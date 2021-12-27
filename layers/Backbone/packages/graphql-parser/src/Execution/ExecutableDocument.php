@@ -36,6 +36,33 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     public function validateAndMerge(): void
     {
+        $operations = $this->getOperationsToExecute();
+
+        $this->assertOperationToExecuteExists($operations);
+        $this->assertFragmentReferencesAreValid($operations);
+        $this->assertFragmentsAreUsed($operations);
+        $this->assertAllVariablesExist($operations);
+        $this->assertAllVariablesAreUsed($operations);
+        $this->assertAllVariablesHaveValue($operations);
+
+        // Inject the variable values into the objects
+        foreach ($operations as $operation) {
+            $this->mergeOperationVariables($operation);
+        }
+    }
+
+    /**
+     * Even though the GraphQL spec allows to execute only 1 Operation,
+     * retrieve a list of Operations, allowing to override it
+     * for the "multiple query execution" feature.
+     *
+     * @return OperationInterface[]
+     * @throws InvalidRequestException
+     *
+     * @see https://spec.graphql.org/draft/#sec-Executing-Requests
+     */
+    protected function getOperationsToExecute(): array
+    {
         $operationsToExecute = [];
         // Executing `__ALL`?
         $executeAllOperations = $this->operationName === ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME;
@@ -46,21 +73,41 @@ class ExecutableDocument implements ExecutableDocumentInterface
             $operationsToExecute[] = $operation;
         }
 
-        if ($operationsToExecute === []) {
-            throw new InvalidRequestException('saranga', new Location(0, 0));
+        return $operationsToExecute;
+    }
+
+    /**
+     * If there is more than one operation, check that the operationName
+     * corresponds to one of them, or is `__ALL`
+     *
+     * @param OperationInterface[] $operations
+     * @throws InvalidRequestException
+     */
+    protected function assertOperationToExecuteExists(array $operations): void
+    {
+        if (count($operations) === 1) {
+            return;
         }
 
-        // Validate all variables are satisfied
-        $this->assertFragmentReferencesAreValid($operationsToExecute);
-        $this->assertFragmentsAreUsed($operationsToExecute);
-        $this->assertAllVariablesExist($operationsToExecute);
-        $this->assertAllVariablesAreUsed($operationsToExecute);
-        $this->assertAllVariablesHaveValue($operationsToExecute);
-
-        // Inject the variable values into the objects
-        foreach ($operationsToExecute as $operation) {
-            $this->mergeOperationVariables($operation);
+        if ($operations === []) {
+            $errorMessage = $this->operationName !== null ?
+                $this->getNoOperationsMatchNameErrorMessage($this->operationName)
+                : $this->getNoOperationsProvidedErrorMessage();
+            throw new InvalidRequestException(
+                throw $errorMessage,
+                new Location(1, 1)
+            );
         }
+    }
+
+    protected function getNoOperationsMatchNameErrorMessage(string $operationName): string
+    {
+        return \sprintf('Operation with name \'%s\' does not exist', $operationName);
+    }
+
+    protected function getNoOperationsProvidedErrorMessage(): string
+    {
+        return \sprintf('No operations were provided in the query');
     }
 
     /**
