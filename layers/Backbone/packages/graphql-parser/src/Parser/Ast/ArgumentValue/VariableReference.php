@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue;
 
+use LogicException;
 use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
@@ -33,11 +34,23 @@ class VariableReference extends AbstractAst implements WithValueInterface
 
     /**
      * Get the value from the context or from the variable
+     *
+     * @throws LogicException
      */
     public function getValue(): mixed
     {
-        $variableValues = $this->context->getVariableValues();
-        return $variableValues[$this->name] ?? $this->variable?->getDefaultValue() ?? null;
+        if ($this->context->hasVariableValue($this->name)) {
+            return $this->context->getVariableValue($this->name);
+        }
+        if ($this->variable?->hasDefaultValue()) {
+            return $this->variable->getDefaultValue();
+        }
+        throw new LogicException($this->getValueIsNotSetForVariableErrorMessage($this->name));
+    }
+
+    protected function getValueIsNotSetForVariableErrorMessage(string $variableName): string
+    {
+        return sprintf('Value is not set for variable \'%s\'', $variableName);
     }
 
     public function getName(): string

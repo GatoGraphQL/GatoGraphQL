@@ -28,4 +28,14 @@ class Context
     {
         return $this->variableValues;
     }
+
+    public function hasVariableValue(string $variableName): bool
+    {
+        return array_key_exists($variableName, $this->variableValues);
+    }
+
+    public function getVariableValue(string $variableName): mixed
+    {
+        return $this->variableValues[$variableName] ?? null;
+    }
 }
