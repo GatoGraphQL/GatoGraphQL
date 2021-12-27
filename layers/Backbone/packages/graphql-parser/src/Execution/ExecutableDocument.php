@@ -13,7 +13,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
 {
     private string $operationName;
     private ?array $executableOperations = null;
-    private array $operationVariableValues = [];
+    private ?array $operationVariableValues = null;
 
     public function __construct(
         private Document $document,
@@ -22,14 +22,6 @@ class ExecutableDocument implements ExecutableDocumentInterface
         ?string $operationName = null,
     ) {
         $this->operationName = $operationName ?? '';
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getVariableValues(): array
-    {
-        return $this->variableValues;
     }
 
     /**
@@ -301,15 +293,39 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         if ($this->executableOperations === null) {
             throw new InvalidRequestException(
-                $this->getExecuteValidationErrorMessage(),
+                $this->getExecuteValidationErrorMessage(__FUNCTION__),
                 new Location(1, 1)
             );
         }
         return $this->executableOperations;
     }
 
-    protected function getExecuteValidationErrorMessage(): string
+    protected function getExecuteValidationErrorMessage(string $methodName): string
     {
-        return sprintf('Before executing `getExecutableOperations`, must call `validateAndMerge`');
+        return sprintf(
+            'Before executing `%s`, must call `%s`',
+            $methodName,
+            'validateAndMerge'
+        );
+    }
+
+    /**
+     * @return array<string,array<string, mixed>.
+     */
+    public function getOperationVariableValues(): array
+    {
+        if ($this->operationVariableValues === null) {
+            throw new InvalidRequestException(
+                $this->getExecuteValidationErrorMessage(__FUNCTION__),
+                new Location(1, 1)
+            );
+        }
+        return $this->operationVariableValues;
+    }
+
+    public function getOperationVariableValue(OperationInterface $operation, string $variableName): mixed
+    {
+        $operationVariableValues = $this->getOperationVariableValues();
+        return $operationVariableValues[$operation->getName()][$variableName] ?? null;
     }
 }
