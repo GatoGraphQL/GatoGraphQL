@@ -37,22 +37,67 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         return $this->variables;
     }
 
-    // @todo Calculate deep
     /**
+     * Gather all the FragmentReference within the Operation.
+     *
      * @return FragmentReference[]
      */
     public function getFragmentReferences(): array
     {
-        return [];
+        return $this->addFragmentReferences([], $this->fieldOrFragmentReferences);
+    }
+
+    /**
+     * @param FragmentReference[] $fragmentReferences
+     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferencesToIterate
+     * @return FragmentReference[]
+     */
+    protected function addFragmentReferences(array $fragmentReferences, array $fieldOrFragmentReferencesToIterate): array
+    {
+        foreach ($fieldOrFragmentReferencesToIterate as $fieldOrFragmentReference) {
+            if ($fieldOrFragmentReference instanceof FragmentReference) {
+                /** @var FragmentReference */
+                $fragmentReference = $fieldOrFragmentReference;
+                $fragmentReferences[] = $fragmentReference;
+                continue;
+            }
+            if ($fieldOrFragmentReference instanceof TypedFragmentReference) {
+                /** @var TypedFragmentReference */
+                $typedFragmentReference = $fieldOrFragmentReference;
+                $fragmentReferences = array_merge(
+                    $fragmentReferences,
+                    $this->addFragmentReferences([], $typedFragmentReference->getFieldOrFragmentReferences)
+                );
+                continue;
+            }
+            if ($fieldOrFragmentReference instanceof RelationalField) {
+                /** @var RelationalField */
+                $relationalField = $fieldOrFragmentReference;
+                $fragmentReferences = array_merge(
+                    $fragmentReferences,
+                    $this->addFragmentReferences([], $relationalField->getFieldOrFragmentReferences)
+                );
+                continue;
+            }
+        }
+        return $fragmentReferences;
     }
 
     // @todo Calculate deep
     /**
+     * Gather all the VariableReference within the Operation.
+     *
      * @return VariableReference[]
      */
     public function getVariableReferences(): array
     {
-        return [];
+        $variableReferences = [];
+        foreach ($this->fieldOrFragmentReferences as $fieldOrFragmentReference) {
+            if ($fieldOrFragmentReference instanceof FieldInterface) {
+
+            }
+        }
+        return $variableReferences;
     }
 
     /**
