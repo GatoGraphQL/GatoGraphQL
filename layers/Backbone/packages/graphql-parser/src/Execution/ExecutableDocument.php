@@ -127,13 +127,22 @@ class ExecutableDocument implements ExecutableDocumentInterface
     protected function assertAllVariablesHaveValue(): void
     {
         foreach ($this->document->getOperations() as $operation) {
+            $variables = $operation->getVariables();
             foreach ($operation->getVariableReferences() as $variableReference) {
-                /** @var Variable */
-                $variable = $variableReference->getVariable();
-                if (array_key_exists($variable->getName(), $this->variableValues)
-                    || $variable->hasDefaultValue()
-                ) {
+                $variableName = $variableReference->getName();
+                // Check if a value was provided
+                if (array_key_exists($variableName, $this->variableValues)) {
                     continue;
+                }
+                // Check if the variable has a default value
+                foreach ($variables as $variable) {
+                    if ($variable->getName() !== $variableName) {
+                        continue;
+                    }
+                    if ($variable->hasDefaultValue()) {
+                        break(2);
+                    }
+                    break;
                 }
                 throw new InvalidRequestException(
                     $this->getVariableHasntBeenSubmittedErrorMessage($variableReference->getName()),
