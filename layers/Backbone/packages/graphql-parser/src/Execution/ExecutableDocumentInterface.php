@@ -19,7 +19,7 @@ interface ExecutableDocumentInterface
      *
      * @see https://spec.graphql.org/draft/#sec-Validation
      */
-    public function validateAndMerge(): void;
+    public function validateAndInitialize(): void;
 
     /**
      * @return OperationInterface[]

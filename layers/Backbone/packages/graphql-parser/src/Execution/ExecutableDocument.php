@@ -26,7 +26,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     /**
      * @throws InvalidRequestException
      */
-    public function validateAndMerge(): void
+    public function validateAndInitialize(): void
     {
         $this->executableOperations = null;
 
@@ -283,7 +283,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         return sprintf(
             'Before executing `%s`, must call `%s`',
             $methodName,
-            'validateAndMerge'
+            'validateAndInitialize'
         );
     }
 }
