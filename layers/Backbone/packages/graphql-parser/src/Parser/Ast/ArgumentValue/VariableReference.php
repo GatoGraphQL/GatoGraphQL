@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue;
 
+use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
 class VariableReference extends AbstractAst implements WithValueInterface
 {
-    private mixed $value;
+    private Context $context;
 
     public function __construct(
         private string $name,
@@ -25,14 +26,18 @@ class VariableReference extends AbstractAst implements WithValueInterface
         return $this->variable;
     }
 
-    public function getValue(): mixed
+    public function setContext(Context $context): void
     {
-        return $this->value;
+        $this->context = $context;
     }
 
-    public function setValue(mixed $value): void
+    /**
+     * Get the value from the context or from the variable
+     */
+    public function getValue(): mixed
     {
-        $this->value = $value;
+        $variableValues = $this->context->getVariableValues();
+        return $variableValues[$this->name] ?? $this->variable?->getDefaultValue() ?? null;
     }
 
     public function getName(): string

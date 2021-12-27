@@ -160,6 +160,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         $variables = $operation->getVariables();
         $variableValues = $this->context->getVariableValues();
         foreach ($operation->getVariableReferences() as $variableReference) {
+            $variableReference->setContext($this->context);
             $variableName = $variableReference->getName();
             // If the value was provided, then use it
             if (array_key_exists($variableName, $variableValues)) {
