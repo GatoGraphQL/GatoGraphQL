@@ -66,22 +66,4 @@ class RelationalField extends AbstractAst implements FieldInterface
     {
         return $this->alias;
     }
-
-    public function hasField(string $name, bool $deep = false): bool
-    {
-        foreach ($this->getFieldOrFragmentReferences() as $fieldOrFragmentReference) {
-            if ($fieldOrFragmentReference instanceof FragmentInterface) {
-                continue;
-            }
-            /** @var FieldInterface */
-            $field = $fieldOrFragmentReference;
-            if ($field->getName() === $name
-                || ($deep && $field instanceof RelationalField && $field->hasField($name))
-            ) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }
