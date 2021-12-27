@@ -23,6 +23,16 @@ class ExecutableDocument implements ExecutableDocumentInterface
         $this->context = new Context($operationName, $variableValues);
     }
 
+    public function getDocument(): Document
+    {
+        return $this->document;
+    }
+
+    public function getContext(): Context
+    {
+        return $this->context;
+    }
+
     /**
      * @throws InvalidRequestException
      */
