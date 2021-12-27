@@ -6,7 +6,8 @@ namespace PoPBackbone\GraphQLParser\Library\Validator;
 
 use PHPUnit\Framework\TestCase;
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoPBackbone\GraphQLParser\Execution\RequestInterface;
+use PoPBackbone\GraphQLParser\Execution\Context;
+use PoPBackbone\GraphQLParser\Execution\ExecutableDocument;
 use PoPBackbone\GraphQLParser\Execution\Request;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
@@ -16,27 +17,27 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Location;
-use PoPBackbone\GraphQLParser\Validator\RequestValidator\RequestValidator;
 
 class RequestValidatorTest extends TestCase
 {
     /**
      * @dataProvider invalidRequestProvider
      */
-    public function testInvalidRequests(RequestInterface $request)
+    public function testInvalidRequests(ExecutableDocument $executableDocument)
     {
         $this->expectException(InvalidRequestException::class);
-        (new RequestValidator())->validate($request);
+        $executableDocument->validateAndInitialize();
     }
 
     public function invalidRequestProvider()
     {
+        $context = new Context();
         $variable1 = new Variable('test', 'Int', false, false, true, new Location(1, 1));
-        // $variable1->setUsed(true);
+        $variable1->setContext($context);
         $variable2 = new Variable('test2', 'Int', false, false, true, new Location(1, 1));
-        // $variable2->setUsed(true);
+        $variable2->setContext($context);
         $variable3 = new Variable('test3', 'Int', false, false, true, new Location(1, 1));
-        // $variable3->setUsed(false);
+        $variable3->setContext($context);
 
         return [
             [

@@ -17,7 +17,7 @@ class VariableTest extends TestCase
     public function testGetValue($actual, $expected)
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
-        $var->setContext(new Context('', ['foo' => $actual]));
+        $var->setContext(new Context(null, ['foo' => $actual]));
         $this->assertEquals($var->getValue()->getValue(), $expected);
     }
 
@@ -33,7 +33,7 @@ class VariableTest extends TestCase
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->setDefaultValue(new Literal('default-value', new Location(1, 1)));
-        $var->setContext(new Context('', []));
+        $var->setContext(new Context());
 
         $this->assertEquals(
             'default-value',
@@ -44,7 +44,7 @@ class VariableTest extends TestCase
     public function testGetValueReturnsSetValueEvenWithDefaultValue()
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
-        $var->setContext(new Context('', ['foo' => 'real-value']));
+        $var->setContext(new Context(null, ['foo' => 'real-value']));
         $var->setDefaultValue(new Literal('default-value', new Location(1, 1)));
 
         $this->assertEquals(

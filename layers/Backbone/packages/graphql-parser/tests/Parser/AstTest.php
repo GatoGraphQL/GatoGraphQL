@@ -187,7 +187,7 @@ class AstTest extends TestCase
         $this->assertTrue($variable->isRequired());
         $this->assertTrue($variable->isArray());
 
-        $variable->setContext(new Context('', [$variable->getName() => 'text']));
+        $variable->setContext(new Context(null, [$variable->getName() => 'text']));
         $this->assertEquals(new Literal('text', new Location(1, 1)), $variable->getValue());
     }
 

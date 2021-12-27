@@ -861,7 +861,7 @@ GRAPHQL;
         ');
         /** @var Variable $var */
         $var = $document->getOperations()[0]->getVariables()[0];
-        $var->setContext(new Context('', []));
+        $var->setContext(new Context());
         $this->assertTrue($var->hasDefaultValue());
         $this->assertEquals('small', $var->getDefaultValue()->getValue());
         $this->assertEquals('small', $var->getValue()->getValue());
@@ -877,7 +877,7 @@ GRAPHQL;
         ');
         /** @var Variable $var */
         $var = $document->getOperations()[0]->getVariables()[0];
-        $var->setContext(new Context('', []));
+        $var->setContext(new Context());
         $this->assertTrue($var->hasDefaultValue());
         $this->assertNull($var->getDefaultValue()->getValue());
         $this->assertNull($var->getValue()->getValue());
