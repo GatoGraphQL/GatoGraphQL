@@ -4,42 +4,44 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser;
 
-use PoPBackbone\GraphQLParser\Execution\Request;
-use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PHPUnit\Framework\TestCase;
+use PoPBackbone\GraphQLParser\Execution\ExecutableDocument;
+use PoPBackbone\GraphQLParser\Parser\Ast\Document;
+use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
+use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 
 class RequestTest extends TestCase
 {
-
     public function testMethods()
     {
         $fragment1     = new Fragment('fragmentName1', 'test', [], [], new Location(1, 1));
         $fragment2     = new Fragment('fragmentName2', 'test', [], [], new Location(1, 1));
-        $operationsData   = ['query1', 'query2', 'mutation1', 'mutation2'];
-        $fragmentsData = [$fragment1];
+        $operationsData   = [
+            new QueryOperation('query1', [], [], [], new Location(1, 1)),
+            new QueryOperation('query2', [], [], [], new Location(1, 1)),
+            new MutationOperation('mutation1', [], [], [], new Location(1, 1)),
+            new MutationOperation('mutation1', [], [], [], new Location(1, 1)),
+        ];
+        $fragmentsData = [$fragment1, $fragment2];
         $variableValues     = [
             'page' => 2
         ];
 
-        $request = new Request();
-        $request->process([
-            'operations' => $operationsData,
-            'fragments' => $fragmentsData,
-        ]);
-        $request->setVariableValues($variableValues);
+        $executableDocument = new ExecutableDocument(
+            new Document($operationsData, $fragmentsData),
+            null,
+            $variableValues
+        );
 
-        $this->assertEquals($operationsData, $request->getOperations());
-        $this->assertEquals($fragmentsData, $request->getFragments());
-        $this->assertEquals($variableValues, $request->getVariableValues());
+        $this->assertEquals($operationsData, $executableDocument->getDocument()->getOperations());
+        $this->assertEquals($fragmentsData, $executableDocument->getDocument()->getFragments());
+        $this->assertEquals($variableValues, $executableDocument->getContext()->getVariableValues());
 
-        $this->assertTrue($request->hasFragments());
-        $this->assertTrue($request->hasOperations());
+        $this->assertTrue($executableDocument->getContext()->hasVariableValue('page'));
+        $this->assertEquals(2, $executableDocument->getContext()->getVariableValue('page'));
 
-        $this->assertTrue($request->hasVariable('page'));
-        $this->assertEquals(2, $request->getVariableValue('page'));
-
-        $request->addFragment($fragment2);
-        $this->assertEquals($fragment2, $request->getFragment('fragmentName2'));
-        $this->assertNull($request->getFragment('unknown fragment'));
+        $this->assertEquals($fragment2, $executableDocument->getDocument()->getFragment('fragmentName2'));
+        $this->assertNull($executableDocument->getDocument()->getFragment('unknown fragment'));
     }
 }
