@@ -14,16 +14,15 @@ class ExecutableDocument extends UpstreamExecutableDocument
      * Override to support the "multiple query execution" feature:
      * If passing operation name `__ALL`, then execute all operations (hack)
      *
-     * @param OperationInterface[] $operations
      * @return OperationInterface[]
      */
-    protected function getSelectedOperationsToExecute(array $operations, string $operationName): array
+    protected function getSelectedOperationsToExecute(): array
     {
-        if ($this->isExecutingAllOperations($operationName)) {
-            return $operations;
+        if ($this->isExecutingAllOperations($this->operationName)) {
+            return $this->document->getOperations();
         }
         
-        return parent::getSelectedOperationsToExecute($operations, $operationName);
+        return parent::getSelectedOperationsToExecute();
     }
 
     protected function isExecutingAllOperations(string $operationName): bool

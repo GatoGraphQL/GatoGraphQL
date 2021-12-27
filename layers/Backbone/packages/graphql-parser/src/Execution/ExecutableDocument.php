@@ -43,7 +43,6 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
         // Obtain the operations that must be executed
         $requestedOperations = $this->assertAndGetRequestedOperations(
-            $this->document->getOperations(),
             $this->operationName
         );
 
@@ -58,15 +57,14 @@ class ExecutableDocument implements ExecutableDocumentInterface
      * retrieve a list of Operations, allowing to override it
      * for the "multiple query execution" feature.
      *
-     * @param OperationInterface[] $operations
      * @return OperationInterface[]
      * @throws InvalidRequestException
      *
      * @see https://spec.graphql.org/draft/#sec-Executing-Requests
      */
-    protected function assertAndGetRequestedOperations(array $operations, ?string $operationName): array
+    protected function assertAndGetRequestedOperations(): array
     {
-        $operationCount = count($operations);
+        $operationCount = count($this->document->getOperations());
         if ($operationCount === 0) {
             throw new InvalidRequestException(
                 $this->getNoOperationsProvidedErrorMessage(),
@@ -74,7 +72,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             );
         }
 
-        if (empty($operationName)) {
+        if (empty($this->operationName)) {
             if ($operationCount > 1) {
                 throw new InvalidRequestException(
                     $this->getNoOperationNameProvidedErrorMessage(),
@@ -82,13 +80,13 @@ class ExecutableDocument implements ExecutableDocumentInterface
                 );
             }
             // There is exactly 1 operation
-            return $operations;
+            return $this->document->getOperations();
         }
 
-        $selectedOperations = $this->getSelectedOperationsToExecute($operations, $operationName);
+        $selectedOperations = $this->getSelectedOperationsToExecute();
         if ($selectedOperations === []) {
             throw new InvalidRequestException(
-                $this->getNoOperationMatchesNameErrorMessage($operationName),
+                $this->getNoOperationMatchesNameErrorMessage($this->operationName),
                 new Location(1, 1)
             );
         }
@@ -98,14 +96,13 @@ class ExecutableDocument implements ExecutableDocumentInterface
     }
 
     /**
-     * @param OperationInterface[] $operations
      * @return OperationInterface[]
      */
-    protected function getSelectedOperationsToExecute(array $operations, string $operationName): array
+    protected function getSelectedOperationsToExecute(): array
     {
         return array_values(array_filter(
-            $operations,
-            fn (OperationInterface $operation) => $operation->getName() === $operationName
+            $this->document->getOperations(),
+            fn (OperationInterface $operation) => $operation->getName() === $this->operationName
         ));
     }
 
