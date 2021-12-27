@@ -51,11 +51,11 @@ class ExecutableDocument implements ExecutableDocumentInterface
         }
 
         // Validate all variables are satisfied
-        $this->validateOperationVariables($operationsToExecute);
-        $this->assertFragmentReferencesValid($operationsToExecute);
-        $this->assertFragmentsUsed($operationsToExecute);
-        $this->assertAllVariablesExists($operationsToExecute);
-        $this->assertAllVariablesUsed($operationsToExecute);
+        $this->assertFragmentReferencesAreValid($operationsToExecute);
+        $this->assertFragmentsAreUsed($operationsToExecute);
+        $this->assertAllVariablesExist($operationsToExecute);
+        $this->assertAllVariablesAreUsed($operationsToExecute);
+        $this->assertAllVariablesHaveValue($operationsToExecute);
 
         // Inject the variable values into the objects
         foreach ($operationsToExecute as $operation) {
@@ -70,7 +70,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      * @param OperationInterface[] $operations
      * @throws InvalidRequestException
      */
-    protected function validateOperationVariables(array $operations): void
+    protected function assertAllVariablesHaveValue(array $operations): void
     {
         foreach ($operations as $operation) {
             foreach ($operation->getVariableReferences() as $variableReference) {
@@ -126,7 +126,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      * @param OperationInterface[] $operations
      * @throws InvalidRequestException
      */
-    protected function assertFragmentsUsed(array $operations): void
+    protected function assertFragmentsAreUsed(array $operations): void
     {
         foreach ($operations as $operation) {
             foreach ($operation->getFragmentReferences() as $fragmentReference) {
@@ -154,7 +154,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      * @param OperationInterface[] $operations
      * @throws InvalidRequestException
      */
-    protected function assertFragmentReferencesValid(array $operations): void
+    protected function assertFragmentReferencesAreValid(array $operations): void
     {
         foreach ($operations as $operation) {
             foreach ($operation->getFragmentReferences() as $fragmentReference) {
@@ -178,7 +178,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      * @param OperationInterface[] $operations
      * @throws InvalidRequestException
      */
-    protected function assertAllVariablesExists(array $operations): void
+    protected function assertAllVariablesExist(array $operations): void
     {
         foreach ($operations as $operation) {
             foreach ($operation->getVariableReferences() as $variableReference) {
@@ -202,7 +202,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      * @param OperationInterface[] $operations
      * @throws InvalidRequestException
      */
-    protected function assertAllVariablesUsed(array $operations): void
+    protected function assertAllVariablesAreUsed(array $operations): void
     {
         foreach ($operations as $operation) {
             foreach ($operation->getVariables() as $variable) {
