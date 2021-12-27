@@ -96,7 +96,7 @@ class Parser extends Tokenizer implements ParserInterface
 
             $operationToken = $this->eat(Token::TYPE_IDENTIFIER);
             $operationName = (string)$operationToken?->getData() ?? '';
-            $operationLocation = $this->getTokenLocation($operationToken);
+            $operationLocation = $operationToken !== null ? $this->getTokenLocation($operationToken) : $this->getLocation();
 
             if ($this->match(Token::TYPE_LPAREN)) {
                 $variables = $this->parseVariables();
@@ -311,7 +311,7 @@ class Parser extends Tokenizer implements ParserInterface
             $name = $this->lex()->getData();
 
             $variable = $this->findVariable($name);
-            
+
             return $this->createVariableReference(
                 $name,
                 $variable,
