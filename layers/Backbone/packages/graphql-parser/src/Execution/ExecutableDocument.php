@@ -139,8 +139,9 @@ class ExecutableDocument implements ExecutableDocumentInterface
             foreach ($operation->getVariableReferences() as $variableReference) {
                 /** @var Variable */
                 $variable = $variableReference->getVariable();
-                if (array_key_exists($variableReference->getName(), $this->variableValues)
-                    || $variable->hasDefaultValue()) {
+                if (array_key_exists($variable->getName(), $this->variableValues)
+                    || $variable->hasDefaultValue()
+                ) {
                     continue;
                 }
                 throw new InvalidRequestException(
