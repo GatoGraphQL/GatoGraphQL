@@ -5,15 +5,25 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Execution;
 
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 
 interface ExecutableDocumentInterface
 {
     /**
-     * Integrate the variableValues into the included Operations in the Document.
-     * If some variable is missing, or other, throw an exception to signify
-     * that the validation fail.
+     * Calculate the executable operations, and 
+     * integrate the variableValues for them.
+     *
+     * If any validation fails, throw an exception.
      *
      * @throws InvalidRequestException
+     *
+     * @see https://spec.graphql.org/draft/#sec-Validation
      */
     public function validateAndMerge(): void;
+
+    /**
+     * @return OperationInterface[]
+     * @throws InvalidRequestException
+     */
+    public function getExecutableOperations(): array;
 }

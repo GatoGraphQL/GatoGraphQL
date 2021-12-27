@@ -12,6 +12,7 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 class ExecutableDocument implements ExecutableDocumentInterface
 {
     private string $operationName;
+    private ?array $executableOperations = null;
 
     public function __construct(
         private Document $document,
@@ -35,6 +36,8 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     public function validateAndMerge(): void
     {
+        $this->executableOperations = null;
+
         $this->assertFragmentReferencesAreValid();
         $this->assertFragmentsAreUsed();
         $this->assertAllVariablesExist();
@@ -42,12 +45,12 @@ class ExecutableDocument implements ExecutableDocumentInterface
         $this->assertAllVariablesHaveValue();
 
         // Obtain the operations that must be executed
-        $requestedOperations = $this->assertAndGetRequestedOperations(
+        $this->executableOperations = $this->assertAndGetRequestedOperations(
             $this->operationName
         );
 
         // Inject the variable values into the objects
-        foreach ($requestedOperations as $operation) {
+        foreach ($this->executableOperations as $operation) {
             $this->mergeOperationVariables($operation);
         }
     }
@@ -278,5 +281,25 @@ class ExecutableDocument implements ExecutableDocumentInterface
     protected function getVariableNotUsedErrorMessage(string $variableName): string
     {
         return sprintf('Variable \'%s\' not used', $variableName);
+    }
+
+    /**
+     * @return OperationInterface[]
+     * @throws InvalidRequestException
+     */
+    public function getExecutableOperations(): array
+    {
+        if ($this->executableOperations === null) {
+            throw new InvalidRequestException(
+                $this->getExecuteValidationErrorMessage(),
+                new Location(1, 1)
+            );
+        }
+        return $this->executableOperations;
+    }
+
+    protected function getExecuteValidationErrorMessage(): string
+    {
+        return sprintf('Before executing `getExecutableOperations`, must call `validateAndMerge`');
     }
 }
