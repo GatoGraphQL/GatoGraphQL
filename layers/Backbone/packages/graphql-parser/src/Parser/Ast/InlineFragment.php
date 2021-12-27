@@ -6,7 +6,7 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class TypedFragmentReference extends AbstractAst implements FragmentInterface, WithDirectivesInterface
+class InlineFragment extends AbstractAst implements FragmentInterface, WithDirectivesInterface
 {
     use AstDirectivesTrait;
 

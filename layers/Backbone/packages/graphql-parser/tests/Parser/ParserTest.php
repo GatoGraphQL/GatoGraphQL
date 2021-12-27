@@ -19,7 +19,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
-use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
 
 class ParserTest extends TestCase
 {
@@ -442,7 +442,7 @@ GRAPHQL;
                             [],
                             [
                                 new LeafField('name', null, [], [], new Location(4, 21)),
-                                new TypedFragmentReference('UnionType', [new LeafField('unionName', null, [], [], new Location(6, 25))], [], new Location(5, 28)),
+                                new InlineFragment('UnionType', [new LeafField('unionName', null, [], [], new Location(6, 25))], [], new Location(5, 28)),
                             ],
                             [],
                             new Location(3, 23)

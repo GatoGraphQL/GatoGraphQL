@@ -15,7 +15,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
-use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
 
 class AstTest extends TestCase
 {
@@ -87,13 +87,13 @@ class AstTest extends TestCase
         $this->assertEquals('largeShipInfo', $reference->getName());
     }
 
-    public function testTypedFragmentReference()
+    public function testInlineFragment()
     {
         $fields = [
             new LeafField('id', null, [], [], new Location(1, 1))
         ];
 
-        $reference = new TypedFragmentReference('Ship', $fields, [], new Location(1, 1));
+        $reference = new InlineFragment('Ship', $fields, [], new Location(1, 1));
 
         $this->assertEquals('Ship', $reference->getTypeName());
         $this->assertEquals($fields, $reference->getFieldOrFragmentReferences());

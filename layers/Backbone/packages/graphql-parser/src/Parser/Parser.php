@@ -22,7 +22,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
-use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use stdClass;
@@ -186,7 +186,7 @@ class Parser extends Tokenizer implements ParserInterface
                 $this->lex();
 
                 if ($this->eat(Token::TYPE_ON)) {
-                    $fieldOrFragmentReferences[] = $this->parseBodyItem(Token::TYPE_TYPED_FRAGMENT, $highLevel);
+                    $fieldOrFragmentReferences[] = $this->parseBodyItem(Token::TYPE_INLINE_FRAGMENT, $highLevel);
                 } else {
                     $fieldOrFragmentReferences[] = $this->parseFragmentReference();
                 }
@@ -394,14 +394,14 @@ class Parser extends Tokenizer implements ParserInterface
 
         if ($this->match(Token::TYPE_LBRACE)) {
             /** @var FieldInterface[]|FragmentInterface[] */
-            $fieldOrFragmentReferences = $this->parseBody($type === Token::TYPE_TYPED_FRAGMENT ? Token::TYPE_QUERY : $type, false);
+            $fieldOrFragmentReferences = $this->parseBody($type === Token::TYPE_INLINE_FRAGMENT ? Token::TYPE_QUERY : $type, false);
 
             if (!$fieldOrFragmentReferences) {
                 throw $this->createUnexpectedTokenTypeException($this->lookAhead->getType());
             }
 
-            if ($type === Token::TYPE_TYPED_FRAGMENT) {
-                return $this->createTypedFragmentReference($nameToken->getData(), $fieldOrFragmentReferences, $directives, $bodyLocation);
+            if ($type === Token::TYPE_INLINE_FRAGMENT) {
+                return $this->createInlineFragment($nameToken->getData(), $fieldOrFragmentReferences, $directives, $bodyLocation);
             }
 
             return $this->createRelationalField($nameToken->getData(), $alias, $arguments, $fieldOrFragmentReferences, $directives, $bodyLocation);
@@ -437,13 +437,13 @@ class Parser extends Tokenizer implements ParserInterface
      * @param FieldInterface[] $fieldOrFragmentReferences
      * @param Directive[] $directives
      */
-    protected function createTypedFragmentReference(
+    protected function createInlineFragment(
         string $typeName,
         array $fieldOrFragmentReferences,
         array $directives,
         Location $location,
-    ): TypedFragmentReference {
-        return new TypedFragmentReference($typeName, $fieldOrFragmentReferences, $directives, $location);
+    ): InlineFragment {
+        return new InlineFragment($typeName, $fieldOrFragmentReferences, $directives, $location);
     }
 
     /**

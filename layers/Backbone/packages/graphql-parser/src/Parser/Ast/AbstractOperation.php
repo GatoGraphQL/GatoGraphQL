@@ -59,8 +59,8 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
             if ($fieldOrFragmentReference instanceof LeafField) {
                 continue;
             }
-            if ($fieldOrFragmentReference instanceof TypedFragmentReference) {
-                /** @var TypedFragmentReference */
+            if ($fieldOrFragmentReference instanceof InlineFragment) {
+                /** @var InlineFragment */
                 $typedFragmentReference = $fieldOrFragmentReference;
                 $fragmentReferences = array_merge(
                     $fragmentReferences,
@@ -108,8 +108,8 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
             if ($fieldOrFragmentReference instanceof FragmentReference) {
                 continue;
             }
-            if ($fieldOrFragmentReference instanceof TypedFragmentReference) {
-                /** @var TypedFragmentReference */
+            if ($fieldOrFragmentReference instanceof InlineFragment) {
+                /** @var InlineFragment */
                 $typedFragmentReference = $fieldOrFragmentReference;
                 $variableReferences = array_merge(
                     $variableReferences,

@@ -27,7 +27,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
-use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
@@ -446,7 +446,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                         $nestedFieldPath
                     );
                 }
-            } elseif ($field instanceof FragmentReference || $field instanceof TypedFragmentReference) {
+            } elseif ($field instanceof FragmentReference || $field instanceof InlineFragment) {
                 // Replace the fragment reference with its resolved information
                 $fragmentReference = $field;
                 if ($fragmentReference instanceof FragmentReference) {
