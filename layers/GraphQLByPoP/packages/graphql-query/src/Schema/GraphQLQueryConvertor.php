@@ -28,7 +28,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Query;
+use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
@@ -457,7 +457,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                     $queryFieldPath,
                     [$this->convertField($field)]
                 );
-            } elseif ($field instanceof Query) {
+            } elseif ($field instanceof RelationalField) {
                 // Queries are connections
                 $nestedFieldPaths = $this->getFieldPathsFromQuery($executableDocument, $field);
                 foreach ($nestedFieldPaths as $nestedFieldPath) {
@@ -497,13 +497,13 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         }
     }
 
-    protected function getFieldPathsFromQuery(ExecutableDocumentInterface $executableDocument, Query $query): array
+    protected function getFieldPathsFromQuery(ExecutableDocumentInterface $executableDocument, RelationalField $query): array
     {
         $queryFieldPaths = [];
         $queryFieldPath = [$this->convertField($query)];
 
         // Iterate through the query's fields: properties and connections
-        if ($fields = $query->getFields()) {
+        if ($fields = $query->getFieldOrFragmentReferences()) {
             $this->processAndAddFieldPaths($executableDocument, $queryFieldPaths, $fields, $queryFieldPath);
         } else {
             // Otherwise, just add the query field, which doesn't have subfields
