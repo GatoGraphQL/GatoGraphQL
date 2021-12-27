@@ -233,14 +233,8 @@ class ExecutableDocument implements ExecutableDocumentInterface
     protected function assertAllVariablesExist(): void
     {
         foreach ($this->document->getOperations() as $operation) {
-            $variableNames = [];
-            foreach ($operation->getVariables() as $variable) {
-                $variableNames[] = $variable->getName();
-            }
-            $variableNames = array_values(array_unique($variableNames));
-
             foreach ($operation->getVariableReferences() as $variableReference) {
-                if (in_array($variableReference->getName(), $variableNames)) {
+                if ($variableReference->getVariable() !== null) {
                     continue;
                 }
                 throw new InvalidRequestException(
