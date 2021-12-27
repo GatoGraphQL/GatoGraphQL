@@ -29,10 +29,12 @@ use stdClass;
 
 class Parser extends Tokenizer implements ParserInterface
 {
-    /**
-     * @var array<string,mixed>
-     */
-    private array $data = [];
+    /** @var OperationInterface[] */
+    private array $operations = [];
+    /** @var Fragment[] */
+    private array $fragments = [];
+    /** @var Variable[] */
+    private array $variables = [];
 
     public function parse(string $source): Document
     {
@@ -45,11 +47,11 @@ class Parser extends Tokenizer implements ParserInterface
                 case Token::TYPE_LBRACE:
                 case Token::TYPE_QUERY:
                 case Token::TYPE_MUTATION:
-                    $this->data['operations'][] = $this->parseOperation($tokenType);
+                    $this->operations[] = $this->parseOperation($tokenType);
                     break;
 
                 case Token::TYPE_FRAGMENT:
-                    $this->data['fragments'][] = $this->parseFragment();
+                    $this->fragments[] = $this->parseFragment();
                     break;
 
                 default:
@@ -61,8 +63,8 @@ class Parser extends Tokenizer implements ParserInterface
         }
 
         return new Document(
-            $this->data['operations'],
-            $this->data['fragments'],
+            $this->operations,
+            $this->fragments,
         );
     }
 
@@ -75,10 +77,8 @@ class Parser extends Tokenizer implements ParserInterface
     {
         $this->initTokenizer($source);
 
-        $this->data = [
-            'operations'         => [],
-            'fragments'          => [],
-        ];
+        $this->operations = [];
+        $this->fragments = [];
     }
 
     protected function parseOperation(string $type): OperationInterface
@@ -87,7 +87,7 @@ class Parser extends Tokenizer implements ParserInterface
         $directives = [];
         $operationName = null;
         $variables = [];
-        $this->data['variables'] = [];
+        $this->variables = [];
 
         $isShorthandQuery = $this->match(Token::TYPE_LBRACE);
 
@@ -255,7 +255,7 @@ class Parser extends Tokenizer implements ParserInterface
                 $variable->setDefaultValue($this->parseValue());
             }
 
-            $this->data['variables'][] = $variable;
+            $this->variables[] = $variable;
             $variables[] = $variable;
         }
 
@@ -332,9 +332,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     protected function findVariable(string $name): ?Variable
     {
-        /** @var Variable[] */
-        $variables = $this->data['variables'];
-        foreach ($variables as $variable) {
+        foreach ($this->variables as $variable) {
             if ($variable->getName() === $name) {
                 return $variable;
             }
