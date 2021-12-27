@@ -19,12 +19,16 @@ class ExecutableDocument extends UpstreamExecutableDocument
      */
     protected function getSelectedOperationsToExecute(array $operations, string $operationName): array
     {
-        if (ComponentConfiguration::enableMultipleQueryExecution()
-            && $this->operationName === ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME
-        ) {
+        if ($this->isExecutingAllOperations($operationName)) {
             return $operations;
         }
         
         return parent::getSelectedOperationsToExecute($operations, $operationName);
+    }
+
+    protected function isExecutingAllOperations(string $operationName): bool
+    {
+        return ComponentConfiguration::enableMultipleQueryExecution()
+            && strtoupper($operationName) === ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME;
     }
 }
