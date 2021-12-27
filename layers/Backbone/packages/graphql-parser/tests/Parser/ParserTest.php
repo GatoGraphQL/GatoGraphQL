@@ -520,7 +520,7 @@ GRAPHQL;
                                     new Location(1, 12)
                                 ),
                             ],
-                            new Location(1, 1)
+                            new Location(1, 10)
                         )
                     ],
                     'fragments'          => [],
