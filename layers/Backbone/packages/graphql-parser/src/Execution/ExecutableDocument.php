@@ -36,16 +36,18 @@ class ExecutableDocument implements ExecutableDocumentInterface
     public function validateAndMerge(): void
     {
         $documentOperations = $this->document->getOperations();
+
+        $this->assertFragmentReferencesAreValid($documentOperations);
+        $this->assertFragmentsAreUsed($documentOperations);
+        $this->assertAllVariablesExist($documentOperations);
+        $this->assertAllVariablesAreUsed($documentOperations);
+        $this->assertAllVariablesHaveValue($documentOperations);
+
+        // Obtain the operations that must be executed
         $requestedOperations = $this->getRequestedOperations(
             $documentOperations,
             $this->operationName
         );
-
-        $this->assertFragmentReferencesAreValid($requestedOperations);
-        $this->assertFragmentsAreUsed($requestedOperations);
-        $this->assertAllVariablesExist($requestedOperations);
-        $this->assertAllVariablesAreUsed($requestedOperations);
-        $this->assertAllVariablesHaveValue($requestedOperations);
 
         // Inject the variable values into the objects
         foreach ($requestedOperations as $operation) {
