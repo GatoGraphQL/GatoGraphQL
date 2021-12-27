@@ -13,7 +13,6 @@ class ExecutableDocument implements ExecutableDocumentInterface
 {
     private Context $context;
     private ?array $executableOperations = null;
-    private ?array $operationVariableValues = null;
 
     public function __construct(
         private Document $document,
@@ -43,7 +42,6 @@ class ExecutableDocument implements ExecutableDocumentInterface
         );
 
         // Inject the variable values into the objects
-        $this->operationVariableValues = [];
         foreach ($this->executableOperations as $operation) {
             $this->initializeOperationVariableValues($operation);
         }
@@ -156,25 +154,8 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
     protected function initializeOperationVariableValues(OperationInterface $operation): void
     {
-        $this->operationVariableValues[$operation->getName()] = [];
-        $variables = $operation->getVariables();
-        $variableValues = $this->context->getVariableValues();
         foreach ($operation->getVariableReferences() as $variableReference) {
             $variableReference->setContext($this->context);
-            $variableName = $variableReference->getName();
-            // If the value was provided, then use it
-            if (array_key_exists($variableName, $variableValues)) {
-                $this->operationVariableValues[$operation->getName()][$variableName] = $variableValues[$variableName];
-                continue;
-            }
-            // Otherwise, use the variable's default value
-            foreach ($variables as $variable) {
-                if ($variable->getName() !== $variableName) {
-                    continue;
-                }
-                $this->operationVariableValues[$operation->getName()][$variableName] = $variable->getDefaultValue();
-                break;
-            }
         }
     }
 
@@ -304,25 +285,5 @@ class ExecutableDocument implements ExecutableDocumentInterface
             $methodName,
             'validateAndMerge'
         );
-    }
-
-    /**
-     * @return array<string,array<string, mixed>.
-     */
-    public function getOperationVariableValues(): array
-    {
-        if ($this->operationVariableValues === null) {
-            throw new InvalidRequestException(
-                $this->getExecuteValidationErrorMessage(__FUNCTION__),
-                new Location(1, 1)
-            );
-        }
-        return $this->operationVariableValues;
-    }
-
-    public function getOperationVariableValue(OperationInterface $operation, string $variableName): mixed
-    {
-        $operationVariableValues = $this->getOperationVariableValues();
-        return $operationVariableValues[$operation->getName()][$variableName] ?? null;
     }
 }

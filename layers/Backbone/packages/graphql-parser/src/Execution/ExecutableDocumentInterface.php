@@ -26,10 +26,4 @@ interface ExecutableDocumentInterface
      * @throws InvalidRequestException
      */
     public function getExecutableOperations(): array;
-
-    /**
-     * @return array<string,array<string, mixed>.
-     */
-    public function getOperationVariableValues(): array;
-    public function getOperationVariableValue(OperationInterface $operation, string $variableName): mixed;
 }
