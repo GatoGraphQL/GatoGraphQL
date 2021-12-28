@@ -797,6 +797,7 @@ GRAPHQL;
 
     public function queryWithDirectiveProvider()
     {
+        $formatVariable = new Variable('format', 'String', true, false, false, new Location(1, 24));
         return [
             [
                 <<<GRAPHQL
@@ -856,6 +857,45 @@ GRAPHQL;
                                     [],
                                     [
                                         new LeafField('name', null, [], [], new Location(3, 13)),
+                                    ],
+                                    [],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ]
+                ),
+            ],
+            [
+                <<<GRAPHQL
+                    query GetUsersName(\$format: String!) @someOperationDirective {
+                        users {
+                            name @style(format: \$format)
+                        }
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            'GetUsersName', 
+                            [
+                                $formatVariable
+                            ],
+                            [
+                                new Directive('someOperationDirective', [], new Location(1, 43))
+                            ],
+                            [
+                                new RelationalField(
+                                    'users',
+                                    null,
+                                    [],
+                                    [
+                                        new LeafField('name', null, [], [
+                                            new Directive('style', [
+                                                new Argument('format', new VariableReference('format', $formatVariable, new Location(3, 33), new Location(5, 67)), new Location(3, 25))
+                                            ], new Location(3, 19))
+                                        ], new Location(3, 13)),
                                     ],
                                     [],
                                     new Location(2, 9)
