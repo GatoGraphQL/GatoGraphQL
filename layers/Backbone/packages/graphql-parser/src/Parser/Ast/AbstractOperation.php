@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
+use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
+use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
@@ -173,12 +175,40 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     {
         $variableReferences = [];
         foreach ($arguments as $argument) {
-            if (!($argument->getValue() instanceof VariableReference)) {
+            $variableReferences = array_merge(
+                $variableReferences,
+                $this->getVariableReferencesInArgumentValue($argument->getValue())
+            );
+        }
+        return $variableReferences;
+    }
+
+    /**
+     * @return VariableReference[]
+     */
+    protected function getVariableReferencesInArgumentValue(WithValueInterface $argumentValue): array
+    {
+        if ($argumentValue instanceof VariableReference) {
+            return [$argumentValue];
+        }
+        $variableReferences = [];
+        // Get references within InputObjects and Lists
+        if ($argumentValue instanceof InputObject || $argumentValue instanceof InputList) {
+            $listValues = (array)$argumentValue->getAstValue();
+        }
+        foreach ($listValues as $listValue) {
+            if (!($listValue instanceof WithValueInterface || $listValue instanceof VariableReference)) {
                 continue;
             }
-            /** @var VariableReference */
-            $variableReference = $argument->getValue();
-            $variableReferences[] = $variableReference;
+            if ($listValue instanceof VariableReference) {
+                $variableReferences[] = $listValue;
+                continue;
+            }
+            /** @var WithValueInterface $listValue */
+            $variableReferences = array_merge(
+                $variableReferences,
+                $this->getVariableReferencesInArgumentValue($listValue)
+            );
         }
         return $variableReferences;
     }

@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue;
 
 use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
+use PoPBackbone\GraphQLParser\Parser\Ast\WithAstValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use stdClass;
 
-class InputObject extends AbstractAst implements WithValueInterface
+class InputObject extends AbstractAst implements WithValueInterface, WithAstValueInterface
 {
     public function __construct(
         protected stdClass $object,
@@ -44,5 +45,13 @@ class InputObject extends AbstractAst implements WithValueInterface
     public function setValue(mixed $value): void
     {
         $this->object = $value;
+    }
+
+    /**
+     * @return stdClass
+     */
+    public function getAstValue(): mixed
+    {
+        return $this->object;
     }
 }

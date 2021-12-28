@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue;
 
 use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
+use PoPBackbone\GraphQLParser\Parser\Ast\WithAstValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class InputList extends AbstractAst implements WithValueInterface
+class InputList extends AbstractAst implements WithValueInterface, WithAstValueInterface
 {
     /**
      * @param mixed[] $list
@@ -46,5 +47,13 @@ class InputList extends AbstractAst implements WithValueInterface
     public function setValue(mixed $value): void
     {
         $this->list = $value;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function getAstValue(): mixed
+    {
+        return $this->list;
     }
 }
