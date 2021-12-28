@@ -142,6 +142,23 @@ class DocumentTest extends TestCase
         $document->validate();
     }
 
+    public function testVariableMissingInDirective()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        
+        // Validate that there are no errors <= no Exception is thrown
+        $document = $parser->parse('
+            query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
+              id
+              factions(names:$names_0, test: $query) @include(if: $missingVar) {
+                id
+              }
+            }
+        ');
+        $document->validate();
+    }
+
     public function testNoOperationsDefined()
     {
         $this->expectException(InvalidRequestException::class);
