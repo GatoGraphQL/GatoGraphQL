@@ -141,4 +141,19 @@ class DocumentTest extends TestCase
         ');
         $document->validate();
     }
+
+    public function testNoOperationsDefined()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        
+        // Validate that there are no errors <= no Exception is thrown
+        $document = $parser->parse('
+            fragment F0 on Ship {
+                id,
+                name
+            }
+        ');
+        $document->validate();
+    }
 }
