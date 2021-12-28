@@ -9,5 +9,5 @@ class MutationOperation extends AbstractOperation
     public function getOperationType(): string
     {
         return OperationTypes::MUTATION;
-    }    
+    }
 }

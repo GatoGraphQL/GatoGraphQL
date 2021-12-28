@@ -12,7 +12,7 @@ class DocumentTest extends TestCase
     public function testValidationWorks()
     {
         $parser = new Parser();
-        
+
         // Validate that there are no errors <= no Exception is thrown
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {

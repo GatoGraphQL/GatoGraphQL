@@ -7,7 +7,7 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 trait WithFieldsOrFragmentBondsTrait
 {
     /** @var FieldInterface[]|FragmentBondInterface[] */
-    protected array $fieldsOrFragmentBonds;    
+    protected array $fieldsOrFragmentBonds;
 
     /**
      * @return FieldInterface[]|FragmentBondInterface[]
@@ -16,7 +16,7 @@ trait WithFieldsOrFragmentBondsTrait
     {
         return $this->fieldsOrFragmentBonds;
     }
-    
+
     /**
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */

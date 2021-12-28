@@ -68,7 +68,10 @@ GRAPHQL;
 
         $this->assertEquals($document, new Document(
             [
-                new QueryOperation('', [], [],
+                new QueryOperation(
+                    '',
+                    [],
+                    [],
                     [
                         new RelationalField(
                             'authors',
@@ -143,7 +146,10 @@ GRAPHQL;
         $document   = $parser->parse('{ foo,       ,,  , bar  }');
         $this->assertEquals(new Document(
             [
-                new QueryOperation('', [], [],
+                new QueryOperation(
+                    '',
+                    [],
+                    [],
                     [
                         new LeafField('foo', '', [], [], new Location(1, 3)),
                         new LeafField('bar', '', [], [], new Location(1, 20)),
@@ -160,7 +166,10 @@ GRAPHQL;
         $document   = $parser->parse('{ name }');
         $this->assertEquals(new Document(
             [
-                new QueryOperation('', [], [],
+                new QueryOperation(
+                    '',
+                    [],
+                    [],
                     [
                         new LeafField('name', '', [], [], new Location(1, 3)),
                     ],
@@ -176,7 +185,10 @@ GRAPHQL;
         $document   = $parser->parse('{ post, user { name } }');
         $this->assertEquals(new Document(
             [
-                new QueryOperation('', [], [],
+                new QueryOperation(
+                    '',
+                    [],
+                    [],
                     [
                         new LeafField('post', null, [], [], new Location(1, 3)),
                         new RelationalField('user', null, [], [
@@ -200,7 +212,7 @@ GRAPHQL;
                 }
             }');
         $this->assertEquals(new Document(
-            [], 
+            [],
             [
                 new Fragment('FullType', '__Type', [], [
                     new LeafField('kind', null, [], [], new Location(3, 17)),
@@ -326,7 +338,8 @@ GRAPHQL;
                     ],
                     new Location(2, 19)
                 )
-            ], [
+            ],
+            [
                 new Fragment('FullType', '__Type', [], [
                     new LeafField('kind', null, [], [], new Location(23, 17)),
                     new LeafField('name', null, [], [], new Location(24, 17)),
@@ -419,7 +432,10 @@ GRAPHQL;
 
         $this->assertEquals($document, new Document(
             [
-                new QueryOperation('', [], [],
+                new QueryOperation(
+                    '',
+                    [],
+                    [],
                     [
                         new RelationalField(
                             'test',
@@ -459,7 +475,7 @@ GRAPHQL;
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
                 new Document([
                         new QueryOperation(
-                            '', 
+                            '',
                             [
                                 $variable,
                             ],
@@ -480,8 +496,7 @@ GRAPHQL;
                             ],
                             new Location(1, 7)
                         )
-                    ]
-                ),
+                    ]),
             ],
             [
                 '{ query { alias: name } }',
@@ -497,7 +512,10 @@ GRAPHQL;
                 'mutation { createUser ( email: "test@test.com", active: true ) { id } }',
                 new Document(
                     [
-                        new MutationOperation('', [], [],
+                        new MutationOperation(
+                            '',
+                            [],
+                            [],
                             [
                                 new RelationalField(
                                     'createUser',
@@ -522,7 +540,10 @@ GRAPHQL;
                 'mutation { test : createUser (id: 4) }',
                 new Document(
                     [
-                        new MutationOperation('', [], [],
+                        new MutationOperation(
+                            '',
+                            [],
+                            [],
                             [
                                 new LeafField(
                                     'createUser',
@@ -738,7 +759,10 @@ GRAPHQL;
                 '{ allUsers : users ( id: [ 1, "2", true, null] ) { id } }',
                 new Document(
                     [
-                        new QueryOperation('', [], [],
+                        new QueryOperation(
+                            '',
+                            [],
+                            [],
                             [
                                 new RelationalField(
                                     'users',
@@ -832,7 +856,7 @@ GRAPHQL;
                 new Document(
                     [
                         new QueryOperation(
-                            '', 
+                            '',
                             [],
                             [],
                             [
@@ -868,7 +892,7 @@ GRAPHQL;
                 new Document(
                     [
                         new QueryOperation(
-                            'GetUsersName', 
+                            'GetUsersName',
                             [],
                             [
                                 new Directive('someOperationDirective', [], new Location(1, 25))
@@ -902,7 +926,7 @@ GRAPHQL;
                 new Document(
                     [
                         new QueryOperation(
-                            'GetUsersName', 
+                            'GetUsersName',
                             [
                                 $formatVariable
                             ],
@@ -946,7 +970,7 @@ GRAPHQL;
                 new Document(
                     [
                         new QueryOperation(
-                            'GetUsersName', 
+                            'GetUsersName',
                             [
                                 $formatVariable
                             ],
@@ -992,7 +1016,7 @@ GRAPHQL;
                 new Document(
                     [
                         new QueryOperation(
-                            'GetUsersName', 
+                            'GetUsersName',
                             [],
                             [],
                             [
@@ -1009,7 +1033,8 @@ GRAPHQL;
                             ],
                             new Location(1, 11)
                         )
-                    ], [
+                    ],
+                    [
                         new Fragment('UserProps', 'User', [], [
                             new LeafField('id', null, [], [], new Location(8, 9)),
                             new RelationalField('posts', null, [], [
@@ -1038,7 +1063,7 @@ GRAPHQL;
                 new Document(
                     [
                         new QueryOperation(
-                            'GetUsersName', 
+                            'GetUsersName',
                             [],
                             [],
                             [

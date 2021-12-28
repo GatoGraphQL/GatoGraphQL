@@ -7,7 +7,7 @@ namespace PoPBackbone\GraphQLParser\Execution;
 class Context
 {
     private string $operationName;
-    
+
     public function __construct(
         ?string $operationName = null,
         /** @var array<string, mixed> */

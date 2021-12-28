@@ -115,10 +115,10 @@ class Variable extends AbstractAst implements WithValueInterface
         if ($this->context->hasVariableValue($this->name)) {
             $variableValue = $this->context->getVariableValue($this->name);
             if (is_array($variableValue)) {
-                return new InputList($variableValue, $this->getLocation());    
+                return new InputList($variableValue, $this->getLocation());
             }
             if ($variableValue instanceof stdClass) {
-                return new InputObject($variableValue, $this->getLocation());    
+                return new InputObject($variableValue, $this->getLocation());
             }
             return new Literal($variableValue, $this->getLocation());
         }

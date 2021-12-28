@@ -66,8 +66,10 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
             if ($fieldOrFragmentBond instanceof LeafField) {
                 continue;
             }
-            if ($fieldOrFragmentBond instanceof InlineFragment
-                || $fieldOrFragmentBond instanceof RelationalField) {
+            if (
+                $fieldOrFragmentBond instanceof InlineFragment
+                || $fieldOrFragmentBond instanceof RelationalField
+            ) {
                 $fragmentReferences = array_merge(
                     $fragmentReferences,
                     $this->getFragmentReferencesInFieldsOrFragmentBonds($fieldOrFragmentBond->getFieldsOrFragmentBonds(), $fragments)

@@ -18,7 +18,7 @@ class ExecutableDocumentTest extends TestCase
 {
     /**
      * Commented test, since it produces error:
-     * 
+     *
      * > Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException: You have requested a non-existent service "PoP\GraphQLParser\Query\QueryAugmenterServiceInterface".
      *
      * Fix when solving the corresponding issue:

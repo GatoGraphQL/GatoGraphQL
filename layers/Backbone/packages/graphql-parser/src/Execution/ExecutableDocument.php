@@ -134,7 +134,8 @@ class ExecutableDocument implements ExecutableDocumentInterface
         foreach ($this->document->getOperations() as $operation) {
             foreach ($operation->getVariableReferences($this->document->getFragments()) as $variableReference) {
                 $variable = $variableReference->getVariable();
-                if (array_key_exists($variable->getName(), $this->context->getVariableValues())
+                if (
+                    array_key_exists($variable->getName(), $this->context->getVariableValues())
                     || $variable->hasDefaultValue()
                 ) {
                     continue;

@@ -22,7 +22,7 @@ interface OperationInterface extends LocatableInterface, WithDirectivesInterface
      * @return Variable[]
      */
     public function getVariables(): array;
-    
+
     /**
      * @param Fragment[] $fragments
      * @return VariableReference[]

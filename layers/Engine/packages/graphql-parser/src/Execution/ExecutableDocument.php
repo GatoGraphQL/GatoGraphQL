@@ -12,7 +12,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 class ExecutableDocument extends UpstreamExecutableDocument
 {
     use StandaloneServiceTrait;
-    
+
     /**
      * Override to support the "multiple query execution" feature:
      * If passing operation name `__ALL`, then execute all operations (hack)
@@ -25,7 +25,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
         if ($queryAugmenterService->isExecutingAllOperations($this->context->getOperationName())) {
             return $this->document->getOperations();
         }
-        
+
         return parent::extractRequestedOperations();
     }
 

@@ -48,27 +48,36 @@ class RequestValidatorTest extends TestCase
             [
                 (new ExecutableDocument(
                     new Document([
-                        new QueryOperation('saranga', [], [], 
+                        new QueryOperation(
+                            'saranga',
+                            [],
+                            [],
                             [
                                 new RelationalField('test', null, [], [
                                     new FragmentReference('reference', new Location(1, 1))
                                 ], [], new Location(1, 1)),
                                 new FragmentReference('reference', new Location(1, 1))
-                            ], new Location(1, 1)
+                            ],
+                            new Location(1, 1)
                         )]),
-                        new Context()
-                    )),
+                    new Context()
+                )),
             ],
             [
                 (new ExecutableDocument(
                     new Document([
-                        new QueryOperation('saranga', [], [], 
+                        new QueryOperation(
+                            'saranga',
+                            [],
+                            [],
                             [
                                 new RelationalField('test', null, [], [
                                     new FragmentReference('reference', new Location(1, 1)),
                                     new FragmentReference('reference2', new Location(1, 1)),
                                 ], [], new Location(1, 1))
-                            ], new Location(1, 1))
+                            ],
+                            new Location(1, 1)
+                        )
                         ], [
                         new Fragment('reference', 'TestType', [], [], new Location(1, 1))
                     ]),
@@ -78,24 +87,31 @@ class RequestValidatorTest extends TestCase
             [
                 (new ExecutableDocument(
                     new Document([
-                        new QueryOperation('saranga', [], [], 
+                        new QueryOperation(
+                            'saranga',
+                            [],
+                            [],
                             [
                                 new RelationalField('test', null, [], [
                                     new FragmentReference('reference', new Location(1, 1)),
                                 ], [], new Location(1, 1))
-                            ], new Location(1, 1))
+                            ],
+                            new Location(1, 1)
+                        )
                         ], [
                             new Fragment('reference', 'TestType', [], [], new Location(1, 1)),
                             new Fragment('reference2', 'TestType', [], [], new Location(1, 1))
-                        ]
-                    ),
+                        ]),
                     new Context()
                 ))
             ],
             [
                 (new ExecutableDocument(
                     new Document([
-                        new QueryOperation('saranga', [], [], 
+                        new QueryOperation(
+                            'saranga',
+                            [],
+                            [],
                             [
                                 new RelationalField(
                                     'test',
@@ -109,16 +125,20 @@ class RequestValidatorTest extends TestCase
                                     [],
                                     new Location(1, 1)
                                 )
-                            ], new Location(1, 1))
-                        ]
-                    ),
+                            ],
+                            new Location(1, 1)
+                        )
+                        ]),
                     new Context()
                 ))
             ],
             [
                 (new ExecutableDocument(
                     new Document([
-                        new QueryOperation('saranga', [], [], 
+                        new QueryOperation(
+                            'saranga',
+                            [],
+                            [],
                             [
                                 new RelationalField('test', null, [
                                     new Argument('test', new VariableReference('test', $variable1, new Location(1, 1)), new Location(1, 1)),
@@ -126,9 +146,10 @@ class RequestValidatorTest extends TestCase
                                 ], [
                                     new LeafField('test', null, [], [], new Location(1, 1))
                                 ], [], new Location(1, 1))
-                            ], new Location(1, 1))
-                        ]
-                    ),
+                            ],
+                            new Location(1, 1)
+                        )
+                        ]),
                     new Context()
                 ))
             ]

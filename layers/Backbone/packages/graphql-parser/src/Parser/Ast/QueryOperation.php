@@ -9,5 +9,5 @@ class QueryOperation extends AbstractOperation
     public function getOperationType(): string
     {
         return OperationTypes::QUERY;
-    }    
+    }
 }

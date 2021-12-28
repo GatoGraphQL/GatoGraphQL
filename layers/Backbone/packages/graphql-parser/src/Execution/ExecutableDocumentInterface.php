@@ -11,7 +11,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 interface ExecutableDocumentInterface
 {
     /**
-     * Calculate the executable operations, and 
+     * Calculate the executable operations, and
      * integrate the variableValues for them.
      *
      * If any validation fails, throw an exception.
