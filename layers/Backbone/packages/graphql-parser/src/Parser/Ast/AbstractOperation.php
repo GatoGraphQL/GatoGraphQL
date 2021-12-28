@@ -7,7 +7,7 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-abstract class AbstractOperation extends AbstractAst implements OperationInterface, WithFieldsOrFragmentBondsInterface
+abstract class AbstractOperation extends AbstractAst implements OperationInterface
 {
     use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;

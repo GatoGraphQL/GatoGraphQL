@@ -7,7 +7,7 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 
-interface OperationInterface extends LocatableInterface, WithDirectivesInterface
+interface OperationInterface extends LocatableInterface, WithDirectivesInterface, WithFieldsOrFragmentBondsInterface
 {
     public function getName(): string;
     public function getOperationType(): string;
