@@ -228,7 +228,7 @@ class Document
     protected function assertAllVariablesExist(): void
     {
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getVariableReferences() as $variableReference) {
+            foreach ($operation->getVariableReferences($this->getFragments()) as $variableReference) {
                 if ($variableReference->getVariable() !== null) {
                     continue;
                 }
@@ -252,7 +252,7 @@ class Document
     {
         foreach ($this->getOperations() as $operation) {
             $referencedVariableNames = [];
-            foreach ($operation->getVariableReferences() as $variableReference) {
+            foreach ($operation->getVariableReferences($this->getFragments()) as $variableReference) {
                 $referencedVariableNames[] = $variableReference->getName();
             }
             $referencedVariableNames = array_values(array_unique($referencedVariableNames));
