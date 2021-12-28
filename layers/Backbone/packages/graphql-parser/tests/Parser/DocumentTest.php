@@ -317,6 +317,53 @@ class DocumentTest extends TestCase
                     }
                 }
             '],
+            ['
+                {
+                    posts(limit: 3, limit: 5) {
+                        id
+                    }
+                }
+            '],
+            ['
+                {
+                    posts {
+                        ...Frag
+                    }
+                }
+
+                fragment Frag on Post {
+                    date(format: "d/m/Y", format: "d, m, Y")
+                }
+            '],
+            ['
+                {
+                    posts {
+                        ... on Post {
+                            date(format: "d/m/Y", format: "d, m, Y")
+                        }
+                    }
+                }
+            '],
+            ['
+                {
+                    posts {
+                        ...Frag
+                    }
+                }
+
+                fragment Frag on Post {
+                    ... on Post {
+                        date(format: "d/m/Y", format: "d, m, Y")
+                    }
+                }
+            '],
+            ['
+                {
+                    posts @include(if: true, if: false) {
+                        id
+                    }
+                }
+            '],
         ];
     }
 }
