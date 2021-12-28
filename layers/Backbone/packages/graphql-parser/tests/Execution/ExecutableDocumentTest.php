@@ -202,4 +202,37 @@ class ExecutableDocumentTest extends TestCase
             ]
         );
     }
+
+    public function testRequestedOperation()
+    {
+        $parser = new Parser();
+        $document = $parser->parse('
+            query One {
+                film(id: 1) {
+                    title
+                }
+            }
+
+            query Two {
+                post(id: 2) {
+                    title
+                }
+            }
+        ');
+        $context = new Context('Two');
+        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument->validateAndInitialize();
+        $this->assertEquals(
+            $executableDocument->getRequestedOperations(),
+            [
+                new QueryOperation('Two', [], [], [
+                    new RelationalField('post', null, [
+                        new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22)),
+                    ], [
+                        new LeafField('title', null, [], [], new Location(10, 21)),
+                    ], [], new Location(9, 17))
+                ], new Location(8, 19)),
+            ]
+        );
+    }
 }
