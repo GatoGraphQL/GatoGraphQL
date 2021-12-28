@@ -13,6 +13,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Ast\Document;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
@@ -776,6 +777,58 @@ GRAPHQL;
                                 new Location(1, 14)
                             ),
                         ], new Location(1, 1))
+                    ]
+                ),
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider queryWithDirectiveProvider
+     */
+    public function testDirectives($query, $structure)
+    {
+        $parser = new Parser();
+
+        $document = $parser->parse($query);
+
+        $this->assertEquals($document, $structure);
+    }
+
+    public function queryWithDirectiveProvider()
+    {
+        return [
+            [
+                <<<GRAPHQL
+                    query {
+                        users @include(if: true) {
+                            name
+                        }
+                    }
+                GRAPHQL,
+                new Document([
+                        new QueryOperation(
+                            '', 
+                            [],
+                            [],
+                            [
+                                new RelationalField(
+                                    'users',
+                                    null,
+                                    [],
+                                    [
+                                        new LeafField('name', null, [], [], new Location(3, 13)),
+                                    ],
+                                    [
+                                        new Directive('include', [
+                                            new Argument('if', new Literal(true, new Location(2, 28)), new Location(2, 24)),
+                                        ], new Location(2, 16))
+                                    ],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
                     ]
                 ),
             ],
