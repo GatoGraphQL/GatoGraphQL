@@ -30,7 +30,7 @@ class Variable extends AbstractAst implements WithValueInterface
         parent::__construct($location);
     }
 
-    public function setContext(Context $context): void
+    public function setContext(?Context $context): void
     {
         $this->context = $context;
     }

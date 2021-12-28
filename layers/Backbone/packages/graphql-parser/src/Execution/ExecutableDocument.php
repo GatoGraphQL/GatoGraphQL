@@ -46,7 +46,17 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
         // Inject the variable values into the objects
         foreach ($this->requestedOperations as $operation) {
-            $this->propagateContext($operation);
+            $this->propagateContext($operation, $this->context);
+        }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    public function reset(): void
+    {
+        foreach ($this->requestedOperations as $operation) {
+            $this->propagateContext($operation, null);
         }
     }
 
@@ -148,10 +158,10 @@ class ExecutableDocument implements ExecutableDocumentInterface
         return \sprintf('Variable \'%s\' hasn\'t been submitted', $variableName);
     }
 
-    protected function propagateContext(OperationInterface $operation): void
+    protected function propagateContext(OperationInterface $operation, ?Context $context): void
     {
         foreach ($operation->getVariables() as $variable) {
-            $variable->setContext($this->context);
+            $variable->setContext($context);
         }
     }
 
