@@ -1135,7 +1135,7 @@ GRAPHQL;
         // Test with default value
         $parser          = new Parser();
         $document = $parser->parse('
-            query FilterPosts($ids: [ID!]! = [3, 5]) {
+            query FilterPosts($ids: [ID!]! = [3, 5, {id: 5}]) {
               posts(ids: $ids) {
                 id
                 title
@@ -1146,7 +1146,9 @@ GRAPHQL;
         $var = $document->getOperations()[0]->getVariables()[0];
         $var->setContext(new Context());
         $this->assertTrue($var->hasDefaultValue());
-        $ids = [3, 5];
+        $idObject = new stdClass();
+        $idObject->id = 5;
+        $ids = [3, 5, $idObject];
         $this->assertEquals($var->getDefaultValue()->getValue(), $ids);
 
         // Test injecting in Context

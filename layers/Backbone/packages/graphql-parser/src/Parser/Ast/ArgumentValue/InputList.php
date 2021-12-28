@@ -21,11 +21,23 @@ class InputList extends AbstractAst implements WithValueInterface
     }
 
     /**
+     * Transform from Ast to actual value.
+     * Eg: replace VariableReferences with their value,
+     * nested InputObjects with stdClass, etc
+     *
      * @return mixed[]
      */
     public function getValue(): mixed
     {
-        return $this->list;
+        $list = [];
+        foreach ($this->list as $key => $value) {
+            if ($value instanceof WithValueInterface) {
+                $list[$key] = $value->getValue();
+                continue;
+            }
+            $list[$key] = $value;
+        }
+        return $list;
     }
 
     /**
