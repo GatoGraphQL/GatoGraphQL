@@ -799,6 +799,7 @@ GRAPHQL;
     {
         $formatVariable = new Variable('format', 'String', true, false, false, new Location(1, 24));
         return [
+            // Directive in RelationalField
             [
                 <<<GRAPHQL
                     query {
@@ -834,6 +835,7 @@ GRAPHQL;
                     ]
                 ),
             ],
+            // Directive in operation
             [
                 <<<GRAPHQL
                     query GetUsersName @someOperationDirective {
@@ -867,6 +869,7 @@ GRAPHQL;
                     ]
                 ),
             ],
+            // Directive in operation and leaf field
             [
                 <<<GRAPHQL
                     query GetUsersName(\$format: String!) @someOperationDirective {
@@ -895,6 +898,49 @@ GRAPHQL;
                                             new Directive('style', [
                                                 new Argument('format', new VariableReference('format', $formatVariable, new Location(3, 33), new Location(5, 67)), new Location(3, 25))
                                             ], new Location(3, 19))
+                                        ], new Location(3, 13)),
+                                    ],
+                                    [],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ]
+                ),
+            ],
+            // Repeatable directives
+            [
+                <<<GRAPHQL
+                    query GetUsersName(\$format: String!) {
+                        users {
+                            name
+                                @style(format: \$format)
+                                @someOtherDirective
+                                @style(format: \$format)
+                                @someOtherDirective
+                        }
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            'GetUsersName', 
+                            [
+                                $formatVariable
+                            ],
+                            [],
+                            [
+                                new RelationalField(
+                                    'users',
+                                    null,
+                                    [],
+                                    [
+                                        new LeafField('name', null, [], [
+                                            new Directive('style', [new Argument('format', new VariableReference('format', $formatVariable, new Location(4, 32), new Location(5, 67)), new Location(4, 24))], new Location(4, 18)),
+                                            new Directive('someOtherDirective', [], new Location(5, 18)),
+                                            new Directive('style', [new Argument('format', new VariableReference('format', $formatVariable, new Location(6, 32), new Location(5, 67)), new Location(6, 24))], new Location(6, 18)),
+                                            new Directive('someOtherDirective', [], new Location(7, 18)),
                                         ], new Location(3, 13)),
                                     ],
                                     [],
