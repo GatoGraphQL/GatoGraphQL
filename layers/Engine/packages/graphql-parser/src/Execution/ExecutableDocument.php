@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Execution;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\BasicService\StandaloneServiceTrait;
 use PoP\GraphQLParser\Facades\Query\QueryAugmenterServiceFacade;
 use PoPBackbone\GraphQLParser\Execution\ExecutableDocument as UpstreamExecutableDocument;
 
 class ExecutableDocument extends UpstreamExecutableDocument
 {
-    use BasicServiceTrait;
+    use StandaloneServiceTrait;
     
     /**
      * Override to support the "multiple query execution" feature:

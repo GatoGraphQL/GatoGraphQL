@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\BasicService\StandaloneServiceTrait;
 use PoPBackbone\GraphQLParser\Parser\Ast\Document as UpstreamDocument;
 
 class Document extends UpstreamDocument
 {
-    use BasicServiceTrait;
+    use StandaloneServiceTrait;
 
     protected function getNoOperationsDefinedInQueryErrorMessage(): string
     {

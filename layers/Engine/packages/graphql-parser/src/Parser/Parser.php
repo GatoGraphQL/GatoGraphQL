@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\BasicService\StandaloneServiceTrait;
 use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable as ExtendedVariable;
 use PoP\GraphQLParser\Parser\Ast\Directive as ExtendedDirective;
 use PoP\GraphQLParser\Parser\Ast\Document;
@@ -18,7 +18,7 @@ use PoPBackbone\GraphQLParser\Parser\Parser as UpstreamParser;
 
 class Parser extends UpstreamParser implements ParserInterface
 {
-    use BasicServiceTrait;
+    use StandaloneServiceTrait;
 
     protected function getIncorrectRequestSyntaxErrorMessage(string $syntax): string
     {
