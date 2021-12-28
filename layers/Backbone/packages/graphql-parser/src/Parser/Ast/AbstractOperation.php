@@ -113,7 +113,8 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
             $field = $fieldOrFragmentReference;
             $variableReferences = array_merge(
                 $variableReferences,
-                $this->getVariableReferencesInArguments($field->getArguments())
+                $this->getVariableReferencesInArguments($field->getArguments()),
+                $this->getVariableReferencesInDirectives($field->getDirectives())
             );
             if ($field instanceof RelationalField) {
                 /** @var RelationalField */
