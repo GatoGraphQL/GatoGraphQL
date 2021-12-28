@@ -40,6 +40,12 @@ class Document extends UpstreamDocument
         );
     }
 
+    protected function getDuplicateVariableNameErrorMessage(string $variableName): string
+    {
+        return \sprintf(
+            $this->getTranslationAPI()->__('Variable name \'%s\' is duplicated, it must be unique', $variableName);
+    }
+
     protected function getVariableDoesNotExistErrorMessage(string $variableName): string
     {
         return \sprintf(

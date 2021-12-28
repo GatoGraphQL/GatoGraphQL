@@ -55,6 +55,7 @@ class Document
         $this->assertOperationNamesUnique();
         $this->assertFragmentReferencesAreValid();
         $this->assertFragmentsAreUsed();
+        $this->assertVariableNamesUnique();
         $this->assertAllVariablesExist();
         $this->assertAllVariablesAreUsed();
     }
@@ -170,6 +171,31 @@ class Document
     protected function getFragmentNotUsedErrorMessage(string $fragmentName): string
     {
         return sprintf('Fragment \'%s\' not used', $fragmentName);
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertVariableNamesUnique(): void
+    {
+        foreach ($this->getOperations() as $operation) {
+            $variableNames = [];
+            foreach ($operation->getVariables() as $variable) {
+                $variableName = $variable->getName();
+                if (in_array($variableName, $variableNames)) {
+                    throw new InvalidRequestException(
+                        $this->getDuplicateVariableNameErrorMessage($variableName),
+                        $this->getNonSpecificLocation()
+                    );
+                }
+                $variableNames[] = $variableName;
+            }
+        }
+    }
+
+    protected function getDuplicateVariableNameErrorMessage(string $variableName): string
+    {
+        return \sprintf('Variable name \'%s\' is duplicated, it must be unique', $variableName);
     }
 
     /**
