@@ -56,7 +56,7 @@ class Parser extends Tokenizer implements ParserInterface
 
                 default:
                     throw new SyntaxErrorException(
-                        $this->getIncorrectRequestSyntaxErrorMessage(),
+                        $this->getIncorrectRequestSyntaxErrorMessage($this->lookAhead->getData()),
                         $this->getLocation()
                     );
             }
@@ -80,9 +80,9 @@ class Parser extends Tokenizer implements ParserInterface
         );
     }
 
-    protected function getIncorrectRequestSyntaxErrorMessage(): string
+    protected function getIncorrectRequestSyntaxErrorMessage(string $syntax): string
     {
-        return 'Incorrect request syntax';
+        return \sprintf('Incorrect request syntax: \'%s\'', $syntax);
     }
 
     private function init(string $source): void

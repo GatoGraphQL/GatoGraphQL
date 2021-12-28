@@ -20,9 +20,12 @@ class Parser extends UpstreamParser implements ParserInterface
 {
     use BasicServiceTrait;
 
-    protected function getIncorrectRequestSyntaxErrorMessage(): string
+    protected function getIncorrectRequestSyntaxErrorMessage(string $syntax): string
     {
-        return $this->getTranslationAPI()->__('Incorrect request syntax', 'graphql-parser');
+        return \sprintf(
+            $this->getTranslationAPI()->__('Incorrect request syntax: \'%s\'', 'graphql-parser'),
+            $syntax
+        );
     }
 
     protected function getCantParseArgumentErrorMessage(): string
