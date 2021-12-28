@@ -85,11 +85,26 @@ class Document
     protected function assertFragmentsAreUsed(): void
     {
         $referencedFragmentNames = [];
+
+        // Collect fragment references in all operations
         foreach ($this->getOperations() as $operation) {
             foreach ($operation->getFragmentReferences() as $fragmentReference) {
                 $referencedFragmentNames[] = $fragmentReference->getName();
             }
         }
+
+        // Collect fragment references in all fragments
+        foreach ($this->getFragments() as $fragment) {
+            foreach ($fragment->getFieldsOrFragmentBonds() as $fieldsOrFragmentBond) {
+                if (!($fieldsOrFragmentBond instanceof FragmentReference)) {
+                    continue;
+                }
+                /** @var FragmentReference */
+                $fragmentReference = $fieldsOrFragmentBond;
+                $referencedFragmentNames[] = $fragmentReference->getName();
+            }
+        }
+
         $referencedFragmentNames = array_values(array_unique($referencedFragmentNames));
 
         foreach ($this->getFragments() as $fragment) {
