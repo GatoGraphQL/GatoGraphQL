@@ -13,9 +13,10 @@ interface OperationInterface extends LocatableInterface, WithDirectivesInterface
     public function getOperationType(): string;
 
     /**
+     * @param Fragment[] $fragments
      * @return FragmentReference[]
      */
-    public function getFragmentReferences(): array;
+    public function getFragmentReferences(array $fragments): array;
 
     /**
      * @return Variable[]

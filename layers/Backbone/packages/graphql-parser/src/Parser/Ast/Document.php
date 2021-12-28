@@ -136,7 +136,7 @@ class Document
     protected function assertFragmentReferencesAreValid(): void
     {
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getFragmentReferences() as $fragmentReference) {
+            foreach ($operation->getFragmentReferences($this->getFragments()) as $fragmentReference) {
                 if ($this->getFragment($fragmentReference->getName()) !== null) {
                     continue;
                 }
@@ -162,7 +162,7 @@ class Document
 
         // Collect fragment references in all operations
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getFragmentReferences() as $fragmentReference) {
+            foreach ($operation->getFragmentReferences($this->getFragments()) as $fragmentReference) {
                 $referencedFragmentNames[] = $fragmentReference->getName();
             }
         }
