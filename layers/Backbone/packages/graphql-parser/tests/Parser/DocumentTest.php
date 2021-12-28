@@ -109,4 +109,36 @@ class DocumentTest extends TestCase
         ');
         $document->validate();
     }
+
+    public function testVariableNotUsed()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        
+        // Validate that there are no errors <= no Exception is thrown
+        $document = $parser->parse('
+            query StarWarsAppHomeRoute($names_0:[String!]!, $query: String, $notUsedVar: Boolean) {
+              factions(names:$names_0, test: $query) {
+                id
+              }
+            }
+        ');
+        $document->validate();
+    }
+
+    public function testVariableMissing()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        
+        // Validate that there are no errors <= no Exception is thrown
+        $document = $parser->parse('
+            query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
+              factions(names:$names_0, test: $query, someOther: $missingVar) {
+                id
+              }
+            }
+        ');
+        $document->validate();
+    }
 }
