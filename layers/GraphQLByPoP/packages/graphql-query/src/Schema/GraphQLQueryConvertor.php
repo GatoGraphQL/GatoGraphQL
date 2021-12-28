@@ -33,6 +33,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
+use stdClass;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
@@ -188,11 +189,13 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              * then replace it with an expression, so its value can be computed on runtime
              */
             return QueryHelpers::getExpressionQuery($value->getName());
-        } elseif ($value instanceof VariableReference || $value instanceof Variable | $value instanceof Literal) {
+        } elseif ($value instanceof Literal) {
             if (is_string($value->getValue())) {
                 return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value->getValue());
             }
             return $value->getValue();
+        } elseif ($value instanceof VariableReference || $value instanceof Variable) {
+            return $this->convertArgumentValue($value->getValue());
         } elseif (is_array($value)) {
             /**
              * When coming from the InputList, its `getValue` is an array of Variables
@@ -200,6 +203,11 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             return array_map(
                 [$this, 'convertArgumentValue'],
                 $value
+            );
+        } elseif ($value instanceof stdClass) {
+            return (object) array_map(
+                [$this, 'convertArgumentValue'],
+                (array) $value
             );
         } elseif ($value instanceof InputList) {
             return array_map(
