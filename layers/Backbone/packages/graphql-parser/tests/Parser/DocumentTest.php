@@ -167,6 +167,36 @@ class DocumentTest extends TestCase
         $document->validate();
     }
 
+    public function testVariableMissingInInputObject()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        $document = $parser->parse('
+            query {
+              id
+              posts(filter: { search: $search }) {
+                id
+              }
+            }
+        ');
+        $document->validate();
+    }
+
+    public function testVariableMissingInInputList()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        $document = $parser->parse('
+            query {
+              id
+              posts(ids: [$id]) {
+                id
+              }
+            }
+        ');
+        $document->validate();
+    }
+
     public function testVariableInFragment()
     {
         $parser = new Parser();
