@@ -1129,4 +1129,40 @@ GRAPHQL;
         $this->assertFalse($var->hasDefaultValue());
         $this->assertEquals($var->getValue()->getValue(), $filter);
     }
+
+    public function testInputListVariableValue()
+    {
+        // Test with default value
+        $parser          = new Parser();
+        $document = $parser->parse('
+            query FilterPosts($ids: [ID!]! = [3, 5]) {
+              posts(ids: $ids) {
+                id
+                title
+              }
+            }
+        ');
+        /** @var Variable $var */
+        $var = $document->getOperations()[0]->getVariables()[0];
+        $var->setContext(new Context());
+        $this->assertTrue($var->hasDefaultValue());
+        $ids = [3, 5];
+        $this->assertEquals($var->getDefaultValue()->getValue(), $ids);
+
+        // Test injecting in Context
+        $parser          = new Parser();
+        $document = $parser->parse('
+        query FilterPosts($ids: [ID!]!) {
+            posts(ids: $ids) {
+              id
+              title
+            }
+          }
+        ');
+        /** @var Variable $var */
+        $var = $document->getOperations()[0]->getVariables()[0];
+        $var->setContext(new Context(null, ['ids' => $ids]));
+        $this->assertFalse($var->hasDefaultValue());
+        $this->assertEquals($var->getValue()->getValue(), $ids);
+    }
 }
