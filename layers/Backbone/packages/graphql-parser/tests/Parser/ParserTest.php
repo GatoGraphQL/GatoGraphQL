@@ -952,6 +952,54 @@ GRAPHQL;
                     ]
                 ),
             ],
+            // Directive in fragment
+            [
+                <<<GRAPHQL
+                    query GetUsersName {
+                        users {
+                            ...UserProps
+                        }
+                    }
+
+                    fragment UserProps on User {
+                        id
+                        posts @someOperationDirective {
+                            id
+                        }
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            'GetUsersName', 
+                            [],
+                            [],
+                            [
+                                new RelationalField(
+                                    'users',
+                                    null,
+                                    [],
+                                    [
+                                        new FragmentReference('UserProps', new Location(3, 16)),
+                                    ],
+                                    [],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ], [
+                        new Fragment('UserProps', 'User', [], [
+                            new LeafField('id', null, [], [], new Location(8, 9)),
+                            new RelationalField('posts', null, [], [
+                                new LeafField('id', null, [], [], new Location(10, 13)),
+                            ], [
+                                new Directive('someOperationDirective', [], new Location(9, 16))
+                            ], new Location(9, 9)),
+                        ], new Location(7, 14)),
+                    ]
+                ),
+            ],
         ];
     }
 
