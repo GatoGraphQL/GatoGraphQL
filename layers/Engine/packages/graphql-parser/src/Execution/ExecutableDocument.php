@@ -28,38 +28,6 @@ class ExecutableDocument extends UpstreamExecutableDocument
         return parent::getSelectedOperationsToExecute();
     }
 
-    protected function getFragmentNotUsedErrorMessage(string $fragmentName): string
-    {
-        return \sprintf(
-            $this->getTranslationAPI()->__('Fragment \'%s\' not used', 'graphql-parser'),
-            $fragmentName
-        );
-    }
-
-    protected function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
-    {
-        return \sprintf(
-            $this->getTranslationAPI()->__('Fragment \'%s\' not defined in query', 'graphql-parser'),
-            $fragmentName
-        );
-    }
-
-    protected function getVariableDoesNotExistErrorMessage(string $variableName): string
-    {
-        return \sprintf(
-            $this->getTranslationAPI()->__('Variable \'%s\' does not exist', 'graphql-parser'),
-            $variableName
-        );
-    }
-
-    protected function getVariableNotUsedErrorMessage(string $variableName): string
-    {
-        return \sprintf(
-            $this->getTranslationAPI()->__('Variable \'%s\' not used', 'graphql-parser'),
-            $variableName
-        );
-    }
-
     protected function getNoOperationMatchesNameErrorMessage(string $operationName): string
     {
         return \sprintf(

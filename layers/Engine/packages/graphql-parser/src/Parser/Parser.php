@@ -7,6 +7,7 @@ namespace PoP\GraphQLParser\Parser;
 use PoP\BasicService\BasicServiceTrait;
 use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable as ExtendedVariable;
 use PoP\GraphQLParser\Parser\Ast\Directive as ExtendedDirective;
+use PoP\GraphQLParser\Parser\Ast\Document;
 use PoP\GraphQLParser\Parser\Ast\LeafField as ExtendedLeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
@@ -27,6 +28,18 @@ class Parser extends UpstreamParser implements ParserInterface
     protected function getCantParseArgumentErrorMessage(): string
     {
         return $this->getTranslationAPI()->__('Can\'t parse argument', 'graphql-parser');
+    }
+
+    public function createDocument(
+        /** @var OperationInterface[] */
+        array $operations,
+        /** @var Fragment[] */
+        array $fragments,
+    ) {
+        return new Document(
+            $operations,
+            $fragments,
+        );
     }
 
     protected function createVariable(

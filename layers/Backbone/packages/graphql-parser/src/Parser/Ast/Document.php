@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
+use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 
@@ -42,5 +43,120 @@ class Document
         }
 
         return null;
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    public function validate(): void
+    {
+        $this->assertFragmentReferencesAreValid();
+        $this->assertFragmentsAreUsed();
+        $this->assertAllVariablesExist();
+        $this->assertAllVariablesAreUsed();
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertFragmentReferencesAreValid(): void
+    {
+        foreach ($this->document->getOperations() as $operation) {
+            foreach ($operation->getFragmentReferences() as $fragmentReference) {
+                if ($this->document->getFragment($fragmentReference->getName()) !== null) {
+                    continue;
+                }
+                throw new InvalidRequestException(
+                    $this->getFragmentNotDefinedInQueryErrorMessage($fragmentReference->getName()),
+                    $fragmentReference->getLocation()
+                );
+            }
+        }
+    }
+
+    protected function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
+    {
+        return sprintf('Fragment \'%s\' not defined in query', $fragmentName);
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertFragmentsAreUsed(): void
+    {
+        $referencedFragmentNames = [];
+        foreach ($this->document->getOperations() as $operation) {
+            foreach ($operation->getFragmentReferences() as $fragmentReference) {
+                $referencedFragmentNames[] = $fragmentReference->getName();
+            }
+        }
+        $referencedFragmentNames = array_values(array_unique($referencedFragmentNames));
+
+        foreach ($this->document->getFragments() as $fragment) {
+            if (in_array($fragment->getName(), $referencedFragmentNames)) {
+                continue;
+            }
+            throw new InvalidRequestException(
+                $this->getFragmentNotUsedErrorMessage($fragment->getName()),
+                $fragment->getLocation()
+            );
+        }
+    }
+
+    protected function getFragmentNotUsedErrorMessage(string $fragmentName): string
+    {
+        return sprintf('Fragment \'%s\' not used', $fragmentName);
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertAllVariablesExist(): void
+    {
+        foreach ($this->document->getOperations() as $operation) {
+            foreach ($operation->getVariableReferences() as $variableReference) {
+                if ($variableReference->getVariable() !== null) {
+                    continue;
+                }
+                throw new InvalidRequestException(
+                    $this->getVariableDoesNotExistErrorMessage($variableReference->getName()),
+                    $variableReference->getLocation()
+                );
+            }
+        }
+    }
+
+    protected function getVariableDoesNotExistErrorMessage(string $variableName): string
+    {
+        return sprintf('Variable \'%s\' does not exist', $variableName);
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertAllVariablesAreUsed(): void
+    {
+        foreach ($this->document->getOperations() as $operation) {
+            $referencedVariableNames = [];
+            foreach ($operation->getVariableReferences() as $variableReference) {
+                $referencedVariableNames[] = $variableReference->getName();
+            }
+            $referencedVariableNames = array_values(array_unique($referencedVariableNames));
+
+            foreach ($operation->getVariables() as $variable) {
+                if (in_array($variable->getName(), $referencedVariableNames)) {
+                    continue;
+                }
+                throw new InvalidRequestException(
+                    $this->getVariableNotUsedErrorMessage($variable->getName()),
+                    $variable->getLocation()
+                );
+            }
+        }
+    }
+
+    protected function getVariableNotUsedErrorMessage(string $variableName): string
+    {
+        return sprintf('Variable \'%s\' not used', $variableName);
     }
 }

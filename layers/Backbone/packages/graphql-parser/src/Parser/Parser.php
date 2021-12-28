@@ -62,9 +62,21 @@ class Parser extends Tokenizer implements ParserInterface
             }
         }
 
-        return new Document(
+        return $this->createDocument(
             $this->operations,
             $this->fragments,
+        );
+    }
+
+    public function createDocument(
+        /** @var OperationInterface[] */
+        array $operations,
+        /** @var Fragment[] */
+        array $fragments,
+    ) {
+        return new Document(
+            $operations,
+            $fragments,
         );
     }
 
