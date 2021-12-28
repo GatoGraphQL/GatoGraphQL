@@ -17,6 +17,7 @@ use PoP\GraphQLParser\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Parser\ParserInterface;
 use PoP\GraphQLParser\Query\ClientSymbols;
 use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
+use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Execution\ExecutableDocumentInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
@@ -26,8 +27,8 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
+use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
@@ -704,7 +705,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
         // If some variable hasn't been submitted, it will throw an Exception
         // Let it bubble up
-        $executableDocument = new ExecutableDocument($document, $operationName, $variableValues);
+        $executableDocument = new ExecutableDocument($document, new Context($operationName, $variableValues));
         $executableDocument->validateAndInitialize();
         return $executableDocument;
     }

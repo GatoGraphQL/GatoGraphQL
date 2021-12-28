@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser;
 
 use PHPUnit\Framework\TestCase;
+use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Execution\ExecutableDocument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Document;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
@@ -30,8 +31,7 @@ class RequestTest extends TestCase
 
         $executableDocument = new ExecutableDocument(
             new Document($operationsData, $fragmentsData),
-            null,
-            $variableValues
+            new Context(null, $variableValues)
         );
 
         $this->assertEquals($operationsData, $executableDocument->getDocument()->getOperations());

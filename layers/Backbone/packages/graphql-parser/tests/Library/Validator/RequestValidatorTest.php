@@ -55,8 +55,9 @@ class RequestValidatorTest extends TestCase
                                 ], [], new Location(1, 1)),
                                 new FragmentReference('reference', new Location(1, 1))
                             ], new Location(1, 1)
-                        )], [])
-                    ))
+                        )]),
+                        new Context()
+                    )),
             ],
             [
                 (new ExecutableDocument(
@@ -70,8 +71,9 @@ class RequestValidatorTest extends TestCase
                             ], new Location(1, 1))
                         ], [
                         new Fragment('reference', 'TestType', [], [], new Location(1, 1))
-                    ]))
-                )
+                    ]),
+                    new Context()
+                ))
             ],
             [
                 (new ExecutableDocument(
@@ -86,8 +88,9 @@ class RequestValidatorTest extends TestCase
                             new Fragment('reference', 'TestType', [], [], new Location(1, 1)),
                             new Fragment('reference2', 'TestType', [], [], new Location(1, 1))
                         ]
-                    ))
-                )
+                    ),
+                    new Context()
+                ))
             ],
             [
                 (new ExecutableDocument(
@@ -107,8 +110,10 @@ class RequestValidatorTest extends TestCase
                                     new Location(1, 1)
                                 )
                             ], new Location(1, 1))
-                        ], []))
-                )
+                        ]
+                    ),
+                    new Context()
+                ))
             ],
             [
                 (new ExecutableDocument(
@@ -122,8 +127,10 @@ class RequestValidatorTest extends TestCase
                                     new LeafField('test', null, [], [], new Location(1, 1))
                                 ], [], new Location(1, 1))
                             ], new Location(1, 1))
-                        ], []))
-                )
+                        ]
+                    ),
+                    new Context()
+                ))
             ]
         ];
     }

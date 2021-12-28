@@ -11,16 +11,12 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 class ExecutableDocument implements ExecutableDocumentInterface
 {
-    private Context $context;
     private ?array $requestedOperations = null;
 
     public function __construct(
         private Document $document,
-        ?string $operationName = null,
-        /** @var array<string, mixed> */
-        array $variableValues = [],
+        private Context $context,
     ) {
-        $this->context = new Context($operationName, $variableValues);
     }
 
     public function getDocument(): Document
