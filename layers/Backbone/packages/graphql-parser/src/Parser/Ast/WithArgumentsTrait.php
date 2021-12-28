@@ -6,7 +6,7 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
 trait WithArgumentsTrait
 {
-    /** @var array<string,Argument> */
+    /** @var Argument[] */
     protected array $arguments;
 
     /** @var array<string,mixed>|null */
@@ -24,7 +24,7 @@ trait WithArgumentsTrait
     }
 
     /**
-     * @return array<string,Argument>
+     * @return Argument[]
      */
     public function getArguments(): array
     {
@@ -50,17 +50,13 @@ trait WithArgumentsTrait
      */
     public function setArguments(array $arguments): void
     {
-        $this->arguments = [];
         $this->keyValueArguments = null;
-
-        foreach ($arguments as $argument) {
-            $this->addArgument($argument);
-        }
+        $this->arguments = $arguments;
     }
 
     public function addArgument(Argument $argument): void
     {
-        $this->arguments[$argument->getName()] = $argument;
+        $this->arguments[] = $argument;
     }
 
     /**

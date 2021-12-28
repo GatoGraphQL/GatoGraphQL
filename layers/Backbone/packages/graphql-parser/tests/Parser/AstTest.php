@@ -124,7 +124,7 @@ class AstTest extends TestCase
 
         $this->assertEquals('ships', $query->getName());
         $this->assertEquals('lastShips', $query->getAlias());
-        $this->assertEquals(['limit' => $arguments[0]], $query->getArguments());
+        $this->assertEquals([$arguments[0]], $query->getArguments());
         $this->assertEquals(['limit' => '10'], $query->getKeyValueArguments());
         $this->assertEquals($fields, $query->getFieldsOrFragmentBonds());
         $this->assertTrue($query->hasArguments());
