@@ -21,6 +21,10 @@ class DocumentTest extends TestCase
                 ...F2
               }
             }
+            fragment F0 on Ship {
+              id,
+              name
+            }
             fragment F1 on Faction {
               id,
               factionId
@@ -49,7 +53,7 @@ class DocumentTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testFragmentNotUsed()
+    public function testValidFragmentReferencedByFragment()
     {
         $this->expectException(InvalidRequestException::class);
         $parser = new Parser();
@@ -60,9 +64,23 @@ class DocumentTest extends TestCase
                 ...F2
               }
             }
-            fragment F0 on Ship {
-              id,
-              name
+            fragment F2 on Faction {
+              ...F1
+            }
+        ');
+        $document->validate();
+    }
+
+    public function testFragmentNotUsed()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        $document = $parser->parse('
+            query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
+              factions(names:$names_0, test: $query) {
+                id,
+                ...F2
+              }
             }
             fragment F1 on Faction {
               id,
