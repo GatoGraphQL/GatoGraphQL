@@ -24,26 +24,12 @@ use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 
 class ParserTest extends TestCase
 {
-    /**
-     * @return array<string, mixed>
-     */
-    protected function documentToArray(Document $document): array
-    {
-        return [
-            'operations'         => $document->getOperations(),
-            'fragments'          => $document->getFragments(),
-        ];
-    }
-
     public function testEmptyParser()
     {
         $parser = new Parser();
         $document = $parser->parse('');
 
-        $this->assertEquals([
-            'operations'    => [],
-            'fragments'          => [],
-        ], $this->documentToArray($document));
+        $this->assertEquals(new Document([], []), $document);
     }
 
     public function testInvalidSelection()
@@ -78,8 +64,8 @@ GRAPHQL;
         $parser     = new Parser();
         $document = $parser->parse($query);
 
-        $this->assertEquals($this->documentToArray($document), [
-            'operations'            => [
+        $this->assertEquals($document, new Document(
+            [
                 new QueryOperation('', [], [],
                     [
                         new RelationalField(
@@ -97,9 +83,8 @@ GRAPHQL;
                     ],
                     new Location(4, 7)
                 )
-            ],
-            'fragments'          => [],
-        ]);
+            ]
+        ));
     }
 
     private function tokenizeStringContents($graphQLString)
@@ -154,40 +139,41 @@ GRAPHQL;
     {
         $parser = new Parser();
         $document   = $parser->parse('{ foo,       ,,  , bar  }');
-        $this->assertEquals([
-            new QueryOperation('', [], [],
-                [
-                    new LeafField('foo', '', [], [], new Location(1, 3)),
-                    new LeafField('bar', '', [], [], new Location(1, 20)),
-                ],
-                new Location(1, 1)
-            )
-        ], $this->documentToArray($document)['operations']);
+        $this->assertEquals(new Document(
+            [
+                new QueryOperation('', [], [],
+                    [
+                        new LeafField('foo', '', [], [], new Location(1, 3)),
+                        new LeafField('bar', '', [], [], new Location(1, 20)),
+                    ],
+                    new Location(1, 1)
+                )
+            ]
+        ), $document);
     }
 
     public function testQueryWithNoFields()
     {
         $parser = new Parser();
         $document   = $parser->parse('{ name }');
-        $this->assertEquals([
-            'operations'            => [
+        $this->assertEquals(new Document(
+            [
                 new QueryOperation('', [], [],
                     [
                         new LeafField('name', '', [], [], new Location(1, 3)),
                     ],
                     new Location(1, 1)
                 )
-            ],
-            'fragments'          => [],
-        ], $this->documentToArray($document));
+            ]
+        ), $document);
     }
 
     public function testQueryWithFields()
     {
         $parser = new Parser();
         $document   = $parser->parse('{ post, user { name } }');
-        $this->assertEquals([
-            'operations'            => [
+        $this->assertEquals(new Document(
+            [
                 new QueryOperation('', [], [],
                     [
                         new LeafField('post', null, [], [], new Location(1, 3)),
@@ -197,9 +183,8 @@ GRAPHQL;
                     ],
                     new Location(1, 1)
                 )
-            ],
-            'fragments'          => [],
-        ], $this->documentToArray($document));
+            ]
+        ), $document);
     }
 
     public function testFragmentWithFields()
@@ -212,17 +197,17 @@ GRAPHQL;
                     name
                 }
             }');
-        $this->assertEquals([
-            'operations'    => [],
-            'fragments'          => [
+        $this->assertEquals(new Document(
+            [], 
+            [
                 new Fragment('FullType', '__Type', [], [
                     new LeafField('kind', null, [], [], new Location(3, 17)),
                     new RelationalField('fields', null, [], [
                         new LeafField('name', null, [], [], new Location(5, 21)),
                     ], [], new Location(4, 17)),
                 ], new Location(2, 22)),
-            ],
-        ], $this->documentToArray($document));
+            ]
+        ), $document);
     }
 
     public function testInspectionQuery()
@@ -308,8 +293,8 @@ GRAPHQL;
             }
         ');
 
-        $this->assertEquals([
-            'operations'            => [
+        $this->assertEquals(new Document(
+            [
                 new QueryOperation(
                     'IntrospectionQuery',
                     [],
@@ -339,8 +324,7 @@ GRAPHQL;
                     ],
                     new Location(2, 19)
                 )
-            ],
-            'fragments'          => [
+            ], [
                 new Fragment('FullType', '__Type', [], [
                     new LeafField('kind', null, [], [], new Location(23, 17)),
                     new LeafField('name', null, [], [], new Location(24, 17)),
@@ -398,8 +382,8 @@ GRAPHQL;
                         ], [], new Location(68, 21)),
                     ], [], new Location(65, 17)),
                 ], new Location(62, 22)),
-            ],
-        ], $this->documentToArray($document));
+            ]
+        ), $document);
     }
 
     public function wrongQueriesProvider()
@@ -426,10 +410,10 @@ GRAPHQL;
 
         $document = $parser->parse($query);
 
-        $this->assertEquals($this->documentToArray($document), $structure);
+        $this->assertEquals($document, $structure);
     }
 
-    public function testTypedFragment()
+    public function testInlineFragment()
     {
         $parser          = new Parser();
         $document = $parser->parse('
@@ -443,8 +427,8 @@ GRAPHQL;
             }
         ');
 
-        $this->assertEquals($this->documentToArray($document), [
-            'operations'            => [
+        $this->assertEquals($document, new Document(
+            [
                 new QueryOperation('', [], [],
                     [
                         new RelationalField(
@@ -461,9 +445,8 @@ GRAPHQL;
                     ],
                     new Location(2, 13)
                 )
-            ],
-            'fragments'          => [],
-        ]);
+            ]
+        ));
     }
 
     public function mutationProvider()
@@ -472,8 +455,7 @@ GRAPHQL;
         return [
             [
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
-                [
-                    'operations'            => [
+                new Document([
                         new QueryOperation(
                             '', 
                             [
@@ -496,25 +478,23 @@ GRAPHQL;
                             ],
                             new Location(1, 7)
                         )
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 '{ query { alias: name } }',
-                [
-                    'operations'            => [
+                new Document(
+                    [
                         new QueryOperation('', [], [], [
                             new RelationalField('query', null, [], [new LeafField('name', 'alias', [], [], new Location(1, 18))], [], new Location(1, 3)),
                         ], new Location(1, 1)),
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 'mutation { createUser ( email: "test@test.com", active: true ) { id } }',
-                [
-                    'operations'          => [
+                new Document(
+                    [
                         new MutationOperation('', [], [],
                             [
                                 new RelationalField(
@@ -533,14 +513,13 @@ GRAPHQL;
                             ],
                             new Location(1, 10)
                         )
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 'mutation { test : createUser (id: 4) }',
-                [
-                    'operations'            => [
+                new Document(
+                    [
                         new MutationOperation('', [], [],
                             [
                                 new LeafField(
@@ -555,9 +534,8 @@ GRAPHQL;
                             ],
                             new Location(1, 10)
                         )
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
         ];
     }
@@ -570,17 +548,16 @@ GRAPHQL;
         $parser          = new Parser();
         $document = $parser->parse($query);
 
-        $this->assertEquals($structure, $this->documentToArray($document));
+        $this->assertEquals($structure, $document);
     }
-
 
     public function queryProvider()
     {
         return [
             [
                 '{ film(id: 1 filmID: 2) { title } }',
-                [
-                    'operations'            => [
+                new Document(
+                    [
                         new QueryOperation('', [], [], [
                             new RelationalField('film', null, [
                                 new Argument('id', new Literal(1, new Location(1, 12)), new Location(1, 8)),
@@ -589,14 +566,13 @@ GRAPHQL;
                                 new LeafField('title', null, [], [], new Location(1, 27)),
                             ], [], new Location(1, 3))
                         ], new Location(1, 1)),
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 '{ test (id: -5) { id } } ',
-                [
-                    'operations'            => [
+                new Document(
+                    [
                         new QueryOperation('', [], [], [
                             new RelationalField('test', null, [
                                 new Argument('id', new Literal(-5, new Location(1, 13)), new Location(1, 9)),
@@ -604,14 +580,13 @@ GRAPHQL;
                                 new LeafField('id', null, [], [], new Location(1, 19)),
                             ], [], new Location(1, 3)),
                         ], new Location(1, 1))
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 "{ test (id: -5) \r\n { id } } ",
-                [
-                    'operations'            => [
+                new Document(
+                    [
                         new QueryOperation('', [], [], [
                             new RelationalField('test', null, [
                                 new Argument('id', new Literal(-5, new Location(1, 13)), new Location(1, 9)),
@@ -619,9 +594,8 @@ GRAPHQL;
                                 new LeafField('id', null, [], [], new Location(2, 4)),
                             ], [], new Location(1, 3)),
                         ], new Location(1, 1))
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 'query CheckTypeOfLuke {
@@ -630,8 +604,8 @@ GRAPHQL;
                     name
                   }
                 }',
-                [
-                    'operations'            => [
+                new Document(
+                    [
                         new QueryOperation('CheckTypeOfLuke', [], [], [
                             new RelationalField('hero', null, [
                                 new Argument('episode', new Literal('EMPIRE', new Location(2, 33)), new Location(2, 24)),
@@ -640,83 +614,77 @@ GRAPHQL;
                                 new LeafField('name', null, [], [], new Location(4, 21)),
                             ], [], new Location(2, 19)),
                         ], new Location(1, 7))
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 '{ test { __typename, id } }',
-                [
-                    'operations'            => [
+                new Document(
+                    [
                         new QueryOperation('', [], [], [
                             new RelationalField('test', null, [], [
                                 new LeafField('__typename', null, [], [], new Location(1, 10)),
                                 new LeafField('id', null, [], [], new Location(1, 22)),
                             ], [], new Location(1, 3)),
                         ], new Location(1, 1))
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 '{}',
-                [
-                    'operations'    => [
+                new Document(
+                    [
                         new QueryOperation('', [], [], [], new Location(1, 1))
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 'query test {}',
-                [
-                    'operations'    => [
+                new Document(
+                    [
                         new QueryOperation('test', [], [], [], new Location(1, 7))
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 'query {}',
-                [
-                    'operations'    => [
+                new Document(
+                    [
                         new QueryOperation('', [], [], [], new Location(1, 7))
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 'mutation setName { setUserName }',
-                [
-                    'operations'            => [
+                new Document(
+                    [
                         new MutationOperation('setName', [], [], [
                             new LeafField('setUserName', null, [], [], new Location(1, 20)),
                         ], new Location(1, 10))
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 '{ test { ...userDataFragment } } fragment userDataFragment on User { id, name, email }',
-                [
-                    'operations'            => [
+                new Document(
+                    [
                         new QueryOperation('', [], [], [
                             new RelationalField('test', null, [], [new FragmentReference('userDataFragment', new Location(1, 13))], [], new Location(1, 3)),
                         ], new Location(1, 1))
                     ],
-                    'fragments'          => [
+                    [
                         new Fragment('userDataFragment', 'User', [], [
                             new LeafField('id', null, [], [], new Location(1, 70)),
                             new LeafField('name', null, [], [], new Location(1, 74)),
                             new LeafField('email', null, [], [], new Location(1, 80)),
                         ], new Location(1, 43)),
-                    ],
-                ],
+                    ]
+                ),
             ],
             [
                 '{ user (id: 10, name: "max", float: 123.123 ) { id, name } }',
-                [
-                    'operations'            => [
+                new Document(
+                    [
                         new QueryOperation('', [], [], [
                             new RelationalField(
                                 'user',
@@ -734,14 +702,13 @@ GRAPHQL;
                                 new Location(1, 3)
                             ),
                         ], new Location(1, 1))
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 '{ allUsers : users ( id: [ 1, 2, 3] ) { id } }',
-                [
-                    'operations'            => [
+                new Document(
+                    [
                         new QueryOperation('', [], [], [
                             new RelationalField(
                                 'users',
@@ -756,36 +723,37 @@ GRAPHQL;
                                 new Location(1, 14)
                             ),
                         ], new Location(1, 1))
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
             [
                 '{ allUsers : users ( id: [ 1, "2", true, null] ) { id } }',
-                [
-                    'operations'            => [
-                        new QueryOperation('', [], [], [
-                            new RelationalField(
-                                'users',
-                                'allUsers',
-                                [
-                                    new Argument('id', new InputList([1, "2", true, null], new Location(1, 26)), new Location(1, 22)),
-                                ],
-                                [
-                                    new LeafField('id', null, [], [], new Location(1, 52)),
-                                ],
-                                [],
-                                new Location(1, 14)
-                            )
-                        ], new Location(1, 1))
-                    ],
-                    'fragments'          => [],
-                ],
+                new Document(
+                    [
+                        new QueryOperation('', [], [],
+                            [
+                                new RelationalField(
+                                    'users',
+                                    'allUsers',
+                                    [
+                                        new Argument('id', new InputList([1, "2", true, null], new Location(1, 26)), new Location(1, 22)),
+                                    ],
+                                    [
+                                        new LeafField('id', null, [], [], new Location(1, 52)),
+                                    ],
+                                    [],
+                                    new Location(1, 14)
+                                )
+                            ],
+                            new Location(1, 1)
+                        )
+                    ]
+                ),
             ],
             [
                 '{ allUsers : users ( object: { "a": 123, "d": "asd",  "b" : [ 1, 2, 4 ], "c": { "a" : 123, "b":  "asd" } } ) { id } }',
-                [
-                    'operations'            => [
+                new Document(
+                    [
                         new QueryOperation('', [], [], [
                             new RelationalField(
                                 'users',
@@ -808,9 +776,8 @@ GRAPHQL;
                                 new Location(1, 14)
                             ),
                         ], new Location(1, 1))
-                    ],
-                    'fragments'          => [],
-                ],
+                    ]
+                ),
             ],
         ];
     }
