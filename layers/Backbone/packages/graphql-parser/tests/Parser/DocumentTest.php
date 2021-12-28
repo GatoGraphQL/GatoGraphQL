@@ -53,7 +53,7 @@ class DocumentTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testValidFragmentReferencedByFragment()
+    public function testMissingFragmentReferencedByFragment()
     {
         $this->expectException(InvalidRequestException::class);
         $parser = new Parser();
