@@ -66,9 +66,14 @@ class Document
         if ($this->getOperations() === []) {
             throw new InvalidRequestException(
                 $this->getNoOperationsDefinedInQueryErrorMessage(),
-                new Location(1, 1)
+                $this->getNonSpecificLocation()
             );
         }
+    }
+
+    protected function getNonSpecificLocation(): Location
+    {
+        return new Location(1, 1);
     }
 
     protected function getNoOperationsDefinedInQueryErrorMessage(): string

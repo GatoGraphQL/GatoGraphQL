@@ -71,7 +71,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             if (count($this->document->getOperations()) > 1) {
                 throw new InvalidRequestException(
                     $this->getNoOperationNameProvidedErrorMessage(),
-                    new Location(1, 1)
+                    $this->getNonSpecificLocation()
                 );
             }
             // There is exactly 1 operation
@@ -82,12 +82,17 @@ class ExecutableDocument implements ExecutableDocumentInterface
         if ($requestedOperations === []) {
             throw new InvalidRequestException(
                 $this->getNoOperationMatchesNameErrorMessage($this->context->getOperationName()),
-                new Location(1, 1)
+                $this->getNonSpecificLocation()
             );
         }
 
         // There can be many operations
         return $requestedOperations;
+    }
+
+    protected function getNonSpecificLocation(): Location
+    {
+        return new Location(1, 1);
     }
 
     /**
@@ -163,7 +168,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         if ($this->executableOperations === null) {
             throw new InvalidRequestException(
                 $this->getExecuteValidationErrorMessage(__FUNCTION__),
-                new Location(1, 1)
+                $this->getNonSpecificLocation()
             );
         }
         return $this->executableOperations;
