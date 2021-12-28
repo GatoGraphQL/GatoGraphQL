@@ -143,7 +143,7 @@ class Document
 
     protected function getVariableDoesNotExistErrorMessage(string $variableName): string
     {
-        return sprintf('Variable \'%s\' does not exist', $variableName);
+        return sprintf('Variable \'%s\' has not been defined in the operation', $variableName);
     }
 
     /**

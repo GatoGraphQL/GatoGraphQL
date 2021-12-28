@@ -30,7 +30,7 @@ class Document extends UpstreamDocument
     protected function getVariableDoesNotExistErrorMessage(string $variableName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Variable \'%s\' does not exist', 'graphql-parser'),
+            $this->getTranslationAPI()->__('Variable \'%s\' has not been defined in the operation', 'graphql-parser'),
             $variableName
         );
     }
