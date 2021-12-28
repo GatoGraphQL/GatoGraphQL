@@ -66,10 +66,9 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     protected function assertAndGetRequestedOperations(): array
     {
-        // It can't be 0, or validation already fails in Document
-        $operationCount = count($this->document->getOperations());
         if ($this->context->getOperationName() === '') {
-            if ($operationCount > 1) {
+            // It can't be 0, or validation already fails in Document
+            if (count($this->document->getOperations()) > 1) {
                 throw new InvalidRequestException(
                     $this->getNoOperationNameProvidedErrorMessage(),
                     new Location(1, 1)
