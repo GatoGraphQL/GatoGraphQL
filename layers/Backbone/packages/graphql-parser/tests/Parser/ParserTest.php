@@ -22,6 +22,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
+use stdClass;
 
 class ParserTest extends TestCase
 {
@@ -1087,5 +1088,45 @@ GRAPHQL;
         $this->assertTrue($var->hasDefaultValue());
         $this->assertNull($var->getDefaultValue()->getValue());
         $this->assertNull($var->getValue()->getValue());
+    }
+
+    public function testInputObjectVariableValue()
+    {
+        // Test with default value
+        $parser          = new Parser();
+        $document = $parser->parse('
+            query FilterUsers($filter: UserFilterInput = { name: "Pedro", age: 19, relatives: { dad: "Jacinto" } }) {
+              users(filter: $filter) {
+                id
+                name
+              }
+            }
+        ');
+        /** @var Variable $var */
+        $var = $document->getOperations()[0]->getVariables()[0];
+        $var->setContext(new Context());
+        $this->assertTrue($var->hasDefaultValue());
+        $filter = new stdClass();
+        $filter->name = 'Pedro';
+        $filter->age = 19;
+        $filter->relatives = new StdClass();
+        $filter->relatives->dad = 'Jacinto';
+        $this->assertEquals($var->getDefaultValue()->getValue(), $filter);
+
+        // Test injecting in Context
+        $parser          = new Parser();
+        $document = $parser->parse('
+        query FilterUsers($filter: UserFilterInput!) {
+            users(filter: $filter) {
+              id
+              name
+            }
+          }
+        ');
+        /** @var Variable $var */
+        $var = $document->getOperations()[0]->getVariables()[0];
+        $var->setContext(new Context(null, ['filter' => $filter]));
+        $this->assertFalse($var->hasDefaultValue());
+        $this->assertEquals($var->getValue()->getValue(), $filter);
     }
 }
