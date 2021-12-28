@@ -13,7 +13,7 @@ class Document
         /** @var OperationInterface[] */
         private array $operations,
         /** @var Fragment[] */
-        private array $fragments,
+        private array $fragments = [],
     ) {
     }
 
