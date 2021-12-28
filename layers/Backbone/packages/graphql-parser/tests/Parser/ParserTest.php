@@ -555,6 +555,12 @@ GRAPHQL;
 
     public function queryProvider()
     {
+        $filter = new stdClass();
+        $filter->title = 'unrequested';
+        $filter->director = 'steven';
+        $attrs = new stdClass();
+        $attrs->stars = 5;
+        $filter->attrs = new InputObject($attrs, new Location(1, 67));
         return [
             [
                 '{ film(id: 1 filmID: 2) { title } }',
@@ -778,6 +784,20 @@ GRAPHQL;
                                 new Location(1, 14)
                             ),
                         ], new Location(1, 1))
+                    ]
+                ),
+            ],
+            [
+                '{ films(filter: {title: "unrequested", director: "steven", attrs: { stars: 5 } } ) { title } }',
+                new Document(
+                    [
+                        new QueryOperation('', [], [], [
+                            new RelationalField('films', null, [
+                                new Argument('filter', new InputObject($filter, new Location(1, 17)), new Location(1, 9)),
+                            ], [
+                                new LeafField('title', null, [], [], new Location(1, 86)),
+                            ], [], new Location(1, 3))
+                        ], new Location(1, 1)),
                     ]
                 ),
             ],
