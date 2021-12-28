@@ -191,11 +191,12 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         if ($argumentValue instanceof VariableReference) {
             return [$argumentValue];
         }
-        $variableReferences = [];
-        // Get references within InputObjects and Lists
-        if ($argumentValue instanceof InputObject || $argumentValue instanceof InputList) {
-            $listValues = (array)$argumentValue->getAstValue();
+        if (!($argumentValue instanceof InputObject || $argumentValue instanceof InputList)) {
+            return [];
         }
+        // Get references within InputObjects and Lists
+        $variableReferences = [];
+        $listValues = (array)$argumentValue->getAstValue();
         foreach ($listValues as $listValue) {
             if (!($listValue instanceof WithValueInterface || $listValue instanceof VariableReference)) {
                 continue;
