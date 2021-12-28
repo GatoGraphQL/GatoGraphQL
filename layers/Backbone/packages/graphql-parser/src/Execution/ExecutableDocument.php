@@ -78,8 +78,8 @@ class ExecutableDocument implements ExecutableDocumentInterface
             return $this->document->getOperations();
         }
 
-        $selectedOperations = $this->getSelectedOperationsToExecute();
-        if ($selectedOperations === []) {
+        $requestedOperations = $this->getRequestedOperations();
+        if ($requestedOperations === []) {
             throw new InvalidRequestException(
                 $this->getNoOperationMatchesNameErrorMessage($this->context->getOperationName()),
                 new Location(1, 1)
@@ -87,13 +87,13 @@ class ExecutableDocument implements ExecutableDocumentInterface
         }
 
         // There can be many operations
-        return $selectedOperations;
+        return $requestedOperations;
     }
 
     /**
      * @return OperationInterface[]
      */
-    protected function getSelectedOperationsToExecute(): array
+    protected function getRequestedOperations(): array
     {
         $operationName = $this->context->getOperationName();
         return array_values(array_filter(

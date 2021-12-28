@@ -18,14 +18,14 @@ class ExecutableDocument extends UpstreamExecutableDocument
      *
      * @return OperationInterface[]
      */
-    protected function getSelectedOperationsToExecute(): array
+    protected function getRequestedOperations(): array
     {
         $queryAugmenterService = QueryAugmenterServiceFacade::getInstance();
         if ($queryAugmenterService->isExecutingAllOperations($this->operationName)) {
             return $this->document->getOperations();
         }
         
-        return parent::getSelectedOperationsToExecute();
+        return parent::getRequestedOperations();
     }
 
     protected function getNoOperationMatchesNameErrorMessage(string $operationName): string
