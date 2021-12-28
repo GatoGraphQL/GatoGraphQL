@@ -6,6 +6,7 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
+use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
@@ -198,7 +199,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         $variableReferences = [];
         $listValues = (array)$argumentValue->getAstValue();
         foreach ($listValues as $listValue) {
-            if (!($listValue instanceof WithValueInterface || $listValue instanceof VariableReference)) {
+            if (!($listValue instanceof VariableReference || $listValue instanceof WithValueInterface)) {
                 continue;
             }
             if ($listValue instanceof VariableReference) {

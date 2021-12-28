@@ -7,6 +7,7 @@ namespace PoP\GraphQLParser\Execution;
 use PoP\BasicService\StandaloneServiceTrait;
 use PoP\GraphQLParser\Facades\Query\QueryAugmenterServiceFacade;
 use PoPBackbone\GraphQLParser\Execution\ExecutableDocument as UpstreamExecutableDocument;
+use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 
 class ExecutableDocument extends UpstreamExecutableDocument
 {

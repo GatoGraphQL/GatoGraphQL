@@ -18,7 +18,7 @@ trait WithFieldsOrFragmentBondsTrait
     }
     
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentBonds
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
     public function setFieldsOrFragmentBonds(array $fieldsOrFragmentBonds): void
     {

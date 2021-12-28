@@ -40,9 +40,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         $this->assertAllVariablesHaveValue();
 
         // Obtain the operations that must be executed
-        $this->requestedOperations = $this->assertAndGetRequestedOperations(
-            $this->context->getOperationName()
-        );
+        $this->requestedOperations = $this->assertAndGetRequestedOperations();
 
         // Inject the variable values into the objects
         foreach ($this->requestedOperations as $operation) {
@@ -135,7 +133,6 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         foreach ($this->document->getOperations() as $operation) {
             foreach ($operation->getVariableReferences($this->document->getFragments()) as $variableReference) {
-                /** @var Variable */
                 $variable = $variableReference->getVariable();
                 if (array_key_exists($variable->getName(), $this->context->getVariableValues())
                     || $variable->hasDefaultValue()

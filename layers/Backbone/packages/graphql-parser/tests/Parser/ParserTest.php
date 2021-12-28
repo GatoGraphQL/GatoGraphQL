@@ -917,7 +917,7 @@ GRAPHQL;
                                     [
                                         new LeafField('name', null, [], [
                                             new Directive('style', [
-                                                new Argument('format', new VariableReference('format', $formatVariable, new Location(3, 33), new Location(5, 67)), new Location(3, 25))
+                                                new Argument('format', new VariableReference('format', $formatVariable, new Location(3, 33)), new Location(3, 25))
                                             ], new Location(3, 19))
                                         ], new Location(3, 13)),
                                     ],
@@ -958,9 +958,9 @@ GRAPHQL;
                                     [],
                                     [
                                         new LeafField('name', null, [], [
-                                            new Directive('style', [new Argument('format', new VariableReference('format', $formatVariable, new Location(4, 32), new Location(5, 67)), new Location(4, 24))], new Location(4, 18)),
+                                            new Directive('style', [new Argument('format', new VariableReference('format', $formatVariable, new Location(4, 32)), new Location(4, 24))], new Location(4, 18)),
                                             new Directive('someOtherDirective', [], new Location(5, 18)),
-                                            new Directive('style', [new Argument('format', new VariableReference('format', $formatVariable, new Location(6, 32), new Location(5, 67)), new Location(6, 24))], new Location(6, 18)),
+                                            new Directive('style', [new Argument('format', new VariableReference('format', $formatVariable, new Location(6, 32)), new Location(6, 24))], new Location(6, 18)),
                                             new Directive('someOtherDirective', [], new Location(7, 18)),
                                         ], new Location(3, 13)),
                                     ],

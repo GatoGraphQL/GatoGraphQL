@@ -14,15 +14,16 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Ast\Document;
-use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
+use PoPBackbone\GraphQLParser\Parser\Ast\FragmentBondInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
+use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
-use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use stdClass;
 
@@ -94,7 +95,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     protected function parseOperation(string $type): OperationInterface
     {
-        $operation  = null;
+        $operationLocation  = null;
         $directives = [];
         $operationName = null;
         $variables = [];
@@ -106,7 +107,7 @@ class Parser extends Tokenizer implements ParserInterface
             $this->lex();
 
             $operationToken = $this->eat(Token::TYPE_IDENTIFIER);
-            $operationName = (string)$operationToken?->getData() ?? '';
+            $operationName = $operationToken === null ? '' : (string)$operationToken->getData();
             $operationLocation = $operationToken !== null ? $this->getTokenLocation($operationToken) : $this->getLocation();
 
             if ($this->match(Token::TYPE_LPAREN)) {
@@ -379,7 +380,7 @@ class Parser extends Tokenizer implements ParserInterface
     /**
      * @throws SyntaxErrorException
      */
-    protected function parseBodyItem(string $type): AbstractAst
+    protected function parseBodyItem(string $type): FieldInterface|FragmentBondInterface
     {
         $nameToken = $this->eatIdentifierToken();
         $alias     = null;
@@ -689,7 +690,6 @@ class Parser extends Tokenizer implements ParserInterface
 
         $directives = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
-        /** @var FieldInterface[] */
         $fieldsOrFragmentBonds = $this->parseBody(Token::TYPE_QUERY);
 
         return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fieldsOrFragmentBonds, $this->getTokenLocation($nameToken));
