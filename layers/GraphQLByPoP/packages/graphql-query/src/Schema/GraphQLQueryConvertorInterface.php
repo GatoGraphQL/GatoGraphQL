@@ -14,7 +14,6 @@ interface GraphQLQueryConvertorInterface
     public function convertFromGraphQLToFieldQuery(
         string $graphQLQuery,
         ?array $variables = [],
-        bool $enableMultipleQueryExecution = false,
         ?string $operationName = null
     ): array;
 

@@ -79,7 +79,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     public function convertFromGraphQLToFieldQuery(
         string $graphQLQuery,
         ?array $variableValues = [],
-        bool $enableMultipleQueryExecution = false,
         ?string $operationName = null
     ): array {
         list(
@@ -88,7 +87,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         ) = $this->convertFromGraphQLToFieldQueryPaths(
             $graphQLQuery,
             $variableValues ?? [],
-            $enableMultipleQueryExecution,
             $operationName
         );
         $fieldQueries = [];
@@ -125,7 +123,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     protected function convertFromGraphQLToFieldQueryPaths(
         string $graphQLQuery,
         array $variableValues,
-        bool $enableMultipleQueryExecution,
         ?string $operationName = null
     ): array {
         try {
@@ -133,7 +130,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             $request = $this->parseAndCreateRequest(
                 $graphQLQuery,
                 $variableValues,
-                $enableMultipleQueryExecution,
                 $operationName
             );
             // Converting the query could also throw an Exception
@@ -545,7 +541,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     protected function parseAndCreateRequest(
         string $payload,
         array $variableValues,
-        bool $enableMultipleQueryExecution,
         ?string $operationName = null
     ): ExecutableDocumentInterface {
         if (empty($payload)) {
