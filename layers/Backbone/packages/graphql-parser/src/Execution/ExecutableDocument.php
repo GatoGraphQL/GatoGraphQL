@@ -14,8 +14,8 @@ class ExecutableDocument implements ExecutableDocumentInterface
     private ?array $requestedOperations = null;
 
     public function __construct(
-        private Document $document,
-        private Context $context,
+        protected Document $document,
+        protected Context $context,
     ) {
     }
 

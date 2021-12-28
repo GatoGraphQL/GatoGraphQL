@@ -21,7 +21,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
     protected function extractRequestedOperations(): array
     {
         $queryAugmenterService = QueryAugmenterServiceFacade::getInstance();
-        if ($queryAugmenterService->isExecutingAllOperations($this->operationName)) {
+        if ($queryAugmenterService->isExecutingAllOperations($this->context->getOperationName())) {
             return $this->document->getOperations();
         }
         
