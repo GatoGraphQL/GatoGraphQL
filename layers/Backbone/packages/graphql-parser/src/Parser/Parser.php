@@ -137,13 +137,6 @@ class Parser extends Tokenizer implements ParserInterface
 
             /** @var WithDirectivesInterface */
             $operation = $this->parseBodyItem($type, true);
-            $operation->setDirectives(
-                array_merge(
-                    $directives,
-                    $operation->getDirectives()
-                )
-            );
-
             $fieldsOrFragmentBonds[] = $operation;
         }
 
