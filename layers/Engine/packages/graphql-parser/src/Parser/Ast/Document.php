@@ -19,7 +19,7 @@ class Document extends UpstreamDocument
     protected function getDuplicateOperationNameErrorMessage(string $operationName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Operation name \'%s\' is duplicated, it must be unique', 'graphql-parser'),
+            $this->getTranslationAPI()->__('Operation name \'%s\' is duplicated', 'graphql-parser'),
             $operationName
         );
     }
@@ -48,7 +48,7 @@ class Document extends UpstreamDocument
     protected function getDuplicateVariableNameErrorMessage(string $variableName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Variable name \'%s\' is duplicated, it must be unique', 'graphql-parser'),
+            $this->getTranslationAPI()->__('Variable name \'%s\' is duplicated', 'graphql-parser'),
             $variableName
         );
     }
@@ -66,6 +66,14 @@ class Document extends UpstreamDocument
         return \sprintf(
             $this->getTranslationAPI()->__('Variable \'%s\' not used', 'graphql-parser'),
             $variableName
+        );
+    }
+
+    protected function getDuplicateArgumentErrorMessage(string $argumentName): string
+    {
+        return \sprintf(
+            $this->getTranslationAPI()->__('Argument \'%s\' is duplicated', 'graphql-parser'),
+            $argumentName
         );
     }
 }

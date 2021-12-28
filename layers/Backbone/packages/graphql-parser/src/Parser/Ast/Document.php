@@ -59,6 +59,7 @@ class Document
         $this->assertVariableNamesUnique();
         $this->assertAllVariablesExist();
         $this->assertAllVariablesAreUsed();
+        $this->assertArgumentsUnique();
     }
 
     /**
@@ -104,7 +105,7 @@ class Document
 
     protected function getDuplicateOperationNameErrorMessage(string $operationName): string
     {
-        return \sprintf('Operation name \'%s\' is duplicated, it must be unique', $operationName);
+        return \sprintf('Operation name \'%s\' is duplicated', $operationName);
     }
 
     /**
@@ -219,7 +220,7 @@ class Document
 
     protected function getDuplicateVariableNameErrorMessage(string $variableName): string
     {
-        return \sprintf('Variable name \'%s\' is duplicated, it must be unique', $variableName);
+        return \sprintf('Variable name \'%s\' is duplicated', $variableName);
     }
 
     /**
@@ -272,5 +273,99 @@ class Document
     protected function getVariableNotUsedErrorMessage(string $variableName): string
     {
         return sprintf('Variable \'%s\' not used', $variableName);
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertArgumentsUnique(): void
+    {
+        foreach ($this->getOperations() as $operation) {
+            $this->assertArgumentsUniqueInOperation($operation);
+        }
+        foreach ($this->getFragments() as $fragment) {
+            $this->assertArgumentsUniqueInFragment($fragment);
+        }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertArgumentsUniqueInOperation(OperationInterface $operation): void
+    {
+        $this->assertArgumentsUniqueInFieldsOrInlineFragments($operation->getFieldsOrFragmentBonds());
+        $this->assertArgumentsUniqueInDirectives($operation->getDirectives());
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertArgumentsUniqueInFragment(Fragment $fragment): void
+    {
+        $this->assertArgumentsUniqueInFieldsOrInlineFragments($fragment->getFieldsOrFragmentBonds());
+        $this->assertArgumentsUniqueInDirectives($fragment->getDirectives());
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @throws InvalidRequestException
+     */
+    protected function assertArgumentsUniqueInFieldsOrInlineFragments(array $fieldsOrFragmentBonds): void
+    {
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $this->assertArgumentsUniqueInFieldsOrInlineFragments($inlineFragment->getFieldsOrFragmentBonds());
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            $this->assertArgumentNamesUnique($field->getArguments());
+            $this->assertArgumentsUniqueInDirectives($field->getDirectives());
+            if ($field instanceof RelationalField) {
+                /** @var RelationalField */
+                $relationalField = $field;
+                $this->assertArgumentsUniqueInFieldsOrInlineFragments($relationalField->getFieldsOrFragmentBonds());
+            }
+        }
+    }
+
+    /**
+     * @param Directive[] $directives
+     * @throws InvalidRequestException
+     */
+    protected function assertArgumentsUniqueInDirectives(array $directives): void
+    {
+        foreach ($directives as $directive) {
+            $this->assertArgumentNamesUnique($directive->getArguments());
+        }
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @throws InvalidRequestException
+     */
+    protected function assertArgumentNamesUnique(array $arguments): void
+    {
+        $argumentNames = [];
+        foreach ($arguments as $argument) {
+            $argumentName = $argument->getName();
+            if (in_array($argumentName, $argumentNames)) {
+                throw new InvalidRequestException(
+                    $this->getDuplicateArgumentErrorMessage($argumentName),
+                    $argument->getLocation()
+                );
+            }
+            $argumentNames[] = $argumentName;
+        }
+    }
+
+    protected function getDuplicateArgumentErrorMessage(string $argumentName): string
+    {
+        return \sprintf('Argument \'%s\' is duplicated', $argumentName);
     }
 }

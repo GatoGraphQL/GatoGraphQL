@@ -294,4 +294,29 @@ class DocumentTest extends TestCase
         ');
         $document->validate();
     }
+
+    /**
+     * @dataProvider duplicateArgumentQueryProvider
+     */
+    public function testDuplicateArgument($query)
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        $document = $parser->parse($query);
+        $document->validate();
+    }
+
+    public function duplicateArgumentQueryProvider(): array
+    {
+        return [
+            ['
+                {
+                    posts {
+                        id
+                        date(format: "d/m/Y", format: "d, m, Y")
+                    }
+                }
+            '],
+        ];
+    }
 }
