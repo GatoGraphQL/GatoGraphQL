@@ -1188,13 +1188,27 @@ GRAPHQL;
         $this->assertEquals($var->getValue()->getValue(), $ids);
     }
 
-    public function testNoDuplicateKeysInInputObject()
+    public function testNoDuplicateKeysInInputObjectInVariable()
     {
         $this->expectException(SyntaxErrorException::class);
         $parser          = new Parser();
         $parser->parse('
             query FilterUsers($filter: UserFilterInput = { name: "Pedro", name: "Juancho" }) {
               users(filter: $filter) {
+                id
+                name
+              }
+            }
+        ');
+    }
+
+    public function testNoDuplicateKeysInInputObjectInArgument()
+    {
+        $this->expectException(SyntaxErrorException::class);
+        $parser          = new Parser();
+        $parser->parse('
+            query FilterUsers {
+              users(filter: { name: "Pedro", name: "Juancho" }) {
                 id
                 name
               }
