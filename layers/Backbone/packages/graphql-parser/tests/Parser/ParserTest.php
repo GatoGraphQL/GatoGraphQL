@@ -1000,6 +1000,57 @@ GRAPHQL;
                     ]
                 ),
             ],
+            // Directive in inline fragment
+            [
+                <<<GRAPHQL
+                    query GetUsersName {
+                        users {
+                            ... on User @outside {
+                                id
+                                posts @inside {
+                                    id
+                                }
+                            }
+                        }
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            'GetUsersName', 
+                            [],
+                            [],
+                            [
+                                new RelationalField(
+                                    'users',
+                                    null,
+                                    [],
+                                    [
+                                        new InlineFragment(
+                                            'User',
+                                            [
+                                                new LeafField('id', null, [], [], new Location(4, 17)),
+                                                new RelationalField('posts', null, [], [
+                                                    new LeafField('id', null, [], [], new Location(6, 21)),
+                                                    ], [
+                                                    new Directive('inside', [], new Location(5, 24))
+                                                ], new Location(5, 17))
+                                            ],
+                                            [
+                                                new Directive('outside', [], new Location(3, 26))
+                                            ],
+                                            new Location(3, 20)
+                                        )
+                                    ],
+                                    [],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ]
+                ),
+            ],
         ];
     }
 
