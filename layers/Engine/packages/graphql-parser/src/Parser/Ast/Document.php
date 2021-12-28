@@ -11,6 +11,11 @@ class Document extends UpstreamDocument
 {
     use BasicServiceTrait;
 
+    protected function getNoOperationsDefinedInQueryErrorMessage(): string
+    {
+        return $this->getTranslationAPI()->__('No operations defined in the query', 'graphql-parser');
+    }
+
     protected function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
     {
         return \sprintf(

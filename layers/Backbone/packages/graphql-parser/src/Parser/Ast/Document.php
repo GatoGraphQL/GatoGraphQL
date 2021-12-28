@@ -7,6 +7,7 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
+use PoPBackbone\GraphQLParser\Parser\Location;
 
 class Document
 {
@@ -50,10 +51,29 @@ class Document
      */
     public function validate(): void
     {
+        $this->assertOperationsDefined();
         $this->assertFragmentReferencesAreValid();
         $this->assertFragmentsAreUsed();
         $this->assertAllVariablesExist();
         $this->assertAllVariablesAreUsed();
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertOperationsDefined(): void
+    {
+        if ($this->getOperations() === []) {
+            throw new InvalidRequestException(
+                $this->getNoOperationsDefinedInQueryErrorMessage(),
+                new Location(1, 1)
+            );
+        }
+    }
+
+    protected function getNoOperationsDefinedInQueryErrorMessage(): string
+    {
+        return 'No operations defined in the query';
     }
 
     /**
