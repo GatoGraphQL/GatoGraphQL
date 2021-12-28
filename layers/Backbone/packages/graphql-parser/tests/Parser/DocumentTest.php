@@ -201,4 +201,19 @@ class DocumentTest extends TestCase
         ');
         $document->validate();
     }
+
+    public function testUniqueVariableName()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        $document = $parser->parse('
+            query SomeQuery($someVar: String, $someVar: Boolean) {
+                users {
+                    id
+                    name(format: $someVar)
+                }
+            }
+        ');
+        $document->validate();
+    }
 }
