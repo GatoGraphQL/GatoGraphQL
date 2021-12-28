@@ -23,7 +23,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\GraphQLParser\Parser\Ast\Field;
+use PoP\GraphQLParser\Parser\Ast\LeafField;
 use PoP\LooseContracts\NameResolverInterface;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
@@ -720,7 +720,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
 
     /**
-     * @return Field[]
+     * @return LeafField[]
      */
     public function getDataFields(array $module, array &$props): array
     {
