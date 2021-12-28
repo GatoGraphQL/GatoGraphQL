@@ -13,24 +13,30 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
-use PoPBackbone\GraphQLParser\Parser\Ast\Field;
+use PoPBackbone\GraphQLParser\Parser\Ast\Document;
+use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
+use PoPBackbone\GraphQLParser\Parser\Ast\FragmentBondInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
-use PoPBackbone\GraphQLParser\Parser\Ast\Query;
-use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
+use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
+use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use stdClass;
 
 class Parser extends Tokenizer implements ParserInterface
 {
-    /**
-     * @var array<string,mixed>
-     */
-    private array $data = [];
+    /** @var OperationInterface[] */
+    private array $operations = [];
+    /** @var Fragment[] */
+    private array $fragments = [];
+    /** @var Variable[] */
+    private array $variables = [];
 
-    public function parse(string $source): ParsedData
+    public function parse(string $source): Document
     {
         $this->init($source);
 
@@ -39,101 +45,73 @@ class Parser extends Tokenizer implements ParserInterface
 
             switch ($tokenType) {
                 case Token::TYPE_LBRACE:
-                    foreach ($this->parseBody(Token::TYPE_QUERY, true) as $query) {
-                        $this->data['queries'][] = $query;
-                    }
-                    break;
-
                 case Token::TYPE_QUERY:
-                    [$operationName, $queries] = $this->parseOperation(Token::TYPE_QUERY);
-                    $this->data['queryOperations'][] = [
-                        'name' => $operationName,
-                        'position' => count($this->data['queries']),
-                        'numberItems' => count($queries),
-                    ];
-                    foreach ($queries as $query) {
-                        $this->data['queries'][] = $query;
-                    }
-                    break;
-
                 case Token::TYPE_MUTATION:
-                    [$operationName, $mutations] = $this->parseOperation(Token::TYPE_MUTATION);
-                    if ($operationName) {
-                        $this->data['mutationOperations'][] = [
-                            'name' => $operationName,
-                            'position' => count($this->data['mutations']),
-                            'numberItems' => count($mutations),
-                        ];
-                    }
-                    foreach ($mutations as $query) {
-                        $this->data['mutations'][] = $query;
-                    }
+                    $this->operations[] = $this->parseOperation($tokenType);
                     break;
 
                 case Token::TYPE_FRAGMENT:
-                    $this->data['fragments'][] = $this->parseFragment();
+                    $this->fragments[] = $this->parseFragment();
                     break;
 
                 default:
                     throw new SyntaxErrorException(
-                        $this->getIncorrectRequestSyntaxErrorMessage(),
+                        $this->getIncorrectRequestSyntaxErrorMessage($this->lookAhead->getData()),
                         $this->getLocation()
                     );
             }
         }
 
-        return new ParsedData(
-            $this->data['queryOperations'],
-            $this->data['mutationOperations'],
-            $this->data['queries'],
-            $this->data['mutations'],
-            $this->data['fragments'],
-            $this->data['fragmentReferences'],
-            $this->data['variables'],
-            $this->data['variableReferences'],
+        return $this->createDocument(
+            $this->operations,
+            $this->fragments,
         );
     }
 
-    protected function getIncorrectRequestSyntaxErrorMessage(): string
+    public function createDocument(
+        /** @var OperationInterface[] */
+        array $operations,
+        /** @var Fragment[] */
+        array $fragments,
+    ) {
+        return new Document(
+            $operations,
+            $fragments,
+        );
+    }
+
+    protected function getIncorrectRequestSyntaxErrorMessage(string $syntax): string
     {
-        return 'Incorrect request syntax';
+        return \sprintf('Incorrect request syntax: \'%s\'', $syntax);
     }
 
     private function init(string $source): void
     {
         $this->initTokenizer($source);
 
-        $this->data = [
-            'queryOperations'    => [],
-            'mutationOperations' => [],
-            'queries'            => [],
-            'mutations'          => [],
-            'fragments'          => [],
-            'fragmentReferences' => [],
-            'variables'          => [],
-            'variableReferences' => [],
-        ];
+        $this->operations = [];
+        $this->fragments = [];
     }
 
-    /**
-     * @return mixed[]
-     */
-    protected function parseOperation(string $type): array
+    protected function parseOperation(string $type): OperationInterface
     {
-        $operation  = null;
+        $operationLocation  = null;
         $directives = [];
         $operationName = null;
+        $variables = [];
+        $this->variables = [];
 
-        if ($this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION])) {
+        $isShorthandQuery = $this->match(Token::TYPE_LBRACE);
+
+        if (!$isShorthandQuery && $this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION])) {
             $this->lex();
 
-            $operationInfo = $this->eat(Token::TYPE_IDENTIFIER);
-            if (!is_null($operationInfo)) {
-                $operationName = $operationInfo->getData();
-            }
+            $operationToken = $this->eat(Token::TYPE_IDENTIFIER);
+            $operationName = $operationToken === null ? '' : (string)$operationToken->getData();
+            $operationLocation = $operationToken !== null ? $this->getTokenLocation($operationToken) : $this->getLocation();
 
             if ($this->match(Token::TYPE_LPAREN)) {
-                $this->parseVariables();
+                $variables = $this->parseVariables();
             }
 
             if ($this->match(Token::TYPE_AT)) {
@@ -141,39 +119,67 @@ class Parser extends Tokenizer implements ParserInterface
             }
         }
 
-        $this->lex();
+        $lbraceToken = $this->lex();
 
-        $fields = [];
+        /**
+         * Query shorthand: it has no name, variables or directives
+         * @see https://spec.graphql.org/draft/#sec-Language.Operations.Query-shorthand
+         */
+        if ($isShorthandQuery) {
+            $operationName = '';
+            $operationLocation = $this->getTokenLocation($lbraceToken);
+        }
+
+        $fieldsOrFragmentBonds = [];
 
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
             $this->eatMulti([Token::TYPE_COMMA]);
 
-            /** @var WithDirectivesInterface */
-            $operation = $this->parseBodyItem($type, true);
-            $operation->setDirectives(
-                array_merge(
-                    $directives,
-                    $operation->getDirectives()
-                )
-            );
-
-            $fields[] = $operation;
+            $fieldOrFragmentBond = $this->parseBodyItem($type);
+            $fieldsOrFragmentBonds[] = $fieldOrFragmentBond;
         }
 
         $this->expect(Token::TYPE_RBRACE);
 
-        return [
-            $operationName,
-            $fields,
-        ];
+        if ($type === Token::TYPE_MUTATION) {
+            return $this->createMutationOperation($operationName, $variables, $directives, $fieldsOrFragmentBonds, $operationLocation);
+        }
+
+        return $this->createQueryOperation($operationName, $variables, $directives, $fieldsOrFragmentBonds, $operationLocation);
+    }
+
+    public function createQueryOperation(
+        string $name,
+        /** @var Variable[] */
+        array $variables,
+        /** @var Directive[] $directives */
+        array $directives,
+        /** @var FieldInterface[]|FragmentBondInterface[] */
+        array $fieldsOrFragmentBonds,
+        Location $location,
+    ) {
+        return new QueryOperation($name, $variables, $directives, $fieldsOrFragmentBonds, $location);
+    }
+
+    public function createMutationOperation(
+        string $name,
+        /** @var Variable[] */
+        array $variables,
+        /** @var Directive[] $directives */
+        array $directives,
+        /** @var FieldInterface[]|FragmentBondInterface[] */
+        array $fieldsOrFragmentBonds,
+        Location $location,
+    ) {
+        return new MutationOperation($name, $variables, $directives, $fieldsOrFragmentBonds, $location);
     }
 
     /**
-     * @return AbstractAst[]
+     * @return FieldInterface[]|FragmentBondInterface[]
      */
-    protected function parseBody(string $token, bool $highLevel): array
+    protected function parseBody(string $token): array
     {
-        $fields = [];
+        $fieldsOrFragmentBonds = [];
 
         $this->lex();
 
@@ -184,22 +190,27 @@ class Parser extends Tokenizer implements ParserInterface
                 $this->lex();
 
                 if ($this->eat(Token::TYPE_ON)) {
-                    $fields[] = $this->parseBodyItem(Token::TYPE_TYPED_FRAGMENT, $highLevel);
+                    $fieldsOrFragmentBonds[] = $this->parseBodyItem(Token::TYPE_INLINE_FRAGMENT);
                 } else {
-                    $fields[] = $this->parseFragmentReference();
+                    $fieldsOrFragmentBonds[] = $this->parseFragmentReference();
                 }
             } else {
-                $fields[] = $this->parseBodyItem($token, $highLevel);
+                $fieldsOrFragmentBonds[] = $this->parseBodyItem($token);
             }
         }
 
         $this->expect(Token::TYPE_RBRACE);
 
-        return $fields;
+        return $fieldsOrFragmentBonds;
     }
 
-    protected function parseVariables(): void
+    /**
+     * @return Variable[]
+     */
+    protected function parseVariables(): array
     {
+        $variables = [];
+
         $this->eat(Token::TYPE_LPAREN);
 
         while (!$this->match(Token::TYPE_RPAREN) && !$this->end()) {
@@ -210,7 +221,7 @@ class Parser extends Tokenizer implements ParserInterface
             $this->eat(Token::TYPE_COLON);
 
             $isArray              = false;
-            $arrayElementNullable = true;
+            $isArrayElementRequired = false;
 
             if ($this->match(Token::TYPE_LSQUARE_BRACE)) {
                 $isArray = true;
@@ -219,7 +230,7 @@ class Parser extends Tokenizer implements ParserInterface
                 $type = $this->eatIdentifierToken()->getData();
 
                 if ($this->match(Token::TYPE_REQUIRED)) {
-                    $arrayElementNullable = false;
+                    $isArrayElementRequired = true;
                     $this->eat(Token::TYPE_REQUIRED);
                 }
 
@@ -228,18 +239,18 @@ class Parser extends Tokenizer implements ParserInterface
                 $type = $this->eatIdentifierToken()->getData();
             }
 
-            $required = false;
+            $isRequired = false;
             if ($this->match(Token::TYPE_REQUIRED)) {
-                $required = true;
+                $isRequired = true;
                 $this->eat(Token::TYPE_REQUIRED);
             }
 
             $variable = $this->createVariable(
                 (string)$nameToken->getData(),
                 (string)$type,
-                $required,
+                $isRequired,
                 $isArray,
-                $arrayElementNullable,
+                $isArrayElementRequired,
                 $this->getTokenLocation($variableToken),
             );
 
@@ -248,10 +259,13 @@ class Parser extends Tokenizer implements ParserInterface
                 $variable->setDefaultValue($this->parseValue());
             }
 
-            $this->data['variables'][] = $variable;
+            $this->variables[] = $variable;
+            $variables[] = $variable;
         }
 
         $this->expect(Token::TYPE_RPAREN);
+
+        return $variables;
     }
 
     protected function getTokenLocation(Token $token): Location
@@ -262,17 +276,17 @@ class Parser extends Tokenizer implements ParserInterface
     protected function createVariable(
         string $name,
         string $type,
-        bool $required,
+        bool $isRequired,
         bool $isArray,
-        bool $arrayElementNullable,
+        bool $isArrayElementRequired,
         Location $location,
     ): Variable {
         return new Variable(
             $name,
             $type,
-            $required,
+            $isRequired,
             $isArray,
-            $arrayElementNullable,
+            $isArrayElementRequired,
             $location
         );
     }
@@ -301,19 +315,12 @@ class Parser extends Tokenizer implements ParserInterface
             $name = $this->lex()->getData();
 
             $variable = $this->findVariable($name);
-            if ($variable) {
-                $variable->setUsed(true);
-            }
 
-            $variableReference = $this->createVariableReference(
+            return $this->createVariableReference(
                 $name,
                 $variable,
                 $this->getTokenLocation($startToken)
             );
-
-            $this->data['variableReferences'][] = $variableReference;
-
-            return $variableReference;
         }
 
         throw $this->createUnexpectedException($this->peek());
@@ -329,9 +336,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     protected function findVariable(string $name): ?Variable
     {
-        /** @var Variable[] */
-        $variables = $this->data['variables'];
-        foreach ($variables as $variable) {
+        foreach ($this->variables as $variable) {
             if ($variable->getName() === $name) {
                 return $variable;
             }
@@ -345,15 +350,11 @@ class Parser extends Tokenizer implements ParserInterface
      */
     protected function parseFragmentReference(): FragmentReference
     {
-        $nameToken         = $this->eatIdentifierToken();
-        $fragmentReference = $this->createFragmentReference(
+        $nameToken = $this->eatIdentifierToken();
+        return $this->createFragmentReference(
             $nameToken->getData(),
             $this->getTokenLocation($nameToken)
         );
-
-        $this->data['fragmentReferences'][] = $fragmentReference;
-
-        return $fragmentReference;
     }
 
     protected function createFragmentReference(
@@ -379,7 +380,7 @@ class Parser extends Tokenizer implements ParserInterface
     /**
      * @throws SyntaxErrorException
      */
-    protected function parseBodyItem(string $type, bool $highLevel): AbstractAst
+    protected function parseBodyItem(string $type): FieldInterface|FragmentBondInterface
     {
         $nameToken = $this->eatIdentifierToken();
         $alias     = null;
@@ -394,99 +395,71 @@ class Parser extends Tokenizer implements ParserInterface
         $directives   = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
         if ($this->match(Token::TYPE_LBRACE)) {
-            /** @var Query[] */
-            $fields = $this->parseBody($type === Token::TYPE_TYPED_FRAGMENT ? Token::TYPE_QUERY : $type, false);
+            /** @var FieldInterface[]|FragmentBondInterface[] */
+            $fieldsOrFragmentBonds = $this->parseBody($type === Token::TYPE_INLINE_FRAGMENT ? Token::TYPE_QUERY : $type);
 
-            if (!$fields) {
+            if (!$fieldsOrFragmentBonds) {
                 throw $this->createUnexpectedTokenTypeException($this->lookAhead->getType());
             }
 
-            if ($type === Token::TYPE_QUERY) {
-                return $this->createQuery($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
+            if ($type === Token::TYPE_INLINE_FRAGMENT) {
+                return $this->createInlineFragment($nameToken->getData(), $fieldsOrFragmentBonds, $directives, $bodyLocation);
             }
 
-            if ($type === Token::TYPE_TYPED_FRAGMENT) {
-                return $this->createTypedFragmentReference($nameToken->getData(), $fields, $directives, $bodyLocation);
-            }
-
-            return $this->createMutation($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
+            return $this->createRelationalField($nameToken->getData(), $alias, $arguments, $fieldsOrFragmentBonds, $directives, $bodyLocation);
         }
 
-        if ($highLevel && $type === Token::TYPE_MUTATION) {
-            return $this->createMutation($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
-        }
-
-        if ($highLevel && $type === Token::TYPE_QUERY) {
-            return $this->createQuery($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
-        }
-
-        return $this->createField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
+        return $this->createLeafField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
     }
 
     /**
      * @param Argument[] $arguments
-     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
-    protected function createQuery(
+    protected function createRelationalField(
         string $name,
         ?string $alias,
         array $arguments,
-        array $fields,
+        array $fieldsOrFragmentBonds,
         array $directives,
         Location $location
-    ): Query {
-        return new Query(
+    ): RelationalField {
+        return new RelationalField(
             $name,
             $alias,
             $arguments,
-            $fields,
+            $fieldsOrFragmentBonds,
             $directives,
             $location
         );
     }
 
     /**
-     * @param Field[]|Query[] $fields
+     * @param FieldInterface[] $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
-    protected function createTypedFragmentReference(
+    protected function createInlineFragment(
         string $typeName,
-        array $fields,
+        array $fieldsOrFragmentBonds,
         array $directives,
         Location $location,
-    ): TypedFragmentReference {
-        return new TypedFragmentReference($typeName, $fields, $directives, $location);
-    }
-
-    /**
-     * @param Argument[] $arguments
-     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
-     * @param Directive[] $directives
-     */
-    protected function createMutation(
-        string $name,
-        ?string $alias,
-        array $arguments,
-        array $fields,
-        array $directives,
-        Location $location,
-    ): Mutation {
-        return new Mutation($name, $alias, $arguments, $fields, $directives, $location);
+    ): InlineFragment {
+        return new InlineFragment($typeName, $fieldsOrFragmentBonds, $directives, $location);
     }
 
     /**
      * @param Argument[] $arguments
      * @param Directive[] $directives
      */
-    protected function createField(
+    protected function createLeafField(
         string $name,
         ?string $alias,
         array $arguments,
         array $directives,
         Location $location,
-    ): Field {
-        return new Field($name, $alias, $arguments, $directives, $location);
+    ): LeafField {
+        return new LeafField($name, $alias, $arguments, $directives, $location);
     }
 
     /**
@@ -668,11 +641,20 @@ class Parser extends Tokenizer implements ParserInterface
         // Use stdClass instead of array
         $object = new stdClass();
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
-            $key = $this->expectMulti([Token::TYPE_STRING, Token::TYPE_IDENTIFIER])->getData();
+            $keyToken = $this->expectMulti([Token::TYPE_STRING, Token::TYPE_IDENTIFIER]);
+            $key = $keyToken->getData();
             $this->expect(Token::TYPE_COLON);
             $value = $this->parseListValue();
 
             $this->eat(Token::TYPE_COMMA);
+
+            // Validate no duplicated keys in InputObject
+            if (property_exists($object, $key)) {
+                throw new SyntaxErrorException(
+                    $this->getDuplicateKeyInInputObjectSyntaxErrorMessage($key),
+                    $this->getTokenLocation($keyToken)
+                );
+            }
 
             $object->$key = $value;
         }
@@ -680,6 +662,11 @@ class Parser extends Tokenizer implements ParserInterface
         $this->eat(Token::TYPE_RBRACE);
 
         return $createType ? $this->createInputObject($object, $this->getTokenLocation($startToken)) : $object;
+    }
+
+    protected function getDuplicateKeyInInputObjectSyntaxErrorMessage(string $key): string
+    {
+        return \sprintf('Input object has duplicate key \'%s\'', $key);
     }
 
     protected function createInputObject(
@@ -703,24 +690,23 @@ class Parser extends Tokenizer implements ParserInterface
 
         $directives = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
-        /** @var Query[] */
-        $fields = $this->parseBody(Token::TYPE_QUERY, false);
+        $fieldsOrFragmentBonds = $this->parseBody(Token::TYPE_QUERY);
 
-        return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fields, $this->getTokenLocation($nameToken));
+        return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fieldsOrFragmentBonds, $this->getTokenLocation($nameToken));
     }
 
     /**
      * @param Directive[] $directives
-     * @param Field[]|Query[] $fields
+     * @param FieldInterface[] $fieldsOrFragmentBonds
      */
     protected function createFragment(
         string $name,
         string $model,
         array $directives,
-        array $fields,
+        array $fieldsOrFragmentBonds,
         Location $location,
     ): Fragment {
-        return new Fragment($name, $model, $directives, $fields, $location);
+        return new Fragment($name, $model, $directives, $fieldsOrFragmentBonds, $location);
     }
 
     protected function eat(string $type): ?Token

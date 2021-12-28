@@ -6,20 +6,19 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class Fragment extends AbstractAst implements WithDirectivesInterface, WithFieldsOrFragmentBondsInterface
+class InlineFragment extends AbstractAst implements FragmentBondInterface, WithDirectivesInterface, WithFieldsOrFragmentBondsInterface
 {
     use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;
 
     /**
-     * @param Directive[] $directives
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param Directive[] $directives
      */
     public function __construct(
-        protected string $name,
-        protected string $model,
-        array $directives,
+        protected string $typeName,
         array $fieldsOrFragmentBonds,
+        array $directives,
         Location $location,
     ) {
         parent::__construct($location);
@@ -27,23 +26,13 @@ class Fragment extends AbstractAst implements WithDirectivesInterface, WithField
         $this->setFieldsOrFragmentBonds($fieldsOrFragmentBonds);
     }
 
-    public function getName(): string
+    public function getTypeName(): string
     {
-        return $this->name;
+        return $this->typeName;
     }
 
-    public function setName(string $name): void
+    public function setTypeName(string $typeName): void
     {
-        $this->name = $name;
-    }
-
-    public function getModel(): string
-    {
-        return $this->model;
-    }
-
-    public function setModel(string $model): void
-    {
-        $this->model = $model;
+        $this->typeName = $typeName;
     }
 }

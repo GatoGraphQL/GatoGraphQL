@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast\ArgumentValue;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\BasicService\StandaloneServiceTrait;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable as UpstreamVariable;
 
 class Variable extends UpstreamVariable
 {
-    use BasicServiceTrait;
+    use StandaloneServiceTrait;
 
     protected function getValueIsNotSetForVariableErrorMessage(string $variableName): string
     {

@@ -12,11 +12,11 @@ use GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInt
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\API\Schema\QueryInputs;
 use PoP\API\State\ApplicationStateUtils;
+use PoP\BasicService\AbstractHookSet;
 use PoP\ComponentModel\CheckpointProcessors\MutationCheckpointProcessor;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
-use PoP\BasicService\AbstractHookSet;
 
 class VarsHookSet extends AbstractHookSet
 {
@@ -195,7 +195,6 @@ class VarsHookSet extends AbstractHookSet
         ) = $this->getGraphQLQueryConvertor()->convertFromGraphQLToFieldQuery(
             $graphQLQuery,
             $variables,
-            ComponentConfiguration::enableMultipleQueryExecution(),
             $operationName
         );
         // Set the operation type and, based on it, if mutations are supported
