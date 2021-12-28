@@ -53,8 +53,6 @@ class DocumentTest extends TestCase
     {
         $this->expectException(InvalidRequestException::class);
         $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
               factions(names:$names_0, test: $query) {
@@ -97,8 +95,6 @@ class DocumentTest extends TestCase
     {
         $this->expectException(InvalidRequestException::class);
         $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
               factions(names:$names_0, test: $query) {
@@ -114,8 +110,6 @@ class DocumentTest extends TestCase
     {
         $this->expectException(InvalidRequestException::class);
         $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String, $notUsedVar: Boolean) {
               factions(names:$names_0, test: $query) {
@@ -130,8 +124,6 @@ class DocumentTest extends TestCase
     {
         $this->expectException(InvalidRequestException::class);
         $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
               factions(names:$names_0, test: $query, someOther: $missingVar) {
@@ -146,8 +138,6 @@ class DocumentTest extends TestCase
     {
         $this->expectException(InvalidRequestException::class);
         $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
               id
@@ -163,12 +153,30 @@ class DocumentTest extends TestCase
     {
         $this->expectException(InvalidRequestException::class);
         $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
         $document = $parser->parse('
             fragment F0 on Ship {
                 id,
                 name
+            }
+        ');
+        $document->validate();
+    }
+
+    public function testDuplicateOperationName()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        $document = $parser->parse('
+            query SomeQuery {
+                users {
+                    id
+                }
+            }
+
+            query SomeQuery {
+                posts {
+                    title
+                }
             }
         ');
         $document->validate();

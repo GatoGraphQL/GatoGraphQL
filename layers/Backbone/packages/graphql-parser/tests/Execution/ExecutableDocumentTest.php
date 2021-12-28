@@ -33,9 +33,7 @@ class ExecutableDocumentTest extends TestCase
 
     public function testGetVariableDefaultValue()
     {
-        $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
+        $parser = new Parser();        
         $document = $parser->parse('
             query SomeQuery($includeUsers: Boolean = true) {
               users {
@@ -52,9 +50,7 @@ class ExecutableDocumentTest extends TestCase
 
     public function testRequestDefinedOperation()
     {
-        $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
+        $parser = new Parser();        
         $document = $parser->parse('
             query SomeQuery {
               users {
@@ -71,9 +67,7 @@ class ExecutableDocumentTest extends TestCase
 
     public function testRequestOneOfDefinedOperation()
     {
-        $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
+        $parser = new Parser();        
         $document = $parser->parse('
             query SomeQuery {
               users {
@@ -98,9 +92,7 @@ class ExecutableDocumentTest extends TestCase
     public function testNonUniqueOperation()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
+        $parser = new Parser();        
         $document = $parser->parse('
             query SomeQuery {
               users {
@@ -125,9 +117,7 @@ class ExecutableDocumentTest extends TestCase
     public function testMissingVariableValue()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
+        $parser = new Parser();        
         $document = $parser->parse('
             query SomeQuery($format: String) {
               users {
@@ -145,8 +135,6 @@ class ExecutableDocumentTest extends TestCase
     {
         $this->expectException(InvalidRequestException::class);
         $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
         $document = $parser->parse('
             query SomeQuery($includeUsers: Boolean) {
               users {
@@ -164,8 +152,6 @@ class ExecutableDocumentTest extends TestCase
     {
         $this->expectException(InvalidRequestException::class);
         $parser = new Parser();
-        
-        // Validate that there are no errors <= no Exception is thrown
         $document = $parser->parse('
             query SomeQuery {
               users {
