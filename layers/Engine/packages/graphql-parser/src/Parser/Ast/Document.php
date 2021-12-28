@@ -43,7 +43,9 @@ class Document extends UpstreamDocument
     protected function getDuplicateVariableNameErrorMessage(string $variableName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Variable name \'%s\' is duplicated, it must be unique', $variableName);
+            $this->getTranslationAPI()->__('Variable name \'%s\' is duplicated, it must be unique', 'graphql-parser'),
+            $variableName
+        );
     }
 
     protected function getVariableDoesNotExistErrorMessage(string $variableName): string
