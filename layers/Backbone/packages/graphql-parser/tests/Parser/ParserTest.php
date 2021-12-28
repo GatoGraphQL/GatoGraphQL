@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser;
 
 use PHPUnit\Framework\TestCase;
-use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoPBackbone\GraphQLParser\Execution\Context;
-use PoPBackbone\GraphQLParser\Execution\ExecutableDocument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
@@ -403,18 +401,6 @@ GRAPHQL;
         ];
     }
 
-    /**
-     * @dataProvider mutationProvider
-     */
-    public function testMutations($query, $structure)
-    {
-        $parser = new Parser();
-
-        $document = $parser->parse($query);
-
-        $this->assertEquals($document, $structure);
-    }
-
     public function testInlineFragment()
     {
         $parser          = new Parser();
@@ -449,6 +435,18 @@ GRAPHQL;
                 )
             ]
         ));
+    }
+
+    /**
+     * @dataProvider mutationProvider
+     */
+    public function testMutations($query, $structure)
+    {
+        $parser = new Parser();
+
+        $document = $parser->parse($query);
+
+        $this->assertEquals($document, $structure);
     }
 
     public function mutationProvider()
