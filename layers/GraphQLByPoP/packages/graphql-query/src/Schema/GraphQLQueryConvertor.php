@@ -565,8 +565,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
          * Let it bubble up
          */
         $document = $this->getParser()->parse($payload);
-        $executableDocument = new ExecutableDocument($document, new Context($operationName, $variableValues));
-        $executableDocument->validateAndInitialize();
+        $executableDocument = (new ExecutableDocument($document, new Context($operationName, $variableValues)))->validateAndInitialize();
         return $executableDocument;
     }
 }

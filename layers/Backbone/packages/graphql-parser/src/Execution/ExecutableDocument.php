@@ -32,7 +32,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     /**
      * @throws InvalidRequestException
      */
-    public function validateAndInitialize(): void
+    public function validateAndInitialize(): self
     {
         $this->requestedOperations = null;
 
@@ -48,6 +48,8 @@ class ExecutableDocument implements ExecutableDocumentInterface
         foreach ($this->requestedOperations as $operation) {
             $this->propagateContext($operation, $this->context);
         }
+
+        return $this;
     }
 
     /**
