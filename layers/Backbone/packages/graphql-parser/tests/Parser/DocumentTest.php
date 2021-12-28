@@ -216,4 +216,24 @@ class DocumentTest extends TestCase
         ');
         $document->validate();
     }
+
+    public function testNonEmptyOperationName()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        $document = $parser->parse('
+            query SomeQuery {
+                users {
+                    id
+                }
+            }
+
+            mutation {
+                posts {
+                    title
+                }
+            }
+        ');
+        $document->validate();
+    }
 }
