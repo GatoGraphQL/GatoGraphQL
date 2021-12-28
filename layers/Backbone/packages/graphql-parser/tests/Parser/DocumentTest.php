@@ -149,6 +149,46 @@ class DocumentTest extends TestCase
         $document->validate();
     }
 
+    public function testVariableInFragment()
+    {
+        $parser = new Parser();
+        $document = $parser->parse('
+            query StarWarsAppHomeRoute($includeName: Boolean) {
+              id
+              factions {
+                ...F2
+              }
+            }
+
+            fragment F2 on Faction {
+              id
+              name @include(if: $includeName)
+            }
+        ');
+        $document->validate();
+        $this->assertTrue(true);
+    }
+
+    public function testVariableMissingInFragment()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        $document = $parser->parse('
+            query StarWarsAppHomeRoute {
+              id
+              factions {
+                ...F2
+              }
+            }
+
+            fragment F2 on Faction {
+              id
+              name @include(if: $missingVar)
+            }
+        ');
+        $document->validate();
+    }
+
     public function testNoOperationsDefined()
     {
         $this->expectException(InvalidRequestException::class);
