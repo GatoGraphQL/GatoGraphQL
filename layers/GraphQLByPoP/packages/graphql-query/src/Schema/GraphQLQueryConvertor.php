@@ -28,6 +28,10 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
+use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
+use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
@@ -428,7 +432,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         // Iterate through the query's fields: properties, connections, fragments
         $queryFieldPath = $queryField;
         foreach ($fields as $field) {
-            if ($field instanceof Field) {
+            if ($field instanceof LeafField) {
                 // Fields are leaves in the graph
                 $queryFieldPaths[] = array_merge(
                     $queryFieldPath,
@@ -448,7 +452,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $fragmentReference = $field;
                 if ($fragmentReference instanceof FragmentReference) {
                     $fragmentName = $fragmentReference->getName();
-                    $fragment = $executableDocument->getFragment($fragmentName);
+                    $fragment = $executableDocument->getDocument()->getFragment($fragmentName);
                     $fragmentFields = $fragment->getFieldsOrFragmentBonds();
                     $fragmentType = $fragment->getModel();
                 } else {
@@ -501,8 +505,17 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     {
         $fieldQueryPaths = [];
         // It is either is a query or a mutation
-        $mutations = $executableDocument->getMutations();
-        $queries = $executableDocument->getQueries();
+        $mutations = $queries = [];
+        $operations = $executableDocument->getRequestedOperations();
+        foreach ($operations as $operation) {
+            if ($operation instanceof QueryOperation) {
+                $queries[] = $operation;
+                continue;
+            }
+            if ($operation instanceof MutationOperation) {
+                $mutations[] = $operation;
+            }
+        }
         if ($mutations) {
             $queriesOrMutations = $mutations;
             $operationType = OperationTypes::MUTATION;
@@ -517,16 +530,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $this->getTranslationAPI()->__('Cannot execute both queries AND mutations, hence the queries have been ignored, resolving mutations only', 'graphql-query')
             );
         }
-        foreach ($queriesOrMutations as $query) {
-            $operationLocation = $query->getLocation();
-            $operationID = sprintf(
-                '%s-%s',
-                $operationLocation->getLine(),
-                $operationLocation->getColumn()
-            );
-            $fieldQueryPaths[$operationID] = array_merge(
-                $fieldQueryPaths[$operationID] ?? [],
-                $this->getFieldPathsFromQuery($executableDocument, $query)
+        /** @var OperationInterface[] $queriesOrMutations */
+        foreach ($queriesOrMutations as $operation) {
+            $operationName = $operation->getName();
+            $operationFieldPaths = [];
+            $this->processAndAddFieldPaths($executableDocument, $operationFieldPaths, $operation->getFieldsOrFragmentBonds());
+            $fieldQueryPaths[$operationName] = array_merge(
+                $fieldQueryPaths[$operationName] ?? [],
+                $operationFieldPaths
             );
         }
         return [

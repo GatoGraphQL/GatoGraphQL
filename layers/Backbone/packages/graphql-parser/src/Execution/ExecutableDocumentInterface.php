@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Execution;
 
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoPBackbone\GraphQLParser\Parser\Ast\Document;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 
 interface ExecutableDocumentInterface
@@ -26,4 +27,7 @@ interface ExecutableDocumentInterface
      * @throws InvalidRequestException
      */
     public function getRequestedOperations(): array;
+
+    public function getDocument(): Document;
+    public function getContext(): Context;
 }
