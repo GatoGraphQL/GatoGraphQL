@@ -61,9 +61,9 @@ class Document
      */
     protected function assertFragmentReferencesAreValid(): void
     {
-        foreach ($this->document->getOperations() as $operation) {
+        foreach ($this->getOperations() as $operation) {
             foreach ($operation->getFragmentReferences() as $fragmentReference) {
-                if ($this->document->getFragment($fragmentReference->getName()) !== null) {
+                if ($this->getFragment($fragmentReference->getName()) !== null) {
                     continue;
                 }
                 throw new InvalidRequestException(
@@ -85,14 +85,14 @@ class Document
     protected function assertFragmentsAreUsed(): void
     {
         $referencedFragmentNames = [];
-        foreach ($this->document->getOperations() as $operation) {
+        foreach ($this->getOperations() as $operation) {
             foreach ($operation->getFragmentReferences() as $fragmentReference) {
                 $referencedFragmentNames[] = $fragmentReference->getName();
             }
         }
         $referencedFragmentNames = array_values(array_unique($referencedFragmentNames));
 
-        foreach ($this->document->getFragments() as $fragment) {
+        foreach ($this->getFragments() as $fragment) {
             if (in_array($fragment->getName(), $referencedFragmentNames)) {
                 continue;
             }
@@ -113,7 +113,7 @@ class Document
      */
     protected function assertAllVariablesExist(): void
     {
-        foreach ($this->document->getOperations() as $operation) {
+        foreach ($this->getOperations() as $operation) {
             foreach ($operation->getVariableReferences() as $variableReference) {
                 if ($variableReference->getVariable() !== null) {
                     continue;
@@ -136,7 +136,7 @@ class Document
      */
     protected function assertAllVariablesAreUsed(): void
     {
-        foreach ($this->document->getOperations() as $operation) {
+        foreach ($this->getOperations() as $operation) {
             $referencedVariableNames = [];
             foreach ($operation->getVariableReferences() as $variableReference) {
                 $referencedVariableNames[] = $variableReference->getName();
