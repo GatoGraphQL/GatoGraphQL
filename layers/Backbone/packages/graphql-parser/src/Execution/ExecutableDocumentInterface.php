@@ -25,5 +25,5 @@ interface ExecutableDocumentInterface
      * @return OperationInterface[]
      * @throws InvalidRequestException
      */
-    public function getExecutableOperations(): array;
+    public function getRequestedOperations(): array;
 }

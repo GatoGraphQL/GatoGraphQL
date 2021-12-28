@@ -12,7 +12,7 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 class ExecutableDocument implements ExecutableDocumentInterface
 {
     private Context $context;
-    private ?array $executableOperations = null;
+    private ?array $requestedOperations = null;
 
     public function __construct(
         private Document $document,
@@ -38,18 +38,18 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     public function validateAndInitialize(): void
     {
-        $this->executableOperations = null;
+        $this->requestedOperations = null;
 
         $this->document->validate();
         $this->assertAllVariablesHaveValue();
 
         // Obtain the operations that must be executed
-        $this->executableOperations = $this->assertAndGetRequestedOperations(
+        $this->requestedOperations = $this->assertAndGetRequestedOperations(
             $this->context->getOperationName()
         );
 
         // Inject the variable values into the objects
-        foreach ($this->executableOperations as $operation) {
+        foreach ($this->requestedOperations as $operation) {
             $this->propagateContext($operation);
         }
     }
@@ -78,7 +78,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             return $this->document->getOperations();
         }
 
-        $requestedOperations = $this->getRequestedOperations();
+        $requestedOperations = $this->extractRequestedOperations();
         if ($requestedOperations === []) {
             throw new InvalidRequestException(
                 $this->getNoOperationMatchesNameErrorMessage($this->context->getOperationName()),
@@ -98,7 +98,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     /**
      * @return OperationInterface[]
      */
-    protected function getRequestedOperations(): array
+    protected function extractRequestedOperations(): array
     {
         $operationName = $this->context->getOperationName();
         return array_values(array_filter(
@@ -163,15 +163,15 @@ class ExecutableDocument implements ExecutableDocumentInterface
      * @return OperationInterface[]
      * @throws InvalidRequestException
      */
-    public function getExecutableOperations(): array
+    public function getRequestedOperations(): array
     {
-        if ($this->executableOperations === null) {
+        if ($this->requestedOperations === null) {
             throw new InvalidRequestException(
                 $this->getExecuteValidationErrorMessage(__FUNCTION__),
                 $this->getNonSpecificLocation()
             );
         }
-        return $this->executableOperations;
+        return $this->requestedOperations;
     }
 
     protected function getExecuteValidationErrorMessage(string $methodName): string
