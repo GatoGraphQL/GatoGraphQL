@@ -151,7 +151,7 @@ class Document
 
     protected function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
     {
-        return sprintf('Fragment \'%s\' not defined in query', $fragmentName);
+        return sprintf('Fragment \'%s\' is not defined in query', $fragmentName);
     }
 
     /**
@@ -195,7 +195,7 @@ class Document
 
     protected function getFragmentNotUsedErrorMessage(string $fragmentName): string
     {
-        return sprintf('Fragment \'%s\' not used', $fragmentName);
+        return sprintf('Fragment \'%s\' is not used', $fragmentName);
     }
 
     /**
@@ -272,7 +272,7 @@ class Document
 
     protected function getVariableNotUsedErrorMessage(string $variableName): string
     {
-        return sprintf('Variable \'%s\' not used', $variableName);
+        return sprintf('Variable \'%s\' is not used', $variableName);
     }
 
     /**

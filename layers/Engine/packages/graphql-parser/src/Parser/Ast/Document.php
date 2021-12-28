@@ -32,7 +32,7 @@ class Document extends UpstreamDocument
     protected function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Fragment \'%s\' not defined in query', 'graphql-parser'),
+            $this->getTranslationAPI()->__('Fragment \'%s\' is not defined in query', 'graphql-parser'),
             $fragmentName
         );
     }
@@ -40,7 +40,7 @@ class Document extends UpstreamDocument
     protected function getFragmentNotUsedErrorMessage(string $fragmentName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Fragment \'%s\' not used', 'graphql-parser'),
+            $this->getTranslationAPI()->__('Fragment \'%s\' is not used', 'graphql-parser'),
             $fragmentName
         );
     }
@@ -64,7 +64,7 @@ class Document extends UpstreamDocument
     protected function getVariableNotUsedErrorMessage(string $variableName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Variable \'%s\' not used', 'graphql-parser'),
+            $this->getTranslationAPI()->__('Variable \'%s\' is not used', 'graphql-parser'),
             $variableName
         );
     }
