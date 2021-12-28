@@ -24,6 +24,11 @@ class Document extends UpstreamDocument
         );
     }
 
+    protected function getEmptyOperationNameErrorMessage(): string
+    {
+        return $this->getTranslationAPI()->__('When submitting more than 1 operation, no operation name can be empty', 'graphql-parser');
+    }
+
     protected function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
     {
         return \sprintf(

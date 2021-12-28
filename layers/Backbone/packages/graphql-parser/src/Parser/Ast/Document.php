@@ -53,6 +53,7 @@ class Document
     {
         $this->assertOperationsDefined();
         $this->assertOperationNamesUnique();
+        $this->assertNonEmptyOperationName();
         $this->assertFragmentReferencesAreValid();
         $this->assertFragmentsAreUsed();
         $this->assertVariableNamesUnique();
@@ -104,6 +105,29 @@ class Document
     protected function getDuplicateOperationNameErrorMessage(string $operationName): string
     {
         return \sprintf('Operation name \'%s\' is duplicated, it must be unique', $operationName);
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertNonEmptyOperationName(): void
+    {
+        if (count($this->getOperations()) === 1) {
+            return;
+        }
+        foreach ($this->getOperations() as $operation) {
+            if (empty($operation->getName())) {
+                throw new InvalidRequestException(
+                    $this->getEmptyOperationNameErrorMessage(),
+                    $this->getNonSpecificLocation()
+                );
+            }
+        }
+    }
+
+    protected function getEmptyOperationNameErrorMessage(): string
+    {
+        return 'When submitting more than 1 operation, no operation name can be empty';
     }
 
     /**
