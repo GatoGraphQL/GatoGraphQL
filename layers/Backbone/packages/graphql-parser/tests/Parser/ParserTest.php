@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser;
 
 use PHPUnit\Framework\TestCase;
+use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoPBackbone\GraphQLParser\Execution\Context;
+use PoPBackbone\GraphQLParser\Execution\ExecutableDocument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
@@ -782,10 +784,12 @@ GRAPHQL;
         ];
     }
 
-    public function testVariablesInQuery()
+    public function testFragmentNotUsed()
     {
+        $this->expectException(InvalidRequestException::class);
         $parser = new Parser();
-
+        
+        // Validate that there are no errors <= no Exception is thrown
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
               factions(names:$names_0, test: $query) {
@@ -821,8 +825,7 @@ GRAPHQL;
               ...F1
             }
         ');
-
-        $this->assertArrayNotHasKey('errors', $this->documentToArray($document));
+        $document->validate();
     }
 
     public function testVariableDefaultValue()
