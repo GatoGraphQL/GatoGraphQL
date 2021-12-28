@@ -178,7 +178,7 @@ class Parser extends Tokenizer implements ParserInterface
     /**
      * @return FieldInterface[]|FragmentBondInterface[]
      */
-    protected function parseBody(string $token, bool $highLevel): array
+    protected function parseBody(string $token): array
     {
         $fieldsOrFragmentBonds = [];
 
@@ -191,12 +191,12 @@ class Parser extends Tokenizer implements ParserInterface
                 $this->lex();
 
                 if ($this->eat(Token::TYPE_ON)) {
-                    $fieldsOrFragmentBonds[] = $this->parseBodyItem(Token::TYPE_INLINE_FRAGMENT, $highLevel);
+                    $fieldsOrFragmentBonds[] = $this->parseBodyItem(Token::TYPE_INLINE_FRAGMENT);
                 } else {
                     $fieldsOrFragmentBonds[] = $this->parseFragmentReference();
                 }
             } else {
-                $fieldsOrFragmentBonds[] = $this->parseBodyItem($token, $highLevel);
+                $fieldsOrFragmentBonds[] = $this->parseBodyItem($token);
             }
         }
 
@@ -397,7 +397,7 @@ class Parser extends Tokenizer implements ParserInterface
 
         if ($this->match(Token::TYPE_LBRACE)) {
             /** @var FieldInterface[]|FragmentBondInterface[] */
-            $fieldsOrFragmentBonds = $this->parseBody($type === Token::TYPE_INLINE_FRAGMENT ? Token::TYPE_QUERY : $type, false);
+            $fieldsOrFragmentBonds = $this->parseBody($type === Token::TYPE_INLINE_FRAGMENT ? Token::TYPE_QUERY : $type);
 
             if (!$fieldsOrFragmentBonds) {
                 throw $this->createUnexpectedTokenTypeException($this->lookAhead->getType());
@@ -678,7 +678,7 @@ class Parser extends Tokenizer implements ParserInterface
         $directives = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
         /** @var FieldInterface[] */
-        $fieldsOrFragmentBonds = $this->parseBody(Token::TYPE_QUERY, false);
+        $fieldsOrFragmentBonds = $this->parseBody(Token::TYPE_QUERY);
 
         return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fieldsOrFragmentBonds, $this->getTokenLocation($nameToken));
     }
