@@ -66,14 +66,8 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     protected function assertAndGetRequestedOperations(): array
     {
+        // It can't be 0, or validation already fails in Document
         $operationCount = count($this->document->getOperations());
-        if ($operationCount === 0) {
-            throw new InvalidRequestException(
-                $this->getNoOperationsProvidedErrorMessage(),
-                new Location(1, 1)
-            );
-        }
-
         if ($this->context->getOperationName() === '') {
             if ($operationCount > 1) {
                 throw new InvalidRequestException(
@@ -112,11 +106,6 @@ class ExecutableDocument implements ExecutableDocumentInterface
     protected function getNoOperationMatchesNameErrorMessage(string $operationName): string
     {
         return \sprintf('Operation with name \'%s\' does not exist', $operationName);
-    }
-
-    protected function getNoOperationsProvidedErrorMessage(): string
-    {
-        return 'No operations were provided in the query';
     }
 
     protected function getNoOperationNameProvidedErrorMessage(): string

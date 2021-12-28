@@ -36,11 +36,6 @@ class ExecutableDocument extends UpstreamExecutableDocument
         );
     }
 
-    protected function getNoOperationsProvidedErrorMessage(): string
-    {
-        return $this->getTranslationAPI()->__('No operations were provided in the query', 'graphql-parser');
-    }
-
     protected function getNoOperationNameProvidedErrorMessage(): string
     {
         return $this->getTranslationAPI()->__('The operation name must be provided', 'graphql-parser');
