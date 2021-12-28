@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
-trait AstDirectivesTrait
+trait WithDirectivesTrait
 {
     /** @var array<string,Directive> */
     protected array $directives;
-
-    /** @var array<string,Directive>|null */
-    private ?array $directivesCache = null;
 
     public function hasDirectives(): bool
     {
@@ -40,9 +37,7 @@ trait AstDirectivesTrait
      */
     public function setDirectives(array $directives): void
     {
-        $this->directives      = [];
-        $this->directivesCache = null;
-
+        $this->directives = [];
         foreach ($directives as $directive) {
             $this->addDirective($directive);
         }

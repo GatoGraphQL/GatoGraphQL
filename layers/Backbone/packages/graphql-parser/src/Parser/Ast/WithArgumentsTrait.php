@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
-trait AstArgumentsTrait
+trait WithArgumentsTrait
 {
-    /** @var array<string,Argument> */
+    /** @var Argument[] */
     protected array $arguments;
 
     /** @var array<string,mixed>|null */
-    private ?array $argumentsCache = null;
+    private ?array $keyValueArguments = null;
 
 
     public function hasArguments(): bool
@@ -24,7 +24,7 @@ trait AstArgumentsTrait
     }
 
     /**
-     * @return array<string,Argument>
+     * @return Argument[]
      */
     public function getArguments(): array
     {
@@ -50,17 +50,13 @@ trait AstArgumentsTrait
      */
     public function setArguments(array $arguments): void
     {
-        $this->arguments = [];
-        $this->argumentsCache = null;
-
-        foreach ($arguments as $argument) {
-            $this->addArgument($argument);
-        }
+        $this->keyValueArguments = null;
+        $this->arguments = $arguments;
     }
 
     public function addArgument(Argument $argument): void
     {
-        $this->arguments[$argument->getName()] = $argument;
+        $this->arguments[] = $argument;
     }
 
     /**
@@ -68,16 +64,14 @@ trait AstArgumentsTrait
      */
     public function getKeyValueArguments(): array
     {
-        if ($this->argumentsCache !== null) {
-            return $this->argumentsCache;
+        if ($this->keyValueArguments !== null) {
+            return $this->keyValueArguments;
         }
 
-        $this->argumentsCache = [];
-
+        $this->keyValueArguments = [];
         foreach ($this->getArguments() as $argument) {
-            $this->argumentsCache[$argument->getName()] = $argument->getValue()->getValue();
+            $this->keyValueArguments[$argument->getName()] = $argument->getValue()->getValue();
         }
-
-        return $this->argumentsCache;
+        return $this->keyValueArguments;
     }
 }

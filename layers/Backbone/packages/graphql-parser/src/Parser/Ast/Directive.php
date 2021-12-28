@@ -8,7 +8,7 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 class Directive extends AbstractAst
 {
-    use AstArgumentsTrait;
+    use WithArgumentsTrait;
 
     /**
      * @param Argument[] $arguments

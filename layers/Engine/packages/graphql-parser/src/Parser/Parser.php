@@ -4,24 +4,28 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\BasicService\StandaloneServiceTrait;
 use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable as ExtendedVariable;
 use PoP\GraphQLParser\Parser\Ast\Directive as ExtendedDirective;
-use PoP\GraphQLParser\Parser\Ast\Field as ExtendedField;
+use PoP\GraphQLParser\Parser\Ast\Document;
+use PoP\GraphQLParser\Parser\Ast\LeafField as ExtendedLeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
-use PoPBackbone\GraphQLParser\Parser\Ast\Field;
+use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use PoPBackbone\GraphQLParser\Parser\Parser as UpstreamParser;
 
 class Parser extends UpstreamParser implements ParserInterface
 {
-    use BasicServiceTrait;
+    use StandaloneServiceTrait;
 
-    protected function getIncorrectRequestSyntaxErrorMessage(): string
+    protected function getIncorrectRequestSyntaxErrorMessage(string $syntax): string
     {
-        return $this->getTranslationAPI()->__('Incorrect request syntax', 'graphql-parser');
+        return \sprintf(
+            $this->getTranslationAPI()->__('Incorrect request syntax: \'%s\'', 'graphql-parser'),
+            $syntax
+        );
     }
 
     protected function getCantParseArgumentErrorMessage(): string
@@ -29,20 +33,32 @@ class Parser extends UpstreamParser implements ParserInterface
         return $this->getTranslationAPI()->__('Can\'t parse argument', 'graphql-parser');
     }
 
+    public function createDocument(
+        /** @var OperationInterface[] */
+        array $operations,
+        /** @var Fragment[] */
+        array $fragments,
+    ) {
+        return new Document(
+            $operations,
+            $fragments,
+        );
+    }
+
     protected function createVariable(
         string $name,
         string $type,
-        bool $required,
+        bool $isRequired,
         bool $isArray,
-        bool $arrayElementNullable,
+        bool $isArrayElementRequired,
         Location $location,
     ): Variable {
         return new ExtendedVariable(
             $name,
             $type,
-            $required,
+            $isRequired,
             $isArray,
-            $arrayElementNullable,
+            $isArrayElementRequired,
             $location,
         );
     }
@@ -51,14 +67,14 @@ class Parser extends UpstreamParser implements ParserInterface
      * @param Argument[] $arguments
      * @param Directive[] $directives
      */
-    protected function createField(
+    protected function createLeafField(
         string $name,
         ?string $alias,
         array $arguments,
         array $directives,
         Location $location,
-    ): Field {
-        return new ExtendedField($name, $alias, $arguments, $directives, $location);
+    ): LeafField {
+        return new ExtendedLeafField($name, $alias, $arguments, $directives, $location);
     }
 
     /**

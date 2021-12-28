@@ -5,54 +5,34 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue;
 
 use LogicException;
+use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
+use stdClass;
 
 class Variable extends AbstractAst implements WithValueInterface
 {
-    private mixed $value = null;
-
-    private bool $used = false;
+    private ?Context $context = null;
 
     private bool $hasDefaultValue = false;
 
-    private mixed $defaultValue = null;
+    private InputList|InputObject|Literal|null $defaultValue = null;
 
     public function __construct(
         private string $name,
         private string $type,
-        private bool $nullable,
+        private bool $isRequired,
         private bool $isArray,
-        private bool $arrayElementNullable,
+        private bool $isArrayElementRequired,
         Location $location,
     ) {
         parent::__construct($location);
     }
 
-    /**
-     * @throws LogicException
-     */
-    public function getValue(): mixed
+    public function setContext(?Context $context): void
     {
-        if (null === $this->value) {
-            if ($this->hasDefaultValue()) {
-                return $this->defaultValue;
-            }
-            throw new LogicException($this->getValueIsNotSetForVariableErrorMessage($this->name));
-        }
-
-        return $this->value;
-    }
-
-    protected function getValueIsNotSetForVariableErrorMessage(string $variableName): string
-    {
-        return sprintf('Value is not set for variable \'%s\'', $variableName);
-    }
-
-    public function setValue(mixed $value): void
-    {
-        $this->value = $value;
+        $this->context = $context;
     }
 
     public function getName(): string
@@ -85,14 +65,14 @@ class Variable extends AbstractAst implements WithValueInterface
         $this->isArray = $isArray;
     }
 
-    public function isNullable(): bool
+    public function isRequired(): bool
     {
-        return $this->nullable;
+        return $this->isRequired;
     }
 
-    public function setNullable(bool $nullable): void
+    public function setRequired(bool $isRequired): void
     {
-        $this->nullable = $nullable;
+        $this->isRequired = $isRequired;
     }
 
     public function hasDefaultValue(): bool
@@ -100,34 +80,61 @@ class Variable extends AbstractAst implements WithValueInterface
         return $this->hasDefaultValue;
     }
 
-    public function getDefaultValue(): mixed
+    public function getDefaultValue(): InputList|InputObject|Literal|null
     {
         return $this->defaultValue;
     }
 
-    public function setDefaultValue(mixed $defaultValue): void
+    public function setDefaultValue(InputList|InputObject|Literal|null $defaultValue): void
     {
         $this->hasDefaultValue = true;
         $this->defaultValue = $defaultValue;
     }
 
-    public function isUsed(): bool
+    public function isArrayElementRequired(): bool
     {
-        return $this->used;
+        return $this->isArrayElementRequired;
     }
 
-    public function setUsed(bool $used): void
+    public function setArrayElementRequired(bool $isArrayElementRequired): void
     {
-        $this->used = $used;
+        $this->isArrayElementRequired = $isArrayElementRequired;
     }
 
-    public function isArrayElementNullable(): bool
+    /**
+     * Get the value from the context or from the variable
+     *
+     * @return InputList|InputObject|Literal|null
+     * @throws LogicException
+     */
+    public function getValue(): mixed
     {
-        return $this->arrayElementNullable;
+        if ($this->context === null) {
+            throw new LogicException($this->getContextNotSetErrorMessage($this->name));
+        }
+        if ($this->context->hasVariableValue($this->name)) {
+            $variableValue = $this->context->getVariableValue($this->name);
+            if (is_array($variableValue)) {
+                return new InputList($variableValue, $this->getLocation());
+            }
+            if ($variableValue instanceof stdClass) {
+                return new InputObject($variableValue, $this->getLocation());
+            }
+            return new Literal($variableValue, $this->getLocation());
+        }
+        if ($this->hasDefaultValue()) {
+            return $this->getDefaultValue();
+        }
+        throw new LogicException($this->getValueIsNotSetForVariableErrorMessage($this->name));
     }
 
-    public function setArrayElementNullable(bool $arrayElementNullable): void
+    protected function getContextNotSetErrorMessage(string $variableName): string
     {
-        $this->arrayElementNullable = $arrayElementNullable;
+        return sprintf('Context has not been set for variable \'%s\'', $variableName);
+    }
+
+    protected function getValueIsNotSetForVariableErrorMessage(string $variableName): string
+    {
+        return sprintf('Value is not set for variable \'%s\'', $variableName);
     }
 }

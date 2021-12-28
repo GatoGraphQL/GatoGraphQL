@@ -16,7 +16,7 @@ class Token
     public const TYPE_MUTATION           = 'mutation';
     public const TYPE_FRAGMENT           = 'fragment';
     public const TYPE_FRAGMENT_REFERENCE = '...';
-    public const TYPE_TYPED_FRAGMENT     = 'typed fragment';
+    public const TYPE_INLINE_FRAGMENT     = 'inline fragment';
 
     public const TYPE_LBRACE        = '{';
     public const TYPE_RBRACE        = '}';
@@ -70,7 +70,7 @@ class Token
             self::TYPE_MUTATION           => 'MUTATION',
             self::TYPE_FRAGMENT           => 'FRAGMENT',
             self::TYPE_FRAGMENT_REFERENCE => 'FRAGMENT_REFERENCE',
-            self::TYPE_TYPED_FRAGMENT     => 'TYPED_FRAGMENT',
+            self::TYPE_INLINE_FRAGMENT     => 'TYPED_FRAGMENT',
             self::TYPE_LBRACE             => 'LBRACE',
             self::TYPE_RBRACE             => 'RBRACE',
             self::TYPE_LPAREN             => 'LPAREN',

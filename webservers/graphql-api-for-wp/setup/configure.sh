@@ -4,3 +4,4 @@ wp config set GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS true --raw --path=/app/wordpres
 wp rewrite structure '/%postname%/' --hard --path=/app/wordpress
 cp /app/assets/.htaccess /app/wordpress
 cp /app/assets/phpinfo.php /app/wordpress
+cp /app/assets/favicon.ico /app/wordpress

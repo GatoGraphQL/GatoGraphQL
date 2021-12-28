@@ -4,27 +4,28 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
+use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class Fragment extends AbstractAst implements WithDirectivesInterface, WithFieldsOrFragmentBondsInterface
+class LeafField extends AbstractAst implements FieldInterface
 {
+    use WithArgumentsTrait;
     use WithDirectivesTrait;
-    use WithFieldsOrFragmentBondsTrait;
 
     /**
+     * @param Argument[] $arguments
      * @param Directive[] $directives
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
     public function __construct(
-        protected string $name,
-        protected string $model,
+        private string $name,
+        private ?string $alias,
+        array $arguments,
         array $directives,
-        array $fieldsOrFragmentBonds,
         Location $location,
     ) {
         parent::__construct($location);
+        $this->setArguments($arguments);
         $this->setDirectives($directives);
-        $this->setFieldsOrFragmentBonds($fieldsOrFragmentBonds);
     }
 
     public function getName(): string
@@ -37,13 +38,13 @@ class Fragment extends AbstractAst implements WithDirectivesInterface, WithField
         $this->name = $name;
     }
 
-    public function getModel(): string
+    public function getAlias(): ?string
     {
-        return $this->model;
+        return $this->alias;
     }
 
-    public function setModel(string $model): void
+    public function setAlias(?string $alias): void
     {
-        $this->model = $model;
+        $this->alias = $alias;
     }
 }

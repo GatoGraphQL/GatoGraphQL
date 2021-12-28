@@ -13,10 +13,11 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
-use PoP\GraphQLParser\Execution\RequestInterface;
+use PoP\GraphQLParser\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Parser\ParserInterface;
-use PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface;
 use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
+use PoPBackbone\GraphQLParser\Execution\Context;
+use PoPBackbone\GraphQLParser\Execution\ExecutableDocumentInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
@@ -25,8 +26,13 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Query;
-use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
+use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
+use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
+use stdClass;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
@@ -36,8 +42,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?IncludeDirectiveResolver $includeDirectiveResolver = null;
     private ?ParserInterface $parser = null;
-    private ?RequestInterface $request = null;
-    private ?RequestValidatorInterface $requestValidator = null;
 
     final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -71,22 +75,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     {
         return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
     }
-    final public function setRequest(RequestInterface $request): void
-    {
-        $this->request = $request;
-    }
-    final protected function getRequest(): RequestInterface
-    {
-        return $this->request ??= $this->instanceManager->getInstance(RequestInterface::class);
-    }
-    final public function setRequestValidator(RequestValidatorInterface $requestValidator): void
-    {
-        $this->requestValidator = $requestValidator;
-    }
-    final protected function getRequestValidator(): RequestValidatorInterface
-    {
-        return $this->requestValidator ??= $this->instanceManager->getInstance(RequestValidatorInterface::class);
-    }
 
     /**
      * Convert the GraphQL Query to PoP query in its requested form
@@ -94,8 +82,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      */
     public function convertFromGraphQLToFieldQuery(
         string $graphQLQuery,
-        ?array $variables = [],
-        bool $enableMultipleQueryExecution = false,
+        ?array $variableValues = [],
         ?string $operationName = null
     ): array {
         list(
@@ -103,8 +90,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             $operationFieldQueryPaths
         ) = $this->convertFromGraphQLToFieldQueryPaths(
             $graphQLQuery,
-            $variables ?? [],
-            $enableMultipleQueryExecution,
+            $variableValues ?? [],
             $operationName
         );
         $fieldQueries = [];
@@ -140,16 +126,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      */
     protected function convertFromGraphQLToFieldQueryPaths(
         string $graphQLQuery,
-        array $variables,
-        bool $enableMultipleQueryExecution,
+        array $variableValues,
         ?string $operationName = null
     ): array {
         try {
             // If the validation throws an error, stop parsing the script
             $request = $this->parseAndCreateRequest(
                 $graphQLQuery,
-                $variables,
-                $enableMultipleQueryExecution,
+                $variableValues,
                 $operationName
             );
             // Converting the query could also throw an Exception
@@ -204,11 +188,13 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              * then replace it with an expression, so its value can be computed on runtime
              */
             return QueryHelpers::getExpressionQuery($value->getName());
-        } elseif ($value instanceof VariableReference || $value instanceof Variable | $value instanceof Literal) {
+        } elseif ($value instanceof Literal) {
             if (is_string($value->getValue())) {
                 return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value->getValue());
             }
             return $value->getValue();
+        } elseif ($value instanceof VariableReference || $value instanceof Variable) {
+            return $this->convertArgumentValue($value->getValue());
         } elseif (is_array($value)) {
             /**
              * When coming from the InputList, its `getValue` is an array of Variables
@@ -216,6 +202,11 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             return array_map(
                 [$this, 'convertArgumentValue'],
                 $value
+            );
+        } elseif ($value instanceof stdClass) {
+            return (object) array_map(
+                [$this, 'convertArgumentValue'],
+                (array) $value
             );
         } elseif ($value instanceof InputList) {
             return array_map(
@@ -443,42 +434,42 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         return $fragmentFieldPaths;
     }
 
-    protected function processAndAddFieldPaths(RequestInterface $request, array &$queryFieldPaths, array $fields, array $queryField = []): void
+    protected function processAndAddFieldPaths(ExecutableDocumentInterface $executableDocument, array &$queryFieldPaths, array $fields, array $queryField = []): void
     {
         // Iterate through the query's fields: properties, connections, fragments
         $queryFieldPath = $queryField;
         foreach ($fields as $field) {
-            if ($field instanceof Field) {
+            if ($field instanceof LeafField) {
                 // Fields are leaves in the graph
                 $queryFieldPaths[] = array_merge(
                     $queryFieldPath,
                     [$this->convertField($field)]
                 );
-            } elseif ($field instanceof Query) {
+            } elseif ($field instanceof RelationalField) {
                 // Queries are connections
-                $nestedFieldPaths = $this->getFieldPathsFromQuery($request, $field);
+                $nestedFieldPaths = $this->getFieldPathsFromQuery($executableDocument, $field);
                 foreach ($nestedFieldPaths as $nestedFieldPath) {
                     $queryFieldPaths[] = array_merge(
                         $queryFieldPath,
                         $nestedFieldPath
                     );
                 }
-            } elseif ($field instanceof FragmentReference || $field instanceof TypedFragmentReference) {
+            } elseif ($field instanceof FragmentReference || $field instanceof InlineFragment) {
                 // Replace the fragment reference with its resolved information
                 $fragmentReference = $field;
                 if ($fragmentReference instanceof FragmentReference) {
                     $fragmentName = $fragmentReference->getName();
-                    $fragment = $request->getFragment($fragmentName);
-                    $fragmentFields = $fragment->getFields();
+                    $fragment = $executableDocument->getDocument()->getFragment($fragmentName);
+                    $fragmentFields = $fragment->getFieldsOrFragmentBonds();
                     $fragmentType = $fragment->getModel();
                 } else {
-                    $fragmentFields = $fragmentReference->getFields();
+                    $fragmentFields = $fragmentReference->getFieldsOrFragmentBonds();
                     $fragmentType = $fragmentReference->getTypeName();
                 }
 
                 // Get the fields defined in the fragment
                 $fragmentConvertedFieldPaths = [];
-                $this->processAndAddFieldPaths($request, $fragmentConvertedFieldPaths, $fragmentFields);
+                $this->processAndAddFieldPaths($executableDocument, $fragmentConvertedFieldPaths, $fragmentFields);
 
                 // Restrain those fields to the indicated type
                 $fragmentConvertedFieldPaths = $this->restrainFieldsByTypeOrInterface($fragmentConvertedFieldPaths, $fragmentType);
@@ -494,14 +485,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         }
     }
 
-    protected function getFieldPathsFromQuery(RequestInterface $request, Query $query): array
+    protected function getFieldPathsFromQuery(ExecutableDocumentInterface $executableDocument, RelationalField $query): array
     {
         $queryFieldPaths = [];
         $queryFieldPath = [$this->convertField($query)];
 
         // Iterate through the query's fields: properties and connections
-        if ($fields = $query->getFields()) {
-            $this->processAndAddFieldPaths($request, $queryFieldPaths, $fields, $queryFieldPath);
+        if ($fields = $query->getFieldsOrFragmentBonds()) {
+            $this->processAndAddFieldPaths($executableDocument, $queryFieldPaths, $fields, $queryFieldPath);
         } else {
             // Otherwise, just add the query field, which doesn't have subfields
             $queryFieldPaths[] = $queryFieldPath;
@@ -517,12 +508,21 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      *
      * @see https://graphql.org/learn/queries/
      */
-    protected function convertRequestToFieldQueryPaths(RequestInterface $request): array
+    protected function convertRequestToFieldQueryPaths(ExecutableDocumentInterface $executableDocument): array
     {
         $fieldQueryPaths = [];
         // It is either is a query or a mutation
-        $mutations = $request->getMutations();
-        $queries = $request->getQueries();
+        $mutations = $queries = [];
+        $operations = $executableDocument->getRequestedOperations();
+        foreach ($operations as $operation) {
+            if ($operation instanceof QueryOperation) {
+                $queries[] = $operation;
+                continue;
+            }
+            if ($operation instanceof MutationOperation) {
+                $mutations[] = $operation;
+            }
+        }
         if ($mutations) {
             $queriesOrMutations = $mutations;
             $operationType = OperationTypes::MUTATION;
@@ -537,16 +537,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $this->getTranslationAPI()->__('Cannot execute both queries AND mutations, hence the queries have been ignored, resolving mutations only', 'graphql-query')
             );
         }
-        foreach ($queriesOrMutations as $query) {
-            $operationLocation = $query->getLocation();
-            $operationID = sprintf(
-                '%s-%s',
-                $operationLocation->getLine(),
-                $operationLocation->getColumn()
-            );
-            $fieldQueryPaths[$operationID] = array_merge(
-                $fieldQueryPaths[$operationID] ?? [],
-                $this->getFieldPathsFromQuery($request, $query)
+        /** @var OperationInterface[] $queriesOrMutations */
+        foreach ($queriesOrMutations as $operation) {
+            $operationName = $operation->getName();
+            $operationFieldPaths = [];
+            $this->processAndAddFieldPaths($executableDocument, $operationFieldPaths, $operation->getFieldsOrFragmentBonds());
+            $fieldQueryPaths[$operationName] = array_merge(
+                $fieldQueryPaths[$operationName] ?? [],
+                $operationFieldPaths
             );
         }
         return [
@@ -560,173 +558,21 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      */
     protected function parseAndCreateRequest(
         string $payload,
-        array $variables,
-        bool $enableMultipleQueryExecution,
+        array $variableValues,
         ?string $operationName = null
-    ): RequestInterface {
+    ): ExecutableDocumentInterface {
         if (empty($payload)) {
             throw new InvalidArgumentException(
                 $this->getTranslationAPI()->__('Must provide an operation.', 'graphql-query')
             );
         }
 
-        $parsedData = $this->getParser()->parse($payload)->toArray();
-
-        // GraphiQL sends the operationName to execute in the payload, under "operationName"
-        // This is required when the payload contains multiple queries
-        if (is_null($operationName)) {
-            /**
-             * If not enabling multiple query execution, validate that
-             * only one operation was submitted.
-             *
-             * From the GraphQL spec:
-             *
-             * > If operationName is null:
-             * >     If document contains exactly one operation.
-             * >         Return the Operation contained in the document.
-             * >     Otherwise produce a query error requiring operationName.
-             *
-             * @see https://spec.graphql.org/draft/#GetOperation()
-             * @see https://spec.graphql.org/draft/#sel-EANLHDBFBGCBFDCBnmD
-             */
-            if (!$enableMultipleQueryExecution) {
-                $operationCount = count($parsedData['queryOperations']) + count($parsedData['mutationOperations']);
-                if ($operationCount > 1) {
-                    throw new InvalidArgumentException(sprintf(
-                        $this->getTranslationAPI()->__(
-                            'Feature \'Multiple Query Execution\' is not enabled, so can execute 1 operation only, but %s operations were submitted (\'%s\')',
-                            'graphql-query'
-                        ),
-                        $operationCount,
-                        implode(
-                            '\', \'',
-                            array_merge(
-                                array_map(
-                                    function (array $operation): string {
-                                        return $operation['name'];
-                                    },
-                                    $parsedData['queryOperations']
-                                ),
-                                array_map(
-                                    function (array $operation): string {
-                                        return $operation['name'];
-                                    },
-                                    $parsedData['mutationOperations']
-                                )
-                            )
-                        )
-                    ));
-                }
-            }
-        } else {
-            /**
-             * Hack! Because GraphiQL does not allow to execute more than 1 operation,
-             * (so it doesn't support query batching), then this artificial query
-             * indicates to execute all (i.e. execute all operations but this one):
-             * ```
-             *   query __ALL { id }
-             * ```
-             */
-            if ($enableMultipleQueryExecution && strtoupper($operationName) == ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME) {
-                // Find the position and number of queries processed by this operation
-                foreach ($parsedData['queryOperations'] as $queryOperation) {
-                    if ($queryOperation['name'] == $operationName) {
-                        array_splice(
-                            $parsedData['queries'],
-                            $queryOperation['position'],
-                            $queryOperation['numberItems']
-                        );
-                        break;
-                    }
-                }
-                foreach ($parsedData['mutationOperations'] as $mutationOperation) {
-                    if ($mutationOperation['name'] == $operationName) {
-                        array_splice(
-                            $parsedData['mutations'],
-                            $mutationOperation['position'],
-                            $mutationOperation['numberItems']
-                        );
-                        break;
-                    }
-                }
-            } else {
-                /**
-                 * Find the position and number of queries processed by this operation
-                 * If the operation is the same one, then that's it, retrieve it.
-                 *
-                 * Otherwise, remove it from the entry, so that if sending an operationName,
-                 * that does not exist, the set to execute is an empty array
-                 */
-                if ($parsedData['queryOperations']) {
-                    for ($i = count($parsedData['queryOperations']) - 1; $i >= 0; $i--) {
-                        $queryOperation = $parsedData['queryOperations'][$i];
-                        if ($queryOperation['name'] == $operationName) {
-                            $parsedData['queries'] = array_slice(
-                                $parsedData['queries'],
-                                $queryOperation['position'],
-                                $queryOperation['numberItems']
-                            );
-                            break;
-                        } else {
-                            array_splice(
-                                $parsedData['queries'],
-                                $queryOperation['position'],
-                                $queryOperation['numberItems']
-                            );
-                        }
-                    }
-                } else {
-                    // Make sure no queries are executed
-                    unset($parsedData['queries']);
-                }
-                if ($parsedData['mutationOperations']) {
-                    for ($i = count($parsedData['mutationOperations']) - 1; $i >= 0; $i--) {
-                        $mutationOperation = $parsedData['mutationOperations'][$i];
-                        if ($mutationOperation['name'] == $operationName) {
-                            $parsedData['mutations'] = array_slice(
-                                $parsedData['mutations'],
-                                $mutationOperation['position'],
-                                $mutationOperation['numberItems']
-                            );
-                            break;
-                        } else {
-                            array_splice(
-                                $parsedData['mutations'],
-                                $mutationOperation['position'],
-                                $mutationOperation['numberItems']
-                            );
-                        }
-                    }
-                } else {
-                    // Make sure no mutations are executed
-                    unset($parsedData['mutations']);
-                }
-                /**
-                 * From the GraphQL spec:
-                 *
-                 * > If operation was not found, produce a query error.
-                 *
-                 * @see https://spec.graphql.org/draft/#GetOperation()
-                 * @see https://spec.graphql.org/draft/#sel-IANLHCDBDCAACCmB3L
-                 */
-                if (empty($parsedData['queries']) && empty($parsedData['mutations'])) {
-                    throw new InvalidArgumentException(sprintf(
-                        $this->getTranslationAPI()->__('No operation with name \'%s\' was submitted.', 'graphql-query'),
-                        $operationName
-                    ));
-                }
-            }
-        }
-
-        // If some variable hasn't been submitted, it will throw an Exception
-        // Let it bubble up
-        /** @var RequestInterface */
-        $request = $this->getRequest()->process($parsedData, $variables);
-
-        // If the validation fails, it will throw an exception
-        $this->getRequestValidator()->validate($request);
-
-        // Return the request
-        return $request;
+        /**
+         * If some variable hasn't been submitted, it will throw an Exception.
+         * Let it bubble up
+         */
+        $document = $this->getParser()->parse($payload);
+        $executableDocument = (new ExecutableDocument($document, new Context($operationName, $variableValues)))->validateAndInitialize();
+        return $executableDocument;
     }
 }

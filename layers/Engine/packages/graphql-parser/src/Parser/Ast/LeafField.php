@@ -6,10 +6,10 @@ namespace PoP\GraphQLParser\Parser\Ast;
 
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
-use PoPBackbone\GraphQLParser\Parser\Ast\Field as UpstreamField;
+use PoPBackbone\GraphQLParser\Parser\Ast\LeafField as UpstreamLeafField;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class Field extends UpstreamField
+class LeafField extends UpstreamLeafField
 {
     use MaybeNonLocatableAstTrait;
 
