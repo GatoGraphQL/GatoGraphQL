@@ -135,9 +135,8 @@ class Parser extends Tokenizer implements ParserInterface
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
             $this->eatMulti([Token::TYPE_COMMA]);
 
-            /** @var WithDirectivesInterface */
-            $operation = $this->parseBodyItem($type, true);
-            $fieldsOrFragmentBonds[] = $operation;
+            $fieldOrFragmentBond = $this->parseBodyItem($type);
+            $fieldsOrFragmentBonds[] = $fieldOrFragmentBond;
         }
 
         $this->expect(Token::TYPE_RBRACE);
