@@ -16,6 +16,14 @@ class Document extends UpstreamDocument
         return $this->getTranslationAPI()->__('No operations defined in the query', 'graphql-parser');
     }
 
+    protected function getDuplicateOperationNameErrorMessage(string $operationName): string
+    {
+        return \sprintf(
+            $this->getTranslationAPI()->__('Operation name \'%s\' is duplicated, it must be unique', 'graphql-parser'),
+            $operationName
+        );
+    }
+
     protected function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
     {
         return \sprintf(

@@ -52,6 +52,7 @@ class Document
     public function validate(): void
     {
         $this->assertOperationsDefined();
+        $this->assertOperationNamesUnique();
         $this->assertFragmentReferencesAreValid();
         $this->assertFragmentsAreUsed();
         $this->assertAllVariablesExist();
@@ -71,14 +72,37 @@ class Document
         }
     }
 
+    protected function getNoOperationsDefinedInQueryErrorMessage(): string
+    {
+        return 'No operations defined in the query';
+    }
+
     protected function getNonSpecificLocation(): Location
     {
         return new Location(1, 1);
     }
 
-    protected function getNoOperationsDefinedInQueryErrorMessage(): string
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertOperationNamesUnique(): void
     {
-        return 'No operations defined in the query';
+        $operationNames = [];
+        foreach ($this->getOperations() as $operation) {
+            $operationName = $operation->getName();
+            if (in_array($operationName, $operationNames)) {
+                throw new InvalidRequestException(
+                    $this->getDuplicateOperationNameErrorMessage($operationName),
+                    $this->getNonSpecificLocation()
+                );
+            }
+            $operationNames[] = $operationName;
+        }
+    }
+
+    protected function getDuplicateOperationNameErrorMessage(string $operationName): string
+    {
+        return \sprintf('Operation name \'%s\' is duplicated, it must be unique', $operationName);
     }
 
     /**
