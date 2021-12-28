@@ -640,11 +640,20 @@ class Parser extends Tokenizer implements ParserInterface
         // Use stdClass instead of array
         $object = new stdClass();
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
-            $key = $this->expectMulti([Token::TYPE_STRING, Token::TYPE_IDENTIFIER])->getData();
+            $keyToken = $this->expectMulti([Token::TYPE_STRING, Token::TYPE_IDENTIFIER]);
+            $key = $keyToken->getData();
             $this->expect(Token::TYPE_COLON);
             $value = $this->parseListValue();
 
             $this->eat(Token::TYPE_COMMA);
+
+            // Validate no duplicated keys in InputObject
+            if (property_exists($object, $key)) {
+                throw new SyntaxErrorException(
+                    $this->getDuplicateKeyInInputObjectSyntaxErrorMessage($key),
+                    $this->getTokenLocation($keyToken)
+                );
+            }
 
             $object->$key = $value;
         }
@@ -652,6 +661,11 @@ class Parser extends Tokenizer implements ParserInterface
         $this->eat(Token::TYPE_RBRACE);
 
         return $createType ? $this->createInputObject($object, $this->getTokenLocation($startToken)) : $object;
+    }
+
+    protected function getDuplicateKeyInInputObjectSyntaxErrorMessage(string $key): string
+    {
+        return \sprintf('Input object has duplicate key \'%s\'', $key);
     }
 
     protected function createInputObject(
