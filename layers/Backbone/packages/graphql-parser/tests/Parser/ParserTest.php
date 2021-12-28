@@ -806,7 +806,8 @@ GRAPHQL;
                         }
                     }
                 GRAPHQL,
-                new Document([
+                new Document(
+                    [
                         new QueryOperation(
                             '', 
                             [],
@@ -824,6 +825,39 @@ GRAPHQL;
                                             new Argument('if', new Literal(true, new Location(2, 28)), new Location(2, 24)),
                                         ], new Location(2, 16))
                                     ],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ]
+                ),
+            ],
+            [
+                <<<GRAPHQL
+                    query GetUsersName @someOperationDirective {
+                        users {
+                            name
+                        }
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            'GetUsersName', 
+                            [],
+                            [
+                                new Directive('someOperationDirective', [], new Location(1, 25))
+                            ],
+                            [
+                                new RelationalField(
+                                    'users',
+                                    null,
+                                    [],
+                                    [
+                                        new LeafField('name', null, [], [], new Location(3, 13)),
+                                    ],
+                                    [],
                                     new Location(2, 9)
                                 ),
                             ],
