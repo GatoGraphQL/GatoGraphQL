@@ -162,7 +162,7 @@ class DocumentTest extends TestCase
         $document->validate();
     }
 
-    public function testDuplicateOperationName()
+    public function testUniqueOperationName()
     {
         $this->expectException(InvalidRequestException::class);
         $parser = new Parser();
@@ -174,6 +174,26 @@ class DocumentTest extends TestCase
             }
 
             query SomeQuery {
+                posts {
+                    title
+                }
+            }
+        ');
+        $document->validate();
+    }
+
+    public function testUniqueOperationNameAcrossOps()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $parser = new Parser();
+        $document = $parser->parse('
+            query SomeQuery {
+                users {
+                    id
+                }
+            }
+
+            mutation SomeQuery {
                 posts {
                     title
                 }
