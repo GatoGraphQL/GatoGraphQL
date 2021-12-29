@@ -215,7 +215,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $addVersionToGraphQLSchemaFieldDescription = ComponentConfiguration::addVersionToGraphQLSchemaFieldDescription();
         // When doing nested mutations, differentiate mutating fields by adding label "[Mutation]" in the description
         $addMutationLabelToSchemaFieldDescription = $enableNestedMutations;
-        // Maybe add param "nestedUnder" on the schema for each directive
         $enableComposableDirectives = GraphQLQueryComponentConfiguration::enableComposableDirectives();
 
         // Modify the schema definitions
@@ -266,7 +265,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $this->maybeAddTypeToSchemaDirectiveDescription($itemPath);
         }
         // 2. Each type's fields and directives
-        if ($addVersionToGraphQLSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription/* || $enableComposableDirectives*/) {
+        if ($addVersionToGraphQLSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription) {
             foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT] as $typeName => $typeSchemaDefinition) {
                 foreach (array_keys($typeSchemaDefinition[SchemaDefinition::FIELDS]) as $fieldName) {
                     $itemPath = [
