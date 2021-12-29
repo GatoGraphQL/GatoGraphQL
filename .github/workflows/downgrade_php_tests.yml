@@ -68,7 +68,7 @@ jobs:
             # Pass param "additional_rector_configs" to fix bug
             # @see https://github.com/rectorphp/rector/issues/5962
             -   name: Dependencies - Downgrade PHP code via Rector
-                run: submodules/PoP/ci/downgrade/downgrade_code.sh config/rector/downgrade/monorepo/rector.php "" "" "${{ needs.provide_data.outputs.additional_downgrade_rector_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
+                run: ci/downgrade/downgrade_code.sh config/rector/downgrade/monorepo/rector.php "" "" "${{ needs.provide_data.outputs.additional_downgrade_rector_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
 
             ################################################################################
             # Run Rector again with --dry-run, check no further downgrades are executed
@@ -85,7 +85,7 @@ jobs:
                 if: github.event_name == 'push'
 
             -   name: (Again) Dependencies - Downgrade PHP code via Rector
-                run: submodules/PoP/ci/downgrade/downgrade_code.sh config/rector/downgrade/monorepo/rector.php --dry-run "" "${{ needs.provide_data.outputs.additional_downgrade_rector_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
+                run: ci/downgrade/downgrade_code.sh config/rector/downgrade/monorepo/rector.php --dry-run "" "${{ needs.provide_data.outputs.additional_downgrade_rector_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
                 if: github.event_name == 'push'
             ################################################################################
 
