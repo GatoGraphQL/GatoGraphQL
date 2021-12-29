@@ -28,7 +28,7 @@ jobs:
             -   id: output_data
                 run: |
                     echo "::set-output name=package_srcs::$(vendor/bin/monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src)"
-                    echo "::set-output name=exclude_package_tests::$(vendor/bin/monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=tests | sed -e 's/ / --exclude =/g')"
+                    echo "::set-output name=exclude_package_tests::$(vendor/bin/monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=tests | sed -e 's/ / --exclude /g')"
                     echo "::set-output name=generate_artifact_with_downgraded_code::$(vendor/bin/monorepo-builder env-var GENERATE_ARTIFACT_WITH_DOWNGRADED_CODE --config=config/monorepo-builder/env-var.php)"
                     echo "::set-output name=additional_downgrade_rector_configs::$(vendor/bin/monorepo-builder additional-downgrade-rector-configs --config=config/monorepo-builder/additional-downgrade-rector-configs.php)"
                     echo "::set-output name=local_package_owners::$(vendor/bin/monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)"
