@@ -266,15 +266,15 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         /**
          * Enable composable directives:
          * Executing <directive1<directive11,directive12<directive123>>> can be done doing
-         * @directive1 @directive11(nestedUnder: -1) @directive12(nestedUnder: -2) @directive123(nestedUnder -1)
-         * In this case, "nestedUnder" indicates the relative position from the directive,
-         * to its parent directive (under which it must be nested).
+         * @directive1(affect: [1, 2]) @directive11(affect: [1]) @directive12(affect: [1]) @directive123
+         * In this case, "affect" indicates the relative position from the meta-directive
+         * to its nested/affected directive.
          */
         $enableComposableDirectives = ComponentConfiguration::enableComposableDirectives();
         /**
          * Comment 29/12: Move the param, from "nestedUnder" under the directive
          * to "affect" under the meta-directive. For simplicity, bridge the new
-         * logic to the previous logic.
+         * logic to the previous logic (this code is temporary).
          */
         $directiveCount = count($fieldDirectives);
         $nestedUnderPositions = [];
