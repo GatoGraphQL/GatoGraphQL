@@ -14,11 +14,6 @@ trait WithDirectivesTrait
         return count($this->directives) > 0;
     }
 
-    public function hasDirective(string $name): bool
-    {
-        return array_key_exists($name, $this->directives);
-    }
-
     public function getDirective(string $name): ?Directive
     {
         return $this->directives[$name] ?? null;
