@@ -14,11 +14,6 @@ trait WithDirectivesTrait
         return count($this->directives) > 0;
     }
 
-    public function getDirective(string $name): ?Directive
-    {
-        return $this->directives[$name] ?? null;
-    }
-
     /**
      * @return Directive[]
      */
