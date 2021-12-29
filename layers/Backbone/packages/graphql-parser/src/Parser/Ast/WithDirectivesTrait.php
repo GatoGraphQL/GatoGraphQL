@@ -6,7 +6,7 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
 trait WithDirectivesTrait
 {
-    /** @var array<string,Directive> */
+    /** @var Directive[] */
     protected array $directives;
 
     public function hasDirectives(): bool
@@ -14,22 +14,12 @@ trait WithDirectivesTrait
         return count($this->directives) > 0;
     }
 
-    public function hasDirective(string $name): bool
-    {
-        return array_key_exists($name, $this->directives);
-    }
-
-    public function getDirective(string $name): ?Directive
-    {
-        return $this->directives[$name] ?? null;
-    }
-
     /**
      * @return Directive[]
      */
     public function getDirectives(): array
     {
-        return array_values($this->directives);
+        return $this->directives;
     }
 
     /**
@@ -37,49 +27,6 @@ trait WithDirectivesTrait
      */
     public function setDirectives(array $directives): void
     {
-        $this->directives = [];
-        foreach ($directives as $directive) {
-            $this->addDirective($directive);
-        }
-    }
-
-    public function addDirective(Directive $directive): void
-    {
-        /**
-         * Watch out! In this query, a field contains the same directive twice:
-         *
-         * ```
-         * {
-         *   user(id:1) {
-         *     name @titleCase @upperCase @titleCase
-         *   }
-         * }
-         * ```
-         *
-         * This behavior is allowed through `isRepeatable`:
-         * @see https://spec.graphql.org/draft/#sel-FAJbLACvIDDxIAA6P
-         *
-         * The code here, originally, would not allow this behavior, since it
-         * uses the directive's name as the key of the array, so if it happens
-         * more than once, only one instance of it would remain:
-         *
-         * ```
-         * $this->directives[$directive->getName()] = $directive;
-         * ```
-         *
-         * As a solution, if the key already exists, place the directive
-         * under a different key using a counter. There is no need to
-         * remove this key later on, because the Parser will retrieve
-         * the Directive objects stored as values in the array, and
-         * ignore the key
-         */
-        $directiveName = $directive->getName();
-        $key = $directiveName;
-        $counter = 0;
-        while (isset($this->directives[$key])) {
-            $counter++;
-            $key = $directiveName . '|' . $counter;
-        }
-        $this->directives[$key] = $directive;
+        $this->directives = $directives;
     }
 }
