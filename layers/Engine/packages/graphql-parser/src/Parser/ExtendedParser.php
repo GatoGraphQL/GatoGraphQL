@@ -9,7 +9,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class ExtendedParser extends Parser
+class ExtendedParser extends Parser implements ExtendedParserInterface
 {
     /**
      * @todo Implement for MetaDirective

@@ -14,7 +14,7 @@ use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Execution\ExecutableDocument;
-use PoP\GraphQLParser\Parser\ParserInterface;
+use PoP\GraphQLParser\Parser\ExtendedParserInterface;
 use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Execution\ExecutableDocumentInterface;
@@ -40,7 +40,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?IncludeDirectiveResolver $includeDirectiveResolver = null;
-    private ?ParserInterface $parser = null;
+    private ?ExtendedParserInterface $extendedParser = null;
 
     final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -66,13 +66,13 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     {
         return $this->includeDirectiveResolver ??= $this->instanceManager->getInstance(IncludeDirectiveResolver::class);
     }
-    final public function setParser(ParserInterface $parser): void
+    final public function setExtendedParser(ExtendedParserInterface $extendedParser): void
     {
-        $this->parser = $parser;
+        $this->extendedParser = $extendedParser;
     }
-    final protected function getParser(): ParserInterface
+    final protected function getExtendedParser(): ExtendedParserInterface
     {
-        return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
+        return $this->extendedParser ??= $this->instanceManager->getInstance(ExtendedParserInterface::class);
     }
 
     /**
@@ -608,7 +608,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
          * If some variable hasn't been submitted, it will throw an Exception.
          * Let it bubble up
          */
-        $document = $this->getParser()->parse($payload);
+        $document = $this->getExtendedParser()->parse($payload);
         $executableDocument = (new ExecutableDocument($document, new Context($operationName, $variableValues)))->validateAndInitialize();
         return $executableDocument;
     }
