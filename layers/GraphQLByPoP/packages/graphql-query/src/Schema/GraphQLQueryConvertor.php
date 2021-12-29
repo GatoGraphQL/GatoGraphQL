@@ -23,7 +23,6 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
@@ -267,11 +266,70 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         /**
          * Enable composable directives:
          * Executing <directive1<directive11,directive12<directive123>>> can be done doing
-         * @directive1 @directive11(nestedUnder: -1) @directive12(nestedUnder: -2) @directive123(nestedUnder -1)
-         * In this case, "nestedUnder" indicates the relative position from the directive,
-         * to its parent directive (under which it must be nested).
+         * @directive1(affect: [1, 2]) @directive11(affect: [1]) @directive12(affect: [1]) @directive123
+         * In this case, "affect" indicates the relative position from the meta-directive
+         * to its nested/affected directive.
          */
         $enableComposableDirectives = ComponentConfiguration::enableComposableDirectives();
+        /**
+         * Comment 29/12: Move the param, from "nestedUnder" under the directive
+         * to "affect" under the meta-directive. For simplicity, bridge the new
+         * logic to the previous logic (this code is temporary).
+         */
+        $directiveCount = count($fieldDirectives);
+        $nestedUnderPositions = [];
+        if ($enableComposableDirectives) {
+            $counter = 0;
+            foreach ($fieldDirectives as $directive) {
+                $directiveName = $directive->getName();
+                $directiveArgs = $this->convertArguments($directive->getArguments());
+                $nestedUnder = null;
+                /**
+                 * Check if it's a nested directive and, if so, remove param "nestedUnder"
+                 * which is not used by the directive (it's a "meta" param)
+                 */
+                if (isset($directiveArgs[SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS])) {
+                    $directiveNestedUnderPositions = (array) $directiveArgs[SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS];
+                    if (!is_array($directiveNestedUnderPositions)) {
+                        $this->getFeedbackMessageStore()->addQueryError(
+                            sprintf(
+                                $this->getTranslationAPI()->__('Param \'%s\' must be an array of positive integers, hence value \'%s\' in directive \'%s\' has been ignored', 'graphql-query'),
+                                SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS,
+                                $directiveNestedUnderPositions,
+                                $directiveName
+                            )
+                        );
+                    } else {
+                        /** @var int[] $directiveNestedUnderPositions */
+                        foreach ($directiveNestedUnderPositions as $nestedUnder) {
+                            if (!($nestedUnder > 0)) {
+                                $this->getFeedbackMessageStore()->addQueryError(
+                                    sprintf(
+                                        $this->getTranslationAPI()->__('Param \'%s\' must be a positive integer, hence value \'%s\' in directive \'%s\' has been ignored', 'graphql-query'),
+                                        SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS,
+                                        $nestedUnder,
+                                        $directiveName
+                                    )
+                                );
+                                continue;
+                            } elseif ($nestedUnder > ($directiveCount - $counter)) {
+                                $this->getFeedbackMessageStore()->addQueryError(
+                                    sprintf(
+                                        $this->getTranslationAPI()->__('There is no directive at position \'%s\' (set under param \'%s\') relative to directive \'%s\'', 'graphql-query'),
+                                        $nestedUnder,
+                                        SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS,
+                                        $directiveName
+                                    )
+                                );
+                                continue;
+                            }
+                            $nestedUnderPositions[$counter + $nestedUnder] = (int) (-1 * $nestedUnder);
+                        }
+                    }
+                }
+                $counter++;
+            }
+        }
         /**
          * The first pass goes from right to left, as to enable composable directives:
          * because we can have <directive1<directive2<directive3>>>, represented as
@@ -281,7 +339,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
          * If we iterated from left to right, directive3 would not be added under
          * directive1=>directive2
          */
-        $directiveCount = count($fieldDirectives);
         $counter = $directiveCount - 1;
         foreach (array_reverse($fieldDirectives) as $directive) {
             $directiveArgs = $this->convertArguments($directive->getArguments());
@@ -292,10 +349,10 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                  * Check if it's a nested directive and, if so, remove param "nestedUnder"
                  * which is not used by the directive (it's a "meta" param)
                  */
-                if (isset($directiveArgs[SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER])) {
-                    $nestedUnder = $directiveArgs[SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER];
-                    unset($directiveArgs[SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER]);
+                if (isset($directiveArgs[SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS])) {
+                    unset($directiveArgs[SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS]);
                 }
+                $nestedUnder = $nestedUnderPositions[$counter] ?? null;
                 /**
                  * Because we're iterating from right to left, if this directive
                  * has been defined as composing to another directive,
@@ -319,31 +376,11 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             );
             $rootAndComposableDirectives[$counter] = $convertedDirective;
             if ($enableComposableDirectives && $nestedUnder !== null) {
-                if (!is_int($nestedUnder) || !($nestedUnder < 0)) {
-                    $this->getFeedbackMessageStore()->addQueryError(
-                        sprintf(
-                            $this->getTranslationAPI()->__('Param \'%s\' must be a negative integer, hence value \'%s\' in directive \'%s\' has been ignored', 'graphql-query'),
-                            SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
-                            $nestedUnder,
-                            $directiveName
-                        )
-                    );
-                } elseif ((-1 * $nestedUnder) > $counter) {
-                    $this->getFeedbackMessageStore()->addQueryError(
-                        sprintf(
-                            $this->getTranslationAPI()->__('There is no directive at position \'%s\' (set under param \'%s\') relative to directive \'%s\'', 'graphql-query'),
-                            $nestedUnder,
-                            SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
-                            $directiveName
-                        )
-                    );
-                } else {
-                    // From the current position, move "$nestedUnder" positions to the left
-                    // (it's a negative int)
-                    $nestedUnderPos = $counter + $nestedUnder;
-                    $composableDirectivesByPosition[$nestedUnderPos] ??= [];
-                    $composableDirectivesByPosition[$nestedUnderPos][] = $convertedDirective;
-                }
+                // From the current position, move "$nestedUnder" positions to the left
+                // (it's a negative int)
+                $nestedUnderPos = $counter + $nestedUnder;
+                $composableDirectivesByPosition[$nestedUnderPos] ??= [];
+                $composableDirectivesByPosition[$nestedUnderPos][] = $convertedDirective;
             } else {
                 // Because we're iterating from right to left, place the item
                 // at the beginning

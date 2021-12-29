@@ -215,7 +215,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $addVersionToGraphQLSchemaFieldDescription = ComponentConfiguration::addVersionToGraphQLSchemaFieldDescription();
         // When doing nested mutations, differentiate mutating fields by adding label "[Mutation]" in the description
         $addMutationLabelToSchemaFieldDescription = $enableNestedMutations;
-        // Maybe add param "nestedUnder" on the schema for each directive
         $enableComposableDirectives = GraphQLQueryComponentConfiguration::enableComposableDirectives();
 
         // Modify the schema definitions
@@ -260,16 +259,13 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 SchemaDefinition::GLOBAL_DIRECTIVES,
                 $directiveName
             ];
-            if ($enableComposableDirectives) {
-                $this->addNestedDirectiveDataToSchemaDirectiveArgs($itemPath);
-            }
             if ($addVersionToGraphQLSchemaFieldDescription) {
                 $this->addVersionToGraphQLSchemaFieldDescription($itemPath);
             }
             $this->maybeAddTypeToSchemaDirectiveDescription($itemPath);
         }
         // 2. Each type's fields and directives
-        if ($addVersionToGraphQLSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription/* || $enableComposableDirectives*/) {
+        if ($addVersionToGraphQLSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription) {
             foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT] as $typeName => $typeSchemaDefinition) {
                 foreach (array_keys($typeSchemaDefinition[SchemaDefinition::FIELDS]) as $fieldName) {
                     $itemPath = [
@@ -336,25 +332,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 $schemaFieldVersion
             );
         }
-    }
-
-    /**
-     * Append param "nestedUnder" to the directive
-     */
-    protected function addNestedDirectiveDataToSchemaDirectiveArgs(array $directiveSchemaDefinitionPath): void
-    {
-        $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $directiveSchemaDefinitionPath);
-        $directiveSchemaDefinition[SchemaDefinition::ARGS] ??= [];
-        $directiveArgSchemaDefinition = [
-            SchemaDefinition::NAME => SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
-            SchemaDefinition::TYPE_RESOLVER => $this->getIntScalarTypeResolver(),
-            SchemaDefinition::DESCRIPTION => $this->getTranslationAPI()->__('Nest the directive under another one, indicated as a relative position from this one (a negative int)', 'graphql-server'),
-            SchemaDefinition::EXTENSIONS => [
-                SchemaDefinition::IS_ADMIN_ELEMENT => false,
-            ],
-        ];
-        APISchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($directiveArgSchemaDefinition);
-        $directiveSchemaDefinition[SchemaDefinition::ARGS][SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER] = $directiveArgSchemaDefinition;
     }
 
     /**
