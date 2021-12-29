@@ -5,14 +5,10 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Parser\Ast;
 
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
-use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesInterface;
-use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesTrait;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class MetaDirective extends Directive implements WithDirectivesInterface
+class MetaDirective extends Directive
 {
-    use WithDirectivesTrait;
-
     /**
      * @param Directive[] $nestedDirectives
      * @param Argument[] $arguments
@@ -20,7 +16,7 @@ class MetaDirective extends Directive implements WithDirectivesInterface
     public function __construct(
         string $name,
         array $arguments = [],
-        array $nestedDirectives = [],
+        protected array $nestedDirectives = [],
         ?Location $location = null,
     ) {
         parent::__construct(
@@ -28,6 +24,27 @@ class MetaDirective extends Directive implements WithDirectivesInterface
             $arguments,
             $location,
         );
-        $this->setDirectives($nestedDirectives);
+        $this->setNestedDirectives($nestedDirectives);
+    }
+
+    public function hasNestedDirectives(): bool
+    {
+        return count($this->nestedDirectives) > 0;
+    }
+
+    /**
+     * @return Directive[]
+     */
+    public function getNestedDirectives(): array
+    {
+        return $this->nestedDirectives;
+    }
+
+    /**
+     * @param Directive[] $nestedDirectives
+     */
+    public function setNestedDirectives(array $nestedDirectives): void
+    {
+        $this->nestedDirectives = $nestedDirectives;
     }
 }
