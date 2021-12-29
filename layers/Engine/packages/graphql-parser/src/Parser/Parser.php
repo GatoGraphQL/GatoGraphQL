@@ -92,4 +92,14 @@ class Parser extends UpstreamParser implements ParserInterface
     ): Directive {
         return new ExtendedDirective($name, $arguments, $location);
     }
+
+    /**
+     * @todo Implement for MetaDirective
+     * @return Directive[]
+     */
+    protected function parseDirectiveList(): array
+    {
+        $directives = parent::parseDirectiveList();
+        return $directives;
+    }
 }
