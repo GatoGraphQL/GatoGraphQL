@@ -15,7 +15,6 @@ use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Parser\ParserInterface;
-use PoP\GraphQLParser\Query\ClientSymbols;
 use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Execution\ExecutableDocumentInterface;
@@ -24,7 +23,6 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
@@ -279,7 +277,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
          * logic to the previous logic.
          */
         $directiveCount = count($fieldDirectives);
-        $nestedUnderPos = [];
+        $nestedUnderPositions = [];
         if ($enableComposableDirectives) {
             $counter = 0;
             foreach ($fieldDirectives as $directive) {
@@ -291,19 +289,19 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                  * which is not used by the directive (it's a "meta" param)
                  */
                 if (isset($directiveArgs[SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS])) {
-                    $nestedUnderPositions = (array) $directiveArgs[SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS];
-                    if (!is_array($nestedUnderPositions)) {
+                    $directiveNestedUnderPositions = (array) $directiveArgs[SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS];
+                    if (!is_array($directiveNestedUnderPositions)) {
                         $this->getFeedbackMessageStore()->addQueryError(
                             sprintf(
                                 $this->getTranslationAPI()->__('Param \'%s\' must be an array of positive integers, hence value \'%s\' in directive \'%s\' has been ignored', 'graphql-query'),
                                 SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS,
-                                $nestedUnderPositions,
+                                $directiveNestedUnderPositions,
                                 $directiveName
                             )
                         );
                     } else {
-                        /** @var int[] $nestedUnderPositions */
-                        foreach ($nestedUnderPositions as $nestedUnder) {
+                        /** @var int[] $directiveNestedUnderPositions */
+                        foreach ($directiveNestedUnderPositions as $nestedUnder) {
                             if (!($nestedUnder > 0)) {
                                 $this->getFeedbackMessageStore()->addQueryError(
                                     sprintf(
@@ -325,7 +323,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                                 );
                                 continue;
                             }
-                            $nestedUnderPos[$counter + $nestedUnder] = -1 * $nestedUnder;
+                            $nestedUnderPositions[$counter + $nestedUnder] = (int) (-1 * $nestedUnder);
                         }
                     }
                 }
@@ -354,7 +352,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 if (isset($directiveArgs[SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS])) {
                     unset($directiveArgs[SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS]);
                 }
-                $nestedUnder = $nestedUnderPos[$counter] ?? null;
+                $nestedUnder = $nestedUnderPositions[$counter] ?? null;
                 /**
                  * Because we're iterating from right to left, if this directive
                  * has been defined as composing to another directive,
