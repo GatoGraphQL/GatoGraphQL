@@ -101,7 +101,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
     {
         return match ($directiveArgName) {
-            SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
         };
     }
