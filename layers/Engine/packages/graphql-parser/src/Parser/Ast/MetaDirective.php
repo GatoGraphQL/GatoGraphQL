@@ -14,12 +14,13 @@ class MetaDirective extends Directive implements WithDirectivesInterface
     use WithDirectivesTrait;
 
     /**
+     * @param Directive[] $nestedDirectives
      * @param Argument[] $arguments
      */
     public function __construct(
         string $name,
-        array $arguments,
-        array $nestedDirectives,
+        array $arguments = [],
+        array $nestedDirectives = [],
         ?Location $location = null,
     ) {
         parent::__construct(
