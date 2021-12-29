@@ -9,7 +9,6 @@ use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable as ExtendedVariable;
 use PoP\GraphQLParser\Parser\Ast\Directive as ExtendedDirective;
 use PoP\GraphQLParser\Parser\Ast\Document;
 use PoP\GraphQLParser\Parser\Ast\LeafField as ExtendedLeafField;
-use PoP\GraphQLParser\Parser\Ast\MetaDirective;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
@@ -92,28 +91,5 @@ class Parser extends UpstreamParser implements ParserInterface
         Location $location,
     ): Directive {
         return new ExtendedDirective($name, $arguments, $location);
-    }
-
-    /**
-     * @todo Implement for MetaDirective
-     * @return Directive[]
-     */
-    protected function parseDirectiveList(): array
-    {
-        $directives = parent::parseDirectiveList();
-        return $directives;
-    }
-
-    /**
-     * @param Argument[] $arguments
-     * @param Directive[] $nestedDirectives
-     */
-    protected function createMetaDirective(
-        $name,
-        array $arguments,
-        array $nestedDirectives,
-        Location $location,
-    ): MetaDirective {
-        return new MetaDirective($name, $arguments, $nestedDirectives, $location);
     }
 }
