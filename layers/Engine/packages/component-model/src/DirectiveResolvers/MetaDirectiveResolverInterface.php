@@ -14,4 +14,8 @@ interface MetaDirectiveResolverInterface extends DirectiveResolverInterface
      * Eg: @foreach(affectDirectivesUnderPos: [1]) @translate
      */
     public function getAffectDirectivesUnderPosArgumentName(): string;
+    /**
+     * @return int[]|null
+     */
+    public function getAffectDirectivesUnderPosArgumentDefaultValue(): ?array;
 }

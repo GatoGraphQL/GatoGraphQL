@@ -62,17 +62,20 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
                 $directivePos++;
                 continue;
             }
+            /**
+             * Obtain the value from the "affect" argument.
+             * If not set, use the default value
+             */
             $affectDirectivesUnderPosArgument = $this->getAffectDirectivesUnderPosArgument($metaDirectiveResolver, $directive);
-            if ($affectDirectivesUnderPosArgument === null) {
-                $directivePos++;
-                continue;
-            }
-            $affectDirectivesUnderPositions = $this->getAffectDirectivesUnderPosArgumentValue(
-                $directive,
-                $affectDirectivesUnderPosArgument,
-                $directivePos,
-                $directiveCount,
-            );
+            $affectDirectivesUnderPositions = $affectDirectivesUnderPosArgument !== null ?
+                $this->getAffectDirectivesUnderPosArgumentValue(
+                        $directive,
+                        $affectDirectivesUnderPosArgument,
+                        $directivePos,
+                        $directiveCount,
+                )
+                : $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentDefaultValue();
+            
             foreach ($affectDirectivesUnderPositions as $affectDirectiveUnderPosition) {
                 $composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition] = $affectDirectiveUnderPosition;
             }

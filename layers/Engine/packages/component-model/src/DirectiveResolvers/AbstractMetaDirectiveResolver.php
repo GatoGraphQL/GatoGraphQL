@@ -33,6 +33,16 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         return 'affectDirectivesUnderPos';
     }
 
+    /**
+     * This array cannot be empty!
+     *
+     * @return int[]
+     */
+    public function getAffectDirectivesUnderPosArgumentDefaultValue(): array
+    {
+        return [1];
+    }
+
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
@@ -51,7 +61,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     public function getDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
     {
         return match ($directiveArgName) {
-            $this->getAffectDirectivesUnderPosArgumentName() => [1],
+            $this->getAffectDirectivesUnderPosArgumentName() => $this->getAffectDirectivesUnderPosArgumentDefaultValue(),
             default => parent::getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
         };
     }
