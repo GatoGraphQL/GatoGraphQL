@@ -47,7 +47,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
          * by indicating their relative position (as a negative int)
          * @var array<int, int>
          */
-        $composingMetaDirectivePosition = [];
+        $composingMetaDirectiveRelativePosition = [];
         $directiveCount = count($directives);
         $directivePos = 0;
         while ($directivePos < $directiveCount) {
@@ -74,7 +74,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
                 $directiveCount,
             );
             foreach ($affectDirectivesUnderPositions as $affectDirectiveUnderPosition) {
-                $composingMetaDirectivePosition[$directivePos + $affectDirectiveUnderPosition] = $affectDirectiveUnderPosition;
+                $composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition] = $affectDirectiveUnderPosition;
             }
             $directivePos++;
         }
@@ -96,14 +96,14 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         $directivePos = $directiveCount - 1;
         while ($directivePos >= 0) {
             $directive = $directives[$directivePos];
-            $nestedUnderMetaDirectiveInPosition = $composingMetaDirectivePosition[$directivePos] ?? null;
-            if ($nestedUnderMetaDirectiveInPosition === null) {
+            $nestedUnderMetaDirectiveInRelativePosition = $composingMetaDirectiveRelativePosition[$directivePos] ?? null;
+            if ($nestedUnderMetaDirectiveInRelativePosition === null) {
                 $directivesAndMetaDirectives[$directivePos] = $directive;
                 $directivePos--;
                 continue;
             }
             
-            $metaDirectivePos = $directivePos - $nestedUnderMetaDirectiveInPosition;
+            $metaDirectivePos = $directivePos - $nestedUnderMetaDirectiveInRelativePosition;
             if (!isset($directivesAndMetaDirectives[$metaDirectivePos])) {
                 $sourceDirective = $directives[$metaDirectivePos];
                 $directivesAndMetaDirectives[$metaDirectivePos] = $this->createMetaDirective(
