@@ -80,13 +80,13 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
             $affectDirectivesUnderPosArgument = $this->getAffectDirectivesUnderPosArgument($metaDirectiveResolver, $directive);
             $affectDirectivesUnderPositions = $affectDirectivesUnderPosArgument !== null ?
                 $this->getAffectDirectivesUnderPosArgumentValue(
-                        $directive,
-                        $affectDirectivesUnderPosArgument,
-                        $directivePos,
-                        $directiveCount,
+                    $directive,
+                    $affectDirectivesUnderPosArgument,
+                    $directivePos,
+                    $directiveCount,
                 )
                 : $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentDefaultValue();
-            
+
             foreach ($affectDirectivesUnderPositions as $affectDirectiveUnderPosition) {
                 $composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition] = $affectDirectiveUnderPosition;
             }
@@ -95,9 +95,9 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
 
         /**
          * Iterate from right to left, as to enable composable directives.
-         * 
+         *
          * Because we can have <directive1<directive2<directive3>>>, represented as:
-         * 
+         *
          *   @directive1(affect: [1]) @directive2(affect: [1]) @directive3
          *
          * then @directive3 must first be added under @directive2, and then this one
@@ -117,7 +117,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
                 $directivePos--;
                 continue;
             }
-            
+
             $metaDirectivePos = $directivePos - $nestedUnderMetaDirectiveInRelativePosition;
             if (!isset($metaDirectives[$metaDirectivePos])) {
                 $sourceDirective = $directives[$metaDirectivePos];
