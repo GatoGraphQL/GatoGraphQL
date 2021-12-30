@@ -17,7 +17,7 @@ class Directive extends UpstreamDirective
      */
     public function __construct(
         string $name,
-        array $arguments,
+        array $arguments = [],
         ?Location $location = null,
     ) {
         parent::__construct(
