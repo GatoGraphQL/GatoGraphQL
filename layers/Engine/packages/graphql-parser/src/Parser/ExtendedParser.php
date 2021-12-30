@@ -5,17 +5,20 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Parser;
 
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
+use PoP\ComponentModel\Error\ErrorProviderInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
+use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Parser\Ast\MetaDirective;
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Location;
-use PoP\GraphQLParser\ComponentConfiguration;
+use stdClass;
 
 class ExtendedParser extends Parser implements ExtendedParserInterface
 {
     private ?MetaDirectiveRegistryInterface $metaDirectiveRegistry = null;
+    private ?ErrorProviderInterface $errorProvider = null;
 
     final public function setMetaDirectiveRegistry(MetaDirectiveRegistryInterface $metaDirectiveRegistry): void
     {
@@ -24,6 +27,14 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
     final protected function getMetaDirectiveRegistry(): MetaDirectiveRegistryInterface
     {
         return $this->metaDirectiveRegistry ??= $this->instanceManager->getInstance(MetaDirectiveRegistryInterface::class);
+    }
+    final public function setErrorProvider(ErrorProviderInterface $errorProvider): void
+    {
+        $this->errorProvider = $errorProvider;
+    }
+    final protected function getErrorProvider(): ErrorProviderInterface
+    {
+        return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
     }
 
     /**
@@ -175,20 +186,14 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         }
 
         foreach ($argumentValue as $argumentValueItem) {
-            if (!is_int($argumentValueItem)) {
+            if (!is_int($argumentValueItem) || ((int)$argumentValueItem < 0)) {
                 throw new InvalidRequestException(
                     $this->getAffectedDirectivesUnderPosNotPositiveIntErrorMessage($directive, $argument, $argumentValueItem),
                     $argument->getLocation()
                 );
             }
-            $argumentValueItem = (int)$argumentValueItem;
-            if ($argumentValueItem <= 0) {
-                throw new InvalidRequestException(
-                    $this->getAffectedDirectivesUnderPosNotPositiveIntErrorMessage($directive, $argument, $argumentValueItem),
-                    $argument->getLocation()
-                );
-            }
-            if ($directivePos + $argumentValueItem > $directiveCount) {
+            $nestedDirectivePos = $directivePos + (int)$argumentValueItem;
+            if ($nestedDirectivePos > $directiveCount) {
                 throw new InvalidRequestException(
                     $this->getNoAffectedDirectiveUnderPosErrorMessage($directive, $argument, $argumentValueItem),
                     $argument->getLocation()
@@ -213,13 +218,15 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
     protected function getAffectedDirectivesUnderPosNotPositiveIntErrorMessage(
         Directive $directive,
         Argument $argument,
-        int $itemValue
+        mixed $itemValue
     ): string {
         return \sprintf(
-            $this->getTranslationAPI()->__('Argument \'%s\' in directive \'%s\' must be an array of positive integers, \'%s\' is not allowed', 'graphql-parser'),
+            $this->getTranslationAPI()->__('Argument \'%s\' in directive \'%s\' must be an array of positive integers, array item with value \'%s\' is not allowed', 'graphql-parser'),
             $argument->getName(),
             $directive->getName(),
-            $itemValue
+            is_array($itemValue) || ($itemValue instanceof stdClass)
+                ? $this->getErrorProvider()->jsonEncodeArrayOrStdClassValue($itemValue)
+                : $itemValue
         );
     }
 
