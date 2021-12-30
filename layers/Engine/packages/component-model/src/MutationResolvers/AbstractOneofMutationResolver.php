@@ -77,22 +77,26 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @return array<string,mixed>|stdClass
-     * @throws Exception If the form data for the input field is not present in the array
+     * @todo Review this commenting works for different oneof mutations
+     * eg: http://graphql-by-pop-pro.lndo.site/graphiql/?query=mutation%20LoginUser%20%7B%0A%20%20loginUser(by%3A%20%7Bcredentials%3A%20%7BusernameOrEmail%3A%20%22admin%22%2C%20password%3A%20%22admin%22%7D%7D)%20%7B%0A%20%20%20%20id%0A%20%20%20%20name%0A%20%20%7D%0A%7D&operationName=LoginUser&variables=%7B%0A%20%20%22authorID%22%3A%203%0A%7D
      */
-    protected function getInputFieldFormData(string $inputFieldName, stdClass $oneofInputObjectFormData): array|stdClass
-    {
-        $inputFieldFormData = $oneofInputObjectFormData->$inputFieldName ?? null;
-        if ($inputFieldFormData === null) {
-            throw new Exception(
-                sprintf(
-                    $this->getTranslationAPI()->__('There is not form data for input field with name \'%s\'', 'component-model'),
-                    $inputFieldName
-                )
-            );
-        }
-        return $inputFieldFormData;
-    }
+    // /**
+    //  * @return array<string,mixed>|stdClass
+    //  * @throws Exception If the form data for the input field is not present in the array
+    //  */
+    // protected function getInputFieldFormData(string $inputFieldName, stdClass $oneofInputObjectFormData): array|stdClass
+    // {
+    //     $inputFieldFormData = $oneofInputObjectFormData->$inputFieldName ?? null;
+    //     if ($inputFieldFormData === null) {
+    //         throw new Exception(
+    //             sprintf(
+    //                 $this->getTranslationAPI()->__('There is not form data for input field with name \'%s\'', 'component-model'),
+    //                 $inputFieldName
+    //             )
+    //         );
+    //     }
+    //     return $inputFieldFormData;
+    // }
 
     /**
      * Assume there's only one argument in the field,
@@ -100,10 +104,10 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * If that's not the case, this function must be overriden,
      * to avoid throwing an Exception
      *
-     * @return stdClass The current input field's form data
+     * @return string The current input field's name
      * @throws Exception If more than 1 argument is passed to the field executing the OneofMutation
      */
-    protected function getOneofInputObjectFormData(array $formData): stdClass
+    protected function getOneofInputObjectFieldName(array $formData): string
     {
         $formDataSize = count($formData);
         if ($formDataSize !== 1) {
@@ -115,8 +119,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
                 )
             );
         }
-        $fieldArgName = key($formData);
-        return $formData[$fieldArgName];
+        return key($formData);
     }
 
     final public function executeMutation(array $formData): mixed
@@ -140,10 +143,16 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      */
     final protected function getInputFieldMutationResolverAndFormData(array $formData): array
     {
-        $oneofInputObjectFormData = $this->getOneofInputObjectFormData($formData);
-        $inputFieldName = $this->getCurrentInputFieldName($oneofInputObjectFormData);
+        $inputFieldName = $this->getOneofInputObjectFieldName($formData);
+        /** @var stdClass */
+        $oneofInputObjectFormData = $formData[$inputFieldName];
         $inputFieldMutationResolver = $this->getInputFieldMutationResolver($inputFieldName);
-        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $oneofInputObjectFormData);
-        return [$inputFieldMutationResolver, $inputFieldFormData];
+        /**
+         * @todo Review this commenting works for different oneof mutations
+         * eg: http://graphql-by-pop-pro.lndo.site/graphiql/?query=mutation%20LoginUser%20%7B%0A%20%20loginUser(by%3A%20%7Bcredentials%3A%20%7BusernameOrEmail%3A%20%22admin%22%2C%20password%3A%20%22admin%22%7D%7D)%20%7B%0A%20%20%20%20id%0A%20%20%20%20name%0A%20%20%7D%0A%7D&operationName=LoginUser&variables=%7B%0A%20%20%22authorID%22%3A%203%0A%7D
+         */
+        // $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $oneofInputObjectFormData);
+        // return [$inputFieldMutationResolver, $inputFieldFormData];
+        return [$inputFieldMutationResolver, $oneofInputObjectFormData];
     }
 }
