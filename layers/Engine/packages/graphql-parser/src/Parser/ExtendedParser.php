@@ -74,7 +74,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
                 $directiveCount,
             );
             foreach ($affectDirectivesUnderPositions as $affectDirectiveUnderPosition) {
-                $composingMetaDirectivePosition[$directivePos + $affectDirectiveUnderPosition] = (int) (-1 * $affectDirectiveUnderPosition);
+                $composingMetaDirectivePosition[$directivePos + $affectDirectiveUnderPosition] = $affectDirectiveUnderPosition;
             }
             $directivePos++;
         }
@@ -103,7 +103,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
                 continue;
             }
             
-            $metaDirectivePos = $directivePos + $nestedUnderMetaDirectiveInPosition;
+            $metaDirectivePos = $directivePos - $nestedUnderMetaDirectiveInPosition;
             if (!isset($directivesAndMetaDirectives[$metaDirectivePos])) {
                 $sourceDirective = $directives[$metaDirectivePos];
                 $directivesAndMetaDirectives[$metaDirectivePos] = $this->createMetaDirective(
