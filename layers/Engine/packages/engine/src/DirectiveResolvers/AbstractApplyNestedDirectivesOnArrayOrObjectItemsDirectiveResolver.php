@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use GraphQLByPoP\GraphQLQuery\Schema\SchemaElements;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalMetaDirectiveResolver;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration;
 use PoP\Engine\Dataloading\Expressions;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
@@ -30,7 +27,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
 
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
-    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     final public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
     {
@@ -48,20 +44,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     {
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-    }
-    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
-    {
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
-    }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        $directiveArgNameTypeResolvers = [
-            SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS => $this->getIntScalarTypeResolver(),
-        ];
+        $directiveArgNameTypeResolvers = parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver);
         if (!ComponentConfiguration::enablePassingExpressionsByArgInNestedDirectives()) {
             return $directiveArgNameTypeResolvers;
         }
@@ -77,7 +63,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS => $this->getTranslationAPI()->__('Positions of the directives to be affected, relative from this one (as an array of positive integers)', 'graphql-server'),
             'addExpressions' => sprintf(
                 $this->getTranslationAPI()->__('Expressions to inject to the composed directive. The value of the affected field can be provided under special expression `%s`', 'component-model'),
                 QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
@@ -87,22 +72,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
             ),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
-        };
-    }
-
-    public function getDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
-    {
-        return match ($directiveArgName) {
-            SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS => [1],
-            default => parent::getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
-        };
-    }
-
-    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
-    {
-        return match ($directiveArgName) {
-            SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default => parent::getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
         };
     }
 

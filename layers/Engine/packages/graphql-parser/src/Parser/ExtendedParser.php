@@ -38,17 +38,21 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
 
         // Identify meta directives
         $metaDirectiveResolvers = $this->getMetaDirectiveRegistry()->getMetaDirectiveResolvers();
-        $metaDirectiveResolverNames = array_map(
-            fn(MetaDirectiveResolverInterface $metaDirectiveResolver) => $metaDirectiveResolver->getDirectiveName(),
-            $metaDirectiveResolvers
-        );
         $directiveCount = count($directives);
         $counter = 0;
         foreach ($directives as $directive) {
-            if (!in_array($directive->getName(), $metaDirectiveResolverNames)) {
+            $metaDirectiveResolver = null;
+            foreach ($metaDirectiveResolvers as $maybeMetaDirectiveResolver) {
+                if ($maybeMetaDirectiveResolver->getDirectiveName() !== $directive->getName()) {
+                    continue;
+                }
+                $metaDirectiveResolver = $maybeMetaDirectiveResolver;
+                break;
+            }
+            if ($metaDirectiveResolver === null) {
                 continue;
             }
-            $affectDirectivesUnderPosArgument = $this->getAffectDirectivesUnderPosArgument($directive);
+            $affectDirectivesUnderPosArgument = $this->getAffectDirectivesUnderPosArgument($metaDirectiveResolver, $directive);
             if ($affectDirectivesUnderPosArgument === null) {
                 continue;
             }
@@ -67,10 +71,12 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
     }
 
     protected function getAffectDirectivesUnderPosArgument(
-        Directive $directive
+        MetaDirectiveResolverInterface $metaDirectiveResolver,
+        Directive $directive,
     ): ?Argument {
+        $affectDirectivesUnderPosArgumentName = $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentName();
         foreach ($directive->getArguments() as $argument) {
-            if ($argument->getName() !== SchemaElements::DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS) {
+            if ($argument->getName() !== $affectDirectivesUnderPosArgumentName) {
                 continue;
             }
             return $argument;
