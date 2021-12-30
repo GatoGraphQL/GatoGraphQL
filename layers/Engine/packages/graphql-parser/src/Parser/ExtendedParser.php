@@ -52,12 +52,15 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
             if ($affectDirectivesUnderPosArgument === null) {
                 continue;
             }
-            $this->validateAffectDirectivesUnderPosArgument(
+            $affectDirectivesUnderPositions = $this->getAffectDirectivesUnderPosArgumentValue(
                 $directive,
                 $affectDirectivesUnderPosArgument,
                 $counter,
                 $directiveCount,
             );
+            foreach ($affectDirectivesUnderPositions as $affectDirectiveUnderPosition) {
+
+            }
             $counter++;
         }
         return $directives;
@@ -76,18 +79,19 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
     }
 
     /**
+     * @return int[]
      * @throws InvalidRequestException
      */
-    protected function validateAffectDirectivesUnderPosArgument(
+    protected function getAffectDirectivesUnderPosArgumentValue(
         Directive $directive,
         Argument $argument,
         int $directivePos,
         int $directiveCount,
-    ): void {
+    ): array {
         $argumentValue = $argument->getValue()->getValue();
         if ($argumentValue === null) {
             throw new InvalidRequestException(
-                $this->getAffectedDirectivesUnderPosNotNullErrorMessage($directive, $argument),
+                $this->getAffectedDirectivesUnderPosNotEmptyErrorMessage($directive, $argument),
                 $argument->getLocation()
             );
         }
@@ -97,7 +101,20 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
             $argumentValue = [$argumentValue];
         }
 
+        if ($argumentValue === []) {
+            throw new InvalidRequestException(
+                $this->getAffectedDirectivesUnderPosNotEmptyErrorMessage($directive, $argument),
+                $argument->getLocation()
+            );
+        }
+
         foreach ($argumentValue as $argumentValueItem) {
+            if (!is_int($argumentValueItem)) {
+                throw new InvalidRequestException(
+                    $this->getAffectedDirectivesUnderPosNotPositiveIntErrorMessage($directive, $argument, $argumentValueItem),
+                    $argument->getLocation()
+                );
+            }
             $argumentValueItem = (int)$argumentValueItem;
             if ($argumentValueItem <= 0) {
                 throw new InvalidRequestException(
@@ -112,14 +129,16 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
                 );
             }
         }
+
+        return $argumentValue;
     }
 
-    protected function getAffectedDirectivesUnderPosNotNullErrorMessage(
+    protected function getAffectedDirectivesUnderPosNotEmptyErrorMessage(
         Directive $directive,
         Argument $argument
     ): string {
         return \sprintf(
-            $this->getTranslationAPI()->__('Argument \'%s\' in directive \'%s\' cannot be null', 'graphql-parser'),
+            $this->getTranslationAPI()->__('Argument \'%s\' in directive \'%s\' cannot be null or empty', 'graphql-parser'),
             $argument->getName(),
             $directive->getName()
         );
