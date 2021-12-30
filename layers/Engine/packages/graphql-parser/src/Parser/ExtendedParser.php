@@ -193,7 +193,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
                 );
             }
             $nestedDirectivePos = $directivePos + (int)$argumentValueItem;
-            if ($nestedDirectivePos > $directiveCount) {
+            if ($nestedDirectivePos >= $directiveCount) {
                 throw new InvalidRequestException(
                     $this->getNoAffectedDirectiveUnderPosErrorMessage($directive, $argument, $argumentValueItem),
                     $argument->getLocation()
