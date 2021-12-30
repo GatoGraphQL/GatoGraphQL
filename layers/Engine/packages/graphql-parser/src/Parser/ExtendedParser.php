@@ -35,7 +35,6 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
     protected function parseDirectiveList(): array
     {
         $directives = parent::parseDirectiveList();
-
         if (!ComponentConfiguration::enableComposableDirectives()) {
             return $directives;
         }
@@ -99,7 +98,10 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
             $directive = $directives[$directivePos];
             $nestedUnderMetaDirectiveInRelativePosition = $composingMetaDirectiveRelativePosition[$directivePos] ?? null;
             if ($nestedUnderMetaDirectiveInRelativePosition === null) {
-                $directivesAndMetaDirectives[$directivePos] = $directive;
+                // MetaDirectives are already set in the code below, don't override them!
+                if (!isset($directivesAndMetaDirectives[$directivePos])) {
+                    $directivesAndMetaDirectives[$directivePos] = $directive;
+                }
                 $directivePos--;
                 continue;
             }
