@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
+use PoP\GraphQLParser\Parser\Ast\Directive as ExtendedDirective;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
+use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class MetaDirective extends Directive
+class MetaDirective extends ExtendedDirective
 {
     /**
      * @param Directive[] $nestedDirectives
