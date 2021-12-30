@@ -54,4 +54,9 @@ class MetaDirective extends ExtendedDirective
     {
         $this->nestedDirectives[] = $nestedDirective;
     }
+
+    public function prependNestedDirective(Directive $nestedDirective): void
+    {
+        array_unshift($this->nestedDirectives, $nestedDirective);
+    }
 }
