@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Error;
 
+use stdClass;
+
 interface ErrorProviderInterface
 {
     /**
@@ -60,4 +62,5 @@ interface ErrorProviderInterface
      * @param Error[] $nestedErrors
      */
     public function getNestedErrorsFieldError(array $nestedErrors, string $fieldName): Error;
+    public function jsonEncodeArrayOrStdClassValue(array|stdClass $value): string;
 }
