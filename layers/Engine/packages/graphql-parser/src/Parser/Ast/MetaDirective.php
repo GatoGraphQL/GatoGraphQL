@@ -47,4 +47,9 @@ class MetaDirective extends Directive
     {
         $this->nestedDirectives = $nestedDirectives;
     }
+
+    public function addNestedDirective(Directive $nestedDirective): void
+    {
+        $this->nestedDirectives[] = $nestedDirective;
+    }
 }

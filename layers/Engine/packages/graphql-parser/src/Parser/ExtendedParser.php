@@ -12,6 +12,7 @@ use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Location;
+use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
 
 class ExtendedParser extends Parser implements ExtendedParserInterface
 {
@@ -36,10 +37,19 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
     {
         $directives = parent::parseDirectiveList();
 
-        // Identify meta directives
+        if (!ComponentConfiguration::enableComposableDirectives()) {
+            return $directives;
+        }
+
         $metaDirectiveResolvers = $this->getMetaDirectiveRegistry()->getMetaDirectiveResolvers();
+        /**
+         * For each directive, indicate which meta-directive is composing it
+         * by indicating their relative position (as a negative int)
+         * @var array<int, int>
+         */
+        $composingMetaDirectivePosition = [];
         $directiveCount = count($directives);
-        $counter = 0;
+        $directivePos = 0;
         foreach ($directives as $directive) {
             $metaDirectiveResolver = null;
             foreach ($metaDirectiveResolvers as $maybeMetaDirectiveResolver) {
@@ -59,15 +69,56 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
             $affectDirectivesUnderPositions = $this->getAffectDirectivesUnderPosArgumentValue(
                 $directive,
                 $affectDirectivesUnderPosArgument,
-                $counter,
+                $directivePos,
                 $directiveCount,
             );
             foreach ($affectDirectivesUnderPositions as $affectDirectiveUnderPosition) {
-
+                $composingMetaDirectivePosition[$directivePos + $affectDirectiveUnderPosition] = (int) (-1 * $affectDirectiveUnderPosition);
             }
-            $counter++;
+            $directivePos++;
         }
-        return $directives;
+
+        /**
+         * Iterate from right to left, as to enable composable directives.
+         * 
+         * Because we can have <directive1<directive2<directive3>>>, represented as:
+         * 
+         *   @directive1(affect: [1]) @directive2(affect: [1]) @directive3
+         *
+         * then @directive3 must first be added under @directive2, and then this one
+         * must be added under @directive1.
+         *
+         * If we iterated from left to right, @directive3 would not be added under
+         * @directive1=>@directive2
+         */
+        $directivesAndMetaDirectives = [];
+        $directivePos = $directiveCount - 1;
+        foreach (array_reverse($directives) as $directive) {
+            $nestedUnderMetaDirectiveInPosition = $composingMetaDirectivePosition[$directivePos] ?? null;
+            if ($nestedUnderMetaDirectiveInPosition === null) {
+                $directivesAndMetaDirectives[$directivePos] = $directive;
+                $directivePos--;
+                continue;
+            }
+            
+            $metaDirectivePos = $directivePos + $nestedUnderMetaDirectiveInPosition;
+            if (!isset($directivesAndMetaDirectives[$metaDirectivePos])) {
+                $sourceDirective = $directives[$metaDirectivePos];
+                $directivesAndMetaDirectives[$metaDirectivePos] = $this->createMetaDirective(
+                    $sourceDirective->getName(),
+                    $sourceDirective->getArguments(),
+                    [],
+                    $sourceDirective->getLocation()
+                );
+            }
+            /** @var MetaDirective */
+            $metaDirective = $directivesAndMetaDirectives[$metaDirectivePos];
+            $metaDirective->addNestedDirective($directive);
+            $directivePos--;
+        }
+
+        // Remove the empty slots from those directives which were added under some metaDirective
+        return array_values($directivesAndMetaDirectives);
     }
 
     protected function getAffectDirectivesUnderPosArgument(
