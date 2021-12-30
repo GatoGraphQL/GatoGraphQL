@@ -50,7 +50,8 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         $composingMetaDirectivePosition = [];
         $directiveCount = count($directives);
         $directivePos = 0;
-        foreach ($directives as $directive) {
+        while ($directivePos < $directiveCount) {
+            $directive = $directives[$directivePos];
             $metaDirectiveResolver = null;
             foreach ($metaDirectiveResolvers as $maybeMetaDirectiveResolver) {
                 if ($maybeMetaDirectiveResolver->getDirectiveName() !== $directive->getName()) {
@@ -93,7 +94,8 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
          */
         $directivesAndMetaDirectives = [];
         $directivePos = $directiveCount - 1;
-        foreach (array_reverse($directives) as $directive) {
+        while ($directivePos >= 0) {
+            $directive = $directives[$directivePos];
             $nestedUnderMetaDirectiveInPosition = $composingMetaDirectivePosition[$directivePos] ?? null;
             if ($nestedUnderMetaDirectiveInPosition === null) {
                 $directivesAndMetaDirectives[$directivePos] = $directive;
