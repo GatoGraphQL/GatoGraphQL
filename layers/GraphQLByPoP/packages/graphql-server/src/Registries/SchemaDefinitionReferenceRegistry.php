@@ -5,15 +5,13 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Registries;
 
 use Exception;
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
-use GraphQLByPoP\GraphQLQuery\Schema\SchemaElements;
+use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
-use PoP\API\Schema\SchemaDefinitionHelpers as APISchemaDefinitionHelpers;
 use PoP\API\Schema\SchemaDefinitionServiceInterface;
 use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
@@ -215,7 +213,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $addVersionToGraphQLSchemaFieldDescription = ComponentConfiguration::addVersionToGraphQLSchemaFieldDescription();
         // When doing nested mutations, differentiate mutating fields by adding label "[Mutation]" in the description
         $addMutationLabelToSchemaFieldDescription = $enableNestedMutations;
-        $enableComposableDirectives = GraphQLQueryComponentConfiguration::enableComposableDirectives();
+        $enableComposableDirectives = GraphQLParserComponentConfiguration::enableComposableDirectives();
 
         // Modify the schema definitions
         // 1. Global fields and directives

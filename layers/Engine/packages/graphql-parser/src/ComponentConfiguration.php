@@ -12,6 +12,7 @@ class ComponentConfiguration
     use ComponentConfigurationTrait;
 
     private static bool $enableMultipleQueryExecution = false;
+    private static bool $enableComposableDirectives = false;
 
     /**
      * Disable hook, because it is invoked by `export-directive`
@@ -26,6 +27,24 @@ class ComponentConfiguration
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function enableComposableDirectives(): bool
+    {
+        // Define properties
+        $envVariable = Environment::ENABLE_COMPOSABLE_DIRECTIVES;
+        $selfProperty = &self::$enableComposableDirectives;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
         self::maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,

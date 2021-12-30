@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
+use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 use stdClass;

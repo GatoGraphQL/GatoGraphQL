@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
+use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;

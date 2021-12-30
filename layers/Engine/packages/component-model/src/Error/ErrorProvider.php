@@ -85,7 +85,7 @@ class ErrorProvider implements ErrorProviderInterface
      *
      * @param mixed[] $value
      */
-    protected function jsonEncodeArrayOrStdClassValue(array|stdClass $value): string
+    public function jsonEncodeArrayOrStdClassValue(array|stdClass $value): string
     {
         return mb_strimwidth(
             json_encode($value),
