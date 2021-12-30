@@ -90,21 +90,6 @@ class ErrorProvider implements ErrorProviderInterface
     }
 
     /**
-     * Encode the array, and trim to 500 chars max
-     *
-     * @param mixed[] $value
-     */
-    public function jsonEncodeArrayOrStdClassValue(array|stdClass $value): string
-    {
-        return mb_strimwidth(
-            json_encode($value),
-            0,
-            500,
-            $this->getTranslationAPI()->__('...', 'component-model')
-        );
-    }
-
-    /**
      * Return an error to indicate that a non-array field is returning an array value
      */
     public function getMustNotBeArrayFieldError(string $fieldName, array $value): Error

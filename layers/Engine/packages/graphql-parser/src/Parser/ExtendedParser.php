@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Parser;
 
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
-use PoP\ComponentModel\Error\ErrorProviderInterface;
+use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Parser\Ast\MetaDirective;
@@ -18,7 +18,7 @@ use stdClass;
 class ExtendedParser extends Parser implements ExtendedParserInterface
 {
     private ?MetaDirectiveRegistryInterface $metaDirectiveRegistry = null;
-    private ?ErrorProviderInterface $errorProvider = null;
+    private ?ErrorServiceInterface $errorProvider = null;
 
     final public function setMetaDirectiveRegistry(MetaDirectiveRegistryInterface $metaDirectiveRegistry): void
     {
@@ -28,13 +28,13 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
     {
         return $this->metaDirectiveRegistry ??= $this->instanceManager->getInstance(MetaDirectiveRegistryInterface::class);
     }
-    final public function setErrorProvider(ErrorProviderInterface $errorProvider): void
+    final public function setErrorService(ErrorServiceInterface $errorProvider): void
     {
         $this->errorProvider = $errorProvider;
     }
-    final protected function getErrorProvider(): ErrorProviderInterface
+    final protected function getErrorService(): ErrorServiceInterface
     {
-        return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
+        return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
     }
 
     /**
@@ -225,7 +225,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
             $argument->getName(),
             $directive->getName(),
             is_array($itemValue) || ($itemValue instanceof stdClass)
-                ? $this->getErrorProvider()->jsonEncodeArrayOrStdClassValue($itemValue)
+                ? $this->getErrorService()->jsonEncodeArrayOrStdClassValue($itemValue)
                 : $itemValue
         );
     }
