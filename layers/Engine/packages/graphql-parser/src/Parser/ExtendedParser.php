@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser;
 
-use GraphQLByPoP\GraphQLQuery\Schema\SchemaElements;
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
 use PoP\GraphQLParser\Parser\Ast\MetaDirective;
@@ -12,7 +11,7 @@ use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Location;
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
+use PoP\GraphQLParser\ComponentConfiguration;
 
 class ExtendedParser extends Parser implements ExtendedParserInterface
 {

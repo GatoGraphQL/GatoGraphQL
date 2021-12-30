@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLQuery\Schema;
 
 use Exception;
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
+use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
 use InvalidArgumentException;
 use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -13,6 +13,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
+use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
 use PoP\GraphQLParser\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Parser\ExtendedParserInterface;
 use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
@@ -179,7 +180,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
          */
         if (
             $value instanceof VariableReference &&
-            ComponentConfiguration::enableVariablesAsExpressions() &&
+            GraphQLQueryComponentConfiguration::enableVariablesAsExpressions() &&
             $this->treatVariableAsExpression($value->getName())
         ) {
             /**
@@ -270,7 +271,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
          * In this case, "_affectDirectivesUnderPos" indicates the relative position from the meta-directive
          * to its nested/affected directive.
          */
-        $enableComposableDirectives = ComponentConfiguration::enableComposableDirectives();
+        $enableComposableDirectives = GraphQLParserComponentConfiguration::enableComposableDirectives();
         /**
          * Comment 29/12: Move the param, from "nestedUnder" under the directive
          * to "_affectDirectivesUnderPos" under the meta-directive. For simplicity, bridge the new
