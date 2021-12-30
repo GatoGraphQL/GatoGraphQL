@@ -95,24 +95,22 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
          * If we iterated from left to right, @directive3 would not be added under
          * @directive1=>@directive2
          */
-        $directivesAndMetaDirectives = [];
+        $rootDirectivePositions = [];
+        $metaDirectives = [];
         $directivePos = $directiveCount - 1;
         while ($directivePos >= 0) {
-            $directive = $directives[$directivePos];
+            $directive = $metaDirectives[$directivePos] ?? $directives[$directivePos];
             $nestedUnderMetaDirectiveInRelativePosition = $composingMetaDirectiveRelativePosition[$directivePos] ?? null;
             if ($nestedUnderMetaDirectiveInRelativePosition === null) {
-                // MetaDirectives are already set in the code below, don't override them!
-                if (!isset($directivesAndMetaDirectives[$directivePos])) {
-                    $directivesAndMetaDirectives[$directivePos] = $directive;
-                }
+                $rootDirectivePositions[] = $directivePos;
                 $directivePos--;
                 continue;
             }
             
             $metaDirectivePos = $directivePos - $nestedUnderMetaDirectiveInRelativePosition;
-            if (!isset($directivesAndMetaDirectives[$metaDirectivePos])) {
+            if (!isset($metaDirectives[$metaDirectivePos])) {
                 $sourceDirective = $directives[$metaDirectivePos];
-                $directivesAndMetaDirectives[$metaDirectivePos] = $this->createMetaDirective(
+                $metaDirectives[$metaDirectivePos] = $this->createMetaDirective(
                     $sourceDirective->getName(),
                     $sourceDirective->getArguments(),
                     [],
@@ -120,13 +118,16 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
                 );
             }
             /** @var MetaDirective */
-            $metaDirective = $directivesAndMetaDirectives[$metaDirectivePos];
+            $metaDirective = $metaDirectives[$metaDirectivePos];
             $metaDirective->addNestedDirective($directive);
             $directivePos--;
         }
 
-        // Remove the empty slots from those directives which were added under some metaDirective
-        return array_values($directivesAndMetaDirectives);
+        $rootDirectives = [];
+        foreach ($rootDirectivePositions as $rootDirectivePosition) {
+            $rootDirectives[] = $metaDirectives[$rootDirectivePosition] ?? $directives[$rootDirectivePosition];
+        }
+        return $rootDirectives;
     }
 
     protected function getAffectDirectivesUnderPosArgument(
