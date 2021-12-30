@@ -221,7 +221,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         mixed $itemValue
     ): string {
         return \sprintf(
-            $this->getTranslationAPI()->__('Argument \'%s\' in directive \'%s\' must be an array of positive integers, array item with value \'%s\' is not allowed', 'graphql-parser'),
+            $this->getTranslationAPI()->__('Argument \'%s\' in directive \'%s\' must be an array of positive integers, array item \'%s\' is not allowed', 'graphql-parser'),
             $argument->getName(),
             $directive->getName(),
             is_array($itemValue) || ($itemValue instanceof stdClass)
