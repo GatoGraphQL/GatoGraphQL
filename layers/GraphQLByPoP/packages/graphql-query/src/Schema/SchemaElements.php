@@ -11,7 +11,7 @@ class SchemaElements
      * are being nested, by indicating their relative position
      * to the meta-directive.
      *
-     * Eg: @foreach(_affectDirectivesUnderPos: [1]) @translate
+     * Eg: @foreach(affectDirectivesUnderPos: [1]) @translate
      */
-    const DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS = '_affectDirectivesUnderPos';
+    const DIRECTIVE_PARAM_AFFECT_DIRECTIVES_UNDER_POS = 'affectDirectivesUnderPos';
 }
