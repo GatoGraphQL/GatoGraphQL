@@ -60,10 +60,12 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
                 break;
             }
             if ($metaDirectiveResolver === null) {
+                $directivePos++;
                 continue;
             }
             $affectDirectivesUnderPosArgument = $this->getAffectDirectivesUnderPosArgument($metaDirectiveResolver, $directive);
             if ($affectDirectivesUnderPosArgument === null) {
+                $directivePos++;
                 continue;
             }
             $affectDirectivesUnderPositions = $this->getAffectDirectivesUnderPosArgumentValue(
