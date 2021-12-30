@@ -130,7 +130,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
             }
             /** @var MetaDirective */
             $metaDirective = $metaDirectives[$metaDirectivePos];
-            $metaDirective->addNestedDirective($directive);
+            $metaDirective->prependNestedDirective($directive);
             $directivePos--;
         }
 
