@@ -186,7 +186,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         }
 
         foreach ($argumentValue as $argumentValueItem) {
-            if (!is_int($argumentValueItem) || ((int)$argumentValueItem < 0)) {
+            if (!is_int($argumentValueItem) || ((int)$argumentValueItem <= 0)) {
                 throw new InvalidRequestException(
                     $this->getAffectedDirectivesUnderPosNotPositiveIntErrorMessage($directive, $argument, $argumentValueItem),
                     $argument->getLocation()
