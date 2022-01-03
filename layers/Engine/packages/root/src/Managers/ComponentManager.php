@@ -13,7 +13,7 @@ class ComponentManager
      * @var string[]
      */
     private static array $components = [];
-    
+
     /**
      * Reset the state. Called during PHPUnit testing.
      */

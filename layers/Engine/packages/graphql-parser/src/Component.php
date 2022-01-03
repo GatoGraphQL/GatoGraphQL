@@ -38,7 +38,7 @@ class Component extends AbstractComponent
         ComponentConfiguration::setConfiguration($configuration);
         self::initServices(dirname(__DIR__));
     }
-    
+
     /**
      * Reset the state. Called during PHPUnit testing.
      */

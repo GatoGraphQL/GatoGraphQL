@@ -10,7 +10,7 @@ namespace PoP\Root\Component;
 abstract class AbstractComponent implements ComponentInterface
 {
     use InitializeContainerServicesInComponentTrait;
-    
+
     /**
      * Reset the state. Called during PHPUnit testing.
      */

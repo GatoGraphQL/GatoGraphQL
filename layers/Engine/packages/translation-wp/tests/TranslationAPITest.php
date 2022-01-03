@@ -19,7 +19,7 @@ class TranslationAPITest extends AbstractTestCase
          * @todo Set-up WordPress for testing, then restore
          */
         return;
-        
+
         $translationapi = TranslationAPIFacade::getInstance();
         $this->assertEquals(
             'There is no translation for this yet, sorry!',
