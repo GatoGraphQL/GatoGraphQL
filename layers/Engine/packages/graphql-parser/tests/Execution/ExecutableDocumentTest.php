@@ -29,8 +29,6 @@ class ExecutableDocumentTest extends AbstractIntegrationTestCase
      */
     public function testMultipleQueryExecution(): void
     {
-        self::bootKernel();
-        
         $parser = new Parser();
         $document = $parser->parse('
             query One {

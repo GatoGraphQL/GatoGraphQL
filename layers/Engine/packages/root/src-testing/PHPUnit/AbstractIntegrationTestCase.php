@@ -33,14 +33,13 @@ abstract class AbstractIntegrationTestCase extends TestCase
         self::$container = ContainerBuilderFactory::getInstance();;
         self::$booted = true;
     }
-    
-    /**
-     * Boots the Kernel for this test.
-     */
-    protected static function bootKernel(array $options = []): void
+
+    protected function setUp(): void
     {
+        parent::setUp();
+
         if (!self::$booted) {
-            self::initializeContainer($options);
+            self::initializeContainer();
         }
     }
 
