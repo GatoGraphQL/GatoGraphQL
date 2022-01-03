@@ -59,6 +59,7 @@ includes:
     - layers/GraphQLByPoP/packages/graphql-server/phpstan.neon.dist
     - layers/Engine/packages/guzzle-helpers/phpstan.neon.dist
     - layers/Engine/packages/hooks/phpstan.neon.dist
+    - layers/Engine/packages/hooks-php/phpstan.neon.dist
     - layers/Engine/packages/hooks-wp/phpstan.neon.dist
     - layers/Engine/packages/loosecontracts/phpstan.neon.dist
     - layers/Engine/packages/mandatory-directives-by-configuration/phpstan.neon.dist
