@@ -11,6 +11,7 @@ namespace PoP\Root\Testing\PHPUnit;
 use PHPUnit\Framework\TestCase;
 use PoP\Engine\AppLoader;
 use PoP\Root\Container\ContainerBuilderFactory;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Contracts\Service\ResetInterface;
@@ -20,23 +21,14 @@ use Symfony\Contracts\Service\ResetInterface;
  */
 abstract class KernelTestCase extends TestCase
 {
-    protected static $booted = false;
-
-    private static ?ContainerInterface $kernelContainer = null;
-
-    protected function tearDown(): void
-    {
-        static::ensureKernelShutdown();
-        static::$booted = false;
-    }
+    private static bool $booted = false;
+    private static ?ContainerInterface $container = null;
 
     /**
      * Boots the Kernel for this test.
      */
-    protected static function bootKernel(array $options = []): void
+    private static final function initializeContainer(array $options = []): void
     {
-        static::ensureKernelShutdown();
-
         $componentClasses = [
             \PoP\GraphQLParser\Component::class,
         ];
@@ -44,9 +36,18 @@ abstract class KernelTestCase extends TestCase
         AppLoader::bootSystem(false, null, null, true);
         AppLoader::bootApplication(false, null, null, true);
 
-        static::$booted = true;
-
-        self::$kernelContainer = ContainerBuilderFactory::getInstance();
+        self::$container = ContainerBuilderFactory::getInstance();;
+        self::$booted = true;
+    }
+    
+    /**
+     * Boots the Kernel for this test.
+     */
+    protected static function bootKernel(array $options = []): void
+    {
+        if (!self::$booted) {
+            self::initializeContainer($options);
+        }
     }
 
     /**
@@ -60,27 +61,13 @@ abstract class KernelTestCase extends TestCase
     protected static function getContainer(): ContainerInterface
     {
         if (!static::$booted) {
-            static::bootKernel();
+            self::initializeContainer();
         }
 
         try {
-            return self::$kernelContainer->get('test.service_container');
+            return self::$container->get('test.service_container');
         } catch (ServiceNotFoundException $e) {
             throw new \LogicException('Could not find service "test.service_container". Try updating the "framework.test" config to "true".', 0, $e);
         }
-    }
-
-    /**
-     * Shuts the kernel down if it was used in the test - called by the tearDown method by default.
-     */
-    protected static function ensureKernelShutdown()
-    {
-        static::$booted = false;
-
-        if (self::$kernelContainer instanceof ResetInterface) {
-            self::$kernelContainer->reset();
-        }
-
-        self::$kernelContainer = null;
     }
 }
