@@ -22,15 +22,20 @@ abstract class AbstractIntegrationTestCase extends TestCase
      */
     private static final function initializeContainer(): void
     {
-        $componentClasses = [
-            \PoP\GraphQLParser\Component::class,
-        ];
+        $componentClasses = static::getDependedComponentClasses();
         AppLoader::addComponentClassesToInitialize($componentClasses);
         AppLoader::bootSystem(false, null, null, true);
         AppLoader::bootApplication(false, null, null, true);
 
         self::$container = ContainerBuilderFactory::getInstance();;
     }
+
+    /**
+     * Classes from PoP components that must be initialized before this component
+     *
+     * @return string[]
+     */
+    abstract protected static function getDependedComponentClasses(): array;
 
     protected function setUp(): void
     {
