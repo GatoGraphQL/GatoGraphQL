@@ -9,7 +9,7 @@
 namespace PoP\Root\Testing\PHPUnit;
 
 use PHPUnit\Framework\TestCase;
-use PoP\Engine\AppLoader;
+use PoP\Root\AppLoader;
 use PoP\Root\Container\ContainerBuilderFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -20,11 +20,23 @@ abstract class AbstractIntegrationTestCase extends TestCase
     protected static final function initializeContainer(): void
     {
         $componentClasses = static::getDependedComponentClasses();
-        AppLoader::addComponentClassesToInitialize($componentClasses);
-        AppLoader::bootSystem(false, null, null, true);
-        AppLoader::bootApplication(false, null, null, true);
-
+        static::initializeAppLoader($componentClasses, false, null, null, true);
         static::$container = ContainerBuilderFactory::getInstance();;
+    }
+
+    /**
+     * @param string[] $componentClasses
+     */
+    protected static function initializeAppLoader(
+        array $componentClasses,
+        ?bool $cacheContainerConfiguration = null,
+        ?string $containerNamespace = null,
+        ?string $containerDirectory = null,
+        bool $isDev = false
+    ): void {
+        AppLoader::addComponentClassesToInitialize($componentClasses);
+        AppLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
+        AppLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
     }
 
     /**
