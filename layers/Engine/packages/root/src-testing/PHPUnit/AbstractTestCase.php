@@ -12,35 +12,35 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class AbstractTestCase extends TestCase
 {
-    private static ?ContainerInterface $container = null;
+    private ?ContainerInterface $container = null;
 
-    protected static final function initializeContainer(): void
+    protected final function initializeContainer(): void
     {
-        $componentClass = static::getComponentClass();
-        static::initializeAppLoader($componentClass, false, null, null, true);
-        static::$container = ContainerBuilderFactory::getInstance();
+        $componentClass = $this->getComponentClass();
+        $this->initializeAppLoader($componentClass, false, null, null, true);
+        $this->container = ContainerBuilderFactory::getInstance();
     }
 
-    protected static function getAppLoaderClass(): string
+    protected function getAppLoaderClass(): string
     {
         return AppLoader::class;
     }
 
-    protected static function initializeAppLoader(
+    protected function initializeAppLoader(
         string $componentClass,
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
         ?string $containerDirectory = null,
         bool $isDev = false
     ): void {
-        $appLoader = static::getAppLoaderClass();
+        $appLoader = $this->getAppLoaderClass();
         $appLoader::addComponentClassesToInitialize([$componentClass]);
         $appLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
         $appLoader::addComponentClassConfiguration(
-            static::getComponentClassConfiguration()
+            $this->getComponentClassConfiguration()
         );
         
         $appLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
@@ -51,7 +51,7 @@ abstract class AbstractTestCase extends TestCase
      *
      * @return array<string, mixed> [key]: Component class, [value]: Configuration
      */
-    protected static function getComponentClassConfiguration(): array
+    protected function getComponentClassConfiguration(): array
     {
         return [];
     }
@@ -60,7 +60,7 @@ abstract class AbstractTestCase extends TestCase
      * Package's Component class, of type ComponentInterface.
      * By standard, it is "NamespaceOwner\Project\Component::class"
      */
-    protected static function getComponentClass(): string
+    protected function getComponentClass(): string
     {
         $class = \get_called_class();
         $parts = \explode('\\', $class);
@@ -80,8 +80,8 @@ abstract class AbstractTestCase extends TestCase
     {
         parent::setUp();
 
-        if (static::$container === null) {
-            static::initializeContainer();
+        if ($this->container === null) {
+            $this->initializeContainer();
         }
     }
 
@@ -90,8 +90,8 @@ abstract class AbstractTestCase extends TestCase
         parent::tearDown();
 
         if (!$this->keepContainerAcrossTests()) {
-            static::$container = null;
-            $appLoader = static::getAppLoaderClass();
+            $this->container = null;
+            $appLoader = $this->getAppLoaderClass();
             $appLoader::reset();
         }
     }
@@ -101,8 +101,8 @@ abstract class AbstractTestCase extends TestCase
         return false;
     }
 
-    protected static function getService(string $service): mixed
+    protected function getService(string $service): mixed
     {
-        return static::$container->get($service);
+        return $this->container->get($service);
     }
 }

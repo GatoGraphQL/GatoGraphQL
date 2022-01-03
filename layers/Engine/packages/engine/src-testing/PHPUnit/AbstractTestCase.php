@@ -9,7 +9,7 @@ use PoP\Root\Testing\PHPUnit\AbstractTestCase as UpstreamAbstractTestCase;
 
 abstract class AbstractTestCase extends UpstreamAbstractTestCase
 {
-    protected static function getAppLoaderClass(): string
+    protected function getAppLoaderClass(): string
     {
         return AppLoader::class;
     }
