@@ -8,6 +8,7 @@
 
 namespace PoP\Root\Testing\PHPUnit;
 
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use PoP\Root\AppLoader;
 use PoP\Root\Container\ContainerBuilderFactory;
@@ -40,9 +41,24 @@ abstract class AbstractIntegrationTestCase extends TestCase
     }
 
     /**
-     * Package's Component class, of type ComponentInterface
+     * Package's Component class, of type ComponentInterface.
+     * By standard, it is "NamespaceOwner\Project\Component::class"
      */
-    abstract protected static function getComponentClass(): string;
+    protected static function getComponentClass(): string
+    {
+        $class = \get_called_class();
+        $parts = \explode('\\', $class);
+        if (\count($parts) < 3) {
+            throw new LogicException(
+                sprintf(
+                    'Could not deduce the package Component class from "%s". Must override function "%s"?',
+                    $class,
+                    __FUNCTION__
+                )
+            );
+        }
+        return '\\' . $parts[0] . '\\' . $parts[1] . '\\Component';
+    }
 
     protected function setUp(): void
     {

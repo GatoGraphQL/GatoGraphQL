@@ -17,16 +17,6 @@ use PoPBackbone\GraphQLParser\Parser\Parser;
 class ExecutableDocumentTest extends AbstractIntegrationTestCase
 {
     /**
-     * Classes from PoP components that must be initialized before this component
-     *
-     * @return string[]
-     */
-    protected static function getComponentClass(): string
-    {
-        return \PoP\GraphQLParser\Component::class;
-    }
-
-    /**
      * Commented test, since it produces error:
      *
      * > Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException: You have requested a non-existent service "PoP\GraphQLParser\Query\QueryAugmenterServiceInterface".
