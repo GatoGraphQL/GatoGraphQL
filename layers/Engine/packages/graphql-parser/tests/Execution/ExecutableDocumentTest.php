@@ -21,11 +21,9 @@ class ExecutableDocumentTest extends AbstractIntegrationTestCase
      *
      * @return string[]
      */
-    protected static function getDependedComponentClasses(): array
+    protected static function getComponentClass(): string
     {
-        return [
-            \PoP\GraphQLParser\Component::class,
-        ];
+        return \PoP\GraphQLParser\Component::class;
     }
 
     /**

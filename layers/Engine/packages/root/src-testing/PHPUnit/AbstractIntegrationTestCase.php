@@ -19,32 +19,30 @@ abstract class AbstractIntegrationTestCase extends TestCase
 
     protected static final function initializeContainer(): void
     {
-        $componentClasses = static::getDependedComponentClasses();
-        static::initializeAppLoader($componentClasses, false, null, null, true);
-        static::$container = ContainerBuilderFactory::getInstance();;
+        $componentClass = static::getComponentClass();
+        static::initializeAppLoader($componentClass, false, null, null, true);
+        static::$container = ContainerBuilderFactory::getInstance();
     }
 
     /**
      * @param string[] $componentClasses
      */
     protected static function initializeAppLoader(
-        array $componentClasses,
+        string $componentClass,
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
         ?string $containerDirectory = null,
         bool $isDev = false
     ): void {
-        AppLoader::addComponentClassesToInitialize($componentClasses);
+        AppLoader::addComponentClassesToInitialize([$componentClass]);
         AppLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
         AppLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
     }
 
     /**
-     * Classes from PoP components that must be initialized before this component
-     *
-     * @return string[]
+     * Package's Component class, of type ComponentInterface
      */
-    abstract protected static function getDependedComponentClasses(): array;
+    abstract protected static function getComponentClass(): string;
 
     protected function setUp(): void
     {
