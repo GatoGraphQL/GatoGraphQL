@@ -19,7 +19,7 @@ class ComponentManager
      */
     public static function reset(): void
     {
-        static::$components = [];
+        self::$components = [];
     }
 
     /**

@@ -51,11 +51,11 @@ class AppLoader
      */
     public static function reset(): void
     {
-        static::$initializedClasses = [];
-        static::$orderedComponentClasses = [];
-        static::$componentClassesToInitialize = [];
-        static::$componentClassConfiguration = [];
-        static::$skipSchemaComponentClasses = [];
+        self::$initializedClasses = [];
+        self::$orderedComponentClasses = [];
+        self::$componentClassesToInitialize = [];
+        self::$componentClassConfiguration = [];
+        self::$skipSchemaComponentClasses = [];
         ComponentManager::reset();
     }
 
