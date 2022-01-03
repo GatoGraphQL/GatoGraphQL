@@ -22,6 +22,7 @@ class Component extends AbstractComponent
             \PoP\Hooks\Component::class,
         ];
     }
+
     /**
      * @return string[]
      */

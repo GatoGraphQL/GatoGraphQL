@@ -14,6 +14,15 @@ trait ComponentConfigurationTrait
     protected static array $configuration = [];
     protected static array $initialized = [];
 
+    /**
+     * Reset the state. Called during PHPUnit testing.
+     */
+    public static function reset(): void
+    {
+        self::$configuration = [];
+        self::$initialized = [];
+    }
+
     public static function setConfiguration(array $configuration): void
     {
         self::$configuration = $configuration;

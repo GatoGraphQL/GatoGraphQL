@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\HooksPHP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Testing\PHPUnit\AbstractTestCase;
 
-class HooksAPITest extends TestCase
+class HooksAPITest extends AbstractTestCase
 {
     /**
      * Test that applyFilter returns $value

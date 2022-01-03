@@ -15,6 +15,14 @@ class ComponentManager
     private static array $components = [];
 
     /**
+     * Reset the state. Called during PHPUnit testing.
+     */
+    public static function reset(): void
+    {
+        self::$components = [];
+    }
+
+    /**
      * @return string[]
      */
     public static function getComponentClasses(): array

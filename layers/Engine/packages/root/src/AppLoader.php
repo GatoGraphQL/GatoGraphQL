@@ -47,6 +47,23 @@ class AppLoader
     protected static array $skipSchemaComponentClasses = [];
 
     /**
+     * Reset the state. Called during PHPUnit testing.
+     */
+    public static function reset(): void
+    {
+        foreach (self::$orderedComponentClasses as $componentClass) {
+            $componentClass::reset();
+        }
+
+        self::$initializedClasses = [];
+        self::$orderedComponentClasses = [];
+        self::$componentClassesToInitialize = [];
+        self::$componentClassConfiguration = [];
+        self::$skipSchemaComponentClasses = [];
+        ComponentManager::reset();
+    }
+
+    /**
      * Add Component classes to be initialized
      *
      * @param string[] $componentClasses List of `Component` class to initialize
