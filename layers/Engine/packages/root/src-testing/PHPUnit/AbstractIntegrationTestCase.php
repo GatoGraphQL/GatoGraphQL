@@ -21,7 +21,7 @@ abstract class AbstractIntegrationTestCase extends TestCase
     /**
      * Boots the Kernel for this test.
      */
-    private static final function initializeContainer(array $options = []): void
+    private static final function initializeContainer(): void
     {
         $componentClasses = [
             \PoP\GraphQLParser\Component::class,
