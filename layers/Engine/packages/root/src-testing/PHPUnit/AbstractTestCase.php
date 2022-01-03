@@ -21,6 +21,11 @@ abstract class AbstractTestCase extends TestCase
         static::$container = ContainerBuilderFactory::getInstance();
     }
 
+    protected static function getAppLoaderClass(): string
+    {
+        return AppLoader::class;
+    }
+
     protected static function initializeAppLoader(
         string $componentClass,
         ?bool $cacheContainerConfiguration = null,
@@ -28,16 +33,17 @@ abstract class AbstractTestCase extends TestCase
         ?string $containerDirectory = null,
         bool $isDev = false
     ): void {
-        AppLoader::addComponentClassesToInitialize([$componentClass]);
-        AppLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
+        $appLoaderClass = static::getAppLoaderClass();
+        $appLoaderClass::addComponentClassesToInitialize([$componentClass]);
+        $appLoaderClass::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        AppLoader::addComponentClassConfiguration(
+        $appLoaderClass::addComponentClassConfiguration(
             static::getComponentClassConfiguration()
         );
         
-        AppLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
+        $appLoaderClass::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
     }
 
     /**
