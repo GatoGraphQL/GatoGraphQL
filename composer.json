@@ -350,6 +350,7 @@
             "PoP\\ResourceLoader\\": "layers/SiteBuilder/packages/resourceloader/tests",
             "PoP\\Resources\\": "layers/SiteBuilder/packages/resources/tests",
             "PoP\\Root\\": "layers/Engine/packages/root/tests",
+            "PoP\\Root\\Testing\\": "layers/Engine/packages/root/src-testing",
             "PoP\\RoutingWP\\": "layers/Engine/packages/routing-wp/tests",
             "PoP\\Routing\\": "layers/Engine/packages/routing/tests",
             "PoP\\SPA\\": "layers/SiteBuilder/packages/spa/tests",
