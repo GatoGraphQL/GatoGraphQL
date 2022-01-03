@@ -84,8 +84,8 @@ abstract class KernelTestCase extends TestCase
             \PoP\GraphQLParser\Component::class,
         ];
         AppLoader::addComponentClassesToInitialize($componentClasses);
-        AppLoader::bootSystem();
-        AppLoader::bootApplication();
+        AppLoader::bootSystem(false);
+        AppLoader::bootApplication(false);
         static::$booted = true;
 
         self::$kernelContainer = ContainerBuilderFactory::getInstance();
