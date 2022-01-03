@@ -16,7 +16,6 @@ class DataToAppendAndRemoveDataSource
             'require-dev' => [
                 'symplify/monorepo-builder' => '^9.0',
                 'friendsofphp/php-cs-fixer' => '^3.2',
-                'getpop/hooks-php' => '*',
             ],
             'autoload' => [
                 'psr-4' => [
