@@ -167,6 +167,7 @@
     "require": {
         "php": "^8.0",
         "getpop/basic-service": "^0.9",
+        "getpop/engine": "^0.9",
         "pop-backbone/graphql-parser": "^0.9"
     },
     "require-dev": {
