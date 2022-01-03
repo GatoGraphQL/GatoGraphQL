@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoP\Engine\Testing\PHPUnit;
 
 use PoP\Engine\AppLoader;
-use PoP\Root\Testing\PHPUnit\AbstractIntegrationTestCase as UpstreamAbstractIntegrationTestCase;
+use PoP\Root\Testing\PHPUnit\AbstractTestCase as UpstreamAbstractTestCase;
 
-abstract class AbstractIntegrationTestCase extends UpstreamAbstractIntegrationTestCase
+abstract class AbstractTestCase extends UpstreamAbstractTestCase
 {
     protected static function initializeAppLoader(
         string $componentClass,

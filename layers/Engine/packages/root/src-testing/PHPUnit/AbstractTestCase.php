@@ -10,7 +10,7 @@ use PoP\Root\AppLoader;
 use PoP\Root\Container\ContainerBuilderFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-abstract class AbstractIntegrationTestCase extends TestCase
+abstract class AbstractTestCase extends TestCase
 {
     private static ?ContainerInterface $container = null;
 
