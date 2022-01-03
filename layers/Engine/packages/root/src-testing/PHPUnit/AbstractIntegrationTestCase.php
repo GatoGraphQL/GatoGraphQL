@@ -17,17 +17,14 @@ abstract class AbstractIntegrationTestCase extends TestCase
 {
     private static ?ContainerInterface $container = null;
 
-    /**
-     * Boots the Kernel for this test.
-     */
-    private static final function initializeContainer(): void
+    protected static final function initializeContainer(): void
     {
         $componentClasses = static::getDependedComponentClasses();
         AppLoader::addComponentClassesToInitialize($componentClasses);
         AppLoader::bootSystem(false, null, null, true);
         AppLoader::bootApplication(false, null, null, true);
 
-        self::$container = ContainerBuilderFactory::getInstance();;
+        static::$container = ContainerBuilderFactory::getInstance();;
     }
 
     /**
@@ -41,19 +38,19 @@ abstract class AbstractIntegrationTestCase extends TestCase
     {
         parent::setUp();
 
-        if (self::$container === null) {
-            self::initializeContainer();
+        if (static::$container === null) {
+            static::initializeContainer();
         }
     }
 
     protected function tearDown(): void
     {
-        self::$container = null;
+        static::$container = null;
     }
 
     protected static function getService(string $service): mixed
     {
-        return self::$container->get($service);
+        return static::$container->get($service);
     }
 
     // /**
@@ -67,11 +64,11 @@ abstract class AbstractIntegrationTestCase extends TestCase
     // protected static function getContainer(): ContainerInterface
     // {
     //     if (!static::$booted) {
-    //         self::initializeContainer();
+    //         static::initializeContainer();
     //     }
 
     //     try {
-    //         return self::$container->get('test.service_container');
+    //         return static::$container->get('test.service_container');
     //     } catch (ServiceNotFoundException $e) {
     //         throw new \LogicException('Could not find service "test.service_container". Try updating the "framework.test" config to "true".', 0, $e);
     //     }
