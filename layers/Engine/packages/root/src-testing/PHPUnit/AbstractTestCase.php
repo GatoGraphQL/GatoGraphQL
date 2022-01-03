@@ -33,17 +33,17 @@ abstract class AbstractTestCase extends TestCase
         ?string $containerDirectory = null,
         bool $isDev = false
     ): void {
-        $appLoaderClass = static::getAppLoaderClass();
-        $appLoaderClass::addComponentClassesToInitialize([$componentClass]);
-        $appLoaderClass::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
+        $appLoader = static::getAppLoaderClass();
+        $appLoader::addComponentClassesToInitialize([$componentClass]);
+        $appLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        $appLoaderClass::addComponentClassConfiguration(
+        $appLoader::addComponentClassConfiguration(
             static::getComponentClassConfiguration()
         );
         
-        $appLoaderClass::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
+        $appLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
     }
 
     /**
@@ -88,8 +88,17 @@ abstract class AbstractTestCase extends TestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        
-        static::$container = null;
+
+        if (!$this->keepContainerAcrossTests()) {
+            static::$container = null;
+            $appLoader = static::getAppLoaderClass();
+            $appLoader::reset();
+        }
+    }
+
+    protected function keepContainerAcrossTests(): bool
+    {
+        return false;
     }
 
     protected static function getService(string $service): mixed
