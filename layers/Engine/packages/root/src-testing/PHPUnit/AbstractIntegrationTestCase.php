@@ -13,10 +13,7 @@ use PoP\Engine\AppLoader;
 use PoP\Root\Container\ContainerBuilderFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * KernelTestCase is the base class for tests needing a Kernel.
- */
-abstract class KernelTestCase extends TestCase
+abstract class AbstractIntegrationTestCase extends TestCase
 {
     private static bool $booted = false;
     private static ?ContainerInterface $container = null;

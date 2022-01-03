@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Execution;
 
-use PoP\Root\Testing\PHPUnit\KernelTestCase;
+use PoP\Root\Testing\PHPUnit\AbstractIntegrationTestCase;
 use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
@@ -14,7 +14,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use PoPBackbone\GraphQLParser\Parser\Parser;
 
-class ExecutableDocumentTest extends KernelTestCase
+class ExecutableDocumentTest extends AbstractIntegrationTestCase
 {
     /**
      * Commented test, since it produces error:
