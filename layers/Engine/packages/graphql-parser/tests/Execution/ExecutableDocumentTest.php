@@ -17,8 +17,6 @@ use PoPBackbone\GraphQLParser\Parser\Parser;
 class ExecutableDocumentTest extends AbstractTestCase
 {
     /**
-     * Add configuration for the Component classes
-     *
      * @return array<string, mixed> [key]: Component class, [value]: Configuration
      */
     protected static function getComponentClassConfiguration(): array
@@ -28,17 +26,6 @@ class ExecutableDocumentTest extends AbstractTestCase
         return $componentClassConfiguration;
     }
 
-    /**
-     * Commented test, since it produces error:
-     *
-     * > Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException: You have requested a non-existent service "PoP\GraphQLParser\Query\QueryAugmenterServiceInterface".
-     *
-     * Fix when solving the corresponding issue:
-     *
-     * @see https://github.com/leoloso/PoP/issues/464
-     *
-     * Then, must fix the assertion: all Location(...) were copy/pasted, their col/row must be adapted
-     */
     public function testMultipleQueryExecution(): void
     {
         $parser = new Parser();
