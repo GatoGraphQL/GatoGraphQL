@@ -43,6 +43,12 @@ abstract class AbstractIntegrationTestCase extends TestCase
         }
     }
 
+    protected function tearDown(): void
+    {
+        self::$container = null;
+        self::$booted = false;
+    }
+
     protected static function getService(string $service): mixed
     {
         return self::$container->get($service);
