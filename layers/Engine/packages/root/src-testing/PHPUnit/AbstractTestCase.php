@@ -30,7 +30,24 @@ abstract class AbstractTestCase extends TestCase
     ): void {
         AppLoader::addComponentClassesToInitialize([$componentClass]);
         AppLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
+
+        // Only after initializing the System Container,
+        // we can obtain the configuration (which may depend on hooks)
+        AppLoader::addComponentClassConfiguration(
+            static::getComponentClassConfiguration()
+        );
+        
         AppLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
+    }
+
+    /**
+     * Add configuration for the Component classes
+     *
+     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     */
+    protected static function getComponentClassConfiguration(): array
+    {
+        return [];
     }
 
     /**
@@ -50,7 +67,7 @@ abstract class AbstractTestCase extends TestCase
                 )
             );
         }
-        return '\\' . $parts[0] . '\\' . $parts[1] . '\\Component';
+        return $parts[0] . '\\' . $parts[1] . '\\Component';
     }
 
     protected function setUp(): void

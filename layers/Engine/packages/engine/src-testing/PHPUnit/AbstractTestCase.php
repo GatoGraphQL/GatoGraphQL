@@ -18,6 +18,13 @@ abstract class AbstractTestCase extends UpstreamAbstractTestCase
     ): void {
         AppLoader::addComponentClassesToInitialize([$componentClass]);
         AppLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
+        
+        // Only after initializing the System Container,
+        // we can obtain the configuration (which may depend on hooks)
+        AppLoader::addComponentClassConfiguration(
+            static::getComponentClassConfiguration()
+        );
+        
         AppLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
     }
 }
