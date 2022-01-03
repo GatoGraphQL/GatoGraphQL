@@ -100,12 +100,14 @@ class AppLoader
      * @return string[]
      */
     final protected static function getComponentsOrderedForInitialization(
-        array $componentClasses
+        array $componentClasses,
+        bool $isDev
     ): array {
         $orderedComponentClasses = [];
         self::addComponentsOrderedForInitialization(
             $componentClasses,
-            $orderedComponentClasses
+            $orderedComponentClasses,
+            $isDev
         );
         return $orderedComponentClasses;
     }
@@ -119,7 +121,8 @@ class AppLoader
      */
     final protected static function addComponentsOrderedForInitialization(
         array $componentClasses,
-        array &$orderedComponentClasses
+        array &$orderedComponentClasses,
+        bool $isDev
     ): void {
         /**
          * If any component class has already been initialized,
@@ -135,8 +138,17 @@ class AppLoader
             // Initialize all depended-upon PoP components
             self::addComponentsOrderedForInitialization(
                 $componentClass::getDependedComponentClasses(),
-                $orderedComponentClasses
+                $orderedComponentClasses,
+                $isDev
             );
+
+            if ($isDev) {
+                self::addComponentsOrderedForInitialization(
+                    $componentClass::getDevDependedComponentClasses(),
+                    $orderedComponentClasses,
+                    $isDev
+                );
+            }
 
             // Initialize all depended-upon PoP conditional components, if they are installed
             self::addComponentsOrderedForInitialization(
@@ -144,7 +156,8 @@ class AppLoader
                     $componentClass::getDependedConditionalComponentClasses(),
                     'class_exists'
                 ),
-                $orderedComponentClasses
+                $orderedComponentClasses,
+                $isDev
             );
 
             // We reached the bottom of the rung, add the component to the list
@@ -164,11 +177,13 @@ class AppLoader
      * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
      * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
      * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
+     * @param boolean $isDev Indicate if testing with PHPUnit, as to load components only for DEV
      */
     public static function bootSystem(
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
-        ?string $containerDirectory = null
+        ?string $containerDirectory = null,
+        bool $isDev = false
     ): void {
         // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
         DotenvBuilderFactory::init();
@@ -177,7 +192,8 @@ class AppLoader
          * Calculate the components in their initialization order
          */
         self::$orderedComponentClasses = self::getComponentsOrderedForInitialization(
-            self::$componentClassesToInitialize
+            self::$componentClassesToInitialize,
+            $isDev
         );
 
         /**
