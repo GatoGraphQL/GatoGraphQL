@@ -15,7 +15,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class AbstractIntegrationTestCase extends TestCase
 {
-    private static bool $booted = false;
     private static ?ContainerInterface $container = null;
 
     /**
@@ -31,14 +30,13 @@ abstract class AbstractIntegrationTestCase extends TestCase
         AppLoader::bootApplication(false, null, null, true);
 
         self::$container = ContainerBuilderFactory::getInstance();;
-        self::$booted = true;
     }
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        if (!self::$booted) {
+        if (self::$container === null) {
             self::initializeContainer();
         }
     }
@@ -46,7 +44,6 @@ abstract class AbstractIntegrationTestCase extends TestCase
     protected function tearDown(): void
     {
         self::$container = null;
-        self::$booted = false;
     }
 
     protected static function getService(string $service): mixed
