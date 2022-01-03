@@ -51,7 +51,6 @@ class ExecutableDocumentTest extends AbstractTestCase
         $executableDocument = new ExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
-            $executableDocument->getRequestedOperations(),
             [
                 new QueryOperation('One', [], [], [
                     new RelationalField('film', null, [
@@ -70,7 +69,8 @@ class ExecutableDocumentTest extends AbstractTestCase
                 new QueryOperation('__ALL', [], [], [
                   new LeafField('id', null, [], [], new Location(10, 21))
                 ], new Location(8, 19)),
-            ]
+            ],
+            $executableDocument->getRequestedOperations()
         );
     }
 }
