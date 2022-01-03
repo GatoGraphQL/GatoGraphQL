@@ -50,24 +50,24 @@ abstract class KernelTestCase extends TestCase
         }
     }
 
-    /**
-     * Provides a dedicated test container with access to both public and private
-     * services. The container will not include private services that have been
-     * inlined or removed. Private services will be removed when they are not
-     * used by other services.
-     *
-     * Using this method is the best way to get a container from your test code.
-     */
-    protected static function getContainer(): ContainerInterface
-    {
-        if (!static::$booted) {
-            self::initializeContainer();
-        }
+    // /**
+    //  * Provides a dedicated test container with access to both public and private
+    //  * services. The container will not include private services that have been
+    //  * inlined or removed. Private services will be removed when they are not
+    //  * used by other services.
+    //  *
+    //  * Using this method is the best way to get a container from your test code.
+    //  */
+    // protected static function getContainer(): ContainerInterface
+    // {
+    //     if (!static::$booted) {
+    //         self::initializeContainer();
+    //     }
 
-        try {
-            return self::$container->get('test.service_container');
-        } catch (ServiceNotFoundException $e) {
-            throw new \LogicException('Could not find service "test.service_container". Try updating the "framework.test" config to "true".', 0, $e);
-        }
-    }
+    //     try {
+    //         return self::$container->get('test.service_container');
+    //     } catch (ServiceNotFoundException $e) {
+    //         throw new \LogicException('Could not find service "test.service_container". Try updating the "framework.test" config to "true".', 0, $e);
+    //     }
+    // }
 }
