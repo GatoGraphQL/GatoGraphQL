@@ -35,6 +35,7 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
+        ComponentConfiguration::setConfiguration($configuration);
         self::initServices(dirname(__DIR__));
     }
 }
