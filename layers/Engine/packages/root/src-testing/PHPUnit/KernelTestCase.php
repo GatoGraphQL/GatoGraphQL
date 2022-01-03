@@ -20,8 +20,6 @@ use Symfony\Contracts\Service\ResetInterface;
  */
 abstract class KernelTestCase extends TestCase
 {
-    protected static $class;
-
     protected static $booted = false;
 
     private static ?ContainerInterface $kernelContainer = null;
