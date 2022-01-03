@@ -11,10 +11,7 @@ namespace PoP\Root\Testing\PHPUnit;
 use PHPUnit\Framework\TestCase;
 use PoP\Engine\AppLoader;
 use PoP\Root\Container\ContainerBuilderFactory;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use Symfony\Contracts\Service\ResetInterface;
 
 /**
  * KernelTestCase is the base class for tests needing a Kernel.
@@ -48,6 +45,11 @@ abstract class KernelTestCase extends TestCase
         if (!self::$booted) {
             self::initializeContainer($options);
         }
+    }
+
+    protected static function getService(string $service): mixed
+    {
+        return self::$container->get($service);
     }
 
     // /**
