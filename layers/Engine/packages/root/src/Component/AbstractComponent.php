@@ -65,6 +65,16 @@ abstract class AbstractComponent implements ComponentInterface
     abstract public static function getDependedComponentClasses(): array;
 
     /**
+     * All DEV component classes that this component depends upon, to initialize them
+     *
+     * @return string[]
+     */
+    public static function getDevDependedComponentClasses(): array
+    {
+        return [];
+    }
+
+    /**
      * All conditional component classes that this component depends upon, to initialize them
      *
      * @return string[]

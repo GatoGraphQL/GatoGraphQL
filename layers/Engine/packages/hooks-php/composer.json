@@ -1,16 +1,14 @@
 {
-    "name": "getpop/basic-service",
+    "name": "getpop/hooks-php",
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
-        "getpop/hooks-wp": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
+        "getpop/translation": "<0.8.9",
         "getpop/mandatory-directives-by-configuration": "<0.8.9",
         "getpop/component-model": "<0.8.9",
         "getpop/filestore": "<0.8.9",
         "getpop/guzzle-helpers": "<0.8.9",
         "getpop/routing-wp": "<0.8.9",
-        "getpop/translation-wp": "<0.8.9",
-        "getpop/hooks": "<0.8.9",
         "getpop/root": "<0.8.9",
         "getpop/engine-wp": "<0.8.9",
         "getpop/routing": "<0.8.9",
@@ -19,6 +17,8 @@
         "getpop/definitions": "<0.8.9",
         "getpop/engine": "<0.8.9",
         "getpop/engine-wp-bootloader": "<0.8.9",
+        "getpop/query-parsing": "<0.8.9",
+        "getpop/field-query": "<0.8.9",
         "getpop/cache-control": "<0.8.9",
         "getpop/api-rest": "<0.8.9",
         "getpop/api-graphql": "<0.8.9",
@@ -154,9 +154,9 @@
         "pop-wp-schema/schema-commons": "<0.8.9"
     },
     "type": "library",
-    "description": "Set of utilities for container services",
-    "keywords": ["PoP", "basic-service"],
-    "homepage": "https://github.com/getpop/basic-service",
+    "description": "Implementation of PoP\\Hooks using package `bainternet/php-hooks` (a fork from the WordPress hooks system), to use with PHPUnit and avoid having to load WordPress.",
+    "keywords": ["PoP", "hooks"],
+    "homepage": "https://github.com/getpop/hooks-php",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -170,20 +170,19 @@
         "getpop/hooks": "^0.9"
     },
     "require-dev": {
-        "getpop/hooks-php": "^0.9",
-        "phpstan/phpstan": "^1.0",
+        "bainternet/php-hooks": "^1.0",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.0"
     },
     "autoload": {
         "psr-4": {
-            "PoP\\BasicService\\": "src"
+            "PoP\\HooksPHP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\BasicService\\": "tests"
+            "PoP\\HooksPHP\\": "tests"
         }
     },
     "scripts": {
