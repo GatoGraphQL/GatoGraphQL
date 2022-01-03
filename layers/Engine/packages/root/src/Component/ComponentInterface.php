@@ -33,6 +33,13 @@ interface ComponentInterface
      * @return string[]
      */
     public static function getDependedComponentClasses(): array;
+    
+    /**
+     * All DEV component classes that this component depends upon, to initialize them
+     *
+     * @return string[]
+     */
+    public static function getDevDependedComponentClasses(): array;
 
     /**
      * All conditional component classes that this component depends upon, to initialize them
