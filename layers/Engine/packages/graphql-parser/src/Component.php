@@ -20,6 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\BasicService\Component::class,
+            \PoP\Engine\Component::class,
         ];
     }
 
