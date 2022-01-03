@@ -10,6 +10,13 @@ namespace PoP\Root\Component;
 abstract class AbstractComponent implements ComponentInterface
 {
     use InitializeContainerServicesInComponentTrait;
+    
+    /**
+     * Reset the state. Called during PHPUnit testing.
+     */
+    public static function reset(): void
+    {
+    }
 
     /**
      * Enable each component to set default configuration for

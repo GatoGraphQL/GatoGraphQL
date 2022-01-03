@@ -51,6 +51,10 @@ class AppLoader
      */
     public static function reset(): void
     {
+        foreach (self::$orderedComponentClasses as $componentClass) {
+            $componentClass::reset();
+        }
+
         self::$initializedClasses = [];
         self::$orderedComponentClasses = [];
         self::$componentClassesToInitialize = [];
