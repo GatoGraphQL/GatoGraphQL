@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Execution;
 
-use PHPUnit\Framework\TestCase;
+use PoP\Root\Testing\PHPUnit\KernelTestCase;
 use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
@@ -14,7 +14,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use PoPBackbone\GraphQLParser\Parser\Parser;
 
-class ExecutableDocumentTest extends TestCase
+class ExecutableDocumentTest extends KernelTestCase
 {
     /**
      * Commented test, since it produces error:
@@ -27,8 +27,10 @@ class ExecutableDocumentTest extends TestCase
      *
      * Then, must fix the assertion: all Location(...) were copy/pasted, their col/row must be adapted
      */
-    public function commentedTestMultipleQueryExecution(): void
+    public function testMultipleQueryExecution(): void
     {
+        self::bootKernel();
+        
         $parser = new Parser();
         $document = $parser->parse('
             query One {
