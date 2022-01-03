@@ -17,6 +17,18 @@ use PoPBackbone\GraphQLParser\Parser\Parser;
 class ExecutableDocumentTest extends AbstractTestCase
 {
     /**
+     * Add configuration for the Component classes
+     *
+     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     */
+    protected static function getComponentClassConfiguration(): array
+    {
+        $componentClassConfiguration = parent::getComponentClassConfiguration();
+        $componentClassConfiguration[\PoP\GraphQLParser\Component::class][\PoP\GraphQLParser\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION] = true;
+        return $componentClassConfiguration;
+    }
+
+    /**
      * Commented test, since it produces error:
      *
      * > Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException: You have requested a non-existent service "PoP\GraphQLParser\Query\QueryAugmenterServiceInterface".
