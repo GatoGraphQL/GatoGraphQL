@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ec1d2e17d6e63c0c1fa1839e583cd88",
+    "content-hash": "820b4cf2ec69e9e2eb1359a20e0e56d9",
     "packages": [
         {
             "name": "boxuk/wp-muplugin-loader",
@@ -3027,6 +3027,49 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "bainternet/php-hooks",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bainternet/PHP-Hooks.git",
+                "reference": "c45a4d1b1c630c52cf7483424d222049e1b7d341"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bainternet/PHP-Hooks/zipball/c45a4d1b1c630c52cf7483424d222049e1b7d341",
+                "reference": "c45a4d1b1c630c52cf7483424d222049e1b7d341",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "php-hooks.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ohad Raz",
+                    "homepage": "https://en.bainternet.info/"
+                }
+            ],
+            "description": "A fork of the WordPress filters hook system rolled in to a class to be ported into any PHP-based system",
+            "homepage": "http://bainternet.github.io/PHP-Hooks/",
+            "keywords": [
+                "actions",
+                "filters",
+                "hooks"
+            ],
+            "support": {
+                "issues": "https://github.com/bainternet/PHP-Hooks/issues",
+                "source": "https://github.com/bainternet/PHP-Hooks/tree/master"
+            },
+            "time": "2015-09-07T12:11:17+00:00"
+        },
         {
             "name": "composer/xdebug-handler",
             "version": "2.0.2",
@@ -7762,5 +7805,5 @@
         "ext-mbstring": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

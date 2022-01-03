@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser;
+namespace PoP\HooksPHP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,8 +19,7 @@ class Component extends AbstractComponent
     public static function getDependedComponentClasses(): array
     {
         return [
-            \PoP\BasicService\Component::class,
-            \PoP\Engine\Component::class,
+            \PoP\Hooks\Component::class,
         ];
     }
 
@@ -35,15 +34,15 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        ComponentConfiguration::setConfiguration($configuration);
         self::initServices(dirname(__DIR__));
     }
 
     /**
-     * Reset the state. Called during PHPUnit testing.
+     * Initialize services for the system container
      */
-    public static function reset(): void
+    protected static function initializeSystemContainerServices(): void
     {
-        ComponentConfiguration::reset();
+        // The same services injected into the application are injected into the system container
+        self::initSystemServices(dirname(__DIR__), '', 'services.yaml');
     }
 }

@@ -12,6 +12,13 @@ abstract class AbstractComponent implements ComponentInterface
     use InitializeContainerServicesInComponentTrait;
 
     /**
+     * Reset the state. Called during PHPUnit testing.
+     */
+    public static function reset(): void
+    {
+    }
+
+    /**
      * Enable each component to set default configuration for
      * itself and its depended components
      *
@@ -63,6 +70,16 @@ abstract class AbstractComponent implements ComponentInterface
      * @return string[]
      */
     abstract public static function getDependedComponentClasses(): array;
+
+    /**
+     * All DEV component classes that this component depends upon, to initialize them
+     *
+     * @return string[]
+     */
+    public static function getDevDependedComponentClasses(): array
+    {
+        return [];
+    }
 
     /**
      * All conditional component classes that this component depends upon, to initialize them

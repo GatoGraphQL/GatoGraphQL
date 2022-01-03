@@ -151,8 +151,7 @@ abstract class AbstractPlugin
         $this->callPluginConfiguration();
 
         // Only after initializing the System Container,
-        // we can obtain the configuration
-        // (which may depend on hooks)
+        // we can obtain the configuration (which may depend on hooks)
         AppLoader::addComponentClassConfiguration(
             $this->getComponentClassConfiguration()
         );
