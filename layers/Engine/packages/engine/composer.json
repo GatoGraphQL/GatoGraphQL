@@ -184,7 +184,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\Engine\\": "tests"
+            "PoP\\Engine\\": "tests",
+            "PoP\\Engine\\Testing\\": "src-testing"
         }
     },
     "scripts": {

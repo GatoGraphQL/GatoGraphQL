@@ -335,6 +335,7 @@
             "PoP\\EmojiDefinitions\\": "layers/SiteBuilder/packages/definitions-emoji/tests",
             "PoP\\EngineWP\\": "layers/Engine/packages/engine-wp/tests",
             "PoP\\Engine\\": "layers/Engine/packages/engine/tests",
+            "PoP\\Engine\\Testing\\": "layers/Engine/packages/engine/src-testing",
             "PoP\\FieldQuery\\": "layers/Engine/packages/field-query/tests",
             "PoP\\FileStore\\": "layers/Engine/packages/filestore/tests",
             "PoP\\FunctionFields\\": "layers/Engine/packages/function-fields/tests",

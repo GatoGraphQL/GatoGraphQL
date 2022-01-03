@@ -1,10 +1,6 @@
 <?php
 
-/*
- * Copied from the Symfony package.
- *
- * @see https://raw.githubusercontent.com/symfony/symfony/6.0/src/Symfony/Bundle/FrameworkBundle/Test/KernelTestCase.php
- */
+declare(strict_types=1);
 
 namespace PoP\Root\Testing\PHPUnit;
 
@@ -25,9 +21,6 @@ abstract class AbstractIntegrationTestCase extends TestCase
         static::$container = ContainerBuilderFactory::getInstance();
     }
 
-    /**
-     * @param string[] $componentClasses
-     */
     protected static function initializeAppLoader(
         string $componentClass,
         ?bool $cacheContainerConfiguration = null,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Execution;
 
-use PoP\Root\Testing\PHPUnit\AbstractIntegrationTestCase;
+use PoP\Engine\Testing\PHPUnit\AbstractIntegrationTestCase;
 use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
