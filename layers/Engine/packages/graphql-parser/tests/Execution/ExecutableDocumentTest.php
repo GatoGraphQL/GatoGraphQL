@@ -66,11 +66,11 @@ class ExecutableDocumentTest extends AbstractTestCase
             [
                 new QueryOperation('One', [], [], [
                     new RelationalField('film', null, [
-                        new Argument('id', new Literal(1, new Location(9, 26)), new Location(9, 22)),
+                        new Argument('id', new Literal(1, new Location(3, 26)), new Location(3, 22)),
                     ], [
-                        new LeafField('title', null, [], [], new Location(10, 21)),
-                    ], [], new Location(9, 17))
-                ], new Location(8, 19)),
+                        new LeafField('title', null, [], [], new Location(4, 21)),
+                    ], [], new Location(3, 17))
+                ], new Location(2, 19)),
                 new QueryOperation('Two', [], [], [
                     new RelationalField('post', null, [
                         new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22)),
@@ -79,8 +79,8 @@ class ExecutableDocumentTest extends AbstractTestCase
                     ], [], new Location(9, 17))
                 ], new Location(8, 19)),
                 new QueryOperation('__ALL', [], [], [
-                  new LeafField('id', null, [], [], new Location(10, 21))
-                ], new Location(8, 19)),
+                  new LeafField('id', null, [], [], new Location(15, 15))
+                ], new Location(14, 19)),
             ],
             $executableDocument->getRequestedOperations()
         );
