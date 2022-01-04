@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\SiteBuilderAPI;
 
 use PoP\API\Environment;
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UsersWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoPSchema\CustomPosts\Component as CustomPostsComponent;
 
 /**

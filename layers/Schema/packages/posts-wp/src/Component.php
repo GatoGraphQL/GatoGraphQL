@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostsWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoPSchema\Posts\ComponentConfiguration;
 
 /**
