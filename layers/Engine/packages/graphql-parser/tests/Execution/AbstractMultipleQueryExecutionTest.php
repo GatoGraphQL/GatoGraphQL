@@ -19,14 +19,14 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
     /**
      * @return array<string, mixed> [key]: Component class, [value]: Configuration
      */
-    protected function getComponentClassConfiguration(): array
+    protected static function getComponentClassConfiguration(): array
     {
         $componentClassConfiguration = parent::getComponentClassConfiguration();
-        $componentClassConfiguration[\PoP\GraphQLParser\Component::class][\PoP\GraphQLParser\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION] = $this->enabled();
+        $componentClassConfiguration[\PoP\GraphQLParser\Component::class][\PoP\GraphQLParser\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION] = static::enabled();
         return $componentClassConfiguration;
     }
 
-    abstract protected function enabled(): bool;
+    abstract protected static function enabled(): bool;
 
     public function testMultipleQueryExecution(): void
     {

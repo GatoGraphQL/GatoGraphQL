@@ -9,7 +9,7 @@ use PoP\Root\AbstractTestCase as UpstreamAbstractTestCase;
 
 abstract class AbstractTestCase extends UpstreamAbstractTestCase
 {
-    protected function getAppLoaderClass(): string
+    protected static function getAppLoaderClass(): string
     {
         return AppLoader::class;
     }
