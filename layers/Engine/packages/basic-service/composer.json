@@ -172,6 +172,7 @@
     },
     "require-dev": {
         "getpop/hooks-php": "^0.9",
+        "getpop/translation-mock": "^0.9",
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.12",
