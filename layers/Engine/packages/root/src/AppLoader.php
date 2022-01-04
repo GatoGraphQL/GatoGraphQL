@@ -114,8 +114,6 @@ class AppLoader
     /**
      * Get the array of components ordered by how they must be initialized,
      * following the Composer dependencies tree
-     *
-     * @param string[] $componentClasses List of `Component` class to initialize
      */
     private static function initializeComponents(bool $isDev): void
     {
