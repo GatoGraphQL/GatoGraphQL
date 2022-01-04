@@ -197,6 +197,7 @@
             "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/src",
             "PoP\\SiteWP\\": "layers/SiteBuilder/packages/site-wp/src",
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/src",
+            "PoP\\TranslationMock\\": "layers/Engine/packages/translation-mock/src",
             "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/src",
             "PoP\\Translation\\": "layers/Engine/packages/translation/src"
         }
@@ -360,6 +361,7 @@
             "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/tests",
             "PoP\\SiteWP\\": "layers/SiteBuilder/packages/site-wp/tests",
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/tests",
+            "PoP\\TranslationMock\\": "layers/Engine/packages/translation-mock/tests",
             "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/tests",
             "PoP\\Translation\\": "layers/Engine/packages/translation/tests"
         }
@@ -413,6 +415,7 @@
         "getpop/spa": "0.8.9",
         "getpop/static-site-generator": "0.8.9",
         "getpop/translation": "0.8.9",
+        "getpop/translation-mock": "0.8.9",
         "getpop/translation-wp": "0.8.9",
         "graphql-api/extension-demo": "0.8.9",
         "graphql-api/external-dependency-wrappers": "0.8.9",
