@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginComponentInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Engine\AppLoader;
+use PoP\Root\Managers\ComponentManager;
 
 abstract class AbstractPlugin
 {
@@ -117,17 +119,28 @@ abstract class AbstractPlugin
      */
     protected function initializeComponentClasses(): void
     {
+        // Initialize the containers
+        $componentClasses = $this->getComponentClassesToInitialize();
+        AppLoader::addComponentClassesToInitialize($componentClasses);
+    }
+
+    /**
+     * After initialized, and before booting,
+     * allow the components to inject their own configuration
+     */
+    public function configureComponents(): void
+    {
         // Set the plugin folder on all the Extension Components
         $componentClasses = $this->getComponentClassesToInitialize();
         $pluginFolder = dirname($this->pluginFile);
         foreach ($componentClasses as $componentClass) {
-            if (is_a($componentClass, AbstractPluginComponent::class, true)) {
-                $componentClass::setPluginFolder($pluginFolder);
+            if (!is_a($componentClass, PluginComponentInterface::class, true)) {
+                continue;
             }
+            /** @var PluginComponentInterface */
+            $component = ComponentManager::getComponent($componentClass);
+            $component->setPluginFolder($pluginFolder);
         }
-
-        // Initialize the containers
-        AppLoader::addComponentClassesToInitialize($componentClasses);
     }
 
     /**

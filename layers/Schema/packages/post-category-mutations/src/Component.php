@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategoryMutations;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -16,7 +16,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoPSchema\CustomPostCategoryMutations\Component::class,
@@ -31,12 +31,12 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initServices(dirname(__DIR__));
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initServices(dirname(__DIR__));
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }

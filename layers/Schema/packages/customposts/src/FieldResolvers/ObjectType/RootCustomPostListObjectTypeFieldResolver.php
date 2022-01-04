@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers\ObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoPSchema\CustomPosts\Component;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
@@ -99,9 +101,11 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         switch ($fieldName) {
             case 'customPost':
-                if (ComponentConfiguration::treatCustomPostStatusAsAdminData()) {
+                if ($componentConfiguration->treatCustomPostStatusAsAdminData()) {
                     $customPostStatusFilterInputName = FilterInputHelper::getFilterInputName([
                         FilterInputModuleProcessor::class,
                         FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS

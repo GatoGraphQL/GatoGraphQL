@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\TypeResolvers\InputObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\CommentMutations\Component;
 use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
@@ -55,6 +57,8 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
 
     public function getInputFieldNameTypeResolvers(): array
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         return array_merge(
             [
                 MutationInputProperties::COMMENT => $this->getStringScalarTypeResolver(),
@@ -65,7 +69,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
             $this->addParentCommentInputField() ? [
                 MutationInputProperties::PARENT_COMMENT_ID => $this->getIDScalarTypeResolver(),
             ] : [],
-            !ComponentConfiguration::mustUserBeLoggedInToAddComment() ? [
+            !$componentConfiguration->mustUserBeLoggedInToAddComment() ? [
                 MutationInputProperties::AUTHOR_NAME => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::AUTHOR_EMAIL => $this->getEmailScalarTypeResolver(),
                 MutationInputProperties::AUTHOR_URL => $this->getURLScalarTypeResolver(),

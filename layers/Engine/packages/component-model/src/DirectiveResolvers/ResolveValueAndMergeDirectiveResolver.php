@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\Root\Managers\ComponentManager;
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
@@ -234,7 +236,9 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$field]);
 
             // For GraphQL, set the response for the failing field as null
-            if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
+            /** @var ComponentConfiguration */
+            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+            if ($componentConfiguration->setFailingFieldResponseAsNull()) {
                 $dbItems[(string)$id][$fieldOutputKey] = null;
             }
             return;

@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\API\RouteModuleProcessors;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoPSchema\Posts\Component;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPSchema\Users\Routing\RouteNatures;
@@ -20,8 +22,10 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         $ret = array();
 
         // Author's posts
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         $routemodules = array(
-            ComponentConfiguration::getPostsRoute() => [
+            $componentConfiguration->getPostsRoute() => [
                 FieldDataloadModuleProcessor::class,
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST
             ],

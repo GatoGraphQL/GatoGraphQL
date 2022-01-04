@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
+use PoP\Root\Managers\ComponentManager;
+use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Schema\SchemaDefinition;
 
@@ -23,7 +25,9 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
         $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] = $globalSchemaDefinition[SchemaDefinition::DIRECTIVES];
 
         // Global fields are only added if enabled
-        if (ComponentConfiguration::skipExposingGlobalFieldsInFullSchema()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return $schemaDefinition;
         }
         $this->addFieldSchemaDefinitions($globalSchemaDefinition, true);

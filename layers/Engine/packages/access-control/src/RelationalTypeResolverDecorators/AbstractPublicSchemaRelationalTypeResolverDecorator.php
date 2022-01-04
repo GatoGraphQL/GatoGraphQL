@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\RelationalTypeResolverDecorators;
 
+use PoP\Root\Managers\ComponentManager;
+use PoP\AccessControl\Component;
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\AccessControl\Schema\SchemaModes;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\AbstractRelationalTypeResolverDecorator;
@@ -16,9 +18,11 @@ abstract class AbstractPublicSchemaRelationalTypeResolverDecorator extends Abstr
      */
     public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         return
-            ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode() ||
-            !ComponentConfiguration::usePrivateSchemaMode();
+            $componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode() ||
+            !$componentConfiguration->usePrivateSchemaMode();
     }
 
     protected function getSchemaMode(): string

@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
+use PoP\Root\Managers\ComponentManager;
 use Exception;
 use PoP\API\Cache\CacheTypes;
+use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\ObjectModels\SchemaDefinition\DirectiveSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\EnumTypeSchemaDefinitionProvider;
@@ -85,7 +87,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     {
         $schemaDefinition = null;
         // Attempt to retrieve from the cache, if enabled
-        if ($useCache = ComponentConfiguration::useSchemaDefinitionCache()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($useCache = $componentConfiguration->useSchemaDefinitionCache()) {
             $persistentCache = $this->getPersistentCache();
             // Use different caches for the normal and namespaced schemas, or
             // it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
@@ -163,7 +167,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getSchemaExtensions();
 
             // Sort the elements in the schema alphabetically
-            if (ComponentConfiguration::sortFullSchemaAlphabetically()) {
+            if ($componentConfiguration->sortFullSchemaAlphabetically()) {
                 $this->sortFullSchemaAlphabetically($schemaDefinition);
             }
 
@@ -300,7 +304,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     private function maybeMoveGlobalTypeSchemaDefinition(array &$schemaDefinition, array &$rootTypeSchemaDefinition): void
     {
         unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]);
-        if (ComponentConfiguration::skipExposingGlobalFieldsInFullSchema()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return;
         }
         $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS] = $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS];

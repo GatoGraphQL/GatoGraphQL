@@ -36,8 +36,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\Root\\": "tests",
-            "PoP\\Root\\Testing\\": "src-testing"
+            "PoP\\Root\\": "tests"
         }
     },
     "scripts": {

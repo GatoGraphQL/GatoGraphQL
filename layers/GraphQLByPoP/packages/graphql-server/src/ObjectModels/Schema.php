@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
+use PoP\Root\Managers\ComponentManager;
 use Exception;
+use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
@@ -28,7 +30,9 @@ class Schema
         protected string $id
     ) {
         // Enable or not to add the global fields to the schema, since they may pollute the documentation
-        if (ComponentConfiguration::exposeGlobalFieldsInGraphQLSchema()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
             // Add the global fields in the registry
             SchemaDefinitionHelpers::createFieldsFromPath(
                 $fullSchemaDefinition,

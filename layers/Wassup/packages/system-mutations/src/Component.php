@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -16,10 +16,10 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\ComponentModel\Component::class,
+            \PoP\Engine\Component::class,
         ];
     }
 
@@ -29,11 +29,11 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }

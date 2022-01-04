@@ -90,7 +90,9 @@ trait ClientTrait
          */
         $endpoint = preg_replace('#^https?:#', '', $endpoint);
         // // If namespaced, add /?use_namespace=1 to the endpoint
-        // if (ComponentModelComponentConfiguration::mustNamespaceTypes()) {
+        // /** @var ComponentModelComponentConfiguration */
+        // $componentConfiguration = ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
+        // if ($componentConfiguration->mustNamespaceTypes()) {
         //     $endpoint = GeneralUtils::addQueryArgs(
         //         [
         //             Request::URLPARAM_USE_NAMESPACE => true,

@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\Categories\Routing\RouteNatures as CategoryRouteNatures;
+use PoPSchema\PostCategories\Component;
 use PoPSchema\PostCategories\ComponentConfiguration;
 use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
 use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoPSchema\Posts\Component as PostsComponent;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
@@ -69,8 +72,10 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
         $vars = ApplicationState::getVars();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         $routemodules = array(
-            ComponentConfiguration::getPostCategoriesRoute() => [
+            $componentConfiguration->getPostCategoriesRoute() => [
                 PostCategoryFieldDataloadModuleProcessor::class,
                 PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST,
                 [
@@ -89,8 +94,10 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 ],
             ];
         }
+        /** @var PostsComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(PostsComponent::class)->getConfiguration();
         $routemodules = array(
-            PostsComponentConfiguration::getPostsRoute() => [
+            $componentConfiguration->getPostsRoute() => [
                 CategoryPostFieldDataloadModuleProcessor::class,
                 CategoryPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST,
                 [

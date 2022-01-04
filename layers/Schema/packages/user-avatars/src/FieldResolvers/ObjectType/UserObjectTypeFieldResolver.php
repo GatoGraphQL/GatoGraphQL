@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\FieldResolvers\ObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoPSchema\UserAvatars\Component;
 use PoPSchema\UserAvatars\ComponentConfiguration;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
@@ -97,8 +99,10 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         return match ([$fieldName => $fieldArgName]) {
-            ['avatar' => 'size'] => ComponentConfiguration::getUserAvatarDefaultSize(),
+            ['avatar' => 'size'] => $componentConfiguration->getUserAvatarDefaultSize(),
             default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -119,10 +123,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $options = []
     ): mixed {
         $user = $object;
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         switch ($fieldName) {
             case 'avatar':
                 // Create the avatar, and store it in the dynamic registry
-                $avatarSize = $fieldArgs['size'] ?? ComponentConfiguration::getUserAvatarDefaultSize();
+                $avatarSize = $fieldArgs['size'] ?? $componentConfiguration->getUserAvatarDefaultSize();
                 $avatarSrc = $this->getUserAvatarTypeAPI()->getUserAvatarSrc($user, $avatarSize);
                 if ($avatarSrc === null) {
                     return null;

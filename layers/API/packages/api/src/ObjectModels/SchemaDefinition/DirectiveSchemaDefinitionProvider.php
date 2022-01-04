@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinitionHelpers;
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
@@ -25,7 +27,9 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
         $schemaDefinition = $this->directiveResolver->getDirectiveSchemaDefinition($this->relationalTypeResolver);
 
         $dangerouslyDynamicScalarTypeResolver = null;
-        if ($skipExposingDangerouslyDynamicScalarTypeInSchema = ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($skipExposingDangerouslyDynamicScalarTypeInSchema = $componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var DangerouslyDynamicScalarTypeResolver */
             $dangerouslyDynamicScalarTypeResolver = $instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);

@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    private ?int $getMenuListDefaultLimit = 10;
+    private ?int $getMenuListMaxLimit = -1;
 
-    private static ?int $getMenuListDefaultLimit = 10;
-    private static ?int $getMenuListMaxLimit = -1;
-
-    public static function getMenuListDefaultLimit(): ?int
+    public function getMenuListDefaultLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::MENU_LIST_DEFAULT_LIMIT;
-        $selfProperty = &self::$getMenuListDefaultLimit;
+        $selfProperty = &$this->getMenuListDefaultLimit;
         $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -32,16 +30,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getMenuListMaxLimit(): ?int
+    public function getMenuListMaxLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::MENU_LIST_MAX_LIMIT;
-        $selfProperty = &self::$getMenuListMaxLimit;
+        $selfProperty = &$this->getMenuListMaxLimit;
         $defaultValue = -1; // Unlimited
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

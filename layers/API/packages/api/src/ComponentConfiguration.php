@@ -4,37 +4,39 @@ declare(strict_types=1);
 
 namespace PoP\API;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
+use PoP\Root\Managers\ComponentManager;
+use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    private bool $useSchemaDefinitionCache = false;
+    private bool $executeQueryBatchInStrictOrder = true;
+    private bool $enableEmbeddableFields = false;
+    private bool $enableMutations = true;
+    private bool $overrideRequestURI = false;
+    private bool $skipExposingGlobalFieldsInFullSchema = false;
+    private bool $sortFullSchemaAlphabetically = true;
 
-    private static bool $useSchemaDefinitionCache = false;
-    private static bool $executeQueryBatchInStrictOrder = true;
-    private static bool $enableEmbeddableFields = false;
-    private static bool $enableMutations = true;
-    private static bool $overrideRequestURI = false;
-    private static bool $skipExposingGlobalFieldsInFullSchema = false;
-    private static bool $sortFullSchemaAlphabetically = true;
-
-    public static function useSchemaDefinitionCache(): bool
+    public function useSchemaDefinitionCache(): bool
     {
         // First check that the Component Model cache is enabled
-        if (!ComponentModelComponentConfiguration::useComponentModelCache()) {
+        /** @var ComponentModelComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
+        if (!$componentConfiguration->useComponentModelCache()) {
             return false;
         }
 
         // Define properties
         $envVariable = Environment::USE_SCHEMA_DEFINITION_CACHE;
-        $selfProperty = &self::$useSchemaDefinitionCache;
+        $selfProperty = &$this->useSchemaDefinitionCache;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -43,16 +45,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function executeQueryBatchInStrictOrder(): bool
+    public function executeQueryBatchInStrictOrder(): bool
     {
         // Define properties
         $envVariable = Environment::EXECUTE_QUERY_BATCH_IN_STRICT_ORDER;
-        $selfProperty = &self::$executeQueryBatchInStrictOrder;
+        $selfProperty = &$this->executeQueryBatchInStrictOrder;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -61,16 +63,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function enableEmbeddableFields(): bool
+    public function enableEmbeddableFields(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_EMBEDDABLE_FIELDS;
-        $selfProperty = &self::$enableEmbeddableFields;
+        $selfProperty = &$this->enableEmbeddableFields;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -79,16 +81,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function enableMutations(): bool
+    public function enableMutations(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_MUTATIONS;
-        $selfProperty = &self::$enableMutations;
+        $selfProperty = &$this->enableMutations;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -102,16 +104,16 @@ class ComponentConfiguration
      * it with the website home URL.
      * Eg: the language information from qTranslate (https://domain.com/en/...)
      */
-    public static function overrideRequestURI(): bool
+    public function overrideRequestURI(): bool
     {
         // Define properties
         $envVariable = Environment::OVERRIDE_REQUEST_URI;
-        $selfProperty = &self::$overrideRequestURI;
+        $selfProperty = &$this->overrideRequestURI;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -120,16 +122,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function skipExposingGlobalFieldsInFullSchema(): bool
+    public function skipExposingGlobalFieldsInFullSchema(): bool
     {
         // Define properties
         $envVariable = Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA;
-        $selfProperty = &self::$skipExposingGlobalFieldsInFullSchema;
+        $selfProperty = &$this->skipExposingGlobalFieldsInFullSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -138,16 +140,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function sortFullSchemaAlphabetically(): bool
+    public function sortFullSchemaAlphabetically(): bool
     {
         // Define properties
         $envVariable = Environment::SORT_FULL_SCHEMA_ALPHABETICALLY;
-        $selfProperty = &self::$sortFullSchemaAlphabetically;
+        $selfProperty = &$this->sortFullSchemaAlphabetically;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

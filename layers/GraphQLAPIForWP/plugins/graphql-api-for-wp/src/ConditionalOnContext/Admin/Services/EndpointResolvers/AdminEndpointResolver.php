@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointResolvers;
 
+use PoP\Root\Managers\ComponentManager;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
+use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
@@ -64,7 +66,9 @@ class AdminEndpointResolver extends AbstractEndpointResolver
      */
     protected function loadGraphQLQueryAndVariables(): bool
     {
-        return !GraphQLRequestComponentConfiguration::disableGraphQLAPIForPoP();
+        /** @var GraphQLRequestComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(GraphQLRequestComponent::class)->getConfiguration();
+        return !$componentConfiguration->disableGraphQLAPIForPoP();
     }
 
     /**

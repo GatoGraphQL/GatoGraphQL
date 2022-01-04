@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateAccessControl\Hooks;
 
+use PoP\Root\Managers\ComponentManager;
+use PoP\AccessControl\Component;
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\AccessControl\Hooks\AbstractAccessControlForFieldsHookSet;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -23,7 +25,9 @@ class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSc
     {
         $vars = ApplicationState::getVars();
         $isUserLoggedIn = $vars['global-userstate']['is-user-logged-in'];
-        return ComponentConfiguration::usePrivateSchemaMode() && !$isUserLoggedIn;
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->usePrivateSchemaMode() && !$isUserLoggedIn;
     }
 
     /**

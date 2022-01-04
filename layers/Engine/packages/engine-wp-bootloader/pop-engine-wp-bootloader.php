@@ -20,6 +20,7 @@ if (!class_exists(AppLoader::class)) {
  * or not based on their required plugins being active.
  */
 \add_action('plugins_loaded', function(): void {
+    AppLoader::initializeComponents();
     AppLoader::bootSystem();
     AppLoader::bootApplication();
 });

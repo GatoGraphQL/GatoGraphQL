@@ -4,18 +4,26 @@ declare(strict_types=1);
 
 namespace PoP\Root\Managers;
 
+use LogicException;
+use PoP\Root\Component\ComponentInterface;
+
 /**
  * Keep a reference to all Components
  */
 class ComponentManager
 {
     /**
-     * @var string[]
+     * The initialized components, stored under their class
+     *
+     * @var array<string,ComponentInterface>
      */
-    private static array $components = [];
+    protected static array $components = [];
 
     /**
-     * Reset the state. Called during PHPUnit testing.
+     * This functions is to be called by PHPUnit,
+     * to reset the state in between tests.
+     *
+     * Reset the initialized components.
      */
     public static function reset(): void
     {
@@ -23,19 +31,34 @@ class ComponentManager
     }
 
     /**
-     * @return string[]
+     * Register and initialize a component
      */
-    public static function getComponentClasses(): array
+    public static function register(string $componentClass): ComponentInterface
     {
-        return self::$components;
+        $component = new $componentClass();
+        self::$components[$componentClass] = $component;
+        return $component;
     }
 
     /**
-     * Register a component
+     * @throws LogicException If the class of the component does not exist or has not been initialized
      */
-    public static function register(string $component): void
+    public static function getComponent(string $componentClass): ComponentInterface
     {
-        self::$components[] = $component;
+        return self::$components[$componentClass] ?? throw new LogicException(\sprintf(
+            'Component of class \'%s\' does not exist, or it has not been added for initialization',
+            $componentClass
+        ));
+    }
+
+    /**
+     * Configure components
+     */
+    public static function configureComponents(): void
+    {
+        foreach (self::$components as $component) {
+            $component->configure();
+        }
     }
 
     /**
@@ -44,7 +67,7 @@ class ComponentManager
     public static function bootSystem(): void
     {
         foreach (self::$components as $component) {
-            $component::bootSystem();
+            $component->bootSystem();
         }
     }
 
@@ -54,7 +77,7 @@ class ComponentManager
     public static function beforeBoot(): void
     {
         foreach (self::$components as $component) {
-            $component::beforeBoot();
+            $component->beforeBoot();
         }
     }
 
@@ -64,7 +87,7 @@ class ComponentManager
     public static function boot(): void
     {
         foreach (self::$components as $component) {
-            $component::boot();
+            $component->boot();
         }
     }
 
@@ -74,7 +97,7 @@ class ComponentManager
     public static function afterBoot(): void
     {
         foreach (self::$components as $component) {
-            $component::afterBoot();
+            $component->afterBoot();
         }
     }
 }

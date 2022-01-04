@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
+use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
+use PoP\API\Component as APIComponent;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -53,7 +55,9 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
      */
     public function getSchemaMutationRootObjectTypeResolver(): ?ObjectTypeResolverInterface
     {
-        if (!APIComponentConfiguration::enableMutations()) {
+        /** @var APIComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(APIComponent::class)->getConfiguration();
+        if (!$componentConfiguration->enableMutations()) {
             return null;
         }
         $vars = ApplicationState::getVars();

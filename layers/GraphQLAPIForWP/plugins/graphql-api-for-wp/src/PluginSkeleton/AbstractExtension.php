@@ -87,6 +87,10 @@ abstract class AbstractExtension extends AbstractPlugin
                     [$this, 'initialize']
                 );
                 \add_action(
+                    PluginLifecycleHooks::CONFIGURE_EXTENSION_COMPONENTS,
+                    [$this, 'configureComponents']
+                );
+                \add_action(
                     PluginLifecycleHooks::CONFIGURE_EXTENSION,
                     [$this, 'configure']
                 );

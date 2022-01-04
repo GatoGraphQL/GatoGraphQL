@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomyQueryWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -16,7 +16,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoPSchema\TaxonomyQuery\Component::class,

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Testing\PHPUnit;
+namespace PoP\Engine;
 
 use PoP\Engine\AppLoader;
-use PoP\Root\Testing\PHPUnit\AbstractTestCase as UpstreamAbstractTestCase;
+use PoP\Root\AbstractTestCase as UpstreamAbstractTestCase;
 
 abstract class AbstractTestCase extends UpstreamAbstractTestCase
 {

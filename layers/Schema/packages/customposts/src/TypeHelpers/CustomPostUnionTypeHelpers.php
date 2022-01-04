@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeHelpers;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoPSchema\CustomPosts\Component;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
@@ -55,7 +57,9 @@ class CustomPostUnionTypeHelpers
         $targetTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
         if ($targetTypeResolvers) {
             // By configuration: If there is only 1 item, return only that one
-            if (ComponentConfiguration::useSingleTypeInsteadOfCustomPostUnionType()) {
+            /** @var ComponentConfiguration */
+            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+            if ($componentConfiguration->useSingleTypeInsteadOfCustomPostUnionType()) {
                 return count($targetTypeResolvers) === 1 ?
                     $targetTypeResolvers[0] :
                     $unionTypeResolver;

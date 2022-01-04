@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    private bool $disableGraphQLAPIForPoP = false;
 
-    private static bool $disableGraphQLAPIForPoP = false;
-
-    public static function disableGraphQLAPIForPoP(): bool
+    public function disableGraphQLAPIForPoP(): bool
     {
         // Define properties
         $envVariable = Environment::DISABLE_GRAPHQL_API_FOR_POP;
-        $selfProperty = &self::$disableGraphQLAPIForPoP;
+        $selfProperty = &$this->disableGraphQLAPIForPoP;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

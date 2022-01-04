@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLClientsForWP;
 
+use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLServer\Component as GraphQLServerComponent;
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
@@ -20,7 +21,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoP\APIClients\Component::class,
@@ -35,22 +36,23 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if (self::isEnabled()) {
-            ComponentConfiguration::setConfiguration($configuration);
-            self::initServices(dirname(__DIR__));
-            if (ComponentConfiguration::useGraphiQLExplorer()) {
-                self::initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
+        if ($this->isEnabled()) {
+            $this->initServices(dirname(__DIR__));
+            /** @var ComponentConfiguration */
+            $componentConfiguration = $this->getConfiguration();
+            if ($componentConfiguration->useGraphiQLExplorer()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
             }
         }
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
-        return GraphQLServerComponent::isEnabled();
+        return ComponentManager::getComponent(GraphQLServerComponent::class)->isEnabled();
     }
 }

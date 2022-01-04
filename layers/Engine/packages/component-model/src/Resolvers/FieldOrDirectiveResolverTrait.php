@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
+use PoP\Root\Managers\ComponentManager;
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
@@ -33,7 +35,9 @@ trait FieldOrDirectiveResolverTrait
             fn (string $fieldArgName) => !isset($fieldOrDirectiveArgs[$fieldArgName])
         ));
         if ($missing !== []) {
-            $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
+            /** @var ComponentConfiguration */
+            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+            $treatUndefinedFieldOrDirectiveArgsAsErrors = $componentConfiguration->treatUndefinedFieldOrDirectiveArgsAsErrors();
             $errorMessage = count($missing) == 1 ?
                 sprintf(
                     $this->getTranslationAPI()->__('Argument \'%1$s\' cannot be empty', 'component-model'),

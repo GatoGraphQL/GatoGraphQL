@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\PagesWP;
 
-use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Pages\ComponentConfiguration;
+use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Managers\ComponentManager;
+use PoPSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
+use PoPSchema\Pages\Component as PagesComponent;
 
 /**
  * Initialize component
@@ -17,7 +19,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoPSchema\Pages\Component::class,
@@ -31,14 +33,16 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initServices(dirname(__DIR__));
-        if (ComponentConfiguration::addPageTypeToCustomPostUnionTypes()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes/Overrides');
+        $this->initServices(dirname(__DIR__));
+        /** @var PagesComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(PagesComponent::class)->getConfiguration();
+        if ($componentConfiguration->addPageTypeToCustomPostUnionTypes()) {
+            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes/Overrides');
         }
     }
 }

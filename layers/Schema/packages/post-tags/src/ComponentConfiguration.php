@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    // private ?int $getPostTagListDefaultLimit = 10;
+    // private ?int $getPostTagListMaxLimit = -1;
+    private string $getPostTagsRoute = '';
 
-    // private static ?int $getPostTagListDefaultLimit = 10;
-    // private static ?int $getPostTagListMaxLimit = -1;
-    private static string $getPostTagsRoute = '';
-
-    // public static function getPostTagListDefaultLimit(): ?int
+    // public function getPostTagListDefaultLimit(): ?int
     // {
     //     // Define properties
     //     $envVariable = Environment::POSTTAG_LIST_DEFAULT_LIMIT;
-    //     $selfProperty = &self::$getPostTagListDefaultLimit;
+    //     $selfProperty = &$this->getPostTagListDefaultLimit;
     //     $defaultValue = 10;
     //     $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
     //     // Initialize property from the environment/hook
-    //     self::maybeInitializeConfigurationValue(
+    //     $this->maybeInitializeConfigurationValue(
     //         $envVariable,
     //         $selfProperty,
     //         $defaultValue,
@@ -32,16 +30,16 @@ class ComponentConfiguration
     //     return $selfProperty;
     // }
 
-    // public static function getPostTagListMaxLimit(): ?int
+    // public function getPostTagListMaxLimit(): ?int
     // {
     //     // Define properties
     //     $envVariable = Environment::POSTTAG_LIST_MAX_LIMIT;
-    //     $selfProperty = &self::$getPostTagListMaxLimit;
+    //     $selfProperty = &$this->getPostTagListMaxLimit;
     //     $defaultValue = -1; // Unlimited
     //     $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
     //     // Initialize property from the environment/hook
-    //     self::maybeInitializeConfigurationValue(
+    //     $this->maybeInitializeConfigurationValue(
     //         $envVariable,
     //         $selfProperty,
     //         $defaultValue,
@@ -50,15 +48,15 @@ class ComponentConfiguration
     //     return $selfProperty;
     // }
 
-    public static function getPostTagsRoute(): string
+    public function getPostTagsRoute(): string
     {
         // Define properties
         $envVariable = Environment::POSTTAGS_ROUTE;
-        $selfProperty = &self::$getPostTagsRoute;
+        $selfProperty = &$this->getPostTagsRoute;
         $defaultValue = 'tags';
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue

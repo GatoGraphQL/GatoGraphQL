@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\TypeKinds;
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -72,7 +74,9 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
     final protected function addFieldSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
     {
         $dangerouslyDynamicScalarTypeResolver = null;
-        if ($skipExposingDangerouslyDynamicScalarTypeInSchema = ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($skipExposingDangerouslyDynamicScalarTypeInSchema = $componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var DangerouslyDynamicScalarTypeResolver */
             $dangerouslyDynamicScalarTypeResolver = $instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);

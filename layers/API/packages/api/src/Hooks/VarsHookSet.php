@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\API\Hooks;
 
+use PoP\Root\Managers\ComponentManager;
+use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Constants\Actions;
 use PoP\API\Facades\FieldQueryConvertorFacade;
@@ -106,7 +108,9 @@ class VarsHookSet extends AbstractHookSet
             $vars['actions'][] = Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT;
 
             // Enable mutations?
-            $vars['are-mutations-enabled'] = ComponentConfiguration::enableMutations();
+            /** @var ComponentConfiguration */
+            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+            $vars['are-mutations-enabled'] = $componentConfiguration->enableMutations();
 
             // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)
             $vars['does-api-query-have-errors'] = false;

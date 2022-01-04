@@ -4,27 +4,25 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLEndpointForWP;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\APIEndpoints\EndpointUtils;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    private bool $isGraphQLAPIEndpointDisabled = false;
+    private string $getGraphQLAPIEndpoint = '/api/graphql/';
 
-    private static bool $isGraphQLAPIEndpointDisabled = false;
-    private static string $getGraphQLAPIEndpoint = '/api/graphql/';
-
-    public static function isGraphQLAPIEndpointDisabled(): bool
+    public function isGraphQLAPIEndpointDisabled(): bool
     {
         // Define properties
         $envVariable = Environment::DISABLE_GRAPHQL_API_ENDPOINT;
-        $selfProperty = &self::$isGraphQLAPIEndpointDisabled;
+        $selfProperty = &$this->isGraphQLAPIEndpointDisabled;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -33,16 +31,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getGraphQLAPIEndpoint(): string
+    public function getGraphQLAPIEndpoint(): string
     {
         // Define properties
         $envVariable = Environment::GRAPHQL_API_ENDPOINT;
-        $selfProperty = &self::$getGraphQLAPIEndpoint;
+        $selfProperty = &$this->getGraphQLAPIEndpoint;
         $defaultValue = '/api/graphql/';
         $callback = [EndpointUtils::class, 'slashURI'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

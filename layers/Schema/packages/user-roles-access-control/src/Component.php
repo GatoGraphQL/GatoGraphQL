@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\CacheControl\Component as CacheControlComponent;
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
@@ -21,7 +22,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoPSchema\UserRoles\Component::class,
@@ -32,7 +33,7 @@ class Component extends AbstractComponent
     /**
      * All conditional component classes that this component depends upon, to initialize them
      */
-    public static function getDependedConditionalComponentClasses(): array
+    public function getDependedConditionalComponentClasses(): array
     {
         return [
             \PoP\CacheControl\Component::class,
@@ -45,17 +46,17 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if (self::isEnabled()) {
-            self::initServices(dirname(__DIR__));
-            self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        if ($this->isEnabled()) {
+            $this->initServices(dirname(__DIR__));
+            $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
             if (class_exists(CacheControlComponent::class)) {
-                self::initSchemaServices(
+                $this->initSchemaServices(
                     dirname(__DIR__),
                     $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses),
                     '/ConditionalOnComponent/CacheControl'
@@ -64,8 +65,8 @@ class Component extends AbstractComponent
         }
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
-        return AccessControlComponent::isEnabled();
+        return ComponentManager::getComponent(AccessControlComponent::class)->isEnabled();
     }
 }

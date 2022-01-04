@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\FieldResolvers\ObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageOnCustomPostMutationResolver;
@@ -75,7 +77,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getFieldNamesToResolve(): array
     {
-        if (EngineComponentConfiguration::disableRedundantRootTypeMutationFields()) {
+        /** @var EngineComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(EngineComponent::class)->getConfiguration();
+        if ($componentConfiguration->disableRedundantRootTypeMutationFields()) {
             return [];
         }
         return [

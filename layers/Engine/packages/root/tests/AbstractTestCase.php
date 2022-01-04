@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\Testing\PHPUnit;
+namespace PoP\Root;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
@@ -14,10 +14,9 @@ abstract class AbstractTestCase extends TestCase
 {
     private ?ContainerInterface $container = null;
 
-    protected final function initializeContainer(): void
+    final protected function initializeContainer(): void
     {
-        $componentClass = $this->getComponentClass();
-        $this->initializeAppLoader($componentClass, false, null, null, true);
+        $this->initializeAppLoader(false, null, null, true);
         $this->container = ContainerBuilderFactory::getInstance();
     }
 
@@ -27,23 +26,33 @@ abstract class AbstractTestCase extends TestCase
     }
 
     protected function initializeAppLoader(
-        string $componentClass,
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
         ?string $containerDirectory = null,
         bool $isDev = false
     ): void {
         $appLoader = $this->getAppLoaderClass();
-        $appLoader::addComponentClassesToInitialize([$componentClass]);
-        $appLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
+        $appLoader::addComponentClassesToInitialize($this->getComponentClassesToInitialize());
+        $appLoader::initializeComponents($isDev);
+        $appLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
         $appLoader::addComponentClassConfiguration(
             $this->getComponentClassConfiguration()
         );
-        
-        $appLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
+
+        $appLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getComponentClassesToInitialize(): array
+    {
+        return [
+            $this->getComponentClass(),
+        ];
     }
 
     /**

@@ -2,9 +2,10 @@
 
 namespace GraphQLByPoP\GraphQLServer;
 
-use PHPUnit\Framework\TestCase;
+use PoP\Engine\AbstractTestCase;
+use PoP\Root\Managers\ComponentManager;
 
-class ComponentTest extends TestCase
+class ComponentTest extends AbstractTestCase
 {
     /**
      * The component must have some dependency (only the root has not)
@@ -12,7 +13,7 @@ class ComponentTest extends TestCase
     public function testHasDependedComponentClasses(): void
     {
         $this->assertNotEmpty(
-            Component::getDependedComponentClasses()
+            ComponentManager::getComponent(Component::class)->getDependedComponentClasses()
         );
     }
 }

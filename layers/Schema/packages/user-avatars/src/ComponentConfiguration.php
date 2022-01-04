@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    private int $getUserAvatarDefaultSize = 96;
 
-    private static int $getUserAvatarDefaultSize = 96;
-
-    public static function getUserAvatarDefaultSize(): int
+    public function getUserAvatarDefaultSize(): int
     {
         // Define properties
         $envVariable = Environment::USER_AVATAR_DEFAULT_SIZE;
-        $selfProperty = &self::$getUserAvatarDefaultSize;
+        $selfProperty = &$this->getUserAvatarDefaultSize;
         $defaultValue = 96;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

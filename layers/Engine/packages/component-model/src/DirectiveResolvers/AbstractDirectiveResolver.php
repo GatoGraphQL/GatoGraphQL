@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\Root\Managers\ComponentManager;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveKinds;
@@ -1113,14 +1115,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             }
         }
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
-        $removeFieldIfDirectiveFailed = ComponentConfiguration::removeFieldIfDirectiveFailed();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $removeFieldIfDirectiveFailed = $componentConfiguration->removeFieldIfDirectiveFailed();
         if ($removeFieldIfDirectiveFailed) {
             $this->removeIDsDataFields(
                 $idsDataFieldsToRemove,
                 $succeedingPipelineIDsDataFields
             );
         }
-        $setFailingFieldResponseAsNull = ComponentConfiguration::setFailingFieldResponseAsNull();
+        $setFailingFieldResponseAsNull = $componentConfiguration->setFailingFieldResponseAsNull();
         if ($setFailingFieldResponseAsNull) {
             $this->setIDsDataFieldsAsNull(
                 $relationalTypeResolver,
@@ -1205,7 +1209,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * If disabled, then do not expose the directive if it
          * has any mandatory argument of type `DangerouslyDynamic`
          */
-        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             /**
              * If `DangerouslyDynamic` is disabled, do not expose the field if either:
              *

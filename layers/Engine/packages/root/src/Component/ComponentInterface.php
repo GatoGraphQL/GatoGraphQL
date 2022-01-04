@@ -16,7 +16,7 @@ interface ComponentInterface
      * @param boolean $skipSchema Indicate if to skip initializing the schema
      * @param string[] $skipSchemaComponentClasses
      */
-    public static function initialize(
+    public function initialize(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
@@ -32,38 +32,76 @@ interface ComponentInterface
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array;
+    public function getDependedComponentClasses(): array;
 
     /**
      * All DEV component classes that this component depends upon, to initialize them
      *
      * @return string[]
      */
-    public static function getDevDependedComponentClasses(): array;
+    public function getDevDependedComponentClasses(): array;
 
     /**
      * All conditional component classes that this component depends upon, to initialize them
      *
      * @return string[]
      */
-    public static function getDependedConditionalComponentClasses(): array;
+    public function getDependedConditionalComponentClasses(): array;
 
-    // /**
-    //  * Initialize services
-    //  */
-    // public static function init(): void;
+    /**
+     * Function called by the Bootloader before booting the system
+     */
+    public function configure(): void;
+
+    /**
+     * Function called by the Bootloader when booting the system
+     */
+    public function bootSystem(): void;
+
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public static function beforeBoot(): void;
+    public function beforeBoot(): void;
 
     /**
      * Function called by the Bootloader when booting the system
      */
-    public static function boot(): void;
+    public function boot(): void;
 
     /**
      * Function called by the Bootloader when booting the system
      */
-    public static function afterBoot(): void;
+    public function afterBoot(): void;
+
+    /**
+     * Initialize services for the system container
+     */
+    public function initializeSystem(): void;
+
+    /**
+     * Compiler Passes for the System Container
+     *
+     * @return string[]
+     */
+    public function getSystemContainerCompilerPassClasses(): array;
+
+     /**
+     * Enable each component to set default configuration for
+     * itself and its depended components
+     *
+     * @param array<string, mixed> $componentClassConfiguration
+     */
+    public function customizeComponentClassConfiguration(
+        array &$componentClassConfiguration
+    ): void;
+
+    /**
+     * Indicates if the Component is enabled
+     */
+    public function isEnabled(): bool;
+
+    /**
+     * ComponentConfiguration for the Component
+     */
+    public function getConfiguration(): ?ComponentConfigurationInterface;
 }

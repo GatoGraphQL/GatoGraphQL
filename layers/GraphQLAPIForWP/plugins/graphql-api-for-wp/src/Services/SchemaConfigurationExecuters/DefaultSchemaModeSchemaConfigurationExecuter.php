@@ -7,10 +7,11 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaModeBlock;
+use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
+use PoP\BasicService\Component\ComponentConfigurationHelpers;
 
 class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {

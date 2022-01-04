@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -11,6 +12,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoPSchema\Comments\Component;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
@@ -190,9 +192,11 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         switch ($fieldName) {
             case 'comment':
-                if (ComponentConfiguration::treatCommentStatusAsAdminData()) {
+                if ($componentConfiguration->treatCommentStatusAsAdminData()) {
                     $commentStatusFilterInputName = FilterInputHelper::getFilterInputName([
                         FilterInputModuleProcessor::class,
                         FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS

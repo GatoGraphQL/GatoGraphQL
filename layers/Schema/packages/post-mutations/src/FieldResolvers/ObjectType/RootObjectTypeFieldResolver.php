@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\FieldResolvers\ObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
@@ -75,11 +77,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldNamesToResolve(): array
     {
+        /** @var EngineComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(EngineComponent::class)->getConfiguration();
         return array_merge(
             [
                 'createPost',
             ],
-            !EngineComponentConfiguration::disableRedundantRootTypeMutationFields() ? [
+            !$componentConfiguration->disableRedundantRootTypeMutationFields() ? [
                 'updatePost',
             ] : []
         );

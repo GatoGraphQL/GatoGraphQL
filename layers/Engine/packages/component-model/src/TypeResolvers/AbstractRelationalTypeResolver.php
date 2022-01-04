@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
@@ -1068,9 +1070,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // If any directive failed validation and the field must be set to `null`,
             // then skip processing that field altogether
             $schemaErrorFailingFields = [];
+            /** @var ComponentConfiguration */
+            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
             if (
                 !empty($directivePipelineSchemaErrors)
-                && ComponentConfiguration::removeFieldIfDirectiveFailed()
+                && $componentConfiguration->removeFieldIfDirectiveFailed()
             ) {
                 // Extract the failing fields from the path of the thrown error
                 foreach ($directivePipelineSchemaErrors as $directivePipelineSchemaError) {

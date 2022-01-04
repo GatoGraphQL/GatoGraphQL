@@ -20,7 +20,7 @@ class AppLoader
      *
      * @var string[]
      */
-    protected static array $initializedClasses = [];
+    protected static array $initializedComponentClasses = [];
     /**
      * Component in their initialization order
      *
@@ -47,19 +47,21 @@ class AppLoader
     protected static array $skipSchemaComponentClasses = [];
 
     /**
-     * Reset the state. Called during PHPUnit testing.
+     * This functions is to be called by PHPUnit,
+     * to reset the state in between tests.
+     *
+     * Reset the state of the Application.
      */
     public static function reset(): void
     {
-        foreach (self::$orderedComponentClasses as $componentClass) {
-            $componentClass::reset();
-        }
-
-        self::$initializedClasses = [];
+        self::$initializedComponentClasses = [];
         self::$orderedComponentClasses = [];
         self::$componentClassesToInitialize = [];
         self::$componentClassConfiguration = [];
         self::$skipSchemaComponentClasses = [];
+
+        ContainerBuilderFactory::reset();
+        SystemContainerBuilderFactory::reset();
         ComponentManager::reset();
     }
 
@@ -114,31 +116,9 @@ class AppLoader
      * following the Composer dependencies tree
      *
      * @param string[] $componentClasses List of `Component` class to initialize
-     * @return string[]
      */
-    final protected static function getComponentsOrderedForInitialization(
+    private static function addComponentsOrderedForInitialization(
         array $componentClasses,
-        bool $isDev
-    ): array {
-        $orderedComponentClasses = [];
-        self::addComponentsOrderedForInitialization(
-            $componentClasses,
-            $orderedComponentClasses,
-            $isDev
-        );
-        return $orderedComponentClasses;
-    }
-
-    /**
-     * Get the array of components ordered by how they must be initialized,
-     * following the Composer dependencies tree
-     *
-     * @param string[] $componentClasses List of `Component` class to initialize
-     * @param string[] $orderedComponentClasses List of `Component` class in order of initialization
-     */
-    final protected static function addComponentsOrderedForInitialization(
-        array $componentClasses,
-        array &$orderedComponentClasses,
         bool $isDev
     ): void {
         /**
@@ -147,22 +127,23 @@ class AppLoader
          */
         $componentClasses = array_values(array_diff(
             $componentClasses,
-            self::$initializedClasses
+            self::$initializedComponentClasses
         ));
         foreach ($componentClasses as $componentClass) {
-            self::$initializedClasses[] = $componentClass;
+            self::$initializedComponentClasses[] = $componentClass;
+
+            // Initialize and register the Component
+            $component = ComponentManager::register($componentClass);
 
             // Initialize all depended-upon PoP components
             self::addComponentsOrderedForInitialization(
-                $componentClass::getDependedComponentClasses(),
-                $orderedComponentClasses,
+                $component->getDependedComponentClasses(),
                 $isDev
             );
 
             if ($isDev) {
                 self::addComponentsOrderedForInitialization(
-                    $componentClass::getDevDependedComponentClasses(),
-                    $orderedComponentClasses,
+                    $component->getDevDependedComponentClasses(),
                     $isDev
                 );
             }
@@ -170,16 +151,42 @@ class AppLoader
             // Initialize all depended-upon PoP conditional components, if they are installed
             self::addComponentsOrderedForInitialization(
                 array_filter(
-                    $componentClass::getDependedConditionalComponentClasses(),
+                    $component->getDependedConditionalComponentClasses(),
                     'class_exists'
                 ),
-                $orderedComponentClasses,
                 $isDev
             );
 
             // We reached the bottom of the rung, add the component to the list
-            $orderedComponentClasses[] = $componentClass;
+            self::$orderedComponentClasses[] = $componentClass;
         }
+    }
+
+    /**
+     * Get the array of components ordered by how they must be initialized,
+     * following the Composer dependencies tree
+     *
+     * @param boolean $isDev Indicate if testing with PHPUnit, as to load components only for DEV
+     */
+    public static function initializeComponents(
+        bool $isDev = false
+    ): void {
+        // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
+        DotenvBuilderFactory::init();
+
+        /**
+         * Calculate the components in their initialization order
+         */
+        self::addComponentsOrderedForInitialization(
+            self::$componentClassesToInitialize,
+            $isDev
+        );
+
+        /**
+         * After initialized, and before booting,
+         * allow the components to inject their own configuration
+         */
+        static::configureComponents();
     }
 
     /**
@@ -194,32 +201,12 @@ class AppLoader
      * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
      * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
      * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
-     * @param boolean $isDev Indicate if testing with PHPUnit, as to load components only for DEV
      */
     public static function bootSystem(
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
         ?string $containerDirectory = null,
-        bool $isDev = false
     ): void {
-        // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
-        DotenvBuilderFactory::init();
-
-        /**
-         * Calculate the components in their initialization order
-         */
-        self::$orderedComponentClasses = self::getComponentsOrderedForInitialization(
-            self::$componentClassesToInitialize,
-            $isDev
-        );
-
-        /**
-         * Register all components in the ComponentManager
-         */
-        foreach (self::$orderedComponentClasses as $componentClass) {
-            ComponentManager::register($componentClass);
-        }
-
         /**
          * System container: initialize it and compile it already,
          * since it will be used to initialize the Application container
@@ -237,7 +224,8 @@ class AppLoader
          * Application Container services.
          */
         foreach (self::$orderedComponentClasses as $componentClass) {
-            $componentClass::initializeSystem();
+            $component = ComponentManager::getComponent($componentClass);
+            $component->initializeSystem();
         }
         $systemCompilerPasses = array_map(
             fn ($class) => new $class(),
@@ -247,6 +235,15 @@ class AppLoader
 
         // Finally boot the components
         static::bootSystemForComponents();
+    }
+
+    /**
+     * Trigger after initializing all components,
+     * and before booting the system
+     */
+    protected static function configureComponents(): void
+    {
+        ComponentManager::configureComponents();
     }
 
     /**
@@ -266,9 +263,10 @@ class AppLoader
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
         foreach (self::$orderedComponentClasses as $componentClass) {
+            $component = ComponentManager::getComponent($componentClass);
             $compilerPassClasses = [
                 ...$compilerPassClasses,
-                ...$componentClass::getSystemContainerCompilerPassClasses()
+                ...$component->getSystemContainerCompilerPassClasses()
             ];
         }
         return array_values(array_unique($compilerPassClasses));
@@ -295,7 +293,8 @@ class AppLoader
          * Hence this is executed from bottom to top
          */
         foreach (array_reverse(self::$orderedComponentClasses) as $componentClass) {
-            $componentClass::customizeComponentClassConfiguration(self::$componentClassConfiguration);
+            $component = ComponentManager::getComponent($componentClass);
+            $component->customizeComponentClassConfiguration(self::$componentClassConfiguration);
         }
 
         /**
@@ -312,9 +311,10 @@ class AppLoader
          */
         foreach (self::$orderedComponentClasses as $componentClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
+            $component = ComponentManager::getComponent($componentClass);
             $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
             $skipSchemaForComponent = in_array($componentClass, self::$skipSchemaComponentClasses);
-            $componentClass::initialize(
+            $component->initialize(
                 $componentConfiguration,
                 $skipSchemaForComponent,
                 self::$skipSchemaComponentClasses

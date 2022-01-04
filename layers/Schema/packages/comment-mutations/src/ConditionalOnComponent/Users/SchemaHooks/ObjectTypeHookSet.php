@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\ConditionalOnComponent\Users\SchemaHooks;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\BasicService\AbstractHookSet;
+use PoPSchema\CommentMutations\Component;
 use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\CommentMutations\FieldResolvers\ObjectType\AbstractAddCommentToCustomPostObjectTypeFieldResolver;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
@@ -50,8 +52,10 @@ class ObjectTypeHookSet extends AbstractHookSet
         }
 
         $vars = ApplicationState::getVars();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         if (
-            !ComponentConfiguration::mustUserBeLoggedInToAddComment()
+            !$componentConfiguration->mustUserBeLoggedInToAddComment()
             && $vars['global-userstate']['is-user-logged-in']
         ) {
             $userID = $vars['global-userstate']['current-user-id'];

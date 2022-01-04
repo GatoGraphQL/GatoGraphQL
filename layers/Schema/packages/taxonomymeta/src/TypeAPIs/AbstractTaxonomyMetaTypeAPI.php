@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomyMeta\TypeAPIs;
 
+use PoP\Root\Managers\ComponentManager;
 use InvalidArgumentException;
 use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
+use PoPSchema\TaxonomyMeta\Component;
 use PoPSchema\TaxonomyMeta\ComponentConfiguration;
 
 abstract class AbstractTaxonomyMetaTypeAPI extends AbstractMetaTypeAPI implements TaxonomyMetaTypeAPIInterface
@@ -32,11 +34,15 @@ abstract class AbstractTaxonomyMetaTypeAPI extends AbstractMetaTypeAPI implement
      */
     public function getAllowOrDenyMetaEntries(): array
     {
-        return ComponentConfiguration::getTaxonomyMetaEntries();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getTaxonomyMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
-        return ComponentConfiguration::getTaxonomyMetaBehavior();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getTaxonomyMetaBehavior();
     }
 
     /**

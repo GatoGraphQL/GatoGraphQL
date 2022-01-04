@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
+use PoPSchema\Posts\Component as PostsComponent;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPSchema\PostTags\Component;
 use PoPSchema\PostTags\ComponentConfiguration;
 use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
 use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
@@ -69,8 +72,10 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
         $vars = ApplicationState::getVars();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         $routemodules = array(
-            ComponentConfiguration::getPostTagsRoute() => [
+            $componentConfiguration->getPostTagsRoute() => [
                 PostTagFieldDataloadModuleProcessor::class,
                 PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
                 [
@@ -89,8 +94,10 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 ],
             ];
         }
+        /** @var PostsComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(PostsComponent::class)->getConfiguration();
         $routemodules = array(
-            PostsComponentConfiguration::getPostsRoute() => [
+            $componentConfiguration->getPostsRoute() => [
                 TagPostFieldDataloadModuleProcessor::class,
                 TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
                 [

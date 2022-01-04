@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    private ?int $getStanceListDefaultLimit = 10;
+    private ?int $getStanceListMaxLimit = -1;
 
-    private static ?int $getStanceListDefaultLimit = 10;
-    private static ?int $getStanceListMaxLimit = -1;
-
-    public static function getStanceListDefaultLimit(): ?int
+    public function getStanceListDefaultLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::STANCE_LIST_DEFAULT_LIMIT;
@@ -23,7 +21,7 @@ class ComponentConfiguration
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -32,7 +30,7 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getStanceListMaxLimit(): ?int
+    public function getStanceListMaxLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::STANCE_LIST_MAX_LIMIT;

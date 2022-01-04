@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
+use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
@@ -12,7 +13,7 @@ use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfigurat
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
@@ -27,7 +28,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \GraphQLByPoP\GraphQLRequest\Component::class,
@@ -37,7 +38,7 @@ class Component extends AbstractComponent
     /**
      * All conditional component classes that this component depends upon, to initialize them
      */
-    public static function getDependedConditionalComponentClasses(): array
+    public function getDependedConditionalComponentClasses(): array
     {
         return [
             \PoP\AccessControl\Component::class,
@@ -50,21 +51,23 @@ class Component extends AbstractComponent
      *
      * @param array<string, mixed> $componentClassConfiguration
      */
-    public static function customizeComponentClassConfiguration(
+    public function customizeComponentClassConfiguration(
         array &$componentClassConfiguration
     ): void {
         // The mutation scheme can be set by param ?mutation_scheme=..., with values:
         // - "standard" => Use QueryRoot and MutationRoot
         // - "nested" => Use Root, and nested mutations with redundant root fields
         // - "lean_nested" => Use Root, and nested mutations without redundant root fields
-        if (ComponentConfiguration::enableSettingMutationSchemeByURLParam()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = $this->getConfiguration();
+        if ($componentConfiguration->enableSettingMutationSchemeByURLParam()) {
             if ($mutationScheme = Request::getMutationScheme()) {
                 $componentClassConfiguration[self::class][Environment::ENABLE_NESTED_MUTATIONS] = $mutationScheme != MutationSchemes::STANDARD;
                 $componentClassConfiguration[EngineComponent::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = $mutationScheme == MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS;
             }
         }
         // Enable GraphQL Introspection for PQL by doing ?enable_graphql_introspection=1
-        if (ComponentConfiguration::enableEnablingGraphQLIntrospectionByURLParam()) {
+        if ($componentConfiguration->enableEnablingGraphQLIntrospectionByURLParam()) {
             $enableGraphQLIntrospection = Request::enableGraphQLIntrospection();
             if ($enableGraphQLIntrospection !== null) {
                 $componentClassConfiguration[self::class][Environment::ENABLE_GRAPHQL_INTROSPECTION] = $enableGraphQLIntrospection;
@@ -78,25 +81,26 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if (self::isEnabled()) {
-            ComponentConfiguration::setConfiguration($configuration);
-            self::initServices(dirname(__DIR__));
-            self::initServices(dirname(__DIR__), '/Overrides');
-            self::initSchemaServices(dirname(__DIR__), $skipSchema);
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
+        if ($this->isEnabled()) {
+            $this->initServices(dirname(__DIR__));
+            $this->initServices(dirname(__DIR__), '/Overrides');
+            $this->initSchemaServices(dirname(__DIR__), $skipSchema);
+            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
 
             // Boot conditionals
+            /** @var AccessControlComponentConfiguration */
+            $componentConfiguration = ComponentManager::getComponent(AccessControlComponent::class)->getConfiguration();
             if (
                 class_exists(CacheControlComponent::class)
                 && class_exists(AccessControlComponent::class)
-                && AccessControlComponentConfiguration::canSchemaBePrivate()
+                && $componentConfiguration->canSchemaBePrivate()
             ) {
-                self::initSchemaServices(
+                $this->initSchemaServices(
                     dirname(__DIR__),
                     $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses),
                     '/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema'
@@ -108,15 +112,15 @@ class Component extends AbstractComponent
     /**
      * Initialize services for the system container
      */
-    protected static function initializeSystemContainerServices(): void
+    protected function initializeSystemContainerServices(): void
     {
-        if (self::isEnabled()) {
-            self::initSystemServices(dirname(__DIR__));
+        if ($this->isEnabled()) {
+            $this->initSystemServices(dirname(__DIR__));
         }
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
-        return GraphQLRequestComponent::isEnabled();
+        return ComponentManager::getComponent(GraphQLRequestComponent::class)->isEnabled();
     }
 }

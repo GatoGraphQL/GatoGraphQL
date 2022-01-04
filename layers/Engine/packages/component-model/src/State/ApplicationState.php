@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\State;
 
+use PoP\Root\Managers\ComponentManager;
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
@@ -159,6 +161,8 @@ class ApplicationState
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $variables = $fieldQueryInterpreter->getVariablesFromRequest();
 
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         self::$vars = array(
             'nature' => $nature,
             'route' => $route,
@@ -178,7 +182,7 @@ class ApplicationState
             'version' => $version,
             'variables' => $variables,
             'only-fieldname-as-outputkey' => false,
-            'namespace-types-and-interfaces' => ComponentConfiguration::mustNamespaceTypes(),
+            'namespace-types-and-interfaces' => $componentConfiguration->mustNamespaceTypes(),
             'version-constraint' => Request::getVersionConstraint(),
             'field-version-constraints' => Request::getVersionConstraintsForFields(),
             'directive-version-constraints' => Request::getVersionConstraintsForDirectives(),
@@ -186,7 +190,7 @@ class ApplicationState
             'are-mutations-enabled' => true,
         );
 
-        if (ComponentConfiguration::enableConfigByParams()) {
+        if ($componentConfiguration->enableConfigByParams()) {
             self::$vars['config'] = $_REQUEST[Params::CONFIG] ?? null;
         }
 

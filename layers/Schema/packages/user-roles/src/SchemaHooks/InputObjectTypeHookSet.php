@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\SchemaHooks;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\BasicService\AbstractHookSet;
+use PoPSchema\UserRoles\Component;
 use PoPSchema\UserRoles\ComponentConfiguration;
 use PoPSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\Users\TypeResolvers\InputObjectType\AbstractUsersFilterInputObjectTypeResolver;
@@ -91,7 +93,9 @@ class InputObjectTypeHookSet extends AbstractHookSet
         if (!($inputObjectTypeResolver instanceof AbstractUsersFilterInputObjectTypeResolver)) {
             return $adminInputFieldNames;
         }
-        if (ComponentConfiguration::treatUserRoleAsAdminData()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->treatUserRoleAsAdminData()) {
             $adminInputFieldNames[] = 'roles';
             $adminInputFieldNames[] = 'excludeRoles';
         }

@@ -4,27 +4,25 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMeta;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    private array $getCustomPostMetaEntries = [];
+    private string $getCustomPostMetaBehavior = Behaviors::ALLOWLIST;
 
-    private static array $getCustomPostMetaEntries = [];
-    private static string $getCustomPostMetaBehavior = Behaviors::ALLOWLIST;
-
-    public static function getCustomPostMetaEntries(): array
+    public function getCustomPostMetaEntries(): array
     {
         // Define properties
         $envVariable = Environment::CUSTOMPOST_META_ENTRIES;
-        $selfProperty = &self::$getCustomPostMetaEntries;
+        $selfProperty = &$this->getCustomPostMetaEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -33,15 +31,15 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getCustomPostMetaBehavior(): string
+    public function getCustomPostMetaBehavior(): string
     {
         // Define properties
         $envVariable = Environment::CUSTOMPOST_META_BEHAVIOR;
-        $selfProperty = &self::$getCustomPostMetaBehavior;
+        $selfProperty = &$this->getCustomPostMetaBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue

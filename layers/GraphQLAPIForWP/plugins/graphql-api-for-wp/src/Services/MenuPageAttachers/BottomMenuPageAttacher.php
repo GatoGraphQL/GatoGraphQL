@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
 
+use PoP\Root\Managers\ComponentManager;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
@@ -14,6 +15,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModuleDocumentationMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
+use GraphQLByPoP\GraphQLClientsForWP\Component as GraphQLClientsForWPComponent;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
 
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
@@ -133,9 +135,11 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->getSettingsMenuPage()->setHookName($hookName);
         }
 
+        /** @var GraphQLClientsForWPComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(GraphQLClientsForWPComponent::class)->getConfiguration();
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
             global $submenu;
-            $clientPath = GraphQLClientsForWPComponentConfiguration::getGraphiQLClientEndpoint();
+            $clientPath = $componentConfiguration->getGraphiQLClientEndpoint();
             $submenu[$this->getMenuName()][] = [
                 __('GraphiQL (public client)', 'graphql-api'),
                 'read',
@@ -145,7 +149,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
             global $submenu;
-            $clientPath = GraphQLClientsForWPComponentConfiguration::getVoyagerClientEndpoint();
+            $clientPath = $componentConfiguration->getVoyagerClientEndpoint();
             $submenu[$this->getMenuName()][] = [
                 __('Interactive Schema (public client)', 'graphql-api'),
                 'read',

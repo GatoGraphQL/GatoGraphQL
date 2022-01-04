@@ -4,27 +4,25 @@ declare(strict_types=1);
 
 namespace PoP\APIEndpointsForWP;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\APIEndpoints\EndpointUtils;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    private bool $isNativeAPIEndpointDisabled = false;
+    private string $getNativeAPIEndpoint = '/api/';
 
-    private static bool $isNativeAPIEndpointDisabled = false;
-    private static string $getNativeAPIEndpoint = '/api/';
-
-    public static function isNativeAPIEndpointDisabled(): bool
+    public function isNativeAPIEndpointDisabled(): bool
     {
         // Define properties
         $envVariable = Environment::DISABLE_NATIVE_API_ENDPOINT;
-        $selfProperty = &self::$isNativeAPIEndpointDisabled;
+        $selfProperty = &$this->isNativeAPIEndpointDisabled;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -33,16 +31,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getNativeAPIEndpoint(): string
+    public function getNativeAPIEndpoint(): string
     {
         // Define properties
         $envVariable = Environment::NATIVE_API_ENDPOINT;
-        $selfProperty = &self::$getNativeAPIEndpoint;
+        $selfProperty = &$this->getNativeAPIEndpoint;
         $defaultValue = '/api/';
         $callback = [EndpointUtils::class, 'slashURI'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

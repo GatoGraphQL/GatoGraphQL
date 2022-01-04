@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
+use PoP\Root\Managers\ComponentManager;
+use PoP\CacheControl\Component;
 use PoP\CacheControl\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -31,6 +33,8 @@ final class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveR
      */
     public function getMaxAge(): ?int
     {
-        return ComponentConfiguration::getDefaultCacheControlMaxAge();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getDefaultCacheControlMaxAge();
     }
 }

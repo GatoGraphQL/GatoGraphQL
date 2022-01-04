@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use PoP\Root\Managers\ComponentManager;
+use GraphQLAPI\GraphQLAPI\Component;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
@@ -87,7 +89,9 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
      */
     protected function getSlugBase(): ?string
     {
-        return ComponentConfiguration::getCustomEndpointSlugBase();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getCustomEndpointSlugBase();
     }
 
     /**
