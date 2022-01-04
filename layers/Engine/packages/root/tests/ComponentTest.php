@@ -2,9 +2,9 @@
 
 namespace PoP\Root;
 
-use PHPUnit\Framework\TestCase;
+use PoP\Engine\AbstractTestCase;
 
-class ComponentTest extends TestCase
+class ComponentTest extends AbstractTestCase
 {
     /**
      * The root component cannot have any dependency
