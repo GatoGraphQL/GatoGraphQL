@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\TranslationWP;
 
-use PoP\Root\Testing\PHPUnit\AbstractTestCase;
+use PoP\Root\AbstractTestCase;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
 class TranslationAPITest extends AbstractTestCase
