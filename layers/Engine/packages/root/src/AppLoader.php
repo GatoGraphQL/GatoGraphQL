@@ -144,19 +144,20 @@ class AppLoader
             self::$initializedComponentClasses[] = $componentClass;
 
             // Initialize the Component
+            /** @var ComponentInterface */
             $component = new $componentClass();
             self::$components[$componentClass] = $component;
 
             // Initialize all depended-upon PoP components
             self::addComponentsOrderedForInitialization(
-                $component::getDependedComponentClasses(),
+                $component->getDependedComponentClasses(),
                 $orderedComponentClasses,
                 $isDev
             );
 
             if ($isDev) {
                 self::addComponentsOrderedForInitialization(
-                    $component::getDevDependedComponentClasses(),
+                    $component->getDevDependedComponentClasses(),
                     $orderedComponentClasses,
                     $isDev
                 );
@@ -165,7 +166,7 @@ class AppLoader
             // Initialize all depended-upon PoP conditional components, if they are installed
             self::addComponentsOrderedForInitialization(
                 array_filter(
-                    $component::getDependedConditionalComponentClasses(),
+                    $component->getDependedConditionalComponentClasses(),
                     'class_exists'
                 ),
                 $orderedComponentClasses,
@@ -244,7 +245,7 @@ class AppLoader
          */
         foreach (self::$orderedComponentClasses as $componentClass) {
             $component = self::getComponent($componentClass);
-            $component::initializeSystem();
+            $component->initializeSystem();
         }
         $systemCompilerPasses = array_map(
             fn ($class) => new $class(),
@@ -276,7 +277,7 @@ class AppLoader
             $component = self::getComponent($componentClass);
             $compilerPassClasses = [
                 ...$compilerPassClasses,
-                ...$component::getSystemContainerCompilerPassClasses()
+                ...$component->getSystemContainerCompilerPassClasses()
             ];
         }
         return array_values(array_unique($compilerPassClasses));
@@ -304,7 +305,7 @@ class AppLoader
          */
         foreach (array_reverse(self::$orderedComponentClasses) as $componentClass) {
             $component = self::getComponent($componentClass);
-            $component::customizeComponentClassConfiguration(self::$componentClassConfiguration);
+            $component->customizeComponentClassConfiguration(self::$componentClassConfiguration);
         }
 
         /**
@@ -324,7 +325,7 @@ class AppLoader
             $component = self::getComponent($componentClass);
             $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
             $skipSchemaForComponent = in_array($componentClass, self::$skipSchemaComponentClasses);
-            $component::initialize(
+            $component->initialize(
                 $componentConfiguration,
                 $skipSchemaForComponent,
                 self::$skipSchemaComponentClasses

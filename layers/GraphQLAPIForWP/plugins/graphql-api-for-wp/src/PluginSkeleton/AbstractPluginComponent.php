@@ -13,12 +13,12 @@ abstract class AbstractPluginComponent extends AbstractComponent implements Plug
      */
     private static array $pluginFolders = [];
 
-    public static function setPluginFolder(string $pluginFolder): void
+    public function setPluginFolder(string $pluginFolder): void
     {
         self::$pluginFolders[get_called_class()] = $pluginFolder;
     }
 
-    public static function getPluginFolder(): ?string
+    public function getPluginFolder(): ?string
     {
         return self::$pluginFolders[get_called_class()] ?? null;
     }

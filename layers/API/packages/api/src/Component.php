@@ -23,7 +23,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoP\Engine\Component::class,
@@ -33,7 +33,7 @@ class Component extends AbstractComponent
     /**
      * All conditional component classes that this component depends upon, to initialize them
      */
-    public static function getDependedConditionalComponentClasses(): array
+    public function getDependedConditionalComponentClasses(): array
     {
         return [
             \PoP\AccessControl\Component::class,
@@ -46,7 +46,7 @@ class Component extends AbstractComponent
      *
      * @param array<string, mixed> $componentClassConfiguration
      */
-    public static function customizeComponentClassConfiguration(
+    public function customizeComponentClassConfiguration(
         array &$componentClassConfiguration
     ): void {
         // If passing ?use_namespace=1, set it on the configuration

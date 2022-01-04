@@ -22,7 +22,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [];
     }
@@ -32,7 +32,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getSystemContainerCompilerPassClasses(): array
+    public function getSystemContainerCompilerPassClasses(): array
     {
         return [
             RegisterSystemCompilerPassServiceCompilerPass::class,

@@ -24,7 +24,7 @@ abstract class AbstractComponent implements ComponentInterface
      *
      * @param array<string, mixed> $componentClassConfiguration
      */
-    public static function customizeComponentClassConfiguration(
+    public function customizeComponentClassConfiguration(
         array &$componentClassConfiguration
     ): void {
     }
@@ -36,7 +36,7 @@ abstract class AbstractComponent implements ComponentInterface
      * @param boolean $skipSchema Indicate if to skip initializing the schema
      * @param string[] $skipSchemaComponentClasses
      */
-    final public static function initialize(
+    final public function initialize(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
@@ -51,7 +51,7 @@ abstract class AbstractComponent implements ComponentInterface
     /**
      * Initialize services for the system container
      */
-    final public static function initializeSystem(): void
+    final public function initializeSystem(): void
     {
         static::initializeSystemContainerServices();
     }
@@ -69,14 +69,14 @@ abstract class AbstractComponent implements ComponentInterface
      *
      * @return string[]
      */
-    abstract public static function getDependedComponentClasses(): array;
+    abstract public function getDependedComponentClasses(): array;
 
     /**
      * All DEV component classes that this component depends upon, to initialize them
      *
      * @return string[]
      */
-    public static function getDevDependedComponentClasses(): array
+    public function getDevDependedComponentClasses(): array
     {
         return [];
     }
@@ -86,7 +86,7 @@ abstract class AbstractComponent implements ComponentInterface
      *
      * @return string[]
      */
-    public static function getDependedConditionalComponentClasses(): array
+    public function getDependedConditionalComponentClasses(): array
     {
         return [];
     }
@@ -96,7 +96,7 @@ abstract class AbstractComponent implements ComponentInterface
      *
      * @return string[]
      */
-    public static function getSystemContainerCompilerPassClasses(): array
+    public function getSystemContainerCompilerPassClasses(): array
     {
         return [];
     }

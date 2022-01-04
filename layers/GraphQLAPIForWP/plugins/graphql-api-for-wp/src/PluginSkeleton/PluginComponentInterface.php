@@ -8,6 +8,6 @@ use PoP\Root\Component\ComponentInterface;
 
 interface PluginComponentInterface extends ComponentInterface
 {
-    public static function setPluginFolder(string $pluginFolder): void;
-    public static function getPluginFolder(): ?string;
+    public function setPluginFolder(string $pluginFolder): void;
+    public function getPluginFolder(): ?string;
 }

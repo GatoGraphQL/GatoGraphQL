@@ -125,7 +125,7 @@ abstract class AbstractPlugin
             if (is_a($componentClass, PluginComponentInterface::class, true)) {
                 /** @var PluginComponentInterface */
                 $component = AppLoader::getComponent($componentClass);
-                $component::setPluginFolder($pluginFolder);
+                $component->setPluginFolder($pluginFolder);
             }
         }
 

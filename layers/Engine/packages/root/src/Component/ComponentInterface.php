@@ -16,7 +16,7 @@ interface ComponentInterface
      * @param boolean $skipSchema Indicate if to skip initializing the schema
      * @param string[] $skipSchemaComponentClasses
      */
-    public static function initialize(
+    public function initialize(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
@@ -32,21 +32,21 @@ interface ComponentInterface
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array;
+    public function getDependedComponentClasses(): array;
 
     /**
      * All DEV component classes that this component depends upon, to initialize them
      *
      * @return string[]
      */
-    public static function getDevDependedComponentClasses(): array;
+    public function getDevDependedComponentClasses(): array;
 
     /**
      * All conditional component classes that this component depends upon, to initialize them
      *
      * @return string[]
      */
-    public static function getDependedConditionalComponentClasses(): array;
+    public function getDependedConditionalComponentClasses(): array;
 
     // /**
     //  * Initialize services
@@ -70,14 +70,14 @@ interface ComponentInterface
     /**
      * Initialize services for the system container
      */
-    public static function initializeSystem(): void;
+    public function initializeSystem(): void;
 
     /**
      * Compiler Passes for the System Container
      *
      * @return string[]
      */
-    public static function getSystemContainerCompilerPassClasses(): array;
+    public function getSystemContainerCompilerPassClasses(): array;
 
      /**
      * Enable each component to set default configuration for
@@ -85,7 +85,7 @@ interface ComponentInterface
      *
      * @param array<string, mixed> $componentClassConfiguration
      */
-    public static function customizeComponentClassConfiguration(
+    public function customizeComponentClassConfiguration(
         array &$componentClassConfiguration
     ): void;
 }

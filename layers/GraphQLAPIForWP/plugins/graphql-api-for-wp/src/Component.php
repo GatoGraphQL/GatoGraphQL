@@ -24,7 +24,7 @@ class Component extends AbstractPluginComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoPSchema\GenericCustomPosts\Component::class,
@@ -67,7 +67,7 @@ class Component extends AbstractPluginComponent
      *
      * @return string[]
      */
-    public static function getSystemContainerCompilerPassClasses(): array
+    public function getSystemContainerCompilerPassClasses(): array
     {
         return [
             RegisterModuleResolverCompilerPass::class,
