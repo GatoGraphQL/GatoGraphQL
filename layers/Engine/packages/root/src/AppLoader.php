@@ -20,7 +20,7 @@ class AppLoader
      *
      * @var string[]
      */
-    protected static array $initializedClasses = [];
+    protected static array $initializedComponentClasses = [];
     /**
      * Component in their initialization order
      *
@@ -130,10 +130,10 @@ class AppLoader
          */
         $componentClasses = array_values(array_diff(
             $componentClasses,
-            self::$initializedClasses
+            self::$initializedComponentClasses
         ));
         foreach ($componentClasses as $componentClass) {
-            self::$initializedClasses[] = $componentClass;
+            self::$initializedComponentClasses[] = $componentClass;
 
             // Initialize all depended-upon PoP components
             self::addComponentsOrderedForInitialization(
