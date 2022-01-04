@@ -154,7 +154,9 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     //  */
     // protected function getURLBase(string $module): string
     // {
-    //     return ComponentConfiguration::getModuleURLBase();
+    //     /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getModuleURLBase();
     // }
     /**
      * Does the module have HTML Documentation?

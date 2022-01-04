@@ -32,11 +32,15 @@ abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements Us
      */
     public function getAllowOrDenyMetaEntries(): array
     {
-        return ComponentConfiguration::getUserMetaEntries();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getUserMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
-        return ComponentConfiguration::getUserMetaBehavior();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getUserMetaBehavior();
     }
 
     /**

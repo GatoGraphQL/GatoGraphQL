@@ -22,11 +22,15 @@ class RootMediaItemPaginationInputObjectTypeResolver extends PaginationInputObje
 
     protected function getDefaultLimit(): ?int
     {
-        return ComponentConfiguration::getMediaListDefaultLimit();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getMediaListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
-        return ComponentConfiguration::getMediaListMaxLimit();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getMediaListMaxLimit();
     }
 }

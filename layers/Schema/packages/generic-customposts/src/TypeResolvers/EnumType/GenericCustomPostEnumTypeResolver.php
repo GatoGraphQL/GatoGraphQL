@@ -19,6 +19,8 @@ class GenericCustomPostEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function getEnumValues(): array
     {
-        return ComponentConfiguration::getGenericCustomPostTypes();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getGenericCustomPostTypes();
     }
 }

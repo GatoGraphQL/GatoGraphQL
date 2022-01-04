@@ -15,7 +15,9 @@ trait WPClientTrait
      */
     protected function getComponentBaseURL(): ?string
     {
-        return ComponentConfiguration::getGraphQLClientsComponentURL();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getGraphQLClientsComponentURL();
     }
     /**
      * Base Dir

@@ -27,7 +27,9 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
      */
     protected function getEndpoint(): string
     {
-        return ComponentConfiguration::getNativeAPIEndpoint();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getNativeAPIEndpoint();
     }
 
     /**

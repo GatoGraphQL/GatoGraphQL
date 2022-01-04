@@ -20,10 +20,14 @@ class CustomPostMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputO
      */
     protected function getAllowOrDenyEntries(): array
     {
-        return ComponentConfiguration::getCustomPostMetaEntries();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getCustomPostMetaEntries();
     }
     protected function getAllowOrDenyBehavior(): string
     {
-        return ComponentConfiguration::getCustomPostMetaBehavior();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getCustomPostMetaBehavior();
     }
 }

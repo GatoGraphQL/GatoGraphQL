@@ -22,11 +22,15 @@ class CategoryPaginationInputObjectTypeResolver extends PaginationInputObjectTyp
 
     protected function getDefaultLimit(): ?int
     {
-        return ComponentConfiguration::getCategoryListDefaultLimit();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getCategoryListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
-        return ComponentConfiguration::getCategoryListMaxLimit();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getCategoryListMaxLimit();
     }
 }

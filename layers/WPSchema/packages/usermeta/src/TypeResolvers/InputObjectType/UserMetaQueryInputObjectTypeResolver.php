@@ -20,10 +20,14 @@ class UserMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObjectT
      */
     protected function getAllowOrDenyEntries(): array
     {
-        return ComponentConfiguration::getUserMetaEntries();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getUserMetaEntries();
     }
     protected function getAllowOrDenyBehavior(): string
     {
-        return ComponentConfiguration::getUserMetaBehavior();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getUserMetaBehavior();
     }
 }

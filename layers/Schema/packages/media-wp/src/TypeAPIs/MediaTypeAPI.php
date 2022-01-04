@@ -127,7 +127,9 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
      */
     protected function getCustomPostListMaxLimit(): int
     {
-        return ComponentConfiguration::getMediaListMaxLimit();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getMediaListMaxLimit();
     }
 
     public function getMediaItems(array $query, array $options = []): array

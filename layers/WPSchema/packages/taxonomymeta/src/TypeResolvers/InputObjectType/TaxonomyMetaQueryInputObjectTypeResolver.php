@@ -20,10 +20,14 @@ class TaxonomyMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObj
      */
     protected function getAllowOrDenyEntries(): array
     {
-        return ComponentConfiguration::getTaxonomyMetaEntries();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getTaxonomyMetaEntries();
     }
     protected function getAllowOrDenyBehavior(): string
     {
-        return ComponentConfiguration::getTaxonomyMetaBehavior();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getTaxonomyMetaBehavior();
     }
 }

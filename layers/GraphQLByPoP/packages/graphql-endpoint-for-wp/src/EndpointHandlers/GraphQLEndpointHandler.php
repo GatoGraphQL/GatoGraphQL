@@ -42,7 +42,9 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
      */
     protected function getEndpoint(): string
     {
-        return ComponentConfiguration::getGraphQLAPIEndpoint();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getGraphQLAPIEndpoint();
     }
 
     /**

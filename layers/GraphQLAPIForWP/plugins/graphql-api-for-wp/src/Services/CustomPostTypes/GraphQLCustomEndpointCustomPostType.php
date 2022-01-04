@@ -88,7 +88,9 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
      */
     protected function getSlugBase(): ?string
     {
-        return ComponentConfiguration::getCustomEndpointSlugBase();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getCustomEndpointSlugBase();
     }
 
     /**

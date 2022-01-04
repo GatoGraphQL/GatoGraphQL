@@ -22,11 +22,15 @@ class UserPaginationInputObjectTypeResolver extends PaginationInputObjectTypeRes
 
     protected function getDefaultLimit(): ?int
     {
-        return ComponentConfiguration::getUserListDefaultLimit();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getUserListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
-        return ComponentConfiguration::getUserListMaxLimit();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getUserListMaxLimit();
     }
 }

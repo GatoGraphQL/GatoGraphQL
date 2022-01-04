@@ -98,7 +98,9 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
      */
     protected function getSlugBase(): ?string
     {
-        return ComponentConfiguration::getPersistedQuerySlugBase();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getPersistedQuerySlugBase();
     }
 
     /**

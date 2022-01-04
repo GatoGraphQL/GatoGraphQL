@@ -90,7 +90,9 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
      */
     protected function getCustomPostListMaxLimit(): int
     {
-        return ComponentConfiguration::getCustomPostListMaxLimit();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getCustomPostListMaxLimit();
     }
     /**
      * @param array<string, mixed> $query

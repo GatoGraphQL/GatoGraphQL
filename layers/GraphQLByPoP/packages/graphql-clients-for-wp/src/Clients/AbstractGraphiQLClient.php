@@ -13,10 +13,14 @@ abstract class AbstractGraphiQLClient extends AbstractClient
      */
     protected function isClientDisabled(): bool
     {
-        return ComponentConfiguration::isGraphiQLClientEndpointDisabled();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getGraphiQLClientEndpointDisabled();
     }
     protected function getEndpoint(): string
     {
-        return ComponentConfiguration::getGraphiQLClientEndpoint();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getGraphiQLClientEndpoint();
     }
 }

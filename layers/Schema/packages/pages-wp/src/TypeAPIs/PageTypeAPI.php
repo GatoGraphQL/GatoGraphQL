@@ -138,7 +138,9 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
      */
     protected function getCustomPostListMaxLimit(): int
     {
-        return ComponentConfiguration::getPageListMaxLimit();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getPageListMaxLimit();
     }
 
     public function getPages(array $query, array $options = []): array
