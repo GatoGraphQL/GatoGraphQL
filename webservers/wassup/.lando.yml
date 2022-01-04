@@ -65,6 +65,7 @@ services:
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
         - '../../layers/Engine/packages/hooks:/app/vendor/getpop/hooks'
+        - '../../layers/Engine/packages/hooks-php:/app/vendor/getpop/hooks-php'
         - '../../layers/Engine/packages/hooks-wp:/app/vendor/getpop/hooks-wp'
         - >-
           ../../layers/Engine/packages/loosecontracts:/app/vendor/getpop/loosecontracts

@@ -45,6 +45,7 @@ services:
           ../../layers/Engine/packages/graphql-parser:/app/vendor/getpop/graphql-parser
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
+        - '../../layers/Engine/packages/hooks-php:/app/vendor/getpop/hooks-php'
         - '../../layers/Engine/packages/hooks-wp:/app/vendor/getpop/hooks-wp'
         - '../../layers/Engine/packages/hooks:/app/vendor/getpop/hooks'
         - >-
