@@ -13,26 +13,6 @@ use PoP\Root\Component\AbstractComponentConfiguration as UpstreamAbstractCompone
  */
 abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentConfiguration implements ComponentConfigurationInterface
 {
-    /**
-     * Component configuration.
-     *
-     * @var array<string,mixed>
-     */
-    protected array $configuration = [];
-
-    public function setConfiguration(array $configuration): void
-    {
-        $this->configuration = $configuration;
-    }
-    public function hasConfigurationValue(string $option): bool
-    {
-        return array_key_exists($option, $this->configuration);
-    }
-    public function getConfigurationValue(string $option): mixed
-    {
-        return $this->configuration[$option] ?? null;
-    }
-
     protected function maybeInitializeConfigurationValue(
         string $envVariable,
         mixed &$selfProperty,
@@ -53,10 +33,10 @@ abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentC
             $selfProperty = $this->getConfigurationValue($envVariable);
         } else {
             // Get the value from the environment function
-            $envValue = getenv($envVariable);
+            $envValue = \getenv($envVariable);
             if ($envValue !== false) {
                 // Modify the type of the variable, from string to bool/int/array
-                $selfProperty = $callback ? $callback($envValue) : $envValue;
+                $selfProperty = $callback !== null ? $callback($envValue) : $envValue;
             }
             /**
              * Important: it must use the Hooks service from the System Container,
