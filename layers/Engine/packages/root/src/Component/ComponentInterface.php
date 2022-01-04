@@ -94,4 +94,9 @@ interface ComponentInterface
      * Indicates if the Component is enabled
      */
     public function isEnabled(): bool;
+
+    /**
+     * ComponentConfiguration class for the Component
+     */
+    public function getComponentConfigurationClass(): ?string;
 }

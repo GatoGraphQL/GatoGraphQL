@@ -159,4 +159,21 @@ abstract class AbstractComponent implements ComponentInterface
     {
         return true;
     }
+
+    /**
+     * ComponentConfiguration class for the Component
+     */
+    public function getComponentConfigurationClass(): ?string
+    {
+        $class = \get_called_class();
+        $parts = \explode('\\', $class);
+        if (\count($parts) < 3) {
+            return null;
+        }
+        $componentConfigurationClass = $parts[0] . '\\' . $parts[1] . '\\ComponentConfiguration';
+        if (!class_exists($componentConfigurationClass)) {
+            return null;
+        }
+        return $componentConfigurationClass;
+    }
 }

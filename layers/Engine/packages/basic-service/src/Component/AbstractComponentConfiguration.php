@@ -6,11 +6,12 @@ namespace PoP\BasicService\Component;
 
 use PoP\BasicService\Component\ComponentConfigurationHelpers;
 use PoP\Hooks\Facades\SystemHooksAPIFacade;
+use PoP\Root\Component\AbstractComponentConfiguration as UpstreamAbstractComponentConfiguration;
 
 /**
  * Initialize component
  */
-abstract class AbstractComponentConfiguration implements ComponentConfigurationInterface
+abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentConfiguration implements ComponentConfigurationInterface
 {
     /**
      * Component configuration.

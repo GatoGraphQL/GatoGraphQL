@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root\Managers;
 
 use LogicException;
+use PoP\BasicService\Component\ComponentConfigurationInterface;
 use PoP\Root\Component\ComponentInterface;
 
 /**
@@ -20,6 +21,13 @@ class ComponentManager
     protected static array $components = [];
 
     /**
+     * The initialized component configurations, stored under the component's class
+     *
+     * @var array<string,ComponentConfigurationInterface>
+     */
+    protected static array $componentConfigurations = [];
+
+    /**
      * This functions is to be called by PHPUnit,
      * to reset the state in between tests.
      *
@@ -28,6 +36,7 @@ class ComponentManager
     public static function reset(): void
     {
         self::$components = [];
+        self::$componentConfigurations = [];
     }
 
     /**
@@ -49,6 +58,19 @@ class ComponentManager
             'Component of class \'%s\' does not exist, or it has not been added for initialization',
             $componentClass
         ));
+    }
+
+    /**
+     * @throws LogicException If the class of the component does not exist or has not been initialized
+     */
+    public static function getComponentConfiguration(string $componentClass): ?ComponentConfigurationInterface
+    {
+        if (!array_key_exists($componentClass, self::$componentConfigurations)) {
+            $component = self::getComponent($componentClass);
+            $componentConfigurationClass = $component->getComponentConfigurationClass();
+            self::$componentConfigurations[$componentClass] = $componentConfigurationClass !== null ? new $componentConfigurationClass() : null;
+        }
+        return self::$componentConfigurations[$componentClass];
     }
 
     /**
