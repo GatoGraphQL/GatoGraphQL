@@ -12,22 +12,22 @@ class ComponentManager
     /**
      * @var string[]
      */
-    private static array $components = [];
+    private static array $componentClasses = [];
 
     /**
      * @return string[]
      */
     public static function getComponentClasses(): array
     {
-        return self::$components;
+        return self::$componentClasses;
     }
 
     /**
      * Register a component
      */
-    public static function register(string $component): void
+    public static function register(string $componentClass): void
     {
-        self::$components[] = $component;
+        self::$componentClasses[] = $componentClass;
     }
 
     /**
@@ -35,8 +35,8 @@ class ComponentManager
      */
     public static function bootSystem(): void
     {
-        foreach (self::$components as $component) {
-            $component::bootSystem();
+        foreach (self::$componentClasses as $componentClass) {
+            $componentClass::bootSystem();
         }
     }
 
@@ -45,8 +45,8 @@ class ComponentManager
      */
     public static function beforeBoot(): void
     {
-        foreach (self::$components as $component) {
-            $component::beforeBoot();
+        foreach (self::$componentClasses as $componentClass) {
+            $componentClass::beforeBoot();
         }
     }
 
@@ -55,8 +55,8 @@ class ComponentManager
      */
     public static function boot(): void
     {
-        foreach (self::$components as $component) {
-            $component::boot();
+        foreach (self::$componentClasses as $componentClass) {
+            $componentClass::boot();
         }
     }
 
@@ -65,8 +65,8 @@ class ComponentManager
      */
     public static function afterBoot(): void
     {
-        foreach (self::$components as $component) {
-            $component::afterBoot();
+        foreach (self::$componentClasses as $componentClass) {
+            $componentClass::afterBoot();
         }
     }
 }
