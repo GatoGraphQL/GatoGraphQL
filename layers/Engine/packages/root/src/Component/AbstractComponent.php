@@ -45,10 +45,10 @@ abstract class AbstractComponent implements ComponentInterface
         $this->maybeSetConfiguration($configuration);
 
         // Initialize the self component
-        $this->initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
+        $this->initializeContainerServices($skipSchema, $skipSchemaComponentClasses);
 
         // Allow the component to define runtime constants
-        $this->defineRuntimeConstants($configuration, $skipSchema, $skipSchemaComponentClasses);
+        $this->defineRuntimeConstants($skipSchema, $skipSchemaComponentClasses);
     }
 
     /**
@@ -107,11 +107,9 @@ abstract class AbstractComponent implements ComponentInterface
     /**
      * Initialize services
      *
-     * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
@@ -121,7 +119,6 @@ abstract class AbstractComponent implements ComponentInterface
      * Define runtime constants
      */
     protected function defineRuntimeConstants(
-        array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
