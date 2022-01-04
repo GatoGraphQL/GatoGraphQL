@@ -11,16 +11,16 @@ abstract class AbstractPluginComponent extends AbstractComponent implements Plug
     /**
      * @var string[]
      */
-    private static array $pluginFolders = [];
+    private array $pluginFolders = [];
 
     public function setPluginFolder(string $pluginFolder): void
     {
-        self::$pluginFolders[get_called_class()] = $pluginFolder;
+        $this->pluginFolders[get_called_class()] = $pluginFolder;
     }
 
     public function getPluginFolder(): ?string
     {
-        return self::$pluginFolders[get_called_class()] ?? null;
+        return $this->pluginFolders[get_called_class()] ?? null;
     }
 
     /**
