@@ -48,7 +48,6 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        ComponentConfiguration::setConfiguration($configuration);
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
         if (class_exists(APIComponent::class) && \PoP\Root\Managers\ComponentManager::getComponent(APIComponent::class)->isEnabled()) {

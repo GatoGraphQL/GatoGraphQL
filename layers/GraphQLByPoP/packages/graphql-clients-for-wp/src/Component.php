@@ -41,7 +41,6 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         if ($this->isEnabled()) {
-            ComponentConfiguration::setConfiguration($configuration);
             $this->initServices(dirname(__DIR__));
             if (ComponentConfiguration::useGraphiQLExplorer()) {
                 $this->initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
