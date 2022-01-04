@@ -750,7 +750,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         string $fieldName,
         array $fieldArgs,
     ): bool {
-        return ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->validateFieldTypeResponseWithSchemaDefinition();
     }
 
     /**

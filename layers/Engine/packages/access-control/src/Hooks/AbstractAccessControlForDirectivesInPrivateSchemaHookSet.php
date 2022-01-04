@@ -12,7 +12,9 @@ abstract class AbstractAccessControlForDirectivesInPrivateSchemaHookSet extends 
 {
     protected function enabled(): bool
     {
-        return ComponentConfiguration::canSchemaBePrivate();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->canSchemaBePrivate();
     }
 
     protected function getSchemaMode(): string

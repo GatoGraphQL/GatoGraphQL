@@ -67,7 +67,9 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
 
     protected function treatCustomPostStatusAsAdminData(): bool
     {
-        return ComponentConfiguration::treatCustomPostStatusAsAdminData();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->treatCustomPostStatusAsAdminData();
     }
 
     protected function addCustomPostInputFields(): bool

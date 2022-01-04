@@ -79,7 +79,9 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
 
     protected function treatCommentStatusAsAdminData(): bool
     {
-        return ComponentConfiguration::treatCommentStatusAsAdminData();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->treatCommentStatusAsAdminData();
     }
 
     abstract protected function addParentInputFields(): bool;
