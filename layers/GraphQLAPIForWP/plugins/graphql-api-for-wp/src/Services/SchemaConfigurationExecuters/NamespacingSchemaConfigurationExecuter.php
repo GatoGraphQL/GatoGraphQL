@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigNamespacingBlock;
 use PoP\ComponentModel\Component as ComponentModelComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 
 class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
@@ -34,9 +33,9 @@ class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
         return $this->getSchemaConfigNamespacingBlock();
     }
 
-    public function getHookComponentConfigurationClass(): string
+    public function getHookComponentClass(): string
     {
-        return ComponentModelComponentConfiguration::class;
+        return ComponentModelComponent::class;
     }
 
     public function getHookEnvironmentClass(): string

@@ -7,7 +7,7 @@ namespace PoP\API\ConditionalOnComponent\AccessControl\Hooks;
 use PoP\Root\Managers\ComponentManager;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
-use PoP\API\ComponentConfiguration;
+use PoP\API\Component;
 use PoP\API\Environment;
 use PoP\BasicService\Component\ComponentConfigurationHelpers;
 use PoP\BasicService\AbstractHookSet;
@@ -23,7 +23,7 @@ class ComponentConfigurationHookSet extends AbstractHookSet
         $componentConfiguration = ComponentManager::getComponent(AccessControlComponent::class)->getConfiguration();
         if ($componentConfiguration->canSchemaBePrivate()) {
             $hookName = ComponentConfigurationHelpers::getHookName(
-                ComponentConfiguration::class,
+                Component::class,
                 Environment::USE_SCHEMA_DEFINITION_CACHE
             );
             $this->getHooksAPI()->addFilter(
