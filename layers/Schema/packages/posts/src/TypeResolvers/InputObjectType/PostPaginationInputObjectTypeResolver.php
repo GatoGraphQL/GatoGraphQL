@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Posts\TypeResolvers\InputObjectType;
 
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostPaginationInputObjectTypeResolver;
+use PoPSchema\Posts\Component;
 use PoPSchema\Posts\ComponentConfiguration;
 
 class PostPaginationInputObjectTypeResolver extends CustomPostPaginationInputObjectTypeResolver

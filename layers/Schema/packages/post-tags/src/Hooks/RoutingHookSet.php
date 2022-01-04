@@ -6,6 +6,7 @@ namespace PoPSchema\PostTags\Hooks;
 
 use PoP\BasicService\AbstractHookSet;
 use PoP\Routing\RouteHookNames;
+use PoPSchema\PostTags\Component;
 use PoPSchema\PostTags\ComponentConfiguration;
 
 class RoutingHookSet extends AbstractHookSet

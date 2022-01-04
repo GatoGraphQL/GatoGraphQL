@@ -6,6 +6,7 @@ namespace PoPSchema\Users\Hooks;
 
 use PoP\BasicService\AbstractHookSet;
 use PoP\Routing\RouteHookNames;
+use PoPSchema\Users\Component;
 use PoPSchema\Users\ComponentConfiguration;
 
 class RoutingHookSet extends AbstractHookSet

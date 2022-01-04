@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\APIEndpointsForWP\EndpointHandlers;
 
-use PoP\API\Component;
+use PoP\API\Component as APIComponent;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\APIEndpointsForWP\Component;
 use PoP\APIEndpointsForWP\ComponentConfiguration;
@@ -38,7 +38,7 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
     protected function isNativeAPIEnabled(): bool
     {
         return
-            \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->isEnabled()
+            \PoP\Root\Managers\ComponentManager::getComponent(APIComponent::class)->isEnabled()
             && !ComponentConfiguration::isNativeAPIEndpointDisabled();
     }
 
