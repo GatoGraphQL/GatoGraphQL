@@ -125,7 +125,7 @@ abstract class AbstractPlugin
     }
 
     /**
-     * After initialized, and before booting, 
+     * After initialized, and before booting,
      * allow the components to inject their own configuration
      */
     public function configureComponents(): void

@@ -453,7 +453,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         AppLoader::initializeComponents();
 
         /**
-         * After initialized, and before booting, 
+         * After initialized, and before booting,
          * allow the components to inject their own configuration
          */
         $this->configureComponents();

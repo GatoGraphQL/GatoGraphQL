@@ -183,7 +183,7 @@ class AppLoader
         );
 
         /**
-         * After initialized, and before booting, 
+         * After initialized, and before booting,
          * allow the components to inject their own configuration
          */
         static::configureComponents();
