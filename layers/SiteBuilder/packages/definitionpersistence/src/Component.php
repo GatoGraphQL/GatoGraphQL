@@ -25,11 +25,6 @@ class Component extends AbstractComponent
         ];
     }
 
-    public static function getBuildDir(): string
-    {
-        return dirname(__DIR__) . '/build';
-    }
-
     /**
      * Initialize services
      *
