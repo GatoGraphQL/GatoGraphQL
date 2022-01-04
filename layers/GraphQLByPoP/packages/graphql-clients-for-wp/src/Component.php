@@ -42,7 +42,9 @@ class Component extends AbstractComponent
     ): void {
         if ($this->isEnabled()) {
             $this->initServices(dirname(__DIR__));
-            if (ComponentConfiguration::useGraphiQLExplorer()) {
+            /** @var ComponentConfiguration */
+            $componentConfiguration = $this->getConfiguration();
+            if ($componentConfiguration->useGraphiQLExplorer()) {
                 $this->initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
             }
         }

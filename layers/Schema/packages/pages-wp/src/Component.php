@@ -37,7 +37,9 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         $this->initServices(dirname(__DIR__));
-        if (ComponentConfiguration::addPageTypeToCustomPostUnionTypes()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = $this->getConfiguration();
+        if ($componentConfiguration->addPageTypeToCustomPostUnionTypes()) {
             $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes/Overrides');
         }
     }

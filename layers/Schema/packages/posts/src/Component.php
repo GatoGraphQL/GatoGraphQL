@@ -73,7 +73,9 @@ class Component extends AbstractComponent
             }
         }
 
-        if (ComponentConfiguration::addPostTypeToCustomPostUnionTypes()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = $this->getConfiguration();
+        if ($componentConfiguration->addPostTypeToCustomPostUnionTypes()) {
             $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPostTypeToCustomPostUnionTypes');
         }
     }
