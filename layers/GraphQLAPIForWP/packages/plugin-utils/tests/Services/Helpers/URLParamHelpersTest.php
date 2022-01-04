@@ -1,6 +1,6 @@
 <?php
 
-namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
+namespace GraphQLAPI\PluginUtils\Services\Helpers;
 
 use GraphQLAPI\PluginUtils\Services\Helpers\URLParamHelpers;
 use PoP\Engine\AbstractTestCase;
