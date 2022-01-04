@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
-class GeneralUtils
+class StringConversion
 {
     /**
      * Convert a string with dashes into camelCase mode

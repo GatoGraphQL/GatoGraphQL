@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\StringConversion;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use PoP\BasicService\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
@@ -31,7 +31,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserAuthorizationInterface $userAuthorization = null;
-    private ?GeneralUtils $generalUtils = null;
+    private ?StringConversion $stringConversion = null;
     private ?EditorHelpers $editorHelpers = null;
     private ?LocaleHelper $localeHelper = null;
 
@@ -51,13 +51,13 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     {
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
-    final public function setGeneralUtils(GeneralUtils $generalUtils): void
+    final public function setStringConversion(StringConversion $stringConversion): void
     {
-        $this->generalUtils = $generalUtils;
+        $this->stringConversion = $stringConversion;
     }
-    final protected function getGeneralUtils(): GeneralUtils
+    final protected function getStringConversion(): StringConversion
     {
-        return $this->generalUtils ??= $this->instanceManager->getInstance(GeneralUtils::class);
+        return $this->stringConversion ??= $this->instanceManager->getInstance(StringConversion::class);
     }
     final public function setEditorHelpers(EditorHelpers $editorHelpers): void
     {
@@ -185,7 +185,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     final protected function getBlockLocalizationName(): string
     {
-        return $this->getGeneralUtils()->dashesToCamelCase($this->getBlockRegistrationName());
+        return $this->getStringConversion()->dashesToCamelCase($this->getBlockRegistrationName());
     }
     /**
      * Block class name: wp-block-namespace-blockName
