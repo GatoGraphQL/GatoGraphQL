@@ -11,7 +11,7 @@ class GeneralUtils
      *
      * @see https://stackoverflow.com/a/2792045
      */
-    public static function dashesToCamelCase(string $string, bool $capitalizeFirstCharacter = false): string
+    public function dashesToCamelCase(string $string, bool $capitalizeFirstCharacter = false): string
     {
         $str = str_replace('-', '', ucwords($string, '-'));
         if (!$capitalizeFirstCharacter) {
