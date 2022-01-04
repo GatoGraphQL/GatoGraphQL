@@ -1,24 +1,17 @@
 <?php
 
-namespace GraphQLAPI\GraphQLAPI\Misc;
+namespace GraphQLAPI\PluginUtils\Services\Helpers;
 
-use GraphQLAPI\GraphQLAPI\Services\Helpers\URLParamHelpers;
-use PHPUnit\Framework\TestCase;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use GraphQLAPI\PluginUtils\Services\Helpers\URLParamHelpers;
+use PoP\Engine\AbstractTestCase;
 
-class URLParamHelpersTest extends TestCase
+class URLParamHelpersTest extends AbstractTestCase
 {
     public function testEncodeURIComponent(): void
     {
-        /**
-         * Currently can't use container services in tests
-         * @todo Load container services in bootstrap-phpunit.php, then restore
-         */
-        return;
-
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var URLParamHelpers */
-        $urlParamHelpers = $instanceManager->getInstance(URLParamHelpers::class);
+        $urlParamHelpers = $this->getService(URLParamHelpers::class);
+
         /**
          * Inputs taken from Mozilla documentation for `encodeURIComponent`
          * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent

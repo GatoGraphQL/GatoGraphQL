@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
+namespace GraphQLAPI\PluginUtils\Services\Helpers;
 
-class GeneralUtils
+class StringConversion
 {
     /**
      * Convert a string with dashes into camelCase mode
      *
      * @see https://stackoverflow.com/a/2792045
      */
-    public static function dashesToCamelCase(string $string, bool $capitalizeFirstCharacter = false): string
+    public function dashesToCamelCase(string $string, bool $capitalizeFirstCharacter = false): string
     {
         $str = str_replace('-', '', ucwords($string, '-'));
         if (!$capitalizeFirstCharacter) {
