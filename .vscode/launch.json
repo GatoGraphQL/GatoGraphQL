@@ -36,6 +36,7 @@
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/root": "${workspaceFolder}/layers/Engine/packages/root",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/routing-wp": "${workspaceFolder}/layers/Engine/packages/routing-wp",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/routing": "${workspaceFolder}/layers/Engine/packages/routing",
+              "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/translation-mock": "${workspaceFolder}/layers/Engine/packages/translation-mock",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/translation-wp": "${workspaceFolder}/layers/Engine/packages/translation-wp",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/translation": "${workspaceFolder}/layers/Engine/packages/translation",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/external-dependency-wrappers": "${workspaceFolder}/layers/GraphQLAPIForWP/packages/external-dependency-wrappers",
