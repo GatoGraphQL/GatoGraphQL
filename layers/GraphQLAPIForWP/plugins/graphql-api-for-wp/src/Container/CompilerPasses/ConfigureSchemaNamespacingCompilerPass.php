@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
+use GraphQLByPoP\GraphQLServer\Component;
 class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaNamespacingCompilerPass
 {
     /**
@@ -21,7 +22,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
     protected function getComponentClasses(): array
     {
         return [
-            \GraphQLByPoP\GraphQLServer\Component::class,
+            Component::class,
             \PoP\ComponentModel\Component::class,
             \PoP\Engine\Component::class,
             \PoPSchema\Categories\Component::class,

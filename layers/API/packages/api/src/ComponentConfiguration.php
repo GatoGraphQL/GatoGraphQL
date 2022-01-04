@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\API;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     private bool $useSchemaDefinitionCache = false;
     private bool $executeQueryBatchInStrictOrder = true;
@@ -22,7 +24,7 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
     {
         // First check that the Component Model cache is enabled
         /** @var ComponentModelComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
         if (!$componentConfiguration->useComponentModelCache()) {
             return false;
         }

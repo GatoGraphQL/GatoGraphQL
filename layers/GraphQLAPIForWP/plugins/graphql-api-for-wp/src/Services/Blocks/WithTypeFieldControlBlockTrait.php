@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use PoP\Root\Managers\ComponentManager;
 use GraphQLAPI\GraphQLAPI\Component;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
@@ -23,7 +24,7 @@ trait WithTypeFieldControlBlockTrait
     public function getTypeFieldsForPrint(array $typeFields): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         $groupFieldsUnderTypeForPrint = $componentConfiguration->groupFieldsUnderTypeForPrint();
         // For each class, obtain its namespacedTypeName
         $objectTypeResolvers = $this->getTypeRegistry()->getObjectTypeResolvers();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
+use PoP\Root\Managers\ComponentManager;
 use PoPSchema\CustomPosts\Component;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\Constants\CustomPostOrderBy;
@@ -91,7 +92,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     protected function getCustomPostListMaxLimit(): int
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getCustomPostListMaxLimit();
     }
     /**

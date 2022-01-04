@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use PoP\Root\Managers\ComponentManager;
 use Exception;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -431,7 +432,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         $fieldOrDirectiveArgs = [];
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         $treatUndefinedFieldOrDirectiveArgsAsErrors = $componentConfiguration->treatUndefinedFieldOrDirectiveArgsAsErrors();
         $setFailingFieldResponseAsNull = $componentConfiguration->setFailingFieldResponseAsNull();
         for ($i = 0; $i < count($fieldOrDirectiveArgElems); $i++) {
@@ -1459,7 +1460,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $directiveArgNameTypeResolvers = $this->getDirectiveArgumentNameTypeResolvers($directiveResolver, $relationalTypeResolver);
             $directiveArgNameSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver);
             /** @var ComponentConfiguration */
-            $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
             $treatTypeCoercingFailuresAsErrors = $componentConfiguration->treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingDirectiveArgErrors) as $failedCastingDirectiveArgName) {
                 // If it is Error, also show the error message
@@ -1561,7 +1562,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             /** @var array */
             $fieldArgNameSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
             /** @var ComponentConfiguration */
-            $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
             $treatTypeCoercingFailuresAsErrors = $componentConfiguration->treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingFieldArgErrors) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message

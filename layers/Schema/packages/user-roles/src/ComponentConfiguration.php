@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     private bool $treatUserRoleAsAdminData = true;
     private bool $treatUserCapabilityAsAdminData = true;

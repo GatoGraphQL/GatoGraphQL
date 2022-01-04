@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -66,7 +67,7 @@ class RootObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(EngineComponent::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(EngineComponent::class)->getConfiguration();
         if ($componentConfiguration->disableRedundantRootTypeMutationFields()) {
             return [];
         }

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMeta;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     private array $getUserMetaEntries = [];
     private string $getUserMetaBehavior = Behaviors::ALLOWLIST;

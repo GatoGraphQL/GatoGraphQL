@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+use PoP\BasicService\Component\AbstractComponentConfiguration;
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     // private int $getPostCategoryListDefaultLimit = 10;
     // private int $getPostCategoryListMaxLimit = -1;

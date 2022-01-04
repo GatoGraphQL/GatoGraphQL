@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMeta\TypeAPIs;
 
+use PoP\Root\Managers\ComponentManager;
 use InvalidArgumentException;
 use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 use PoPSchema\CustomPostMeta\Component;
@@ -34,13 +35,13 @@ abstract class AbstractCustomPostMetaTypeAPI extends AbstractMetaTypeAPI impleme
     public function getAllowOrDenyMetaEntries(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getCustomPostMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getCustomPostMetaBehavior();
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\SchemaHooks;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
@@ -93,7 +94,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $adminInputFieldNames;
         }
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->treatUserRoleAsAdminData()) {
             $adminInputFieldNames[] = 'roles';
             $adminInputFieldNames[] = 'excludeRoles';

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\API\Configuration\Request;
@@ -80,7 +81,7 @@ class Component extends AbstractComponent
             }
 
             /** @var AccessControlComponentConfiguration */
-            $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(AccessControlComponent::class)->getConfiguration();
+            $componentConfiguration = ComponentManager::getComponent(AccessControlComponent::class)->getConfiguration();
             if (
                 class_exists(CacheControlComponent::class)
                 && class_exists(AccessControlComponent::class)

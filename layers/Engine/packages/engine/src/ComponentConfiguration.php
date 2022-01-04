@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\Engine;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     private bool $disableRedundantRootTypeMutationFields = false;
     private bool $enablePassingExpressionsByArgInNestedDirectives = true;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -130,7 +131,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
 
         // Exclude the admin enum values, if "Admin" Schema is not enabled
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         if (!$componentConfiguration->enableAdminSchema()) {
             $adminEnumValues = $this->getConsolidatedAdminEnumValues();
             $consolidatedEnumValues = array_filter(

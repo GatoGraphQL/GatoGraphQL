@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
@@ -87,7 +88,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         $requestedFields = [];
         $executableFields = [];
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         $executeQueryBatchInStrictOrder = $componentConfiguration->executeQueryBatchInStrictOrder();
         $operationMaxLevels = 0;
         $maxDepth = 0;
@@ -307,7 +308,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     protected function maybeReplaceEmbeddableFields(string $field): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->enableEmbeddableFields()) {
             /**
              * Identify all the fieldArgValues from the string, because

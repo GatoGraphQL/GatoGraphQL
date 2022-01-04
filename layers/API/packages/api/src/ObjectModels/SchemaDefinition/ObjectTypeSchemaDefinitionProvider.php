@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\TypeKinds;
@@ -74,7 +75,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
     {
         $dangerouslyDynamicScalarTypeResolver = null;
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         if ($skipExposingDangerouslyDynamicScalarTypeInSchema = $componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var DangerouslyDynamicScalarTypeResolver */

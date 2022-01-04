@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLAPI;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Component as APIComponent;
 use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
@@ -45,6 +46,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return \PoP\Root\Managers\ComponentManager::getComponent(APIComponent::class)->isEnabled() && !Environment::disableGraphQLAPI();
+        return ComponentManager::getComponent(APIComponent::class)->isEnabled() && !Environment::disableGraphQLAPI();
     }
 }

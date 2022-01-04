@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use PoP\Root\Managers\ComponentManager;
 use GraphQLAPI\GraphQLAPI\Component;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
@@ -46,7 +47,7 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigBlock
             SchemaModes::PRIVATE_SCHEMA_MODE => \__('Private', 'graphql-api'),
         ];
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         $blockContent = sprintf(
             $blockContentPlaceholder,
             \__('Public/Private Schema Mode:', 'graphql-api'),

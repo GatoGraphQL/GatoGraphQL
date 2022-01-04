@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMeta\TypeAPIs;
 
+use PoP\Root\Managers\ComponentManager;
 use InvalidArgumentException;
 use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 use PoPSchema\UserMeta\Component;
@@ -34,13 +35,13 @@ abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements Us
     public function getAllowOrDenyMetaEntries(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getUserMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getUserMetaBehavior();
     }
 

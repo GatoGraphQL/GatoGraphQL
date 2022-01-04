@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesWP\FieldResolvers\ObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractReflectionPropertyObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -42,7 +43,7 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
     {
         $adminFieldNames = parent::getAdminFieldNames();
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->treatUserCapabilityAsAdminData()) {
             $adminFieldNames[] = 'capabilities';
         }

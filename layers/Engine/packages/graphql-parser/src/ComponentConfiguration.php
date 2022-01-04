@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     private bool $enableMultipleQueryExecution = false;
     private bool $enableComposableDirectives = false;

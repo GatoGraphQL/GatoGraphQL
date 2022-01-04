@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -1070,7 +1071,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // then skip processing that field altogether
             $schemaErrorFailingFields = [];
             /** @var ComponentConfiguration */
-            $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
             if (
                 !empty($directivePipelineSchemaErrors)
                 && $componentConfiguration->removeFieldIfDirectiveFailed()

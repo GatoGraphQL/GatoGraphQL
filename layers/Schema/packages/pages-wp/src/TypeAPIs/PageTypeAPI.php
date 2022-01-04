@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PagesWP\TypeAPIs;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
@@ -139,7 +140,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
     protected function getCustomPostListMaxLimit(): int
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getPageListMaxLimit();
     }
 
@@ -152,7 +153,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
             $returnIDs = ($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS;
             $pageIDs = [];
             /** @var ComponentModelComponentConfiguration */
-            $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
+            $componentConfiguration = ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
             $enableAdminSchema = $componentConfiguration->enableAdminSchema();
             foreach ($paths as $path) {
                 /** @var WP_Post|null */

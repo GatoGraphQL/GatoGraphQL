@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMeta;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     private array $getCustomPostMetaEntries = [];
     private string $getCustomPostMetaBehavior = Behaviors::ALLOWLIST;

@@ -41,7 +41,6 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * The oneof input object can receive only 1 input field at a time.
      * Retrieve it, or throw an Exception if this is not respected
      *
-     * @return string
      * @throws Exception If either there is none or more than 1 inputFieldNames being used
      */
     protected function getCurrentInputFieldName(stdClass $oneofInputObjectFormData): string

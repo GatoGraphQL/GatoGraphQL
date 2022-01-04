@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Component as APIComponent;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     private bool $exposeSelfFieldForRootTypeInGraphQLSchema = false;
     private bool $sortGraphQLSchemaAlphabetically = true;
@@ -338,7 +340,7 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
     public function exposeGlobalFieldsInGraphQLSchema(): bool
     {
         /** @var APIComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(APIComponent::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(APIComponent::class)->getConfiguration();
         if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return false;
         }

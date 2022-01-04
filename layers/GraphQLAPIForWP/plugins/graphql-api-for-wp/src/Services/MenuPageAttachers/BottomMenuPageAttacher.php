@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
 
+use PoP\Root\Managers\ComponentManager;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
@@ -135,7 +136,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
 
         /** @var GraphQLClientsForWPComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(GraphQLClientsForWPComponent::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(GraphQLClientsForWPComponent::class)->getConfiguration();
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
             global $submenu;
             $clientPath = $componentConfiguration->getGraphiQLClientEndpoint();

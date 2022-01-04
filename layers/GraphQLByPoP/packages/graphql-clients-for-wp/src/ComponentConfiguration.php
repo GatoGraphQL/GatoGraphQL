@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLClientsForWP;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\APIEndpoints\EndpointUtils;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     private string $getGraphQLClientsComponentURL = '';
 

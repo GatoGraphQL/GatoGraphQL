@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     private ?int $getUserListDefaultLimit = 10;
     private ?int $getUserListMaxLimit = -1;

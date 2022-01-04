@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     private ?int $getPageListDefaultLimit = 10;
     private ?int $getPageListMaxLimit = -1;

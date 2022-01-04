@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesACL;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 use PoPSchema\UserRolesAccessControl\Component as UserRolesAccessControlComponent;
@@ -29,7 +30,7 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return \PoP\Root\Managers\ComponentManager::getComponent(UserRolesAccessControlComponent::class)->isEnabled();
+        return ComponentManager::getComponent(UserRolesAccessControlComponent::class)->isEnabled();
     }
 
     /**

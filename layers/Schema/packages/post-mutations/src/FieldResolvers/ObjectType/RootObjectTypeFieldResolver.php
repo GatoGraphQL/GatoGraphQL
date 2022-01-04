@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\FieldResolvers\ObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -77,7 +78,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(EngineComponent::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(EngineComponent::class)->getConfiguration();
         return array_merge(
             [
                 'createPost',

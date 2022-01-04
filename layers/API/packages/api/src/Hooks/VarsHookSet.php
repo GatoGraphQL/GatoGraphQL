@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Hooks;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Constants\Actions;
@@ -74,7 +75,7 @@ class VarsHookSet extends AbstractHookSet
 
             // Enable mutations?
             /** @var ComponentConfiguration */
-            $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
             $vars['are-mutations-enabled'] = $componentConfiguration->enableMutations();
 
             // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)

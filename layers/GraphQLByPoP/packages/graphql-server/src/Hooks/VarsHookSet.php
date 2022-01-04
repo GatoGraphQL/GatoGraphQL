@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
+use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
@@ -53,7 +54,7 @@ class VarsHookSet extends AbstractHookSet
     public function augmentVarsProperties(array $vars_in_array): void
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
 
         // The PQL always has nested mutations enabled. Only the for the standard GraphQL server
         [&$vars] = $vars_in_array;

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     private int $getDefaultCacheControlMaxAge = 3600;
 

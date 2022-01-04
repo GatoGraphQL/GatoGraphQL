@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Component as APIComponent;
 use PoP\RESTAPI\Component as RESTAPIComponent;
 use PoP\BasicService\Component\AbstractComponent;
@@ -54,10 +55,10 @@ class Component extends AbstractComponent
         if ($componentConfiguration->addPageTypeToCustomPostUnionTypes()) {
             $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes');
         }
-        if (class_exists(APIComponent::class) && \PoP\Root\Managers\ComponentManager::getComponent(APIComponent::class)->isEnabled()) {
+        if (class_exists(APIComponent::class) && ComponentManager::getComponent(APIComponent::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
         }
-        if (class_exists(RESTAPIComponent::class) && \PoP\Root\Managers\ComponentManager::getComponent(RESTAPIComponent::class)->isEnabled()) {
+        if (class_exists(RESTAPIComponent::class) && ComponentManager::getComponent(RESTAPIComponent::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/RESTAPI');
         }
     }

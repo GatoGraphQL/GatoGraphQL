@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest\Hooks;
 
+use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLRequest\Component;
@@ -129,7 +130,7 @@ class VarsHookSet extends AbstractHookSet
     protected function processURLParamVars(array &$vars): void
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         $disablePoPQuery = isset($_REQUEST[QueryInputs::QUERY]) && $componentConfiguration->disableGraphQLAPIForPoP();
         if ($disablePoPQuery) {
             // Remove the query set by package API

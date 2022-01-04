@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\State;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Configuration\Request;
@@ -161,7 +162,7 @@ class ApplicationState
         $variables = $fieldQueryInterpreter->getVariablesFromRequest();
 
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         self::$vars = array(
             'nature' => $nature,
             'route' => $route,

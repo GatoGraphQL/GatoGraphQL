@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalMetaDirectiveResolver;
 use PoP\ComponentModel\Error\Error;
@@ -50,7 +51,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     {
         $directiveArgNameTypeResolvers = parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver);
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         if (!$componentConfiguration->enablePassingExpressionsByArgInNestedDirectives()) {
             return $directiveArgNameTypeResolvers;
         }

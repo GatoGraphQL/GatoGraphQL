@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\ConditionalOnComponent\Users\FieldResolvers\ObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CommentMutations\Component;
 use PoPSchema\CommentMutations\ComponentConfiguration;
@@ -51,7 +52,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     public function isServiceEnabled(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->mustUserBeLoggedInToAddComment();
     }
 

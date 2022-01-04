@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\GenericCustomPosts\FieldResolvers\ObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -191,7 +192,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     {
         $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
         /** @var CustomPostsComponentConfiguration */
-        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(CustomPostsComponent::class)->getConfiguration();
+        $componentConfiguration = ComponentManager::getComponent(CustomPostsComponent::class)->getConfiguration();
         switch ($fieldName) {
             case 'genericCustomPost':
                 if ($componentConfiguration->treatCustomPostStatusAsAdminData()) {

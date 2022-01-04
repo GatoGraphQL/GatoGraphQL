@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
     // private string $getModuleURLBase;
     private bool $groupFieldsUnderTypeForPrint = false;
