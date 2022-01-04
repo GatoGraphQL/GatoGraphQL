@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentConfiguration;
 
+use PoP\BasicService\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\Hooks\Facades\SystemHooksAPIFacade;
 
 /**

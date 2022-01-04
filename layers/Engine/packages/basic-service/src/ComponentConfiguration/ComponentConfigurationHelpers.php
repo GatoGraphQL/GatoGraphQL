@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ComponentConfiguration;
+namespace PoP\BasicService\ComponentConfiguration;
 
 /**
  * Helpers for the ComponentConfiguration class

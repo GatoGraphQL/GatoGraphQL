@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\BasicService\Component;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
+use PoP\BasicService\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\Hooks\Facades\SystemHooksAPIFacade;
 use PoP\Root\Component\AbstractComponent as UpstreamAbstractComponent;
 
