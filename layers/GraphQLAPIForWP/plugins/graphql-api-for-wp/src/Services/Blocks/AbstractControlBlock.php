@@ -60,8 +60,10 @@ abstract class AbstractControlBlock extends AbstractBlock
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
         $fieldTypeContent = $directiveContent = '';
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
         if (!$this->disableFields()) {
-            $fieldTypeContent = ComponentConfiguration::getEmptyLabel();
+            $fieldTypeContent = $componentConfiguration->getEmptyLabel();
             $typeFields = $attributes[self::ATTRIBUTE_NAME_TYPE_FIELDS] ?? [];
             if ($typeFields) {
                 $typeFieldsForPrint = $this->getTypeFieldsForPrint($typeFields);
@@ -69,7 +71,7 @@ abstract class AbstractControlBlock extends AbstractBlock
                  * If $groupFieldsUnderTypeForPrint is true, combine all types under their shared typeName
                  * If $groupFieldsUnderTypeForPrint is false, replace namespacedTypeName for typeName and "." for "/"
                  * */
-                $groupFieldsUnderTypeForPrint = ComponentConfiguration::groupFieldsUnderTypeForPrint();
+                $groupFieldsUnderTypeForPrint = $componentConfiguration->groupFieldsUnderTypeForPrint();
                 if ($groupFieldsUnderTypeForPrint) {
                     /**
                      * Cast object so PHPStan doesn't throw error
@@ -104,7 +106,7 @@ abstract class AbstractControlBlock extends AbstractBlock
             }
         }
         if (!$this->disableDirectives()) {
-            $directiveContent = ComponentConfiguration::getEmptyLabel();
+            $directiveContent = $componentConfiguration->getEmptyLabel();
             $directives = $attributes[self::ATTRIBUTE_NAME_DIRECTIVES] ?? [];
             if ($directives) {
                 // // Notice we are adding the "@" symbol for GraphQL directives

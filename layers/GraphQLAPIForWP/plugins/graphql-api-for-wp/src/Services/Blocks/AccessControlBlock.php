@@ -56,7 +56,9 @@ class AccessControlBlock extends AbstractControlBlock
     }
     protected function getBlockContentTitle(): string
     {
-        if (ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             return \__('Access Control Rules:', 'graphql-api');
         }
         return \__('Who can access:', 'graphql-api');
@@ -69,10 +71,12 @@ class AccessControlBlock extends AbstractControlBlock
      */
     protected function getLocalizedData(): array
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
         return array_merge(
             parent::getLocalizedData(),
             [
-                'isIndividualControlForSchemaModeEnabled' => ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode(),
+                'isIndividualControlForSchemaModeEnabled' => $componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode(),
             ]
         );
     }
@@ -85,7 +89,9 @@ class AccessControlBlock extends AbstractControlBlock
     protected function getBlockContent(array $attributes, string $content): string
     {
         $maybeSchemaModeContent = '';
-        if (ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             $blockContentPlaceholder = <<<EOT
                 <p><strong>%s</strong> %s</p>
                 <h4 class="%s">%s</h4>

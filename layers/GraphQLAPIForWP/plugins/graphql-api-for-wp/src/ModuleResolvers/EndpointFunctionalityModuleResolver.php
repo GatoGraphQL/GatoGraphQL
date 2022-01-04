@@ -85,11 +85,13 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
 
     public function getDescription(string $module): string
     {
+        /** @var GraphQLEndpointForWPComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(GraphQLEndpointForWPComponent::class)->getConfiguration();
         switch ($module) {
             case self::SINGLE_ENDPOINT:
                 return \sprintf(
                     \__('Expose a single GraphQL endpoint under <code>%s</code>, with unrestricted access', 'graphql-api'),
-                    GraphQLEndpointForWPComponentConfiguration::getGraphQLAPIEndpoint()
+                    $componentConfiguration->getGraphQLAPIEndpoint()
                 );
             case self::PERSISTED_QUERIES:
                 return \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'graphql-api');
