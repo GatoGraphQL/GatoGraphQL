@@ -7,6 +7,7 @@ namespace PoP\BasicService\Component;
 use PoP\BasicService\Component\ComponentConfigurationHelpers;
 use PoP\Hooks\Facades\SystemHooksAPIFacade;
 use PoP\Root\Component\AbstractComponentConfiguration as UpstreamAbstractComponentConfiguration;
+use PoP\Root\Helpers\ClassHelpers;
 
 /**
  * Initialize component
@@ -42,7 +43,7 @@ abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentC
              * in `Component.initialize()`, so it must already be available by then
              */
             $hooksAPI = SystemHooksAPIFacade::getInstance();
-            $class = \get_called_class();
+            $class = $this->getComponentClass();
             $hookName = ComponentConfigurationHelpers::getHookName(
                 $class,
                 $envVariable
@@ -54,5 +55,15 @@ abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentC
                 $envVariable
             );
         }
+    }
+
+    /**
+     * Package's Component class, of type ComponentInterface.
+     * By standard, it is "NamespaceOwner\Project\Component::class"
+     */
+    protected function getComponentClass(): string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        return $classNamespace . '\\Component';
     }
 }

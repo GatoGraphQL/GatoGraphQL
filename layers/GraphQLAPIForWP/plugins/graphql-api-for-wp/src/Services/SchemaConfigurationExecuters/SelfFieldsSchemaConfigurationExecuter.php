@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSelfFieldsBlock;
 use GraphQLByPoP\GraphQLServer\Component as GraphQLServerComponent;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 
 class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
@@ -34,9 +33,9 @@ class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisable
         return $this->getSchemaConfigSelfFieldsBlock();
     }
 
-    public function getHookComponentConfigurationClass(): string
+    public function getHookComponentClass(): string
     {
-        return GraphQLServerComponentConfiguration::class;
+        return GraphQLServerComponent::class;
     }
 
     public function getHookEnvironmentClass(): string
