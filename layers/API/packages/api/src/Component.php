@@ -64,27 +64,27 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if (self::isEnabled()) {
+        if ($this->isEnabled()) {
             ComponentConfiguration::setConfiguration($configuration);
-            self::initServices(dirname(__DIR__));
-            self::initServices(dirname(__DIR__), '/Overrides');
-            self::initSchemaServices(dirname(__DIR__), $skipSchema);
+            $this->initServices(dirname(__DIR__));
+            $this->initServices(dirname(__DIR__), '/Overrides');
+            $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
             // Conditional packages
             if (class_exists(AccessControlComponent::class)) {
-                self::initServices(dirname(__DIR__), '/ConditionalOnComponent/AccessControl');
+                $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/AccessControl');
             }
             if (
                 class_exists(CacheControlComponent::class)
                 && class_exists(AccessControlComponent::class)
                 && AccessControlComponentConfiguration::canSchemaBePrivate()
             ) {
-                self::initSchemaServices(
+                $this->initSchemaServices(
                     dirname(__DIR__),
                     $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses),
                     '/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema'
@@ -93,7 +93,7 @@ class Component extends AbstractComponent
         }
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
         return !Environment::disableAPI();
     }

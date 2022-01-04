@@ -66,7 +66,7 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         // If CacheControl is enabled, add it to the headers
         $headers = [];
-        if (CacheControlComponent::isEnabled()) {
+        if (\PoP\Root\Managers\ComponentManager::getComponent(CacheControlComponent::class)->isEnabled()) {
             if ($cacheControlHeader = $this->getCacheControlEngine()->getCacheControlHeader()) {
                 $headers[] = $cacheControlHeader;
             }

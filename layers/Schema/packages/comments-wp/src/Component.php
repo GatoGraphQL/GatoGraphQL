@@ -31,19 +31,19 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initServices(dirname(__DIR__));
+        $this->initServices(dirname(__DIR__));
 
         if (class_exists(UsersComponent::class)) {
-            self::initServices(
+            $this->initServices(
                 dirname(__DIR__),
                 '/ConditionalOnComponent/Users'
             );
-            self::initSchemaServices(
+            $this->initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
                 '/ConditionalOnComponent/Users'

@@ -89,4 +89,9 @@ interface ComponentInterface
     public function customizeComponentClassConfiguration(
         array &$componentClassConfiguration
     ): void;
+
+    /**
+     * Indicates if the Component is enabled
+     */
+    public function isEnabled(): bool;
 }

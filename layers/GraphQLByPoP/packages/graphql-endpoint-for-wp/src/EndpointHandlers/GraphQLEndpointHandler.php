@@ -51,7 +51,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
     {
         return
             class_exists(Component::class)
-            && Component::isEnabled()
+            && \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->isEnabled()
             && !ComponentConfiguration::isGraphQLAPIEndpointDisabled();
     }
 

@@ -78,12 +78,12 @@ class Component extends AbstractPluginComponent
     /**
      * Initialize services for the system container.
      */
-    protected static function initializeSystemContainerServices(): void
+    protected function initializeSystemContainerServices(): void
     {
         parent::initializeSystemContainerServices();
 
         if (\is_admin()) {
-            self::initSystemServices(dirname(__DIR__), '/ConditionalOnContext/Admin');
+            $this->initSystemServices(dirname(__DIR__), '/ConditionalOnContext/Admin');
         }
     }
 
@@ -93,7 +93,7 @@ class Component extends AbstractPluginComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
@@ -104,13 +104,13 @@ class Component extends AbstractPluginComponent
             $skipSchemaComponentClasses
         );
         // Override DI services
-        self::initServices(dirname(__DIR__), '/Overrides');
+        $this->initServices(dirname(__DIR__), '/Overrides');
         // Conditional DI settings
         /**
          * ObjectTypeFieldResolvers used to configure the services can also be accessed in the admin area
          */
         if (\is_admin()) {
-            self::initServices(dirname(__DIR__), '/ConditionalOnContext/Admin');
+            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin');
 
             // The WordPress editor can access the full GraphQL schema,
             // including "admin" fields, so cache it individually.
@@ -118,7 +118,7 @@ class Component extends AbstractPluginComponent
             $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
             /** @var EndpointHelpers */
             $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-            self::initSchemaServices(
+            $this->initSchemaServices(
                 dirname(__DIR__),
                 !$endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint(),
                 '/ConditionalOnContext/Admin/ConditionalOnContext/Editor'
@@ -126,7 +126,7 @@ class Component extends AbstractPluginComponent
         }
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         if ($moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
-            self::initServices(dirname(__DIR__), '/ConditionalOnContext/CacheControl/Overrides');
+            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/CacheControl/Overrides');
         }
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
@@ -139,7 +139,7 @@ class Component extends AbstractPluginComponent
                 ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_CLIENT
             )
         ) {
-            self::initServices(dirname(__DIR__), '/ConditionalOnContext/Admin/ConditionalOnContext/GraphiQLExplorerInAdminClient/Overrides');
+            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin/ConditionalOnContext/GraphiQLExplorerInAdminClient/Overrides');
         }
         if ($isGraphiQLExplorerEnabled) {
             if (
@@ -148,7 +148,7 @@ class Component extends AbstractPluginComponent
                     ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
                 )
             ) {
-                self::initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorerInAdminPersistedQueries/Overrides');
+                $this->initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorerInAdminPersistedQueries/Overrides');
             }
             if (
                 $userSettingsManager->getSetting(
@@ -156,7 +156,7 @@ class Component extends AbstractPluginComponent
                     ClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT
                 )
             ) {
-                self::initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorerInSingleEndpointPublicClient/Overrides');
+                $this->initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorerInSingleEndpointPublicClient/Overrides');
             }
             if (
                 $userSettingsManager->getSetting(
@@ -164,7 +164,7 @@ class Component extends AbstractPluginComponent
                     ClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS
                 )
             ) {
-                self::initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
+                $this->initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
             }
         }
     }

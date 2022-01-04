@@ -35,22 +35,22 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if (self::isEnabled()) {
+        if ($this->isEnabled()) {
             ComponentConfiguration::setConfiguration($configuration);
-            self::initServices(dirname(__DIR__));
+            $this->initServices(dirname(__DIR__));
             if (ComponentConfiguration::useGraphiQLExplorer()) {
-                self::initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
+                $this->initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
             }
         }
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
-        return GraphQLServerComponent::isEnabled();
+        return \PoP\Root\Managers\ComponentManager::getComponent(GraphQLServerComponent::class)->isEnabled();
     }
 }

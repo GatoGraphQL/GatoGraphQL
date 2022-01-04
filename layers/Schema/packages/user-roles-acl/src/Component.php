@@ -27,18 +27,18 @@ class Component extends AbstractComponent
         ];
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
-        return UserRolesAccessControlComponent::isEnabled();
+        return \PoP\Root\Managers\ComponentManager::getComponent(UserRolesAccessControlComponent::class)->isEnabled();
     }
 
     /**
      * Initialize services for the system container
      */
-    protected static function initializeSystemContainerServices(): void
+    protected function initializeSystemContainerServices(): void
     {
-        if (self::isEnabled()) {
-                self::initSystemServices(dirname(__DIR__));
+        if ($this->isEnabled()) {
+                $this->initSystemServices(dirname(__DIR__));
         }
     }
 }

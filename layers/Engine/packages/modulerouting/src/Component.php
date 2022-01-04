@@ -26,8 +26,8 @@ class Component extends AbstractComponent
     /**
      * Initialize services for the system container
      */
-    protected static function initializeSystemContainerServices(): void
+    protected function initializeSystemContainerServices(): void
     {
-        self::initSystemServices(dirname(__DIR__));
+        $this->initSystemServices(dirname(__DIR__));
     }
 }

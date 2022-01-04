@@ -32,20 +32,20 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initServices(dirname(__DIR__));
-        self::initServices(dirname(__DIR__), '/Overrides');
+        $this->initServices(dirname(__DIR__));
+        $this->initServices(dirname(__DIR__), '/Overrides');
     }
 
     /**
      * Initialize services for the system container
      */
-    protected static function initializeSystemContainerServices(): void
+    protected function initializeSystemContainerServices(): void
     {
-        self::initSystemServices(dirname(__DIR__));
+        $this->initSystemServices(dirname(__DIR__));
     }
 }

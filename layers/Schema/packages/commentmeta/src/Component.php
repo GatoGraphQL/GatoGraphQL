@@ -30,12 +30,12 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
         ComponentConfiguration::setConfiguration($configuration);
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }

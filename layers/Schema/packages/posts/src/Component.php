@@ -44,38 +44,38 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
         ComponentConfiguration::setConfiguration($configuration);
-        self::initServices(dirname(__DIR__));
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initServices(dirname(__DIR__));
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (class_exists(APIComponent::class) && APIComponent::isEnabled()) {
-            self::initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
+        if (class_exists(APIComponent::class) && \PoP\Root\Managers\ComponentManager::getComponent(APIComponent::class)->isEnabled()) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
         }
-        if (class_exists(RESTAPIComponent::class) && RESTAPIComponent::isEnabled()) {
-            self::initServices(dirname(__DIR__), '/ConditionalOnComponent/RESTAPI');
+        if (class_exists(RESTAPIComponent::class) && \PoP\Root\Managers\ComponentManager::getComponent(RESTAPIComponent::class)->isEnabled()) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/RESTAPI');
         }
 
         if (class_exists(UsersComponent::class)) {
-            self::initSchemaServices(
+            $this->initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
                 '/ConditionalOnComponent/Users'
             );
-            if (class_exists(APIComponent::class) && APIComponent::isEnabled()) {
-                self::initServices(dirname(__DIR__), '/ConditionalOnComponent/Users/ConditionalOnComponent/API');
+            if (class_exists(APIComponent::class) && \PoP\Root\Managers\ComponentManager::getComponent(APIComponent::class)->isEnabled()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/Users/ConditionalOnComponent/API');
             }
-            if (class_exists(RESTAPIComponent::class) && RESTAPIComponent::isEnabled()) {
-                self::initServices(dirname(__DIR__), '/ConditionalOnComponent/Users/ConditionalOnComponent/RESTAPI');
+            if (class_exists(RESTAPIComponent::class) && \PoP\Root\Managers\ComponentManager::getComponent(RESTAPIComponent::class)->isEnabled()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/Users/ConditionalOnComponent/RESTAPI');
             }
         }
 
         if (ComponentConfiguration::addPostTypeToCustomPostUnionTypes()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPostTypeToCustomPostUnionTypes');
+            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPostTypeToCustomPostUnionTypes');
         }
     }
 }

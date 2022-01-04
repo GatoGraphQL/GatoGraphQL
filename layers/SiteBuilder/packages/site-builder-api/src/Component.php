@@ -27,7 +27,7 @@ class Component extends AbstractComponent
         ];
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
         return !Environment::disableAPI();
     }

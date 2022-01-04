@@ -33,18 +33,18 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if (self::isEnabled()) {
-            self::initServices(dirname(__DIR__));
+        if ($this->isEnabled()) {
+            $this->initServices(dirname(__DIR__));
         }
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
-        return APIComponent::isEnabled() && !Environment::disableRESTAPI();
+        return \PoP\Root\Managers\ComponentManager::getComponent(APIComponent::class)->isEnabled() && !Environment::disableRESTAPI();
     }
 }
