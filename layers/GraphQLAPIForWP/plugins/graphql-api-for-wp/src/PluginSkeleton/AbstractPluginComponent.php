@@ -51,11 +51,9 @@ abstract class AbstractPluginComponent extends AbstractComponent implements Plug
      * It uses Convention over Configuration: if the requested files exist,
      * load them.
      *
-     * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Root\Component;
 
+use PoP\Root\Helpers\ClassHelpers;
+
 abstract class AbstractComponent implements ComponentInterface
 {
     use InitializeContainerServicesInComponentTrait;
@@ -45,10 +47,10 @@ abstract class AbstractComponent implements ComponentInterface
         $this->maybeSetConfiguration($configuration);
 
         // Initialize the self component
-        $this->initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
+        $this->initializeContainerServices($skipSchema, $skipSchemaComponentClasses);
 
         // Allow the component to define runtime constants
-        $this->defineRuntimeConstants($configuration, $skipSchema, $skipSchemaComponentClasses);
+        $this->defineRuntimeConstants($skipSchema, $skipSchemaComponentClasses);
     }
 
     /**
@@ -107,11 +109,9 @@ abstract class AbstractComponent implements ComponentInterface
     /**
      * Initialize services
      *
-     * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
@@ -121,7 +121,6 @@ abstract class AbstractComponent implements ComponentInterface
      * Define runtime constants
      */
     protected function defineRuntimeConstants(
-        array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
@@ -175,12 +174,8 @@ abstract class AbstractComponent implements ComponentInterface
      */
     protected function getComponentConfigurationClass(): ?string
     {
-        $class = \get_called_class();
-        $parts = \explode('\\', $class);
-        if (\count($parts) < 3) {
-            return null;
-        }
-        $componentConfigurationClass = $parts[0] . '\\' . $parts[1] . '\\ComponentConfiguration';
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        $componentConfigurationClass = $classNamespace . '\\ComponentConfiguration';
         if (!class_exists($componentConfigurationClass)) {
             return null;
         }

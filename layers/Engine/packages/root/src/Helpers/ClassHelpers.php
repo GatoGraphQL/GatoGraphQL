@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
+namespace PoP\Root\Helpers;
 
-class PluginHelpers
+class ClassHelpers
 {
     /**
      * The PSR-4 namespace, with format "Vendor\Project"

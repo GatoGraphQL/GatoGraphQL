@@ -20,6 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\Hooks\Component::class,
+            \PoP\Translation\Component::class,
         ];
     }
 
@@ -30,6 +31,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\HooksPHP\Component::class,
+            \PoP\TranslationMock\Component::class,
         ];
     }
 }

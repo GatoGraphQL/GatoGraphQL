@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\Execution;
 
 class MultipleQueryExecutionDisabledTest extends AbstractMultipleQueryExecutionTest
 {
-    protected function enabled(): bool
+    protected static function enabled(): bool
     {
         return false;
     }

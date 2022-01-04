@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginComponentInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Engine\AppLoader;
+use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Managers\ComponentManager;
 
 abstract class AbstractPlugin
@@ -247,7 +248,7 @@ abstract class AbstractPlugin
      */
     public function getPluginNamespace(): string
     {
-        return PluginHelpers::getClassPSR4Namespace(get_called_class());
+        return ClassHelpers::getClassPSR4Namespace(get_called_class());
     }
 
     /**

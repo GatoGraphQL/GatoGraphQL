@@ -60,6 +60,8 @@ services:
         - '../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp'
         - '../../layers/Engine/packages/routing:/app/vendor/getpop/routing'
         - >-
+          ../../layers/Engine/packages/translation-mock:/app/vendor/getpop/translation-mock
+        - >-
           ../../layers/Engine/packages/translation-wp:/app/vendor/getpop/translation-wp
         - >-
           ../../layers/Engine/packages/translation:/app/vendor/getpop/translation

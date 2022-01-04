@@ -32,11 +32,9 @@ class Component extends AbstractComponent
     /**
      * Initialize services
      *
-     * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
@@ -86,7 +84,6 @@ class Component extends AbstractComponent
      * Define runtime constants
      */
     protected function defineRuntimeConstants(
-        array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {

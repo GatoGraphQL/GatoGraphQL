@@ -4,7 +4,10 @@ namespace PoPSchema\TaxonomyQueryWP;
 
 use PHPUnit\Framework\TestCase;
 
-class ComponentTest extends TestCase
+/**
+ * Made abstract to disable the test
+ */
+abstract class ComponentTest extends TestCase
 {
     // /**
     //  * The component must have some dependency (only the root has not)

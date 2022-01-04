@@ -90,16 +90,13 @@ class Component extends AbstractPluginComponent
     /**
      * Initialize services
      *
-     * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
         parent::initializeContainerServices(
-            $configuration,
             $skipSchema,
             $skipSchemaComponentClasses
         );

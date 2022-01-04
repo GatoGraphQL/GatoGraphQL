@@ -4,54 +4,54 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use LogicException;
 use PHPUnit\Framework\TestCase;
 use PoP\Root\AppLoader;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\Helpers\ClassHelpers;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class AbstractTestCase extends TestCase
 {
-    private ?ContainerInterface $container = null;
+    private static ?ContainerInterface $container = null;
 
-    final protected function initializeContainer(): void
+    public static function setUpBeforeClass(): void
     {
-        $this->initializeAppLoader(false, null, null, true);
-        $this->container = ContainerBuilderFactory::getInstance();
+        static::initializeAppLoader(false, null, null, true);
+        self::$container = ContainerBuilderFactory::getInstance();
     }
 
-    protected function getAppLoaderClass(): string
-    {
-        return AppLoader::class;
-    }
-
-    protected function initializeAppLoader(
+    protected static function initializeAppLoader(
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
         ?string $containerDirectory = null,
         bool $isDev = false
     ): void {
-        $appLoader = $this->getAppLoaderClass();
-        $appLoader::addComponentClassesToInitialize($this->getComponentClassesToInitialize());
+        $appLoader = static::getAppLoaderClass();
+        $appLoader::addComponentClassesToInitialize(static::getComponentClassesToInitialize());
         $appLoader::initializeComponents($isDev);
         $appLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
         $appLoader::addComponentClassConfiguration(
-            $this->getComponentClassConfiguration()
+            static::getComponentClassConfiguration()
         );
 
         $appLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
     }
 
+    protected static function getAppLoaderClass(): string
+    {
+        return AppLoader::class;
+    }
+
     /**
      * @return string[]
      */
-    protected function getComponentClassesToInitialize(): array
+    protected static function getComponentClassesToInitialize(): array
     {
         return [
-            $this->getComponentClass(),
+            static::getComponentClass(),
         ];
     }
 
@@ -60,7 +60,7 @@ abstract class AbstractTestCase extends TestCase
      *
      * @return array<string, mixed> [key]: Component class, [value]: Configuration
      */
-    protected function getComponentClassConfiguration(): array
+    protected static function getComponentClassConfiguration(): array
     {
         return [];
     }
@@ -69,49 +69,20 @@ abstract class AbstractTestCase extends TestCase
      * Package's Component class, of type ComponentInterface.
      * By standard, it is "NamespaceOwner\Project\Component::class"
      */
-    protected function getComponentClass(): string
+    protected static function getComponentClass(): string
     {
-        $class = \get_called_class();
-        $parts = \explode('\\', $class);
-        if (\count($parts) < 3) {
-            throw new LogicException(
-                sprintf(
-                    'Could not deduce the package Component class from "%s". Must override function "%s"?',
-                    $class,
-                    __FUNCTION__
-                )
-            );
-        }
-        return $parts[0] . '\\' . $parts[1] . '\\Component';
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        return $classNamespace . '\\Component';
     }
 
-    protected function setUp(): void
+    public static function tearDownAfterClass(): void
     {
-        parent::setUp();
-
-        if ($this->container === null) {
-            $this->initializeContainer();
-        }
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        if (!$this->keepContainerAcrossTests()) {
-            $this->container = null;
-            $appLoader = $this->getAppLoaderClass();
-            $appLoader::reset();
-        }
-    }
-
-    protected function keepContainerAcrossTests(): bool
-    {
-        return false;
+        $appLoader = static::getAppLoaderClass();
+        $appLoader::reset();
     }
 
     protected function getService(string $service): mixed
     {
-        return $this->container->get($service);
+        return self::$container->get($service);
     }
 }
