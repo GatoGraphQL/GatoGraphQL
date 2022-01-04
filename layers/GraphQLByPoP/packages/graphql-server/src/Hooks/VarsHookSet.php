@@ -54,7 +54,7 @@ class VarsHookSet extends AbstractHookSet
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
-        
+
         // The PQL always has nested mutations enabled. Only the for the standard GraphQL server
         [&$vars] = $vars_in_array;
         $vars['nested-mutations-enabled'] = $vars['standard-graphql'] ?

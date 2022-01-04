@@ -59,7 +59,7 @@ class AppLoader
         self::$componentClassesToInitialize = [];
         self::$componentClassConfiguration = [];
         self::$skipSchemaComponentClasses = [];
-        
+
         ContainerBuilderFactory::reset();
         SystemContainerBuilderFactory::reset();
         ComponentManager::reset();

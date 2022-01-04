@@ -8,5 +8,5 @@ use PoP\Root\Component\ComponentInterface as UpstreamComponentInterface;
 
 interface ComponentInterface extends UpstreamComponentInterface
 {
-    
+
 }

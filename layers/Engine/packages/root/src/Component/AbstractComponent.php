@@ -16,7 +16,7 @@ abstract class AbstractComponent implements ComponentInterface
     final function __construct()
     {
         $componentConfigurationClass = $this->getComponentConfigurationClass();
-        if ($componentConfigurationClass !== null) {    
+        if ($componentConfigurationClass !== null) {
             $this->componentConfiguration = new $componentConfigurationClass();
         }
     }

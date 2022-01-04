@@ -78,7 +78,7 @@ class Component extends AbstractComponent
             if (class_exists(AccessControlComponent::class)) {
                 $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/AccessControl');
             }
-            
+
             /** @var AccessControlComponentConfiguration */
             $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(AccessControlComponent::class)->getConfiguration();
             if (

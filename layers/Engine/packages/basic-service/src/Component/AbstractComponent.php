@@ -11,5 +11,5 @@ use PoP\Root\Component\AbstractComponent as UpstreamAbstractComponent;
  */
 abstract class AbstractComponent extends UpstreamAbstractComponent implements ComponentInterface
 {
-    
+
 }

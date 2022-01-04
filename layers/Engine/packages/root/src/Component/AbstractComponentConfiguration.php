@@ -20,7 +20,7 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
      * Cannot override the constructor
      */
     final function __construct()
-    {        
+    {
     }
 
     public function setConfiguration(array $configuration): void
@@ -32,7 +32,7 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
     {
         return array_key_exists($option, $this->configuration);
     }
-    
+
     public function getConfigurationValue(string $option): mixed
     {
         return $this->configuration[$option] ?? null;
