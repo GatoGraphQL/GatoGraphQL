@@ -20,14 +20,6 @@ class ComponentManager
     protected static array $components = [];
 
     /**
-     * @return string[]
-     */
-    public static function getComponentClasses(): array
-    {
-        return array_keys(self::$components);
-    }
-
-    /**
      * Register and initialize a component
      */
     public static function register(string $componentClass): ComponentInterface
