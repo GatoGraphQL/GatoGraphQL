@@ -13,11 +13,6 @@ use PoP\Root\Component\ComponentInterface;
 class ComponentManager
 {
     /**
-     * @var string[]
-     */
-    private static array $componentClasses = [];
-
-    /**
      * The initialized components, stored under their class
      *
      * @var array<string,ComponentInterface>
@@ -29,7 +24,7 @@ class ComponentManager
      */
     public static function getComponentClasses(): array
     {
-        return self::$componentClasses;
+        return array_keys(self::$components);
     }
 
     /**
@@ -39,7 +34,6 @@ class ComponentManager
     {
         $component = new $componentClass();
         self::$components[$componentClass] = $component;
-        self::$componentClasses[] = $componentClass;
         return $component;
     }
 
@@ -59,8 +53,8 @@ class ComponentManager
      */
     public static function bootSystem(): void
     {
-        foreach (self::$componentClasses as $componentClass) {
-            $componentClass::bootSystem();
+        foreach (self::$components as $component) {
+            $component::bootSystem();
         }
     }
 
@@ -69,8 +63,8 @@ class ComponentManager
      */
     public static function beforeBoot(): void
     {
-        foreach (self::$componentClasses as $componentClass) {
-            $componentClass::beforeBoot();
+        foreach (self::$components as $component) {
+            $component::beforeBoot();
         }
     }
 
@@ -79,8 +73,8 @@ class ComponentManager
      */
     public static function boot(): void
     {
-        foreach (self::$componentClasses as $componentClass) {
-            $componentClass::boot();
+        foreach (self::$components as $component) {
+            $component::boot();
         }
     }
 
@@ -89,8 +83,8 @@ class ComponentManager
      */
     public static function afterBoot(): void
     {
-        foreach (self::$componentClasses as $componentClass) {
-            $componentClass::afterBoot();
+        foreach (self::$components as $component) {
+            $component::afterBoot();
         }
     }
 }
