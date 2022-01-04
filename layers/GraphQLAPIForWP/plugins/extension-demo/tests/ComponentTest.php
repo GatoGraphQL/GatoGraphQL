@@ -3,6 +3,7 @@
 namespace GraphQLAPI\ExtensionDemo;
 
 use PoP\Engine\AbstractTestCase;
+use PoP\Root\Managers\ComponentManager;
 
 class ComponentTest extends AbstractTestCase
 {
@@ -12,7 +13,7 @@ class ComponentTest extends AbstractTestCase
     public function testHasDependedComponentClasses(): void
     {
         $this->assertNotEmpty(
-            \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getDependedComponentClasses()
+            ComponentManager::getComponent(Component::class)->getDependedComponentClasses()
         );
     }
 }
