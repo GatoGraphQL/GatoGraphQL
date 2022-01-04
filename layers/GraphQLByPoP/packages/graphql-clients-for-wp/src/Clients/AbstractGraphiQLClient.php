@@ -16,7 +16,7 @@ abstract class AbstractGraphiQLClient extends AbstractClient
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getGraphiQLClientEndpointDisabled();
+        return $componentConfiguration->isGraphiQLClientEndpointDisabled();
     }
     protected function getEndpoint(): string
     {
