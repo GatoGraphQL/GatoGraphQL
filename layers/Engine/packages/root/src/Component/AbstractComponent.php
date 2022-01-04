@@ -10,10 +10,7 @@ abstract class AbstractComponent implements ComponentInterface
 
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
 
-    /**
-     * Cannot override the constructor
-     */
-    final function __construct()
+    public function __construct()
     {
         $componentConfigurationClass = $this->getComponentConfigurationClass();
         if ($componentConfigurationClass !== null) {

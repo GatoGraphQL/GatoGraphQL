@@ -16,13 +16,6 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
      */
     protected array $configuration = [];
 
-    /**
-     * Cannot override the constructor
-     */
-    final function __construct()
-    {
-    }
-
     public function setConfiguration(array $configuration): void
     {
         $this->configuration = $configuration;
