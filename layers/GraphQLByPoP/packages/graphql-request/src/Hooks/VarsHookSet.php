@@ -128,7 +128,9 @@ class VarsHookSet extends AbstractHookSet
      */
     protected function processURLParamVars(array &$vars): void
     {
-        $disablePoPQuery = isset($_REQUEST[QueryInputs::QUERY]) && ComponentConfiguration::disableGraphQLAPIForPoP();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $disablePoPQuery = isset($_REQUEST[QueryInputs::QUERY]) && $componentConfiguration->disableGraphQLAPIForPoP();
         if ($disablePoPQuery) {
             // Remove the query set by package API
             unset($vars['query']);
@@ -138,7 +140,7 @@ class VarsHookSet extends AbstractHookSet
         $isGraphQLPersistedQuery = isset($_REQUEST[QueryInputs::QUERY]) && $this->getGraphQLPersistedQueryManager()->isPersistedQuery($_REQUEST[QueryInputs::QUERY]);
         if (
             !isset($_REQUEST[QueryInputs::QUERY])
-            || ComponentConfiguration::disableGraphQLAPIForPoP()
+            || $componentConfiguration->disableGraphQLAPIForPoP()
             || $isGraphQLPersistedQuery
         ) {
             // Add a flag indicating that we are doing standard GraphQL

@@ -134,9 +134,11 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->getSettingsMenuPage()->setHookName($hookName);
         }
 
+        /** @var GraphQLClientsForWPComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(GraphQLClientsForWPComponent::class)->getConfiguration();
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
             global $submenu;
-            $clientPath = GraphQLClientsForWPComponentConfiguration::getGraphiQLClientEndpoint();
+            $clientPath = $componentConfiguration->getGraphiQLClientEndpoint();
             $submenu[$this->getMenuName()][] = [
                 __('GraphiQL (public client)', 'graphql-api'),
                 'read',
@@ -146,7 +148,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
             global $submenu;
-            $clientPath = GraphQLClientsForWPComponentConfiguration::getVoyagerClientEndpoint();
+            $clientPath = $componentConfiguration->getVoyagerClientEndpoint();
             $submenu[$this->getMenuName()][] = [
                 __('Interactive Schema (public client)', 'graphql-api'),
                 'read',

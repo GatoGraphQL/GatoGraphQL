@@ -337,7 +337,9 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
 
     public function exposeGlobalFieldsInGraphQLSchema(): bool
     {
-        if (APIComponentConfiguration::skipExposingGlobalFieldsInFullSchema()) {
+        /** @var APIComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(APIComponent::class)->getConfiguration();
+        if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return false;
         }
 

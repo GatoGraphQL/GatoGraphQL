@@ -52,15 +52,18 @@ class VarsHookSet extends AbstractHookSet
      */
     public function augmentVarsProperties(array $vars_in_array): void
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        
         // The PQL always has nested mutations enabled. Only the for the standard GraphQL server
         [&$vars] = $vars_in_array;
         $vars['nested-mutations-enabled'] = $vars['standard-graphql'] ?
-            ComponentConfiguration::enableNestedMutations()
+            $componentConfiguration->enableNestedMutations()
             : true;
         // Check if the value has been defined by configuration. If so, use it.
         // Otherwise, use the defaults:
         // By default, Standard GraphQL has introspection enabled, and PQL is not
-        $enableGraphQLIntrospection = ComponentConfiguration::enableGraphQLIntrospection();
+        $enableGraphQLIntrospection = $componentConfiguration->enableGraphQLIntrospection();
         $vars['graphql-introspection-enabled'] = $enableGraphQLIntrospection !== null ?
             $enableGraphQLIntrospection
             : $vars['standard-graphql'];

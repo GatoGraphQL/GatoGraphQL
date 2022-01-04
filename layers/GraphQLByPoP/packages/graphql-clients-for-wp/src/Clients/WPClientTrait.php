@@ -33,6 +33,8 @@ trait WPClientTrait
      */
     protected function getEndpointURLOrURLPath(): string
     {
-        return GraphQLEndpointForWPComponentConfiguration::getGraphQLAPIEndpoint();
+        /** @var GraphQLEndpointForWPComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(GraphQLEndpointForWPComponent::class)->getConfiguration();
+        return $componentConfiguration->getGraphQLAPIEndpoint();
     }
 }
