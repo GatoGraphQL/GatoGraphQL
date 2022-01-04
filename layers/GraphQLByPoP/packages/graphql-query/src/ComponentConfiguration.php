@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLQuery;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    private bool $enableVariablesAsExpressions = false;
 
-    private static bool $enableVariablesAsExpressions = false;
-
-    public static function enableVariablesAsExpressions(): bool
+    public function enableVariablesAsExpressions(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_VARIABLES_AS_EXPRESSIONS;
-        $selfProperty = &self::$enableVariablesAsExpressions;
+        $selfProperty = &$this->enableVariablesAsExpressions;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

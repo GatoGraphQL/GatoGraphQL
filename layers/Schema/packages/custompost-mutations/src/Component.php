@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoPSchema\Users\Component as UsersComponent;
 
 /**
@@ -17,7 +17,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoPSchema\CustomPosts\Component::class,
@@ -32,15 +32,15 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initServices(dirname(__DIR__));
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initServices(dirname(__DIR__));
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
         if (class_exists(UsersComponent::class)) {
-            self::initSchemaServices(
+            $this->initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
                 '/ConditionalOnComponent/Users'

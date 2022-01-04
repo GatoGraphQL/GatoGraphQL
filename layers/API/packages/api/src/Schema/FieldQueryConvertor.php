@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
+use PoP\Root\Managers\ComponentManager;
+use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;
@@ -85,7 +87,9 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         // If it is a string, split the ElemCount with ',', the inner ElemCount with '.', and the inner fields with '|'
         $requestedFields = [];
         $executableFields = [];
-        $executeQueryBatchInStrictOrder = ComponentConfiguration::executeQueryBatchInStrictOrder();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $executeQueryBatchInStrictOrder = $componentConfiguration->executeQueryBatchInStrictOrder();
         $operationMaxLevels = 0;
         $maxDepth = 0;
         $dotNotations = $this->getQueryParser()->splitElements($operationDotNotation, FieldQueryQuerySyntax::SYMBOL_OPERATIONS_SEPARATOR, [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING], [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING], FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
@@ -303,7 +307,9 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
      */
     protected function maybeReplaceEmbeddableFields(string $field): string
     {
-        if (ComponentConfiguration::enableEmbeddableFields()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->enableEmbeddableFields()) {
             /**
              * Identify all the fieldArgValues from the string, because
              * embeddable fields can only appear in field/directive arguments

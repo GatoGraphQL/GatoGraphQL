@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoP\MandatoryDirectivesByConfiguration\Component::class,
@@ -33,19 +33,18 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if (self::isEnabled()) {
-            ComponentConfiguration::setConfiguration($configuration);
-            self::initServices(dirname(__DIR__));
-            self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        if ($this->isEnabled()) {
+            $this->initServices(dirname(__DIR__));
+            $this->initSchemaServices(dirname(__DIR__), $skipSchema);
         }
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
         return !Environment::disableAccessControl();
     }

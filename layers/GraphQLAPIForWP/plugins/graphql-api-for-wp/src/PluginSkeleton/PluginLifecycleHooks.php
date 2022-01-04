@@ -13,6 +13,10 @@ class PluginLifecycleHooks
     /**
      * Hook to configure extensions
      */
+    public const CONFIGURE_EXTENSION_COMPONENTS = __CLASS__ . ':configureExtensionComponents';
+    /**
+     * Hook to configure extensions
+     */
     public const CONFIGURE_EXTENSION = __CLASS__ . ':configureExtension';
     /**
      * Hook to boot extensions

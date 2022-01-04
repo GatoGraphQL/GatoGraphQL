@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\TypeResolvers\InputObjectType;
 
+use PoP\Root\Managers\ComponentManager;
+use PoPSchema\Menus\Component;
 use PoPSchema\Menus\ComponentConfiguration;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
@@ -21,11 +23,15 @@ class RootMenuPaginationInputObjectTypeResolver extends PaginationInputObjectTyp
 
     protected function getDefaultLimit(): ?int
     {
-        return ComponentConfiguration::getMenuListDefaultLimit();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getMenuListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
-        return ComponentConfiguration::getMenuListMaxLimit();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getMenuListMaxLimit();
     }
 }

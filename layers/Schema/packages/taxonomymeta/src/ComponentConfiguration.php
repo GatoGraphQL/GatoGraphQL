@@ -4,27 +4,25 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomyMeta;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    private array $getTaxonomyMetaEntries = [];
+    private string $getTaxonomyMetaBehavior = Behaviors::ALLOWLIST;
 
-    private static array $getTaxonomyMetaEntries = [];
-    private static string $getTaxonomyMetaBehavior = Behaviors::ALLOWLIST;
-
-    public static function getTaxonomyMetaEntries(): array
+    public function getTaxonomyMetaEntries(): array
     {
         // Define properties
         $envVariable = Environment::TAXONOMY_META_ENTRIES;
-        $selfProperty = &self::$getTaxonomyMetaEntries;
+        $selfProperty = &$this->getTaxonomyMetaEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -33,15 +31,15 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getTaxonomyMetaBehavior(): string
+    public function getTaxonomyMetaBehavior(): string
     {
         // Define properties
         $envVariable = Environment::TAXONOMY_META_BEHAVIOR;
-        $selfProperty = &self::$getTaxonomyMetaBehavior;
+        $selfProperty = &$this->getTaxonomyMetaBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue

@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\Hooks;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\BasicService\AbstractHookSet;
 use PoP\Routing\RouteHookNames;
+use PoPSchema\Users\Component;
 use PoPSchema\Users\ComponentConfiguration;
 
 class RoutingHookSet extends AbstractHookSet
@@ -20,9 +22,11 @@ class RoutingHookSet extends AbstractHookSet
 
     public function registerRoutes(array $routes): array
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         return [
             ...$routes,
-            ComponentConfiguration::getUsersRoute(),
+            $componentConfiguration->getUsersRoute(),
         ];
     }
 }

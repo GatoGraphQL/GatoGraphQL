@@ -4,23 +4,20 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 
-abstract class AbstractPluginComponent extends AbstractComponent
+abstract class AbstractPluginComponent extends AbstractComponent implements PluginComponentInterface
 {
-    /**
-     * @var string[]
-     */
-    private static array $pluginFolders = [];
+    private ?string $pluginFolder = null;
 
-    public static function setPluginFolder(string $pluginFolder): void
+    public function setPluginFolder(string $pluginFolder): void
     {
-        self::$pluginFolders[get_called_class()] = $pluginFolder;
+        $this->pluginFolder = $pluginFolder;
     }
 
-    public static function getPluginFolder(): ?string
+    public function getPluginFolder(): ?string
     {
-        return self::$pluginFolders[get_called_class()] ?? null;
+        return $this->pluginFolder;
     }
 
     /**
@@ -28,24 +25,24 @@ abstract class AbstractPluginComponent extends AbstractComponent
      * It uses Convention over Configuration: if the requested files exist,
      * load them.
      */
-    protected static function initializeSystemContainerServices(): void
+    protected function initializeSystemContainerServices(): void
     {
-        $pluginFolder = static::getPluginFolder();
+        $pluginFolder = $this->getPluginFolder();
         if ($pluginFolder === null) {
             return;
         }
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'hybrid-services.yaml')) {
-            self::initSystemServices($pluginFolder, '', 'hybrid-services.yaml');
+            $this->initSystemServices($pluginFolder, '', 'hybrid-services.yaml');
         }
         /**
          * ModuleResolvers are also hybrid, but they are defined on a different config
          * to make it easier to understand (for documentation)
          */
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'module-services.yaml')) {
-            self::initSystemServices($pluginFolder, '', 'module-services.yaml');
+            $this->initSystemServices($pluginFolder, '', 'module-services.yaml');
         }
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'system-services.yaml')) {
-            self::initSystemServices($pluginFolder);
+            $this->initSystemServices($pluginFolder);
         }
     }
 
@@ -57,30 +54,30 @@ abstract class AbstractPluginComponent extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        $pluginFolder = static::getPluginFolder();
+        $pluginFolder = $this->getPluginFolder();
         if ($pluginFolder === null) {
             return;
         }
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'hybrid-services.yaml')) {
-            self::initServices($pluginFolder, '', 'hybrid-services.yaml');
+            $this->initServices($pluginFolder, '', 'hybrid-services.yaml');
         }
         /**
          * ModuleResolvers are also hybrid, but they are defined on a different config
          * to make it easier to understand (for documentation)
          */
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'module-services.yaml')) {
-            self::initServices($pluginFolder, '', 'module-services.yaml');
+            $this->initServices($pluginFolder, '', 'module-services.yaml');
         }
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'services.yaml')) {
-            self::initServices($pluginFolder);
+            $this->initServices($pluginFolder);
         }
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'schema-services.yaml')) {
-            self::initSchemaServices($pluginFolder, $skipSchema);
+            $this->initSchemaServices($pluginFolder, $skipSchema);
         }
     }
 }

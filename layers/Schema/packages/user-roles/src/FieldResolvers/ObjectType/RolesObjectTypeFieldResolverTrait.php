@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\UserRoles\Component;
 use PoPSchema\UserRoles\ComponentConfiguration;
 
 trait RolesObjectTypeFieldResolverTrait
@@ -26,10 +28,12 @@ trait RolesObjectTypeFieldResolverTrait
     public function getAdminFieldNames(): array
     {
         $adminFieldNames = parent::getAdminFieldNames();
-        if (ComponentConfiguration::treatUserRoleAsAdminData()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->treatUserRoleAsAdminData()) {
             $adminFieldNames[] = 'roles';
         }
-        if (ComponentConfiguration::treatUserCapabilityAsAdminData()) {
+        if ($componentConfiguration->treatUserCapabilityAsAdminData()) {
             $adminFieldNames[] = 'capabilities';
         }
         return $adminFieldNames;

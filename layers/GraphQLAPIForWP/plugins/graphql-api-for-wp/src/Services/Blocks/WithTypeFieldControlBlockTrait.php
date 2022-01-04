@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use PoP\Root\Managers\ComponentManager;
+use GraphQLAPI\GraphQLAPI\Component;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
@@ -21,7 +23,9 @@ trait WithTypeFieldControlBlockTrait
      */
     public function getTypeFieldsForPrint(array $typeFields): array
     {
-        $groupFieldsUnderTypeForPrint = ComponentConfiguration::groupFieldsUnderTypeForPrint();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $groupFieldsUnderTypeForPrint = $componentConfiguration->groupFieldsUnderTypeForPrint();
         // For each class, obtain its namespacedTypeName
         $objectTypeResolvers = $this->getTypeRegistry()->getObjectTypeResolvers();
         $namespacedObjectTypeNameNames = [];

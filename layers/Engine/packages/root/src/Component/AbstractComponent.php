@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace PoP\Root\Component;
 
-/**
- * Initialize component
- */
 abstract class AbstractComponent implements ComponentInterface
 {
     use InitializeContainerServicesInComponentTrait;
 
-    /**
-     * Reset the state. Called during PHPUnit testing.
-     */
-    public static function reset(): void
+    protected ?ComponentConfigurationInterface $componentConfiguration = null;
+
+    public function __construct()
     {
+        $componentConfigurationClass = $this->getComponentConfigurationClass();
+        if ($componentConfigurationClass !== null) {
+            $this->componentConfiguration = new $componentConfigurationClass();
+        }
     }
 
     /**
@@ -24,7 +24,7 @@ abstract class AbstractComponent implements ComponentInterface
      *
      * @param array<string, mixed> $componentClassConfiguration
      */
-    public static function customizeComponentClassConfiguration(
+    public function customizeComponentClassConfiguration(
         array &$componentClassConfiguration
     ): void {
     }
@@ -36,30 +36,33 @@ abstract class AbstractComponent implements ComponentInterface
      * @param boolean $skipSchema Indicate if to skip initializing the schema
      * @param string[] $skipSchemaComponentClasses
      */
-    final public static function initialize(
+    final public function initialize(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
+        // Set the configuration on the corresponding ComponentConfiguration
+        $this->maybeSetConfiguration($configuration);
+
         // Initialize the self component
-        static::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
+        $this->initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
 
         // Allow the component to define runtime constants
-        static::defineRuntimeConstants($configuration, $skipSchema, $skipSchemaComponentClasses);
+        $this->defineRuntimeConstants($configuration, $skipSchema, $skipSchemaComponentClasses);
     }
 
     /**
      * Initialize services for the system container
      */
-    final public static function initializeSystem(): void
+    final public function initializeSystem(): void
     {
-        static::initializeSystemContainerServices();
+        $this->initializeSystemContainerServices();
     }
 
     /**
      * Initialize services for the system container
      */
-    protected static function initializeSystemContainerServices(): void
+    protected function initializeSystemContainerServices(): void
     {
         // Override
     }
@@ -69,14 +72,14 @@ abstract class AbstractComponent implements ComponentInterface
      *
      * @return string[]
      */
-    abstract public static function getDependedComponentClasses(): array;
+    abstract public function getDependedComponentClasses(): array;
 
     /**
      * All DEV component classes that this component depends upon, to initialize them
      *
      * @return string[]
      */
-    public static function getDevDependedComponentClasses(): array
+    public function getDevDependedComponentClasses(): array
     {
         return [];
     }
@@ -86,7 +89,7 @@ abstract class AbstractComponent implements ComponentInterface
      *
      * @return string[]
      */
-    public static function getDependedConditionalComponentClasses(): array
+    public function getDependedConditionalComponentClasses(): array
     {
         return [];
     }
@@ -96,7 +99,7 @@ abstract class AbstractComponent implements ComponentInterface
      *
      * @return string[]
      */
-    public static function getSystemContainerCompilerPassClasses(): array
+    public function getSystemContainerCompilerPassClasses(): array
     {
         return [];
     }
@@ -107,7 +110,7 @@ abstract class AbstractComponent implements ComponentInterface
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
@@ -117,7 +120,7 @@ abstract class AbstractComponent implements ComponentInterface
     /**
      * Define runtime constants
      */
-    protected static function defineRuntimeConstants(
+    protected function defineRuntimeConstants(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
@@ -125,30 +128,78 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
+     * Function called by the Bootloader before booting the system
+     */
+    public function configure(): void
+    {
+    }
+
+    /**
      * Function called by the Bootloader when booting the system
      */
-    public static function bootSystem(): void
+    public function bootSystem(): void
     {
     }
 
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public static function beforeBoot(): void
+    public function beforeBoot(): void
     {
     }
 
     /**
      * Function called by the Bootloader when booting the system
      */
-    public static function boot(): void
+    public function boot(): void
     {
     }
 
     /**
      * Function called by the Bootloader when booting the system
      */
-    public static function afterBoot(): void
+    public function afterBoot(): void
     {
+    }
+
+    /**
+     * Indicates if the Component is enabled
+     */
+    public function isEnabled(): bool
+    {
+        return true;
+    }
+
+    /**
+     * ComponentConfiguration class for the Component
+     */
+    protected function getComponentConfigurationClass(): ?string
+    {
+        $class = \get_called_class();
+        $parts = \explode('\\', $class);
+        if (\count($parts) < 3) {
+            return null;
+        }
+        $componentConfigurationClass = $parts[0] . '\\' . $parts[1] . '\\ComponentConfiguration';
+        if (!class_exists($componentConfigurationClass)) {
+            return null;
+        }
+        return $componentConfigurationClass;
+    }
+
+    /**
+     * ComponentConfiguration class for the Component
+     */
+    public function getConfiguration(): ?ComponentConfigurationInterface
+    {
+        return $this->componentConfiguration;
+    }
+
+    /**
+     * @param array<string,mixed> $configuration
+     */
+    protected function maybeSetConfiguration(array $configuration): void
+    {
+        $this->getConfiguration()?->setConfiguration($configuration);
     }
 }

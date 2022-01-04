@@ -2,9 +2,10 @@
 
 namespace PoP\Root;
 
-use PHPUnit\Framework\TestCase;
+use PoP\Root\AbstractTestCase;
+use PoP\Root\Managers\ComponentManager;
 
-class ComponentTest extends TestCase
+class ComponentTest extends AbstractTestCase
 {
     /**
      * The root component cannot have any dependency
@@ -12,10 +13,10 @@ class ComponentTest extends TestCase
     public function testHasNoDependencies(): void
     {
         $this->assertEmpty(
-            Component::getDependedComponentClasses()
+            ComponentManager::getComponent(Component::class)->getDependedComponentClasses()
         );
         $this->assertEmpty(
-            Component::getDependedConditionalComponentClasses()
+            ComponentManager::getComponent(Component::class)->getDependedConditionalComponentClasses()
         );
     }
 }

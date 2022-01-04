@@ -34,11 +34,12 @@ class PluginLifecyclePriorities
     public const SETUP_EXTENSIONS = 100;
     public const INITIALIZE_PLUGIN = 110;
     public const INITIALIZE_EXTENSIONS = 120;
-    public const BOOT_SYSTEM = 130;
-    public const CONFIGURE_PLUGIN = 140;
-    public const CONFIGURE_EXTENSIONS = 150;
-    public const BOOT_APPLICATION = 160;
-    public const BOOT_PLUGIN = 170;
-    public const BOOT_EXTENSIONS = 180;
-    public const AFTER_EVERYTHING = 190;
+    public const CONFIGURE_COMPONENTS = 130;
+    public const BOOT_SYSTEM = 140;
+    public const CONFIGURE_PLUGIN = 150;
+    public const CONFIGURE_EXTENSIONS = 160;
+    public const BOOT_APPLICATION = 170;
+    public const BOOT_PLUGIN = 180;
+    public const BOOT_EXTENSIONS = 190;
+    public const AFTER_EVERYTHING = 200;
 }

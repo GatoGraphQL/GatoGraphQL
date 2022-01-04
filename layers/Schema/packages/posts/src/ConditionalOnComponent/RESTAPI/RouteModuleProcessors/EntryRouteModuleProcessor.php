@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Routing\RouteNatures;
 use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\Posts\Component;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
 
@@ -48,10 +51,14 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
     {
         $ret = array();
         $vars = ApplicationState::getVars();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        /** @var ComponentModelComponentConfiguration */
+        $componentModelComponentConfiguration = ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
         $routemodules = array(
-            ComponentConfiguration::getPostsRoute() => [
+            $componentConfiguration->getPostsRoute() => [
                 FieldDataloadModuleProcessor::class,
-                ComponentModelComponentConfiguration::enableAdminSchema() ?
+                $componentModelComponentConfiguration->enableAdminSchema() ?
                     FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST
                     : FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
                 [

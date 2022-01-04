@@ -6,7 +6,7 @@ namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\ApplicationEvents;
 
 /**
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoP\Definitions\Component::class,
@@ -35,37 +35,38 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        ComponentConfiguration::setConfiguration($configuration);
-        self::initServices(dirname(__DIR__));
-        self::initServices(dirname(__DIR__), '/Overrides');
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initServices(dirname(__DIR__));
+        $this->initServices(dirname(__DIR__), '/Overrides');
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 
     /**
      * Initialize services for the system container
      */
-    protected static function initializeSystemContainerServices(): void
+    protected function initializeSystemContainerServices(): void
     {
-        self::initSystemServices(dirname(__DIR__));
+        $this->initSystemServices(dirname(__DIR__));
     }
 
-    public static function beforeBoot(): void
+    public function beforeBoot(): void
     {
         parent::beforeBoot();
 
         // Initialize the Component Configuration
-        ComponentConfiguration::init();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = $this->getConfiguration();
+        $componentConfiguration->init();
 
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
         $attachExtensionService->attachExtensions(ApplicationEvents::BEFORE_BOOT);
     }
 
-    public static function boot(): void
+    public function boot(): void
     {
         parent::boot();
 
@@ -73,7 +74,7 @@ class Component extends AbstractComponent
         $attachExtensionService->attachExtensions(ApplicationEvents::BOOT);
     }
 
-    public static function afterBoot(): void
+    public function afterBoot(): void
     {
         parent::afterBoot();
 
@@ -84,7 +85,7 @@ class Component extends AbstractComponent
     /**
      * Define runtime constants
      */
-    protected static function defineRuntimeConstants(
+    protected function defineRuntimeConstants(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []

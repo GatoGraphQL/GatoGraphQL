@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\ApplicationEvents;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\HybridCompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
@@ -22,7 +22,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [];
     }
@@ -32,7 +32,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getSystemContainerCompilerPassClasses(): array
+    public function getSystemContainerCompilerPassClasses(): array
     {
         return [
             RegisterSystemCompilerPassServiceCompilerPass::class,
@@ -44,10 +44,10 @@ class Component extends AbstractComponent
     /**
      * Initialize services for the system container
      */
-    protected static function initializeSystemContainerServices(): void
+    protected function initializeSystemContainerServices(): void
     {
-        self::initSystemServices(dirname(__DIR__), '', 'hybrid-services.yaml');
-        self::initSystemServices(dirname(__DIR__));
+        $this->initSystemServices(dirname(__DIR__), '', 'hybrid-services.yaml');
+        $this->initSystemServices(dirname(__DIR__));
     }
 
     /**
@@ -56,19 +56,19 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initServices(dirname(__DIR__), '', 'hybrid-services.yaml');
-        self::initServices(dirname(__DIR__));
+        $this->initServices(dirname(__DIR__), '', 'hybrid-services.yaml');
+        $this->initServices(dirname(__DIR__));
     }
 
     /**
      * Function called by the Bootloader after initializing the SystemContainer
      */
-    public static function bootSystem(): void
+    public function bootSystem(): void
     {
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**
@@ -81,7 +81,7 @@ class Component extends AbstractComponent
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public static function beforeBoot(): void
+    public function beforeBoot(): void
     {
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**
@@ -94,7 +94,7 @@ class Component extends AbstractComponent
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public static function boot(): void
+    public function boot(): void
     {
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**
@@ -107,7 +107,7 @@ class Component extends AbstractComponent
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public static function afterBoot(): void
+    public function afterBoot(): void
     {
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**

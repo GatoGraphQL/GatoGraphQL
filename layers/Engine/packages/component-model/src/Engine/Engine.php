@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
+use PoP\Root\Managers\ComponentManager;
 use Exception;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ComponentInfo;
 use PoP\ComponentModel\Constants\Actions;
@@ -392,7 +394,9 @@ class Engine implements EngineInterface
 
     public function getModelPropsModuletree(array $module): array
     {
-        $useCache = ComponentConfiguration::useComponentModelCache();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $useCache = $componentConfiguration->useComponentModelCache();
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
         // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
@@ -566,7 +570,9 @@ class Engine implements EngineInterface
     public function getModuleDatasetSettings(array $module, $model_props, array &$props): array
     {
         $ret = [];
-        $useCache = ComponentConfiguration::useComponentModelCache();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $useCache = $componentConfiguration->useComponentModelCache();
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
         // From the state we know if to process static/staful content or both
@@ -672,7 +678,9 @@ class Engine implements EngineInterface
             if ($vars['mangled'] ?? null) {
                 $meta[Request::URLPARAM_MANGLED] = $vars['mangled'];
             }
-            if (ComponentConfiguration::enableConfigByParams() && $vars['config']) {
+            /** @var ComponentConfiguration */
+            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+            if ($componentConfiguration->enableConfigByParams() && $vars['config']) {
                 $meta[Params::CONFIG] = $vars['config'];
             }
 
@@ -944,7 +952,9 @@ class Engine implements EngineInterface
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
     public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
     {
-        $useCache = ComponentConfiguration::useComponentModelCache();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $useCache = $componentConfiguration->useComponentModelCache();
         $root_processor = $this->getModuleProcessorManager()->getProcessor($root_module);
 
         // From the state we know if to process static/staful content or both

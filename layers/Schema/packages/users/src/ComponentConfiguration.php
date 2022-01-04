@@ -4,28 +4,26 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    private ?int $getUserListDefaultLimit = 10;
+    private ?int $getUserListMaxLimit = -1;
+    private string $getUsersRoute = '';
+    private bool $treatUserEmailAsAdminData = true;
 
-    private static ?int $getUserListDefaultLimit = 10;
-    private static ?int $getUserListMaxLimit = -1;
-    private static string $getUsersRoute = '';
-    private static bool $treatUserEmailAsAdminData = true;
-
-    public static function getUserListDefaultLimit(): ?int
+    public function getUserListDefaultLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::USER_LIST_DEFAULT_LIMIT;
-        $selfProperty = &self::$getUserListDefaultLimit;
+        $selfProperty = &$this->getUserListDefaultLimit;
         $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -34,16 +32,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getUserListMaxLimit(): ?int
+    public function getUserListMaxLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::USER_LIST_MAX_LIMIT;
-        $selfProperty = &self::$getUserListMaxLimit;
+        $selfProperty = &$this->getUserListMaxLimit;
         $defaultValue = -1; // Unlimited
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -52,15 +50,15 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getUsersRoute(): string
+    public function getUsersRoute(): string
     {
         // Define properties
         $envVariable = Environment::USERS_ROUTE;
-        $selfProperty = &self::$getUsersRoute;
+        $selfProperty = &$this->getUsersRoute;
         $defaultValue = 'users';
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue
@@ -68,16 +66,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function treatUserEmailAsAdminData(): bool
+    public function treatUserEmailAsAdminData(): bool
     {
         // Define properties
         $envVariable = Environment::TREAT_USER_EMAIL_AS_ADMIN_DATA;
-        $selfProperty = &self::$treatUserEmailAsAdminData;
+        $selfProperty = &$this->treatUserEmailAsAdminData;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

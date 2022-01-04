@@ -4,57 +4,55 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Tokens\Param;
 use PoP\Root\Environment as RootEnvironment;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     /**
      * Map with the configuration passed by params
      *
      * @var array
      */
-    private static array $overrideConfiguration = [];
+    private array $overrideConfiguration = [];
 
-    private static bool $enableConfigByParams = false;
-    private static bool $useComponentModelCache = false;
-    private static bool $mustNamespaceTypes = false;
-    private static bool $useSingleTypeInsteadOfUnionType = false;
-    private static bool $enableAdminSchema = false;
-    private static bool $validateFieldTypeResponseWithSchemaDefinition = false;
-    private static bool $treatTypeCoercingFailuresAsErrors = false;
-    private static bool $treatUndefinedFieldOrDirectiveArgsAsErrors = false;
-    private static bool $setFailingFieldResponseAsNull = false;
-    private static bool $removeFieldIfDirectiveFailed = false;
-    private static bool $convertInputValueFromSingleToList = false;
-    private static bool $enableUnionTypeImplementingInterfaceType = false;
-    private static bool $skipExposingDangerouslyDynamicScalarTypeInSchema = false;
+    private bool $enableConfigByParams = false;
+    private bool $useComponentModelCache = false;
+    private bool $mustNamespaceTypes = false;
+    private bool $useSingleTypeInsteadOfUnionType = false;
+    private bool $enableAdminSchema = false;
+    private bool $validateFieldTypeResponseWithSchemaDefinition = false;
+    private bool $treatTypeCoercingFailuresAsErrors = false;
+    private bool $treatUndefinedFieldOrDirectiveArgsAsErrors = false;
+    private bool $setFailingFieldResponseAsNull = false;
+    private bool $removeFieldIfDirectiveFailed = false;
+    private bool $convertInputValueFromSingleToList = false;
+    private bool $enableUnionTypeImplementingInterfaceType = false;
+    private bool $skipExposingDangerouslyDynamicScalarTypeInSchema = false;
 
     /**
      * Initialize component configuration
      */
-    public static function init(): void
+    public function init(): void
     {
         // Allow to override the configuration with values passed in the query string:
         // "config": comma-separated string with all fields with value "true"
         // Whatever fields are not there, will be considered "false"
-        self::$overrideConfiguration = array();
-        if (self::enableConfigByParams()) {
-            self::$overrideConfiguration = isset($_REQUEST[Params::CONFIG]) ? explode(Param::VALUE_SEPARATOR, $_REQUEST[Params::CONFIG]) : array();
+        $this->overrideConfiguration = array();
+        if ($this->enableConfigByParams()) {
+            $this->overrideConfiguration = isset($_REQUEST[Params::CONFIG]) ? explode(Param::VALUE_SEPARATOR, $_REQUEST[Params::CONFIG]) : array();
         }
     }
 
     /**
      * Indicate if the configuration is overriden by params
      */
-    public static function doingOverrideConfiguration(): bool
+    public function doingOverrideConfiguration(): bool
     {
-        return !empty(self::$overrideConfiguration);
+        return !empty($this->overrideConfiguration);
     }
 
     /**
@@ -63,15 +61,15 @@ class ComponentConfiguration
      *
      * @param string $key the key to get the value
      */
-    public static function getOverrideConfiguration(string $key): ?bool
+    public function getOverrideConfiguration(string $key): ?bool
     {
         // If no values where defined in the configuration, then skip it completely
-        if (empty(self::$overrideConfiguration)) {
+        if (empty($this->overrideConfiguration)) {
             return null;
         }
 
         // Check if the key has been given value "true"
-        if (in_array($key, self::$overrideConfiguration)) {
+        if (in_array($key, $this->overrideConfiguration)) {
             return true;
         }
 
@@ -83,16 +81,16 @@ class ComponentConfiguration
      * Access layer to the environment variable, enabling to override its value
      * Indicate if the configuration can be set through params
      */
-    public static function enableConfigByParams(): bool
+    public function enableConfigByParams(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_CONFIG_BY_PARAMS;
-        $selfProperty = &self::$enableConfigByParams;
+        $selfProperty = &$this->enableConfigByParams;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -105,23 +103,23 @@ class ComponentConfiguration
      * Access layer to the environment variable, enabling to override its value
      * Indicate if to use the cache
      */
-    public static function useComponentModelCache(): bool
+    public function useComponentModelCache(): bool
     {
         // If we are overriding the configuration, then do NOT use the cache
         // Otherwise, parameters from the config have need to be added to $vars, however they can't,
         // since we want the $vars model_instance_id to not change when testing with the "config" param
-        if (self::doingOverrideConfiguration()) {
+        if ($this->doingOverrideConfiguration()) {
             return false;
         }
 
         // Define properties
         $envVariable = Environment::USE_COMPONENT_MODEL_CACHE;
-        $selfProperty = &self::$useComponentModelCache;
+        $selfProperty = &$this->useComponentModelCache;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -130,16 +128,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function mustNamespaceTypes(): bool
+    public function mustNamespaceTypes(): bool
     {
         // Define properties
         $envVariable = Environment::NAMESPACE_TYPES_AND_INTERFACES;
-        $selfProperty = &self::$mustNamespaceTypes;
+        $selfProperty = &$this->mustNamespaceTypes;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -148,16 +146,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function useSingleTypeInsteadOfUnionType(): bool
+    public function useSingleTypeInsteadOfUnionType(): bool
     {
         // Define properties
         $envVariable = Environment::USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
-        $selfProperty = &self::$useSingleTypeInsteadOfUnionType;
+        $selfProperty = &$this->useSingleTypeInsteadOfUnionType;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -166,16 +164,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function enableAdminSchema(): bool
+    public function enableAdminSchema(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_ADMIN_SCHEMA;
-        $selfProperty = &self::$enableAdminSchema;
+        $selfProperty = &$this->enableAdminSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -187,16 +185,16 @@ class ComponentConfiguration
     /**
      * By default, validate for DEV only
      */
-    public static function validateFieldTypeResponseWithSchemaDefinition(): bool
+    public function validateFieldTypeResponseWithSchemaDefinition(): bool
     {
         // Define properties
         $envVariable = Environment::VALIDATE_FIELD_TYPE_RESPONSE_WITH_SCHEMA_DEFINITION;
-        $selfProperty = &self::$validateFieldTypeResponseWithSchemaDefinition;
+        $selfProperty = &$this->validateFieldTypeResponseWithSchemaDefinition;
         $defaultValue = RootEnvironment::isApplicationEnvironmentDev();
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -209,16 +207,16 @@ class ComponentConfiguration
      * By default, errors produced from casting a type (eg: "3.5 to int")
      * are treated as warnings, not errors
      */
-    public static function treatTypeCoercingFailuresAsErrors(): bool
+    public function treatTypeCoercingFailuresAsErrors(): bool
     {
         // Define properties
         $envVariable = Environment::TREAT_TYPE_COERCING_FAILURES_AS_ERRORS;
-        $selfProperty = &self::$treatTypeCoercingFailuresAsErrors;
+        $selfProperty = &$this->treatTypeCoercingFailuresAsErrors;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -232,16 +230,16 @@ class ComponentConfiguration
      * which has not been defined in the schema
      * is treated as a warning, not an error
      */
-    public static function treatUndefinedFieldOrDirectiveArgsAsErrors(): bool
+    public function treatUndefinedFieldOrDirectiveArgsAsErrors(): bool
     {
         // Define properties
         $envVariable = Environment::TREAT_UNDEFINED_FIELD_OR_DIRECTIVE_ARGS_AS_ERRORS;
-        $selfProperty = &self::$treatUndefinedFieldOrDirectiveArgsAsErrors;
+        $selfProperty = &$this->treatUndefinedFieldOrDirectiveArgsAsErrors;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -258,16 +256,16 @@ class ComponentConfiguration
      *
      * @see https://spec.graphql.org/draft/#sec-Handling-Field-Errors
      */
-    public static function setFailingFieldResponseAsNull(): bool
+    public function setFailingFieldResponseAsNull(): bool
     {
         // Define properties
         $envVariable = Environment::SET_FAILING_FIELD_RESPONSE_AS_NULL;
-        $selfProperty = &self::$setFailingFieldResponseAsNull;
+        $selfProperty = &$this->setFailingFieldResponseAsNull;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -279,16 +277,16 @@ class ComponentConfiguration
     /**
      * Indicate: If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
      */
-    public static function removeFieldIfDirectiveFailed(): bool
+    public function removeFieldIfDirectiveFailed(): bool
     {
         // Define properties
         $envVariable = Environment::REMOVE_FIELD_IF_DIRECTIVE_FAILED;
-        $selfProperty = &self::$removeFieldIfDirectiveFailed;
+        $selfProperty = &$this->removeFieldIfDirectiveFailed;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -303,16 +301,16 @@ class ComponentConfiguration
      *
      * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
      */
-    public static function convertInputValueFromSingleToList(): bool
+    public function convertInputValueFromSingleToList(): bool
     {
         // Define properties
         $envVariable = Environment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST;
-        $selfProperty = &self::$convertInputValueFromSingleToList;
+        $selfProperty = &$this->convertInputValueFromSingleToList;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -327,16 +325,16 @@ class ComponentConfiguration
      *
      * @see https://github.com/graphql/graphql-spec/issues/518
      */
-    public static function enableUnionTypeImplementingInterfaceType(): bool
+    public function enableUnionTypeImplementingInterfaceType(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_UNION_TYPE_IMPLEMENTING_INTERFACE_TYPE;
-        $selfProperty = &self::$enableUnionTypeImplementingInterfaceType;
+        $selfProperty = &$this->enableUnionTypeImplementingInterfaceType;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -360,16 +358,16 @@ class ComponentConfiguration
      * field arguments and directive arguments which use this type will
      * automatically not be added to the schema.
      */
-    public static function skipExposingDangerouslyDynamicScalarTypeInSchema(): bool
+    public function skipExposingDangerouslyDynamicScalarTypeInSchema(): bool
     {
         // Define properties
         $envVariable = Environment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA;
-        $selfProperty = &self::$skipExposingDangerouslyDynamicScalarTypeInSchema;
+        $selfProperty = &$this->skipExposingDangerouslyDynamicScalarTypeInSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

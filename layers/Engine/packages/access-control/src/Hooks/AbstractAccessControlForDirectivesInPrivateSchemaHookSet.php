@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Hooks;
 
+use PoP\Root\Managers\ComponentManager;
+use PoP\AccessControl\Component;
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\AccessControl\Schema\SchemaModes;
 
@@ -11,7 +13,9 @@ abstract class AbstractAccessControlForDirectivesInPrivateSchemaHookSet extends 
 {
     protected function enabled(): bool
     {
-        return ComponentConfiguration::canSchemaBePrivate();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->canSchemaBePrivate();
     }
 
     protected function getSchemaMode(): string

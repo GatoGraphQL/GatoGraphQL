@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\BasicService;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -16,7 +16,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoP\Hooks\Component::class,
@@ -26,7 +26,7 @@ class Component extends AbstractComponent
     /**
      * @return string[]
      */
-    public static function getDevDependedComponentClasses(): array
+    public function getDevDependedComponentClasses(): array
     {
         return [
             \PoP\HooksPHP\Component::class,

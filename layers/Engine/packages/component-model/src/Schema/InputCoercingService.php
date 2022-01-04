@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use PoP\Root\Managers\ComponentManager;
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -28,9 +30,11 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
     ): mixed {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         if (
             is_array($inputValue)
-            || !ComponentConfiguration::convertInputValueFromSingleToList()
+            || !$componentConfiguration->convertInputValueFromSingleToList()
         ) {
             return $inputValue;
         }

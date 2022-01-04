@@ -14,7 +14,7 @@ abstract class AbstractTestCase extends TestCase
 {
     private ?ContainerInterface $container = null;
 
-    protected final function initializeContainer(): void
+    final protected function initializeContainer(): void
     {
         $this->initializeAppLoader(false, null, null, true);
         $this->container = ContainerBuilderFactory::getInstance();
@@ -33,15 +33,16 @@ abstract class AbstractTestCase extends TestCase
     ): void {
         $appLoader = $this->getAppLoaderClass();
         $appLoader::addComponentClassesToInitialize($this->getComponentClassesToInitialize());
-        $appLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
+        $appLoader::initializeComponents($isDev);
+        $appLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
         $appLoader::addComponentClassConfiguration(
             $this->getComponentClassConfiguration()
         );
-        
-        $appLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory, $isDev);
+
+        $appLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
     }
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ModuleRouting;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -16,7 +16,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoP\Root\Component::class,
@@ -26,8 +26,8 @@ class Component extends AbstractComponent
     /**
      * Initialize services for the system container
      */
-    protected static function initializeSystemContainerServices(): void
+    protected function initializeSystemContainerServices(): void
     {
-        self::initSystemServices(dirname(__DIR__));
+        $this->initSystemServices(dirname(__DIR__));
     }
 }

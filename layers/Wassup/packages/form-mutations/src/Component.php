@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\FormMutations;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -16,10 +16,10 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\ComponentModel\Component::class,
+            \PoP\Engine\Component::class,
         ];
     }
 }

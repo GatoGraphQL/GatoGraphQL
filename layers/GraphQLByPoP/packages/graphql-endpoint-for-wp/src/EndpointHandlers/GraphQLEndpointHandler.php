@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers;
 
+use PoP\Root\Managers\ComponentManager;
+use GraphQLByPoP\GraphQLEndpointForWP\Component;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 use PoP\ComponentModel\Constants\Params;
 use PoP\BasicService\BasicServiceTrait;
-use PoP\GraphQLAPI\Component;
+use PoP\GraphQLAPI\Component as GraphQLAPIComponent;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLEndpointHandler extends AbstractEndpointHandler
@@ -41,7 +43,9 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
      */
     protected function getEndpoint(): string
     {
-        return ComponentConfiguration::getGraphQLAPIEndpoint();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getGraphQLAPIEndpoint();
     }
 
     /**
@@ -49,10 +53,12 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
      */
     protected function isGraphQLAPIEnabled(): bool
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         return
-            class_exists(Component::class)
-            && Component::isEnabled()
-            && !ComponentConfiguration::isGraphQLAPIEndpointDisabled();
+            class_exists(GraphQLAPIComponent::class)
+            && ComponentManager::getComponent(GraphQLAPIComponent::class)->isEnabled()
+            && !$componentConfiguration->isGraphQLAPIEndpointDisabled();
     }
 
     /**

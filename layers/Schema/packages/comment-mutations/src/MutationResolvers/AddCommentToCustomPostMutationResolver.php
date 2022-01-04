@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\MutationResolvers;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\CommentMutations\Component;
 use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
@@ -55,12 +57,14 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         $errors = [];
 
         // Check that the user is logged-in
-        if (ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
             $this->validateUserIsLoggedIn($errors);
             if ($errors) {
                 return $errors;
             }
-        } elseif (ComponentConfiguration::requireCommenterNameAndEmail()) {
+        } elseif ($componentConfiguration->requireCommenterNameAndEmail()) {
             // Validate if the commenter's name and email are mandatory
             if (!($form_data[MutationInputProperties::AUTHOR_NAME] ?? null)) {
                 $errors[] = $this->getTranslationAPI()->__('The comment author\'s name is missing', 'comment-mutations');
@@ -103,7 +107,9 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
          * Override with the user's properties
          */
         $vars = ApplicationState::getVars();
-        if (ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
             $userID = $vars['global-userstate']['current-user-id'];
             $comment_data['userID'] = $userID;
             $comment_data['author'] = $this->getUserTypeAPI()->getUserDisplayName($userID);

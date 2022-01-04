@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\ConfigurationEntries;
 
+use PoP\Root\Managers\ComponentManager;
+use PoP\AccessControl\Component;
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForDirectivesTrait;
 
@@ -25,7 +27,9 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesTrait
          * If the schema mode was not defined in the entry, then this field is valid if the default
          * schema mode is the same required one
          */
-        if (!ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if (!$componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             return $this->getUpstreamMatchingEntries($entryList, $value);
         }
         /**

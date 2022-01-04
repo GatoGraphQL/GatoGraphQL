@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings\TypeAPIs;
 
+use PoP\Root\Managers\ComponentManager;
 use InvalidArgumentException;
 use PoP\BasicService\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
+use PoPSchema\Settings\Component;
 use PoPSchema\Settings\ComponentConfiguration;
 
 abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
@@ -44,11 +46,15 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
      */
     public function getAllowOrDenyOptionEntries(): array
     {
-        return ComponentConfiguration::getSettingsEntries();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getSettingsEntries();
     }
     public function getAllowOrDenyOptionBehavior(): string
     {
-        return ComponentConfiguration::getSettingsBehavior();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getSettingsBehavior();
     }
 
     final public function validateIsOptionAllowed(string $name): bool

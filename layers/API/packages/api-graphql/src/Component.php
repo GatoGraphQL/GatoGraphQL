@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLAPI;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Component as APIComponent;
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
@@ -20,7 +21,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoP\APIMirrorQuery\Component::class,
@@ -33,18 +34,18 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if (self::isEnabled()) {
-            self::initServices(dirname(__DIR__));
+        if ($this->isEnabled()) {
+            $this->initServices(dirname(__DIR__));
         }
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
-        return APIComponent::isEnabled() && !Environment::disableGraphQLAPI();
+        return ComponentManager::getComponent(APIComponent::class)->isEnabled() && !Environment::disableGraphQLAPI();
     }
 }

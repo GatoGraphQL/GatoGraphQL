@@ -6,19 +6,19 @@ namespace PoP\Root\Component;
 
 trait CanDisableComponentTrait
 {
-    protected static ?bool $enabled = null;
+    protected ?bool $enabled = null;
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
         return true;
     }
 
-    public static function isEnabled()
+    public function isEnabled(): bool
     {
         // This is needed for if asking if this component is enabled before it has been initialized
-        if (is_null(self::$enabled)) {
-            self::$enabled = self::resolveEnabled();
+        if ($this->enabled === null) {
+            $this->enabled = $this->resolveEnabled();
         }
-        return self::$enabled;
+        return $this->enabled;
     }
 }

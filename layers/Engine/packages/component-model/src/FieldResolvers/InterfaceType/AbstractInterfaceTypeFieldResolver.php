@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\HookNames;
@@ -333,7 +335,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         );
 
         // Exclude the admin field args, if "Admin" Schema is not enabled
-        if (!ComponentConfiguration::enableAdminSchema()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if (!$componentConfiguration->enableAdminSchema()) {
             $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
             $consolidatedFieldArgNameTypeResolvers = array_filter(
                 $consolidatedFieldArgNameTypeResolvers,
@@ -571,7 +575,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             return $this->schemaFieldArgsCache[$cacheKey];
         }
         $schemaFieldArgs = [];
-        $skipExposingDangerouslyDynamicScalarTypeInSchema = ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $skipExposingDangerouslyDynamicScalarTypeInSchema = $componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema();
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($fieldName);
         foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
             /**
@@ -640,7 +646,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      */
     public function skipExposingFieldInSchema(string $fieldName): bool
     {
-        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             /**
              * If `DangerouslyDynamic` is disabled, do not expose the field if either:
              *

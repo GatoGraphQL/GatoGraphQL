@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\API\Component as APIComponent;
 use PoP\RESTAPI\Component as RESTAPIComponent;
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -18,7 +19,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoPSchema\CustomPosts\Component::class,
@@ -28,7 +29,7 @@ class Component extends AbstractComponent
     /**
      * All conditional component classes that this component depends upon, to initialize them
      */
-    public static function getDependedConditionalComponentClasses(): array
+    public function getDependedConditionalComponentClasses(): array
     {
         return [
             \PoP\API\Component::class,
@@ -42,22 +43,23 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        ComponentConfiguration::setConfiguration($configuration);
-        self::initServices(dirname(__DIR__));
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
-        if (ComponentConfiguration::addPageTypeToCustomPostUnionTypes()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes');
+        $this->initServices(dirname(__DIR__));
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
+        /** @var ComponentConfiguration */
+        $componentConfiguration = $this->getConfiguration();
+        if ($componentConfiguration->addPageTypeToCustomPostUnionTypes()) {
+            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes');
         }
-        if (class_exists(APIComponent::class) && APIComponent::isEnabled()) {
-            self::initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
+        if (class_exists(APIComponent::class) && ComponentManager::getComponent(APIComponent::class)->isEnabled()) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
         }
-        if (class_exists(RESTAPIComponent::class) && RESTAPIComponent::isEnabled()) {
-            self::initServices(dirname(__DIR__), '/ConditionalOnComponent/RESTAPI');
+        if (class_exists(RESTAPIComponent::class) && ComponentManager::getComponent(RESTAPIComponent::class)->isEnabled()) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/RESTAPI');
         }
     }
 }

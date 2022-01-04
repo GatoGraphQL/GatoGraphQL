@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesWP\FieldResolvers\ObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\UserRoles\Component;
 use PoPSchema\UserRoles\ComponentConfiguration;
 use PoPSchema\UserRoles\FieldResolvers\ObjectType\RolesObjectTypeFieldResolverTrait;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
@@ -55,7 +57,9 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getAdminFieldNames(): array
     {
         $adminFieldNames = parent::getAdminFieldNames();
-        if (ComponentConfiguration::treatUserRoleAsAdminData()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->treatUserRoleAsAdminData()) {
             $adminFieldNames[] = 'roleNames';
         }
         return $adminFieldNames;

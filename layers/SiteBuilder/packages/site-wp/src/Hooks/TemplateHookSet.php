@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\SiteWP\Hooks;
 
+use PoP\BasicService\AbstractHookSet;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
 use PoP\EngineWP\Component;
-use PoP\BasicService\AbstractHookSet;
+use PoP\EngineWP\ComponentInterface;
+use PoP\Root\Managers\ComponentManager;
 
 class TemplateHookSet extends AbstractHookSet
 {
@@ -35,7 +37,9 @@ class TemplateHookSet extends AbstractHookSet
     {
         // If doing JSON, for sure return json.php which only prints the encoded JSON
         if (!$this->getApplicationStateHelperService()->doingJSON()) {
-            return Component::getTemplatesDir() . '/Output.php';
+            /** @var ComponentInterface */
+            $component = ComponentManager::getComponent(Component::class);
+            return $component->getTemplatesDir() . '/Output.php';
         }
         return $template;
     }

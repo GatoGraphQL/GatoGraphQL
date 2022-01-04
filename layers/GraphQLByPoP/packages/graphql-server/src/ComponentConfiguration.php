@@ -4,43 +4,43 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
+use PoP\BasicService\Component\AbstractComponentConfiguration;
+use PoP\Root\Managers\ComponentManager;
+use PoP\API\Component as APIComponent;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
+    private bool $exposeSelfFieldForRootTypeInGraphQLSchema = false;
+    private bool $sortGraphQLSchemaAlphabetically = true;
+    private bool $enableProactiveFeedback = true;
+    private bool $enableProactiveFeedbackDeprecations = true;
+    private bool $enableProactiveFeedbackNotices = true;
+    private bool $enableProactiveFeedbackTraces = true;
+    private bool $enableProactiveFeedbackLogs = true;
+    private bool $enableNestedMutations = false;
+    private ?bool $enableGraphQLIntrospection = null;
+    private bool $exposeSelfFieldInGraphQLSchema = false;
+    private bool $addFullSchemaFieldToGraphQLSchema = false;
+    private bool $addVersionToGraphQLSchemaFieldDescription = false;
+    private bool $enableSettingMutationSchemeByURLParam = false;
+    private bool $enableEnablingGraphQLIntrospectionByURLParam = false;
+    private bool $addGraphQLIntrospectionPersistedQuery = false;
+    private bool $addConnectionFromRootToQueryRootAndMutationRoot = false;
+    private bool $exposeSchemaIntrospectionFieldInSchema = false;
+    private bool $exposeGlobalFieldsInGraphQLSchema = false;
 
-    private static bool $exposeSelfFieldForRootTypeInGraphQLSchema = false;
-    private static bool $sortGraphQLSchemaAlphabetically = true;
-    private static bool $enableProactiveFeedback = true;
-    private static bool $enableProactiveFeedbackDeprecations = true;
-    private static bool $enableProactiveFeedbackNotices = true;
-    private static bool $enableProactiveFeedbackTraces = true;
-    private static bool $enableProactiveFeedbackLogs = true;
-    private static bool $enableNestedMutations = false;
-    private static ?bool $enableGraphQLIntrospection = null;
-    private static bool $exposeSelfFieldInGraphQLSchema = false;
-    private static bool $addFullSchemaFieldToGraphQLSchema = false;
-    private static bool $addVersionToGraphQLSchemaFieldDescription = false;
-    private static bool $enableSettingMutationSchemeByURLParam = false;
-    private static bool $enableEnablingGraphQLIntrospectionByURLParam = false;
-    private static bool $addGraphQLIntrospectionPersistedQuery = false;
-    private static bool $addConnectionFromRootToQueryRootAndMutationRoot = false;
-    private static bool $exposeSchemaIntrospectionFieldInSchema = false;
-    private static bool $exposeGlobalFieldsInGraphQLSchema = false;
-
-    public static function exposeSelfFieldForRootTypeInGraphQLSchema(): bool
+    public function exposeSelfFieldForRootTypeInGraphQLSchema(): bool
     {
         // Define properties
         $envVariable = Environment::EXPOSE_SELF_FIELD_FOR_ROOT_TYPE_IN_GRAPHQL_SCHEMA;
-        $selfProperty = &self::$exposeSelfFieldForRootTypeInGraphQLSchema;
+        $selfProperty = &$this->exposeSelfFieldForRootTypeInGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -49,16 +49,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function sortGraphQLSchemaAlphabetically(): bool
+    public function sortGraphQLSchemaAlphabetically(): bool
     {
         // Define properties
         $envVariable = Environment::SORT_GRAPHQL_SCHEMA_ALPHABETICALLY;
-        $selfProperty = &self::$sortGraphQLSchemaAlphabetically;
+        $selfProperty = &$this->sortGraphQLSchemaAlphabetically;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -67,16 +67,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function enableProactiveFeedback(): bool
+    public function enableProactiveFeedback(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK;
-        $selfProperty = &self::$enableProactiveFeedback;
+        $selfProperty = &$this->enableProactiveFeedback;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -85,16 +85,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function enableProactiveFeedbackDeprecations(): bool
+    public function enableProactiveFeedbackDeprecations(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_DEPRECATIONS;
-        $selfProperty = &self::$enableProactiveFeedbackDeprecations;
+        $selfProperty = &$this->enableProactiveFeedbackDeprecations;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -103,16 +103,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function enableProactiveFeedbackNotices(): bool
+    public function enableProactiveFeedbackNotices(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_NOTICES;
-        $selfProperty = &self::$enableProactiveFeedbackNotices;
+        $selfProperty = &$this->enableProactiveFeedbackNotices;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -121,16 +121,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function enableProactiveFeedbackTraces(): bool
+    public function enableProactiveFeedbackTraces(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_TRACES;
-        $selfProperty = &self::$enableProactiveFeedbackTraces;
+        $selfProperty = &$this->enableProactiveFeedbackTraces;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -139,16 +139,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function enableProactiveFeedbackLogs(): bool
+    public function enableProactiveFeedbackLogs(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_LOGS;
-        $selfProperty = &self::$enableProactiveFeedbackLogs;
+        $selfProperty = &$this->enableProactiveFeedbackLogs;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -157,16 +157,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function enableNestedMutations(): bool
+    public function enableNestedMutations(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_NESTED_MUTATIONS;
-        $selfProperty = &self::$enableNestedMutations;
+        $selfProperty = &$this->enableNestedMutations;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -175,16 +175,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function enableGraphQLIntrospection(): ?bool
+    public function enableGraphQLIntrospection(): ?bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_GRAPHQL_INTROSPECTION;
-        $selfProperty = &self::$enableGraphQLIntrospection;
+        $selfProperty = &$this->enableGraphQLIntrospection;
         $defaultValue = null;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -193,16 +193,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function exposeSelfFieldInGraphQLSchema(): bool
+    public function exposeSelfFieldInGraphQLSchema(): bool
     {
         // Define properties
         $envVariable = Environment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA;
-        $selfProperty = &self::$exposeSelfFieldInGraphQLSchema;
+        $selfProperty = &$this->exposeSelfFieldInGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -211,16 +211,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function addFullSchemaFieldToGraphQLSchema(): bool
+    public function addFullSchemaFieldToGraphQLSchema(): bool
     {
         // Define properties
         $envVariable = Environment::ADD_FULLSCHEMA_FIELD_TO_GRAPHQL_SCHEMA;
-        $selfProperty = &self::$addFullSchemaFieldToGraphQLSchema;
+        $selfProperty = &$this->addFullSchemaFieldToGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -229,16 +229,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function addVersionToGraphQLSchemaFieldDescription(): bool
+    public function addVersionToGraphQLSchemaFieldDescription(): bool
     {
         // Define properties
         $envVariable = Environment::ADD_VERSION_TO_GRAPHQL_SCHEMA_FIELD_DESCRIPTION;
-        $selfProperty = &self::$addVersionToGraphQLSchemaFieldDescription;
+        $selfProperty = &$this->addVersionToGraphQLSchemaFieldDescription;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -247,16 +247,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function enableSettingMutationSchemeByURLParam(): bool
+    public function enableSettingMutationSchemeByURLParam(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_SETTING_MUTATION_SCHEME_BY_URL_PARAM;
-        $selfProperty = &self::$enableSettingMutationSchemeByURLParam;
+        $selfProperty = &$this->enableSettingMutationSchemeByURLParam;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -265,16 +265,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function enableEnablingGraphQLIntrospectionByURLParam(): bool
+    public function enableEnablingGraphQLIntrospectionByURLParam(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM;
-        $selfProperty = &self::$enableEnablingGraphQLIntrospectionByURLParam;
+        $selfProperty = &$this->enableEnablingGraphQLIntrospectionByURLParam;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -283,16 +283,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function addGraphQLIntrospectionPersistedQuery(): bool
+    public function addGraphQLIntrospectionPersistedQuery(): bool
     {
         // Define properties
         $envVariable = Environment::ADD_GRAPHQL_INTROSPECTION_PERSISTED_QUERY;
-        $selfProperty = &self::$addGraphQLIntrospectionPersistedQuery;
+        $selfProperty = &$this->addGraphQLIntrospectionPersistedQuery;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -301,16 +301,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function addConnectionFromRootToQueryRootAndMutationRoot(): bool
+    public function addConnectionFromRootToQueryRootAndMutationRoot(): bool
     {
         // Define properties
         $envVariable = Environment::ADD_CONNECTION_FROM_ROOT_TO_QUERYROOT_AND_MUTATIONROOT;
-        $selfProperty = &self::$addConnectionFromRootToQueryRootAndMutationRoot;
+        $selfProperty = &$this->addConnectionFromRootToQueryRootAndMutationRoot;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -319,16 +319,16 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function exposeSchemaIntrospectionFieldInSchema(): bool
+    public function exposeSchemaIntrospectionFieldInSchema(): bool
     {
         // Define properties
         $envVariable = Environment::EXPOSE_SCHEMA_INTROSPECTION_FIELD_IN_SCHEMA;
-        $selfProperty = &self::$exposeSchemaIntrospectionFieldInSchema;
+        $selfProperty = &$this->exposeSchemaIntrospectionFieldInSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -337,20 +337,22 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function exposeGlobalFieldsInGraphQLSchema(): bool
+    public function exposeGlobalFieldsInGraphQLSchema(): bool
     {
-        if (APIComponentConfiguration::skipExposingGlobalFieldsInFullSchema()) {
+        /** @var APIComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(APIComponent::class)->getConfiguration();
+        if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return false;
         }
 
         // Define properties
         $envVariable = Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA;
-        $selfProperty = &self::$exposeGlobalFieldsInGraphQLSchema;
+        $selfProperty = &$this->exposeGlobalFieldsInGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

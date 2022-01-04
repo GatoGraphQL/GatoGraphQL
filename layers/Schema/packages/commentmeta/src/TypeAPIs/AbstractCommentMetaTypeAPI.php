@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMeta\TypeAPIs;
 
+use PoP\Root\Managers\ComponentManager;
 use InvalidArgumentException;
+use PoPSchema\CommentMeta\Component;
 use PoPSchema\CommentMeta\ComponentConfiguration;
 use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 
@@ -32,11 +34,15 @@ abstract class AbstractCommentMetaTypeAPI extends AbstractMetaTypeAPI implements
      */
     public function getAllowOrDenyMetaEntries(): array
     {
-        return ComponentConfiguration::getCommentMetaEntries();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getCommentMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
-        return ComponentConfiguration::getCommentMetaBehavior();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getCommentMetaBehavior();
     }
 
     /**

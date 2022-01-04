@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLQuery;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\GraphQLAPI\Component as GraphQLAPIComponent;
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
@@ -20,7 +21,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoP\Engine\Component::class,
@@ -34,19 +35,18 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if (self::isEnabled()) {
-            ComponentConfiguration::setConfiguration($configuration);
-            self::initServices(dirname(__DIR__));
+        if ($this->isEnabled()) {
+            $this->initServices(dirname(__DIR__));
         }
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
-        return GraphQLAPIComponent::isEnabled();
+        return ComponentManager::getComponent(GraphQLAPIComponent::class)->isEnabled();
     }
 }

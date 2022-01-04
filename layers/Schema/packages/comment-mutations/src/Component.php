@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoPSchema\Users\Component as UsersComponent;
 
 /**
@@ -17,7 +17,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoPSchema\Comments\Component::class,
@@ -31,14 +31,14 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initServices(dirname(__DIR__));
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
-        self::initSchemaServices(
+        $this->initServices(dirname(__DIR__));
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initSchemaServices(
             dirname(__DIR__),
             $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
             '/ConditionalOnComponent/Users'

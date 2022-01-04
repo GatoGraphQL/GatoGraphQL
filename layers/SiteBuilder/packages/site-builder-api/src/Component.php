@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\SiteBuilderAPI;
 
 use PoP\API\Environment;
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
@@ -20,14 +20,14 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoP\API\Component::class,
         ];
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
         return !Environment::disableAPI();
     }

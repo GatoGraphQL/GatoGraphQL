@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\API;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\API\Configuration\Request;
 use PoP\CacheControl\Component as CacheControlComponent;
-use PoP\Root\Component\AbstractComponent;
+use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
@@ -23,7 +24,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoP\Engine\Component::class,
@@ -33,7 +34,7 @@ class Component extends AbstractComponent
     /**
      * All conditional component classes that this component depends upon, to initialize them
      */
-    public static function getDependedConditionalComponentClasses(): array
+    public function getDependedConditionalComponentClasses(): array
     {
         return [
             \PoP\AccessControl\Component::class,
@@ -46,7 +47,7 @@ class Component extends AbstractComponent
      *
      * @param array<string, mixed> $componentClassConfiguration
      */
-    public static function customizeComponentClassConfiguration(
+    public function customizeComponentClassConfiguration(
         array &$componentClassConfiguration
     ): void {
         // If passing ?use_namespace=1, set it on the configuration
@@ -64,27 +65,29 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
+    protected function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if (self::isEnabled()) {
-            ComponentConfiguration::setConfiguration($configuration);
-            self::initServices(dirname(__DIR__));
-            self::initServices(dirname(__DIR__), '/Overrides');
-            self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        if ($this->isEnabled()) {
+            $this->initServices(dirname(__DIR__));
+            $this->initServices(dirname(__DIR__), '/Overrides');
+            $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
             // Conditional packages
             if (class_exists(AccessControlComponent::class)) {
-                self::initServices(dirname(__DIR__), '/ConditionalOnComponent/AccessControl');
+                $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/AccessControl');
             }
+
+            /** @var AccessControlComponentConfiguration */
+            $componentConfiguration = ComponentManager::getComponent(AccessControlComponent::class)->getConfiguration();
             if (
                 class_exists(CacheControlComponent::class)
                 && class_exists(AccessControlComponent::class)
-                && AccessControlComponentConfiguration::canSchemaBePrivate()
+                && $componentConfiguration->canSchemaBePrivate()
             ) {
-                self::initSchemaServices(
+                $this->initSchemaServices(
                     dirname(__DIR__),
                     $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses),
                     '/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema'
@@ -93,7 +96,7 @@ class Component extends AbstractComponent
         }
     }
 
-    protected static function resolveEnabled(): bool
+    protected function resolveEnabled(): bool
     {
         return !Environment::disableAPI();
     }

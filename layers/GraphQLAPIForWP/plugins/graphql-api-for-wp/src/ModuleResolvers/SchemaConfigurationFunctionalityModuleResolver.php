@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use PoP\Root\Managers\ComponentManager;
+use GraphQLAPI\GraphQLAPI\Component;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
@@ -148,6 +150,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      */
     public function getSettings(string $module): array
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
         $moduleSettings = parent::getSettings($module);
         $defaultValueLabel = $this->getDefaultValueLabel();
         $defaultValueDesc = $this->getDefaultValueDescription();
@@ -269,7 +273,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::TITLE => \__('Default visibility', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Visibility to use for fields and directives in the schema when option <code>"%s"</code> is selected (in %s)', 'graphql-api'),
-                    ComponentConfiguration::getSettingsValueLabel(),
+                    $componentConfiguration->getSettingsValueLabel(),
                     implode(
                         \__(', ', 'graphql-api'),
                         $whereModuleNames

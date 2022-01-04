@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
+use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\CustomPosts\Component;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
@@ -66,7 +68,9 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
 
     protected function treatCustomPostStatusAsAdminData(): bool
     {
-        return ComponentConfiguration::treatCustomPostStatusAsAdminData();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->treatCustomPostStatusAsAdminData();
     }
 
     protected function addCustomPostInputFields(): bool
