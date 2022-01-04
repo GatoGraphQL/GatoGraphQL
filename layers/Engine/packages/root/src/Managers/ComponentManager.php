@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Root\Managers;
 
+use LogicException;
+use PoP\Root\Component\ComponentInterface;
+
 /**
  * Keep a reference to all Components
  */
@@ -15,6 +18,13 @@ class ComponentManager
     private static array $componentClasses = [];
 
     /**
+     * The initialized components, stored under their class
+     *
+     * @var array<string,ComponentInterface>
+     */
+    protected static array $components = [];
+
+    /**
      * @return string[]
      */
     public static function getComponentClasses(): array
@@ -23,11 +33,25 @@ class ComponentManager
     }
 
     /**
-     * Register a component
+     * Register and initialize a component
      */
-    public static function register(string $componentClass): void
+    public static function register(string $componentClass): ComponentInterface
     {
+        $component = new $componentClass();
+        self::$components[$componentClass] = $component;
         self::$componentClasses[] = $componentClass;
+        return $component;
+    }
+
+    /**
+     * @throws LogicException If the class of the component does not exist or has not been initialized
+     */
+    public static function getComponent(string $componentClass): ComponentInterface
+    {
+        return self::$components[$componentClass] ?? throw new LogicException(\sprintf(
+            'Component of class \'%s\' does not exist, or it has not been added for initialization',
+            $componentClass
+        ));
     }
 
     /**

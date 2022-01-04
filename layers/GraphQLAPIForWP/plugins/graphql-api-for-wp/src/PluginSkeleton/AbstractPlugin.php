@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginComponentInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Engine\AppLoader;
+use PoP\Root\Managers\ComponentManager;
 
 abstract class AbstractPlugin
 {
@@ -124,7 +125,7 @@ abstract class AbstractPlugin
         foreach ($componentClasses as $componentClass) {
             if (is_a($componentClass, PluginComponentInterface::class, true)) {
                 /** @var PluginComponentInterface */
-                $component = AppLoader::getComponent($componentClass);
+                $component = ComponentManager::getComponent($componentClass);
                 $component->setPluginFolder($pluginFolder);
             }
         }
