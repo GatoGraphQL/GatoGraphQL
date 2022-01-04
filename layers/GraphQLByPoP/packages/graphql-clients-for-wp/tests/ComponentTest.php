@@ -12,7 +12,7 @@ class ComponentTest extends TestCase
     public function testHasDependedComponentClasses(): void
     {
         $this->assertNotEmpty(
-            Component::getDependedComponentClasses()
+            \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getDependedComponentClasses()
         );
     }
 }

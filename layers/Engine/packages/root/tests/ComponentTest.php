@@ -12,10 +12,10 @@ class ComponentTest extends TestCase
     public function testHasNoDependencies(): void
     {
         $this->assertEmpty(
-            Component::getDependedComponentClasses()
+            \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getDependedComponentClasses()
         );
         $this->assertEmpty(
-            Component::getDependedConditionalComponentClasses()
+            \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getDependedConditionalComponentClasses()
         );
     }
 }
