@@ -45,10 +45,13 @@ class ComponentManager
      */
     public static function getComponent(string $componentClass): ComponentInterface
     {
-        return self::$components[$componentClass] ?? throw new LogicException(\sprintf(
-            'Component of class \'%s\' does not exist, or it has not been added for initialization',
-            $componentClass
-        ));
+        if (!isset(self::$components[$componentClass])) {
+            throw new LogicException(\sprintf(
+                'Component of class \'%s\' does not exist, or it has not been added for initialization',
+                $componentClass
+            ));
+        }
+        return self::$components[$componentClass];
     }
 
     /**
