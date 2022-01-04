@@ -5,7 +5,6 @@
   bootstrap="lib/bootstrap-phpunit.php"
   colors="true"
   verbose="true"
-  backupStaticAttributes="true"
 >
   <coverage processUncoveredFiles="true">
     <include>
