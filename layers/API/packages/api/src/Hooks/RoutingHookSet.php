@@ -69,7 +69,9 @@ class RoutingHookSet extends AbstractHookSet
      */
     public function getURIRoute(string $route): string
     {
-        if (!ComponentConfiguration::overrideRequestURI()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if (!$componentConfiguration->overrideRequestURI()) {
             return $route;
         }
         $homeURL = $this->getCmsService()->getHomeURL();

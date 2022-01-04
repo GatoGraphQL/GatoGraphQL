@@ -21,7 +21,9 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
     public function useSchemaDefinitionCache(): bool
     {
         // First check that the Component Model cache is enabled
-        if (!ComponentModelComponentConfiguration::useComponentModelCache()) {
+        /** @var ComponentModelComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
+        if (!$componentConfiguration->useComponentModelCache()) {
             return false;
         }
 

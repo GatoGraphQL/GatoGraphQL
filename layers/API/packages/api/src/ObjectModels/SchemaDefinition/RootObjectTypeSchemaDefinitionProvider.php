@@ -24,7 +24,9 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
         $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] = $globalSchemaDefinition[SchemaDefinition::DIRECTIVES];
 
         // Global fields are only added if enabled
-        if (ComponentConfiguration::skipExposingGlobalFieldsInFullSchema()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return $schemaDefinition;
         }
         $this->addFieldSchemaDefinitions($globalSchemaDefinition, true);

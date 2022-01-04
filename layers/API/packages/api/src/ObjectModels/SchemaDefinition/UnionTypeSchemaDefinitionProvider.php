@@ -53,7 +53,9 @@ class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitio
 
     final protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
     {
-        if (!ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if (!$componentConfiguration->enableUnionTypeImplementingInterfaceType()) {
             return;
         }
 

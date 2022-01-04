@@ -86,7 +86,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     {
         $schemaDefinition = null;
         // Attempt to retrieve from the cache, if enabled
-        if ($useCache = ComponentConfiguration::useSchemaDefinitionCache()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($useCache = $componentConfiguration->useSchemaDefinitionCache()) {
             $persistentCache = $this->getPersistentCache();
             // Use different caches for the normal and namespaced schemas, or
             // it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
@@ -164,7 +166,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getSchemaExtensions();
 
             // Sort the elements in the schema alphabetically
-            if (ComponentConfiguration::sortFullSchemaAlphabetically()) {
+            if ($componentConfiguration->sortFullSchemaAlphabetically()) {
                 $this->sortFullSchemaAlphabetically($schemaDefinition);
             }
 
@@ -301,7 +303,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     private function maybeMoveGlobalTypeSchemaDefinition(array &$schemaDefinition, array &$rootTypeSchemaDefinition): void
     {
         unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]);
-        if (ComponentConfiguration::skipExposingGlobalFieldsInFullSchema()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return;
         }
         $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS] = $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS];
