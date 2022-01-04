@@ -9,13 +9,16 @@ abstract class AbstractComponent implements ComponentInterface
     use InitializeContainerServicesInComponentTrait;
 
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
-    protected bool $initializedComponentConfiguration = false;
 
     /**
      * Cannot override the constructor
      */
     final function __construct()
-    {        
+    {
+        $componentConfigurationClass = $this->getComponentConfigurationClass();
+        if ($componentConfigurationClass !== null) {    
+            $this->componentConfiguration = new $componentConfigurationClass();
+        }
     }
 
     /**
@@ -185,13 +188,6 @@ abstract class AbstractComponent implements ComponentInterface
      */
     public function getConfiguration(): ?ComponentConfigurationInterface
     {
-        if (!$this->initializedComponentConfiguration) {
-            $this->initializedComponentConfiguration = true;
-            $componentConfigurationClass = $this->getComponentConfigurationClass();
-            if ($componentConfigurationClass !== null) {    
-                $this->componentConfiguration = new $componentConfigurationClass();
-            }
-        }
         return $this->componentConfiguration;
     }
 
