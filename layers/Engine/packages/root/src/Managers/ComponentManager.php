@@ -52,6 +52,16 @@ class ComponentManager
     }
 
     /**
+     * Configure components
+     */
+    public static function configureComponents(): void
+    {
+        foreach (self::$components as $component) {
+            $component->configure();
+        }
+    }
+
+    /**
      * Boot all components
      */
     public static function bootSystem(): void

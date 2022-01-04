@@ -128,6 +128,13 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
+     * Function called by the Bootloader before booting the system
+     */
+    public function configure(): void
+    {
+    }
+
+    /**
      * Function called by the Bootloader when booting the system
      */
     public function bootSystem(): void

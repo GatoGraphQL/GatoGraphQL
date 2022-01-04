@@ -114,18 +114,6 @@ class AppLoader
     /**
      * Get the array of components ordered by how they must be initialized,
      * following the Composer dependencies tree
-     */
-    private static function initializeComponents(bool $isDev): void
-    {
-        self::addComponentsOrderedForInitialization(
-            self::$componentClassesToInitialize,
-            $isDev
-        );
-    }
-
-    /**
-     * Get the array of components ordered by how they must be initialized,
-     * following the Composer dependencies tree
      *
      * @param string[] $componentClasses List of `Component` class to initialize
      */
@@ -175,6 +163,33 @@ class AppLoader
     }
 
     /**
+     * Get the array of components ordered by how they must be initialized,
+     * following the Composer dependencies tree
+     *
+     * @param boolean $isDev Indicate if testing with PHPUnit, as to load components only for DEV
+     */
+    public static function initializeComponents(
+        bool $isDev = false
+    ): void {
+        // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
+        DotenvBuilderFactory::init();
+
+        /**
+         * Calculate the components in their initialization order
+         */
+        self::addComponentsOrderedForInitialization(
+            self::$componentClassesToInitialize,
+            $isDev
+        );
+
+        /**
+         * After initialized, and before booting, 
+         * allow the components to inject their own configuration
+         */
+        static::configureComponents();
+    }
+
+    /**
      * Boot the application. It does these steps:
      *
      * 1. Initialize Symfony's Dotenv component (to get config from ENV)
@@ -186,22 +201,12 @@ class AppLoader
      * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
      * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
      * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
-     * @param boolean $isDev Indicate if testing with PHPUnit, as to load components only for DEV
      */
     public static function bootSystem(
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
         ?string $containerDirectory = null,
-        bool $isDev = false
     ): void {
-        // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
-        DotenvBuilderFactory::init();
-
-        /**
-         * Calculate the components in their initialization order
-         */
-        self::initializeComponents($isDev);
-
         /**
          * System container: initialize it and compile it already,
          * since it will be used to initialize the Application container
@@ -230,6 +235,15 @@ class AppLoader
 
         // Finally boot the components
         static::bootSystemForComponents();
+    }
+
+    /**
+     * Trigger after initializing all components,
+     * and before booting the system
+     */
+    protected static function configureComponents(): void
+    {
+        ComponentManager::configureComponents();
     }
 
     /**

@@ -372,6 +372,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 if ($this->inititalizationException !== null) {
                     return;
                 }
+                $this->initializeComponents();
+            },
+            PluginLifecyclePriorities::CONFIGURE_COMPONENTS
+        );
+        \add_action(
+            'plugins_loaded',
+            function (): void {
+                if ($this->inititalizationException !== null) {
+                    return;
+                }
                 $this->bootSystem();
             },
             PluginLifecyclePriorities::BOOT_SYSTEM
@@ -433,6 +443,21 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             },
             PHP_INT_MAX
         );
+    }
+
+    /**
+     * Initialize the components
+     */
+    public function initializeComponents(): void
+    {
+        AppLoader::initializeComponents();
+
+        /**
+         * After initialized, and before booting, 
+         * allow the components to inject their own configuration
+         */
+        $this->configureComponents();
+        \do_action(PluginLifecycleHooks::CONFIGURE_EXTENSION_COMPONENTS);
     }
 
     /**
