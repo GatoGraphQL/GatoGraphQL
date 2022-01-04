@@ -65,7 +65,9 @@ class RootObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
 
     public function getFieldNamesToResolve(): array
     {
-        if (EngineComponentConfiguration::disableRedundantRootTypeMutationFields()) {
+        /** @var EngineComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(EngineComponent::class)->getConfiguration();
+        if ($componentConfiguration->disableRedundantRootTypeMutationFields()) {
             return [];
         }
         return [

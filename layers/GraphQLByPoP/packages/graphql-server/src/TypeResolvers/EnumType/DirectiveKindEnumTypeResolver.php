@@ -22,12 +22,14 @@ class DirectiveKindEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function getEnumValues(): array
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
         return array_merge(
             [
                 DirectiveKinds::QUERY,
                 DirectiveKinds::SCHEMA,
             ],
-            ComponentConfiguration::enableComposableDirectives() ? [
+            $componentConfiguration->enableComposableDirectives() ? [
                 DirectiveKinds::INDEXING,
             ] : [],
         );

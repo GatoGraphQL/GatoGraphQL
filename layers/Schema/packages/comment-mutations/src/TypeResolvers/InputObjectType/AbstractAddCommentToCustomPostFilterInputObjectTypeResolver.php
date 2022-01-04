@@ -56,6 +56,8 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
 
     public function getInputFieldNameTypeResolvers(): array
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
         return array_merge(
             [
                 MutationInputProperties::COMMENT => $this->getStringScalarTypeResolver(),
@@ -66,7 +68,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
             $this->addParentCommentInputField() ? [
                 MutationInputProperties::PARENT_COMMENT_ID => $this->getIDScalarTypeResolver(),
             ] : [],
-            !ComponentConfiguration::mustUserBeLoggedInToAddComment() ? [
+            !$componentConfiguration->mustUserBeLoggedInToAddComment() ? [
                 MutationInputProperties::AUTHOR_NAME => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::AUTHOR_EMAIL => $this->getEmailScalarTypeResolver(),
                 MutationInputProperties::AUTHOR_URL => $this->getURLScalarTypeResolver(),
