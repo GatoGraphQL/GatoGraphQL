@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use LogicException;
-use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
@@ -47,6 +45,25 @@ class AppLoader
      * @var string[]
      */
     protected static array $skipSchemaComponentClasses = [];
+
+    /**
+     * This functions is to be called by PHPUnit,
+     * to reset the state in between tests.
+     *
+     * Reset the state of the Application.
+     */
+    public static function reset(): void
+    {
+        self::$initializedComponentClasses = [];
+        self::$orderedComponentClasses = [];
+        self::$componentClassesToInitialize = [];
+        self::$componentClassConfiguration = [];
+        self::$skipSchemaComponentClasses = [];
+        
+        ContainerBuilderFactory::reset();
+        SystemContainerBuilderFactory::reset();
+        ComponentManager::reset();
+    }
 
     /**
      * Add Component classes to be initialized
