@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomyMeta;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static array $getTaxonomyMetaEntries = [];
     private static string $getTaxonomyMetaBehavior = Behaviors::ALLOWLIST;
 

@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace PoP\API;
 
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static bool $useSchemaDefinitionCache = false;
     private static bool $executeQueryBatchInStrictOrder = true;
     private static bool $enableEmbeddableFields = false;

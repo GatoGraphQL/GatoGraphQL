@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Tokens\Param;
 use PoP\Root\Environment as RootEnvironment;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     /**
      * Map with the configuration passed by params
      *

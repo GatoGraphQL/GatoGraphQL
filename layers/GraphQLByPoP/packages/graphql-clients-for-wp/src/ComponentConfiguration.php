@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLClientsForWP;
 
 use PoP\APIEndpoints\EndpointUtils;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static string $getGraphQLClientsComponentURL = '';
 
     private static bool $isGraphiQLClientEndpointDisabled = false;

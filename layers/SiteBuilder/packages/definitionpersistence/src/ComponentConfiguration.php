@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\DefinitionPersistence;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
-
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static string $getDefinitionPersistenceBuildDir = '';
 
     /**

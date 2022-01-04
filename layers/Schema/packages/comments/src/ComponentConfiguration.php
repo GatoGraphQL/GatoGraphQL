@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static ?int $getRootCommentListDefaultLimit = 10;
     private static ?int $getCustomPostCommentOrCommentResponseListDefaultLimit = -1;
     private static ?int $getCommentListMaxLimit = -1;

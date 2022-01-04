@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static ?int $getPostListDefaultLimit = 10;
     private static ?int $getPostListMaxLimit = -1;
     private static bool $addPostTypeToCustomPostUnionTypes = true;

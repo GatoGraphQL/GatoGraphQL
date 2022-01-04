@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
-
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     // private static int $getPostCategoryListDefaultLimit = 10;
     // private static int $getPostCategoryListMaxLimit = -1;
     private static string $getPostCategoriesRoute = '';

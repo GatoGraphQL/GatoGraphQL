@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
-
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     // private static ?int $getPostTagListDefaultLimit = 10;
     // private static ?int $getPostTagListMaxLimit = -1;
     private static string $getPostTagsRoute = '';

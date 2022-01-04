@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static int $getUserAvatarDefaultSize = 96;
 
     public static function getUserAvatarDefaultSize(): int

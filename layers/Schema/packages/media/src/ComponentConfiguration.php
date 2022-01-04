@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static ?int $getMediaListDefaultLimit = 10;
     private static ?int $getMediaListMaxLimit = -1;
 

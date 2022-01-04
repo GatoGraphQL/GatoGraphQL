@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\GenericCustomPosts;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static ?int $getGenericCustomPostListDefaultLimit = 10;
     private static ?int $getGenericCustomPostListMaxLimit = -1;
     private static array $getGenericCustomPostTypes = ['post'];

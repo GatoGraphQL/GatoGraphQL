@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static bool $usePrivateSchemaMode = false;
     private static bool $enableIndividualControlForPublicPrivateSchemaMode = true;
 

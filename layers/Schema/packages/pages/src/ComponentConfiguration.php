@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static ?int $getPageListDefaultLimit = 10;
     private static ?int $getPageListMaxLimit = -1;
     private static bool $addPageTypeToCustomPostUnionTypes = false;

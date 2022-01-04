@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLQuery;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static bool $enableVariablesAsExpressions = false;
 
     public static function enableVariablesAsExpressions(): bool

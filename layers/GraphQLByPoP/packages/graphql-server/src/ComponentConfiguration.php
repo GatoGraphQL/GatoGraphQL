@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer;
 
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static bool $exposeSelfFieldForRootTypeInGraphQLSchema = false;
     private static bool $sortGraphQLSchemaAlphabetically = true;
     private static bool $enableProactiveFeedback = true;

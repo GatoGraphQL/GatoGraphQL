@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static ?int $getUserListDefaultLimit = 10;
     private static ?int $getUserListMaxLimit = -1;
     private static string $getUsersRoute = '';

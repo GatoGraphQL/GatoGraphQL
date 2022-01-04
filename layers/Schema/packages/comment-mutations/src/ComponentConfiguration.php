@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoPSchema\Users\Component as UsersComponent;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static bool $mustUserBeLoggedInToAddComment = true;
     private static bool $requireCommenterNameAndEmail = true;
 

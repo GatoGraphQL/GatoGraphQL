@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static array $getSettingsEntries = [];
     private static string $getSettingsBehavior = Behaviors::ALLOWLIST;
 

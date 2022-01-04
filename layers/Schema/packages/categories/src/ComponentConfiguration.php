@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories;
 
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration
+class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    use ComponentConfigurationTrait;
-
     private static ?int $getCategoryListDefaultLimit = 10;
     private static ?int $getCategoryListMaxLimit = -1;
 
