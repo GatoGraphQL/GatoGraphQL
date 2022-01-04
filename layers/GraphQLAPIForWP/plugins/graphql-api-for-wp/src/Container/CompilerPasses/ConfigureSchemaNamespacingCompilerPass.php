@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
 use GraphQLByPoP\GraphQLServer\Component;
+
 class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaNamespacingCompilerPass
 {
     /**

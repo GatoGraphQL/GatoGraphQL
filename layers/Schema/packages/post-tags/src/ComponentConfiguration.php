@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags;
 
 use PoP\BasicService\Component\AbstractComponentConfiguration;
+
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
     // private ?int $getPostTagListDefaultLimit = 10;

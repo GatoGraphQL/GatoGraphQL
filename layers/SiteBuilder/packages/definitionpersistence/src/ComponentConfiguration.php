@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\DefinitionPersistence;
 
 use PoP\BasicService\Component\AbstractComponentConfiguration;
+
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
     private string $getDefinitionPersistenceBuildDir = '';
