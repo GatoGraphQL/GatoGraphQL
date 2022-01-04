@@ -92,7 +92,9 @@ class InputObjectTypeHookSet extends AbstractHookSet
         if (!($inputObjectTypeResolver instanceof AbstractUsersFilterInputObjectTypeResolver)) {
             return $adminInputFieldNames;
         }
-        if (ComponentConfiguration::treatUserRoleAsAdminData()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->treatUserRoleAsAdminData()) {
             $adminInputFieldNames[] = 'roles';
             $adminInputFieldNames[] = 'excludeRoles';
         }

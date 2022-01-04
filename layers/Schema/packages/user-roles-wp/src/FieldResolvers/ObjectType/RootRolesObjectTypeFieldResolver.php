@@ -56,7 +56,9 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getAdminFieldNames(): array
     {
         $adminFieldNames = parent::getAdminFieldNames();
-        if (ComponentConfiguration::treatUserRoleAsAdminData()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->treatUserRoleAsAdminData()) {
             $adminFieldNames[] = 'roleNames';
         }
         return $adminFieldNames;

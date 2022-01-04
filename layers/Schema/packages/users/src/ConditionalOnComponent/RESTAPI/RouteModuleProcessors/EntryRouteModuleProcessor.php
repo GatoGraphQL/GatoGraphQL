@@ -54,10 +54,14 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
         $vars = ApplicationState::getVars();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        /** @var ComponentModelComponentConfiguration */
+        $componentModelComponentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
         $routemodules = array(
-            ComponentConfiguration::getUsersRoute() => [
+            $componentConfiguration->getUsersRoute() => [
                 FieldDataloadModuleProcessor::class,
-                ComponentModelComponentConfiguration::enableAdminSchema() ?
+                $componentModelComponentConfiguration->enableAdminSchema() ?
                     FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST
                     : FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
                 [
