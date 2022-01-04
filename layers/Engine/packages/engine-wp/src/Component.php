@@ -9,7 +9,7 @@ use PoP\Root\Component\AbstractComponent;
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Component extends AbstractComponent implements ComponentInterface
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -26,7 +26,7 @@ class Component extends AbstractComponent
         ];
     }
 
-    public static function getTemplatesDir(): string
+    public function getTemplatesDir(): string
     {
         return dirname(__DIR__) . '/templates';
     }
