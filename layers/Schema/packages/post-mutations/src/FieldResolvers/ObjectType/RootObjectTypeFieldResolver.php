@@ -76,11 +76,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldNamesToResolve(): array
     {
+        /** @var EngineComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(EngineComponent::class)->getConfiguration();
         return array_merge(
             [
                 'createPost',
             ],
-            !EngineComponentConfiguration::disableRedundantRootTypeMutationFields() ? [
+            !$componentConfiguration->disableRedundantRootTypeMutationFields() ? [
                 'updatePost',
             ] : []
         );

@@ -190,9 +190,11 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
+        /** @var CustomPostsComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(CustomPostsComponent::class)->getConfiguration();
         switch ($fieldName) {
             case 'genericCustomPost':
-                if (CustomPostsComponentConfiguration::treatCustomPostStatusAsAdminData()) {
+                if ($componentConfiguration->treatCustomPostStatusAsAdminData()) {
                     $customPostStatusFilterInputName = FilterInputHelper::getFilterInputName([
                         FilterInputModuleProcessor::class,
                         FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS

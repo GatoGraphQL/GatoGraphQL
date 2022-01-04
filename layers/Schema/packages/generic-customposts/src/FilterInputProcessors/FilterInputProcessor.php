@@ -22,6 +22,8 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
 
     public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
         switch ($filterInput[1]) {
             case self::FILTERINPUT_GENERICCUSTOMPOSTTYPES:
                 // Make sure the provided postTypes have been whitelisted
@@ -29,7 +31,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 if ($value) {
                     $value = array_intersect(
                         $value,
-                        ComponentConfiguration::getGenericCustomPostTypes()
+                        $componentConfiguration->getGenericCustomPostTypes()
                     );
                     $value = FilterInputHelper::maybeGetNonExistingCustomPostTypes($value);
                 }

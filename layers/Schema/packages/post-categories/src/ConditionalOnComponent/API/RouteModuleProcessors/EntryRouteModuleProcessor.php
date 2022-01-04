@@ -53,8 +53,10 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
         $routemodules = array(
-            ComponentConfiguration::getPostCategoriesRoute() => [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
+            $componentConfiguration->getPostCategoriesRoute() => [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
         );
         foreach ($routemodules as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [
@@ -64,8 +66,10 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 ],
             ];
         }
+        /** @var PostsComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(PostsComponent::class)->getConfiguration();
         $routemodules = array(
-            PostsComponentConfiguration::getPostsRoute() => [CategoryPostFieldDataloadModuleProcessor::class, CategoryPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST],
+            $componentConfiguration->getPostsRoute() => [CategoryPostFieldDataloadModuleProcessor::class, CategoryPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST],
         );
         foreach ($routemodules as $route => $module) {
             $ret[CategoryRouteNatures::CATEGORY][$route][] = [

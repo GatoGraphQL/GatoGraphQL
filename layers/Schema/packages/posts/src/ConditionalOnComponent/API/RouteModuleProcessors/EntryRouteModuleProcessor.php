@@ -35,8 +35,10 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
         $routemodules = array(
-            ComponentConfiguration::getPostsRoute() => [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST],
+            $componentConfiguration->getPostsRoute() => [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST],
         );
         foreach ($routemodules as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [

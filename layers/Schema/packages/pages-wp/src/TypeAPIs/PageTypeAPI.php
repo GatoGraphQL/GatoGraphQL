@@ -151,7 +151,9 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
         if ($paths = $query['paths'] ?? []) {
             $returnIDs = ($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS;
             $pageIDs = [];
-            $enableAdminSchema = ComponentModelComponentConfiguration::enableAdminSchema();
+            /** @var ComponentModelComponentConfiguration */
+            $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
+            $enableAdminSchema = $componentConfiguration->enableAdminSchema();
             foreach ($paths as $path) {
                 /** @var WP_Post|null */
                 $page = \get_page_by_path($path);

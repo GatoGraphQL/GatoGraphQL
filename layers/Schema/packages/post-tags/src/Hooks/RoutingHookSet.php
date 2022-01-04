@@ -21,9 +21,11 @@ class RoutingHookSet extends AbstractHookSet
 
     public function registerRoutes(array $routes): array
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
         return [
             ...$routes,
-            ComponentConfiguration::getPostTagsRoute(),
+            $componentConfiguration->getPostTagsRoute(),
         ];
     }
 }

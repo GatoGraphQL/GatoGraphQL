@@ -71,8 +71,10 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
         $vars = ApplicationState::getVars();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
         $routemodules = array(
-            ComponentConfiguration::getPostTagsRoute() => [
+            $componentConfiguration->getPostTagsRoute() => [
                 PostTagFieldDataloadModuleProcessor::class,
                 PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
                 [
@@ -91,8 +93,10 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 ],
             ];
         }
+        /** @var PostsComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(PostsComponent::class)->getConfiguration();
         $routemodules = array(
-            PostsComponentConfiguration::getPostsRoute() => [
+            $componentConfiguration->getPostsRoute() => [
                 TagPostFieldDataloadModuleProcessor::class,
                 TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
                 [
