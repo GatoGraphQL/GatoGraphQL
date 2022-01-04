@@ -8,19 +8,16 @@ use PoP\BasicService\Component\AbstractComponent;
 
 abstract class AbstractPluginComponent extends AbstractComponent implements PluginComponentInterface
 {
-    /**
-     * @var string[]
-     */
-    private array $pluginFolders = [];
+    private ?string $pluginFolder = null;
 
     public function setPluginFolder(string $pluginFolder): void
     {
-        $this->pluginFolders[get_called_class()] = $pluginFolder;
+        $this->pluginFolder = $pluginFolder;
     }
 
     public function getPluginFolder(): ?string
     {
-        return $this->pluginFolders[get_called_class()] ?? null;
+        return $this->pluginFolder;
     }
 
     /**
