@@ -27,7 +27,9 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
         $excludedFieldNames = [];
         // Whenever:
         // 1. Exclude the admin fields, if "Admin" Schema is not enabled
-        if (!ComponentConfiguration::enableAdminSchema()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if (!$componentConfiguration->enableAdminSchema()) {
             $excludedFieldNames = $objectTypeOrInterfaceTypeFieldResolver->getAdminFieldNames();
         }
         // 2. By filter hook

@@ -49,7 +49,9 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $directiveArgNameTypeResolvers = parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver);
-        if (!ComponentConfiguration::enablePassingExpressionsByArgInNestedDirectives()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if (!$componentConfiguration->enablePassingExpressionsByArgInNestedDirectives()) {
             return $directiveArgNameTypeResolvers;
         }
         return array_merge(

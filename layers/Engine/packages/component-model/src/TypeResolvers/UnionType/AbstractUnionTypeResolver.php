@@ -278,7 +278,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
          * - But Post is still part of CustomPostUnion, then the code below will throw an exception
          *   stating that the member Post type does not implement the IsCustomPost interface!
          */
-        if (ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->enableUnionTypeImplementingInterfaceType()) {
             // Validate that all typeResolvers implement the required interface
             if ($interfaceTypeResolvers = $this->getUnionTypeInterfaceTypeResolvers()) {
                 $notImplementingInterfaceTypeResolvers = [];

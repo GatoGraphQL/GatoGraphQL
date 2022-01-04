@@ -22,7 +22,9 @@ class VarsHookSet extends AbstractHookSet
     public function getModelInstanceComponentsFromVars($components)
     {
         // Removing fields changes the configuration
-        $components[] = $this->getTranslationAPI()->__('disable redundant root fields:', 'pop-engine') . ComponentConfiguration::disableRedundantRootTypeMutationFields();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $components[] = $this->getTranslationAPI()->__('disable redundant root fields:', 'pop-engine') . $componentConfiguration->disableRedundantRootTypeMutationFields();
         return $components;
     }
 }

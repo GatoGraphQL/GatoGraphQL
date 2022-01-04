@@ -17,6 +17,8 @@ class CacheUtils
     {
         $vars = ApplicationState::getVars();
         $hooksAPI = HooksAPIFacade::getInstance();
+        /** @var EngineComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(EngineComponent::class)->getConfiguration();
         return (array)$hooksAPI->applyFilters(
             self::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,
             [
@@ -24,7 +26,7 @@ class CacheUtils
                 'version-constraint' => $vars['version-constraint'],
                 'field-version-constraints' => $vars['field-version-constraints'],
                 'directive-version-constraints' => $vars['directive-version-constraints'],
-                'redundant-root-fields-disabled' => EngineComponentConfiguration::disableRedundantRootTypeMutationFields(),
+                'redundant-root-fields-disabled' => $componentConfiguration->disableRedundantRootTypeMutationFields(),
             ]
         );
     }

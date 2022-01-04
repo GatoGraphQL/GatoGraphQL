@@ -47,7 +47,9 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
     protected function parseDirectiveList(): array
     {
         $directives = parent::parseDirectiveList();
-        if (!ComponentConfiguration::enableComposableDirectives()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if (!$componentConfiguration->enableComposableDirectives()) {
             return $directives;
         }
 
