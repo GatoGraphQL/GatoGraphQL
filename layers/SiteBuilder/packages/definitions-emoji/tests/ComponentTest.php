@@ -2,7 +2,7 @@
 
 namespace PoP\EmojiDefinitions;
 
-use PoP\Engine\AbstractTestCase;
+use PoP\Root\AbstractTestCase;
 
 class ComponentTest extends AbstractTestCase
 {
