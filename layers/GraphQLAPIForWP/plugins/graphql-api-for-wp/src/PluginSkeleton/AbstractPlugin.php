@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginComponentInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Engine\AppLoader;
 
@@ -121,8 +122,10 @@ abstract class AbstractPlugin
         $componentClasses = $this->getComponentClassesToInitialize();
         $pluginFolder = dirname($this->pluginFile);
         foreach ($componentClasses as $componentClass) {
-            if (is_a($componentClass, AbstractPluginComponent::class, true)) {
-                $componentClass::setPluginFolder($pluginFolder);
+            if (is_a($componentClass, PluginComponentInterface::class, true)) {
+                /** @var PluginComponentInterface */
+                $component = AppLoader::getComponent($componentClass);
+                $component::setPluginFolder($pluginFolder);
             }
         }
 

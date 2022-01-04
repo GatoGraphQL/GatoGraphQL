@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
+use LogicException;
+use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
@@ -21,6 +23,12 @@ class AppLoader
      * @var string[]
      */
     protected static array $initializedComponentClasses = [];
+    /**
+     * The initialized components, stored under their class
+     *
+     * @var array<string,ComponentInterface>
+     */
+    protected static array $components = [];
     /**
      * Component in their initialization order
      *
@@ -135,16 +143,20 @@ class AppLoader
         foreach ($componentClasses as $componentClass) {
             self::$initializedComponentClasses[] = $componentClass;
 
+            // Initialize the Component
+            $component = new $componentClass();
+            self::$components[$componentClass] = $component;
+
             // Initialize all depended-upon PoP components
             self::addComponentsOrderedForInitialization(
-                $componentClass::getDependedComponentClasses(),
+                $component::getDependedComponentClasses(),
                 $orderedComponentClasses,
                 $isDev
             );
 
             if ($isDev) {
                 self::addComponentsOrderedForInitialization(
-                    $componentClass::getDevDependedComponentClasses(),
+                    $component::getDevDependedComponentClasses(),
                     $orderedComponentClasses,
                     $isDev
                 );
@@ -153,7 +165,7 @@ class AppLoader
             // Initialize all depended-upon PoP conditional components, if they are installed
             self::addComponentsOrderedForInitialization(
                 array_filter(
-                    $componentClass::getDependedConditionalComponentClasses(),
+                    $component::getDependedConditionalComponentClasses(),
                     'class_exists'
                 ),
                 $orderedComponentClasses,
@@ -163,6 +175,17 @@ class AppLoader
             // We reached the bottom of the rung, add the component to the list
             $orderedComponentClasses[] = $componentClass;
         }
+    }
+
+    /**
+     * @throws LogicException If the class of the component does not exist or has not been initialized
+     */
+    public static function getComponent(string $componentClass): ComponentInterface
+    {
+        return self::$components[$componentClass] ?? throw new LogicException(\sprintf(
+            'Component of class \'%s\' does not exist, or it has not been added for initialization',
+            $componentClass
+        ));
     }
 
     /**
@@ -220,7 +243,8 @@ class AppLoader
          * Application Container services.
          */
         foreach (self::$orderedComponentClasses as $componentClass) {
-            $componentClass::initializeSystem();
+            $component = self::getComponent($componentClass);
+            $component::initializeSystem();
         }
         $systemCompilerPasses = array_map(
             fn ($class) => new $class(),
@@ -249,9 +273,10 @@ class AppLoader
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
         foreach (self::$orderedComponentClasses as $componentClass) {
+            $component = self::getComponent($componentClass);
             $compilerPassClasses = [
                 ...$compilerPassClasses,
-                ...$componentClass::getSystemContainerCompilerPassClasses()
+                ...$component::getSystemContainerCompilerPassClasses()
             ];
         }
         return array_values(array_unique($compilerPassClasses));
@@ -278,7 +303,8 @@ class AppLoader
          * Hence this is executed from bottom to top
          */
         foreach (array_reverse(self::$orderedComponentClasses) as $componentClass) {
-            $componentClass::customizeComponentClassConfiguration(self::$componentClassConfiguration);
+            $component = self::getComponent($componentClass);
+            $component::customizeComponentClassConfiguration(self::$componentClassConfiguration);
         }
 
         /**
@@ -295,9 +321,10 @@ class AppLoader
          */
         foreach (self::$orderedComponentClasses as $componentClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
+            $component = self::getComponent($componentClass);
             $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
             $skipSchemaForComponent = in_array($componentClass, self::$skipSchemaComponentClasses);
-            $componentClass::initialize(
+            $component::initialize(
                 $componentConfiguration,
                 $skipSchemaForComponent,
                 self::$skipSchemaComponentClasses

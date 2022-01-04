@@ -66,4 +66,26 @@ interface ComponentInterface
      * Function called by the Bootloader when booting the system
      */
     public static function afterBoot(): void;
+
+    /**
+     * Initialize services for the system container
+     */
+    public static function initializeSystem(): void;
+
+    /**
+     * Compiler Passes for the System Container
+     *
+     * @return string[]
+     */
+    public static function getSystemContainerCompilerPassClasses(): array;
+
+     /**
+     * Enable each component to set default configuration for
+     * itself and its depended components
+     *
+     * @param array<string, mixed> $componentClassConfiguration
+     */
+    public static function customizeComponentClassConfiguration(
+        array &$componentClassConfiguration
+    ): void;
 }

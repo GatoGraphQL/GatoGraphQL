@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use PoP\Root\Component\AbstractComponent;
 
-abstract class AbstractPluginComponent extends AbstractComponent
+abstract class AbstractPluginComponent extends AbstractComponent implements PluginComponentInterface
 {
     /**
      * @var string[]

@@ -12,6 +12,13 @@ abstract class AbstractComponent implements ComponentInterface
     use InitializeContainerServicesInComponentTrait;
 
     /**
+     * Cannot override the constructor
+     */
+    final function __construct()
+    {        
+    }
+
+    /**
      * Enable each component to set default configuration for
      * itself and its depended components
      *
