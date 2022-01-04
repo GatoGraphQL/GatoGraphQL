@@ -9,19 +9,19 @@ use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static bool $isNativeAPIEndpointDisabled = false;
-    private static string $getNativeAPIEndpoint = '/api/';
+    private bool $isNativeAPIEndpointDisabled = false;
+    private string $getNativeAPIEndpoint = '/api/';
 
-    public static function isNativeAPIEndpointDisabled(): bool
+    public function isNativeAPIEndpointDisabled(): bool
     {
         // Define properties
         $envVariable = Environment::DISABLE_NATIVE_API_ENDPOINT;
-        $selfProperty = &self::$isNativeAPIEndpointDisabled;
+        $selfProperty = &$this->isNativeAPIEndpointDisabled;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -30,16 +30,16 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
         return $selfProperty;
     }
 
-    public static function getNativeAPIEndpoint(): string
+    public function getNativeAPIEndpoint(): string
     {
         // Define properties
         $envVariable = Environment::NATIVE_API_ENDPOINT;
-        $selfProperty = &self::$getNativeAPIEndpoint;
+        $selfProperty = &$this->getNativeAPIEndpoint;
         $defaultValue = '/api/';
         $callback = [EndpointUtils::class, 'slashURI'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

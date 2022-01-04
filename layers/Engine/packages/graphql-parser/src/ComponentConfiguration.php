@@ -8,23 +8,23 @@ use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static bool $enableMultipleQueryExecution = false;
-    private static bool $enableComposableDirectives = false;
+    private bool $enableMultipleQueryExecution = false;
+    private bool $enableComposableDirectives = false;
 
     /**
      * Disable hook, because it is invoked by `export-directive`
      * on its Component's `resolveEnabled` function.
      */
-    public static function enableMultipleQueryExecution(): bool
+    public function enableMultipleQueryExecution(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_MULTIPLE_QUERY_EXECUTION;
-        $selfProperty = &self::$enableMultipleQueryExecution;
+        $selfProperty = &$this->enableMultipleQueryExecution;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -33,16 +33,16 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
         return $selfProperty;
     }
 
-    public static function enableComposableDirectives(): bool
+    public function enableComposableDirectives(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_COMPOSABLE_DIRECTIVES;
-        $selfProperty = &self::$enableComposableDirectives;
+        $selfProperty = &$this->enableComposableDirectives;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

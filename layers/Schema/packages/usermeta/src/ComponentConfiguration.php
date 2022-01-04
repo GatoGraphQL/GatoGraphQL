@@ -9,19 +9,19 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static array $getUserMetaEntries = [];
-    private static string $getUserMetaBehavior = Behaviors::ALLOWLIST;
+    private array $getUserMetaEntries = [];
+    private string $getUserMetaBehavior = Behaviors::ALLOWLIST;
 
-    public static function getUserMetaEntries(): array
+    public function getUserMetaEntries(): array
     {
         // Define properties
         $envVariable = Environment::USER_META_ENTRIES;
-        $selfProperty = &self::$getUserMetaEntries;
+        $selfProperty = &$this->getUserMetaEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -30,15 +30,15 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
         return $selfProperty;
     }
 
-    public static function getUserMetaBehavior(): string
+    public function getUserMetaBehavior(): string
     {
         // Define properties
         $envVariable = Environment::USER_META_BEHAVIOR;
-        $selfProperty = &self::$getUserMetaBehavior;
+        $selfProperty = &$this->getUserMetaBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue

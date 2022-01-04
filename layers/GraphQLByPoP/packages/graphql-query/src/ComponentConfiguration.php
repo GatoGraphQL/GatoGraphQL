@@ -8,18 +8,18 @@ use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static bool $enableVariablesAsExpressions = false;
+    private bool $enableVariablesAsExpressions = false;
 
-    public static function enableVariablesAsExpressions(): bool
+    public function enableVariablesAsExpressions(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_VARIABLES_AS_EXPRESSIONS;
-        $selfProperty = &self::$enableVariablesAsExpressions;
+        $selfProperty = &$this->enableVariablesAsExpressions;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

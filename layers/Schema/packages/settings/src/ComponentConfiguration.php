@@ -9,19 +9,19 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static array $getSettingsEntries = [];
-    private static string $getSettingsBehavior = Behaviors::ALLOWLIST;
+    private array $getSettingsEntries = [];
+    private string $getSettingsBehavior = Behaviors::ALLOWLIST;
 
-    public static function getSettingsEntries(): array
+    public function getSettingsEntries(): array
     {
         // Define properties
         $envVariable = Environment::SETTINGS_ENTRIES;
-        $selfProperty = &self::$getSettingsEntries;
+        $selfProperty = &$this->getSettingsEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -30,15 +30,15 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
         return $selfProperty;
     }
 
-    public static function getSettingsBehavior(): string
+    public function getSettingsBehavior(): string
     {
         // Define properties
         $envVariable = Environment::SETTINGS_BEHAVIOR;
-        $selfProperty = &self::$getSettingsBehavior;
+        $selfProperty = &$this->getSettingsBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue

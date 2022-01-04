@@ -8,18 +8,18 @@ use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static bool $disableGraphQLAPIForPoP = false;
+    private bool $disableGraphQLAPIForPoP = false;
 
-    public static function disableGraphQLAPIForPoP(): bool
+    public function disableGraphQLAPIForPoP(): bool
     {
         // Define properties
         $envVariable = Environment::DISABLE_GRAPHQL_API_FOR_POP;
-        $selfProperty = &self::$disableGraphQLAPIForPoP;
+        $selfProperty = &$this->disableGraphQLAPIForPoP;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

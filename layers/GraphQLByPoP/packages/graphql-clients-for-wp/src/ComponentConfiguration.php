@@ -9,28 +9,28 @@ use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static string $getGraphQLClientsComponentURL = '';
+    private string $getGraphQLClientsComponentURL = '';
 
-    private static bool $isGraphiQLClientEndpointDisabled = false;
-    private static string $graphiQLClientEndpoint = '/graphiql/';
-    private static bool $useGraphiQLExplorer = true;
-    private static bool $isGoyagerClientEndpointDisabled = false;
-    private static string $voyagerClientEndpoint = '/schema/';
+    private bool $isGraphiQLClientEndpointDisabled = false;
+    private string $graphiQLClientEndpoint = '/graphiql/';
+    private bool $useGraphiQLExplorer = true;
+    private bool $isGoyagerClientEndpointDisabled = false;
+    private string $voyagerClientEndpoint = '/schema/';
 
 
     /**
      * URL under which the clients are loaded.
      * Needed to convert relative paths to absolute URLs
      */
-    public static function getGraphQLClientsComponentURL(): string
+    public function getGraphQLClientsComponentURL(): string
     {
         // Define properties
         $envVariable = Environment::GRAPHQL_CLIENTS_COMPONENT_URL;
-        $selfProperty = &self::$getGraphQLClientsComponentURL;
+        $selfProperty = &$this->getGraphQLClientsComponentURL;
         $defaultValue = '';
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue
@@ -41,16 +41,16 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
     /**
      * Is the GraphiQL client disabled?
      */
-    public static function isGraphiQLClientEndpointDisabled(): bool
+    public function isGraphiQLClientEndpointDisabled(): bool
     {
         // Define properties
         $envVariable = Environment::DISABLE_GRAPHIQL_CLIENT_ENDPOINT;
-        $selfProperty = &self::$isGraphiQLClientEndpointDisabled;
+        $selfProperty = &$this->isGraphiQLClientEndpointDisabled;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -62,16 +62,16 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
     /**
      * Use the GraphiQL explorer?
      */
-    public static function useGraphiQLExplorer(): bool
+    public function useGraphiQLExplorer(): bool
     {
         // Define properties
         $envVariable = Environment::USE_GRAPHIQL_EXPLORER;
-        $selfProperty = &self::$useGraphiQLExplorer;
+        $selfProperty = &$this->useGraphiQLExplorer;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -83,16 +83,16 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
     /**
      * GraphiQL client endpoint, to be executed against the GraphQL single endpoint
      */
-    public static function getGraphiQLClientEndpoint(): string
+    public function getGraphiQLClientEndpoint(): string
     {
         // Define properties
         $envVariable = Environment::GRAPHIQL_CLIENT_ENDPOINT;
-        $selfProperty = &self::$graphiQLClientEndpoint;
+        $selfProperty = &$this->graphiQLClientEndpoint;
         $defaultValue = '/graphiql/';
         $callback = [EndpointUtils::class, 'slashURI'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -104,16 +104,16 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
     /**
      * Is the Voyager client disabled?
      */
-    public static function isVoyagerClientEndpointDisabled(): bool
+    public function isVoyagerClientEndpointDisabled(): bool
     {
         // Define properties
         $envVariable = Environment::DISABLE_VOYAGER_CLIENT_ENDPOINT;
-        $selfProperty = &self::$isGoyagerClientEndpointDisabled;
+        $selfProperty = &$this->isGoyagerClientEndpointDisabled;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -125,16 +125,16 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
     /**
      * Voyager client endpoint, to be executed against the GraphQL single endpoint
      */
-    public static function getVoyagerClientEndpoint(): string
+    public function getVoyagerClientEndpoint(): string
     {
         // Define properties
         $envVariable = Environment::VOYAGER_CLIENT_ENDPOINT;
-        $selfProperty = &self::$voyagerClientEndpoint;
+        $selfProperty = &$this->voyagerClientEndpoint;
         $defaultValue = '/schema/';
         $callback = [EndpointUtils::class, 'slashURI'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

@@ -8,19 +8,19 @@ use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static ?int $getCategoryListDefaultLimit = 10;
-    private static ?int $getCategoryListMaxLimit = -1;
+    private ?int $getCategoryListDefaultLimit = 10;
+    private ?int $getCategoryListMaxLimit = -1;
 
-    public static function getCategoryListDefaultLimit(): ?int
+    public function getCategoryListDefaultLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::CATEGORY_LIST_DEFAULT_LIMIT;
-        $selfProperty = &self::$getCategoryListDefaultLimit;
+        $selfProperty = &$this->getCategoryListDefaultLimit;
         $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -29,16 +29,16 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
         return $selfProperty;
     }
 
-    public static function getCategoryListMaxLimit(): ?int
+    public function getCategoryListMaxLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::CATEGORY_LIST_MAX_LIMIT;
-        $selfProperty = &self::$getCategoryListMaxLimit;
+        $selfProperty = &$this->getCategoryListMaxLimit;
         $defaultValue = -1; // Unlimited
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

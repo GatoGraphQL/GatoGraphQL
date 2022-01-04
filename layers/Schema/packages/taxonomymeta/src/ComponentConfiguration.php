@@ -9,19 +9,19 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static array $getTaxonomyMetaEntries = [];
-    private static string $getTaxonomyMetaBehavior = Behaviors::ALLOWLIST;
+    private array $getTaxonomyMetaEntries = [];
+    private string $getTaxonomyMetaBehavior = Behaviors::ALLOWLIST;
 
-    public static function getTaxonomyMetaEntries(): array
+    public function getTaxonomyMetaEntries(): array
     {
         // Define properties
         $envVariable = Environment::TAXONOMY_META_ENTRIES;
-        $selfProperty = &self::$getTaxonomyMetaEntries;
+        $selfProperty = &$this->getTaxonomyMetaEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -30,15 +30,15 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
         return $selfProperty;
     }
 
-    public static function getTaxonomyMetaBehavior(): string
+    public function getTaxonomyMetaBehavior(): string
     {
         // Define properties
         $envVariable = Environment::TAXONOMY_META_BEHAVIOR;
-        $selfProperty = &self::$getTaxonomyMetaBehavior;
+        $selfProperty = &$this->getTaxonomyMetaBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue

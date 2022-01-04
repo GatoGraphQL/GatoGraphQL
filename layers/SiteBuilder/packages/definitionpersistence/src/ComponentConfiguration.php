@@ -6,21 +6,21 @@ namespace PoP\DefinitionPersistence;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static string $getDefinitionPersistenceBuildDir = '';
+    private string $getDefinitionPersistenceBuildDir = '';
 
     /**
      * Disable hook, because it is invoked by `export-directive`
      * on its Component's `resolveEnabled` function.
      */
-    public static function getDefinitionPersistenceBuildDir(): string
+    public function getDefinitionPersistenceBuildDir(): string
     {
         // Define properties
         $envVariable = Environment::DEFINITION_PERSISTENCE_BUILD_DIR;
-        $selfProperty = &self::$getDefinitionPersistenceBuildDir;
+        $selfProperty = &$this->getDefinitionPersistenceBuildDir;
         $defaultValue = dirname(__DIR__) . '/build';
 
         // Initialize property from the environment
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue

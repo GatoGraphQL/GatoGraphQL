@@ -9,19 +9,19 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static array $getCommentMetaEntries = [];
-    private static string $getCommentMetaBehavior = Behaviors::ALLOWLIST;
+    private array $getCommentMetaEntries = [];
+    private string $getCommentMetaBehavior = Behaviors::ALLOWLIST;
 
-    public static function getCommentMetaEntries(): array
+    public function getCommentMetaEntries(): array
     {
         // Define properties
         $envVariable = Environment::COMMENT_META_ENTRIES;
-        $selfProperty = &self::$getCommentMetaEntries;
+        $selfProperty = &$this->getCommentMetaEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -30,15 +30,15 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
         return $selfProperty;
     }
 
-    public static function getCommentMetaBehavior(): string
+    public function getCommentMetaBehavior(): string
     {
         // Define properties
         $envVariable = Environment::COMMENT_META_BEHAVIOR;
-        $selfProperty = &self::$getCommentMetaBehavior;
+        $selfProperty = &$this->getCommentMetaBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue

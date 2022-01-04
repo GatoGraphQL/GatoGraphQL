@@ -8,18 +8,18 @@ use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static int $getUserAvatarDefaultSize = 96;
+    private int $getUserAvatarDefaultSize = 96;
 
-    public static function getUserAvatarDefaultSize(): int
+    public function getUserAvatarDefaultSize(): int
     {
         // Define properties
         $envVariable = Environment::USER_AVATAR_DEFAULT_SIZE;
-        $selfProperty = &self::$getUserAvatarDefaultSize;
+        $selfProperty = &$this->getUserAvatarDefaultSize;
         $defaultValue = 96;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,

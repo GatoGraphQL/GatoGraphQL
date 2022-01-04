@@ -8,19 +8,19 @@ use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static bool $usePrivateSchemaMode = false;
-    private static bool $enableIndividualControlForPublicPrivateSchemaMode = true;
+    private bool $usePrivateSchemaMode = false;
+    private bool $enableIndividualControlForPublicPrivateSchemaMode = true;
 
-    public static function usePrivateSchemaMode(): bool
+    public function usePrivateSchemaMode(): bool
     {
         // Define properties
         $envVariable = Environment::USE_PRIVATE_SCHEMA_MODE;
-        $selfProperty = &self::$usePrivateSchemaMode;
+        $selfProperty = &$this->usePrivateSchemaMode;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -29,16 +29,16 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
         return $selfProperty;
     }
 
-    public static function enableIndividualControlForPublicPrivateSchemaMode(): bool
+    public function enableIndividualControlForPublicPrivateSchemaMode(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_INDIVIDUAL_CONTROL_FOR_PUBLIC_PRIVATE_SCHEMA_MODE;
-        $selfProperty = &self::$enableIndividualControlForPublicPrivateSchemaMode;
+        $selfProperty = &$this->enableIndividualControlForPublicPrivateSchemaMode;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -53,10 +53,10 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
      * then the schema (as obtained by querying the "__schema" field) is dynamic:
      * Fields will be available or not depending on the user being logged in or not
      */
-    public static function canSchemaBePrivate(): bool
+    public function canSchemaBePrivate(): bool
     {
         return
-            self::enableIndividualControlForPublicPrivateSchemaMode()
-            || self::usePrivateSchemaMode();
+            $this->enableIndividualControlForPublicPrivateSchemaMode()
+            || $this->usePrivateSchemaMode();
     }
 }

@@ -9,19 +9,19 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends \PoP\BasicService\Component\AbstractComponentConfiguration
 {
-    private static array $getCustomPostMetaEntries = [];
-    private static string $getCustomPostMetaBehavior = Behaviors::ALLOWLIST;
+    private array $getCustomPostMetaEntries = [];
+    private string $getCustomPostMetaBehavior = Behaviors::ALLOWLIST;
 
-    public static function getCustomPostMetaEntries(): array
+    public function getCustomPostMetaEntries(): array
     {
         // Define properties
         $envVariable = Environment::CUSTOMPOST_META_ENTRIES;
-        $selfProperty = &self::$getCustomPostMetaEntries;
+        $selfProperty = &$this->getCustomPostMetaEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
@@ -30,15 +30,15 @@ class ComponentConfiguration extends \PoP\BasicService\Component\AbstractCompone
         return $selfProperty;
     }
 
-    public static function getCustomPostMetaBehavior(): string
+    public function getCustomPostMetaBehavior(): string
     {
         // Define properties
         $envVariable = Environment::CUSTOMPOST_META_BEHAVIOR;
-        $selfProperty = &self::$getCustomPostMetaBehavior;
+        $selfProperty = &$this->getCustomPostMetaBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
+        $this->maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue
