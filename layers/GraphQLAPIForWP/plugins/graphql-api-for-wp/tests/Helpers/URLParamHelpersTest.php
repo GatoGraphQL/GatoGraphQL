@@ -2,7 +2,7 @@
 
 namespace GraphQLAPI\GraphQLAPI\Helpers;
 
-use GraphQLAPI\GraphQLAPI\Services\Helpers\URLParamHelpers;
+use GraphQLAPI\PluginUtils\Services\Helpers\URLParamHelpers;
 use PoP\Engine\AbstractTestCase;
 
 class URLParamHelpersTest extends AbstractTestCase

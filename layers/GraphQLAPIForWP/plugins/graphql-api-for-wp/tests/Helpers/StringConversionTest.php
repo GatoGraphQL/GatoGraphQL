@@ -2,7 +2,7 @@
 
 namespace GraphQLAPI\GraphQLAPI\Helpers;
 
-use GraphQLAPI\GraphQLAPI\Services\Helpers\StringConversion;
+use GraphQLAPI\PluginUtils\Services\Helpers\StringConversion;
 use PoP\Engine\AbstractTestCase;
 
 class StringConversionTest extends AbstractTestCase
