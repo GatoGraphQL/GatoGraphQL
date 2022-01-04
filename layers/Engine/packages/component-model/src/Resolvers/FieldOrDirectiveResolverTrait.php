@@ -34,7 +34,9 @@ trait FieldOrDirectiveResolverTrait
             fn (string $fieldArgName) => !isset($fieldOrDirectiveArgs[$fieldArgName])
         ));
         if ($missing !== []) {
-            $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
+            /** @var ComponentConfiguration */
+            $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+            $treatUndefinedFieldOrDirectiveArgsAsErrors = $componentConfiguration->treatUndefinedFieldOrDirectiveArgsAsErrors();
             $errorMessage = count($missing) == 1 ?
                 sprintf(
                     $this->getTranslationAPI()->__('Argument \'%1$s\' cannot be empty', 'component-model'),

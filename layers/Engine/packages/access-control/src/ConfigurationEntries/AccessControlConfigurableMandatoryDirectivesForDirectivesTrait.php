@@ -26,7 +26,9 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesTrait
          * If the schema mode was not defined in the entry, then this field is valid if the default
          * schema mode is the same required one
          */
-        if (!ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if (!$componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             return $this->getUpstreamMatchingEntries($entryList, $value);
         }
         /**

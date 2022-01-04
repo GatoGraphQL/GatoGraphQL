@@ -90,7 +90,9 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $idsDataFieldsToRemove,
                 $succeedingPipelineIDsDataFields
             );
-            if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
+            /** @var ComponentConfiguration */
+            $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+            if ($componentConfiguration->setFailingFieldResponseAsNull()) {
                 $this->setIDsDataFieldsAsNull(
                     $relationalTypeResolver,
                     $idsDataFieldsToRemove,

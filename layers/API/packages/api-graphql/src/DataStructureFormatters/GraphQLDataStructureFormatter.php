@@ -81,7 +81,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
          */
         if ($this->addTopLevelExtensionsEntryToResponse()) {
             // Add notices
-            if (ComponentConfiguration::enableProactiveFeedbackNotices()) {
+            /** @var ComponentConfiguration */
+            $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+            if ($componentConfiguration->enableProactiveFeedbackNotices()) {
                 if ($data['objectNotices'] ?? null) {
                     $notices = $this->reformatDBEntries($data['objectNotices']);
                 }
@@ -97,7 +99,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             }
 
             // Add traces
-            if (ComponentConfiguration::enableProactiveFeedbackTraces()) {
+            if ($componentConfiguration->enableProactiveFeedbackTraces()) {
                 if ($data['objectTraces'] ?? null) {
                     $traces = $this->reformatDBEntries($data['objectTraces']);
                 }
@@ -113,7 +115,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             }
 
             // Add deprecations
-            if (ComponentConfiguration::enableProactiveFeedbackDeprecations()) {
+            if ($componentConfiguration->enableProactiveFeedbackDeprecations()) {
                 if ($data['objectDeprecations'] ?? null) {
                     $deprecations = $this->reformatDBEntries($data['objectDeprecations']);
                 }
@@ -129,7 +131,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             }
 
             // Add logs
-            if (ComponentConfiguration::enableProactiveFeedbackLogs()) {
+            if ($componentConfiguration->enableProactiveFeedbackLogs()) {
                 if ($data['logEntries'] ?? null) {
                     $ret['extensions']['logs'] = $data['logEntries'];
                 }

@@ -18,9 +18,11 @@ trait AccessControlConfigurableMandatoryDirectivesForItemsTrait
     protected function doesSchemaModeProcessNullControlEntry(): bool
     {
         $individualControlSchemaMode = $this->getSchemaMode();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
         return
-            (ComponentConfiguration::usePrivateSchemaMode() && $individualControlSchemaMode == SchemaModes::PRIVATE_SCHEMA_MODE) ||
-            (!ComponentConfiguration::usePrivateSchemaMode() && $individualControlSchemaMode == SchemaModes::PUBLIC_SCHEMA_MODE);
+            ($componentConfiguration->usePrivateSchemaMode() && $individualControlSchemaMode == SchemaModes::PRIVATE_SCHEMA_MODE) ||
+            (!$componentConfiguration->usePrivateSchemaMode() && $individualControlSchemaMode == SchemaModes::PUBLIC_SCHEMA_MODE);
     }
 
     abstract protected function getSchemaMode(): string;

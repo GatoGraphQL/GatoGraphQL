@@ -1114,14 +1114,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             }
         }
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
-        $removeFieldIfDirectiveFailed = ComponentConfiguration::removeFieldIfDirectiveFailed();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        $removeFieldIfDirectiveFailed = $componentConfiguration->removeFieldIfDirectiveFailed();
         if ($removeFieldIfDirectiveFailed) {
             $this->removeIDsDataFields(
                 $idsDataFieldsToRemove,
                 $succeedingPipelineIDsDataFields
             );
         }
-        $setFailingFieldResponseAsNull = ComponentConfiguration::setFailingFieldResponseAsNull();
+        $setFailingFieldResponseAsNull = $componentConfiguration->setFailingFieldResponseAsNull();
         if ($setFailingFieldResponseAsNull) {
             $this->setIDsDataFieldsAsNull(
                 $relationalTypeResolver,
@@ -1206,7 +1208,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * If disabled, then do not expose the directive if it
          * has any mandatory argument of type `DangerouslyDynamic`
          */
-        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             /**
              * If `DangerouslyDynamic` is disabled, do not expose the field if either:
              *
