@@ -99,8 +99,6 @@ abstract class AbstractTestCase extends TestCase
 
         if (!$this->keepContainerAcrossTests()) {
             $this->container = null;
-            $appLoader = $this->getAppLoaderClass();
-            $appLoader::reset();
         }
     }
 
