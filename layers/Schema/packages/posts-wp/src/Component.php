@@ -39,7 +39,6 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         $this->initServices(dirname(__DIR__));
-        /** @var ComponentConfiguration */
         /** @var PostsComponentConfiguration */
         $componentConfiguration = ComponentManager::getComponent(PostsComponent::class)->getConfiguration();
         if ($componentConfiguration->addPostTypeToCustomPostUnionTypes()) {
