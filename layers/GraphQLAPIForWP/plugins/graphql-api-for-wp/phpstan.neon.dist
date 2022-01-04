@@ -28,13 +28,6 @@ parameters:
         -
             message: '#^Access to property \$post on an unknown class WP_Block_Editor_Context\.$#'
             path: src/Services/CustomPostTypes/AbstractCustomPostType.php
-        # Remove these when issue #464 (https://github.com/leoloso/PoP/issues/464) is fixed
-        -
-            message: '#^Unreachable statement - code above always terminates\.$#'
-            path: tests/Misc/GeneralUtilsTest.php
-        -
-            message: '#^Unreachable statement - code above always terminates\.$#'
-            path: tests/Misc/URLParamHelpersTest.php
     # bootstrapFiles:
     #     - graphql-api.php
     level: 8
