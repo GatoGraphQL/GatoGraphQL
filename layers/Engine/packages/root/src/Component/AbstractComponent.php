@@ -41,6 +41,9 @@ abstract class AbstractComponent implements ComponentInterface
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
+        // Set the configuration on the corresponding ComponentConfiguration
+        $this->maybeSetConfiguration($configuration);
+
         // Initialize the self component
         $this->initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
 
@@ -190,5 +193,13 @@ abstract class AbstractComponent implements ComponentInterface
             }
         }
         return $this->componentConfiguration;
+    }
+
+    /**
+     * @param array<string,mixed> $configuration
+     */
+    protected function maybeSetConfiguration(array $configuration): void
+    {
+        $this->getConfiguration()?->setConfiguration($configuration);
     }
 }
