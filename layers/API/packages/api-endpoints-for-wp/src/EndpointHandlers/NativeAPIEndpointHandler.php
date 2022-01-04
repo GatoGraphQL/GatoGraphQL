@@ -37,9 +37,10 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
      */
     protected function isNativeAPIEnabled(): bool
     {
-        return
-            \PoP\Root\Managers\ComponentManager::getComponent(APIComponent::class)->isEnabled()
-            && !ComponentConfiguration::isNativeAPIEndpointDisabled();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
+        return \PoP\Root\Managers\ComponentManager::getComponent(APIComponent::class)->isEnabled()
+            && !$componentConfiguration->isNativeAPIEndpointDisabled();
     }
 
     /**

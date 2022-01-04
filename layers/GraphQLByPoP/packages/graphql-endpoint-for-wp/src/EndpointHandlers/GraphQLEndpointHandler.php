@@ -10,7 +10,7 @@ use PoP\API\Response\Schemes as APISchemes;
 use PoP\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 use PoP\ComponentModel\Constants\Params;
 use PoP\BasicService\BasicServiceTrait;
-use PoP\GraphQLAPI\Component;
+use PoP\GraphQLAPI\Component as GraphQLAPIComponent;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLEndpointHandler extends AbstractEndpointHandler
@@ -52,10 +52,12 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
      */
     protected function isGraphQLAPIEnabled(): bool
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->getConfiguration();
         return
-            class_exists(Component::class)
-            && \PoP\Root\Managers\ComponentManager::getComponent(Component::class)->isEnabled()
-            && !ComponentConfiguration::isGraphQLAPIEndpointDisabled();
+            class_exists(GraphQLAPIComponent::class)
+            && \PoP\Root\Managers\ComponentManager::getComponent(GraphQLAPIComponent::class)->isEnabled()
+            && !$componentConfiguration->isGraphQLAPIEndpointDisabled();
     }
 
     /**
