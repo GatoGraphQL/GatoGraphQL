@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLEndpointForWP;
 
 use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\APIEndpoints\EndpointUtils;
-use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
+use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Configuration;
 
-use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
+use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class Request
 {

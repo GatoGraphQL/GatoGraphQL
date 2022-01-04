@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CommentMeta;
 
 use PoP\BasicService\Component\AbstractComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
+use PoP\BasicService\Component\EnvironmentValueHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends AbstractComponentConfiguration

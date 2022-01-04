@@ -8,7 +8,7 @@ use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\Root\Managers\ComponentManager;
 use PoP\API\Component as APIComponent;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
+use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\AccessControl;
 
 use PoP\BasicService\Component\AbstractComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
+use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {

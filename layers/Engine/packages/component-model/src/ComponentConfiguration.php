@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel;
 
 use PoP\BasicService\Component\AbstractComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
+use PoP\BasicService\Component\EnvironmentValueHelpers;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Tokens\Param;
 use PoP\Root\Environment as RootEnvironment;
