@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\Root\Component;
 
-/**
- * Initialize component
- */
 abstract class AbstractComponent implements ComponentInterface
 {
     use InitializeContainerServicesInComponentTrait;
+
+    protected ?ComponentConfigurationInterface $componentConfiguration = null;
+    protected bool $initializedComponentConfiguration = false;
 
     /**
      * Cannot override the constructor
@@ -163,7 +163,7 @@ abstract class AbstractComponent implements ComponentInterface
     /**
      * ComponentConfiguration class for the Component
      */
-    public function getComponentConfigurationClass(): ?string
+    protected function getComponentConfigurationClass(): ?string
     {
         $class = \get_called_class();
         $parts = \explode('\\', $class);
@@ -175,5 +175,20 @@ abstract class AbstractComponent implements ComponentInterface
             return null;
         }
         return $componentConfigurationClass;
+    }
+
+    /**
+     * ComponentConfiguration class for the Component
+     */
+    public function getConfiguration(): ?ComponentConfigurationInterface
+    {
+        if (!$this->initializedComponentConfiguration) {
+            $this->initializedComponentConfiguration = true;
+            $componentConfigurationClass = $this->getComponentConfigurationClass();
+            if ($componentConfigurationClass !== null) {    
+                $this->componentConfiguration = new $componentConfigurationClass();
+            }
+        }
+        return $this->componentConfiguration;
     }
 }

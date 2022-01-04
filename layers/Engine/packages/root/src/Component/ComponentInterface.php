@@ -96,7 +96,7 @@ interface ComponentInterface
     public function isEnabled(): bool;
 
     /**
-     * ComponentConfiguration class for the Component
+     * ComponentConfiguration for the Component
      */
-    public function getComponentConfigurationClass(): ?string;
+    public function getConfiguration(): ?ComponentConfigurationInterface;
 }
