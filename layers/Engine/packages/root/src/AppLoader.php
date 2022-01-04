@@ -105,19 +105,20 @@ class AppLoader
      * following the Composer dependencies tree
      *
      * @param string[] $componentClasses List of `Component` class to initialize
-     * @return string[]
      */
-    final protected static function getComponentsOrderedForInitialization(
-        array $componentClasses,
-        bool $isDev
-    ): array {
-        $orderedComponentClasses = [];
+    private static function initializeComponents(bool $isDev): void
+    {
         self::addComponentsOrderedForInitialization(
-            $componentClasses,
-            $orderedComponentClasses,
+            self::$componentClassesToInitialize,
             $isDev
         );
-        return $orderedComponentClasses;
+
+        /**
+         * Register all components in the ComponentManager
+         */
+        foreach (self::$orderedComponentClasses as $componentClass) {
+            ComponentManager::register($componentClass);
+        }
     }
 
     /**
@@ -125,11 +126,9 @@ class AppLoader
      * following the Composer dependencies tree
      *
      * @param string[] $componentClasses List of `Component` class to initialize
-     * @param string[] $orderedComponentClasses List of `Component` class in order of initialization
      */
-    final protected static function addComponentsOrderedForInitialization(
+    private static function addComponentsOrderedForInitialization(
         array $componentClasses,
-        array &$orderedComponentClasses,
         bool $isDev
     ): void {
         /**
@@ -151,14 +150,12 @@ class AppLoader
             // Initialize all depended-upon PoP components
             self::addComponentsOrderedForInitialization(
                 $component->getDependedComponentClasses(),
-                $orderedComponentClasses,
                 $isDev
             );
 
             if ($isDev) {
                 self::addComponentsOrderedForInitialization(
                     $component->getDevDependedComponentClasses(),
-                    $orderedComponentClasses,
                     $isDev
                 );
             }
@@ -169,12 +166,11 @@ class AppLoader
                     $component->getDependedConditionalComponentClasses(),
                     'class_exists'
                 ),
-                $orderedComponentClasses,
                 $isDev
             );
 
             // We reached the bottom of the rung, add the component to the list
-            $orderedComponentClasses[] = $componentClass;
+            self::$orderedComponentClasses[] = $componentClass;
         }
     }
 
@@ -215,17 +211,7 @@ class AppLoader
         /**
          * Calculate the components in their initialization order
          */
-        self::$orderedComponentClasses = self::getComponentsOrderedForInitialization(
-            self::$componentClassesToInitialize,
-            $isDev
-        );
-
-        /**
-         * Register all components in the ComponentManager
-         */
-        foreach (self::$orderedComponentClasses as $componentClass) {
-            ComponentManager::register($componentClass);
-        }
+        self::initializeComponents($isDev);
 
         /**
          * System container: initialize it and compile it already,
