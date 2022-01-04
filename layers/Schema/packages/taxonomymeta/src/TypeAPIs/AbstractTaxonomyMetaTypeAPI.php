@@ -6,6 +6,7 @@ namespace PoPSchema\TaxonomyMeta\TypeAPIs;
 
 use InvalidArgumentException;
 use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
+use PoPSchema\TaxonomyMeta\Component;
 use PoPSchema\TaxonomyMeta\ComponentConfiguration;
 
 abstract class AbstractTaxonomyMetaTypeAPI extends AbstractMetaTypeAPI implements TaxonomyMetaTypeAPIInterface

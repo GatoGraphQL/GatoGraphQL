@@ -7,6 +7,7 @@ namespace PoPSchema\Settings\TypeAPIs;
 use InvalidArgumentException;
 use PoP\BasicService\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
+use PoPSchema\Settings\Component;
 use PoPSchema\Settings\ComponentConfiguration;
 
 abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface

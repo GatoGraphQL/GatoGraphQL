@@ -6,6 +6,7 @@ namespace PoPSchema\UserMeta\TypeAPIs;
 
 use InvalidArgumentException;
 use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
+use PoPSchema\UserMeta\Component;
 use PoPSchema\UserMeta\ComponentConfiguration;
 
 abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements UserMetaTypeAPIInterface

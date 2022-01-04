@@ -6,6 +6,7 @@ namespace PoPSchema\CustomPostMeta\TypeAPIs;
 
 use InvalidArgumentException;
 use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
+use PoPSchema\CustomPostMeta\Component;
 use PoPSchema\CustomPostMeta\ComponentConfiguration;
 
 abstract class AbstractCustomPostMetaTypeAPI extends AbstractMetaTypeAPI implements CustomPostMetaTypeAPIInterface
