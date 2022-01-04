@@ -2,7 +2,7 @@
 
 namespace PoP\Definitions;
 
-use PoP\Engine\AbstractTestCase;
+use PoP\Root\AbstractTestCase;
 
 class ComponentTest extends AbstractTestCase
 {
