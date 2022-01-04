@@ -68,7 +68,7 @@ class Component extends AbstractComponent
     /**
      * Function called by the Bootloader after initializing the SystemContainer
      */
-    public static function bootSystem(): void
+    public function bootSystem(): void
     {
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**
@@ -81,7 +81,7 @@ class Component extends AbstractComponent
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public static function beforeBoot(): void
+    public function beforeBoot(): void
     {
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**
@@ -94,7 +94,7 @@ class Component extends AbstractComponent
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public static function boot(): void
+    public function boot(): void
     {
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**
@@ -107,7 +107,7 @@ class Component extends AbstractComponent
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public static function afterBoot(): void
+    public function afterBoot(): void
     {
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**

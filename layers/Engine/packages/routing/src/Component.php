@@ -24,7 +24,7 @@ class Component extends AbstractComponent
         ];
     }
 
-    public static function beforeBoot(): void
+    public function beforeBoot(): void
     {
         Routes::init();
     }

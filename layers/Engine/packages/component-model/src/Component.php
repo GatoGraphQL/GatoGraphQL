@@ -54,7 +54,7 @@ class Component extends AbstractComponent
         self::initSystemServices(dirname(__DIR__));
     }
 
-    public static function beforeBoot(): void
+    public function beforeBoot(): void
     {
         parent::beforeBoot();
 
@@ -65,7 +65,7 @@ class Component extends AbstractComponent
         $attachExtensionService->attachExtensions(ApplicationEvents::BEFORE_BOOT);
     }
 
-    public static function boot(): void
+    public function boot(): void
     {
         parent::boot();
 
@@ -73,7 +73,7 @@ class Component extends AbstractComponent
         $attachExtensionService->attachExtensions(ApplicationEvents::BOOT);
     }
 
-    public static function afterBoot(): void
+    public function afterBoot(): void
     {
         parent::afterBoot();
 

@@ -51,22 +51,22 @@ interface ComponentInterface
     /**
      * Function called by the Bootloader when booting the system
      */
-    public static function bootSystem(): void;
-    
+    public function bootSystem(): void;
+
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public static function beforeBoot(): void;
+    public function beforeBoot(): void;
 
     /**
      * Function called by the Bootloader when booting the system
      */
-    public static function boot(): void;
+    public function boot(): void;
 
     /**
      * Function called by the Bootloader when booting the system
      */
-    public static function afterBoot(): void;
+    public function afterBoot(): void;
 
     /**
      * Initialize services for the system container

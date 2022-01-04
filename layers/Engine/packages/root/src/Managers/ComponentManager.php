@@ -46,7 +46,7 @@ class ComponentManager
     public static function bootSystem(): void
     {
         foreach (self::$components as $component) {
-            $component::bootSystem();
+            $component->bootSystem();
         }
     }
 
@@ -56,7 +56,7 @@ class ComponentManager
     public static function beforeBoot(): void
     {
         foreach (self::$components as $component) {
-            $component::beforeBoot();
+            $component->beforeBoot();
         }
     }
 
@@ -66,7 +66,7 @@ class ComponentManager
     public static function boot(): void
     {
         foreach (self::$components as $component) {
-            $component::boot();
+            $component->boot();
         }
     }
 
@@ -76,7 +76,7 @@ class ComponentManager
     public static function afterBoot(): void
     {
         foreach (self::$components as $component) {
-            $component::afterBoot();
+            $component->afterBoot();
         }
     }
 }

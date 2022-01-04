@@ -38,7 +38,7 @@ class Component extends AbstractComponent
         self::initServices(dirname(__DIR__));
     }
 
-    public static function beforeBoot(): void
+    public function beforeBoot(): void
     {
         Cortex::boot();
     }
