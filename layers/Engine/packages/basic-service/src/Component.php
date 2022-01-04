@@ -20,6 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\Hooks\Component::class,
+            \PoP\Translation\Component::class,
         ];
     }
 
