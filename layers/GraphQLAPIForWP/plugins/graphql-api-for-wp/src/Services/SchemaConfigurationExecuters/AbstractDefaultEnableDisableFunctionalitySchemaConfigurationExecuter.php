@@ -15,7 +15,7 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecu
         return BlockAttributeNames::ENABLED_CONST;
     }
 
-    abstract public function getHookComponentConfigurationClass(): string;
+    abstract public function getHookComponentClass(): string;
 
     abstract public function getHookEnvironmentClass(): string;
 
@@ -40,12 +40,12 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecu
             }
             // Define the settings value through a hook. Execute last so it overrides the default settings
             $hookName = ComponentConfigurationHelpers::getHookName(
-                $this->getHookComponentConfigurationClass(),
+                $this->getHookComponentClass(),
                 $this->getHookEnvironmentClass(),
             );
             \add_filter(
                 $hookName,
-                fn () => $enableFunctionality == BlockAttributeValues::ENABLED,
+                fn () => $enableFunctionality === BlockAttributeValues::ENABLED,
                 PHP_INT_MAX
             );
         }

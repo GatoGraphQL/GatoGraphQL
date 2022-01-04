@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigExposeAdminDataBlock;
 use PoP\ComponentModel\Component as ComponentModelComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 
 class ExposeAdminDataSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
@@ -34,9 +33,9 @@ class ExposeAdminDataSchemaConfigurationExecuter extends AbstractDefaultEnableDi
         return $this->getSchemaConfigExposeAdminDataBlock();
     }
 
-    public function getHookComponentConfigurationClass(): string
+    public function getHookComponentClass(): string
     {
-        return ComponentModelComponentConfiguration::class;
+        return ComponentModelComponent::class;
     }
 
     public function getHookEnvironmentClass(): string
