@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root\Container;
 
 use InvalidArgumentException;
+use LogicException;
 use PoP\Root\Environment;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -14,10 +15,10 @@ use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 
 trait ContainerBuilderFactoryTrait
 {
-    protected static Container $instance;
-    protected static bool $cacheContainerConfiguration;
-    protected static bool $cached;
-    protected static string $cacheFile;
+    protected static ?Container $instance = null;
+    protected static ?bool $cacheContainerConfiguration = null;
+    protected static ?bool $cached = null;
+    protected static ?string $cacheFile = null;
 
     /**
      * Initialize the Container Builder.
@@ -116,10 +117,23 @@ trait ContainerBuilderFactoryTrait
     }
     public static function getInstance(): Container
     {
+        if (static::$instance === null) {
+            static::throwContainerNotInitializedException();
+        }
         return static::$instance;
+    }
+    /**
+     * @throws LogicException
+     */
+    protected static function throwContainerNotInitializedException(): void
+    {
+        throw new LogicException('Container has not been initialized');
     }
     public static function isCached(): bool
     {
+        if (static::$cached === null) {
+            static::throwContainerNotInitializedException();
+        }
         return static::$cached;
     }
 
