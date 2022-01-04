@@ -1,16 +1,19 @@
 {
-    "name": "getpop/engine-wp",
+    "name": "graphql-api/plugin-utils",
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
+        "getpop/hooks-wp": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
         "getpop/translation": "<0.8.9",
         "getpop/mandatory-directives-by-configuration": "<0.8.9",
         "getpop/component-model": "<0.8.9",
         "getpop/filestore": "<0.8.9",
         "getpop/guzzle-helpers": "<0.8.9",
+        "getpop/routing-wp": "<0.8.9",
         "getpop/translation-wp": "<0.8.9",
         "getpop/hooks": "<0.8.9",
         "getpop/root": "<0.8.9",
+        "getpop/engine-wp": "<0.8.9",
         "getpop/routing": "<0.8.9",
         "getpop/function-fields": "<0.8.9",
         "getpop/access-control": "<0.8.9",
@@ -106,7 +109,6 @@
         "getpop/graphql-parser": "<0.8.9",
         "graphql-by-pop/graphql-server": "<0.8.9",
         "graphql-api/external-dependency-wrappers": "<0.8.9",
-        "graphql-api/markdown-convertor": "<0.8.9",
         "graphql-api/extension-demo": "<0.8.9",
         "graphql-api/graphql-api-for-wp": "<0.8.9",
         "getpop/definitions-emoji": "<0.8.9",
@@ -153,9 +155,9 @@
         "pop-wp-schema/schema-commons": "<0.8.9"
     },
     "type": "library",
-    "description": "Implementation of PoP Engine for WordPress",
-    "keywords": ["PoP", "engine", "WordPress"],
-    "homepage": "https://github.com/getpop/engine-wp",
+    "description": "General utilities for the plugin, not dependent on WordPress",
+    "keywords": ["PoP", "plugin-utils"],
+    "homepage": "https://github.com/GraphQLAPI/plugin-utils",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -166,26 +168,22 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/engine": "^0.9",
-        "getpop/hooks-wp": "^0.9",
-        "getpop/routing-wp": "^0.9",
-        "getpop/translation-wp": "^0.9"
+        "getpop/engine": "^0.9"
     },
     "require-dev": {
-        "johnpbloch/wordpress": ">=5.5",
+        "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.12",
-        "squizlabs/php_codesniffer": "^3.0",
-        "szepeviktor/phpstan-wordpress": "^1.0"
+        "squizlabs/php_codesniffer": "^3.0"
     },
     "autoload": {
         "psr-4": {
-            "PoP\\EngineWP\\": "src"
+            "GraphQLAPI\\PluginUtils\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\EngineWP\\": "tests"
+            "GraphQLAPI\\PluginUtils\\": "tests"
         }
     },
     "scripts": {
@@ -195,7 +193,6 @@
         "analyse": "phpstan analyse"
     },
     "extra": {
-        "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
             "dev-master": "0.9-dev"
         }

@@ -85,6 +85,8 @@ services:
         - >-
           ../../layers/GraphQLAPIForWP/packages/markdown-convertor:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/markdown-convertor
         - >-
+          ../../layers/GraphQLAPIForWP/packages/plugin-utils:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/plugin-utils
+        - >-
           ../../layers/GraphQLByPoP/packages/graphql-clients-for-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-by-pop/graphql-clients-for-wp
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-endpoint-for-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-by-pop/graphql-endpoint-for-wp

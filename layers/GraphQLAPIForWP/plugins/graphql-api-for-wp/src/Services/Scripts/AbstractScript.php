@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 
 use Error;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
+use GraphQLAPI\PluginUtils\Services\Helpers\StringConversion;
 use PoP\BasicService\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
@@ -22,7 +22,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     use BasicServiceTrait;
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
-    private ?GeneralUtils $generalUtils = null;
+    private ?StringConversion $stringConversion = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -32,13 +32,13 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     {
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
-    final public function setGeneralUtils(GeneralUtils $generalUtils): void
+    final public function setStringConversion(StringConversion $stringConversion): void
     {
-        $this->generalUtils = $generalUtils;
+        $this->stringConversion = $stringConversion;
     }
-    final protected function getGeneralUtils(): GeneralUtils
+    final protected function getStringConversion(): StringConversion
     {
-        return $this->generalUtils ??= $this->instanceManager->getInstance(GeneralUtils::class);
+        return $this->stringConversion ??= $this->instanceManager->getInstance(StringConversion::class);
     }
 
     /**
@@ -94,7 +94,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
      */
     final protected function getScriptLocalizationName(): string
     {
-        return $this->getGeneralUtils()->dashesToCamelCase($this->getScriptName());
+        return $this->getStringConversion()->dashesToCamelCase($this->getScriptName());
     }
 
     /**

@@ -57,8 +57,9 @@ class Component extends AbstractPluginComponent
             \PoPWPSchema\UserMeta\Component::class,
             \GraphQLByPoP\GraphQLClientsForWP\Component::class,
             \GraphQLByPoP\GraphQLEndpointForWP\Component::class,
-            \GraphQLAPI\MarkdownConvertor\Component::class,
             \GraphQLAPI\ExternalDependencyWrappers\Component::class,
+            \GraphQLAPI\MarkdownConvertor\Component::class,
+            \GraphQLAPI\PluginUtils\Component::class,
         ];
     }
 

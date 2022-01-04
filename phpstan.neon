@@ -77,6 +77,7 @@ includes:
     - layers/Schema/packages/pages/phpstan.neon.dist
     - layers/WPSchema/packages/pages/phpstan.neon.dist
     - layers/Schema/packages/pages-wp/phpstan.neon.dist
+    - layers/GraphQLAPIForWP/packages/plugin-utils/phpstan.neon.dist
     - layers/Schema/packages/post-categories/phpstan.neon.dist
     - layers/Schema/packages/post-categories-wp/phpstan.neon.dist
     - layers/Schema/packages/post-category-mutations/phpstan.neon.dist

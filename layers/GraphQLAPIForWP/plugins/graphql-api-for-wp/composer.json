@@ -17,6 +17,7 @@
         "getpop/engine-wp": "^0.9",
         "graphql-api/external-dependency-wrappers": "^0.9",
         "graphql-api/markdown-convertor": "^0.9",
+        "graphql-api/plugin-utils": "^0.9",
         "graphql-by-pop/graphql-clients-for-wp": "^0.9",
         "graphql-by-pop/graphql-endpoint-for-wp": "^0.9",
         "graphql-by-pop/graphql-server": "^0.9",
