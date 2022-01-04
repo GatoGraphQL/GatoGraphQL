@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\Testing\PHPUnit;
+namespace PoP\Root;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;

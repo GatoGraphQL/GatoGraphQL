@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\HooksWP;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Root\Testing\PHPUnit\AbstractTestCase;
+use PoP\Root\AbstractTestCase;
 
 class HooksAPITest extends AbstractTestCase
 {
