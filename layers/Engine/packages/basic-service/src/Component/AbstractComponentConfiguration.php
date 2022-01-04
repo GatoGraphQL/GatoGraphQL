@@ -21,9 +21,6 @@ abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentC
     ): void {
         // Only set default value if passing the param,
         // to avoid overriding a value already set in the param definition
-        if ($this->hasConfigurationValue($envVariable)) {
-            return;
-        }
         if ($defaultValue !== null) {
             $selfProperty = $defaultValue;
         }
