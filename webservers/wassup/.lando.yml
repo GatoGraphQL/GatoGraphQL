@@ -87,6 +87,8 @@ services:
         - >-
           ../../layers/Engine/packages/translation:/app/vendor/getpop/translation
         - >-
+          ../../layers/Engine/packages/translation-mock:/app/vendor/getpop/translation-mock
+        - >-
           ../../layers/Engine/packages/translation-wp:/app/vendor/getpop/translation-wp
         - >-
           ../../layers/Schema/packages/block-metadata-for-wp:/app/vendor/pop-schema/block-metadata-for-wp
