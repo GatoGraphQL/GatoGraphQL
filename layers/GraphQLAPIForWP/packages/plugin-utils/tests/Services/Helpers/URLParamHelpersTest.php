@@ -11,7 +11,7 @@ class URLParamHelpersTest extends AbstractTestCase
     {
         /** @var URLParamHelpers */
         $urlParamHelpers = $this->getService(URLParamHelpers::class);
-        
+
         /**
          * Inputs taken from Mozilla documentation for `encodeURIComponent`
          * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
