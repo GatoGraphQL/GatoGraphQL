@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Registries;
 
 use Exception;
+use PoP\GraphQLParser\Component as GraphQLParserComponent;
 use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
+use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
+use PoP\API\Component as APIComponent;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\API\Schema\SchemaDefinitionServiceInterface;
 use PoP\API\Schema\TypeKinds;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
+use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;

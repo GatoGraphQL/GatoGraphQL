@@ -6,6 +6,7 @@ namespace PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\AP
 
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoPSchema\Posts\Component;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPSchema\Users\Routing\RouteNatures;

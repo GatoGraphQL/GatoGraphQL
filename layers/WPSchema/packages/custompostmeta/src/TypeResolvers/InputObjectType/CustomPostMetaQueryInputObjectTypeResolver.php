@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPostMeta\TypeResolvers\InputObjectType;
 
+use PoPSchema\CustomPostMeta\Component;
 use PoPSchema\CustomPostMeta\ComponentConfiguration;
 use PoPWPSchema\Meta\TypeResolvers\InputObjectType\AbstractMetaQueryInputObjectTypeResolver;
 

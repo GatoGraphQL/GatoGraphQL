@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;

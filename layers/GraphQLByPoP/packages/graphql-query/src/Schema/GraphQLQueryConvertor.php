@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLQuery\Schema;
 
 use Exception;
+use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
 use InvalidArgumentException;
 use PoP\BasicService\BasicServiceTrait;

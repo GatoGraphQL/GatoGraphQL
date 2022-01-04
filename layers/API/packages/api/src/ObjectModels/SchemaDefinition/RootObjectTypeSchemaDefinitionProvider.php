@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
+use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Schema\SchemaDefinition;
 

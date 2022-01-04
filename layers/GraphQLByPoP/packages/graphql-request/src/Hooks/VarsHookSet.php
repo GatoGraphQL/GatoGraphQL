@@ -6,6 +6,7 @@ namespace GraphQLByPoP\GraphQLRequest\Hooks;
 
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
+use GraphQLByPoP\GraphQLRequest\Component;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Hooks;
 
+use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Constants\Actions;
 use PoP\API\PersistedQueries\PersistedQueryUtils;

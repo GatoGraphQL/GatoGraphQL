@@ -6,6 +6,7 @@ namespace PoP\API\Schema;
 
 use Exception;
 use PoP\API\Cache\CacheTypes;
+use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\ObjectModels\SchemaDefinition\DirectiveSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\EnumTypeSchemaDefinitionProvider;

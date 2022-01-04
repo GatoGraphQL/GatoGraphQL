@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\API\ConditionalOnComponent\AccessControl\Hooks;
 
+use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
+use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Environment;
 use PoP\BasicService\Component\ComponentConfigurationHelpers;

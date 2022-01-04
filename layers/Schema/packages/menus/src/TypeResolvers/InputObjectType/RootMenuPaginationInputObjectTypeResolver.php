@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\TypeResolvers\InputObjectType;
 
+use PoPSchema\Menus\Component;
 use PoPSchema\Menus\ComponentConfiguration;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 

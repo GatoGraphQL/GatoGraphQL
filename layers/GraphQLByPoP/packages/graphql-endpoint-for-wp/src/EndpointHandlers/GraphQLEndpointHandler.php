@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers;
 
+use GraphQLByPoP\GraphQLEndpointForWP\Component;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;

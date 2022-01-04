@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\Engine;
 use Exception;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ComponentInfo;
 use PoP\ComponentModel\Constants\Actions;

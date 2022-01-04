@@ -7,6 +7,7 @@ namespace PoP\GraphQLParser\Parser;
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
 use PoP\ComponentModel\Error\ErrorProviderInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
+use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Parser\Ast\MetaDirective;
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;

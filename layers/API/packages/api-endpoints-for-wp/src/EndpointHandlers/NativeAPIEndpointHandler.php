@@ -6,6 +6,7 @@ namespace PoP\APIEndpointsForWP\EndpointHandlers;
 
 use PoP\API\Component;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\APIEndpointsForWP\Component;
 use PoP\APIEndpointsForWP\ComponentConfiguration;
 use PoP\ComponentModel\Constants\Params;
 
