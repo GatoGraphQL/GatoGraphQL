@@ -9,12 +9,6 @@ class StringConversionTest extends AbstractTestCase
 {
     public function testDashesToCamelCase(): void
     {
-        /**
-         * Currently can't use container services in tests
-         * @todo Load container services in bootstrap-phpunit.php, then restore
-         */
-        return;
-
         /** @var StringConversion */
         $stringConversion = $this->getService(StringConversion::class);
 
