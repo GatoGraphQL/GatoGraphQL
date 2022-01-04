@@ -6,6 +6,7 @@ namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 
 use GraphQLByPoP\GraphQLClientsForWP\Component;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration;
+use GraphQLByPoP\GraphQLEndpointForWP\Component as GraphQLEndpointForWPComponent;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
 
 trait WPClientTrait
