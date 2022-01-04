@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use LogicException;
 use PHPUnit\Framework\TestCase;
 use PoP\Root\AppLoader;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\Helpers\ClassHelpers;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class AbstractTestCase extends TestCase
@@ -71,18 +71,8 @@ abstract class AbstractTestCase extends TestCase
      */
     protected static function getComponentClass(): string
     {
-        $class = \get_called_class();
-        $parts = \explode('\\', $class);
-        if (\count($parts) < 3) {
-            throw new LogicException(
-                sprintf(
-                    'Could not deduce the package Component class from "%s". Must override function "%s"?',
-                    $class,
-                    __FUNCTION__
-                )
-            );
-        }
-        return $parts[0] . '\\' . $parts[1] . '\\Component';
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        return $classNamespace . '\\Component';
     }
 
     public static function tearDownAfterClass(): void

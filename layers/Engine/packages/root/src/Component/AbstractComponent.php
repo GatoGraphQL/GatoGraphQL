@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Root\Component;
 
+use PoP\Root\Helpers\ClassHelpers;
+
 abstract class AbstractComponent implements ComponentInterface
 {
     use InitializeContainerServicesInComponentTrait;
@@ -172,12 +174,8 @@ abstract class AbstractComponent implements ComponentInterface
      */
     protected function getComponentConfigurationClass(): ?string
     {
-        $class = \get_called_class();
-        $parts = \explode('\\', $class);
-        if (\count($parts) < 3) {
-            return null;
-        }
-        $componentConfigurationClass = $parts[0] . '\\' . $parts[1] . '\\ComponentConfiguration';
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        $componentConfigurationClass = $classNamespace . '\\ComponentConfiguration';
         if (!class_exists($componentConfigurationClass)) {
             return null;
         }
