@@ -20,6 +20,17 @@ class ComponentManager
     protected static array $components = [];
 
     /**
+     * This functions is to be called by PHPUnit,
+     * to reset the state in between tests.
+     *
+     * Reset the initialized components.
+     */
+    public static function reset(): void
+    {
+        self::$components = [];
+    }
+
+    /**
      * Register and initialize a component
      */
     public static function register(string $componentClass): ComponentInterface

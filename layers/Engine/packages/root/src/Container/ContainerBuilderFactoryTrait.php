@@ -21,6 +21,20 @@ trait ContainerBuilderFactoryTrait
     protected static ?string $cacheFile = null;
 
     /**
+     * This functions is to be called by PHPUnit,
+     * to reset the state in between tests.
+     *
+     * Reset the container.
+     */
+    public static function reset(): void
+    {
+        static::$instance = null;
+        static::$cacheContainerConfiguration = null;
+        static::$cached = null;
+        static::$cacheFile = null;
+    }
+
+    /**
      * Initialize the Container Builder.
      * If the directory is not provided, store the cache in a system temp dir
      *
