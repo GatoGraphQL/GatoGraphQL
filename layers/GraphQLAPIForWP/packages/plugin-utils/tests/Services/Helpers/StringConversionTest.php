@@ -1,6 +1,6 @@
 <?php
 
-namespace GraphQLAPI\GraphQLAPI\Helpers;
+namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use GraphQLAPI\PluginUtils\Services\Helpers\StringConversion;
 use PoP\Engine\AbstractTestCase;
