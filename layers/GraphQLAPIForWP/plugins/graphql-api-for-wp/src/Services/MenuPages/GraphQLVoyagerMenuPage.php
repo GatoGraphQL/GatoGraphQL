@@ -32,8 +32,8 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
     {
         parent::enqueueAssets();
 
-        $mainPluginURL = (string) App::getMainPluginManager()->getConfig('url');
-        $mainPluginVersion = (string) App::getMainPluginManager()->getConfig('version');
+        $mainPluginURL = App::getMainPlugin()->getPluginURL();
+        $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
 
         // CSS
         \wp_enqueue_style(
