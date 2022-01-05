@@ -7,6 +7,7 @@ namespace PoP\Root;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Managers\ComponentManager;
+use Symfony\Component\DependencyInjection\Container;
 
 /**
  * Single class hosting all the top-level instances to run the application
@@ -68,5 +69,15 @@ class App
     public static function getComponentManager(): ComponentManager
     {
         return self::$componentManager;
+    }
+
+    final public static function getContainer(): Container
+    {
+        return self::getContainerBuilderFactory()->getInstance();
+    }
+
+    final public static function getSystemContainer(): Container
+    {
+        return self::getSystemContainerBuilderFactory()->getInstance();
     }
 }
