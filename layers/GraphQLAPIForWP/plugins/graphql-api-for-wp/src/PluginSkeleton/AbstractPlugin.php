@@ -9,8 +9,10 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 
-abstract class AbstractPlugin
+abstract class AbstractPlugin implements PluginInterface
 {
+    protected ?PluginInfoInterface $pluginInfo = null;
+
     /**
      * @var array<string, mixed>|null
      */
@@ -26,6 +28,9 @@ abstract class AbstractPlugin
     ) {
         $this->pluginBaseName = \plugin_basename($pluginFile);
         $this->pluginName = $pluginName ?? $this->pluginBaseName;
+
+        // Have the Plugin set its own info on the corresponding PluginInfo
+        $this->initializeInfo();
     }
 
     /**
@@ -58,6 +63,52 @@ abstract class AbstractPlugin
     public function getPluginVersion(): string
     {
         return $this->pluginVersion;
+    }
+
+    /**
+     * Plugin dir
+     */
+    public function getPluginDir(): string
+    {
+        return \dirname($this->pluginFile);
+    }
+
+    /**
+     * Plugin URL
+     */
+    public function getPluginURL(): string
+    {
+        return \plugin_dir_url($this->pluginFile);
+    }
+
+    /**
+     * PluginInfo class for the Plugin
+     */
+    public function getInfo(): ?PluginInfoInterface
+    {
+        return $this->pluginInfo;
+    }
+
+    protected function initializeInfo(): void
+    {
+        $pluginInfoClass = $this->getPluginInfoClass();
+        if ($pluginInfoClass === null) {
+            return;
+        }
+        $this->pluginInfo = new $pluginInfoClass($this);
+    }
+
+    /**
+     * PluginInfo class for the Plugin
+     */
+    protected function getPluginInfoClass(): ?string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        $pluginInfoClass = $classNamespace . '\\PluginInfo';
+        if (!class_exists($pluginInfoClass)) {
+            return null;
+        }
+        return $pluginInfoClass;
     }
 
     /**
@@ -100,8 +151,8 @@ abstract class AbstractPlugin
     protected function doGetFullConfiguration(): array
     {
         return [
-            'dir' => dirname($this->pluginFile),
-            'url' => plugin_dir_url($this->pluginFile),
+            'dir' => $this->getPluginDir(),
+            'url' => $this->getPluginURL(),
         ];
     }
 
