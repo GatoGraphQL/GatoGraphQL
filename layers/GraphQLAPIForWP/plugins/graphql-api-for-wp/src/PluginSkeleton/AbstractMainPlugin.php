@@ -8,13 +8,12 @@ use Exception;
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use PoP\Engine\AppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use RuntimeException;
 
-abstract class AbstractMainPlugin extends AbstractPlugin
+abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
 {
     /**
      * If there is any error when initializing the plugin,
@@ -64,26 +63,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     public function getSchemaComponentClassesToSkip(): array
     {
         return $this->pluginConfiguration->getSchemaComponentClassesToSkip();
-    }
-
-    /**
-     * Get the plugin's immutable configuration values
-     *
-     * @return array<string, mixed>
-     */
-    protected function doGetFullConfiguration(): array
-    {
-        return array_merge(
-            parent::doGetFullConfiguration(),
-            [
-                /**
-                 * Where to store the config cache,
-                 * for both /container and /operational
-                 * (config persistent cache: component model configuration + schema)
-                 */
-                'cache-dir' => PluginEnvironment::getCacheDir(),
-            ]
-        );
     }
 
     /**

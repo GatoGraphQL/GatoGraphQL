@@ -35,4 +35,9 @@ interface PluginInterface
      * Plugin URL
      */
     public function getPluginURL(): string;
+
+    /**
+     * PluginInfo class for the Plugin
+     */
+    public function getInfo(): ?PluginInfoInterface;
 }

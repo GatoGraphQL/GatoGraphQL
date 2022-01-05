@@ -13,11 +13,6 @@ abstract class AbstractPlugin implements PluginInterface
 {
     protected ?PluginInfoInterface $pluginInfo = null;
 
-    /**
-     * @var array<string, mixed>|null
-     */
-    private ?array $config = null;
-
     protected string $pluginBaseName;
     protected string $pluginName;
 
@@ -109,51 +104,6 @@ abstract class AbstractPlugin implements PluginInterface
             return null;
         }
         return $pluginInfoClass;
-    }
-
-    /**
-     * Get the plugin's immutable configuration values
-     *
-     * @return array<string, mixed>
-     */
-    final public function getFullConfiguration(): array
-    {
-        if ($this->config === null) {
-            $this->config = array_merge(
-                // These configuration values are mandatory
-                [
-                    'version' => $this->pluginVersion,
-                    'file' => $this->pluginFile,
-                    'baseName' => $this->pluginBaseName,
-                    'name' => $this->pluginName,
-                ],
-                // These are custom configuration values
-                $this->doGetFullConfiguration()
-            );
-        }
-        return $this->config;
-    }
-
-    /**
-     * Get a plugin's immutable configuration value
-     */
-    final public function getConfig(string $key): mixed
-    {
-        $config = $this->getFullConfiguration();
-        return $config[$key];
-    }
-
-    /**
-     * Get the plugin's immutable configuration values
-     *
-     * @return array<string, mixed>
-     */
-    protected function doGetFullConfiguration(): array
-    {
-        return [
-            'dir' => $this->getPluginDir(),
-            'url' => $this->getPluginURL(),
-        ];
     }
 
     /**

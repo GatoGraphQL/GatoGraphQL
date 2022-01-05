@@ -19,7 +19,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
  *
  * @see https://github.com/leoloso/PoP/blob/bccf2f0/layers/GraphQLAPIForWP/plugins/extension-demo/graphql-api-extension-demo.php#L73-L77
  */
-abstract class AbstractExtension extends AbstractPlugin
+abstract class AbstractExtension extends AbstractPlugin implements ExtensionInterface
 {
     public function __construct(
         string $pluginFile, /** The main plugin file */
