@@ -36,10 +36,12 @@ class App
         ?ComponentManager $componentManager = null,
     ): void {
         self::$appLoader = static::createAppLoader();
-        self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
         self::$containerBuilderFactory = static::createContainerBuilderFactory();
         self::$systemContainerBuilderFactory = static::createSystemContainerBuilderFactory();
         self::$componentManager = static::createComponentManager();
+        
+        // Inject the Components slated for initialization
+        self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
         self::$componentClassesToInitialize = [];
     }
 
