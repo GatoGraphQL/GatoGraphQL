@@ -15,10 +15,10 @@ use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 
 trait ContainerBuilderFactoryTrait
 {
-    protected static ?Container $instance = null;
-    protected static ?bool $cacheContainerConfiguration = null;
-    protected static ?bool $cached = null;
-    protected static ?string $cacheFile = null;
+    protected ?Container $instance = null;
+    protected ?bool $cacheContainerConfiguration = null;
+    protected ?bool $cached = null;
+    protected ?string $cacheFile = null;
 
     /**
      * This functions is to be called by PHPUnit,
@@ -26,12 +26,12 @@ trait ContainerBuilderFactoryTrait
      *
      * Reset the container.
      */
-    public static function reset(): void
+    public function reset(): void
     {
-        static::$instance = null;
-        static::$cacheContainerConfiguration = null;
-        static::$cached = null;
-        static::$cacheFile = null;
+        $this->instance = null;
+        $this->cacheContainerConfiguration = null;
+        $this->cached = null;
+        $this->cacheFile = null;
     }
 
     /**
@@ -42,19 +42,19 @@ trait ContainerBuilderFactoryTrait
      * @param string|null $namespace subdirectory under which to store the cache. If null, it will use a system temp folder
      * @param string|null $directory directory where to store the cache. If null, the default value is used
      */
-    public static function init(
+    public function init(
         ?bool $cacheContainerConfiguration = null,
         ?string $namespace = null,
         ?string $directory = null
     ): void {
-        static::$cacheContainerConfiguration = $cacheContainerConfiguration ?? Environment::cacheContainerConfiguration();
+        $this->cacheContainerConfiguration = $cacheContainerConfiguration ?? Environment::cacheContainerConfiguration();
         $namespace ??= Environment::getCacheContainerConfigurationNamespace();
         $directory ??= Environment::getCacheContainerConfigurationDirectory();
         $throwExceptionIfCacheSetupError = Environment::throwExceptionIfCacheSetupError();
         $cacheSetupSuccess = true;
         $containerClass = $containerNamespace = null;
 
-        if (static::$cacheContainerConfiguration) {
+        if ($this->cacheContainerConfiguration) {
             /**
              * Code copied from Symfony FilesystemAdapter
              * @see https://github.com/symfony/cache/blob/master/Traits/FilesystemCommonTrait.php
@@ -89,8 +89,8 @@ trait ContainerBuilderFactoryTrait
             }
             $directory .= \DIRECTORY_SEPARATOR;
             // Since we have 2 containers, store each under its namespace and classname
-            $containerNamespace = static::getContainerNamespace();
-            $containerClass = static::getContainerClass();
+            $containerNamespace = $this->getContainerNamespace();
+            $containerClass = $this->getContainerClass();
             $directory .= $containerNamespace . \DIRECTORY_SEPARATOR;
             $directory .= $containerClass . \DIRECTORY_SEPARATOR;
             // On Windows the whole path is limited to 258 chars
@@ -107,71 +107,71 @@ trait ContainerBuilderFactoryTrait
             }
         }
 
-        if (static::$cacheContainerConfiguration && $cacheSetupSuccess) {
+        if ($this->cacheContainerConfiguration && $cacheSetupSuccess) {
             // Store the cache under this file
-            static::$cacheFile = $directory . 'container.php';
+            $this->cacheFile = $directory . 'container.php';
 
             // If not caching the container, then it's for development
-            $isDebug = !static::$cacheContainerConfiguration;
-            $containerConfigCache = new ConfigCache(static::$cacheFile, $isDebug);
-            static::$cached = $containerConfigCache->isFresh();
+            $isDebug = !$this->cacheContainerConfiguration;
+            $containerConfigCache = new ConfigCache($this->cacheFile, $isDebug);
+            $this->cached = $containerConfigCache->isFresh();
         } else {
-            static::$cached = false;
-            static::$cacheContainerConfiguration = false;
+            $this->cached = false;
+            $this->cacheContainerConfiguration = false;
         }
 
         // If not cached, then create the new instance
-        if (!static::$cached) {
-            static::$instance = new ContainerBuilder();
+        if (!$this->cached) {
+            $this->instance = new ContainerBuilder();
         } else {
-            require_once static::$cacheFile;
+            require_once $this->cacheFile;
             $containerFullyQuantifiedClass = "\\{$containerNamespace}\\{$containerClass}";
-            static::$instance = new $containerFullyQuantifiedClass();
+            $this->instance = new $containerFullyQuantifiedClass();
         }
     }
-    public static function getInstance(): Container
+    public function getInstance(): Container
     {
-        if (static::$instance === null) {
-            static::throwContainerNotInitializedException();
+        if ($this->instance === null) {
+            $this->throwContainerNotInitializedException();
         }
-        return static::$instance;
+        return $this->instance;
     }
     /**
      * @throws LogicException
      */
-    protected static function throwContainerNotInitializedException(): void
+    protected function throwContainerNotInitializedException(): void
     {
         throw new LogicException('Container has not been initialized');
     }
-    public static function isCached(): bool
+    public function isCached(): bool
     {
-        if (static::$cached === null) {
-            static::throwContainerNotInitializedException();
+        if ($this->cached === null) {
+            $this->throwContainerNotInitializedException();
         }
-        return static::$cached;
+        return $this->cached;
     }
 
-    public static function getContainerNamespace(): string
+    public function getContainerNamespace(): string
     {
         return 'PoPContainer';
     }
 
-    abstract public static function getContainerClass(): string;
+    abstract public function getContainerClass(): string;
 
     /**
      * If the container is not cached, then compile it and cache it
      *
      * @param CompilerPassInterface[] $compilerPasses Compiler Pass objects to register on the container
      */
-    public static function maybeCompileAndCacheContainer(
+    public function maybeCompileAndCacheContainer(
         array $compilerPasses = []
     ): void {
         // Compile Symfony's DependencyInjection Container Builder
         // After compiling, cache it in disk for performance.
         // This happens only the first time the site is accessed on the current server
-        if (!static::$cached) {
+        if (!$this->cached) {
             /** @var ContainerBuilder */
-            $containerBuilder = static::getInstance();
+            $containerBuilder = $this->getInstance();
             // Inject all the compiler passes
             foreach ($compilerPasses as $compilerPass) {
                 $containerBuilder->addCompilerPass($compilerPass);
@@ -180,9 +180,9 @@ trait ContainerBuilderFactoryTrait
             $containerBuilder->compile();
 
             // Cache the container
-            if (static::$cacheContainerConfiguration) {
+            if ($this->cacheContainerConfiguration) {
                 // Create the folder if it doesn't exist, and check it was successful
-                $dir = dirname(static::$cacheFile);
+                $dir = dirname($this->cacheFile);
                 $folderExists = file_exists($dir);
                 if (!$folderExists) {
                     $folderExists = @mkdir($dir, 0777, true);
@@ -191,18 +191,18 @@ trait ContainerBuilderFactoryTrait
                     // Save the container to disk
                     $dumper = new PhpDumper($containerBuilder);
                     file_put_contents(
-                        static::$cacheFile,
+                        $this->cacheFile,
                         $dumper->dump(
                             // Save under own namespace to avoid conflicts
                             [
-                                'namespace' => static::getContainerNamespace(),
-                                'class' => static::getContainerClass(),
+                                'namespace' => $this->getContainerNamespace(),
+                                'class' => $this->getContainerClass(),
                             ]
                         )
                     );
 
                     // Change the permissions so it can be modified by external processes (eg: deployment)
-                    chmod(static::$cacheFile, 0777);
+                    chmod($this->cacheFile, 0777);
                 }
             }
         }
