@@ -6,7 +6,6 @@ namespace PoP\Engine;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Root\AppLoader as RootAppLoader;
-use PoP\Root\Managers\ComponentManager;
 
 class AppLoader extends RootAppLoader
 {
@@ -18,14 +17,14 @@ class AppLoader extends RootAppLoader
     protected function bootApplicationForComponents(): void
     {
         // Boot all the components
-        ComponentManager::beforeBoot();
+        App::getComponentManager()->beforeBoot();
 
         $hooksAPI = HooksAPIFacade::getInstance();
         $hooksAPI->addAction(
             'popcms:boot',
             function (): void {
                 // Boot all the components
-                ComponentManager::boot();
+                App::getComponentManager()->boot();
             },
             5
         );
@@ -34,7 +33,7 @@ class AppLoader extends RootAppLoader
             'popcms:boot',
             function (): void {
                 // Boot all the components
-                ComponentManager::afterBoot();
+                App::getComponentManager()->afterBoot();
             },
             15
         );

@@ -34,7 +34,7 @@ final class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveR
     public function getMaxAge(): ?int
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = \PoP\Root\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getDefaultCacheControlMaxAge();
     }
 }

@@ -48,7 +48,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
         $directiveKind = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_KIND];
         $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         /**
          * There are 3 cases for adding the "Query" type locations:
          * 1. When the type is "Query"

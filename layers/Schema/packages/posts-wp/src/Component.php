@@ -38,7 +38,7 @@ class Component extends AbstractComponent
     ): void {
         $this->initServices(dirname(__DIR__));
         /** @var PostsComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(PostsComponent::class)->getConfiguration();
+        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(PostsComponent::class)->getConfiguration();
         if ($componentConfiguration->addPostTypeToCustomPostUnionTypes()) {
             $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPostTypeToCustomPostUnionTypes/Overrides');
         }

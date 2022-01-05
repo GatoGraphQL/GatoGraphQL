@@ -75,7 +75,7 @@ class VarsHookSet extends AbstractHookSet
 
             // Enable mutations?
             /** @var ComponentConfiguration */
-            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
             $vars['are-mutations-enabled'] = $componentConfiguration->enableMutations();
 
             // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)

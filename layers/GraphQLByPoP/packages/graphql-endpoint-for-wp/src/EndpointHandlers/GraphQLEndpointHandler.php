@@ -44,7 +44,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
     protected function getEndpoint(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getGraphQLAPIEndpoint();
     }
 
@@ -54,10 +54,10 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
     protected function isGraphQLAPIEnabled(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         return
             class_exists(GraphQLAPIComponent::class)
-            && ComponentManager::getComponent(GraphQLAPIComponent::class)->isEnabled()
+            && \PoP\Engine\App::getComponentManager()->getComponent(GraphQLAPIComponent::class)->isEnabled()
             && !$componentConfiguration->isGraphQLAPIEndpointDisabled();
     }
 

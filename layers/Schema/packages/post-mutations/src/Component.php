@@ -49,7 +49,7 @@ class Component extends AbstractComponent
     ): void {
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
-        if (class_exists(APIComponent::class) && ComponentManager::getComponent(APIComponent::class)->isEnabled()) {
+        if (class_exists(APIComponent::class) && \PoP\Engine\App::getComponentManager()->getComponent(APIComponent::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
         }
         if (class_exists(UsersComponent::class)) {

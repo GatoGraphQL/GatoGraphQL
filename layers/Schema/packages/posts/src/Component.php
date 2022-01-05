@@ -51,10 +51,10 @@ class Component extends AbstractComponent
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (class_exists(APIComponent::class) && ComponentManager::getComponent(APIComponent::class)->isEnabled()) {
+        if (class_exists(APIComponent::class) && \PoP\Engine\App::getComponentManager()->getComponent(APIComponent::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
         }
-        if (class_exists(RESTAPIComponent::class) && ComponentManager::getComponent(RESTAPIComponent::class)->isEnabled()) {
+        if (class_exists(RESTAPIComponent::class) && \PoP\Engine\App::getComponentManager()->getComponent(RESTAPIComponent::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/RESTAPI');
         }
 
@@ -64,10 +64,10 @@ class Component extends AbstractComponent
                 $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
                 '/ConditionalOnComponent/Users'
             );
-            if (class_exists(APIComponent::class) && ComponentManager::getComponent(APIComponent::class)->isEnabled()) {
+            if (class_exists(APIComponent::class) && \PoP\Engine\App::getComponentManager()->getComponent(APIComponent::class)->isEnabled()) {
                 $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/Users/ConditionalOnComponent/API');
             }
-            if (class_exists(RESTAPIComponent::class) && ComponentManager::getComponent(RESTAPIComponent::class)->isEnabled()) {
+            if (class_exists(RESTAPIComponent::class) && \PoP\Engine\App::getComponentManager()->getComponent(RESTAPIComponent::class)->isEnabled()) {
                 $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/Users/ConditionalOnComponent/RESTAPI');
             }
         }

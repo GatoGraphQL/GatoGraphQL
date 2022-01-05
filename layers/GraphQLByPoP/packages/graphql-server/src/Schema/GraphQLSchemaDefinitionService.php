@@ -56,7 +56,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     public function getSchemaMutationRootObjectTypeResolver(): ?ObjectTypeResolverInterface
     {
         /** @var APIComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(APIComponent::class)->getConfiguration();
+        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(APIComponent::class)->getConfiguration();
         if (!$componentConfiguration->enableMutations()) {
             return null;
         }

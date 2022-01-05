@@ -36,7 +36,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
          * schema mode is the same required one
          */
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         if (!$componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             return $this->getUpstreamMatchingEntries(
                 $entryList,

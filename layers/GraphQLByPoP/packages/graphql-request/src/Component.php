@@ -44,6 +44,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return ComponentManager::getComponent(GraphQLQueryComponent::class)->isEnabled();
+        return \PoP\Engine\App::getComponentManager()->getComponent(GraphQLQueryComponent::class)->isEnabled();
     }
 }

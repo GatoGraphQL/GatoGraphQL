@@ -31,7 +31,7 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsArrayOfArraysType,
     ): mixed {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = \PoP\Root\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         if (
             is_array($inputValue)
             || !$componentConfiguration->convertInputValueFromSingleToList()

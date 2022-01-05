@@ -44,6 +44,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return ComponentManager::getComponent(APIComponent::class)->isEnabled() && !Environment::disableRESTAPI();
+        return \PoP\Engine\App::getComponentManager()->getComponent(APIComponent::class)->isEnabled() && !Environment::disableRESTAPI();
     }
 }

@@ -60,7 +60,7 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
         /** @var ComponentModelComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
+        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(ComponentModelComponent::class)->getConfiguration();
         if ($useCache = $componentConfiguration->useComponentModelCache()) {
             $useCache = $this->persistentCache !== null;
         }

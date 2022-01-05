@@ -131,7 +131,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
 
         // Exclude the admin enum values, if "Admin" Schema is not enabled
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = \PoP\Root\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         if (!$componentConfiguration->enableAdminSchema()) {
             $adminEnumValues = $this->getConsolidatedAdminEnumValues();
             $consolidatedEnumValues = array_filter(

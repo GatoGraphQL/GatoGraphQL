@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
+use PoP\Root\App;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
@@ -62,7 +63,7 @@ class AppLoader
 
         ContainerBuilderFactory::reset();
         SystemContainerBuilderFactory::reset();
-        ComponentManager::reset();
+        App::getComponentManager()->reset();
     }
 
     /**
@@ -133,7 +134,7 @@ class AppLoader
             $this->initializedComponentClasses[] = $componentClass;
 
             // Initialize and register the Component
-            $component = ComponentManager::register($componentClass);
+            $component = App::getComponentManager()->register($componentClass);
 
             // Initialize all depended-upon PoP components
             $this->addComponentsOrderedForInitialization(
@@ -224,7 +225,7 @@ class AppLoader
          * Application Container services.
          */
         foreach ($this->orderedComponentClasses as $componentClass) {
-            $component = ComponentManager::getComponent($componentClass);
+            $component = App::getComponentManager()->getComponent($componentClass);
             $component->initializeSystem();
         }
         $systemCompilerPasses = array_map(
@@ -243,7 +244,7 @@ class AppLoader
      */
     protected function configureComponents(): void
     {
-        ComponentManager::configureComponents();
+        App::getComponentManager()->configureComponents();
     }
 
     /**
@@ -252,7 +253,7 @@ class AppLoader
      */
     protected function bootSystemForComponents(): void
     {
-        ComponentManager::bootSystem();
+        App::getComponentManager()->bootSystem();
     }
 
     /**
@@ -263,7 +264,7 @@ class AppLoader
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
         foreach ($this->orderedComponentClasses as $componentClass) {
-            $component = ComponentManager::getComponent($componentClass);
+            $component = App::getComponentManager()->getComponent($componentClass);
             $compilerPassClasses = [
                 ...$compilerPassClasses,
                 ...$component->getSystemContainerCompilerPassClasses()
@@ -293,7 +294,7 @@ class AppLoader
          * Hence this is executed from bottom to top
          */
         foreach (array_reverse($this->orderedComponentClasses) as $componentClass) {
-            $component = ComponentManager::getComponent($componentClass);
+            $component = App::getComponentManager()->getComponent($componentClass);
             $component->customizeComponentClassConfiguration($this->componentClassConfiguration);
         }
 
@@ -311,7 +312,7 @@ class AppLoader
          */
         foreach ($this->orderedComponentClasses as $componentClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
-            $component = ComponentManager::getComponent($componentClass);
+            $component = App::getComponentManager()->getComponent($componentClass);
             $componentConfiguration = $this->componentClassConfiguration[$componentClass] ?? [];
             $skipSchemaForComponent = in_array($componentClass, $this->skipSchemaComponentClasses);
             $component->initialize(
@@ -337,8 +338,8 @@ class AppLoader
      */
     protected function bootApplicationForComponents(): void
     {
-        ComponentManager::beforeBoot();
-        ComponentManager::boot();
-        ComponentManager::afterBoot();
+        App::getComponentManager()->beforeBoot();
+        App::getComponentManager()->boot();
+        App::getComponentManager()->afterBoot();
     }
 }

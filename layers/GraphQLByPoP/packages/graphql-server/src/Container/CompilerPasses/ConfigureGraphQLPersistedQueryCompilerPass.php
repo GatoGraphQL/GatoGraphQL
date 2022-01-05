@@ -17,7 +17,7 @@ class ConfigureGraphQLPersistedQueryCompilerPass extends AbstractCompilerPass
     protected function enabled(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->addGraphQLIntrospectionPersistedQuery();
     }
 

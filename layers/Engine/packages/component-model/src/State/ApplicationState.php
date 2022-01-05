@@ -162,7 +162,7 @@ class ApplicationState
         $variables = $fieldQueryInterpreter->getVariablesFromRequest();
 
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = \PoP\Root\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         self::$vars = array(
             'nature' => $nature,
             'route' => $route,

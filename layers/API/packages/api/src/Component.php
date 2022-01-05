@@ -79,7 +79,7 @@ class Component extends AbstractComponent
             }
 
             /** @var AccessControlComponentConfiguration */
-            $componentConfiguration = ComponentManager::getComponent(AccessControlComponent::class)->getConfiguration();
+            $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(AccessControlComponent::class)->getConfiguration();
             if (
                 class_exists(CacheControlComponent::class)
                 && class_exists(AccessControlComponent::class)

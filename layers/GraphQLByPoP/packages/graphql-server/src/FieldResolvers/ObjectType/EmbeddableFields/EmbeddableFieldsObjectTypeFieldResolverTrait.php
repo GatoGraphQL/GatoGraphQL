@@ -19,7 +19,7 @@ trait EmbeddableFieldsObjectTypeFieldResolverTrait
     public function isServiceEnabled(): bool
     {
         /** @var APIComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(APIComponent::class)->getConfiguration();
+        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(APIComponent::class)->getConfiguration();
         return $componentConfiguration->enableEmbeddableFields();
     }
 }
