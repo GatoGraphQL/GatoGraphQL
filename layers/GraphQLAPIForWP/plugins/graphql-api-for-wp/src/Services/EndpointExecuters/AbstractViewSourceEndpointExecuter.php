@@ -45,7 +45,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractEndpointExecut
     protected function getGraphQLQuerySourceContent(string $content, WP_Post $graphQLQueryPost): string
     {
         // $scriptSrc = 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js'
-        $mainPluginURL = (string) App::getMainPluginManager()->getConfig('url');
+        $mainPluginURL = App::getMainPlugin()->getPluginURL();
         $scriptSrc = $mainPluginURL . 'assets/js/vendors/code-prettify/run_prettify.js';
         /**
          * Prettyprint the code

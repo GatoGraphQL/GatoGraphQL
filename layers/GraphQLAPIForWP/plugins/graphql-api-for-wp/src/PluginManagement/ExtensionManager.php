@@ -6,33 +6,49 @@ namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
 use GraphQLAPI\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtension;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
+use LogicException;
 
 class ExtensionManager extends AbstractPluginManager
 {
     /**
      * Have the extensions organized by their class
      *
-     * @var array<string, AbstractExtension>
+     * @var array<string, ExtensionInterface>
      */
     private array $extensionClassInstances = [];
 
     /**
      * Have the extensions organized by their baseName
      *
-     * @var array<string, AbstractExtension>
+     * @var array<string, ExtensionInterface>
      */
     private array $extensionBaseNameInstances = [];
 
     /**
-     * @return array<string, AbstractExtension>
+     * Extensions, organized under their name.
+     *
+     * @return array<string, ExtensionInterface>
      */
     public function getExtensions(): array
     {
         return $this->extensionBaseNameInstances;
     }
 
-    public function register(AbstractExtension $extension): AbstractExtension
+    public function getExtension(string $extensionClass): ExtensionInterface
+    {
+        if (!isset($this->extensionClassInstances[$extensionClass])) {
+            throw new LogicException(
+                sprintf(
+                    \__('The extension with class \'%s\' has not been registered yet', 'graphql-api'),
+                    $extensionClass
+                )
+            );
+        }
+        return $this->extensionClassInstances[$extensionClass];
+    }
+
+    public function register(ExtensionInterface $extension): ExtensionInterface
     {
         $extensionClass = get_class($extension);
         $this->extensionClassInstances[$extensionClass] = $extension;
@@ -64,8 +80,8 @@ class ExtensionManager extends AbstractPluginManager
             $this->printAdminNoticeErrorMessage(
                 sprintf(
                     __('Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
-                    $extensionName ?? $this->extensionClassInstances[$extensionClass]->getConfig('name'),
-                    $this->extensionClassInstances[$extensionClass]->getConfig('version'),
+                    $extensionName ?? $this->extensionClassInstances[$extensionClass]->getPluginName(),
+                    $this->extensionClassInstances[$extensionClass]->getPluginVersion(),
                     $extensionVersion,
                 )
             );
@@ -75,7 +91,7 @@ class ExtensionManager extends AbstractPluginManager
         // Validate that the required version of the GraphQL API for WP plugin is installed
         if (
             $mainPluginVersionConstraint !== null && !SemverWrapper::satisfies(
-                App::getMainPluginManager()->getConfig('version'),
+                App::getMainPluginManager()->getPlugin()->getPluginVersion(),
                 $mainPluginVersionConstraint
             )
         ) {
@@ -83,34 +99,14 @@ class ExtensionManager extends AbstractPluginManager
                 sprintf(
                     __('Extension <strong>%s</strong> requires plugin <strong>%s</strong> to satisfy version constraint <code>%s</code>, but the current version <code>%s</code> does not. The extension has not been loaded.', 'graphql-api'),
                     $extensionName ?? $extensionClass,
-                    App::getMainPluginManager()->getConfig('name'),
+                    App::getMainPluginManager()->getPlugin()->getPluginName(),
                     $mainPluginVersionConstraint,
-                    App::getMainPluginManager()->getConfig('version'),
+                    App::getMainPluginManager()->getPlugin()->getPluginVersion(),
                 )
             );
             return false;
         }
 
         return true;
-    }
-
-    /**
-     * Get the configuration for an extension
-     *
-     * @return array<string, mixed>
-     */
-    protected function getFullConfiguration(string $extensionClass): array
-    {
-        $extensionInstance = $this->extensionClassInstances[$extensionClass];
-        return $extensionInstance->getFullConfiguration();
-    }
-
-    /**
-     * Get a configuration value for an extension
-     */
-    public function getConfig(string $extensionClass, string $key): mixed
-    {
-        $extensionConfig = $this->getFullConfiguration($extensionClass);
-        return $extensionConfig[$key];
     }
 }

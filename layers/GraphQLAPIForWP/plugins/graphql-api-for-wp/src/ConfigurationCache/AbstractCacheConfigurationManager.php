@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInfoInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\BasicService\BasicServiceTrait;
@@ -49,7 +50,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
      */
     public function getNamespace(): string
     {
-        $mainPluginVersion = (string) App::getMainPluginManager()->getConfig('version');
+        $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
         // (Needed for development) Don't share cache among plugin versions
         $timestamp = '_v' . $mainPluginVersion;
         // The timestamp from when last saving settings/modules to the DB
@@ -74,7 +75,9 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
      */
     public function getDirectory(): ?string
     {
-        $mainPluginCacheDir = (string) App::getMainPluginManager()->getConfig('cache-dir');
+        /** @var MainPluginInfoInterface */
+        $mainPluginInfo = App::getMainPlugin()->getInfo();
+        $mainPluginCacheDir = $mainPluginInfo->getCacheDir();
         return $mainPluginCacheDir . \DIRECTORY_SEPARATOR . $this->getDirectoryName();
     }
 

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
-use Exception;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
+use LogicException;
 
 class MainPluginManager extends AbstractPluginManager
 {
-    private ?AbstractMainPlugin $mainPlugin = null;
+    private ?MainPluginInterface $mainPlugin = null;
 
-    public function register(AbstractMainPlugin $mainPlugin): AbstractMainPlugin
+    public function register(MainPluginInterface $mainPlugin): MainPluginInterface
     {
         $this->mainPlugin = $mainPlugin;
         return $mainPlugin;
@@ -28,8 +28,8 @@ class MainPluginManager extends AbstractPluginManager
             $this->printAdminNoticeErrorMessage(
                 sprintf(
                     __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
-                    $this->mainPlugin->getConfig('name'),
-                    $this->mainPlugin->getConfig('version'),
+                    $this->mainPlugin->getPluginName(),
+                    $this->mainPlugin->getPluginVersion(),
                     $pluginVersion,
                 )
             );
@@ -39,27 +39,13 @@ class MainPluginManager extends AbstractPluginManager
         return true;
     }
 
-    /**
-     * Get the configuration for the main plugin
-     *
-     * @return array<string, mixed>
-     */
-    protected function getFullConfiguration(): array
+    public function getPlugin(): MainPluginInterface
     {
         if ($this->mainPlugin === null) {
-            throw new Exception(
+            throw new LogicException(
                 __('The main plugin has not been registered yet', 'graphql-api')
             );
         }
-        return $this->mainPlugin->getFullConfiguration();
-    }
-
-    /**
-     * Get a configuration value for the main plugin
-     */
-    public function getConfig(string $key): mixed
-    {
-        $mainPluginConfig = $this->getFullConfiguration();
-        return $mainPluginConfig[$key];
+        return $this->mainPlugin;
     }
 }

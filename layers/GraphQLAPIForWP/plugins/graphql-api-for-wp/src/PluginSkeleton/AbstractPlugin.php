@@ -9,12 +9,9 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 
-abstract class AbstractPlugin
+abstract class AbstractPlugin implements PluginInterface
 {
-    /**
-     * @var array<string, mixed>|null
-     */
-    private ?array $config = null;
+    protected ?PluginInfoInterface $pluginInfo = null;
 
     protected string $pluginBaseName;
     protected string $pluginName;
@@ -26,6 +23,9 @@ abstract class AbstractPlugin
     ) {
         $this->pluginBaseName = \plugin_basename($pluginFile);
         $this->pluginName = $pluginName ?? $this->pluginBaseName;
+
+        // Have the Plugin set its own info on the corresponding PluginInfo
+        $this->initializeInfo();
     }
 
     /**
@@ -61,49 +61,55 @@ abstract class AbstractPlugin
     }
 
     /**
-     * Get the plugin's immutable configuration values
-     *
-     * @return array<string, mixed>
+     * Plugin dir
      */
-    final public function getFullConfiguration(): array
+    public function getPluginDir(): string
     {
-        if ($this->config === null) {
-            $this->config = array_merge(
-                // These configuration values are mandatory
-                [
-                    'version' => $this->pluginVersion,
-                    'file' => $this->pluginFile,
-                    'baseName' => $this->pluginBaseName,
-                    'name' => $this->pluginName,
-                ],
-                // These are custom configuration values
-                $this->doGetFullConfiguration()
-            );
+        return \dirname($this->pluginFile);
+    }
+
+    /**
+     * Plugin URL
+     */
+    public function getPluginURL(): string
+    {
+        return \plugin_dir_url($this->pluginFile);
+    }
+
+    /**
+     * PluginInfo class for the Plugin
+     */
+    public function getInfo(): ?PluginInfoInterface
+    {
+        return $this->pluginInfo;
+    }
+
+    protected function initializeInfo(): void
+    {
+        $pluginInfoClass = $this->getPluginInfoClass();
+        if ($pluginInfoClass === null) {
+            return;
         }
-        return $this->config;
+        $this->pluginInfo = new $pluginInfoClass($this);
     }
 
     /**
-     * Get a plugin's immutable configuration value
+     * PluginInfo class for the Plugin
      */
-    final public function getConfig(string $key): mixed
+    protected function getPluginInfoClass(): ?string
     {
-        $config = $this->getFullConfiguration();
-        return $config[$key];
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        $pluginInfoClass = $classNamespace . '\\' . $this->getPluginInfoClassName();
+        if (!class_exists($pluginInfoClass)) {
+            return null;
+        }
+        return $pluginInfoClass;
     }
 
     /**
-     * Get the plugin's immutable configuration values
-     *
-     * @return array<string, mixed>
+     * PluginInfo class name for the Plugin
      */
-    protected function doGetFullConfiguration(): array
-    {
-        return [
-            'dir' => dirname($this->pluginFile),
-            'url' => plugin_dir_url($this->pluginFile),
-        ];
-    }
+    abstract protected function getPluginInfoClassName(): ?string;
 
     /**
      * Plugin's initialization
@@ -311,14 +317,14 @@ abstract class AbstractPlugin
     /**
      * Execute logic after the plugin/extension has just been activated
      */
-    protected function pluginJustActivated(): void
+    public function pluginJustActivated(): void
     {
     }
 
     /**
      * Execute logic after the plugin/extension has just been updated
      */
-    protected function pluginJustUpdated(string $storedVersion): void
+    public function pluginJustUpdated(string $storedVersion): void
     {
     }
 }

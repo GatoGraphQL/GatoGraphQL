@@ -6,6 +6,8 @@ namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
 use PoP\Root\AppInterface as UpstreamAppInterface;
 
 interface AppInterface extends UpstreamAppInterface
@@ -16,4 +18,14 @@ interface AppInterface extends UpstreamAppInterface
 
     public static function getMainPluginManager(): MainPluginManager;
     public static function getExtensionManager(): ExtensionManager;
+
+    /**
+     * Shortcut function.
+     */
+    public static function getMainPlugin(): MainPluginInterface;
+
+    /**
+     * Shortcut function.
+     */
+    public static function getExtension(string $extensionClass): ExtensionInterface;
 }
