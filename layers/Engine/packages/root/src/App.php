@@ -104,7 +104,7 @@ class App
     /**
      * @throws LogicException
      */
-    public function getComponent(string $componentClass): ComponentInterface
+    public static function getComponent(string $componentClass): ComponentInterface
     {
         return self::getComponentManager()->getComponent($componentClass);
     }
