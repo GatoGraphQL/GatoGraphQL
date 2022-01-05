@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Facades;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 
 class PersistedFragmentManagerFacade

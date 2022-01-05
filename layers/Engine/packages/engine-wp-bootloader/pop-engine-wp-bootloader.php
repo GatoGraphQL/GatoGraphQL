@@ -7,7 +7,7 @@ Plugin URI: https://github.com/getpop/engine-wp-bootloader/
 Author: Leonardo Losoviz
 */
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\Engine\AppLoader;
 
 if (!class_exists(App::class)) {

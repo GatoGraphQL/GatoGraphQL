@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMeta\Facades;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoPSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
 
 class UserMetaTypeAPIFacade

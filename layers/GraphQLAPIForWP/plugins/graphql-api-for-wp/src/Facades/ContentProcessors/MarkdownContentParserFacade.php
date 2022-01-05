@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Facades\ContentProcessors;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 
 class MarkdownContentParserFacade

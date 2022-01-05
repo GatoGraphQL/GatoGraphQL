@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Facades\Schema;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\API\Schema\SchemaDefinitionServiceInterface;
 
 class SchemaDefinitionServiceFacade

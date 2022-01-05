@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Facades\Engine;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\ComponentModel\Engine\EngineInterface as UpstreamEngineInterface;
 use PoP\Engine\Engine\EngineInterface;
 

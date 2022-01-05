@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\Facades;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 
 class CustomPostTypeMutationAPIFacade

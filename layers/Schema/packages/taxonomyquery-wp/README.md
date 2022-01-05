@@ -28,7 +28,7 @@ The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP),
 Initialize the component:
 
 ``` php
-\PoP\Engine\App::stockAndInitializeComponentClasses([([
+\PoP\Root\App::stockAndInitializeComponentClasses([([
     \PoPSchema\TaxonomyQueryWP\Component::class,
 ]);
 ```

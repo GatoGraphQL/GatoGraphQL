@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\Facades;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 
 class CommentTypeAPIFacade

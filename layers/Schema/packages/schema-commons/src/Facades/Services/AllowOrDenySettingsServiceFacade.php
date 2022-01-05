@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\Facades\Services;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
 class AllowOrDenySettingsServiceFacade

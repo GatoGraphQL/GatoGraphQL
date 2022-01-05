@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\Facades\RuntimeRegistries;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 
 class UserAvatarRuntimeRegistryFacade

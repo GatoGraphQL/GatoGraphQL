@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\GenericCustomPosts\FilterInputProcessors;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 use PoPSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPSchema\GenericCustomPosts\Component;

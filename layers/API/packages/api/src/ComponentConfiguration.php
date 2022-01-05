@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;

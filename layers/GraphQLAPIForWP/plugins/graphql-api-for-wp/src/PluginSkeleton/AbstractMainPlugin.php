@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\Engine\AppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use RuntimeException;
