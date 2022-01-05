@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Routing\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\App;
 use PoP\Routing\RoutingManagerInterface;
 
 class RoutingManagerFacade
@@ -14,7 +14,7 @@ class RoutingManagerFacade
         /**
          * @var RoutingManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(RoutingManagerInterface::class);
+        $service = App::getContainer()->get(RoutingManagerInterface::class);
         return $service;
     }
 }

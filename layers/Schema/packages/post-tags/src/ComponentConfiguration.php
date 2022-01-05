@@ -8,59 +8,49 @@ use PoP\BasicService\Component\AbstractComponentConfiguration;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    // private ?int $getPostTagListDefaultLimit = 10;
-    // private ?int $getPostTagListMaxLimit = -1;
-    private string $getPostTagsRoute = '';
-
     // public function getPostTagListDefaultLimit(): ?int
     // {
     //     // Define properties
     //     $envVariable = Environment::POSTTAG_LIST_DEFAULT_LIMIT;
-    //     $selfProperty = &$this->getPostTagListDefaultLimit;
     //     $defaultValue = 10;
     //     $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
     //     // Initialize property from the environment/hook
     //     $this->maybeInitializeConfigurationValue(
     //         $envVariable,
-    //         $selfProperty,
     //         $defaultValue,
     //         $callback
     //     );
-    //     return $selfProperty;
+    //     return $this->configuration[$envVariable];
     // }
 
     // public function getPostTagListMaxLimit(): ?int
     // {
     //     // Define properties
     //     $envVariable = Environment::POSTTAG_LIST_MAX_LIMIT;
-    //     $selfProperty = &$this->getPostTagListMaxLimit;
     //     $defaultValue = -1; // Unlimited
     //     $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
     //     // Initialize property from the environment/hook
     //     $this->maybeInitializeConfigurationValue(
     //         $envVariable,
-    //         $selfProperty,
     //         $defaultValue,
     //         $callback
     //     );
-    //     return $selfProperty;
+    //     return $this->configuration[$envVariable];
     // }
 
     public function getPostTagsRoute(): string
     {
         // Define properties
         $envVariable = Environment::POSTTAGS_ROUTE;
-        $selfProperty = &$this->getPostTagsRoute;
         $defaultValue = 'tags';
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Cache;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\App;
 use Psr\Cache\CacheItemPoolInterface;
 
 class TransientCacheManagerItemPoolFacade
@@ -14,7 +14,7 @@ class TransientCacheManagerItemPoolFacade
         /**
          * @var CacheItemPoolInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get('transient_cache_item_pool');
+        $service = App::getContainer()->get('transient_cache_item_pool');
         return $service;
     }
 }

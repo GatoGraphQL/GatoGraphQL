@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\TypeResolvers\InputObjectType;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Comments\Component;
@@ -81,7 +81,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     protected function treatCommentStatusAsAdminData(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->treatCommentStatusAsAdminData();
     }
 

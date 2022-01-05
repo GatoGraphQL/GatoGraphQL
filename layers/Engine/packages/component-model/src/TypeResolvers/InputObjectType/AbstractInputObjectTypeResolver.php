@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Error\Error;
@@ -93,7 +93,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         // Exclude the admin input fields, if "Admin" Schema is not enabled
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if (!$componentConfiguration->enableAdminSchema()) {
             $adminInputFieldNames = $this->getConsolidatedAdminInputFieldNames();
             $consolidatedInputFieldNameTypeResolvers = array_filter(
@@ -502,7 +502,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     public function skipExposingInputFieldInSchema(string $inputFieldName): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             /**
              * If `DangerouslyDynamic` is disabled, do not expose the input field if:

@@ -2,8 +2,7 @@
 
 namespace PoP\Engine;
 
-use PoP\Engine\AbstractTestCase;
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 
 class ComponentTest extends AbstractTestCase
 {
@@ -13,7 +12,7 @@ class ComponentTest extends AbstractTestCase
     public function testHasDependedComponentClasses(): void
     {
         $this->assertNotEmpty(
-            ComponentManager::getComponent(Component::class)->getDependedComponentClasses()
+            App::getComponent(Component::class)->getDependedComponentClasses()
         );
     }
 }

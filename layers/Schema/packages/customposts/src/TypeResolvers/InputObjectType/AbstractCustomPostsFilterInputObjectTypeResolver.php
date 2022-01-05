@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPosts\Component;
@@ -69,7 +69,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     protected function treatCustomPostStatusAsAdminData(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->treatCustomPostStatusAsAdminData();
     }
 

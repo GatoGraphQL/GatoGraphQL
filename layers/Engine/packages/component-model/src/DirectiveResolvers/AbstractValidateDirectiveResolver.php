@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Directives\DirectiveKinds;
@@ -92,7 +92,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $succeedingPipelineIDsDataFields
             );
             /** @var ComponentConfiguration */
-            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
             if ($componentConfiguration->setFailingFieldResponseAsNull()) {
                 $this->setIDsDataFieldsAsNull(
                     $relationalTypeResolver,

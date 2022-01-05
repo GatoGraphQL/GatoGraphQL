@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Component;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
@@ -62,7 +62,7 @@ abstract class AbstractControlBlock extends AbstractBlock
         $className = $this->getBlockClassName() . '-front';
         $fieldTypeContent = $directiveContent = '';
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if (!$this->disableFields()) {
             $fieldTypeContent = $componentConfiguration->getEmptyLabel();
             $typeFields = $attributes[self::ATTRIBUTE_NAME_TYPE_FIELDS] ?? [];

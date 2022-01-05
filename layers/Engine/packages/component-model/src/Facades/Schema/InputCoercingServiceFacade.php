@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Schema;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class InputCoercingServiceFacade
 {
@@ -14,7 +14,7 @@ class InputCoercingServiceFacade
         /**
          * @var InputCoercingServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(InputCoercingServiceInterface::class);
+        $service = App::getContainer()->get(InputCoercingServiceInterface::class);
         return $service;
     }
 }

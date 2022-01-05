@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Query;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
-use PoP\GraphQLParser\Query\ClientSymbols;
 
 class QueryAugmenterService implements QueryAugmenterServiceInterface
 {
@@ -17,7 +16,7 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
     public function isExecutingAllOperations(string $operationName): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->enableMultipleQueryExecution()
             && strtoupper($operationName) === ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME;
     }

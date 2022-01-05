@@ -9,42 +9,35 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $treatUserRoleAsAdminData = true;
-    private bool $treatUserCapabilityAsAdminData = true;
-
     public function treatUserRoleAsAdminData(): bool
     {
         // Define properties
         $envVariable = Environment::TREAT_USER_ROLE_AS_ADMIN_DATA;
-        $selfProperty = &$this->treatUserRoleAsAdminData;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function treatUserCapabilityAsAdminData(): bool
     {
         // Define properties
         $envVariable = Environment::TREAT_USER_CAPABILITY_AS_ADMIN_DATA;
-        $selfProperty = &$this->treatUserCapabilityAsAdminData;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }

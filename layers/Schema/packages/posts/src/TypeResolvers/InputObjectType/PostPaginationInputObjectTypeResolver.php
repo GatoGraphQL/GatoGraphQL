@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\TypeResolvers\InputObjectType;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostPaginationInputObjectTypeResolver;
 use PoPSchema\Posts\Component;
 use PoPSchema\Posts\ComponentConfiguration;
@@ -24,14 +24,14 @@ class PostPaginationInputObjectTypeResolver extends CustomPostPaginationInputObj
     protected function getDefaultLimit(): ?int
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getPostListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getPostListMaxLimit();
     }
 }

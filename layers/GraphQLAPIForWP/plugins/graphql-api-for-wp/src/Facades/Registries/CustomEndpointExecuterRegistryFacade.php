@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
 
+use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Registries\CustomEndpointExecuterRegistryInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class CustomEndpointExecuterRegistryFacade
 {
@@ -14,7 +14,7 @@ class CustomEndpointExecuterRegistryFacade
         /**
          * @var CustomEndpointExecuterRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CustomEndpointExecuterRegistryInterface::class);
+        $service = App::getContainer()->get(CustomEndpointExecuterRegistryInterface::class);
         return $service;
     }
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest\Facades;
 
+use PoP\Root\App;
 use GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class GraphQLPersistedQueryManagerFacade
 {
@@ -14,7 +14,7 @@ class GraphQLPersistedQueryManagerFacade
         /**
          * @var GraphQLPersistedQueryManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(GraphQLPersistedQueryManagerInterface::class);
+        $service = App::getContainer()->get(GraphQLPersistedQueryManagerInterface::class);
         return $service;
     }
 }

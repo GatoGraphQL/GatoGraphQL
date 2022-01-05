@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\Facades\RuntimeRegistries;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\App;
 use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 
 class UserAvatarRuntimeRegistryFacade
@@ -14,7 +14,7 @@ class UserAvatarRuntimeRegistryFacade
         /**
          * @var UserAvatarRuntimeRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserAvatarRuntimeRegistryInterface::class);
+        $service = App::getContainer()->get(UserAvatarRuntimeRegistryInterface::class);
         return $service;
     }
 }

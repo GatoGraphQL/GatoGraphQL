@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\GenericCustomPosts\RelationalTypeDataLoaders\ObjectType;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostTypeDataLoader;
 use PoPSchema\GenericCustomPosts\Component;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
@@ -17,7 +17,7 @@ class GenericCustomPostTypeDataLoader extends AbstractCustomPostTypeDataLoader
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return array_merge(
             parent::getQueryToRetrieveObjectsForIDs($ids),
             [

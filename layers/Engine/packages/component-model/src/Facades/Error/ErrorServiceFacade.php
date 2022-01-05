@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Error;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Error\ErrorServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class ErrorServiceFacade
 {
@@ -14,7 +14,7 @@ class ErrorServiceFacade
         /**
          * @var ErrorServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(ErrorServiceInterface::class);
+        $service = App::getContainer()->get(ErrorServiceInterface::class);
         return $service;
     }
 }

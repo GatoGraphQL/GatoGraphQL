@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
+use GraphQLAPI\GraphQLAPI\App;
 
 /**
  * Menu page that opens in modal window
@@ -16,8 +16,8 @@ trait OpenInModalMenuPageTrait
      */
     protected function enqueueModalAssets(): void
     {
-        $mainPluginURL = (string) MainPluginManager::getConfig('url');
-        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
+        $mainPluginURL = (string) App::getMainPluginManager()->getConfig('url');
+        $mainPluginVersion = (string) App::getMainPluginManager()->getConfig('version');
 
         /**
          * Hide the menus

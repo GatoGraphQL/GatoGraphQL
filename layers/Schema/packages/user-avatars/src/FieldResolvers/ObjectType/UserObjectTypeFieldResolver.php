@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\FieldResolvers\ObjectType;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -100,7 +100,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return match ([$fieldName => $fieldArgName]) {
             ['avatar' => 'size'] => $componentConfiguration->getUserAvatarDefaultSize(),
             default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
@@ -124,7 +124,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $user = $object;
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         switch ($fieldName) {
             case 'avatar':
                 // Create the avatar, and store it in the dynamic registry

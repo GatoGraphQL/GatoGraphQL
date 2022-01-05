@@ -10,40 +10,36 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private array $getTaxonomyMetaEntries = [];
-    private string $getTaxonomyMetaBehavior = Behaviors::ALLOWLIST;
-
+    /**
+     * @return string[]
+     */
     public function getTaxonomyMetaEntries(): array
     {
         // Define properties
         $envVariable = Environment::TAXONOMY_META_ENTRIES;
-        $selfProperty = &$this->getTaxonomyMetaEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function getTaxonomyMetaBehavior(): string
     {
         // Define properties
         $envVariable = Environment::TAXONOMY_META_BEHAVIOR;
-        $selfProperty = &$this->getTaxonomyMetaBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }

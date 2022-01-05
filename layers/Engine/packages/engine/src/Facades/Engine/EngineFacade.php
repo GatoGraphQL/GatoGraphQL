@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Facades\Engine;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Engine\EngineInterface as UpstreamEngineInterface;
 use PoP\Engine\Engine\EngineInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class EngineFacade
 {
@@ -15,7 +15,7 @@ class EngineFacade
         /**
          * @var EngineInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UpstreamEngineInterface::class);
+        $service = App::getContainer()->get(UpstreamEngineInterface::class);
         return $service;
     }
 }

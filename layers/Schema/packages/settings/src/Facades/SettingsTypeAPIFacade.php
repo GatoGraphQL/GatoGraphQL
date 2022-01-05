@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\App;
 use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
 class SettingsTypeAPIFacade
@@ -14,7 +14,7 @@ class SettingsTypeAPIFacade
         /**
          * @var SettingsTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(SettingsTypeAPIInterface::class);
+        $service = App::getContainer()->get(SettingsTypeAPIInterface::class);
         return $service;
     }
 }

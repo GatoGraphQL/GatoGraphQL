@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Facades\CMS;
 
+use PoP\Root\App;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class CMSServiceFacade
 {
@@ -14,7 +14,7 @@ class CMSServiceFacade
         /**
          * @var CMSServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CMSServiceInterface::class);
+        $service = App::getContainer()->get(CMSServiceInterface::class);
         return $service;
     }
 }

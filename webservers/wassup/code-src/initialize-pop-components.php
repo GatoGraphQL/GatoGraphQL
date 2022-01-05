@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-use PoP\Engine\AppLoader;
+use PoP\Root\App;
 
-// Set the Component configuration
-AppLoader::addComponentClassesToInitialize([
+App::stockAndInitializeComponentClasses([
     \PoPSitesWassup\Wassup\Component::class,
 ]);
 

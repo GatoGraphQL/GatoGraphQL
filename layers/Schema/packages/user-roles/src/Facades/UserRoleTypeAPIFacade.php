@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\App;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 
 class UserRoleTypeAPIFacade
@@ -14,7 +14,7 @@ class UserRoleTypeAPIFacade
         /**
          * @var UserRoleTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserRoleTypeAPIInterface::class);
+        $service = App::getContainer()->get(UserRoleTypeAPIInterface::class);
         return $service;
     }
 }

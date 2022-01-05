@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
-use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
 class Document

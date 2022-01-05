@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Root\Facades\Instances;
 
+use PoP\Root\App;
 use PoP\Root\Instances\InstanceManagerInterface;
-use PoP\Root\Container\SystemContainerBuilderFactory;
 
 class SystemInstanceManagerFacade
 {
@@ -14,7 +14,7 @@ class SystemInstanceManagerFacade
         /**
          * @var InstanceManagerInterface
          */
-        $service = SystemContainerBuilderFactory::getInstance()->get(InstanceManagerInterface::class);
+        $service = App::getSystemContainer()->get(InstanceManagerInterface::class);
         return $service;
     }
 }

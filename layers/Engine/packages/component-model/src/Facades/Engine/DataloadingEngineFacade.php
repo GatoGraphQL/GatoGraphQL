@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Engine;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class DataloadingEngineFacade
 {
@@ -14,7 +14,7 @@ class DataloadingEngineFacade
         /**
          * @var DataloadingEngineInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(DataloadingEngineInterface::class);
+        $service = App::getContainer()->get(DataloadingEngineInterface::class);
         return $service;
     }
 }

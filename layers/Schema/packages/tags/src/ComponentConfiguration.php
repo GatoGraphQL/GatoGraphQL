@@ -9,42 +9,35 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private ?int $getTagListDefaultLimit = 10;
-    private ?int $getTagListMaxLimit = -1;
-
     public function getTagListDefaultLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::TAG_LIST_DEFAULT_LIMIT;
-        $selfProperty = &$this->getTagListDefaultLimit;
         $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function getTagListMaxLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::TAG_LIST_MAX_LIMIT;
-        $selfProperty = &$this->getTagListMaxLimit;
         $defaultValue = -1; // Unlimited
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }

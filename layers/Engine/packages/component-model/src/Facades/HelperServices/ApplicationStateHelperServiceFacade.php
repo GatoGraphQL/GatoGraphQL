@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\HelperServices;
 
+use PoP\Root\App;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class ApplicationStateHelperServiceFacade
 {
@@ -14,7 +14,7 @@ class ApplicationStateHelperServiceFacade
         /**
          * @var ApplicationStateHelperServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(ApplicationStateHelperServiceInterface::class);
+        $service = App::getContainer()->get(ApplicationStateHelperServiceInterface::class);
         return $service;
     }
 }

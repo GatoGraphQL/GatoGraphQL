@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Facades\Engine;
 
+use PoP\Root\App;
 use PoP\ConfigurationComponentModel\Engine\EngineInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class EngineFacade
 {
@@ -14,7 +14,7 @@ class EngineFacade
         /**
          * @var EngineInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(EngineInterface::class);
+        $service = App::getContainer()->get(EngineInterface::class);
         return $service;
     }
 }

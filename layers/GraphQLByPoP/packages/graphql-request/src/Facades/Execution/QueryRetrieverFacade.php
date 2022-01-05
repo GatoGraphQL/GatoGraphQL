@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest\Facades\Execution;
 
+use PoP\Root\App;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class QueryRetrieverFacade
 {
@@ -14,7 +14,7 @@ class QueryRetrieverFacade
         /**
          * @var QueryRetrieverInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(QueryRetrieverInterface::class);
+        $service = App::getContainer()->get(QueryRetrieverInterface::class);
         return $service;
     }
 }

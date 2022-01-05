@@ -13,17 +13,29 @@ class CodeQualityContainerConfigurationService extends AbstractCodeQualityContai
     {
         return [
             $this->rootDirectory . '/layers/API/packages/*/src/*',
+            $this->rootDirectory . '/layers/API/packages/*/tests/*',
             $this->rootDirectory . '/layers/Engine/packages/*/src/*',
+            $this->rootDirectory . '/layers/Engine/packages/*/tests/*',
             $this->rootDirectory . '/layers/GraphQLAPIForWP/packages/*/src/*',
+            $this->rootDirectory . '/layers/GraphQLAPIForWP/packages/*/tests/*',
             $this->rootDirectory . '/layers/GraphQLAPIForWP/plugins/*/src/*',
+            $this->rootDirectory . '/layers/GraphQLAPIForWP/plugins/*/tests/*',
             $this->rootDirectory . '/layers/GraphQLByPoP/packages/*/src/*',
+            $this->rootDirectory . '/layers/GraphQLByPoP/packages/*/tests/*',
             $this->rootDirectory . '/layers/Legacy/Engine/packages/*/src/*',
+            $this->rootDirectory . '/layers/Legacy/Engine/packages/*/tests/*',
             $this->rootDirectory . '/layers/Legacy/Schema/packages/*/src/*',
+            $this->rootDirectory . '/layers/Legacy/Schema/packages/*/tests/*',
             $this->rootDirectory . '/layers/Legacy/Wassup/packages/*/src/*',
+            $this->rootDirectory . '/layers/Legacy/Wassup/packages/*/tests/*',
             $this->rootDirectory . '/layers/Schema/packages/*/src/*',
+            $this->rootDirectory . '/layers/Schema/packages/*/tests/*',
             $this->rootDirectory . '/layers/SiteBuilder/packages/*/src/*',
+            $this->rootDirectory . '/layers/SiteBuilder/packages/*/tests/*',
             $this->rootDirectory . '/layers/Wassup/packages/*/src/*',
+            $this->rootDirectory . '/layers/Wassup/packages/*/tests/*',
             $this->rootDirectory . '/layers/WPSchema/packages/*/src/*',
+            $this->rootDirectory . '/layers/WPSchema/packages/*/tests/*',
         ];
     }
 }

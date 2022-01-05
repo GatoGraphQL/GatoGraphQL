@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\FileStore\Facades;
 
+use PoP\Root\App;
 use PoP\FileStore\Store\FileStoreInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class FileStoreFacade
 {
@@ -14,7 +14,7 @@ class FileStoreFacade
         /**
          * @var FileStoreInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get('file_store');
+        $service = App::getContainer()->get('file_store');
         return $service;
     }
 }

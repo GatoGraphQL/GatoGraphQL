@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Hooks;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
@@ -71,7 +71,7 @@ class RoutingHookSet extends AbstractHookSet
     public function getURIRoute(string $route): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if (!$componentConfiguration->overrideRequestURI()) {
             return $route;
         }

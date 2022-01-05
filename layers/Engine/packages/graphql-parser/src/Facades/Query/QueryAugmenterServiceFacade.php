@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Facades\Query;
 
+use PoP\Root\App;
 use PoP\GraphQLParser\Query\QueryAugmenterServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class QueryAugmenterServiceFacade
 {
@@ -14,7 +14,7 @@ class QueryAugmenterServiceFacade
         /**
          * @var QueryAugmenterServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(QueryAugmenterServiceInterface::class);
+        $service = App::getContainer()->get(QueryAugmenterServiceInterface::class);
         return $service;
     }
 }

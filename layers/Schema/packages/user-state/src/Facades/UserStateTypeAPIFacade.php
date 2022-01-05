@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\App;
 use PoPSchema\UserState\TypeAPIs\UserStateTypeAPIInterface;
 
 class UserStateTypeAPIFacade
@@ -14,7 +14,7 @@ class UserStateTypeAPIFacade
         /**
          * @var UserStateTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserStateTypeAPIInterface::class);
+        $service = App::getContainer()->get(UserStateTypeAPIInterface::class);
         return $service;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -28,7 +28,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(EngineComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(EngineComponent::class)->getConfiguration();
         if ($componentConfiguration->disableRedundantRootTypeMutationFields()) {
             return [];
         }

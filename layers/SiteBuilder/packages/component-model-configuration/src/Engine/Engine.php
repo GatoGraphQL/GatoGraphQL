@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Constants\DataOutputModes;
@@ -60,7 +60,7 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
         /** @var ComponentModelComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
         if ($useCache = $componentConfiguration->useComponentModelCache()) {
             $useCache = $this->persistentCache !== null;
         }

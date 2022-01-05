@@ -10,40 +10,36 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private array $getSettingsEntries = [];
-    private string $getSettingsBehavior = Behaviors::ALLOWLIST;
-
+    /**
+     * @return string[]
+     */
     public function getSettingsEntries(): array
     {
         // Define properties
         $envVariable = Environment::SETTINGS_ENTRIES;
-        $selfProperty = &$this->getSettingsEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function getSettingsBehavior(): string
     {
         // Define properties
         $envVariable = Environment::SETTINGS_BEHAVIOR;
-        $selfProperty = &$this->getSettingsBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }

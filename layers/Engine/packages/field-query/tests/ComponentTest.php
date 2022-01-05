@@ -2,8 +2,8 @@
 
 namespace PoP\FieldQuery;
 
+use PoP\Root\App;
 use PoP\Root\AbstractTestCase;
-use PoP\Root\Managers\ComponentManager;
 
 class ComponentTest extends AbstractTestCase
 {
@@ -13,7 +13,7 @@ class ComponentTest extends AbstractTestCase
     public function testHasDependedComponentClasses(): void
     {
         $this->assertNotEmpty(
-            ComponentManager::getComponent(Component::class)->getDependedComponentClasses()
+            App::getComponent(Component::class)->getDependedComponentClasses()
         );
     }
 }

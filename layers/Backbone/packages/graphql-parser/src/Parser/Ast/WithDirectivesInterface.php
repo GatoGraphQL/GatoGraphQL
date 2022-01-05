@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
-use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
-
 interface WithDirectivesInterface
 {
     /**

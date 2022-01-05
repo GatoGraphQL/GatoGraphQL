@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\API\Facades;
 
+use PoP\Root\App;
 use PoP\API\Schema\FieldQueryConvertorInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class FieldQueryConvertorFacade
 {
@@ -14,7 +14,7 @@ class FieldQueryConvertorFacade
         /**
          * @var FieldQueryConvertorInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(FieldQueryConvertorInterface::class);
+        $service = App::getContainer()->get(FieldQueryConvertorInterface::class);
         return $service;
     }
 }

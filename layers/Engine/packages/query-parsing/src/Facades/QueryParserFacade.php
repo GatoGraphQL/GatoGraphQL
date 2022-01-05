@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\QueryParsing\Facades;
 
+use PoP\Root\App;
 use PoP\QueryParsing\QueryParserInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class QueryParserFacade
 {
@@ -14,7 +14,7 @@ class QueryParserFacade
         /**
          * @var QueryParserInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(QueryParserInterface::class);
+        $service = App::getContainer()->get(QueryParserInterface::class);
         return $service;
     }
 }

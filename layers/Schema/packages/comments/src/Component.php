@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\API\Component as APIComponent;
 use PoP\RESTAPI\Component as RESTAPIComponent;
 use PoP\BasicService\Component\AbstractComponent;
@@ -51,11 +51,11 @@ class Component extends AbstractComponent
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (class_exists(APIComponent::class) && ComponentManager::getComponent(APIComponent::class)->isEnabled()) {
+        if (class_exists(APIComponent::class) && App::getComponent(APIComponent::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
         }
 
-        if (class_exists(RESTAPIComponent::class) && ComponentManager::getComponent(RESTAPIComponent::class)->isEnabled()) {
+        if (class_exists(RESTAPIComponent::class) && App::getComponent(RESTAPIComponent::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/RESTAPI');
         }
 

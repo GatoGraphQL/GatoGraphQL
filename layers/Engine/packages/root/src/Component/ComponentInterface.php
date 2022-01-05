@@ -104,4 +104,9 @@ interface ComponentInterface
      * ComponentConfiguration for the Component
      */
     public function getConfiguration(): ?ComponentConfigurationInterface;
+
+    /**
+     * ComponentInfo for the Component
+     */
+    public function getInfo(): ?ComponentInfoInterface;
 }

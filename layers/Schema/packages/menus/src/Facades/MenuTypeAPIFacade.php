@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\App;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 
 class MenuTypeAPIFacade
@@ -14,7 +14,7 @@ class MenuTypeAPIFacade
         /**
          * @var MenuTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(MenuTypeAPIInterface::class);
+        $service = App::getContainer()->get(MenuTypeAPIInterface::class);
         return $service;
     }
 }

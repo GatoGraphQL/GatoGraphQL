@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Application\QueryInputOutputHandlers;
 
 use PoP\Application\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
@@ -12,6 +13,7 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler as U
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
+use PoP\Root\App;
 
 class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 {
@@ -47,7 +49,9 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 
         // Needed to loadLatest, to know from what time to get results
         if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == DataSources::MUTABLEONREQUEST) {
-            $ret[GD_URLPARAM_TIMESTAMP] = ComponentModelComponentInfo::get('time');
+            /** @var ComponentModelComponentInfo */
+            $componentInfo = App::getComponent(ComponentModelComponent::class)->getInfo();
+            $ret[GD_URLPARAM_TIMESTAMP] = $componentInfo->getTime();
         }
 
         // If it is lazy load, no need to calculate pagenumber / stop-fetching / etc
@@ -97,7 +101,9 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
     //     $ret = parent::getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
     //     // Needed to loadLatest, to know from what time to get results
-    //     $ret[GD_URLPARAM_TIMESTAMP] = ComponentModelComponentInfo::get('time');
+    //      /** @var ComponentModelComponentInfo */
+    //      $componentInfo = App::getComponent(ComponentModelComponent::class)->getInfo();
+    //     $ret[GD_URLPARAM_TIMESTAMP] = $componentInfo->getTime();
 
     //     // If data is not to be loaded, then "stop-fetching" as to not show the Load More button
     //     if ($data_properties[DataloadingConstants::SKIPDATALOAD] ?? null) {

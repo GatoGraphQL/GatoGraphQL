@@ -9,7 +9,7 @@ use PoP\BasicService\Component\AbstractComponent;
 /**
  * Initialize component
  */
-class Component extends AbstractComponent implements ComponentInterface
+class Component extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -24,11 +24,6 @@ class Component extends AbstractComponent implements ComponentInterface
             \PoP\HooksWP\Component::class,
             \PoP\TranslationWP\Component::class,
         ];
-    }
-
-    public function getTemplatesDir(): string
-    {
-        return dirname(__DIR__) . '/templates';
     }
 
     /**

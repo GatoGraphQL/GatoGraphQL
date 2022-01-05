@@ -6,7 +6,6 @@ namespace PoP\Root\Component;
 
 interface ComponentConfigurationInterface
 {
-    public function setConfiguration(array $configuration): void;
-    public function hasConfigurationValue(string $option): bool;
-    public function getConfigurationValue(string $option): mixed;
+    public function hasConfigurationValue(string $envVariable): bool;
+    public function getConfigurationValue(string $envVariable): mixed;
 }

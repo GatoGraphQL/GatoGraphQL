@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Container\ContainerBuilderFactory;
-use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
 use PoP\Root\Managers\ComponentManager;
 
 /**
- * Component Loader
+ * Application Loader
  */
 class AppLoader
 {
@@ -20,61 +18,42 @@ class AppLoader
      *
      * @var string[]
      */
-    protected static array $initializedComponentClasses = [];
+    protected array $initializedComponentClasses = [];
     /**
      * Component in their initialization order
      *
      * @var string[]
      */
-    protected static array $orderedComponentClasses = [];
+    protected array $orderedComponentClasses = [];
     /**
      * Component classes to be initialized
      *
      * @var string[]
      */
-    protected static array $componentClassesToInitialize = [];
+    protected array $componentClassesToInitialize = [];
     /**
      * [key]: Component class, [value]: Configuration
      *
      * @var array<string, array<string, mixed>>
      */
-    protected static array $componentClassConfiguration = [];
+    protected array $componentClassConfiguration = [];
     /**
      * List of `Component` class which must not initialize their Schema services
      *
      * @var string[]
      */
-    protected static array $skipSchemaComponentClasses = [];
-
-    /**
-     * This functions is to be called by PHPUnit,
-     * to reset the state in between tests.
-     *
-     * Reset the state of the Application.
-     */
-    public static function reset(): void
-    {
-        self::$initializedComponentClasses = [];
-        self::$orderedComponentClasses = [];
-        self::$componentClassesToInitialize = [];
-        self::$componentClassConfiguration = [];
-        self::$skipSchemaComponentClasses = [];
-
-        ContainerBuilderFactory::reset();
-        SystemContainerBuilderFactory::reset();
-        ComponentManager::reset();
-    }
+    protected array $skipSchemaComponentClasses = [];
 
     /**
      * Add Component classes to be initialized
      *
      * @param string[] $componentClasses List of `Component` class to initialize
      */
-    public static function addComponentClassesToInitialize(
+    public function addComponentClassesToInitialize(
         array $componentClasses
     ): void {
-        self::$componentClassesToInitialize = array_merge(
-            self::$componentClassesToInitialize,
+        $this->componentClassesToInitialize = array_merge(
+            $this->componentClassesToInitialize,
             $componentClasses
         );
     }
@@ -84,14 +63,14 @@ class AppLoader
      *
      * @param array<string, array<string, mixed>> $componentClassConfiguration [key]: Component class, [value]: Configuration
      */
-    public static function addComponentClassConfiguration(
+    public function addComponentClassConfiguration(
         array $componentClassConfiguration = []
     ): void {
         // Allow to override entries under each Component
         foreach ($componentClassConfiguration as $componentClass => $componentConfiguration) {
-            self::$componentClassConfiguration[$componentClass] ??= [];
-            self::$componentClassConfiguration[$componentClass] = array_merge(
-                self::$componentClassConfiguration[$componentClass],
+            $this->componentClassConfiguration[$componentClass] ??= [];
+            $this->componentClassConfiguration[$componentClass] = array_merge(
+                $this->componentClassConfiguration[$componentClass],
                 $componentConfiguration
             );
         }
@@ -102,11 +81,11 @@ class AppLoader
      *
      * @param string[] $skipSchemaComponentClasses List of `Component` class which must not initialize their Schema services
      */
-    public static function addSchemaComponentClassesToSkip(
+    public function addSchemaComponentClassesToSkip(
         array $skipSchemaComponentClasses = []
     ): void {
-        self::$skipSchemaComponentClasses = array_merge(
-            self::$skipSchemaComponentClasses,
+        $this->skipSchemaComponentClasses = array_merge(
+            $this->skipSchemaComponentClasses,
             $skipSchemaComponentClasses
         );
     }
@@ -117,7 +96,7 @@ class AppLoader
      *
      * @param string[] $componentClasses List of `Component` class to initialize
      */
-    private static function addComponentsOrderedForInitialization(
+    private function addComponentsOrderedForInitialization(
         array $componentClasses,
         bool $isDev
     ): void {
@@ -127,29 +106,29 @@ class AppLoader
          */
         $componentClasses = array_values(array_diff(
             $componentClasses,
-            self::$initializedComponentClasses
+            $this->initializedComponentClasses
         ));
         foreach ($componentClasses as $componentClass) {
-            self::$initializedComponentClasses[] = $componentClass;
+            $this->initializedComponentClasses[] = $componentClass;
 
             // Initialize and register the Component
-            $component = ComponentManager::register($componentClass);
+            $component = App::getComponentManager()->register($componentClass);
 
             // Initialize all depended-upon PoP components
-            self::addComponentsOrderedForInitialization(
+            $this->addComponentsOrderedForInitialization(
                 $component->getDependedComponentClasses(),
                 $isDev
             );
 
             if ($isDev) {
-                self::addComponentsOrderedForInitialization(
+                $this->addComponentsOrderedForInitialization(
                     $component->getDevDependedComponentClasses(),
                     $isDev
                 );
             }
 
             // Initialize all depended-upon PoP conditional components, if they are installed
-            self::addComponentsOrderedForInitialization(
+            $this->addComponentsOrderedForInitialization(
                 array_filter(
                     $component->getDependedConditionalComponentClasses(),
                     'class_exists'
@@ -158,7 +137,7 @@ class AppLoader
             );
 
             // We reached the bottom of the rung, add the component to the list
-            self::$orderedComponentClasses[] = $componentClass;
+            $this->orderedComponentClasses[] = $componentClass;
         }
     }
 
@@ -168,7 +147,7 @@ class AppLoader
      *
      * @param boolean $isDev Indicate if testing with PHPUnit, as to load components only for DEV
      */
-    public static function initializeComponents(
+    public function initializeComponents(
         bool $isDev = false
     ): void {
         // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
@@ -177,8 +156,8 @@ class AppLoader
         /**
          * Calculate the components in their initialization order
          */
-        self::addComponentsOrderedForInitialization(
-            self::$componentClassesToInitialize,
+        $this->addComponentsOrderedForInitialization(
+            $this->componentClassesToInitialize,
             $isDev
         );
 
@@ -186,7 +165,7 @@ class AppLoader
          * After initialized, and before booting,
          * allow the components to inject their own configuration
          */
-        static::configureComponents();
+        $this->configureComponents();
     }
 
     /**
@@ -202,7 +181,7 @@ class AppLoader
      * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
      * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
-    public static function bootSystem(
+    public function bootSystem(
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
         ?string $containerDirectory = null,
@@ -211,7 +190,7 @@ class AppLoader
          * System container: initialize it and compile it already,
          * since it will be used to initialize the Application container
          */
-        SystemContainerBuilderFactory::init(
+        App::getSystemContainerBuilderFactory()->init(
             $cacheContainerConfiguration,
             $containerNamespace,
             $containerDirectory
@@ -223,47 +202,47 @@ class AppLoader
          * This way, these services become available for initializing
          * Application Container services.
          */
-        foreach (self::$orderedComponentClasses as $componentClass) {
-            $component = ComponentManager::getComponent($componentClass);
+        foreach ($this->orderedComponentClasses as $componentClass) {
+            $component = App::getComponent($componentClass);
             $component->initializeSystem();
         }
         $systemCompilerPasses = array_map(
             fn ($class) => new $class(),
-            self::getSystemContainerCompilerPasses()
+            $this->getSystemContainerCompilerPasses()
         );
-        SystemContainerBuilderFactory::maybeCompileAndCacheContainer($systemCompilerPasses);
+        App::getSystemContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
 
         // Finally boot the components
-        static::bootSystemForComponents();
+        $this->bootSystemForComponents();
     }
 
     /**
      * Trigger after initializing all components,
      * and before booting the system
      */
-    protected static function configureComponents(): void
+    protected function configureComponents(): void
     {
-        ComponentManager::configureComponents();
+        App::getComponentManager()->configureComponents();
     }
 
     /**
      * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
      * for them to execute any custom extra logic
      */
-    protected static function bootSystemForComponents(): void
+    protected function bootSystemForComponents(): void
     {
-        ComponentManager::bootSystem();
+        App::getComponentManager()->bootSystem();
     }
 
     /**
      * @return string[]
      */
-    final protected static function getSystemContainerCompilerPasses(): array
+    final protected function getSystemContainerCompilerPasses(): array
     {
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
-        foreach (self::$orderedComponentClasses as $componentClass) {
-            $component = ComponentManager::getComponent($componentClass);
+        foreach ($this->orderedComponentClasses as $componentClass) {
+            $component = App::getComponent($componentClass);
             $compilerPassClasses = [
                 ...$compilerPassClasses,
                 ...$component->getSystemContainerCompilerPassClasses()
@@ -282,7 +261,7 @@ class AppLoader
      * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
      * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
-    public static function bootApplication(
+    public function bootApplication(
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
         ?string $containerDirectory = null
@@ -292,15 +271,15 @@ class AppLoader
          * and for its depended-upon components.
          * Hence this is executed from bottom to top
          */
-        foreach (array_reverse(self::$orderedComponentClasses) as $componentClass) {
-            $component = ComponentManager::getComponent($componentClass);
-            $component->customizeComponentClassConfiguration(self::$componentClassConfiguration);
+        foreach (array_reverse($this->orderedComponentClasses) as $componentClass) {
+            $component = App::getComponent($componentClass);
+            $component->customizeComponentClassConfiguration($this->componentClassConfiguration);
         }
 
         /**
          * Initialize the Application container only
          */
-        ContainerBuilderFactory::init(
+        App::getContainerBuilderFactory()->init(
             $cacheContainerConfiguration,
             $containerNamespace,
             $containerDirectory
@@ -309,15 +288,15 @@ class AppLoader
         /**
          * Initialize the container services by the Components
          */
-        foreach (self::$orderedComponentClasses as $componentClass) {
+        foreach ($this->orderedComponentClasses as $componentClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
-            $component = ComponentManager::getComponent($componentClass);
-            $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
-            $skipSchemaForComponent = in_array($componentClass, self::$skipSchemaComponentClasses);
+            $component = App::getComponent($componentClass);
+            $componentConfiguration = $this->componentClassConfiguration[$componentClass] ?? [];
+            $skipSchemaForComponent = in_array($componentClass, $this->skipSchemaComponentClasses);
             $component->initialize(
                 $componentConfiguration,
                 $skipSchemaForComponent,
-                self::$skipSchemaComponentClasses
+                $this->skipSchemaComponentClasses
             );
         }
 
@@ -325,20 +304,20 @@ class AppLoader
         // Symfony's DependencyInjection Application Container
         $systemCompilerPassRegistry = SystemCompilerPassRegistryFacade::getInstance();
         $systemCompilerPasses = $systemCompilerPassRegistry->getCompilerPasses();
-        ContainerBuilderFactory::maybeCompileAndCacheContainer($systemCompilerPasses);
+        App::getContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
 
         // Finally boot the components
-        static::bootApplicationForComponents();
+        $this->bootApplicationForComponents();
     }
 
     /**
      * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
      * for them to execute any custom extra logic
      */
-    protected static function bootApplicationForComponents(): void
+    protected function bootApplicationForComponents(): void
     {
-        ComponentManager::beforeBoot();
-        ComponentManager::boot();
-        ComponentManager::afterBoot();
+        App::getComponentManager()->beforeBoot();
+        App::getComponentManager()->boot();
+        App::getComponentManager()->afterBoot();
     }
 }

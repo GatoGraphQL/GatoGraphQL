@@ -4,21 +4,28 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Cache;
 
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentInfo;
 use PoP\ComponentModel\Constants\CachePlaceholders;
+use PoP\Root\App;
 
 trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
 {
-    protected function getCacheReplacements()
+    /**
+     * @return array<int|string,int|string>
+     */
+    protected function getCacheReplacements(): array
     {
+        /** @var ComponentInfo */
+        $componentInfo = App::getComponent(Component::class)->getInfo();
         return [
-            ComponentInfo::get('unique-id') => CachePlaceholders::UNIQUE_ID,
-            ComponentInfo::get('rand') => CachePlaceholders::RAND,
-            ComponentInfo::get('time') => CachePlaceholders::TIME,
+            $componentInfo->getUniqueID() => CachePlaceholders::UNIQUE_ID,
+            $componentInfo->getRand() => CachePlaceholders::RAND,
+            $componentInfo->getTime() => CachePlaceholders::TIME,
         ];
     }
 
-    protected function replaceCurrentExecutionDataWithPlaceholders($content)
+    protected function replaceCurrentExecutionDataWithPlaceholders(string $content): string
     {
         $replacements = $this->getCacheReplacements();
         return str_replace(
@@ -28,12 +35,12 @@ trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
         );
     }
 
-    protected function replacePlaceholdersWithCurrentExecutionData($content)
+    protected function replacePlaceholdersWithCurrentExecutionData(string|array|null $content): ?string
     {
         /**
          * Content may be null if it had not been cached
          */
-        if (is_null($content)) {
+        if ($content === null) {
             return null;
         }
         // Replace the placeholder for the uniqueId with the current uniqueId

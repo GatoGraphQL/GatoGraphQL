@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
 
+use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistryInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class AccessControlRuleBlockRegistryFacade
 {
@@ -14,7 +14,7 @@ class AccessControlRuleBlockRegistryFacade
         /**
          * @var AccessControlRuleBlockRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(AccessControlRuleBlockRegistryInterface::class);
+        $service = App::getContainer()->get(AccessControlRuleBlockRegistryInterface::class);
         return $service;
     }
 }

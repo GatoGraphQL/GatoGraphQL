@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPostMeta\TypeResolvers\InputObjectType;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoPSchema\CustomPostMeta\Component;
 use PoPSchema\CustomPostMeta\ComponentConfiguration;
 use PoPWPSchema\Meta\TypeResolvers\InputObjectType\AbstractMetaQueryInputObjectTypeResolver;
@@ -22,13 +22,13 @@ class CustomPostMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputO
     protected function getAllowOrDenyEntries(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getCustomPostMetaEntries();
     }
     protected function getAllowOrDenyBehavior(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getCustomPostMetaBehavior();
     }
 }

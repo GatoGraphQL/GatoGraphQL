@@ -17,7 +17,7 @@ abstract class ComponentTest extends TestCase
     // public function testHasDependedComponentClasses(): void
     // {
     //     $this->assertNotEmpty(
-    //         ComponentManager::getComponent(Component::class)->getDependedComponentClasses()
+    //         \PoP\Root\App::getComponent(Component::class)->getDependedComponentClasses()
     //     );
     // }
 }

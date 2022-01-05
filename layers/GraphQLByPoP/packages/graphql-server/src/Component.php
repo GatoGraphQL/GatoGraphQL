@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
@@ -58,16 +58,14 @@ class Component extends AbstractComponent
         // - "standard" => Use QueryRoot and MutationRoot
         // - "nested" => Use Root, and nested mutations with redundant root fields
         // - "lean_nested" => Use Root, and nested mutations without redundant root fields
-        /** @var ComponentConfiguration */
-        $componentConfiguration = $this->getConfiguration();
-        if ($componentConfiguration->enableSettingMutationSchemeByURLParam()) {
+        if (Environment::enableSettingMutationSchemeByURLParam()) {
             if ($mutationScheme = Request::getMutationScheme()) {
-                $componentClassConfiguration[self::class][Environment::ENABLE_NESTED_MUTATIONS] = $mutationScheme != MutationSchemes::STANDARD;
-                $componentClassConfiguration[EngineComponent::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = $mutationScheme == MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS;
+                $componentClassConfiguration[self::class][Environment::ENABLE_NESTED_MUTATIONS] = $mutationScheme !== MutationSchemes::STANDARD;
+                $componentClassConfiguration[EngineComponent::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = $mutationScheme === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS;
             }
         }
         // Enable GraphQL Introspection for PQL by doing ?enable_graphql_introspection=1
-        if ($componentConfiguration->enableEnablingGraphQLIntrospectionByURLParam()) {
+        if (Environment::enableEnablingGraphQLIntrospectionByURLParam()) {
             $enableGraphQLIntrospection = Request::enableGraphQLIntrospection();
             if ($enableGraphQLIntrospection !== null) {
                 $componentClassConfiguration[self::class][Environment::ENABLE_GRAPHQL_INTROSPECTION] = $enableGraphQLIntrospection;
@@ -92,7 +90,7 @@ class Component extends AbstractComponent
 
             // Boot conditionals
             /** @var AccessControlComponentConfiguration */
-            $componentConfiguration = ComponentManager::getComponent(AccessControlComponent::class)->getConfiguration();
+            $componentConfiguration = App::getComponent(AccessControlComponent::class)->getConfiguration();
             if (
                 class_exists(CacheControlComponent::class)
                 && class_exists(AccessControlComponent::class)
@@ -119,6 +117,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return ComponentManager::getComponent(GraphQLRequestComponent::class)->isEnabled();
+        return App::getComponent(GraphQLRequestComponent::class)->isEnabled();
     }
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Hooks\Facades;
 
+use PoP\Root\App;
 use PoP\Hooks\HooksAPIInterface;
-use PoP\Root\Container\SystemContainerBuilderFactory;
 
 class SystemHooksAPIFacade
 {
@@ -14,7 +14,7 @@ class SystemHooksAPIFacade
         /**
          * @var HooksAPIInterface
          */
-        $service = SystemContainerBuilderFactory::getInstance()->get(HooksAPIInterface::class);
+        $service = App::getSystemContainer()->get(HooksAPIInterface::class);
         return $service;
     }
 }

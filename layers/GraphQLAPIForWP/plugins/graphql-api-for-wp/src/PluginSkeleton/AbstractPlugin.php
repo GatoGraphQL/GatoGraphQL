@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginComponentInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
-use PoP\Engine\AppLoader;
+use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
-use PoP\Root\Managers\ComponentManager;
 
 abstract class AbstractPlugin
 {
@@ -122,7 +120,7 @@ abstract class AbstractPlugin
     {
         // Initialize the containers
         $componentClasses = $this->getComponentClassesToInitialize();
-        AppLoader::addComponentClassesToInitialize($componentClasses);
+        App::getAppLoader()->addComponentClassesToInitialize($componentClasses);
     }
 
     /**
@@ -139,7 +137,7 @@ abstract class AbstractPlugin
                 continue;
             }
             /** @var PluginComponentInterface */
-            $component = ComponentManager::getComponent($componentClass);
+            $component = App::getComponent($componentClass);
             $component->setPluginFolder($pluginFolder);
         }
     }
@@ -166,10 +164,10 @@ abstract class AbstractPlugin
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        AppLoader::addComponentClassConfiguration(
+        App::getAppLoader()->addComponentClassConfiguration(
             $this->getComponentClassConfiguration()
         );
-        AppLoader::addSchemaComponentClassesToSkip(
+        App::getAppLoader()->addSchemaComponentClassesToSkip(
             $this->getSchemaComponentClassesToSkip()
         );
     }

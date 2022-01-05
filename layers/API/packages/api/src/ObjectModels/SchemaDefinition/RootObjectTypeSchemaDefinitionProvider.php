@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Schema\SchemaDefinition;
@@ -26,7 +26,7 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
 
         // Global fields are only added if enabled
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return $schemaDefinition;
         }

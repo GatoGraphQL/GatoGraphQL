@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\MutationResolvers;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -58,7 +58,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
         // Check that the user is logged-in
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
             $this->validateUserIsLoggedIn($errors);
             if ($errors) {
@@ -108,7 +108,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
          */
         $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
             $userID = $vars['global-userstate']['current-user-id'];
             $comment_data['userID'] = $userID;

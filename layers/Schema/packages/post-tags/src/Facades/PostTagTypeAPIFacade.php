@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\App;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 
 class PostTagTypeAPIFacade
@@ -14,7 +14,7 @@ class PostTagTypeAPIFacade
         /**
          * @var PostTagTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(PostTagTypeAPIInterface::class);
+        $service = App::getContainer()->get(PostTagTypeAPIInterface::class);
         return $service;
     }
 }

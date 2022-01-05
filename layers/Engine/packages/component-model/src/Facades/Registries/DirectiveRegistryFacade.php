@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Registries;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class DirectiveRegistryFacade
 {
@@ -14,7 +14,7 @@ class DirectiveRegistryFacade
         /**
          * @var DirectiveRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(DirectiveRegistryInterface::class);
+        $service = App::getContainer()->get(DirectiveRegistryInterface::class);
         return $service;
     }
 }

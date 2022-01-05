@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
@@ -73,7 +73,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $ret = array();
         $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $routemodules = array(
             $componentConfiguration->getPostTagsRoute() => [
                 PostTagFieldDataloadModuleProcessor::class,
@@ -95,7 +95,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
             ];
         }
         /** @var PostsComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(PostsComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(PostsComponent::class)->getConfiguration();
         $routemodules = array(
             $componentConfiguration->getPostsRoute() => [
                 TagPostFieldDataloadModuleProcessor::class,

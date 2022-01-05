@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\Facades\Services;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\App;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
 class AllowOrDenySettingsServiceFacade
@@ -14,7 +14,7 @@ class AllowOrDenySettingsServiceFacade
         /**
          * @var AllowOrDenySettingsServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(AllowOrDenySettingsServiceInterface::class);
+        $service = App::getContainer()->get(AllowOrDenySettingsServiceInterface::class);
         return $service;
     }
 }

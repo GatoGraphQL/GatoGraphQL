@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\QueriedObject\Facades\Routing;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\App;
 use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
 
 class CMSRoutingStateServiceFacade
@@ -14,7 +14,7 @@ class CMSRoutingStateServiceFacade
         /**
          * @var CMSRoutingStateServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CMSRoutingStateServiceInterface::class);
+        $service = App::getContainer()->get(CMSRoutingStateServiceInterface::class);
         return $service;
     }
 }

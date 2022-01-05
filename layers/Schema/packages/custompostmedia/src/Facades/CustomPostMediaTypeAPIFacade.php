@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMedia\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\App;
 use PoPSchema\CustomPostMedia\TypeAPIs\CustomPostMediaTypeAPIInterface;
 
 class CustomPostMediaTypeAPIFacade
@@ -14,7 +14,7 @@ class CustomPostMediaTypeAPIFacade
         /**
          * @var CustomPostMediaTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CustomPostMediaTypeAPIInterface::class);
+        $service = App::getContainer()->get(CustomPostMediaTypeAPIInterface::class);
         return $service;
     }
 }
