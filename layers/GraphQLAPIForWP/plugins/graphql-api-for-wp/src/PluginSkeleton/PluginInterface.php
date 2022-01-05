@@ -6,6 +6,8 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 interface PluginInterface
 {
+    public function setup(): void;
+
     /**
      * Plugin name
      */
