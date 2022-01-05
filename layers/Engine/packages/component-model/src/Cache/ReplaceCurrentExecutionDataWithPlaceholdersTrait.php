@@ -11,7 +11,10 @@ use PoP\Root\App;
 
 trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
 {
-    protected function getCacheReplacements()
+    /**
+     * @return array<int|string,int|string>
+     */
+    protected function getCacheReplacements(): array
     {
         /** @var ComponentInfo */
         $componentInfo = App::getComponent(Component::class)->getInfo();
@@ -22,7 +25,7 @@ trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
         ];
     }
 
-    protected function replaceCurrentExecutionDataWithPlaceholders($content)
+    protected function replaceCurrentExecutionDataWithPlaceholders(string $content): string
     {
         $replacements = $this->getCacheReplacements();
         return str_replace(
@@ -32,12 +35,12 @@ trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
         );
     }
 
-    protected function replacePlaceholdersWithCurrentExecutionData($content)
+    protected function replacePlaceholdersWithCurrentExecutionData(string $content): ?string
     {
         /**
          * Content may be null if it had not been cached
          */
-        if (is_null($content)) {
+        if ($content === null) {
             return null;
         }
         // Replace the placeholder for the uniqueId with the current uniqueId
