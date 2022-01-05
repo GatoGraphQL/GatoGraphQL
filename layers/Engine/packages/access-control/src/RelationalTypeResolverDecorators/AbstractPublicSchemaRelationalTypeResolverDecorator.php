@@ -19,7 +19,7 @@ abstract class AbstractPublicSchemaRelationalTypeResolverDecorator extends Abstr
     public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return
             $componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode() ||
             !$componentConfiguration->usePrivateSchemaMode();

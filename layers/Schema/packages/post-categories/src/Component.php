@@ -49,10 +49,10 @@ class Component extends AbstractComponent
     ): void {
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
-        if (class_exists(APIComponent::class) && App::getComponentManager()->getComponent(APIComponent::class)->isEnabled()) {
+        if (class_exists(APIComponent::class) && App::getComponent(APIComponent::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
         }
-        if (class_exists(RESTAPIComponent::class) && App::getComponentManager()->getComponent(RESTAPIComponent::class)->isEnabled()) {
+        if (class_exists(RESTAPIComponent::class) && App::getComponent(RESTAPIComponent::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/RESTAPI');
         }
     }

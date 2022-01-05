@@ -71,7 +71,7 @@ class RoutingHookSet extends AbstractHookSet
     public function getURIRoute(string $route): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if (!$componentConfiguration->overrideRequestURI()) {
             return $route;
         }

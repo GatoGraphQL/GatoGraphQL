@@ -13,7 +13,7 @@ class TemplateHelpers
     public static function getTemplateFile(): string
     {
         /** @var ComponentInterface */
-        $component = App::getComponentManager()->getComponent(Component::class);
+        $component = App::getComponent(Component::class);
         return $component->getTemplatesDir() . '/Output.php';
     }
 }

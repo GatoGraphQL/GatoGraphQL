@@ -16,13 +16,13 @@ class VoyagerClient extends AbstractClient
     protected function isClientDisabled(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->isVoyagerClientEndpointDisabled();
     }
     protected function getEndpoint(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getVoyagerClientEndpoint();
     }
     protected function getClientRelativePath(): string

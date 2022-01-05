@@ -53,7 +53,7 @@ class ObjectTypeHookSet extends AbstractHookSet
 
         $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if (
             !$componentConfiguration->mustUserBeLoggedInToAddComment()
             && $vars['global-userstate']['is-user-logged-in']

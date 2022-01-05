@@ -51,6 +51,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return App::getComponentManager()->getComponent(GraphQLServerComponent::class)->isEnabled();
+        return App::getComponent(GraphQLServerComponent::class)->isEnabled();
     }
 }

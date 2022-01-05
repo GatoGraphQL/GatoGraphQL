@@ -19,7 +19,7 @@ class CacheUtils
         $vars = ApplicationState::getVars();
         $hooksAPI = HooksAPIFacade::getInstance();
         /** @var EngineComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(EngineComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(EngineComponent::class)->getConfiguration();
         return (array)$hooksAPI->applyFilters(
             self::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,
             [

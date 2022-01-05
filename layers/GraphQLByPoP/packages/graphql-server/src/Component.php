@@ -90,7 +90,7 @@ class Component extends AbstractComponent
 
             // Boot conditionals
             /** @var AccessControlComponentConfiguration */
-            $componentConfiguration = App::getComponentManager()->getComponent(AccessControlComponent::class)->getConfiguration();
+            $componentConfiguration = App::getComponent(AccessControlComponent::class)->getConfiguration();
             if (
                 class_exists(CacheControlComponent::class)
                 && class_exists(AccessControlComponent::class)
@@ -117,6 +117,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return App::getComponentManager()->getComponent(GraphQLRequestComponent::class)->isEnabled();
+        return App::getComponent(GraphQLRequestComponent::class)->isEnabled();
     }
 }

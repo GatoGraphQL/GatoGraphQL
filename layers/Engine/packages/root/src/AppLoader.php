@@ -203,7 +203,7 @@ class AppLoader
          * Application Container services.
          */
         foreach ($this->orderedComponentClasses as $componentClass) {
-            $component = App::getComponentManager()->getComponent($componentClass);
+            $component = App::getComponent($componentClass);
             $component->initializeSystem();
         }
         $systemCompilerPasses = array_map(
@@ -242,7 +242,7 @@ class AppLoader
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
         foreach ($this->orderedComponentClasses as $componentClass) {
-            $component = App::getComponentManager()->getComponent($componentClass);
+            $component = App::getComponent($componentClass);
             $compilerPassClasses = [
                 ...$compilerPassClasses,
                 ...$component->getSystemContainerCompilerPassClasses()
@@ -272,7 +272,7 @@ class AppLoader
          * Hence this is executed from bottom to top
          */
         foreach (array_reverse($this->orderedComponentClasses) as $componentClass) {
-            $component = App::getComponentManager()->getComponent($componentClass);
+            $component = App::getComponent($componentClass);
             $component->customizeComponentClassConfiguration($this->componentClassConfiguration);
         }
 
@@ -290,7 +290,7 @@ class AppLoader
          */
         foreach ($this->orderedComponentClasses as $componentClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
-            $component = App::getComponentManager()->getComponent($componentClass);
+            $component = App::getComponent($componentClass);
             $componentConfiguration = $this->componentClassConfiguration[$componentClass] ?? [];
             $skipSchemaForComponent = in_array($componentClass, $this->skipSchemaComponentClasses);
             $component->initialize(

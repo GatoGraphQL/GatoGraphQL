@@ -67,7 +67,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     protected function loadGraphQLQueryAndVariables(): bool
     {
         /** @var GraphQLRequestComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(GraphQLRequestComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(GraphQLRequestComponent::class)->getConfiguration();
         return !$componentConfiguration->disableGraphQLAPIForPoP();
     }
 

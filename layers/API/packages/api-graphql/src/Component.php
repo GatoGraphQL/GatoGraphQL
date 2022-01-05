@@ -44,6 +44,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return App::getComponentManager()->getComponent(APIComponent::class)->isEnabled() && !Environment::disableGraphQLAPI();
+        return App::getComponent(APIComponent::class)->isEnabled() && !Environment::disableGraphQLAPI();
     }
 }

@@ -137,7 +137,7 @@ abstract class AbstractPlugin
                 continue;
             }
             /** @var PluginComponentInterface */
-            $component = App::getComponentManager()->getComponent($componentClass);
+            $component = App::getComponent($componentClass);
             $component->setPluginFolder($pluginFolder);
         }
     }
