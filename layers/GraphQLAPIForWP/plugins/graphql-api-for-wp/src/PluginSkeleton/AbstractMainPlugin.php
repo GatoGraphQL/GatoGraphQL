@@ -124,7 +124,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         $fileSystemWrapper = new FilesystemWrapper();
         try {
-            $fileSystemWrapper->remove(App::getMainPlugin()->getInfo()->getCacheDir());
+            /** @var MainPluginInfoInterface */
+            $mainPluginInfo = App::getMainPlugin()->getInfo();
+            $fileSystemWrapper->remove($mainPluginInfo->getCacheDir());
         } catch (RuntimeException) {
             // If the folder does not exist, do nothing
         }

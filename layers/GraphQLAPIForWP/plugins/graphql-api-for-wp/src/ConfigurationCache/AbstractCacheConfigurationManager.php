@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInfoInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\BasicService\BasicServiceTrait;
@@ -74,7 +75,9 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
      */
     public function getDirectory(): ?string
     {
-        $mainPluginCacheDir = App::getMainPlugin()->getInfo()->getCacheDir();
+        /** @var MainPluginInfoInterface */
+        $mainPluginInfo = App::getMainPlugin()->getInfo();
+        $mainPluginCacheDir = $mainPluginInfo->getCacheDir();
         return $mainPluginCacheDir . \DIRECTORY_SEPARATOR . $this->getDirectoryName();
     }
 
