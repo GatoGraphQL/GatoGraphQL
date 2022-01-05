@@ -11,6 +11,7 @@ abstract class AbstractComponentInfo implements ComponentInfoInterface
     final public function __construct(
         protected ComponentInterface $component
     ) {
+        $this->initialize();
     }
 
     abstract protected function initialize(): void;
