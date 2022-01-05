@@ -67,7 +67,10 @@ class App
 
     public static function getAppLoader(): AppLoader
     {
-        return self::$appLoader ?? self::throwAppNotInitializedException();
+        if (self::$appLoader === null) {
+            self::throwAppNotInitializedException();
+        }
+        return self::$appLoader;
     }
 
     /**
@@ -80,17 +83,26 @@ class App
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory
     {
-        return self::$containerBuilderFactory ?? self::throwAppNotInitializedException();
+        if (self::$containerBuilderFactory === null) {
+            self::throwAppNotInitializedException();
+        }
+        return self::$containerBuilderFactory;
     }
 
     public static function getSystemContainerBuilderFactory(): SystemContainerBuilderFactory
     {
-        return self::$systemContainerBuilderFactory ?? self::throwAppNotInitializedException();
+        if (self::$systemContainerBuilderFactory === null) {
+            self::throwAppNotInitializedException();
+        }
+        return self::$systemContainerBuilderFactory;
     }
 
     public static function getComponentManager(): ComponentManager
     {
-        return self::$componentManager ?? self::throwAppNotInitializedException();
+        if (self::$componentManager === null) {
+            self::throwAppNotInitializedException();
+        }
+        return self::$componentManager;
     }
 
 }
