@@ -16,7 +16,6 @@ abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentC
 {
     protected function maybeInitializeConfigurationValue(
         string $envVariable,
-        mixed &$selfProperty,
         mixed $defaultValue = null,
         ?callable $callback = null
     ): void {
