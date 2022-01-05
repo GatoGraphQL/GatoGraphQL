@@ -15,7 +15,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::USER_AVATAR_DEFAULT_SIZE;
-        $selfProperty = &$this->getUserAvatarDefaultSize;
         $defaultValue = 96;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 

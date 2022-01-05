@@ -17,7 +17,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::DISABLE_NATIVE_API_ENDPOINT;
-        $selfProperty = &$this->isNativeAPIEndpointDisabled;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -34,7 +33,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::NATIVE_API_ENDPOINT;
-        $selfProperty = &$this->getNativeAPIEndpoint;
         $defaultValue = '/api/';
         $callback = [EndpointUtils::class, 'slashURI'];
 

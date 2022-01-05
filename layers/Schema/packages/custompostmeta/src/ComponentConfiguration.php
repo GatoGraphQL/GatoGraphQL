@@ -17,7 +17,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::CUSTOMPOST_META_ENTRIES;
-        $selfProperty = &$this->getCustomPostMetaEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
@@ -34,7 +33,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::CUSTOMPOST_META_BEHAVIOR;
-        $selfProperty = &$this->getCustomPostMetaBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook

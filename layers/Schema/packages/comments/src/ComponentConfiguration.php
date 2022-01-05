@@ -18,7 +18,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ROOT_COMMENT_LIST_DEFAULT_LIMIT;
-        $selfProperty = &$this->getRootCommentListDefaultLimit;
         $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
@@ -35,7 +34,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT;
-        $selfProperty = &$this->getCustomPostCommentOrCommentResponseListDefaultLimit;
         $defaultValue = -1; // Unlimited
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
@@ -52,7 +50,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::COMMENT_LIST_MAX_LIMIT;
-        $selfProperty = &$this->getCommentListMaxLimit;
         $defaultValue = -1;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
@@ -69,7 +66,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::TREAT_COMMENT_STATUS_AS_ADMIN_DATA;
-        $selfProperty = &$this->treatCommentStatusAsAdminData;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

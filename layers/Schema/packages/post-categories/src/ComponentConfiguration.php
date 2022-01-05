@@ -46,7 +46,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::POSTCATEGORIES_ROUTE;
-        $selfProperty = &$this->getPostCategoriesRoute;
         $defaultValue = 'categories';
 
         // Initialize property from the environment/hook

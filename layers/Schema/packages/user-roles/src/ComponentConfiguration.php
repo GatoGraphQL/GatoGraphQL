@@ -16,7 +16,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::TREAT_USER_ROLE_AS_ADMIN_DATA;
-        $selfProperty = &$this->treatUserRoleAsAdminData;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -33,7 +32,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::TREAT_USER_CAPABILITY_AS_ADMIN_DATA;
-        $selfProperty = &$this->treatUserCapabilityAsAdminData;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

@@ -20,7 +20,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_MULTIPLE_QUERY_EXECUTION;
-        $selfProperty = &$this->enableMultipleQueryExecution;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -37,7 +36,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_COMPOSABLE_DIRECTIVES;
-        $selfProperty = &$this->enableComposableDirectives;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

@@ -15,7 +15,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_VARIABLES_AS_EXPRESSIONS;
-        $selfProperty = &$this->enableVariablesAsExpressions;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

@@ -22,7 +22,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
 
         // Define properties
         $envVariable = Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT;
-        $selfProperty = &$this->mustUserBeLoggedInToAddComment;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -39,7 +38,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::REQUIRE_COMMENTER_NAME_AND_EMAIL;
-        $selfProperty = &$this->requireCommenterNameAndEmail;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

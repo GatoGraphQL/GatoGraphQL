@@ -17,7 +17,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::PAGE_LIST_DEFAULT_LIMIT;
-        $selfProperty = &$this->getPageListDefaultLimit;
         $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
@@ -34,7 +33,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::PAGE_LIST_MAX_LIMIT;
-        $selfProperty = &$this->getPageListMaxLimit;
         $defaultValue = -1; // Unlimited
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
@@ -51,7 +49,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES;
-        $selfProperty = &$this->addPageTypeToCustomPostUnionTypes;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

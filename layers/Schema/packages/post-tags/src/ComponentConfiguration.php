@@ -46,7 +46,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::POSTTAGS_ROUTE;
-        $selfProperty = &$this->getPostTagsRoute;
         $defaultValue = 'tags';
 
         // Initialize property from the environment/hook

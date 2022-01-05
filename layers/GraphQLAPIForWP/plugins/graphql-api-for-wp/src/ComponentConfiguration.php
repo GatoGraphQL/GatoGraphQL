@@ -39,7 +39,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::GROUP_FIELDS_UNDER_TYPE_FOR_PRINT;
-        $selfProperty = &$this->groupFieldsUnderTypeForPrint;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -59,7 +58,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::EMPTY_LABEL;
-        $selfProperty = &$this->getEmptyLabel;
         $defaultValue = \__('---', 'graphql-api');
 
         // Initialize property from the environment/hook
@@ -77,7 +75,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::SETTINGS_VALUE_LABEL;
-        $selfProperty = &$this->getSettingsValueLabel;
         $defaultValue = \__('🟡 Default', 'graphql-api');
 
         // Initialize property from the environment/hook
@@ -95,7 +92,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENDPOINT_SLUG_BASE;
-        $selfProperty = &$this->getCustomEndpointSlugBase;
         $defaultValue = 'graphql';
 
         // Initialize property from the environment/hook
@@ -113,7 +109,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::PERSISTED_QUERY_SLUG_BASE;
-        $selfProperty = &$this->getPersistedQuerySlugBase;
         $defaultValue = 'graphql-query';
 
         // Initialize property from the environment/hook
@@ -133,7 +128,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::EDITING_ACCESS_SCHEME;
-        $selfProperty = &$this->getEditingAccessScheme;
         $defaultValue = null;
 
         // Initialize property from the environment/hook

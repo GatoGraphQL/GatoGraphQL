@@ -18,7 +18,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::DEFINITION_PERSISTENCE_BUILD_DIR;
-        $selfProperty = &$this->getDefinitionPersistenceBuildDir;
         $defaultValue = dirname(__DIR__) . '/build';
 
         // Initialize property from the environment

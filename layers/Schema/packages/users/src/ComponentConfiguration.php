@@ -18,7 +18,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::USER_LIST_DEFAULT_LIMIT;
-        $selfProperty = &$this->getUserListDefaultLimit;
         $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
@@ -35,7 +34,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::USER_LIST_MAX_LIMIT;
-        $selfProperty = &$this->getUserListMaxLimit;
         $defaultValue = -1; // Unlimited
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
@@ -52,7 +50,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::USERS_ROUTE;
-        $selfProperty = &$this->getUsersRoute;
         $defaultValue = 'users';
 
         // Initialize property from the environment/hook
@@ -67,7 +64,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::TREAT_USER_EMAIL_AS_ADMIN_DATA;
-        $selfProperty = &$this->treatUserEmailAsAdminData;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

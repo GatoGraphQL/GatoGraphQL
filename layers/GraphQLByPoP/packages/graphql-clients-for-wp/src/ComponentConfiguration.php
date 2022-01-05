@@ -27,7 +27,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::GRAPHQL_CLIENTS_COMPONENT_URL;
-        $selfProperty = &$this->getGraphQLClientsComponentURL;
         $defaultValue = '';
 
         // Initialize property from the environment/hook
@@ -45,7 +44,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::DISABLE_GRAPHIQL_CLIENT_ENDPOINT;
-        $selfProperty = &$this->isGraphiQLClientEndpointDisabled;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -65,7 +63,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::USE_GRAPHIQL_EXPLORER;
-        $selfProperty = &$this->useGraphiQLExplorer;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -85,7 +82,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::GRAPHIQL_CLIENT_ENDPOINT;
-        $selfProperty = &$this->graphiQLClientEndpoint;
         $defaultValue = '/graphiql/';
         $callback = [EndpointUtils::class, 'slashURI'];
 
@@ -105,7 +101,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::DISABLE_VOYAGER_CLIENT_ENDPOINT;
-        $selfProperty = &$this->isGoyagerClientEndpointDisabled;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -125,7 +120,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::VOYAGER_CLIENT_ENDPOINT;
-        $selfProperty = &$this->voyagerClientEndpoint;
         $defaultValue = '/schema/';
         $callback = [EndpointUtils::class, 'slashURI'];
 

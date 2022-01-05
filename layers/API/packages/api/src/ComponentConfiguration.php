@@ -31,7 +31,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
 
         // Define properties
         $envVariable = Environment::USE_SCHEMA_DEFINITION_CACHE;
-        $selfProperty = &$this->useSchemaDefinitionCache;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -48,7 +47,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::EXECUTE_QUERY_BATCH_IN_STRICT_ORDER;
-        $selfProperty = &$this->executeQueryBatchInStrictOrder;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -65,7 +63,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_EMBEDDABLE_FIELDS;
-        $selfProperty = &$this->enableEmbeddableFields;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -82,7 +79,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_MUTATIONS;
-        $selfProperty = &$this->enableMutations;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -104,7 +100,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::OVERRIDE_REQUEST_URI;
-        $selfProperty = &$this->overrideRequestURI;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -121,7 +116,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA;
-        $selfProperty = &$this->skipExposingGlobalFieldsInFullSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -138,7 +132,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::SORT_FULL_SCHEMA_ALPHABETICALLY;
-        $selfProperty = &$this->sortFullSchemaAlphabetically;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

@@ -16,7 +16,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::CATEGORY_LIST_DEFAULT_LIMIT;
-        $selfProperty = &$this->getCategoryListDefaultLimit;
         $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
@@ -33,7 +32,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::CATEGORY_LIST_MAX_LIMIT;
-        $selfProperty = &$this->getCategoryListMaxLimit;
         $defaultValue = -1; // Unlimited
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 

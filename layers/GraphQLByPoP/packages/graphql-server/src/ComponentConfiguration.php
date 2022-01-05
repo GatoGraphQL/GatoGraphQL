@@ -35,7 +35,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::EXPOSE_SELF_FIELD_FOR_ROOT_TYPE_IN_GRAPHQL_SCHEMA;
-        $selfProperty = &$this->exposeSelfFieldForRootTypeInGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -52,7 +51,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::SORT_GRAPHQL_SCHEMA_ALPHABETICALLY;
-        $selfProperty = &$this->sortGraphQLSchemaAlphabetically;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -69,7 +67,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK;
-        $selfProperty = &$this->enableProactiveFeedback;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -86,7 +83,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_DEPRECATIONS;
-        $selfProperty = &$this->enableProactiveFeedbackDeprecations;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -103,7 +99,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_NOTICES;
-        $selfProperty = &$this->enableProactiveFeedbackNotices;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -120,7 +115,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_TRACES;
-        $selfProperty = &$this->enableProactiveFeedbackTraces;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -137,7 +131,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_LOGS;
-        $selfProperty = &$this->enableProactiveFeedbackLogs;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -154,7 +147,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_NESTED_MUTATIONS;
-        $selfProperty = &$this->enableNestedMutations;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -171,7 +163,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_GRAPHQL_INTROSPECTION;
-        $selfProperty = &$this->enableGraphQLIntrospection;
         $defaultValue = null;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -188,7 +179,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA;
-        $selfProperty = &$this->exposeSelfFieldInGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -205,7 +195,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ADD_FULLSCHEMA_FIELD_TO_GRAPHQL_SCHEMA;
-        $selfProperty = &$this->addFullSchemaFieldToGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -222,7 +211,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ADD_VERSION_TO_GRAPHQL_SCHEMA_FIELD_DESCRIPTION;
-        $selfProperty = &$this->addVersionToGraphQLSchemaFieldDescription;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -239,7 +227,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_SETTING_MUTATION_SCHEME_BY_URL_PARAM;
-        $selfProperty = &$this->enableSettingMutationSchemeByURLParam;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -256,7 +243,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM;
-        $selfProperty = &$this->enableEnablingGraphQLIntrospectionByURLParam;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -273,7 +259,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ADD_GRAPHQL_INTROSPECTION_PERSISTED_QUERY;
-        $selfProperty = &$this->addGraphQLIntrospectionPersistedQuery;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -290,7 +275,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ADD_CONNECTION_FROM_ROOT_TO_QUERYROOT_AND_MUTATIONROOT;
-        $selfProperty = &$this->addConnectionFromRootToQueryRootAndMutationRoot;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -307,7 +291,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::EXPOSE_SCHEMA_INTROSPECTION_FIELD_IN_SCHEMA;
-        $selfProperty = &$this->exposeSchemaIntrospectionFieldInSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -330,7 +313,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
 
         // Define properties
         $envVariable = Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA;
-        $selfProperty = &$this->exposeGlobalFieldsInGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

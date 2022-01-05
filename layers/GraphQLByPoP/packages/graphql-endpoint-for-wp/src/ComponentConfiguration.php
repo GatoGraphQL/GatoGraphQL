@@ -17,7 +17,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::DISABLE_GRAPHQL_API_ENDPOINT;
-        $selfProperty = &$this->isGraphQLAPIEndpointDisabled;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -34,7 +33,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::GRAPHQL_API_ENDPOINT;
-        $selfProperty = &$this->getGraphQLAPIEndpoint;
         $defaultValue = '/api/graphql/';
         $callback = [EndpointUtils::class, 'slashURI'];
 

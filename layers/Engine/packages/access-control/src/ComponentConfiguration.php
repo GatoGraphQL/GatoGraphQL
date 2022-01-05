@@ -16,7 +16,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::USE_PRIVATE_SCHEMA_MODE;
-        $selfProperty = &$this->usePrivateSchemaMode;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -33,7 +32,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_INDIVIDUAL_CONTROL_FOR_PUBLIC_PRIVATE_SCHEMA_MODE;
-        $selfProperty = &$this->enableIndividualControlForPublicPrivateSchemaMode;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
