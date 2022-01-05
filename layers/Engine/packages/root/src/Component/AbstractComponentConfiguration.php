@@ -9,16 +9,10 @@ namespace PoP\Root\Component;
  */
 abstract class AbstractComponentConfiguration implements ComponentConfigurationInterface
 {
-    /**
-     * Component configuration.
-     *
-     * @var array<string,mixed>
-     */
-    protected array $configuration = [];
-
-    public function setConfiguration(array $configuration): void
-    {
-        $this->configuration = $configuration;
+    final public function __construct(
+        /** @var array<string,mixed> */
+        protected array $configuration
+    ) {
     }
 
     public function hasConfigurationValue(string $envVariable): bool

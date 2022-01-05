@@ -12,14 +12,6 @@ abstract class AbstractComponent implements ComponentInterface
 
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
 
-    public function __construct()
-    {
-        $componentConfigurationClass = $this->getComponentConfigurationClass();
-        if ($componentConfigurationClass !== null) {
-            $this->componentConfiguration = new $componentConfigurationClass();
-        }
-    }
-
     /**
      * Enable each component to set default configuration for
      * itself and its depended components
@@ -44,7 +36,7 @@ abstract class AbstractComponent implements ComponentInterface
         array $skipSchemaComponentClasses = []
     ): void {
         // Set the configuration on the corresponding ComponentConfiguration
-        $this->maybeSetConfiguration($configuration);
+        $this->initializeConfiguration($configuration);
 
         // Initialize the self component
         $this->initializeContainerServices($skipSchema, $skipSchemaComponentClasses);
@@ -193,8 +185,12 @@ abstract class AbstractComponent implements ComponentInterface
     /**
      * @param array<string,mixed> $configuration
      */
-    protected function maybeSetConfiguration(array $configuration): void
+    protected function initializeConfiguration(array $configuration): void
     {
-        $this->getConfiguration()?->setConfiguration($configuration);
+        $componentConfigurationClass = $this->getComponentConfigurationClass();
+        if ($componentConfigurationClass === null) {
+            return;
+        }
+        $this->componentConfiguration = new $componentConfigurationClass($configuration);
     }
 }

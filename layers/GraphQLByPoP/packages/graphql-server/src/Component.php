@@ -58,16 +58,14 @@ class Component extends AbstractComponent
         // - "standard" => Use QueryRoot and MutationRoot
         // - "nested" => Use Root, and nested mutations with redundant root fields
         // - "lean_nested" => Use Root, and nested mutations without redundant root fields
-        /** @var ComponentConfiguration */
-        $componentConfiguration = $this->getConfiguration();
-        if ($componentConfiguration->enableSettingMutationSchemeByURLParam()) {
+        if (Environment::enableSettingMutationSchemeByURLParam()) {
             if ($mutationScheme = Request::getMutationScheme()) {
-                $componentClassConfiguration[self::class][Environment::ENABLE_NESTED_MUTATIONS] = $mutationScheme != MutationSchemes::STANDARD;
-                $componentClassConfiguration[EngineComponent::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = $mutationScheme == MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS;
+                $componentClassConfiguration[self::class][Environment::ENABLE_NESTED_MUTATIONS] = $mutationScheme !== MutationSchemes::STANDARD;
+                $componentClassConfiguration[EngineComponent::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = $mutationScheme === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS;
             }
         }
         // Enable GraphQL Introspection for PQL by doing ?enable_graphql_introspection=1
-        if ($componentConfiguration->enableEnablingGraphQLIntrospectionByURLParam()) {
+        if (Environment::enableEnablingGraphQLIntrospectionByURLParam()) {
             $enableGraphQLIntrospection = Request::enableGraphQLIntrospection();
             if ($enableGraphQLIntrospection !== null) {
                 $componentClassConfiguration[self::class][Environment::ENABLE_GRAPHQL_INTROSPECTION] = $enableGraphQLIntrospection;
