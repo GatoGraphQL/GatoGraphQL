@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\ApplicationEvents;
 
@@ -78,23 +77,5 @@ class Component extends AbstractComponent
 
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
         $attachExtensionService->attachExtensions(ApplicationEvents::AFTER_BOOT);
-    }
-
-    /**
-     * Define runtime constants
-     */
-    protected function defineRuntimeConstants(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
-    ): void {
-        ComponentInfo::init([
-            // This Constant is needed to be able to retrieve the timestamp and replace it for nothing when generating the ETag,
-            // so that this random value does not modify the hash of the overall html output
-            'unique-id' => GeneralUtils::generateRandomString(),
-            'rand' => rand(),
-            'time' => time(),
-            // This value will be used in the response. If compact, make sure each JS Key is unique
-            'response-prop-submodules' => Environment::compactResponseJsonKeys() ? 'ms' : 'submodules',
-        ]);
     }
 }

@@ -11,6 +11,7 @@ abstract class AbstractComponent implements ComponentInterface
     use InitializeContainerServicesInComponentTrait;
 
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
+    protected ?ComponentInfoInterface $componentInfo = null;
 
     /**
      * Enable each component to set default configuration for
@@ -37,6 +38,9 @@ abstract class AbstractComponent implements ComponentInterface
     ): void {
         // Set the configuration on the corresponding ComponentConfiguration
         $this->initializeConfiguration($configuration);
+
+        // Have the Component set its own info on the corresponding ComponentInfo
+        $this->initializeInfo();
 
         // Initialize the self component
         $this->initializeContainerServices($skipSchema, $skipSchemaComponentClasses);
@@ -164,22 +168,17 @@ abstract class AbstractComponent implements ComponentInterface
     /**
      * ComponentConfiguration class for the Component
      */
-    protected function getComponentConfigurationClass(): ?string
-    {
-        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        $componentConfigurationClass = $classNamespace . '\\ComponentConfiguration';
-        if (!class_exists($componentConfigurationClass)) {
-            return null;
-        }
-        return $componentConfigurationClass;
-    }
-
-    /**
-     * ComponentConfiguration class for the Component
-     */
     public function getConfiguration(): ?ComponentConfigurationInterface
     {
         return $this->componentConfiguration;
+    }
+
+    /**
+     * ComponentInfo class for the Component
+     */
+    public function getInfo(): ?ComponentInfoInterface
+    {
+        return $this->componentInfo;
     }
 
     /**
@@ -192,5 +191,40 @@ abstract class AbstractComponent implements ComponentInterface
             return;
         }
         $this->componentConfiguration = new $componentConfigurationClass($configuration);
+    }
+
+    /**
+     * ComponentConfiguration class for the Component
+     */
+    protected function getComponentConfigurationClass(): ?string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        $componentConfigurationClass = $classNamespace . '\\ComponentConfiguration';
+        if (!class_exists($componentConfigurationClass)) {
+            return null;
+        }
+        return $componentConfigurationClass;
+    }
+
+    protected function initializeInfo(): void
+    {
+        $componentInfoClass = $this->getComponentInfoClass();
+        if ($componentInfoClass === null) {
+            return;
+        }
+        $this->componentInfo = new $componentInfoClass($this);
+    }
+
+    /**
+     * ComponentInfo class for the Component
+     */
+    protected function getComponentInfoClass(): ?string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        $componentInfoClass = $classNamespace . '\\ComponentInfo';
+        if (!class_exists($componentInfoClass)) {
+            return null;
+        }
+        return $componentInfoClass;
     }
 }

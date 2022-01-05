@@ -266,10 +266,12 @@ class Engine implements EngineInterface
         if ($this->getHooksAPI()->applyFilters('\PoP\ComponentModel\Engine:outputData:addEtagHeader', true)) {
             // The same page will have different hashs only because of those random elements added each time,
             // such as the unique_id and the current_time. So remove these to generate the hash
+            /** @var ComponentInfo */
+            $componentInfo = App::getComponent(Component::class)->getInfo();
             $differentiators = array(
-                ComponentInfo::get('unique-id'),
-                ComponentInfo::get('rand'),
-                ComponentInfo::get('time'),
+                $componentInfo->getUniqueID(),
+                $componentInfo->getRand(),
+                $componentInfo->getTime(),
             );
             $commoncode = str_replace($differentiators, '', json_encode($this->data));
 
@@ -616,9 +618,11 @@ class Engine implements EngineInterface
 
     public function getRequestMeta(): array
     {
+        /** @var ComponentInfo */
+        $componentInfo = App::getComponent(Component::class)->getInfo();
         $meta = array(
             Response::ENTRY_MODULE => $this->getEntryModule()[1],
-            Response::UNIQUE_ID => ComponentInfo::get('unique-id'),
+            Response::UNIQUE_ID => $componentInfo->getUniqueID(),
             Response::URL => $this->getRequestHelperService()->getCurrentURL(),
             'modelinstanceid' => $this->getModelInstance()->getModelInstanceId(),
         );
@@ -912,18 +916,21 @@ class Engine implements EngineInterface
         string $key,
         mixed $value,
     ): void {
+        /** @var ComponentInfo */
+        $componentInfo = App::getComponent(Component::class)->getInfo();
+        $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
         $array_pointer = &$array;
         foreach ($module_path as $submodule) {
             // Notice that when generating the array for the response, we don't use $module anymore, but $moduleOutputName
             $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
 
             // If the path doesn't exist, create it
-            if (!isset($array_pointer[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')])) {
-                $array_pointer[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')] = [];
+            if (!isset($array_pointer[$submoduleOutputName][$submodulesOutputProperty])) {
+                $array_pointer[$submoduleOutputName][$submodulesOutputProperty] = [];
             }
 
             // The pointer is the location in the array where the value will be set
-            $array_pointer = &$array_pointer[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')];
+            $array_pointer = &$array_pointer[$submoduleOutputName][$submodulesOutputProperty];
         }
 
         $moduleOutputName = ModuleUtils::getModuleOutputName($module);
@@ -1029,6 +1036,10 @@ class Engine implements EngineInterface
         // Get the list of all modules which load data, as a list of the module path starting from the top element (the entry module)
         $module_fullpaths = $this->getDataloadingModuleFullpaths($root_module, $root_props);
 
+        /** @var ComponentInfo */
+        $componentInfo = App::getComponent(Component::class)->getInfo();
+        $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
+
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getModuleFilterManager()->neverExclude(true);
         foreach ($module_fullpaths as $module_path) {
@@ -1044,7 +1055,7 @@ class Engine implements EngineInterface
             $data_properties = &$root_data_properties;
             foreach ($module_path as $submodule) {
                 $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
-                $data_properties = &$data_properties[$submoduleFullName][ComponentInfo::get('response-prop-submodules')];
+                $data_properties = &$data_properties[$submoduleFullName][$submodulesOutputProperty];
             }
             $data_properties = &$data_properties[$moduleFullName][DataLoading::DATA_PROPERTIES];
             $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
@@ -1994,11 +2005,15 @@ class Engine implements EngineInterface
 
             // Add the feedback into the object
             if ($feedback = $processor->getDataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
+                /** @var ComponentInfo */
+                $componentInfo = App::getComponent(Component::class)->getInfo();
+                $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
+
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
                     $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
-                    $moduledata[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')] = $moduledata[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')] ?? [];
-                    $moduledata = &$moduledata[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')];
+                    $moduledata[$submoduleOutputName][$submodulesOutputProperty] = $moduledata[$submoduleOutputName][$submodulesOutputProperty] ?? [];
+                    $moduledata = &$moduledata[$submoduleOutputName][$submodulesOutputProperty];
                 }
                 // Merge the feedback in
                 $moduledata = array_merge_recursive(
