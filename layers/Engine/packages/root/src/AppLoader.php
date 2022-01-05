@@ -11,7 +11,7 @@ use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
 use PoP\Root\Managers\ComponentManager;
 
 /**
- * Component Loader
+ * Application Loader
  */
 class AppLoader
 {
