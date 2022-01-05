@@ -35,7 +35,7 @@ trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
         );
     }
 
-    protected function replacePlaceholdersWithCurrentExecutionData(string $content): ?string
+    protected function replacePlaceholdersWithCurrentExecutionData(string|array|null $content): ?string
     {
         /**
          * Content may be null if it had not been cached
