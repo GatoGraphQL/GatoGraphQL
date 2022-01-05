@@ -24,9 +24,8 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }

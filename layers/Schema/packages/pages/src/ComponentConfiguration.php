@@ -24,11 +24,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function getPageListMaxLimit(): ?int
@@ -42,11 +41,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function addPageTypeToCustomPostUnionTypes(): bool
@@ -60,10 +58,9 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }

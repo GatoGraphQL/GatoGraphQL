@@ -42,11 +42,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function sortGraphQLSchemaAlphabetically(): bool
@@ -60,11 +59,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableProactiveFeedback(): bool
@@ -78,11 +76,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableProactiveFeedbackDeprecations(): bool
@@ -96,11 +93,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableProactiveFeedbackNotices(): bool
@@ -114,11 +110,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableProactiveFeedbackTraces(): bool
@@ -132,11 +127,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableProactiveFeedbackLogs(): bool
@@ -150,11 +144,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableNestedMutations(): bool
@@ -168,11 +161,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableGraphQLIntrospection(): ?bool
@@ -186,11 +178,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function exposeSelfFieldInGraphQLSchema(): bool
@@ -204,11 +195,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function addFullSchemaFieldToGraphQLSchema(): bool
@@ -222,11 +212,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function addVersionToGraphQLSchemaFieldDescription(): bool
@@ -240,11 +229,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableSettingMutationSchemeByURLParam(): bool
@@ -258,11 +246,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableEnablingGraphQLIntrospectionByURLParam(): bool
@@ -276,11 +263,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function addGraphQLIntrospectionPersistedQuery(): bool
@@ -294,11 +280,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function addConnectionFromRootToQueryRootAndMutationRoot(): bool
@@ -312,11 +297,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function exposeSchemaIntrospectionFieldInSchema(): bool
@@ -330,11 +314,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function exposeGlobalFieldsInGraphQLSchema(): bool
@@ -354,10 +337,9 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }

@@ -24,15 +24,13 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     // {
     //     // Define properties
     //     $envVariable = Environment::MODULE_URL_BASE;
-    //     $selfProperty = &$this->getModuleURLBase;
     //     $defaultValue = 'https://graphql-api.com/modules/';
     //     // Initialize property from the environment/hook
     //     $this->maybeInitializeConfigurationValue(
     //         $envVariable,
-    //         $selfProperty,
     //         $defaultValue
     //     );
-    //     return $selfProperty;
+    //     return $this->configuration[$envVariable];
     // }
     /**
      * Group the fields under the type when printing it for the user
@@ -48,11 +46,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -68,10 +65,9 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -87,10 +83,9 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -106,10 +101,9 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -125,10 +119,9 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -146,9 +139,8 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }

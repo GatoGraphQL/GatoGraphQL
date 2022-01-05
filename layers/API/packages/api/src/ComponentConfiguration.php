@@ -38,11 +38,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function executeQueryBatchInStrictOrder(): bool
@@ -56,11 +55,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableEmbeddableFields(): bool
@@ -74,11 +72,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableMutations(): bool
@@ -92,11 +89,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -115,11 +111,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function skipExposingGlobalFieldsInFullSchema(): bool
@@ -133,11 +128,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function sortFullSchemaAlphabetically(): bool
@@ -151,10 +145,9 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }
