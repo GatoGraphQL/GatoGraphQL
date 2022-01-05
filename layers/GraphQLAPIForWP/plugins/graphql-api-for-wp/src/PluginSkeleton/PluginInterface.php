@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 interface PluginInterface
 {
     public function setup(): void;
-    
+
     /**
      * Execute logic after the plugin/extension has just been activated
      */
