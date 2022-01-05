@@ -11,6 +11,7 @@ abstract class AbstractComponent implements ComponentInterface
     use InitializeContainerServicesInComponentTrait;
 
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
+    protected ?ComponentInfoInterface $componentInfo = null;
 
     /**
      * Enable each component to set default configuration for
@@ -173,6 +174,14 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
+     * ComponentInfo class for the Component
+     */
+    public function getInfo(): ?ComponentInfoInterface
+    {
+        return $this->componentInfo;
+    }
+
+    /**
      * @param array<string,mixed> $configuration
      */
     protected function initializeConfiguration(array $configuration): void
@@ -203,7 +212,7 @@ abstract class AbstractComponent implements ComponentInterface
         if ($componentInfoClass === null) {
             return;
         }
-        $this->componentInfo = new $componentInfoClass();
+        $this->componentInfo = new $componentInfoClass($this);
     }
 
     /**

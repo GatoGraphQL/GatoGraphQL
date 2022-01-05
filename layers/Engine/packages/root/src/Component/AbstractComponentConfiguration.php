@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Root\Component;
 
-/**
- * Initialize component
- */
 abstract class AbstractComponentConfiguration implements ComponentConfigurationInterface
 {
     final public function __construct(
