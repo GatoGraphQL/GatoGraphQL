@@ -9,14 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    // private string $getModuleURLBase;
-    private bool $groupFieldsUnderTypeForPrint = false;
-    private string $getEmptyLabel = '';
-    private string $getSettingsValueLabel = '';
-    private ?string $getCustomEndpointSlugBase = null;
-    private ?string $getPersistedQuerySlugBase = null;
-    private ?string $getEditingAccessScheme = null;
-
     // /**
     //  * URL base for the module, pointing to graphql-api.com
     //  */
@@ -24,16 +16,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     // {
     //     // Define properties
     //     $envVariable = Environment::MODULE_URL_BASE;
-    //     $selfProperty = &$this->getModuleURLBase;
     //     $defaultValue = 'https://graphql-api.com/modules/';
     //     // Initialize property from the environment/hook
     //     $this->maybeInitializeConfigurationValue(
     //         $envVariable,
-    //         $selfProperty,
     //         $defaultValue
     //     );
-    //     return $selfProperty;
+    //     return $this->configuration[$envVariable];
     // }
+
     /**
      * Group the fields under the type when printing it for the user
      */
@@ -41,18 +32,16 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::GROUP_FIELDS_UNDER_TYPE_FOR_PRINT;
-        $selfProperty = &$this->groupFieldsUnderTypeForPrint;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -62,16 +51,14 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::EMPTY_LABEL;
-        $selfProperty = &$this->getEmptyLabel;
         $defaultValue = \__('---', 'graphql-api');
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -81,16 +68,14 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::SETTINGS_VALUE_LABEL;
-        $selfProperty = &$this->getSettingsValueLabel;
         $defaultValue = \__('🟡 Default', 'graphql-api');
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -100,16 +85,14 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENDPOINT_SLUG_BASE;
-        $selfProperty = &$this->getCustomEndpointSlugBase;
         $defaultValue = 'graphql';
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -119,16 +102,14 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::PERSISTED_QUERY_SLUG_BASE;
-        $selfProperty = &$this->getPersistedQuerySlugBase;
         $defaultValue = 'graphql-query';
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -140,15 +121,13 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::EDITING_ACCESS_SCHEME;
-        $selfProperty = &$this->getEditingAccessScheme;
         $defaultValue = null;
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }

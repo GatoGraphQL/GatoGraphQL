@@ -9,43 +9,36 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $usePrivateSchemaMode = false;
-    private bool $enableIndividualControlForPublicPrivateSchemaMode = true;
-
     public function usePrivateSchemaMode(): bool
     {
         // Define properties
         $envVariable = Environment::USE_PRIVATE_SCHEMA_MODE;
-        $selfProperty = &$this->usePrivateSchemaMode;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableIndividualControlForPublicPrivateSchemaMode(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_INDIVIDUAL_CONTROL_FOR_PUBLIC_PRIVATE_SCHEMA_MODE;
-        $selfProperty = &$this->enableIndividualControlForPublicPrivateSchemaMode;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**

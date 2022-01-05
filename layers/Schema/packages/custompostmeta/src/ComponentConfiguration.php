@@ -10,40 +10,36 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private array $getCustomPostMetaEntries = [];
-    private string $getCustomPostMetaBehavior = Behaviors::ALLOWLIST;
-
+    /**
+     * @return string[]
+     */
     public function getCustomPostMetaEntries(): array
     {
         // Define properties
         $envVariable = Environment::CUSTOMPOST_META_ENTRIES;
-        $selfProperty = &$this->getCustomPostMetaEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function getCustomPostMetaBehavior(): string
     {
         // Define properties
         $envVariable = Environment::CUSTOMPOST_META_BEHAVIOR;
-        $selfProperty = &$this->getCustomPostMetaBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
-            $defaultValue
+            $defaultValue,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }

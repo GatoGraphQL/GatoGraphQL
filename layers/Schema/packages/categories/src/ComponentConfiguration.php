@@ -9,42 +9,35 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private ?int $getCategoryListDefaultLimit = 10;
-    private ?int $getCategoryListMaxLimit = -1;
-
     public function getCategoryListDefaultLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::CATEGORY_LIST_DEFAULT_LIMIT;
-        $selfProperty = &$this->getCategoryListDefaultLimit;
         $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function getCategoryListMaxLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::CATEGORY_LIST_MAX_LIMIT;
-        $selfProperty = &$this->getCategoryListMaxLimit;
         $defaultValue = -1; // Unlimited
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }

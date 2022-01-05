@@ -19,20 +19,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     private array $overrideConfiguration = [];
 
-    private bool $enableConfigByParams = false;
-    private bool $useComponentModelCache = false;
-    private bool $mustNamespaceTypes = false;
-    private bool $useSingleTypeInsteadOfUnionType = false;
-    private bool $enableAdminSchema = false;
-    private bool $validateFieldTypeResponseWithSchemaDefinition = false;
-    private bool $treatTypeCoercingFailuresAsErrors = false;
-    private bool $treatUndefinedFieldOrDirectiveArgsAsErrors = false;
-    private bool $setFailingFieldResponseAsNull = false;
-    private bool $removeFieldIfDirectiveFailed = false;
-    private bool $convertInputValueFromSingleToList = false;
-    private bool $enableUnionTypeImplementingInterfaceType = false;
-    private bool $skipExposingDangerouslyDynamicScalarTypeInSchema = false;
-
     /**
      * Initialize component configuration
      */
@@ -85,18 +71,16 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_CONFIG_BY_PARAMS;
-        $selfProperty = &$this->enableConfigByParams;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -114,72 +98,64 @@ class ComponentConfiguration extends AbstractComponentConfiguration
 
         // Define properties
         $envVariable = Environment::USE_COMPONENT_MODEL_CACHE;
-        $selfProperty = &$this->useComponentModelCache;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function mustNamespaceTypes(): bool
     {
         // Define properties
         $envVariable = Environment::NAMESPACE_TYPES_AND_INTERFACES;
-        $selfProperty = &$this->mustNamespaceTypes;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function useSingleTypeInsteadOfUnionType(): bool
     {
         // Define properties
         $envVariable = Environment::USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
-        $selfProperty = &$this->useSingleTypeInsteadOfUnionType;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     public function enableAdminSchema(): bool
     {
         // Define properties
         $envVariable = Environment::ENABLE_ADMIN_SCHEMA;
-        $selfProperty = &$this->enableAdminSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -189,18 +165,16 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::VALIDATE_FIELD_TYPE_RESPONSE_WITH_SCHEMA_DEFINITION;
-        $selfProperty = &$this->validateFieldTypeResponseWithSchemaDefinition;
         $defaultValue = RootEnvironment::isApplicationEnvironmentDev();
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -211,18 +185,16 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::TREAT_TYPE_COERCING_FAILURES_AS_ERRORS;
-        $selfProperty = &$this->treatTypeCoercingFailuresAsErrors;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -234,18 +206,16 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::TREAT_UNDEFINED_FIELD_OR_DIRECTIVE_ARGS_AS_ERRORS;
-        $selfProperty = &$this->treatUndefinedFieldOrDirectiveArgsAsErrors;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -260,18 +230,16 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::SET_FAILING_FIELD_RESPONSE_AS_NULL;
-        $selfProperty = &$this->setFailingFieldResponseAsNull;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -281,18 +249,16 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::REMOVE_FIELD_IF_DIRECTIVE_FAILED;
-        $selfProperty = &$this->removeFieldIfDirectiveFailed;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -305,18 +271,16 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST;
-        $selfProperty = &$this->convertInputValueFromSingleToList;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -329,18 +293,16 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::ENABLE_UNION_TYPE_IMPLEMENTING_INTERFACE_TYPE;
-        $selfProperty = &$this->enableUnionTypeImplementingInterfaceType;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 
     /**
@@ -362,17 +324,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // Define properties
         $envVariable = Environment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA;
-        $selfProperty = &$this->skipExposingDangerouslyDynamicScalarTypeInSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
             $envVariable,
-            $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
         );
-        return $selfProperty;
+        return $this->configuration[$envVariable];
     }
 }
