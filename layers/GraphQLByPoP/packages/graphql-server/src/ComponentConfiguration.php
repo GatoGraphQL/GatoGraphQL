@@ -204,38 +204,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         return $this->configuration[$envVariable];
     }
 
-    public function enableSettingMutationSchemeByURLParam(): bool
-    {
-        // Define properties
-        $envVariable = Environment::ENABLE_SETTING_MUTATION_SCHEME_BY_URL_PARAM;
-        $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
-
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-        return $this->configuration[$envVariable];
-    }
-
-    public function enableEnablingGraphQLIntrospectionByURLParam(): bool
-    {
-        // Define properties
-        $envVariable = Environment::ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM;
-        $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
-
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-        return $this->configuration[$envVariable];
-    }
-
     public function addGraphQLIntrospectionPersistedQuery(): bool
     {
         // Define properties
