@@ -29,7 +29,7 @@ class ComponentInfo extends AbstractComponentInfo
 
     public function getRand(): int
     {
-        return $this->values['int'];
+        return $this->values['rand'];
     }
 
     public function getTime(): int
