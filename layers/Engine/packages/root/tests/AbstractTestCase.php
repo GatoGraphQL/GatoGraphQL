@@ -17,7 +17,7 @@ abstract class AbstractTestCase extends TestCase
     {
         if (self::$container === null) {
             static::initializeApp(false, null, null, true);
-            self::$container = \PoP\Root\App::getContainerBuilderFactory()->getInstance();
+            self::$container = App::getContainerBuilderFactory()->getInstance();
         }
     }
 
