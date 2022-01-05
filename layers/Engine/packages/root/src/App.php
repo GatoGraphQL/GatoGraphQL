@@ -14,10 +14,10 @@ use PoP\Root\Managers\ComponentManager;
  */
 class App
 {
-    protected static ?AppLoader $appLoader = null;
-    protected static ?ContainerBuilderFactory $containerBuilderFactory = null;
-    protected static ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null;
-    protected static ?ComponentManager $componentManager = null;
+    protected static AppLoader $appLoader;
+    protected static ContainerBuilderFactory $containerBuilderFactory;
+    protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
+    protected static ComponentManager $componentManager;
 
     /**
      * This functions is to be called by PHPUnit,
@@ -27,10 +27,7 @@ class App
      */
     public static function reset(): void
     {
-        self::$appLoader = null;
-        self::$containerBuilderFactory = null;
-        self::$systemContainerBuilderFactory = null;
-        self::$componentManager = null;
+        static::initialize();
     }
 
     /**
