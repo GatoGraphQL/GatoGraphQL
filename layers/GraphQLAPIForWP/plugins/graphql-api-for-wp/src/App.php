@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use LogicException;
 use PoP\Root\App as UpstreamApp;
@@ -25,11 +26,19 @@ class App implements AppInterface
 {
     protected static UpstreamApp $app;
     protected static MainPluginManager $mainPluginManager;
+    protected static ExtensionManager $extensionManager;
 
     public static function initializePlugin(
         ?MainPluginManager $mainPluginManager = null,
+        ?ExtensionManager $extensionManager = null,
     ): void {
         self::$mainPluginManager = $mainPluginManager ?? static::getMainPluginManager();
+        self::$extensionManager = $extensionManager ?? static::getExtensionManager();
+    }
+
+    protected static function createExtensionManager(): ExtensionManager
+    {
+        return new ExtensionManager();
     }
 
     protected static function createMainPluginManager(): MainPluginManager
@@ -40,6 +49,11 @@ class App implements AppInterface
     public static function getMainPluginManager(): MainPluginManager
     {
         return self::$mainPluginManager;
+    }
+
+    public static function getExtensionManager(): ExtensionManager
+    {
+        return self::$extensionManager;
     }
 
     /**
