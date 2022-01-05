@@ -4,7 +4,6 @@ namespace PoPSchema\CommentMeta;
 
 use PoP\Root\App;
 use PoP\Engine\AbstractTestCase;
-use PoP\Root\Managers\ComponentManager;
 
 class ComponentTest extends AbstractTestCase
 {

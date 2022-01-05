@@ -4,7 +4,6 @@ namespace PoP\Translation;
 
 use PoP\Root\App;
 use PoP\Root\AbstractTestCase;
-use PoP\Root\Managers\ComponentManager;
 
 class ComponentTest extends AbstractTestCase
 {

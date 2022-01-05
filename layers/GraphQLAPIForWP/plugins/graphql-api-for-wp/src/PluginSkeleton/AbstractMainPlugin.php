@@ -9,7 +9,6 @@ use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\Filesyste
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
-use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use PoP\Engine\AppLoader;
 use PoP\Root\Environment as RootEnvironment;

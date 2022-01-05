@@ -3,7 +3,6 @@
 namespace PoP\Root\Helpers;
 
 use PHPUnit\Framework\TestCase;
-use PoP\Root\Helpers\ClassHelpers;
 
 class ClassHelpersTest extends TestCase
 {

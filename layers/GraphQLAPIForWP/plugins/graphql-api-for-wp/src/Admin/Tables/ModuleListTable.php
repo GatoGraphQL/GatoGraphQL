@@ -9,7 +9,6 @@ use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;

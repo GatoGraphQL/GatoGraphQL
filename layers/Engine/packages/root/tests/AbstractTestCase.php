@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Root;
 
 use PHPUnit\Framework\TestCase;
-use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

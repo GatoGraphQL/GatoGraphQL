@@ -4,7 +4,6 @@ namespace PoP\Base36Definitions;
 
 use PoP\Root\App;
 use PoP\Root\AbstractTestCase;
-use PoP\Root\Managers\ComponentManager;
 
 class ComponentTest extends AbstractTestCase
 {

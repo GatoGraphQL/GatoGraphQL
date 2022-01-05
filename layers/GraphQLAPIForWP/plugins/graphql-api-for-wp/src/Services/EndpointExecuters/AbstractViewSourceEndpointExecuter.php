@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use PoP\ComponentModel\State\ApplicationState;
 use WP_Post;
 

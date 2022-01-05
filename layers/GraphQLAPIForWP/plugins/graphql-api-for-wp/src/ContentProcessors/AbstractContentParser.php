@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\PluginConstants;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use InvalidArgumentException;
 use PoP\BasicService\BasicServiceTrait;

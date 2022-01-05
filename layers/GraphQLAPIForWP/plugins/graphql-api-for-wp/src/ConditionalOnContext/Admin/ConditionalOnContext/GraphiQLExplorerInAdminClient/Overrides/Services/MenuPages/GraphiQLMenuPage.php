@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\Clients\AdminGraphiQLWithExplorerClient;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage as UpstreamGraphiQLMenuPage;
 use PoP\API\Schema\QueryInputs;
 
