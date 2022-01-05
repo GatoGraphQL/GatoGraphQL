@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace PoP\EngineWP\Templates;
 
 use PoP\Root\App;
-use PoP\EngineWP\ComponentInterface;
 use PoP\EngineWP\Component;
+use PoP\EngineWP\ComponentInfo;
 
 class TemplateHelpers
 {
     public static function getTemplateFile(): string
     {
-        /** @var ComponentInterface */
-        $component = App::getComponent(Component::class);
-        return $component->getTemplatesDir() . '/Output.php';
+        /** @var ComponentInfo */
+        $componentInfo = App::getComponent(Component::class)->getInfo();
+        return $componentInfo->getTemplatesDir() . '/Output.php';
     }
 }
