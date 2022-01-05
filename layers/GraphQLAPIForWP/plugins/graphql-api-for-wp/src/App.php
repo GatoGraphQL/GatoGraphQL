@@ -24,7 +24,6 @@ use Symfony\Component\DependencyInjection\Container;
  */
 class App implements AppInterface
 {
-    protected static UpstreamApp $app;
     protected static MainPluginManager $mainPluginManager;
     protected static ExtensionManager $extensionManager;
 
@@ -69,7 +68,7 @@ class App implements AppInterface
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManager $componentManager = null,
     ): void {
-        self::$app::initialize(
+        UpstreamApp::initialize(
             $appLoader,
             $containerBuilderFactory,
             $systemContainerBuilderFactory,
@@ -79,22 +78,22 @@ class App implements AppInterface
 
     public static function getAppLoader(): AppLoader
     {
-        return self::$app::getAppLoader();
+        return UpstreamApp::getAppLoader();
     }
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory
     {
-        return self::$app::getContainerBuilderFactory();
+        return UpstreamApp::getContainerBuilderFactory();
     }
 
     public static function getSystemContainerBuilderFactory(): SystemContainerBuilderFactory
     {
-        return self::$app::getSystemContainerBuilderFactory();
+        return UpstreamApp::getSystemContainerBuilderFactory();
     }
 
     public static function getComponentManager(): ComponentManager
     {
-        return self::$app::getComponentManager();
+        return UpstreamApp::getComponentManager();
     }
 
     /**
@@ -106,7 +105,7 @@ class App implements AppInterface
     public static function stockAndInitializeComponentClasses(
         array $componentClasses
     ): void {
-        self::$app::stockAndInitializeComponentClasses($componentClasses);
+        UpstreamApp::stockAndInitializeComponentClasses($componentClasses);
     }
 
     /**
@@ -114,7 +113,7 @@ class App implements AppInterface
      */
     final public static function getContainer(): Container
     {
-        return self::$app::getContainer();
+        return UpstreamApp::getContainer();
     }
 
     /**
@@ -122,7 +121,7 @@ class App implements AppInterface
      */
     final public static function getSystemContainer(): Container
     {
-        return self::$app::getSystemContainer();
+        return UpstreamApp::getSystemContainer();
     }
 
     /**
@@ -132,6 +131,6 @@ class App implements AppInterface
      */
     final public static function getComponent(string $componentClass): ComponentInterface
     {
-        return self::$app::getComponent($componentClass);
+        return UpstreamApp::getComponent($componentClass);
     }
 }
