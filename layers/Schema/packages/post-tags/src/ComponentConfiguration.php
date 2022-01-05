@@ -8,8 +8,6 @@ use PoP\BasicService\Component\AbstractComponentConfiguration;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private string $getPostTagsRoute = '';
-
     // public function getPostTagListDefaultLimit(): ?int
     // {
     //     // Define properties

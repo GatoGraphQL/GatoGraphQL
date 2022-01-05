@@ -9,11 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private ?int $getPostListDefaultLimit = 10;
-    private ?int $getPostListMaxLimit = -1;
-    private bool $addPostTypeToCustomPostUnionTypes = true;
-    private string $getPostsRoute = '';
-
     public function getPostListDefaultLimit(): ?int
     {
         // Define properties

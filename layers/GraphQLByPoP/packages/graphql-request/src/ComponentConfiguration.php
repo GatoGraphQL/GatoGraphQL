@@ -9,8 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $disableGraphQLAPIForPoP = false;
-
     public function disableGraphQLAPIForPoP(): bool
     {
         // Define properties

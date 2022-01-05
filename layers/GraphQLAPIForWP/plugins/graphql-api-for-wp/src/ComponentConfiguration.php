@@ -9,14 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    // private string $getModuleURLBase;
-    private bool $groupFieldsUnderTypeForPrint = false;
-    private string $getEmptyLabel = '';
-    private string $getSettingsValueLabel = '';
-    private ?string $getCustomEndpointSlugBase = null;
-    private ?string $getPersistedQuerySlugBase = null;
-    private ?string $getEditingAccessScheme = null;
-
     // /**
     //  * URL base for the module, pointing to graphql-api.com
     //  */
@@ -32,6 +24,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     //     );
     //     return $this->configuration[$envVariable];
     // }
+    
     /**
      * Group the fields under the type when printing it for the user
      */

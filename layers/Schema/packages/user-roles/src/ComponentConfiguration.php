@@ -9,9 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $treatUserRoleAsAdminData = true;
-    private bool $treatUserCapabilityAsAdminData = true;
-
     public function treatUserRoleAsAdminData(): bool
     {
         // Define properties

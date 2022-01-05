@@ -9,8 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $enableVariablesAsExpressions = false;
-
     public function enableVariablesAsExpressions(): bool
     {
         // Define properties

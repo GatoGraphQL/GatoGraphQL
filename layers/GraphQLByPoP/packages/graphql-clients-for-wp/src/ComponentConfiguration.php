@@ -10,15 +10,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private string $getGraphQLClientsComponentURL = '';
-
-    private bool $isGraphiQLClientEndpointDisabled = false;
-    private string $graphiQLClientEndpoint = '/graphiql/';
-    private bool $useGraphiQLExplorer = true;
-    private bool $isGoyagerClientEndpointDisabled = false;
-    private string $voyagerClientEndpoint = '/schema/';
-
-
     /**
      * URL under which the clients are loaded.
      * Needed to convert relative paths to absolute URLs

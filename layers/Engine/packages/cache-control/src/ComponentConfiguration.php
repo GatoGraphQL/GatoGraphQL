@@ -9,8 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private int $getDefaultCacheControlMaxAge = 3600;
-
     public function getDefaultCacheControlMaxAge(): int
     {
         // Define properties

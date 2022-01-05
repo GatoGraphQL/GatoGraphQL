@@ -9,9 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private ?int $getCategoryListDefaultLimit = 10;
-    private ?int $getCategoryListMaxLimit = -1;
-
     public function getCategoryListDefaultLimit(): ?int
     {
         // Define properties

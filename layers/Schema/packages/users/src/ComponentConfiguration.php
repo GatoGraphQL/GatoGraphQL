@@ -9,11 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private ?int $getUserListDefaultLimit = 10;
-    private ?int $getUserListMaxLimit = -1;
-    private string $getUsersRoute = '';
-    private bool $treatUserEmailAsAdminData = true;
-
     public function getUserListDefaultLimit(): ?int
     {
         // Define properties

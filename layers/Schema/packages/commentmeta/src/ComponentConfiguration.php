@@ -10,9 +10,9 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private array $getCommentMetaEntries = [];
-    private string $getCommentMetaBehavior = Behaviors::ALLOWLIST;
-
+    /**
+     * @return string[]
+     */
     public function getCommentMetaEntries(): array
     {
         // Define properties

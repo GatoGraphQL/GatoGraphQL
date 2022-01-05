@@ -9,11 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private ?int $getRootCommentListDefaultLimit = 10;
-    private ?int $getCustomPostCommentOrCommentResponseListDefaultLimit = -1;
-    private ?int $getCommentListMaxLimit = -1;
-    private bool $treatCommentStatusAsAdminData = true;
-
     public function getRootCommentListDefaultLimit(): ?int
     {
         // Define properties

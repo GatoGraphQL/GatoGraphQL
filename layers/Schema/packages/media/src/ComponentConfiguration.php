@@ -9,9 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private ?int $getMediaListDefaultLimit = 10;
-    private ?int $getMediaListMaxLimit = -1;
-
     public function getMediaListDefaultLimit(): ?int
     {
         // Define properties

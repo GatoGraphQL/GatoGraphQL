@@ -9,9 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $enableMultipleQueryExecution = false;
-    private bool $enableComposableDirectives = false;
-
     /**
      * Disable hook, because it is invoked by `export-directive`
      * on its Component's `resolveEnabled` function.

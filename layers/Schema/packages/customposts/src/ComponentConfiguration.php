@@ -9,11 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private ?int $getCustomPostListDefaultLimit = 10;
-    private ?int $getCustomPostListMaxLimit = -1;
-    private bool $useSingleTypeInsteadOfCustomPostUnionType = false;
-    private bool $treatCustomPostStatusAsAdminData = true;
-
     public function getCustomPostListDefaultLimit(): ?int
     {
         // Define properties

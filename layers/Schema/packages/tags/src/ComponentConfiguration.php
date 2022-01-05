@@ -9,9 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private ?int $getTagListDefaultLimit = 10;
-    private ?int $getTagListMaxLimit = -1;
-
     public function getTagListDefaultLimit(): ?int
     {
         // Define properties

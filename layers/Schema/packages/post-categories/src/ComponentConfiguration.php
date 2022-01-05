@@ -8,8 +8,6 @@ use PoP\BasicService\Component\AbstractComponentConfiguration;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private string $getPostCategoriesRoute = '';
-
     // public function getPostCategoryListDefaultLimit(): ?int
     // {
     //     // Define properties

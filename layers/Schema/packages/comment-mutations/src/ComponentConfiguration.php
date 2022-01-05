@@ -10,9 +10,6 @@ use PoPSchema\Users\Component as UsersComponent;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $mustUserBeLoggedInToAddComment = true;
-    private bool $requireCommenterNameAndEmail = true;
-
     public function mustUserBeLoggedInToAddComment(): bool
     {
         // The Users package must be active

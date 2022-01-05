@@ -12,25 +12,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $exposeSelfFieldForRootTypeInGraphQLSchema = false;
-    private bool $sortGraphQLSchemaAlphabetically = true;
-    private bool $enableProactiveFeedback = true;
-    private bool $enableProactiveFeedbackDeprecations = true;
-    private bool $enableProactiveFeedbackNotices = true;
-    private bool $enableProactiveFeedbackTraces = true;
-    private bool $enableProactiveFeedbackLogs = true;
-    private bool $enableNestedMutations = false;
-    private ?bool $enableGraphQLIntrospection = null;
-    private bool $exposeSelfFieldInGraphQLSchema = false;
-    private bool $addFullSchemaFieldToGraphQLSchema = false;
-    private bool $addVersionToGraphQLSchemaFieldDescription = false;
-    private bool $enableSettingMutationSchemeByURLParam = false;
-    private bool $enableEnablingGraphQLIntrospectionByURLParam = false;
-    private bool $addGraphQLIntrospectionPersistedQuery = false;
-    private bool $addConnectionFromRootToQueryRootAndMutationRoot = false;
-    private bool $exposeSchemaIntrospectionFieldInSchema = false;
-    private bool $exposeGlobalFieldsInGraphQLSchema = false;
-
     public function exposeSelfFieldForRootTypeInGraphQLSchema(): bool
     {
         // Define properties

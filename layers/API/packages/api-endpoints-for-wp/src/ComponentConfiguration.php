@@ -10,9 +10,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $isNativeAPIEndpointDisabled = false;
-    private string $getNativeAPIEndpoint = '/api/';
-
     public function isNativeAPIEndpointDisabled(): bool
     {
         // Define properties

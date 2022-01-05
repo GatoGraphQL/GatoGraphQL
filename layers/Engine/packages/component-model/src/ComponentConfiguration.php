@@ -19,20 +19,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     private array $overrideConfiguration = [];
 
-    private bool $enableConfigByParams = false;
-    private bool $useComponentModelCache = false;
-    private bool $mustNamespaceTypes = false;
-    private bool $useSingleTypeInsteadOfUnionType = false;
-    private bool $enableAdminSchema = false;
-    private bool $validateFieldTypeResponseWithSchemaDefinition = false;
-    private bool $treatTypeCoercingFailuresAsErrors = false;
-    private bool $treatUndefinedFieldOrDirectiveArgsAsErrors = false;
-    private bool $setFailingFieldResponseAsNull = false;
-    private bool $removeFieldIfDirectiveFailed = false;
-    private bool $convertInputValueFromSingleToList = false;
-    private bool $enableUnionTypeImplementingInterfaceType = false;
-    private bool $skipExposingDangerouslyDynamicScalarTypeInSchema = false;
-
     /**
      * Initialize component configuration
      */

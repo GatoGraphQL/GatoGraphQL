@@ -9,10 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private ?int $getPageListDefaultLimit = 10;
-    private ?int $getPageListMaxLimit = -1;
-    private bool $addPageTypeToCustomPostUnionTypes = false;
-
     public function getPageListDefaultLimit(): ?int
     {
         // Define properties

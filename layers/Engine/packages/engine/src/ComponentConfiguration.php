@@ -9,9 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $disableRedundantRootTypeMutationFields = false;
-    private bool $enablePassingExpressionsByArgInNestedDirectives = true;
-
     public function disableRedundantRootTypeMutationFields(): bool
     {
         // Define properties

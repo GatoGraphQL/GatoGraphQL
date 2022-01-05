@@ -9,9 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private ?int $getMenuListDefaultLimit = 10;
-    private ?int $getMenuListMaxLimit = -1;
-
     public function getMenuListDefaultLimit(): ?int
     {
         // Define properties

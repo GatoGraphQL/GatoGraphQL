@@ -9,10 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private ?int $getGenericCustomPostListDefaultLimit = 10;
-    private ?int $getGenericCustomPostListMaxLimit = -1;
-    private array $getGenericCustomPostTypes = ['post'];
-
     public function getGenericCustomPostListDefaultLimit(): ?int
     {
         // Define properties
@@ -45,6 +41,9 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         return $this->configuration[$envVariable];
     }
 
+    /**
+     * @return string[]
+     */
     public function getGenericCustomPostTypes(): array
     {
         // Define properties

@@ -9,9 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $usePrivateSchemaMode = false;
-    private bool $enableIndividualControlForPublicPrivateSchemaMode = true;
-
     public function usePrivateSchemaMode(): bool
     {
         // Define properties

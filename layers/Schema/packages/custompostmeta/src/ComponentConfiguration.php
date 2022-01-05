@@ -10,9 +10,9 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private array $getCustomPostMetaEntries = [];
-    private string $getCustomPostMetaBehavior = Behaviors::ALLOWLIST;
-
+    /**
+     * @return string[]
+     */
     public function getCustomPostMetaEntries(): array
     {
         // Define properties

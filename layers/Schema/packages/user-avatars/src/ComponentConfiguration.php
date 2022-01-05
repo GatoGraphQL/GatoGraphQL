@@ -9,8 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private int $getUserAvatarDefaultSize = 96;
-
     public function getUserAvatarDefaultSize(): int
     {
         // Define properties

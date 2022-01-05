@@ -10,9 +10,9 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private array $getTaxonomyMetaEntries = [];
-    private string $getTaxonomyMetaBehavior = Behaviors::ALLOWLIST;
-
+    /**
+     * @return string[]
+     */
     public function getTaxonomyMetaEntries(): array
     {
         // Define properties

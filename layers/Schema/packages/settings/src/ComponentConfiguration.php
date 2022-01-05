@@ -10,9 +10,9 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private array $getSettingsEntries = [];
-    private string $getSettingsBehavior = Behaviors::ALLOWLIST;
-
+    /**
+     * @return string[]
+     */
     public function getSettingsEntries(): array
     {
         // Define properties

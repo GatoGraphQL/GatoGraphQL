@@ -8,8 +8,6 @@ use PoP\BasicService\Component\AbstractComponentConfiguration;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private string $getDefinitionPersistenceBuildDir = '';
-
     /**
      * Disable hook, because it is invoked by `export-directive`
      * on its Component's `resolveEnabled` function.

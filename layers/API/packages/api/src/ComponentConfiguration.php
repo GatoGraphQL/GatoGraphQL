@@ -12,14 +12,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $useSchemaDefinitionCache = false;
-    private bool $executeQueryBatchInStrictOrder = true;
-    private bool $enableEmbeddableFields = false;
-    private bool $enableMutations = true;
-    private bool $overrideRequestURI = false;
-    private bool $skipExposingGlobalFieldsInFullSchema = false;
-    private bool $sortFullSchemaAlphabetically = true;
-
     public function useSchemaDefinitionCache(): bool
     {
         // First check that the Component Model cache is enabled

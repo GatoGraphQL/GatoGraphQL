@@ -10,9 +10,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    private bool $isGraphQLAPIEndpointDisabled = false;
-    private string $getGraphQLAPIEndpoint = '/api/graphql/';
-
     public function isGraphQLAPIEndpointDisabled(): bool
     {
         // Define properties
