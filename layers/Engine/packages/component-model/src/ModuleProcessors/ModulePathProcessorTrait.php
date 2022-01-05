@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentInfo;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\Root\App;
 
 trait ModulePathProcessorTrait
 {
@@ -48,7 +50,10 @@ trait ModulePathProcessorTrait
             );
         }
         if ($submodules_ret) {
-            $ret[$key][ComponentInfo::get('response-prop-submodules')] = $submodules_ret;
+            /** @var ComponentInfo */
+            $componentInfo = App::getComponent(Component::class)->getInfo();
+            $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
+            $ret[$key][$submodulesOutputProperty] = $submodules_ret;
         }
         $this->getModuleFilterManager()->restoreFromPropagation($module, $props);
 
@@ -116,7 +121,10 @@ trait ModulePathProcessorTrait
             );
         }
         if ($submodules_ret) {
-            $ret[$key][ComponentInfo::get('response-prop-submodules')] = $submodules_ret;
+            /** @var ComponentInfo */
+            $componentInfo = App::getComponent(Component::class)->getInfo();
+            $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
+            $ret[$key][$submodulesOutputProperty] = $submodules_ret;
         }
         $this->getModuleFilterManager()->restoreFromPropagation($module, $props);
 
