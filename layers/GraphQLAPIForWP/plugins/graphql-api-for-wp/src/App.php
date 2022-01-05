@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use LogicException;
 use PoP\Root\App as UpstreamApp;
-use PoP\Root\AppInterface;
 use PoP\Root\AppLoader;
 use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
@@ -24,6 +24,23 @@ use Symfony\Component\DependencyInjection\Container;
 class App implements AppInterface
 {
     protected static UpstreamApp $app;
+    protected static MainPluginManager $mainPluginManager;
+
+    public static function initializePlugin(
+        ?MainPluginManager $mainPluginManager = null,
+    ): void {
+        self::$mainPluginManager = $mainPluginManager ?? static::getMainPluginManager();
+    }
+
+    protected static function createMainPluginManager(): MainPluginManager
+    {
+        return new MainPluginManager();
+    }
+
+    public static function getMainPluginManager(): MainPluginManager
+    {
+        return self::$mainPluginManager;
+    }
 
     /**
      * This function must be invoked at the very beginning,
