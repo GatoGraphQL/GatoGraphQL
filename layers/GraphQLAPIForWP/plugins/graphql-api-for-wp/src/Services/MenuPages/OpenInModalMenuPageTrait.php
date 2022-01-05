@@ -16,8 +16,8 @@ trait OpenInModalMenuPageTrait
      */
     protected function enqueueModalAssets(): void
     {
-        $mainPluginURL = (string) App::getMainPluginManager()->getConfig('url');
-        $mainPluginVersion = (string) App::getMainPluginManager()->getConfig('version');
+        $mainPluginURL = App::getMainPlugin()->getPluginURL();
+        $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
 
         /**
          * Hide the menus

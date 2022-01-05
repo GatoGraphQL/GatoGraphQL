@@ -12,18 +12,12 @@ trait ExtensionScriptTrait
 
     protected function getPluginDir(): string
     {
-        return (string) App::getExtensionManager()->getConfig(
-            $this->getExtensionClass(),
-            'dir'
-        );
+        return App::getExtension($this->getExtensionClass())->getPluginDir();
     }
 
     protected function getPluginURL(): string
     {
         // Remove the trailing slash
-        return trim((string) App::getExtensionManager()->getConfig(
-            $this->getExtensionClass(),
-            'url'
-        ), '/');
+        return trim(App::getExtension($this->getExtensionClass())->getPluginURL(), '/');
     }
 }

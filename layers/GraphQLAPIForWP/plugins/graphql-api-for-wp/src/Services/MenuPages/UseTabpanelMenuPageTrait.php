@@ -16,8 +16,8 @@ trait UseTabpanelMenuPageTrait
      */
     protected function enqueueTabpanelAssets(): void
     {
-        $mainPluginURL = (string) App::getMainPluginManager()->getConfig('url');
-        $mainPluginVersion = (string) App::getMainPluginManager()->getConfig('version');
+        $mainPluginURL = App::getMainPlugin()->getPluginURL();
+        $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
 
         /**
          * Add tabs to the documentation

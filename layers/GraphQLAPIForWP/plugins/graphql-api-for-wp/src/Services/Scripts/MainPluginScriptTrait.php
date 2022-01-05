@@ -13,12 +13,12 @@ trait MainPluginScriptTrait
 {
     protected function getPluginDir(): string
     {
-        return (string) App::getMainPluginManager()->getConfig('dir');
+        return App::getMainPlugin()->getPluginDir();
     }
 
     protected function getPluginURL(): string
     {
         // Remove the trailing slash
-        return trim((string) App::getMainPluginManager()->getConfig('url'), '/');
+        return trim(App::getMainPlugin()->getPluginURL(), '/');
     }
 }
