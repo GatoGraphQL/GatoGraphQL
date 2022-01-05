@@ -27,7 +27,7 @@ class Plugin extends AbstractMainPlugin
     /**
      * Show an admin notice with a link to the latest release notes
      */
-    protected function pluginJustUpdated(string $storedVersion): void
+    public function pluginJustUpdated(string $storedVersion): void
     {
         parent::pluginJustUpdated($storedVersion);
 
