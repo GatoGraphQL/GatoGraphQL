@@ -26,6 +26,8 @@ class ExtensionManager extends AbstractPluginManager
     private array $extensionBaseNameInstances = [];
 
     /**
+     * Extensions, organized under their name.
+     *
      * @return array<string, ExtensionInterface>
      */
     public function getExtensions(): array
