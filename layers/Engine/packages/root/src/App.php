@@ -18,6 +18,7 @@ class App
     protected static ContainerBuilderFactory $containerBuilderFactory;
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
     protected static ComponentManager $componentManager;
+    protected static array $componentClassesToInitialize = [];
 
     /**
      * This function must be invoked at the very beginning,
@@ -26,9 +27,11 @@ class App
     public static function initialize(): void
     {
         self::$appLoader = static::createAppLoader();
+        self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
         self::$containerBuilderFactory = static::createContainerBuilderFactory();
         self::$systemContainerBuilderFactory = static::createSystemContainerBuilderFactory();
         self::$componentManager = static::createComponentManager();
+        self::$componentClassesToInitialize = [];
     }
 
     protected static function createAppLoader(): AppLoader
@@ -79,5 +82,20 @@ class App
     final public static function getSystemContainer(): Container
     {
         return self::getSystemContainerBuilderFactory()->getInstance();
+    }
+
+    /**
+     * Store Component classes to be initialized, and
+     * inject them into the AppLoader when this is initialized.
+     *
+     * @param string[] $componentClasses List of `Component` class to initialize
+     */
+    public static function stockAndInitializeComponentClasses(
+        array $componentClasses
+    ): void {
+        self::$componentClassesToInitialize = array_merge(
+            self::$componentClassesToInitialize,
+            $componentClasses
+        );
     }
 }
