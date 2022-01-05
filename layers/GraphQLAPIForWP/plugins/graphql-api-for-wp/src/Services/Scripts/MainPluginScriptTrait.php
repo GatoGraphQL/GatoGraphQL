@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
 /**
@@ -13,12 +14,12 @@ trait MainPluginScriptTrait
 {
     protected function getPluginDir(): string
     {
-        return (string) MainPluginManager::getConfig('dir');
+        return (string) App::getMainPluginManager()->getConfig('dir');
     }
 
     protected function getPluginURL(): string
     {
         // Remove the trailing slash
-        return trim((string) MainPluginManager::getConfig('url'), '/');
+        return trim((string) App::getMainPluginManager()->getConfig('url'), '/');
     }
 }

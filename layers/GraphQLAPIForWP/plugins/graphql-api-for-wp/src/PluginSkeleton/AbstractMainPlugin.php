@@ -6,12 +6,11 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use Exception;
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
-use PoP\Root\App;
 use PoP\Engine\AppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use RuntimeException;
@@ -139,7 +138,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     {
         $fileSystemWrapper = new FilesystemWrapper();
         try {
-            $fileSystemWrapper->remove((string) MainPluginManager::getConfig('cache-dir'));
+            $fileSystemWrapper->remove((string) App::getMainPluginManager()->getConfig('cache-dir'));
         } catch (RuntimeException) {
             // If the folder does not exist, do nothing
         }

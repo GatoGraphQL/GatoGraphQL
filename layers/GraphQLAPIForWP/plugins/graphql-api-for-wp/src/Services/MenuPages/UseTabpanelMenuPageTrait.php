@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
 /**
@@ -16,8 +17,8 @@ trait UseTabpanelMenuPageTrait
      */
     protected function enqueueTabpanelAssets(): void
     {
-        $mainPluginURL = (string) MainPluginManager::getConfig('url');
-        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
+        $mainPluginURL = (string) App::getMainPluginManager()->getConfig('url');
+        $mainPluginVersion = (string) App::getMainPluginManager()->getConfig('version');
 
         /**
          * Add tabs to the documentation

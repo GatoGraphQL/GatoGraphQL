@@ -14,7 +14,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
@@ -582,7 +581,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     protected function getPredefinedComponentClassConfiguration(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $mainPluginURL = (string) MainPluginManager::getConfig('url');
+        $mainPluginURL = (string) App::getMainPluginManager()->getConfig('url');
 
         $componentClassConfiguration = [];
         $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [

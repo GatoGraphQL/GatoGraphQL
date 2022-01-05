@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Admin\Tables;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
@@ -533,8 +534,8 @@ class ModuleListTable extends AbstractItemListTable
     {
         parent::enqueueAssets();
 
-        $mainPluginURL = (string) MainPluginManager::getConfig('url');
-        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
+        $mainPluginURL = (string) App::getMainPluginManager()->getConfig('url');
+        $mainPluginVersion = (string) App::getMainPluginManager()->getConfig('version');
 
         /**
          * Fix the issues with the WP List Table

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
 trait PluginMarkdownContentRetrieverTrait
@@ -13,7 +14,7 @@ trait PluginMarkdownContentRetrieverTrait
      */
     protected function getBaseDir(): string
     {
-        return (string) MainPluginManager::getConfig('dir');
+        return (string) App::getMainPluginManager()->getConfig('dir');
     }
 
     /**
@@ -21,6 +22,6 @@ trait PluginMarkdownContentRetrieverTrait
      */
     protected function getBaseURL(): string
     {
-        return (string) MainPluginManager::getConfig('url');
+        return (string) App::getMainPluginManager()->getConfig('url');
     }
 }

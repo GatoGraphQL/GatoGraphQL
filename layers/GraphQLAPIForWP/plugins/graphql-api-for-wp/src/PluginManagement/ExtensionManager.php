@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
 use GraphQLAPI\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtension;
 
 class ExtensionManager extends AbstractPluginManager
@@ -74,7 +75,7 @@ class ExtensionManager extends AbstractPluginManager
         // Validate that the required version of the GraphQL API for WP plugin is installed
         if (
             $mainPluginVersionConstraint !== null && !SemverWrapper::satisfies(
-                MainPluginManager::getConfig('version'),
+                App::getMainPluginManager()->getConfig('version'),
                 $mainPluginVersionConstraint
             )
         ) {
@@ -82,9 +83,9 @@ class ExtensionManager extends AbstractPluginManager
                 sprintf(
                     __('Extension <strong>%s</strong> requires plugin <strong>%s</strong> to satisfy version constraint <code>%s</code>, but the current version <code>%s</code> does not. The extension has not been loaded.', 'graphql-api'),
                     $extensionName ?? $extensionClass,
-                    MainPluginManager::getConfig('name'),
+                    App::getMainPluginManager()->getConfig('name'),
                     $mainPluginVersionConstraint,
-                    MainPluginManager::getConfig('version'),
+                    App::getMainPluginManager()->getConfig('version'),
                 )
             );
             return false;

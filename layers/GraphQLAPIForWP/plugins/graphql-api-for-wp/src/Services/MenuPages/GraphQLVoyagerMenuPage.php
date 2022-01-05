@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
 /**
@@ -32,8 +33,8 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
     {
         parent::enqueueAssets();
 
-        $mainPluginURL = (string) MainPluginManager::getConfig('url');
-        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
+        $mainPluginURL = (string) App::getMainPluginManager()->getConfig('url');
+        $mainPluginVersion = (string) App::getMainPluginManager()->getConfig('version');
 
         // CSS
         \wp_enqueue_style(
