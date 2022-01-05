@@ -23,7 +23,7 @@ abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentC
         if ($this->hasConfigurationValue($envVariable)) {
             return;
         }
-        
+
         // Initialize via environment
         parent::maybeInitializeConfigurationValue($envVariable, $defaultValue, $callback);
 

@@ -40,13 +40,13 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
         if ($this->hasConfigurationValue($envVariable)) {
             return;
         }
-        
+
         /**
          * Otherwise, initialize from environment.
          * First set the default value, for if there's no env var defined.
          */
         $this->configuration[$envVariable] = $defaultValue;
-        
+
         /**
          * Get the value from the environment, converting it
          * to the appropriate type via a callback function.

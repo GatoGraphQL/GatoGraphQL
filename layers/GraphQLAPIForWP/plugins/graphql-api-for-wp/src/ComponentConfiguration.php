@@ -24,7 +24,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     //     );
     //     return $this->configuration[$envVariable];
     // }
-    
+
     /**
      * Group the fields under the type when printing it for the user
      */
