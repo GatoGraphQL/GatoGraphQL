@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginComponentInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Engine\App;
 use PoP\Root\Helpers\ClassHelpers;
-use PoP\Root\Managers\ComponentManager;
 
 abstract class AbstractPlugin
 {

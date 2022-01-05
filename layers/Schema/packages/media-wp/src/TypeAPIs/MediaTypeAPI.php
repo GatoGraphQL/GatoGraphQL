@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\MediaWP\TypeAPIs;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPSchema\Media\Component;
 use PoPSchema\Media\ComponentConfiguration;

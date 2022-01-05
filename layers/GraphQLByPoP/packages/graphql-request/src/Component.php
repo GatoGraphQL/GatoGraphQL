@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLRequest;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
 use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;

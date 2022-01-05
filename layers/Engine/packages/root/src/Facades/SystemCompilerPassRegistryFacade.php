@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Root\Facades;
 
 use PoP\Root\App;
-use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Registries\CompilerPassRegistryInterface;
 
 class SystemCompilerPassRegistryFacade

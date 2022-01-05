@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Engine\Hooks;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Engine\Component;
 use PoP\Engine\ComponentConfiguration;

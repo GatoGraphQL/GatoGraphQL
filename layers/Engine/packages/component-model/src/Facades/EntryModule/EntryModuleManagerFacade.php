@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\EntryModule;
 
 use PoP\Root\App;
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class EntryModuleManagerFacade
 {

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\API\Schema;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use Exception;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\Component;

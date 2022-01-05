@@ -6,7 +6,6 @@ namespace PoP\AccessControl\Facades;
 
 use PoP\Engine\App;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class AccessControlManagerFacade
 {

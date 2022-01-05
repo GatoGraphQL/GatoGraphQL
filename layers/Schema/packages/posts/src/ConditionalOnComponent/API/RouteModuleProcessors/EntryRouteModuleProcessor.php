@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Posts\ConditionalOnComponent\API\RouteModuleProcessors;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;

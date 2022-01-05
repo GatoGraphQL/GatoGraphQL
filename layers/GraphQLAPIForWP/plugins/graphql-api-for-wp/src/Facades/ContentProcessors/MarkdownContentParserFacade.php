@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Facades\ContentProcessors;
 
 use PoP\Engine\App;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class MarkdownContentParserFacade
 {

@@ -6,7 +6,6 @@ namespace PoP\Engine\Facades\Error;
 
 use PoP\Engine\App;
 use PoP\Engine\Error\ErrorManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class ErrorManagerFacade
 {

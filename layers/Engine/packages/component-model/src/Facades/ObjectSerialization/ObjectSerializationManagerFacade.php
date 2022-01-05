@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\ObjectSerialization;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class ObjectSerializationManagerFacade
 {

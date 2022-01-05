@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
 
 use PoP\Engine\App;
 use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class UserAuthorizationSchemeRegistryFacade
 {

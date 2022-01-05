@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Posts\FieldResolvers\ObjectType;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;

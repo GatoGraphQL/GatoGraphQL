@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\API\ConditionalOnComponent\AccessControl\Hooks;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\API\Component;

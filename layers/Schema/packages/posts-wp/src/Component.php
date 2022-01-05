@@ -6,7 +6,6 @@ namespace PoPSchema\PostsWP;
 
 use PoP\Engine\App;
 use PoP\BasicService\Component\AbstractComponent;
-use PoP\Root\Managers\ComponentManager;
 use PoPSchema\Posts\Component as PostsComponent;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 

@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\Cache;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Cache\TransientCacheInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class TransientCacheManagerFacade
 {

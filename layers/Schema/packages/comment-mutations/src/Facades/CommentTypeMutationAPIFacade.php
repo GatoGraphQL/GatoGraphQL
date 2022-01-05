@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CommentMutations\Facades;
 
 use PoP\Engine\App;
-use PoP\Root\Container\ContainerBuilderFactory;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 
 class CommentTypeMutationAPIFacade

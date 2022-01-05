@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\QueriedObject\Facades\Routing;
 
 use PoP\Engine\App;
-use PoP\Root\Container\ContainerBuilderFactory;
 use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
 
 class CMSRoutingStateServiceFacade

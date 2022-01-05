@@ -6,7 +6,6 @@ namespace PoP\Engine\Facades\Schema;
 
 use PoP\Engine\App;
 use PoP\Engine\Schema\SchemaDefinitionServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class SchemaDefinitionServiceFacade
 {

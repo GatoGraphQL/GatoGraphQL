@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Facades\Cache;
 
 use PoP\Root\App;
-use PoP\Root\Container\ContainerBuilderFactory;
 use Psr\Cache\CacheItemPoolInterface;
 
 class TransientCacheManagerItemPoolFacade

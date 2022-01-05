@@ -6,7 +6,6 @@ namespace GraphQLAPI\MarkdownConvertor\Facades;
 
 use PoP\Engine\App;
 use GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class MarkdownConvertorFacade
 {

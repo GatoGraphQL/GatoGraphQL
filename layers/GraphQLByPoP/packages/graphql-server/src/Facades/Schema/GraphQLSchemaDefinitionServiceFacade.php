@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\Facades\Schema;
 
 use PoP\Engine\App;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class GraphQLSchemaDefinitionServiceFacade
 {

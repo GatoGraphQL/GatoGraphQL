@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\API\Hooks;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;

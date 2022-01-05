@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\ModuleFiltering;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class ModuleFilterManagerFacade
 {

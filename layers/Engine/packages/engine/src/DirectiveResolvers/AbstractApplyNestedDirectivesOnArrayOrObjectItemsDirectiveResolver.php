@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Engine\DirectiveResolvers;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalMetaDirectiveResolver;
 use PoP\ComponentModel\Error\Error;

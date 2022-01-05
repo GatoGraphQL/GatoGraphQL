@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\Engine;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Constants\DataOutputModes;

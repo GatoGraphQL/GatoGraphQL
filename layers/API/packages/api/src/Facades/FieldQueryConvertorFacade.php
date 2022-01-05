@@ -6,7 +6,6 @@ namespace PoP\API\Facades;
 
 use PoP\Engine\App;
 use PoP\API\Schema\FieldQueryConvertorInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class FieldQueryConvertorFacade
 {

@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\Container;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class ObjectDictionaryFacade
 {

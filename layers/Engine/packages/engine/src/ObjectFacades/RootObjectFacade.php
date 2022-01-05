@@ -6,7 +6,6 @@ namespace PoP\Engine\ObjectFacades;
 
 use PoP\Engine\App;
 use PoP\Engine\ObjectModels\Root;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class RootObjectFacade
 {

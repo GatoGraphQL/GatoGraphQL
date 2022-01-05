@@ -6,7 +6,6 @@ namespace PoP\Engine\Facades\CMS;
 
 use PoP\Engine\App;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class CMSServiceFacade
 {

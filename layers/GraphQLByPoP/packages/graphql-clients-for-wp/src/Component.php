@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLClientsForWP;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLServer\Component as GraphQLServerComponent;
 use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;

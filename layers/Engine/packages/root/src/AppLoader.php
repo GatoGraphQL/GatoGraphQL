@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\App;
-use PoP\Root\Container\ContainerBuilderFactory;
-use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
 use PoP\Root\Managers\ComponentManager;

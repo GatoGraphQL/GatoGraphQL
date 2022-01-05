@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Settings\TypeAPIs;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use InvalidArgumentException;
 use PoP\BasicService\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;

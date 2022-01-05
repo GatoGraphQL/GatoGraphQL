@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\ModuleProcessors;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class ModuleProcessorManagerFacade
 {

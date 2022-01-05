@@ -6,7 +6,6 @@ namespace PoP\GraphQLParser\Facades\Query;
 
 use PoP\Root\App;
 use PoP\GraphQLParser\Query\QueryAugmenterServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class QueryAugmenterServiceFacade
 {

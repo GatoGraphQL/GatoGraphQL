@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\ModulePath;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class ModulePathHelpersFacade
 {

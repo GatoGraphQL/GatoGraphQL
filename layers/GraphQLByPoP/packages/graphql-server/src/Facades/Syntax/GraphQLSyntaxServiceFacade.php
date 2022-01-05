@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\Facades\Syntax;
 
 use PoP\Engine\App;
 use GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class GraphQLSyntaxServiceFacade
 {

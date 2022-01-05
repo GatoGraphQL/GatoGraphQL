@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Resolvers;
 
 use PoP\Root\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Schema\FieldQueryUtils;

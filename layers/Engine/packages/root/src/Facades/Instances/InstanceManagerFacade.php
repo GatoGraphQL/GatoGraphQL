@@ -6,7 +6,6 @@ namespace PoP\Root\Facades\Instances;
 
 use PoP\Root\App;
 use PoP\Root\Instances\InstanceManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class InstanceManagerFacade
 {

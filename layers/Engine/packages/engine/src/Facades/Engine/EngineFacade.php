@@ -7,7 +7,6 @@ namespace PoP\Engine\Facades\Engine;
 use PoP\Engine\App;
 use PoP\ComponentModel\Engine\EngineInterface as UpstreamEngineInterface;
 use PoP\Engine\Engine\EngineInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class EngineFacade
 {

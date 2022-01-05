@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLRequest\Facades;
 
 use PoP\Engine\App;
 use GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class GraphQLPersistedQueryManagerFacade
 {

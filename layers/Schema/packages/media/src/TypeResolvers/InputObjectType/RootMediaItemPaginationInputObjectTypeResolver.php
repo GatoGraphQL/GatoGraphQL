@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Media\TypeResolvers\InputObjectType;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoPSchema\Media\Component;
 use PoPSchema\Media\ComponentConfiguration;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;

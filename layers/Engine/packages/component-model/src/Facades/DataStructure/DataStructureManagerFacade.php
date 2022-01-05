@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\DataStructure;
 
 use PoP\Root\App;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class DataStructureManagerFacade
 {

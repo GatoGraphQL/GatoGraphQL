@@ -6,7 +6,6 @@ namespace PoP\API;
 
 use PoP\Engine\App;
 use PoP\BasicService\Component\AbstractComponentConfiguration;
-use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\BasicService\Component\EnvironmentValueHelpers;

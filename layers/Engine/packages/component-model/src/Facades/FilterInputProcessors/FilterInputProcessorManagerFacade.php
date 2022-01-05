@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\FilterInputProcessors;
 
 use PoP\Root\App;
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class FilterInputProcessorManagerFacade
 {

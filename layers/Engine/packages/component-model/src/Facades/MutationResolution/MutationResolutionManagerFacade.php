@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\MutationResolution;
 
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class MutationResolutionManagerFacade
 {

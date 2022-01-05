@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\ObjectFacades;
 
 use PoP\Engine\App;
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class QueryRootObjectFacade
 {

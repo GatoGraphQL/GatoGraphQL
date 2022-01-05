@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMeta\TypeAPIs;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use InvalidArgumentException;
 use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 use PoPSchema\CustomPostMeta\Component;

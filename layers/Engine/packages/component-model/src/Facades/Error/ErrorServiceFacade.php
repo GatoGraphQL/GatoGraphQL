@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\Error;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Error\ErrorServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class ErrorServiceFacade
 {

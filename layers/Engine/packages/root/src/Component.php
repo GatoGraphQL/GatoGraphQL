@@ -6,11 +6,9 @@ namespace PoP\Root;
 
 use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\ApplicationEvents;
-use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\HybridCompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ServiceInstantiatorInterface;
 use PoP\Root\Container\SystemCompilerPasses\RegisterSystemCompilerPassServiceCompilerPass;
-use PoP\Root\Container\SystemContainerBuilderFactory;
 
 /**
  * Initialize component

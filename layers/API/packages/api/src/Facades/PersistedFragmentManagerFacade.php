@@ -6,7 +6,6 @@ namespace PoP\API\Facades;
 
 use PoP\Engine\App;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class PersistedFragmentManagerFacade
 {

@@ -6,7 +6,6 @@ namespace PoP\Definitions\Facades;
 
 use PoP\Root\App;
 use PoP\Definitions\DefinitionManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class DefinitionManagerFacade
 {

@@ -6,7 +6,6 @@ namespace PoP\CacheControl\Facades;
 
 use PoP\Root\App;
 use PoP\CacheControl\Managers\CacheControlManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class CacheControlManagerFacade
 {

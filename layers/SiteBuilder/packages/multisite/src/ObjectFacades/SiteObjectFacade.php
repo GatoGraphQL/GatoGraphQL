@@ -6,7 +6,6 @@ namespace PoP\Multisite\ObjectFacades;
 
 use PoP\Engine\App;
 use PoP\Multisite\ObjectModels\Site;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class SiteObjectFacade
 {

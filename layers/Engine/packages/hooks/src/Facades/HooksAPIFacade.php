@@ -6,7 +6,6 @@ namespace PoP\Hooks\Facades;
 
 use PoP\Root\App;
 use PoP\Hooks\HooksAPIInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class HooksAPIFacade
 {

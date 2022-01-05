@@ -9,7 +9,6 @@ use PoP\BasicService\AbstractHookSet;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
 use PoP\EngineWP\Component;
 use PoP\EngineWP\ComponentInterface;
-use PoP\Root\Managers\ComponentManager;
 
 class TemplateHookSet extends AbstractHookSet
 {

@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\Engine;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class DataloadingEngineFacade
 {

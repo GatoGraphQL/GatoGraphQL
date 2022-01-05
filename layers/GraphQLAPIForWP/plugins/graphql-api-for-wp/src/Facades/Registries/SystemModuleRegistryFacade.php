@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
 
 use PoP\Engine\App;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use PoP\Root\Container\SystemContainerBuilderFactory;
 
 /**
  * Obtain an instance of the ModuleRegistry.

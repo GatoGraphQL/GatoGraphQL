@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\AttachableExtensions;
 
 use PoP\Root\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class AttachableExtensionManagerFacade
 {

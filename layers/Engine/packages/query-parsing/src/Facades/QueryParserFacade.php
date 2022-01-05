@@ -6,7 +6,6 @@ namespace PoP\QueryParsing\Facades;
 
 use PoP\Root\App;
 use PoP\QueryParsing\QueryParserInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class QueryParserFacade
 {

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Users\Hooks;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\BasicService\AbstractHookSet;
 use PoP\Routing\RouteHookNames;
 use PoPSchema\Users\Component;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades;
 
 use PoP\Engine\App;
-use PoP\Root\Container\ContainerBuilderFactory;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\TypeAPIs\CustomPostUserTypeAPIInterface;
 
 class CustomPostUserTypeAPIFacade

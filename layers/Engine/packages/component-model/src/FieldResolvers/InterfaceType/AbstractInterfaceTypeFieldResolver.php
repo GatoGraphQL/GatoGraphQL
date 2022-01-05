@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use PoP\Root\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\HookNames;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;

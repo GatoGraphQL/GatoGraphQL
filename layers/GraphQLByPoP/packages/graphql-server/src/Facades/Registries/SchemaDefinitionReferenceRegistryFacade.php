@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\Facades\Registries;
 
 use PoP\Engine\App;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class SchemaDefinitionReferenceRegistryFacade
 {

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
 use PoP\Root\App;
-use PoP\Root\Managers\ComponentManager;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Component;

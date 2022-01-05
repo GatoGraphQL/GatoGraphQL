@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Users;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\API\Component as APIComponent;
 use PoP\RESTAPI\Component as RESTAPIComponent;
 use PoP\BasicService\Component\AbstractComponent;

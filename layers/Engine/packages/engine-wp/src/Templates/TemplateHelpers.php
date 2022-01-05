@@ -7,7 +7,6 @@ namespace PoP\EngineWP\Templates;
 use PoP\Engine\App;
 use PoP\EngineWP\ComponentInterface;
 use PoP\EngineWP\Component;
-use PoP\Root\Managers\ComponentManager;
 
 class TemplateHelpers
 {

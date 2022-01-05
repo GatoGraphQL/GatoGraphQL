@@ -6,7 +6,6 @@ namespace PoP\FileStore\Facades;
 
 use PoP\Root\App;
 use PoP\FileStore\Renderer\FileRendererInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class FileRendererFacade
 {

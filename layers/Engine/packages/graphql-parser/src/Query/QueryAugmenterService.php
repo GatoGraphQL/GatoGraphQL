@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Query;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
-use PoP\GraphQLParser\Query\ClientSymbols;
 
 class QueryAugmenterService implements QueryAugmenterServiceInterface
 {

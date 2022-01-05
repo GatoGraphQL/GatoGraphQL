@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateMutations\Facades;
 
 use PoP\Engine\App;
-use PoP\Root\Container\ContainerBuilderFactory;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 class UserStateTypeMutationAPIFacade

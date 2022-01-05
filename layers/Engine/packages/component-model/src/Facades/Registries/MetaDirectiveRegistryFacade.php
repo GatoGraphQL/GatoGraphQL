@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\Registries;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class MetaDirectiveRegistryFacade
 {

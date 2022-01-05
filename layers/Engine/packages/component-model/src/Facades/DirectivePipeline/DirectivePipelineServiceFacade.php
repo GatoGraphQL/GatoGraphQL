@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\DirectivePipeline;
 
 use PoP\Root\App;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class DirectivePipelineServiceFacade
 {

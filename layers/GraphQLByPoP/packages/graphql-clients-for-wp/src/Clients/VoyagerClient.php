@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLClientsForWP\Component;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration;
 

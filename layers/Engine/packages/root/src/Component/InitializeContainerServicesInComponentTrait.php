@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root\Component;
 
 use PoP\Root\App;
-use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\Loader\ForceAutoconfigureYamlFileLoader;
-use PoP\Root\Container\SystemContainerBuilderFactory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;

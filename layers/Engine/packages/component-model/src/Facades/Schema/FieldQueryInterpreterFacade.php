@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\Schema;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class FieldQueryInterpreterFacade
 {

@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\HelperServices;
 
 use PoP\Root\App;
 use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class FormInputHelperServiceFacade
 {

@@ -6,7 +6,6 @@ namespace PoP\Engine\Facades\Formatters;
 
 use PoP\Engine\App;
 use PoP\Engine\Formatters\DateFormatterInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class DateFormatterFacade
 {

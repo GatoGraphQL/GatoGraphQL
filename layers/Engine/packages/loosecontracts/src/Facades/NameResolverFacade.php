@@ -6,7 +6,6 @@ namespace PoP\LooseContracts\Facades;
 
 use PoP\Root\App;
 use PoP\LooseContracts\NameResolverInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class NameResolverFacade
 {

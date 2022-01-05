@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Engine\Cache;
 
 use PoP\Engine\App;
-use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;

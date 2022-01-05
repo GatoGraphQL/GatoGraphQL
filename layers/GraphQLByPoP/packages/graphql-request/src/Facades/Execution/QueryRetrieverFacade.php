@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLRequest\Facades\Execution;
 
 use PoP\Engine\App;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class QueryRetrieverFacade
 {

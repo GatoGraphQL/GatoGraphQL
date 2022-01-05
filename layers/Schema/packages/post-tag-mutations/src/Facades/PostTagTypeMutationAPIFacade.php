@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\PostTagMutations\Facades;
 
 use PoP\Engine\App;
-use PoP\Root\Container\ContainerBuilderFactory;
 use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
 
 class PostTagTypeMutationAPIFacade

@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\ObjectFacades;
 
 use PoP\Engine\App;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class MutationRootObjectFacade
 {

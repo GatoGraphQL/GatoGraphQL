@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Facades\ModelInstance;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class ModelInstanceFacade
 {
