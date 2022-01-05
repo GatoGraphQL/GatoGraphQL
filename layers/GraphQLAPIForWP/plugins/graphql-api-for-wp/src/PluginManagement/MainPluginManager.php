@@ -25,7 +25,7 @@ class MainPluginManager extends AbstractPluginManager
         string $pluginVersion
     ): bool {
         if ($this->mainPlugin !== null) {
-            self::printAdminNoticeErrorMessage(
+            $this->printAdminNoticeErrorMessage(
                 sprintf(
                     __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
                     $this->mainPlugin->getConfig('name'),
