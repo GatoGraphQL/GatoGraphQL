@@ -39,7 +39,7 @@ class App
         self::$containerBuilderFactory = $containerBuilderFactory ?? static::createContainerBuilderFactory();
         self::$systemContainerBuilderFactory = $systemContainerBuilderFactory ?? static::createSystemContainerBuilderFactory();
         self::$componentManager = $componentManager ?? static::createComponentManager();
-        
+
         // Inject the Components slated for initialization
         self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
         self::$componentClassesToInitialize = [];
