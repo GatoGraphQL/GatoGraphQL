@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\API;
 
+use PoP\Engine\App;
 use PoP\BasicService\Component\AbstractComponentConfiguration;
-use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\BasicService\Component\EnvironmentValueHelpers;
@@ -16,7 +16,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         // First check that the Component Model cache is enabled
         /** @var ComponentModelComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(ComponentModelComponent::class)->getConfiguration();
         if (!$componentConfiguration->useComponentModelCache()) {
             return false;
         }

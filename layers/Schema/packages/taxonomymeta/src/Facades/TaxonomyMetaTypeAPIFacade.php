@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomyMeta\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Engine\App;
 use PoPSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 
 class TaxonomyMetaTypeAPIFacade
@@ -14,7 +14,7 @@ class TaxonomyMetaTypeAPIFacade
         /**
          * @var TaxonomyMetaTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(TaxonomyMetaTypeAPIInterface::class);
+        $service = App::getContainer()->get(TaxonomyMetaTypeAPIInterface::class);
         return $service;
     }
 }

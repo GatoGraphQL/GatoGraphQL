@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\Engine;
 
-use PoP\Engine\AppLoader;
+use PoP\Engine\App;
 use PoP\Root\AbstractTestCase as UpstreamAbstractTestCase;
 
 abstract class AbstractTestCase extends UpstreamAbstractTestCase
 {
-    protected static function getAppLoaderClass(): string
+    protected static function getAppClass(): string
     {
-        return AppLoader::class;
+        return App::class;
     }
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\ObjectSerialization;
 
+use PoP\Root\App;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class ObjectSerializationManagerFacade
 {
@@ -14,7 +14,7 @@ class ObjectSerializationManagerFacade
         /**
          * @var ObjectSerializationManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(ObjectSerializationManagerInterface::class);
+        $service = App::getContainer()->get(ObjectSerializationManagerInterface::class);
         return $service;
     }
 }

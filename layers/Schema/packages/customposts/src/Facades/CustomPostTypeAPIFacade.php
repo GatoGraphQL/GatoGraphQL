@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Engine\App;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 
 class CustomPostTypeAPIFacade
@@ -14,7 +14,7 @@ class CustomPostTypeAPIFacade
         /**
          * @var CustomPostTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CustomPostTypeAPIInterface::class);
+        $service = App::getContainer()->get(CustomPostTypeAPIInterface::class);
         return $service;
     }
 }

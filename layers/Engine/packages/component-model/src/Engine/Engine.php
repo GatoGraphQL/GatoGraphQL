@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use Exception;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
@@ -395,7 +395,7 @@ class Engine implements EngineInterface
     public function getModelPropsModuletree(array $module): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         $useCache = $componentConfiguration->useComponentModelCache();
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
@@ -571,7 +571,7 @@ class Engine implements EngineInterface
     {
         $ret = [];
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         $useCache = $componentConfiguration->useComponentModelCache();
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
@@ -679,7 +679,7 @@ class Engine implements EngineInterface
                 $meta[Request::URLPARAM_MANGLED] = $vars['mangled'];
             }
             /** @var ComponentConfiguration */
-            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
             if ($componentConfiguration->enableConfigByParams() && $vars['config']) {
                 $meta[Params::CONFIG] = $vars['config'];
             }
@@ -953,7 +953,7 @@ class Engine implements EngineInterface
     public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         $useCache = $componentConfiguration->useComponentModelCache();
         $root_processor = $this->getModuleProcessorManager()->getProcessor($root_module);
 

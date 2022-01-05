@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Engine\App;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\TypeKinds;
@@ -55,7 +55,7 @@ class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitio
     final protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         if (!$componentConfiguration->enableUnionTypeImplementingInterfaceType()) {
             return;
         }

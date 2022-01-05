@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
 
+use PoP\Engine\App;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class SchemaConfigBlockRegistryFacade
 {
@@ -14,7 +14,7 @@ class SchemaConfigBlockRegistryFacade
         /**
          * @var SchemaConfigBlockRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(SchemaConfigBlockRegistryInterface::class);
+        $service = App::getContainer()->get(SchemaConfigBlockRegistryInterface::class);
         return $service;
     }
 }

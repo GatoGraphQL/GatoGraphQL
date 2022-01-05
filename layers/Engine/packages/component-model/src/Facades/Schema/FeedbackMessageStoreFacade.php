@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Schema;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class FeedbackMessageStoreFacade
 {
@@ -14,7 +14,7 @@ class FeedbackMessageStoreFacade
         /**
          * @var FeedbackMessageStoreInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(FeedbackMessageStoreInterface::class);
+        $service = App::getContainer()->get(FeedbackMessageStoreInterface::class);
         return $service;
     }
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser;
 
 use PoPBackbone\GraphQLParser\Exception\Parser\SyntaxErrorException;
-use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;

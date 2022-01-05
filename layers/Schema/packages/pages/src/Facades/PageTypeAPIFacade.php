@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Engine\App;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 
 class PageTypeAPIFacade
@@ -14,7 +14,7 @@ class PageTypeAPIFacade
         /**
          * @var PageTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(PageTypeAPIInterface::class);
+        $service = App::getContainer()->get(PageTypeAPIInterface::class);
         return $service;
     }
 }

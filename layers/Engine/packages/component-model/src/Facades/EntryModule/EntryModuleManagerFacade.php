@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\EntryModule;
 
+use PoP\Root\App;
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class EntryModuleManagerFacade
 {
@@ -14,7 +14,7 @@ class EntryModuleManagerFacade
         /**
          * @var EntryModuleManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(EntryModuleManagerInterface::class);
+        $service = App::getContainer()->get(EntryModuleManagerInterface::class);
         return $service;
     }
 }

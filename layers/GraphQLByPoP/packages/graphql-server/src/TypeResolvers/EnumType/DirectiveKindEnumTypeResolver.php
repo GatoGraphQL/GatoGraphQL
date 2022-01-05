@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Engine\App;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\ComponentModel\Directives\DirectiveKinds;
@@ -24,7 +24,7 @@ class DirectiveKindEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValues(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         return array_merge(
             [
                 DirectiveKinds::QUERY,

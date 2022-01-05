@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Facades\Syntax;
 
+use PoP\Engine\App;
 use GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class GraphQLSyntaxServiceFacade
 {
@@ -14,7 +14,7 @@ class GraphQLSyntaxServiceFacade
         /**
          * @var GraphQLSyntaxServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(GraphQLSyntaxServiceInterface::class);
+        $service = App::getContainer()->get(GraphQLSyntaxServiceInterface::class);
         return $service;
     }
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\FileStore\Facades;
 
+use PoP\Root\App;
 use PoP\FileStore\Store\FileStoreInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class JSONFileStoreFacade
 {
@@ -14,7 +14,7 @@ class JSONFileStoreFacade
         /**
          * @var FileStoreInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get('json_file_store');
+        $service = App::getContainer()->get('json_file_store');
         return $service;
     }
 }

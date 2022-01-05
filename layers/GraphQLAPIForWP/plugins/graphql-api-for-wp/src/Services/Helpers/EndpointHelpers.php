@@ -117,7 +117,7 @@ class EndpointHelpers
 
         // If namespaced, add /?use_namespace=1 to the endpoint
         // /** @var ComponentModelComponentConfiguration */
-        // $componentConfiguration = ComponentManager::getComponent(ComponentModelComponent::class)->getConfiguration();
+        // $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(ComponentModelComponent::class)->getConfiguration();
         // if ($componentConfiguration->mustNamespaceTypes()) {
         //     $endpoint = \add_query_arg(APIRequest::URLPARAM_USE_NAMESPACE, true, $endpoint);
         // }

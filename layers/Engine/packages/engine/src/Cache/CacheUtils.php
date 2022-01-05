@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Cache;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Engine\App;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
@@ -19,7 +19,7 @@ class CacheUtils
         $vars = ApplicationState::getVars();
         $hooksAPI = HooksAPIFacade::getInstance();
         /** @var EngineComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(EngineComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(EngineComponent::class)->getConfiguration();
         return (array)$hooksAPI->applyFilters(
             self::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,
             [

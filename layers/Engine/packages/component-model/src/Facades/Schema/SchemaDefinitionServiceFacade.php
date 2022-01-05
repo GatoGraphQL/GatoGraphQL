@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Schema;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class SchemaDefinitionServiceFacade
 {
@@ -14,7 +14,7 @@ class SchemaDefinitionServiceFacade
         /**
          * @var SchemaDefinitionServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(SchemaDefinitionServiceInterface::class);
+        $service = App::getContainer()->get(SchemaDefinitionServiceInterface::class);
         return $service;
     }
 }

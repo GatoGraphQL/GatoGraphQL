@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategoryMutations\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Engine\App;
 use PoPSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface;
 
 class PostCategoryTypeMutationAPIFacade
@@ -14,7 +14,7 @@ class PostCategoryTypeMutationAPIFacade
         /**
          * @var PostCategoryTypeMutationAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(PostCategoryTypeMutationAPIInterface::class);
+        $service = App::getContainer()->get(PostCategoryTypeMutationAPIInterface::class);
         return $service;
     }
 }

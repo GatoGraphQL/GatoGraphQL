@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Engine\App;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 
 class CommentTypeMutationAPIFacade
@@ -14,7 +14,7 @@ class CommentTypeMutationAPIFacade
         /**
          * @var CommentTypeMutationAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CommentTypeMutationAPIInterface::class);
+        $service = App::getContainer()->get(CommentTypeMutationAPIInterface::class);
         return $service;
     }
 }

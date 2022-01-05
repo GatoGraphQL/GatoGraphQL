@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\ConfigurationEntries;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Engine\App;
 use PoP\AccessControl\Component;
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -36,7 +36,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
          * schema mode is the same required one
          */
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         if (!$componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             return $this->getUpstreamMatchingEntries(
                 $entryList,

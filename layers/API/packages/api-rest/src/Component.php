@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\RESTAPI;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Engine\App;
 use PoP\API\Component as APIComponent;
 use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
@@ -44,6 +44,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return ComponentManager::getComponent(APIComponent::class)->isEnabled() && !Environment::disableRESTAPI();
+        return App::getComponentManager()->getComponent(APIComponent::class)->isEnabled() && !Environment::disableRESTAPI();
     }
 }

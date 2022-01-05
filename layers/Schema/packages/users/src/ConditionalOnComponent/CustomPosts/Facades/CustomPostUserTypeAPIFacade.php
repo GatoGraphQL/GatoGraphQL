@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Engine\App;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\TypeAPIs\CustomPostUserTypeAPIInterface;
 
 class CustomPostUserTypeAPIFacade
@@ -14,7 +14,7 @@ class CustomPostUserTypeAPIFacade
         /**
          * @var CustomPostUserTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CustomPostUserTypeAPIInterface::class);
+        $service = App::getContainer()->get(CustomPostUserTypeAPIInterface::class);
         return $service;
     }
 }

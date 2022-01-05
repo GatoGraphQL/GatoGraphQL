@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Hooks;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Engine\App;
 use PoP\AccessControl\Component;
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
@@ -18,7 +18,7 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesHookSetTrait
          * If not enabling individual control, then the parent case already deals with the general case
          */
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         if (!$componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             return parent::maybeFilterDirectiveName($include, $relationalTypeResolver, $directiveResolver, $directiveName);
         }

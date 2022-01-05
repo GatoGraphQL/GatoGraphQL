@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoP\Root\Instances;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\App;
 
 class InstanceManager implements InstanceManagerInterface
 {
     public function getInstance(string $class): object
     {
-        $containerBuilder = ContainerBuilderFactory::getInstance();
+        $containerBuilder = App::getContainer();
         return $containerBuilder->get($class);
     }
 
     public function hasInstance(string $class): bool
     {
-        $containerBuilder = ContainerBuilderFactory::getInstance();
+        $containerBuilder = App::getContainer();
         return $containerBuilder->has($class);
     }
 }

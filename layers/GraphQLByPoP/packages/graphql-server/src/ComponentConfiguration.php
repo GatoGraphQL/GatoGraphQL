@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
+use PoP\Engine\App;
 use PoP\BasicService\Component\AbstractComponentConfiguration;
-use PoP\Root\Managers\ComponentManager;
 use PoP\API\Component as APIComponent;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\BasicService\Component\EnvironmentValueHelpers;
@@ -255,7 +255,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     public function exposeGlobalFieldsInGraphQLSchema(): bool
     {
         /** @var APIComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(APIComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(APIComponent::class)->getConfiguration();
         if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return false;
         }

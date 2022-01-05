@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\DataStructure;
 
+use PoP\Root\App;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class DataStructureManagerFacade
 {
@@ -14,7 +14,7 @@ class DataStructureManagerFacade
         /**
          * @var DataStructureManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(DataStructureManagerInterface::class);
+        $service = App::getContainer()->get(DataStructureManagerInterface::class);
         return $service;
     }
 }

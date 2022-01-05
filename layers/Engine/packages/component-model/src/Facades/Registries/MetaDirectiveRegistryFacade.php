@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Registries;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class MetaDirectiveRegistryFacade
 {
@@ -14,7 +14,7 @@ class MetaDirectiveRegistryFacade
         /**
          * @var MetaDirectiveRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(MetaDirectiveRegistryInterface::class);
+        $service = App::getContainer()->get(MetaDirectiveRegistryInterface::class);
         return $service;
     }
 }

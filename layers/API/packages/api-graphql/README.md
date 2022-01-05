@@ -54,7 +54,7 @@ RewriteRule ^api/graphql/?$ /?scheme=api&datastructure=graphql [L,P,QSA]
 Initialize the component:
 
 ``` php
-\PoP\Root\AppLoader::addComponentClassesToInitialize([
+\PoP\Engine\App::stockAndInitializeComponentClasses([([
     \PoP\GraphQLAPI\Component::class,
 ]);
 ```

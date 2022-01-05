@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Facades\Schema;
 
+use PoP\Engine\App;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class GraphQLSchemaDefinitionServiceFacade
 {
@@ -14,7 +14,7 @@ class GraphQLSchemaDefinitionServiceFacade
         /**
          * @var GraphQLSchemaDefinitionServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(GraphQLSchemaDefinitionServiceInterface::class);
+        $service = App::getContainer()->get(GraphQLSchemaDefinitionServiceInterface::class);
         return $service;
     }
 }

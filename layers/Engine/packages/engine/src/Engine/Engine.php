@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Engine;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Engine\App;
 use Exception;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
@@ -67,7 +67,7 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         // If CacheControl is enabled, add it to the headers
         $headers = [];
-        if (ComponentManager::getComponent(CacheControlComponent::class)->isEnabled()) {
+        if (App::getComponentManager()->getComponent(CacheControlComponent::class)->isEnabled()) {
             if ($cacheControlHeader = $this->getCacheControlEngine()->getCacheControlHeader()) {
                 $headers[] = $cacheControlHeader;
             }

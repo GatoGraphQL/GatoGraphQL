@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
-use PoP\Engine\AppLoader;
+use PoP\Engine\App;
 use PoP\Root\Environment as RootEnvironment;
 use RuntimeException;
 
@@ -349,6 +349,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         \add_action(
             'plugins_loaded',
             function (): void {
+                App::initialize();
+            },
+            PluginLifecyclePriorities::INITIALIZE_APP
+        );
+        \add_action(
+            'plugins_loaded',
+            function (): void {
+                if ($this->inititalizationException !== null) {
+                    return;
+                }
+                $this->initialize();
+            },
+            PluginLifecyclePriorities::INITIALIZE_PLUGIN
+        );
+        \add_action(
+            'plugins_loaded',
+            function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
@@ -450,7 +467,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      */
     public function initializeComponents(): void
     {
-        AppLoader::initializeComponents();
+        App::getAppLoader()->initializeComponents();
 
         /**
          * After initialized, and before booting,
@@ -469,7 +486,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         try {
             // Boot all PoP components, from this plugin and all extensions
             $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
-            AppLoader::bootSystem(
+            App::getAppLoader()->bootSystem(
                 $containerCacheConfiguration->cacheContainerConfiguration(),
                 $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
                 $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),
@@ -498,7 +515,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         try {
             // Boot all PoP components, from this plugin and all extensions
             $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
-            AppLoader::bootApplication(
+            App::getAppLoader()->bootApplication(
                 $containerCacheConfiguration->cacheContainerConfiguration(),
                 $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
                 $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),

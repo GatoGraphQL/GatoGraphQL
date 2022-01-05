@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Engine\App;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 
 class PostCategoryTypeAPIFacade
@@ -14,7 +14,7 @@ class PostCategoryTypeAPIFacade
         /**
          * @var PostCategoryTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(PostCategoryTypeAPIInterface::class);
+        $service = App::getContainer()->get(PostCategoryTypeAPIInterface::class);
         return $service;
     }
 }

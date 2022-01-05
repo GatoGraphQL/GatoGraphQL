@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Hooks;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Engine\App;
 use PoP\AccessControl\Component;
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -24,7 +24,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
          * If enabling individual control, then check if there is any entry for this field and schema mode
          */
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             /**
              * If there are no entries, then exit by returning the original hook value

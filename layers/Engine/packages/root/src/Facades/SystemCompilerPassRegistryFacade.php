@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\Root\Facades;
 
-use PoP\Root\Container\SystemContainerBuilderFactory;
+use PoP\Root\App;
 use PoP\Root\Registries\CompilerPassRegistryInterface;
 
 class SystemCompilerPassRegistryFacade
 {
     public static function getInstance(): CompilerPassRegistryInterface
     {
-        $systemContainerBuilder = SystemContainerBuilderFactory::getInstance();
+        $systemContainerBuilder = App::getSystemContainer();
         /**
          * @var CompilerPassRegistryInterface
          */

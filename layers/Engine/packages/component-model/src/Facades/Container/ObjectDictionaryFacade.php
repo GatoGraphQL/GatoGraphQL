@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Container;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class ObjectDictionaryFacade
 {
@@ -14,7 +14,7 @@ class ObjectDictionaryFacade
         /**
          * @var ObjectDictionaryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(ObjectDictionaryInterface::class);
+        $service = App::getContainer()->get(ObjectDictionaryInterface::class);
         return $service;
     }
 }

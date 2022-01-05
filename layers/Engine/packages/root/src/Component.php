@@ -6,11 +6,9 @@ namespace PoP\Root;
 
 use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Component\ApplicationEvents;
-use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\HybridCompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ServiceInstantiatorInterface;
 use PoP\Root\Container\SystemCompilerPasses\RegisterSystemCompilerPassServiceCompilerPass;
-use PoP\Root\Container\SystemContainerBuilderFactory;
 
 /**
  * Initialize component
@@ -72,7 +70,7 @@ class Component extends AbstractComponent
         /**
          * @var ServiceInstantiatorInterface
          */
-        $serviceInstantiator = SystemContainerBuilderFactory::getInstance()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator = App::getSystemContainer()->get(ServiceInstantiatorInterface::class);
         $serviceInstantiator->initializeServices();
     }
 
@@ -85,7 +83,7 @@ class Component extends AbstractComponent
         /**
          * @var ServiceInstantiatorInterface
          */
-        $serviceInstantiator = ContainerBuilderFactory::getInstance()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator = App::getContainer()->get(ServiceInstantiatorInterface::class);
         $serviceInstantiator->initializeServices(ApplicationEvents::BEFORE_BOOT);
     }
 
@@ -98,7 +96,7 @@ class Component extends AbstractComponent
         /**
          * @var ServiceInstantiatorInterface
          */
-        $serviceInstantiator = ContainerBuilderFactory::getInstance()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator = App::getContainer()->get(ServiceInstantiatorInterface::class);
         $serviceInstantiator->initializeServices(ApplicationEvents::BOOT);
     }
 
@@ -111,7 +109,7 @@ class Component extends AbstractComponent
         /**
          * @var ServiceInstantiatorInterface
          */
-        $serviceInstantiator = ContainerBuilderFactory::getInstance()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator = App::getContainer()->get(ServiceInstantiatorInterface::class);
         $serviceInstantiator->initializeServices(ApplicationEvents::AFTER_BOOT);
     }
 }

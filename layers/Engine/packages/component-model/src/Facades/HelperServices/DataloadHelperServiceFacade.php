@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\HelperServices;
 
+use PoP\Root\App;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class DataloadHelperServiceFacade
 {
@@ -14,7 +14,7 @@ class DataloadHelperServiceFacade
         /**
          * @var DataloadHelperServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(DataloadHelperServiceInterface::class);
+        $service = App::getContainer()->get(DataloadHelperServiceInterface::class);
         return $service;
     }
 }

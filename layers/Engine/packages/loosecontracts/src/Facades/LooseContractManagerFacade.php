@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\LooseContracts\Facades;
 
+use PoP\Root\App;
 use PoP\LooseContracts\LooseContractManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class LooseContractManagerFacade
 {
@@ -14,7 +14,7 @@ class LooseContractManagerFacade
         /**
          * @var LooseContractManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(LooseContractManagerInterface::class);
+        $service = App::getContainer()->get(LooseContractManagerInterface::class);
         return $service;
     }
 }

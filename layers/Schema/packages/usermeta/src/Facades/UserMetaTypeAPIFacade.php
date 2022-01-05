@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMeta\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Engine\App;
 use PoPSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
 
 class UserMetaTypeAPIFacade
@@ -14,7 +14,7 @@ class UserMetaTypeAPIFacade
         /**
          * @var UserMetaTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserMetaTypeAPIInterface::class);
+        $service = App::getContainer()->get(UserMetaTypeAPIInterface::class);
         return $service;
     }
 }

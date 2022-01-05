@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Engine\App;
 use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 
 class CustomPostMediaTypeMutationAPIFacade
@@ -14,7 +14,7 @@ class CustomPostMediaTypeMutationAPIFacade
         /**
          * @var CustomPostMediaTypeMutationAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CustomPostMediaTypeMutationAPIInterface::class);
+        $service = App::getContainer()->get(CustomPostMediaTypeMutationAPIInterface::class);
         return $service;
     }
 }

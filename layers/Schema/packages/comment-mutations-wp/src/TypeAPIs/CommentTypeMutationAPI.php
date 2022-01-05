@@ -6,8 +6,6 @@ namespace PoPSchema\CommentMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\Error\Error;
 use PoP\BasicService\BasicServiceTrait;
-use PoPSchema\CommentMutations\Component;
-use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 
 /**

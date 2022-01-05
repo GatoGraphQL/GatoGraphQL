@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Engine\App;
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
 use PoP\ComponentModel\Error\ErrorProviderInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
@@ -49,7 +49,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
     {
         $directives = parent::parseDirectiveList();
         /** @var ComponentConfiguration */
-        $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         if (!$componentConfiguration->enableComposableDirectives()) {
             return $directives;
         }

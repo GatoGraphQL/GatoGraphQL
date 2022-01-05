@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Facades;
 
+use PoP\Engine\App;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class AccessControlManagerFacade
 {
@@ -14,7 +14,7 @@ class AccessControlManagerFacade
         /**
          * @var AccessControlManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(AccessControlManagerInterface::class);
+        $service = App::getContainer()->get(AccessControlManagerInterface::class);
         return $service;
     }
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Facades\Formatters;
 
+use PoP\Engine\App;
 use PoP\Engine\Formatters\DateFormatterInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class DateFormatterFacade
 {
@@ -14,7 +14,7 @@ class DateFormatterFacade
         /**
          * @var DateFormatterInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(DateFormatterInterface::class);
+        $service = App::getContainer()->get(DateFormatterInterface::class);
         return $service;
     }
 }

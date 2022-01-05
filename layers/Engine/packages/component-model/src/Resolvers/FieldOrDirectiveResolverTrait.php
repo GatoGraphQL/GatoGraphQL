@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
@@ -36,7 +36,7 @@ trait FieldOrDirectiveResolverTrait
         ));
         if ($missing !== []) {
             /** @var ComponentConfiguration */
-            $componentConfiguration = ComponentManager::getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
             $treatUndefinedFieldOrDirectiveArgsAsErrors = $componentConfiguration->treatUndefinedFieldOrDirectiveArgsAsErrors();
             $errorMessage = count($missing) == 1 ?
                 sprintf(

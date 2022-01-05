@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
 
+use PoP\Engine\App;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class PersistedQueryEndpointAnnotatorRegistryFacade
 {
@@ -14,7 +14,7 @@ class PersistedQueryEndpointAnnotatorRegistryFacade
         /**
          * @var PersistedQueryEndpointAnnotatorRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(PersistedQueryEndpointAnnotatorRegistryInterface::class);
+        $service = App::getContainer()->get(PersistedQueryEndpointAnnotatorRegistryInterface::class);
         return $service;
     }
 }

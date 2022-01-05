@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
 
+use PoP\Engine\App;
 use GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistryInterface;
-use PoP\Root\Container\ContainerBuilderFactory;
 
 class CustomEndpointAnnotatorRegistryFacade
 {
@@ -14,7 +14,7 @@ class CustomEndpointAnnotatorRegistryFacade
         /**
          * @var CustomEndpointAnnotatorRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CustomEndpointAnnotatorRegistryInterface::class);
+        $service = App::getContainer()->get(CustomEndpointAnnotatorRegistryInterface::class);
         return $service;
     }
 }

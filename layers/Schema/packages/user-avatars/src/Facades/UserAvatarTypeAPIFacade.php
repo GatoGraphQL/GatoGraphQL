@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\Facades;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Engine\App;
 use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
 
 class UserAvatarTypeAPIFacade
@@ -14,7 +14,7 @@ class UserAvatarTypeAPIFacade
         /**
          * @var UserAvatarTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserAvatarTypeAPIInterface::class);
+        $service = App::getContainer()->get(UserAvatarTypeAPIInterface::class);
         return $service;
     }
 }
