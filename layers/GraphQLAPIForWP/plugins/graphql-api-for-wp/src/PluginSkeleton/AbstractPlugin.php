@@ -317,14 +317,14 @@ abstract class AbstractPlugin implements PluginInterface
     /**
      * Execute logic after the plugin/extension has just been activated
      */
-    protected function pluginJustActivated(): void
+    public function pluginJustActivated(): void
     {
     }
 
     /**
      * Execute logic after the plugin/extension has just been updated
      */
-    protected function pluginJustUpdated(string $storedVersion): void
+    public function pluginJustUpdated(string $storedVersion): void
     {
     }
 }
