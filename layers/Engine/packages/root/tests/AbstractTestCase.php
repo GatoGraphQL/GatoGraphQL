@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root;
 
 use PHPUnit\Framework\TestCase;
-use PoP\Root\AppLoader;
+use PoP\Root\App;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Helpers\ClassHelpers;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -16,33 +16,34 @@ abstract class AbstractTestCase extends TestCase
 
     public static function setUpBeforeClass(): void
     {
-        static::initializeAppLoader(false, null, null, true);
+        static::initializeApp(false, null, null, true);
         self::$container = ContainerBuilderFactory::getInstance();
     }
 
-    protected static function initializeAppLoader(
+    protected static function initializeApp(
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
         ?string $containerDirectory = null,
         bool $isDev = false
     ): void {
-        $appLoader = static::getAppLoaderClass();
-        $appLoader::addComponentClassesToInitialize(static::getComponentClassesToInitialize());
-        $appLoader::initializeComponents($isDev);
-        $appLoader::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
+        $app = static::getAppClass();
+        $app::initialize();
+        $app::getAppLoader()::addComponentClassesToInitialize(static::getComponentClassesToInitialize());
+        $app::getAppLoader()::initializeComponents($isDev);
+        $app::getAppLoader()::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        $appLoader::addComponentClassConfiguration(
+        $app::getAppLoader()::addComponentClassConfiguration(
             static::getComponentClassConfiguration()
         );
 
-        $appLoader::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
+        $app::getAppLoader()::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
     }
 
-    protected static function getAppLoaderClass(): string
+    protected static function getAppClass(): string
     {
-        return AppLoader::class;
+        return App::class;
     }
 
     /**
@@ -77,8 +78,8 @@ abstract class AbstractTestCase extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        $appLoader = static::getAppLoaderClass();
-        $appLoader::reset();
+        $app = static::getAppClass();
+        $app::reset();
     }
 
     protected function getService(string $service): mixed

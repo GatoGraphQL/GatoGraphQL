@@ -30,8 +30,9 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
  */
 class PluginLifecyclePriorities
 {
-    public const HANDLE_NEW_ACTIVATIONS = 90;
-    public const SETUP_EXTENSIONS = 100;
+    public const HANDLE_NEW_ACTIVATIONS = 80;
+    public const SETUP_EXTENSIONS = 90;
+    public const INITIALIZE_APP = 100;
     public const INITIALIZE_PLUGIN = 110;
     public const INITIALIZE_EXTENSIONS = 120;
     public const CONFIGURE_COMPONENTS = 130;
