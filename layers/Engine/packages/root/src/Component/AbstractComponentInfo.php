@@ -13,7 +13,7 @@ abstract class AbstractComponentInfo implements ComponentInfoInterface
     ) {
     }
 
-    abstract protected function initialize(): mixed;
+    abstract protected function initialize(): void;
 
     public function get(string $key): mixed
     {

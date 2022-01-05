@@ -9,7 +9,7 @@ use PoP\Root\Component\AbstractComponentInfo;
 
 class ComponentInfo extends AbstractComponentInfo
 {
-    protected function initialize(): mixed
+    protected function initialize(): void
     {
         $this->values = [
             // This Constant is needed to be able to retrieve the timestamp and replace it for nothing when generating the ETag,
