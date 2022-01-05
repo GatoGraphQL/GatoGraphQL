@@ -32,8 +32,8 @@ class App implements AppInterface
         ?MainPluginManager $mainPluginManager = null,
         ?ExtensionManager $extensionManager = null,
     ): void {
-        self::$mainPluginManager = $mainPluginManager ?? static::getMainPluginManager();
-        self::$extensionManager = $extensionManager ?? static::getExtensionManager();
+        self::$mainPluginManager = $mainPluginManager ?? static::createMainPluginManager();
+        self::$extensionManager = $extensionManager ?? static::createExtensionManager();
     }
 
     protected static function createExtensionManager(): ExtensionManager
