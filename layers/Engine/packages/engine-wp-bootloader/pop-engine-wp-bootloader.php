@@ -22,7 +22,7 @@ App::initialize();
  * or not based on their required plugins being active.
  */
 \add_action('plugins_loaded', function(): void {
-    App::getAppLoader()::initializeComponents();
-    App::getAppLoader()::bootSystem();
-    App::getAppLoader()::bootApplication();
+    App::getAppLoader()->initializeComponents();
+    App::getAppLoader()->bootSystem();
+    App::getAppLoader()->bootApplication();
 });

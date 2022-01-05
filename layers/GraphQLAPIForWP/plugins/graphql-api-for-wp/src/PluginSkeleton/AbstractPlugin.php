@@ -122,7 +122,7 @@ abstract class AbstractPlugin
     {
         // Initialize the containers
         $componentClasses = $this->getComponentClassesToInitialize();
-        App::getAppLoader()::addComponentClassesToInitialize($componentClasses);
+        App::getAppLoader()->addComponentClassesToInitialize($componentClasses);
     }
 
     /**
@@ -166,10 +166,10 @@ abstract class AbstractPlugin
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        App::getAppLoader()::addComponentClassConfiguration(
+        App::getAppLoader()->addComponentClassConfiguration(
             $this->getComponentClassConfiguration()
         );
-        App::getAppLoader()::addSchemaComponentClassesToSkip(
+        App::getAppLoader()->addSchemaComponentClassesToSkip(
             $this->getSchemaComponentClassesToSkip()
         );
     }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 use PoP\Engine\App;
 
 // Set the Component configuration
-App::getAppLoader()::addComponentClassesToInitialize([
+App::getAppLoader()->addComponentClassesToInitialize([
     \PoPSchema\PostsWP\Component::class,
     \PoPSchema\PagesWP\Component::class,
     \PoPSchema\CustomPostMediaWP\Component::class,

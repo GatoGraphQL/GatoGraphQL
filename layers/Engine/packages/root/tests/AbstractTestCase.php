@@ -28,17 +28,17 @@ abstract class AbstractTestCase extends TestCase
     ): void {
         $app = static::getAppClass();
         $app::initialize();
-        $app::getAppLoader()::addComponentClassesToInitialize(static::getComponentClassesToInitialize());
-        $app::getAppLoader()::initializeComponents($isDev);
-        $app::getAppLoader()::bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
+        $app::getAppLoader()->addComponentClassesToInitialize(static::getComponentClassesToInitialize());
+        $app::getAppLoader()->initializeComponents($isDev);
+        $app::getAppLoader()->bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        $app::getAppLoader()::addComponentClassConfiguration(
+        $app::getAppLoader()->addComponentClassConfiguration(
             static::getComponentClassConfiguration()
         );
 
-        $app::getAppLoader()::bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
+        $app::getAppLoader()->bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
     }
 
     protected static function getAppClass(): string

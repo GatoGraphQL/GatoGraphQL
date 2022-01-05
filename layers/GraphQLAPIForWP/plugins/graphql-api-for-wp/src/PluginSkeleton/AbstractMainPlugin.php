@@ -467,7 +467,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      */
     public function initializeComponents(): void
     {
-        App::getAppLoader()::initializeComponents();
+        App::getAppLoader()->initializeComponents();
 
         /**
          * After initialized, and before booting,
@@ -486,7 +486,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         try {
             // Boot all PoP components, from this plugin and all extensions
             $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
-            App::getAppLoader()::bootSystem(
+            App::getAppLoader()->bootSystem(
                 $containerCacheConfiguration->cacheContainerConfiguration(),
                 $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
                 $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),
@@ -515,7 +515,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         try {
             // Boot all PoP components, from this plugin and all extensions
             $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
-            App::getAppLoader()::bootApplication(
+            App::getAppLoader()->bootApplication(
                 $containerCacheConfiguration->cacheContainerConfiguration(),
                 $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
                 $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),
