@@ -118,7 +118,7 @@ trait ContainerBuilderFactoryTrait
     {
         return $this->instance;
     }
-    
+
     public function isCached(): bool
     {
         return $this->cached;

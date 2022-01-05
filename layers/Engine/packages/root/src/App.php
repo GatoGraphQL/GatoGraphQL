@@ -80,5 +80,4 @@ class App
     {
         return self::$componentManager;
     }
-
 }
