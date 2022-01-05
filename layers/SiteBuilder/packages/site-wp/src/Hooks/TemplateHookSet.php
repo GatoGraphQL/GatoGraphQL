@@ -38,7 +38,7 @@ class TemplateHookSet extends AbstractHookSet
         // If doing JSON, for sure return json.php which only prints the encoded JSON
         if (!$this->getApplicationStateHelperService()->doingJSON()) {
             /** @var ComponentInterface */
-            $component = App::getComponentManager()->getComponent(Component::class);
+            $component = App::getComponent(Component::class);
             return $component->getTemplatesDir() . '/Output.php';
         }
         return $template;

@@ -103,7 +103,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         // Attempt to retrieve from the cache, if enabled
         /** @var APIComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(APIComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(APIComponent::class)->getConfiguration();
         if ($useCache = $componentConfiguration->useSchemaDefinitionCache()) {
             // Use different caches for the normal and namespaced schemas,
             // or it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
@@ -146,7 +146,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $vars = ApplicationState::getVars();
         $enableNestedMutations = $vars['nested-mutations-enabled'];
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $exposeSchemaIntrospectionFieldInSchema = $componentConfiguration->exposeSchemaIntrospectionFieldInSchema();
         $exposeGlobalFieldsInGraphQLSchema = $componentConfiguration->exposeGlobalFieldsInGraphQLSchema();
 
@@ -222,7 +222,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // When doing nested mutations, differentiate mutating fields by adding label "[Mutation]" in the description
         $addMutationLabelToSchemaFieldDescription = $enableNestedMutations;
         /** @var GraphQLParserComponentConfiguration */
-        $graphQLParserComponentConfiguration = App::getComponentManager()->getComponent(GraphQLParserComponent::class)->getConfiguration();
+        $graphQLParserComponentConfiguration = App::getComponent(GraphQLParserComponent::class)->getConfiguration();
         $enableComposableDirectives = $graphQLParserComponentConfiguration->enableComposableDirectives();
 
         // Modify the schema definitions
@@ -295,7 +295,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
         // Sort the elements in the schema alphabetically (if not already sorted!)
         /** @var APIComponentConfiguration */
-        $apiComponentConfiguration = App::getComponentManager()->getComponent(APIComponent::class)->getConfiguration();
+        $apiComponentConfiguration = App::getComponent(APIComponent::class)->getConfiguration();
         if (
             !$apiComponentConfiguration->sortFullSchemaAlphabetically()
             && $componentConfiguration->sortGraphQLSchemaAlphabetically()

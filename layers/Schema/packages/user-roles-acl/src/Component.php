@@ -30,7 +30,7 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return App::getComponentManager()->getComponent(UserRolesAccessControlComponent::class)->isEnabled();
+        return App::getComponent(UserRolesAccessControlComponent::class)->isEnabled();
     }
 
     /**

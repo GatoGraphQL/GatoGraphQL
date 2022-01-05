@@ -18,7 +18,7 @@ trait WPClientTrait
     protected function getComponentBaseURL(): ?string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getGraphQLClientsComponentURL();
     }
     /**
@@ -35,7 +35,7 @@ trait WPClientTrait
     protected function getEndpointURLOrURLPath(): string
     {
         /** @var GraphQLEndpointForWPComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(GraphQLEndpointForWPComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(GraphQLEndpointForWPComponent::class)->getConfiguration();
         return $componentConfiguration->getGraphQLAPIEndpoint();
     }
 }

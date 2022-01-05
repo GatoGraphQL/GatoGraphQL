@@ -75,7 +75,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
     {
         $dangerouslyDynamicScalarTypeResolver = null;
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($skipExposingDangerouslyDynamicScalarTypeInSchema = $componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var DangerouslyDynamicScalarTypeResolver */

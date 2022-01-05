@@ -27,7 +27,7 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock extend
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
 
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $enabledDisabledLabels = $this->getEnabledDisabledLabels();
         $blockContent = sprintf(
             $blockContentPlaceholder,

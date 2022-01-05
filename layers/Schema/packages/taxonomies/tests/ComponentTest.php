@@ -13,7 +13,7 @@ class ComponentTest extends AbstractTestCase
     public function testHasDependedComponentClasses(): void
     {
         $this->assertNotEmpty(
-            \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getDependedComponentClasses()
+            \PoP\Engine\App::getComponent(Component::class)->getDependedComponentClasses()
         );
     }
 }

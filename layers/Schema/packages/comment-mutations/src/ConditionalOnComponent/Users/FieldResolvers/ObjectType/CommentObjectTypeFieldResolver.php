@@ -52,7 +52,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     public function isServiceEnabled(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->mustUserBeLoggedInToAddComment();
     }
 

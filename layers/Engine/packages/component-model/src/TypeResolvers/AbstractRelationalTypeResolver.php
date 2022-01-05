@@ -1071,7 +1071,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // then skip processing that field altogether
             $schemaErrorFailingFields = [];
             /** @var ComponentConfiguration */
-            $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
             if (
                 !empty($directivePipelineSchemaErrors)
                 && $componentConfiguration->removeFieldIfDirectiveFailed()

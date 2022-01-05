@@ -102,7 +102,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     {
         $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         switch ($fieldName) {
             case 'customPost':
                 if ($componentConfiguration->treatCustomPostStatusAsAdminData()) {

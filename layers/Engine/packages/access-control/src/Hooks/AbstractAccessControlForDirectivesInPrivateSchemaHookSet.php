@@ -14,7 +14,7 @@ abstract class AbstractAccessControlForDirectivesInPrivateSchemaHookSet extends 
     protected function enabled(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->canSchemaBePrivate();
     }
 

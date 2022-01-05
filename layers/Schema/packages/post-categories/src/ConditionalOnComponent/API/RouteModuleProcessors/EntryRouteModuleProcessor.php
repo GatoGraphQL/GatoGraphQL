@@ -55,7 +55,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     {
         $ret = array();
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $routemodules = array(
             $componentConfiguration->getPostCategoriesRoute() => [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
         );
@@ -68,7 +68,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             ];
         }
         /** @var PostsComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(PostsComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(PostsComponent::class)->getConfiguration();
         $routemodules = array(
             $componentConfiguration->getPostsRoute() => [CategoryPostFieldDataloadModuleProcessor::class, CategoryPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST],
         );

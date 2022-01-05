@@ -47,13 +47,13 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
     public function getAllowOrDenyOptionEntries(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getSettingsEntries();
     }
     public function getAllowOrDenyOptionBehavior(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getSettingsBehavior();
     }
 

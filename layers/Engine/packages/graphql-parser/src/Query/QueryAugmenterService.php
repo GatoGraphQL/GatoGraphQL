@@ -16,7 +16,7 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
     public function isExecutingAllOperations(string $operationName): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->enableMultipleQueryExecution()
             && strtoupper($operationName) === ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME;
     }

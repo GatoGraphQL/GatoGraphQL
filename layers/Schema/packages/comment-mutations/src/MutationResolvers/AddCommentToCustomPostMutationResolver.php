@@ -58,7 +58,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
         // Check that the user is logged-in
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
             $this->validateUserIsLoggedIn($errors);
             if ($errors) {
@@ -108,7 +108,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
          */
         $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
             $userID = $vars['global-userstate']['current-user-id'];
             $comment_data['userID'] = $userID;

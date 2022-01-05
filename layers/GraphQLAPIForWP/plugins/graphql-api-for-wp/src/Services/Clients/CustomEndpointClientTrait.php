@@ -38,7 +38,7 @@ trait CustomEndpointClientTrait
         $endpointURL = \remove_query_arg(RequestParams::VIEW, $fullURL);
         // // Maybe add ?use_namespace=true
         // /** @var ComponentModelComponentConfiguration */
-        // $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(ComponentModelComponent::class)->getConfiguration();
+        // $componentConfiguration = \PoP\Engine\App::getComponent(ComponentModelComponent::class)->getConfiguration();
         // if ($componentConfiguration->mustNamespaceTypes()) {
         //     $endpointURL = \add_query_arg(APIRequest::URLPARAM_USE_NAMESPACE, true, $endpointURL);
         // }

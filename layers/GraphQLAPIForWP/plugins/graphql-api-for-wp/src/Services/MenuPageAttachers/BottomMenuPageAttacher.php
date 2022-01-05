@@ -136,7 +136,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
 
         /** @var GraphQLClientsForWPComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(GraphQLClientsForWPComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(GraphQLClientsForWPComponent::class)->getConfiguration();
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
             global $submenu;
             $clientPath = $componentConfiguration->getGraphiQLClientEndpoint();

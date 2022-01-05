@@ -22,13 +22,13 @@ class TaxonomyMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObj
     protected function getAllowOrDenyEntries(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getTaxonomyMetaEntries();
     }
     protected function getAllowOrDenyBehavior(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getTaxonomyMetaBehavior();
     }
 }

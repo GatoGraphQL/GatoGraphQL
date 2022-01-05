@@ -65,6 +65,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return App::getComponentManager()->getComponent(AccessControlComponent::class)->isEnabled();
+        return App::getComponent(AccessControlComponent::class)->isEnabled();
     }
 }

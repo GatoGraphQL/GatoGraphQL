@@ -45,6 +45,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return App::getComponentManager()->getComponent(GraphQLAPIComponent::class)->isEnabled();
+        return App::getComponent(GraphQLAPIComponent::class)->isEnabled();
     }
 }

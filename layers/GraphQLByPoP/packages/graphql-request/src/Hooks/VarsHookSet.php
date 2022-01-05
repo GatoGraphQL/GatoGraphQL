@@ -130,7 +130,7 @@ class VarsHookSet extends AbstractHookSet
     protected function processURLParamVars(array &$vars): void
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $disablePoPQuery = isset($_REQUEST[QueryInputs::QUERY]) && $componentConfiguration->disableGraphQLAPIForPoP();
         if ($disablePoPQuery) {
             // Remove the query set by package API

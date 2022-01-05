@@ -35,13 +35,13 @@ abstract class AbstractCustomPostMetaTypeAPI extends AbstractMetaTypeAPI impleme
     public function getAllowOrDenyMetaEntries(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getCustomPostMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getCustomPostMetaBehavior();
     }
 

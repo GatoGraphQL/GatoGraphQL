@@ -22,13 +22,13 @@ class UserMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObjectT
     protected function getAllowOrDenyEntries(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getUserMetaEntries();
     }
     protected function getAllowOrDenyBehavior(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getUserMetaBehavior();
     }
 }

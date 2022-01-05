@@ -94,7 +94,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $adminInputFieldNames;
         }
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->treatUserRoleAsAdminData()) {
             $adminInputFieldNames[] = 'roles';
             $adminInputFieldNames[] = 'excludeRoles';

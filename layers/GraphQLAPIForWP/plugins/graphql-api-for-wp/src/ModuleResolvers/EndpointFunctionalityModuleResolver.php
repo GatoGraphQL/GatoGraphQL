@@ -87,7 +87,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public function getDescription(string $module): string
     {
         /** @var GraphQLEndpointForWPComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(GraphQLEndpointForWPComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(GraphQLEndpointForWPComponent::class)->getConfiguration();
         switch ($module) {
             case self::SINGLE_ENDPOINT:
                 return \sprintf(

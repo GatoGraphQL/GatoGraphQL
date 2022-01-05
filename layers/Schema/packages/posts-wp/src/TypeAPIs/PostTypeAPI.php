@@ -86,7 +86,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     protected function getCustomPostListMaxLimit(): int
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getPostListMaxLimit();
     }
 

@@ -63,7 +63,7 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
     {
         $adminInputFieldNames = parent::getAdminInputFieldNames();
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->treatUserEmailAsAdminData()) {
             $adminInputFieldNames[] = 'emails';
         }

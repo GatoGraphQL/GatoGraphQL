@@ -255,7 +255,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     public function exposeGlobalFieldsInGraphQLSchema(): bool
     {
         /** @var APIComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(APIComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(APIComponent::class)->getConfiguration();
         if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return false;
         }

@@ -31,7 +31,7 @@ class Schema
     ) {
         // Enable or not to add the global fields to the schema, since they may pollute the documentation
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
             // Add the global fields in the registry
             SchemaDefinitionHelpers::createFieldsFromPath(

@@ -115,7 +115,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     public function getDescription(string $module): string
     {
         /** @var GraphQLClientsForWPComponentConfiguration */
-        $componentConfiguration = App::getComponentManager()->getComponent(GraphQLClientsForWPComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(GraphQLClientsForWPComponent::class)->getConfiguration();
         switch ($module) {
             case self::GRAPHIQL_FOR_SINGLE_ENDPOINT:
                 return \sprintf(
