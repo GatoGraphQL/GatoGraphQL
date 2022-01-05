@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use LogicException;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Managers\ComponentManager;
@@ -64,41 +63,21 @@ class App
 
     public static function getAppLoader(): AppLoader
     {
-        if (self::$appLoader === null) {
-            self::throwAppNotInitializedException();
-        }
         return self::$appLoader;
-    }
-
-    /**
-     * @throws LogicException
-     */
-    private static function throwAppNotInitializedException(): void
-    {
-        throw new LogicException(\sprintf('App has not been initialized'));
     }
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory
     {
-        if (self::$containerBuilderFactory === null) {
-            self::throwAppNotInitializedException();
-        }
         return self::$containerBuilderFactory;
     }
 
     public static function getSystemContainerBuilderFactory(): SystemContainerBuilderFactory
     {
-        if (self::$systemContainerBuilderFactory === null) {
-            self::throwAppNotInitializedException();
-        }
         return self::$systemContainerBuilderFactory;
     }
 
     public static function getComponentManager(): ComponentManager
     {
-        if (self::$componentManager === null) {
-            self::throwAppNotInitializedException();
-        }
         return self::$componentManager;
     }
 
