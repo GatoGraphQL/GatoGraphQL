@@ -18,7 +18,27 @@ class ComponentInfo extends AbstractComponentInfo
             'rand' => rand(),
             'time' => time(),
             // This value will be used in the response. If compact, make sure each JS Key is unique
-            'response-prop-submodules' => Environment::compactResponseJsonKeys() ? 'ms' : 'submodules',
+            'submodules-output-property' => Environment::compactResponseJsonKeys() ? 'ms' : 'submodules',
         ];
+    }
+
+    public function getUniqueID(): string
+    {
+        return $this->values['unique-id'];
+    }
+
+    public function getRand(): int
+    {
+        return $this->values['int'];
+    }
+
+    public function getTime(): int
+    {
+        return $this->values['time'];
+    }
+
+    public function getSubmodulesOutputProperty(): string
+    {
+        return $this->values['submodules-output-property'];
     }
 }
