@@ -16,7 +16,7 @@ abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentC
 {
     protected function maybeInitializeConfigurationValue(
         string $envVariable,
-        mixed $defaultValue = null,
+        mixed $defaultValue,
         ?callable $callback = null
     ): void {
         // Initialized from configuration? Then use that one directly.

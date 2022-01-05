@@ -33,7 +33,7 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
 
     protected function maybeInitializeConfigurationValue(
         string $envVariable,
-        mixed $defaultValue = null,
+        mixed $defaultValue,
         ?callable $callback = null
     ): void {
         // Initialized from configuration? Then use that one directly.
