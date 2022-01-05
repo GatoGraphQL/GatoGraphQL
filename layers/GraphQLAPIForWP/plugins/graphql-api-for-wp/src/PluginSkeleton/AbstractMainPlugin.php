@@ -236,7 +236,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                     return;
                 }
                 $storedPluginVersions = \get_option(PluginOptions::PLUGIN_VERSIONS, []);
-                $registeredExtensionBaseNameInstances = ExtensionManager::getExtensions();
+                $registeredExtensionBaseNameInstances = App::getExtensionManager()->getExtensions();
 
                 // Check if the main plugin has been activated or updated
                 $isMainPluginJustActivated = !isset($storedPluginVersions[$this->pluginBaseName]);
