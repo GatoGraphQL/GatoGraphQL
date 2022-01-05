@@ -35,6 +35,14 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
     }
 
     /**
+     * ExtensionInfo class name for the Extension
+     */
+    protected function getPluginInfoClassName(): ?string
+    {
+        return 'ExtensionInfo';
+    }
+
+    /**
      * Configure the plugin.
      * This defines hooks to set environment variables,
      * so must be executed before those hooks are triggered for first time

@@ -99,12 +99,17 @@ abstract class AbstractPlugin implements PluginInterface
     protected function getPluginInfoClass(): ?string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        $pluginInfoClass = $classNamespace . '\\PluginInfo';
+        $pluginInfoClass = $classNamespace . '\\' . $this->getPluginInfoClassName();
         if (!class_exists($pluginInfoClass)) {
             return null;
         }
         return $pluginInfoClass;
     }
+
+    /**
+     * PluginInfo class name for the Plugin
+     */
+    abstract protected function getPluginInfoClassName(): ?string;
 
     /**
      * Plugin's initialization

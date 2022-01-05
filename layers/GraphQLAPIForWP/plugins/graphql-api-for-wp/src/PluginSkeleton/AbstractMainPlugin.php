@@ -35,6 +35,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
+     * PluginInfo class name for the Plugin
+     */
+    protected function getPluginInfoClassName(): ?string
+    {
+        return 'PluginInfo';
+    }
+
+    /**
      * Configure the plugin.
      * This defines hooks to set environment variables,
      * so must be executed before those hooks are triggered for first time
