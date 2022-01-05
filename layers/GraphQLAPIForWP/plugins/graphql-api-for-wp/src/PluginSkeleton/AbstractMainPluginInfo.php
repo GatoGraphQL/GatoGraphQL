@@ -10,16 +10,16 @@ abstract class AbstractMainPluginInfo extends AbstractPluginInfo implements Main
 {
     protected function initialize(): void
     {
-        parent::initialize();
-        
-        /**
-         * Where to store the config cache,
-         * for both /container and /operational
-         * (config persistent cache: component model configuration + schema)
-         */
-        $this->values['cache-dir'] = PluginEnvironment::getCacheDir();
+        $this->values = [
+            'cache-dir' => PluginEnvironment::getCacheDir(),
+        ];
     }
 
+    /**
+     * Where to store the config cache,
+     * for both /container and /operational
+     * (config persistent cache: component model configuration + schema)
+     */
     public function getCacheDir(): string
     {
         return $this->values['cache-dir'];

@@ -14,50 +14,10 @@ abstract class AbstractPluginInfo implements PluginInfoInterface
         $this->initialize();
     }
 
-    protected function initialize(): void
-    {
-        $this->values = [
-            'version' => $this->plugin->getPluginVersion(),
-            'file' => $this->plugin->getPluginFile(),
-            'baseName' => $this->plugin->getPluginBaseName(),
-            'name' => $this->plugin->getPluginName(),
-            'dir' => $this->plugin->getPluginDir(),
-            'url' => $this->plugin->getPluginURL(),
-        ];
-    }
+    abstract protected function initialize(): void;
 
     public function get(string $key): mixed
     {
         return $this->values[$key] ?? null;
-    }
-
-    public function getVersion(): string
-    {
-        return $this->values['version'];
-    }
-
-    public function getFile(): string
-    {
-        return $this->values['file'];
-    }
-
-    public function getBaseName(): string
-    {
-        return $this->values['baseName'];
-    }
-
-    public function getName(): string
-    {
-        return $this->values['name'];
-    }
-
-    public function getDir(): string
-    {
-        return $this->values['dir'];
-    }
-
-    public function getURL(): string
-    {
-        return $this->values['url'];
     }
 }
