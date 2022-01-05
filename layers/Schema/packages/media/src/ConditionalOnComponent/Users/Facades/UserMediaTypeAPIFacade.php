@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\ConditionalOnComponent\Users\Facades;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
 
 class UserMediaTypeAPIFacade

@@ -86,7 +86,7 @@ RewriteRule ^api/rest/?$ /?scheme=api&datastructure=rest [L,P,QSA]
 Initialize the component:
 
 ``` php
-\PoP\Engine\App::stockAndInitializeComponentClasses([([
+\PoP\Root\App::stockAndInitializeComponentClasses([([
     \PoP\RESTAPI\Component::class,
 ]);
 ```

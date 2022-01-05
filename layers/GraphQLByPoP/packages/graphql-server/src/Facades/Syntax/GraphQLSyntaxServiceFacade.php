@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Facades\Syntax;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface;
 
 class GraphQLSyntaxServiceFacade

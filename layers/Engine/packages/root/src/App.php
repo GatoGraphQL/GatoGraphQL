@@ -24,15 +24,24 @@ class App
 
     /**
      * This function must be invoked at the very beginning,
-     * to initialize the instance to run the application
+     * to initialize the instance to run the application.
+     *
+     * Either inject the desired instance, or have the Root
+     * provide the default one.
      */
-    public static function initialize(): void
-    {
-        self::$appLoader = static::createAppLoader();
+    public static function initialize(
+        ?AppLoader $appLoader = null,
+        ?ContainerBuilderFactory $containerBuilderFactory = null,
+        ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
+        ?ComponentManager $componentManager = null,
+    ): void {
+        self::$appLoader = $appLoader ?? static::createAppLoader();
+        self::$containerBuilderFactory = $containerBuilderFactory ?? static::createContainerBuilderFactory();
+        self::$systemContainerBuilderFactory = $systemContainerBuilderFactory ?? static::createSystemContainerBuilderFactory();
+        self::$componentManager = $componentManager ?? static::createComponentManager();
+        
+        // Inject the Components slated for initialization
         self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
-        self::$containerBuilderFactory = static::createContainerBuilderFactory();
-        self::$systemContainerBuilderFactory = static::createSystemContainerBuilderFactory();
-        self::$componentManager = static::createComponentManager();
         self::$componentClassesToInitialize = [];
     }
 

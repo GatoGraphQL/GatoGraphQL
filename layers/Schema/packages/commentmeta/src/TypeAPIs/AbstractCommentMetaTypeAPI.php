@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMeta\TypeAPIs;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use InvalidArgumentException;
 use PoPSchema\CommentMeta\Component;
 use PoPSchema\CommentMeta\ComponentConfiguration;

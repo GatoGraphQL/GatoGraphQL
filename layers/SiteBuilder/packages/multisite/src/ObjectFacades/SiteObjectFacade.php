@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\ObjectFacades;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\Multisite\ObjectModels\Site;
 
 class SiteObjectFacade

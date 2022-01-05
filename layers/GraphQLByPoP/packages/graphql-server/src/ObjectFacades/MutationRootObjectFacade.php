@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectFacades;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 
 class MutationRootObjectFacade

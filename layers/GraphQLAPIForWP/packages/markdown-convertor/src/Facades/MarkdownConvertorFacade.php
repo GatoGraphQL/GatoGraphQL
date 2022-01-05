@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\MarkdownConvertor\Facades;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface;
 
 class MarkdownConvertorFacade

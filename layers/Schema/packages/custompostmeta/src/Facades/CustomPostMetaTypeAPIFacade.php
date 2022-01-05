@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMeta\Facades;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoPSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
 
 class CustomPostMetaTypeAPIFacade

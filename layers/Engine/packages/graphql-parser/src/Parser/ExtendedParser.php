@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
 use PoP\ComponentModel\Error\ErrorProviderInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;

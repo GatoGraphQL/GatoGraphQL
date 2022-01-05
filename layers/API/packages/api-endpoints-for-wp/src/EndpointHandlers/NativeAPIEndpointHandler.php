@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\APIEndpointsForWP\EndpointHandlers;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\API\Component as APIComponent;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\APIEndpointsForWP\Component;

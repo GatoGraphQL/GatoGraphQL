@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\API\Component as APIComponent;
 use PoP\RESTAPI\Component as RESTAPIComponent;
 use PoP\BasicService\Component\AbstractComponent;

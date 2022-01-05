@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Engine;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use Exception;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;

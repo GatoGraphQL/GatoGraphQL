@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Facades;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 
 class AccessControlManagerFacade

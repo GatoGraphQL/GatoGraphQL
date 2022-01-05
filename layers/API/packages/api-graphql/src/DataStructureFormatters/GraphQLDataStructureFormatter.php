@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLAPI\DataStructureFormatters;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;

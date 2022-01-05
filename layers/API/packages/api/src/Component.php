@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\API\Configuration\Request;

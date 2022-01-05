@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\Facades;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoPSchema\UserState\TypeAPIs\UserStateTypeAPIInterface;
 
 class UserStateTypeAPIFacade

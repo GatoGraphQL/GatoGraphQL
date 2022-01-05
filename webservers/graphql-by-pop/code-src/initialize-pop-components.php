@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use PoP\Engine\App;
+use PoP\Root\App;
 
 App::stockAndInitializeComponentClasses([
     \PoPSchema\PostsWP\Component::class,

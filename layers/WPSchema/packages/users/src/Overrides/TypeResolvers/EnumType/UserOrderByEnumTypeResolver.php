@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Users\Overrides\TypeResolvers\EnumType;
 
-use PoP\Engine\App;
+use PoP\Root\App;
 use PoPSchema\Users\Component;
 use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\Users\TypeResolvers\EnumType\UserOrderByEnumTypeResolver as UpstreamUserOrderByEnumTypeResolver;
