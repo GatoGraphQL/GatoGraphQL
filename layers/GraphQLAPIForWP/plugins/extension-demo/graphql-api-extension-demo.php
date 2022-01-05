@@ -15,8 +15,8 @@ Domain Path: /languages
 */
 
 use GraphQLAPI\ExtensionDemo\GraphQLAPIExtension;
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -60,7 +60,7 @@ add_action('plugins_loaded', function (): void {
         return;
     }
 
-    if (ExtensionManager::assertIsValid(
+    if (App::getExtensionManager()->assertIsValid(
         GraphQLAPIExtension::class,
         $extensionVersion,
         $extensionName,
@@ -70,7 +70,7 @@ add_action('plugins_loaded', function (): void {
         require_once(__DIR__ . '/vendor/autoload.php');
 
         // Create and set-up the extension instance
-        ExtensionManager::register(new GraphQLAPIExtension(
+        App::getExtensionManager()->register(new GraphQLAPIExtension(
             __FILE__,
             $extensionVersion,
             $extensionName

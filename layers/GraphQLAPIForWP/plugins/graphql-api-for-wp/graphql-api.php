@@ -15,9 +15,9 @@ Domain Path: /languages
 GitHub Plugin URI: GraphQLAPI/graphql-api-for-wp-dist
 */
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -37,15 +37,18 @@ $pluginName = __('GraphQL API for WordPress', 'graphql-api');
 /**
  * If the plugin is already registered, print an error and halt loading
  */
-if (class_exists(Plugin::class) && !MainPluginManager::assertIsValid($pluginVersion)) {
+if (class_exists(Plugin::class) && !App::getMainPluginManager()->assertIsValid($pluginVersion)) {
     return;
 }
 
 // Load Composer’s autoloader
 require_once(__DIR__ . '/vendor/autoload.php');
 
+// Initialize the GraphQL API App
+App::initializePlugin();
+
 // Create and set-up the plugin instance
-MainPluginManager::register(new Plugin(
+App::getMainPluginManager()->register(new Plugin(
     __FILE__,
     $pluginVersion,
     $pluginName,

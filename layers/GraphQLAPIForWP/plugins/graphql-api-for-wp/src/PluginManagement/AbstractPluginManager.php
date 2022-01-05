@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
 abstract class AbstractPluginManager
 {
-    protected static function printAdminNoticeErrorMessage(string $errorMessage): void
+    protected function printAdminNoticeErrorMessage(string $errorMessage): void
     {
         \add_action('admin_notices', function () use ($errorMessage): void {
             _e(sprintf(

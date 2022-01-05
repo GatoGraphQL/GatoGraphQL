@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
 use GraphQLAPI\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtension;
 
 class ExtensionManager extends AbstractPluginManager
@@ -14,28 +15,28 @@ class ExtensionManager extends AbstractPluginManager
      *
      * @var array<string, AbstractExtension>
      */
-    private static array $extensionClassInstances = [];
+    private array $extensionClassInstances = [];
 
     /**
      * Have the extensions organized by their baseName
      *
      * @var array<string, AbstractExtension>
      */
-    private static array $extensionBaseNameInstances = [];
+    private array $extensionBaseNameInstances = [];
 
     /**
      * @return array<string, AbstractExtension>
      */
-    public static function getExtensions(): array
+    public function getExtensions(): array
     {
-        return self::$extensionBaseNameInstances;
+        return $this->extensionBaseNameInstances;
     }
 
-    public static function register(AbstractExtension $extension): AbstractExtension
+    public function register(AbstractExtension $extension): AbstractExtension
     {
         $extensionClass = get_class($extension);
-        self::$extensionClassInstances[$extensionClass] = $extension;
-        self::$extensionBaseNameInstances[$extension->getPluginBaseName()] = $extension;
+        $this->extensionClassInstances[$extensionClass] = $extension;
+        $this->extensionBaseNameInstances[$extension->getPluginBaseName()] = $extension;
         return $extension;
     }
 
@@ -52,19 +53,19 @@ class ExtensionManager extends AbstractPluginManager
      *
      * @see https://getcomposer.org/doc/articles/versions.md#versions-and-constraints
      */
-    public static function assertIsValid(
+    public function assertIsValid(
         string $extensionClass,
         string $extensionVersion,
         ?string $extensionName = null,
         ?string $mainPluginVersionConstraint = null,
     ): bool {
         // Validate that the extension is not registered yet.
-        if (isset(self::$extensionClassInstances[$extensionClass])) {
-            self::printAdminNoticeErrorMessage(
+        if (isset($this->extensionClassInstances[$extensionClass])) {
+            $this->printAdminNoticeErrorMessage(
                 sprintf(
                     __('Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
-                    $extensionName ?? self::$extensionClassInstances[$extensionClass]->getConfig('name'),
-                    self::$extensionClassInstances[$extensionClass]->getConfig('version'),
+                    $extensionName ?? $this->extensionClassInstances[$extensionClass]->getConfig('name'),
+                    $this->extensionClassInstances[$extensionClass]->getConfig('version'),
                     $extensionVersion,
                 )
             );
@@ -74,17 +75,17 @@ class ExtensionManager extends AbstractPluginManager
         // Validate that the required version of the GraphQL API for WP plugin is installed
         if (
             $mainPluginVersionConstraint !== null && !SemverWrapper::satisfies(
-                MainPluginManager::getConfig('version'),
+                App::getMainPluginManager()->getConfig('version'),
                 $mainPluginVersionConstraint
             )
         ) {
-            self::printAdminNoticeErrorMessage(
+            $this->printAdminNoticeErrorMessage(
                 sprintf(
                     __('Extension <strong>%s</strong> requires plugin <strong>%s</strong> to satisfy version constraint <code>%s</code>, but the current version <code>%s</code> does not. The extension has not been loaded.', 'graphql-api'),
                     $extensionName ?? $extensionClass,
-                    MainPluginManager::getConfig('name'),
+                    App::getMainPluginManager()->getConfig('name'),
                     $mainPluginVersionConstraint,
-                    MainPluginManager::getConfig('version'),
+                    App::getMainPluginManager()->getConfig('version'),
                 )
             );
             return false;
@@ -98,18 +99,18 @@ class ExtensionManager extends AbstractPluginManager
      *
      * @return array<string, mixed>
      */
-    protected static function getFullConfiguration(string $extensionClass): array
+    protected function getFullConfiguration(string $extensionClass): array
     {
-        $extensionInstance = self::$extensionClassInstances[$extensionClass];
+        $extensionInstance = $this->extensionClassInstances[$extensionClass];
         return $extensionInstance->getFullConfiguration();
     }
 
     /**
      * Get a configuration value for an extension
      */
-    public static function getConfig(string $extensionClass, string $key): mixed
+    public function getConfig(string $extensionClass, string $key): mixed
     {
-        $extensionConfig = self::getFullConfiguration($extensionClass);
+        $extensionConfig = $this->getFullConfiguration($extensionClass);
         return $extensionConfig[$key];
     }
 }

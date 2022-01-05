@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 
-use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
+use GraphQLAPI\GraphQLAPI\App;
 
 trait ExtensionScriptTrait
 {
@@ -12,7 +12,7 @@ trait ExtensionScriptTrait
 
     protected function getPluginDir(): string
     {
-        return (string) ExtensionManager::getConfig(
+        return (string) App::getExtensionManager()->getConfig(
             $this->getExtensionClass(),
             'dir'
         );
@@ -21,7 +21,7 @@ trait ExtensionScriptTrait
     protected function getPluginURL(): string
     {
         // Remove the trailing slash
-        return trim((string) ExtensionManager::getConfig(
+        return trim((string) App::getExtensionManager()->getConfig(
             $this->getExtensionClass(),
             'url'
         ), '/');

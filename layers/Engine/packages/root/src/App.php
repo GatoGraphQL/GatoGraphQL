@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Container;
 /**
  * Single class hosting all the top-level instances to run the application
  */
-class App
+class App implements AppInterface
 {
     protected static AppLoader $appLoader;
     protected static ContainerBuilderFactory $containerBuilderFactory;
