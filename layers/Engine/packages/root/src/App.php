@@ -86,6 +86,21 @@ class App
     }
 
     /**
+     * Store Component classes to be initialized, and
+     * inject them into the AppLoader when this is initialized.
+     *
+     * @param string[] $componentClasses List of `Component` class to initialize
+     */
+    public static function stockAndInitializeComponentClasses(
+        array $componentClasses
+    ): void {
+        self::$componentClassesToInitialize = array_merge(
+            self::$componentClassesToInitialize,
+            $componentClasses
+        );
+    }
+
+    /**
      * Shortcut function.
      */
     final public static function getContainer(): Container
@@ -99,21 +114,6 @@ class App
     final public static function getSystemContainer(): Container
     {
         return self::getSystemContainerBuilderFactory()->getInstance();
-    }
-
-    /**
-     * Store Component classes to be initialized, and
-     * inject them into the AppLoader when this is initialized.
-     *
-     * @param string[] $componentClasses List of `Component` class to initialize
-     */
-    public static function stockAndInitializeComponentClasses(
-        array $componentClasses
-    ): void {
-        self::$componentClassesToInitialize = array_merge(
-            self::$componentClassesToInitialize,
-            $componentClasses
-        );
     }
 
     /**
