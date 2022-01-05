@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
+use LogicException;
+use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Managers\ComponentManager;
@@ -97,5 +99,13 @@ class App
             self::$componentClassesToInitialize,
             $componentClasses
         );
+    }
+
+    /**
+     * @throws LogicException
+     */
+    public function getComponent(string $componentClass): ComponentInterface
+    {
+        return self::getComponentManager()->getComponent($componentClass);
     }
 }
