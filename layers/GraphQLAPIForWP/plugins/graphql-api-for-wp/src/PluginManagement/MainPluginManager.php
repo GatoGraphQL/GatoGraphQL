@@ -9,11 +9,11 @@ use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
 
 class MainPluginManager extends AbstractPluginManager
 {
-    private static ?AbstractMainPlugin $mainPlugin = null;
+    private ?AbstractMainPlugin $mainPlugin = null;
 
-    public static function register(AbstractMainPlugin $mainPlugin): AbstractMainPlugin
+    public function register(AbstractMainPlugin $mainPlugin): AbstractMainPlugin
     {
-        self::$mainPlugin = $mainPlugin;
+        $this->mainPlugin = $mainPlugin;
         return $mainPlugin;
     }
 
@@ -21,15 +21,15 @@ class MainPluginManager extends AbstractPluginManager
      * Validate that the plugin is not registered yet.
      * If it is, print an error and return false
      */
-    public static function assertIsValid(
+    public function assertIsValid(
         string $pluginVersion
     ): bool {
-        if (self::$mainPlugin !== null) {
+        if ($this->mainPlugin !== null) {
             self::printAdminNoticeErrorMessage(
                 sprintf(
                     __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
-                    self::$mainPlugin->getConfig('name'),
-                    self::$mainPlugin->getConfig('version'),
+                    $this->mainPlugin->getConfig('name'),
+                    $this->mainPlugin->getConfig('version'),
                     $pluginVersion,
                 )
             );
@@ -44,22 +44,22 @@ class MainPluginManager extends AbstractPluginManager
      *
      * @return array<string, mixed>
      */
-    protected static function getFullConfiguration(): array
+    protected function getFullConfiguration(): array
     {
-        if (self::$mainPlugin === null) {
+        if ($this->mainPlugin === null) {
             throw new Exception(
                 __('The main plugin has not been registered yet', 'graphql-api')
             );
         }
-        return self::$mainPlugin->getFullConfiguration();
+        return $this->mainPlugin->getFullConfiguration();
     }
 
     /**
      * Get a configuration value for the main plugin
      */
-    public static function getConfig(string $key): mixed
+    public function getConfig(string $key): mixed
     {
-        $mainPluginConfig = self::getFullConfiguration();
+        $mainPluginConfig = $this->getFullConfiguration();
         return $mainPluginConfig[$key];
     }
 }
