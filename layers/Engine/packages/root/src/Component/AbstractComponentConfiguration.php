@@ -21,14 +21,14 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
         $this->configuration = $configuration;
     }
 
-    public function hasConfigurationValue(string $option): bool
+    public function hasConfigurationValue(string $envVariable): bool
     {
-        return array_key_exists($option, $this->configuration);
+        return array_key_exists($envVariable, $this->configuration);
     }
 
-    public function getConfigurationValue(string $option): mixed
+    public function getConfigurationValue(string $envVariable): mixed
     {
-        return $this->configuration[$option] ?? null;
+        return $this->configuration[$envVariable] ?? null;
     }
 
     protected function maybeInitializeConfigurationValue(
