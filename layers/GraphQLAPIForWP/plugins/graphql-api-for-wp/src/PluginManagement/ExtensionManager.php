@@ -35,7 +35,7 @@ class ExtensionManager extends AbstractPluginManager
 
     public function getExtension(string $extensionClass): ExtensionInterface
     {
-        if (!isset($this->extensionBaseNameInstances[$extensionClass])) {
+        if (!isset($this->extensionClassInstances[$extensionClass])) {
             throw new LogicException(
                 sprintf(
                     \__('The extension with class \'%s\' has not been registered yet', 'graphql-api'),
@@ -43,7 +43,7 @@ class ExtensionManager extends AbstractPluginManager
                 )
             );
         }
-        return $this->extensionBaseNameInstances[$extensionClass];
+        return $this->extensionClassInstances[$extensionClass];
     }
 
     public function register(ExtensionInterface $extension): ExtensionInterface
