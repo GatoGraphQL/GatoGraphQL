@@ -48,25 +48,6 @@ class AppLoader
     protected array $skipSchemaComponentClasses = [];
 
     /**
-     * This functions is to be called by PHPUnit,
-     * to reset the state in between tests.
-     *
-     * Reset the state of the Application.
-     */
-    public function reset(): void
-    {
-        $this->initializedComponentClasses = [];
-        $this->orderedComponentClasses = [];
-        $this->componentClassesToInitialize = [];
-        $this->componentClassConfiguration = [];
-        $this->skipSchemaComponentClasses = [];
-
-        App::getContainerBuilderFactory()->reset();
-        App::getSystemContainerBuilderFactory()->reset();
-        App::getComponentManager()->reset();
-    }
-
-    /**
      * Add Component classes to be initialized
      *
      * @param string[] $componentClasses List of `Component` class to initialize

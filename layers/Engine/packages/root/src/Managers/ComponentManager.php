@@ -20,17 +20,6 @@ class ComponentManager
     protected array $components = [];
 
     /**
-     * This functions is to be called by PHPUnit,
-     * to reset the state in between tests.
-     *
-     * Reset the initialized components.
-     */
-    public function reset(): void
-    {
-        $this->components = [];
-    }
-
-    /**
      * Register and initialize a component
      */
     public function register(string $componentClass): ComponentInterface

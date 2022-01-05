@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Root\Container;
 
 use InvalidArgumentException;
-use LogicException;
 use PoP\Root\Environment;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -15,24 +14,10 @@ use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 
 trait ContainerBuilderFactoryTrait
 {
-    protected ?Container $instance = null;
-    protected ?bool $cacheContainerConfiguration = null;
-    protected ?bool $cached = null;
-    protected ?string $cacheFile = null;
-
-    /**
-     * This functions is to be called by PHPUnit,
-     * to reset the state in between tests.
-     *
-     * Reset the container.
-     */
-    public function reset(): void
-    {
-        $this->instance = null;
-        $this->cacheContainerConfiguration = null;
-        $this->cached = null;
-        $this->cacheFile = null;
-    }
+    protected Container $instance;
+    protected bool $cacheContainerConfiguration;
+    protected bool $cached;
+    protected string $cacheFile;
 
     /**
      * Initialize the Container Builder.
@@ -131,23 +116,11 @@ trait ContainerBuilderFactoryTrait
     }
     public function getInstance(): Container
     {
-        if ($this->instance === null) {
-            $this->throwContainerNotInitializedException();
-        }
         return $this->instance;
     }
-    /**
-     * @throws LogicException
-     */
-    protected function throwContainerNotInitializedException(): void
-    {
-        throw new LogicException('Container has not been initialized');
-    }
+    
     public function isCached(): bool
     {
-        if ($this->cached === null) {
-            $this->throwContainerNotInitializedException();
-        }
         return $this->cached;
     }
 
