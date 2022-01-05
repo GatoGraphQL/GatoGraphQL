@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\Facades;
 
+use PoP\Engine\App;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 
@@ -14,7 +15,7 @@ class MediaTypeAPIFacade
         /**
          * @var MediaTypeAPIInterface
          */
-        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(MediaTypeAPIInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(MediaTypeAPIInterface::class);
         return $service;
     }
 }

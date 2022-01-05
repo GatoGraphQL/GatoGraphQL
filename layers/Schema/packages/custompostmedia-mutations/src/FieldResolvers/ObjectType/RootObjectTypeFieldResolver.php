@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\FieldResolvers\ObjectType;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -78,7 +79,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(EngineComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(EngineComponent::class)->getConfiguration();
         if ($componentConfiguration->disableRedundantRootTypeMutationFields()) {
             return [];
         }

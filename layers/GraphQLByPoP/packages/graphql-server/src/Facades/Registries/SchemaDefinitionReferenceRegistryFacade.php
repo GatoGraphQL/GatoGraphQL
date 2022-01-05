@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Facades\Registries;
 
+use PoP\Engine\App;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class SchemaDefinitionReferenceRegistryFacade
         /**
          * @var SchemaDefinitionReferenceRegistryInterface
          */
-        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(SchemaDefinitionReferenceRegistryInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(SchemaDefinitionReferenceRegistryInterface::class);
         return $service;
     }
 }

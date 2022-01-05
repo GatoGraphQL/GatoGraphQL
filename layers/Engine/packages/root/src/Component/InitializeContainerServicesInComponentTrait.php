@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Component;
 
+use PoP\Root\App;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\Loader\ForceAutoconfigureYamlFileLoader;
 use PoP\Root\Container\SystemContainerBuilderFactory;
@@ -23,10 +24,10 @@ trait InitializeContainerServicesInComponentTrait
         string $fileName = 'services.yaml'
     ): void {
         // First check if the container has been cached. If so, do nothing
-        if (!\PoP\Root\App::getContainerBuilderFactory()->isCached()) {
+        if (!App::getContainerBuilderFactory()->isCached()) {
             // Initialize the ContainerBuilder with this component's service implementations
             /** @var ContainerBuilder */
-            $containerBuilder = \PoP\Root\App::getContainerBuilderFactory()->getInstance();
+            $containerBuilder = App::getContainerBuilderFactory()->getInstance();
             $this->loadServicesFromYAMLConfigIntoContainer($containerBuilder, $componentDir, $configPath, $fileName);
         }
     }
@@ -68,9 +69,9 @@ trait InitializeContainerServicesInComponentTrait
         string $configPath = '',
         string $fileName = 'schema-services.yaml'
     ): void {
-        if (!\PoP\Root\App::getContainerBuilderFactory()->isCached()) {
+        if (!App::getContainerBuilderFactory()->isCached()) {
             /** @var ContainerBuilder */
-            $containerBuilder = \PoP\Root\App::getContainerBuilderFactory()->getInstance();
+            $containerBuilder = App::getContainerBuilderFactory()->getInstance();
             $componentPath = $this->getComponentPath($componentDir, $configPath);
             $autoconfigure = !$skipSchema;
             $loader = new ForceAutoconfigureYamlFileLoader(
@@ -91,10 +92,10 @@ trait InitializeContainerServicesInComponentTrait
         string $fileName = 'system-services.yaml'
     ): void {
         // First check if the container has been cached. If so, do nothing
-        if (!\PoP\Root\App::getSystemContainerBuilderFactory()->isCached()) {
+        if (!App::getSystemContainerBuilderFactory()->isCached()) {
             // Initialize the ContainerBuilder with this component's service implementations
             /** @var ContainerBuilder */
-            $containerBuilder = \PoP\Root\App::getSystemContainerBuilderFactory()->getInstance();
+            $containerBuilder = App::getSystemContainerBuilderFactory()->getInstance();
             $this->loadServicesFromYAMLConfigIntoContainer($containerBuilder, $componentDir, $configPath, $fileName);
         }
     }

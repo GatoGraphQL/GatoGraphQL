@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeHelpers;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
@@ -58,7 +59,7 @@ class CustomPostUnionTypeHelpers
         if ($targetTypeResolvers) {
             // By configuration: If there is only 1 item, return only that one
             /** @var ComponentConfiguration */
-            $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
             if ($componentConfiguration->useSingleTypeInsteadOfCustomPostUnionType()) {
                 return count($targetTypeResolvers) === 1 ?
                     $targetTypeResolvers[0] :

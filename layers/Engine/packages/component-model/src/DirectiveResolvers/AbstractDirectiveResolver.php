@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\Root\App;
 use PoP\Root\Managers\ComponentManager;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
@@ -1116,7 +1117,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         $removeFieldIfDirectiveFailed = $componentConfiguration->removeFieldIfDirectiveFailed();
         if ($removeFieldIfDirectiveFailed) {
             $this->removeIDsDataFields(
@@ -1210,7 +1211,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * has any mandatory argument of type `DangerouslyDynamic`
          */
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             /**
              * If `DangerouslyDynamic` is disabled, do not expose the field if either:

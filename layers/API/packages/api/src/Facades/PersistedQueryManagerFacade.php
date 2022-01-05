@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Facades;
 
+use PoP\Engine\App;
 use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class PersistedQueryManagerFacade
         /**
          * @var PersistedQueryManagerInterface
          */
-        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(PersistedQueryManagerInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(PersistedQueryManagerInterface::class);
         return $service;
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Schema;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class FieldQueryInterpreterFacade
         /**
          * @var FieldQueryInterpreterInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(FieldQueryInterpreterInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(FieldQueryInterpreterInterface::class);
         return $service;
     }
 }

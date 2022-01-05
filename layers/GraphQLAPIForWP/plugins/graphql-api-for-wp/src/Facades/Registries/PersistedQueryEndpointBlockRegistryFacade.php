@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
 
+use PoP\Engine\App;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class PersistedQueryEndpointBlockRegistryFacade
         /**
          * @var PersistedQueryEndpointBlockRegistryInterface
          */
-        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(PersistedQueryEndpointBlockRegistryInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(PersistedQueryEndpointBlockRegistryInterface::class);
         return $service;
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\DefinitionPersistence;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use PoP\FileStore\File\AbstractFile;
 
@@ -12,7 +13,7 @@ class DefinitionPersistenceFile extends AbstractFile
     public function getDir(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getDefinitionPersistenceBuildDir();
     }
 

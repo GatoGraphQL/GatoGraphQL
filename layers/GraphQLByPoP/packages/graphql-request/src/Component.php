@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
 use PoP\BasicService\Component\AbstractComponent;
@@ -44,6 +45,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return \PoP\Engine\App::getComponentManager()->getComponent(GraphQLQueryComponent::class)->isEnabled();
+        return App::getComponentManager()->getComponent(GraphQLQueryComponent::class)->isEnabled();
     }
 }

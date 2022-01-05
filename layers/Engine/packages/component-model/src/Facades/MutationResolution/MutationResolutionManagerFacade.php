@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\MutationResolution;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class MutationResolutionManagerFacade
         /**
          * @var MutationResolutionManagerInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(MutationResolutionManagerInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(MutationResolutionManagerInterface::class);
         return $service;
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMeta\Facades;
 
+use PoP\Engine\App;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoPSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
 
@@ -14,7 +15,7 @@ class CommentMetaTypeAPIFacade
         /**
          * @var CommentMetaTypeAPIInterface
          */
-        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(CommentMetaTypeAPIInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(CommentMetaTypeAPIInterface::class);
         return $service;
     }
 }

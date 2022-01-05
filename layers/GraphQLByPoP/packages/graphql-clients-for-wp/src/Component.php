@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLClientsForWP;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLServer\Component as GraphQLServerComponent;
 use PoP\BasicService\Component\AbstractComponent;
@@ -51,6 +52,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return \PoP\Engine\App::getComponentManager()->getComponent(GraphQLServerComponent::class)->isEnabled();
+        return App::getComponentManager()->getComponent(GraphQLServerComponent::class)->isEnabled();
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\ConditionalOnComponent\Users\Facades;
 
+use PoP\Engine\App;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
 
@@ -14,7 +15,7 @@ class UserMediaTypeAPIFacade
         /**
          * @var UserMediaTypeAPIInterface
          */
-        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(UserMediaTypeAPIInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(UserMediaTypeAPIInterface::class);
         return $service;
     }
 }

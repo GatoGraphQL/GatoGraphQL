@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Registries;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class TypeRegistryFacade
         /**
          * @var TypeRegistryInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(TypeRegistryInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(TypeRegistryInterface::class);
         return $service;
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Hooks;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use PoP\AccessControl\Component;
 use PoP\AccessControl\ComponentConfiguration;
@@ -17,7 +18,7 @@ abstract class AbstractAccessControlForFieldsInPrivateSchemaHookSet extends Abst
     protected function enabled(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->canSchemaBePrivate();
     }
 

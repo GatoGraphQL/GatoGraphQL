@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Definitions\Facades;
 
+use PoP\Root\App;
 use PoP\Definitions\DefinitionManagerInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class DefinitionManagerFacade
         /**
          * @var DefinitionManagerInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(DefinitionManagerInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(DefinitionManagerInterface::class);
         return $service;
     }
 }

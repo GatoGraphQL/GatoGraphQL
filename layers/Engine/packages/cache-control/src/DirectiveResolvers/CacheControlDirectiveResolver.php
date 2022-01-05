@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
+use PoP\Root\App;
 use PoP\Root\Managers\ComponentManager;
 use PoP\CacheControl\Component;
 use PoP\CacheControl\ComponentConfiguration;
@@ -34,7 +35,7 @@ final class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveR
     public function getMaxAge(): ?int
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Root\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getDefaultCacheControlMaxAge();
     }
 }

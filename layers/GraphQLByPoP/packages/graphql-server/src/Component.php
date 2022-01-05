@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
@@ -90,7 +91,7 @@ class Component extends AbstractComponent
 
             // Boot conditionals
             /** @var AccessControlComponentConfiguration */
-            $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(AccessControlComponent::class)->getConfiguration();
+            $componentConfiguration = App::getComponentManager()->getComponent(AccessControlComponent::class)->getConfiguration();
             if (
                 class_exists(CacheControlComponent::class)
                 && class_exists(AccessControlComponent::class)
@@ -117,6 +118,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return \PoP\Engine\App::getComponentManager()->getComponent(GraphQLRequestComponent::class)->isEnabled();
+        return App::getComponentManager()->getComponent(GraphQLRequestComponent::class)->isEnabled();
     }
 }

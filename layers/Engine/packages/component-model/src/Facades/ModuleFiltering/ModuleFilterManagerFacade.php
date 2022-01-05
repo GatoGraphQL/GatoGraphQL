@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\ModuleFiltering;
 
+use PoP\Root\App;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class ModuleFilterManagerFacade
         /**
          * @var ModuleFilterManagerInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(ModuleFilterManagerInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(ModuleFilterManagerInterface::class);
         return $service;
     }
 }

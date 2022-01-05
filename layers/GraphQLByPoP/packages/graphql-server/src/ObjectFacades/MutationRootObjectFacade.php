@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectFacades;
 
+use PoP\Engine\App;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -11,7 +12,7 @@ class MutationRootObjectFacade
 {
     public static function getInstance(): MutationRoot
     {
-        $containerBuilderFactory = \PoP\Engine\App::getContainerBuilderFactory()->getInstance();
+        $containerBuilderFactory = App::getContainerBuilderFactory()->getInstance();
         return $containerBuilderFactory->get(MutationRoot::class);
     }
 }

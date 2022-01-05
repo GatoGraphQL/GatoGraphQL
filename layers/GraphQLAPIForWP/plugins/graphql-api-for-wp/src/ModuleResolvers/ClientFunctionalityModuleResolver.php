@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
@@ -115,7 +116,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     public function getDescription(string $module): string
     {
         /** @var GraphQLClientsForWPComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(GraphQLClientsForWPComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(GraphQLClientsForWPComponent::class)->getConfiguration();
         switch ($module) {
             case self::GRAPHIQL_FOR_SINGLE_ENDPOINT:
                 return \sprintf(

@@ -72,7 +72,7 @@ class Component extends AbstractComponent
         /**
          * @var ServiceInstantiatorInterface
          */
-        $serviceInstantiator = \PoP\Root\App::getSystemContainerBuilderFactory()->getInstance()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator = App::getSystemContainerBuilderFactory()->getInstance()->get(ServiceInstantiatorInterface::class);
         $serviceInstantiator->initializeServices();
     }
 
@@ -85,7 +85,7 @@ class Component extends AbstractComponent
         /**
          * @var ServiceInstantiatorInterface
          */
-        $serviceInstantiator = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator = App::getContainerBuilderFactory()->getInstance()->get(ServiceInstantiatorInterface::class);
         $serviceInstantiator->initializeServices(ApplicationEvents::BEFORE_BOOT);
     }
 
@@ -98,7 +98,7 @@ class Component extends AbstractComponent
         /**
          * @var ServiceInstantiatorInterface
          */
-        $serviceInstantiator = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator = App::getContainerBuilderFactory()->getInstance()->get(ServiceInstantiatorInterface::class);
         $serviceInstantiator->initializeServices(ApplicationEvents::BOOT);
     }
 
@@ -111,7 +111,7 @@ class Component extends AbstractComponent
         /**
          * @var ServiceInstantiatorInterface
          */
-        $serviceInstantiator = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator = App::getContainerBuilderFactory()->getInstance()->get(ServiceInstantiatorInterface::class);
         $serviceInstantiator->initializeServices(ApplicationEvents::AFTER_BOOT);
     }
 }

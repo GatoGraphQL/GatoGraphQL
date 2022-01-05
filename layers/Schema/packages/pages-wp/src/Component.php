@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PagesWP;
 
+use PoP\Engine\App;
 use PoP\BasicService\Component\AbstractComponent;
 use PoP\Root\Managers\ComponentManager;
 use PoPSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
@@ -38,7 +39,7 @@ class Component extends AbstractComponent
     ): void {
         $this->initServices(dirname(__DIR__));
         /** @var PagesComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(PagesComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(PagesComponent::class)->getConfiguration();
         if ($componentConfiguration->addPageTypeToCustomPostUnionTypes()) {
             $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes/Overrides');
         }

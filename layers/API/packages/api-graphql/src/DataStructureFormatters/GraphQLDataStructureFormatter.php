@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLAPI\DataStructureFormatters;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
@@ -83,7 +84,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($this->addTopLevelExtensionsEntryToResponse()) {
             // Add notices
             /** @var ComponentConfiguration */
-            $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
             if ($componentConfiguration->enableProactiveFeedbackNotices()) {
                 if ($data['objectNotices'] ?? null) {
                     $notices = $this->reformatDBEntries($data['objectNotices']);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\DirectivePipeline;
 
+use PoP\Root\App;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class DirectivePipelineServiceFacade
         /**
          * @var DirectivePipelineServiceInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(DirectivePipelineServiceInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(DirectivePipelineServiceInterface::class);
         return $service;
     }
 }

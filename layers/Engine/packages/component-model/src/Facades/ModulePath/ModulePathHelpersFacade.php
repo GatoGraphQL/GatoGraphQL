@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\ModulePath;
 
+use PoP\Root\App;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class ModulePathHelpersFacade
         /**
          * @var ModulePathHelpersInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(ModulePathHelpersInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(ModulePathHelpersInterface::class);
         return $service;
     }
 }

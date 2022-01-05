@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
@@ -48,7 +49,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
         $directiveKind = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_KIND];
         $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         /**
          * There are 3 cases for adding the "Query" type locations:
          * 1. When the type is "Query"

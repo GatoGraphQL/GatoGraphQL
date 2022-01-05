@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Schema;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class SchemaNamespacingServiceFacade
         /**
          * @var SchemaNamespacingServiceInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(SchemaNamespacingServiceInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(SchemaNamespacingServiceInterface::class);
         return $service;
     }
 }

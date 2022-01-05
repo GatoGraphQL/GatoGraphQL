@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\FileStore\Facades;
 
+use PoP\Root\App;
 use PoP\FileStore\Renderer\FileRendererInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class FileRendererFacade
         /**
          * @var FileRendererInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(FileRendererInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(FileRendererInterface::class);
         return $service;
     }
 }

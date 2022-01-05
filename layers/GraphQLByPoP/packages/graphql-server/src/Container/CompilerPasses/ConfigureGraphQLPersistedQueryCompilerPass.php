@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Container\CompilerPasses;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface;
 use GraphQLByPoP\GraphQLServer\Component;
@@ -17,7 +18,7 @@ class ConfigureGraphQLPersistedQueryCompilerPass extends AbstractCompilerPass
     protected function enabled(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->addGraphQLIntrospectionPersistedQuery();
     }
 

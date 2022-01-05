@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Translation\Facades;
 
+use PoP\Root\App;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Translation\TranslationAPIInterface;
 
@@ -14,7 +15,7 @@ class SystemTranslationAPIFacade
         /**
          * @var TranslationAPIInterface
          */
-        $service = \PoP\Root\App::getSystemContainerBuilderFactory()->getInstance()->get(TranslationAPIInterface::class);
+        $service = App::getSystemContainerBuilderFactory()->getInstance()->get(TranslationAPIInterface::class);
         return $service;
     }
 }

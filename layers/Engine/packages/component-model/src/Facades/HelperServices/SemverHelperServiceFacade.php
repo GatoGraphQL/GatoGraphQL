@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\HelperServices;
 
+use PoP\Root\App;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class SemverHelperServiceFacade
         /**
          * @var SemverHelperServiceInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(SemverHelperServiceInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(SemverHelperServiceInterface::class);
         return $service;
     }
 }

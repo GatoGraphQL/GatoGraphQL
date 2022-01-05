@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use Exception;
 use PoP\API\Cache\CacheTypes;
@@ -88,7 +89,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         $schemaDefinition = null;
         // Attempt to retrieve from the cache, if enabled
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         if ($useCache = $componentConfiguration->useSchemaDefinitionCache()) {
             $persistentCache = $this->getPersistentCache();
             // Use different caches for the normal and namespaced schemas, or
@@ -305,7 +306,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     {
         unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]);
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return;
         }

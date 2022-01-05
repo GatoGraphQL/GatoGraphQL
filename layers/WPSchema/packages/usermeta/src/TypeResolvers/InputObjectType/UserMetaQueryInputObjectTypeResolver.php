@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\UserMeta\TypeResolvers\InputObjectType;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use PoPSchema\UserMeta\Component;
 use PoPSchema\UserMeta\ComponentConfiguration;
@@ -22,13 +23,13 @@ class UserMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObjectT
     protected function getAllowOrDenyEntries(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getUserMetaEntries();
     }
     protected function getAllowOrDenyBehavior(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getUserMetaBehavior();
     }
 }

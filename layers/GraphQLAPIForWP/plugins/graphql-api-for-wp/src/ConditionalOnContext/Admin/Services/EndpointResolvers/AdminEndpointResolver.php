@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointResolvers;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
@@ -67,7 +68,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     protected function loadGraphQLQueryAndVariables(): bool
     {
         /** @var GraphQLRequestComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(GraphQLRequestComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(GraphQLRequestComponent::class)->getConfiguration();
         return !$componentConfiguration->disableGraphQLAPIForPoP();
     }
 

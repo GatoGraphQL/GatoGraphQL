@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\HelperServices;
 
+use PoP\Root\App;
 use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class FormInputHelperServiceFacade
         /**
          * @var FormInputHelperServiceInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(FormInputHelperServiceInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(FormInputHelperServiceInterface::class);
         return $service;
     }
 }

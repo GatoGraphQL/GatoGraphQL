@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Component as ComponentModelComponent;
@@ -56,9 +57,9 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $ret = array();
         $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
         /** @var ComponentModelComponentConfiguration */
-        $componentModelComponentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(ComponentModelComponent::class)->getConfiguration();
+        $componentModelComponentConfiguration = App::getComponentManager()->getComponent(ComponentModelComponent::class)->getConfiguration();
         $routemodules = array(
             $componentConfiguration->getUsersRoute() => [
                 FieldDataloadModuleProcessor::class,

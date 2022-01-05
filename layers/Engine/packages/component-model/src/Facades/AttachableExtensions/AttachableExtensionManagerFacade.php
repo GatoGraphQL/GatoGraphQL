@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\AttachableExtensions;
 
+use PoP\Root\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class AttachableExtensionManagerFacade
         /**
          * @var AttachableExtensionManagerInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(AttachableExtensionManagerInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(AttachableExtensionManagerInterface::class);
         return $service;
     }
 }

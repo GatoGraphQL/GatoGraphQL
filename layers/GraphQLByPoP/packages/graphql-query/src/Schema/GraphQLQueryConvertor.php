@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLQuery\Schema;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use Exception;
 use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
@@ -182,7 +183,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
          * If the value is of type InputList, then resolve the array with its variables (under `getValue`)
          */
         /** @var GraphQLQueryComponentConfiguration */
-        $componentConfiguration = \PoP\Engine\App::getComponentManager()->getComponent(GraphQLQueryComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponentManager()->getComponent(GraphQLQueryComponent::class)->getConfiguration();
         if (
             $value instanceof VariableReference &&
             $componentConfiguration->enableVariablesAsExpressions() &&

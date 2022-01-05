@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Cache;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Cache\TransientCacheInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class TransientCacheManagerFacade
         /**
          * @var TransientCacheInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(TransientCacheInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(TransientCacheInterface::class);
         return $service;
     }
 }

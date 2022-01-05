@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
+use PoP\Root\App;
 use PoP\Root\Managers\ComponentManager;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -69,7 +70,7 @@ class UnionTypeHelpers
         if ($targetTypeResolvers) {
             // By configuration: If there is only 1 item, return only that one
             /** @var ComponentConfiguration */
-            $componentConfiguration = \PoP\Root\App::getComponentManager()->getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = App::getComponentManager()->getComponent(Component::class)->getConfiguration();
             if ($componentConfiguration->useSingleTypeInsteadOfUnionType()) {
                 return count($targetTypeResolvers) == 1 ?
                     $targetTypeResolvers[0] :

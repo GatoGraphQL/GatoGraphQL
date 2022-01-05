@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\MarkdownConvertor\Facades;
 
+use PoP\Engine\App;
 use GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class MarkdownConvertorFacade
         /**
          * @var MarkdownConvertorInterface
          */
-        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(MarkdownConvertorInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(MarkdownConvertorInterface::class);
         return $service;
     }
 }

@@ -139,7 +139,7 @@ abstract class AbstractPlugin
                 continue;
             }
             /** @var PluginComponentInterface */
-            $component = \PoP\Engine\App::getComponentManager()->getComponent($componentClass);
+            $component = App::getComponentManager()->getComponent($componentClass);
             $component->setPluginFolder($pluginFolder);
         }
     }

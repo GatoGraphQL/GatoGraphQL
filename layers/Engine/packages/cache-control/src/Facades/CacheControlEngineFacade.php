@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\Facades;
 
+use PoP\Root\App;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class CacheControlEngineFacade
         /**
          * @var CacheControlEngineInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(CacheControlEngineInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(CacheControlEngineInterface::class);
         return $service;
     }
 }

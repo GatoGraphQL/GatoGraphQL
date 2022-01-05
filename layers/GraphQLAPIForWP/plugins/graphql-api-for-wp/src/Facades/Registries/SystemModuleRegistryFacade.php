@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
 
+use PoP\Engine\App;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 
@@ -20,6 +21,6 @@ class SystemModuleRegistryFacade
         /**
          * @var ModuleRegistryInterface
          */
-        return \PoP\Engine\App::getSystemContainerBuilderFactory()->getInstance()->get(ModuleRegistryInterface::class);
+        return App::getSystemContainerBuilderFactory()->getInstance()->get(ModuleRegistryInterface::class);
     }
 }

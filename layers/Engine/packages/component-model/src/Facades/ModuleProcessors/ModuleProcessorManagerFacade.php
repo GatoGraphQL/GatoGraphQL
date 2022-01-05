@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class ModuleProcessorManagerFacade
         /**
          * @var ModuleProcessorManagerInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(ModuleProcessorManagerInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(ModuleProcessorManagerInterface::class);
         return $service;
     }
 }

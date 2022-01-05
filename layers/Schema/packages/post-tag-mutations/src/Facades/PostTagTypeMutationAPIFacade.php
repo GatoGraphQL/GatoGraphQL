@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTagMutations\Facades;
 
+use PoP\Engine\App;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
 
@@ -14,7 +15,7 @@ class PostTagTypeMutationAPIFacade
         /**
          * @var PostTagTypeMutationAPIInterface
          */
-        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(PostTagTypeMutationAPIInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(PostTagTypeMutationAPIInterface::class);
         return $service;
     }
 }

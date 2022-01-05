@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\FilterInputProcessors;
 
+use PoP\Root\App;
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class FilterInputProcessorManagerFacade
         /**
          * @var FilterInputProcessorManagerInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(FilterInputProcessorManagerInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(FilterInputProcessorManagerInterface::class);
         return $service;
     }
 }

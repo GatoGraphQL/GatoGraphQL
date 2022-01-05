@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\CheckpointProcessors;
 
+use PoP\Root\App;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class CheckpointProcessorManagerFacade
         /**
          * @var CheckpointProcessorManagerInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(CheckpointProcessorManagerInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(CheckpointProcessorManagerInterface::class);
         return $service;
     }
 }

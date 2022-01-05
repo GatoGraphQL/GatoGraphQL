@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Cache;
 
+use PoP\Root\App;
 use PoP\Root\Container\ContainerBuilderFactory;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -14,7 +15,7 @@ class PersistentCacheItemPoolFacade
         /**
          * @var CacheItemPoolInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get('persistent_cache_item_pool');
+        $service = App::getContainerBuilderFactory()->getInstance()->get('persistent_cache_item_pool');
         return $service;
     }
 }

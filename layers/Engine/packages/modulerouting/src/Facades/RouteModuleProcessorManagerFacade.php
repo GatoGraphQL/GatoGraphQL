@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ModuleRouting\Facades;
 
+use PoP\Root\App;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class RouteModuleProcessorManagerFacade
         /**
          * @var RouteModuleProcessorManagerInterface
          */
-        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(RouteModuleProcessorManagerInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(RouteModuleProcessorManagerInterface::class);
         return $service;
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl;
 
+use PoP\Engine\App;
 use PoP\Root\Managers\ComponentManager;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\CacheControl\Component as CacheControlComponent;
@@ -65,6 +66,6 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return \PoP\Engine\App::getComponentManager()->getComponent(AccessControlComponent::class)->isEnabled();
+        return App::getComponentManager()->getComponent(AccessControlComponent::class)->isEnabled();
     }
 }

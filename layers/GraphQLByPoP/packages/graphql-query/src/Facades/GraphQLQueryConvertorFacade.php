@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLQuery\Facades;
 
+use PoP\Engine\App;
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
@@ -14,7 +15,7 @@ class GraphQLQueryConvertorFacade
         /**
          * @var GraphQLQueryConvertorInterface
          */
-        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(GraphQLQueryConvertorInterface::class);
+        $service = App::getContainerBuilderFactory()->getInstance()->get(GraphQLQueryConvertorInterface::class);
         return $service;
     }
 }
