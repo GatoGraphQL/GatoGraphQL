@@ -1039,7 +1039,7 @@ class Engine implements EngineInterface
         /** @var ComponentInfo */
         $componentInfo = App::getComponent(Component::class)->getInfo();
         $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
-        
+
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getModuleFilterManager()->neverExclude(true);
         foreach ($module_fullpaths as $module_path) {
@@ -2008,7 +2008,7 @@ class Engine implements EngineInterface
                 /** @var ComponentInfo */
                 $componentInfo = App::getComponent(Component::class)->getInfo();
                 $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
-                
+
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
                     $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);

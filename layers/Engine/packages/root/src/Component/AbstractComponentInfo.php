@@ -7,7 +7,7 @@ namespace PoP\Root\Component;
 abstract class AbstractComponentInfo implements ComponentInfoInterface
 {
     protected array $values = [];
-    
+
     final public function __construct(
         protected ComponentInterface $component
     ) {
