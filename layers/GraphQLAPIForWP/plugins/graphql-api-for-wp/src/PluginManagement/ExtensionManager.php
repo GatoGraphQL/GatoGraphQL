@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 use GraphQLAPI\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
+use LogicException;
 
 class ExtensionManager extends AbstractPluginManager
 {
@@ -30,6 +31,19 @@ class ExtensionManager extends AbstractPluginManager
     public function getExtensions(): array
     {
         return $this->extensionBaseNameInstances;
+    }
+
+    public function getExtension(string $extensionClass): ExtensionInterface
+    {
+        if (!isset($this->extensionBaseNameInstances[$extensionClass])) {
+            throw new LogicException(
+                sprintf(
+                    \__('The extension with class \'%s\' has not been registered yet', 'graphql-api'),
+                    $extensionClass
+                )
+            );
+        }
+        return $this->extensionBaseNameInstances[$extensionClass];
     }
 
     public function register(ExtensionInterface $extension): ExtensionInterface

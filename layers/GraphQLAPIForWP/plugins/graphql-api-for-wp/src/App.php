@@ -6,6 +6,8 @@ namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
 use LogicException;
 use PoP\Root\App as UpstreamApp;
 use PoP\Root\AppLoader;
@@ -53,6 +55,22 @@ class App implements AppInterface
     public static function getExtensionManager(): ExtensionManager
     {
         return self::$extensionManager;
+    }
+
+    /**
+     * Shortcut function.
+     */
+    public static function getMainPlugin(): MainPluginInterface
+    {
+        return self::getMainPluginManager()->getPlugin();
+    }
+
+    /**
+     * Shortcut function.
+     */
+    public static function getExtension(string $extensionClass): ExtensionInterface
+    {
+        return self::getExtensionManager()->getExtension($extensionClass);
     }
 
     /**
