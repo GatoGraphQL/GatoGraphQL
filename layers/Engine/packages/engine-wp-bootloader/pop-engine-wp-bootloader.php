@@ -13,6 +13,8 @@ if (!class_exists(App::class)) {
     return;
 }
 
+App::initialize();
+
 /**
  * Initialize PoP Engine through the Bootloader.
  * 
@@ -20,7 +22,6 @@ if (!class_exists(App::class)) {
  * or not based on their required plugins being active.
  */
 \add_action('plugins_loaded', function(): void {
-    App::initialize();
     App::getAppLoader()::initializeComponents();
     App::getAppLoader()::bootSystem();
     App::getAppLoader()::bootApplication();
