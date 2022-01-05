@@ -13,10 +13,10 @@ abstract class AbstractComponentInfo implements ComponentInfoInterface
     ) {
     }
 
-    abstract protected function initializeValues(): mixed;
+    abstract protected function initialize(): mixed;
 
-    public function getValue(string $option): mixed
+    public function get(string $key): mixed
     {
-        return $this->values[$option] ?? null;
+        return $this->values[$key] ?? null;
     }
 }

@@ -6,5 +6,5 @@ namespace PoP\Root\Component;
 
 interface ComponentInfoInterface
 {
-    public function getValue(string $option): mixed;
+    public function get(string $key): mixed;
 }
