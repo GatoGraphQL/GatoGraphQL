@@ -39,30 +39,30 @@ class App
      */
     public static function initialize(): void
     {
-        static::initializeAppLoader();
-        static::initializeContainerBuilderFactory();
-        static::initializeSystemContainerBuilderFactory();
-        static::initializeComponentManager();
+        self::$appLoader = static::createAppLoader();
+        self::$containerBuilderFactory = static::createContainerBuilderFactory();
+        self::$systemContainerBuilderFactory = static::createSystemContainerBuilderFactory();
+        self::$componentManager = static::createComponentManager();
     }
 
-    protected static function initializeAppLoader(): void
+    protected static function createAppLoader(): AppLoader
     {
-        self::$appLoader = new AppLoader();
+        return new AppLoader();
     }
 
-    protected static function initializeContainerBuilderFactory(): void
+    protected static function createContainerBuilderFactory(): ContainerBuilderFactory
     {
-        self::$containerBuilderFactory = new ContainerBuilderFactory();
+        return new ContainerBuilderFactory();
     }
 
-    protected static function initializeSystemContainerBuilderFactory(): void
+    protected static function createSystemContainerBuilderFactory(): SystemContainerBuilderFactory
     {
-        self::$systemContainerBuilderFactory = new SystemContainerBuilderFactory();
+        return new SystemContainerBuilderFactory();
     }
 
-    protected static function initializeComponentManager(): void
+    protected static function createComponentManager(): ComponentManager
     {
-        self::$componentManager = new ComponentManager();
+        return new ComponentManager();
     }
 
     public static function getAppLoader(): AppLoader
