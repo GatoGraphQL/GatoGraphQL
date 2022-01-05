@@ -19,17 +19,6 @@ class App
     protected static ComponentManager $componentManager;
 
     /**
-     * This functions is to be called by PHPUnit,
-     * to reset the state in between tests.
-     *
-     * Reset the state of the Application.
-     */
-    public static function reset(): void
-    {
-        static::initialize();
-    }
-
-    /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application
      */

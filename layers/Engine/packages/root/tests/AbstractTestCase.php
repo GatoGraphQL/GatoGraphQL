@@ -6,7 +6,6 @@ namespace PoP\Root;
 
 use PHPUnit\Framework\TestCase;
 use PoP\Root\App;
-use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Helpers\ClassHelpers;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -16,8 +15,10 @@ abstract class AbstractTestCase extends TestCase
 
     public static function setUpBeforeClass(): void
     {
-        static::initializeApp(false, null, null, true);
-        self::$container = \PoP\Root\App::getContainerBuilderFactory()->getInstance();
+        if (self::$container === null) {
+            static::initializeApp(false, null, null, true);
+            self::$container = \PoP\Root\App::getContainerBuilderFactory()->getInstance();
+        }
     }
 
     protected static function initializeApp(
@@ -78,8 +79,7 @@ abstract class AbstractTestCase extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        $app = static::getAppClass();
-        $app::reset();
+        self::$container = null;
     }
 
     protected function getService(string $service): mixed
