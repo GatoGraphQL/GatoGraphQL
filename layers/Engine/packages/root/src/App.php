@@ -33,6 +33,38 @@ class App
         self::$componentManager = null;
     }
 
+    /**
+     * This function must be invoked at the very beginning,
+     * to initialize the instance to run the application
+     */
+    public static function initialize(): void
+    {
+        static::initializeAppLoader();
+        static::initializeContainerBuilderFactory();
+        static::initializeSystemContainerBuilderFactory();
+        static::initializeComponentManager();
+    }
+
+    protected static function initializeAppLoader(): void
+    {
+        self::$appLoader = new AppLoader();
+    }
+
+    protected static function initializeContainerBuilderFactory(): void
+    {
+        self::$containerBuilderFactory = new ContainerBuilderFactory();
+    }
+
+    protected static function initializeSystemContainerBuilderFactory(): void
+    {
+        self::$systemContainerBuilderFactory = new SystemContainerBuilderFactory();
+    }
+
+    protected static function initializeComponentManager(): void
+    {
+        self::$componentManager = new ComponentManager();
+    }
+
     public static function getAppLoader(): AppLoader
     {
         return self::$appLoader ?? self::throwAppNotInitializedException();
