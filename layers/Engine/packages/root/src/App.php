@@ -76,11 +76,17 @@ class App
         return self::$componentManager;
     }
 
+    /**
+     * Shortcut function.
+     */
     final public static function getContainer(): Container
     {
         return self::getContainerBuilderFactory()->getInstance();
     }
 
+    /**
+     * Shortcut function.
+     */
     final public static function getSystemContainer(): Container
     {
         return self::getSystemContainerBuilderFactory()->getInstance();
@@ -102,9 +108,11 @@ class App
     }
 
     /**
+     * Shortcut function.
+     *
      * @throws LogicException
      */
-    public static function getComponent(string $componentClass): ComponentInterface
+    final public static function getComponent(string $componentClass): ComponentInterface
     {
         return self::getComponentManager()->getComponent($componentClass);
     }
