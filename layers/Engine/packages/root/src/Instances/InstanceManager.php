@@ -10,13 +10,13 @@ class InstanceManager implements InstanceManagerInterface
 {
     public function getInstance(string $class): object
     {
-        $containerBuilder = App::getContainerBuilderFactory()->getInstance();
+        $containerBuilder = App::getContainer();
         return $containerBuilder->get($class);
     }
 
     public function hasInstance(string $class): bool
     {
-        $containerBuilder = App::getContainerBuilderFactory()->getInstance();
+        $containerBuilder = App::getContainer();
         return $containerBuilder->has($class);
     }
 }

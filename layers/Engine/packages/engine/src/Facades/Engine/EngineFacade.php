@@ -15,7 +15,7 @@ class EngineFacade
         /**
          * @var EngineInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(UpstreamEngineInterface::class);
+        $service = App::getContainer()->get(UpstreamEngineInterface::class);
         return $service;
     }
 }

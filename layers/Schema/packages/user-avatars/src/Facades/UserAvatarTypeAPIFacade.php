@@ -14,7 +14,7 @@ class UserAvatarTypeAPIFacade
         /**
          * @var UserAvatarTypeAPIInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(UserAvatarTypeAPIInterface::class);
+        $service = App::getContainer()->get(UserAvatarTypeAPIInterface::class);
         return $service;
     }
 }

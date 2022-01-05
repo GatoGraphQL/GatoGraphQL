@@ -14,7 +14,7 @@ class FormInputHelperServiceFacade
         /**
          * @var FormInputHelperServiceInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(FormInputHelperServiceInterface::class);
+        $service = App::getContainer()->get(FormInputHelperServiceInterface::class);
         return $service;
     }
 }

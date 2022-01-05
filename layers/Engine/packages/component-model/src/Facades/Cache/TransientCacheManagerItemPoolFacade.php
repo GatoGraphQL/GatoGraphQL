@@ -14,7 +14,7 @@ class TransientCacheManagerItemPoolFacade
         /**
          * @var CacheItemPoolInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get('transient_cache_item_pool');
+        $service = App::getContainer()->get('transient_cache_item_pool');
         return $service;
     }
 }

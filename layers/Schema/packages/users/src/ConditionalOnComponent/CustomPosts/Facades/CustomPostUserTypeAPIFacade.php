@@ -14,7 +14,7 @@ class CustomPostUserTypeAPIFacade
         /**
          * @var CustomPostUserTypeAPIInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(CustomPostUserTypeAPIInterface::class);
+        $service = App::getContainer()->get(CustomPostUserTypeAPIInterface::class);
         return $service;
     }
 }

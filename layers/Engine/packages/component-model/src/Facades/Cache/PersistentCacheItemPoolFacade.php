@@ -14,7 +14,7 @@ class PersistentCacheItemPoolFacade
         /**
          * @var CacheItemPoolInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get('persistent_cache_item_pool');
+        $service = App::getContainer()->get('persistent_cache_item_pool');
         return $service;
     }
 }

@@ -14,7 +14,7 @@ class SchemaConfigBlockRegistryFacade
         /**
          * @var SchemaConfigBlockRegistryInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(SchemaConfigBlockRegistryInterface::class);
+        $service = App::getContainer()->get(SchemaConfigBlockRegistryInterface::class);
         return $service;
     }
 }

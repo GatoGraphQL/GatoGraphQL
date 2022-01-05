@@ -20,6 +20,6 @@ class SystemModuleRegistryFacade
         /**
          * @var ModuleRegistryInterface
          */
-        return App::getSystemContainerBuilderFactory()->getInstance()->get(ModuleRegistryInterface::class);
+        return App::getSystemContainer()->get(ModuleRegistryInterface::class);
     }
 }

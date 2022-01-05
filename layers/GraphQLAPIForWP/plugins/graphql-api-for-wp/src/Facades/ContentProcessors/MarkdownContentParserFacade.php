@@ -14,7 +14,7 @@ class MarkdownContentParserFacade
         /**
          * @var MarkdownContentParserInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(MarkdownContentParserInterface::class);
+        $service = App::getContainer()->get(MarkdownContentParserInterface::class);
         return $service;
     }
 }

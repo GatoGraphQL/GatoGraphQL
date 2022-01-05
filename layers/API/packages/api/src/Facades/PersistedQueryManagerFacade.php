@@ -14,7 +14,7 @@ class PersistedQueryManagerFacade
         /**
          * @var PersistedQueryManagerInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(PersistedQueryManagerInterface::class);
+        $service = App::getContainer()->get(PersistedQueryManagerInterface::class);
         return $service;
     }
 }

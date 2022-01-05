@@ -14,7 +14,7 @@ class CustomEndpointExecuterRegistryFacade
         /**
          * @var CustomEndpointExecuterRegistryInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(CustomEndpointExecuterRegistryInterface::class);
+        $service = App::getContainer()->get(CustomEndpointExecuterRegistryInterface::class);
         return $service;
     }
 }

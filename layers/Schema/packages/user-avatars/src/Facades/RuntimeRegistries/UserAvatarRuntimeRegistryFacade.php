@@ -14,7 +14,7 @@ class UserAvatarRuntimeRegistryFacade
         /**
          * @var UserAvatarRuntimeRegistryInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(UserAvatarRuntimeRegistryInterface::class);
+        $service = App::getContainer()->get(UserAvatarRuntimeRegistryInterface::class);
         return $service;
     }
 }

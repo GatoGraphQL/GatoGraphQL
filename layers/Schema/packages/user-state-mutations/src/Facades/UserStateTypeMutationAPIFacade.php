@@ -14,7 +14,7 @@ class UserStateTypeMutationAPIFacade
         /**
          * @var UserStateTypeMutationAPIInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(UserStateTypeMutationAPIInterface::class);
+        $service = App::getContainer()->get(UserStateTypeMutationAPIInterface::class);
         return $service;
     }
 }

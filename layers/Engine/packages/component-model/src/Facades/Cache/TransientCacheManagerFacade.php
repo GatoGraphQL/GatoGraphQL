@@ -14,7 +14,7 @@ class TransientCacheManagerFacade
         /**
          * @var TransientCacheInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(TransientCacheInterface::class);
+        $service = App::getContainer()->get(TransientCacheInterface::class);
         return $service;
     }
 }

@@ -14,7 +14,7 @@ class ApplicationInfoFacade
         /**
          * @var ApplicationInfoInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(ApplicationInfoInterface::class);
+        $service = App::getContainer()->get(ApplicationInfoInterface::class);
         return $service;
     }
 }

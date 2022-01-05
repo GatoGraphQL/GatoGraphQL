@@ -14,7 +14,7 @@ class SchemaNamespacingServiceFacade
         /**
          * @var SchemaNamespacingServiceInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(SchemaNamespacingServiceInterface::class);
+        $service = App::getContainer()->get(SchemaNamespacingServiceInterface::class);
         return $service;
     }
 }

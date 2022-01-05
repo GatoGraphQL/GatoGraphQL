@@ -14,7 +14,7 @@ class PersistedQueryEndpointAnnotatorRegistryFacade
         /**
          * @var PersistedQueryEndpointAnnotatorRegistryInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(PersistedQueryEndpointAnnotatorRegistryInterface::class);
+        $service = App::getContainer()->get(PersistedQueryEndpointAnnotatorRegistryInterface::class);
         return $service;
     }
 }

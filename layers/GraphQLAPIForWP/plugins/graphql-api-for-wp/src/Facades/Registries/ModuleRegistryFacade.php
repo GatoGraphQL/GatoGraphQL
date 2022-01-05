@@ -17,6 +17,6 @@ class ModuleRegistryFacade
         /**
          * @var ModuleRegistryInterface
          */
-        return App::getContainerBuilderFactory()->getInstance()->get(ModuleRegistryInterface::class);
+        return App::getContainer()->get(ModuleRegistryInterface::class);
     }
 }

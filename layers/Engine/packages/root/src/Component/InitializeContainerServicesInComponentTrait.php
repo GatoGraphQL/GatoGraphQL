@@ -25,7 +25,7 @@ trait InitializeContainerServicesInComponentTrait
         if (!App::getContainerBuilderFactory()->isCached()) {
             // Initialize the ContainerBuilder with this component's service implementations
             /** @var ContainerBuilder */
-            $containerBuilder = App::getContainerBuilderFactory()->getInstance();
+            $containerBuilder = App::getContainer();
             $this->loadServicesFromYAMLConfigIntoContainer($containerBuilder, $componentDir, $configPath, $fileName);
         }
     }
@@ -69,7 +69,7 @@ trait InitializeContainerServicesInComponentTrait
     ): void {
         if (!App::getContainerBuilderFactory()->isCached()) {
             /** @var ContainerBuilder */
-            $containerBuilder = App::getContainerBuilderFactory()->getInstance();
+            $containerBuilder = App::getContainer();
             $componentPath = $this->getComponentPath($componentDir, $configPath);
             $autoconfigure = !$skipSchema;
             $loader = new ForceAutoconfigureYamlFileLoader(
@@ -93,7 +93,7 @@ trait InitializeContainerServicesInComponentTrait
         if (!App::getSystemContainerBuilderFactory()->isCached()) {
             // Initialize the ContainerBuilder with this component's service implementations
             /** @var ContainerBuilder */
-            $containerBuilder = App::getSystemContainerBuilderFactory()->getInstance();
+            $containerBuilder = App::getSystemContainer();
             $this->loadServicesFromYAMLConfigIntoContainer($containerBuilder, $componentDir, $configPath, $fileName);
         }
     }

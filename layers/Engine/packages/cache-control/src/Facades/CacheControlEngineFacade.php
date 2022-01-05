@@ -14,7 +14,7 @@ class CacheControlEngineFacade
         /**
          * @var CacheControlEngineInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(CacheControlEngineInterface::class);
+        $service = App::getContainer()->get(CacheControlEngineInterface::class);
         return $service;
     }
 }

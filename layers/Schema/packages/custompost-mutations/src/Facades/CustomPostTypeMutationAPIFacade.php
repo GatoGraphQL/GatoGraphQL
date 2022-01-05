@@ -14,7 +14,7 @@ class CustomPostTypeMutationAPIFacade
         /**
          * @var CustomPostTypeMutationAPIInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(CustomPostTypeMutationAPIInterface::class);
+        $service = App::getContainer()->get(CustomPostTypeMutationAPIInterface::class);
         return $service;
     }
 }

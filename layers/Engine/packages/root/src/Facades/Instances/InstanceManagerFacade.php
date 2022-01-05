@@ -14,7 +14,7 @@ class InstanceManagerFacade
         /**
          * @var InstanceManagerInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(InstanceManagerInterface::class);
+        $service = App::getContainer()->get(InstanceManagerInterface::class);
         return $service;
     }
 }

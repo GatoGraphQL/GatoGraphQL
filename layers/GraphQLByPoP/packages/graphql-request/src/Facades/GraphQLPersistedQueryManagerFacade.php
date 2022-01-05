@@ -14,7 +14,7 @@ class GraphQLPersistedQueryManagerFacade
         /**
          * @var GraphQLPersistedQueryManagerInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(GraphQLPersistedQueryManagerInterface::class);
+        $service = App::getContainer()->get(GraphQLPersistedQueryManagerInterface::class);
         return $service;
     }
 }

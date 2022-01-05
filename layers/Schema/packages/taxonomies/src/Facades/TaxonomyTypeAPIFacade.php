@@ -14,7 +14,7 @@ class TaxonomyTypeAPIFacade
         /**
          * @var TaxonomyTypeAPIInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(TaxonomyTypeAPIInterface::class);
+        $service = App::getContainer()->get(TaxonomyTypeAPIInterface::class);
         return $service;
     }
 }

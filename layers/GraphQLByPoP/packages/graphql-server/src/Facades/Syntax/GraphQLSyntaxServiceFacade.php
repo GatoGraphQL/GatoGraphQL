@@ -14,7 +14,7 @@ class GraphQLSyntaxServiceFacade
         /**
          * @var GraphQLSyntaxServiceInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(GraphQLSyntaxServiceInterface::class);
+        $service = App::getContainer()->get(GraphQLSyntaxServiceInterface::class);
         return $service;
     }
 }

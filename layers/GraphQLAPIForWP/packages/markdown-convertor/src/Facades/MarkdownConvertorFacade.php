@@ -14,7 +14,7 @@ class MarkdownConvertorFacade
         /**
          * @var MarkdownConvertorInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(MarkdownConvertorInterface::class);
+        $service = App::getContainer()->get(MarkdownConvertorInterface::class);
         return $service;
     }
 }

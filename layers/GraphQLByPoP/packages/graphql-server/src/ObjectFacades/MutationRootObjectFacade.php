@@ -11,7 +11,7 @@ class MutationRootObjectFacade
 {
     public static function getInstance(): MutationRoot
     {
-        $containerBuilderFactory = App::getContainerBuilderFactory()->getInstance();
+        $containerBuilderFactory = App::getContainer();
         return $containerBuilderFactory->get(MutationRoot::class);
     }
 }

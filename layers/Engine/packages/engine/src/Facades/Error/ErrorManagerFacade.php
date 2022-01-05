@@ -14,7 +14,7 @@ class ErrorManagerFacade
         /**
          * @var ErrorManagerInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(ErrorManagerInterface::class);
+        $service = App::getContainer()->get(ErrorManagerInterface::class);
         return $service;
     }
 }

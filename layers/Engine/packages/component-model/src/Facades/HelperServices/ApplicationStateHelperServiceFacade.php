@@ -14,7 +14,7 @@ class ApplicationStateHelperServiceFacade
         /**
          * @var ApplicationStateHelperServiceInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(ApplicationStateHelperServiceInterface::class);
+        $service = App::getContainer()->get(ApplicationStateHelperServiceInterface::class);
         return $service;
     }
 }

@@ -14,7 +14,7 @@ class ErrorServiceFacade
         /**
          * @var ErrorServiceInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(ErrorServiceInterface::class);
+        $service = App::getContainer()->get(ErrorServiceInterface::class);
         return $service;
     }
 }

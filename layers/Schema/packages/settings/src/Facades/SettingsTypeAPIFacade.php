@@ -14,7 +14,7 @@ class SettingsTypeAPIFacade
         /**
          * @var SettingsTypeAPIInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(SettingsTypeAPIInterface::class);
+        $service = App::getContainer()->get(SettingsTypeAPIInterface::class);
         return $service;
     }
 }

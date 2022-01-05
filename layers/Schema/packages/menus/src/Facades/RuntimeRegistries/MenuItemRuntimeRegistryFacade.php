@@ -14,7 +14,7 @@ class MenuItemRuntimeRegistryFacade
         /**
          * @var MenuItemRuntimeRegistryInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(MenuItemRuntimeRegistryInterface::class);
+        $service = App::getContainer()->get(MenuItemRuntimeRegistryInterface::class);
         return $service;
     }
 }

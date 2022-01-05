@@ -14,7 +14,7 @@ class CMSRoutingStateServiceFacade
         /**
          * @var CMSRoutingStateServiceInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(CMSRoutingStateServiceInterface::class);
+        $service = App::getContainer()->get(CMSRoutingStateServiceInterface::class);
         return $service;
     }
 }

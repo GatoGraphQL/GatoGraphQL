@@ -14,7 +14,7 @@ class SystemHooksAPIFacade
         /**
          * @var HooksAPIInterface
          */
-        $service = App::getSystemContainerBuilderFactory()->getInstance()->get(HooksAPIInterface::class);
+        $service = App::getSystemContainer()->get(HooksAPIInterface::class);
         return $service;
     }
 }

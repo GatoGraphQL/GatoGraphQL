@@ -14,7 +14,7 @@ class MetaDirectiveRegistryFacade
         /**
          * @var MetaDirectiveRegistryInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(MetaDirectiveRegistryInterface::class);
+        $service = App::getContainer()->get(MetaDirectiveRegistryInterface::class);
         return $service;
     }
 }

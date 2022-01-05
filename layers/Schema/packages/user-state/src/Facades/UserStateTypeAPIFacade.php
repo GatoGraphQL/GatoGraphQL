@@ -14,7 +14,7 @@ class UserStateTypeAPIFacade
         /**
          * @var UserStateTypeAPIInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(UserStateTypeAPIInterface::class);
+        $service = App::getContainer()->get(UserStateTypeAPIInterface::class);
         return $service;
     }
 }

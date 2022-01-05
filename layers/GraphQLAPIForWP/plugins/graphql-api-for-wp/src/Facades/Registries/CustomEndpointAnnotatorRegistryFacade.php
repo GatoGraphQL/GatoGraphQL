@@ -14,7 +14,7 @@ class CustomEndpointAnnotatorRegistryFacade
         /**
          * @var CustomEndpointAnnotatorRegistryInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(CustomEndpointAnnotatorRegistryInterface::class);
+        $service = App::getContainer()->get(CustomEndpointAnnotatorRegistryInterface::class);
         return $service;
     }
 }

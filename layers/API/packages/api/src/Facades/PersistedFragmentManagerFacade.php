@@ -14,7 +14,7 @@ class PersistedFragmentManagerFacade
         /**
          * @var PersistedFragmentManagerInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(PersistedFragmentManagerInterface::class);
+        $service = App::getContainer()->get(PersistedFragmentManagerInterface::class);
         return $service;
     }
 }

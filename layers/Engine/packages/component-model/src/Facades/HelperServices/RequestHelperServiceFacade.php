@@ -14,7 +14,7 @@ class RequestHelperServiceFacade
         /**
          * @var RequestHelperServiceInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(RequestHelperServiceInterface::class);
+        $service = App::getContainer()->get(RequestHelperServiceInterface::class);
         return $service;
     }
 }

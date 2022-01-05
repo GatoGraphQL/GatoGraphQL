@@ -14,7 +14,7 @@ class SemverHelperServiceFacade
         /**
          * @var SemverHelperServiceInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(SemverHelperServiceInterface::class);
+        $service = App::getContainer()->get(SemverHelperServiceInterface::class);
         return $service;
     }
 }

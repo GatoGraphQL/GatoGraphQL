@@ -14,7 +14,7 @@ class QueryRetrieverFacade
         /**
          * @var QueryRetrieverInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(QueryRetrieverInterface::class);
+        $service = App::getContainer()->get(QueryRetrieverInterface::class);
         return $service;
     }
 }

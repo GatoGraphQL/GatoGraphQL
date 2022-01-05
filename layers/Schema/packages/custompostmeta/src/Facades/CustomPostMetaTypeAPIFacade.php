@@ -14,7 +14,7 @@ class CustomPostMetaTypeAPIFacade
         /**
          * @var CustomPostMetaTypeAPIInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(CustomPostMetaTypeAPIInterface::class);
+        $service = App::getContainer()->get(CustomPostMetaTypeAPIInterface::class);
         return $service;
     }
 }

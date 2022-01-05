@@ -11,7 +11,7 @@ class QueryRootObjectFacade
 {
     public static function getInstance(): QueryRoot
     {
-        $containerBuilderFactory = App::getContainerBuilderFactory()->getInstance();
+        $containerBuilderFactory = App::getContainer();
         return $containerBuilderFactory->get(QueryRoot::class);
     }
 }

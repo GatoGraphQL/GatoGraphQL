@@ -14,7 +14,7 @@ class DateFormatterFacade
         /**
          * @var DateFormatterInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(DateFormatterInterface::class);
+        $service = App::getContainer()->get(DateFormatterInterface::class);
         return $service;
     }
 }

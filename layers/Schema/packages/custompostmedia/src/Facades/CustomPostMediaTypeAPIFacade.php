@@ -14,7 +14,7 @@ class CustomPostMediaTypeAPIFacade
         /**
          * @var CustomPostMediaTypeAPIInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(CustomPostMediaTypeAPIInterface::class);
+        $service = App::getContainer()->get(CustomPostMediaTypeAPIInterface::class);
         return $service;
     }
 }

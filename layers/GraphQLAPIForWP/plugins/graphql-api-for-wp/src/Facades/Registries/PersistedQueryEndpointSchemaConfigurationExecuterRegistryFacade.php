@@ -14,7 +14,7 @@ class PersistedQueryEndpointSchemaConfigurationExecuterRegistryFacade
         /**
          * @var PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface::class);
+        $service = App::getContainer()->get(PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface::class);
         return $service;
     }
 }

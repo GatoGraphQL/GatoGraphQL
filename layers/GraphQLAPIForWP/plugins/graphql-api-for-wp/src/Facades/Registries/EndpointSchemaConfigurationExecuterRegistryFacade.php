@@ -14,7 +14,7 @@ class EndpointSchemaConfigurationExecuterRegistryFacade
         /**
          * @var EndpointSchemaConfigurationExecuterRegistryInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(EndpointSchemaConfigurationExecuterRegistryInterface::class);
+        $service = App::getContainer()->get(EndpointSchemaConfigurationExecuterRegistryInterface::class);
         return $service;
     }
 }

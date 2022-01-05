@@ -14,7 +14,7 @@ class ErrorHelperFacade
         /**
          * @var ErrorHelperInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(ErrorHelperInterface::class);
+        $service = App::getContainer()->get(ErrorHelperInterface::class);
         return $service;
     }
 }

@@ -14,7 +14,7 @@ class GraphQLSchemaDefinitionServiceFacade
         /**
          * @var GraphQLSchemaDefinitionServiceInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(GraphQLSchemaDefinitionServiceInterface::class);
+        $service = App::getContainer()->get(GraphQLSchemaDefinitionServiceInterface::class);
         return $service;
     }
 }

@@ -14,7 +14,7 @@ class FieldQueryInterpreterFacade
         /**
          * @var FieldQueryInterpreterInterface
          */
-        $service = App::getContainerBuilderFactory()->getInstance()->get(FieldQueryInterpreterInterface::class);
+        $service = App::getContainer()->get(FieldQueryInterpreterInterface::class);
         return $service;
     }
 }
