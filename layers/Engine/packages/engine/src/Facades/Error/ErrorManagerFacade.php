@@ -14,7 +14,7 @@ class ErrorManagerFacade
         /**
          * @var ErrorManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(ErrorManagerInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(ErrorManagerInterface::class);
         return $service;
     }
 }

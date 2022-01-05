@@ -14,7 +14,7 @@ class AttachExtensionServiceFacade
         /**
          * @var AttachExtensionServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(AttachExtensionServiceInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(AttachExtensionServiceInterface::class);
         return $service;
     }
 }

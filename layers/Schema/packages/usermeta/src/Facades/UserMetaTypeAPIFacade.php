@@ -14,7 +14,7 @@ class UserMetaTypeAPIFacade
         /**
          * @var UserMetaTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserMetaTypeAPIInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(UserMetaTypeAPIInterface::class);
         return $service;
     }
 }

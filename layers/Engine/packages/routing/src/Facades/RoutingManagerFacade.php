@@ -14,7 +14,7 @@ class RoutingManagerFacade
         /**
          * @var RoutingManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(RoutingManagerInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(RoutingManagerInterface::class);
         return $service;
     }
 }

@@ -14,7 +14,7 @@ class UserTypeAPIFacade
         /**
          * @var UserTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserTypeAPIInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(UserTypeAPIInterface::class);
         return $service;
     }
 }

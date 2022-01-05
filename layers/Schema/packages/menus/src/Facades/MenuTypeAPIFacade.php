@@ -14,7 +14,7 @@ class MenuTypeAPIFacade
         /**
          * @var MenuTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(MenuTypeAPIInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(MenuTypeAPIInterface::class);
         return $service;
     }
 }

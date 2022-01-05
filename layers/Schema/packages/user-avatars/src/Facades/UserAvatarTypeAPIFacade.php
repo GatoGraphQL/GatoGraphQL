@@ -14,7 +14,7 @@ class UserAvatarTypeAPIFacade
         /**
          * @var UserAvatarTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserAvatarTypeAPIInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(UserAvatarTypeAPIInterface::class);
         return $service;
     }
 }

@@ -14,7 +14,7 @@ class SchemaDefinitionReferenceRegistryFacade
         /**
          * @var SchemaDefinitionReferenceRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(SchemaDefinitionReferenceRegistryInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(SchemaDefinitionReferenceRegistryInterface::class);
         return $service;
     }
 }

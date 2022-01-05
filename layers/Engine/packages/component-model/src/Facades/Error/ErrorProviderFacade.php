@@ -14,7 +14,7 @@ class ErrorProviderFacade
         /**
          * @var ErrorProviderInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(ErrorProviderInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(ErrorProviderInterface::class);
         return $service;
     }
 }

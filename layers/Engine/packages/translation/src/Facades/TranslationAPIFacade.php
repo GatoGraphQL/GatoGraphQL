@@ -14,7 +14,7 @@ class TranslationAPIFacade
         /**
          * @var TranslationAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(TranslationAPIInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(TranslationAPIInterface::class);
         return $service;
     }
 }

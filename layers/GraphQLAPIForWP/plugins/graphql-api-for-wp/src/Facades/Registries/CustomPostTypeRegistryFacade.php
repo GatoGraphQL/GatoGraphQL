@@ -14,7 +14,7 @@ class CustomPostTypeRegistryFacade
         /**
          * @var CustomPostTypeRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CustomPostTypeRegistryInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(CustomPostTypeRegistryInterface::class);
         return $service;
     }
 }

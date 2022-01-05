@@ -14,7 +14,7 @@ class AttachableExtensionManagerFacade
         /**
          * @var AttachableExtensionManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(AttachableExtensionManagerInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(AttachableExtensionManagerInterface::class);
         return $service;
     }
 }

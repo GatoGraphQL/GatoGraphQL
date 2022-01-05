@@ -14,7 +14,7 @@ class AccessControlManagerFacade
         /**
          * @var AccessControlManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(AccessControlManagerInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(AccessControlManagerInterface::class);
         return $service;
     }
 }

@@ -14,7 +14,7 @@ class CommentMetaTypeAPIFacade
         /**
          * @var CommentMetaTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CommentMetaTypeAPIInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(CommentMetaTypeAPIInterface::class);
         return $service;
     }
 }

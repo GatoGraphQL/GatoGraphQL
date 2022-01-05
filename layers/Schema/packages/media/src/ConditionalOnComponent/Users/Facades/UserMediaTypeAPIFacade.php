@@ -14,7 +14,7 @@ class UserMediaTypeAPIFacade
         /**
          * @var UserMediaTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserMediaTypeAPIInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(UserMediaTypeAPIInterface::class);
         return $service;
     }
 }

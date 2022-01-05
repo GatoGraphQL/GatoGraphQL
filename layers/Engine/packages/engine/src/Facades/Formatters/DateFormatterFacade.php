@@ -14,7 +14,7 @@ class DateFormatterFacade
         /**
          * @var DateFormatterInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(DateFormatterInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(DateFormatterInterface::class);
         return $service;
     }
 }

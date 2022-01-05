@@ -14,7 +14,7 @@ class FilterInputProcessorManagerFacade
         /**
          * @var FilterInputProcessorManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(FilterInputProcessorManagerInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(FilterInputProcessorManagerInterface::class);
         return $service;
     }
 }

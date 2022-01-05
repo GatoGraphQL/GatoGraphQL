@@ -14,7 +14,7 @@ class MediaTypeAPIFacade
         /**
          * @var MediaTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(MediaTypeAPIInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(MediaTypeAPIInterface::class);
         return $service;
     }
 }

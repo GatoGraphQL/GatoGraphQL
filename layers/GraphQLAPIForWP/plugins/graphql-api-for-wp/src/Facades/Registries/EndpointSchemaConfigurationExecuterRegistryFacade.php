@@ -14,7 +14,7 @@ class EndpointSchemaConfigurationExecuterRegistryFacade
         /**
          * @var EndpointSchemaConfigurationExecuterRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(EndpointSchemaConfigurationExecuterRegistryInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(EndpointSchemaConfigurationExecuterRegistryInterface::class);
         return $service;
     }
 }

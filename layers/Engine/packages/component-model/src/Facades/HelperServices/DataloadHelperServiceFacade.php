@@ -14,7 +14,7 @@ class DataloadHelperServiceFacade
         /**
          * @var DataloadHelperServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(DataloadHelperServiceInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(DataloadHelperServiceInterface::class);
         return $service;
     }
 }

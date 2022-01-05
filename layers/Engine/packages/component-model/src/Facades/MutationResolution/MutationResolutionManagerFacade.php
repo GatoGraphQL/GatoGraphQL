@@ -14,7 +14,7 @@ class MutationResolutionManagerFacade
         /**
          * @var MutationResolutionManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(MutationResolutionManagerInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(MutationResolutionManagerInterface::class);
         return $service;
     }
 }

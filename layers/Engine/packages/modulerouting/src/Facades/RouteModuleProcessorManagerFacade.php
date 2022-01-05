@@ -14,7 +14,7 @@ class RouteModuleProcessorManagerFacade
         /**
          * @var RouteModuleProcessorManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(RouteModuleProcessorManagerInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(RouteModuleProcessorManagerInterface::class);
         return $service;
     }
 }

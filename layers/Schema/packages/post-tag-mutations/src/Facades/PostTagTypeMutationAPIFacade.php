@@ -14,7 +14,7 @@ class PostTagTypeMutationAPIFacade
         /**
          * @var PostTagTypeMutationAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(PostTagTypeMutationAPIInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(PostTagTypeMutationAPIInterface::class);
         return $service;
     }
 }

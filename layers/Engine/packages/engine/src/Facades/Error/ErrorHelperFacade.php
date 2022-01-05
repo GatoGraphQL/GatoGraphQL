@@ -14,7 +14,7 @@ class ErrorHelperFacade
         /**
          * @var ErrorHelperInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(ErrorHelperInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(ErrorHelperInterface::class);
         return $service;
     }
 }

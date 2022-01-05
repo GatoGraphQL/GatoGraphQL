@@ -17,7 +17,7 @@ abstract class AbstractTestCase extends TestCase
     public static function setUpBeforeClass(): void
     {
         static::initializeApp(false, null, null, true);
-        self::$container = ContainerBuilderFactory::getInstance();
+        self::$container = \PoP\Root\App::getContainerBuilderFactory()->getInstance();
     }
 
     protected static function initializeApp(

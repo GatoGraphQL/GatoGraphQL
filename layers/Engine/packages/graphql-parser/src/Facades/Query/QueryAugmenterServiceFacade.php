@@ -14,7 +14,7 @@ class QueryAugmenterServiceFacade
         /**
          * @var QueryAugmenterServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(QueryAugmenterServiceInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(QueryAugmenterServiceInterface::class);
         return $service;
     }
 }

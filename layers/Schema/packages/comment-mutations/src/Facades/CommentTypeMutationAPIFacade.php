@@ -14,7 +14,7 @@ class CommentTypeMutationAPIFacade
         /**
          * @var CommentTypeMutationAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CommentTypeMutationAPIInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(CommentTypeMutationAPIInterface::class);
         return $service;
     }
 }

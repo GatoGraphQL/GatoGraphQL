@@ -14,7 +14,7 @@ class NameResolverFacade
         /**
          * @var NameResolverInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(NameResolverInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(NameResolverInterface::class);
         return $service;
     }
 }

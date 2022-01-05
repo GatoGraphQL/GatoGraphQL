@@ -14,7 +14,7 @@ class FieldQueryConvertorFacade
         /**
          * @var FieldQueryConvertorInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(FieldQueryConvertorInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(FieldQueryConvertorInterface::class);
         return $service;
     }
 }

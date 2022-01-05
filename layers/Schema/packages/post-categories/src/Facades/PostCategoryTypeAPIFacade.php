@@ -14,7 +14,7 @@ class PostCategoryTypeAPIFacade
         /**
          * @var PostCategoryTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(PostCategoryTypeAPIInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(PostCategoryTypeAPIInterface::class);
         return $service;
     }
 }

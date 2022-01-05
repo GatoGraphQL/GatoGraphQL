@@ -14,7 +14,7 @@ class AllowOrDenySettingsServiceFacade
         /**
          * @var AllowOrDenySettingsServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(AllowOrDenySettingsServiceInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(AllowOrDenySettingsServiceInterface::class);
         return $service;
     }
 }

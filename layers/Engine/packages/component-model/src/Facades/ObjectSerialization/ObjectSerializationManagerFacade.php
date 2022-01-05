@@ -14,7 +14,7 @@ class ObjectSerializationManagerFacade
         /**
          * @var ObjectSerializationManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(ObjectSerializationManagerInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(ObjectSerializationManagerInterface::class);
         return $service;
     }
 }

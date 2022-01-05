@@ -14,7 +14,7 @@ class AccessControlRuleBlockRegistryFacade
         /**
          * @var AccessControlRuleBlockRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(AccessControlRuleBlockRegistryInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(AccessControlRuleBlockRegistryInterface::class);
         return $service;
     }
 }

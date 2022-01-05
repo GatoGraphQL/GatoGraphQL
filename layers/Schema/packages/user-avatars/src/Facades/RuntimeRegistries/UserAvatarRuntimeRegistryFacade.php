@@ -14,7 +14,7 @@ class UserAvatarRuntimeRegistryFacade
         /**
          * @var UserAvatarRuntimeRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserAvatarRuntimeRegistryInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(UserAvatarRuntimeRegistryInterface::class);
         return $service;
     }
 }

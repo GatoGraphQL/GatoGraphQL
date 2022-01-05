@@ -14,7 +14,7 @@ class ModulePathHelpersFacade
         /**
          * @var ModulePathHelpersInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(ModulePathHelpersInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(ModulePathHelpersInterface::class);
         return $service;
     }
 }

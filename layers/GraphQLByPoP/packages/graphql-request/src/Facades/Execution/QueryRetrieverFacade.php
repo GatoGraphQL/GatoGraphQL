@@ -14,7 +14,7 @@ class QueryRetrieverFacade
         /**
          * @var QueryRetrieverInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(QueryRetrieverInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(QueryRetrieverInterface::class);
         return $service;
     }
 }

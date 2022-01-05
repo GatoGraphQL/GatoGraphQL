@@ -11,7 +11,7 @@ class SystemCompilerPassRegistryFacade
 {
     public static function getInstance(): CompilerPassRegistryInterface
     {
-        $systemContainerBuilder = SystemContainerBuilderFactory::getInstance();
+        $systemContainerBuilder = \PoP\Root\App::getSystemContainerBuilderFactory()->getInstance();
         /**
          * @var CompilerPassRegistryInterface
          */

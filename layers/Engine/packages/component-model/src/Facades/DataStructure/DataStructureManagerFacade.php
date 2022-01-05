@@ -14,7 +14,7 @@ class DataStructureManagerFacade
         /**
          * @var DataStructureManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(DataStructureManagerInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(DataStructureManagerInterface::class);
         return $service;
     }
 }

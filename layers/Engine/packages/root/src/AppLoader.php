@@ -61,8 +61,8 @@ class AppLoader
         $this->componentClassConfiguration = [];
         $this->skipSchemaComponentClasses = [];
 
-        ContainerBuilderFactory::reset();
-        SystemContainerBuilderFactory::reset();
+        App::getContainerBuilderFactory()->reset();
+        App::getSystemContainerBuilderFactory()->reset();
         App::getComponentManager()->reset();
     }
 
@@ -212,7 +212,7 @@ class AppLoader
          * System container: initialize it and compile it already,
          * since it will be used to initialize the Application container
          */
-        SystemContainerBuilderFactory::init(
+        App::getSystemContainerBuilderFactory()->init(
             $cacheContainerConfiguration,
             $containerNamespace,
             $containerDirectory
@@ -232,7 +232,7 @@ class AppLoader
             fn ($class) => new $class(),
             $this->getSystemContainerCompilerPasses()
         );
-        SystemContainerBuilderFactory::maybeCompileAndCacheContainer($systemCompilerPasses);
+        App::getSystemContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
 
         // Finally boot the components
         $this->bootSystemForComponents();
@@ -301,7 +301,7 @@ class AppLoader
         /**
          * Initialize the Application container only
          */
-        ContainerBuilderFactory::init(
+        App::getContainerBuilderFactory()->init(
             $cacheContainerConfiguration,
             $containerNamespace,
             $containerDirectory
@@ -326,7 +326,7 @@ class AppLoader
         // Symfony's DependencyInjection Application Container
         $systemCompilerPassRegistry = SystemCompilerPassRegistryFacade::getInstance();
         $systemCompilerPasses = $systemCompilerPassRegistry->getCompilerPasses();
-        ContainerBuilderFactory::maybeCompileAndCacheContainer($systemCompilerPasses);
+        App::getContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
 
         // Finally boot the components
         $this->bootApplicationForComponents();

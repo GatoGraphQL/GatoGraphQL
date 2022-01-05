@@ -14,7 +14,7 @@ class InputCoercingServiceFacade
         /**
          * @var InputCoercingServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(InputCoercingServiceInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(InputCoercingServiceInterface::class);
         return $service;
     }
 }

@@ -14,7 +14,7 @@ class GraphQLQueryConvertorFacade
         /**
          * @var GraphQLQueryConvertorInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(GraphQLQueryConvertorInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(GraphQLQueryConvertorInterface::class);
         return $service;
     }
 }

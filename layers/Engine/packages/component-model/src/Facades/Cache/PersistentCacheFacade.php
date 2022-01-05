@@ -14,7 +14,7 @@ class PersistentCacheFacade
         /**
          * @var PersistentCacheInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(PersistentCacheInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(PersistentCacheInterface::class);
         return $service;
     }
 }

@@ -15,7 +15,7 @@ class EngineFacade
         /**
          * @var EngineInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UpstreamEngineInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(UpstreamEngineInterface::class);
         return $service;
     }
 }

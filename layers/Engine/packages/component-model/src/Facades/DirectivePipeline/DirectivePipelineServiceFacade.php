@@ -14,7 +14,7 @@ class DirectivePipelineServiceFacade
         /**
          * @var DirectivePipelineServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(DirectivePipelineServiceInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(DirectivePipelineServiceInterface::class);
         return $service;
     }
 }

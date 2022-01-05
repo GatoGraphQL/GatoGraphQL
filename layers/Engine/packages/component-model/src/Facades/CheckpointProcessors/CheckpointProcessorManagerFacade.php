@@ -14,7 +14,7 @@ class CheckpointProcessorManagerFacade
         /**
          * @var CheckpointProcessorManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CheckpointProcessorManagerInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(CheckpointProcessorManagerInterface::class);
         return $service;
     }
 }

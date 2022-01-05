@@ -14,7 +14,7 @@ class UserAuthorizationSchemeRegistryFacade
         /**
          * @var UserAuthorizationSchemeRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserAuthorizationSchemeRegistryInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(UserAuthorizationSchemeRegistryInterface::class);
         return $service;
     }
 }

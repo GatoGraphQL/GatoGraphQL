@@ -17,6 +17,6 @@ class ModuleRegistryFacade
         /**
          * @var ModuleRegistryInterface
          */
-        return ContainerBuilderFactory::getInstance()->get(ModuleRegistryInterface::class);
+        return \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(ModuleRegistryInterface::class);
     }
 }

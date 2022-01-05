@@ -14,7 +14,7 @@ class EndpointBlockRegistryFacade
         /**
          * @var EndpointBlockRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(EndpointBlockRegistryInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(EndpointBlockRegistryInterface::class);
         return $service;
     }
 }

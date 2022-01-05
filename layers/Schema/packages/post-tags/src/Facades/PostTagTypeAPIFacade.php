@@ -14,7 +14,7 @@ class PostTagTypeAPIFacade
         /**
          * @var PostTagTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(PostTagTypeAPIInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(PostTagTypeAPIInterface::class);
         return $service;
     }
 }

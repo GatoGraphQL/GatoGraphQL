@@ -14,7 +14,7 @@ class ObjectDictionaryFacade
         /**
          * @var ObjectDictionaryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(ObjectDictionaryInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(ObjectDictionaryInterface::class);
         return $service;
     }
 }

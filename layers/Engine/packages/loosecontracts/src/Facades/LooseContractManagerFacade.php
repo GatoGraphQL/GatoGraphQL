@@ -14,7 +14,7 @@ class LooseContractManagerFacade
         /**
          * @var LooseContractManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(LooseContractManagerInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(LooseContractManagerInterface::class);
         return $service;
     }
 }

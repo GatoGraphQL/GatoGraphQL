@@ -14,7 +14,7 @@ class DefinitionManagerFacade
         /**
          * @var DefinitionManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(DefinitionManagerInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(DefinitionManagerInterface::class);
         return $service;
     }
 }

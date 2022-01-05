@@ -14,7 +14,7 @@ class PersistedQueryEndpointBlockRegistryFacade
         /**
          * @var PersistedQueryEndpointBlockRegistryInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(PersistedQueryEndpointBlockRegistryInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(PersistedQueryEndpointBlockRegistryInterface::class);
         return $service;
     }
 }

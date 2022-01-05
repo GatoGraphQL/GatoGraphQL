@@ -14,7 +14,7 @@ class FileRendererFacade
         /**
          * @var FileRendererInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(FileRendererInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(FileRendererInterface::class);
         return $service;
     }
 }

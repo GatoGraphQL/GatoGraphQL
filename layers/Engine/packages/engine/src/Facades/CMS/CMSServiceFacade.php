@@ -14,7 +14,7 @@ class CMSServiceFacade
         /**
          * @var CMSServiceInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(CMSServiceInterface::class);
+        $service = \PoP\Engine\App::getContainerBuilderFactory()->getInstance()->get(CMSServiceInterface::class);
         return $service;
     }
 }

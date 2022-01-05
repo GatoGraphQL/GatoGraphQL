@@ -14,7 +14,7 @@ class ModuleFilterManagerFacade
         /**
          * @var ModuleFilterManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(ModuleFilterManagerInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(ModuleFilterManagerInterface::class);
         return $service;
     }
 }

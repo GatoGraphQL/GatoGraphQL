@@ -14,7 +14,7 @@ class FeedbackMessageStoreFacade
         /**
          * @var FeedbackMessageStoreInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(FeedbackMessageStoreInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(FeedbackMessageStoreInterface::class);
         return $service;
     }
 }

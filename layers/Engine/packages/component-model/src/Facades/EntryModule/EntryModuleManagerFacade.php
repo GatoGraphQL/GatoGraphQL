@@ -14,7 +14,7 @@ class EntryModuleManagerFacade
         /**
          * @var EntryModuleManagerInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(EntryModuleManagerInterface::class);
+        $service = \PoP\Root\App::getContainerBuilderFactory()->getInstance()->get(EntryModuleManagerInterface::class);
         return $service;
     }
 }
