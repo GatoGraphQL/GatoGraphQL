@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Error;
 
-use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\BasicService\BasicServiceTrait;
+use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
+use PoP\GraphQLParser\Response\OutputServiceInterface;
 use stdClass;
 
 class ErrorProvider implements ErrorProviderInterface
@@ -13,6 +14,7 @@ class ErrorProvider implements ErrorProviderInterface
     use BasicServiceTrait;
 
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
+    private ?OutputServiceInterface $outputService = null;
 
     final public function setObjectSerializationManager(ObjectSerializationManagerInterface $objectSerializationManager): void
     {
@@ -21,6 +23,14 @@ class ErrorProvider implements ErrorProviderInterface
     final protected function getObjectSerializationManager(): ObjectSerializationManagerInterface
     {
         return $this->objectSerializationManager ??= $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
+    }
+    final public function setOutputService(OutputServiceInterface $outputService): void
+    {
+        $this->outputService = $outputService;
+    }
+    final protected function getOutputService(): OutputServiceInterface
+    {
+        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
     }
 
     /**
@@ -81,21 +91,6 @@ class ErrorProvider implements ErrorProviderInterface
     }
 
     /**
-     * Encode the array, and trim to 500 chars max
-     *
-     * @param mixed[] $value
-     */
-    public function jsonEncodeArrayOrStdClassValue(array|stdClass $value): string
-    {
-        return mb_strimwidth(
-            json_encode($value),
-            0,
-            500,
-            $this->__('...', 'component-model')
-        );
-    }
-
-    /**
      * Return an error to indicate that a non-array field is returning an array value
      */
     public function getMustNotBeArrayFieldError(string $fieldName, array $value): Error
@@ -106,7 +101,7 @@ class ErrorProvider implements ErrorProviderInterface
             sprintf(
                 $this->__('Field \'%s\' must not return an array, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
-                $this->jsonEncodeArrayOrStdClassValue($value)
+                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
             )
         );
     }
@@ -117,7 +112,7 @@ class ErrorProvider implements ErrorProviderInterface
     public function getMustBeArrayFieldError(string $fieldName, mixed $value): Error
     {
         if ($value instanceof stdClass) {
-            $valueAsString = $this->jsonEncodeArrayOrStdClassValue($value);
+            $valueAsString = $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value);
         } elseif (is_object($value)) {
             $valueAsString = $this->getObjectSerializationManager()->serialize($value);
         } else {
@@ -157,7 +152,7 @@ class ErrorProvider implements ErrorProviderInterface
             sprintf(
                 $this->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
-                $this->jsonEncodeArrayOrStdClassValue($value)
+                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
             )
         );
     }
@@ -170,7 +165,7 @@ class ErrorProvider implements ErrorProviderInterface
             sprintf(
                 $this->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
-                $this->jsonEncodeArrayOrStdClassValue($value)
+                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
             )
         );
     }
