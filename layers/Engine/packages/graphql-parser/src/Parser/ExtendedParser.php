@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser;
 
-use PoP\Root\App;
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
-use PoP\ComponentModel\Error\ErrorProviderInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Parser\Ast\MetaDirective;
+use PoP\GraphQLParser\Response\OutputServiceInterface;
+use PoP\Root\App;
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
@@ -20,7 +20,7 @@ use stdClass;
 class ExtendedParser extends Parser implements ExtendedParserInterface
 {
     private ?MetaDirectiveRegistryInterface $metaDirectiveRegistry = null;
-    private ?ErrorProviderInterface $errorProvider = null;
+    private ?OutputServiceInterface $outputService = null;
 
     final public function setMetaDirectiveRegistry(MetaDirectiveRegistryInterface $metaDirectiveRegistry): void
     {
@@ -30,13 +30,13 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
     {
         return $this->metaDirectiveRegistry ??= $this->instanceManager->getInstance(MetaDirectiveRegistryInterface::class);
     }
-    final public function setErrorProvider(ErrorProviderInterface $errorProvider): void
+    final public function setOutputService(OutputServiceInterface $outputService): void
     {
-        $this->errorProvider = $errorProvider;
+        $this->outputService = $outputService;
     }
-    final protected function getErrorProvider(): ErrorProviderInterface
+    final protected function getOutputService(): OutputServiceInterface
     {
-        return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
+        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
     }
 
     /**
@@ -232,7 +232,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
             $argument->getName(),
             $directive->getName(),
             is_array($itemValue) || ($itemValue instanceof stdClass)
-                ? $this->getErrorProvider()->jsonEncodeArrayOrStdClassValue($itemValue)
+                ? $this->getOutputService()->jsonEncodeArrayOrStdClassValue($itemValue)
                 : $itemValue
         );
     }
