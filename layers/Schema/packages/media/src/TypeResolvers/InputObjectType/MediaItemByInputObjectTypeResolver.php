@@ -28,7 +28,7 @@ class MediaItemByInputObjectTypeResolver extends AbstractOneofQueryableInputObje
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Oneof input to specify the property and data to fetch a media item', 'media');
+        return $this->__('Oneof input to specify the property and data to fetch a media item', 'media');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -41,7 +41,7 @@ class MediaItemByInputObjectTypeResolver extends AbstractOneofQueryableInputObje
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->getTranslationAPI()->__('Query by media item ID', 'users'),
+            'id' => $this->__('Query by media item ID', 'users'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

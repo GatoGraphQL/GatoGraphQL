@@ -92,10 +92,10 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->getTranslationAPI()->__('Menu\'s name', 'pop-menus'),
-            'slug' => $this->getTranslationAPI()->__('Menu\'s slug', 'pop-menus'),
-            'count' => $this->getTranslationAPI()->__('Number of items contained in the menu', 'pop-menus'),
-            'locations' => $this->getTranslationAPI()->__('To which locations has the menu been assigned to', 'pop-menus'),
+            'name' => $this->__('Menu\'s name', 'pop-menus'),
+            'slug' => $this->__('Menu\'s slug', 'pop-menus'),
+            'count' => $this->__('Number of items contained in the menu', 'pop-menus'),
+            'locations' => $this->__('To which locations has the menu been assigned to', 'pop-menus'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

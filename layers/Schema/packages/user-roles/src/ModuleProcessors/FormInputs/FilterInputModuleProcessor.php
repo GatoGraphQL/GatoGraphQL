@@ -76,8 +76,8 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_USER_ROLES => $this->getTranslationAPI()->__('Get the users with given roles', 'user-roles'),
-            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getTranslationAPI()->__('Get the users without the given roles', 'user-roles'),
+            self::MODULE_FILTERINPUT_USER_ROLES => $this->__('Get the users with given roles', 'user-roles'),
+            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => $this->__('Get the users without the given roles', 'user-roles'),
             default => null,
         };
     }

@@ -42,10 +42,10 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
         }
 
         if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
-            $errors[] = $this->getTranslationAPI()->__('The custom post ID is missing.', 'custompostmedia-mutations');
+            $errors[] = $this->__('The custom post ID is missing.', 'custompostmedia-mutations');
         }
         if (!$form_data[MutationInputProperties::MEDIA_ITEM_ID]) {
-            $errors[] = $this->getTranslationAPI()->__('The media item ID is missing.', 'custompostmedia-mutations');
+            $errors[] = $this->__('The media item ID is missing.', 'custompostmedia-mutations');
         }
         return $errors;
     }

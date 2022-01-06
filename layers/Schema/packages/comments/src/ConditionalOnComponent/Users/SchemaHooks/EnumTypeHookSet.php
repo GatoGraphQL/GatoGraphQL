@@ -55,7 +55,7 @@ class EnumTypeHookSet extends AbstractHookSet
             return $enumValueDescription;
         }
         return match ($enumValue) {
-            CommentOrderBy::AUTHOR => $this->getTranslationAPI()->__('Order by comment author', 'comments'),
+            CommentOrderBy::AUTHOR => $this->__('Order by comment author', 'comments'),
             default => $enumValueDescription,
         };
     }

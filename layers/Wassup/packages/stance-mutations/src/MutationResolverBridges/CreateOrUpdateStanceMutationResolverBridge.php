@@ -80,7 +80,7 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
         $feedback_title = \PoP_UserStance_PostNameUtils::getNameUc();
         if ($referenced) {
             return sprintf(
-                $this->getTranslationAPI()->__('%1$s after reading “%2$s”', 'pop-userstance'),
+                $this->__('%1$s after reading “%2$s”', 'pop-userstance'),
                 $feedback_title,
                 $this->getCustomPostTypeAPI()->getTitle($referenced)
             );

@@ -35,7 +35,7 @@ class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInpu
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'locations' => $this->getTranslationAPI()->__('Filter menus based on locations', 'menus'),
+            'locations' => $this->__('Filter menus based on locations', 'menus'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

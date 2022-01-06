@@ -44,7 +44,7 @@ abstract class AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver ext
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to update a custom post', 'custompost-mutations');
+        return $this->__('Input to update a custom post', 'custompost-mutations');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -66,10 +66,10 @@ abstract class AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver ext
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->getTranslationAPI()->__('The ID of the custom post to update', 'custompost-mutations'),
-            MutationInputProperties::TITLE => $this->getTranslationAPI()->__('The title of the custom post', 'custompost-mutations'),
-            MutationInputProperties::CONTENT => $this->getTranslationAPI()->__('The content of the custom post', 'custompost-mutations'),
-            MutationInputProperties::STATUS => $this->getTranslationAPI()->__('The status of the custom post', 'custompost-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the custom post to update', 'custompost-mutations'),
+            MutationInputProperties::TITLE => $this->__('The title of the custom post', 'custompost-mutations'),
+            MutationInputProperties::CONTENT => $this->__('The content of the custom post', 'custompost-mutations'),
+            MutationInputProperties::STATUS => $this->__('The status of the custom post', 'custompost-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

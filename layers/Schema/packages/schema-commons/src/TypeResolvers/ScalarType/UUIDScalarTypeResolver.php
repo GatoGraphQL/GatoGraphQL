@@ -21,7 +21,7 @@ class UUIDScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('UUID (universally unique identifier) scalar, such as 25770975-0c3d-4ff0-ba27-a0f98fe9b052', 'component-model');
+        return $this->__('UUID (universally unique identifier) scalar, such as 25770975-0c3d-4ff0-ba27-a0f98fe9b052', 'component-model');
     }
 
     public function getSpecifiedByURL(): ?string
@@ -38,7 +38,7 @@ class UUIDScalarTypeResolver extends AbstractScalarTypeResolver
         if (\preg_match('/^{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}}?$/', $inputValue) !== 1) {
             return $this->getError(
                 sprintf(
-                    $this->getTranslationAPI()->__('The format for type \'%s\' is not right: it must be satisfied via regex /^{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}}?$/', 'component-model'),
+                    $this->__('The format for type \'%s\' is not right: it must be satisfied via regex /^{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}}?$/', 'component-model'),
                     $this->getMaybeNamespacedTypeName()
                 )
             );

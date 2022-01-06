@@ -50,7 +50,7 @@ class SchemaExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'isNamespaced' => $this->getTranslationAPI()->__('Is the schema namespaced?', 'graphql-server'),
+            'isNamespaced' => $this->__('Is the schema namespaced?', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

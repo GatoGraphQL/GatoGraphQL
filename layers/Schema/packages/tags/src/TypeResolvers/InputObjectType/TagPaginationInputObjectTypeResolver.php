@@ -18,7 +18,7 @@ class TagPaginationInputObjectTypeResolver extends PaginationInputObjectTypeReso
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to paginate tags', 'tags');
+        return $this->__('Input to paginate tags', 'tags');
     }
 
     protected function getDefaultLimit(): ?int

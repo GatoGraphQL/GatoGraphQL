@@ -131,17 +131,17 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'children' => $this->getTranslationAPI()->__('Menu item children items', 'menus'),
-            'label' => $this->getTranslationAPI()->__('Menu item label', 'menus'),
-            'title' => $this->getTranslationAPI()->__('Menu item title', 'menus'),
-            'localURLPath' => $this->getTranslationAPI()->__('Path of a local URL, or null if external URL', 'menus'),
-            'url' => $this->getTranslationAPI()->__('Menu item URL', 'menus'),
-            'classes' => $this->getTranslationAPI()->__('Menu item classes', 'menus'),
-            'target' => $this->getTranslationAPI()->__('Menu item target', 'menus'),
-            'description' => $this->getTranslationAPI()->__('Menu item additional attributes', 'menus'),
-            'objectID' => $this->getTranslationAPI()->__('ID of the object linked to by the menu item ', 'menus'),
-            'parentID' => $this->getTranslationAPI()->__('Menu item\'s parent ID', 'menus'),
-            'linkRelationship' => $this->getTranslationAPI()->__('Link relationship (XFN)', 'menus'),
+            'children' => $this->__('Menu item children items', 'menus'),
+            'label' => $this->__('Menu item label', 'menus'),
+            'title' => $this->__('Menu item title', 'menus'),
+            'localURLPath' => $this->__('Path of a local URL, or null if external URL', 'menus'),
+            'url' => $this->__('Menu item URL', 'menus'),
+            'classes' => $this->__('Menu item classes', 'menus'),
+            'target' => $this->__('Menu item target', 'menus'),
+            'description' => $this->__('Menu item additional attributes', 'menus'),
+            'objectID' => $this->__('ID of the object linked to by the menu item ', 'menus'),
+            'parentID' => $this->__('Menu item\'s parent ID', 'menus'),
+            'linkRelationship' => $this->__('Link relationship (XFN)', 'menus'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

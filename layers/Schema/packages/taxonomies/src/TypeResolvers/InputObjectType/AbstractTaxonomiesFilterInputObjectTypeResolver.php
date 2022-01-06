@@ -41,9 +41,9 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'search' => $this->getTranslationAPI()->__('Search for taxonomies containing the given string', 'taxonomies'),
-            'slugs' => $this->getTranslationAPI()->__('Search for taxonomies with the given slugs', 'taxonomies'),
-            'parentID' => $this->getTranslationAPI()->__('Limit results to taxonomies with the given parent ID. \'0\' means \'no parent\'', 'taxonomies'),
+            'search' => $this->__('Search for taxonomies containing the given string', 'taxonomies'),
+            'slugs' => $this->__('Search for taxonomies with the given slugs', 'taxonomies'),
+            'parentID' => $this->__('Limit results to taxonomies with the given parent ID. \'0\' means \'no parent\'', 'taxonomies'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

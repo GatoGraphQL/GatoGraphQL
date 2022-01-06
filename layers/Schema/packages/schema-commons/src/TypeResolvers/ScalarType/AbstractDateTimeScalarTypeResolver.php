@@ -19,7 +19,7 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
     public function getTypeDescription(): ?string
     {
         return sprintf(
-            $this->getTranslationAPI()->__('%s scalar. It follows the ISO 8601 specification, with format "%s")', 'schema-commons'),
+            $this->__('%s scalar. It follows the ISO 8601 specification, with format "%s")', 'schema-commons'),
             $this->getTypeName(),
             $this->getDateTimeFormat()
         );
@@ -45,7 +45,7 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
         }
         return $this->getError(
             sprintf(
-                $this->getTranslationAPI()->__('Type \'%s\' must be provided with format \'%s\'', 'component-model'),
+                $this->__('Type \'%s\' must be provided with format \'%s\'', 'component-model'),
                 $this->getMaybeNamespacedTypeName(),
                 $this->getDateTimeFormat()
             )

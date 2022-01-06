@@ -51,7 +51,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
                 if (!$this->getMetaTypeAPI()->validateIsMetaKeyAllowed($fieldArgs['key'])) {
                     return [
                         sprintf(
-                            $this->getTranslationAPI()->__('There is no key with name \'%s\'', 'commentmeta'),
+                            $this->__('There is no key with name \'%s\'', 'commentmeta'),
                             $fieldArgs['key']
                         ),
                     ];

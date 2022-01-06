@@ -116,8 +116,8 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->getTranslationAPI()->__('Custom Post Status', 'customposts'),
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getTranslationAPI()->__('Return results from Union of the Custom Post Types', 'customposts'),
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->__('Custom Post Status', 'customposts'),
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->__('Return results from Union of the Custom Post Types', 'customposts'),
             default => null,
         };
     }

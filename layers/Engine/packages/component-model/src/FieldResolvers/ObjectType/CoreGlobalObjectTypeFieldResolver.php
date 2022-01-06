@@ -74,11 +74,11 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'typeName' => $this->getTranslationAPI()->__('The object\'s type', 'pop-component-model'),
-            'namespace' => $this->getTranslationAPI()->__('The object\'s namespace', 'pop-component-model'),
-            'qualifiedTypeName' => $this->getTranslationAPI()->__('The object\'s namespace + type', 'pop-component-model'),
-            'isType' => $this->getTranslationAPI()->__('Indicate if the object is of a given type', 'pop-component-model'),
-            'implements' => $this->getTranslationAPI()->__('Indicate if the object implements a given interface', 'pop-component-model'),
+            'typeName' => $this->__('The object\'s type', 'pop-component-model'),
+            'namespace' => $this->__('The object\'s namespace', 'pop-component-model'),
+            'qualifiedTypeName' => $this->__('The object\'s namespace + type', 'pop-component-model'),
+            'isType' => $this->__('Indicate if the object is of a given type', 'pop-component-model'),
+            'implements' => $this->__('Indicate if the object implements a given interface', 'pop-component-model'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -99,8 +99,8 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['isType' => 'type'] => $this->getTranslationAPI()->__('The type name to compare against', 'component-model'),
-            ['implements' => 'interface'] => $this->getTranslationAPI()->__('The interface name to compare against', 'component-model'),
+            ['isType' => 'type'] => $this->__('The type name to compare against', 'component-model'),
+            ['implements' => 'interface'] => $this->__('The interface name to compare against', 'component-model'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

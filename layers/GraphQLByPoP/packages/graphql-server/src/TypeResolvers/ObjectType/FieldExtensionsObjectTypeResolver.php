@@ -13,6 +13,6 @@ class FieldExtensionsObjectTypeResolver extends AbstractSchemaElementExtensionsO
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Extensions (custom metadata) added to the field', 'graphql-server');
+        return $this->__('Extensions (custom metadata) added to the field', 'graphql-server');
     }
 }

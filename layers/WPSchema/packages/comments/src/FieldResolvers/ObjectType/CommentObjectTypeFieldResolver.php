@@ -53,8 +53,8 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'karma' => $this->getTranslationAPI()->__('Comment karma', 'comments'),
-            'authorIP' => $this->getTranslationAPI()->__('The author IP', 'comments'),
+            'karma' => $this->__('Comment karma', 'comments'),
+            'authorIP' => $this->__('The author IP', 'comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

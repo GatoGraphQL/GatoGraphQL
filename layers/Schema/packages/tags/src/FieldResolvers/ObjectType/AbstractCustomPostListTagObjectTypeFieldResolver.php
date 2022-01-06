@@ -13,8 +13,8 @@ abstract class AbstractCustomPostListTagObjectTypeFieldResolver extends Abstract
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'customPosts' => $this->getTranslationAPI()->__('Custom posts which contain this tag', 'pop-tags'),
-            'customPostCount' => $this->getTranslationAPI()->__('Number of custom posts which contain this tag', 'pop-tags'),
+            'customPosts' => $this->__('Custom posts which contain this tag', 'pop-tags'),
+            'customPostCount' => $this->__('Number of custom posts which contain this tag', 'pop-tags'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

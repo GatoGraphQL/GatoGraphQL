@@ -305,11 +305,11 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 if ($notImplementingInterfaceTypeResolvers) {
                     throw new Exception(
                         sprintf(
-                            $this->getTranslationAPI()->__('Union Type \'%s\' is defined to implement interface \'%s\', hence its Type members must also satisfy this interface, but the following ones do not: \'%s\'', 'component-model'),
+                            $this->__('Union Type \'%s\' is defined to implement interface \'%s\', hence its Type members must also satisfy this interface, but the following ones do not: \'%s\'', 'component-model'),
                             $this->getMaybeNamespacedTypeName(),
                             $interfaceTypeResolver->getMaybeNamespacedTypeName(),
                             implode(
-                                $this->getTranslationAPI()->__('\', \''),
+                                $this->__('\', \''),
                                 array_map(
                                     fn (ObjectTypeResolverInterface $objectTypeResolver) => $objectTypeResolver->getMaybeNamespacedTypeName(),
                                     $notImplementingInterfaceTypeResolvers
@@ -374,7 +374,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return new Error(
             'unresolved-resultitem-id',
             sprintf(
-                $this->getTranslationAPI()->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'pop-component-model'),
+                $this->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'pop-component-model'),
                 (string) $objectID
             )
         );
@@ -385,7 +385,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return new Error(
             'unresolved-resultitem',
             sprintf(
-                $this->getTranslationAPI()->__('No TypeResolver resolves object \'%s\'', 'pop-component-model'),
+                $this->__('No TypeResolver resolves object \'%s\'', 'pop-component-model'),
                 json_encode($object)
             )
         );

@@ -38,7 +38,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Union of \'custom post\' type resolvers', 'customposts');
+        return $this->__('Union of \'custom post\' type resolvers', 'customposts');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

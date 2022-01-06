@@ -33,7 +33,7 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->getTranslationAPI()->__('You have stopped following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->__('You have stopped following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $this->getUserTypeAPI()->getUserDisplayName($result_id)
         );
     }

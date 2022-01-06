@@ -104,7 +104,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $objectErrors[(string)$id][] = [
                     Tokens::PATH => ['id'],
                     Tokens::MESSAGE => sprintf(
-                        $this->getTranslationAPI()->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
+                        $this->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
                         $id
                     ),
                 ];
@@ -249,6 +249,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->getTranslationAPI()->__('Resolve the value of the field and merge it into results. This directive is already included by the engine, since its execution is mandatory', 'component-model');
+        return $this->__('Resolve the value of the field and merge it into results. This directive is already included by the engine, since its execution is mandatory', 'component-model');
     }
 }

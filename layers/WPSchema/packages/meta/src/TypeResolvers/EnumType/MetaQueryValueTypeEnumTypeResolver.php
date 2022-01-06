@@ -21,7 +21,7 @@ class MetaQueryValueTypeEnumTypeResolver extends AbstractEnumTypeResolver
 
     public function getTypeDescription(): string
     {
-        return $this->getTranslationAPI()->__('Custom field type', 'meta');
+        return $this->__('Custom field type', 'meta');
     }
 
     /**

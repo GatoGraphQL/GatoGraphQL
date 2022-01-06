@@ -54,7 +54,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return sprintf(
-            $this->getTranslationAPI()->__('Place the current object\'s data under expression `%s`, making it accessible to fields and directives through helper function `getPropertyFromSelf`', 'component-model'),
+            $this->__('Place the current object\'s data under expression `%s`, making it accessible to fields and directives through helper function `getPropertyFromSelf`', 'component-model'),
             QueryHelpers::getExpressionQuery(Expressions::NAME_SELF)
         );
     }
@@ -62,7 +62,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
     public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            Expressions::NAME_SELF => $this->getTranslationAPI()->__('Object containing all properties for the current object, fetched either in the current or a previous iteration. These properties can be accessed through helper function `getSelfProp`', 'component-model'),
+            Expressions::NAME_SELF => $this->__('Object containing all properties for the current object, fetched either in the current or a previous iteration. These properties can be accessed through helper function `getSelfProp`', 'component-model'),
         ];
     }
 

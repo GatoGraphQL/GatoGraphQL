@@ -34,14 +34,14 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
     public function getTypeDescription(): ?string
     {
         return sprintf(
-            $this->getTranslationAPI()->__('Oneof input to specify the property and data to fetch %s', 'customposts'),
+            $this->__('Oneof input to specify the property and data to fetch %s', 'customposts'),
             $this->getTypeDescriptionCustomPostEntity()
         );
     }
 
     protected function getTypeDescriptionCustomPostEntity(): string
     {
-        return $this->getTranslationAPI()->__('a custom post', 'customposts');
+        return $this->__('a custom post', 'customposts');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -55,8 +55,8 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->getTranslationAPI()->__('Query by custom post ID', 'customposts'),
-            'slug' => $this->getTranslationAPI()->__('Query by custom post slug', 'customposts'),
+            'id' => $this->__('Query by custom post ID', 'customposts'),
+            'slug' => $this->__('Query by custom post slug', 'customposts'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

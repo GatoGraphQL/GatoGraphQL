@@ -13,6 +13,6 @@ class CustomPostTagsFilterInputObjectTypeResolver extends AbstractTagsFilterInpu
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter tags from a custom post', 'tags');
+        return $this->__('Input to filter tags from a custom post', 'tags');
     }
 }

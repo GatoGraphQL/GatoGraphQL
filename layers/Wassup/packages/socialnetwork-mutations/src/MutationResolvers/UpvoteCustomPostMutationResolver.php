@@ -32,7 +32,7 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS);
             if (in_array($target_id, $value)) {
                 $errors[] = sprintf(
-                    $this->getTranslationAPI()->__('You have already up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->__('You have already up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $this->getCustomPostTypeAPI()->getTitle($target_id)
                 );
             }

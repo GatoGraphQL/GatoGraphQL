@@ -34,7 +34,7 @@ class LoginUserByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTy
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'credentials' => $this->getTranslationAPI()->__('Login using the website credentials', 'user-state-mutations'),
+            'credentials' => $this->__('Login using the website credentials', 'user-state-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

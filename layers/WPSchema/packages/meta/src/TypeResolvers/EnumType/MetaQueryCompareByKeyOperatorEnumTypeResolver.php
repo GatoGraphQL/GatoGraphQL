@@ -21,7 +21,7 @@ class MetaQueryCompareByKeyOperatorEnumTypeResolver extends AbstractEnumTypeReso
 
     public function getTypeDescription(): string
     {
-        return $this->getTranslationAPI()->__('Operators to compare against the meta key', 'meta');
+        return $this->__('Operators to compare against the meta key', 'meta');
     }
 
     /**

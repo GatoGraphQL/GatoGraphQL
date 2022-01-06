@@ -15,6 +15,6 @@ class PostByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeR
 
     protected function getTypeDescriptionCustomPostEntity(): string
     {
-        return $this->getTranslationAPI()->__('a post', 'posts');
+        return $this->__('a post', 'posts');
     }
 }

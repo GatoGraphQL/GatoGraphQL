@@ -111,8 +111,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'roles' => $this->getTranslationAPI()->__('Filter users by role(s)', 'user-roles'),
-            'excludeRoles' => $this->getTranslationAPI()->__('Filter users by excluding role(s)', 'user-roles'),
+            'roles' => $this->__('Filter users by role(s)', 'user-roles'),
+            'excludeRoles' => $this->__('Filter users by excluding role(s)', 'user-roles'),
             default => $inputFieldDescription,
         };
     }

@@ -33,7 +33,7 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->getTranslationAPI()->__('You have up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->__('You have up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $this->getCustomPostTypeAPI()->getTitle($result_id)
         );
     }

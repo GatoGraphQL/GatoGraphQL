@@ -13,7 +13,7 @@ class RootMyCustomPostsFilterInputObjectTypeResolver extends AbstractMyCustomPos
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter the logged-in user\'s custom posts', 'custompost-mutations');
+        return $this->__('Input to filter the logged-in user\'s custom posts', 'custompost-mutations');
     }
 
     protected function addCustomPostInputFields(): bool

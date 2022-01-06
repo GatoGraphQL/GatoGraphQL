@@ -120,12 +120,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'roles' => $this->getTranslationAPI()->__('User roles', 'user-roles'),
-            'capabilities' => $this->getTranslationAPI()->__('User capabilities', 'user-roles'),
-            'hasRole' => $this->getTranslationAPI()->__('Does the user have a specific role?', 'user-roles'),
-            'hasAnyRole' => $this->getTranslationAPI()->__('Does the user have any role from a provided list?', 'user-roles'),
-            'hasCapability' => $this->getTranslationAPI()->__('Does the user have a specific capability?', 'user-roles'),
-            'hasAnyCapability' => $this->getTranslationAPI()->__('Does the user have any capability from a provided list?', 'user-roles'),
+            'roles' => $this->__('User roles', 'user-roles'),
+            'capabilities' => $this->__('User capabilities', 'user-roles'),
+            'hasRole' => $this->__('Does the user have a specific role?', 'user-roles'),
+            'hasAnyRole' => $this->__('Does the user have any role from a provided list?', 'user-roles'),
+            'hasCapability' => $this->__('Does the user have a specific capability?', 'user-roles'),
+            'hasAnyCapability' => $this->__('Does the user have any capability from a provided list?', 'user-roles'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -152,10 +152,10 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['hasRole' => 'role'] => $this->getTranslationAPI()->__('User role to check against', 'user-roles'),
-            ['hasAnyRole' => 'roles'] => $this->getTranslationAPI()->__('User roles to check against', 'user-roles'),
-            ['hasCapability' => 'capability'] => $this->getTranslationAPI()->__('User capability to check against', 'user-roles'),
-            ['hasAnyCapability' => 'capabilities'] => $this->getTranslationAPI()->__('User capabilities to check against', 'user-roles'),
+            ['hasRole' => 'role'] => $this->__('User role to check against', 'user-roles'),
+            ['hasAnyRole' => 'roles'] => $this->__('User roles to check against', 'user-roles'),
+            ['hasCapability' => 'capability'] => $this->__('User capability to check against', 'user-roles'),
+            ['hasAnyCapability' => 'capabilities'] => $this->__('User capabilities to check against', 'user-roles'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

@@ -30,7 +30,7 @@ class RootGenericCustomPostsFilterInputObjectTypeResolver extends AbstractCustom
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter generic custom posts', 'genericcustomposts');
+        return $this->__('Input to filter generic custom posts', 'genericcustomposts');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -46,7 +46,7 @@ class RootGenericCustomPostsFilterInputObjectTypeResolver extends AbstractCustom
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'customPostTypes' => $this->getTranslationAPI()->__('Filter generic custom posts of given types', 'genericcustomposts'),
+            'customPostTypes' => $this->__('Filter generic custom posts of given types', 'genericcustomposts'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

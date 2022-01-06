@@ -40,7 +40,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'loggedInUserID' => $this->getTranslationAPI()->__('The logged-in user\'s ID', 'user-state'),
+            'loggedInUserID' => $this->__('The logged-in user\'s ID', 'user-state'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

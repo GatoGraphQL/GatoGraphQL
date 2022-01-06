@@ -29,9 +29,9 @@ class MediaItemOrderByEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            MediaItemOrderBy::ID => $this->getTranslationAPI()->__('Order by ID', 'media'),
-            MediaItemOrderBy::TITLE => $this->getTranslationAPI()->__('Order by title', 'media'),
-            MediaItemOrderBy::DATE => $this->getTranslationAPI()->__('Order by date', 'media'),
+            MediaItemOrderBy::ID => $this->__('Order by ID', 'media'),
+            MediaItemOrderBy::TITLE => $this->__('Order by title', 'media'),
+            MediaItemOrderBy::DATE => $this->__('Order by date', 'media'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

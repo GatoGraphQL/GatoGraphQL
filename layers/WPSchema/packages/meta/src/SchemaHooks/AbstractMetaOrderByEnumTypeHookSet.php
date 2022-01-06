@@ -58,7 +58,7 @@ abstract class AbstractMetaOrderByEnumTypeHookSet extends AbstractHookSet
             return $enumValueDescription;
         }
         return match ($enumValue) {
-            MetaOrderBy::META_VALUE => $this->getTranslationAPI()->__('Order by meta value. See description for ‘meta_value‘ in: https://developer.wordpress.org/reference/classes/wp_query/#order-orderby-parameters', 'comments'),
+            MetaOrderBy::META_VALUE => $this->__('Order by meta value. See description for ‘meta_value‘ in: https://developer.wordpress.org/reference/classes/wp_query/#order-orderby-parameters', 'comments'),
             default => $enumValueDescription,
         };
     }

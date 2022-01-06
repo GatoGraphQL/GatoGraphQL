@@ -141,20 +141,20 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'src' => $this->getTranslationAPI()->__('Media element URL source', 'pop-media'),
-            'srcSet' => $this->getTranslationAPI()->__('Media element URL srcset', 'pop-media'),
-            'width' => $this->getTranslationAPI()->__('Media element\'s width', 'pop-media'),
-            'height' => $this->getTranslationAPI()->__('Media element\'s height', 'pop-media'),
-            'sizes' => $this->getTranslationAPI()->__('Media element\'s ‘sizes’ attribute value for an image', 'pop-media'),
-            'title' => $this->getTranslationAPI()->__('Media element title', 'pop-media'),
-            'caption' => $this->getTranslationAPI()->__('Media element caption', 'pop-media'),
-            'altText' => $this->getTranslationAPI()->__('Media element alt text', 'pop-media'),
-            'description' => $this->getTranslationAPI()->__('Media element description', 'pop-media'),
-            'date' => $this->getTranslationAPI()->__('Media element\'s published date', 'pop-media'),
-            'dateStr' => $this->getTranslationAPI()->__('Media element\'s published date, in String format', 'pop-media'),
-            'modifiedDate' => $this->getTranslationAPI()->__('Media element\'s modified date', 'pop-media'),
-            'modifiedDateStr' => $this->getTranslationAPI()->__('Media element\'s modified date, in String format', 'pop-media'),
-            'mimeType' => $this->getTranslationAPI()->__('Media element\'s mime type', 'pop-media'),
+            'src' => $this->__('Media element URL source', 'pop-media'),
+            'srcSet' => $this->__('Media element URL srcset', 'pop-media'),
+            'width' => $this->__('Media element\'s width', 'pop-media'),
+            'height' => $this->__('Media element\'s height', 'pop-media'),
+            'sizes' => $this->__('Media element\'s ‘sizes’ attribute value for an image', 'pop-media'),
+            'title' => $this->__('Media element title', 'pop-media'),
+            'caption' => $this->__('Media element caption', 'pop-media'),
+            'altText' => $this->__('Media element alt text', 'pop-media'),
+            'description' => $this->__('Media element description', 'pop-media'),
+            'date' => $this->__('Media element\'s published date', 'pop-media'),
+            'dateStr' => $this->__('Media element\'s published date, in String format', 'pop-media'),
+            'modifiedDate' => $this->__('Media element\'s modified date', 'pop-media'),
+            'modifiedDateStr' => $this->__('Media element\'s modified date, in String format', 'pop-media'),
+            'mimeType' => $this->__('Media element\'s mime type', 'pop-media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -178,7 +178,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'size' => $this->getTranslationAPI()->__('Size of the image', 'pop-media'),
+            'size' => $this->__('Size of the image', 'pop-media'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

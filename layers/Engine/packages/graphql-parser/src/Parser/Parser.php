@@ -22,12 +22,12 @@ class Parser extends UpstreamParser implements ParserInterface
 
     protected function getIncorrectRequestSyntaxErrorMessage(?string $syntax): string
     {
-        $errorMessage = $this->getTranslationAPI()->__('Incorrect request syntax', 'graphql-parser');
+        $errorMessage = $this->__('Incorrect request syntax', 'graphql-parser');
         if ($syntax === null) {
             return $errorMessage;
         }
         return \sprintf(
-            $this->getTranslationAPI()->__('%s: \'%s\'', 'graphql-parser'),
+            $this->__('%s: \'%s\'', 'graphql-parser'),
             $errorMessage,
             $syntax
         );
@@ -35,7 +35,7 @@ class Parser extends UpstreamParser implements ParserInterface
 
     protected function getCantParseArgumentErrorMessage(): string
     {
-        return $this->getTranslationAPI()->__('Can\'t parse argument', 'graphql-parser');
+        return $this->__('Can\'t parse argument', 'graphql-parser');
     }
 
     public function createDocument(

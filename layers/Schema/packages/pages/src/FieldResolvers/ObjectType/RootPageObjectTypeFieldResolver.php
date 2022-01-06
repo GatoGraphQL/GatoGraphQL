@@ -108,9 +108,9 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'page' => $this->getTranslationAPI()->__('Retrieve a single page', 'pages'),
-            'pages' => $this->getTranslationAPI()->__('Pages', 'pages'),
-            'pageCount' => $this->getTranslationAPI()->__('Number of pages', 'pages'),
+            'page' => $this->__('Retrieve a single page', 'pages'),
+            'pages' => $this->__('Pages', 'pages'),
+            'pageCount' => $this->__('Number of pages', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

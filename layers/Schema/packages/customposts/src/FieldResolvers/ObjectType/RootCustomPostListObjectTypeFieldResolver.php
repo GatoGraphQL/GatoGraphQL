@@ -66,7 +66,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'customPost' => $this->getTranslationAPI()->__('Query a custom post by different properties', 'customposts'),
+            'customPost' => $this->__('Query a custom post by different properties', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

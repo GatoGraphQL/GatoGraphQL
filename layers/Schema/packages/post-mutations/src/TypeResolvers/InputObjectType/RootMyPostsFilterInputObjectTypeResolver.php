@@ -16,6 +16,6 @@ class RootMyPostsFilterInputObjectTypeResolver extends AbstractMyCustomPostsFilt
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter the logged-in user\'s posts', 'post-mutations');
+        return $this->__('Input to filter the logged-in user\'s posts', 'post-mutations');
     }
 }

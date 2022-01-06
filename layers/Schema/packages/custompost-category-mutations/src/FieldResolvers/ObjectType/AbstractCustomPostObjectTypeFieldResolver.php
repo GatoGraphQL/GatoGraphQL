@@ -33,7 +33,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setCategories' => sprintf(
-                $this->getTranslationAPI()->__('Set categories on the %s', 'custompost-category-mutations'),
+                $this->__('Set categories on the %s', 'custompost-category-mutations'),
                 $this->getEntityName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),

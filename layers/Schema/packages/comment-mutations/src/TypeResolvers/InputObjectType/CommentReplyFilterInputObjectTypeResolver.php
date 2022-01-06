@@ -13,7 +13,7 @@ class CommentReplyFilterInputObjectTypeResolver extends AbstractAddCommentToCust
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to reply to a comment', 'comment-mutations');
+        return $this->__('Input to reply to a comment', 'comment-mutations');
     }
 
     protected function addCustomPostInputField(): bool

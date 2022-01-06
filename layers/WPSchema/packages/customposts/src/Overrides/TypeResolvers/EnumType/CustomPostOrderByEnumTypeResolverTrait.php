@@ -35,16 +35,16 @@ trait CustomPostOrderByEnumTypeResolverTrait
     public function getAdditionalCustomPostEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            CustomPostOrderBy::NONE => $this->getTranslationAPI()->__('Skip ordering', 'customposts'),
-            CustomPostOrderBy::COMMENT_COUNT => $this->getTranslationAPI()->__('Order by number of comments', 'customposts'),
-            CustomPostOrderBy::RANDOM => $this->getTranslationAPI()->__('Order by a random number', 'customposts'),
-            CustomPostOrderBy::MODIFIED_DATE => $this->getTranslationAPI()->__('Order by last modified date', 'customposts'),
-            CustomPostOrderBy::RELEVANCE => $this->getTranslationAPI()->__('Order by relevance', 'customposts'),
-            CustomPostOrderBy::TYPE => $this->getTranslationAPI()->__('Order by type', 'customposts'),
-            CustomPostOrderBy::PARENT => $this->getTranslationAPI()->__('Order by custom post parent id', 'customposts'),
-            CustomPostOrderBy::MENU_ORDER => $this->getTranslationAPI()->__('Order by menu order', 'customposts'),
-            // CustomPostOrderBy::POST__IN => $this->getTranslationAPI()->__('Preserve post ID order given in the post__in array', 'customposts'),
-            // CustomPostOrderBy::POST_PARENT__IN => $this->getTranslationAPI()->__('Preserve post parent order given in the ‘post_parent__in’ array', 'customposts'),
+            CustomPostOrderBy::NONE => $this->__('Skip ordering', 'customposts'),
+            CustomPostOrderBy::COMMENT_COUNT => $this->__('Order by number of comments', 'customposts'),
+            CustomPostOrderBy::RANDOM => $this->__('Order by a random number', 'customposts'),
+            CustomPostOrderBy::MODIFIED_DATE => $this->__('Order by last modified date', 'customposts'),
+            CustomPostOrderBy::RELEVANCE => $this->__('Order by relevance', 'customposts'),
+            CustomPostOrderBy::TYPE => $this->__('Order by type', 'customposts'),
+            CustomPostOrderBy::PARENT => $this->__('Order by custom post parent id', 'customposts'),
+            CustomPostOrderBy::MENU_ORDER => $this->__('Order by menu order', 'customposts'),
+            // CustomPostOrderBy::POST__IN => $this->__('Preserve post ID order given in the post__in array', 'customposts'),
+            // CustomPostOrderBy::POST_PARENT__IN => $this->__('Preserve post parent order given in the ‘post_parent__in’ array', 'customposts'),
             default => null,
         };
     }

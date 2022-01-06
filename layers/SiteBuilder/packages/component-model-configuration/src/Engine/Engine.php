@@ -172,8 +172,8 @@ class Engine extends UpstreamEngine implements EngineInterface
         // Any errors? Send them back
         if (RequestUtils::$errors) {
             $meta[Response::ERROR] = count(RequestUtils::$errors) > 1 ?
-                $this->getTranslationAPI()->__('Oops, there were some errors:', 'pop-engine') . implode('<br/>', RequestUtils::$errors)
-                : $this->getTranslationAPI()->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
+                $this->__('Oops, there were some errors:', 'pop-engine') . implode('<br/>', RequestUtils::$errors)
+                : $this->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
         }
 
         return $this->getHooksAPI()->applyFilters(

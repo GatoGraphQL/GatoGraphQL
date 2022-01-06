@@ -33,7 +33,7 @@ class UndoDownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpd
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->getTranslationAPI()->__('You have stopped down-voting <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->__('You have stopped down-voting <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $this->getCustomPostTypeAPI()->getTitle($result_id)
         );
     }

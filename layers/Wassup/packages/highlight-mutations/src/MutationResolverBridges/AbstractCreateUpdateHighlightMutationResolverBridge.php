@@ -29,12 +29,12 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
     {
         if ($referenced) {
             return sprintf(
-                $this->getTranslationAPI()->__('Highlight from “%s”', 'poptheme-wassup'),
+                $this->__('Highlight from “%s”', 'poptheme-wassup'),
                 $this->getCustomPostTypeAPI()->getTitle($referenced)
             );
         }
 
-        return $this->getTranslationAPI()->__('Highlight', 'poptheme-wassup');
+        return $this->__('Highlight', 'poptheme-wassup');
     }
 
     public function getSuccessString(string | int $result_id): ?string
@@ -44,7 +44,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
             // Give a link to the referenced post to the stance, and force it to get it from the server again
             $highlighted = Utils::getCustomPostMeta($result_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
             $success_string = sprintf(
-                $this->getTranslationAPI()->__('<a href="%s" %s>Click here to view it</a>.', 'poptheme-wassup'),
+                $this->__('<a href="%s" %s>Click here to view it</a>.', 'poptheme-wassup'),
                 $this->getCustomPostTypeAPI()->getPermalink($highlighted),
                 getReloadurlLinkattrs()
             );

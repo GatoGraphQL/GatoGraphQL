@@ -28,7 +28,7 @@ class CommentByInputObjectTypeResolver extends AbstractOneofQueryableInputObject
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Oneof input to specify the property and data to fetch a comment', 'comments');
+        return $this->__('Oneof input to specify the property and data to fetch a comment', 'comments');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -41,7 +41,7 @@ class CommentByInputObjectTypeResolver extends AbstractOneofQueryableInputObject
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->getTranslationAPI()->__('Query by comment ID', 'comments'),
+            'id' => $this->__('Query by comment ID', 'comments'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

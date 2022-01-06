@@ -21,7 +21,7 @@ class HTMLScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('HTML scalar, such as "<p>Hello <strong>world</strong>!</p>"', 'component-model');
+        return $this->__('HTML scalar, such as "<p>Hello <strong>world</strong>!</p>"', 'component-model');
     }
 
     public function getSpecifiedByURL(): ?string

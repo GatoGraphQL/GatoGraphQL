@@ -115,17 +115,17 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'status' => $this->getTranslationAPI()->__('Comment status', 'comments'),
-            'search' => $this->getTranslationAPI()->__('Search for comments containing the given string', 'comments'),
-            'dateQuery' => $this->getTranslationAPI()->__('Filter comments based on date', 'comments'),
-            'types' => $this->getTranslationAPI()->__('Filter comments based on type', 'comments'),
-            'parentID' => $this->getTranslationAPI()->__('Filter comments with the given parent IDs. \'0\' means \'no parent\'', 'comments'),
-            'parentIDs' => $this->getTranslationAPI()->__('Filter comments with the given parent ID. \'0\' means \'no parent\'', 'comments'),
-            'excludeParentIDs' => $this->getTranslationAPI()->__('Exclude comments with the given parent IDs', 'comments'),
-            'customPostID' => $this->getTranslationAPI()->__('Filter comments added to the given custom post', 'comments'),
-            'customPostIDs' => $this->getTranslationAPI()->__('Filter comments added to the given custom posts', 'comments'),
-            'excludeCustomPostIDs' => $this->getTranslationAPI()->__('Exclude comments added to the given custom posts', 'comments'),
-            'customPostTypes' => $this->getTranslationAPI()->__('Filter comments added to custom posts of given types', 'comments'),
+            'status' => $this->__('Comment status', 'comments'),
+            'search' => $this->__('Search for comments containing the given string', 'comments'),
+            'dateQuery' => $this->__('Filter comments based on date', 'comments'),
+            'types' => $this->__('Filter comments based on type', 'comments'),
+            'parentID' => $this->__('Filter comments with the given parent IDs. \'0\' means \'no parent\'', 'comments'),
+            'parentIDs' => $this->__('Filter comments with the given parent ID. \'0\' means \'no parent\'', 'comments'),
+            'excludeParentIDs' => $this->__('Exclude comments with the given parent IDs', 'comments'),
+            'customPostID' => $this->__('Filter comments added to the given custom post', 'comments'),
+            'customPostIDs' => $this->__('Filter comments added to the given custom posts', 'comments'),
+            'excludeCustomPostIDs' => $this->__('Exclude comments added to the given custom posts', 'comments'),
+            'customPostTypes' => $this->__('Filter comments added to custom posts of given types', 'comments'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

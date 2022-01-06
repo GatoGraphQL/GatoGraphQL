@@ -21,7 +21,7 @@ class MetaQueryCompareByNumericValueOperatorEnumTypeResolver extends AbstractEnu
 
     public function getTypeDescription(): string
     {
-        return $this->getTranslationAPI()->__('Operators to compare against a numeric value', 'meta');
+        return $this->__('Operators to compare against a numeric value', 'meta');
     }
 
     /**

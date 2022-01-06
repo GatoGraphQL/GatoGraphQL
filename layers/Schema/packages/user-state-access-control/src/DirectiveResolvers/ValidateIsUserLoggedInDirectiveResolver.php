@@ -23,12 +23,12 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
     protected function getValidationFailedMessage(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): string
     {
         $errorMessage = $this->isValidatingDirective() ?
-            $this->getTranslationAPI()->__('You must be logged in to access directives in field(s) \'%s\' for type \'%s\'', 'user-state') :
-            $this->getTranslationAPI()->__('You must be logged in to access field(s) \'%s\' for type \'%s\'', 'user-state');
+            $this->__('You must be logged in to access directives in field(s) \'%s\' for type \'%s\'', 'user-state') :
+            $this->__('You must be logged in to access field(s) \'%s\' for type \'%s\'', 'user-state');
         return sprintf(
             $errorMessage,
             implode(
-                $this->getTranslationAPI()->__('\', \''),
+                $this->__('\', \''),
                 $failedDataFields
             ),
             $relationalTypeResolver->getMaybeNamespacedTypeName()
@@ -37,6 +37,6 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->getTranslationAPI()->__('It validates if the user is logged-in', 'component-model');
+        return $this->__('It validates if the user is logged-in', 'component-model');
     }
 }

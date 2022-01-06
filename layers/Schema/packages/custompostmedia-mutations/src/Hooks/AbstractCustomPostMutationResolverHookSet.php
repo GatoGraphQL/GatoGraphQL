@@ -84,6 +84,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if ($inputFieldName !== MutationInputProperties::FEATUREDIMAGE_ID || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return $this->getTranslationAPI()->__('The ID of the image to set as featured', 'custompost-mutations');
+        return $this->__('The ID of the image to set as featured', 'custompost-mutations');
     }
 }

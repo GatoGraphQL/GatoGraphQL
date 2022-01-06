@@ -71,8 +71,8 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'src' => $this->getTranslationAPI()->__('Avatar source URL', 'user-avatars'),
-            'size' => $this->getTranslationAPI()->__('Avatar size', 'user-avatars'),
+            'src' => $this->__('Avatar source URL', 'user-avatars'),
+            'size' => $this->__('Avatar size', 'user-avatars'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

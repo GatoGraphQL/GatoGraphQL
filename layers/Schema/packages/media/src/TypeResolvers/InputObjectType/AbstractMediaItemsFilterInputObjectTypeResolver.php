@@ -48,9 +48,9 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'search' => $this->getTranslationAPI()->__('Search for comments containing the given string', 'comments'),
-            'dateQuery' => $this->getTranslationAPI()->__('Filter comments based on date', 'comments'),
-            'mimeTypes' => $this->getTranslationAPI()->__('Filter comments based on type', 'comments'),
+            'search' => $this->__('Search for comments containing the given string', 'comments'),
+            'dateQuery' => $this->__('Filter comments based on date', 'comments'),
+            'mimeTypes' => $this->__('Filter comments based on type', 'comments'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
