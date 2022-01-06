@@ -7,7 +7,7 @@ namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;

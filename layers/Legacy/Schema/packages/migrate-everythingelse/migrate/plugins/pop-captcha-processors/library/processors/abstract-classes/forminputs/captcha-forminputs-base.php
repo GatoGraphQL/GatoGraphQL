@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 
 abstract class PoP_Module_Processor_CaptchaFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {
