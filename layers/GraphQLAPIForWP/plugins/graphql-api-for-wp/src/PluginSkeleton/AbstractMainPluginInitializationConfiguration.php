@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\AppObjects\ContainerCacheConfiguration;
 /**
  * Base class to set the configuration for all the PoP components in the main plugin.
  */
-abstract class AbstractMainPluginConfiguration extends AbstractPluginConfiguration
+abstract class AbstractMainPluginInitializationConfiguration extends AbstractPluginInitializationConfiguration implements MainPluginInitializationConfigurationInterface
 {
     /**
      * Cache the Container Cache Configuration

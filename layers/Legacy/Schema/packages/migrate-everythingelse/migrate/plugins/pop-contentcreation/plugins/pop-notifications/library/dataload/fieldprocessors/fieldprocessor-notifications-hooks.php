@@ -29,10 +29,10 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'icon' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'icon' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'url' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'target' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'message' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'target' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'message' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

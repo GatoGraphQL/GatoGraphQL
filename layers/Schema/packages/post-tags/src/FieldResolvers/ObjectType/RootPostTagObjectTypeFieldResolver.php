@@ -9,8 +9,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPSchema\PostTags\TypeResolvers\InputObjectType\PostTagByInputObjectTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
@@ -147,10 +147,10 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'postTag' => $this->getTranslationAPI()->__('Retrieve a single post tag', 'pop-post-tags'),
-            'postTags' => $this->getTranslationAPI()->__('Post tags', 'pop-post-tags'),
-            'postTagCount' => $this->getTranslationAPI()->__('Number of post tags', 'pop-post-tags'),
-            'postTagNames' => $this->getTranslationAPI()->__('Names of the post tags', 'pop-post-tags'),
+            'postTag' => $this->__('Retrieve a single post tag', 'pop-post-tags'),
+            'postTags' => $this->__('Post tags', 'pop-post-tags'),
+            'postTagCount' => $this->__('Number of post tags', 'pop-post-tags'),
+            'postTagNames' => $this->__('Names of the post tags', 'pop-post-tags'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

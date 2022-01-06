@@ -41,7 +41,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         /** @var DirectiveResolverInterface */
         $applyFunctionDirectiveResolver = $this->instanceManager->getInstance(ApplyFunctionDirectiveResolver::class);
         return sprintf(
-            $this->getTranslationAPI()->__('Use %s instead', 'component-model'),
+            $this->__('Use %s instead', 'component-model'),
             $this->getFieldQueryInterpreter()->getFieldDirectivesAsString([
                 [
                     $forEachDirectiveResolver->getDirectiveName(),
@@ -105,7 +105,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $this->getTranslationAPI()->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
+                                $this->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
                                 $field,
                                 $fieldOutputKey,
                                 $id
@@ -115,7 +115,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $this->getTranslationAPI()->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
+                                $this->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
                                 $fieldOutputKey,
                                 $id
                             ),
@@ -139,7 +139,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $this->getTranslationAPI()->__('The value for field \'%s\' (under property \'%s\') is not an array, so execution of this directive can\'t continue', 'component-model'),
+                                $this->__('The value for field \'%s\' (under property \'%s\') is not an array, so execution of this directive can\'t continue', 'component-model'),
                                 $field,
                                 $fieldOutputKey,
                                 $id
@@ -149,7 +149,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $this->getTranslationAPI()->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'component-model'),
+                                $this->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'component-model'),
                                 $fieldOutputKey,
                                 $id
                             ),
@@ -242,7 +242,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $this->getTranslationAPI()->__('Transformation of element with key \'%s\' on array from property \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
+                                $this->__('Transformation of element with key \'%s\' on array from property \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
                                 $key,
                                 $fieldOutputKey,
                                 $id,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Menus\Overrides\TypeResolvers\InputObjectType;
 
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Menus\TypeResolvers\InputObjectType\MenuByInputObjectTypeResolver as UpstreamMenuByInputObjectTypeResolver;
 use PoPWPSchema\Menus\TypeResolvers\ScalarType\MenuLocationSelectableStringTypeResolver;
 
@@ -44,8 +44,8 @@ class MenuByInputObjectTypeResolver extends UpstreamMenuByInputObjectTypeResolve
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'slug' => $this->getTranslationAPI()->__('Query by slug', 'menus'),
-            'location' => $this->getTranslationAPI()->__('Query by location', 'menus'),
+            'slug' => $this->__('Query by slug', 'menus'),
+            'location' => $this->__('Query by location', 'menus'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

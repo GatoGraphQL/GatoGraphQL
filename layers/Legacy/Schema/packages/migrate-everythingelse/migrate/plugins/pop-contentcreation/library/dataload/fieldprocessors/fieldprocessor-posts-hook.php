@@ -34,9 +34,9 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'titleEdit' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'contentEditor' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'contentEdit' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'titleEdit' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'contentEditor' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'contentEdit' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'editURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
             'deleteURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
             'coauthors' => UserObjectTypeResolver::class,

@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPostMediaMutations\Hooks;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\BasicService\AbstractHookSet;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
@@ -84,6 +84,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if ($inputFieldName !== MutationInputProperties::FEATUREDIMAGE_ID || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return $this->getTranslationAPI()->__('The ID of the image to set as featured', 'custompost-mutations');
+        return $this->__('The ID of the image to set as featured', 'custompost-mutations');
     }
 }

@@ -19,4 +19,12 @@ trait StandaloneServiceTrait
     {
         return TranslationAPIFacade::getInstance();
     }
+
+    /**
+     * Shortcut function
+     */
+    protected function __(string $text, string $domain = 'default'): string
+    {
+        return $this->getTranslationAPI()->__($text, $domain);
+    }
 }

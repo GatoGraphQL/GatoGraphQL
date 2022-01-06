@@ -11,7 +11,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 
 class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver
 {
@@ -38,7 +38,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObj
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->getTranslationAPI()->__('Iterate all affected array items and execute the composed directives on them', 'component-model');
+        return $this->__('Iterate all affected array items and execute the composed directives on them', 'component-model');
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -54,7 +54,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObj
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'if' => $this->getTranslationAPI()->__('If provided, iterate only those items that satisfy this condition `%s`', 'component-model'),
+            'if' => $this->__('If provided, iterate only those items that satisfy this condition `%s`', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
@@ -62,8 +62,8 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObj
     public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            Expressions::NAME_KEY => $this->getTranslationAPI()->__('Key of the array element from the current iteration', 'component-model'),
-            Expressions::NAME_VALUE => $this->getTranslationAPI()->__('Value of the array element from the current iteration', 'component-model'),
+            Expressions::NAME_KEY => $this->__('Key of the array element from the current iteration', 'component-model'),
+            Expressions::NAME_VALUE => $this->__('Value of the array element from the current iteration', 'component-model'),
         ];
     }
 
@@ -100,7 +100,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObj
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $this->getTranslationAPI()->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
+                                $this->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
                                 $field,
                                 $id,
                                 $error->getMessageOrCode(),

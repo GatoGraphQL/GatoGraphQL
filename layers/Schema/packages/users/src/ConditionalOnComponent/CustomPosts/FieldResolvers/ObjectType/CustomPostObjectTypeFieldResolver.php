@@ -56,7 +56,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'author' => $this->getTranslationAPI()->__('The post\'s author', ''),
+            'author' => $this->__('The post\'s author', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

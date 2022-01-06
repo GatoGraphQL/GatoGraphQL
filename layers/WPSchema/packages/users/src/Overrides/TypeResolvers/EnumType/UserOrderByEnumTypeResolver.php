@@ -50,10 +50,10 @@ class UserOrderByEnumTypeResolver extends UpstreamUserOrderByEnumTypeResolver
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            UserOrderBy::INCLUDE => $this->getTranslationAPI()->__('Order by the included list of user IDs (requires the \'ids\' parameter)', 'users'),
-            UserOrderBy::WEBSITE_URL => $this->getTranslationAPI()->__('Order by user\'s website URL', 'users'),
-            UserOrderBy::NICENAME => $this->getTranslationAPI()->__('Order by user nicename', 'users'),
-            UserOrderBy::EMAIL => $this->getTranslationAPI()->__('Order by user email', 'users'),
+            UserOrderBy::INCLUDE => $this->__('Order by the included list of user IDs (requires the \'ids\' parameter)', 'users'),
+            UserOrderBy::WEBSITE_URL => $this->__('Order by user\'s website URL', 'users'),
+            UserOrderBy::NICENAME => $this->__('Order by user nicename', 'users'),
+            UserOrderBy::EMAIL => $this->__('Order by user email', 'users'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

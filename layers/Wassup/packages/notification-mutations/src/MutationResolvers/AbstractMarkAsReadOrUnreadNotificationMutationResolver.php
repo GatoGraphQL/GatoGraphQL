@@ -13,12 +13,12 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
         $errors = [];
         $histid = $form_data['histid'];
         if (!$histid) {
-            $errors[] = $this->getTranslationAPI()->__('This URL is incorrect.', 'pop-notifications');
+            $errors[] = $this->__('This URL is incorrect.', 'pop-notifications');
         } else {
             // $notification = AAL_Main::instance()->api->getNotification($histid);
             $notification = \PoP_Notifications_API::getNotification($histid);
             if (!$notification) {
-                $errors[] = $this->getTranslationAPI()->__('This notification does not exist.', 'pop-notifications');
+                $errors[] = $this->__('This notification does not exist.', 'pop-notifications');
             }
         }
         return $errors;

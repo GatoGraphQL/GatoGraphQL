@@ -135,17 +135,28 @@ abstract class AbstractPlugin implements PluginInterface
      */
     public function configureComponents(): void
     {
-        // Set the plugin folder on all the Extension Components
-        $componentClasses = $this->getComponentClassesToInitialize();
+        // Set the plugin folder on the plugin's Component
         $pluginFolder = dirname($this->pluginFile);
-        foreach ($componentClasses as $componentClass) {
-            if (!is_a($componentClass, PluginComponentInterface::class, true)) {
-                continue;
-            }
-            /** @var PluginComponentInterface */
-            $component = App::getComponent($componentClass);
-            $component->setPluginFolder($pluginFolder);
-        }
+        $this->getPluginComponent()->setPluginFolder($pluginFolder);
+    }
+
+    /**
+     * Plugin's Component
+     */
+    protected function getPluginComponent(): PluginComponentInterface
+    {
+        /** @var PluginComponentInterface */
+        return App::getComponent($this->getComponentClass());
+    }
+
+    /**
+     * Package's Component class, of type PluginComponentInterface.
+     * By standard, it is "NamespaceOwner\Project\Component::class"
+     */
+    protected function getComponentClass(): string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        return $classNamespace . '\\Component';
     }
 
     /**
@@ -166,7 +177,7 @@ abstract class AbstractPlugin implements PluginInterface
         // Configure the plugin. This defines hooks to set environment variables,
         // so must be executed before those hooks are triggered for first time
         // (in ComponentConfiguration classes)
-        $this->callPluginConfiguration();
+        $this->callPluginInitializationConfiguration();
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
@@ -181,7 +192,7 @@ abstract class AbstractPlugin implements PluginInterface
     /**
      * Configure the plugin.
      */
-    abstract protected function callPluginConfiguration(): void;
+    abstract protected function callPluginInitializationConfiguration(): void;
 
     /**
      * Plugin's booting

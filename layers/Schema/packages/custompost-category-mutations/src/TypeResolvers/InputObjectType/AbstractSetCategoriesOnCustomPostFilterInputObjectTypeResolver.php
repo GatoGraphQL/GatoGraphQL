@@ -6,8 +6,8 @@ namespace PoPSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
 
@@ -35,7 +35,7 @@ abstract class AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver ex
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to set categories on a custom post', 'comment-mutations');
+        return $this->__('Input to set categories on a custom post', 'comment-mutations');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -59,14 +59,14 @@ abstract class AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver ex
     {
         return match ($inputFieldName) {
             MutationInputProperties::CUSTOMPOST_ID => sprintf(
-                $this->getTranslationAPI()->__('The ID of the %s', 'custompost-category-mutations'),
+                $this->__('The ID of the %s', 'custompost-category-mutations'),
                 $this->getEntityName()
             ),
             MutationInputProperties::CATEGORY_IDS => sprintf(
-                $this->getTranslationAPI()->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
+                $this->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
                 $this->getCategoryTypeResolver()->getMaybeNamespacedTypeName()
             ),
-            MutationInputProperties::APPEND => $this->getTranslationAPI()->__('Append the categories to the existing ones?', 'custompost-category-mutations'),
+            MutationInputProperties::APPEND => $this->__('Append the categories to the existing ones?', 'custompost-category-mutations'),
             default => null,
         };
     }

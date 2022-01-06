@@ -8,7 +8,7 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 
 class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
@@ -67,7 +67,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->getTranslationAPI()->__('Include the field value in the output only if the argument \'if\' evals to `true`', 'api');
+        return $this->__('Include the field value in the output only if the argument \'if\' evals to `true`', 'api');
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -80,7 +80,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'if' => $this->getTranslationAPI()->__('Argument that must evaluate to `true` to include the field value in the output', 'api'),
+            'if' => $this->__('Argument that must evaluate to `true` to include the field value in the output', 'api'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }

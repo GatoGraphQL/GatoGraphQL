@@ -48,8 +48,8 @@ class MetaQueryCompareByArrayValueInputObjectTypeResolver extends AbstractInputO
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'value' => $this->getTranslationAPI()->__('Custom field value', 'meta'),
-            'operator' => $this->getTranslationAPI()->__('The operator to compare against', 'meta'),
+            'value' => $this->__('Custom field value', 'meta'),
+            'operator' => $this->__('The operator to compare against', 'meta'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

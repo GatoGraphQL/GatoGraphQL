@@ -25,26 +25,26 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
     {
         $errors = [];
         if (empty($form_data['name'])) {
-            $errors[] = $this->getTranslationAPI()->__('Your name cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
         if (empty($form_data['email'])) {
-            $errors[] = $this->getTranslationAPI()->__('Email cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = $this->getTranslationAPI()->__('Email format is incorrect.', 'pop-genericforms');
+            $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
         if (empty($form_data['whyflag'])) {
-            $errors[] = $this->getTranslationAPI()->__('Why flag cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->__('Why flag cannot be empty.', 'pop-genericforms');
         }
 
         if (empty($form_data['target-id'])) {
-            $errors[] = $this->getTranslationAPI()->__('The requested post cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
             $target = $this->getCustomPostTypeAPI()->getCustomPost($form_data['target-id']);
             if (!$target) {
-                $errors[] = $this->getTranslationAPI()->__('The requested post does not exist.', 'pop-genericforms');
+                $errors[] = $this->__('The requested post does not exist.', 'pop-genericforms');
             }
         }
         return $errors;
@@ -63,36 +63,36 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $to = \PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $subject = sprintf(
-            $this->getTranslationAPI()->__('[%s]: %s', 'pop-genericforms'),
+            $this->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
-            $this->getTranslationAPI()->__('Flag post', 'pop-genericforms')
+            $this->__('Flag post', 'pop-genericforms')
         );
         $placeholder = '<p><b>%s:</b> %s</p>';
         $msg = sprintf(
             '<p>%s</p>',
-            $this->getTranslationAPI()->__('New post flagged by user', 'pop-genericforms')
+            $this->__('New post flagged by user', 'pop-genericforms')
         ) . sprintf(
             $placeholder,
-            $this->getTranslationAPI()->__('Name', 'pop-genericforms'),
+            $this->__('Name', 'pop-genericforms'),
             $form_data['name']
         ) . sprintf(
             $placeholder,
-            $this->getTranslationAPI()->__('Email', 'pop-genericforms'),
+            $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
                 $form_data['email']
             )
         ) . sprintf(
             $placeholder,
-            $this->getTranslationAPI()->__('Post ID', 'pop-genericforms'),
+            $this->__('Post ID', 'pop-genericforms'),
             $form_data['target-id']
         ) . sprintf(
             $placeholder,
-            $this->getTranslationAPI()->__('Post title', 'pop-genericforms'),
+            $this->__('Post title', 'pop-genericforms'),
             $this->getCustomPostTypeAPI()->getTitle($form_data['target-id'])
         ) . sprintf(
             $placeholder,
-            $this->getTranslationAPI()->__('Why flag', 'pop-genericforms'),
+            $this->__('Why flag', 'pop-genericforms'),
             $form_data['whyflag']
         );
 

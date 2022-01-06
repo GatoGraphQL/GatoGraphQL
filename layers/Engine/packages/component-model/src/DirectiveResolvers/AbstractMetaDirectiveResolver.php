@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\GraphQLParser\Component;
+use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Root\App;
 
 abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver implements MetaDirectiveResolverInterface
 {
@@ -19,6 +22,13 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+
+    public function isServiceEnabled(): bool
+    {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->enableComposableDirectives();
     }
 
     /**
@@ -53,7 +63,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            $this->getAffectDirectivesUnderPosArgumentName() => $this->getTranslationAPI()->__('Positions of the directives to be affected, relative from this one (as an array of positive integers)', 'graphql-server'),
+            $this->getAffectDirectivesUnderPosArgumentName() => $this->__('Positions of the directives to be affected, relative from this one (as an array of positive integers)', 'graphql-server'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }

@@ -7,7 +7,7 @@ namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 
 class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObjectTypeFieldResolver
 {
@@ -40,7 +40,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'loggedInUserID' => $this->getTranslationAPI()->__('The logged-in user\'s ID', 'user-state'),
+            'loggedInUserID' => $this->__('The logged-in user\'s ID', 'user-state'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

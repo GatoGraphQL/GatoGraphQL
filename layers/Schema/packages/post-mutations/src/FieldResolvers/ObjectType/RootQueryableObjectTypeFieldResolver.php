@@ -10,7 +10,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
 use PoPSchema\PostMutations\TypeResolvers\InputObjectType\RootMyPostsFilterInputObjectTypeResolver;
@@ -134,9 +134,9 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'myPosts' => $this->getTranslationAPI()->__('Posts by the logged-in user', 'post-mutations'),
-            'myPostCount' => $this->getTranslationAPI()->__('Number of posts by the logged-in user', 'post-mutations'),
-            'myPost' => $this->getTranslationAPI()->__('Retrieve a single post by the logged-in user', 'post-mutations'),
+            'myPosts' => $this->__('Posts by the logged-in user', 'post-mutations'),
+            'myPostCount' => $this->__('Number of posts by the logged-in user', 'post-mutations'),
+            'myPost' => $this->__('Retrieve a single post by the logged-in user', 'post-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

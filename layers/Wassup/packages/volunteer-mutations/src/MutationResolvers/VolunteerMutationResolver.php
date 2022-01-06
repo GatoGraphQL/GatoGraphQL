@@ -25,27 +25,27 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     {
         $errors = [];
         if (empty($form_data['name'])) {
-            $errors[] = $this->getTranslationAPI()->__('Your name cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
         if (empty($form_data['email'])) {
-            $errors[] = $this->getTranslationAPI()->__('Email cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = $this->getTranslationAPI()->__('Email format is incorrect.', 'pop-genericforms');
+            $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
         if (empty($form_data['target-id'])) {
-            $errors[] = $this->getTranslationAPI()->__('The requested post cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
             $target = $this->getCustomPostTypeAPI()->getCustomPost($form_data['target-id']);
             if (!$target) {
-                $errors[] = $this->getTranslationAPI()->__('The requested post does not exist.', 'pop-genericforms');
+                $errors[] = $this->__('The requested post does not exist.', 'pop-genericforms');
             }
         }
 
         if (empty($form_data['whyvolunteer'])) {
-            $errors[] = $this->getTranslationAPI()->__('Why volunteer cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->__('Why volunteer cannot be empty.', 'pop-genericforms');
         }
         return $errors;
     }
@@ -63,10 +63,10 @@ class VolunteerMutationResolver extends AbstractMutationResolver
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $post_title = $this->getCustomPostTypeAPI()->getTitle($form_data['target-id']);
         $subject = sprintf(
-            $this->getTranslationAPI()->__('[%s]: %s', 'pop-genericforms'),
+            $this->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
             sprintf(
-                $this->getTranslationAPI()->__('%s applied to volunteer for %s', 'pop-genericforms'),
+                $this->__('%s applied to volunteer for %s', 'pop-genericforms'),
                 $form_data['name'],
                 $post_title
             )
@@ -74,29 +74,29 @@ class VolunteerMutationResolver extends AbstractMutationResolver
         $placeholder = '<p><b>%s:</b> %s</p>';
         $msg = sprintf(
             '<p>%s</p>',
-            $this->getTranslationAPI()->__('You have a new volunteer! Please contact the volunteer directly through the contact details below.', 'pop-genericforms')
+            $this->__('You have a new volunteer! Please contact the volunteer directly through the contact details below.', 'pop-genericforms')
         ) . sprintf(
             '<p>%s</p>',
             sprintf(
-                $this->getTranslationAPI()->__('%s applied to volunteer for: <a href="%s">%s</a>', 'pop-genericforms'),
+                $this->__('%s applied to volunteer for: <a href="%s">%s</a>', 'pop-genericforms'),
                 $form_data['name'],
                 $this->getCustomPostTypeAPI()->getPermalink($form_data['target-id']),
                 $post_title
             )
         ) . sprintf(
             $placeholder,
-            $this->getTranslationAPI()->__('Email', 'pop-genericforms'),
+            $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
                 $form_data['email']
             )
         ) . sprintf(
             $placeholder,
-            $this->getTranslationAPI()->__('Phone', 'pop-genericforms'),
+            $this->__('Phone', 'pop-genericforms'),
             $form_data['phone']
         ) . sprintf(
             $placeholder,
-            $this->getTranslationAPI()->__('Why volunteer', 'pop-genericforms'),
+            $this->__('Why volunteer', 'pop-genericforms'),
             $form_data['whyvolunteer']
         );
 

@@ -32,20 +32,20 @@ class ExecutableDocument extends UpstreamExecutableDocument
     protected function getNoOperationMatchesNameErrorMessage(string $operationName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Operation with name \'%s\' does not exist', 'graphql-parser'),
+            $this->__('Operation with name \'%s\' does not exist', 'graphql-parser'),
             $operationName
         );
     }
 
     protected function getNoOperationNameProvidedErrorMessage(): string
     {
-        return $this->getTranslationAPI()->__('The operation name must be provided', 'graphql-parser');
+        return $this->__('The operation name must be provided', 'graphql-parser');
     }
 
     protected function getVariableHasntBeenDeclaredErrorMessage(string $variableName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Variable \'%s\' hasn\'t been declared', 'graphql-parser'),
+            $this->__('Variable \'%s\' hasn\'t been declared', 'graphql-parser'),
             $variableName
         );
     }
@@ -53,7 +53,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
     protected function getVariableHasntBeenSubmittedErrorMessage(string $variableName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Variable \'%s\' hasn\'t been submitted', 'graphql-parser'),
+            $this->__('Variable \'%s\' hasn\'t been submitted', 'graphql-parser'),
             $variableName
         );
     }
@@ -61,7 +61,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
     protected function getExecuteValidationErrorMessage(string $methodName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Before executing `%s`, must call `%s`', 'graphql-parser'),
+            $this->__('Before executing `%s`, must call `%s`', 'graphql-parser'),
             $methodName,
             'validateAndInitialize'
         );

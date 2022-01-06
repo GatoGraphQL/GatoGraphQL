@@ -14,7 +14,7 @@ class Variable extends UpstreamVariable
     protected function getValueIsNotSetForVariableErrorMessage(string $variableName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Value is not set for variable \'%s\'', 'graphql-parser'),
+            $this->__('Value is not set for variable \'%s\'', 'graphql-parser'),
             $variableName
         );
     }

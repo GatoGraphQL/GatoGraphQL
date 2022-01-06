@@ -8,8 +8,8 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFiel
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractObjectTypeFieldResolverInterface;
 use PoPSchema\Categories\TypeResolvers\InputObjectType\CategoryPaginationInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -104,9 +104,9 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'children' => $this->getTranslationAPI()->__('Child categories', 'categories'),
-            'childCount' => $this->getTranslationAPI()->__('Number of child categories', 'categories'),
-            'childNames' => $this->getTranslationAPI()->__('Names of the child categories', 'categories'),
+            'children' => $this->__('Child categories', 'categories'),
+            'childCount' => $this->__('Number of child categories', 'categories'),
+            'childNames' => $this->__('Names of the child categories', 'categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

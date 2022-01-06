@@ -18,7 +18,7 @@ class UserPaginationInputObjectTypeResolver extends PaginationInputObjectTypeRes
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to paginate users', 'users');
+        return $this->__('Input to paginate users', 'users');
     }
 
     protected function getDefaultLimit(): ?int

@@ -42,7 +42,7 @@ abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface
         if (!$this->validateIsMetaKeyAllowed($key)) {
             throw new InvalidArgumentException(
                 sprintf(
-                    $this->getTranslationAPI()->__('There is no meta with key \'%s\'', 'commentmeta'),
+                    $this->__('There is no meta with key \'%s\'', 'commentmeta'),
                     $key
                 )
             );

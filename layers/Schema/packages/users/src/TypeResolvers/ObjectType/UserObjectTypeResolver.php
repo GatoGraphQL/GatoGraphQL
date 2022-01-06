@@ -38,7 +38,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Representation of a user', 'users');
+        return $this->__('Representation of a user', 'users');
     }
 
     public function getID(object $object): string | int | null

@@ -22,7 +22,6 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
-use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
 
 abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver implements InterfaceTypeFieldResolverInterface
@@ -63,7 +62,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     protected ?array $partiallyImplementedInterfaceTypeResolvers = null;
 
     private ?NameResolverInterface $nameResolver = null;
-    private ?CMSServiceInterface $cmsService = null;
     private ?SchemaNamespacingServiceInterface $schemaNamespacingService = null;
     private ?TypeRegistryInterface $typeRegistry = null;
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
@@ -77,14 +75,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     final protected function getNameResolver(): NameResolverInterface
     {
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
-    }
-    final public function setCMSService(CMSServiceInterface $cmsService): void
-    {
-        $this->cmsService = $cmsService;
-    }
-    final protected function getCMSService(): CMSServiceInterface
-    {
-        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
     final public function setSchemaNamespacingService(SchemaNamespacingServiceInterface $schemaNamespacingService): void
     {

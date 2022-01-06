@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractReflectionPropertyObjec
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\UserRoles\Component;
 use PoPSchema\UserRoles\ComponentConfiguration;
 use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
@@ -81,8 +81,8 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->getTranslationAPI()->__('The role name', 'user-roles-wp'),
-            'capabilities' => $this->getTranslationAPI()->__('Capabilities granted by the role', 'user-roles-wp'),
+            'name' => $this->__('The role name', 'user-roles-wp'),
+            'capabilities' => $this->__('Capabilities granted by the role', 'user-roles-wp'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

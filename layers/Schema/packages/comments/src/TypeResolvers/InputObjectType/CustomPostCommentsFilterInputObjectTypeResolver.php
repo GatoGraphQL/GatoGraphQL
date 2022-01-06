@@ -13,7 +13,7 @@ class CustomPostCommentsFilterInputObjectTypeResolver extends AbstractCommentsFi
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter comments from custom posts', 'comments');
+        return $this->__('Input to filter comments from custom posts', 'comments');
     }
 
     protected function addParentInputFields(): bool

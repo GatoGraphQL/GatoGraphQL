@@ -471,7 +471,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         // In that case, execute mutations only, and display a warning on the query
         if ($queries && $mutations) {
             $this->getFeedbackMessageStore()->addQueryWarning(
-                $this->getTranslationAPI()->__('Cannot execute both queries AND mutations, hence the queries have been ignored, resolving mutations only', 'graphql-query')
+                $this->__('Cannot execute both queries AND mutations, hence the queries have been ignored, resolving mutations only', 'graphql-query')
             );
         }
         /** @var OperationInterface[] $queriesOrMutations */
@@ -500,7 +500,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     ): ExecutableDocumentInterface {
         if (empty($payload)) {
             throw new InvalidArgumentException(
-                $this->getTranslationAPI()->__('Must provide an operation.', 'graphql-query')
+                $this->__('Must provide an operation.', 'graphql-query')
             );
         }
 

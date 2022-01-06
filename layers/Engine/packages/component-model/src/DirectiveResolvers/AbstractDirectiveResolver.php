@@ -239,7 +239,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             if ($nestedDirectiveSchemaErrors) {
                 $schemaError = [
                     Tokens::PATH => [$this->directive],
-                    Tokens::MESSAGE => $this->getTranslationAPI()->__('This directive can\'t be executed due to errors from its composed directives', 'component-model'),
+                    Tokens::MESSAGE => $this->__('This directive can\'t be executed due to errors from its composed directives', 'component-model'),
                 ];
                 foreach ($nestedDirectiveSchemaErrors as $nestedDirectiveSchemaError) {
                     array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $this->directive);
@@ -898,7 +898,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                  */
                 if (!$this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)) {
                     return sprintf(
-                        $this->getTranslationAPI()->__('The DirectiveResolver used to process directive \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
+                        $this->__('The DirectiveResolver used to process directive \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
                         $this->getDirectiveName(),
                         $this->getDirectiveVersion($relationalTypeResolver) ?? '',
                         $versionConstraint
@@ -1035,7 +1035,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     throw $e;
                 }
                 $failureMessage = sprintf(
-                    $this->getTranslationAPI()->__('Resolving directive \'%s\' produced an exception, with message: \'%s\'', 'component-model'),
+                    $this->__('Resolving directive \'%s\' produced an exception, with message: \'%s\'', 'component-model'),
                     $this->directive,
                     $e->getMessage()
                 );
@@ -1147,9 +1147,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             }
         } elseif ($removeFieldIfDirectiveFailed) {
             if (count($failedFields) == 1) {
-                $message = $this->getTranslationAPI()->__('%s. Field \'%s\' has been removed from the directive pipeline', 'component-model');
+                $message = $this->__('%s. Field \'%s\' has been removed from the directive pipeline', 'component-model');
             } else {
-                $message = $this->getTranslationAPI()->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
+                $message = $this->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
             }
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $failedField) {
@@ -1158,16 +1158,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         Tokens::MESSAGE => sprintf(
                             $message,
                             $failureMessage,
-                            implode($this->getTranslationAPI()->__('\', \''), $failedFields)
+                            implode($this->__('\', \''), $failedFields)
                         ),
                     ];
                 }
             }
         } else {
             if (count($failedFields) === 1) {
-                $message = $this->getTranslationAPI()->__('%s. Execution of directive \'%s\' has been ignored on field \'%s\'', 'component-model');
+                $message = $this->__('%s. Execution of directive \'%s\' has been ignored on field \'%s\'', 'component-model');
             } else {
-                $message = $this->getTranslationAPI()->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
+                $message = $this->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
             }
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $failedField) {
@@ -1177,7 +1177,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                             $message,
                             $failureMessage,
                             $directiveName,
-                            implode($this->getTranslationAPI()->__('\', \''), $failedFields)
+                            implode($this->__('\', \''), $failedFields)
                         ),
                     ];
                 }

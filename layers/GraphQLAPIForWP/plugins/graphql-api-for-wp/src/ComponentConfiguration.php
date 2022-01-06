@@ -18,7 +18,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     //     $envVariable = Environment::MODULE_URL_BASE;
     //     $defaultValue = 'https://graphql-api.com/modules/';
     //     // Initialize property from the environment/hook
-    //     $this->maybeInitializeConfigurationValue(
+    //     $this->retrieveConfigurationValueOrUseDefault(
     //         $envVariable,
     //         $defaultValue
     //     );
@@ -30,18 +30,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function groupFieldsUnderTypeForPrint(): bool
     {
-        // Define properties
         $envVariable = Environment::GROUP_FIELDS_UNDER_TYPE_FOR_PRINT;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -49,16 +46,13 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function getEmptyLabel(): string
     {
-        // Define properties
         $envVariable = Environment::EMPTY_LABEL;
         $defaultValue = \__('---', 'graphql-api');
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -66,16 +60,13 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function getSettingsValueLabel(): string
     {
-        // Define properties
         $envVariable = Environment::SETTINGS_VALUE_LABEL;
         $defaultValue = \__('🟡 Default', 'graphql-api');
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -83,16 +74,13 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function getCustomEndpointSlugBase(): string
     {
-        // Define properties
         $envVariable = Environment::ENDPOINT_SLUG_BASE;
         $defaultValue = 'graphql';
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -100,16 +88,13 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function getPersistedQuerySlugBase(): string
     {
-        // Define properties
         $envVariable = Environment::PERSISTED_QUERY_SLUG_BASE;
         $defaultValue = 'graphql-query';
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -119,15 +104,12 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function getEditingAccessScheme(): ?string
     {
-        // Define properties
         $envVariable = Environment::EDITING_ACCESS_SCHEME;
         $defaultValue = null;
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
-        return $this->configuration[$envVariable];
     }
 }

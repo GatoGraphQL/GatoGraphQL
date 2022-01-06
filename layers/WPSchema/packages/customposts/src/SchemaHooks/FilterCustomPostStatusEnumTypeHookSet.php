@@ -83,9 +83,9 @@ class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
             return $enumValueDescription;
         }
         return match ($enumValue) {
-            CustomPostStatus::FUTURE => $this->getTranslationAPI()->__('Future content - custom posts to publish in the future', 'customposts'),
-            CustomPostStatus::PRIVATE => $this->getTranslationAPI()->__('Private content - not visible to users who are not logged in', 'customposts'),
-            // CustomPostStatus::ANY => $this->getTranslationAPI()->__('Custom posts with any status', 'customposts'),
+            CustomPostStatus::FUTURE => $this->__('Future content - custom posts to publish in the future', 'customposts'),
+            CustomPostStatus::PRIVATE => $this->__('Private content - not visible to users who are not logged in', 'customposts'),
+            // CustomPostStatus::ANY => $this->__('Custom posts with any status', 'customposts'),
             default => $enumValueDescription,
         };
     }

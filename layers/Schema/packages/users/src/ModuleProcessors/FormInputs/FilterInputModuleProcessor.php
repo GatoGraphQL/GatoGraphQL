@@ -8,7 +8,7 @@ use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\Users\FilterInputProcessors\FilterInputProcessor;
 
@@ -90,8 +90,8 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_NAME => $this->getTranslationAPI()->__('Search users whose name contains this string', 'pop-users'),
-            self::MODULE_FILTERINPUT_EMAILS => $this->getTranslationAPI()->__('Search users with any of the provided emails', 'pop-users'),
+            self::MODULE_FILTERINPUT_NAME => $this->__('Search users whose name contains this string', 'pop-users'),
+            self::MODULE_FILTERINPUT_EMAILS => $this->__('Search users with any of the provided emails', 'pop-users'),
             default => null,
         };
     }

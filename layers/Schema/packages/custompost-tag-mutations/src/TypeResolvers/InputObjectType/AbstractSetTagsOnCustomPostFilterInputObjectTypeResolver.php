@@ -6,9 +6,9 @@ namespace PoPSchema\CustomPostTagMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver
@@ -44,7 +44,7 @@ abstract class AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver extends 
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to set tags on a custom post', 'comment-mutations');
+        return $this->__('Input to set tags on a custom post', 'comment-mutations');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -67,11 +67,11 @@ abstract class AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver extends 
     {
         return match ($inputFieldName) {
             MutationInputProperties::CUSTOMPOST_ID => sprintf(
-                $this->getTranslationAPI()->__('The ID of the %s', 'custompost-tag-mutations'),
+                $this->__('The ID of the %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
             ),
-            MutationInputProperties::TAGS => $this->getTranslationAPI()->__('The tags to set', 'custompost-tag-mutations'),
-            MutationInputProperties::APPEND => $this->getTranslationAPI()->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
+            MutationInputProperties::TAGS => $this->__('The tags to set', 'custompost-tag-mutations'),
+            MutationInputProperties::APPEND => $this->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
             default => null,
         };
     }

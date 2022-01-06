@@ -31,11 +31,11 @@ class UserOrderByEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            UserOrderBy::ID => $this->getTranslationAPI()->__('Order by ID', 'users'),
-            UserOrderBy::NAME => $this->getTranslationAPI()->__('Order by name', 'users'),
-            UserOrderBy::USERNAME => $this->getTranslationAPI()->__('Order by username (login name)', 'users'),
-            UserOrderBy::DISPLAY_NAME => $this->getTranslationAPI()->__('Order by the user display name', 'users'),
-            UserOrderBy::REGISTRATION_DATE => $this->getTranslationAPI()->__('Order by registration date', 'users'),
+            UserOrderBy::ID => $this->__('Order by ID', 'users'),
+            UserOrderBy::NAME => $this->__('Order by name', 'users'),
+            UserOrderBy::USERNAME => $this->__('Order by username (login name)', 'users'),
+            UserOrderBy::DISPLAY_NAME => $this->__('Order by the user display name', 'users'),
+            UserOrderBy::REGISTRATION_DATE => $this->__('Order by registration date', 'users'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

@@ -43,7 +43,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             $this->getSetCategoriesFieldName() => sprintf(
-                $this->getTranslationAPI()->__('Set categories on a %s', 'custompost-category-mutations'),
+                $this->__('Set categories on a %s', 'custompost-category-mutations'),
                 $this->getEntityName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),

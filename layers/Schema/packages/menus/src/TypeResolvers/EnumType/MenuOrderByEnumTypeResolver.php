@@ -29,9 +29,9 @@ class MenuOrderByEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            MenuOrderBy::ID => $this->getTranslationAPI()->__('Order by ID', 'menus'),
-            MenuOrderBy::DATE => $this->getTranslationAPI()->__('Order by date', 'menus'),
-            MenuOrderBy::NAME => $this->getTranslationAPI()->__('Order by name', 'menus'),
+            MenuOrderBy::ID => $this->__('Order by ID', 'menus'),
+            MenuOrderBy::DATE => $this->__('Order by date', 'menus'),
+            MenuOrderBy::NAME => $this->__('Order by name', 'menus'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

@@ -51,7 +51,7 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'post' => $this->getTranslationAPI()->__('Retrieve a single post', 'posts'),
+            'post' => $this->__('Retrieve a single post', 'posts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

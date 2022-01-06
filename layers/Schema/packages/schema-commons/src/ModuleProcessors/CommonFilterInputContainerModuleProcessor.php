@@ -6,6 +6,7 @@ namespace PoPSchema\SchemaCommons\ModuleProcessors;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
@@ -17,6 +18,17 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
     public const MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING = 'filterinputcontainer-date-as-string';
     public const MODULE_FILTERINPUTCONTAINER_GMTDATE = 'filterinputcontainer-utcdate';
     public const MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING = 'filterinputcontainer-utcdate-as-string';
+
+    private ?CMSServiceInterface $cmsService = null;
+
+    final public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    final protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+    }
 
     public function getModulesToProcess(): array
     {

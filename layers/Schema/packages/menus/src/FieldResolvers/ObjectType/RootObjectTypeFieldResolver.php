@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPSchema\Menus\TypeResolvers\InputObjectType\MenuByInputObjectTypeResolver;
 use PoPSchema\Menus\TypeResolvers\InputObjectType\MenuSortInputObjectTypeResolver;
@@ -105,9 +105,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'menu' => $this->getTranslationAPI()->__('Get a menu', 'menus'),
-            'menus' => $this->getTranslationAPI()->__('Get all menus', 'menus'),
-            'menuCount' => $this->getTranslationAPI()->__('Count the number of menus', 'menus'),
+            'menu' => $this->__('Get a menu', 'menus'),
+            'menus' => $this->__('Get all menus', 'menus'),
+            'menuCount' => $this->__('Count the number of menus', 'menus'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

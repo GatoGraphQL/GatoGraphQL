@@ -7,8 +7,8 @@ namespace PoPSchema\CustomPostMedia\FieldResolvers\InterfaceType;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPSchema\CustomPostMedia\TypeResolvers\InterfaceType\SupportingFeaturedImageInterfaceTypeResolver;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 
@@ -81,8 +81,8 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'hasFeaturedImage' => $this->getTranslationAPI()->__('Does the custom post have a featured image?', 'custompostmedia'),
-            'featuredImage' => $this->getTranslationAPI()->__('Featured image from the custom post', 'custompostmedia'),
+            'hasFeaturedImage' => $this->__('Does the custom post have a featured image?', 'custompostmedia'),
+            'featuredImage' => $this->__('Featured image from the custom post', 'custompostmedia'),
             default => parent::getFieldDescription($fieldName),
         };
     }

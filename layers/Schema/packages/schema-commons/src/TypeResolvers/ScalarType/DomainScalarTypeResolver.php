@@ -21,7 +21,7 @@ class DomainScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Domain scalar, such as https://mysite.com or http://www.mysite.org', 'component-model');
+        return $this->__('Domain scalar, such as https://mysite.com or http://www.mysite.org', 'component-model');
     }
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object

@@ -13,6 +13,6 @@ class RootPostsFilterInputObjectTypeResolver extends AbstractPostsFilterInputObj
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter posts', 'posts');
+        return $this->__('Input to filter posts', 'posts');
     }
 }

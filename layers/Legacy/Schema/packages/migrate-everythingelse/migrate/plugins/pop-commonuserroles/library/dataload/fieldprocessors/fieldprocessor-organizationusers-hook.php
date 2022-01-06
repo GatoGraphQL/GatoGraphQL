@@ -30,11 +30,11 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-			'contactPerson' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'contactNumber' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'organizationtypes' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'organizationcategories' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'hasOrganizationDetails' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+			'contactPerson' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'contactNumber' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'organizationtypes' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'organizationcategories' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'hasOrganizationDetails' => \PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

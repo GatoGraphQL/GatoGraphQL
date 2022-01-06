@@ -33,7 +33,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'update' => $this->getTranslationAPI()->__('Update the custom post', 'custompost-mutations'),
+            'update' => $this->__('Update the custom post', 'custompost-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

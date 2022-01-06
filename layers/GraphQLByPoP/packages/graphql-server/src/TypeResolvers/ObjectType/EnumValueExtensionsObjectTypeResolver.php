@@ -13,6 +13,6 @@ class EnumValueExtensionsObjectTypeResolver extends AbstractSchemaElementExtensi
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Extensions (custom metadata) added to the enum value', 'graphql-server');
+        return $this->__('Extensions (custom metadata) added to the enum value', 'graphql-server');
     }
 }

@@ -7,8 +7,9 @@ namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 
@@ -20,6 +21,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFilterInputModule
 
     private ?FormInputHelperServiceInterface $formInputHelperService = null;
     private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    private ?CMSServiceInterface $cmsService = null;
 
     final public function setFormInputHelperService(FormInputHelperServiceInterface $formInputHelperService): void
     {
@@ -36,6 +38,14 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFilterInputModule
     final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
     {
         return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+    }
+    final public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    final protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
     public function getModulesToProcess(): array
@@ -85,7 +95,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFilterInputModule
                 $name = $this->getName($module);
                 $subnames = $this->getInputOptions($module)['subnames'];
                 return sprintf(
-                    $this->getTranslationAPI()->__('Search for elements between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\', in format \'%s\'', 'pop-engine'),
+                    $this->__('Search for elements between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\', in format \'%s\'', 'pop-engine'),
                     $this->getFormInputHelperService()->getMultipleInputName($name, $subnames[0]),
                     $this->getFormInputHelperService()->getMultipleInputName($name, $subnames[1]),
                     $this->getCmsService()->getOption($this->getNameResolver()->getName('popcms:option:dateFormat'))

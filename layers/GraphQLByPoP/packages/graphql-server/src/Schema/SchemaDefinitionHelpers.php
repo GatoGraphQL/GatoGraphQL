@@ -18,7 +18,7 @@ class SchemaDefinitionHelpers
             $schemaDefinitionPath
         );
     }
-    public static function &advancePointerToPath(array &$schemaDefinition, array $schemaDefinitionPath)
+    public static function &advancePointerToPath(array &$schemaDefinition, array $schemaDefinitionPath): array
     {
         $schemaDefinitionPointer = &$schemaDefinition;
         foreach ($schemaDefinitionPath as $pathLevel) {

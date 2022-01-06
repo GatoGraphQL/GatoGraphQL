@@ -18,7 +18,7 @@ class CommentResponsePaginationInputObjectTypeResolver extends PaginationInputOb
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to paginate response comments', 'comments');
+        return $this->__('Input to paginate response comments', 'comments');
     }
 
     protected function getDefaultLimit(): ?int

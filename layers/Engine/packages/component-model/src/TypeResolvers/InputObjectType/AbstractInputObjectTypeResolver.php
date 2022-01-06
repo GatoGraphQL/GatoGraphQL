@@ -184,7 +184,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         if (!($inputValue instanceof stdClass)) {
             return $this->getError(
                 sprintf(
-                    $this->getTranslationAPI()->__('Input object of type \'%s\' cannot be casted from input value \'%s\'', 'component-model'),
+                    $this->__('Input object of type \'%s\' cannot be casted from input value \'%s\'', 'component-model'),
                     $this->getMaybeNamespacedTypeName(),
                     $inputValue
                 )
@@ -233,7 +233,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $errors[] = new Error(
                     $this->getErrorCode(),
                     sprintf(
-                        $this->getTranslationAPI()->__('There is no input field \'%s\' in input object \'%s\''),
+                        $this->__('There is no input field \'%s\' in input object \'%s\''),
                         $inputFieldName,
                         $this->getMaybeNamespacedTypeName()
                     ),
@@ -363,7 +363,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $errors[] = new Error(
                 $this->getErrorCode(),
                 sprintf(
-                    $this->getTranslationAPI()->__('Mandatory input field \'%s\' in input object \'%s\' has not been provided'),
+                    $this->__('Mandatory input field \'%s\' in input object \'%s\' has not been provided'),
                     $inputFieldName,
                     $this->getMaybeNamespacedTypeName()
                 ),
@@ -380,7 +380,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $errors[0]
                 : $this->getError(
                     sprintf(
-                        $this->getTranslationAPI()->__('Casting input object of type \'%s\' produced errors', 'component-model'),
+                        $this->__('Casting input object of type \'%s\' produced errors', 'component-model'),
                         $this->getMaybeNamespacedTypeName()
                     ),
                     $errors
@@ -424,7 +424,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return new Error(
             $this->getErrorCode(),
             sprintf(
-                $this->getTranslationAPI()->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
+                $this->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
                 $inputFieldName,
                 $inputFieldTypeResolver->getMaybeNamespacedTypeName()
             ),

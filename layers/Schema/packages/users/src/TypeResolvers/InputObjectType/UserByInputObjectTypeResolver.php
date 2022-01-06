@@ -6,8 +6,8 @@ namespace PoPSchema\Users\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\Users\Component;
@@ -52,7 +52,7 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Oneof input to specify the property and data to fetch a user', 'users');
+        return $this->__('Oneof input to specify the property and data to fetch a user', 'users');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -78,9 +78,9 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->getTranslationAPI()->__('Query by user ID', 'users'),
-            'username' => $this->getTranslationAPI()->__('Query by username', 'users'),
-            'email' => $this->getTranslationAPI()->__('Query by email', 'users'),
+            'id' => $this->__('Query by user ID', 'users'),
+            'username' => $this->__('Query by username', 'users'),
+            'email' => $this->__('Query by email', 'users'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

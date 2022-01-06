@@ -8,8 +8,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\BasicService\AbstractHookSet;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\PostsFilterInputObjectTypeResolverInterface;
 use PoPSchema\Tags\FilterInputProcessors\FilterInputProcessor;
@@ -92,8 +92,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'tagIDs' => $this->getTranslationAPI()->__('Get results from the tags with given IDs', 'pop-users'),
-            'tagSlugs' => $this->getTranslationAPI()->__('Get results from the tags with given slug', 'pop-users'),
+            'tagIDs' => $this->__('Get results from the tags with given IDs', 'pop-users'),
+            'tagSlugs' => $this->__('Get results from the tags with given slug', 'pop-users'),
             default => $inputFieldDescription,
         };
     }

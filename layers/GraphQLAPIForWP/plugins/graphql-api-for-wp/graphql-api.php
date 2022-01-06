@@ -17,7 +17,6 @@ GitHub Plugin URI: GraphQLAPI/graphql-api-for-wp-dist
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\PluginConfiguration;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -51,6 +50,5 @@ App::initializePlugin();
 App::getMainPluginManager()->register(new Plugin(
     __FILE__,
     $pluginVersion,
-    $pluginName,
-    new PluginConfiguration()
+    $pluginName
 ))->setup();

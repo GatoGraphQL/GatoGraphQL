@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractSetFeaturedImageOnCustomPostFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver
@@ -24,7 +24,7 @@ abstract class AbstractSetFeaturedImageOnCustomPostFilterInputObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to set the featured image on a custom post', 'custompostmedia-mutations');
+        return $this->__('Input to set the featured image on a custom post', 'custompostmedia-mutations');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -44,8 +44,8 @@ abstract class AbstractSetFeaturedImageOnCustomPostFilterInputObjectTypeResolver
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::CUSTOMPOST_ID => $this->getTranslationAPI()->__('The ID of the custom post', 'custompostmedia-mutations'),
-            MutationInputProperties::MEDIA_ITEM_ID => $this->getTranslationAPI()->__('The ID of the image to set as featured', 'custompostmedia-mutations'),
+            MutationInputProperties::CUSTOMPOST_ID => $this->__('The ID of the custom post', 'custompostmedia-mutations'),
+            MutationInputProperties::MEDIA_ITEM_ID => $this->__('The ID of the image to set as featured', 'custompostmedia-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

@@ -8,8 +8,8 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
 
 class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -71,8 +71,8 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'src' => $this->getTranslationAPI()->__('Avatar source URL', 'user-avatars'),
-            'size' => $this->getTranslationAPI()->__('Avatar size', 'user-avatars'),
+            'src' => $this->__('Avatar source URL', 'user-avatars'),
+            'size' => $this->__('Avatar size', 'user-avatars'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

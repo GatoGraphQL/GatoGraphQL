@@ -6,7 +6,7 @@ namespace PoPSchema\UserStateMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 
 class LoginCredentialsInputObjectTypeResolver extends AbstractInputObjectTypeResolver
@@ -38,8 +38,8 @@ class LoginCredentialsInputObjectTypeResolver extends AbstractInputObjectTypeRes
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::USERNAME_OR_EMAIL => $this->getTranslationAPI()->__('The username or email', 'user-state-mutations'),
-            MutationInputProperties::PASSWORD => $this->getTranslationAPI()->__('The password', 'user-state-mutations'),
+            MutationInputProperties::USERNAME_OR_EMAIL => $this->__('The username or email', 'user-state-mutations'),
+            MutationInputProperties::PASSWORD => $this->__('The password', 'user-state-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

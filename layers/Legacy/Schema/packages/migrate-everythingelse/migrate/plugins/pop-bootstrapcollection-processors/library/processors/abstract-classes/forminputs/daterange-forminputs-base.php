@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 use PoP\Engine\FormInputs\DateRangeFormInput;
 use PoP\Engine\FormInputs\DateRangeTimeFormInput;
 

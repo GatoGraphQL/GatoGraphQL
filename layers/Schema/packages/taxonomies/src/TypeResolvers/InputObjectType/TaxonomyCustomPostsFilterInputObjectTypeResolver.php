@@ -16,7 +16,7 @@ class TaxonomyCustomPostsFilterInputObjectTypeResolver extends AbstractCustomPos
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter a taxonomy\'s custom posts', 'taxonomies');
+        return $this->__('Input to filter a taxonomy\'s custom posts', 'taxonomies');
     }
 
     protected function addCustomPostInputFields(): bool

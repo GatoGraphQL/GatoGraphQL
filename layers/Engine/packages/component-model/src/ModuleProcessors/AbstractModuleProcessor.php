@@ -22,7 +22,6 @@ use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
-use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\GraphQLParser\Parser\Ast\LeafField;
 use PoP\LooseContracts\NameResolverInterface;
 
@@ -44,7 +43,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
     private ?ModuleFilterManagerInterface $moduleFilterManager = null;
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
-    private ?CMSServiceInterface $cmsService = null;
     private ?NameResolverInterface $nameResolver = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
@@ -81,14 +79,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     final protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
-    }
-    final public function setCMSService(CMSServiceInterface $cmsService): void
-    {
-        $this->cmsService = $cmsService;
-    }
-    final protected function getCMSService(): CMSServiceInterface
-    {
-        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {

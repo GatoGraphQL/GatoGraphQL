@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
@@ -139,17 +139,17 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->getTranslationAPI()->__('URL of the user\'s profile in the website', 'pop-users'),
-            'urlAbsolutePath' => $this->getTranslationAPI()->__('URL path of the user\'s profile in the website', 'pop-users'),
-            'slug' => $this->getTranslationAPI()->__('Slug of the URL of the user\'s profile in the website', 'pop-users'),
-            'username' => $this->getTranslationAPI()->__('User\'s username handle', 'pop-users'),
-            'name' => $this->getTranslationAPI()->__('Name of the user', 'pop-users'),
-            'displayName' => $this->getTranslationAPI()->__('Name of the user as displayed on the website', 'pop-users'),
-            'firstName' => $this->getTranslationAPI()->__('User\'s first name', 'pop-users'),
-            'lastName' => $this->getTranslationAPI()->__('User\'s last name', 'pop-users'),
-            'email' => $this->getTranslationAPI()->__('User\'s email', 'pop-users'),
-            'description' => $this->getTranslationAPI()->__('Description of the user', 'pop-users'),
-            'websiteURL' => $this->getTranslationAPI()->__('User\'s own website\'s URL', 'pop-users'),
+            'url' => $this->__('URL of the user\'s profile in the website', 'pop-users'),
+            'urlAbsolutePath' => $this->__('URL path of the user\'s profile in the website', 'pop-users'),
+            'slug' => $this->__('Slug of the URL of the user\'s profile in the website', 'pop-users'),
+            'username' => $this->__('User\'s username handle', 'pop-users'),
+            'name' => $this->__('Name of the user', 'pop-users'),
+            'displayName' => $this->__('Name of the user as displayed on the website', 'pop-users'),
+            'firstName' => $this->__('User\'s first name', 'pop-users'),
+            'lastName' => $this->__('User\'s last name', 'pop-users'),
+            'email' => $this->__('User\'s email', 'pop-users'),
+            'description' => $this->__('Description of the user', 'pop-users'),
+            'websiteURL' => $this->__('User\'s own website\'s URL', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

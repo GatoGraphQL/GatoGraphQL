@@ -11,34 +11,28 @@ class ComponentConfiguration extends AbstractComponentConfiguration
 {
     public function usePrivateSchemaMode(): bool
     {
-        // Define properties
         $envVariable = Environment::USE_PRIVATE_SCHEMA_MODE;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function enableIndividualControlForPublicPrivateSchemaMode(): bool
     {
-        // Define properties
         $envVariable = Environment::ENABLE_INDIVIDUAL_CONTROL_FOR_PUBLIC_PRIVATE_SCHEMA_MODE;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**

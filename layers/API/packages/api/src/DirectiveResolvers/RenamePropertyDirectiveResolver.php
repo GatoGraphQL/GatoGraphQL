@@ -24,7 +24,7 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->getTranslationAPI()->__('Rename a property in the current object', 'component-model');
+        return $this->__('Rename a property in the current object', 'component-model');
     }
 
     /**

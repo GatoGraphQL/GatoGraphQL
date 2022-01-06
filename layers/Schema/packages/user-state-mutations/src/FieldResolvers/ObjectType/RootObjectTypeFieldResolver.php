@@ -74,8 +74,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'loginUser' => $this->getTranslationAPI()->__('Log the user in', 'user-state-mutations'),
-            'logoutUser' => $this->getTranslationAPI()->__('Log the user out', 'user-state-mutations'),
+            'loginUser' => $this->__('Log the user in', 'user-state-mutations'),
+            'logoutUser' => $this->__('Log the user out', 'user-state-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -93,7 +93,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['loginUser' => MutationInputProperties::BY] => $this->getTranslationAPI()->__('Choose which credentials to use to log-in, and provide them', 'user-state-mutations'),
+            ['loginUser' => MutationInputProperties::BY] => $this->__('Choose which credentials to use to log-in, and provide them', 'user-state-mutations'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

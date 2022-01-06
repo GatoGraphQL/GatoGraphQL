@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 use PoPSchema\Pages\TypeResolvers\InputObjectType\PageByInputObjectTypeResolver;
@@ -108,9 +108,9 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'page' => $this->getTranslationAPI()->__('Retrieve a single page', 'pages'),
-            'pages' => $this->getTranslationAPI()->__('Pages', 'pages'),
-            'pageCount' => $this->getTranslationAPI()->__('Number of pages', 'pages'),
+            'page' => $this->__('Retrieve a single page', 'pages'),
+            'pages' => $this->__('Pages', 'pages'),
+            'pageCount' => $this->__('Number of pages', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

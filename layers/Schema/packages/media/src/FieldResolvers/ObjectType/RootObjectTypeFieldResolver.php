@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\TypeResolvers\InputObjectType\MediaItemByInputObjectTypeResolver;
 use PoPSchema\Media\TypeResolvers\InputObjectType\MediaItemSortInputObjectTypeResolver;
@@ -108,9 +108,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'mediaItem' => $this->getTranslationAPI()->__('Get a media item', 'media'),
-            'mediaItems' => $this->getTranslationAPI()->__('Get the media items', 'media'),
-            'mediaItemCount' => $this->getTranslationAPI()->__('Number of media items', 'media'),
+            'mediaItem' => $this->__('Get a media item', 'media'),
+            'mediaItems' => $this->__('Get the media items', 'media'),
+            'mediaItemCount' => $this->__('Number of media items', 'media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -71,7 +71,7 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
             // The line is added to the description
             $docCommentDescLines[] = $docCommentLines[$count];
         }
-        return implode($this->getTranslationAPI()->__('. '), $docCommentDescLines);
+        return implode($this->__('. '), $docCommentDescLines);
     }
 
     public function getTypePropertyDocComments(): array

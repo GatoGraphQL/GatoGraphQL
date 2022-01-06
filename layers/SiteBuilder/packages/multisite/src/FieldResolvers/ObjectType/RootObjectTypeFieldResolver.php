@@ -61,8 +61,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'sites' => $this->getTranslationAPI()->__('All websites', 'multisite'),
-            'site' => $this->getTranslationAPI()->__('This website', 'multisite'),
+            'sites' => $this->__('All websites', 'multisite'),
+            'site' => $this->__('This website', 'multisite'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

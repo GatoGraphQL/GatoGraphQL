@@ -13,6 +13,6 @@ class CustomPostCategoriesFilterInputObjectTypeResolver extends AbstractCategori
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter categories from a custom post', 'categories');
+        return $this->__('Input to filter categories from a custom post', 'categories');
     }
 }

@@ -33,7 +33,7 @@ class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMu
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->getTranslationAPI()->__('You are now following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->__('You are now following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $this->getUserTypeAPI()->getUserDisplayName($result_id)
         );
     }

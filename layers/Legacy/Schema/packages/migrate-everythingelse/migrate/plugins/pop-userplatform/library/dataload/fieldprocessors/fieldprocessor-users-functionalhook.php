@@ -26,9 +26,9 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'shortDescriptionFormatted' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'contactSmall' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'userPreferences' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'shortDescriptionFormatted' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'contactSmall' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'userPreferences' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

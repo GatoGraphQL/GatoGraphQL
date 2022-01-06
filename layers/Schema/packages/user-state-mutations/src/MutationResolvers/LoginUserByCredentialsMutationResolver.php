@@ -41,10 +41,10 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         $pwd = $formData[MutationInputProperties::PASSWORD];
 
         if (!$username_or_email) {
-            $errors[] = $this->getTranslationAPI()->__('Please supply your username or email', 'user-state-mutations');
+            $errors[] = $this->__('Please supply your username or email', 'user-state-mutations');
         }
         if (!$pwd) {
-            $errors[] = $this->getTranslationAPI()->__('Please supply your password', 'user-state-mutations');
+            $errors[] = $this->__('Please supply your password', 'user-state-mutations');
         }
 
         $vars = ApplicationState::getVars();
@@ -56,7 +56,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
 
     protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
     {
-        return $this->getTranslationAPI()->__('You are already logged in', 'user-state-mutations');
+        return $this->__('You are already logged in', 'user-state-mutations');
     }
 
     public function executeMutation(array $formData): mixed
@@ -72,7 +72,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
             if (!$user) {
                 return new Error(
                     'no-user',
-                    $this->getTranslationAPI()->__('There is no user registered with that email address.')
+                    $this->__('There is no user registered with that email address.')
                 );
             }
             $username = $this->getUserTypeAPI()->getUserLogin($user);

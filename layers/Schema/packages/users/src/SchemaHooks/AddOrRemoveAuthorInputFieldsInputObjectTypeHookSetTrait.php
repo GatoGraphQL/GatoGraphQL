@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\SchemaHooks;
 
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 trait AddOrRemoveAuthorInputFieldsInputObjectTypeHookSetTrait
 {

@@ -8,7 +8,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\BasicService\AbstractHookSet;
 use PoPSchema\Categories\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\PostsFilterInputObjectTypeResolverInterface;
@@ -81,7 +81,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'categoryIDs' => $this->getTranslationAPI()->__('Get results from the categories with given IDs', 'pop-users'),
+            'categoryIDs' => $this->__('Get results from the categories with given IDs', 'pop-users'),
             default => $inputFieldDescription,
         };
     }

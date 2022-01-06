@@ -13,7 +13,7 @@ class TaxonomyTaxonomiesFilterInputObjectTypeResolver extends AbstractTaxonomies
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter child taxonomies', 'taxonomies');
+        return $this->__('Input to filter child taxonomies', 'taxonomies');
     }
 
     protected function addParentIDInputField(): bool

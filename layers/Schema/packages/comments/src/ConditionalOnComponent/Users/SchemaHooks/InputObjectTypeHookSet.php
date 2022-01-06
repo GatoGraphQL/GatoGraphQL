@@ -8,7 +8,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\BasicService\AbstractHookSet;
 use PoPSchema\Comments\ConditionalOnComponent\Users\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\Comments\TypeResolvers\InputObjectType\RootCommentsFilterInputObjectTypeResolver;
@@ -85,10 +85,10 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'authorIDs' => $this->getTranslationAPI()->__('Filter comments from the authors with given IDs', 'comments'),
-            'excludeAuthorIDs' => $this->getTranslationAPI()->__('Exclude comments from authors with given IDs', 'comments'),
-            'customPostAuthorIDs' => $this->getTranslationAPI()->__('Filter comments added to custom posts from the authors with given IDs', 'comments'),
-            'excludeCustomPostAuthorIDs' => $this->getTranslationAPI()->__('Exclude comments added to custom posts from authors with given IDs', 'comments'),
+            'authorIDs' => $this->__('Filter comments from the authors with given IDs', 'comments'),
+            'excludeAuthorIDs' => $this->__('Exclude comments from authors with given IDs', 'comments'),
+            'customPostAuthorIDs' => $this->__('Filter comments added to custom posts from the authors with given IDs', 'comments'),
+            'excludeCustomPostAuthorIDs' => $this->__('Exclude comments added to custom posts from authors with given IDs', 'comments'),
             default => $inputFieldDescription,
         };
     }

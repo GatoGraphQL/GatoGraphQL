@@ -13,6 +13,6 @@ class RootMenusFilterInputObjectTypeResolver extends AbstractMenusFilterInputObj
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter menus', 'menus');
+        return $this->__('Input to filter menus', 'menus');
     }
 }

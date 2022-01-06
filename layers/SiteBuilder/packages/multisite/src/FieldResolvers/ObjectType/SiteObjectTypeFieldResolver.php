@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Multisite\ObjectModels\Site;
 use PoP\Multisite\TypeResolvers\ObjectType\SiteObjectTypeResolver;
 
@@ -63,8 +63,8 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'domain' => $this->getTranslationAPI()->__('The site\'s domain', ''),
-            'host' => $this->getTranslationAPI()->__('The site\'s host', ''),
+            'domain' => $this->__('The site\'s domain', ''),
+            'host' => $this->__('The site\'s host', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

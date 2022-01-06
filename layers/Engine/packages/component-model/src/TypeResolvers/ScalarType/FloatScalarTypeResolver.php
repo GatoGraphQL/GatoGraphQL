@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\TypeResolvers\ScalarType;
+namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
 use CastToType;
-use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
 
 /**
@@ -13,16 +12,16 @@ use stdClass;
  *
  * @see https://spec.graphql.org/draft/#sec-Scalars.Built-in-Scalars
  */
-class IntScalarTypeResolver extends AbstractScalarTypeResolver
+class FloatScalarTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'Int';
+        return 'Float';
     }
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('The Int scalar type represents non-fractional signed whole numeric values.', 'component-model');
+        return $this->__('The Float scalar type represents float numbers.', 'component-model');
     }
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
@@ -31,10 +30,10 @@ class IntScalarTypeResolver extends AbstractScalarTypeResolver
             return $error;
         }
 
-        $castInputValue = CastToType::_int($inputValue);
+        $castInputValue = CastToType::_float($inputValue);
         if ($castInputValue === null) {
             return $this->getError($this->getDefaultErrorMessage($inputValue));
         }
-        return (int) $castInputValue;
+        return (float) $castInputValue;
     }
 }

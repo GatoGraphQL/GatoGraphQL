@@ -24,7 +24,6 @@ class Component extends AbstractComponent
             \PoP\Definitions\Component::class,
             \PoP\FieldQuery\Component::class,
             \PoP\GraphQLParser\Component::class,
-            \PoP\BasicService\Component::class,
         ];
     }
 

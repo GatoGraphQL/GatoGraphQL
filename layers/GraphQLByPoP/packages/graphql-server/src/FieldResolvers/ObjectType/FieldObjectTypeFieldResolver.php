@@ -13,8 +13,8 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -117,13 +117,13 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->getTranslationAPI()->__('Field\'s name', 'graphql-server'),
-            'description' => $this->getTranslationAPI()->__('Field\'s description', 'graphql-server'),
-            'args' => $this->getTranslationAPI()->__('Field arguments', 'graphql-server'),
-            'type' => $this->getTranslationAPI()->__('Type to which the field belongs', 'graphql-server'),
-            'isDeprecated' => $this->getTranslationAPI()->__('Is the field deprecated?', 'graphql-server'),
-            'deprecationReason' => $this->getTranslationAPI()->__('Why was the field deprecated?', 'graphql-server'),
-            'extensions' => $this->getTranslationAPI()->__('Extensions (custom metadata) added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
+            'name' => $this->__('Field\'s name', 'graphql-server'),
+            'description' => $this->__('Field\'s description', 'graphql-server'),
+            'args' => $this->__('Field arguments', 'graphql-server'),
+            'type' => $this->__('Type to which the field belongs', 'graphql-server'),
+            'isDeprecated' => $this->__('Is the field deprecated?', 'graphql-server'),
+            'deprecationReason' => $this->__('Why was the field deprecated?', 'graphql-server'),
+            'extensions' => $this->__('Extensions (custom metadata) added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -8,7 +8,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\TypeResolvers\InputObjectType\UserByInputObjectTypeResolver;
@@ -55,8 +55,8 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'user' => $this->getTranslationAPI()->__('Retrieve a single user', 'pop-users'),
-            'users' => $this->getTranslationAPI()->__('Retrieve a list of users', 'pop-users'),
+            'user' => $this->__('Retrieve a single user', 'pop-users'),
+            'users' => $this->__('Retrieve a list of users', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

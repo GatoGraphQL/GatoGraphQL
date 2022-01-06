@@ -10,7 +10,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 
 class SchemaExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -50,7 +50,7 @@ class SchemaExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'isNamespaced' => $this->getTranslationAPI()->__('Is the schema namespaced?', 'graphql-server'),
+            'isNamespaced' => $this->__('Is the schema namespaced?', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

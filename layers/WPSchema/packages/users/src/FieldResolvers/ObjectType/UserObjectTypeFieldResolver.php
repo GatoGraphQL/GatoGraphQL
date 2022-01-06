@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Formatters\DateFormatterInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
@@ -94,11 +94,11 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'nicename' => $this->getTranslationAPI()->__('User\'s nicename', 'pop-users'),
-            'nickname' => $this->getTranslationAPI()->__('User\'s nickname', 'pop-users'),
-            'locale' => $this->getTranslationAPI()->__('Retrieves the locale of a user', 'pop-users'),
-            'registeredDate' => $this->getTranslationAPI()->__('The date the user registerd on the site', 'pop-users'),
-            'registeredDateStr' => $this->getTranslationAPI()->__('The date the user registerd on the site, in String format', 'pop-users'),
+            'nicename' => $this->__('User\'s nicename', 'pop-users'),
+            'nickname' => $this->__('User\'s nickname', 'pop-users'),
+            'locale' => $this->__('Retrieves the locale of a user', 'pop-users'),
+            'registeredDate' => $this->__('The date the user registerd on the site', 'pop-users'),
+            'registeredDateStr' => $this->__('The date the user registerd on the site, in String format', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

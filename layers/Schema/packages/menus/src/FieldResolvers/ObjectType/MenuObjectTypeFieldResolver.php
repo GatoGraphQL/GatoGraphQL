@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
@@ -112,7 +112,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['itemDataEntries' => 'flat'] => $this->getTranslationAPI()->__('Flatten the items', 'menus'),
+            ['itemDataEntries' => 'flat'] => $this->__('Flatten the items', 'menus'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -120,8 +120,8 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'items' => $this->getTranslationAPI()->__('The menu items', 'menus'),
-            'itemDataEntries' => $this->getTranslationAPI()->__('The data for the menu items', 'menus'),
+            'items' => $this->__('The menu items', 'menus'),
+            'itemDataEntries' => $this->__('The data for the menu items', 'menus'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -21,7 +21,7 @@ class EmailScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Email scalar, such as leo@mysite.com', 'component-model');
+        return $this->__('Email scalar, such as leo@mysite.com', 'component-model');
     }
 
     public function getSpecifiedByURL(): ?string

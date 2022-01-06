@@ -15,6 +15,6 @@ class IsCustomPostInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Entities representing a custom post', 'customposts');
+        return $this->__('Entities representing a custom post', 'customposts');
     }
 }

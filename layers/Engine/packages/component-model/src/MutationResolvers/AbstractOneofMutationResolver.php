@@ -49,7 +49,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         if ($oneofInputObjectFormDataSize !== 1) {
             throw new Exception(
                 sprintf(
-                    $this->getTranslationAPI()->__('Only and exactly 1 input field must be provided to the OneofMutationResolver, but %s were provided', 'component-model'),
+                    $this->__('Only and exactly 1 input field must be provided to the OneofMutationResolver, but %s were provided', 'component-model'),
                     $oneofInputObjectFormDataSize
                 )
             );
@@ -67,7 +67,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         if ($inputFieldMutationResolver === null) {
             throw new Exception(
                 sprintf(
-                    $this->getTranslationAPI()->__('There is no MutationResolver for input field with name \'%s\'', 'component-model'),
+                    $this->__('There is no MutationResolver for input field with name \'%s\'', 'component-model'),
                     $inputFieldName
                 )
             );
@@ -89,7 +89,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     //     if ($inputFieldFormData === null) {
     //         throw new Exception(
     //             sprintf(
-    //                 $this->getTranslationAPI()->__('There is not form data for input field with name \'%s\'', 'component-model'),
+    //                 $this->__('There is not form data for input field with name \'%s\'', 'component-model'),
     //                 $inputFieldName
     //             )
     //         );
@@ -112,7 +112,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         if ($formDataSize !== 1) {
             throw new Exception(
                 sprintf(
-                    $this->getTranslationAPI()->__('The OneofMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'component-model'),
+                    $this->__('The OneofMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'component-model'),
                     $formDataSize,
                     implode('\'%s\'', array_keys($formData))
                 )

@@ -18,7 +18,7 @@ class GenericCustomPostPaginationInputObjectTypeResolver extends PaginationInput
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to paginate generic custom posts', 'customposts');
+        return $this->__('Input to paginate generic custom posts', 'customposts');
     }
 
     protected function getDefaultLimit(): ?int

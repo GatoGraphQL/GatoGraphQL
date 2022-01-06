@@ -6,7 +6,7 @@ namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPWPSchema\Meta\Constants\MetaQueryCompareByOperators;
 use PoPWPSchema\Meta\TypeResolvers\EnumType\MetaQueryCompareByStringValueOperatorEnumTypeResolver;
 
@@ -48,8 +48,8 @@ class MetaQueryCompareByStringValueInputObjectTypeResolver extends AbstractInput
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'value' => $this->getTranslationAPI()->__('Custom field value', 'meta'),
-            'operator' => $this->getTranslationAPI()->__('The operator to compare against', 'meta'),
+            'value' => $this->__('Custom field value', 'meta'),
+            'operator' => $this->__('The operator to compare against', 'meta'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

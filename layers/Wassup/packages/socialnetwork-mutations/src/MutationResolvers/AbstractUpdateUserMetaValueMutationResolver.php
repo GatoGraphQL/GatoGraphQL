@@ -13,7 +13,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         $errors = [];
         $target_id = $form_data['target_id'];
         if (!$target_id) {
-            $errors[] = $this->getTranslationAPI()->__('This URL is incorrect.', 'pop-coreprocessors');
+            $errors[] = $this->__('This URL is incorrect.', 'pop-coreprocessors');
         }
         return $errors;
     }

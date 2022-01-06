@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\TypeResolvers\ScalarType;
+namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
 use CastToType;
-use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
 
 /**
@@ -43,6 +42,6 @@ class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('The Boolean scalar type represents `true` or `false`.', 'component-model');
+        return $this->__('The Boolean scalar type represents `true` or `false`.', 'component-model');
     }
 }

@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 
 class RootRemoveFeaturedImageFromCustomPostFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver
@@ -29,7 +29,7 @@ class RootRemoveFeaturedImageFromCustomPostFilterInputObjectTypeResolver extends
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to remove the featured image from a custom post', 'custompostmedia-mutations');
+        return $this->__('Input to remove the featured image from a custom post', 'custompostmedia-mutations');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -42,7 +42,7 @@ class RootRemoveFeaturedImageFromCustomPostFilterInputObjectTypeResolver extends
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::CUSTOMPOST_ID => $this->getTranslationAPI()->__('The ID of the custom post', 'custompostmedia-mutations'),
+            MutationInputProperties::CUSTOMPOST_ID => $this->__('The ID of the custom post', 'custompostmedia-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

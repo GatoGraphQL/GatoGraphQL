@@ -33,7 +33,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setTags' => sprintf(
-                $this->getTranslationAPI()->__('Set tags on the %s', 'custompost-tag-mutations'),
+                $this->__('Set tags on the %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),

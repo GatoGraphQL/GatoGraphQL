@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\BasicService\AbstractHookSet;
 use PoPSchema\UserRoles\Component;
 use PoPSchema\UserRoles\ComponentConfiguration;
@@ -111,8 +111,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'roles' => $this->getTranslationAPI()->__('Filter users by role(s)', 'user-roles'),
-            'excludeRoles' => $this->getTranslationAPI()->__('Filter users by excluding role(s)', 'user-roles'),
+            'roles' => $this->__('Filter users by role(s)', 'user-roles'),
+            'excludeRoles' => $this->__('Filter users by excluding role(s)', 'user-roles'),
             default => $inputFieldDescription,
         };
     }

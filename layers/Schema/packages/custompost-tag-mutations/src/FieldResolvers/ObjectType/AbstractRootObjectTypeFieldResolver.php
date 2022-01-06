@@ -43,7 +43,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             $this->getSetTagsFieldName() => sprintf(
-                $this->getTranslationAPI()->__('Set tags on a %s', 'custompost-tag-mutations'),
+                $this->__('Set tags on a %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),

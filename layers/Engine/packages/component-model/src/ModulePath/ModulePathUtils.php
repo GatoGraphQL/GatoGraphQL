@@ -10,7 +10,7 @@ use PoP\ComponentModel\Tokens\ModulePath;
 
 class ModulePathUtils
 {
-    public static function getModulePaths()
+    public static function getModulePaths(): array
     {
         $ret = array();
         if ($paths = $_REQUEST[ModulePaths::URLPARAM_MODULEPATHS] ?? null) {

@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPosts\Component;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
@@ -96,10 +96,10 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'status' => $this->getTranslationAPI()->__('Custom post status', 'customposts'),
-            'search' => $this->getTranslationAPI()->__('Search for custom posts containing the given string', 'customposts'),
-            'dateQuery' => $this->getTranslationAPI()->__('Filter custom posts based on date', 'customposts'),
-            'customPostTypes' => $this->getTranslationAPI()->__('Filter custom posts of given types', 'customposts'),
+            'status' => $this->__('Custom post status', 'customposts'),
+            'search' => $this->__('Search for custom posts containing the given string', 'customposts'),
+            'dateQuery' => $this->__('Filter custom posts based on date', 'customposts'),
+            'customPostTypes' => $this->__('Filter custom posts of given types', 'customposts'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

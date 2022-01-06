@@ -37,8 +37,8 @@ class DateQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'after' => $this->getTranslationAPI()->__('Retrieve entities from after this date', 'schema-commons'),
-            'before' => $this->getTranslationAPI()->__('Retrieve entities from before this date', 'schema-commons'),
+            'after' => $this->__('Retrieve entities from after this date', 'schema-commons'),
+            'before' => $this->__('Retrieve entities from before this date', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

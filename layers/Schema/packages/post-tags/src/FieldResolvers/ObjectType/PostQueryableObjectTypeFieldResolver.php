@@ -44,9 +44,9 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'tags' => $this->getTranslationAPI()->__('Tags added to this post', 'pop-post-tags'),
-            'tagCount' => $this->getTranslationAPI()->__('Number of tags added to this post', 'pop-post-tags'),
-            'tagNames' => $this->getTranslationAPI()->__('Names of the tags added to this post', 'pop-post-tags'),
+            'tags' => $this->__('Tags added to this post', 'pop-post-tags'),
+            'tagCount' => $this->__('Number of tags added to this post', 'pop-post-tags'),
+            'tagNames' => $this->__('Names of the tags added to this post', 'pop-post-tags'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

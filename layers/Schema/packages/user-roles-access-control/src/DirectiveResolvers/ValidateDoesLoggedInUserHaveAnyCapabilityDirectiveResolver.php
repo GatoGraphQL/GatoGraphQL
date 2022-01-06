@@ -8,7 +8,7 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveReso
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 
 class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends AbstractValidateConditionDirectiveResolver
@@ -58,21 +58,21 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         $isValidatingDirective = $this->isValidatingDirective();
         if (count($capabilities) == 1) {
             $errorMessage = $isValidatingDirective ?
-                $this->getTranslationAPI()->__('You must have capability \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
-                $this->getTranslationAPI()->__('You must have capability \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
+                $this->__('You must have capability \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
+                $this->__('You must have capability \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
         } else {
             $errorMessage = $isValidatingDirective ?
-                $this->getTranslationAPI()->__('You must have any capability from among \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
-                $this->getTranslationAPI()->__('You must have any capability from among \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
+                $this->__('You must have any capability from among \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
+                $this->__('You must have any capability from among \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
         }
         return sprintf(
             $errorMessage,
             implode(
-                $this->getTranslationAPI()->__('\', \''),
+                $this->__('\', \''),
                 $capabilities
             ),
             implode(
-                $this->getTranslationAPI()->__('\', \''),
+                $this->__('\', \''),
                 $failedDataFields
             ),
             $relationalTypeResolver->getMaybeNamespacedTypeName()
@@ -81,7 +81,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->getTranslationAPI()->__('It validates if the user has any capability provided through directive argument \'capabilities\'', 'component-model');
+        return $this->__('It validates if the user has any capability provided through directive argument \'capabilities\'', 'component-model');
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -94,7 +94,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'capabilities' => $this->getTranslationAPI()->__('Capabilities to validate if the logged-in user has (any of them)', 'component-model'),
+            'capabilities' => $this->__('Capabilities to validate if the logged-in user has (any of them)', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }

@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\TypeResolvers\ScalarType;
+namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
 
 /**
@@ -22,7 +20,7 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('The ID scalar type represents a unique identifier.', 'component-model');
+        return $this->__('The ID scalar type represents a unique identifier.', 'component-model');
     }
 
     /**
@@ -49,7 +47,7 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
         if (is_float($inputValue) || is_bool($inputValue)) {
             return $this->getError(
                 sprintf(
-                    $this->getTranslationAPI()->__('Only strings or integers are allowed for type \'%s\'', 'component-model'),
+                    $this->__('Only strings or integers are allowed for type \'%s\'', 'component-model'),
                     $this->getMaybeNamespacedTypeName()
                 )
             );

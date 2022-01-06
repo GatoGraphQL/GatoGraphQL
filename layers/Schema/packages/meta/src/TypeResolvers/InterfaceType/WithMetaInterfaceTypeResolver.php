@@ -15,6 +15,6 @@ class WithMetaInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Fields with meta values', 'custompostmeta');
+        return $this->__('Fields with meta values', 'custompostmeta');
     }
 }

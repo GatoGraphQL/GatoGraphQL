@@ -91,8 +91,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'setFeaturedImageOnCustomPost' => $this->getTranslationAPI()->__('Set the featured image on a custom post', 'custompostmedia-mutations'),
-            'removeFeaturedImageFromCustomPost' => $this->getTranslationAPI()->__('Remove the featured image from a custom post', 'custompostmedia-mutations'),
+            'setFeaturedImageOnCustomPost' => $this->__('Set the featured image on a custom post', 'custompostmedia-mutations'),
+            'removeFeaturedImageFromCustomPost' => $this->__('Remove the featured image from a custom post', 'custompostmedia-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

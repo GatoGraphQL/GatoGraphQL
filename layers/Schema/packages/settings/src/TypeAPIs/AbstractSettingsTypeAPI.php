@@ -76,7 +76,7 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
         if (!$this->validateIsOptionAllowed($name)) {
             throw new InvalidArgumentException(
                 sprintf(
-                    $this->getTranslationAPI()->__('There is no option with name \'%s\'', 'settings'),
+                    $this->__('There is no option with name \'%s\'', 'settings'),
                     $name
                 )
             );

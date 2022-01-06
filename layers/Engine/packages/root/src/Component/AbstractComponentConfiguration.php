@@ -22,14 +22,14 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
         return $this->configuration[$envVariable] ?? null;
     }
 
-    protected function maybeInitializeConfigurationValue(
+    protected function retrieveConfigurationValueOrUseDefault(
         string $envVariable,
         mixed $defaultValue,
         ?callable $callback = null
-    ): void {
+    ): mixed {
         // Initialized from configuration? Then use that one directly.
         if ($this->hasConfigurationValue($envVariable)) {
-            return;
+            return $this->getConfigurationValue($envVariable);
         }
 
         /**
@@ -47,5 +47,7 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
             // Modify the type of the variable, from string to bool/int/array
             $this->configuration[$envVariable] = $callback !== null ? $callback($envValue) : $envValue;
         }
+
+        return $this->configuration[$envVariable];
     }
 }

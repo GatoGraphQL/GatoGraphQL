@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\Hooks\Component::class,
+            \PoP\BasicService\Component::class,
             \PoP\Definitions\Component::class,
         ];
     }

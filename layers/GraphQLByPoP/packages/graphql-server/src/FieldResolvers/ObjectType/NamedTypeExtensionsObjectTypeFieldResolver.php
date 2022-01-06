@@ -10,7 +10,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -54,8 +54,8 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'elementName' => $this->getTranslationAPI()->__('The type\'s non-namespaced name', 'graphql-server'),
-            'namespacedName' => $this->getTranslationAPI()->__('The type\'s namespaced name', 'graphql-server'),
+            'elementName' => $this->__('The type\'s non-namespaced name', 'graphql-server'),
+            'namespacedName' => $this->__('The type\'s namespaced name', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

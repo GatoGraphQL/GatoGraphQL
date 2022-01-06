@@ -10,7 +10,7 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Misc\OperatorHelpers;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use stdClass;
 
 class AdvancePointerInArrayOrObjectDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver
@@ -46,7 +46,7 @@ class AdvancePointerInArrayOrObjectDirectiveResolver extends AbstractApplyNested
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->getTranslationAPI()->__('Apply all composed directives on the element found under the \'path\' parameter in the affected array object', 'component-model');
+        return $this->__('Apply all composed directives on the element found under the \'path\' parameter in the affected array object', 'component-model');
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -62,7 +62,7 @@ class AdvancePointerInArrayOrObjectDirectiveResolver extends AbstractApplyNested
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'path' => $this->getTranslationAPI()->__('Path to the element in the array', 'component-model'),
+            'path' => $this->__('Path to the element in the array', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }

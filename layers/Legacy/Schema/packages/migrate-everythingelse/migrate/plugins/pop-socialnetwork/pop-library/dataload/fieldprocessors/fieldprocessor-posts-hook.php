@@ -37,9 +37,9 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
         return match($fieldName) {
-            'recommendPostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'upvotePostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'downvotePostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'recommendPostCount' => \PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'upvotePostCount' => \PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'downvotePostCount' => \PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

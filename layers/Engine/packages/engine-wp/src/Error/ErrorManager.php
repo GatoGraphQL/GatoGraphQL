@@ -29,13 +29,13 @@ class ErrorManager extends AbstractErrorManager
         foreach ($cmsErrorCodes as $cmsErrorCode) {
             if ($errorMessage = $cmsError->get_error_message($cmsErrorCode)) {
                 $errorMessages[] = sprintf(
-                    $this->getTranslationAPI()->__('[%s] %s', 'engine-wp'),
+                    $this->__('[%s] %s', 'engine-wp'),
                     $cmsErrorCode,
                     $errorMessage
                 );
             } else {
                 $errorMessages[] = sprintf(
-                    $this->getTranslationAPI()->__('Error code: %s', 'engine-wp'),
+                    $this->__('Error code: %s', 'engine-wp'),
                     $cmsErrorCode
                 );
             }
@@ -43,8 +43,8 @@ class ErrorManager extends AbstractErrorManager
         return new Error(
             'cms-error',
             sprintf(
-                $this->getTranslationAPI()->__('CMS errors: \'%s\'', 'engine-wp'),
-                implode($this->getTranslationAPI()->__('\', \'', 'engine-wp'), $errorMessages)
+                $this->__('CMS errors: \'%s\'', 'engine-wp'),
+                implode($this->__('\', \'', 'engine-wp'), $errorMessages)
             )
         );
     }

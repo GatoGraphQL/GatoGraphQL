@@ -10,10 +10,10 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Formatters\DateFormatterInterface;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPSchema\Comments\TypeResolvers\InputObjectType\CommentResponsePaginationInputObjectTypeResolver;
@@ -257,21 +257,21 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'content' => $this->getTranslationAPI()->__('Comment\'s content, in HTML format', 'pop-comments'),
-            'rawContent' => $this->getTranslationAPI()->__('Comment\'s content, in raw format', 'pop-comments'),
-            'authorName' => $this->getTranslationAPI()->__('Comment author\'s name', 'pop-comments'),
-            'authorURL' => $this->getTranslationAPI()->__('Comment author\'s URL', 'pop-comments'),
-            'authorEmail' => $this->getTranslationAPI()->__('Comment author\'s email', 'pop-comments'),
-            'customPost' => $this->getTranslationAPI()->__('Custom post to which the comment was added', 'pop-comments'),
-            'customPostID' => $this->getTranslationAPI()->__('ID of the custom post to which the comment was added', 'pop-comments'),
-            'approved' => $this->getTranslationAPI()->__('Is the comment approved?', 'pop-comments'),
-            'type' => $this->getTranslationAPI()->__('Type of comment', 'pop-comments'),
-            'status' => $this->getTranslationAPI()->__('Status of the comment', 'pop-comments'),
-            'parent' => $this->getTranslationAPI()->__('Parent comment (if this comment is a response to another one)', 'pop-comments'),
-            'date' => $this->getTranslationAPI()->__('Date when the comment was added', 'pop-comments'),
-            'dateStr' => $this->getTranslationAPI()->__('Date when the comment was added, in String format', 'pop-comments'),
-            'responses' => $this->getTranslationAPI()->__('Responses to the comment', 'pop-comments'),
-            'responseCount' => $this->getTranslationAPI()->__('Number of responses to the comment', 'pop-comments'),
+            'content' => $this->__('Comment\'s content, in HTML format', 'pop-comments'),
+            'rawContent' => $this->__('Comment\'s content, in raw format', 'pop-comments'),
+            'authorName' => $this->__('Comment author\'s name', 'pop-comments'),
+            'authorURL' => $this->__('Comment author\'s URL', 'pop-comments'),
+            'authorEmail' => $this->__('Comment author\'s email', 'pop-comments'),
+            'customPost' => $this->__('Custom post to which the comment was added', 'pop-comments'),
+            'customPostID' => $this->__('ID of the custom post to which the comment was added', 'pop-comments'),
+            'approved' => $this->__('Is the comment approved?', 'pop-comments'),
+            'type' => $this->__('Type of comment', 'pop-comments'),
+            'status' => $this->__('Status of the comment', 'pop-comments'),
+            'parent' => $this->__('Parent comment (if this comment is a response to another one)', 'pop-comments'),
+            'date' => $this->__('Date when the comment was added', 'pop-comments'),
+            'dateStr' => $this->__('Date when the comment was added, in String format', 'pop-comments'),
+            'responses' => $this->__('Responses to the comment', 'pop-comments'),
+            'responseCount' => $this->__('Number of responses to the comment', 'pop-comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

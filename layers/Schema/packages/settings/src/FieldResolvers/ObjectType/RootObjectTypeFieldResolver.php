@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
@@ -73,9 +73,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'optionValue' => $this->getTranslationAPI()->__('Single-value option saved in the DB, of any built-in scalar type', 'pop-settings'),
-            'optionValues' => $this->getTranslationAPI()->__('Array-value option saved in the DB, of any built-in scalar type', 'pop-settings'),
-            'optionObjectValue' => $this->getTranslationAPI()->__('Object-value option saved in the DB', 'pop-settings'),
+            'optionValue' => $this->__('Single-value option saved in the DB, of any built-in scalar type', 'pop-settings'),
+            'optionValues' => $this->__('Array-value option saved in the DB, of any built-in scalar type', 'pop-settings'),
+            'optionObjectValue' => $this->__('Object-value option saved in the DB', 'pop-settings'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -117,7 +117,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'name' => $this->getTranslationAPI()->__('The option name', 'pop-settings'),
+            'name' => $this->__('The option name', 'pop-settings'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -143,7 +143,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($fieldArgs['name'])) {
                     return [
                         sprintf(
-                            $this->getTranslationAPI()->__('There is no option with name \'%s\'', 'settings'),
+                            $this->__('There is no option with name \'%s\'', 'settings'),
                             $fieldArgs['name']
                         ),
                     ];

@@ -7,7 +7,7 @@ namespace PoPSchema\Users\TypeResolvers\InputObjectType;
 use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\Users\Component;
@@ -43,7 +43,7 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Oneof input to specify the property and data to search users', 'users');
+        return $this->__('Oneof input to specify the property and data to search users', 'users');
     }
 
     protected function isOneInputValueMandatory(): bool
@@ -73,8 +73,8 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'name' => $this->getTranslationAPI()->__('Search by name', 'users'),
-            'emails' => $this->getTranslationAPI()->__('Search by email(s)', 'users'),
+            'name' => $this->__('Search by name', 'users'),
+            'emails' => $this->__('Search by email(s)', 'users'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

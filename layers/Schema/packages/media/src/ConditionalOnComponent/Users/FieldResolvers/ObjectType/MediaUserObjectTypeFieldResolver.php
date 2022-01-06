@@ -50,7 +50,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'author' => $this->getTranslationAPI()->__('Media element\'s author', 'pop-media'),
+            'author' => $this->__('Media element\'s author', 'pop-media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

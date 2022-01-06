@@ -35,13 +35,13 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
         return match($fieldName) {
 			'recommendPostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
             'unrecommendPostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'recommendPostCountPlus1' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'recommendPostCountPlus1' => \PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'upvotePostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
             'undoUpvotePostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'upvotePostCountPlus1' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'upvotePostCountPlus1' => \PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'downvotePostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
             'undoDownvotePostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'downvotePostCountPlus1' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'downvotePostCountPlus1' => \PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

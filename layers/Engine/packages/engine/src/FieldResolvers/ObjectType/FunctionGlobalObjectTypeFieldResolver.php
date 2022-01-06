@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
@@ -54,7 +54,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'getSelfProp' => sprintf(
-                $this->getTranslationAPI()->__('Get a property from the current object, as stored under expression `%s`', 'pop-component-model'),
+                $this->__('Get a property from the current object, as stored under expression `%s`', 'pop-component-model'),
                 QueryHelpers::getExpressionQuery(Expressions::NAME_SELF)
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -75,8 +75,8 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['getSelfProp' => 'self'] => $this->getTranslationAPI()->__('The `$self` object containing all data for the current object', 'component-model'),
-            ['getSelfProp' => 'property'] => $this->getTranslationAPI()->__('The property to access from the current object', 'component-model'),
+            ['getSelfProp' => 'self'] => $this->__('The `$self` object containing all data for the current object', 'component-model'),
+            ['getSelfProp' => 'property'] => $this->__('The property to access from the current object', 'component-model'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

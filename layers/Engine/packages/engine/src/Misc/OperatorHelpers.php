@@ -10,7 +10,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 class OperatorHelpers
 {
-    protected static function throwNoArrayItemUnderPathException(array $data, string $path)
+    protected static function throwNoArrayItemUnderPathException(array $data, string $path): void
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         throw new Exception(sprintf(
@@ -19,7 +19,7 @@ class OperatorHelpers
             json_encode($data)
         ));
     }
-    public static function &getPointerToArrayItemUnderPath(array &$data, string $path)
+    public static function &getPointerToArrayItemUnderPath(array &$data, string $path): array
     {
         $dataPointer = &$data;
 

@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use PoP\Engine\AppLoader;
 use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Helpers\ClassHelpers;
 use RuntimeException;
 
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
@@ -21,17 +22,35 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     private ?Exception $inititalizationException = null;
 
+    protected MainPluginInitializationConfigurationInterface $pluginInitializationConfiguration;
+
     public function __construct(
         string $pluginFile, /** The main plugin file */
         string $pluginVersion,
         ?string $pluginName = null,
-        protected AbstractMainPluginConfiguration $pluginConfiguration,
+        ?MainPluginInitializationConfigurationInterface $pluginInitializationConfiguration = null,
     ) {
         parent::__construct(
             $pluginFile,
             $pluginVersion,
             $pluginName,
         );
+        $this->pluginInitializationConfiguration = $pluginInitializationConfiguration ?? $this->createInitializationConfiguration();
+    }
+
+    protected function createInitializationConfiguration(): MainPluginInitializationConfigurationInterface
+    {
+        $pluginInitializationConfigurationClass = $this->getPluginInitializationConfigurationClass();
+        return new $pluginInitializationConfigurationClass();
+    }
+
+    /**
+     * PluginInitializationConfiguration class for the Plugin
+     */
+    protected function getPluginInitializationConfigurationClass(): string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        return $classNamespace . '\\PluginInitializationConfiguration';
     }
 
     /**
@@ -48,9 +67,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * so must be executed before those hooks are triggered for first time
      * (in ComponentConfiguration classes)
      */
-    protected function callPluginConfiguration(): void
+    protected function callPluginInitializationConfiguration(): void
     {
-        $this->pluginConfiguration->initialize();
+        $this->pluginInitializationConfiguration->initialize();
     }
 
     /**
@@ -60,7 +79,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     public function getComponentClassConfiguration(): array
     {
-        return $this->pluginConfiguration->getComponentClassConfiguration();
+        return $this->pluginInitializationConfiguration->getComponentClassConfiguration();
     }
 
     /**
@@ -70,7 +89,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     public function getSchemaComponentClassesToSkip(): array
     {
-        return $this->pluginConfiguration->getSchemaComponentClassesToSkip();
+        return $this->pluginInitializationConfiguration->getSchemaComponentClassesToSkip();
     }
 
     /**
@@ -473,7 +492,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
-            $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
+            $containerCacheConfiguration = $this->pluginInitializationConfiguration->getContainerCacheConfiguration();
             App::getAppLoader()->bootSystem(
                 $containerCacheConfiguration->cacheContainerConfiguration(),
                 $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
@@ -502,7 +521,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
-            $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
+            $containerCacheConfiguration = $this->pluginInitializationConfiguration->getContainerCacheConfiguration();
             App::getAppLoader()->bootApplication(
                 $containerCacheConfiguration->cacheContainerConfiguration(),
                 $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
