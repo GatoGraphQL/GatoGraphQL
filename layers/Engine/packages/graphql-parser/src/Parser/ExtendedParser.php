@@ -54,7 +54,6 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
             return $directives;
         }
 
-        $metaDirectiveResolvers = $this->getMetaDirectiveRegistry()->getMetaDirectiveResolvers();
         /**
          * For each directive, indicate which meta-directive is composing it
          * by indicating their relative position (as a negative int)
@@ -65,14 +64,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         $directivePos = 0;
         while ($directivePos < $directiveCount) {
             $directive = $directives[$directivePos];
-            $metaDirectiveResolver = null;
-            foreach ($metaDirectiveResolvers as $maybeMetaDirectiveResolver) {
-                if ($maybeMetaDirectiveResolver->getDirectiveName() !== $directive->getName()) {
-                    continue;
-                }
-                $metaDirectiveResolver = $maybeMetaDirectiveResolver;
-                break;
-            }
+            $metaDirectiveResolver = $this->getMetaDirectiveResolver($directive->getName());
             if ($metaDirectiveResolver === null) {
                 $directivePos++;
                 continue;
@@ -143,6 +135,17 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
             $rootDirectives[] = $metaDirectives[$rootDirectivePosition] ?? $directives[$rootDirectivePosition];
         }
         return $rootDirectives;
+    }
+
+    protected function getMetaDirectiveResolver(string $directiveName): ?MetaDirectiveResolverInterface
+    {
+        $metaDirectiveResolvers = $this->getMetaDirectiveRegistry()->getMetaDirectiveResolvers();
+        foreach ($metaDirectiveResolvers as $metaDirectiveResolver) {
+            if ($metaDirectiveResolver->getDirectiveName() === $directiveName) {
+                return $metaDirectiveResolver;
+            }
+        }
+        return null;
     }
 
     protected function getAffectDirectivesUnderPosArgument(
