@@ -17,7 +17,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
-        $this->getConfigurationValueFromEnvVariable(
+        $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,

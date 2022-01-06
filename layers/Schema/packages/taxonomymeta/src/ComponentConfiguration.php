@@ -21,7 +21,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
-        $this->getConfigurationValueFromEnvVariable(
+        $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
@@ -36,7 +36,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook
-        $this->getConfigurationValueFromEnvVariable(
+        $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );

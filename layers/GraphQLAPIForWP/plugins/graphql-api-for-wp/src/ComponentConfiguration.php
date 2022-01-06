@@ -18,7 +18,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     //     $envVariable = Environment::MODULE_URL_BASE;
     //     $defaultValue = 'https://graphql-api.com/modules/';
     //     // Initialize property from the environment/hook
-    //     $this->getConfigurationValueFromEnvVariable(
+    //     $this->retrieveConfigurationValueOrUseDefault(
     //         $envVariable,
     //         $defaultValue
     //     );
@@ -36,7 +36,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        $this->getConfigurationValueFromEnvVariable(
+        $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
@@ -54,7 +54,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $defaultValue = \__('---', 'graphql-api');
 
         // Initialize property from the environment/hook
-        $this->getConfigurationValueFromEnvVariable(
+        $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
@@ -71,7 +71,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $defaultValue = \__('🟡 Default', 'graphql-api');
 
         // Initialize property from the environment/hook
-        $this->getConfigurationValueFromEnvVariable(
+        $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
@@ -88,7 +88,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $defaultValue = 'graphql';
 
         // Initialize property from the environment/hook
-        $this->getConfigurationValueFromEnvVariable(
+        $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
@@ -105,7 +105,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $defaultValue = 'graphql-query';
 
         // Initialize property from the environment/hook
-        $this->getConfigurationValueFromEnvVariable(
+        $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
@@ -124,7 +124,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $defaultValue = null;
 
         // Initialize property from the environment/hook
-        $this->getConfigurationValueFromEnvVariable(
+        $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );

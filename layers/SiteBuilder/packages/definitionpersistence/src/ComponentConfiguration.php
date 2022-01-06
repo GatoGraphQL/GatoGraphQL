@@ -19,7 +19,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $defaultValue = dirname(__DIR__) . '/build';
 
         // Initialize property from the environment
-        $this->getConfigurationValueFromEnvVariable(
+        $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
