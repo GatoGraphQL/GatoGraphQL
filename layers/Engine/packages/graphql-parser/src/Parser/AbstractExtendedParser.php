@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser;
 
-use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
-use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Parser\Ast\MetaDirective;
@@ -17,19 +15,10 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use stdClass;
 
-class ExtendedParser extends Parser implements ExtendedParserInterface
+abstract class AbstractExtendedParser extends Parser implements ExtendedParserInterface
 {
-    private ?MetaDirectiveRegistryInterface $metaDirectiveRegistry = null;
     private ?OutputServiceInterface $outputService = null;
 
-    final public function setMetaDirectiveRegistry(MetaDirectiveRegistryInterface $metaDirectiveRegistry): void
-    {
-        $this->metaDirectiveRegistry = $metaDirectiveRegistry;
-    }
-    final protected function getMetaDirectiveRegistry(): MetaDirectiveRegistryInterface
-    {
-        return $this->metaDirectiveRegistry ??= $this->instanceManager->getInstance(MetaDirectiveRegistryInterface::class);
-    }
     final public function setOutputService(OutputServiceInterface $outputService): void
     {
         $this->outputService = $outputService;
@@ -64,8 +53,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         $directivePos = 0;
         while ($directivePos < $directiveCount) {
             $directive = $directives[$directivePos];
-            $metaDirectiveResolver = $this->getMetaDirectiveResolver($directive->getName());
-            if ($metaDirectiveResolver === null) {
+            if (!$this->isMetaDirective($directive->getName())) {
                 $directivePos++;
                 continue;
             }
@@ -73,7 +61,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
              * Obtain the value from the "affect" argument.
              * If not set, use the default value
              */
-            $affectDirectivesUnderPosArgument = $this->getAffectDirectivesUnderPosArgument($metaDirectiveResolver, $directive);
+            $affectDirectivesUnderPosArgument = $this->getAffectDirectivesUnderPosArgument($directive);
             $affectDirectivesUnderPositions = $affectDirectivesUnderPosArgument !== null ?
                 $this->getAffectDirectivesUnderPosArgumentValue(
                     $directive,
@@ -81,7 +69,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
                     $directivePos,
                     $directiveCount,
                 )
-                : $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentDefaultValue();
+                : $this->getAffectDirectivesUnderPosArgumentDefaultValue($directive);
 
             foreach ($affectDirectivesUnderPositions as $affectDirectiveUnderPosition) {
                 $composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition] = $affectDirectiveUnderPosition;
@@ -137,31 +125,15 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         return $rootDirectives;
     }
 
-    protected function getMetaDirectiveResolver(string $directiveName): ?MetaDirectiveResolverInterface
-    {
-        $metaDirectiveResolvers = $this->getMetaDirectiveRegistry()->getMetaDirectiveResolvers();
-        foreach ($metaDirectiveResolvers as $metaDirectiveResolver) {
-            if ($metaDirectiveResolver->getDirectiveName() !== $directiveName) {
-                continue;
-            }
-            return $metaDirectiveResolver;
-        }
-        return null;
-    }
+    abstract protected function isMetaDirective(string $directiveName): bool;
 
-    protected function getAffectDirectivesUnderPosArgument(
-        MetaDirectiveResolverInterface $metaDirectiveResolver,
+    abstract protected function getAffectDirectivesUnderPosArgument(
         Directive $directive,
-    ): ?Argument {
-        $affectDirectivesUnderPosArgumentName = $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentName();
-        foreach ($directive->getArguments() as $argument) {
-            if ($argument->getName() !== $affectDirectivesUnderPosArgumentName) {
-                continue;
-            }
-            return $argument;
-        }
-        return null;
-    }
+    ): ?Argument;
+
+    abstract protected function getAffectDirectivesUnderPosArgumentDefaultValue(
+        Directive $directive,
+    ): mixed;
 
     /**
      * @return int[]

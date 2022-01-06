@@ -7,9 +7,6 @@ services:
     PoP\GraphQLParser\Parser\ParserInterface:
         class: \PoP\GraphQLParser\Parser\Parser
 
-    PoP\GraphQLParser\Parser\ExtendedParserInterface:
-        class: \PoP\GraphQLParser\Parser\ExtendedParser
-
     PoP\GraphQLParser\Query\QueryAugmenterServiceInterface:
         class: \PoP\GraphQLParser\Query\QueryAugmenterService
 
