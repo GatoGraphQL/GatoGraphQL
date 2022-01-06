@@ -19,7 +19,7 @@ use PoP\Root\App;
 class Schema
 {
     use StandaloneServiceTrait;
-    
+
     /** @var NamedTypeInterface[] */
     protected array $types;
     /** @var Directive[] */
