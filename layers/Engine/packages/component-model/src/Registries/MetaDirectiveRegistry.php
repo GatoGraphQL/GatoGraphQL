@@ -17,7 +17,7 @@ class MetaDirectiveRegistry implements MetaDirectiveRegistryInterface
     {
         $this->metaDirectiveResolvers[$metaDirectiveResolver->getDirectiveName()] = $metaDirectiveResolver;
     }
-    
+
     /**
      * @return array<string,MetaDirectiveResolverInterface>
      */
@@ -25,7 +25,7 @@ class MetaDirectiveRegistry implements MetaDirectiveRegistryInterface
     {
         return $this->metaDirectiveResolvers;
     }
-    
+
     public function getMetaDirectiveResolver($directiveName): ?MetaDirectiveResolverInterface
     {
         return $this->metaDirectiveResolvers[$directiveName] ?? null;
