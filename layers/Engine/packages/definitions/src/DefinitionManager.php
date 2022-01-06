@@ -75,28 +75,6 @@ class DefinitionManager implements DefinitionManagerInterface
     }
 
     /**
-     * Make sure the name has not been defined already. If it has, throw an Exception
-     */
-    public function getUniqueDefinition(string $name, string $group): string
-    {
-        // If the ID has already been defined, then throw an Exception
-        $this->names[$group] ??= [];
-        if (in_array($name, $this->names[$group])) {
-            throw new \Exception(
-                sprintf(
-                    'Error with the Defining: another constant/object was already registered with name \'%s\' and group \'%s\'',
-                    $name,
-                    $group
-                )
-            );
-        }
-        $this->names[$group][] = $name;
-
-        // Simply return the definition
-        return $this->getDefinition($name, $group);
-    }
-
-    /**
      * Function used to create a definition for a module.
      * Needed for reducing the filesize of the html generated for PROD
      * Instead of using the name of the $module, we use a unique number in base 36,

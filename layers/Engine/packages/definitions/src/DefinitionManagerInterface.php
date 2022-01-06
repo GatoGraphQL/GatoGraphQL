@@ -14,7 +14,6 @@ interface DefinitionManagerInterface
     public function setDefinitionResolver(DefinitionResolverInterface $definition_resolver, string $group): void;
     public function setDefinitionPersistence(DefinitionPersistenceInterface $definition_persistence): void;
     public function getDefinitionPersistence(): ?DefinitionPersistenceInterface;
-    public function getUniqueDefinition(string $name, string $group): string;
     public function getDefinition(string $name, string $group): string;
     public function getOriginalName(string $definition, string $group): string;
     public function maybeStoreDefinitionsPersistently(): void;
