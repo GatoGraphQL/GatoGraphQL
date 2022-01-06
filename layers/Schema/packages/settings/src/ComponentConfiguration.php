@@ -15,31 +15,25 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function getSettingsEntries(): array
     {
-        // Define properties
         $envVariable = Environment::SETTINGS_ENTRIES;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function getSettingsBehavior(): string
     {
-        // Define properties
         $envVariable = Environment::SETTINGS_BEHAVIOR;
         $defaultValue = Behaviors::ALLOWLIST;
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
-        return $this->configuration[$envVariable];
     }
 }

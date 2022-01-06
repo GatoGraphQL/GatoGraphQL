@@ -15,31 +15,25 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function getTaxonomyMetaEntries(): array
     {
-        // Define properties
         $envVariable = Environment::TAXONOMY_META_ENTRIES;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function getTaxonomyMetaBehavior(): string
     {
-        // Define properties
         $envVariable = Environment::TAXONOMY_META_BEHAVIOR;
         $defaultValue = Behaviors::ALLOWLIST;
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
-        return $this->configuration[$envVariable];
     }
 }

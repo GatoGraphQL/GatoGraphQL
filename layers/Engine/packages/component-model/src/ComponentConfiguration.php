@@ -69,18 +69,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function enableConfigByParams(): bool
     {
-        // Define properties
         $envVariable = Environment::ENABLE_CONFIG_BY_PARAMS;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -96,66 +93,54 @@ class ComponentConfiguration extends AbstractComponentConfiguration
             return false;
         }
 
-        // Define properties
         $envVariable = Environment::USE_COMPONENT_MODEL_CACHE;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function mustNamespaceTypes(): bool
     {
-        // Define properties
         $envVariable = Environment::NAMESPACE_TYPES_AND_INTERFACES;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function useSingleTypeInsteadOfUnionType(): bool
     {
-        // Define properties
         $envVariable = Environment::USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function enableAdminSchema(): bool
     {
-        // Define properties
         $envVariable = Environment::ENABLE_ADMIN_SCHEMA;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -163,18 +148,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function validateFieldTypeResponseWithSchemaDefinition(): bool
     {
-        // Define properties
         $envVariable = Environment::VALIDATE_FIELD_TYPE_RESPONSE_WITH_SCHEMA_DEFINITION;
         $defaultValue = RootEnvironment::isApplicationEnvironmentDev();
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -183,18 +165,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function treatTypeCoercingFailuresAsErrors(): bool
     {
-        // Define properties
         $envVariable = Environment::TREAT_TYPE_COERCING_FAILURES_AS_ERRORS;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -204,18 +183,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function treatUndefinedFieldOrDirectiveArgsAsErrors(): bool
     {
-        // Define properties
         $envVariable = Environment::TREAT_UNDEFINED_FIELD_OR_DIRECTIVE_ARGS_AS_ERRORS;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -228,18 +204,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function setFailingFieldResponseAsNull(): bool
     {
-        // Define properties
         $envVariable = Environment::SET_FAILING_FIELD_RESPONSE_AS_NULL;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -247,18 +220,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function removeFieldIfDirectiveFailed(): bool
     {
-        // Define properties
         $envVariable = Environment::REMOVE_FIELD_IF_DIRECTIVE_FAILED;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -269,18 +239,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function convertInputValueFromSingleToList(): bool
     {
-        // Define properties
         $envVariable = Environment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -291,18 +258,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function enableUnionTypeImplementingInterfaceType(): bool
     {
-        // Define properties
         $envVariable = Environment::ENABLE_UNION_TYPE_IMPLEMENTING_INTERFACE_TYPE;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -322,17 +286,14 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function skipExposingDangerouslyDynamicScalarTypeInSchema(): bool
     {
-        // Define properties
         $envVariable = Environment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 }

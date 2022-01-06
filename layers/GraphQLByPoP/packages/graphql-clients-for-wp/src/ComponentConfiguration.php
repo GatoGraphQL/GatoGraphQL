@@ -16,16 +16,13 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function getGraphQLClientsComponentURL(): string
     {
-        // Define properties
         $envVariable = Environment::GRAPHQL_CLIENTS_COMPONENT_URL;
         $defaultValue = '';
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -33,18 +30,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function isGraphiQLClientEndpointDisabled(): bool
     {
-        // Define properties
         $envVariable = Environment::DISABLE_GRAPHIQL_CLIENT_ENDPOINT;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -52,18 +46,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function useGraphiQLExplorer(): bool
     {
-        // Define properties
         $envVariable = Environment::USE_GRAPHIQL_EXPLORER;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -71,18 +62,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function getGraphiQLClientEndpoint(): string
     {
-        // Define properties
         $envVariable = Environment::GRAPHIQL_CLIENT_ENDPOINT;
         $defaultValue = '/graphiql/';
         $callback = [EndpointUtils::class, 'slashURI'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -90,18 +78,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function isVoyagerClientEndpointDisabled(): bool
     {
-        // Define properties
         $envVariable = Environment::DISABLE_VOYAGER_CLIENT_ENDPOINT;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -109,17 +94,14 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function getVoyagerClientEndpoint(): string
     {
-        // Define properties
         $envVariable = Environment::VOYAGER_CLIENT_ENDPOINT;
         $defaultValue = '/schema/';
         $callback = [EndpointUtils::class, 'slashURI'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 }

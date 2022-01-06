@@ -17,33 +17,27 @@ class ComponentConfiguration extends AbstractComponentConfiguration
             return false;
         }
 
-        // Define properties
         $envVariable = Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function requireCommenterNameAndEmail(): bool
     {
-        // Define properties
         $envVariable = Environment::REQUIRE_COMMENTER_NAME_AND_EMAIL;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 }

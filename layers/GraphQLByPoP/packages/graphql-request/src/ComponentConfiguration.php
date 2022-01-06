@@ -11,17 +11,14 @@ class ComponentConfiguration extends AbstractComponentConfiguration
 {
     public function disableGraphQLAPIForPoP(): bool
     {
-        // Define properties
         $envVariable = Environment::DISABLE_GRAPHQL_API_FOR_POP;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 }

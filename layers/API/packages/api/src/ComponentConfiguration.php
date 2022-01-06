@@ -21,66 +21,54 @@ class ComponentConfiguration extends AbstractComponentConfiguration
             return false;
         }
 
-        // Define properties
         $envVariable = Environment::USE_SCHEMA_DEFINITION_CACHE;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function executeQueryBatchInStrictOrder(): bool
     {
-        // Define properties
         $envVariable = Environment::EXECUTE_QUERY_BATCH_IN_STRICT_ORDER;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function enableEmbeddableFields(): bool
     {
-        // Define properties
         $envVariable = Environment::ENABLE_EMBEDDABLE_FIELDS;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function enableMutations(): bool
     {
-        // Define properties
         $envVariable = Environment::ENABLE_MUTATIONS;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     /**
@@ -90,49 +78,40 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function overrideRequestURI(): bool
     {
-        // Define properties
         $envVariable = Environment::OVERRIDE_REQUEST_URI;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function skipExposingGlobalFieldsInFullSchema(): bool
     {
-        // Define properties
         $envVariable = Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function sortFullSchemaAlphabetically(): bool
     {
-        // Define properties
         $envVariable = Environment::SORT_FULL_SCHEMA_ALPHABETICALLY;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->retrieveConfigurationValueOrUseDefault(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 }
