@@ -22,8 +22,5 @@ trait RoutesTrait
     /**
      * @return array<string, string>
      */
-    protected static function getRouteNameAndVariableRefs(): array
-    {
-        return [];
-    }
+    abstract protected static function getRouteNameAndVariableRefs(): array;
 }
