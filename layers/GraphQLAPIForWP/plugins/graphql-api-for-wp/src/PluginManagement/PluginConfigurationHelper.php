@@ -12,7 +12,7 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 /**
  * Helper class with functions to set the configuration in PoP components.
  */
-class PluginConfigurationHelper
+class PluginInitializationConfigurationHelper
 {
     /**
      * Cache the options after normalizing them

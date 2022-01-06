@@ -14,8 +14,8 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginConfiguration;
+use GraphQLAPI\GraphQLAPI\PluginManagement\PluginInitializationConfigurationHelper;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginInitializationConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLClientsForWP\Component as GraphQLClientsForWPComponent;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
@@ -73,7 +73,7 @@ use PoPSchema\Users\Environment as UsersEnvironment;
 /**
  * Sets the configuration in all the PoP components from the main plugin.
  */
-class PluginConfiguration extends AbstractMainPluginConfiguration
+class PluginInitializationConfiguration extends AbstractMainPluginInitializationConfiguration
 {
     protected function isCachingEnabled(): bool
     {
@@ -101,7 +101,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
+                'callback' => fn ($value) => PluginInitializationConfigurationHelper::getURLPathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                     ModuleSettingOptions::PATH
@@ -114,7 +114,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => Environment::ENDPOINT_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => PluginConfigurationHelper::getCPTPermalinkBasePathSettingValue(
+                'callback' => fn ($value) => PluginInitializationConfigurationHelper::getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                     ModuleSettingOptions::PATH
@@ -127,7 +127,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => Environment::PERSISTED_QUERY_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => PluginConfigurationHelper::getCPTPermalinkBasePathSettingValue(
+                'callback' => fn ($value) => PluginInitializationConfigurationHelper::getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     ModuleSettingOptions::PATH
@@ -140,7 +140,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
+                'callback' => fn ($value) => PluginInitializationConfigurationHelper::getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                     ModuleSettingOptions::PATH
@@ -153,7 +153,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
+                'callback' => fn ($value) => PluginInitializationConfigurationHelper::getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                     ModuleSettingOptions::PATH

@@ -48,7 +48,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
      * so must be executed before those hooks are triggered for first time
      * (in ComponentConfiguration classes)
      */
-    protected function callPluginConfiguration(): void
+    protected function callPluginInitializationConfiguration(): void
     {
         $this->extensionConfiguration?->initialize();
     }

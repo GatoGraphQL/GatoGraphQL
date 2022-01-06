@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
+use GraphQLAPI\GraphQLAPI\PluginManagement\PluginInitializationConfigurationHelper;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\BasicService\Component\ComponentConfigurationHelpers;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
@@ -28,7 +28,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
  * For that, on the WordPress admin,
  * go to Settings => Permalinks and click on Save changes.
  */
-abstract class AbstractPluginConfiguration
+abstract class AbstractPluginInitializationConfiguration
 {
     /**
      * Initialize all configuration
@@ -69,8 +69,8 @@ abstract class AbstractPluginConfiguration
                  * in wp-config.php, with the environment name prepended with "GRAPHQL_API_"
                  */
                 function ($value) use ($envVariable) {
-                    if (PluginConfigurationHelper::isWPConfigConstantDefined($envVariable)) {
-                        return PluginConfigurationHelper::getWPConfigConstantValue($envVariable);
+                    if (PluginInitializationConfigurationHelper::isWPConfigConstantDefined($envVariable)) {
+                        return PluginInitializationConfigurationHelper::getWPConfigConstantValue($envVariable);
                     }
                     return $value;
                 }
@@ -109,7 +109,7 @@ abstract class AbstractPluginConfiguration
             // If the environment value has been defined, or the constant in wp-config.php,
             // then do nothing, since they have priority
             $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginConfigurationHelper::isWPConfigConstantDefined($envVariable)) {
+            if (getenv($envVariable) !== false || PluginInitializationConfigurationHelper::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
             $hookName = ComponentConfigurationHelpers::getHookName(
@@ -151,7 +151,7 @@ abstract class AbstractPluginConfiguration
             // If the environment value has been defined, or the constant in wp-config.php,
             // then do nothing, since they have priority
             $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginConfigurationHelper::isWPConfigConstantDefined($envVariable)) {
+            if (getenv($envVariable) !== false || PluginInitializationConfigurationHelper::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
             $hookName = ComponentConfigurationHelpers::getHookName(

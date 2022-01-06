@@ -155,7 +155,7 @@ class Plugin extends AbstractMainPlugin
          * a module, then already take that new state!
          *
          * This is because `maybeProcessAction`, which is where modules are
-         * enabled/disabled, must be executed before PluginConfiguration->initialize(),
+         * enabled/disabled, must be executed before PluginInitializationConfiguration->initialize(),
          * which is where the plugin reads if a module is enabled/disabled as to
          * set the environment constants.
          *
