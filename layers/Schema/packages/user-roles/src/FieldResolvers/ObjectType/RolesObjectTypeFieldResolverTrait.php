@@ -51,8 +51,8 @@ trait RolesObjectTypeFieldResolverTrait
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'roles' => $this->__('All user roles', 'user-roles'),
-            'capabilities' => $this->__('All user capabilities', 'user-roles'),
+            'roles' => $this->getTranslationaAPI()->__('All user roles', 'user-roles'),
+            'capabilities' => $this->getTranslationaAPI()->__('All user capabilities', 'user-roles'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -45,7 +45,7 @@ trait UserStateObjectTypeFieldResolverTrait
             return $errorMessage;
         }
         return sprintf(
-            $this->__('You must be logged in to access field \'%s\' for type \'%s\'', ''),
+            $this->getTranslationaAPI()->__('You must be logged in to access field \'%s\' for type \'%s\'', ''),
             $fieldName,
             $objectTypeResolver->getMaybeNamespacedTypeName()
         );
