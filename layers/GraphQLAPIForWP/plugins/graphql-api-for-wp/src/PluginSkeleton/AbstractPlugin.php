@@ -135,17 +135,28 @@ abstract class AbstractPlugin implements PluginInterface
      */
     public function configureComponents(): void
     {
-        // Set the plugin folder on all the Extension Components
-        $componentClasses = $this->getComponentClassesToInitialize();
+        // Set the plugin folder on the plugin's Component
         $pluginFolder = dirname($this->pluginFile);
-        foreach ($componentClasses as $componentClass) {
-            if (!is_a($componentClass, PluginComponentInterface::class, true)) {
-                continue;
-            }
-            /** @var PluginComponentInterface */
-            $component = App::getComponent($componentClass);
-            $component->setPluginFolder($pluginFolder);
-        }
+        $this->getPluginComponent()->setPluginFolder($pluginFolder);
+    }
+
+    /**
+     * Plugin's Component
+     */
+    protected function getPluginComponent(): PluginComponentInterface
+    {
+        /** @var PluginComponentInterface */
+        return App::getComponent($this->getComponentClass());
+    }
+
+    /**
+     * Package's Component class, of type PluginComponentInterface.
+     * By standard, it is "NamespaceOwner\Project\Component::class"
+     */
+    protected function getComponentClass(): string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        return $classNamespace . '\\Component';
     }
 
     /**
