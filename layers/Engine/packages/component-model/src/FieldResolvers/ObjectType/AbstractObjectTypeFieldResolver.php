@@ -38,7 +38,6 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
-use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
 
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface
@@ -87,7 +86,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?NameResolverInterface $nameResolver = null;
-    private ?CMSServiceInterface $cmsService = null;
     private ?SemverHelperServiceInterface $semverHelperService = null;
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
     private ?EngineInterface $engine = null;
@@ -109,14 +107,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function getNameResolver(): NameResolverInterface
     {
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
-    }
-    final public function setCMSService(CMSServiceInterface $cmsService): void
-    {
-        $this->cmsService = $cmsService;
-    }
-    final protected function getCMSService(): CMSServiceInterface
-    {
-        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
     final public function setSemverHelperService(SemverHelperServiceInterface $semverHelperService): void
     {
