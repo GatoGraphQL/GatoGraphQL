@@ -141,9 +141,10 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
     {
         $metaDirectiveResolvers = $this->getMetaDirectiveRegistry()->getMetaDirectiveResolvers();
         foreach ($metaDirectiveResolvers as $metaDirectiveResolver) {
-            if ($metaDirectiveResolver->getDirectiveName() === $directiveName) {
-                return $metaDirectiveResolver;
+            if ($metaDirectiveResolver->getDirectiveName() !== $directiveName) {
+                continue;
             }
+            return $metaDirectiveResolver;
         }
         return null;
     }
