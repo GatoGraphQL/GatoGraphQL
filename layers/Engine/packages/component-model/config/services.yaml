@@ -145,3 +145,6 @@ services:
 
     PoP\ModuleRouting\RouteModuleProcessorManagerInterface:
         class: \PoP\ComponentModel\ModuleRouting\RouteModuleProcessorManager
+
+    PoP\GraphQLParser\Parser\ExtendedParserInterface:
+        class: \PoP\ComponentModel\GraphQLParser\Parser\ExtendedParser

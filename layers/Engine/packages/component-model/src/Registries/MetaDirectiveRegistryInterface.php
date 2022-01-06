@@ -10,7 +10,8 @@ interface MetaDirectiveRegistryInterface
 {
     public function addMetaDirectiveResolver(MetaDirectiveResolverInterface $metaDirectiveResolver): void;
     /**
-     * @return MetaDirectiveResolverInterface[]
+     * @return array<string,MetaDirectiveResolverInterface>
      */
     public function getMetaDirectiveResolvers(): array;
+    public function getMetaDirectiveResolver(string $directiveName): ?MetaDirectiveResolverInterface;
 }

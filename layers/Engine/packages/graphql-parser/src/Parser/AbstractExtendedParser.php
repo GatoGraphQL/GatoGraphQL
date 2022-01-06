@@ -4,39 +4,28 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser;
 
-use PoP\Root\App;
-use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
-use PoP\ComponentModel\Error\ErrorProviderInterface;
-use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Parser\Ast\MetaDirective;
+use PoP\GraphQLParser\Response\OutputServiceInterface;
+use PoP\Root\App;
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use stdClass;
 
-class ExtendedParser extends Parser implements ExtendedParserInterface
+abstract class AbstractExtendedParser extends Parser implements ExtendedParserInterface
 {
-    private ?MetaDirectiveRegistryInterface $metaDirectiveRegistry = null;
-    private ?ErrorProviderInterface $errorProvider = null;
+    private ?OutputServiceInterface $outputService = null;
 
-    final public function setMetaDirectiveRegistry(MetaDirectiveRegistryInterface $metaDirectiveRegistry): void
+    final public function setOutputService(OutputServiceInterface $outputService): void
     {
-        $this->metaDirectiveRegistry = $metaDirectiveRegistry;
+        $this->outputService = $outputService;
     }
-    final protected function getMetaDirectiveRegistry(): MetaDirectiveRegistryInterface
+    final protected function getOutputService(): OutputServiceInterface
     {
-        return $this->metaDirectiveRegistry ??= $this->instanceManager->getInstance(MetaDirectiveRegistryInterface::class);
-    }
-    final public function setErrorProvider(ErrorProviderInterface $errorProvider): void
-    {
-        $this->errorProvider = $errorProvider;
-    }
-    final protected function getErrorProvider(): ErrorProviderInterface
-    {
-        return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
+        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
     }
 
     /**
@@ -54,7 +43,6 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
             return $directives;
         }
 
-        $metaDirectiveResolvers = $this->getMetaDirectiveRegistry()->getMetaDirectiveResolvers();
         /**
          * For each directive, indicate which meta-directive is composing it
          * by indicating their relative position (as a negative int)
@@ -65,15 +53,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         $directivePos = 0;
         while ($directivePos < $directiveCount) {
             $directive = $directives[$directivePos];
-            $metaDirectiveResolver = null;
-            foreach ($metaDirectiveResolvers as $maybeMetaDirectiveResolver) {
-                if ($maybeMetaDirectiveResolver->getDirectiveName() !== $directive->getName()) {
-                    continue;
-                }
-                $metaDirectiveResolver = $maybeMetaDirectiveResolver;
-                break;
-            }
-            if ($metaDirectiveResolver === null) {
+            if (!$this->isMetaDirective($directive->getName())) {
                 $directivePos++;
                 continue;
             }
@@ -81,7 +61,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
              * Obtain the value from the "affect" argument.
              * If not set, use the default value
              */
-            $affectDirectivesUnderPosArgument = $this->getAffectDirectivesUnderPosArgument($metaDirectiveResolver, $directive);
+            $affectDirectivesUnderPosArgument = $this->getAffectDirectivesUnderPosArgument($directive);
             $affectDirectivesUnderPositions = $affectDirectivesUnderPosArgument !== null ?
                 $this->getAffectDirectivesUnderPosArgumentValue(
                     $directive,
@@ -89,7 +69,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
                     $directivePos,
                     $directiveCount,
                 )
-                : $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentDefaultValue();
+                : $this->getAffectDirectivesUnderPosArgumentDefaultValue($directive);
 
             foreach ($affectDirectivesUnderPositions as $affectDirectiveUnderPosition) {
                 $composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition] = $affectDirectiveUnderPosition;
@@ -145,19 +125,15 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         return $rootDirectives;
     }
 
-    protected function getAffectDirectivesUnderPosArgument(
-        MetaDirectiveResolverInterface $metaDirectiveResolver,
+    abstract protected function isMetaDirective(string $directiveName): bool;
+
+    abstract protected function getAffectDirectivesUnderPosArgument(
         Directive $directive,
-    ): ?Argument {
-        $affectDirectivesUnderPosArgumentName = $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentName();
-        foreach ($directive->getArguments() as $argument) {
-            if ($argument->getName() !== $affectDirectivesUnderPosArgumentName) {
-                continue;
-            }
-            return $argument;
-        }
-        return null;
-    }
+    ): ?Argument;
+
+    abstract protected function getAffectDirectivesUnderPosArgumentDefaultValue(
+        Directive $directive,
+    ): mixed;
 
     /**
      * @return int[]
@@ -229,7 +205,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
             $argument->getName(),
             $directive->getName(),
             is_array($itemValue) || ($itemValue instanceof stdClass)
-                ? $this->getErrorProvider()->jsonEncodeArrayOrStdClassValue($itemValue)
+                ? $this->getOutputService()->jsonEncodeArrayOrStdClassValue($itemValue)
                 : $itemValue
         );
     }
