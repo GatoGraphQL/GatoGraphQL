@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\PluginManagement\PluginInitializationConfigurationHelper;
+use GraphQLAPI\GraphQLAPI\PluginManagement\PluginManagementHelpers;
 
 class PluginEnvironment
 {
@@ -23,8 +23,8 @@ class PluginEnvironment
             return strtolower(getenv(self::DISABLE_CACHING)) != "true";
         }
 
-        if (PluginInitializationConfigurationHelper::isWPConfigConstantDefined(self::DISABLE_CACHING)) {
-            return !PluginInitializationConfigurationHelper::getWPConfigConstantValue(self::DISABLE_CACHING);
+        if (PluginManagementHelpers::isWPConfigConstantDefined(self::DISABLE_CACHING)) {
+            return !PluginManagementHelpers::getWPConfigConstantValue(self::DISABLE_CACHING);
         }
 
         return true;
@@ -40,8 +40,8 @@ class PluginEnvironment
         $baseCacheDir = null;
         if (getenv(self::CACHE_DIR) !== false) {
             $baseCacheDir = rtrim(getenv(self::CACHE_DIR), '/');
-        } elseif (PluginInitializationConfigurationHelper::isWPConfigConstantDefined(self::CACHE_DIR)) {
-            $baseCacheDir = rtrim(PluginInitializationConfigurationHelper::getWPConfigConstantValue(self::CACHE_DIR), '/');
+        } elseif (PluginManagementHelpers::isWPConfigConstantDefined(self::CACHE_DIR)) {
+            $baseCacheDir = rtrim(PluginManagementHelpers::getWPConfigConstantValue(self::CACHE_DIR), '/');
         } else {
             $baseCacheDir = constant('WP_CONTENT_DIR');
         }
@@ -56,8 +56,8 @@ class PluginEnvironment
     {
         if (getenv(self::ENABLE_UNSAFE_DEFAULTS) !== false) {
             return (bool)getenv(self::ENABLE_UNSAFE_DEFAULTS);
-        } elseif (PluginInitializationConfigurationHelper::isWPConfigConstantDefined(self::ENABLE_UNSAFE_DEFAULTS)) {
-            return (bool)PluginInitializationConfigurationHelper::getWPConfigConstantValue(self::ENABLE_UNSAFE_DEFAULTS);
+        } elseif (PluginManagementHelpers::isWPConfigConstantDefined(self::ENABLE_UNSAFE_DEFAULTS)) {
+            return (bool)PluginManagementHelpers::getWPConfigConstantValue(self::ENABLE_UNSAFE_DEFAULTS);
         }
 
         return false;

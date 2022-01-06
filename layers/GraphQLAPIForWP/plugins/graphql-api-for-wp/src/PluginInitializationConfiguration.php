@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PluginManagement\PluginInitializationConfigurationHelper;
+use GraphQLAPI\GraphQLAPI\PluginManagement\PluginManagementHelpers;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginInitializationConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLClientsForWP\Component as GraphQLClientsForWPComponent;
@@ -101,7 +101,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => PluginInitializationConfigurationHelper::getURLPathSettingValue(
+                'callback' => fn ($value) => PluginManagementHelpers::getURLPathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                     ModuleSettingOptions::PATH
@@ -114,7 +114,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => Environment::ENDPOINT_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => PluginInitializationConfigurationHelper::getCPTPermalinkBasePathSettingValue(
+                'callback' => fn ($value) => PluginManagementHelpers::getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                     ModuleSettingOptions::PATH
@@ -127,7 +127,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => Environment::PERSISTED_QUERY_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => PluginInitializationConfigurationHelper::getCPTPermalinkBasePathSettingValue(
+                'callback' => fn ($value) => PluginManagementHelpers::getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     ModuleSettingOptions::PATH
@@ -140,7 +140,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => PluginInitializationConfigurationHelper::getURLPathSettingValue(
+                'callback' => fn ($value) => PluginManagementHelpers::getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                     ModuleSettingOptions::PATH
@@ -153,7 +153,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => PluginInitializationConfigurationHelper::getURLPathSettingValue(
+                'callback' => fn ($value) => PluginManagementHelpers::getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                     ModuleSettingOptions::PATH
