@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
+use PoP\Root\Helpers\ClassHelpers;
+
 /**
  * This class is hosted within the graphql-api-for-wp plugin, and not
  * within the extension plugin. That means that the main plugin
@@ -21,17 +23,50 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
  */
 abstract class AbstractExtension extends AbstractPlugin implements ExtensionInterface
 {
+    protected ?ExtensionInitializationConfigurationInterface $extensionInitializationConfiguration = null;
+
     public function __construct(
         string $pluginFile, /** The main plugin file */
         string $pluginVersion,
         ?string $pluginName = null,
-        protected ?ExtensionInitializationConfigurationInterface $extensionInitializationConfiguration = null,
+        ?ExtensionInitializationConfigurationInterface $extensionInitializationConfiguration = null,
     ) {
         parent::__construct(
             $pluginFile,
             $pluginVersion,
             $pluginName,
         );
+        $this->extensionInitializationConfiguration = $extensionInitializationConfiguration ?? $this->maybeCreateInitializationConfiguration();
+    }
+
+    protected function maybeCreateInitializationConfiguration(): ?ExtensionInitializationConfigurationInterface
+    {
+        $extensionInitializationConfigurationClass = $this->getExtensionInitializationConfigurationClass();
+        if ($extensionInitializationConfigurationClass === null) {
+            return null;
+        }
+        return new $extensionInitializationConfigurationClass();
+    }
+
+    /**
+     * ExtensionInitializationConfiguration class for the Plugin
+     */
+    protected function getExtensionInitializationConfigurationClass(): ?string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        $pluginInitializationConfigurationClass = $classNamespace . '\\' . $this->getExtensionInitializationConfigurationClassName();
+        if (!class_exists($pluginInitializationConfigurationClass)) {
+            return null;
+        }
+        return $pluginInitializationConfigurationClass;
+    }
+
+    /**
+     * ExtensionInitializationConfiguration class name for the Extension
+     */
+    protected function getExtensionInitializationConfigurationClassName(): ?string
+    {
+        return 'ExtensionInitializationConfiguration';
     }
 
     /**

@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use PoP\Engine\AppLoader;
 use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Helpers\ClassHelpers;
 use RuntimeException;
 
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
@@ -21,17 +22,35 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     private ?Exception $inititalizationException = null;
 
+    protected MainPluginInitializationConfigurationInterface $pluginInitializationConfiguration;
+
     public function __construct(
         string $pluginFile, /** The main plugin file */
         string $pluginVersion,
         ?string $pluginName = null,
-        protected MainPluginInitializationConfigurationInterface $pluginInitializationConfiguration,
+        ?MainPluginInitializationConfigurationInterface $pluginInitializationConfiguration = null,
     ) {
         parent::__construct(
             $pluginFile,
             $pluginVersion,
             $pluginName,
         );
+        $this->pluginInitializationConfiguration = $pluginInitializationConfiguration ?? $this->createInitializationConfiguration();
+    }
+
+    protected function createInitializationConfiguration(): MainPluginInitializationConfigurationInterface
+    {
+        $pluginInitializationConfigurationClass = $this->getPluginInitializationConfigurationClass();
+        return new $pluginInitializationConfigurationClass();
+    }
+
+    /**
+     * PluginInitializationConfiguration class for the Plugin
+     */
+    protected function getPluginInitializationConfigurationClass(): string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        return $classNamespace . '\\PluginInitializationConfiguration';
     }
 
     /**
