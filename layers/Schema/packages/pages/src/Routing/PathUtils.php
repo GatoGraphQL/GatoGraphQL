@@ -9,7 +9,7 @@ use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 
 class PathUtils
 {
-    public static function getPagePath($page_id)
+    public static function getPagePath(string|int $page_id): string
     {
         $cmsService = CMSServiceFacade::getInstance();
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
