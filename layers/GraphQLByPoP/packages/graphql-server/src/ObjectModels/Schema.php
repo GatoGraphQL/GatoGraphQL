@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-use PoP\Root\App;
 use Exception;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
@@ -12,13 +11,15 @@ use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFaca
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\TypeKinds;
+use PoP\BasicService\StandaloneServiceTrait;
 use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Translation\TranslationAPIInterface;
+use PoP\Root\App;
 
 class Schema
 {
+    use StandaloneServiceTrait;
+    
     /** @var NamedTypeInterface[] */
     protected array $types;
     /** @var Directive[] */
@@ -82,10 +83,6 @@ class Schema
                 $typeKind
             )),
         };
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return TranslationAPIFacade::getInstance();
     }
 
     protected function getDirectiveInstance(array &$fullSchemaDefinition, string $directiveName): Directive
