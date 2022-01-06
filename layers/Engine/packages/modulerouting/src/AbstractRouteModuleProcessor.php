@@ -4,23 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ModuleRouting;
 
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Root\Services\WithInstanceManagerServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 
 abstract class AbstractRouteModuleProcessor
 {
-    use WithInstanceManagerServiceTrait;
-
-    private ?HooksAPIInterface $hooksAPI = null;
-
-    final public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    final protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
+    use BasicServiceTrait;
 
     /**
      * @return string[]
