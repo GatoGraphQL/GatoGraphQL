@@ -41,11 +41,11 @@ trait OneofInputObjectTypeResolverTrait
             return new Error(
                 $this->getErrorCode(),
                 sprintf(
-                    $this->getTranslationaAPI()->__('The oneof input object \'%s\' must receive exactly 1 input, but \'%s\' inputs were provided (\'%s\')', 'component-model'),
+                    $this->getTranslationAPI()->__('The oneof input object \'%s\' must receive exactly 1 input, but \'%s\' inputs were provided (\'%s\')', 'component-model'),
                     $this->getMaybeNamespacedTypeName(),
                     $inputValueSize,
                     implode(
-                        $this->getTranslationaAPI()->__('\', \'', 'component-model'),
+                        $this->getTranslationAPI()->__('\', \'', 'component-model'),
                         array_keys((array)$inputValue)
                     )
                 )
@@ -55,7 +55,7 @@ trait OneofInputObjectTypeResolverTrait
             return new Error(
                 $this->getErrorCode(),
                 sprintf(
-                    $this->getTranslationaAPI()->__('No input value was provided to the oneof input object \'%s\'', 'component-model'),
+                    $this->getTranslationAPI()->__('No input value was provided to the oneof input object \'%s\'', 'component-model'),
                     $this->getMaybeNamespacedTypeName()
                 )
             );

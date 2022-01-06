@@ -35,16 +35,16 @@ trait CustomPostOrderByEnumTypeResolverTrait
     public function getAdditionalCustomPostEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            CustomPostOrderBy::NONE => $this->getTranslationaAPI()->__('Skip ordering', 'customposts'),
-            CustomPostOrderBy::COMMENT_COUNT => $this->getTranslationaAPI()->__('Order by number of comments', 'customposts'),
-            CustomPostOrderBy::RANDOM => $this->getTranslationaAPI()->__('Order by a random number', 'customposts'),
-            CustomPostOrderBy::MODIFIED_DATE => $this->getTranslationaAPI()->__('Order by last modified date', 'customposts'),
-            CustomPostOrderBy::RELEVANCE => $this->getTranslationaAPI()->__('Order by relevance', 'customposts'),
-            CustomPostOrderBy::TYPE => $this->getTranslationaAPI()->__('Order by type', 'customposts'),
-            CustomPostOrderBy::PARENT => $this->getTranslationaAPI()->__('Order by custom post parent id', 'customposts'),
-            CustomPostOrderBy::MENU_ORDER => $this->getTranslationaAPI()->__('Order by menu order', 'customposts'),
-            // CustomPostOrderBy::POST__IN => $this->getTranslationaAPI()->__('Preserve post ID order given in the post__in array', 'customposts'),
-            // CustomPostOrderBy::POST_PARENT__IN => $this->getTranslationaAPI()->__('Preserve post parent order given in the ‘post_parent__in’ array', 'customposts'),
+            CustomPostOrderBy::NONE => $this->getTranslationAPI()->__('Skip ordering', 'customposts'),
+            CustomPostOrderBy::COMMENT_COUNT => $this->getTranslationAPI()->__('Order by number of comments', 'customposts'),
+            CustomPostOrderBy::RANDOM => $this->getTranslationAPI()->__('Order by a random number', 'customposts'),
+            CustomPostOrderBy::MODIFIED_DATE => $this->getTranslationAPI()->__('Order by last modified date', 'customposts'),
+            CustomPostOrderBy::RELEVANCE => $this->getTranslationAPI()->__('Order by relevance', 'customposts'),
+            CustomPostOrderBy::TYPE => $this->getTranslationAPI()->__('Order by type', 'customposts'),
+            CustomPostOrderBy::PARENT => $this->getTranslationAPI()->__('Order by custom post parent id', 'customposts'),
+            CustomPostOrderBy::MENU_ORDER => $this->getTranslationAPI()->__('Order by menu order', 'customposts'),
+            // CustomPostOrderBy::POST__IN => $this->getTranslationAPI()->__('Preserve post ID order given in the post__in array', 'customposts'),
+            // CustomPostOrderBy::POST_PARENT__IN => $this->getTranslationAPI()->__('Preserve post parent order given in the ‘post_parent__in’ array', 'customposts'),
             default => null,
         };
     }

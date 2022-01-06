@@ -25,6 +25,6 @@ trait ValidateUserLoggedInMutationResolverTrait
     }
     protected function getUserNotLoggedInErrorMessage(): string
     {
-        return $this->getTranslationaAPI()->__('You are not logged in', 'user-state-mutations');
+        return $this->getTranslationAPI()->__('You are not logged in', 'user-state-mutations');
     }
 }

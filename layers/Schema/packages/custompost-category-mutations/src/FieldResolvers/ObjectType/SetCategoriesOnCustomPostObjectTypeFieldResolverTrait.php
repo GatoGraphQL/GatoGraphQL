@@ -12,6 +12,6 @@ trait SetCategoriesOnCustomPostObjectTypeFieldResolverTrait
 
     protected function getEntityName(): string
     {
-        return $this->getTranslationaAPI()->__('custom post', 'custompost-category-mutations');
+        return $this->getTranslationAPI()->__('custom post', 'custompost-category-mutations');
     }
 }
