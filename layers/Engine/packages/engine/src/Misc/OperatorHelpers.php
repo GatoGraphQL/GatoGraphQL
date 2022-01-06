@@ -27,7 +27,7 @@ class OperatorHelpers
         foreach (explode(OperationSymbols::ARRAY_PATH_DELIMITER, $path) as $pathLevel) {
             if (!$dataPointer) {
                 // If we reached the end of the array and can't keep going down any level more, then it's an error
-                return self::throwNoArrayItemUnderPathException($data, $path);
+                self::throwNoArrayItemUnderPathException($data, $path);
             } elseif (array_key_exists($pathLevel, $dataPointer)) {
                 // Retrieve the property under the pathLevel
                 $dataPointer = &$dataPointer[$pathLevel];
@@ -40,7 +40,7 @@ class OperatorHelpers
             } else {
                 // We are accessing a level that doesn't exist
                 // If we reached the end of the array and can't keep going down any level more, then it's an error
-                return self::throwNoArrayItemUnderPathException($data, $path);
+                self::throwNoArrayItemUnderPathException($data, $path);
             }
         }
         return $dataPointer;
