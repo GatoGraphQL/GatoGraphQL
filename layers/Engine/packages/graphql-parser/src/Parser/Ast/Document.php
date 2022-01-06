@@ -13,26 +13,26 @@ class Document extends UpstreamDocument
 
     protected function getNoOperationsDefinedInQueryErrorMessage(): string
     {
-        return $this->getTranslationAPI()->__('No operations defined in the query', 'graphql-parser');
+        return $this->__('No operations defined in the query', 'graphql-parser');
     }
 
     protected function getDuplicateOperationNameErrorMessage(string $operationName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Operation name \'%s\' is duplicated', 'graphql-parser'),
+            $this->__('Operation name \'%s\' is duplicated', 'graphql-parser'),
             $operationName
         );
     }
 
     protected function getEmptyOperationNameErrorMessage(): string
     {
-        return $this->getTranslationAPI()->__('When submitting more than 1 operation, no operation name can be empty', 'graphql-parser');
+        return $this->__('When submitting more than 1 operation, no operation name can be empty', 'graphql-parser');
     }
 
     protected function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Fragment \'%s\' is not defined in query', 'graphql-parser'),
+            $this->__('Fragment \'%s\' is not defined in query', 'graphql-parser'),
             $fragmentName
         );
     }
@@ -40,7 +40,7 @@ class Document extends UpstreamDocument
     protected function getFragmentNotUsedErrorMessage(string $fragmentName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Fragment \'%s\' is not used', 'graphql-parser'),
+            $this->__('Fragment \'%s\' is not used', 'graphql-parser'),
             $fragmentName
         );
     }
@@ -48,7 +48,7 @@ class Document extends UpstreamDocument
     protected function getDuplicateVariableNameErrorMessage(string $variableName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Variable name \'%s\' is duplicated', 'graphql-parser'),
+            $this->__('Variable name \'%s\' is duplicated', 'graphql-parser'),
             $variableName
         );
     }
@@ -56,7 +56,7 @@ class Document extends UpstreamDocument
     protected function getVariableDoesNotExistErrorMessage(string $variableName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Variable \'%s\' has not been defined in the operation', 'graphql-parser'),
+            $this->__('Variable \'%s\' has not been defined in the operation', 'graphql-parser'),
             $variableName
         );
     }
@@ -64,7 +64,7 @@ class Document extends UpstreamDocument
     protected function getVariableNotUsedErrorMessage(string $variableName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Variable \'%s\' is not used', 'graphql-parser'),
+            $this->__('Variable \'%s\' is not used', 'graphql-parser'),
             $variableName
         );
     }
@@ -72,7 +72,7 @@ class Document extends UpstreamDocument
     protected function getDuplicateArgumentErrorMessage(string $argumentName): string
     {
         return \sprintf(
-            $this->getTranslationAPI()->__('Argument \'%s\' is duplicated', 'graphql-parser'),
+            $this->__('Argument \'%s\' is duplicated', 'graphql-parser'),
             $argumentName
         );
     }

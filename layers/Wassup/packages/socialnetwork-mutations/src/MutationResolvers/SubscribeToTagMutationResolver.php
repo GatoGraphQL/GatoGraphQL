@@ -24,7 +24,7 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
                 $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
                 $tag = $this->getPostTagTypeAPI()->getTag($target_id);
                 $errors[] = sprintf(
-                    $this->getTranslationAPI()->__('You have already subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->__('You have already subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $applicationtaxonomyapi->getTagSymbolName($tag)
                 );
             }

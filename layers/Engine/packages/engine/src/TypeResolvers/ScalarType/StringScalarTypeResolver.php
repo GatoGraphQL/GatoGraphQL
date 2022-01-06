@@ -21,7 +21,7 @@ class StringScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('The String scalar type represents textual data, represented as UTF-8 character sequences.', 'component-model');
+        return $this->__('The String scalar type represents textual data, represented as UTF-8 character sequences.', 'component-model');
     }
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object

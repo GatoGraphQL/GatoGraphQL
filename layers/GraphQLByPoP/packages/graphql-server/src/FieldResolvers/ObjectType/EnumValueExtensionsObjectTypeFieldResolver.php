@@ -42,7 +42,7 @@ class EnumValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'isAdminElement' => $this->getTranslationAPI()->__('Is this element considered an \'admin\' element in the schema? (If so, it is only exposed in the schema when \'Expose admin elements\' is enabled)', 'graphql-server'),
+            'isAdminElement' => $this->__('Is this element considered an \'admin\' element in the schema? (If so, it is only exposed in the schema when \'Expose admin elements\' is enabled)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -46,7 +46,7 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
         $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
         $tag = $this->getPostTagTypeAPI()->getTag($result_id);
         return sprintf(
-            $this->getTranslationAPI()->__('You have unsubscribed from <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->__('You have unsubscribed from <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $applicationtaxonomyapi->getTagSymbolName($tag)
         );
     }

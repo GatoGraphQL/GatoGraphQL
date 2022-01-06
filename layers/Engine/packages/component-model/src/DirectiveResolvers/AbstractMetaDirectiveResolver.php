@@ -53,7 +53,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            $this->getAffectDirectivesUnderPosArgumentName() => $this->getTranslationAPI()->__('Positions of the directives to be affected, relative from this one (as an array of positive integers)', 'graphql-server'),
+            $this->getAffectDirectivesUnderPosArgumentName() => $this->__('Positions of the directives to be affected, relative from this one (as an array of positive integers)', 'graphql-server'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }

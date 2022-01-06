@@ -13,6 +13,6 @@ class InputValueExtensionsObjectTypeResolver extends AbstractSchemaElementExtens
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Extensions (custom metadata) added to the input value', 'graphql-server');
+        return $this->__('Extensions (custom metadata) added to the input value', 'graphql-server');
     }
 }

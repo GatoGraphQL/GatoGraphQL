@@ -50,7 +50,7 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'author' => $this->getTranslationAPI()->__('Comment\'s author', 'comments'),
+            'author' => $this->__('Comment\'s author', 'comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

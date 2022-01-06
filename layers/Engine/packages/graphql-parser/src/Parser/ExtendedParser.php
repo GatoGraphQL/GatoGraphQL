@@ -213,7 +213,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         Argument $argument
     ): string {
         return \sprintf(
-            $this->getTranslationAPI()->__('Argument \'%s\' in directive \'%s\' cannot be null or empty', 'graphql-parser'),
+            $this->__('Argument \'%s\' in directive \'%s\' cannot be null or empty', 'graphql-parser'),
             $argument->getName(),
             $directive->getName()
         );
@@ -225,7 +225,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         mixed $itemValue
     ): string {
         return \sprintf(
-            $this->getTranslationAPI()->__('Argument \'%s\' in directive \'%s\' must be an array of positive integers, array item \'%s\' is not allowed', 'graphql-parser'),
+            $this->__('Argument \'%s\' in directive \'%s\' must be an array of positive integers, array item \'%s\' is not allowed', 'graphql-parser'),
             $argument->getName(),
             $directive->getName(),
             is_array($itemValue) || ($itemValue instanceof stdClass)
@@ -240,7 +240,7 @@ class ExtendedParser extends Parser implements ExtendedParserInterface
         int $itemValue
     ): string {
         return \sprintf(
-            $this->getTranslationAPI()->__('There is no directive in relative position \'%s\' from meta directive \'%s\', as indicated in argument \'%s\'', 'graphql-parser'),
+            $this->__('There is no directive in relative position \'%s\' from meta directive \'%s\', as indicated in argument \'%s\'', 'graphql-parser'),
             $itemValue,
             $directive->getName(),
             $argument->getName(),

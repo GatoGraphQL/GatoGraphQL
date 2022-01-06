@@ -76,7 +76,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'roleNames' => $this->getTranslationAPI()->__('All user role names', 'user-roles'),
+            'roleNames' => $this->__('All user role names', 'user-roles'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

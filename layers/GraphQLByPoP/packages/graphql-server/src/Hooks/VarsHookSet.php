@@ -85,13 +85,13 @@ class VarsHookSet extends AbstractHookSet
     {
         $vars = ApplicationState::getVars();
         if (isset($vars['edit-schema'])) {
-            $components[] = $this->getTranslationAPI()->__('edit schema:', 'graphql-server') . $vars['edit-schema'];
+            $components[] = $this->__('edit schema:', 'graphql-server') . $vars['edit-schema'];
         }
         if ($graphQLOperationType = $vars['graphql-operation-type'] ?? null) {
-            $components[] = $this->getTranslationAPI()->__('GraphQL operation type:', 'graphql-server') . $graphQLOperationType;
+            $components[] = $this->__('GraphQL operation type:', 'graphql-server') . $graphQLOperationType;
         }
-        $components[] = $this->getTranslationAPI()->__('enable nested mutations:', 'graphql-server') . $vars['nested-mutations-enabled'];
-        $components[] = $this->getTranslationAPI()->__('enable GraphQL introspection:', 'graphql-server') . $vars['graphql-introspection-enabled'];
+        $components[] = $this->__('enable nested mutations:', 'graphql-server') . $vars['nested-mutations-enabled'];
+        $components[] = $this->__('enable GraphQL introspection:', 'graphql-server') . $vars['graphql-introspection-enabled'];
 
         return $components;
     }

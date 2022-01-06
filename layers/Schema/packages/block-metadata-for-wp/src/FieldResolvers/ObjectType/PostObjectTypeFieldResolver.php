@@ -69,7 +69,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'blockMetadata' => $this->getTranslationAPI()->__('Metadata for all blocks contained in the post, split on a block by block basis', 'pop-block-metadata'),
+            'blockMetadata' => $this->__('Metadata for all blocks contained in the post, split on a block by block basis', 'pop-block-metadata'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -88,8 +88,8 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['blockMetadata' => 'blockName'] => $this->getTranslationAPI()->__('Fetch only the block with this name in the post, filtering out all other blocks', 'block-metadata'),
-            // ['blockMetadata' => 'filterBy'] => $this->getTranslationAPI()->__('Filter the block results based on different properties', 'block-metadata'),
+            ['blockMetadata' => 'blockName'] => $this->__('Fetch only the block with this name in the post, filtering out all other blocks', 'block-metadata'),
+            // ['blockMetadata' => 'filterBy'] => $this->__('Filter the block results based on different properties', 'block-metadata'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -106,18 +106,18 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     //                     [
     //                         SchemaDefinition::NAME => 'filterBy',
     //                         SchemaDefinition::TYPE_NAME => SchemaDefinitionTypes::TYPE_INPUT_OBJECT,
-    //                         SchemaDefinition::DESCRIPTION => $this->getTranslationAPI()->__('Filter the block results based on different properties', 'block-metadata'),
+    //                         SchemaDefinition::DESCRIPTION => $this->__('Filter the block results based on different properties', 'block-metadata'),
     //                         SchemaDefinition::ARGS => [
     //                             [
     //                                 SchemaDefinition::NAME => 'blockNameStartsWith',
     //                                 SchemaDefinition::TYPE_NAME => SchemaDefinitionTypes::TYPE_STRING,
-    //                                 SchemaDefinition::DESCRIPTION => $this->getTranslationAPI()->__('Include only blocks with the given name', 'block-metadata'),
+    //                                 SchemaDefinition::DESCRIPTION => $this->__('Include only blocks with the given name', 'block-metadata'),
     //                             ],
     //                             [
     //                                 SchemaDefinition::NAME => 'metaProperties',
     //                                 SchemaDefinition::TYPE_NAME => SchemaDefinitionTypes::TYPE_STRING,
     //                                 SchemaDefinition::IS_ARRAY => true,
-    //                                 SchemaDefinition::DESCRIPTION => $this->getTranslationAPI()->__('Include only these block properties in the meta entry from the block', 'block-metadata'),
+    //                                 SchemaDefinition::DESCRIPTION => $this->__('Include only these block properties in the meta entry from the block', 'block-metadata'),
     //                             ]
     //                         ]
     //                     ],

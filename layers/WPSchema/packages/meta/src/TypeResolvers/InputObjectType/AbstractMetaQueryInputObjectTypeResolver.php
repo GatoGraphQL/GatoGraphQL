@@ -66,7 +66,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/', 'meta');
+        return $this->__('Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/', 'meta');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -82,10 +82,10 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'key' => $this->getTranslationAPI()->__('Custom field key', 'meta'),
-            'type' => $this->getTranslationAPI()->__('Custom field type', 'meta'),
-            'compareBy' => $this->getTranslationAPI()->__('Value and operator to compare against', 'meta'),
-            'relation' => $this->getTranslationAPI()->__('OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used', 'meta'),
+            'key' => $this->__('Custom field key', 'meta'),
+            'type' => $this->__('Custom field type', 'meta'),
+            'compareBy' => $this->__('Value and operator to compare against', 'meta'),
+            'relation' => $this->__('OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used', 'meta'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -119,7 +119,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
                 ) {
                     return [
                         sprintf(
-                            $this->getTranslationAPI()->__('There is no meta with key \'%s\'', 'meta'),
+                            $this->__('There is no meta with key \'%s\'', 'meta'),
                             $coercedInputFieldValue
                         )
                     ];

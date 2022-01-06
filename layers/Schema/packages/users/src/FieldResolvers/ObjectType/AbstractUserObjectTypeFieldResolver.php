@@ -107,8 +107,8 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'users' => $this->getTranslationAPI()->__('Users', 'pop-users'),
-            'userCount' => $this->getTranslationAPI()->__('Number of users', 'pop-users'),
+            'users' => $this->__('Users', 'pop-users'),
+            'userCount' => $this->__('Number of users', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

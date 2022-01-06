@@ -115,12 +115,12 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->getTranslationAPI()->__('Directive\'s name', 'graphql-server'),
-            'description' => $this->getTranslationAPI()->__('Directive\'s description', 'graphql-server'),
-            'args' => $this->getTranslationAPI()->__('Directive\'s arguments', 'graphql-server'),
-            'locations' => $this->getTranslationAPI()->__('The locations where the directive may be placed', 'graphql-server'),
-            'isRepeatable' => $this->getTranslationAPI()->__('Can the directive be executed more than once in the same field?', 'graphql-server'),
-            'extensions' => $this->getTranslationAPI()->__('Extensions (custom metadata) added to the directive (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
+            'name' => $this->__('Directive\'s name', 'graphql-server'),
+            'description' => $this->__('Directive\'s description', 'graphql-server'),
+            'args' => $this->__('Directive\'s arguments', 'graphql-server'),
+            'locations' => $this->__('The locations where the directive may be placed', 'graphql-server'),
+            'isRepeatable' => $this->__('Can the directive be executed more than once in the same field?', 'graphql-server'),
+            'extensions' => $this->__('Extensions (custom metadata) added to the directive (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -13,7 +13,7 @@ abstract class AbstractCategoryObjectTypeResolver extends AbstractTaxonomyObject
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Representation of a category, added to a custom post', 'categories');
+        return $this->__('Representation of a category, added to a custom post', 'categories');
     }
 
     public function getID(object $object): string | int | null

@@ -49,14 +49,14 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         $message = sprintf(
             '<p>%s</p><br/>',
             sprintf(
-                $this->getTranslationAPI()->__('Someone requested that the password be reset for your account on <a href="%s">%s</a>. If this was a mistake, or if it was not you who requested the password reset, just ignore this email and nothing will happen.', 'pop-application'),
+                $this->__('Someone requested that the password be reset for your account on <a href="%s">%s</a>. If this was a mistake, or if it was not you who requested the password reset, just ignore this email and nothing will happen.', 'pop-application'),
                 GeneralUtils::maybeAddTrailingSlash($this->getCmsService()->getHomeURL()),
                 $cmsapplicationapi->getSiteName()
             )
         );
         $message .= sprintf(
             '<p>%s</p>',
-            $this->getTranslationAPI()->__('To reset your password, please click on the following link:</p>', 'pop-application')
+            $this->__('To reset your password, please click on the following link:</p>', 'pop-application')
         );
         $message .= sprintf(
             '<p>%s</p><br/>',
@@ -67,7 +67,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         );
         $message .= sprintf(
             '<p>%s</p>',
-            $this->getTranslationAPI()->__('Alternatively, please paste the following code in the "Code" input:', 'pop-application')
+            $this->__('Alternatively, please paste the following code in the "Code" input:', 'pop-application')
         );
         $message .= sprintf(
             // '<p><pre style="%s">%s</pre></p><br/>',
@@ -86,11 +86,11 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
 
         // Code copied from file wp-login.php (We can't invoke it directly, since wp-login.php has not been loaded, and we can't do it since it executes a lot of unwanted code producing and output)
         if (empty($user_login)) {
-            $errors[] = $this->getTranslationAPI()->__('Enter a username or e-mail address.');
+            $errors[] = $this->__('Enter a username or e-mail address.');
         } elseif (strpos($user_login, '@')) {
             $user = $this->getUserTypeAPI()->getUserByEmail(trim($user_login));
             if (empty($user)) {
-                $errors[] = $this->getTranslationAPI()->__('There is no user registered with that email address.');
+                $errors[] = $this->__('There is no user registered with that email address.');
             }
         } else {
             $login = trim($user_login);
@@ -98,7 +98,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         }
 
         if (!$user) {
-            $errors[] = $this->getTranslationAPI()->__('Invalid username or e-mail.');
+            $errors[] = $this->__('Invalid username or e-mail.');
         }
 
         return $errors;
@@ -128,10 +128,10 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         * in sanitize_option we want to reverse this for the plain text arena of emails.
         */
         // $site_name = wp_specialchars_decode($cmsapplicationapi->getSiteName(), ENT_QUOTES);
-        // $title = sprintf($this->getTranslationAPI()->__('[%s] Password Reset'), $site_name);
+        // $title = sprintf($this->__('[%s] Password Reset'), $site_name);
         $user_id = $this->getUserTypeAPI()->getUserId($user);
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
-        $title = sprintf($this->getTranslationAPI()->__('[%s] Password Reset'), $cmsapplicationapi->getSiteName());
+        $title = sprintf($this->__('[%s] Password Reset'), $cmsapplicationapi->getSiteName());
         $title = $this->getHooksAPI()->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);
         $message = $this->retrievePasswordMessage($key, $user_login, $user_id);
         $message = $this->getHooksAPI()->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);

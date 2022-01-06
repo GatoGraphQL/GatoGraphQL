@@ -13,6 +13,6 @@ class NodeInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('The fundamental fields that must be implemented by all objects', 'component-model');
+        return $this->__('The fundamental fields that must be implemented by all objects', 'component-model');
     }
 }

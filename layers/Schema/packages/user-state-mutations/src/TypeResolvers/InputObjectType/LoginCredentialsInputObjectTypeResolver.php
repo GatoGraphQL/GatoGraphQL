@@ -38,8 +38,8 @@ class LoginCredentialsInputObjectTypeResolver extends AbstractInputObjectTypeRes
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::USERNAME_OR_EMAIL => $this->getTranslationAPI()->__('The username or email', 'user-state-mutations'),
-            MutationInputProperties::PASSWORD => $this->getTranslationAPI()->__('The password', 'user-state-mutations'),
+            MutationInputProperties::USERNAME_OR_EMAIL => $this->__('The username or email', 'user-state-mutations'),
+            MutationInputProperties::PASSWORD => $this->__('The password', 'user-state-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

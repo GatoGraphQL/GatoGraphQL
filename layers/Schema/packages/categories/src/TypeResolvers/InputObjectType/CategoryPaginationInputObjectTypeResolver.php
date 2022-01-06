@@ -18,7 +18,7 @@ class CategoryPaginationInputObjectTypeResolver extends PaginationInputObjectTyp
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to paginate categories', 'categories');
+        return $this->__('Input to paginate categories', 'categories');
     }
 
     protected function getDefaultLimit(): ?int

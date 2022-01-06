@@ -74,7 +74,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'slug' => $this->getTranslationAPI()->__('Query media item by slug', 'media'),
+            'slug' => $this->__('Query media item by slug', 'media'),
             default => $inputFieldDescription,
         };
     }

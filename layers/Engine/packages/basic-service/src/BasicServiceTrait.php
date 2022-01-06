@@ -31,4 +31,12 @@ trait BasicServiceTrait
     {
         return $this->translationAPI ??= $this->instanceManager->getInstance(TranslationAPIInterface::class);
     }
+
+    /**
+     * Shortcut function
+     */
+    final protected function __(string $text, string $domain = 'default'): string
+    {
+        return $this->getTranslationAPI()->__($text, $domain);
+    }
 }

@@ -10,7 +10,7 @@ abstract class AbstractCategoriesFilterInputObjectTypeResolver extends AbstractT
 {
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter categories', 'categories');
+        return $this->__('Input to filter categories', 'categories');
     }
 
     protected function addParentIDInputField(): bool

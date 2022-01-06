@@ -45,7 +45,7 @@ class ApplicationStateHookSet extends AbstractHookSet
     {
         $vars = ApplicationState::getVars();
         if ($stratum = $vars['stratum'] ?? null) {
-            $components[] = $this->getTranslationAPI()->__('stratum:', 'component-model') . $stratum;
+            $components[] = $this->__('stratum:', 'component-model') . $stratum;
         }
 
         return $components;

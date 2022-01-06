@@ -107,7 +107,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         // If the field name is missing, show an error
         if ($pos === 0) {
             $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                $this->getTranslationAPI()->__('Name in \'%s\' is missing', 'field-query'),
+                $this->__('Name in \'%s\' is missing', 'field-query'),
                 $field
             ));
             return '';
@@ -180,7 +180,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             )
         ) {
             $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                $this->getTranslationAPI()->__(
+                $this->__(
                     'Arguments \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
                     'field-query'
                 ),
@@ -331,14 +331,14 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             if ($aliasSymbolPos === 0) {
                 // Only there is the alias, nothing to alias to
                 $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                    $this->getTranslationAPI()->__('The field to be aliased in \'%s\' is missing', 'field-query'),
+                    $this->__('The field to be aliased in \'%s\' is missing', 'field-query'),
                     $field
                 ));
                 return null;
             } elseif ($aliasSymbolPos === strlen($field) - 1) {
                 // Only the "@" was added, but the alias is missing
                 $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                    $this->getTranslationAPI()->__('Alias in \'%s\' is missing', 'field-query'),
+                    $this->__('Alias in \'%s\' is missing', 'field-query'),
                     $field
                 ));
                 return null;
@@ -446,7 +446,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             )
         ) {
             $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                $this->getTranslationAPI()->__(
+                $this->__(
                     'Directive \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
                     'field-query'
                 ),

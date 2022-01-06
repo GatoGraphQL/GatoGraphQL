@@ -97,9 +97,9 @@ abstract class AbstractAddAuthorInputFieldsInputObjectTypeHookSet extends Abstra
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'authorIDs' => $this->getTranslationAPI()->__('Get results from the authors with given IDs', 'pop-users'),
-            'authorSlug' => $this->getTranslationAPI()->__('Get results from the authors with given slug', 'pop-users'),
-            'excludeAuthorIDs' => $this->getTranslationAPI()->__('Get results excluding the ones from authors with given IDs', 'pop-users'),
+            'authorIDs' => $this->__('Get results from the authors with given IDs', 'pop-users'),
+            'authorSlug' => $this->__('Get results from the authors with given slug', 'pop-users'),
+            'excludeAuthorIDs' => $this->__('Get results excluding the ones from authors with given IDs', 'pop-users'),
             default => $inputFieldDescription,
         };
     }

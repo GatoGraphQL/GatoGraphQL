@@ -20,8 +20,8 @@ class PostUserObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'posts' => $this->getTranslationAPI()->__('Posts by the user', 'users'),
-            'postCount' => $this->getTranslationAPI()->__('Number of posts by the user', 'users'),
+            'posts' => $this->__('Posts by the user', 'users'),
+            'postCount' => $this->__('Number of posts by the user', 'users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

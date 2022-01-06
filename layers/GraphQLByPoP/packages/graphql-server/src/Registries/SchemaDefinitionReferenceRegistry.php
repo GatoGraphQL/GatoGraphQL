@@ -316,10 +316,10 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $directiveSchemaDefinitionPath);
             if ($directiveSchemaDefinition[SchemaDefinition::DIRECTIVE_KIND] === DirectiveKinds::SCHEMA) {
                 $directiveSchemaDefinition[SchemaDefinition::DESCRIPTION] = sprintf(
-                    $this->getTranslationAPI()->__('%s %s', 'graphql-server'),
+                    $this->__('%s %s', 'graphql-server'),
                     sprintf(
                         '_%s_', // Make it italic using markdown
-                        $this->getTranslationAPI()->__('("Schema" type directive)', 'graphql-server')
+                        $this->__('("Schema" type directive)', 'graphql-server')
                     ),
                     $directiveSchemaDefinition[SchemaDefinition::DESCRIPTION]
                 );
@@ -336,8 +336,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         if ($schemaFieldVersion = $fieldOrDirectiveSchemaDefinition[SchemaDefinition::VERSION] ?? null) {
             $fieldOrDirectiveSchemaDefinition[SchemaDefinition::DESCRIPTION] .= sprintf(
                 sprintf(
-                    $this->getTranslationAPI()->__(' _%s_', 'graphql-server'), // Make it italic using markdown
-                    $this->getTranslationAPI()->__('(Version: %s)', 'graphql-server')
+                    $this->__(' _%s_', 'graphql-server'), // Make it italic using markdown
+                    $this->__('(Version: %s)', 'graphql-server')
                 ),
                 $schemaFieldVersion
             );
@@ -352,7 +352,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $fieldSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $fieldSchemaDefinitionPath);
         if ($fieldSchemaDefinition[SchemaDefinition::EXTENSIONS][SchemaDefinition::FIELD_IS_MUTATION]) {
             $fieldSchemaDefinition[SchemaDefinition::DESCRIPTION] = sprintf(
-                $this->getTranslationAPI()->__('[Mutation] %s', 'graphql-server'),
+                $this->__('[Mutation] %s', 'graphql-server'),
                 $fieldSchemaDefinition[SchemaDefinition::DESCRIPTION]
             );
         }
@@ -365,7 +365,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $schemaDefinitionReferenceObjectID = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID($schemaDefinitionPath);
         if (isset($this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID])) {
             throw new Exception(sprintf(
-                $this->getTranslationAPI()->__('A Schema Definition Reference Object with id \'%s\s has already been registered', 'graphql-server'),
+                $this->__('A Schema Definition Reference Object with id \'%s\s has already been registered', 'graphql-server'),
                 $schemaDefinitionReferenceObjectID
             ));
         }

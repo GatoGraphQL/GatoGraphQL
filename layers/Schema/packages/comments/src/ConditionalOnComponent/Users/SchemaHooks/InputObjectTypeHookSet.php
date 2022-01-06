@@ -85,10 +85,10 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'authorIDs' => $this->getTranslationAPI()->__('Filter comments from the authors with given IDs', 'comments'),
-            'excludeAuthorIDs' => $this->getTranslationAPI()->__('Exclude comments from authors with given IDs', 'comments'),
-            'customPostAuthorIDs' => $this->getTranslationAPI()->__('Filter comments added to custom posts from the authors with given IDs', 'comments'),
-            'excludeCustomPostAuthorIDs' => $this->getTranslationAPI()->__('Exclude comments added to custom posts from authors with given IDs', 'comments'),
+            'authorIDs' => $this->__('Filter comments from the authors with given IDs', 'comments'),
+            'excludeAuthorIDs' => $this->__('Exclude comments from authors with given IDs', 'comments'),
+            'customPostAuthorIDs' => $this->__('Filter comments added to custom posts from the authors with given IDs', 'comments'),
+            'excludeCustomPostAuthorIDs' => $this->__('Exclude comments added to custom posts from authors with given IDs', 'comments'),
             default => $inputFieldDescription,
         };
     }

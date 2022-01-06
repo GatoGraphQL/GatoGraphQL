@@ -21,7 +21,7 @@ abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObject
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter users', 'users');
+        return $this->__('Input to filter users', 'users');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -37,7 +37,7 @@ abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObject
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'searchBy' => $this->getTranslationAPI()->__('Search for users', 'users'),
+            'searchBy' => $this->__('Search for users', 'users'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

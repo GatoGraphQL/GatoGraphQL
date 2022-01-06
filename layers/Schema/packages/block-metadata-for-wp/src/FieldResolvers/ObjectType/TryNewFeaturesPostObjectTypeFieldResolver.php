@@ -62,7 +62,7 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'content' => $this->getTranslationAPI()->__('Post\'s content, formatted with its block metadata', 'pop-block-metadata'),
+            'content' => $this->__('Post\'s content, formatted with its block metadata', 'pop-block-metadata'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

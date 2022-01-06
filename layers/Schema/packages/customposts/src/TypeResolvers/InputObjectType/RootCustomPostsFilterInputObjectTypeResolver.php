@@ -13,7 +13,7 @@ class RootCustomPostsFilterInputObjectTypeResolver extends AbstractCustomPostsFi
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter custom posts', 'customposts');
+        return $this->__('Input to filter custom posts', 'customposts');
     }
 
     protected function addCustomPostInputFields(): bool

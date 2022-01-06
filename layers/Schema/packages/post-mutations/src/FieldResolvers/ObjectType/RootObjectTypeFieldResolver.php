@@ -92,8 +92,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'createPost' => $this->getTranslationAPI()->__('Create a post', 'post-mutations'),
-            'updatePost' => $this->getTranslationAPI()->__('Update a post', 'post-mutations'),
+            'createPost' => $this->__('Create a post', 'post-mutations'),
+            'updatePost' => $this->__('Update a post', 'post-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

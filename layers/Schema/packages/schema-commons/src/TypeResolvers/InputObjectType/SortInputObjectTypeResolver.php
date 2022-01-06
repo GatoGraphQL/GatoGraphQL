@@ -39,7 +39,7 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to sort custom posts', 'customposts');
+        return $this->__('Input to sort custom posts', 'customposts');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -53,8 +53,8 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'order' => $this->getTranslationAPI()->__('Sorting direction', 'schema-commons'),
-            'by' => $this->getTranslationAPI()->__('Property to order by', 'schema-commons'),
+            'order' => $this->__('Sorting direction', 'schema-commons'),
+            'by' => $this->__('Property to order by', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

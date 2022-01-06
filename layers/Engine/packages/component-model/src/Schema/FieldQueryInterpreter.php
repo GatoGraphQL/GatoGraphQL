@@ -158,7 +158,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             if ($targetObjectTypeResolver === null) {
                 throw new Exception(
                     sprintf(
-                        $this->getTranslationAPI()->__('The Union Type \'%s\' does not provide a target ObjectTypeResolver for the object', 'component-model'),
+                        $this->__('The Union Type \'%s\' does not provide a target ObjectTypeResolver for the object', 'component-model'),
                         $relationalTypeResolver->getMaybeNamespacedTypeName()
                     )
                 );
@@ -450,12 +450,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldOrDirectiveArgValue = $fieldOrDirectiveArg;
                 if (!$orderedFieldOrDirectiveArgNamesEnabled || !isset($orderedFieldOrDirectiveArgNames[$i])) {
                     $errorMessage = sprintf(
-                        $this->getTranslationAPI()->__('The argument on position number %s (with value \'%s\') has its name missing, and %s. Please define the query using the \'key%svalue\' format', 'pop-component-model'),
+                        $this->__('The argument on position number %s (with value \'%s\') has its name missing, and %s. Please define the query using the \'key%svalue\' format', 'pop-component-model'),
                         $i + 1,
                         $fieldOrDirectiveArgValue,
                         $orderedFieldOrDirectiveArgNamesEnabled ?
-                            $this->getTranslationAPI()->__('documentation for this argument in the schema definition has not been defined, hence it can\'t be deduced from there', 'pop-component-model') :
-                            $this->getTranslationAPI()->__('retrieving this information from the schema definition is not enabled for the field', 'pop-component-model'),
+                            $this->__('documentation for this argument in the schema definition has not been defined, hence it can\'t be deduced from there', 'pop-component-model') :
+                            $this->__('retrieving this information from the schema definition is not enabled for the field', 'pop-component-model'),
                         QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR
                     );
                     if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
@@ -464,7 +464,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                             Tokens::MESSAGE => ($resolverType === ResolverTypes::FIELD || $setFailingFieldResponseAsNull) ?
                                 $errorMessage
                                 : sprintf(
-                                    $this->getTranslationAPI()->__('%s. The directive has been ignored', 'pop-component-model'),
+                                    $this->__('%s. The directive has been ignored', 'pop-component-model'),
                                     $errorMessage
                                 ),
                         ];
@@ -472,7 +472,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $schemaWarnings[] = [
                             Tokens::PATH => [$fieldOrDirective],
                             Tokens::MESSAGE => sprintf(
-                                $this->getTranslationAPI()->__('%s. This argument has been ignored', 'pop-component-model'),
+                                $this->__('%s. This argument has been ignored', 'pop-component-model'),
                                 $errorMessage
                             ),
                         ];
@@ -487,7 +487,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $feedbackMessageStore = $this->getFeedbackMessageStore();
                 $feedbackMessageStore->maybeAddLogEntry(
                     sprintf(
-                        $this->getTranslationAPI()->__('In field or directive \'%s\', the argument on position number %s (with value \'%s\') is resolved as argument \'%s\'', 'pop-component-model'),
+                        $this->__('In field or directive \'%s\', the argument on position number %s (with value \'%s\') is resolved as argument \'%s\'', 'pop-component-model'),
                         $fieldOrDirective,
                         $i + 1,
                         $fieldOrDirectiveArgValue,
@@ -501,8 +501,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 // But don't skip it! It may be that the engine accepts the property, it is just not documented!
                 if (!array_key_exists($fieldOrDirectiveArgName, $fieldOrDirectiveArgumentNameTypeResolvers)) {
                     $errorMessage = sprintf(
-                        $this->getTranslationAPI()->__('On %1$s \'%2$s\', there is no argument with name \'%3$s\'', 'pop-component-model'),
-                        $resolverType == ResolverTypes::FIELD ? $this->getTranslationAPI()->__('field', 'component-model') : $this->getTranslationAPI()->__('directive', 'component-model'),
+                        $this->__('On %1$s \'%2$s\', there is no argument with name \'%3$s\'', 'pop-component-model'),
+                        $resolverType == ResolverTypes::FIELD ? $this->__('field', 'component-model') : $this->__('directive', 'component-model'),
                         $this->getFieldName($fieldOrDirective),
                         $fieldOrDirectiveArgName
                     );
@@ -512,7 +512,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                             Tokens::MESSAGE => ($resolverType === ResolverTypes::FIELD || $setFailingFieldResponseAsNull) ?
                                 $errorMessage
                                 : sprintf(
-                                    $this->getTranslationAPI()->__('%s. The directive has been ignored', 'pop-component-model'),
+                                    $this->__('%s. The directive has been ignored', 'pop-component-model'),
                                     $errorMessage
                                 ),
                                 Tokens::EXTENSIONS => [
@@ -524,7 +524,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $schemaWarnings[] = [
                             Tokens::PATH => [$fieldOrDirective],
                             Tokens::MESSAGE => sprintf(
-                                $this->getTranslationAPI()->__('%s, so it may have no effect (it has not been removed from the query, though)', 'pop-component-model'),
+                                $this->__('%s, so it may have no effect (it has not been removed from the query, though)', 'pop-component-model'),
                                 $errorMessage
                             ),
                             Tokens::EXTENSIONS => [
@@ -630,7 +630,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function getNoFieldErrorMessage(ObjectTypeResolverInterface $objectTypeResolver, string $field): string
     {
         return sprintf(
-            $this->getTranslationAPI()->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
+            $this->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
             $this->getFieldName($field),
             $objectTypeResolver->getMaybeNamespacedTypeName()
         );
@@ -1150,7 +1150,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $maybeCoercedArgValueErrors[0]
                     : new Error(
                         'casting',
-                        $this->getTranslationAPI()->__('Casting cannot be done due to nested errors', 'component-model'),
+                        $this->__('Casting cannot be done due to nested errors', 'component-model'),
                         null,
                         $maybeCoercedArgValueErrors
                     );
@@ -1470,12 +1470,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $composedDirectiveArgTypeName = $composedDirectiveArgTypeResolver->getMaybeNamespacedTypeName();
                 if ($directiveArgIsArrayOfArraysType) {
                     $composedDirectiveArgTypeName = sprintf(
-                        $this->getTranslationAPI()->__('array of arrays of %s', 'pop-component-model'),
+                        $this->__('array of arrays of %s', 'pop-component-model'),
                         $composedDirectiveArgTypeName
                     );
                 } elseif ($directiveArgIsArrayType) {
                     $composedDirectiveArgTypeName = sprintf(
-                        $this->getTranslationAPI()->__('array of %s', 'pop-component-model'),
+                        $this->__('array of %s', 'pop-component-model'),
                         $composedDirectiveArgTypeName
                     );
                 }
@@ -1487,7 +1487,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $directiveArgError = new Error(
                         sprintf('%s-error', $failedCastingDirectiveArgName),
                         sprintf(
-                            $this->getTranslationAPI()->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
+                            $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
                             $directiveName,
                             $encodedValue,
                             $failedCastingDirectiveArgName,
@@ -1502,7 +1502,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 } else {
                     // Override the message
                     $schemaWarningOrError[Tokens::MESSAGE] = sprintf(
-                        $this->getTranslationAPI()->__('%1$s. It has been ignored', 'pop-component-model'),
+                        $this->__('%1$s. It has been ignored', 'pop-component-model'),
                         $schemaWarningOrError[Tokens::MESSAGE]
                     );
                     $schemaWarnings[] = $schemaWarningOrError;
@@ -1572,12 +1572,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $composedFieldArgTypeName = $composedFieldArgTypeResolver->getMaybeNamespacedTypeName();
                 if ($fieldArgIsArrayOfArraysType) {
                     $composedFieldArgTypeName = sprintf(
-                        $this->getTranslationAPI()->__('array of arrays of %s', 'pop-component-model'),
+                        $this->__('array of arrays of %s', 'pop-component-model'),
                         $composedFieldArgTypeName
                     );
                 } elseif ($fieldArgIsArrayType) {
                     $composedFieldArgTypeName = sprintf(
-                        $this->getTranslationAPI()->__('array of %s', 'pop-component-model'),
+                        $this->__('array of %s', 'pop-component-model'),
                         $composedFieldArgTypeName
                     );
                 }
@@ -1589,7 +1589,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $fieldArgError = new Error(
                         sprintf('%s-error', $failedCastingFieldArgName),
                         sprintf(
-                            $this->getTranslationAPI()->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
+                            $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
                             $fieldName,
                             $encodedValue,
                             $failedCastingFieldArgName,
@@ -1604,7 +1604,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 } else {
                     // Override the message
                     $schemaWarningOrError[Tokens::MESSAGE] = sprintf(
-                        $this->getTranslationAPI()->__('%1$s. It has been ignored', 'pop-component-model'),
+                        $this->__('%1$s. It has been ignored', 'pop-component-model'),
                         $schemaWarningOrError[Tokens::MESSAGE]
                     );
                     $schemaWarnings[] = $schemaWarningOrError;
@@ -1691,7 +1691,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
             // If the variable is not set, then show the error under entry "variableErrors"
             $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                $this->getTranslationAPI()->__('Variable \'%s\' is undefined', 'pop-component-model'),
+                $this->__('Variable \'%s\' is undefined', 'pop-component-model'),
                 $variableName
             ));
             return null;
@@ -1827,7 +1827,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
             // If the expression is not set, then show the error under entry "expressionErrors"
             $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                $this->getTranslationAPI()->__('Expression \'%s\' is undefined', 'pop-component-model'),
+                $this->__('Expression \'%s\' is undefined', 'pop-component-model'),
                 $expressionName
             ));
             return null;
@@ -1844,7 +1844,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 /** @var Error */
                 $error = $resolvedValue;
                 $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                    $this->getTranslationAPI()->__('Executing field \'%s\' produced error: %s', 'pop-component-model'),
+                    $this->__('Executing field \'%s\' produced error: %s', 'pop-component-model'),
                     $fieldArgValue,
                     $error->getMessageOrCode()
                 ));

@@ -15,6 +15,6 @@ class WithAuthorInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Entities that have an author', 'queriedobject');
+        return $this->__('Entities that have an author', 'queriedobject');
     }
 }

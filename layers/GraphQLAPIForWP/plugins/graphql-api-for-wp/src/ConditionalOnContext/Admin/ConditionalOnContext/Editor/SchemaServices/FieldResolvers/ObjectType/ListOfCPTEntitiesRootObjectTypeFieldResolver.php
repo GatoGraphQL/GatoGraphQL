@@ -58,9 +58,9 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'accessControlLists' => $this->getTranslationAPI()->__('Access Control Lists', 'graphql-api'),
-            'cacheControlLists' => $this->getTranslationAPI()->__('Cache Control Lists', 'graphql-api'),
-            'schemaConfigurations' => $this->getTranslationAPI()->__('Schema Configurations', 'graphql-api'),
+            'accessControlLists' => $this->__('Access Control Lists', 'graphql-api'),
+            'cacheControlLists' => $this->__('Cache Control Lists', 'graphql-api'),
+            'schemaConfigurations' => $this->__('Schema Configurations', 'graphql-api'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

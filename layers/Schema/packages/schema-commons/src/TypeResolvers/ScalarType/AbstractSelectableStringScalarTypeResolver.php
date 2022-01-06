@@ -36,10 +36,10 @@ abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalar
         if (!in_array($inputValue, $possibleValues)) {
             return $this->getError(
                 sprintf(
-                    $this->getTranslationAPI()->__('Value \'%1$s\' for type \'%2$s\' is not valid (the only valid values are: \'%3$s\')', 'component-model'),
+                    $this->__('Value \'%1$s\' for type \'%2$s\' is not valid (the only valid values are: \'%3$s\')', 'component-model'),
                     $inputValue,
                     $this->getMaybeNamespacedTypeName(),
-                    implode($this->getTranslationAPI()->__('\', \''), $possibleValues)
+                    implode($this->__('\', \''), $possibleValues)
                 )
             );
         }

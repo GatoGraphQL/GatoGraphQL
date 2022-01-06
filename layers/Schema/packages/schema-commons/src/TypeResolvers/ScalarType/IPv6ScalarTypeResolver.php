@@ -26,7 +26,7 @@ class IPv6ScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('IPv6 scalar, such as 2001:0db8:85a3:08d3:1319:8a2e:0370:7334', 'component-model');
+        return $this->__('IPv6 scalar, such as 2001:0db8:85a3:08d3:1319:8a2e:0370:7334', 'component-model');
     }
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object

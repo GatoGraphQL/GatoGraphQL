@@ -89,13 +89,13 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->getTranslationAPI()->__('Category URL', 'pop-categories'),
-            'urlAbsolutePath' => $this->getTranslationAPI()->__('Category URL path', 'pop-categories'),
-            'slug' => $this->getTranslationAPI()->__('Category slug', 'pop-categories'),
-            'name' => $this->getTranslationAPI()->__('Category', 'pop-categories'),
-            'description' => $this->getTranslationAPI()->__('Category description', 'pop-categories'),
-            'parent' => $this->getTranslationAPI()->__('Parent category (if this category is a child of another one)', 'pop-categories'),
-            'count' => $this->getTranslationAPI()->__('Number of custom posts containing this category', 'pop-categories'),
+            'url' => $this->__('Category URL', 'pop-categories'),
+            'urlAbsolutePath' => $this->__('Category URL path', 'pop-categories'),
+            'slug' => $this->__('Category slug', 'pop-categories'),
+            'name' => $this->__('Category', 'pop-categories'),
+            'description' => $this->__('Category description', 'pop-categories'),
+            'parent' => $this->__('Parent category (if this category is a child of another one)', 'pop-categories'),
+            'count' => $this->__('Number of custom posts containing this category', 'pop-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

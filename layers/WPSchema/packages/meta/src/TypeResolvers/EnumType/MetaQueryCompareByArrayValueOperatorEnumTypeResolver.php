@@ -21,7 +21,7 @@ class MetaQueryCompareByArrayValueOperatorEnumTypeResolver extends AbstractEnumT
 
     public function getTypeDescription(): string
     {
-        return $this->getTranslationAPI()->__('Operators to compare against an array value', 'meta');
+        return $this->__('Operators to compare against an array value', 'meta');
     }
 
     /**

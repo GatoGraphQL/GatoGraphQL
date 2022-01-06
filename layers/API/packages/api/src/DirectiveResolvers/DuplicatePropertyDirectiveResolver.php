@@ -47,7 +47,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->getTranslationAPI()->__('Duplicate a property in the current object', 'component-model');
+        return $this->__('Duplicate a property in the current object', 'component-model');
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -60,7 +60,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'to' => $this->getTranslationAPI()->__('The new property name', 'component-model'),
+            'to' => $this->__('The new property name', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
@@ -109,7 +109,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $objectWarnings[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
-                            $this->getTranslationAPI()->__('Property \'%s\' doesn\'t exist in object with ID \'%s\', so it can\'t be copied to \'%s\''),
+                            $this->__('Property \'%s\' doesn\'t exist in object with ID \'%s\', so it can\'t be copied to \'%s\''),
                             $fieldOutputKey,
                             $id,
                             $copyTo

@@ -32,7 +32,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Query type, starting from which the query is executed', 'graphql-server');
+        return $this->__('Query type, starting from which the query is executed', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null

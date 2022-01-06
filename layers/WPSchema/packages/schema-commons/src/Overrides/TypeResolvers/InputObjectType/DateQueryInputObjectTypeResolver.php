@@ -74,17 +74,17 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'inclusive' => $this->getTranslationAPI()->__('For after/before, whether exact value should be matched or not', 'schema-commons'),
-            'year' => $this->getTranslationAPI()->__('4 digit year (e.g. 2011)', 'schema-commons'),
-            'month' => $this->getTranslationAPI()->__('Month number (from 1 to 12)', 'schema-commons'),
-            'week' => $this->getTranslationAPI()->__('Week of the year (from 0 to 53)', 'schema-commons'),
-            'day' => $this->getTranslationAPI()->__('Day of the month (from 1 to 31)', 'schema-commons'),
-            'hour' => $this->getTranslationAPI()->__('Hour (from 0 to 23)', 'schema-commons'),
-            'minute' => $this->getTranslationAPI()->__('Minute (from 0 to 59)', 'schema-commons'),
-            'second' => $this->getTranslationAPI()->__('Second (0 to 59)', 'schema-commons'),
-            'compare' => $this->getTranslationAPI()->__('Determines and validates what comparison operator to use', 'schema-commons'),
-            'column' => $this->getTranslationAPI()->__('Posts column to query against. Default: ‘post_date’)', 'schema-commons'),
-            'relation' => $this->getTranslationAPI()->__('OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used', 'schema-commons'),
+            'inclusive' => $this->__('For after/before, whether exact value should be matched or not', 'schema-commons'),
+            'year' => $this->__('4 digit year (e.g. 2011)', 'schema-commons'),
+            'month' => $this->__('Month number (from 1 to 12)', 'schema-commons'),
+            'week' => $this->__('Week of the year (from 0 to 53)', 'schema-commons'),
+            'day' => $this->__('Day of the month (from 1 to 31)', 'schema-commons'),
+            'hour' => $this->__('Hour (from 0 to 23)', 'schema-commons'),
+            'minute' => $this->__('Minute (from 0 to 59)', 'schema-commons'),
+            'second' => $this->__('Second (0 to 59)', 'schema-commons'),
+            'compare' => $this->__('Determines and validates what comparison operator to use', 'schema-commons'),
+            'column' => $this->__('Posts column to query against. Default: ‘post_date’)', 'schema-commons'),
+            'relation' => $this->__('OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

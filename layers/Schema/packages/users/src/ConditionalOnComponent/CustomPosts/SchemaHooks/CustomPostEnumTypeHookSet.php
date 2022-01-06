@@ -55,7 +55,7 @@ class CustomPostEnumTypeHookSet extends AbstractHookSet
             return $enumValueDescription;
         }
         return match ($enumValue) {
-            CustomPostOrderBy::AUTHOR => $this->getTranslationAPI()->__('Order by custom post author', 'pop-users'),
+            CustomPostOrderBy::AUTHOR => $this->__('Order by custom post author', 'pop-users'),
             default => $enumValueDescription,
         };
     }

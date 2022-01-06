@@ -36,7 +36,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
 
         if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
             $errors[] = sprintf(
-                $this->getTranslationAPI()->__('The %s ID is missing.', 'custompost-tag-mutations'),
+                $this->__('The %s ID is missing.', 'custompost-tag-mutations'),
                 $this->getEntityName()
             );
         }
@@ -45,6 +45,6 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
 
     protected function getEntityName(): string
     {
-        return $this->getTranslationAPI()->__('custom post', 'custompost-tag-mutations');
+        return $this->__('custom post', 'custompost-tag-mutations');
     }
 }

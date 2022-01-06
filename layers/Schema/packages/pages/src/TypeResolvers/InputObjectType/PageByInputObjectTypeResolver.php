@@ -16,7 +16,7 @@ class PageByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeR
 
     protected function getTypeDescriptionCustomPostEntity(): string
     {
-        return $this->getTranslationAPI()->__('a page', 'pages');
+        return $this->__('a page', 'pages');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -32,7 +32,7 @@ class PageByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeR
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'path' => $this->getTranslationAPI()->__('Query by page path', 'pages'),
+            'path' => $this->__('Query by page path', 'pages'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

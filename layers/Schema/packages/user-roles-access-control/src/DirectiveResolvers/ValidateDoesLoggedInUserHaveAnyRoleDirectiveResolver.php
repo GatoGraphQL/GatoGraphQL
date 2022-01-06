@@ -58,21 +58,21 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         $isValidatingDirective = $this->isValidatingDirective();
         if (count($roles) == 1) {
             $errorMessage = $isValidatingDirective ?
-                $this->getTranslationAPI()->__('You must have role \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
-                $this->getTranslationAPI()->__('You must have role \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
+                $this->__('You must have role \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
+                $this->__('You must have role \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
         } else {
             $errorMessage = $isValidatingDirective ?
-                $this->getTranslationAPI()->__('You must have any role from among \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
-                $this->getTranslationAPI()->__('You must have any role from among \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
+                $this->__('You must have any role from among \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
+                $this->__('You must have any role from among \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
         }
         return sprintf(
             $errorMessage,
             implode(
-                $this->getTranslationAPI()->__('\', \''),
+                $this->__('\', \''),
                 $roles
             ),
             implode(
-                $this->getTranslationAPI()->__('\', \''),
+                $this->__('\', \''),
                 $failedDataFields
             ),
             $relationalTypeResolver->getMaybeNamespacedTypeName()
@@ -81,7 +81,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->getTranslationAPI()->__('It validates if the user has any of the roles provided through directive argument \'roles\'', 'component-model');
+        return $this->__('It validates if the user has any of the roles provided through directive argument \'roles\'', 'component-model');
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -94,7 +94,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'roles' => $this->getTranslationAPI()->__('Roles to validate if the logged-in user has (any of them)', 'component-model'),
+            'roles' => $this->__('Roles to validate if the logged-in user has (any of them)', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }

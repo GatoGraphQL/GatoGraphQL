@@ -18,13 +18,13 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
             $target_id = $form_data['target_id'];
 
             if ($user_id == $target_id) {
-                $errors[] = $this->getTranslationAPI()->__('You can\'t follow yourself!', 'pop-coreprocessors');
+                $errors[] = $this->__('You can\'t follow yourself!', 'pop-coreprocessors');
             } else {
                 // Check that the logged in user does not currently follow that user
                 $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS);
                 if (in_array($target_id, $value)) {
                     $errors[] = sprintf(
-                        $this->getTranslationAPI()->__('You are already following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                        $this->__('You are already following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                         $this->getUserTypeAPI()->getUserDisplayName($target_id)
                     );
                 }

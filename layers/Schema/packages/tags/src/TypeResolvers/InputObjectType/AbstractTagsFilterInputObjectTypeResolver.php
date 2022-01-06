@@ -10,7 +10,7 @@ abstract class AbstractTagsFilterInputObjectTypeResolver extends AbstractTaxonom
 {
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter tags', 'tags');
+        return $this->__('Input to filter tags', 'tags');
     }
 
     protected function addParentIDInputField(): bool

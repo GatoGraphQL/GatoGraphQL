@@ -70,10 +70,10 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             );
             return $this->getError(
                 sprintf(
-                    $this->getTranslationAPI()->__('Value \'%1$s\' for enum type \'%2$s\' is not valid (the only valid values are: \'%3$s\')', 'component-model'),
+                    $this->__('Value \'%1$s\' for enum type \'%2$s\' is not valid (the only valid values are: \'%3$s\')', 'component-model'),
                     $inputValue,
                     $this->getMaybeNamespacedTypeName(),
-                    implode($this->getTranslationAPI()->__('\', \''), $nonDeprecatedEnumValues)
+                    implode($this->__('\', \''), $nonDeprecatedEnumValues)
                 )
             );
         }
@@ -99,7 +99,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         if ($deprecationMessage = $this->getConsolidatedEnumValueDeprecationMessage($inputValue)) {
             return [
                 sprintf(
-                    $this->getTranslationAPI()->__('Enum value \'%s\' is deprecated: %s', 'component-model'),
+                    $this->__('Enum value \'%s\' is deprecated: %s', 'component-model'),
                     $inputValue,
                     $deprecationMessage
                 ),

@@ -56,7 +56,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'self' => $this->getTranslationAPI()->__('The same object', 'pop-component-model'),
+            'self' => $this->__('The same object', 'pop-component-model'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

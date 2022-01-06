@@ -28,6 +28,6 @@ abstract class AbstractSetTagsOnPostFilterInputObjectTypeResolver extends Abstra
 
     protected function getEntityName(): string
     {
-        return $this->getTranslationAPI()->__('post', 'postcategory-mutations');
+        return $this->__('post', 'postcategory-mutations');
     }
 }

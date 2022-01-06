@@ -34,14 +34,14 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
     public function getTypeDescription(): ?string
     {
         return sprintf(
-            $this->getTranslationAPI()->__('Oneof input to specify the property and data to fetch %s', 'customposts'),
+            $this->__('Oneof input to specify the property and data to fetch %s', 'customposts'),
             $this->getTypeDescriptionTaxonomyEntity()
         );
     }
 
     protected function getTypeDescriptionTaxonomyEntity(): string
     {
-        return $this->getTranslationAPI()->__('a taxonomy', 'customposts');
+        return $this->__('a taxonomy', 'customposts');
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -55,8 +55,8 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->getTranslationAPI()->__('Query by taxonomy ID', 'taxonomies'),
-            'slug' => $this->getTranslationAPI()->__('Query by taxonomy slug', 'taxonomies'),
+            'id' => $this->__('Query by taxonomy ID', 'taxonomies'),
+            'slug' => $this->__('Query by taxonomy slug', 'taxonomies'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

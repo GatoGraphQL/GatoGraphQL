@@ -143,11 +143,11 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->getTranslationAPI()->__('Limit results to elements with the given custom post IDs', 'comments'),
-            self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->getTranslationAPI()->__('Limit results to elements with the given custom post ID', 'comments'),
-            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->getTranslationAPI()->__('Exclude elements with the given custom post IDs', 'comments'),
-            self::MODULE_FILTERINPUT_COMMENT_TYPES => $this->getTranslationAPI()->__('Types of comment', 'comments'),
-            self::MODULE_FILTERINPUT_COMMENT_STATUS => $this->getTranslationAPI()->__('Status of the comment', 'comments'),
+            self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->__('Limit results to elements with the given custom post IDs', 'comments'),
+            self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->__('Limit results to elements with the given custom post ID', 'comments'),
+            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->__('Exclude elements with the given custom post IDs', 'comments'),
+            self::MODULE_FILTERINPUT_COMMENT_TYPES => $this->__('Types of comment', 'comments'),
+            self::MODULE_FILTERINPUT_COMMENT_STATUS => $this->__('Status of the comment', 'comments'),
             default => null,
         };
     }

@@ -91,7 +91,7 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getTranslationAPI()->__('Return results from Custom Post Types', 'customposts'),
+            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->__('Return results from Custom Post Types', 'customposts'),
             default => null,
         };
     }

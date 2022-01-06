@@ -15,6 +15,6 @@ class SupportingFeaturedImageInterfaceTypeResolver extends AbstractInterfaceType
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Fields concerning an entity\'s featured image', 'custompostmedia');
+        return $this->__('Fields concerning an entity\'s featured image', 'custompostmedia');
     }
 }

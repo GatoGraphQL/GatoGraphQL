@@ -13,6 +13,6 @@ class RootMediaItemsFilterInputObjectTypeResolver extends AbstractMediaItemsFilt
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter media items', 'media');
+        return $this->__('Input to filter media items', 'media');
     }
 }

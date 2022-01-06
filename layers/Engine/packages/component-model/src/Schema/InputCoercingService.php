@@ -68,7 +68,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             && is_array($inputValue)
         ) {
             return sprintf(
-                $this->getTranslationAPI()->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'pop-component-model'),
+                $this->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'pop-component-model'),
                 $inputName,
                 json_encode($inputValue)
             );
@@ -78,7 +78,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             && !is_array($inputValue)
         ) {
             return sprintf(
-                $this->getTranslationAPI()->__('Argument \'%s\' expects an array, but value \'%s\' was provided', 'pop-component-model'),
+                $this->__('Argument \'%s\' expects an array, but value \'%s\' was provided', 'pop-component-model'),
                 $inputName,
                 $inputValue
             );
@@ -92,7 +92,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             )
         ) {
             return sprintf(
-                $this->getTranslationAPI()->__('Argument \'%s\' cannot receive an array with `null` values', 'pop-component-model'),
+                $this->__('Argument \'%s\' cannot receive an array with `null` values', 'pop-component-model'),
                 $inputName
             );
         }
@@ -105,7 +105,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             )
         ) {
             return sprintf(
-                $this->getTranslationAPI()->__('Argument \'%s\' cannot receive an array containing arrays as elements', 'pop-component-model'),
+                $this->__('Argument \'%s\' cannot receive an array containing arrays as elements', 'pop-component-model'),
                 $inputName,
                 json_encode($inputValue)
             );
@@ -120,7 +120,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             )
         ) {
             return sprintf(
-                $this->getTranslationAPI()->__('Argument \'%s\' expects an array of arrays, but value \'%s\' was provided', 'pop-component-model'),
+                $this->__('Argument \'%s\' expects an array of arrays, but value \'%s\' was provided', 'pop-component-model'),
                 $inputName,
                 json_encode($inputValue)
             );
@@ -137,7 +137,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             )
         ) {
             return sprintf(
-                $this->getTranslationAPI()->__('Argument \'%s\' cannot receive an array of arrays with `null` values', 'pop-component-model'),
+                $this->__('Argument \'%s\' cannot receive an array of arrays with `null` values', 'pop-component-model'),
                 $inputName
             );
         }

@@ -21,7 +21,7 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS);
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
-                    $this->getTranslationAPI()->__('You had not up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->__('You had not up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $this->getCustomPostTypeAPI()->getTitle($target_id)
                 );
             }

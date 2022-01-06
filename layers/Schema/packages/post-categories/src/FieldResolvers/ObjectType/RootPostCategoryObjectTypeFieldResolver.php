@@ -147,10 +147,10 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'postCategory' => $this->getTranslationAPI()->__('Retrieve a single post category', 'post-categories'),
-            'postCategories' => $this->getTranslationAPI()->__('Post categories', 'post-categories'),
-            'postCategoryCount' => $this->getTranslationAPI()->__('Number of post categories', 'post-categories'),
-            'postCategoryNames' => $this->getTranslationAPI()->__('Names of the post categories', 'post-categories'),
+            'postCategory' => $this->__('Retrieve a single post category', 'post-categories'),
+            'postCategories' => $this->__('Post categories', 'post-categories'),
+            'postCategoryCount' => $this->__('Number of post categories', 'post-categories'),
+            'postCategoryNames' => $this->__('Names of the post categories', 'post-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

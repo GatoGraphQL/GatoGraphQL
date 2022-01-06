@@ -105,7 +105,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     protected function getDefaultErrorMessage(mixed $inputValue): string
     {
         return sprintf(
-            $this->getTranslationAPI()->__('Cannot cast value \'%s\' for type \'%s\'', 'component-model'),
+            $this->__('Cannot cast value \'%s\' for type \'%s\'', 'component-model'),
             $inputValue,
             $this->getMaybeNamespacedTypeName(),
         );

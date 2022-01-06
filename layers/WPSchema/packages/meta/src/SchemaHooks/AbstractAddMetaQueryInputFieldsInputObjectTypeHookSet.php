@@ -68,7 +68,7 @@ abstract class AbstractAddMetaQueryInputFieldsInputObjectTypeHookSet extends Abs
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'metaQuery' => $this->getTranslationAPI()->__('Filter elements by meta key and value', 'meta'),
+            'metaQuery' => $this->__('Filter elements by meta key and value', 'meta'),
             default => $inputFieldDescription,
         };
     }

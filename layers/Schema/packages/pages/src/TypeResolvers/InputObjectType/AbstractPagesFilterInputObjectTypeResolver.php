@@ -27,9 +27,9 @@ abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustom
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'parentID' => $this->getTranslationAPI()->__('Filter pages with the given parent IDs. \'0\' means \'no parent\'', 'pages'),
-            'parentIDs' => $this->getTranslationAPI()->__('Filter pages with the given parent ID. \'0\' means \'no parent\'', 'pages'),
-            'excludeParentIDs' => $this->getTranslationAPI()->__('Exclude pages with the given parent IDs', 'pages'),
+            'parentID' => $this->__('Filter pages with the given parent IDs. \'0\' means \'no parent\'', 'pages'),
+            'parentIDs' => $this->__('Filter pages with the given parent ID. \'0\' means \'no parent\'', 'pages'),
+            'excludeParentIDs' => $this->__('Exclude pages with the given parent IDs', 'pages'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

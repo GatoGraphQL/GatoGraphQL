@@ -71,7 +71,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
             return new Error(
                 'incorrect_password',
                 sprintf(
-                    $this->getTranslationAPI()->__('The password you entered for the username \'%s\' is incorrect.', 'user-state-mutations'),
+                    $this->__('The password you entered for the username \'%s\' is incorrect.', 'user-state-mutations'),
                     $credentials['user_login']
                 )
             );

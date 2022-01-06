@@ -171,6 +171,6 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->getTranslationAPI()->__('Serialize the results for fields of Scalar and Enum Types. This directive is already included by the engine, since its execution is mandatory', 'component-model');
+        return $this->__('Serialize the results for fields of Scalar and Enum Types. This directive is already included by the engine, since its execution is mandatory', 'component-model');
     }
 }

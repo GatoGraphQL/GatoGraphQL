@@ -92,8 +92,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'tagIDs' => $this->getTranslationAPI()->__('Get results from the tags with given IDs', 'pop-users'),
-            'tagSlugs' => $this->getTranslationAPI()->__('Get results from the tags with given slug', 'pop-users'),
+            'tagIDs' => $this->__('Get results from the tags with given IDs', 'pop-users'),
+            'tagSlugs' => $this->__('Get results from the tags with given slug', 'pop-users'),
             default => $inputFieldDescription,
         };
     }

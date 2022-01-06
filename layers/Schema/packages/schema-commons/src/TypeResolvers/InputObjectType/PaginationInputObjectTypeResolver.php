@@ -38,16 +38,16 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     {
         $maxLimit = $this->getMaxLimit();
         $limitDesc = match ($maxLimit) {
-            null => $this->getTranslationAPI()->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
-            -1 => $this->getTranslationAPI()->__('Limit the results. \'-1\' brings all the results', 'schema-commons'),
+            null => $this->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
+            -1 => $this->__('Limit the results. \'-1\' brings all the results', 'schema-commons'),
             default => sprintf(
-                $this->getTranslationAPI()->__('Limit the results. The maximum amount allowed is \'%s\'', 'schema-commons'),
+                $this->__('Limit the results. The maximum amount allowed is \'%s\'', 'schema-commons'),
                 $maxLimit
             ),
         };
         return match ($inputFieldName) {
             'limit' => $limitDesc,
-            'offset' => $this->getTranslationAPI()->__('Offset the results by how many positions', 'schema-commons'),
+            'offset' => $this->__('Offset the results by how many positions', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -105,7 +105,7 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
         $minLimit = $maxLimit === -1 ? -1 : 1;
         if ($inputFieldValue < $minLimit) {
             return sprintf(
-                $this->getTranslationAPI()->__('The value for input field \'%s\' in input object \'%s\' cannot be below \'%s\'', 'schema-commons'),
+                $this->__('The value for input field \'%s\' in input object \'%s\' cannot be below \'%s\'', 'schema-commons'),
                 $inputFieldName,
                 $this->getMaybeNamespacedTypeName(),
                 $minLimit
@@ -115,7 +115,7 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
         // Check the value is not below the max limit
         if ($maxLimit !== -1 && $inputFieldValue > $maxLimit) {
             return sprintf(
-                $this->getTranslationAPI()->__('The value for input field \'%s\' in input object \'%s\' cannot be above \'%s\', but \'%s\' was provided', 'posts'),
+                $this->__('The value for input field \'%s\' in input object \'%s\' cannot be above \'%s\', but \'%s\' was provided', 'posts'),
                 $inputFieldName,
                 $this->getMaybeNamespacedTypeName(),
                 $maxLimit,

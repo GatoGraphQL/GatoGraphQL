@@ -13,6 +13,6 @@ class NamedTypeExtensionsObjectTypeResolver extends AbstractSchemaElementExtensi
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Extensions (custom metadata) added to the GraphQL type (for all \'named\' types: Object, Interface, Union, Scalar, Enum and InputObject)', 'graphql-server');
+        return $this->__('Extensions (custom metadata) added to the GraphQL type (for all \'named\' types: Object, Interface, Union, Scalar, Enum and InputObject)', 'graphql-server');
     }
 }

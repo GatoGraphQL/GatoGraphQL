@@ -13,7 +13,7 @@ class CommentResponsesFilterInputObjectTypeResolver extends AbstractCommentsFilt
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to filter comment responses', 'comments');
+        return $this->__('Input to filter comment responses', 'comments');
     }
 
     protected function addParentInputFields(): bool

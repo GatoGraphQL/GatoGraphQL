@@ -363,7 +363,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             return new InputObjectTypeSchemaDefinitionProvider($typeResolver);
         }
         throw new Exception(sprintf(
-            $this->getTranslationAPI()->__('No type identified for TypeResolver with class \'%s\'', 'api'),
+            $this->__('No type identified for TypeResolver with class \'%s\'', 'api'),
             get_class($typeResolver)
         ));
     }

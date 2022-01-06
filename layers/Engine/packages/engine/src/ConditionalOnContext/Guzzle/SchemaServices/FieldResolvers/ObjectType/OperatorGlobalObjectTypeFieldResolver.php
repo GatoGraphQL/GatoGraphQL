@@ -63,8 +63,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'getJSON' => $this->getTranslationAPI()->__('Retrieve data from URL and decode it as a JSON object', 'pop-component-model'),
-            'getAsyncJSON' => $this->getTranslationAPI()->__('Retrieve data from multiple URL asynchronously, and decode each of them as a JSON object', 'pop-component-model'),
+            'getJSON' => $this->__('Retrieve data from URL and decode it as a JSON object', 'pop-component-model'),
+            'getAsyncJSON' => $this->__('Retrieve data from multiple URL asynchronously, and decode each of them as a JSON object', 'pop-component-model'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -85,8 +85,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['getJSON' => 'url'] => $this->getTranslationAPI()->__('The URL to request', 'pop-component-model'),
-            ['getAsyncJSON' => 'urls'] => $this->getTranslationAPI()->__('The URLs to request, with format `key:value`, where the value is the URL, and the key, if provided, is the name where to store the JSON data in the result (if not provided, it is accessed under the corresponding numeric index)', 'pop-component-model'),
+            ['getJSON' => 'url'] => $this->__('The URL to request', 'pop-component-model'),
+            ['getAsyncJSON' => 'urls'] => $this->__('The URLs to request, with format `key:value`, where the value is the URL, and the key, if provided, is the name where to store the JSON data in the result (if not provided, it is accessed under the corresponding numeric index)', 'pop-component-model'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

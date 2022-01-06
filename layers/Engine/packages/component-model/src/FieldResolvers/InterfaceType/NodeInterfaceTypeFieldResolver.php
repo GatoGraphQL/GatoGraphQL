@@ -56,7 +56,7 @@ class NodeInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'id' => $this->getTranslationAPI()->__('The object\'s unique identifier for its type', 'component-model'),
+            'id' => $this->__('The object\'s unique identifier for its type', 'component-model'),
             default => parent::getFieldDescription($fieldName),
         };
     }

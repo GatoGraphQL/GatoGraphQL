@@ -21,7 +21,7 @@ class MetaQueryCompareByStringValueOperatorEnumTypeResolver extends AbstractEnum
 
     public function getTypeDescription(): string
     {
-        return $this->getTranslationAPI()->__('Operators to compare against a string value', 'meta');
+        return $this->__('Operators to compare against a string value', 'meta');
     }
 
     /**

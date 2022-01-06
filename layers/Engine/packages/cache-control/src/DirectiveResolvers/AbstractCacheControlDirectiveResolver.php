@@ -71,7 +71,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->getTranslationAPI()->__('HTTP caching (https://tools.ietf.org/html/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding \'no-store\' value is sent, indicating to not cache the response', 'cache-control');
+        return $this->__('HTTP caching (https://tools.ietf.org/html/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding \'no-store\' value is sent, indicating to not cache the response', 'cache-control');
     }
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
@@ -83,7 +83,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'maxAge' => $this->getTranslationAPI()->__('Use a specific max-age value for the field, instead of the one configured in the directive', 'cache-control'),
+            'maxAge' => $this->__('Use a specific max-age value for the field, instead of the one configured in the directive', 'cache-control'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
@@ -109,7 +109,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         switch ($directiveArgName) {
             case 'maxAge':
                 if ($directiveArgValue < 0) {
-                    $errors[] = $this->getTranslationAPI()->__('The value for \'maxAge\' must either be a positive number, or \'0\' to avoid caching');
+                    $errors[] = $this->__('The value for \'maxAge\' must either be a positive number, or \'0\' to avoid caching');
                 }
                 break;
         }

@@ -69,9 +69,9 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->getTranslationAPI()->__('Media element URL', 'pop-media'),
-            'urlAbsolutePath' => $this->getTranslationAPI()->__('Media element URL path', 'pop-media'),
-            'slug' => $this->getTranslationAPI()->__('Media element slug', 'pop-media'),
+            'url' => $this->__('Media element URL', 'pop-media'),
+            'urlAbsolutePath' => $this->__('Media element URL path', 'pop-media'),
+            'slug' => $this->__('Media element slug', 'pop-media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

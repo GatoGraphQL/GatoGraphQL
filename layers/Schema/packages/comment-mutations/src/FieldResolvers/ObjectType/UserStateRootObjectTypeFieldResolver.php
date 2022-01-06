@@ -137,9 +137,9 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'myComment' => $this->getTranslationAPI()->__('Comment by the logged-in user on the site with a specific ID', 'pop-comments'),
-            'myCommentCount' => $this->getTranslationAPI()->__('Number of comments by the logged-in user on the site', 'pop-comments'),
-            'myComments' => $this->getTranslationAPI()->__('Comments by the logged-in user on the site', 'pop-comments'),
+            'myComment' => $this->__('Comment by the logged-in user on the site with a specific ID', 'pop-comments'),
+            'myCommentCount' => $this->__('Number of comments by the logged-in user on the site', 'pop-comments'),
+            'myComments' => $this->__('Comments by the logged-in user on the site', 'pop-comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

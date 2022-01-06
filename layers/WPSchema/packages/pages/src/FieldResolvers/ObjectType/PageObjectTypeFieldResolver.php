@@ -42,7 +42,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'menuOrder' => $this->getTranslationAPI()->__('Menu order', 'pages'),
+            'menuOrder' => $this->__('Menu order', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
