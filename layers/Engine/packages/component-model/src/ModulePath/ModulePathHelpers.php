@@ -23,14 +23,14 @@ class ModulePathHelpers implements ModulePathHelpersInterface
         return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
     }
 
-    public function getStringifiedModulePropagationCurrentPath(array $module)
+    public function getStringifiedModulePropagationCurrentPath(array $module): string
     {
         $module_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
         $module_propagation_current_path[] = $module;
         return $this->stringifyModulePath($module_propagation_current_path);
     }
 
-    public function stringifyModulePath(array $modulepath)
+    public function stringifyModulePath(array $modulepath): string
     {
         return implode(
             ModulePath::MODULE_SEPARATOR,
@@ -41,7 +41,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
         );
     }
 
-    public function recastModulePath(string $modulepath_as_string)
+    public function recastModulePath(string $modulepath_as_string): array
     {
         return array_map(
             [ModuleUtils::class, 'getModuleFromOutputName'],
