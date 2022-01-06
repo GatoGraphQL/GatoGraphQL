@@ -17,8 +17,16 @@ class Tokenizer
 
     protected function initTokenizer(string $source): void
     {
+        $this->resetTokenizer();
         $this->source    = $source;
         $this->lookAhead = $this->next();
+    }
+
+    protected function resetTokenizer(): void
+    {
+        $this->pos = 0;
+        $this->line = 1;
+        $this->lineStart = 0;
     }
 
     protected function next(): Token
