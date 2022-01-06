@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\Response;
 
 use stdClass;
 
-interface ResponseServiceInterface
+interface OutputServiceInterface
 {
     public function jsonEncodeArrayOrStdClassValue(array|stdClass $value): string;
 }

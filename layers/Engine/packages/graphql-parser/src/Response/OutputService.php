@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\Response;
 use PoP\BasicService\BasicServiceTrait;
 use stdClass;
 
-class ResponseService implements ResponseServiceInterface
+class OutputService implements OutputServiceInterface
 {
     use BasicServiceTrait;
 

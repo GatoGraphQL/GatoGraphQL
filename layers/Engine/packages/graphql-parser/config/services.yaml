@@ -13,5 +13,5 @@ services:
     PoP\GraphQLParser\Query\QueryAugmenterServiceInterface:
         class: \PoP\GraphQLParser\Query\QueryAugmenterService
 
-    PoP\GraphQLParser\Response\ResponseServiceInterface:
-        class: \PoP\GraphQLParser\Response\ResponseService
+    PoP\GraphQLParser\Response\OutputServiceInterface:
+        class: \PoP\GraphQLParser\Response\OutputService
