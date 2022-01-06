@@ -25,7 +25,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
         string $pluginFile, /** The main plugin file */
         string $pluginVersion,
         ?string $pluginName = null,
-        protected ?AbstractExtensionConfiguration $extensionConfiguration = null,
+        protected ?AbstractExtensionInitializationConfiguration $extensionInitializationConfiguration = null,
     ) {
         parent::__construct(
             $pluginFile,
@@ -50,7 +50,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
      */
     protected function callPluginInitializationConfiguration(): void
     {
-        $this->extensionConfiguration?->initialize();
+        $this->extensionInitializationConfiguration?->initialize();
     }
 
     /**
@@ -60,7 +60,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
      */
     public function getComponentClassConfiguration(): array
     {
-        return $this->extensionConfiguration?->getComponentClassConfiguration() ?? parent::getComponentClassConfiguration();
+        return $this->extensionInitializationConfiguration?->getComponentClassConfiguration() ?? parent::getComponentClassConfiguration();
     }
 
     /**
@@ -70,7 +70,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
      */
     public function getSchemaComponentClassesToSkip(): array
     {
-        return $this->extensionConfiguration?->getSchemaComponentClassesToSkip() ?? parent::getSchemaComponentClassesToSkip();
+        return $this->extensionInitializationConfiguration?->getSchemaComponentClassesToSkip() ?? parent::getSchemaComponentClassesToSkip();
     }
 
     /**
