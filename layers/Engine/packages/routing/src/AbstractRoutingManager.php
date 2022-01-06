@@ -67,7 +67,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
                 $route = trim(strtolower($_REQUEST[URLParams::ROUTE]), '/');
             } else {
                 // If not, use the "main" route
-                $route = Routes::$MAIN;
+                $route = Routes::MAIN;
             }
         }
 

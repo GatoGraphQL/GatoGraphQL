@@ -23,9 +23,4 @@ class Component extends AbstractComponent
             \PoP\Definitions\Component::class,
         ];
     }
-
-    public function beforeBoot(): void
-    {
-        Routes::init();
-    }
 }
