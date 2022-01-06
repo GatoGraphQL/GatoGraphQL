@@ -169,7 +169,6 @@
     "require": {
         "php": "^8.0",
         "composer/semver": "^3.2",
-        "getpop/basic-service": "^0.9",
         "getpop/definitions": "^0.9",
         "getpop/field-query": "^0.9",
         "getpop/graphql-parser": "^0.9",
