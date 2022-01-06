@@ -12,33 +12,27 @@ class ComponentConfiguration extends AbstractComponentConfiguration
 {
     public function isGraphQLAPIEndpointDisabled(): bool
     {
-        // Define properties
         $envVariable = Environment::DISABLE_GRAPHQL_API_ENDPOINT;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function getGraphQLAPIEndpoint(): string
     {
-        // Define properties
         $envVariable = Environment::GRAPHQL_API_ENDPOINT;
         $defaultValue = '/api/graphql/';
         $callback = [EndpointUtils::class, 'slashURI'];
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 }

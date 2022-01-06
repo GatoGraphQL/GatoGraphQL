@@ -15,31 +15,25 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function getCommentMetaEntries(): array
     {
-        // Define properties
         $envVariable = Environment::COMMENT_META_ENTRIES;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function getCommentMetaBehavior(): string
     {
-        // Define properties
         $envVariable = Environment::COMMENT_META_BEHAVIOR;
         $defaultValue = Behaviors::ALLOWLIST;
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
-        return $this->configuration[$envVariable];
     }
 }

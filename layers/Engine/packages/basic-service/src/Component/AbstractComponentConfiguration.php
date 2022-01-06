@@ -13,18 +13,18 @@ use PoP\Root\Helpers\ClassHelpers;
  */
 abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentConfiguration implements ComponentConfigurationInterface
 {
-    protected function maybeInitializeConfigurationValue(
+    protected function retrieveConfigurationValueOrUseDefault(
         string $envVariable,
         mixed $defaultValue,
         ?callable $callback = null
-    ): void {
+    ): mixed {
         // Initialized from configuration? Then use that one directly.
         if ($this->hasConfigurationValue($envVariable)) {
-            return;
+            return $this->getConfigurationValue($envVariable);
         }
 
         // Initialize via environment
-        parent::maybeInitializeConfigurationValue($envVariable, $defaultValue, $callback);
+        $upstreamValue = parent::retrieveConfigurationValueOrUseDefault($envVariable, $defaultValue, $callback);
 
         /**
          * Get the value via a hook.
@@ -42,10 +42,12 @@ abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentC
         );
         $this->configuration[$envVariable] = $hooksAPI->applyFilters(
             $hookName,
-            $this->configuration[$envVariable],
+            $upstreamValue,
             $class,
             $envVariable
         );
+
+        return $this->configuration[$envVariable];
     }
 
     /**

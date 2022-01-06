@@ -15,33 +15,27 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function enableMultipleQueryExecution(): bool
     {
-        // Define properties
         $envVariable = Environment::ENABLE_MULTIPLE_QUERY_EXECUTION;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 
     public function enableComposableDirectives(): bool
     {
-        // Define properties
         $envVariable = Environment::ENABLE_COMPOSABLE_DIRECTIVES;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
-        return $this->configuration[$envVariable];
     }
 }

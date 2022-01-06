@@ -16,7 +16,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     //     $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
     //     // Initialize property from the environment/hook
-    //     $this->maybeInitializeConfigurationValue(
+    //     $this->retrieveConfigurationValueOrUseDefault(
     //         $envVariable,
     //         $defaultValue,
     //         $callback
@@ -32,7 +32,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     //     $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
     //     // Initialize property from the environment/hook
-    //     $this->maybeInitializeConfigurationValue(
+    //     $this->retrieveConfigurationValueOrUseDefault(
     //         $envVariable,
     //         $defaultValue,
     //         $callback
@@ -42,15 +42,12 @@ class ComponentConfiguration extends AbstractComponentConfiguration
 
     public function getPostCategoriesRoute(): string
     {
-        // Define properties
         $envVariable = Environment::POSTCATEGORIES_ROUTE;
         $defaultValue = 'categories';
 
-        // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
-        return $this->configuration[$envVariable];
     }
 }
