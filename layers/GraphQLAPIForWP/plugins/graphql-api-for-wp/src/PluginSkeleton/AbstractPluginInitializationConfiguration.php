@@ -28,7 +28,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
  * For that, on the WordPress admin,
  * go to Settings => Permalinks and click on Save changes.
  */
-abstract class AbstractPluginInitializationConfiguration
+abstract class AbstractPluginInitializationConfiguration implements PluginInitializationConfigurationInterface
 {
     /**
      * Initialize all configuration

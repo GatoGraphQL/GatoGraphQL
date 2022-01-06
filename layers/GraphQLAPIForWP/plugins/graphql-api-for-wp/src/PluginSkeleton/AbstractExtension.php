@@ -25,7 +25,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
         string $pluginFile, /** The main plugin file */
         string $pluginVersion,
         ?string $pluginName = null,
-        protected ?AbstractExtensionInitializationConfiguration $extensionInitializationConfiguration = null,
+        protected ?ExtensionInitializationConfigurationInterface $extensionInitializationConfiguration = null,
     ) {
         parent::__construct(
             $pluginFile,
