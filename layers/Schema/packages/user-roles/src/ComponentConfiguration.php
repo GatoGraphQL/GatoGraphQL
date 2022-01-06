@@ -17,7 +17,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        $this->getConfigurationValueFromEnvVariable(
             $envVariable,
             $defaultValue,
             $callback,
@@ -33,7 +33,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        $this->getConfigurationValueFromEnvVariable(
             $envVariable,
             $defaultValue,
             $callback,

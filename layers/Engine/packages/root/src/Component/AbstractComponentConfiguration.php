@@ -22,7 +22,7 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
         return $this->configuration[$envVariable] ?? null;
     }
 
-    protected function maybeInitializeConfigurationValue(
+    protected function getConfigurationValueFromEnvVariable(
         string $envVariable,
         mixed $defaultValue,
         ?callable $callback = null

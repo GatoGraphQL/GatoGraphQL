@@ -16,7 +16,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     //     $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
     //     // Initialize property from the environment/hook
-    //     $this->maybeInitializeConfigurationValue(
+    //     $this->getConfigurationValueFromEnvVariable(
     //         $envVariable,
     //         $defaultValue,
     //         $callback
@@ -32,7 +32,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     //     $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
     //     // Initialize property from the environment/hook
-    //     $this->maybeInitializeConfigurationValue(
+    //     $this->getConfigurationValueFromEnvVariable(
     //         $envVariable,
     //         $defaultValue,
     //         $callback
@@ -47,7 +47,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $defaultValue = 'categories';
 
         // Initialize property from the environment/hook
-        $this->maybeInitializeConfigurationValue(
+        $this->getConfigurationValueFromEnvVariable(
             $envVariable,
             $defaultValue,
         );

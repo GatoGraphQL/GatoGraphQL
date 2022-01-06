@@ -13,7 +13,7 @@ use PoP\Root\Helpers\ClassHelpers;
  */
 abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentConfiguration implements ComponentConfigurationInterface
 {
-    protected function maybeInitializeConfigurationValue(
+    protected function getConfigurationValueFromEnvVariable(
         string $envVariable,
         mixed $defaultValue,
         ?callable $callback = null
@@ -24,7 +24,7 @@ abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentC
         }
 
         // Initialize via environment
-        parent::maybeInitializeConfigurationValue($envVariable, $defaultValue, $callback);
+        parent::getConfigurationValueFromEnvVariable($envVariable, $defaultValue, $callback);
 
         /**
          * Get the value via a hook.
