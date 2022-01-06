@@ -7,8 +7,8 @@ namespace PoPSchema\CustomPostMedia\FieldResolvers\InterfaceType;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPSchema\CustomPostMedia\TypeResolvers\InterfaceType\SupportingFeaturedImageInterfaceTypeResolver;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 

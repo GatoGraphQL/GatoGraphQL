@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFiel
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 use PoPSchema\Pages\TypeResolvers\InputObjectType\PageChildrenFilterInputObjectTypeResolver;

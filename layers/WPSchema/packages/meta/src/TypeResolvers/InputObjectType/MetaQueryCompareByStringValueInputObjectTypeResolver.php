@@ -6,7 +6,7 @@ namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPWPSchema\Meta\Constants\MetaQueryCompareByOperators;
 use PoPWPSchema\Meta\TypeResolvers\EnumType\MetaQueryCompareByStringValueOperatorEnumTypeResolver;
 

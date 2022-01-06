@@ -10,8 +10,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\FloatScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\FloatScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FunctionFields\TypeResolvers\ScalarType\ArrayKeyScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 

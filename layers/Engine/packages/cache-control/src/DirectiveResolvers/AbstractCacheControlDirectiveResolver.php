@@ -8,7 +8,7 @@ use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {

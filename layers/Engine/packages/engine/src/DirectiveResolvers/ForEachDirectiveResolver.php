@@ -11,7 +11,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 
 class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver
 {

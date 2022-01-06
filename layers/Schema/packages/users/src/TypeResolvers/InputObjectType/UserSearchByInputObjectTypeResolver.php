@@ -7,7 +7,7 @@ namespace PoPSchema\Users\TypeResolvers\InputObjectType;
 use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\Users\Component;

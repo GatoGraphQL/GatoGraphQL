@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\SchemaCommons\Overrides\TypeResolvers\InputObjectType;
 
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver as UpstreamDateQueryInputObjectTypeResolver;
 use PoPWPSchema\SchemaCommons\TypeResolvers\EnumType\RelationEnumTypeResolver;
 use stdClass;

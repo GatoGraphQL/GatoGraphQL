@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPosts\Component;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;

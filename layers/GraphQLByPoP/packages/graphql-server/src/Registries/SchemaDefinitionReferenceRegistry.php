@@ -24,7 +24,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Cache\CacheUtils;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface
 {

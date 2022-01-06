@@ -6,8 +6,8 @@ namespace PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 

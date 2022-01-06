@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 
 class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {

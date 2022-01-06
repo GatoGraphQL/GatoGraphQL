@@ -7,7 +7,7 @@ namespace PoPWPSchema\Posts\SchemaHooks;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\BasicService\AbstractHookSet;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\AbstractPostsFilterInputObjectTypeResolver;
 use PoPWPSchema\Posts\FilterInputProcessors\FilterInputProcessor;

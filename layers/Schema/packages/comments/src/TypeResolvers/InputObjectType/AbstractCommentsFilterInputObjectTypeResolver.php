@@ -6,7 +6,7 @@ namespace PoPSchema\Comments\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Comments\Component;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\Constants\CommentStatus;

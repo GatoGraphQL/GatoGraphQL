@@ -6,9 +6,9 @@ namespace PoPSchema\CustomPostTagMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver

@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 
 abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver implements MetaDirectiveResolverInterface
 {
