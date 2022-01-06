@@ -9,7 +9,7 @@ use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Menus\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 
 class MenuByInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 {

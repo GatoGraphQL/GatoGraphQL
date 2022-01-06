@@ -26,8 +26,8 @@ class GD_ApplicationProcessors_DataLoad_ObjectTypeFieldResolver_Posts extends Ab
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-			'highlightsLazy' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
-            'referencedbyLazy' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+			'highlightsLazy' => \PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'referencedbyLazy' => \PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

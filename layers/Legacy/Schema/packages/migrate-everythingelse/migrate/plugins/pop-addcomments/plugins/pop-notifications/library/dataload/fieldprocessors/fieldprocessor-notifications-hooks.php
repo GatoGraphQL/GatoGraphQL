@@ -37,10 +37,10 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'commentObjectID' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
-            'icon' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'commentObjectID' => \PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'icon' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'url' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'message' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'message' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'commentObjectID' => CommentObjectTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

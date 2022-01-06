@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
 class CommentByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver

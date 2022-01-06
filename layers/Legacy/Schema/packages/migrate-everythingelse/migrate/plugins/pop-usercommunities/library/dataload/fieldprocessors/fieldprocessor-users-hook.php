@@ -34,9 +34,9 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
     {
         return match ($fieldName) {
             'isCommunity'
-                => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+                => \PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'hasActiveCommunities'
-                => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+                => \PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'communities',
             'activeCommunities'
                 => UserObjectTypeResolver::class,

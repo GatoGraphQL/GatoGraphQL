@@ -31,11 +31,11 @@ class PoP_RelatedPosts_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
     {
         return match ($fieldName) {
             'hasReferences'
-                => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+                => \PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'hasReferencedBy'
-                => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+                => \PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'referencedByCount'
-                => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+                => \PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'references',
             'referencedby'
                 => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),

@@ -27,8 +27,8 @@ class ObjectTypeFieldResolver_IndividualUsers extends AbstractObjectTypeFieldRes
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-			'individualinterests' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'hasIndividualDetails' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+			'individualinterests' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'hasIndividualDetails' => \PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\NodeInterfaceTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 
 class NodeInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {

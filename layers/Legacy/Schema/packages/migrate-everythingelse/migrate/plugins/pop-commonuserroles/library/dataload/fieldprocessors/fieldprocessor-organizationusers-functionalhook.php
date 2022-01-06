@@ -27,8 +27,8 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalOrganizationUsers
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-			'organizationTypesByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'organizationCategoriesByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+			'organizationTypesByName' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'organizationCategoriesByName' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
