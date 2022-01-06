@@ -31,14 +31,7 @@ class ExtendedParser extends AbstractExtendedParser
 
     protected function getMetaDirectiveResolver(string $directiveName): ?MetaDirectiveResolverInterface
     {
-        $metaDirectiveResolvers = $this->getMetaDirectiveRegistry()->getMetaDirectiveResolvers();
-        foreach ($metaDirectiveResolvers as $metaDirectiveResolver) {
-            if ($metaDirectiveResolver->getDirectiveName() !== $directiveName) {
-                continue;
-            }
-            return $metaDirectiveResolver;
-        }
-        return null;
+        return $this->getMetaDirectiveRegistry()->getMetaDirectiveResolver($directiveName);
     }
 
     protected function getAffectDirectivesUnderPosArgument(
