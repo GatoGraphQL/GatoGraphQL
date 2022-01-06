@@ -6,16 +6,8 @@ namespace PoP\Routing;
 
 class Routes
 {
-    use RoutesTrait;
-
-    public static string $MAIN = '';
     /**
-     * @return array<string, string>
+     * This route is reserved, no other package can declare it
      */
-    protected static function getRouteNameAndVariableRefs(): array
-    {
-        return [
-            'main' => &self::$MAIN,
-        ];
-    }
+    public const MAIN = 'main';
 }
