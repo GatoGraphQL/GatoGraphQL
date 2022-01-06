@@ -35,14 +35,14 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-			'multilayoutKeys' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'latestcountsTriggerValues' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'catsByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'commentsLazy' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
-            'noheadercommentsLazy' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+			'multilayoutKeys' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'latestcountsTriggerValues' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'catsByName' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'commentsLazy' => \PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'noheadercommentsLazy' => \PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
             'addCommentURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'topicsByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'appliestoByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'topicsByName' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'appliestoByName' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

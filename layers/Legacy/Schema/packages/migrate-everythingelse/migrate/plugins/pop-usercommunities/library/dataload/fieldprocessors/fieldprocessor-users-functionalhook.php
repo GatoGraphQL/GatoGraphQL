@@ -30,9 +30,9 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
         return match($fieldName) {
 			'editMembershipURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
             'editMemberStatusInlineURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'memberStatusByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'memberPrivilegesByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'memberTagsByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'memberStatusByName' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'memberPrivilegesByName' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'memberTagsByName' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
