@@ -24,7 +24,7 @@ abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentC
         }
 
         // Initialize via environment
-        parent::retrieveConfigurationValueOrUseDefault($envVariable, $defaultValue, $callback);
+        $upstreamValue = parent::retrieveConfigurationValueOrUseDefault($envVariable, $defaultValue, $callback);
 
         /**
          * Get the value via a hook.
@@ -42,10 +42,12 @@ abstract class AbstractComponentConfiguration extends UpstreamAbstractComponentC
         );
         $this->configuration[$envVariable] = $hooksAPI->applyFilters(
             $hookName,
-            $this->configuration[$envVariable],
+            $upstreamValue,
             $class,
             $envVariable
         );
+
+        return $this->configuration[$envVariable];
     }
 
     /**

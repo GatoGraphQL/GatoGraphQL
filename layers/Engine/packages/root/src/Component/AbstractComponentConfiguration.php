@@ -29,7 +29,7 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
     ): mixed {
         // Initialized from configuration? Then use that one directly.
         if ($this->hasConfigurationValue($envVariable)) {
-            return $this->configuration[$envVariable];
+            return $this->getConfigurationValue($envVariable);
         }
 
         /**
@@ -47,5 +47,7 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
             // Modify the type of the variable, from string to bool/int/array
             $this->configuration[$envVariable] = $callback !== null ? $callback($envValue) : $envValue;
         }
+
+        return $this->configuration[$envVariable];
     }
 }
