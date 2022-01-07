@@ -95,11 +95,13 @@ class ComponentManager
 
     /**
      * Have the components initialize their state on a global, shared way
+     *
+     * @param array<string,mixed> $state
      */
-    public function initializeAppState(): void
+    public function initializeAppState(array &$state): void
     {
         foreach ($this->components as $component) {
-            $component->initializeAppState();
+            $component->initializeAppState($state);
         }
     }
 }

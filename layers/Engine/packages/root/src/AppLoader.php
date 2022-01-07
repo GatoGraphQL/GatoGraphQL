@@ -310,7 +310,8 @@ class AppLoader
         $this->bootApplicationForComponents();
 
         // Have the components initialize their state on a global, shared way
-        $this->initializeAppState();
+        $state = App::getAppStateManager()->getState();
+        $this->initializeAppState($state);
     }
 
     /**
@@ -326,9 +327,11 @@ class AppLoader
 
     /**
      * Have the components initialize their state on a global, shared way
+     *
+     * @param array<string,mixed> $state
      */
-    protected function initializeAppState(): void
+     protected function initializeAppState(array &$state): void
     {
-        App::getComponentManager()->initializeAppState();
+        App::getComponentManager()->initializeAppState($state);
     }
 }

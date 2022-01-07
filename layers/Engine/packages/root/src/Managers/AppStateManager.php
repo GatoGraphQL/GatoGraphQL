@@ -30,4 +30,9 @@ class AppStateManager
     {
         return isset($this->state[$key]);
     }
+
+    public function &getState(): array
+    {
+        return $this->state;
+    }
 }

@@ -75,8 +75,10 @@ interface ComponentInterface
 
     /**
      * Have the components initialize their state on a global, shared way
+     *
+     * @param array<string,mixed> $state
      */
-    public function initializeAppState(): void;
+    public function initializeAppState(array &$state): void;
 
     /**
      * Initialize services for the system container
