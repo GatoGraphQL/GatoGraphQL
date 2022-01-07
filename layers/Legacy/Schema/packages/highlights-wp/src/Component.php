@@ -32,9 +32,9 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected static function initializeContainerServices(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        array $configuration,
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         self::initServices(dirname(__DIR__));
         if (Environment::addHighlightTypeToCustomPostUnionTypes()) {

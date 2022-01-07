@@ -34,9 +34,9 @@ abstract class AbstractComponent implements ComponentInterface
      * @param string[] $skipSchemaComponentClasses
      */
     final public function initialize(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        array $configuration,
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         // Set the configuration on the corresponding ComponentConfiguration
         $this->initializeConfiguration($configuration);
@@ -110,8 +110,8 @@ abstract class AbstractComponent implements ComponentInterface
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
     }
 
@@ -119,8 +119,8 @@ abstract class AbstractComponent implements ComponentInterface
      * Define runtime constants
      */
     protected function defineRuntimeConstants(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses
     ): void {
     }
 

@@ -40,8 +40,8 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
     }

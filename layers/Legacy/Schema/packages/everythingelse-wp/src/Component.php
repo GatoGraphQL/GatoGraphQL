@@ -42,9 +42,9 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected static function initializeContainerServices(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        array $configuration,
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         if (class_exists(CustomPostsComponent::class)) {
             self::initServices(dirname(__DIR__), '/ConditionalOnComponent/CustomPosts');
