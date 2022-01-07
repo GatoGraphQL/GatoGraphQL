@@ -14,7 +14,7 @@ class VersioningHelpers
     /**
      * Token used to separate the type from the field for setting version constraints
      */
-    const TYPE_FIELD_SEPARATOR = '.';
+    private const TYPE_FIELD_SEPARATOR = '.';
 
     private static ?array $versionConstraintsForFields = null;
     private static ?array $versionConstraintsForDirectives = null;
