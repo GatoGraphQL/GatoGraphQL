@@ -148,3 +148,6 @@ services:
 
     PoP\GraphQLParser\Parser\ExtendedParserInterface:
         class: \PoP\ComponentModel\GraphQLParser\Parser\ExtendedParser
+
+    PoP\ComponentModel\Versioning\VersioningServiceInterface:
+        class: \PoP\ComponentModel\Versioning\VersioningService
