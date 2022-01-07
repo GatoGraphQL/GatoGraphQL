@@ -9,8 +9,4 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
  */
 abstract class AbstractExtensionInitializationConfiguration extends AbstractPluginInitializationConfiguration implements ExtensionInitializationConfigurationInterface
 {
-    public function getComponentClassesToDisable(): array
-    {
-        return [];
-    }
 }

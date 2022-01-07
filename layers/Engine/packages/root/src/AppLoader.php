@@ -44,12 +44,6 @@ class AppLoader
      */
     protected array $skipSchemaComponentClasses = [];
     /**
-     * List of `Component` class which must not be enabled
-     *
-     * @var string[]
-     */
-    protected array $disableComponentClasses = [];
-    /**
      * Cache if a component is enabled or not, stored under its class
      *
      * @var array<string,bool>
@@ -105,20 +99,6 @@ class AppLoader
         $this->skipSchemaComponentClasses = array_merge(
             $this->skipSchemaComponentClasses,
             $skipSchemaComponentClasses
-        );
-    }
-
-    /**
-     * Add schema Component classes to skip initializing
-     *
-     * @param string[] $disableComponentClasses List of `Component` class which must not be enabled
-     */
-    public function addComponentClassesToDisable(
-        array $disableComponentClasses = []
-    ): void {
-        $this->disableComponentClasses = array_merge(
-            $this->disableComponentClasses,
-            $disableComponentClasses
         );
     }
 
@@ -255,7 +235,7 @@ class AppLoader
     {
         $componentClass = \get_class($component);
         if (!isset($this->componentEnabledCache[$componentClass])) {
-            $this->componentEnabledCache[$componentClass] = !in_array($componentClass, $this->disableComponentClasses) && $component->isEnabled();
+            $this->componentEnabledCache[$componentClass] = $component->isEnabled();
         }
         return $this->componentEnabledCache[$componentClass];
     }

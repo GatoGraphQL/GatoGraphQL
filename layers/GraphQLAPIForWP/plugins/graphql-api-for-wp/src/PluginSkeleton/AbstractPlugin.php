@@ -127,10 +127,6 @@ abstract class AbstractPlugin implements PluginInterface
         // Initialize the containers
         $componentClasses = $this->getComponentClassesToInitialize();
         App::getAppLoader()->addComponentClassesToInitialize($componentClasses);
-
-        App::getAppLoader()->addComponentClassesToDisable(
-            $this->getComponentClassesToDisable()
-        );
     }
 
     /**
@@ -222,13 +218,6 @@ abstract class AbstractPlugin implements PluginInterface
      * @return string[] List of `Component` class which must not initialize their Schema services
      */
     abstract protected function getSchemaComponentClassesToSkip(): array;
-
-    /**
-     * Add Component classes to disable
-     *
-     * @return string[] List of `Component` class which must not be enabled
-     */
-    abstract protected function getComponentClassesToDisable(): array;
 
     /**
      * Remove the CPTs from the DB

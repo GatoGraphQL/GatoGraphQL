@@ -109,16 +109,6 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
     }
 
     /**
-     * Add Component classes to disable
-     *
-     * @return string[] List of `Component` class which must not be enabled
-     */
-    protected function getComponentClassesToDisable(): array
-    {
-        return $this->extensionInitializationConfiguration?->getComponentClassesToDisable() ?? [];
-    }
-
-    /**
      * Plugin set-up, executed after the GraphQL API plugin is loaded,
      * and before it is initialized
      */
