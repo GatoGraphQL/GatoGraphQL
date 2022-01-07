@@ -7,15 +7,12 @@ namespace GraphQLByPoP\GraphQLQuery;
 use PoP\Root\App;
 use PoP\GraphQLAPI\Component as GraphQLAPIComponent;
 use PoP\BasicService\Component\AbstractComponent;
-use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use CanDisableComponentTrait;
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -29,6 +26,11 @@ class Component extends AbstractComponent
         ];
     }
 
+    public function isEnabled(): bool
+    {
+        return App::getComponent(GraphQLAPIComponent::class)->isEnabled();
+    }
+
     /**
      * Initialize services
      *
@@ -38,13 +40,6 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if ($this->isEnabled()) {
-            $this->initServices(dirname(__DIR__));
-        }
-    }
-
-    protected function resolveEnabled(): bool
-    {
-        return App::getComponent(GraphQLAPIComponent::class)->isEnabled();
+        $this->initServices(dirname(__DIR__));
     }
 }

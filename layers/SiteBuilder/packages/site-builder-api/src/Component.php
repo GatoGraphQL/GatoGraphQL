@@ -6,15 +6,12 @@ namespace PoP\SiteBuilderAPI;
 
 use PoP\API\Environment;
 use PoP\BasicService\Component\AbstractComponent;
-use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use CanDisableComponentTrait;
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -27,7 +24,7 @@ class Component extends AbstractComponent
         ];
     }
 
-    protected function resolveEnabled(): bool
+    public function isEnabled(): bool
     {
         return !Environment::disableAPI();
     }
