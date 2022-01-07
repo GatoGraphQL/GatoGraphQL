@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\Root\Component;
 
+use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 
 abstract class AbstractComponent implements ComponentInterface
 {
     use InitializeContainerServicesInComponentTrait;
 
+    private ?bool $enabled = null;
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
     protected ?ComponentInfoInterface $componentInfo = null;
     protected ?ComponentAppStateInterface $componentAppState = null;
@@ -33,9 +35,9 @@ abstract class AbstractComponent implements ComponentInterface
      * @param string[] $skipSchemaComponentClasses
      */
     final public function initialize(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        array $configuration,
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         // Set the configuration on the corresponding ComponentConfiguration
         $this->initializeConfiguration($configuration);
@@ -109,8 +111,8 @@ abstract class AbstractComponent implements ComponentInterface
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
     }
 
@@ -118,8 +120,8 @@ abstract class AbstractComponent implements ComponentInterface
      * Define runtime constants
      */
     protected function defineRuntimeConstants(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses
     ): void {
     }
 
@@ -192,7 +194,31 @@ abstract class AbstractComponent implements ComponentInterface
      */
     public function isEnabled(): bool
     {
+        if ($this->enabled === null) {
+            // If any dependency is disabled, then disable this component too
+            foreach ($this->getDependedComponentClasses() as $dependedComponentClass) {
+                $dependedComponent = App::getComponent($dependedComponentClass);
+                if (!$dependedComponent->isEnabled()) {
+                    $this->enabled = false;
+                    return $this->enabled;
+                }
+            }
+            $this->enabled = $this->resolveEnabled();
+        }
+        return $this->enabled;
+    }
+
+    protected function resolveEnabled(): bool
+    {
         return true;
+    }
+
+    /**
+     * Indicates if the Component must skipSchema
+     */
+    public function skipSchema(): bool
+    {
+        return false;
     }
 
     /**

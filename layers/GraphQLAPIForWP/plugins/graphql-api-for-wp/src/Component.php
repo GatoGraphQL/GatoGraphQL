@@ -94,8 +94,8 @@ class Component extends AbstractPluginComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         parent::initializeContainerServices(
             $skipSchema,

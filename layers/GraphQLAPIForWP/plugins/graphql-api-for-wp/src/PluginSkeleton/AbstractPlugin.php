@@ -217,10 +217,7 @@ abstract class AbstractPlugin implements PluginInterface
      *
      * @return string[] List of `Component` class which must not initialize their Schema services
      */
-    public function getSchemaComponentClassesToSkip(): array
-    {
-        return [];
-    }
+    abstract protected function getSchemaComponentClassesToSkip(): array;
 
     /**
      * Remove the CPTs from the DB

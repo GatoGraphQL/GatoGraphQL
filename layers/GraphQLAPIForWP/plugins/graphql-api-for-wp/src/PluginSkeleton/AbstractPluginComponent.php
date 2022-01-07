@@ -54,8 +54,8 @@ abstract class AbstractPluginComponent extends AbstractComponent implements Plug
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         $pluginFolder = $this->getPluginFolder();
         if ($pluginFolder === null) {

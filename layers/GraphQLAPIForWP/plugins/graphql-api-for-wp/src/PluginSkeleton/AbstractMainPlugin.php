@@ -376,16 +376,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 if ($this->inititalizationException !== null) {
                     return;
                 }
-                $this->initialize();
-            },
-            PluginLifecyclePriorities::INITIALIZE_PLUGIN
-        );
-        \add_action(
-            'plugins_loaded',
-            function (): void {
-                if ($this->inititalizationException !== null) {
-                    return;
-                }
                 \do_action(PluginLifecycleHooks::INITIALIZE_EXTENSION);
             },
             PluginLifecyclePriorities::INITIALIZE_EXTENSIONS
