@@ -16,7 +16,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoPSchema\EverythingElse\Component::class,
@@ -29,11 +29,10 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
-        array $configuration,
+    protected function initializeContainerServices(
         bool $skipSchema,
         array $skipSchemaComponentClasses,
     ): void {
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }

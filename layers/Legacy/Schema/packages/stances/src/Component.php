@@ -30,7 +30,6 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        array $configuration,
         bool $skipSchema,
         array $skipSchemaComponentClasses,
     ): void {

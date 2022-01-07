@@ -16,7 +16,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         /**
          * Comment Leo 17/03/2021:
@@ -105,13 +105,12 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
-        array $configuration,
+    protected function initializeContainerServices(
         bool $skipSchema,
         array $skipSchemaComponentClasses,
     ): void {
-        self::initServices(dirname(__DIR__));
-        self::initServices(dirname(__DIR__), '/Overrides');
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initServices(dirname(__DIR__));
+        $this->initServices(dirname(__DIR__), '/Overrides');
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }

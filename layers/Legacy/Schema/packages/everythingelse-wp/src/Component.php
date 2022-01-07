@@ -17,7 +17,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoPSchema\EverythingElse\Component::class,
@@ -28,7 +28,7 @@ class Component extends AbstractComponent
     /**
      * All conditional component classes that this component depends upon, to initialize them
      */
-    public static function getDependedConditionalComponentClasses(): array
+    public function getDependedConditionalComponentClasses(): array
     {
         return [
             \PoPSchema\CustomPosts\Component::class,
@@ -41,13 +41,12 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
-        array $configuration,
+    protected function initializeContainerServices(
         bool $skipSchema,
         array $skipSchemaComponentClasses,
     ): void {
         if (class_exists(CustomPostsComponent::class)) {
-            self::initServices(dirname(__DIR__), '/ConditionalOnComponent/CustomPosts');
+            $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/CustomPosts');
         }
     }
 }
