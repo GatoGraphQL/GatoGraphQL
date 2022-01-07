@@ -9,10 +9,12 @@ use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable as ExtendedVariable;
 use PoP\GraphQLParser\Parser\Ast\Directive as ExtendedDirective;
 use PoP\GraphQLParser\Parser\Ast\Document;
 use PoP\GraphQLParser\Parser\Ast\LeafField as ExtendedLeafField;
+use PoP\GraphQLParser\Parser\Ast\RelationalField as ExtendedRelationalField;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
+use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use PoPBackbone\GraphQLParser\Parser\Parser as UpstreamParser;
 
@@ -91,5 +93,28 @@ class Parser extends UpstreamParser implements ParserInterface
         Location $location,
     ): Directive {
         return new ExtendedDirective($name, $arguments, $location);
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param Directive[] $directives
+     */
+    protected function createRelationalField(
+        string $name,
+        ?string $alias,
+        array $arguments,
+        array $fieldsOrFragmentBonds,
+        array $directives,
+        Location $location
+    ): RelationalField {
+        return new ExtendedRelationalField(
+            $name,
+            $alias,
+            $arguments,
+            $fieldsOrFragmentBonds,
+            $directives,
+            $location
+        );
     }
 }
