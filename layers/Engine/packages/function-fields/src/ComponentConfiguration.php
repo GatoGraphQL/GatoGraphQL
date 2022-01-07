@@ -21,4 +21,12 @@ class ComponentConfiguration extends AbstractComponentConfiguration
             $callback,
         );
     }
+
+    protected function enableHook(string $envVariable): bool
+    {
+        return match ($envVariable) {
+            Environment::DISABLE_FUNCTION_FIELDS => false,
+            default => parent::enableHook($envVariable),
+        };
+    }
 }
