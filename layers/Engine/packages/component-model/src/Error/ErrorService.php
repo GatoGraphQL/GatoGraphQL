@@ -10,7 +10,6 @@ use PoP\ComponentModel\Feedback\Tokens;
 class ErrorService implements ErrorServiceInterface
 {
     use BasicServiceTrait;
-    
     /**
      * @param string[]|null $path
      * @return array<string, mixed>
