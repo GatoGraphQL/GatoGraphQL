@@ -49,6 +49,12 @@ class AppLoader
      * @var string[]
      */
     protected array $disableComponentClasses = [];
+    /**
+     * Cache if a component is enabled or not, stored under its class
+     *
+     * @var array<string,bool>
+     */
+    protected array $componentEnabledCache = [];
 
     /**
      * Add Component classes to be initialized
@@ -241,8 +247,11 @@ class AppLoader
 
     public function isComponentEnabled(ComponentInterface $component): bool
     {
-        $componentClass = get_class($component);
-        return !in_array($componentClass, $this->disableComponentClasses) && $component->isEnabled();
+        $componentClass = \get_class($component);
+        if (!isset(self::$componentEnabledCache[$componentClass])) {
+            self::$componentEnabledCache[$componentClass] = !in_array($componentClass, $this->disableComponentClasses) && $component->isEnabled();
+        }
+        return self::$componentEnabledCache[$componentClass];
     }
 
     /**
