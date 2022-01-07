@@ -14,7 +14,17 @@ class AppStateManager
      *
      * @var array<string,mixed>
      */
-    protected array $state = [];
+    protected array $state;
+
+    /**
+     * Called by the AppLoader to initalize the state
+     *
+     * @param array<string,mixed> $state
+     */
+    public function initializeState(array $state): void
+    {
+        $this->state = $state;
+    }
 
     public function set(string $key, mixed $value): void
     {
@@ -29,10 +39,5 @@ class AppStateManager
     public function has(string $key): bool
     {
         return isset($this->state[$key]);
-    }
-
-    public function &getAppState(): array
-    {
-        return $this->state;
     }
 }
