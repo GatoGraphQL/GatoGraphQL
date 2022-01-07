@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
+use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
 
@@ -223,7 +224,7 @@ class AppLoader
          */
         foreach ($this->orderedComponentClasses as $componentClass) {
             $component = App::getComponent($componentClass);
-            if (!$component->isEnabled()) {
+            if (!$this->isComponentEnabled($component)) {
                 continue;
             }
             $component->initializeSystem();
@@ -236,6 +237,13 @@ class AppLoader
 
         // Finally boot the components
         $this->bootSystemForComponents();
+    }
+
+    protected function isComponentEnabled(ComponentInterface $component): bool
+    {
+        $componentClass = get_class($component);
+        $isComponentDisabled = in_array($componentClass, $this->disableComponentClasses);
+        return !$isComponentDisabled && $component->isEnabled();
     }
 
     /**
@@ -265,7 +273,7 @@ class AppLoader
         $compilerPassClasses = [];
         foreach ($this->orderedComponentClasses as $componentClass) {
             $component = App::getComponent($componentClass);
-            if (!$component->isEnabled()) {
+            if (!$this->isComponentEnabled($component)) {
                 continue;
             }
             $compilerPassClasses = [
@@ -298,7 +306,7 @@ class AppLoader
          */
         foreach (array_reverse($this->orderedComponentClasses) as $componentClass) {
             $component = App::getComponent($componentClass);
-            if (!$component->isEnabled()) {
+            if (!$this->isComponentEnabled($component)) {
                 continue;
             }
             $component->customizeComponentClassConfiguration($this->componentClassConfiguration);
@@ -319,8 +327,7 @@ class AppLoader
         foreach ($this->orderedComponentClasses as $componentClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
             $component = App::getComponent($componentClass);
-            $isComponentDisabled = in_array($componentClass, $this->disableComponentClasses);
-            if ($isComponentDisabled || !$component->isEnabled()) {
+            if (!$this->isComponentEnabled($component)) {
                 continue;
             }
             $componentConfiguration = $this->componentClassConfiguration[$componentClass] ?? [];
