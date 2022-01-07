@@ -16,16 +16,16 @@ class VersioningService implements VersioningServiceInterface
      */
     private const TYPE_FIELD_SEPARATOR = '.';
 
-    private static ?array $versionConstraintsForFields = null;
-    private static ?array $versionConstraintsForDirectives = null;
+    private ?array $versionConstraintsForFields = null;
+    private ?array $versionConstraintsForDirectives = null;
 
     /**
      * Initialize the dictionary with the version constraints for specific fields in the schema
      */
-    protected static function initializeVersionConstraintsForFields(): void
+    protected function initializeVersionConstraintsForFields(): void
     {
         // Iterate through entries in `fieldVersionConstraints` and set them into a dictionary
-        self::$versionConstraintsForFields = [];
+        $this->versionConstraintsForFields = [];
         $schemaWarnings = [];
         $translationAPI = TranslationAPIFacade::getInstance();
         $vars = ApplicationState::getVars();
@@ -49,7 +49,7 @@ class VersioningService implements VersioningServiceInterface
             }
             $maybeNamespacedTypeName = $entry[0];
             $fieldName = $entry[1];
-            self::$versionConstraintsForFields[$maybeNamespacedTypeName][$fieldName] = $versionConstraint;
+            $this->versionConstraintsForFields[$maybeNamespacedTypeName][$fieldName] = $versionConstraint;
         }
         if ($schemaWarnings) {
             $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
@@ -60,23 +60,23 @@ class VersioningService implements VersioningServiceInterface
     /**
      * Indicates the version constraints for specific fields in the schema
      */
-    public static function getVersionConstraintsForField(string $maybeNamespacedTypeName, string $fieldName): ?string
+    public function getVersionConstraintsForField(string $maybeNamespacedTypeName, string $fieldName): ?string
     {
-        if (is_null(self::$versionConstraintsForFields)) {
-            self::initializeVersionConstraintsForFields();
+        if ($this->versionConstraintsForFields === null) {
+            $this->initializeVersionConstraintsForFields();
         }
-        return self::$versionConstraintsForFields[$maybeNamespacedTypeName][$fieldName] ?? null;
+        return $this->versionConstraintsForFields[$maybeNamespacedTypeName][$fieldName] ?? null;
     }
 
     /**
      * Indicates the version constraints for specific directives in the schema
      */
-    public static function getVersionConstraintsForDirective(string $directiveName): ?string
+    public function getVersionConstraintsForDirective(string $directiveName): ?string
     {
-        if (is_null(self::$versionConstraintsForDirectives)) {
+        if ($this->versionConstraintsForDirectives === null) {
             $vars = ApplicationState::getVars();
-            self::$versionConstraintsForDirectives = $vars['directive-version-constraints'];
+            $this->versionConstraintsForDirectives = $vars['directive-version-constraints'];
         }
-        return self::$versionConstraintsForDirectives[$directiveName];
+        return $this->versionConstraintsForDirectives[$directiveName];
     }
 }
