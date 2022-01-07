@@ -24,7 +24,7 @@ class Component extends AbstractComponent
         ];
     }
 
-    public function isEnabled(): bool
+    protected function resolveEnabled(): bool
     {
         return !Environment::disableAccessControl();
     }

@@ -170,6 +170,11 @@ abstract class AbstractComponent implements ComponentInterface
             }
             return false;
         }
+        return $this->resolveEnabled();
+    }
+
+    protected function resolveEnabled(): bool
+    {
         return true;
     }
 
