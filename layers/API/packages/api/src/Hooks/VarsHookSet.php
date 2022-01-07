@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\API\Hooks;
 
-use PoP\Root\App;
 use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Constants\Actions;
@@ -17,27 +16,28 @@ use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
-use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\GraphQLParser\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Parser\ParserInterface;
+use PoP\GraphQLParser\Response\OutputServiceInterface;
+use PoP\Root\App;
 use PoPBackbone\GraphQLParser\Execution\Context;
 
 class VarsHookSet extends AbstractHookSet
 {
-    private ?ErrorServiceInterface $errorService = null;
+    private ?OutputServiceInterface $errorService = null;
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?ParserInterface $parser = null;
 
-    final public function setErrorService(ErrorServiceInterface $errorService): void
+    final public function setOutputService(OutputServiceInterface $errorService): void
     {
         $this->errorService = $errorService;
     }
-    final protected function getErrorService(): ErrorServiceInterface
+    final protected function getOutputService(): OutputServiceInterface
     {
-        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
+        return $this->errorService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
     }
     final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -142,7 +142,7 @@ class VarsHookSet extends AbstractHookSet
             if (is_array($query)) {
                 $errorMessage = sprintf(
                     $this->getTranslationAPI()->__('The GraphQL query must be a string, but received \'%s\'', 'api'),
-                    $this->getErrorService()->jsonEncodeArrayOrStdClassValue($query)
+                    $this->getOutputService()->jsonEncodeArrayOrStdClassValue($query)
                 );
                 $this->getFeedbackMessageStore()->addQueryError($errorMessage);
                 return;
