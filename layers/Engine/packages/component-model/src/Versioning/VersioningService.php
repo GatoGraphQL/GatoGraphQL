@@ -9,7 +9,7 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-class VersioningHelpers
+class VersioningService implements VersioningServiceInterface
 {
     /**
      * Token used to separate the type from the field for setting version constraints
