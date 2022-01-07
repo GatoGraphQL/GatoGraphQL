@@ -9,10 +9,6 @@ use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    /**
-     * Disable hook, because it is invoked by `export-directive`
-     * on its Component's `resolveEnabled` function.
-     */
     public function enableMultipleQueryExecution(): bool
     {
         $envVariable = Environment::ENABLE_MULTIPLE_QUERY_EXECUTION;
