@@ -204,6 +204,9 @@ class AppLoader
          */
         foreach ($this->orderedComponentClasses as $componentClass) {
             $component = App::getComponent($componentClass);
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $component->initializeSystem();
         }
         $systemCompilerPasses = array_map(
@@ -243,6 +246,9 @@ class AppLoader
         $compilerPassClasses = [];
         foreach ($this->orderedComponentClasses as $componentClass) {
             $component = App::getComponent($componentClass);
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $compilerPassClasses = [
                 ...$compilerPassClasses,
                 ...$component->getSystemContainerCompilerPassClasses()
@@ -273,6 +279,9 @@ class AppLoader
          */
         foreach (array_reverse($this->orderedComponentClasses) as $componentClass) {
             $component = App::getComponent($componentClass);
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $component->customizeComponentClassConfiguration($this->componentClassConfiguration);
         }
 
@@ -291,6 +300,9 @@ class AppLoader
         foreach ($this->orderedComponentClasses as $componentClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
             $component = App::getComponent($componentClass);
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $componentConfiguration = $this->componentClassConfiguration[$componentClass] ?? [];
             $skipSchemaForComponent = in_array($componentClass, $this->skipSchemaComponentClasses);
             $component->initialize(
