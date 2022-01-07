@@ -6,8 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\PluginManagement\PluginEnvironmentHelpers;
-use GraphQLAPI\GraphQLAPI\PluginManagement\PluginManagementHelpers;
+use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\BasicService\Component\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
