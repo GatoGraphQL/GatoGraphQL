@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\FunctionFields;
 
 use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\App;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
@@ -28,7 +29,9 @@ class Component extends AbstractComponent
 
     protected function resolveEnabled(): bool
     {
-        return !Environment::disableFunctionFields();
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        return !$componentConfiguration->disableFunctionFields();
     }
 
     /**
