@@ -86,17 +86,6 @@ class Parser extends UpstreamParser implements ParserInterface
 
     /**
      * @param Argument[] $arguments
-     */
-    protected function createDirective(
-        $name,
-        array $arguments,
-        Location $location,
-    ): Directive {
-        return new ExtendedDirective($name, $arguments, $location);
-    }
-
-    /**
-     * @param Argument[] $arguments
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
@@ -116,5 +105,16 @@ class Parser extends UpstreamParser implements ParserInterface
             $directives,
             $location
         );
+    }
+
+    /**
+     * @param Argument[] $arguments
+     */
+    protected function createDirective(
+        $name,
+        array $arguments,
+        Location $location,
+    ): Directive {
+        return new ExtendedDirective($name, $arguments, $location);
     }
 }
