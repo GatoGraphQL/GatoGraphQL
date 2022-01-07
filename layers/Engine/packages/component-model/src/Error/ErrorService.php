@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Error;
 
+use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\Feedback\Tokens;
 
 class ErrorService implements ErrorServiceInterface
 {
+    use BasicServiceTrait;
+    
     /**
      * @param string[]|null $path
      * @return array<string, mixed>
