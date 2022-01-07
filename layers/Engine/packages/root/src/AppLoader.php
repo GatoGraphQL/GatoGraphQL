@@ -248,10 +248,10 @@ class AppLoader
     public function isComponentEnabled(ComponentInterface $component): bool
     {
         $componentClass = \get_class($component);
-        if (!isset(self::$componentEnabledCache[$componentClass])) {
-            self::$componentEnabledCache[$componentClass] = !in_array($componentClass, $this->disableComponentClasses) && $component->isEnabled();
+        if (!isset($this->componentEnabledCache[$componentClass])) {
+            $this->componentEnabledCache[$componentClass] = !in_array($componentClass, $this->disableComponentClasses) && $component->isEnabled();
         }
-        return self::$componentEnabledCache[$componentClass];
+        return $this->componentEnabledCache[$componentClass];
     }
 
     /**
