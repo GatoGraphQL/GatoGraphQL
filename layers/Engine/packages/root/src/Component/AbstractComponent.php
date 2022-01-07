@@ -179,6 +179,14 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
+     * Indicates if the Component must skipSchema
+     */
+    public function skipSchema(): bool
+    {
+        return false;
+    }
+
+    /**
      * ComponentConfiguration class for the Component
      */
     public function getConfiguration(): ?ComponentConfigurationInterface

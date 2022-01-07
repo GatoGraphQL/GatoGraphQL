@@ -55,6 +55,12 @@ class AppLoader
      * @var array<string,bool>
      */
     protected array $componentEnabledCache = [];
+    /**
+     * Cache if a component must skipSchema or not, stored under its class
+     *
+     * @var array<string,bool>
+     */
+    protected array $skipSchemaForComponentCache = [];
 
     /**
      * Add Component classes to be initialized
@@ -339,7 +345,7 @@ class AppLoader
                 continue;
             }
             $componentConfiguration = $this->componentClassConfiguration[$componentClass] ?? [];
-            $skipSchemaForComponent = in_array($componentClass, $this->skipSchemaComponentClasses);
+            $skipSchemaForComponent = $this->skipSchemaForComponent($component);
             $component->initialize(
                 $componentConfiguration,
                 $skipSchemaForComponent,
@@ -355,6 +361,15 @@ class AppLoader
 
         // Finally boot the components
         $this->bootApplicationForComponents();
+    }
+
+    public function skipSchemaForComponent(ComponentInterface $component): bool
+    {
+        $componentClass = \get_class($component);
+        if (!isset($this->skipSchemaForComponentCache[$componentClass])) {
+            $this->skipSchemaForComponentCache[$componentClass] = in_array($componentClass, $this->skipSchemaComponentClasses) || $component->skipSchema();
+        }
+        return $this->skipSchemaForComponentCache[$componentClass];
     }
 
     /**
