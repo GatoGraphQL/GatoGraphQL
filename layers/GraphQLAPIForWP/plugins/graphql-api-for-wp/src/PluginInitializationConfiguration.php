@@ -810,16 +810,4 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
         ];
     }
-
-    /**
-     * Add Component classes to disable
-     *
-     * @return string[] List of `Component` class which must not be enabled
-     */
-    public function getComponentClassesToDisable(): array
-    {
-        return [
-            \PoP\FunctionFields\Component::class,
-        ];
-    }
 }
