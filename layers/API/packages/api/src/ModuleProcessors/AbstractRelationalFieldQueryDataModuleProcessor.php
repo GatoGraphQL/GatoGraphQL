@@ -26,7 +26,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     protected function getPropertyFields(array $module): array
     {
-        $moduleAtts = count($module) >= 3 ? $module[2] : null;
+        $moduleAtts = $module[2] ?? null;
         $fields = $this->getFields($module, $moduleAtts);
 
         return array_values(array_filter(
@@ -43,7 +43,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     protected function getFieldsWithNestedSubfields(array $module): array
     {
-        $moduleAtts = count($module) >= 3 ? $module[2] : null;
+        $moduleAtts = $module[2] ?? null;
         $fields = $this->getFields($module, $moduleAtts);
 
         return array_filter(
