@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginManagement;
+namespace GraphQLAPI\GraphQLAPI\StaticHelpers;
 
 class PluginEnvironmentHelpers
 {
