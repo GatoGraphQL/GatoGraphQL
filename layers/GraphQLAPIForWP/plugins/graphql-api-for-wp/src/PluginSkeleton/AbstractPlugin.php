@@ -127,6 +127,10 @@ abstract class AbstractPlugin implements PluginInterface
         // Initialize the containers
         $componentClasses = $this->getComponentClassesToInitialize();
         App::getAppLoader()->addComponentClassesToInitialize($componentClasses);
+
+        App::getAppLoader()->addComponentClassesToDisable(
+            $this->getComponentClassesToDisable()
+        );
     }
 
     /**
@@ -186,9 +190,6 @@ abstract class AbstractPlugin implements PluginInterface
         );
         App::getAppLoader()->addSchemaComponentClassesToSkip(
             $this->getSchemaComponentClassesToSkip()
-        );
-        App::getAppLoader()->addComponentClassesToDisable(
-            $this->getComponentClassesToDisable()
         );
     }
 
