@@ -44,12 +44,6 @@ class AppLoader
      */
     protected array $skipSchemaComponentClasses = [];
     /**
-     * Cache if a component is enabled or not, stored under its class
-     *
-     * @var array<string,bool>
-     */
-    protected array $componentEnabledCache = [];
-    /**
      * Cache if a component must skipSchema or not, stored under its class
      *
      * @var array<string,bool>
@@ -233,11 +227,7 @@ class AppLoader
 
     public function isComponentEnabled(ComponentInterface $component): bool
     {
-        $componentClass = \get_class($component);
-        if (!isset($this->componentEnabledCache[$componentClass])) {
-            $this->componentEnabledCache[$componentClass] = $component->isEnabled();
-        }
-        return $this->componentEnabledCache[$componentClass];
+        return $component->isEnabled();
     }
 
     /**
