@@ -819,7 +819,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     public function getComponentClassesToDisable(): array
     {
         return [
-            \PoP\FunctionFields\Environment::class,
+            \PoP\FunctionFields\Component::class,
         ];
     }
 }
