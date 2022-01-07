@@ -17,7 +17,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoPSchema\Stances\Component::class,
@@ -31,14 +31,13 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+    protected function initializeContainerServices(
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
-        self::initServices(dirname(__DIR__));
+        $this->initServices(dirname(__DIR__));
         if (Environment::addStanceTypeToCustomPostUnionTypes()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddStanceTypeToCustomPostUnionTypes/Overrides');
+            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddStanceTypeToCustomPostUnionTypes/Overrides');
         }
     }
 }

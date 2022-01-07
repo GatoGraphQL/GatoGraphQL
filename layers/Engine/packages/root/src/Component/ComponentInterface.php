@@ -17,9 +17,9 @@ interface ComponentInterface
      * @param string[] $skipSchemaComponentClasses
      */
     public function initialize(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        array $configuration,
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void;
 
     /**

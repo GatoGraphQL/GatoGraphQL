@@ -88,7 +88,7 @@ class AppLoader
      * @param string[] $skipSchemaComponentClasses List of `Component` class which must not initialize their Schema services
      */
     public function addSchemaComponentClassesToSkip(
-        array $skipSchemaComponentClasses = []
+        array $skipSchemaComponentClasses
     ): void {
         $this->skipSchemaComponentClasses = array_merge(
             $this->skipSchemaComponentClasses,
