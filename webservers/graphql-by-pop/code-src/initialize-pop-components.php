@@ -35,7 +35,6 @@ App::stockAndInitializeComponentClasses([
     \PoPWPSchema\TaxonomyMeta\Component::class,
     \PoPWPSchema\UserMeta\Component::class,
     \GraphQLByPoP\GraphQLServer\Component::class,
-    \PoP\FunctionFields\Component::class,
     \PoP\RESTAPI\Component::class,
 ]);
 
