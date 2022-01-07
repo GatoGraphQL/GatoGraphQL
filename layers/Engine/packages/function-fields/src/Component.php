@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace PoP\FunctionFields;
 
 use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
+    use CanDisableComponentTrait;
+    
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -23,6 +26,11 @@ class Component extends AbstractComponent
         ];
     }
 
+    protected function resolveEnabled(): bool
+    {
+        return !Environment::disableFunctionFields();
+    }
+
     /**
      * Initialize services
      *
@@ -32,6 +40,8 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
+        if ($this->isEnabled()) {
+            $this->initSchemaServices(dirname(__DIR__), $skipSchema);
+        }
     }
 }
