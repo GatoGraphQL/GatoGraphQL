@@ -174,6 +174,20 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
+     * Once all properties by all Components have been set,
+     * have this second pass consolidate the state
+     *
+     * @param array<string,mixed> $state
+     */
+    public function augmentAppState(array &$state): void
+    {
+        if ($this->componentAppState === null) {
+            return;
+        }
+        $this->componentAppState->augment($state);
+    }
+
+    /**
      * Indicates if the Component is enabled
      */
     public function isEnabled(): bool

@@ -103,5 +103,8 @@ class ComponentManager
         foreach ($this->components as $component) {
             $component->initializeAppState($state);
         }
+        foreach ($this->components as $component) {
+            $component->augmentAppState($state);
+        }
     }
 }

@@ -81,6 +81,14 @@ interface ComponentInterface
     public function initializeAppState(array &$state): void;
 
     /**
+     * Once all properties by all Components have been set,
+     * have this second pass consolidate the state
+     *
+     * @param array<string,mixed> $state
+     */
+    public function augmentAppState(array &$state): void;
+
+    /**
      * Initialize services for the system container
      */
     public function initializeSystem(): void;
