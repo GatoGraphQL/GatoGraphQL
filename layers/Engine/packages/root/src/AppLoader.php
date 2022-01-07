@@ -210,7 +210,7 @@ class AppLoader
          */
         foreach ($this->orderedComponentClasses as $componentClass) {
             $component = App::getComponent($componentClass);
-            if (!$this->isComponentEnabled($component)) {
+            if (!$component->isEnabled()) {
                 continue;
             }
             $component->initializeSystem();
@@ -223,11 +223,6 @@ class AppLoader
 
         // Finally boot the components
         $this->bootSystemForComponents();
-    }
-
-    public function isComponentEnabled(ComponentInterface $component): bool
-    {
-        return $component->isEnabled();
     }
 
     /**
@@ -257,7 +252,7 @@ class AppLoader
         $compilerPassClasses = [];
         foreach ($this->orderedComponentClasses as $componentClass) {
             $component = App::getComponent($componentClass);
-            if (!$this->isComponentEnabled($component)) {
+            if (!$component->isEnabled()) {
                 continue;
             }
             $compilerPassClasses = [
@@ -290,7 +285,7 @@ class AppLoader
          */
         foreach (array_reverse($this->orderedComponentClasses) as $componentClass) {
             $component = App::getComponent($componentClass);
-            if (!$this->isComponentEnabled($component)) {
+            if (!$component->isEnabled()) {
                 continue;
             }
             $component->customizeComponentClassConfiguration($this->componentClassConfiguration);
@@ -311,7 +306,7 @@ class AppLoader
         foreach ($this->orderedComponentClasses as $componentClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
             $component = App::getComponent($componentClass);
-            if (!$this->isComponentEnabled($component)) {
+            if (!$component->isEnabled()) {
                 continue;
             }
             $componentConfiguration = $this->componentClassConfiguration[$componentClass] ?? [];
