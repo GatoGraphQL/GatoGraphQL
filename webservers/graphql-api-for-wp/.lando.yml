@@ -51,6 +51,8 @@ services:
         - >-
           ../../layers/Engine/packages/field-query:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/field-query
         - >-
+          ../../layers/Engine/packages/function-fields:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/function-fields
+        - >-
           ../../layers/Engine/packages/graphql-parser:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/graphql-parser
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/guzzle-helpers

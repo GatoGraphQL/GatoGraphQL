@@ -612,6 +612,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
              */
             ComponentModelEnvironment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA => true,
         ];
+        $componentClassConfiguration[\PoP\FunctionFields\Component::class] = [
+            \PoP\FunctionFields\Environment::DISABLE_FUNCTION_FIELDS => true,
+        ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
         ];

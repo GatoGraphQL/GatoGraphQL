@@ -3,7 +3,7 @@
 namespace PoP\FunctionFields;
 
 use PoP\Root\App;
-use PoP\Engine\AbstractTestCase;
+use PoP\Root\AbstractTestCase;
 
 class ComponentTest extends AbstractTestCase
 {

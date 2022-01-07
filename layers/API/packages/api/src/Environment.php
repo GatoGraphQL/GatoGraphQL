@@ -13,14 +13,16 @@ class Environment
     public const OVERRIDE_REQUEST_URI = 'OVERRIDE_REQUEST_URI';
     public const SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA = 'SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA';
     public const SORT_FULL_SCHEMA_ALPHABETICALLY = 'SORT_FULL_SCHEMA_ALPHABETICALLY';
+    public const DISABLE_API = 'DISABLE_API';
+    public const ENABLE_SETTING_NAMESPACING_BY_URL_PARAM = 'ENABLE_SETTING_NAMESPACING_BY_URL_PARAM';
 
     public static function disableAPI(): bool
     {
-        return getenv('DISABLE_API') !== false ? strtolower(getenv('DISABLE_API')) == "true" : false;
+        return getenv(self::DISABLE_API) !== false ? strtolower(getenv(self::DISABLE_API)) == "true" : false;
     }
 
     public static function enableSettingNamespacingByURLParam(): bool
     {
-        return getenv('ENABLE_SETTING_NAMESPACING_BY_URL_PARAM') !== false ? strtolower(getenv('ENABLE_SETTING_NAMESPACING_BY_URL_PARAM')) == "true" : false;
+        return getenv(self::ENABLE_SETTING_NAMESPACING_BY_URL_PARAM) !== false ? strtolower(getenv(self::ENABLE_SETTING_NAMESPACING_BY_URL_PARAM)) == "true" : false;
     }
 }
