@@ -242,8 +242,7 @@ class AppLoader
     protected function isComponentEnabled(ComponentInterface $component): bool
     {
         $componentClass = get_class($component);
-        $isComponentDisabled = in_array($componentClass, $this->disableComponentClasses);
-        return !$isComponentDisabled && $component->isEnabled();
+        return $component->isEnabled() && !in_array($componentClass, $this->disableComponentClasses);
     }
 
     /**
