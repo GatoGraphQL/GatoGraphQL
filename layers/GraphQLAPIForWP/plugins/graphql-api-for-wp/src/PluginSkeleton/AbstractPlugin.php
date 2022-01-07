@@ -187,6 +187,9 @@ abstract class AbstractPlugin implements PluginInterface
         App::getAppLoader()->addSchemaComponentClassesToSkip(
             $this->getSchemaComponentClassesToSkip()
         );
+        App::getAppLoader()->addComponentClassesToDisable(
+            $this->getComponentClassesToDisable()
+        );
     }
 
     /**
@@ -218,6 +221,16 @@ abstract class AbstractPlugin implements PluginInterface
      * @return string[] List of `Component` class which must not initialize their Schema services
      */
     public function getSchemaComponentClassesToSkip(): array
+    {
+        return [];
+    }
+
+    /**
+     * Add Component classes to disable
+     *
+     * @return string[] List of `Component` class which must not be enabled
+     */
+    public function getComponentClassesToDisable(): array
     {
         return [];
     }

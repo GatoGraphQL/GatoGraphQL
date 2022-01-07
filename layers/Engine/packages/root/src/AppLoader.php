@@ -6,7 +6,6 @@ namespace PoP\Root;
 
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
-use PoP\Root\Managers\ComponentManager;
 
 /**
  * Application Loader
@@ -43,6 +42,12 @@ class AppLoader
      * @var string[]
      */
     protected array $skipSchemaComponentClasses = [];
+    /**
+     * List of `Component` class which must not be enabled
+     *
+     * @var string[]
+     */
+    protected array $disableComponentClasses = [];
 
     /**
      * Add Component classes to be initialized
@@ -87,6 +92,20 @@ class AppLoader
         $this->skipSchemaComponentClasses = array_merge(
             $this->skipSchemaComponentClasses,
             $skipSchemaComponentClasses
+        );
+    }
+
+    /**
+     * Add schema Component classes to skip initializing
+     *
+     * @param string[] $disableComponentClasses List of `Component` class which must not be enabled
+     */
+    public function addComponentClassesToDisable(
+        array $disableComponentClasses = []
+    ): void {
+        $this->disableComponentClasses = array_merge(
+            $this->disableComponentClasses,
+            $disableComponentClasses
         );
     }
 
@@ -300,7 +319,8 @@ class AppLoader
         foreach ($this->orderedComponentClasses as $componentClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
             $component = App::getComponent($componentClass);
-            if (!$component->isEnabled()) {
+            $isComponentDisabled = in_array($componentClass, $this->disableComponentClasses);
+            if ($isComponentDisabled || !$component->isEnabled()) {
                 continue;
             }
             $componentConfiguration = $this->componentClassConfiguration[$componentClass] ?? [];
