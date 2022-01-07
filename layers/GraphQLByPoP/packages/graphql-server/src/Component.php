@@ -43,11 +43,6 @@ class Component extends AbstractComponent
         ];
     }
 
-    public function isEnabled(): bool
-    {
-        return App::getComponent(GraphQLRequestComponent::class)->isEnabled();
-    }
-
     /**
      * Set the default component configuration
      *

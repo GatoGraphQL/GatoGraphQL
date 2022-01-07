@@ -25,11 +25,6 @@ class Component extends AbstractComponent
         ];
     }
 
-    public function isEnabled(): bool
-    {
-        return App::getComponent(UserRolesAccessControlComponent::class)->isEnabled();
-    }
-
     /**
      * Initialize services for the system container
      */

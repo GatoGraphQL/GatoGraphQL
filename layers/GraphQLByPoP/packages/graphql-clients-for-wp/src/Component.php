@@ -27,11 +27,6 @@ class Component extends AbstractComponent
         ];
     }
 
-    public function isEnabled(): bool
-    {
-        return App::getComponent(GraphQLServerComponent::class)->isEnabled();
-    }
-
     /**
      * Initialize services
      *

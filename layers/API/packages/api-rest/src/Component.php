@@ -27,7 +27,7 @@ class Component extends AbstractComponent
 
     public function isEnabled(): bool
     {
-        return App::getComponent(APIComponent::class)->isEnabled() && !Environment::disableRESTAPI();
+        return !Environment::disableRESTAPI();
     }
 
     /**

@@ -25,11 +25,6 @@ class Component extends AbstractComponent
         ];
     }
 
-    public function isEnabled(): bool
-    {
-        return App::getComponent(GraphQLQueryComponent::class)->isEnabled();
-    }
-
     /**
      * Initialize services
      *

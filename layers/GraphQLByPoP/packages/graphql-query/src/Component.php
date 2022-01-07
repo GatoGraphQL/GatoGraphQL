@@ -26,11 +26,6 @@ class Component extends AbstractComponent
         ];
     }
 
-    public function isEnabled(): bool
-    {
-        return App::getComponent(GraphQLAPIComponent::class)->isEnabled();
-    }
-
     /**
      * Initialize services
      *

@@ -37,11 +37,6 @@ class Component extends AbstractComponent
         ];
     }
 
-    public function isEnabled(): bool
-    {
-        return App::getComponent(AccessControlComponent::class)->isEnabled();
-    }
-
     /**
      * Initialize services
      *
