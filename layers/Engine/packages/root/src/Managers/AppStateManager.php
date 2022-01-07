@@ -31,7 +31,7 @@ class AppStateManager
         return isset($this->state[$key]);
     }
 
-    public function &getState(): array
+    public function &getAppState(): array
     {
         return $this->state;
     }
