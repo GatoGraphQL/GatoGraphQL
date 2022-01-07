@@ -6,7 +6,6 @@ namespace PoPSchema\UserRolesACL;
 
 use PoP\Root\App;
 use PoP\BasicService\Component\AbstractComponent;
-use PoP\Root\Component\CanDisableComponentTrait;
 use PoPSchema\UserRolesAccessControl\Component as UserRolesAccessControlComponent;
 
 /**
@@ -14,8 +13,6 @@ use PoPSchema\UserRolesAccessControl\Component as UserRolesAccessControlComponen
  */
 class Component extends AbstractComponent
 {
-    use CanDisableComponentTrait;
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -28,18 +25,11 @@ class Component extends AbstractComponent
         ];
     }
 
-    protected function resolveEnabled(): bool
-    {
-        return App::getComponent(UserRolesAccessControlComponent::class)->isEnabled();
-    }
-
     /**
      * Initialize services for the system container
      */
     protected function initializeSystemContainerServices(): void
     {
-        if ($this->isEnabled()) {
-                $this->initSystemServices(dirname(__DIR__));
-        }
+        $this->initSystemServices(dirname(__DIR__));
     }
 }

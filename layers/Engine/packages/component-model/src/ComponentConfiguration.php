@@ -104,6 +104,14 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
+    protected function enableHook(string $envVariable): bool
+    {
+        return match ($envVariable) {
+            Environment::USE_COMPONENT_MODEL_CACHE => false,
+            default => parent::enableHook($envVariable),
+        };
+    }
+
     public function mustNamespaceTypes(): bool
     {
         $envVariable = Environment::NAMESPACE_TYPES_AND_INTERFACES;

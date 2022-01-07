@@ -14,15 +14,12 @@ use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoP\BasicService\Component\AbstractComponent;
-use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use CanDisableComponentTrait;
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -74,6 +71,14 @@ class Component extends AbstractComponent
     }
 
     /**
+     * Initialize services for the system container
+     */
+    protected function initializeSystemContainerServices(): void
+    {
+        $this->initSystemServices(dirname(__DIR__));
+    }
+
+    /**
      * Initialize services
      *
      * @param string[] $skipSchemaComponentClasses
@@ -82,41 +87,24 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if ($this->isEnabled()) {
-            $this->initServices(dirname(__DIR__));
-            $this->initServices(dirname(__DIR__), '/Overrides');
-            $this->initSchemaServices(dirname(__DIR__), $skipSchema);
-            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
+        $this->initServices(dirname(__DIR__));
+        $this->initServices(dirname(__DIR__), '/Overrides');
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
 
-            // Boot conditionals
-            /** @var AccessControlComponentConfiguration */
-            $componentConfiguration = App::getComponent(AccessControlComponent::class)->getConfiguration();
-            if (
-                class_exists(CacheControlComponent::class)
-                && class_exists(AccessControlComponent::class)
-                && $componentConfiguration->canSchemaBePrivate()
-            ) {
-                $this->initSchemaServices(
-                    dirname(__DIR__),
-                    $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses),
-                    '/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema'
-                );
-            }
+        // Boot conditionals
+        /** @var AccessControlComponentConfiguration */
+        $componentConfiguration = App::getComponent(AccessControlComponent::class)->getConfiguration();
+        if (
+            class_exists(CacheControlComponent::class)
+            && class_exists(AccessControlComponent::class)
+            && $componentConfiguration->canSchemaBePrivate()
+        ) {
+            $this->initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses),
+                '/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema'
+            );
         }
-    }
-
-    /**
-     * Initialize services for the system container
-     */
-    protected function initializeSystemContainerServices(): void
-    {
-        if ($this->isEnabled()) {
-            $this->initSystemServices(dirname(__DIR__));
-        }
-    }
-
-    protected function resolveEnabled(): bool
-    {
-        return App::getComponent(GraphQLRequestComponent::class)->isEnabled();
     }
 }

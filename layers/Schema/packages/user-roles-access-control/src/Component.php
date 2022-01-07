@@ -8,15 +8,12 @@ use PoP\Root\App;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\BasicService\Component\AbstractComponent;
-use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use CanDisableComponentTrait;
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -49,22 +46,15 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if ($this->isEnabled()) {
-            $this->initServices(dirname(__DIR__));
-            $this->initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initServices(dirname(__DIR__));
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
-            if (class_exists(CacheControlComponent::class)) {
-                $this->initSchemaServices(
-                    dirname(__DIR__),
-                    $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses),
-                    '/ConditionalOnComponent/CacheControl'
-                );
-            }
+        if (class_exists(CacheControlComponent::class)) {
+            $this->initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses),
+                '/ConditionalOnComponent/CacheControl'
+            );
         }
-    }
-
-    protected function resolveEnabled(): bool
-    {
-        return App::getComponent(AccessControlComponent::class)->isEnabled();
     }
 }

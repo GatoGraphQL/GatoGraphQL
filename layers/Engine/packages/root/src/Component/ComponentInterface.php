@@ -101,6 +101,11 @@ interface ComponentInterface
     public function isEnabled(): bool;
 
     /**
+     * Indicates if the Component must skipSchema
+     */
+    public function skipSchema(): bool;
+
+    /**
      * ComponentConfiguration for the Component
      */
     public function getConfiguration(): ?ComponentConfigurationInterface;
