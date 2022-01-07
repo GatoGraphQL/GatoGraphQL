@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Versioning;
 
-use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
 
 class VersioningService implements VersioningServiceInterface
 {
+    use BasicServiceTrait;
+
     /**
      * Token used to separate the type from the field for setting version constraints
      */
@@ -18,6 +20,17 @@ class VersioningService implements VersioningServiceInterface
 
     private ?array $versionConstraintsForFields = null;
     private ?array $versionConstraintsForDirectives = null;
+
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+
+    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+    }
 
     /**
      * Initialize the dictionary with the version constraints for specific fields in the schema
@@ -27,7 +40,6 @@ class VersioningService implements VersioningServiceInterface
         // Iterate through entries in `fieldVersionConstraints` and set them into a dictionary
         $this->versionConstraintsForFields = [];
         $schemaWarnings = [];
-        $translationAPI = TranslationAPIFacade::getInstance();
         $vars = ApplicationState::getVars();
         foreach (($vars['field-version-constraints'] ?? []) as $typeField => $versionConstraint) {
             // All fields are defined as "$type.$fieldName". If not, it's an error
@@ -36,10 +48,7 @@ class VersioningService implements VersioningServiceInterface
                 $schemaWarnings[] = [
                     Tokens::PATH => [$typeField],
                     Tokens::MESSAGE => sprintf(
-                        $translationAPI->__(
-                            'URL param \'fieldVersionConstraints\' expects the type and field name separated by \'%s\' (eg: \'%s\'), so the following value has been ignored: \'%s\'',
-                            'component-model'
-                        ),
+                        $this->__('URL param \'fieldVersionConstraints\' expects the type and field name separated by \'%s\' (eg: \'%s\'), so the following value has been ignored: \'%s\'', 'component-model'),
                         self::TYPE_FIELD_SEPARATOR,
                         '?fieldVersionConstraints[Post.title]=^0.1',
                         $typeField
@@ -52,8 +61,7 @@ class VersioningService implements VersioningServiceInterface
             $this->versionConstraintsForFields[$maybeNamespacedTypeName][$fieldName] = $versionConstraint;
         }
         if ($schemaWarnings) {
-            $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-            $feedbackMessageStore->addSchemaWarnings($schemaWarnings);
+            $this->getFeedbackMessageStore()->addSchemaWarnings($schemaWarnings);
         }
     }
 
