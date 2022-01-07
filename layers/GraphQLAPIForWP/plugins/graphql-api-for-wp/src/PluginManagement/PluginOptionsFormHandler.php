@@ -12,23 +12,23 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 /**
  * Helper class with functions to set the configuration in PoP components.
  */
-class PluginManagementHelpers
+class PluginOptionsFormHandler
 {
     /**
      * Cache the options after normalizing them
      *
      * @var array<string, mixed>|null
      */
-    protected static ?array $normalizedOptionValuesCache = null;
+    protected ?array $normalizedOptionValuesCache = null;
 
     /**
      * Get the values from the form submitted to options.php, and normalize them
      *
      * @return array<string, mixed>
      */
-    public static function getNormalizedOptionValues(): array
+    public function getNormalizedOptionValues(): array
     {
-        if (self::$normalizedOptionValuesCache === null) {
+        if ($this->normalizedOptionValuesCache === null) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /**
              * @var SettingsMenuPage
@@ -36,9 +36,9 @@ class PluginManagementHelpers
             $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
             // Obtain the values from the POST and normalize them
             $value = $_POST[SettingsMenuPage::SETTINGS_FIELD] ?? [];
-            self::$normalizedOptionValuesCache = $settingsMenuPage->normalizeSettings($value);
+            $this->normalizedOptionValuesCache = $settingsMenuPage->normalizeSettings($value);
         }
-        return self::$normalizedOptionValuesCache;
+        return $this->normalizedOptionValuesCache;
     }
 
     /**
@@ -51,7 +51,7 @@ class PluginManagementHelpers
      * since options.php is used everywhere, including WP core and other plugins.
      * Otherwise, it may thrown an exception!
      */
-    public static function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
+    public function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
     {
         global $pagenow;
         if (
@@ -59,7 +59,7 @@ class PluginManagementHelpers
             && isset($_REQUEST[SettingsMenuPage::FORM_ORIGIN])
             && $_REQUEST[SettingsMenuPage::FORM_ORIGIN] == SettingsMenuPage::SETTINGS_FIELD
         ) {
-            $value = self::getNormalizedOptionValues();
+            $value = $this->getNormalizedOptionValues();
             // Return the specific value to this module/option
             $moduleRegistry = SystemModuleRegistryFacade::getInstance();
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
@@ -72,14 +72,14 @@ class PluginManagementHelpers
     /**
      * Process the "URL path" option values
      */
-    public static function getURLPathSettingValue(
+    public function getURLPathSettingValue(
         string $value,
         string $module,
         string $option
     ): string {
         // If we are on options.php, use the value submitted to the form,
         // so it's updated before doing `add_rewrite_endpoint` and `flush_rewrite_rules`
-        $value = self::maybeOverrideValueFromForm($value, $module, $option);
+        $value = $this->maybeOverrideValueFromForm($value, $module, $option);
 
         // Make sure the path has a "/" on both ends
         return EndpointUtils::slashURI($value);
@@ -88,43 +88,16 @@ class PluginManagementHelpers
     /**
      * Process the "URL base path" option values
      */
-    public static function getCPTPermalinkBasePathSettingValue(
+    public function getCPTPermalinkBasePathSettingValue(
         string $value,
         string $module,
         string $option
     ): string {
         // If we are on options.php, use the value submitted to the form,
         // so it's updated before doing `add_rewrite_endpoint` and `flush_rewrite_rules`
-        $value = self::maybeOverrideValueFromForm($value, $module, $option);
+        $value = $this->maybeOverrideValueFromForm($value, $module, $option);
 
         // Make sure the path does not have "/" on either end
         return trim($value, '/');
-    }
-
-    /**
-     * Determine if the environment variable was defined
-     * as a constant in wp-config.php
-     */
-    public static function getWPConfigConstantValue(string $envVariable): mixed
-    {
-        return constant(self::getWPConfigConstantName($envVariable));
-    }
-
-    /**
-     * Determine if the environment variable was defined
-     * as a constant in wp-config.php
-     */
-    public static function isWPConfigConstantDefined(string $envVariable): bool
-    {
-        return defined(self::getWPConfigConstantName($envVariable));
-    }
-
-    /**
-     * Constants defined in wp-config.php must start with this prefix
-     * to override GraphQL API environment variables
-     */
-    public static function getWPConfigConstantName(string $envVariable): string
-    {
-        return 'GRAPHQL_API_' . $envVariable;
     }
 }

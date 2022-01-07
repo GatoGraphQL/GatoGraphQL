@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
-use PoP\Root\App;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
@@ -37,8 +36,9 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
-use PoP\ComponentModel\Versioning\VersioningHelpers;
+use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
+use PoP\Root\App;
 
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface
 {
@@ -91,6 +91,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     private ?EngineInterface $engine = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?VersioningServiceInterface $versioningService = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -147,6 +148,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    final public function setVersioningService(VersioningServiceInterface $versioningService): void
+    {
+        $this->versioningService = $versioningService;
+    }
+    final protected function getVersioningService(): VersioningServiceInterface
+    {
+        return $this->versioningService ??= $this->instanceManager->getInstance(VersioningServiceInterface::class);
     }
 
     final public function getClassesToAttachTo(): array
@@ -650,11 +659,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              */
             $versionConstraint =
                 $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT]
-                ?? VersioningHelpers::getVersionConstraintsForField(
+                ?? $this->getVersioningService()->getVersionConstraintsForField(
                     $objectTypeResolver->getNamespacedTypeName(),
                     $fieldName
                 )
-                ?? VersioningHelpers::getVersionConstraintsForField(
+                ?? $this->getVersioningService()->getVersionConstraintsForField(
                     $objectTypeResolver->getTypeName(),
                     $fieldName
                 )

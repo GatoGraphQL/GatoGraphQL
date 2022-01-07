@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\Root\App;
 use Exception;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Component;
@@ -23,15 +23,15 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
-use PoP\ComponentModel\Versioning\VersioningHelpers;
+use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\FieldQuery\QueryHelpers;
+use PoP\Root\App;
 use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
@@ -64,6 +64,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     private ?SemverHelperServiceInterface $semverHelperService = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?VersioningServiceInterface $versioningService = null;
 
     /**
      * @var array<string, mixed>
@@ -144,6 +145,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    final public function setVersioningService(VersioningServiceInterface $versioningService): void
+    {
+        $this->versioningService = $versioningService;
+    }
+    final protected function getVersioningService(): VersioningServiceInterface
+    {
+        return $this->versioningService ??= $this->instanceManager->getInstance(VersioningServiceInterface::class);
     }
 
     final public function getClassesToAttachTo(): array
@@ -443,7 +452,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              */
             $versionConstraint =
                 $directiveArgs[SchemaDefinition::VERSION_CONSTRAINT]
-                ?? VersioningHelpers::getVersionConstraintsForDirective($this->getDirectiveName())
+                ?? $this->getVersioningService()->getVersionConstraintsForDirective($this->getDirectiveName())
                 ?? $vars['version-constraint'];
             /**
              * If the query doesn't restrict the version, then do not process
