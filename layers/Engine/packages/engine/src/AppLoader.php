@@ -24,7 +24,6 @@ class AppLoader extends RootAppLoader
         $hooksAPI->addAction(
             'popcms:boot',
             function (): void {
-                // Boot all the components
                 App::getComponentManager()->boot();
             },
             5
@@ -33,10 +32,17 @@ class AppLoader extends RootAppLoader
         $hooksAPI->addAction(
             'popcms:boot',
             function (): void {
-                // Boot all the components
                 App::getComponentManager()->afterBoot();
             },
             15
+        );
+
+        $hooksAPI->addAction(
+            'popcms:boot',
+            function (): void {
+                App::getComponentManager()->initializeAppState();
+            },
+            25
         );
     }
 }

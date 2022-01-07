@@ -319,5 +319,6 @@ class AppLoader
         App::getComponentManager()->beforeBoot();
         App::getComponentManager()->boot();
         App::getComponentManager()->afterBoot();
+        App::getComponentManager()->initializeAppState();
     }
 }

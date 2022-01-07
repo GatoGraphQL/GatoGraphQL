@@ -92,4 +92,14 @@ class ComponentManager
             $component->afterBoot();
         }
     }
+
+    /**
+     * Have the components initialize their state on a global, shared way
+     */
+    public function initializeAppState(): void
+    {
+        foreach ($this->components as $component) {
+            $component->initializeAppState();
+        }
+    }
 }

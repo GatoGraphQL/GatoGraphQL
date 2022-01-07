@@ -158,6 +158,13 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
+     * Have the components initialize their state on a global, shared way
+     */
+    public function initializeAppState(): void
+    {
+    }
+
+    /**
      * Indicates if the Component is enabled
      */
     public function isEnabled(): bool

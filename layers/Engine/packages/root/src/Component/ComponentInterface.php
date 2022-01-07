@@ -74,6 +74,11 @@ interface ComponentInterface
     public function afterBoot(): void;
 
     /**
+     * Have the components initialize their state on a global, shared way
+     */
+    public function initializeAppState(): void;
+
+    /**
      * Initialize services for the system container
      */
     public function initializeSystem(): void;
