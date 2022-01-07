@@ -6,11 +6,12 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\PluginManagement\PluginEnvironmentHelpers;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginManagementHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\BasicService\Component\ComponentConfigurationHelpers;
-use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
 /**
  * Base class to set the configuration for all the PoP components,
@@ -69,8 +70,8 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
                  * in wp-config.php, with the environment name prepended with "GRAPHQL_API_"
                  */
                 function ($value) use ($envVariable) {
-                    if (PluginManagementHelpers::isWPConfigConstantDefined($envVariable)) {
-                        return PluginManagementHelpers::getWPConfigConstantValue($envVariable);
+                    if (PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
+                        return PluginEnvironmentHelpers::getWPConfigConstantValue($envVariable);
                     }
                     return $value;
                 }
@@ -109,7 +110,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             // If the environment value has been defined, or the constant in wp-config.php,
             // then do nothing, since they have priority
             $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginManagementHelpers::isWPConfigConstantDefined($envVariable)) {
+            if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
             $hookName = ComponentConfigurationHelpers::getHookName(
@@ -151,7 +152,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             // If the environment value has been defined, or the constant in wp-config.php,
             // then do nothing, since they have priority
             $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginManagementHelpers::isWPConfigConstantDefined($envVariable)) {
+            if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
             $hookName = ComponentConfigurationHelpers::getHookName(
