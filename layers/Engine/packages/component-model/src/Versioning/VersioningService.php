@@ -85,6 +85,6 @@ class VersioningService implements VersioningServiceInterface
             $vars = ApplicationState::getVars();
             $this->versionConstraintsForDirectives = $vars['directive-version-constraints'];
         }
-        return $this->versionConstraintsForDirectives[$directiveName];
+        return $this->versionConstraintsForDirectives[$directiveName] ?? null;
     }
 }
