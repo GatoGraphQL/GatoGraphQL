@@ -139,4 +139,12 @@ class App implements AppInterface
     {
         return self::getComponentManager()->getComponent($componentClass);
     }
+
+    /**
+     * Shortcut function.
+     */
+    final public static function getState(string $key): mixed
+    {
+        return self::getAppStateManager()->get($key);
+    }
 }
