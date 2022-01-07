@@ -6,6 +6,7 @@ namespace PoP\GraphQLParser\Parser\Ast;
 
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
+use PoPBackbone\GraphQLParser\Parser\Ast\FragmentBondInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField as UpstreamRelationalField;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
