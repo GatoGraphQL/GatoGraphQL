@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Component;
 
+use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 
 abstract class AbstractComponent implements ComponentInterface
@@ -162,6 +163,13 @@ abstract class AbstractComponent implements ComponentInterface
      */
     public function isEnabled(): bool
     {
+        // If any dependency is disabled, then disable this component too
+        foreach ($this->getDependedComponentClasses() as $dependedComponentClass) {
+            if (App::getComponent($dependedComponentClass)->isEnabled()) {
+                continue;
+            }
+            return false;
+        }
         return true;
     }
 
