@@ -186,7 +186,7 @@ class VarsHookSet extends AbstractHookSet
          */
         $document = $this->getParser()->parse($query);
         $executableDocument = (new ExecutableDocument($document, new Context(null, $variableValues)))->validateAndInitialize();
-        
+
         $vars['query'] = $executableDocument;
         if (false) {
             $vars['requested-query'] = $executableDocument;
