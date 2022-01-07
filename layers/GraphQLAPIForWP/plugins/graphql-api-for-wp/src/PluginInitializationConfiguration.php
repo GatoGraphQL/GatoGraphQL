@@ -102,7 +102,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $$pluginOptionsFormHandler->getURLPathSettingValue(
+                'callback' => fn ($value) => $pluginOptionsFormHandler->getURLPathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                     ModuleSettingOptions::PATH
@@ -115,7 +115,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => Environment::ENDPOINT_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $$pluginOptionsFormHandler->getCPTPermalinkBasePathSettingValue(
+                'callback' => fn ($value) => $pluginOptionsFormHandler->getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                     ModuleSettingOptions::PATH
@@ -128,7 +128,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => Environment::PERSISTED_QUERY_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $$pluginOptionsFormHandler->getCPTPermalinkBasePathSettingValue(
+                'callback' => fn ($value) => $pluginOptionsFormHandler->getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     ModuleSettingOptions::PATH
@@ -141,7 +141,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $$pluginOptionsFormHandler->getURLPathSettingValue(
+                'callback' => fn ($value) => $pluginOptionsFormHandler->getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                     ModuleSettingOptions::PATH
@@ -154,7 +154,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $$pluginOptionsFormHandler->getURLPathSettingValue(
+                'callback' => fn ($value) => $pluginOptionsFormHandler->getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                     ModuleSettingOptions::PATH
