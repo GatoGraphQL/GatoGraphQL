@@ -8,6 +8,7 @@ use LogicException;
 use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
+use PoP\Root\Managers\AppStateManager;
 use PoP\Root\Managers\ComponentManager;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -20,6 +21,7 @@ class App implements AppInterface
     protected static ContainerBuilderFactory $containerBuilderFactory;
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
     protected static ComponentManager $componentManager;
+    protected static AppStateManager $appStateManager;
     protected static array $componentClassesToInitialize = [];
 
     /**
@@ -34,11 +36,13 @@ class App implements AppInterface
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManager $componentManager = null,
+        ?AppStateManager $appStateManager = null,
     ): void {
         self::$appLoader = $appLoader ?? static::createAppLoader();
         self::$containerBuilderFactory = $containerBuilderFactory ?? static::createContainerBuilderFactory();
         self::$systemContainerBuilderFactory = $systemContainerBuilderFactory ?? static::createSystemContainerBuilderFactory();
         self::$componentManager = $componentManager ?? static::createComponentManager();
+        self::$appStateManager = $appStateManager ?? static::createAppStateManager();
 
         // Inject the Components slated for initialization
         self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
@@ -65,6 +69,11 @@ class App implements AppInterface
         return new ComponentManager();
     }
 
+    protected static function createAppStateManager(): AppStateManager
+    {
+        return new AppStateManager();
+    }
+
     public static function getAppLoader(): AppLoader
     {
         return self::$appLoader;
@@ -83,6 +92,11 @@ class App implements AppInterface
     public static function getComponentManager(): ComponentManager
     {
         return self::$componentManager;
+    }
+
+    public static function getAppStateManager(): AppStateManager
+    {
+        return self::$appStateManager;
     }
 
     /**
