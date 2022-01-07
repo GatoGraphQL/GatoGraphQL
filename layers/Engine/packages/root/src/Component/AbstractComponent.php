@@ -12,6 +12,7 @@ abstract class AbstractComponent implements ComponentInterface
 
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
     protected ?ComponentInfoInterface $componentInfo = null;
+    protected ?ComponentAppStateInterface $componentAppState = null;
 
     /**
      * Enable each component to set default configuration for
@@ -164,6 +165,12 @@ abstract class AbstractComponent implements ComponentInterface
      */
     public function initializeAppState(array &$state): void
     {
+        $componentAppStateClass = $this->getComponentAppStateClass();
+        if ($componentAppStateClass === null) {
+            return;
+        }
+        $this->componentAppState = new $componentAppStateClass($this);
+        $this->componentAppState->initialize($state);
     }
 
     /**
@@ -188,6 +195,14 @@ abstract class AbstractComponent implements ComponentInterface
     public function getInfo(): ?ComponentInfoInterface
     {
         return $this->componentInfo;
+    }
+
+    /**
+     * ComponentAppState class for the Component
+     */
+    public function getAppState(): ?ComponentAppStateInterface
+    {
+        return $this->componentAppState;
     }
 
     /**
@@ -235,5 +250,18 @@ abstract class AbstractComponent implements ComponentInterface
             return null;
         }
         return $componentInfoClass;
+    }
+
+    /**
+     * ComponentAppState class for the Component
+     */
+    protected function getComponentAppStateClass(): ?string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        $componentAppStateClass = $classNamespace . '\\ComponentAppState';
+        if (!class_exists($componentAppStateClass)) {
+            return null;
+        }
+        return $componentAppStateClass;
     }
 }
