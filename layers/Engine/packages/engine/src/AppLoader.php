@@ -36,7 +36,14 @@ class AppLoader extends RootAppLoader
             },
             15
         );
+    }
 
+    /**
+     * Have the components initialize their state on a global, shared way
+     */
+    protected function initializeAppState(): void
+    {
+        $hooksAPI = HooksAPIFacade::getInstance();
         $hooksAPI->addAction(
             'popcms:boot',
             function (): void {
