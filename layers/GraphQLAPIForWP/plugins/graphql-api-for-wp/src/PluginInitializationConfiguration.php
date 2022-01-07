@@ -612,9 +612,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
              */
             ComponentModelEnvironment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA => true,
         ];
-        $componentClassConfiguration[\PoP\FunctionFields\Component::class] = [
-            \PoP\FunctionFields\Environment::DISABLE_FUNCTION_FIELDS => true,
-        ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
         ];
@@ -811,6 +808,18 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 \PoPSchema\TaxonomyMeta\Component::class,
                 \PoPWPSchema\TaxonomyMeta\Component::class,
             ],
+        ];
+    }
+
+    /**
+     * Add Component classes to disable
+     *
+     * @return string[] List of `Component` class which must not be enabled
+     */
+    public function getComponentClassesToDisable(): array
+    {
+        return [
+            \PoP\FunctionFields\Environment::class,
         ];
     }
 }

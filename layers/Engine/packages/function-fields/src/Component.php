@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\FunctionFields;
 
 use PoP\BasicService\Component\AbstractComponent;
-use PoP\Root\App;
 
 /**
  * Initialize component
@@ -22,13 +21,6 @@ class Component extends AbstractComponent
         return [
             \PoP\ComponentModel\Component::class,
         ];
-    }
-
-    protected function resolveEnabled(): bool
-    {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return !$componentConfiguration->disableFunctionFields();
     }
 
     /**
