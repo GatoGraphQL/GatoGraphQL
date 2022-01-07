@@ -93,6 +93,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
+     * Add Component classes to disable
+     *
+     * @return string[] List of `Component` class which must not be enabled
+     */
+    protected function getComponentClassesToDisable(): array
+    {
+        return $this->pluginInitializationConfiguration->getComponentClassesToDisable();
+    }
+
+    /**
      * When activating/deactivating ANY plugin (either from GraphQL API
      * or 3rd-parties), the cached service container and the config
      * must be dumped, so that they can be regenerated.

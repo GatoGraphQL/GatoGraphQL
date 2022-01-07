@@ -264,4 +264,9 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     {
         return [];
     }
+
+    public function getComponentClassesToDisable(): array
+    {
+        return [];
+    }
 }

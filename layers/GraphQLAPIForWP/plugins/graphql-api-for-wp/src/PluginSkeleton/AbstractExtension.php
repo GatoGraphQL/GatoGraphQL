@@ -105,7 +105,17 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
      */
     public function getSchemaComponentClassesToSkip(): array
     {
-        return $this->extensionInitializationConfiguration?->getSchemaComponentClassesToSkip() ?? parent::getSchemaComponentClassesToSkip();
+        return $this->extensionInitializationConfiguration?->getSchemaComponentClassesToSkip() ?? [];
+    }
+
+    /**
+     * Add Component classes to disable
+     *
+     * @return string[] List of `Component` class which must not be enabled
+     */
+    protected function getComponentClassesToDisable(): array
+    {
+        return $this->extensionInitializationConfiguration?->getComponentClassesToDisable() ?? [];
     }
 
     /**
