@@ -9,10 +9,10 @@ interface VersioningServiceInterface
     /**
      * Indicates the version constraints for specific fields in the schema
      */
-    public static function getVersionConstraintsForField(string $maybeNamespacedTypeName, string $fieldName): ?string;
+    public function getVersionConstraintsForField(string $maybeNamespacedTypeName, string $fieldName): ?string;
 
     /**
      * Indicates the version constraints for specific directives in the schema
      */
-    public static function getVersionConstraintsForDirective(string $directiveName): ?string;
+    public function getVersionConstraintsForDirective(string $directiveName): ?string;
 }
