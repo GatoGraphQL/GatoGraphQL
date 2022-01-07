@@ -14,7 +14,7 @@ use PoP\Root\Component\CanDisableComponentTrait;
 class Component extends AbstractComponent
 {
     use CanDisableComponentTrait;
-    
+
     /**
      * Classes from PoP components that must be initialized before this component
      *
