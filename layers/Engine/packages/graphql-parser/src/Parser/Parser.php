@@ -13,6 +13,8 @@ use PoP\GraphQLParser\Parser\Ast\RelationalField as ExtendedRelationalField;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
+use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\FragmentBondInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Location;
