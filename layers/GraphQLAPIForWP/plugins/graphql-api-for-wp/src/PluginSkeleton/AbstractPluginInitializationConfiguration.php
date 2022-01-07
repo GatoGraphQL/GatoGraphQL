@@ -213,7 +213,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             $value = $moduleRegistry->isModuleEnabled($mapping['module']);
             // Make explicit it can be null so that PHPStan level 3 doesn't fail
             $callback = $mapping['callback'] ?? null;
-            if (!is_null($callback)) {
+            if ($callback !== null) {
                 $value = $callback($value);
             }
             $componentClassConfiguration[$mapping['class']][$mapping['envVariable']] = $value;
