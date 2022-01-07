@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
