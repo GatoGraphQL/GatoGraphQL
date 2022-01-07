@@ -9,7 +9,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Ast\LeafField as UpstreamLeafField;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class LeafField extends UpstreamLeafField
+class LeafField extends UpstreamLeafField implements FieldInterface
 {
     use MaybeNonLocatableAstTrait;
 
@@ -31,5 +31,10 @@ class LeafField extends UpstreamLeafField
             $directives,
             $this->getLocation($location),
         );
+    }
+
+    public function isSkipOutputIfNull(): bool
+    {
+        return false;
     }
 }
