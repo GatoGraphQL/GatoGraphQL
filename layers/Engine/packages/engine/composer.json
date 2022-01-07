@@ -165,6 +165,7 @@
         "php": "^8.0",
         "getpop/cache-control": "^0.9",
         "getpop/component-model": "^0.9",
+        "getpop/function-fields": "^0.9",
         "getpop/guzzle-helpers": "^0.9",
         "getpop/loosecontracts": "^0.9",
         "getpop/modulerouting": "^0.9",
