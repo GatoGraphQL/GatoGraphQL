@@ -26,7 +26,7 @@ class VarsHookSet extends AbstractHookSet
         if (App::getState('scheme') === APISchemes::API) {
             $query = App::getState('query');
             if ($query !== null) {
-                $components[] = $this->__('query:', 'pop-engine') . App::getState('query');
+                $components[] = $this->__('query:', 'pop-engine') . $query;
             }
         }
 

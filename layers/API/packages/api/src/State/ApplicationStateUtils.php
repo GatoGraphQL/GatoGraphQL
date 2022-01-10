@@ -27,11 +27,11 @@ class ApplicationStateUtils
     {
         // The fields param can either be an array or a string. Convert them to array
         if (is_array($query)) {
-            $vars['query'] = $query;
+            $vars['executable-query'] = $query;
         } elseif (is_string($query)) {
             $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
             $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($query);
-            $vars['query'] = $fieldQuerySet->getExecutableFieldQuery();
+            $vars['executable-query'] = $fieldQuerySet->getExecutableFieldQuery();
             if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
                 $vars['requested-query'] = $fieldQuerySet->getRequestedFieldQuery();
             }
