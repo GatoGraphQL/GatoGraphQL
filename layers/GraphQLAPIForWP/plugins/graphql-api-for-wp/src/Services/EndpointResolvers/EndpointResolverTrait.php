@@ -63,7 +63,7 @@ trait EndpointResolverTrait
      *
      * @return mixed[] Array of 2 elements: [query, variables]
      */
-    abstract protected function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array;
+    abstract public function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array;
 
     /**
      * Indicate if the endpoint must load the GraphQL query
