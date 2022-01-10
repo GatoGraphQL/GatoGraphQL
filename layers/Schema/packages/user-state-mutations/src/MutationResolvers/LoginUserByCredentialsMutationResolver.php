@@ -7,9 +7,8 @@ namespace PoPSchema\UserStateMutations\MutationResolvers;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use PoPSchema\UserState\State\ApplicationStateUtils;
+use PoPSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
@@ -47,7 +46,6 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Please supply your password', 'user-state-mutations');
         }
 
-        $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState('is-user-logged-in')) {
             $errors[] = $this->getUserAlreadyLoggedInErrorMessage(\PoP\Root\App::getState('current-user-id'));
         }
@@ -94,7 +92,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         $user = $loginResult;
 
         // Modify the routing-state with the newly logged in user info
-        ApplicationStateUtils::setUserStateVars(ApplicationState::$vars);
+        AppStateHelpers::resetCurrentUserInAppState();
 
         $userID = $this->getUserTypeAPI()->getUserId($user);
         $this->getHooksAPI()->doAction('gd:user:loggedin', $userID);
