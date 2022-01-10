@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_ListFeedbackMessageInnersBase extends PoP_Mo
         $checkpoint_failed = GeneralUtils::isError($dataaccess_checkpoint_validation);
         if (!$checkpoint_failed && empty($dbobjectids) && (!isset($vars['loading-latest']) || !$vars['loading-latest'])) {
             $query_args = $data_properties[DataloadingConstants::QUERYARGS];
-            $pagenumber = $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER];
+            $pagenumber = $query_args[\PoP\ComponentModel\Constants\PaginationParams::PAGE_NUMBER];
 
             // If pagenumber < 2 => There are no results at all
             $msg = array(

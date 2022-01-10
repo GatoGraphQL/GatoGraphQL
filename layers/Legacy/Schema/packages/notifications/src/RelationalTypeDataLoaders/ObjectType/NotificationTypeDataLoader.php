@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\RelationalTypeDataLoaders\ObjectType;
 
+use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoP\ComponentModel\State\ApplicationState;
@@ -31,10 +32,10 @@ class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
             $query['pagenumber'] = 1;
             $query['limit'] = -1; // Limit=-1 => Bring all results
         } else {
-            if ($pagenumber = $query_args[Params::PAGE_NUMBER]) {
+            if ($pagenumber = $query_args[PaginationParams::PAGE_NUMBER]) {
                 $query['pagenumber'] = $pagenumber;
             }
-            if ($limit = $query_args[Params::LIMIT]) {
+            if ($limit = $query_args[PaginationParams::LIMIT]) {
                 $query['limit'] = $limit;
             }
         }

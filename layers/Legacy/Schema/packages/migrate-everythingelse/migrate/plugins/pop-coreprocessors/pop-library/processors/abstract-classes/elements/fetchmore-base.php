@@ -84,9 +84,9 @@ abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataMod
 
         if (!$stopFetching && ($data_properties[DataloadingConstants::SOURCE] ?? null)) {
             $query_args = $data_properties[DataloadingConstants::QUERYARGS];
-            $pagenumber = $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER];
+            $pagenumber = $query_args[\PoP\ComponentModel\Constants\PaginationParams::PAGE_NUMBER];
             $ret['query-next-url'] = GeneralUtils::addQueryArgs([
-                \PoP\ComponentModel\Constants\Params::PAGE_NUMBER => $pagenumber+1,
+                \PoP\ComponentModel\Constants\PaginationParams::PAGE_NUMBER => $pagenumber+1,
             ], $data_properties[DataloadingConstants::SOURCE]);
         }
 

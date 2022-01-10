@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataSources;
+use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
@@ -89,8 +90,8 @@ trait QueryDataModuleProcessorTrait
             $whitelisted_params = (array)$this->getHooksAPI()->applyFilters(
                 Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
                 array(
-                    Params::PAGE_NUMBER,
-                    Params::LIMIT,
+                    PaginationParams::PAGE_NUMBER,
+                    PaginationParams::LIMIT,
                 )
             );
             $params_from_request = array_filter(

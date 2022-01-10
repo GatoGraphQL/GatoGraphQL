@@ -109,7 +109,7 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 
     // Bring 10 times the pre-defined result set
     $users_baselineurl = GeneralUtils::addQueryArgs([
-        \PoP\ComponentModel\Constants\Params::LIMIT => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
+        \PoP\ComponentModel\Constants\PaginationParams::LIMIT => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
     ], $users_baselineurl);
 
     $users_baselineurl = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($users_baselineurl, POP_FORMAT_MENTION);
@@ -143,7 +143,7 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 
     // Bring 10 times the pre-defined result set
     $tags_baselineurl = GeneralUtils::addQueryArgs([
-        \PoP\ComponentModel\Constants\Params::LIMIT => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
+        \PoP\ComponentModel\Constants\PaginationParams::LIMIT => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
     ], $tags_baselineurl);
 
     $tags_baselineurl = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($tags_baselineurl, POP_FORMAT_MENTION);
