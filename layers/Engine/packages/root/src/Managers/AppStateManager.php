@@ -61,20 +61,6 @@ class AppStateManager
         $this->state[$key] = $value;
     }
 
-    // @todo Check if they are needed
-    // public function set(string $key, mixed $value): void
-    // {
-    //     $this->state[$key] = $value;
-    // }
-    // public function merge(string $key, array $value): void
-    // {
-    //     $this->state[$key] ??= [];
-    //     $this->state[$key] = array_merge(
-    //         $this->state[$key],
-    //         $value
-    //     );
-    // }
-
     /**
      * @param string $keyOrPath The property key
      * @throws LogicException
