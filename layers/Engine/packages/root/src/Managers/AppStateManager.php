@@ -35,35 +35,13 @@ class AppStateManager
     }
 
     /**
-     * @param string|string[] $keyOrPath The property key, or a property path for array values
+     * @param string $keyOrPath The property key
      * @throws LogicException
      */
-    public function get(string|array $keyOrPath): mixed
+    public function get(string $key): mixed
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        if (is_array($keyOrPath)) {
-            /** @var string[] */
-            $path = $keyOrPath;
-            $stateValue = &$this->state;
-            foreach ($path as $pathItem) {
-                if (!isset($stateValue[$pathItem])) {
-                    throw new LogicException(
-                        \sprintf(
-                            $translationAPI->__('There is no state under path \'%s\'', 'root'),
-                            implode(
-                                $translationAPI->__(',', 'root'),
-                                $path
-                            )
-                        )
-                    );
-                }
-                $stateValue = &$stateValue[$pathItem];
-            }
-            return $stateValue;
-        }
-        /** @var string */
-        $key = $keyOrPath;
-        if (!isset($this->state[$key][$key])) {
+        if (!isset($this->state[$key])) {
             throw new LogicException(
                 \sprintf(
                     $translationAPI->__('There is no state under key \'%s\'', 'root'),
@@ -72,6 +50,31 @@ class AppStateManager
             );
         }
         return $this->state[$key] ?? null;
+    }
+
+    /**
+     * @param string[] $keyOrPath The property path under which to retrieve a value
+     * @throws LogicException
+     */
+    public function getUnder(array $path): mixed
+    {
+        $translationAPI = TranslationAPIFacade::getInstance();
+        $state = &$this->state;
+        foreach ($path as $pathItem) {
+            if (!isset($state[$pathItem])) {
+                throw new LogicException(
+                    \sprintf(
+                        $translationAPI->__('There is no state under path \'%s\'', 'root'),
+                        implode(
+                            $translationAPI->__(',', 'root'),
+                            $path
+                        )
+                    )
+                );
+            }
+            $state = &$state[$pathItem];
+        }
+        return $state;
     }
 
     public function has(string $key): bool
