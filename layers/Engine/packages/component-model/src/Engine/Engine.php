@@ -348,11 +348,17 @@ class Engine implements EngineInterface
         $this->data = $this->helperCalculations = [];
         $this->processAndGenerateData();
 
-        // See if there are extra URIs to be processed in this same request
+        /**
+         * See if there are extra URIs to be processed in this same request.
+         *
+         * Combine the response for each extra URI together with the original response,
+         * merging all JSON objects together, but under each's URL/model_instance_id.
+         *
+         * To obtain the nature for each URI, we use a hack:
+         * change the current URI and create a new WP object,
+         * which will process the query_vars and from there obtain the nature.
+         */
         if ($extra_routes = $this->getExtraRoutes()) {
-            // Combine the response for each extra URI together with the original response, merging all JSON objects together, but under each's URL/model_instance_id
-
-            // To obtain the nature for each URI, we use a hack: change the current URI and create a new WP object, which will process the query_vars and from there obtain the nature
             // First make a backup of the current URI to set it again later
             $currentRoute = App::getState('route');
 
