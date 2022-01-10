@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Registries;
 
-use PoP\Root\Component\AppStateProviderInterface;
+use PoP\Root\State\AppStateProviderInterface;
 
 class AppStateProviderRegistry implements AppStateProviderRegistryInterface
 {
