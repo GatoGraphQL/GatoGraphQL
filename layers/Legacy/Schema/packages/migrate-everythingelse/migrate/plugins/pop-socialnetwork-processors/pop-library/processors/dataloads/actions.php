@@ -9,7 +9,7 @@ use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnfollowUserM
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnrecommendPostMutationResolverBridge;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnsubscribeFromTagMutationResolverBridge;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UpvoteCustomPostMutationResolverBridge;
-use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionStoreFacade;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -181,8 +181,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_UNDOUPVOTEPOST:
             case self::MODULE_DATALOADACTION_DOWNVOTEPOST:
             case self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST:
-                $gd_dataload_actionexecution_manager = MutationResolutionStoreFacade::getInstance();
-                if ($target_id = $gd_dataload_actionexecution_manager->getResult($this->getComponentMutationResolverBridge($module))) {
+                if ($target_id = App::getMutationResolutionStore()->getResult($this->getComponentMutationResolverBridge($module))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($target_id);
                 } else {
                     $data_properties[DataloadingConstants::SKIPDATALOAD] = true;

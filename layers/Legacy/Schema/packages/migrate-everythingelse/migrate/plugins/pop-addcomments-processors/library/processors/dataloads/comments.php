@@ -1,5 +1,6 @@
 <?php
-use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionStoreFacade;
+
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -126,8 +127,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
 
         switch ($module[1]) {
             case self::MODULE_DATALOAD_ADDCOMMENT:
-                $gd_dataload_actionexecution_manager = MutationResolutionStoreFacade::getInstance();
-                if ($comment_id = $gd_dataload_actionexecution_manager->getResult($this->instanceManager->getInstance(AddCommentToCustomPostMutationResolverBridge::class))) {
+                if ($comment_id = App::getMutationResolutionStore()->getResult($this->instanceManager->getInstance(AddCommentToCustomPostMutationResolverBridge::class))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($comment_id);
                 } else {
                     $data_properties[DataloadingConstants::SKIPDATALOAD] = true;
