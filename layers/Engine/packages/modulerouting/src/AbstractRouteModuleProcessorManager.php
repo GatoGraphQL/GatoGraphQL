@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ModuleRouting;
 
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\ModuleRouting\Helpers\Methods;
 
 abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcessorManagerInterface
@@ -41,13 +42,9 @@ abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcess
     public function getRouteModuleByMostAllmatchingVarsProperties(string $group = null): ?array
     {
         $group ??= $this->getDefaultGroup();
-        $vars = $this->getVars();
+        $vars = ApplicationState::getVars();
         $nature = \PoP\Root\App::getState('nature');
         $route = \PoP\Root\App::getState('route');
-
-        // // Allow to pass a custom $vars, with custom values
-        // $vars ??= ApplicationState::getVars();
-        // $route ??= Utils::getRoute();
 
         $processors = $this->getProcessors($group);
         $most_matching_module = false;

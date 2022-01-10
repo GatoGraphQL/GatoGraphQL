@@ -9,11 +9,4 @@ use PoP\ModuleRouting\AbstractRouteModuleProcessorManager;
 
 class RouteModuleProcessorManager extends AbstractRouteModuleProcessorManager
 {
-    /**
-     * @return array<string, mixed>
-     */
-    public function getVars(): array
-    {
-        return ApplicationState::getVars();
-    }
 }
