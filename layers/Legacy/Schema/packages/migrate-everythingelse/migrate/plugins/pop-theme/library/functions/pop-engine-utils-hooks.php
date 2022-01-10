@@ -7,6 +7,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 class PoP_Theme_UtilsHooks
 {
     /**
+     * @todo Migrate to AppStateProvider
      * @param array<array> $vars_in_array
      */
     public static function addVars(array $vars_in_array): void

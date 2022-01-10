@@ -8,6 +8,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 class PoP_MultiDomain_Engine_Utils
 {
     /**
+     * @todo Migrate to AppStateProvider
      * @param array<array> $vars_in_array
      */
     public static function addVars(array $vars_in_array): void
