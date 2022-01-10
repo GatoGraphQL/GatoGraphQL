@@ -25,7 +25,7 @@ class PoPCore_ModuleManager_Utils
             \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => [
                 \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             ],
-            \PoP\ComponentModel\Constants\Params::TARGET => \PoP\ComponentModel\Constants\Targets::MAIN,
+            \PoP\ComponentModel\Constants\Params::TARGET => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
             \PoP\ComponentModel\Constants\Params::DATASTRUCTURE => $dbItemListDataStructureFormatter->getName(),
         ];
         if ($format) {

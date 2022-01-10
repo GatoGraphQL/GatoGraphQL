@@ -23,5 +23,4 @@ class Params
     public const DATA_SOURCE = 'datasource';
     public const EXTRA_ROUTES = 'extraroutes';
     public const OUTPUT = 'output';
-    public const TARGET = 'target';
 }

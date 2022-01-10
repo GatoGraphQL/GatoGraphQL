@@ -273,7 +273,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $props,
                     'params',
                     array(
-                        'data-frametarget' => \PoP\ComponentModel\Constants\Targets::MAIN,
+                        'data-frametarget' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                     )
                 );
                 break;
@@ -285,7 +285,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     'params',
                     array(
                         'data-frametarget' => POP_TARGET_NAVIGATOR,
-                        'data-clickframetarget' => \PoP\ComponentModel\Constants\Targets::MAIN,
+                        'data-clickframetarget' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                         'data-pagesection-openmode' => 'automatic',
                     )
                 );
@@ -297,7 +297,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $props,
                     'params',
                     array(
-                        'data-frametarget' => \PoP\ComponentModel\Constants\Targets::MAIN,
+                        'data-frametarget' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                         'data-pagesection-openmode' => 'manual',
                     )
                 );
@@ -310,7 +310,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $props,
                     'params',
                     array(
-                        'data-frametarget' => \PoP\ComponentModel\Constants\Targets::MAIN,
+                        'data-frametarget' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                         'data-pagesection-openmode' => $openmode,
                     )
                 );
@@ -322,7 +322,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $props,
                     'params',
                     array(
-                        'data-frametarget' => \PoP\ComponentModel\Constants\Targets::MAIN,
+                        'data-frametarget' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                     )
                 );
                 break;

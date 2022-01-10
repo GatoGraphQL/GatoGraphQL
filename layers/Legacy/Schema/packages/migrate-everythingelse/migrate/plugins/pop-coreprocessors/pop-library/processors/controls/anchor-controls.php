@@ -149,7 +149,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
     {
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_CURRENTURL:
-                return \PoP\ComponentModel\Constants\Targets::MAIN;
+                return \PoP\ConfigurationComponentModel\Constants\Targets::MAIN;
         }
 
         return parent::getTarget($module, $props);

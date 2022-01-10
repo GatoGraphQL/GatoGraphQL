@@ -13,7 +13,6 @@ use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Constants\Targets;
 use PoP\ComponentModel\Constants\Values;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
@@ -115,20 +114,6 @@ class ComponentAppState extends AbstractComponentAppState
             );
         }
 
-        // If not target, or invalid, reset it to "main"
-        // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided
-        // (ie initial load) and when target is provided (ie loading pageSection)
-        $target = strtolower($_REQUEST[Params::TARGET] ?? '');
-        $targets = (array) $hooksAPI->applyFilters(
-            'ApplicationState:targets',
-            [
-                Targets::MAIN,
-            ]
-        );
-        if (!in_array($target, $targets)) {
-            $target = Targets::MAIN;
-        }
-
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
         $modulefilter = $modulefilter_manager->getSelectedModuleFilterName();
 
@@ -152,7 +137,6 @@ class ComponentAppState extends AbstractComponentAppState
                 'output' => $output,
                 'modulefilter' => $modulefilter,
                 'actionpath' => $_REQUEST[Params::ACTION_PATH] ?? '',
-                'target' => $target,
                 'dataoutputitems' => $dataoutputitems,
                 'datasources' => $datasources,
                 'datastructure' => $datastructure,

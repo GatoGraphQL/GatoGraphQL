@@ -16,7 +16,7 @@ class PoPThemeWassup_EM_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureRe
         $merge = false;
         $components = array(
             'format' => POP_FORMAT_MODALS,
-            'target' => \PoP\ComponentModel\Constants\Targets::MAIN,
+            'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
         );
         PoP_ResourceLoaderProcessorUtils::addResourcesFromCurrentVars($modulefilter, $resources, $nature, $ids, $merge, $components, $options);
     }

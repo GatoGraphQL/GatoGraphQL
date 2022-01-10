@@ -6,3 +6,6 @@ services:
 
     PoP\ConfigurationComponentModel\RouteModuleProcessors\:
         resource: '../src/RouteModuleProcessors/*'
+
+    PoP\ConfigurationComponentModel\Hooks\:
+        resource: '../src/Hooks/*'

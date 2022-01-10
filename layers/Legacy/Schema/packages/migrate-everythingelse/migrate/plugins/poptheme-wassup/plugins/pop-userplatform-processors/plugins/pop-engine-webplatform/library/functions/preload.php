@@ -10,7 +10,7 @@ class PoPTheme_Wassup_UserPlatform_WebPlatform_PreloadHooks
             array($this, 'getRoutesForModals')
         );
         HooksAPIFacade::getInstance()->addFilter(
-            'wassup:extra-routes:initialframes:'.\PoP\ComponentModel\Constants\Targets::MAIN,
+            'wassup:extra-routes:initialframes:'.\PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
             array($this, 'getRoutesForMain')
         );
     }

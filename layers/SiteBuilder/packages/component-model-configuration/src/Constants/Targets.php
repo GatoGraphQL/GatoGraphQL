@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Constants;
+namespace PoP\ConfigurationComponentModel\Constants;
 
 class Targets
 {

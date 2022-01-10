@@ -91,7 +91,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
                 $addontabsSubmoduleOutputName = ModuleUtils::getModuleOutputName($addontabs_submodule);
                 $ret[$addonsSubmoduleOutputName] = array(
                     'data-frametarget' => POP_TARGET_ADDONS,
-                    'data-clickframetarget' => \PoP\ComponentModel\Constants\Targets::MAIN,
+                    'data-clickframetarget' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                     'data-offcanvas' => 'addons',
                 );
                 $ret[$addontabsSubmoduleOutputName] = array(

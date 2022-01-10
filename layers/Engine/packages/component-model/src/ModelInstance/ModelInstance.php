@@ -97,9 +97,6 @@ class ModelInstance implements ModelInstanceInterface
         if ($format = $vars['format'] ?? null) {
             $components[] = $this->__('format:', 'component-model') . $format;
         }
-        if ($target = $vars['target'] ?? null) {
-            $components[] = $this->__('target:', 'component-model') . $target;
-        }
         if ($actions = $vars['actions'] ?? null) {
             $components[] = $this->__('actions:', 'component-model') . implode(';', $actions);
         }

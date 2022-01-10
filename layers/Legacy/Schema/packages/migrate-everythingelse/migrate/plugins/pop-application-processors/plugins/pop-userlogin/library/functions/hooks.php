@@ -37,7 +37,7 @@ class PoP_ApplicationProcessors_UserLogin_Hooks
                 $path
             );
         }
-        $backgroundurls[$url] = array(\PoP\ComponentModel\Constants\Targets::MAIN);
+        $backgroundurls[$url] = array(\PoP\ConfigurationComponentModel\Constants\Targets::MAIN);
         
         return $backgroundurls;
     }
