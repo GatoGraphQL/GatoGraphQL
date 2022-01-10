@@ -40,49 +40,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
         return $ret;
     }
-    // GraphQL/REST cannot have getExtraRoutes()!!!!! Because the fields can't be applied to different resources! (Eg: author/leo/ and author/leo/?route=posts)
-    // public function getFormattedData($data)
-    // {
-    //     // Re-create the shape of the query by iterating through all objectIDs and all required fields,
-    //     // getting the data from the corresponding dbKeyPath
-    //     $ret = [];
-    //     if ($fields = $this->getFields()) {
-    //         $engine = EngineFacade::getInstance();
-    //         list($has_extra_routes) = $engine->listExtraRouteVars();
-    //         $vars = ApplicationState::getVars();
-    //         $dataoutputmode = $vars['dataoutputmode'];
-
-    //         $databases = $data['dbData'] ?? [];
-    //         $datasetModuleData = $data['datasetmoduledata'] ?? [];
-    //         $datasetModuleSettings = $data['datasetmodulesettings'] ?? [];
-    //         if ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES) {
-    //             if ($has_extra_routes) {
-    //                 $datasetModuleData = array_merge_recursive(
-    //                     $datasetModuleData['immutable'] ?? [],
-    //                     ($has_extra_routes ? array_values($datasetModuleData['mutableonmodel'])[0] : $datasetModuleData['mutableonmodel']) ?? [],
-    //                     ($has_extra_routes ? array_values($datasetModuleData['mutableonrequest'])[0] : $datasetModuleData['mutableonrequest']) ?? []
-    //                 );
-    //                 $datasetModuleSettings = array_merge_recursive(
-    //                     $datasetModuleSettings['immutable'] ?? [],
-    //                     ($has_extra_routes ? array_values($datasetModuleSettings['mutableonmodel'])[0] : $datasetModuleSettings['mutableonmodel']) ?? [],
-    //                     ($has_extra_routes ? array_values($datasetModuleSettings['mutableonrequest'])[0] : $datasetModuleSettings['mutableonrequest']) ?? []
-    //                 );
-    //             }
-    //         } elseif ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED) {
-    //             if ($has_extra_routes) {
-    //                 $datasetModuleData = array_values($datasetModuleData)[0];
-    //                 $datasetModuleSettings = array_values($datasetModuleSettings)[0];
-    //             }
-    //         }
-    //         foreach ($datasetModuleData as $moduleName => $objectIDs) {
-    //             $dbKeyPaths = $datasetModuleSettings[$moduleName]['dbkeys'] ?? [];
-    //             $objectIDorIDs = $objectIDs['dbobjectids'];
-    //             $this->addData($ret, $fields, $databases, $objectIDorIDs, 'id', $dbKeyPaths, false);
-    //         }
-    //     }
-
-    //     return $ret;
-    // }
 
     protected function addData(&$ret, $fields, &$databases, &$unionDBKeyIDs, $objectIDorIDs, $objectKeyPath, &$dbKeyPaths, $concatenateField = true)
     {
