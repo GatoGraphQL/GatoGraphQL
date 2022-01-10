@@ -53,11 +53,6 @@ class Component extends AbstractComponent
     {
         parent::beforeBoot();
 
-        // Initialize the Component Configuration
-        /** @var ComponentConfiguration */
-        $componentConfiguration = $this->getConfiguration();
-        $componentConfiguration->init();
-
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
         $attachExtensionService->attachExtensions(ApplicationEvents::BEFORE_BOOT);
     }
