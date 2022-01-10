@@ -100,11 +100,11 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
         $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
-                $ret['authors'] = [$vars['routing']['queried-object-id']];
+                $ret['authors'] = [\PoP\Root\App::getState(['routing', 'queried-object-id'])];
                 break;
 
             case self::MODULE_EXAMPLE_TAGLATESTPOSTS:
-                $ret['tag-ids'] = [$vars['routing']['queried-object-id']];
+                $ret['tag-ids'] = [\PoP\Root\App::getState(['routing', 'queried-object-id'])];
                 break;
         }
 

@@ -37,7 +37,7 @@ class VarsHookSet extends AbstractHookSet
         $vars = ApplicationState::getVars();
         switch ($vars['nature']) {
             case RouteNatures::USER:
-                $user_id = $vars['routing']['queried-object-id'];
+                $user_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // Author: it may depend on its role
                 $component_types = $this->getHooksAPI()->applyFilters(
                     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:userrole',

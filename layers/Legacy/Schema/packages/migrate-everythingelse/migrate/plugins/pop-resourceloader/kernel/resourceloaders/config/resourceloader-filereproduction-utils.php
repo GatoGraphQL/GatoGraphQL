@@ -79,7 +79,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                 case PageRouteNatures::PAGE:
                 case CustomPostRouteNatures::CUSTOMPOST:
 
-                    $path = GeneralUtils::maybeAddTrailingSlash(\PoPSchema\Posts\Engine_Utils::getCustomPostPath($vars['routing']['queried-object-id'], true));
+                    $path = GeneralUtils::maybeAddTrailingSlash(\PoPSchema\Posts\Engine_Utils::getCustomPostPath(\PoP\Root\App::getState(['routing', 'queried-object-id']), true));
                     $path_resources[$nature][$path][$key] = $resources;
                     break;
             }

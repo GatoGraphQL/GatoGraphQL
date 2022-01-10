@@ -66,7 +66,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 return RouteUtils::getRouteTitle(POP_USERSTANCE_ROUTE_STANCES);
 
             case self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES:
-                $author = $vars['routing']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
                 // Allow URE to override adding "+Members"
                 $name = HooksAPIFacade::getInstance()->applyFilters(
@@ -80,7 +80,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 );
 
             case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
-                $tag_id = $vars['routing']['queried-object-id'];
+                $tag_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return sprintf(
                     TranslationAPIFacade::getInstance()->__('%s tagged with “%s”', 'pop-userstance-processors'),
                     getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true) . PoP_UserStanceProcessors_Utils::getLatestvotesTitle(),
@@ -100,7 +100,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_STANCES);
 
             case self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES:
-                $author = $vars['routing']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES => POP_USERSTANCE_ROUTE_STANCES,
@@ -113,7 +113,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 );
 
             case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
-                $url = $postTagTypeAPI->getTagURL($vars['routing']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_TAGSTANCES => POP_USERSTANCE_ROUTE_STANCES,
                 );

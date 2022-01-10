@@ -14,7 +14,7 @@ class PoP_RelatedPosts_SectionUtils
 
         if (is_null($post_id)) {
             $vars = ApplicationState::getVars();
-            $post_id = $vars['routing']['queried-object-id'];
+            $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         }
 
         // Find all related posts

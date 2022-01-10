@@ -86,7 +86,7 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
             case self::MODULE_BLOCK_TABPANEL_SINGLERECOMMENDEDBY:
             case self::MODULE_BLOCK_TABPANEL_SINGLEUPVOTEDBY:
             case self::MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY:
-                $post_id = $vars['routing']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
                     $this->setProp($module, $props, 'show-controls-bottom', false);
                 }

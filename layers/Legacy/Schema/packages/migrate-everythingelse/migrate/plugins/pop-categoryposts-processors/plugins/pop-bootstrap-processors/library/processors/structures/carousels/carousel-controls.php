@@ -415,11 +415,11 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
         if ($route = $routes[$module[1]] ?? null) {
             return RouteUtils::getRouteURL($route);
         } elseif ($route = $authorroutes[$module[1]] ?? null) {
-            $author = $vars['routing']['queried-object-id'];
+            $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $url = $userTypeAPI->getUserURL($author);
             return RequestUtils::addRoute($url, $route);
         } elseif ($route = $tagroutes[$module[1]] ?? null) {
-            $url = $postTagTypeAPI->getTagURL($vars['routing']['queried-object-id']);
+            $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
             return RequestUtils::addRoute($url, $route);
         }
 

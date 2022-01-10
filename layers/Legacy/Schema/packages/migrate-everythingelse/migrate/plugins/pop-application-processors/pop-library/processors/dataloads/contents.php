@@ -71,7 +71,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
             case self::MODULE_DATALOAD_SINGLE_CONTENT:
                 // Add the Sidebar on the top
-                $post_id = $vars['routing']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $top_sidebar = [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST];
 
                 // Allow Events Manager to change the sidebar

@@ -18,7 +18,7 @@ class PoP_MultiDomainSPAResourceLoader_ResourceLoaderProcessor_Hooks
         // If accessing the External page, then we must load the resource-config.js and initialresources.js for the external domain
         $vars = ApplicationState::getVars();
         // if ($vars['external-url-domain']) {
-        if ($vars['routing']['is-standard'] && $vars['route'] == POP_MULTIDOMAIN_ROUTE_EXTERNAL) {
+        if (\PoP\Root\App::getState(['routing', 'is-standard']) && $vars['route'] == POP_MULTIDOMAIN_ROUTE_EXTERNAL) {
             $dependencies[] = [PoP_MultiDomainSPAResourceLoader_DynamicJSResourceLoaderProcessor::class, PoP_MultiDomainSPAResourceLoader_DynamicJSResourceLoaderProcessor::RESOURCE_RESOURCELOADERCONFIG_EXTERNAL];
             $dependencies[] = [PoP_MultiDomainSPAResourceLoader_DynamicJSResourceLoaderProcessor::class, PoP_MultiDomainSPAResourceLoader_DynamicJSResourceLoaderProcessor::RESOURCE_RESOURCELOADERCONFIG_EXTERNALRESOURCES];
         }

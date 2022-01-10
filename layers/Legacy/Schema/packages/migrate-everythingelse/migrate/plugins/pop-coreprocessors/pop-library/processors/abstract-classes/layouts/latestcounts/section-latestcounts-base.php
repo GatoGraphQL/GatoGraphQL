@@ -11,15 +11,15 @@ abstract class PoP_Module_Processor_SectionLatestCountsBase extends PoP_Module_P
         if ($section_classes = $this->getSectionClasses($module, $props)) {
             $pre = '';
             if ($this->isAuthor($module, $props)) {
-                $author = $vars['routing']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $ret[] = 'author'.$author;
                 $pre = 'author-';
             } elseif ($this->isSingle($module, $props)) {
-                $post_id = $vars['routing']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $ret[] = 'single'.$post_id;
                 $pre = 'single-';
             } elseif ($this->isTag($module, $props)) {
-                $ret[] = 'tag'.$vars['routing']['queried-object-id'];
+                $ret[] = 'tag'.\PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $pre = 'tag-';
             }
 

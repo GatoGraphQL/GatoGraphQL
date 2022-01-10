@@ -13,7 +13,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     {
         $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        $author = $vars['routing']['queried-object-id'];
+        $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         $ret = $userTypeAPI->getUserDisplayName($author);
 
         $route = $vars['route'];
@@ -31,7 +31,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     {
         $vars = ApplicationState::getVars();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        $tag_id = $vars['routing']['queried-object-id'];
+        $tag_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         $ret = '<i class="fa fa-fw fa-hashtag"></i>' . $applicationtaxonomyapi->getTagSymbolName($tag_id);
 
         if ($add_description) {
@@ -63,7 +63,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     {
         $vars = ApplicationState::getVars();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $post_id = $vars['routing']['queried-object-id'];
+        $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         $ret = $customPostTypeAPI->getTitle($post_id);
 
         $route = $vars['route'];
@@ -81,7 +81,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function getSingleSubmenu()
     {
         $vars = ApplicationState::getVars();
-        $post_id = $vars['routing']['queried-object-id'];
+        $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         if (in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
@@ -94,7 +94,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function addDataloadqueryargsAuthorcontent(&$ret)
     {
         $vars = ApplicationState::getVars();
-        $author = $vars['routing']['queried-object-id'];
+        $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Allow to override with User Role Editor: for organizations: Find all the members of this community, and filter all posts accordingly
         // Only filter if the 'author' attribute has not been set yet. If it has been set, it must've been done by the filter,
@@ -108,14 +108,14 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function addDataloadqueryargsTagcontent(&$ret)
     {
         $vars = ApplicationState::getVars();
-        $tag_id = $vars['routing']['queried-object-id'];
+        $tag_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         $ret['tag-ids'] = [$tag_id];
     }
 
     public static function addDataloadqueryargsTagsubscribers(&$ret)
     {
         $vars = ApplicationState::getVars();
-        $tag_id = $vars['routing']['queried-object-id'];
+        $tag_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         $ret['meta-query'][] = [
             'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS),
@@ -128,7 +128,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     {
         if (!$author) {
             $vars = ApplicationState::getVars();
-            $author = $vars['routing']['queried-object-id'];
+            $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         }
 
         // It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
@@ -144,7 +144,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     {
         if (!$author) {
             $vars = ApplicationState::getVars();
-            $author = $vars['routing']['queried-object-id'];
+            $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         }
 
         // It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
@@ -159,7 +159,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function addDataloadqueryargsAuthorsubscribedtotags(&$ret)
     {
         $vars = ApplicationState::getVars();
-        $author = $vars['routing']['queried-object-id'];
+        $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
         // And the Organization must've accepted it by leaving the Show As Member privilege on
@@ -175,7 +175,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         if (!$author) {
             $vars = ApplicationState::getVars();
-            $author = $vars['routing']['queried-object-id'];
+            $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         }
 
         // Find all recommended posts by this author
@@ -190,7 +190,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function addDataloadqueryargsSingleauthors(&$ret)
     {
         $vars = ApplicationState::getVars();
-        $post_id = $vars['routing']['queried-object-id'];
+        $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Include only the authors of the current post
         $ret['include'] = gdGetPostauthors($post_id);
@@ -200,7 +200,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     {
         if (!$post_id) {
             $vars = ApplicationState::getVars();
-            $post_id = $vars['routing']['queried-object-id'];
+            $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         }
 
         // Find all related posts
@@ -214,7 +214,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function addDataloadqueryargsUpvotedby(&$ret)
     {
         $vars = ApplicationState::getVars();
-        $post_id = $vars['routing']['queried-object-id'];
+        $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Find all related posts
         $ret['meta-query'][] = [
@@ -227,7 +227,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function addDataloadqueryargsDownvotedby(&$ret)
     {
         $vars = ApplicationState::getVars();
-        $post_id = $vars['routing']['queried-object-id'];
+        $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Find all related posts
         $ret['meta-query'][] = [

@@ -55,7 +55,7 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
                 case self::MODULE_MULTIPLE_AUTHOREVENTS_SIDEBAR:
                 case self::MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR:
                 case self::MODULE_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR:
-                    $author = $vars['routing']['queried-object-id'];
+                    $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                     $filters = array(
                         self::MODULE_MULTIPLE_AUTHOREVENTS_SIDEBAR => [GD_EM_Module_Processor_CustomSectionSidebarInners::class, GD_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTS],
                         self::MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR => [GD_EM_Module_Processor_CustomSectionSidebarInners::class, GD_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS],

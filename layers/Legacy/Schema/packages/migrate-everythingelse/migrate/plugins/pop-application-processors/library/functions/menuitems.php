@@ -12,18 +12,18 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 //     );
 //     if ($add_parentpageid) {
 //         $vars = ApplicationState::getVars();
-//         if ($vars['routing']['is-page']) {
-//             $post_id = $vars['routing']['queried-object-id'];
+//         if (\PoP\Root\App::getState(['routing', 'is-page'])) {
+//             $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 //             $parentpageid = $post_id;
 //         }
 //         // retrieve the page for the category for the post
-//         elseif ($vars['routing']['is-custompost']) {
-//             $post_id = $vars['routing']['queried-object-id'];
+//         elseif (\PoP\Root\App::getState(['routing', 'is-custompost'])) {
+//             $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 //             $parentpageid = gdPostParentpageid($post_id);
 //         }
 //         // retrieve the page for the authors
-//         elseif ($vars['routing']['is-user']) {
-//             $author = $vars['routing']['queried-object-id'];
+//         elseif (\PoP\Root\App::getState(['routing', 'is-user'])) {
+//             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 //             $parentpageid = gdAuthorParentpageid($author);
 //         }
 //         if ($parentpageid) {

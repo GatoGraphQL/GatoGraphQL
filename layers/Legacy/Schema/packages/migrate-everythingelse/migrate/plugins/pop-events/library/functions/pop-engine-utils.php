@@ -29,15 +29,15 @@ class PoP_Events_Engine_Hooks
         // Attributes needed to match the RouteModuleProcessor vars conditions
         if ($nature == CustomPostRouteNatures::CUSTOMPOST) {
             $eventTypeAPI = EventTypeAPIFacade::getInstance();
-            $customPostType = $vars['routing']['queried-object-post-type'];
+            $customPostType = \PoP\Root\App::getState(['routing', 'queried-object-post-type']);
             if ($customPostType == $eventTypeAPI->getEventCustomPostType()) {
-                $post_id = $vars['routing']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($eventTypeAPI->isFutureEvent($post_id)) {
-                    $vars['routing']['queried-object-is-future-event'] = true;
+                    \PoP\Root\App::getState(['routing', 'queried-object-is-future-event']) = true;
                 } elseif ($eventTypeAPI->isCurrentEvent($post_id)) {
-                    $vars['routing']['queried-object-is-current-event'] = true;
+                    \PoP\Root\App::getState(['routing', 'queried-object-is-current-event']) = true;
                 } elseif ($eventTypeAPI->isPastEvent($post_id)) {
-                    $vars['routing']['queried-object-is-past-event'] = true;
+                    \PoP\Root\App::getState(['routing', 'queried-object-is-past-event']) = true;
                 }
             }
         }

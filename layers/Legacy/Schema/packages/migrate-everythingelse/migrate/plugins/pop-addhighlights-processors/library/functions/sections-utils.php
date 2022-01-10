@@ -8,7 +8,7 @@ class PoP_AddHighlights_Module_Processor_SectionBlocksUtils
     {
         if (is_null($post_id)) {
             $vars = ApplicationState::getVars();
-            $post_id = $vars['routing']['queried-object-id'];
+            $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         }
 
         // $ret['custompost-types'] = [POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT];

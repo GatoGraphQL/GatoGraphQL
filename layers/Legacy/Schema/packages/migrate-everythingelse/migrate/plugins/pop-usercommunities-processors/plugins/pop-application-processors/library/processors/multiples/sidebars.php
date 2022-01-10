@@ -25,7 +25,7 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
          // Add also the filter block for the Single Related Content, etc
             case self::MODULE_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR:
                 $vars = ApplicationState::getVars();
-                $author = $vars['routing']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $filters = array(
                     self::MODULE_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR => [PoP_UserCommunities_Module_Processor_SectionSidebarInners::class, PoP_UserCommunities_Module_Processor_SectionSidebarInners::MODULE_MULTIPLE_AUTHORSECTIONINNER_COMMUNITYMEMBERS_SIDEBAR],
                 );

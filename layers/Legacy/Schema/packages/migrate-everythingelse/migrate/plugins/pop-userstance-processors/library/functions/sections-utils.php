@@ -40,7 +40,7 @@ class UserStance_Module_Processor_CustomSectionBlocksUtils
     {
         if (!$referenced_post_id) {
             $vars = ApplicationState::getVars();
-            $referenced_post_id = $vars['routing']['queried-object-id'];
+            $referenced_post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         }
 
         $ret['custompost-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];

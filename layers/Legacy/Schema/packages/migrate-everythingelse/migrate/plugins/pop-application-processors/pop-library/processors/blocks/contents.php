@@ -41,7 +41,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
                 $vars = ApplicationState::getVars();
-                $author = $vars['routing']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 return sprintf(
                     '<p class="text-center"><a href="%s">%s</a></p>',
@@ -61,12 +61,12 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTHOR_CONTENT:
             case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
-                $author = $vars['routing']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $userTypeAPI->getUserDisplayName($author);
 
             case self::MODULE_BLOCK_SINGLE_CONTENT:
             case self::MODULE_BLOCK_PAGE_CONTENT:
-                $post_id = $vars['routing']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $customPostTypeAPI->getTitle($post_id);
         }
 
@@ -132,7 +132,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
                 $vars = ApplicationState::getVars();
 
                 // Also append the post_status, so we can hide the bottomsidebar for draft posts
-                $post_id = $vars['routing']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $this->appendProp($module, $props, 'runtime-class', $customPostTypeAPI->getCustomPostType($post_id) . '-' . $post_id);
                 $this->appendProp($module, $props, 'runtime-class', $customPostTypeAPI->getStatus($post_id));
                 break;

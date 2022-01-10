@@ -17,7 +17,7 @@ class PoP_MultiDomain_Engine_Utils
         $vars['domain'] = $_REQUEST[POP_URLPARAM_DOMAIN] ?? null;
 
         // Add the external URL's domain, only if we are on the External Page
-        if ($vars['routing']['is-standard'] && $vars['route'] == POP_MULTIDOMAIN_ROUTE_EXTERNAL) {
+        if (\PoP\Root\App::getState(['routing', 'is-standard']) && $vars['route'] == POP_MULTIDOMAIN_ROUTE_EXTERNAL) {
             if ($external_url = $_REQUEST[\PoP\ComponentModel\Constants\Response::URL] ?? null) {
                 $vars['external-url-domain'] = GeneralUtils::getDomain($external_url);
             }

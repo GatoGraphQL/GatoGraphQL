@@ -308,7 +308,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
              * Add the excerpt (if not empty) as description of the GraphQL query
              */
             $vars = ApplicationState::getVars();
-            $customPost = $vars['routing']['queried-object'];
+            $customPost = \PoP\Root\App::getState(['routing', 'queried-object']);
             // Make sure there is a post (eg: it has not been deleted)
             if ($customPost !== null) {
                 if ($excerpt = $this->getCptUtils()->getCustomPostDescription($customPost)) {

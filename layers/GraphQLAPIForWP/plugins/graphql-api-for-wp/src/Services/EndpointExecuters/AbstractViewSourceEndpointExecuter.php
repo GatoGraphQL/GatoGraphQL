@@ -31,7 +31,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractEndpointExecut
     public function maybeGetGraphQLQuerySourceContent(string $content): string
     {
         $vars = ApplicationState::getVars();
-        $customPost = $vars['routing']['queried-object'];
+        $customPost = \PoP\Root\App::getState(['routing', 'queried-object']);
         // Make sure there is a post (eg: it has not been deleted)
         if ($customPost !== null) {
             return $this->getGraphQLQuerySourceContent($content, $customPost);

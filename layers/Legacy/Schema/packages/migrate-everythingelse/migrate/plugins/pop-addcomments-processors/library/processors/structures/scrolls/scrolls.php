@@ -54,7 +54,7 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
         switch ($module[1]) {
             case self::MODULE_SCROLL_COMMENTS_LIST:
                 $vars = ApplicationState::getVars();
-                $post_id = $vars['routing']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $this->appendProp($module, $props, 'class', 'pop-commentpost-'.$post_id);
                 $this->appendProp($module, $props, 'class', 'pop-postcomment');
                 break;

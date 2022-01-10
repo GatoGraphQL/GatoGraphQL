@@ -41,7 +41,7 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
 
         // Only add the configuration if we are on the corresponding page
         $vars = ApplicationState::getVars();
-        if ($vars['routing']['is-standard'] && $vars['is-user-logged-in']) {
+        if (\PoP\Root\App::getState(['routing', 'is-standard']) && $vars['is-user-logged-in']) {
             $route = $vars['route'];
             if ($route == POP_USERPLATFORM_ROUTE_EDITPROFILE) {
                 // Allow PoP Common User Roles to fill in these redirects according to their roles

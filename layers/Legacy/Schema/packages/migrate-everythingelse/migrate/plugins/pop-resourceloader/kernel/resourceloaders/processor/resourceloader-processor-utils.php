@@ -397,8 +397,8 @@ class PoP_ResourceLoaderProcessorUtils {
                 self::setExtraVarsProperties($vars, $extra_vars, $page_id);
 
                 $vars['routing'] = [];
-                $vars['routing']['queried-object'] = $pageTypeAPI->getPage($page_id);
-                $vars['routing']['queried-object-id'] = $page_id;
+                \PoP\Root\App::getState(['routing', 'queried-object']) = $pageTypeAPI->getPage($page_id);
+                \PoP\Root\App::getState(['routing', 'queried-object-id']) = $page_id;
                 ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources,
@@ -458,8 +458,8 @@ class PoP_ResourceLoaderProcessorUtils {
                 self::setExtraVarsProperties($vars, $extra_vars, $post_id);
 
                 $vars['routing'] = [];
-                $vars['routing']['queried-object'] = $customPostTypeAPI->getCustomPost($post_id);
-                $vars['routing']['queried-object-id'] = $post_id;
+                \PoP\Root\App::getState(['routing', 'queried-object']) = $customPostTypeAPI->getCustomPost($post_id);
+                \PoP\Root\App::getState(['routing', 'queried-object-id']) = $post_id;
                 ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
@@ -489,8 +489,8 @@ class PoP_ResourceLoaderProcessorUtils {
                 self::setExtraVarsProperties($vars, $extra_vars, $author);
 
                 $vars['routing'] = [];
-                $vars['routing']['queried-object'] = $userTypeAPI->getUserById($author);
-                $vars['routing']['queried-object-id'] = $author;
+                \PoP\Root\App::getState(['routing', 'queried-object']) = $userTypeAPI->getUserById($author);
+                \PoP\Root\App::getState(['routing', 'queried-object-id']) = $author;
                 ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
@@ -515,8 +515,8 @@ class PoP_ResourceLoaderProcessorUtils {
                 self::setExtraVarsProperties($vars, $extra_vars, $tag_id);
 
                 $vars['routing'] = [];
-                $vars['routing']['queried-object'] = $postTagTypeAPI->getTag($tag_id);
-                $vars['routing']['queried-object-id'] = $tag_id;
+                \PoP\Root\App::getState(['routing', 'queried-object']) = $postTagTypeAPI->getTag($tag_id);
+                \PoP\Root\App::getState(['routing', 'queried-object-id']) = $tag_id;
                 ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key

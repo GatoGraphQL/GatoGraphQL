@@ -16,7 +16,7 @@ HooksAPIFacade::getInstance()->addFilter('UserStance_Module_Processor_CustomCaro
 function gdUserstanceUreTitlemembers($title)
 {
     $vars = ApplicationState::getVars();
-    $author = $vars['routing']['queried-object-id'];
+    $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
     if (gdUreIsCommunity($author)) {
         $vars = ApplicationState::getVars();
         if (isset($vars['source']) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {

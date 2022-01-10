@@ -71,7 +71,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
                 $vars = ApplicationState::getVars();
                 $ret['authors'] = [
-                    $vars['routing']['queried-object-id'],
+                    \PoP\Root\App::getState(['routing', 'queried-object-id']),
                 ];
                 break;
         }

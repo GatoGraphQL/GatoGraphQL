@@ -9,7 +9,7 @@ HooksAPIFacade::getInstance()->addFilter('pop_module:dataload_query_args:authors
 function gdUreProfileCommunityDataloadqueryAddmembers($authors)
 {
     $vars = ApplicationState::getVars();
-    $author = $vars['routing']['queried-object-id'];
+    $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
     // Check if the user is showing the community. If showing user, then no need for this
     if (gdUreIsCommunity($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
@@ -41,7 +41,7 @@ HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_CustomSubMenus:au
 function gdUreProfileCommunityAddMembersTab($routes)
 {
     $vars = ApplicationState::getVars();
-    $author = $vars['routing']['queried-object-id'];
+    $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
     if (gdUreIsCommunity($author) && defined('POP_USERCOMMUNITIES_ROUTE_MEMBERS') && POP_USERCOMMUNITIES_ROUTE_MEMBERS) {
         // Place the Members tab before the Followers tab
         $routes[POP_USERCOMMUNITIES_ROUTE_MEMBERS] = array();

@@ -51,7 +51,7 @@ class ModelInstanceHookSet extends AbstractHookSet
         // Properties specific to each nature
         if (
             $nature == RouteNatures::CUSTOMPOST
-            && $vars['routing']['queried-object-post-type'] == $this->getPostTypeAPI()->getPostCustomPostType()
+            && \PoP\Root\App::getState(['routing', 'queried-object-post-type']) == $this->getPostTypeAPI()->getPostCustomPostType()
         ) {
             // Single may depend on its post_type and category
             // Post and Event may be different
@@ -63,7 +63,7 @@ class ModelInstanceHookSet extends AbstractHookSet
                     false
                 )
             ) {
-                $postID = $vars['routing']['queried-object-id'];
+                $postID = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $categories = [];
                 foreach ($this->getPostCategoryTypeAPI()->getCustomPostCategories($postID) as $cat) {
                     $categories[] = $this->getPostCategoryTypeAPI()->getCategorySlug($cat) . $this->getPostCategoryTypeAPI()->getCategoryID($cat);

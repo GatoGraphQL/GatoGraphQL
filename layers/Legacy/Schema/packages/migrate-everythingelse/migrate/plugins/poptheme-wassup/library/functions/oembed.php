@@ -17,11 +17,11 @@ function popwassupOembedUnsupported($content)
     if (
         defined('POPTHEME_WASSUP_PAGEPLACEHOLDER_OEMBED') && POPTHEME_WASSUP_PAGEPLACEHOLDER_OEMBED &&
         (
-            $vars['routing']['is-home'] ||
-            $vars['routing']['is-user'] ||
-            $vars['routing']['is-custompost'] ||
-            $vars['routing']['is-tag'] ||
-            $vars['routing']['is-404']
+            \PoP\Root\App::getState(['routing', 'is-home']) ||
+            \PoP\Root\App::getState(['routing', 'is-user']) ||
+            \PoP\Root\App::getState(['routing', 'is-custompost']) ||
+            \PoP\Root\App::getState(['routing', 'is-tag']) ||
+            \PoP\Root\App::getState(['routing', 'is-404'])
         )
     ) {
         $GLOBALS['wp_embed']->post_ID = POPTHEME_WASSUP_PAGEPLACEHOLDER_OEMBED;
