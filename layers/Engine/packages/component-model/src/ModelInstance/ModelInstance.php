@@ -82,7 +82,6 @@ class ModelInstance implements ModelInstanceInterface
     {
         $components = array();
 
-        
         // There will always be a nature. Add it.
         $nature = App::getState('nature');
         $route = App::getState('route');
