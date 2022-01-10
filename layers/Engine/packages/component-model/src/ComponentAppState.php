@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Component;
+namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Configuration\Request;
-use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\Root\App;
