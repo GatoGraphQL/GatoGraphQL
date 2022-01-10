@@ -25,6 +25,15 @@ class AppStateManager
         $this->state[$key] = $value;
     }
 
+    public function merge(string $key, array $value): void
+    {
+        $this->state[$key] ??= [];
+        $this->state[$key] = array_merge(
+            $this->state[$key],
+            $value
+        );
+    }
+
     /**
      * @param string|string[] $keyOrPath The property key, or a property path for array values
      * @throws LogicException
