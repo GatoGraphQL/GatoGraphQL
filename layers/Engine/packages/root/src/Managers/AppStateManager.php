@@ -18,7 +18,7 @@ class AppStateManager
      *
      * @var array<string,mixed>
      */
-    protected array $state;
+    public array $state;
 
     // @todo Check if they are needed
     // public function set(string $key, mixed $value): void
