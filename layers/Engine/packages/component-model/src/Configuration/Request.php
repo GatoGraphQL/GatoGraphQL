@@ -28,9 +28,9 @@ class Request
         return $output;
     }
 
-    public static function getDataStructure(): string
+    public static function getDataStructure(): ?string
     {
-        return strtolower($_REQUEST[Params::DATASTRUCTURE] ?? '');
+        return $_REQUEST[Params::DATASTRUCTURE] ?? null;
     }
 
     public static function getMangledValue(): string
@@ -46,9 +46,9 @@ class Request
         return isset($_REQUEST[Params::ACTIONS]) ? array_map('strtolower', $_REQUEST[Params::ACTIONS]) : [];
     }
 
-    public static function getScheme(): string
+    public static function getScheme(): ?string
     {
-        return strtolower($_REQUEST[Params::SCHEME] ?? '');
+        return $_REQUEST[Params::SCHEME] ?? null;
     }
 
     public static function getDataSourceSelector(): string
@@ -139,9 +139,9 @@ class Request
         ];
     }
 
-    public static function getActionPath(): string
+    public static function getActionPath(): ?string
     {
-        return $_REQUEST[Params::ACTION_PATH] ?? '';
+        return $_REQUEST[Params::ACTION_PATH] ?? null;
     }
     
     /**

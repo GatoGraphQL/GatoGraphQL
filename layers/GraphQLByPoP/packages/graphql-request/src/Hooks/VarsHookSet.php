@@ -113,7 +113,7 @@ class VarsHookSet extends AbstractHookSet
         // Set always. It will be overriden below
         $vars['standard-graphql'] = false;
 
-        if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $this->getGraphQLDataStructureFormatter()->getName()) {
+        if ($vars['scheme'] === APISchemes::API && $vars['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName()) {
             $this->processURLParamVars($vars);
         }
     }

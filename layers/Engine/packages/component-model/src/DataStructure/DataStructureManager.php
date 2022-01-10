@@ -36,7 +36,7 @@ class DataStructureManager implements DataStructureManagerInterface
 
         // Return the one saved in the vars
         $name = App::getState('datastructure');
-        if ($name && isset($this->formatters[$name])) {
+        if ($name !== null && isset($this->formatters[$name])) {
             return $this->formatters[$name];
         };
 
