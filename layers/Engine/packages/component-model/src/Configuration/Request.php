@@ -4,23 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Configuration;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Constants\Params;
 
 class Request
 {
-    /**
-     * What version constraint to use for the API
-     */
-    public const URLPARAM_VERSION_CONSTRAINT = SchemaDefinition::VERSION_CONSTRAINT;
-    public const URLPARAM_VERSION_CONSTRAINT_FOR_FIELDS = 'fieldVersionConstraints';
-    public const URLPARAM_VERSION_CONSTRAINT_FOR_DIRECTIVES = 'directiveVersionConstraints';
-
     /**
      * Indicates the version constraint for all fields/directives in the query
      */
     public static function getVersionConstraint(): ?string
     {
-        return $_REQUEST[self::URLPARAM_VERSION_CONSTRAINT] ?? null;
+        return $_REQUEST[Params::VERSION_CONSTRAINT] ?? null;
     }
 
     /**
@@ -28,7 +21,7 @@ class Request
      */
     public static function getVersionConstraintsForFields(): ?array
     {
-        return $_REQUEST[self::URLPARAM_VERSION_CONSTRAINT_FOR_FIELDS] ?? null;
+        return $_REQUEST[Params::VERSION_CONSTRAINT_FOR_FIELDS] ?? null;
     }
 
     /**
@@ -36,6 +29,6 @@ class Request
      */
     public static function getVersionConstraintsForDirectives(): ?array
     {
-        return $_REQUEST[self::URLPARAM_VERSION_CONSTRAINT_FOR_DIRECTIVES] ?? null;
+        return $_REQUEST[Params::VERSION_CONSTRAINT_FOR_DIRECTIVES] ?? null;
     }
 }

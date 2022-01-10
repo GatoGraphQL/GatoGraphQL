@@ -17,4 +17,10 @@ class Params
     public const DATA_SOURCE = 'datasource';
     public const EXTRA_ROUTES = 'extraroutes';
     public const OUTPUT = 'output';
+    /**
+     * What version constraint to use for the API
+     */
+    public const VERSION_CONSTRAINT = 'versionConstraints';
+    public const VERSION_CONSTRAINT_FOR_FIELDS = 'fieldVersionConstraints';
+    public const VERSION_CONSTRAINT_FOR_DIRECTIVES = 'directiveVersionConstraints';
 }
