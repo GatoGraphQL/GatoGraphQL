@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\MutationResolution;
 
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
-use PoP\BasicService\BasicServiceTrait;
 
 class MutationResolutionManager implements MutationResolutionManagerInterface
 {
-    use BasicServiceTrait;
-
     /**
      * @var array<string, mixed>
      */
