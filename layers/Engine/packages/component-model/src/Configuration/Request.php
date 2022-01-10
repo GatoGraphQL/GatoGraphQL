@@ -17,7 +17,7 @@ class Request
 {
     public static function getOutput(): string
     {
-        $output = strtolower($_REQUEST[Params::OUTPUT] ?? '');
+        $output = $_REQUEST[Params::OUTPUT] ?? null;
         $outputs = [
             Outputs::HTML,
             Outputs::JSON,
@@ -43,7 +43,7 @@ class Request
      */
     public static function getActions(): array
     {
-        return isset($_REQUEST[Params::ACTIONS]) ? array_map('strtolower', $_REQUEST[Params::ACTIONS]) : [];
+        return $_REQUEST[Params::ACTIONS] ?? [];
     }
 
     public static function getScheme(): ?string
@@ -53,7 +53,7 @@ class Request
 
     public static function getDataSourceSelector(): string
     {
-        $dataSourceSelector = strtolower($_REQUEST[Params::DATA_SOURCE] ?? '');
+        $dataSourceSelector = $_REQUEST[Params::DATA_SOURCE] ?? null;
         $allDataSourceSelectors = [
             DataSourceSelectors::ONLYMODEL,
             DataSourceSelectors::MODELANDREQUEST,
@@ -66,7 +66,7 @@ class Request
 
     public static function getDataOutputMode(): string
     {
-        $dataOutputMode = strtolower($_REQUEST[Params::DATAOUTPUTMODE] ?? '');
+        $dataOutputMode = $_REQUEST[Params::DATAOUTPUTMODE] ?? null;
         $dataOutputModes = [
             DataOutputModes::SPLITBYSOURCES,
             DataOutputModes::COMBINED,
@@ -79,7 +79,7 @@ class Request
 
     public static function getDBOutputMode(): string
     {
-        $dbOutputMode = strtolower($_REQUEST[Params::DATABASESOUTPUTMODE] ?? '');
+        $dbOutputMode = $_REQUEST[Params::DATABASESOUTPUTMODE] ?? null;
         $dbOutputModes = array(
             DatabasesOutputModes::SPLITBYDATABASES,
             DatabasesOutputModes::COMBINED,
@@ -99,7 +99,6 @@ class Request
         if (!is_array($dataOutputItems)) {
             $dataOutputItems = explode(Param::VALUE_SEPARATOR, $dataOutputItems);
         }
-        $dataOutputItems = array_map('strtolower', $dataOutputItems);
 
         $dataOutputItems = array_intersect(
             $dataOutputItems,
