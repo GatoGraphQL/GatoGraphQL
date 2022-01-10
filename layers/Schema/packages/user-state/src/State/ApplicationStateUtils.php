@@ -11,20 +11,20 @@ class ApplicationStateUtils
     /**
      * Add the user's (non)logged-in state
      *
-     * @param array<string, mixed> $vars
+     * @param array<string, mixed> $state
      */
-    public static function setUserStateVars(array &$vars): void
+    public static function setUserStateVars(array &$state): void
     {
-        $vars['global-userstate'] = [];
+        $state['global-userstate'] = [];
         $userStateTypeAPI = UserStateTypeAPIFacade::getInstance();
         if ($userStateTypeAPI->isUserLoggedIn()) {
-            $vars['global-userstate']['is-user-logged-in'] = true;
-            $vars['global-userstate']['current-user'] = $userStateTypeAPI->getCurrentUser();
-            $vars['global-userstate']['current-user-id'] = $userStateTypeAPI->getCurrentUserID();
+            $state['global-userstate']['is-user-logged-in'] = true;
+            $state['global-userstate']['current-user'] = $userStateTypeAPI->getCurrentUser();
+            $state['global-userstate']['current-user-id'] = $userStateTypeAPI->getCurrentUserID();
         } else {
-            $vars['global-userstate']['is-user-logged-in'] = false;
-            $vars['global-userstate']['current-user'] = null;
-            $vars['global-userstate']['current-user-id'] = null;
+            $state['global-userstate']['is-user-logged-in'] = false;
+            $state['global-userstate']['current-user'] = null;
+            $state['global-userstate']['current-user-id'] = null;
         }
     }
 }
