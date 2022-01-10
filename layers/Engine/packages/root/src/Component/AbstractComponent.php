@@ -161,33 +161,6 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * Initialize state on a global, shared way
-     *
-     * @param array<string,mixed> $state
-     */
-    public function initializeAppState(array &$state): void
-    {
-        $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
-        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
-            $appStateProvider->initialize($state);
-        }
-    }
-
-    /**
-     * Once all properties have been set,
-     * have a second pass consolidate (or "augment") the state
-     *
-     * @param array<string,mixed> $state
-     */
-    public function augmentAppState(array &$state): void
-    {
-        $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
-        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
-            $appStateProvider->augment($state);
-        }
-    }
-
-    /**
      * Indicates if the Component is enabled
      */
     public function isEnabled(): bool
