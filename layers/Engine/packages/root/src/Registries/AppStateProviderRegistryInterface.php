@@ -6,7 +6,7 @@ namespace PoP\Root\Registries;
 
 use PoP\Root\State\AppStateProviderInterface;
 
-interface AccessControlRuleBlockRegistryInterface
+interface AppStateProviderRegistryInterface
 {
     public function addAppStateProvider(AppStateProviderInterface $appStateProvider): void;
     /**
