@@ -4,30 +4,21 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolverBridges;
 
+use PoP\BasicService\BasicServiceTrait;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\MutationResolution\MutationResolutionStoreInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\BasicService\BasicServiceTrait;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
     use BasicServiceTrait;
 
-    private ?MutationResolutionStoreInterface $mutationResolutionManager = null;
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
-    final public function setMutationResolutionStore(MutationResolutionStoreInterface $mutationResolutionManager): void
-    {
-        $this->mutationResolutionManager = $mutationResolutionManager;
-    }
-    final protected function getMutationResolutionStore(): MutationResolutionStoreInterface
-    {
-        return $this->mutationResolutionManager ??= $this->instanceManager->getInstance(MutationResolutionStoreInterface::class);
-    }
     final public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->moduleProcessorManager = $moduleProcessorManager;
@@ -115,7 +106,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         $this->modifyDataProperties($data_properties, $result_id);
 
         // Save the result for some module to incorporate it into the query args
-        $this->getMutationResolutionStore()->setResult($this, $result_id);
+        App::getMutationResolutionStore()->setResult($this, $result_id);
 
         $return[ResponseConstants::SUCCESS] = true;
         if ($success_strings = $this->getSuccessStrings($result_id)) {
