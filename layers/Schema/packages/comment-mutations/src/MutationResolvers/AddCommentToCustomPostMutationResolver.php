@@ -116,7 +116,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             $comment_data['authorEmail'] = $this->getUserTypeAPI()->getUserEmail($userID);
             $comment_data['authorURL'] = $this->getUserTypeAPI()->getUserWebsiteUrl($userID);
         } else {
-            if ($userID = \PoP\Root\App::getState('current-user-id') ?? null) {
+            if ($userID = \PoP\Root\App::getState('current-user-id')) {
                 $comment_data['userID'] = $userID;
             }
             $comment_data['author'] = $form_data[MutationInputProperties::AUTHOR_NAME] ?? null;

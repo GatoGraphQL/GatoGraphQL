@@ -150,10 +150,10 @@ class Engine extends UpstreamEngine implements EngineInterface
         $meta = parent::getSiteMeta();
         if ($this->addSiteMeta()) {
             $vars = ApplicationState::getVars();
-            if (\PoP\Root\App::getState('stratum') ?? null) {
+            if (\PoP\Root\App::getState('stratum')) {
                 $meta[Params::STRATUM] = \PoP\Root\App::getState('stratum');
             }
-            if (\PoP\Root\App::getState('format') ?? null) {
+            if (\PoP\Root\App::getState('format')) {
                 $meta[Params::SETTINGSFORMAT] = \PoP\Root\App::getState('format');
             }
         }

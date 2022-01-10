@@ -24,7 +24,7 @@ class VarsHookSet extends AbstractHookSet
         if (isset(\PoP\Root\App::getState('edit-schema'))) {
             $components[] = $this->__('edit schema:', 'graphql-server') . \PoP\Root\App::getState('edit-schema');
         }
-        if ($graphQLOperationType = \PoP\Root\App::getState('graphql-operation-type') ?? null) {
+        if ($graphQLOperationType = \PoP\Root\App::getState('graphql-operation-type')) {
             $components[] = $this->__('GraphQL operation type:', 'graphql-server') . $graphQLOperationType;
         }
         $components[] = $this->__('enable nested mutations:', 'graphql-server') . \PoP\Root\App::getState('nested-mutations-enabled');

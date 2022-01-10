@@ -55,9 +55,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['does-api-query-have-errors'] = false;
 
         // Passing the query via URL param?
-        if ($query = Request::getQuery()) {
-            $state['query'] = $query;
-        }
+        $state['query'] = Request::getQuery();
     }
 
     /**

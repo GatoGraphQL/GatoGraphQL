@@ -686,7 +686,7 @@ class Engine implements EngineInterface
             $meta[Params::DATAOUTPUTMODE] = \PoP\Root\App::getState('dataoutputmode');
             $meta[Params::DATABASESOUTPUTMODE] = \PoP\Root\App::getState('dboutputmode');
 
-            if (\PoP\Root\App::getState('mangled') ?? null) {
+            if (\PoP\Root\App::getState('mangled')) {
                 $meta[Request::URLPARAM_MANGLED] = \PoP\Root\App::getState('mangled');
             }
 

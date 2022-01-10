@@ -37,7 +37,7 @@ class VarsHookSet extends AbstractHookSet
     private function addFieldsToComponents(&$components): void
     {
         $vars = ApplicationState::getVars();
-        if ($fields = \PoP\Root\App::getState('query') ?? null) {
+        if ($fields = \PoP\Root\App::getState('query')) {
             // Serialize instead of implode, because $fields can contain $key => $value
             $components[] = $this->__('fields:', 'pop-engine') . serialize($fields);
         }

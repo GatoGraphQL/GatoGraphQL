@@ -22,13 +22,13 @@ class PoP_Theme_Meta_Hooks
             $vars = ApplicationState::getVars();
 
             // Send the current selected theme back
-            if (\PoP\Root\App::getState('theme') ?? null) {
+            if (\PoP\Root\App::getState('theme')) {
                 $meta[ParamConstants::PARAMS][GD_URLPARAM_THEME] = \PoP\Root\App::getState('theme');
             }
-            if (\PoP\Root\App::getState('thememode') ?? null) {
+            if (\PoP\Root\App::getState('thememode')) {
                 $meta[ParamConstants::PARAMS][GD_URLPARAM_THEMEMODE] = \PoP\Root\App::getState('thememode');
             }
-            if (\PoP\Root\App::getState('themestyle') ?? null) {
+            if (\PoP\Root\App::getState('themestyle')) {
                 $meta[ParamConstants::PARAMS][GD_URLPARAM_THEMESTYLE] = \PoP\Root\App::getState('themestyle');
             }
 

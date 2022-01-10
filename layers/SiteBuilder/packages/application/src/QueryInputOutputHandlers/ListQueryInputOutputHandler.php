@@ -56,7 +56,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         }
 
         // If it is lazy load, no need to calculate pagenumber / stop-fetching / etc
-        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != DataSources::MUTABLEONREQUEST) || (\PoP\Root\App::getState('loading-latest') ?? null)) {
+        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != DataSources::MUTABLEONREQUEST) || (\PoP\Root\App::getState('loading-latest')ull)) {
             return $ret;
         }
 

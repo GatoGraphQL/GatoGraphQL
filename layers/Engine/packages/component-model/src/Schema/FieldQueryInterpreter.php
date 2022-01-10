@@ -1925,7 +1925,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     {
         // GraphQL: Use fieldName only
         $vars = ApplicationState::getVars();
-        if (\PoP\Root\App::getState('only-fieldname-as-outputkey') ?? null) {
+        if (\PoP\Root\App::getState('only-fieldname-as-outputkey')) {
             return $this->getFieldName($field);
         }
         return parent::getNoAliasFieldOutputKey($field);

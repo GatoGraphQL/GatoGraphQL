@@ -74,7 +74,7 @@ abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataMod
         // If it is lazy load, no need to calculate stop-fetching
         // If loading static data, then that's it
         // Do not send this value back when doing loadLatest, or it will mess up the original structure loading
-        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) || (\PoP\Root\App::getState('loading-latest') ?? null)) {
+        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) || (\PoP\Root\App::getState('loading-latest'))) {
             return $ret;
         }
 

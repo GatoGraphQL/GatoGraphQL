@@ -21,7 +21,7 @@ class ApplicationStateHookSet extends AbstractHookSet
     public function maybeAddComponent(array $components): array
     {
         $vars = ApplicationState::getVars();
-        if ($stratum = \PoP\Root\App::getState('stratum') ?? null) {
+        if ($stratum = \PoP\Root\App::getState('stratum')) {
             $components[] = $this->__('stratum:', 'component-model') . $stratum;
         }
 
