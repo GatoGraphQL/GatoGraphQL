@@ -2,15 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI;
+namespace PoP\ComponentModel;
 
-use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
 use LogicException;
-use PoP\ComponentModel\App as ComponentModelApp;
-use PoP\ComponentModel\AppInterface as ComponentModelAppInterface;
+use PoP\ComponentModel\MutationResolution\MutationResolutionManager;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\Root\App as RootApp;
 use PoP\Root\AppInterface as RootAppInterface;
@@ -28,66 +23,24 @@ use Symfony\Component\DependencyInjection\Container;
  * Using composition instead of inheritance, so that the original PoP\Root\App
  * is the single source of truth
  */
-class App implements AppInterface, ComponentModelAppInterface, RootAppInterface
+class App implements AppInterface, RootAppInterface
 {
-    protected static MainPluginManager $mainPluginManager;
-    protected static ExtensionManager $extensionManager;
-
-    public static function initializePlugin(
-        ?MainPluginManager $mainPluginManager = null,
-        ?ExtensionManager $extensionManager = null,
-    ): void {
-        self::$mainPluginManager = $mainPluginManager ?? static::createMainPluginManager();
-        self::$extensionManager = $extensionManager ?? static::createExtensionManager();
-    }
-
-    protected static function createExtensionManager(): ExtensionManager
-    {
-        return new ExtensionManager();
-    }
-
-    protected static function createMainPluginManager(): MainPluginManager
-    {
-        return new MainPluginManager();
-    }
-
-    public static function getMainPluginManager(): MainPluginManager
-    {
-        return self::$mainPluginManager;
-    }
-
-    public static function getExtensionManager(): ExtensionManager
-    {
-        return self::$extensionManager;
-    }
-
-    /**
-     * Shortcut function.
-     */
-    public static function getMainPlugin(): MainPluginInterface
-    {
-        return self::getMainPluginManager()->getPlugin();
-    }
-
-    /**
-     * Shortcut function.
-     */
-    public static function getExtension(string $extensionClass): ExtensionInterface
-    {
-        return self::getExtensionManager()->getExtension($extensionClass);
-    }
-
+    protected static MutationResolutionManagerInterface $mutationResolutionManager;
+    
     public static function initializeComponentModel(
         ?MutationResolutionManagerInterface $mutationResolutionManager = null,
     ): void {
-        ComponentModelApp::initializeComponentModel(
-            $mutationResolutionManager,
-        );
+        self::$mutationResolutionManager = $mutationResolutionManager ?? static::createMutationResolutionManager();
+    }
+
+    protected static function createMutationResolutionManager(): MutationResolutionManagerInterface
+    {
+        return new MutationResolutionManager();
     }
 
     public static function getMutationResolutionManager(): MutationResolutionManagerInterface
     {
-        return ComponentModelApp::getMutationResolutionManager();
+        return self::$mutationResolutionManager;
     }
 
     /**
