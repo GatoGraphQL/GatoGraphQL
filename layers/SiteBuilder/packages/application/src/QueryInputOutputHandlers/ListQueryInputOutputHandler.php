@@ -46,7 +46,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
     public function getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
     {
         $ret = parent::getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
-        
+
         // Needed to loadLatest, to know from what time to get results
         if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == DataSources::MUTABLEONREQUEST) {
             /** @var ComponentModelComponentInfo */
@@ -55,7 +55,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         }
 
         // If it is lazy load, no need to calculate pagenumber / stop-fetching / etc
-        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != DataSources::MUTABLEONREQUEST) || (\PoP\Root\App::getState('loading-latest'))) {
+        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != DataSources::MUTABLEONREQUEST) || (App::getState('loading-latest'))) {
             return $ret;
         }
 
@@ -73,7 +73,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
     public function getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
-        
+
         // If data is not to be loaded, then "stop-fetching" as to not show the Load More button
         if (($data_properties[DataloadingConstants::SKIPDATALOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != DataSources::MUTABLEONREQUEST)) {
             return $ret;
@@ -88,7 +88,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         $pagenumber = $query_args[PaginationParams::PAGE_NUMBER];
         if (!Utils::stopFetching($dbObjectIDOrIDs, $data_properties)) {
             // When loading latest, we need to return the same $pagenumber as we got, because it must not alter the params
-            $nextpagenumber = (\PoP\Root\App::hasState('loading-latest') && \PoP\Root\App::getState('loading-latest')) ? $pagenumber : $pagenumber + 1;
+            $nextpagenumber = (App::hasState('loading-latest') && App::getState('loading-latest')) ? $pagenumber : $pagenumber + 1;
         }
         $ret[PaginationParams::PAGE_NUMBER] = $nextpagenumber;
 
