@@ -29,7 +29,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     protected function addTopLevelExtensionsEntryToResponse(): bool
     {
         $vars = ApplicationState::getVars();
-        if ($vars['standard-graphql']) {
+        if (\PoP\Root\App::getState('standard-graphql')) {
             /** @var ComponentConfiguration */
             $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
             return $componentConfiguration->enableProactiveFeedback();
@@ -88,7 +88,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     {
         $extensions = parent::reformatExtensions($extensions);
         $vars = ApplicationState::getVars();
-        if ($vars['standard-graphql']) {
+        if (\PoP\Root\App::getState('standard-graphql')) {
             if (!empty($extensions[Tokens::ARGUMENT_PATH])) {
                 // The first element is the field or directive argument name
                 $fieldOrDirectiveName = array_shift($extensions[Tokens::ARGUMENT_PATH]);
@@ -108,7 +108,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     protected function getDBEntryExtensions(string $dbKey, int | string $id, array $item): array
     {
         $vars = ApplicationState::getVars();
-        if ($vars['standard-graphql']) {
+        if (\PoP\Root\App::getState('standard-graphql')) {
             $extensions = [
                 'type' => $dbKey,
                 'id' => $id,
@@ -125,7 +125,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     protected function getSchemaEntryExtensions(string $dbKey, array $item): array
     {
         $vars = ApplicationState::getVars();
-        if ($vars['standard-graphql']) {
+        if (\PoP\Root\App::getState('standard-graphql')) {
             $extensions = [
                 'type' => $dbKey,
             ];
@@ -166,7 +166,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     protected function getQueryEntryExtensions(): array
     {
         $vars = ApplicationState::getVars();
-        if ($vars['standard-graphql']) {
+        if (\PoP\Root\App::getState('standard-graphql')) {
             // Do not print "type" => "query"
             return [];
         }

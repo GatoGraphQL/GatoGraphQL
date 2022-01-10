@@ -85,8 +85,8 @@ class ModelInstance implements ModelInstanceInterface
         $vars = ApplicationState::getVars();
 
         // There will always be a nature. Add it.
-        $nature = $vars['nature'];
-        $route = $vars['route'];
+        $nature = \PoP\Root\App::getState('nature');
+        $route = \PoP\Root\App::getState('route');
         $components[] = $this->__('nature:', 'component-model') . $nature;
         $components[] = $this->__('route:', 'component-model') . $route;
 
@@ -94,10 +94,10 @@ class ModelInstance implements ModelInstanceInterface
         $components[] = $this->__('version:', 'component-model') . $this->getApplicationInfo()->getVersion();
 
         // Other properties
-        if ($actions = $vars['actions'] ?? null) {
+        if ($actions = \PoP\Root\App::getState('actions') ?? null) {
             $components[] = $this->__('actions:', 'component-model') . implode(';', $actions);
         }
-        if ($modulefilter = $vars['modulefilter'] ?? null) {
+        if ($modulefilter = \PoP\Root\App::getState('modulefilter') ?? null) {
             $components[] = $this->__('module filter:', 'component-model') . $modulefilter;
         }
 
@@ -110,21 +110,21 @@ class ModelInstance implements ModelInstanceInterface
         ) {
             $components[] = $this->__('operation:', 'component-model') . ('POST' == $_SERVER['REQUEST_METHOD'] ? 'post' : 'get');
         }
-        if ($mangled = $vars['mangled'] ?? null) {
+        if ($mangled = \PoP\Root\App::getState('mangled') ?? null) {
             // By default it is mangled. To make it non-mangled, url must have param "mangled=none",
             // so only in these exceptional cases the identifier will add this parameter
             $components[] = $this->__('mangled:', 'component-model') . $mangled;
         }
-        if ($vars['only-fieldname-as-outputkey'] ?? null) {
+        if (\PoP\Root\App::getState('only-fieldname-as-outputkey') ?? null) {
             $components[] = $this->__('only-fieldname-as-outputkey', 'component-model');
         }
-        if ($versionConstraint = $vars['version-constraint'] ?? null) {
+        if ($versionConstraint = \PoP\Root\App::getState('version-constraint') ?? null) {
             $components[] = $this->__('version-constraint:', 'component-model') . $versionConstraint;
         }
-        if ($fieldVersionConstraints = $vars['field-version-constraints'] ?? null) {
+        if ($fieldVersionConstraints = \PoP\Root\App::getState('field-version-constraints') ?? null) {
             $components[] = $this->__('field-version-constraints:', 'component-model') . json_encode($fieldVersionConstraints);
         }
-        if ($directiveVersionConstraints = $vars['directive-version-constraints'] ?? null) {
+        if ($directiveVersionConstraints = \PoP\Root\App::getState('directive-version-constraints') ?? null) {
             $components[] = $this->__('directive-version-constraints:', 'component-model') . json_encode($directiveVersionConstraints);
         }
 

@@ -33,7 +33,7 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
     public function executeMutation(array $form_data): mixed
     {
         $vars = ApplicationState::getVars();
-        $user_id = $vars['current-user-id'];
+        $user_id = \PoP\Root\App::getState('current-user-id');
 
         $this->getUserStateTypeMutationAPI()->logout();
 

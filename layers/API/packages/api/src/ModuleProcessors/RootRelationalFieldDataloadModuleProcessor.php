@@ -34,7 +34,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array | null
     {
         $vars = ApplicationState::getVars();
-        if ($vars['does-api-query-have-errors']) {
+        if (\PoP\Root\App::getState('does-api-query-have-errors')) {
             return null;
         }
         switch ($module[1]) {

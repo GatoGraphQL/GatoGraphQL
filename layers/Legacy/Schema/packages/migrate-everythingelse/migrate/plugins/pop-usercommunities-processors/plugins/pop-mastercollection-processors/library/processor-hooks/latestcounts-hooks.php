@@ -19,7 +19,7 @@ class UREPoP_RoleProcessors_LatestCounts_Hooks
 
         // Add all the members of the community, if the author is a community, and we're on the Community+Members page
         $vars = ApplicationState::getVars();
-        if (gdUreIsCommunity($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
+        if (gdUreIsCommunity($author) && \PoP\Root\App::getState('source') == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
             if ($members = gdUreGetActivecontributingcontentcommunitymembers($author)) {
                 foreach ($members as $member) {
                     $classes[] = 'author'.$member;

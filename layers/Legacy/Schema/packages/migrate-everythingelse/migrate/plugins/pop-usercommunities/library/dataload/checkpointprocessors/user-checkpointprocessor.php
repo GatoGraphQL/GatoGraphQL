@@ -22,7 +22,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
     public function validateCheckpoint(array $checkpoint): ?Error
     {
         $vars = ApplicationState::getVars();
-        $current_user_id = $vars['current-user-id'];
+        $current_user_id = \PoP\Root\App::getState('current-user-id');
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY:
                 if (!gdUreIsCommunity($current_user_id)) {

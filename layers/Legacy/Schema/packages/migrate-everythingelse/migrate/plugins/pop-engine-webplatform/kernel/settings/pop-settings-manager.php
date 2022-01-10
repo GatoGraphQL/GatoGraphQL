@@ -8,7 +8,7 @@ class PoP_Module_SettingsManager extends \PoP\ComponentModel\Settings\SettingsMa
     {
         $vars = ApplicationState::getVars();
         if (!$route) {
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
         }
 
         $processor = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance()->getProcessor($route);
@@ -27,7 +27,7 @@ class PoP_Module_SettingsManager extends \PoP\ComponentModel\Settings\SettingsMa
     {
         $vars = ApplicationState::getVars();
         if (!$route) {
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
         }
 
         $processor = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance()->getProcessor($route);
@@ -46,7 +46,7 @@ class PoP_Module_SettingsManager extends \PoP\ComponentModel\Settings\SettingsMa
     {
         $vars = ApplicationState::getVars();
         if (!$route) {
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
         }
 
         $processor = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance()->getProcessor($route);
@@ -65,7 +65,7 @@ class PoP_Module_SettingsManager extends \PoP\ComponentModel\Settings\SettingsMa
     {
         $vars = ApplicationState::getVars();
         if (!$route) {
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
         }
 
         $processor = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance()->getProcessor($route);

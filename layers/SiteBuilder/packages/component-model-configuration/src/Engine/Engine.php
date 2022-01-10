@@ -29,7 +29,7 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_CONFIGURATION, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_CONFIGURATION, \PoP\Root\App::getState('strata'))) {
             return;
         }
 
@@ -37,7 +37,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         $module = $this->getEntryModule();
 
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
-        $dataoutputitems = $vars['dataoutputitems'];
+        $dataoutputitems = \PoP\Root\App::getState('dataoutputitems');
 
         $data = [];
         if (in_array(DataOutputItems::MODULESETTINGS, $dataoutputitems)) {
@@ -67,8 +67,8 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         // From the state we know if to process static/staful content or both
         $vars = ApplicationState::getVars();
-        $datasources = $vars['datasources'];
-        $dataoutputmode = $vars['dataoutputmode'];
+        $datasources = \PoP\Root\App::getState('datasources');
+        $dataoutputmode = \PoP\Root\App::getState('dataoutputmode');
 
         // First check if there's a cache stored
         $immutable_settings = $mutableonmodel_settings = null;
@@ -150,11 +150,11 @@ class Engine extends UpstreamEngine implements EngineInterface
         $meta = parent::getSiteMeta();
         if ($this->addSiteMeta()) {
             $vars = ApplicationState::getVars();
-            if ($vars['stratum'] ?? null) {
-                $meta[Params::STRATUM] = $vars['stratum'];
+            if (\PoP\Root\App::getState('stratum') ?? null) {
+                $meta[Params::STRATUM] = \PoP\Root\App::getState('stratum');
             }
-            if ($vars['format'] ?? null) {
-                $meta[Params::SETTINGSFORMAT] = $vars['format'];
+            if (\PoP\Root\App::getState('format') ?? null) {
+                $meta[Params::SETTINGSFORMAT] = \PoP\Root\App::getState('format');
             }
         }
         return $this->getHooksAPI()->applyFilters(

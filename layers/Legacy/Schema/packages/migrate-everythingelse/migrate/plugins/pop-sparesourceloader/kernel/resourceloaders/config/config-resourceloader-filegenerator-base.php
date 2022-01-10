@@ -20,7 +20,7 @@ abstract class PoP_SPAResourceLoader_ConfigFileBase extends \PoP\FileStore\File\
         $subfolder = PoP_ResourceLoader_ServerUtils::bundleExternalFiles() ? 'global' : 'local';
         if (defined('POP_THEME_INITIALIZED')) {
             $vars = ApplicationState::getVars();
-            return '/'.$vars['theme'].'/'.$vars['thememode'].'/'.$subfolder;
+            return '/'.\PoP\Root\App::getState('theme').'/'.\PoP\Root\App::getState('thememode').'/'.$subfolder;
         }
 
         return $subfolder;

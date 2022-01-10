@@ -54,7 +54,7 @@ class PoP_ApplicationProcessors_Utils
     protected static function loadingLazy()
     {
         $vars = ApplicationState::getVars();
-        return in_array(Actions::LOADLAZY, $vars['actions']);
+        return in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
     }
 
     public static function feedSimpleviewLazyload()
@@ -112,7 +112,7 @@ class PoP_ApplicationProcessors_Utils
 
         // Comment Leo 14/03/2017: The embed must be scrollable, because the fullscreen scrollbar doesn't work! Otherwise, it can't allow fullscreen mode
         // $vars = ApplicationState::getVars();
-        // if ($vars['theme'] == GD_THEME_WASSUP && $vars['thememode'] == GD_THEMEMODE_WASSUP_EMBED) {
+        // if (\PoP\Root\App::getState('theme') == GD_THEME_WASSUP && \PoP\Root\App::getState('thememode') == GD_THEMEMODE_WASSUP_EMBED) {
 
         //     return true;
         // }

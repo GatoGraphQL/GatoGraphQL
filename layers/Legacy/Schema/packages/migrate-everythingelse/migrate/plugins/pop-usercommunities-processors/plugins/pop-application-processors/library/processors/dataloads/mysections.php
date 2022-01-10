@@ -101,7 +101,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
          // Members of the Community
             case self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
-                $current_user = $vars['current-user-id'];
+                $current_user = \PoP\Root\App::getState('current-user-id');
                 if (gdUreIsCommunity($current_user)) {
                     $ret['meta-query'][] = [
                         'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES),

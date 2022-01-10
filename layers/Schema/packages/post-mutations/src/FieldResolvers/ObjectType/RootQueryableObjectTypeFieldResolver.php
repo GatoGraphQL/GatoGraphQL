@@ -204,7 +204,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             'myPosts',
             'myPostCount'
                 => [
-                    'authors' => [$vars['current-user-id']],
+                    'authors' => [\PoP\Root\App::getState('current-user-id')],
                 ],
             default
                 => [],

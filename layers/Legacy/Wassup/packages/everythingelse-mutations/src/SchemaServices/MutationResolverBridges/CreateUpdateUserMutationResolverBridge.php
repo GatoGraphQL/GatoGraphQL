@@ -35,11 +35,11 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         // If user is logged in => It's Update
         // Otherwise => It's Create
         $vars = ApplicationState::getVars();
-        if ($vars['is-user-logged-in']) {
+        if (\PoP\Root\App::getState('is-user-logged-in')) {
             // Allow PoP Service Workers to add the attr to avoid the link being served from the browser cache
             return sprintf(
                 $this->getTranslationAPI()->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
-                getAuthorProfileUrl($vars['current-user-id']),
+                getAuthorProfileUrl(\PoP\Root\App::getState('current-user-id')),
                 \PoP_Application_Utils::getPreviewTarget(),
                 $this->getHooksAPI()->applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
             );
@@ -51,7 +51,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         $cmseditusershelpers = HelperAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
-        $user_id = $vars['is-user-logged-in'] ? $vars['current-user-id'] : '';
+        $user_id = \PoP\Root\App::getState('is-user-logged-in') ? \PoP\Root\App::getState('current-user-id') : '';
         $inputs = $this->getFormInputs();
         $form_data = array(
             'user_id' => $user_id,

@@ -377,7 +377,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             case self::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST:
                 // For the quickview we return something different
                 $vars = ApplicationState::getVars();
-                if (isset($vars['target']) && $vars['target'] == POP_TARGET_QUICKVIEW) {
+                if (isset(\PoP\Root\App::getState('target')) && \PoP\Root\App::getState('target') == POP_TARGET_QUICKVIEW) {
                     return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST];
                 }
 

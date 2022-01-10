@@ -187,7 +187,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     {
         $vars = ApplicationState::getVars();
         return [
-            SchemaDefinition::SCHEMA_IS_NAMESPACED => $vars['namespace-types-and-interfaces'],
+            SchemaDefinition::SCHEMA_IS_NAMESPACED => \PoP\Root\App::getState('namespace-types-and-interfaces'),
         ];
     }
 

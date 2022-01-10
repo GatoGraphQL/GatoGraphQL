@@ -37,7 +37,7 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
     {
         // If we are requesting only the databases, then return these as a list of items
         $vars = ApplicationState::getVars();
-        $dataoutputitems = $vars['dataoutputitems'];
+        $dataoutputitems = \PoP\Root\App::getState('dataoutputitems');
         if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
             $ret = array();
 
@@ -46,7 +46,7 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
                 // First pass: merge all content about the same DB object
                 // Eg: notifications can appear under "database" and "userstatedatabase", showing different fields on each
                 $merged_databases = array();
-                $dboutputmode = $vars['dboutputmode'];
+                $dboutputmode = \PoP\Root\App::getState('dboutputmode');
                 if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
                     foreach ($databases as $database_name => $database) {
                         $this->addDBEntries($database, $merged_databases);

@@ -14,12 +14,12 @@ class PoP_MultiDomain_Engine_Utils
     public static function addVars(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
-        $vars['domain'] = $_REQUEST[POP_URLPARAM_DOMAIN] ?? null;
+        \PoP\Root\App::getState('domain') = $_REQUEST[POP_URLPARAM_DOMAIN] ?? null;
 
         // Add the external URL's domain, only if we are on the External Page
-        if (\PoP\Root\App::getState(['routing', 'is-standard']) && $vars['route'] == POP_MULTIDOMAIN_ROUTE_EXTERNAL) {
+        if (\PoP\Root\App::getState(['routing', 'is-standard']) && \PoP\Root\App::getState('route') == POP_MULTIDOMAIN_ROUTE_EXTERNAL) {
             if ($external_url = $_REQUEST[\PoP\ComponentModel\Constants\Response::URL] ?? null) {
-                $vars['external-url-domain'] = GeneralUtils::getDomain($external_url);
+                \PoP\Root\App::getState('external-url-domain') = GeneralUtils::getDomain($external_url);
             }
         }
     }
@@ -27,12 +27,12 @@ class PoP_MultiDomain_Engine_Utils
     public static function addModuleInstanceComponents($components)
     {
         $vars = ApplicationState::getVars();
-        if ($domain = $vars['domain']) {
+        if ($domain = \PoP\Root\App::getState('domain')) {
             $components[] = TranslationAPIFacade::getInstance()->__('domain:', 'pop-multidomain').RequestUtils::getDomainId($domain);
         }
         // External domain different configuration: needed for the resourceLoader config.js file to load, cached in the list under pop-cache/resources/,
         // which is different for different domains
-        if ($external_url_domain = $vars['external-url-domain']) {
+        if ($external_url_domain = \PoP\Root\App::getState('external-url-domain')) {
             $components[] = TranslationAPIFacade::getInstance()->__('external url domain:', 'pop-multidomain').RequestUtils::getDomainId($external_url_domain);
         }
 

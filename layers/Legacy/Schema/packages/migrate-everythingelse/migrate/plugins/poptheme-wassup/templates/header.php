@@ -128,7 +128,7 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
     require POPTHEME_WASSUP_TEMPLATES.'/status.php';
 
     // Include the Theme Header
-    $theme_header = $vars['theme-path'].'/header.php';
+    $theme_header = \PoP\Root\App::getState('theme-path').'/header.php';
     if (file_exists($theme_header)) {
         include $theme_header;
     }

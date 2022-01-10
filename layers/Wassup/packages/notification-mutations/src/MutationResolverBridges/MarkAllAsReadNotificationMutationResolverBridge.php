@@ -36,7 +36,7 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
     {
         $vars = ApplicationState::getVars();
         $form_data = array(
-            'user_id' => $vars['current-user-id'],
+            'user_id' => \PoP\Root\App::getState('current-user-id'),
         );
 
         return $form_data;

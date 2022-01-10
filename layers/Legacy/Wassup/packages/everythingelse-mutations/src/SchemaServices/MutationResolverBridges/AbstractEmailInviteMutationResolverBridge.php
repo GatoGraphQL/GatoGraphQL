@@ -38,8 +38,8 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
 
         $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        if (\PoP_FormUtils::useLoggedinuserData() && $vars['is-user-logged-in']) {
-            $user_id = $vars['current-user-id'];
+        if (\PoP_FormUtils::useLoggedinuserData() && \PoP\Root\App::getState('is-user-logged-in')) {
+            $user_id = \PoP\Root\App::getState('current-user-id');
             $sender_name = $userTypeAPI->getUserDisplayName($user_id);
             $sender_url = $userTypeAPI->getUserURL($user_id);
         } else {

@@ -46,7 +46,7 @@ class ModelInstanceHookSet extends AbstractHookSet
     public function getModelInstanceComponentsFromVars($components)
     {
         $vars = ApplicationState::getVars();
-        $nature = $vars['nature'];
+        $nature = \PoP\Root\App::getState('nature');
 
         // Properties specific to each nature
         if (

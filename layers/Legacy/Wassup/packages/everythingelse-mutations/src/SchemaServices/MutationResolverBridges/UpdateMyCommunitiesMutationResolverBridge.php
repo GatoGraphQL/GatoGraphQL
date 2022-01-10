@@ -31,7 +31,7 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
     public function getFormData(): array
     {
         $vars = ApplicationState::getVars();
-        $user_id = $vars['is-user-logged-in'] ? $vars['current-user-id'] : '';
+        $user_id = \PoP\Root\App::getState('is-user-logged-in') ? \PoP\Root\App::getState('current-user-id') : '';
         $inputs = MutationResolverUtils::getMyCommunityFormInputs();
         $communities = $this->getModuleProcessorManager()->getProcessor($inputs['communities'])->getValue($inputs['communities']);
         $form_data = array(

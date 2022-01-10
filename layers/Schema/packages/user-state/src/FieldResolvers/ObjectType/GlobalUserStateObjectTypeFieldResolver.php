@@ -63,7 +63,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
         switch ($fieldName) {
             case 'loggedInUserID':
                 $vars = ApplicationState::getVars();
-                return $vars['current-user-id'];
+                return \PoP\Root\App::getState('current-user-id');
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

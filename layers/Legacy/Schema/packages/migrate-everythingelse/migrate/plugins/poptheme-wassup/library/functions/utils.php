@@ -21,7 +21,7 @@ class PoPThemeWassup_Utils
             // If we are targeting specific module paths, then no need to validate. Otherwise, we must check that the module is under only 1 pageSection, or it may be repeated here and there
             self::$checkLoadingPagesectionModule = HooksAPIFacade::getInstance()->applyFilters(
                 'PoPThemeWassup_Utils:checkLoadingPagesectionModule',
-                $vars['modulefilter'] !== $modulePaths->getName()
+                \PoP\Root\App::getState('modulefilter') !== $modulePaths->getName()
             );
         }
 

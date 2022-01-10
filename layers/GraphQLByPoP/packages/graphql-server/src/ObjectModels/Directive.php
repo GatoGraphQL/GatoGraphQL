@@ -57,7 +57,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
          */
         if (
             $directiveKind === DirectiveKinds::QUERY
-            || ($directiveKind === DirectiveKinds::SCHEMA && isset($vars['edit-schema']) && $vars['edit-schema'])
+            || ($directiveKind === DirectiveKinds::SCHEMA && isset(\PoP\Root\App::getState('edit-schema')) && \PoP\Root\App::getState('edit-schema'))
             || ($directiveKind === DirectiveKinds::INDEXING && $componentConfiguration->enableComposableDirectives())
         ) {
             // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip

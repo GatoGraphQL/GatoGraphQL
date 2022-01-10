@@ -15,13 +15,13 @@ class PoP_Theme_UtilsHooks
         $thememanager = Themes\ThemeManagerFactory::getInstance();
         $vars = &$vars_in_array[0];
 
-        $vars['theme'] = $thememanager->getTheme() ? $thememanager->getTheme()->getName() : '';
-        $vars['thememode'] = $thememanager->getThememode() ? $thememanager->getThememode()->getName() : '';
-        $vars['themestyle'] = $thememanager->getThemestyle() ? $thememanager->getThemestyle()->getName() : '';
-        $vars['theme-isdefault'] = $thememanager->isDefaultTheme();
-        $vars['thememode-isdefault'] = $thememanager->isDefaultThememode();
-        $vars['themestyle-isdefault'] = $thememanager->isDefaultThemestyle();
-        $vars['theme-path'] = $thememanager->getThemePath();
+        \PoP\Root\App::getState('theme') = $thememanager->getTheme() ? $thememanager->getTheme()->getName() : '';
+        \PoP\Root\App::getState('thememode') = $thememanager->getThememode() ? $thememanager->getThememode()->getName() : '';
+        \PoP\Root\App::getState('themestyle') = $thememanager->getThemestyle() ? $thememanager->getThemestyle()->getName() : '';
+        \PoP\Root\App::getState('theme-isdefault') = $thememanager->isDefaultTheme();
+        \PoP\Root\App::getState('thememode-isdefault') = $thememanager->isDefaultThememode();
+        \PoP\Root\App::getState('themestyle-isdefault') = $thememanager->isDefaultThemestyle();
+        \PoP\Root\App::getState('theme-path') = $thememanager->getThemePath();
     }
 
     /**

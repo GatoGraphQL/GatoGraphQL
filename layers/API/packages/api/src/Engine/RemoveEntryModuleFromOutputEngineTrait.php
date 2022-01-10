@@ -21,9 +21,9 @@ trait RemoveEntryModuleFromOutputEngineTrait
         $vars = ApplicationState::getVars();
         if (
             App::getComponent(APIComponent::class)->isEnabled() &&
-            $vars['scheme'] == APISchemes::API &&
-            in_array(Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT, $vars['actions']) &&
-            $vars['dataoutputmode'] == DataOutputModes::COMBINED
+            \PoP\Root\App::getState('scheme') == APISchemes::API &&
+            in_array(Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT, \PoP\Root\App::getState('actions')) &&
+            \PoP\Root\App::getState('dataoutputmode') == DataOutputModes::COMBINED
         ) {
             if ($data['datasetmodulesettings'] ?? null) {
                 $data['datasetmodulesettings'] = $this->removeEntryModuleFromOutput($data['datasetmodulesettings']);

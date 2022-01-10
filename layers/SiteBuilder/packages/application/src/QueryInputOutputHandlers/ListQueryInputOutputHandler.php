@@ -56,7 +56,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         }
 
         // If it is lazy load, no need to calculate pagenumber / stop-fetching / etc
-        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != DataSources::MUTABLEONREQUEST) || ($vars['loading-latest'] ?? null)) {
+        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != DataSources::MUTABLEONREQUEST) || (\PoP\Root\App::getState('loading-latest') ?? null)) {
             return $ret;
         }
 
@@ -90,7 +90,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         $pagenumber = $query_args[PaginationParams::PAGE_NUMBER];
         if (!Utils::stopFetching($dbObjectIDOrIDs, $data_properties)) {
             // When loading latest, we need to return the same $pagenumber as we got, because it must not alter the params
-            $nextpagenumber = (isset($vars['loading-latest']) && $vars['loading-latest']) ? $pagenumber : $pagenumber + 1;
+            $nextpagenumber = (isset(\PoP\Root\App::getState('loading-latest')) && \PoP\Root\App::getState('loading-latest')) ? $pagenumber : $pagenumber + 1;
         }
         $ret[PaginationParams::PAGE_NUMBER] = $nextpagenumber;
 
@@ -132,12 +132,12 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
     //     $ret[GD_URLPARAM_STOPFETCHING] = $stop_loading;
 
     //     // When loading latest, we need to return the same $pagenumber as we got, because it must not alter the params
-    //     $nextpaged = $vars['loading-latest'] ? $pagenumber : $pagenumber + 1;
+    //     $nextpaged = \PoP\Root\App::getState('loading-latest') ? $pagenumber : $pagenumber + 1;
     //     $ret[ParamConstants::PARAMS][\PoP\ComponentModel\Constants\PaginationParams::PAGE_NUMBER] = $stop_loading ? '' : $nextpaged;
 
     //     // Do not send this value back when doing loadLatest, or it will mess up the original structure loading
     //     // Doing 'unset' as to also take it out if an ancestor class (eg: GD_DataLoad_BlockQueryInputOutputHandler) has set it
-    //     if (isset($vars['loading-latest']) && $vars['loading-latest']) {
+    //     if (isset(\PoP\Root\App::getState('loading-latest')) && \PoP\Root\App::getState('loading-latest')) {
 
     //         unset($ret[GD_URLPARAM_STOPFETCHING]);
     //     }
@@ -183,7 +183,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
     //         if (empty($dbobjectids)) {
 
     //             // Do not show the message when doing loadLatest
-    //             if (!$vars['loading-latest']) {
+    //             if (!\PoP\Root\App::getState('loading-latest')) {
 
     //                 // If pagenumber < 2 => There are no results at all
     //                 $msgs[] = array(
@@ -212,7 +212,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 
     //     // Do not send this value back when doing loadLatest, or it will mess up the original structure loading
     //     // Doing 'unset' as to also take it out if an ancestor class (eg: GD_DataLoad_BlockQueryInputOutputHandler) has set it
-    //     if (isset($vars['loading-latest']) && $vars['loading-latest']) {
+    //     if (isset(\PoP\Root\App::getState('loading-latest')) && \PoP\Root\App::getState('loading-latest')) {
 
     //         unset($ret[GD_URLPARAM_STOPFETCHING]);
     //     }

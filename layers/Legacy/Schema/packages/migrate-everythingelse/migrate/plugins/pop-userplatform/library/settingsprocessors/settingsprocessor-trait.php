@@ -41,8 +41,8 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
 
         // Only add the configuration if we are on the corresponding page
         $vars = ApplicationState::getVars();
-        if (\PoP\Root\App::getState(['routing', 'is-standard']) && $vars['is-user-logged-in']) {
-            $route = $vars['route'];
+        if (\PoP\Root\App::getState(['routing', 'is-standard']) && \PoP\Root\App::getState('is-user-logged-in')) {
+            $route = \PoP\Root\App::getState('route');
             if ($route == POP_USERPLATFORM_ROUTE_EDITPROFILE) {
                 // Allow PoP Common User Roles to fill in these redirects according to their roles
                 if ($redirect_url = HooksAPIFacade::getInstance()->applyFilters(
@@ -54,7 +54,7 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
                 }
             } elseif ($route == POP_USERPLATFORM_ROUTE_MYPROFILE) {
                 $userTypeAPI = UserTypeAPIFacade::getInstance();
-                $current_user_id = $vars['current-user-id'];
+                $current_user_id = \PoP\Root\App::getState('current-user-id');
                 $ret[POP_USERPLATFORM_ROUTE_MYPROFILE] = $userTypeAPI->getUserURL($current_user_id);
             }
         }

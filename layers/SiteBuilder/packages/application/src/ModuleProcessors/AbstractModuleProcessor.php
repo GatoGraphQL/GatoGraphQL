@@ -78,7 +78,7 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
         $ret[DataloadingConstants::SKIPDATALOAD] =
             (
                 $ret[DataloadingConstants::LAZYLOAD] &&
-                !in_array(Actions::LOADLAZY, $vars['actions'])
+                !in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'))
             ) ||
             $ret[DataloadingConstants::EXTERNALLOAD] ||
             $this->getProp($module, $props, 'skip-data-load');

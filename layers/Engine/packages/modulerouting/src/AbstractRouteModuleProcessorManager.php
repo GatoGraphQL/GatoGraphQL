@@ -42,8 +42,8 @@ abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcess
     {
         $group ??= $this->getDefaultGroup();
         $vars = $this->getVars();
-        $nature = $vars['nature'];
-        $route = $vars['route'];
+        $nature = \PoP\Root\App::getState('nature');
+        $route = \PoP\Root\App::getState('route');
 
         // // Allow to pass a custom $vars, with custom values
         // $vars ??= ApplicationState::getVars();

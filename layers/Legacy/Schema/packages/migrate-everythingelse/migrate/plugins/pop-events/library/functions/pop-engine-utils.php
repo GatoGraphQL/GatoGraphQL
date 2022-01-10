@@ -24,7 +24,7 @@ class PoP_Events_Engine_Hooks
 
         // Set additional properties based on the nature: the global $post, $author, or $queried_object
         $vars = &$vars_in_array[0];
-        $nature = $vars['nature'];
+        $nature = \PoP\Root\App::getState('nature');
 
         // Attributes needed to match the RouteModuleProcessor vars conditions
         if ($nature == CustomPostRouteNatures::CUSTOMPOST) {

@@ -16,7 +16,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         $ret = $userTypeAPI->getUserDisplayName($author);
 
-        $route = $vars['route'];
+        $route = \PoP\Root\App::getState('route');
         if ($route != RoutingRoutes::$MAIN) {
             $ret = sprintf(
                 '<small>%s <i class="fa fa-fw fa-angle-double-right"></i></small> %s',
@@ -47,7 +47,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
         }
 
         if ($add_sublevel) {
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
             if ($route != RoutingRoutes::$MAIN) {
                 $ret = sprintf(
                     '<small>%s <i class="fa fa-fw fa-angle-double-right"></i></small> %s',
@@ -66,7 +66,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
         $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         $ret = $customPostTypeAPI->getTitle($post_id);
 
-        $route = $vars['route'];
+        $route = \PoP\Root\App::getState('route');
         if ($route != RoutingRoutes::$MAIN) {
             $ret = sprintf(
                 '<small>%s <i class="fa fa-fw fa-angle-double-right"></i></small> %s',

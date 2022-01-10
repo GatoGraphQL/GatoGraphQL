@@ -24,12 +24,12 @@ class VarsHookSet extends AbstractHookSet
         // Allow WP API to set the "routing-state" first
         // Each page is an independent configuration
         $vars = ApplicationState::getVars();
-        if (isset($vars['scheme']) && $vars['scheme'] == APISchemes::API) {
+        if (isset(\PoP\Root\App::getState('scheme')) && \PoP\Root\App::getState('scheme') == APISchemes::API) {
             $this->addFieldsToComponents($components);
         }
 
         // Namespaces change the configuration
-        $components[] = $this->__('namespaced:', 'pop-engine') . ($vars['namespace-types-and-interfaces'] ?? false);
+        $components[] = $this->__('namespaced:', 'pop-engine') . (\PoP\Root\App::getState('namespace-types-and-interfaces') ?? false);
 
         return $components;
     }
@@ -37,7 +37,7 @@ class VarsHookSet extends AbstractHookSet
     private function addFieldsToComponents(&$components): void
     {
         $vars = ApplicationState::getVars();
-        if ($fields = $vars['query'] ?? null) {
+        if ($fields = \PoP\Root\App::getState('query') ?? null) {
             // Serialize instead of implode, because $fields can contain $key => $value
             $components[] = $this->__('fields:', 'pop-engine') . serialize($fields);
         }

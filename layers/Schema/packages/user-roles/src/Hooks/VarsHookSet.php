@@ -35,7 +35,7 @@ class VarsHookSet extends AbstractHookSet
     public function getModelInstanceComponentsFromVars($components)
     {
         $vars = ApplicationState::getVars();
-        switch ($vars['nature']) {
+        switch (\PoP\Root\App::getState('nature')) {
             case RouteNatures::USER:
                 $user_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // Author: it may depend on its role

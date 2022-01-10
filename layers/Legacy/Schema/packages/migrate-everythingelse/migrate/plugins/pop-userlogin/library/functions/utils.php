@@ -8,7 +8,7 @@ class PoP_UserLogin_Utils
     {
     	if (!$route) {
     		$vars = ApplicationState::getVars();
-	        $route = $vars['route'];
+	        $route = \PoP\Root\App::getState('route');
     	}
         return PoP_UserState_Utils::routeRequiresUserState($route);
     }

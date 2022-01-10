@@ -14,7 +14,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
 
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
             return $ret;
         }
 
@@ -32,7 +32,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
     {
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
+        if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
 
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -66,7 +66,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
     {
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
+        if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
 
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

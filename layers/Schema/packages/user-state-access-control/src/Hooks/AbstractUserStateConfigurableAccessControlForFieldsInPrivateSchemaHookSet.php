@@ -22,7 +22,7 @@ abstract class AbstractUserStateConfigurableAccessControlForFieldsInPrivateSchem
     {
         // Obtain the user state: logged in or not
         $vars = ApplicationState::getVars();
-        $isUserLoggedIn = $vars['is-user-logged-in'];
+        $isUserLoggedIn = \PoP\Root\App::getState('is-user-logged-in');
         // Let the implementation class decide if to remove the field or not
         return $this->removeFieldNameBasedOnUserState((string)$entryValue, $isUserLoggedIn);
     }

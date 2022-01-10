@@ -107,7 +107,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
                 return $userTypeAPI->getUserDisplayName($author);
 
             case self::MODULE_LAYOUT_PAGETABS_ROUTE:
-                $route = $vars['route'];
+                $route = \PoP\Root\App::getState('route');
                 return RouteUtils::getRouteTitle($route);
 
             case self::MODULE_LAYOUT_PAGETABS_PAGE:

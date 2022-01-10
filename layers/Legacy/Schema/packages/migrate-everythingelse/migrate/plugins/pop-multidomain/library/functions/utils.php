@@ -23,11 +23,11 @@ class PoP_MultiDomain_Utils
             $thememode = $options['thememode'];
 
             $vars = ApplicationState::getVars();
-            if ($theme && $vars['theme'] != $theme) {
-                $subpath = str_replace('/'.$vars['theme'].'/', '/'.$theme.'/', $subpath);
+            if ($theme && \PoP\Root\App::getState('theme') != $theme) {
+                $subpath = str_replace('/'.\PoP\Root\App::getState('theme').'/', '/'.$theme.'/', $subpath);
             }
-            if ($thememode && $vars['thememode'] != $thememode) {
-                $subpath = str_replace('/'.$vars['thememode'].'/', '/'.$thememode.'/', $subpath);
+            if ($thememode && \PoP\Root\App::getState('thememode') != $thememode) {
+                $subpath = str_replace('/'.\PoP\Root\App::getState('thememode').'/', '/'.$thememode.'/', $subpath);
             }
         }
 

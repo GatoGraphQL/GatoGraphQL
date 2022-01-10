@@ -11,16 +11,16 @@ class PoP_Application_ApplicationState
     {
         $vars = &$vars_in_array[0];
         if ($timestamp = $_REQUEST[GD_URLPARAM_TIMESTAMP] ?? null) {
-            $vars['timestamp'] = (int) $timestamp;
+            \PoP\Root\App::getState('timestamp') = (int) $timestamp;
         }
 
-        $vars['loading-latest'] =
-        	in_array(GD_URLPARAM_ACTION_LOADLATEST, $vars['actions'])  &&
+        \PoP\Root\App::getState('loading-latest') =
+        	in_array(GD_URLPARAM_ACTION_LOADLATEST, \PoP\Root\App::getState('actions'))  &&
 	        // Also make sure a timestamp was passed along
-        	isset($vars['timestamp']) &&
+        	isset(\PoP\Root\App::getState('timestamp')) &&
         	// Only for allowed routes, such as notifications (avoid calling the homepage with "loading-latest" or the amount of retrieved data can bring the server down)
         	in_array(
-        		$vars['route'],
+        		\PoP\Root\App::getState('route'),
         		HooksAPIFacade::getInstance()->applyFilters(
         			'loadingLatestRoutes',
         			[]

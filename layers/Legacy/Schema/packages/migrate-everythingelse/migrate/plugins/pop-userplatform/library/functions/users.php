@@ -21,7 +21,7 @@ function userHasAccess($capability, $user_id = null)
 {
     if (is_null($user_id)) {
         $vars = ApplicationState::getVars();
-        $user_id = $vars['current-user-id'];
+        $user_id = \PoP\Root\App::getState('current-user-id');
     }
     $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
     return $userRoleTypeAPI->userCan($user_id, $capability);

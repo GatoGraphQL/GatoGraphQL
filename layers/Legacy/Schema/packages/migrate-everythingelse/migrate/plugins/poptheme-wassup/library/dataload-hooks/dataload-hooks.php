@@ -12,7 +12,7 @@ function addToplevelVarsSilent($meta)
         POP_TARGET_QUICKVIEW,
         POP_TARGET_NAVIGATOR,
     );
-    if (in_array($vars['target'], $silent_targets)) {
+    if (in_array(\PoP\Root\App::getState('target'), $silent_targets)) {
         // Always silent for the quickView or the Navigator
         $meta[GD_URLPARAM_SILENTDOCUMENT] = true;
     }

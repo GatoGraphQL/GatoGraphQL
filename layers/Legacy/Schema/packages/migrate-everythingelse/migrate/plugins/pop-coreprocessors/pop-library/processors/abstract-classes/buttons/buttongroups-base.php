@@ -61,7 +61,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
                         'title' => $headers_data['titles'][$format],
                         'fontawesome' => $headers_data['icons'][$format],
                     );
-                    if (($vars['format'] == $format) || ((!$vars['format'] || $vars['format'] == \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT) && ($format == $default_active_format))) {
+                    if ((\PoP\Root\App::getState('format') == $format) || ((!\PoP\Root\App::getState('format') || \PoP\Root\App::getState('format') == \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT) && ($format == $default_active_format))) {
                         $header['active'] = true;
                     }
                     if ($subformats) {
@@ -74,7 +74,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
                                 'title' => $headers_data['titles'][$subformat],
                                 'fontawesome' => $headers_data['icons'][$subformat],
                             );
-                            if (($vars['format'] == $subformat) || ((!$vars['format'] || $vars['format'] == \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT) && ($subformat == $default_active_format))) {
+                            if ((\PoP\Root\App::getState('format') == $subformat) || ((!\PoP\Root\App::getState('format') || \PoP\Root\App::getState('format') == \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT) && ($subformat == $default_active_format))) {
                                 $subheader['active'] = true;
                                 $header['active'] = true;
                             }

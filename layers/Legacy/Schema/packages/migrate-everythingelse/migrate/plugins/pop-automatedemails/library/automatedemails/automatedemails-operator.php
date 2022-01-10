@@ -20,7 +20,7 @@ class PoP_AutomatedEmails_Operator
         $userTypeAPI = UserTypeAPIFacade::getInstance();
 
         if (\PoP\Root\App::getState(['routing', 'is-standard'])) {
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
             if ($automatedemails = $pop_automatedemails_manager->getAutomatedEmails($route)) {
                 foreach ($automatedemails as $automatedemail) {
                     // Allow to change the header to 'newsletter' under PoPTheme Wassup

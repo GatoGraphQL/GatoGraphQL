@@ -1043,7 +1043,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         // By default, execute only if the module is targeted for execution and doing POST
         $vars = ApplicationState::getVars();
-        return 'POST' == $_SERVER['REQUEST_METHOD'] && $vars['actionpath'] == $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
+        return 'POST' == $_SERVER['REQUEST_METHOD'] && \PoP\Root\App::getState('actionpath') == $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
     }
 
     public function getDataloadSource(array $module, array &$props): string
@@ -1061,7 +1061,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         // If we are in the API currently, stay in the API
         $vars = ApplicationState::getVars();
-        if ($scheme = $vars['scheme']) {
+        if ($scheme = \PoP\Root\App::getState('scheme')) {
             $ret = GeneralUtils::addQueryArgs([
                 Params::SCHEME => $scheme,
             ], $ret);
@@ -1084,7 +1084,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         // If mangled, make it mandle
-        if ($mangled = $vars['mangled']) {
+        if ($mangled = \PoP\Root\App::getState('mangled')) {
             $ret = GeneralUtils::addQueryArgs([
                 Request::URLPARAM_MANGLED => $mangled,
             ], $ret);

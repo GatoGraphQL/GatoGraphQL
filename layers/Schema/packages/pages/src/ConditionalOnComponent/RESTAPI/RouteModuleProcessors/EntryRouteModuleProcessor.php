@@ -30,8 +30,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 FieldDataloadModuleProcessor::class,
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_PAGE,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query']
+                    'fields' => isset(\PoP\Root\App::getState('query')) ?
+                        \PoP\Root\App::getState('query')
                         : $this->getRESTFields()
                     ]
                 ],

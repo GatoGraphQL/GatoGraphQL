@@ -136,12 +136,12 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 $vars = ApplicationState::getVars();
-                if (!$vars['is-user-logged-in']) {
+                if (!\PoP\Root\App::getState('is-user-logged-in')) {
                     return [];
                 }
                 $query = array(
                     'status' => array(Status::PUBLISHED, Status::DRAFT),
-                    'authors' => [$vars['current-user-id']],
+                    'authors' => [\PoP\Root\App::getState('current-user-id')],
                 );
                 if ($module[1] == self::MODULE_DATALOAD_STANCE_CREATEORUPDATE) {
                     UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsGeneralstances($query);

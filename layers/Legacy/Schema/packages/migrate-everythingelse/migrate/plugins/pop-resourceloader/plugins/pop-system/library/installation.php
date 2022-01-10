@@ -35,7 +35,7 @@ class PoPWebPlatform_Installation
     public function systemGenerateTheme()
     {
         $vars = ApplicationState::getVars();
-        $acrossThememodes = $vars['thememode-isdefault'];
+        $acrossThememodes = \PoP\Root\App::getState('thememode-isdefault');
         $acrossThememodes = HooksAPIFacade::getInstance()->applyFilters('PoPWebPlatform_Installation:systemGenerateTheme:delete-across-thememodes', $acrossThememodes);
         $this->generateResources($acrossThememodes);
     }

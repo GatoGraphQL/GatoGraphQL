@@ -12,7 +12,7 @@ function gdUreModuleInstanceComponents($components)
     if (\PoP\Root\App::getState(['routing', 'is-user'])) {
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         if (gdUreIsCommunity($author)) {
-            if ($source = $vars['source']) {
+            if ($source = \PoP\Root\App::getState('source')) {
                 $components[] = TranslationAPIFacade::getInstance()->__('source:', 'pop-usercommunities').$source;
             }
         }

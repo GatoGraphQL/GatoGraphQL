@@ -73,7 +73,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
         switch ($fieldName) {
             case 'isUserLoggedIn':
                 $vars = ApplicationState::getVars();
-                return $vars['is-user-logged-in'];
+                return \PoP\Root\App::getState('is-user-logged-in');
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

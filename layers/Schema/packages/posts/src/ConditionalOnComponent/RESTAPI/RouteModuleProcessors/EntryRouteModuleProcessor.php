@@ -30,8 +30,8 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
                 FieldDataloadModuleProcessor::class,
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query'] :
+                    'fields' => isset(\PoP\Root\App::getState('query')) ?
+                        \PoP\Root\App::getState('query') :
                         $this->getRESTFields()
                     ]
                 ],
@@ -62,8 +62,8 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
                     FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST
                     : FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query'] :
+                    'fields' => isset(\PoP\Root\App::getState('query')) ?
+                        \PoP\Root\App::getState('query') :
                         $this->getRESTFields()
                     ]
                 ],

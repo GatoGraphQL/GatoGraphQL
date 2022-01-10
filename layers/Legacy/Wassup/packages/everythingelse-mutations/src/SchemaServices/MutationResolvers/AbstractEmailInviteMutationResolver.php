@@ -29,7 +29,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     {
         // Validate the captcha
         $vars = ApplicationState::getVars();
-        if (!\PoP_FormUtils::useLoggedinuserData() || !$vars['is-user-logged-in']) {
+        if (!\PoP_FormUtils::useLoggedinuserData() || !\PoP\Root\App::getState('is-user-logged-in')) {
             $captcha = $form_data['captcha'];
 
             $captcha_validation = \GD_Captcha::validate($captcha);

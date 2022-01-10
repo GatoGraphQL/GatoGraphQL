@@ -19,6 +19,6 @@ class HeadModule extends AbstractModuleFilter
     public function excludeModule(array $module, array &$props): bool
     {
         $vars = ApplicationState::getVars();
-        return $vars['headmodule'] != $module;
+        return \PoP\Root\App::getState('headmodule') != $module;
     }
 }

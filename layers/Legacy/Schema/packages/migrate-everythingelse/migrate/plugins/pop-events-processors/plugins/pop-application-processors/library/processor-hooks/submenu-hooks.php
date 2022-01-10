@@ -32,7 +32,7 @@ class Wassup_EM_BP_SubmenuHooks
                 $event_subheaders
             );
             $vars = ApplicationState::getVars();
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
             if (in_array($route, $event_subheaders)) {
                 $routes[$route] = array();
             }

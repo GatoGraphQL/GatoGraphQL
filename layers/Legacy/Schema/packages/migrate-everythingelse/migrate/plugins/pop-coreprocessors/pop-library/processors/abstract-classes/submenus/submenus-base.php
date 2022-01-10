@@ -65,7 +65,7 @@ abstract class PoP_Module_Processor_SubMenusBase extends PoPEngine_QueryDataModu
 
         // Pages can vary with the URL: /u/mesym/ has tab "Members", but /u/leo/ does not, then place this logic under "mutableonrequest"
         $vars = ApplicationState::getVars();
-        $route = $vars['route'];
+        $route = \PoP\Root\App::getState('route');
         $headers = array();
         foreach ($this->getRoutes($module, $props) as $header_route => $subheader_routes) {
             $headers[$header_route] = array(

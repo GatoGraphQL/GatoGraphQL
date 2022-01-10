@@ -33,8 +33,8 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
 
         // Add only if the current nature is the one expected by the block
         $vars = ApplicationState::getVars();
-        // if ($vars['nature'] == $this->getNature($module)) {
-        switch ($vars['nature']) {
+        // if (\PoP\Root\App::getState('nature') == $this->getNature($module)) {
+        switch (\PoP\Root\App::getState('nature')) {
             case UserRouteNatures::USER:
                 return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_AUTHOR];
 
@@ -54,8 +54,8 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
 
         // Add only if the current nature is the one expected by the block
         $vars = ApplicationState::getVars();
-        // if ($vars['nature'] == $this->getNature($module)) {
-        switch ($vars['nature']) {
+        // if (\PoP\Root\App::getState('nature') == $this->getNature($module)) {
+        switch (\PoP\Root\App::getState('nature')) {
             case UserRouteNatures::USER:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getAuthorTitle();
 
@@ -78,7 +78,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             $userTypeAPI = UserTypeAPIFacade::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-            switch ($vars['nature']) {
+            switch (\PoP\Root\App::getState('nature')) {
                 case UserRouteNatures::USER:
                     $url = $userTypeAPI->getUserURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                     return RequestUtils::addRoute($url, $route);

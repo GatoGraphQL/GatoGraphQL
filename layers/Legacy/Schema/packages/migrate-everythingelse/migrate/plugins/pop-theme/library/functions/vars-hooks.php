@@ -8,13 +8,13 @@ function popThemeModuleInstanceComponents($components)
 {
     $vars = ApplicationState::getVars();
 
-    if ($theme = $vars['theme']) {
+    if ($theme = \PoP\Root\App::getState('theme')) {
         $components[] = TranslationAPIFacade::getInstance()->__('theme:', 'pop-engine').$theme;
     }
-    if ($thememode = $vars['thememode']) {
+    if ($thememode = \PoP\Root\App::getState('thememode')) {
         $components[] = TranslationAPIFacade::getInstance()->__('thememode:', 'pop-engine').$thememode;
     }
-    if ($themestyle = $vars['themestyle']) {
+    if ($themestyle = \PoP\Root\App::getState('themestyle')) {
         $components[] = TranslationAPIFacade::getInstance()->__('themestyle:', 'pop-engine').$themestyle;
     }
 

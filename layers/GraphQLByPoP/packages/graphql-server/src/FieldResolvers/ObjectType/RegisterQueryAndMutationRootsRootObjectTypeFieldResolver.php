@@ -60,7 +60,7 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
         $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($vars['nested-mutations-enabled'] && !$componentConfiguration->addConnectionFromRootToQueryRootAndMutationRoot()) {
+        if (\PoP\Root\App::getState('nested-mutations-enabled') && !$componentConfiguration->addConnectionFromRootToQueryRootAndMutationRoot()) {
             return [];
         }
         /** @var APIComponentConfiguration */

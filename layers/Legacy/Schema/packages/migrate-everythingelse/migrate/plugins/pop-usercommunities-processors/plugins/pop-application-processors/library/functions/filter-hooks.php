@@ -102,7 +102,7 @@ function gdUreAddFiltercomponentCommunityusers($filterinputs, array $module)
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Check if the user is showing the community. If showing user, then no need for this
-        if (gdUreIsCommunity($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
+        if (gdUreIsCommunity($author) && \PoP\Root\App::getState('source') == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
 
             // Add it after the search
             array_splice(
@@ -131,7 +131,7 @@ function gdUreAddSimpleFiltercomponentCommunityusers($filterinputs, array $modul
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Check if the user is showing the community. If showing user, then no need for this
-        if (gdUreIsCommunity($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
+        if (gdUreIsCommunity($author) && \PoP\Root\App::getState('source') == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
 
             // Add it after the search
             array_splice(

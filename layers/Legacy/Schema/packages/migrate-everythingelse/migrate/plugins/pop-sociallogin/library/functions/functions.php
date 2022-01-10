@@ -6,7 +6,7 @@ function getSocialloginProvider($user_id = null)
 {
     if (is_null($user_id)) {
         $vars = ApplicationState::getVars();
-        $user_id = $vars['current-user-id'];
+        $user_id = \PoP\Root\App::getState('current-user-id');
     }
 
     $api = PoP_SocialLogin_APIFactory::getInstance();

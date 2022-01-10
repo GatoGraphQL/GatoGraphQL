@@ -63,7 +63,7 @@ function gdGetPostDescription()
 function gdHeaderRouteDescription()
 {
     $vars = ApplicationState::getVars();
-    $route = $vars['route'];
+    $route = \PoP\Root\App::getState('route');
     return HooksAPIFacade::getInstance()->applyFilters('gdHeaderRouteDescription', '', $route);
 }
 

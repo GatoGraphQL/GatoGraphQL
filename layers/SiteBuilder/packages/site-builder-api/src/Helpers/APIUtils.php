@@ -33,7 +33,7 @@ class APIUtils
         ], $url);
 
         $vars = ApplicationState::getVars();
-        if ($mangled = $vars['mangled']) {
+        if ($mangled = \PoP\Root\App::getState('mangled')) {
             $endpoint = GeneralUtils::addQueryArgs(
                 [
                     Request::URLPARAM_MANGLED => $mangled,

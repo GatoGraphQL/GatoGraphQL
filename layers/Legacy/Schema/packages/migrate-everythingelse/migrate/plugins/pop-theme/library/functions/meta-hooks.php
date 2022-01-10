@@ -22,27 +22,27 @@ class PoP_Theme_Meta_Hooks
             $vars = ApplicationState::getVars();
 
             // Send the current selected theme back
-            if ($vars['theme'] ?? null) {
-                $meta[ParamConstants::PARAMS][GD_URLPARAM_THEME] = $vars['theme'];
+            if (\PoP\Root\App::getState('theme') ?? null) {
+                $meta[ParamConstants::PARAMS][GD_URLPARAM_THEME] = \PoP\Root\App::getState('theme');
             }
-            if ($vars['thememode'] ?? null) {
-                $meta[ParamConstants::PARAMS][GD_URLPARAM_THEMEMODE] = $vars['thememode'];
+            if (\PoP\Root\App::getState('thememode') ?? null) {
+                $meta[ParamConstants::PARAMS][GD_URLPARAM_THEMEMODE] = \PoP\Root\App::getState('thememode');
             }
-            if ($vars['themestyle'] ?? null) {
-                $meta[ParamConstants::PARAMS][GD_URLPARAM_THEMESTYLE] = $vars['themestyle'];
+            if (\PoP\Root\App::getState('themestyle') ?? null) {
+                $meta[ParamConstants::PARAMS][GD_URLPARAM_THEMESTYLE] = \PoP\Root\App::getState('themestyle');
             }
 
             $pushurlprops = array();
 
             // Theme: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)
-            if (isset($vars['theme']) && !$vars['theme-isdefault']) {
-                $pushurlprops[GD_URLPARAM_THEME] = $vars['theme'];
+            if (isset(\PoP\Root\App::getState('theme')) && !\PoP\Root\App::getState('theme-isdefault')) {
+                $pushurlprops[GD_URLPARAM_THEME] = \PoP\Root\App::getState('theme');
             }
-            if (isset($vars['thememode']) && !$vars['thememode-isdefault']) {
-                $pushurlprops[GD_URLPARAM_THEMEMODE] = $vars['thememode'];
+            if (isset(\PoP\Root\App::getState('thememode')) && !\PoP\Root\App::getState('thememode-isdefault')) {
+                $pushurlprops[GD_URLPARAM_THEMEMODE] = \PoP\Root\App::getState('thememode');
             }
-            if (isset($vars['themestyle']) && !$vars['themestyle-isdefault']) {
-                $pushurlprops[GD_URLPARAM_THEMESTYLE] = $vars['themestyle'];
+            if (isset(\PoP\Root\App::getState('themestyle')) && !\PoP\Root\App::getState('themestyle-isdefault')) {
+                $pushurlprops[GD_URLPARAM_THEMESTYLE] = \PoP\Root\App::getState('themestyle');
             }
 
             if ($pushurlprops) {

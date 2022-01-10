@@ -19,9 +19,9 @@ class PoP_UserAvatar_UserStance_Hooks
         $avatar_user_id = POP_AVATAR_GENERICAVATARUSER;
 
         $vars = ApplicationState::getVars();
-        $user_logged_in = $vars['is-user-logged-in'];
+        $user_logged_in = \PoP\Root\App::getState('is-user-logged-in');
         if ($user_logged_in) {
-            $avatar_user_id = $vars['current-user-id'];
+            $avatar_user_id = \PoP\Root\App::getState('current-user-id');
         }
 
         $avatar = gdGetAvatar($avatar_user_id, GD_AVATAR_SIZE_100);

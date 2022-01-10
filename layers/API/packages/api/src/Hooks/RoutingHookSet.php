@@ -56,7 +56,7 @@ class RoutingHookSet extends AbstractHookSet
         // Because the fields can't be applied to different resources!
         // (Eg: author/leo/ and author/leo/?route=posts)
         $vars = ApplicationState::getVars();
-        if (isset($vars['scheme']) && $vars['scheme'] == APISchemes::API) {
+        if (isset(\PoP\Root\App::getState('scheme')) && \PoP\Root\App::getState('scheme') == APISchemes::API) {
             return [];
         }
 

@@ -31,7 +31,7 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
     public function getFormData(): array
     {
         $vars = ApplicationState::getVars();
-        $community = $vars['is-user-logged-in'] ? $vars['current-user-id'] : '';
+        $community = \PoP\Root\App::getState('is-user-logged-in') ? \PoP\Root\App::getState('current-user-id') : '';
         $privileges = $this->getModuleProcessorManager()->getProcessor([\GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, \GD_URE_Module_Processor_ProfileMultiSelectFormInputs::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES])->getValue([\GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, \GD_URE_Module_Processor_ProfileMultiSelectFormInputs::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES]);
         $tags = $this->getModuleProcessorManager()->getProcessor([\GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, \GD_URE_Module_Processor_ProfileMultiSelectFormInputs::MODULE_URE_FORMINPUT_MEMBERTAGS])->getValue([\GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, \GD_URE_Module_Processor_ProfileMultiSelectFormInputs::MODULE_URE_FORMINPUT_MEMBERTAGS]);
         $form_data = array(

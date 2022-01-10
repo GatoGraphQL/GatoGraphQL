@@ -211,7 +211,7 @@ class PoP_ServerSideRendering
         // If the target was provided, then check that the current page has that target to render the html
         // Eg: addons pageSection must have target "addons", if not do nothing
         $vars = ApplicationState::getVars();
-        if (!is_null($target) && $target != $vars['target']) {
+        if (!is_null($target) && $target != \PoP\Root\App::getState('target')) {
             return '';
         }
 

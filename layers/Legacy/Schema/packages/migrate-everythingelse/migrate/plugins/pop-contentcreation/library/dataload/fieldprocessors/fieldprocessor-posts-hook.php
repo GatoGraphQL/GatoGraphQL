@@ -115,8 +115,8 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
 
                 // This function only makes sense when the user is logged in
                 $vars = ApplicationState::getVars();
-                if ($vars['is-user-logged-in']) {
-                    $pos = array_search($vars['current-user-id'], $authors);
+                if (\PoP\Root\App::getState('is-user-logged-in')) {
+                    $pos = array_search(\PoP\Root\App::getState('current-user-id'), $authors);
                     if ($pos !== false) {
                         array_splice($authors, $pos, 1);
                     }

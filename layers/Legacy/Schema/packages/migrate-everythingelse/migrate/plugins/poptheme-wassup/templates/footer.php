@@ -4,7 +4,7 @@
         
         // Include the Theme Footer
         $vars = \PoP\ComponentModel\State\ApplicationState::getVars();
-        $theme_footer = $vars['theme-path'].'/footer.php';
+        $theme_footer = \PoP\Root\App::getState('theme-path').'/footer.php';
         if (file_exists($theme_footer)) {
             include $theme_footer;
         }

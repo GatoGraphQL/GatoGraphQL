@@ -12,7 +12,7 @@ function popUserstanceModuleInstanceComponents($components)
     // The difference is, is there parameter "tid"?
     $vars = ApplicationState::getVars();
     if (\PoP\Root\App::getState(['routing', 'is-standard'])) {
-        $route = $vars['route'];
+        $route = \PoP\Root\App::getState('route');
 
         if ($route == POP_USERSTANCE_ROUTE_ADDOREDITSTANCE) {
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();

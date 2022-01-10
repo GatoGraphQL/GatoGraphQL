@@ -207,8 +207,8 @@ class PoPWebPlatform_Initialization
             'AJAXURL' => admin_url('admin-ajax.php', 'relative'),
             'UPLOADURL' => admin_url('async-upload.php', 'relative'),
             'GMT_OFFSET' => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')),
-            'DATAOUTPUTMODE' => $vars['dataoutputmode'],
-            'DBOUTPUTMODE' => $vars['dboutputmode'],
+            'DATAOUTPUTMODE' => \PoP\Root\App::getState('dataoutputmode'),
+            'DBOUTPUTMODE' => \PoP\Root\App::getState('dboutputmode'),
             'ERROR_MESSAGE' => '<div class="alert alert-danger alert-block fade in"><button type="button" class="close" data-dismiss="alert">x</button>{0}</div>',
             'POSTSTATUS' => array(
                 'PUBLISH' => Status::PUBLISHED,

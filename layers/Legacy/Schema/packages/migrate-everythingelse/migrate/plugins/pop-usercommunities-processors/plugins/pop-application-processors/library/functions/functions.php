@@ -12,7 +12,7 @@ function gdUreProfileCommunityDataloadqueryAddmembers($authors)
     $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
     // Check if the user is showing the community. If showing user, then no need for this
-    if (gdUreIsCommunity($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
+    if (gdUreIsCommunity($author) && \PoP\Root\App::getState('source') == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
         $authors = array_merge(
             $authors,
             gdUreGetActivecontributingcontentcommunitymembers($author)
@@ -27,7 +27,7 @@ function gdUreAddSourceParam($url, $user_id)
 {
     if (gdUreIsCommunity($user_id)) {
         $vars = ApplicationState::getVars();
-        $source = $vars['source'];
+        $source = \PoP\Root\App::getState('source');
         $url = PoP_URE_ModuleManager_Utils::addSource($url, $source);
     }
 

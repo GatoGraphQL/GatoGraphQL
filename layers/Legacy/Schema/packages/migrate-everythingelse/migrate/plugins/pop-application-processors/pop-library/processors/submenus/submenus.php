@@ -61,7 +61,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
 
         // Potentially, add an extra header level if the current page is one of the subheaders
         $vars = ApplicationState::getVars();
-        $route = $vars['route'];
+        $route = \PoP\Root\App::getState('route');
 
         switch ($module[1]) {
             case self::MODULE_SUBMENU_AUTHOR:

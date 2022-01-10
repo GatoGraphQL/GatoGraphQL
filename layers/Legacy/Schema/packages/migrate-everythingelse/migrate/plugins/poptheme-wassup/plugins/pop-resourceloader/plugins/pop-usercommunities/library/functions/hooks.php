@@ -18,7 +18,7 @@ class PoPThemeWassup_UserCommunities_ResourceLoader_Hooks
     {
         if ($nature == UserRouteNatures::USER) {
             // Organization: it must add together the resources for both "source=community" and "source=user"
-            // Then, for the organization and community roles, we must set the extra $vars['source'] value
+            // Then, for the organization and community roles, we must set the extra \PoP\Root\App::getState('source') value
             $source = array();
             foreach ($ids as $author_id) {
                 // We only set-up the value for GD_URLPARAM_URECONTENTSOURCE_COMMUNITY.

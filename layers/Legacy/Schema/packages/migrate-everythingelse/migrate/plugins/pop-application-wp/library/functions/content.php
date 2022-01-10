@@ -11,7 +11,7 @@ HooksAPIFacade::getInstance()->addFilter(
     function ($title) {
         $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState(['routing', 'is-standard'])) {
-            $title['title'] = strip_tags(RouteUtils::getRouteTitle($vars['route']));
+            $title['title'] = strip_tags(RouteUtils::getRouteTitle(\PoP\Root\App::getState('route')));
         }
         return $title;
     }

@@ -23,10 +23,10 @@ class CacheUtils
         return (array)$hooksAPI->applyFilters(
             self::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,
             [
-                'namespaced' => $vars['namespace-types-and-interfaces'],
-                'version-constraint' => $vars['version-constraint'],
-                'field-version-constraints' => $vars['field-version-constraints'],
-                'directive-version-constraints' => $vars['directive-version-constraints'],
+                'namespaced' => \PoP\Root\App::getState('namespace-types-and-interfaces'),
+                'version-constraint' => \PoP\Root\App::getState('version-constraint'),
+                'field-version-constraints' => \PoP\Root\App::getState('field-version-constraints'),
+                'directive-version-constraints' => \PoP\Root\App::getState('directive-version-constraints'),
                 'redundant-root-fields-disabled' => $componentConfiguration->disableRedundantRootTypeMutationFields(),
             ]
         );

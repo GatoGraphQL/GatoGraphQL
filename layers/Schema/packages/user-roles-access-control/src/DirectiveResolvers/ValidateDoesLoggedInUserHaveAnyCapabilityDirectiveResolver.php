@@ -42,12 +42,12 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
     {
         $vars = ApplicationState::getVars();
         // If the user is not logged-in, then do nothing: directive `@validateIsUserLoggedIn` will already fail
-        if (!$vars['is-user-logged-in']) {
+        if (!\PoP\Root\App::getState('is-user-logged-in')) {
             return true;
         }
 
         $capabilities = $this->directiveArgsForSchema['capabilities'];
-        $userID = $vars['current-user-id'];
+        $userID = \PoP\Root\App::getState('current-user-id');
         $userCapabilities = $this->getUserRoleTypeAPI()->getUserCapabilities($userID);
         return !empty(array_intersect($capabilities, $userCapabilities));
     }

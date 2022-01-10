@@ -37,7 +37,7 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
             $entries = $this->getEntries();
             // If the user is not logged in, then it's all directives
             $vars = ApplicationState::getVars();
-            if (!$vars['is-user-logged-in']) {
+            if (!\PoP\Root\App::getState('is-user-logged-in')) {
                 $this->directiveResolverClasses = array_values(array_unique(array_map(
                     fn (array $entry) => $entry[0],
                     $entries

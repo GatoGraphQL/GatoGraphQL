@@ -53,7 +53,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             case self::MODULE_DATALOAD_DOWNVOTESPOSTS:
                 // If the user is not logged in, then do not load the data
                 $vars = ApplicationState::getVars();
-                if (!PoP_UserState_Utils::currentRouteRequiresUserState() || !$vars['is-user-logged-in']) {
+                if (!PoP_UserState_Utils::currentRouteRequiresUserState() || !\PoP\Root\App::getState('is-user-logged-in')) {
                     $ret[DataloadingConstants::SKIPDATALOAD] = true;
                 }
                 break;
@@ -101,7 +101,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     {
         // All of these modules require the user to be logged in
         $vars = ApplicationState::getVars();
-        if (!$vars['is-user-logged-in']) {
+        if (!\PoP\Root\App::getState('is-user-logged-in')) {
             return [];
         }
 
@@ -114,7 +114,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         ];
 
         if ($metaKey = $metaKeys[$module[1]] ?? null) {
-            $userID = $vars['current-user-id'];
+            $userID = \PoP\Root\App::getState('current-user-id');
             return \PoPSchema\UserMeta\Utils::getUserMeta($userID, $metaKey) ?? [];
         }
 

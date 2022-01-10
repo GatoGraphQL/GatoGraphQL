@@ -60,7 +60,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
             $resources = PoP_ResourceLoaderProcessorUtils::getResourcesFromCurrentVars($modulefilter, $options);
 
             $vars = ApplicationState::getVars();
-            $nature = $vars['nature'];
+            $nature = \PoP\Root\App::getState('nature');
 
             $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
 

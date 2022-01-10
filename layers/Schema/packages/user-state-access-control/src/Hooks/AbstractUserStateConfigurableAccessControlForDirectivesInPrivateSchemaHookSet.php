@@ -13,7 +13,7 @@ abstract class AbstractUserStateConfigurableAccessControlForDirectivesInPrivateS
     protected function enabled(): bool
     {
         $vars = ApplicationState::getVars();
-        $isUserLoggedIn = $vars['is-user-logged-in'];
+        $isUserLoggedIn = \PoP\Root\App::getState('is-user-logged-in');
         return parent::enabled() && $this->enableBasedOnUserState($isUserLoggedIn);
     }
 

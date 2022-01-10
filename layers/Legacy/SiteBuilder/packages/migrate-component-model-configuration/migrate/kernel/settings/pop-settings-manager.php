@@ -14,7 +14,7 @@ class SettingsManager
     {
         $vars = ApplicationState::getVars();
         if (!$route) {
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
         }
 
         $processor = SettingsProcessorManagerFactory::getInstance()->getProcessor($route);
@@ -29,7 +29,7 @@ class SettingsManager
     {
         $vars = ApplicationState::getVars();
         if (!$route) {
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
         }
 
         $processor = SettingsProcessorManagerFactory::getInstance()->getProcessor($route);
@@ -48,7 +48,7 @@ class SettingsManager
     {
         $vars = ApplicationState::getVars();
         if (!$route) {
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
         }
 
         $processor = SettingsProcessorManagerFactory::getInstance()->getProcessor($route);
@@ -67,7 +67,7 @@ class SettingsManager
     {
         $vars = ApplicationState::getVars();
         if (!$route) {
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
         }
         
         $processor = SettingsProcessorManagerFactory::getInstance()->getProcessor($route);
@@ -86,7 +86,7 @@ class SettingsManager
     {
         $vars = ApplicationState::getVars();
         if (!$route) {
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
         }
         
         $processor = SettingsProcessorManagerFactory::getInstance()->getProcessor($route);

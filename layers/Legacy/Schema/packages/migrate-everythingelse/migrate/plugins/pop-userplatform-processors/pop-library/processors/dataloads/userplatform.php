@@ -82,7 +82,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYPREFERENCES:
                 $vars = ApplicationState::getVars();
-                return $vars['current-user-id'];
+                return \PoP\Root\App::getState('current-user-id');
         }
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }

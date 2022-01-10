@@ -41,7 +41,7 @@ class VersioningService implements VersioningServiceInterface
         $this->versionConstraintsForFields = [];
         $schemaWarnings = [];
         $vars = ApplicationState::getVars();
-        foreach (($vars['field-version-constraints'] ?? []) as $typeField => $versionConstraint) {
+        foreach ((\PoP\Root\App::getState('field-version-constraints') ?? []) as $typeField => $versionConstraint) {
             // All fields are defined as "$type.$fieldName". If not, it's an error
             $entry = explode(self::TYPE_FIELD_SEPARATOR, $typeField);
             if (count($entry) != 2) {
@@ -83,7 +83,7 @@ class VersioningService implements VersioningServiceInterface
     {
         if ($this->versionConstraintsForDirectives === null) {
             $vars = ApplicationState::getVars();
-            $this->versionConstraintsForDirectives = $vars['directive-version-constraints'];
+            $this->versionConstraintsForDirectives = \PoP\Root\App::getState('directive-version-constraints');
         }
         return $this->versionConstraintsForDirectives[$directiveName] ?? null;
     }

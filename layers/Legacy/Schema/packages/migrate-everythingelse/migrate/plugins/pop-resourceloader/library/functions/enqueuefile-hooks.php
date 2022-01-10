@@ -25,7 +25,7 @@ class PoP_ResourceLoader_EnqueueFileHooks
     {
         $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState(['routing', 'is-standard'])) {
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
         
             $processor = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance()->getProcessor($route);
             if ($internals = $processor->isForInternalUse()) {

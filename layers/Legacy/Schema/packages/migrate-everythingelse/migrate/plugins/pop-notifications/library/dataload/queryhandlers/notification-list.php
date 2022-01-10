@@ -9,7 +9,7 @@ class GD_DataLoad_QueryInputOutputHandler_NotificationList extends ListQueryInpu
     public function getHistTime(&$query_args)
     {
         $vars = ApplicationState::getVars();
-        if (isset($vars['loading-latest']) && $vars['loading-latest']) {
+        if (isset(\PoP\Root\App::getState('loading-latest')) && \PoP\Root\App::getState('loading-latest')) {
             return $query_args[GD_URLPARAM_TIMESTAMP];
         }
 
@@ -26,7 +26,7 @@ class GD_DataLoad_QueryInputOutputHandler_NotificationList extends ListQueryInpu
     public function getHistTimeCompare(&$query_args)
     {
         $vars = ApplicationState::getVars();
-        if (isset($vars['loading-latest']) && $vars['loading-latest']) {
+        if (isset(\PoP\Root\App::getState('loading-latest')) && \PoP\Root\App::getState('loading-latest')) {
             return '>';
         }
 

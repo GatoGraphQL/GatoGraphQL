@@ -19,7 +19,7 @@ trait ValidateUserLoggedInMutationResolverTrait
     protected function validateUserIsLoggedIn(array &$errors): void
     {
         $vars = ApplicationState::getVars();
-        if (!$vars['is-user-logged-in']) {
+        if (!\PoP\Root\App::getState('is-user-logged-in')) {
             $errors[] = $this->getUserNotLoggedInErrorMessage();
         }
     }

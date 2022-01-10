@@ -39,7 +39,7 @@ class PoP_SocialNetwork_Notifications_Hook_Users /* extends AAL_Hook_Base*/
             array(
                 'action'      => $action,
                 'object_type' => 'User',
-                'user_id'     => $vars['current-user-id'],
+                'user_id'     => \PoP\Root\App::getState('current-user-id'),
                 'object_id'   => $user_id,
                 'object_name' => $userTypeAPI->getUserDisplayName($user_id),
             )

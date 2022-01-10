@@ -95,7 +95,7 @@ class VarsHookSet extends AbstractHookSet
     public function getMutationsNotSupportedErrorMessage(string $errorMessage): string
     {
         $vars = ApplicationState::getVars();
-        if ($vars['standard-graphql']) {
+        if (\PoP\Root\App::getState('standard-graphql')) {
             return sprintf(
                 $this->__('Use the operation type \'%s\' to execute mutations', 'graphql-request'),
                 OperationTypes::MUTATION
@@ -112,9 +112,9 @@ class VarsHookSet extends AbstractHookSet
         [&$vars] = $vars_in_array;
 
         // Set always. It will be overriden below
-        $vars['standard-graphql'] = false;
+        \PoP\Root\App::getState('standard-graphql') = false;
 
-        if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $this->getGraphQLDataStructureFormatter()->getName()) {
+        if (\PoP\Root\App::getState('scheme') == APISchemes::API && \PoP\Root\App::getState('datastructure') == $this->getGraphQLDataStructureFormatter()->getName()) {
             $this->processURLParamVars($vars);
         }
     }
@@ -122,7 +122,7 @@ class VarsHookSet extends AbstractHookSet
     public function setStandardGraphQLVars(array &$vars): void
     {
         // Add a flag indicating that we are doing standard GraphQL
-        $vars['standard-graphql'] = true;
+        \PoP\Root\App::getState('standard-graphql') = true;
     }
 
     /**
@@ -135,7 +135,7 @@ class VarsHookSet extends AbstractHookSet
         $disablePoPQuery = isset($_REQUEST[QueryInputs::QUERY]) && $componentConfiguration->disableGraphQLAPIForPoP();
         if ($disablePoPQuery) {
             // Remove the query set by package API
-            unset($vars['query']);
+            unset(\PoP\Root\App::getState('query'));
         }
         // If the "query" param is set, this case is already handled in API package
         // Unless it is a persisted query for GraphQL, then deal with it here
@@ -170,7 +170,7 @@ class VarsHookSet extends AbstractHookSet
             if ($graphQLQuery) {
                 // Maybe override the variables, getting them from the GraphQL dictionary
                 if ($variables) {
-                    $vars['variables'] = $variables;
+                    \PoP\Root\App::getState('variables') = $variables;
                 }
                 $this->addGraphQLQueryToVars($vars, $graphQLQuery, $operationName);
             } elseif ($disablePoPQuery || !$isGraphQLPersistedQuery) {
@@ -192,7 +192,7 @@ class VarsHookSet extends AbstractHookSet
     public function addGraphQLQueryToVars(array &$vars, string $graphQLQuery, ?string $operationName = null): void
     {
         // Take the existing variables from $vars, so they must be set in advance
-        $variables = $vars['variables'] ?? [];
+        $variables = \PoP\Root\App::getState('variables') ?? [];
         // Convert from GraphQL syntax to Field Query syntax
         list(
             $operationType,
@@ -203,19 +203,19 @@ class VarsHookSet extends AbstractHookSet
             $operationName
         );
         // Set the operation type and, based on it, if mutations are supported
-        $vars['graphql-operation-type'] = $operationType;
-        $vars['are-mutations-enabled'] = $operationType === OperationTypes::MUTATION;
+        \PoP\Root\App::getState('graphql-operation-type') = $operationType;
+        \PoP\Root\App::getState('are-mutations-enabled') = $operationType === OperationTypes::MUTATION;
 
         // If there was an error when parsing the query, the operationType will be null,
         // then there's no need to execute the query
         if ($operationType === null) {
-            $vars['does-api-query-have-errors'] = true;
+            \PoP\Root\App::getState('does-api-query-have-errors') = true;
         }
 
         // Set the query in $vars
         ApplicationStateUtils::maybeConvertQueryAndAddToVars($vars, $fieldQuery);
 
         // Do not include the fieldArgs and directives when outputting the field
-        $vars['only-fieldname-as-outputkey'] = true;
+        \PoP\Root\App::getState('only-fieldname-as-outputkey') = true;
     }
 }

@@ -42,12 +42,12 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
     {
         $vars = ApplicationState::getVars();
         // If the user is not logged-in, then do nothing: directive `@validateIsUserLoggedIn` will already fail
-        if (!$vars['is-user-logged-in']) {
+        if (!\PoP\Root\App::getState('is-user-logged-in')) {
             return true;
         }
 
         $roles = $this->directiveArgsForSchema['roles'];
-        $userID = $vars['current-user-id'];
+        $userID = \PoP\Root\App::getState('current-user-id');
         $userRoles = $this->getUserRoleTypeAPI()->getUserRoles($userID);
         return !empty(array_intersect($roles, $userRoles));
     }

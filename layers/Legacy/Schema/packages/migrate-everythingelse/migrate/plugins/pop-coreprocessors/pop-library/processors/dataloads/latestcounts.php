@@ -87,7 +87,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
                 $this->appendProp($module, $props, 'class', 'hidden');
 
                 // Do not load initially. Load only needed when executing the setTimeout with loadLatest
-                if ($vars['fetching-site'] ?? null) {
+                if (\PoP\Root\App::getState('fetching-site') ?? null) {
                     $this->setProp($module, $props, 'skip-data-load', true);
                 }
                 break;

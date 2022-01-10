@@ -48,8 +48,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 PostCategoryFieldDataloadModuleProcessor::class,
                 PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query'] :
+                    'fields' => isset(\PoP\Root\App::getState('query')) ?
+                        \PoP\Root\App::getState('query') :
                         $this->getRESTFields()
                 ]
             ],
@@ -79,8 +79,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 PostCategoryFieldDataloadModuleProcessor::class,
                 PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query'] :
+                    'fields' => isset(\PoP\Root\App::getState('query')) ?
+                        \PoP\Root\App::getState('query') :
                         $this->getRESTFields()
                 ]
             ],
@@ -101,8 +101,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 CategoryPostFieldDataloadModuleProcessor::class,
                 CategoryPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query'] :
+                    'fields' => isset(\PoP\Root\App::getState('query')) ?
+                        \PoP\Root\App::getState('query') :
                         $this->getRESTFields()
                     ]
                 ],
