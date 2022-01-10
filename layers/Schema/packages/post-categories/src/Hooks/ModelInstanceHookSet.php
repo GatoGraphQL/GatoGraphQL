@@ -39,11 +39,11 @@ class ModelInstanceHookSet extends AbstractHookSet
     {
         $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
-            array($this, 'getModelInstanceComponentsFromVars')
+            array($this, 'getModelInstanceComponentsFromAppState')
         );
     }
 
-    public function getModelInstanceComponentsFromVars($components)
+    public function getModelInstanceComponentsFromAppState($components)
     {
         $nature = App::getState('nature');
 

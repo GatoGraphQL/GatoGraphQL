@@ -15,11 +15,11 @@ class VarsHookSet extends AbstractHookSet
     {
         $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
-            array($this, 'getModelInstanceComponentsFromVars')
+            array($this, 'getModelInstanceComponentsFromAppState')
         );
     }
 
-    public function getModelInstanceComponentsFromVars($components)
+    public function getModelInstanceComponentsFromAppState($components)
     {
         // Allow WP API to set the "routing-state" first
         // Each page is an independent configuration

@@ -55,7 +55,7 @@ class ModelInstance implements ModelInstanceInterface
             self::HOOK_COMPONENTS_RESULT,
             array_merge(
                 $components,
-                $this->getModelInstanceComponentsFromVars()
+                $this->getModelInstanceComponentsFromAppState()
             )
         );
 
@@ -78,7 +78,7 @@ class ModelInstance implements ModelInstanceInterface
     /**
      * @return string[]
      */
-    protected function getModelInstanceComponentsFromVars(): array
+    protected function getModelInstanceComponentsFromAppState(): array
     {
         $components = array();
 

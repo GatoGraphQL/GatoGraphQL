@@ -474,7 +474,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 self::addResourcesFromCurrentLoop($modulefilter, $resources[$path], $key, $merge, $options);
 
-                // // We need to delete the cache, because PoP_VarsUtils::getModelInstanceComponentsFromVars() doesn't have all the information needed
+                // // We need to delete the cache, because PoP_VarsUtils::getModelInstanceComponentsFromAppState() doesn't have all the information needed
                 // // Eg: because the categories are not in $vars, it can't tell the difference between past and future events,
                 // // or from 2 posts with different category
                 // $pop_module_processor_runtimecache->deleteCache();
