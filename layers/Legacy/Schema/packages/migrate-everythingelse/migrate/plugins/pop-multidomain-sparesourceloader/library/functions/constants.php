@@ -21,7 +21,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 //         // Must add the version (request will be routed through CDN)
         // //		   $vars = ApplicationState::getVars();
-//         $url = GeneralUtils::addQueryArgs(['ver', $vars['version']], $url);
+//         $url = GeneralUtils::addQueryArgs(['ver', ApplicationInfoFacade::getInstance()->getVersion()], $url);
 
 //         // Replace the domain with "{0}" for the external domain to be injected in javascript
 //         $cmsService = CMSServiceFacade::getInstance();

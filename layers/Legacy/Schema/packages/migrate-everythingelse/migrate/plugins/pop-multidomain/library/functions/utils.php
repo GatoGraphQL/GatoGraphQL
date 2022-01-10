@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
@@ -12,7 +13,7 @@ class PoP_MultiDomain_Utils
         $cmsService = CMSServiceFacade::getInstance();
         $vars = ApplicationState::getVars();
         $url = GeneralUtils::addQueryArgs([
-            'ver' => $vars['version'],
+            'ver' => ApplicationInfoFacade::getInstance()->getVersion(),
         ], $url);
         $subpath = substr($url, strlen($cmsService->getSiteURL()));
 

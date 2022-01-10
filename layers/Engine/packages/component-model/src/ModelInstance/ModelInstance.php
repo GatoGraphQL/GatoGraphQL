@@ -91,7 +91,7 @@ class ModelInstance implements ModelInstanceInterface
         $components[] = $this->__('route:', 'component-model') . $route;
 
         // Add the version, because otherwise there may be PHP errors happening from stale configuration that is not deleted, and still served, after a new version is deployed
-        $components[] = $this->__('version:', 'component-model') . $vars['version'];
+        $components[] = $this->__('version:', 'component-model') . $this->getApplicationInfo()->getVersion();
 
         // Other properties
         if ($format = $vars['format'] ?? null) {

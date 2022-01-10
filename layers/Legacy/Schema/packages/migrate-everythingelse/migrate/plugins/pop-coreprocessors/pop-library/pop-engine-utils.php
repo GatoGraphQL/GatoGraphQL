@@ -19,7 +19,7 @@ class PoPCore_ModuleManager_Utils
         /** @var MainContentModule */
         $mainContentModule = $instanceManager->getInstance(MainContentModule::class);
         $args = [
-            \PoP\ComponentModel\Constants\Params::VERSION => $vars['version'],
+            \PoP\ComponentModel\Constants\Params::VERSION => ApplicationInfoFacade::getInstance()->getVersion(),
             \PoP\ComponentModel\Constants\Params::OUTPUT => \PoP\ComponentModel\Constants\Outputs::JSON,
             ModuleFilterManager::URLPARAM_MODULEFILTER => $mainContentModule->getName(),
             \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => [

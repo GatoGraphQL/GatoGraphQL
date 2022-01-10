@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
@@ -22,7 +23,7 @@ class PoP_Module_RuntimeContentManager
     {
         // Add the version in the path, so it's easier to identify currently-needed files
         $vars = ApplicationState::getVars();
-        return POP_RUNTIMECONTENT_DIR.'/'.$vars['version'];
+        return POP_RUNTIMECONTENT_DIR.'/'.ApplicationInfoFacade::getInstance()->getVersion();
     }
 
     protected function getFileBaseURL()
@@ -32,7 +33,7 @@ class PoP_Module_RuntimeContentManager
         $vars = ApplicationState::getVars();
         return HooksAPIFacade::getInstance()->applyFilters(
             'PoP_Module_RuntimeContentManager:cache-baseurl',
-            POP_RUNTIMECONTENT_URL.'/'.$vars['version']
+            POP_RUNTIMECONTENT_URL.'/'.ApplicationInfoFacade::getInstance()->getVersion()
         );
     }
 

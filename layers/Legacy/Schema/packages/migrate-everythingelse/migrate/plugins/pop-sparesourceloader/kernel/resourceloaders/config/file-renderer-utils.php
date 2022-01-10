@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\File\AbstractFile;
@@ -8,9 +9,8 @@ class PoP_SPAResourceLoader_ConfigAddResources_FileRenderer extends \PoP\FileSto
     public function renderAndSave(AbstractFile $file): void
     {
         // Add the version param to the URL
-        $vars = ApplicationState::getVars();
         $fileurl = GeneralUtils::addQueryArgs([
-            'ver' => $vars['version'], 
+            'ver' => ApplicationInfoFacade::getInstance()->getVersion(), 
         ], $file->getFileurl());
 
         // Insert the current file URL to the generated resources file

@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\Facades\FileRendererFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -76,7 +77,7 @@ class PoP_UserLoginWebPlatform_Initialization
             global $popcore_userloggedinstyles_file;
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
                 $vars = ApplicationState::getVars();
-                $htmlcssplatformapi->registerStyle('pop-userlogin-webplatform-userloggedin', $popcore_userloggedinstyles_file->getFileurl(), array(), $vars['version']);
+                $htmlcssplatformapi->registerStyle('pop-userlogin-webplatform-userloggedin', $popcore_userloggedinstyles_file->getFileurl(), array(), ApplicationInfoFacade::getInstance()->getVersion());
                 $htmlcssplatformapi->enqueueStyle('pop-userlogin-webplatform-userloggedin');
             }
         }

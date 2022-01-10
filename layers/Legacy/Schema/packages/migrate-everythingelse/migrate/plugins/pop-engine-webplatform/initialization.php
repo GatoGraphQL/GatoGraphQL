@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\Configuration\Request;
@@ -192,7 +193,7 @@ class PoPWebPlatform_Initialization
             'INITIAL_URL' => $requestHelperService->getCurrentURL(), // Needed to always identify which was the first URL loaded
             'HOME_DOMAIN' => $homeurl,
             'ALLOWED_DOMAINS' => $allowed_domains,
-            'VERSION' => $vars['version'],
+            'VERSION' => ApplicationInfoFacade::getInstance()->getVersion(),
             'LOCALE' => $locale,
             'API_URLPARAMS' => $api_urlparams,
             'USE_PROGRESSIVEBOOTING' => (PoP_WebPlatform_ServerUtils::useProgressiveBooting() ? true : ''),

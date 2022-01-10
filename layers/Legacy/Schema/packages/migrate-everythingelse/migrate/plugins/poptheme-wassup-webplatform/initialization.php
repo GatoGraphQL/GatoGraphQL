@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\Facades\FileRendererFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -224,11 +225,11 @@ class PoP_ThemeWassupWebPlatform_Initialization
             global $popthemewassup_backgroundimage_file, $popthemewassup_feedthumb_file;
             $vars = ApplicationState::getVars();
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $htmlcssplatformapi->registerStyle('poptheme-wassup-backgroundimage', $popthemewassup_backgroundimage_file->getFileurl(), array(), $vars['version']);
+                $htmlcssplatformapi->registerStyle('poptheme-wassup-backgroundimage', $popthemewassup_backgroundimage_file->getFileurl(), array(), ApplicationInfoFacade::getInstance()->getVersion());
                 $htmlcssplatformapi->enqueueStyle('poptheme-wassup-backgroundimage');
             }
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $htmlcssplatformapi->registerStyle('poptheme-wassup-feedthumb', $popthemewassup_feedthumb_file->getFileurl(), array(), $vars['version']);
+                $htmlcssplatformapi->registerStyle('poptheme-wassup-feedthumb', $popthemewassup_feedthumb_file->getFileurl(), array(), ApplicationInfoFacade::getInstance()->getVersion());
                 $htmlcssplatformapi->enqueueStyle('poptheme-wassup-feedthumb');
             }
         }

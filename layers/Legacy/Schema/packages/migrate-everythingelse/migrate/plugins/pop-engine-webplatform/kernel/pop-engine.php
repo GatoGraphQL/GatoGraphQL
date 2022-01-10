@@ -3,6 +3,7 @@
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Modules\ModuleUtils;
@@ -320,7 +321,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     public function enqueueScripts()
     {
         $vars = ApplicationState::getVars();
-        $version = $vars['version'];
+        $version = ApplicationInfoFacade::getInstance()->getVersion();
         $cmswebplatformapi = \PoP\EngineWebPlatform\FunctionAPIFactory::getInstance();
 
         $script = 'pop';

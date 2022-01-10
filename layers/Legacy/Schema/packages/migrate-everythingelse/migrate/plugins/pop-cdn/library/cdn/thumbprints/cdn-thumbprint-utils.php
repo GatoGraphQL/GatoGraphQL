@@ -20,7 +20,7 @@ class PoP_CDN_Thumbprint_Utils
 
             // Add the version
             // $vars = ApplicationState::getVars();
-            // $url = GeneralUtils::addQueryArgs([POP_CDN_URLPARAM_VERSION => $vars['version']], $url);
+            // $url = GeneralUtils::addQueryArgs([POP_CDN_URLPARAM_VERSION => ApplicationInfoFacade::getInstance()->getVersion()], $url);
 
             // Add the thumbprints
             $thumbprints_value = array();

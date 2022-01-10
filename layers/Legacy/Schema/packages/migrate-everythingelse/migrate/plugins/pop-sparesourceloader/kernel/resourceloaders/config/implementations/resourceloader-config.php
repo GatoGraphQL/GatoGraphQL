@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
@@ -59,7 +60,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
             .'/'
             .$pop_sparesourceloader_natureformatcombinationresources_configfile->getVariableFilename('{0}', '{1}');
         $configFileURLPlaceholder = GeneralUtils::addQueryArgs([
-            'ver' => $vars['version'],
+            'ver' => ApplicationInfoFacade::getInstance()->getVersion(),
         ], $configFileURLPlaceholder);
         $configuration['$configFileURLPlaceholder'] = $configFileURLPlaceholder;
 

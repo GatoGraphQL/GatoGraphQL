@@ -42,12 +42,7 @@ class ComponentAppState extends AbstractComponentAppState
         $actions = isset($_REQUEST[Params::ACTIONS]) ?
             array_map('strtolower', $_REQUEST[Params::ACTIONS]) : [];
         $scheme = strtolower($_REQUEST[Params::SCHEME] ?? '');
-        // The version could possibly be set from outside
-        $appVersion = ApplicationInfoFacade::getInstance()->getVersion();
-        $version = Environment::enableVersionByParams() ?
-            ($_REQUEST[Params::VERSION] ?? $appVersion)
-            : $appVersion;
-
+        
         $output = strtolower($_REQUEST[Params::OUTPUT] ?? '');
         $outputs = [
             Outputs::HTML,
@@ -169,7 +164,6 @@ class ComponentAppState extends AbstractComponentAppState
                 'format' => $format,
                 'actions' => $actions,
                 'scheme' => $scheme,
-                'version' => $version,
                 'variables' => $variables,
                 'only-fieldname-as-outputkey' => false,
                 'namespace-types-and-interfaces' => $componentConfiguration->mustNamespaceTypes(),

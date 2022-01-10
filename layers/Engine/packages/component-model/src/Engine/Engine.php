@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\Root\App;
 use Exception;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\Component;
@@ -27,6 +27,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
@@ -37,13 +38,13 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
+use PoP\Root\App;
 use PoP\Root\Helpers\Methods;
 
 class Engine implements EngineInterface
@@ -117,6 +118,7 @@ class Engine implements EngineInterface
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?EntryModuleManagerInterface $entryModuleManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
+    private ?ApplicationInfoInterface $applicationInfo = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -226,6 +228,14 @@ class Engine implements EngineInterface
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+    }
+    final public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
+    {
+        $this->applicationInfo = $applicationInfo;
+    }
+    final protected function getApplicationInfo(): ApplicationInfoInterface
+    {
+        return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
     }
 
     public function getOutputData(): array
@@ -672,7 +682,7 @@ class Engine implements EngineInterface
         $meta = [];
         if ($this->addSiteMeta()) {
             $vars = ApplicationState::getVars();
-            $meta[Params::VERSION] = $vars['version'];
+            $meta[Params::VERSION] = $this->getApplicationInfo()->getVersion();
             $meta[Params::DATAOUTPUTMODE] = $vars['dataoutputmode'];
             $meta[Params::DATABASESOUTPUTMODE] = $vars['dboutputmode'];
 

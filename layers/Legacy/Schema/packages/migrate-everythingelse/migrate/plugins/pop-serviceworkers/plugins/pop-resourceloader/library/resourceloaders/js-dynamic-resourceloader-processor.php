@@ -27,7 +27,7 @@ class PoP_ServiceWorkers_DynamicJSResourceLoaderProcessor extends PoP_DynamicJSR
 
     // // return POP_SERVICEWORKERS_VERSION;
     //     $vars = ApplicationState::getVars();
-    //     return $vars['version'];
+    //     return ApplicationInfoFacade::getInstance()->getVersion();
     // }
     
     public function getDir(array $resource)
