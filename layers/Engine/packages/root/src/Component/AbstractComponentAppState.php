@@ -11,12 +11,6 @@ abstract class AbstractComponentAppState implements ComponentAppStateInterface
     ) {
     }
 
-    /**
-     * Once all properties by all Components have been set,
-     * have this second pass consolidate the state
-     *
-     * @param array<string,mixed> $state
-     */
     public function augment(array &$state): void
     {
     }
