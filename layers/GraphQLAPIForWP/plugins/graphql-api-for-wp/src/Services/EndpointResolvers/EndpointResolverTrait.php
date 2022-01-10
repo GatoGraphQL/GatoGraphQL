@@ -24,18 +24,19 @@ trait EndpointResolverTrait
      */
     protected function executeGraphQLQuery(): void
     {
-        /**
-         * Priority 1: Execute before VarsHookSet in the API package, to set-up the variables
-         * in $vars as soon as we knows if it's a singular post of this type.
-         * But after setting $vars['routing-state']['queried-object-id'], to get the current
-         * post ID from $vars instead of the global context
-         */
-        \add_action(
-            'ApplicationState:addVars',
-            [$this, 'addGraphQLVars'],
-            1,
-            1
-        );
+        // @todo Remove this code and the function below and everything stale
+        // /**
+        //  * Priority 1: Execute before VarsHookSet in the API package, to set-up the variables
+        //  * in $vars as soon as we knows if it's a singular post of this type.
+        //  * But after setting $vars['routing-state']['queried-object-id'], to get the current
+        //  * post ID from $vars instead of the global context
+        //  */
+        // \add_action(
+        //     'ApplicationState:addVars',
+        //     [$this, 'addGraphQLVars'],
+        //     1,
+        //     1
+        // );
         /**
          * Assign the single endpoint.
          * Execute last, to make sure it's not overriden RouteNatures::CUSTOMPOST

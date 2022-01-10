@@ -58,7 +58,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
      *
      * @return mixed[] Array with 2 elements: [$graphQLQuery, $graphQLVariables]
      */
-    protected function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array
+    public function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array
     {
         /**
          * Extract the query from the post (or from its parents), and set it in $vars
@@ -67,37 +67,9 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     }
 
     /**
-     * Check if requesting the single post of this CPT and, in this case, set the request with the needed API params
-     *
-     * @param array<array> $vars_in_array
-     */
-    public function addGraphQLVars(array $vars_in_array): void
-    {
-        [&$vars] = $vars_in_array;
-
-        // The Persisted Query is also standard GraphQL
-        $this->getGraphQLRequestVarsHooks()->setStandardGraphQLVars($vars);
-
-        // Remove the VarsHookSet from the GraphQLRequest, so it doesn't process the GraphQL query
-        // Otherwise it will add error "The query in the body is empty"
-        /**
-         * @var callable
-         */
-        $action = [$this->getGraphQLRequestVarsHooks(), 'addVars'];
-        \remove_action(
-            'ApplicationState:addVars',
-            $action,
-            20
-        );
-
-        // Execute the original logic
-        parent::addGraphQLVars($vars_in_array);
-    }
-
-    /**
      * Indicate if the GraphQL variables must override the URL params
      */
-    protected function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool
+    public function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool
     {
         if ($customPost === null) {
             return parent::doURLParamsOverrideGraphQLVariables($customPost);

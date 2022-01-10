@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\State;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter;
 
-class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuterAppStateProvider extends AbstractEndpointExecuterAppStateProvider
+class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuterAppStateProvider extends AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider
 {
     private ?PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter $persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter = null;
 
@@ -23,5 +23,12 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuterAppStateProvid
     protected function getEndpointExecuter(): EndpointExecuterInterface
     {
         return $this->getPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter();
+    }
+
+    public function initialize(array &$state): void
+    {
+        parent::initialize($state);
+
+        $state['standard-graphql'] = true;
     }
 }
