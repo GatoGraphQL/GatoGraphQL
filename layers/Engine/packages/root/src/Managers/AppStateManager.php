@@ -18,16 +18,6 @@ class AppStateManager
      */
     protected array $state;
 
-    /**
-     * Called by the AppLoader to initalize the state
-     *
-     * @param array<string,mixed> $state
-     */
-    public function initializeState(array $state): void
-    {
-        $this->state = $state;
-    }
-
     public function set(string $key, mixed $value): void
     {
         $this->state[$key] = $value;
@@ -44,22 +34,25 @@ class AppStateManager
     }
 
     /**
+     * Called by the AppLoader to initalize the state.
+     *
      * Initialize application state
      *
      * @param array<string,mixed> $state
      */
-    public function initializeAppState(array &$state): void
+    public function initializeAppState(): void
     {
+        $this->state = [];
         $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
 
         // First pass: initialize
         foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
-            $appStateProvider->initialize($state);
+            $appStateProvider->initialize($this->state);
         }
 
         // Second pass: consolidate
         foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
-            $appStateProvider->augment($state);
+            $appStateProvider->augment($this->state);
         }
     }
 }

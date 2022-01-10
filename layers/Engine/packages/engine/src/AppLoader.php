@@ -39,12 +39,12 @@ class AppLoader extends RootAppLoader
      *
      * @param array<string,mixed> $state
      */
-    protected function initializeAppState(array &$state): void
+    protected function initializeAppState(): void
     {
         $hooksAPI = HooksAPIFacade::getInstance();
         $hooksAPI->addAction(
             'popcms:boot',
-            fn() => App::getAppStateManager()->initializeAppState($state),
+            fn() => App::getAppStateManager()->initializeAppState(),
             25
         );
     }
