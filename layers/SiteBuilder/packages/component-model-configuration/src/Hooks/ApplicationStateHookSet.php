@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\Hooks;
 
 use PoP\BasicService\AbstractHookSet;
-use PoP\ComponentModel\Constants\Values;
+use PoP\ConfigurationComponentModel\Constants\Values;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ConfigurationComponentModel\Constants\Params;

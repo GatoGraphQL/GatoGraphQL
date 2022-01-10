@@ -128,7 +128,7 @@ class PoP_ResourceLoaderProcessorUtils {
                     foreach ($vars_properties as $vars_properties_set) {
                         $conditions = $vars_properties_set['conditions'];
                         // Add the format under the return variable
-                        $format = $conditions['format'] ?? \PoP\ComponentModel\Constants\Values::DEFAULT;
+                        $format = $conditions['format'] ?? \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT;
                         if (!in_array($format, $route_formats[$nature][$route])) {
                             $route_formats[$nature][$route][] = $format;
                         }
@@ -176,7 +176,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                         // If this tab is the default one, an entry with no tab must also be created
                         // if ($route == RequestUtils::getNatureDefaultPage($nature)) {
-                        if ($format == \PoP\ComponentModel\Constants\Values::DEFAULT) {
+                        if ($format == \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT) {
                             $item_options['is-default-route'] = true;
                         }
                     }
@@ -312,7 +312,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // Obtain the key under which to add the resources, which is a combination of components 'format', 'route' and 'target'
         // This code is replicated in function `loadResources` in resourceloader.js
         $params = array();
-        $format = $components['format'] ?? ($loadingSite ? '' : \PoP\ComponentModel\Constants\Values::DEFAULT);
+        $format = $components['format'] ?? ($loadingSite ? '' : \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT);
         $route = $components['route'];
 
         // Targets special cases: certain formats (eg: Navigator) are used only from a corresponding target
@@ -335,7 +335,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // instead of "{}", which may make the JS produce an error
                 $target = $format_targets[$format];
                 $duplicate_as_default_format = true;
-                // $format = \PoP\ComponentModel\Constants\Values::DEFAULT;
+                // $format = \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT;
             } else {
                 $target = \PoP\ConfigurationComponentModel\Constants\Targets::MAIN;
             }
@@ -619,7 +619,7 @@ class PoP_ResourceLoaderProcessorUtils {
             if ($duplicate_as_default_format) {
 
                 $defaultformat_params = $params;
-                $defaultformat_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.\PoP\ComponentModel\Constants\Values::DEFAULT;
+                $defaultformat_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.\PoP\ConfigurationComponentModel\Constants\Values::DEFAULT;
                 $defaultformat_key = implode(GD_SEPARATOR_RESOURCELOADER, $defaultformat_params);
 
                 if (in_array($nature, $flat_natures)) {
@@ -638,7 +638,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                     // If also duplicate, add the same entry without the tab
                     $defaultformat_noroute_params = $noroute_params;
-                    $defaultformat_noroute_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.\PoP\ComponentModel\Constants\Values::DEFAULT;
+                    $defaultformat_noroute_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.\PoP\ConfigurationComponentModel\Constants\Values::DEFAULT;
                     $defaultformat_noroute_key = implode(GD_SEPARATOR_RESOURCELOADER, $defaultformat_noroute_params);
 
                     if (in_array($nature, $flat_natures)) {
