@@ -9,10 +9,6 @@ use PoP\Root\Services\ServiceTrait;
 abstract class AbstractAppStateProvider implements AppStateProviderInterface
 {
     use ServiceTrait;
-    
-    public function __construct()
-    {
-    }
 
     public function augment(array &$state): void
     {
