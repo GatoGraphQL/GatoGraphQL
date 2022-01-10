@@ -28,7 +28,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         parent::processAndGenerateData();
 
         // Validate that the strata includes the required stratum
-        if (!in_array(POP_STRATUM_CONFIGURATION, \PoP\Root\App::getState('strata'))) {
+        if (!in_array(POP_STRATUM_CONFIGURATION, App::getState('strata'))) {
             return;
         }
 
@@ -36,7 +36,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         $module = $this->getEntryModule();
 
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
-        $dataoutputitems = \PoP\Root\App::getState('dataoutputitems');
+        $dataoutputitems = App::getState('dataoutputitems');
 
         $data = [];
         if (in_array(DataOutputItems::MODULESETTINGS, $dataoutputitems)) {
@@ -65,8 +65,8 @@ class Engine extends UpstreamEngine implements EngineInterface
         }
 
         // From the state we know if to process static/staful content or both
-        $datasources = \PoP\Root\App::getState('datasources');
-        $dataoutputmode = \PoP\Root\App::getState('dataoutputmode');
+        $datasources = App::getState('datasources');
+        $dataoutputmode = App::getState('dataoutputmode');
 
         // First check if there's a cache stored
         $immutable_settings = $mutableonmodel_settings = null;
@@ -147,11 +147,11 @@ class Engine extends UpstreamEngine implements EngineInterface
     {
         $meta = parent::getSiteMeta();
         if ($this->addSiteMeta()) {
-            if (\PoP\Root\App::getState('stratum')) {
-                $meta[Params::STRATUM] = \PoP\Root\App::getState('stratum');
+            if (App::getState('stratum')) {
+                $meta[Params::STRATUM] = App::getState('stratum');
             }
-            if (\PoP\Root\App::getState('format')) {
-                $meta[Params::SETTINGSFORMAT] = \PoP\Root\App::getState('format');
+            if (App::getState('format')) {
+                $meta[Params::SETTINGSFORMAT] = App::getState('format');
             }
         }
         return $this->getHooksAPI()->applyFilters(

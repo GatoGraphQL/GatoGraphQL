@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateAccessControl\Hooks;
 
+use PoP\Root\App;
 use PoP\AccessControl\Hooks\AbstractAccessControlForFieldsInPrivateSchemaHookSet;
 use PoP\ComponentModel\State\ApplicationState;
 
@@ -19,6 +20,6 @@ abstract class AbstractDisableFieldsIfUserIsLoggedInAccessControlForFieldsInPriv
         /**
          * If the user is logged in, then do not register field names
          */
-        return \PoP\Root\App::getState('is-user-logged-in');
+        return App::getState('is-user-logged-in');
     }
 }

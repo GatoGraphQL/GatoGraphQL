@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Configuration;
 
+use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Configuration\Request as UpstreamRequest;
 
 class Request extends UpstreamRequest
@@ -16,7 +17,7 @@ class Request extends UpstreamRequest
         return array_merge(
             parent::getAllDataOutputItems(),
             [
-                \PoP\ConfigurationComponentModel\Constants\DataOutputItems::MODULESETTINGS,
+                DataOutputItems::MODULESETTINGS,
             ]
         );
     }
@@ -36,7 +37,7 @@ class Request extends UpstreamRequest
             ),
             1,
             [
-                \PoP\ConfigurationComponentModel\Constants\DataOutputItems::MODULESETTINGS,
+                DataOutputItems::MODULESETTINGS,
             ]
         );
         return $defaultDataOutputItems;

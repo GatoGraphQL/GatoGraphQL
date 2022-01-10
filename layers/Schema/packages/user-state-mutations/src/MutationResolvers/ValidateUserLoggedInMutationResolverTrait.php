@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\TranslationAPIInterface;
 
@@ -18,7 +19,7 @@ trait ValidateUserLoggedInMutationResolverTrait
      */
     protected function validateUserIsLoggedIn(array &$errors): void
     {
-        if (!\PoP\Root\App::getState('is-user-logged-in')) {
+        if (!App::getState('is-user-logged-in')) {
             $errors[] = $this->getUserNotLoggedInErrorMessage();
         }
     }

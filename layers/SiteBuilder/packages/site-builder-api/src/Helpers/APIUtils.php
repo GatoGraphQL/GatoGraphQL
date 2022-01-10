@@ -2,6 +2,7 @@
 
 namespace PoP\SiteBuilderAPI\Helpers;
 
+use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
@@ -32,7 +33,7 @@ class APIUtils
             ),
         ], $url);
 
-        if ($mangled = \PoP\Root\App::getState('mangled')) {
+        if ($mangled = App::getState('mangled')) {
             $endpoint = GeneralUtils::addQueryArgs(
                 [
                     Request::URLPARAM_MANGLED => $mangled,

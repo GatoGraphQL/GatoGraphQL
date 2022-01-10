@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\CheckpointProcessors;
 
+use PoP\Root\App;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\State\ApplicationState;
@@ -25,13 +26,13 @@ class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
     {
         switch ($checkpoint[1]) {
             case self::USERLOGGEDIN:
-                if (!\PoP\Root\App::getState('is-user-logged-in')) {
+                if (!App::getState('is-user-logged-in')) {
                     return new Error('usernotloggedin');
                 }
                 break;
 
             case self::USERNOTLOGGEDIN:
-                if (\PoP\Root\App::getState('is-user-logged-in')) {
+                if (App::getState('is-user-logged-in')) {
                     return new Error('userloggedin');
                 }
                 break;

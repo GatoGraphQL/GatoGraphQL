@@ -34,8 +34,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 FieldDataloadModuleProcessor::class,
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER,
                 [
-                    'fields' => !empty(\PoP\Root\App::getState('query')) ?
-                        \PoP\Root\App::getState('query') :
+                    'fields' => !empty(App::getState('query')) ?
+                        App::getState('query') :
                         $this->getRESTFields()
                 ]
             ],
@@ -64,8 +64,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                     FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST
                     : FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
                 [
-                    'fields' => !empty(\PoP\Root\App::getState('query')) ?
-                        \PoP\Root\App::getState('query') :
+                    'fields' => !empty(App::getState('query')) ?
+                        App::getState('query') :
                         $this->getRESTFields()
                 ]
             ],

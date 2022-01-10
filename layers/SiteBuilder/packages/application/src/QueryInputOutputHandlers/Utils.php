@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Application\QueryInputOutputHandlers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
@@ -19,7 +20,7 @@ class Utils
         }
 
         // Do not announce to stop loading when doing loadLatest
-        if (\PoP\Root\App::hasState('loading-latest') && \PoP\Root\App::getState('loading-latest')) {
+        if (App::hasState('loading-latest') && App::getState('loading-latest')) {
             return false;
         }
 

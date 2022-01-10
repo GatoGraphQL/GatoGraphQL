@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolverBridges;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
@@ -35,7 +36,7 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
     public function getFormData(): array
     {
         $form_data = array(
-            'user_id' => \PoP\Root\App::getState('current-user-id'),
+            'user_id' => App::getState('current-user-id'),
         );
 
         return $form_data;

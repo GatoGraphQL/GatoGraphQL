@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\EditPosts\FunctionAPIFactory;
 use PoPSchema\CustomPostMeta\Utils;
@@ -65,7 +66,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         // Check if there is already an existing stance
         $query = array(
             'status' => array(CustomPostStatus::PUBLISH, CustomPostStatus::DRAFT),
-            'authors' => [\PoP\Root\App::getState('current-user-id')],
+            'authors' => [App::getState('current-user-id')],
         );
         if ($referenced_id) {
             \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $referenced_id);

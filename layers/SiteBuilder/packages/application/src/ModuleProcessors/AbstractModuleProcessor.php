@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Application\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\Application\Constants\Actions;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\State\ApplicationState;
@@ -77,7 +78,7 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
         $ret[DataloadingConstants::SKIPDATALOAD] =
             (
                 $ret[DataloadingConstants::LAZYLOAD] &&
-                !in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'))
+                !in_array(Actions::LOADLAZY, App::getState('actions'))
             ) ||
             $ret[DataloadingConstants::EXTERNALLOAD] ||
             $this->getProp($module, $props, 'skip-data-load');

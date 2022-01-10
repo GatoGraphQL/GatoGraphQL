@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\UserMeta\Utils;
@@ -14,7 +15,7 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
     {
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
-            $user_id = \PoP\Root\App::getState('current-user-id');
+            $user_id = App::getState('current-user-id');
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user has not already subscribed to this tag
@@ -42,7 +43,7 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
 
     protected function update($form_data): string | int
     {
-        $user_id = \PoP\Root\App::getState('current-user-id');
+        $user_id = App::getState('current-user-id');
         $target_id = $form_data['target_id'];
 
         // Update value

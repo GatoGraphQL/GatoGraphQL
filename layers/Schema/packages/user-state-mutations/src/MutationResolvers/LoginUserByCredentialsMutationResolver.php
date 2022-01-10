@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -46,8 +47,8 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Please supply your password', 'user-state-mutations');
         }
 
-        if (\PoP\Root\App::getState('is-user-logged-in')) {
-            $errors[] = $this->getUserAlreadyLoggedInErrorMessage(\PoP\Root\App::getState('current-user-id'));
+        if (App::getState('is-user-logged-in')) {
+            $errors[] = $this->getUserAlreadyLoggedInErrorMessage(App::getState('current-user-id'));
         }
         return $errors;
     }

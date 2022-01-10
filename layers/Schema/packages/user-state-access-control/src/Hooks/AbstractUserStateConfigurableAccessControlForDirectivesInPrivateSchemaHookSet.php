@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateAccessControl\Hooks;
 
+use PoP\Root\App;
 use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\UserStateAccessControl\Services\AccessControlGroups;
@@ -12,7 +13,7 @@ abstract class AbstractUserStateConfigurableAccessControlForDirectivesInPrivateS
 {
     protected function enabled(): bool
     {
-        $isUserLoggedIn = \PoP\Root\App::getState('is-user-logged-in');
+        $isUserLoggedIn = App::getState('is-user-logged-in');
         return parent::enabled() && $this->enableBasedOnUserState($isUserLoggedIn);
     }
 

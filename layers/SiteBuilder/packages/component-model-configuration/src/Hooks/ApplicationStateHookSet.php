@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Hooks;
 
+use PoP\Root\App;
 use PoP\BasicService\AbstractHookSet;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
@@ -20,10 +21,10 @@ class ApplicationStateHookSet extends AbstractHookSet
 
     public function maybeAddComponent(array $components): array
     {
-        if ($target = \PoP\Root\App::getState('target')) {
+        if ($target = App::getState('target')) {
             $components[] = $this->__('target:', 'component-model') . $target;
         }
-        if ($format = \PoP\Root\App::getState('format')) {
+        if ($format = App::getState('format')) {
             $components[] = $this->__('format:', 'component-model') . $format;
         }
 

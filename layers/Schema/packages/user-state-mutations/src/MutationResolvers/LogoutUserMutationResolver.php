@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
@@ -31,7 +32,7 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
     }
     public function executeMutation(array $form_data): mixed
     {
-        $user_id = \PoP\Root\App::getState('current-user-id');
+        $user_id = App::getState('current-user-id');
 
         $this->getUserStateTypeMutationAPI()->logout();
 

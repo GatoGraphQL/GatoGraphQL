@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\SiteBuilderAPI\Hooks;
 
+use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\BasicService\AbstractHookSet;
@@ -20,7 +21,7 @@ class ApplicationStateHookSet extends AbstractHookSet
 
     public function maybeAddComponent(array $components): array
     {
-        if ($stratum = \PoP\Root\App::getState('stratum')) {
+        if ($stratum = App::getState('stratum')) {
             $components[] = $this->__('stratum:', 'component-model') . $stratum;
         }
 
