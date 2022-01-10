@@ -29,29 +29,12 @@ class HeadModuleHookSet extends AbstractHookSet
             ModelInstance::HOOK_COMPONENTSFROMVARS_RESULT,
             [$this, 'maybeAddComponent']
         );
-        $this->getHooksAPI()->addAction(
-            'ApplicationState:addVars',
-            [$this, 'addVars'],
-            10,
-            1
-        );
     }
-    /**
-     * @param array<array> $vars_in_array
-     */
-    public function addVars(array $vars_in_array): void
-    {
-        [&$vars] = $vars_in_array;
-        if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->headModule->getName()) {
-            if ($headmodule = $_REQUEST[HeadModule::URLPARAM_HEADMODULE] ?? null) {
-                $vars['headmodule'] = ModuleUtils::getModuleFromOutputName($headmodule);
-            }
-        }
-    }
+    
     public function maybeAddComponent($components)
     {
         $vars = ApplicationState::getVars();
-        if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->headModule->getName()) {
+        if (isset($vars['modulefilter']) && $vars['modulefilter'] === $this->headModule->getName()) {
             if ($headmodule = $vars['headmodule']) {
                 $components[] = $this->getTranslationAPI()->__('head module:', 'engine') . ModuleUtils::getModuleFullName($headmodule);
             }
