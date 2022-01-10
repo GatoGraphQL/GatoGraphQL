@@ -6,3 +6,6 @@ services:
 
     PoP\Root\Instances\InstanceManagerInterface:
         class: \PoP\Root\Instances\InstanceManager
+
+    PoP\Root\Registries\AppStateProviderRegistryInterface:
+        class: \PoP\Root\Registries\AppStateProviderRegistry
