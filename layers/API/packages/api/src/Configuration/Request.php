@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\API\Configuration;
 
+use PoP\API\Schema\QueryInputs;
+
 class Request
 {
     public const URLPARAM_USE_NAMESPACE = 'use_namespace';
@@ -21,5 +23,10 @@ class Request
             );
         }
         return null;
+    }
+
+    public static function getQuery(): string
+    {
+        return $_REQUEST[QueryInputs::QUERY] ?? '';
     }
 }
