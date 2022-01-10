@@ -14,6 +14,7 @@ abstract class AbstractComponent implements ComponentInterface
     private ?bool $enabled = null;
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
     protected ?ComponentInfoInterface $componentInfo = null;
+    protected ?ComponentAppStateInterface $componentAppState = null;
 
     /**
      * Enable each component to set default configuration for
@@ -160,6 +161,35 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
+     * Have the components initialize their state on a global, shared way
+     *
+     * @param array<string,mixed> $state
+     */
+    public function initializeAppState(array &$state): void
+    {
+        $componentAppStateClass = $this->getComponentAppStateClass();
+        if ($componentAppStateClass === null) {
+            return;
+        }
+        $this->componentAppState = new $componentAppStateClass($this);
+        $this->componentAppState->initialize($state);
+    }
+
+    /**
+     * Once all properties by all Components have been set,
+     * have this second pass consolidate the state
+     *
+     * @param array<string,mixed> $state
+     */
+    public function augmentAppState(array &$state): void
+    {
+        if ($this->componentAppState === null) {
+            return;
+        }
+        $this->componentAppState->augment($state);
+    }
+
+    /**
      * Indicates if the Component is enabled
      */
     public function isEnabled(): bool
@@ -208,6 +238,14 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
+     * ComponentAppState class for the Component
+     */
+    public function getAppState(): ?ComponentAppStateInterface
+    {
+        return $this->componentAppState;
+    }
+
+    /**
      * @param array<string,mixed> $configuration
      */
     protected function initializeConfiguration(array $configuration): void
@@ -252,5 +290,18 @@ abstract class AbstractComponent implements ComponentInterface
             return null;
         }
         return $componentInfoClass;
+    }
+
+    /**
+     * ComponentAppState class for the Component
+     */
+    protected function getComponentAppStateClass(): ?string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        $componentAppStateClass = $classNamespace . '\\ComponentAppState';
+        if (!class_exists($componentAppStateClass)) {
+            return null;
+        }
+        return $componentAppStateClass;
     }
 }
