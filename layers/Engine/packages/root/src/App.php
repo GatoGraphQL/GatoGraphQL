@@ -143,8 +143,8 @@ class App implements AppInterface
     /**
      * Shortcut function.
      */
-    final public static function getState(string $key): mixed
+    final public static function getState(string|array $keyOrPath): mixed
     {
-        return self::getAppStateManager()->get($key);
+        return self::getAppStateManager()->get($keyOrPath);
     }
 }
