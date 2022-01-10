@@ -10,11 +10,11 @@ use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\Root\App;
-use PoP\Root\Component\AbstractComponentAppState;
+use PoP\Root\State\AbstractAppStateProvider;
 use PoP\Routing\Facades\RoutingManagerFacade;
 use PoP\Routing\RouteNatures;
 
-class ComponentAppState extends AbstractComponentAppState
+class ComponentAppState extends AbstractAppStateProvider
 {
     public function initialize(array &$state): void
     {

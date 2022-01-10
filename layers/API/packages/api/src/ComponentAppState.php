@@ -16,9 +16,9 @@ use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\Root\App;
-use PoP\Root\Component\AbstractComponentAppState;
+use PoP\Root\State\AbstractAppStateProvider;
 
-class ComponentAppState extends AbstractComponentAppState
+class ComponentAppState extends AbstractAppStateProvider
 {
     public function initialize(array &$state): void
     {

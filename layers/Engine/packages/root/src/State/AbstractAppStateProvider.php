@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\Component;
+namespace PoP\Root\State;
 
-abstract class AbstractComponentAppState implements AppStateProviderInterface
+abstract class AbstractAppStateProvider implements AppStateProviderInterface
 {
     public function __construct(
         protected ComponentInterface $component
