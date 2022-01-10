@@ -16,58 +16,43 @@ use PoP\Routing\RouteNatures;
 
 class ComponentAppState extends AbstractComponentAppState
 {
-    /**
-     * Have the Component set its own state, accessible for all Components in the App
-     *
-     * @param array<string,mixed> $state
-     */
     public function initialize(array &$state): void
     {
+        $routingManager = RoutingManagerFacade::getInstance();
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-
-        // By default, get the variables from the request
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        $routingManager = RoutingManagerFacade::getInstance();
-        $state = array_merge(
-            $state,
-            [
-                'nature' => $routingManager->getCurrentNature(),
-                'route' => $routingManager->getCurrentRoute(),
-                'output' => Request::getOutput(),
-                'modulefilter' => $modulefilter_manager->getSelectedModuleFilterName(),
-                'actionpath' => Request::getActionPath(),
-                'dataoutputitems' => Request::getDataOutputItems(),
-                'datasources' => Request::getDataSourceSelector(),
-                'datastructure' => Request::getDataStructure(),
-                'dataoutputmode' => Request::getDataOutputMode(),
-                'dboutputmode' => Request::getDBOutputMode(),
-                'mangled' => Request::getMangledValue(),
-                'actions' => Request::getActions(),
-                'scheme' => Request::getScheme(),
-                'variables' => $fieldQueryInterpreter->getVariablesFromRequest(),
-                'only-fieldname-as-outputkey' => false,
-                'namespace-types-and-interfaces' => $componentConfiguration->mustNamespaceTypes(),
-                'version-constraint' => Request::getVersionConstraint(),
-                'field-version-constraints' => Request::getVersionConstraintsForFields(),
-                'directive-version-constraints' => Request::getVersionConstraintsForDirectives(),
-                // By default, mutations are always enabled. Can be changed for the API
-                'are-mutations-enabled' => true,
-            ]
-        );
+
+        $state['nature'] = $routingManager->getCurrentNature();
+        $state['route'] = $routingManager->getCurrentRoute();
+        $state['output'] = Request::getOutput();
+        $state['modulefilter'] = $modulefilter_manager->getSelectedModuleFilterName();
+        $state['actionpath'] = Request::getActionPath();
+        $state['dataoutputitems'] = Request::getDataOutputItems();
+        $state['datasources'] = Request::getDataSourceSelector();
+        $state['datastructure'] = Request::getDataStructure();
+        $state['dataoutputmode'] = Request::getDataOutputMode();
+        $state['dboutputmode'] = Request::getDBOutputMode();
+        $state['mangled'] = Request::getMangledValue();
+        $state['actions'] = Request::getActions();
+        $state['scheme'] = Request::getScheme();
+        
+        // By default, get the variables from the request
+        $state['variables'] = $fieldQueryInterpreter->getVariablesFromRequest();
+        $state['only-fieldname-as-outputkey'] = false;
+        $state['namespace-types-and-interfaces'] = $componentConfiguration->mustNamespaceTypes();
+        $state['version-constraint'] = Request::getVersionConstraint();
+        $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
+        $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
+        
+        // By default, mutations are always enabled. Can be changed for the API
+        $state['are-mutations-enabled'] = true;
 
         // Set the routing state (eg: PoP Queried Object can add its information)
         $state['routing-state'] = [];
     }
 
-    /**
-     * Once all properties by all Components have been set,
-     * have this second pass consolidate the state
-     *
-     * @param array<string,mixed> $state
-     */
     public function augment(array &$state): void
     {
         $nature = $state['nature'];
