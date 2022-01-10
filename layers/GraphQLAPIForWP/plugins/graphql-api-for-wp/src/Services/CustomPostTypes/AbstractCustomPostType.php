@@ -239,7 +239,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                  */
                 $post = \get_post($post_id);
                 if (!is_null($post)) {
-                    echo $this->getCptUtils()->getCustomPostDescription($post);
+                    echo $this->getCPTUtils()->getCustomPostDescription($post);
                 }
                 break;
         }
@@ -311,7 +311,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $customPost = \PoP\Root\App::getState(['routing', 'queried-object']);
             // Make sure there is a post (eg: it has not been deleted)
             if ($customPost !== null) {
-                if ($excerpt = $this->getCptUtils()->getCustomPostDescription($customPost)) {
+                if ($excerpt = $this->getCPTUtils()->getCustomPostDescription($customPost)) {
                     $content = \sprintf(
                         \__('<p class="%s"><strong>Description: </strong>%s</p>'),
                         $this->getAlignClassName(),
