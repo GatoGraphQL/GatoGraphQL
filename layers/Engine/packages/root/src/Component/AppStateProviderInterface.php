@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Component;
 
-interface ComponentAppStateInterface
+interface AppStateProviderInterface
 {
     /**
      * Have the Component set its own state, accessible for all Components in the App

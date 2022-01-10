@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\Root\Registries;
 
-use PoP\Root\Component\ComponentAppStateInterface;
+use PoP\Root\Component\AppStateProviderInterface;
 
 interface AccessControlRuleBlockRegistryInterface
 {
-    public function addAppStateProvider(ComponentAppStateInterface $appStateProvider): void;
+    public function addAppStateProvider(AppStateProviderInterface $appStateProvider): void;
     /**
-     * @return ComponentAppStateInterface[]
+     * @return AppStateProviderInterface[]
      */
     public function getAppStateProviders(): array;
 }

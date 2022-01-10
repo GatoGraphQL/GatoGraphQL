@@ -14,7 +14,7 @@ abstract class AbstractComponent implements ComponentInterface
     private ?bool $enabled = null;
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
     protected ?ComponentInfoInterface $componentInfo = null;
-    protected ?ComponentAppStateInterface $componentAppState = null;
+    protected ?AppStateProviderInterface $componentAppState = null;
 
     /**
      * Enable each component to set default configuration for
@@ -239,7 +239,7 @@ abstract class AbstractComponent implements ComponentInterface
     /**
      * ComponentAppState class for the Component
      */
-    public function getAppState(): ?ComponentAppStateInterface
+    public function getAppState(): ?AppStateProviderInterface
     {
         return $this->componentAppState;
     }
@@ -296,7 +296,7 @@ abstract class AbstractComponent implements ComponentInterface
      *
      * @param array<string,mixed> $state
      */
-    protected function getComponentAppState(): ?ComponentAppStateInterface
+    protected function getComponentAppState(): ?AppStateProviderInterface
     {
         $componentAppStateClass = $this->getComponentAppStateClass();
         if ($componentAppStateClass === null) {

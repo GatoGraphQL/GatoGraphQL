@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace PoP\Root\Registries;
 
-use PoP\Root\Component\ComponentAppStateInterface;
+use PoP\Root\Component\AppStateProviderInterface;
 
 class AppStateProviderRegistry implements AppStateProviderRegistryInterface
 {
     /**
-     * @var ComponentAppStateInterface[]
+     * @var AppStateProviderInterface[]
      */
     protected array $appStateProviders = [];
 
-    public function addAppStateProvider(ComponentAppStateInterface $appStateProvider): void
+    public function addAppStateProvider(AppStateProviderInterface $appStateProvider): void
     {
         $this->appStateProviders[] = $appStateProvider;
     }
     /**
-     * @return ComponentAppStateInterface[]
+     * @return AppStateProviderInterface[]
      */
     public function getAppStateProviders(): array
     {
