@@ -354,20 +354,19 @@ class Engine implements EngineInterface
 
             // To obtain the nature for each URI, we use a hack: change the current URI and create a new WP object, which will process the query_vars and from there obtain the nature
             // First make a backup of the current URI to set it again later
-            $vars = &ApplicationState::$vars;
-            $current_route = $vars['route'];
+            $currentRoute = App::getState('route');
 
             // Process each extra URI, and merge its results with all others
             foreach ($extra_routes as $route) {
                 // Reset $vars so that it gets created anew
-                $vars['route'] = $route;
+                App::getAppStateManager()->override('route', $route);
 
                 // Process the request with the new $vars and merge it with all other results
                 $this->processAndGenerateData();
             }
 
             // Set the previous values back
-            $vars['route'] = $current_route;
+            App::getAppStateManager()->override('route', $currentRoute);
         }
 
         // Add session/site meta

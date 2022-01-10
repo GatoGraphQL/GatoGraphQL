@@ -53,6 +53,14 @@ class AppStateManager
         return $this->state;
     }
 
+    /**
+     * To be called by Engine. Use with care!
+     */
+    public function override(string $key, mixed $value): void
+    {
+        $this->state[$key] = $value;
+    }
+
     // @todo Check if they are needed
     // public function set(string $key, mixed $value): void
     // {
