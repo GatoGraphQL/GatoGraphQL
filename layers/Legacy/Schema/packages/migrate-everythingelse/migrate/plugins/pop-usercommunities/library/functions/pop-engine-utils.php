@@ -44,6 +44,7 @@ class PoP_URE_Engine_Hooks
     }
 
     /**
+     * @todo Migrate to AppStateProvider
      * @param array<array> $vars_in_array
      */
     public function augmentVarsProperties(array $vars_in_array): void
