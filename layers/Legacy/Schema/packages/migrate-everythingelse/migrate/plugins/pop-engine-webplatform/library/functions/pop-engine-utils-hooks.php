@@ -18,8 +18,8 @@ class PoP_WebPlatformEngine_UtilsHooks
             // Comment Leo 19/11/2017: page ID POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL must be set at this plugin level, not on pop-serviceworkers
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
             $vars = &$vars_in_array[0];
-            \PoP\Root\App::getState('nature') = RouteNatures::STANDARD;//PageRouteNatures::PAGE;
-            \PoP\Root\App::getState('route') = POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL;
+            $vars['nature'] = RouteNatures::STANDARD;//PageRouteNatures::PAGE;
+            $vars['route'] = POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL;
         }
     }
     public static function getQueriedObject(array $queriedObjectList)

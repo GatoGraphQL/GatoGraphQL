@@ -100,8 +100,8 @@ trait EndpointResolverTrait
         // Indicate it is an API, of type GraphQL. Just by doing is, class
         // \GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet will process the GraphQL request
         [&$vars] = $vars_in_array;
-        \PoP\Root\App::getState('scheme') = APISchemes::API;
-        \PoP\Root\App::getState('datastructure') = $this->getGraphQLDataStructureFormatter()->getName();
+        $vars['scheme'] = APISchemes::API;
+        $vars['datastructure'] = $this->getGraphQLDataStructureFormatter()->getName();
 
         /**
          * Enable the AdminEndpointResolver to not load the query,
@@ -130,13 +130,13 @@ trait EndpointResolverTrait
             // But this behavior can be overriden for the persisted query,
             // by setting "Accept Variables as URL Params" => false
             // When editing in the editor, 'queried-object' will be null, and that's OK
-            \PoP\Root\App::getState('variables') = $this->doURLParamsOverrideGraphQLVariables(\PoP\Root\App::getState(['routing', 'queried-object'])) ?
+            $vars['variables'] = $this->doURLParamsOverrideGraphQLVariables(\PoP\Root\App::getState(['routing', 'queried-object'])) ?
                 array_merge(
                     $graphQLVariables,
-                    \PoP\Root\App::getState('variables') ?? []
+                    $vars['variables'] ?? []
                 ) :
                 array_merge(
-                    \PoP\Root\App::getState('variables') ?? [],
+                    $vars['variables'] ?? [],
                     $graphQLVariables
                 );
         }

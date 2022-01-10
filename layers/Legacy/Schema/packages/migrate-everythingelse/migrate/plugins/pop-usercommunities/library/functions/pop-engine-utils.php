@@ -26,7 +26,7 @@ class PoP_URE_Engine_Hooks
     public function addVars(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
-        if (\PoP\Root\App::getState('nature') == UserRouteNatures::USER) {
+        if ($vars['nature'] == UserRouteNatures::USER) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
                 $source = $_REQUEST[GD_URLPARAM_URECONTENTSOURCE] ?? null;
@@ -38,7 +38,7 @@ class PoP_URE_Engine_Hooks
                     $source = gdUreGetDefaultContentsource();
                 }
 
-                \PoP\Root\App::getState('source') = $source;
+                $vars['source'] = $source;
             }
         }
     }
@@ -50,9 +50,9 @@ class PoP_URE_Engine_Hooks
     public function augmentVarsProperties(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
-        if (\PoP\Root\App::getState('nature') == UserRouteNatures::USER) {
+        if ($vars['nature'] == UserRouteNatures::USER) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
-            \PoP\Root\App::getState(['routing', 'queried-object-is-community']) = gdUreIsCommunity($author);
+            $vars['routing']['queried-object-is-community'] = gdUreIsCommunity($author);
         }
     }
 }
