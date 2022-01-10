@@ -7,11 +7,6 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 // This way, function getValue('contentEditor') on typeResolver-posts.php
 // will process the right html output, and not the one the HTML tab (without <p> <br> etc tags)
 // Code copied from wp-includes/class-wp-editor.php => public static function editor( $content, $editor_id, $settings = array() )
-// Comment Leo 20/06/2017: this cannot be executed on 'init'! If doing so, function `loadingSite` initializes
-// ApplicationState::getVars() before the WordPress query vars are set, which means that
-// function is_home, isAuthor, isPage, etc, they all fail, returning always false
-// For that, instead execute when we have initialized PoP
-// HooksAPIFacade::getInstance()->addFilter('init', 'gdEditorInit');
 HooksAPIFacade::getInstance()->addFilter('\PoP\ComponentModel\Engine:beginning', 'gdEditorInit');
 function gdEditorInit()
 {
@@ -19,14 +14,6 @@ function gdEditorInit()
         return;
     }
 
-    // Since WP 4.3.0, the functions below are deprecated, replaced with 'format_for_editor'
-    // $default_editor = wp_default_editor();
-    // // 'html' is used for the "Text" editor tab.
-    // if ( 'html' === $default_editor ) {
-    //   HooksAPIFacade::getInstance()->addFilter('the_editor_content', 'wp_htmledit_pre');
-    // } else {
-    //   HooksAPIFacade::getInstance()->addFilter('the_editor_content', 'wp_richedit_pre');
-    // }
     HooksAPIFacade::getInstance()->addFilter('the_editor_content', 'format_for_editor', 10, 2);
 }
 

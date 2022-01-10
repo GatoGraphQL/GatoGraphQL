@@ -94,8 +94,7 @@ class VarsHookSet extends AbstractHookSet
      */
     public function getMutationsNotSupportedErrorMessage(string $errorMessage): string
     {
-        $vars = ApplicationState::getVars();
-        if ($vars['standard-graphql']) {
+        if (App::getState('standard-graphql')) {
             return sprintf(
                 $this->__('Use the operation type \'%s\' to execute mutations', 'graphql-request'),
                 OperationTypes::MUTATION

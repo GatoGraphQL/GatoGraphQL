@@ -450,8 +450,6 @@ class Engine implements EngineInterface
 
     protected function processAndGenerateData(): void
     {
-        $vars = ApplicationState::getVars();
-
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
         $dataoutputitems = App::getState('dataoutputitems');
 
@@ -558,8 +556,6 @@ class Engine implements EngineInterface
 
     protected function addSharedMeta(): void
     {
-        $vars = ApplicationState::getVars();
-
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
         $dataoutputitems = App::getState('dataoutputitems');
 
@@ -593,7 +589,6 @@ class Engine implements EngineInterface
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
         // From the state we know if to process static/staful content or both
-        $vars = ApplicationState::getVars();
         $dataoutputmode = App::getState('dataoutputmode');
 
         // First check if there's a cache stored
@@ -686,7 +681,6 @@ class Engine implements EngineInterface
     {
         $meta = [];
         if ($this->addSiteMeta()) {
-            $vars = ApplicationState::getVars();
             $meta[Params::VERSION] = $this->getApplicationInfo()->getVersion();
             $meta[Params::DATAOUTPUTMODE] = App::getState('dataoutputmode');
             $meta[Params::DATABASESOUTPUTMODE] = App::getState('dboutputmode');
@@ -972,7 +966,6 @@ class Engine implements EngineInterface
         $root_processor = $this->getModuleProcessorManager()->getProcessor($root_module);
 
         // From the state we know if to process static/staful content or both
-        $vars = ApplicationState::getVars();
         $datasources = App::getState('datasources');
         $dataoutputmode = App::getState('dataoutputmode');
         $dataoutputitems = App::getState('dataoutputitems');
@@ -1448,8 +1441,6 @@ class Engine implements EngineInterface
 
     public function getDatabases(): array
     {
-        $vars = ApplicationState::getVars();
-
         // Save all database elements here, under typeResolver
         $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $objectTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = [];
         $this->nocache_fields = [];
@@ -1938,7 +1929,6 @@ class Engine implements EngineInterface
         // Do not add the "database", "userstatedatabase" entries unless there are values in them
         // Otherwise, it messes up integrating the current databases in the webplatform with those from the response when deep merging them
         if ($entries) {
-            $vars = ApplicationState::getVars();
             $dboutputmode = App::getState('dboutputmode');
 
             // Combine all the databases or send them separate
@@ -1970,7 +1960,6 @@ class Engine implements EngineInterface
     protected function maybeCombineAndAddSchemaEntries(array &$ret, string $name, array $entries): void
     {
         if ($entries) {
-            $vars = ApplicationState::getVars();
             $dboutputmode = App::getState('dboutputmode');
 
             // Combine all the databases or send them separate
