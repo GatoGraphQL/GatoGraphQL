@@ -6,7 +6,6 @@ namespace PoP\Root\Managers;
 
 use LogicException;
 use PoP\Root\Component\ComponentInterface;
-use PoP\Root\Facades\Registries\AppStateProviderRegistryFacade;
 
 /**
  * Keep a reference to all Components
@@ -91,26 +90,6 @@ class ComponentManager
     {
         foreach ($this->components as $component) {
             $component->afterBoot();
-        }
-    }
-
-    /**
-     * Initialize application state
-     *
-     * @param array<string,mixed> $state
-     */
-    public function initializeAppState(array &$state): void
-    {
-        $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
-
-        // First pass: initialize
-        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
-            $appStateProvider->initialize($state);
-        }
-
-        // Second pass: consolidate
-        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
-            $appStateProvider->augment($state);
         }
     }
 }

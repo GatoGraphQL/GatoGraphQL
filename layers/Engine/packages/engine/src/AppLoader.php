@@ -44,7 +44,7 @@ class AppLoader extends RootAppLoader
         $hooksAPI = HooksAPIFacade::getInstance();
         $hooksAPI->addAction(
             'popcms:boot',
-            fn() => App::getComponentManager()->initializeAppState($state),
+            fn() => App::getAppStateManager()->initializeAppState($state),
             25
         );
     }

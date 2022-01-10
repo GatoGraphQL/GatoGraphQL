@@ -360,6 +360,6 @@ class AppLoader
      */
      protected function initializeAppState(array &$state): void
     {
-        App::getComponentManager()->initializeAppState($state);
+        App::getAppStateManager()->initializeAppState($state);
     }
 }

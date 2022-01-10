@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Root\Managers;
 
+use PoP\Root\Facades\Registries\AppStateProviderRegistryFacade;
+
 /**
  * Keep a reference to the global, shared state by the App
  */
@@ -39,5 +41,25 @@ class AppStateManager
     public function has(string $key): bool
     {
         return isset($this->state[$key]);
+    }
+
+    /**
+     * Initialize application state
+     *
+     * @param array<string,mixed> $state
+     */
+    public function initializeAppState(array &$state): void
+    {
+        $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
+
+        // First pass: initialize
+        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
+            $appStateProvider->initialize($state);
+        }
+
+        // Second pass: consolidate
+        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
+            $appStateProvider->augment($state);
+        }
     }
 }
