@@ -34,4 +34,17 @@ class ComponentConfiguration extends AbstractComponentConfiguration
             $callback,
         );
     }
+
+    public function enableQueryingAppStateFields(): bool
+    {
+        $envVariable = Environment::ENABLE_QUERYING_APP_STATE_FIELDS;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }
