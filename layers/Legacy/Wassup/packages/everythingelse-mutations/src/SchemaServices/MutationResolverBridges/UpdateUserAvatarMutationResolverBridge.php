@@ -30,7 +30,7 @@ class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationRe
     public function getFormData(): array
     {
         $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['is-user-logged-in'] ? $vars['global-userstate']['current-user-id'] : '';
+        $user_id = $vars['is-user-logged-in'] ? $vars['current-user-id'] : '';
         $form_data = array(
             'user_id' => $user_id,
         );

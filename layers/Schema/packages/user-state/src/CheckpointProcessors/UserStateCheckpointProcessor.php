@@ -26,13 +26,13 @@ class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
         $vars = ApplicationState::getVars();
         switch ($checkpoint[1]) {
             case self::USERLOGGEDIN:
-                if (!$vars['global-userstate']['is-user-logged-in']) {
+                if (!$vars['is-user-logged-in']) {
                     return new Error('usernotloggedin');
                 }
                 break;
 
             case self::USERNOTLOGGEDIN:
-                if ($vars['global-userstate']['is-user-logged-in']) {
+                if ($vars['is-user-logged-in']) {
                     return new Error('userloggedin');
                 }
                 break;

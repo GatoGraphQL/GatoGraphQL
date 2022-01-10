@@ -26,6 +26,6 @@ class VarsHookSet extends AbstractHookSet
     {
         // Remove the current user object
         $safeVars = &$vars_in_array[0];
-        unset($safeVars['global-userstate']['current-user']);
+        unset($safeVars['current-user']);
     }
 }

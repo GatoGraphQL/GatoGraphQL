@@ -30,9 +30,9 @@ class PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks
             $user_id = '';
             $user_name = '';
             $user_url = '';
-            $user_logged_in = $vars['global-userstate']['is-user-logged-in'];
+            $user_logged_in = $vars['is-user-logged-in'];
             if ($user_logged_in) {
-                $user_id = $vars['global-userstate']['current-user-id'];
+                $user_id = $vars['current-user-id'];
                 $user_name = $userTypeAPI->getUserDisplayName($user_id);
                 $user_url = $userTypeAPI->getUserURL($user_id);
             }

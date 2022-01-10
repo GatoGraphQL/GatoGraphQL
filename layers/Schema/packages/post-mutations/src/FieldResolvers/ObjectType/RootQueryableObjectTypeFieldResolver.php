@@ -204,7 +204,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             'myPosts',
             'myPostCount'
                 => [
-                    'authors' => [$vars['global-userstate']['current-user-id']],
+                    'authors' => [$vars['current-user-id']],
                 ],
             default
                 => [],

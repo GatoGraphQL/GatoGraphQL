@@ -111,8 +111,8 @@ class PoP_Notifications_API
         if (!$user_id) {
             if (PoP_UserState_Utils::currentRouteRequiresUserState()) {
                 $vars = ApplicationState::getVars();
-                if ($vars['global-userstate']['is-user-logged-in']) {
-                    $user_id = $vars['global-userstate']['current-user-id'];
+                if ($vars['is-user-logged-in']) {
+                    $user_id = $vars['current-user-id'];
                 }
             }
         }

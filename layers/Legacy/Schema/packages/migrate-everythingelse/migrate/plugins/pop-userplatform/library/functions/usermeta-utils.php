@@ -20,8 +20,8 @@ class PoP_ModuleManager_UserMetaUtils
         // Can do it only if the page is mutableonrequestdata
         if (PoP_UserState_Utils::currentRouteRequiresUserState()) {
             $vars = ApplicationState::getVars();
-            if ($vars['global-userstate']['is-user-logged-in']) {
-                PoP_UserPlatform_UserUtils::saveUserLastAccess($vars['global-userstate']['current-user-id'], ComponentModelComponentInfo::get('time'));
+            if ($vars['is-user-logged-in']) {
+                PoP_UserPlatform_UserUtils::saveUserLastAccess($vars['current-user-id'], ComponentModelComponentInfo::get('time'));
             }
         }
     }

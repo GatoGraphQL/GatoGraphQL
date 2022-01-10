@@ -30,7 +30,7 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
     public function getFormData(): array
     {
         $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = $vars['current-user-id'];
         $form_data = array(
             'user_id' => $user_id,
             'current_password' => $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_CURRENTPASSWORD])->getValue([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_CURRENTPASSWORD]),

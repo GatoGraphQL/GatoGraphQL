@@ -20,7 +20,7 @@ class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointPr
         $vars = ApplicationState::getVars();
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR:
-                $user_id = $vars['global-userstate']['current-user-id'];
+                $user_id = $vars['current-user-id'];
                 $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
                 if (!$userRoleTypeAPI->hasRole($user_id, 'administrator')) {
                     return new Error('userisnotadmin');

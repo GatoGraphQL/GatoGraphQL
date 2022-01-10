@@ -35,7 +35,7 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
     {
         $vars = ApplicationState::getVars();
         return [
-            'user_id' => $vars['global-userstate']['current-user-id'],
+            'user_id' => $vars['current-user-id'],
         ];
     }
     /**

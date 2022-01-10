@@ -169,7 +169,7 @@ class PoP_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Notifications extends A
                             case AAL_POP_ACTION_USER_FOLLOWSUSER:
                             case AAL_POP_ACTION_USER_UNFOLLOWSUSER:
                                 // If the user is the object of this action, then point the link to the user who is doing the action
-                                if ($vars['global-userstate']['current-user-id'] == $notification->object_id) {
+                                if ($vars['current-user-id'] == $notification->object_id) {
                                     return $userTypeAPI->getUserURL($notification->user_id);
                                 }
                                 return $userTypeAPI->getUserURL($notification->object_id);
@@ -228,7 +228,7 @@ class PoP_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Notifications extends A
                                 );
 
                                 // Change the message depending if the logged in user is the object of this action
-                                $recipient = ($vars['global-userstate']['current-user-id'] == $notification->object_id) ? TranslationAPIFacade::getInstance()->__('you', 'pop-notifications') : sprintf('<strong>%s</strong>', $userTypeAPI->getUserDisplayName($notification->object_id));
+                                $recipient = ($vars['current-user-id'] == $notification->object_id) ? TranslationAPIFacade::getInstance()->__('you', 'pop-notifications') : sprintf('<strong>%s</strong>', $userTypeAPI->getUserDisplayName($notification->object_id));
                                 return sprintf(
                                     $messages[$notification->action],
                                     $userTypeAPI->getUserDisplayName($notification->user_id),

@@ -32,7 +32,7 @@ class PoP_Notifications_Utils
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         if (!$user_id) {
             $vars = ApplicationState::getVars();
-            $user_id = $vars['global-userstate']['current-user-id'];
+            $user_id = $vars['current-user-id'];
         }
 
         self::insertLog(

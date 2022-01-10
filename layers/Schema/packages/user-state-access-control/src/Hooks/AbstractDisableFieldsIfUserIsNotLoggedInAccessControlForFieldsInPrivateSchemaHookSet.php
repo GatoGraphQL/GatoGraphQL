@@ -33,6 +33,6 @@ abstract class AbstractDisableFieldsIfUserIsNotLoggedInAccessControlForFieldsInP
     protected function isUserLoggedIn(): bool
     {
         $vars = ApplicationState::getVars();
-        return $vars['global-userstate']['is-user-logged-in'];
+        return $vars['is-user-logged-in'];
     }
 }

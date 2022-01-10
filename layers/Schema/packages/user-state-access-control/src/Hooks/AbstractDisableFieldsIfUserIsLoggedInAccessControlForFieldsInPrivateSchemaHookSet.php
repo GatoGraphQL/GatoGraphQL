@@ -20,6 +20,6 @@ abstract class AbstractDisableFieldsIfUserIsLoggedInAccessControlForFieldsInPriv
          * If the user is logged in, then do not register field names
          */
         $vars = ApplicationState::getVars();
-        return $vars['global-userstate']['is-user-logged-in'];
+        return $vars['is-user-logged-in'];
     }
 }

@@ -9,7 +9,7 @@ function gdCurrentUserCanEdit($post_id = null)
     $nameResolver = NameResolverFacade::getInstance();
     $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
     $vars = ApplicationState::getVars();
-    $userID = $vars['global-userstate']['current-user-id'];
+    $userID = $vars['current-user-id'];
     $authors = gdGetPostauthors($post_id);
     $editCustomPostsCapability = $nameResolver->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
     return $userRoleTypeAPI->userCan(

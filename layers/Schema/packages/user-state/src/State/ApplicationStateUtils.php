@@ -15,16 +15,15 @@ class ApplicationStateUtils
      */
     public static function setUserStateVars(array &$state): void
     {
-        $state['global-userstate'] = [];
         $userStateTypeAPI = UserStateTypeAPIFacade::getInstance();
         if ($userStateTypeAPI->isUserLoggedIn()) {
-            $state['global-userstate']['is-user-logged-in'] = true;
-            $state['global-userstate']['current-user'] = $userStateTypeAPI->getCurrentUser();
-            $state['global-userstate']['current-user-id'] = $userStateTypeAPI->getCurrentUserID();
+            $state['is-user-logged-in'] = true;
+            $state['current-user'] = $userStateTypeAPI->getCurrentUser();
+            $state['current-user-id'] = $userStateTypeAPI->getCurrentUserID();
         } else {
-            $state['global-userstate']['is-user-logged-in'] = false;
-            $state['global-userstate']['current-user'] = null;
-            $state['global-userstate']['current-user-id'] = null;
+            $state['is-user-logged-in'] = false;
+            $state['current-user'] = null;
+            $state['current-user-id'] = null;
         }
     }
 }

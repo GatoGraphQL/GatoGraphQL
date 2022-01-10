@@ -48,8 +48,8 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         }
 
         $vars = ApplicationState::getVars();
-        if ($vars['global-userstate']['is-user-logged-in']) {
-            $errors[] = $this->getUserAlreadyLoggedInErrorMessage($vars['global-userstate']['current-user-id']);
+        if ($vars['is-user-logged-in']) {
+            $errors[] = $this->getUserAlreadyLoggedInErrorMessage($vars['current-user-id']);
         }
         return $errors;
     }

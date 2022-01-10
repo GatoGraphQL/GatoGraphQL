@@ -41,7 +41,7 @@ class PoP_SocialNetwork_Notifications_Hook_Tags /* extends AAL_Hook_Base*/
                 'action'      => $action,
                 'object_type' => 'Taxonomy',
                 'object_subtype' => 'Tag',
-                'user_id'     => $vars['global-userstate']['current-user-id'],
+                'user_id'     => $vars['current-user-id'],
                 'object_id'   => $tag_id,
                 'object_name' => $applicationtaxonomyapi->getTagSymbolName($tag),
             )

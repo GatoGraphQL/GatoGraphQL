@@ -152,7 +152,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
         // Enable if the current logged in user is the System Notification's defined user
         $vars = ApplicationState::getVars();
-        if ($vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
+        if ($vars['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
             return;
         }
 

@@ -49,7 +49,7 @@ abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Pr
 
         // Logged-in author
         $vars = ApplicationState::getVars();
-        $ret['authors'] = [$vars['global-userstate']['current-user-id']];
+        $ret['authors'] = [$vars['current-user-id']];
 
         return $ret;
     }

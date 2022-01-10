@@ -179,11 +179,11 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
 
             case 'loggedInUserStances':
                 $vars = ApplicationState::getVars();
-                if (!$vars['global-userstate']['is-user-logged-in']) {
+                if (!$vars['is-user-logged-in']) {
                     return array();
                 }
                 $query = array(
-                    'authors' => [$vars['global-userstate']['current-user-id']],
+                    'authors' => [$vars['current-user-id']],
                 );
                 \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $objectTypeResolver->getID($post));
 

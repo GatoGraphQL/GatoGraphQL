@@ -66,7 +66,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         $vars = ApplicationState::getVars();
         $query = array(
             'status' => array(CustomPostStatus::PUBLISH, CustomPostStatus::DRAFT),
-            'authors' => [$vars['global-userstate']['current-user-id']],
+            'authors' => [$vars['current-user-id']],
         );
         if ($referenced_id) {
             \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $referenced_id);

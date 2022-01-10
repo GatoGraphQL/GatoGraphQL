@@ -35,7 +35,7 @@ if (class_exists("EM_Gateway_Offline")) {
         {
             $cmsService = CMSServiceFacade::getInstance();
             $vars = ApplicationState::getVars();
-            if ($vars['global-userstate']['is-user-logged-in'] && $cmsService->getOption('dbem_rsvp_enabled')) {
+            if ($vars['is-user-logged-in'] && $cmsService->getOption('dbem_rsvp_enabled')) {
                 $em_localized_js[$this->gateway . '_confirm'] = TranslationAPIFacade::getInstance()->__('Be aware that by approving a booking awaiting payment, a full payment transaction will be registered against this booking, meaning that it will be considered as paid.', 'dbem');
             }
             return $em_localized_js;

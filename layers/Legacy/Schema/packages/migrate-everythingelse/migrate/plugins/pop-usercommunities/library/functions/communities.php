@@ -52,7 +52,7 @@ function gdUreGetCommunityMetavalueContributecontent($user_id)
 function gdUreGetCommunityMetavalueCurrentcommunity($value)
 {
     $vars = ApplicationState::getVars();
-    $community = $vars['global-userstate']['current-user-id'];
+    $community = $vars['current-user-id'];
     return gdUreGetCommunityMetavalue($community, $value);
 }
 
@@ -155,7 +155,7 @@ function gdUreGetCommunitiesStatusActiveFilter($value)
 function gdUreCommunityMembershipstatusFilterbycurrentcommunity($values)
 {
     $vars = ApplicationState::getVars();
-    return gdUreCommunityMembershipstatusFilterbycommunity($values, $vars['global-userstate']['current-user-id']);
+    return gdUreCommunityMembershipstatusFilterbycommunity($values, $vars['current-user-id']);
 }
 
 function gdUreCommunityMembershipstatusFilterbycommunity($values, $community)

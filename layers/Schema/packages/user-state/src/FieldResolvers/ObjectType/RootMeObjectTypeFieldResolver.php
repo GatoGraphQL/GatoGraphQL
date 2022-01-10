@@ -63,7 +63,7 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
         switch ($fieldName) {
             case 'me':
                 $vars = ApplicationState::getVars();
-                return $vars['global-userstate']['current-user-id'];
+                return $vars['current-user-id'];
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

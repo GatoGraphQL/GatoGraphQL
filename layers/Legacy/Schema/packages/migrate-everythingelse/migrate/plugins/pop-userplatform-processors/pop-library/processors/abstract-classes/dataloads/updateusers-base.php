@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_UpdateUserDataloadsBase extends PoP_Module_P
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         $vars = ApplicationState::getVars();
-        return $vars['global-userstate']['current-user-id'];
+        return $vars['current-user-id'];
     }
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface

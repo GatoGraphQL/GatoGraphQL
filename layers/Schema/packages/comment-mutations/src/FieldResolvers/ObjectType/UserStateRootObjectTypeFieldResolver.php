@@ -207,7 +207,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         $query = array_merge(
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
             [
-                'authors' => [$vars['global-userstate']['current-user-id']],
+                'authors' => [$vars['current-user-id']],
             ]
         );
         switch ($fieldName) {

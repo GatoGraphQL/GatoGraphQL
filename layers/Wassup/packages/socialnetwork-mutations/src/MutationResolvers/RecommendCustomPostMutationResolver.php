@@ -14,7 +14,7 @@ class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommend
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
             $vars = ApplicationState::getVars();
-            $user_id = $vars['global-userstate']['current-user-id'];
+            $user_id = $vars['current-user-id'];
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user has not already recommended this post
@@ -48,7 +48,7 @@ class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommend
     protected function update($form_data): string | int
     {
         $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = $vars['current-user-id'];
         $target_id = $form_data['target_id'];
 
         // Update value
