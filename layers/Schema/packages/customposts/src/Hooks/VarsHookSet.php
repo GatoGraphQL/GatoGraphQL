@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\Hooks;
 
+use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\BasicService\AbstractHookSet;
@@ -22,7 +23,7 @@ class VarsHookSet extends AbstractHookSet
 
     public function getModelInstanceComponentsFromVars($components)
     {
-        $nature = \PoP\Root\App::getState('nature');
+        $nature = App::getState('nature');
 
         // Properties specific to each nature
         switch ($nature) {
@@ -38,7 +39,7 @@ class VarsHookSet extends AbstractHookSet
                     )
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
-                    $customPostType = \PoP\Root\App::getState(['routing', 'queried-object-post-type']);
+                    $customPostType = App::getState(['routing', 'queried-object-post-type']);
                     $components[] = $this->__('post type:', 'pop-engine') . $customPostType;
                 }
                 break;

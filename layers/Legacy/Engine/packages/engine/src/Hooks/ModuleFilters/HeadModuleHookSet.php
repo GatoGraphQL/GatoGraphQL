@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
+use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
@@ -33,8 +34,8 @@ class HeadModuleHookSet extends AbstractHookSet
     
     public function maybeAddComponent($components)
     {
-        if (\PoP\Root\App::getState('modulefilter') === $this->headModule->getName()) {
-            if ($headmodule = \PoP\Root\App::getState('headmodule')) {
+        if (App::getState('modulefilter') === $this->headModule->getName()) {
+            if ($headmodule = App::getState('headmodule')) {
                 $components[] = $this->getTranslationAPI()->__('head module:', 'engine') . ModuleUtils::getModuleFullName($headmodule);
             }
         }

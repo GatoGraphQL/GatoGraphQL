@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaTypeDataLoader;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
@@ -67,7 +68,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         // Only register them for the standard GraphQL,
         // or for PQL if explicitly enabled
-        if (!\PoP\Root\App::getState('graphql-introspection-enabled')) {
+        if (!App::getState('graphql-introspection-enabled')) {
             return [];
         }
         return [

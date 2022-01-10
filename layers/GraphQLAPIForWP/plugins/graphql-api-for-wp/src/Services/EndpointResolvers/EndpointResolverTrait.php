@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointResolvers;
 
+use PoP\Root\App;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
 use PoP\API\Response\Schemes as APISchemes;
@@ -117,7 +118,7 @@ trait EndpointResolverTrait
         list(
             $graphQLQuery,
             $graphQLVariables
-        ) = $this->getGraphQLQueryAndVariables(\PoP\Root\App::getState(['routing', 'queried-object']));
+        ) = $this->getGraphQLQueryAndVariables(App::getState(['routing', 'queried-object']));
         if (!$graphQLQuery) {
             // If there is no query, nothing to do!
             return;
@@ -130,7 +131,7 @@ trait EndpointResolverTrait
             // But this behavior can be overriden for the persisted query,
             // by setting "Accept Variables as URL Params" => false
             // When editing in the editor, 'queried-object' will be null, and that's OK
-            $vars['variables'] = $this->doURLParamsOverrideGraphQLVariables(\PoP\Root\App::getState(['routing', 'queried-object'])) ?
+            $vars['variables'] = $this->doURLParamsOverrideGraphQLVariables(App::getState(['routing', 'queried-object'])) ?
                 array_merge(
                     $graphQLVariables,
                     $vars['variables'] ?? []

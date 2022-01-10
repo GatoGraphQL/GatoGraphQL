@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ModuleProcessors;
 
+use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
@@ -37,7 +38,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
 
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array | null
     {
-        if (\PoP\Root\App::getState('does-api-query-have-errors')) {
+        if (App::getState('does-api-query-have-errors')) {
             return null;
         }
         switch ($module[1]) {

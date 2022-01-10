@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Misc;
 
+use PoP\Root\App;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\URLParams;
@@ -42,19 +43,19 @@ class RequestUtils
 
     public static function fetchingSite()
     {
-        return \PoP\Root\App::getState('fetching-site') ?? false;
+        return App::getState('fetching-site') ?? false;
     }
 
     public static function loadingSite()
     {
         // If we are doing JSON (or any other output) AND we setting the target, then we're loading content dynamically and we need it to be JSON
         // Otherwise, it is the first time loading website => loadingSite
-        return \PoP\Root\App::getState('loading-site') ?? false;
+        return App::getState('loading-site') ?? false;
     }
 
     public static function isRoute($route_or_routes)
     {
-        $route = \PoP\Root\App::getState('route');
+        $route = App::getState('route');
         if (is_array($route_or_routes)) {
             return in_array($route, $route_or_routes);
         }

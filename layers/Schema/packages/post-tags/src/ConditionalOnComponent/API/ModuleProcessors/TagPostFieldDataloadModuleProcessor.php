@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
@@ -72,7 +73,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
 
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
-                $ret['tag-ids'] = [\PoP\Root\App::getState(['routing', 'queried-object-id'])];
+                $ret['tag-ids'] = [App::getState(['routing', 'queried-object-id'])];
                 break;
         }
 

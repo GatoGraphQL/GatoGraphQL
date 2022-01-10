@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
+use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
@@ -47,7 +48,7 @@ class NestedMutationHookSet extends AbstractHookSet
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         string $fieldName
     ): bool {
-        if (\PoP\Root\App::getState('nested-mutations-enabled')) {
+        if (App::getState('nested-mutations-enabled')) {
             return $include;
         }
         if ($objectTypeOrInterfaceTypeResolver instanceof InterfaceTypeResolverInterface) {

@@ -111,7 +111,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $cacheKeyComponents = array_merge(
                 CacheUtils::getSchemaCacheKeyComponents(),
                 [
-                    'edit-schema' => \PoP\Root\App::hasState('edit-schema') && \PoP\Root\App::getState('edit-schema'),
+                    'edit-schema' => App::hasState('edit-schema') && App::getState('edit-schema'),
                 ]
             );
             // For the persistentCache, use a hash to remove invalid characters (such as "()")
@@ -142,7 +142,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     protected function prepareSchemaDefinitionForGraphQL(): void
     {
-        $enableNestedMutations = \PoP\Root\App::getState('nested-mutations-enabled');
+        $enableNestedMutations = App::getState('nested-mutations-enabled');
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $exposeSchemaIntrospectionFieldInSchema = $componentConfiguration->exposeSchemaIntrospectionFieldInSchema();
@@ -309,7 +309,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     protected function maybeAddTypeToSchemaDirectiveDescription(array $directiveSchemaDefinitionPath): void
     {
-        if (\PoP\Root\App::hasState('edit-schema') && \PoP\Root\App::getState('edit-schema')) {
+        if (App::hasState('edit-schema') && App::getState('edit-schema')) {
             $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $directiveSchemaDefinitionPath);
             if ($directiveSchemaDefinition[SchemaDefinition::DIRECTIVE_KIND] === DirectiveKinds::SCHEMA) {
                 $directiveSchemaDefinition[SchemaDefinition::DESCRIPTION] = sprintf(

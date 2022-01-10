@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
@@ -72,7 +73,7 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
 
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST:
-                $ret['category-ids'] = [\PoP\Root\App::getState(['routing', 'queried-object-id'])];
+                $ret['category-ids'] = [App::getState(['routing', 'queried-object-id'])];
                 break;
         }
 

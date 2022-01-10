@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
@@ -29,7 +30,7 @@ class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutatio
 
     public function getFormData(): array
     {
-        $user_id = \PoP\Root\App::getState('is-user-logged-in') ? \PoP\Root\App::getState('current-user-id') : '';
+        $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $form_data = array(
             'user_id' => $user_id,
             // We can just get the value for any one forminput from the My Preferences form, since they all have the same name (and even if the forminput was actually removed from the form!)

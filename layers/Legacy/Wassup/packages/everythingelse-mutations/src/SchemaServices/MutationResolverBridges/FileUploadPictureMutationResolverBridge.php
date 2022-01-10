@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
@@ -34,7 +35,7 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
     public function getFormData(): array
     {
         return [
-            'user_id' => \PoP\Root\App::getState('current-user-id'),
+            'user_id' => App::getState('current-user-id'),
         ];
     }
     /**

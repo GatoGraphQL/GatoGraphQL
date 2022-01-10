@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\RelationalTypeDataLoaders\ObjectType;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
@@ -27,7 +28,7 @@ class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         $query = parent::getQuery($query_args);
 
         // Pagination
-        if (\PoP\Root\App::hasState('loading-latest') && \PoP\Root\App::getState('loading-latest')) {
+        if (App::hasState('loading-latest') && App::getState('loading-latest')) {
             $query['pagenumber'] = 1;
             $query['limit'] = -1; // Limit=-1 => Bring all results
         } else {

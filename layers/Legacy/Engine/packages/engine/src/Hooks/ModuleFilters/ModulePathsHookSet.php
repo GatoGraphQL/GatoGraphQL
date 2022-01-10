@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
@@ -33,8 +34,8 @@ class ModulePathsHookSet extends AbstractHookSet
     
     public function maybeAddComponent(array $components): array
     {
-        if (\PoP\Root\App::getState('modulefilter') === $this->modulePaths->getName()) {
-            if ($modulepaths = \PoP\Root\App::getState('modulepaths')) {
+        if (App::getState('modulefilter') === $this->modulePaths->getName()) {
+            if ($modulepaths = App::getState('modulepaths')) {
                 $modulePathHelpers = ModulePathHelpersFacade::getInstance();
                 $paths = array_map(
                     fn ($modulepath) => $modulePathHelpers->stringifyModulePath($modulepath),

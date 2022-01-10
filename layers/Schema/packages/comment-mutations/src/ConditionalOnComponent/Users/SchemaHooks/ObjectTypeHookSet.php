@@ -55,9 +55,9 @@ class ObjectTypeHookSet extends AbstractHookSet
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if (
             !$componentConfiguration->mustUserBeLoggedInToAddComment()
-            && \PoP\Root\App::getState('is-user-logged-in')
+            && App::getState('is-user-logged-in')
         ) {
-            $userID = \PoP\Root\App::getState('current-user-id');
+            $userID = App::getState('current-user-id');
             if (!isset($mutationFieldArgs[MutationInputProperties::AUTHOR_NAME])) {
                 $mutationFieldArgs[MutationInputProperties::AUTHOR_NAME] = $this->getUserTypeAPI()->getUserDisplayName($userID);
             }

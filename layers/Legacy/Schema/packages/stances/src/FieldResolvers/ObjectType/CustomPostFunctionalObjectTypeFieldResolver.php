@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
@@ -178,11 +179,11 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 ], RouteUtils::getRouteURL($route));
 
             case 'loggedInUserStances':
-                if (!\PoP\Root\App::getState('is-user-logged-in')) {
+                if (!App::getState('is-user-logged-in')) {
                     return array();
                 }
                 $query = array(
-                    'authors' => [\PoP\Root\App::getState('current-user-id')],
+                    'authors' => [App::getState('current-user-id')],
                 );
                 \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $objectTypeResolver->getID($post));
 

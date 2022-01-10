@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Overrides\TypeResolvers\ObjectType;
 
+use PoP\Root\App;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver as UpstreamRootObjectTypeResolver;
 
@@ -15,7 +16,7 @@ class RootObjectTypeResolver extends UpstreamRootObjectTypeResolver
 {
     protected function calculateObjectTypeFieldResolversForField(string $field): array
     {
-        $enableNestedMutations = \PoP\Root\App::getState('nested-mutations-enabled');
+        $enableNestedMutations = App::getState('nested-mutations-enabled');
         /**
          * Watch out: The field is not provided fieldArgs,
          * that's why there's no need to parse $field to get the fieldName!
