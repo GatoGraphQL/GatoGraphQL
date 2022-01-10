@@ -448,10 +448,10 @@ class Engine implements EngineInterface
         $vars = ApplicationState::getVars();
 
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
-        $dataoutputitems = $vars['dataoutputitems'];
+        $dataoutputitems = \PoP\Root\App::getState('dataoutputitems');
 
         // From the state we know if to process static/staful content or both
-        $datasources = $vars['datasources'];
+        $datasources = \PoP\Root\App::getState('datasources');
 
         // Get the entry module based on the application configuration and the nature
         $module = $this->getEntryModule();
@@ -556,7 +556,7 @@ class Engine implements EngineInterface
         $vars = ApplicationState::getVars();
 
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
-        $dataoutputitems = $vars['dataoutputitems'];
+        $dataoutputitems = \PoP\Root\App::getState('dataoutputitems');
 
         if (
             in_array(DataOutputItems::META, $dataoutputitems)
@@ -589,7 +589,7 @@ class Engine implements EngineInterface
 
         // From the state we know if to process static/staful content or both
         $vars = ApplicationState::getVars();
-        $dataoutputmode = $vars['dataoutputmode'];
+        $dataoutputmode = \PoP\Root\App::getState('dataoutputmode');
 
         // First check if there's a cache stored
         $immutable_datasetsettings = null;
@@ -683,11 +683,11 @@ class Engine implements EngineInterface
         if ($this->addSiteMeta()) {
             $vars = ApplicationState::getVars();
             $meta[Params::VERSION] = $this->getApplicationInfo()->getVersion();
-            $meta[Params::DATAOUTPUTMODE] = $vars['dataoutputmode'];
-            $meta[Params::DATABASESOUTPUTMODE] = $vars['dboutputmode'];
+            $meta[Params::DATAOUTPUTMODE] = \PoP\Root\App::getState('dataoutputmode');
+            $meta[Params::DATABASESOUTPUTMODE] = \PoP\Root\App::getState('dboutputmode');
 
-            if ($vars['mangled'] ?? null) {
-                $meta[Request::URLPARAM_MANGLED] = $vars['mangled'];
+            if (\PoP\Root\App::getState('mangled') ?? null) {
+                $meta[Request::URLPARAM_MANGLED] = \PoP\Root\App::getState('mangled');
             }
 
             // Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
@@ -968,9 +968,9 @@ class Engine implements EngineInterface
 
         // From the state we know if to process static/staful content or both
         $vars = ApplicationState::getVars();
-        $datasources = $vars['datasources'];
-        $dataoutputmode = $vars['dataoutputmode'];
-        $dataoutputitems = $vars['dataoutputitems'];
+        $datasources = \PoP\Root\App::getState('datasources');
+        $dataoutputmode = \PoP\Root\App::getState('dataoutputmode');
+        $dataoutputitems = \PoP\Root\App::getState('dataoutputitems');
         $add_meta = in_array(DataOutputItems::META, $dataoutputitems);
 
         $immutable_moduledata = $mutableonmodel_moduledata = $mutableonrequest_moduledata = [];
@@ -1454,7 +1454,7 @@ class Engine implements EngineInterface
         $already_loaded_ids_data_fields = [];
 
         // The variables come from $vars
-        $variables = $vars['variables'];
+        $variables = \PoP\Root\App::getState('variables');
         // Initiate a new $messages interchange across directives
         $messages = [];
 
@@ -1773,7 +1773,7 @@ class Engine implements EngineInterface
 
         // Show logs only if both enabled, and passing the action in the URL
         if (Environment::enableShowLogs()) {
-            if (in_array(Actions::SHOW_LOGS, $vars['actions'])) {
+            if (in_array(Actions::SHOW_LOGS, \PoP\Root\App::getState('actions'))) {
                 $ret['logEntries'] = $this->getFeedbackMessageStore()->getLogEntries();
             }
         }
@@ -1934,7 +1934,7 @@ class Engine implements EngineInterface
         // Otherwise, it messes up integrating the current databases in the webplatform with those from the response when deep merging them
         if ($entries) {
             $vars = ApplicationState::getVars();
-            $dboutputmode = $vars['dboutputmode'];
+            $dboutputmode = \PoP\Root\App::getState('dboutputmode');
 
             // Combine all the databases or send them separate
             if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
@@ -1966,7 +1966,7 @@ class Engine implements EngineInterface
     {
         if ($entries) {
             $vars = ApplicationState::getVars();
-            $dboutputmode = $vars['dboutputmode'];
+            $dboutputmode = \PoP\Root\App::getState('dboutputmode');
 
             // Combine all the databases or send them separate
             if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
