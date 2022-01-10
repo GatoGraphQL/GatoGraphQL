@@ -143,8 +143,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'equals' => $this->__('Indicate if the result from a field equals a certain value', 'component-model'),
             'empty' => $this->__('Indicate if a value is empty', 'component-model'),
             'isNull' => $this->__('Indicate if a value is null', 'component-model'),
-            'var' => $this->__('Retrieve the value of a certain property from the `$vars` context object', 'component-model'),
-            'context' => $this->__('Retrieve the `$vars` context object', 'component-model'),
+            'var' => $this->__('Retrieve the value of a certain property from the application state', 'component-model'),
+            'context' => $this->__('Retrieve the application state', 'component-model'),
             'extract' => $this->__('Given an object, it retrieves the data under a certain path', 'pop-component-model'),
             'time' => $this->__('Return the time now (https://php.net/manual/en/function.time.php)', 'component-model'),
             'echo' => $this->__('Repeat back the input, whatever it is', 'function-fields'),
@@ -212,7 +212,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             ['equals' => 'value2'] => $this->__('The second value to compare', 'component-model'),
             ['empty' => 'value'] => $this->__('The value to check if it is empty', 'component-model'),
             ['isNull' => 'value'] => $this->__('The value to check if it is null', 'component-model'),
-            ['var' => 'name'] => $this->__('The name of the variable to retrieve from the `$vars` context object', 'component-model'),
+            ['var' => 'name'] => $this->__('The name of the variable to retrieve from the application state', 'component-model'),
             ['extract' => 'object'] => $this->__('The object to retrieve the data from', 'pop-component-model'),
             ['extract' => 'path'] => $this->__('The path to retrieve data from the object. Paths are separated with \'.\' for each sublevel', 'pop-component-model'),
             ['echo' => 'value'] => $this->__('The input to be echoed back', 'function-fields'),
@@ -262,7 +262,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     if (!isset($safeVars[$fieldArgs['name']])) {
                         return [
                             sprintf(
-                                $this->__('Var \'%s\' does not exist in `$vars`', 'component-model'),
+                                $this->__('There is no property \'%s\' in the application state', 'component-model'),
                                 $fieldArgs['name']
                             )
                         ];
