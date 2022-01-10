@@ -666,7 +666,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     $objectTypeResolver->getTypeName(),
                     $fieldName
                 )
-                ?? \PoP\Root\App::getState('version-constraint');
+                ?? App::getState('version-constraint');
             /**
              * If the query doesn't restrict the version, then do not process
              */

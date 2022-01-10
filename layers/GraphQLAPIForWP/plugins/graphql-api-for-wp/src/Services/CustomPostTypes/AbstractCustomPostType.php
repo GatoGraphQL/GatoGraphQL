@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
@@ -307,7 +308,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             /**
              * Add the excerpt (if not empty) as description of the GraphQL query
              */
-            $customPost = \PoP\Root\App::getState(['routing', 'queried-object']);
+            $customPost = App::getState(['routing', 'queried-object']);
             // Make sure there is a post (eg: it has not been deleted)
             if ($customPost !== null) {
                 if ($excerpt = $this->getCPTUtils()->getCustomPostDescription($customPost)) {

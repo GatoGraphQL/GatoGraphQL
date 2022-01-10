@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModelInstance;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
@@ -84,8 +85,8 @@ class ModelInstance implements ModelInstanceInterface
 
         
         // There will always be a nature. Add it.
-        $nature = \PoP\Root\App::getState('nature');
-        $route = \PoP\Root\App::getState('route');
+        $nature = App::getState('nature');
+        $route = App::getState('route');
         $components[] = $this->__('nature:', 'component-model') . $nature;
         $components[] = $this->__('route:', 'component-model') . $route;
 
@@ -93,10 +94,10 @@ class ModelInstance implements ModelInstanceInterface
         $components[] = $this->__('version:', 'component-model') . $this->getApplicationInfo()->getVersion();
 
         // Other properties
-        if ($actions = \PoP\Root\App::getState('actions')) {
+        if ($actions = App::getState('actions')) {
             $components[] = $this->__('actions:', 'component-model') . implode(';', $actions);
         }
-        if ($modulefilter = \PoP\Root\App::getState('modulefilter')) {
+        if ($modulefilter = App::getState('modulefilter')) {
             $components[] = $this->__('module filter:', 'component-model') . $modulefilter;
         }
 
@@ -109,21 +110,21 @@ class ModelInstance implements ModelInstanceInterface
         ) {
             $components[] = $this->__('operation:', 'component-model') . ('POST' == $_SERVER['REQUEST_METHOD'] ? 'post' : 'get');
         }
-        if ($mangled = \PoP\Root\App::getState('mangled')) {
+        if ($mangled = App::getState('mangled')) {
             // By default it is mangled. To make it non-mangled, url must have param "mangled=none",
             // so only in these exceptional cases the identifier will add this parameter
             $components[] = $this->__('mangled:', 'component-model') . $mangled;
         }
-        if (\PoP\Root\App::getState('only-fieldname-as-outputkey')) {
+        if (App::getState('only-fieldname-as-outputkey')) {
             $components[] = $this->__('only-fieldname-as-outputkey', 'component-model');
         }
-        if ($versionConstraint = \PoP\Root\App::getState('version-constraint')) {
+        if ($versionConstraint = App::getState('version-constraint')) {
             $components[] = $this->__('version-constraint:', 'component-model') . $versionConstraint;
         }
-        if ($fieldVersionConstraints = \PoP\Root\App::getState('field-version-constraints')) {
+        if ($fieldVersionConstraints = App::getState('field-version-constraints')) {
             $components[] = $this->__('field-version-constraints:', 'component-model') . json_encode($fieldVersionConstraints);
         }
-        if ($directiveVersionConstraints = \PoP\Root\App::getState('directive-version-constraints')) {
+        if ($directiveVersionConstraints = App::getState('directive-version-constraints')) {
             $components[] = $this->__('directive-version-constraints:', 'component-model') . json_encode($directiveVersionConstraints);
         }
 

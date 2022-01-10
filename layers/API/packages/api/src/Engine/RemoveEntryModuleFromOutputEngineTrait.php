@@ -20,9 +20,9 @@ trait RemoveEntryModuleFromOutputEngineTrait
         // For the API: maybe remove the entry module from the output
         if (
             App::getComponent(APIComponent::class)->isEnabled() &&
-            \PoP\Root\App::getState('scheme') == APISchemes::API &&
-            in_array(Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT, \PoP\Root\App::getState('actions')) &&
-            \PoP\Root\App::getState('dataoutputmode') == DataOutputModes::COMBINED
+            App::getState('scheme') == APISchemes::API &&
+            in_array(Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT, App::getState('actions')) &&
+            App::getState('dataoutputmode') == DataOutputModes::COMBINED
         ) {
             if ($data['datasetmodulesettings'] ?? null) {
                 $data['datasetmodulesettings'] = $this->removeEntryModuleFromOutput($data['datasetmodulesettings']);

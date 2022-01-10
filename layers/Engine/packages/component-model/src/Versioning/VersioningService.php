@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Versioning;
 
+use PoP\Root\App;
 use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -40,7 +41,7 @@ class VersioningService implements VersioningServiceInterface
         // Iterate through entries in `fieldVersionConstraints` and set them into a dictionary
         $this->versionConstraintsForFields = [];
         $schemaWarnings = [];
-        foreach ((\PoP\Root\App::getState('field-version-constraints') ?? []) as $typeField => $versionConstraint) {
+        foreach ((App::getState('field-version-constraints') ?? []) as $typeField => $versionConstraint) {
             // All fields are defined as "$type.$fieldName". If not, it's an error
             $entry = explode(self::TYPE_FIELD_SEPARATOR, $typeField);
             if (count($entry) != 2) {
@@ -81,7 +82,7 @@ class VersioningService implements VersioningServiceInterface
     public function getVersionConstraintsForDirective(string $directiveName): ?string
     {
         if ($this->versionConstraintsForDirectives === null) {
-            $this->versionConstraintsForDirectives = \PoP\Root\App::getState('directive-version-constraints');
+            $this->versionConstraintsForDirectives = App::getState('directive-version-constraints');
         }
         return $this->versionConstraintsForDirectives[$directiveName] ?? null;
     }

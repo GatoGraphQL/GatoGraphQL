@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Hooks;
 
+use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
@@ -23,19 +24,19 @@ class VarsHookSet extends AbstractHookSet
     {
         // Allow WP API to set the "routing-state" first
         // Each page is an independent configuration
-        if (\PoP\Root\App::getState('scheme') == APISchemes::API) {
+        if (App::getState('scheme') == APISchemes::API) {
             $this->addFieldsToComponents($components);
         }
 
         // Namespaces change the configuration
-        $components[] = $this->__('namespaced:', 'pop-engine') . (\PoP\Root\App::getState('namespace-types-and-interfaces') ?? false);
+        $components[] = $this->__('namespaced:', 'pop-engine') . (App::getState('namespace-types-and-interfaces') ?? false);
 
         return $components;
     }
 
     private function addFieldsToComponents(&$components): void
     {
-        if ($fields = \PoP\Root\App::getState('query')) {
+        if ($fields = App::getState('query')) {
             // Serialize instead of implode, because $fields can contain $key => $value
             $components[] = $this->__('fields:', 'pop-engine') . serialize($fields);
         }

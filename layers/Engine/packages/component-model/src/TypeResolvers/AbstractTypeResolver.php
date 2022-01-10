@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
@@ -64,7 +65,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     final public function getMaybeNamespacedTypeName(): string
     {
-        return \PoP\Root\App::getState('namespace-types-and-interfaces') ?
+        return App::getState('namespace-types-and-interfaces') ?
             $this->getNamespacedTypeName() :
             $this->getTypeName();
     }

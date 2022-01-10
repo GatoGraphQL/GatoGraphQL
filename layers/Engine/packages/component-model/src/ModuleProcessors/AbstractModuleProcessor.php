@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
@@ -1042,7 +1043,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function shouldExecuteMutation(array $module, array &$props): bool
     {
         // By default, execute only if the module is targeted for execution and doing POST
-        return 'POST' == $_SERVER['REQUEST_METHOD'] && \PoP\Root\App::getState('actionpath') == $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
+        return 'POST' == $_SERVER['REQUEST_METHOD'] && App::getState('actionpath') == $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
     }
 
     public function getDataloadSource(array $module, array &$props): string
@@ -1059,7 +1060,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         );
 
         // If we are in the API currently, stay in the API
-        if ($scheme = \PoP\Root\App::getState('scheme')) {
+        if ($scheme = App::getState('scheme')) {
             $ret = GeneralUtils::addQueryArgs([
                 Params::SCHEME => $scheme,
             ], $ret);
@@ -1082,7 +1083,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         // If mangled, make it mandle
-        if ($mangled = \PoP\Root\App::getState('mangled')) {
+        if ($mangled = App::getState('mangled')) {
             $ret = GeneralUtils::addQueryArgs([
                 Request::URLPARAM_MANGLED => $mangled,
             ], $ret);
