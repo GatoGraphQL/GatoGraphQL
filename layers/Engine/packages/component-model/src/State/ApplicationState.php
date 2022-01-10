@@ -25,24 +25,6 @@ class ApplicationState
 
         self::$vars = [];
 
-        // Allow for plug-ins to add their own vars
-        $hooksAPI = HooksAPIFacade::getInstance();
-        $hooksAPI->doAction(
-            'ApplicationState:addVars',
-            array(&self::$vars)
-        );
-
-        self::augmentVarsProperties();
-
         return self::$vars;
-    }
-
-    public static function augmentVarsProperties(): void
-    {
-        $hooksAPI = HooksAPIFacade::getInstance();
-        $hooksAPI->doAction(
-            'augmentVarsProperties',
-            array(&self::$vars)
-        );
     }
 }
