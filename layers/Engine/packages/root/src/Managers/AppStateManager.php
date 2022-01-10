@@ -18,7 +18,7 @@ class AppStateManager
      *
      * @var array<string,mixed>
      */
-    public array $state;
+    protected array $state;
 
     /**
      * Called by the AppLoader to initalize the state.
@@ -46,6 +46,11 @@ class AppStateManager
         foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
             $appStateProvider->augment($this->state);
         }
+    }
+
+    public function all(): array
+    {
+        return $this->state;
     }
 
     // @todo Check if they are needed
