@@ -31,7 +31,7 @@ class AppStateProvider extends AbstractAppStateProvider
             ]
         );
 
-        \PoP\Root\App::getState(['routing', 'queried-object']) = $queried_object;
-        \PoP\Root\App::getState(['routing', 'queried-object-id']) = $queried_object_id;
+        $state['routing']['queried-object'] = $queried_object;
+        $state['routing']['queried-object-id'] = $queried_object_id;
     }
 }
