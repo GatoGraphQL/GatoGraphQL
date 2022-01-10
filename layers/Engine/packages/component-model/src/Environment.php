@@ -32,10 +32,6 @@ class Environment
     {
         return getenv('ENABLE_SEMANTIC_VERSION_CONSTRAINTS') !== false ? strtolower(getenv('ENABLE_SEMANTIC_VERSION_CONSTRAINTS')) == "true" : false;
     }
-    public static function enableVersionByParams()
-    {
-        return getenv('ENABLE_VERSION_BY_PARAMS') !== false ? strtolower(getenv('ENABLE_VERSION_BY_PARAMS')) == "true" : false;
-    }
 
     // public static function failIfSubcomponentTypeResolverUndefined()
     // {
