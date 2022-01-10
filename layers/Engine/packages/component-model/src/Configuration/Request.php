@@ -101,30 +101,43 @@ class Request
         }
         $dataOutputItems = array_map('strtolower', $dataOutputItems);
 
-        $alldataOutputItems = [
+        $dataOutputItems = array_intersect(
+            $dataOutputItems,
+            static::getAllDataOutputItems()
+        );
+        if (!$dataOutputItems) {
+            return static::getDefaultDataOutputItems();
+        }
+        return $dataOutputItems;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected static function getAllDataOutputItems(): array
+    {
+        return [
             DataOutputItems::META,
             DataOutputItems::DATASET_MODULE_SETTINGS,
             DataOutputItems::MODULE_DATA,
             DataOutputItems::DATABASES,
             DataOutputItems::SESSION,
         ];
-        $dataOutputItems = array_intersect(
-            $dataOutputItems,
-            $alldataOutputItems
-        );
-        if (!$dataOutputItems) {
-            return [
-                DataOutputItems::META,
-                DataOutputItems::DATASET_MODULE_SETTINGS,
-                DataOutputItems::MODULE_DATA,
-                DataOutputItems::DATABASES,
-                DataOutputItems::SESSION,
-            ];
-        }
-        return $dataOutputItems;
     }
-    
-    
+
+    /**
+     * @return string[]
+     */
+    protected static function getDefaultDataOutputItems(): array
+    {
+        return [
+            DataOutputItems::META,
+            DataOutputItems::DATASET_MODULE_SETTINGS,
+            DataOutputItems::MODULE_DATA,
+            DataOutputItems::DATABASES,
+            DataOutputItems::SESSION,
+        ];
+    }
     
     /**
      * Indicates the version constraint for all fields/directives in the query

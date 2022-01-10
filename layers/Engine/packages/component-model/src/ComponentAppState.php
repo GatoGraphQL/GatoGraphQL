@@ -7,15 +7,9 @@ namespace PoP\ComponentModel\Component;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Configuration\Request;
-use PoP\ComponentModel\Constants\DatabasesOutputModes;
-use PoP\ComponentModel\Constants\DataOutputItems;
-use PoP\ComponentModel\Constants\DataOutputModes;
-use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Tokens\Param;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Root\App;
 use PoP\Root\Component\AbstractComponentAppState;
 use PoP\Routing\Facades\RoutingManagerFacade;
@@ -30,9 +24,6 @@ class ComponentAppState extends AbstractComponentAppState
      */
     public function initialize(array &$state): void
     {
-        
-        
-
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
         $modulefilter = $modulefilter_manager->getSelectedModuleFilterName();
 
