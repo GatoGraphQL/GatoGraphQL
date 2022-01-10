@@ -29,7 +29,7 @@ class PoP_SPA_RequestMeta_Hooks
                 \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
                 \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT,
                 Request::URLPARAM_MANGLED,
-                \PoP\ComponentModel\Constants\Params::STRATUM,
+                \PoP\ConfigurationComponentModel\Constants\Params::STRATUM,
             ];
             foreach ($elemKeys as $elemKey) {
                 if ($elemValue = $meta[$elemKey] ?? null) {
@@ -43,7 +43,7 @@ class PoP_SPA_RequestMeta_Hooks
             // Platform: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)
             $vars = ApplicationState::getVars();
             if ($vars['stratum'] && !$vars['stratum-isdefault']) {
-                $pushurlprops[\PoP\ComponentModel\Constants\Params::STRATUM] = $vars['stratum'];
+                $pushurlprops[\PoP\ConfigurationComponentModel\Constants\Params::STRATUM] = $vars['stratum'];
             }
 
             if ($pushurlprops) {
