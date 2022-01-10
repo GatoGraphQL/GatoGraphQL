@@ -25,8 +25,8 @@ class Request
         return null;
     }
 
-    public static function getQuery(): string
+    public static function getQuery(): ?string
     {
-        return $_REQUEST[QueryInputs::QUERY] ?? '';
+        return $_REQUEST[QueryInputs::QUERY] ?? null;
     }
 }
