@@ -37,13 +37,7 @@ class ComponentAppState extends AbstractComponentAppState
     public function initialize(array &$state): void
     {
         // Convert them to lower to make it insensitive to upper/lower case values
-        $output = strtolower($_REQUEST[Params::OUTPUT] ?? '');
-        $dataoutputitems = $_REQUEST[Params::DATA_OUTPUT_ITEMS] ?? [];
-        $datasources = strtolower($_REQUEST[Params::DATA_SOURCE] ?? '');
         $datastructure = strtolower($_REQUEST[Params::DATASTRUCTURE] ?? '');
-        $dataoutputmode = strtolower($_REQUEST[Params::DATAOUTPUTMODE] ?? '');
-        $dboutputmode = strtolower($_REQUEST[Params::DATABASESOUTPUTMODE] ?? '');
-        $target = strtolower($_REQUEST[Params::TARGET] ?? '');
         $mangled = DefinitionsRequest::isMangled() ? '' : DefinitionsRequest::URLPARAMVALUE_MANGLED_NONE;
         $actions = isset($_REQUEST[Params::ACTIONS]) ?
             array_map('strtolower', $_REQUEST[Params::ACTIONS]) : [];
@@ -54,6 +48,7 @@ class ComponentAppState extends AbstractComponentAppState
             ($_REQUEST[Params::VERSION] ?? $appVersion)
             : $appVersion;
 
+        $output = strtolower($_REQUEST[Params::OUTPUT] ?? '');
         $outputs = [
             Outputs::HTML,
             Outputs::JSON,
@@ -63,6 +58,7 @@ class ComponentAppState extends AbstractComponentAppState
         }
 
         // Target/Module default values (for either empty, or if the user is playing around with the url)
+        $datasources = strtolower($_REQUEST[Params::DATA_SOURCE] ?? '');
         $alldatasources = array(
             DataSourceSelectors::ONLYMODEL,
             DataSourceSelectors::MODELANDREQUEST,
@@ -71,6 +67,7 @@ class ComponentAppState extends AbstractComponentAppState
             $datasources = DataSourceSelectors::MODELANDREQUEST;
         }
 
+        $dataoutputmode = strtolower($_REQUEST[Params::DATAOUTPUTMODE] ?? '');
         $dataoutputmodes = array(
             DataOutputModes::SPLITBYSOURCES,
             DataOutputModes::COMBINED,
@@ -79,6 +76,7 @@ class ComponentAppState extends AbstractComponentAppState
             $dataoutputmode = DataOutputModes::SPLITBYSOURCES;
         }
 
+        $dboutputmode = strtolower($_REQUEST[Params::DATABASESOUTPUTMODE] ?? '');
         $dboutputmodes = array(
             DatabasesOutputModes::SPLITBYDATABASES,
             DatabasesOutputModes::COMBINED,
@@ -87,6 +85,7 @@ class ComponentAppState extends AbstractComponentAppState
             $dboutputmode = DatabasesOutputModes::SPLITBYDATABASES;
         }
 
+        $dataoutputitems = $_REQUEST[Params::DATA_OUTPUT_ITEMS] ?? [];
         if ($dataoutputitems) {
             if (!is_array($dataoutputitems)) {
                 $dataoutputitems = explode(Param::VALUE_SEPARATOR, strtolower($dataoutputitems));
@@ -126,6 +125,7 @@ class ComponentAppState extends AbstractComponentAppState
         // If not target, or invalid, reset it to "main"
         // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided
         // (ie initial load) and when target is provided (ie loading pageSection)
+        $target = strtolower($_REQUEST[Params::TARGET] ?? '');
         $targets = (array) $hooksAPI->applyFilters(
             'ApplicationState:targets',
             array(
