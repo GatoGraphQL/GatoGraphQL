@@ -10,7 +10,7 @@ use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use WP_Post;
 
-abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEndpointExecuter
+abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEndpointExecuter implements GraphQLQueryResolutionEndpointExecuterInterface
 {
     use EndpointResolverTrait;
 
