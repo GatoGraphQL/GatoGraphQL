@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
 use LogicException;
 use PoP\ComponentModel\App as ComponentModelApp;
 use PoP\ComponentModel\AppInterface as ComponentModelAppInterface;
-use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
+use PoP\ComponentModel\MutationResolution\MutationResolutionStoreInterface;
 use PoP\Root\App as RootApp;
 use PoP\Root\AppInterface as RootAppInterface;
 use PoP\Root\AppLoader;
@@ -78,16 +78,16 @@ class App implements AppInterface, ComponentModelAppInterface, RootAppInterface
     }
 
     public static function initializeComponentModel(
-        ?MutationResolutionManagerInterface $mutationResolutionManager = null,
+        ?MutationResolutionStoreInterface $mutationResolutionManager = null,
     ): void {
         ComponentModelApp::initializeComponentModel(
             $mutationResolutionManager,
         );
     }
 
-    public static function getMutationResolutionManager(): MutationResolutionManagerInterface
+    public static function getMutationResolutionStore(): MutationResolutionStoreInterface
     {
-        return ComponentModelApp::getMutationResolutionManager();
+        return ComponentModelApp::getMutationResolutionStore();
     }
 
     /**

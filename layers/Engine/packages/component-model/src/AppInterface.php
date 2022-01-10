@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
-use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
+use PoP\ComponentModel\MutationResolution\MutationResolutionStoreInterface;
 
 interface AppInterface
 {
     public static function initializeComponentModel(
-        ?MutationResolutionManagerInterface $MutationResolutionManager = null,
+        ?MutationResolutionStoreInterface $MutationResolutionStore = null,
     ): void;
 
-    public static function getMutationResolutionManager(): MutationResolutionManagerInterface;
+    public static function getMutationResolutionStore(): MutationResolutionStoreInterface;
 }

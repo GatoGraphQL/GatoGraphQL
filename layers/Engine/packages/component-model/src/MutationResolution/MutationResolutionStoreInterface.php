@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\MutationResolution;
 
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 
-interface MutationResolutionManagerInterface
+interface MutationResolutionStoreInterface
 {
     public function clearResults(): void;
 

@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
+use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionStoreFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
@@ -61,7 +61,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         parent::prepareDataPropertiesAfterMutationExecution($module, $props, $data_properties);
 
         if ($this->isCreate($module)) {
-            $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
+            $gd_dataload_actionexecution_manager = MutationResolutionStoreFacade::getInstance();
             if ($target_id = $gd_dataload_actionexecution_manager->getResult($this->getComponentMutationResolverBridge($module))) {
                 $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($target_id);
             } else {

@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\MutationResolution;
 
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 
-class MutationResolutionManager implements MutationResolutionManagerInterface
+class MutationResolutionStore implements MutationResolutionStoreInterface
 {
     /**
      * @var array<string, mixed>

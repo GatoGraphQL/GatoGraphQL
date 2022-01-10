@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel;
 
 use LogicException;
-use PoP\ComponentModel\MutationResolution\MutationResolutionManager;
-use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
+use PoP\ComponentModel\MutationResolution\MutationResolutionStore;
+use PoP\ComponentModel\MutationResolution\MutationResolutionStoreInterface;
 use PoP\Root\App as RootApp;
 use PoP\Root\AppInterface as RootAppInterface;
 use PoP\Root\AppLoader;
@@ -25,20 +25,20 @@ use Symfony\Component\DependencyInjection\Container;
  */
 class App implements AppInterface, RootAppInterface
 {
-    protected static MutationResolutionManagerInterface $mutationResolutionManager;
+    protected static MutationResolutionStoreInterface $mutationResolutionManager;
     
     public static function initializeComponentModel(
-        ?MutationResolutionManagerInterface $mutationResolutionManager = null,
+        ?MutationResolutionStoreInterface $mutationResolutionManager = null,
     ): void {
-        self::$mutationResolutionManager = $mutationResolutionManager ?? static::createMutationResolutionManager();
+        self::$mutationResolutionManager = $mutationResolutionManager ?? static::createMutationResolutionStore();
     }
 
-    protected static function createMutationResolutionManager(): MutationResolutionManagerInterface
+    protected static function createMutationResolutionStore(): MutationResolutionStoreInterface
     {
-        return new MutationResolutionManager();
+        return new MutationResolutionStore();
     }
 
-    public static function getMutationResolutionManager(): MutationResolutionManagerInterface
+    public static function getMutationResolutionStore(): MutationResolutionStoreInterface
     {
         return self::$mutationResolutionManager;
     }
