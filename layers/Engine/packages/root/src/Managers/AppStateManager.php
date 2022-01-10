@@ -20,6 +20,34 @@ class AppStateManager
      */
     public array $state;
 
+    /**
+     * Called by the AppLoader to initalize the state.
+     *
+     * Initialize application state
+     *
+     * @param array<string,mixed> $state
+     */
+    public function initializeAppState(): void
+    {
+        $this->state = [];
+        $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
+
+        // First pass: initialize
+        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
+            $appStateProvider->initialize($this->state);
+        }
+
+        // Second pass: consolidate
+        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
+            $appStateProvider->consolidate($this->state);
+        }
+
+        // Final pass: augment
+        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
+            $appStateProvider->augment($this->state);
+        }
+    }
+
     // @todo Check if they are needed
     // public function set(string $key, mixed $value): void
     // {
@@ -96,33 +124,5 @@ class AppStateManager
             $state = &$state[$pathItem];
         }
         return true;
-    }
-
-    /**
-     * Called by the AppLoader to initalize the state.
-     *
-     * Initialize application state
-     *
-     * @param array<string,mixed> $state
-     */
-    public function initializeAppState(): void
-    {
-        $this->state = [];
-        $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
-
-        // First pass: initialize
-        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
-            $appStateProvider->initialize($this->state);
-        }
-
-        // Second pass: consolidate
-        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
-            $appStateProvider->consolidate($this->state);
-        }
-
-        // Final pass: augment
-        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
-            $appStateProvider->augment($this->state);
-        }
     }
 }
