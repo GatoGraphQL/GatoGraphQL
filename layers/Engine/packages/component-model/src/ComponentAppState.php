@@ -11,12 +11,10 @@ use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
-use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Tokens\Param;
-use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Root\App;
 use PoP\Root\Component\AbstractComponentAppState;
@@ -32,22 +30,6 @@ class ComponentAppState extends AbstractComponentAppState
      */
     public function initialize(array &$state): void
     {
-        // Convert them to lower to make it insensitive to upper/lower case values
-        $datastructure = strtolower($_REQUEST[Params::DATASTRUCTURE] ?? '');
-        $mangled = DefinitionsRequest::isMangled() ? '' : DefinitionsRequest::URLPARAMVALUE_MANGLED_NONE;
-        $actions = isset($_REQUEST[Params::ACTIONS]) ?
-            array_map('strtolower', $_REQUEST[Params::ACTIONS]) : [];
-        $scheme = strtolower($_REQUEST[Params::SCHEME] ?? '');
-        
-        $output = strtolower($_REQUEST[Params::OUTPUT] ?? '');
-        $outputs = [
-            Outputs::HTML,
-            Outputs::JSON,
-        ];
-        if (!in_array($output, $outputs)) {
-            $output = Outputs::HTML;
-        }
-
         // Target/Module default values (for either empty, or if the user is playing around with the url)
         $datasources = strtolower($_REQUEST[Params::DATA_SOURCE] ?? '');
         $alldatasources = array(
@@ -128,17 +110,17 @@ class ComponentAppState extends AbstractComponentAppState
             [
                 'nature' => $routingManager->getCurrentNature(),
                 'route' => $routingManager->getCurrentRoute(),
-                'output' => $output,
+                'output' => Request::getOutput(),
                 'modulefilter' => $modulefilter,
                 'actionpath' => $_REQUEST[Params::ACTION_PATH] ?? '',
                 'dataoutputitems' => $dataoutputitems,
                 'datasources' => $datasources,
-                'datastructure' => $datastructure,
+                'datastructure' => Request::getDataStructure(),
                 'dataoutputmode' => $dataoutputmode,
                 'dboutputmode' => $dboutputmode,
-                'mangled' => $mangled,
-                'actions' => $actions,
-                'scheme' => $scheme,
+                'mangled' => Request::getMangledValue(),
+                'actions' => Request::getActions(),
+                'scheme' => Request::getScheme(),
                 'variables' => $variables,
                 'only-fieldname-as-outputkey' => false,
                 'namespace-types-and-interfaces' => $componentConfiguration->mustNamespaceTypes(),
