@@ -16,7 +16,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         if (!is_null($moduleAtts)) {
             return $moduleAtts['fields'];
         }
-        // If it is a normal module, it is the first added, then simply get the fields from $vars
+        // If it is a normal module, it is the first added, then simply get the fields from the application state
         $vars = ApplicationState::getVars();
         return \PoP\Root\App::getState('query') ?? [];
     }

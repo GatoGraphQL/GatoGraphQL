@@ -12,12 +12,11 @@ abstract class AbstractLoadingCPTSchemaConfiguratorExecuter extends AbstractSche
     protected function getCustomPostID(): ?int
     {
         if (\is_singular($this->getCustomPostType())) {
-            // Watch out! If accessing $vars it triggers setting ComponentConfiguration vars,
+            // Watch out! If accessing the application state it triggers setting ComponentConfiguration vars,
             // but we have not set the hooks yet!
             // For instance for `mustNamespaceTypes()`,
             // to be set in `executeSchemaConfigurationOptionsNamespacing()`
             // Hence, code below was commented, and access the $post from the global variable
-            // $vars = ApplicationState::getVars();
             // $postID = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             global $post;
             return $post->ID;

@@ -61,7 +61,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     public function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array
     {
         /**
-         * Extract the query from the post (or from its parents), and set it in $vars
+         * Extract the query from the post (or from its parents), and set it in the application state
          */
         return $this->getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
     }

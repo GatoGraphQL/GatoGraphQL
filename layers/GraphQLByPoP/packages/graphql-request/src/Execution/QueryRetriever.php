@@ -18,7 +18,6 @@ class QueryRetriever implements QueryRetrieverInterface
         } else {
             $payload = $_POST;
         }
-        // Get the query, transform it, and set it on $vars
         return [
             $payload['query'] ?? null,
             $payload['variables'] ?? null,
