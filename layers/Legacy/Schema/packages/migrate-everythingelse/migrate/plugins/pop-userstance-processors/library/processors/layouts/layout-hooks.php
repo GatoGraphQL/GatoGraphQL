@@ -34,7 +34,7 @@ class PoPTheme_UserStance_LayoutHooks
         // Only if it is not single. In that case, we add the block to directly add the Thought
         // Add the "What do you think about TPP?" before the userpostinteraction layouts
         $vars = ApplicationState::getVars();
-        if (!$vars['routing-state']['is-custompost']) {
+        if (!$vars['routing']['is-custompost']) {
             array_unshift(
                 $layouts,
                 [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::MODULE_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE]

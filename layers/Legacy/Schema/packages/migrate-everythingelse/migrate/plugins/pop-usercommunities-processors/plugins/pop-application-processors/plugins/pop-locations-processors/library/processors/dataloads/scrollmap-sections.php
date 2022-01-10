@@ -96,7 +96,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
          // Members of the Community
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
                 $vars = ApplicationState::getVars();
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = $vars['routing']['queried-object-id'];
                 // If the profile is not a community, then return no users at all (Eg: a community opting out from having members)
                 if (gdUreIsCommunity($author)) {
                     URE_CommunityUtils::addDataloadqueryargsCommunitymembers($ret, $author);
@@ -124,7 +124,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
          // Members of the Community
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
                 $vars = ApplicationState::getVars();
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = $vars['routing']['queried-object-id'];
                 // If the profile is not a community, then return no users at all (Eg: a community opting out from having members)
                 if (!gdUreIsCommunity($author)) {
                     $this->setProp($module, $props, 'skip-data-load', true);

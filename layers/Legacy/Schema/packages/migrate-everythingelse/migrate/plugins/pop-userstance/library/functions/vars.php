@@ -11,7 +11,7 @@ function popUserstanceModuleInstanceComponents($components)
     // Add the origin, as it is needed to decide between blocks PoP_Module_Processor_MainBlocks::MODULE_BLOCK_SINGLEPOSTOPINIONATEDVOTE_CREATEORUPDATE and self::MODULE_BLOCK_OPINIONATEDVOTE_CREATEORUPDATE
     // The difference is, is there parameter "tid"?
     $vars = ApplicationState::getVars();
-    if ($vars['routing-state']['is-standard']) {
+    if ($vars['routing']['is-standard']) {
         $route = $vars['route'];
 
         if ($route == POP_USERSTANCE_ROUTE_ADDOREDITSTANCE) {

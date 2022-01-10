@@ -41,7 +41,7 @@ function gdGetPostDescription()
     $vars = ApplicationState::getVars();
     $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-    $post_id = $vars['routing-state']['queried-object-id'];
+    $post_id = $vars['routing']['queried-object-id'];
     $excerpt = $customPostTypeAPI->getExcerpt($post_id);
 
     // If the excerpt is empty, return the post content instead
@@ -81,16 +81,16 @@ function gdGetDocumentThumb($size = 'large')
 {
     $vars = ApplicationState::getVars();
     $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
-    if ($vars['routing-state']['is-custompost'] || $vars['routing-state']['is-page']) {
-        $post_id = $vars['routing-state']['queried-object-id'];
+    if ($vars['routing']['is-custompost'] || $vars['routing']['is-page']) {
+        $post_id = $vars['routing']['queried-object-id'];
         if ($post_thumb_id = MediaHelpers::getThumbId($post_id)) {
             $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
             $thumb = $mediaTypeAPI->getImageProperties($post_thumb_id, $size);
             $thumb_mime_type = $cmsmediaapi->getMediaMimeType($post_thumb_id);
         }
-    } elseif ($vars['routing-state']['is-user']) {
+    } elseif ($vars['routing']['is-user']) {
         if (defined('POP_AVATAR_INITIALIZED')) {
-            $author = $vars['routing-state']['queried-object-id'];
+            $author = $vars['routing']['queried-object-id'];
             $userphoto = gdGetAvatarPhotoinfo($author);
             $thumb = $userphoto['src'];
             $thumb_mime_type = '';

@@ -415,11 +415,11 @@ class NSCPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carou
         if ($route = $routes[$module[1]] ?? null) {
             return RouteUtils::getRouteURL($route);
         } elseif ($route = $authorroutes[$module[1]] ?? null) {
-            $author = $vars['routing-state']['queried-object-id'];
+            $author = $vars['routing']['queried-object-id'];
             $url = $userTypeAPI->getUserURL($author);
             return RequestUtils::addRoute($url, $route);
         } elseif ($route = $tagroutes[$module[1]] ?? null) {
-            $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
+            $url = $postTagTypeAPI->getTagURL($vars['routing']['queried-object-id']);
             return RequestUtils::addRoute($url, $route);
         }
 

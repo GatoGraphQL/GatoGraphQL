@@ -7,7 +7,7 @@ function gdUreAuthorParentpageidImpl($pageid, $author_id = null)
 {
     if (is_null($author_id)) {
         $vars = ApplicationState::getVars();
-        $author_id = $vars['routing-state']['queried-object-id'];
+        $author_id = $vars['routing']['queried-object-id'];
     }
 
     if (gdUreIsOrganization($author_id)) {

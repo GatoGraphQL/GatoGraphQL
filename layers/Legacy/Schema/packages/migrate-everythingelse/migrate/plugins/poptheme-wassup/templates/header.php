@@ -32,7 +32,7 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
     <?php $site_name = $cmsapplicationapi->getSiteName(); ?>
     <?php $js_disabled = PoP_WebPlatform_ServerUtils::disableJs(); ?>
     <title><?php echo $title ?></title>
-    <?php if (/*$vars['routing-state']['is-search'] || */$vars['routing-state']['is-user']) : ?>
+    <?php if (/*$vars['routing']['is-search'] || */$vars['routing']['is-user']) : ?>
     <meta name="robots" content="noindex, nofollow" />
     <?php endif ?>
     <link rel="alternate" type="application/rss+xml" href="<?php bloginfo('rss2_url') ?>" title="<?php printf(TranslationAPIFacade::getInstance()->__('%s latest posts', 'poptheme-wassup'), $cmsapplicationhelpers->escapeHTML($site_name, 1)) ?>" />
@@ -56,16 +56,16 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
     <meta name="twitter:site" content="<?php echo $twitter_user ?>">
     <meta name="twitter:creator" content="<?php echo $twitter_user ?>">
     <?php
-    if ($vars['routing-state']['is-custompost'] || $vars['routing-state']['is-page']) {
+    if ($vars['routing']['is-custompost'] || $vars['routing']['is-page']) {
         $description = gdGetPostDescription();
-    } elseif ($vars['routing-state']['is-standard']) {
+    } elseif ($vars['routing']['is-standard']) {
         $description = gdHeaderRouteDescription();
-    } elseif ($vars['routing-state']['is-user']) {
-        $author = $vars['routing-state']['queried-object-id'];
+    } elseif ($vars['routing']['is-user']) {
+        $author = $vars['routing']['queried-object-id'];
         $curauth = $userTypeAPI->getUserById($author);
         $description = sprintf(TranslationAPIFacade::getInstance()->__('View %1$s profile and get in touch through %2$s.', 'poptheme-wassup'), $curauth->display_name, $site_name);
-    } elseif ($vars['routing-state']['is-tag']) {
-        $tag_id = $vars['routing-state']['queried-object-id'];
+    } elseif ($vars['routing']['is-tag']) {
+        $tag_id = $vars['routing']['queried-object-id'];
         $description = sprintf(
             TranslationAPIFacade::getInstance()->__('Entries tagged “%1$s” in %2$s.', 'poptheme-wassup'),
             $applicationtaxonomyapi->getTagSymbolName($tag_id),

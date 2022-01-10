@@ -24,7 +24,7 @@ HooksAPIFacade::getInstance()->addAction('rss2_item', 'gdRssFeaturedImage');
 function gdRssFeaturedImage()
 {
     $vars = ApplicationState::getVars();
-    $post_id = $vars['routing-state']['queried-object-id'];
+    $post_id = $vars['routing']['queried-object-id'];
     gdRssPrintFeaturedImage($post_id);
 }
 function gdRssPrintFeaturedImage($post_id)

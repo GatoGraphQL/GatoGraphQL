@@ -24,13 +24,13 @@ class AppStateProvider extends AbstractAppStateProvider
     public function augment(array &$state): void
     {
         $nature = $state['nature'];
-        $state['routing-state']['is-tag'] = $nature === RouteNatures::TAG;
+        $state['routing']['is-tag'] = $nature === RouteNatures::TAG;
 
         // Save the name of the taxonomy as an attribute,
         // needed to match the RouteModuleProcessor vars conditions
         if ($nature === RouteNatures::TAG) {
-            $termObjectID = $state['routing-state']['queried-object-id'];
-            $state['routing-state']['taxonomy-name'] = $this->getTaxonomyTypeAPI()->getTermTaxonomyName($termObjectID);
+            $termObjectID = $state['routing']['queried-object-id'];
+            $state['routing']['taxonomy-name'] = $this->getTaxonomyTypeAPI()->getTermTaxonomyName($termObjectID);
         }
     }
 }

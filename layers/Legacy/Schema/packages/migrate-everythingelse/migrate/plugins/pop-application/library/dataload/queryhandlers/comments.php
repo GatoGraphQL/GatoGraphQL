@@ -14,7 +14,7 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
             $vars = ApplicationState::getVars();
 
             // By default, select the global $post ID;
-            $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID] = $vars['routing-state']['queried-object-id'];
+            $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID] = $vars['routing']['queried-object-id'];
         }
 
         // // Limit: by default, show all comments

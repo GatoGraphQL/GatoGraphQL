@@ -301,7 +301,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 'dataoutputitems',
                 'datasources',
                 // Nature
-                'routing-state',
+                'routing',
             ),
             array_unique(array_keys($extra_vars))
         );
@@ -382,7 +382,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $vars['format'] = $format;
         $vars['route'] = $route;
         $vars['target'] = $target;
-        // $vars['routing-state'] = array();
+        // $vars['routing'] = array();
         // ApplicationState::setNatureInGlobalState();
 
         // Save the list of all the paths. It will be needed later,
@@ -396,9 +396,9 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Allow to set the extra vars
                 self::setExtraVarsProperties($vars, $extra_vars, $page_id);
 
-                $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $pageTypeAPI->getPage($page_id);
-                $vars['routing-state']['queried-object-id'] = $page_id;
+                $vars['routing'] = [];
+                $vars['routing']['queried-object'] = $pageTypeAPI->getPage($page_id);
+                $vars['routing']['queried-object-id'] = $page_id;
                 ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources,
@@ -419,7 +419,7 @@ class PoP_ResourceLoaderProcessorUtils {
             }
         } elseif ($nature == RouteNatures::STANDARD) {
 
-            $vars['routing-state'] = [];
+            $vars['routing'] = [];
             ApplicationState::augmentVarsProperties();
 
             // For the page nature, we must save the resources under the page path,
@@ -457,9 +457,9 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Allow to set the extra vars
                 self::setExtraVarsProperties($vars, $extra_vars, $post_id);
 
-                $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $customPostTypeAPI->getCustomPost($post_id);
-                $vars['routing-state']['queried-object-id'] = $post_id;
+                $vars['routing'] = [];
+                $vars['routing']['queried-object'] = $customPostTypeAPI->getCustomPost($post_id);
+                $vars['routing']['queried-object-id'] = $post_id;
                 ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
@@ -488,9 +488,9 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Allow to set the extra vars: "source" => "community"/"organization", with the value set under the author id
                 self::setExtraVarsProperties($vars, $extra_vars, $author);
 
-                $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $userTypeAPI->getUserById($author);
-                $vars['routing-state']['queried-object-id'] = $author;
+                $vars['routing'] = [];
+                $vars['routing']['queried-object'] = $userTypeAPI->getUserById($author);
+                $vars['routing']['queried-object-id'] = $author;
                 ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
@@ -514,9 +514,9 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Allow to set the extra vars
                 self::setExtraVarsProperties($vars, $extra_vars, $tag_id);
 
-                $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $postTagTypeAPI->getTag($tag_id);
-                $vars['routing-state']['queried-object-id'] = $tag_id;
+                $vars['routing'] = [];
+                $vars['routing']['queried-object'] = $postTagTypeAPI->getTag($tag_id);
+                $vars['routing']['queried-object-id'] = $tag_id;
                 ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
@@ -533,7 +533,7 @@ class PoP_ResourceLoaderProcessorUtils {
             }
         } elseif ($nature == RouteNatures::HOME) {
 
-            $vars['routing-state'] = [];
+            $vars['routing'] = [];
             ApplicationState::augmentVarsProperties();
 
             // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
@@ -550,7 +550,7 @@ class PoP_ResourceLoaderProcessorUtils {
             // $pop_module_processor_runtimecache->deleteCache();
         } elseif ($nature == RouteNatures::NOTFOUND) {
 
-            $vars['routing-state'] = [];
+            $vars['routing'] = [];
             ApplicationState::augmentVarsProperties();
 
             // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key

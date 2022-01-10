@@ -80,16 +80,16 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
             switch ($vars['nature']) {
                 case UserRouteNatures::USER:
-                    $url = $userTypeAPI->getUserURL($vars['routing-state']['queried-object-id']);
+                    $url = $userTypeAPI->getUserURL($vars['routing']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 
                 case TagRouteNatures::TAG:
-                    $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
+                    $url = $postTagTypeAPI->getTagURL($vars['routing']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 
                 case PageRouteNatures::PAGE:
                 case CustomPostRouteNatures::CUSTOMPOST:
-                    $url = $customPostTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
+                    $url = $customPostTypeAPI->getPermalink($vars['routing']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 
                 case RouteNatures::HOME:

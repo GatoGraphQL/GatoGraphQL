@@ -8,7 +8,7 @@ HooksAPIFacade::getInstance()->addFilter('redirect_canonical', 'noRedirectOn404'
 function noRedirectOn404($redirect_url)
 {
     $vars = ApplicationState::getVars();
-    if ($vars['routing-state']['is-404']) {
+    if ($vars['routing']['is-404']) {
         return false;
     }
     return $redirect_url;

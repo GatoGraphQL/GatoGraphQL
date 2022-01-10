@@ -19,7 +19,7 @@ class PoP_AutomatedEmails_Operator
         $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
 
-        if ($vars['routing-state']['is-standard']) {
+        if ($vars['routing']['is-standard']) {
             $route = $vars['route'];
             if ($automatedemails = $pop_automatedemails_manager->getAutomatedEmails($route)) {
                 foreach ($automatedemails as $automatedemail) {

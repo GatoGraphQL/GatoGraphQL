@@ -19,7 +19,7 @@ class PoPTheme_AddHighlights_Processors_ContentHooks
     {
         if ($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE] || $module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_USERPOSTINTERACTION]) {
             $vars = ApplicationState::getVars();
-            $post_id = $vars['routing-state']['queried-object-id'];
+            $post_id = $vars['routing']['queried-object-id'];
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             if ($customPostTypeAPI->getCustomPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
                 if (($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE])) {

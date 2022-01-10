@@ -15,7 +15,7 @@ class UREPoP_RoleProcessors_LatestCounts_Hooks
     public function getClasses($classes)
     {
         $vars = ApplicationState::getVars();
-        $author = $vars['routing-state']['queried-object-id'];
+        $author = $vars['routing']['queried-object-id'];
 
         // Add all the members of the community, if the author is a community, and we're on the Community+Members page
         $vars = ApplicationState::getVars();

@@ -27,7 +27,7 @@ class PoP_URE_Engine_Hooks
     {
         $vars = &$vars_in_array[0];
         if ($vars['nature'] == UserRouteNatures::USER) {
-            $author = $vars['routing-state']['queried-object-id'];
+            $author = $vars['routing']['queried-object-id'];
             if (gdUreIsCommunity($author)) {
                 $source = $_REQUEST[GD_URLPARAM_URECONTENTSOURCE] ?? null;
                 $sources = array(
@@ -51,8 +51,8 @@ class PoP_URE_Engine_Hooks
     {
         $vars = &$vars_in_array[0];
         if ($vars['nature'] == UserRouteNatures::USER) {
-            $author = $vars['routing-state']['queried-object-id'];
-            $vars['routing-state']['queried-object-is-community'] = gdUreIsCommunity($author);
+            $author = $vars['routing']['queried-object-id'];
+            $vars['routing']['queried-object-is-community'] = gdUreIsCommunity($author);
         }
     }
 }

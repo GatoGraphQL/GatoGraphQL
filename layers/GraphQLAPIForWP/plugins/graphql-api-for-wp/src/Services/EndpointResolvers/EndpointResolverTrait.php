@@ -28,7 +28,7 @@ trait EndpointResolverTrait
         // /**
         //  * Priority 1: Execute before VarsHookSet in the API package, to set-up the variables
         //  * in $vars as soon as we knows if it's a singular post of this type.
-        //  * But after setting $vars['routing-state']['queried-object-id'], to get the current
+        //  * But after setting $vars['routing']['queried-object-id'], to get the current
         //  * post ID from $vars instead of the global context
         //  */
         // \add_action(
@@ -117,7 +117,7 @@ trait EndpointResolverTrait
         list(
             $graphQLQuery,
             $graphQLVariables
-        ) = $this->getGraphQLQueryAndVariables($vars['routing-state']['queried-object']);
+        ) = $this->getGraphQLQueryAndVariables($vars['routing']['queried-object']);
         if (!$graphQLQuery) {
             // If there is no query, nothing to do!
             return;
@@ -130,7 +130,7 @@ trait EndpointResolverTrait
             // But this behavior can be overriden for the persisted query,
             // by setting "Accept Variables as URL Params" => false
             // When editing in the editor, 'queried-object' will be null, and that's OK
-            $vars['variables'] = $this->doURLParamsOverrideGraphQLVariables($vars['routing-state']['queried-object']) ?
+            $vars['variables'] = $this->doURLParamsOverrideGraphQLVariables($vars['routing']['queried-object']) ?
                 array_merge(
                     $graphQLVariables,
                     $vars['variables'] ?? []

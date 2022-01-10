@@ -26,6 +26,6 @@ class ApplicationStateHookSet extends AbstractHookSet
     {
         // Remove the queried object
         $safeVars = &$vars_in_array[0];
-        unset($safeVars['routing-state']['queried-object']);
+        unset($safeVars['routing']['queried-object']);
     }
 }

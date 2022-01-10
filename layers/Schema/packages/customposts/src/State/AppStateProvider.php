@@ -24,12 +24,12 @@ class AppStateProvider extends AbstractAppStateProvider
     public function augment(array &$state): void
     {
         $nature = $state['nature'];
-        $state['routing-state']['is-custompost'] = $nature === RouteNatures::CUSTOMPOST;
+        $state['routing']['is-custompost'] = $nature === RouteNatures::CUSTOMPOST;
 
         // Attributes needed to match the RouteModuleProcessor vars conditions
         if ($nature === RouteNatures::CUSTOMPOST) {
-            $customPostID = $state['routing-state']['queried-object-id'];
-            $state['routing-state']['queried-object-post-type'] = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+            $customPostID = $state['routing']['queried-object-id'];
+            $state['routing']['queried-object-post-type'] = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
         }
     }
 }

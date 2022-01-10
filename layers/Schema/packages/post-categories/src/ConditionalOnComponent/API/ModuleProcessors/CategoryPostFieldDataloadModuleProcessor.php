@@ -73,7 +73,7 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST:
                 $vars = ApplicationState::getVars();
-                $ret['category-ids'] = [$vars['routing-state']['queried-object-id']];
+                $ret['category-ids'] = [$vars['routing']['queried-object-id']];
                 break;
         }
 

@@ -30,7 +30,7 @@ class VarsHookSet extends AbstractHookSet
                     []
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_PAGE, $component_types)) {
-                    $page_id = $vars['routing-state']['queried-object-id'];
+                    $page_id = $vars['routing']['queried-object-id'];
                     $components[] = $this->__('page id:', 'pop-engine') . $page_id;
                 }
                 break;

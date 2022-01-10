@@ -50,14 +50,14 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['are-mutations-enabled'] = true;
 
         // Set the routing state (eg: PoP Queried Object can add its information)
-        $state['routing-state'] = [];
+        $state['routing'] = [];
     }
 
     public function augment(array &$state): void
     {
         $nature = $state['nature'];
-        $state['routing-state']['is-standard'] = $nature === RouteNatures::STANDARD;
-        $state['routing-state']['is-home'] = $nature === RouteNatures::HOME;
-        $state['routing-state']['is-404'] = $nature === RouteNatures::NOTFOUND;
+        $state['routing']['is-standard'] = $nature === RouteNatures::STANDARD;
+        $state['routing']['is-home'] = $nature === RouteNatures::HOME;
+        $state['routing']['is-404'] = $nature === RouteNatures::NOTFOUND;
     }
 }

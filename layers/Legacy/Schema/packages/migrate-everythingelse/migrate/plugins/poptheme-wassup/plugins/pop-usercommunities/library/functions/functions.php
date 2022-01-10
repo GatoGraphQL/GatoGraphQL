@@ -7,8 +7,8 @@ HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_TabPanePageSectio
 function gdUreAddSourceParamPagesections($url)
 {
     $vars = ApplicationState::getVars();
-    if ($vars['routing-state']['is-user']) {
-        $author = $vars['routing-state']['queried-object-id'];
+    if ($vars['routing']['is-user']) {
+        $author = $vars['routing']['queried-object-id'];
         return gdUreAddSourceParam($url, $author);
     }
 

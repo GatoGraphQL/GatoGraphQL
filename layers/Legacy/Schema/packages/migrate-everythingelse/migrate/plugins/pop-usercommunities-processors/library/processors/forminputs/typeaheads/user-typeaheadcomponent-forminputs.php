@@ -34,7 +34,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
         switch ($module[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITYPLUSMEMBERS:
                 $vars = ApplicationState::getVars();
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = $vars['routing']['queried-object-id'];
                 $url = $userTypeAPI->getUserURL($author);
                 return RequestUtils::addRoute($url, POP_USERCOMMUNITIES_ROUTE_COMMUNITYPLUSMEMBERS);
 

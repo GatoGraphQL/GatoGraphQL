@@ -31,7 +31,7 @@ class AppStateProvider extends AbstractAppStateProvider
             ]
         );
 
-        $vars['routing-state']['queried-object'] = $queried_object;
-        $vars['routing-state']['queried-object-id'] = $queried_object_id;
+        $vars['routing']['queried-object'] = $queried_object;
+        $vars['routing']['queried-object-id'] = $queried_object_id;
     }
 }

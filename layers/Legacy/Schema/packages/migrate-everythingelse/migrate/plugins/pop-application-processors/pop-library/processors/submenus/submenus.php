@@ -122,7 +122,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = $vars['routing']['queried-object-id'];
                 $url = $userTypeAPI->getUserURL($author);
                 $url = RequestUtils::addRoute($url, $route);
 
@@ -130,11 +130,11 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                 return HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomSubMenus:getUrl:author', $url, $route, $author);
 
             case self::MODULE_SUBMENU_TAG:
-                $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagURL($vars['routing']['queried-object-id']);
                 return RequestUtils::addRoute($url, $route);
 
             case self::MODULE_SUBMENU_SINGLE:
-                $url = $customPostTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
+                $url = $customPostTypeAPI->getPermalink($vars['routing']['queried-object-id']);
                 return RequestUtils::addRoute($url, $route);
         }
 

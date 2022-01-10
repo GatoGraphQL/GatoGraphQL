@@ -25,14 +25,14 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
         switch ($module[1]) {
             case self::MODULE_LATESTCOUNT_TAG_CONTENT:
                 return array(
-                    'tag'.$vars['routing-state']['queried-object-id']
+                    'tag'.$vars['routing']['queried-object-id']
                 );
             
             case self::MODULE_LATESTCOUNT_CONTENT:
                 return GD_LatestCounts_Utils::getAllcontentClasses($module, $props);
             
             case self::MODULE_LATESTCOUNT_AUTHOR_CONTENT:
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = $vars['routing']['queried-object-id'];
                 $ret = array(
                     'author'.$author
                 );
@@ -46,7 +46,7 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
                 return GD_LatestCounts_Utils::authorFilters($ret, $module, $props);
             
             case self::MODULE_LATESTCOUNT_SINGLE_CONTENT:
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = $vars['routing']['queried-object-id'];
                 $ret = array(
                     'single'.$post_id
                 );

@@ -13,7 +13,7 @@ function maybeGetTitleAsBasicContent($title, $post_id = null)
     );
     if (is_null($post_id)) {
         $vars = ApplicationState::getVars();
-        $post_id = $vars['routing-state']['queried-object-id'];
+        $post_id = $vars['routing']['queried-object-id'];
     }
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
     if (in_array($customPostTypeAPI->getCustomPostType($post_id), $post_types)) {

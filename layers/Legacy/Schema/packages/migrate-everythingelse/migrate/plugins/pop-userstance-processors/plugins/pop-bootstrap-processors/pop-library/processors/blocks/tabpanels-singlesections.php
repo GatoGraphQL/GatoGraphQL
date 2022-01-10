@@ -59,7 +59,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL:
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = $vars['routing']['queried-object-id'];
                 if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
                     $this->setProp($module, $props, 'show-controls-bottom', false);
                 }

@@ -9,8 +9,8 @@ function gdUreModuleInstanceComponents($components)
 
     // Add source param for Communities: view their profile as Community or personal
     $vars = ApplicationState::getVars();
-    if ($vars['routing-state']['is-user']) {
-        $author = $vars['routing-state']['queried-object-id'];
+    if ($vars['routing']['is-user']) {
+        $author = $vars['routing']['queried-object-id'];
         if (gdUreIsCommunity($author)) {
             if ($source = $vars['source']) {
                 $components[] = TranslationAPIFacade::getInstance()->__('source:', 'pop-usercommunities').$source;

@@ -33,7 +33,7 @@ class PoP_Application_SectionUtils
     {
         $vars = ApplicationState::getVars();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        $tag_id = $vars['routing-state']['queried-object-id'];
+        $tag_id = $vars['routing']['queried-object-id'];
         $ret['tag-ids'] = [$tag_id];
         $ret['custompost-types'] = $cmsapplicationpostsapi->getAllcontentPostTypes();
 

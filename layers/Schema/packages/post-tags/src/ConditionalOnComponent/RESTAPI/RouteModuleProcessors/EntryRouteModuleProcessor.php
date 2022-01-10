@@ -56,7 +56,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->getRestDataStructureFormatter()->getName(),
-                'routing-state' => [
+                'routing' => [
                     'taxonomy-name' => $this->getPostTagTypeAPI()->getPostTagTaxonomyName(),
                 ],
             ],
@@ -113,7 +113,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'datastructure' => $this->getRestDataStructureFormatter()->getName(),
-                    'routing-state' => [
+                    'routing' => [
                         'taxonomy-name' => $this->getPostTagTypeAPI()->getPostTagTaxonomyName(),
                     ],
                 ],

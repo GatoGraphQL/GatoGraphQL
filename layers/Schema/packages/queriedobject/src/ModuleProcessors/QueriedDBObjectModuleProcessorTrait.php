@@ -11,6 +11,6 @@ trait QueriedDBObjectModuleProcessorTrait
     protected function getQueriedDBObjectID(array $module, array &$props, &$data_properties): string | int | array | null
     {
         $vars = ApplicationState::getVars();
-        return $vars['routing-state']['queried-object-id'] ?? null;
+        return $vars['routing']['queried-object-id'] ?? null;
     }
 }

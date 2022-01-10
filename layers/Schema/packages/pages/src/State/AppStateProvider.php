@@ -12,6 +12,6 @@ class AppStateProvider extends AbstractAppStateProvider
     public function augment(array &$state): void
     {
         $nature = $state['nature'];
-        $state['routing-state']['is-page'] = $nature === RouteNatures::PAGE;
+        $state['routing']['is-page'] = $nature === RouteNatures::PAGE;
     }
 }

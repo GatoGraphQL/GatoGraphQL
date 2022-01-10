@@ -18,7 +18,7 @@ abstract class AbstractLoadingCPTSchemaConfiguratorExecuter extends AbstractSche
             // to be set in `executeSchemaConfigurationOptionsNamespacing()`
             // Hence, code below was commented, and access the $post from the global variable
             // $vars = ApplicationState::getVars();
-            // $postID = $vars['routing-state']['queried-object-id'];
+            // $postID = $vars['routing']['queried-object-id'];
             global $post;
             return $post->ID;
         }

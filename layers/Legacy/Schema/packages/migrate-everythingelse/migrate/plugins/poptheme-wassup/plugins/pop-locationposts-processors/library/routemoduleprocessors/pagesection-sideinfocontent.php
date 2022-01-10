@@ -55,7 +55,7 @@ class PoPTheme_Wassup_LocationPosts_Module_SideInfoContentPageSectionRouteModule
         $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
             'module' => [PoPSP_URE_EM_Module_Processor_SidebarMultiples::class, PoPSP_URE_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR],
             'conditions' => [
-                'routing-state' => [
+                'routing' => [
                     'queried-object-post-type' => POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST,
                 ],
             ],

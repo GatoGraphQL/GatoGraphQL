@@ -73,7 +73,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
                 $vars = ApplicationState::getVars();
-                $ret['tag-ids'] = [$vars['routing-state']['queried-object-id']];
+                $ret['tag-ids'] = [$vars['routing']['queried-object-id']];
                 break;
         }
 

@@ -10,7 +10,7 @@ HooksAPIFacade::getInstance()->addFilter(
     'document_title_parts',
     function ($title) {
         $vars = ApplicationState::getVars();
-        if ($vars['routing-state']['is-standard']) {
+        if ($vars['routing']['is-standard']) {
             $title['title'] = strip_tags(RouteUtils::getRouteTitle($vars['route']));
         }
         return $title;

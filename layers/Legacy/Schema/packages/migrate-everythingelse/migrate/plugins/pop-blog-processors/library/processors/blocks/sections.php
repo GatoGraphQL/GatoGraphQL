@@ -318,7 +318,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 $vars = ApplicationState::getVars();
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = $vars['routing']['queried-object-id'];
                 return sprintf(
                     '<br/><p class="text-center"><a href="%s">%s</a></p>',
                     $userTypeAPI->getUserURL($author),

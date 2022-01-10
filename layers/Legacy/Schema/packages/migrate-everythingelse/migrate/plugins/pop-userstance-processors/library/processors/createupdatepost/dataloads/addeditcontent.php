@@ -147,7 +147,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                     UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsGeneralstances($query);
                 }
                 elseif ($module[1] == self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE) {
-                    $post_id = $vars['routing-state']['queried-object-id'];
+                    $post_id = $vars['routing']['queried-object-id'];
                     UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $post_id);
                 }
 

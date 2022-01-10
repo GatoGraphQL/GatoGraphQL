@@ -39,7 +39,7 @@ class VarsHookSet extends AbstractHookSet
                     )
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
-                    $customPostType = $vars['routing-state']['queried-object-post-type'];
+                    $customPostType = $vars['routing']['queried-object-post-type'];
                     $components[] = $this->__('post type:', 'pop-engine') . $customPostType;
                 }
                 break;

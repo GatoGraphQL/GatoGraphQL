@@ -57,7 +57,7 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $vars = ApplicationState::getVars();
-            $author = $vars['routing-state']['queried-object-id'];
+            $author = $vars['routing']['queried-object-id'];
             if (gdUreIsCommunity($author)) {
                 switch ($module[1]) {
                     case self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00:
