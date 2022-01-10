@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Configuration;
 
+use PoP\ComponentModel\Constants\DatabasesOutputModes;
+use PoP\ComponentModel\Constants\DataOutputModes;
+use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Constants\Params;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
@@ -44,6 +47,45 @@ class Request
     public static function getScheme(): string
     {
         return strtolower($_REQUEST[Params::SCHEME] ?? '');
+    }
+
+    public static function getDataSourceSelector(): string
+    {
+        $dataSourceSelector = strtolower($_REQUEST[Params::DATA_SOURCE] ?? '');
+        $allDataSourceSelectors = [
+            DataSourceSelectors::ONLYMODEL,
+            DataSourceSelectors::MODELANDREQUEST,
+        ];
+        if (!in_array($dataSourceSelector, $allDataSourceSelectors)) {
+            return DataSourceSelectors::MODELANDREQUEST;
+        }
+        return $dataSourceSelector;
+    }
+
+    public static function getDataOutputMode(): string
+    {
+        $dataOutputMode = strtolower($_REQUEST[Params::DATAOUTPUTMODE] ?? '');
+        $dataOutputModes = [
+            DataOutputModes::SPLITBYSOURCES,
+            DataOutputModes::COMBINED,
+        ];
+        if (!in_array($dataOutputMode, $dataOutputModes)) {
+            return DataOutputModes::SPLITBYSOURCES;
+        }
+        return $dataOutputMode;
+    }
+
+    public static function getDBOutputMode(): string
+    {
+        $dbOutputMode = strtolower($_REQUEST[Params::DATABASESOUTPUTMODE] ?? '');
+        $dbOutputModes = array(
+            DatabasesOutputModes::SPLITBYDATABASES,
+            DatabasesOutputModes::COMBINED,
+        );
+        if (!in_array($dbOutputMode, $dbOutputModes)) {
+            return DatabasesOutputModes::SPLITBYDATABASES;
+        }
+        return $dbOutputMode;
     }
     
     

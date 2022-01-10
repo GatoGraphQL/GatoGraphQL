@@ -30,34 +30,7 @@ class ComponentAppState extends AbstractComponentAppState
      */
     public function initialize(array &$state): void
     {
-        // Target/Module default values (for either empty, or if the user is playing around with the url)
-        $datasources = strtolower($_REQUEST[Params::DATA_SOURCE] ?? '');
-        $alldatasources = array(
-            DataSourceSelectors::ONLYMODEL,
-            DataSourceSelectors::MODELANDREQUEST,
-        );
-        if (!in_array($datasources, $alldatasources)) {
-            $datasources = DataSourceSelectors::MODELANDREQUEST;
-        }
-
-        $dataoutputmode = strtolower($_REQUEST[Params::DATAOUTPUTMODE] ?? '');
-        $dataoutputmodes = array(
-            DataOutputModes::SPLITBYSOURCES,
-            DataOutputModes::COMBINED,
-        );
-        if (!in_array($dataoutputmode, $dataoutputmodes)) {
-            $dataoutputmode = DataOutputModes::SPLITBYSOURCES;
-        }
-
-        $dboutputmode = strtolower($_REQUEST[Params::DATABASESOUTPUTMODE] ?? '');
-        $dboutputmodes = array(
-            DatabasesOutputModes::SPLITBYDATABASES,
-            DatabasesOutputModes::COMBINED,
-        );
-        if (!in_array($dboutputmode, $dboutputmodes)) {
-            $dboutputmode = DatabasesOutputModes::SPLITBYDATABASES;
-        }
-
+        
         $dataoutputitems = $_REQUEST[Params::DATA_OUTPUT_ITEMS] ?? [];
         if ($dataoutputitems) {
             if (!is_array($dataoutputitems)) {
@@ -114,10 +87,10 @@ class ComponentAppState extends AbstractComponentAppState
                 'modulefilter' => $modulefilter,
                 'actionpath' => $_REQUEST[Params::ACTION_PATH] ?? '',
                 'dataoutputitems' => $dataoutputitems,
-                'datasources' => $datasources,
+                'datasources' => Request::getDataSourceSelector(),
                 'datastructure' => Request::getDataStructure(),
-                'dataoutputmode' => $dataoutputmode,
-                'dboutputmode' => $dboutputmode,
+                'dataoutputmode' => Request::getDataOutputMode(),
+                'dboutputmode' => Request::getDBOutputMode(),
                 'mangled' => Request::getMangledValue(),
                 'actions' => Request::getActions(),
                 'scheme' => Request::getScheme(),
