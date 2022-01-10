@@ -69,8 +69,7 @@ abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataMod
     public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-        $vars = ApplicationState::getVars();
-
+        
         // If it is lazy load, no need to calculate stop-fetching
         // If loading static data, then that's it
         // Do not send this value back when doing loadLatest, or it will mess up the original structure loading

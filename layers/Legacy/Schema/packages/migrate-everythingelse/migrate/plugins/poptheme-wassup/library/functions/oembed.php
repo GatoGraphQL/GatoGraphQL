@@ -13,7 +13,6 @@ function popwassupOembedUnsupported($content)
     // however we need to still use oEmbed in this case, since using SimpleView
     // so for these cases, set an external $post_ID, where the cache will be saved
     // Can use the Homepage page
-    $vars = ApplicationState::getVars();
     if (
         defined('POPTHEME_WASSUP_PAGEPLACEHOLDER_OEMBED') && POPTHEME_WASSUP_PAGEPLACEHOLDER_OEMBED &&
         (

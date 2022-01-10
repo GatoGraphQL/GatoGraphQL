@@ -17,7 +17,6 @@ class PoPTheme_UserStance_ModuleHooks
     {
 
         // Only for Links/Posts/Stories/Discussions/Announcements/Events
-        $vars = ApplicationState::getVars();
         $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();

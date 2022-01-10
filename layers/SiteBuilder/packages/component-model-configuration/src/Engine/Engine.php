@@ -28,7 +28,6 @@ class Engine extends UpstreamEngine implements EngineInterface
         parent::processAndGenerateData();
 
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
         if (!in_array(POP_STRATUM_CONFIGURATION, \PoP\Root\App::getState('strata'))) {
             return;
         }
@@ -66,7 +65,6 @@ class Engine extends UpstreamEngine implements EngineInterface
         }
 
         // From the state we know if to process static/staful content or both
-        $vars = ApplicationState::getVars();
         $datasources = \PoP\Root\App::getState('datasources');
         $dataoutputmode = \PoP\Root\App::getState('dataoutputmode');
 
@@ -149,7 +147,6 @@ class Engine extends UpstreamEngine implements EngineInterface
     {
         $meta = parent::getSiteMeta();
         if ($this->addSiteMeta()) {
-            $vars = ApplicationState::getVars();
             if (\PoP\Root\App::getState('stratum')) {
                 $meta[Params::STRATUM] = \PoP\Root\App::getState('stratum');
             }

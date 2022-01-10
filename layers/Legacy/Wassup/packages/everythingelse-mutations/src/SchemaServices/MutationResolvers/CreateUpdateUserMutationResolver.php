@@ -183,7 +183,6 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     {
         // If user is logged in => It's Update
         // Otherwise => It's Create
-        $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState('is-user-logged-in')) {
             return $this->update($form_data);
         }
@@ -208,7 +207,6 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     {
         $errors = [];
         $this->validateContent($errors, $form_data);
-        $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState('is-user-logged-in')) {
             $this->validateUpdateContent($errors, $form_data);
         } else {

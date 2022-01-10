@@ -14,7 +14,6 @@ abstract class DefaultSettingsProcessorBase extends SettingsProcessorBase
 
     public function requiresUserState()
     {
-        $vars = ApplicationState::getVars();
         $route = \PoP\Root\App::getState('route');
 
         // Check if the page has checkpoints. If so, assume it requires user state

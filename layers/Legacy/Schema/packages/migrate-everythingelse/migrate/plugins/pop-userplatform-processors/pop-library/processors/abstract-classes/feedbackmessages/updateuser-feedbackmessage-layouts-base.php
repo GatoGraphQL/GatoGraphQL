@@ -10,7 +10,6 @@ abstract class PoP_Module_Processor_UpdateUserFormMesageFeedbackLayoutsBase exte
         $ret = parent::getMessages($module, $props);
             
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        $vars = ApplicationState::getVars();
         $ret['success-header'] = TranslationAPIFacade::getInstance()->__('User Account updated successfully.', 'pop-coreprocessors');
         $ret['success'] = sprintf(
             TranslationAPIFacade::getInstance()->__('View your <a href="%s">updated user account</a>.', 'pop-coreprocessors'),

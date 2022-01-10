@@ -127,7 +127,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
 
         // Validate user permission
-        $vars = ApplicationState::getVars();
         $userID = \PoP\Root\App::getState('current-user-id');
         $editCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
         if (
@@ -218,7 +217,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         // Check that the user has access to the edited custom post
-        $vars = ApplicationState::getVars();
         $userID = \PoP\Root\App::getState('current-user-id');
         if (!$this->getCustomPostTypeMutationAPI()->canUserEditCustomPost($userID, $customPostID)) {
             $errors[] = sprintf(

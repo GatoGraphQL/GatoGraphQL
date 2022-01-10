@@ -51,7 +51,6 @@ class ObjectTypeHookSet extends AbstractHookSet
             return $mutationFieldArgs;
         }
 
-        $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if (

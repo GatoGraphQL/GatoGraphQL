@@ -20,7 +20,6 @@ class VarsHookSet extends AbstractHookSet
 
     public function getModelInstanceComponentsFromVars($components)
     {
-        $vars = ApplicationState::getVars();
         if (isset(\PoP\Root\App::getState('edit-schema'))) {
             $components[] = $this->__('edit schema:', 'graphql-server') . \PoP\Root\App::getState('edit-schema');
         }

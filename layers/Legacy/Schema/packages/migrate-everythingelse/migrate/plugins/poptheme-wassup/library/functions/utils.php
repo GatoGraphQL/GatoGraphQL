@@ -13,7 +13,6 @@ class PoPThemeWassup_Utils
     public static function checkLoadingPagesectionModule()
     {
         if (is_null(self::$checkLoadingPagesectionModule)) {
-            $vars = ApplicationState::getVars();
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var ModulePaths */
             $modulePaths = $instanceManager->getInstance(ModulePaths::class);

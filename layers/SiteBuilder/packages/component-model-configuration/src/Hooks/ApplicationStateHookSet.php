@@ -20,7 +20,6 @@ class ApplicationStateHookSet extends AbstractHookSet
 
     public function maybeAddComponent(array $components): array
     {
-        $vars = ApplicationState::getVars();
         if ($target = \PoP\Root\App::getState('target')) {
             $components[] = $this->__('target:', 'component-model') . $target;
         }

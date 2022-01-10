@@ -19,8 +19,7 @@ class PoP_Theme_Meta_Hooks
     public function getSiteMeta($meta)
     {
         if (RequestUtils::fetchingSite()) {
-            $vars = ApplicationState::getVars();
-
+            
             // Send the current selected theme back
             if (\PoP\Root\App::getState('theme')) {
                 $meta[ParamConstants::PARAMS][GD_URLPARAM_THEME] = \PoP\Root\App::getState('theme');

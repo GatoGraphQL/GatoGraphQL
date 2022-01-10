@@ -53,7 +53,6 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
     public function initRequestProps(array $module, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:

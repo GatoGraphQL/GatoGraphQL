@@ -22,7 +22,6 @@ class VarsHookSet extends AbstractHookSet
 
     public function getModelInstanceComponentsFromVars($components)
     {
-        $vars = ApplicationState::getVars();
         switch (\PoP\Root\App::getState('nature')) {
             case RouteNatures::PAGE:
                 $component_types = $this->getHooksAPI()->applyFilters(

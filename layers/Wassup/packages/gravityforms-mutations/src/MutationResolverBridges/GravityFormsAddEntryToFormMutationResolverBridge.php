@@ -161,7 +161,6 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         // These are needed since implementing PoP where the user is always logged in, so we can't print the name/email
         // on the front-end anymore, instead fields PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME and PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL are
         // not visible when the user is logged in
-        $vars = ApplicationState::getVars();
         if (\PoP_FormUtils::useLoggedinuserData() && \PoP\Root\App::getState('is-user-logged-in')) {
             if ($form_id = $_POST["gform_submit"] ?? null) {
                 // Hook the fieldnames from the configuration
@@ -204,7 +203,6 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         // this is done now because GF sends the email at the beginning, this can't be postponed
         // Check only if the user is not logged in. When logged in, we never use the captcha
         if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $vars = ApplicationState::getVars();
             if (!(\PoP_FormUtils::useLoggedinuserData() && \PoP\Root\App::getState('is-user-logged-in'))) {
                 if ($form_id = $_POST["gform_submit"] ?? null) {
                     // Check if there's a captcha sent along

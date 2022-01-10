@@ -80,7 +80,6 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
 
     public function initModelProps(array $module, array &$props): void
     {
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
                 // It can be invisible, nothing to show

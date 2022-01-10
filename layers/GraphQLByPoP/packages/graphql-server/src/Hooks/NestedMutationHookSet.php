@@ -47,7 +47,6 @@ class NestedMutationHookSet extends AbstractHookSet
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         string $fieldName
     ): bool {
-        $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState('nested-mutations-enabled')) {
             return $include;
         }

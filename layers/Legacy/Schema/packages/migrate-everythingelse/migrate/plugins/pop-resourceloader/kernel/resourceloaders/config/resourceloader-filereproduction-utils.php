@@ -59,7 +59,6 @@ class PoP_ResourceLoader_FileReproduction_Utils {
             $options['use-engine-entrymodule-props'] = true;
             $resources = PoP_ResourceLoaderProcessorUtils::getResourcesFromCurrentVars($modulefilter, $options);
 
-            $vars = ApplicationState::getVars();
             $nature = \PoP\Root\App::getState('nature');
 
             $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();

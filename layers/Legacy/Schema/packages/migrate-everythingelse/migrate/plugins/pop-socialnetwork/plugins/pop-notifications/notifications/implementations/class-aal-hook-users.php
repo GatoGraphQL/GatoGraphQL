@@ -33,7 +33,6 @@ class PoP_SocialNetwork_Notifications_Hook_Users /* extends AAL_Hook_Base*/
 
     public function followunfollowsUser($user_id, $action)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         PoP_Notifications_Utils::insertLog(
             array(

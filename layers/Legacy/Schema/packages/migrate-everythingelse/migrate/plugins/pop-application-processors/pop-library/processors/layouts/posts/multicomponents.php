@@ -18,7 +18,6 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
 
     protected function getUserpostinteractionLayoutSubmodules(array $module)
     {
-        $vars = ApplicationState::getVars();
         $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
         switch ($module[1]) {
          // Highlights: it has a different set-up

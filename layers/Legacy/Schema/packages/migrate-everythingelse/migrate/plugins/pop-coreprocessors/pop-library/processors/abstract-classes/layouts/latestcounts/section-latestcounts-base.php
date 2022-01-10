@@ -6,7 +6,6 @@ abstract class PoP_Module_Processor_SectionLatestCountsBase extends PoP_Module_P
 {
     public function getClasses(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $ret = parent::getClasses($module, $props);
         if ($section_classes = $this->getSectionClasses($module, $props)) {
             $pre = '';

@@ -18,7 +18,6 @@ class UserStance_DataLoad_CreateUpdateStanceHooks
         // Redundancy on who has created the Stance: an individual or an organization
         // This way we can show the slider in the Homepage "Latest thoughts about TPP" and split them into "By people" / "By organizations"
         // This works because the Stance has only 1 author
-        $vars = ApplicationState::getVars();
         \PoPSchema\CustomPostMeta\Utils::addCustomPostMeta($post_id, GD_URE_METAKEY_POST_AUTHORROLE, gdUreGetuserrole(\PoP\Root\App::getState('current-user-id')), true);
     }
 }

@@ -7,7 +7,6 @@ trait FormatActiveTrait
 {
     public function isSubmoduleActivePanel(array $module, $submodule)
     {
-        $vars = ApplicationState::getVars();
         return \PoP\Root\App::getState('format') == $this->getSubmoduleFormat($module, $submodule);
     }
 

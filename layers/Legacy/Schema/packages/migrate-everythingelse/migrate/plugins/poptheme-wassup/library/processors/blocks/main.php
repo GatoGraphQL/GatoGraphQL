@@ -36,7 +36,6 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     {
 
         // Do not add for the quickview, since it is a modal and can't open a new modal (eg: Embed) on top
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -214,7 +213,6 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
-                $vars = ApplicationState::getVars();
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
                     $this->setProp($module, $props, 'show-submenu', false);
@@ -261,7 +259,6 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
     public function getTitle(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {

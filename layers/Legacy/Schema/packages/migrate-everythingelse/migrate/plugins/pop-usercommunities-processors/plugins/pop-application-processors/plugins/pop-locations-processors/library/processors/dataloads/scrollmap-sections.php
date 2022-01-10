@@ -95,7 +95,6 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
         switch ($module[1]) {
          // Members of the Community
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
-                $vars = ApplicationState::getVars();
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // If the profile is not a community, then return no users at all (Eg: a community opting out from having members)
                 if (gdUreIsCommunity($author)) {
@@ -123,7 +122,6 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
         switch ($module[1]) {
          // Members of the Community
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
-                $vars = ApplicationState::getVars();
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // If the profile is not a community, then return no users at all (Eg: a community opting out from having members)
                 if (!gdUreIsCommunity($author)) {

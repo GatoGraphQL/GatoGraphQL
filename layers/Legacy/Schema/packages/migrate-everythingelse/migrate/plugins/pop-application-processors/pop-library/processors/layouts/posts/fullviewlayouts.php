@@ -34,7 +34,6 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
     {
         $ret = parent::getFooterSubmodules($module);
 
-        $vars = ApplicationState::getVars();
         $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
         switch ($module[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_POST:

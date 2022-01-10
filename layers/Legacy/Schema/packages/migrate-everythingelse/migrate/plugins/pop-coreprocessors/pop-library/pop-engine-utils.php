@@ -13,7 +13,6 @@ class PoPCore_ModuleManager_Utils
     {
 
         // Retrieve the dataload-source that will produce the data. Add the params to the URL
-        $vars = ApplicationState::getVars();
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DBItemListDataStructureFormatter */
         $dbItemListDataStructureFormatter = $instanceManager->getInstance(DBItemListDataStructureFormatter::class);

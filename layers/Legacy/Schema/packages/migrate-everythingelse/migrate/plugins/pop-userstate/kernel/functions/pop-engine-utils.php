@@ -9,7 +9,6 @@ class PoP_UserState_Utils
 
         // We can force loading the userstate by passing param ?action=loaduserstate
         // Then, for this case, we can assume that the current page requires user state
-        $vars = ApplicationState::getVars();
         if (in_array(POP_ACTION_LOADUSERSTATE, \PoP\Root\App::getState('actions'))) {
             return true;
         }

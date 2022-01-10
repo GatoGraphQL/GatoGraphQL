@@ -46,7 +46,6 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
 
         // When submitting the form, if user is logged in, then use these values.
         // Otherwise, use the values sent in the form
-        $vars = ApplicationState::getVars();
         if (PoP_FormUtils::useLoggedinuserData() && doingPost() && \PoP\Root\App::getState('is-user-logged-in')) {
             $user_id = \PoP\Root\App::getState('current-user-id');
             $userTypeAPI = UserTypeAPIFacade::getInstance();

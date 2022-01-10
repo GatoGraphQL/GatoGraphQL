@@ -78,7 +78,6 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
 
     public function initRequestProps(array $module, array &$props): void
     {
-        $vars = ApplicationState::getVars();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDCONTENT:

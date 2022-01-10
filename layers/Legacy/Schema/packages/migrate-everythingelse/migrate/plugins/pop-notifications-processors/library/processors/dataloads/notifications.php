@@ -22,7 +22,6 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
                 // If the user is not logged in, then do not load the data
-                $vars = ApplicationState::getVars();
                 if (!PoP_UserState_Utils::currentRouteRequiresUserState() || !\PoP\Root\App::getState('is-user-logged-in')) {
                     $ret[DataloadingConstants::SKIPDATALOAD] = true;
                 }

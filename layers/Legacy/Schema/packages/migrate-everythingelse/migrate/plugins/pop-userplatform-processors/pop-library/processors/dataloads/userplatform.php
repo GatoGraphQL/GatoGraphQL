@@ -81,7 +81,6 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYPREFERENCES:
-                $vars = ApplicationState::getVars();
                 return \PoP\Root\App::getState('current-user-id');
         }
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
@@ -145,7 +144,6 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
 
     public function initModelProps(array $module, array &$props): void
     {
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
                 if ($extra_checkpoint_msgs = HooksAPIFacade::getInstance()->applyFilters(

@@ -51,7 +51,6 @@ function gdUreGetCommunityMetavalueContributecontent($user_id)
 
 function gdUreGetCommunityMetavalueCurrentcommunity($value)
 {
-    $vars = ApplicationState::getVars();
     $community = \PoP\Root\App::getState('current-user-id');
     return gdUreGetCommunityMetavalue($community, $value);
 }
@@ -154,7 +153,6 @@ function gdUreGetCommunitiesStatusActiveFilter($value)
 
 function gdUreCommunityMembershipstatusFilterbycurrentcommunity($values)
 {
-    $vars = ApplicationState::getVars();
     return gdUreCommunityMembershipstatusFilterbycommunity($values, \PoP\Root\App::getState('current-user-id'));
 }
 

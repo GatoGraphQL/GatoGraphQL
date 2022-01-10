@@ -21,7 +21,6 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
 
     public function getClasses(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_LATESTCOUNT_TAG_CONTENT:
                 return array(

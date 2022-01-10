@@ -22,7 +22,6 @@ class PoP_AutomatedEmails_WebPlatform_ResourceLoader_Hooks
 
     protected function isAutomatedEmailRoute()
     {
-        $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState(['routing', 'is-standard'])) {
             $route = \PoP\Root\App::getState('route');
             $automatedemail_routes = PoP_AutomatedEmails_WebPlatform_ResourceLoader_Utils::getAutomatedEmailRoutes();

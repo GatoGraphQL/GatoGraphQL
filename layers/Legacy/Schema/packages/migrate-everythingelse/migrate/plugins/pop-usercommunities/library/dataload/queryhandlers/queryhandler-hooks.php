@@ -18,7 +18,6 @@ class PoP_UserCommunities_UserStance_Hooks
     public function getUserFeedback($user_feedback)
     {
         $user_roles = array();
-        $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState('is-user-logged-in')) {
             $userID = \PoP\Root\App::getState('current-user-id');
 

@@ -11,7 +11,6 @@ function popthemeWassupJqueryConstants($jqueryConstants)
     $jqueryConstants['THEMEMODE_WASSUP_EMBED'] = GD_THEMEMODE_WASSUP_EMBED;
     $jqueryConstants['THEMEMODE_WASSUP_PRINT'] = GD_THEMEMODE_WASSUP_PRINT;
 
-    $vars = ApplicationState::getVars();
     $jqueryConstants['THEMESTYLE'] = \PoP\Root\App::getState('themestyle-isdefault') ? '' : \PoP\Root\App::getState('themestyle');
     return $jqueryConstants;
 }

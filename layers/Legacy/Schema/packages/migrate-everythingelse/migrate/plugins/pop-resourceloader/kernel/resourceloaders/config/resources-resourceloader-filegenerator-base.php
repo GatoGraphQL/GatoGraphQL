@@ -32,8 +32,7 @@ abstract class PoP_ResourceLoader_ResourcesFileBase extends \PoP\FileStore\File\
 				return '/shared';
 			}
 
-			$vars = ApplicationState::getVars();
-			return '/'.\PoP\Root\App::getState('theme').'/'.\PoP\Root\App::getState('thememode').'/'.$subfolder;
+						return '/'.\PoP\Root\App::getState('theme').'/'.\PoP\Root\App::getState('thememode').'/'.$subfolder;
 		}
 
 		return $subfolder;

@@ -42,7 +42,6 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
-        $vars = ApplicationState::getVars();
         $ret[CategoryRouteNatures::CATEGORY][] = [
             'module' => [
                 PostCategoryFieldDataloadModuleProcessor::class,
@@ -71,7 +70,6 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
-        $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $routemodules = array(

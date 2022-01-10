@@ -73,7 +73,6 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
         switch ($module[1]) {
             case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
             case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
-                $vars = ApplicationState::getVars();
                 $sources = array(
                     self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY => GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,
                     self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER => GD_URLPARAM_URECONTENTSOURCE_USER,

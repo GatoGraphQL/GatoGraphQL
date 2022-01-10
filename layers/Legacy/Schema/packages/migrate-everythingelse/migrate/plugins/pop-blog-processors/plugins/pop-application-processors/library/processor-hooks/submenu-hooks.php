@@ -26,7 +26,6 @@ class PoP_Blog_SubmenuHooks
                 'PoP_Blog_SubmenuHooks:mainsubheaders',
                 array()
             );
-            $vars = ApplicationState::getVars();
             $route = \PoP\Root\App::getState('route');
             if (in_array($route, $routes[PostsComponentConfiguration::getPostsRoute()])) {
                 $routes[$route] = array();

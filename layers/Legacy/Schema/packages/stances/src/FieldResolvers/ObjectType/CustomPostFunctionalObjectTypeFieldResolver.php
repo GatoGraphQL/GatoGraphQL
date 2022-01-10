@@ -178,7 +178,6 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 ], RouteUtils::getRouteURL($route));
 
             case 'loggedInUserStances':
-                $vars = ApplicationState::getVars();
                 if (!\PoP\Root\App::getState('is-user-logged-in')) {
                     return array();
                 }

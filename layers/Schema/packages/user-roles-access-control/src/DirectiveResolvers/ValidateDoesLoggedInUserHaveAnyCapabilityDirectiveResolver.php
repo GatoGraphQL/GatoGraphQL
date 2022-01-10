@@ -40,7 +40,6 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
 
     protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        $vars = ApplicationState::getVars();
         // If the user is not logged-in, then do nothing: directive `@validateIsUserLoggedIn` will already fail
         if (!\PoP\Root\App::getState('is-user-logged-in')) {
             return true;

@@ -41,7 +41,6 @@ class PoP_SPA_RequestMeta_Hooks
             $pushurlprops = [];
 
             // Platform: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)
-            $vars = ApplicationState::getVars();
             if (\PoP\Root\App::getState('stratum') && !\PoP\Root\App::getState('stratum-isdefault')) {
                 $pushurlprops[\PoP\ConfigurationComponentModel\Constants\Params::STRATUM] = \PoP\Root\App::getState('stratum');
             }

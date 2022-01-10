@@ -12,7 +12,6 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
     {
         $ret = parent::getDataloadSource($module, $props);
 
-        $vars = ApplicationState::getVars();
         // if (\PoP\Root\App::getState('nature') == $this->getNature($module)) {
         if (\PoP\Root\App::getState('nature') == UserRouteNatures::USER) {
             // Allow URE to add the Organization/Community content source attribute

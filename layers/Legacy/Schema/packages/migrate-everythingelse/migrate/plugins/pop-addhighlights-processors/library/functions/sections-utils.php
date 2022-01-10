@@ -7,7 +7,6 @@ class PoP_AddHighlights_Module_Processor_SectionBlocksUtils
     public static function addDataloadqueryargsSinglehighlights(&$ret, $post_id = null)
     {
         if (is_null($post_id)) {
-            $vars = ApplicationState::getVars();
             $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         }
 

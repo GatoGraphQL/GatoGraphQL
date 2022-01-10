@@ -7,7 +7,6 @@ function popthemeWassupExtraRoutes($extra_routes)
 {
     if (!PoPTheme_Wassup_ServerUtils::disablePreloadingPages()) {
         // Load extra URIs for the INITIALFRAMES page
-        $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState(['routing', 'is-standard']) && \PoP\Root\App::getState('route') == POPTHEME_WASSUP_ROUTE_LOADERS_INITIALFRAMES) {
             $target = \PoP\Root\App::getState('target');
             if ($routes = HooksAPIFacade::getInstance()->applyFilters(

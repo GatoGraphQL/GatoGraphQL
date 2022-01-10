@@ -82,8 +82,7 @@ class ModelInstance implements ModelInstanceInterface
     {
         $components = array();
 
-        $vars = ApplicationState::getVars();
-
+        
         // There will always be a nature. Add it.
         $nature = \PoP\Root\App::getState('nature');
         $route = \PoP\Root\App::getState('route');

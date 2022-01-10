@@ -67,7 +67,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         // Only register them for the standard GraphQL,
         // or for PQL if explicitly enabled
-        $vars = ApplicationState::getVars();
         if (!\PoP\Root\App::getState('graphql-introspection-enabled')) {
             return [];
         }

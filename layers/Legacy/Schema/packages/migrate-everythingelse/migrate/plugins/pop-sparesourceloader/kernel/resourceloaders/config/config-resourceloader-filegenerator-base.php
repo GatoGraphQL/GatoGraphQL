@@ -19,7 +19,6 @@ abstract class PoP_SPAResourceLoader_ConfigFileBase extends \PoP\FileStore\File\
         // We must create different mapping files depending on if we're adding the CDN resources inside the bundles or not
         $subfolder = PoP_ResourceLoader_ServerUtils::bundleExternalFiles() ? 'global' : 'local';
         if (defined('POP_THEME_INITIALIZED')) {
-            $vars = ApplicationState::getVars();
             return '/'.\PoP\Root\App::getState('theme').'/'.\PoP\Root\App::getState('thememode').'/'.$subfolder;
         }
 

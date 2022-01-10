@@ -40,7 +40,6 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
         $ret = array();
 
         // Only add the configuration if we are on the corresponding page
-        $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState(['routing', 'is-standard']) && \PoP\Root\App::getState('is-user-logged-in')) {
             $route = \PoP\Root\App::getState('route');
             if ($route == POP_USERPLATFORM_ROUTE_EDITPROFILE) {

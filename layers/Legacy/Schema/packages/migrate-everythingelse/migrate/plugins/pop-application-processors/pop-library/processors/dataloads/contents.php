@@ -45,7 +45,6 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     {
         $ret = parent::getInnerSubmodules($module);
 
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:

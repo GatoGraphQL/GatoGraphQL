@@ -46,7 +46,6 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     }
     protected function getThumb(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -99,7 +98,6 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $vars = ApplicationState::getVars();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PAGETABS_AUTHOR:

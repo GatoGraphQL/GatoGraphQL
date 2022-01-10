@@ -45,8 +45,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
     {
         $ret = parent::getMutableonrequestConfiguration($module, $props);
 
-        $vars = ApplicationState::getVars();
-
+        
         // Using runtimeconfiguration, because the URL can vary for Single, it must not be cached in the configuration
         if ($header_type = $this->getHeaderType($module, $props)) {
             if ($headers_data = $this->getHeadersData($module, $props)) {

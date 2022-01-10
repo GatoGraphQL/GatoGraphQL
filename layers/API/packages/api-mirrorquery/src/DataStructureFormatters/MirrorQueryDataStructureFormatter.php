@@ -18,7 +18,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     protected function getFields()
     {
         // Allow REST to override with default fields
-        $vars = ApplicationState::getVars();
         return \PoP\Root\App::getState('requested-query') ?? \PoP\Root\App::getState('query') ?? [];
     }
 

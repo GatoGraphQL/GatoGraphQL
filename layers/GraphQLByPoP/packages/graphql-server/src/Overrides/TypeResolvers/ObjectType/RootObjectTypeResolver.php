@@ -15,7 +15,6 @@ class RootObjectTypeResolver extends UpstreamRootObjectTypeResolver
 {
     protected function calculateObjectTypeFieldResolversForField(string $field): array
     {
-        $vars = ApplicationState::getVars();
         $enableNestedMutations = \PoP\Root\App::getState('nested-mutations-enabled');
         /**
          * Watch out: The field is not provided fieldArgs,

@@ -12,7 +12,6 @@ class SettingsManager
 
     public function getCheckpoints($route = null)
     {
-        $vars = ApplicationState::getVars();
         if (!$route) {
             $route = \PoP\Root\App::getState('route');
         }
@@ -27,7 +26,6 @@ class SettingsManager
 
     public function isFunctional($route = null)
     {
-        $vars = ApplicationState::getVars();
         if (!$route) {
             $route = \PoP\Root\App::getState('route');
         }
@@ -46,7 +44,6 @@ class SettingsManager
 
     public function isForInternalUse($route = null)
     {
-        $vars = ApplicationState::getVars();
         if (!$route) {
             $route = \PoP\Root\App::getState('route');
         }
@@ -65,7 +62,6 @@ class SettingsManager
 
     public function needsTargetId($route = null)
     {
-        $vars = ApplicationState::getVars();
         if (!$route) {
             $route = \PoP\Root\App::getState('route');
         }
@@ -84,7 +80,6 @@ class SettingsManager
 
     public function getRedirectUrl($route = null)
     {
-        $vars = ApplicationState::getVars();
         if (!$route) {
             $route = \PoP\Root\App::getState('route');
         }

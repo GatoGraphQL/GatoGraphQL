@@ -649,7 +649,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * If this field is tagged with a version...
              */
             $schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $fieldName);
-            $vars = ApplicationState::getVars();
             /**
              * Get versionConstraint in this order:
              * 1. Passed as field argument

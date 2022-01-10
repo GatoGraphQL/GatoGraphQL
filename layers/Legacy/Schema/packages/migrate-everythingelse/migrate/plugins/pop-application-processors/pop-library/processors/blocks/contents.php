@@ -39,7 +39,6 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
-                $vars = ApplicationState::getVars();
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 return sprintf(
@@ -54,7 +53,6 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
     public function getTitle(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
@@ -128,8 +126,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLE_CONTENT:
-                $vars = ApplicationState::getVars();
-
+                
                 // Also append the post_status, so we can hide the bottomsidebar for draft posts
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $this->appendProp($module, $props, 'runtime-class', $customPostTypeAPI->getCustomPostType($post_id) . '-' . $post_id);

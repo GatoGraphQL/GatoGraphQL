@@ -19,7 +19,6 @@ class PoP_ModuleManager_UserMetaUtils
         // Function used to save information on the user access. In particular, we need the last access time, for the Notifications
         // Can do it only if the page is mutableonrequestdata
         if (PoP_UserState_Utils::currentRouteRequiresUserState()) {
-            $vars = ApplicationState::getVars();
             if (\PoP\Root\App::getState('is-user-logged-in')) {
                 PoP_UserPlatform_UserUtils::saveUserLastAccess(\PoP\Root\App::getState('current-user-id'), ComponentModelComponentInfo::get('time'));
             }

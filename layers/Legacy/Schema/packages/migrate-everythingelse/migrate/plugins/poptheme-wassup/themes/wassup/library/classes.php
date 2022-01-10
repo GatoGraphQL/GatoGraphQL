@@ -5,7 +5,6 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter("gdClassesBody", 'gdWassupThemeBodyClass');
 function gdWassupThemeBodyClass($body_classes)
 {
-    $vars = ApplicationState::getVars();
     if (isset(\PoP\Root\App::getState('theme')) && \PoP\Root\App::getState('theme') == GD_THEME_WASSUP) {
         $thememode = \PoP\Root\App::getState('thememode');
 

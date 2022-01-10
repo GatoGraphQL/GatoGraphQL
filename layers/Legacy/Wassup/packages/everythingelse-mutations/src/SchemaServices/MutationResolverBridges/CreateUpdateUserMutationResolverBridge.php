@@ -34,7 +34,6 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         // For the update, gotta return the success string
         // If user is logged in => It's Update
         // Otherwise => It's Create
-        $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState('is-user-logged-in')) {
             // Allow PoP Service Workers to add the attr to avoid the link being served from the browser cache
             return sprintf(
@@ -50,7 +49,6 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     {
         $cmseditusershelpers = HelperAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-        $vars = ApplicationState::getVars();
         $user_id = \PoP\Root\App::getState('is-user-logged-in') ? \PoP\Root\App::getState('current-user-id') : '';
         $inputs = $this->getFormInputs();
         $form_data = array(

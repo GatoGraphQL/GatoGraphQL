@@ -104,7 +104,6 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $vars = ApplicationState::getVars();
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();

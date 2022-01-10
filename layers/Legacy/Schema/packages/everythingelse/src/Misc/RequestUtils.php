@@ -42,7 +42,6 @@ class RequestUtils
 
     public static function fetchingSite()
     {
-        $vars = ApplicationState::getVars();
         return \PoP\Root\App::getState('fetching-site') ?? false;
     }
 
@@ -50,13 +49,11 @@ class RequestUtils
     {
         // If we are doing JSON (or any other output) AND we setting the target, then we're loading content dynamically and we need it to be JSON
         // Otherwise, it is the first time loading website => loadingSite
-        $vars = ApplicationState::getVars();
         return \PoP\Root\App::getState('loading-site') ?? false;
     }
 
     public static function isRoute($route_or_routes)
     {
-        $vars = ApplicationState::getVars();
         $route = \PoP\Root\App::getState('route');
         if (is_array($route_or_routes)) {
             return in_array($route, $route_or_routes);

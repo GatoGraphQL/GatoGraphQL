@@ -18,7 +18,6 @@ class PoPTheme_UserStance_ContentHooks
     public function contentInner($inner, array $module)
     {
         if ($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE] || $module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_USERPOSTINTERACTION]) {
-            $vars = ApplicationState::getVars();
             $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             if ($customPostTypeAPI->getCustomPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {

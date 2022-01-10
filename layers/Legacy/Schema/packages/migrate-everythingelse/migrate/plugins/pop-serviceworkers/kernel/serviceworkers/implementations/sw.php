@@ -26,8 +26,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
     {
         $configuration = parent::getSwConfiguration();
 		$cmsService = CMSServiceFacade::getInstance();
-        $vars = ApplicationState::getVars();
-
+        
         // Add a string before the version, since starting with a number makes trouble
         $configuration['${cacheNamePrefix}'] = 'PoP';
         $configuration['${version}'] = ApplicationInfoFacade::getInstance()->getVersion();

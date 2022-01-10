@@ -13,8 +13,7 @@ abstract class PoP_Module_Processor_ListFeedbackMessageInnersBase extends PoP_Mo
     public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-        $vars = ApplicationState::getVars();
-
+        
         // Show error message if no items, but only if the checkpoint did not fail
         // Do not show the message when doing loadLatest
         $checkpoint_failed = GeneralUtils::isError($dataaccess_checkpoint_validation);

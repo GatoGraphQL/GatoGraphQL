@@ -50,7 +50,6 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
         if ($block = $blocks[$module[1]] ?? null) {
             $ret[] = $block;
         } else {
-            $vars = ApplicationState::getVars();
             switch ($module[1]) {
                 case self::MODULE_MULTIPLE_AUTHOREVENTS_SIDEBAR:
                 case self::MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR:

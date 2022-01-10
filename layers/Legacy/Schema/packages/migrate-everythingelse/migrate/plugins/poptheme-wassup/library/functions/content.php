@@ -38,7 +38,6 @@ function wassupMediaSendToEditor($html, $id, $attachment)
 
 function gdGetPostDescription()
 {
-    $vars = ApplicationState::getVars();
     $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
     $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -62,7 +61,6 @@ function gdGetPostDescription()
 
 function gdHeaderRouteDescription()
 {
-    $vars = ApplicationState::getVars();
     $route = \PoP\Root\App::getState('route');
     return HooksAPIFacade::getInstance()->applyFilters('gdHeaderRouteDescription', '', $route);
 }
@@ -79,7 +77,6 @@ function gdGetThemeColor()
 
 function gdGetDocumentThumb($size = 'large')
 {
-    $vars = ApplicationState::getVars();
     $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
     if (\PoP\Root\App::getState(['routing', 'is-custompost']) || \PoP\Root\App::getState(['routing', 'is-page'])) {
         $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);

@@ -40,7 +40,6 @@ class VersioningService implements VersioningServiceInterface
         // Iterate through entries in `fieldVersionConstraints` and set them into a dictionary
         $this->versionConstraintsForFields = [];
         $schemaWarnings = [];
-        $vars = ApplicationState::getVars();
         foreach ((\PoP\Root\App::getState('field-version-constraints') ?? []) as $typeField => $versionConstraint) {
             // All fields are defined as "$type.$fieldName". If not, it's an error
             $entry = explode(self::TYPE_FIELD_SEPARATOR, $typeField);
@@ -82,7 +81,6 @@ class VersioningService implements VersioningServiceInterface
     public function getVersionConstraintsForDirective(string $directiveName): ?string
     {
         if ($this->versionConstraintsForDirectives === null) {
-            $vars = ApplicationState::getVars();
             $this->versionConstraintsForDirectives = \PoP\Root\App::getState('directive-version-constraints');
         }
         return $this->versionConstraintsForDirectives[$directiveName] ?? null;

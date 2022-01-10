@@ -61,7 +61,6 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
     }
     protected function getTitleLink(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {

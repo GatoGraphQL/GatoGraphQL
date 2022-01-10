@@ -62,7 +62,6 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
     ): mixed {
         switch ($fieldName) {
             case 'loggedInUserID':
-                $vars = ApplicationState::getVars();
                 return \PoP\Root\App::getState('current-user-id');
         }
 

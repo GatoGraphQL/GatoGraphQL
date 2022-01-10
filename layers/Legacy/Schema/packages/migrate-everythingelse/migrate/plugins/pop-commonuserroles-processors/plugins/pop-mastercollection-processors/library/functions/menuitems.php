@@ -6,7 +6,6 @@ HooksAPIFacade::getInstance()->addFilter('gdAuthorParentpageid', 'gdUreAuthorPar
 function gdUreAuthorParentpageidImpl($pageid, $author_id = null)
 {
     if (is_null($author_id)) {
-        $vars = ApplicationState::getVars();
         $author_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
     }
 

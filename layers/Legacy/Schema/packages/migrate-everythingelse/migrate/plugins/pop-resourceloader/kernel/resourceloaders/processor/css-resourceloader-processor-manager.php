@@ -85,8 +85,6 @@ class PoP_CSSResourceLoaderProcessorManager {
 		$loading_bundle = $enqueuefile_type == 'bundlegroup' || $enqueuefile_type == 'bundle';
 		$bundlestyles_properties = array();
 		if ($loading_bundle) {
-
-			$vars = ApplicationState::getVars();
 			$version = ApplicationInfoFacade::getInstance()->getVersion();
 			$file = $this->getFile($enqueuefile_type, $acrossThememodes);
 			

@@ -203,7 +203,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $vars = ApplicationState::getVars();
         $query = array_merge(
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
             [

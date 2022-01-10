@@ -57,7 +57,6 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
     public function maybeAppendAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes = false): array
     {
         // With Nested Mutations there's no need to duplicate Root entries
-        $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState('nested-mutations-enabled')) {
             return $fieldEntries;
         }

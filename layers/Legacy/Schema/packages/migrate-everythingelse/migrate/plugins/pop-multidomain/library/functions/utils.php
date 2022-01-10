@@ -11,7 +11,6 @@ class PoP_MultiDomain_Utils
     {
         // Must add the version (request will be routed through CDN)
         $cmsService = CMSServiceFacade::getInstance();
-        $vars = ApplicationState::getVars();
         $url = GeneralUtils::addQueryArgs([
             'ver' => ApplicationInfoFacade::getInstance()->getVersion(),
         ], $url);
@@ -22,7 +21,6 @@ class PoP_MultiDomain_Utils
             $theme = $options['theme'];
             $thememode = $options['thememode'];
 
-            $vars = ApplicationState::getVars();
             if ($theme && \PoP\Root\App::getState('theme') != $theme) {
                 $subpath = str_replace('/'.\PoP\Root\App::getState('theme').'/', '/'.$theme.'/', $subpath);
             }

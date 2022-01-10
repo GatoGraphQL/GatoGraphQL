@@ -58,7 +58,6 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     }
     public function getTitle(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
@@ -92,7 +91,6 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     }
     protected function getTitleLink(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {

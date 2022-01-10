@@ -23,7 +23,6 @@ class PoP_ResourceLoader_EnqueueFileHooks
 
     protected function isForInternalUse()
     {
-        $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState(['routing', 'is-standard'])) {
             $route = \PoP\Root\App::getState('route');
         

@@ -54,7 +54,6 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     }
     public function getHref(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {

@@ -172,7 +172,6 @@ class PoPWebPlatform_Initialization
         $locale = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:locale', get_locale());
 
         // Default one: do not send, so that it doesn't show up in the Embed URL
-        $vars = ApplicationState::getVars();
         $keepopentabs = HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS, true);
         $multilayout_labels = PoP_HTMLCSSPlatform_ConfigurationUtils::getMultilayoutLabels();
         // $multilayout_keyfields = PoP_WebPlatform_ConfigurationUtils::get_multilayout_keyfields();

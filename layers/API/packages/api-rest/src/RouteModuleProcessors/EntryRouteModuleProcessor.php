@@ -23,7 +23,6 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
 
-        $vars = ApplicationState::getVars();
         $ret[RouteNatures::HOME][] = [
             'module' => [
                 RootRelationalFieldDataloadModuleProcessor::class,

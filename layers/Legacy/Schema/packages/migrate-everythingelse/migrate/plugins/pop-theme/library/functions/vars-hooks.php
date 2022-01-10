@@ -6,8 +6,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 HooksAPIFacade::getInstance()->addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, 'popThemeModuleInstanceComponents');
 function popThemeModuleInstanceComponents($components)
 {
-    $vars = ApplicationState::getVars();
-
+    
     if ($theme = \PoP\Root\App::getState('theme')) {
         $components[] = TranslationAPIFacade::getInstance()->__('theme:', 'pop-engine').$theme;
     }

@@ -1682,7 +1682,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             // Expected input is similar to GraphQL: https://graphql.org/learn/queries/#variables
             // If not passed the variables parameter, use $_REQUEST["variables"] by default
             if (is_null($variables)) {
-                $vars = ApplicationState::getVars();
                 $variables = \PoP\Root\App::getState('variables');
             }
             $variableName = substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_VARIABLE_PREFIX));
@@ -1924,7 +1923,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function getNoAliasFieldOutputKey(string $field): string
     {
         // GraphQL: Use fieldName only
-        $vars = ApplicationState::getVars();
         if (\PoP\Root\App::getState('only-fieldname-as-outputkey')) {
             return $this->getFieldName($field);
         }

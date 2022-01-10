@@ -18,7 +18,6 @@ trait RemoveEntryModuleFromOutputEngineTrait
         $data = parent::getEncodedDataObject($data);
 
         // For the API: maybe remove the entry module from the output
-        $vars = ApplicationState::getVars();
         if (
             App::getComponent(APIComponent::class)->isEnabled() &&
             \PoP\Root\App::getState('scheme') == APISchemes::API &&

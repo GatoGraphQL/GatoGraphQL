@@ -16,7 +16,6 @@ class PoP_MultiDomain_CDN_ResourceLoaderProcessor_Hooks
     {
 
         // If accessing the External page, then we must load the resource-config.js and initialresources.js for the external domain
-        $vars = ApplicationState::getVars();
         // if (\PoP\Root\App::getState('external-url-domain')) {
         if (\PoP\Root\App::getState(['routing', 'is-standard']) && \PoP\Root\App::getState('route') == POP_MULTIDOMAIN_ROUTE_EXTERNAL) {
             $dependencies[] = [PoP_MultiDomain_CDN_DynamicJSResourceLoaderProcessor::class, PoP_MultiDomain_CDN_DynamicJSResourceLoaderProcessor::RESOURCE_CDNCONFIG_EXTERNAL];

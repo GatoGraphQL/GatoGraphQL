@@ -33,7 +33,6 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
 
     public function getFormData(): array
     {
-        $vars = ApplicationState::getVars();
         return [
             'user_id' => \PoP\Root\App::getState('current-user-id'),
         ];

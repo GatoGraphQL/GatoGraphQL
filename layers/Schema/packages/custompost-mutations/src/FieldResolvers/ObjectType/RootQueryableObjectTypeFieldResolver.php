@@ -186,7 +186,6 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         string $fieldName,
         array $fieldArgs
     ): array {
-        $vars = ApplicationState::getVars();
         return match ($fieldName) {
             'myCustomPost',
             'myCustomPosts',

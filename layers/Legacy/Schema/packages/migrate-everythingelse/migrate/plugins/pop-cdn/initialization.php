@@ -53,7 +53,6 @@ class PoP_CDN_Initialization
             // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
             global $pop_cdn_configfile;
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $vars = ApplicationState::getVars();
                 $cmswebplatformapi->registerScript('pop-cdn-config', $pop_cdn_configfile->getFileurl(), array(), ApplicationInfoFacade::getInstance()->getVersion(), true);
                 $cmswebplatformapi->enqueueScript('pop-cdn-config');
             }

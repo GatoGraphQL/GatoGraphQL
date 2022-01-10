@@ -32,7 +32,6 @@ class APIUtils
             ),
         ], $url);
 
-        $vars = ApplicationState::getVars();
         if ($mangled = \PoP\Root\App::getState('mangled')) {
             $endpoint = GeneralUtils::addQueryArgs(
                 [

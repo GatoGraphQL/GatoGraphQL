@@ -97,7 +97,6 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
 
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
                 $ret['authors'] = [\PoP\Root\App::getState(['routing', 'queried-object-id'])];

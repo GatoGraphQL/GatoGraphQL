@@ -20,7 +20,6 @@ class SchemaCacheHookSet extends AbstractHookSet
 
     public function getSchemaCacheKeyComponents(array $components): array
     {
-        $vars = ApplicationState::getVars();
         if ($graphQLOperationType = \PoP\Root\App::getState('graphql-operation-type')) {
             $components['graphql-operation-type'] = $graphQLOperationType;
         }

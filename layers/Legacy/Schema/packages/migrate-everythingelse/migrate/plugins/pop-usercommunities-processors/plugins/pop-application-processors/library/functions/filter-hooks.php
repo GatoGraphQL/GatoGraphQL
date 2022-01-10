@@ -98,7 +98,6 @@ function gdUreAddFiltercomponentCommunityusers($filterinputs, array $module)
     if (in_array($module, [
         [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORCONTENT],
     ])) {
-        $vars = ApplicationState::getVars();
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Check if the user is showing the community. If showing user, then no need for this
@@ -127,7 +126,6 @@ function gdUreAddSimpleFiltercomponentCommunityusers($filterinputs, array $modul
     if (in_array($module, [
         [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],
     ])) {
-        $vars = ApplicationState::getVars();
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Check if the user is showing the community. If showing user, then no need for this

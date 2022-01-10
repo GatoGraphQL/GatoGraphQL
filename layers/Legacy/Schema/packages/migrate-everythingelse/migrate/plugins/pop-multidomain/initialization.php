@@ -63,7 +63,6 @@ class PoP_MultiDomain_Initialization
             // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
             global $pop_multidomain_initdomainscripts_configfile;
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $vars = ApplicationState::getVars();
                 $cmswebplatformapi->registerScript('pop-multidomain-domainscripts', $pop_multidomain_initdomainscripts_configfile->getFileurl(), array(), ApplicationInfoFacade::getInstance()->getVersion());
                 $cmswebplatformapi->enqueueScript('pop-multidomain-domainscripts');
             }

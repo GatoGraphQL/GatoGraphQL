@@ -38,7 +38,6 @@ class GD_FormInput_SettingsFormat extends SelectFormInput
 
     public function getDefaultValue(): mixed
     {
-        $vars = ApplicationState::getVars();
         if ($selected = \PoP\Root\App::getState('settingsformat')) {
             $allvalues = array(
                 POP_FORMAT_SIMPLEVIEW,

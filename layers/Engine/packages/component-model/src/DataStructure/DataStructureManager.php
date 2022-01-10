@@ -35,7 +35,6 @@ class DataStructureManager implements DataStructureManagerInterface
         };
 
         // Return the one saved in the vars
-        $vars = ApplicationState::getVars();
         $name = \PoP\Root\App::getState('datastructure');
         if ($name && isset($this->formatters[$name])) {
             return $this->formatters[$name];

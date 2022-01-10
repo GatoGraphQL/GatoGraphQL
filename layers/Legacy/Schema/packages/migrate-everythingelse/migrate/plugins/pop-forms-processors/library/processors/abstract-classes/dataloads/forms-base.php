@@ -14,7 +14,6 @@ abstract class PoP_Module_Processor_FormDataloadsBase extends PoP_Module_Process
         if (defined('POP_FORMSWEBPLATFORM_INITIALIZED')) {
             if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
                 if ($this->validateCaptcha($module, $props)) {
-                    $vars = ApplicationState::getVars();
                     if (!(PoP_FormUtils::useLoggedinuserData() && \PoP\Root\App::getState('is-user-logged-in'))) {
                         $ret[GD_DATALOAD_QUERYHANDLERPROPERTY_FORM_VALIDATECAPTCHA] = true;
                     }

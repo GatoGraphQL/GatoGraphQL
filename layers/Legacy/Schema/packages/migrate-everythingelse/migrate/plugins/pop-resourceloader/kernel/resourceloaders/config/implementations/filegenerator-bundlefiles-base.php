@@ -274,7 +274,6 @@ class PoP_ResourceLoader_FileGenerator_BundleFilesBase {
 
             // If it is an empty file, use the website version. This makes sure that an entry for this file is created in files bundle(group)-versions.json,
             // so that an empty file is not re-generated each time when using generate_bundlefile_on_runtime()
-            $vars = ApplicationState::getVars();
             $version = ApplicationInfoFacade::getInstance()->getVersion();
         }
 

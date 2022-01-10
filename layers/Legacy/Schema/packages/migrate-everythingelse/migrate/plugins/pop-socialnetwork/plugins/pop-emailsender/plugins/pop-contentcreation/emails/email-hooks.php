@@ -194,7 +194,6 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             $post_title = $customPostTypeAPI->getTitle($post_id);
             $footer = PoP_UserPlatform_EmailSenderUtils::getPreferencesFooter(TranslationAPIFacade::getInstance()->__('You are receiving this notification for having subscribed to tags/topics added in this post.', 'pop-emailsender'));
 
-            $vars = ApplicationState::getVars();
             foreach ($post_tags as $tag_id) {
                 // Get all the users who subscribed to each tag
                 if ($tag_subscribers = \PoPSchema\TaxonomyMeta\Utils::getTermMeta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
@@ -324,7 +323,6 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             $post_title = $customPostTypeAPI->getTitle($post_id);
             $footer = PoP_UserPlatform_EmailSenderUtils::getPreferencesFooter(TranslationAPIFacade::getInstance()->__('You are receiving this notification for having subscribed to tags/topics added in this comment/post.', 'pop-emailsender'));
 
-            $vars = ApplicationState::getVars();
             foreach ($post_tags as $tag_id) {
                 // Get all the users who subscribed to each tag
                 if ($tag_subscribers = \PoPSchema\TaxonomyMeta\Utils::getTermMeta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
@@ -374,7 +372,6 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     }
     public function emailnotificationsNetworkSubscribedtotopic($tag_id)
     {
-        $vars = ApplicationState::getVars();
         $user_id = \PoP\Root\App::getState('current-user-id');
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
 

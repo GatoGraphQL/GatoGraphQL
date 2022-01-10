@@ -14,7 +14,6 @@ class PoP_LocationPosts_CommonUserRoles_ProcessorHooks
 
     public function getInnerSubmodules($modules)
     {
-        $vars = ApplicationState::getVars();
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         if (gdUreIsOrganization($author)) {
             $modules[] = [GD_URE_Module_Processor_CustomSidebarDataloads::class, GD_URE_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION];

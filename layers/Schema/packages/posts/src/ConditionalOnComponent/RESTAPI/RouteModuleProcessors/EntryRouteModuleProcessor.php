@@ -24,7 +24,6 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
     public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
-        $vars = ApplicationState::getVars();
         $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
             'module' => [
                 FieldDataloadModuleProcessor::class,
@@ -50,7 +49,6 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
-        $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         /** @var ComponentModelComponentConfiguration */

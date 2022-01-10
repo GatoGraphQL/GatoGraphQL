@@ -6,7 +6,6 @@ abstract class PoP_Module_Processor_UpdateUserDataloadsBase extends PoP_Module_P
 {
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
-        $vars = ApplicationState::getVars();
         return \PoP\Root\App::getState('current-user-id');
     }
 

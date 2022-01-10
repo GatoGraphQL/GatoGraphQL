@@ -41,7 +41,6 @@ class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP
 
     public function initRequestProps(array $module, array &$props): void
     {
-        $vars = ApplicationState::getVars();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT:

@@ -21,7 +21,6 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
 
     public function validateCheckpoint(array $checkpoint): ?Error
     {
-        $vars = ApplicationState::getVars();
         $current_user_id = \PoP\Root\App::getState('current-user-id');
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY:
@@ -32,7 +31,6 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
 
             case self::CHECKPOINT_EDITINGCOMMUNITYMEMBER:
                 // Validate the user being edited is member of the community
-                $vars = ApplicationState::getVars();
                 $user_id = $_REQUEST[\PoPSchema\Users\Constants\InputNames::USER_ID];
                 $community = $current_user_id;
                 $status = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);

@@ -24,7 +24,6 @@ class PoPTheme_UserStance_SubmenuHooks
 
     public function addRoutes($routes)
     {
-        $vars = ApplicationState::getVars();
         $route = \PoP\Root\App::getState('route');
 
         if (defined('POP_USERSTANCE_ROUTE_STANCES') && POP_USERSTANCE_ROUTE_STANCES) {

@@ -52,7 +52,6 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             case self::MODULE_DATALOAD_UPVOTESPOSTS:
             case self::MODULE_DATALOAD_DOWNVOTESPOSTS:
                 // If the user is not logged in, then do not load the data
-                $vars = ApplicationState::getVars();
                 if (!PoP_UserState_Utils::currentRouteRequiresUserState() || !\PoP\Root\App::getState('is-user-logged-in')) {
                     $ret[DataloadingConstants::SKIPDATALOAD] = true;
                 }
@@ -100,7 +99,6 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         // All of these modules require the user to be logged in
-        $vars = ApplicationState::getVars();
         if (!\PoP\Root\App::getState('is-user-logged-in')) {
             return [];
         }

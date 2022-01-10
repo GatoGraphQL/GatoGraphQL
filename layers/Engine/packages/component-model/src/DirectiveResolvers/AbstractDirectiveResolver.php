@@ -443,7 +443,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * If this directive is tagged with a version...
              */
             $schemaDirectiveVersion = $this->getDirectiveVersion($relationalTypeResolver);
-            $vars = ApplicationState::getVars();
             /**
              * Get versionConstraint in this order:
              * 1. Passed as directive argument

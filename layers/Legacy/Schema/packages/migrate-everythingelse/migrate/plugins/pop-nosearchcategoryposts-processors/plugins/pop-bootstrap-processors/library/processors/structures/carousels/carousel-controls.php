@@ -343,7 +343,6 @@ class NSCPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carou
     }
     protected function getTitleLink(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $routes = array(

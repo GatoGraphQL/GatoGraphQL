@@ -76,7 +76,6 @@ class PoP_UserLoginWebPlatform_Initialization
             // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
             global $popcore_userloggedinstyles_file;
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $vars = ApplicationState::getVars();
                 $htmlcssplatformapi->registerStyle('pop-userlogin-webplatform-userloggedin', $popcore_userloggedinstyles_file->getFileurl(), array(), ApplicationInfoFacade::getInstance()->getVersion());
                 $htmlcssplatformapi->enqueueStyle('pop-userlogin-webplatform-userloggedin');
             }

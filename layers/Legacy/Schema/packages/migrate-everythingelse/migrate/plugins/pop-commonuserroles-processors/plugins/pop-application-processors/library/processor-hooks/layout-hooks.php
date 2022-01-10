@@ -8,7 +8,6 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_CustomContentBlocks:author:sidebar', 'gdUreAuthorsidebarLayout');
 function gdUreAuthorsidebarLayout($layout)
 {
-    $vars = ApplicationState::getVars();
     $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
     if (gdUreIsOrganization($author)) {
         return [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION];

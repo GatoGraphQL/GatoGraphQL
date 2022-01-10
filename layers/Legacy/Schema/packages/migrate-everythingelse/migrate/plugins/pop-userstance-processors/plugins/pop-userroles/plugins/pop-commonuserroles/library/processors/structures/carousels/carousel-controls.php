@@ -61,7 +61,6 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
     }
     protected function getTitleLink(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:

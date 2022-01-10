@@ -48,7 +48,6 @@ abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Pr
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
 
         // Logged-in author
-        $vars = ApplicationState::getVars();
         $ret['authors'] = [\PoP\Root\App::getState('current-user-id')];
 
         return $ret;

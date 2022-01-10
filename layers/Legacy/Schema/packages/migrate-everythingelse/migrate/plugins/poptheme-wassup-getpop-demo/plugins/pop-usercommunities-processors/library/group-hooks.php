@@ -17,7 +17,6 @@ class GetPoPDemo_URE_GroupHooks
     {
 
         // Add the members only for communities
-        $vars = ApplicationState::getVars();
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         if (gdUreIsCommunity($author)) {
             if (defined('POP_APPLICATIONPROCESSORS_INITIALIZED')) {

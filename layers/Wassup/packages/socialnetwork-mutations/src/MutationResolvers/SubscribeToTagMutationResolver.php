@@ -14,7 +14,6 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
     {
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
-            $vars = ApplicationState::getVars();
             $user_id = \PoP\Root\App::getState('current-user-id');
             $target_id = $form_data['target_id'];
 
@@ -43,7 +42,6 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
 
     protected function update($form_data): string | int
     {
-        $vars = ApplicationState::getVars();
         $user_id = \PoP\Root\App::getState('current-user-id');
         $target_id = $form_data['target_id'];
 

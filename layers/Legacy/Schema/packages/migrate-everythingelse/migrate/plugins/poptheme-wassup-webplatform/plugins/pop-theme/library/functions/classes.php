@@ -8,7 +8,6 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter("gdClassesBody", 'gdClassesBodyThemeImpl');
 function gdClassesBodyThemeImpl($body_classes)
 {
-    $vars = ApplicationState::getVars();
     $body_classes[] = \PoP\Root\App::getState('theme');
     $body_classes[] = \PoP\Root\App::getState('thememode');
     $body_classes[] = \PoP\Root\App::getState('themestyle');

@@ -6,7 +6,6 @@ class PoP_Module_SettingsManager extends \PoP\ComponentModel\Settings\SettingsMa
 {
     public function silentDocument($route = null)
     {
-        $vars = ApplicationState::getVars();
         if (!$route) {
             $route = \PoP\Root\App::getState('route');
         }
@@ -25,7 +24,6 @@ class PoP_Module_SettingsManager extends \PoP\ComponentModel\Settings\SettingsMa
 
     public function isMultipleopen($route = null)
     {
-        $vars = ApplicationState::getVars();
         if (!$route) {
             $route = \PoP\Root\App::getState('route');
         }
@@ -44,7 +42,6 @@ class PoP_Module_SettingsManager extends \PoP\ComponentModel\Settings\SettingsMa
 
     public function isAppshell($route = null)
     {
-        $vars = ApplicationState::getVars();
         if (!$route) {
             $route = \PoP\Root\App::getState('route');
         }
@@ -63,7 +60,6 @@ class PoP_Module_SettingsManager extends \PoP\ComponentModel\Settings\SettingsMa
 
     public function storeLocal($route = null)
     {
-        $vars = ApplicationState::getVars();
         if (!$route) {
             $route = \PoP\Root\App::getState('route');
         }

@@ -135,7 +135,6 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                $vars = ApplicationState::getVars();
                 if (!\PoP\Root\App::getState('is-user-logged-in')) {
                     return [];
                 }

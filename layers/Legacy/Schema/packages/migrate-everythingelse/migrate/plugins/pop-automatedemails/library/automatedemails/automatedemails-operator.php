@@ -16,7 +16,6 @@ class PoP_AutomatedEmails_Operator
     public function maybeSendAutomatedemail()
     {
         global $pop_automatedemails_manager;
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
 
         if (\PoP\Root\App::getState(['routing', 'is-standard'])) {

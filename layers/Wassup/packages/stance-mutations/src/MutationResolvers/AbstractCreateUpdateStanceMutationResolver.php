@@ -63,7 +63,6 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         $referenced_id = $form_data['stancetarget'];
 
         // Check if there is already an existing stance
-        $vars = ApplicationState::getVars();
         $query = array(
             'status' => array(CustomPostStatus::PUBLISH, CustomPostStatus::DRAFT),
             'authors' => [\PoP\Root\App::getState('current-user-id')],

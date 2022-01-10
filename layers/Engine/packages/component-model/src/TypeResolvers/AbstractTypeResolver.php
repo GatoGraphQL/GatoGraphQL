@@ -64,7 +64,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     final public function getMaybeNamespacedTypeName(): string
     {
-        $vars = ApplicationState::getVars();
         return \PoP\Root\App::getState('namespace-types-and-interfaces') ?
             $this->getNamespacedTypeName() :
             $this->getTypeName();

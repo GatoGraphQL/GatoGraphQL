@@ -32,7 +32,6 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
             case self::MODULE_MULTIPLE_AUTHORCONTENT_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORPOSTS_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR:
-                $vars = ApplicationState::getVars();
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $filters = array(
                     self::MODULE_MULTIPLE_AUTHOR_SIDEBAR => null,

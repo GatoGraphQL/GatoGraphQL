@@ -19,7 +19,6 @@ class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
 
     public function validateCheckpoint(array $checkpoint): ?Error
     {
-        $vars = ApplicationState::getVars();
         $current_user_id = \PoP\Root\App::getState('current-user-id');
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISPROFILEORGANIZATION:

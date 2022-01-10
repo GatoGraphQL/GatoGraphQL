@@ -60,7 +60,6 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         $ret = parent::getRoutes($module, $props);
 
         // Potentially, add an extra header level if the current page is one of the subheaders
-        $vars = ApplicationState::getVars();
         $route = \PoP\Root\App::getState('route');
 
         switch ($module[1]) {
@@ -116,7 +115,6 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
 
     public function getUrl(array $module, $route, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();

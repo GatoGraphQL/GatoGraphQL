@@ -19,7 +19,6 @@ class Utils
         }
 
         // Do not announce to stop loading when doing loadLatest
-        $vars = ApplicationState::getVars();
         if (isset(\PoP\Root\App::getState('loading-latest')) && \PoP\Root\App::getState('loading-latest')) {
             return false;
         }

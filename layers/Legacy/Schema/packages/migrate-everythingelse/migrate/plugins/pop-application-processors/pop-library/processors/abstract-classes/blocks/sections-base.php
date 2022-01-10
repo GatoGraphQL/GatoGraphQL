@@ -32,7 +32,6 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     {
 
         // Add only if the current nature is the one expected by the block
-        $vars = ApplicationState::getVars();
         // if (\PoP\Root\App::getState('nature') == $this->getNature($module)) {
         switch (\PoP\Root\App::getState('nature')) {
             case UserRouteNatures::USER:
@@ -53,7 +52,6 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     {
 
         // Add only if the current nature is the one expected by the block
-        $vars = ApplicationState::getVars();
         // if (\PoP\Root\App::getState('nature') == $this->getNature($module)) {
         switch (\PoP\Root\App::getState('nature')) {
             case UserRouteNatures::USER:
@@ -73,7 +71,6 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     protected function getTitleLink(array $module, array &$props)
     {
         if ($route = $this->getRelevantRoute($module, $props)) {
-            $vars = ApplicationState::getVars();
             $cmsService = CMSServiceFacade::getInstance();
             $userTypeAPI = UserTypeAPIFacade::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();

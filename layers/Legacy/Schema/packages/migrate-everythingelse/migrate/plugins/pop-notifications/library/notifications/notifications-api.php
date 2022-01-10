@@ -110,7 +110,6 @@ class PoP_Notifications_API
         // $user_id: if none has been passed in the params, then check if the user is logged in, and use that
         if (!$user_id) {
             if (PoP_UserState_Utils::currentRouteRequiresUserState()) {
-                $vars = ApplicationState::getVars();
                 if (\PoP\Root\App::getState('is-user-logged-in')) {
                     $user_id = \PoP\Root\App::getState('current-user-id');
                 }

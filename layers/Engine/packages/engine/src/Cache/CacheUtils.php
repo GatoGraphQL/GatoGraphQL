@@ -16,7 +16,6 @@ class CacheUtils
 
     public static function getSchemaCacheKeyComponents(): array
     {
-        $vars = ApplicationState::getVars();
         $hooksAPI = HooksAPIFacade::getInstance();
         /** @var EngineComponentConfiguration */
         $componentConfiguration = App::getComponent(EngineComponent::class)->getConfiguration();

@@ -53,7 +53,6 @@ class PoP_ApplicationProcessors_Utils
 
     protected static function loadingLazy()
     {
-        $vars = ApplicationState::getVars();
         return in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
     }
 

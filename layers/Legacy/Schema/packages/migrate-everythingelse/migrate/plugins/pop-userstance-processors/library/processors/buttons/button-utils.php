@@ -7,7 +7,6 @@ class UserStance_Module_Processor_ButtonUtils
 {
     public static function getSinglepostAddstanceTitle()
     {
-        $vars = ApplicationState::getVars();
         $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
     
         // Allow Events to have a different title

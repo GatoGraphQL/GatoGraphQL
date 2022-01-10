@@ -106,7 +106,6 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         /**
          * Override with the user's properties
          */
-        $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {

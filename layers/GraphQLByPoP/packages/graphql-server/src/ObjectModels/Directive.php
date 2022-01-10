@@ -46,7 +46,6 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
     {
         $directives = [];
         $directiveKind = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_KIND];
-        $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         /**

@@ -62,7 +62,6 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
     ): mixed {
         switch ($fieldName) {
             case 'me':
-                $vars = ApplicationState::getVars();
                 return \PoP\Root\App::getState('current-user-id');
         }
 

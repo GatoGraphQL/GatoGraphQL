@@ -96,7 +96,6 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
 
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
          // Members of the Community
             case self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT:

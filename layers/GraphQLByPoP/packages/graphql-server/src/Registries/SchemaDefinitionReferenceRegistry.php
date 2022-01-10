@@ -107,7 +107,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         if ($useCache = $componentConfiguration->useSchemaDefinitionCache()) {
             // Use different caches for the normal and namespaced schemas,
             // or it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
-            $vars = ApplicationState::getVars();
             $cacheType = CacheTypes::GRAPHQL_SCHEMA_DEFINITION;
             $cacheKeyComponents = array_merge(
                 CacheUtils::getSchemaCacheKeyComponents(),
@@ -143,7 +142,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     protected function prepareSchemaDefinitionForGraphQL(): void
     {
-        $vars = ApplicationState::getVars();
         $enableNestedMutations = \PoP\Root\App::getState('nested-mutations-enabled');
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
@@ -311,7 +309,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     protected function maybeAddTypeToSchemaDirectiveDescription(array $directiveSchemaDefinitionPath): void
     {
-        $vars = ApplicationState::getVars();
         if (isset(\PoP\Root\App::getState('edit-schema')) && \PoP\Root\App::getState('edit-schema')) {
             $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $directiveSchemaDefinitionPath);
             if ($directiveSchemaDefinition[SchemaDefinition::DIRECTIVE_KIND] === DirectiveKinds::SCHEMA) {

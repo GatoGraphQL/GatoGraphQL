@@ -17,7 +17,6 @@ class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointPr
 
     public function validateCheckpoint(array $checkpoint): ?Error
     {
-        $vars = ApplicationState::getVars();
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR:
                 $user_id = \PoP\Root\App::getState('current-user-id');

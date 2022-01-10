@@ -67,8 +67,7 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
     {
         parent::addHeaddatasetmoduleDataProperties($ret, $module, $props);
 
-        $vars = ApplicationState::getVars();
-
+        
         // Is the component lazy-load?
         $ret[DataloadingConstants::LAZYLOAD] = $this->isLazyload($module, $props);
 

@@ -8,7 +8,6 @@ function gdUreModuleInstanceComponents($components)
 {
 
     // Add source param for Communities: view their profile as Community or personal
-    $vars = ApplicationState::getVars();
     if (\PoP\Root\App::getState(['routing', 'is-user'])) {
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         if (gdUreIsCommunity($author)) {

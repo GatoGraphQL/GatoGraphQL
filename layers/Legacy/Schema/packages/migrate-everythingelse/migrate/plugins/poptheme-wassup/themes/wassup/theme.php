@@ -26,7 +26,6 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_SCROLLINNER_THUMBNAIL_GRID.':'.$this->getName(), array($this, 'getScrollinnerThumbnailGrid'));
 
         HooksAPIFacade::getInstance()->addAction('popcms:boot', function() {
-            $vars = ApplicationState::getVars();
             if (in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
                 HooksAPIFacade::getInstance()->addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD.':'.$this->getName(), array($this, 'getPagesectionJsmethod'), 10, 2);
                 HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getName(), array($this, 'keepOpenTabs'));
@@ -215,8 +214,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
 
     protected function addUrlParams($url)
     {
-        $vars = ApplicationState::getVars();
-
+        
         // Add the themestyle, if it is not the default one
         if (!\PoP\Root\App::getState('themestyle-isdefault')) {
             $url = GeneralUtils::addQueryArgs([

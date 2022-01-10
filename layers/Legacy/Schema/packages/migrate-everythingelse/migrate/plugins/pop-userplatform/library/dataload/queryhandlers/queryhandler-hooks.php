@@ -16,7 +16,6 @@ class PoP_UserPlatform_UserStance_Hooks
 
     public function getUserFeedback($user_feedback)
     {
-        $vars = ApplicationState::getVars();
         $user_attributes = array();
         $user_logged_in = \PoP\Root\App::getState('is-user-logged-in');
         if ($user_logged_in) {

@@ -9,7 +9,6 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter('UserPlatform:redirect_url:edit_profile', 'getCommonuserrolesEditprofileRedirectUrl');
 function getCommonuserrolesEditprofileRedirectUrl($redirect_url)
 {
-    $vars = ApplicationState::getVars();
     if (\PoP\Root\App::getState('is-user-logged-in')) {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $current_user_id = \PoP\Root\App::getState('current-user-id');

@@ -29,7 +29,6 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
 
     public function getFormData(): array
     {
-        $vars = ApplicationState::getVars();
         $user_id = \PoP\Root\App::getState('current-user-id');
         $form_data = array(
             'user_id' => $user_id,

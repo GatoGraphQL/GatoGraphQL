@@ -11,7 +11,6 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge exte
 {
     public function getFormData(): array
     {
-        $vars = ApplicationState::getVars();
         $form_data = array(
             'histid' => $_REQUEST[$this->getRequestKey()] ?? null,
             'user_id' => \PoP\Root\App::getState('current-user-id'),

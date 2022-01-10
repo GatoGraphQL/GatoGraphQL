@@ -21,7 +21,6 @@ abstract class AbstractUserStateConfigurableAccessControlForFieldsInPrivateSchem
     protected function removeFieldNameBasedOnMatchingEntryValue($entryValue = null): bool
     {
         // Obtain the user state: logged in or not
-        $vars = ApplicationState::getVars();
         $isUserLoggedIn = \PoP\Root\App::getState('is-user-logged-in');
         // Let the implementation class decide if to remove the field or not
         return $this->removeFieldNameBasedOnUserState((string)$entryValue, $isUserLoggedIn);

@@ -216,7 +216,6 @@ class PoP_ContentCreation_EmailSender_Hooks
 
         // Keep only the users with the corresponding preference on
         // Do not send to the current user
-        $vars = ApplicationState::getVars();
         $users = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_GENERAL_NEWPOST, array(), array(\PoP\Root\App::getState('current-user-id')));
         if ($users) {
             // From those, remove all users who got an email in a previous email function

@@ -23,7 +23,6 @@ class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
 
     public function validateCheckpoint(array $checkpoint): ?Error
     {
-        $vars = ApplicationState::getVars();
         switch ($checkpoint[1]) {
             case self::USERLOGGEDIN:
                 if (!\PoP\Root\App::getState('is-user-logged-in')) {

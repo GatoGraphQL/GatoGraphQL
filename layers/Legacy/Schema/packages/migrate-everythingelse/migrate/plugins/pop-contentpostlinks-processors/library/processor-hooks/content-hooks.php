@@ -17,7 +17,6 @@ class PoP_ContentPostLinks_ContentHooks
 
     public function contentInner($inner, array $module)
     {
-        $vars = ApplicationState::getVars();
         $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
 

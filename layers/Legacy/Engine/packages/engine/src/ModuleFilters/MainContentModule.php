@@ -16,7 +16,6 @@ class MainContentModule extends AbstractModuleFilter
 
     public function excludeModule(array $module, array &$props): bool
     {
-        $vars = ApplicationState::getVars();
         return \PoP\Root\App::getState('maincontentmodule') != $module;
     }
 }

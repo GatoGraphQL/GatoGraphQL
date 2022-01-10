@@ -18,7 +18,6 @@ class PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks extends 
         $ret = parent::getInnerSubmodules($module);
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
-            $vars = ApplicationState::getVars();
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
                 switch ($module[1]) {

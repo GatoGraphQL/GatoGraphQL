@@ -22,7 +22,6 @@ class PoPTheme_WassupManager
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_SCROLLINNER_THUMBNAIL_GRID, array($this, 'getScrollinnerThumbnailGrid'));
 
         HooksAPIFacade::getInstance()->addAction('popcms:boot', function() {
-            $vars = ApplicationState::getVars();
             if (in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
                 HooksAPIFacade::getInstance()->addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD, array($this, 'getPagesectionjsmethod'), 10, 2);
                 HooksAPIFacade::getInstance()->addFilter(POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD, array($this, 'getBlockjsmethod'), 10, 2);

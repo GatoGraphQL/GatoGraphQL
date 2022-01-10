@@ -39,7 +39,6 @@ class UserStance_Module_Processor_CustomSectionBlocksUtils
     public static function addDataloadqueryargsSinglestances(&$ret, $referenced_post_id = null)
     {
         if (!$referenced_post_id) {
-            $vars = ApplicationState::getVars();
             $referenced_post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         }
 

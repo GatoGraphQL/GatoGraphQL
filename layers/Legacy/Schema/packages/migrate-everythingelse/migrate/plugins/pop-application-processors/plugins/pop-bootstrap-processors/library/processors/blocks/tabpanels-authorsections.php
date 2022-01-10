@@ -28,7 +28,6 @@ class PoP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
         $ret = parent::getInnerSubmodules($module);
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
-            $vars = ApplicationState::getVars();
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
                 switch ($module[1]) {

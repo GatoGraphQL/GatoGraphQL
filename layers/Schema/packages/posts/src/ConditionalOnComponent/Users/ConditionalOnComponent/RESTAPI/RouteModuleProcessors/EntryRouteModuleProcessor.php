@@ -37,7 +37,6 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
-        $vars = ApplicationState::getVars();
         // Author's posts
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();

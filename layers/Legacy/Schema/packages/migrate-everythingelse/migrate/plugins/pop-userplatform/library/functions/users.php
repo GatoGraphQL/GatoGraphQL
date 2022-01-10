@@ -20,7 +20,6 @@ function gdGetUserattributes($user_id)
 function userHasAccess($capability, $user_id = null)
 {
     if (is_null($user_id)) {
-        $vars = ApplicationState::getVars();
         $user_id = \PoP\Root\App::getState('current-user-id');
     }
     $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();

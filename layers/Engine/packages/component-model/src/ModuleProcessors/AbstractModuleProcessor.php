@@ -1042,7 +1042,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function shouldExecuteMutation(array $module, array &$props): bool
     {
         // By default, execute only if the module is targeted for execution and doing POST
-        $vars = ApplicationState::getVars();
         return 'POST' == $_SERVER['REQUEST_METHOD'] && \PoP\Root\App::getState('actionpath') == $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
     }
 
@@ -1060,7 +1059,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         );
 
         // If we are in the API currently, stay in the API
-        $vars = ApplicationState::getVars();
         if ($scheme = \PoP\Root\App::getState('scheme')) {
             $ret = GeneralUtils::addQueryArgs([
                 Params::SCHEME => $scheme,

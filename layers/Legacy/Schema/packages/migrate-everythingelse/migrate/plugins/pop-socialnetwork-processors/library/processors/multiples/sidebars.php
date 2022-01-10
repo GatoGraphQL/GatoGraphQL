@@ -29,7 +29,6 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
             case self::MODULE_MULTIPLE_AUTHORFOLLOWINGUSERS_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR:
-                $vars = ApplicationState::getVars();
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $filters = array(
                     self::MODULE_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],

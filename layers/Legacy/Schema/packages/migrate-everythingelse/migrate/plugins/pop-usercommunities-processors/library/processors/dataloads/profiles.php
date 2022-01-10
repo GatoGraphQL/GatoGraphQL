@@ -146,7 +146,6 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
                 return $this->getObjectIDFromURLParam($module, $props, $data_properties);
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
-                $vars = ApplicationState::getVars();
                 return \PoP\Root\App::getState('current-user-id');
         }
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
