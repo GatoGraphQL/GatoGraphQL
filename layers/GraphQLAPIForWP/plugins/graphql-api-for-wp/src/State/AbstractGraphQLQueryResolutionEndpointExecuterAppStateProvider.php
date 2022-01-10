@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\State;
 
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoP\Root\App;
 
 abstract class AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider extends AbstractEndpointExecuterAppStateProvider
 {
@@ -31,7 +32,7 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider ex
         list(
             $graphQLQuery,
             $graphQLVariables
-        ) = $this->getEndpointExecuter()->getGraphQLQueryAndVariables($state['routing']['queried-object']);
+        ) = $this->getEndpointExecuter()->getGraphQLQueryAndVariables(App::getState(['routing', 'queried-object']));
         if (!$graphQLQuery) {
             // If there is no query, nothing to do!
             return;
@@ -50,7 +51,7 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider ex
         // But this behavior can be overriden for the persisted query,
         // by setting "Accept Variables as URL Params" => false
         // When editing in the editor, 'queried-object' will be null, and that's OK
-        $state['variables'] = $this->getEndpointExecuter()->doURLParamsOverrideGraphQLVariables($state['routing']['queried-object']) ?
+        $state['variables'] = $this->getEndpointExecuter()->doURLParamsOverrideGraphQLVariables(App::getState(['routing', 'queried-object'])) ?
             array_merge(
                 $graphQLVariables,
                 $state['variables'] ?? []
