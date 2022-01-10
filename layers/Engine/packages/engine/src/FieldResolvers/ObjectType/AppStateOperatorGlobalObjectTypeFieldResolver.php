@@ -7,7 +7,6 @@ namespace PoP\Engine\FieldResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -18,13 +17,6 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolve
 
 class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
-    public const HOOK_SAFEVARS = __CLASS__ . ':safeVars';
-
-    /**
-     * @var array<string, mixed>
-     */
-    protected ?array $safeVars = null;
-
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
@@ -123,13 +115,12 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
         if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
             switch ($fieldName) {
                 case 'var':
-                    $safeVars = $this->getSafeVars();
-                    if (!isset($safeVars[$fieldArgs['name']])) {
+                    if (!App::hasState($fieldArgs['name'])) {
                         return [
                             sprintf(
                                 $this->__('There is no property \'%s\' in the application state', 'component-model'),
                                 $fieldArgs['name']
-                            )
+                            ),
                         ];
                     };
                     break;
@@ -137,18 +128,6 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
         }
 
         return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
-    }
-
-    protected function getSafeVars()
-    {
-        if (is_null($this->safeVars)) {
-            $this->safeVars = ApplicationState::getVars();
-            $this->getHooksAPI()->doAction(
-                self::HOOK_SAFEVARS,
-                array(&$this->safeVars)
-            );
-        }
-        return $this->safeVars;
     }
 
     /**
@@ -168,10 +147,9 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
     ): mixed {
         switch ($fieldName) {
             case 'var':
-                $safeVars = $this->getSafeVars();
-                return $safeVars[$fieldArgs['name']];
+                return App::getState($fieldArgs['name']);
             case 'context':
-                return $this->getSafeVars();
+                return App::getAppStateManager()->all();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
