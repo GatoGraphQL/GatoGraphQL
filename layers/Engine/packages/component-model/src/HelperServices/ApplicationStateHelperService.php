@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\HelperServices;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Constants\Outputs;
-use PoP\ComponentModel\State\ApplicationState;
 
 class ApplicationStateHelperService implements ApplicationStateHelperServiceInterface
 {

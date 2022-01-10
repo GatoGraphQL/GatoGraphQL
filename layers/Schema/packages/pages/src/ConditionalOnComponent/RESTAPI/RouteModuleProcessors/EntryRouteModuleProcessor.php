@@ -6,7 +6,6 @@ namespace PoPSchema\Pages\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
 use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoPSchema\Pages\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPSchema\Pages\Routing\RouteNatures;

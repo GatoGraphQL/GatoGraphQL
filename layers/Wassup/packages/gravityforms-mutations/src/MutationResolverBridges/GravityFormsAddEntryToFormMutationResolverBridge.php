@@ -8,7 +8,6 @@ use PoP\Root\App;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;
 use PoP\Root\Services\AutomaticallyInstantiatedServiceTrait;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;

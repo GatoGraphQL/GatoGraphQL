@@ -8,7 +8,6 @@ use PoP\Root\App;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\BasicService\AbstractHookSet;
 
 class ModulePathsHookSet extends AbstractHookSet

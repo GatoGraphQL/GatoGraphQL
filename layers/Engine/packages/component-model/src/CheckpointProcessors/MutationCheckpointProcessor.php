@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\CheckpointProcessors;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\State\ApplicationState;
 
 class MutationCheckpointProcessor extends AbstractCheckpointProcessor
 {

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
 use PoP\Root\App;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\TranslationAPIInterface;
 
 trait ValidateUserLoggedInMutationResolverTrait

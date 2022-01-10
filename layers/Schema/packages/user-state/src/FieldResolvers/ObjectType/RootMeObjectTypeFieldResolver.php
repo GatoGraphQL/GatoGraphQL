@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
 use PoP\Root\App;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;

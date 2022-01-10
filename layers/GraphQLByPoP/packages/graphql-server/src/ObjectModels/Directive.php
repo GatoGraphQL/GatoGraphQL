@@ -9,7 +9,6 @@ use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\State\ApplicationState;
 
 class Directive extends AbstractSchemaDefinitionReferenceObject
 {

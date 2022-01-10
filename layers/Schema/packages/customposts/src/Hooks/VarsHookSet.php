@@ -6,7 +6,6 @@ namespace PoPSchema\CustomPosts\Hooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\BasicService\AbstractHookSet;
 use PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes;
 use PoPSchema\CustomPosts\Routing\RouteNatures;

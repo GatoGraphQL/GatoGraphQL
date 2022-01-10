@@ -6,7 +6,6 @@ namespace PoP\APIMirrorQuery\DataStructureFormatters;
 
 use PoP\Root\App;
 use PoP\ComponentModel\DataStructure\AbstractJSONDataStructureFormatter;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 
 class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatter

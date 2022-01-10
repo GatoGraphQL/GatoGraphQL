@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
 use PoP\Root\App;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\EditPosts\FunctionAPIFactory;
 use PoPSchema\CustomPostMeta\Utils;
 use PoPSchema\CustomPosts\Enums\CustomPostStatus;

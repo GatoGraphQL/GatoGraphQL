@@ -6,7 +6,6 @@ namespace PoPSchema\UserStateAccessControl\Hooks;
 
 use PoP\Root\App;
 use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet;
-use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\UserStateAccessControl\Services\AccessControlGroups;
 
 abstract class AbstractUserStateConfigurableAccessControlForDirectivesInPrivateSchemaHookSet extends AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet

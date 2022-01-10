@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\QueryInputOutputHandlers;
 
 use PoP\ComponentModel\Constants\PaginationParams;
-use PoP\ComponentModel\Constants\Params;
 
 class ListQueryInputOutputHandler extends AbstractQueryInputOutputHandler
 {

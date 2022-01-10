@@ -6,9 +6,7 @@ namespace PoPSchema\Notifications\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Constants\PaginationParams;
-use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP_Notifications_API;
 
 class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader

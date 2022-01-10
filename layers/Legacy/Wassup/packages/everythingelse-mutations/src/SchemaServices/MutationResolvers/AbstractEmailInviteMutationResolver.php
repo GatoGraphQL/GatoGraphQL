@@ -8,7 +8,6 @@ use PoP\Root\App;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\ComponentModel\State\ApplicationState;
 
 abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResolver
 {

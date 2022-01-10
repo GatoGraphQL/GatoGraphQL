@@ -6,7 +6,6 @@ namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
 use PoP\Root\App;
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
-use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\UserMeta\Utils;
 
 class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFromTagMutationResolver

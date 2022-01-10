@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Misc;
 
 use PoP\Root\App;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\URLParams;
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\QueriedObject\ModuleProcessors;
 
 use PoP\Root\App;
-use PoP\ComponentModel\State\ApplicationState;
 
 trait QueriedDBObjectModuleProcessorTrait
 {

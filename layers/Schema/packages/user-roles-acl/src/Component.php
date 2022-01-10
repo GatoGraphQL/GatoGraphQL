@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesACL;
 
-use PoP\Root\App;
 use PoP\BasicService\Component\AbstractComponent;
-use PoPSchema\UserRolesAccessControl\Component as UserRolesAccessControlComponent;
 
 /**
  * Initialize component

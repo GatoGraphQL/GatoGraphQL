@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use PoP\ComponentModel\State\ApplicationState;
 use WP_Post;
 
 abstract class AbstractViewSourceEndpointExecuter extends AbstractEndpointExecuter

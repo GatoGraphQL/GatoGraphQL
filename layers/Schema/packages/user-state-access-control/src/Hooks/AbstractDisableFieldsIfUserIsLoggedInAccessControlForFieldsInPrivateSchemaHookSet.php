@@ -6,7 +6,6 @@ namespace PoPSchema\UserStateAccessControl\Hooks;
 
 use PoP\Root\App;
 use PoP\AccessControl\Hooks\AbstractAccessControlForFieldsInPrivateSchemaHookSet;
-use PoP\ComponentModel\State\ApplicationState;
 
 abstract class AbstractDisableFieldsIfUserIsLoggedInAccessControlForFieldsInPrivateSchemaHookSet extends AbstractAccessControlForFieldsInPrivateSchemaHookSet
 {

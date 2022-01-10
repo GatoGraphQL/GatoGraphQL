@@ -9,7 +9,6 @@ use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Tokens\Param;
 use PoP\Definitions\Configuration\Request;
 

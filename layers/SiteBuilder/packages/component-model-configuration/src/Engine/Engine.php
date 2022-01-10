@@ -12,7 +12,6 @@ use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Engine\Engine\Engine as UpstreamEngine;

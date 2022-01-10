@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Root\Component;
 
 use PoP\Root\App;
-use PoP\Root\Facades\Registries\AppStateProviderRegistryFacade;
 use PoP\Root\Helpers\ClassHelpers;
 
 abstract class AbstractComponent implements ComponentInterface

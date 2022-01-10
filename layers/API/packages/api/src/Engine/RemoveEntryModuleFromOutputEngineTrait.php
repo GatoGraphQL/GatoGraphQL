@@ -9,7 +9,6 @@ use PoP\API\Component as APIComponent;
 use PoP\API\Constants\Actions;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Constants\DataOutputModes;
-use PoP\ComponentModel\State\ApplicationState;
 
 trait RemoveEntryModuleFromOutputEngineTrait
 {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\State;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class ApplicationState
 {

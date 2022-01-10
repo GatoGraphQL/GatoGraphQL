@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\API\ModuleProcessors;
 
 use PoP\Root\App;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\Schema\SchemaDefinitionServiceInterface;

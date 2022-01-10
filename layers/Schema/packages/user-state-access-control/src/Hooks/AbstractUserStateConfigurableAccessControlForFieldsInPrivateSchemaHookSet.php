@@ -6,7 +6,6 @@ namespace PoPSchema\UserStateAccessControl\Hooks;
 
 use PoP\Root\App;
 use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet;
-use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\UserStateAccessControl\Services\AccessControlGroups;
 
 abstract class AbstractUserStateConfigurableAccessControlForFieldsInPrivateSchemaHookSet extends AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet

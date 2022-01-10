@@ -6,7 +6,6 @@ namespace PoP\API\ModuleProcessors;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\FieldQuery\QueryHelpers;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor

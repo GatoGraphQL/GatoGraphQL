@@ -7,7 +7,6 @@ namespace PoP\ConfigurationComponentModel\Hooks;
 use PoP\Root\App;
 use PoP\BasicService\AbstractHookSet;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\State\ApplicationState;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {

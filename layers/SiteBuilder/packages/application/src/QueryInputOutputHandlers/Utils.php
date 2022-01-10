@@ -6,9 +6,7 @@ namespace PoP\Application\QueryInputOutputHandlers;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Constants\PaginationParams;
-use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\State\ApplicationState;
 
 class Utils
 {

@@ -8,7 +8,6 @@ use PoP\Root\App;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\DataStructure\AbstractJSONDataStructureFormatter;
-use PoP\ComponentModel\State\ApplicationState;
 
 class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatter
 {

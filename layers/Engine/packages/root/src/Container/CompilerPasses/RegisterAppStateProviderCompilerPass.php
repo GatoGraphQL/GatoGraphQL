@@ -6,7 +6,6 @@ namespace PoP\Root\Container\CompilerPasses;
 
 use GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistryInterface;
 use PoP\Root\State\AppStateProviderInterface;
-use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
 class RegisterAppStateProviderCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
 {

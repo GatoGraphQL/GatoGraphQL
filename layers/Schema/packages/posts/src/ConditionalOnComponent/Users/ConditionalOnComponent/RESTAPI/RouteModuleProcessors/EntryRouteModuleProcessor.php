@@ -6,7 +6,6 @@ namespace PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\RE
 
 use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 use PoPSchema\Posts\Component;
 use PoPSchema\Posts\ComponentConfiguration;

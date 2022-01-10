@@ -7,7 +7,6 @@ namespace PoP\Engine\Hooks\ModuleFilters;
 use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\ModuleFilters\HeadModule;
 use PoP\BasicService\AbstractHookSet;
 

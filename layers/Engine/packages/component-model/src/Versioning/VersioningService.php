@@ -8,7 +8,6 @@ use PoP\Root\App;
 use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
-use PoP\ComponentModel\State\ApplicationState;
 
 class VersioningService implements VersioningServiceInterface
 {

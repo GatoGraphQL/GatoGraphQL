@@ -9,7 +9,6 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeRe
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\API\Component as APIComponent;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\API\Schema\SchemaDefinitionService;
 

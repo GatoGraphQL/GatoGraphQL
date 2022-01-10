@@ -6,7 +6,6 @@ namespace PoP\Engine\ModuleFilters;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
-use PoP\ComponentModel\State\ApplicationState;
 
 class HeadModule extends AbstractModuleFilter
 {

@@ -6,7 +6,6 @@ namespace PoPSitesWassup\NotificationMutations\MutationResolverBridges;
 
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
-use PoP\ComponentModel\State\ApplicationState;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
