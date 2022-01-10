@@ -22,40 +22,41 @@ class ComponentAppState extends AbstractComponentAppState
 {
     public function initialize(array &$state): void
     {
-        // Others (eg: SPA) will be based on these updated values
-        if ($state['scheme'] === APISchemes::API) {
-            // For the API, the response is always JSON
-            $state['output'] = Outputs::JSON;
+        if ($state['scheme'] !== APISchemes::API) {
+            return;
+        }
 
-            // Fetch datasetmodulesettings: needed to obtain the dbKeyPath to know where to find the database entries
-            $state['dataoutputitems'] = [
-                DataOutputItems::DATASET_MODULE_SETTINGS,
-                DataOutputItems::MODULE_DATA,
-                DataOutputItems::DATABASES,
-            ];
+        // For the API, the response is always JSON
+        $state['output'] = Outputs::JSON;
 
-            // dataoutputmode => Combined: there is no need to split the sources, then already combined them
-            $state['dataoutputmode'] = DataOutputModes::COMBINED;
+        // Fetch datasetmodulesettings: needed to obtain the dbKeyPath to know where to find the database entries
+        $state['dataoutputitems'] = [
+            DataOutputItems::DATASET_MODULE_SETTINGS,
+            DataOutputItems::MODULE_DATA,
+            DataOutputItems::DATABASES,
+        ];
 
-            // dboutputmode => Combined: needed since we don't know under what database does the dbKeyPath point to. Then simply integrate all of them
-            // Also, needed for REST/GraphQL APIs since all their data comes bundled all together
-            $state['dboutputmode'] = DatabasesOutputModes::COMBINED;
+        // dataoutputmode => Combined: there is no need to split the sources, then already combined them
+        $state['dataoutputmode'] = DataOutputModes::COMBINED;
 
-            // Do not print the entry module
-            $state['actions'][] = Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT;
+        // dboutputmode => Combined: needed since we don't know under what database does the dbKeyPath point to. Then simply integrate all of them
+        // Also, needed for REST/GraphQL APIs since all their data comes bundled all together
+        $state['dboutputmode'] = DatabasesOutputModes::COMBINED;
 
-            // Enable mutations?
-            /** @var ComponentConfiguration */
-            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-            $state['are-mutations-enabled'] = $componentConfiguration->enableMutations();
+        // Do not print the entry module
+        $state['actions'][] = Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT;
 
-            // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)
-            $state['does-api-query-have-errors'] = false;
+        // Enable mutations?
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $state['are-mutations-enabled'] = $componentConfiguration->enableMutations();
 
-            // Passing the query via URL param?
-            if ($query = Request::getQuery()) {
-                $this->addQuery($state, $query);
-            }
+        // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)
+        $state['does-api-query-have-errors'] = false;
+
+        // Passing the query via URL param?
+        if ($query = Request::getQuery()) {
+            $state['query'] = $query;
         }
     }
 
@@ -73,16 +74,23 @@ class ComponentAppState extends AbstractComponentAppState
      * It's saved under "requested-query" in $state, and it's optional: if empty,
      * requested = executable => the executable query from $state['query'] can be used
      */
-    private function addQuery(array &$state, string $query): void
+    public function augment(array &$state): void
     {
-        // If the query starts with "!", then it is the query name to a persisted query
-        $query = PersistedQueryUtils::maybeGetPersistedQuery($query);
+        if ($state['scheme'] !== APISchemes::API) {
+            return;
+        }
 
-        $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
-        $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($query);
-        $state['query'] = $fieldQuerySet->getExecutableFieldQuery();
-        if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
-            $state['requested-query'] = $fieldQuerySet->getRequestedFieldQuery();
+        if ($query = $state['query']) {
+            // If the query starts with "!", then it is the query name to a persisted query
+            $query = PersistedQueryUtils::maybeGetPersistedQuery($query);
+
+            // Parse the query from string into the format needed to work with it
+            $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
+            $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($query);
+            $state['executable-query'] = $fieldQuerySet->getExecutableFieldQuery();
+            if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
+                $state['requested-query'] = $fieldQuerySet->getRequestedFieldQuery();
+            }
         }
     }
 }
