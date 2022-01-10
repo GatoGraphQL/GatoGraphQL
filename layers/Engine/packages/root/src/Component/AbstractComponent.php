@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root\Component;
 
 use PoP\Root\App;
+use PoP\Root\Facades\Registries\AppStateProviderRegistryFacade;
 use PoP\Root\Helpers\ClassHelpers;
 
 abstract class AbstractComponent implements ComponentInterface
@@ -14,7 +15,6 @@ abstract class AbstractComponent implements ComponentInterface
     private ?bool $enabled = null;
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
     protected ?ComponentInfoInterface $componentInfo = null;
-    protected ?AppStateProviderInterface $componentAppState = null;
 
     /**
      * Enable each component to set default configuration for
@@ -161,31 +161,30 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * Have the components initialize their state on a global, shared way
+     * Initialize state on a global, shared way
      *
      * @param array<string,mixed> $state
      */
     public function initializeAppState(array &$state): void
     {
-        $this->componentAppState = $this->getComponentAppState();
-        if ($this->componentAppState === null) {
-            return;
+        $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
+        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
+            $appStateProvider->initialize($state);
         }
-        $this->componentAppState->initialize($state);
     }
 
     /**
-     * Once all properties by all Components have been set,
-     * have this second pass consolidate the state
+     * Once all properties have been set,
+     * have a second pass consolidate (or "augment") the state
      *
      * @param array<string,mixed> $state
      */
     public function augmentAppState(array &$state): void
     {
-        if ($this->componentAppState === null) {
-            return;
+        $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
+        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
+            $appStateProvider->augment($state);
         }
-        $this->componentAppState->augment($state);
     }
 
     /**
@@ -237,14 +236,6 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * ComponentAppState class for the Component
-     */
-    public function getAppState(): ?AppStateProviderInterface
-    {
-        return $this->componentAppState;
-    }
-
-    /**
      * @param array<string,mixed> $configuration
      */
     protected function initializeConfiguration(array $configuration): void
@@ -289,37 +280,5 @@ abstract class AbstractComponent implements ComponentInterface
             return null;
         }
         return $componentInfoClass;
-    }
-
-    /**
-     * Have the components initialize their state on a global, shared way
-     *
-     * @param array<string,mixed> $state
-     */
-    protected function getComponentAppState(): ?AppStateProviderInterface
-    {
-        $componentAppStateClass = $this->getComponentAppStateClass();
-        if ($componentAppStateClass === null) {
-            return null;
-        }
-        // Get the ComponentAppState from the container,
-        // so it can use services
-        if (!App::getContainer()->has($componentAppStateClass)) {
-            return null;
-        }
-        return App::getContainer()->get($componentAppStateClass);
-    }
-
-    /**
-     * ComponentAppState class for the Component
-     */
-    protected function getComponentAppStateClass(): ?string
-    {
-        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        $componentAppStateClass = $classNamespace . '\\ComponentAppState';
-        if (!class_exists($componentAppStateClass)) {
-            return null;
-        }
-        return $componentAppStateClass;
     }
 }
