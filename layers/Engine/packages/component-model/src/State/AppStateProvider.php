@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel;
+namespace PoP\ComponentModel\State;
 
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -14,7 +14,7 @@ use PoP\Root\State\AbstractAppStateProvider;
 use PoP\Routing\Facades\RoutingManagerFacade;
 use PoP\Routing\RouteNatures;
 
-class ComponentAppState extends AbstractAppStateProvider
+class AppStateProvider extends AbstractAppStateProvider
 {
     public function initialize(array &$state): void
     {

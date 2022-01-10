@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\API;
+namespace PoP\API\State;
 
 use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
@@ -18,7 +18,7 @@ use PoP\ComponentModel\Constants\Outputs;
 use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
 
-class ComponentAppState extends AbstractAppStateProvider
+class AppStateProvider extends AbstractAppStateProvider
 {
     public function initialize(array &$state): void
     {

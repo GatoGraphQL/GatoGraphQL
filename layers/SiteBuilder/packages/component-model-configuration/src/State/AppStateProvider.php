@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\ConfigurationComponentModel;
+namespace PoP\ConfigurationComponentModel\State;
 
 use PoP\ConfigurationComponentModel\Configuration\Request;
 use PoP\Root\State\AbstractAppStateProvider;
 
-class ComponentAppState extends AbstractAppStateProvider
+class AppStateProvider extends AbstractAppStateProvider
 {
     /**
      * Have the Component set its own state, accessible for all Components in the App
