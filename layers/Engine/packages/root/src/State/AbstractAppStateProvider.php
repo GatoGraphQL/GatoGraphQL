@@ -10,6 +10,10 @@ abstract class AbstractAppStateProvider implements AppStateProviderInterface
 {
     use ServiceTrait;
 
+    public function initialize(array &$state): void
+    {
+    }
+
     public function consolidate(array &$state): void
     {
     }

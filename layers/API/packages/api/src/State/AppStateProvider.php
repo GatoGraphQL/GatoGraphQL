@@ -20,7 +20,7 @@ use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
-    public function initialize(array &$state): void
+    public function consolidate(array &$state): void
     {
         if ($state['scheme'] !== APISchemes::API) {
             return;
