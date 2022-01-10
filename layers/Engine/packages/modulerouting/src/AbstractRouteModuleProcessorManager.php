@@ -42,8 +42,8 @@ abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcess
     public function getRouteModuleByMostAllmatchingVarsProperties(string $group = null): ?array
     {
         $group ??= $this->getDefaultGroup();
-        $nature = \PoP\Root\App::getState('nature');
-        $route = \PoP\Root\App::getState('route');
+        $nature = App::getState('nature');
+        $route = App::getState('route');
         $appState = App::getAppStateManager()->all();
 
         $processors = $this->getProcessors($group);

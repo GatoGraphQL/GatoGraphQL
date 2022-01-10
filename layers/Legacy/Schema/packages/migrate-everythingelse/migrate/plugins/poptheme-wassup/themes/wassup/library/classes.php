@@ -5,7 +5,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter("gdClassesBody", 'gdWassupThemeBodyClass');
 function gdWassupThemeBodyClass($body_classes)
 {
-    if (isset(\PoP\Root\App::getState('theme')) && \PoP\Root\App::getState('theme') == GD_THEME_WASSUP) {
+    if (\PoP\Root\App::getState('theme') == GD_THEME_WASSUP) {
         $thememode = \PoP\Root\App::getState('thememode');
 
         // For the 'simple' and 'embed' themes, also add 'sliding' in the body class, since these are sliding implementations and need its css classes

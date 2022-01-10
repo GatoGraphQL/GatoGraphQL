@@ -55,7 +55,7 @@ class RoutingHookSet extends AbstractHookSet
         // The API cannot use getExtraRoutes()!!!!!
         // Because the fields can't be applied to different resources!
         // (Eg: author/leo/ and author/leo/?route=posts)
-        if (isset(\PoP\Root\App::getState('scheme')) && \PoP\Root\App::getState('scheme') == APISchemes::API) {
+        if (\PoP\Root\App::getState('scheme') == APISchemes::API) {
             return [];
         }
 

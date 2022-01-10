@@ -17,7 +17,7 @@ function gdUserstanceUreTitlemembers($title)
 {
     $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
     if (gdUreIsCommunity($author)) {
-        if (isset(\PoP\Root\App::getState('source')) && \PoP\Root\App::getState('source') == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
+        if (\PoP\Root\App::getState('source') == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
             $title .= TranslationAPIFacade::getInstance()->__(' + Members', 'pop-userstance-processors');
         }
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\APIMirrorQuery\DataStructureFormatters;
 
+use PoP\Root\App;
 use PoP\ComponentModel\DataStructure\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -18,7 +19,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     protected function getFields()
     {
         // Allow REST to override with default fields
-        return \PoP\Root\App::getState('requested-query') ?? \PoP\Root\App::getState('query') ?? [];
+        return App::getState('requested-query') ?? App::getState('query') ?? [];
     }
 
     public function getFormattedData($data)

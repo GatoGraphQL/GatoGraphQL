@@ -27,7 +27,7 @@ class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         $query = parent::getQuery($query_args);
 
         // Pagination
-        if (isset(\PoP\Root\App::getState('loading-latest')) && \PoP\Root\App::getState('loading-latest')) {
+        if (\PoP\Root\App::hasState('loading-latest') && \PoP\Root\App::getState('loading-latest')) {
             $query['pagenumber'] = 1;
             $query['limit'] = -1; // Limit=-1 => Bring all results
         } else {

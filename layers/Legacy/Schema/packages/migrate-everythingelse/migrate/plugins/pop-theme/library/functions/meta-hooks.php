@@ -34,13 +34,13 @@ class PoP_Theme_Meta_Hooks
             $pushurlprops = array();
 
             // Theme: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)
-            if (isset(\PoP\Root\App::getState('theme')) && !\PoP\Root\App::getState('theme-isdefault')) {
+            if (!\PoP\Root\App::getState('theme-isdefault')) {
                 $pushurlprops[GD_URLPARAM_THEME] = \PoP\Root\App::getState('theme');
             }
-            if (isset(\PoP\Root\App::getState('thememode')) && !\PoP\Root\App::getState('thememode-isdefault')) {
+            if (!\PoP\Root\App::getState('thememode-isdefault')) {
                 $pushurlprops[GD_URLPARAM_THEMEMODE] = \PoP\Root\App::getState('thememode');
             }
-            if (isset(\PoP\Root\App::getState('themestyle')) && !\PoP\Root\App::getState('themestyle-isdefault')) {
+            if (!\PoP\Root\App::getState('themestyle-isdefault')) {
                 $pushurlprops[GD_URLPARAM_THEMESTYLE] = \PoP\Root\App::getState('themestyle');
             }
 

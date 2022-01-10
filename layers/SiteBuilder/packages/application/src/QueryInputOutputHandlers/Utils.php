@@ -19,7 +19,7 @@ class Utils
         }
 
         // Do not announce to stop loading when doing loadLatest
-        if (isset(\PoP\Root\App::getState('loading-latest')) && \PoP\Root\App::getState('loading-latest')) {
+        if (\PoP\Root\App::hasState('loading-latest') && \PoP\Root\App::getState('loading-latest')) {
             return false;
         }
 

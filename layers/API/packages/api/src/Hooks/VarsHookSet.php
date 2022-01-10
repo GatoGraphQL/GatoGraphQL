@@ -23,7 +23,7 @@ class VarsHookSet extends AbstractHookSet
     {
         // Allow WP API to set the "routing-state" first
         // Each page is an independent configuration
-        if (isset(\PoP\Root\App::getState('scheme')) && \PoP\Root\App::getState('scheme') == APISchemes::API) {
+        if (\PoP\Root\App::getState('scheme') == APISchemes::API) {
             $this->addFieldsToComponents($components);
         }
 

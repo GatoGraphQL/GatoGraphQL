@@ -88,7 +88,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         $pagenumber = $query_args[PaginationParams::PAGE_NUMBER];
         if (!Utils::stopFetching($dbObjectIDOrIDs, $data_properties)) {
             // When loading latest, we need to return the same $pagenumber as we got, because it must not alter the params
-            $nextpagenumber = (isset(\PoP\Root\App::getState('loading-latest')) && \PoP\Root\App::getState('loading-latest')) ? $pagenumber : $pagenumber + 1;
+            $nextpagenumber = (\PoP\Root\App::hasState('loading-latest') && \PoP\Root\App::getState('loading-latest')) ? $pagenumber : $pagenumber + 1;
         }
         $ret[PaginationParams::PAGE_NUMBER] = $nextpagenumber;
 
@@ -135,7 +135,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 
     //     // Do not send this value back when doing loadLatest, or it will mess up the original structure loading
     //     // Doing 'unset' as to also take it out if an ancestor class (eg: GD_DataLoad_BlockQueryInputOutputHandler) has set it
-    //     if (isset(\PoP\Root\App::getState('loading-latest')) && \PoP\Root\App::getState('loading-latest')) {
+    //     if (\PoP\Root\App::hasState('loading-latest') && \PoP\Root\App::getState('loading-latest')) {
 
     //         unset($ret[GD_URLPARAM_STOPFETCHING]);
     //     }
@@ -210,7 +210,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 
     //     // Do not send this value back when doing loadLatest, or it will mess up the original structure loading
     //     // Doing 'unset' as to also take it out if an ancestor class (eg: GD_DataLoad_BlockQueryInputOutputHandler) has set it
-    //     if (isset(\PoP\Root\App::getState('loading-latest')) && \PoP\Root\App::getState('loading-latest')) {
+    //     if (\PoP\Root\App::hasState('loading-latest') && \PoP\Root\App::getState('loading-latest')) {
 
     //         unset($ret[GD_URLPARAM_STOPFETCHING]);
     //     }

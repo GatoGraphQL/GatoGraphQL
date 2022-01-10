@@ -13,7 +13,7 @@ class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var Page */
         $page = $instanceManager->getInstance(Page::class);
-        if (isset(\PoP\Root\App::getState('modulefilter')) && \PoP\Root\App::getState('modulefilter') == $page->getName()) {
+        if (\PoP\Root\App::getState('modulefilter') == $page->getName()) {
             $ret = array();
 
             switch ($module[1]) {
