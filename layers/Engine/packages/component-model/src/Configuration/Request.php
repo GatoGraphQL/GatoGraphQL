@@ -138,6 +138,11 @@ class Request
             DataOutputItems::SESSION,
         ];
     }
+
+    public static function getActionPath(): string
+    {
+        return $_REQUEST[Params::ACTION_PATH] ?? '';
+    }
     
     /**
      * Indicates the version constraint for all fields/directives in the query

@@ -25,11 +25,9 @@ class ComponentAppState extends AbstractComponentAppState
     public function initialize(array &$state): void
     {
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-        $modulefilter = $modulefilter_manager->getSelectedModuleFilterName();
 
         // By default, get the variables from the request
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $variables = $fieldQueryInterpreter->getVariablesFromRequest();
 
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
@@ -40,8 +38,8 @@ class ComponentAppState extends AbstractComponentAppState
                 'nature' => $routingManager->getCurrentNature(),
                 'route' => $routingManager->getCurrentRoute(),
                 'output' => Request::getOutput(),
-                'modulefilter' => $modulefilter,
-                'actionpath' => $_REQUEST[Params::ACTION_PATH] ?? '',
+                'modulefilter' => $modulefilter_manager->getSelectedModuleFilterName(),
+                'actionpath' => Request::getActionPath(),
                 'dataoutputitems' => Request::getDataOutputItems(),
                 'datasources' => Request::getDataSourceSelector(),
                 'datastructure' => Request::getDataStructure(),
@@ -50,7 +48,7 @@ class ComponentAppState extends AbstractComponentAppState
                 'mangled' => Request::getMangledValue(),
                 'actions' => Request::getActions(),
                 'scheme' => Request::getScheme(),
-                'variables' => $variables,
+                'variables' => $fieldQueryInterpreter->getVariablesFromRequest(),
                 'only-fieldname-as-outputkey' => false,
                 'namespace-types-and-interfaces' => $componentConfiguration->mustNamespaceTypes(),
                 'version-constraint' => Request::getVersionConstraint(),
@@ -74,8 +72,8 @@ class ComponentAppState extends AbstractComponentAppState
     public function augment(array &$state): void
     {
         $nature = $state['nature'];
-        $state['routing-state']['is-standard'] = $nature == RouteNatures::STANDARD;
-        $state['routing-state']['is-home'] = $nature == RouteNatures::HOME;
-        $state['routing-state']['is-404'] = $nature == RouteNatures::NOTFOUND;
+        $state['routing-state']['is-standard'] = $nature === RouteNatures::STANDARD;
+        $state['routing-state']['is-home'] = $nature === RouteNatures::HOME;
+        $state['routing-state']['is-404'] = $nature === RouteNatures::NOTFOUND;
     }
 }
