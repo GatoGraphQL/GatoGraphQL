@@ -71,13 +71,14 @@ class VarsHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        // Priority 20: execute after the same code in API, as to remove $vars['query]
-        $this->getHooksAPI()->addAction(
-            'ApplicationState:addVars',
-            array($this, 'addVars'),
-            20,
-            1
-        );
+        // @todo Remove this code and the function below and everything stale
+        // // Priority 20: execute after the same code in API, as to remove $vars['query]
+        // $this->getHooksAPI()->addAction(
+        //     'ApplicationState:addVars',
+        //     array($this, 'addVars'),
+        //     20,
+        //     1
+        // );
 
         // Change the error message when mutations are not supported
         $this->getHooksAPI()->addFilter(
