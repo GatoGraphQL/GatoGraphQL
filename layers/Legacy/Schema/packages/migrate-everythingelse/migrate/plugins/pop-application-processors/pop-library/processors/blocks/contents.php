@@ -25,7 +25,6 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        // $vars = ApplicationState::getVars();
         return match($module[1]) {
             // The Page Content block uses whichever is the current page
             self::MODULE_BLOCK_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//\PoP\Root\App::getState('route'),

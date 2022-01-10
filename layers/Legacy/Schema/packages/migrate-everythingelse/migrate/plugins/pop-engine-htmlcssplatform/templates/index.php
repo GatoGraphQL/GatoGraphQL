@@ -7,7 +7,6 @@ $engine = EngineFacade::getInstance();
 $engine->maybeRedirectAndExit();
 $engine->generateData();
 
-// $vars = ApplicationState::getVars();
 // include \PoP\Root\App::getState('theme-path').'/mainpagesection.php';
 
 // Allow PoP SSR to inject the server-side rendered HTML

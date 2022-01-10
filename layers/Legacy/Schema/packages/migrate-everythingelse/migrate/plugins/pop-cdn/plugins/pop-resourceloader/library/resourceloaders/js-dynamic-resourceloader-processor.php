@@ -41,7 +41,6 @@ class PoP_CDN_DynamicJSResourceLoaderProcessor extends PoP_DynamicJSResourceLoad
     //         case self::RESOURCE_CDNCONFIG:
                 
     //             // This script file is dynamically generated getting data from all over the website, so its version depend on the website version
-    //             $vars = ApplicationState::getVars();
     //             return ApplicationInfoFacade::getInstance()->getVersion();
     //     }
     

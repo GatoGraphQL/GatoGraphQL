@@ -11,7 +11,6 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 //         $props
 //     );
 //     if ($add_parentpageid) {
-//         $vars = ApplicationState::getVars();
 //         if (\PoP\Root\App::getState(['routing', 'is-page'])) {
 //             $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 //             $parentpageid = $post_id;

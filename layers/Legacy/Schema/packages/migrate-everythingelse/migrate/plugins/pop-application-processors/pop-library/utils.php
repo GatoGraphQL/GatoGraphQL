@@ -111,7 +111,6 @@ class PoP_ApplicationProcessors_Utils
     {
 
         // Comment Leo 14/03/2017: The embed must be scrollable, because the fullscreen scrollbar doesn't work! Otherwise, it can't allow fullscreen mode
-        // $vars = ApplicationState::getVars();
         // if (\PoP\Root\App::getState('theme') == GD_THEME_WASSUP && \PoP\Root\App::getState('thememode') == GD_THEMEMODE_WASSUP_EMBED) {
 
         //     return true;
