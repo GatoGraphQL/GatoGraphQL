@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\Hooks\ModuleFilters;
 
 use PoP\Engine\ModuleFilters\MainContentModule;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class MainContentModuleHookSet extends AbstractHookSet

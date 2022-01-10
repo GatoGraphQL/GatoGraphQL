@@ -9,7 +9,7 @@ use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 
 class ModulePathsHookSet extends AbstractHookSet
 {
