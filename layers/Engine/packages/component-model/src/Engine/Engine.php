@@ -377,7 +377,7 @@ class Engine implements EngineInterface
         $this->formatData();
 
         // Keep only the data that is needed to be sent, and encode it as JSON
-        $this->calculateOutuputData();
+        $this->calculateOutputData();
 
         // Send the ETag-header
         $this->sendEtagHeader();
@@ -389,7 +389,7 @@ class Engine implements EngineInterface
         $this->data = $formatter->getFormattedData($this->data);
     }
 
-    public function calculateOutuputData(): void
+    public function calculateOutputData(): void
     {
         $this->outputData = $this->getEncodedDataObject($this->data);
     }
