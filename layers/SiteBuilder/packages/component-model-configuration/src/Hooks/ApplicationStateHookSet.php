@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\Hooks;
 
 use PoP\BasicService\AbstractHookSet;
-use PoP\ConfigurationComponentModel\Constants\Targets;
+use PoP\ComponentModel\Constants\Values;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ConfigurationComponentModel\Constants\Params;
+use PoP\ConfigurationComponentModel\Constants\Targets;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {
@@ -46,7 +47,13 @@ class ApplicationStateHookSet extends AbstractHookSet
             $target = Targets::MAIN;
         }
 
+        // If there is not format, then set it to 'default'
+        // This is needed so that the /generate/ generated configurations under a $model_instance_id (based on the value of $vars)
+        // can match the same $model_instance_id when visiting that page
+        $format = isset($_REQUEST[Params::FORMAT]) ? strtolower($_REQUEST[Params::FORMAT]) : Values::DEFAULT;
+
         $vars['target'] = $target;
+        $vars['format'] = $format;
     }
 
     public function maybeAddComponent(array $components): array
@@ -54,6 +61,9 @@ class ApplicationStateHookSet extends AbstractHookSet
         $vars = ApplicationState::getVars();
         if ($target = $vars['target'] ?? null) {
             $components[] = $this->__('target:', 'component-model') . $target;
+        }
+        if ($format = $vars['format'] ?? null) {
+            $components[] = $this->__('format:', 'component-model') . $format;
         }
 
         return $components;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\SiteBuilderAPI\Hooks;
+namespace PoP\ConfigurationComponentModel\Hooks;
 
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\BasicService\AbstractHookSet;
@@ -19,6 +19,8 @@ class URLHookSet extends AbstractHookSet
     public function getParamsToRemoveFromURL($params)
     {
         $params[] = Params::STRATUM;
+        $params[] = Params::SETTINGSFORMAT;
+        $params[] = Params::TARGET;
         return $params;
     }
 }

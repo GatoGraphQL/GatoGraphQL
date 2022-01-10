@@ -8,8 +8,6 @@ class Params
 {
     public const VERSION = 'version';
     public const DATASTRUCTURE = 'datastructure';
-    public const FORMAT = 'format';
-    public const SETTINGSFORMAT = 'settingsformat';
     public const DATAOUTPUTMODE = 'dataoutputmode';
     public const DATABASESOUTPUTMODE = 'dboutputmode';
     public const ACTIONS = 'actions';

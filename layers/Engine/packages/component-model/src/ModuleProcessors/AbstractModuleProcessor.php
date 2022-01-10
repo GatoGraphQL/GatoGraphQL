@@ -1083,15 +1083,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             ], $ret);
         }
 
-        // Add the format to the query url
-        if ($this instanceof FormattableModuleInterface) {
-            if ($format = $this->getFormat($module)) {
-                $ret = GeneralUtils::addQueryArgs([
-                    Params::FORMAT => $format,
-                ], $ret);
-            }
-        }
-
         // If mangled, make it mandle
         if ($mangled = $vars['mangled']) {
             $ret = GeneralUtils::addQueryArgs([

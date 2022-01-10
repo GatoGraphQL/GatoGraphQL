@@ -153,6 +153,9 @@ class Engine extends UpstreamEngine implements EngineInterface
             if ($vars['stratum'] ?? null) {
                 $meta[Params::STRATUM] = $vars['stratum'];
             }
+            if ($vars['format'] ?? null) {
+                $meta[Params::SETTINGSFORMAT] = $vars['format'];
+            }
         }
         return $this->getHooksAPI()->applyFilters(
             '\PoPSiteBuilder\ComponentModel\Engine:site-meta',

@@ -42,7 +42,7 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
     $jqueryConstants['URLPARAM_OPERATION_REPLACE'] = GD_URLPARAM_OPERATION_REPLACE;
     $jqueryConstants['URLPARAM_OPERATION_REPLACEINLINE'] = GD_URLPARAM_OPERATION_REPLACEINLINE;
 
-    $jqueryConstants['URLPARAM_FORMAT'] = \PoP\ComponentModel\Constants\Params::FORMAT;
+    $jqueryConstants['URLPARAM_FORMAT'] = \PoP\ConfigurationComponentModel\Constants\Params::FORMAT;
     $jqueryConstants['URLPARAM_ROUTE'] = URLParams::ROUTE;
 
     $jqueryConstants['URLPARAM_DATAOUTPUTITEMS'] = \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS;
@@ -52,7 +52,7 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
     $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_DATABASES'] = \PoP\ComponentModel\Constants\DataOutputItems::DATABASES;
     $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_SESSION'] = \PoP\ComponentModel\Constants\DataOutputItems::SESSION;
 
-    $jqueryConstants['URLPARAM_TARGET'] = \PoP\ComponentModel\Constants\Params::TARGET;
+    $jqueryConstants['URLPARAM_TARGET'] = \PoP\ConfigurationComponentModel\Constants\Params::TARGET;
     $jqueryConstants['URLPARAM_TARGET_MAIN'] = \PoP\ConfigurationComponentModel\Constants\Targets::MAIN;
     $jqueryConstants['URLPARAM_TARGET_FULL'] = GD_URLPARAM_TARGET_FULL;
     $jqueryConstants['URLPARAM_TARGET_PRINT'] = GD_URLPARAM_TARGET_PRINT;

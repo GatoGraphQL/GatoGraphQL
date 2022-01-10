@@ -27,7 +27,7 @@ class PoP_SPA_RequestMeta_Hooks
                 \PoP\ComponentModel\Constants\Params::VERSION,
                 \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
                 \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
-                \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT,
+                \PoP\ConfigurationComponentModel\Constants\Params::SETTINGSFORMAT,
                 Request::URLPARAM_MANGLED,
                 \PoP\ConfigurationComponentModel\Constants\Params::STRATUM,
             ];

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\SPA\Hooks;
 
 use PoP\ComponentModel\Constants\Outputs;
-use PoP\ComponentModel\Constants\Params;
+use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\BasicService\AbstractHookSet;
 
 class VarsHookSet extends AbstractHookSet

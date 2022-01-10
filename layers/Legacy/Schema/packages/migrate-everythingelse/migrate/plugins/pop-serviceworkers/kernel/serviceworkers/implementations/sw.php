@@ -38,7 +38,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         $configuration['${appshellFromServerParams}'] = array(
             \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
             \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
-            \PoP\ComponentModel\Constants\Params::FORMAT, // Initially, this is a proxy for \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT
+            \PoP\ConfigurationComponentModel\Constants\Params::FORMAT, // Initially, this is a proxy for \PoP\ConfigurationComponentModel\Constants\Params::SETTINGSFORMAT
             Request::URLPARAM_MANGLED,
         );
         $configuration['${localesByURL}'] = $this->getLocalesByurl();

@@ -51,12 +51,12 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
         if ($header_type = $this->getHeaderType($module, $props)) {
             if ($headers_data = $this->getHeadersData($module, $props)) {
                 $headers = array();
-                $url = $headers_data['url'];
+                $url = (string)$headers_data['url'];
                 $default_active_format = PoP_Application_Utils::getDefaultformatByScreen($headers_data['screen']);
                 foreach ($headers_data['formats'] as $format => $subformats) {
                     $header = array(
                         'url' => GeneralUtils::addQueryArgs([
-                            \PoP\ComponentModel\Constants\Params::FORMAT => $format,
+                            \PoP\ConfigurationComponentModel\Constants\Params::FORMAT => $format,
                         ], $url),
                         'title' => $headers_data['titles'][$format],
                         'fontawesome' => $headers_data['icons'][$format],
@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
                         foreach ($subformats as $subformat) {
                             $subheader = array(
                                 'url' => GeneralUtils::addQueryArgs([
-                                    \PoP\ComponentModel\Constants\Params::FORMAT => $subformat,
+                                    \PoP\ConfigurationComponentModel\Constants\Params::FORMAT => $subformat,
                                 ], $url),
                                 'title' => $headers_data['titles'][$subformat],
                                 'fontawesome' => $headers_data['icons'][$subformat],

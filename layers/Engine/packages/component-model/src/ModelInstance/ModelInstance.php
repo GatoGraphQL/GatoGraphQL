@@ -94,9 +94,6 @@ class ModelInstance implements ModelInstanceInterface
         $components[] = $this->__('version:', 'component-model') . $this->getApplicationInfo()->getVersion();
 
         // Other properties
-        if ($format = $vars['format'] ?? null) {
-            $components[] = $this->__('format:', 'component-model') . $format;
-        }
         if ($actions = $vars['actions'] ?? null) {
             $components[] = $this->__('actions:', 'component-model') . implode(';', $actions);
         }

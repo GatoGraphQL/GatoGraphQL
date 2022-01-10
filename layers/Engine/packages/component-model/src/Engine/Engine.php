@@ -686,9 +686,6 @@ class Engine implements EngineInterface
             $meta[Params::DATAOUTPUTMODE] = $vars['dataoutputmode'];
             $meta[Params::DATABASESOUTPUTMODE] = $vars['dboutputmode'];
 
-            if ($vars['format'] ?? null) {
-                $meta[Params::SETTINGSFORMAT] = $vars['format'];
-            }
             if ($vars['mangled'] ?? null) {
                 $meta[Request::URLPARAM_MANGLED] = $vars['mangled'];
             }
@@ -1451,8 +1448,6 @@ class Engine implements EngineInterface
         // Save all database elements here, under typeResolver
         $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $objectTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = [];
         $this->nocache_fields = [];
-        // $format = $vars['format'];
-        // $route = $vars['route'];
 
         // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
         // but we need to avoid fetching those DB objects that were already fetched in a previous iteration

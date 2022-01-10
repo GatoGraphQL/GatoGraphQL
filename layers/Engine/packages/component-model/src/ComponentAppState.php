@@ -117,11 +117,6 @@ class ComponentAppState extends AbstractComponentAppState
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
         $modulefilter = $modulefilter_manager->getSelectedModuleFilterName();
 
-        // If there is not format, then set it to 'default'
-        // This is needed so that the /generate/ generated configurations under a $model_instance_id (based on the value of $vars)
-        // can match the same $model_instance_id when visiting that page
-        $format = isset($_REQUEST[Params::FORMAT]) ? strtolower($_REQUEST[Params::FORMAT]) : Values::DEFAULT;
-
         // By default, get the variables from the request
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $variables = $fieldQueryInterpreter->getVariablesFromRequest();
@@ -143,7 +138,6 @@ class ComponentAppState extends AbstractComponentAppState
                 'dataoutputmode' => $dataoutputmode,
                 'dboutputmode' => $dboutputmode,
                 'mangled' => $mangled,
-                'format' => $format,
                 'actions' => $actions,
                 'scheme' => $scheme,
                 'variables' => $variables,
