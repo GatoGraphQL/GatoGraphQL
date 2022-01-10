@@ -15,8 +15,6 @@ use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Targets;
 use PoP\ComponentModel\Constants\Values;
-use PoP\ComponentModel\Environment as Environment;
-use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Tokens\Param;
@@ -101,7 +99,7 @@ class ComponentAppState extends AbstractComponentAppState
             )
         );
         $dataoutputitems = array_intersect(
-            $dataoutputitems ?? array(),
+            $dataoutputitems,
             $alldataoutputitems
         );
         if (!$dataoutputitems) {
@@ -123,9 +121,9 @@ class ComponentAppState extends AbstractComponentAppState
         $target = strtolower($_REQUEST[Params::TARGET] ?? '');
         $targets = (array) $hooksAPI->applyFilters(
             'ApplicationState:targets',
-            array(
+            [
                 Targets::MAIN,
-            )
+            ]
         );
         if (!in_array($target, $targets)) {
             $target = Targets::MAIN;
