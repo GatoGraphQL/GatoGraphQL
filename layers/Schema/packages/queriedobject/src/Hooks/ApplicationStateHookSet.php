@@ -48,8 +48,8 @@ class ApplicationStateHookSet extends AbstractHookSet
         list($queried_object, $queried_object_id) = $this->getHooksAPI()->applyFilters(
             'ApplicationState:queried-object',
             [
-                $this->getCmsRoutingStateService()->getQueriedObject(),
-                $this->getCmsRoutingStateService()->getQueriedObjectId()
+                $this->getCMSRoutingStateService()->getQueriedObject(),
+                $this->getCMSRoutingStateService()->getQueriedObjectId()
             ]
         );
 
