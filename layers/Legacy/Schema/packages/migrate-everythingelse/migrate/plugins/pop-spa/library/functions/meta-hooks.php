@@ -29,7 +29,6 @@ class PoP_SPA_RequestMeta_Hooks
                 \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
                 \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT,
                 Request::URLPARAM_MANGLED,
-                \PoP\ComponentModel\Constants\Params::CONFIG,
                 \PoP\ComponentModel\Constants\Params::STRATUM,
             ];
             foreach ($elemKeys as $elemKey) {

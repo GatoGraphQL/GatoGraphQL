@@ -28,9 +28,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         // "config": comma-separated string with all fields with value "true"
         // Whatever fields are not there, will be considered "false"
         $this->overrideConfiguration = array();
-        if ($this->enableConfigByParams()) {
-            $this->overrideConfiguration = isset($_REQUEST[Params::CONFIG]) ? explode(Param::VALUE_SEPARATOR, $_REQUEST[Params::CONFIG]) : array();
-        }
     }
 
     /**
@@ -61,23 +58,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
 
         // Otherwise, it has value "false"
         return false;
-    }
-
-    /**
-     * Access layer to the environment variable, enabling to override its value
-     * Indicate if the configuration can be set through params
-     */
-    public function enableConfigByParams(): bool
-    {
-        $envVariable = Environment::ENABLE_CONFIG_BY_PARAMS;
-        $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
     }
 
     /**

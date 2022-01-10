@@ -9,7 +9,6 @@ use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 class Environment
 {
     public const USE_COMPONENT_MODEL_CACHE = 'USE_COMPONENT_MODEL_CACHE';
-    public const ENABLE_CONFIG_BY_PARAMS = 'ENABLE_CONFIG_BY_PARAMS';
     public const NAMESPACE_TYPES_AND_INTERFACES = 'NAMESPACE_TYPES_AND_INTERFACES';
     public const USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE';
     public const ENABLE_ADMIN_SCHEMA = 'ENABLE_ADMIN_SCHEMA';

@@ -55,7 +55,7 @@ class PoP_SPAResourceLoader_Initialization
 
     //     // No need to declare this file here, since it's already defined in the sparesourceloader-processor
     //     // Also, if not doing code splitting, then no need for the resourceLoader config file
-    //     // if (\PoP\ComponentModel\Environment::enableConfigByParams() || PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
+    //     // if (PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
 
     //     //     $cmswebplatformapi->registerScript('pop-codesplit-jslibrary-manager', $libraries_js_folder.'/codesplit-jslibrary-manager'.$suffix.'.js', array('jquery'), POP_SPARESOURCELOADER_VERSION, true);
     //     //     $cmswebplatformapi->enqueueScript('pop-codesplit-jslibrary-manager');

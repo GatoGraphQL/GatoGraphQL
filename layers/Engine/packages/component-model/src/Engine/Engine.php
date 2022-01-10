@@ -692,11 +692,6 @@ class Engine implements EngineInterface
             if ($vars['mangled'] ?? null) {
                 $meta[Request::URLPARAM_MANGLED] = $vars['mangled'];
             }
-            /** @var ComponentConfiguration */
-            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-            if ($componentConfiguration->enableConfigByParams() && $vars['config']) {
-                $meta[Params::CONFIG] = $vars['config'];
-            }
 
             // Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
             if (!is_null($this->cachedsettings)) {

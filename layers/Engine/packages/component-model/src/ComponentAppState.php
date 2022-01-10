@@ -173,10 +173,6 @@ class ComponentAppState extends AbstractComponentAppState
             ]
         );
 
-        if ($componentConfiguration->enableConfigByParams()) {
-            $state['config'] = $_REQUEST[Params::CONFIG] ?? null;
-        }
-
         // Set the routing state (eg: PoP Queried Object can add its information)
         $state['routing-state'] = [];
     }

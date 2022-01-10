@@ -103,9 +103,6 @@ class ModelInstance implements ModelInstanceInterface
         if ($actions = $vars['actions'] ?? null) {
             $components[] = $this->__('actions:', 'component-model') . implode(';', $actions);
         }
-        if ($config = $vars['config'] ?? null) {
-            $components[] = $this->__('config:', 'component-model') . $config;
-        }
         if ($modulefilter = $vars['modulefilter'] ?? null) {
             $components[] = $this->__('module filter:', 'component-model') . $modulefilter;
         }

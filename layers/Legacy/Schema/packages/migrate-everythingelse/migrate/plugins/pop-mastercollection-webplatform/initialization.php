@@ -324,7 +324,7 @@ class PoP_MasterCollectionWebPlatform_Initialization
                 $cmswebplatformapi->enqueueScript('pop-mastercollection-addeditpost');
 
                 // Comment Leo 19/11/2017: load the appshell file if either: enabling the config, using the appshell, or allowing for Service Workers, which use the appshell to load content when offline
-                if (ComponentModelComponentConfiguration::enableConfigByParams() || PoP_WebPlatform_ServerUtils::useAppshell() || (defined('POP_SERVICEWORKERS_INITIALIZED') && !PoP_ServiceWorkers_ServerUtils::disableServiceworkers())) {
+                if (PoP_WebPlatform_ServerUtils::useAppshell() || (defined('POP_SERVICEWORKERS_INITIALIZED') && !PoP_ServiceWorkers_ServerUtils::disableServiceworkers())) {
                     $cmswebplatformapi->registerScript('pop-appshell', $libraries_js_folder.'/appshell'.$suffix.'.js', array(), POP_MASTERCOLLECTIONWEBPLATFORM_VERSION, true);
                     $cmswebplatformapi->enqueueScript('pop-appshell');
                 }
