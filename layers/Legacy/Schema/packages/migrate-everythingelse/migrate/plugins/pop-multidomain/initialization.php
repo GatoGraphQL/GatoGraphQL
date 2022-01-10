@@ -77,7 +77,6 @@ class PoP_MultiDomain_Initialization
         //     // This file is generated dynamically, so it can't be added to any bundle or minified
         //     // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
         //     global $pop_multidomain_resourceloader_configfile;
-        //     $vars = ApplicationState::getVars();
         //     $cmswebplatformapi->registerScript('pop-multidomain-sparesourceloader-config', $pop_multidomain_resourceloader_configfile->getFileurl(), array(PoP_ResourceLoaderProcessorUtils::getNoconflictResourceName([PoP_MultiDomain_JSResourceLoaderProcessor::class, PoP_MultiDomain_JSResourceLoaderProcessor::RESOURCE_MULTIDOMAIN])), ApplicationInfoFacade::getInstance()->getVersion(), true);
         //     $cmswebplatformapi->enqueueScript('pop-multidomain-sparesourceloader-config');
         // }

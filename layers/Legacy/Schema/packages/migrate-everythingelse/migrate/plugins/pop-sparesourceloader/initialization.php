@@ -69,7 +69,6 @@ class PoP_SPAResourceLoader_Initialization
     //     //     // This file is generated dynamically, so it can't be added to any bundle or minified
     //     //     // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
     //     //     global $pop_sparesourceloader_configfile;
-    //     //     $vars = ApplicationState::getVars();
     //     //     $cmswebplatformapi->registerScript('pop-sparesourceloader-config', $pop_sparesourceloader_configfile->getFileurl(), array(PoP_SPAResourceLoaderProcessorUtils::getNoconflictResourceName(POP_SPARESOURCELOADER_SPARESOURCELOADER)), ApplicationInfoFacade::getInstance()->getVersion(), true);
     //     //     $cmswebplatformapi->enqueueScript('pop-sparesourceloader-config');
     //     // }

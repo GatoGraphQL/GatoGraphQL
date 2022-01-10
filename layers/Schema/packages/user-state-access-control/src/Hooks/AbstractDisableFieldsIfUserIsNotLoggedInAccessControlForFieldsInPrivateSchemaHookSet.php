@@ -27,12 +27,8 @@ abstract class AbstractDisableFieldsIfUserIsNotLoggedInAccessControlForFieldsInP
         return !$this->isUserLoggedIn();
     }
 
-    /**
-     * Helper function to get user state from $vars
-     */
     protected function isUserLoggedIn(): bool
     {
-        $vars = ApplicationState::getVars();
         return \PoP\Root\App::getState('is-user-logged-in');
     }
 }

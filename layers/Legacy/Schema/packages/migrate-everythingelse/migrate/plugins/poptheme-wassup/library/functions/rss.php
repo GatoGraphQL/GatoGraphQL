@@ -57,7 +57,6 @@ function gdRssAuthor($output)
     // );
     // if (is_feed() && in_array($_REQUEST[GD_URLPARAM_RSSCAMPAIGN], $campaigns)) {
 
-    // $vars = ApplicationState::getVars();
     // $authordata = \PoP\Root\App::getState(['routing', 'authordata'])/*global $authordata*/;
     global $authordata;
     $userTypeAPI = UserTypeAPIFacade::getInstance();

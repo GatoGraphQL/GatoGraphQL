@@ -20,7 +20,6 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 //         $url = $pop_sparesourceloader_configfile->getFileurl();
 
 //         // Must add the version (request will be routed through CDN)
-        // //		   $vars = ApplicationState::getVars();
 //         $url = GeneralUtils::addQueryArgs(['ver', ApplicationInfoFacade::getInstance()->getVersion()], $url);
 
 //         // Replace the domain with "{0}" for the external domain to be injected in javascript

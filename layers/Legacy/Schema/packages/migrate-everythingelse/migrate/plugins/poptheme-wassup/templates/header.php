@@ -20,7 +20,6 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
         <?php /* Avoid insecure HTTP requests over HTTPS. Taken from https://developers.google.com/web/fundamentals/security/prevent-mixed-content/fixing-mixed-content */ ?>
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <?php endif; ?>
-    <?php $vars = ApplicationState::getVars(); ?>
     <?php $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance(); ?>
     <?php $htmlcssplatformapi = \PoP\EngineHTMLCSSPlatform\FunctionAPIFactory::getInstance(); ?>
     <?php $userTypeAPI = UserTypeAPIFacade::getInstance(); ?>

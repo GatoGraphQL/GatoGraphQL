@@ -66,7 +66,8 @@ class PoP_JSResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 		return true;
 	}
 
-	// isDefer function is relative to the specific $vars, since a resource may be defer for a page, but not for another
+	// isDefer function is relative to the specific vars,
+	// since a resource may be defer for a page, but not for another
 	// This is evident when generating all the bundle(group) files, in which isDefer is accessed to calculate the deferred bundle(group)s
 	function isDefer(array $resource, $model_instance_id) {
 
