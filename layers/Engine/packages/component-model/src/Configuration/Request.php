@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Configuration;
 
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
+use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Tokens\Param;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 
 class Request
@@ -86,6 +88,40 @@ class Request
             return DatabasesOutputModes::SPLITBYDATABASES;
         }
         return $dbOutputMode;
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getDataOutputItems(): array
+    {
+        $dataOutputItems = $_REQUEST[Params::DATA_OUTPUT_ITEMS] ?? [];
+        if (!is_array($dataOutputItems)) {
+            $dataOutputItems = explode(Param::VALUE_SEPARATOR, $dataOutputItems);
+        }
+        $dataOutputItems = array_map('strtolower', $dataOutputItems);
+
+        $alldataOutputItems = [
+            DataOutputItems::META,
+            DataOutputItems::DATASET_MODULE_SETTINGS,
+            DataOutputItems::MODULE_DATA,
+            DataOutputItems::DATABASES,
+            DataOutputItems::SESSION,
+        ];
+        $dataOutputItems = array_intersect(
+            $dataOutputItems,
+            $alldataOutputItems
+        );
+        if (!$dataOutputItems) {
+            return [
+                DataOutputItems::META,
+                DataOutputItems::DATASET_MODULE_SETTINGS,
+                DataOutputItems::MODULE_DATA,
+                DataOutputItems::DATABASES,
+                DataOutputItems::SESSION,
+            ];
+        }
+        return $dataOutputItems;
     }
     
     

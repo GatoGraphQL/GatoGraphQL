@@ -31,42 +31,7 @@ class ComponentAppState extends AbstractComponentAppState
     public function initialize(array &$state): void
     {
         
-        $dataoutputitems = $_REQUEST[Params::DATA_OUTPUT_ITEMS] ?? [];
-        if ($dataoutputitems) {
-            if (!is_array($dataoutputitems)) {
-                $dataoutputitems = explode(Param::VALUE_SEPARATOR, strtolower($dataoutputitems));
-            } else {
-                $dataoutputitems = array_map('strtolower', $dataoutputitems);
-            }
-        }
-
-        $hooksAPI = HooksAPIFacade::getInstance();
-        $alldataoutputitems = (array) $hooksAPI->applyFilters(
-            'ApplicationState:dataoutputitems',
-            array(
-                DataOutputItems::META,
-                DataOutputItems::DATASET_MODULE_SETTINGS,
-                DataOutputItems::MODULE_DATA,
-                DataOutputItems::DATABASES,
-                DataOutputItems::SESSION,
-            )
-        );
-        $dataoutputitems = array_intersect(
-            $dataoutputitems,
-            $alldataoutputitems
-        );
-        if (!$dataoutputitems) {
-            $dataoutputitems = $hooksAPI->applyFilters(
-                'ApplicationState:default-dataoutputitems',
-                array(
-                    DataOutputItems::META,
-                    DataOutputItems::DATASET_MODULE_SETTINGS,
-                    DataOutputItems::MODULE_DATA,
-                    DataOutputItems::DATABASES,
-                    DataOutputItems::SESSION,
-                )
-            );
-        }
+        
 
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
         $modulefilter = $modulefilter_manager->getSelectedModuleFilterName();
@@ -86,7 +51,7 @@ class ComponentAppState extends AbstractComponentAppState
                 'output' => Request::getOutput(),
                 'modulefilter' => $modulefilter,
                 'actionpath' => $_REQUEST[Params::ACTION_PATH] ?? '',
-                'dataoutputitems' => $dataoutputitems,
+                'dataoutputitems' => Request::getDataOutputItems(),
                 'datasources' => Request::getDataSourceSelector(),
                 'datastructure' => Request::getDataStructure(),
                 'dataoutputmode' => Request::getDataOutputMode(),
