@@ -83,6 +83,22 @@ class AppStateManager
     }
 
     /**
+     * @param string[] $keyOrPath The property path under which to check if there is a value
+     * @throws LogicException
+     */
+    public function hasUnder(array $path): bool
+    {
+        $state = &$this->state;
+        foreach ($path as $pathItem) {
+            if (!isset($state[$pathItem])) {
+                return false;
+            }
+            $state = &$state[$pathItem];
+        }
+        return true;
+    }
+
+    /**
      * Called by the AppLoader to initalize the state.
      *
      * Initialize application state

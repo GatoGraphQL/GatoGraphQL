@@ -156,4 +156,21 @@ class App implements AppInterface
         $key = $keyOrPath;
         return $appStateManager->get($key);
     }
+
+    /**
+     * Shortcut function.
+     * @param string|string[] $keyOrPath The property key, or a property path for array values
+     */
+    final public static function hasState(string|array $keyOrPath): mixed
+    {
+        $appStateManager = self::getAppStateManager();
+        if (is_array($keyOrPath)) {
+            /** @var string[] */
+            $path = $keyOrPath;
+            return $appStateManager->hasUnder($path);
+        }
+        /** @var string */
+        $key = $keyOrPath;
+        return $appStateManager->has($key);
+    }
 }
