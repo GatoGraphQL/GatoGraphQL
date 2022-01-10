@@ -167,11 +167,10 @@ abstract class AbstractComponent implements ComponentInterface
      */
     public function initializeAppState(array &$state): void
     {
-        $componentAppStateClass = $this->getComponentAppStateClass();
-        if ($componentAppStateClass === null) {
+        $this->componentAppState = $this->getComponentAppState();
+        if ($this->componentAppState === null) {
             return;
         }
-        $this->componentAppState = new $componentAppStateClass($this);
         $this->componentAppState->initialize($state);
     }
 
@@ -290,6 +289,25 @@ abstract class AbstractComponent implements ComponentInterface
             return null;
         }
         return $componentInfoClass;
+    }
+
+    /**
+     * Have the components initialize their state on a global, shared way
+     *
+     * @param array<string,mixed> $state
+     */
+    protected function getComponentAppState(): ?ComponentAppStateInterface
+    {
+        $componentAppStateClass = $this->getComponentAppStateClass();
+        if ($componentAppStateClass === null) {
+            return null;
+        }
+        // Get the ComponentAppState from the container,
+        // so it can use services
+        if (!App::getContainer()->has($componentAppStateClass)) {
+            return null;
+        }
+        return App::getContainer()->get($componentAppStateClass);
     }
 
     /**

@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoP\ComponentModel\ComponentAppState:
+        class: ~
+
     transient_cache_item_pool:
         class: \Symfony\Component\Cache\Adapter\ArrayAdapter
 

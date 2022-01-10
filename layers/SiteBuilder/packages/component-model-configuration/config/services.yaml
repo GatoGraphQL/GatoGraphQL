@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoP\ConfigurationComponentModel\ComponentAppState:
+        class: ~
+
     PoP\ConfigurationComponentModel\RouteModuleProcessors\:
         resource: '../src/RouteModuleProcessors/*'
 
