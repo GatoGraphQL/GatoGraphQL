@@ -52,6 +52,11 @@ class AppStateManager
 
         // Second pass: consolidate
         foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
+            $appStateProvider->consolidate($this->state);
+        }
+
+        // Final pass: augment
+        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
             $appStateProvider->augment($this->state);
         }
     }

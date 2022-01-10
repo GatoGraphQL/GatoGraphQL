@@ -9,15 +9,22 @@ use PoP\Root\Services\ServiceInterface;
 interface AppStateProviderInterface extends ServiceInterface
 {
     /**
-     * Have the Component set its own state, accessible for all Components in the App
+     * Initialize some state in the application
      *
      * @param array<string,mixed> $state
      */
     public function initialize(array &$state): void;
 
     /**
-     * Once all properties by all Components have been set,
-     * have this second pass consolidate the state
+     * Modify properties possibly set by other packages
+     *
+     * @param array<string,mixed> $state
+     */
+    public function consolidate(array &$state): void;
+
+    /**
+     * Once all properties have been set,
+     * have a final pass add derivative properties
      *
      * @param array<string,mixed> $state
      */
