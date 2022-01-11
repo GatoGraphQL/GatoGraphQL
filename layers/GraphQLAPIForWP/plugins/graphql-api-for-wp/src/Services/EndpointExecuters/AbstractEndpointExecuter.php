@@ -38,7 +38,7 @@ abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
         }
 
         // Check the expected ?view=... is requested
-        if (!$this->isClientRequested()) {
+        if (!$this->isEndpointBeingRequested()) {
             return false;
         }
 

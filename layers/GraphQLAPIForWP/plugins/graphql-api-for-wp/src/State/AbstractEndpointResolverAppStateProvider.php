@@ -43,7 +43,7 @@ abstract class AbstractEndpointResolverAppStateProvider extends AbstractAppState
 
     public function isServiceEnabled(): bool
     {
-        return $this->getEndpointResolver()->isClientRequested();
+        return $this->getEndpointResolver()->isEndpointBeingRequested();
     }
 
     public function initialize(array &$state): void

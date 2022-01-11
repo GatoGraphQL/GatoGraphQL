@@ -38,7 +38,7 @@ abstract class AbstractCPTEndpointExecuter extends AbstractEndpointExecuter
     /**
      * Check the expected ?view=... is requested.
      */
-    public function isClientRequested(): bool
+    public function isEndpointBeingRequested(): bool
     {
         // Use `''` instead of `null` so that the query resolution
         // works either without param or empty (?view=)
