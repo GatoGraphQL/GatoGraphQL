@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
-interface GraphQLQueryResolutionEndpointExecuterInterface extends EndpointExecuterInterface, GraphQLEndpointExecuterInterface
+interface GraphQLQueryResolutionEndpointExecuterInterface extends GraphQLEndpointExecuterInterface
 {
 }
