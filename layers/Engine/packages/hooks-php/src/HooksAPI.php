@@ -18,7 +18,10 @@ class HooksAPI implements HooksAPIInterface
     protected function getInstance(): Hooks
     {
         if (!isset(App::$runtimeServices['hooks'])) {
-            App::$runtimeServices['hooks'] = new Hooks();
+            // Copied from bainternet/php-hooks/php-hooks.php
+            $hooks = new Hooks();
+            $hooks->do_action('After_Hooks_Setup', $hooks);
+            App::$runtimeServices['hooks'] = $hooks;
         }
         return App::$runtimeServices['hooks'];
     }
