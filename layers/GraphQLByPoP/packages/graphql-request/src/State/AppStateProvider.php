@@ -54,7 +54,7 @@ class AppStateProvider extends AbstractAppStateProvider
         ) = $this->getGraphQLQueryConvertor()->convertFromGraphQLToFieldQuery(
             $state['query'],
             $state['variables'],
-            $payload['operationName'],
+            $payload['operationName'] ?? null,
         );
         $state['query'] = $fieldQuery;
 
