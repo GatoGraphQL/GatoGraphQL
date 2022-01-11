@@ -145,19 +145,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
      */
     protected function executeGraphQLQuery(): void
     {
-        /**
-         * Only in "init" we can execute `wp_get_current_user`, to validate that the
-         * user can execute the query
-         */
-        \add_action(
-            'init',
-            function (): void {
-                // Make sure the user has access to the editor
-                if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
-                    // Nothing to do, already done in AppStateProvider
-                }
-            }
-        );
+        // Nothing to do, already done in AppStateProvider
     }
 
     /**
