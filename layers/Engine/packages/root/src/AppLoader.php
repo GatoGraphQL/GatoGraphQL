@@ -326,9 +326,6 @@ class AppLoader
 
         // Finally boot the components
         $this->bootApplicationForComponents();
-
-        // Have the components initialize their state on a global, shared way
-        $this->initializeAppState();
     }
 
     public function skipSchemaForComponent(ComponentInterface $component): bool
@@ -347,15 +344,8 @@ class AppLoader
     protected function bootApplicationForComponents(): void
     {
         App::getComponentManager()->beforeBoot();
+        App::getAppStateManager()->initializeAppState();
         App::getComponentManager()->boot();
         App::getComponentManager()->afterBoot();
-    }
-
-    /**
-     * Have the components initialize their state on a global, shared way
-     */
-    protected function initializeAppState(): void
-    {
-        App::getAppStateManager()->initializeAppState();
     }
 }

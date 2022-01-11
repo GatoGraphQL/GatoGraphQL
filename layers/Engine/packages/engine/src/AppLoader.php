@@ -23,6 +23,12 @@ class AppLoader extends RootAppLoader
         $hooksAPI = HooksAPIFacade::getInstance();
         $hooksAPI->addAction(
             'popcms:boot',
+            fn() => App::getAppStateManager()->initializeAppState(),
+            0
+        );
+
+        $hooksAPI->addAction(
+            'popcms:boot',
             fn () => App::getComponentManager()->boot(),
             5
         );
@@ -31,19 +37,6 @@ class AppLoader extends RootAppLoader
             'popcms:boot',
             fn () => App::getComponentManager()->afterBoot(),
             15
-        );
-    }
-
-    /**
-     * Have the components initialize their state on a global, shared way
-     */
-    protected function initializeAppState(): void
-    {
-        $hooksAPI = HooksAPIFacade::getInstance();
-        $hooksAPI->addAction(
-            'popcms:boot',
-            fn() => App::getAppStateManager()->initializeAppState(),
-            25
         );
     }
 }
