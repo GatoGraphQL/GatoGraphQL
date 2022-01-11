@@ -61,17 +61,6 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     }
 
     /**
-     * Do not load the query if already loaded
-     * in `processURLParamVars` from `graphql-request/src/Hooks/VarsHookSet.php`
-     */
-    protected function loadGraphQLQueryAndVariables(): bool
-    {
-        /** @var GraphQLRequestComponentConfiguration */
-        $componentConfiguration = App::getComponent(GraphQLRequestComponent::class)->getConfiguration();
-        return !$componentConfiguration->disableGraphQLAPIForPoP();
-    }
-
-    /**
      * Provide the query to execute and its variables
      *
      * @return mixed[] Array of 2 elements: [query, variables]
