@@ -29,7 +29,7 @@ class EndpointExecuterService extends AbstractAutomaticallyInstantiatedService
          * Call it on "boot" after the WP_Query is parsed, so the single CPT
          * is loaded, and asking for `is_singular(CPT)` works.
          */
-        add_action(
+        \add_action(
             'popcms:boot',
             function (): void {
                 /**
