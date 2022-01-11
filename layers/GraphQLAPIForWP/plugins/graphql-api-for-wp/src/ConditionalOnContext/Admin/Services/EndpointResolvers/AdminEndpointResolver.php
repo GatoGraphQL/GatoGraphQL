@@ -88,7 +88,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
      * Execute the GraphQL query when posting to:
      * /wp-admin/edit.php?page=graphql_api&action=execute_query
      */
-    protected function isGraphQLQueryExecution(): bool
+    public function isGraphQLQueryExecution(): bool
     {
         return $this->getEndpointHelpers()->isRequestingAdminConfigurableSchemaGraphQLEndpoint();
     }

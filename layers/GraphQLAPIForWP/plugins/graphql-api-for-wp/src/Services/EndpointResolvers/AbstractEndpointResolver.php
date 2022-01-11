@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\BasicService\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
-abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiatedService
+abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiatedService implements EndpointResolverInterface
 {
     use BasicServiceTrait;
 
