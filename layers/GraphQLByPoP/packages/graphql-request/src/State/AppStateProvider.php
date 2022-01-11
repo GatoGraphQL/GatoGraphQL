@@ -33,6 +33,11 @@ class AppStateProvider extends AbstractAppStateProvider
         return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
     }
 
+    public function initialize(array &$state): void
+    {
+        $state['graphql-operation-type'] = null;
+    }
+
     public function consolidate(array &$state): void
     {
         if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {

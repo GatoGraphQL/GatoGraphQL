@@ -25,6 +25,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['query'] = null;
         $state['executable-query'] = null;
         $state['requested-query'] = null;
+        $state['does-api-query-have-errors'] = null;
     }
 
     public function consolidate(array &$state): void
