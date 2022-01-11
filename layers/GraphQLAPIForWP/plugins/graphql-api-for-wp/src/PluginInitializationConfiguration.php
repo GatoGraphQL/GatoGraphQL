@@ -619,10 +619,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Disable the Native endpoint
             \PoP\APIEndpointsForWP\Environment::DISABLE_NATIVE_API_ENDPOINT => true,
         ];
-        $componentClassConfiguration[\GraphQLByPoP\GraphQLRequest\Component::class] = [
-            // Disable processing ?query=...
-            \GraphQLByPoP\GraphQLRequest\Environment::DISABLE_GRAPHQL_API_FOR_POP => true,
-        ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class] = [
             // Expose the "self" field when doing Low Level Query Editing
             GraphQLServerEnvironment::EXPOSE_SELF_FIELD_FOR_ROOT_TYPE_IN_GRAPHQL_SCHEMA => $moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING),
