@@ -17,7 +17,7 @@ class AppStateProviderRegistry implements AppStateProviderRegistryInterface
     {
         $this->appStateProviders[] = $appStateProvider;
     }
-    
+
     /**
      * @return AppStateProviderInterface[]
      */

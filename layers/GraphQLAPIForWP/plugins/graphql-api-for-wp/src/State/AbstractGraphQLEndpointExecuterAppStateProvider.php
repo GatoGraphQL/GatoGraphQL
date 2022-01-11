@@ -34,7 +34,7 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
     {
         return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
     }
-    
+
     abstract protected function getGraphQLEndpointExecuter(): GraphQLEndpointExecuterInterface;
 
     public function isServiceEnabled(): bool
@@ -102,7 +102,7 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
             // Set the operation type and, based on it, if mutations are supported
             $state['graphql-operation-type'] = $operationType;
             $state['are-mutations-enabled'] = $operationType === OperationTypes::MUTATION;
-    
+
             // If there was an error when parsing the query, the operationType will be null,
             // then there's no need to execute the query
             if ($operationType === null) {

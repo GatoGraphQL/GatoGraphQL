@@ -10,5 +10,5 @@ namespace PoP\Routing;
  */
 class RoutingManager extends AbstractRoutingManager
 {
-    
+
 }

@@ -67,7 +67,7 @@ class AppStateProvider extends AbstractAppStateProvider
             // Set the operation type and, based on it, if mutations are supported
             $state['graphql-operation-type'] = $operationType;
             $state['are-mutations-enabled'] = $operationType === OperationTypes::MUTATION;
-    
+
             // If there was an error when parsing the query, the operationType will be null,
             // then there's no need to execute the query
             if ($operationType === null) {

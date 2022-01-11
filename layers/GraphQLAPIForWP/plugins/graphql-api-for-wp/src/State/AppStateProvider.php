@@ -36,11 +36,11 @@ class AppStateProvider extends AbstractAppStateProvider
      * If the single endpoint is disabled, or if pointing to a different URL
      * than the single endpoint (eg: /posts/) and the datastructure param
      * is not provided or is not "graphql", then:
-     * 
+     *
      *   Do not allow to query the endpoint through URL.
      *
      * Examples of not allowed URLs:
-     * 
+     *
      *   - /single-endpoint/?scheme=api&datastructure=graphql <= single endpoint disabled
      *   - /posts/?scheme=api
      */

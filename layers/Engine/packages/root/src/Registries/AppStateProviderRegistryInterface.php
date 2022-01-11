@@ -9,7 +9,7 @@ use PoP\Root\State\AppStateProviderInterface;
 interface AppStateProviderRegistryInterface
 {
     public function addAppStateProvider(AppStateProviderInterface $appStateProvider): void;
-    
+
     /**
      * @return AppStateProviderInterface[]
      */
