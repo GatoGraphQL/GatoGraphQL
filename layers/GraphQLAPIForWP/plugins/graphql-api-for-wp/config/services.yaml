@@ -45,3 +45,6 @@ services:
 
     GraphQLAPI\GraphQLAPI\Services\:
         resource: ../src/Services/*
+
+    GraphQLAPI\GraphQLAPI\State\:
+        resource: '../src/State/*'

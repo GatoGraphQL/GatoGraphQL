@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoPSchema\Pages\State\:
+        resource: '../src/State/*'
+
     PoPSchema\Pages\Hooks\:
         resource: '../src/Hooks/*'
 

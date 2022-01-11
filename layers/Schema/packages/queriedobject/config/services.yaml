@@ -4,8 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\Engine\State\:
+    PoPSchema\QueriedObject\State\:
         resource: '../src/State/*'
-
-    PoP\Engine\ModuleFilters\:
-        resource: '../src/ModuleFilters/*'

@@ -4,9 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\ComponentModel\ComponentAppState:
-        class: ~
-
     transient_cache_item_pool:
         class: \Symfony\Component\Cache\Adapter\ArrayAdapter
 
@@ -68,6 +65,9 @@ services:
 
     PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\ApplicationStateHelperService
+
+    PoP\ComponentModel\State\:
+        resource: '../src/State/*'
 
     PoP\ComponentModel\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'

@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoPSchema\Tags\State\:
+        resource: '../src/State/*'
+
     PoPSchema\Tags\LooseContracts\:
         resource: '../src/LooseContracts/*'
 

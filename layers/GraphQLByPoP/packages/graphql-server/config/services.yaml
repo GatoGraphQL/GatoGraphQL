@@ -13,6 +13,9 @@ services:
     GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface:
         class: \GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxService
 
+    GraphQLByPoP\GraphQLServer\State\:
+        resource: '../src/State/*'
+
     GraphQLByPoP\GraphQLServer\Hooks\:
         resource: '../src/Hooks/*'
 
