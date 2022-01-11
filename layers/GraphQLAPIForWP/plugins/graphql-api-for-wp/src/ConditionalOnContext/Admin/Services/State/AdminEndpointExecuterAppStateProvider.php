@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\State;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointExecuters\AdminEndpointExecuter;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterInterface;
+use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
 use GraphQLAPI\GraphQLAPI\State\AbstractEndpointExecuterAppStateProvider;
 
 class AdminEndpointExecuterAppStateProvider extends AbstractEndpointExecuterAppStateProvider
@@ -31,7 +32,7 @@ class AdminEndpointExecuterAppStateProvider extends AbstractEndpointExecuterAppS
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
 
-    protected function getEndpointExecuter(): EndpointExecuterInterface
+    protected function getEndpointExecuter(): GraphQLEndpointExecuterInterface
     {
         return $this->getAdminEndpointExecuter();
     }

@@ -36,12 +36,7 @@ abstract class AbstractEndpointExecuterAppStateProvider extends AbstractAppState
         return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
     }
     
-    protected function getGraphQLEndpointResolver(): GraphQLEndpointExecuterInterface
-    {
-        return $this->getEndpointExecuter();
-    }
-
-    abstract protected function getEndpointExecuter(): EndpointExecuterInterface;
+    abstract protected function getEndpointExecuter(): GraphQLEndpointExecuterInterface;
 
     public function isServiceEnabled(): bool
     {
@@ -65,7 +60,7 @@ abstract class AbstractEndpointExecuterAppStateProvider extends AbstractAppState
         list(
             $graphQLQuery,
             $graphQLVariables
-        ) = $this->getGraphQLEndpointResolver()->getGraphQLQueryAndVariables(App::getState(['routing', 'queried-object']));
+        ) = $this->getEndpointExecuter()->getGraphQLQueryAndVariables(App::getState(['routing', 'queried-object']));
         if (!$graphQLQuery) {
             // If there is no query, nothing to do!
             return;
@@ -82,7 +77,7 @@ abstract class AbstractEndpointExecuterAppStateProvider extends AbstractAppState
          * When editing in the editor, 'queried-object' will be null, and that's OK
          */
         $graphQLVariables ??= [];
-        $state['variables'] = $this->getGraphQLEndpointResolver()->doURLParamsOverrideGraphQLVariables(App::getState(['routing', 'queried-object'])) ?
+        $state['variables'] = $this->getEndpointExecuter()->doURLParamsOverrideGraphQLVariables(App::getState(['routing', 'queried-object'])) ?
             array_merge(
                 $graphQLVariables,
                 $state['variables'] ?? []
