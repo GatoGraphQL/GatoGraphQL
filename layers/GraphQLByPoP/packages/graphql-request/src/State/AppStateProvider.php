@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLRequest\State;
 
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
+use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLRequest\StaticHelpers\GraphQLQueryPayloadRetriever;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
@@ -38,12 +39,15 @@ class AppStateProvider extends AbstractAppStateProvider
             return;
         }
 
+        $state['standard-graphql'] = true;
+
         // Override with the GraphQL query from the body
         $payload = GraphQLQueryPayloadRetriever::getGraphQLQueryPayload();
         $state['query'] = $payload['query'] ?? null;
         $state['variables'] = $payload['variables'] ?? [];
 
         // @todo Remove this code, to temporarily convert back from GraphQL to PoP query
+        // ---------------------------------------------
         list(
             $operationType,
             $fieldQuery
@@ -53,5 +57,19 @@ class AppStateProvider extends AbstractAppStateProvider
             $payload['operationName'],
         );
         $state['query'] = $fieldQuery;
+
+        // Set the operation type and, based on it, if mutations are supported
+        $state['graphql-operation-type'] = $operationType;
+        $state['are-mutations-enabled'] = $operationType === OperationTypes::MUTATION;
+
+        // If there was an error when parsing the query, the operationType will be null,
+        // then there's no need to execute the query
+        if ($operationType === null) {
+            $state['does-api-query-have-errors'] = true;
+        }
+
+        // Do not include the fieldArgs and directives when outputting the field
+        $state['only-fieldname-as-outputkey'] = true;
+        // ---------------------------------------------
     }
 }
