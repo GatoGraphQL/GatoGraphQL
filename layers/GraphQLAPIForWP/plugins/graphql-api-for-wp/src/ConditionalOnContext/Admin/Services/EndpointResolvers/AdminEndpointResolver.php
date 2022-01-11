@@ -98,7 +98,6 @@ class AdminEndpointResolver extends AbstractEndpointResolver
         $this->printTemplateInAdminAndExit();
     }
 
-
     /**
      * Print JS variables which are used by several blocks,
      * before the blocks are loaded
