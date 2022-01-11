@@ -23,7 +23,7 @@ class App implements AppInterface
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
     protected static ComponentManager $componentManager;
     protected static AppStateManager $appStateManager;
-    protected static MutationResolutionStore $mutationResolutionManager;
+    protected static MutationResolutionStore $mutationResolutionStore;
     protected static array $componentClassesToInitialize = [];
 
     /**
@@ -39,14 +39,14 @@ class App implements AppInterface
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManager $componentManager = null,
         ?AppStateManager $appStateManager = null,
-        ?MutationResolutionStore $mutationResolutionManager = null,
+        ?MutationResolutionStore $mutationResolutionStore = null,
     ): void {
         self::$appLoader = $appLoader ?? static::createAppLoader();
         self::$containerBuilderFactory = $containerBuilderFactory ?? static::createContainerBuilderFactory();
         self::$systemContainerBuilderFactory = $systemContainerBuilderFactory ?? static::createSystemContainerBuilderFactory();
         self::$componentManager = $componentManager ?? static::createComponentManager();
         self::$appStateManager = $appStateManager ?? static::createAppStateManager();
-        self::$mutationResolutionManager = $mutationResolutionManager ?? static::createMutationResolutionStore();
+        self::$mutationResolutionStore = $mutationResolutionStore ?? static::createMutationResolutionStore();
 
         // Inject the Components slated for initialization
         self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
@@ -110,7 +110,7 @@ class App implements AppInterface
 
     public static function getMutationResolutionStore(): MutationResolutionStore
     {
-        return self::$mutationResolutionManager;
+        return self::$mutationResolutionStore;
     }
 
     /**

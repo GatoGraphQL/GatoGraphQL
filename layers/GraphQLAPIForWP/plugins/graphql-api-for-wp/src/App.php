@@ -89,7 +89,7 @@ class App implements AppInterface, RootAppInterface
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManager $componentManager = null,
         ?AppStateManager $appStateManager = null,
-        ?MutationResolutionStore $mutationResolutionManager = null,
+        ?MutationResolutionStore $mutationResolutionStore = null,
     ): void {
         RootApp::initialize(
             $appLoader,
@@ -97,7 +97,7 @@ class App implements AppInterface, RootAppInterface
             $systemContainerBuilderFactory,
             $componentManager,
             $appStateManager,
-            $mutationResolutionManager,
+            $mutationResolutionStore,
         );
     }
 
