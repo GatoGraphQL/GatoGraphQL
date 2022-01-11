@@ -11,6 +11,7 @@ use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\App;
+use PoP\Routing\RouteNatures;
 
 abstract class AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider extends AbstractEndpointExecuterAppStateProvider
 {
@@ -45,6 +46,9 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider ex
     {
         $state['scheme'] = APISchemes::API;
         $state['datastructure'] = $this->getGraphQLDataStructureFormatter()->getName();
+
+        // Assign the single endpoint by setting it as the Home nature
+        $state['nature'] = RouteNatures::HOME;
     }
 
     public function consolidate(array &$state): void
