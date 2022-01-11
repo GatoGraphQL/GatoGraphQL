@@ -105,6 +105,7 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider ex
                 $state['does-api-query-have-errors'] = true;
             }
         }
+        $state['standard-graphql'] = true;
         // ---------------------------------------------
     }
 }

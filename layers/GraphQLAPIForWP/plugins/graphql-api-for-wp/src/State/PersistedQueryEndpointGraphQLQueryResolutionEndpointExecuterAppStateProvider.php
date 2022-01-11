@@ -24,11 +24,4 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuterAppStateProvid
     {
         return $this->getPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter();
     }
-
-    public function initialize(array &$state): void
-    {
-        parent::initialize($state);
-
-        $state['standard-graphql'] = true;
-    }
 }
