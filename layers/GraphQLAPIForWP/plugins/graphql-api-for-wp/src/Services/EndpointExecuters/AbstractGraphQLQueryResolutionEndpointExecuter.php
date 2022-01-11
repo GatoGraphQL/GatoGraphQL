@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
-use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use WP_Post;
 
@@ -13,7 +12,6 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractCP
 {
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
     private ?QueryRetrieverInterface $queryRetriever = null;
-    private ?GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet = null;
 
     final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {
@@ -30,14 +28,6 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractCP
     final protected function getQueryRetriever(): QueryRetrieverInterface
     {
         return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
-    }
-    final public function setGraphQLRequestVarsHookSet(GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet): void
-    {
-        $this->graphQLRequestVarsHookSet = $graphQLRequestVarsHookSet;
-    }
-    final protected function getGraphQLRequestVarsHookSet(): GraphQLRequestVarsHookSet
-    {
-        return $this->graphQLRequestVarsHookSet ??= $this->instanceManager->getInstance(GraphQLRequestVarsHookSet::class);
     }
 
     protected function getView(): string

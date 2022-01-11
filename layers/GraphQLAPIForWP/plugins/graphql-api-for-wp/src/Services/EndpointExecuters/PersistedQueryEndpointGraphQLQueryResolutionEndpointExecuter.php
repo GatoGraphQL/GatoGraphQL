@@ -9,14 +9,12 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
-use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHooks;
 use WP_Post;
 
 class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraphQLQueryResolutionEndpointExecuter implements PersistedQueryEndpointExecuterServiceTagInterface
 {
     private ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
     private ?GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers = null;
-    private ?GraphQLRequestVarsHooks $graphQLRequestVarsHooks = null;
 
     final public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
     {
@@ -33,14 +31,6 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     final protected function getGraphQLQueryPostTypeHelpers(): GraphQLQueryPostTypeHelpers
     {
         return $this->graphQLQueryPostTypeHelpers ??= $this->instanceManager->getInstance(GraphQLQueryPostTypeHelpers::class);
-    }
-    final public function setGraphQLRequestVarsHooks(GraphQLRequestVarsHooks $graphQLRequestVarsHooks): void
-    {
-        $this->graphQLRequestVarsHooks = $graphQLRequestVarsHooks;
-    }
-    final protected function getGraphQLRequestVarsHooks(): GraphQLRequestVarsHooks
-    {
-        return $this->graphQLRequestVarsHooks ??= $this->instanceManager->getInstance(GraphQLRequestVarsHooks::class);
     }
 
     public function getEnablingModule(): ?string

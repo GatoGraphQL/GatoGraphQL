@@ -10,7 +10,6 @@ use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\AbstractEndpointExecuter;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
-use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
 use PoP\EngineWP\Templates\TemplateHelpers;
 use WP_Post;
 
@@ -18,7 +17,6 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
 {
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?QueryRetrieverInterface $queryRetriever = null;
-    private ?GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet = null;
     private ?EndpointHelpers $endpointHelpers = null;
 
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
@@ -36,14 +34,6 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     final protected function getQueryRetriever(): QueryRetrieverInterface
     {
         return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
-    }
-    final public function setGraphQLRequestVarsHookSet(GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet): void
-    {
-        $this->graphQLRequestVarsHookSet = $graphQLRequestVarsHookSet;
-    }
-    final protected function getGraphQLRequestVarsHookSet(): GraphQLRequestVarsHookSet
-    {
-        return $this->graphQLRequestVarsHookSet ??= $this->instanceManager->getInstance(GraphQLRequestVarsHookSet::class);
     }
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
