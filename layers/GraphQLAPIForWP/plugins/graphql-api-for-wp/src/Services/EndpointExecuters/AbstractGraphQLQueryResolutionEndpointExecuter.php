@@ -47,7 +47,8 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractCP
 
     public function executeEndpoint(): void
     {
-        // Nothing to do, already done in AppStateProvider
+        // Nothing to do, required application state already set
+        // in the corresponding AppStateProvider
     }
 
     /**
