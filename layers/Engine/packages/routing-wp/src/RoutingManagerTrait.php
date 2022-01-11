@@ -12,7 +12,7 @@ trait RoutingManagerTrait
 
     private function init(): void
     {
-        if (is_null($this->query)) {
+        if ($this->query === null) {
             global $wp_query;
             $this->query = $wp_query;
         }
