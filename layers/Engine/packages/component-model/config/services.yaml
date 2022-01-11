@@ -48,9 +48,6 @@ services:
     PoP\ComponentModel\ModelInstance\ModelInstanceInterface:
         class: \PoP\ComponentModel\ModelInstance\ModelInstance
 
-    PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface:
-        class: \PoP\ComponentModel\MutationResolution\MutationResolutionManager
-
     PoP\ComponentModel\Info\ApplicationInfoInterface:
         class: \PoP\ComponentModel\Info\ApplicationInfo
 
