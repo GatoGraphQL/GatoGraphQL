@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest\Execution;
 
+use GraphQLByPoP\GraphQLRequest\StaticHelpers\GraphQLQueryPayloadRetriever;
+
 class QueryRetriever implements QueryRetrieverInterface
 {
     /**
@@ -12,12 +14,7 @@ class QueryRetriever implements QueryRetrieverInterface
     public function extractRequestedGraphQLQueryPayload(): array
     {
         // Attempt to get the query from the body, following the GraphQL syntax
-        if (isset($_SERVER['CONTENT_TYPE']) && $_SERVER['CONTENT_TYPE'] === 'application/json') {
-            $rawBody     = file_get_contents('php://input');
-            $payload = json_decode($rawBody ?: '', true);
-        } else {
-            $payload = $_POST;
-        }
+        $payload = GraphQLQueryPayloadRetriever::getGraphQLQueryPayload();
         return [
             $payload['query'] ?? null,
             $payload['variables'] ?? null,
