@@ -48,24 +48,26 @@ class AppStateProvider extends AbstractAppStateProvider
 
         // @todo Remove this code, to temporarily convert back from GraphQL to PoP query
         // ---------------------------------------------
-        list(
-            $operationType,
-            $fieldQuery
-        ) = $this->getGraphQLQueryConvertor()->convertFromGraphQLToFieldQuery(
-            $state['query'],
-            $state['variables'],
-            $payload['operationName'] ?? null,
-        );
-        $state['query'] = $fieldQuery;
+        if ($state['query'] !== null) {
+            list(
+                $operationType,
+                $fieldQuery
+            ) = $this->getGraphQLQueryConvertor()->convertFromGraphQLToFieldQuery(
+                $state['query'],
+                $state['variables'],
+                $payload['operationName'] ?? null,
+            );
+            $state['query'] = $fieldQuery;
 
-        // Set the operation type and, based on it, if mutations are supported
-        $state['graphql-operation-type'] = $operationType;
-        $state['are-mutations-enabled'] = $operationType === OperationTypes::MUTATION;
-
-        // If there was an error when parsing the query, the operationType will be null,
-        // then there's no need to execute the query
-        if ($operationType === null) {
-            $state['does-api-query-have-errors'] = true;
+            // Set the operation type and, based on it, if mutations are supported
+            $state['graphql-operation-type'] = $operationType;
+            $state['are-mutations-enabled'] = $operationType === OperationTypes::MUTATION;
+    
+            // If there was an error when parsing the query, the operationType will be null,
+            // then there's no need to execute the query
+            if ($operationType === null) {
+                $state['does-api-query-have-errors'] = true;
+            }
         }
 
         // Do not include the fieldArgs and directives when outputting the field
