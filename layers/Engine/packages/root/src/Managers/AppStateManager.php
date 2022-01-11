@@ -68,7 +68,7 @@ class AppStateManager
         if (!isset($this->state[$key])) {
             throw new LogicException(
                 \sprintf(
-                    $translationAPI->__('There is no state under key \'%s\'', 'root'),
+                    $translationAPI->__('There is no application state under key \'%s\'', 'root'),
                     $key
                 )
             );
@@ -87,7 +87,7 @@ class AppStateManager
             if (!isset($state[$pathItem])) {
                 throw new LogicException(
                     \sprintf(
-                        $translationAPI->__('There is no state under path \'%s\'', 'root'),
+                        $translationAPI->__('There is no application state under path \'%s\'', 'root'),
                         implode(
                             $translationAPI->__(',', 'root'),
                             $path
