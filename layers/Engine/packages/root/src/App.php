@@ -24,7 +24,15 @@ class App implements AppInterface
     protected static ComponentManager $componentManager;
     protected static AppStateManager $appStateManager;
     protected static MutationResolutionStore $mutationResolutionStore;
+    /** @var string[] */
     protected static array $componentClassesToInitialize = [];
+    /**
+     * Enable services to inject their own state.
+     * Useful for PHPUnit tests.
+     *
+     * @var array<string,mixed>
+     */
+    public static array $runtimeServices = [];
 
     /**
      * This function must be invoked at the very beginning,
@@ -51,6 +59,9 @@ class App implements AppInterface
         // Inject the Components slated for initialization
         self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
         self::$componentClassesToInitialize = [];
+
+        // Reset the dynamic services
+        self::$runtimeServices = [];
     }
 
     protected static function createAppLoader(): AppLoader
