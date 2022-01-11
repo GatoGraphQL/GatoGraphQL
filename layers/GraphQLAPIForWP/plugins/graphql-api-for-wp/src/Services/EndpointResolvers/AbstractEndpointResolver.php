@@ -23,11 +23,15 @@ abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiate
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
 
-    /**
-     * Initialize the resolver
-     */
     public function initialize(): void
     {
-        // Do nothing
+        /**
+         * If executing the GraphQL query, resolve it
+         */
+        if ($this->isGraphQLQueryExecution()) {
+            $this->resolveGraphQLQuery();
+        }
     }
+
+    abstract protected function resolveGraphQLQuery(): void;
 }

@@ -104,14 +104,12 @@ class AdminEndpointResolver extends AbstractEndpointResolver
          * Print the global JS variables, required by the blocks
          */
         $this->printGlobalVariables();
+    }
 
-        /**
-         * If executing the GraphQL query, resolve it
-         */
-        if ($this->isGraphQLQueryExecution()) {
-            $this->executeGraphQLQuery();
-            $this->printTemplateInAdminAndExit();
-        }
+    protected function resolveGraphQLQuery(): void
+    {
+        $this->executeGraphQLQuery();
+        $this->printTemplateInAdminAndExit();
     }
 
 
