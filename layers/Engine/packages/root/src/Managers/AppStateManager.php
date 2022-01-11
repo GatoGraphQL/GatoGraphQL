@@ -31,17 +31,17 @@ class AppStateManager
         $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
 
         // First pass: initialize
-        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
+        foreach ($appStateProviderRegistry->getEnabledAppStateProviders() as $appStateProvider) {
             $appStateProvider->initialize($this->state);
         }
 
         // Second pass: consolidate
-        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
+        foreach ($appStateProviderRegistry->getEnabledAppStateProviders() as $appStateProvider) {
             $appStateProvider->consolidate($this->state);
         }
 
         // Final pass: augment
-        foreach ($appStateProviderRegistry->getAppStateProviders() as $appStateProvider) {
+        foreach ($appStateProviderRegistry->getEnabledAppStateProviders() as $appStateProvider) {
             $appStateProvider->augment($this->state);
         }
     }

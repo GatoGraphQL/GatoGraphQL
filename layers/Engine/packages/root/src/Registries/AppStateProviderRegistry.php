@@ -17,11 +17,23 @@ class AppStateProviderRegistry implements AppStateProviderRegistryInterface
     {
         $this->appStateProviders[] = $appStateProvider;
     }
+    
     /**
      * @return AppStateProviderInterface[]
      */
     public function getAppStateProviders(): array
     {
         return $this->appStateProviders;
+    }
+
+    /**
+     * @return AppStateProviderInterface[]
+     */
+    public function getEnabledAppStateProviders(): array
+    {
+        return array_values(array_filter(
+            $this->getAppStateProviders(),
+            fn (AppStateProviderInterface $service) => $service->isServiceEnabled()
+        ));
     }
 }
