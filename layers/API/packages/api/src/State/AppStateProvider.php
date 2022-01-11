@@ -20,6 +20,13 @@ use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
+    public function initialize(array &$state): void
+    {
+        $state['query'] = null;
+        $state['executable-query'] = null;
+        $state['requested-query'] = null;
+    }
+
     public function consolidate(array &$state): void
     {
         if ($state['scheme'] !== APISchemes::API) {
@@ -78,7 +85,8 @@ class AppStateProvider extends AbstractAppStateProvider
             return;
         }
 
-        if ($query = $state['query']) {
+        $query = $state['query'];
+        if ($query !== null) {
             // If the query starts with "!", then it is the query name to a persisted query
             $query = PersistedQueryUtils::maybeGetPersistedQuery($query);
 
