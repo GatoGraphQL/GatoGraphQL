@@ -63,6 +63,25 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider ex
 
         $state['query'] = $graphQLQuery;
 
+        /**
+         * Merge the variables into $state?
+         *
+         * Normally, GraphQL variables must not override the variables from the request
+         * But this behavior can be overriden for the persisted query,
+         * by setting "Accept Variables as URL Params" => false
+         * When editing in the editor, 'queried-object' will be null, and that's OK
+         */
+        $graphQLVariables ??= [];
+        $state['variables'] = $this->getGraphQLQueryResolutionEndpointExecuter()->doURLParamsOverrideGraphQLVariables(App::getState(['routing', 'queried-object'])) ?
+            array_merge(
+                $graphQLVariables,
+                $state['variables'] ?? []
+            ) :
+            array_merge(
+                $state['variables'] ?? [],
+                $graphQLVariables
+            );
+
         // @todo Remove this code, to temporarily convert back from GraphQL to PoP query
         // ---------------------------------------------
         if ($state['query'] !== null) {
@@ -87,26 +106,5 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider ex
             }
         }
         // ---------------------------------------------
-
-        /**
-         * Merge the variables into $state?
-         */
-        if (!$graphQLVariables) {
-            return;
-        }
-
-        // Normally, GraphQL variables must not override the variables from the request
-        // But this behavior can be overriden for the persisted query,
-        // by setting "Accept Variables as URL Params" => false
-        // When editing in the editor, 'queried-object' will be null, and that's OK
-        $state['variables'] = $this->getGraphQLQueryResolutionEndpointExecuter()->doURLParamsOverrideGraphQLVariables(App::getState(['routing', 'queried-object'])) ?
-            array_merge(
-                $graphQLVariables,
-                $state['variables'] ?? []
-            ) :
-            array_merge(
-                $state['variables'] ?? [],
-                $graphQLVariables
-            );
     }
 }
