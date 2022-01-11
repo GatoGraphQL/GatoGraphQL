@@ -65,7 +65,7 @@ class AppStateManager
     public function get(string $key): mixed
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        if (!isset($this->state[$key])) {
+        if (!array_key_exists($key, $this->state)) {
             throw new LogicException(
                 \sprintf(
                     $translationAPI->__('There is no application state under key \'%s\'', 'root'),
@@ -84,7 +84,7 @@ class AppStateManager
         $translationAPI = TranslationAPIFacade::getInstance();
         $state = &$this->state;
         foreach ($path as $pathItem) {
-            if (!isset($state[$pathItem])) {
+            if (!array_key_exists($pathItem, $state)) {
                 throw new LogicException(
                     \sprintf(
                         $translationAPI->__('There is no application state under path \'%s\'', 'root'),
@@ -102,7 +102,7 @@ class AppStateManager
 
     public function has(string $key): bool
     {
-        return isset($this->state[$key]);
+        return array_key_exists($key, $this->state);
     }
 
     /**
@@ -112,7 +112,7 @@ class AppStateManager
     {
         $state = &$this->state;
         foreach ($path as $pathItem) {
-            if (!isset($state[$pathItem])) {
+            if (!array_key_exists($pathItem, $state)) {
                 return false;
             }
             $state = &$state[$pathItem];
