@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointResolvers;
 
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\AbstractEndpointExecuter;
-use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointResolverInterface;
+use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 
-abstract class AbstractEndpointResolver extends AbstractEndpointExecuter implements GraphQLEndpointResolverInterface
+abstract class AbstractEndpointResolver extends AbstractEndpointExecuter implements GraphQLEndpointExecuterInterface
 {
     private ?EndpointHelpers $endpointHelpers = null;
 

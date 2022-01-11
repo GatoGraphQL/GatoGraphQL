@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\State;
 
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterInterface;
-use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointResolverInterface;
+use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use PoP\API\Response\Schemes as APISchemes;
@@ -36,7 +36,7 @@ abstract class AbstractEndpointExecuterAppStateProvider extends AbstractAppState
         return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
     }
     
-    protected function getGraphQLEndpointResolver(): GraphQLEndpointResolverInterface
+    protected function getGraphQLEndpointResolver(): GraphQLEndpointExecuterInterface
     {
         return $this->getEndpointExecuter();
     }
