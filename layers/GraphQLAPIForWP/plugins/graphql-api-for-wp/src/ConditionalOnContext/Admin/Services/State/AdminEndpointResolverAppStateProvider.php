@@ -31,7 +31,7 @@ class AdminEndpointResolverAppStateProvider extends AbstractEndpointResolverAppS
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
 
-    protected function getEndpointResolver(): EndpointExecuterInterface
+    protected function getEndpointExecuter(): EndpointExecuterInterface
     {
         return $this->getAdminEndpointResolver();
     }
