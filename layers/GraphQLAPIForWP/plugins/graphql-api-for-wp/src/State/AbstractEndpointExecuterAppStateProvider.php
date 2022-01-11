@@ -36,7 +36,10 @@ abstract class AbstractEndpointExecuterAppStateProvider extends AbstractAppState
         return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
     }
     
-    abstract protected function getGraphQLEndpointResolver(): GraphQLEndpointResolverInterface;
+    protected function getGraphQLEndpointResolver(): GraphQLEndpointResolverInterface
+    {
+        return $this->getEndpointExecuter();
+    }
 
     abstract protected function getEndpointExecuter(): EndpointExecuterInterface;
 

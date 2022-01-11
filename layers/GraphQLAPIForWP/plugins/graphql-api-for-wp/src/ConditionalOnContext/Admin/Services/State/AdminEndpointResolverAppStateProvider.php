@@ -7,9 +7,9 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\State;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointResolvers\AdminEndpointResolver;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterInterface;
-use GraphQLAPI\GraphQLAPI\State\AbstractEndpointResolverAppStateProvider;
+use GraphQLAPI\GraphQLAPI\State\AbstractEndpointExecuterAppStateProvider;
 
-class AdminEndpointResolverAppStateProvider extends AbstractEndpointResolverAppStateProvider
+class AdminEndpointResolverAppStateProvider extends AbstractEndpointExecuterAppStateProvider
 {
     private ?AdminEndpointResolver $adminEndpointResolver = null;
     private ?UserAuthorizationInterface $userAuthorization = null;
