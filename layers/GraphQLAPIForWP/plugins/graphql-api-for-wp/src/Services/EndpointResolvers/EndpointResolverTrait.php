@@ -77,7 +77,7 @@ trait EndpointResolverTrait
     /**
      * Indicate if the GraphQL variables must override the URL params
      */
-    protected function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool
+    public function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool
     {
         return false;
     }
