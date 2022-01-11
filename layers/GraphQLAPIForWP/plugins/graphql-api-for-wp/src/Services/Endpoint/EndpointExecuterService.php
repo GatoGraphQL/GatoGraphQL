@@ -31,27 +31,30 @@ class EndpointExecuterService extends AbstractAutomaticallyInstantiatedService
          */
         \add_action(
             'popcms:boot',
-            function (): void {
-                /**
-                 * Execute the EndpointExecuters from the Registry:
-                 *
-                 * Only 1 executer should be executed, from among (or other injected ones):
-                 *
-                 * - Query resolution
-                 * - GraphiQL client
-                 * - Voyager client
-                 * - View query source
-                 * - Admin client
-                 * - Persisted Query
-                 *
-                 * All others will have `isServiceEnabled` => false, by checking
-                 * their expected value of ?view=... or if some attached service
-                 * is enabled or not
-                 */
-                foreach ($this->getEndpointExecuterRegistry()->getEnabledEndpointExecuters() as $endpointExecuter) {
-                    $endpointExecuter->executeEndpoint();
-                }
-            }
+            [$this, 'executeRequestedEndpoint']
         );
+    }
+
+    /**
+     * Execute the EndpointExecuters from the Registry:
+     *
+     * Only 1 executer should be executed, from among (or other injected ones):
+     *
+     * - Query resolution
+     * - GraphiQL client
+     * - Voyager client
+     * - View query source
+     * - Admin client
+     * - Persisted Query
+     *
+     * All others will have `isServiceEnabled` => false, by checking
+     * their expected value of ?view=... or if some attached service
+     * is enabled or not
+     */
+    public function executeRequestedEndpoint(): void
+    {
+        foreach ($this->getEndpointExecuterRegistry()->getEnabledEndpointExecuters() as $endpointExecuter) {
+            $endpointExecuter->executeEndpoint();
+        }
     }
 }
