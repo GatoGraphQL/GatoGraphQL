@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointResolvers;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointExecuters\AdminEndpointExecuterServiceTagInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
@@ -14,7 +14,7 @@ use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
 use PoP\EngineWP\Templates\TemplateHelpers;
 use WP_Post;
 
-class AdminEndpointResolver extends AbstractEndpointExecuter implements AdminEndpointExecuterServiceTagInterface, GraphQLEndpointExecuterInterface
+class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEndpointExecuterServiceTagInterface, GraphQLEndpointExecuterInterface
 {
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?QueryRetrieverInterface $queryRetriever = null;
