@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\MutationResolverBridges;
 
 use PoP\BasicService\BasicServiceTrait;
-use PoP\ComponentModel\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\Root\App;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {

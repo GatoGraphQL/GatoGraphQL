@@ -9,16 +9,15 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
 use LogicException;
-use PoP\ComponentModel\App as ComponentModelApp;
-use PoP\ComponentModel\AppInterface as ComponentModelAppInterface;
-use PoP\ComponentModel\MutationResolution\MutationResolutionStoreInterface;
 use PoP\Root\App as RootApp;
 use PoP\Root\AppInterface as RootAppInterface;
 use PoP\Root\AppLoader;
 use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
+use PoP\Root\Managers\AppStateManager;
 use PoP\Root\Managers\ComponentManager;
+use PoP\Root\MutationResolution\MutationResolutionStore;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
@@ -28,7 +27,7 @@ use Symfony\Component\DependencyInjection\Container;
  * Using composition instead of inheritance, so that the original PoP\Root\App
  * is the single source of truth
  */
-class App implements AppInterface, ComponentModelAppInterface, RootAppInterface
+class App implements AppInterface, RootAppInterface
 {
     protected static MainPluginManager $mainPluginManager;
     protected static ExtensionManager $extensionManager;
@@ -77,19 +76,6 @@ class App implements AppInterface, ComponentModelAppInterface, RootAppInterface
         return self::getExtensionManager()->getExtension($extensionClass);
     }
 
-    public static function initializeComponentModel(
-        ?MutationResolutionStoreInterface $mutationResolutionManager = null,
-    ): void {
-        ComponentModelApp::initializeComponentModel(
-            $mutationResolutionManager,
-        );
-    }
-
-    public static function getMutationResolutionStore(): MutationResolutionStoreInterface
-    {
-        return ComponentModelApp::getMutationResolutionStore();
-    }
-
     /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.
@@ -102,12 +88,16 @@ class App implements AppInterface, ComponentModelAppInterface, RootAppInterface
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManager $componentManager = null,
+        ?AppStateManager $appStateManager = null,
+        ?MutationResolutionStore $mutationResolutionManager = null,
     ): void {
         RootApp::initialize(
             $appLoader,
             $containerBuilderFactory,
             $systemContainerBuilderFactory,
             $componentManager,
+            $appStateManager,
+            $mutationResolutionManager,
         );
     }
 
@@ -129,6 +119,11 @@ class App implements AppInterface, ComponentModelAppInterface, RootAppInterface
     public static function getComponentManager(): ComponentManager
     {
         return RootApp::getComponentManager();
+    }
+
+    public static function getMutationResolutionStore(): MutationResolutionStore
+    {
+        return RootApp::getMutationResolutionStore();
     }
 
     /**

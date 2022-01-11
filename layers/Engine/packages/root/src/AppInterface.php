@@ -8,7 +8,9 @@ use LogicException;
 use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
+use PoP\Root\Managers\AppStateManager;
 use PoP\Root\Managers\ComponentManager;
+use PoP\Root\MutationResolution\MutationResolutionStore;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
@@ -28,6 +30,8 @@ interface AppInterface
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManager $componentManager = null,
+        ?AppStateManager $appStateManager = null,
+        ?MutationResolutionStore $mutationResolutionStore = null,
     ): void;
 
     public static function getAppLoader(): AppLoader;
@@ -37,6 +41,8 @@ interface AppInterface
     public static function getSystemContainerBuilderFactory(): SystemContainerBuilderFactory;
 
     public static function getComponentManager(): ComponentManager;
+
+    public static function getMutationResolutionStore(): MutationResolutionStore;
 
     /**
      * Store Component classes to be initialized, and

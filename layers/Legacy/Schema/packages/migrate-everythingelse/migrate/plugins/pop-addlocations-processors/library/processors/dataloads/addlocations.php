@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\App;
+use PoP\Root\App;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;

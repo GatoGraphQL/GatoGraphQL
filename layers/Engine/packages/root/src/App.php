@@ -10,6 +10,7 @@ use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Managers\AppStateManager;
 use PoP\Root\Managers\ComponentManager;
+use PoP\Root\MutationResolution\MutationResolutionStore;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
@@ -22,6 +23,7 @@ class App implements AppInterface
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
     protected static ComponentManager $componentManager;
     protected static AppStateManager $appStateManager;
+    protected static MutationResolutionStore $mutationResolutionManager;
     protected static array $componentClassesToInitialize = [];
 
     /**
@@ -37,12 +39,14 @@ class App implements AppInterface
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManager $componentManager = null,
         ?AppStateManager $appStateManager = null,
+        ?MutationResolutionStore $mutationResolutionManager = null,
     ): void {
         self::$appLoader = $appLoader ?? static::createAppLoader();
         self::$containerBuilderFactory = $containerBuilderFactory ?? static::createContainerBuilderFactory();
         self::$systemContainerBuilderFactory = $systemContainerBuilderFactory ?? static::createSystemContainerBuilderFactory();
         self::$componentManager = $componentManager ?? static::createComponentManager();
         self::$appStateManager = $appStateManager ?? static::createAppStateManager();
+        self::$mutationResolutionManager = $mutationResolutionManager ?? static::createMutationResolutionStore();
 
         // Inject the Components slated for initialization
         self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
@@ -74,6 +78,11 @@ class App implements AppInterface
         return new AppStateManager();
     }
 
+    protected static function createMutationResolutionStore(): MutationResolutionStore
+    {
+        return new MutationResolutionStore();
+    }
+
     public static function getAppLoader(): AppLoader
     {
         return self::$appLoader;
@@ -97,6 +106,11 @@ class App implements AppInterface
     public static function getAppStateManager(): AppStateManager
     {
         return self::$appStateManager;
+    }
+
+    public static function getMutationResolutionStore(): MutationResolutionStore
+    {
+        return self::$mutationResolutionManager;
     }
 
     /**
