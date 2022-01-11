@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\State;
 
+use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointResolverInterface;
-use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\State\AbstractAppStateProvider;
@@ -34,7 +34,7 @@ abstract class AbstractEndpointResolverAppStateProvider extends AbstractAppState
         return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
     }
 
-    abstract protected function getEndpointResolver(): EndpointResolverInterface;
+    abstract protected function getEndpointResolver(): EndpointExecuterInterface;
 
     protected function getGraphQLEndpointResolver(): GraphQLEndpointResolverInterface
     {
@@ -43,7 +43,7 @@ abstract class AbstractEndpointResolverAppStateProvider extends AbstractAppState
 
     public function isServiceEnabled(): bool
     {
-        return $this->getEndpointResolver()->isGraphQLQueryExecution();
+        return $this->getEndpointResolver()->isClientRequested();
     }
 
     public function initialize(array &$state): void

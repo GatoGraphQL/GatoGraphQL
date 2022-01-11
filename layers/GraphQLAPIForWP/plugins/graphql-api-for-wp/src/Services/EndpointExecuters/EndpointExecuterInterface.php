@@ -9,4 +9,5 @@ use PoP\Root\Services\ServiceInterface;
 interface EndpointExecuterInterface extends ServiceInterface
 {
     public function executeEndpoint(): void;
+    public function isClientRequested(): bool;
 }

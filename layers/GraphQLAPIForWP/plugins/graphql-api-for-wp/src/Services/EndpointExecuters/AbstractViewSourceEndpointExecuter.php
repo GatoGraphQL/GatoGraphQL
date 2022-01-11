@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use WP_Post;
 
-abstract class AbstractViewSourceEndpointExecuter extends AbstractEndpointExecuter
+abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExecuter
 {
     protected function getView(): string
     {

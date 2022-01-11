@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointResolvers;
 
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\CustomEndpointExecuterServiceTagInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
@@ -12,7 +13,7 @@ use PoP\EngineWP\Templates\TemplateHelpers;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use WP_Post;
 
-class AdminEndpointResolver extends AbstractEndpointResolver
+class AdminEndpointResolver extends AbstractEndpointResolver implements CustomEndpointExecuterServiceTagInterface
 {
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?QueryRetrieverInterface $queryRetriever = null;
@@ -74,27 +75,21 @@ class AdminEndpointResolver extends AbstractEndpointResolver
      * Execute the GraphQL query when posting to:
      * /wp-admin/edit.php?page=graphql_api&action=execute_query
      */
-    public function isGraphQLQueryExecution(): bool
+    public function isClientRequested(): bool
     {
+        if (!$this->getUserAuthorization()->canAccessSchemaEditor()) {
+            return false;
+        }
         return $this->getEndpointHelpers()->isRequestingAdminConfigurableSchemaGraphQLEndpoint();
     }
 
-    /**
-     * Initialize the resolver
-     */
-    public function initialize(): void
+    public function executeEndpoint(): void
     {
-        parent::initialize();
-
         /**
          * Print the global JS variables, required by the blocks
          */
         $this->printGlobalVariables();
-    }
 
-    protected function resolveGraphQLQuery(): void
-    {
-        $this->executeGraphQLQuery();
         $this->printTemplateInAdminAndExit();
     }
 
@@ -137,14 +132,6 @@ class AdminEndpointResolver extends AbstractEndpointResolver
                 );
             }
         });
-    }
-
-    /**
-     * Execute the GraphQL query
-     */
-    protected function executeGraphQLQuery(): void
-    {
-        // Nothing to do, already done in AppStateProvider
     }
 
     /**
