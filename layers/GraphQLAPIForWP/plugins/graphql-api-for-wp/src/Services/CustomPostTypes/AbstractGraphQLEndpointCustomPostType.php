@@ -141,10 +141,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         /**
          * Call it on "boot" after the WP_Query is parsed, so the single CPT
          * is loaded, and asking for `is_singular(CPT)` works.
-         *
-         * Important: load it before anything else, so it can load the hooks
-         * from `executeGraphQLQuery` before these are called, which is
-         * triggered also on "boot"
          */
         add_action(
             'popcms:boot',
@@ -158,15 +154,16 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                  * - GraphiQL client
                  * - Voyager client
                  * - View query source
+                 * - Admin client
                  *
                  * All others will have `isServiceEnabled` => false, by checking
-                 * their expected value of ?view=...
+                 * their expected value of ?view=... or if some attached service
+                 * is enabled or not
                  */
                 foreach ($this->getEndpointExecuterRegistry()->getEnabledEndpointExecuters() as $endpointExecuter) {
                     $endpointExecuter->executeEndpoint();
                 }
-            },
-            0
+            }
         );
     }
 

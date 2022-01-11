@@ -30,13 +30,13 @@ class AppLoader extends RootAppLoader
         $hooksAPI->addAction(
             'popcms:boot',
             fn () => App::getComponentManager()->boot(),
-            5
+            4
         );
 
         $hooksAPI->addAction(
             'popcms:boot',
             fn () => App::getComponentManager()->afterBoot(),
-            15
+            8
         );
     }
 }
