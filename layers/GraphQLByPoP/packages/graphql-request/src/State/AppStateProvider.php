@@ -31,6 +31,6 @@ class AppStateProvider extends AbstractAppStateProvider
         // Override with the GraphQL query from the body
         $payload = GraphQLQueryPayloadRetriever::getGraphQLQueryPayload();
         $state['query'] = $payload['query'] ?? null;
-        $state['variables'] = $payload['variables'] ?? null;
+        $state['variables'] = $payload['variables'] ?? [];
     }
 }
