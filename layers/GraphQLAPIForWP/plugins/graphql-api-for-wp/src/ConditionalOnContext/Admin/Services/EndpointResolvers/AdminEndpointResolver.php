@@ -6,17 +6,20 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointReso
 
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointExecuters\AdminEndpointExecuterServiceTagInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
+use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\AbstractEndpointExecuter;
+use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
 use PoP\EngineWP\Templates\TemplateHelpers;
 use WP_Post;
 
-class AdminEndpointResolver extends AbstractEndpointResolver implements AdminEndpointExecuterServiceTagInterface
+class AdminEndpointResolver extends AbstractEndpointExecuter implements AdminEndpointExecuterServiceTagInterface, GraphQLEndpointExecuterInterface
 {
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?QueryRetrieverInterface $queryRetriever = null;
     private ?GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet = null;
+    private ?EndpointHelpers $endpointHelpers = null;
 
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -41,6 +44,14 @@ class AdminEndpointResolver extends AbstractEndpointResolver implements AdminEnd
     final protected function getGraphQLRequestVarsHookSet(): GraphQLRequestVarsHookSet
     {
         return $this->graphQLRequestVarsHookSet ??= $this->instanceManager->getInstance(GraphQLRequestVarsHookSet::class);
+    }
+    final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
+    final protected function getEndpointHelpers(): EndpointHelpers
+    {
+        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
 
     /**
