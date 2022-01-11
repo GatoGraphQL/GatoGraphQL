@@ -353,8 +353,6 @@ class AppLoader
 
     /**
      * Have the components initialize their state on a global, shared way
-     *
-     * @param array<string,mixed> $state
      */
      protected function initializeAppState(): void
     {

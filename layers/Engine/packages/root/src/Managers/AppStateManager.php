@@ -24,8 +24,6 @@ class AppStateManager
      * Called by the AppLoader to initalize the state.
      *
      * Initialize application state
-     *
-     * @param array<string,mixed> $state
      */
     public function initializeAppState(): void
     {
@@ -62,7 +60,6 @@ class AppStateManager
     }
 
     /**
-     * @param string $keyOrPath The property key
      * @throws LogicException
      */
     public function get(string $key): mixed
@@ -80,7 +77,6 @@ class AppStateManager
     }
 
     /**
-     * @param string[] $keyOrPath The property path under which to retrieve a value
      * @throws LogicException
      */
     public function getUnder(array $path): mixed
@@ -110,7 +106,6 @@ class AppStateManager
     }
 
     /**
-     * @param string[] $keyOrPath The property path under which to check if there is a value
      * @throws LogicException
      */
     public function hasUnder(array $path): bool
