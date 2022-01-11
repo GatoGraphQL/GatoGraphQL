@@ -38,7 +38,7 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider ex
             return;
         }
 
-        $state['variables'] = $graphQLQuery;
+        $state['query'] = $graphQLQuery;
 
         /**
          * Merge the variables into $state?
