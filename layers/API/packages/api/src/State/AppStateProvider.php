@@ -15,11 +15,23 @@ use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    
+    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+    }
+
     public function initialize(array &$state): void
     {
         $state['query'] = null;
@@ -87,17 +99,20 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         $query = $state['query'];
-        if ($query !== null) {
-            // If the query starts with "!", then it is the query name to a persisted query
-            $query = PersistedQueryUtils::maybeGetPersistedQuery($query);
+        if (empty($query)) {
+            $this->getFeedbackMessageStore()->addQueryError($this->__('The query in the body is empty', 'api'));
+            return;
+        }
 
-            // Parse the query from string into the format needed to work with it
-            $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
-            $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($query);
-            $state['executable-query'] = $fieldQuerySet->getExecutableFieldQuery();
-            if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
-                $state['requested-query'] = $fieldQuerySet->getRequestedFieldQuery();
-            }
+        // If the query starts with "!", then it is the query name to a persisted query
+        $query = PersistedQueryUtils::maybeGetPersistedQuery($query);
+
+        // Parse the query from string into the format needed to work with it
+        $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
+        $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($query);
+        $state['executable-query'] = $fieldQuerySet->getExecutableFieldQuery();
+        if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
+            $state['requested-query'] = $fieldQuerySet->getRequestedFieldQuery();
         }
     }
 }
