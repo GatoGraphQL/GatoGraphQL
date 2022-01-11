@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\State;
 
-use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterInterface;
+use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLQueryResolutionEndpointExecuterInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter;
 
 class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuterAppStateProvider extends AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider
@@ -20,7 +20,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuterAppStateProvid
         return $this->persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter ??= $this->instanceManager->getInstance(PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter::class);
     }
 
-    protected function getEndpointExecuter(): EndpointExecuterInterface
+    protected function getGraphQLQueryResolutionEndpointExecuter(): GraphQLQueryResolutionEndpointExecuterInterface
     {
         return $this->getPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter();
     }
