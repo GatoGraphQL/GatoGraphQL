@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointResolvers;
 
-use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
-use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
-use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
-use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
 use PoP\EngineWP\Templates\TemplateHelpers;
@@ -18,10 +14,6 @@ use WP_Post;
 
 class AdminEndpointResolver extends AbstractEndpointResolver
 {
-    use EndpointResolverTrait {
-        EndpointResolverTrait::executeGraphQLQuery as upstreamExecuteGraphQLQuery;
-    }
-
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?QueryRetrieverInterface $queryRetriever = null;
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
@@ -71,6 +63,11 @@ class AdminEndpointResolver extends AbstractEndpointResolver
          * Extract the query from the BODY through standard GraphQL endpoint execution
          */
         return $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
+    }
+
+    public function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool
+    {
+        return false;
     }
 
     /**
@@ -157,7 +154,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
             function (): void {
                 // Make sure the user has access to the editor
                 if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
-                    $this->upstreamExecuteGraphQLQuery();
+                    // Nothing to do, already done in AppStateProvider
                 }
             }
         );

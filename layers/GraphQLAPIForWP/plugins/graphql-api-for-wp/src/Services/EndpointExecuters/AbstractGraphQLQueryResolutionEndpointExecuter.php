@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
@@ -12,8 +11,6 @@ use WP_Post;
 
 abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEndpointExecuter implements GraphQLQueryResolutionEndpointExecuterInterface
 {
-    use EndpointResolverTrait;
-
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
     private ?QueryRetrieverInterface $queryRetriever = null;
     private ?GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet = null;
@@ -50,7 +47,7 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEn
 
     public function executeEndpoint(): void
     {
-        $this->executeGraphQLQuery();
+        // Nothing to do, already done in AppStateProvider
     }
 
     /**
