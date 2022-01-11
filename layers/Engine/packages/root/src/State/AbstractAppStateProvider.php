@@ -19,7 +19,7 @@ abstract class AbstractAppStateProvider implements AppStateProviderInterface
     public function consolidate(array &$state): void
     {
     }
-    
+
     public function augment(array &$state): void
     {
     }

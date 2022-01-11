@@ -19,7 +19,7 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->userStateTypeAPI ??= $this->instanceManager->getInstance(UserStateTypeAPIInterface::class);
     }
-    
+
     public function initialize(array &$state): void
     {
         $this->setUserStateVars($state);

@@ -60,7 +60,7 @@ class AppStateProvider extends AbstractAppStateProvider
 
     /**
      * The query must be converted to array, which has 2 outputs:
-     * 
+     *
      *   1. The actual requested query
      *   2. The executable query, created by doing transformations on the requested query
      *

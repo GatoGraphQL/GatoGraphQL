@@ -37,7 +37,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['mangled'] = Request::getMangledValue();
         $state['actions'] = Request::getActions();
         $state['scheme'] = Request::getScheme();
-        
+
         // By default, get the variables from the request
         $state['variables'] = $fieldQueryInterpreter->getVariablesFromRequest();
         $state['only-fieldname-as-outputkey'] = false;
@@ -45,7 +45,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['version-constraint'] = Request::getVersionConstraint();
         $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
         $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
-        
+
         // By default, mutations are always enabled. Can be changed for the API
         $state['are-mutations-enabled'] = true;
 

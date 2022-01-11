@@ -142,7 +142,7 @@ class Request
     {
         return $_REQUEST[Params::ACTION_PATH] ?? null;
     }
-    
+
     /**
      * Indicates the version constraint for all fields/directives in the query
      */

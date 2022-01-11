@@ -354,7 +354,7 @@ class AppLoader
     /**
      * Have the components initialize their state on a global, shared way
      */
-     protected function initializeAppState(): void
+    protected function initializeAppState(): void
     {
         App::getAppStateManager()->initializeAppState();
     }
