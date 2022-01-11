@@ -25,6 +25,11 @@ class AppStateProvider extends AbstractAppStateProvider
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
     }
 
+    public function initialize(array &$state): void
+    {
+        $state['nested-mutations-enabled'] = true;
+    }
+
     public function consolidate(array &$state): void
     {
         if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
