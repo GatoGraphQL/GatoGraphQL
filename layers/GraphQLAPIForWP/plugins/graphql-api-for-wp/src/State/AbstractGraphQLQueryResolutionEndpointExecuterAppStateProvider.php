@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\State;
 
+use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLQueryResolutionEndpointExecuterInterface;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
@@ -22,12 +23,12 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider ex
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
     }
 
-    abstract protected function getGraphQLQueryResolutionEndpointExecuter(): GraphQLQueryResolutionEndpointExecuterInterface;
-
-    public function isServiceEnabled(): bool
+    protected function getEndpointExecuter(): EndpointExecuterInterface
     {
-        return $this->getGraphQLQueryResolutionEndpointExecuter()->isServiceEnabled();
+        return $this->getGraphQLQueryResolutionEndpointExecuter();
     }
+
+    abstract protected function getGraphQLQueryResolutionEndpointExecuter(): GraphQLQueryResolutionEndpointExecuterInterface;
 
     public function initialize(array &$state): void
     {
