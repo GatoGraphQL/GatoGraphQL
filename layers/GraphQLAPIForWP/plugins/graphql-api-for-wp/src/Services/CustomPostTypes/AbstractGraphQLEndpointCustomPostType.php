@@ -120,8 +120,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         return $actions;
     }
 
-    abstract protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface;
-
     abstract protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface;
 
     /**
@@ -137,34 +135,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 wp_die(\__('Access forbidden', 'graphql-api'));
             }
         }, 0);
-
-        /**
-         * Call it on "boot" after the WP_Query is parsed, so the single CPT
-         * is loaded, and asking for `is_singular(CPT)` works.
-         */
-        add_action(
-            'popcms:boot',
-            function (): void {
-                /**
-                 * Execute the EndpointExecuters from the Registry:
-                 *
-                 * Only 1 executer should be executed, from among (or other injected ones):
-                 *
-                 * - Query resolution
-                 * - GraphiQL client
-                 * - Voyager client
-                 * - View query source
-                 * - Admin client
-                 *
-                 * All others will have `isServiceEnabled` => false, by checking
-                 * their expected value of ?view=... or if some attached service
-                 * is enabled or not
-                 */
-                foreach ($this->getEndpointExecuterRegistry()->getEnabledEndpointExecuters() as $endpointExecuter) {
-                    $endpointExecuter->executeEndpoint();
-                }
-            }
-        );
     }
 
     /**

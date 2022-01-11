@@ -31,6 +31,9 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistry
 
+    GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface:
+        class: \GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistry
+
     GraphQLAPI\GraphQLAPI\Registries\CustomEndpointExecuterRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\CustomEndpointExecuterRegistry
 
