@@ -59,7 +59,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
         $nature = $this->getCurrentNature();
 
         // If it is a ROUTE, then the URL path is already the route
-        if ($nature == RouteNatures::STANDARD) {
+        if ($nature === RouteNatures::STANDARD) {
             $route = RoutingUtils::getURLPath();
         } else {
             // If having set URL param "route", then use it
