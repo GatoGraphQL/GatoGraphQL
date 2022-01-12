@@ -119,7 +119,7 @@ class EndpointHelpers
         // /** @var ComponentModelComponentConfiguration */
         // $componentConfiguration = \PoP\Root\App::getComponent(ComponentModelComponent::class)->getConfiguration();
         // if ($componentConfiguration->mustNamespaceTypes()) {
-        //     $endpoint = \add_query_arg(APIRequest::URLPARAM_USE_NAMESPACE, true, $endpoint);
+        //     $endpoint = \add_query_arg(APIParams::USE_NAMESPACE, true, $endpoint);
         // }
         return $endpoint;
     }

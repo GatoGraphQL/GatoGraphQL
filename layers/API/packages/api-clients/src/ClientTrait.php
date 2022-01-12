@@ -95,7 +95,7 @@ trait ClientTrait
         // if ($componentConfiguration->mustNamespaceTypes()) {
         //     $endpoint = GeneralUtils::addQueryArgs(
         //         [
-        //             Request::URLPARAM_USE_NAMESPACE => true,
+        //             APIParams::USE_NAMESPACE => true,
         //         ],
         //         $endpoint
         //     );
