@@ -15,9 +15,9 @@ use PoP\ComponentModel\Tokens\Param;
 /**
  * Special Request class, with properties that modify the Engine's behavior.
  * All methods receive an extra parameter:
- * 
+ *
  *   $enableModifyingEngineBehaviorViaRequestParams
- * 
+ *
  * By setting this flag in false, users cannot modify the behavior of the application,
  * which is defined via AppStateProvider classes.
  */

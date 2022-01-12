@@ -76,7 +76,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)
         $state['does-api-query-have-errors'] = false;
 
-        // Passing the query via URL param?        
+        // Passing the query via URL param?
         /** @var ComponentModelComponentConfiguration */
         $componentModelComponentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
         $enableModifyingEngineBehaviorViaRequestParams = $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequestParams();
