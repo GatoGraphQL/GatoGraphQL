@@ -15,16 +15,18 @@ class Request
             return null;
         }
         
-        if (isset($_REQUEST[Params::USE_NAMESPACE])) {
-            return in_array(
-                strtolower($_REQUEST[Params::USE_NAMESPACE]),
-                [
-                    "true",
-                    "on",
-                    "1"
-                ]
-            );
+        $useNamespace = $_REQUEST[Params::USE_NAMESPACE] ?? null;
+        if ($useNamespace === null) {
+            return null;
         }
-        return null;
+
+        return in_array(
+            strtolower($useNamespace),
+            [
+                "true",
+                "on",
+                "1"
+            ]
+        );
     }
 }
