@@ -10,6 +10,7 @@ use PoP\ComponentModel\Configuration\EngineRequest;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoP\Routing\Facades\RoutingManagerFacade;
@@ -33,7 +34,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['only-fieldname-as-outputkey'] = false;
         $state['are-mutations-enabled'] = true;
 
-        $state['mangled'] = Request::getMangledValue();
+        $state['mangled'] = DefinitionsRequest::getMangledValue();
         $state['actionpath'] = Request::getActionPath();
         $state['actions'] = Request::getActions();
         $state['version-constraint'] = Request::getVersionConstraint();

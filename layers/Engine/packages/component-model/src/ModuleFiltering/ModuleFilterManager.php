@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFiltering;
 
+use PoP\BasicService\BasicServiceTrait;
+use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
-use PoP\BasicService\BasicServiceTrait;
 
 class ModuleFilterManager implements ModuleFilterManagerInterface
 {
     use BasicServiceTrait;
-
-    public const URLPARAM_MODULEFILTER = 'modulefilter';
 
     protected ?string $selected_filter_name = null;
     private ?ModuleFilterInterface $selected_filter = null;
@@ -91,7 +90,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     {
         if ($this->selected_filter_name) {
             return $this->selected_filter_name;
-        } elseif ($selectedModuleFilterName = $_REQUEST[self::URLPARAM_MODULEFILTER] ?? null) {
+        } elseif ($selectedModuleFilterName = $_REQUEST[Params::MODULEFILTER] ?? null) {
             // Only valid if there's a corresponding moduleFilter
             if (in_array($selectedModuleFilterName, array_keys($this->modulefilters))) {
                 return $selectedModuleFilterName;

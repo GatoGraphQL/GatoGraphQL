@@ -1,4 +1,6 @@
 <?php
+use PoP\ComponentModel\Constants\DataOutputItems;
+use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -52,13 +54,13 @@ class PoP_UserState_EngineHooks
             $requestHelperService = RequestHelperServiceFacade::getInstance();
             $url = GeneralUtils::addQueryArgs(
                 [
-                    \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => [
-                        \PoP\ComponentModel\Constants\DataOutputItems::META,
-                        \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
-                        \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
+                    Params::DATA_OUTPUT_ITEMS => [
+                        DataOutputItems::META,
+                        DataOutputItems::MODULE_DATA,
+                        DataOutputItems::DATABASES,
                     ],
-                    \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager::URLPARAM_MODULEFILTER => POP_MODULEFILTER_USERSTATE,
-                    \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => POP_ACTION_LOADUSERSTATE,
+                    Params::MODULEFILTER => POP_MODULEFILTER_USERSTATE,
+                    Params::ACTIONS.'[]' => POP_ACTION_LOADUSERSTATE,
                 ],
                 $requestHelperService->getCurrentURL()
             );

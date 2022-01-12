@@ -12,7 +12,6 @@ use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
@@ -21,7 +20,7 @@ use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeIn
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Definitions\Configuration\Request;
+use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\LooseContracts\NameResolverInterface;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
@@ -1052,8 +1051,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $stringified_module_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
         $ret = GeneralUtils::addQueryArgs(
             [
-                ModuleFilterManager::URLPARAM_MODULEFILTER => $this->getModulePaths()->getName(),
-                ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
+                Params::MODULEFILTER => $this->getModulePaths()->getName(),
+                Params::MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
             ],
             $this->getRequestHelperService()->getCurrentURL()
         );
@@ -1069,7 +1068,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($extra_module_paths = $this->getProp($module, $props, 'dataload-source-add-modulepaths')) {
             foreach ($extra_module_paths as $modulepath) {
                 $ret = GeneralUtils::addQueryArgs([
-                    ModulePaths::URLPARAM_MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($modulepath),
+                    Params::MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($modulepath),
                 ], $ret);
             }
         }
@@ -1084,7 +1083,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // If mangled, make it mandle
         if ($mangled = App::getState('mangled')) {
             $ret = GeneralUtils::addQueryArgs([
-                Request::URLPARAM_MANGLED => $mangled,
+                DefinitionsParams::MANGLED => $mangled,
             ], $ret);
         }
 

@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Configuration;
 
 use PoP\ComponentModel\Constants\Params;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
+use PoP\Definitions\Constants\ParamValues as DefinitionsParamValues;
 
 class Request
 {
@@ -20,11 +21,6 @@ class Request
     public static function getActionPath(): ?string
     {
         return $_REQUEST[Params::ACTION_PATH] ?? null;
-    }
-
-    public static function getMangledValue(): string
-    {
-        return DefinitionsRequest::isMangled() ? '' : DefinitionsRequest::URLPARAMVALUE_MANGLED_NONE;
     }
 
     /**

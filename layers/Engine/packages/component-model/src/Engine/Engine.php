@@ -38,12 +38,11 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use PoP\Definitions\Configuration\Request;
+use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\Root\App;
 use PoP\Root\Helpers\Methods;
 
@@ -686,7 +685,7 @@ class Engine implements EngineInterface
             $meta[Params::DATABASESOUTPUTMODE] = App::getState('dboutputmode');
 
             if (App::getState('mangled')) {
-                $meta[Request::URLPARAM_MANGLED] = App::getState('mangled');
+                $meta[DefinitionsParams::MANGLED] = App::getState('mangled');
             }
 
             // Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code

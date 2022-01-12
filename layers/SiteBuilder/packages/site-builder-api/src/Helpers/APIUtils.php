@@ -10,7 +10,7 @@ use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Tokens\Param;
-use PoP\Definitions\Configuration\Request;
+use PoP\Definitions\Constants\Params as DefinitionsParams;
 
 class APIUtils
 {
@@ -35,7 +35,7 @@ class APIUtils
         if ($mangled = App::getState('mangled')) {
             $endpoint = GeneralUtils::addQueryArgs(
                 [
-                    Request::URLPARAM_MANGLED => $mangled,
+                    DefinitionsParams::MANGLED => $mangled,
                 ],
                 $endpoint
             );

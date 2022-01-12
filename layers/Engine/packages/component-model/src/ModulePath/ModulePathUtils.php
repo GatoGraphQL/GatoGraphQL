@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModulePath;
 
+use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\Tokens\ModulePath;
 
 class ModulePathUtils
@@ -13,7 +13,7 @@ class ModulePathUtils
     public static function getModulePaths(): array
     {
         $ret = array();
-        if ($paths = $_REQUEST[ModulePaths::URLPARAM_MODULEPATHS] ?? null) {
+        if ($paths = $_REQUEST[Params::MODULEPATHS] ?? null) {
             if (!is_array($paths)) {
                 $paths = array($paths);
             }

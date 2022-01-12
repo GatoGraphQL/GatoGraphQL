@@ -9,8 +9,6 @@ use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
 
 class HeadModule extends AbstractModuleFilter
 {
-    public const URLPARAM_HEADMODULE = 'headmodule';
-
     public function getName(): string
     {
         return 'headmodule';

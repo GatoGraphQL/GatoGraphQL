@@ -9,7 +9,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\BasicService\BasicServiceTrait;
-use PoP\Definitions\Configuration\Request;
+use PoP\Definitions\Constants\Params as DefinitionsParams;
 
 class RequestHelperService implements RequestHelperServiceInterface
 {
@@ -22,8 +22,8 @@ class RequestHelperService implements RequestHelperServiceInterface
             'RequestUtils:current_url:remove_params',
             [
                 Params::VERSION,
-                ModuleFilterManager::URLPARAM_MODULEFILTER,
-                ModulePaths::URLPARAM_MODULEPATHS,
+                Params::MODULEFILTER,
+                Params::MODULEPATHS,
                 Params::ACTION_PATH,
                 Params::DATA_OUTPUT_ITEMS,
                 Params::DATA_SOURCE,
@@ -31,7 +31,7 @@ class RequestHelperService implements RequestHelperServiceInterface
                 Params::DATABASESOUTPUTMODE,
                 Params::OUTPUT,
                 Params::DATASTRUCTURE,
-                Request::URLPARAM_MANGLED,
+                DefinitionsParams::MANGLED,
                 Params::EXTRA_ROUTES,
                 Params::ACTIONS, // Needed to remove ?actions[]=preload, ?actions[]=loaduserstate, ?actions[]=loadlazy
             ]
