@@ -26,6 +26,8 @@ services:
         - >-
           ../../layers/Backbone/packages/graphql-parser:/app/vendor/pop-backbone/graphql-parser
         - >-
+          ../../layers/Backbone/packages/php-hooks:/app/vendor/pop-backbone/php-hooks
+        - >-
           ../../layers/Engine/packages/graphql-parser:/app/vendor/getpop/graphql-parser
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-query:/app/vendor/graphql-by-pop/graphql-query
