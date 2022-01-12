@@ -60,7 +60,7 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
             $graphQLQuery,
             $graphQLVariables
         ) = $this->getGraphQLEndpointExecuter()->getGraphQLQueryAndVariables(App::getState(['routing', 'queried-object']));
-        if (!$graphQLQuery) {
+        if ($graphQLQuery === null) {
             // If there is no query, nothing to do!
             return;
         }
@@ -85,31 +85,5 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
                 $state['variables'] ?? [],
                 $graphQLVariables
             );
-
-        // @todo Remove this code, to temporarily convert back from GraphQL to PoP query
-        // ---------------------------------------------
-        if ($state['query'] !== null) {
-            list(
-                $operationType,
-                $fieldQuery
-            ) = $this->getGraphQLQueryConvertor()->convertFromGraphQLToFieldQuery(
-                $state['query'],
-                $state['variables'],
-                null,
-            );
-            $state['query'] = $fieldQuery;
-
-            // Set the operation type and, based on it, if mutations are supported
-            $state['graphql-operation-type'] = $operationType;
-            $state['are-mutations-enabled'] = $operationType === OperationTypes::MUTATION;
-
-            // If there was an error when parsing the query, the operationType will be null,
-            // then there's no need to execute the query
-            if ($operationType === null) {
-                $state['does-api-query-have-errors'] = true;
-            }
-        }
-        $state['standard-graphql'] = true;
-        // ---------------------------------------------
     }
 }

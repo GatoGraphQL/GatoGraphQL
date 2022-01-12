@@ -35,7 +35,9 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
+        $state['graphql-operation-name'] = null;
         $state['graphql-operation-type'] = null;
+        $state['standard-graphql'] = false;
     }
 
     public function consolidate(array &$state): void
@@ -44,12 +46,25 @@ class AppStateProvider extends AbstractAppStateProvider
             return;
         }
 
-        $state['standard-graphql'] = true;
-
-        // Override with the GraphQL query from the body
+        // Get the GraphQL payload from POST
         $payload = GraphQLQueryPayloadRetriever::getGraphQLQueryPayload();
+        if ($payload === null) {
+            return;
+        }
+
+        // Set state with the GraphQL query from the body
         $state['query'] = $payload['query'] ?? null;
         $state['variables'] = $payload['variables'] ?? [];
+        $state['graphql-operation-name'] = $payload['operationName'] ?? null;
+    }
+
+    public function augment(array &$state): void
+    {
+        if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
+            return;
+        }
+
+        $state['standard-graphql'] = true;
 
         // @todo Remove this code, to temporarily convert back from GraphQL to PoP query
         // ---------------------------------------------
@@ -60,7 +75,7 @@ class AppStateProvider extends AbstractAppStateProvider
             ) = $this->getGraphQLQueryConvertor()->convertFromGraphQLToFieldQuery(
                 $state['query'],
                 $state['variables'],
-                $payload['operationName'] ?? null,
+                $state['graphql-operation-name'],
             );
             $state['query'] = $fieldQuery;
 
