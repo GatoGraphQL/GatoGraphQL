@@ -118,6 +118,10 @@ class ComponentConfiguration extends AbstractComponentConfiguration
 
     public function enableGraphQLIntrospection(): ?bool
     {
+        if (!Environment::enableEnablingGraphQLIntrospectionByURLParam()) {
+            return null;
+        }
+
         $envVariable = Environment::ENABLE_GRAPHQL_INTROSPECTION;
         $defaultValue = null;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
