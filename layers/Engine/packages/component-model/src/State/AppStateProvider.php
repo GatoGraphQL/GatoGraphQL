@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\State;
 
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Configuration\EngineRequest;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
@@ -32,20 +33,21 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['only-fieldname-as-outputkey'] = false;
         $state['are-mutations-enabled'] = true;
 
+        $state['mangled'] = Request::getMangledValue();
+        $state['actionpath'] = Request::getActionPath();
         $state['actions'] = Request::getActions();
         $state['version-constraint'] = Request::getVersionConstraint();
         $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
         $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
-        $state['actionpath'] = Request::getActionPath();
-        $state['mangled'] = Request::getMangledValue();
 
-        $state['output'] = Request::getOutput();
-        $state['dataoutputitems'] = Request::getDataOutputItems();
-        $state['datasources'] = Request::getDataSourceSelector();
-        $state['datastructure'] = Request::getDataStructure();
-        $state['dataoutputmode'] = Request::getDataOutputMode();
-        $state['dboutputmode'] = Request::getDBOutputMode();
-        $state['scheme'] = Request::getScheme();
+        $enableModifyingEngineBehaviorViaRequestParam = false;
+        $state['output'] = EngineRequest::getOutput($enableModifyingEngineBehaviorViaRequestParam);
+        $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequestParam);
+        $state['datasources'] = EngineRequest::getDataSourceSelector($enableModifyingEngineBehaviorViaRequestParam);
+        $state['datastructure'] = EngineRequest::getDataStructure($enableModifyingEngineBehaviorViaRequestParam);
+        $state['dataoutputmode'] = EngineRequest::getDataOutputMode($enableModifyingEngineBehaviorViaRequestParam);
+        $state['dboutputmode'] = EngineRequest::getDBOutputMode($enableModifyingEngineBehaviorViaRequestParam);
+        $state['scheme'] = EngineRequest::getScheme($enableModifyingEngineBehaviorViaRequestParam);
 
         // Set the routing state under a unified entry
         $state['routing'] = [];
