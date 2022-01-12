@@ -11,10 +11,10 @@ use PoP\API\Schema\QueryInputs;
  */
 class EngineRequest
 {
-    public static function getQuery(bool $enableModifyingEngineBehaviorViaRequestParam): ?string
+    public static function getQuery(bool $enableModifyingEngineBehaviorViaRequestParams): ?string
     {
         $default = null;
-        if (!$enableModifyingEngineBehaviorViaRequestParam) {
+        if (!$enableModifyingEngineBehaviorViaRequestParams) {
             return $default;
         }
 

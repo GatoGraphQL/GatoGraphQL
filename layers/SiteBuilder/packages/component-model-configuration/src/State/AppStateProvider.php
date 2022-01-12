@@ -15,8 +15,8 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         // Override the settings from ComponentModel
-        $enableModifyingEngineBehaviorViaRequestParam = false;
-        $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequestParam);
+        $enableModifyingEngineBehaviorViaRequestParams = false;
+        $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequestParams);
 
         // If not target, or invalid, reset it to "main"
         // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided

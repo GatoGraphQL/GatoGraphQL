@@ -16,17 +16,17 @@ use PoP\ComponentModel\Tokens\Param;
  * Special Request class, with properties that modify the Engine's behavior.
  * All methods receive an extra parameter:
  * 
- *   $enableModifyingEngineBehaviorViaRequestParam
+ *   $enableModifyingEngineBehaviorViaRequestParams
  * 
  * By setting this flag in false, users cannot modify the behavior of the application,
  * which is defined via AppStateProvider classes.
  */
 class EngineRequest
 {
-    public static function getOutput(bool $enableModifyingEngineBehaviorViaRequestParam): string
+    public static function getOutput(bool $enableModifyingEngineBehaviorViaRequestParams): string
     {
         $default = Outputs::HTML;
-        if (!$enableModifyingEngineBehaviorViaRequestParam) {
+        if (!$enableModifyingEngineBehaviorViaRequestParams) {
             return $default;
         }
 
@@ -41,30 +41,30 @@ class EngineRequest
         return $output;
     }
 
-    public static function getDataStructure(bool $enableModifyingEngineBehaviorViaRequestParam): ?string
+    public static function getDataStructure(bool $enableModifyingEngineBehaviorViaRequestParams): ?string
     {
         $default = null;
-        if (!$enableModifyingEngineBehaviorViaRequestParam) {
+        if (!$enableModifyingEngineBehaviorViaRequestParams) {
             return $default;
         }
 
         return $_REQUEST[Params::DATASTRUCTURE] ?? $default;
     }
 
-    public static function getScheme(bool $enableModifyingEngineBehaviorViaRequestParam): ?string
+    public static function getScheme(bool $enableModifyingEngineBehaviorViaRequestParams): ?string
     {
         $default = null;
-        if (!$enableModifyingEngineBehaviorViaRequestParam) {
+        if (!$enableModifyingEngineBehaviorViaRequestParams) {
             return $default;
         }
 
         return $_REQUEST[Params::SCHEME] ?? $default;
     }
 
-    public static function getDataSourceSelector(bool $enableModifyingEngineBehaviorViaRequestParam): string
+    public static function getDataSourceSelector(bool $enableModifyingEngineBehaviorViaRequestParams): string
     {
         $default = DataSourceSelectors::MODELANDREQUEST;
-        if (!$enableModifyingEngineBehaviorViaRequestParam) {
+        if (!$enableModifyingEngineBehaviorViaRequestParams) {
             return $default;
         }
 
@@ -79,10 +79,10 @@ class EngineRequest
         return $dataSourceSelector;
     }
 
-    public static function getDataOutputMode(bool $enableModifyingEngineBehaviorViaRequestParam): string
+    public static function getDataOutputMode(bool $enableModifyingEngineBehaviorViaRequestParams): string
     {
         $default = DataOutputModes::SPLITBYSOURCES;
-        if (!$enableModifyingEngineBehaviorViaRequestParam) {
+        if (!$enableModifyingEngineBehaviorViaRequestParams) {
             return $default;
         }
 
@@ -97,10 +97,10 @@ class EngineRequest
         return $dataOutputMode;
     }
 
-    public static function getDBOutputMode(bool $enableModifyingEngineBehaviorViaRequestParam): string
+    public static function getDBOutputMode(bool $enableModifyingEngineBehaviorViaRequestParams): string
     {
         $default = DatabasesOutputModes::SPLITBYDATABASES;
-        if (!$enableModifyingEngineBehaviorViaRequestParam) {
+        if (!$enableModifyingEngineBehaviorViaRequestParams) {
             return $default;
         }
 
@@ -118,10 +118,10 @@ class EngineRequest
     /**
      * @return string[]
      */
-    public static function getDataOutputItems(bool $enableModifyingEngineBehaviorViaRequestParam): array
+    public static function getDataOutputItems(bool $enableModifyingEngineBehaviorViaRequestParams): array
     {
         $default = static::getDefaultDataOutputItems();
-        if (!$enableModifyingEngineBehaviorViaRequestParam) {
+        if (!$enableModifyingEngineBehaviorViaRequestParams) {
             return $default;
         }
 

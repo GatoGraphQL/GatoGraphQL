@@ -40,14 +40,14 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
         $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
 
-        $enableModifyingEngineBehaviorViaRequestParam = false;
-        $state['output'] = EngineRequest::getOutput($enableModifyingEngineBehaviorViaRequestParam);
-        $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequestParam);
-        $state['datasources'] = EngineRequest::getDataSourceSelector($enableModifyingEngineBehaviorViaRequestParam);
-        $state['datastructure'] = EngineRequest::getDataStructure($enableModifyingEngineBehaviorViaRequestParam);
-        $state['dataoutputmode'] = EngineRequest::getDataOutputMode($enableModifyingEngineBehaviorViaRequestParam);
-        $state['dboutputmode'] = EngineRequest::getDBOutputMode($enableModifyingEngineBehaviorViaRequestParam);
-        $state['scheme'] = EngineRequest::getScheme($enableModifyingEngineBehaviorViaRequestParam);
+        $enableModifyingEngineBehaviorViaRequestParams = false;
+        $state['output'] = EngineRequest::getOutput($enableModifyingEngineBehaviorViaRequestParams);
+        $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequestParams);
+        $state['datasources'] = EngineRequest::getDataSourceSelector($enableModifyingEngineBehaviorViaRequestParams);
+        $state['datastructure'] = EngineRequest::getDataStructure($enableModifyingEngineBehaviorViaRequestParams);
+        $state['dataoutputmode'] = EngineRequest::getDataOutputMode($enableModifyingEngineBehaviorViaRequestParams);
+        $state['dboutputmode'] = EngineRequest::getDBOutputMode($enableModifyingEngineBehaviorViaRequestParams);
+        $state['scheme'] = EngineRequest::getScheme($enableModifyingEngineBehaviorViaRequestParams);
 
         // Set the routing state under a unified entry
         $state['routing'] = [];

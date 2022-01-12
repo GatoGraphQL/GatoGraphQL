@@ -231,7 +231,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     /**
      * Indicate if users can add URL params that modify the Engine's behavior.
      */
-    public function enableModifyingEngineBehaviorViaRequestParam(): bool
+    public function enableModifyingEngineBehaviorViaRequestParams(): bool
     {
         $envVariable = Environment::ENABLE_MODIFYING_ENGINE_BEHAVIOR_VIA_REQUEST_PARAMS;
         $defaultValue = false;
