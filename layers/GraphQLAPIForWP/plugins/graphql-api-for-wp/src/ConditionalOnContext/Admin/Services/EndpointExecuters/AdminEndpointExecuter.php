@@ -76,56 +76,10 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
 
     public function executeEndpoint(): void
     {
-        /**
-         * Print the global JS variables, required by the blocks
-         */
-        $this->printGlobalVariables();
-
         \add_action(
             'admin_init',
             [$this, 'includeJSONOutputTemplateAndExit']
         );
-    }
-
-    /**
-     * Print JS variables which are used by several blocks,
-     * before the blocks are loaded
-     */
-    protected function printGlobalVariables(): void
-    {
-        \add_action('admin_print_scripts', function (): void {
-            // Make sure the user has access to the editor
-            if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
-                $scriptTag = '<script type="text/javascript">var %s = "%s"</script>';
-                /**
-                 * The endpoint against which to execute GraphQL queries on the admin.
-                 * This GraphQL schema is modified by user preferences:
-                 * - Disabled types/directives are not in the schema
-                 * - Nested mutations enabled or not
-                 * - Schema namespaced or not
-                 * - etc
-                 */
-                \printf(
-                    $scriptTag,
-                    'GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT',
-                    $this->getEndpointHelpers()->getAdminConfigurableSchemaGraphQLEndpoint()
-                );
-                /**
-                 * The endpoint against which to execute GraphQL queries on the WordPress editor,
-                 * for Gutenberg blocks which require some field that must necessarily be enabled.
-                 * This GraphQL schema is not modified by user preferences:
-                 * - All types/directives are always in the schema
-                 * - The "admin" fields are in the schema
-                 * - Nested mutations enabled, without removing the redundant fields in the Root
-                 * - No namespacing
-                 */
-                \printf(
-                    $scriptTag,
-                    'GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT',
-                    $this->getEndpointHelpers()->getAdminFixedSchemaGraphQLEndpoint()
-                );
-            }
-        });
     }
 
     /**

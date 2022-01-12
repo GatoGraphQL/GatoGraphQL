@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\App;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use WP_Block_Editor_Context;
 use WP_Post;
@@ -28,6 +29,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?CPTUtils $cptUtils = null;
     private ?PluginMenu $pluginMenu = null;
+    private ?EndpointHelpers $endpointHelpers = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -69,6 +71,15 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     {
         return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
     }
+    final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
+    final protected function getEndpointHelpers(): EndpointHelpers
+    {
+        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+    }
+
     /**
      * Add the hook to initialize the different post types
      */
@@ -106,6 +117,13 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 2
             );
         }
+        /**
+         * Print the global JS variables, required by the blocks
+         */
+        \add_action(
+            'admin_print_scripts',
+            [$this, 'printAdminGraphQLEndpointVariables']
+        );
 
         /**
          * Add the excerpt, which is the description of the
@@ -174,6 +192,47 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 2
             );
         }
+    }
+
+    /**
+     * Print JS variables which are used by several blocks,
+     * before the blocks are loaded
+     */
+    public function printAdminGraphQLEndpointVariables(): void
+    {
+        // Make sure the user has access to the editor
+        if (!$this->getUserAuthorization()->canAccessSchemaEditor()) {
+            return;
+        }
+
+        $scriptTag = '<script type="text/javascript">var %s = "%s"</script>';
+        /**
+         * The endpoint against which to execute GraphQL queries on the admin.
+         * This GraphQL schema is modified by user preferences:
+         * - Disabled types/directives are not in the schema
+         * - Nested mutations enabled or not
+         * - Schema namespaced or not
+         * - etc
+         */
+        \printf(
+            $scriptTag,
+            'GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT',
+            $this->getEndpointHelpers()->getAdminConfigurableSchemaGraphQLEndpoint()
+        );
+        /**
+         * The endpoint against which to execute GraphQL queries on the WordPress editor,
+         * for Gutenberg blocks which require some field that must necessarily be enabled.
+         * This GraphQL schema is not modified by user preferences:
+         * - All types/directives are always in the schema
+         * - The "admin" fields are in the schema
+         * - Nested mutations enabled, without removing the redundant fields in the Root
+         * - No namespacing
+         */
+        \printf(
+            $scriptTag,
+            'GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT',
+            $this->getEndpointHelpers()->getAdminFixedSchemaGraphQLEndpoint()
+        );
     }
 
     public function getEnablingModule(): ?string
