@@ -16,7 +16,7 @@ class GraphQLQueryPayloadRetriever
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             return null;
         }
-        
+
         // Attempt to get the query from the body, following the GraphQL syntax
         if (isset($_SERVER['CONTENT_TYPE']) && $_SERVER['CONTENT_TYPE'] === 'application/json') {
             $rawBody = file_get_contents('php://input');
