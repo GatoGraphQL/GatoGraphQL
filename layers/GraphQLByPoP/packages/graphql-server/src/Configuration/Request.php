@@ -24,18 +24,21 @@ class Request
             return null;
         }
 
-        if (isset($_REQUEST[Params::MUTATION_SCHEME])) {
-            $scheme = $_REQUEST[Params::MUTATION_SCHEME];
-            $schemes = [
-                MutationSchemes::STANDARD,
-                MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
-                MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
-            ];
-            if (in_array($scheme, $schemes)) {
-                return $scheme;
-            }
+        $scheme = $_REQUEST[Params::MUTATION_SCHEME] ?? null;
+        if ($scheme === null) {
+            return null;
         }
-        return null;
+
+        $schemes = [
+            MutationSchemes::STANDARD,
+            MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
+            MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
+        ];
+        if (!in_array($scheme, $schemes)) {
+            return null;
+        }
+        
+        return $scheme;
     }
 
     public static function enableGraphQLIntrospection(): ?bool
