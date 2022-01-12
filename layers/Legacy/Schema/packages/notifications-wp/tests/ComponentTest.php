@@ -2,17 +2,8 @@
 
 namespace PoPSchema\NotificationsWP;
 
-use PHPUnit\Framework\TestCase;
+use PoP\Engine\AbstractComponentTest;
 
-class ComponentTest extends TestCase
+class ComponentTest extends AbstractComponentTest
 {
-    /**
-     * The component must have some dependency (only the root has not)
-     */
-    public function testHasDependedComponentClasses(): void
-    {
-        $this->assertNotEmpty(
-            Component::getDependedComponentClasses()
-        );
-    }
 }

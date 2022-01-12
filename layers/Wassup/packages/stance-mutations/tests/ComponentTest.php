@@ -3,19 +3,11 @@
 namespace PoPSitesWassup\StanceMutations;
 
 use PHPUnit\Framework\TestCase;
+use PoP\Engine\AbstractComponentTest;
 
 /**
  * Made abstract to disable the test
  */
-abstract class ComponentTest extends TestCase
+abstract class ComponentTest extends AbstractComponentTest
 {
-    // /**
-    //  * The component must have some dependency (only the root has not)
-    //  */
-    // public function testHasDependedComponentClasses(): void
-    // {
-    //     $this->assertNotEmpty(
-    //         \PoP\Root\App::getComponent(Component::class)->getDependedComponentClasses()
-    //     );
-    // }
 }
