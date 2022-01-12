@@ -26,5 +26,4 @@ class Params
     public const VERSION_CONSTRAINT = 'versionConstraints';
     public const VERSION_CONSTRAINT_FOR_FIELDS = 'fieldVersionConstraints';
     public const VERSION_CONSTRAINT_FOR_DIRECTIVES = 'directiveVersionConstraints';
-    
 }
