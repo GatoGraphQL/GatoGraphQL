@@ -14,7 +14,7 @@ use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuItemObjectTypeResolver;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

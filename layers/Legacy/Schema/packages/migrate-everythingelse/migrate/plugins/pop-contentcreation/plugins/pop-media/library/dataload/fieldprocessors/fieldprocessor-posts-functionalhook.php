@@ -25,7 +25,7 @@ class GD_ContentCreation_Media_DataLoad_ObjectTypeFieldResolver_FunctionalPosts 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-			'featuredImageAttrs' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver::class,
+			'featuredImageAttrs' => \PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
