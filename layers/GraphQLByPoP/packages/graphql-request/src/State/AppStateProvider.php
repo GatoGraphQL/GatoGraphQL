@@ -37,7 +37,7 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         $state['graphql-operation-name'] = null;
         $state['graphql-operation-type'] = null;
-        $state['standard-graphql'] = false;
+        $state['standard-graphql'] = true;
     }
 
     public function consolidate(array &$state): void
