@@ -29,20 +29,26 @@ class AppStateManager
     {
         $this->state = [];
         $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
+        $appStateProviders = $appStateProviderRegistry->getEnabledAppStateProviders();
 
         // First pass: initialize
-        foreach ($appStateProviderRegistry->getEnabledAppStateProviders() as $appStateProvider) {
+        foreach ($appStateProviders as $appStateProvider) {
             $appStateProvider->initialize($this->state);
         }
 
         // Second pass: consolidate
-        foreach ($appStateProviderRegistry->getEnabledAppStateProviders() as $appStateProvider) {
+        foreach ($appStateProviders as $appStateProvider) {
             $appStateProvider->consolidate($this->state);
         }
 
-        // Final pass: augment
-        foreach ($appStateProviderRegistry->getEnabledAppStateProviders() as $appStateProvider) {
+        // Third pass: augment
+        foreach ($appStateProviders as $appStateProvider) {
             $appStateProvider->augment($this->state);
+        }
+
+        // Final pass: compute
+        foreach ($appStateProviders as $appStateProvider) {
+            $appStateProvider->compute($this->state);
         }
     }
 

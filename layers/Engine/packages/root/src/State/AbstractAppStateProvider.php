@@ -23,4 +23,8 @@ abstract class AbstractAppStateProvider implements AppStateProviderInterface
     public function augment(array &$state): void
     {
     }
+
+    public function compute(array &$state): void
+    {
+    }
 }

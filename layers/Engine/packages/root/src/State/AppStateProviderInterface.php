@@ -23,10 +23,17 @@ interface AppStateProviderInterface extends ServiceInterface
     public function consolidate(array &$state): void;
 
     /**
+     * Further modify the properties
+     *
+     * @param array<string,mixed> $state
+     */
+    public function augment(array &$state): void;
+
+    /**
      * Once all properties have been set,
      * have a final pass add derivative properties
      *
      * @param array<string,mixed> $state
      */
-    public function augment(array &$state): void;
+    public function compute(array &$state): void;
 }
