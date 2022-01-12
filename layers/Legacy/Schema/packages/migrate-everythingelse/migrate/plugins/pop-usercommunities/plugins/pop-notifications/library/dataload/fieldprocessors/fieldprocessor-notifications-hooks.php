@@ -133,7 +133,6 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
         array $options = []
     ): mixed {
         $notification = $object;
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
@@ -226,7 +225,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
 
                     case URE_AAL_POP_ACTION_USER_UPDATEDUSERMEMBERSHIP:
                         // Change the message depending if the logged in user is the object of this action
-                        $recipient = ($vars['global-userstate']['current-user-id'] == $notification->object_id) ? TranslationAPIFacade::getInstance()->__('your', 'ure-pop') : sprintf('<strong>%s</strong>’s', $cmsengineapi->getUserDisplayName($notification->object_id));
+                        $recipient = (\PoP\Root\App::getState('current-user-id') == $notification->object_id) ? TranslationAPIFacade::getInstance()->__('your', 'ure-pop') : sprintf('<strong>%s</strong>’s', $cmsengineapi->getUserDisplayName($notification->object_id));
                         return sprintf(
                             TranslationAPIFacade::getInstance()->__('<strong>%s</strong> has updated %s membership settings:', 'ure-pop'),
                             $userTypeAPI->getUserDisplayName($notification->user_id),

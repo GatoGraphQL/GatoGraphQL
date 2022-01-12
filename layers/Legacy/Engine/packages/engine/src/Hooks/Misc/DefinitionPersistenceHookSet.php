@@ -6,7 +6,7 @@ namespace PoP\Engine\Hooks\Misc;
 
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 use PoP\Engine\Environment;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 
 class DefinitionPersistenceHookSet extends AbstractHookSet
 {

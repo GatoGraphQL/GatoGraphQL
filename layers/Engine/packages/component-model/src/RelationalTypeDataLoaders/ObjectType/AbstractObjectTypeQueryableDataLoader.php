@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType;
 
+use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
@@ -36,14 +37,14 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
     {
         return $this->getHooksAPI()->applyFilters(
             'GD_Dataloader_List:query:pagenumber',
-            $query_args[Params::PAGE_NUMBER]
+            $query_args[PaginationParams::PAGE_NUMBER]
         );
     }
     protected function getLimitParam($query_args)
     {
         return $this->getHooksAPI()->applyFilters(
             'GD_Dataloader_List:query:limit',
-            $query_args[Params::LIMIT]
+            $query_args[PaginationParams::LIMIT]
         );
     }
 

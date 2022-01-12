@@ -7,7 +7,6 @@ namespace PoPSchema\CommentMutations\ConditionalOnComponent\Users\SchemaHooks;
 use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\BasicService\AbstractHookSet;
 use PoPSchema\CommentMutations\Component;
 use PoPSchema\CommentMutations\ComponentConfiguration;
@@ -51,14 +50,13 @@ class ObjectTypeHookSet extends AbstractHookSet
             return $mutationFieldArgs;
         }
 
-        $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if (
             !$componentConfiguration->mustUserBeLoggedInToAddComment()
-            && $vars['global-userstate']['is-user-logged-in']
+            && App::getState('is-user-logged-in')
         ) {
-            $userID = $vars['global-userstate']['current-user-id'];
+            $userID = App::getState('current-user-id');
             if (!isset($mutationFieldArgs[MutationInputProperties::AUTHOR_NAME])) {
                 $mutationFieldArgs[MutationInputProperties::AUTHOR_NAME] = $this->getUserTypeAPI()->getUserDisplayName($userID);
             }

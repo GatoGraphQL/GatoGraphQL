@@ -24,6 +24,9 @@ class Component extends AbstractComponent
             \PoP\Definitions\Component::class,
             \PoP\FieldQuery\Component::class,
             \PoP\GraphQLParser\Component::class,
+            \PoP\LooseContracts\Component::class,
+            \PoP\ModuleRouting\Component::class,
+            \PoP\Routing\Component::class,
         ];
     }
 
@@ -52,11 +55,6 @@ class Component extends AbstractComponent
     public function beforeBoot(): void
     {
         parent::beforeBoot();
-
-        // Initialize the Component Configuration
-        /** @var ComponentConfiguration */
-        $componentConfiguration = $this->getConfiguration();
-        $componentConfiguration->init();
 
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
         $attachExtensionService->attachExtensions(ApplicationEvents::BEFORE_BOOT);

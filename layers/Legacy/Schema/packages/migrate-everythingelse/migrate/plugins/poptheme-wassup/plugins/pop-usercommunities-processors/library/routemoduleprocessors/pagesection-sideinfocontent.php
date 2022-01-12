@@ -19,7 +19,7 @@ class PoPTheme_Wassup_UserCommunities_Module_SideInfoContentPageSectionRouteModu
             $ret[UserRouteNatures::USER][$route][] = [
                 'module' => $module,
                 'conditions' => [
-                    'routing-state' => [
+                    'routing' => [
                         'queried-object-is-community' => true,
                     ],
                 ],

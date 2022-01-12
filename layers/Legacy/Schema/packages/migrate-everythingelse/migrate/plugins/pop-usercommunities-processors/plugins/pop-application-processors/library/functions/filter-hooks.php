@@ -98,11 +98,10 @@ function gdUreAddFiltercomponentCommunityusers($filterinputs, array $module)
     if (in_array($module, [
         [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORCONTENT],
     ])) {
-        $vars = ApplicationState::getVars();
-        $author = $vars['routing-state']['queried-object-id'];
+        $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Check if the user is showing the community. If showing user, then no need for this
-        if (gdUreIsCommunity($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
+        if (gdUreIsCommunity($author) && \PoP\Root\App::getState('source') == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
 
             // Add it after the search
             array_splice(
@@ -127,11 +126,10 @@ function gdUreAddSimpleFiltercomponentCommunityusers($filterinputs, array $modul
     if (in_array($module, [
         [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],
     ])) {
-        $vars = ApplicationState::getVars();
-        $author = $vars['routing-state']['queried-object-id'];
+        $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Check if the user is showing the community. If showing user, then no need for this
-        if (gdUreIsCommunity($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
+        if (gdUreIsCommunity($author) && \PoP\Root\App::getState('source') == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
 
             // Add it after the search
             array_splice(

@@ -20,8 +20,7 @@ class PoP_ContentCreation_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
 
     public function getMessage($message, $notification)
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = \PoP\Root\App::getState('current-user-id');
 
         // If the user has been tagged in this post, this action has higher priority than creating a post, then show that message
         $taggedusers_ids = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($notification->object_id, GD_METAKEY_POST_TAGGEDUSERS);

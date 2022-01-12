@@ -12,7 +12,6 @@ use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Engine\Engine\Engine as UpstreamEngine;
@@ -28,8 +27,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         parent::processAndGenerateData();
 
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_CONFIGURATION, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_CONFIGURATION, App::getState('strata'))) {
             return;
         }
 
@@ -37,7 +35,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         $module = $this->getEntryModule();
 
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
-        $dataoutputitems = $vars['dataoutputitems'];
+        $dataoutputitems = App::getState('dataoutputitems');
 
         $data = [];
         if (in_array(DataOutputItems::MODULESETTINGS, $dataoutputitems)) {
@@ -66,9 +64,8 @@ class Engine extends UpstreamEngine implements EngineInterface
         }
 
         // From the state we know if to process static/staful content or both
-        $vars = ApplicationState::getVars();
-        $datasources = $vars['datasources'];
-        $dataoutputmode = $vars['dataoutputmode'];
+        $datasources = App::getState('datasources');
+        $dataoutputmode = App::getState('dataoutputmode');
 
         // First check if there's a cache stored
         $immutable_settings = $mutableonmodel_settings = null;
@@ -149,9 +146,11 @@ class Engine extends UpstreamEngine implements EngineInterface
     {
         $meta = parent::getSiteMeta();
         if ($this->addSiteMeta()) {
-            $vars = ApplicationState::getVars();
-            if ($vars['stratum'] ?? null) {
-                $meta[Params::STRATUM] = $vars['stratum'];
+            if (App::getState('stratum')) {
+                $meta[Params::STRATUM] = App::getState('stratum');
+            }
+            if (App::getState('format')) {
+                $meta[Params::SETTINGSFORMAT] = App::getState('format');
             }
         }
         return $this->getHooksAPI()->applyFilters(

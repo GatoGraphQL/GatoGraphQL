@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\ComponentModel\State\ApplicationState;
 
 abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResolver
 {
@@ -28,8 +28,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     protected function validateCaptcha(&$errors, &$form_data): void
     {
         // Validate the captcha
-        $vars = ApplicationState::getVars();
-        if (!\PoP_FormUtils::useLoggedinuserData() || !$vars['global-userstate']['is-user-logged-in']) {
+        if (!\PoP_FormUtils::useLoggedinuserData() || !App::getState('is-user-logged-in')) {
             $captcha = $form_data['captcha'];
 
             $captcha_validation = \GD_Captcha::validate($captcha);

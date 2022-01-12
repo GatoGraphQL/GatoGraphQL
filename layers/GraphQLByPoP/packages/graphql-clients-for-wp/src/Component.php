@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLClientsForWP;
 
-use PoP\Root\App;
-use GraphQLByPoP\GraphQLServer\Component as GraphQLServerComponent;
 use PoP\BasicService\Component\AbstractComponent;
 
 /**

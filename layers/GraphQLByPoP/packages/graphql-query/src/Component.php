@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLQuery;
 
-use PoP\Root\App;
-use PoP\GraphQLAPI\Component as GraphQLAPIComponent;
 use PoP\BasicService\Component\AbstractComponent;
 
 /**

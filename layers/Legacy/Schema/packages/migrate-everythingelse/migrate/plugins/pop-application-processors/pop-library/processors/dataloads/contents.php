@@ -32,10 +32,9 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        // $vars = ApplicationState::getVars();
         return match($module[1]) {
             // The Page Content block uses whichever is the current page
-            self::MODULE_DATALOAD_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//$vars['route'],
+            self::MODULE_DATALOAD_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//\PoP\Root\App::getState('route'),
             self::MODULE_DATALOAD_AUTHOR_CONTENT => POP_ROUTE_DESCRIPTION,
             self::MODULE_DATALOAD_TAG_CONTENT => POP_ROUTE_DESCRIPTION,
             default => parent::getRelevantRoute($module, $props),
@@ -46,7 +45,6 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     {
         $ret = parent::getInnerSubmodules($module);
 
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:
@@ -71,7 +69,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
             case self::MODULE_DATALOAD_SINGLE_CONTENT:
                 // Add the Sidebar on the top
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $top_sidebar = [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST];
 
                 // Allow Events Manager to change the sidebar

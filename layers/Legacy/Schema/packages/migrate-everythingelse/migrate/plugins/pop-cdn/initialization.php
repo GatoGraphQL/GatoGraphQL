@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\Facades\FileRendererFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -52,8 +53,7 @@ class PoP_CDN_Initialization
             // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
             global $pop_cdn_configfile;
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $vars = ApplicationState::getVars();
-                $cmswebplatformapi->registerScript('pop-cdn-config', $pop_cdn_configfile->getFileurl(), array(), $vars['version'], true);
+                $cmswebplatformapi->registerScript('pop-cdn-config', $pop_cdn_configfile->getFileurl(), array(), ApplicationInfoFacade::getInstance()->getVersion(), true);
                 $cmswebplatformapi->enqueueScript('pop-cdn-config');
             }
         }

@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\QueriedObject\Hooks\:
-        resource: '../src/Hooks/*'
+    PoPSchema\QueriedObject\State\:
+        resource: '../src/State/*'

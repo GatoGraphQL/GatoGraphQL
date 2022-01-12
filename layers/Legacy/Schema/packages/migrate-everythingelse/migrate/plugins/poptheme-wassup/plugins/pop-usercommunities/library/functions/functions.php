@@ -6,9 +6,8 @@ HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_PageTabPageSectio
 HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_TabPanePageSections:getModuleExtraInterceptUrls', 'gdUreAddSourceParamPagesections');
 function gdUreAddSourceParamPagesections($url)
 {
-    $vars = ApplicationState::getVars();
-    if ($vars['routing-state']['is-user']) {
-        $author = $vars['routing-state']['queried-object-id'];
+    if (\PoP\Root\App::getState(['routing', 'is-user'])) {
+        $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         return gdUreAddSourceParam($url, $author);
     }
 

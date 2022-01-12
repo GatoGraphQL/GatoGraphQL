@@ -28,8 +28,7 @@ class PoP_Application_DataloaderHooks
 
     public function maybeGetLoadinglatestPagenumber($pagenumber)
     {
-        $vars = ApplicationState::getVars();
-        if (isset($vars['loading-latest']) && $vars['loading-latest']) {
+        if (\PoP\Root\App::hasState('loading-latest') && \PoP\Root\App::getState('loading-latest')) {
             return 1;
         }
 
@@ -38,8 +37,7 @@ class PoP_Application_DataloaderHooks
 
     public function maybeGetLoadinglatestLimit($limit)
     {
-        $vars = ApplicationState::getVars();
-        if (isset($vars['loading-latest']) && $vars['loading-latest']) {
+        if (\PoP\Root\App::hasState('loading-latest') && \PoP\Root\App::getState('loading-latest')) {
             return 0;
         }
 
@@ -49,8 +47,7 @@ class PoP_Application_DataloaderHooks
     public function maybeGetLoadinglatestLimitForPost($limit)
     {
         // No-limit for posts is -1, not 0
-        $vars = ApplicationState::getVars();
-        if (isset($vars['loading-latest']) && $vars['loading-latest']) {
+        if (\PoP\Root\App::hasState('loading-latest') && \PoP\Root\App::getState('loading-latest')) {
             return -1;
         }
 
@@ -59,8 +56,7 @@ class PoP_Application_DataloaderHooks
 
     public function maybeAddLoadinglatestTimestamp($query, $query_args)
     {
-        $vars = ApplicationState::getVars();
-        if (isset($vars['loading-latest']) && $vars['loading-latest']) {
+        if (\PoP\Root\App::hasState('loading-latest') && \PoP\Root\App::getState('loading-latest')) {
             // Return the posts created after the given timestamp
             $timestamp = $query_args[GD_URLPARAM_TIMESTAMP];
             // $query['date-query'] = array(

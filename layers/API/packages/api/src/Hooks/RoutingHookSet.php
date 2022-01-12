@@ -9,7 +9,6 @@ use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\BasicService\AbstractHookSet;
 
@@ -55,8 +54,7 @@ class RoutingHookSet extends AbstractHookSet
         // The API cannot use getExtraRoutes()!!!!!
         // Because the fields can't be applied to different resources!
         // (Eg: author/leo/ and author/leo/?route=posts)
-        $vars = ApplicationState::getVars();
-        if (isset($vars['scheme']) && $vars['scheme'] == APISchemes::API) {
+        if (App::getState('scheme') === APISchemes::API) {
             return [];
         }
 

@@ -27,10 +27,9 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
 
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                return $vars['global-userstate']['current-user-id'];
+                return \PoP\Root\App::getState('current-user-id');
         }
 
         return parent::getObjectIDOrIDs($module, $props, $data_properties);

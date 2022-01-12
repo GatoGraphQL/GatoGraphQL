@@ -23,7 +23,6 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
@@ -443,7 +442,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * If this directive is tagged with a version...
              */
             $schemaDirectiveVersion = $this->getDirectiveVersion($relationalTypeResolver);
-            $vars = ApplicationState::getVars();
             /**
              * Get versionConstraint in this order:
              * 1. Passed as directive argument
@@ -453,7 +451,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $versionConstraint =
                 $directiveArgs[SchemaDefinition::VERSION_CONSTRAINT]
                 ?? $this->getVersioningService()->getVersionConstraintsForDirective($this->getDirectiveName())
-                ?? $vars['version-constraint'];
+                ?? App::getState('version-constraint');
             /**
              * If the query doesn't restrict the version, then do not process
              */

@@ -46,10 +46,9 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     }
     protected function getThumb(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $avatar = gdGetAvatar($author, GD_AVATAR_SIZE_16);
                 return array(
                     'src' => $avatar['src'],
@@ -59,7 +58,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
 
             case self::MODULE_LAYOUT_PAGETABS_PAGE:
             case self::MODULE_LAYOUT_PAGETABS_SINGLE:
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($post_thumb_id = MediaHelpers::getThumbId($post_id)) {
                     $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
                     $thumb = $mediaTypeAPI->getImageProperties($post_thumb_id, 'favicon');
@@ -99,24 +98,23 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $vars = ApplicationState::getVars();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $userTypeAPI->getUserDisplayName($author);
 
             case self::MODULE_LAYOUT_PAGETABS_ROUTE:
-                $route = $vars['route'];
+                $route = \PoP\Root\App::getState('route');
                 return RouteUtils::getRouteTitle($route);
 
             case self::MODULE_LAYOUT_PAGETABS_PAGE:
             case self::MODULE_LAYOUT_PAGETABS_SINGLE:
-                $customPostID = $vars['routing-state']['queried-object-id'];
+                $customPostID = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $customPostTypeAPI->getTitle($customPostID);
 
             case self::MODULE_LAYOUT_PAGETABS_TAG:
-                $tag_id = $vars['routing-state']['queried-object-id'];
+                $tag_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $applicationtaxonomyapi->getTagSymbolName($tag_id);
         }
 

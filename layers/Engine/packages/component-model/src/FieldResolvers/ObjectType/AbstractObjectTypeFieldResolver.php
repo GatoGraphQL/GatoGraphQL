@@ -29,7 +29,6 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -649,7 +648,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * If this field is tagged with a version...
              */
             $schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $fieldName);
-            $vars = ApplicationState::getVars();
             /**
              * Get versionConstraint in this order:
              * 1. Passed as field argument
@@ -667,7 +665,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     $objectTypeResolver->getTypeName(),
                     $fieldName
                 )
-                ?? $vars['version-constraint'];
+                ?? App::getState('version-constraint');
             /**
              * If the query doesn't restrict the version, then do not process
              */

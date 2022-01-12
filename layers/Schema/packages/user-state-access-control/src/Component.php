@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateAccessControl;
 
-use PoP\Root\App;
-use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\BasicService\Component\AbstractComponent;
 

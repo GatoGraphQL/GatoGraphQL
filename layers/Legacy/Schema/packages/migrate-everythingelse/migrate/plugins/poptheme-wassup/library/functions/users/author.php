@@ -24,15 +24,15 @@ function changeAuthorPermalinks()
 }
 
 HooksAPIFacade::getInstance()->addFilter('query_vars', 'usersQueryVars');
-function usersQueryVars($vars)
+function usersQueryVars($queryVars)
 {
 
     if ($authorBase = getAuthorBase()) {
         // add lid to the valid list of variables
         $new_vars = array($authorBase);
-        $vars = $new_vars + $vars;
+        $queryVars = $new_vars + $queryVars;
     }
-    return $vars;
+    return $queryVars;
 }
 HooksAPIFacade::getInstance()->addFilter('generate_rewrite_rules', 'userRewriteRules');
 function userRewriteRules($wp_rewrite)

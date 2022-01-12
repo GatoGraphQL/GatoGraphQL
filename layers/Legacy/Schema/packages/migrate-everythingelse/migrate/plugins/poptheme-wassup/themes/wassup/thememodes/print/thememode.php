@@ -16,8 +16,7 @@ class GD_ThemeMode_Wassup_Print extends GD_WassupThemeMode_Base
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'getSidebarOrientation'));
 
         HooksAPIFacade::getInstance()->addAction('popcms:boot', function() {
-            $vars = ApplicationState::getVars();
-            if (in_array(POP_STRATUM_WEB, $vars['strata'])) {
+            if (in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
                 HooksAPIFacade::getInstance()->addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'getPagesectionJsmethod'), 10, 2);
                 HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getTheme()->getName().':'.$this->getName(), '__return_false');
             }

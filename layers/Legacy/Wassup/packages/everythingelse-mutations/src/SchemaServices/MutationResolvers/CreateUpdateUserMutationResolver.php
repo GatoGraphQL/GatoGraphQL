@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\EditUsers\FunctionAPIFactory;
 
 class CreateUpdateUserMutationResolver extends AbstractMutationResolver
@@ -183,8 +183,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     {
         // If user is logged in => It's Update
         // Otherwise => It's Create
-        $vars = ApplicationState::getVars();
-        if ($vars['global-userstate']['is-user-logged-in']) {
+        if (App::getState('is-user-logged-in')) {
             return $this->update($form_data);
         }
 
@@ -208,8 +207,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     {
         $errors = [];
         $this->validateContent($errors, $form_data);
-        $vars = ApplicationState::getVars();
-        if ($vars['global-userstate']['is-user-logged-in']) {
+        if (App::getState('is-user-logged-in')) {
             $this->validateUpdateContent($errors, $form_data);
         } else {
             $this->validateCreateContent($errors, $form_data);

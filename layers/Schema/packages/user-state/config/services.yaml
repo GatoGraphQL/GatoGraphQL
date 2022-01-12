@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoPSchema\UserState\State\:
+        resource: '../src/State/*'
+
     PoPSchema\UserState\Hooks\:
         resource: '../src/Hooks/*'
 

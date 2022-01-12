@@ -6,10 +6,9 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use PoP\ComponentModel\State\ApplicationState;
 use WP_Post;
 
-abstract class AbstractViewSourceEndpointExecuter extends AbstractEndpointExecuter
+abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExecuter
 {
     protected function getView(): string
     {
@@ -30,8 +29,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractEndpointExecut
      */
     public function maybeGetGraphQLQuerySourceContent(string $content): string
     {
-        $vars = ApplicationState::getVars();
-        $customPost = $vars['routing-state']['queried-object'];
+        $customPost = \PoP\Root\App::getState(['routing', 'queried-object']);
         // Make sure there is a post (eg: it has not been deleted)
         if ($customPost !== null) {
             return $this->getGraphQLQuerySourceContent($content, $customPost);

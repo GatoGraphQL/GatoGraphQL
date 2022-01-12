@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoPSchema\Categories\State\:
+        resource: '../src/State/*'
+
     PoPSchema\Categories\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
@@ -12,6 +15,3 @@ services:
 
     PoPSchema\Categories\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'
-
-    PoPSchema\Categories\Hooks\:
-        resource: '../src/Hooks/*'

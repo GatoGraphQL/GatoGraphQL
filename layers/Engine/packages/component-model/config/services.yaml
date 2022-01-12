@@ -45,9 +45,6 @@ services:
     PoP\ComponentModel\ModelInstance\ModelInstanceInterface:
         class: \PoP\ComponentModel\ModelInstance\ModelInstance
 
-    PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface:
-        class: \PoP\ComponentModel\MutationResolution\MutationResolutionManager
-
     PoP\ComponentModel\Info\ApplicationInfoInterface:
         class: \PoP\ComponentModel\Info\ApplicationInfo
 
@@ -69,14 +66,14 @@ services:
     PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\ApplicationStateHelperService
 
+    PoP\ComponentModel\State\:
+        resource: '../src/State/*'
+
     PoP\ComponentModel\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
 
     PoP\ComponentModel\FormInputs\:
         resource: '../src/FormInputs/*'
-
-    PoP\ComponentModel\Hooks\:
-        resource: '../src/Hooks/*'
 
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'

@@ -8,7 +8,6 @@ use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CommentMutations\Component;
 use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
@@ -106,17 +105,16 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         /**
          * Override with the user's properties
          */
-        $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
-            $userID = $vars['global-userstate']['current-user-id'];
+            $userID = App::getState('current-user-id');
             $comment_data['userID'] = $userID;
             $comment_data['author'] = $this->getUserTypeAPI()->getUserDisplayName($userID);
             $comment_data['authorEmail'] = $this->getUserTypeAPI()->getUserEmail($userID);
             $comment_data['authorURL'] = $this->getUserTypeAPI()->getUserWebsiteUrl($userID);
         } else {
-            if ($userID = $vars['global-userstate']['current-user-id'] ?? null) {
+            if ($userID = App::getState('current-user-id')) {
                 $comment_data['userID'] = $userID;
             }
             $comment_data['author'] = $form_data[MutationInputProperties::AUTHOR_NAME] ?? null;

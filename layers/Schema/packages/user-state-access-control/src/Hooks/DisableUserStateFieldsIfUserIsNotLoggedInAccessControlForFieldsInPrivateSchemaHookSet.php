@@ -10,7 +10,6 @@ use PoP\AccessControl\ComponentConfiguration;
 use PoP\AccessControl\Hooks\AbstractAccessControlForFieldsHookSet;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\UserState\FieldResolvers\ObjectType\AbstractUserStateObjectTypeFieldResolver;
@@ -23,8 +22,7 @@ class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSc
      */
     protected function enabled(): bool
     {
-        $vars = ApplicationState::getVars();
-        $isUserLoggedIn = $vars['global-userstate']['is-user-logged-in'];
+        $isUserLoggedIn = App::getState('is-user-logged-in');
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->usePrivateSchemaMode() && !$isUserLoggedIn;

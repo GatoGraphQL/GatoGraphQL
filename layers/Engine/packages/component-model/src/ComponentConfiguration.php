@@ -6,93 +6,16 @@ namespace PoP\ComponentModel;
 
 use PoP\BasicService\Component\AbstractComponentConfiguration;
 use PoP\BasicService\Component\EnvironmentValueHelpers;
-use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Tokens\Param;
 use PoP\Root\Environment as RootEnvironment;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
-    /**
-     * Map with the configuration passed by params
-     *
-     * @var array
-     */
-    private array $overrideConfiguration = [];
-
-    /**
-     * Initialize component configuration
-     */
-    public function init(): void
-    {
-        // Allow to override the configuration with values passed in the query string:
-        // "config": comma-separated string with all fields with value "true"
-        // Whatever fields are not there, will be considered "false"
-        $this->overrideConfiguration = array();
-        if ($this->enableConfigByParams()) {
-            $this->overrideConfiguration = isset($_REQUEST[Params::CONFIG]) ? explode(Param::VALUE_SEPARATOR, $_REQUEST[Params::CONFIG]) : array();
-        }
-    }
-
-    /**
-     * Indicate if the configuration is overriden by params
-     */
-    public function doingOverrideConfiguration(): bool
-    {
-        return !empty($this->overrideConfiguration);
-    }
-
-    /**
-     * Obtain the override configuration for a key, with possible values being only
-     * `true` or `false`, or `null` if that key is not set
-     *
-     * @param string $key the key to get the value
-     */
-    public function getOverrideConfiguration(string $key): ?bool
-    {
-        // If no values where defined in the configuration, then skip it completely
-        if (empty($this->overrideConfiguration)) {
-            return null;
-        }
-
-        // Check if the key has been given value "true"
-        if (in_array($key, $this->overrideConfiguration)) {
-            return true;
-        }
-
-        // Otherwise, it has value "false"
-        return false;
-    }
-
-    /**
-     * Access layer to the environment variable, enabling to override its value
-     * Indicate if the configuration can be set through params
-     */
-    public function enableConfigByParams(): bool
-    {
-        $envVariable = Environment::ENABLE_CONFIG_BY_PARAMS;
-        $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     /**
      * Access layer to the environment variable, enabling to override its value
      * Indicate if to use the cache
      */
     public function useComponentModelCache(): bool
     {
-        // If we are overriding the configuration, then do NOT use the cache
-        // Otherwise, parameters from the config have need to be added to $vars, however they can't,
-        // since we want the $vars model_instance_id to not change when testing with the "config" param
-        if ($this->doingOverrideConfiguration()) {
-            return false;
-        }
-
         $envVariable = Environment::USE_COMPONENT_MODEL_CACHE;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];

@@ -54,7 +54,6 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     }
     public function getHref(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {
@@ -69,7 +68,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 return RouteUtils::getRouteURL($route);
 
             case self::MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 // Allow URE to add the ContentSource
                 return HooksAPIFacade::getInstance()->applyFilters(
@@ -79,7 +78,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 );
 
             case self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
-                $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                 return RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS);
         }
 

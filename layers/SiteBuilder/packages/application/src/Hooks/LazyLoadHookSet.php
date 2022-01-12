@@ -9,7 +9,7 @@ use PoP\Application\ModuleFilters\Lazy;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Constants\Targets;
+use PoP\ConfigurationComponentModel\Constants\Targets;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;

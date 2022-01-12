@@ -31,7 +31,7 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
     return array_merge(
         $fetchtarget_settings,
         array(
-            // \PoP\ComponentModel\Constants\Targets::MAIN => POP_MODULEID_PAGESECTIONCONTAINERID_BODY, // Since creating targets "body", "hover" and "hole", no need for this one anymore, since this case will not happen
+            // \PoP\ConfigurationComponentModel\Constants\Targets::MAIN => POP_MODULEID_PAGESECTIONCONTAINERID_BODY, // Since creating targets "body", "hover" and "hole", no need for this one anymore, since this case will not happen
             POP_TARGET_BODY => POP_MODULEID_PAGESECTIONCONTAINERID_BODY,
             POP_TARGET_HOVER => POP_MODULEID_PAGESECTIONCONTAINERID_HOVER,
             POP_TARGET_HOLE => POP_MODULEID_PAGESECTIONCONTAINERID_HOLE,

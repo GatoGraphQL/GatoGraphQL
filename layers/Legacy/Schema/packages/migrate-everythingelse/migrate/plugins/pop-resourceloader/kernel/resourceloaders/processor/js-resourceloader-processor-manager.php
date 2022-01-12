@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -204,8 +205,7 @@ class PoP_JSResourceLoaderProcessorManager {
 		$bundlescripts_properties = array();
 		if ($loading_bundle) {
 
-			$vars = ApplicationState::getVars();
-			$version = $vars['version'];
+			$version = ApplicationInfoFacade::getInstance()->getVersion();
 			$file = $this->getFile($enqueuefile_type, $acrossThememodes);
 
 			// Enqueue the bundleGroups

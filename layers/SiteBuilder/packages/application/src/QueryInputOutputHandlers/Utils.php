@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Application\QueryInputOutputHandlers;
 
-use PoP\ComponentModel\Constants\Params;
+use PoP\Root\App;
+use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\State\ApplicationState;
 
 class Utils
 {
@@ -18,8 +18,7 @@ class Utils
         }
 
         // Do not announce to stop loading when doing loadLatest
-        $vars = ApplicationState::getVars();
-        if (isset($vars['loading-latest']) && $vars['loading-latest']) {
+        if (App::hasState('loading-latest') && App::getState('loading-latest')) {
             return false;
         }
 
@@ -27,7 +26,7 @@ class Utils
 
         // Keep loading? (If limit = 0 or -1, this will always return false => keep fetching!)
         // If limit = 0 or -1, then it brought already all the results, so stop fetching
-        $limit = $query_args[Params::LIMIT];
+        $limit = $query_args[PaginationParams::LIMIT];
         if ($data_properties[GD_DATALOAD_QUERYHANDLERPROPERTY_LIST_STOPFETCHING] || $limit <= 0) {
             return true;
         }

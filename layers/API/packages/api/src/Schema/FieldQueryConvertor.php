@@ -561,7 +561,6 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
             Params::ACTION_PATH,
             Params::DATA_OUTPUT_ITEMS,
             Params::DATA_SOURCE,
-            Params::TARGET,
         ];
     }
 

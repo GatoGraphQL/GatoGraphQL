@@ -67,7 +67,7 @@ EOF;
             ]);
             foreach ($postObjects as $postObject) {
                 $foundPostListIDs[] = $postObject->ID;
-                $postDescription = $this->getCptUtils()->getCustomPostDescription($postObject);
+                $postDescription = $this->getCPTUtils()->getCustomPostDescription($postObject);
                 $permalink = \get_permalink($postObject->ID);
                 $postContentElems[] = ($permalink ?
                     \sprintf(

@@ -11,14 +11,13 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
         parent::prepareQueryArgs($query_args);
 
         if (!isset($query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID])) {
-            $vars = ApplicationState::getVars();
-
+            
             // By default, select the global $post ID;
-            $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID] = $vars['routing-state']['queried-object-id'];
+            $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID] = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         }
 
         // // Limit: by default, show all comments
-        // $query_args[\PoP\ComponentModel\Constants\Params::LIMIT] = $query_args[\PoP\ComponentModel\Constants\Params::LIMIT] ?? '';
+        // $query_args[\PoP\ComponentModel\Constants\PaginationParams::LIMIT] = $query_args[\PoP\ComponentModel\Constants\PaginationParams::LIMIT] ?? '';
 
         // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
         $query_args['order'] =  'ASC';

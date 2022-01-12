@@ -2,6 +2,7 @@
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\App;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
 /**
@@ -34,8 +35,7 @@ if (class_exists("EM_Gateway_Offline")) {
         public function emWpLocalizeScript($em_localized_js)
         {
             $cmsService = CMSServiceFacade::getInstance();
-            $vars = ApplicationState::getVars();
-            if ($vars['global-userstate']['is-user-logged-in'] && $cmsService->getOption('dbem_rsvp_enabled')) {
+            if (App::getState('is-user-logged-in') && $cmsService->getOption('dbem_rsvp_enabled')) {
                 $em_localized_js[$this->gateway . '_confirm'] = TranslationAPIFacade::getInstance()->__('Be aware that by approving a booking awaiting payment, a full payment transaction will be registered against this booking, meaning that it will be considered as paid.', 'dbem');
             }
             return $em_localized_js;

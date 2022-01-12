@@ -64,7 +64,7 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionRouteModulePro
         $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
             'module' => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR],
             'conditions' => [
-                'routing-state' => [
+                'routing' => [
                     'queried-object-post-type' => POP_USERSTANCE_POSTTYPE_USERSTANCE,
                 ],
             ],

@@ -12,11 +12,10 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
     {
         $ret = parent::getDataloadSource($module, $props);
 
-        $vars = ApplicationState::getVars();
-        // if ($vars['nature'] == $this->getNature($module)) {
-        if ($vars['nature'] == UserRouteNatures::USER) {
+        // if (\PoP\Root\App::getState('nature') == $this->getNature($module)) {
+        if (\PoP\Root\App::getState('nature') == UserRouteNatures::USER) {
             // Allow URE to add the Organization/Community content source attribute
-            $author = $vars['routing-state']['queried-object-id'];
+            $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $ret = HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomSectionBlocks:getDataloadSource:author', $ret, $author);
         }
         // }

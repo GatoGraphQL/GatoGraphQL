@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\Root\App;
 use PoPSchema\UserMeta\Utils;
 
 class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommendCustomPostMutationResolver
@@ -13,8 +13,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
     {
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
-            $vars = ApplicationState::getVars();
-            $user_id = $vars['global-userstate']['current-user-id'];
+            $user_id = App::getState('current-user-id');
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user does currently follow that user
@@ -47,8 +46,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
 
     protected function update($form_data): string | int
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = App::getState('current-user-id');
         $target_id = $form_data['target_id'];
 
         // Update value

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\IFTTT;
 
+use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\BasicService\BasicServiceTrait;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
@@ -57,8 +57,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
     public function maybeAppendAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes = false): array
     {
         // With Nested Mutations there's no need to duplicate Root entries
-        $vars = ApplicationState::getVars();
-        if ($vars['nested-mutations-enabled']) {
+        if (App::getState('nested-mutations-enabled')) {
             return $fieldEntries;
         }
 

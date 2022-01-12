@@ -36,13 +36,13 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
     $jqueryConstants['URLPARAM_OUTPUT'] = \PoP\ComponentModel\Constants\Params::OUTPUT;
     $jqueryConstants['URLPARAM_OUTPUT_JSON'] = \PoP\ComponentModel\Constants\Outputs::JSON;
 
-    $jqueryConstants['URLPARAM_PAGED'] = \PoP\ComponentModel\Constants\Params::PAGE_NUMBER;
+    $jqueryConstants['URLPARAM_PAGED'] = \PoP\ComponentModel\Constants\PaginationParams::PAGE_NUMBER;
     $jqueryConstants['URLPARAM_OPERATION_APPEND'] = GD_URLPARAM_OPERATION_APPEND;
     $jqueryConstants['URLPARAM_OPERATION_PREPEND'] = GD_URLPARAM_OPERATION_PREPEND;
     $jqueryConstants['URLPARAM_OPERATION_REPLACE'] = GD_URLPARAM_OPERATION_REPLACE;
     $jqueryConstants['URLPARAM_OPERATION_REPLACEINLINE'] = GD_URLPARAM_OPERATION_REPLACEINLINE;
 
-    $jqueryConstants['URLPARAM_FORMAT'] = \PoP\ComponentModel\Constants\Params::FORMAT;
+    $jqueryConstants['URLPARAM_FORMAT'] = \PoP\ConfigurationComponentModel\Constants\Params::FORMAT;
     $jqueryConstants['URLPARAM_ROUTE'] = URLParams::ROUTE;
 
     $jqueryConstants['URLPARAM_DATAOUTPUTITEMS'] = \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS;
@@ -52,8 +52,8 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
     $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_DATABASES'] = \PoP\ComponentModel\Constants\DataOutputItems::DATABASES;
     $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_SESSION'] = \PoP\ComponentModel\Constants\DataOutputItems::SESSION;
 
-    $jqueryConstants['URLPARAM_TARGET'] = \PoP\ComponentModel\Constants\Params::TARGET;
-    $jqueryConstants['URLPARAM_TARGET_MAIN'] = \PoP\ComponentModel\Constants\Targets::MAIN;
+    $jqueryConstants['URLPARAM_TARGET'] = \PoP\ConfigurationComponentModel\Constants\Params::TARGET;
+    $jqueryConstants['URLPARAM_TARGET_MAIN'] = \PoP\ConfigurationComponentModel\Constants\Targets::MAIN;
     $jqueryConstants['URLPARAM_TARGET_FULL'] = GD_URLPARAM_TARGET_FULL;
     $jqueryConstants['URLPARAM_TARGET_PRINT'] = GD_URLPARAM_TARGET_PRINT;
     $jqueryConstants['URLPARAM_TARGET_SOCIALMEDIA'] = GD_URLPARAM_TARGET_SOCIALMEDIA;

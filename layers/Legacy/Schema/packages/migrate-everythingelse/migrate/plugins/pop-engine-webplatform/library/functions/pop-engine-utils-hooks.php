@@ -6,6 +6,7 @@ use PoP\Routing\RouteNatures;
 class PoP_WebPlatformEngine_UtilsHooks
 {
     /**
+     * @todo Migrate to AppStateProvider
      * @param array<array> $vars_in_array
      */
     public static function addVars(array $vars_in_array): void

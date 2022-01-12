@@ -7,5 +7,8 @@ services:
     PoP\API\Schema\FieldQueryConvertorInterface:
         class: \PoP\SiteBuilderAPI\Schema\FieldQueryConvertor
 
+    PoP\SiteBuilderAPI\State\:
+        resource: '../src/State/*'
+
     PoP\SiteBuilderAPI\Hooks\:
         resource: '../src/Hooks/*'

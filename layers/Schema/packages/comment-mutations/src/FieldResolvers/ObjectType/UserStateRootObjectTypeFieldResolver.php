@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 
+use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
@@ -203,11 +203,10 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $vars = ApplicationState::getVars();
         $query = array_merge(
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
             [
-                'authors' => [$vars['global-userstate']['current-user-id']],
+                'authors' => [App::getState('current-user-id')],
             ]
         );
         switch ($fieldName) {

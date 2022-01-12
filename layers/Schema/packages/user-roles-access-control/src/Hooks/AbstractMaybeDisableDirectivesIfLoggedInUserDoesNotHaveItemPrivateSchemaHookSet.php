@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl\Hooks;
 
+use PoP\Root\App;
 use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet;
-use PoP\ComponentModel\State\ApplicationState;
 
 abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivateSchemaHookSet extends AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet
 {
@@ -36,8 +36,7 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
         if ($this->directiveResolverClasses === null) {
             $entries = $this->getEntries();
             // If the user is not logged in, then it's all directives
-            $vars = ApplicationState::getVars();
-            if (!$vars['global-userstate']['is-user-logged-in']) {
+            if (!App::getState('is-user-logged-in')) {
                 $this->directiveResolverClasses = array_values(array_unique(array_map(
                     fn (array $entry) => $entry[0],
                     $entries

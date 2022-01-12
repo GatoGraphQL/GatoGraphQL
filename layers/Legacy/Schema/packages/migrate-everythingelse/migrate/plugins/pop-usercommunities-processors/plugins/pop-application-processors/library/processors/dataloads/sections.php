@@ -181,7 +181,6 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
 
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
              // Members of the Community
             case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
@@ -190,7 +189,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // If the profile is not a community, then return no users at all (Eg: a Community opting out from having members)
                 if (gdUreIsCommunity($author)) {
                     URE_CommunityUtils::addDataloadqueryargsCommunitymembers($ret, $author);
@@ -208,8 +207,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
                 // Also include the current author
-                $vars = ApplicationState::getVars();
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 array_unshift($ret, $author);
                 break;
         }
@@ -270,8 +268,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
-                $vars = ApplicationState::getVars();
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // If the profile is not a community, then return no users at all (Eg: a community opting out from having members)
                 if (!gdUreIsCommunity($author)) {
                     $this->setProp($module, $props, 'skip-data-load', true);

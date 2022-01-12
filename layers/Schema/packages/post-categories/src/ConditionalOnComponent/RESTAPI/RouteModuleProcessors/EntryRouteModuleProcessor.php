@@ -6,7 +6,6 @@ namespace PoPSchema\PostCategories\ConditionalOnComponent\RESTAPI\RouteModulePro
 
 use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\Categories\Routing\RouteNatures as CategoryRouteNatures;
@@ -42,21 +41,20 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
-        $vars = ApplicationState::getVars();
         $ret[CategoryRouteNatures::CATEGORY][] = [
             'module' => [
                 PostCategoryFieldDataloadModuleProcessor::class,
                 PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query'] :
+                    'fields' => !empty(App::getState('query')) ?
+                        App::getState('query') :
                         $this->getRESTFields()
                 ]
             ],
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->getRestDataStructureFormatter()->getName(),
-                'routing-state' => [
+                'routing' => [
                     'taxonomy-name' => $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName(),
                 ],
             ],
@@ -71,7 +69,6 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
-        $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $routemodules = array(
@@ -79,8 +76,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 PostCategoryFieldDataloadModuleProcessor::class,
                 PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query'] :
+                    'fields' => !empty(App::getState('query')) ?
+                        App::getState('query') :
                         $this->getRESTFields()
                 ]
             ],
@@ -101,8 +98,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 CategoryPostFieldDataloadModuleProcessor::class,
                 CategoryPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query'] :
+                    'fields' => !empty(App::getState('query')) ?
+                        App::getState('query') :
                         $this->getRESTFields()
                     ]
                 ],
@@ -113,7 +110,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'datastructure' => $this->getRestDataStructureFormatter()->getName(),
-                    'routing-state' => [
+                    'routing' => [
                         'taxonomy-name' => $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName(),
                     ],
                 ],

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
@@ -19,7 +20,6 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\BasicService\BasicServiceTrait;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
 use PoP\LooseContracts\NameResolverInterface;
@@ -1042,8 +1042,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function shouldExecuteMutation(array $module, array &$props): bool
     {
         // By default, execute only if the module is targeted for execution and doing POST
-        $vars = ApplicationState::getVars();
-        return 'POST' == $_SERVER['REQUEST_METHOD'] && $vars['actionpath'] == $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
+        return 'POST' == $_SERVER['REQUEST_METHOD'] && App::getState('actionpath') == $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
     }
 
     public function getDataloadSource(array $module, array &$props): string
@@ -1060,8 +1059,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         );
 
         // If we are in the API currently, stay in the API
-        $vars = ApplicationState::getVars();
-        if ($scheme = $vars['scheme']) {
+        if ($scheme = App::getState('scheme')) {
             $ret = GeneralUtils::addQueryArgs([
                 Params::SCHEME => $scheme,
             ], $ret);
@@ -1083,17 +1081,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             ], $ret);
         }
 
-        // Add the format to the query url
-        if ($this instanceof FormattableModuleInterface) {
-            if ($format = $this->getFormat($module)) {
-                $ret = GeneralUtils::addQueryArgs([
-                    Params::FORMAT => $format,
-                ], $ret);
-            }
-        }
-
         // If mangled, make it mandle
-        if ($mangled = $vars['mangled']) {
+        if ($mangled = App::getState('mangled')) {
             $ret = GeneralUtils::addQueryArgs([
                 Request::URLPARAM_MANGLED => $mangled,
             ], $ret);

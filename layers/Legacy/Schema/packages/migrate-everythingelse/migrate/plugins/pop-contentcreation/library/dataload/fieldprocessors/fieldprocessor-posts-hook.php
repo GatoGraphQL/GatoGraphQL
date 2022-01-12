@@ -114,9 +114,8 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
                 $authors = $objectTypeResolver->resolveValue($object, FieldQueryInterpreterFacade::getInstance()->getField('authors', $fieldArgs), $variables, $expressions, $options);
 
                 // This function only makes sense when the user is logged in
-                $vars = ApplicationState::getVars();
-                if ($vars['global-userstate']['is-user-logged-in']) {
-                    $pos = array_search($vars['global-userstate']['current-user-id'], $authors);
+                if (\PoP\Root\App::getState('is-user-logged-in')) {
+                    $pos = array_search(\PoP\Root\App::getState('current-user-id'), $authors);
                     if ($pos !== false) {
                         array_splice($authors, $pos, 1);
                     }

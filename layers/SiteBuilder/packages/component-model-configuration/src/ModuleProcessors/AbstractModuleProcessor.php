@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataLoading;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
+use PoP\ConfigurationComponentModel\Constants\Params;
 
 abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor implements ModuleProcessorInterface
 {
@@ -131,5 +134,23 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
         }
 
         return parent::getActionExecutionCheckpoints($module, $props);
+    }
+
+    public function getDataloadSource(array $module, array &$props): string
+    {
+        // Because a component can interact with itself by adding ?modulepaths=...,
+        // then, by default, we simply set the dataload source to point to itself!
+        $ret = parent::getDataloadSource($module, $props);
+
+        // Add the format to the query url
+        if ($this instanceof FormattableModuleInterface) {
+            if ($format = $this->getFormat($module)) {
+                $ret = GeneralUtils::addQueryArgs([
+                    Params::FORMAT => $format,
+                ], $ret);
+            }
+        }
+
+        return $ret;
     }
 }

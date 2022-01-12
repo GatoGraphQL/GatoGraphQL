@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\Configuration\Request;
@@ -25,11 +26,10 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
     {
         $configuration = parent::getSwConfiguration();
 		$cmsService = CMSServiceFacade::getInstance();
-        $vars = ApplicationState::getVars();
-
+        
         // Add a string before the version, since starting with a number makes trouble
         $configuration['${cacheNamePrefix}'] = 'PoP';
-        $configuration['${version}'] = $vars['version'];
+        $configuration['${version}'] = ApplicationInfoFacade::getInstance()->getVersion();
         $configuration['${homeDomain}'] = $cmsService->getSiteURL();
         // $configuration['${contentDomain}'] = $this->getContentDomains();
         $configuration['${appshellPages}'] = $this->getAppshellPages();
@@ -37,7 +37,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         $configuration['${appshellFromServerParams}'] = array(
             \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
             \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
-            \PoP\ComponentModel\Constants\Params::FORMAT, // Initially, this is a proxy for \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT
+            \PoP\ConfigurationComponentModel\Constants\Params::FORMAT, // Initially, this is a proxy for \PoP\ConfigurationComponentModel\Constants\Params::SETTINGSFORMAT
             Request::URLPARAM_MANGLED,
         );
         $configuration['${localesByURL}'] = $this->getLocalesByurl();

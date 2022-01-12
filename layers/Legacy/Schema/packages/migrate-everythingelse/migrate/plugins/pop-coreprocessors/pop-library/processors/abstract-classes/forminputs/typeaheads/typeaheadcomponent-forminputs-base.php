@@ -125,14 +125,14 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         $cmsService = CMSServiceFacade::getInstance();
         $limit = $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10;
         return GeneralUtils::addQueryArgs([
-            \PoP\ComponentModel\Constants\Params::LIMIT => $limit,
+            \PoP\ComponentModel\Constants\PaginationParams::LIMIT => $limit,
         ], $url);
     }
     protected function getRemoteUrl(array $module, array &$props)
     {
         $url = $this->getSourceUrl($module, $props);
         return GeneralUtils::addQueryArgs([
-            \PoP\ComponentModel\Constants\Params::LIMIT => 12,
+            \PoP\ComponentModel\Constants\PaginationParams::LIMIT => 12,
         ], $url);
     }
     protected function getStaticSuggestions(array $module, array &$props)

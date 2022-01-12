@@ -12,12 +12,6 @@ class PoP_SSR_ServerUtils
             return false;
         }
 
-        // Allow to override the configuration
-        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('disable-serverside-rendering');
-        if (!is_null($override)) {
-            return $override;
-        }
-
         return getenv('DISABLE_SERVER_SIDE_RENDERING') !== false ? strtolower(getenv('DISABLE_SERVER_SIDE_RENDERING')) == "true" : false;
     }
 
@@ -36,12 +30,6 @@ class PoP_SSR_ServerUtils
     {
         if (self::disableServerSideRendering()) {
             return false;
-        }
-
-        // Allow to override the configuration
-        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('scripts-end');
-        if (!is_null($override)) {
-            return $override;
         }
 
         return getenv('INCLUDE_SCRIPTS_AFTER_HTML') !== false ? strtolower(getenv('INCLUDE_SCRIPTS_AFTER_HTML')) == "true" : false;

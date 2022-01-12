@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\Root\App;
 use Exception;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\EditUsers\HelperAPIFactory;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateUserMutationResolver;
 
@@ -34,12 +34,11 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         // For the update, gotta return the success string
         // If user is logged in => It's Update
         // Otherwise => It's Create
-        $vars = ApplicationState::getVars();
-        if ($vars['global-userstate']['is-user-logged-in']) {
+        if (App::getState('is-user-logged-in')) {
             // Allow PoP Service Workers to add the attr to avoid the link being served from the browser cache
             return sprintf(
                 $this->getTranslationAPI()->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
-                getAuthorProfileUrl($vars['global-userstate']['current-user-id']),
+                getAuthorProfileUrl(App::getState('current-user-id')),
                 \PoP_Application_Utils::getPreviewTarget(),
                 $this->getHooksAPI()->applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
             );
@@ -50,8 +49,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     {
         $cmseditusershelpers = HelperAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['is-user-logged-in'] ? $vars['global-userstate']['current-user-id'] : '';
+        $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $inputs = $this->getFormInputs();
         $form_data = array(
             'user_id' => $user_id,

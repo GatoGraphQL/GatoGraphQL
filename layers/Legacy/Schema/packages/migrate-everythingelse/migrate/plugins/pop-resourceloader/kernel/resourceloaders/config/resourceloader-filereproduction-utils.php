@@ -59,8 +59,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
             $options['use-engine-entrymodule-props'] = true;
             $resources = PoP_ResourceLoaderProcessorUtils::getResourcesFromCurrentVars($modulefilter, $options);
 
-            $vars = ApplicationState::getVars();
-            $nature = $vars['nature'];
+            $nature = \PoP\Root\App::getState('nature');
 
             $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
 
@@ -79,7 +78,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                 case PageRouteNatures::PAGE:
                 case CustomPostRouteNatures::CUSTOMPOST:
 
-                    $path = GeneralUtils::maybeAddTrailingSlash(\PoPSchema\Posts\Engine_Utils::getCustomPostPath($vars['routing-state']['queried-object-id'], true));
+                    $path = GeneralUtils::maybeAddTrailingSlash(\PoPSchema\Posts\Engine_Utils::getCustomPostPath(\PoP\Root\App::getState(['routing', 'queried-object-id']), true));
                     $path_resources[$nature][$path][$key] = $resources;
                     break;
             }

@@ -31,9 +31,8 @@ class PoP_Application_SectionUtils
 
     public static function addDataloadqueryargsAllcontentBysingletag(&$ret)
     {
-        $vars = ApplicationState::getVars();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        $tag_id = $vars['routing-state']['queried-object-id'];
+        $tag_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         $ret['tag-ids'] = [$tag_id];
         $ret['custompost-types'] = $cmsapplicationpostsapi->getAllcontentPostTypes();
 

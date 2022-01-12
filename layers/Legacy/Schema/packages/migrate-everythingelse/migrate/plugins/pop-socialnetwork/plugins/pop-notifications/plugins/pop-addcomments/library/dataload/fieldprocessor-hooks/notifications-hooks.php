@@ -19,8 +19,7 @@ class PoP_AddComments_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
 
     public function getMessage($message, $notification)
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = \PoP\Root\App::getState('current-user-id');
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();

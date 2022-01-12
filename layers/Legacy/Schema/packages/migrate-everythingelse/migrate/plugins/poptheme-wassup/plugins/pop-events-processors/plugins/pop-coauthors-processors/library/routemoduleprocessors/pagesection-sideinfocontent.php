@@ -22,7 +22,7 @@ class PoPTheme_Wassup_Events_CAP_Module_SideInfoContentPageSectionRouteModulePro
             $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
-                    'routing-state' => [
+                    'routing' => [
                         'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
                         'queried-object-is-past-event' => true,
                     ],
@@ -38,7 +38,7 @@ class PoPTheme_Wassup_Events_CAP_Module_SideInfoContentPageSectionRouteModulePro
             $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
-                    'routing-state' => [
+                    'routing' => [
                         'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
                     ],
                 ],

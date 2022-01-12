@@ -4,5 +4,11 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoP\ConfigurationComponentModel\State\:
+        resource: '../src/State/*'
+
     PoP\ConfigurationComponentModel\RouteModuleProcessors\:
         resource: '../src/RouteModuleProcessors/*'
+
+    PoP\ConfigurationComponentModel\Hooks\:
+        resource: '../src/Hooks/*'

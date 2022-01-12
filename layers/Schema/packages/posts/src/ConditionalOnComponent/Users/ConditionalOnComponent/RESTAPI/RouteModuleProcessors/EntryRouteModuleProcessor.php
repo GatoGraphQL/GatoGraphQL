@@ -6,7 +6,6 @@ namespace PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\RE
 
 use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 use PoPSchema\Posts\Component;
 use PoPSchema\Posts\ComponentConfiguration;
@@ -37,7 +36,6 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
-        $vars = ApplicationState::getVars();
         // Author's posts
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
@@ -46,8 +44,8 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
                 FieldDataloadModuleProcessor::class,
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query'] :
+                    'fields' => !empty(App::getState('query')) ?
+                        App::getState('query') :
                         $this->getRESTFields()
                     ]
                 ],

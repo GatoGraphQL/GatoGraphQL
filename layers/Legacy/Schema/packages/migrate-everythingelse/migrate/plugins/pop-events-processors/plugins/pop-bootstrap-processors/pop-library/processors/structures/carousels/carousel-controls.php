@@ -61,7 +61,6 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
     }
     protected function getTitleLink(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {
@@ -69,7 +68,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
                 return RouteUtils::getRouteURL(POP_EVENTS_ROUTE_EVENTS);
 
             case self::MODULE_CAROUSELCONTROLS_AUTHOREVENTS:
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_AUTHOREVENTS => POP_EVENTS_ROUTE_EVENTS,
@@ -77,7 +76,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
                 return RequestUtils::addRoute($url, $routes[$module[1]] ?? null);
 
             case self::MODULE_CAROUSELCONTROLS_TAGEVENTS:
-                $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_TAGEVENTS => POP_EVENTS_ROUTE_EVENTS,
                 );

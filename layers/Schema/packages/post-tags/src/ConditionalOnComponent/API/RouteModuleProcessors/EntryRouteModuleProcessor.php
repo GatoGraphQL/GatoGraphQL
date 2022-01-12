@@ -40,7 +40,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             'module' => [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
             'conditions' => [
                 'scheme' => APISchemes::API,
-                'routing-state' => [
+                'routing' => [
                     'taxonomy-name' => $this->getPostTagTypeAPI()->getPostTagTaxonomyName(),
                 ],
             ],
@@ -77,7 +77,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'routing-state' => [
+                    'routing' => [
                         'taxonomy-name' => $this->getPostTagTypeAPI()->getPostTagTaxonomyName(),
                     ],
                 ],

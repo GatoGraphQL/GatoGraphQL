@@ -13,8 +13,7 @@ class PoP_RelatedPosts_SectionUtils
         PoP_Application_SectionUtils::addDataloadqueryargsAllcontent($ret);
 
         if (is_null($post_id)) {
-            $vars = ApplicationState::getVars();
-            $post_id = $vars['routing-state']['queried-object-id'];
+            $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         }
 
         // Find all related posts

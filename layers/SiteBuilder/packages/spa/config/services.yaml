@@ -4,5 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoP\SPA\State\:
+        resource: '../src/State/*'
+
     PoP\SPA\ModuleFilters\:
         resource: '../src/ModuleFilters/*'

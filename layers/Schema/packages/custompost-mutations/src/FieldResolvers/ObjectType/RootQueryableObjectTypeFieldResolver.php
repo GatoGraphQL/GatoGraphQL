@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
+use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
@@ -186,13 +186,12 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         string $fieldName,
         array $fieldArgs
     ): array {
-        $vars = ApplicationState::getVars();
         return match ($fieldName) {
             'myCustomPost',
             'myCustomPosts',
             'myCustomPostCount'
                 => [
-                    'authors' => [$vars['global-userstate']['current-user-id']],
+                    'authors' => [App::getState('current-user-id')],
                 ],
             default
                 => [],

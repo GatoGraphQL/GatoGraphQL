@@ -19,9 +19,6 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\LooseContracts\Component::class,
-            \PoP\Routing\Component::class,
-            \PoP\ModuleRouting\Component::class,
             \PoP\ComponentModel\Component::class,
             \PoP\CacheControl\Component::class,
             \PoP\GuzzleHelpers\Component::class,

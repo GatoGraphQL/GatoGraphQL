@@ -32,9 +32,8 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     {
 
         // Add only if the current nature is the one expected by the block
-        $vars = ApplicationState::getVars();
-        // if ($vars['nature'] == $this->getNature($module)) {
-        switch ($vars['nature']) {
+        // if (\PoP\Root\App::getState('nature') == $this->getNature($module)) {
+        switch (\PoP\Root\App::getState('nature')) {
             case UserRouteNatures::USER:
                 return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_AUTHOR];
 
@@ -53,9 +52,8 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     {
 
         // Add only if the current nature is the one expected by the block
-        $vars = ApplicationState::getVars();
-        // if ($vars['nature'] == $this->getNature($module)) {
-        switch ($vars['nature']) {
+        // if (\PoP\Root\App::getState('nature') == $this->getNature($module)) {
+        switch (\PoP\Root\App::getState('nature')) {
             case UserRouteNatures::USER:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getAuthorTitle();
 
@@ -73,23 +71,22 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     protected function getTitleLink(array $module, array &$props)
     {
         if ($route = $this->getRelevantRoute($module, $props)) {
-            $vars = ApplicationState::getVars();
             $cmsService = CMSServiceFacade::getInstance();
             $userTypeAPI = UserTypeAPIFacade::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-            switch ($vars['nature']) {
+            switch (\PoP\Root\App::getState('nature')) {
                 case UserRouteNatures::USER:
-                    $url = $userTypeAPI->getUserURL($vars['routing-state']['queried-object-id']);
+                    $url = $userTypeAPI->getUserURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                     return RequestUtils::addRoute($url, $route);
 
                 case TagRouteNatures::TAG:
-                    $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
+                    $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                     return RequestUtils::addRoute($url, $route);
 
                 case PageRouteNatures::PAGE:
                 case CustomPostRouteNatures::CUSTOMPOST:
-                    $url = $customPostTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
+                    $url = $customPostTypeAPI->getPermalink(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                     return RequestUtils::addRoute($url, $route);
 
                 case RouteNatures::HOME:

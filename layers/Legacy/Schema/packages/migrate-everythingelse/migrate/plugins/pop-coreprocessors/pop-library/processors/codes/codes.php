@@ -29,7 +29,6 @@ class GD_Core_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesB
 
     public function initModelProps(array $module, array &$props): void
     {
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_CODE_APPSHELL:
                 // Make it invisible, nothing to show

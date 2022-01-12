@@ -52,11 +52,10 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
 
     public function getTitle(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP:
-                $tag_id = $vars['routing-state']['queried-object-id'];
+                $tag_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return
                     getRouteIcon(POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS, true).
                     sprintf(

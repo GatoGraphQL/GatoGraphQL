@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
+use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoPSchema\Pages\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPSchema\Pages\Routing\RouteNatures;
@@ -24,14 +24,13 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
 
-        $vars = ApplicationState::getVars();
         $ret[RouteNatures::PAGE][] = [
             'module' => [
                 FieldDataloadModuleProcessor::class,
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_PAGE,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query']
+                    'fields' => !empty(App::getState('query')) ?
+                        App::getState('query')
                         : $this->getRESTFields()
                     ]
                 ],

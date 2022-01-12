@@ -16,12 +16,6 @@ class PoP_HTMLCSSPlatform_ServerUtils
 
     public static function accessExternalcdnResources()
     {
-        // Allow to override the configuration
-        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('externalcdn');
-        if (!is_null($override)) {
-            return $override;
-        }
-
         return getenv('ACCESS_EXTERNAL_CDN_RESOURCES') !== false ? strtolower(getenv('ACCESS_EXTERNAL_CDN_RESOURCES')) == "true" : false;
     }
 
@@ -32,12 +26,6 @@ class PoP_HTMLCSSPlatform_ServerUtils
 
     public static function useBundledResources()
     {
-        // Allow to override the configuration
-        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('app-bundle');
-        if (!is_null($override)) {
-            return $override;
-        }
-
         return getenv('USE_BUNDLED_RESOURCES') !== false ? strtolower(getenv('USE_BUNDLED_RESOURCES')) == "true" : false;
     }
 }

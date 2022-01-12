@@ -22,7 +22,6 @@ use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -185,9 +184,8 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      */
     protected function getSchemaExtensions(): array
     {
-        $vars = ApplicationState::getVars();
         return [
-            SchemaDefinition::SCHEMA_IS_NAMESPACED => $vars['namespace-types-and-interfaces'],
+            SchemaDefinition::SCHEMA_IS_NAMESPACED => App::getState('namespace-types-and-interfaces'),
         ];
     }
 

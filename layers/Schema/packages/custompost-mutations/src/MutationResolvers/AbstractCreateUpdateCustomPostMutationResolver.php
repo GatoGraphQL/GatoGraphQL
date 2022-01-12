@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\LooseContracts\NameResolverInterface;
 use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
@@ -127,8 +127,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
 
         // Validate user permission
-        $vars = ApplicationState::getVars();
-        $userID = $vars['global-userstate']['current-user-id'];
+        $userID = App::getState('current-user-id');
         $editCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
         if (
             !$this->getUserRoleTypeAPI()->userCan(
@@ -218,8 +217,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         // Check that the user has access to the edited custom post
-        $vars = ApplicationState::getVars();
-        $userID = $vars['global-userstate']['current-user-id'];
+        $userID = App::getState('current-user-id');
         if (!$this->getCustomPostTypeMutationAPI()->canUserEditCustomPost($userID, $customPostID)) {
             $errors[] = sprintf(
                 $this->__('You don\'t have permission to edit custom post with ID \'%s\'', 'custompost-mutations'),

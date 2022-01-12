@@ -6,10 +6,9 @@ class GD_DataLoad_QueryInputOutputHandler_LatestNotificationList extends GD_Data
 {
     public function getHistTime(&$query_args)
     {
-        $vars = ApplicationState::getVars();
-        if ($vars['global-userstate']['is-user-logged-in']) {
+        if (\PoP\Root\App::getState('is-user-logged-in')) {
             // Since the last time the user logged in
-            $lastaccess = \PoPSchema\UserMeta\Utils::getUserMeta($vars['global-userstate']['current-user-id'], POP_METAKEY_USER_LASTACCESS, true);
+            $lastaccess = \PoPSchema\UserMeta\Utils::getUserMeta(\PoP\Root\App::getState('current-user-id'), POP_METAKEY_USER_LASTACCESS, true);
             
             // Alert the user about all past notifications
             // Newly created user accounts, there's still no lastaccess, so just give a "1" to make the comparison, it will return all results

@@ -25,14 +25,13 @@ class PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks
     {
         // Get the user info? (used for pages where user logged in is needed. Generally same as with checkpoints)
         if (PoP_UserLogin_Utils::getUserInfo()) {
-            $vars = ApplicationState::getVars();
             $userTypeAPI = UserTypeAPIFacade::getInstance();
             $user_id = '';
             $user_name = '';
             $user_url = '';
-            $user_logged_in = $vars['global-userstate']['is-user-logged-in'];
+            $user_logged_in = \PoP\Root\App::getState('is-user-logged-in');
             if ($user_logged_in) {
-                $user_id = $vars['global-userstate']['current-user-id'];
+                $user_id = \PoP\Root\App::getState('current-user-id');
                 $user_name = $userTypeAPI->getUserDisplayName($user_id);
                 $user_url = $userTypeAPI->getUserURL($user_id);
             }

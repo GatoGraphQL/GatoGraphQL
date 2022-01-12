@@ -10,10 +10,8 @@ use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\CustomEndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CustomEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
@@ -23,7 +21,6 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     use WithBlockRegistryCustomPostTypeTrait;
 
     private ?EndpointBlockRegistryInterface $endpointBlockRegistry = null;
-    private ?CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistry = null;
     private ?CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistry = null;
     private ?CustomEndpointOptionsBlock $customEndpointOptionsBlock = null;
 
@@ -34,14 +31,6 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     final protected function getEndpointBlockRegistry(): EndpointBlockRegistryInterface
     {
         return $this->endpointBlockRegistry ??= $this->instanceManager->getInstance(EndpointBlockRegistryInterface::class);
-    }
-    final public function setCustomEndpointExecuterRegistry(CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistry): void
-    {
-        $this->customEndpointExecuterRegistry = $customEndpointExecuterRegistry;
-    }
-    final protected function getCustomEndpointExecuterRegistry(): CustomEndpointExecuterRegistryInterface
-    {
-        return $this->customEndpointExecuterRegistry ??= $this->instanceManager->getInstance(CustomEndpointExecuterRegistryInterface::class);
     }
     final public function setCustomEndpointAnnotatorRegistry(CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistry): void
     {
@@ -185,11 +174,6 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     public function getEndpointOptionsBlock(): BlockInterface
     {
         return $this->getCustomEndpointOptionsBlock();
-    }
-
-    protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface
-    {
-        return $this->getCustomEndpointExecuterRegistry();
     }
 
     protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface

@@ -58,7 +58,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
         $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
             'module' => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR],
             'conditions' => [
-                'routing-state' => [
+                'routing' => [
                     'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
                     'queried-object-is-past-event' => true,
                 ],
@@ -69,7 +69,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
         $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
             'module' => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_SIDEBAR],
             'conditions' => [
-                'routing-state' => [
+                'routing' => [
                     'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
                 ],
             ],

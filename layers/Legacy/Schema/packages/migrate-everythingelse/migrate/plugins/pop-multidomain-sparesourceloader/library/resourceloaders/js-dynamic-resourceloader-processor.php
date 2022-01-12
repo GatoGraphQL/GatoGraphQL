@@ -73,8 +73,7 @@ class PoP_MultiDomainSPAResourceLoader_DynamicJSResourceLoaderProcessor extends 
             case self::RESOURCE_RESOURCELOADERCONFIG_EXTERNALRESOURCES:
                 // When we load the External Page, obtain the resources for the requested domain
                 // Eg: https://sukipop.com/en/external/?url=https%3A%2F%2Fwww.mesym.com%2Fen%2Fevents%2Fmindset-public-talk-maintaining-peopled-forests-by-joe-fragoso-and-kamal-s-fadzil%2F
-                $vars = ApplicationState::getVars();
-                if ($external_url_domain = $vars['external-url-domain']) {
+                if ($external_url_domain = \PoP\Root\App::getState('external-url-domain')) {
                      // Comment Leo 06/11/2017: we don't know what nature will be needed for the external domain
                     // (eg: this URL needs the single nature, to process an event: https://sukipop.com/en/external/?url=https%3A%2F%2Fwww.mesym.com%2Fen%2Fevents%2Fmindset-public-talk-maintaining-peopled-forests-by-joe-fragoso-and-kamal-s-fadzil%2F)
                     // So we must load all resources, and not deferred, then no need for file initialresources.js
@@ -98,12 +97,12 @@ class PoP_MultiDomainSPAResourceLoader_DynamicJSResourceLoaderProcessor extends 
                     // If it is not the default one, then use the one we are loading in the local website (eg: 'embed', 'print')
                     $options = array();
                     if (defined('POP_THEME_INITIALIZED')) {
-                        $options['theme'] = $vars['theme-isdefault'] ?
+                        $options['theme'] = \PoP\Root\App::getState('theme-isdefault') ?
                           $multidomain_info[$external_url_domain]['default-theme'] ?? $multidomain_info[$local_domain]['default-theme'] :
-                          $vars['theme'];
-                        $options['thememode'] = $vars['theme-isdefault'] && $vars['thememode-isdefault'] ?
+                          \PoP\Root\App::getState('theme');
+                        $options['thememode'] = \PoP\Root\App::getState('theme-isdefault') && \PoP\Root\App::getState('thememode-isdefault') ?
                           $multidomain_info[$external_url_domain]['default-thememode'] ?? $multidomain_info[$local_domain]['default-thememode'] :
-                          $vars['thememode'];
+                          \PoP\Root\App::getState('thememode');
                     }
                     $file_url = PoP_MultiDomain_Utils::transformUrl($file_url, $external_url_domain, $external_website_name, $options);
 

@@ -20,13 +20,14 @@ class PoP_URE_Engine_Hooks
         );
     }
     /**
+     * @todo Migrate to AppStateProvider
      * @param array<array> $vars_in_array
      */
     public function addVars(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
         if ($vars['nature'] == UserRouteNatures::USER) {
-            $author = $vars['routing-state']['queried-object-id'];
+            $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
                 $source = $_REQUEST[GD_URLPARAM_URECONTENTSOURCE] ?? null;
                 $sources = array(
@@ -43,14 +44,15 @@ class PoP_URE_Engine_Hooks
     }
 
     /**
+     * @todo Migrate to AppStateProvider
      * @param array<array> $vars_in_array
      */
     public function augmentVarsProperties(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
         if ($vars['nature'] == UserRouteNatures::USER) {
-            $author = $vars['routing-state']['queried-object-id'];
-            $vars['routing-state']['queried-object-is-community'] = gdUreIsCommunity($author);
+            $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
+            $vars['routing']['queried-object-is-community'] = gdUreIsCommunity($author);
         }
     }
 }

@@ -49,8 +49,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
-                $vars = ApplicationState::getVars();
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,

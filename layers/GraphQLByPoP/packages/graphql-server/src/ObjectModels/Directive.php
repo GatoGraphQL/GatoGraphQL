@@ -9,7 +9,6 @@ use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\State\ApplicationState;
 
 class Directive extends AbstractSchemaDefinitionReferenceObject
 {
@@ -46,7 +45,6 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
     {
         $directives = [];
         $directiveKind = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_KIND];
-        $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         /**
@@ -57,7 +55,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
          */
         if (
             $directiveKind === DirectiveKinds::QUERY
-            || ($directiveKind === DirectiveKinds::SCHEMA && isset($vars['edit-schema']) && $vars['edit-schema'])
+            || ($directiveKind === DirectiveKinds::SCHEMA && App::hasState('edit-schema') && App::getState('edit-schema'))
             || ($directiveKind === DirectiveKinds::INDEXING && $componentConfiguration->enableComposableDirectives())
         ) {
             // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip

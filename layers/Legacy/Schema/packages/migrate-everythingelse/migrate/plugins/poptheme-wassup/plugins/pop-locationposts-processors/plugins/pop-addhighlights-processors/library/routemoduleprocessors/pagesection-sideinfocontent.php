@@ -18,7 +18,7 @@ class PoPTheme_Wassup_LocationPosts_AddHighlights_Module_SideInfoContentPageSect
             $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
-                    'routing-state' => [
+                    'routing' => [
                         'queried-object-post-type' => POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST,
                     ],
                 ],

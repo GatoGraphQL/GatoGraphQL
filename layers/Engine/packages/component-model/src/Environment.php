@@ -9,7 +9,6 @@ use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 class Environment
 {
     public const USE_COMPONENT_MODEL_CACHE = 'USE_COMPONENT_MODEL_CACHE';
-    public const ENABLE_CONFIG_BY_PARAMS = 'ENABLE_CONFIG_BY_PARAMS';
     public const NAMESPACE_TYPES_AND_INTERFACES = 'NAMESPACE_TYPES_AND_INTERFACES';
     public const USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE';
     public const ENABLE_ADMIN_SCHEMA = 'ENABLE_ADMIN_SCHEMA';
@@ -31,10 +30,6 @@ class Environment
     public static function enableSemanticVersionConstraints(): bool
     {
         return getenv('ENABLE_SEMANTIC_VERSION_CONSTRAINTS') !== false ? strtolower(getenv('ENABLE_SEMANTIC_VERSION_CONSTRAINTS')) == "true" : false;
-    }
-    public static function enableVersionByParams()
-    {
-        return getenv('ENABLE_VERSION_BY_PARAMS') !== false ? strtolower(getenv('ENABLE_VERSION_BY_PARAMS')) == "true" : false;
     }
 
     // public static function failIfSubcomponentTypeResolverUndefined()

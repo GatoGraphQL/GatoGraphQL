@@ -36,10 +36,9 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     {
 
         // Do not add for the quickview, since it is a modal and can't open a new modal (eg: Embed) on top
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
                 if (in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
@@ -214,8 +213,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
-                $vars = ApplicationState::getVars();
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
                     $this->setProp($module, $props, 'show-submenu', false);
                     $this->setProp($module, $props, 'show-controls-bottom', false);
@@ -261,7 +259,6 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
     public function getTitle(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
@@ -269,13 +266,13 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 return TranslationAPIFacade::getInstance()->__('Oops, this page doesn\'t exist!', 'poptheme-wassup');
 
             case self::MODULE_BLOCK_SINGLEPOST:
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $customPostTypeAPI->getTitle($post_id);
 
             case self::MODULE_BLOCK_AUTHOR:
             case self::MODULE_BLOCK_AUTHORDESCRIPTION:
             case self::MODULE_BLOCK_AUTHORSUMMARY:
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $userTypeAPI->getUserDisplayName($author);
 
             case self::MODULE_BLOCK_TAG:

@@ -40,7 +40,7 @@ class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionRouteModule
         $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
             'module' => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR],
             'conditions' => [
-                'routing-state' => [
+                'routing' => [
                     'queried-object-post-type' => POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT,
                 ],
             ],

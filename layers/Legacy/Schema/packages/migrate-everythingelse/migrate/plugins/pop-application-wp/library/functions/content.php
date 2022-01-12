@@ -9,9 +9,8 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter(
     'document_title_parts',
     function ($title) {
-        $vars = ApplicationState::getVars();
-        if ($vars['routing-state']['is-standard']) {
-            $title['title'] = strip_tags(RouteUtils::getRouteTitle($vars['route']));
+        if (\PoP\Root\App::getState(['routing', 'is-standard'])) {
+            $title['title'] = strip_tags(RouteUtils::getRouteTitle(\PoP\Root\App::getState('route')));
         }
         return $title;
     }

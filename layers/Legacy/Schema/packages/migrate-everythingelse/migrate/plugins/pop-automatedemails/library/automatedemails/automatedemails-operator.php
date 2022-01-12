@@ -16,11 +16,10 @@ class PoP_AutomatedEmails_Operator
     public function maybeSendAutomatedemail()
     {
         global $pop_automatedemails_manager;
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
 
-        if ($vars['routing-state']['is-standard']) {
-            $route = $vars['route'];
+        if (\PoP\Root\App::getState(['routing', 'is-standard'])) {
+            $route = \PoP\Root\App::getState('route');
             if ($automatedemails = $pop_automatedemails_manager->getAutomatedEmails($route)) {
                 foreach ($automatedemails as $automatedemail) {
                     // Allow to change the header to 'newsletter' under PoPTheme Wassup

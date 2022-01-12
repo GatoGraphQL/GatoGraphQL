@@ -8,7 +8,6 @@ use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Routing\RouteNatures;
 use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
@@ -24,14 +23,13 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
     public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
-        $vars = ApplicationState::getVars();
         $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
             'module' => [
                 FieldDataloadModuleProcessor::class,
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query'] :
+                    'fields' => !empty(App::getState('query')) ?
+                        App::getState('query') :
                         $this->getRESTFields()
                     ]
                 ],
@@ -50,7 +48,6 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
-        $vars = ApplicationState::getVars();
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         /** @var ComponentModelComponentConfiguration */
@@ -62,8 +59,8 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
                     FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST
                     : FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query'] :
+                    'fields' => !empty(App::getState('query')) ?
+                        App::getState('query') :
                         $this->getRESTFields()
                     ]
                 ],

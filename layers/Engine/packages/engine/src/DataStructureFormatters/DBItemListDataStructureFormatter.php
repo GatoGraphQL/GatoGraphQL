@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DataStructureFormatters;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\DataStructure\AbstractJSONDataStructureFormatter;
-use PoP\ComponentModel\State\ApplicationState;
 
 class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatter
 {
@@ -36,8 +36,7 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
     public function getFormattedData($data)
     {
         // If we are requesting only the databases, then return these as a list of items
-        $vars = ApplicationState::getVars();
-        $dataoutputitems = $vars['dataoutputitems'];
+        $dataoutputitems = App::getState('dataoutputitems');
         if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
             $ret = array();
 
@@ -46,7 +45,7 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
                 // First pass: merge all content about the same DB object
                 // Eg: notifications can appear under "database" and "userstatedatabase", showing different fields on each
                 $merged_databases = array();
-                $dboutputmode = $vars['dboutputmode'];
+                $dboutputmode = App::getState('dboutputmode');
                 if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
                     foreach ($databases as $database_name => $database) {
                         $this->addDBEntries($database, $merged_databases);

@@ -8,13 +8,12 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter("gdClassesBody", 'gdClassesBodyThemeImpl');
 function gdClassesBodyThemeImpl($body_classes)
 {
-    $vars = ApplicationState::getVars();
-    $body_classes[] = $vars['theme'];
-    $body_classes[] = $vars['thememode'];
-    $body_classes[] = $vars['themestyle'];
-    $body_classes[] = $vars['theme'].'-'.$vars['thememode'];
-    $body_classes[] = $vars['theme'].'-'.$vars['themestyle'];
-    $body_classes[] = $vars['theme'].'-'.$vars['thememode'].'-'.$vars['themestyle'];
+    $body_classes[] = \PoP\Root\App::getState('theme');
+    $body_classes[] = \PoP\Root\App::getState('thememode');
+    $body_classes[] = \PoP\Root\App::getState('themestyle');
+    $body_classes[] = \PoP\Root\App::getState('theme').'-'.\PoP\Root\App::getState('thememode');
+    $body_classes[] = \PoP\Root\App::getState('theme').'-'.\PoP\Root\App::getState('themestyle');
+    $body_classes[] = \PoP\Root\App::getState('theme').'-'.\PoP\Root\App::getState('thememode').'-'.\PoP\Root\App::getState('themestyle');
     
     return $body_classes;
 }

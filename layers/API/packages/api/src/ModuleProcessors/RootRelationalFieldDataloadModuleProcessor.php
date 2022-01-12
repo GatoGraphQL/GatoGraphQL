@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ModuleProcessors;
 
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\Schema\SchemaDefinitionServiceInterface;
@@ -33,8 +33,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
 
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array | null
     {
-        $vars = ApplicationState::getVars();
-        if ($vars['does-api-query-have-errors']) {
+        if (App::getState('does-api-query-have-errors')) {
             return null;
         }
         switch ($module[1]) {

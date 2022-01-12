@@ -62,7 +62,7 @@ class PoP_UserState_EngineHooks
                 ],
                 $requestHelperService->getCurrentURL()
             );
-            $engine->addBackgroundUrl($url, array(\PoP\ComponentModel\Constants\Targets::MAIN));
+            $engine->addBackgroundUrl($url, array(\PoP\ConfigurationComponentModel\Constants\Targets::MAIN));
         }
     }
 }

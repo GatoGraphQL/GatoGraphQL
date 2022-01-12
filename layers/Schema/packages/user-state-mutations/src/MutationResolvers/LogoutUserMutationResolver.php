@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\UserState\State\ApplicationStateUtils;
+use PoPSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 class LogoutUserMutationResolver extends AbstractMutationResolver
@@ -32,13 +32,12 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
     }
     public function executeMutation(array $form_data): mixed
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = App::getState('current-user-id');
 
         $this->getUserStateTypeMutationAPI()->logout();
 
         // Modify the routing-state with the newly logged in user info
-        ApplicationStateUtils::setUserStateVars(ApplicationState::$vars);
+        AppStateHelpers::resetCurrentUserInAppState();
 
         $this->getHooksAPI()->doAction('gd:user:loggedout', $user_id);
         return $user_id;

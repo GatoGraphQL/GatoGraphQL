@@ -17,8 +17,7 @@ class PoP_ContentPostLinks_ContentHooks
 
     public function contentInner($inner, array $module)
     {
-        $vars = ApplicationState::getVars();
-        $post_id = $vars['routing-state']['queried-object-id'];
+        $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
 
         if ($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE] && defined('POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS') && POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS && $postCategoryTypeAPI->hasCategory(POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS, $post_id)) {

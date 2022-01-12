@@ -19,8 +19,7 @@ function aalPopNotifyallusersAddMetaBox()
 {
 
     // Enable if the current logged in user is the System Notification's defined user
-    $vars = ApplicationState::getVars();
-    if ($vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
+    if (\PoP\Root\App::getState('current-user-id') != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
         return;
     }
 
@@ -43,8 +42,7 @@ function aalPopNotifyallusersMetaBoxContent()
 {
 
     // Enable if the current logged in user is the System Notification's defined user
-    $vars = ApplicationState::getVars();
-    if ($vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
+    if (\PoP\Root\App::getState('current-user-id') != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
         return;
     }
 
@@ -73,8 +71,7 @@ function aalPopNotifyallusersMetaBoxSave($post_id)
 {
 
     // Enable if the current logged in user is the System Notification's defined user
-    $vars = ApplicationState::getVars();
-    if ($vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
+    if (\PoP\Root\App::getState('current-user-id') != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
         return;
     }
 

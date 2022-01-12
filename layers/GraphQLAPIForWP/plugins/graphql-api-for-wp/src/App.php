@@ -9,12 +9,15 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
 use LogicException;
-use PoP\Root\App as UpstreamApp;
+use PoP\Root\App as RootApp;
+use PoP\Root\AppInterface as RootAppInterface;
 use PoP\Root\AppLoader;
 use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
+use PoP\Root\Managers\AppStateManager;
 use PoP\Root\Managers\ComponentManager;
+use PoP\Root\State\MutationResolutionStore;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
@@ -24,7 +27,7 @@ use Symfony\Component\DependencyInjection\Container;
  * Using composition instead of inheritance, so that the original PoP\Root\App
  * is the single source of truth
  */
-class App implements AppInterface
+class App implements AppInterface, RootAppInterface
 {
     protected static MainPluginManager $mainPluginManager;
     protected static ExtensionManager $extensionManager;
@@ -85,33 +88,42 @@ class App implements AppInterface
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManager $componentManager = null,
+        ?AppStateManager $appStateManager = null,
+        ?MutationResolutionStore $mutationResolutionStore = null,
     ): void {
-        UpstreamApp::initialize(
+        RootApp::initialize(
             $appLoader,
             $containerBuilderFactory,
             $systemContainerBuilderFactory,
             $componentManager,
+            $appStateManager,
+            $mutationResolutionStore,
         );
     }
 
     public static function getAppLoader(): AppLoader
     {
-        return UpstreamApp::getAppLoader();
+        return RootApp::getAppLoader();
     }
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory
     {
-        return UpstreamApp::getContainerBuilderFactory();
+        return RootApp::getContainerBuilderFactory();
     }
 
     public static function getSystemContainerBuilderFactory(): SystemContainerBuilderFactory
     {
-        return UpstreamApp::getSystemContainerBuilderFactory();
+        return RootApp::getSystemContainerBuilderFactory();
     }
 
     public static function getComponentManager(): ComponentManager
     {
-        return UpstreamApp::getComponentManager();
+        return RootApp::getComponentManager();
+    }
+
+    public static function getMutationResolutionStore(): MutationResolutionStore
+    {
+        return RootApp::getMutationResolutionStore();
     }
 
     /**
@@ -123,7 +135,7 @@ class App implements AppInterface
     public static function stockAndInitializeComponentClasses(
         array $componentClasses
     ): void {
-        UpstreamApp::stockAndInitializeComponentClasses($componentClasses);
+        RootApp::stockAndInitializeComponentClasses($componentClasses);
     }
 
     /**
@@ -131,7 +143,7 @@ class App implements AppInterface
      */
     final public static function getContainer(): Container
     {
-        return UpstreamApp::getContainer();
+        return RootApp::getContainer();
     }
 
     /**
@@ -139,7 +151,7 @@ class App implements AppInterface
      */
     final public static function getSystemContainer(): Container
     {
-        return UpstreamApp::getSystemContainer();
+        return RootApp::getSystemContainer();
     }
 
     /**
@@ -149,6 +161,6 @@ class App implements AppInterface
      */
     final public static function getComponent(string $componentClass): ComponentInterface
     {
-        return UpstreamApp::getComponent($componentClass);
+        return RootApp::getComponent($componentClass);
     }
 }

@@ -104,7 +104,6 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $vars = ApplicationState::getVars();
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -167,7 +166,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                     case AAL_POP_ACTION_COMMENT_ADDED:
                         // TODO: Integrate with `CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()`
                         $comment = $commentTypeAPI->getComment($notification->object_id);
-                        $user_id = $vars['global-userstate']['current-user-id'];
+                        $user_id = \PoP\Root\App::getState('current-user-id');
 
                         // Change the message if the comment is a response to the user's comment
                         $message = TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> commented in %2$s <strong>%3$s</strong>', 'pop-notifications');

@@ -30,9 +30,8 @@ class PoP_MultiDomain_CDN_DynamicJSResourceLoaderProcessor extends PoP_DynamicJS
             case self::RESOURCE_CDNCONFIG_EXTERNAL:
                 // When we load the External Page, obtain the resources for the requested domain
                 // Eg: https://sukipop.com/en/external/?url=https%3A%2F%2Fwww.mesym.com%2Fen%2Fevents%2Fmindset-public-talk-maintaining-peopled-forests-by-joe-fragoso-and-kamal-s-fadzil%2F
-                $vars = ApplicationState::getVars();
                 $cmsService = CMSServiceFacade::getInstance();
-                if ($external_url_domain = $vars['external-url-domain']) {
+                if ($external_url_domain = \PoP\Root\App::getState('external-url-domain')) {
                     global $pop_cdn_configfile;
                     $file_url = $pop_cdn_configfile->getFileurl();
                     $local_domain = $cmsService->getSiteURL();

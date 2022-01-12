@@ -21,9 +21,7 @@ class RequestHelperService implements RequestHelperServiceInterface
         $remove_params = (array) $this->getHooksAPI()->applyFilters(
             'RequestUtils:current_url:remove_params',
             [
-                Params::SETTINGSFORMAT,
                 Params::VERSION,
-                Params::TARGET,
                 ModuleFilterManager::URLPARAM_MODULEFILTER,
                 ModulePaths::URLPARAM_MODULEPATHS,
                 Params::ACTION_PATH,

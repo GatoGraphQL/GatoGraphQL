@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnComponent\API\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
@@ -69,9 +69,8 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
 
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST:
-                $vars = ApplicationState::getVars();
                 $ret['authors'] = [
-                    $vars['routing-state']['queried-object-id'],
+                    App::getState(['routing', 'queried-object-id']),
                 ];
                 break;
         }

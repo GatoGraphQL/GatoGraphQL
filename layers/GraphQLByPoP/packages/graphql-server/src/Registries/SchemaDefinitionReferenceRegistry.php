@@ -22,7 +22,6 @@ use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\BasicService\BasicServiceTrait;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 
@@ -107,12 +106,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         if ($useCache = $componentConfiguration->useSchemaDefinitionCache()) {
             // Use different caches for the normal and namespaced schemas,
             // or it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
-            $vars = ApplicationState::getVars();
             $cacheType = CacheTypes::GRAPHQL_SCHEMA_DEFINITION;
             $cacheKeyComponents = array_merge(
                 CacheUtils::getSchemaCacheKeyComponents(),
                 [
-                    'edit-schema' => isset($vars['edit-schema']) && $vars['edit-schema'],
+                    'edit-schema' => App::hasState('edit-schema') && App::getState('edit-schema'),
                 ]
             );
             // For the persistentCache, use a hash to remove invalid characters (such as "()")
@@ -143,8 +141,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     protected function prepareSchemaDefinitionForGraphQL(): void
     {
-        $vars = ApplicationState::getVars();
-        $enableNestedMutations = $vars['nested-mutations-enabled'];
+        $enableNestedMutations = App::getState('nested-mutations-enabled');
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $exposeSchemaIntrospectionFieldInSchema = $componentConfiguration->exposeSchemaIntrospectionFieldInSchema();
@@ -311,8 +308,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     protected function maybeAddTypeToSchemaDirectiveDescription(array $directiveSchemaDefinitionPath): void
     {
-        $vars = ApplicationState::getVars();
-        if (isset($vars['edit-schema']) && $vars['edit-schema']) {
+        if (App::hasState('edit-schema') && App::getState('edit-schema')) {
             $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $directiveSchemaDefinitionPath);
             if ($directiveSchemaDefinition[SchemaDefinition::DIRECTIVE_KIND] === DirectiveKinds::SCHEMA) {
                 $directiveSchemaDefinition[SchemaDefinition::DESCRIPTION] = sprintf(

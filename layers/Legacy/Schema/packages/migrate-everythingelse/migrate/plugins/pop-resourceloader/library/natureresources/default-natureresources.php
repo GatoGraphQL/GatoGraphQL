@@ -23,7 +23,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
     {
 
         // Organization: it must add together the resources for both "source=community" and "source=user"
-        // Then, for the organization and community roles, we must set the extra $vars['source'] value
+        // Then, for the organization and community roles, we must set the extra \PoP\Root\App::getState('source') value
         // Add a hook to allow PoP Common User Roles to set it
         if ($extra_vars = HooksAPIFacade::getInstance()->applyFilters(
             'PoPThemeWassup_ResourceLoader_Hooks:extra-vars',

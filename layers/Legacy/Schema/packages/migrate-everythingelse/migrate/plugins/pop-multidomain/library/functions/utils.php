@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
@@ -10,9 +11,8 @@ class PoP_MultiDomain_Utils
     {
         // Must add the version (request will be routed through CDN)
         $cmsService = CMSServiceFacade::getInstance();
-        $vars = ApplicationState::getVars();
         $url = GeneralUtils::addQueryArgs([
-            'ver' => $vars['version'],
+            'ver' => ApplicationInfoFacade::getInstance()->getVersion(),
         ], $url);
         $subpath = substr($url, strlen($cmsService->getSiteURL()));
 
@@ -21,12 +21,11 @@ class PoP_MultiDomain_Utils
             $theme = $options['theme'];
             $thememode = $options['thememode'];
 
-            $vars = ApplicationState::getVars();
-            if ($theme && $vars['theme'] != $theme) {
-                $subpath = str_replace('/'.$vars['theme'].'/', '/'.$theme.'/', $subpath);
+            if ($theme && \PoP\Root\App::getState('theme') != $theme) {
+                $subpath = str_replace('/'.\PoP\Root\App::getState('theme').'/', '/'.$theme.'/', $subpath);
             }
-            if ($thememode && $vars['thememode'] != $thememode) {
-                $subpath = str_replace('/'.$vars['thememode'].'/', '/'.$thememode.'/', $subpath);
+            if ($thememode && \PoP\Root\App::getState('thememode') != $thememode) {
+                $subpath = str_replace('/'.\PoP\Root\App::getState('thememode').'/', '/'.$thememode.'/', $subpath);
             }
         }
 

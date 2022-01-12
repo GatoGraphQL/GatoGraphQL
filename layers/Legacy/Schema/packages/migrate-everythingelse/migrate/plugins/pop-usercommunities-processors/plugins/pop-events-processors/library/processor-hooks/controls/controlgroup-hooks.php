@@ -22,8 +22,7 @@ class UREPoP_RoleProcessors_EM_ControlGroup_Hooks
 
     public function getLayoutSubmodules($layouts)
     {
-        $vars = ApplicationState::getVars();
-        $author = $vars['routing-state']['queried-object-id'];
+        $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Add the Switch Community/Community+Members if the author is a community
         if (gdUreIsCommunity($author)) {

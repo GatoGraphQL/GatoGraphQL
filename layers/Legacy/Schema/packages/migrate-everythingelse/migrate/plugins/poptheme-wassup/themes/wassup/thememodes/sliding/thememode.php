@@ -23,7 +23,7 @@ class GD_ThemeMode_Wassup_Sliding extends GD_WassupThemeMode_Base
             $routeConfigurations[POPTHEME_WASSUP_ROUTE_LOADERS_INITIALFRAMES] = array(
                 'preload' => true,
                 'targets' => array(
-                    \PoP\ComponentModel\Constants\Targets::MAIN,
+                    \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                     POP_TARGET_ADDONS,
                     POP_TARGET_MODALS,
                 ),

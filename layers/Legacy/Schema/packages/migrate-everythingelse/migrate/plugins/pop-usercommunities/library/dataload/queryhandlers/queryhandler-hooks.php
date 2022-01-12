@@ -18,9 +18,8 @@ class PoP_UserCommunities_UserStance_Hooks
     public function getUserFeedback($user_feedback)
     {
         $user_roles = array();
-        $vars = ApplicationState::getVars();
-        if ($vars['global-userstate']['is-user-logged-in']) {
-            $userID = $vars['global-userstate']['current-user-id'];
+        if (\PoP\Root\App::getState('is-user-logged-in')) {
+            $userID = \PoP\Root\App::getState('current-user-id');
 
             // array_values so that it discards the indexes: if will transform an array into an object
             $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();

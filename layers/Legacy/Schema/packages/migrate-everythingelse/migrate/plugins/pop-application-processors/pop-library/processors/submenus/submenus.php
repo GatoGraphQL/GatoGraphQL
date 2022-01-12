@@ -60,8 +60,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         $ret = parent::getRoutes($module, $props);
 
         // Potentially, add an extra header level if the current page is one of the subheaders
-        $vars = ApplicationState::getVars();
-        $route = $vars['route'];
+        $route = \PoP\Root\App::getState('route');
 
         switch ($module[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
@@ -116,13 +115,12 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
 
     public function getUrl(array $module, $route, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 $url = RequestUtils::addRoute($url, $route);
 
@@ -130,11 +128,11 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                 return HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomSubMenus:getUrl:author', $url, $route, $author);
 
             case self::MODULE_SUBMENU_TAG:
-                $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                 return RequestUtils::addRoute($url, $route);
 
             case self::MODULE_SUBMENU_SINGLE:
-                $url = $customPostTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
+                $url = $customPostTypeAPI->getPermalink(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                 return RequestUtils::addRoute($url, $route);
         }
 

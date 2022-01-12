@@ -18,7 +18,7 @@ class PoP_CommonPages_UserPlatform_Module_MainContentRouteModuleProcessor extend
             $ret[PageRouteNatures::PAGE][] = [
                 'module' => $module,
                 'conditions' => [
-                    'routing-state' => [
+                    'routing' => [
                         'queried-object-id' => $page,
                     ],
                 ],

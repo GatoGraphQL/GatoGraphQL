@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl\DirectiveResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
@@ -40,14 +40,13 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
 
     protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        $vars = ApplicationState::getVars();
         // If the user is not logged-in, then do nothing: directive `@validateIsUserLoggedIn` will already fail
-        if (!$vars['global-userstate']['is-user-logged-in']) {
+        if (!App::getState('is-user-logged-in')) {
             return true;
         }
 
         $roles = $this->directiveArgsForSchema['roles'];
-        $userID = $vars['global-userstate']['current-user-id'];
+        $userID = App::getState('current-user-id');
         $userRoles = $this->getUserRoleTypeAPI()->getUserRoles($userID);
         return !empty(array_intersect($roles, $userRoles));
     }

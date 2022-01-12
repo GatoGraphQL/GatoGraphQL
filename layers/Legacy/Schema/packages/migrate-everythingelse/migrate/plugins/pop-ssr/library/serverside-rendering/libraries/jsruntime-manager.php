@@ -44,27 +44,27 @@ class PoP_ServerSide_JSRuntimeManager
         $this->setPageSectionURL($url);
     }
 
-    public function initBlockVarPaths(&$vars, $url, $domain, $pssId, $targetId, $moduleName, $group = null)
+    public function initBlockVarPaths(&$blockVars, $url, $domain, $pssId, $targetId, $moduleName, $group = null)
     {
         $group = $group ?? GD_JSMETHOD_GROUP_MAIN;
 
-        if (!$vars[$url]) {
-            $vars[$url] = array();
+        if (!$blockVars[$url]) {
+            $blockVars[$url] = array();
         }
-        if (!$vars[$url][$domain]) {
-            $vars[$url][$domain] = array();
+        if (!$blockVars[$url][$domain]) {
+            $blockVars[$url][$domain] = array();
         }
-        if (!$vars[$url][$domain][$pssId]) {
-            $vars[$url][$domain][$pssId] = array();
+        if (!$blockVars[$url][$domain][$pssId]) {
+            $blockVars[$url][$domain][$pssId] = array();
         }
-        if (!$vars[$url][$domain][$pssId][$targetId]) {
-            $vars[$url][$domain][$pssId][$targetId] = array();
+        if (!$blockVars[$url][$domain][$pssId][$targetId]) {
+            $blockVars[$url][$domain][$pssId][$targetId] = array();
         }
-        if (!$vars[$url][$domain][$pssId][$targetId][$moduleName]) {
-            $vars[$url][$domain][$pssId][$targetId][$moduleName] = array();
+        if (!$blockVars[$url][$domain][$pssId][$targetId][$moduleName]) {
+            $blockVars[$url][$domain][$pssId][$targetId][$moduleName] = array();
         }
-        if (!$vars[$url][$domain][$pssId][$targetId][$moduleName][$group]) {
-            $vars[$url][$domain][$pssId][$targetId][$moduleName][$group] = array();
+        if (!$blockVars[$url][$domain][$pssId][$targetId][$moduleName][$group]) {
+            $blockVars[$url][$domain][$pssId][$targetId][$moduleName][$group] = array();
         }
     }
 

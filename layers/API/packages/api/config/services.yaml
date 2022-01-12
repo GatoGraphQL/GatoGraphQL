@@ -19,6 +19,9 @@ services:
     PoP\API\Schema\FieldQueryInterpreterInterface:
         class: \PoP\API\Schema\FieldQueryInterpreter
 
+    PoP\API\State\:
+        resource: '../src/State/*'
+
     PoP\API\Hooks\:
         resource: '../src/Hooks/*'
 

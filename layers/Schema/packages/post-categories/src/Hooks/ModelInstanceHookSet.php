@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\Hooks;
 
+use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\BasicService\AbstractHookSet;
 use PoPSchema\CustomPosts\Routing\RouteNatures;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
@@ -39,19 +39,18 @@ class ModelInstanceHookSet extends AbstractHookSet
     {
         $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
-            array($this, 'getModelInstanceComponentsFromVars')
+            array($this, 'getModelInstanceComponentsFromAppState')
         );
     }
 
-    public function getModelInstanceComponentsFromVars($components)
+    public function getModelInstanceComponentsFromAppState($components)
     {
-        $vars = ApplicationState::getVars();
-        $nature = $vars['nature'];
+        $nature = App::getState('nature');
 
         // Properties specific to each nature
         if (
             $nature == RouteNatures::CUSTOMPOST
-            && $vars['routing-state']['queried-object-post-type'] == $this->getPostTypeAPI()->getPostCustomPostType()
+            && App::getState(['routing', 'queried-object-post-type']) == $this->getPostTypeAPI()->getPostCustomPostType()
         ) {
             // Single may depend on its post_type and category
             // Post and Event may be different
@@ -63,7 +62,7 @@ class ModelInstanceHookSet extends AbstractHookSet
                     false
                 )
             ) {
-                $postID = $vars['routing-state']['queried-object-id'];
+                $postID = App::getState(['routing', 'queried-object-id']);
                 $categories = [];
                 foreach ($this->getPostCategoryTypeAPI()->getCustomPostCategories($postID) as $cat) {
                     $categories[] = $this->getPostCategoryTypeAPI()->getCategorySlug($cat) . $this->getPostCategoryTypeAPI()->getCategoryID($cat);

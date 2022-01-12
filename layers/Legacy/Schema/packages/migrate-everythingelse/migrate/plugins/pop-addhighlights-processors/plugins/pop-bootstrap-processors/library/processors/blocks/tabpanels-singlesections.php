@@ -41,11 +41,10 @@ class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP
 
     public function initRequestProps(array $module, array &$props): void
     {
-        $vars = ApplicationState::getVars();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT:
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
                     $this->setProp($module, $props, 'show-controls-bottom', false);
                 }

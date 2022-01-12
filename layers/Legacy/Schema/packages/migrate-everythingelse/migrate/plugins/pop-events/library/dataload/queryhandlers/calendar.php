@@ -26,7 +26,7 @@ class GD_DataLoad_QueryInputOutputHandler_Calendar extends AbstractQueryInputOut
         $query_args[GD_URLPARAM_MONTH] = $month;
 
         // Always bring all results
-        $query_args[\PoP\ComponentModel\Constants\Params::LIMIT] = 0;
+        $query_args[\PoP\ComponentModel\Constants\PaginationParams::LIMIT] = 0;
     }
 
     public function getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array

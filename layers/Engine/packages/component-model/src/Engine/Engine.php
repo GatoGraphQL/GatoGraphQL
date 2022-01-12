@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\Root\App;
 use Exception;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\Component;
@@ -27,6 +27,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
@@ -37,13 +38,13 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
+use PoP\Root\App;
 use PoP\Root\Helpers\Methods;
 
 class Engine implements EngineInterface
@@ -117,6 +118,7 @@ class Engine implements EngineInterface
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?EntryModuleManagerInterface $entryModuleManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
+    private ?ApplicationInfoInterface $applicationInfo = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -226,6 +228,14 @@ class Engine implements EngineInterface
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+    }
+    final public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
+    {
+        $this->applicationInfo = $applicationInfo;
+    }
+    final protected function getApplicationInfo(): ApplicationInfoInterface
+    {
+        return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
     }
 
     public function getOutputData(): array
@@ -338,26 +348,31 @@ class Engine implements EngineInterface
         $this->data = $this->helperCalculations = [];
         $this->processAndGenerateData();
 
-        // See if there are extra URIs to be processed in this same request
+        /**
+         * See if there are extra URIs to be processed in this same request.
+         *
+         * Combine the response for each extra URI together with the original response,
+         * merging all JSON objects together, but under each's URL/model_instance_id.
+         *
+         * To obtain the nature for each URI, we use a hack:
+         * change the current URI and create a new WP object,
+         * which will process the query_vars and from there obtain the nature.
+         */
         if ($extra_routes = $this->getExtraRoutes()) {
-            // Combine the response for each extra URI together with the original response, merging all JSON objects together, but under each's URL/model_instance_id
-
-            // To obtain the nature for each URI, we use a hack: change the current URI and create a new WP object, which will process the query_vars and from there obtain the nature
             // First make a backup of the current URI to set it again later
-            $vars = &ApplicationState::$vars;
-            $current_route = $vars['route'];
+            $currentRoute = App::getState('route');
 
             // Process each extra URI, and merge its results with all others
             foreach ($extra_routes as $route) {
                 // Reset $vars so that it gets created anew
-                $vars['route'] = $route;
+                App::getAppStateManager()->override('route', $route);
 
                 // Process the request with the new $vars and merge it with all other results
                 $this->processAndGenerateData();
             }
 
             // Set the previous values back
-            $vars['route'] = $current_route;
+            App::getAppStateManager()->override('route', $currentRoute);
         }
 
         // Add session/site meta
@@ -367,7 +382,7 @@ class Engine implements EngineInterface
         $this->formatData();
 
         // Keep only the data that is needed to be sent, and encode it as JSON
-        $this->calculateOutuputData();
+        $this->calculateOutputData();
 
         // Send the ETag-header
         $this->sendEtagHeader();
@@ -379,7 +394,7 @@ class Engine implements EngineInterface
         $this->data = $formatter->getFormattedData($this->data);
     }
 
-    public function calculateOutuputData(): void
+    public function calculateOutputData(): void
     {
         $this->outputData = $this->getEncodedDataObject($this->data);
     }
@@ -435,13 +450,11 @@ class Engine implements EngineInterface
 
     protected function processAndGenerateData(): void
     {
-        $vars = ApplicationState::getVars();
-
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
-        $dataoutputitems = $vars['dataoutputitems'];
+        $dataoutputitems = App::getState('dataoutputitems');
 
         // From the state we know if to process static/staful content or both
-        $datasources = $vars['datasources'];
+        $datasources = App::getState('datasources');
 
         // Get the entry module based on the application configuration and the nature
         $module = $this->getEntryModule();
@@ -543,10 +556,8 @@ class Engine implements EngineInterface
 
     protected function addSharedMeta(): void
     {
-        $vars = ApplicationState::getVars();
-
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
-        $dataoutputitems = $vars['dataoutputitems'];
+        $dataoutputitems = App::getState('dataoutputitems');
 
         if (
             in_array(DataOutputItems::META, $dataoutputitems)
@@ -578,8 +589,7 @@ class Engine implements EngineInterface
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
         // From the state we know if to process static/staful content or both
-        $vars = ApplicationState::getVars();
-        $dataoutputmode = $vars['dataoutputmode'];
+        $dataoutputmode = App::getState('dataoutputmode');
 
         // First check if there's a cache stored
         $immutable_datasetsettings = null;
@@ -671,21 +681,12 @@ class Engine implements EngineInterface
     {
         $meta = [];
         if ($this->addSiteMeta()) {
-            $vars = ApplicationState::getVars();
-            $meta[Params::VERSION] = $vars['version'];
-            $meta[Params::DATAOUTPUTMODE] = $vars['dataoutputmode'];
-            $meta[Params::DATABASESOUTPUTMODE] = $vars['dboutputmode'];
+            $meta[Params::VERSION] = $this->getApplicationInfo()->getVersion();
+            $meta[Params::DATAOUTPUTMODE] = App::getState('dataoutputmode');
+            $meta[Params::DATABASESOUTPUTMODE] = App::getState('dboutputmode');
 
-            if ($vars['format'] ?? null) {
-                $meta[Params::SETTINGSFORMAT] = $vars['format'];
-            }
-            if ($vars['mangled'] ?? null) {
-                $meta[Request::URLPARAM_MANGLED] = $vars['mangled'];
-            }
-            /** @var ComponentConfiguration */
-            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-            if ($componentConfiguration->enableConfigByParams() && $vars['config']) {
-                $meta[Params::CONFIG] = $vars['config'];
+            if (App::getState('mangled')) {
+                $meta[Request::URLPARAM_MANGLED] = App::getState('mangled');
             }
 
             // Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
@@ -965,10 +966,9 @@ class Engine implements EngineInterface
         $root_processor = $this->getModuleProcessorManager()->getProcessor($root_module);
 
         // From the state we know if to process static/staful content or both
-        $vars = ApplicationState::getVars();
-        $datasources = $vars['datasources'];
-        $dataoutputmode = $vars['dataoutputmode'];
-        $dataoutputitems = $vars['dataoutputitems'];
+        $datasources = App::getState('datasources');
+        $dataoutputmode = App::getState('dataoutputmode');
+        $dataoutputitems = App::getState('dataoutputitems');
         $add_meta = in_array(DataOutputItems::META, $dataoutputitems);
 
         $immutable_moduledata = $mutableonmodel_moduledata = $mutableonrequest_moduledata = [];
@@ -1441,20 +1441,16 @@ class Engine implements EngineInterface
 
     public function getDatabases(): array
     {
-        $vars = ApplicationState::getVars();
-
         // Save all database elements here, under typeResolver
         $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $objectTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = [];
         $this->nocache_fields = [];
-        // $format = $vars['format'];
-        // $route = $vars['route'];
 
         // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
         // but we need to avoid fetching those DB objects that were already fetched in a previous iteration
         $already_loaded_ids_data_fields = [];
 
         // The variables come from $vars
-        $variables = $vars['variables'];
+        $variables = App::getState('variables');
         // Initiate a new $messages interchange across directives
         $messages = [];
 
@@ -1773,7 +1769,7 @@ class Engine implements EngineInterface
 
         // Show logs only if both enabled, and passing the action in the URL
         if (Environment::enableShowLogs()) {
-            if (in_array(Actions::SHOW_LOGS, $vars['actions'])) {
+            if (in_array(Actions::SHOW_LOGS, App::getState('actions'))) {
                 $ret['logEntries'] = $this->getFeedbackMessageStore()->getLogEntries();
             }
         }
@@ -1933,8 +1929,7 @@ class Engine implements EngineInterface
         // Do not add the "database", "userstatedatabase" entries unless there are values in them
         // Otherwise, it messes up integrating the current databases in the webplatform with those from the response when deep merging them
         if ($entries) {
-            $vars = ApplicationState::getVars();
-            $dboutputmode = $vars['dboutputmode'];
+            $dboutputmode = App::getState('dboutputmode');
 
             // Combine all the databases or send them separate
             if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
@@ -1965,8 +1960,7 @@ class Engine implements EngineInterface
     protected function maybeCombineAndAddSchemaEntries(array &$ret, string $name, array $entries): void
     {
         if ($entries) {
-            $vars = ApplicationState::getVars();
-            $dboutputmode = $vars['dboutputmode'];
+            $dboutputmode = App::getState('dboutputmode');
 
             // Combine all the databases or send them separate
             if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {

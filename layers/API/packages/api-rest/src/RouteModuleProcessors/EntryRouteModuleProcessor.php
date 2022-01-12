@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\RESTAPI\RouteModuleProcessors;
 
+use PoP\Root\App;
 use PoP\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Routing\RouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
@@ -23,14 +23,13 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
 
-        $vars = ApplicationState::getVars();
         $ret[RouteNatures::HOME][] = [
             'module' => [
                 RootRelationalFieldDataloadModuleProcessor::class,
                 RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT,
                 [
-                    'fields' => isset($vars['query']) ?
-                        $vars['query']
+                    'fields' => !empty(App::getState('query')) ?
+                        App::getState('query')
                         : $this->getRESTFields()
                     ]
                 ],

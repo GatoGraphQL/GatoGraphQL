@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\Configuration\Request;
@@ -171,7 +172,6 @@ class PoPWebPlatform_Initialization
         $locale = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:locale', get_locale());
 
         // Default one: do not send, so that it doesn't show up in the Embed URL
-        $vars = ApplicationState::getVars();
         $keepopentabs = HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS, true);
         $multilayout_labels = PoP_HTMLCSSPlatform_ConfigurationUtils::getMultilayoutLabels();
         // $multilayout_keyfields = PoP_WebPlatform_ConfigurationUtils::get_multilayout_keyfields();
@@ -192,7 +192,7 @@ class PoPWebPlatform_Initialization
             'INITIAL_URL' => $requestHelperService->getCurrentURL(), // Needed to always identify which was the first URL loaded
             'HOME_DOMAIN' => $homeurl,
             'ALLOWED_DOMAINS' => $allowed_domains,
-            'VERSION' => $vars['version'],
+            'VERSION' => ApplicationInfoFacade::getInstance()->getVersion(),
             'LOCALE' => $locale,
             'API_URLPARAMS' => $api_urlparams,
             'USE_PROGRESSIVEBOOTING' => (PoP_WebPlatform_ServerUtils::useProgressiveBooting() ? true : ''),
@@ -206,8 +206,8 @@ class PoPWebPlatform_Initialization
             'AJAXURL' => admin_url('admin-ajax.php', 'relative'),
             'UPLOADURL' => admin_url('async-upload.php', 'relative'),
             'GMT_OFFSET' => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')),
-            'DATAOUTPUTMODE' => $vars['dataoutputmode'],
-            'DBOUTPUTMODE' => $vars['dboutputmode'],
+            'DATAOUTPUTMODE' => \PoP\Root\App::getState('dataoutputmode'),
+            'DBOUTPUTMODE' => \PoP\Root\App::getState('dboutputmode'),
             'ERROR_MESSAGE' => '<div class="alert alert-danger alert-block fade in"><button type="button" class="close" data-dismiss="alert">x</button>{0}</div>',
             'POSTSTATUS' => array(
                 'PUBLISH' => Status::PUBLISHED,

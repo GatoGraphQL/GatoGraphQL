@@ -7,6 +7,7 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\Root\App;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\SettingsMutationResolver;
 
 class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBridge
@@ -40,7 +41,7 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
         $executed = parent::executeMutation($data_properties);
         if ($executed !== null && $executed[ResponseConstants::SUCCESS]) {
             // Add the result from the MutationResolver as hard redirect
-            $redirect_to = $this->getMutationResolutionManager()->getResult($this);
+            $redirect_to = App::getMutationResolutionStore()->getResult($this);
             $executed[GD_DATALOAD_QUERYHANDLERRESPONSE_HARDREDIRECT] = $redirect_to;
         }
         return $executed;

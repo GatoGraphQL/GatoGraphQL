@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModelInstance;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\BasicService\BasicServiceTrait;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\DefinitionManagerInterface;
 
 class ModelInstance implements ModelInstanceInterface
@@ -50,12 +50,12 @@ class ModelInstance implements ModelInstanceInterface
     {
         $components = array();
 
-        // Mix the information specific to the module, with that present in $vars
+        // Mix the information specific to the module, with that present in the application state
         $components = (array)$this->getHooksAPI()->applyFilters(
             self::HOOK_COMPONENTS_RESULT,
             array_merge(
                 $components,
-                $this->getModelInstanceComponentsFromVars()
+                $this->getModelInstanceComponentsFromAppState()
             )
         );
 
@@ -78,35 +78,24 @@ class ModelInstance implements ModelInstanceInterface
     /**
      * @return string[]
      */
-    protected function getModelInstanceComponentsFromVars(): array
+    protected function getModelInstanceComponentsFromAppState(): array
     {
         $components = array();
 
-        $vars = ApplicationState::getVars();
-
         // There will always be a nature. Add it.
-        $nature = $vars['nature'];
-        $route = $vars['route'];
+        $nature = App::getState('nature');
+        $route = App::getState('route');
         $components[] = $this->__('nature:', 'component-model') . $nature;
         $components[] = $this->__('route:', 'component-model') . $route;
 
         // Add the version, because otherwise there may be PHP errors happening from stale configuration that is not deleted, and still served, after a new version is deployed
-        $components[] = $this->__('version:', 'component-model') . $vars['version'];
+        $components[] = $this->__('version:', 'component-model') . $this->getApplicationInfo()->getVersion();
 
         // Other properties
-        if ($format = $vars['format'] ?? null) {
-            $components[] = $this->__('format:', 'component-model') . $format;
-        }
-        if ($target = $vars['target'] ?? null) {
-            $components[] = $this->__('target:', 'component-model') . $target;
-        }
-        if ($actions = $vars['actions'] ?? null) {
+        if ($actions = App::getState('actions')) {
             $components[] = $this->__('actions:', 'component-model') . implode(';', $actions);
         }
-        if ($config = $vars['config'] ?? null) {
-            $components[] = $this->__('config:', 'component-model') . $config;
-        }
-        if ($modulefilter = $vars['modulefilter'] ?? null) {
+        if ($modulefilter = App::getState('modulefilter')) {
             $components[] = $this->__('module filter:', 'component-model') . $modulefilter;
         }
 
@@ -119,21 +108,21 @@ class ModelInstance implements ModelInstanceInterface
         ) {
             $components[] = $this->__('operation:', 'component-model') . ('POST' == $_SERVER['REQUEST_METHOD'] ? 'post' : 'get');
         }
-        if ($mangled = $vars['mangled'] ?? null) {
+        if ($mangled = App::getState('mangled')) {
             // By default it is mangled. To make it non-mangled, url must have param "mangled=none",
             // so only in these exceptional cases the identifier will add this parameter
             $components[] = $this->__('mangled:', 'component-model') . $mangled;
         }
-        if ($vars['only-fieldname-as-outputkey'] ?? null) {
+        if (App::getState('only-fieldname-as-outputkey')) {
             $components[] = $this->__('only-fieldname-as-outputkey', 'component-model');
         }
-        if ($versionConstraint = $vars['version-constraint'] ?? null) {
+        if ($versionConstraint = App::getState('version-constraint')) {
             $components[] = $this->__('version-constraint:', 'component-model') . $versionConstraint;
         }
-        if ($fieldVersionConstraints = $vars['field-version-constraints'] ?? null) {
+        if ($fieldVersionConstraints = App::getState('field-version-constraints')) {
             $components[] = $this->__('field-version-constraints:', 'component-model') . json_encode($fieldVersionConstraints);
         }
-        if ($directiveVersionConstraints = $vars['directive-version-constraints'] ?? null) {
+        if ($directiveVersionConstraints = App::getState('directive-version-constraints')) {
             $components[] = $this->__('directive-version-constraints:', 'component-model') . json_encode($directiveVersionConstraints);
         }
 

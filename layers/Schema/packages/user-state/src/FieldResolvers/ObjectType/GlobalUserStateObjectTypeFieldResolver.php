@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
@@ -62,8 +62,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
     ): mixed {
         switch ($fieldName) {
             case 'loggedInUserID':
-                $vars = ApplicationState::getVars();
-                return $vars['global-userstate']['current-user-id'];
+                return App::getState('current-user-id');
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
+use PoP\Root\App;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
@@ -52,8 +52,7 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
 
         switch ($module[1]) {
             case self::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION:
-                $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
-                if ($target_id = $gd_dataload_actionexecution_manager->getResult($this->instanceManager->getInstance(CreateLocationMutationResolverBridge::class))) {
+                if ($target_id = App::getMutationResolutionStore()->getResult($this->instanceManager->getInstance(CreateLocationMutationResolverBridge::class))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($target_id);
                 } else {
                     $data_properties[DataloadingConstants::SKIPDATALOAD] = true;
