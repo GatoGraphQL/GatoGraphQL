@@ -2,7 +2,7 @@
 
 namespace PoPSchema\Settings;
 
-use PoP\Root\AbstractComponentTest;
+use PoP\Engine\AbstractComponentTest;
 
 class ComponentTest extends AbstractComponentTest
 {

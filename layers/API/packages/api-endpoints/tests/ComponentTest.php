@@ -2,7 +2,7 @@
 
 namespace PoP\APIEndpoints;
 
-use PoP\Root\AbstractComponentTest;
+use PoP\Engine\AbstractComponentTest;
 
 class ComponentTest extends AbstractComponentTest
 {

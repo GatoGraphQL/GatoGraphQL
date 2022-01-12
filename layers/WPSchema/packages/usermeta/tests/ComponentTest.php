@@ -4,7 +4,7 @@ namespace PoPWPSchema\UserMeta;
 
 use PHPUnit\Framework\TestCase;
 
-use PoP\Root\AbstractComponentTest;
+use PoP\Engine\AbstractComponentTest;
 
 /**
  * Made abstract to disable the test

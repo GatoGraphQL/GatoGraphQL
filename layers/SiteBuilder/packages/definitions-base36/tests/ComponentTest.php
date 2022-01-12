@@ -2,7 +2,7 @@
 
 namespace PoP\Base36Definitions;
 
-use PoP\Root\AbstractComponentTest;
+use PoP\Engine\AbstractComponentTest;
 
 class ComponentTest extends AbstractComponentTest
 {

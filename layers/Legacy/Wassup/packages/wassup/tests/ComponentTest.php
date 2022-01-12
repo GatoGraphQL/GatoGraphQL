@@ -2,7 +2,7 @@
 
 namespace PoPSitesWassup\Wassup;
 
-use PoP\Root\AbstractComponentTest;
+use PoP\Engine\AbstractComponentTest;
 
 class ComponentTest extends AbstractComponentTest
 {
