@@ -26,8 +26,12 @@ class AppStateProvider extends AbstractAppStateProvider
 
         $state['nature'] = $routingManager->getCurrentNature();
         $state['route'] = $routingManager->getCurrentRoute();
-        $state['output'] = Request::getOutput();
         $state['modulefilter'] = $modulefilter_manager->getSelectedModuleFilterName();
+        $state['variables'] = $fieldQueryInterpreter->getVariablesFromRequest();
+        $state['namespace-types-and-interfaces'] = $componentConfiguration->mustNamespaceTypes();
+        $state['only-fieldname-as-outputkey'] = false;
+        
+        $state['output'] = Request::getOutput();
         $state['actionpath'] = Request::getActionPath();
         $state['dataoutputitems'] = Request::getDataOutputItems();
         $state['datasources'] = Request::getDataSourceSelector();
@@ -37,11 +41,6 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['mangled'] = Request::getMangledValue();
         $state['actions'] = Request::getActions();
         $state['scheme'] = Request::getScheme();
-
-        // By default, get the variables from the request
-        $state['variables'] = $fieldQueryInterpreter->getVariablesFromRequest();
-        $state['only-fieldname-as-outputkey'] = false;
-        $state['namespace-types-and-interfaces'] = $componentConfiguration->mustNamespaceTypes();
         $state['version-constraint'] = Request::getVersionConstraint();
         $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
         $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
