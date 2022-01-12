@@ -1052,7 +1052,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $stringified_module_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
         $ret = GeneralUtils::addQueryArgs(
             [
-                ModuleFilterManager::URLPARAM_MODULEFILTER => $this->getModulePaths()->getName(),
+                Params::MODULEFILTER => $this->getModulePaths()->getName(),
                 ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
             ],
             $this->getRequestHelperService()->getCurrentURL()
