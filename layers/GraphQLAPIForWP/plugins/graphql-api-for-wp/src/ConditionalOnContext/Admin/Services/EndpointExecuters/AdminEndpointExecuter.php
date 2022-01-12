@@ -83,7 +83,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
 
         \add_action(
             'admin_init',
-            [$this, 'printJSONOutputTemplateAndExit']
+            [$this, 'includeJSONOutputTemplateAndExit']
         );
     }
 
@@ -134,7 +134,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
      * When in the admin, we must manually load the template,
      * and then exit
      */
-    public function printJSONOutputTemplateAndExit(): void
+    public function includeJSONOutputTemplateAndExit(): void
     {
         // Make sure the user has access to the editor
         if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
