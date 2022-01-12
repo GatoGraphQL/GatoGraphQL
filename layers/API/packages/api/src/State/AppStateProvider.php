@@ -6,7 +6,7 @@ namespace PoP\API\State;
 
 use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
-use PoP\API\Configuration\Request;
+use PoP\API\Configuration\EngineRequest;
 use PoP\API\Constants\Actions;
 use PoP\API\Facades\FieldQueryConvertorFacade;
 use PoP\API\PersistedQueries\PersistedQueryUtils;
@@ -75,7 +75,8 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['does-api-query-have-errors'] = false;
 
         // Passing the query via URL param?
-        $state['query'] = Request::getQuery();
+        $enableModifyingEngineBehaviorViaRequestParam = false;
+        $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequestParam);
     }
 
     /**
