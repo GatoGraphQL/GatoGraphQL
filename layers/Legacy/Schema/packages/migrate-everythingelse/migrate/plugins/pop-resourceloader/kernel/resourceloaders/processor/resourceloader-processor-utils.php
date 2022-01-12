@@ -297,7 +297,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 'route',
                 'target',
                 'dataoutputitems',
-                'datasources',
+                'datasourceselector',
                 // Nature
                 'routing',
             ),
@@ -376,7 +376,7 @@ class PoP_ResourceLoaderProcessorUtils {
             \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             \PoP\ComponentModel\Constants\DataOutputItems::SESSION,
         );
-        $vars['datasources'] = \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST;
+        $vars['datasourceselector'] = \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST;
         $vars['format'] = $format;
         $vars['route'] = $route;
         $vars['target'] = $target;

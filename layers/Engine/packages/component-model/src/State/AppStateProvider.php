@@ -44,7 +44,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $enableModifyingEngineBehaviorViaRequestParams = $componentConfiguration->enableModifyingEngineBehaviorViaRequestParams();
         $state['output'] = EngineRequest::getOutput($enableModifyingEngineBehaviorViaRequestParams);
         $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequestParams);
-        $state['datasources'] = EngineRequest::getDataSourceSelector($enableModifyingEngineBehaviorViaRequestParams);
+        $state['datasourceselector'] = EngineRequest::getDataSourceSelector($enableModifyingEngineBehaviorViaRequestParams);
         $state['datastructure'] = EngineRequest::getDataStructure($enableModifyingEngineBehaviorViaRequestParams);
         $state['dataoutputmode'] = EngineRequest::getDataOutputMode($enableModifyingEngineBehaviorViaRequestParams);
         $state['dboutputmode'] = EngineRequest::getDBOutputMode($enableModifyingEngineBehaviorViaRequestParams);

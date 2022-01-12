@@ -64,7 +64,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         }
 
         // From the state we know if to process static/staful content or both
-        $datasources = App::getState('datasources');
+        $datasourceselector = App::getState('datasourceselector');
         $dataoutputmode = App::getState('dataoutputmode');
 
         // First check if there's a cache stored
@@ -87,7 +87,7 @@ class Engine extends UpstreamEngine implements EngineInterface
                 $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings);
             }
         }
-        if ($datasources == DataSourceSelectors::MODELANDREQUEST) {
+        if ($datasourceselector == DataSourceSelectors::MODELANDREQUEST) {
             $mutableonrequest_settings = $processor->getMutableonrequestSettingsModuletree($module, $props);
         }
 

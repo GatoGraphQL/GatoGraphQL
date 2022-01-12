@@ -9,6 +9,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\App;
 
 class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engine
 {
@@ -42,7 +43,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $ret = parent::getModuleSettings($module, $model_props, $props);
 
         // Validate that the strata includes the required stratum
-        if (!in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
+        if (!in_array(POP_STRATUM_WEB, App::getState('strata'))) {
             return $ret;
         }
 
@@ -55,9 +56,9 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
 
         // From the state we know if to process static/staful content or both
-        $datasources = \PoP\Root\App::getState('datasources');
-        $dataoutputmode = \PoP\Root\App::getState('dataoutputmode');
-        $dataoutputitems = \PoP\Root\App::getState('dataoutputitems');
+        $datasourceselector = App::getState('datasourceselector');
+        $dataoutputmode = App::getState('dataoutputmode');
+        $dataoutputitems = App::getState('dataoutputitems');
 
         $add_settings = in_array(\PoP\ConfigurationComponentModel\Constants\DataOutputItems::MODULESETTINGS, $dataoutputitems);
 
@@ -80,7 +81,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 }
             }
 
-            if ($datasources == \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST) {
+            if ($datasourceselector == \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST) {
                 $mutableonrequest_jssettings = $processor->getMutableonrequestJssettingsModuletree($module, $props);
             }
 
@@ -135,7 +136,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         // Only add the extra information if the entry-module is of the right object class
         if ($root_processor instanceof PoP_WebPlatformQueryDataModuleProcessorBase) {
 
-            $dataoutputmode = \PoP\Root\App::getState('dataoutputmode');
+            $dataoutputmode = App::getState('dataoutputmode');
 
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
@@ -182,7 +183,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         parent::processAndAddModuleData($module_path, $module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
 
         // Validate that the strata includes the required stratum
-        if (!in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
+        if (!in_array(POP_STRATUM_WEB, App::getState('strata'))) {
             return;
         }
 
@@ -226,7 +227,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $meta = parent::getRequestMeta();
 
         // Validate that the strata includes the required stratum
-        if (!in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
+        if (!in_array(POP_STRATUM_WEB, App::getState('strata'))) {
             return $meta;
         }
 
@@ -251,7 +252,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
 
         // If preloading the request, then do not render it
-        if (in_array(GD_URLPARAM_ACTION_PRELOAD, \PoP\Root\App::getState('actions'))) {
+        if (in_array(GD_URLPARAM_ACTION_PRELOAD, App::getState('actions'))) {
             $meta[POP_JS_DONOTRENDER] = true;
         }
 
@@ -278,7 +279,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $data = parent::getEncodedDataObject($data);
 
         // Validate that the strata includes the required stratum
-        if (!in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
+        if (!in_array(POP_STRATUM_WEB, App::getState('strata'))) {
             return $data;
         }
 

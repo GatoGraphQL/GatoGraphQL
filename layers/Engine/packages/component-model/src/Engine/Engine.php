@@ -453,7 +453,7 @@ class Engine implements EngineInterface
         $dataoutputitems = App::getState('dataoutputitems');
 
         // From the state we know if to process static/staful content or both
-        $datasources = App::getState('datasources');
+        $datasourceselector = App::getState('datasourceselector');
 
         // Get the entry module based on the application configuration and the nature
         $module = $this->getEntryModule();
@@ -463,7 +463,7 @@ class Engine implements EngineInterface
         $this->model_props = $this->getModelPropsModuletree($module);
 
         // If only getting static content, then no need to add the mutableonrequest props
-        if ($datasources == DataSourceSelectors::ONLYMODEL) {
+        if ($datasourceselector == DataSourceSelectors::ONLYMODEL) {
             $this->props = $this->model_props;
         } else {
             $this->props = $this->addRequestPropsModuletree($module, $this->model_props);
@@ -965,7 +965,7 @@ class Engine implements EngineInterface
         $root_processor = $this->getModuleProcessorManager()->getProcessor($root_module);
 
         // From the state we know if to process static/staful content or both
-        $datasources = App::getState('datasources');
+        $datasourceselector = App::getState('datasourceselector');
         $dataoutputmode = App::getState('dataoutputmode');
         $dataoutputitems = App::getState('dataoutputitems');
         $add_meta = in_array(DataOutputItems::META, $dataoutputitems);
@@ -1019,7 +1019,7 @@ class Engine implements EngineInterface
             $mutableonmodel_data_properties
         );
 
-        if ($datasources == DataSourceSelectors::ONLYMODEL) {
+        if ($datasourceselector == DataSourceSelectors::ONLYMODEL) {
             $root_data_properties = $model_data_properties;
         } else {
             $mutableonrequest_data_properties = $root_processor->getMutableonrequestDataPropertiesDatasetmoduletree($root_module, $root_props);
@@ -1060,7 +1060,7 @@ class Engine implements EngineInterface
             $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
 
             // If we are only requesting data from the model alone, and this dataloading module depends on mutableonrequest, then skip it
-            if ($datasources == DataSourceSelectors::ONLYMODEL && $datasource == DataSources::MUTABLEONREQUEST) {
+            if ($datasourceselector == DataSourceSelectors::ONLYMODEL && $datasource == DataSources::MUTABLEONREQUEST) {
                 continue;
             }
 
