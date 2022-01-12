@@ -12,7 +12,6 @@ use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
@@ -1053,7 +1052,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $ret = GeneralUtils::addQueryArgs(
             [
                 Params::MODULEFILTER => $this->getModulePaths()->getName(),
-                ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
+                Params::MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
             ],
             $this->getRequestHelperService()->getCurrentURL()
         );
@@ -1069,7 +1068,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($extra_module_paths = $this->getProp($module, $props, 'dataload-source-add-modulepaths')) {
             foreach ($extra_module_paths as $modulepath) {
                 $ret = GeneralUtils::addQueryArgs([
-                    ModulePaths::URLPARAM_MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($modulepath),
+                    Params::MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($modulepath),
                 ], $ret);
             }
         }

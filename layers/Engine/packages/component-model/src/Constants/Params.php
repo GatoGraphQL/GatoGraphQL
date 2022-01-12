@@ -18,6 +18,8 @@ class Params
     public const EXTRA_ROUTES = 'extraroutes';
     public const OUTPUT = 'output';
     public const MODULEFILTER = 'modulefilter';
+    public const MODULEPATHS = 'modulepaths';
+
     /**
      * What version constraint to use for the API
      */

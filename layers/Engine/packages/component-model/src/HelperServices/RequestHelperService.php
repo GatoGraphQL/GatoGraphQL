@@ -23,7 +23,7 @@ class RequestHelperService implements RequestHelperServiceInterface
             [
                 Params::VERSION,
                 Params::MODULEFILTER,
-                ModulePaths::URLPARAM_MODULEPATHS,
+                Params::MODULEPATHS,
                 Params::ACTION_PATH,
                 Params::DATA_OUTPUT_ITEMS,
                 Params::DATA_SOURCE,

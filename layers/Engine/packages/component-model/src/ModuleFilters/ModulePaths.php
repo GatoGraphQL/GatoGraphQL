@@ -9,8 +9,6 @@ use PoP\ComponentModel\ModulePath\ModulePathUtils;
 
 class ModulePaths extends AbstractModuleFilter
 {
-    public const URLPARAM_MODULEPATHS = 'modulepaths';
-
     /**
      * @var array[]
      */
