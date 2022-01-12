@@ -30,25 +30,24 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['variables'] = $fieldQueryInterpreter->getVariablesFromRequest();
         $state['namespace-types-and-interfaces'] = $componentConfiguration->mustNamespaceTypes();
         $state['only-fieldname-as-outputkey'] = false;
-        
-        $state['output'] = Request::getOutput();
+        $state['are-mutations-enabled'] = true;
+
+        $state['actions'] = Request::getActions();
+        $state['version-constraint'] = Request::getVersionConstraint();
+        $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
+        $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
         $state['actionpath'] = Request::getActionPath();
+        $state['mangled'] = Request::getMangledValue();
+
+        $state['output'] = Request::getOutput();
         $state['dataoutputitems'] = Request::getDataOutputItems();
         $state['datasources'] = Request::getDataSourceSelector();
         $state['datastructure'] = Request::getDataStructure();
         $state['dataoutputmode'] = Request::getDataOutputMode();
         $state['dboutputmode'] = Request::getDBOutputMode();
-        $state['mangled'] = Request::getMangledValue();
-        $state['actions'] = Request::getActions();
         $state['scheme'] = Request::getScheme();
-        $state['version-constraint'] = Request::getVersionConstraint();
-        $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
-        $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
 
-        // By default, mutations are always enabled. Can be changed for the API
-        $state['are-mutations-enabled'] = true;
-
-        // Set the routing state (eg: PoP Queried Object can add its information)
+        // Set the routing state under a unified entry
         $state['routing'] = [];
     }
 
