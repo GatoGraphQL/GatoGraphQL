@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\ClientEndpointAnnotatorInt
 use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\VoyagerClientEndpointAnnotator;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 
-class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter
+class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter implements EndpointExecuterServiceTagInterface
 {
     private ?CustomEndpointVoyagerClient $customEndpointVoyagerClient = null;
     private ?VoyagerClientEndpointAnnotator $voyagerClientEndpointAnnotator = null;
