@@ -15,7 +15,7 @@ class HooksAPI implements HooksAPIInterface
      * It must be lazy load, since the state will be deleted when
      * calling App::initialize() in the tests.
      */
-    protected function getInstance(): Hooks
+    protected function getInstance(): PHPHooks
     {
         if (!isset(App::$runtimeServices['hooks'])) {
             /**
