@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\Misc;
 
-use PoP\Engine\ModuleFilters\HeadModule;
+use PoP\Engine\Constants\Params;
 use PoP\BasicService\AbstractHookSet;
 
 class URLHookSet extends AbstractHookSet
@@ -18,7 +18,7 @@ class URLHookSet extends AbstractHookSet
     }
     public function getParamsToRemoveFromURL($params)
     {
-        $params[] = HeadModule::URLPARAM_HEADMODULE;
+        $params[] = Params::HEADMODULE;
         return $params;
     }
 }
