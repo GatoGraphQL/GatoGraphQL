@@ -53,11 +53,9 @@ class Component extends AbstractComponent
         array &$componentClassConfiguration
     ): void {
         // If passing ?use_namespace=1, set it on the configuration
-        if (Environment::enableSettingNamespacingByURLParam()) {
-            $useNamespacing = Request::mustNamespaceTypes();
-            if ($useNamespacing !== null) {
-                $componentClassConfiguration[\PoP\ComponentModel\Component::class][\PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES] = $useNamespacing;
-            }
+        $useNamespacing = Request::mustNamespaceTypes();
+        if ($useNamespacing !== null) {
+            $componentClassConfiguration[\PoP\ComponentModel\Component::class][\PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES] = $useNamespacing;
         }
     }
 
