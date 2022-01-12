@@ -35,7 +35,7 @@ class PoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users extends 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-			'avatar' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver::class,
+			'avatar' => \PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

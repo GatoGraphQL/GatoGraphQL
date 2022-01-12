@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

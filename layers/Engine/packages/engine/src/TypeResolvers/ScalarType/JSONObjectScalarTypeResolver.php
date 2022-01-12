@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
+namespace PoP\Engine\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;

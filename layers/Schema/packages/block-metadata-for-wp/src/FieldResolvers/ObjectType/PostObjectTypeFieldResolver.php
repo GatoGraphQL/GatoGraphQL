@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

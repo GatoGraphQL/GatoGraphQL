@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GuzzleHelpers\GuzzleHelpers;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver

@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolv
 use PoP\ComponentModel\TypeResolvers\ScalarType\FloatScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FunctionFields\TypeResolvers\ScalarType\ArrayKeyScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
