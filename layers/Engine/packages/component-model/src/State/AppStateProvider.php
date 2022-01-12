@@ -40,7 +40,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
         $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
 
-        $enableModifyingEngineBehaviorViaRequestParams = false;
+        $enableModifyingEngineBehaviorViaRequestParams = $componentConfiguration->enableModifyingEngineBehaviorViaRequestParams();
         $state['output'] = EngineRequest::getOutput($enableModifyingEngineBehaviorViaRequestParams);
         $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequestParams);
         $state['datasources'] = EngineRequest::getDataSourceSelector($enableModifyingEngineBehaviorViaRequestParams);

@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\API\State;
 
-use PoP\API\Component;
-use PoP\API\ComponentConfiguration;
+use PoP\API\Component as APIComponent;
+use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\API\Configuration\EngineRequest;
 use PoP\API\Constants\Actions;
 use PoP\API\Facades\FieldQueryConvertorFacade;
 use PoP\API\PersistedQueries\PersistedQueryUtils;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\ComponentModel\Component as ComponentModelComponent;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
@@ -67,15 +69,17 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['actions'][] = Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT;
 
         // Enable mutations?
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        $state['are-mutations-enabled'] = $componentConfiguration->enableMutations();
+        /** @var APIComponentConfiguration */
+        $apiComponentConfiguration = App::getComponent(APIComponent::class)->getConfiguration();
+        $state['are-mutations-enabled'] = $apiComponentConfiguration->enableMutations();
 
         // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)
         $state['does-api-query-have-errors'] = false;
 
-        // Passing the query via URL param?
-        $enableModifyingEngineBehaviorViaRequestParams = false;
+        // Passing the query via URL param?        
+        /** @var ComponentModelComponentConfiguration */
+        $componentModelComponentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
+        $enableModifyingEngineBehaviorViaRequestParams = $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequestParams();
         $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequestParams);
     }
 
