@@ -16,4 +16,9 @@ class Request
         // when called at the very beginning. So then access the request directly
         return !isset($_REQUEST[Params::MANGLED]) || !$_REQUEST[Params::MANGLED] || $_REQUEST[Params::MANGLED] != ParamValues::MANGLED_NONE;
     }
+
+    public static function getMangledValue(): string
+    {
+        return self::isMangled() ? '' : ParamValues::MANGLED_NONE;
+    }
 }

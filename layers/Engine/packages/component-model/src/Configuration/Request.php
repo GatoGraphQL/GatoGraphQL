@@ -23,11 +23,6 @@ class Request
         return $_REQUEST[Params::ACTION_PATH] ?? null;
     }
 
-    public static function getMangledValue(): string
-    {
-        return DefinitionsRequest::isMangled() ? '' : DefinitionsParamValues::MANGLED_NONE;
-    }
-
     /**
      * Indicates the version constraint for all fields/directives in the query
      */
