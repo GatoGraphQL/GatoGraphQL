@@ -9,7 +9,6 @@ use PoP\Root\Environment as RootEnvironment;
 
 class RequestHelpers
 {
-
     /**
      * If XDebug enabled, append param "XDEBUG_TRIGGER" to debug the request
      */

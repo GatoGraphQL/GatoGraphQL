@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\State;
 
-use PoP\ConfigurationComponentModel\Configuration\Request;
+use PoP\ComponentModel\Component as ComponentModelComponent;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ConfigurationComponentModel\Configuration\EngineRequest;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\ConfigurationComponentModel\Constants\Targets;
 use PoP\ConfigurationComponentModel\Constants\Values;
+use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
@@ -15,7 +18,10 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         // Override the settings from ComponentModel
-        $state['dataoutputitems'] = Request::getDataOutputItems();
+        /** @var ComponentModelComponentConfiguration */
+        $componentModelComponentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
+        $enableModifyingEngineBehaviorViaRequestParams = $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequestParams();
+        $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequestParams);
 
         // If not target, or invalid, reset it to "main"
         // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided

@@ -110,7 +110,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $cacheKeyComponents = array_merge(
                 CacheUtils::getSchemaCacheKeyComponents(),
                 [
-                    'edit-schema' => App::hasState('edit-schema') && App::getState('edit-schema'),
+                    'edit-schema' => App::getState('edit-schema'),
                 ]
             );
             // For the persistentCache, use a hash to remove invalid characters (such as "()")
@@ -308,7 +308,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     protected function maybeAddTypeToSchemaDirectiveDescription(array $directiveSchemaDefinitionPath): void
     {
-        if (App::hasState('edit-schema') && App::getState('edit-schema')) {
+        if (App::getState('edit-schema')) {
             $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $directiveSchemaDefinitionPath);
             if ($directiveSchemaDefinition[SchemaDefinition::DIRECTIVE_KIND] === DirectiveKinds::SCHEMA) {
                 $directiveSchemaDefinition[SchemaDefinition::DESCRIPTION] = sprintf(

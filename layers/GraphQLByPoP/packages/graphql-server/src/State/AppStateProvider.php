@@ -29,6 +29,7 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         $state['nested-mutations-enabled'] = null;
         $state['graphql-introspection-enabled'] = null;
+        $state['edit-schema'] = null;
     }
 
     public function consolidate(array &$state): void
