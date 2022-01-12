@@ -1,0 +1,20 @@
+{
+    "name": "pop-backbone/php-hooks",
+    "description": "A fork of PHP-Hooks, adapted to PoP - A fork of the WordPress filters hook system rolled in to a class to be ported into any PHP-based system",
+    "keywords": ["hooks", "actions", "filters"],
+    "homepage": "https://github.com/PoPBackbone/php-hooks",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PoPBackbone\\PHPHooks\\": "src"
+        }
+    }
+}

@@ -49,6 +49,7 @@
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-by-pop/graphql-request": "${workspaceFolder}/layers/GraphQLByPoP/packages/graphql-request",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-by-pop/graphql-server": "${workspaceFolder}/layers/GraphQLByPoP/packages/graphql-server",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-backbone/graphql-parser": "${workspaceFolder}/layers/Backbone/packages/graphql-parser",
+              "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-backbone/php-hooks": "${workspaceFolder}/layers/Backbone/packages/php-hooks",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/categories-wp": "${workspaceFolder}/layers/Schema/packages/categories-wp",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/categories": "${workspaceFolder}/layers/Schema/packages/categories",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/comment-mutations-wp": "${workspaceFolder}/layers/Schema/packages/comment-mutations-wp",

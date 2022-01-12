@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\HooksPHP;
 
-use Hooks;
+use PoPBackbone\PHPHooks\PHPHooks;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Root\App;
 
@@ -15,11 +15,15 @@ class HooksAPI implements HooksAPIInterface
      * It must be lazy load, since the state will be deleted when
      * calling App::initialize() in the tests.
      */
-    protected function getInstance(): Hooks
+    protected function getInstance(): PHPHooks
     {
         if (!isset(App::$runtimeServices['hooks'])) {
-            // Copied from bainternet/php-hooks/php-hooks.php
-            $hooks = new Hooks();
+            /**
+             * Copied from bainternet/php-hooks/php-hooks.php
+             *
+             * @see https://github.com/bainternet/PHP-Hooks/blob/7b28d10ed7a2f7e3c8bd7f53ba1e9b4769955242/php-hooks.php#L562
+             */
+            $hooks = new PHPHooks();
             $hooks->do_action('After_Hooks_Setup', $hooks);
             App::$runtimeServices['hooks'] = $hooks;
         }

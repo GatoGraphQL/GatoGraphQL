@@ -35,6 +35,8 @@ services:
         - >-
           ../../layers/Backbone/packages/graphql-parser:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-backbone/graphql-parser
         - >-
+          ../../layers/Backbone/packages/php-hooks:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-backbone/php-hooks
+        - >-
           ../../layers/Engine/packages/access-control:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/access-control
         - >-
           ../../layers/Engine/packages/basic-service:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/basic-service

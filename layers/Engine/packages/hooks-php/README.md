@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Implementation of `PoP\Hooks` using package [`bainternet/php-hooks`](https://packagist.org/packages/bainternet/php-hooks), which is a fork from the WordPress hooks system, making it independent from WordPress.
+Implementation of `PoP\Hooks` using package `pop-backbone/php-hooks`, a fork of [`bainternet/php-hooks`](https://packagist.org/packages/bainternet/php-hooks), which is itself a fork from the WordPress hooks system, making it independent from WordPress.
 
 This package is to be used for PHPUnit, to avoid having to load WordPress.
 
