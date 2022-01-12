@@ -7,10 +7,16 @@ namespace GraphQLByPoP\GraphQLRequest\StaticHelpers;
 class GraphQLQueryPayloadRetriever
 {
     /**
-     * @return array<string,mixed>
+     * Retrieve the GraphQL payload sent via POST, or `null` if none
+     *
+     * @return array<string,mixed>|null
      */
-    public static function getGraphQLQueryPayload(): array
+    public static function getGraphQLQueryPayload(): ?array
     {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return null;
+        }
+        
         // Attempt to get the query from the body, following the GraphQL syntax
         if (isset($_SERVER['CONTENT_TYPE']) && $_SERVER['CONTENT_TYPE'] === 'application/json') {
             $rawBody = file_get_contents('php://input');

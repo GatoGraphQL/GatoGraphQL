@@ -15,10 +15,13 @@ class QueryRetriever implements QueryRetrieverInterface
     {
         // Attempt to get the query from the body, following the GraphQL syntax
         $payload = GraphQLQueryPayloadRetriever::getGraphQLQueryPayload();
+        if ($payload === null) {
+            return [null, null, null];
+        }
         return [
             $payload['query'] ?? null,
             $payload['variables'] ?? null,
-            $payload['operationName'] ?? null
+            $payload['operationName'] ?? null,
         ];
     }
 }
