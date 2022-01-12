@@ -72,7 +72,7 @@ class PHPHooks
    * @return boolean true
    */
   public function add_filter($tag, $function_to_add, $priority = 10, $accepted_args = 1) {
-    $idx =  $this->_filter_build_unique_id($tag, $function_to_add, $priority);
+    $idx =  $this->__filter_build_unique_id($tag, $function_to_add, $priority);
     $this->filters[$tag][$priority][$idx] = array('function' => $function_to_add, 'accepted_args' => $accepted_args);
     unset( $this->merged_filters[ $tag ] );
     return true;
@@ -88,7 +88,7 @@ class PHPHooks
    * @return boolean Whether the function existed before it was removed.
    */
   public function remove_filter( $tag, $function_to_remove, $priority = 10 ) {
-    $function_to_remove = $this->_filter_build_unique_id($tag, $function_to_remove, $priority);
+    $function_to_remove = $this->__filter_build_unique_id($tag, $function_to_remove, $priority);
 
     $r = isset($this->filters[$tag][$priority][$function_to_remove]);
 
@@ -137,7 +137,7 @@ class PHPHooks
     if ( false === $function_to_check || false == $has )
       return $has;
 
-    if ( !$idx = $this->_filter_build_unique_id($tag, $function_to_check, false) )
+    if ( !$idx = $this->__filter_build_unique_id($tag, $function_to_check, false) )
       return false;
 
     foreach ( (array) array_keys($this->filters[$tag]) as $priority ) {
@@ -488,13 +488,13 @@ class PHPHooks
   }
   
   /**
-   * _filter_build_unique_id Build Unique ID for storage and retrieval.
+   * __filter_build_unique_id Build Unique ID for storage and retrieval.
    * @param string $tag Used in counting how many hooks were applied
    * @param callback $function Used for creating unique id
    * @param int|bool $priority Used in counting how many hooks were applied. If === false and $function is an object reference, we return the unique id only if it already has one, false otherwise.
    * @return string|bool Unique ID for usage as array key or false if $priority === false and $function is an object reference, and it does not already have a unique id.
    */
-  private function _filter_build_unique_id($tag, $function, $priority) {
+  private function __filter_build_unique_id($tag, $function, $priority) {
     static $filter_id_count = 0;
 
     if ( is_string($function) )
