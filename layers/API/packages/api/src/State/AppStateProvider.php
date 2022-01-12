@@ -92,7 +92,7 @@ class AppStateProvider extends AbstractAppStateProvider
      * It's saved under "requested-query" in $state, and it's optional: if empty,
      * requested = executable => the executable query from $state['query'] can be used
      */
-    public function augment(array &$state): void
+    public function compute(array &$state): void
     {
         if ($state['scheme'] !== APISchemes::API) {
             return;
