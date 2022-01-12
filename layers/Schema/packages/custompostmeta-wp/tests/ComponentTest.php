@@ -3,7 +3,6 @@
 namespace PoPSchema\CustomPostMetaWP;
 
 use PHPUnit\Framework\TestCase;
-
 use PoP\Engine\AbstractComponentTest;
 
 /**

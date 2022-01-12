@@ -3,7 +3,6 @@
 namespace PoP\SSG;
 
 use PHPUnit\Framework\TestCase;
-
 use PoP\Engine\AbstractComponentTest;
 
 /**

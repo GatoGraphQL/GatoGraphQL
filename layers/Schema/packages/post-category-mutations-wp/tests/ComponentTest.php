@@ -3,7 +3,6 @@
 namespace PoPSchema\PostCategoryMutationsWP;
 
 use PHPUnit\Framework\TestCase;
-
 use PoP\Engine\AbstractComponentTest;
 
 /**

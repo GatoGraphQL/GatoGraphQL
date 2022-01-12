@@ -3,7 +3,6 @@
 namespace PoPSchema\MediaWP;
 
 use PHPUnit\Framework\TestCase;
-
 use PoP\Engine\AbstractComponentTest;
 
 /**

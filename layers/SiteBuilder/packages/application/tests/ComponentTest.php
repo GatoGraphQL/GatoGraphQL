@@ -3,7 +3,6 @@
 namespace PoP\Application;
 
 use PHPUnit\Framework\TestCase;
-
 use PoP\Engine\AbstractComponentTest;
 
 /**

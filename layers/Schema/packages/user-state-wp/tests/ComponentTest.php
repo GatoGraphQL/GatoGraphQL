@@ -3,7 +3,6 @@
 namespace PoPSchema\UserStateWP;
 
 use PHPUnit\Framework\TestCase;
-
 use PoP\Engine\AbstractComponentTest;
 
 /**

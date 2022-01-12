@@ -3,7 +3,6 @@
 namespace PoPSitesWassup\GravityFormsMutations;
 
 use PHPUnit\Framework\TestCase;
-
 use PoP\Engine\AbstractComponentTest;
 
 /**

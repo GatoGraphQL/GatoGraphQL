@@ -3,7 +3,6 @@
 namespace PoPSitesWassup\NewsletterMutations;
 
 use PHPUnit\Framework\TestCase;
-
 use PoP\Engine\AbstractComponentTest;
 
 /**

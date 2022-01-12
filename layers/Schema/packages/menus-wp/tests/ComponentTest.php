@@ -3,7 +3,6 @@
 namespace PoPSchema\MenusWP;
 
 use PHPUnit\Framework\TestCase;
-
 use PoP\Engine\AbstractComponentTest;
 
 /**

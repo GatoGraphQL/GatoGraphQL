@@ -3,7 +3,6 @@
 namespace PoPSitesWassup\PostLinkMutations;
 
 use PHPUnit\Framework\TestCase;
-
 use PoP\Engine\AbstractComponentTest;
 
 /**

@@ -3,7 +3,6 @@
 namespace PoPSchema\UserAvatarsWP;
 
 use PHPUnit\Framework\TestCase;
-
 use PoP\Engine\AbstractComponentTest;
 
 /**

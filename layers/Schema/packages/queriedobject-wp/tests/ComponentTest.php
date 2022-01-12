@@ -3,7 +3,6 @@
 namespace PoPSchema\QueriedObjectWP;
 
 use PHPUnit\Framework\TestCase;
-
 use PoP\Engine\AbstractComponentTest;
 
 /**
