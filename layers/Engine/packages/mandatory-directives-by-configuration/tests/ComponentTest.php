@@ -2,18 +2,8 @@
 
 namespace PoP\MandatoryDirectivesByConfiguration;
 
-use PoP\Root\App;
-use PoP\Root\AbstractTestCase;
+use PoP\Root\AbstractComponentTest;
 
-class ComponentTest extends AbstractTestCase
+class ComponentTest extends AbstractComponentTest
 {
-    /**
-     * The component must have some dependency (only the root has not)
-     */
-    public function testHasDependedComponentClasses(): void
-    {
-        $this->assertNotEmpty(
-            App::getComponent(Component::class)->getDependedComponentClasses()
-        );
-    }
 }
