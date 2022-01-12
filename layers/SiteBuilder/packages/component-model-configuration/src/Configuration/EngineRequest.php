@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\Configuration;
 
 use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
-use PoP\ComponentModel\Configuration\Request as UpstreamRequest;
+use PoP\ComponentModel\Configuration\EngineRequest as UpstreamEngineRequest;
 
-class Request extends UpstreamRequest
+class EngineRequest extends UpstreamEngineRequest
 {
     /**
      * @return string[]
