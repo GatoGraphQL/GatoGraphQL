@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType
 use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\ClientEndpointAnnotatorInterface;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 
-abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecuter
+abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecuter implements EndpointExecuterServiceTagInterface
 {
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 

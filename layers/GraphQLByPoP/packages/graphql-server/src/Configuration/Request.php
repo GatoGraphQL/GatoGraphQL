@@ -37,7 +37,7 @@ class Request
         if (!in_array($scheme, $schemes)) {
             return null;
         }
-        
+
         return $scheme;
     }
 

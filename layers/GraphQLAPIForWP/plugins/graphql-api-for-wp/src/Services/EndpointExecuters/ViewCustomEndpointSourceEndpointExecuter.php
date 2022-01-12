@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 
-class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
+class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpointExecuter
 {
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 

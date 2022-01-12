@@ -34,12 +34,6 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\CustomEndpointExecuterRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\CustomEndpointExecuterRegistry
-
-    GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointExecuterRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointExecuterRegistry
-
     GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistry
 

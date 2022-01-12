@@ -6,9 +6,10 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterServiceTagInterface;
 use WP_Post;
 
-abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExecuter
+abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExecuter implements EndpointExecuterServiceTagInterface
 {
     protected function getView(): string
     {
