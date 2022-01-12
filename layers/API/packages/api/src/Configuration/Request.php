@@ -14,7 +14,7 @@ class Request
         if (!Environment::enableSettingNamespacingByURLParam()) {
             return null;
         }
-        
+
         $useNamespace = $_REQUEST[Params::USE_NAMESPACE] ?? null;
         if ($useNamespace === null) {
             return null;
