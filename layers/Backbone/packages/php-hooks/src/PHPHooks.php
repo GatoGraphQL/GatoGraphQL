@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPBackbone\PHPHooks;
 
 /**
- * This is a fork of PHP Hooks, adapted for PoP, and adding
+ * This is a fork of PHP-Hooks, adapted for PoP, and adding
  * a couple of updates not merged in the original project
  *
  * @see https://github.com/bainternet/PHP-Hooks

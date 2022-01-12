@@ -1,6 +1,6 @@
 {
     "name": "pop-backbone/php-hooks",
-    "description": "A fork of Hooks PHP - A fork of the WordPress filters hook system rolled in to a class to be ported into any PHP-based system",
+    "description": "A fork of PHP-Hooks - A fork of the WordPress filters hook system rolled in to a class to be ported into any PHP-based system",
     "keywords": ["hooks", "actions", "filters"],
     "homepage": "https://github.com/PoPBackbone/php-hooks",
     "type": "library",
