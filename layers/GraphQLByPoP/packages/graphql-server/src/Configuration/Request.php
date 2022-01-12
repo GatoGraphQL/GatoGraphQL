@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Configuration;
 
 use GraphQLByPoP\GraphQLServer\Constants\Params;
+use GraphQLByPoP\GraphQLServer\Environment;
 use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class Request
@@ -19,6 +20,10 @@ class Request
 
     public static function getMutationScheme(): ?string
     {
+        if (!Environment::enableSettingMutationSchemeByURLParam()) {
+            return null;
+        }
+
         if (isset($_REQUEST[Params::MUTATION_SCHEME])) {
             $scheme = $_REQUEST[Params::MUTATION_SCHEME];
             $schemes = [
