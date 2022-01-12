@@ -2,9 +2,8 @@
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
-use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Definitions\Configuration\Request;
+use PoP\Definitions\Constants\Params as DefinitionsParams;
+use PoP\Definitions\Constants\ParamValues as DefinitionsParamValues;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
@@ -184,7 +183,7 @@ class PoPWebPlatform_Initialization
                 \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
                 \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             ),
-            Request::URLPARAM_MANGLED => Request::URLPARAMVALUE_MANGLED_NONE,
+            DefinitionsParams::MANGLED => DefinitionsParamValues::MANGLED_NONE,
         ));
 
         $requestHelperService = RequestHelperServiceFacade::getInstance();

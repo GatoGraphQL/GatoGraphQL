@@ -21,7 +21,7 @@ use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeIn
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Definitions\Configuration\Request;
+use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\LooseContracts\NameResolverInterface;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
@@ -1084,7 +1084,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // If mangled, make it mandle
         if ($mangled = App::getState('mangled')) {
             $ret = GeneralUtils::addQueryArgs([
-                Request::URLPARAM_MANGLED => $mangled,
+                DefinitionsParams::MANGLED => $mangled,
             ], $ret);
         }
 

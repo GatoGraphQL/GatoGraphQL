@@ -1,8 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Definitions\Configuration\Request;
+use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -38,7 +37,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
             \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
             \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
             \PoP\ConfigurationComponentModel\Constants\Params::FORMAT, // Initially, this is a proxy for \PoP\ConfigurationComponentModel\Constants\Params::SETTINGSFORMAT
-            Request::URLPARAM_MANGLED,
+            DefinitionsParams::MANGLED,
         );
         $configuration['${localesByURL}'] = $this->getLocalesByurl();
         $configuration['${defaultLocale}'] = $this->getDefaultLocale();

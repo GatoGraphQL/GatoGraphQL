@@ -1,8 +1,7 @@
 <?php
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Definitions\Configuration\Request;
+use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_SPA_RequestMeta_Hooks
@@ -28,7 +27,7 @@ class PoP_SPA_RequestMeta_Hooks
                 \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
                 \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
                 \PoP\ConfigurationComponentModel\Constants\Params::SETTINGSFORMAT,
-                Request::URLPARAM_MANGLED,
+                DefinitionsParams::MANGLED,
                 \PoP\ConfigurationComponentModel\Constants\Params::STRATUM,
             ];
             foreach ($elemKeys as $elemKey) {

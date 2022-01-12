@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Configuration;
 
 use PoP\ComponentModel\Constants\Params;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
+use PoP\Definitions\Constants\ParamValues as DefinitionsParamValues;
 
 class Request
 {
@@ -24,7 +25,7 @@ class Request
 
     public static function getMangledValue(): string
     {
-        return DefinitionsRequest::isMangled() ? '' : DefinitionsRequest::URLPARAMVALUE_MANGLED_NONE;
+        return DefinitionsRequest::isMangled() ? '' : DefinitionsParamValues::MANGLED_NONE;
     }
 
     /**

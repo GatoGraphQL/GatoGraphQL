@@ -9,7 +9,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\BasicService\BasicServiceTrait;
-use PoP\Definitions\Configuration\Request;
+use PoP\Definitions\Constants\Params as DefinitionsParams;
 
 class RequestHelperService implements RequestHelperServiceInterface
 {
@@ -31,7 +31,7 @@ class RequestHelperService implements RequestHelperServiceInterface
                 Params::DATABASESOUTPUTMODE,
                 Params::OUTPUT,
                 Params::DATASTRUCTURE,
-                Request::URLPARAM_MANGLED,
+                DefinitionsParams::MANGLED,
                 Params::EXTRA_ROUTES,
                 Params::ACTIONS, // Needed to remove ?actions[]=preload, ?actions[]=loaduserstate, ?actions[]=loadlazy
             ]
