@@ -161,7 +161,7 @@ class PHPHooks
     if ( isset($this->filters['all']) ) {
       $this->current_filter[] = $tag;
       $args = func_get_args();
-      $this->_call_all_hook($args);
+      $this->__call_all_hook($args);
     }
 
     if ( !isset($this->filters[$tag]) ) {
@@ -210,7 +210,7 @@ class PHPHooks
     if ( isset($this->filters['all']) ) {
       $this->current_filter[] = $tag;
       $all_args = func_get_args();
-      $this->_call_all_hook($all_args);
+      $this->__call_all_hook($all_args);
     }
 
     if ( !isset($this->filters[$tag]) ) {
@@ -317,7 +317,7 @@ class PHPHooks
     if ( isset($this->filters['all']) ) {
       $this->current_filter[] = $tag;
       $all_args = func_get_args();
-      $this->_call_all_hook($all_args);
+      $this->__call_all_hook($all_args);
     }
 
     if ( !isset($this->filters[$tag]) ) {
@@ -376,7 +376,7 @@ class PHPHooks
     if ( isset($this->filters['all']) ) {
       $this->current_filter[] = $tag;
       $all_args = func_get_args();
-      $this->_call_all_hook($all_args);
+      $this->__call_all_hook($all_args);
     }
 
     if ( !isset($this->filters[$tag]) ) {
