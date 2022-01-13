@@ -147,8 +147,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
 
     protected function getFormFieldnames($form_id)
     {
-        $hooksAPI = App::getHookManager();
-        return $hooksAPI->applyFilters(
+        return App::getHookManager()->applyFilters(
             self::HOOK_FORM_FIELDNAMES,
             array(),
             $form_id

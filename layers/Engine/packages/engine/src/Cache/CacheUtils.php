@@ -14,10 +14,9 @@ class CacheUtils
 
     public static function getSchemaCacheKeyComponents(): array
     {
-        $hooksAPI = App::getHookManager();
         /** @var EngineComponentConfiguration */
         $componentConfiguration = App::getComponent(EngineComponent::class)->getConfiguration();
-        return (array)$hooksAPI->applyFilters(
+        return (array)App::getHookManager()->applyFilters(
             self::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,
             [
                 'namespaced' => App::getState('namespace-types-and-interfaces'),
