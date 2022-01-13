@@ -7,7 +7,6 @@ namespace PoP\RESTAPI\RouteModuleProcessors;
 use PoP\Root\App;
 use PoP\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\Routing\RouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -17,13 +16,13 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     }
 
     /**
-     * @return array<string, array<array>>
+     * @return array<array>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getModulesVarsProperties(): array
     {
         $ret = array();
 
-        $ret[RouteNatures::HOME][] = [
+        $ret[] = [
             'module' => [
                 RootRelationalFieldDataloadModuleProcessor::class,
                 RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT,

@@ -46,9 +46,6 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
     {
         $state['scheme'] = APISchemes::API;
         $state['datastructure'] = $this->getGraphQLDataStructureFormatter()->getName();
-
-        // Assign the single endpoint by setting it as the Home nature
-        $state['nature'] = RouteNatures::HOME;
     }
 
     public function consolidate(array &$state): void
