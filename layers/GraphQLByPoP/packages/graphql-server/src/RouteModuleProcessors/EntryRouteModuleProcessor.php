@@ -7,29 +7,42 @@ namespace GraphQLByPoP\GraphQLServer\RouteModuleProcessors;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLServer\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
-use PoP\Routing\RouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
+    private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
+
+    final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
+    {
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+    }
+    final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    {
+        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+    }
+
     /**
-     * @return array<string, array<array>>
+     * @return array<array>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getModulesVarsProperties(): array
     {
         $ret = array();
 
-        $ret[RouteNatures::HOME][] = [
+        $ret[] = [
             'module' => [RootRelationalFieldDataloadModuleProcessor::class, RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT],
             'conditions' => [
                 'scheme' => APISchemes::API,
+                'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),
                 'graphql-operation-type' => OperationTypes::QUERY,
             ],
         ];
-        $ret[RouteNatures::HOME][] = [
+        $ret[] = [
             'module' => [RootRelationalFieldDataloadModuleProcessor::class, RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT],
             'conditions' => [
                 'scheme' => APISchemes::API,
+                'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),
                 'graphql-operation-type' => OperationTypes::MUTATION,
             ],
         ];
