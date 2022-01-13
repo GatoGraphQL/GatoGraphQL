@@ -8,12 +8,12 @@ use LogicException;
 use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
-use PoP\Root\Managers\AppStateManager;
-use PoP\Root\Managers\AppStateManagerInterface;
-use PoP\Root\Managers\ComponentManager;
-use PoP\Root\Managers\ComponentManagerInterface;
-use PoP\Root\Managers\HookManager;
-use PoP\Root\Managers\HookManagerInterface;
+use PoP\Root\StateManagers\AppStateManager;
+use PoP\Root\StateManagers\AppStateManagerInterface;
+use PoP\Root\StateManagers\ComponentManager;
+use PoP\Root\StateManagers\ComponentManagerInterface;
+use PoP\Root\StateManagers\HookManager;
+use PoP\Root\StateManagers\HookManagerInterface;
 use PoP\Root\Stores\MutationResolutionStore;
 use Symfony\Component\DependencyInjection\Container;
 

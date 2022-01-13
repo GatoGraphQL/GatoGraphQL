@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\Managers;
+namespace PoP\Root\StateManagers;
 
 use LogicException;
 use PoP\Root\Component\ComponentInterface;
