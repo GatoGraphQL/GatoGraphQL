@@ -1,6 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
-
 class PoP_ResourceLoader_ProcessorHooks {
 
 	public function __construct() {

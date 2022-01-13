@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Engine;
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\App;
 use PoP\Root\AppLoader as UpstreamAppLoader;
 

@@ -1,6 +1,5 @@
 <?php
 use PoP\FileStore\Facades\JSONFileStoreFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_WebPlatform_ResourceLoaderMappingGenerator {
 
