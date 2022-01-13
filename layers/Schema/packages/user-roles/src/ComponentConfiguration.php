@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles;
 
-use PoP\BasicService\Component\AbstractComponentConfiguration;
+use PoP\Root\Component\AbstractComponentConfiguration;
 use PoP\BasicService\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration

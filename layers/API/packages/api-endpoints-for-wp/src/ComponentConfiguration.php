@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\APIEndpointsForWP;
 
-use PoP\BasicService\Component\AbstractComponentConfiguration;
+use PoP\Root\Component\AbstractComponentConfiguration;
 use PoP\APIEndpoints\EndpointUtils;
 use PoP\BasicService\Component\EnvironmentValueHelpers;
 
