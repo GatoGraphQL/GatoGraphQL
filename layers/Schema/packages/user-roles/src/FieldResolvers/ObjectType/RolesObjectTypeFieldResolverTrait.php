@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Translation\TranslationAPIInterface;
+use PoP\Root\Translation\TranslationAPIInterface;
 use PoPSchema\UserRoles\Component;
 use PoPSchema\UserRoles\ComponentConfiguration;
 

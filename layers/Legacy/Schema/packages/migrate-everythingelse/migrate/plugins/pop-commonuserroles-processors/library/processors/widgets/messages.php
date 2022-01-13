@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Custom_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMessagesBase
 {

@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('PoP_ApplicationProcessors_Utils:initializedomain:modules', 'addDomainstylesModule');
 function addDomainstylesModule($modules)

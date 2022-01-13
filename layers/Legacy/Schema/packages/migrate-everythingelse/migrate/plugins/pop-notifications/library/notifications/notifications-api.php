@@ -2,7 +2,7 @@
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class PoP_Notifications_API

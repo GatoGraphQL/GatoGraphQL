@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\MutationResolverUtils;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class MutationResolverUtils
 {

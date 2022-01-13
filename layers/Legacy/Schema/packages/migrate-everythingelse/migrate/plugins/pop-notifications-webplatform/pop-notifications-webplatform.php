@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Notifications Web Platform
 Description: Implementation of Notifications Web Platform for PoP

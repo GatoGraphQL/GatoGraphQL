@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Allow to hardcode the settings, so no need to input them as options in the DB

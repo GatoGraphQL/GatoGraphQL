@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFiltering;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;

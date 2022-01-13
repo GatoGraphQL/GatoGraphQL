@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;

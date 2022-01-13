@@ -3,7 +3,7 @@ use PoP\Root\App;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 
 abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Module_Processor_DataloadsBase

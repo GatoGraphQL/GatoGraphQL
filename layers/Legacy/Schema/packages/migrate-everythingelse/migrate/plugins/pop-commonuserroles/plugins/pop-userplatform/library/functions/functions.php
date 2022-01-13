@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * login.php

@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;

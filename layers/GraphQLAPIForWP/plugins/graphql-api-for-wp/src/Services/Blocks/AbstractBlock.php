@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use GraphQLAPI\PluginUtils\Services\Helpers\StringConversion;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**

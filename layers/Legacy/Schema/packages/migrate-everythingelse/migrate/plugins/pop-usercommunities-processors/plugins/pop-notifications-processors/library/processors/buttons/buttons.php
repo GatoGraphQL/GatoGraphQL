@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {

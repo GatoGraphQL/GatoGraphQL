@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Events Web Platform
 Description: Implementation of Events Web Platform for PoP

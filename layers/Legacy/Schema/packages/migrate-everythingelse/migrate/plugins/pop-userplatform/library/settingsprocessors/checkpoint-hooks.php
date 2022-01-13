@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 class PoP_UserPlatform_SettingsProcessor_CheckpointHooks

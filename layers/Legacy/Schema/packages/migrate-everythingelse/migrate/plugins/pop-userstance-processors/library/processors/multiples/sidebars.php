@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {

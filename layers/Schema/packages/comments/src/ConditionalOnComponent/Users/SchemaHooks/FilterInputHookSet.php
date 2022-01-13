@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ConditionalOnComponent\Users\SchemaHooks;
 
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\Comments\ConditionalOnComponent\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor as UserFilterInputModuleProcessor;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;

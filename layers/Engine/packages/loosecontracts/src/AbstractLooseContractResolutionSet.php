@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\LooseContracts;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyInstantiatedService

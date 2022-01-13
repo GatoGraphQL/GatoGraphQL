@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageLayouts extends PoP_Module_Processor_FormFeedbackMessageLayoutsBase
 {

@@ -2,7 +2,7 @@
 
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // If it is a route, then return its title as the Document Title
 // Make sure it doesn't change the title for GraphQL persisted queries (/some-query/?view=source)

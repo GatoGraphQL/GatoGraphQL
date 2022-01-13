@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Bootstrap Collection Web Platform
 Description: Implementation of Bootstrap Collection Web Platform for PoP

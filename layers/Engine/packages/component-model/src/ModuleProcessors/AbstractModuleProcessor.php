@@ -18,7 +18,7 @@ use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\LooseContracts\NameResolverInterface;

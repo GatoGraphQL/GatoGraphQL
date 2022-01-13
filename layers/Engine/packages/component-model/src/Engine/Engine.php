@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Engine;
 
 use Exception;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\Component;

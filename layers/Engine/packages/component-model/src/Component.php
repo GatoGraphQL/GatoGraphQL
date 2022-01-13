@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\ApplicationEvents;
 
 /**

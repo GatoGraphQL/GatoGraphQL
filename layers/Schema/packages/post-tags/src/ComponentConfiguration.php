@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags;
 
-use PoP\BasicService\Component\AbstractComponentConfiguration;
+use PoP\Root\Component\AbstractComponentConfiguration;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {

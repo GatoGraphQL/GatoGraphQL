@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Add Highlights Web Platform
 Description: Implementation of Add Highlights Web Platform for PoP

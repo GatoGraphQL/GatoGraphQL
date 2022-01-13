@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extends PoP_Module_Processor_PostHeaderViewComponentButtonsBase
 {

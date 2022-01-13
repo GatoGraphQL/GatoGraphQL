@@ -2,7 +2,7 @@
 use Aws\Common\Aws;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // use Aws\S3\Exception\S3Exception;
 

@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 class PoP_Module_Processor_ShareModalComponents extends PoP_Module_Processor_FormModalViewComponentsBase
 {
     public const MODULE_MODAL_EMBED = 'modal-embed';

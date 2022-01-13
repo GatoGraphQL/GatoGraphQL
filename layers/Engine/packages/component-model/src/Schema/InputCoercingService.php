@@ -9,7 +9,7 @@ use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 

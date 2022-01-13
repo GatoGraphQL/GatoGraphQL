@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ObjectSerialization;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractObjectSerializer implements ObjectSerializerInterface
 {

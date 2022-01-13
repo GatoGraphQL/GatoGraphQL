@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeAPIs;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 
 abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface

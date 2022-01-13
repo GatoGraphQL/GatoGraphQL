@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FormInputs;
 
 use Exception;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class FormInput
 {

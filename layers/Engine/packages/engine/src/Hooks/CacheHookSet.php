@@ -6,7 +6,7 @@ namespace PoP\Engine\Hooks;
 
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Cache\TransientCacheInterface;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class CacheHookSet extends AbstractHookSet
 {

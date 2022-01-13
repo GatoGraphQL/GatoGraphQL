@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 const POP_RESOURCELOADER_RESOURCETYPE_JS = 'js';
 const POP_RESOURCELOADER_RESOURCETYPE_CSS = 'css';

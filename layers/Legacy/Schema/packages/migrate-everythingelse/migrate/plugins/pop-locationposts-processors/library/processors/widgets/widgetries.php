@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Custom_EM_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBase
 {

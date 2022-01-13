@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;

@@ -1,7 +1,7 @@
 <?php
 namespace PoPSchema\Users\WP;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_USERSWP_POP_ENGINEWP_MIN_VERSION', 0.1);
 

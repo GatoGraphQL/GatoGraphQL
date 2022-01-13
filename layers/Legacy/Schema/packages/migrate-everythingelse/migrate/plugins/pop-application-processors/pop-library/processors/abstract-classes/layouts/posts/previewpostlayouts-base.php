@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Module_Processor_PreviewPostLayoutsBase
 {

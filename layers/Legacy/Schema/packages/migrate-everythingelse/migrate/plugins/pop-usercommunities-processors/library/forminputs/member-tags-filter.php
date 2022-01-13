@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_FormInput_FilterMemberTags extends GD_URE_FormInput_MemberTags
 {

@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPThemeWassup_FileReproduction_BackgroundImage extends PoP_Engine_CSSFileReproductionBase
 {

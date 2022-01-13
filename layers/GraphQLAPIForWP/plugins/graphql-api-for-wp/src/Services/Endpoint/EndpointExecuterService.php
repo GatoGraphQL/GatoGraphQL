@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Endpoint;
 
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 class EndpointExecuterService extends AbstractAutomaticallyInstantiatedService

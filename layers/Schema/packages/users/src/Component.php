@@ -7,7 +7,7 @@ namespace PoPSchema\Users;
 use PoP\Root\App;
 use PoP\API\Component as APIComponent;
 use PoP\RESTAPI\Component as RESTAPIComponent;
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 use PoPSchema\CustomPosts\Component as CustomPostsComponent;
 
 /**

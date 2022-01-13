@@ -7,7 +7,7 @@ namespace PoP\RoutingWP\Hooks;
 use Brain\Cortex\Route\QueryRoute;
 use Brain\Cortex\Route\RouteCollectionInterface;
 use Brain\Cortex\Route\RouteInterface;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoP\Routing\RoutingManagerInterface;
 use PoP\RoutingWP\WPQueries;
 

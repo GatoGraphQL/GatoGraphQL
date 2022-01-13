@@ -3,7 +3,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProces
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use Symfony\Contracts\Service\Attribute\Required;
 

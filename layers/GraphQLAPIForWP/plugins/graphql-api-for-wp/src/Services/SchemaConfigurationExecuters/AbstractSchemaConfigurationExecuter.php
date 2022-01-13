@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractSchemaConfigurationExecuter implements SchemaConfigurationExecuterInterface
 {

@@ -6,7 +6,7 @@ Description: Integration with plug-in qTranslate-X for the Platform of Platforms
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('QTX_POP_VERSION', 0.109);
 define('QTX_POP_DIR', dirname(__FILE__));

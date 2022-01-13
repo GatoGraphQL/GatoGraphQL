@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Load the .js file
 HooksAPIFacade::getInstance()->addAction("init", "gdWslScriptsAndStyles");

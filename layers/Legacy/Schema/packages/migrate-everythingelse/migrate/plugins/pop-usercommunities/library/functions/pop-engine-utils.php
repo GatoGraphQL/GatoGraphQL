@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoP_URE_Engine_Hooks

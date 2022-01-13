@@ -11,7 +11,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterfac
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class NestedMutationHookSet extends AbstractHookSet
 {

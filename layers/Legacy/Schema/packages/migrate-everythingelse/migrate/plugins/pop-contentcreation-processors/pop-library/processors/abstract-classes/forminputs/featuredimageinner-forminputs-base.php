@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_FeaturedImageInnerFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {

@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 const GD_SIDEBARSECTION_GENERICUSER = 'genericuser';
 const GD_COMPACTSIDEBARSECTION_GENERICUSER = 'compact-genericuser';

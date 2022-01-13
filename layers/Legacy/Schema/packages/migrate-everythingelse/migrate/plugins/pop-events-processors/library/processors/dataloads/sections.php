@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;

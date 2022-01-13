@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Routing;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class RoutingUtils
 {

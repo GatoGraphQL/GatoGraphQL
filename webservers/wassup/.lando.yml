@@ -42,8 +42,6 @@ services:
         - >-
           ../../layers/SiteBuilder/packages/application-wp:/app/vendor/getpop/application-wp
         - >-
-          ../../layers/Engine/packages/basic-service:/app/vendor/getpop/basic-service
-        - >-
           ../../layers/Engine/packages/cache-control:/app/vendor/getpop/cache-control
         - >-
           ../../layers/Engine/packages/component-model:/app/vendor/getpop/component-model
@@ -66,8 +64,6 @@ services:
           ../../layers/Engine/packages/function-fields:/app/vendor/getpop/function-fields
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
-        - '../../layers/Engine/packages/hooks:/app/vendor/getpop/hooks'
-        - '../../layers/Engine/packages/hooks-php:/app/vendor/getpop/hooks-php'
         - '../../layers/Engine/packages/hooks-wp:/app/vendor/getpop/hooks-wp'
         - >-
           ../../layers/Engine/packages/loosecontracts:/app/vendor/getpop/loosecontracts
@@ -86,10 +82,6 @@ services:
         - '../../layers/SiteBuilder/packages/site:/app/vendor/getpop/site'
         - '../../layers/SiteBuilder/packages/site-wp:/app/vendor/getpop/site-wp'
         - '../../layers/SiteBuilder/packages/spa:/app/vendor/getpop/spa'
-        - >-
-          ../../layers/Engine/packages/translation:/app/vendor/getpop/translation
-        - >-
-          ../../layers/Engine/packages/translation-mock:/app/vendor/getpop/translation-mock
         - >-
           ../../layers/Engine/packages/translation-wp:/app/vendor/getpop/translation-wp
         - >-

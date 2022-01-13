@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Posts\Hooks;
 
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\PostsWP\TypeAPIs\PostTypeAPI;
 
 class QueryHookSet extends AbstractHookSet

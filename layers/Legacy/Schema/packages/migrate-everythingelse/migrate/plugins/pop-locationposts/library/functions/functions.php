@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('gd_postname', 'locationpostsPostname', 10, 2);

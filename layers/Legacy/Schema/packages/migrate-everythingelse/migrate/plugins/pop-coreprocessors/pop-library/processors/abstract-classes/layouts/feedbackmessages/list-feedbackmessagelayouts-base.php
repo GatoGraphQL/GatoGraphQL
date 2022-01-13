@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_ListFeedbackMessageLayoutsBase extends PoP_Module_Processor_FeedbackMessageLayoutsBase
 {

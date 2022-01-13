@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('GD_THEMESTYLE_WASSUP_EXPANSIVE', 'expansive');
 

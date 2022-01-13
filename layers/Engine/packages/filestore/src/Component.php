@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\FileStore;
 
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\BasicService\Component::class,
+            \PoP\Root\Component::class,
         ];
     }
 

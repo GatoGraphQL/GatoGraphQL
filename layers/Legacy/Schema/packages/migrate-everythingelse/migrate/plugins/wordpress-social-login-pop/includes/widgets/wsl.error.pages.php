@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * Override functions from WSL, from file plugins/wordpress-social-login/includes/widgets/wsl.error.pages.php

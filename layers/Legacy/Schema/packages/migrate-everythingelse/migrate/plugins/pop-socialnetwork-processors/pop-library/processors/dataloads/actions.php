@@ -12,7 +12,7 @@ use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UpvoteCustomP
 use PoP\Root\App;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;

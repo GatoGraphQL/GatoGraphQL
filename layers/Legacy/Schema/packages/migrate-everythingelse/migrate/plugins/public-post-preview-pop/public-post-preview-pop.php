@@ -6,7 +6,7 @@ Description: Integration with plug-in Public Post Preview for the Platform of Pl
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('PPP_POP_VERSION', 0.110);
 define('PPP_POP_DIR', dirname(__FILE__));

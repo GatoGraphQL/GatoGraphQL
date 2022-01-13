@@ -1,7 +1,7 @@
 <?php
 use PoP\Engine\Constants\FormInputConstants;
 use PoP\Engine\FormInputs\BooleanFormInputTrait;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 trait GD_FormInput_YesNoTrait
 {

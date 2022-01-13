@@ -6,7 +6,7 @@ namespace PoPWPSchema\CustomPosts\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\HookNames;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
 use PoPWPSchema\CustomPosts\Enums\CustomPostStatus;
 

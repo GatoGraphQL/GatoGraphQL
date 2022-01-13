@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'maybeGetHighlightEditUrl', 10, 2);

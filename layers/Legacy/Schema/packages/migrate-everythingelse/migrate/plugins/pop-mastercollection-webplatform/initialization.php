@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_MasterCollectionWebPlatform_Initialization
 {

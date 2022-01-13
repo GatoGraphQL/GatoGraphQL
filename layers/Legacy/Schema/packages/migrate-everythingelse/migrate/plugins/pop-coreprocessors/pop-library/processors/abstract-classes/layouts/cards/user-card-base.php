@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {

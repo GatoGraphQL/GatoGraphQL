@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_Processor_CollapsePanelGroupComponentsBase
 {

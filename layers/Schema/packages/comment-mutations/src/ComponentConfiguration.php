@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations;
 
-use PoP\BasicService\Component\AbstractComponentConfiguration;
-use PoP\BasicService\Component\EnvironmentValueHelpers;
+use PoP\Root\Component\AbstractComponentConfiguration;
+use PoP\Root\Component\EnvironmentValueHelpers;
 use PoPSchema\Users\Component as UsersComponent;
 
 class ComponentConfiguration extends AbstractComponentConfiguration

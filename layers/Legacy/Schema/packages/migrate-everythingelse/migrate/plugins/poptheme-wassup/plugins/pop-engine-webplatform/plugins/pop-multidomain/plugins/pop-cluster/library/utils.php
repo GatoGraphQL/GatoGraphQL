@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_Wassup_FrontEnd_MultiDomain_Cluster_Utils
 {

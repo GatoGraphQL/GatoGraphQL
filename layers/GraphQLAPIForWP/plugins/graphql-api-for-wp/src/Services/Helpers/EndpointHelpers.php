@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLByPoP\GraphQLServer\Constants\Params as GraphQLServerParams;
 use PoP\ComponentModel\Configuration\RequestHelpers;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 
 class EndpointHelpers
 {

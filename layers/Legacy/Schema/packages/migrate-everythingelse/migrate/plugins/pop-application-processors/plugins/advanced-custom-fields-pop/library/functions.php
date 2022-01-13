@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * Follow users / recommend posts: the information is redundant, saving each entry on both entities (user/user and user/post)

@@ -8,7 +8,7 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 
 class RequestHelperService implements RequestHelperServiceInterface

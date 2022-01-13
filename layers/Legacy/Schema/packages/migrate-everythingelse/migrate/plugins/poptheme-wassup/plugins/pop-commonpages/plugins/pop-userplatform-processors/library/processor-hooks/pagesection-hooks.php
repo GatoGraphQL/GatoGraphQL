@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPTheme_Wassup_CommonPages_UserPlatform_PageSectionHooks
 {

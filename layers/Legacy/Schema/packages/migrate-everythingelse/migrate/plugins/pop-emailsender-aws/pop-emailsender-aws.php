@@ -6,7 +6,7 @@ Description: Use AWS for Sending emails for the Platform of Platforms (PoP). It 
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

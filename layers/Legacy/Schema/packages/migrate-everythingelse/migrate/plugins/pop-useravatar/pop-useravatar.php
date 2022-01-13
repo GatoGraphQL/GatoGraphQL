@@ -6,7 +6,7 @@ Description: Implementation of the User Avatar plugin for the Platform of Platfo
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

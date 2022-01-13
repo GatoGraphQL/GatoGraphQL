@@ -1,7 +1,7 @@
 <?php
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
  * This class is a parent class which online gateways may extend. There are various variables and functions that are automatically taken care of by

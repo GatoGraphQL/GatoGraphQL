@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Link to image / Gallery: add "data-size" attr with the dimensions of the pic linked to
 // Problem: This will also add the data-size attr when selecting "Custom Url" option, so that the

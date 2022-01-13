@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('excerpt_length', function($length) {
 	return 300;

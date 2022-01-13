@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_UserStance_SubmenuHooks
 {

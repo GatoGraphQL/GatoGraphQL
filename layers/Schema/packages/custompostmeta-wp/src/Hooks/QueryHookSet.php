@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMetaWP\Hooks;
 
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPSchema\MetaQueryWP\Helpers\MetaQueryHelpers;
 

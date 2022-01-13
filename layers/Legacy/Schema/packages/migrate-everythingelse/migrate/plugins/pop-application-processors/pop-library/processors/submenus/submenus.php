@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\RouteNatures;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;

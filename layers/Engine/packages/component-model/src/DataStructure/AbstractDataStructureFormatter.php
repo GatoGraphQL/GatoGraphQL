@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\DataStructure;
 
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractDataStructureFormatter implements DataStructureFormatterInterface
 {

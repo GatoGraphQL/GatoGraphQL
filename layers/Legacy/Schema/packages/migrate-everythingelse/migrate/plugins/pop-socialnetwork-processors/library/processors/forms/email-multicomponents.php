@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_SocialNetwork_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {

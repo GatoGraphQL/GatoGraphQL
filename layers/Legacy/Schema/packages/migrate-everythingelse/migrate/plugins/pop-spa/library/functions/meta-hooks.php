@@ -2,7 +2,7 @@
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_SPA_RequestMeta_Hooks
 {

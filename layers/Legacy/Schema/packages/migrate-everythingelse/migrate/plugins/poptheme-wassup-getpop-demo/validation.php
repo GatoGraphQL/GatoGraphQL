@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('PTWGETPOPDEMO_POPTHEME_WASSUP_MIN_VERSION', 0.1);
 define('PTWGETPOPDEMO_GETPOPDEMO_PAGES_MIN_VERSION', 0.1);

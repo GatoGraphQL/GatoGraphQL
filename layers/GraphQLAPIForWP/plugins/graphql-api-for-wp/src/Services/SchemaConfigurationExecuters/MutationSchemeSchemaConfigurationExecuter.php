@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigMutationSchemeBlock;
 use GraphQLByPoP\GraphQLServer\Component as GraphQLServerComponent;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
-use PoP\BasicService\Component\ComponentConfigurationHelpers;
+use PoP\Root\Component\ComponentConfigurationHelpers;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
 

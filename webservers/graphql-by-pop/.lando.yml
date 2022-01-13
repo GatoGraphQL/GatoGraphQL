@@ -28,8 +28,6 @@ services:
         - >-
           ../../layers/Engine/packages/access-control:/app/vendor/getpop/access-control
         - >-
-          ../../layers/Engine/packages/basic-service:/app/vendor/getpop/basic-service
-        - >-
           ../../layers/Engine/packages/cache-control:/app/vendor/getpop/cache-control
         - >-
           ../../layers/Engine/packages/component-model:/app/vendor/getpop/component-model
@@ -47,9 +45,7 @@ services:
           ../../layers/Engine/packages/graphql-parser:/app/vendor/getpop/graphql-parser
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
-        - '../../layers/Engine/packages/hooks-php:/app/vendor/getpop/hooks-php'
         - '../../layers/Engine/packages/hooks-wp:/app/vendor/getpop/hooks-wp'
-        - '../../layers/Engine/packages/hooks:/app/vendor/getpop/hooks'
         - >-
           ../../layers/Engine/packages/loosecontracts:/app/vendor/getpop/loosecontracts
         - >-
@@ -62,11 +58,7 @@ services:
         - '../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp'
         - '../../layers/Engine/packages/routing:/app/vendor/getpop/routing'
         - >-
-          ../../layers/Engine/packages/translation-mock:/app/vendor/getpop/translation-mock
-        - >-
           ../../layers/Engine/packages/translation-wp:/app/vendor/getpop/translation-wp
-        - >-
-          ../../layers/Engine/packages/translation:/app/vendor/getpop/translation
         - >-
           ../../layers/GraphQLByPoP/clients/graphiql:/app/wordpress/graphiql
         - >-

@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('GD_THEME_WASSUP', 'wassup');
 

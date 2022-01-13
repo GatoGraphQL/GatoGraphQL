@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Meta\Hooks;
 
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPWPSchema\Meta\Constants\MetaOrderBy;
 
 abstract class AbstractMetaOrderByQueryHookSet extends AbstractHookSet

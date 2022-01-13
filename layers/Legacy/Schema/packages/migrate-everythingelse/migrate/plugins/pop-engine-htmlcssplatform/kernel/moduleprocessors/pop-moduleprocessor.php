@@ -5,7 +5,7 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQueryDataModuleProcessor
 {

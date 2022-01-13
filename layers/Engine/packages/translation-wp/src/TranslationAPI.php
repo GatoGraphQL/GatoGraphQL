@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\TranslationWP;
 
-use PoP\Translation\TranslationAPIInterface;
+use PoP\Root\Translation\TranslationAPIInterface;
 
 use function __;
 

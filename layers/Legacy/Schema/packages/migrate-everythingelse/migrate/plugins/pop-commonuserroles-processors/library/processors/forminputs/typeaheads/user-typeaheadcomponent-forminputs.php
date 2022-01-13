@@ -1,6 +1,6 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_Processor_UserTypeaheadComponentFormInputs
 {

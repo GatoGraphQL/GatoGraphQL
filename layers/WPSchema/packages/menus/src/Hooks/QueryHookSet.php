@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Menus\Hooks;
 
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\MenusWP\TypeAPIs\MenuTypeAPI;
 
 class QueryHookSet extends AbstractHookSet

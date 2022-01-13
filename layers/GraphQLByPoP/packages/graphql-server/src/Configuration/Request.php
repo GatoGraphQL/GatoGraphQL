@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Configuration;
 
 use GraphQLByPoP\GraphQLServer\Constants\Params;
 use GraphQLByPoP\GraphQLServer\Environment;
-use PoP\BasicService\Component\EnvironmentValueHelpers;
+use PoP\Root\Component\EnvironmentValueHelpers;
 
 class Request
 {

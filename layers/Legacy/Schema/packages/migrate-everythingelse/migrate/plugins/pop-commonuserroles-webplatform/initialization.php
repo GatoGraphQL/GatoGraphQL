@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PoP_CommonUserRolesWebPlatform_Initialization
 {
     public function initialize()

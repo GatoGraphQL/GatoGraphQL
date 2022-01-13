@@ -6,7 +6,7 @@ namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Translation\TranslationAPIInterface;
+use PoP\Root\Translation\TranslationAPIInterface;
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 trait UserStateObjectTypeFieldResolverTrait

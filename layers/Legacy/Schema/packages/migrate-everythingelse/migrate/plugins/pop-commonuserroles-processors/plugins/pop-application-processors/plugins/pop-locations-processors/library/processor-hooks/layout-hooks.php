@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('PoP_EM_Module_Processor_SidebarMultiples:inner-modules', 'wassupUreAddAuthorSidebar', 10, 2);
 function wassupUreAddAuthorSidebar($modules, $author)

@@ -1,5 +1,5 @@
 <?php
-// use PoP\Hooks\Facades\HooksAPIFacade;
+// use PoP\Root\Facades\Hooks\HooksAPIFacade;
 // use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 // HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels', 'nosearchcategorypostsMultilayoutLabels');

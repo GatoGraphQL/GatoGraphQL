@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\SiteWP\Hooks;
 
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
 use PoP\EngineWP\Component;
 use PoP\EngineWP\ComponentInfo;

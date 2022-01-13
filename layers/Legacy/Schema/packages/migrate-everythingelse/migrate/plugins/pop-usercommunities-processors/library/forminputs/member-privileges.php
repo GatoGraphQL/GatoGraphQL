@@ -1,6 +1,6 @@
 <?php
 use PoP\Engine\FormInputs\MultipleSelectFormInput;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_FormInput_MemberPrivileges extends MultipleSelectFormInput
 {

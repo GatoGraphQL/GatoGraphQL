@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Hooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class VarsHookSet extends AbstractHookSet
 {

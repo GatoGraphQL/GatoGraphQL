@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Pages\Routing\PathUtils;
  
 class PoP_CommonPagesWebPlatform_CDN_Hooks

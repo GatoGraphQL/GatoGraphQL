@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Content Post Links Creation Web Platform
 Description: Implementation of Content Post Links Creation Web Platform for PoP

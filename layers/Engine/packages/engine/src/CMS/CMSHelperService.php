@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\CMS;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 
 class CMSHelperService implements CMSHelperServiceInterface
 {

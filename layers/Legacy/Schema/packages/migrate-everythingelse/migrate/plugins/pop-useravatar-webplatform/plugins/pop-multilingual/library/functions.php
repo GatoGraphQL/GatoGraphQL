@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Add locale to fileupload-userphoto
 HooksAPIFacade::getInstance()->addFilter('gd_fileupload-userphoto_locale:filename', 'gdFileuploadUserphotoLocaleFilename');

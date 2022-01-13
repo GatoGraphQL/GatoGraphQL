@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\RouteNatures;
 
 class PoP_WebPlatformEngine_UtilsHooks

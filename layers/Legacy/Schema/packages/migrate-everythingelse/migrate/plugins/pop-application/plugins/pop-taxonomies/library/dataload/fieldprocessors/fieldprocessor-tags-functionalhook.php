@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
 
 class PoP_Application_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObjectTypeFieldResolver

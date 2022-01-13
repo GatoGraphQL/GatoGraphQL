@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor as PostFilterInners;
 
 class PoPThemeWassup_DataLoad_FilterHooks

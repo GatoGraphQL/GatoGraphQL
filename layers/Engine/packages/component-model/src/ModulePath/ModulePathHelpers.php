@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModulePath;
 
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\Tokens\ModulePath;
 
 class ModulePathHelpers implements ModulePathHelpersInterface

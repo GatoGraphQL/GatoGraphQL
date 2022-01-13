@@ -5,7 +5,7 @@ use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\Routing\RouteNatures;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;

@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Hooks;
 
 use PoP\Root\App;
 use PoP\Engine\Cache\CacheUtils;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class SchemaCacheHookSet extends AbstractHookSet
 {

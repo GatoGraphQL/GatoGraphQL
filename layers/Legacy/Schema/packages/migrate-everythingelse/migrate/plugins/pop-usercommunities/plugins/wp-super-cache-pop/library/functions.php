@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // When updating My Communities
 HooksAPIFacade::getInstance()->addAction('gd_update_mycommunities:update', 'gdWpCacheUserEdit', 0, 0);

@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Engine\Route\RouteUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase

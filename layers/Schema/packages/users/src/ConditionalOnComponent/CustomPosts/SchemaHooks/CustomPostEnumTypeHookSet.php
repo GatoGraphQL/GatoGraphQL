@@ -6,7 +6,7 @@ namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\HookNames;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Constants\CustomPostOrderBy;
 

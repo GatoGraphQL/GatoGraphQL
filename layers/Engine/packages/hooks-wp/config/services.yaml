@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\Hooks\HooksAPIInterface:
+    PoP\Root\Hooks\HooksAPIInterface:
         class: \PoP\HooksWP\HooksAPI

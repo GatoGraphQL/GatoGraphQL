@@ -1,6 +1,6 @@
 <?php
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\SettingsMutationResolver;
 
 HooksAPIFacade::getInstance()->addAction(

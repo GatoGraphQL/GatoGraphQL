@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Register the language scripts for the fullcalendar
 HooksAPIFacade::getInstance()->addAction("popcms:enqueueScripts", 'emPopprocessorsQtransxRegisterScripts');

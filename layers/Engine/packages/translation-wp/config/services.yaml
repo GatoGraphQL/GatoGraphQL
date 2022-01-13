@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\Translation\TranslationAPIInterface:
+    PoP\Root\Translation\TranslationAPIInterface:
         class: \PoP\TranslationWP\TranslationAPI

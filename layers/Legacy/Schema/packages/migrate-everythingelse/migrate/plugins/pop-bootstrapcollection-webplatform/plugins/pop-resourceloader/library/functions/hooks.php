@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CoreProcessors_Bootstrap_ResourceLoaderProcessor_Hooks
 {

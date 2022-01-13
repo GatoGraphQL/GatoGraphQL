@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\Hooks;
 
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\UserState\FieldResolvers\ObjectType\GlobalObjectTypeFieldResolver;
 
 class DBEntriesHookSet extends AbstractHookSet

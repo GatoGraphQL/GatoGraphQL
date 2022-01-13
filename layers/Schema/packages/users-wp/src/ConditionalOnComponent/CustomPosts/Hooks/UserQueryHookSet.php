@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UsersWP\ConditionalOnComponent\CustomPosts\Hooks;
 
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Constants\UserOrderBy;
 use PoPSchema\UsersWP\TypeAPIs\UserTypeAPI;
 

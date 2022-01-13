@@ -163,7 +163,6 @@
             "PoP\\ApplicationWP\\": "layers/SiteBuilder/packages/application-wp/src",
             "PoP\\Application\\": "layers/SiteBuilder/packages/application/src",
             "PoP\\Base36Definitions\\": "layers/SiteBuilder/packages/definitions-base36/src",
-            "PoP\\BasicService\\": "layers/Engine/packages/basic-service/src",
             "PoP\\CacheControl\\": "layers/Engine/packages/cache-control/src",
             "PoP\\ComponentModel\\": "layers/Engine/packages/component-model/src",
             "PoP\\ConfigurationComponentModel\\": "layers/SiteBuilder/packages/component-model-configuration/src",
@@ -178,9 +177,7 @@
             "PoP\\GraphQLAPI\\": "layers/API/packages/api-graphql/src",
             "PoP\\GraphQLParser\\": "layers/Engine/packages/graphql-parser/src",
             "PoP\\GuzzleHelpers\\": "layers/Engine/packages/guzzle-helpers/src",
-            "PoP\\HooksPHP\\": "layers/Engine/packages/hooks-php/src",
             "PoP\\HooksWP\\": "layers/Engine/packages/hooks-wp/src",
-            "PoP\\Hooks\\": "layers/Engine/packages/hooks/src",
             "PoP\\LooseContracts\\": "layers/Engine/packages/loosecontracts/src",
             "PoP\\MandatoryDirectivesByConfiguration\\": "layers/Engine/packages/mandatory-directives-by-configuration/src",
             "PoP\\ModuleRouting\\": "layers/Engine/packages/modulerouting/src",
@@ -198,9 +195,7 @@
             "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/src",
             "PoP\\SiteWP\\": "layers/SiteBuilder/packages/site-wp/src",
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/src",
-            "PoP\\TranslationMock\\": "layers/Engine/packages/translation-mock/src",
-            "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/src",
-            "PoP\\Translation\\": "layers/Engine/packages/translation/src"
+            "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/src"
         }
     },
     "autoload-dev": {
@@ -329,7 +324,6 @@
             "PoP\\ApplicationWP\\": "layers/SiteBuilder/packages/application-wp/tests",
             "PoP\\Application\\": "layers/SiteBuilder/packages/application/tests",
             "PoP\\Base36Definitions\\": "layers/SiteBuilder/packages/definitions-base36/tests",
-            "PoP\\BasicService\\": "layers/Engine/packages/basic-service/tests",
             "PoP\\CacheControl\\": "layers/Engine/packages/cache-control/tests",
             "PoP\\ComponentModel\\": "layers/Engine/packages/component-model/tests",
             "PoP\\ConfigurationComponentModel\\": "layers/SiteBuilder/packages/component-model-configuration/tests",
@@ -344,9 +338,7 @@
             "PoP\\GraphQLAPI\\": "layers/API/packages/api-graphql/tests",
             "PoP\\GraphQLParser\\": "layers/Engine/packages/graphql-parser/tests",
             "PoP\\GuzzleHelpers\\": "layers/Engine/packages/guzzle-helpers/tests",
-            "PoP\\HooksPHP\\": "layers/Engine/packages/hooks-php/tests",
             "PoP\\HooksWP\\": "layers/Engine/packages/hooks-wp/tests",
-            "PoP\\Hooks\\": "layers/Engine/packages/hooks/tests",
             "PoP\\LooseContracts\\": "layers/Engine/packages/loosecontracts/tests",
             "PoP\\MandatoryDirectivesByConfiguration\\": "layers/Engine/packages/mandatory-directives-by-configuration/tests",
             "PoP\\ModuleRouting\\": "layers/Engine/packages/modulerouting/tests",
@@ -363,9 +355,7 @@
             "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/tests",
             "PoP\\SiteWP\\": "layers/SiteBuilder/packages/site-wp/tests",
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/tests",
-            "PoP\\TranslationMock\\": "layers/Engine/packages/translation-mock/tests",
-            "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/tests",
-            "PoP\\Translation\\": "layers/Engine/packages/translation/tests"
+            "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/tests"
         }
     },
     "extra": {
@@ -382,7 +372,6 @@
         "getpop/api-rest": "0.8.9",
         "getpop/application": "0.8.9",
         "getpop/application-wp": "0.8.9",
-        "getpop/basic-service": "0.8.9",
         "getpop/cache-control": "0.8.9",
         "getpop/component-model": "0.8.9",
         "getpop/component-model-configuration": "0.8.9",
@@ -398,8 +387,6 @@
         "getpop/function-fields": "0.8.9",
         "getpop/graphql-parser": "0.8.9",
         "getpop/guzzle-helpers": "0.8.9",
-        "getpop/hooks": "0.8.9",
-        "getpop/hooks-php": "0.8.9",
         "getpop/hooks-wp": "0.8.9",
         "getpop/loosecontracts": "0.8.9",
         "getpop/mandatory-directives-by-configuration": "0.8.9",
@@ -416,8 +403,6 @@
         "getpop/site-wp": "0.8.9",
         "getpop/spa": "0.8.9",
         "getpop/static-site-generator": "0.8.9",
-        "getpop/translation": "0.8.9",
-        "getpop/translation-mock": "0.8.9",
         "getpop/translation-wp": "0.8.9",
         "graphql-api/extension-demo": "0.8.9",
         "graphql-api/external-dependency-wrappers": "0.8.9",

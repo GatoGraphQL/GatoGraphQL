@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Versioning;
 
 use PoP\Root\App;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 

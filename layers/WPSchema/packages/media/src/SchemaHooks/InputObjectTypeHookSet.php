@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\Media\TypeResolvers\InputObjectType\MediaItemByInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 

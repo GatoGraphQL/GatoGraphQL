@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\Hooks;
 
 use PoP\ConfigurationComponentModel\Constants\Params;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class URLHookSet extends AbstractHookSet
 {

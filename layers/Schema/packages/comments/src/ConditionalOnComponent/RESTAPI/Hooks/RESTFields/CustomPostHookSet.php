@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ConditionalOnComponent\RESTAPI\Hooks\RESTFields;
 
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoP\RESTAPI\Helpers\HookHelpers;
 use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 

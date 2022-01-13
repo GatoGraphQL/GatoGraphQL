@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Remove the canonical, since we are already printing this info in the header (and we do it ourselves, as to remove the language information)
 // Originally added in wp-includes/default-filters.php

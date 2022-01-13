@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {

@@ -6,7 +6,7 @@ namespace PoPSchema\Media\ConditionalOnComponent\Users\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\HookNames;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\Media\ConditionalOnComponent\Users\Constants\MediaItemOrderBy;
 use PoPSchema\Media\TypeResolvers\EnumType\MediaItemOrderByEnumTypeResolver;
 

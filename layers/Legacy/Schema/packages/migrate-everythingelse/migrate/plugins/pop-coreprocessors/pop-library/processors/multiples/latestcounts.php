@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
 {

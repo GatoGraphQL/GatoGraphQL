@@ -1,7 +1,7 @@
 <?php
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 // Remove Events Manager Pro "Further information" in the My profile page
 HooksAPIFacade::getInstance()->removeAction('show_user_profile', array('EM_User_Fields','show_profile_fields'), 1);

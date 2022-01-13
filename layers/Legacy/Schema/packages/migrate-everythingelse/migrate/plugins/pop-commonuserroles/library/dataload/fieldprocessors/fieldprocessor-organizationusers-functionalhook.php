@@ -2,7 +2,7 @@
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalOrganizationUsers extends AbstractObjectTypeFieldResolver

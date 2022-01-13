@@ -1,6 +1,6 @@
 <?php
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;

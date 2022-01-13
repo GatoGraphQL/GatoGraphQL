@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class GD_URE_Module_Processor_CreateProfileOrganizationFormInnersBase extends PoP_Module_Processor_CreateProfileFormInnersBase
 {

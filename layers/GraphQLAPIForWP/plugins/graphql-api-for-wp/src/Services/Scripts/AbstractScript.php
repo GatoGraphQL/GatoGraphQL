@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 use Error;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\PluginUtils\Services\Helpers\StringConversion;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**

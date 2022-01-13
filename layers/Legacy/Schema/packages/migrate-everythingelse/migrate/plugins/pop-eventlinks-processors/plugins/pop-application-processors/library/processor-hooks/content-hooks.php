@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 class PoPTheme_EM_Processors_ContentHooks

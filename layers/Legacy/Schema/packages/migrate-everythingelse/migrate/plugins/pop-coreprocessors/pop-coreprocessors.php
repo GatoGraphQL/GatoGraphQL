@@ -6,7 +6,7 @@ Description: Plug-in providing a collection of processors for the Platform of Pl
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

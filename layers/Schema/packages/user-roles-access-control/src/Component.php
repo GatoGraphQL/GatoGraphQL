@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\UserRolesAccessControl;
 
 use PoP\CacheControl\Component as CacheControlComponent;
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component

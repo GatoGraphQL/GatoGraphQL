@@ -1,6 +1,6 @@
 <?php
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPSitesWassup\EventMutations\MutationResolverBridges\CreateEventMutationResolverBridge;
 use PoPSitesWassup\EventMutations\MutationResolverBridges\UpdateEventMutationResolverBridge;

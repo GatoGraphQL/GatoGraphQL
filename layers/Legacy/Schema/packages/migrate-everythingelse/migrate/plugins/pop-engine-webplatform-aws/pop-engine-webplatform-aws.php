@@ -6,7 +6,7 @@ Description: Use AWS for the Engine Web Platform plugin for the Platform of Plat
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

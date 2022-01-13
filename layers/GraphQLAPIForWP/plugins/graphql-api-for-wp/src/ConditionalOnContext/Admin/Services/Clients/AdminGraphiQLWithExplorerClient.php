@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\Clients;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLClientsForWP\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\GraphiQLWithExplorerClient;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 
 class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
 {

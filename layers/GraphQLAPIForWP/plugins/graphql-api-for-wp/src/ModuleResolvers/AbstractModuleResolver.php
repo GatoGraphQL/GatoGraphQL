@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {

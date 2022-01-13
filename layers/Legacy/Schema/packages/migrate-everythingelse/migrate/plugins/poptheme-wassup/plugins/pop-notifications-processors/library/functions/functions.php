@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts:bgcolor', 'popthemeWassupBgcolor', 10, 2);
 function popthemeWassupBgcolor($color, array $module)

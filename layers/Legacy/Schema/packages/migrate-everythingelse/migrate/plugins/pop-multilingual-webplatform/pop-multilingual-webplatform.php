@@ -6,7 +6,7 @@ Description: Implementation of PoP Multilingual Web Platform for PoP
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_MULTILINGUALWEBPLATFORM_VERSION', 0.109);
 define('POP_MULTILINGUALWEBPLATFORM_DIR', dirname(__FILE__));

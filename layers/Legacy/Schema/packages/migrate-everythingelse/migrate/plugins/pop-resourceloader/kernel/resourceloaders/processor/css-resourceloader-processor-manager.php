@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CSSResourceLoaderProcessorManager {
 

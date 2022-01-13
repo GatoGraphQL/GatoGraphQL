@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter(
 	ModelInstance::HOOK_COMPONENTS_RESULT, 

@@ -6,7 +6,7 @@ Description: Integration with plug-in Google Analytics Dashboard for WP
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('GADWP_POP_VERSION', 0.110);
 define('GADWP_POP_DIR', dirname(__FILE__));

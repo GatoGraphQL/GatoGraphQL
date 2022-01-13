@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class Wassup_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {

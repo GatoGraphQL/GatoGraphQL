@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addAction(

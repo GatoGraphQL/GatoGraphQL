@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
