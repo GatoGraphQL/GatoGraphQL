@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\HooksWP;
 
-use PoP\Hooks\HooksAPIInterface;
+use PoP\Root\Hooks\HooksAPIInterface;
 
 class HooksAPI implements HooksAPIInterface
 {

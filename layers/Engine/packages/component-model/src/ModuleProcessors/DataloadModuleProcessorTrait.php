@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\Hooks\HooksAPIInterface;
+use PoP\Root\Hooks\HooksAPIInterface;
 
 trait DataloadModuleProcessorTrait
 {

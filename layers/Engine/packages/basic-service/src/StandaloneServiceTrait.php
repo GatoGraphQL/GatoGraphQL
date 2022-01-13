@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\BasicService;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Hooks\HooksAPIInterface;
+use PoP\Root\Hooks\HooksAPIInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoP\Root\Translation\TranslationAPIInterface;
 
