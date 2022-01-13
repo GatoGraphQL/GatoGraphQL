@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Cache;
 
 use DateInterval;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 

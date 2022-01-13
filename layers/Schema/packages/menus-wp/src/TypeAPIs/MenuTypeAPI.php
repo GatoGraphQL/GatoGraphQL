@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\MenusWP\TypeAPIs;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;

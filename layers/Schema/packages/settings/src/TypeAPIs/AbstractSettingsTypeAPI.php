@@ -6,7 +6,7 @@ namespace PoPSchema\Settings\TypeAPIs;
 
 use PoP\Root\App;
 use InvalidArgumentException;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPSchema\Settings\Component;
 use PoPSchema\Settings\ComponentConfiguration;

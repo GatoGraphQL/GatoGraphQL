@@ -21,7 +21,7 @@ use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Error;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 
 class ErrorHelper implements ErrorHelperInterface
 {

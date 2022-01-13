@@ -9,7 +9,7 @@ use Exception;
 use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
 use InvalidArgumentException;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;

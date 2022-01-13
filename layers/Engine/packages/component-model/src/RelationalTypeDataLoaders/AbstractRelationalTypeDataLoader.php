@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeDataLoaders;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\LooseContracts\NameResolverInterface;
 
 abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoaderInterface

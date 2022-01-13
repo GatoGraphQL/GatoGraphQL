@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use WP_Post;
 
 abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface

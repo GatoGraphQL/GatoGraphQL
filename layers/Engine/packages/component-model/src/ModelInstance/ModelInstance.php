@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\ModelInstance;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\Definitions\DefinitionManagerInterface;
 
 class ModelInstance implements ModelInstanceInterface

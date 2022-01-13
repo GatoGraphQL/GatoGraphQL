@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentsWP\TypeAPIs;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoPSchema\Comments\Constants\CommentOrderBy;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;

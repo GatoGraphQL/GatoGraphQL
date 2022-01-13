@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Clients;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\VoyagerClient;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 
 class CustomEndpointVoyagerClient extends VoyagerClient
 {

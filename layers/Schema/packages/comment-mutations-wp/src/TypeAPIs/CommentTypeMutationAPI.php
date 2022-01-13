@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CommentMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\Error\Error;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 
 /**
