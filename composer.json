@@ -200,7 +200,6 @@
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/src",
             "PoP\\TranslationMock\\": "layers/Engine/packages/translation-mock/src",
             "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/src",
-            "PoP\\Translation\\": "layers/Engine/packages/translation/src"
         }
     },
     "autoload-dev": {
@@ -365,7 +364,6 @@
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/tests",
             "PoP\\TranslationMock\\": "layers/Engine/packages/translation-mock/tests",
             "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/tests",
-            "PoP\\Translation\\": "layers/Engine/packages/translation/tests"
         }
     },
     "extra": {
