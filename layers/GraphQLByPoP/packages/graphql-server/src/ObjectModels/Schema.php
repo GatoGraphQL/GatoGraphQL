@@ -11,7 +11,7 @@ use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFaca
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\TypeKinds;
-use PoP\BasicService\StandaloneServiceTrait;
+use PoP\Root\Services\StandaloneServiceTrait;
 use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\App;

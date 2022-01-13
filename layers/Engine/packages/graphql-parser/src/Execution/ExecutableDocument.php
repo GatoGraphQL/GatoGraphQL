@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Execution;
 
-use PoP\BasicService\StandaloneServiceTrait;
+use PoP\Root\Services\StandaloneServiceTrait;
 use PoP\GraphQLParser\Facades\Query\QueryAugmenterServiceFacade;
 use PoPBackbone\GraphQLParser\Execution\ExecutableDocument as UpstreamExecutableDocument;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
