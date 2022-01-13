@@ -6,11 +6,9 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\PaginationParams;
-use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
-use PoP\Root\Hooks\HooksAPIInterface;
 
 trait QueryDataModuleProcessorTrait
 {

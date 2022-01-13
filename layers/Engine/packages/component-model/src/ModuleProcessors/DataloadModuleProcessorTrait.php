@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\Root\Hooks\HooksAPIInterface;
-
 trait DataloadModuleProcessorTrait
 {
     use FormattableModuleTrait;

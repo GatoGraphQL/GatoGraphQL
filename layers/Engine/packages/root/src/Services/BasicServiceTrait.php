@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Root\Services;
 
-use PoP\Root\Hooks\HooksAPIInterface;
 use PoP\Root\Services\WithInstanceManagerServiceTrait;
 use PoP\Root\Translation\TranslationAPIInterface;
 
