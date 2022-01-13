@@ -9,9 +9,9 @@ use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Managers\AppStateManager;
-use PoP\Root\State\ComponentManager;
-use PoP\Root\State\HookManager;
-use PoP\Root\State\HookManagerInterface;
+use PoP\Root\Managers\ComponentManager;
+use PoP\Root\Managers\HookManager;
+use PoP\Root\Managers\HookManagerInterface;
 use PoP\Root\State\MutationResolutionStore;
 use Symfony\Component\DependencyInjection\Container;
 
