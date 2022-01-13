@@ -10,7 +10,7 @@ use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Managers\AppStateManager;
 use PoP\Root\State\ComponentManager;
-use PoP\Root\State\HookManager;
+use PoP\Root\State\HookManagerInterface;
 use PoP\Root\State\MutationResolutionStore;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -28,7 +28,7 @@ interface AppInterface
      */
     public static function initialize(
         ?AppLoader $appLoader = null,
-        ?HookManager $hookManager = null,
+        ?HookManagerInterface $hookManager = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManager $componentManager = null,
@@ -38,7 +38,7 @@ interface AppInterface
 
     public static function getAppLoader(): AppLoader;
 
-    public static function getHookManager(): HookManager;
+    public static function getHookManager(): HookManagerInterface;
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory;
 

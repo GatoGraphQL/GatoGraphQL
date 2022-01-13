@@ -6,7 +6,7 @@ namespace PoP\Root\State;
 
 use PoPBackbone\PHPHooks\PHPHooks;
 
-class HookManager
+class HookManager implements HookManagerInterface
 {
     protected PHPHooks $phpHooks;
 
