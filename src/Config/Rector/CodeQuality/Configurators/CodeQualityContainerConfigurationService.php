@@ -26,6 +26,8 @@ class CodeQualityContainerConfigurationService extends AbstractCodeQualityContai
             $this->rootDirectory . '/layers/Legacy/Engine/packages/*/tests/*',
             $this->rootDirectory . '/layers/Legacy/Schema/packages/*/src/*',
             $this->rootDirectory . '/layers/Legacy/Schema/packages/*/tests/*',
+            $this->rootDirectory . '/layers/Legacy/SiteBuilder/packages/*/src/*',
+            $this->rootDirectory . '/layers/Legacy/SiteBuilder/packages/*/tests/*',
             $this->rootDirectory . '/layers/Legacy/Wassup/packages/*/src/*',
             $this->rootDirectory . '/layers/Legacy/Wassup/packages/*/tests/*',
             $this->rootDirectory . '/layers/Schema/packages/*/src/*',
