@@ -19,7 +19,6 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\Translation\Component::class,
         ];
     }
 
