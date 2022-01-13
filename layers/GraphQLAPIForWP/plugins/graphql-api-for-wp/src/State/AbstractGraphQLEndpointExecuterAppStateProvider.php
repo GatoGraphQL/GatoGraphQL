@@ -6,12 +6,10 @@ namespace GraphQLAPI\GraphQLAPI\State;
 
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
-use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
-use PoP\Routing\RouteNatures;
 
 abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractAppStateProvider
 {
