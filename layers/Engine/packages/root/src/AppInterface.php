@@ -73,5 +73,31 @@ interface AppInterface
      *
      * @throws LogicException
      */
-    public static function getComponent(string $componentClass): ComponentInterface;
+    public static function getComponent(string $componentClass): ComponentInterface;public function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void;
+
+    /**
+     * Shortcut function.
+     */
+    public function removeFilter(string $tag, callable $function_to_remove, int $priority = 10): bool;
+    
+    /**
+     * Shortcut function.
+     */
+    public function applyFilters(string $tag, mixed $value, mixed ...$args): mixed;
+    
+    /**
+     * Shortcut function.
+     */
+    public function addAction(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void;
+    
+    /**
+     * Shortcut function.
+     */
+    public function removeAction(string $tag, callable $function_to_remove, int $priority = 10): bool;
+    
+    /**
+     * Shortcut function.
+     */
+    public function doAction(string $tag, mixed ...$args): void;
+    
 }
