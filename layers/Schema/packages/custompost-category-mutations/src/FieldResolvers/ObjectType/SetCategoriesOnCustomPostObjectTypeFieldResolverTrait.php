@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType;
 
-use PoP\Translation\TranslationAPIInterface;
+use PoP\Root\Translation\TranslationAPIInterface;
 
 trait SetCategoriesOnCustomPostObjectTypeFieldResolverTrait
 {

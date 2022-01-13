@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Translation\Facades;
 
 use PoP\Root\App;
-use PoP\Translation\TranslationAPIInterface;
+use PoP\Root\Translation\TranslationAPIInterface;
 
 class TranslationAPIFacade
 {

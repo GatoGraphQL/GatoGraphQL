@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\TranslationMock;
 
-use PoP\Translation\TranslationAPIInterface;
+use PoP\Root\Translation\TranslationAPIInterface;
 
 class TranslationAPI implements TranslationAPIInterface
 {

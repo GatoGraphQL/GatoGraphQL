@@ -7,7 +7,7 @@ namespace PoP\BasicService;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Translation\TranslationAPIInterface;
+use PoP\Root\Translation\TranslationAPIInterface;
 
 trait StandaloneServiceTrait
 {

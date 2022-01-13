@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Error\Error;
-use PoP\Translation\TranslationAPIInterface;
+use PoP\Root\Translation\TranslationAPIInterface;
 use stdClass;
 
 trait OneofInputObjectTypeResolverTrait

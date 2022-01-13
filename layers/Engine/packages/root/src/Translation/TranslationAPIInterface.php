@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Translation;
+namespace PoP\Root\Translation;
 
 interface TranslationAPIInterface
 {
