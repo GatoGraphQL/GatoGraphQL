@@ -9,7 +9,7 @@ use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Managers\AppStateManager;
-use PoP\Root\Managers\ComponentManager;
+use PoP\Root\Managers\ComponentManagerInterface;
 use PoP\Root\Managers\HookManagerInterface;
 use PoP\Root\Stores\MutationResolutionStore;
 use Symfony\Component\DependencyInjection\Container;
@@ -31,7 +31,7 @@ interface AppInterface
         ?HookManagerInterface $hookManager = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
-        ?ComponentManager $componentManager = null,
+        ?ComponentManagerInterface $componentManager = null,
         ?AppStateManager $appStateManager = null,
         ?MutationResolutionStore $mutationResolutionStore = null,
     ): void;
@@ -44,7 +44,7 @@ interface AppInterface
 
     public static function getSystemContainerBuilderFactory(): SystemContainerBuilderFactory;
 
-    public static function getComponentManager(): ComponentManager;
+    public static function getComponentManager(): ComponentManagerInterface;
 
     public static function getMutationResolutionStore(): MutationResolutionStore;
 

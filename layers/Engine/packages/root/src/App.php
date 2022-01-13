@@ -10,6 +10,7 @@ use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Managers\AppStateManager;
 use PoP\Root\Managers\ComponentManager;
+use PoP\Root\Managers\ComponentManagerInterface;
 use PoP\Root\Managers\HookManager;
 use PoP\Root\Managers\HookManagerInterface;
 use PoP\Root\Stores\MutationResolutionStore;
@@ -24,7 +25,7 @@ class App implements AppInterface
     protected static HookManagerInterface $hookManager;
     protected static ContainerBuilderFactory $containerBuilderFactory;
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
-    protected static ComponentManager $componentManager;
+    protected static ComponentManagerInterface $componentManager;
     protected static AppStateManager $appStateManager;
     protected static MutationResolutionStore $mutationResolutionStore;
     /** @var string[] */
@@ -49,7 +50,7 @@ class App implements AppInterface
         ?HookManagerInterface $hookManager = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
-        ?ComponentManager $componentManager = null,
+        ?ComponentManagerInterface $componentManager = null,
         ?AppStateManager $appStateManager = null,
         ?MutationResolutionStore $mutationResolutionStore = null,
     ): void {
@@ -89,7 +90,7 @@ class App implements AppInterface
         return new SystemContainerBuilderFactory();
     }
 
-    protected static function createComponentManager(): ComponentManager
+    protected static function createComponentManager(): ComponentManagerInterface
     {
         return new ComponentManager();
     }
@@ -124,7 +125,7 @@ class App implements AppInterface
         return self::$systemContainerBuilderFactory;
     }
 
-    public static function getComponentManager(): ComponentManager
+    public static function getComponentManager(): ComponentManagerInterface
     {
         return self::$componentManager;
     }

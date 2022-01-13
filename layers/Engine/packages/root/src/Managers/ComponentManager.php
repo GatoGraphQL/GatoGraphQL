@@ -10,7 +10,7 @@ use PoP\Root\Component\ComponentInterface;
 /**
  * Keep a reference to all Components
  */
-class ComponentManager
+class ComponentManager implements ComponentManagerInterface
 {
     /**
      * The initialized components, stored under their class
