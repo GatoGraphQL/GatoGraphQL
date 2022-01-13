@@ -16,7 +16,7 @@ class PoP_CommonPages_Module_MainContentRouteModuleProcessor extends \PoP\Applic
             POP_COMMONPAGES_ROUTE_ABOUT => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_ABOUT],
         );
         foreach ($modules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;

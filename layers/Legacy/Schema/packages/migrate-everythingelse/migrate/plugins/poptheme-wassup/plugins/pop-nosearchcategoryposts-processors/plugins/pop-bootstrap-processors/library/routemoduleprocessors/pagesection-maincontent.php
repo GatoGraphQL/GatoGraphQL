@@ -37,7 +37,7 @@ class PoPTheme_Wassup_NSAppCatPro_Bootstrap_Module_MainPageSectionRouteModulePro
         );
 
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

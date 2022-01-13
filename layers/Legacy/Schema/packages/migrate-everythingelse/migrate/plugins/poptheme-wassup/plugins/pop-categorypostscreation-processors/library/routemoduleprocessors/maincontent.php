@@ -36,14 +36,14 @@ class PoP_CategoryPostsCreation_Module_MainContentRouteModuleProcessor extends \
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYCATEGORYPOSTS19_TABLE_EDIT],
         );
         foreach ($routemodules_mycontent as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TABLE,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_TABLE) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_mycontent_simpleviewpreviews = array(
@@ -69,14 +69,14 @@ class PoP_CategoryPostsCreation_Module_MainContentRouteModuleProcessor extends \
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW],
         );
         foreach ($routemodules_mycontent_simpleviewpreviews as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_SIMPLEVIEW) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_mycontent_fullviewpreviews = array(
@@ -102,14 +102,14 @@ class PoP_CategoryPostsCreation_Module_MainContentRouteModuleProcessor extends \
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
         foreach ($routemodules_mycontent_fullviewpreviews as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_FULLVIEW) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
 

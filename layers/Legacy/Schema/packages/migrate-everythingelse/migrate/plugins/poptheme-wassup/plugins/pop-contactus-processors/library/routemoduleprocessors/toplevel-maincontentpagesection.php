@@ -16,7 +16,7 @@ class PoPTheme_Wassup_ContactUs_Module_ContentPageSectionTopLevelRouteModuleProc
             POP_CONTACTUS_ROUTE_CONTACTUS,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
                 'conditions' => [
                     'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,

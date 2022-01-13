@@ -19,7 +19,7 @@ class PoPTheme_Wassup_UserLogin_Module_MainContentRouteModuleProcessor extends \
             POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA => [PoP_Module_Processor_UserAccountGroups::class, PoP_Module_Processor_UserAccountGroups::MODULE_GROUP_LOGGEDINUSERDATA],
         );
         foreach ($modules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;

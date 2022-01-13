@@ -16,14 +16,14 @@ class Wassup_EM_URE_Module_MainContentRouteModuleProcessor extends \PoP\Applicat
             POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomScrollMapSectionBlocks::class, GD_URE_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_INDIVIDUALS_SCROLLMAP],
         );
         foreach ($routemodules_addons as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_users == POP_FORMAT_MAP) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
 

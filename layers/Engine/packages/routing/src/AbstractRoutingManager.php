@@ -52,7 +52,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
     public function getCurrentNature(): string
     {
         // By default, everything is a standard route
-        return RouteNatures::STANDARD;
+        return RouteNatures::GENERIC;
     }
 
     public function getCurrentRoute(): string
@@ -60,7 +60,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
         $nature = $this->getCurrentNature();
 
         // If it is a ROUTE, then the URL path is already the route
-        if ($nature === RouteNatures::STANDARD) {
+        if ($nature === RouteNatures::GENERIC) {
             $route = RoutingUtils::getURLPath();
         } else {
             // If having set URL param "route", then use it

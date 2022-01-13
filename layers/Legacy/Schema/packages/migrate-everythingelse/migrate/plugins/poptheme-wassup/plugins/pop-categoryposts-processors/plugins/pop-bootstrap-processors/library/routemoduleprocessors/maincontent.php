@@ -36,7 +36,7 @@ class PoPTheme_Wassup_AppCatPro_Bootstrap_Module_MainContentRouteModuleProcessor
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_TabPanelSectionBlocks::class, CPP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_CATEGORYPOSTS19],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

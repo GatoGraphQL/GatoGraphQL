@@ -19,7 +19,7 @@ class RoutingManager extends AbstractRoutingManager
         /** @var WP_Query */
         $query = $this->query;
         if ($this->isStandard()) {
-            return RouteNatures::STANDARD;
+            return RouteNatures::GENERIC;
         } elseif ($query->is_home() || $query->is_front_page()) {
             return RouteNatures::HOME;
         } elseif ($query->is_404()) {

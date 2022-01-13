@@ -150,7 +150,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
             // If there is more than one page, then add the tabs component (eg: feeds)
             // If there is only one page defined, then there is no need for the tabs (eg: homepage)
-            // $add_tabs = ($nature == RouteNatures::STANDARD/*PageRouteNatures::PAGE*/) ? false : count($route_formats) > 1;
+            // $add_tabs = ($nature == RouteNatures::GENERIC/*PageRouteNatures::PAGE*/) ? false : count($route_formats) > 1;
             $add_tabs = count($route_formats) > 1;
             foreach ($route_formats as $route => $formats) {
 
@@ -161,7 +161,7 @@ class PoP_ResourceLoaderProcessorUtils {
                         'format' => $format,
                     );
                     $original_layouts = array();
-                    if ($nature == RouteNatures::STANDARD/*PageRouteNatures::PAGE*/) {
+                    if ($nature == RouteNatures::GENERIC/*PageRouteNatures::PAGE*/) {
 
                         $ids = array(
                             $route,
@@ -414,7 +414,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // Reset the cache
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == RouteNatures::STANDARD) {
+        } elseif ($nature == RouteNatures::GENERIC) {
 
             $vars['routing'] = [];
             ApplicationState::augmentVarsProperties();
@@ -576,7 +576,7 @@ class PoP_ResourceLoaderProcessorUtils {
             $path_natures = array(
                 CustomPostRouteNatures::CUSTOMPOST,
                 PageRouteNatures::PAGE,
-                RouteNatures::STANDARD,
+                RouteNatures::GENERIC,
             );
 
             // For natures where can have a tab, if the tab is the default one, then also
@@ -586,7 +586,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // UserRouteNatures::USER,
                 // CustomPostRouteNatures::CUSTOMPOST,
                 // TagRouteNatures::TAG,
-                RouteNatures::STANDARD,
+                RouteNatures::GENERIC,
             );
 
             $duplicate_noroute = in_array($nature, $noroute_natures) && $options['is-default-route'];

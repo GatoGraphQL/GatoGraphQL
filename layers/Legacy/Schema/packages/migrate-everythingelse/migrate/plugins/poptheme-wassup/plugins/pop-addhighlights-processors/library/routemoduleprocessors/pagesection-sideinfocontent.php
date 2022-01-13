@@ -24,7 +24,7 @@ class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionRouteModule
             POP_ADDHIGHLIGHTS_ROUTE_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;

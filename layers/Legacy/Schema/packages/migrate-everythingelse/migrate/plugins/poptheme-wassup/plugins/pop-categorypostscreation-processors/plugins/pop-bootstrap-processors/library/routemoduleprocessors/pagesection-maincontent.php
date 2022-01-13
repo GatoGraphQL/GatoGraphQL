@@ -36,7 +36,7 @@ class PoP_CategoryPostsCreation_Bootstrap_Module_MainPageSectionRouteModuleProce
         );
 
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

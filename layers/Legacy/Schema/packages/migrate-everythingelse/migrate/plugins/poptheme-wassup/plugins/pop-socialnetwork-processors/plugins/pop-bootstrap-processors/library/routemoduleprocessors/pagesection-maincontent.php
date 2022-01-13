@@ -20,7 +20,7 @@ class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionRouteModuleP
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDPOSTS => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORRECOMMENDEDPOSTS],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

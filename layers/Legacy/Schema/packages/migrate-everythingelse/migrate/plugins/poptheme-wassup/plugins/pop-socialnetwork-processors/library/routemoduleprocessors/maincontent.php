@@ -28,7 +28,7 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor exten
             POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST => [PoP_Module_Processor_FunctionsBlocks::class, PoP_Module_Processor_FunctionsBlocks::MODULE_BLOCK_UNDODOWNVOTEPOST],
         );
         foreach ($modules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
         }
 
         // Tag modules

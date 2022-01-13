@@ -16,7 +16,7 @@ class PoP_LocationPostLinksCreation_Module_MainContentRouteModuleProcessor exten
             POP_LOCATIONPOSTLINKSCREATION_ROUTE_EDITLOCATIONPOSTLINK => [PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_LOCATIONPOSTLINK_UPDATE],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;

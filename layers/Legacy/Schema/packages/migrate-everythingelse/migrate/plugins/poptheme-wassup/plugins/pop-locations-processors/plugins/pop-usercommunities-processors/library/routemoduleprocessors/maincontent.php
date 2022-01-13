@@ -17,14 +17,14 @@ class PoP_Locations_CommonUserRoles_Module_MainContentRouteModuleProcessor exten
             POP_USERCOMMUNITIES_ROUTE_COMMUNITIES => [PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionBlocks::class, PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionBlocks::MODULE_BLOCK_COMMUNITIES_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_users == POP_FORMAT_MAP) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
 

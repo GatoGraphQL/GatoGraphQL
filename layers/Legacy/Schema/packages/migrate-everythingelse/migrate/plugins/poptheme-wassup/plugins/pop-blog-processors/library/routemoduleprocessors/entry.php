@@ -45,7 +45,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
                 POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
             );
             foreach ($routemodules as $route => $module) {
-                $ret[RouteNatures::STANDARD][$route][] = [
+                $ret[RouteNatures::GENERIC][$route][] = [
                     'module' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,
@@ -58,7 +58,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
                 POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
             );
             foreach ($routemodules as $route => $module) {
-                $ret[RouteNatures::STANDARD][$route][] = [
+                $ret[RouteNatures::GENERIC][$route][] = [
                     'module' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,

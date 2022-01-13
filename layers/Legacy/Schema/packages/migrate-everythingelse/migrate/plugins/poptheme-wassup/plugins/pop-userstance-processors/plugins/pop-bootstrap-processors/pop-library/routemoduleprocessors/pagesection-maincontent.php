@@ -28,7 +28,7 @@ class UserStance_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends Po
             POP_USERSTANCE_ROUTE_MYSTANCES => [UserStance_Module_Processor_SectionTabPanelBlocks::class, UserStance_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_MYSTANCES],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

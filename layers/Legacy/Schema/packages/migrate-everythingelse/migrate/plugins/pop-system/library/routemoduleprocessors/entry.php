@@ -17,7 +17,7 @@ class PoPSystem_Module_EntryRouteModuleProcessor extends \PoP\ModuleRouting\Abst
             POP_SYSTEM_ROUTE_SYSTEM_INSTALL => [PoP_System_Module_Processor_SystemActions::class, PoP_System_Module_Processor_SystemActions::MODULE_DATALOADACTION_SYSTEM_INSTALL],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;

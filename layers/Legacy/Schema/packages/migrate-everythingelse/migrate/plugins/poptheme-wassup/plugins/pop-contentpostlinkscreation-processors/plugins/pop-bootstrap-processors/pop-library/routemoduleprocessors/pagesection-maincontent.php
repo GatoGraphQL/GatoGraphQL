@@ -15,7 +15,7 @@ class PoPTheme_Wassup_CPLC_Bootstrap_Module_MainPageSectionRouteModuleProcessor 
             POP_CONTENTPOSTLINKSCREATION_ROUTE_MYCONTENTPOSTLINKS => [PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_MYLINKS],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

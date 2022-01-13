@@ -15,7 +15,7 @@ class Wassup_Volunteering_Module_MainContentRouteModuleProcessor extends \PoP\Ap
             POP_VOLUNTEERING_ROUTE_VOLUNTEER => [PoP_Volunteering_Module_Processor_Blocks::class, PoP_Volunteering_Module_Processor_Blocks::MODULE_BLOCK_VOLUNTEER],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;

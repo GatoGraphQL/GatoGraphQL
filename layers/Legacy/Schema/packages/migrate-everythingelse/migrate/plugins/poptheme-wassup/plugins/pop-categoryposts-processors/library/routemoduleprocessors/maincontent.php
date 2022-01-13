@@ -40,14 +40,14 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS19_TYPEAHEAD],
         );
         foreach ($routemodules_typeahead as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TYPEAHEAD,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_TYPEAHEAD) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
 
@@ -74,18 +74,18 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_NAVIGATOR],
         );
         foreach ($routemodules_navigator as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_NAVIGATOR,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_NAVIGATOR) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
 
             // Navigator special case: use the NAVIGATOR module when the target is the navigator
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'target' => POP_TARGET_NAVIGATOR,
@@ -116,14 +116,14 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_ADDONS],
         );
         foreach ($routemodules_addons as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_ADDONS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_ADDONS) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
 
@@ -150,14 +150,14 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_DETAILS) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_simpleview = array(
@@ -183,14 +183,14 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
         );
         foreach ($routemodules_simpleview as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_SIMPLEVIEW) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_fullview = array(
@@ -216,14 +216,14 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_FULLVIEW) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -249,14 +249,14 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_THUMBNAIL) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_list = array(
@@ -282,14 +282,14 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LIST) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_line = array(
@@ -315,14 +315,14 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_LINE],
         );
         foreach ($routemodules_line as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LINE,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LINE) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_carousels = array(
@@ -348,14 +348,14 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_CATEGORYPOSTS19_CAROUSEL],
         );
         foreach ($routemodules_carousels as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CAROUSEL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_CAROUSEL) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_carousels = array(
@@ -381,14 +381,14 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_CATEGORYPOSTS19_CAROUSEL_CONTENT],
         );
         foreach ($routemodules_carousels as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CAROUSELCONTENT,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_CAROUSELCONTENT) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
 

@@ -6,7 +6,7 @@ namespace PoP\Routing;
 
 class RouteNatures
 {
-    public const STANDARD = 'standard';
+    public const GENERIC = 'generic';
     public const HOME = 'home';
     public const NOTFOUND = '404';
 }

@@ -17,7 +17,7 @@ class Wassup_URE_RoleProcessors_Bootstrap_Module_MainPageSectionRouteModuleProce
             POP_USERCOMMUNITIES_ROUTE_MYMEMBERS => [PoP_UserCommunities_ModuleProcessor_SectionBlocks::class, PoP_UserCommunities_ModuleProcessor_SectionBlocks::MODULE_BLOCK_TABPANEL_MYMEMBERS],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

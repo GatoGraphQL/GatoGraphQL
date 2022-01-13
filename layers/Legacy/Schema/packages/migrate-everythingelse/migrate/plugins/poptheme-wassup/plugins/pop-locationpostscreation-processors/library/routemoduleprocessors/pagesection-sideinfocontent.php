@@ -15,7 +15,7 @@ class PoPTheme_Wassup_LocationPostsCreation_Module_SideInfoContentPageSectionRou
             POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [PoPSPEM_Module_Processor_SidebarMultiples::class, PoPSPEM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;

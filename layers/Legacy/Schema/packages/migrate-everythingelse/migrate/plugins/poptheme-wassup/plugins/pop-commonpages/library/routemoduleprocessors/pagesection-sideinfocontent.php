@@ -15,7 +15,7 @@ class PoPTheme_Wassup_CommonPages_Module_SideInfoContentPageSectionRouteModulePr
             POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLEPAGE_ABOUT_SIDEBAR]
             ];
         }

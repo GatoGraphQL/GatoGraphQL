@@ -74,7 +74,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                     $flat_resources[$nature][$key] = $resources;
                     break;
 
-                case RouteNatures::STANDARD:
+                case RouteNatures::GENERIC:
                 case PageRouteNatures::PAGE:
                 case CustomPostRouteNatures::CUSTOMPOST:
 

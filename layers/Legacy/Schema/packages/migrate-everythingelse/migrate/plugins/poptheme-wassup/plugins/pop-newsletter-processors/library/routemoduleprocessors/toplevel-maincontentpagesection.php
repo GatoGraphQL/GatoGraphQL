@@ -17,7 +17,7 @@ class PoPTheme_Wassup_Newsletter_Module_ContentPageSectionTopLevelRouteModulePro
             POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
                 'conditions' => [
                     'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,

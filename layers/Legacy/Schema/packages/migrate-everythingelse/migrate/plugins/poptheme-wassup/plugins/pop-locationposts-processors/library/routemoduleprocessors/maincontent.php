@@ -19,14 +19,14 @@ class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\App
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_LOCATIONPOSTS_TYPEAHEAD],
         );
         foreach ($routemodules_typeahead as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TYPEAHEAD,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_TYPEAHEAD) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
 
@@ -34,18 +34,18 @@ class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\App
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_NAVIGATOR],
         );
         foreach ($routemodules_navigator as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_NAVIGATOR,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_NAVIGATOR) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
 
             // Navigator special case: use the NAVIGATOR module when the target is the navigator
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'target' => POP_TARGET_NAVIGATOR,
@@ -57,14 +57,14 @@ class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\App
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_ADDONS],
         );
         foreach ($routemodules_addons as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_ADDONS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_ADDONS) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
 
@@ -72,14 +72,14 @@ class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\App
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_DETAILS) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
 
@@ -87,84 +87,84 @@ class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\App
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_SIMPLEVIEW],
         );
         foreach ($routemodules_simpleview as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_SIMPLEVIEW) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_fullview = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_FULLVIEW) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_thumbnail = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_THUMBNAIL) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_list = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LIST) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_map = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_MAP) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_horizontalmap = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::class, GD_Custom_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
         );
         foreach ($routemodules_horizontalmap as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_HORIZONTALMAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_HORIZONTALMAP) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
             }
         }
 

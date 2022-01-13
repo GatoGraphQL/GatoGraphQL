@@ -15,7 +15,7 @@ class PoPTheme_Wassup_MultiDomain_Module_ContentPageSectionTopLevelRouteModulePr
             POP_MULTIDOMAIN_ROUTE_EXTERNAL,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_PageSectionContainers::class, PoP_Module_Processor_PageSectionContainers::MODULE_PAGESECTIONCONTAINER_HOLE],
                 'conditions' => [
                     'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,

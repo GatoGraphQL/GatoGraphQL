@@ -16,7 +16,7 @@ class PoP_EventsCreation_Bootstrap_Module_MainPageSectionRouteModuleProcessor ex
             POP_EVENTSCREATION_ROUTE_MYPASTEVENTS => [PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::class, PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_MYPASTEVENTS],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

@@ -46,7 +46,7 @@ class PoPTheme_Wassup_NoSearchCategoryPosts_Module_SideInfoContentPageSectionRou
             ];
         }
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_CATEGORYPOSTS_SIDEBAR]
             ];
         }

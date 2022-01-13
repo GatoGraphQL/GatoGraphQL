@@ -57,7 +57,7 @@ class AppStateProvider extends AbstractAppStateProvider
     public function augment(array &$state): void
     {
         $nature = $state['nature'];
-        $state['routing']['is-standard'] = $nature === RouteNatures::STANDARD;
+        $state['routing']['is-standard'] = $nature === RouteNatures::GENERIC;
         $state['routing']['is-home'] = $nature === RouteNatures::HOME;
         $state['routing']['is-404'] = $nature === RouteNatures::NOTFOUND;
     }

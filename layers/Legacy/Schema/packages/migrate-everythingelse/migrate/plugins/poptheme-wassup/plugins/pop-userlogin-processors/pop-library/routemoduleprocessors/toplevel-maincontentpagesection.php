@@ -18,7 +18,7 @@ class PoPTheme_Wassup_UserLogin_Module_ContentPageSectionTopLevelRouteModuleProc
             POP_USERLOGIN_ROUTE_LOSTPWDRESET,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
                 'conditions' => [
                     'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
@@ -31,7 +31,7 @@ class PoPTheme_Wassup_UserLogin_Module_ContentPageSectionTopLevelRouteModuleProc
             POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_PageSectionContainers::class, PoP_Module_Processor_PageSectionContainers::MODULE_PAGESECTIONCONTAINER_HOLE],
                 'conditions' => [
                     'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,

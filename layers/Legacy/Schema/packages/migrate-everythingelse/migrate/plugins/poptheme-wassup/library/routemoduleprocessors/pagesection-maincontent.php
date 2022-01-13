@@ -29,7 +29,7 @@ class PoP_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPage
         );
         foreach ($routes as $route) {
             // Override the default Page Content module
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => null];
+            $ret[RouteNatures::GENERIC][$route][] = ['module' => null];
         }
 
         return $ret;

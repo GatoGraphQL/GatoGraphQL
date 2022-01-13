@@ -17,7 +17,7 @@ class PoPTheme_Wassup_CommonUserRoles_Module_ContentPageSectionTopLevelRouteModu
             POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RouteNatures::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
                 'conditions' => [
                     'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,

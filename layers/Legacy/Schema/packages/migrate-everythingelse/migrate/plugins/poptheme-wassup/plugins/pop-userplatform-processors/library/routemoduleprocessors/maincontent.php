@@ -20,7 +20,7 @@ class PoPTheme_Wassup_UserPlatform_Module_MainContentRouteModuleProcessor extend
             POP_USERPLATFORM_ROUTE_MYPROFILE => [PoP_UserLogin_Module_Processor_HTMLCodes::class, PoP_UserLogin_Module_Processor_HTMLCodes::MODULE_HTMLCODE_USERMUSTBELOGGEDIN],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;
