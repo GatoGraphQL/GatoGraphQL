@@ -11,7 +11,7 @@ use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Managers\AppStateManager;
 use PoP\Root\Managers\ComponentManager;
 use PoP\Root\Managers\HookManagerInterface;
-use PoP\Root\State\MutationResolutionStore;
+use PoP\Root\Stores\MutationResolutionStore;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
