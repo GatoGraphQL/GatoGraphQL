@@ -18,7 +18,7 @@ trait RoutingManagerTrait
         }
     }
 
-    private function isStandard(): bool
+    private function isGeneric(): bool
     {
         /** @var WP_Query */
         $query = $this->query;
