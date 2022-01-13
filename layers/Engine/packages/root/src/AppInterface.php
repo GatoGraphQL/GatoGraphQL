@@ -74,7 +74,7 @@ interface AppInterface
      * @throws LogicException
      */
     public static function getComponent(string $componentClass): ComponentInterface;
-    
+
     /**
      * Shortcut function.
      */
@@ -104,5 +104,4 @@ interface AppInterface
      * Shortcut function.
      */
     public static function doAction(string $tag, mixed ...$args): void;
-
 }
