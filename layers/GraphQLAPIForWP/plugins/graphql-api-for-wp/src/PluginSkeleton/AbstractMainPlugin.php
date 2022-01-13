@@ -10,6 +10,7 @@ use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use PoP\Engine\AppLoader;
+use PoP\EngineWP\StateManagers\HookManager;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
 use RuntimeException;
@@ -356,7 +357,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \add_action(
             'plugins_loaded',
             function (): void {
-                App::initialize(new AppLoader());
+                App::initialize(
+                    new AppLoader(),
+                    new HookManager(),
+                );
             },
             PluginLifecyclePriorities::INITIALIZE_APP
         );
