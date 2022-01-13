@@ -1,11 +1,10 @@
 <?php
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PoP_UserStanceWP_Installation
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('PoP:system-install', array($this, 'systemInstall'));
+        \PoP\Root\App::getHookManager()->addAction('PoP:system-install', array($this, 'systemInstall'));
     }
 
     public function systemInstall()

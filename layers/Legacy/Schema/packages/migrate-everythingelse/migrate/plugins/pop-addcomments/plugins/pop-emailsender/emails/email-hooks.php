@@ -1,7 +1,6 @@
 <?php
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
@@ -15,7 +14,7 @@ class PoP_AddComments_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Functional emails
         //----------------------------------------------------------------------
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:insertComment',
             array($this, 'sendemailToUsersFromComment'),
             10,

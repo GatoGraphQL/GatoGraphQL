@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
@@ -41,7 +40,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
                 }
 
                 // Allow URE to add the Organization/Individual sidebars below
-                $ret = HooksAPIFacade::getInstance()->applyFilters(
+                $ret = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_UserCommunities_Module_Processor_SidebarMultiples:sidebar-layouts',
                     $ret,
                     $author,

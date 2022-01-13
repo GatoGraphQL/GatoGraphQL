@@ -1,12 +1,11 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * Needed to add the "All" category to all events, to list them for the Latest Everything Block
  */
 
 // Do always add the 'All' Category when adding a new event
-HooksAPIFacade::getInstance()->addAction('em_event_save_pre', 'gdEmEventSavePreAddAllCategory', 10, 1);
+\PoP\Root\App::getHookManager()->addAction('em_event_save_pre', 'gdEmEventSavePreAddAllCategory', 10, 1);
 function gdEmEventSavePreAddAllCategory($EM_Event)
 {
 

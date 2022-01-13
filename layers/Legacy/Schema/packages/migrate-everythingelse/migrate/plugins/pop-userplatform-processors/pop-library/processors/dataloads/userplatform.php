@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\ChangeUserPasswordMutationResolverBridge;
@@ -146,7 +145,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
-                if ($extra_checkpoint_msgs = HooksAPIFacade::getInstance()->applyFilters(
+                if ($extra_checkpoint_msgs = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_UserLogin_Module_Processor_Blocks:extra-checkpoint-msgs:change-pwd',
                     array(),
                     $module

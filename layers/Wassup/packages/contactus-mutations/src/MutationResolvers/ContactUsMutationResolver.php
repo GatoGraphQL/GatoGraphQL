@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUsMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
@@ -31,7 +32,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data): void
     {
-        $this->getHooksAPI()->doAction('pop_contactus', $form_data);
+        App::getHookManager()->doAction('pop_contactus', $form_data);
     }
 
     protected function doExecute($form_data)

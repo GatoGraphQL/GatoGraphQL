@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Web Platform Engine Optimizations
 Description: Implementation of Web Platform Engine Optimizations for PoP
@@ -22,7 +21,7 @@ class PoP_WebPlatformEngineOptimizations
     {
 
         // Priority: after PoP Resource Loader, inner circle
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888406);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888406);
     }
     public function init()
     {

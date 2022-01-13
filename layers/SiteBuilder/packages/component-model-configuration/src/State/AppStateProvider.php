@@ -27,7 +27,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided
         // (ie initial load) and when target is provided (ie loading pageSection)
         $target = strtolower($_REQUEST[Params::TARGET] ?? '');
-        $targets = (array) $this->getHooksAPI()->applyFilters(
+        $targets = (array) App::getHookManager()->applyFilters(
             'ApplicationState:targets',
             [
                 Targets::MAIN,

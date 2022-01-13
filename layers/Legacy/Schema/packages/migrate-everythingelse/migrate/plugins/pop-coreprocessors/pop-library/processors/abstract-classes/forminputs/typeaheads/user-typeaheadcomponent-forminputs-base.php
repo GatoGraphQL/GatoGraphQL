@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -35,7 +34,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends
     {
 
         // Allow PoP User Platform to add the role "profile"
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_Module_Processor_UserTypeaheadComponentFormInputsBase:thumbprint-query',
             array(
                 // 'fields' => 'ID',

@@ -3,7 +3,6 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 
@@ -75,5 +74,5 @@ class PoP_EventsCreation_DataLoad_FunctionalObjectTypeFieldResolver extends Abst
 
 // Static Initialization: Attach
 $translationAPI = TranslationAPIFacade::getInstance();
-$hooksAPI = HooksAPIFacade::getInstance();
+$hooksAPI = \PoP\Root\App::getHookManager();
 (new PoP_EventsCreation_DataLoad_FunctionalObjectTypeFieldResolver($translationAPI, $hooksAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

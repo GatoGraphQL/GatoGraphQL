@@ -1,6 +1,5 @@
 <?php
 use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\DefinitionGroups;
 $definitionManager = DefinitionManagerFacade::getInstance();
 
@@ -19,7 +18,7 @@ if (!defined('POP_CLUSTERCOMMONPAGES_ROUTE_ABOUT_OURSPONSORS')) {
 //     define('POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS', $definitionManager->getUniqueDefinition('sponsor-us', DefinitionGroups::ROUTES));
 // }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

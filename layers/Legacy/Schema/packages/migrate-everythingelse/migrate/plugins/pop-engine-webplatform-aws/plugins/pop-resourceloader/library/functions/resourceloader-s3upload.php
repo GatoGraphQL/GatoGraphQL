@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_WebPlatformEngine_AWS_Resourceloader_S3Upload extends PoP_WebPlatformEngine_AWS_S3UploadBase
 {
@@ -11,20 +10,20 @@ class PoP_WebPlatformEngine_AWS_Resourceloader_S3Upload extends PoP_WebPlatformE
 
         $this->files_to_upload = array();
 
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'PoP_ResourceLoader_FileGenerator_BundleFilesBase:generate-item',
             array($this, 'enqueueForS3'),
             10,
             4
         );
 
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils:generated-bundlefiles',
             array($this, 'uploadFilesToS3')
         );
 
         // Priority 100: execute on the late side
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ResourceLoader_ResourcesFileBase:base-url',
             array($this, 'getResourcesBaseUrl'),
             100,
@@ -36,7 +35,7 @@ class PoP_WebPlatformEngine_AWS_Resourceloader_S3Upload extends PoP_WebPlatformE
     {
 
         // Allow PoP Cluster ResourceLoader AWS to take over file uploading
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_WebPlatformEngine_AWS_Resourceloader_S3Upload:handleBaseUrl',
             true,
             $acrossThememodes
@@ -58,7 +57,7 @@ class PoP_WebPlatformEngine_AWS_Resourceloader_S3Upload extends PoP_WebPlatformE
     {
 
         // Allow PoP Cluster ResourceLoader AWS to take over file uploading
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_WebPlatformEngine_AWS_Resourceloader_S3Upload:enqueueFiles',
             true,
             $type,

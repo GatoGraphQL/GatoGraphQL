@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class CommonPages_EM_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
@@ -19,7 +18,7 @@ class CommonPages_EM_Module_Processor_ControlButtonGroups extends PoP_Module_Pro
         switch ($module[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_ADDLOCATIONPOST:
                 $ret[] = [CommonPagesEM_Module_Processor_AnchorControls::class, CommonPagesEM_Module_Processor_AnchorControls::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST];
-                $ret = HooksAPIFacade::getInstance()->applyFilters(
+                $ret = \PoP\Root\App::getHookManager()->applyFilters(
                     'CommonPages_EM_Module_Processor_ControlButtonGroups:modules',
                     $ret,
                     $module,

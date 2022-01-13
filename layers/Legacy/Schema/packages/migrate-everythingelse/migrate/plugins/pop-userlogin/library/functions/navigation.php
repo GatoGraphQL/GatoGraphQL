@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
@@ -9,7 +8,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 /**
  * Implementation of the icons
  */
-HooksAPIFacade::getInstance()->addFilter('route:icon', 'popUserloginRouteIcon', 10, 3);
+\PoP\Root\App::getHookManager()->addFilter('route:icon', 'popUserloginRouteIcon', 10, 3);
 function popUserloginRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -30,7 +29,7 @@ function popUserloginRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-HooksAPIFacade::getInstance()->addFilter('route:title', 'popUserloginNavigationRouteTitle', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('route:title', 'popUserloginNavigationRouteTitle', 10, 2);
 function popUserloginNavigationRouteTitle($title, $route)
 {
     $titles = [

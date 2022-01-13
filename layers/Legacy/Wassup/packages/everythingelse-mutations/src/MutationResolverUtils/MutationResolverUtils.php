@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\MutationResolverUtils;
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
-
+use PoP\Root\App;
 class MutationResolverUtils
 {
     public static function getMyCommunityFormInputs()
     {
-        $inputs = HooksAPIFacade::getInstance()->applyFilters(
+        $inputs = App::getHookManager()->applyFilters(
             'GD_UserCommunities_MyCommunitiesUtils:form-inputs',
             array(
                 'communities' => null,

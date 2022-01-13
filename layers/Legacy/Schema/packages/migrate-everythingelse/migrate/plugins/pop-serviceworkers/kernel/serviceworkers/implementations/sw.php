@@ -4,7 +4,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 {
@@ -73,7 +72,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         $configuration['${contentCDNParams}'] = array();
 
         // Allow to hook the CDN configuration
-        $configuration = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkers_Job_SW:configuration', $configuration);
+        $configuration = \PoP\Root\App::getHookManager()->applyFilters('PoP_ServiceWorkers_Job_SW:configuration', $configuration);
 
         return $configuration;
     }
@@ -99,7 +98,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         }
 
         // Hook in the resources to pre-cache
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_CacheResources:precache',
             $precache,
             $resourceType
@@ -110,7 +109,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
     {
 
         // Hook in the resources to exclude
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:exclude:full',
             array(),
             $resourceType
@@ -121,7 +120,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
     {
 
         // Hook in the resources to exclude
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:exclude:partial',
             array(),
             $resourceType
@@ -130,7 +129,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 
     protected function getFontExtensions()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:font-extensions',
             array('woff', 'woff2', 'ttf', 'eof', 'eot')
         );
@@ -138,7 +137,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 
     protected function getStaticcacheExtensions()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:staticcache-extensions',
             array_merge(
                 array('js', 'css', 'jpg', 'jpeg', 'png', 'gif', 'svg'),
@@ -149,7 +148,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 
     protected function getStaticresourceExtensions()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:staticresource-extensions',
             array_merge(
                 array('txt', 'ico', 'xml', 'xsl', 'css', 'js', 'svg', 'jpg', 'jpeg', 'png', 'gif', 'pdf'),
@@ -170,7 +169,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         // Hook in the paths to include
         // All the layout loaders (eg: POP_POSTS_ROUTE_LOADERS_POSTS_LAYOUTS) belong here
         // It can be resolved to all silentDocument pages without a checkpoint
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:ignoredparams:'.$resourceType,
             $ignore
         );
@@ -187,16 +186,16 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
             // It can be resolved to all silentDocument pages without a checkpoint
             $strategies['networkFirst'] = array(
                 'startsWith' => array(
-                    'full' => HooksAPIFacade::getInstance()->applyFilters(
+                    'full' => \PoP\Root\App::getHookManager()->applyFilters(
                         'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:startsWith:full',
                         array()
                     ),
-                    'partial' => HooksAPIFacade::getInstance()->applyFilters(
+                    'partial' => \PoP\Root\App::getHookManager()->applyFilters(
                         'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:startsWith:partial',
                         array()
                     ),
                 ),
-                'hasParams' => HooksAPIFacade::getInstance()->applyFilters(
+                'hasParams' => \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:hasParams',
                     // $hasParams
                     array(
@@ -220,7 +219,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         }
 
         // Hook in the params to exclude
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:exclude-params:'.$resourceType,
             $excluded
         );
@@ -233,7 +232,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         $excluded = array();
 
         // Hook in the params to exclude
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:exclude-paramvalues:'.$resourceType,
             $excluded
         );
@@ -242,7 +241,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
     protected function getMultidomains()
     {
         $multidomains = array_unique(
-            HooksAPIFacade::getInstance()->applyFilters(
+            \PoP\Root\App::getHookManager()->applyFilters(
                 'PoP_ServiceWorkers_Job_Fetch:multidomains',
                 array()
             )
@@ -262,7 +261,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
     protected function getMultidomainLocales()
     {
         $multidomain_locales = array_unique(
-            HooksAPIFacade::getInstance()->applyFilters(
+            \PoP\Root\App::getHookManager()->applyFilters(
                 'PoP_ServiceWorkers_Job_Fetch:multidomain-locales',
                 array()
             )
@@ -283,7 +282,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
     {
 
         // Allow qTrans to modify this
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:locales',
             array(get_locale())
         );
@@ -303,7 +302,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         }
 
         // Allow qTrans to modify this
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:appshell_url',
             $url,
             $locale
@@ -339,7 +338,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
             }
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:appshell_pages',
             $pages,
             $locales
@@ -350,7 +349,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
     {
 
         // Allow qTrans to modify this
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:locales_byurl',
             array(
                 site_url() => get_locale(),
@@ -362,7 +361,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
     {
 
         // Allow qTrans to modify this
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:default_locale',
             get_locale()
         );

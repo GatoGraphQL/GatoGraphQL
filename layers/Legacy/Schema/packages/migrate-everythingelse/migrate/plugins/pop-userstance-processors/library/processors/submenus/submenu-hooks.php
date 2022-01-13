@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_UserStance_SubmenuHooks
 {
@@ -8,15 +7,15 @@ class PoPTheme_UserStance_SubmenuHooks
     {
 
         // Before Events Manager sets its own links
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_CustomSubMenus:author:routes',
             array($this, 'addRoutes')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_CustomSubMenus:tag:routes',
             array($this, 'addRoutes')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_CustomSubMenus:single:routes',
             array($this, 'addRoutes')
         );

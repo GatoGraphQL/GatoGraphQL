@@ -1,8 +1,7 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels', 'categorypostsMultilayoutLabels');
+\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:multilayout_labels', 'categorypostsMultilayoutLabels');
 function categorypostsMultilayoutLabels($labels)
 {
     $label = '<span class="label label-%s">%s</span>';

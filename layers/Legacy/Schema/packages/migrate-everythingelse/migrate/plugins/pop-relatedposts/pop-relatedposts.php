@@ -6,7 +6,6 @@ Description: The foundation for a PoP Related Posts
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_RelatedPosts
     {
 
         // Priority: after PoP Notifications, and before PoP Posts Creation and others
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888349);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888349);
     }
     public function init()
     {

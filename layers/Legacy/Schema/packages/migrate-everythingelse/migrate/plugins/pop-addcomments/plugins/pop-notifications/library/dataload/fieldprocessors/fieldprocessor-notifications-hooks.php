@@ -5,7 +5,6 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
@@ -179,7 +178,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                         }
 
                         // Allow PoP Social Network to make the message more precise
-                        $message = HooksAPIFacade::getInstance()->applyFilters(
+                        $message = \PoP\Root\App::getHookManager()->applyFilters(
                             'PoP_AddComments_DataLoad_TypeResolver_Notifications_Hook:comment-added:message',
                             $message,
                             $notification

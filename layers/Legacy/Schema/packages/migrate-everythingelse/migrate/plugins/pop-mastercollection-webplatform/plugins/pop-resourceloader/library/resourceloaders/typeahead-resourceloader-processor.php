@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CoreProcessors_TypeaheadResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
@@ -106,7 +105,7 @@ class PoP_CoreProcessors_TypeaheadResourceLoaderProcessor extends PoP_JSResource
 
                 // Also add the Handlebar templates needed to render the typeahead views on runtime
                 if ($typeahead_layouts = array_unique(
-                    HooksAPIFacade::getInstance()->applyFilters(
+                    \PoP\Root\App::getHookManager()->applyFilters(
                         'PoP_CoreProcessors_ResourceLoaderProcessor:typeahead:templates',
                         array()
                     )

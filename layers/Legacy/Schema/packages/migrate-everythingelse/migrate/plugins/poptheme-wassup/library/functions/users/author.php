@@ -1,15 +1,14 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * Change Author permalink from 'author' to 'u'
  */
 function getAuthorBase() {
-    return HooksAPIFacade::getInstance()->applyFilters('author-base', '');
+    return \PoP\Root\App::getHookManager()->applyFilters('author-base', '');
 }
 
 // change author/username base to users/userID
-HooksAPIFacade::getInstance()->addAction('init', 'changeAuthorPermalinks');
+\PoP\Root\App::getHookManager()->addAction('init', 'changeAuthorPermalinks');
 function changeAuthorPermalinks()
 {
 
@@ -23,7 +22,7 @@ function changeAuthorPermalinks()
     }
 }
 
-HooksAPIFacade::getInstance()->addFilter('query_vars', 'usersQueryVars');
+\PoP\Root\App::getHookManager()->addFilter('query_vars', 'usersQueryVars');
 function usersQueryVars($queryVars)
 {
 
@@ -34,7 +33,7 @@ function usersQueryVars($queryVars)
     }
     return $queryVars;
 }
-HooksAPIFacade::getInstance()->addFilter('generate_rewrite_rules', 'userRewriteRules');
+\PoP\Root\App::getHookManager()->addFilter('generate_rewrite_rules', 'userRewriteRules');
 function userRewriteRules($wp_rewrite)
 {
     if ($authorBase = getAuthorBase()) {

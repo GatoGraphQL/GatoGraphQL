@@ -1,12 +1,11 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\LooseContracts\Facades\LooseContractManagerFacade;
 
 class CAP_PoP_Coauthors_LooseContractImplementations
 {
 	public function __construct() {
 		
-		$hooksapi = HooksAPIFacade::getInstance();
+		$hooksapi = \PoP\Root\App::getHookManager();
 		$loosecontract_manager = LooseContractManagerFacade::getInstance();
 
 		// Filters

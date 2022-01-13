@@ -1,15 +1,14 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_Wassup_LocationPostLinksCreation_WebPlatform_PreloadHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'wassup:extra-routes:initialframes:'.\PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
             array($this, 'maybeGetRoutesForMain')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'wassup:extra-routes:initialframes:'.POP_TARGET_ADDONS,
             array($this, 'maybeGetRoutesForAddons')
         );

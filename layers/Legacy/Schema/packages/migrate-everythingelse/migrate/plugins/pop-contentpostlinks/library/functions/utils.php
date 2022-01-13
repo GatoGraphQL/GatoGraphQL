@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
@@ -91,7 +90,7 @@ class PoP_ContentPostLinks_Utils
 
     public static function getLinkCategories()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'gd_thumb_defaultlink:link_categories',
             array_filter(
                 array(

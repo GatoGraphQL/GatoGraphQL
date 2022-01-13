@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class DBEntriesHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::getHookManager()->addFilter(
             'PoP\API\DataloaderHooks:metaFields',
             array($this, 'moveEntriesUnderDBName')
         );

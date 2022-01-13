@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Domain_Utils
 {
     public static function init(): void
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Application_Utils:request-domain',
             array(self::class, 'maybeGetRequestDomain')
         );

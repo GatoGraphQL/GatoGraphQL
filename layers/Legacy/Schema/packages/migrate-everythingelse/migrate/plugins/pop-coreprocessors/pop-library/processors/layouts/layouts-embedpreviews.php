@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Module_Processor_EmbedPreviewLayouts extends PoP_Module_Processor_EmbedPreviewLayoutsBase
 {
@@ -17,7 +16,7 @@ class PoP_Module_Processor_EmbedPreviewLayouts extends PoP_Module_Processor_Embe
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_USERINPUTEMBEDPREVIEW:
-                return HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_EmbedPreviewLayouts:getFrameSrc', '');
+                return \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_EmbedPreviewLayouts:getFrameSrc', '');
         }
 
         return parent::getFrameSrc($module, $props);

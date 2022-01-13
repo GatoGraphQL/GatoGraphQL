@@ -1,8 +1,7 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('popcms:page:title', 'gdNavigationUpdateMenuItem', PHP_INT_MAX, 2);
+\PoP\Root\App::getHookManager()->addFilter('popcms:page:title', 'gdNavigationUpdateMenuItem', PHP_INT_MAX, 2);
 function gdNavigationUpdateMenuItem($title, $page_id)
 {
     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
@@ -19,10 +18,10 @@ function gdNavigationUpdateMenuItem($title, $page_id)
 }
 function getPageIcon($page_id, $html = true)
 {
-    return HooksAPIFacade::getInstance()->applyFilters('page:icon', '', $page_id, $html);
+    return \PoP\Root\App::getHookManager()->applyFilters('page:icon', '', $page_id, $html);
 }
 
-HooksAPIFacade::getInstance()->addFilter('route:title', 'getRouteTitleIcon', PHP_INT_MAX, 2);
+\PoP\Root\App::getHookManager()->addFilter('route:title', 'getRouteTitleIcon', PHP_INT_MAX, 2);
 function getRouteTitleIcon($title, $route)
 {
     if ($icon = getRouteIcon($route)) {
@@ -33,7 +32,7 @@ function getRouteTitleIcon($title, $route)
 }
 function getRouteIcon($route, $html = true)
 {
-    return HooksAPIFacade::getInstance()->applyFilters('route:icon', '', $route, $html);
+    return \PoP\Root\App::getHookManager()->applyFilters('route:icon', '', $route, $html);
 }
 
 function processIcon($icon, $fontawesome, $html)
@@ -55,7 +54,7 @@ function processIcon($icon, $fontawesome, $html)
 /**
  * navigation.php
  */
-HooksAPIFacade::getInstance()->addFilter('route:icon', 'popApplicationRouteIcon', 10, 3);
+\PoP\Root\App::getHookManager()->addFilter('route:icon', 'popApplicationRouteIcon', 10, 3);
 function popApplicationRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -68,7 +67,7 @@ function popApplicationRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-HooksAPIFacade::getInstance()->addFilter('route:title', 'popApplicationNavigationRouteTitle', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('route:title', 'popApplicationNavigationRouteTitle', 10, 2);
 function popApplicationNavigationRouteTitle($title, $route)
 {
     $titles = [

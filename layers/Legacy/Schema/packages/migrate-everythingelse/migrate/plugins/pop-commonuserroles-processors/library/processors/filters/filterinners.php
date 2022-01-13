@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CommonUserRoles_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
@@ -30,7 +29,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilterInners extends PoP_Module
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_ORDERUSER],
             ],
         ];
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+        if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
             'CommonUserRoles:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module

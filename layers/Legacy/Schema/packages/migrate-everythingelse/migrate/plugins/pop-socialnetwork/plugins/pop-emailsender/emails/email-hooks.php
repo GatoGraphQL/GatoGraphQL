@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
@@ -22,21 +21,21 @@ class PoP_SocialNetwork_EmailSender_Hooks
         // Functional emails
         //----------------------------------------------------------------------
         // User followed
-        HooksAPIFacade::getInstance()->addAction('gd_followuser', array($this, 'followuser'), 10, 1);
+        \PoP\Root\App::getHookManager()->addAction('gd_followuser', array($this, 'followuser'), 10, 1);
 
         // Post recommended
-        HooksAPIFacade::getInstance()->addAction('gd_recommendpost', array($this, 'recommendpost'), 10, 1);
+        \PoP\Root\App::getHookManager()->addAction('gd_recommendpost', array($this, 'recommendpost'), 10, 1);
 
         //----------------------------------------------------------------------
         // Email Notifications
         //----------------------------------------------------------------------
         // EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST:
-        HooksAPIFacade::getInstance()->addAction('gd_recommendpost', array($this, 'emailnotificationsNetworkRecommendedpost'), 10, 1);
+        \PoP\Root\App::getHookManager()->addAction('gd_recommendpost', array($this, 'emailnotificationsNetworkRecommendedpost'), 10, 1);
         // EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER:
-        HooksAPIFacade::getInstance()->addAction('gd_followuser', array($this, 'emailnotificationsNetworkFolloweduser'), 10, 1);
+        \PoP\Root\App::getHookManager()->addAction('gd_followuser', array($this, 'emailnotificationsNetworkFolloweduser'), 10, 1);
         // EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST:
-        HooksAPIFacade::getInstance()->addAction('gd_upvotepost', array($this, 'emailnotificationsNetworkUpvotedpost'), 10, 1);
-        HooksAPIFacade::getInstance()->addAction('gd_downvotepost', array($this, 'emailnotificationsNetworkDownvotedpost'), 10, 1);
+        \PoP\Root\App::getHookManager()->addAction('gd_upvotepost', array($this, 'emailnotificationsNetworkUpvotedpost'), 10, 1);
+        \PoP\Root\App::getHookManager()->addAction('gd_downvotepost', array($this, 'emailnotificationsNetworkDownvotedpost'), 10, 1);
     }
 
     /**

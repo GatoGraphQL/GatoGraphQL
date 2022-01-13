@@ -1,10 +1,9 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * Ignore files to cache: all the ones with checkpoint needed
  */
-HooksAPIFacade::getInstance()->addFilter('pop_wp_cache_set_rejected_uri', 'gdWpCacheSetRejectedUriCheckpoints');
+\PoP\Root\App::getHookManager()->addFilter('pop_wp_cache_set_rejected_uri', 'gdWpCacheSetRejectedUriCheckpoints');
 function gdWpCacheSetRejectedUriCheckpoints($rejected_uris)
 {
     $settingsmanager = \PoPSchema\UserState\Settings\SettingsManagerFactory::getInstance();

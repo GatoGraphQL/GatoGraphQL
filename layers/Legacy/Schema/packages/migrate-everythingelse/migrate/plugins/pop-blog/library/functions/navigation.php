@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
@@ -8,7 +7,7 @@ use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 /**
  * Implementation of the icons
  */
-HooksAPIFacade::getInstance()->addFilter('route:icon', 'popblogRouteIcon', 10, 3);
+\PoP\Root\App::getHookManager()->addFilter('route:icon', 'popblogRouteIcon', 10, 3);
 function popblogRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -50,7 +49,7 @@ function popblogRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-HooksAPIFacade::getInstance()->addFilter('route:title', 'popblogNavigationRouteTitle', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('route:title', 'popblogNavigationRouteTitle', 10, 2);
 function popblogNavigationRouteTitle($title, $route)
 {
     $titles = [

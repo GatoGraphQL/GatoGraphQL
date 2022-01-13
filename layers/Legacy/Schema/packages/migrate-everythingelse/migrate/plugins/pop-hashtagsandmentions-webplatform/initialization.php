@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PoP_HashtagsAndMentionsWebPlatform_Initialization
 {
     public function initialize()
@@ -8,8 +7,8 @@ class PoP_HashtagsAndMentionsWebPlatform_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
-            HooksAPIFacade::getInstance()->addAction('popcms:printStyles', array($this, 'registerStyles'));
+            \PoP\Root\App::getHookManager()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::getHookManager()->addAction('popcms:printStyles', array($this, 'registerStyles'));
         }
 
         /**

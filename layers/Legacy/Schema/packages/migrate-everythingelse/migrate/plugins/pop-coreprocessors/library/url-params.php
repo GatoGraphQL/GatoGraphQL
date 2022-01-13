@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\URLParams;
 
 const GD_URLPARAM_INTERCEPTURLS = 'intercept-urls';
@@ -12,7 +11,7 @@ define('GD_URLPARAM_ACTION_PRINT', 'print');
 define('GD_URLPARAM_TARGET_PRINT', 'print');
 define('GD_URLPARAM_TARGET_SOCIALMEDIA', 'socialmedia');
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsUrlparams');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdJqueryConstantsUrlparams');
 function gdJqueryConstantsUrlparams($jqueryConstants)
 {
     $jqueryConstants['UNIQUEID'] = \PoP\ComponentModel\Constants\Response::UNIQUE_ID;

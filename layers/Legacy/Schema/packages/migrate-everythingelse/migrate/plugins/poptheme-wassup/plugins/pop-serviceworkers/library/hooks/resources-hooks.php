@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_Wassup_ServiceWorkers_Hooks_Resources
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ServiceWorkers_Job_CacheResources:precache',
             array($this, 'getPrecacheList'),
             10,

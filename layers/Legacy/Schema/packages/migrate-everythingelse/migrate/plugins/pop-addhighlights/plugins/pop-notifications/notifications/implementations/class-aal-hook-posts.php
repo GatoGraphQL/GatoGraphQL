@@ -1,6 +1,5 @@
 <?php
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
@@ -15,11 +14,11 @@ class PoP_AddHighlights_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'GD_CreateUpdate_Highlight:createAdditionals',
             array($this, 'createdHighlight')
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'GD_CreateUpdate_Highlight:updateAdditionals',
             array($this, 'updatedHighlight'),
             10,

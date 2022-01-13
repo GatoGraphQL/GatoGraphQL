@@ -1,7 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CSSResourceLoaderProcessorManager {
 
@@ -11,7 +9,7 @@ class PoP_CSSResourceLoaderProcessorManager {
 
 		$this->inline_resources = array();
 
-		HooksAPIFacade::getInstance()->addAction('popcms:head', array($this, 'printStyles'));
+		\PoP\Root\App::getHookManager()->addAction('popcms:head', array($this, 'printStyles'));
 	}
 
 	function printStyle(array $resource) {

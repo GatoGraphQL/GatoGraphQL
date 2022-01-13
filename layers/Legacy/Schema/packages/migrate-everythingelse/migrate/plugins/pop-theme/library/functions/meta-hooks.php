@@ -4,13 +4,12 @@ namespace PoP\Theme;
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Theme_Meta_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             '\PoP\ComponentModel\Engine:site-meta',
             array($this, 'getSiteMeta')
         );

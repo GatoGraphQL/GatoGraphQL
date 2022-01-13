@@ -1,13 +1,12 @@
 <?php
 namespace PoP\EngineWebPlatform\WP;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\LooseContracts\Facades\LooseContractManagerFacade;
 
 class WebPlatformCMSLooseContractImplementations
 {
 	public function __construct() {
 		
-		$hooksapi = HooksAPIFacade::getInstance();
+		$hooksapi = \PoP\Root\App::getHookManager();
 
 		// Actions
 		$hooksapi->addAction('wp_enqueue_scripts', function() use($hooksapi) {

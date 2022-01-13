@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_Wassup_GenericForms_LayoutHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_CustomPostMultipleSidebarComponents:featuredimagevolunteer:modules',
             array($this, 'singleComponents')
         );

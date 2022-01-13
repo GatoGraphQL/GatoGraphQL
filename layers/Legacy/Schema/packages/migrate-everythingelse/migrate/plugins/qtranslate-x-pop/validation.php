@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('QTXPOP_QTX_MIN_VERSION', '3.4.6.8');
@@ -12,12 +11,12 @@ class QTX_PoP_Validation
 
         // Validate plug-in
         if (!class_exists('QTX_Translator')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'pluginWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'pluginWarning'));
             $success = false;
         } elseif (QTXPOP_QTX_MIN_VERSION > QTX_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'pluginversion_warning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'pluginversion_warning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'pluginversion_warning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'pluginversion_warning'));
         }
 
         return $success;

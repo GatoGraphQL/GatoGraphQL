@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_UserAvatarProcessors_UserPlatformProcessors_CreateUpdateUser_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'pop_module:createuser:components', 
             array($this, 'getComponentSubmodules'), 
             10, 

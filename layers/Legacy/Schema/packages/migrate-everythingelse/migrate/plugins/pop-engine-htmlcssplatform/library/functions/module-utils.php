@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_HTMLCSSPlatformEngine_Module_Utils
 {
@@ -7,7 +6,7 @@ class PoP_HTMLCSSPlatformEngine_Module_Utils
     {
 
         // Allow PoP SSR to inject the server-side rendered HTML
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'htmlcssplatform-engine:main_html',
             ''
         );

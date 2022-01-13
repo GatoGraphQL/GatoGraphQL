@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor_MultiplesBase
 {
@@ -20,7 +19,7 @@ class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor
             case self::MODULE_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM:
                 $ret = array_merge_recursive(
                     $ret,
-                    HooksAPIFacade::getInstance()->applyFilters(
+                    \PoP\Root\App::getHookManager()->applyFilters(
                         'PoP_Module_Processor_MultipleComponentLayouts:modules',
                         array(),
                         $module

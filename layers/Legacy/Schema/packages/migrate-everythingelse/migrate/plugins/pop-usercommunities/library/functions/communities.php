@@ -2,7 +2,6 @@
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
@@ -95,7 +94,7 @@ function gdUreUserAddnewcommunities($user_id, $communities)
     \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS, $tags);
 
     // Allow ACF to also save the value in the DB
-    HooksAPIFacade::getInstance()->doAction('ure:user:add_new_communities', $user_id, $communities);
+    \PoP\Root\App::getHookManager()->doAction('ure:user:add_new_communities', $user_id, $communities);
 }
 
 function gdUreFindCommunityMetavalues($community, $values, $extract_metavalue = true)

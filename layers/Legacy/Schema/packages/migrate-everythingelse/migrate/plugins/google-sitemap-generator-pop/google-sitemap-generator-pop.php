@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: Google XML Sitemaps for PoP
 Description: Integration of plugin Google XML Sitemaps with PoP
@@ -20,7 +19,7 @@ class PoP_GSG
     {
 
         // Priority: after PoP Application
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888310);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888310);
     }
     public function init()
     {

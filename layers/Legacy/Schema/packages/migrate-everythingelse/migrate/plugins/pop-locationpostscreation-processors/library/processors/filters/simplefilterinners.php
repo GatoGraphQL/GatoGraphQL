@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
@@ -27,7 +26,7 @@ class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proce
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_ORDERPOST],
             ],
         ];
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+        if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
             'Locations:SimpleFilterInners:inputmodules',
             $inputmodules[$module[1]],
             $module

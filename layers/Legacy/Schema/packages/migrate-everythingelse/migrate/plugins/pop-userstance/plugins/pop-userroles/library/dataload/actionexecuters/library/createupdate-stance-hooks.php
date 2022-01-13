@@ -1,12 +1,11 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class UserStance_DataLoad_CreateUpdateStanceHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'GD_CreateUpdate_Stance:createAdditionals',
             array($this, 'createAdditionals')
         );

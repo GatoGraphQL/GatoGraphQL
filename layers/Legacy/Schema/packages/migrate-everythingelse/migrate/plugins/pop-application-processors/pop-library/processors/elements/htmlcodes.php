@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
@@ -68,14 +67,14 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
                         $img
                     );
                 }
-                $code .= HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_Codes:description:welcomeImage', $imgcode);
+                $code .= \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_Codes:description:welcomeImage', $imgcode);
                 $code .= gdGetWebsiteDescription(false);
                 return $code;
 
             case self::MODULE_CODE_TRENDINGTAGSDESCRIPTION:
                 return sprintf(
                     '<div class="bg-warning text-warning">%s</div>',
-                    HooksAPIFacade::getInstance()->applyFilters(
+                    \PoP\Root\App::getHookManager()->applyFilters(
                         'PoP_Module_Processor_Codes:getCode:message',
                         sprintf(
                             TranslationAPIFacade::getInstance()->__('<strong>#Trending tags are:</strong><br/>Those tags which appear in the highest number of posts, during the last %s days.', 'poptheme-wassup'),

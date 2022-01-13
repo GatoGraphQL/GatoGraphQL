@@ -3,7 +3,6 @@ use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProcessor {
 
@@ -39,7 +38,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $resourceprocessor = $pop_resourceloaderprocessor_manager->getProcessor($templateResource);
         return array_values(
             array_unique(
-                HooksAPIFacade::getInstance()->applyFilters(
+                \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_WebPlatformQueryDataModuleProcessorBase:module-resources',
                     array(),
                     $module,

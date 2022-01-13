@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostsWP\LooseContracts;
 
+use PoP\Root\App;
 use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 
 class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
@@ -11,11 +12,11 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     protected function resolveContracts(): void
     {
         // Filters.
-        $this->getHooksAPI()->addFilter('the_title', function ($post_title, $post_id) {
-            return $this->getHooksAPI()->applyFilters('popcms:post:title', $post_title, $post_id);
+        App::getHookManager()->addFilter('the_title', function ($post_title, $post_id) {
+            return App::getHookManager()->applyFilters('popcms:post:title', $post_title, $post_id);
         }, 10, 2);
-        $this->getHooksAPI()->addFilter('excerpt_more', function ($text) {
-            return $this->getHooksAPI()->applyFilters('popcms:excerptMore', $text);
+        App::getHookManager()->addFilter('excerpt_more', function ($text) {
+            return App::getHookManager()->applyFilters('popcms:excerptMore', $text);
         }, 10, 1);
 
         $this->getLooseContractManager()->implementHooks([

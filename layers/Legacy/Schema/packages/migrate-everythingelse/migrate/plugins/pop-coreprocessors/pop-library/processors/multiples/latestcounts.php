@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
 {
@@ -36,7 +35,7 @@ class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
                 $this->addJsmethod($ret, 'timeoutLoadLatestBlock');
 
                 // Allow Service Workers to inject js function 'resetTimestamp'
-                if ($extra_jsmethods = HooksAPIFacade::getInstance()->applyFilters('GD_Core_Module_Processor_Blocks:jsmethod:latestcounts', array())) {
+                if ($extra_jsmethods = \PoP\Root\App::getHookManager()->applyFilters('GD_Core_Module_Processor_Blocks:jsmethod:latestcounts', array())) {
                     foreach ($extra_jsmethods as $extra_jsmethod) {
                         $this->addJsmethod($ret, $extra_jsmethod);
                     }

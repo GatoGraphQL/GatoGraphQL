@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
@@ -10,7 +9,7 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
  */
 
 // Send an email to the new Communities: when the user updated the communities
-HooksAPIFacade::getInstance()->addAction('gd_update_mycommunities:update', 'gdUreSendemailUpdatemycommunities', 100, 3);
+\PoP\Root\App::getHookManager()->addAction('gd_update_mycommunities:update', 'gdUreSendemailUpdatemycommunities', 100, 3);
 function gdUreSendemailUpdatemycommunities($user_id, $form_data, $operationlog)
 {
     gdUreSendemailCommunityNewmember($user_id, $operationlog['new-communities']);

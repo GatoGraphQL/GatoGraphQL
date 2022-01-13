@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Domain
 Description: Implementation of domain features for PoP
@@ -20,8 +19,8 @@ class PoP_Domain
     {
 
         // Priority: after PoP CDN
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888419);
-        // HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this,'systemGenerate'));
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888419);
+        // \PoP\Root\App::getHookManager()->addAction('PoP:system-generate', array($this,'systemGenerate'));
     }
     public function init()
     {

@@ -1,7 +1,6 @@
 <?php
 use Aws\Common\Aws;
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // use Aws\S3\Exception\S3Exception;
 
@@ -11,7 +10,7 @@ class PoP_WebPlatformEngine_AWS_CDNHooks
     {
 
         // Priority: after same function in PoP_WebPlatformEngine_AWS_InitializeData
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_AWS_S3UploadBase:domain',
             array($this, 'getDomain'),
             100,

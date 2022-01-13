@@ -6,7 +6,6 @@ Description: The foundation for a PoP Common User Roles
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_CommonUserRoles
     {
 
         // Priority: after PoP User Communities
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888380);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888380);
     }
     public function init()
     {

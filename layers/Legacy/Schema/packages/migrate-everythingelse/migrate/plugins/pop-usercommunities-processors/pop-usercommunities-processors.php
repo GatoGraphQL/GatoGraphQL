@@ -6,7 +6,6 @@ Description: The foundation for a PoP User Communities Processors
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_UserCommunitiesProcessors
     {
 
         // Priority: after PoP Social Network Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888870);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888870);
     }
     public function init()
     {

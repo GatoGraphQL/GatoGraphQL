@@ -1,10 +1,9 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 require_once 'routes.php';
 
 // High priority: allow the Theme and other plug-ins to set the values in advance.
-HooksAPIFacade::getInstance()->addAction(
+\PoP\Root\App::getHookManager()->addAction(
     'popcms:init', 
     'popNewsletterInitConstants', 
     10000

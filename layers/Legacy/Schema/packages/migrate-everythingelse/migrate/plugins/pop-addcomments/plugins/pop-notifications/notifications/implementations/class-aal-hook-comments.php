@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
@@ -15,7 +14,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
     {
 
         // Commented
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'gd_addcomment',
             array($this, 'commented'),
             10,
@@ -23,7 +22,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
         );
 
         // When a comment is marked as spam, tell the user about content guidelines
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:spamComment',
             array($this, 'spamComment'),
             10,
@@ -31,7 +30,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
         );
 
         // When a comment is deleted from the system, delete all notifications about that comment
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:deleteComment',
             array(PoP_AddComments_Notifications_API::class, 'clearComment'),
             10,

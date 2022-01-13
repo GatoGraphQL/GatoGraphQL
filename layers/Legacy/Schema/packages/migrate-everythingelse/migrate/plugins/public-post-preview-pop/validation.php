@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('PPPPOP_POP_APPLICATIONWP_MIN_VERSION', 0.1);
@@ -12,8 +11,8 @@ class PPP_PoP_Validation
 
         // Validate plug-in
         if (!class_exists('DS_Public_Post_Preview')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'pluginWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'pluginWarning'));
             $success = false;
         }
 

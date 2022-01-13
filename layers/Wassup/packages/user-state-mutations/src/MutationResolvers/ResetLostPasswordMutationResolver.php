@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -83,7 +84,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         $cmsuseraccountapi->resetPassword($user, $pwd);
 
         $userID = $this->getUserTypeAPI()->getUserId($user);
-        $this->getHooksAPI()->doAction('gd_lostpasswordreset', $userID);
+        App::getHookManager()->doAction('gd_lostpasswordreset', $userID);
         return $userID;
     }
 }

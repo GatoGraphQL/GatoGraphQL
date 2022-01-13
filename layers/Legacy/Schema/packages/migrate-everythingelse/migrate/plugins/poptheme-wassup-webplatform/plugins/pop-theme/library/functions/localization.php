@@ -1,8 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'popthemeWassupJqueryConstants');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'popthemeWassupJqueryConstants');
 function popthemeWassupJqueryConstants($jqueryConstants)
 {
     $jqueryConstants['URLPARAM_THEMEMODE'] = GD_URLPARAM_THEMEMODE;

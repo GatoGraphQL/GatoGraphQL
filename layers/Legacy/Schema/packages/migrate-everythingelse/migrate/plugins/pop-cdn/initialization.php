@@ -2,7 +2,6 @@
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\Facades\FileRendererFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CDN_Initialization
 {
@@ -12,10 +11,10 @@ class PoP_CDN_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::getHookManager()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
             
             // Inline scripts
-            HooksAPIFacade::getInstance()->addAction('popcms:head', array($this, 'printInlineScripts'));
+            \PoP\Root\App::getHookManager()->addAction('popcms:head', array($this, 'printInlineScripts'));
         }
 
         /**

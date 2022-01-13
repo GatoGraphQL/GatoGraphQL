@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\State;
+namespace PoP\Root\Stores;
 
 class MutationResolutionStore
 {

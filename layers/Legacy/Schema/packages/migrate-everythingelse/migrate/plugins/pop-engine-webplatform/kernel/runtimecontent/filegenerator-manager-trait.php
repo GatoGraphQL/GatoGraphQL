@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 trait FileGeneratorManagerTrait
 {
@@ -10,7 +9,7 @@ trait FileGeneratorManagerTrait
     {
         // When a plugin is activated/deactivated, ANY plugin, delete the corresponding cached files
         // This is particularly important for the MEMORY, since we can't set by constants to not use it
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:componentInstalledOrUninstalled',
             array($this, 'deleteFiles')
         );

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Forms Processors
 Description: Implementation of Forms Processors for PoP
@@ -21,7 +20,7 @@ class PoP_FormsProcessors
     {
 
         // Priority: before PoP Application Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888790);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888790);
     }
     public function init()
     {

@@ -6,7 +6,6 @@ Description: Integration of plugin WP Offload S3 Lite with PoP
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -21,7 +20,7 @@ class AWSS3CFPoPWebPlatform
     {
 
         // Priority: after PoP Application Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888510);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888510);
     }
 
     public function init()

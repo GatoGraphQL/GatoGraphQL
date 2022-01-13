@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
@@ -23,7 +22,7 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
     {
         $ret = parent::getInnerSubmodules($module);
 
-        $orientation = HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, 'vertical');
+        $orientation = \PoP\Root\App::getHookManager()->applyFilters(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, 'vertical');
         $vertical = ($orientation == 'vertical');
         $inners = array(
             self::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR => $vertical ?

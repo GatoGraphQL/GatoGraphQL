@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ContentCreation_Notifications_NotificationHooks
 {
@@ -7,7 +6,7 @@ class PoP_ContentCreation_Notifications_NotificationHooks
     {
 
         // Hook into the API: Where statements
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Notifications_API:sql:wheres',
             array($this, 'getWhereStatements'),
             10,
@@ -15,12 +14,12 @@ class PoP_ContentCreation_Notifications_NotificationHooks
         );
 
         // Hook into the API: Notification Actions
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:notifications:useractivityplusnetwork:actions',
             array($this, 'getUseractivityplusnetworkActions')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:additional_notifications:markasread:posts:actions',
             array($this, 'getMarkasreadPostActions')
         );
@@ -35,7 +34,7 @@ class PoP_ContentCreation_Notifications_NotificationHooks
         // - The admin approved the user's post
         // - The admin sent back to draft the user's post
         // - The admin trashed the user's post
-        $admin_notification_postactions = HooksAPIFacade::getInstance()->applyFilters(
+        $admin_notification_postactions = \PoP\Root\App::getHookManager()->applyFilters(
             'AAL_PoP_API:notifications:admin:post:actions',
             array(
                 AAL_POP_ACTION_POST_APPROVEDPOST,

@@ -7,7 +7,6 @@ Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
 namespace PoPSchema\CommentMeta\WP;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,13 +19,13 @@ class Plugin
     public function __construct()
     {
         include_once 'validation.php';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_CommentMeta_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
 
         // Priority: mid section, after PoP CMS Model WP
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888255);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888255);
     }
     public function getProviderValidationClass($class)
     {

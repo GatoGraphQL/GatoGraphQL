@@ -1,6 +1,5 @@
 <?php
 use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\DefinitionGroups;
 $definitionManager = DefinitionManagerFacade::getInstance();
 
@@ -28,7 +27,7 @@ if (!defined('POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE')) {
     define('POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE', $definitionManager->getUniqueDefinition('change-password', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

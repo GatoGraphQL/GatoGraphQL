@@ -1,18 +1,17 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor as PostFilterInners;
 
 class PoPThemeWassup_DataLoad_FilterHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'Blog:FilterInnerModuleProcessor:inputmodules',
             array($this, 'modifyPostFilterInputs'),
             10,
             2
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'Blog:SimpleFilterInners:inputmodules',
             array($this, 'modifyPostSimpleFilterInputs'),
             10,

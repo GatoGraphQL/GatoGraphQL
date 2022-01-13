@@ -1,12 +1,11 @@
 <?php
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * Litte bit of everything
  */
 // Change the position of where the path in a URL starts (accounting for "en/")
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:pathstartpos', 'gdQtransPathstartpos');
+\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:pathstartpos', 'gdQtransPathstartpos');
 function gdQtransPathstartpos($pos)
 {
     $pluginapi = PoP_Multilingual_FunctionsAPIFactory::getInstance();
@@ -21,7 +20,7 @@ function gdQtransPathstartpos($pos)
 /*
  * Add extra classes to the body: Locale
  */
-HooksAPIFacade::getInstance()->addFilter("gdClassesBody", "gdBodyClassLocale");
+\PoP\Root\App::getHookManager()->addFilter("gdClassesBody", "gdBodyClassLocale");
 function gdBodyClassLocale($body_classes)
 {
 
@@ -37,7 +36,7 @@ function gdBodyClassLocale($body_classes)
  */
 
 // Add the locale to the webplatform
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:locale', 'popQtransLocale');
+\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:locale', 'popQtransLocale');
 function popQtransLocale($locale)
 {
 
@@ -47,7 +46,7 @@ function popQtransLocale($locale)
 }
 
 // Add the locale to the home url
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:homelocale_url', 'popQtransHomelocaleUrl');
+\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:homelocale_url', 'popQtransHomelocaleUrl');
 function popQtransHomelocaleUrl($url)
 {
     $cmsService = CMSServiceFacade::getInstance();

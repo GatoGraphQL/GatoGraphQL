@@ -1,7 +1,6 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addAction('init', 'setAllcontentPostTypes', 100);
+\PoP\Root\App::getHookManager()->addAction('init', 'setAllcontentPostTypes', 100);
 function setAllcontentPostTypes()
 {
 

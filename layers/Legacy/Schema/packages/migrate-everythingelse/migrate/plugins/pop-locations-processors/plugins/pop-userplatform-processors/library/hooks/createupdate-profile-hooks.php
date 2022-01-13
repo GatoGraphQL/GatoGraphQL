@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_EM_CreateUpdate_Profile_Hooks
 {
@@ -8,11 +7,11 @@ class GD_EM_CreateUpdate_Profile_Hooks
 
         // Hooks for PoP Locations
         // Because it is placed under plugins/pop-userplatform-processors/, the dataload-saving logic only takes effect if the corresponding processors on which to add the Typeahead Map exist
-        HooksAPIFacade::getInstance()->addFilter('PoP_Location_UserPlatform_ProfileHooks:form-input', array($this, 'getLocationsForminputInput'));
+        \PoP\Root\App::getHookManager()->addFilter('PoP_Location_UserPlatform_ProfileHooks:form-input', array($this, 'getLocationsForminputInput'));
 
         // Processor Hooks
-        HooksAPIFacade::getInstance()->addFilter('pop_module:createprofile:components', array($this, 'getComponentSubmodules'), 10, 3);
-        HooksAPIFacade::getInstance()->addFilter('pop_module:updateprofile:components', array($this, 'getComponentSubmodules'), 10, 3);
+        \PoP\Root\App::getHookManager()->addFilter('pop_module:createprofile:components', array($this, 'getComponentSubmodules'), 10, 3);
+        \PoP\Root\App::getHookManager()->addFilter('pop_module:updateprofile:components', array($this, 'getComponentSubmodules'), 10, 3);
     }
 
     public function getLocationsForminputInput()

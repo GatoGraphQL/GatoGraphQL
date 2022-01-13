@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_Wassup_AddHighlights_WebPlatform_PreloadHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'wassup:extra-routes:initialframes:'.POP_TARGET_ADDONS,
             array($this, 'getRoutesForAddons')
         );

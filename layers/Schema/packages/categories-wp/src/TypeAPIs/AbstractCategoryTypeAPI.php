@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CategoriesWP\TypeAPIs;
 
+use PoP\Root\App;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
@@ -130,7 +131,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             unset($query['parent-id']);
         }
 
-        return $this->getHooksAPI()->applyFilters(
+        return App::getHookManager()->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options

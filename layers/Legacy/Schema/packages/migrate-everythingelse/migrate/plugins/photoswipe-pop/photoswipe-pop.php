@@ -6,7 +6,6 @@ Description: PhotoSwipe for the Platform of Platforms (PoP)
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('PHOTOSWIPEPOP_VERSION', 0.109);
 define('PHOTOSWIPEPOP_VENDORRESOURCESVERSION', 0.100);
@@ -19,7 +18,7 @@ class PhotoSwipe_PoP
     {
 
         // Priority: after PoP Application Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888510);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888510);
     }
 
     public function init()

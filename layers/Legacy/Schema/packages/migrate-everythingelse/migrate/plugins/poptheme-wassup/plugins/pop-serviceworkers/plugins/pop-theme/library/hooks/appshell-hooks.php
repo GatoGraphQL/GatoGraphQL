@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_Wassup_ServiceWorkers_Theme_Hooks_AppShell
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ServiceWorkers_Job_Fetch:appshell_pages',
             array($this, 'getAppshellPages'),
             10,

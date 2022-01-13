@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Related Posts Web Platform
 Description: Implementation of Related Posts Web Platform for PoP
@@ -20,7 +19,7 @@ class PoP_RelatedPostsWebPlatform
     {
 
         // Priority: after PoP Add Comments TinyMCE Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888560);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888560);
     }
     public function init()
     {

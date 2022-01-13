@@ -1,13 +1,12 @@
 <?php
 
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('popcms:post:title', 'maybeGetTitleAsBasicContent', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('popcms:post:title', 'maybeGetTitleAsBasicContent', 10, 2);
 function maybeGetTitleAsBasicContent($title, $post_id = null)
 {
-    $post_types = HooksAPIFacade::getInstance()->applyFilters(
+    $post_types = \PoP\Root\App::getHookManager()->applyFilters(
         'get_title_as_basic_content:post_types',
         array()
     );

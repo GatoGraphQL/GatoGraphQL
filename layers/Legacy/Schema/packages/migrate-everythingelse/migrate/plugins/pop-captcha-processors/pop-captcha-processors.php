@@ -6,7 +6,6 @@ Description: Implementation of processors for the Captcha for the Platform of Pl
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_CaptchaProcessors
     {
 
         // Priority: after PoP Application Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888810);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888810);
     }
     public function init()
     {

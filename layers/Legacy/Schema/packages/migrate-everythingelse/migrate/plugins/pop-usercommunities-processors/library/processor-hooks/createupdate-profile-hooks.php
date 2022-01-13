@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_UserCommunitiesProcessors_CreateUpdate_ProfileHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'GD_UserCommunities_MyCommunitiesUtils:form-inputs',
             array($this, 'getFormInputs')
         );

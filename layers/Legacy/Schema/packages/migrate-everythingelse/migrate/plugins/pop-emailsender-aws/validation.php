@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POPMAILERAWS_POP_MAILER_AWS_MIN_VERSION', 0.1);
@@ -11,29 +10,29 @@ class PoP_EmailSender_AWS_Validation
     {
         $success = true;
         if (!defined('POP_MAILER_AWS_VERSION')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'installWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'installWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'installWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'installWarning'));
             $success = false;
         } elseif (!defined('POP_MAILER_AWS_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initializeWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (POPMAILERAWS_POP_MAILER_AWS_MIN_VERSION > POP_MAILER_AWS_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'versionWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'versionWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'versionWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'versionWarning'));
         }
 
         if (!defined('POP_EMAILSENDER_VERSION')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'install_warning_2'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'install_warning_2'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'install_warning_2'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'install_warning_2'));
             $success = false;
         } elseif (!defined('POP_EMAILSENDER_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initialize_warning_2'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initialize_warning_2'));
             $success = false;
         } elseif (POPMAILERAWS_POP_EMAILSENDER_MIN_VERSION > POP_EMAILSENDER_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'version_warning_2'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'version_warning_2'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'version_warning_2'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'version_warning_2'));
         }
 
         return $success;

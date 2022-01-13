@@ -1,14 +1,13 @@
 <?php
 namespace PoPSchema\EverythingElse;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class Plugins
 {
     public function __construct()
     {
         // Priority: new section, after PoP CMS Model and PoP Meta
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888100);
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'initMigratePackages'), 88820);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888100);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'initMigratePackages'), 88820);
     }
     public function init()
     {

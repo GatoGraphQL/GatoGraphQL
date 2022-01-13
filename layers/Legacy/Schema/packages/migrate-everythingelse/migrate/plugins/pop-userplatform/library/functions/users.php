@@ -1,17 +1,16 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 function gdUserAttributes()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdUserAttributes', array());
+    return \PoP\Root\App::getHookManager()->applyFilters('gdUserAttributes', array());
 }
 
 function gdGetUserattributes($user_id)
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdGetUserattributes', array(), $user_id);
+    return \PoP\Root\App::getHookManager()->applyFilters('gdGetUserattributes', array(), $user_id);
 }
 
 /**

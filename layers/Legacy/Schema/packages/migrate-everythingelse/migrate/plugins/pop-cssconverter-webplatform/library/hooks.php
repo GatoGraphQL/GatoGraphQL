@@ -1,17 +1,16 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PoP_WebPlatform_CSSConverter_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-configuration',
             array($this, 'getImmutableConfiguration'),
             10,
             4
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-mutableonrequest-configuration',
             array($this, 'getMutableonrequestConfiguration'),
             10,

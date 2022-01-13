@@ -1,6 +1,5 @@
 <?php
 use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\DefinitionGroups;
 $definitionManager = DefinitionManagerFacade::getInstance();
 
@@ -28,7 +27,7 @@ if (!defined('POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS')) {
     define('POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS', $definitionManager->getUniqueDefinition('invite-new-members', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

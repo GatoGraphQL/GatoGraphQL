@@ -1,12 +1,11 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * Follow users / recommend posts: the information is redundant, saving each entry on both entities (user/user and user/post)
  * So that both (eg: "Who I am following" and "Who are my followers") can be queried and with pagination
  * Priority 0: it executes before saving the value on the db, so we can first get the previous value and compare to get a delta of additions/deletions
  */
-HooksAPIFacade::getInstance()->addFilter('acf/update_value', 'gd_acf_userfunctionalities_duplicatedata', 0, 3);
+\PoP\Root\App::getHookManager()->addFilter('acf/update_value', 'gd_acf_userfunctionalities_duplicatedata', 0, 3);
 function gd_acf_userfunctionalities_duplicatedata($value, $post_id, $field)
 {
     $key = $field['name'];

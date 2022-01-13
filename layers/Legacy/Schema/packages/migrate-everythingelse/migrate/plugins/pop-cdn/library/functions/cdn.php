@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * CDN URLs
  */
 
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:allowed_domains', 'popCdnAllowedurls');
+\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:allowed_domains', 'popCdnAllowedurls');
 function popCdnAllowedurls($allowed_domains)
 {
 

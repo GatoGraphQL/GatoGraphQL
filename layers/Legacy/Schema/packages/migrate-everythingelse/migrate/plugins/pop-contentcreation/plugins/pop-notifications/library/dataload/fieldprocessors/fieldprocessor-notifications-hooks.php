@@ -2,7 +2,6 @@
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
@@ -160,7 +159,7 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
                         }
 
                         // Allow PoP Social Network to make the message more precise
-                        $message = HooksAPIFacade::getInstance()->applyFilters(
+                        $message = \PoP\Root\App::getHookManager()->applyFilters(
                             'PoP_ContentCreation_DataLoad_TypeResolver_Notifications_Hook:post-created:message',
                             $message,
                             $notification

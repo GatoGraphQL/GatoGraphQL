@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentsWP\TypeAPIs;
 
+use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPSchema\Comments\Constants\CommentOrderBy;
 use PoPSchema\Comments\Constants\CommentStatus;
@@ -128,7 +129,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             unset($query['date-to']);
         }
 
-        $query = $this->getHooksAPI()->applyFilters(
+        $query = App::getHookManager()->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
@@ -170,7 +171,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             CommentOrderBy::STATUS => 'comment_approved',
             default => $orderBy,
         };
-        return $this->getHooksAPI()->applyFilters(
+        return App::getHookManager()->applyFilters(
             self::HOOK_ORDERBY_QUERY_ARG_VALUE,
             $orderBy
         );
@@ -179,7 +180,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     public function getCommentContent(object $comment): string
     {
         /** @var WP_Comment $comment */
-        return $this->getHooksAPI()->applyFilters(
+        return App::getHookManager()->applyFilters(
             'comment_text',
             $comment->comment_content
         );

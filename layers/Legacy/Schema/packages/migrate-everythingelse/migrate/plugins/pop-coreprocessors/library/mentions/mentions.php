@@ -3,7 +3,6 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
@@ -56,12 +55,12 @@ class PoP_Mentions
         $this->regex_users =    '/(?<!\w)@([a-z0-9-._]+[a-z0-9])/iu';
 
         // Save the tags immediately
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:savePost',
             array($this, 'generatePostTags'),
             0
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:insertComment',
             array($this, 'generateCommentTags'),
             0,
@@ -73,12 +72,12 @@ class PoP_Mentions
             // Can't use filter "the_content" because it doesn't work with page How to use website on MESYM
             // So quick fix: ignore for pages. Since the_content does not pass the post_id, we use another hook
             // Execute before wpautop, or otherwise the hashtags after <p> don't work
-            HooksAPIFacade::getInstance()->addFilter('pop_content', array($this, 'processContentPost'), 5, 2);
+            \PoP\Root\App::getHookManager()->addFilter('pop_content', array($this, 'processContentPost'), 5, 2);
 
             // Comment Leo 08/05/2016: Do not enable for excerpts, because somehow sometimes it fails (eg: with MESYM Documentary Night event) deleting everything
-            // HooksAPIFacade::getInstance()->addFilter('pop_excerpt', array($this, 'processContentPost'), 9999, 2);
+            // \PoP\Root\App::getHookManager()->addFilter('pop_excerpt', array($this, 'processContentPost'), 9999, 2);
             // Execute before wpautop
-            HooksAPIFacade::getInstance()->addFilter('gd_comments_content', array($this, 'processContent'), 5);
+            \PoP\Root\App::getHookManager()->addFilter('gd_comments_content', array($this, 'processContent'), 5);
         }
     }
 
@@ -99,7 +98,7 @@ class PoP_Mentions
 
             // Allow Events Manager to also add its own tags with its own taxonomy
             // This is needed so we can search using parameter 'tag' with events, using the common slug
-            HooksAPIFacade::getInstance()->doAction('PoP_Mentions:post_tags:add', $post_id, $tags);
+            \PoP\Root\App::getHookManager()->doAction('PoP_Mentions:post_tags:add', $post_id, $tags);
 
             // Extract all user_nicenames and notify them they were tagged
             // Get the previous ones, as to send an email only to the new ones
@@ -120,7 +119,7 @@ class PoP_Mentions
 
                     // Send an email to all newly tagged users
                     if ($newly_taggedusers_ids = array_diff($taggedusers_ids, $previous_taggedusers_ids)) {
-                        HooksAPIFacade::getInstance()->doAction('PoP_Mentions:post_tags:tagged_users', $post_id, $taggedusers_ids, $newly_taggedusers_ids);
+                        \PoP\Root\App::getHookManager()->doAction('PoP_Mentions:post_tags:tagged_users', $post_id, $taggedusers_ids, $newly_taggedusers_ids);
                     }
                 }
             }
@@ -150,7 +149,7 @@ class PoP_Mentions
 
         // Allow Events Manager to also add its own tags with its own taxonomy
         // This is needed so we can search using parameter 'tag' with events, using the common slug
-        HooksAPIFacade::getInstance()->doAction('PoP_Mentions:post_tags:add', $commentTypeAPI->getCommentPostId($comment), $tags);
+        \PoP\Root\App::getHookManager()->doAction('PoP_Mentions:post_tags:add', $commentTypeAPI->getCommentPostId($comment), $tags);
 
         if ($user_nicenames = $this->getUserNicenamesFromContent($commentTypeAPI->getCommentContent($comment))) {
             $taggedusers_ids = array();
@@ -164,7 +163,7 @@ class PoP_Mentions
                 \PoPSchema\CommentMeta\Utils::updateCommentMeta($comment_id, GD_METAKEY_COMMENT_TAGGEDUSERS, $taggedusers_ids);
 
                 // Send an email to all newly tagged users
-                HooksAPIFacade::getInstance()->doAction('PoP_Mentions:comment_tags:tagged_users', $comment_id, $taggedusers_ids);
+                \PoP\Root\App::getHookManager()->doAction('PoP_Mentions:comment_tags:tagged_users', $comment_id, $taggedusers_ids);
             }
         }
     }

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Master Collection Web Platform
 Description: Implementation of Master Collection Web Platform for PoP
@@ -22,7 +21,7 @@ class PoP_MasterCollectionWebPlatform
     {
 
         // Priority: after PoP Server-Side Rendering
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888420);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888420);
     }
     public function init()
     {

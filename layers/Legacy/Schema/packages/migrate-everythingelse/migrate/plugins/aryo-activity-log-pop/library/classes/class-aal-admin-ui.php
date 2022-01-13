@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -45,7 +44,7 @@ class AAL_PoP_Admin_Ui
     
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('admin_menu', array( &$this, 'createAdminMenu' ), 20);
+        \PoP\Root\App::getHookManager()->addAction('admin_menu', array( &$this, 'createAdminMenu' ), 20);
     }
     
     private function _is_elementor_installed()

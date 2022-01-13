@@ -1,6 +1,5 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBlocksBase
 {
@@ -62,7 +61,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
     public function initModelProps(array $module, array &$props): void
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $newsletter_description = HooksAPIFacade::getInstance()->applyFilters(
+        $newsletter_description = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_Module_Processor_GFBlocks:newsletter:description',
             ''
         );
@@ -70,7 +69,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
             case self::MODULE_BLOCK_NEWSLETTER:
                 $this->appendProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'class', 'form-inline');
                 if ($newsletter_description) {
-                    $title_tag = HooksAPIFacade::getInstance()->applyFilters(
+                    $title_tag = \PoP\Root\App::getHookManager()->applyFilters(
                         'PoP_Module_Processor_GFBlocks:newsletter:titletag',
                         'h3'
                     );
@@ -82,7 +81,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
                     $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'description', $description);
                 }
 
-                if ($description_bottom = HooksAPIFacade::getInstance()->applyFilters(
+                if ($description_bottom = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_GFBlocks:newsletter:descriptionbottom',
                     ''
                 )

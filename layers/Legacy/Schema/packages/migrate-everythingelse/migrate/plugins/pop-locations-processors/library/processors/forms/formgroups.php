@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_FormComponentGroupsBase
@@ -49,7 +48,7 @@ class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Fo
             case self::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
             case self::MODULE_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
                 // Make it mandatory?
-                if (HooksAPIFacade::getInstance()->applyFilters(
+                if (\PoP\Root\App::getHookManager()->applyFilters(
                     'GD_EM_Module_Processor_FormGroups:locations:mandatory',
                     false,
                     $module,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Cache\TransientCacheInterface;
 use PoP\Root\Hooks\AbstractHookSet;
@@ -34,13 +35,13 @@ class CacheHookSet extends AbstractHookSet
     {
         // When a plugin is activated/deactivated, ANY plugin, delete the corresponding cached files
         // This is particularly important for the MEMORY, since we can't set by constants to not use it
-        $this->getHooksAPI()->addAction(
+        App::getHookManager()->addAction(
             'popcms:componentInstalledOrUninstalled',
             [$this, 'clear']
         );
 
         // Save all deferred cacheItems
-        $this->getHooksAPI()->addAction(
+        App::getHookManager()->addAction(
             'popcms:shutdown',
             [$this, 'commit']
         );

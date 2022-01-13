@@ -1,7 +1,6 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gdAcfGetKeysStoreAsArray', 'wassupAcfGetKeysStoreAsArrayCustom');
+\PoP\Root\App::getHookManager()->addFilter('gdAcfGetKeysStoreAsArray', 'wassupAcfGetKeysStoreAsArrayCustom');
 function wassupAcfGetKeysStoreAsArrayCustom($keys)
 {
     $keys[] = GD_METAKEY_POST_LINKCATEGORIES;
@@ -10,7 +9,7 @@ function wassupAcfGetKeysStoreAsArrayCustom($keys)
     return $keys;
 }
 
-HooksAPIFacade::getInstance()->addFilter('gdAcfGetKeysStoreAsSingle', 'wassupAcfGetKeysStoreAsSingleCustom');
+\PoP\Root\App::getHookManager()->addFilter('gdAcfGetKeysStoreAsSingle', 'wassupAcfGetKeysStoreAsSingleCustom');
 function wassupAcfGetKeysStoreAsSingleCustom($keys)
 {
     $keys[] = GD_METAKEY_POST_LINKACCESS;

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 //-------------------------------------------------------------------------------------
@@ -7,7 +6,7 @@ use PoPSchema\Events\Facades\EventTypeAPIFacade;
 //-------------------------------------------------------------------------------------
 
 // Add the Events and Locations for the resourceLoader single path configuration
-HooksAPIFacade::getInstance()->addFilter('PoP_ResourceLoader_FileReproduction_Config:configuration:category-paths', 'emPopResourceloaderSinglePaths');
+\PoP\Root\App::getHookManager()->addFilter('PoP_ResourceLoader_FileReproduction_Config:configuration:category-paths', 'emPopResourceloaderSinglePaths');
 function emPopResourceloaderSinglePaths($paths)
 {
     $eventTypeAPI = EventTypeAPIFacade::getInstance();

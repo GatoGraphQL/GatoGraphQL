@@ -6,7 +6,6 @@ Description: Integration with plug-in Advanced Custom Fields for the Platform of
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('ACF_POP_VERSION', 0.110);
 define('ACF_POP_DIR', dirname(__FILE__));
@@ -17,7 +16,7 @@ class ACF_PoP
     {
 
         // Priority: after PoP Application
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888310);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888310);
     }
 
     public function init()

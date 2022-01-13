@@ -1,9 +1,8 @@
 <?php
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsQueryhandler');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdJqueryConstantsQueryhandler');
 function gdJqueryConstantsQueryhandler($jqueryConstants)
 {
     $jqueryConstants['DATALOAD_PARAMS'] = ParamConstants::PARAMS;

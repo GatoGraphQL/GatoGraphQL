@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_Wassup_PageSectionHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:sideinfo',
             array($this, 'initModelPropsSideinfo'),
             10,

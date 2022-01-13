@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_SocialNetwork_Notifications_NotificationHooks
 {
@@ -7,42 +6,42 @@ class PoP_SocialNetwork_Notifications_NotificationHooks
     {
 
         // Hook into the API: Notification Actions
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:notifications:useractivityplusnetwork:actions',
             array($this, 'getUseractivityplusnetworkActions')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:additional_notifications:markasread:posts:actions',
             array($this, 'getMarkasreadPostActions')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:notifications:userplusnetwork-user:actions',
             array($this, 'getUserplusnetworkUserActions')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:additional_notifications:markasread:users:actions',
             array($this, 'getMarkasreadUserActions')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:notifications:userplusnetwork-tag:actions',
             array($this, 'getUserplusnetworkTagActions')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:additional_notifications:markasread:tags:actions',
             array($this, 'getMarkasreadTagActions')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:notifications:usernetwork:metakeys',
             array($this, 'getUsernetworkMetakeys')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:notifications:useractivityposts:post_id_unions',
             array($this, 'getUseractivitypostsPostIdUnions'),
             10,

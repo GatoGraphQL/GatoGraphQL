@@ -2,13 +2,12 @@
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_SPA_RequestMeta_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             '\PoP\ComponentModel\Engine:site-meta',
             array($this, 'getSiteMeta')
         );

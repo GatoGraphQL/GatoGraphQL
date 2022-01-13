@@ -1,6 +1,5 @@
 <?php
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\RouteNatures;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
@@ -65,7 +64,7 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
 
         // Default for Home
         // Allow GetPoP website to change the sidebar, since it is changing the homeroute
-        $home_module = HooksAPIFacade::getInstance()->applyFilters(
+        $home_module = \PoP\Root\App::getHookManager()->applyFilters(
             'PoPTheme_Wassup_PageSectionSettingsProcessor:sideinfo_home:blockgroup',
             [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR]
         );

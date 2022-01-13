@@ -1,11 +1,10 @@
 <?php
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PoPTheme_Wassup_GADWP_Installation
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('PoP:system-install', array($this,'updateSettings'));
+        \PoP\Root\App::getHookManager()->addAction('PoP:system-install', array($this,'updateSettings'));
     }
 
     public function updateSettings()

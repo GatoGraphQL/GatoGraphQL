@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 function removeScheme($domain)
 {
@@ -37,7 +36,7 @@ function doingPost()
 function doingAjax()
 {
     $doingAjax = defined('DOING_AJAX') && DOING_AJAX;
-    return HooksAPIFacade::getInstance()->applyFilters('gd_doing_ajax', $doingAjax);
+    return \PoP\Root\App::getHookManager()->applyFilters('gd_doing_ajax', $doingAjax);
 }
 
 function multiexplode($delimiters, $string)

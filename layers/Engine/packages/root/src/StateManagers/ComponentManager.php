@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\Managers;
+namespace PoP\Root\StateManagers;
 
 use LogicException;
 use PoP\Root\Component\ComponentInterface;
@@ -10,7 +10,7 @@ use PoP\Root\Component\ComponentInterface;
 /**
  * Keep a reference to all Components
  */
-class ComponentManager
+class ComponentManager implements ComponentManagerInterface
 {
     /**
      * The initialized components, stored under their class

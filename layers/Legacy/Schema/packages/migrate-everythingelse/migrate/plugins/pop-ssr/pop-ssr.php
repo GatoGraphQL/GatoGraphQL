@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Server-Side Rendering
 Description: Implementation of SSR capabilities for PoP
@@ -22,7 +21,7 @@ class PoP_SSR
     {
 
         // Priority: after PoP Engine Web Platform, inner circle
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888402);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888402);
     }
     public function init()
     {

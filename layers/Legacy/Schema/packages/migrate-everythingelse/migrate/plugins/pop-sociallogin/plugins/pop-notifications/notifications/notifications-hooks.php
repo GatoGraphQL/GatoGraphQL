@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_SocialLogin_Notifications_NotificationHooks
 {
@@ -7,7 +6,7 @@ class PoP_SocialLogin_Notifications_NotificationHooks
     {
 
         // Hook into the API: Notification Actions
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:notifications:userspecific:actions',
             array($this, 'getUserspecificActions')
         );

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Meta\SchemaHooks;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
@@ -15,19 +16,19 @@ abstract class AbstractAddMetaQueryInputFieldsInputObjectTypeHookSet extends Abs
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::getHookManager()->addFilter(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
             [$this, 'getInputFieldNameTypeResolvers'],
             10,
             2
         );
-        $this->getHooksAPI()->addFilter(
+        App::getHookManager()->addFilter(
             HookNames::INPUT_FIELD_DESCRIPTION,
             [$this, 'getInputFieldDescription'],
             10,
             3
         );
-        $this->getHooksAPI()->addFilter(
+        App::getHookManager()->addFilter(
             HookNames::INPUT_FIELD_TYPE_MODIFIERS,
             [$this, 'getInputFieldTypeModifiers'],
             10,

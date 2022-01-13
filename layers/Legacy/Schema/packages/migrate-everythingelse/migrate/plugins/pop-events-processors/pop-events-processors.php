@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Events Processors
 Description: Implementation of Events Processors for PoP
@@ -21,7 +20,7 @@ class PoP_EventsProcessors
     {
 
         // Priority: after PoP Locations Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888880);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888880);
     }
     public function init()
     {

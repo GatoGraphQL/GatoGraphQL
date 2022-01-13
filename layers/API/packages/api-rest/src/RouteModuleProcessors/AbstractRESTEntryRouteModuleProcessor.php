@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\RESTAPI\RouteModuleProcessors;
 
+use PoP\Root\App;
 use PoP\API\Schema\FieldQueryConvertorInterface;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
@@ -47,7 +48,7 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
     public function getRESTFieldsQuery(): string
     {
         if (is_null($this->restFieldsQuery)) {
-            $this->restFieldsQuery = (string) $this->getHooksAPI()->applyFilters(
+            $this->restFieldsQuery = (string) App::getHookManager()->applyFilters(
                 HookHelpers::getHookName(get_called_class()),
                 $this->getInitialRESTFields()
             );

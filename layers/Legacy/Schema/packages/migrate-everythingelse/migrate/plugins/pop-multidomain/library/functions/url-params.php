@@ -1,8 +1,7 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsMultidomain');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdJqueryConstantsMultidomain');
 function gdJqueryConstantsMultidomain($jqueryConstants)
 {
     // Properties for all the domains

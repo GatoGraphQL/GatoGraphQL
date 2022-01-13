@@ -5,7 +5,6 @@ use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\Routing\RouteNatures;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -322,7 +321,7 @@ class PoP_ResourceLoaderProcessorUtils {
         if ($components['target'] ?? null) {
             $target = $components['target'];
         } else {
-            $format_targets = HooksAPIFacade::getInstance()->applyFilters(
+            $format_targets = \PoP\Root\App::getHookManager()->applyFilters(
                 'PoP_ResourceLoaderProcessorUtils:resources-from-current-vars:format-targets',
                 array()
             );

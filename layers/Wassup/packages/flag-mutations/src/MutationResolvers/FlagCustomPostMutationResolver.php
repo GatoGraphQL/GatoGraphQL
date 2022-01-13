@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\FlagMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
@@ -55,7 +56,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data): void
     {
-        $this->getHooksAPI()->doAction('pop_flag', $form_data);
+        App::getHookManager()->doAction('pop_flag', $form_data);
     }
 
     protected function doExecute($form_data)

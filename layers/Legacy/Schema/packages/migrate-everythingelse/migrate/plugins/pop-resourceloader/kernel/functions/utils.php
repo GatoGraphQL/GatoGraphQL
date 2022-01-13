@@ -1,13 +1,12 @@
 <?php
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ResourceLoader_Utils {
 
 	public static function registerHandlebarshelperScript() {
 
 		// Loading this script can be disabled by SPAResourceLoader
-		return HooksAPIFacade::getInstance()->applyFilters(
+		return \PoP\Root\App::getHookManager()->applyFilters(
 			'PoP_ResourceLoader_Utils:registerHandlebarshelperScript', 
 			true
 		);

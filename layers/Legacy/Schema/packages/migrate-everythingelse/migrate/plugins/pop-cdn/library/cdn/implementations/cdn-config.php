@@ -1,6 +1,5 @@
 <?php
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CDN_FileReproduction_ThumbprintsConfig extends PoP_CDN_FileReproduction
 {
@@ -39,26 +38,26 @@ class PoP_CDN_FileReproduction_ThumbprintsConfig extends PoP_CDN_FileReproductio
     {
         return array(
             'startsWith' => array(
-                'full' => HooksAPIFacade::getInstance()->applyFilters(
+                'full' => \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:startsWith:full',
                     array()
                 ),
-                'partial' => HooksAPIFacade::getInstance()->applyFilters(
+                'partial' => \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:startsWith:partial',
                     array()
                 ),
             ),
             // Array of Arrays: elem[0] = URL param, elem[1] = value
-            'hasParamValues' => HooksAPIFacade::getInstance()->applyFilters(
+            'hasParamValues' => \PoP\Root\App::getHookManager()->applyFilters(
                 'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:hasParamValues',
                 array()
             ),
             // Array of Arrays: elem[0] = URL param, elem[1] = value
-            'noParamValues' => HooksAPIFacade::getInstance()->applyFilters(
+            'noParamValues' => \PoP\Root\App::getHookManager()->applyFilters(
                 'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:noParamValues',
                 array()
             ),
-            'isHome' => HooksAPIFacade::getInstance()->applyFilters(
+            'isHome' => \PoP\Root\App::getHookManager()->applyFilters(
                 'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:isHome',
                 false
             )
@@ -69,28 +68,28 @@ class PoP_CDN_FileReproduction_ThumbprintsConfig extends PoP_CDN_FileReproductio
     {
         return array(
             'startsWith' => array(
-                'full' => HooksAPIFacade::getInstance()->applyFilters(
+                'full' => \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:full',
                     array(),
                     $thumbprint
                 ),
-                'partial' => HooksAPIFacade::getInstance()->applyFilters(
+                'partial' => \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
                     array(),
                     $thumbprint
                 ),
             ),
-            'hasParamValues' => HooksAPIFacade::getInstance()->applyFilters(
+            'hasParamValues' => \PoP\Root\App::getHookManager()->applyFilters(
                 'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:hasParamValues',
                 array(),
                 $thumbprint
             ),
-            'noParamValues' => HooksAPIFacade::getInstance()->applyFilters(
+            'noParamValues' => \PoP\Root\App::getHookManager()->applyFilters(
                 'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:noParamValues',
                 array(),
                 $thumbprint
             ),
-            'isHome' => HooksAPIFacade::getInstance()->applyFilters(
+            'isHome' => \PoP\Root\App::getHookManager()->applyFilters(
                 'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:isHome',
                 false,
                 $thumbprint

@@ -6,7 +6,6 @@ Description: Plug-in providing the base processors for the Platform of Platforms
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -21,7 +20,7 @@ class PoP_BaseCollectionProcessors
     {
 
         // Priority: after PoP Engine Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888610);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888610);
     }
     public function init()
     {

@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 
@@ -13,14 +12,14 @@ use PoPSchema\Media\Facades\MediaTypeAPIFacade;
  * - http://kb.mailchimp.com/merge-tags/rss-blog/rss-merge-tags
  */
 
-HooksAPIFacade::getInstance()->addAction('rss2_ns', 'gdRssNamespace');
+\PoP\Root\App::getHookManager()->addAction('rss2_ns', 'gdRssNamespace');
 function gdRssNamespace()
 {
     echo 'xmlns:media="http://search.yahoo.com/mrss/"
     xmlns:georss="http://www.georss.org/georss"';
 }
 
-HooksAPIFacade::getInstance()->addAction('rss2_item', 'gdRssFeaturedImage');
+\PoP\Root\App::getHookManager()->addAction('rss2_item', 'gdRssFeaturedImage');
 function gdRssFeaturedImage()
 {
     $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -35,7 +34,7 @@ function gdRssPrintFeaturedImage($post_id)
 
         // Allow to set the image width in the URL: Needed for using the rss merge tag *|RSSITEM:IMAGE|* in Mailchimp,
         // since it does not allow to resize the image
-        $img_attr = HooksAPIFacade::getInstance()->applyFilters('gdRssPrintFeaturedImage:img_attr', $mediaTypeAPI->getImageProperties($featuredimage_id, 'thumb-md'), $featuredimage_id); ?>
+        $img_attr = \PoP\Root\App::getHookManager()->applyFilters('gdRssPrintFeaturedImage:img_attr', $mediaTypeAPI->getImageProperties($featuredimage_id, 'thumb-md'), $featuredimage_id); ?>
         <media:content url="<?php echo $img_attr['src'] ?>" type="<?php echo $featuredimage->post_mime_type; ?>" medium="image" width="<?php echo $img_attr['width'] ?>" height="<?php echo $img_attr['height'] ?>">
             <media:description type="plain"><![CDATA[<?php echo $featuredimage->post_title; ?>]]></media:description>
         </media:content>

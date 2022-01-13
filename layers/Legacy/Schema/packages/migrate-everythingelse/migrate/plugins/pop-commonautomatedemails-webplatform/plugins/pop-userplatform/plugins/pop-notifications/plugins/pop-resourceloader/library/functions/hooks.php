@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CommonAutomatedEmails_AAL_ResourceLoader_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_AutomatedEmails_WebPlatform_ResourceLoader_Utils:automatedemail-routes',
             array($this, 'getAutomatedEmailRoutes')
         );

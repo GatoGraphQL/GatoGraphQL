@@ -1,12 +1,11 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ServiceWorkers_WebPlatformEngine_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter('extractResponseIntoJsfilesOnRuntime:skip', array($this, 'maybeSkipExtractResponseIntoJsfilesOnRuntime'));
+        \PoP\Root\App::getHookManager()->addFilter('extractResponseIntoJsfilesOnRuntime:skip', array($this, 'maybeSkipExtractResponseIntoJsfilesOnRuntime'));
     }
 
     public function maybeSkipExtractResponseIntoJsfilesOnRuntime($skip)

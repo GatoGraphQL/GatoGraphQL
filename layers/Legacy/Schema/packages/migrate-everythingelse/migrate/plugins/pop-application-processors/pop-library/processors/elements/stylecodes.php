@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Module_Processor_DomainStyleCodes extends PoP_Module_Processor_StyleCodesBase
 {
@@ -20,7 +19,7 @@ class PoP_Module_Processor_DomainStyleCodes extends PoP_Module_Processor_StyleCo
                 $domain = PoP_Application_Utils::getRequestDomain();
 
                 // Allow PoP Theme Wassup to add the background color styles
-                return HooksAPIFacade::getInstance()->applyFilters(
+                return \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_DomainCodes:code:styles',
                     getLoggedinDomainStyles($domain), // Logged in the domain styles
                     $domain

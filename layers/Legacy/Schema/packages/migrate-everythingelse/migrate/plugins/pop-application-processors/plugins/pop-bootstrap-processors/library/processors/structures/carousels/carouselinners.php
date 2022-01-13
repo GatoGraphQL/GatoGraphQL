@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_HOOK_CAROUSEL_USERS_GRIDCLASS', 'carousel-users-gridclass');
 
@@ -21,7 +20,7 @@ class PoP_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_Car
                 return array(
                     'row-items' => 12,
                     // Allow ThemeStyle Expansive to change the class
-                    'class' => HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_CAROUSEL_USERS_GRIDCLASS, 'col-xs-4 col-sm-2 no-padding'),
+                    'class' => \PoP\Root\App::getHookManager()->applyFilters(POP_HOOK_CAROUSEL_USERS_GRIDCLASS, 'col-xs-4 col-sm-2 no-padding'),
                     'divider' => 12
                 );
         }

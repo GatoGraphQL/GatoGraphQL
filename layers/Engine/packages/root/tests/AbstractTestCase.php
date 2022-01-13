@@ -6,6 +6,8 @@ namespace PoP\Root;
 
 use PHPUnit\Framework\TestCase;
 use PoP\Root\Helpers\ClassHelpers;
+use PoP\Root\StateManagers\HookManager;
+use PoP\Root\StateManagers\HookManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class AbstractTestCase extends TestCase
@@ -26,7 +28,10 @@ abstract class AbstractTestCase extends TestCase
         ?string $containerDirectory = null,
         bool $isDev = false
     ): void {
-        App::initialize(static::getAppLoader());
+        App::initialize(
+            static::getAppLoader(),
+            static::getHookManager(),
+        );
         App::getAppLoader()->addComponentClassesToInitialize(static::getComponentClassesToInitialize());
         App::getAppLoader()->initializeComponents($isDev);
         App::getAppLoader()->bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
@@ -40,9 +45,14 @@ abstract class AbstractTestCase extends TestCase
         App::getAppLoader()->bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
     }
 
-    protected static function getAppLoader(): AppLoader
+    protected static function getAppLoader(): AppLoaderInterface
     {
         return new AppLoader();
+    }
+
+    protected static function getHookManager(): HookManagerInterface
+    {
+        return new HookManager();
     }
 
     /**

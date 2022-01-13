@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\Hooks;
 
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
@@ -24,7 +25,7 @@ class MutationResolverHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addAction(
+        App::getHookManager()->addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
             array($this, 'setOrRemoveFeaturedImage'),
             10,

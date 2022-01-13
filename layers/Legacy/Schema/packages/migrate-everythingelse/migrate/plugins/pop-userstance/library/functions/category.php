@@ -1,10 +1,9 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * Integration with Latest Everything Block
  */
-HooksAPIFacade::getInstance()->addFilter('pop_module:allcontent:tax_query_items', 'popUserstanceSearchablecontentTaxquery');
+\PoP\Root\App::getHookManager()->addFilter('pop_module:allcontent:tax_query_items', 'popUserstanceSearchablecontentTaxquery');
 function popUserstanceSearchablecontentTaxquery($tax_query_items)
 {
     $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();

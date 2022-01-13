@@ -6,7 +6,6 @@ Description: Implementation of PoP Category Posts
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_CategoryPosts
     {
 
         // Priority: after PoP Blog
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888320);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888320);
     }
     public function init()
     {

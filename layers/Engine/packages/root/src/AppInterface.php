@@ -8,9 +8,10 @@ use LogicException;
 use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
-use PoP\Root\Managers\AppStateManager;
-use PoP\Root\Managers\ComponentManager;
-use PoP\Root\State\MutationResolutionStore;
+use PoP\Root\StateManagers\AppStateManagerInterface;
+use PoP\Root\StateManagers\ComponentManagerInterface;
+use PoP\Root\StateManagers\HookManagerInterface;
+use PoP\Root\Stores\MutationResolutionStore;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
@@ -26,21 +27,24 @@ interface AppInterface
      * provide the default one.
      */
     public static function initialize(
-        ?AppLoader $appLoader = null,
+        ?AppLoaderInterface $appLoader = null,
+        ?HookManagerInterface $hookManager = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
-        ?ComponentManager $componentManager = null,
-        ?AppStateManager $appStateManager = null,
+        ?ComponentManagerInterface $componentManager = null,
+        ?AppStateManagerInterface $appStateManager = null,
         ?MutationResolutionStore $mutationResolutionStore = null,
     ): void;
 
-    public static function getAppLoader(): AppLoader;
+    public static function getAppLoader(): AppLoaderInterface;
+
+    public static function getHookManager(): HookManagerInterface;
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory;
 
     public static function getSystemContainerBuilderFactory(): SystemContainerBuilderFactory;
 
-    public static function getComponentManager(): ComponentManager;
+    public static function getComponentManager(): ComponentManagerInterface;
 
     public static function getMutationResolutionStore(): MutationResolutionStore;
 

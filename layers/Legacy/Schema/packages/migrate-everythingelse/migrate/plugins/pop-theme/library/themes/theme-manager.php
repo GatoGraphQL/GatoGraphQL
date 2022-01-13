@@ -1,6 +1,5 @@
 <?php
 namespace PoP\Theme\Themes;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class ThemeManager
 {
@@ -11,7 +10,7 @@ class ThemeManager
     {
         ThemeManagerFactory::setInstance($this);
         $this->themes = array();
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:init',
             array($this, 'init')
         );
@@ -38,7 +37,7 @@ class ThemeManager
 
     public function getDefaultThemename()
     {
-        return HooksAPIFacade::getInstance()->applyFilters('\PoP\Theme\Themes\ThemeManager:default', null);
+        return \PoP\Root\App::getHookManager()->applyFilters('\PoP\Theme\Themes\ThemeManager:default', null);
         ;
     }
 

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_GSG_Installation
 {
@@ -7,7 +6,7 @@ class PoP_GSG_Installation
     {
         // Comment Leo 12/04/2019: commented until routes are integrated into plugin GoogleSitemapGenerator
         // (currently it deals only with pages)
-        // HooksAPIFacade::getInstance()->addAction(
+        // \PoP\Root\App::getHookManager()->addAction(
         //     'PoP:system-install', 
         //     [$this, 'systemInstall']
         // );

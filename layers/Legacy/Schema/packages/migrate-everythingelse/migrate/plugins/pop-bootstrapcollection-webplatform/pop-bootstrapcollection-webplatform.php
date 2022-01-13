@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Bootstrap Collection Web Platform
 Description: Implementation of Bootstrap Collection Web Platform for PoP
@@ -22,7 +21,7 @@ class PoP_BootstrapCollectionWebPlatform
     {
 
         // Priority: after PoP Bootstrap Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888450);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888450);
     }
     public function init()
     {

@@ -11,7 +11,7 @@ use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
 /**
  * Application Loader
  */
-class AppLoader
+class AppLoader implements AppLoaderInterface
 {
     /**
      * Has the component been initialized?

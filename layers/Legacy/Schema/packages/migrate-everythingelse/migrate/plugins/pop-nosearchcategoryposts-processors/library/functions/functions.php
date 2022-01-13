@@ -2,7 +2,7 @@
 // use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 // use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 // use PoPSchema\SchemaCommons\Constants\QueryOptions;
-// HooksAPIFacade::getInstance()->addFilter('gdPostParentpageid', 'nosearchcategorypostsPostParentpageid', 10, 2);
+// \PoP\Root\App::getHookManager()->addFilter('gdPostParentpageid', 'nosearchcategorypostsPostParentpageid', 10, 2);
 // function nosearchcategorypostsPostParentpageid($pageid, $post_id)
 // {
     // $postTypeAPI = PostTypeAPIFacade::getInstance();

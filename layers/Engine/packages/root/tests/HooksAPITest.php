@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\AbstractTestCase;
 
 class HooksAPITest extends AbstractTestCase
@@ -14,7 +13,7 @@ class HooksAPITest extends AbstractTestCase
      */
     public function testApplyFilters(): void
     {
-        $hooksapi = HooksAPIFacade::getInstance();
+        $hooksapi = App::getHookManager();
         $this->assertEquals(
             'bar',
             $hooksapi->applyFilters('foo', 'bar')

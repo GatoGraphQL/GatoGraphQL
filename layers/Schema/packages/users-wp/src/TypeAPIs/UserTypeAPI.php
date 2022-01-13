@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UsersWP\TypeAPIs;
 
+use PoP\Root\App;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Constants\UserOrderBy;
@@ -195,7 +196,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
             unset($query['limit']);
         }
 
-        return $this->getHooksAPI()->applyFilters(
+        return App::getHookManager()->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
@@ -211,7 +212,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
             UserOrderBy::REGISTRATION_DATE => 'registered',
             default => $orderBy,
         };
-        return $this->getHooksAPI()->applyFilters(
+        return App::getHookManager()->applyFilters(
             self::HOOK_ORDERBY_QUERY_ARG_VALUE,
             $orderBy
         );

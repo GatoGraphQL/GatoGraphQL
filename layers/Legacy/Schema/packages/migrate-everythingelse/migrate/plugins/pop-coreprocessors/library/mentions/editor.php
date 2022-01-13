@@ -3,12 +3,11 @@ use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
-HooksAPIFacade::getInstance()->addFilter('mce_external_plugins', 'gdMentionsExternalPlugins');
+\PoP\Root\App::getHookManager()->addFilter('mce_external_plugins', 'gdMentionsExternalPlugins');
 function gdMentionsExternalPlugins($plugins)
 {
     if (is_admin()) {
@@ -28,8 +27,8 @@ function gdMentionsExternalPlugins($plugins)
 }
 
 
-HooksAPIFacade::getInstance()->addFilter('teeny_mce_before_init', 'gdMentionsBeforeInit');
-HooksAPIFacade::getInstance()->addFilter('tiny_mce_before_init', 'gdMentionsBeforeInit');
+\PoP\Root\App::getHookManager()->addFilter('teeny_mce_before_init', 'gdMentionsBeforeInit');
+\PoP\Root\App::getHookManager()->addFilter('tiny_mce_before_init', 'gdMentionsBeforeInit');
 function gdMentionsBeforeInit($mceInit)
 {
     if (is_admin() || PoP_WebPlatform_ServerUtils::disableJs()) {
@@ -57,7 +56,7 @@ function gdMentionsBeforeInit($mceInit)
     return $mceInit;
 }
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsMentionsManagerImpl');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdJqueryConstantsMentionsManagerImpl');
 function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 {
     $cmsService = CMSServiceFacade::getInstance();
@@ -71,11 +70,11 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
     $tags_url = RouteUtils::getRouteURL(PostTagsComponentConfiguration::getPostTagsRoute());
 
     // // Add a hook, so we can use the content CDN
-    // $users_url = HooksAPIFacade::getInstance()->applyFilters(
+    // $users_url = \PoP\Root\App::getHookManager()->applyFilters(
     //   'pop_mentions:url:users',
     //   $users_url
     // );
-    // $tags_url = HooksAPIFacade::getInstance()->applyFilters(
+    // $tags_url = \PoP\Root\App::getHookManager()->applyFilters(
     //   'pop_mentions:url:tags',
     //   $tags_url
     // );

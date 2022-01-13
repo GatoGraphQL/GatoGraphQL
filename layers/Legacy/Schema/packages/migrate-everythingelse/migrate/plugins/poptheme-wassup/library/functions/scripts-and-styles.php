@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 function getCompatibilityJsFiles()
 {
@@ -21,7 +20,7 @@ function getCompatibilityJsFiles()
 $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
 if (!$cmsapplicationapi->isAdminPanel()) {
     if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-        HooksAPIFacade::getInstance()->addAction('popcms:head', 'popHeaderPreloadfonts');
+        \PoP\Root\App::getHookManager()->addAction('popcms:head', 'popHeaderPreloadfonts');
     }
 }
 function popHeaderPreloadfonts()
@@ -44,7 +43,7 @@ function getFontawesomeFontUrl($pathkey = null)
         }
 
         // Allow PoP Resource Loader to hook in its values
-        $pathkey = HooksAPIFacade::getInstance()->applyFilters(
+        $pathkey = \PoP\Root\App::getHookManager()->applyFilters(
             'getFontawesomeFontUrl:pathkey',
             $pathkey
         );
@@ -62,7 +61,7 @@ function getFontawesomeFontPath($pathkey)
     }
     
     // Allow PoP Resource Loader to hook in its values
-    return HooksAPIFacade::getInstance()->applyFilters(
+    return \PoP\Root\App::getHookManager()->applyFilters(
         'getFontawesomeFontPath',
         $local_font_path,
         $pathkey

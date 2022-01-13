@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Avatar Web Platform
 Description: Implementation of Avatar Web Platform for PoP
@@ -21,7 +20,7 @@ class PoP_AvatarWebPlatform
     {
 
         // Priority: after PoP Application Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888510);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888510);
     }
     public function init()
     {

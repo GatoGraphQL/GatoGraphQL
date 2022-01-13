@@ -1,10 +1,9 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 require_once 'routes.php';
 
 // Allow TPPDebate AR to translate the post_type to Spanish
-HooksAPIFacade::getInstance()->addAction(
+\PoP\Root\App::getHookManager()->addAction(
     'popcms:init', 
     function() {
 	    include_once 'config.php';
@@ -13,7 +12,7 @@ HooksAPIFacade::getInstance()->addAction(
 );
 
 // High priority: allow the Theme and other plug-ins to set the values in advance.
-HooksAPIFacade::getInstance()->addAction(
+\PoP\Root\App::getHookManager()->addAction(
     'popcms:init', 
     'popUserstanceInitConstants', 
     10000

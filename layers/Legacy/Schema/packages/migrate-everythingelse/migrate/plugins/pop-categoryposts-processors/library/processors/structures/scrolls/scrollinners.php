@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CategoryPosts_Module_Processor_ScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
@@ -110,7 +109,7 @@ class PoP_CategoryPosts_Module_Processor_ScrollInners extends PoP_Module_Process
         );
 
         // Allow PoP Post Category Layouts to add a more specific layout for this category
-        if ($layout = HooksAPIFacade::getInstance()->applyFilters(
+        if ($layout = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_CategoryPosts_Module_Processor_ScrollInners:layout',
             [PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW],
             $categories[$module[1]]

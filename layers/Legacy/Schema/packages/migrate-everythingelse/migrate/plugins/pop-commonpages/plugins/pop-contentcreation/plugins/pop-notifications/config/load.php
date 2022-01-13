@@ -1,8 +1,7 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Wait until the constants have been set
-HooksAPIFacade::getInstance()->addAction(
+\PoP\Root\App::getHookManager()->addAction(
     'popcms:init', 
     'popCommonpagesContentcreationNotificationsInitConstants', 
     5100

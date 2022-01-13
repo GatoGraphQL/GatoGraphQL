@@ -1,8 +1,7 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Add support for Cross-Domain to Plupload
-HooksAPIFacade::getInstance()->addFilter('plupload_default_settings', 'popCorePluploadDefaultSettings');
+\PoP\Root\App::getHookManager()->addFilter('plupload_default_settings', 'popCorePluploadDefaultSettings');
 function popCorePluploadDefaultSettings($defaults)
 {
     

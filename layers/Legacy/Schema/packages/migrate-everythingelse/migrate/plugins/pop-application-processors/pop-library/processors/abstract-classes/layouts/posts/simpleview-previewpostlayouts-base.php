@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_CustomSimpleViewPreviewPostLayoutsBase extends PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase
@@ -21,7 +20,7 @@ abstract class PoP_Module_Processor_CustomSimpleViewPreviewPostLayoutsBase exten
         }
 
         // Allow to override. Eg: TPP Debate website adds the Stance Counter
-        $layouts = HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomPreviewPostLayoutsBase:simpleviewfeed_bottom_modules', $layouts, $module);
+        $layouts = \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_CustomPreviewPostLayoutsBase:simpleviewfeed_bottom_modules', $layouts, $module);
 
         return $layouts;
     }

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PopThemeWassup_AAL_Initialization
 {
     public function __construct()
@@ -11,7 +10,7 @@ class PopThemeWassup_AAL_Initialization
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            HooksAPIFacade::getInstance()->addAction('popcms:printStyles', array($this, 'registerStyles'), 50);
+            \PoP\Root\App::getHookManager()->addAction('popcms:printStyles', array($this, 'registerStyles'), 50);
         }
     }
 

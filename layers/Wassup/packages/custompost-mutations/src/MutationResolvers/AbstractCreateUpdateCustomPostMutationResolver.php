@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
 use PoPSchema\CustomPostMeta\Utils;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver as UpstreamAbstractCreateUpdateCustomPostMutationResolver;
@@ -34,7 +35,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
     protected function addParentCategories()
     {
-        return $this->getHooksAPI()->applyFilters(
+        return App::getHookManager()->applyFilters(
             'GD_CreateUpdate_Post:add-parent-categories',
             false,
             $this
@@ -61,7 +62,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
     protected function getCategoriesErrorMessages()
     {
-        return $this->getHooksAPI()->applyFilters(
+        return App::getHookManager()->applyFilters(
             'GD_CreateUpdate_Post:categories-validation:error',
             array(
                 'empty-categories' => $this->__('The categories have not been set', 'pop-application'),

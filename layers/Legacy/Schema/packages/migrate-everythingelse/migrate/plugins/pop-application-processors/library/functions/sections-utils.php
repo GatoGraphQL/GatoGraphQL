@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -95,7 +94,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
         // Only filter if the 'author' attribute has not been set yet. If it has been set, it must've been done by the filter,
         // which will allow only members belonging to the community. So use that one instead
         // if (!$ret['author']) {
-        $authors = HooksAPIFacade::getInstance()->applyFilters('pop_module:dataload_query_args:authors', array($author));
+        $authors = \PoP\Root\App::getHookManager()->applyFilters('pop_module:dataload_query_args:authors', array($author));
         $ret['authors'] = $authors;
         // }
     }

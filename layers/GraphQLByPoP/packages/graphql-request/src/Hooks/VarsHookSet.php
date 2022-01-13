@@ -14,7 +14,7 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         // Change the error message when mutations are not supported
-        $this->getHooksAPI()->addFilter(
+        App::getHookManager()->addFilter(
             MutationCheckpointProcessor::HOOK_MUTATIONS_NOT_SUPPORTED_ERROR_MSG,
             array($this, 'getMutationsNotSupportedErrorMessage'),
             10,

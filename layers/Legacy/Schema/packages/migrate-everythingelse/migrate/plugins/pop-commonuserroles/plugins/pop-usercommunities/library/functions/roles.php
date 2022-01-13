@@ -1,8 +1,7 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // After function `getUserRoleCombinationsCommonroles`
-HooksAPIFacade::getInstance()->addFilter('getUserRoleCombinations', 'getUserRoleCombinationsUsercommunitiesCommonroles', 105);
+\PoP\Root\App::getHookManager()->addFilter('getUserRoleCombinations', 'getUserRoleCombinationsUsercommunitiesCommonroles', 105);
 function getUserRoleCombinationsUsercommunitiesCommonroles($user_role_combinations)
 {
 

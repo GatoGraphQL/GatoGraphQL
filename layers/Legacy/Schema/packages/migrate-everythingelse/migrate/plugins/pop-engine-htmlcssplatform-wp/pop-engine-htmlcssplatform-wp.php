@@ -7,7 +7,6 @@ Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
 namespace PoP\EngineHTMLCSSPlatform;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,13 +19,13 @@ class Plugins
     public function __construct()
     {
         include_once 'validation.php';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_EngineHTMLCSSPlatform_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
 
         // Priority: after PoP HTML/CSS Platform Engine, inner circle
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888401);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888401);
     }
     public function getProviderValidationClass($class)
     {

@@ -6,7 +6,6 @@ Description: The foundation for a PoP Location Posts Creation
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_LocationPostsCreation
     {
 
         // Priority: after PoP Location Posts and PoP Posts Creation
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888360);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888360);
     }
     public function init()
     {

@@ -187,7 +187,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             unset($query['date-to']);
         }
 
-        return $this->getHooksAPI()->applyFilters(
+        return App::getHookManager()->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
@@ -201,7 +201,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             CustomPostOrderBy::DATE => 'date',
             default => $orderBy,
         };
-        return $this->getHooksAPI()->applyFilters(
+        return App::getHookManager()->applyFilters(
             self::HOOK_ORDERBY_QUERY_ARG_VALUE,
             $orderBy
         );
@@ -299,7 +299,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
         /** @var WP_Post $customPost */
-        return $this->getHooksAPI()->applyFilters('the_title', $customPost->post_title, $customPostID);
+        return App::getHookManager()->applyFilters('the_title', $customPost->post_title, $customPostID);
     }
 
     public function getContent(string | int | object $customPostObjectOrID): ?string
@@ -308,7 +308,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         if ($customPost === null) {
             return null;
         }
-        return $this->getHooksAPI()->applyFilters('the_content', $customPost->post_content);
+        return App::getHookManager()->applyFilters('the_content', $customPost->post_content);
     }
 
     public function getRawContent(string | int | object $customPostObjectOrID): ?string
@@ -322,14 +322,14 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         // Remove unneeded filters, then add them again
         // @see wp-includes/default-filters.php
         $wp_embed = $GLOBALS['wp_embed'];
-        $this->getHooksAPI()->removeFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
-        $this->getHooksAPI()->removeFilter('the_content', 'wpautop');
+        App::getHookManager()->removeFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
+        App::getHookManager()->removeFilter('the_content', 'wpautop');
 
         // Do not allow HTML tags or shortcodes
         $ret = \strip_shortcodes($customPost->post_content);
-        $ret = $this->getHooksAPI()->applyFilters('the_content', $ret);
-        $this->getHooksAPI()->addFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
-        $this->getHooksAPI()->addFilter('the_content', 'wpautop');
+        $ret = App::getHookManager()->applyFilters('the_content', $ret);
+        App::getHookManager()->addFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
+        App::getHookManager()->addFilter('the_content', 'wpautop');
 
         return strip_tags($ret);
     }

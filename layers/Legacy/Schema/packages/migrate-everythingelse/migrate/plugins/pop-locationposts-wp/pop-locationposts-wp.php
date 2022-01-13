@@ -6,7 +6,6 @@ Description: Implementation of PoP Location Posts WordPress
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -22,7 +21,7 @@ class PoP_LocationPostsWP
     public function __construct()
     {
         // Priority: after PoP Locations
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888352);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888352);
     }
     public function init()
     {

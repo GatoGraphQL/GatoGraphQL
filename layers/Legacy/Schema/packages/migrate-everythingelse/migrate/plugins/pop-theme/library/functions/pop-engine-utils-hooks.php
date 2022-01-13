@@ -2,7 +2,6 @@
 namespace PoP\Theme;
 
 use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Theme_UtilsHooks
 {
@@ -28,4 +27,4 @@ class PoP_Theme_UtilsHooks
 /**
  * Initialization
  */
-HooksAPIFacade::getInstance()->addAction('ApplicationState:addVars', array(PoP_Theme_UtilsHooks::class, 'addVars'), 10, 1);
+\PoP\Root\App::getHookManager()->addAction('ApplicationState:addVars', array(PoP_Theme_UtilsHooks::class, 'addVars'), 10, 1);

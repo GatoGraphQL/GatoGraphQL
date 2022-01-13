@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('GD_THEMEMODE_WASSUP_SIMPLE', 'simple');
 
@@ -8,7 +7,7 @@ class GD_ThemeMode_Wassup_Simple extends GD_WassupThemeMode_Base
     public function __construct()
     {
         // Hooks to allow the thememodes to do some functionality
-        HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'backgroundLoad'));
+        \PoP\Root\App::getHookManager()->addFilter(POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'backgroundLoad'));
         parent::__construct();
     }
 

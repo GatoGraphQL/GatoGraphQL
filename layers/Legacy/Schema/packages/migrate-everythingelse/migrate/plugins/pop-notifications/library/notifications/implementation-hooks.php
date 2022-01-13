@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Notifications_ImplementationHooks
 {
@@ -7,7 +6,7 @@ class PoP_Notifications_ImplementationHooks
     {
 
         // Add this library's hooks for AAL
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcomponent:notifications:init',
             array($this, 'addNotificationHooks')
         );

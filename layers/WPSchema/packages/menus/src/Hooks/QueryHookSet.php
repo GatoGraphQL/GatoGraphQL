@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Menus\Hooks;
 
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\MenusWP\TypeAPIs\MenuTypeAPI;
 
@@ -11,7 +12,7 @@ class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::getHookManager()->addFilter(
             MenuTypeAPI::HOOK_QUERY,
             [$this, 'convertMenuQuery'],
             10,

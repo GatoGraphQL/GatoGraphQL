@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_AddComments_SocialNetwork_Notifications_NotificationHooks
 {
@@ -7,7 +6,7 @@ class PoP_AddComments_SocialNetwork_Notifications_NotificationHooks
     {
 
         // Hook into the API: Where statements
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_AddComments_Notifications_NotificationHooks:select_from_comment_post_id:unions',
             array($this, 'getSelectFromCommentPostIdUnions'),
             10,

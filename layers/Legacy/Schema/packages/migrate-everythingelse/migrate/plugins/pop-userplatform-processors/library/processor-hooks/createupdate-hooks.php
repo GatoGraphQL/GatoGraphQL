@@ -1,15 +1,14 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_UserPlatform_CreateUpdateHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'GD_CreateUpdate_Profile:form-inputs',
             array($this, 'getProfileFormInputs')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'GD_CreateUpdate_User:form-inputs',
             array($this, 'getUserFormInputs')
         );

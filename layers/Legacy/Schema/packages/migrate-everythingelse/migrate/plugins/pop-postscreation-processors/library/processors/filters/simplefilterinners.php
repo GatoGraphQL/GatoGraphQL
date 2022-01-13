@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
@@ -41,7 +40,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
                 ]
             );
         }
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+        if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
             'Links:SimpleFilterInners:inputmodules',
             $inputmodules[$module[1]],
             $module

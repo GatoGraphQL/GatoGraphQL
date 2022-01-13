@@ -1,12 +1,11 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_AutomatedEmails_WebPlatform_ResourceLoader_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter('getResourcesIncludeType', array($this, 'getResourcesIncludeType'));
+        \PoP\Root\App::getHookManager()->addFilter('getResourcesIncludeType', array($this, 'getResourcesIncludeType'));
     }
 
     public function getResourcesIncludeType($type)

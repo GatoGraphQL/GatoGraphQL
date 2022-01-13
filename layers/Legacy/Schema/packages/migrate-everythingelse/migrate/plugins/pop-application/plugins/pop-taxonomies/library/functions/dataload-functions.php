@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -7,12 +6,12 @@ use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 function getAllcontentExcludedTaxonomies()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('getAllcontentExcludedTaxonomies', array());
+    return \PoP\Root\App::getHookManager()->applyFilters('getAllcontentExcludedTaxonomies', array());
 }
 
 function useAllcontentCategories()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('useAllcontentCategories', true);
+    return \PoP\Root\App::getHookManager()->applyFilters('useAllcontentCategories', true);
 }
 
 function gdDataloadAllcontentCategories()

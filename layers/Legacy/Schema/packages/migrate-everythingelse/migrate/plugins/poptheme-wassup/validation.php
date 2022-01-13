@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('PTW_POP_APPLICATIONPROCESSORS_MIN_VERSION', 0.1);
@@ -15,93 +14,93 @@ class PoPTheme_Wassup_Validation
     {
         $success = true;
         if (!defined('POP_APPLICATIONPROCESSORS_VERSION')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'installWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'installWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'installWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'installWarning'));
             $success = false;
         } elseif (!defined('POP_APPLICATIONPROCESSORS_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initializeWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (PTW_POP_APPLICATIONPROCESSORS_MIN_VERSION > POP_APPLICATIONPROCESSORS_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'versionWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'versionWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'versionWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'versionWarning'));
         }
 
         // if (!defined('POP_GENERICFORMS_VERSION')) {
 
-        //     HooksAPIFacade::getInstance()->addAction('admin_notices',array($this,'install_warning_2'));
-        //     HooksAPIFacade::getInstance()->addAction('network_admin_notices',array($this,'install_warning_2'));
+        //     \PoP\Root\App::getHookManager()->addAction('admin_notices',array($this,'install_warning_2'));
+        //     \PoP\Root\App::getHookManager()->addAction('network_admin_notices',array($this,'install_warning_2'));
         //     $success = false;
         // }
         // elseif (!defined('POP_GENERICFORMS_INITIALIZED')) {
 
-        //     HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initialize_warning_2'));
-        //     HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+        //     \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initialize_warning_2'));
+        //     \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initialize_warning_2'));
         //     $success = false;
         // }
         // elseif (PTW_POP_GENERICFORMS_MIN_VERSION > POP_GENERICFORMS_VERSION) {
             
-        //     HooksAPIFacade::getInstance()->addAction('admin_notices',array($this,'version_warning_2'));
-        //     HooksAPIFacade::getInstance()->addAction('network_admin_notices',array($this,'version_warning_2'));
+        //     \PoP\Root\App::getHookManager()->addAction('admin_notices',array($this,'version_warning_2'));
+        //     \PoP\Root\App::getHookManager()->addAction('network_admin_notices',array($this,'version_warning_2'));
         // }
 
         if (!defined('POP_BOOTSTRAPPROCESSORS_VERSION')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'install_warning_3'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'install_warning_3'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'install_warning_3'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'install_warning_3'));
             $success = false;
         } elseif (!defined('POP_BOOTSTRAPPROCESSORS_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initialize_warning_3'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initialize_warning_3'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initialize_warning_3'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initialize_warning_3'));
             $success = false;
         } elseif (PTW_POP_BOOTSTRAPPROCESSORS_MIN_VERSION > POP_BOOTSTRAPPROCESSORS_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'version_warning_3'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'version_warning_3'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'version_warning_3'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'version_warning_3'));
         }
 
         if (!defined('POP_APPLICATIONPROCESSORS_VERSION')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'install_warning_4'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'install_warning_4'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'install_warning_4'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'install_warning_4'));
             $success = false;
         } elseif (!defined('POP_APPLICATIONPROCESSORS_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initialize_warning_4'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initialize_warning_4'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initialize_warning_4'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initialize_warning_4'));
             $success = false;
         } elseif (PTW_POP_APPLICATIONPROCESSORS_MIN_VERSION > POP_APPLICATIONPROCESSORS_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'version_warning_4'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'version_warning_4'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'version_warning_4'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'version_warning_4'));
         }
 
         if (!defined('POP_THEME_VERSION')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'install_warning_5'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'install_warning_5'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'install_warning_5'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'install_warning_5'));
             $success = false;
         } elseif (!defined('POP_THEME_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initialize_warning_5'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initialize_warning_5'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initialize_warning_5'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initialize_warning_5'));
             $success = false;
         } elseif (PTW_POP_THEME_MIN_VERSION > POP_THEME_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'version_warning_5'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'version_warning_5'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'version_warning_5'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'version_warning_5'));
         }
 
         if (!defined('POP_SPAPROCESSORS_VERSION')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'install_warning_6'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'install_warning_6'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'install_warning_6'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'install_warning_6'));
             $success = false;
         } elseif (!defined('POP_SPAPROCESSORS_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initialize_warning_6'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initialize_warning_6'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initialize_warning_6'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initialize_warning_6'));
             $success = false;
         } elseif (PTW_POP_SPAPROCESSORS_MIN_VERSION > POP_SPAPROCESSORS_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'version_warning_6'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'version_warning_6'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'version_warning_6'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'version_warning_6'));
         }
 
         if ($success) {
             // Validate that there is at least one implementation of the CMS
             if (is_null(\PoP\Engine\FunctionAPIFactory::getInstance()) || !is_subclass_of(\PoP\Engine\FunctionAPIFactory::getInstance(), \PoP\Engine\FunctionAPI::class)) {
-                HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'cmsimplementationWarning'));
-                HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'cmsimplementationWarning'));
+                \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'cmsimplementationWarning'));
+                \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'cmsimplementationWarning'));
                 $success = false;
             }
         }

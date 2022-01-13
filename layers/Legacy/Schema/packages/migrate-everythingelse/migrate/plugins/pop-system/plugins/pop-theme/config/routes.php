@@ -1,6 +1,5 @@
 <?php
 use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\DefinitionGroups;
 $definitionManager = DefinitionManagerFacade::getInstance();
 
@@ -10,7 +9,7 @@ if (!defined('POP_SYSTEM_ROUTE_SYSTEM_GENERATETHEME')) {
 	define('POP_SYSTEM_ROUTE_SYSTEM_GENERATETHEME', $definitionManager->getUniqueDefinition('system/generatetheme', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

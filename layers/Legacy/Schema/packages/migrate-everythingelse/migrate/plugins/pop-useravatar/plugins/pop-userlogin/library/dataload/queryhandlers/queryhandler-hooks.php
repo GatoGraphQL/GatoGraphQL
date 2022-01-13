@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('GD_DATALOAD_USER_AVATAR', 'avatar');
 
@@ -8,7 +7,7 @@ class PoP_UserAvatar_UserStance_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks:user-feedback',
             array($this, 'getUserFeedback')
         );

@@ -1,10 +1,9 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_IDS_APPSTATUS', 'app-status');
 define('GD_INTERCEPT_TARGET_NAVIGATOR', 'navigator');
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdThemewassupJqueryConstantsModulemanagerImpl');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdThemewassupJqueryConstantsModulemanagerImpl');
 function gdThemewassupJqueryConstantsModulemanagerImpl($jqueryConstants)
 {
 

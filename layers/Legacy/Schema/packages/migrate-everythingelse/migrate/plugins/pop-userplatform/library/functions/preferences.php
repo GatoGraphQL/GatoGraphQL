@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_UserPlatform_Preferences
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:userRegister',
             array($this, 'grantDefaultPreferences'),
             10,
@@ -18,7 +17,7 @@ class PoP_UserPlatform_Preferences
      */
     protected function getDefaultPreferencesValues()
     {
-        return HooksAPIFacade::getInstance()->applyFilters('PoP_UserPlatform_Preferences:default:values', array());
+        return \PoP\Root\App::getHookManager()->applyFilters('PoP_UserPlatform_Preferences:default:values', array());
     }
 
     /**

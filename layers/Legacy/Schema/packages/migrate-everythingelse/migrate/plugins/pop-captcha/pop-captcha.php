@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Captcha
 Description: Implementation of Captcha for PoP
@@ -20,7 +19,7 @@ class PoP_Captcha
     {
 
         // Priority: after PoP Application
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888304);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888304);
     }
     public function init()
     {

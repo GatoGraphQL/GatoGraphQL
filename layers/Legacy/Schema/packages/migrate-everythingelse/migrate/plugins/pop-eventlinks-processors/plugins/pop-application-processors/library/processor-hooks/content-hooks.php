@@ -1,13 +1,12 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 class PoPTheme_EM_Processors_ContentHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_Contents:inner_module',
             array($this, 'contentInner'),
             10,

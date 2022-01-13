@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Component;
 
-use PoP\Root\Facades\Hooks\SystemHooksAPIFacade;
+use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 
 abstract class AbstractComponentConfiguration implements ComponentConfigurationInterface
@@ -55,21 +55,12 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
             return $this->configuration[$envVariable];
         }
 
-        /**
-         * Get the value via a hook.
-         *
-         * Important: it must use the Hooks service from the System Container,
-         * and not the (Application) Container, because ComponentConfiguration::foo()
-         * may be accessed when initializing (Application) container services
-         * in `Component.initialize()`, so it must already be available by then
-         */
-        $hooksAPI = SystemHooksAPIFacade::getInstance();
         $class = $this->getComponentClass();
         $hookName = ComponentConfigurationHelpers::getHookName(
             $class,
             $envVariable
         );
-        $this->configuration[$envVariable] = $hooksAPI->applyFilters(
+        $this->configuration[$envVariable] = App::getHookManager()->applyFilters(
             $hookName,
             $this->configuration[$envVariable],
             $class,

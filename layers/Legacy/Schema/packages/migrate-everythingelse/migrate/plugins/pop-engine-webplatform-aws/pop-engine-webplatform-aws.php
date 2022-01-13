@@ -6,7 +6,6 @@ Description: Use AWS for the Engine Web Platform plugin for the Platform of Plat
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_WebPlatformEngine_AWS
     {
 
         // Priority: after PoP CDN
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888420);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888420);
     }
 
     public function init()

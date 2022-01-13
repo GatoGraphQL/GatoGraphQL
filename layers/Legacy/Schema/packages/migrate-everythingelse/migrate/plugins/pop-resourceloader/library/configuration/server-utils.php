@@ -1,7 +1,6 @@
 <?php
 
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ResourceLoader_ServerUtils
 {
@@ -43,7 +42,7 @@ class PoP_ResourceLoader_ServerUtils
 
         // Allow specific pages to set this value to false
         // Eg: when generating the Service Workers, we need to register all of the CSS files to output them in the precache list
-        if ($include_type = HooksAPIFacade::getInstance()->applyFilters('getResourcesIncludeType', '')) {
+        if ($include_type = \PoP\Root\App::getHookManager()->applyFilters('getResourcesIncludeType', '')) {
             return $include_type;
         }
 
@@ -159,7 +158,7 @@ class PoP_ResourceLoader_ServerUtils
             // There are requests that can only work with a specific type
             // Eg: the AppShell, it must always use 'resource', or otherwise it will need to load extra bundle(group) files,
             // making the initial SW pre-fetch heavy, and not allowing to easily create the AppShell for the different thememodes (embed, print)
-            if ($enqueuefile_type = HooksAPIFacade::getInstance()->applyFilters('getEnqueuefileType', '')) {
+            if ($enqueuefile_type = \PoP\Root\App::getHookManager()->applyFilters('getEnqueuefileType', '')) {
                 return $enqueuefile_type;
             }
         }

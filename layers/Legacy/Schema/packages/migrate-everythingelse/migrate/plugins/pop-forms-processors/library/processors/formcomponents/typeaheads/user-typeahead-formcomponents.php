@@ -4,7 +4,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -75,7 +74,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
         switch ($module[1]) {
             case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 // Allow PoP Common User Roles to change this
-                return HooksAPIFacade::getInstance()->applyFilters(
+                return \PoP\Root\App::getHookManager()->applyFilters(
                     'UserSelectableTypeaheadFormInputs:components:profiles',
                     array(
                         [PoP_Module_Processor_UserTypeaheadComponentFormInputs::class, PoP_Module_Processor_UserTypeaheadComponentFormInputs::MODULE_TYPEAHEAD_COMPONENT_USERS],

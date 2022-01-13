@@ -1,11 +1,9 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
-
 class PoP_ResourceLoader_ProcessorHooks {
 
 	public function __construct() {
 
-		HooksAPIFacade::getInstance()->addFilter(
+		\PoP\Root\App::getHookManager()->addFilter(
 			'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-settings',
 			array($this, 'getImmutableSettings'),
 			10,

@@ -1,8 +1,7 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('icon_dirs', 'gdMediaIconDirs', 100);
+\PoP\Root\App::getHookManager()->addFilter('icon_dirs', 'gdMediaIconDirs', 100);
 
 // Icons copied from EG-Attachment plugin
 function gdMediaIconDirs($args)
@@ -23,7 +22,7 @@ function gdMediaIconDirs($args)
  * Do not allow certain filetypes
  */
 
-HooksAPIFacade::getInstance()->addFilter('upload_mimes', 'gdUploadMimes');
+\PoP\Root\App::getHookManager()->addFilter('upload_mimes', 'gdUploadMimes');
 function gdUploadMimes($mime)
 {
     $unset = array('exe', 'gz', 'gzip', 'rar', 'tar', 'zip');
@@ -40,7 +39,7 @@ function gdUploadMimes($mime)
  * Source: http://alxmedia.se/code/2013/10/make-wordpress-default-video-embeds-responsive/
  */
 
-HooksAPIFacade::getInstance()->addFilter('embed_defaults', 'gdEmbedDefaultsSize');
+\PoP\Root\App::getHookManager()->addFilter('embed_defaults', 'gdEmbedDefaultsSize');
 function gdEmbedDefaultsSize()
 {
     // adjust these pixel values to your needs
@@ -55,7 +54,7 @@ function gdEmbedDefaultsSize()
 
 function gdImageRel()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdImageRel', '');
+    return \PoP\Root\App::getHookManager()->applyFilters('gdImageRel', '');
 }
 
 
@@ -64,7 +63,7 @@ function gdImageRel()
  *
  * @see wp-includes|media.php
  */
-HooksAPIFacade::getInstance()->addFilter('media_view_strings', 'corMediaViewStrings');
+\PoP\Root\App::getHookManager()->addFilter('media_view_strings', 'corMediaViewStrings');
 function corMediaViewStrings($strings)
 {
     if (!is_admin()) {
@@ -90,7 +89,7 @@ function corMediaViewStrings($strings)
 /**
  * Enqueue scripts and constants
  */
-HooksAPIFacade::getInstance()->addAction("wp_enqueue_scripts", "gdMediaRegisterScripts");
+\PoP\Root\App::getHookManager()->addAction("wp_enqueue_scripts", "gdMediaRegisterScripts");
 function gdMediaRegisterScripts()
 {
 
@@ -103,7 +102,7 @@ function gdMediaRegisterScripts()
     wp_enqueue_script('thickbox');
 }
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsMediaManagerImpl');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdJqueryConstantsMediaManagerImpl');
 function gdJqueryConstantsMediaManagerImpl($jqueryConstants)
 {
 
@@ -164,5 +163,5 @@ function alxEmbedHtml($html, $src)
         $html
     );
 }
-HooksAPIFacade::getInstance()->addFilter('embed_oembed_html', 'alxEmbedHtml', 10, 2);
-// HooksAPIFacade::getInstance()->addFilter( 'video_embed_html', 'alxEmbedHtml' ); // Jetpack
+\PoP\Root\App::getHookManager()->addFilter('embed_oembed_html', 'alxEmbedHtml', 10, 2);
+// \PoP\Root\App::getHookManager()->addFilter( 'video_embed_html', 'alxEmbedHtml' ); // Jetpack

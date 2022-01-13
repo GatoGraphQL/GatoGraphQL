@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * Thumbs for the Links depending on their domain
  */
 
-HooksAPIFacade::getInstance()->addFilter('gdThumbDefault:host_thumb_ids', 'wassupHostThumbs');
+\PoP\Root\App::getHookManager()->addFilter('gdThumbDefault:host_thumb_ids', 'wassupHostThumbs');
 function wassupHostThumbs($host_thumb_ids)
 {
     return array_merge(

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
 {
@@ -7,28 +6,28 @@ class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
     {
 
         // Hook into the API: Where statements
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_AddComments_Notifications_NotificationHooks:select_from_comment_post_id:unions',
             array($this, 'getSelectFromCommentPostIdUnions'),
             10,
             2
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_AddComments_Notifications_NotificationHooks:select_from_comment_id:ors',
             array($this, 'getSelectFromCommentIdOrs'),
             10,
             2
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:notifications:useractivityposts:comment_id_ors',
             array($this, 'getUseractivitypostsCommentIdOrs'),
             10,
             2
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_AddComments_Notifications_NotificationHooks:object_id:unions',
             array($this, 'getUseractivitycommentsObjectIdUnions'),
             10,

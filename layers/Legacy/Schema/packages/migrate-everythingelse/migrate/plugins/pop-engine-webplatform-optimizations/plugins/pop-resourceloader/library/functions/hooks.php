@@ -1,13 +1,12 @@
 <?php
 
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_FrontEndOptimization_ResourceLoaderProcessor_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_FrontEnd_ResourceLoaderProcessor:dependencies:manager',
             array($this, 'getManagerDependencies')
         );

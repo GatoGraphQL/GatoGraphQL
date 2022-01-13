@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
@@ -7,7 +6,7 @@ class PoP_Events_Engine_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'augmentVarsProperties',
             [$this, 'augmentVarsProperties'],
             10,

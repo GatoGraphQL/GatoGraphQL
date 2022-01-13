@@ -34,7 +34,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->getHooksAPI()->doAction('gd_unrecommendpost', $target_id, $form_data);
+        App::getHookManager()->doAction('gd_unrecommendpost', $target_id, $form_data);
     }
 
     // protected function updateValue($value, $form_data) {

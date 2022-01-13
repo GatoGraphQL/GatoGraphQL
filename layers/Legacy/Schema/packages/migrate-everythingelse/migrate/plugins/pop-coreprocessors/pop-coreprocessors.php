@@ -6,7 +6,6 @@ Description: Plug-in providing a collection of processors for the Platform of Pl
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -22,8 +21,8 @@ class PoP_CoreProcessors
     {
 
         // Priority: after PoP Bootstrap Collection Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888710);
-        // HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this,'systemGenerate'));
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888710);
+        // \PoP\Root\App::getHookManager()->addAction('PoP:system-generate', array($this,'systemGenerate'));
     }
     public function init()
     {

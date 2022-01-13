@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Route;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class RouteUtils
 {
@@ -21,7 +21,7 @@ class RouteUtils
 
     public static function getRouteTitle($route)
     {
-        $title = HooksAPIFacade::getInstance()->applyFilters(
+        $title = App::getHookManager()->applyFilters(
             'route:title',
             $route,
             $route

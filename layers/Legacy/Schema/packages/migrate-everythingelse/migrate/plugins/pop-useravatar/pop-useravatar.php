@@ -6,7 +6,6 @@ Description: Implementation of the User Avatar plugin for the Platform of Platfo
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -21,7 +20,7 @@ class PoP_UserAvatar
     {
 
         // Priority: after PoP Notifications
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function init()
     {

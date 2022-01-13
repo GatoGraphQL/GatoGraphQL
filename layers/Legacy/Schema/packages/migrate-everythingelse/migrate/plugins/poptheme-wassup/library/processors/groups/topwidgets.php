@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBase
@@ -63,7 +62,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
 
             case self::MODULE_GROUP_HOME_WIDGETAREA:
                 // Add the blocks
-                if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+                if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomGroups:modules:home_widgetarea',
                     array(),
                     $module
@@ -77,7 +76,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
 
             case self::MODULE_GROUP_AUTHOR_WIDGETAREA:
                 // Add the blocks
-                if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+                if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomGroups:modules:author_widgetarea',
                     array(),
                     $module
@@ -94,7 +93,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 $modules[] = [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_TAG_CONTENT];
 
                 // Allow to add the Featured Carousel
-                if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+                if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomGroups:modules:tag_widgetarea',
                     $modules,
                     $module
@@ -110,7 +109,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 $ret[] = [self::class, self::MODULE_GROUP_HOME_COMPACTWELCOME];
 
                 // Allow MESYM to override this
-                if ($widgetarea = HooksAPIFacade::getInstance()->applyFilters(
+                if ($widgetarea = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomGroups:hometop:modules:widget',
                     [self::class, self::MODULE_GROUP_HOME_WIDGETAREA]
                 )) {
@@ -122,7 +121,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 $ret[] = [self::class, self::MODULE_GROUP_AUTHOR_DESCRIPTION];
 
                 // Allow MESYM to override this
-                if ($widgetarea = HooksAPIFacade::getInstance()->applyFilters(
+                if ($widgetarea = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomGroups:authortop:modules:widget',
                     [self::class, self::MODULE_GROUP_AUTHOR_WIDGETAREA]
                 )) {
@@ -264,7 +263,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
             case self::MODULE_GROUP_AUTHOR_WIDGETAREA:
             case self::MODULE_GROUP_TAG_WIDGETAREA:
                 // External Injection
-                HooksAPIFacade::getInstance()->doAction(
+                \PoP\Root\App::getHookManager()->doAction(
                     'PoP_Module_Processor_CustomGroups:modules:props',
                     $module,
                     array(&$props),

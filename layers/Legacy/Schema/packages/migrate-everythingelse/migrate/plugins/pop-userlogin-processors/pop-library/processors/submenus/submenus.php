@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
 {
@@ -51,7 +50,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
                 );
 
                 // Allow for the Create Profiles links to be added by User Role Editor
-                return HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_SubMenus:routes', $ret);
+                return \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_SubMenus:routes', $ret);
         }
 
         return parent::getRoutes($module, $props);

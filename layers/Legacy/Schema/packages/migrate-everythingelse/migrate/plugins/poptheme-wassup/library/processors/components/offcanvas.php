@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
@@ -304,7 +303,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                 break;
 
             case self::MODULE_OFFCANVAS_BODYSIDEINFO:
-                $openmode = HooksAPIFacade::getInstance()->applyFilters('modules:sideinfo:openmode', 'automatic');
+                $openmode = \PoP\Root\App::getHookManager()->applyFilters('modules:sideinfo:openmode', 'automatic');
                 $this->mergeProp(
                     $module,
                     $props,

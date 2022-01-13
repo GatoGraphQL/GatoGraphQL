@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
@@ -8,7 +7,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 function getTheMainCategories()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('getTheMainCategories', array());
+    return \PoP\Root\App::getHookManager()->applyFilters('getTheMainCategories', array());
 }
 
 function getTheMainCategory($post_id)

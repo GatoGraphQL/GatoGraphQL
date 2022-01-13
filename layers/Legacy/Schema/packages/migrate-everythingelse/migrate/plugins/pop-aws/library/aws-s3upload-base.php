@@ -1,7 +1,6 @@
 <?php
 use Aws\Common\Aws;
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_AWS_S3UploadBase
 {
@@ -43,7 +42,7 @@ class PoP_AWS_S3UploadBase
         $domain = $scheme.'://'.$prefix.'.amazonaws.com/'.$bucket;
 
         // Allow to inject the CDN instead
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_AWS_S3UploadBase:domain',
             $domain,
             $bucket

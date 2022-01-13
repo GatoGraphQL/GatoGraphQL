@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('WSLPOP_WSL_MIN_VERSION', '2.3.0');
@@ -11,28 +10,28 @@ class WSL_PoP_Validation
     {
         $success = true;
         if (!defined('POP_ENGINEWP_VERSION')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'installWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'installWarning'));
             $success = false;
         } elseif (!defined('POP_ENGINEWP_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initializeWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (WSLPOP_POP_CMSWP_MIN_VERSION > POP_ENGINEWP_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'versionWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'versionWarning'));
         }
 
         global $WORDPRESS_SOCIAL_LOGIN_VERSION;
 
         // Validate plug-in
         if (!function_exists('wsl_activate')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'pluginWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'pluginWarning'));
             $success = false;
         } elseif (WSLPOP_WSL_MIN_VERSION > $WORDPRESS_SOCIAL_LOGIN_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'pluginversion_warning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'pluginversion_warning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'pluginversion_warning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'pluginversion_warning'));
         }
 
         return $success;

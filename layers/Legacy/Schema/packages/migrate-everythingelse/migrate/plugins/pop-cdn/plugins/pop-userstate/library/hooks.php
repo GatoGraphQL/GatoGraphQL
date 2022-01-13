@@ -1,12 +1,11 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 
 class PoP_CDN_UserState_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:hasParamValues',
             array($this, 'getRejectedParamvalues')
         );

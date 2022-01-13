@@ -1,6 +1,5 @@
 <?php
 use PoP\Engine\FormInputs\MultipleSelectFormInput;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_FormInput_OrganizationCategories extends MultipleSelectFormInput
 {
@@ -11,7 +10,7 @@ class GD_FormInput_OrganizationCategories extends MultipleSelectFormInput
         // The values here must be input from outside, to allow any potential website to add their own LinkCategories conveniently
         $values = array_merge(
             $values,
-            HooksAPIFacade::getInstance()->applyFilters('wassup_organizationcategories', array())
+            \PoP\Root\App::getHookManager()->applyFilters('wassup_organizationcategories', array())
         );
 
         return $values;

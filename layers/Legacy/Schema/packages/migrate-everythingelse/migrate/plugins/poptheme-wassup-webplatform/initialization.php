@@ -2,7 +2,6 @@
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\Facades\FileRendererFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ThemeWassupWebPlatform_Initialization
 {
@@ -13,13 +12,13 @@ class PoP_ThemeWassupWebPlatform_Initialization
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
             // After PoP
-            HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'), 100);
+            \PoP\Root\App::getHookManager()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'), 100);
 
             // Priority 0: print "style.css" immediately, so it starts rendering and applying these styles before anything else
-            HooksAPIFacade::getInstance()->addAction('popcms:printStyles', array($this, 'registerStyles'), 0);
+            \PoP\Root\App::getHookManager()->addAction('popcms:printStyles', array($this, 'registerStyles'), 0);
 
             // Inline styles
-            HooksAPIFacade::getInstance()->addAction('popcms:head', array($this, 'printInlineStyles'));
+            \PoP\Root\App::getHookManager()->addAction('popcms:head', array($this, 'printInlineStyles'));
         }
 
         /**

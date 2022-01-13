@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_AddHighlights_SubmenuHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_CustomSubMenus:single:mainsubheaders',
             array($this, 'addSingleMainsubheaders')
         );

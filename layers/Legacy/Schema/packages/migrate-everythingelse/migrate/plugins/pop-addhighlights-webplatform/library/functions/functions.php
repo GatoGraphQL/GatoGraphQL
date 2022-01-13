@@ -1,10 +1,9 @@
 <?php
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels', 'wassupMultilayoutLabels');
+\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:multilayout_labels', 'wassupMultilayoutLabels');
 function wassupMultilayoutLabels($labels)
 {
     $label = '<span class="label label-%s">%s</span>';
@@ -20,7 +19,7 @@ function wassupMultilayoutLabels($labels)
     );
 }
 
-HooksAPIFacade::getInstance()->addFilter('gd_postname', 'wassupPostname', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('gd_postname', 'wassupPostname', 10, 2);
 function wassupPostname($name, $post_id)
 {
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -31,7 +30,7 @@ function wassupPostname($name, $post_id)
     return $name;
 }
 
-HooksAPIFacade::getInstance()->addFilter('gd_posticon', 'wassupPosticon', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('gd_posticon', 'wassupPosticon', 10, 2);
 function wassupPosticon($icon, $post_id)
 {
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -42,7 +41,7 @@ function wassupPosticon($icon, $post_id)
     return $icon;
 }
 
-// HooksAPIFacade::getInstance()->addFilter('gdPostParentpageid', 'wassupPostParentpageid', 10, 2);
+// \PoP\Root\App::getHookManager()->addFilter('gdPostParentpageid', 'wassupPostParentpageid', 10, 2);
 // function wassupPostParentpageid($pageid, $post_id)
 // {
 //     $customostTypeAPI = CustomPostTypeAPIFacade::getInstance();

@@ -2,7 +2,6 @@
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\App;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
@@ -43,5 +42,5 @@ class PoP_MultiDomain_Engine_Utils
 /**
  * Initialization
  */
-HooksAPIFacade::getInstance()->addAction('ApplicationState:addVars', array(PoP_MultiDomain_Engine_Utils::class, 'addVars'), 10, 1);
-HooksAPIFacade::getInstance()->addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, array(PoP_MultiDomain_Engine_Utils::class, 'addModuleInstanceComponents'));
+\PoP\Root\App::getHookManager()->addAction('ApplicationState:addVars', array(PoP_MultiDomain_Engine_Utils::class, 'addVars'), 10, 1);
+\PoP\Root\App::getHookManager()->addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, array(PoP_MultiDomain_Engine_Utils::class, 'addModuleInstanceComponents'));

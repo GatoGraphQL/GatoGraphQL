@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Multidomain
 Description: Implementation of the multi-domain features for PoP
@@ -20,8 +19,8 @@ class PoP_MultiDomain
     {
 
         // Priority: after PoP CDN
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888420);
-        // HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this,'systemGenerate'));
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888420);
+        // \PoP\Root\App::getHookManager()->addAction('PoP:system-generate', array($this,'systemGenerate'));
     }
     public function init()
     {

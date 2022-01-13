@@ -2,7 +2,6 @@
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -15,7 +14,7 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
     {
 
         // Allow URE to override adding their own templates to include Community members in the filter
-        return HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_UserCardLayoutsBase:getAdditionalSubmodules', array(), $module);
+        return \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_UserCardLayoutsBase:getAdditionalSubmodules', array(), $module);
     }
 
     public function getSubmodules(array $module): array

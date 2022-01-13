@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CommonAutomatedEmails_ScreenHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Application_Utils:defaultformat_by_screen',
             array($this, 'getDefaultformatByScreen'),
             0,

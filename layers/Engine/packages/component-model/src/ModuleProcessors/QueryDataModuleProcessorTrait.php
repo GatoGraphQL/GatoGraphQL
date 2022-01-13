@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\PaginationParams;
-use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
-use PoP\Root\Hooks\HooksAPIInterface;
 
 trait QueryDataModuleProcessorTrait
 {
     use FilterDataModuleProcessorTrait;
 
-    abstract protected function getHooksAPI(): HooksAPIInterface;
     abstract protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler;
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
@@ -87,7 +85,7 @@ trait QueryDataModuleProcessorTrait
         if ($datasource == DataSources::MUTABLEONREQUEST && !($data_properties[DataloadingConstants::IGNOREREQUESTPARAMS] ?? null)) {
             // Merge with $_REQUEST, so that params passed through the URL can be used for the query (eg: ?limit=5)
             // But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
-            $whitelisted_params = (array)$this->getHooksAPI()->applyFilters(
+            $whitelisted_params = (array)App::getHookManager()->applyFilters(
                 Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
                 array(
                     PaginationParams::PAGE_NUMBER,
@@ -102,7 +100,7 @@ trait QueryDataModuleProcessorTrait
                 ARRAY_FILTER_USE_KEY
             );
 
-            $params_from_request = $this->getHooksAPI()->applyFilters(
+            $params_from_request = App::getHookManager()->applyFilters(
                 'QueryDataModuleProcessorTrait:request:filter_params',
                 $params_from_request
             );

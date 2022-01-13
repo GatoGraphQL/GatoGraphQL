@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserAvatarPoPForkPoP_Validation
@@ -10,8 +9,8 @@ class UserAvatarPoPForkPoP_Validation
 
         // Validate plug-in
         if (!function_exists('user_avatar_init')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'pluginWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'pluginWarning'));
             $success = false;
         }
 

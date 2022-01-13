@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Processor_InstantaneousSimpleFilterInnersBase
 {
@@ -26,7 +25,7 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
                 [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FILTERINPUTGROUP_BUTTONGROUP_POSTSECTIONS],
             ],
         ];
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+        if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
             'Blog:InstantaneousFilterInners:inputmodules',
             $inputmodules[$module[1]],
             $module

@@ -1,10 +1,9 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Priority 7: Just before calling in file wp-includes/class-wp-embed.php:
-// `HooksAPIFacade::getInstance()->addFilter( 'the_content', array( $this, 'run_shortcode' ), 8 );`
-HooksAPIFacade::getInstance()->addFilter('the_content', 'popwassupOembedUnsupported', 7);
+// `\PoP\Root\App::getHookManager()->addFilter( 'the_content', array( $this, 'run_shortcode' ), 8 );`
+\PoP\Root\App::getHookManager()->addFilter('the_content', 'popwassupOembedUnsupported', 7);
 function popwassupOembedUnsupported($content)
 {
 

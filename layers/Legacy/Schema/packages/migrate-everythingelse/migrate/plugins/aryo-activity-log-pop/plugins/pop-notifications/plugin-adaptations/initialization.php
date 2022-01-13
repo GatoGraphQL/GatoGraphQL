@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * Make plugin Activity Log compatible with PoP
  */
 // Execute them in init so we allow classes to hook into 'AAL_PoP_Hooks'
-HooksAPIFacade::getInstance()->addAction('init', 'aalPopInitAdaptations', 0);
+\PoP\Root\App::getHookManager()->addAction('init', 'aalPopInitAdaptations', 0);
 function aalPopInitAdaptations()
 {
 

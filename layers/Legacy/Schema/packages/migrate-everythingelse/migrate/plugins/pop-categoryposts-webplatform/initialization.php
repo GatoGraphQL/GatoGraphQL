@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PoP_CategoryPostsWebPlatform_Initialization
 {
     public function initialize()
@@ -19,7 +18,7 @@ class PoP_CategoryPostsWebPlatform_Initialization
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
             // After PoPTheme MESYM
-            HooksAPIFacade::getInstance()->addAction('popcms:printStyles', array($this, 'registerStyles'), 110);
+            \PoP\Root\App::getHookManager()->addAction('popcms:printStyles', array($this, 'registerStyles'), 110);
         }
     }
 

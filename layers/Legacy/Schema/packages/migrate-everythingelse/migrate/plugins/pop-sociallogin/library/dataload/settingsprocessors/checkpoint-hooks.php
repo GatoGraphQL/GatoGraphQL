@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class WSL_SettingsProcessor_CheckpointHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'Wassup_Module_SettingsProcessor:changepwdprofile:checkpoints',
             array($this, 'getChangepwdCheckpoints')
         );

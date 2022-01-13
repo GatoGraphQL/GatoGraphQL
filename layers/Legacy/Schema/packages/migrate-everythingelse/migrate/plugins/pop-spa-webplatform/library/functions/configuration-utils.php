@@ -2,7 +2,6 @@
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\SPA\ModuleFilters\Page;
 
@@ -28,6 +27,6 @@ class PoP_SPAWebPlatform_ConfigurationUtils
             $url_targets[$url] = $configuration['targets'];
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters('PoP_WebPlatform_ConfigurationUtils:backgroundload_urls', $url_targets);
+        return \PoP\Root\App::getHookManager()->applyFilters('PoP_WebPlatform_ConfigurationUtils:backgroundload_urls', $url_targets);
     }
 }

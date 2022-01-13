@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP User State
 Description: Implementation of User State for PoP
@@ -20,7 +19,7 @@ class PoP_UserState
     {
 
         // Priority: after PoP Engine
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888110);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888110);
     }
     public function init()
     {

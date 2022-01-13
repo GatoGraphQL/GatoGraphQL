@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
  * navigation.php
  */
-HooksAPIFacade::getInstance()->addFilter('route:icon', 'ureRouteIcon', 10, 3);
+\PoP\Root\App::getHookManager()->addFilter('route:icon', 'ureRouteIcon', 10, 3);
 function ureRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -28,7 +27,7 @@ function ureRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-HooksAPIFacade::getInstance()->addFilter('route:title', 'ureNavigationRouteTitle', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('route:title', 'ureNavigationRouteTitle', 10, 2);
 function ureNavigationRouteTitle($title, $route)
 {
     $titles = [

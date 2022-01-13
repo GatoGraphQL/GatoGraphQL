@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 function getMultilingualLanguageitems($shortnames = array())
 {
@@ -14,7 +13,7 @@ function getMultilingualLanguageitems($shortnames = array())
     if ($languages && count($languages) > 1) {
         // Allow to hook in the list of shortnames
         if (!$shortnames) {
-            $shortnames = HooksAPIFacade::getInstance()->applyFilters('getMultilingualLanguageitems:shortnames', array());
+            $shortnames = \PoP\Root\App::getHookManager()->applyFilters('getMultilingualLanguageitems:shortnames', array());
         }
         
         $current = $pluginapi->getCurrentLanguage();

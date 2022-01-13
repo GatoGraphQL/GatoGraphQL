@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP CDN
 Description: Implementation of the CDN for PoP
@@ -21,8 +20,8 @@ class PoP_CDN
     {
 
         // Priority: after PoP Engine Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888410);
-        // HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this,'systemGenerate'));
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888410);
+        // \PoP\Root\App::getHookManager()->addAction('PoP:system-generate', array($this,'systemGenerate'));
     }
     public function init()
     {

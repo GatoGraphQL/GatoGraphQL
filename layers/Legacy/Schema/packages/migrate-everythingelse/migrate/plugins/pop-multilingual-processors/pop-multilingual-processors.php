@@ -6,7 +6,6 @@ Description: The foundation for a PoP MultilingualProcessors
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_MultilingualProcessors
     {
 
         // Priority: after PoP Application Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888810);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888810);
     }
     public function init()
     {

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Add Post Links Web Platform
 Description: Implementation of Add Post Links Web Platform for PoP
@@ -22,7 +21,7 @@ class PoP_AddPostLinksWebPlatform
     {
 
         // Priority: after PoP Notifications Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888550);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888550);
     }
     public function init()
     {

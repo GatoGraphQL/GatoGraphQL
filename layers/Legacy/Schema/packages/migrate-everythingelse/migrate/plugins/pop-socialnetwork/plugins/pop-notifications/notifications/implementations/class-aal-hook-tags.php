@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
@@ -14,8 +13,8 @@ class PoP_SocialNetwork_Notifications_Hook_Tags /* extends AAL_Hook_Base*/
     {
 
         // Subscribed to/Unsubscribed from
-        HooksAPIFacade::getInstance()->addAction('gd_subscribetotag', array($this, 'subscribedtoTag'));
-        HooksAPIFacade::getInstance()->addAction('gd_unsubscribefromtag', array($this, 'unsubscribedfromTag'));
+        \PoP\Root\App::getHookManager()->addAction('gd_subscribetotag', array($this, 'subscribedtoTag'));
+        \PoP\Root\App::getHookManager()->addAction('gd_unsubscribefromtag', array($this, 'unsubscribedfromTag'));
 
         // parent::__construct();
     }

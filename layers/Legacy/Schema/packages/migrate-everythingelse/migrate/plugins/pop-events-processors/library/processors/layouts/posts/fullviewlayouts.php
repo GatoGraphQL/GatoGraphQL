@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_CustomFullViewLayoutsBase
 {
@@ -25,7 +24,7 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
                 $ret[] = [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION];
                 $ret[] = [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::MODULE_CODEWRAPPER_LAZYLOADINGSPINNER];
                 // Allow plugins to hook in layouts
-                $ret = HooksAPIFacade::getInstance()->applyFilters(
+                $ret = \PoP\Root\App::getHookManager()->applyFilters(
                     'GD_EM_Module_Processor_CustomFullViewLayouts:footer-modules',
                     $ret,
                     $module

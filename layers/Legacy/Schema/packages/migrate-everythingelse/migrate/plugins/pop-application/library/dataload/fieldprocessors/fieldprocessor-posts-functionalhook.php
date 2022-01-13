@@ -5,7 +5,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 
@@ -98,7 +97,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
         switch ($fieldName) {
             case 'multilayoutKeys':
                 // Allow pop-categorypostlayouts to add more layouts
-                return HooksAPIFacade::getInstance()->applyFilters(
+                return \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Application:TypeResolver_Posts:multilayout-keys',
                     array(
                         strtolower($objectTypeResolver->getTypeName()),

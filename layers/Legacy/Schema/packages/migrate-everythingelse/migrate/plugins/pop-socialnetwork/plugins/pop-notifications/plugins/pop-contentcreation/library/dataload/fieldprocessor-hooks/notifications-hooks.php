@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -10,7 +9,7 @@ class PoP_ContentCreation_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ContentCreation_DataLoad_TypeResolver_Notifications_Hook:post-created:message',
             array($this, 'getMessage'),
             10,

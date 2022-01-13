@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_Wassup_AE_NewsletterRecipientsBase extends PoP_SimpleProcessorAutomatedEmailsBase
 {
@@ -7,7 +6,7 @@ class PoPTheme_Wassup_AE_NewsletterRecipientsBase extends PoP_SimpleProcessorAut
     {
 
         // Allow Gravity Forms to hook the recipients in
-        return HooksAPIFacade::getInstance()->applyFilters('PoPTheme_Wassup_AE_NewsletterRecipientsBase:recipients', array());
+        return \PoP\Root\App::getHookManager()->applyFilters('PoPTheme_Wassup_AE_NewsletterRecipientsBase:recipients', array());
     }
 
     protected function getFrame()

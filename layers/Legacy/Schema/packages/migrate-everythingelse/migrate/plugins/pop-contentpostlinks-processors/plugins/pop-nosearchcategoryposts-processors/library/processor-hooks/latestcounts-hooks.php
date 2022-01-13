@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ContentPostLinks_NoSearchCategoryPosts_LatestCounts_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'latestcounts:nosearchcategoryposts:classes',
             array($this, 'getSectionClasses')
         );

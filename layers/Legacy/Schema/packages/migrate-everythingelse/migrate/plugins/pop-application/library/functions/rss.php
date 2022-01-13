@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * Standard
  */
 
-HooksAPIFacade::getInstance()->addFilter('pre_get_posts', 'gdRssFilter');
+\PoP\Root\App::getHookManager()->addFilter('pre_get_posts', 'gdRssFilter');
 function gdRssFilter($query)
 {
 

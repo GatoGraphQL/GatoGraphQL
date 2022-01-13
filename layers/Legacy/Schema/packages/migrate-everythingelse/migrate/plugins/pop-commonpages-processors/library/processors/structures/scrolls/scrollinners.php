@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
@@ -23,7 +22,7 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
         switch ($module[1]) {
             case self::MODULE_SCROLLINNER_WHOWEARE_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
-                return HooksAPIFacade::getInstance()->applyFilters(
+                return \PoP\Root\App::getHookManager()->applyFilters(
                     POP_HOOK_SCROLLINNER_THUMBNAIL_GRID,
                     array(
                         'row-items' => 3,

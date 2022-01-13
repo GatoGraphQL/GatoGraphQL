@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks;
 
+use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\HookNames;
 use PoP\Root\Hooks\AbstractHookSet;
@@ -14,13 +15,13 @@ class UserEnumTypeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::getHookManager()->addFilter(
             HookNames::ENUM_VALUES,
             [$this, 'getEnumValues'],
             10,
             2
         );
-        $this->getHooksAPI()->addFilter(
+        App::getHookManager()->addFilter(
             HookNames::ENUM_VALUE_DESCRIPTION,
             [$this, 'getEnumValueDescription'],
             10,

@@ -1,6 +1,5 @@
 <?php
 use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\DefinitionGroups;
 $definitionManager = DefinitionManagerFacade::getInstance();
 
@@ -22,7 +21,7 @@ if (!defined('POPTHEME_WASSUP_ROUTE_LOADERS_INITIALFRAMES')) {
     define('POPTHEME_WASSUP_ROUTE_LOADERS_INITIALFRAMES', $definitionManager->getUniqueDefinition('loaders/initial-frames', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

@@ -6,7 +6,6 @@ Description: Processors for the GetPoP Demo website, implemented using the Wassu
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class GetPoPDemo_PagesProcessors
     {
 
         // Priority: after PoP GetPoP Demo Pages
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888830);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888830);
     }
 
     public function init()

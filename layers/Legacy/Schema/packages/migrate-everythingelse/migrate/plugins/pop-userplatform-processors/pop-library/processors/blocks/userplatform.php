@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_BlocksBase
@@ -44,7 +43,7 @@ class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_Bloc
         switch ($module[1]) {
             case self::MODULE_BLOCK_INVITENEWUSERS:
                 // Allow Organik Fundraising to override it, changing the title to "Share by email"
-                return HooksAPIFacade::getInstance()->applyFilters(
+                return \PoP\Root\App::getHookManager()->applyFilters(
                     'GD_Core_Module_Processor_Blocks:inviteusers:description',
                     sprintf(
                         '<p>%s</p>',

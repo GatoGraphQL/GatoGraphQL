@@ -1,12 +1,11 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
  * login.php
  */
-HooksAPIFacade::getInstance()->addFilter('gdGetLoginHtml', 'gdUreGetLoginHtml', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('gdGetLoginHtml', 'gdUreGetLoginHtml', 10, 2);
 function gdUreGetLoginHtml($html, $capitalize = false)
 {
     $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();

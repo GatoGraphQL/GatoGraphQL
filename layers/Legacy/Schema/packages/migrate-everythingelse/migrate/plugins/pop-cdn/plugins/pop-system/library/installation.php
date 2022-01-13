@@ -1,12 +1,11 @@
 <?php
 use PoP\FileStore\Facades\FileRendererFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CDN_Installation
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this, 'systemGenerate'));
+        \PoP\Root\App::getHookManager()->addAction('PoP:system-generate', array($this, 'systemGenerate'));
     }
 
     public function systemGenerate()

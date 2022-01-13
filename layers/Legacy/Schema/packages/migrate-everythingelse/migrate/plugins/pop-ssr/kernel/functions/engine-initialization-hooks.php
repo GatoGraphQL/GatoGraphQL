@@ -11,30 +11,29 @@ use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_SSR_EngineInitialization_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'webplatform-engine:main_html',
             array($this, 'getMainHtml')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoPWebPlatform_Initialization:init-scripts',
             array($this, 'initScripts')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoPWebPlatform_Engine:encoded-data-object',
             array($this, 'getEncodedDataObject'),
             10,
             2
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'add-scripts:where',
             array($this, 'getScriptsWhere')
         );

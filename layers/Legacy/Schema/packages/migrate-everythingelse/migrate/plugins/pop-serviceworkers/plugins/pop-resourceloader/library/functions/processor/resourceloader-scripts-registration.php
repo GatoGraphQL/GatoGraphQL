@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ServiceWorkers_WebPlatform_ResourceLoader_ScriptsAndStylesRegistration
 {
@@ -16,7 +15,7 @@ class PoP_ServiceWorkers_WebPlatform_ResourceLoader_ScriptsAndStylesRegistration
         // Add a hook to remove unwanted resources. Eg:
         // POP_RESOURCELOADER_RESOURCELOADERCONFIG_EXTERNALRESOURCES
         // (These only make sense to be added on the External page)
-        $resources = HooksAPIFacade::getInstance()->applyFilters(
+        $resources = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_WebPlatform_ResourceLoader_ScriptsAndStylesRegistration:registerScripts',
             $resources
         );
@@ -39,7 +38,7 @@ class PoP_ServiceWorkers_WebPlatform_ResourceLoader_ScriptsAndStylesRegistration
         $resources = $pop_resourceloaderprocessor_manager->filterCss($resources);
 
         // Add a hook to remove unwanted resources.
-        $resources = HooksAPIFacade::getInstance()->applyFilters(
+        $resources = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_WebPlatform_ResourceLoader_ScriptsAndStylesRegistration:registerStyles',
             $resources
         );

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Content Creation Web Platform
 Description: Implementation of Content Creation Web Platform for PoP
@@ -21,7 +20,7 @@ class PoP_ContentCreationWebPlatform
     {
 
         // Priority: after PoP Locations Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888550);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888550);
     }
     public function init()
     {

@@ -2,11 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoP\HooksWP;
+namespace PoP\HooksWP\StateManagers;
 
-use PoP\Root\Hooks\HooksAPIInterface;
+use PoP\Root\StateManagers\HookManagerInterface;
 
-class HooksAPI implements HooksAPIInterface
+/**
+ * Use the WordPress hook system
+ */
+class HookManager implements HookManagerInterface
 {
     public function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
     {

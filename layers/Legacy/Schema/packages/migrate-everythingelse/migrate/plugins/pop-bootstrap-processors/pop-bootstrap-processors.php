@@ -6,7 +6,6 @@ Description: Plug-in providing a collection of processors for Bootstrap for the 
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -19,7 +18,7 @@ class PoP_BootstrapProcessors
     {
 
         // Priority: after PoP Base Collection Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888620);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888620);
     }
     public function init()
     {

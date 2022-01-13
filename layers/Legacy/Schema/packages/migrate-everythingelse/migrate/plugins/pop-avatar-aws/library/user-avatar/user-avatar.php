@@ -2,7 +2,6 @@
 use Aws\Common\Aws;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // use Aws\S3\Exception\S3Exception;
 
@@ -14,19 +13,19 @@ class PoP_Avatar_AWSFunctions
     {
 
         // Make the AWS functions take over the original ones
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'popcomponent:avatar:avatarexists',
             array($this, 'avatarExists'),
             10,
             3
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcomponent:avatar:avataruploaded',
             array($this, 'uploadToS3'),
             10,
             3
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'gdGetAvatarPhotoinfo:override',
             array($this, 'getPhotoInfo'),
             10,
@@ -34,7 +33,7 @@ class PoP_Avatar_AWSFunctions
         );
 
         // Register the AWS S3 domain in the Allowed Domains list
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'pop_modulemanager:allowed_domains',
             array($this, 'getAllowedDomains')
         );
@@ -204,7 +203,7 @@ class PoP_Avatar_AWSFunctions
         $domain = $scheme.'://'.$prefix.'.amazonaws.com/'.$this->getBucket().'/';
 
         // Allow to override the bucket, to add a CDN host instead (eg: media.tppdebate.org)
-        return GeneralUtils::maybeAddTrailingSlash(HooksAPIFacade::getInstance()->applyFilters('PoP_Avatar_AWS:bucket_url', $domain, $this->getBucket(), $region));
+        return GeneralUtils::maybeAddTrailingSlash(\PoP\Root\App::getHookManager()->applyFilters('PoP_Avatar_AWS:bucket_url', $domain, $this->getBucket(), $region));
     }
 
     protected function listObjects($prefix)

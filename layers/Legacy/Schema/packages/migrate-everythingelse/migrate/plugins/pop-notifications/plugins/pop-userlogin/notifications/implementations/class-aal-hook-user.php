@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -11,13 +10,13 @@ class PoP_Notifications_UserLogin_Hook_Users /* extends AAL_Hook_Base*/
     {
 
         // Logged in/out
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'gd:user:loggedin',
             array($this, 'loggedIn'),
             10,
             1
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'gd:user:loggedout',
             array($this, 'loggedOut'),
             10,

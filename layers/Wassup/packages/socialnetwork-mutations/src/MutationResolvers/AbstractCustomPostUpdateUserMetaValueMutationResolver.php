@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\Posts\Constants\InputNames;
 
@@ -53,7 +54,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
 
     protected function additionals($target_id, $form_data): void
     {
-        $this->getHooksAPI()->doAction('gd_updateusermetavalue:post', $target_id, $form_data);
+        App::getHookManager()->doAction('gd_updateusermetavalue:post', $target_id, $form_data);
         parent::additionals($target_id, $form_data);
     }
 }

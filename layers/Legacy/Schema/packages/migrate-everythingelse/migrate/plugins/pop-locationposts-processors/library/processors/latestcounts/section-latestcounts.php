@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_SectionLatestCountsBase
 {
@@ -53,7 +52,7 @@ class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends
         }
 
         // Allow to hook in POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS
-        $ret = HooksAPIFacade::getInstance()->applyFilters(
+        $ret = \PoP\Root\App::getHookManager()->applyFilters(
             'latestcounts:locationposts:classes',
             $ret,
             $module,

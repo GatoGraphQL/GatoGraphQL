@@ -1,7 +1,6 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'popWebPlatformAppJqueryConstantsCheckpointqueryhandler');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'popWebPlatformAppJqueryConstantsCheckpointqueryhandler');
 function popWebPlatformAppJqueryConstantsCheckpointqueryhandler($jqueryConstants)
 {
     $jqueryConstants['DATALOAD_USER'] = GD_DATALOAD_USER;

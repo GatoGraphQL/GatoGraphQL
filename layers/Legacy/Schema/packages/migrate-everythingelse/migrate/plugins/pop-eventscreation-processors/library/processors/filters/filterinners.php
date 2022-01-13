@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
@@ -29,7 +28,7 @@ class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_
                 // [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_HASHTAGS],
             ],
         ];
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+        if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
             'Events:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module

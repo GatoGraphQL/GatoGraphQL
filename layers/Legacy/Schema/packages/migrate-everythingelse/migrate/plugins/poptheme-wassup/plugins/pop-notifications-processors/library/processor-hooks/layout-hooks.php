@@ -1,15 +1,14 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_AAL_LayoutHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'GD_AAL_Module_Processor_FunctionsContentMultipleInners:markasread:layouts',
             array($this, 'markasreadLayouts')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'GD_AAL_Module_Processor_FunctionsContentMultipleInners:markasunread:layouts',
             array($this, 'markasunreadLayouts')
         );

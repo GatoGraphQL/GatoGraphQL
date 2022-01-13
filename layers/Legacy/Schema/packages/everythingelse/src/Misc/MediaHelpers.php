@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMedia\Misc;
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
+use PoP\Root\App;
 use PoPSchema\CustomPostMedia\Facades\CustomPostMediaTypeAPIFacade;
 
 class MediaHelpers
@@ -17,6 +17,6 @@ class MediaHelpers
         }
 
         // Default
-        return HooksAPIFacade::getInstance()->applyFilters('getThumbId:default', null, $post_id);
+        return App::getHookManager()->applyFilters('getThumbId:default', null, $post_id);
     }
 }

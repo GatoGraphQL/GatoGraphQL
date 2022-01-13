@@ -6,7 +6,6 @@ Description: Integration with plug-in qTranslate-X for the Platform of Platforms
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('QTX_POP_VERSION', 0.109);
 define('QTX_POP_DIR', dirname(__FILE__));
@@ -16,13 +15,13 @@ class QTX_PoP
     public function __construct()
     {
         include_once 'validation.php';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Multilingual_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
 
         // Priority: after PoP WordPress Application
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888360);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888360);
     }
     public function getProviderValidationClass($class)
     {

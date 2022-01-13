@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
  * navigation.php
  */
-HooksAPIFacade::getInstance()->addFilter('route:icon', 'popwassupUserstanceRouteIcon', 10, 3);
+\PoP\Root\App::getHookManager()->addFilter('route:icon', 'popwassupUserstanceRouteIcon', 10, 3);
 function popwassupUserstanceRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -41,7 +40,7 @@ function popwassupUserstanceRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-HooksAPIFacade::getInstance()->addFilter('route:title', 'popwassupUserstanceNavigationRouteTitle', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('route:title', 'popwassupUserstanceNavigationRouteTitle', 10, 2);
 function popwassupUserstanceNavigationRouteTitle($title, $route)
 {
     $titles = [

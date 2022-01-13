@@ -2,7 +2,6 @@
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
@@ -71,7 +70,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 // Allow URE to add the ContentSource
-                return HooksAPIFacade::getInstance()->applyFilters(
+                return \PoP\Root\App::getHookManager()->applyFilters(
                     'GD_EM_Module_Processor_CustomAnchorControls:pastevents:url',
                     RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS),
                     $author

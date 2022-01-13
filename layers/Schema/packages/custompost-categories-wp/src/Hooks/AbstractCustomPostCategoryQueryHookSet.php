@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostCategoriesWP\Hooks;
 
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 
@@ -11,7 +12,7 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::getHookManager()->addFilter(
             AbstractCustomPostTypeAPI::HOOK_QUERY,
             [$this, 'convertCustomPostsQuery'],
             10,

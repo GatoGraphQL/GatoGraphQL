@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class UpdateUserAvatarMutationResolver extends AbstractMutationResolver
@@ -26,6 +27,6 @@ class UpdateUserAvatarMutationResolver extends AbstractMutationResolver
 
     protected function additionals($user_id, $form_data): void
     {
-        $this->getHooksAPI()->doAction('gd_useravatar_update:additionals', $user_id, $form_data);
+        App::getHookManager()->doAction('gd_useravatar_update:additionals', $user_id, $form_data);
     }
 }

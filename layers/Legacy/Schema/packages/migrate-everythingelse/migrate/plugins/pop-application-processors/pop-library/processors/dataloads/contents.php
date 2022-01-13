@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
@@ -49,7 +48,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
             case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:
                 // Add the Sidebar on the top
-                if ($sidebar = HooksAPIFacade::getInstance()->applyFilters(
+                if ($sidebar = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomContentBlocks:author:sidebar',
                     [PoP_Module_Processor_CustomUserLayoutSidebars::class, PoP_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL],
                     $module
@@ -73,7 +72,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
                 $top_sidebar = [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST];
 
                 // Allow Events Manager to change the sidebar
-                if ($top_sidebar = HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomContentBlocks:single-sidebar:top', $top_sidebar, $post_id)) {
+                if ($top_sidebar = \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_CustomContentBlocks:single-sidebar:top', $top_sidebar, $post_id)) {
                     $ret[] = $top_sidebar;
                 }
 
@@ -82,7 +81,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
                 $bottom_sidebar = [PoPCore_Module_Processor_Contents::class, PoPCore_Module_Processor_Contents::MODULE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL];
 
                 // Allow Events Manager to change the sidebar
-                if ($bottom_sidebar = HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomContentBlocks:single-sidebar:bottom', $bottom_sidebar, $post_id)) {
+                if ($bottom_sidebar = \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_CustomContentBlocks:single-sidebar:bottom', $bottom_sidebar, $post_id)) {
                     $ret[] = $bottom_sidebar;
                 }
                 break;

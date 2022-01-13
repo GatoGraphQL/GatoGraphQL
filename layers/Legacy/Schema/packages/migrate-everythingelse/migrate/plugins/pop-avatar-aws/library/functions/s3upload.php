@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Avatar_AWS_S3Upload extends PoP_AWS_S3UploadBase
 {
@@ -9,21 +8,21 @@ class PoP_Avatar_AWS_S3Upload extends PoP_AWS_S3UploadBase
     {
         $this->files_to_upload = array();
 
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'user_avatar_add_photo:file-uploaded',
             array($this, 'maybeUploadToS3'),
             10,
             2
         );
 
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'user_avatar_add_photo:image-url',
             array($this, 'getImageUrl'),
             10,
             3
         );
 
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'user_avatar_add_photo:retrieve-file',
             array($this, 'maybeDownloadFromS3'),
             10,

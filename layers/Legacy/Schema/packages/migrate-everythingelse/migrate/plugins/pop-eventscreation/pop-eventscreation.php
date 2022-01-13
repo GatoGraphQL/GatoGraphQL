@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Events Creation
 Description: Implementation of Events Creation for PoP
@@ -20,7 +19,7 @@ class PoP_EventsCreation
     {
 
         // Priority: after PoP Events
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888380);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888380);
     }
     public function init()
     {

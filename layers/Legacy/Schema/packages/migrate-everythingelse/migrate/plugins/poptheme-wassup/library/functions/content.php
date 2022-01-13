@@ -1,25 +1,24 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 
 // Allow posts to have menu_order. This is needed for the TPP Debate website,
 // to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
-HooksAPIFacade::getInstance()->addAction('admin_init', 'gdPostsMenuorder');
+\PoP\Root\App::getHookManager()->addAction('admin_init', 'gdPostsMenuorder');
 function gdPostsMenuorder()
 {
     add_post_type_support('post', 'page-attributes');
 }
 
 // Make the tinymce always rich edit, also if user is logged out, or accessing the website using wget (so we can use wget to call /system/popinstall and save the service-workers.js file properly)
-HooksAPIFacade::getInstance()->addFilter('user_can_richedit', '__return_true', PHP_INT_MAX);
+\PoP\Root\App::getHookManager()->addFilter('user_can_richedit', '__return_true', PHP_INT_MAX);
 
 /**
  * Add Media: do ALWAYS add a link to the image
  */
-HooksAPIFacade::getInstance()->addFilter('media_send_to_editor', 'wassupMediaSendToEditor', 0, 3);
+\PoP\Root\App::getHookManager()->addFilter('media_send_to_editor', 'wassupMediaSendToEditor', 0, 3);
 function wassupMediaSendToEditor($html, $id, $attachment)
 {
 
@@ -62,17 +61,17 @@ function gdGetPostDescription()
 function gdHeaderRouteDescription()
 {
     $route = \PoP\Root\App::getState('route');
-    return HooksAPIFacade::getInstance()->applyFilters('gdHeaderRouteDescription', '', $route);
+    return \PoP\Root\App::getHookManager()->applyFilters('gdHeaderRouteDescription', '', $route);
 }
 
 function gdHeaderSiteDescription()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdHeaderSiteDescription', '');
+    return \PoP\Root\App::getHookManager()->applyFilters('gdHeaderSiteDescription', '');
 }
 
 function gdGetThemeColor()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdGetThemeColor', '#FFFFFF');
+    return \PoP\Root\App::getHookManager()->applyFilters('gdGetThemeColor', '#FFFFFF');
 }
 
 function gdGetDocumentThumb($size = 'large')

@@ -1,10 +1,9 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PoP_CommonUserRoles_Installation
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('PoP:system-build', array($this, 'installRoles'));
+        \PoP\Root\App::getHookManager()->addAction('PoP:system-build', array($this, 'installRoles'));
     }
 
     public function installRoles()

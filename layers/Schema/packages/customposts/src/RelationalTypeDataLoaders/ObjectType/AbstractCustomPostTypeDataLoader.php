@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType;
 
+use PoP\Root\App;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
@@ -65,7 +66,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
 
     protected function getLimitParam($query_args)
     {
-        return $this->getHooksAPI()->applyFilters(
+        return App::getHookManager()->applyFilters(
             'CustomPostTypeDataLoader:query:limit',
             parent::getLimitParam($query_args)
         );

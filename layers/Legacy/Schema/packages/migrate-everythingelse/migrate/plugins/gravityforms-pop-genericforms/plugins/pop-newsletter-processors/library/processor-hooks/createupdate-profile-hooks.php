@@ -1,22 +1,21 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter('gd_createupdate_profile:form_data', array($this, 'getFormData'), 10);
-        HooksAPIFacade::getInstance()->addFilter('pop_module:createprofile:components', array($this, 'getComponentSubmodules'), 10, 3);
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_profile:additionalsCreate', array($this, 'additionals'), 10, 1);
+        \PoP\Root\App::getHookManager()->addFilter('gd_createupdate_profile:form_data', array($this, 'getFormData'), 10);
+        \PoP\Root\App::getHookManager()->addFilter('pop_module:createprofile:components', array($this, 'getComponentSubmodules'), 10, 3);
+        \PoP\Root\App::getHookManager()->addAction('gd_createupdate_profile:additionalsCreate', array($this, 'additionals'), 10, 1);
     }
 
     public function enabled()
     {
 
         // By default it is not enabled
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'GD_GF_CreateUpdate_Profile_Hooks:enabled',
             false
         );

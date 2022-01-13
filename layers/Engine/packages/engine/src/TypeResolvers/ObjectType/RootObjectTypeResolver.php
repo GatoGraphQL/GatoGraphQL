@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ObjectType;
 
+use PoP\Root\App;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\Engine\ObjectModels\Root;
@@ -34,7 +35,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getHooksAPI()->applyFilters(
+        return App::getHookManager()->applyFilters(
             self::HOOK_DESCRIPTION,
             $this->__('Root type, starting from which the query is executed', 'api')
         );

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Root\App;
 use PoPSchema\UserMeta\Utils;
 class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfileMutationResolver
 {
@@ -14,7 +15,7 @@ class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfi
     }
     protected function usercommunitiesAdditionalsCreate($user_id, $form_data): void
     {
-        $this->getHooksAPI()->doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $form_data);
+        App::getHookManager()->doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $form_data);
     }
 
     protected function createuser($form_data)

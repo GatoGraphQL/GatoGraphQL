@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBase
@@ -39,7 +38,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
                 }
 
                 // Allow TPPDebate to add the Featured Block
-                if ($layouts = HooksAPIFacade::getInstance()->applyFilters(
+                if ($layouts = \PoP\Root\App::getHookManager()->applyFilters(
                     'UserStance_Module_Processor_CustomGroups:modules:hometop',
                     array(),
                     $module

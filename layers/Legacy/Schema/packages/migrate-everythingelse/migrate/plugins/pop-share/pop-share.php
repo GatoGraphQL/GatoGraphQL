@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Share
 Description: Implementation of Share for PoP
@@ -20,7 +19,7 @@ class PoP_Share
     {
 
         // Priority: after PoP Application
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888310);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888310);
     }
     public function init()
     {

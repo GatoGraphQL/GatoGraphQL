@@ -1,11 +1,10 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ServiceWorkers_UserState_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ServiceWorkers_Job_Fetch:exclude:partial',
             array($this, 'getExcludedPartialpaths'),
             10,
@@ -13,12 +12,12 @@ class PoP_ServiceWorkers_UserState_Hooks
         );
 
         $resourceType = 'json';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:startsWith:partial',
             array($this, 'getNetworkfirstJsonPartialpaths')
         );
 
-        // HooksAPIFacade::getInstance()->addFilter(
+        // \PoP\Root\App::getHookManager()->addFilter(
         //     'popSwAddEtagHeader',
         //     array($this, 'addEtagHeader')
         // );

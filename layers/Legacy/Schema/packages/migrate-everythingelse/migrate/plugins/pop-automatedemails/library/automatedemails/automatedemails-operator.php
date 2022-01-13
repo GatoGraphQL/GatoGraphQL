@@ -1,13 +1,12 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_AutomatedEmails_Operator
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:shutdown',
             array($this, 'maybeSendAutomatedemail')
         );
@@ -23,7 +22,7 @@ class PoP_AutomatedEmails_Operator
             if ($automatedemails = $pop_automatedemails_manager->getAutomatedEmails($route)) {
                 foreach ($automatedemails as $automatedemail) {
                     // Allow to change the header to 'newsletter' under PoPTheme Wassup
-                    $header = HooksAPIFacade::getInstance()->applyFilters(
+                    $header = \PoP\Root\App::getHookManager()->applyFilters(
                         'PoP_AutomatedEmails_Operator:automatedemail:header',
                         null
                     );

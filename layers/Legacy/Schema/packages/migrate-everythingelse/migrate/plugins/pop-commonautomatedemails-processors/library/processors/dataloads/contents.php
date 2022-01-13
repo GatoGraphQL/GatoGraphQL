@@ -1,6 +1,5 @@
 <?php
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Processor_DataloadsBase
@@ -32,7 +31,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
                 // Add the Sidebar on the top
                 $pid = $_REQUEST[\PoPSchema\Posts\Constants\InputNames::POST_ID];
-                if ($layout = HooksAPIFacade::getInstance()->applyFilters(
+                if ($layout = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoPTheme_Wassup_AE_Module_Processor_ContentDataloads:singlepost:sidebar',
                     [PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::class, PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
                     $pid

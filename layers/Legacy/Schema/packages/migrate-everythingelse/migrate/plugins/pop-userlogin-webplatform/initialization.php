@@ -2,7 +2,6 @@
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\Facades\FileRendererFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_UserLoginWebPlatform_Initialization
 {
@@ -12,11 +11,11 @@ class PoP_UserLoginWebPlatform_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
-            HooksAPIFacade::getInstance()->addAction('popcms:printStyles', array($this, 'registerStyles'), 100);
+            \PoP\Root\App::getHookManager()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::getHookManager()->addAction('popcms:printStyles', array($this, 'registerStyles'), 100);
 
             // Inline styles
-            HooksAPIFacade::getInstance()->addAction('popcms:head', array($this, 'printInlineStyles'));
+            \PoP\Root\App::getHookManager()->addAction('popcms:head', array($this, 'printInlineStyles'));
         }
 
         /**

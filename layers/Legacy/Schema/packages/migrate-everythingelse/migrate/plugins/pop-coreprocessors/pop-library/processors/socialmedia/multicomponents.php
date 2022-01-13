@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
@@ -68,7 +67,7 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
         }
 
         // Allow PoP Generic Forms Processors to add modules
-        $modules = HooksAPIFacade::getInstance()->applyFilters(
+        $modules = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_Module_Processor_SocialMediaMultipleComponents:modules',
             $modules,
             $module

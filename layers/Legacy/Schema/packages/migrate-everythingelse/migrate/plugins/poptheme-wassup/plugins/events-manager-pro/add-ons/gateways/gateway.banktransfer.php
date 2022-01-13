@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\App;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
@@ -26,10 +25,10 @@ if (class_exists("EM_Gateway_Offline")) {
             //Booking Interception
 
             // These actions have already been added by gateway.offline.php, if they are not removed they are executed twice
-            HooksAPIFacade::getInstance()->removeAction('em_admin_event_booking_options_buttons', array($this, 'event_booking_options_buttons'), 10);
-            HooksAPIFacade::getInstance()->removeAction('em_admin_event_booking_options', array($this, 'event_booking_options'), 10);
-            HooksAPIFacade::getInstance()->removeAction('em_bookings_single_metabox_footer', array($this, 'add_payment_form'), 1, 1); //add payment to booking
-            HooksAPIFacade::getInstance()->removeAction('em_bookings_manual_booking', array($this, 'add_booking_form'), 1, 1);
+            \PoP\Root\App::getHookManager()->removeAction('em_admin_event_booking_options_buttons', array($this, 'event_booking_options_buttons'), 10);
+            \PoP\Root\App::getHookManager()->removeAction('em_admin_event_booking_options', array($this, 'event_booking_options'), 10);
+            \PoP\Root\App::getHookManager()->removeAction('em_bookings_single_metabox_footer', array($this, 'add_payment_form'), 1, 1); //add payment to booking
+            \PoP\Root\App::getHookManager()->removeAction('em_bookings_manual_booking', array($this, 'add_booking_form'), 1, 1);
         }
 
         public function emWpLocalizeScript($em_localized_js)
@@ -63,7 +62,7 @@ if (class_exists("EM_Gateway_Offline")) {
                     if (!empty($EM_Booking->email_not_sent)) {
                         $return['message'] .=  ' '.$cmsService->getOption('dbem_booking_feedback_nomail');
                     }
-                    return HooksAPIFacade::getInstance()->applyFilters('em_gateway_' . $this->gateway . '_booking_add', $return, $EM_Booking->getEvent(), $EM_Booking);
+                    return \PoP\Root\App::getHookManager()->applyFilters('em_gateway_' . $this->gateway . '_booking_add', $return, $EM_Booking->getEvent(), $EM_Booking);
                 }
             }
             return $return;
