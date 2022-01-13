@@ -6,3 +6,9 @@ services:
 
     PoP\Root\Container\ServiceInstantiatorInterface:
         class: \PoP\Root\Container\ServiceInstantiator
+
+    PoP\Root\Translation\TranslationAPIInterface:
+        class: \PoP\Root\Translation\BasicTranslationAPI
+
+    PoP\Root\Hooks\HooksAPIInterface:
+        class: \PoP\Root\Hooks\HooksAPI

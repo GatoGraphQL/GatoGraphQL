@@ -9,9 +9,3 @@ services:
 
     PoP\Root\Registries\AppStateProviderRegistryInterface:
         class: \PoP\Root\Registries\AppStateProviderRegistry
-
-    PoP\Root\Translation\TranslationAPIInterface:
-        class: \PoP\Root\Translation\BasicTranslationAPI
-
-    PoP\Root\Hooks\HooksAPIInterface:
-        class: \PoP\Root\Hooks\HooksAPI
