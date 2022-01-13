@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\EngineWP\StateManagers;
+namespace PoP\HooksWP\StateManagers;
 
 use PoP\Root\StateManagers\HookManagerInterface;
 
