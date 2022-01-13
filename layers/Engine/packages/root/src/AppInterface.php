@@ -27,7 +27,7 @@ interface AppInterface
      * provide the default one.
      */
     public static function initialize(
-        ?AppLoader $appLoader = null,
+        ?AppLoaderInterface $appLoader = null,
         ?HookManagerInterface $hookManager = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
@@ -36,7 +36,7 @@ interface AppInterface
         ?MutationResolutionStore $mutationResolutionStore = null,
     ): void;
 
-    public static function getAppLoader(): AppLoader;
+    public static function getAppLoader(): AppLoaderInterface;
 
     public static function getHookManager(): HookManagerInterface;
 

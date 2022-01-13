@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Container;
  */
 class App implements AppInterface
 {
-    protected static AppLoader $appLoader;
+    protected static AppLoaderInterface $appLoader;
     protected static HookManagerInterface $hookManager;
     protected static ContainerBuilderFactory $containerBuilderFactory;
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
@@ -47,7 +47,7 @@ class App implements AppInterface
      * provide the default one.
      */
     public static function initialize(
-        ?AppLoader $appLoader = null,
+        ?AppLoaderInterface $appLoader = null,
         ?HookManagerInterface $hookManager = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
@@ -71,7 +71,7 @@ class App implements AppInterface
         self::$runtimeServices = [];
     }
 
-    protected static function createAppLoader(): AppLoader
+    protected static function createAppLoader(): AppLoaderInterface
     {
         return new AppLoader();
     }
@@ -106,7 +106,7 @@ class App implements AppInterface
         return new MutationResolutionStore();
     }
 
-    public static function getAppLoader(): AppLoader
+    public static function getAppLoader(): AppLoaderInterface
     {
         return self::$appLoader;
     }

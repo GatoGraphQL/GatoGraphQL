@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
 use LogicException;
 use PoP\Root\App as RootApp;
 use PoP\Root\AppInterface as RootAppInterface;
-use PoP\Root\AppLoader;
+use PoP\Root\AppLoaderInterface;
 use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
@@ -85,7 +85,7 @@ class App implements AppInterface, RootAppInterface
      * provide the default one.
      */
     public static function initialize(
-        ?AppLoader $appLoader = null,
+        ?AppLoaderInterface $appLoader = null,
         ?HookManagerInterface $hookManager = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
@@ -104,7 +104,7 @@ class App implements AppInterface, RootAppInterface
         );
     }
 
-    public static function getAppLoader(): AppLoader
+    public static function getAppLoader(): AppLoaderInterface
     {
         return RootApp::getAppLoader();
     }

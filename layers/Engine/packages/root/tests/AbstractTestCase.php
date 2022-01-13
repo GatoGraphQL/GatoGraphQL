@@ -45,7 +45,7 @@ abstract class AbstractTestCase extends TestCase
         App::getAppLoader()->bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
     }
 
-    protected static function getAppLoader(): AppLoader
+    protected static function getAppLoader(): AppLoaderInterface
     {
         return new AppLoader();
     }
