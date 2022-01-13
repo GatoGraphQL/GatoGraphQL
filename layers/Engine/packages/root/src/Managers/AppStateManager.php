@@ -11,7 +11,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 /**
  * Keep a reference to the global, shared state by the App
  */
-class AppStateManager
+class AppStateManager implements AppStateManagerInterface
 {
     /**
      * The state, stored under their own property as added by each Component
@@ -52,6 +52,9 @@ class AppStateManager
         }
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function all(): array
     {
         return $this->state;
@@ -66,7 +69,7 @@ class AppStateManager
     }
 
     /**
-     * @throws LogicException
+     * @throws LogicException If there is no state under the provided key
      */
     public function get(string $key): mixed
     {
@@ -83,7 +86,7 @@ class AppStateManager
     }
 
     /**
-     * @throws LogicException
+     * @throws LogicException If there is no state under the provided path
      */
     public function getUnder(array $path): mixed
     {
@@ -111,9 +114,6 @@ class AppStateManager
         return array_key_exists($key, $this->state);
     }
 
-    /**
-     * @throws LogicException
-     */
     public function hasUnder(array $path): bool
     {
         $state = &$this->state;

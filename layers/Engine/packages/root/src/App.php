@@ -9,6 +9,7 @@ use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Managers\AppStateManager;
+use PoP\Root\Managers\AppStateManagerInterface;
 use PoP\Root\Managers\ComponentManager;
 use PoP\Root\Managers\ComponentManagerInterface;
 use PoP\Root\Managers\HookManager;
@@ -26,7 +27,7 @@ class App implements AppInterface
     protected static ContainerBuilderFactory $containerBuilderFactory;
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
     protected static ComponentManagerInterface $componentManager;
-    protected static AppStateManager $appStateManager;
+    protected static AppStateManagerInterface $appStateManager;
     protected static MutationResolutionStore $mutationResolutionStore;
     /** @var string[] */
     protected static array $componentClassesToInitialize = [];
@@ -51,7 +52,7 @@ class App implements AppInterface
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManagerInterface $componentManager = null,
-        ?AppStateManager $appStateManager = null,
+        ?AppStateManagerInterface $appStateManager = null,
         ?MutationResolutionStore $mutationResolutionStore = null,
     ): void {
         self::$appLoader = $appLoader ?? static::createAppLoader();
@@ -95,7 +96,7 @@ class App implements AppInterface
         return new ComponentManager();
     }
 
-    protected static function createAppStateManager(): AppStateManager
+    protected static function createAppStateManager(): AppStateManagerInterface
     {
         return new AppStateManager();
     }
@@ -130,7 +131,7 @@ class App implements AppInterface
         return self::$componentManager;
     }
 
-    public static function getAppStateManager(): AppStateManager
+    public static function getAppStateManager(): AppStateManagerInterface
     {
         return self::$appStateManager;
     }

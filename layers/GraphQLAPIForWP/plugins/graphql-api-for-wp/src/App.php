@@ -15,7 +15,7 @@ use PoP\Root\AppLoader;
 use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
-use PoP\Root\Managers\AppStateManager;
+use PoP\Root\Managers\AppStateManagerInterface;
 use PoP\Root\Managers\ComponentManagerInterface;
 use PoP\Root\Managers\HookManagerInterface;
 use PoP\Root\Stores\MutationResolutionStore;
@@ -90,7 +90,7 @@ class App implements AppInterface, RootAppInterface
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManagerInterface $componentManager = null,
-        ?AppStateManager $appStateManager = null,
+        ?AppStateManagerInterface $appStateManager = null,
         ?MutationResolutionStore $mutationResolutionStore = null,
     ): void {
         RootApp::initialize(
