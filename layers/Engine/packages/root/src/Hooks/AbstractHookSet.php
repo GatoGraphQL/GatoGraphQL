@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\BasicService;
+namespace PoP\Root\Hooks;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 

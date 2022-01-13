@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLRequest\Hooks;
 
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoP\ComponentModel\CheckpointProcessors\MutationCheckpointProcessor;
 
 class VarsHookSet extends AbstractHookSet

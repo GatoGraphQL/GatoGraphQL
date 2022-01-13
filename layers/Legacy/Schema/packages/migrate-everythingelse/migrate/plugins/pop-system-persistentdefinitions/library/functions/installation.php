@@ -1,6 +1,6 @@
 <?php
 use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 

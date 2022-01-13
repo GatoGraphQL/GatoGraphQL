@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\SchemaHooks;
 
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\Categories\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\Posts\ModuleProcessors\AbstractPostFilterInputContainerModuleProcessor;
 

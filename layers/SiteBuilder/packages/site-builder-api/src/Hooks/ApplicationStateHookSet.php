@@ -6,7 +6,7 @@ namespace PoP\SiteBuilderAPI\Hooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {

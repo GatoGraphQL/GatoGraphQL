@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Engine\ModuleFilters\HeadModule;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class HeadModuleHookSet extends AbstractHookSet
 {

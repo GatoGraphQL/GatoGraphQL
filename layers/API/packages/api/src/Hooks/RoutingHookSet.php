@@ -10,7 +10,7 @@ use PoP\API\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class RoutingHookSet extends AbstractHookSet
 {

@@ -6,7 +6,7 @@ namespace PoPSchema\PostCategories\Hooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\CustomPosts\Routing\RouteNatures;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;

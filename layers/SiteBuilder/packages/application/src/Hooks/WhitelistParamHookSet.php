@@ -6,7 +6,7 @@ namespace PoP\Application\Hooks;
 
 use PoP\Application\Constants\Response;
 use PoP\ComponentModel\ModuleProcessors\Constants;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class WhitelistParamHookSet extends AbstractHookSet
 {

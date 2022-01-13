@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags\Hooks;
 
 use PoP\Root\App;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoP\Routing\RouteHookNames;
 use PoPSchema\PostTags\Component;
 use PoPSchema\PostTags\ComponentConfiguration;
