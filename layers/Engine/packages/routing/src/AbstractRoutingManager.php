@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Routing;
 
+use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractRoutingManager implements RoutingManagerInterface
@@ -22,7 +23,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
     {
         if ($this->routes === null) {
             $this->routes = array_filter(
-                (array) \PoP\Root\App::getHookManager()->applyFilters(
+                (array) App::getHookManager()->applyFilters(
                     RouteHookNames::ROUTES,
                     []
                 )
@@ -72,7 +73,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
         }
 
         // Allow to change it
-        return (string) \PoP\Root\App::getHookManager()->applyFilters(
+        return (string) App::getHookManager()->applyFilters(
             RouteHookNames::CURRENT_ROUTE,
             $route,
             $nature

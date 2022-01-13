@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\Root\App;
 use Exception;
 use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -31,7 +32,7 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
 
     private function getFormInputs()
     {
-        $inputs = \PoP\Root\App::getHookManager()->applyFilters(
+        $inputs = App::getHookManager()->applyFilters(
             'GD_CreateUpdate_ProfileIndividual_Trait:form-inputs',
             array(
                 'last_name' => null,

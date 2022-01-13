@@ -85,7 +85,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             return $this->consolidatedInputFieldNameTypeResolversCache;
         }
 
-        $consolidatedInputFieldNameTypeResolvers = \PoP\Root\App::getHookManager()->applyFilters(
+        $consolidatedInputFieldNameTypeResolvers = App::getHookManager()->applyFilters(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
             $this->getInputFieldNameTypeResolvers(),
             $this,
@@ -117,7 +117,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             return $this->consolidatedAdminInputFieldNames;
         }
 
-        $this->consolidatedAdminInputFieldNames = \PoP\Root\App::getHookManager()->applyFilters(
+        $this->consolidatedAdminInputFieldNames = App::getHookManager()->applyFilters(
             HookNames::ADMIN_INPUT_FIELD_NAMES,
             $this->getAdminInputFieldNames(),
             $this,
@@ -134,7 +134,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldDescriptionCache)) {
             return $this->consolidatedInputFieldDescriptionCache[$inputFieldName];
         }
-        $this->consolidatedInputFieldDescriptionCache[$inputFieldName] = \PoP\Root\App::getHookManager()->applyFilters(
+        $this->consolidatedInputFieldDescriptionCache[$inputFieldName] = App::getHookManager()->applyFilters(
             HookNames::INPUT_FIELD_DESCRIPTION,
             $this->getInputFieldDescription($inputFieldName),
             $this,
@@ -152,7 +152,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldDefaultValueCache)) {
             return $this->consolidatedInputFieldDefaultValueCache[$inputFieldName];
         }
-        $this->consolidatedInputFieldDefaultValueCache[$inputFieldName] = \PoP\Root\App::getHookManager()->applyFilters(
+        $this->consolidatedInputFieldDefaultValueCache[$inputFieldName] = App::getHookManager()->applyFilters(
             HookNames::INPUT_FIELD_DEFAULT_VALUE,
             $this->getInputFieldDefaultValue($inputFieldName),
             $this,
@@ -170,7 +170,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldTypeModifiersCache)) {
             return $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName];
         }
-        $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName] = \PoP\Root\App::getHookManager()->applyFilters(
+        $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName] = App::getHookManager()->applyFilters(
             HookNames::INPUT_FIELD_TYPE_MODIFIERS,
             $this->getInputFieldTypeModifiers($inputFieldName),
             $this,
@@ -563,7 +563,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldExtensionsCache)) {
             return $this->consolidatedInputFieldExtensionsCache[$inputFieldName];
         }
-        $this->consolidatedInputFieldExtensionsCache[$inputFieldName] = \PoP\Root\App::getHookManager()->applyFilters(
+        $this->consolidatedInputFieldExtensionsCache[$inputFieldName] = App::getHookManager()->applyFilters(
             HookNames::INPUT_FIELD_EXTENSIONS,
             $this->getInputFieldExtensionsSchemaDefinition($inputFieldName),
             $this,

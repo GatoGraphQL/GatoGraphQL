@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -132,9 +133,9 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         $user_id = $this->getUserTypeAPI()->getUserId($user);
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $title = sprintf($this->__('[%s] Password Reset'), $cmsapplicationapi->getSiteName());
-        $title = \PoP\Root\App::getHookManager()->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);
+        $title = App::getHookManager()->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);
         $message = $this->retrievePasswordMessage($key, $user_login, $user_id);
-        $message = \PoP\Root\App::getHookManager()->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
+        $message = App::getHookManager()->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
 
         $user_email = $this->getUserTypeAPI()->getUserEmail($user);
         return PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);

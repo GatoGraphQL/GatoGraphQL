@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\TagsWP\TypeAPIs;
 
+use PoP\Root\App;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -117,7 +118,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         // Convert the parameters
         $query['taxonomy'] = $this->getTagTaxonomyName();
 
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return App::getHookManager()->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options

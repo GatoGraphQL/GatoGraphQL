@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
+use PoP\Root\App;
 use Exception;
 use stdClass;
 
@@ -29,7 +30,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         if ($this->consolidatedInputFieldNameMutationResolversCache !== null) {
             return $this->consolidatedInputFieldNameMutationResolversCache;
         }
-        $this->consolidatedInputFieldNameMutationResolversCache = \PoP\Root\App::getHookManager()->applyFilters(
+        $this->consolidatedInputFieldNameMutationResolversCache = App::getHookManager()->applyFilters(
             HookNames::INPUT_FIELD_NAME_MUTATION_RESOLVERS,
             $this->getInputFieldNameMutationResolvers(),
             $this,

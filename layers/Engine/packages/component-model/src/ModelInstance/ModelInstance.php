@@ -51,7 +51,7 @@ class ModelInstance implements ModelInstanceInterface
         $components = array();
 
         // Mix the information specific to the module, with that present in the application state
-        $components = (array)\PoP\Root\App::getHookManager()->applyFilters(
+        $components = (array)App::getHookManager()->applyFilters(
             self::HOOK_COMPONENTS_RESULT,
             array_merge(
                 $components,
@@ -101,7 +101,7 @@ class ModelInstance implements ModelInstanceInterface
 
         // Can the configuration change when doing a POST or GET?
         if (
-            \PoP\Root\App::getHookManager()->applyFilters(
+            App::getHookManager()->applyFilters(
                 self::HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE,
                 false
             )
@@ -127,7 +127,7 @@ class ModelInstance implements ModelInstanceInterface
         }
 
         // Allow for plug-ins to add their own vars. Eg: URE source parameter
-        return (array)\PoP\Root\App::getHookManager()->applyFilters(
+        return (array)App::getHookManager()->applyFilters(
             self::HOOK_COMPONENTSFROMVARS_RESULT,
             $components
         );

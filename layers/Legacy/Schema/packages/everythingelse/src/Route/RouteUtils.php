@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Route;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
@@ -20,7 +21,7 @@ class RouteUtils
 
     public static function getRouteTitle($route)
     {
-        $title = \PoP\Root\App::getHookManager()->applyFilters(
+        $title = App::getHookManager()->applyFilters(
             'route:title',
             $route,
             $route

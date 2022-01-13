@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class MarkAllAsReadNotificationMutationResolver extends AbstractMutationResolver
 {
     protected function additionals($form_data): void
     {
-        \PoP\Root\App::getHookManager()->doAction('GD_NotificationMarkAllAsRead:additionals', $form_data);
+        App::getHookManager()->doAction('GD_NotificationMarkAllAsRead:additionals', $form_data);
     }
 
     protected function markAllAsRead($form_data)

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\Hooks;
 
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\UserState\FieldResolvers\ObjectType\GlobalObjectTypeFieldResolver;
 
@@ -22,7 +23,7 @@ class DBEntriesHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
             array($this, 'moveEntriesUnderDBName'),
             10,
@@ -32,7 +33,7 @@ class DBEntriesHookSet extends AbstractHookSet
 
     public function moveEntriesUnderDBName(array $dbname_datafields): array
     {
-        $dbname_datafields['userstate'] = \PoP\Root\App::getHookManager()->applyFilters(
+        $dbname_datafields['userstate'] = App::getHookManager()->applyFilters(
             'PoPSchema\UserState\DataloaderHooks:metaFields',
             $this->getGlobalObjectTypeFieldResolver()->getFieldNamesToResolve()
         );

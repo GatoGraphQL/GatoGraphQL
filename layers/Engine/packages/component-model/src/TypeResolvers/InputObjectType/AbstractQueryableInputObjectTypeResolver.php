@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
+use PoP\Root\App;
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface;
 use stdClass;
@@ -38,7 +39,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldFilterInputCache)) {
             return $this->consolidatedInputFieldFilterInputCache[$inputFieldName];
         }
-        $this->consolidatedInputFieldFilterInputCache[$inputFieldName] = \PoP\Root\App::getHookManager()->applyFilters(
+        $this->consolidatedInputFieldFilterInputCache[$inputFieldName] = App::getHookManager()->applyFilters(
             HookNames::INPUT_FIELD_FILTER_INPUT,
             $this->getInputFieldFilterInput($inputFieldName),
             $this,

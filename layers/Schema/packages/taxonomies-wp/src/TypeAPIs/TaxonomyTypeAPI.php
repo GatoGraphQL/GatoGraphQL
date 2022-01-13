@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomiesWP\TypeAPIs;
 
+use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -107,7 +108,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             unset($query['parent-id']);
         }
 
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return App::getHookManager()->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
@@ -128,7 +129,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             TaxonomyOrderBy::DESCRIPTION => 'description',
             default => $orderBy,
         };
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return App::getHookManager()->applyFilters(
             self::HOOK_ORDERBY_QUERY_ARG_VALUE,
             $orderBy
         );

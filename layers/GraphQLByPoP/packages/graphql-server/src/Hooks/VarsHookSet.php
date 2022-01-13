@@ -12,7 +12,7 @@ class VarsHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromAppState')
         );

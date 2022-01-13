@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\Hooks;
 
+use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -38,13 +39,13 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
             array($this, 'maybeAddInputFieldNameTypeResolvers'),
             10,
             2
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             HookNames::INPUT_FIELD_DESCRIPTION,
             array($this, 'maybeAddInputFieldDescription'),
             10,

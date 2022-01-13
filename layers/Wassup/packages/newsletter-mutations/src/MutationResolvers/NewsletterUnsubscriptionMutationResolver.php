@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
@@ -55,7 +56,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data): void
     {
-        \PoP\Root\App::getHookManager()->doAction('pop_unsubscribe_from_newsletter', $form_data);
+        App::getHookManager()->doAction('pop_unsubscribe_from_newsletter', $form_data);
     }
 
     /**

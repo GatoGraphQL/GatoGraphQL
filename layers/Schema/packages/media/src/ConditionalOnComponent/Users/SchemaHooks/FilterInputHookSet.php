@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\ConditionalOnComponent\Users\SchemaHooks;
 
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\Media\ModuleProcessors\MediaFilterInputContainerModuleProcessor;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
@@ -12,7 +13,7 @@ class FilterInputHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             MediaFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
             [$this, 'getFilterInputModules']
         );

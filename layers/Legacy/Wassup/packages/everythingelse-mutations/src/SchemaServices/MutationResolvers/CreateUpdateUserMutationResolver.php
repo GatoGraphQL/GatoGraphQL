@@ -192,15 +192,15 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     protected function additionals($user_id, $form_data): void
     {
-        \PoP\Root\App::getHookManager()->doAction('gd_createupdate_user:additionals', $user_id, $form_data);
+        App::getHookManager()->doAction('gd_createupdate_user:additionals', $user_id, $form_data);
     }
     protected function additionalsUpdate($user_id, $form_data): void
     {
-        \PoP\Root\App::getHookManager()->doAction('gd_createupdate_user:additionalsUpdate', $user_id, $form_data);
+        App::getHookManager()->doAction('gd_createupdate_user:additionalsUpdate', $user_id, $form_data);
     }
     protected function additionalsCreate($user_id, $form_data): void
     {
-        \PoP\Root\App::getHookManager()->doAction('gd_createupdate_user:additionalsCreate', $user_id, $form_data);
+        App::getHookManager()->doAction('gd_createupdate_user:additionalsCreate', $user_id, $form_data);
     }
 
     public function validateErrors(array $form_data): array

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentsWP\ConditionalOnComponent\Users\Hooks;
 
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\Comments\ConditionalOnComponent\Users\Constants\CommentOrderBy;
 use PoPSchema\CommentsWP\TypeAPIs\CommentTypeAPI;
@@ -12,14 +13,14 @@ class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             CommentTypeAPI::HOOK_QUERY,
             [$this, 'convertCommentQuery'],
             10,
             2
         );
 
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             CommentTypeAPI::HOOK_ORDERBY_QUERY_ARG_VALUE,
             [$this, 'getOrderByQueryArgValue']
         );

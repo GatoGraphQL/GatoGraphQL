@@ -25,7 +25,7 @@ class TemplateHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             'template_include',
             [$this, 'setTemplate'],
             // Execute last

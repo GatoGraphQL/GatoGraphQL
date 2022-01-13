@@ -14,7 +14,7 @@ class CacheUtils
 
     public static function getSchemaCacheKeyComponents(): array
     {
-        $hooksAPI = \PoP\Root\App::getHookManager();
+        $hooksAPI = App::getHookManager();
         /** @var EngineComponentConfiguration */
         $componentConfiguration = App::getComponent(EngineComponent::class)->getConfiguration();
         return (array)$hooksAPI->applyFilters(

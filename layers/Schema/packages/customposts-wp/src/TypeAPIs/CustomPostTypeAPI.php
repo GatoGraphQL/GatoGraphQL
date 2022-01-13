@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
+use PoP\Root\App;
 class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
@@ -15,7 +16,7 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return App::getHookManager()->applyFilters(
             self::HOOK_QUERY,
             parent::convertCustomPostsQuery($query, $options),
             $options

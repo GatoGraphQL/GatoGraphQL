@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks;
 
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
 abstract class AbstractCMSBootHookSet extends AbstractHookSet
@@ -13,7 +14,7 @@ abstract class AbstractCMSBootHookSet extends AbstractHookSet
      */
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addAction(
+        App::getHookManager()->addAction(
             'popcms:boot',
             [$this, 'cmsBoot'],
             $this->getPriority()

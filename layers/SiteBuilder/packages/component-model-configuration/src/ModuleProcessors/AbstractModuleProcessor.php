@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;
@@ -108,7 +109,7 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
     protected function maybeOverrideCheckpoints($checkpoints)
     {
         // Allow URE to add the extra checkpoint condition of the user having the Profile role
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return App::getHookManager()->applyFilters(
             'ModuleProcessor:checkpoints',
             $checkpoints
         );

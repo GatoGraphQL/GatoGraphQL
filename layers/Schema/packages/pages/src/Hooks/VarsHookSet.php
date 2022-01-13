@@ -14,7 +14,7 @@ class VarsHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromAppState')
         );
@@ -24,7 +24,7 @@ class VarsHookSet extends AbstractHookSet
     {
         switch (App::getState('nature')) {
             case RouteNatures::PAGE:
-                $component_types = \PoP\Root\App::getHookManager()->applyFilters(
+                $component_types = App::getHookManager()->applyFilters(
                     '\PoPSchema\Pages\ModelInstanceProcessor_Utils:components_from_vars:type:page',
                     []
                 );

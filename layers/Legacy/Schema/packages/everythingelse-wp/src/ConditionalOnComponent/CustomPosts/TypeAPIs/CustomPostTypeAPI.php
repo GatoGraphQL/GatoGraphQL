@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElseWP\ConditionalOnComponent\CustomPosts\TypeAPIs;
 
+use PoP\Root\App;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
@@ -30,7 +31,7 @@ class CustomPostTypeAPI extends \PoPSchema\CustomPostsWP\TypeAPIs\CustomPostType
                 $readmore
             ) :
             $customPost->post_excerpt;
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return App::getHookManager()->applyFilters(
             'get_the_excerpt',
             $value,
             $customPostID

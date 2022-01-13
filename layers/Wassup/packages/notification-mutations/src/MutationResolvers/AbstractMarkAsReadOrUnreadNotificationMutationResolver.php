@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends AbstractMutationResolver
@@ -26,7 +27,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
 
     protected function additionals($histid, $form_data): void
     {
-        \PoP\Root\App::getHookManager()->doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $form_data);
+        App::getHookManager()->doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $form_data);
     }
 
     abstract protected function getStatus();

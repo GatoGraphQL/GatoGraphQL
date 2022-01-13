@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\ConditionalOnComponent\Users\SchemaHooks;
 
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks\FilterInputHookSet as UserCustomPostFilterInputHookSet;
 
@@ -22,7 +23,7 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             $this->getHookNameToRemoveFilterInput(),
             [$this, 'getFilterInputModules']
         );

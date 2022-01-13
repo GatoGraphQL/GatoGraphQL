@@ -14,7 +14,7 @@ class RoutingHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addAction(
+        App::getHookManager()->addAction(
             RouteHookNames::ROUTES,
             [$this, 'registerRoutes']
         );

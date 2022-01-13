@@ -45,7 +45,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        \PoP\Root\App::getHookManager()->doAction('gd_downvotepost', $target_id, $form_data);
+        App::getHookManager()->doAction('gd_downvotepost', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int

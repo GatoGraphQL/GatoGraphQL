@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\UserMeta\Utils;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
@@ -55,7 +56,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         );
 
         // Allow to send an email before the update: get the current communities, so we know which ones are new
-        \PoP\Root\App::getHookManager()->doAction('gd_update_mycommunities:update', $user_id, $form_data, $operationlog);
+        App::getHookManager()->doAction('gd_update_mycommunities:update', $user_id, $form_data, $operationlog);
 
         return $user_id;
         // Update: either updated or no banned communities (even if nothing changed, tell the user update was successful)

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Engine\CMS\CMSServiceInterface;
@@ -43,10 +44,10 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
         if (!in_array($plugin, $current)) {
             $current[] = $plugin;
             sort($current);
-            \PoP\Root\App::getHookManager()->doAction('activate_plugin', trim($plugin));
+            App::getHookManager()->doAction('activate_plugin', trim($plugin));
             update_option('active_plugins', $current);
-            \PoP\Root\App::getHookManager()->doAction('activate_' . trim($plugin));
-            \PoP\Root\App::getHookManager()->doAction('activated_plugin', trim($plugin));
+            App::getHookManager()->doAction('activate_' . trim($plugin));
+            App::getHookManager()->doAction('activated_plugin', trim($plugin));
             return true;
         }
 
@@ -57,7 +58,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     {
         // Plugins needed by the website. Check the website version, if it's the one indicated,
         // then proceed to install the required plugin
-        $plugin_version = \PoP\Root\App::getHookManager()->applyFilters(
+        $plugin_version = App::getHookManager()->applyFilters(
             'PoP:system-activateplugins:plugins',
             array()
         );

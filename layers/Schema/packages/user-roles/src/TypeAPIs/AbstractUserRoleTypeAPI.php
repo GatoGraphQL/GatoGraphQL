@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\TypeAPIs;
 
+use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
@@ -15,7 +16,7 @@ abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
         $roles = $this->getUserRoles($userObjectOrID);
         $role = $roles[0] ?? null;
         // Allow URE to override this function
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return App::getHookManager()->applyFilters(
             'getTheUserRole',
             $role,
             $userObjectOrID

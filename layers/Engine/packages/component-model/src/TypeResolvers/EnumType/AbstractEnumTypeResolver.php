@@ -123,7 +123,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         /**
          * Allow to override/extend the enum values
          */
-        $consolidatedEnumValues = \PoP\Root\App::getHookManager()->applyFilters(
+        $consolidatedEnumValues = App::getHookManager()->applyFilters(
             HookNames::ENUM_VALUES,
             $this->getEnumValues(),
             $this,
@@ -150,7 +150,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         if ($this->consolidatedAdminEnumValuesCache !== null) {
             return $this->consolidatedAdminEnumValuesCache;
         }
-        return $this->consolidatedAdminEnumValuesCache = \PoP\Root\App::getHookManager()->applyFilters(
+        return $this->consolidatedAdminEnumValuesCache = App::getHookManager()->applyFilters(
             HookNames::ADMIN_ENUM_VALUES,
             $this->getAdminEnumValues(),
             $this,
@@ -163,7 +163,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         if (array_key_exists($enumValue, $this->consolidatedEnumValueDescriptionCache)) {
             return $this->consolidatedEnumValueDescriptionCache[$enumValue];
         }
-        return $this->consolidatedEnumValueDescriptionCache[$enumValue] = \PoP\Root\App::getHookManager()->applyFilters(
+        return $this->consolidatedEnumValueDescriptionCache[$enumValue] = App::getHookManager()->applyFilters(
             HookNames::ENUM_VALUE_DESCRIPTION,
             $this->getEnumValueDescription($enumValue),
             $this,
@@ -177,7 +177,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         if (array_key_exists($enumValue, $this->consolidatedEnumValueDeprecationMessageCache)) {
             return $this->consolidatedEnumValueDeprecationMessageCache[$enumValue];
         }
-        return $this->consolidatedEnumValueDeprecationMessageCache[$enumValue] = \PoP\Root\App::getHookManager()->applyFilters(
+        return $this->consolidatedEnumValueDeprecationMessageCache[$enumValue] = App::getHookManager()->applyFilters(
             HookNames::ENUM_VALUE_DEPRECATION_MESSAGE,
             $this->getEnumValueDeprecationMessage($enumValue),
             $this,
@@ -248,7 +248,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         if (array_key_exists($enumValue, $this->consolidatedEnumValueExtensionsCache)) {
             return $this->consolidatedEnumValueExtensionsCache[$enumValue];
         }
-        $this->consolidatedEnumValueExtensionsCache[$enumValue] = \PoP\Root\App::getHookManager()->applyFilters(
+        $this->consolidatedEnumValueExtensionsCache[$enumValue] = App::getHookManager()->applyFilters(
             HookNames::ENUM_VALUE_EXTENSIONS,
             $this->getEnumValueExtensionsSchemaDefinition($enumValue),
             $this,

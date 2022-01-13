@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\EngineWP\Hooks;
 
+use PoP\Root\App;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
 use PoP\EngineWP\Templates\TemplateHelpers;
 use PoP\Root\Hooks\AbstractHookSet;
@@ -23,7 +24,7 @@ class TemplateHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             'template_include',
             [$this, 'setTemplate'],
             // Execute last

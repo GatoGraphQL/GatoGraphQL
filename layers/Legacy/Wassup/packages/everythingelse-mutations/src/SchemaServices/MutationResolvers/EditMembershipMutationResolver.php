@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\UserMeta\Utils;
 
@@ -75,7 +76,7 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS, $tags);
 
         // Allow ACF to also save the value in the DB
-        \PoP\Root\App::getHookManager()->doAction('GD_EditMembership:update', $user_id, $community, $new_community_status, $new_community_privileges, $new_community_tags);
+        App::getHookManager()->doAction('GD_EditMembership:update', $user_id, $community, $new_community_status, $new_community_privileges, $new_community_tags);
 
         return $user_id;
     }

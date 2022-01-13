@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
@@ -84,7 +85,7 @@ trait QueryDataModuleProcessorTrait
         if ($datasource == DataSources::MUTABLEONREQUEST && !($data_properties[DataloadingConstants::IGNOREREQUESTPARAMS] ?? null)) {
             // Merge with $_REQUEST, so that params passed through the URL can be used for the query (eg: ?limit=5)
             // But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
-            $whitelisted_params = (array)\PoP\Root\App::getHookManager()->applyFilters(
+            $whitelisted_params = (array)App::getHookManager()->applyFilters(
                 Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
                 array(
                     PaginationParams::PAGE_NUMBER,
@@ -99,7 +100,7 @@ trait QueryDataModuleProcessorTrait
                 ARRAY_FILTER_USE_KEY
             );
 
-            $params_from_request = \PoP\Root\App::getHookManager()->applyFilters(
+            $params_from_request = App::getHookManager()->applyFilters(
                 'QueryDataModuleProcessorTrait:request:filter_params',
                 $params_from_request
             );

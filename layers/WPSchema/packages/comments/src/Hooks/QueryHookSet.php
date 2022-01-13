@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Comments\Hooks;
 
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\CommentsWP\TypeAPIs\CommentTypeAPI;
 use PoPWPSchema\Comments\Constants\CommentOrderBy;
@@ -12,7 +13,7 @@ class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             CommentTypeAPI::HOOK_ORDERBY_QUERY_ARG_VALUE,
             [$this, 'getOrderByQueryArgValue']
         );

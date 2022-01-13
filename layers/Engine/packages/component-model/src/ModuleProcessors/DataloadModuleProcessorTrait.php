@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\Root\App;
 trait DataloadModuleProcessorTrait
 {
     use FormattableModuleTrait;
@@ -41,7 +42,7 @@ trait DataloadModuleProcessorTrait
         /**
          * Allow to add more stuff
          */
-        \PoP\Root\App::getHookManager()->doAction(
+        App::getHookManager()->doAction(
             Constants::HOOK_DATALOAD_INIT_MODEL_PROPS,
             array(&$props),
             $module,

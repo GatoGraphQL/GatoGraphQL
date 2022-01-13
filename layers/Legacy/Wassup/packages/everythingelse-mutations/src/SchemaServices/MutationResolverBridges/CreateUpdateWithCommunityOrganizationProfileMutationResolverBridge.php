@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\Root\App;
 use Exception;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateWithCommunityOrganizationProfileMutationResolver;
@@ -35,7 +36,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
     }
     protected function getProfileorganizationFormInputs()
     {
-        $inputs = \PoP\Root\App::getHookManager()->applyFilters(
+        $inputs = App::getHookManager()->applyFilters(
             'GD_CommonUserRole_UserCommunities_CreateUpdate_ProfileOrganization:form-inputs',
             array(
                 'is_community' => null,

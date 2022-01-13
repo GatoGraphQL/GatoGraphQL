@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\VolunteerMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
@@ -55,7 +56,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data): void
     {
-        \PoP\Root\App::getHookManager()->doAction('pop_volunteer', $form_data);
+        App::getHookManager()->doAction('pop_volunteer', $form_data);
     }
 
     protected function doExecute($form_data)

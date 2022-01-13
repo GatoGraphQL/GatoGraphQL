@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UsersWP\ConditionalOnComponent\CustomPosts\Hooks;
 
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Constants\UserOrderBy;
 use PoPSchema\UsersWP\TypeAPIs\UserTypeAPI;
@@ -12,7 +13,7 @@ class UserQueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        App::getHookManager()->addFilter(
             UserTypeAPI::HOOK_ORDERBY_QUERY_ARG_VALUE,
             [$this, 'getOrderByQueryArgValue']
         );
