@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\TranslationMock;
+namespace PoP\Root\Translation;
 
-use PoP\Root\Translation\TranslationAPIInterface;
-
-class TranslationAPI implements TranslationAPIInterface
+class BasicTranslationAPI implements TranslationAPIInterface
 {
     public function __(string $text, string $domain = 'default'): string
     {

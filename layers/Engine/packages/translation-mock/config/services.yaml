@@ -3,6 +3,3 @@ services:
         public: true
         autowire: true
         autoconfigure: true
-
-    PoP\Root\Translation\TranslationAPIInterface:
-        class: \PoP\TranslationMock\TranslationAPI
