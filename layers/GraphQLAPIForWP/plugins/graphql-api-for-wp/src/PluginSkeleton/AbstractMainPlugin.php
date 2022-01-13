@@ -359,7 +359,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             function (): void {
                 App::initialize(
                     new AppLoader(),
-                    new HookManager(),
+                    new HookManager()
                 );
             },
             PluginLifecyclePriorities::INITIALIZE_APP

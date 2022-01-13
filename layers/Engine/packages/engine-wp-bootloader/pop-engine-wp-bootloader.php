@@ -24,7 +24,7 @@ if (!class_exists(App::class)) {
 \add_action('plugins_loaded', function(): void {
     App::initialize(
         new AppLoader(),
-        new HookManager(),
+        new HookManager()
     );
     App::getAppLoader()->initializeComponents();
     App::getAppLoader()->bootSystem();
