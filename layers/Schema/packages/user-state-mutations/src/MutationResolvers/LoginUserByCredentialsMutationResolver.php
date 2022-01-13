@@ -96,7 +96,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         AppStateHelpers::resetCurrentUserInAppState();
 
         $userID = $this->getUserTypeAPI()->getUserId($user);
-        $this->getHooksAPI()->doAction('gd:user:loggedin', $userID);
+        \PoP\Root\App::getHookManager()->doAction('gd:user:loggedin', $userID);
         return $userID;
     }
 }

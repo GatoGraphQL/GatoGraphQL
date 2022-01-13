@@ -38,13 +38,13 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
             array($this, 'maybeAddInputFieldNameTypeResolvers'),
             10,
             2
         );
-        $this->getHooksAPI()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             HookNames::INPUT_FIELD_DESCRIPTION,
             array($this, 'maybeAddInputFieldDescription'),
             10,

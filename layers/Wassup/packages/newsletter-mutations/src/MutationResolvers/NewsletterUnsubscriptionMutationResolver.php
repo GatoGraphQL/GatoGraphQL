@@ -55,7 +55,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data): void
     {
-        $this->getHooksAPI()->doAction('pop_unsubscribe_from_newsletter', $form_data);
+        \PoP\Root\App::getHookManager()->doAction('pop_unsubscribe_from_newsletter', $form_data);
     }
 
     /**

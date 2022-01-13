@@ -12,17 +12,8 @@ trait BasicServiceTrait
 {
     use WithInstanceManagerServiceTrait;
 
-    private ?HooksAPIInterface $hooksAPI = null;
     private ?TranslationAPIInterface $translationAPI = null;
 
-    final public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    final protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     final public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
     {
         $this->translationAPI = $translationAPI;

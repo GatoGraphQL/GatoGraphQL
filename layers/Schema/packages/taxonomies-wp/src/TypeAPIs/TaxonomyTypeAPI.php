@@ -107,7 +107,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             unset($query['parent-id']);
         }
 
-        return $this->getHooksAPI()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
@@ -128,7 +128,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             TaxonomyOrderBy::DESCRIPTION => 'description',
             default => $orderBy,
         };
-        return $this->getHooksAPI()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             self::HOOK_ORDERBY_QUERY_ARG_VALUE,
             $orderBy
         );

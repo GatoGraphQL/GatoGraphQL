@@ -31,7 +31,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data): void
     {
-        $this->getHooksAPI()->doAction('pop_contactus', $form_data);
+        \PoP\Root\App::getHookManager()->doAction('pop_contactus', $form_data);
     }
 
     protected function doExecute($form_data)

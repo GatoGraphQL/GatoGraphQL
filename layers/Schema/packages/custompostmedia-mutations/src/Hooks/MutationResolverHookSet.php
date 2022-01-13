@@ -24,7 +24,7 @@ class MutationResolverHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
             array($this, 'setOrRemoveFeaturedImage'),
             10,

@@ -10,7 +10,7 @@ abstract class AbstractAddCustomPostPasswordToFilterInputQueryHookSet extends Ab
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             $this->getHookName(),
             [$this, 'convertCustomPostsQuery'],
             10,

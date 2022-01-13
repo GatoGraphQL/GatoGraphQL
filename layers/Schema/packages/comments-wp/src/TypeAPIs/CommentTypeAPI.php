@@ -128,7 +128,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             unset($query['date-to']);
         }
 
-        $query = $this->getHooksAPI()->applyFilters(
+        $query = \PoP\Root\App::getHookManager()->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
@@ -170,7 +170,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             CommentOrderBy::STATUS => 'comment_approved',
             default => $orderBy,
         };
-        return $this->getHooksAPI()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             self::HOOK_ORDERBY_QUERY_ARG_VALUE,
             $orderBy
         );
@@ -179,7 +179,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     public function getCommentContent(object $comment): string
     {
         /** @var WP_Comment $comment */
-        return $this->getHooksAPI()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'comment_text',
             $comment->comment_content
         );

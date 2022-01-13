@@ -37,7 +37,7 @@ abstract class AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet extends Abs
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
             [$this, 'getInputFieldNameTypeResolvers'],
             100,

@@ -20,7 +20,7 @@ class AbstractCustomPostRESTEntryRouteModuleProcessor extends AbstractRESTEntryR
     public function getRESTFieldsQuery(): string
     {
         if (is_null($this->restFieldsQuery)) {
-            $this->restFieldsQuery = (string) $this->getHooksAPI()->applyFilters(
+            $this->restFieldsQuery = (string) \PoP\Root\App::getHookManager()->applyFilters(
                 HookHelpers::getHookName(__CLASS__),
                 parent::getRESTFieldsQuery()
             );

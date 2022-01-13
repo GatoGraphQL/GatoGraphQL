@@ -47,14 +47,14 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
         );
 
         // Allow to add extra inputs
-        $form_data = $this->getHooksAPI()->applyFilters('gd_createupdate_profile:form_data', $form_data);
+        $form_data = \PoP\Root\App::getHookManager()->applyFilters('gd_createupdate_profile:form_data', $form_data);
 
         return $form_data;
     }
 
     private function getFormInputs()
     {
-        $inputs = $this->getHooksAPI()->applyFilters(
+        $inputs = \PoP\Root\App::getHookManager()->applyFilters(
             'GD_CreateUpdate_Profile:form-inputs',
             array(
                 'short_description' => null,

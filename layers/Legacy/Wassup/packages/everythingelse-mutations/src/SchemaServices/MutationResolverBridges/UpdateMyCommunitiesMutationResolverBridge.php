@@ -39,7 +39,7 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
         );
 
         // Allow to add extra inputs
-        $form_data = $this->getHooksAPI()->applyFilters('gd_createupdate_mycommunities:form_data', $form_data);
+        $form_data = \PoP\Root\App::getHookManager()->applyFilters('gd_createupdate_mycommunities:form_data', $form_data);
 
         return $form_data;
     }

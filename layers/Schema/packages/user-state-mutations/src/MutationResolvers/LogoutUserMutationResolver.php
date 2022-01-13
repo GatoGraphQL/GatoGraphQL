@@ -39,7 +39,7 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
         // Modify the routing-state with the newly logged in user info
         AppStateHelpers::resetCurrentUserInAppState();
 
-        $this->getHooksAPI()->doAction('gd:user:loggedout', $user_id);
+        \PoP\Root\App::getHookManager()->doAction('gd:user:loggedout', $user_id);
         return $user_id;
     }
 }

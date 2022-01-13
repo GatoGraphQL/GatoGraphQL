@@ -10,7 +10,7 @@ class SaveDefinitionFileMutationResolver extends AbstractMutationResolver
 {
     public function executeMutation(array $form_data): mixed
     {
-        $this->getHooksAPI()->doAction('PoP:system:save-definition-file');
+        \PoP\Root\App::getHookManager()->doAction('PoP:system:save-definition-file');
         return true;
     }
 }

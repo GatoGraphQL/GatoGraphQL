@@ -9,6 +9,6 @@ abstract class AbstractFollowOrUnfollowUserMutationResolver extends AbstractUser
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->getHooksAPI()->doAction('gd_followunfollow_user', $target_id, $form_data);
+        \PoP\Root\App::getHookManager()->doAction('gd_followunfollow_user', $target_id, $form_data);
     }
 }

@@ -11,7 +11,7 @@ class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             UserTypeAPI::HOOK_QUERY,
             [$this, 'convertUsersQuery'],
             10,

@@ -12,7 +12,7 @@ class WhitelistParamHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
             array($this, 'getWhitelistedParams')
         );

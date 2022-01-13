@@ -75,7 +75,7 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS, $tags);
 
         // Allow ACF to also save the value in the DB
-        $this->getHooksAPI()->doAction('GD_EditMembership:update', $user_id, $community, $new_community_status, $new_community_privileges, $new_community_tags);
+        \PoP\Root\App::getHookManager()->doAction('GD_EditMembership:update', $user_id, $community, $new_community_status, $new_community_privileges, $new_community_tags);
 
         return $user_id;
     }

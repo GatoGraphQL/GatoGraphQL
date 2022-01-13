@@ -173,9 +173,9 @@ class MenuTypeAPI implements MenuTypeAPIInterface
             // Same param name, so do nothing
         }
 
-        return $this->getHooksAPI()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             TaxonomyTypeAPI::HOOK_QUERY,
-            $this->getHooksAPI()->applyFilters(
+            \PoP\Root\App::getHookManager()->applyFilters(
                 self::HOOK_QUERY,
                 $query,
                 $options

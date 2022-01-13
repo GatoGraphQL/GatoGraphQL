@@ -47,7 +47,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $form_data['highlightedpost'], true);
 
         // Allow to create a Notification
-        $this->getHooksAPI()->doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $form_data);
+        \PoP\Root\App::getHookManager()->doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $form_data);
     }
 
     protected function updateAdditionals(string | int $post_id, array $form_data, array $log): void
@@ -55,6 +55,6 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         parent::updateAdditionals($post_id, $form_data, $log);
 
         // Allow to create a Notification
-        $this->getHooksAPI()->doAction('GD_CreateUpdate_Highlight:updateAdditionals', $post_id, $form_data, $log);
+        \PoP\Root\App::getHookManager()->doAction('GD_CreateUpdate_Highlight:updateAdditionals', $post_id, $form_data, $log);
     }
 }

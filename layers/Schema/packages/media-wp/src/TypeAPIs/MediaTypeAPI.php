@@ -89,7 +89,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
 
         $query = $this->convertMediaQuery($query, $options);
 
-        return $this->getHooksAPI()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options

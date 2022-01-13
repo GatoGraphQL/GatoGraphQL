@@ -10,8 +10,6 @@ trait DataloadModuleProcessorTrait
 {
     use FormattableModuleTrait;
 
-    abstract protected function getHooksAPI(): HooksAPIInterface;
-
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
@@ -45,7 +43,7 @@ trait DataloadModuleProcessorTrait
         /**
          * Allow to add more stuff
          */
-        $this->getHooksAPI()->doAction(
+        \PoP\Root\App::getHookManager()->doAction(
             Constants::HOOK_DATALOAD_INIT_MODEL_PROPS,
             array(&$props),
             $module,

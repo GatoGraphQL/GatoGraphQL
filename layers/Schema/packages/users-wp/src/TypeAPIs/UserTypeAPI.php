@@ -195,7 +195,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
             unset($query['limit']);
         }
 
-        return $this->getHooksAPI()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
@@ -211,7 +211,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
             UserOrderBy::REGISTRATION_DATE => 'registered',
             default => $orderBy,
         };
-        return $this->getHooksAPI()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             self::HOOK_ORDERBY_QUERY_ARG_VALUE,
             $orderBy
         );

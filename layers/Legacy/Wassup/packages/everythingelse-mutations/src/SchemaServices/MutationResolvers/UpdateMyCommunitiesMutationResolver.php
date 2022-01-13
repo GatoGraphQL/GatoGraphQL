@@ -55,7 +55,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         );
 
         // Allow to send an email before the update: get the current communities, so we know which ones are new
-        $this->getHooksAPI()->doAction('gd_update_mycommunities:update', $user_id, $form_data, $operationlog);
+        \PoP\Root\App::getHookManager()->doAction('gd_update_mycommunities:update', $user_id, $form_data, $operationlog);
 
         return $user_id;
         // Update: either updated or no banned communities (even if nothing changed, tell the user update was successful)

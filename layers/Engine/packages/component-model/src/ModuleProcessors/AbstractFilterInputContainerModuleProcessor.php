@@ -16,7 +16,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
 
         // Enable extensions to add more FilterInputs
         foreach ($this->getFilterInputHookNames() as $filterInputHookName) {
-            $filterInputModules = $this->getHooksAPI()->applyFilters(
+            $filterInputModules = \PoP\Root\App::getHookManager()->applyFilters(
                 $filterInputHookName,
                 $filterInputModules,
                 $module

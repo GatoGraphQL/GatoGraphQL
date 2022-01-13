@@ -36,7 +36,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
 
     protected function additionals($target_id, $form_data): void
     {
-        $this->getHooksAPI()->doAction('gd_subscritetounsubscribefrom_tag', $target_id, $form_data);
+        \PoP\Root\App::getHookManager()->doAction('gd_subscritetounsubscribefrom_tag', $target_id, $form_data);
         parent::additionals($target_id, $form_data);
     }
 }

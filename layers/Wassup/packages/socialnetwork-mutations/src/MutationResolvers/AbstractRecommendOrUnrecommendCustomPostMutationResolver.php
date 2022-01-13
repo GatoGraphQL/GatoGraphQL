@@ -12,7 +12,7 @@ abstract class AbstractRecommendOrUnrecommendCustomPostMutationResolver extends 
     {
         $cmsapplicationpostsapi = PostsFunctionAPIFactory::getInstance();
         $eligible = in_array($this->getCustomPostTypeAPI()->getCustomPostType($post), $cmsapplicationpostsapi->getAllcontentPostTypes());
-        return $this->getHooksAPI()->applyFilters('GD_RecommendUnrecommendPost:eligible', $eligible, $post);
+        return \PoP\Root\App::getHookManager()->applyFilters('GD_RecommendUnrecommendPost:eligible', $eligible, $post);
     }
 
     /**
@@ -21,6 +21,6 @@ abstract class AbstractRecommendOrUnrecommendCustomPostMutationResolver extends 
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->getHooksAPI()->doAction('gd_recommendunrecommend_post', $target_id, $form_data);
+        \PoP\Root\App::getHookManager()->doAction('gd_recommendunrecommend_post', $target_id, $form_data);
     }
 }

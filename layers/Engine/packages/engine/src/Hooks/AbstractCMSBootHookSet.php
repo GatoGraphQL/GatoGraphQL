@@ -13,7 +13,7 @@ abstract class AbstractCMSBootHookSet extends AbstractHookSet
      */
     protected function init(): void
     {
-        $this->getHooksAPI()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:boot',
             [$this, 'cmsBoot'],
             $this->getPriority()

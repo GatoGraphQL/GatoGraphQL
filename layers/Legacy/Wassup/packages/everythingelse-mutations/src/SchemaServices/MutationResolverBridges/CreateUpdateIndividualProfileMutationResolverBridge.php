@@ -31,7 +31,7 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
 
     private function getFormInputs()
     {
-        $inputs = $this->getHooksAPI()->applyFilters(
+        $inputs = \PoP\Root\App::getHookManager()->applyFilters(
             'GD_CreateUpdate_ProfileIndividual_Trait:form-inputs',
             array(
                 'last_name' => null,
