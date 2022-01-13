@@ -17,6 +17,7 @@ use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Managers\AppStateManager;
 use PoP\Root\Managers\ComponentManager;
+use PoP\Root\Managers\HookManager;
 use PoP\Root\State\MutationResolutionStore;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -85,6 +86,7 @@ class App implements AppInterface, RootAppInterface
      */
     public static function initialize(
         ?AppLoader $appLoader = null,
+        ?HookManager $hookManager = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManager $componentManager = null,
@@ -93,6 +95,7 @@ class App implements AppInterface, RootAppInterface
     ): void {
         RootApp::initialize(
             $appLoader,
+            $hookManager,
             $containerBuilderFactory,
             $systemContainerBuilderFactory,
             $componentManager,
@@ -104,6 +107,11 @@ class App implements AppInterface, RootAppInterface
     public static function getAppLoader(): AppLoader
     {
         return RootApp::getAppLoader();
+    }
+
+    public static function getHookManager(): HookManager
+    {
+        return RootApp::getHookManager();
     }
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory

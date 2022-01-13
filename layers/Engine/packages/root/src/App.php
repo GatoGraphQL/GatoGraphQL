@@ -10,6 +10,7 @@ use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Managers\AppStateManager;
 use PoP\Root\Managers\ComponentManager;
+use PoP\Root\Managers\HookManager;
 use PoP\Root\State\MutationResolutionStore;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -19,6 +20,7 @@ use Symfony\Component\DependencyInjection\Container;
 class App implements AppInterface
 {
     protected static AppLoader $appLoader;
+    protected static HookManager $hookManager;
     protected static ContainerBuilderFactory $containerBuilderFactory;
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
     protected static ComponentManager $componentManager;
@@ -43,6 +45,7 @@ class App implements AppInterface
      */
     public static function initialize(
         ?AppLoader $appLoader = null,
+        ?HookManager $hookManager = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManager $componentManager = null,
@@ -50,6 +53,7 @@ class App implements AppInterface
         ?MutationResolutionStore $mutationResolutionStore = null,
     ): void {
         self::$appLoader = $appLoader ?? static::createAppLoader();
+        self::$hookManager = $hookManager ?? static::createHookManager();
         self::$containerBuilderFactory = $containerBuilderFactory ?? static::createContainerBuilderFactory();
         self::$systemContainerBuilderFactory = $systemContainerBuilderFactory ?? static::createSystemContainerBuilderFactory();
         self::$componentManager = $componentManager ?? static::createComponentManager();
@@ -67,6 +71,11 @@ class App implements AppInterface
     protected static function createAppLoader(): AppLoader
     {
         return new AppLoader();
+    }
+
+    protected static function createHookManager(): HookManager
+    {
+        return new HookManager();
     }
 
     protected static function createContainerBuilderFactory(): ContainerBuilderFactory
@@ -97,6 +106,11 @@ class App implements AppInterface
     public static function getAppLoader(): AppLoader
     {
         return self::$appLoader;
+    }
+
+    public static function getHookManager(): HookManager
+    {
+        return self::$hookManager;
     }
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory
