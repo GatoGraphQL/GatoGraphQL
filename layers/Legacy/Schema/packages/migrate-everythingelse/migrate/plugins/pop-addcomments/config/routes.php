@@ -9,7 +9,7 @@ if (!defined('POP_ADDCOMMENTS_ROUTE_ADDCOMMENT')) {
 	define('POP_ADDCOMMENTS_ROUTE_ADDCOMMENT', $definitionManager->getUniqueDefinition('add-comment', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

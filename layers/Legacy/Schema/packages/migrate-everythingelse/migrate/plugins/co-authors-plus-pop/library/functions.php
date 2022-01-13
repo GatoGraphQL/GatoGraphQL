@@ -3,13 +3,13 @@
 /**
  * No need from any avatar size from this plugin
  */
-\PoP\Root\App::getHookManager()->addFilter('coauthors_guest_author_avatar_sizes', 'emptyArray', 10000);
+\PoP\Root\App::addFilter('coauthors_guest_author_avatar_sizes', 'emptyArray', 10000);
 function emptyArray($anything)
 {
     return array();
 }
 
-\PoP\Root\App::getHookManager()->addFilter('CMSAPI:customposts:query', 'maybeRemoveSupressFilters');
+\PoP\Root\App::addFilter('CMSAPI:customposts:query', 'maybeRemoveSupressFilters');
 function maybeRemoveSupressFilters($query)
 {
 	// If filtering by author, let it also be a co-author

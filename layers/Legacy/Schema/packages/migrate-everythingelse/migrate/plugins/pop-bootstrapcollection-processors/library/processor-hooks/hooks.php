@@ -4,19 +4,19 @@ class PoP_CoreProcessors_Bootstrap_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_DropdownButtonControls:modules:share',
             array($this, 'getShareSubmodules'),
             0,
             2
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_DropdownButtonQuicklinks:modules',
             array($this, 'getDropdownSubmodules'),
             0,
             2
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_SocialMediaMultipleComponents:modules',
             array($this, 'getSocialmediaSubmodules'),
             0,

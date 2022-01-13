@@ -5,21 +5,21 @@ class PoPTheme_CategoryProcessors_SectionFilterHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'wassup_section_taxonomyterms',
             array($this, 'getTaxonomyterms')
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'wassup_contentpostsection_cats',
             array($this, 'getCats')
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'GD_FormInput_ContentSections:taxonomyterms:name',
             array($this, 'getTaxonomytermsName'),
             10,
             3
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'GD_FormInput_PostSections:cat:name',
             array($this, 'getCatName'),
             10,

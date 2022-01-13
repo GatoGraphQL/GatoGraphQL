@@ -41,7 +41,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
             );
             $inner = $inners[$module[1]];
 
-            return \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_Contents:inner_module', $inner, $module);
+            return \PoP\Root\App::applyFilters('PoP_Module_Processor_Contents:inner_module', $inner, $module);
         }
 
         return parent::getInnerSubmodule($module);

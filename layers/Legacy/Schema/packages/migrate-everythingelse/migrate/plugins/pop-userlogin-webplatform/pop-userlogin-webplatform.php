@@ -20,7 +20,7 @@ class PoP_UserLoginWebPlatform
     {
 
         // Priority: after PoP Email Sender Web Platform
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888520);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888520);
     }
     public function init()
     {

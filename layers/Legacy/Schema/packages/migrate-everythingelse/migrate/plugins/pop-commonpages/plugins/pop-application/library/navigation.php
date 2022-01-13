@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 /**
  * navigation.php
  */
-\PoP\Root\App::getHookManager()->addFilter('page:icon', 'popwassupPageIcon', 10, 3);
+\PoP\Root\App::addFilter('page:icon', 'popwassupPageIcon', 10, 3);
 function popwassupPageIcon($icon, $page_id, $html = true)
 {
     switch ($page_id) {
@@ -21,7 +21,7 @@ function popwassupPageIcon($icon, $page_id, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-\PoP\Root\App::getHookManager()->addFilter('route:icon', 'popwassupRouteIcon', 10, 3);
+\PoP\Root\App::addFilter('route:icon', 'popwassupRouteIcon', 10, 3);
 function popwassupRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -37,7 +37,7 @@ function popwassupRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-\PoP\Root\App::getHookManager()->addFilter('route:title', 'popwassupWassupNavigationRouteTitle', 10, 2);
+\PoP\Root\App::addFilter('route:title', 'popwassupWassupNavigationRouteTitle', 10, 2);
 function popwassupWassupNavigationRouteTitle($title, $route)
 {
     $titles = [

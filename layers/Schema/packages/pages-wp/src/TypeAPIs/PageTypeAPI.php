@@ -35,7 +35,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
 
         $query = $this->convertPagesQuery($query, $options);
 
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             self::HOOK_QUERY,
             $query,
             $options

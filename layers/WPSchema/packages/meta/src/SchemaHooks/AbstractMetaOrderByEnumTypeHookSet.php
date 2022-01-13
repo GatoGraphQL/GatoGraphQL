@@ -14,13 +14,13 @@ abstract class AbstractMetaOrderByEnumTypeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             HookNames::ENUM_VALUES,
             [$this, 'getEnumValues'],
             10,
             2
         );
-        App::getHookManager()->addFilter(
+        App::addFilter(
             HookNames::ENUM_VALUE_DESCRIPTION,
             [$this, 'getEnumValueDescription'],
             10,

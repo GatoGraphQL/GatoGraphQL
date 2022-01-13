@@ -5,12 +5,12 @@ use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 function gdUserAttributes()
 {
-    return \PoP\Root\App::getHookManager()->applyFilters('gdUserAttributes', array());
+    return \PoP\Root\App::applyFilters('gdUserAttributes', array());
 }
 
 function gdGetUserattributes($user_id)
 {
-    return \PoP\Root\App::getHookManager()->applyFilters('gdGetUserattributes', array(), $user_id);
+    return \PoP\Root\App::applyFilters('gdGetUserattributes', array(), $user_id);
 }
 
 /**

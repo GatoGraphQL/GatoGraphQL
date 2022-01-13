@@ -19,7 +19,7 @@ class PoP_SocialNetwork
     {
 
         // Priority: after PoP Add Comments TinyMCE
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888360);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888360);
     }
     public function init()
     {

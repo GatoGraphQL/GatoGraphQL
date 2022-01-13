@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addFilter('gd_thumb_defaultlink:link_categories', 'popLocationpostlinksMainLinkcategories');
+\PoP\Root\App::addFilter('gd_thumb_defaultlink:link_categories', 'popLocationpostlinksMainLinkcategories');
 function popLocationpostlinksMainLinkcategories($cats)
 {
 

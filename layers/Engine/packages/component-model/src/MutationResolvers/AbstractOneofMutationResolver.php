@@ -30,7 +30,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         if ($this->consolidatedInputFieldNameMutationResolversCache !== null) {
             return $this->consolidatedInputFieldNameMutationResolversCache;
         }
-        $this->consolidatedInputFieldNameMutationResolversCache = App::getHookManager()->applyFilters(
+        $this->consolidatedInputFieldNameMutationResolversCache = App::applyFilters(
             HookNames::INPUT_FIELD_NAME_MUTATION_RESOLVERS,
             $this->getInputFieldNameMutationResolvers(),
             $this,

@@ -10,7 +10,7 @@ class ThemeManager
     {
         ThemeManagerFactory::setInstance($this);
         $this->themes = array();
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'popcms:init',
             array($this, 'init')
         );
@@ -37,7 +37,7 @@ class ThemeManager
 
     public function getDefaultThemename()
     {
-        return \PoP\Root\App::getHookManager()->applyFilters('\PoP\Theme\Themes\ThemeManager:default', null);
+        return \PoP\Root\App::applyFilters('\PoP\Theme\Themes\ThemeManager:default', null);
         ;
     }
 

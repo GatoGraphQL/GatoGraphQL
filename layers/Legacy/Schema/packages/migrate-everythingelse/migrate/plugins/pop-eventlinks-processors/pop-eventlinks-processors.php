@@ -20,7 +20,7 @@ class PoP_EventLinksProcessors
     {
 
         // Priority: after PoP Events Processors
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888900);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888900);
     }
     public function init()
     {

@@ -1,9 +1,9 @@
 <?php
 
-// \PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_MenuMultiplesBase:active-link-menu-item-ids', 'addActiveMenuitemParentitem', 10, 3);
+// \PoP\Root\App::addFilter('PoP_Module_Processor_MenuMultiplesBase:active-link-menu-item-ids', 'addActiveMenuitemParentitem', 10, 3);
 // function addActiveMenuitemParentitem($active_link_menu_item_ids, array $module, array &$props)
 // {
-//     $add_parentpageid = \PoP\Root\App::getHookManager()->applyFilters(
+//     $add_parentpageid = \PoP\Root\App::applyFilters(
 //         'PoP_Module_Processor_MenuMultiplesBase:js-setting:add-active-parent-item',
 //         false,
 //         $module,
@@ -36,11 +36,11 @@
 // // (Used for painting navigation in single.php)
 // function gdPostParentpageid($post_id)
 // {
-//     return \PoP\Root\App::getHookManager()->applyFilters('gdPostParentpageid', null, $post_id);
+//     return \PoP\Root\App::applyFilters('gdPostParentpageid', null, $post_id);
 // }
 
 // Returns the id of the page showing all items of same role (Organizations / Individuals)
 function gdAuthorParentpageid($author_id)
 {
-    return \PoP\Root\App::getHookManager()->applyFilters('gdAuthorParentpageid', null, $author_id);
+    return \PoP\Root\App::applyFilters('gdAuthorParentpageid', null, $author_id);
 }

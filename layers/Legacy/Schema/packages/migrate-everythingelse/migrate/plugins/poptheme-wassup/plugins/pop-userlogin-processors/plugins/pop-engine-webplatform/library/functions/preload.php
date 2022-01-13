@@ -4,7 +4,7 @@ class PoPTheme_Wassup_UserLogin_WebPlatform_PreloadHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'wassup:extra-routes:initialframes:'.\PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
             array($this, 'getRoutesForMain')
         );

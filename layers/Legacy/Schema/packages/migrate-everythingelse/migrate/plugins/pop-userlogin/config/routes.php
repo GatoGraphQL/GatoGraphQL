@@ -21,7 +21,7 @@ if (!defined('POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA')) {
     define('POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA', $definitionManager->getUniqueDefinition('loggedinuser-data', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

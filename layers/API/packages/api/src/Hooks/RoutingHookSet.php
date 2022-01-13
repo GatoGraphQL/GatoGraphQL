@@ -36,12 +36,12 @@ class RoutingHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             '\PoP\Routing:uri-route',
             array($this, 'getURIRoute')
         );
 
-        App::getHookManager()->addFilter(
+        App::addFilter(
             '\PoP\ComponentModel\Engine:getExtraRoutes',
             array($this, 'getExtraRoutes'),
             10,

@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 /**
  * Allow communities to include its members' content in the community Profile
  */
-\PoP\Root\App::getHookManager()->addFilter('pop_module:dataload_query_args:authors', 'gdUreProfileCommunityDataloadqueryAddmembers');
+\PoP\Root\App::addFilter('pop_module:dataload_query_args:authors', 'gdUreProfileCommunityDataloadqueryAddmembers');
 function gdUreProfileCommunityDataloadqueryAddmembers($authors)
 {
     $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -20,7 +20,7 @@ function gdUreProfileCommunityDataloadqueryAddmembers($authors)
     return $authors;
 }
 
-\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_CustomSectionBlocks:getDataloadSource:author', 'gdUreAddSourceParam', 10, 2);
+\PoP\Root\App::addFilter('PoP_Module_Processor_CustomSectionBlocks:getDataloadSource:author', 'gdUreAddSourceParam', 10, 2);
 function gdUreAddSourceParam($url, $user_id)
 {
     if (gdUreIsCommunity($user_id)) {
@@ -34,7 +34,7 @@ function gdUreAddSourceParam($url, $user_id)
 /**
  * Add the 'members' tab for the communities author page
  */
-\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_CustomSubMenus:author:routes', 'gdUreProfileCommunityAddMembersTab');
+\PoP\Root\App::addFilter('PoP_Module_Processor_CustomSubMenus:author:routes', 'gdUreProfileCommunityAddMembersTab');
 function gdUreProfileCommunityAddMembersTab($routes)
 {
     $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -47,7 +47,7 @@ function gdUreProfileCommunityAddMembersTab($routes)
 }
 
 // Add the source param whenever in an author
-\PoP\Root\App::getHookManager()->addFilter('gdUreAddSourceParamToSubmenu:skip:routes', 'gdUreAddSourceParamToSubmenuRoutes');
+\PoP\Root\App::addFilter('gdUreAddSourceParamToSubmenu:skip:routes', 'gdUreAddSourceParamToSubmenuRoutes');
 function gdUreAddSourceParamToSubmenuRoutes($routes)
 {
     return array_merge(

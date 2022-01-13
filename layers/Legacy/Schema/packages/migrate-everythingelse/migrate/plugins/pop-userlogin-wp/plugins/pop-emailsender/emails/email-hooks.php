@@ -7,14 +7,14 @@ class PoP_UserLoginWP_WP_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Functional emails
         //----------------------------------------------------------------------
-        \PoP\Root\App::getHookManager()->addAction('retrieve_password_key', array($this, 'retrievePasswordKey'));
-        \PoP\Root\App::getHookManager()->addFilter('send_password_change_email', array($this, 'donotsend'), PHP_INT_MAX, 1);
-        \PoP\Root\App::getHookManager()->addFilter('send_email_change_email', array($this, 'donotsend'), PHP_INT_MAX, 1);
+        \PoP\Root\App::addAction('retrieve_password_key', array($this, 'retrievePasswordKey'));
+        \PoP\Root\App::addFilter('send_password_change_email', array($this, 'donotsend'), PHP_INT_MAX, 1);
+        \PoP\Root\App::addFilter('send_email_change_email', array($this, 'donotsend'), PHP_INT_MAX, 1);
     }
 
     public function retrievePasswordKey()
     {
-        \PoP\Root\App::getHookManager()->addFilter('wp_mail_content_type', array($this, 'setHtmlContentType'));
+        \PoP\Root\App::addFilter('wp_mail_content_type', array($this, 'setHtmlContentType'));
     }
     public function setHtmlContentType($content_type)
     {

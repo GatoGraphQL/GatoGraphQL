@@ -4,7 +4,7 @@ class AAL_PoPProcessors_ProcessorHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_UserAccountUtils:login:modules',
             array($this, 'getLoginModules')
         );
@@ -12,7 +12,7 @@ class AAL_PoPProcessors_ProcessorHooks
 
     protected function enableLatestnotifications()
     {
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'AAL_PoPProcessors_ProcessorHooks:latestnotifications:enabled',
             true
         );

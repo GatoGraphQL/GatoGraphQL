@@ -4,17 +4,17 @@ class PoP_Application_Hooks
 {
 	public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'PoP_Application_SectionUtils:dataloadqueryargs-allcontent',
             array($this, 'addAllcontentQueryargs')
         );
 
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'PoP_Application_SectionUtils:dataloadqueryargs-allcontent-bysingletag',
             array($this, 'addAllcontentBySingleTagQueryargs')
         );
 
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'latestcounts:allcontent:classes',
             array($this, 'getAllcontentClasses')
         );

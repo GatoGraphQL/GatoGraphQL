@@ -28,7 +28,7 @@ class PoP_EventsCreation_Module_Processor_CustomSimpleFilterInners extends PoP_M
                 // [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_HASHTAGS],
             ],
         ];
-        if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
+        if ($modules = \PoP\Root\App::applyFilters(
             'Events:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module

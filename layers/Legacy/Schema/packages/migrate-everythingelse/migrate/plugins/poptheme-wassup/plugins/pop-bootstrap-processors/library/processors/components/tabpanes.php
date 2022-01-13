@@ -131,7 +131,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
                 // // Editor rows
                 // $this->add_general_prop($ret, 'editor-rows', 5);
 
-                \PoP\Root\App::getHookManager()->doAction(
+                \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:addons',
                     $module,
                     array(&$module_props),

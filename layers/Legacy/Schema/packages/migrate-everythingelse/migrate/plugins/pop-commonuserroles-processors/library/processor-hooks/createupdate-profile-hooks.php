@@ -4,11 +4,11 @@ class PoP_CommonUserRolesProcessors_CreateUpdateProfileHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'GD_CreateUpdate_ProfileOrganization_Trait:form-inputs',
             array($this, 'getProfileorganizationFormInputs')
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'GD_CreateUpdate_ProfileIndividual_Trait:form-inputs',
             array($this, 'getProfileindividualFormInputs')
         );

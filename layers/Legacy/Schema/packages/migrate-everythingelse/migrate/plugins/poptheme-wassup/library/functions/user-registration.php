@@ -2,14 +2,14 @@
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-\PoP\Root\App::getHookManager()->addAction('show_user_profile', 'extraUserProfileFields', 1);
-\PoP\Root\App::getHookManager()->addAction('edit_user_profile', 'extraUserProfileFields', 1);
+\PoP\Root\App::addAction('show_user_profile', 'extraUserProfileFields', 1);
+\PoP\Root\App::addAction('edit_user_profile', 'extraUserProfileFields', 1);
 
-\PoP\Root\App::getHookManager()->addAction('edit_user_created_user', 'saveExtraUserInfo', 10, 1);
-\PoP\Root\App::getHookManager()->addAction('personal_options_update', 'saveExtraUserProfileFields');
-\PoP\Root\App::getHookManager()->addAction('edit_user_profile_update', 'saveExtraUserProfileFields');
+\PoP\Root\App::addAction('edit_user_created_user', 'saveExtraUserInfo', 10, 1);
+\PoP\Root\App::addAction('personal_options_update', 'saveExtraUserProfileFields');
+\PoP\Root\App::addAction('edit_user_profile_update', 'saveExtraUserProfileFields');
 
-\PoP\Root\App::getHookManager()->addFilter('insert_user_meta', 'adduserSetNickname', 10, 2);
+\PoP\Root\App::addFilter('insert_user_meta', 'adduserSetNickname', 10, 2);
 function adduserSetNickname($meta, $user)
 {
 
@@ -20,7 +20,7 @@ function adduserSetNickname($meta, $user)
     $meta['nickname'] = $user->display_name;
     return $meta;
 }
-\PoP\Root\App::getHookManager()->addAction('user_profile_update_errors', 'setNickname', 10, 3);
+\PoP\Root\App::addAction('user_profile_update_errors', 'setNickname', 10, 3);
 function setNickname(&$errors, $update, &$user)
 {
 
@@ -209,7 +209,7 @@ function saveExtraUserProfileFields($user_id)
 
 
 /* Contact Methods for the Edit User Page for the WP backend*/
-\PoP\Root\App::getHookManager()->addFilter('user_contactmethods', 'gdUserContactmethods');
+\PoP\Root\App::addFilter('user_contactmethods', 'gdUserContactmethods');
 function gdUserContactmethods()
 {
     $contact = array(
@@ -223,11 +223,11 @@ function gdUserContactmethods()
     return $contact;
 }
 
-\PoP\Root\App::getHookManager()->addAction('show_user_profile', 'customExtraUserProfileFields', 2);
-\PoP\Root\App::getHookManager()->addAction('edit_user_profile', 'customExtraUserProfileFields', 2);
+\PoP\Root\App::addAction('show_user_profile', 'customExtraUserProfileFields', 2);
+\PoP\Root\App::addAction('edit_user_profile', 'customExtraUserProfileFields', 2);
 
-\PoP\Root\App::getHookManager()->addAction('personal_options_update', 'customSaveExtraUserProfileFields', 20);
-\PoP\Root\App::getHookManager()->addAction('edit_user_profile_update', 'customSaveExtraUserProfileFields', 20);
+\PoP\Root\App::addAction('personal_options_update', 'customSaveExtraUserProfileFields', 20);
+\PoP\Root\App::addAction('edit_user_profile_update', 'customSaveExtraUserProfileFields', 20);
 
 function customExtraUserProfileFields($user)
 {

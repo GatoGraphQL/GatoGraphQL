@@ -5,7 +5,7 @@ class PoP_ApplicationProcessors_SPA_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_MultidomainProcessors_Module_Processor_Dataloads:backgroundurls',
             array($this, 'addBackgroundurls'),
             10,
@@ -33,7 +33,7 @@ class PoP_ApplicationProcessors_SPA_Hooks
             }
             
             // Allow to override (eg: for a given domain, the page slug may be different)
-            $url = \PoP\Root\App::getHookManager()->applyFilters(
+            $url = \PoP\Root\App::applyFilters(
                 'PoP_ApplicationProcessors_SPA_Hooks:backgroundurls:backgroundurl',
                 $url,
                 $domain,

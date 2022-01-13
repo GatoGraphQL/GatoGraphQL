@@ -6,12 +6,12 @@ class PoP_HTMLCSSPlatform_ConfigurationUtils
 {
     public static function getMultilayoutLabels()
     {
-        return \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:multilayout_labels', array());
+        return \PoP\Root\App::applyFilters('pop_modulemanager:multilayout_labels', array());
     }
 
     public static function getOndateString()
     {
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'pop_modulemanager:ondate',
             TranslationAPIFacade::getInstance()->__('<small>on</small> %s', 'pop-engine-htmlcssplatform')
         );
@@ -32,7 +32,7 @@ class PoP_HTMLCSSPlatform_ConfigurationUtils
             )
         );
         // Allow to override: allow URE to add its Member Status
-        return \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:status_settings', $status);
+        return \PoP\Root\App::applyFilters('pop_modulemanager:status_settings', $status);
     }
 
     public static function getLabelizeClasses()
@@ -40,12 +40,12 @@ class PoP_HTMLCSSPlatform_ConfigurationUtils
         $labelize_classes = array(
             TranslationAPIFacade::getInstance()->__('(None)', 'pop-engine-htmlcssplatform') => 'label-none',
         );
-        return \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:labelize_classes', $labelize_classes);
+        return \PoP\Root\App::applyFilters('pop_modulemanager:labelize_classes', $labelize_classes);
     }
 
     public static function registerScriptsAndStylesDuringInit()
     {
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_HTMLCSSPlatform_ConfigurationUtils:registerScriptsAndStylesDuringInit',
             true
         );

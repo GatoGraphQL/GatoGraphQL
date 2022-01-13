@@ -11,8 +11,8 @@ class AAL_PoP_Validation
 
         // Validate plug-in
         if (!class_exists('AAL_Main')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'pluginWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this,'pluginWarning'));
             $success = false;
         }
 

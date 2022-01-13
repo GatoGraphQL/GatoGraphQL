@@ -39,7 +39,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldFilterInputCache)) {
             return $this->consolidatedInputFieldFilterInputCache[$inputFieldName];
         }
-        $this->consolidatedInputFieldFilterInputCache[$inputFieldName] = App::getHookManager()->applyFilters(
+        $this->consolidatedInputFieldFilterInputCache[$inputFieldName] = App::applyFilters(
             HookNames::INPUT_FIELD_FILTER_INPUT,
             $this->getInputFieldFilterInput($inputFieldName),
             $this,

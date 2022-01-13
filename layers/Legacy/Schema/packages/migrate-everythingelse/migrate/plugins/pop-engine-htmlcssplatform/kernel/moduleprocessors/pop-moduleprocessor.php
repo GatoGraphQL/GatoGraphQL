@@ -246,7 +246,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         }
 
         // Allow CSS to Styles to modify these value
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_HTMLCSSPlatformQueryDataModuleProcessorBase:module-mutableonrequest-configuration',
             $ret,
             $module,
@@ -329,7 +329,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         }
 
         // Allow PoP Resource Loader to inject this value
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_HTMLCSSPlatformQueryDataModuleProcessorBase:module-immutable-configuration',
             $ret,
             $module,

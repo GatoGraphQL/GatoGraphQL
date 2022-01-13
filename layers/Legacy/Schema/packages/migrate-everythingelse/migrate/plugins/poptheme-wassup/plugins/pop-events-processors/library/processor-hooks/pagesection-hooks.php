@@ -6,7 +6,7 @@ class PoP_Events_PageSectionHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:sideinfo',
             array($this, 'initModelPropsSideinfo'),
             10,

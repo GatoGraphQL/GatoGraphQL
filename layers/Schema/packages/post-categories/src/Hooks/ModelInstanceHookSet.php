@@ -37,7 +37,7 @@ class ModelInstanceHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromAppState')
         );
@@ -57,7 +57,7 @@ class ModelInstanceHookSet extends AbstractHookSet
             // Announcements and Articles (Posts), or Past Event and (Upcoming) Event may be different
             // By default, we check for post type but not for categories
             if (
-                App::getHookManager()->applyFilters(
+                App::applyFilters(
                     self::HOOK_VARY_MODEL_INSTANCE_BY_CATEGORY,
                     false
                 )

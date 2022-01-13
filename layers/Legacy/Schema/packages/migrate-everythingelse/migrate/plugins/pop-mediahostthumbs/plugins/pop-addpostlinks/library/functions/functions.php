@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addFilter('getThumbId:default', 'popAddpostlinksDefaultlink', 10, 2);
+\PoP\Root\App::addFilter('getThumbId:default', 'popAddpostlinksDefaultlink', 10, 2);
 function popAddpostlinksDefaultlink($thumb_id, $post_id)
 {
 

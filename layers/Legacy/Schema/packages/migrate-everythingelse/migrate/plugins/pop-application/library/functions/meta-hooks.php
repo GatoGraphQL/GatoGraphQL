@@ -7,11 +7,11 @@ class PoP_Application_RequestMeta_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             '\PoP\ComponentModel\Engine:request-meta',
             array($this, 'getRequestMeta')
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             '\PoP\ComponentModel\Engine:site-meta',
             array($this, 'getSiteMeta')
         );

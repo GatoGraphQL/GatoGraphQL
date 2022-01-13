@@ -4,11 +4,11 @@
  * Change Author permalink from 'author' to 'u'
  */
 function getAuthorBase() {
-    return \PoP\Root\App::getHookManager()->applyFilters('author-base', '');
+    return \PoP\Root\App::applyFilters('author-base', '');
 }
 
 // change author/username base to users/userID
-\PoP\Root\App::getHookManager()->addAction('init', 'changeAuthorPermalinks');
+\PoP\Root\App::addAction('init', 'changeAuthorPermalinks');
 function changeAuthorPermalinks()
 {
 
@@ -22,7 +22,7 @@ function changeAuthorPermalinks()
     }
 }
 
-\PoP\Root\App::getHookManager()->addFilter('query_vars', 'usersQueryVars');
+\PoP\Root\App::addFilter('query_vars', 'usersQueryVars');
 function usersQueryVars($queryVars)
 {
 
@@ -33,7 +33,7 @@ function usersQueryVars($queryVars)
     }
     return $queryVars;
 }
-\PoP\Root\App::getHookManager()->addFilter('generate_rewrite_rules', 'userRewriteRules');
+\PoP\Root\App::addFilter('generate_rewrite_rules', 'userRewriteRules');
 function userRewriteRules($wp_rewrite)
 {
     if ($authorBase = getAuthorBase()) {

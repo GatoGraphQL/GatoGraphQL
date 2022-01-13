@@ -27,7 +27,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
                 break;
         }
 
-        return \PoP\Root\App::getHookManager()->applyFilters('UserStance_Module_Processor_SingleContentInners:commentssingle_layouts', $layouts, $module);
+        return \PoP\Root\App::applyFilters('UserStance_Module_Processor_SingleContentInners:commentssingle_layouts', $layouts, $module);
     }
 
     public function getLayoutSubmodules(array $module)

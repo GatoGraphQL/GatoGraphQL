@@ -34,7 +34,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
             $excludedFieldNames = $objectTypeOrInterfaceTypeFieldResolver->getAdminFieldNames();
         }
         // 2. By filter hook
-        $excludedFieldNames = App::getHookManager()->applyFilters(
+        $excludedFieldNames = App::applyFilters(
             Hooks::EXCLUDE_FIELDNAMES,
             $excludedFieldNames,
             $objectTypeOrInterfaceTypeFieldResolver,
@@ -67,7 +67,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
     ): bool {
         // Execute 2 filters: a generic one, and a specific one
         if (
-            App::getHookManager()->applyFilters(
+            App::applyFilters(
                 HookHelpers::getHookNameToFilterField(),
                 true,
                 $objectTypeOrInterfaceTypeResolver,
@@ -75,7 +75,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
                 $fieldName
             )
         ) {
-            return App::getHookManager()->applyFilters(
+            return App::applyFilters(
                 HookHelpers::getHookNameToFilterField($fieldName),
                 true,
                 $objectTypeOrInterfaceTypeResolver,

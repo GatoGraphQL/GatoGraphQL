@@ -6,13 +6,13 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 //-------------------------------------------------------------------------------------
 
 // Register the AWS S3 domain in the Allowed Domains list
-\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:allowed_domains', 'popAwss3Allowedurl');
+\PoP\Root\App::addFilter('pop_modulemanager:allowed_domains', 'popAwss3Allowedurl');
 function popAwss3Allowedurl($allowed_domains)
 {
 
     // Comment Leo 29/12/2017: getting the region like below doesn't work, so get it from outside then
     // $region = $as3cf->get_setting('region');
-    if ($region = \PoP\Root\App::getHookManager()->applyFilters('popAwss3Allowedurl:region', '')) {
+    if ($region = \PoP\Root\App::applyFilters('popAwss3Allowedurl:region', '')) {
         global $as3cf;
         if ($as3cf) {
             // Copied from plugins/amazon-s3-and-cloudfront/classes/amazon-s3-and-cloudfront.php function get_s3_url_domain

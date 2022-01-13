@@ -4,7 +4,7 @@ use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 /**
  * Integration with Latest Everything Block
  */
-\PoP\Root\App::getHookManager()->addFilter('pop_module:allcontent:tax_query_items', 'popLocationpostsSearchablecontentTaxquery');
+\PoP\Root\App::addFilter('pop_module:allcontent:tax_query_items', 'popLocationpostsSearchablecontentTaxquery');
 function popLocationpostsSearchablecontentTaxquery($tax_query_items)
 {
     if (POP_LOCATIONPOSTS_CAT_ALL) {
@@ -28,10 +28,10 @@ function popLocationpostsSearchablecontentTaxquery($tax_query_items)
  * Needed to add the "All" category to all events, to list them for the Latest Everything Block
  */
 // Do always add the 'All' Category when creating/updating a locationpost
-\PoP\Root\App::getHookManager()->addAction('init', 'popLocationpostsInitAddAllCategory');
+\PoP\Root\App::addAction('init', 'popLocationpostsInitAddAllCategory');
 function popLocationpostsInitAddAllCategory()
 {
-    \PoP\Root\App::getHookManager()->addAction('save_post_'.POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST, 'popLocationpostsAddAllCategory', 10, 1);
+    \PoP\Root\App::addAction('save_post_'.POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST, 'popLocationpostsAddAllCategory', 10, 1);
 }
 function popLocationpostsAddAllCategory($post_id)
 {

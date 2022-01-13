@@ -37,31 +37,31 @@ abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet ex
 
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
             [$this, 'getInputFieldNameTypeResolvers'],
             10,
             2
         );
-        App::getHookManager()->addFilter(
+        App::addFilter(
             HookNames::ADMIN_INPUT_FIELD_NAMES,
             [$this, 'getAdminInputFieldNames'],
             10,
             2
         );
-        App::getHookManager()->addFilter(
+        App::addFilter(
             HookNames::INPUT_FIELD_DESCRIPTION,
             [$this, 'getInputFieldDescription'],
             10,
             3
         );
-        App::getHookManager()->addFilter(
+        App::addFilter(
             HookNames::INPUT_FIELD_DEFAULT_VALUE,
             [$this, 'getInputFieldDefaultValue'],
             10,
             3
         );
-        App::getHookManager()->addFilter(
+        App::addFilter(
             HookNames::INPUT_FIELD_FILTER_INPUT,
             [$this, 'getInputFieldFilterInput'],
             10,

@@ -3,7 +3,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 // Complement to the plugin: also save_post when in webplatform
 if (!is_admin()) {
-    \PoP\Root\App::getHookManager()->addAction('save_post', array('DS_Public_Post_Preview', 'register_public_preview'), 20, 2);
+    \PoP\Root\App::addAction('save_post', array('DS_Public_Post_Preview', 'register_public_preview'), 20, 2);
 }
 
 function gdPppPreviewLink($post_id)

@@ -44,10 +44,10 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
         if (!in_array($plugin, $current)) {
             $current[] = $plugin;
             sort($current);
-            App::getHookManager()->doAction('activate_plugin', trim($plugin));
+            App::doAction('activate_plugin', trim($plugin));
             update_option('active_plugins', $current);
-            App::getHookManager()->doAction('activate_' . trim($plugin));
-            App::getHookManager()->doAction('activated_plugin', trim($plugin));
+            App::doAction('activate_' . trim($plugin));
+            App::doAction('activated_plugin', trim($plugin));
             return true;
         }
 
@@ -58,7 +58,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     {
         // Plugins needed by the website. Check the website version, if it's the one indicated,
         // then proceed to install the required plugin
-        $plugin_version = App::getHookManager()->applyFilters(
+        $plugin_version = App::applyFilters(
             'PoP:system-activateplugins:plugins',
             array()
         );

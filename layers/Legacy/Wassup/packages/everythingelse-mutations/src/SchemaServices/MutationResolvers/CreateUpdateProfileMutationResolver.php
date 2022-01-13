@@ -20,7 +20,7 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         parent::validateContent($errors, $form_data);
 
         // Allow to validate the extra inputs
-        $hooked_errors = App::getHookManager()->applyFilters('gd_createupdate_profile:validateContent', array(), $form_data);
+        $hooked_errors = App::applyFilters('gd_createupdate_profile:validateContent', array(), $form_data);
         foreach ($hooked_errors as $error) {
             $errors[] = $error;
         }
@@ -29,18 +29,18 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
     protected function additionals($user_id, $form_data): void
     {
         parent::additionals($user_id, $form_data);
-        App::getHookManager()->doAction('gd_createupdate_profile:additionals', $user_id, $form_data);
+        App::doAction('gd_createupdate_profile:additionals', $user_id, $form_data);
     }
     protected function additionalsUpdate($user_id, $form_data): void
     {
         parent::additionalsUpdate($user_id, $form_data);
-        App::getHookManager()->doAction('gd_createupdate_profile:additionalsUpdate', $user_id, $form_data);
+        App::doAction('gd_createupdate_profile:additionalsUpdate', $user_id, $form_data);
     }
     protected function additionalsCreate($user_id, $form_data): void
     {
         parent::additionalsCreate($user_id, $form_data);
 
-        App::getHookManager()->doAction('gd_createupdate_profile:additionalsCreate', $user_id, $form_data);
+        App::doAction('gd_createupdate_profile:additionalsCreate', $user_id, $form_data);
     }
     protected function createupdateuser($user_id, $form_data): void
     {

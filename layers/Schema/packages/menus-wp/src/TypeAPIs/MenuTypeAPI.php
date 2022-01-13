@@ -174,9 +174,9 @@ class MenuTypeAPI implements MenuTypeAPIInterface
             // Same param name, so do nothing
         }
 
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             TaxonomyTypeAPI::HOOK_QUERY,
-            App::getHookManager()->applyFilters(
+            App::applyFilters(
                 self::HOOK_QUERY,
                 $query,
                 $options

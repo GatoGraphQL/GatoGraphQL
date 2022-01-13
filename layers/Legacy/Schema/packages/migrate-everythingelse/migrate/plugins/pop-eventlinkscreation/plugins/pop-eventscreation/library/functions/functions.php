@@ -2,7 +2,7 @@
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
-\PoP\Root\App::getHookManager()->addFilter('get_event_edit_url', 'maybeGetEventLinkEditUrl', 10, 2);
+\PoP\Root\App::addFilter('get_event_edit_url', 'maybeGetEventLinkEditUrl', 10, 2);
 function maybeGetEventLinkEditUrl($url, $post_id)
 {
     $eventTypeAPI = EventTypeAPIFacade::getInstance();

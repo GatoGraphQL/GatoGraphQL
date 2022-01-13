@@ -16,7 +16,7 @@ function getUserNetworkusers($user_id)
 {
 
     // Allow URE to override with the same-community users
-    return \PoP\Root\App::getHookManager()->applyFilters(
+    return \PoP\Root\App::applyFilters(
         'getUserNetworkusers',
         getUserFollowers($user_id),
         $user_id

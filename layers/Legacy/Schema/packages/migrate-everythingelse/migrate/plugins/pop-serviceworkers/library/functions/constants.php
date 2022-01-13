@@ -17,7 +17,7 @@ define('GD_URLPARAM_SWNETWORKFIRST', 'sw-networkfirst');
  */
 define('GD_URLPARAM_SWCACHEBUST', 'sw-cachebust');
 
-\PoP\Root\App::getHookManager()->addFilter('RequestUtils:current_url:remove_params', 'popSwRemoveUrlparams');
+\PoP\Root\App::addFilter('RequestUtils:current_url:remove_params', 'popSwRemoveUrlparams');
 function popSwRemoveUrlparams($remove_params)
 {
     $remove_params[] = GD_URLPARAM_SWNETWORKFIRST;
@@ -26,7 +26,7 @@ function popSwRemoveUrlparams($remove_params)
     return $remove_params;
 }
 
-\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'popSwJqueryConstants');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'popSwJqueryConstants');
 function popSwJqueryConstants($jqueryConstants)
 {
     $jqueryConstants['SW_URLPARAM_NETWORKFIRST'] = GD_URLPARAM_SWNETWORKFIRST;
@@ -34,13 +34,13 @@ function popSwJqueryConstants($jqueryConstants)
 
 
     // Allow the PoPTheme Wassup indicate in which pagesections will show the "Please refresh this page" message
-    $jqueryConstants['SW_MAIN_PAGESECTIONS'] = \PoP\Root\App::getHookManager()->applyFilters('pop_sw_main_pagesection_container_ids', array());
+    $jqueryConstants['SW_MAIN_PAGESECTIONS'] = \PoP\Root\App::applyFilters('pop_sw_main_pagesection_container_ids', array());
 
     // We don't want to fetch it from the network, but from the cache, so remove the filter that we've added
 
-    \PoP\Root\App::getHookManager()->removeFilter('getReloadurlLinkattrs', 'popSwReloadurlLinkattrs');
+    \PoP\Root\App::removeFilter('getReloadurlLinkattrs', 'popSwReloadurlLinkattrs');
     $reloadurl_linkattrs = getReloadurlLinkattrs();
-    \PoP\Root\App::getHookManager()->addFilter('getReloadurlLinkattrs', 'popSwReloadurlLinkattrs');
+    \PoP\Root\App::addFilter('getReloadurlLinkattrs', 'popSwReloadurlLinkattrs');
 
     // The message html to be appended to the pageSection
     $msg_placeholder = '<div class="pop-notificationmsg %s alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" aria-hidden="true" data-dismiss="alert">×</button>%s</div>';
@@ -54,7 +54,7 @@ function popSwJqueryConstants($jqueryConstants)
             $reloadurl_linkattrs
         )
     );
-    $jqueryConstants['SW_MESSAGES_PAGEUPDATED'] = \PoP\Root\App::getHookManager()->applyFilters('pop_sw_message:pageupdated', $message);
+    $jqueryConstants['SW_MESSAGES_PAGEUPDATED'] = \PoP\Root\App::applyFilters('pop_sw_message:pageupdated', $message);
 
     // The "there is a new SW" message html to be appended to the status
     // 'topmost': show on top of any other message
@@ -67,14 +67,14 @@ function popSwJqueryConstants($jqueryConstants)
             GD_URLPARAM_TARGET_FULL
         )
     );
-    $jqueryConstants['SW_MESSAGES_WEBSITEUPDATED'] = \PoP\Root\App::getHookManager()->applyFilters('pop_sw_message:websiteupdated', $message);
+    $jqueryConstants['SW_MESSAGES_WEBSITEUPDATED'] = \PoP\Root\App::applyFilters('pop_sw_message:websiteupdated', $message);
 
     return $jqueryConstants;
 }
 
 
-\PoP\Root\App::getHookManager()->addFilter('getReloadurlLinkattrs', 'popSwReloadurlLinkattrs');
-\PoP\Root\App::getHookManager()->addFilter('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', 'popSwReloadurlLinkattrs');
+\PoP\Root\App::addFilter('getReloadurlLinkattrs', 'popSwReloadurlLinkattrs');
+\PoP\Root\App::addFilter('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', 'popSwReloadurlLinkattrs');
 function popSwReloadurlLinkattrs($params)
 {
     $params .= ' data-sw-networkfirst="true"';

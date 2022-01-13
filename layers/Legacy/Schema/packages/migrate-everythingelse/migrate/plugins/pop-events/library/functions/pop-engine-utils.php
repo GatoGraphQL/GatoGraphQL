@@ -6,7 +6,7 @@ class PoP_Events_Engine_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'augmentVarsProperties',
             [$this, 'augmentVarsProperties'],
             10,

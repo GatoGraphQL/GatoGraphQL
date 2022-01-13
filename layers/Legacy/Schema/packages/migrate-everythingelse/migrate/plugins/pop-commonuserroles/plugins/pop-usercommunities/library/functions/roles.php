@@ -1,7 +1,7 @@
 <?php
 
 // After function `getUserRoleCombinationsCommonroles`
-\PoP\Root\App::getHookManager()->addFilter('getUserRoleCombinations', 'getUserRoleCombinationsUsercommunitiesCommonroles', 105);
+\PoP\Root\App::addFilter('getUserRoleCombinations', 'getUserRoleCombinationsUsercommunitiesCommonroles', 105);
 function getUserRoleCombinationsUsercommunitiesCommonroles($user_role_combinations)
 {
 

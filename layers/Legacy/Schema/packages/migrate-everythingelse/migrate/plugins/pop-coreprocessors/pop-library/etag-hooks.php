@@ -4,7 +4,7 @@ class PoP_Core_EtagHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             '\PoP\ComponentModel\Engine:etag_header:commoncode',
             array($this, 'getCommoncode')
         );

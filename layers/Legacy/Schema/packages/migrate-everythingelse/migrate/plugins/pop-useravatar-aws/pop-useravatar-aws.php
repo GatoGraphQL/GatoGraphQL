@@ -20,7 +20,7 @@ class PoP_UserAvatar_AWS
     {
 
         // Priority: after PoP User Avatar
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888360);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888360);
     }
     public function init()
     {

@@ -4,7 +4,7 @@ class PoP_ServiceWorkers_Theme_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_SW:configuration',
             array($this, 'getSwConfiguration')
         );

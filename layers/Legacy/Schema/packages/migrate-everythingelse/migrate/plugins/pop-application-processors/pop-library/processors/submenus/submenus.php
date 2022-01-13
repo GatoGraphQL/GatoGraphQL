@@ -63,7 +63,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
 
         switch ($module[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
-                $ret[RoutingRoutes::$MAIN] = \PoP\Root\App::getHookManager()->applyFilters(
+                $ret[RoutingRoutes::$MAIN] = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomSubMenus:author:mainsubheaders',
                     array(
                         POP_ROUTE_DESCRIPTION,                    )
@@ -73,13 +73,13 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                 }
 
                 // Allow for the members tab to be added by User Role Editor plugin
-                return \PoP\Root\App::getHookManager()->applyFilters(
+                return \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomSubMenus:author:routes',
                     $ret
                 );
 
             case self::MODULE_SUBMENU_TAG:
-                $ret[RoutingRoutes::$MAIN] = \PoP\Root\App::getHookManager()->applyFilters(
+                $ret[RoutingRoutes::$MAIN] = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomSubMenus:tag:mainsubheaders',
                     array()
                 );
@@ -87,13 +87,13 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                     $ret[$route] = array();
                 }
 
-                return \PoP\Root\App::getHookManager()->applyFilters(
+                return \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomSubMenus:tag:routes',
                     $ret
                 );
 
             case self::MODULE_SUBMENU_SINGLE:
-                $ret[RoutingRoutes::$MAIN] = \PoP\Root\App::getHookManager()->applyFilters(
+                $ret[RoutingRoutes::$MAIN] = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomSubMenus:single:mainsubheaders',
                     array()
                 );
@@ -103,7 +103,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
 
                 $ret[POP_ROUTE_AUTHORS] = array();
 
-                return \PoP\Root\App::getHookManager()->applyFilters(
+                return \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomSubMenus:single:routes',
                     $ret
                 );
@@ -124,7 +124,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                 $url = RequestUtils::addRoute($url, $route);
 
                 // Allow URE to add the Organization/Community content source attribute
-                return \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_CustomSubMenus:getUrl:author', $url, $route, $author);
+                return \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomSubMenus:getUrl:author', $url, $route, $author);
 
             case self::MODULE_SUBMENU_TAG:
                 $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));

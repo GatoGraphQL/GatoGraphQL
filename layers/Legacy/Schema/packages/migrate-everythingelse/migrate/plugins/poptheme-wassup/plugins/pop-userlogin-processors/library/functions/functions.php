@@ -3,7 +3,7 @@
 /**
  * Uniqueblocks
  */
-\PoP\Root\App::getHookManager()->addFilter('RequestUtils:getFramecomponentModules', 'getUserloginFramecomponentModules');
+\PoP\Root\App::addFilter('RequestUtils:getFramecomponentModules', 'getUserloginFramecomponentModules');
 function getUserloginFramecomponentModules($modules)
 {
 

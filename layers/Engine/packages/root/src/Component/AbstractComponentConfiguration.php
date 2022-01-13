@@ -60,7 +60,7 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
             $class,
             $envVariable
         );
-        $this->configuration[$envVariable] = App::getHookManager()->applyFilters(
+        $this->configuration[$envVariable] = App::applyFilters(
             $hookName,
             $this->configuration[$envVariable],
             $class,

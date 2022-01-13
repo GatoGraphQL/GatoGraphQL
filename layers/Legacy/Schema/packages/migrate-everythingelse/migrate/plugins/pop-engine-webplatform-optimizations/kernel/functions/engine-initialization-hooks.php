@@ -5,7 +5,7 @@ class PoP_WebPlatformEngineOptimizations_EngineInitialization_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoPWebPlatform_Engine:encoded-data-object',
             array($this, 'getEncodedDataObject'),
             10,
@@ -84,7 +84,7 @@ class PoP_WebPlatformEngineOptimizations_EngineInitialization_Hooks
 
                 // In addition, this file must be uploaded to AWS S3 bucket, so that this scheme of generating the file on runtime
                 // can also work when hosting the website at multiple servers
-                \PoP\Root\App::getHookManager()->doAction(
+                \PoP\Root\App::doAction(
                     '\PoP\ComponentModel\Engine:optimizeEncodedData:file_stored',
                     $module,
                     $property_path,

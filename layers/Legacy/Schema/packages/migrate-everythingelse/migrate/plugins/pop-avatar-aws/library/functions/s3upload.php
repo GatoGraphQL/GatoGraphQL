@@ -8,21 +8,21 @@ class PoP_Avatar_AWS_S3Upload extends PoP_AWS_S3UploadBase
     {
         $this->files_to_upload = array();
 
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'user_avatar_add_photo:file-uploaded',
             array($this, 'maybeUploadToS3'),
             10,
             2
         );
 
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'user_avatar_add_photo:image-url',
             array($this, 'getImageUrl'),
             10,
             3
         );
 
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'user_avatar_add_photo:retrieve-file',
             array($this, 'maybeDownloadFromS3'),
             10,

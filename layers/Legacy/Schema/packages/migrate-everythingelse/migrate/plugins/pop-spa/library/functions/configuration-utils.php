@@ -9,6 +9,6 @@ class PoP_SPA_ConfigurationUtils
 
         // Return a list of items like this:
         // $route => array('preload' => bool value, 'targets' => array value)
-        return \PoP\Root\App::getHookManager()->applyFilters(POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD, array());
+        return \PoP\Root\App::applyFilters(POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD, array());
     }
 }

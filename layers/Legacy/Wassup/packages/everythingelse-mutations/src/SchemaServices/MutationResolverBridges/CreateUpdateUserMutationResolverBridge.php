@@ -40,7 +40,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
                 $this->getTranslationAPI()->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
                 getAuthorProfileUrl(App::getState('current-user-id')),
                 \PoP_Application_Utils::getPreviewTarget(),
-                App::getHookManager()->applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
+                App::applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
             );
         }
     }
@@ -67,7 +67,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         }
 
         // Allow to add extra inputs
-        $form_data = App::getHookManager()->applyFilters('gd_createupdate_user:form_data', $form_data);
+        $form_data = App::applyFilters('gd_createupdate_user:form_data', $form_data);
 
         if ($user_id) {
             $form_data = $this->getUpdateuserFormData($form_data);
@@ -81,7 +81,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     protected function getCreateuserFormData(array $form_data)
     {
         // Allow to add extra inputs
-        $form_data = App::getHookManager()->applyFilters('gd_createupdate_user:form_data:create', $form_data);
+        $form_data = App::applyFilters('gd_createupdate_user:form_data:create', $form_data);
 
         return $form_data;
     }
@@ -89,7 +89,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     protected function getUpdateuserFormData(array $form_data)
     {
         // Allow to add extra inputs
-        $form_data = App::getHookManager()->applyFilters('gd_createupdate_user:form_data:update', $form_data);
+        $form_data = App::applyFilters('gd_createupdate_user:form_data:update', $form_data);
 
         return $form_data;
     }
@@ -110,7 +110,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
             $form_inputs['captcha'] = null;
         }
 
-        $inputs = App::getHookManager()->applyFilters(
+        $inputs = App::applyFilters(
             'GD_CreateUpdate_User:form-inputs',
             $form_inputs
         );

@@ -3,7 +3,7 @@
 /**
  * Uniqueblocks
  */
-\PoP\Root\App::getHookManager()->addFilter('RequestUtils:getFramecomponentModules', 'getDomainFramecomponentModules');
+\PoP\Root\App::addFilter('RequestUtils:getFramecomponentModules', 'getDomainFramecomponentModules');
 function getDomainFramecomponentModules($modules)
 {
     $modules[] = [PoP_MultidomainProcessors_Module_Processor_Dataloads::class, PoP_MultidomainProcessors_Module_Processor_Dataloads::MODULE_DATALOAD_INITIALIZEDOMAIN];

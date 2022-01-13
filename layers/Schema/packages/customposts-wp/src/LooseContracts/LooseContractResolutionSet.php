@@ -12,11 +12,11 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     protected function resolveContracts(): void
     {
         // Filters.
-        App::getHookManager()->addFilter('the_title', function ($post_title, $post_id) {
-            return App::getHookManager()->applyFilters('popcms:post:title', $post_title, $post_id);
+        App::addFilter('the_title', function ($post_title, $post_id) {
+            return App::applyFilters('popcms:post:title', $post_title, $post_id);
         }, 10, 2);
-        App::getHookManager()->addFilter('excerpt_more', function ($text) {
-            return App::getHookManager()->applyFilters('popcms:excerptMore', $text);
+        App::addFilter('excerpt_more', function ($text) {
+            return App::applyFilters('popcms:excerptMore', $text);
         }, 10, 1);
 
         $this->getLooseContractManager()->implementHooks([

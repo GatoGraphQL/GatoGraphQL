@@ -144,7 +144,7 @@ class PoP_Notifications_API
             // Notify of a given post to all users: used with the Blog to make announcements of new releases, etc
             // It is an OR condition all on its own, because it doesn't depend on the user_registered time,
             // so we can show all the general notifications to the logged in user, even those created before the user registered
-            $general_notification_actions = \PoP\Root\App::getHookManager()->applyFilters(
+            $general_notification_actions = \PoP\Root\App::applyFilters(
                 'AAL_PoP_API:notifications:general:actions',
                 array(
                     AAL_POP_ACTION_POST_NOTIFIEDALLUSERS
@@ -215,7 +215,7 @@ class PoP_Notifications_API
                 // User-network: followed users + communities user is part of
                 // Allow User Role Editor to hook into it, to add the Communities (GD_URE_METAKEY_PROFILE_COMMUNITIES)
                 $user_plus_network_where = "1=1";
-                if ($usernetwork_metakeys = \PoP\Root\App::getHookManager()->applyFilters(
+                if ($usernetwork_metakeys = \PoP\Root\App::applyFilters(
                     'AAL_PoP_API:notifications:usernetwork:metakeys',
                     array()
                 )
@@ -258,7 +258,7 @@ class PoP_Notifications_API
                         arrayToQuotedString($usernetwork_keys),
                         $wpdb->pop_notifications
                     );
-                    $user_network_conditions = \PoP\Root\App::getHookManager()->applyFilters(
+                    $user_network_conditions = \PoP\Root\App::applyFilters(
                         'AAL_PoP_API:notifications:usernetwork:conditions',
                         $user_network_conditions,
                         $user_id,
@@ -296,7 +296,7 @@ class PoP_Notifications_API
                         $user_id
                     ),
                 );
-                $useractivityposts_post_id_unions = \PoP\Root\App::getHookManager()->applyFilters(
+                $useractivityposts_post_id_unions = \PoP\Root\App::applyFilters(
                     'AAL_PoP_API:notifications:useractivityposts:post_id_unions',
                     array(),
                     $user_id
@@ -330,7 +330,7 @@ class PoP_Notifications_API
                         '('.implode(') OR (', $useractivityposts_post_id_ors).')'
                     ),
                 );
-                $useractivityposts_object_id_unions = \PoP\Root\App::getHookManager()->applyFilters(
+                $useractivityposts_object_id_unions = \PoP\Root\App::applyFilters(
                     'AAL_PoP_API:notifications:useractivityposts:object_id_unions',
                     $useractivityposts_object_id_unions,
                     $user_id
@@ -378,7 +378,7 @@ class PoP_Notifications_API
                 // User-specific Notifications:
                 // - By Hook: "Welcome User" message
                 // - By Hook: Twitter log-in: request user to update the (fake) email (WSL_AAL_POP_ACTION_USER_REQUESTCHANGEEMAIL)
-                $userspecific_notification_actions = \PoP\Root\App::getHookManager()->applyFilters(
+                $userspecific_notification_actions = \PoP\Root\App::applyFilters(
                     'AAL_PoP_API:notifications:userspecific:actions',
                     array()
                 );
@@ -406,7 +406,7 @@ class PoP_Notifications_API
                 // Notify the user when:
                 // - By Hook: Someone from the network joins a community (URE_AAL_POP_ACTION_USER_JOINEDCOMMUNITY)
                 // - By Hook: Anyone joined the user (user = community) (URE_AAL_POP_ACTION_USER_JOINEDCOMMUNITY)
-                $userplusnetwork_notification_actions = \PoP\Root\App::getHookManager()->applyFilters(
+                $userplusnetwork_notification_actions = \PoP\Root\App::applyFilters(
                     'AAL_PoP_API:notifications:userplusnetwork-user:actions',
                     array()
                 );
@@ -431,7 +431,7 @@ class PoP_Notifications_API
                 }
 
                 // Tags actions: User + Network Notifications:
-                $userplusnetwork_notification_tag_actions = \PoP\Root\App::getHookManager()->applyFilters(
+                $userplusnetwork_notification_tag_actions = \PoP\Root\App::applyFilters(
                     'AAL_PoP_API:notifications:userplusnetwork-tag:actions',
                     array()
                 );
@@ -460,7 +460,7 @@ class PoP_Notifications_API
                 // The User is the target of the action Notifications:
                 // Notify the user when:
                 // - By Hook: A community updates the membership of the user (URE_AAL_POP_ACTION_USER_UPDATEDUSERMEMBERSHIP)
-                $useristarget_notification_actions = \PoP\Root\App::getHookManager()->applyFilters(
+                $useristarget_notification_actions = \PoP\Root\App::applyFilters(
                     'AAL_PoP_API:notifications:useristarget:actions',
                     array()
                 );
@@ -485,7 +485,7 @@ class PoP_Notifications_API
                 }
 
                 // User Activity + Network Notifications:
-                $useractivityposts_notification_actions = \PoP\Root\App::getHookManager()->applyFilters(
+                $useractivityposts_notification_actions = \PoP\Root\App::applyFilters(
                     'AAL_PoP_API:notifications:useractivityposts:actions',
                     array()
                 );
@@ -510,7 +510,7 @@ class PoP_Notifications_API
                 }
 
                 // User Activity + Network Notifications:
-                $useractivityplusnetwork_notification_actions = \PoP\Root\App::getHookManager()->applyFilters(
+                $useractivityplusnetwork_notification_actions = \PoP\Root\App::applyFilters(
                     'AAL_PoP_API:notifications:useractivityplusnetwork:actions',
                     array()
                 );
@@ -552,7 +552,7 @@ class PoP_Notifications_API
 
 
                 // Allow plug-ins to keep adding WHERE statements
-                $sql_where_user_ors = \PoP\Root\App::getHookManager()->applyFilters('PoP_Notifications_API:sql:wheres', $sql_where_user_ors, $args, $actions, $user_id, $userposts_where, $useractivityposts_where, $user_plus_network_where);
+                $sql_where_user_ors = \PoP\Root\App::applyFilters('PoP_Notifications_API:sql:wheres', $sql_where_user_ors, $args, $actions, $user_id, $userposts_where, $useractivityposts_where, $user_plus_network_where);
 
                 $sql_where_user_ands = array();
                 $sql_where_user_ands[] = '('.implode(') OR (', $sql_where_user_ors).')';
@@ -587,7 +587,7 @@ class PoP_Notifications_API
                 }
 
                 // Allow plug-ins to keep adding WHERE statements
-                $sql_where_user_ands = \PoP\Root\App::getHookManager()->applyFilters('AAL_PoP_API:sql:where_ands', $sql_where_user_ands, $args);
+                $sql_where_user_ands = \PoP\Root\App::applyFilters('AAL_PoP_API:sql:where_ands', $sql_where_user_ands, $args);
 
                 $sql_where_ors[] = '('.implode(') AND (', $sql_where_user_ands).')';
             }
@@ -959,7 +959,7 @@ class PoP_Notifications_API
             $notification = self::getNotification($histid);
             $objectids_sql = '';
             if ($notification->object_type == "Post") {
-                $post_actions = \PoP\Root\App::getHookManager()->applyFilters(
+                $post_actions = \PoP\Root\App::applyFilters(
                     'AAL_PoP_API:additional_notifications:markasread:posts:actions',
                     array()
                 );
@@ -974,11 +974,11 @@ class PoP_Notifications_API
                     );
                 }
             } elseif ($notification->object_type == "User") {
-                $user_actions = \PoP\Root\App::getHookManager()->applyFilters(
+                $user_actions = \PoP\Root\App::applyFilters(
                     'AAL_PoP_API:additional_notifications:markasread:users:actions',
                     array()
                 );
-                $sameuser_actions = \PoP\Root\App::getHookManager()->applyFilters(
+                $sameuser_actions = \PoP\Root\App::applyFilters(
                     'AAL_PoP_API:additional_notifications:markasread:sameusers:actions',
                     array()
                 );
@@ -1006,7 +1006,7 @@ class PoP_Notifications_API
                 }
             } elseif ($notification->object_type == "Taxonomy") {
                 if ($notification->object_subtype == "Tag") {
-                    $tag_actions = \PoP\Root\App::getHookManager()->applyFilters(
+                    $tag_actions = \PoP\Root\App::applyFilters(
                         'AAL_PoP_API:additional_notifications:markasread:tags:actions',
                         array()
                     );
@@ -1025,7 +1025,7 @@ class PoP_Notifications_API
 
             // Allow plug-ins to add their own logic
             $multiple_status_data = array($objectids_sql, $actions);
-            $multiple_status_data = \PoP\Root\App::getHookManager()->applyFilters('PoP_Notifications_API:multiple-status:objectids-sql', $multiple_status_data, $notification);
+            $multiple_status_data = \PoP\Root\App::applyFilters('PoP_Notifications_API:multiple-status:objectids-sql', $multiple_status_data, $notification);
             $objectids_sql = $multiple_status_data[0];
             $actions = $multiple_status_data[1];
 
@@ -1063,7 +1063,7 @@ class PoP_Notifications_API
         // or not limiting for "mark all as read"
         if (self::$additionalnotifications_sql) {
             // Add a filter to add an extra AND statement, remove it immediately after
-            \PoP\Root\App::getHookManager()->addFilter(
+            \PoP\Root\App::addFilter(
                 'AAL_PoP_API:sql:where_ands',
                 array(PoP_Notifications_API::class, 'addAdditionalnotificationsStatusSql'),
                 10,
@@ -1085,7 +1085,7 @@ class PoP_Notifications_API
 
         $results = self::getNotifications($args, $actions);
         if (self::$additionalnotifications_sql) {
-            \PoP\Root\App::getHookManager()->removeFilter(
+            \PoP\Root\App::removeFilter(
                 'AAL_PoP_API:sql:where_ands',
                 array(PoP_Notifications_API::class, 'addAdditionalnotificationsStatusSql'),
                 10,

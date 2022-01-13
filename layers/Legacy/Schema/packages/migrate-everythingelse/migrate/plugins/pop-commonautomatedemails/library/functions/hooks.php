@@ -4,11 +4,11 @@ class PoP_CommonAutomatedEmails_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_AutomatedEmails_Operator:automatedemail:header',
             array($this, 'getAutomatedemailHeader')
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_EmailSender_Utils:init:headers',
             array($this, 'initHeaders')
         );

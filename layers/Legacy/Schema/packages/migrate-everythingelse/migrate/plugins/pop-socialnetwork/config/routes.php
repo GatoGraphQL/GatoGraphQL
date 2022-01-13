@@ -64,7 +64,7 @@ if (!defined('POP_SOCIALNETWORK_ROUTE_SUBSCRIBEDTO')) {
 }
 
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

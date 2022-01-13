@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addAction(
+\PoP\Root\App::addAction(
     'popcms:init', 
     'popUseravatarAwsInitConstants', 
     10000

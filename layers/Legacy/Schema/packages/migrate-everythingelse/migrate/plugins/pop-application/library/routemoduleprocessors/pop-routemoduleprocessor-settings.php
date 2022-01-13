@@ -1,7 +1,7 @@
 <?php
 use PoP\ModuleRouting\ModuleRoutingGroups;
 
-\PoP\Root\App::getHookManager()->addAction(
+\PoP\Root\App::addAction(
     'popcms:init', 
     'popEngineDefinePagemodulegroupContentModule'
 );

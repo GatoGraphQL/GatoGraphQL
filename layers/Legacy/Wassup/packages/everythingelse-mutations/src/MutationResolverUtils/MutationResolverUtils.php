@@ -9,7 +9,7 @@ class MutationResolverUtils
 {
     public static function getMyCommunityFormInputs()
     {
-        $inputs = App::getHookManager()->applyFilters(
+        $inputs = App::applyFilters(
             'GD_UserCommunities_MyCommunitiesUtils:form-inputs',
             array(
                 'communities' => null,

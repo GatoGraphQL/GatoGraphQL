@@ -90,7 +90,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
     protected function additionals(string | int $comment_id, array $form_data): void
     {
-        App::getHookManager()->doAction('gd_addcomment', $comment_id, $form_data);
+        App::doAction('gd_addcomment', $comment_id, $form_data);
     }
 
     protected function getCommentData(array $form_data): array

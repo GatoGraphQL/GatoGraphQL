@@ -97,7 +97,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
         switch ($fieldName) {
             case 'multilayoutKeys':
                 // Allow pop-categorypostlayouts to add more layouts
-                return \PoP\Root\App::getHookManager()->applyFilters(
+                return \PoP\Root\App::applyFilters(
                     'PoP_Application:TypeResolver_Posts:multilayout-keys',
                     array(
                         strtolower($objectTypeResolver->getTypeName()),

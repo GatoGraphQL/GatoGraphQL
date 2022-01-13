@@ -231,7 +231,7 @@ class PoP_ResourceLoader_FileGenerator_BundleFilesBase {
 
         // If we are generating the bundle(group) files on runtime, then trigger a hook to have these uploaded to S3
         if ($options['generate-item-triggerhook'] ?? null) {
-            \PoP\Root\App::getHookManager()->doAction(
+            \PoP\Root\App::doAction(
                 'PoP_ResourceLoader_FileGenerator_BundleFilesBase:generate-item',
                 $file->getFilepath(),
                 $file->getGeneratedReferencedFiles(),

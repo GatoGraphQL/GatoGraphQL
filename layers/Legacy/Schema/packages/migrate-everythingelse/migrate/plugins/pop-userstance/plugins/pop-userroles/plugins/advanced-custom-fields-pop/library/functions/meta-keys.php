@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addFilter('gdAcfGetKeysStoreAsSingle', 'userstanceAcfGetKeysStoreAsSingleCustom');
+\PoP\Root\App::addFilter('gdAcfGetKeysStoreAsSingle', 'userstanceAcfGetKeysStoreAsSingleCustom');
 function userstanceAcfGetKeysStoreAsSingleCustom($keys)
 {
     $keys[] = GD_URE_METAKEY_POST_AUTHORROLE;

@@ -66,7 +66,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
 
     protected function getLimitParam($query_args)
     {
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             'CustomPostTypeDataLoader:query:limit',
             parent::getLimitParam($query_args)
         );

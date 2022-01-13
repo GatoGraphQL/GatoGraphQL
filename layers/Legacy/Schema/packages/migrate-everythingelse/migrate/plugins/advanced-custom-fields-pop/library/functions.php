@@ -2,16 +2,16 @@
 
 function gdAcfGetKeysStoreAsArray()
 {
-    return \PoP\Root\App::getHookManager()->applyFilters('gdAcfGetKeysStoreAsArray', array());
+    return \PoP\Root\App::applyFilters('gdAcfGetKeysStoreAsArray', array());
 }
 
 function gdAcfGetKeysStoreAsSingle()
 {
-    return \PoP\Root\App::getHookManager()->applyFilters('gdAcfGetKeysStoreAsSingle', array());
+    return \PoP\Root\App::applyFilters('gdAcfGetKeysStoreAsSingle', array());
 }
 
 // Store an array in different non-unique rows
-\PoP\Root\App::getHookManager()->addFilter('acf/update_value', 'gdAcfUpdateValue', 10, 3);
+\PoP\Root\App::addFilter('acf/update_value', 'gdAcfUpdateValue', 10, 3);
 function gdAcfUpdateValue($value, $post_id, $field)
 {
     $key = $field['name'];
@@ -52,13 +52,13 @@ function gdAcfLoadValue($value, $post_id, $field, $keys, $single = false)
 }
 
 
-\PoP\Root\App::getHookManager()->addFilter('acf/load_value', 'gdAcfLoadValueArray', 100, 3);
+\PoP\Root\App::addFilter('acf/load_value', 'gdAcfLoadValueArray', 100, 3);
 function gdAcfLoadValueArray($value, $post_id, $field)
 {
     return gdAcfLoadValue($value, $post_id, $field, gdAcfGetKeysStoreAsArray());
 }
 
-\PoP\Root\App::getHookManager()->addFilter('acf/load_value', 'gdAcfLoadValueSingle', 100, 3);
+\PoP\Root\App::addFilter('acf/load_value', 'gdAcfLoadValueSingle', 100, 3);
 function gdAcfLoadValueSingle($value, $post_id, $field)
 {
     return gdAcfLoadValue($value, $post_id, $field, gdAcfGetKeysStoreAsSingle(), true);

@@ -10,7 +10,7 @@ class PoP_AddHighlightsWP_Setup
             array($this, 'rewriteFlush')
         );
     
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'init',
             array($this, 'installPostType')
         );

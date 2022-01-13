@@ -1,5 +1,5 @@
 <?php
-// \PoP\Root\App::getHookManager()->addFilter('gdPostParentpageid', 'locationpostsPostParentpageid', 10, 2);
+// \PoP\Root\App::addFilter('gdPostParentpageid', 'locationpostsPostParentpageid', 10, 2);
 // function locationpostsPostParentpageid($pageid, $post_id)
 // {
 //     if (defined('POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS') && POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS) {

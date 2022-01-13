@@ -43,7 +43,7 @@ trait DataloadModuleProcessorTrait
         /**
          * Allow to add more stuff
          */
-        App::getHookManager()->doAction(
+        App::doAction(
             Constants::HOOK_DATALOAD_INIT_MODEL_PROPS,
             array(&$props),
             $module,

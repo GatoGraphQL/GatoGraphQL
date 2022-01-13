@@ -11,7 +11,7 @@ class BuildSystemMutationResolver extends AbstractMutationResolver
 {
     public function executeMutation(array $form_data): mixed
     {
-        App::getHookManager()->doAction('PoP:system-build');
+        App::doAction('PoP:system-build');
         return true;
     }
 }

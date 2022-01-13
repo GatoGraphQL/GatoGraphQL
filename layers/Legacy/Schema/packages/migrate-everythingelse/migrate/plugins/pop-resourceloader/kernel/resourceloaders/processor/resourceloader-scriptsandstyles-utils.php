@@ -555,7 +555,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
                 $pop_resourceloader_currentroute_filegenerator_bundlefiles->generate($options);
 
                 // Trigger an action, to upload the files to S3
-                \PoP\Root\App::getHookManager()->doAction(
+                \PoP\Root\App::doAction(
                     'PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils:generated-bundlefiles'
                 );
             }

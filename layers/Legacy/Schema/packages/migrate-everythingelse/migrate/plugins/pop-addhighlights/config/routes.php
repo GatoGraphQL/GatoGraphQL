@@ -18,7 +18,7 @@ if (!defined('POP_ADDHIGHLIGHTS_ROUTE_EDITHIGHLIGHT')) {
     define('POP_ADDHIGHLIGHTS_ROUTE_EDITHIGHLIGHT', $definitionManager->getUniqueDefinition('edit-highlight', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

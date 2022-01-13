@@ -28,7 +28,7 @@ class PoPTheme_Wassup
         include_once dirname(__FILE__).'/wp-includes/load.php';
 
         // Priority: new section, after PoP Application Processors section
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888850);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888850);
     }
 
     public function init()

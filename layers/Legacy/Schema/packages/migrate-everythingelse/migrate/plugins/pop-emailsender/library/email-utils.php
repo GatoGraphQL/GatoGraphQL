@@ -25,7 +25,7 @@ class PoP_EmailSender_Utils
     {
 
         // Allow to add extra headers. Eg: newsletters
-        self::$headers = \PoP\Root\App::getHookManager()->applyFilters(
+        self::$headers = \PoP\Root\App::applyFilters(
             'PoP_EmailSender_Utils:init:headers',
             array(
                 'default' => sprintf(
@@ -48,7 +48,7 @@ class PoP_EmailSender_Utils
         $skip = !in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
 
         // Check if for a given type of post the email must not be sent (eg: Highlights)
-        return \PoP\Root\App::getHookManager()->applyFilters('create_post:skip_sendemail', $skip, $post_id);
+        return \PoP\Root\App::applyFilters('create_post:skip_sendemail', $skip, $post_id);
     }
     public static function getAdminNotificationsEmail()
     {
@@ -56,28 +56,28 @@ class PoP_EmailSender_Utils
         $cmsemailsenderapi = \PoP\EmailSender\FunctionAPIFactory::getInstance();
 
         // By default, use the admin_email, but this can be overriden
-        return \PoP\Root\App::getHookManager()->applyFilters('gd_email_notifications_email', $cmsemailsenderapi->getAdminUserEmail());
+        return \PoP\Root\App::applyFilters('gd_email_notifications_email', $cmsemailsenderapi->getAdminUserEmail());
     }
     public static function getFromName()
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        return \PoP\Root\App::getHookManager()->applyFilters('gd_email_fromname', $cmsapplicationapi->getSiteName());
+        return \PoP\Root\App::applyFilters('gd_email_fromname', $cmsapplicationapi->getSiteName());
     }
     public static function getFromEmail()
     {
         $cmsemailsenderapi = \PoP\EmailSender\FunctionAPIFactory::getInstance();
 
         // By default, use the admin_email, but this can be overriden
-        return \PoP\Root\App::getHookManager()->applyFilters('gd_email_info_email', $cmsemailsenderapi->getAdminUserEmail());
+        return \PoP\Root\App::applyFilters('gd_email_info_email', $cmsemailsenderapi->getAdminUserEmail());
     }
     public static function getContenttype()
     {
-        return \PoP\Root\App::getHookManager()->applyFilters('gd_email_contenttype', 'text/html');
+        return \PoP\Root\App::applyFilters('gd_email_contenttype', 'text/html');
     }
     public static function getCharset()
     {
         $cmsService = CMSServiceFacade::getInstance();
-        return \PoP\Root\App::getHookManager()->applyFilters('gd_email_charset', strtolower($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:charset'))));
+        return \PoP\Root\App::applyFilters('gd_email_charset', strtolower($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:charset'))));
     }
 
     public static function sendemailToUsers($emails, $names, $subject, $msg, $individual = true, $header = null, $frame = null)

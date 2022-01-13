@@ -9,7 +9,7 @@ if (!defined('POP_SHARE_ROUTE_SHAREBYEMAIL')) {
 	define('POP_SHARE_ROUTE_SHAREBYEMAIL', $definitionManager->getUniqueDefinition('share-by-email', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

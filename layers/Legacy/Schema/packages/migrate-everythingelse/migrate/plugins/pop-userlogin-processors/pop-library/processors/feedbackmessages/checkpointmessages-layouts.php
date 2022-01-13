@@ -47,7 +47,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
                 );
 
                 // Allow to add extra messages by WSL for Change Pwd
-                $extra_checkpoint_msgs = \PoP\Root\App::getHookManager()->applyFilters(
+                $extra_checkpoint_msgs = \PoP\Root\App::applyFilters(
                     'GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts:checkpoint-messages:loggedin',
                     $this->getProp($module, $props, 'extra-checkpoint-messages'),
                     $module

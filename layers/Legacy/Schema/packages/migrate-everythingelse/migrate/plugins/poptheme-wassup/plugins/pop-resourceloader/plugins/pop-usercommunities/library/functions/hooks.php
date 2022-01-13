@@ -5,7 +5,7 @@ class PoPThemeWassup_UserCommunities_ResourceLoader_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoPThemeWassup_ResourceLoader_Hooks:extra-vars',
             array($this, 'getAuthorResourcesExtraVars'),
             10,

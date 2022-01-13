@@ -19,7 +19,7 @@ class PoP_PreviewContent
     {
 
         // Priority: after PoP Content Creation
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888350);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function init()
     {

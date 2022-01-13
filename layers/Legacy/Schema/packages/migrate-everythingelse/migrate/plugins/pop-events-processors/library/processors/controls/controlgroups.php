@@ -38,7 +38,7 @@ class PoP_Events_Module_Processor_CustomControlGroups extends PoP_Module_Process
                 
             case self::MODULE_CONTROLGROUP_BLOCKAUTHOREVENTLIST:
                 // Allow URE to add the Switch Organization/Organization+Members if the author is an organization
-                $layouts = \PoP\Root\App::getHookManager()->applyFilters(
+                $layouts = \PoP\Root\App::applyFilters(
                     'GD_EM_Module_Processor_CustomControlGroups:blockauthoreventlist:layouts',
                     array(
                         [PoP_EventsCreation_Module_Processor_CustomControlButtonGroups::class, PoP_EventsCreation_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS],

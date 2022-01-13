@@ -4,7 +4,7 @@ class PoP_SocialNetowrkProcessors_LoginProcessorHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_UserAccountUtils:login:modules',
             array($this, 'getLoginModules')
         );

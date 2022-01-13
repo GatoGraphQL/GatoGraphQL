@@ -17,7 +17,7 @@ class GD_Captcha
         $random = rawurlencode($random);
 
         // Allow to override the image src URL, as to set the private key from the website's environment-constants
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'GD_Captcha:image-src',
             sprintf(POP_CAPTCHA_URL.'/directaccess-library/captcha/captcha.png.php?encoded=%s&random=%s', $encoded, $random),
             $encoded,

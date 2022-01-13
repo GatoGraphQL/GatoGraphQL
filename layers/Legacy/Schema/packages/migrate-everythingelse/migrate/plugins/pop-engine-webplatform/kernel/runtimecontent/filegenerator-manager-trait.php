@@ -9,7 +9,7 @@ trait FileGeneratorManagerTrait
     {
         // When a plugin is activated/deactivated, ANY plugin, delete the corresponding cached files
         // This is particularly important for the MEMORY, since we can't set by constants to not use it
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'popcms:componentInstalledOrUninstalled',
             array($this, 'deleteFiles')
         );

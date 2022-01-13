@@ -9,7 +9,7 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
  */
 
 // Send an email to the new Communities: when the user updated the communities
-\PoP\Root\App::getHookManager()->addAction('gd_update_mycommunities:update', 'gdUreSendemailUpdatemycommunities', 100, 3);
+\PoP\Root\App::addAction('gd_update_mycommunities:update', 'gdUreSendemailUpdatemycommunities', 100, 3);
 function gdUreSendemailUpdatemycommunities($user_id, $form_data, $operationlog)
 {
     gdUreSendemailCommunityNewmember($user_id, $operationlog['new-communities']);

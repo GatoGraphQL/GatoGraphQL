@@ -19,7 +19,7 @@ class PoP_CommonPagesProcessors
     {
 
         // Priority: after ...
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888891);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888891);
     }
 
     public function init()

@@ -5,7 +5,7 @@
  */
 
 // Do always add the 'All' Category when adding a new event
-\PoP\Root\App::getHookManager()->addAction('em_event_save_pre', 'gdEmEventSavePreAddAllCategory', 10, 1);
+\PoP\Root\App::addAction('em_event_save_pre', 'gdEmEventSavePreAddAllCategory', 10, 1);
 function gdEmEventSavePreAddAllCategory($EM_Event)
 {
 

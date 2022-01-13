@@ -4,7 +4,7 @@ use PoP\Engine\Facades\CMS\CMSServiceFacade;
 /*
  * Function to remove all access to the backend (also edit one's profile) for Subscribers
  */
-\PoP\Root\App::getHookManager()->addAction('admin_init', 'blockDashboardAccess');
+\PoP\Root\App::addAction('admin_init', 'blockDashboardAccess');
 function blockDashboardAccess()
 {
 

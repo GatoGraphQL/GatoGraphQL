@@ -15,7 +15,7 @@ class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfi
     }
     protected function usercommunitiesAdditionalsCreate($user_id, $form_data): void
     {
-        App::getHookManager()->doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $form_data);
+        App::doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $form_data);
     }
 
     protected function createuser($form_data)

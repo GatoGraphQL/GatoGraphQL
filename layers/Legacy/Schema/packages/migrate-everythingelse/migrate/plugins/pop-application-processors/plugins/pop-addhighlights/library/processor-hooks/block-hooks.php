@@ -5,13 +5,13 @@ class PoP_ApplicationProcessors_AddHighlights_BlockHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomContentBlocks:single-sidebar:top',
             array($this, 'getTopSidebar'),
             10,
             2
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomContentBlocks:single-sidebar:bottom',
             array($this, 'getBottomSidebar'),
             10,

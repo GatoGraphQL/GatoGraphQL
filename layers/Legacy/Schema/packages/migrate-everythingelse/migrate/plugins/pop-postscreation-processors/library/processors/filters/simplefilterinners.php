@@ -40,7 +40,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
                 ]
             );
         }
-        if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
+        if ($modules = \PoP\Root\App::applyFilters(
             'Links:SimpleFilterInners:inputmodules',
             $inputmodules[$module[1]],
             $module

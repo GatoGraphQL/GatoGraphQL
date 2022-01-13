@@ -14,7 +14,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
     {
 
         // Commented
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'gd_addcomment',
             array($this, 'commented'),
             10,
@@ -22,7 +22,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
         );
 
         // When a comment is marked as spam, tell the user about content guidelines
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'popcms:spamComment',
             array($this, 'spamComment'),
             10,
@@ -30,7 +30,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
         );
 
         // When a comment is deleted from the system, delete all notifications about that comment
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'popcms:deleteComment',
             array(PoP_AddComments_Notifications_API::class, 'clearComment'),
             10,

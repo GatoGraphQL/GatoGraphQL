@@ -3,7 +3,7 @@ class PoP_ResourceLoader_ProcessorHooks {
 
 	public function __construct() {
 
-		\PoP\Root\App::getHookManager()->addFilter(
+		\PoP\Root\App::addFilter(
 			'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-settings',
 			array($this, 'getImmutableSettings'),
 			10,

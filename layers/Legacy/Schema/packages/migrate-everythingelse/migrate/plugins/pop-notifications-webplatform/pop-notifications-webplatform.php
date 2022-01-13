@@ -21,7 +21,7 @@ class PoP_NotificationsWebPlatform
     {
 
         // Priority: after PoP User Platform Web Platform
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888540);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888540);
     }
     public function init()
     {

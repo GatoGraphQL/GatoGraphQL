@@ -5,7 +5,7 @@ class UREPoP_RoleProcessors_LatestCounts_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'latestcounts:author:classes',
             array($this, 'getClasses')
         );

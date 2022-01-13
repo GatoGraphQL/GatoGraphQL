@@ -7,8 +7,8 @@ class PoP_ServiceWorkers_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            \PoP\Root\App::getHookManager()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
-            \PoP\Root\App::getHookManager()->addAction('popcms:head', array($this, 'header'));
+            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::addAction('popcms:head', array($this, 'header'));
         }
 
         /**

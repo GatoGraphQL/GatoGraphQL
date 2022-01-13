@@ -5,13 +5,13 @@ class PoPThemeWassup_DataLoad_FilterHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'Blog:FilterInnerModuleProcessor:inputmodules',
             array($this, 'modifyPostFilterInputs'),
             10,
             2
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'Blog:SimpleFilterInners:inputmodules',
             array($this, 'modifyPostSimpleFilterInputs'),
             10,

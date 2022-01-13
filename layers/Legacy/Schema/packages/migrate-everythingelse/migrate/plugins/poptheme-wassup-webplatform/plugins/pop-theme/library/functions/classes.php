@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 /*
  * Add extra classes to the body: Theme
  */
-\PoP\Root\App::getHookManager()->addFilter("gdClassesBody", 'gdClassesBodyThemeImpl');
+\PoP\Root\App::addFilter("gdClassesBody", 'gdClassesBodyThemeImpl');
 function gdClassesBodyThemeImpl($body_classes)
 {
     $body_classes[] = \PoP\Root\App::getState('theme');

@@ -22,7 +22,7 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
                 $ret[] = [GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES];
 
                 // Allow to add extra styles, such as changing background color, etc
-                if ($extra = \PoP\Root\App::getHookManager()->applyFilters(
+                if ($extra = \PoP\Root\App::applyFilters(
                     'GD_AAL_Module_Processor_FunctionsContentMultipleInners:markasread:layouts',
                     array(),
                     $module
@@ -39,7 +39,7 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
                 $ret[] = [GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWHIDEELEMSTYLES];
 
                 // Allow to add extra styles, such as changing background color, etc
-                if ($extra = \PoP\Root\App::getHookManager()->applyFilters(
+                if ($extra = \PoP\Root\App::applyFilters(
                     'GD_AAL_Module_Processor_FunctionsContentMultipleInners:markasunread:layouts',
                     array(),
                     $module

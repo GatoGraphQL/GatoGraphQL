@@ -9,16 +9,16 @@ class PoP_CommonPages_Validation
     {
         $success = true;
         if (!defined('POP_APPLICATION_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'installWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'installWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this,'installWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this,'installWarning'));
             $success = false;
         } elseif (!defined('POP_APPLICATION_INITIALIZED')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (PTWSP_POP_APPLICATION_MIN_VERSION > POP_APPLICATION_VERSION) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'versionWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'versionWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this,'versionWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this,'versionWarning'));
         }
 
         return $success;

@@ -4,7 +4,7 @@ class GetPoPDemo_ResourceLoader_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoPTheme_Wassup_ResourceLoaderProcessor_Hooks:css-resources:collapse-hometop',
             array($this, 'getCollapseHometopModule')
         );

@@ -7,7 +7,7 @@ class PoP_UserStanceProcessors_Utils
     {
 
         // Allow TPPDebate to override this title
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_UserStanceProcessors_Utils:latestvotes_title',
             TranslationAPIFacade::getInstance()->__('Latest votes', 'pop-userstance-processors')
         );
@@ -22,7 +22,7 @@ class PoP_UserStanceProcessors_Utils
         }
 
         // Allow TPPDebate to override this title
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_UserStanceProcessors_Utils:whatisyourvote_title',
             $title,
             $format

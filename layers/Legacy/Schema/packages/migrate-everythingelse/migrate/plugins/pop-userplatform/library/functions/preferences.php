@@ -4,7 +4,7 @@ class PoP_UserPlatform_Preferences
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'popcms:userRegister',
             array($this, 'grantDefaultPreferences'),
             10,
@@ -17,7 +17,7 @@ class PoP_UserPlatform_Preferences
      */
     protected function getDefaultPreferencesValues()
     {
-        return \PoP\Root\App::getHookManager()->applyFilters('PoP_UserPlatform_Preferences:default:values', array());
+        return \PoP\Root\App::applyFilters('PoP_UserPlatform_Preferences:default:values', array());
     }
 
     /**

@@ -31,7 +31,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         );
         // Watch out! Events with and without category POP_EVENTLINKS_CAT_EVENTLINKS have the same url path,
         // but different configuration, so we gotta select events with and without this category, and merge them all together
-        $independent_cats = \PoP\Root\App::getHookManager()->applyFilters(
+        $independent_cats = \PoP\Root\App::applyFilters(
             'PoP_ApplicationProcessors_ResourceLoader_Hooks:single-resources:independent-cats',
             array()
         );
@@ -97,9 +97,9 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
             $merge = true;
 
             // Add the hook before the execution of the method, and remove it immediately afterwards
-            \PoP\Root\App::getHookManager()->addFilter('em_get_event', array($this, 'forceEventScope'), PHP_INT_MAX, 2);
+            \PoP\Root\App::addFilter('em_get_event', array($this, 'forceEventScope'), PHP_INT_MAX, 2);
             PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, $ids, $merge, $options);
-            \PoP\Root\App::getHookManager()->removeFilter('em_get_event', array($this, 'forceEventScope'), PHP_INT_MAX, 2);
+            \PoP\Root\App::removeFilter('em_get_event', array($this, 'forceEventScope'), PHP_INT_MAX, 2);
         }
     }
 

@@ -20,7 +20,7 @@ class PoP_ApplicationWebPlatform
     {
 
         // Priority: new section, after PoP Engine Web Platform section
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888500);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888500);
     }
     public function init()
     {

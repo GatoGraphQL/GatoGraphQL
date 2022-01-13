@@ -109,7 +109,7 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
     protected function maybeOverrideCheckpoints($checkpoints)
     {
         // Allow URE to add the extra checkpoint condition of the user having the Profile role
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             'ModuleProcessor:checkpoints',
             $checkpoints
         );

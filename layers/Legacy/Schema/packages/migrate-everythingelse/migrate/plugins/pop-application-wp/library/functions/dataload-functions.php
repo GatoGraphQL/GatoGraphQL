@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addAction('init', 'setAllcontentPostTypes', 100);
+\PoP\Root\App::addAction('init', 'setAllcontentPostTypes', 100);
 function setAllcontentPostTypes()
 {
 

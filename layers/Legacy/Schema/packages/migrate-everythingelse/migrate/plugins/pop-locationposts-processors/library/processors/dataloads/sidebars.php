@@ -19,7 +19,7 @@ class PoP_LocationPosts_Module_Processor_CustomSidebarDataloads extends PoP_Modu
     {
         $ret = parent::getInnerSubmodules($module);
 
-        $orientation = \PoP\Root\App::getHookManager()->applyFilters(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, 'vertical');
+        $orientation = \PoP\Root\App::applyFilters(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, 'vertical');
         $vertical = ($orientation == 'vertical');
         $inners = array(
             self::MODULE_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR => $vertical ?

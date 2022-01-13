@@ -68,7 +68,7 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
 
         $user_id = $user_data['ID'];
 
-        App::getHookManager()->doAction('gd_changepassword_user', $user_id, $form_data);
+        App::doAction('gd_changepassword_user', $user_id, $form_data);
 
         return $user_id;
     }

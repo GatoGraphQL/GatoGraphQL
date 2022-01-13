@@ -27,7 +27,7 @@ class RoutingManager extends AbstractRoutingManager
         }
 
         // Allow plugins to implement their own natures
-        return (string) App::getHookManager()->applyFilters(
+        return (string) App::applyFilters(
             'WPCMSRoutingState:nature',
             parent::getCurrentNature(),
             $this->query

@@ -40,19 +40,19 @@ class LazyLoadHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        App::getHookManager()->addAction(
+        App::addAction(
             '\PoP\ComponentModel\Engine:getModuleData:start',
             array($this, 'start'),
             10,
             4
         );
-        App::getHookManager()->addAction(
+        App::addAction(
             '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
             array($this, 'calculateDataloadingModuleData'),
             10,
             8
         );
-        App::getHookManager()->addAction(
+        App::addAction(
             '\PoP\ComponentModel\Engine:getModuleData:end',
             array($this, 'end'),
             10,

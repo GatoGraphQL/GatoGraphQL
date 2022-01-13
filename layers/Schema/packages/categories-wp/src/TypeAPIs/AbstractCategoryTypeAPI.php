@@ -131,7 +131,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             unset($query['parent-id']);
         }
 
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             self::HOOK_QUERY,
             $query,
             $options

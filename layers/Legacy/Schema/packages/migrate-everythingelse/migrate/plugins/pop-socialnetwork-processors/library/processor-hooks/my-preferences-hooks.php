@@ -4,7 +4,7 @@ class PoP_SocialNetworkProcessors_Hooks_MyPreferences
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_UserMultipleComponents:emailnotifications:modules',
             array($this, 'getEmailnotificationsForminputgroups')
         );

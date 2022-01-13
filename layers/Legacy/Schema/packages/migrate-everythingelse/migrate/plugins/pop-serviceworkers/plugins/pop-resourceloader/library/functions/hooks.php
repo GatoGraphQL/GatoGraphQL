@@ -4,7 +4,7 @@ class PoP_ServiceWorkers_ResourceLoaderProcessor_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_FrontEnd_ResourceLoaderProcessor:dependencies:manager',
             array($this, 'getManagerDependencies')
         );

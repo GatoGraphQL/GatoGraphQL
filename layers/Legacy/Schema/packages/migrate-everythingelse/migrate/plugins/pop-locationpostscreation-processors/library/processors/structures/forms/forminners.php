@@ -59,7 +59,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
         // Allow RIPESS Asia to set an initial value for the Add Project form
         switch ($module[1]) {
             case self::MODULE_FORMINNER_LOCATIONPOST:
-                return \PoP\Root\App::getHookManager()->applyFilters('GD_Custom_Module_Processor_CreateUpdatePostFormInners:editor_initialvalue', null, $module);
+                return \PoP\Root\App::applyFilters('GD_Custom_Module_Processor_CreateUpdatePostFormInners:editor_initialvalue', null, $module);
         }
 
         return parent::getEditorInitialvalue($module);

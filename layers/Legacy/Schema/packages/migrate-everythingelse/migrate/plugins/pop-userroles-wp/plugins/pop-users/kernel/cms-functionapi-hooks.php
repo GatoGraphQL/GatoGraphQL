@@ -5,7 +5,7 @@ class FunctionAPIHooks {
 
 	public function __construct() {
 	
-		\PoP\Root\App::getHookManager()->addFilter(
+		\PoP\Root\App::addFilter(
 		    'CMSAPI:users:query',
 		    [$this, 'convertUsersQuery'],
 		    10,

@@ -16,7 +16,7 @@ class CacheUtils
     {
         /** @var EngineComponentConfiguration */
         $componentConfiguration = App::getComponent(EngineComponent::class)->getConfiguration();
-        return (array)App::getHookManager()->applyFilters(
+        return (array)App::applyFilters(
             self::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,
             [
                 'namespaced' => App::getState('namespace-types-and-interfaces'),

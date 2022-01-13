@@ -20,7 +20,7 @@ class Plugins
     {
 
         // Priority: new section, after PoP CMS Model
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888204);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888204);
     }
     public function init()
     {

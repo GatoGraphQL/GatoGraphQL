@@ -27,6 +27,6 @@ class PoP_SPAWebPlatform_ConfigurationUtils
             $url_targets[$url] = $configuration['targets'];
         }
 
-        return \PoP\Root\App::getHookManager()->applyFilters('PoP_WebPlatform_ConfigurationUtils:backgroundload_urls', $url_targets);
+        return \PoP\Root\App::applyFilters('PoP_WebPlatform_ConfigurationUtils:backgroundload_urls', $url_targets);
     }
 }

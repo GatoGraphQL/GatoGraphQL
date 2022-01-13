@@ -10,7 +10,7 @@ class StratumManager
     public function __construct()
     {
         StratumManagerFactory::setInstance($this);
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'plugins_loaded',
             array($this, 'init'),
             888395
@@ -37,7 +37,7 @@ class StratumManager
     public function getDefaultStratum()
     {
         // By default, use the last defined stratum (the highest-level one) as the default
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'Stratum:default',
             $this->last_registered_stratum
         );

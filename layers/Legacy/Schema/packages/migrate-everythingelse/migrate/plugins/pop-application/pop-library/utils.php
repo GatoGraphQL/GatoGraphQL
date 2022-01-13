@@ -5,14 +5,14 @@ class PoP_Application_Utils
 {
     public static function getContentpostsectionCats()
     {
-        return \PoP\Root\App::getHookManager()->applyFilters('wassup_contentpostsection_cats', array());
+        return \PoP\Root\App::applyFilters('wassup_contentpostsection_cats', array());
     }
 
     public static function getRequestDomain()
     {
         // Allow PoP Multidomain to override this value with the domain in the $_REQUEST
         $cmsService = CMSServiceFacade::getInstance();
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_Application_Utils:request-domain',
             $cmsService->getSiteURL()
         );
@@ -58,7 +58,7 @@ class PoP_Application_Utils
                 break;
         }
 
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_Application_Utils:defaultformat_by_screen',
             $format,
             $screen
@@ -69,13 +69,13 @@ class PoP_Application_Utils
     {
 
         // By default, create new content in the Addons pageSection
-        return \PoP\Root\App::getHookManager()->applyFilters('PoP_Application_Utils:preview_target', POP_TARGET_QUICKVIEW);
+        return \PoP\Root\App::applyFilters('PoP_Application_Utils:preview_target', POP_TARGET_QUICKVIEW);
     }
 
     public static function getAddcontentTarget()
     {
 
         // By default, create new content in the Addons pageSection
-        return \PoP\Root\App::getHookManager()->applyFilters('PoP_Application_Utils:addcontent_target', POP_TARGET_ADDONS);
+        return \PoP\Root\App::applyFilters('PoP_Application_Utils:addcontent_target', POP_TARGET_ADDONS);
     }
 }

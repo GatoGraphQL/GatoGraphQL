@@ -18,17 +18,17 @@ class RequestUtils
         $domain_id = str_replace('.', '-', removeScheme($domain));
 
         // Allow to override the domainId, to unify DEV and PROD domains
-        return App::getHookManager()->applyFilters('pop_modulemanager:domain_id', $domain_id, $domain);
+        return App::applyFilters('pop_modulemanager:domain_id', $domain_id, $domain);
     }
 
     public static function isSearchEngine()
     {
-        return App::getHookManager()->applyFilters('RequestUtils:isSearchEngine', false);
+        return App::applyFilters('RequestUtils:isSearchEngine', false);
     }
 
     public static function getFramecomponentModules()
     {
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             'RequestUtils:getFramecomponentModules',
             array()
         );

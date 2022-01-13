@@ -22,7 +22,7 @@ class GD_FormInput_OrganizationTypes extends MultipleSelectFormInput
 
         $values = array_merge(
             $values,
-            \PoP\Root\App::getHookManager()->applyFilters('wassup_organizationtypes', $types)
+            \PoP\Root\App::applyFilters('wassup_organizationtypes', $types)
         );
 
         return $values;

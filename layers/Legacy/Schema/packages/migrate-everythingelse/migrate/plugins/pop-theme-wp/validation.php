@@ -10,21 +10,21 @@ class Validation
     {
         $success = true;
         if (!defined('POP_ENGINEWP_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'install_warning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'install_warning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'install_warning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'install_warning'));
             $success = false;
         } elseif (!defined('POP_ENGINEWP_INITIALIZED')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initialize_warning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initialize_warning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning'));
             $success = false;
         } elseif (POP_THEMEWP_POP_ENGINEWP_MIN_VERSION > POP_ENGINEWP_VERSION) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'version_warning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'version_warning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'version_warning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'version_warning'));
         }
 
         if (!defined('POP_THEME_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'install_warning_2'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'install_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'install_warning_2'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'install_warning_2'));
             $success = false;
         }
 

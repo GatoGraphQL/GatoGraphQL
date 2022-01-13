@@ -7,7 +7,7 @@ class WSL_PoPWebPlatform_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            \PoP\Root\App::getHookManager()->addAction("popcms:enqueueScripts", array($this, 'registerScripts'));
+            \PoP\Root\App::addAction("popcms:enqueueScripts", array($this, 'registerScripts'));
         }
 
         /**

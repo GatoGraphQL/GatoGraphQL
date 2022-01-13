@@ -4,7 +4,7 @@ class PoP_LocationPosts_LatestCounts_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'latestcounts:locationposts:classes',
             array($this, 'getSectionClasses')
         );

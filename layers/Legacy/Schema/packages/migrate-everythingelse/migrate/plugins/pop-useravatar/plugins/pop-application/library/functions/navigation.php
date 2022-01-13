@@ -8,7 +8,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 /**
  * Implementation of the icons
  */
-\PoP\Root\App::getHookManager()->addFilter('route:icon', 'popuseravatarRouteIcon', 10, 3);
+\PoP\Root\App::addFilter('route:icon', 'popuseravatarRouteIcon', 10, 3);
 function popuseravatarRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -20,7 +20,7 @@ function popuseravatarRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-\PoP\Root\App::getHookManager()->addFilter('route:title', 'popuseravatarNavigationRouteTitle', 10, 2);
+\PoP\Root\App::addFilter('route:title', 'popuseravatarNavigationRouteTitle', 10, 2);
 function popuseravatarNavigationRouteTitle($title, $route)
 {
     $titles = [

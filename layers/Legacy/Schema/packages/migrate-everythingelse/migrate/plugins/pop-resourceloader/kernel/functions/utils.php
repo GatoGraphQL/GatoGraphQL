@@ -6,7 +6,7 @@ class PoP_ResourceLoader_Utils {
 	public static function registerHandlebarshelperScript() {
 
 		// Loading this script can be disabled by SPAResourceLoader
-		return \PoP\Root\App::getHookManager()->applyFilters(
+		return \PoP\Root\App::applyFilters(
 			'PoP_ResourceLoader_Utils:registerHandlebarshelperScript', 
 			true
 		);

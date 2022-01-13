@@ -3,7 +3,7 @@
 /**
  * Map format
  */
-\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_AuthorSectionTabPanelComponents:modules', 'gdEmSocialnetworkAuthorsectiontabpanelSubmodules', 10, 2);
+\PoP\Root\App::addFilter('PoP_Module_Processor_AuthorSectionTabPanelComponents:modules', 'gdEmSocialnetworkAuthorsectiontabpanelSubmodules', 10, 2);
 function gdEmSocialnetworkAuthorsectiontabpanelSubmodules($submodules, array $module)
 {
     if ($module == [PoP_Module_Processor_AuthorSectionTabPanelComponents::class, PoP_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORFOLLOWERS]) {
@@ -14,7 +14,7 @@ function gdEmSocialnetworkAuthorsectiontabpanelSubmodules($submodules, array $mo
 
     return $submodules;
 }
-\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_AuthorSectionTabPanelComponents:panel_headers', 'gdEmSocialnetworkAuthorsectiontabpanelPanelheaders', 10, 2);
+\PoP\Root\App::addFilter('PoP_Module_Processor_AuthorSectionTabPanelComponents:panel_headers', 'gdEmSocialnetworkAuthorsectiontabpanelPanelheaders', 10, 2);
 function gdEmSocialnetworkAuthorsectiontabpanelPanelheaders($panelheaders, array $module)
 {
     if ($module == [PoP_Module_Processor_AuthorSectionTabPanelComponents::class, PoP_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORFOLLOWERS]) {
@@ -29,7 +29,7 @@ function gdEmSocialnetworkAuthorsectiontabpanelPanelheaders($panelheaders, array
 
     return $panelheaders;
 }
-\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_SingleSectionTabPanelComponents:modules', 'gdEmSocialnetworkSinglesectiontabpanelSubmodules', 10, 2);
+\PoP\Root\App::addFilter('PoP_Module_Processor_SingleSectionTabPanelComponents:modules', 'gdEmSocialnetworkSinglesectiontabpanelSubmodules', 10, 2);
 function gdEmSocialnetworkSinglesectiontabpanelSubmodules($submodules, array $module)
 {
     if ($module == [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERECOMMENDEDBY]) {
@@ -43,7 +43,7 @@ function gdEmSocialnetworkSinglesectiontabpanelSubmodules($submodules, array $mo
     return $submodules;
 }
 
-\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_SingleSectionTabPanelComponents:panel_headers', 'gdEmSocialnetworkSinglesectiontabpanelPanelheaders', 10, 2);
+\PoP\Root\App::addFilter('PoP_Module_Processor_SingleSectionTabPanelComponents:panel_headers', 'gdEmSocialnetworkSinglesectiontabpanelPanelheaders', 10, 2);
 function gdEmSocialnetworkSinglesectiontabpanelPanelheaders($panelheaders, array $module)
 {
     if ($module == [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERECOMMENDEDBY]) {
@@ -63,7 +63,7 @@ function gdEmSocialnetworkSinglesectiontabpanelPanelheaders($panelheaders, array
     return $panelheaders;
 }
 
-\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_TagSectionTabPanelComponents:modules', 'gdEmSocialnetworkTagsectiontabpanelSubmodules', 10, 2);
+\PoP\Root\App::addFilter('PoP_Module_Processor_TagSectionTabPanelComponents:modules', 'gdEmSocialnetworkTagsectiontabpanelSubmodules', 10, 2);
 function gdEmSocialnetworkTagsectiontabpanelSubmodules($submodules, array $module)
 {
     if ($module == [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGSUBSCRIBERS]) {
@@ -72,7 +72,7 @@ function gdEmSocialnetworkTagsectiontabpanelSubmodules($submodules, array $modul
 
     return $submodules;
 }
-\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_TagSectionTabPanelComponents:panel_headers', 'gdEmSocialnetworkTagsectiontabpanelPanelheaders', 10, 2);
+\PoP\Root\App::addFilter('PoP_Module_Processor_TagSectionTabPanelComponents:panel_headers', 'gdEmSocialnetworkTagsectiontabpanelPanelheaders', 10, 2);
 function gdEmSocialnetworkTagsectiontabpanelPanelheaders($panelheaders, array $module)
 {
     if ($module == [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGSUBSCRIBERS]) {

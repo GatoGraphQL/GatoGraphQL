@@ -11,7 +11,7 @@ class PoP_ResourceLoader_GeneratedResourcesManager {
 		$this->initialized = false;
 
 		// If the state changes, save it at the end of the execution
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
         	'popcms:shutdown',
         	array($this, 'maybeSave')
         );

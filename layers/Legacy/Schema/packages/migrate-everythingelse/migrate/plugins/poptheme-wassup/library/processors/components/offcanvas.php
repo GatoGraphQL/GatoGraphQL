@@ -303,7 +303,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                 break;
 
             case self::MODULE_OFFCANVAS_BODYSIDEINFO:
-                $openmode = \PoP\Root\App::getHookManager()->applyFilters('modules:sideinfo:openmode', 'automatic');
+                $openmode = \PoP\Root\App::applyFilters('modules:sideinfo:openmode', 'automatic');
                 $this->mergeProp(
                     $module,
                     $props,

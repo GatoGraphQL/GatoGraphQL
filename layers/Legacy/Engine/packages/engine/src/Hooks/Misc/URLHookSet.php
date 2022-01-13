@@ -12,7 +12,7 @@ class URLHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             'RequestUtils:current_url:remove_params',
             [$this, 'getParamsToRemoveFromURL']
         );

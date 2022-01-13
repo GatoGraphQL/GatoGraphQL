@@ -5,7 +5,7 @@ class PoP_ServiceWorkers_WebPlatform_ResourceLoader_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter('getEnqueuefileType', array($this, 'getEnqueuefileType'));
+        \PoP\Root\App::addFilter('getEnqueuefileType', array($this, 'getEnqueuefileType'));
     }
 
     public function getEnqueuefileType($type)

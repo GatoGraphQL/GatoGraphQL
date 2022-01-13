@@ -110,7 +110,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         }
 
         // Allow plugins to add their own fields
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             self::HOOK_FORM_DATA_CREATE_OR_UPDATE,
             $form_data
         );
@@ -147,7 +147,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
     protected function canInputMultipleCategories()
     {
         return false;
-        // return \PoP\Root\App::getHookManager()->applyFilters(
+        // return \PoP\Root\App::applyFilters(
         //     'GD_CreateUpdate_Post:multiple-categories',
         //     true
         // );
@@ -181,7 +181,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
             $success_string = $this->__('Now waiting for approval from the admins.', 'pop-application');
         }
 
-        return App::getHookManager()->applyFilters('gd-createupdate-post:execute:successstring', $success_string, $result_id, $status);
+        return App::applyFilters('gd-createupdate-post:execute:successstring', $success_string, $result_id, $status);
     }
 
     protected function getFeaturedimageModule()

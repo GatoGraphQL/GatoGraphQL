@@ -19,19 +19,19 @@ class AppLoader extends UpstreamAppLoader
         // Boot all the components
         App::getComponentManager()->beforeBoot();
 
-        App::getHookManager()->addAction(
+        App::addAction(
             'popcms:boot',
             fn() => App::getAppStateManager()->initializeAppState(),
             0
         );
 
-        App::getHookManager()->addAction(
+        App::addAction(
             'popcms:boot',
             fn () => App::getComponentManager()->boot(),
             4
         );
 
-        App::getHookManager()->addAction(
+        App::addAction(
             'popcms:boot',
             fn () => App::getComponentManager()->afterBoot(),
             8

@@ -12,7 +12,7 @@ abstract class AbstractMetaOrderByQueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             $this->getHookName(),
             [$this, 'getOrderByQueryArgValue']
         );

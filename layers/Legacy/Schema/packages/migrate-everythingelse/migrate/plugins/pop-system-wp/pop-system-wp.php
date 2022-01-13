@@ -18,7 +18,7 @@ class PoP_SystemWP
     public function __construct()
     {
         // Priority: after PoP Forms
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888122);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888122);
     }
     public function init()
     {

@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addFilter('PoP_EM_Module_Processor_SidebarMultiples:inner-modules', 'wassupUreAddAuthorSidebar', 10, 2);
+\PoP\Root\App::addFilter('PoP_EM_Module_Processor_SidebarMultiples:inner-modules', 'wassupUreAddAuthorSidebar', 10, 2);
 function wassupUreAddAuthorSidebar($modules, $author)
 {
     if (gdUreIsOrganization($author)) {

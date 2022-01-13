@@ -12,7 +12,7 @@ if (!defined('POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION')) {
     define('POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION', $definitionManager->getUniqueDefinition('newsletter-unsubscription', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

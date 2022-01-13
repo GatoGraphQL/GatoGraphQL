@@ -12,7 +12,7 @@
 //  * since that value will always be stale and give back the value false. At least for the current nonce of just 1 day
 //  * So make the nonce a tiny bit longer
 //  */
-// \PoP\Root\App::getHookManager()->addFilter('nonce_life', 'popSwNonceLife');
+// \PoP\Root\App::addFilter('nonce_life', 'popSwNonceLife');
 // function popSwNonceLife($nonce_life) {
 
 //     // 180 Days: this implies that the Service Workers cache must be regenerated every, at most, 180 days,

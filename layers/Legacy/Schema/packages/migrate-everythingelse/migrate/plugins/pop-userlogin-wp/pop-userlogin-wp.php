@@ -18,7 +18,7 @@ class PoP_UserLoginWP
     public function __construct()
     {
         // Priority: after PoP Email Sender
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888322);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888322);
     }
     public function init()
     {

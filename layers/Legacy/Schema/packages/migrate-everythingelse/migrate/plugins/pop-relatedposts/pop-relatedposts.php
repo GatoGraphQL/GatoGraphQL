@@ -19,7 +19,7 @@ class PoP_RelatedPosts
     {
 
         // Priority: after PoP Notifications, and before PoP Posts Creation and others
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888349);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888349);
     }
     public function init()
     {

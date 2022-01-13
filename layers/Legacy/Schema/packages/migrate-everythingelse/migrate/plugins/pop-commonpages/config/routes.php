@@ -18,7 +18,7 @@ if (!defined('POP_CLUSTERCOMMONPAGES_ROUTE_ABOUT_OURSPONSORS')) {
 //     define('POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS', $definitionManager->getUniqueDefinition('sponsor-us', DefinitionGroups::ROUTES));
 // }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

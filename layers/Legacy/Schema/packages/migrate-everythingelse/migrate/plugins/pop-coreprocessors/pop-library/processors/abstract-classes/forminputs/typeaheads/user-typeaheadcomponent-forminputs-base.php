@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends
     {
 
         // Allow PoP User Platform to add the role "profile"
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_UserTypeaheadComponentFormInputsBase:thumbprint-query',
             array(
                 // 'fields' => 'ID',

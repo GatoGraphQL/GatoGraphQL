@@ -18,7 +18,7 @@ class PoP_UserStanceProcessorsWP
     public function __construct()
     {
         // Priority: after PoP Content Creation Processors
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888862);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888862);
     }
     public function init()
     {

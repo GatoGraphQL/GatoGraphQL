@@ -11,42 +11,42 @@ class PoP_AutomatedEmails_Validation
     {
         $success = true;
         if (!defined('POP_EMAILSENDER_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'installWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'installWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this,'installWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this,'installWarning'));
             $success = false;
         } elseif (!defined('POP_EMAILSENDER_INITIALIZED')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (POPAE_POP_EMAILSENDER_MIN_VERSION > POP_EMAILSENDER_VERSION) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'versionWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'versionWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this,'versionWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this,'versionWarning'));
         }
 
         if (!defined('POP_SSR_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'install_warning_2'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'install_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'install_warning_2'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'install_warning_2'));
             $success = false;
         } elseif (!defined('POP_SSR_INITIALIZED')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initialize_warning_2'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning_2'));
             $success = false;
         } elseif (POPAE_POP_SSR_MIN_VERSION > POP_SSR_VERSION) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'version_warning_2'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'version_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'version_warning_2'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'version_warning_2'));
         }
 
         if (!defined('POP_APPLICATION_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'install_warning_3'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'install_warning_3'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'install_warning_3'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'install_warning_3'));
             $success = false;
         } elseif (!defined('POP_APPLICATION_INITIALIZED')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initialize_warning_3'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initialize_warning_3'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning_3'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning_3'));
             $success = false;
         } elseif (POPAE_POP_APPLICATION_MIN_VERSION > POP_APPLICATION_VERSION) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'version_warning_3'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'version_warning_3'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'version_warning_3'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'version_warning_3'));
         }
 
         return $success;

@@ -16,7 +16,7 @@ define('GD_CLASS_UNDODOWNVOTEPOST', 'pop-undodownvotepost');
 
 define('GD_CLASS_TRIGGERLAYOUT', 'trigger-layout');
 
-\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdPopcoreClassesJqueryConstants');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'gdPopcoreClassesJqueryConstants');
 function gdPopcoreClassesJqueryConstants($jqueryConstants)
 {
     $jqueryConstants['CLASS_LAZYJS'] = GD_CLASS_LAZYJS;
@@ -27,7 +27,7 @@ function gdPopcoreClassesJqueryConstants($jqueryConstants)
 function gdClassesBody()
 {
     if (function_exists('body_class')) {
-        return implode(' ', \PoP\Root\App::getHookManager()->applyFilters('gdClassesBody', array()));
+        return implode(' ', \PoP\Root\App::applyFilters('gdClassesBody', array()));
     }
 
     return '';
@@ -37,7 +37,7 @@ function gdClassesBody()
  * Add extra classes to the body: Web Platform
  * Then it is possible to hide elements in the Media Library in the webplatform
  */
-\PoP\Root\App::getHookManager()->addFilter("gdClassesBody", 'gdClassesBodyWebPlatformImpl');
+\PoP\Root\App::addFilter("gdClassesBody", 'gdClassesBodyWebPlatformImpl');
 function gdClassesBodyWebPlatformImpl($body_classes)
 {
 

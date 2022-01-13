@@ -5,7 +5,7 @@ class PPPPoP_CDN_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:hasParamValues',
             array($this, 'getRejectedParamvalues')
         );

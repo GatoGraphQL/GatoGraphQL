@@ -4,7 +4,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 /**
  * Add the language to the links to PoP and Verticals
  */
-\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_CustomPageSections:footer:poweredby-links', 'gdQtransxFooterlinks');
+\PoP\Root\App::addFilter('PoP_Module_Processor_CustomPageSections:footer:poweredby-links', 'gdQtransxFooterlinks');
 function gdQtransxFooterlinks($link)
 {
 
@@ -20,7 +20,7 @@ function gdQtransxFooterlinks($link)
     return $link;
 }
 
-\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_HTMLCodes:homewelcometitle', 'gdQtransxWelcomeLanguagelinks');
+\PoP\Root\App::addFilter('PoP_Module_Processor_HTMLCodes:homewelcometitle', 'gdQtransxWelcomeLanguagelinks');
 function gdQtransxWelcomeLanguagelinks($title)
 {
     if ($items = getMultilingualLanguageitems()) {

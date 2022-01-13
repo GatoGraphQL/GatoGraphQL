@@ -18,7 +18,7 @@ if (!defined('POP_BLOG_ROUTE_COMMENTS')) {
     define('POP_BLOG_ROUTE_COMMENTS', $definitionManager->getUniqueDefinition('comments', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

@@ -5,13 +5,13 @@ class UREPoP_RoleProcessors_EM_ControlGroup_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'GD_EM_Module_Processor_CustomControlGroups:blockauthoreventlist:layouts',
             array($this, 'getLayoutSubmodules')
         );
 
         // Also the Past Events link on the Author Events top controlgroup
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'GD_EM_Module_Processor_CustomAnchorControls:pastevents:url',
             'gdUreAddSourceParam',
             10,

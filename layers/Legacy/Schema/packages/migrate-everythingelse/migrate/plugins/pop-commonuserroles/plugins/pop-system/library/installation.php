@@ -3,7 +3,7 @@ class PoP_CommonUserRoles_Installation
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addAction('PoP:system-build', array($this, 'installRoles'));
+        \PoP\Root\App::addAction('PoP:system-build', array($this, 'installRoles'));
     }
 
     public function installRoles()

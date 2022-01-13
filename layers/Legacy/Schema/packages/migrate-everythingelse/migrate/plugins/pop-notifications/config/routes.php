@@ -18,7 +18,7 @@ if (!defined('POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASUNREAD')) {
     define('POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASUNREAD', $definitionManager->getUniqueDefinition('notifications/mark-as-unread', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

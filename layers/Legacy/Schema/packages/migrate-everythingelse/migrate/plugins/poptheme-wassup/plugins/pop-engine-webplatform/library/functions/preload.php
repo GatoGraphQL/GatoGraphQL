@@ -1,14 +1,14 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 
-\PoP\Root\App::getHookManager()->addFilter('\PoP\ComponentModel\Engine:getExtraUris', 'popthemeWassupExtraRoutes');
+\PoP\Root\App::addFilter('\PoP\ComponentModel\Engine:getExtraUris', 'popthemeWassupExtraRoutes');
 function popthemeWassupExtraRoutes($extra_routes)
 {
     if (!PoPTheme_Wassup_ServerUtils::disablePreloadingPages()) {
         // Load extra URIs for the INITIALFRAMES page
         if (\PoP\Root\App::getState(['routing', 'is-standard']) && \PoP\Root\App::getState('route') == POPTHEME_WASSUP_ROUTE_LOADERS_INITIALFRAMES) {
             $target = \PoP\Root\App::getState('target');
-            if ($routes = \PoP\Root\App::getHookManager()->applyFilters(
+            if ($routes = \PoP\Root\App::applyFilters(
                 'wassup:extra-routes:initialframes:'.$target,
                 array()
             )) {

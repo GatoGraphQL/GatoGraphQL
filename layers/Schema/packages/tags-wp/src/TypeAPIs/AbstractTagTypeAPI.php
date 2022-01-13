@@ -118,7 +118,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         // Convert the parameters
         $query['taxonomy'] = $this->getTagTaxonomyName();
 
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             self::HOOK_QUERY,
             $query,
             $options

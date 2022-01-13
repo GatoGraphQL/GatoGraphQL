@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdEmJqueryConstantsUrlparams');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'gdEmJqueryConstantsUrlparams');
 function gdEmJqueryConstantsUrlparams($jqueryConstants)
 {
     $jqueryConstants['URLPARAM_YEAR'] = GD_URLPARAM_YEAR;

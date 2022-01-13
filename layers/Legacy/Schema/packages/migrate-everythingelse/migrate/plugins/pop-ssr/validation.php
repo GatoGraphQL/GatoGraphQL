@@ -9,23 +9,23 @@ class PoP_SSR_Validation
     {
         $success = true;
         if (!defined('POP_ENGINEWEBPLATFORM_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'installWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'installWarning'));
             $success = false;
         } elseif (!defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (POP_SSR_POP_ENGINEWEBPLATFORM_MIN_VERSION > POP_ENGINEWEBPLATFORM_VERSION) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'versionWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'versionWarning'));
         }
 
         // // Validate external build tools: Composer
         // if (!file_exists(POP_SSR_VENDOR_DIR)) {
 
-        //     \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'buildtoolWarning'));
-        //     \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'buildtoolWarning'));
+        //     \PoP\Root\App::addAction('admin_notices', array($this, 'buildtoolWarning'));
+        //     \PoP\Root\App::addAction('network_admin_notices', array($this, 'buildtoolWarning'));
         //     $success = false;
         // }
 

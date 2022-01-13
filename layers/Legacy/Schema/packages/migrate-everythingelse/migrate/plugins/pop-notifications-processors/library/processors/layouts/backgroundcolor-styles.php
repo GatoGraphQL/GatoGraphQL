@@ -30,7 +30,7 @@ class Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts extends PoP
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES:
                 return array(
-                    'background-color' => \PoP\Root\App::getHookManager()->applyFilters(
+                    'background-color' => \PoP\Root\App::applyFilters(
                         'PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts:bgcolor',
                         'transparent',
                         $module

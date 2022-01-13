@@ -21,7 +21,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
 
     protected function additionals($target_id, $form_data): void
     {
-        App::getHookManager()->doAction('gd_updateusermetavalue', $target_id, $form_data);
+        App::doAction('gd_updateusermetavalue', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int

@@ -67,7 +67,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
                 // Allow URE to override adding "+Members"
-                $name = \PoP\Root\App::getHookManager()->applyFilters(
+                $name = \PoP\Root\App::applyFilters(
                     'UserStance_Module_Processor_CustomCarouselControls:authorstances:title',
                     $userTypeAPI->getUserDisplayName($author)
                 );
@@ -104,7 +104,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 );
 
                 // Allow URE to override adding "+Members" param
-                return \PoP\Root\App::getHookManager()->applyFilters(
+                return \PoP\Root\App::applyFilters(
                     'UserStance_Module_Processor_CustomCarouselControls:authorstances:titlelink',
                     RequestUtils::addRoute($url, $routes[$module[1]])
                 );
@@ -115,7 +115,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                     self::MODULE_CAROUSELCONTROLS_TAGSTANCES => POP_USERSTANCE_ROUTE_STANCES,
                 );
 
-                return \PoP\Root\App::getHookManager()->applyFilters(
+                return \PoP\Root\App::applyFilters(
                     'UserStance_Module_Processor_CustomCarouselControls:tagstances:titlelink',
                     RequestUtils::addRoute($url, $routes[$module[1]])
                 );

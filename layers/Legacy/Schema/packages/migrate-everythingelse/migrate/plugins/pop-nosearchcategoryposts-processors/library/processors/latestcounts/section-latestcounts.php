@@ -456,7 +456,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
         }
 
         // Allow to hook in POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS
-        $ret = \PoP\Root\App::getHookManager()->applyFilters(
+        $ret = \PoP\Root\App::applyFilters(
             'latestcounts:nosearchcategoryposts:classes',
             $ret,
             $module,

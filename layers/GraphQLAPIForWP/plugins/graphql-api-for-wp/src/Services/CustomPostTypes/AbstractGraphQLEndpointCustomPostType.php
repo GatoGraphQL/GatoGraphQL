@@ -143,7 +143,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
      */
     protected function isAccessForbidden(): bool
     {
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             Hooks::FORBID_ACCESS,
             false
         );

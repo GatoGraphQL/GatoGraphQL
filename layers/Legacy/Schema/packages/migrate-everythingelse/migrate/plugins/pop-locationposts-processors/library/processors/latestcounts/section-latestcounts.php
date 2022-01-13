@@ -52,7 +52,7 @@ class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends
         }
 
         // Allow to hook in POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS
-        $ret = \PoP\Root\App::getHookManager()->applyFilters(
+        $ret = \PoP\Root\App::applyFilters(
             'latestcounts:locationposts:classes',
             $ret,
             $module,
