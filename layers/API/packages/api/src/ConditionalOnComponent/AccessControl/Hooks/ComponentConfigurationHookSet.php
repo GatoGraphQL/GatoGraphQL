@@ -9,7 +9,7 @@ use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\API\Component;
 use PoP\API\Environment;
-use PoP\BasicService\Component\ComponentConfigurationHelpers;
+use PoP\Root\Component\ComponentConfigurationHelpers;
 use PoP\BasicService\AbstractHookSet;
 
 class ComponentConfigurationHookSet extends AbstractHookSet
