@@ -27,7 +27,7 @@ if (!defined('POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS')) {
     define('POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS', $definitionManager->getUniqueDefinition('invite-new-members', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

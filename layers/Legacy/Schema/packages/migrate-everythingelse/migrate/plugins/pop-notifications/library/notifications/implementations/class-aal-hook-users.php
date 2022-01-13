@@ -11,7 +11,7 @@ class PoP_Notifications_Hook_Users /* extends AAL_Hook_Base*/
     {
 
         // When a user is deleted from the system, delete all notifications from/for the user
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'popcms:deleteUser', 
             array($this, 'deleteUser'), 
             10, 

@@ -5,7 +5,7 @@ class UREPoP_RoleProcessors_ControlGroup_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomControlGroups:blockauthorpostlist:layouts',
             array($this, 'getLayoutSubmodules')
         );

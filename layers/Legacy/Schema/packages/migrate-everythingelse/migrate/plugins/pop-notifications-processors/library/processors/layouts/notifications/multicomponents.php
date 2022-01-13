@@ -19,7 +19,7 @@ class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor
             case self::MODULE_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM:
                 $ret = array_merge_recursive(
                     $ret,
-                    \PoP\Root\App::getHookManager()->applyFilters(
+                    \PoP\Root\App::applyFilters(
                         'PoP_Module_Processor_MultipleComponentLayouts:modules',
                         array(),
                         $module

@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:userloggedin_loadingmsg_target', 'gdCustomUserloggedinLoadingmsgTarget');
+\PoP\Root\App::addFilter('pop_modulemanager:userloggedin_loadingmsg_target', 'gdCustomUserloggedinLoadingmsgTarget');
 function gdCustomUserloggedinLoadingmsgTarget($target)
 {
 
@@ -13,10 +13,10 @@ function gdCustomUserloggedinLoadingmsgTarget($target)
  * Uniqueblocks
  */
 
-\PoP\Root\App::getHookManager()->addFilter('RequestUtils:getFramecomponentModules', 'getWassupFramecomponentModules');
+\PoP\Root\App::addFilter('RequestUtils:getFramecomponentModules', 'getWassupFramecomponentModules');
 function getWassupFramecomponentModules($modules)
 {
-    if (\PoP\Root\App::getHookManager()->applyFilters('poptheme_wassup_loadlatest', true)) {
+    if (\PoP\Root\App::applyFilters('poptheme_wassup_loadlatest', true)) {
         $modules[] = [GD_Core_Module_Processor_Blocks::class, GD_Core_Module_Processor_Blocks::MODULE_MULTIPLE_LATESTCOUNTS];
     }
 
@@ -24,7 +24,7 @@ function getWassupFramecomponentModules($modules)
 }
 
 
-\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:fetchtarget_settings', 'gdCustomFetchtargetSettings');
+\PoP\Root\App::addFilter('pop_modulemanager:fetchtarget_settings', 'gdCustomFetchtargetSettings');
 function gdCustomFetchtargetSettings($fetchtarget_settings)
 {
     return array_merge(
@@ -48,7 +48,7 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
     );
 }
 
-// \PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_MenuMultiplesBase:js-setting:add-active-parent-item', 'popAddMenuitemParentpageActive', 10, 3);
+// \PoP\Root\App::addFilter('PoP_Module_Processor_MenuMultiplesBase:js-setting:add-active-parent-item', 'popAddMenuitemParentpageActive', 10, 3);
 // function popAddMenuitemParentpageActive($add_active, array $module, array &$props) {
 
 //     // Only if not in Side or Top pageSections
@@ -65,7 +65,7 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
 //     return $add_active;
 // }
 
-\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:fetchpagesection_settings', 'gdCustomFetchpagesectionSettings');
+\PoP\Root\App::addFilter('pop_modulemanager:fetchpagesection_settings', 'gdCustomFetchpagesectionSettings');
 function gdCustomFetchpagesectionSettings($fetchpagesection_settings)
 {
     $settings_main = array(
@@ -106,7 +106,7 @@ function gdCustomFetchpagesectionSettings($fetchpagesection_settings)
 /**
  * Targets
  */
-\PoP\Root\App::getHookManager()->addFilter('ApplicationState:targets', 'getCustomTargets');
+\PoP\Root\App::addFilter('ApplicationState:targets', 'getCustomTargets');
 function getCustomTargets($targets)
 {
     return array_merge(

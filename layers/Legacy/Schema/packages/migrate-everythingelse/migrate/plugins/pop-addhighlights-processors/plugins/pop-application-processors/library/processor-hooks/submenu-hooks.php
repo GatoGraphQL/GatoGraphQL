@@ -4,7 +4,7 @@ class PoP_AddHighlights_SubmenuHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:single:mainsubheaders',
             array($this, 'addSingleMainsubheaders')
         );

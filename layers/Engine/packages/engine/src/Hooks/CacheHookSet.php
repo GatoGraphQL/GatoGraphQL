@@ -35,13 +35,13 @@ class CacheHookSet extends AbstractHookSet
     {
         // When a plugin is activated/deactivated, ANY plugin, delete the corresponding cached files
         // This is particularly important for the MEMORY, since we can't set by constants to not use it
-        App::getHookManager()->addAction(
+        App::addAction(
             'popcms:componentInstalledOrUninstalled',
             [$this, 'clear']
         );
 
         // Save all deferred cacheItems
-        App::getHookManager()->addAction(
+        App::addAction(
             'popcms:shutdown',
             [$this, 'commit']
         );

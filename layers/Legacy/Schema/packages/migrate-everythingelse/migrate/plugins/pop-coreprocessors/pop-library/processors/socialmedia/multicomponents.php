@@ -67,7 +67,7 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
         }
 
         // Allow PoP Generic Forms Processors to add modules
-        $modules = \PoP\Root\App::getHookManager()->applyFilters(
+        $modules = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_SocialMediaMultipleComponents:modules',
             $modules,
             $module

@@ -20,7 +20,7 @@ class PoP_UserAvatarProcessors
     {
 
         // Priority: after PoP Notifications Processors
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888850);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888850);
     }
     public function init()
     {

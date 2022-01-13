@@ -1,7 +1,7 @@
 <?php
 
 // Hook the email notifications, adding the community members to the users' network
-\PoP\Root\App::getHookManager()->addFilter('PoP_EmailSender_Hooks:networkusers', 'popUreEmailsenderGetUserNetworkusers', 10, 2);
+\PoP\Root\App::addFilter('PoP_EmailSender_Hooks:networkusers', 'popUreEmailsenderGetUserNetworkusers', 10, 2);
 function popUreEmailsenderGetUserNetworkusers($usernetwork, $user_id)
 {
     if (gdUreIsCommunity($user_id)) {

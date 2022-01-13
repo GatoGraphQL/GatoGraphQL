@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 
-\PoP\Root\App::getHookManager()->addFilter('PoPWebPlatform_Engine:request-meta', 'addToplevelVarsSilent');
+\PoP\Root\App::addFilter('PoPWebPlatform_Engine:request-meta', 'addToplevelVarsSilent');
 function addToplevelVarsSilent($meta)
 {
     

@@ -11,5 +11,5 @@ $instance->settings = new AAL_PoP_Settings();
 $instance->notifications = new AAL_PoP_Notifications();
 
 // Remove unwanted ads
-\PoP\Root\App::getHookManager()->removeAction('admin_notices', array( &$instance->ui, 'admin_notices' ));
-\PoP\Root\App::getHookManager()->removeAction('wp_ajax_aal_install_elementor_set_admin_notice_viewed', array( &$instance->ui, 'ajax_aal_install_elementor_set_admin_notice_viewed' ));
+\PoP\Root\App::removeAction('admin_notices', array( &$instance->ui, 'admin_notices' ));
+\PoP\Root\App::removeAction('wp_ajax_aal_install_elementor_set_admin_notice_viewed', array( &$instance->ui, 'ajax_aal_install_elementor_set_admin_notice_viewed' ));

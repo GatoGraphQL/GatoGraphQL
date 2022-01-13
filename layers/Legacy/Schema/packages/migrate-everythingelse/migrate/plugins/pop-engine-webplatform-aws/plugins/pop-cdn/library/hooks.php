@@ -10,7 +10,7 @@ class PoP_WebPlatformEngine_AWS_CDNHooks
     {
 
         // Priority: after same function in PoP_WebPlatformEngine_AWS_InitializeData
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_AWS_S3UploadBase:domain',
             array($this, 'getDomain'),
             100,

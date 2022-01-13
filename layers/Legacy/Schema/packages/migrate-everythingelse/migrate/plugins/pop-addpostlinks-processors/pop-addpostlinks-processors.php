@@ -20,7 +20,7 @@ class PoP_AddPostLinksProcessors
     {
 
         // Priority: after PoP Content Creation Processors
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888860);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888860);
     }
     public function init()
     {

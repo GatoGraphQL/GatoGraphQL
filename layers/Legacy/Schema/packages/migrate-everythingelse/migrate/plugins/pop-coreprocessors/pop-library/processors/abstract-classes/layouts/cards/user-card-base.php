@@ -14,7 +14,7 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
     {
 
         // Allow URE to override adding their own templates to include Community members in the filter
-        return \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_UserCardLayoutsBase:getAdditionalSubmodules', array(), $module);
+        return \PoP\Root\App::applyFilters('PoP_Module_Processor_UserCardLayoutsBase:getAdditionalSubmodules', array(), $module);
     }
 
     public function getSubmodules(array $module): array

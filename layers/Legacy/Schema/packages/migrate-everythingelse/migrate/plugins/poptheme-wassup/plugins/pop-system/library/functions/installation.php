@@ -3,8 +3,8 @@ class PoPTheme_Wassup_Installation
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addAction('PoP:system-build', array($this, 'changeAuthorFlushrules'));
-        \PoP\Root\App::getHookManager()->addAction('PoP:system-build', array($this, 'updateImageDefaultSize'));
+        \PoP\Root\App::addAction('PoP:system-build', array($this, 'changeAuthorFlushrules'));
+        \PoP\Root\App::addAction('PoP:system-build', array($this, 'updateImageDefaultSize'));
     }
 
     /**

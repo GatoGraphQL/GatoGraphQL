@@ -6,19 +6,19 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 
 	public function __construct() {
 
-		\PoP\Root\App::getHookManager()->addFilter(
+		\PoP\Root\App::addFilter(
 			'PoPWebPlatform_Engine:enqueue-scripts:first-script-handle',
 			array($this, 'getFirstScriptHandle')
 		);
 
-		\PoP\Root\App::getHookManager()->addAction(
+		\PoP\Root\App::addAction(
 			'\PoP\ComponentModel\Engine:helperCalculations',
 			array($this, 'generateHelperCalculations'),
 			10,
 			3
 		);
 
-		\PoP\Root\App::getHookManager()->addFilter(
+		\PoP\Root\App::addFilter(
 			'PoPWebPlatform_Initialization:init-scripts',
 			array($this, 'initScripts'),
 			20

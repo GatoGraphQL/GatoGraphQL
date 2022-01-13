@@ -63,7 +63,7 @@ if (!defined('POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS19'
 	define('POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS19', false);
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

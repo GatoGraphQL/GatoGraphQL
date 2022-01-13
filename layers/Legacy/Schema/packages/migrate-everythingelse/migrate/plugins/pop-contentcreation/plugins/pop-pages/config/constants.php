@@ -2,7 +2,7 @@
 
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 
-\PoP\Root\App::getHookManager()->addAction(
+\PoP\Root\App::addAction(
     'popcms:init',
     function () {
         if (defined('POP_CONTENTCREATION_PAGEPLACEHOLDER_SPAMMEDPOSTNOTIFICATION')) {

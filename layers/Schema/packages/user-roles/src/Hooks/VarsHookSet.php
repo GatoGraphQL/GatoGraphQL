@@ -26,7 +26,7 @@ class VarsHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromAppState')
         );
@@ -38,7 +38,7 @@ class VarsHookSet extends AbstractHookSet
             case RouteNatures::USER:
                 $user_id = App::getState(['routing', 'queried-object-id']);
                 // Author: it may depend on its role
-                $component_types = App::getHookManager()->applyFilters(
+                $component_types = App::applyFilters(
                     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:userrole',
                     array(
                         ModelInstanceComponentTypes::USER_ROLE,

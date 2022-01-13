@@ -9,7 +9,7 @@ class PoP_Theme_Meta_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             '\PoP\ComponentModel\Engine:site-meta',
             array($this, 'getSiteMeta')
         );

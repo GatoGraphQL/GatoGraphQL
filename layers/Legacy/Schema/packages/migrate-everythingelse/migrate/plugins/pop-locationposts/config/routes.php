@@ -9,7 +9,7 @@ if (!defined('POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS')) {
 	define('POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS', $definitionManager->getUniqueDefinition('locationposts', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_IDS_TABS_REMEMBERCHECKBOX', 'tabs-remember');
 
-\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'popcoreTabsJqueryConstants');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'popcoreTabsJqueryConstants');
 function popcoreTabsJqueryConstants($jqueryConstants)
 {
-    $opentabs = \PoP\Root\App::getHookManager()->applyFilters(
+    $opentabs = \PoP\Root\App::applyFilters(
         'popcoreTabsJqueryConstants:opentabs',
         true
     );
@@ -60,7 +60,7 @@ function popcoreTabsJqueryConstants($jqueryConstants)
             )
         )
     );
-    $jqueryConstants['TABS_REOPENMSG'] = \PoP\Root\App::getHookManager()->applyFilters('pop_sw_message:reopentabs', $message);
+    $jqueryConstants['TABS_REOPENMSG'] = \PoP\Root\App::applyFilters('pop_sw_message:reopentabs', $message);
 
     return $jqueryConstants;
 }

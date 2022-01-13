@@ -31,7 +31,7 @@ class CustomPostTypeAPI extends \PoPSchema\CustomPostsWP\TypeAPIs\CustomPostType
                 $readmore
             ) :
             $customPost->post_excerpt;
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             'get_the_excerpt',
             $value,
             $customPostID

@@ -153,7 +153,7 @@ class Engine extends UpstreamEngine implements EngineInterface
                 $meta[Params::SETTINGSFORMAT] = App::getState('format');
             }
         }
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             '\PoPSiteBuilder\ComponentModel\Engine:site-meta',
             $meta
         );
@@ -175,7 +175,7 @@ class Engine extends UpstreamEngine implements EngineInterface
                 : $this->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
         }
 
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             '\PoPSiteBuilder\ComponentModel\Engine:request-meta',
             $meta
         );

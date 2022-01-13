@@ -18,7 +18,7 @@ class PoP_MediaHostThumbs
     {
 
         // Priority: after PoP Add Post Links
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888370);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888370);
     }
     public function init()
     {

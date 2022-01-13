@@ -4,7 +4,7 @@ class PoP_Domain_Utils
 {
     public static function init(): void
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Application_Utils:request-domain',
             array(self::class, 'maybeGetRequestDomain')
         );

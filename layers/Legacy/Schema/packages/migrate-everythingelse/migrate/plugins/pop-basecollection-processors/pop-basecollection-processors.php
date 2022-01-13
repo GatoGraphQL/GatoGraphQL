@@ -20,7 +20,7 @@ class PoP_BaseCollectionProcessors
     {
 
         // Priority: after PoP Engine Processors
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888610);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888610);
     }
     public function init()
     {

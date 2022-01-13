@@ -20,7 +20,7 @@ class PoP_SPAWebPlatform
     {
 
         // Priority: after PoP Server-Side Rendering, inner circle
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888404);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888404);
     }
     public function init()
     {

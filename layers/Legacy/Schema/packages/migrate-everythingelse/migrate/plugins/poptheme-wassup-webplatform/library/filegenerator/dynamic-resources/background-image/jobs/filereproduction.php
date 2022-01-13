@@ -20,7 +20,7 @@ class PoPThemeWassup_FileReproduction_BackgroundImage extends PoP_Engine_CSSFile
     {
         $configuration = parent::getConfiguration();
 
-        $bgImageArgs = \PoP\Root\App::getHookManager()->applyFilters(
+        $bgImageArgs = \PoP\Root\App::applyFilters(
             'PoPThemeWassup_FileReproduction_BackgroundImage:args',
             array(
                 'color' => '#ffffff',

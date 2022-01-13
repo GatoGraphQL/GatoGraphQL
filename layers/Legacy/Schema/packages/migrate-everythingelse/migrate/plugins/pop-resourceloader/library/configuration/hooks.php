@@ -4,7 +4,7 @@ class PoP_ResourceLoader_WebPlatformHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter('PoP_HTMLCSSPlatform_ConfigurationUtils:registerScriptsAndStylesDuringInit', array($this, 'registerScriptsAndStylesDuringInit'));
+        \PoP\Root\App::addFilter('PoP_HTMLCSSPlatform_ConfigurationUtils:registerScriptsAndStylesDuringInit', array($this, 'registerScriptsAndStylesDuringInit'));
     }
 
     public function registerScriptsAndStylesDuringInit($register)

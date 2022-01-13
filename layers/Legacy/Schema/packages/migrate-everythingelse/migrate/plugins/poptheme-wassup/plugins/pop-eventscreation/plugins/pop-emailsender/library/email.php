@@ -3,7 +3,7 @@
 /**
  * Create page on the initial user welcome email
  */
-\PoP\Root\App::getHookManager()->addFilter('sendemailUserwelcome:create_routes', 'emWassupCreateRoutes');
+\PoP\Root\App::addFilter('sendemailUserwelcome:create_routes', 'emWassupCreateRoutes');
 function emWassupCreateRoutes($routes)
 {
     $routes = array_merge(

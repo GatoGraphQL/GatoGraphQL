@@ -208,7 +208,7 @@ class PoP_ServerSide_KernelHelpers
         $response = $popManager->getHtml($domain, $moduleName, $context);
 
         // Allow PoP Resource Loader to modify the response, to add embedded scripts
-        $response = \PoP\Root\App::getHookManager()->applyFilters(
+        $response = \PoP\Root\App::applyFilters(
             'handlebars-helpers:enterModule:response',
             $response,
             $context,

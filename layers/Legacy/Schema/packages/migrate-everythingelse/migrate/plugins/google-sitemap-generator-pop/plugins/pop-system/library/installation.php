@@ -6,7 +6,7 @@ class PoP_GSG_Installation
     {
         // Comment Leo 12/04/2019: commented until routes are integrated into plugin GoogleSitemapGenerator
         // (currently it deals only with pages)
-        // \PoP\Root\App::getHookManager()->addAction(
+        // \PoP\Root\App::addAction(
         //     'PoP:system-install', 
         //     [$this, 'systemInstall']
         // );

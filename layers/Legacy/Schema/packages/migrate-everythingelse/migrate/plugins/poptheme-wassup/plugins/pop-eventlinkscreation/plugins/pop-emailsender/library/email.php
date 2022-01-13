@@ -3,7 +3,7 @@
 /**
  * Create page on the initial user welcome email
  */
-\PoP\Root\App::getHookManager()->addFilter('sendemailUserwelcome:create_routes', 'popEventlinkscreationWassupCreateRoutes');
+\PoP\Root\App::addFilter('sendemailUserwelcome:create_routes', 'popEventlinkscreationWassupCreateRoutes');
 function popEventlinkscreationWassupCreateRoutes($routes)
 {
     $routes = array_merge(

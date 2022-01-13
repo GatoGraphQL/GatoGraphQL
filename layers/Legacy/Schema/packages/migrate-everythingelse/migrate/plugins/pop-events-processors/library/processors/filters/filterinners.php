@@ -59,7 +59,7 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
                 [PoP_Module_Processor_FormComponentGroups::class, PoP_Module_Processor_FormComponentGroups::MODULE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES],
             ],
         ];
-        if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
+        if ($modules = \PoP\Root\App::applyFilters(
             'Events:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module

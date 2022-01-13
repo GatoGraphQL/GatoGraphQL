@@ -2,7 +2,7 @@
 
 use PoP\ComponentModel\Facades\HelperServices\ApplicationStateHelperServiceFacade;
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
 	'template_include', 
 	function ($template) {
 	    // If the theme doesn't implement the template, use the default one

@@ -10,26 +10,26 @@ class AWSS3CFPoP_Validation
     {
         $success = true;
         if (!defined('POP_ENGINEWP_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'installWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'installWarning'));
             $success = false;
         } elseif (!defined('POP_ENGINEWP_INITIALIZED')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (AWSS3CFPOP_POP_CMSWP_MIN_VERSION > POP_ENGINEWP_VERSION) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'versionWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'versionWarning'));
         }
 
         // Validate plug-in
         if (!function_exists('as3cf_init')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'pluginWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this,'pluginWarning'));
             $success = false;
         } elseif (AWSS3CFPOP_AWSS3CF_MIN_VERSION > $GLOBALS['aws_meta']['amazon-s3-and-cloudfront']['version']) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'pluginversion_warning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'pluginversion_warning'));
+            \PoP\Root\App::addAction('admin_notices', array($this,'pluginversion_warning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this,'pluginversion_warning'));
         }
 
         return $success;

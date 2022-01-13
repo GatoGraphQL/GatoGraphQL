@@ -28,19 +28,19 @@ class InputObjectTypeHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
             [$this, 'getInputFieldNameTypeResolvers'],
             10,
             2
         );
-        App::getHookManager()->addFilter(
+        App::addFilter(
             HookNames::INPUT_FIELD_DESCRIPTION,
             [$this, 'getInputFieldDescription'],
             10,
             3
         );
-        App::getHookManager()->addFilter(
+        App::addFilter(
             HookNames::INPUT_FIELD_FILTER_INPUT,
             [$this, 'getInputFieldFilterInput'],
             10,

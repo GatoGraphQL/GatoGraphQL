@@ -4,7 +4,7 @@
  * Thumbs for the Links depending on their domain
  */
 
-\PoP\Root\App::getHookManager()->addFilter('PoP_MediaHostThumbs_Utils:nonembeddable-hosts', 'wassupNonembeddablehosts');
+\PoP\Root\App::addFilter('PoP_MediaHostThumbs_Utils:nonembeddable-hosts', 'wassupNonembeddablehosts');
 function wassupNonembeddablehosts($nonembeddable)
 {
     return array_merge(

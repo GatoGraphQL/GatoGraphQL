@@ -5,7 +5,7 @@ class PoP_AutomatedEmails_WebPlatform_ResourceLoader_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter('getResourcesIncludeType', array($this, 'getResourcesIncludeType'));
+        \PoP\Root\App::addFilter('getResourcesIncludeType', array($this, 'getResourcesIncludeType'));
     }
 
     public function getResourcesIncludeType($type)

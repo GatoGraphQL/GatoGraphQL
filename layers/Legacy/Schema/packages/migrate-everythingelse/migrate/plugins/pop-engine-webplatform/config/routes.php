@@ -9,7 +9,7 @@ if (!defined('POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL')) {
 	define('POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL', $definitionManager->getUniqueDefinition('loaders/appshell', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

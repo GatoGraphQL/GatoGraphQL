@@ -1,7 +1,7 @@
 <?php
 
 // Hook together the isSearchEngine function with WP Super Cache's is_rejected_user_agent function
-\PoP\Root\App::getHookManager()->addFilter('RequestUtils:isSearchEngine', 'gdWpCacheIsRejectedUserAgent');
+\PoP\Root\App::addFilter('RequestUtils:isSearchEngine', 'gdWpCacheIsRejectedUserAgent');
 function gdWpCacheIsRejectedUserAgent($isSearchEngine)
 {
 

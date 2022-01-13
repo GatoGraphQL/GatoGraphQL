@@ -122,7 +122,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
                 $user_roles = $userRoleTypeAPI->getUserRoles($objectTypeResolver->getID($user));
                 // Allow to hook for URE: Make sure we always get the most specific role
                 // Otherwise, users like Leo get role 'administrator'
-                return \PoP\Root\App::getHookManager()->applyFilters(
+                return \PoP\Root\App::applyFilters(
                     'UserObjectTypeResolver:getValue:role',
                     array_shift($user_roles),
                     $objectTypeResolver->getID($user)

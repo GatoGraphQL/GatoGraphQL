@@ -3,15 +3,15 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 // Execute after callable function has been defined in poptheme-wassup
-\PoP\Root\App::getHookManager()->addAction(
+\PoP\Root\App::addAction(
     'plugins_loaded',
     function () {
-        \PoP\Root\App::getHookManager()->addFilter('UserStance_Module_Processor_CustomCarouselControls:authorstances:titlelink', 'gdUreAddSourceParamPagesections');
+        \PoP\Root\App::addFilter('UserStance_Module_Processor_CustomCarouselControls:authorstances:titlelink', 'gdUreAddSourceParamPagesections');
     },
     1501
 );
 
-\PoP\Root\App::getHookManager()->addFilter('UserStance_Module_Processor_CustomCarouselControls:authorstances:title', 'gdUserstanceUreTitlemembers');
+\PoP\Root\App::addFilter('UserStance_Module_Processor_CustomCarouselControls:authorstances:title', 'gdUserstanceUreTitlemembers');
 function gdUserstanceUreTitlemembers($title)
 {
     $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);

@@ -40,7 +40,7 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_ORDERPOST],
             ],
         ];
-        if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
+        if ($modules = \PoP\Root\App::applyFilters(
             'Locations:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module

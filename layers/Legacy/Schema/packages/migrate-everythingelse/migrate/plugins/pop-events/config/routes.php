@@ -15,7 +15,7 @@ if (!defined('POP_EVENTS_ROUTE_PASTEVENTS')) {
     define('POP_EVENTS_ROUTE_PASTEVENTS', $definitionManager->getUniqueDefinition('past-events', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

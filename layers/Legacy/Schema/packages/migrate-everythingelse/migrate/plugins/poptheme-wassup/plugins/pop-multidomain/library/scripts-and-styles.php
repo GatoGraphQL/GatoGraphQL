@@ -3,7 +3,7 @@ use PoP\FileStore\Facades\FileRendererFacade;
 /**
  * Change styles according to the domain
  */
-\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_DomainCodes:code:styles', 'getMultidomainBgcolorCodestyle', 10, 2);
+\PoP\Root\App::addFilter('PoP_Module_Processor_DomainCodes:code:styles', 'getMultidomainBgcolorCodestyle', 10, 2);
 function getMultidomainBgcolorCodestyle($styles, $domain)
 {
 	// Use an anonymous class, since this file will never need be saved to disk

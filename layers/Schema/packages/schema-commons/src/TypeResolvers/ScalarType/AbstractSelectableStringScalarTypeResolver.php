@@ -63,7 +63,7 @@ abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalar
         /**
          * Allow to override/extend the enum values
          */
-        $this->consolidatedPossibleValuesCache = App::getHookManager()->applyFilters(
+        $this->consolidatedPossibleValuesCache = App::applyFilters(
             self::HOOK_POSSIBLE_VALUES,
             $this->getPossibleValues(),
             $this,

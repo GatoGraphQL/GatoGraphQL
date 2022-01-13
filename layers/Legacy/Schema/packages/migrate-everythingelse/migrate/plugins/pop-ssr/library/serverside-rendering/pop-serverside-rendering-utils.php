@@ -9,7 +9,7 @@ class PoP_ServerSideRendering_Utils
         self::$scripts = array();
 
         // Priority 1: after printing 'wp_print_head_scripts' in the footer (priority 1)
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'popcms:footer',
             array(PoP_ServerSideRendering_Utils::class, 'printScripts'),
             2

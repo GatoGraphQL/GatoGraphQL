@@ -321,7 +321,7 @@ class PoP_ResourceLoaderProcessorUtils {
         if ($components['target'] ?? null) {
             $target = $components['target'];
         } else {
-            $format_targets = \PoP\Root\App::getHookManager()->applyFilters(
+            $format_targets = \PoP\Root\App::applyFilters(
                 'PoP_ResourceLoaderProcessorUtils:resources-from-current-vars:format-targets',
                 array()
             );

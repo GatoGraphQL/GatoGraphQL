@@ -9,6 +9,6 @@ class PoP_FormUtils
      */
     public static function useLoggedinuserData()
     {
-        return \PoP\Root\App::getHookManager()->applyFilters('PoP_FormUtils:useLoggedinuserData', true);
+        return \PoP\Root\App::applyFilters('PoP_FormUtils:useLoggedinuserData', true);
     }
 }

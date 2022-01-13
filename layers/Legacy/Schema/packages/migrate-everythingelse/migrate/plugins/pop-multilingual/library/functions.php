@@ -13,7 +13,7 @@ function getMultilingualLanguageitems($shortnames = array())
     if ($languages && count($languages) > 1) {
         // Allow to hook in the list of shortnames
         if (!$shortnames) {
-            $shortnames = \PoP\Root\App::getHookManager()->applyFilters('getMultilingualLanguageitems:shortnames', array());
+            $shortnames = \PoP\Root\App::applyFilters('getMultilingualLanguageitems:shortnames', array());
         }
         
         $current = $pluginapi->getCurrentLanguage();

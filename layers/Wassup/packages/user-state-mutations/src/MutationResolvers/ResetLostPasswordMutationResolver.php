@@ -84,7 +84,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         $cmsuseraccountapi->resetPassword($user, $pwd);
 
         $userID = $this->getUserTypeAPI()->getUserId($user);
-        App::getHookManager()->doAction('gd_lostpasswordreset', $userID);
+        App::doAction('gd_lostpasswordreset', $userID);
         return $userID;
     }
 }

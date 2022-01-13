@@ -14,8 +14,8 @@ class PoP_SocialNetwork_Notifications_Hook_Users /* extends AAL_Hook_Base*/
     {
 
         // Follows/Unfollows user
-        \PoP\Root\App::getHookManager()->addAction('gd_followuser', array($this, 'followsUser'));
-        \PoP\Root\App::getHookManager()->addAction('gd_unfollowuser', array($this, 'unfollowsUser'));
+        \PoP\Root\App::addAction('gd_followuser', array($this, 'followsUser'));
+        \PoP\Root\App::addAction('gd_unfollowuser', array($this, 'unfollowsUser'));
 
         // parent::__construct();
     }

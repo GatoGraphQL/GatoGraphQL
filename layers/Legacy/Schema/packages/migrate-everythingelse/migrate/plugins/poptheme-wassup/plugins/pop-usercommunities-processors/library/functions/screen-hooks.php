@@ -4,7 +4,7 @@ class PoPTheme_Wassup_URE_ScreenHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Application_Utils:defaultformat_by_screen',
             array($this, 'getDefaultformatByScreen'),
             0,

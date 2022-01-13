@@ -4,7 +4,7 @@ class PoPTheme_Wassup_Volunteering_WebPlatform_PageSectionHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:addons',
             array($this, 'initModelPropsAddons'),
             10,

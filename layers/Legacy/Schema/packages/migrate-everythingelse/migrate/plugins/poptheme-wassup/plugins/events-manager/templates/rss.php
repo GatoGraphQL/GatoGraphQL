@@ -17,7 +17,7 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>'."\n";
      *
      * @since 2.0.0
      */
-    \PoP\Root\App::getHookManager()->doAction('em:rss2_ns');
+    \PoP\Root\App::doAction('em:rss2_ns');
     ?>
 >
     <channel>
@@ -33,7 +33,7 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>'."\n";
         $page_limit = $rss_limit > 50 || !$rss_limit ? 50 : $rss_limit; //set a limit of 50 to output at a time, unless overall limit is lower
     $args = !empty($args) ? $args:array(); /* @var $args array */
     $args = array_merge(array('scope'=>get_option('dbem_rss_scope'), 'owner'=>false, 'limit'=>$page_limit, 'page'=>1, 'order'=>get_option('dbem_rss_order'), 'orderby'=>get_option('dbem_rss_orderby')), $args);
-    $args = \PoP\Root\App::getHookManager()->applyFilters('em_rss_template_args', $args);
+    $args = \PoP\Root\App::applyFilters('em_rss_template_args', $args);
     $EM_Events = EM_Events::get($args);
     $count = 0;
     while (count($EM_Events) > 0) {
@@ -42,7 +42,7 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>'."\n";
             $description = $EM_Event->output(get_option('dbem_rss_description_format'), "rss");
             $description = ent2ncr(convert_chars($description)); //Some RSS filtering
             $event_url = $EM_Event->output('#_EVENTURL');
-            $event_author = \PoP\Root\App::getHookManager()->applyFilters('gd_em_rss:author', $EM_Event->output('#_EVENTAUTHORNAME'), $EM_Event); ?>
+            $event_author = \PoP\Root\App::applyFilters('gd_em_rss:author', $EM_Event->output('#_EVENTAUTHORNAME'), $EM_Event); ?>
                 <item>
                     <title><?php echo $EM_Event->output(get_option('dbem_rss_title_format'), "rss"); ?></title>
                     <link><?php echo $event_url; ?></link>
@@ -56,7 +56,7 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>'."\n";
              *
              * @since 2.0.0
              */
-            \PoP\Root\App::getHookManager()->doAction('em:rss2_item', $EM_Event); ?>
+            \PoP\Root\App::doAction('em:rss2_item', $EM_Event); ?>
                 </item>
             <?php
             $count++;

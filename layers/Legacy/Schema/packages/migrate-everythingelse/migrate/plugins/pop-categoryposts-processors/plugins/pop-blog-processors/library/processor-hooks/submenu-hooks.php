@@ -4,7 +4,7 @@ class PoP_CategoryPostsProcessors_Blog_SubmenuHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Blog_SubmenuHooks:mainsubheaders',
             array($this, 'addMainsubheaders')
         );

@@ -4,13 +4,13 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalOnDataFieldSubmodules',
             array($this, 'getConditionalOnDataFieldSubmodules'),
             10,
             2
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_MultipleComponentLayouts:modules',
             array($this, 'getQuicklinkgroupBottomSubmodule')
         );

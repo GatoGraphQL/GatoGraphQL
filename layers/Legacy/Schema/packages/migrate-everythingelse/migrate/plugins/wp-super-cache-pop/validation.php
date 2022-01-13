@@ -10,22 +10,22 @@ class WPSC_PoP_Validation
         $success = true;
 
         if (!defined('POP_ENGINEWP_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'installWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'installWarning'));
             $success = false;
         } elseif (!defined('POP_ENGINEWP_INITIALIZED')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (WPSCPOP_POP_CMSWP_MIN_VERSION > POP_ENGINEWP_VERSION) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'versionWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'versionWarning'));
         }
 
         // Validate plug-in
         if (!(function_exists('wpsupercache_site_admin'))) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this,'pluginWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this,'pluginWarning'));
             $success = false;
         } elseif (!(defined('WP_CACHE') && WP_CACHE)) {
             // Do not initialize the plug-in, but no need to show an error message

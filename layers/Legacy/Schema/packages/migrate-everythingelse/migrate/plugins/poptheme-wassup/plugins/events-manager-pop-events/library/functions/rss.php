@@ -4,7 +4,7 @@ use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 define('GD_URLPARAM_RSSCAMPAIGN_UPCOMINGEVENTS_3DAYS', 'events-3days');
 define('GD_URLPARAM_RSSCAMPAIGN_UPCOMINGEVENTS_4DAYS', 'events-4days');
 
-\PoP\Root\App::getHookManager()->addFilter('popGetRssPostlistCampaigns', 'popEmGetRssPostlistCampaigns');
+\PoP\Root\App::addFilter('popGetRssPostlistCampaigns', 'popEmGetRssPostlistCampaigns');
 function popEmGetRssPostlistCampaigns($campaigns)
 {
     return array_merge(
@@ -19,7 +19,7 @@ function popEmGetRssPostlistCampaigns($campaigns)
 /**
  * Scope for getting events
  */
-\PoP\Root\App::getHookManager()->addFilter('em_rss_template_args', 'popEmRssTemplateArgs');
+\PoP\Root\App::addFilter('em_rss_template_args', 'popEmRssTemplateArgs');
 function popEmRssTemplateArgs($args)
 {
     if (isset($_REQUEST[GD_URLPARAM_RSSCAMPAIGN])) {
@@ -49,8 +49,8 @@ function gdEmRss()
         $wp_query->is_feed = true; //make is_feed() return true AIO SEO fix
         ob_start();
         \em_locate_template('templates/rss.php', true, array('args'=>$args));
-        echo \PoP\Root\App::getHookManager()->applyFilters('emRss', ob_get_clean());
+        echo \PoP\Root\App::applyFilters('emRss', ob_get_clean());
         die();
     }
 }
-\PoP\Root\App::getHookManager()->addAction('template_redirect', 'gdEmRss');
+\PoP\Root\App::addAction('template_redirect', 'gdEmRss');

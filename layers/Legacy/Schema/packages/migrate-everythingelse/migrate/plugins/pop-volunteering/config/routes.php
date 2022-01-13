@@ -9,7 +9,7 @@ if (!defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER')) {
 	define('POP_VOLUNTEERING_ROUTE_VOLUNTEER', $definitionManager->getUniqueDefinition('volunteer', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

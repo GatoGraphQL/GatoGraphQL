@@ -27,7 +27,7 @@ if (!defined('POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE')) {
     define('POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE', $definitionManager->getUniqueDefinition('change-password', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

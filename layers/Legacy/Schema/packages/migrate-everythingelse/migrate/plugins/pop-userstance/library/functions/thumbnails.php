@@ -1,7 +1,7 @@
 <?php
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
-\PoP\Root\App::getHookManager()->addFilter('getThumbId:default', 'userstanceThumbDefaulthighlight', 10, 2);
+\PoP\Root\App::addFilter('getThumbId:default', 'userstanceThumbDefaulthighlight', 10, 2);
 function userstanceThumbDefaulthighlight($thumb_id, $post_id)
 {
     if (POP_USERSTANCE_IMAGE_NOFEATUREDIMAGESTANCEPOST) {

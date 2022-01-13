@@ -18,7 +18,7 @@ if (!defined('POP_EVENTSCREATION_ROUTE_EDITEVENT')) {
     define('POP_EVENTSCREATION_ROUTE_EDITEVENT', $definitionManager->getUniqueDefinition('edit-event', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

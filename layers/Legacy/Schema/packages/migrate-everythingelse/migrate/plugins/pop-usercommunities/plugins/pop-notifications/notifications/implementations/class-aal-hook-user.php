@@ -9,12 +9,12 @@ class URE_AAL_PoP_Hook_Users /* extends AAL_Hook_Base*/
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addAction('gd_update_mycommunities:update', array($this, 'joinedCommunities'), 10, 3);
-        \PoP\Root\App::getHookManager()->addAction('gd_custom_createupdate_profile:additionalsCreate', array($this, 'newUserCommunities'), 10, 2);
-        \PoP\Root\App::getHookManager()->addAction('GD_EditMembership:update', array($this, 'communityUpdatedUserMembership'), 10, 2);
+        \PoP\Root\App::addAction('gd_update_mycommunities:update', array($this, 'joinedCommunities'), 10, 3);
+        \PoP\Root\App::addAction('gd_custom_createupdate_profile:additionalsCreate', array($this, 'newUserCommunities'), 10, 2);
+        \PoP\Root\App::addAction('GD_EditMembership:update', array($this, 'communityUpdatedUserMembership'), 10, 2);
 
         // Updated communities
-        \PoP\Root\App::getHookManager()->addAction('gd_update_mycommunities:update', array($this, 'updatedCommunities'), 10, 1);
+        \PoP\Root\App::addAction('gd_update_mycommunities:update', array($this, 'updatedCommunities'), 10, 1);
 
         // parent::__construct();
     }

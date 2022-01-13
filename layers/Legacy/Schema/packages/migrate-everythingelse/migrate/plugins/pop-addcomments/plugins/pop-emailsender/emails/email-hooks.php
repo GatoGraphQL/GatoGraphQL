@@ -14,7 +14,7 @@ class PoP_AddComments_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Functional emails
         //----------------------------------------------------------------------
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'popcms:insertComment',
             array($this, 'sendemailToUsersFromComment'),
             10,

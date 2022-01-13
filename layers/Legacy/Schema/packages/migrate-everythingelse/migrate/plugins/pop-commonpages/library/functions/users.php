@@ -6,5 +6,5 @@
 
 function getWhoweareCoreUserIds()
 {
-    return \PoP\Root\App::getHookManager()->applyFilters('getWhoweareCoreUserIds', array());
+    return \PoP\Root\App::applyFilters('getWhoweareCoreUserIds', array());
 }

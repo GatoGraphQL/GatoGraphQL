@@ -26,7 +26,7 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data): void
     {
-        App::getHookManager()->doAction('pop_subscribetonewsletter', $form_data);
+        App::doAction('pop_subscribetonewsletter', $form_data);
     }
 
     protected function doExecute($form_data)

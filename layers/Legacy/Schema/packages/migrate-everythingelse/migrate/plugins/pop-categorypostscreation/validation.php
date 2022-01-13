@@ -10,29 +10,29 @@ class PoP_CategoryPostsCreation_Validation
     {
         $success = true;
         if (!defined('POP_CATEGORYPOSTS_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'installWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'installWarning'));
             $success = false;
         } elseif (!defined('POP_CATEGORYPOSTS_INITIALIZED')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (POP_CATEGORYPOSTSCREATION_POP_CATEGORYPOSTS_MIN_VERSION > POP_CATEGORYPOSTS_VERSION) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'versionWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'versionWarning'));
         }
 
         if (!defined('POP_POSTSCREATION_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'install_warning_2'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'install_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'install_warning_2'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'install_warning_2'));
             $success = false;
         } elseif (!defined('POP_POSTSCREATION_INITIALIZED')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initialize_warning_2'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning_2'));
             $success = false;
         } elseif (POP_CATEGORYPOSTSCREATION_POP_POSTSCREATION_MIN_VERSION > POP_POSTSCREATION_VERSION) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'version_warning_2'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'version_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'version_warning_2'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'version_warning_2'));
         }
 
         return $success;

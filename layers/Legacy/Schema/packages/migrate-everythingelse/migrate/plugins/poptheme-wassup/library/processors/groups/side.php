@@ -18,7 +18,7 @@ class PoP_Module_Processor_SideGroups extends PoP_Module_Processor_MultiplesBase
         switch ($module[1]) {
             case self::MODULE_GROUP_SIDE:
                 // Allow GetPoP to only keep the Sections menu
-                if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
+                if ($modules = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_SideGroups:modules',
                     array(
                         [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_SIDE_ADDNEW],

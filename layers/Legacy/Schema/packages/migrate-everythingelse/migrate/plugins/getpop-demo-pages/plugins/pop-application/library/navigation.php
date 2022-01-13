@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 /**
  * navigation.php
  */
-\PoP\Root\App::getHookManager()->addFilter('route:icon', 'getpopdemoCppRouteIcon', 10, 3);
+\PoP\Root\App::addFilter('route:icon', 'getpopdemoCppRouteIcon', 10, 3);
 function getpopdemoCppRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -28,7 +28,7 @@ function getpopdemoCppRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-\PoP\Root\App::getHookManager()->addFilter('route:title', 'getpopdemoCppNavigationRouteTitle', 10, 2);
+\PoP\Root\App::addFilter('route:title', 'getpopdemoCppNavigationRouteTitle', 10, 2);
 function getpopdemoCppNavigationRouteTitle($title, $route)
 {
     $titles = [

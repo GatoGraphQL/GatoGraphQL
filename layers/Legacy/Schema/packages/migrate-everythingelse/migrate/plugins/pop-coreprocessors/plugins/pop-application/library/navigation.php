@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-\PoP\Root\App::getHookManager()->addFilter('route:icon', 'popcoreRouteIcon', 10, 3);
+\PoP\Root\App::addFilter('route:icon', 'popcoreRouteIcon', 10, 3);
 function popcoreRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -59,7 +59,7 @@ function popcoreRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-\PoP\Root\App::getHookManager()->addFilter('route:title', 'popcoreNavigationRouteTitle', 10, 2);
+\PoP\Root\App::addFilter('route:title', 'popcoreNavigationRouteTitle', 10, 2);
 function popcoreNavigationRouteTitle($title, $route)
 {
     $titles = [

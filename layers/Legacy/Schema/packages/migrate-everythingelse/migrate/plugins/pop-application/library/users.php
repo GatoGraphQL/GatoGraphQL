@@ -3,10 +3,10 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 function userNameUpdated($user_id)
 {
-    \PoP\Root\App::getHookManager()->doAction('userNameUpdated', $user_id);
+    \PoP\Root\App::doAction('userNameUpdated', $user_id);
 }
 
-\PoP\Root\App::getHookManager()->addAction('userNameUpdated', 'saveUserDisplayName', 10, 1);
+\PoP\Root\App::addAction('userNameUpdated', 'saveUserDisplayName', 10, 1);
 function saveUserDisplayName($user_id)
 {
     $display_name = calculateBestDisplayName($user_id);
@@ -45,7 +45,7 @@ function calculateBestDisplayName($user_id)
         $name = sprintf("%s %s", $first_name, $last_name);
     }
     
-    return \PoP\Root\App::getHookManager()->applyFilters(
+    return \PoP\Root\App::applyFilters(
         'calculateBestDisplayName',
         $name,
         $user_id

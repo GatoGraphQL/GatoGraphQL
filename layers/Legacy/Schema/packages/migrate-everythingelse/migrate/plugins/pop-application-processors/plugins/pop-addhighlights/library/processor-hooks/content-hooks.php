@@ -6,7 +6,7 @@ class PoPTheme_AddHighlights_Processors_ContentHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_Contents:inner_module',
             array($this, 'contentInner'),
             10,

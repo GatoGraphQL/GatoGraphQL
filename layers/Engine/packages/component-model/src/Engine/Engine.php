@@ -272,7 +272,7 @@ class Engine implements EngineInterface
     {
         // ETag is needed for the Service Workers
         // Also needed to use together with the Control-Cache header, to know when to refetch data from the server: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching
-        if (App::getHookManager()->applyFilters('\PoP\ComponentModel\Engine:outputData:addEtagHeader', true)) {
+        if (App::applyFilters('\PoP\ComponentModel\Engine:outputData:addEtagHeader', true)) {
             // The same page will have different hashs only because of those random elements added each time,
             // such as the unique_id and the current_time. So remove these to generate the hash
             /** @var ComponentInfo */
@@ -298,7 +298,7 @@ class Engine implements EngineInterface
             }
 
             // Allow plug-ins to replace their own non-needed content (eg: thumbprints, defined in Core)
-            $commoncode = App::getHookManager()->applyFilters('\PoP\ComponentModel\Engine:etag_header:commoncode', $commoncode);
+            $commoncode = App::applyFilters('\PoP\ComponentModel\Engine:etag_header:commoncode', $commoncode);
             header("ETag: " . hash('md5', $commoncode));
         }
     }
@@ -318,7 +318,7 @@ class Engine implements EngineInterface
         }
 
         // Enable to add extra URLs in a fixed manner
-        $this->extra_routes = App::getHookManager()->applyFilters(
+        $this->extra_routes = App::applyFilters(
             '\PoP\ComponentModel\Engine:getExtraRoutes',
             $this->extra_routes
         );
@@ -341,7 +341,7 @@ class Engine implements EngineInterface
 
     public function generateData(): void
     {
-        App::getHookManager()->doAction('\PoP\ComponentModel\Engine:beginning');
+        App::doAction('\PoP\ComponentModel\Engine:beginning');
 
         // Process the request and obtain the results
         $this->data = $this->helperCalculations = [];
@@ -470,7 +470,7 @@ class Engine implements EngineInterface
         }
 
         // Allow for extra operations (eg: calculate resources)
-        App::getHookManager()->doAction(
+        App::doAction(
             '\PoP\ComponentModel\Engine:helperCalculations',
             array(&$this->helperCalculations),
             $module,
@@ -655,7 +655,7 @@ class Engine implements EngineInterface
             $meta['filteredmodules'] = $filteredsettings;
         }
 
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             '\PoP\ComponentModel\Engine:request-meta',
             $meta
         );
@@ -663,7 +663,7 @@ class Engine implements EngineInterface
 
     public function getSessionMeta(): array
     {
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             '\PoP\ComponentModel\Engine:session-meta',
             []
         );
@@ -693,7 +693,7 @@ class Engine implements EngineInterface
                 $meta['cachedsettings'] = $this->cachedsettings;
             };
         }
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             '\PoP\ComponentModel\Engine:site-meta',
             $meta
         );
@@ -984,7 +984,7 @@ class Engine implements EngineInterface
         $this->relationalTypeOutputDBKeyIDsDataFields = [];
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
-        App::getHookManager()->doAction(
+        App::doAction(
             '\PoP\ComponentModel\Engine:getModuleData:start',
             $root_module,
             array(&$root_model_props),
@@ -1279,7 +1279,7 @@ class Engine implements EngineInterface
             );
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
-            App::getHookManager()->doAction(
+            App::doAction(
                 '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
                 $module,
                 array(&$module_props),
@@ -1378,7 +1378,7 @@ class Engine implements EngineInterface
         }
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
-        App::getHookManager()->doAction(
+        App::doAction(
             '\PoP\ComponentModel\Engine:getModuleData:end',
             $root_module,
             array(&$root_model_props),
@@ -1402,7 +1402,7 @@ class Engine implements EngineInterface
 
             // Allow to inject what data fields must be placed under what dbNames
             // Array of key: dbName, values: data-fields
-            $dbname_datafields = App::getHookManager()->applyFilters(
+            $dbname_datafields = App::applyFilters(
                 'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
                 [],
                 $relationalTypeResolver
@@ -1753,11 +1753,11 @@ class Engine implements EngineInterface
         $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
 
         // Execute a hook to process the traces (in advance, we don't do anything with them)
-        App::getHookManager()->doAction(
+        App::doAction(
             '\PoP\ComponentModel\Engine:traces:schema',
             $schemaTraces
         );
-        App::getHookManager()->doAction(
+        App::doAction(
             '\PoP\ComponentModel\Engine:traces:db',
             $objectTraces
         );

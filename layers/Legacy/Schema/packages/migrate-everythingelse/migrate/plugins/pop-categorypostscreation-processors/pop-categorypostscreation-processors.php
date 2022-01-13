@@ -19,7 +19,7 @@ class PoP_CategoryPostsCreationProcessors
     {
 
         // Priority: after PoP Posts Creation Processors
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888860);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888860);
     }
     public function init()
     {

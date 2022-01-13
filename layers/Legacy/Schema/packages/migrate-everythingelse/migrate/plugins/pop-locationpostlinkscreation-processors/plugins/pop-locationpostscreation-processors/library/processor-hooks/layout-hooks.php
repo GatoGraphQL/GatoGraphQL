@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
 	'CommonPages_EM_Module_Processor_ControlButtonGroups:modules', 
 	'popLocationpostlinkscreationAddlocationpostButtons'
 );

@@ -6,7 +6,7 @@ class PoP_CSSConverter_ConversionFileGenerator
     public function generate($file)
     {
         // Get all the .css files from all the plugins
-        $cssfiles = \PoP\Root\App::getHookManager()->applyFilters('PoP_CSSConverter_ConversionManager:css-files', array());
+        $cssfiles = \PoP\Root\App::applyFilters('PoP_CSSConverter_ConversionManager:css-files', array());
 
         $cssFileContents = '';
         foreach ($cssfiles as $cssfile) {

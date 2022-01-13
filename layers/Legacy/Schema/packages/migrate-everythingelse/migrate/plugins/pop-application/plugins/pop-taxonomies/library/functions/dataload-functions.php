@@ -6,12 +6,12 @@ use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 function getAllcontentExcludedTaxonomies()
 {
-    return \PoP\Root\App::getHookManager()->applyFilters('getAllcontentExcludedTaxonomies', array());
+    return \PoP\Root\App::applyFilters('getAllcontentExcludedTaxonomies', array());
 }
 
 function useAllcontentCategories()
 {
-    return \PoP\Root\App::getHookManager()->applyFilters('useAllcontentCategories', true);
+    return \PoP\Root\App::applyFilters('useAllcontentCategories', true);
 }
 
 function gdDataloadAllcontentCategories()

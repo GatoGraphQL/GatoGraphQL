@@ -11,7 +11,7 @@ class GD_FileUpload_Picture_Utils
 
         // Initialize
         if (is_null(self::$action_url)) {
-            self::$action_url = \PoP\Root\App::getHookManager()->applyFilters(
+            self::$action_url = \PoP\Root\App::applyFilters(
                 'GD_FileUpload_UserPhoto:action-url',
                 self::getActionUrlFromBasedir(dirname(dirname(dirname(__FILE__))))
             );

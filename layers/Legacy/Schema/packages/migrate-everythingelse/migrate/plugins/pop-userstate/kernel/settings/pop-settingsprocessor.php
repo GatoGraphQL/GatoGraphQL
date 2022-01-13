@@ -10,7 +10,7 @@ abstract class SettingsProcessorBase
         // all constants have been set by then (otherwise, in file settingsprocessor.pht
         // it may add the configuration under page "POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01",
         // it is not treated as false if the constant has not been defined)
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'popcms:init', 
             array($this, 'init'), 
             PHP_INT_MAX

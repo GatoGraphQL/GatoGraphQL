@@ -44,24 +44,24 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     {
         // Execute before $hooksAPI->addAction('wp',  array('RGForms', 'maybe_process_form'), 9);
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
-            App::getHookManager()->addAction(
+            App::addAction(
                 'popcms:boot',
                 array($this, 'setup'),
                 5
             );
 
             // The 2 functions below must be executed in this order, otherwise 'renameFields' may remove the value filled by 'maybeFillFields'
-            App::getHookManager()->addAction(
+            App::addAction(
                 'popcms:boot',
                 array($this, 'renameFields'),
                 6
             );
-            App::getHookManager()->addAction(
+            App::addAction(
                 'popcms:boot',
                 array($this, 'maybeFillFields'),
                 7
             );
-            App::getHookManager()->addAction(
+            App::addAction(
                 'popcms:boot',
                 array($this, 'maybeValidateCaptcha'),
                 8
@@ -147,8 +147,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
 
     protected function getFormFieldnames($form_id)
     {
-        $hooksAPI = App::getHookManager();
-        return $hooksAPI->applyFilters(
+        return App::applyFilters(
             self::HOOK_FORM_FIELDNAMES,
             array(),
             $form_id

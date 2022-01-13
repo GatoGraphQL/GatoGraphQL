@@ -49,7 +49,7 @@ class PoP_SocialNetwork_Module_Processor_GFFormInners extends PoP_Module_Process
         }
 
         // Allow Gravity Forms to add extra fields
-        $ret = \PoP\Root\App::getHookManager()->applyFilters(
+        $ret = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_GFFormInners:layouts',
             $ret,
             $module
@@ -62,7 +62,7 @@ class PoP_SocialNetwork_Module_Processor_GFFormInners extends PoP_Module_Process
     {
 
         // Allow Gravity Forms to set props on its added fields
-        \PoP\Root\App::getHookManager()->doAction(
+        \PoP\Root\App::doAction(
             'PoP_Module_Processor_GFFormInners:init-props',
             $module,
             array(&$props),

@@ -24,7 +24,7 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
                 $modules[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_PRINT];
 
                 // Allow PoP Generic Forms Processors to add modules
-                $modules = \PoP\Root\App::getHookManager()->applyFilters(
+                $modules = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_DropdownButtonControls:modules:share',
                     $modules,
                     $module

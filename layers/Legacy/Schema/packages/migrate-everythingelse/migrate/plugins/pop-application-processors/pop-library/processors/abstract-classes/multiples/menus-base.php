@@ -4,7 +4,7 @@ abstract class PoP_Module_Processor_MenuMultiplesBase extends PoP_Module_Process
 {
     protected function getActiveLinkMenuItemIds(array $module, array &$props)
     {
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_MenuMultiplesBase:active-link-menu-item-ids',
             array(),
             $module,

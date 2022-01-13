@@ -6,13 +6,13 @@ class PoP_UserCommunities_CDN_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
             array($this, 'getThumbprintPartialpaths'),
             10,
             2
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:noParamValues',
             array($this, 'getThumbprintNoparamvalues'),
             10,

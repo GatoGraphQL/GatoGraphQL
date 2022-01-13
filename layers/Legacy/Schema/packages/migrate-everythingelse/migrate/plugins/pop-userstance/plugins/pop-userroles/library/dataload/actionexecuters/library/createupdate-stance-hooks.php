@@ -5,7 +5,7 @@ class UserStance_DataLoad_CreateUpdateStanceHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'GD_CreateUpdate_Stance:createAdditionals',
             array($this, 'createAdditionals')
         );

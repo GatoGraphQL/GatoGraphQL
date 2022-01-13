@@ -4,17 +4,17 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_FrontEnd_ResourceLoaderProcessor:dependencies:manager',
             array($this, 'getManagerDependencies')
         );
 
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_CoreProcessors_Bootstrap_ResourceLoaderProcessor:dependencies:multiselect',
             array($this, 'getMultiselectDependencies')
         );
 
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-resources',
             array($this, 'getModuleCssResources'),
             10,
@@ -129,7 +129,7 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
         }
 
         // Allow to inject the $module here for several cases
-        if ($module == \PoP\Root\App::getHookManager()->applyFilters(
+        if ($module == \PoP\Root\App::applyFilters(
             'PoPTheme_Wassup_ResourceLoaderProcessor_Hooks:css-resources:collapse-hometop',
             null
         )) {

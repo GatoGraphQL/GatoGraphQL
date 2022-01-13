@@ -15,7 +15,7 @@ if (!defined('POP_POSTSCREATION_ROUTE_EDITPOST')) {
     define('POP_POSTSCREATION_ROUTE_EDITPOST', $definitionManager->getUniqueDefinition('edit-post', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

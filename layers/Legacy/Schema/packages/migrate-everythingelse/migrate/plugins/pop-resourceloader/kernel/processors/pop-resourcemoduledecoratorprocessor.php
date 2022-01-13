@@ -38,7 +38,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $resourceprocessor = $pop_resourceloaderprocessor_manager->getProcessor($templateResource);
         return array_values(
             array_unique(
-                \PoP\Root\App::getHookManager()->applyFilters(
+                \PoP\Root\App::applyFilters(
                     'PoP_WebPlatformQueryDataModuleProcessorBase:module-resources',
                     array(),
                     $module,

@@ -13,7 +13,7 @@ define('AAL_POP_NOTIFYALLUSERS_NONCE', 'aal_pop_notifyallusers');
 /**
  * Allows to add the System Notification to the post in the Backend
  */
-\PoP\Root\App::getHookManager()->addAction('admin_init', 'aalPopNotifyallusersAddMetaBox');
+\PoP\Root\App::addAction('admin_init', 'aalPopNotifyallusersAddMetaBox');
 function aalPopNotifyallusersAddMetaBox()
 {
 
@@ -62,7 +62,7 @@ function aalPopNotifyallusersMetaBoxContent()
 }
 
 
-\PoP\Root\App::getHookManager()->addAction(
+\PoP\Root\App::addAction(
     'popcms:savePost',
     'aalPopNotifyallusersMetaBoxSave'
 );

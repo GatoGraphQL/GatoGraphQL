@@ -14,7 +14,7 @@ abstract class AbstractRemoveMetaQueryInputFieldsInputObjectTypeHookSet extends 
 {
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
             [$this, 'getInputFieldNameTypeResolvers'],
             100,

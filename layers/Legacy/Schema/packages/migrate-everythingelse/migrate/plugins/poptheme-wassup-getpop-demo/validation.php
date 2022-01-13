@@ -10,29 +10,29 @@ class PoPTheme_Wassup_GetPoPDemo_Validation
     {
         $success = true;
         if (!defined('POPTHEME_WASSUP_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'installWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'installWarning'));
             $success = false;
         } elseif (!defined('POPTHEME_WASSUP_INITIALIZED')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (PTWGETPOPDEMO_POPTHEME_WASSUP_MIN_VERSION > POPTHEME_WASSUP_VERSION) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'versionWarning'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'versionWarning'));
         }
 
         if (!defined('GETPOPDEMO_PAGES_VERSION')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'install_warning_2'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'install_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'install_warning_2'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'install_warning_2'));
             $success = false;
         } elseif (!defined('GETPOPDEMO_PAGES_INITIALIZED')) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initialize_warning_2'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning_2'));
             $success = false;
         } elseif (PTWGETPOPDEMO_GETPOPDEMO_PAGES_MIN_VERSION > GETPOPDEMO_PAGES_VERSION) {
-            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'version_warning_2'));
-            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'version_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'version_warning_2'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'version_warning_2'));
         }
 
         return $success;

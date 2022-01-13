@@ -13,7 +13,7 @@ class RoutingStateHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             'WPCMSRoutingState:nature',
             [$this, 'getNature'],
             10,

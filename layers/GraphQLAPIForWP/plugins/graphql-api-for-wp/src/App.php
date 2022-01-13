@@ -171,4 +171,52 @@ class App implements AppInterface, RootAppInterface
     {
         return RootApp::getComponent($componentClass);
     }
+
+    /**
+     * Shortcut function.
+     */
+    public static function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
+    {
+        RootApp::addFilter($tag, $function_to_add, $priority, $accepted_args);
+    }
+
+    /**
+     * Shortcut function.
+     */
+    public static function removeFilter(string $tag, callable $function_to_remove, int $priority = 10): bool
+    {
+        return RootApp::removeFilter($tag, $function_to_remove, $priority);
+    }
+
+    /**
+     * Shortcut function.
+     */
+    public static function applyFilters(string $tag, mixed $value, mixed ...$args): mixed
+    {
+        return RootApp::applyFilters($tag, $value, ...$args);
+    }
+
+    /**
+     * Shortcut function.
+     */
+    public static function addAction(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
+    {
+        RootApp::addAction($tag, $function_to_add, $priority, $accepted_args);
+    }
+
+    /**
+     * Shortcut function.
+     */
+    public static function removeAction(string $tag, callable $function_to_remove, int $priority = 10): bool
+    {
+        return RootApp::removeAction($tag, $function_to_remove, $priority);
+    }
+
+    /**
+     * Shortcut function.
+     */
+    public static function doAction(string $tag, mixed ...$args): void
+    {
+        RootApp::doAction($tag, ...$args);
+    }
 }

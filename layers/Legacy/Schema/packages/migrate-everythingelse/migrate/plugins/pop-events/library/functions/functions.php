@@ -3,7 +3,7 @@ use PoP\ComponentModel\ModuleProcessors\Constants;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
-// \PoP\Root\App::getHookManager()->addFilter('gd_dataload:post_types', 'gdEmAddEventPosttype');
+// \PoP\Root\App::addFilter('gd_dataload:post_types', 'gdEmAddEventPosttype');
 function gdEmAddEventPosttype($post_types)
 {
     $eventTypeAPI = EventTypeAPIFacade::getInstance();
@@ -18,7 +18,7 @@ function eventHasCategory($event, $cat)
     return isset($categories[$cat]);
 }
 
-// \PoP\Root\App::getHookManager()->addFilter('gdGetCategories', 'gdEmGetCategories', 10, 2);
+// \PoP\Root\App::addFilter('gdGetCategories', 'gdEmGetCategories', 10, 2);
 // function gdEmGetCategories($categories, $post_id)
 // {
 //     $eventTypeAPI = EventTypeAPIFacade::getInstance();
@@ -30,7 +30,7 @@ function eventHasCategory($event, $cat)
 //     return $categories;
 // }
 
-\PoP\Root\App::getHookManager()->addFilter('gd_postname', 'gdEmPostnameImpl', 10, 2);
+\PoP\Root\App::addFilter('gd_postname', 'gdEmPostnameImpl', 10, 2);
 function gdEmPostnameImpl($name, $post_id)
 {
     $eventTypeAPI = EventTypeAPIFacade::getInstance();
@@ -40,7 +40,7 @@ function gdEmPostnameImpl($name, $post_id)
 
     return $name;
 }
-\PoP\Root\App::getHookManager()->addFilter('gd_posticon', 'gdEmPosticonImpl', 10, 2);
+\PoP\Root\App::addFilter('gd_posticon', 'gdEmPosticonImpl', 10, 2);
 function gdEmPosticonImpl($icon, $post_id)
 {
     $eventTypeAPI = EventTypeAPIFacade::getInstance();
@@ -51,7 +51,7 @@ function gdEmPosticonImpl($icon, $post_id)
     return $icon;
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
     function($params) {
         $params[] = GD_URLPARAM_YEAR;

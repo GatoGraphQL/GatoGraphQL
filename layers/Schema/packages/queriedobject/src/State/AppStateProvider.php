@@ -24,7 +24,7 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         // Allow to override the queried object, eg: by the AppShell
-        list($queried_object, $queried_object_id) = App::getHookManager()->applyFilters(
+        list($queried_object, $queried_object_id) = App::applyFilters(
             'ApplicationState:queried-object',
             [
                 $this->getCMSRoutingStateService()->getQueriedObject(),

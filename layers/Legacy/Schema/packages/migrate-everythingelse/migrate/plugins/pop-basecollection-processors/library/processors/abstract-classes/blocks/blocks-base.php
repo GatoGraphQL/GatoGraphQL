@@ -208,7 +208,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         /**
          * Allow to add more stuff
          */
-        \PoP\Root\App::getHookManager()->doAction(
+        \PoP\Root\App::doAction(
             'PoP_Module_Processor_BlocksBase:initModelProps',
             array(&$props),
             $module,

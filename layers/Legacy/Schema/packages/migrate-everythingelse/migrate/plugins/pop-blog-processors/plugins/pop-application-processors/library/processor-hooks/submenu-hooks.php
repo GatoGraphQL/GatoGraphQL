@@ -6,11 +6,11 @@ class PoP_Blog_SubmenuHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:author:routes',
             array($this, 'addRoutes')
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:tag:routes',
             array($this, 'addRoutes')
         );
@@ -21,7 +21,7 @@ class PoP_Blog_SubmenuHooks
 
         // Events
         if (defined('PostsComponentConfiguration::getPostsRoute()') && PostsComponentConfiguration::getPostsRoute()) {
-            $routes[PostsComponentConfiguration::getPostsRoute()] = \PoP\Root\App::getHookManager()->applyFilters(
+            $routes[PostsComponentConfiguration::getPostsRoute()] = \PoP\Root\App::applyFilters(
                 'PoP_Blog_SubmenuHooks:mainsubheaders',
                 array()
             );

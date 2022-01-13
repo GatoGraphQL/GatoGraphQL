@@ -69,7 +69,7 @@ abstract class PoP_TemplateResourceLoaderProcessor extends PoP_JSResourceLoaderP
 		$dependencies = parent::getDependencies($resource);
 
 		// All templates depend on the handlebars runtime. Allow plugins to add their own dependencies
-		if ($template_dependencies = \PoP\Root\App::getHookManager()->applyFilters(
+		if ($template_dependencies = \PoP\Root\App::applyFilters(
 			'PoP_TemplateResourceLoaderProcessor:dependencies',
 			[
 				[PoP_FrontEnd_VendorJSResourceLoaderProcessor::class, PoP_FrontEnd_VendorJSResourceLoaderProcessor::RESOURCE_EXTERNAL_HANDLEBARS],

@@ -19,13 +19,13 @@ class Plugin
     public function __construct()
     {
         include_once 'validation.php';
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Users_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
 
         // Priority: mid section, after PoP Edit Users
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888255);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888255);
     }
     public function getProviderValidationClass($class)
     {

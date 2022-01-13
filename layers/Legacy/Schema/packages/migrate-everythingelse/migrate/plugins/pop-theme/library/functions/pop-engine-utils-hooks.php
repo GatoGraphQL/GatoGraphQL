@@ -27,4 +27,4 @@ class PoP_Theme_UtilsHooks
 /**
  * Initialization
  */
-\PoP\Root\App::getHookManager()->addAction('ApplicationState:addVars', array(PoP_Theme_UtilsHooks::class, 'addVars'), 10, 1);
+\PoP\Root\App::addAction('ApplicationState:addVars', array(PoP_Theme_UtilsHooks::class, 'addVars'), 10, 1);

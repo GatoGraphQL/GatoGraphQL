@@ -7,7 +7,7 @@ class PoP_EditorUtils
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
             // If no editor has been initialized, just create the main one, always, at the footer
             // This will be called for HTML output, not for JSON output
-            \PoP\Root\App::getHookManager()->addAction('wp_footer', array(PoP_EditorUtils::class, 'createMainEditor'));
+            \PoP\Root\App::addAction('wp_footer', array(PoP_EditorUtils::class, 'createMainEditor'));
         }
     }
 

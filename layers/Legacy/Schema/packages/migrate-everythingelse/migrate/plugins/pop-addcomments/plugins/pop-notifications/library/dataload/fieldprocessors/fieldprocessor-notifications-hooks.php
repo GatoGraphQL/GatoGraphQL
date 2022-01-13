@@ -178,7 +178,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                         }
 
                         // Allow PoP Social Network to make the message more precise
-                        $message = \PoP\Root\App::getHookManager()->applyFilters(
+                        $message = \PoP\Root\App::applyFilters(
                             'PoP_AddComments_DataLoad_TypeResolver_Notifications_Hook:comment-added:message',
                             $message,
                             $notification

@@ -19,7 +19,7 @@ class PoP_Forms
     {
 
         // Priority: after PoP Application
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888305);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888305);
     }
 
     public function init()

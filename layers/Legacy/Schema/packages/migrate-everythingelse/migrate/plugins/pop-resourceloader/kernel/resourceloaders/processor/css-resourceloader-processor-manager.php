@@ -9,7 +9,7 @@ class PoP_CSSResourceLoaderProcessorManager {
 
 		$this->inline_resources = array();
 
-		\PoP\Root\App::getHookManager()->addAction('popcms:head', array($this, 'printStyles'));
+		\PoP\Root\App::addAction('popcms:head', array($this, 'printStyles'));
 	}
 
 	function printStyle(array $resource) {

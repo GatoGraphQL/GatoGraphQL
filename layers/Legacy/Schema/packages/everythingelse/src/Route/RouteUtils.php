@@ -21,7 +21,7 @@ class RouteUtils
 
     public static function getRouteTitle($route)
     {
-        $title = App::getHookManager()->applyFilters(
+        $title = App::applyFilters(
             'route:title',
             $route,
             $route

@@ -4,7 +4,7 @@
  * CDN URLs
  */
 
-\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:allowed_domains', 'popCdnAllowedurls');
+\PoP\Root\App::addFilter('pop_modulemanager:allowed_domains', 'popCdnAllowedurls');
 function popCdnAllowedurls($allowed_domains)
 {
 

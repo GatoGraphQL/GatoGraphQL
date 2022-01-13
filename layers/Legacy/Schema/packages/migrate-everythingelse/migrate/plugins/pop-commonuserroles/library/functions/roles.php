@@ -4,7 +4,7 @@ use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 const GD_URE_ROLE_INDIVIDUAL = 'individual';
 const GD_URE_ROLE_ORGANIZATION = 'organization';
 
-\PoP\Root\App::getHookManager()->addFilter('gdRoles', 'gdUreRolesImpl');
+\PoP\Root\App::addFilter('gdRoles', 'gdUreRolesImpl');
 function gdUreRolesImpl($roles)
 {
     $roles = array_merge(
@@ -17,7 +17,7 @@ function gdUreRolesImpl($roles)
     return $roles;
 }
 
-\PoP\Root\App::getHookManager()->addFilter('getUserRoleCombinations', 'getUserRoleCombinationsCommonroles', 100);
+\PoP\Root\App::addFilter('getUserRoleCombinations', 'getUserRoleCombinationsCommonroles', 100);
 function getUserRoleCombinationsCommonroles($user_role_combinations)
 {
 
@@ -36,7 +36,7 @@ function getUserRoleCombinationsCommonroles($user_role_combinations)
     return $user_role_combinations;
 }
 
-\PoP\Root\App::getHookManager()->addFilter('gdUreGetuserrole', 'gdUreGetuserroleCommonroles', 10, 2);
+\PoP\Root\App::addFilter('gdUreGetuserrole', 'gdUreGetuserroleCommonroles', 10, 2);
 function gdUreGetuserroleCommonroles($role, $user_id)
 {
     if (gdUreIsOrganization($user_id)) {

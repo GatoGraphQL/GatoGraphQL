@@ -456,7 +456,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
         }
 
         // Allow to hook in POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS
-        $ret = \PoP\Root\App::getHookManager()->applyFilters(
+        $ret = \PoP\Root\App::applyFilters(
             'latestcounts:categoryposts:classes',
             $ret,
             $module,

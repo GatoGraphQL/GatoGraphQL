@@ -4,7 +4,7 @@
  * Thumbs for the Links depending on their domain
  */
 
-\PoP\Root\App::getHookManager()->addFilter('gdThumbDefault:host_thumb_ids', 'wassupHostThumbs');
+\PoP\Root\App::addFilter('gdThumbDefault:host_thumb_ids', 'wassupHostThumbs');
 function wassupHostThumbs($host_thumb_ids)
 {
     return array_merge(

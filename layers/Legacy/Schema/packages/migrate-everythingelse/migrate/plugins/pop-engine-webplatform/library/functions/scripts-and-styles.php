@@ -1,20 +1,20 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addAction('init', 'gdAddScriptsHeaderHook');
+\PoP\Root\App::addAction('init', 'gdAddScriptsHeaderHook');
 function gdAddScriptsHeaderHook()
 {
     if (!is_admin()) {
 
         // Allow PoP Server-Side Rendering to change from header to footer
-        $where = \PoP\Root\App::getHookManager()->applyFilters(
+        $where = \PoP\Root\App::applyFilters(
             'add-scripts:where',
             'header'
         );
 
         if ($where == 'header') {
-            \PoP\Root\App::getHookManager()->addAction('wp_head', 'gdAddScriptsHeader', 0);
+            \PoP\Root\App::addAction('wp_head', 'gdAddScriptsHeader', 0);
         } elseif ($where == 'footer') {
-            \PoP\Root\App::getHookManager()->addAction('wp_footer', 'gdAddScriptsHeader', 0);
+            \PoP\Root\App::addAction('wp_footer', 'gdAddScriptsHeader', 0);
         }
     }
 }

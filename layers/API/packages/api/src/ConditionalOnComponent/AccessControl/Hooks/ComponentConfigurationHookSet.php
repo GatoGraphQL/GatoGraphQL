@@ -26,7 +26,7 @@ class ComponentConfigurationHookSet extends AbstractHookSet
                 Component::class,
                 Environment::USE_SCHEMA_DEFINITION_CACHE
             );
-            App::getHookManager()->addFilter(
+            App::addFilter(
                 $hookName,
                 fn () => false
             );

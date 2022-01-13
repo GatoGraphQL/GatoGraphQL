@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addFilter('gd_useravatar_avatar_sizes', 'getUseravatarfoundationAvatarSizes');
+\PoP\Root\App::addFilter('gd_useravatar_avatar_sizes', 'getUseravatarfoundationAvatarSizes');
 function getUseravatarfoundationAvatarSizes($sizes)
 {
     return array_unique(

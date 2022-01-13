@@ -19,7 +19,7 @@ class PoP_EngineProcessors
     {
 
         // Priority: new section, after PoP Application Web Platform section
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888600);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888600);
     }
     public function init()
     {

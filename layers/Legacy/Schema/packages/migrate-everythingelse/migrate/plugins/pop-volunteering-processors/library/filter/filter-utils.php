@@ -8,7 +8,7 @@ class PoP_VolunteeringProcessors_FilterUtils
     public static function getVolunteerModules()
     {
         if (is_null(self::$volunteer_modules)) {
-            $volunteer_modules = \PoP\Root\App::getHookManager()->applyFilters(
+            $volunteer_modules = \PoP\Root\App::applyFilters(
                 'PoP_VolunteeringProcessors_FilterUtils:volunteer-modules',
                 array()
             );

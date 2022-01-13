@@ -68,7 +68,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             gdGetUserShortdescription($user_id)
         );
 
-        $userhtml_styles = \PoP\Root\App::getHookManager()->applyFilters('sendemail_get_userhtml:userhtml_styles', array('width: 100%'));
+        $userhtml_styles = \PoP\Root\App::applyFilters('sendemail_get_userhtml:userhtml_styles', array('width: 100%'));
         $user_html = sprintf(
             '<table cellpadding=10 cellspacing=0 border=0 style="%s">'.
             '<tr valign="top">'.
@@ -105,7 +105,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             $post_title
         );
 
-        $posthtml_styles = \PoP\Root\App::getHookManager()->applyFilters('sendemail_get_userhtml:posthtml_styles', array('width: 100%'));
+        $posthtml_styles = \PoP\Root\App::applyFilters('sendemail_get_userhtml:posthtml_styles', array('width: 100%'));
         $post_html = sprintf(
             '<table cellpadding=10 cellspacing=0 border=0 style="%s">'.
             '<tr valign="top">'.
@@ -134,7 +134,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             $avatar['size']
         );
 
-        $comment_styles = \PoP\Root\App::getHookManager()->applyFilters('sendemailToUsersFromComment:comment_styles', array('width: 100%'));
+        $comment_styles = \PoP\Root\App::applyFilters('sendemailToUsersFromComment:comment_styles', array('width: 100%'));
         $dateFormatter = DateFormatterFacade::getInstance();
         $cmsService = CMSServiceFacade::getInstance();
         $comment_html = sprintf(
@@ -192,7 +192,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             $tag_url,
             TagHelpers::getTagSymbolNameDescription($tag)
         );
-        $userhtml_styles = \PoP\Root\App::getHookManager()->applyFilters('sendemail_get_userhtml:userhtml_styles', array('width: 100%'));
+        $userhtml_styles = \PoP\Root\App::applyFilters('sendemail_get_userhtml:userhtml_styles', array('width: 100%'));
         $tag_html = sprintf(
             '<table cellpadding=10 cellspacing=0 border=0 style="%s">'.
             '<tr valign="top">'.

@@ -20,7 +20,7 @@ class PoP_ShareProcessors
     {
 
         // Priority: after PoP Forms Processors
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888820);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888820);
     }
     public function init()
     {

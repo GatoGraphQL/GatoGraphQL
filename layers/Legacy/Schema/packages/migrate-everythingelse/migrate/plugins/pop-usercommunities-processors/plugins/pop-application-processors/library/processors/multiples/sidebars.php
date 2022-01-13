@@ -32,7 +32,7 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
                 }
 
                 // Allow URE to add the Organization/Individual sidebars below
-                $ret = \PoP\Root\App::getHookManager()->applyFilters(
+                $ret = \PoP\Root\App::applyFilters(
                     'PoP_UserCommunities_Module_Processor_SidebarMultiples:sidebar-layouts',
                     $ret,
                     $author,

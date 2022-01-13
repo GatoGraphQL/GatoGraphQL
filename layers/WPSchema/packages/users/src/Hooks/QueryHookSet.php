@@ -13,7 +13,7 @@ class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             UserTypeAPI::HOOK_ORDERBY_QUERY_ARG_VALUE,
             [$this, 'getOrderByQueryArgValue']
         );

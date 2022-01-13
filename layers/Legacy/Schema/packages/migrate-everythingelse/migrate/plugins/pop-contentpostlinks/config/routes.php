@@ -9,7 +9,7 @@ if (!defined('POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS')) {
 	define('POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS', $definitionManager->getUniqueDefinition('postlinks', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

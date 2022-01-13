@@ -4,7 +4,7 @@ class PoP_Notifications_UserLogin_ImplementationHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'popcomponent:notifications:init',
             array($this, 'addNotificationHooks')
         );

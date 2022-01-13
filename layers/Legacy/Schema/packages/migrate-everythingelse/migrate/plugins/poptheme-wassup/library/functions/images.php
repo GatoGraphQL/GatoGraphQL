@@ -2,16 +2,16 @@
 
 function gdLogo($size = 'large')
 {
-    $gdLogo = \PoP\Root\App::getHookManager()->applyFilters('gd_get_logo', array());
+    $gdLogo = \PoP\Root\App::applyFilters('gd_get_logo', array());
     return $gdLogo[$size];
 }
 
 function gdImagesBackground()
 {
-    return \PoP\Root\App::getHookManager()->applyFilters('gdImagesBackground', '');
+    return \PoP\Root\App::applyFilters('gdImagesBackground', '');
 }
 
 function gdImagesWelcome()
 {
-    return \PoP\Root\App::getHookManager()->applyFilters('gdImagesWelcome', '');
+    return \PoP\Root\App::applyFilters('gdImagesWelcome', '');
 }

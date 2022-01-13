@@ -9,7 +9,7 @@ class PoP_WebPlatformEngine_AWS_S3UploadBase extends PoP_AWS_S3UploadBase
     {
 
         // Register the AWS S3 domain in the Allowed Domains list
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'pop_modulemanager:allowed_domains',
             array($this, 'getAllowedDomains')
         );

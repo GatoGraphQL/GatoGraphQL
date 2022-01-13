@@ -39,7 +39,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         }
 
         // Allow PoP Resource Loader to inject this value
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-settings',
             $ret,
             $module,
@@ -53,7 +53,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         $jsmethods = $this->getJsmethods($module, $props);
 
         // Allow the theme to modify the jsmethods
-        return \PoP\Root\App::getHookManager()->applyFilters(POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD, $jsmethods, $module);
+        return \PoP\Root\App::applyFilters(POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD, $jsmethods, $module);
 
         // // $ret data structure:
         // // module
@@ -243,7 +243,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         }
 
         // Allow CSS to Styles to modify these value
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-mutableonrequest-configuration',
             $ret,
             $module,
@@ -298,7 +298,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         }
 
         // Allow PoP Resource Loader to inject this value
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-configuration',
             $ret,
             $module,
@@ -442,7 +442,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
     protected function getModuleFilteredPagesectionJsmethods(array $module, array &$props)
     {
         $jsmethod = $this->getPagesectionJsmethod($module, $props);
-        $jsmethod = \PoP\Root\App::getHookManager()->applyFilters(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD, $jsmethod, $module);
+        $jsmethod = \PoP\Root\App::applyFilters(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD, $jsmethod, $module);
 
         return $jsmethod;
     }

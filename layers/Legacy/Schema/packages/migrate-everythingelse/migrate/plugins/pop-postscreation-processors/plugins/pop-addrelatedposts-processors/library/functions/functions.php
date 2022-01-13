@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
 	'PoP_Module_Processor_DropdownButtonControls:addrelatedpost-dropdown:buttons', 
 	'popPostscreationAddrelatedpostButtons', 
 	0

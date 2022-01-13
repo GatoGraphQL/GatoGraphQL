@@ -27,7 +27,7 @@ class SetupCortexHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        App::getHookManager()->addAction(
+        App::addAction(
             'cortex.routes',
             [$this, 'setupCortex'],
             1

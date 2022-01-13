@@ -65,14 +65,14 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
 
             case self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
                 // Allow AgendaUrbana to Override
-                return \PoP\Root\App::getHookManager()->applyFilters(
+                return \PoP\Root\App::applyFilters(
                     'GD_URE_Module_Processor_MultiSelectFormInputs:label:categories',
                     TranslationAPIFacade::getInstance()->__('Organization Categories', 'poptheme-wassup')
                 );
 
             case self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES:
                 // Allow AgendaUrbana to Override
-                return \PoP\Root\App::getHookManager()->applyFilters(
+                return \PoP\Root\App::applyFilters(
                     'GD_URE_Module_Processor_MultiSelectFormInputs:label:types',
                     TranslationAPIFacade::getInstance()->__('Organization Types', 'poptheme-wassup')
                 );

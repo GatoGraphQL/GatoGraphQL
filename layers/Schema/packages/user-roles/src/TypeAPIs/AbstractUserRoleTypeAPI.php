@@ -16,7 +16,7 @@ abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
         $roles = $this->getUserRoles($userObjectOrID);
         $role = $roles[0] ?? null;
         // Allow URE to override this function
-        return App::getHookManager()->applyFilters(
+        return App::applyFilters(
             'getTheUserRole',
             $role,
             $userObjectOrID

@@ -13,12 +13,12 @@ class TagHelpers
 {
     public static function showTagSymbol()
     {
-        return App::getHookManager()->applyFilters('PoP_TagUtils:showTagSymbol', true);
+        return App::applyFilters('PoP_TagUtils:showTagSymbol', true);
     }
 
     public static function getTagSymbol()
     {
-        return self::showTagSymbol() ? App::getHookManager()->applyFilters('PoP_TagUtils:tag_symbol', '#') : '';
+        return self::showTagSymbol() ? App::applyFilters('PoP_TagUtils:tag_symbol', '#') : '';
     }
 
     public static function getTagSymbolNameDescription($tag)

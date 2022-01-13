@@ -29,7 +29,7 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
     protected function canInputMultipleCategories()
     {
         return false;
-        // return \PoP\Root\App::getHookManager()->applyFilters(
+        // return \PoP\Root\App::applyFilters(
         //     'GD_CreateUpdate_Post:multiple-categories',
         //     true
         // );

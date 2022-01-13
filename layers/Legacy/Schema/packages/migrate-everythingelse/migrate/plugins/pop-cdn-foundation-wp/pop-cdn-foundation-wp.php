@@ -19,7 +19,7 @@ class PoP_CDNFoundationWP
     {
         // Priority: after PoP Engine, and before everything else (except the "website-environment" plug-ins),
         // so we can set the POP_CDNFOUNDATIONWP_ASSETS_URI constant in plugin_url before all other plug-ins need it
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888112);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888112);
     }
     public function init()
     {

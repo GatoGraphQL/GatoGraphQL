@@ -8,8 +8,8 @@ class GD_ThemeMode_Wassup_Expansive extends GD_WassupThemeStyle_Base
     {
         
         // Hooks to allow the themestyles to do some functionality
-        \PoP\Root\App::getHookManager()->addFilter(POP_HOOK_CAROUSEL_USERS_GRIDCLASS.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'getCarouselUsersGridclass'));
-        \PoP\Root\App::getHookManager()->addFilter(POP_HOOK_SCROLLINNER_THUMBNAIL_GRID.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'getScrollinnerThumbnailGrid'));
+        \PoP\Root\App::addFilter(POP_HOOK_CAROUSEL_USERS_GRIDCLASS.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'getCarouselUsersGridclass'));
+        \PoP\Root\App::addFilter(POP_HOOK_SCROLLINNER_THUMBNAIL_GRID.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'getScrollinnerThumbnailGrid'));
         
         parent::__construct();
     }

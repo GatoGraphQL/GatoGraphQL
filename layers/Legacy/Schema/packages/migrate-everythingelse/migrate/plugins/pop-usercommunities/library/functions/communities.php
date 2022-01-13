@@ -94,7 +94,7 @@ function gdUreUserAddnewcommunities($user_id, $communities)
     \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS, $tags);
 
     // Allow ACF to also save the value in the DB
-    \PoP\Root\App::getHookManager()->doAction('ure:user:add_new_communities', $user_id, $communities);
+    \PoP\Root\App::doAction('ure:user:add_new_communities', $user_id, $communities);
 }
 
 function gdUreFindCommunityMetavalues($community, $values, $extract_metavalue = true)

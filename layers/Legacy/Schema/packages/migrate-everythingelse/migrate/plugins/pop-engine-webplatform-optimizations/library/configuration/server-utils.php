@@ -13,7 +13,7 @@ class PoP_WebPlatformEngineOptimizations_ServerUtils
         // Even if set as true, there are requests that cannot generate resources on runtime
         // Eg: the AppShell, or otherwise we must also cache the corresponding /settings/ .js files,
         // which we can't obtain when generating the service-worker.js file
-        if (\PoP\Root\App::getHookManager()->applyFilters('extractResponseIntoJsfilesOnRuntime:skip', false)) {
+        if (\PoP\Root\App::applyFilters('extractResponseIntoJsfilesOnRuntime:skip', false)) {
             return false;
         }
 

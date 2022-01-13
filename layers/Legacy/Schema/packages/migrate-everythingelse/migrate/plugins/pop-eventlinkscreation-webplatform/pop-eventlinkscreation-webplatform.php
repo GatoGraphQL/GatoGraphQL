@@ -19,7 +19,7 @@ class PoP_EventLinksCreationWebPlatform
     {
 
         // Priority: after PoP Events Creation Web Platform
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888590);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888590);
     }
     public function init()
     {

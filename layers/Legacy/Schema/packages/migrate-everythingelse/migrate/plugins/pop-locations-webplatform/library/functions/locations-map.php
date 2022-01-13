@@ -1,9 +1,9 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdJqueryConstantsLocationsMapLatlng');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'gdJqueryConstantsLocationsMapLatlng');
 function gdJqueryConstantsLocationsMapLatlng($jqueryConstants)
 {
-    $values = \PoP\Root\App::getHookManager()->applyFilters('gd_locationsmap_latlng', array());
+    $values = \PoP\Root\App::applyFilters('gd_locationsmap_latlng', array());
     
     if (!empty($values)) {
         $jqueryConstants['LOCATIONSMAP_LAT'] = $values['lat'];

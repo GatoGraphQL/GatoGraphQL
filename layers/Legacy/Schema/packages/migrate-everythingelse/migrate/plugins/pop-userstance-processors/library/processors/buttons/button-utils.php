@@ -9,7 +9,7 @@ class UserStance_Module_Processor_ButtonUtils
         $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
     
         // Allow Events to have a different title
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'UserStance_Module_Processor_ButtonUtils:singlepost:title',
             TranslationAPIFacade::getInstance()->__('After reading this information', 'pop-userstance-processors'),
             $post_id
@@ -20,7 +20,7 @@ class UserStance_Module_Processor_ButtonUtils
     {
 
         // Allow Events to have a different title
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'UserStance_Module_Processor_ButtonUtils:fullview:title',
             TranslationAPIFacade::getInstance()->__('After reading this information', 'pop-userstance-processors')
         );

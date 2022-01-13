@@ -14,7 +14,7 @@ abstract class AbstractConvertDateQueryInputFieldToArrayInputObjectTypeHookSet e
 {
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             HookNames::INPUT_FIELD_TYPE_MODIFIERS,
             [$this, 'getInputFieldTypeModifiers'],
             10,

@@ -4,7 +4,7 @@ class PoPTheme_Wassup_Locations_WebPlatform_PreloadHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'wassup:extra-routes:initialframes:'.POP_TARGET_MODALS,
             array($this, 'getRoutesForModals')
         );

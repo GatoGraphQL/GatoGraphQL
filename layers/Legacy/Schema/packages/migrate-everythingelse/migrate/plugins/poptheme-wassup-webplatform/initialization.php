@@ -12,13 +12,13 @@ class PoP_ThemeWassupWebPlatform_Initialization
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
             // After PoP
-            \PoP\Root\App::getHookManager()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'), 100);
+            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'), 100);
 
             // Priority 0: print "style.css" immediately, so it starts rendering and applying these styles before anything else
-            \PoP\Root\App::getHookManager()->addAction('popcms:printStyles', array($this, 'registerStyles'), 0);
+            \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'), 0);
 
             // Inline styles
-            \PoP\Root\App::getHookManager()->addAction('popcms:head', array($this, 'printInlineStyles'));
+            \PoP\Root\App::addAction('popcms:head', array($this, 'printInlineStyles'));
         }
 
         /**

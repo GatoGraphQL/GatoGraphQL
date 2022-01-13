@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 
-\PoP\Root\App::getHookManager()->addFilter("gdClassesBody", 'gdWassupThemeBodyClass');
+\PoP\Root\App::addFilter("gdClassesBody", 'gdWassupThemeBodyClass');
 function gdWassupThemeBodyClass($body_classes)
 {
     if (\PoP\Root\App::getState('theme') == GD_THEME_WASSUP) {

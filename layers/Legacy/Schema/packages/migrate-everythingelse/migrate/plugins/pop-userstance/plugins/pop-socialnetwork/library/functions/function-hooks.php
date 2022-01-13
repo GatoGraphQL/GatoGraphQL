@@ -4,7 +4,7 @@ class PoP_UserStance_FunctionHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_SocialNetwork_Utils:updownvote-post-types',
             'addUserstancePostType'
         );

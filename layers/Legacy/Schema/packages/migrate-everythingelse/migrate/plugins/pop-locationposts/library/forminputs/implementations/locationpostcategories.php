@@ -10,7 +10,7 @@ class GD_FormInput_LocationPostCategories extends MultipleSelectFormInput
         // The values here must be input from outside, to allow any potential website to add their own LinkCategories conveniently
         $values = array_merge(
             $values,
-            \PoP\Root\App::getHookManager()->applyFilters('wassup_locationpostcategories', array())
+            \PoP\Root\App::applyFilters('wassup_locationpostcategories', array())
         );
 
         return $values;

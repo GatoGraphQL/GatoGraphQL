@@ -36,7 +36,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
     }
     protected function getProfileorganizationFormInputs()
     {
-        $inputs = App::getHookManager()->applyFilters(
+        $inputs = App::applyFilters(
             'GD_CommonUserRole_UserCommunities_CreateUpdate_ProfileOrganization:form-inputs',
             array(
                 'is_community' => null,

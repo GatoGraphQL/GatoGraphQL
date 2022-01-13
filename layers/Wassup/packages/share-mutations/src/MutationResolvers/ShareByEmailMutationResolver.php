@@ -38,7 +38,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data): void
     {
-        App::getHookManager()->doAction('pop_sharebyemail', $form_data);
+        App::doAction('pop_sharebyemail', $form_data);
     }
 
     protected function doExecute($form_data)

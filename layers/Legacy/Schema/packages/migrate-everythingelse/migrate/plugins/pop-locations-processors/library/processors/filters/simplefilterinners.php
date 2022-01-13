@@ -20,7 +20,7 @@ class PoP_Locations_Module_Processor_CustomSimpleFilterInners extends PoP_Module
                 [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
             ],
         ];
-        if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
+        if ($modules = \PoP\Root\App::applyFilters(
             'Locations:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module

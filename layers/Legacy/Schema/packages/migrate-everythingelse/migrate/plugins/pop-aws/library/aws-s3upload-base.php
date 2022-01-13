@@ -42,7 +42,7 @@ class PoP_AWS_S3UploadBase
         $domain = $scheme.'://'.$prefix.'.amazonaws.com/'.$bucket;
 
         // Allow to inject the CDN instead
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_AWS_S3UploadBase:domain',
             $domain,
             $bucket

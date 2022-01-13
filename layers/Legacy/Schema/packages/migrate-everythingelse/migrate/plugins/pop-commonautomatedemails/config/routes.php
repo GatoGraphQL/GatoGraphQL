@@ -12,7 +12,7 @@ if (!defined('POP_COMMONAUTOMATEDEMAILS_ROUTE_SINGLEPOST_SPECIAL')) {
     define('POP_COMMONAUTOMATEDEMAILS_ROUTE_SINGLEPOST_SPECIAL', $definitionManager->getUniqueDefinition('single-post-special', DefinitionGroups::ROUTES));
 }
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

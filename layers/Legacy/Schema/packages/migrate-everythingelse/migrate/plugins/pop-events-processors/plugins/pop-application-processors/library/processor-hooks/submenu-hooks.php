@@ -5,11 +5,11 @@ class Wassup_EM_BP_SubmenuHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:author:routes',
             array($this, 'addRoutes')
         );
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:tag:routes',
             array($this, 'addRoutes')
         );

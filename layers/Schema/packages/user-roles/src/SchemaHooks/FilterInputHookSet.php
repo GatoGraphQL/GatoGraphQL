@@ -13,7 +13,7 @@ class FilterInputHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             UserFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
             [$this, 'getFilterInputModules'],
             10,

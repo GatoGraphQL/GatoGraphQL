@@ -13,7 +13,7 @@ class DefinitionPersistenceHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        App::getHookManager()->addAction(
+        App::addAction(
             'popcms:shutdown',
             array($this, 'maybePersist')
         );

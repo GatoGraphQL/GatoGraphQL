@@ -6,7 +6,7 @@ class PoP_SocialLogin_Notifications_NotificationHooks
     {
 
         // Hook into the API: Notification Actions
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:userspecific:actions',
             array($this, 'getUserspecificActions')
         );

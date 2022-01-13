@@ -24,7 +24,7 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
     {
         return array(
             // Allow the Change Password checkpoints to be overriden. Eg: by adding only non-WSL users
-            POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE => \PoP\Root\App::getHookManager()->applyFilters(
+            POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE => \PoP\Root\App::applyFilters(
                 'Wassup_Module_SettingsProcessor:changepwdprofile:checkpoints',
                 UserStateCheckpointSets::LOGGEDIN_STATIC//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_STATIC),
             ),
@@ -43,7 +43,7 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
             $route = \PoP\Root\App::getState('route');
             if ($route == POP_USERPLATFORM_ROUTE_EDITPROFILE) {
                 // Allow PoP Common User Roles to fill in these redirects according to their roles
-                if ($redirect_url = \PoP\Root\App::getHookManager()->applyFilters(
+                if ($redirect_url = \PoP\Root\App::applyFilters(
                     'UserPlatform:redirect_url:edit_profile',
                     null
                 )

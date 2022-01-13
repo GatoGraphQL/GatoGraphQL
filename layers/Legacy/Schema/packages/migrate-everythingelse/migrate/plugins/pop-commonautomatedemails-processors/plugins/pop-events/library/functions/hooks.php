@@ -5,7 +5,7 @@ class PoP_CommonAutomatedEmails_EM_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoPTheme_Wassup_AE_Module_Processor_ContentDataloads:singlepost:sidebar',
             array($this, 'getSidebarLayout'),
             10,

@@ -29,7 +29,7 @@ define('GD_JSPLACEHOLDER_QUERY', '*QUERY*'); // Replaced from '%QUERY' because u
 
 define('POP_KEYS_THUMBPRINT', 'thumbprint');
 
-\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdPopcoreJqueryConstantsModulemanagerImpl');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'gdPopcoreJqueryConstantsModulemanagerImpl');
 function gdPopcoreJqueryConstantsModulemanagerImpl($jqueryConstants)
 {
     $jqueryConstants['JSPLACEHOLDER_QUERY'] = GD_JSPLACEHOLDER_QUERY;
@@ -78,7 +78,7 @@ function gdPopcoreJqueryConstantsModulemanagerImpl($jqueryConstants)
     return $jqueryConstants;
 }
 
-\PoP\Root\App::getHookManager()->addFilter('gd_hack:script_loader:default_error', 'gdWpScriptLoaderDefaultError');
+\PoP\Root\App::addFilter('gd_hack:script_loader:default_error', 'gdWpScriptLoaderDefaultError');
 function gdWpScriptLoaderDefaultError($error)
 {
     return TranslationAPIFacade::getInstance()->__('Oops, the upload failed. Let\'s fix this: please save your post as \'Draft\', refresh the browser window, and try again.', 'pop-coreprocessors');

@@ -90,7 +90,7 @@ class PoP_ContentPostLinks_Utils
 
     public static function getLinkCategories()
     {
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'gd_thumb_defaultlink:link_categories',
             array_filter(
                 array(

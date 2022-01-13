@@ -8,7 +8,7 @@ class PoP_LocationPosts_Multilayout_Processor extends PoP_Application_Multilayou
 {
     protected function useSimpleviewLayout()
     {
-        return \PoP\Root\App::getHookManager()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_LocationPosts_Multilayout_Processor:use-simpleview-layout',
             false
         );

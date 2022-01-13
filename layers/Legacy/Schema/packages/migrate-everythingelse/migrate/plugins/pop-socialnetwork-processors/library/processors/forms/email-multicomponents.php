@@ -22,7 +22,7 @@ class PoP_SocialNetwork_Module_Processor_UserMultipleComponents extends PoP_Modu
                 $ret[] = [PoP_SocialNetwork_Module_Processor_UserCodes::class, PoP_SocialNetwork_Module_Processor_UserCodes::MODULE_CODE_EMAILNOTIFICATIONS_NETWORKLABEL];
 
                 // Allow URE to hook in the "Joins community" input
-                if ($forminputs = \PoP\Root\App::getHookManager()->applyFilters(
+                if ($forminputs = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_UserMultipleComponents:emailnotifications:network:modules',
                     array(
                         [PoP_SocialNetwork_Module_Processor_EmailFormGroups::class, PoP_SocialNetwork_Module_Processor_EmailFormGroups::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT],

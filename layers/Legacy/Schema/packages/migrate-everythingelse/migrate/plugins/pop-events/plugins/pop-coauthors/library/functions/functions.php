@@ -1,3 +1,3 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addFilter('popcomponent:coauthors:supportedposttypes', 'gdEmAddEventPosttype');
+\PoP\Root\App::addFilter('popcomponent:coauthors:supportedposttypes', 'gdEmAddEventPosttype');

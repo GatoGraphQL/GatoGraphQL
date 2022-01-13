@@ -3,7 +3,7 @@ class PoP_ServiceWorkers_Installation
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addAction('PoP:system-generate', array($this, 'systemGenerate'));
+        \PoP\Root\App::addAction('PoP:system-generate', array($this, 'systemGenerate'));
     }
 
     public function systemGenerate()
@@ -13,7 +13,7 @@ class PoP_ServiceWorkers_Installation
         // can have added all the resources from the footer too
         // Because it's added in 'wp_footer', it never gets called if doing output=json, which is alright
         global $pop_serviceworkers_manager;
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'popcms:footer', 
             array($pop_serviceworkers_manager, 'generateFiles'), 
             10000

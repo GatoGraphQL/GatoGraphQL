@@ -4,7 +4,7 @@ class PoP_Forms_Captcha_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Forms_ConfigurationUtils:captcha-enabled',
             array(PoP_Captcha_ConfigurationUtils::class, 'captchaEnabled')
         );

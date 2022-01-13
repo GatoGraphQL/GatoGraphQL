@@ -33,7 +33,7 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
                 if (defined('POP_EMAILSENDER_INITIALIZED')) {
                     $email = PoP_EmailSender_Utils::getFromEmail();
                 }
-                if ($email = \PoP\Root\App::getHookManager()->applyFilters(
+                if ($email = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_GFForms:contactus:email',
                     $email
                 )
@@ -41,7 +41,7 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
                      // Add the description. Allow Organik Fundraising to override the message
                     $description = sprintf(
                         '<p><em>%s</em></p>',
-                        \PoP\Root\App::getHookManager()->applyFilters(
+                        \PoP\Root\App::applyFilters(
                             'PoP_Module_Processor_GFForms:contactus:description',
                             sprintf(
                                 TranslationAPIFacade::getInstance()->__('Please write an email to <a href="mailto:%1$s">%1$s</a>, or fill in the form below:', 'pop-genericforms'),

@@ -12,7 +12,7 @@ class MutationResolverBridgeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        App::getHookManager()->addAction(
+        App::addAction(
             GravityFormsAddEntryToFormMutationResolverBridge::HOOK_FORM_FIELDNAMES,
             array($this, 'getFieldnames'),
             10,

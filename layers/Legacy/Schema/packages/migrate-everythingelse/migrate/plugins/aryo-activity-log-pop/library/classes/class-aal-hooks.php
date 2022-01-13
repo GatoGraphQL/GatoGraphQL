@@ -9,6 +9,6 @@ class AAL_PoP_Hooks
     {
 
         // Hook in all the notification hooks
-        \PoP\Root\App::getHookManager()->doAction('AAL_PoP_Hooks');
+        \PoP\Root\App::doAction('AAL_PoP_Hooks');
     }
 }

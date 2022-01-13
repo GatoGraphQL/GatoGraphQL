@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
     'GD_FileUpload_UserPhoto:action-url',
     'popthemeFileuploadUserphotoAwsActionurl',
     50

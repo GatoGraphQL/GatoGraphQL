@@ -13,7 +13,7 @@ class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        App::getHookManager()->addFilter(
+        App::addFilter(
             UserTypeAPI::HOOK_QUERY,
             [MetaQueryHelpers::class, 'convertMetaQuery']
         );

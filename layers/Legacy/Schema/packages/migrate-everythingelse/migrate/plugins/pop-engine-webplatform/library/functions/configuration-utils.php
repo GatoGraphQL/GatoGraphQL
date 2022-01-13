@@ -7,7 +7,7 @@ class PoP_WebPlatform_ConfigurationUtils
     {
         $cmsService = CMSServiceFacade::getInstance();
         $homeurl = $cmsService->getSiteURL();
-        return array_values(array_unique(\PoP\Root\App::getHookManager()->applyFilters(
+        return array_values(array_unique(\PoP\Root\App::applyFilters(
             'pop_modulemanager:allowed_domains',
             array(
                 $homeurl,

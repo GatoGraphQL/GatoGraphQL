@@ -19,7 +19,7 @@ class PoPWebPlatform
     {
 
         // Priority: new section, after PoP Application section
-        \PoP\Root\App::getHookManager()->addAction(
+        \PoP\Root\App::addAction(
             'plugins_loaded',
             function() {
                 if ($this->validate()) {
@@ -28,7 +28,7 @@ class PoPWebPlatform
             },
             392
         );
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888400);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888400);
     }
     public function init()
     {

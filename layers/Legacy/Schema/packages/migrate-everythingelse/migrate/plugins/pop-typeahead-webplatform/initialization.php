@@ -7,8 +7,8 @@ class PoP_TypeaheadWebPlatform_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            \PoP\Root\App::getHookManager()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
-            \PoP\Root\App::getHookManager()->addAction('popcms:printStyles', array($this, 'registerStyles'));
+            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'));
         }
 
         /**

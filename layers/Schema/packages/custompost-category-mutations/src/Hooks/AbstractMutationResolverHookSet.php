@@ -26,7 +26,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        App::getHookManager()->addAction(
+        App::addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
             array($this, 'maybeSetCategories'),
             10,

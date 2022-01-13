@@ -58,38 +58,38 @@ function maybeAddHttp($url)
 //         }
 //     }
 
-//     return \PoP\Root\App::getHookManager()->applyFilters('gdGetCategories', $categories, $post_id);
+//     return \PoP\Root\App::applyFilters('gdGetCategories', $categories, $post_id);
 // }
 
 
 function gdGetPostname($post_id, $format = 'title')
 {
-    $postname = \PoP\Root\App::getHookManager()->applyFilters('gd_postname', TranslationAPIFacade::getInstance()->__('Post', 'pop-coreprocessors'), $post_id, $format);
+    $postname = \PoP\Root\App::applyFilters('gd_postname', TranslationAPIFacade::getInstance()->__('Post', 'pop-coreprocessors'), $post_id, $format);
 
     // Lowercase
     if ($format == 'lc' || $format == 'plural-lc') {
         $postname = strtolower($postname);
     }
 
-    return \PoP\Root\App::getHookManager()->applyFilters('gd_format_postname', $postname, $post_id, $format);
+    return \PoP\Root\App::applyFilters('gd_format_postname', $postname, $post_id, $format);
 }
 
 function gdGetCategoryname($cat_id, $format = 'title')
 {
     $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
-    $catname = \PoP\Root\App::getHookManager()->applyFilters('gd_catname', $postCategoryTypeAPI->getCategoryName($cat_id), $cat_id, $format);
+    $catname = \PoP\Root\App::applyFilters('gd_catname', $postCategoryTypeAPI->getCategoryName($cat_id), $cat_id, $format);
 
     // Lowercase
     if ($format == 'lc' || $format == 'plural-lc') {
         $catname = strtolower($catname);
     }
 
-    return \PoP\Root\App::getHookManager()->applyFilters('gd_format_catname', $catname, $cat_id, $format);
+    return \PoP\Root\App::applyFilters('gd_format_catname', $catname, $cat_id, $format);
 }
 
 function gdGetPosticon($post_id)
 {
-    return \PoP\Root\App::getHookManager()->applyFilters('gd_posticon', '', $post_id);
+    return \PoP\Root\App::applyFilters('gd_posticon', '', $post_id);
 }
 
 
@@ -112,7 +112,7 @@ function getReloadurlLinkattrs()
 {
 
     // Allow PoP Service Workers to add its own parameter
-    return \PoP\Root\App::getHookManager()->applyFilters('getReloadurlLinkattrs', 'data-reloadurl="true"');
+    return \PoP\Root\App::applyFilters('getReloadurlLinkattrs', 'data-reloadurl="true"');
 }
 
 function getUrlHost($url)

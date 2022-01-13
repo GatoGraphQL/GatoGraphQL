@@ -8,7 +8,7 @@ class PoP_Application_SectionUtils
         self::addDataloadqueryargsAllcontent($ret);
 
         // Allow Non-All Content blocks to also add their data
-        \PoP\Root\App::getHookManager()->doAction(
+        \PoP\Root\App::doAction(
             'PoP_Application_SectionUtils:dataloadqueryargs-latestcounts',
             array(&$ret)
         );
@@ -22,7 +22,7 @@ class PoP_Application_SectionUtils
         }
 
         // Allow WordPress to add the 'tax-query' items
-        \PoP\Root\App::getHookManager()->doAction(
+        \PoP\Root\App::doAction(
             'PoP_Application_SectionUtils:dataloadqueryargs-allcontent',
             array(&$ret)
         );
@@ -36,7 +36,7 @@ class PoP_Application_SectionUtils
         $ret['custompost-types'] = $cmsapplicationpostsapi->getAllcontentPostTypes();
 
         // Allow WordPress to add the 'tax-query' items
-        \PoP\Root\App::getHookManager()->doAction(
+        \PoP\Root\App::doAction(
             'PoP_Application_SectionUtils:dataloadqueryargs-allcontent-bysingletag',
             array(&$ret)
         );

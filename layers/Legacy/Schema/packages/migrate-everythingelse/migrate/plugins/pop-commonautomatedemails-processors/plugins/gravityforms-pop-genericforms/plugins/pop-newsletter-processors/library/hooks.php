@@ -4,7 +4,7 @@ class PoPTheme_Wassup_AE_GF_NewsletterRecipientsHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoPTheme_Wassup_AE_NewsletterRecipientsBase:recipients',
             array($this, 'getRecipients')
         );

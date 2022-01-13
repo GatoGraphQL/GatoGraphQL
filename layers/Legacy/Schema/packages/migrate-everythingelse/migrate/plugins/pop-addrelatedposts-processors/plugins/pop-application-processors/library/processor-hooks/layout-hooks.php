@@ -4,7 +4,7 @@ class PoP_AddRelatedPosts_LayoutHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomControlGroups:userpostinteraction:layouts',
             array($this, 'addUserpostinteractionLayouts')
         );

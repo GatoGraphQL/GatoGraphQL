@@ -91,7 +91,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
         switch ($module[1]) {
             case self::MODULE_BUTTON_POSTPREVIEW:
                 // Allow to add data-sw-networkfirst="true"
-                if ($params = \PoP\Root\App::getHookManager()->applyFilters('GD_ContentCreation_Module_Processor_Buttons:postpreview:params', array())) {
+                if ($params = \PoP\Root\App::applyFilters('GD_ContentCreation_Module_Processor_Buttons:postpreview:params', array())) {
                     $this->mergeProp($module, $props, 'params', $params);
                 }
                 break;

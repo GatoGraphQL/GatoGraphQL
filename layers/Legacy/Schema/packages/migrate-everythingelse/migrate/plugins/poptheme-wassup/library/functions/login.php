@@ -4,7 +4,7 @@ use PoP\Engine\Facades\CMS\CMSServiceFacade;
 /**
  * Change the expiration of the login cookie to much longer than 2 weeks
  */
-\PoP\Root\App::getHookManager()->addFilter('popcms:authCookieExpiration', 'popthemeWassupAuthCookieExpiration');
+\PoP\Root\App::addFilter('popcms:authCookieExpiration', 'popthemeWassupAuthCookieExpiration');
 function popthemeWassupAuthCookieExpiration($time)
 {
 
@@ -15,11 +15,11 @@ function popthemeWassupAuthCookieExpiration($time)
 /**
  * Change the Wordpress logo to MESYM logo in wp-login.php
  */
-\PoP\Root\App::getHookManager()->addAction('login_enqueue_scripts', 'gdLoginLogo');
+\PoP\Root\App::addAction('login_enqueue_scripts', 'gdLoginLogo');
 function gdLoginLogo()
 {
     $logo = gdLogo('large');
-    $logo = \PoP\Root\App::getHookManager()->applyFilters('gdLoginLogo', $logo); ?>
+    $logo = \PoP\Root\App::applyFilters('gdLoginLogo', $logo); ?>
     <style type="text/css">
         body.login div#login h1 a {
             background-image: url(<?php echo $logo[0] ?>);
@@ -31,13 +31,13 @@ function gdLoginLogo()
     </style>
     <?php
 }
-\PoP\Root\App::getHookManager()->addFilter('login_headerurl', 'gdLoginLogoUrl');
+\PoP\Root\App::addFilter('login_headerurl', 'gdLoginLogoUrl');
 function gdLoginLogoUrl()
 {
     $cmsService = CMSServiceFacade::getInstance();
     return $cmsService->getHomeURL();
 }
-\PoP\Root\App::getHookManager()->addFilter('login_headertitle', 'gdLoginLogoUrlTitle');
+\PoP\Root\App::addFilter('login_headertitle', 'gdLoginLogoUrlTitle');
 function gdLoginLogoUrlTitle()
 {
     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();

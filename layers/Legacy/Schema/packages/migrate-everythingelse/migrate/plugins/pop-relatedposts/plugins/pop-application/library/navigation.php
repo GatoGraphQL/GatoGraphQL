@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-\PoP\Root\App::getHookManager()->addFilter('route:icon', 'popRelatedpostsRouteIcon', 10, 3);
+\PoP\Root\App::addFilter('route:icon', 'popRelatedpostsRouteIcon', 10, 3);
 function popRelatedpostsRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -13,7 +13,7 @@ function popRelatedpostsRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-\PoP\Root\App::getHookManager()->addFilter('route:title', 'popRelatedpostsNavigationRouteTitle', 10, 2);
+\PoP\Root\App::addFilter('route:title', 'popRelatedpostsNavigationRouteTitle', 10, 2);
 function popRelatedpostsNavigationRouteTitle($title, $route)
 {
     $titles = [

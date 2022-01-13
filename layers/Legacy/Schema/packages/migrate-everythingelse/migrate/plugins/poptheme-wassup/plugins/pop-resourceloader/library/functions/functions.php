@@ -2,7 +2,7 @@
 /**
  * Specify the fixed targets for certain formats
  */
-\PoP\Root\App::getHookManager()->addFilter('PoP_ResourceLoaderProcessorUtils:resources-from-current-vars:format-targets', 'popthemeWassupFixedFormatTargets');
+\PoP\Root\App::addFilter('PoP_ResourceLoaderProcessorUtils:resources-from-current-vars:format-targets', 'popthemeWassupFixedFormatTargets');
 function popthemeWassupFixedFormatTargets($format_targets)
 {
     return array_merge(

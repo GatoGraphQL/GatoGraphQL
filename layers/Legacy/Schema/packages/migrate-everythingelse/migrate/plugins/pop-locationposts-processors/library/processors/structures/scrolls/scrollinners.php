@@ -34,7 +34,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrollInners extends PoP_Module_P
         switch ($module[1]) {
             case self::MODULE_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
-                return \PoP\Root\App::getHookManager()->applyFilters(
+                return \PoP\Root\App::applyFilters(
                     POP_HOOK_SCROLLINNER_THUMBNAIL_GRID,
                     array(
                         'row-items' => 2,

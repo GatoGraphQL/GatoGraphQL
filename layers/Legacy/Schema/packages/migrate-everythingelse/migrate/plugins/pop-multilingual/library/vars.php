@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 
-\PoP\Root\App::getHookManager()->addFilter(
+\PoP\Root\App::addFilter(
 	ModelInstance::HOOK_COMPONENTS_RESULT, 
 	function($components) {
 	    // Add the language

@@ -54,7 +54,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
             case self::MODULE_DATALOAD_INITIALIZEDOMAIN:
                 // Allow PoP SPA to set the backgroundload URLs
                 $domain = PoP_Application_Utils::getRequestDomain();
-                if ($backgroundurls = \PoP\Root\App::getHookManager()->applyFilters('PoP_MultidomainProcessors_Module_Processor_Dataloads:backgroundurls', array(), $domain)) {
+                if ($backgroundurls = \PoP\Root\App::applyFilters('PoP_MultidomainProcessors_Module_Processor_Dataloads:backgroundurls', array(), $domain)) {
                     $ret = array_merge(
                         $ret,
                         $backgroundurls

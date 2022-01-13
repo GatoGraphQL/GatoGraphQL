@@ -7,7 +7,7 @@ class PoP_UserAvatar_UserStance_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::getHookManager()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks:user-feedback',
             array($this, 'getUserFeedback')
         );

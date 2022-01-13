@@ -18,7 +18,7 @@ class PoP_CDNWP
     public function __construct()
     {
         // Priority: after PoP Engine Web Platform
-        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888412);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888412);
     }
     public function init()
     {

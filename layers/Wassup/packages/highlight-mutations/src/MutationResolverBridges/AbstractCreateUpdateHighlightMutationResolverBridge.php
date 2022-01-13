@@ -50,7 +50,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
                 getReloadurlLinkattrs()
             );
 
-            return App::getHookManager()->applyFilters('gd-createupdate-uniquereference:execute:successstring', $success_string, $result_id, $status);
+            return App::applyFilters('gd-createupdate-uniquereference:execute:successstring', $success_string, $result_id, $status);
         }
 
         return parent::getSuccessString($result_id);

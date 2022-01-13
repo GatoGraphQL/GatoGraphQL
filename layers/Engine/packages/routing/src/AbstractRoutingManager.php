@@ -23,7 +23,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
     {
         if ($this->routes === null) {
             $this->routes = array_filter(
-                (array) App::getHookManager()->applyFilters(
+                (array) App::applyFilters(
                     RouteHookNames::ROUTES,
                     []
                 )
@@ -32,7 +32,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
             // // If there are partial endpoints, generate all the combinations of route + partial endpoint
             // // For instance, route = "posts", endpoint = "/api/rest", combined route = "posts/api/rest"
             // if ($partialEndpoints = array_filter(
-            //     (array) \PoP\Root\App::getHookManager()->applyFilters(
+            //     (array) \PoP\Root\App::applyFilters(
             //         'route-endpoints',
             //         []
             //     )
@@ -73,7 +73,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
         }
 
         // Allow to change it
-        return (string) App::getHookManager()->applyFilters(
+        return (string) App::applyFilters(
             RouteHookNames::CURRENT_ROUTE,
             $route,
             $nature

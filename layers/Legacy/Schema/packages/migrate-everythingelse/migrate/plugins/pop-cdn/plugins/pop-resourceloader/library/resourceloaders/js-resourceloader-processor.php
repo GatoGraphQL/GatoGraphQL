@@ -66,7 +66,7 @@ class PoP_CDN_JSResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
         switch ($resource[1]) {
             case self::RESOURCE_CDN:
                 // All templates depend on the handlebars runtime. Allow plugins to add their own dependencies
-                if ($cdn_dependencies = \PoP\Root\App::getHookManager()->applyFilters(
+                if ($cdn_dependencies = \PoP\Root\App::applyFilters(
                     'PoP_CDN_ResourceLoaderProcessor:dependencies',
                     array(
                     )
