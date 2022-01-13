@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_SocialNetwork_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
 {

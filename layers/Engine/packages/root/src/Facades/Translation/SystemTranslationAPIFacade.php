@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PoP\Translation\Facades;
+namespace PoP\Root\Facades\Translation;
 
 use PoP\Root\App;
 use PoP\Root\Translation\TranslationAPIInterface;
 
-class TranslationAPIFacade
+class SystemTranslationAPIFacade
 {
     public static function getInstance(): TranslationAPIInterface
     {
         /**
          * @var TranslationAPIInterface
          */
-        $service = App::getContainer()->get(TranslationAPIInterface::class);
+        $service = App::getSystemContainer()->get(TranslationAPIInterface::class);
         return $service;
     }
 }

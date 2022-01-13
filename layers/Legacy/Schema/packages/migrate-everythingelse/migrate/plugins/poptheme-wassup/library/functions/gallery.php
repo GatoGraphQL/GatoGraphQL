@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 // // Override what sizes can be chosen for the Gallery: this was added using a Change PoP
 // HooksAPIFacade::getInstance()->addFilter('popGalleryimageSizeNamesChoose', 'popGalleryimageSizeNamesChoose');

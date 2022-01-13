@@ -9,7 +9,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\RequestOptions;
 use PoP\ComponentModel\Error\Error;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use Psr\Http\Message\ResponseInterface;
 
 class GuzzleHelpers

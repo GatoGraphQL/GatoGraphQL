@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 

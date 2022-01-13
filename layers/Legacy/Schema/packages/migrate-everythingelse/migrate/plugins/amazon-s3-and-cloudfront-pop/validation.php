@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('AWSS3CFPOP_POP_CMSWP_MIN_VERSION', 0.1);
 define('AWSS3CFPOP_AWSS3CF_MIN_VERSION', '1.2.1');

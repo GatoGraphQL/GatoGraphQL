@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {

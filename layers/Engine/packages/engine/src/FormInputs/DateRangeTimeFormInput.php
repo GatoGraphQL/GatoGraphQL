@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FormInputs;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class DateRangeTimeFormInput extends MultipleInputFormInput
 {

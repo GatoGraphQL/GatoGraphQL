@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('popcms:page:title', 'gdNavigationUpdateMenuItem', PHP_INT_MAX, 2);
 function gdNavigationUpdateMenuItem($title, $page_id)

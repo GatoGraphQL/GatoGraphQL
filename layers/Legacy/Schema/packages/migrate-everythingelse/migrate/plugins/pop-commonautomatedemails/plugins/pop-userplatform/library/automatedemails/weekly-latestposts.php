@@ -1,7 +1,7 @@
 <?php
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPTheme_Wassup_AE_WeeklyLatestContent extends PoP_UserPreferences_SimpleProcessorAutomatedEmailsBase
 {

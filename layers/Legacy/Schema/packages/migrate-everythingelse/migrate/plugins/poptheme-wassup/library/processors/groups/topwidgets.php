@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBase
 {

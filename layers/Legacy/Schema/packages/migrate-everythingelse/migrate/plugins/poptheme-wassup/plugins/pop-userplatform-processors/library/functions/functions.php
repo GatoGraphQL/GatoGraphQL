@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_CreateUserFormMesageFeedbackLayoutsBase:success:msg', 'popthemeWassupCreateuserSuccessmsg');
 function popthemeWassupCreateuserSuccessmsg($msg)

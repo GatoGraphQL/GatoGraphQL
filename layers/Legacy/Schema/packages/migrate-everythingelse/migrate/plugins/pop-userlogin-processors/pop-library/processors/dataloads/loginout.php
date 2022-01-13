@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSitesWassup\UserStateMutations\MutationResolverBridges\LoginMutationResolverBridge;
 use PoPSitesWassup\UserStateMutations\MutationResolverBridges\LogoutMutationResolverBridge;
 use PoPSitesWassup\UserStateMutations\MutationResolverBridges\LostPasswordMutationResolverBridge;

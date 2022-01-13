@@ -3,7 +3,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 

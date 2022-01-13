@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {

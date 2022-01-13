@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 // Add the week scope
 // Taken from http://wp-events-plugin.com/tutorials/create-your-own-event-scope/

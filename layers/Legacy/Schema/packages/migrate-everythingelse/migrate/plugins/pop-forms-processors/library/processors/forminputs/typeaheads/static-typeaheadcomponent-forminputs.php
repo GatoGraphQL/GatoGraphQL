@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module_Processor_StaticTypeaheadComponentFormInputsBase

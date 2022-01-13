@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_ADDCOAUTHORS_POP_COAUTHORS_MIN_VERSION', 0.1);
 define('POP_ADDCOAUTHORS_POP_USERPLATFORM_MIN_VERSION', 0.1);

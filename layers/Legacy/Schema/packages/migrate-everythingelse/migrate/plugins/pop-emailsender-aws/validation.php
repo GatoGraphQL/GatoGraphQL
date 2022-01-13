@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POPMAILERAWS_POP_MAILER_AWS_MIN_VERSION', 0.1);
 define('POPMAILERAWS_POP_EMAILSENDER_MIN_VERSION', 0.1);

@@ -36,7 +36,7 @@ Initialize the component:
 Use it:
 
 ```php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 // Get an instance of the service
 $translationapi = TranslationAPI::getInstance();

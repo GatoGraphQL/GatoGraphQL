@@ -1,6 +1,6 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {

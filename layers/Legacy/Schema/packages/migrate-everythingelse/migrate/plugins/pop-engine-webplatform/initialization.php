@@ -7,7 +7,7 @@ use PoP\Definitions\Constants\ParamValues as DefinitionsParamValues;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 
 define('POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS', 'popwebplatform-keepopentabs');

@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('GD_CONSTANT_ERROR_MSG', '<i class="fa fa-fw fa-warning"></i>'.TranslationAPIFacade::getInstance()->__('Oops, there was a connection problem.', 'pop-coreprocessors'));
 define('GD_CONSTANT_OFFLINE_MSG', '<i class="fa fa-fw fa-warning"></i>'.TranslationAPIFacade::getInstance()->__('It seems you are offline.', 'pop-coreprocessors'));

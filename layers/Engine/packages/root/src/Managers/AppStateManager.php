@@ -6,7 +6,7 @@ namespace PoP\Root\Managers;
 
 use LogicException;
 use PoP\Root\Facades\Registries\AppStateProviderRegistryFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
  * Keep a reference to the global, shared state by the App

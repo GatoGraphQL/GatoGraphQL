@@ -1,7 +1,7 @@
 <?php
 namespace PoP\EngineHTMLCSSPlatform;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_ENGINEHTMLCSSPLATFORMWP_POP_ENGINEWP_MIN_VERSION', 0.1);
 define('POP_ENGINEHTMLCSSPLATFORMWP_POP_ENGINEHTMLCSSPLATFORM_MIN_VERSION', 0.1);

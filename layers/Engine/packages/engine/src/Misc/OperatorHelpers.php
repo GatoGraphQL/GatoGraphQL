@@ -6,7 +6,7 @@ namespace PoP\Engine\Misc;
 
 use Exception;
 use PoP\Engine\Constants\OperationSymbols;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class OperatorHelpers
 {

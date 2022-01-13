@@ -10,7 +10,7 @@ use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
-use PoP\Translation\Facades\SystemTranslationAPIFacade;
+use PoP\Root\Facades\Translation\SystemTranslationAPIFacade;
 
 class ConfigureGraphQLPersistedQueryCompilerPass extends AbstractCompilerPass
 {

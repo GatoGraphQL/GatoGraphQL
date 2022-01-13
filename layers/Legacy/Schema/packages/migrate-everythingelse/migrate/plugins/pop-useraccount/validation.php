@@ -1,7 +1,7 @@
 <?php
 namespace PoP\UserAccount;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_USERACCOUNT_POP_ENGINE_MIN_VERSION', 0.1);
 

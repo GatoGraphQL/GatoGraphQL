@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('route:icon', 'wassupRouteIcon', 10, 3);
 function wassupRouteIcon($icon, $route, $html = true)
