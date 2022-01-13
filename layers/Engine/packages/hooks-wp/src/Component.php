@@ -22,25 +22,4 @@ class Component extends AbstractComponent
             \PoP\Root\Component::class,
         ];
     }
-
-    /**
-     * Initialize services
-     *
-     * @param string[] $skipSchemaComponentClasses
-     */
-    protected function initializeContainerServices(
-        bool $skipSchema,
-        array $skipSchemaComponentClasses,
-    ): void {
-        $this->initServices(dirname(__DIR__));
-    }
-
-    /**
-     * Initialize services for the system container
-     */
-    protected function initializeSystemContainerServices(): void
-    {
-        // The same services injected into the application are injected into the system container
-        $this->initSystemServices(dirname(__DIR__), '', 'services.yaml');
-    }
 }
