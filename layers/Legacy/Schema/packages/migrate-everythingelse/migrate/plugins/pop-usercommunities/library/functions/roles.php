@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 define('GD_URE_ROLE_COMMUNITY', 'community');

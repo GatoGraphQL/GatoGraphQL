@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_Wassup_AE_Module_Processor_ScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {

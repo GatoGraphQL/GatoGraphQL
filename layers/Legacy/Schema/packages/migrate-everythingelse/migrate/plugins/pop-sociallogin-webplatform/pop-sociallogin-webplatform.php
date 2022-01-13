@@ -6,7 +6,7 @@ Description: Collection of Web Platform for Social Login for the Platform of Pla
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_SOCIALLOGINWEBPLATFORM_VERSION', 0.109);
 define('POP_SOCIALLOGINWEBPLATFORM_DIR', dirname(__FILE__));

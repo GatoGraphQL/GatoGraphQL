@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // The target where to add the preview is the Quickview
 HooksAPIFacade::getInstance()->addFilter('gd_ppp_previewurl_target', 'popthemewassupPppPreviewurlTarget');

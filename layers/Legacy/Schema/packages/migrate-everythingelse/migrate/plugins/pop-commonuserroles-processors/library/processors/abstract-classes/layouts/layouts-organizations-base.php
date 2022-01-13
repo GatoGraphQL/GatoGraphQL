@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class GD_URE_Custom_Module_Processor_ProfileOrganizationLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase

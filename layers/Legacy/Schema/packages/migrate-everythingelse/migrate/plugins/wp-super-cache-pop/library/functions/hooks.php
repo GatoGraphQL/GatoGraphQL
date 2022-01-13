@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Hook together the isSearchEngine function with WP Super Cache's is_rejected_user_agent function
 HooksAPIFacade::getInstance()->addFilter('RequestUtils:isSearchEngine', 'gdWpCacheIsRejectedUserAgent');

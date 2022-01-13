@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Hook the email notifications, adding the community members to the users' network
 HooksAPIFacade::getInstance()->addFilter('PoP_EmailSender_Hooks:networkusers', 'popUreEmailsenderGetUserNetworkusers', 10, 2);

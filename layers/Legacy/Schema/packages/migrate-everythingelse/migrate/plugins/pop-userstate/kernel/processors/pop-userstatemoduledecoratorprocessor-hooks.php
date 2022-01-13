@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_UserStateModuleDecoratorProcessorHooks
 {

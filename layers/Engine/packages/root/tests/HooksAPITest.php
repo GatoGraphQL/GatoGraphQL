@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\HooksPHP;
+namespace PoP\Root;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\AbstractTestCase;
 
 class HooksAPITest extends AbstractTestCase

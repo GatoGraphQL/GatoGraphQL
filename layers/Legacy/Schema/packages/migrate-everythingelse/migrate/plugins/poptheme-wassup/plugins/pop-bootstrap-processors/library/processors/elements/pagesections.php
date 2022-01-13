@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 const POP_MODULEID_PAGESECTIONCONTAINERID_HOLE = 'ps-hole';

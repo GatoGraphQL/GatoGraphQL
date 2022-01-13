@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Category Posts Creation Web Platform
 Description: Implementation of EventLinks Creation Web Platform for PoP

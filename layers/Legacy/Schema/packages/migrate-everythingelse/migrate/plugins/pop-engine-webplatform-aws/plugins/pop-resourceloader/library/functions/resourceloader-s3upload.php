@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_WebPlatformEngine_AWS_Resourceloader_S3Upload extends PoP_WebPlatformEngine_AWS_S3UploadBase
 {

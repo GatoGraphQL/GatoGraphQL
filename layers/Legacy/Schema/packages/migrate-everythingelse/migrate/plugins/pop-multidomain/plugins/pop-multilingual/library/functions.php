@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Add the locale to all the multidomains
 HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multidomain:locale', 'wassupQtransSetLocale', 0, 2);

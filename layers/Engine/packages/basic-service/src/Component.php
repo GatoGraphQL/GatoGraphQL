@@ -22,14 +22,4 @@ class Component extends AbstractComponent
             \PoP\Hooks\Component::class,
         ];
     }
-
-    /**
-     * @return string[]
-     */
-    public function getDevDependedComponentClasses(): array
-    {
-        return [
-            \PoP\HooksPHP\Component::class,
-        ];
-    }
 }

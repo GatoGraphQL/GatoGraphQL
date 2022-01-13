@@ -1,6 +1,6 @@
 <?php
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_UserAvatarProcessors_UserPlatform_ActionExecuter_Hooks
 {

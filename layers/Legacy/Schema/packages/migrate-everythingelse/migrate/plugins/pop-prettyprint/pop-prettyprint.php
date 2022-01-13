@@ -6,7 +6,7 @@ Description: Functionality for doing the PrettyPrint using Google's library: htt
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_PRETTYPRINT_VERSION', 0.109);
 define('POP_PRETTYPRINT_VENDORRESOURCESVERSION', 0.100);

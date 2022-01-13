@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('RequestUtils:current_url:remove_params', 'popCdnRemoveUrlparams');
 function popCdnRemoveUrlparams($remove_params)

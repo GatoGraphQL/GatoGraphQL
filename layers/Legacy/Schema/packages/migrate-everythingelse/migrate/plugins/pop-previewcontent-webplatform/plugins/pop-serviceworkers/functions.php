@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Inject data-sw-networkfirst="true" to the preview link in the Add Post feedbackmessage
 HooksAPIFacade::getInstance()->addFilter('gd_ppp_previewurl_link_params', 'popSwReloadurlLinkattrs');

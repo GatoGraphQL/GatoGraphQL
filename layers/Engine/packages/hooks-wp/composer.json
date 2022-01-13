@@ -167,7 +167,6 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/hooks": "^0.9",
         "getpop/translation-wp": "^0.9"
     },
     "require-dev": {

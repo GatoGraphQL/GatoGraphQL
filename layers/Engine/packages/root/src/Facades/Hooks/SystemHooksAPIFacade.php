@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PoP\Hooks\Facades;
+namespace PoP\Root\Facades\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\HooksAPIInterface;
 
-class HooksAPIFacade
+class SystemHooksAPIFacade
 {
     public static function getInstance(): HooksAPIInterface
     {
         /**
          * @var HooksAPIInterface
          */
-        $service = App::getContainer()->get(HooksAPIInterface::class);
+        $service = App::getSystemContainer()->get(HooksAPIInterface::class);
         return $service;
     }
 }

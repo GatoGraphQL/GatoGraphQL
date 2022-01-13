@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\HooksPHP;
+namespace PoP\Root\Hooks;
 
 use PoPBackbone\PHPHooks\PHPHooks;
-use PoP\Root\Hooks\HooksAPIInterface;
 use PoP\Root\App;
 
 class HooksAPI implements HooksAPIInterface

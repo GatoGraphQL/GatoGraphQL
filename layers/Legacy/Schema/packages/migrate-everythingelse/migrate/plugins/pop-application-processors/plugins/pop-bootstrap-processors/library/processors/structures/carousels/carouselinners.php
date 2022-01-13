@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_HOOK_CAROUSEL_USERS_GRIDCLASS', 'carousel-users-gridclass');
 

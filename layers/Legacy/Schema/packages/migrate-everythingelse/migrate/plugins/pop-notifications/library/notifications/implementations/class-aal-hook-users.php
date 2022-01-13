@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }

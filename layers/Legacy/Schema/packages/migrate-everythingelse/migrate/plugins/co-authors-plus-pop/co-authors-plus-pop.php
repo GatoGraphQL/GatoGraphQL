@@ -6,7 +6,7 @@ Description: Integration with plug-in Co-Authors Plus for the Platform of Platfo
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('CAP_POP_VERSION', 0.110);
 define('CAP_POP_DIR', dirname(__FILE__));

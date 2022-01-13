@@ -3,6 +3,3 @@ services:
         public: true
         autowire: true
         autoconfigure: true
-
-    PoP\Root\Hooks\HooksAPIInterface:
-        class: \PoP\HooksPHP\HooksAPI

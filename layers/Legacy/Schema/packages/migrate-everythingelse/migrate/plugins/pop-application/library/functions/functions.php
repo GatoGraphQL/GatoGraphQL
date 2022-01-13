@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\Constants;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter(
 	Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS, 

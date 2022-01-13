@@ -6,7 +6,7 @@ Description: Social Login for the Platform of Platforms (PoP)
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_SOCIALLOGIN_VERSION', 0.107);
 define('POP_SOCIALLOGIN_DIR', dirname(__FILE__));

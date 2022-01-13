@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Misc;
 
 use PoP\Root\App;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\URLParams;
 
 class RequestUtils

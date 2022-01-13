@@ -1,4 +1,4 @@
-<?php use PoP\Hooks\Facades\HooksAPIFacade; ?>
+<?php use PoP\Root\Facades\Hooks\HooksAPIFacade; ?>
 <?php use PoP\Root\Facades\Translation\TranslationAPIFacade; ?>
 <div class="pop-notificationmsg website-level alert alert-warning" role="alert">
     <?php

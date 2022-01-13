@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Priority 7: Just before calling in file wp-includes/class-wp-embed.php:
 // `HooksAPIFacade::getInstance()->addFilter( 'the_content', array( $this, 'run_shortcode' ), 8 );`

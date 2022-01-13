@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Comment Leo 10/08/2017: we need to allow other websites to embed our content:
 // Multidomain (so we can, in GetPoP, display a page from MESYM with an iframe, such as the post-link posts)

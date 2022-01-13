@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('GD_URLPARAM_CDNTHUMBPRINT', 'tp');
 define('POP_CDN_THUMBPRINTVALUES', 'tpv');

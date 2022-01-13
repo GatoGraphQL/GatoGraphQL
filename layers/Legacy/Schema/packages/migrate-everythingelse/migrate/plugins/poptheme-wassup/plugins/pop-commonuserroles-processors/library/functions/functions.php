@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('pop_module:sidebar_author:components', 'gdCommonuserrolesAuthorsidebarsComponents', 0, 2);
 function gdCommonuserrolesAuthorsidebarsComponents($components, $section)

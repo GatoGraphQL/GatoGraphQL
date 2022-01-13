@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Core_DataLoad_NoncesCheckpointQueryInputOutputHandler_Hooks
 {

@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\Facades\HelperServices\ApplicationStateHelperServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter(
 	'template_include', 

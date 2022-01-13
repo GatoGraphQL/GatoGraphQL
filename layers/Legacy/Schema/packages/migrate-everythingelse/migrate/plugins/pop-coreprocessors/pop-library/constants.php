@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('GD_CONSTANT_ERROR_MSG', '<i class="fa fa-fw fa-warning"></i>'.TranslationAPIFacade::getInstance()->__('Oops, there was a connection problem.', 'pop-coreprocessors'));

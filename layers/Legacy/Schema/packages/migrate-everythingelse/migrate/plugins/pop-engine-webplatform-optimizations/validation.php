@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_ENGINEWEBPLATFORMOPTIMIZATIONS_POP_ENGINEWEBPLATFORM_MIN_VERSION', 0.1);

@@ -6,7 +6,7 @@ Description: Integration with plug-in WP Super Cache for the Platform of Platfor
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('WPSC_POP_VERSION', 0.110);
 define('WPSC_POP_DIR', dirname(__FILE__));

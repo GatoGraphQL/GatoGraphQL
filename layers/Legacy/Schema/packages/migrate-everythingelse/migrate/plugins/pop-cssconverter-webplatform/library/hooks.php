@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PoP_WebPlatform_CSSConverter_Hooks
 {
     public function __construct()

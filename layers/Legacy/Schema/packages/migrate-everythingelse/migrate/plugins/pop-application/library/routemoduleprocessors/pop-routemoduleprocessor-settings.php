@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\ModuleRouting\ModuleRoutingGroups;
 
 HooksAPIFacade::getInstance()->addAction(

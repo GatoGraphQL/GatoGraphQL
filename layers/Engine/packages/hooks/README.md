@@ -36,7 +36,7 @@ Initialize the component:
 Use it:
 
 ```php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Get an instance of the service
 $hooksapi = HooksAPI::getInstance();

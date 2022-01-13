@@ -1,5 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP No Search Category Posts Creation Processors
 Description: Implementation of Content Category Posts Creation Processors for PoP
