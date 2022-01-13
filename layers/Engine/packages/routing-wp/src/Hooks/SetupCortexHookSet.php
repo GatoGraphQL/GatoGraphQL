@@ -43,7 +43,7 @@ class SetupCortexHookSet extends AbstractHookSet
             $routes->addRoute(new QueryRoute(
                 $route,
                 function (array $matches) {
-                    return WPQueries::STANDARD_NATURE;
+                    return WPQueries::GENERIC_NATURE;
                 }
             ));
         }
