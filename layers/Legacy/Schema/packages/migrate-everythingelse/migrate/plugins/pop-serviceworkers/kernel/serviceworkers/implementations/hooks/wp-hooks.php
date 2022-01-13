@@ -12,21 +12,21 @@ class PoP_ServiceWorkers_Hooks_WP
         $this->scripts = $this->styles = array();
         $this->doc = new DOMDocument();
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'popcms:scriptTag',
             array($this, 'scriptLoaderTag')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'popcms:styleTag',
             array($this, 'styleLoaderTag')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ServiceWorkers_Job_CacheResources:precache',
             array($this, 'getPrecacheList'),
             10,
             2
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ServiceWorkers_Job_Fetch:exclude:full',
             array($this, 'getExcludedFullpaths'),
             10,

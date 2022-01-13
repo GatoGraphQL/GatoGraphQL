@@ -10,7 +10,7 @@ class PoP_LocationPostCategoryLayouts_LayoutDataloadHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Application:TypeResolver_Posts:multilayout-keys',
             array($this, 'addMultilayoutKeys'),
             10,

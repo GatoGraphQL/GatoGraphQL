@@ -6,7 +6,7 @@ class PoP_UserAvatarProcessors_UserPlatform_ActionExecuter_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'gd_createupdate_user:additionalsCreate',
             array($this, 'additionalsCreate'),
             10,

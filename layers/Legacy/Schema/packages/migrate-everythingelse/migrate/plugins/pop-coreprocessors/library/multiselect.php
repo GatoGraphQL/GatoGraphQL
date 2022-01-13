@@ -2,7 +2,7 @@
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsMultiselectImpl');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdJqueryConstantsMultiselectImpl');
 function gdJqueryConstantsMultiselectImpl($jqueryConstants)
 {
     $jqueryConstants['MULTISELECT_NONSELECTEDTEXT'] = TranslationAPIFacade::getInstance()->__('None selected', 'pop-coreprocessors');

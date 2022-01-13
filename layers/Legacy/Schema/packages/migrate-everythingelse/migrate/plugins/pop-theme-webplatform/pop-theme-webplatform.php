@@ -20,7 +20,7 @@ class PoP_ThemeWebPlatform
     {
 
         // Priority: after PoP Engine Web Platform, inner circle
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888402);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888402);
     }
     public function init()
     {

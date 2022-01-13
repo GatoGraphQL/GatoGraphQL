@@ -5,7 +5,7 @@ class PoP_CommonUserRolesProcessors_UserCommunities_CreateUpdateProfileHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'GD_CommonUserRole_UserCommunities_CreateUpdate_ProfileOrganization:form-inputs',
             array($this, 'getFormInputs')
         );

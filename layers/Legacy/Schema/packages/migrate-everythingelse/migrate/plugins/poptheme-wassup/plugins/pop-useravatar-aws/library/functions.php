@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     'GD_FileUpload_UserPhoto:action-url',
     'popthemeFileuploadUserphotoAwsActionurl',
     50

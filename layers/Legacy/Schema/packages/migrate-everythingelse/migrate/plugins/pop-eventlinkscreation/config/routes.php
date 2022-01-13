@@ -13,7 +13,7 @@ if (!defined('POP_EVENTLINKSCREATION_ROUTE_EDITEVENTLINK')) {
     define('POP_EVENTLINKSCREATION_ROUTE_EDITEVENTLINK', $definitionManager->getUniqueDefinition('edit-eventlink', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

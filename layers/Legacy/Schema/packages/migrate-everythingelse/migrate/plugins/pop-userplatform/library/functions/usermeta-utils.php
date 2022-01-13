@@ -7,7 +7,7 @@ class PoP_ModuleManager_UserMetaUtils
 {
     public static function init(): void
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:shutdown',
             array('PoP_ModuleManager_UserMetaUtils', 'saveUserMeta')
         );

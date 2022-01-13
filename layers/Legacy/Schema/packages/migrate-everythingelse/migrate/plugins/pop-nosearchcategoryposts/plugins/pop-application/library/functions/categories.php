@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('getAllcontentExcludedTaxonomies', 'getNosearchcategorypostsExcludedTaxonomies');
+\PoP\Root\App::getHookManager()->addFilter('getAllcontentExcludedTaxonomies', 'getNosearchcategorypostsExcludedTaxonomies');
 function getNosearchcategorypostsExcludedTaxonomies($excluded_taxonomies)
 {
     $excluded_taxonomies['category'] = $excluded_taxonomies['category'] ?? array();
@@ -13,7 +13,7 @@ function getNosearchcategorypostsExcludedTaxonomies($excluded_taxonomies)
     return $excluded_taxonomies;
 }
 
-HooksAPIFacade::getInstance()->addFilter('getTheMainCategories', 'getNosearchcategorypostsTheMainCategories');
+\PoP\Root\App::getHookManager()->addFilter('getTheMainCategories', 'getNosearchcategorypostsTheMainCategories');
 function getNosearchcategorypostsTheMainCategories($cats)
 {
     return array_merge(

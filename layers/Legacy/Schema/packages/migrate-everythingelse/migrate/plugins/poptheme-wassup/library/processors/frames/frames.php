@@ -84,7 +84,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
 
                 // Save the state of the Main Navigation being open or not: open by default, by adding class "active-side"
                 // to the pageSectionGroup, but if the user clicks, then it's dismissed
-                if (HooksAPIFacade::getInstance()->applyFilters(
+                if (\PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomPageSections:jsmethods:toggleside',
                     true,
                     $module
@@ -253,7 +253,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 }
 
                 // Allow TPPDebate to override the social media
-                $ret['socialmedias'] = HooksAPIFacade::getInstance()->applyFilters(
+                $ret['socialmedias'] = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomPageSections:frame-top:socialmedias',
                     array()
                 );
@@ -279,7 +279,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                     $ret['links']['useravatar'] = RouteUtils::getRouteURL(POP_USERAVATAR_ROUTE_EDITAVATAR);
                 }
                 // Allow TPPDebate to override the titles
-                $ret[GD_JS_TITLES] = HooksAPIFacade::getInstance()->applyFilters(
+                $ret[GD_JS_TITLES] = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomPageSections:frame-top:titles',
                     array(
                         'home' => TranslationAPIFacade::getInstance()->__('Home', 'poptheme-wassup'),
@@ -292,8 +292,8 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                         'footer' => sprintf(
                             TranslationAPIFacade::getInstance()->__('Powered by <a href="%s" target="_blank">the PoP framework</a> through <a href="%s" target="_blank">Verticals</a>', 'poptheme-wassup'),
                             // Allow qTrans to add the language
-                            HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomPageSections:footer:poweredby-links', POPTHEME_WASSUP_LINK_GETPOP),
-                            HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomPageSections:footer:poweredby-links', POPTHEME_WASSUP_LINK_VERTICALS)
+                            \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_CustomPageSections:footer:poweredby-links', POPTHEME_WASSUP_LINK_GETPOP),
+                            \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_CustomPageSections:footer:poweredby-links', POPTHEME_WASSUP_LINK_VERTICALS)
                         ),
                         'about' => TranslationAPIFacade::getInstance()->__('About us', 'poptheme-wassup'),
                         'myprofile' => TranslationAPIFacade::getInstance()->__('My Profile', 'poptheme-wassup'),
@@ -391,7 +391,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 $title = $cmsapplicationapi->getSiteName();
 
                 // Allow the ThemeStyle to override the logo size
-                $size = HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE, 'large');
+                $size = \PoP\Root\App::getHookManager()->applyFilters(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE, 'large');
                 $logo = gdLogo($size);
                 $ret['logo-main'] = array(
                     'src' => $logo[0],
@@ -439,7 +439,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
         switch ($module[1]) {
             case self::MODULE_FRAME_TOPSIMPLE:
             case self::MODULE_FRAME_TOPEMBED:
-                $ret[GD_JS_TITLES]['document'] = HooksAPIFacade::getInstance()->applyFilters(
+                $ret[GD_JS_TITLES]['document'] = \PoP\Root\App::getHookManager()->applyFilters(
                     'GD_DataLoad_QueryInputOutputHandler_FrameTopSimplePageSection:document_title',
                     $cmsapplicationapi->getDocumentTitle()
                 );

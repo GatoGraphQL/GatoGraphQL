@@ -2,7 +2,7 @@
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gdAuthorParentpageid', 'gdUreAuthorParentpageidImpl', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('gdAuthorParentpageid', 'gdUreAuthorParentpageidImpl', 10, 2);
 function gdUreAuthorParentpageidImpl($pageid, $author_id = null)
 {
     if (is_null($author_id)) {

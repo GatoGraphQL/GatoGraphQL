@@ -11,9 +11,9 @@ class PoP_UserLogin_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Functional emails
         //----------------------------------------------------------------------
-        HooksAPIFacade::getInstance()->addFilter('popcms:retrievePasswordTitle', array($this, 'retrievePasswordTitle'));
-        HooksAPIFacade::getInstance()->addFilter('popcms:retrievePasswordMessage', array($this, 'retrievePasswordMessage'), PHP_INT_MAX, 4);
-        HooksAPIFacade::getInstance()->addAction('gd_lostpasswordreset', array($this, 'lostpasswordreset'), 10, 1);
+        \PoP\Root\App::getHookManager()->addFilter('popcms:retrievePasswordTitle', array($this, 'retrievePasswordTitle'));
+        \PoP\Root\App::getHookManager()->addFilter('popcms:retrievePasswordMessage', array($this, 'retrievePasswordMessage'), PHP_INT_MAX, 4);
+        \PoP\Root\App::getHookManager()->addAction('gd_lostpasswordreset', array($this, 'lostpasswordreset'), 10, 1);
     }
 
     public function retrievePasswordTitle($title)

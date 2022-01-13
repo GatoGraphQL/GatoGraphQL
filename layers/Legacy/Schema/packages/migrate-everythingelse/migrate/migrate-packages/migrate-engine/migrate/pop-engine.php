@@ -21,7 +21,7 @@ class Plugin
     {
         // Allow the Theme to override definitions.
         // Priority: new section, after PoP CMS section
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 88823);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 88823);
     }
     public function init()
     {
@@ -30,7 +30,7 @@ class Plugin
             define('POP_ENGINE_INITIALIZED', true);
 
             // Allow plug-ins to override values
-            HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'defineConstants'), 888110);
+            \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'defineConstants'), 888110);
         }
     }
     public function defineConstants()

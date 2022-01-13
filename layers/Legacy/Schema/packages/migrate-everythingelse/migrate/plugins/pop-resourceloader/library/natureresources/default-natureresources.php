@@ -25,7 +25,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         // Organization: it must add together the resources for both "source=community" and "source=user"
         // Then, for the organization and community roles, we must set the extra \PoP\Root\App::getState('source') value
         // Add a hook to allow PoP Common User Roles to set it
-        if ($extra_vars = HooksAPIFacade::getInstance()->applyFilters(
+        if ($extra_vars = \PoP\Root\App::getHookManager()->applyFilters(
             'PoPThemeWassup_ResourceLoader_Hooks:extra-vars',
             array(),
             $nature,
@@ -47,7 +47,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         // 1. GetPoP: a single page
         // 2. MESYM: a feed of posts, with formats
         // Allow to select the right configuration through hooks
-        $scheme = HooksAPIFacade::getInstance()->applyFilters(
+        $scheme = \PoP\Root\App::getHookManager()->applyFilters(
             'PoPThemeWassup_ResourceLoader_HomeHooks:home-resources:scheme',
             POP_RESOURCELOADERCONFIGURATION_HOME_FEED
         );
@@ -158,7 +158,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // Allow to filter the categories.
             // This is needed so that Articles/Announcements/etc similar-configuration categories
             // can be generated only once
-            $categories = HooksAPIFacade::getInstance()->applyFilters(
+            $categories = \PoP\Root\App::getHookManager()->applyFilters(
                 'PoPThemeWassup_ResourceLoader_Hooks:single_resources:categories',
                 $all_categories
             );

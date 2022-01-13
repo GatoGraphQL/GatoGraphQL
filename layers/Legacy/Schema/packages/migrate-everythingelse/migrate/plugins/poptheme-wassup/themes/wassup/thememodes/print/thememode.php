@@ -9,16 +9,16 @@ class GD_ThemeMode_Wassup_Print extends GD_WassupThemeMode_Base
     public function __construct()
     {
 
-        // HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', array($this, 'jqueryConstants'));
+        // \PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', array($this, 'jqueryConstants'));
 
         // Hooks to allow the thememodes to do some functionality
-        HooksAPIFacade::getInstance()->addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'filteringbyShowfilter'));
-        HooksAPIFacade::getInstance()->addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'getSidebarOrientation'));
+        \PoP\Root\App::getHookManager()->addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'filteringbyShowfilter'));
+        \PoP\Root\App::getHookManager()->addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'getSidebarOrientation'));
 
-        HooksAPIFacade::getInstance()->addAction('popcms:boot', function() {
+        \PoP\Root\App::getHookManager()->addAction('popcms:boot', function() {
             if (in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
-                HooksAPIFacade::getInstance()->addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'getPagesectionJsmethod'), 10, 2);
-                HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getTheme()->getName().':'.$this->getName(), '__return_false');
+                \PoP\Root\App::getHookManager()->addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'getPagesectionJsmethod'), 10, 2);
+                \PoP\Root\App::getHookManager()->addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getTheme()->getName().':'.$this->getName(), '__return_false');
             }
         });
 

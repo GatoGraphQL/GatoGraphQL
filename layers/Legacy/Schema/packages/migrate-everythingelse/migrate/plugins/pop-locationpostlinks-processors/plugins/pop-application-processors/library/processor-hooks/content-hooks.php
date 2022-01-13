@@ -9,7 +9,7 @@ class PoPTheme_LocationPostLinks_ContentHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_Contents:inner_module',
             array($this, 'contentInner'),
             10,

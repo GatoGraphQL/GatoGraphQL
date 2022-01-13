@@ -3,7 +3,7 @@
 use PoP\ComponentModel\Facades\HelperServices\ApplicationStateHelperServiceFacade;
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
 	'template_include', 
 	function ($template) {
 	    // If the theme doesn't implement the template, use the default one

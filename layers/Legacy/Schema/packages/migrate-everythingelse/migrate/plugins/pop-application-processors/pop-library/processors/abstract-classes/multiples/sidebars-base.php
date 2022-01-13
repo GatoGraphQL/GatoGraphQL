@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_SidebarMultiplesBase extends PoP_Module_Proc
     {
 
         // Allow to add the Trending Tags/Events Calendar at the bottom of the sideinfo
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_Module_Processor_SidebarMultiplesBase:modules',
             array(),
             $this->getScreengroup($module),

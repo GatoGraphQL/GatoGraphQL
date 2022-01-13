@@ -5,7 +5,7 @@ class PoP_CDN_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             '\PoP\ComponentModel\Engine:etag_header:commoncode',
             array($this, 'getCommoncode')
         );

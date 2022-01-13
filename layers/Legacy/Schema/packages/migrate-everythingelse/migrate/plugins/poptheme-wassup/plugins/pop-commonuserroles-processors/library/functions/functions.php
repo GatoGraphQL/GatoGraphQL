@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('pop_module:sidebar_author:components', 'gdCommonuserrolesAuthorsidebarsComponents', 0, 2);
+\PoP\Root\App::getHookManager()->addFilter('pop_module:sidebar_author:components', 'gdCommonuserrolesAuthorsidebarsComponents', 0, 2);
 function gdCommonuserrolesAuthorsidebarsComponents($components, $section)
 {
     if (PoP_ApplicationProcessors_Utils::addAuthorWidgetDetails()) {

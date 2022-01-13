@@ -18,7 +18,7 @@ class PoPThemeWassup_Utils
             $modulePaths = $instanceManager->getInstance(ModulePaths::class);
 
             // If we are targeting specific module paths, then no need to validate. Otherwise, we must check that the module is under only 1 pageSection, or it may be repeated here and there
-            self::$checkLoadingPagesectionModule = HooksAPIFacade::getInstance()->applyFilters(
+            self::$checkLoadingPagesectionModule = \PoP\Root\App::getHookManager()->applyFilters(
                 'PoPThemeWassup_Utils:checkLoadingPagesectionModule',
                 \PoP\Root\App::getState('modulefilter') !== $modulePaths->getName()
             );
@@ -69,7 +69,7 @@ class PoPThemeWassup_Utils
         }
 
         // Hook: allow Verticals to remove 'active-side' class
-        $active_classes = HooksAPIFacade::getInstance()->applyFilters(
+        $active_classes = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ApplicationProcessors_Utils:pagesectiongroup:active_pagesection_classes',
             $active_classes
         );

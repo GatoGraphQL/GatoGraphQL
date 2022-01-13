@@ -5,7 +5,7 @@ class PoP_Core_DataLoad_NoncesCheckpointQueryInputOutputHandler_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             '\PoP\ComponentModel\Engine:session-meta',
             array($this, 'getSessionMeta')
         );

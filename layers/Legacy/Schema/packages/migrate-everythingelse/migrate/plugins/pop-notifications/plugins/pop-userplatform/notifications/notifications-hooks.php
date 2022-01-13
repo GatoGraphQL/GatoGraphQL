@@ -7,7 +7,7 @@ class PoP_Notifications_UserPlatform_NotificationHooks
     {
 
         // Hook into the API: Notification Actions
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:notifications:userspecific:actions',
             array($this, 'getUserspecificActions')
         );

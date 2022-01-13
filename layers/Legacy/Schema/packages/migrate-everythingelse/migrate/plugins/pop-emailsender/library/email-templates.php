@@ -29,7 +29,7 @@ class PoP_EmailSender_Templates
     public function getModuleFolders()
     {
         if (!$this->template_folders) {
-            $this->template_folders = HooksAPIFacade::getInstance()->applyFilters(
+            $this->template_folders = \PoP\Root\App::getHookManager()->applyFilters(
                 'sendemailToUsers:template_folders',
                 array(
                     POP_EMAILSENDER_DIR_RESOURCES.'/email-templates/default/',

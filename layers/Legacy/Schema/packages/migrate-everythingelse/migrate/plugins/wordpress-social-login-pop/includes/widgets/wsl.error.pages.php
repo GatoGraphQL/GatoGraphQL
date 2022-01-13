@@ -24,6 +24,6 @@ if (! function_exists('wsl_render_error_page')) {
         RequestUtils::$errors[] = $message;
 
         // keep these 2 LOC
-        HooksAPIFacade::getInstance()->doAction('wsl_clear_user_php_session');
+        \PoP\Root\App::getHookManager()->doAction('wsl_clear_user_php_session');
     }
 }

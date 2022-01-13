@@ -21,7 +21,7 @@ class PoP_Application_ApplicationState
         	// Only for allowed routes, such as notifications (avoid calling the homepage with "loading-latest" or the amount of retrieved data can bring the server down)
         	in_array(
         		$vars['route'],
-        		HooksAPIFacade::getInstance()->applyFilters(
+        		\PoP\Root\App::getHookManager()->applyFilters(
         			'loadingLatestRoutes',
         			[]
         		)
@@ -33,4 +33,4 @@ class PoP_Application_ApplicationState
 /**
  * Initialization
  */
-HooksAPIFacade::getInstance()->addAction('ApplicationState:addVars', array(PoP_Application_ApplicationState::class, 'addVars'), 10, 1);
+\PoP\Root\App::getHookManager()->addAction('ApplicationState:addVars', array(PoP_Application_ApplicationState::class, 'addVars'), 10, 1);

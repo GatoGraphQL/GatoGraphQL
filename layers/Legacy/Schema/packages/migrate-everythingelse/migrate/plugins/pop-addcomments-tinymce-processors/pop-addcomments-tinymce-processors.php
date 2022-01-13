@@ -21,7 +21,7 @@ class PoP_AddCommentsTinyMCEProcessors
     {
 
         // Priority: after PoP Content Creation Processors and PoP Add Comments Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888855);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888855);
     }
     public function init()
     {

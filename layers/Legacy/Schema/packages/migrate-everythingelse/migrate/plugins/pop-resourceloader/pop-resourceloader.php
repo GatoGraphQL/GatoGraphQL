@@ -22,7 +22,7 @@ class PoP_ResourceLoader
     {
 
         // Priority: after PoP Server-Side Rendering, inner circle
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888404);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888404);
     }
     public function init()
     {
@@ -31,7 +31,7 @@ class PoP_ResourceLoader
         if ($this->validate()) {
             $this->initialize();
             define('POP_RESOURCELOADER_INITIALIZED', true);
-            HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'defineConstants'), 888450);
+            \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'defineConstants'), 888450);
         }
     }
 

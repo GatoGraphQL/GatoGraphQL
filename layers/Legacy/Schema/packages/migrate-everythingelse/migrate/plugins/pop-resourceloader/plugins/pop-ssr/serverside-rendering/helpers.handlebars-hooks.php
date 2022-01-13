@@ -5,7 +5,7 @@ class PoP_ResourceLoader_SSR_HandlebarsHelpersHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'handlebars-helpers:enterModule:response',
             array($this, 'getEntermoduleResponse'),
             10,

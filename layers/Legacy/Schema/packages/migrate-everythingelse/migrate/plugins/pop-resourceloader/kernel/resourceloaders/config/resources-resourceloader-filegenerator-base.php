@@ -50,7 +50,7 @@ abstract class PoP_ResourceLoader_ResourcesFileBase extends \PoP\FileStore\File\
 	protected function getBaseDir(): string {
 
 		// Allow pop-cluster-resourceloader to change the dir to pop-cluster-generatecache/
-		return HooksAPIFacade::getInstance()->applyFilters(
+		return \PoP\Root\App::getHookManager()->applyFilters(
 			'PoP_ResourceLoader_ResourcesFileBase:base-dir',
 			POP_RESOURCES_DIR,
 			defined('POP_THEME_INITIALIZED') && $this->acrossThememodes()
@@ -59,7 +59,7 @@ abstract class PoP_ResourceLoader_ResourcesFileBase extends \PoP\FileStore\File\
 	protected function getBaseUrl(): string {
 
 		// Allow pop-cluster-resourceloader to change the dir to pop-cluster-generatecache/
-		return HooksAPIFacade::getInstance()->applyFilters(
+		return \PoP\Root\App::getHookManager()->applyFilters(
 			'PoP_ResourceLoader_ResourcesFileBase:base-url',
 			POP_RESOURCES_URL,
 			defined('POP_THEME_INITIALIZED') && $this->acrossThememodes()

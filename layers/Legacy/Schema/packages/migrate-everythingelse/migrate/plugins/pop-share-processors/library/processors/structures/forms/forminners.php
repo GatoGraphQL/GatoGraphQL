@@ -48,7 +48,7 @@ class PoP_Share_Module_Processor_GFFormInners extends PoP_Module_Processor_FormI
         }
 
         // Allow Gravity Forms to add extra fields
-        $ret = HooksAPIFacade::getInstance()->applyFilters(
+        $ret = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_Module_Processor_GFFormInners:layouts',
             $ret,
             $module
@@ -61,7 +61,7 @@ class PoP_Share_Module_Processor_GFFormInners extends PoP_Module_Processor_FormI
     {
 
         // Allow Gravity Forms to set props on its added fields
-        HooksAPIFacade::getInstance()->doAction(
+        \PoP\Root\App::getHookManager()->doAction(
             'PoP_Module_Processor_GFFormInners:init-props',
             $module,
             array(&$props),

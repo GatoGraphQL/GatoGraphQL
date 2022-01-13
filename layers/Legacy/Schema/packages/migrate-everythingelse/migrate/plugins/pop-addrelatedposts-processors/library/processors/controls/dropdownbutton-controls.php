@@ -21,7 +21,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
             case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 $ret = array_merge(
                     $ret,
-                    HooksAPIFacade::getInstance()->applyFilters(
+                    \PoP\Root\App::getHookManager()->applyFilters(
                         'PoP_Module_Processor_DropdownButtonControls:addrelatedpost-dropdown:buttons',
                         array()
                     )

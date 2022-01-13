@@ -8,7 +8,7 @@ abstract class PoP_Module_Processor_CustomFullUserLayoutsBase extends PoP_Module
     {
 
         // Allow URE to Change it, to inject the (Organization / Organization+Members) links
-        // return HooksAPIFacade::getInstance()->applyFilters(
+        // return \PoP\Root\App::getHookManager()->applyFilters(
         //     'PoP_Module_Processor_CustomFullUserLayoutsBase:title_module',
         //     PoP_Module_Processor_CustomFullUserTitleLayouts::MODULE_LAYOUT_FULLUSERTITLE
         // );

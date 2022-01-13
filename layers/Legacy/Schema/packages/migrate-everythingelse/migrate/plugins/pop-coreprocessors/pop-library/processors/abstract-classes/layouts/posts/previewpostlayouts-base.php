@@ -194,7 +194,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
     {
 
         // Allow 3rd parties to modify the modules. Eg: for the TPP website we re-use the MESYM Theme but we modify some of its elements, eg: adding the "What do you think about TPP?" modules in the fullview templates
-        return HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_PreviewPostLayoutsBase:bottom_modules', $this->getBottomSubmodules($module), $module);
+        return \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_PreviewPostLayoutsBase:bottom_modules', $this->getBottomSubmodules($module), $module);
     }
 
     public function getImmutableConfiguration(array $module, array &$props): array

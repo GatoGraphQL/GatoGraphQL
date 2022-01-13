@@ -71,7 +71,7 @@ class EM_Gateway_Paypal extends EM_Gateway_Online
                 $count++;
             }
         }
-        return HooksAPIFacade::getInstance()->applyFilters('em_gateway_paypal_get_paypal_vars', $paypal_vars, $EM_Booking, $this);
+        return \PoP\Root\App::getHookManager()->applyFilters('em_gateway_paypal_get_paypal_vars', $paypal_vars, $EM_Booking, $this);
     }
 
     /**
@@ -117,10 +117,10 @@ class EM_Gateway_Paypal extends EM_Gateway_Online
 
             //add a CA certificate so that SSL requests always go through
 
-            HooksAPIFacade::getInstance()->addAction('http_api_curl', 'EM_Gateway_Paypal::paymentReturnLocalCaCurl', 10, 1);
+            \PoP\Root\App::getHookManager()->addAction('http_api_curl', 'EM_Gateway_Paypal::paymentReturnLocalCaCurl', 10, 1);
             //using WP's HTTP class
             $ipn_verification_result = wp_remote_get($domain.'?'.$req);
-            HooksAPIFacade::getInstance()->removeAction('http_api_curl', 'EM_Gateway_Paypal::paymentReturnLocalCaCurl', 10, 1);
+            \PoP\Root\App::getHookManager()->removeAction('http_api_curl', 'EM_Gateway_Paypal::paymentReturnLocalCaCurl', 10, 1);
 
             if (!is_wp_error($ipn_verification_result) && $ipn_verification_result['body'] == 'VERIFIED') {
                 //log ipn request if needed, then move on
@@ -175,7 +175,7 @@ class EM_Gateway_Paypal extends EM_Gateway_Online
                             //TODO do something if pp payment not enough
                             $EM_Booking->setStatus(0); //Set back to normal "pending"
                         }
-                        HooksAPIFacade::getInstance()->doAction('em_payment_processed', $EM_Booking, $this);
+                        \PoP\Root\App::getHookManager()->doAction('em_payment_processed', $EM_Booking, $this);
                         break;
 
                     case 'Reversed':
@@ -185,7 +185,7 @@ class EM_Gateway_Paypal extends EM_Gateway_Online
 
                         //We need to cancel their booking.
                         $EM_Booking->cancel();
-                        HooksAPIFacade::getInstance()->doAction('em_payment_reversed', $EM_Booking, $this);
+                        \PoP\Root\App::getHookManager()->doAction('em_payment_reversed', $EM_Booking, $this);
 
                         break;
 
@@ -198,7 +198,7 @@ class EM_Gateway_Paypal extends EM_Gateway_Online
                         } else {
                             $EM_Booking->setStatus(0); //Set back to normal "pending"
                         }
-                        HooksAPIFacade::getInstance()->doAction('em_payment_refunded', $EM_Booking, $this);
+                        \PoP\Root\App::getHookManager()->doAction('em_payment_refunded', $EM_Booking, $this);
                         break;
 
                     case 'Denied':
@@ -207,7 +207,7 @@ class EM_Gateway_Paypal extends EM_Gateway_Online
                         $this->record_transaction($EM_Booking, $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
 
                         $EM_Booking->cancel();
-                        HooksAPIFacade::getInstance()->doAction('em_payment_denied', $EM_Booking, $this);
+                        \PoP\Root\App::getHookManager()->doAction('em_payment_denied', $EM_Booking, $this);
                         break;
 
 
@@ -231,7 +231,7 @@ class EM_Gateway_Paypal extends EM_Gateway_Online
 
                         $this->record_transaction($EM_Booking, $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
 
-                        HooksAPIFacade::getInstance()->doAction('em_payment_pending', $EM_Booking, $this);
+                        \PoP\Root\App::getHookManager()->doAction('em_payment_pending', $EM_Booking, $this);
                         break;
 
                     default:
@@ -239,7 +239,7 @@ class EM_Gateway_Paypal extends EM_Gateway_Online
                 }
             } else {
                 if ($_POST['payment_status'] == 'Completed' || $_POST['payment_status'] == 'Processed') {
-                    $message = HooksAPIFacade::getInstance()->applyFilters('em_gateway_paypal_bad_booking_email', "
+                    $message = \PoP\Root\App::getHookManager()->applyFilters('em_gateway_paypal_bad_booking_email', "
 A Payment has been received by PayPal for a non-existent booking.
 
 Event Details : %event%
@@ -401,5 +401,5 @@ Events Manager
     }
 }
 //EM_Gateways::register_gateway('paypal', 'EM_Gateway_Paypal');
-//HooksAPIFacade::getInstance()->addAction('emp_paypal_cron', 'emGatewayBookingTimeout');
+//\PoP\Root\App::getHookManager()->addAction('emp_paypal_cron', 'emGatewayBookingTimeout');
 ?>

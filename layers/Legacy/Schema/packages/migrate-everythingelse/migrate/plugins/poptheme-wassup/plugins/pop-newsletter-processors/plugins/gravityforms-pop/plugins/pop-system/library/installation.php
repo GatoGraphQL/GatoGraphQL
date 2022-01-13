@@ -6,7 +6,7 @@ class PoPTheme_Wassup_GF_Install_FormEntries
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'PoP:system-install',
             array($this, 'systemInstall')
         );

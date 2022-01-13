@@ -4,7 +4,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /**
  * Add filtercomponents
  */
-HooksAPIFacade::getInstance()->addFilter('CommonUserRoles:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponent', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('CommonUserRoles:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponent', 10, 2);
 function gdUreAddFiltercomponent($filterinputs, array $module)
 {
 	if ($module == [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_INDIVIDUALS]) {
@@ -35,7 +35,7 @@ function gdUreAddFiltercomponent($filterinputs, array $module)
 	}
     return $filterinputs;
 }
-HooksAPIFacade::getInstance()->addFilter('CommonUserRoles:SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponent', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('CommonUserRoles:SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponent', 10, 2);
 function gdUreAddSimpleFiltercomponent($filterinputs, array $module)
 {
 	if ($module == [PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS]) {

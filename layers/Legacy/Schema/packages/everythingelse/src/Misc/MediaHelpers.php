@@ -17,6 +17,6 @@ class MediaHelpers
         }
 
         // Default
-        return HooksAPIFacade::getInstance()->applyFilters('getThumbId:default', null, $post_id);
+        return \PoP\Root\App::getHookManager()->applyFilters('getThumbId:default', null, $post_id);
     }
 }

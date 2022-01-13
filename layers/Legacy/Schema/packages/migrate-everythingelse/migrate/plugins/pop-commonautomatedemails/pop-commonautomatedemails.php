@@ -20,7 +20,7 @@ class PoP_CommonAutomatedEmails
     {
 
         // Priority: after PoP Automated Emails
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888420);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888420);
     }
 
     public function init()

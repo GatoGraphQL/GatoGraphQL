@@ -71,7 +71,7 @@ class PoP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
         }
 
         // Allow Events Manager to add the Map format
-        $ret = HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_TagSectionTabPanelComponents:modules', $ret, $module);
+        $ret = \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_TagSectionTabPanelComponents:modules', $ret, $module);
 
         return $ret;
     }
@@ -137,7 +137,7 @@ class PoP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
         }
 
         if ($ret) {
-            return HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_TagSectionTabPanelComponents:panel_headers', $ret, $module);
+            return \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_TagSectionTabPanelComponents:panel_headers', $ret, $module);
         }
 
         return parent::getPanelHeaders($module, $props);

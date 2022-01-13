@@ -75,5 +75,5 @@ class PoP_EventsCreation_DataLoad_FunctionalObjectTypeFieldResolver extends Abst
 
 // Static Initialization: Attach
 $translationAPI = TranslationAPIFacade::getInstance();
-$hooksAPI = HooksAPIFacade::getInstance();
+$hooksAPI = \PoP\Root\App::getHookManager();
 (new PoP_EventsCreation_DataLoad_FunctionalObjectTypeFieldResolver($translationAPI, $hooksAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

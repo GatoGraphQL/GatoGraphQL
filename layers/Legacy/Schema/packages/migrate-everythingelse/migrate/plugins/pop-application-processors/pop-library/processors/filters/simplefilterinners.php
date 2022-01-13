@@ -142,7 +142,7 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
                 [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERPOST],
             ],
         ];
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+        if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
             'Blog:SimpleFilterInners:inputmodules',
             $inputmodules[$module[1]],
             $module

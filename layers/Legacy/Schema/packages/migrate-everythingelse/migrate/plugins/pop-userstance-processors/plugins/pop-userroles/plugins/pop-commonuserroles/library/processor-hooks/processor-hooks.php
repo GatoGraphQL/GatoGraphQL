@@ -6,7 +6,7 @@ class UserStance_URE_ProcessorHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoPVP_Module_Processor_SidebarMultiples:inner-modules:authorstances',
             array($this, 'getInnerSubmodules')
         );

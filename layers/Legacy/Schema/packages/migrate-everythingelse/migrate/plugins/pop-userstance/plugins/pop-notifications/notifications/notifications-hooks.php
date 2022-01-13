@@ -7,12 +7,12 @@ class PoP_ReferencedPosts_Notifications_NotificationHooks
     {
 
         // Hook into the API: Notification Actions
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:notifications:useractivityposts:actions',
             array($this, 'getUseractivitypostsActions')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:additional_notifications:markasread:posts:actions',
             array($this, 'addActions')
         );

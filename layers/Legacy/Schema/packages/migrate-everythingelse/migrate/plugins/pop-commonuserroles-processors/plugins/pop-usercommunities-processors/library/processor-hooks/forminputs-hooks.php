@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('UserSelectableTypeaheadFormInputs:components:profiles', 'gdUreGetForminputtypeaheadComponents');
+\PoP\Root\App::getHookManager()->addFilter('UserSelectableTypeaheadFormInputs:components:profiles', 'gdUreGetForminputtypeaheadComponents');
 function gdUreGetForminputtypeaheadComponents($components)
 {
     return array(

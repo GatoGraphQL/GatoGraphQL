@@ -10,7 +10,7 @@ if (!defined('POP_MULTIDOMAIN_ROUTE_EXTERNAL')) {
     define('POP_MULTIDOMAIN_ROUTE_EXTERNAL', $definitionManager->getUniqueDefinition('external', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

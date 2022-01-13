@@ -3,7 +3,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Add the locale to all the multidomains
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multidomain:locale', 'wassupQtransSetLocale', 0, 2);
+\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:multidomain:locale', 'wassupQtransSetLocale', 0, 2);
 function wassupQtransSetLocale($locale, $domain)
 {
     $pluginapi = PoP_Multilingual_FunctionsAPIFactory::getInstance();
@@ -41,7 +41,7 @@ function popMultidomainQtransMaybeReplacelang($url, $domain, $path)
 /**
  * Add the locale to all the multidomains, for Service Workers
  */
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multidomain:locale', 'popMultidomainQtransSetLocale', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:multidomain:locale', 'popMultidomainQtransSetLocale', 10, 2);
 function popMultidomainQtransSetLocale($locale, $domain)
 {
     return popMultidomainQtransMaybeReplacelang($locale, $domain, '/');

@@ -6,7 +6,7 @@ class GD_CreateUpdate_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'popcms:editPostLink',
             array($this, 'editPostLink'),
             100,
@@ -19,7 +19,7 @@ class GD_CreateUpdate_Hooks
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
             // Hook to set the URL for other post types
-            $url = HooksAPIFacade::getInstance()->applyFilters(
+            $url = \PoP\Root\App::getHookManager()->applyFilters(
                 'gd-createupdateutils:edit-url',
                 '',
                 $post_id

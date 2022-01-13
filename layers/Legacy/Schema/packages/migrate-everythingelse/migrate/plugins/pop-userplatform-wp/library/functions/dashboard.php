@@ -5,7 +5,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
  * Function to remove all access to the backend (also edit one's profile) for Subscribers
  */
-HooksAPIFacade::getInstance()->addAction('admin_init', 'blockDashboardAccess');
+\PoP\Root\App::getHookManager()->addAction('admin_init', 'blockDashboardAccess');
 function blockDashboardAccess()
 {
 

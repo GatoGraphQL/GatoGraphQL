@@ -4,7 +4,7 @@ class PoP_UserStance_LatestCounts_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'PoP_Application_SectionUtils:dataloadqueryargs-latestcounts',
             array($this, 'addUserstance')
         );

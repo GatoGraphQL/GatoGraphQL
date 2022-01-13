@@ -41,7 +41,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         $single_paths = array_map(array($postCategoryTypeAPI, 'getCategoryPath'), $categories);
 
         // Allow EM to add their own paths
-        $single_paths = HooksAPIFacade::getInstance()->applyFilters(
+        $single_paths = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_SPAResourceLoader_FileReproduction_Config:configuration:category-paths',
             $single_paths
         );

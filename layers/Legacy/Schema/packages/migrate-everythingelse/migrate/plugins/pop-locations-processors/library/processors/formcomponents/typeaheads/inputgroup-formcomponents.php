@@ -31,7 +31,7 @@ class GD_EM_Module_Processor_InputGroupFormComponents extends PoP_Module_Process
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION:
                 // Allow PoP Add Locations Processors to inject the "+" button
-                if ($control = HooksAPIFacade::getInstance()->applyFilters(
+                if ($control = \PoP\Root\App::getHookManager()->applyFilters(
                     'GD_EM_Module_Processor_InputGroupFormComponents:control-layout',
                     null,
                     $module

@@ -68,7 +68,7 @@ class PoP_UserCommunities_ModuleProcessor_AuthorSectionTabPanelComponents extend
         }
 
         if ($ret) {
-            return HooksAPIFacade::getInstance()->applyFilters('GD_URE_Module_Processor_AuthorSectionTabPanels:panel_headers', $ret, $module);
+            return \PoP\Root\App::getHookManager()->applyFilters('GD_URE_Module_Processor_AuthorSectionTabPanels:panel_headers', $ret, $module);
         }
 
         return parent::getPanelHeaders($module, $props);

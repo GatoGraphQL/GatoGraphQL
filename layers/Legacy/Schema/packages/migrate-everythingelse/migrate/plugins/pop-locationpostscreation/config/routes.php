@@ -16,7 +16,7 @@ if (!defined('POP_LOCATIONPOSTSCREATION_ROUTE_EDITLOCATIONPOST')) {
     define('POP_LOCATIONPOSTSCREATION_ROUTE_EDITLOCATIONPOST', $definitionManager->getUniqueDefinition('edit-locationpost', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

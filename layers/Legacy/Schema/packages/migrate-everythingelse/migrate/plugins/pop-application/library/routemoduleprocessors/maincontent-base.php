@@ -12,7 +12,7 @@ abstract class AbstractMainContentRouteModuleProcessor extends \PoP\ModuleRoutin
 
         // If no group specified, then use the "Content Module" one (initially representing the entry module, and overridable)
         // Is it overridable, so the theme can also set group "Page Section Main Content" in addition
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             '\PoP\Application\AbstractMainContentRouteModuleProcessor:maincontentgroups',
             array(
                 POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE,

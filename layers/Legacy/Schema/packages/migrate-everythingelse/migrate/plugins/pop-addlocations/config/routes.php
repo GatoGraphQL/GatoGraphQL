@@ -10,7 +10,7 @@ if (!defined('POP_ADDLOCATIONS_ROUTE_ADDLOCATION')) {
 	define('POP_ADDLOCATIONS_ROUTE_ADDLOCATION', $definitionManager->getUniqueDefinition('add-location', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

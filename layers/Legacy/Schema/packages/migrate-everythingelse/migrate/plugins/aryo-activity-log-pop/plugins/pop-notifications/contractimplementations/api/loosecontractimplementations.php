@@ -6,7 +6,7 @@ class PoP_AAL_Notifications_LooseContractImplementations
 {
 	public function __construct() {
 		
-		$hooksapi = HooksAPIFacade::getInstance();
+		$hooksapi = \PoP\Root\App::getHookManager();
 
 		// Actions
 		$hooksapi->addAction('AAL_PoP_Hooks', function() use($hooksapi) {

@@ -48,7 +48,7 @@ class PoP_ServiceWorkers_Job
 
         // Path: allow to add the full path to the folder, so we can access them under assets.getpop.org instead of getpop.org (which happens using a relative path)
         // Allow the CDN to be injected by hook
-        $dependencies_path = HooksAPIFacade::getInstance()->applyFilters(
+        $dependencies_path = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ServiceWorkers_Job:dependencies_path',
             POP_SERVICEWORKERS_ASSETDESTINATION_URL.'/'.$dependencies_foldername
         );

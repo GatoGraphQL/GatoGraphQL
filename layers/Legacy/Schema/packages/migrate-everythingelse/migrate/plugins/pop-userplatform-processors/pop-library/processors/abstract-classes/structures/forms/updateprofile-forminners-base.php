@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_UpdateProfileFormInnersBase extends PoP_Modu
         PoP_Module_Processor_CreateUpdateProfileFormsUtils::getFormSubmodules($module, $components, $this);
 
         // Hook for Newsletter
-        $components = HooksAPIFacade::getInstance()->applyFilters('pop_module:updateprofile:components', $components, $module, $this);
+        $components = \PoP\Root\App::getHookManager()->applyFilters('pop_module:updateprofile:components', $components, $module, $this);
         
         return $components;
     }

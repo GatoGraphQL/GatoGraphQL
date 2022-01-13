@@ -17,7 +17,7 @@ class PoP_SocialLogin
     {
 
         // Priority: after PoP Notifications
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888350);
     }
 
     public function init()

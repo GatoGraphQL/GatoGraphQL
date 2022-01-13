@@ -24,13 +24,13 @@ class AAL_PoP
         include_once 'maintenance/load.php';
 
         include_once 'validation.php';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Notifications_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
 
         // Priority: after PoP Notifications
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function getProviderValidationClass($class)
     {

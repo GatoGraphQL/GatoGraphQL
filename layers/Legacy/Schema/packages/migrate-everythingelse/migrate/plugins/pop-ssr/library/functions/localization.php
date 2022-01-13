@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'popSsrJqueryConstants');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'popSsrJqueryConstants');
 function popSsrJqueryConstants($jqueryConstants)
 {
     $jqueryConstants['USESERVERSIDERENDERING'] = !PoP_SSR_ServerUtils::disableServerSideRendering() ? true : '';

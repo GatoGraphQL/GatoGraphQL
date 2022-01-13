@@ -2,7 +2,7 @@
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
 	ModelInstance::HOOK_COMPONENTS_RESULT, 
 	function($components) {
 	    // Add the language

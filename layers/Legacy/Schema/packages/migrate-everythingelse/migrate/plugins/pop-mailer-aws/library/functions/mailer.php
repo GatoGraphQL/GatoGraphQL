@@ -17,7 +17,7 @@ class PoP_Mailer_AWS_Engine
 
         // Send all emails at the end of the PoP execution
         // Send the queue at the end
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:shutdown',
             array($this, 'sendQueue'),
             10000
@@ -57,7 +57,7 @@ class PoP_Mailer_AWS_Engine
         // Upload to S3, where a Lambda function will execute to send the emails through SES
         try {
             $url = $cmsService->getHomeURL();
-            $configuration_default = HooksAPIFacade::getInstance()->applyFilters(
+            $configuration_default = \PoP\Root\App::getHookManager()->applyFilters(
                 'PoP_Mailer_AWS_Engine:uploadToS3:configuration',
                 array(
                     'url' => $url,

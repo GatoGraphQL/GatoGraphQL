@@ -5,13 +5,13 @@ class PoP_ContactUs_Module_Processor_GFFormInnerHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'PoP_Module_Processor_GFFormInners:init-props',
             array($this, 'initModelProps'),
             10,
             3
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_GFFormInners:layouts',
             array($this, 'getLayoutSubmodules'),
             10,

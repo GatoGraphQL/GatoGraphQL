@@ -153,7 +153,7 @@ class PoP_FrontEnd_JSResourceLoaderProcessor extends PoP_JSResourceLoaderProcess
                     [self::class, self::RESOURCE_PAGESECTIONMANAGER],
                 );
 
-                if ($manager_dependencies = HooksAPIFacade::getInstance()->applyFilters(
+                if ($manager_dependencies = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_FrontEnd_ResourceLoaderProcessor:dependencies:manager',
                     $manager_dependencies
                 )

@@ -2,7 +2,7 @@
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels', 'gdSpEmMultilayoutLabels');
+\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:multilayout_labels', 'gdSpEmMultilayoutLabels');
 function gdSpEmMultilayoutLabels($labels)
 {
     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();

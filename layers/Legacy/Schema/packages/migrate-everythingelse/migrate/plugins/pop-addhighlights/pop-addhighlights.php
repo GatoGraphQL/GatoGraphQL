@@ -19,7 +19,7 @@ class PoP_AddHighlights
     public function __construct()
     {
         // Priority: after PoP Add Related Posts
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888370);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888370);
     }
     public function init()
     {

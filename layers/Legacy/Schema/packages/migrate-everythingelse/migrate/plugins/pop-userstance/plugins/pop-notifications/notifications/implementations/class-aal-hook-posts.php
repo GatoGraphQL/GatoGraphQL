@@ -14,11 +14,11 @@ class PoP_UserStance_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'GD_CreateUpdate_Stance:createAdditionals',
             array($this, 'createdStance')
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'GD_CreateUpdate_Stance:updateAdditionals',
             array($this, 'updatedStance'),
             10,

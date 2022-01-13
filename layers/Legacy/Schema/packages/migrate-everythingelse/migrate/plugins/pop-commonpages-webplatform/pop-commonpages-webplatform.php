@@ -20,7 +20,7 @@ class PoP_CommonPagesWebPlatform
     {
 
         // Priority: after ...
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888890);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888890);
     }
 
     public function init()

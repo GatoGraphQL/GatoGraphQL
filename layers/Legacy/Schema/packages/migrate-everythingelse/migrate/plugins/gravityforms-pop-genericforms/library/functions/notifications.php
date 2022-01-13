@@ -8,7 +8,7 @@ define('GD_GF_NOTIFICATION_PROFILES', 'Notification to Profiles');
 define('GD_GF_NOTIFICATION_POSTAUTHORS', 'Notification to Post Owners');
 define('GD_GF_NOTIFICATION_DESTINATIONEMAIL', 'Notification to Destination Email');
 
-HooksAPIFacade::getInstance()->addFilter("gform_notification", "gdGfChangeAutoresponderEmailProfiles", 10, 3);
+\PoP\Root\App::getHookManager()->addFilter("gform_notification", "gdGfChangeAutoresponderEmailProfiles", 10, 3);
 function gdGfChangeAutoresponderEmailProfiles($notification, $form, $entry)
 {
     if ($notification['name'] == GD_GF_NOTIFICATION_PROFILES) {
@@ -27,7 +27,7 @@ function gdGfChangeAutoresponderEmailProfiles($notification, $form, $entry)
     return $notification;
 }
 
-HooksAPIFacade::getInstance()->addFilter("gform_notification", "gdGfChangeAutoresponderEmailPostowners", 10, 3);
+\PoP\Root\App::getHookManager()->addFilter("gform_notification", "gdGfChangeAutoresponderEmailPostowners", 10, 3);
 function gdGfChangeAutoresponderEmailPostowners($notification, $form, $entry)
 {
     if ($notification['name'] == GD_GF_NOTIFICATION_POSTAUTHORS) {
@@ -50,7 +50,7 @@ function gdGfChangeAutoresponderEmailPostowners($notification, $form, $entry)
 
 
 // Add the general layout of the MESYM newsletters to the email
-HooksAPIFacade::getInstance()->addFilter("gform_notification", "gdGfEmailLayout", 10, 3);
+\PoP\Root\App::getHookManager()->addFilter("gform_notification", "gdGfEmailLayout", 10, 3);
 function gdGfEmailLayout($notification, $form, $entry)
 {
     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();

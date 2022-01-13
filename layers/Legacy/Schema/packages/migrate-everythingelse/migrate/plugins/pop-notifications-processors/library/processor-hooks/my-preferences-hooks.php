@@ -5,7 +5,7 @@ class PoP_NotificationsProcessors_MyPreferencesHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_UserMultipleComponents:emaildigests:modules',
             array($this, 'getEmaildigestsForminputgroups')
         );

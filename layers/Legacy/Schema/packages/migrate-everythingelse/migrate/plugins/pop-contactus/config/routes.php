@@ -10,7 +10,7 @@ if (!defined('POP_CONTACTUS_ROUTE_CONTACTUS')) {
 	define('POP_CONTACTUS_ROUTE_CONTACTUS', $definitionManager->getUniqueDefinition('contact-us', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

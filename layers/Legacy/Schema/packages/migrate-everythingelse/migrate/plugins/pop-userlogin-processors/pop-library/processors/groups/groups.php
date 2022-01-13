@@ -40,7 +40,7 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
                     $this->setProp([$submodule], $props, 'show-submenu', true);
 
                     // Allow to set $props for the extra blocks. Eg: WSL setting the loginBlock for setting the disabled layer
-                    $hooks = HooksAPIFacade::getInstance()->applyFilters(
+                    $hooks = \PoP\Root\App::getHookManager()->applyFilters(
                         'PoP_Module_Processor_LoginGroups:props:hooks',
                         array()
                     );

@@ -11,29 +11,29 @@ class WSL_PoPWebPlatform_Validation
     {
         $success = true;
         if (!defined('POP_SOCIALLOGINWEBPLATFORM_VERSION')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'installWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'installWarning'));
             $success = false;
         } elseif (!defined('POP_SOCIALLOGINWEBPLATFORM_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initializeWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (WSLPOPWEBPLATFORM_POP_SOCIALLOGINWEBPLATFORM_MIN_VERSION > POP_SOCIALLOGINWEBPLATFORM_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'versionWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'versionWarning'));
         }
 
         if (!defined('WSL_POP_VERSION')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'install_warning_2'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'install_warning_2'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'install_warning_2'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'install_warning_2'));
             $success = false;
         } elseif (!defined('WSL_POP_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initialize_warning_2'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initialize_warning_2'));
             $success = false;
         } elseif (WSLPOPWEBPLATFORM_WSL_POP_MIN_VERSION > WSL_POP_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'version_warning_2'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'version_warning_2'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'version_warning_2'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'version_warning_2'));
         }
 
         return $success;

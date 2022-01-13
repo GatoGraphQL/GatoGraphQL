@@ -20,7 +20,7 @@ class PoP_ApplicationProcessors
     {
 
         // Priority: new section, after PoP Master Collection Processors section
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888800);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888800);
     }
     public function init()
     {

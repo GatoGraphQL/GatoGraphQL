@@ -2,14 +2,14 @@
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addAction(
+\PoP\Root\App::getHookManager()->addAction(
     'popcms:init', 
     function () {
         // Use the assets url instead of the site url for all the scripts and styles
         $cmsService = CMSServiceFacade::getInstance();
         if (POP_CDNFOUNDATION_CDN_ASSETS_URI && (POP_CDNFOUNDATION_CDN_ASSETS_URI != $cmsService->getSiteURL())) {
-            HooksAPIFacade::getInstance()->addFilter('popcms:styleSrc', 'popCdnfoundationAssetsrc');
-            HooksAPIFacade::getInstance()->addFilter('popcms:scriptSrc', 'popCdnfoundationAssetsrc');
+            \PoP\Root\App::getHookManager()->addFilter('popcms:styleSrc', 'popCdnfoundationAssetsrc');
+            \PoP\Root\App::getHookManager()->addFilter('popcms:scriptSrc', 'popCdnfoundationAssetsrc');
         }
     },
     11000

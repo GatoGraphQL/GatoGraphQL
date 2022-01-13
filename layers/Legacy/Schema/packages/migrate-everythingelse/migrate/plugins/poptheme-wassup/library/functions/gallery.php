@@ -3,7 +3,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 // // Override what sizes can be chosen for the Gallery: this was added using a Change PoP
-// HooksAPIFacade::getInstance()->addFilter('popGalleryimageSizeNamesChoose', 'popGalleryimageSizeNamesChoose');
+// \PoP\Root\App::getHookManager()->addFilter('popGalleryimageSizeNamesChoose', 'popGalleryimageSizeNamesChoose');
 // function popGalleryimageSizeNamesChoose($sizes) {
 
 //     // Remove all other sizes, only keep below 2 which have a perfect fit for a Gallery
@@ -14,7 +14,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 // }
 
 // // Add the thumb-pagewide image size everywhere
-// HooksAPIFacade::getInstance()->addFilter('image_size_names_choose', 'popImageSizeNamesChoose', 1000);
+// \PoP\Root\App::getHookManager()->addFilter('image_size_names_choose', 'popImageSizeNamesChoose', 1000);
 // function popImageSizeNamesChoose($sizes) {
 
 //     $sizes['thumb-pagewide'] = TranslationAPIFacade::getInstance()->__('Wide', 'poptheme-wassup');
@@ -26,7 +26,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 // }
 
 // Override what sizes can be chosen for the Gallery
-HooksAPIFacade::getInstance()->addFilter('image_size_names_choose', 'popImageSizeNamesChoose', 1000);
+\PoP\Root\App::getHookManager()->addFilter('image_size_names_choose', 'popImageSizeNamesChoose', 1000);
 function popImageSizeNamesChoose($sizes)
 {
     if (is_admin()) {
@@ -42,7 +42,7 @@ function popImageSizeNamesChoose($sizes)
         'thumbnail' => TranslationAPIFacade::getInstance()->__('Thumbnail', 'poptheme-wassup'),
     );
 }
-HooksAPIFacade::getInstance()->addFilter('media_view_settings', 'popMediaViewSettingsDefaultthumb');
+\PoP\Root\App::getHookManager()->addFilter('media_view_settings', 'popMediaViewSettingsDefaultthumb');
 function popMediaViewSettingsDefaultthumb($settings)
 {
 
@@ -52,7 +52,7 @@ function popMediaViewSettingsDefaultthumb($settings)
 }
 
 // // Override the default WP Post Gallery (function galleryShortcode( $attr ) in wp-includes/media.php)
-// HooksAPIFacade::getInstance()->addFilter('post_gallery', 'gdPostGallery', 10, 2);
+// \PoP\Root\App::getHookManager()->addFilter('post_gallery', 'gdPostGallery', 10, 2);
 // function gdPostGallery($output, $attr) {
 
 //     // From here onwards, copied from media.php, and made needed customizations
@@ -142,7 +142,7 @@ function popMediaViewSettingsDefaultthumb($settings)
 //     $size_class = sanitize_html_class( $size );
 //     $output = "<div class='gallery gallery-size-{$size_class}'>";
 //     /*
-//     if ( HooksAPIFacade::getInstance()->applyFilters( 'use_default_gallery_style', ! $html5 ) ) {
+//     if ( \PoP\Root\App::getHookManager()->applyFilters( 'use_default_gallery_style', ! $html5 ) ) {
 //         $gallery_style = "
 //         <style type='text/css'>
 //             #{$selector} {
@@ -175,7 +175,7 @@ function popMediaViewSettingsDefaultthumb($settings)
 //      * @param string $gallery_style Default gallery shortcode CSS styles.
 //      * @param string $gallery_div   Opening HTML div container for the gallery shortcode output.
 //      * /
-//     $output = HooksAPIFacade::getInstance()->applyFilters( 'gallery_style', $gallery_style . $gallery_div );
+//     $output = \PoP\Root\App::getHookManager()->applyFilters( 'gallery_style', $gallery_style . $gallery_div );
 //     */
 
 //     $i = 0;

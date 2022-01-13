@@ -23,7 +23,7 @@ class PoP_Wassup_CDN_TemporaryFixHooks
     {
 
         // Temporary fix until coding the cdnthumbprints.js file automatically, to also include the winner module from the RouteModuleProcessor (in this case, RoutingRoutes::$MAIN for the homepage)
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
             array($this, 'getThumbprintPartialpaths'),
             10,

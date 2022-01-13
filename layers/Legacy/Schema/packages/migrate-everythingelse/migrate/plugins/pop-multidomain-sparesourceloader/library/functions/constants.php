@@ -10,7 +10,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 // (eg: wp-content/pop-content/mesym/...)
 // A unifying solution must be found using the discoverability features, through which a website can broadcast all its information, including,
 // in this case, the location of its config file
-// HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsMultidomainCodesplitting');
+// \PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdJqueryConstantsMultidomainCodesplitting');
 // function gdJqueryConstantsMultidomainCodesplitting($jqueryConstants) {
 
 //     // Add the placeholder to retrieve the resourceloader-config.js file from external websites

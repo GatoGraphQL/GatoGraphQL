@@ -20,7 +20,7 @@ class PoP_AddLocations
     {
 
         // Priority: after PoP Locations, but before EM PoP Locations
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888349);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888349);
     }
     public function init()
     {

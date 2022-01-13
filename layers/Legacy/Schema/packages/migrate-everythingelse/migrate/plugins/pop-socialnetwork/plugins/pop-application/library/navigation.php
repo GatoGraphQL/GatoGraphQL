@@ -5,7 +5,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 /**
  * navigation.php
  */
-HooksAPIFacade::getInstance()->addFilter('route:icon', 'popSocialnetworkRouteIcon', 10, 3);
+\PoP\Root\App::getHookManager()->addFilter('route:icon', 'popSocialnetworkRouteIcon', 10, 3);
 function popSocialnetworkRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -17,7 +17,7 @@ function popSocialnetworkRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-HooksAPIFacade::getInstance()->addFilter('route:title', 'popSocialnetworkNavigationRouteTitle', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('route:title', 'popSocialnetworkNavigationRouteTitle', 10, 2);
 function popSocialnetworkNavigationRouteTitle($title, $route)
 {
     $titles = [

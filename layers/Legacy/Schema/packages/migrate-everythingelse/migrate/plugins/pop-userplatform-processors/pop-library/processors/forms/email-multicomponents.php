@@ -25,7 +25,7 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
                 $ret[] = [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::MODULE_CODE_EMAILNOTIFICATIONS_LABEL];
                 $ret[] = [self::class, self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL];
                 // Allow PoP Social Network to hook in its modules
-                if ($forminputs = HooksAPIFacade::getInstance()->applyFilters(
+                if ($forminputs = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_UserMultipleComponents:emailnotifications:modules',
                     array()
                 )) {
@@ -49,7 +49,7 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
                 );
 
                 // Allow PoP Social Network to hook in its modules
-                $forminputs = HooksAPIFacade::getInstance()->applyFilters(
+                $forminputs = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_UserMultipleComponents:emaildigests:modules',
                     $forminputs
                 );

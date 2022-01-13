@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:userloggedin_loadingmsg_target', 'gdCustomUserloggedinLoadingmsgTarget');
+\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:userloggedin_loadingmsg_target', 'gdCustomUserloggedinLoadingmsgTarget');
 function gdCustomUserloggedinLoadingmsgTarget($target)
 {
 
@@ -14,10 +14,10 @@ function gdCustomUserloggedinLoadingmsgTarget($target)
  * Uniqueblocks
  */
 
-HooksAPIFacade::getInstance()->addFilter('RequestUtils:getFramecomponentModules', 'getWassupFramecomponentModules');
+\PoP\Root\App::getHookManager()->addFilter('RequestUtils:getFramecomponentModules', 'getWassupFramecomponentModules');
 function getWassupFramecomponentModules($modules)
 {
-    if (HooksAPIFacade::getInstance()->applyFilters('poptheme_wassup_loadlatest', true)) {
+    if (\PoP\Root\App::getHookManager()->applyFilters('poptheme_wassup_loadlatest', true)) {
         $modules[] = [GD_Core_Module_Processor_Blocks::class, GD_Core_Module_Processor_Blocks::MODULE_MULTIPLE_LATESTCOUNTS];
     }
 
@@ -25,7 +25,7 @@ function getWassupFramecomponentModules($modules)
 }
 
 
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:fetchtarget_settings', 'gdCustomFetchtargetSettings');
+\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:fetchtarget_settings', 'gdCustomFetchtargetSettings');
 function gdCustomFetchtargetSettings($fetchtarget_settings)
 {
     return array_merge(
@@ -49,7 +49,7 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
     );
 }
 
-// HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_MenuMultiplesBase:js-setting:add-active-parent-item', 'popAddMenuitemParentpageActive', 10, 3);
+// \PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_MenuMultiplesBase:js-setting:add-active-parent-item', 'popAddMenuitemParentpageActive', 10, 3);
 // function popAddMenuitemParentpageActive($add_active, array $module, array &$props) {
 
 //     // Only if not in Side or Top pageSections
@@ -66,7 +66,7 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
 //     return $add_active;
 // }
 
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:fetchpagesection_settings', 'gdCustomFetchpagesectionSettings');
+\PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:fetchpagesection_settings', 'gdCustomFetchpagesectionSettings');
 function gdCustomFetchpagesectionSettings($fetchpagesection_settings)
 {
     $settings_main = array(
@@ -107,7 +107,7 @@ function gdCustomFetchpagesectionSettings($fetchpagesection_settings)
 /**
  * Targets
  */
-HooksAPIFacade::getInstance()->addFilter('ApplicationState:targets', 'getCustomTargets');
+\PoP\Root\App::getHookManager()->addFilter('ApplicationState:targets', 'getCustomTargets');
 function getCustomTargets($targets)
 {
     return array_merge(

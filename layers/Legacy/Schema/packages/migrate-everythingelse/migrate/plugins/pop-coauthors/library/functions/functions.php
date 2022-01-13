@@ -6,7 +6,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 /**
  * Override function to get the authors of a post
  */
-HooksAPIFacade::getInstance()->addFilter('gdGetPostauthors', 'gdGdGetPostauthors', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('gdGetPostauthors', 'gdGdGetPostauthors', 10, 2);
 function gdGdGetPostauthors($authors, $post_id)
 {
     $pluginapi = PoP_Coauthors_APIFactory::getInstance();

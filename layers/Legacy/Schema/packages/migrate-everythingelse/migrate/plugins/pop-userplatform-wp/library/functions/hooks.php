@@ -6,7 +6,7 @@ class PoP_UserPlatformWP_WP_Hooks
     public function __construct()
     {
 
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'gd_createupdate_user:additionalsUpdate',
             array($this, 'resetCurrentUser'),
             10,

@@ -21,7 +21,7 @@ class PoPHTMLCSSPlatform
     {
 
         // Priority: new section, after PoP Application section
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'plugins_loaded',
             function() {
                 if ($this->validate()) {
@@ -30,7 +30,7 @@ class PoPHTMLCSSPlatform
             },
             392
         );
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888396);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888396);
     }
     public function init()
     {

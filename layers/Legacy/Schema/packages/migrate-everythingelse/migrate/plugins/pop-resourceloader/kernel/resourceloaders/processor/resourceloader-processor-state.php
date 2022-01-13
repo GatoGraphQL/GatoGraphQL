@@ -14,7 +14,7 @@ class PoP_ResourceLoaderProcessorState {
         $this->bundle_ids = $this->bundle_counter = $this->bundlegroup_ids = $this->bundlegroup_counter = $this->key_ids = $this->key_counter = $this->bundle_versions = $this->bundlegroup_versions = array();
 
         // If the state changes, save it at the end of the execution
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:shutdown',
             array($this, 'maybeSaveEntries')
         );
@@ -32,7 +32,7 @@ class PoP_ResourceLoaderProcessorState {
         $this->init();
 
         // Allow to delete the entries (or not!) for pop-cluster-resourceloader
-        HooksAPIFacade::getInstance()->doAction('PoP_ResourceLoaderProcessorUtils:deleteEntries');
+        \PoP\Root\App::getHookManager()->doAction('PoP_ResourceLoaderProcessorUtils:deleteEntries');
     }
 
     function saveEntries() {
@@ -42,7 +42,7 @@ class PoP_ResourceLoaderProcessorState {
         $pop_resourceloader_mappingstoragemanager->save($this->bundle_ids, $this->bundlegroup_ids, $this->key_ids, $this->bundle_versions, $this->bundlegroup_versions);
 
         // Allow to save the entries for pop-cluster-resourceloader
-        HooksAPIFacade::getInstance()->doAction('PoP_ResourceLoaderProcessorUtils:saveEntries');
+        \PoP\Root\App::getHookManager()->doAction('PoP_ResourceLoaderProcessorUtils:saveEntries');
     }
 
     function maybeSaveEntries() {

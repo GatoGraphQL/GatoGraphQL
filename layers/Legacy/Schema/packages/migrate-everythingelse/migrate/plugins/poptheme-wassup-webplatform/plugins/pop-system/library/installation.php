@@ -6,7 +6,7 @@ class PoPTheme_WassupWebPlatform_Installation
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this, 'systemGenerate'));
+        \PoP\Root\App::getHookManager()->addAction('PoP:system-generate', array($this, 'systemGenerate'));
     }
 
     public function systemGenerate()

@@ -15,7 +15,7 @@ class PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             '\PoP\ComponentModel\Engine:session-meta',
             array($this, 'getSessionMeta')
         );
@@ -37,7 +37,7 @@ class PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks
             }
             
             // Allow PoP Application User Avatar to add the user avatar
-            $meta[GD_DATALOAD_USER] = HooksAPIFacade::getInstance()->applyFilters(
+            $meta[GD_DATALOAD_USER] = \PoP\Root\App::getHookManager()->applyFilters(
                 'PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks:user-feedback',
                 array(
                     GD_DATALOAD_USER_LOGGEDIN => $user_logged_in,

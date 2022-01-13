@@ -105,6 +105,6 @@ register_activation_hook(AAL_POP_LOG_BASE, array( 'AAL_PoP_Maintenance', 'activa
 // register_uninstall_hook( AAL_POP_LOG_BASE, array( 'AAL_PoP_Maintenance', 'uninstall' ) );
 
 // // MU installer for new blog.
-// HooksAPIFacade::getInstance()->addAction( 'wpmu_new_blog', array( 'AAL_PoP_Maintenance', 'muNewBlogInstaller' ), 10, 6 );
+// \PoP\Root\App::getHookManager()->addAction( 'wpmu_new_blog', array( 'AAL_PoP_Maintenance', 'muNewBlogInstaller' ), 10, 6 );
 // // MU Uninstall for delete blog.
-// HooksAPIFacade::getInstance()->addAction( 'delete_blog', array( 'AAL_PoP_Maintenance', 'muDeleteBlog' ), 10, 2 );
+// \PoP\Root\App::getHookManager()->addAction( 'delete_blog', array( 'AAL_PoP_Maintenance', 'muDeleteBlog' ), 10, 2 );

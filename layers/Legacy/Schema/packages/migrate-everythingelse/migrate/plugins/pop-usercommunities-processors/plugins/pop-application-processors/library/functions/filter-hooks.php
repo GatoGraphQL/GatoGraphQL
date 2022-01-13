@@ -5,7 +5,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /**
  * Add the filtercomponents to all filters
  */
-HooksAPIFacade::getInstance()->addFilter('Users:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesUser', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('Users:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesUser', 10, 2);
 function gdUreAddFiltercomponentCommunitiesUser($filterinputs, array $module)
 {
     if (in_array($module, [
@@ -28,7 +28,7 @@ function gdUreAddFiltercomponentCommunitiesUser($filterinputs, array $module)
     }
     return $filterinputs;
 }
-HooksAPIFacade::getInstance()->addFilter('SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponentCommunitiesUser', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponentCommunitiesUser', 10, 2);
 function gdUreAddSimpleFiltercomponentCommunitiesUser($filterinputs, array $module)
 {
     if (in_array($module, [
@@ -52,7 +52,7 @@ function gdUreAddSimpleFiltercomponentCommunitiesUser($filterinputs, array $modu
     return $filterinputs;
 }
 
-HooksAPIFacade::getInstance()->addFilter('FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesPost');
+\PoP\Root\App::getHookManager()->addFilter('FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesPost');
 function gdUreAddFiltercomponentCommunitiesPost($filterinputs)
 {
     // Place the 'communities' component before the 'profiles' one, so that we can use {{lastGeneratedId}} to reference it
@@ -92,7 +92,7 @@ function gdUreAddFiltercomponentCommunitiesPost($filterinputs)
 }
 
 // Add the author users filtercomponent on the Community author page
-HooksAPIFacade::getInstance()->addFilter('Blog:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunityusers', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('Blog:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunityusers', 10, 2);
 function gdUreAddFiltercomponentCommunityusers($filterinputs, array $module)
 {
     if (in_array($module, [
@@ -120,7 +120,7 @@ function gdUreAddFiltercomponentCommunityusers($filterinputs, array $module)
     }
     return $filterinputs;
 }
-HooksAPIFacade::getInstance()->addFilter('SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponentCommunityusers', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponentCommunityusers', 10, 2);
 function gdUreAddSimpleFiltercomponentCommunityusers($filterinputs, array $module)
 {
     if (in_array($module, [

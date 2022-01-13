@@ -7,7 +7,7 @@ class PoP_Events_Events_LatestCounts_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'latestcounts:allcontent:classes',
             array($this, 'getAllcontentClasses')
         );

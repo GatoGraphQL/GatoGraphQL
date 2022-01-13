@@ -2,7 +2,7 @@
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\ModuleRouting\ModuleRoutingGroups;
 
-HooksAPIFacade::getInstance()->addAction(
+\PoP\Root\App::getHookManager()->addAction(
     'popcms:init', 
     'popEngineDefinePagemodulegroupContentModule'
 );

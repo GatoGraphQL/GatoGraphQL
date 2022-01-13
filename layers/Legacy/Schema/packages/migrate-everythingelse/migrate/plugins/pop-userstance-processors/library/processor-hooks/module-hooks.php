@@ -7,7 +7,7 @@ class PoPTheme_UserStance_ModuleHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_MainGroups:modules:single',
             array($this, 'getSingleSubmodules')
         );
@@ -21,7 +21,7 @@ class PoPTheme_UserStance_ModuleHooks
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $add = in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
-        $add = HooksAPIFacade::getInstance()->applyFilters(
+        $add = \PoP\Root\App::getHookManager()->applyFilters(
             'PoPTheme_UserStance_ModuleHooks:single-block:add-createorupdate-vote',
             $add,
             $post_id

@@ -7,7 +7,7 @@ class CMSLooseContractImplementations
 {
 	public function __construct() {
 		
-		$hooksapi = HooksAPIFacade::getInstance();
+		$hooksapi = \PoP\Root\App::getHookManager();
 
 		// Actions
 		$hooksapi->addAction('publish_to_draft', function($post) use($hooksapi) {

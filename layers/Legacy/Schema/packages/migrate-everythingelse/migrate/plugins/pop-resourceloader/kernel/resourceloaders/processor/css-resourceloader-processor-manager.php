@@ -11,7 +11,7 @@ class PoP_CSSResourceLoaderProcessorManager {
 
 		$this->inline_resources = array();
 
-		HooksAPIFacade::getInstance()->addAction('popcms:head', array($this, 'printStyles'));
+		\PoP\Root\App::getHookManager()->addAction('popcms:head', array($this, 'printStyles'));
 	}
 
 	function printStyle(array $resource) {

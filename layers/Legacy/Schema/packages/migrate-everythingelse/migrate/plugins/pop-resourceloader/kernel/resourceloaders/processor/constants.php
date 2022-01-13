@@ -11,7 +11,7 @@ const POP_RESOURCELOADER_LOADINGTYPE_IMMEDIATE = 'immediate';
 const POP_RESOURCELOADER_LOADINGTYPE_ASYNC = 'async';
 const POP_RESOURCELOADER_LOADINGTYPE_DEFER = 'defer';
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'popWebPlatformResourceloaderJqueryConstants');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'popWebPlatformResourceloaderJqueryConstants');
 function popWebPlatformResourceloaderJqueryConstants($jqueryConstants) {
 
 	if (PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {

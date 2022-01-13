@@ -39,7 +39,7 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
         }
 
         // Hook for User Avatar
-        $components = HooksAPIFacade::getInstance()->applyFilters('pop_module:createuser:components', $components, $module, $this);
+        $components = \PoP\Root\App::getHookManager()->applyFilters('pop_module:createuser:components', $components, $module, $this);
 
         return $components;
     }
@@ -63,7 +63,7 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
             }
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'pop_module:createuser:mandatory-components',
             $mandatory,
             $module

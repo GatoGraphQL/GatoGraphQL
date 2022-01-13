@@ -18,7 +18,7 @@ class PoP_MultiDomain_ResourceLoader_FileReproduction_Config extends PoP_MultiDo
         $configuration = parent::getConfiguration();
 
         // Domain
-        $configuration['$resourceLoaderSources'] = HooksAPIFacade::getInstance()->applyFilters(
+        $configuration['$resourceLoaderSources'] = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_MultiDomain_ResourceLoader_FileReproduction_Config:resourceloader-config:sources',
             array()
         );

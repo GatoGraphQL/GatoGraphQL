@@ -13,11 +13,11 @@ class GD_FormInput_ContentSections extends MultipleSelectFormInput
         // To print it in the forminput, it must be transformed to a list with this format:
         // array('taxonomy|term')
         $formatted = array();
-        $section_taxonomyterms = HooksAPIFacade::getInstance()->applyFilters('wassup_section_taxonomyterms', array());
+        $section_taxonomyterms = \PoP\Root\App::getHookManager()->applyFilters('wassup_section_taxonomyterms', array());
         foreach ($section_taxonomyterms as $taxonomy => $terms) {
             foreach ($terms as $term) {
                 $item = $taxonomy.'|'.$term;
-                $formatted[$item] = HooksAPIFacade::getInstance()->applyFilters('GD_FormInput_ContentSections:taxonomyterms:name', $item, $taxonomy, $term);
+                $formatted[$item] = \PoP\Root\App::getHookManager()->applyFilters('GD_FormInput_ContentSections:taxonomyterms:name', $item, $taxonomy, $term);
             }
         }
 

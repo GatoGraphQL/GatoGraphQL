@@ -8,7 +8,7 @@ class PoP_AddComments_Notifications_NotificationHooks
     {
 
         // Hook into the API: Where statements
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Notifications_API:sql:wheres',
             array($this, 'getWhereStatements'),
             10,
@@ -16,14 +16,14 @@ class PoP_AddComments_Notifications_NotificationHooks
         );
 
         // Hook into the API: Set Status for multiple notifications
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Notifications_API:multiple-status:objectids-sql',
             array($this, 'getStatusMultipleNotificationsWhereStatements'),
             10,
             2
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'AAL_PoP_API:notifications:useractivityposts:object_id_unions',
             array($this, 'getUseractivitypostsObjectIdUnions'),
             10,
@@ -44,7 +44,7 @@ class PoP_AddComments_Notifications_NotificationHooks
                 $wpdb->comments
             ),
         );
-        $useractivityposts_comment_id_ors = HooksAPIFacade::getInstance()->applyFilters(
+        $useractivityposts_comment_id_ors = \PoP\Root\App::getHookManager()->applyFilters(
             'AAL_PoP_API:notifications:useractivityposts:comment_id_ors',
             $useractivityposts_comment_id_ors,
             $user_id
@@ -89,7 +89,7 @@ class PoP_AddComments_Notifications_NotificationHooks
         if ($notification->object_type == "Comments") {
             // Comments: since the URL to them is their post, so many comments on the same post can all be marked as read
             // Allow to override all actions
-            $comment_actions = HooksAPIFacade::getInstance()->applyFilters(
+            $comment_actions = \PoP\Root\App::getHookManager()->applyFilters(
                 'AAL_PoP_API:additional_notifications:markasread:comments:actions',
                 array(
                     AAL_POP_ACTION_COMMENT_ADDED,
@@ -178,7 +178,7 @@ class PoP_AddComments_Notifications_NotificationHooks
             );
         }
         // Allow plugins to add more conditions
-        $select_from_comment_post_id_unions = HooksAPIFacade::getInstance()->applyFilters(
+        $select_from_comment_post_id_unions = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_AddComments_Notifications_NotificationHooks:select_from_comment_post_id:unions',
             $select_from_comment_post_id_unions,
             $user_id
@@ -211,7 +211,7 @@ class PoP_AddComments_Notifications_NotificationHooks
                 $wpdb->comments
             );
         }
-        $select_from_comment_id_ors = HooksAPIFacade::getInstance()->applyFilters(
+        $select_from_comment_id_ors = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_AddComments_Notifications_NotificationHooks:select_from_comment_id:ors',
             $select_from_comment_id_ors,
             $user_id
@@ -235,7 +235,7 @@ class PoP_AddComments_Notifications_NotificationHooks
                 '('.implode(') OR (', $select_from_comment_id_ors).')'
             )
         );
-        $useractivitycomments_object_id_unions = HooksAPIFacade::getInstance()->applyFilters(
+        $useractivitycomments_object_id_unions = \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_AddComments_Notifications_NotificationHooks:object_id:unions',
             $useractivitycomments_object_id_unions,
             $user_id
@@ -284,7 +284,7 @@ class PoP_AddComments_Notifications_NotificationHooks
         // Notify the user when:
         // - Someone from the network comments,
         // - Anyone comments in a post the user has activity in
-        $usercommentsplusnetwork_notification_actions = HooksAPIFacade::getInstance()->applyFilters(
+        $usercommentsplusnetwork_notification_actions = \PoP\Root\App::getHookManager()->applyFilters(
             'AAL_PoP_API:notifications:usercommentsplusnetwork:actions',
             array(
                 AAL_POP_ACTION_COMMENT_ADDED,
@@ -338,7 +338,7 @@ class PoP_AddComments_Notifications_NotificationHooks
         // Admin Notifications:
         // Notify the user when:
         // - The admin marked the user's comment as spam
-        $admin_notification_commentactions = HooksAPIFacade::getInstance()->applyFilters(
+        $admin_notification_commentactions = \PoP\Root\App::getHookManager()->applyFilters(
             'AAL_PoP_API:notifications:admin:comment:actions',
             array(
                 AAL_POP_ACTION_COMMENT_SPAMMEDCOMMENT,

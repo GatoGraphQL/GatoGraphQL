@@ -16,7 +16,7 @@ if (!defined('POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK')) {
     define('POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK', $definitionManager->getUniqueDefinition('edit-postlink', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

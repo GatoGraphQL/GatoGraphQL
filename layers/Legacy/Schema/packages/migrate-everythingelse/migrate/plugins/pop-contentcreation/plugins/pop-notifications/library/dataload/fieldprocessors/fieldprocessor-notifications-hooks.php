@@ -160,7 +160,7 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
                         }
 
                         // Allow PoP Social Network to make the message more precise
-                        $message = HooksAPIFacade::getInstance()->applyFilters(
+                        $message = \PoP\Root\App::getHookManager()->applyFilters(
                             'PoP_ContentCreation_DataLoad_TypeResolver_Notifications_Hook:post-created:message',
                             $message,
                             $notification

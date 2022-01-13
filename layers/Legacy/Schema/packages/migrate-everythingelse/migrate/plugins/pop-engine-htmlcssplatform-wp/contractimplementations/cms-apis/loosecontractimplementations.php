@@ -7,7 +7,7 @@ class HTMLCSSPlatformCMSLooseContractImplementations
 {
 	public function __construct() {
 		
-		$hooksapi = HooksAPIFacade::getInstance();
+		$hooksapi = \PoP\Root\App::getHookManager();
 
 		// Actions
 		$hooksapi->addAction('wp_footer', function() use($hooksapi) {

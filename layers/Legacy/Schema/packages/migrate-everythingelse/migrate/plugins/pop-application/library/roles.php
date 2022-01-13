@@ -3,10 +3,10 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 function gdRoles()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdRoles', array());
+    return \PoP\Root\App::getHookManager()->applyFilters('gdRoles', array());
 }
 
 function getUserRoleCombinations()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('getUserRoleCombinations', array());
+    return \PoP\Root\App::getHookManager()->applyFilters('getUserRoleCombinations', array());
 }

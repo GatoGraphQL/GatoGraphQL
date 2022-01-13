@@ -4,7 +4,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 require_once 'routes.php';
 
 // Allow TPPDebate AR to translate the post_type to Spanish
-HooksAPIFacade::getInstance()->addAction(
+\PoP\Root\App::getHookManager()->addAction(
     'popcms:init', 
     function() {
 	    include_once 'config.php';

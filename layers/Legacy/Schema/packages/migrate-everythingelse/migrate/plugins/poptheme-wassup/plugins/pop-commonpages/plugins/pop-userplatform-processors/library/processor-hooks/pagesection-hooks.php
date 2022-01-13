@@ -6,7 +6,7 @@ class PoPTheme_Wassup_CommonPages_UserPlatform_PageSectionHooks
 {
     public function __construct()
     {
-        // HooksAPIFacade::getInstance()->addFilter(
+        // \PoP\Root\App::getHookManager()->addFilter(
         //     'PoP_Module_Processor_CustomModalPageSections:getHeaderTitles:modals',
         //     array($this, 'modalHeaderTitles')
         // );

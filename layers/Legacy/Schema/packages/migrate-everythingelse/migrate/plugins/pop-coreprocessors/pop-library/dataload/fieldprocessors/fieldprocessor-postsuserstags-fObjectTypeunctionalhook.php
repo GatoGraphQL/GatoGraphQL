@@ -76,5 +76,5 @@ class GD_DataLoad_FunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
 
 // Static Initialization: Attach
 $translationAPI = TranslationAPIFacade::getInstance();
-$hooksAPI = HooksAPIFacade::getInstance();
+$hooksAPI = \PoP\Root\App::getHookManager();
 (new GD_DataLoad_FunctionalObjectTypeFieldResolver($translationAPI, $hooksAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

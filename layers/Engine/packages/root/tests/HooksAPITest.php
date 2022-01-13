@@ -14,7 +14,7 @@ class HooksAPITest extends AbstractTestCase
      */
     public function testApplyFilters(): void
     {
-        $hooksapi = HooksAPIFacade::getInstance();
+        $hooksapi = \PoP\Root\App::getHookManager();
         $this->assertEquals(
             'bar',
             $hooksapi->applyFilters('foo', 'bar')

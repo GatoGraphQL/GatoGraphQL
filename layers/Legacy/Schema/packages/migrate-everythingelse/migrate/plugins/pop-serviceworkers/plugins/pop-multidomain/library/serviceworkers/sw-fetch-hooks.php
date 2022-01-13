@@ -5,12 +5,12 @@ class PoP_ServiceWorkers_MultiDomain_Job_Fetch_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ServiceWorkers_Job_Fetch:multidomains',
             array($this, 'getMultidomains')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ServiceWorkers_Job_Fetch:multidomain-locales',
             array($this, 'getMultidomainLocales')
         );

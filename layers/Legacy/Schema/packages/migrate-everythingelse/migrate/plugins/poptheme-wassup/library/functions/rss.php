@@ -13,7 +13,7 @@ define('GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST', 'dailypost-digest');
 
 function popGetRssPostlistCampaigns()
 {
-    return HooksAPIFacade::getInstance()->applyFilters(
+    return \PoP\Root\App::getHookManager()->applyFilters(
         'popGetRssPostlistCampaigns',
         array(
             GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST,
@@ -21,7 +21,7 @@ function popGetRssPostlistCampaigns()
     );
 }
 
-HooksAPIFacade::getInstance()->addFilter('pre_get_posts', 'popthemeWassupRssFilter');
+\PoP\Root\App::getHookManager()->addFilter('pre_get_posts', 'popthemeWassupRssFilter');
 function popthemeWassupRssFilter($query)
 {
     if ($query->is_feed) {
@@ -40,11 +40,11 @@ function popthemeWassupRssFilter($query)
 /**
  * Add the author link around the name when invoking 'the author' hook
  */
-HooksAPIFacade::getInstance()->addAction('rss2_ns', 'gdRssAuthorAddlink');
+\PoP\Root\App::getHookManager()->addAction('rss2_ns', 'gdRssAuthorAddlink');
 function gdRssAuthorAddlink()
 {
     if (is_feed()) {
-        HooksAPIFacade::getInstance()->addFilter('the_author', 'gdRssAuthor');
+        \PoP\Root\App::getHookManager()->addFilter('the_author', 'gdRssAuthor');
     }
 }
 function gdRssAuthor($output)
@@ -75,13 +75,13 @@ function gdRssAuthor($output)
 
 function gdRssGetAuthorAnchorStyle()
 {
-    return HooksAPIFacade::getInstance()->applyFilters(
+    return \PoP\Root\App::getHookManager()->applyFilters(
         'poptheme_wassup_rss:anchor_style',
         'word-wrap:break-word;color:#7a7a7b;font-weight:normal;text-decoration:underline;'
     );
 }
 
-HooksAPIFacade::getInstance()->addFilter('gdRssPrintFeaturedImage:img_attr', 'gdCustomRssFeaturedimageSize');
+\PoP\Root\App::getHookManager()->addFilter('gdRssPrintFeaturedImage:img_attr', 'gdCustomRssFeaturedimageSize');
 function gdCustomRssFeaturedimageSize($img_attr)
 {
 
@@ -92,7 +92,7 @@ function gdCustomRssFeaturedimageSize($img_attr)
     // );
     // if (in_array($_REQUEST[GD_URLPARAM_RSSCAMPAIGN], $campaigns)) {
     if (in_array($_REQUEST[GD_URLPARAM_RSSCAMPAIGN] ?? null, popGetRssPostlistCampaigns())) {
-        $thumb_width = HooksAPIFacade::getInstance()->applyFilters(
+        $thumb_width = \PoP\Root\App::getHookManager()->applyFilters(
             'poptheme_wassup_rss:thumb_width',
             132
         );

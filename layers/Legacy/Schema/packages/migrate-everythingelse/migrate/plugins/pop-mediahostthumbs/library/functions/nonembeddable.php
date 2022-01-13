@@ -5,7 +5,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
  * Thumbs for the Links depending on their domain
  */
 
-HooksAPIFacade::getInstance()->addFilter('PoP_MediaHostThumbs_Utils:nonembeddable-hosts', 'wassupNonembeddablehosts');
+\PoP\Root\App::getHookManager()->addFilter('PoP_MediaHostThumbs_Utils:nonembeddable-hosts', 'wassupNonembeddablehosts');
 function wassupNonembeddablehosts($nonembeddable)
 {
     return array_merge(

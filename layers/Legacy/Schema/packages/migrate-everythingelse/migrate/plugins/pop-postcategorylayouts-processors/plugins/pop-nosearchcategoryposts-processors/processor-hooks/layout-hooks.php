@@ -5,7 +5,7 @@ class PoP_NoSearchPostCategoryLayouts_CategoryPosts_LayoutHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners:layout',
             array($this, 'getCategoryLayout'),
             10,

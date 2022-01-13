@@ -19,17 +19,17 @@ class RequestUtils
         $domain_id = str_replace('.', '-', removeScheme($domain));
 
         // Allow to override the domainId, to unify DEV and PROD domains
-        return HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:domain_id', $domain_id, $domain);
+        return \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:domain_id', $domain_id, $domain);
     }
 
     public static function isSearchEngine()
     {
-        return HooksAPIFacade::getInstance()->applyFilters('RequestUtils:isSearchEngine', false);
+        return \PoP\Root\App::getHookManager()->applyFilters('RequestUtils:isSearchEngine', false);
     }
 
     public static function getFramecomponentModules()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'RequestUtils:getFramecomponentModules',
             array()
         );

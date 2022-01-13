@@ -10,7 +10,7 @@ if (!defined('POP_SYSTEM_ROUTE_SYSTEM_SAVEDEFINITIONFILE')) {
 	define('POP_SYSTEM_ROUTE_SYSTEM_SAVEDEFINITIONFILE', $definitionManager->getUniqueDefinition('system/savedefinitionfile', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

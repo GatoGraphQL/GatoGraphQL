@@ -5,7 +5,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 // Load Plugin-specific Libraries
 //-------------------------------------------------------------------------------------
 
-HooksAPIFacade::getInstance()->addFilter('pop_sw_main_pagesection_container_ids', 'popthemeWassupSwMainPagesectionContainerIds');
+\PoP\Root\App::getHookManager()->addFilter('pop_sw_main_pagesection_container_ids', 'popthemeWassupSwMainPagesectionContainerIds');
 function popthemeWassupSwMainPagesectionContainerIds($pagesection_container_ids)
 {
 

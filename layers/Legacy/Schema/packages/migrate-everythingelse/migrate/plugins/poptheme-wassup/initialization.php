@@ -25,7 +25,7 @@ class PoPTheme_Wassup_Initialization
          * Load the plugins' libraries
          */
         // Execute after everything else, so that the other plugins have loaded
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'plugins_loaded',
             function () {
                 include_once 'plugins/load.php';
@@ -41,10 +41,10 @@ class PoPTheme_Wassup_Initialization
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
             if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-                HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'optimizeScripts'), 0);
+                \PoP\Root\App::getHookManager()->addAction('popcms:enqueueScripts', array($this, 'optimizeScripts'), 0);
 
                 // Priority 0: print "style.css" immediately, so it starts rendering and applying these styles before anything else
-                HooksAPIFacade::getInstance()->addAction('popcms:printStyles', array($this, 'registerStyles'), 0);
+                \PoP\Root\App::getHookManager()->addAction('popcms:printStyles', array($this, 'registerStyles'), 0);
             }
         }
     }

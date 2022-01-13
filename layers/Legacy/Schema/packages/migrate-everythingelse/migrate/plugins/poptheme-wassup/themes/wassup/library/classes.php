@@ -2,7 +2,7 @@
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter("gdClassesBody", 'gdWassupThemeBodyClass');
+\PoP\Root\App::getHookManager()->addFilter("gdClassesBody", 'gdWassupThemeBodyClass');
 function gdWassupThemeBodyClass($body_classes)
 {
     if (\PoP\Root\App::getState('theme') == GD_THEME_WASSUP) {

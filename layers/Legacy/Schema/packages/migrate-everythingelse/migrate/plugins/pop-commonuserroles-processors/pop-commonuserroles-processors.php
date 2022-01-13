@@ -20,7 +20,7 @@ class PoP_CommonUserRolesProcessors
     {
 
         // Priority: after PoP User Communities Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888880);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888880);
     }
     public function init()
     {

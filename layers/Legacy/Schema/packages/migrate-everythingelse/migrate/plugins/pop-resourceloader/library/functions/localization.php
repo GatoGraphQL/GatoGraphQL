@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'popResourceloaderJqueryConstants');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'popResourceloaderJqueryConstants');
 function popResourceloaderJqueryConstants($jqueryConstants)
 {
     $jqueryConstants['SEPARATOR_RESOURCELOADER'] = GD_SEPARATOR_RESOURCELOADER;

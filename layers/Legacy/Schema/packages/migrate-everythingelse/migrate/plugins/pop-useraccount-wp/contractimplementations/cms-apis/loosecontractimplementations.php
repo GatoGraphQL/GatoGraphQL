@@ -50,6 +50,6 @@ class CMSLooseContractImplementations extends AbstractLooseContractResolutionSet
 new CMSLooseContractImplementations(
 	LooseContractManagerFacade::getInstance(),
 	NameResolverFacade::getInstance(),
-	HooksAPIFacade::getInstance()
+	\PoP\Root\App::getHookManager()
 );
 

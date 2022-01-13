@@ -3,7 +3,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // If we are on the external page, add a canonical link to the aggregated page
-HooksAPIFacade::getInstance()->addAction('popcms:head', 'popMultidomainHeaders');
+\PoP\Root\App::getHookManager()->addAction('popcms:head', 'popMultidomainHeaders');
 function popMultidomainHeaders()
 {
     

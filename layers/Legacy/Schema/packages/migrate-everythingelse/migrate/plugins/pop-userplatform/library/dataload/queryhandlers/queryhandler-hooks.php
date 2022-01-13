@@ -8,7 +8,7 @@ class PoP_UserPlatform_UserStance_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks:user-feedback',
             array($this, 'getUserFeedback')
         );

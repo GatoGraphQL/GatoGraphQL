@@ -5,7 +5,7 @@ class PoP_ServiceWorkers_ResourceLoader_MultiDomain_RemoveResources
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ServiceWorkers_WebPlatform_ResourceLoader_ScriptsAndStylesRegistration:registerScripts',
             array($this, 'modifyResources')
         );

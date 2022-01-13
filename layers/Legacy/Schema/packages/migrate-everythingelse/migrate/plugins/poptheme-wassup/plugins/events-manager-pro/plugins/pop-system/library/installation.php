@@ -8,7 +8,7 @@ class PoPTheme_Wassup_EM_Installation
     {
 
         // Add Events Manager Pro Bank Transfer Gateway options
-        HooksAPIFacade::getInstance()->addAction('PoP:system-build', 'addOptions');
+        \PoP\Root\App::getHookManager()->addAction('PoP:system-build', 'addOptions');
     }
 
     public function addOptions()

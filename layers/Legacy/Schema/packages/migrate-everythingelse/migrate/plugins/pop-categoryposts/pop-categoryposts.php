@@ -20,7 +20,7 @@ class PoP_CategoryPosts
     {
 
         // Priority: after PoP Blog
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888320);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888320);
     }
     public function init()
     {

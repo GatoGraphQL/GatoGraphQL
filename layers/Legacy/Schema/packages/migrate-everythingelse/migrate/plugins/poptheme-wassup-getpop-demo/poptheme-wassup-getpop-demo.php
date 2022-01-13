@@ -20,7 +20,7 @@ class PoPTheme_Wassup_GetPoPDemo
     {
 
         // Priority: mid-section, after PoP Theme Wassup section, and after PoPTheme Wassup Category Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 8881050);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 8881050);
     }
 
     public function init()

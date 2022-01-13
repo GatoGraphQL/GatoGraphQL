@@ -10,22 +10,22 @@ class PoP_CSSConverter_Validation
     {
         $success = true;
         if (!defined('POP_ENGINE_VERSION')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'installWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'installWarning'));
             $success = false;
         } elseif (!defined('POP_ENGINE_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initializeWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (POPCSSC_POP_ENGINE_MIN_VERSION > POP_ENGINE_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'versionWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'versionWarning'));
         }
 
         // Validate external build tools: Composer
         if (!file_exists(POP_CSSCONVERTER_VENDOR_DIR)) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'buildtoolWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'buildtoolWarning'));
+            \PoP\Root\App::getHookManager()->addAction('admin_notices', array($this, 'buildtoolWarning'));
+            \PoP\Root\App::getHookManager()->addAction('network_admin_notices', array($this, 'buildtoolWarning'));
             // $success = false;
         }
 

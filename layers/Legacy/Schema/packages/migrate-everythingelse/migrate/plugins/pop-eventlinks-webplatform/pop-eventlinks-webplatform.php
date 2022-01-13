@@ -22,7 +22,7 @@ class PoP_EventLinksWebPlatform
     {
 
         // Priority: after PoP Events Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888580);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888580);
     }
     public function init()
     {

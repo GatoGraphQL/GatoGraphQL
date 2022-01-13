@@ -8,7 +8,7 @@ use PoPSchema\Users\RelationalTypeDataLoaders\ObjectType\UserTypeDataLoader;
 define('GD_ROLE_PROFILE', 'profile');
 
 // Set the default role for the user typeDataLoader
-HooksAPIFacade::getInstance()->addFilter('UserTypeDataLoader:query', 'gdUreMaybeProfileRole');
+\PoP\Root\App::getHookManager()->addFilter('UserTypeDataLoader:query', 'gdUreMaybeProfileRole');
 function gdUreMaybeProfileRole($query)
 {
 
@@ -20,7 +20,7 @@ function gdUreMaybeProfileRole($query)
     return $query;
 }
 
-HooksAPIFacade::getInstance()->addFilter('gdRoles', 'gdUreAddProfileRole');
+\PoP\Root\App::getHookManager()->addFilter('gdRoles', 'gdUreAddProfileRole');
 function gdUreAddProfileRole($roles)
 {
     $roles[] = GD_ROLE_PROFILE;
@@ -28,7 +28,7 @@ function gdUreAddProfileRole($roles)
 }
 
 // Priority 0: before anything else
-HooksAPIFacade::getInstance()->addFilter('getUserRoleCombinations', 'getUserRoleCombinationsProfileRole', 0);
+\PoP\Root\App::getHookManager()->addFilter('getUserRoleCombinations', 'getUserRoleCombinationsProfileRole', 0);
 function getUserRoleCombinationsProfileRole($user_role_combinations)
 {
     $user_role_combinations = array(
@@ -57,7 +57,7 @@ function userHasProfileAccess($user_id = null)
 /**
  * User Type Data Resolver: allow to select users only with at least role GD_ROLE_PROFILE
  */
-HooksAPIFacade::getInstance()->addFilter(UserTypeDataLoader::class.':gd_dataload_query', 'gdUreUserlistQuery');
+\PoP\Root\App::getHookManager()->addFilter(UserTypeDataLoader::class.':gd_dataload_query', 'gdUreUserlistQuery');
 function gdUreUserlistQuery($query)
 {
     // The role can only be Profile (Organization + Individual), force there's no other (protection against hackers).

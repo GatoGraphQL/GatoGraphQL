@@ -21,7 +21,7 @@ class PoP_EventsCreationProcessors
     {
 
         // Priority: after PoP Events Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888890);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888890);
     }
     public function init()
     {

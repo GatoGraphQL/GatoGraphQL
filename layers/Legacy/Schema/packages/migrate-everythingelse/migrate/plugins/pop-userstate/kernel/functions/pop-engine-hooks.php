@@ -9,19 +9,19 @@ class PoP_UserState_EngineHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             '\PoP\ComponentModel\Engine:getModuleData:start',
             array($this, 'start'),
             10,
             4
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
             array($this, 'calculateDataloadingModuleData'),
             10,
             8
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             '\PoP\ComponentModel\Engine:getModuleData:end',
             array($this, 'end'),
             10,

@@ -5,7 +5,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 /**
  * Implementation of the icons
  */
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     'route:icon', 
     function($icon, $route, $html = true) {
         switch ($route) {
@@ -27,7 +27,7 @@ HooksAPIFacade::getInstance()->addFilter(
 );
 
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     'route:title', 
     function($title, $route) {
         $titles = [

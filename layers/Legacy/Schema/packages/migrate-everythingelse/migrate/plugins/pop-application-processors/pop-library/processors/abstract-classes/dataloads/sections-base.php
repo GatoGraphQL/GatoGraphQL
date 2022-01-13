@@ -16,7 +16,7 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
         if (\PoP\Root\App::getState('nature') == UserRouteNatures::USER) {
             // Allow URE to add the Organization/Community content source attribute
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
-            $ret = HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomSectionBlocks:getDataloadSource:author', $ret, $author);
+            $ret = \PoP\Root\App::getHookManager()->applyFilters('PoP_Module_Processor_CustomSectionBlocks:getDataloadSource:author', $ret, $author);
         }
         // }
 

@@ -5,15 +5,15 @@ class PoP_SocialNetwork_SubmenuHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_CustomSubMenus:author:mainsubheaders',
             array($this, 'addAuthorMainsubheaders')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_CustomSubMenus:tag:mainsubheaders',
             array($this, 'addTagMainsubheaders')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_CustomSubMenus:single:routes',
             array($this, 'addSingleRoutes')
         );

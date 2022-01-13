@@ -6,7 +6,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 //-------------------------------------------------------------------------------------
 
 // Add the Events and Locations for the resourceLoader single path configuration
-HooksAPIFacade::getInstance()->addFilter('PoP_ResourceLoader_FileReproduction_Config:configuration:category-paths', 'popLocationsResourceloaderSinglePaths');
+\PoP\Root\App::getHookManager()->addFilter('PoP_ResourceLoader_FileReproduction_Config:configuration:category-paths', 'popLocationsResourceloaderSinglePaths');
 function popLocationsResourceloaderSinglePaths($paths)
 {
     $pluginapi = PoP_Locations_APIFactory::getInstance();

@@ -63,7 +63,7 @@ if (class_exists("EM_Gateway_Online")) {
             $alipay_vars['sign'] = $mysign;
             $alipay_vars['sign_type'] = 'MD5';
 
-            return HooksAPIFacade::getInstance()->applyFilters('em_gateway_alipay_get_paypal_vars', $alipay_vars, $EM_Booking, $this);
+            return \PoP\Root\App::getHookManager()->applyFilters('em_gateway_alipay_get_paypal_vars', $alipay_vars, $EM_Booking, $this);
         }
 
         public function buildSign($vars)
@@ -165,11 +165,11 @@ if (class_exists("EM_Gateway_Online")) {
                             //TODO do something if pp payment not enough
                             $EM_Booking->setStatus(0); //Set back to normal "pending"
                         }
-                        HooksAPIFacade::getInstance()->doAction('em_payment_processed', $EM_Booking, $this);
+                        \PoP\Root\App::getHookManager()->doAction('em_payment_processed', $EM_Booking, $this);
                     }
                 } else {
                     if ($_POST['trade_status'] == 'TRADE_FINISHED' || $_POST['trade_status'] == 'TRADE_SUCCESS') {
-                        $message = HooksAPIFacade::getInstance()->applyFilters(
+                        $message = \PoP\Root\App::getHookManager()->applyFilters(
                             'em_gateway_alipay_bad_booking_email',
                             "
 	A Payment has been received by Alipay for a non-existent booking.
@@ -310,6 +310,6 @@ if (class_exists("EM_Gateway_Online")) {
     }
     EM_Gateways::register_gateway('alipay', 'EM_Gateway_Alipay');
 
-    //HooksAPIFacade::getInstance()->addAction('emp_alipay_cron', 'emGatewayBookingTimeout');
+    //\PoP\Root\App::getHookManager()->addAction('emp_alipay_cron', 'emGatewayBookingTimeout');
 }
 ?>

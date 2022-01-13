@@ -7,13 +7,13 @@ class PoPWebPlatform_Installation
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('PoP:system-build', array($this, 'systemBuild'));
+        \PoP\Root\App::getHookManager()->addAction('PoP:system-build', array($this, 'systemBuild'));
 
         // Depending on PoP Theme active or not, generate the resources on "theme" or standard hook
         if (defined('POP_THEME_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('PoP:system-generate:theme', array($this, 'systemGenerateTheme'));
+            \PoP\Root\App::getHookManager()->addAction('PoP:system-generate:theme', array($this, 'systemGenerateTheme'));
         } else {
-            HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this, 'systemGenerate'));
+            \PoP\Root\App::getHookManager()->addAction('PoP:system-generate', array($this, 'systemGenerate'));
         }
     }
 
@@ -35,7 +35,7 @@ class PoPWebPlatform_Installation
     public function systemGenerateTheme()
     {
         $acrossThememodes = \PoP\Root\App::getState('thememode-isdefault');
-        $acrossThememodes = HooksAPIFacade::getInstance()->applyFilters('PoPWebPlatform_Installation:systemGenerateTheme:delete-across-thememodes', $acrossThememodes);
+        $acrossThememodes = \PoP\Root\App::getHookManager()->applyFilters('PoPWebPlatform_Installation:systemGenerateTheme:delete-across-thememodes', $acrossThememodes);
         $this->generateResources($acrossThememodes);
     }
 
@@ -56,7 +56,7 @@ class PoPWebPlatform_Installation
             $pop_resourceloader_generatedfilesmanager->delete();
             
             // This hook is for PoP SPA Resource Loader to generate the config files
-            HooksAPIFacade::getInstance()->doAction('PoPWebPlatform_Installation:generateResources');
+            \PoP\Root\App::getHookManager()->doAction('PoPWebPlatform_Installation:generateResources');
 
             // Important: run this function below at the end, so by then we will have created all dynamic resources (eg: initialresources.js)
             // Generate the bundle(group) file with all the resources inside

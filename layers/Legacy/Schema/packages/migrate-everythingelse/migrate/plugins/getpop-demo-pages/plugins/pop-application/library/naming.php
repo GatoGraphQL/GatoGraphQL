@@ -2,7 +2,7 @@
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_catname', 'getpopdemoCategorypostsCatname', 10, 3);
+\PoP\Root\App::getHookManager()->addFilter('gd_catname', 'getpopdemoCategorypostsCatname', 10, 3);
 function getpopdemoCategorypostsCatname($name, $cat_id, $format)
 {
     switch ($cat_id) {

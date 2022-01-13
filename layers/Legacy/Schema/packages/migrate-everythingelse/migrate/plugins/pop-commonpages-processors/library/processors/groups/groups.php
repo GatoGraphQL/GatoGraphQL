@@ -21,7 +21,7 @@ class GD_CommonPages_Module_Processor_CustomGroups extends PoP_Module_Processor_
                 // Allow to override with custom blocks
                 $ret = array_merge(
                     $ret,
-                    HooksAPIFacade::getInstance()->applyFilters(
+                    \PoP\Root\App::getHookManager()->applyFilters(
                         'PoP_Module_Processor_CustomGroups:modules:whoweare',
                         array(
                             [GD_Custom_Module_Processor_CustomSectionBlocks::class, GD_Custom_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_WHOWEARE_SCROLL_DETAILS]

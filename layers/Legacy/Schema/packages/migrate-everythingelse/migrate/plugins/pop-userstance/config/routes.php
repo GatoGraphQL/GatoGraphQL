@@ -55,7 +55,7 @@ if (!defined('POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS')) {
 	define('POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS', $definitionManager->getUniqueDefinition('stances/by-individuals', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

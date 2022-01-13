@@ -6,7 +6,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /**
  * login.php
  */
-HooksAPIFacade::getInstance()->addFilter('UserPlatform:redirect_url:edit_profile', 'getCommonuserrolesEditprofileRedirectUrl');
+\PoP\Root\App::getHookManager()->addFilter('UserPlatform:redirect_url:edit_profile', 'getCommonuserrolesEditprofileRedirectUrl');
 function getCommonuserrolesEditprofileRedirectUrl($redirect_url)
 {
     if (\PoP\Root\App::getState('is-user-logged-in')) {

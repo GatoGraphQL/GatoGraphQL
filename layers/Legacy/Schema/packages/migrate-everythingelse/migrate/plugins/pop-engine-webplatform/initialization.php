@@ -49,12 +49,12 @@ class PoPWebPlatform_Initialization
         // If it is a search engine, there's no need to output the scripts or initialize pop.Manager
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()/* && !RequestUtils::isSearchEngine()*/) {
-            HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::getHookManager()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
 
             // Print all jQuery functions, execute after all the plugin scripts have loaded
             // Load before we start printing the footer scripts, so we can add the 'after' data to the required scripts
-            HooksAPIFacade::getInstance()->addAction('popcms:printFooterScripts', array($this, 'initScripts'), 0);
-            HooksAPIFacade::getInstance()->addAction('popcms:printFooterScripts', array($this, 'printScripts'), PHP_INT_MAX);
+            \PoP\Root\App::getHookManager()->addAction('popcms:printFooterScripts', array($this, 'initScripts'), 0);
+            \PoP\Root\App::getHookManager()->addAction('popcms:printFooterScripts', array($this, 'printScripts'), PHP_INT_MAX);
         }
     }
 
@@ -168,15 +168,15 @@ class PoPWebPlatform_Initialization
         $allowed_domains = PoP_WebPlatform_ConfigurationUtils::getAllowedDomains();
 
         // Locale is needed to store the Open Tabs under the right language
-        $locale = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:locale', get_locale());
+        $locale = \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:locale', get_locale());
 
         // Default one: do not send, so that it doesn't show up in the Embed URL
-        $keepopentabs = HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS, true);
+        $keepopentabs = \PoP\Root\App::getHookManager()->applyFilters(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS, true);
         $multilayout_labels = PoP_HTMLCSSPlatform_ConfigurationUtils::getMultilayoutLabels();
         // $multilayout_keyfields = PoP_WebPlatform_ConfigurationUtils::get_multilayout_keyfields();
-        $domcontainer_id = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:domcontainer_id', POP_MODULEID_PAGESECTIONCONTAINERID_CONTAINER);
-        $addanchorspinner = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:add_anchor_spinner', true);
-        $api_urlparams = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:api_urlparams', array(
+        $domcontainer_id = \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:domcontainer_id', POP_MODULEID_PAGESECTIONCONTAINERID_CONTAINER);
+        $addanchorspinner = \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:add_anchor_spinner', true);
+        $api_urlparams = \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:api_urlparams', array(
             \PoP\ComponentModel\Constants\Params::OUTPUT => \PoP\ComponentModel\Constants\Outputs::JSON,
             \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => array(
                 \PoP\ComponentModel\Constants\DataOutputItems::META,
@@ -200,7 +200,7 @@ class PoPWebPlatform_Initialization
             // This URL is needed to retrieve the user data, if the user is logged in
             // 'BACKGROUND_LOAD' => $backgroundLoad,
             'KEEP_OPEN_TABS' => $keepopentabs ? true : '',
-            'USERLOGGEDIN_LOADINGMSG_TARGET' => HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:userloggedin_loadingmsg_target', null),
+            'USERLOGGEDIN_LOADINGMSG_TARGET' => \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:userloggedin_loadingmsg_target', null),
             // Define variable below to be overriden by WP Super Cache (if plugin disabled, it won't break anything)
             'AJAXURL' => admin_url('admin-ajax.php', 'relative'),
             'UPLOADURL' => admin_url('async-upload.php', 'relative'),
@@ -219,20 +219,20 @@ class PoPWebPlatform_Initialization
                 'MEDIA_FEATUREDIMAGE_TITLE' => TranslationAPIFacade::getInstance()->__('Set Featured Image', 'pop-engine-webplatform'),
                 'MEDIA_FEATUREDIMAGE_BTN' => TranslationAPIFacade::getInstance()->__('Set', 'pop-engine-webplatform'),
             ),
-            'FETCHTARGET_SETTINGS' => HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:fetchtarget_settings', array()),
-            'FETCHPAGESECTION_SETTINGS' => HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:fetchpagesection_settings', array()),
+            'FETCHTARGET_SETTINGS' => \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:fetchtarget_settings', array()),
+            'FETCHPAGESECTION_SETTINGS' => \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:fetchpagesection_settings', array()),
             'MULTILAYOUT_LABELS' => $multilayout_labels,
             // 'MULTILAYOUT_KEYFIELDS' => $multilayout_keyfields,
             'ADDANCHORSPINNER' => $addanchorspinner,
             'STRING_MORE' => GD_STRING_MORE,
             'STRING_LESS' => GD_STRING_LESS,
             'ONDATE' => $ondate,
-            'PATHSTARTPOS' => HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:pathstartpos', 1),
+            'PATHSTARTPOS' => \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:pathstartpos', 1),
             'THROW_EXCEPTION_ON_TEMPLATE_ERROR' => (PoP_HTMLCSSPlatform_ServerUtils::throwExceptionOnTemplateError() ? true : ''),
         );
 
         // Allow qTrans to add the language information
-        if ($homelocaleurl = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:homelocale_url', $homeurl)) {
+        if ($homelocaleurl = \PoP\Root\App::getHookManager()->applyFilters('pop_modulemanager:homelocale_url', $homeurl)) {
             $jqueryConstants['HOMELOCALE_URL'] = $homelocaleurl;
         }
 
@@ -240,7 +240,7 @@ class PoPWebPlatform_Initialization
             $jqueryConstants['DOMCONTAINER_ID'] = $domcontainer_id;
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters('gd_jquery_constants', $jqueryConstants);
+        return \PoP\Root\App::getHookManager()->applyFilters('gd_jquery_constants', $jqueryConstants);
     }
 
     public function initScripts()
@@ -256,7 +256,7 @@ class PoPWebPlatform_Initialization
         $cmsService = CMSServiceFacade::getInstance();
 
         // Allow PoP Server-Side Rendering, PoP Resource Loader to add their scripts
-        $this->scripts = HooksAPIFacade::getInstance()->applyFilters(
+        $this->scripts = \PoP\Root\App::getHookManager()->applyFilters(
             'PoPWebPlatform_Initialization:init-scripts',
             $this->scripts
         );

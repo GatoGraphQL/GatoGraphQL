@@ -5,7 +5,7 @@ class PoP_TrendingTags_SidebarHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_SidebarMultiplesBase:modules',
             array($this, 'getSidebarSubmodules'),
             0,
@@ -18,7 +18,7 @@ class PoP_TrendingTags_SidebarHooks
 
         // Add the Trending Tags to all Groups in the Sideinfo
         // Allow GetPoP to remove it
-        $includeScreengroups = HooksAPIFacade::getInstance()->applyFilters(
+        $includeScreengroups = \PoP\Root\App::getHookManager()->applyFilters(
             'PoPTheme_Wassup_SidebarHooks:sidebar_modules:includeScreengroups',
             array(
                 POP_SCREENGROUP_CONTENTREAD,

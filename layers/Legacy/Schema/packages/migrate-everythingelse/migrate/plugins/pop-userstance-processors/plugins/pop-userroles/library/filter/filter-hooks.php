@@ -5,12 +5,12 @@ class UserStance_DataLoad_FilterHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'Stances:FilterInnerModuleProcessor:inputmodules',
             array($this, 'filtercomponents'),
             10,
             2
-        );HooksAPIFacade::getInstance()->addFilter(
+        );\PoP\Root\App::getHookManager()->addFilter(
             'Stances:SimpleFilterInners:inputmodules',
             array($this, 'simplefiltercomponents'),
             10,

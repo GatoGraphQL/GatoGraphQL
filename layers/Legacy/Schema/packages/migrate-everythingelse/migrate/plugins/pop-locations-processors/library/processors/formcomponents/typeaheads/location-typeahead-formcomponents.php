@@ -72,7 +72,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
 
     protected function getSuggestions(array $module)
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_Module_Processor_LocationSelectableTypeaheadFormInputs:suggestions',
             array(),
             $module

@@ -17,9 +17,9 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     {
 
         // Created/Updated/Removed Post
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'createdPost'));
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'updatedPost'), 10, 2);
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'createdPost'));
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'updatedPost'), 10, 2);
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:transitionPostStatus',
             array($this, 'removedPost'),
             10,
@@ -29,7 +29,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         // Admin approval
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if ($cmsapplicationapi->isAdminPanel()) {
-            HooksAPIFacade::getInstance()->addAction(
+            \PoP\Root\App::getHookManager()->addAction(
                 'popcms:transitionPostStatus',
                 array($this, 'adminApprovalPost'),
                 10,
@@ -48,7 +48,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $skip = !in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_ContentCreation_Notifications_Hook_Posts:skipNotificationForPost',
             $skip,
             $post_id

@@ -16,7 +16,7 @@ if (!defined('POP_CONTENTCREATION_ROUTE_FLAG')) {
     define('POP_CONTENTCREATION_ROUTE_FLAG', $definitionManager->getUniqueDefinition('flag', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::getHookManager()->addFilter(
     \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(

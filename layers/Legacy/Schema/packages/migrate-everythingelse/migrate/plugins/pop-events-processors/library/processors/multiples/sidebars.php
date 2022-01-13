@@ -63,7 +63,7 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
                     $ret[] = $filters[$module[1]];
 
                     // Allow User Role Editor to add blocks specific to that user role
-                    $ret = HooksAPIFacade::getInstance()->applyFilters(
+                    $ret = \PoP\Root\App::getHookManager()->applyFilters(
                         'PoP_EM_Module_Processor_SidebarMultiples:inner-modules',
                         $ret,
                         $author

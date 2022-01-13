@@ -20,7 +20,7 @@ class PoP_CommonAutomatedEmailsWebPlatform
     {
 
         // Priority: after PoP Notifications Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888550);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888550);
     }
 
     public function init()

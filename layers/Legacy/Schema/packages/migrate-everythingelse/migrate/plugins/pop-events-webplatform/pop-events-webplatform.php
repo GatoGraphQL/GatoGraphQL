@@ -22,9 +22,9 @@ class PoP_EventsWebPlatform
     {
 
         // // Priority: after PoP Locations Web Platform
-        // HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888550);
+        // \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888550);
         // Priority: after PoP Add Highlights Web Platform (needed by PoP Events Processors)
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888570);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888570);
     }
     public function init()
     {

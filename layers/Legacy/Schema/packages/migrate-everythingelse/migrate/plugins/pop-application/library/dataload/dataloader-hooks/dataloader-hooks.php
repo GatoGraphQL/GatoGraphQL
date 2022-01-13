@@ -6,19 +6,19 @@ class PoP_Application_DataloaderHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'GD_Dataloader_List:query:pagenumber',
             array($this, 'maybeGetLoadinglatestPagenumber')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'GD_Dataloader_List:query:limit',
             array($this, 'maybeGetLoadinglatestLimit')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'CustomPostTypeDataLoader:query:limit',
             array($this, 'maybeGetLoadinglatestLimitForPost')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'CustomPostTypeDataLoader:query',
             array($this, 'maybeAddLoadinglatestTimestamp'),
             10,

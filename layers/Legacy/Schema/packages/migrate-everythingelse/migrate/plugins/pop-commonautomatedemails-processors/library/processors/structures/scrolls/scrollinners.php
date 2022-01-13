@@ -25,7 +25,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ScrollInners extends PoP_Module_Proces
         switch ($module[1]) {
             case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
-                return HooksAPIFacade::getInstance()->applyFilters(
+                return \PoP\Root\App::getHookManager()->applyFilters(
                     POP_HOOK_SCROLLINNER_AUTOMATEDEMAILS_THUMBNAIL_GRID,
                     array(
                         'row-items' => 2,

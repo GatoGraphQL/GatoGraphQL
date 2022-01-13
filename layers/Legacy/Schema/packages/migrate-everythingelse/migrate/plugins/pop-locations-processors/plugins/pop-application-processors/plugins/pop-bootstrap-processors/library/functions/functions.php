@@ -4,7 +4,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /**
  * Map format
  */
-HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_SectionTabPanelComponents:modules', 'gdEmSectiontabpanelSubmodules', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_SectionTabPanelComponents:modules', 'gdEmSectiontabpanelSubmodules', 10, 2);
 function gdEmSectiontabpanelSubmodules($submodules, array $module)
 {
     if ($module == [PoP_Module_Processor_SectionTabPanelComponents::class, PoP_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_USERS]) {
@@ -15,7 +15,7 @@ function gdEmSectiontabpanelSubmodules($submodules, array $module)
 
     return $submodules;
 }
-HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_SectionTabPanelComponents:panel_headers', 'gdEmSectiontabpanelPanelheaders', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_SectionTabPanelComponents:panel_headers', 'gdEmSectiontabpanelPanelheaders', 10, 2);
 function gdEmSectiontabpanelPanelheaders($panelheaders, array $module)
 {
     if ($module == [PoP_Module_Processor_SectionTabPanelComponents::class, PoP_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_USERS]) {
@@ -30,7 +30,7 @@ function gdEmSectiontabpanelPanelheaders($panelheaders, array $module)
 
     return $panelheaders;
 }
-HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_SingleSectionTabPanelComponents:modules', 'gdEmSinglesectiontabpanelSubmodules', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_SingleSectionTabPanelComponents:modules', 'gdEmSinglesectiontabpanelSubmodules', 10, 2);
 function gdEmSinglesectiontabpanelSubmodules($submodules, array $module)
 {
     if ($module == [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLEAUTHORS]) {
@@ -39,7 +39,7 @@ function gdEmSinglesectiontabpanelSubmodules($submodules, array $module)
 
     return $submodules;
 }
-HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_SingleSectionTabPanelComponents:panel_headers', 'gdEmSinglesectiontabpanelPanelheaders', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_SingleSectionTabPanelComponents:panel_headers', 'gdEmSinglesectiontabpanelPanelheaders', 10, 2);
 function gdEmSinglesectiontabpanelPanelheaders($panelheaders, array $module)
 {
     if ($module == [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLEAUTHORS]) {

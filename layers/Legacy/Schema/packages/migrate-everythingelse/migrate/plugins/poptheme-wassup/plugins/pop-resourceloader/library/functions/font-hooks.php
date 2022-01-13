@@ -5,23 +5,23 @@ class PoPTheme_Wassup_ResourceLoader_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'getWassupFontUrl:pathkey',
             array($this, 'getPathkey')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'getFontawesomeFontUrl:pathkey',
             array($this, 'getPathkey')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'getWassupFontPath',
             array($this, 'getFontPath'),
             10,
             2
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'getFontawesomeFontPath',
             array($this, 'getFontPath'),
             10,

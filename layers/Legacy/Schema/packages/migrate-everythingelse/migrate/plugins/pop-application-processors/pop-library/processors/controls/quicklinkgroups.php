@@ -54,7 +54,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
                 if ($module == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED]) {
                     $submodules[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
                 }
-                $submodules = HooksAPIFacade::getInstance()->applyFilters(
+                $submodules = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomQuicklinkGroups:modules',
                     $submodules,
                     $module
@@ -78,7 +78,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
                 if ($module == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER]) {
                     $submodules[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
                 }
-                $submodules = HooksAPIFacade::getInstance()->applyFilters(
+                $submodules = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomQuicklinkGroups:modules',
                     $submodules,
                     $module
@@ -107,7 +107,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
 
             case self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
                 // Allow to not show the "Important?" label, since it's too bulky
-                if (HooksAPIFacade::getInstance()->applyFilters(
+                if (\PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomQuicklinkGroups:updownvotepost:addlabel',
                     false
                 )) {

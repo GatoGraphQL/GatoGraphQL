@@ -2,7 +2,7 @@
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Register the language scripts for the fullcalendar
-HooksAPIFacade::getInstance()->addAction("popcms:enqueueScripts", 'emPopprocessorsQtransxRegisterScripts');
+\PoP\Root\App::getHookManager()->addAction("popcms:enqueueScripts", 'emPopprocessorsQtransxRegisterScripts');
 function emPopprocessorsQtransxRegisterScripts()
 {
 
@@ -33,7 +33,7 @@ function getEmQtransxFullcalendarLocaleFilename()
 
     // List of supported languages in fullcalendar. Note that we have both 'zh-cn' and 'zh-tw', so this can be overriden
     // 'en' is hardcoded in the original file, so no need to handle (unless it must be overriden with other country, such as 'en-au')
-    $languages = HooksAPIFacade::getInstance()->applyFilters(
+    $languages = \PoP\Root\App::getHookManager()->applyFilters(
         'emPopprocessorsQtransxRegisterScripts:languages',
         array(
             'es' => 'es',

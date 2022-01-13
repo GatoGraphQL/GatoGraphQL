@@ -2,7 +2,7 @@
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
-HooksAPIFacade::getInstance()->addAction('after_setup_theme', 'gdThumbEnable');
+\PoP\Root\App::getHookManager()->addAction('after_setup_theme', 'gdThumbEnable');
 function gdThumbEnable()
 {
     add_theme_support('post-thumbnails');
@@ -30,7 +30,7 @@ gdCustomThumbSizes();
 /**
  * Default thumbs
  */
-HooksAPIFacade::getInstance()->addFilter('getThumbId:default', 'gdThumbDefault', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('getThumbId:default', 'gdThumbDefault', 10, 2);
 function gdThumbDefault($thumb_id, $post_id)
 {
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();

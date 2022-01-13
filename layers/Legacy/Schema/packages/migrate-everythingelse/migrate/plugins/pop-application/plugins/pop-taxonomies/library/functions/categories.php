@@ -8,7 +8,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 function getTheMainCategories()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('getTheMainCategories', array());
+    return \PoP\Root\App::getHookManager()->applyFilters('getTheMainCategories', array());
 }
 
 function getTheMainCategory($post_id)

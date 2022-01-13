@@ -1,10 +1,10 @@
 <?php
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-// HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_MenuMultiplesBase:active-link-menu-item-ids', 'addActiveMenuitemParentitem', 10, 3);
+// \PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_MenuMultiplesBase:active-link-menu-item-ids', 'addActiveMenuitemParentitem', 10, 3);
 // function addActiveMenuitemParentitem($active_link_menu_item_ids, array $module, array &$props)
 // {
-//     $add_parentpageid = HooksAPIFacade::getInstance()->applyFilters(
+//     $add_parentpageid = \PoP\Root\App::getHookManager()->applyFilters(
 //         'PoP_Module_Processor_MenuMultiplesBase:js-setting:add-active-parent-item',
 //         false,
 //         $module,
@@ -37,11 +37,11 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 // // (Used for painting navigation in single.php)
 // function gdPostParentpageid($post_id)
 // {
-//     return HooksAPIFacade::getInstance()->applyFilters('gdPostParentpageid', null, $post_id);
+//     return \PoP\Root\App::getHookManager()->applyFilters('gdPostParentpageid', null, $post_id);
 // }
 
 // Returns the id of the page showing all items of same role (Organizations / Individuals)
 function gdAuthorParentpageid($author_id)
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdAuthorParentpageid', null, $author_id);
+    return \PoP\Root\App::getHookManager()->applyFilters('gdAuthorParentpageid', null, $author_id);
 }

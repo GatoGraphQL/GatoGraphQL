@@ -31,7 +31,7 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
                 );
                 $ret[] = $filters[$module[1]];
 
-                $ret = HooksAPIFacade::getInstance()->applyFilters(
+                $ret = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoPSP_URE_EM_Module_Processor_SidebarMultiples:inner-modules:author',
                     $ret
                 );

@@ -26,7 +26,7 @@ class PoP_SPAResourceLoader_FileReproduction_InitialResourcesConfig extends PoP_
         // Allow to hook in page POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA
         $routes = array_filter(
             array_values(
-                HooksAPIFacade::getInstance()->applyFilters(
+                \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_SPAResourceLoader_FileReproduction_InitialResourcesConfig:routes',
                     $routes
                 )

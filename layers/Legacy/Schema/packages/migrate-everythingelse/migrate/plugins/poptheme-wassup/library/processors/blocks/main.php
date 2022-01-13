@@ -291,7 +291,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         switch ($module[1]) {
             case self::MODULE_BLOCK_HOME:
                 // Allow TPPDebate to override this
-                if ($top_modules = HooksAPIFacade::getInstance()->applyFilters(
+                if ($top_modules = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:home_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOMETOP]
@@ -310,7 +310,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 break;
 
             case self::MODULE_BLOCK_AUTHOR:
-                if ($top_modules = HooksAPIFacade::getInstance()->applyFilters(
+                if ($top_modules = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:author_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHORTOP],
@@ -329,7 +329,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 break;
 
             case self::MODULE_BLOCK_TAG:
-                if ($top_modules = HooksAPIFacade::getInstance()->applyFilters(
+                if ($top_modules = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:tag_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_TAG_WIDGETAREA],
@@ -369,7 +369,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                     [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT],
                     [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT],
                 );
-                $modules = HooksAPIFacade::getInstance()->applyFilters(
+                $modules = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:single',
                     $modules
                 );

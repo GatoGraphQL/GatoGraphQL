@@ -31,7 +31,7 @@ class PoP_MultiDomain_Utils
 
         // Replace the local domain with the external one
         // Hook: also allow for PoP Cluster to replace the subpath /WEBSITE_NAME/ (after wp-content/pop-webplatform/) with the external website name
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_MultiDomain_Utils:transformUrl',
             $domain.$subpath,
             $subpath,
@@ -62,7 +62,7 @@ class PoP_MultiDomain_Utils
             $domain_properties[$domain]['default-theme'] = $default_themename;
             $domain_properties[$domain]['default-thememode'] = $default_thememodename;
         }
-        $domain_properties = HooksAPIFacade::getInstance()->applyFilters('PoP_MultiDomain_Utils:domain_properties', $domain_properties);
+        $domain_properties = \PoP\Root\App::getHookManager()->applyFilters('PoP_MultiDomain_Utils:domain_properties', $domain_properties);
 
         // Add the ID to all domains
         foreach ($domain_properties as $domain => &$properties) {
@@ -70,7 +70,7 @@ class PoP_MultiDomain_Utils
             // $properties['id'] = RequestUtils::getDomainId($domain);
 
             // Allow to add the language, and then change the default language on a domain by domain basis
-            $properties['locale'] = HooksAPIFacade::getInstance()->applyFilters(
+            $properties['locale'] = \PoP\Root\App::getHookManager()->applyFilters(
                 'pop_modulemanager:multidomain:locale',
                 $domain,
                 $domain

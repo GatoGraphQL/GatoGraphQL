@@ -5,7 +5,7 @@ class PoP_Application_UserStance_ScreenHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Application_Utils:defaultformat_by_screen',
             array($this, 'getDefaultformatByScreen'),
             0,

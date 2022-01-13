@@ -32,7 +32,7 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
                 $layouts = array();
                 $layouts[] = [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE];
                 $layouts[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::MODULE_POSTSOCIALMEDIA_POSTWRAPPER];
-                $layouts = HooksAPIFacade::getInstance()->applyFilters(
+                $layouts = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomPostMultipleSidebarComponents:featuredimage:modules', 
                     $layouts, 
                     $module
@@ -49,7 +49,7 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
                 $layouts[] = [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER];
                 // Added through a hook
                 $layouts[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::MODULE_POSTSOCIALMEDIA_POSTWRAPPER];
-                $layouts = HooksAPIFacade::getInstance()->applyFilters(
+                $layouts = \PoP\Root\App::getHookManager()->applyFilters(
                     'PoP_Module_Processor_CustomPostMultipleSidebarComponents:featuredimagevolunteer:modules', 
                     $layouts, 
                     $module

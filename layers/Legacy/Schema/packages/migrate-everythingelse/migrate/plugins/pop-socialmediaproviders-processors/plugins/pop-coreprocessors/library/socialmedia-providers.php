@@ -5,7 +5,7 @@ define('GD_SOCIALMEDIA_PROVIDER_FACEBOOK', 'facebook');
 define('GD_SOCIALMEDIA_PROVIDER_TWITTER', 'twitter');
 define('GD_SOCIALMEDIA_PROVIDER_LINKEDIN', 'linkedin');
 
-HooksAPIFacade::getInstance()->addFilter('gd_socialmedia:providers', 'gdSocialmediaprovidersDefaultproviders');
+\PoP\Root\App::getHookManager()->addFilter('gd_socialmedia:providers', 'gdSocialmediaprovidersDefaultproviders');
 function gdSocialmediaprovidersDefaultproviders($providers)
 {
     $providers[GD_SOCIALMEDIA_PROVIDER_FACEBOOK] = array(

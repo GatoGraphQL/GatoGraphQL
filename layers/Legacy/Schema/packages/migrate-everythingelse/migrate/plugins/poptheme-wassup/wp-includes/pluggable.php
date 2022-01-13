@@ -63,7 +63,7 @@ endif;
 //     //      * @param int    $uid    ID of the nonce-owning user.
 //     //      * @param string $action The nonce action.
 //
-//     //     $uid = HooksAPIFacade::getInstance()->applyFilters( 'nonce_user_logged_out', $uid, $action );
+//     //     $uid = \PoP\Root\App::getHookManager()->applyFilters( 'nonce_user_logged_out', $uid, $action );
 //     // }
 //
 //     $i = wp_nonce_tick();
@@ -94,7 +94,7 @@ endif;
 //     // $uid = (int) $user->ID;
 //     // if ( ! $uid ) {
 //         /** This filter is documented in wp-includes/pluggable.php */
-//         // $uid = HooksAPIFacade::getInstance()->applyFilters( 'nonce_user_logged_out', $uid, $action );
+//         // $uid = \PoP\Root\App::getHookManager()->applyFilters( 'nonce_user_logged_out', $uid, $action );
 //     // }
 //
 //     $i = wp_nonce_tick();
@@ -137,7 +137,7 @@ if (!function_exists('wp_verify_nonce')) :
              * @param int    $uid    ID of the nonce-owning user.
              * @param string $action The nonce action.
              */
-            $uid = HooksAPIFacade::getInstance()->applyFilters('nonce_user_logged_out', $uid, $action);
+            $uid = \PoP\Root\App::getHookManager()->applyFilters('nonce_user_logged_out', $uid, $action);
         }
 
         if (empty($nonce)) {
@@ -171,7 +171,7 @@ if (!function_exists('wp_verify_nonce')) :
          * @param WP_User    $user   The current user object.
          * @param string     $token  The user's session token.
          */
-        HooksAPIFacade::getInstance()->doAction('wp_verify_nonce_failed', $nonce, $action, $user, $token);
+        \PoP\Root\App::getHookManager()->doAction('wp_verify_nonce_failed', $nonce, $action, $user, $token);
 
         // Invalid nonce
         return false;
@@ -197,7 +197,7 @@ if (!function_exists('wp_create_nonce')) :
             /**
         * This filter is documented in wp-includes/pluggable.php
 */
-            $uid = HooksAPIFacade::getInstance()->applyFilters('nonce_user_logged_out', $uid, $action);
+            $uid = \PoP\Root\App::getHookManager()->applyFilters('nonce_user_logged_out', $uid, $action);
         }
 
         // Hack PoP WP: Ignore getting the value from the cookie

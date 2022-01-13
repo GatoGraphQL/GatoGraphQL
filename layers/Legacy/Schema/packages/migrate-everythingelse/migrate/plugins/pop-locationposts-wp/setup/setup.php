@@ -11,7 +11,7 @@ class PoP_LocationPostsWP_Setup
             array($this, 'rewriteFlush')
         );
     
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'init',
             array($this, 'installPostType')
         );

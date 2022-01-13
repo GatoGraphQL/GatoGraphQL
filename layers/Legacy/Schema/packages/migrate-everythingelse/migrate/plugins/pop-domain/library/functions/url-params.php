@@ -6,7 +6,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 define('POP_URLPARAM_DOMAIN', 'domain');
 define('POP_URLPARAM_ORIGIN', 'origin');
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsDomain');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdJqueryConstantsDomain');
 function gdJqueryConstantsDomain($jqueryConstants)
 {
         $jqueryConstants['URLPARAM_ORIGIN'] = POP_URLPARAM_ORIGIN;

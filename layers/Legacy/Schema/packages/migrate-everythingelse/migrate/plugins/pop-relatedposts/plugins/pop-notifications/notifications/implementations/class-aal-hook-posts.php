@@ -16,11 +16,11 @@ class PoP_RelatedPosts_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     public function __construct()
     {
         // Referenced Post
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE,
             array($this, 'createdPostRelatedToPost')
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE,
             array($this, 'updatedPostRelatedToPost'),
             10,

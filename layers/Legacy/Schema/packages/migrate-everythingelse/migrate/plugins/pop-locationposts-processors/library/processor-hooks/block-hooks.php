@@ -6,7 +6,7 @@ class PoP_LocationPosts_BlockHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_Module_Processor_CustomContentBlocks:single-sidebar:top',
             array($this, 'getTopSidebar'),
             10,

@@ -23,6 +23,6 @@ class PoP_System_Engine_ModuleDefinitionHooks extends AbstractHookSet
  * Initialization
  */
 new PoP_System_Engine_ModuleDefinitionHooks(
-    HooksAPIFacade::getInstance(),
+    \PoP\Root\App::getHookManager(),
     TranslationAPIFacade::getInstance()
 );

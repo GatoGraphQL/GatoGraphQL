@@ -21,6 +21,6 @@ class PoP_UserPlatformWP_LooseContractImplementations extends AbstractLooseContr
 new PoP_UserPlatformWP_LooseContractImplementations(
 	LooseContractManagerFacade::getInstance(),
 	NameResolverFacade::getInstance(),
-	HooksAPIFacade::getInstance()
+	\PoP\Root\App::getHookManager()
 );
 

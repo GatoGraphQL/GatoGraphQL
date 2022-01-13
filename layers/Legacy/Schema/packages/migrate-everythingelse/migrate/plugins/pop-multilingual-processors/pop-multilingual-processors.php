@@ -20,7 +20,7 @@ class PoP_MultilingualProcessors
     {
 
         // Priority: after PoP Application Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888810);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888810);
     }
     public function init()
     {

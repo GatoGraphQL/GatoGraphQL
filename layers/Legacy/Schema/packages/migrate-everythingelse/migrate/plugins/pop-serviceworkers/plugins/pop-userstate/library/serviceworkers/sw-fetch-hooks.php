@@ -6,7 +6,7 @@ class PoP_ServiceWorkers_UserState_Job_Fetch_Hooks
     public function __construct()
     {
         $resourceType = 'json';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ServiceWorkers_Job_Fetch:exclude-paramvalues:'.$resourceType,
             array($this, 'getExcludedParamvalues')
         );

@@ -6,7 +6,7 @@ class WSL_CheckpointHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_UserLogin_Module_Processor_Blocks:extra-checkpoint-msgs:change-pwd',
             array($this, 'getCheckpointMessages')
         );

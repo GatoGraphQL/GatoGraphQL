@@ -29,7 +29,7 @@ class PoP_Module_RuntimeContentManager
     {
         // Add the version in the path, so it's easier to identify currently-needed files
         // Allow to modify the domain, from Assets to Uploads CDN
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_Module_RuntimeContentManager:cache-baseurl',
             POP_RUNTIMECONTENT_URL.'/'.ApplicationInfoFacade::getInstance()->getVersion()
         );

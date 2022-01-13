@@ -11,7 +11,7 @@ class PoP_Events_Multilayout_Processor extends PoP_Application_Multilayout_Proce
 {
     protected function useSimpleviewLayout()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_Events_Multilayout_Processor:use-simpleview-layout',
             false
         );

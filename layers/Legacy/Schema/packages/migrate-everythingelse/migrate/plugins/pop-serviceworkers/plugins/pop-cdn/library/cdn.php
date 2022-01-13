@@ -6,4 +6,4 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
  */
 
 // Load the dependencies assets from the CDN
-HooksAPIFacade::getInstance()->addFilter('PoP_ServiceWorkers_Job:dependencies_path', 'popCdnfoundationAssetsrc');
+\PoP\Root\App::getHookManager()->addFilter('PoP_ServiceWorkers_Job:dependencies_path', 'popCdnfoundationAssetsrc');

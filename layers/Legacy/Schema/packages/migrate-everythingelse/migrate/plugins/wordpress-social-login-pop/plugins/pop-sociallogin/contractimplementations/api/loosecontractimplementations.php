@@ -6,7 +6,7 @@ class WSLPoP_SocialLogin_LooseContractImplementations
 {
 	public function __construct() {
 		
-		$hooksapi = HooksAPIFacade::getInstance();
+		$hooksapi = \PoP\Root\App::getHookManager();
 		$loosecontract_manager = LooseContractManagerFacade::getInstance();
 
 		// Actions

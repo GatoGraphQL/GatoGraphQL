@@ -8,7 +8,7 @@ class GD_CreateUpdate_Utils
     {
 
         // Global constant defining if posts in the website can be created straight or subject to moderation
-        return HooksAPIFacade::getInstance()->applyFilters('GD_CreateUpdate_Utils:moderate', false);
+        return \PoP\Root\App::getHookManager()->applyFilters('GD_CreateUpdate_Utils:moderate', false);
     }
 
     public static function getUpdatepostStatus($status, $moderate)

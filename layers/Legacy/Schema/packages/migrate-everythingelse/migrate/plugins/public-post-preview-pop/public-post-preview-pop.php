@@ -16,13 +16,13 @@ class PPP_PoP
     public function __construct()
     {
         include_once 'validation.php';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_PreviewContent_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
 
         // Priority: after PoP Preview Content
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888360);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888360);
     }
     public function getProviderValidationClass($class)
     {

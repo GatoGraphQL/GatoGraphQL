@@ -21,7 +21,7 @@ class RouteUtils
 
     public static function getRouteTitle($route)
     {
-        $title = HooksAPIFacade::getInstance()->applyFilters(
+        $title = \PoP\Root\App::getHookManager()->applyFilters(
             'route:title',
             $route,
             $route

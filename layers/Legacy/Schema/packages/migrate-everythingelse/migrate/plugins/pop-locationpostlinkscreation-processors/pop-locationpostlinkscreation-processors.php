@@ -20,9 +20,9 @@ class PoP_LocationPostLinksCreationProcessors
     {
 
         // // Priority: after PoP Location Posts Creation Processors
-        // HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888870);
+        // \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888870);
         // Priority: after PoP Location Posts Creation Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888910);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888910);
     }
     public function init()
     {

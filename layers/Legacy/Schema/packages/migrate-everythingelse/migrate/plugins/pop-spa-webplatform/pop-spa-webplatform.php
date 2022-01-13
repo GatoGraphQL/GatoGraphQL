@@ -21,7 +21,7 @@ class PoP_SPAWebPlatform
     {
 
         // Priority: after PoP Server-Side Rendering, inner circle
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888404);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888404);
     }
     public function init()
     {

@@ -16,13 +16,13 @@ class GADWP_PoP
     public function __construct()
     {
         include_once 'validation.php';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_GoogleAnalytics_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
 
         // Priority: after PoP Google Analytics
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888520);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888520);
     }
     public function getProviderValidationClass($class)
     {

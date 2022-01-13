@@ -20,7 +20,7 @@ class PoP_ContentPostLinksWebPlatform
     {
 
         // Priority: after PoP Add Comments TinyMCE Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888560);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888560);
     }
     public function init()
     {

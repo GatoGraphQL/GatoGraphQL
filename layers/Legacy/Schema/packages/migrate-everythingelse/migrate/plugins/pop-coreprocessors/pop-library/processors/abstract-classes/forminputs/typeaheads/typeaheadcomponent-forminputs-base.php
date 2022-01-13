@@ -16,7 +16,7 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         // we must make sure that this module is delivered on the ResourceLoader when doing code-splitting
         if (defined('POP_RESOURCELOADER_INITIALIZED')) {
             $this->resources = array();
-            HooksAPIFacade::getInstance()->addFilter(
+            \PoP\Root\App::getHookManager()->addFilter(
                 'PoP_CoreProcessors_ResourceLoaderProcessor:typeahead:templates',
                 array($this, 'getDependencies')
             );

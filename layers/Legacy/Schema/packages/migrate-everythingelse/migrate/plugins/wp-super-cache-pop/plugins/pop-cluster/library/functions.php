@@ -5,7 +5,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 // In file wp-content/plugins/wp-super-cache-pop/plugins/pop-cluster/plugins/pop-system/installation.php
 // Generate the .htaccess rules for the Gzip compression inside the cluster folder
 // In addition, we also need to add code below add in .htaccess
-HooksAPIFacade::getInstance()->addFilter('supercacherewriterules', 'popClusterSupercacherewriterules');
+\PoP\Root\App::getHookManager()->addFilter('supercacherewriterules', 'popClusterSupercacherewriterules');
 function popClusterSupercacherewriterules($rules)
 {
     $cmsService = CMSServiceFacade::getInstance();

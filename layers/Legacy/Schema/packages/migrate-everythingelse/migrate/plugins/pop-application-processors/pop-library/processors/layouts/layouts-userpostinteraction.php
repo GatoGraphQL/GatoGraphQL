@@ -21,7 +21,7 @@ class Wassup_Module_Processor_UserPostInteractionLayouts extends PoP_Module_Proc
         switch ($module[1]) {
             case self::MODULE_LAYOUT_USERPOSTINTERACTION:
                 // Allow TPPDebate to add the "What do you think about TPP?" before these layouts
-                if ($layouts = HooksAPIFacade::getInstance()->applyFilters(
+                if ($layouts = \PoP\Root\App::getHookManager()->applyFilters(
                     'Wassup_Module_Processor_UserPostInteractionLayouts:userpostinteraction:layouts',
                     array(
                         [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_USERPOSTINTERACTION],

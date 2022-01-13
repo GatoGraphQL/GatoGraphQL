@@ -7,7 +7,7 @@ class PoP_UserStateModuleDecoratorProcessorHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             AbstractModuleProcessor::HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES,
             array($this, 'addHeaddatasetmoduleDataProperties'),
             10,

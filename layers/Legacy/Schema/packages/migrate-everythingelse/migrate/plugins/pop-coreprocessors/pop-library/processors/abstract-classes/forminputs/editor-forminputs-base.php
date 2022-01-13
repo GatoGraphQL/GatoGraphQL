@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
     {
 
         // Allow Mentions to add its required templates (User/Tag Mention Layout)
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::getHookManager()->applyFilters(
             'PoP_Module_Processor_EditorFormInputsBase:editor_layouts',
             array()
         );

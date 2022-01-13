@@ -8,5 +8,5 @@ function popUseravatarGetLocaleJsfile()
 
 function popUseravatarGetLocaleJsfilename()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gd_fileupload-userphoto_locale:filename', 'locale.js');
+    return \PoP\Root\App::getHookManager()->applyFilters('gd_fileupload-userphoto_locale:filename', 'locale.js');
 }

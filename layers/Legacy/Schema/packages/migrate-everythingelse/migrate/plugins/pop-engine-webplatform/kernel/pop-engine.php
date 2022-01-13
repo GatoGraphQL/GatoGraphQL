@@ -25,14 +25,14 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     {
         // Print needed scripts
         $this->scripts = $this->enqueue = $this->scripttag_attributes = array();
-        HooksAPIFacade::getInstance()->addAction('popcms:printFooterScripts', array($this, 'printScripts'));
+        \PoP\Root\App::getHookManager()->addAction('popcms:printFooterScripts', array($this, 'printScripts'));
 
         // Priority 60: after priority 50 in wp-content/plugins/pop-engine-webplatform/kernel/resourceloader/initialization.php
-        HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'enqueueScripts'), 60);
+        \PoP\Root\App::getHookManager()->addAction('popcms:enqueueScripts', array($this, 'enqueueScripts'), 60);
 
         // Allow to add attributes crossorigin="anonymous"
         // Taken from https://stackoverflow.com/questions/18944027/how-do-i-defer-or-async-this-wordpress-javascript-snippet-to-load-lastly-for-fas
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_HTMLTags_Utils:scripttag_attributes',
             array($this, 'getScripttagAttributes')
         );
@@ -256,7 +256,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             $meta[POP_JS_DONOTRENDER] = true;
         }
 
-        $meta = HooksAPIFacade::getInstance()->applyFilters(
+        $meta = \PoP\Root\App::getHookManager()->applyFilters(
             'PoPWebPlatform_Engine:request-meta',
             $meta
         );
@@ -284,7 +284,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
 
         // Allow PoP Server-Side Rendering to inject this value
-        $data = HooksAPIFacade::getInstance()->applyFilters(
+        $data = \PoP\Root\App::getHookManager()->applyFilters(
             'PoPWebPlatform_Engine:encoded-data-object',
             $data,
             $this
@@ -325,7 +325,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             $script = 'pop-app';
         }
         // Allow PoP Resource Loader to set its own "first script" instead
-        $script = HooksAPIFacade::getInstance()->applyFilters(
+        $script = \PoP\Root\App::getHookManager()->applyFilters(
             'PoPWebPlatform_Engine:enqueue-scripts:first-script-handle',
             $script
         );
@@ -359,7 +359,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     // 	);
     // 	$json_settings['templates'] = $processor->getTemplates($module, $props);
 
-    // 	return HooksAPIFacade::getInstance()->applyFilters(
+    // 	return \PoP\Root\App::getHookManager()->applyFilters(
     // 		'PoPWebPlatform_Engine:json-module-immutable-settings',
     // 		$json_settings,
     // 		$module,

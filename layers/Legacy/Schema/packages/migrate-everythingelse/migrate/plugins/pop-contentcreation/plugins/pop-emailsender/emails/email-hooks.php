@@ -18,30 +18,30 @@ class PoP_ContentCreation_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Notifications to the admin
         //----------------------------------------------------------------------
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'sendemailToAdminUpdatepost'), 100, 1);
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToAdminCreatepost'), 100, 1);
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'sendemailToAdminUpdatepost'), 100, 1);
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToAdminCreatepost'), 100, 1);
 
         //----------------------------------------------------------------------
         // Email Notifications
         //----------------------------------------------------------------------
         // Late priority, so they send the email if PoP SocialNetwork has not done so before
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsGeneralNewpostCreate'), 100, 1);
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsGeneralNewpostUpdate'), 100, 2);
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsGeneralNewpostCreate'), 100, 1);
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsGeneralNewpostUpdate'), 100, 2);
 
         //----------------------------------------------------------------------
         // Functional emails
         //----------------------------------------------------------------------
         // Post created/updated/approved
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToUsersFromPostCreate'), 100, 1);
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToUsersFromPostCreate'), 100, 1);
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:pendingToPublish',
             array($this, 'sendemailToUsersFromPostPostapproved'),
             10,
             1
         );
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToUsersFromPostReferencescreate'), 10, 1);
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'sendemailToUsersFromPostReferencesupdate'), 10, 2);
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToUsersFromPostReferencescreate'), 10, 1);
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'sendemailToUsersFromPostReferencesupdate'), 10, 2);
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:pendingToPublish',
             array($this, 'sendemailToUsersFromPostReferencestransition'),
             10,
@@ -297,7 +297,7 @@ class PoP_ContentCreation_EmailSender_Hooks
         $skip = !in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
 
         // Check if for a given type of post the email must not be sent (eg: Highlights)
-        if (HooksAPIFacade::getInstance()->applyFilters('post_references:skip_sendemail', $skip, $post_id)) {
+        if (\PoP\Root\App::getHookManager()->applyFilters('post_references:skip_sendemail', $skip, $post_id)) {
             return;
         }
 

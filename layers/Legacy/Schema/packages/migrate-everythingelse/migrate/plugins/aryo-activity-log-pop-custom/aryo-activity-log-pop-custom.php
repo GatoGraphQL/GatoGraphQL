@@ -17,7 +17,7 @@ class AAL_PoPCustom
     {
 
         // Priority: after AAL PoP
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888370);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888370);
     }
 
     public function init()

@@ -10,7 +10,7 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
 function gdGetPostauthors($post_id)
 {
     $customPostUserTypeAPI = CustomPostUserTypeAPIFacade::getInstance();
-    return HooksAPIFacade::getInstance()->applyFilters(
+    return \PoP\Root\App::getHookManager()->applyFilters(
     	'gdGetPostauthors',
     	array($customPostUserTypeAPI->getAuthorID($post_id)),
     	$post_id
@@ -27,6 +27,6 @@ function getAuthorProfileUrl($author)
 /**
  * Change Author permalink from 'author' to 'u'
  */
-HooksAPIFacade::getInstance()->addFilter('author-base', function($authorBase) {
+\PoP\Root\App::getHookManager()->addFilter('author-base', function($authorBase) {
 	return 'u';
 });

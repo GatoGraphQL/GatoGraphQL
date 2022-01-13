@@ -2,7 +2,7 @@
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_CreateUserFormMesageFeedbackLayoutsBase:success:msg', 'popthemeWassupCreateuserSuccessmsg');
+\PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_CreateUserFormMesageFeedbackLayoutsBase:success:msg', 'popthemeWassupCreateuserSuccessmsg');
 function popthemeWassupCreateuserSuccessmsg($msg)
 {
     $emails = array();

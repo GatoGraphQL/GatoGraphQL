@@ -20,7 +20,7 @@ class PoP_LocationPostCategoryLayoutsProcessors
     {
 
         // Priority: after PoP Location Post Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888891);
+        \PoP\Root\App::getHookManager()->addAction('plugins_loaded', array($this, 'init'), 888891);
     }
     public function init()
     {

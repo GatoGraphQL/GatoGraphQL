@@ -3,7 +3,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('route:icon', 'wassupRouteIcon', 10, 3);
+\PoP\Root\App::getHookManager()->addFilter('route:icon', 'wassupRouteIcon', 10, 3);
 function wassupRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -24,7 +24,7 @@ function wassupRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-HooksAPIFacade::getInstance()->addFilter('route:title', 'wassupNavigationRouteTitle', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('route:title', 'wassupNavigationRouteTitle', 10, 2);
 function wassupNavigationRouteTitle($title, $route)
 {
     $titles = [

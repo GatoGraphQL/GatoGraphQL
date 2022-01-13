@@ -5,7 +5,7 @@ class PoP_CDN_UserState_RejectedPageHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:startsWith:partial',
             array($this, 'getRejectedPartialpaths')
         );

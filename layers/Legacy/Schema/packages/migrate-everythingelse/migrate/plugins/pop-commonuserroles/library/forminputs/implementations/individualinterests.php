@@ -11,7 +11,7 @@ class GD_FormInput_IndividualInterests extends MultipleSelectFormInput
         // The values here must be input from outside, to allow any potential website to add their own LinkCategories conveniently
         $values = array_merge(
             $values,
-            HooksAPIFacade::getInstance()->applyFilters('wassup_individualinterests', array())
+            \PoP\Root\App::getHookManager()->applyFilters('wassup_individualinterests', array())
         );
 
         return $values;

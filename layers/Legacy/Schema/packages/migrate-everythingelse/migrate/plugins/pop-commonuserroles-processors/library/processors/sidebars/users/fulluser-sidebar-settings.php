@@ -27,7 +27,7 @@ class URE_FullUserSidebarSettings
                     $ret[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_AUTHOR_CONTACT];
                     $ret[] = [PoP_Locations_Module_Processor_SidebarComponents::class, PoP_Locations_Module_Processor_SidebarComponents::MODULE_EM_WIDGET_USERLOCATIONSMAP];
                 }
-                $ret = HooksAPIFacade::getInstance()->applyFilters('pop_module:sidebar_author:components', $ret, $section);
+                $ret = \PoP\Root\App::getHookManager()->applyFilters('pop_module:sidebar_author:components', $ret, $section);
                 break;
 
             case GD_COMPACTSIDEBARSECTION_ORGANIZATION:

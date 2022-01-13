@@ -4,7 +4,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'popPostscreationCreateupdateutilsEditUrl', 0, 2);
+\PoP\Root\App::getHookManager()->addFilter('gd-createupdateutils:edit-url', 'popPostscreationCreateupdateutilsEditUrl', 0, 2);
 function popPostscreationCreateupdateutilsEditUrl($url, $post_id)
 {
     $postTypeAPI = PostTypeAPIFacade::getInstance();

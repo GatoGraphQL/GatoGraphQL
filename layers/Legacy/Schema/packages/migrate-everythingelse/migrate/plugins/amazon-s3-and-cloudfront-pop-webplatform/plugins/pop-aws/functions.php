@@ -6,7 +6,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 //-------------------------------------------------------------------------------------
 
 // Register the AWS S3 domain in the Allowed Domains list
-HooksAPIFacade::getInstance()->addFilter('popAwss3Allowedurl:region', 'popAwsAwss3AllowedurlRegion');
+\PoP\Root\App::getHookManager()->addFilter('popAwss3Allowedurl:region', 'popAwsAwss3AllowedurlRegion');
 function popAwsAwss3AllowedurlRegion($region)
 {
     return POP_AWS_REGION;

@@ -25,7 +25,7 @@ function getSocialloginNetworklinks()
 }
 
 // Change the user's display name
-HooksAPIFacade::getInstance()->addAction(
+\PoP\Root\App::getHookManager()->addAction(
     'popcomponent:sociallogin:usercreated', 
     'userNameUpdated', 
     1

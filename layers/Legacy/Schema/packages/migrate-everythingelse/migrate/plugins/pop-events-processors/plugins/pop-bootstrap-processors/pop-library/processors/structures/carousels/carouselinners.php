@@ -22,7 +22,7 @@ class GD_EM_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_C
             case self::MODULE_CAROUSELINNER_EVENTS:
             case self::MODULE_CAROUSELINNER_AUTHOREVENTS:
             case self::MODULE_CAROUSELINNER_TAGEVENTS:
-                return HooksAPIFacade::getInstance()->applyFilters(
+                return \PoP\Root\App::getHookManager()->applyFilters(
                     'GD_EM_Module_Processor_CustomCarouselInners:grid',
                     array(
                         'row-items' => 1,
@@ -44,7 +44,7 @@ class GD_EM_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_C
             case self::MODULE_CAROUSELINNER_AUTHOREVENTS:
             case self::MODULE_CAROUSELINNER_TAGEVENTS:
                 // Allow to override. Eg: TPP Debate needs a different format
-                $layout = HooksAPIFacade::getInstance()->applyFilters(
+                $layout = \PoP\Root\App::getHookManager()->applyFilters(
                     'GD_EM_Module_Processor_CustomCarouselInners:layout', 
                     [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST], 
                     $module

@@ -28,34 +28,34 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         // Functional emails
         //----------------------------------------------------------------------
         // User tagged
-        HooksAPIFacade::getInstance()->addAction('PoP_Mentions:post_tags:tagged_users', array($this, 'sendemailToUsersTaggedInPost'), 10, 3);
-        HooksAPIFacade::getInstance()->addAction('PoP_Mentions:comment_tags:tagged_users', array($this, 'sendemailToUsersTaggedInComment'), 10, 2);
+        \PoP\Root\App::getHookManager()->addAction('PoP_Mentions:post_tags:tagged_users', array($this, 'sendemailToUsersTaggedInPost'), 10, 3);
+        \PoP\Root\App::getHookManager()->addAction('PoP_Mentions:comment_tags:tagged_users', array($this, 'sendemailToUsersTaggedInComment'), 10, 2);
 
         //----------------------------------------------------------------------
         // Email Notifications
         //----------------------------------------------------------------------
         // EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT:
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsSubscribedtopicCreatedpostCreate'), 10, 1);
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsSubscribedtopicCreatedpostUpdate'), 10, 2);
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsSubscribedtopicCreatedpostCreate'), 10, 1);
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsSubscribedtopicCreatedpostUpdate'), 10, 2);
         // EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsNetworkCreatedpostCreate'), 10, 1);
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsNetworkCreatedpostUpdate'), 10, 2);
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsNetworkCreatedpostCreate'), 10, 1);
+        \PoP\Root\App::getHookManager()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsNetworkCreatedpostUpdate'), 10, 2);
         // EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT:
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:insertComment',
             array($this, 'emailnotificationsSubscribedtopicAddedcomment'),
             10,
             2
         );
         // EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT:
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'popcms:insertComment',
             array($this, 'emailnotificationsNetworkAddedcomment'),
             10,
             2
         );
         // EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC:
-        HooksAPIFacade::getInstance()->addAction('gd_subscribetotag', array($this, 'emailnotificationsNetworkSubscribedtotopic'), 10, 1);
+        \PoP\Root\App::getHookManager()->addAction('gd_subscribetotag', array($this, 'emailnotificationsNetworkSubscribedtotopic'), 10, 1);
     }
 
     /**
@@ -93,7 +93,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         }
 
         // Do not send for RIPESS
-        if (!HooksAPIFacade::getInstance()->applyFilters('PoP_EmailSender_Hooks:sendemailToUsersnetworkFromPost:enabled', true)) {
+        if (!\PoP\Root\App::getHookManager()->applyFilters('PoP_EmailSender_Hooks:sendemailToUsersnetworkFromPost:enabled', true)) {
             return;
         }
 

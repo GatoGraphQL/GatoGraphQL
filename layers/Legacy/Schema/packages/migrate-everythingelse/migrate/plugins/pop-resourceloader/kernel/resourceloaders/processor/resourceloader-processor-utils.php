@@ -322,7 +322,7 @@ class PoP_ResourceLoaderProcessorUtils {
         if ($components['target'] ?? null) {
             $target = $components['target'];
         } else {
-            $format_targets = HooksAPIFacade::getInstance()->applyFilters(
+            $format_targets = \PoP\Root\App::getHookManager()->applyFilters(
                 'PoP_ResourceLoaderProcessorUtils:resources-from-current-vars:format-targets',
                 array()
             );

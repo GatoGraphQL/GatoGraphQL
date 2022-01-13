@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('wp_mail', 'popEmailsenderDecodeSubject');
+\PoP\Root\App::getHookManager()->addFilter('wp_mail', 'popEmailsenderDecodeSubject');
 function popEmailsenderDecodeSubject($props)
 {
 

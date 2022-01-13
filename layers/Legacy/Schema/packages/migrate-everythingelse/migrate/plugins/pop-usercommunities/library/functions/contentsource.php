@@ -7,5 +7,5 @@ define('GD_URLPARAM_URECONTENTSOURCE_COMMUNITY', 'community');
 
 function gdUreGetDefaultContentsource()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdUreGetDefaultContentsource', GD_URLPARAM_URECONTENTSOURCE_COMMUNITY);
+    return \PoP\Root\App::getHookManager()->applyFilters('gdUreGetDefaultContentsource', GD_URLPARAM_URECONTENTSOURCE_COMMUNITY);
 }

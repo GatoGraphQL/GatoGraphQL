@@ -12,19 +12,19 @@ function gdGetLoginHtml($capitalize = false)
         $cmsuseraccountapi->getLoginURL(),
         $capitalize ? $title : strtolower($title)
     );
-    return HooksAPIFacade::getInstance()->applyFilters('gdGetLoginHtml', $html, $capitalize);
+    return \PoP\Root\App::getHookManager()->applyFilters('gdGetLoginHtml', $html, $capitalize);
 }
 
 // The Theme must set this value as true, so that it fails loading, it doesn't block the user from logging into the website through wp-login.php
 function enableLoginApplicationScreens()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('enableLoginApplicationScreens', false);
+    return \PoP\Root\App::getHookManager()->applyFilters('enableLoginApplicationScreens', false);
 }
 
 /**
  * Remove access to wp-login.php
  */
-HooksAPIFacade::getInstance()->addAction('pop_wp_login', 'gdWpLoginRedirect');
+\PoP\Root\App::getHookManager()->addAction('pop_wp_login', 'gdWpLoginRedirect');
 function gdWpLoginRedirect()
 {
     if (enableLoginApplicationScreens()) {
@@ -38,7 +38,7 @@ function gdWpLoginRedirect()
 /**
  * Override default login URL
  */
-HooksAPIFacade::getInstance()->addFilter('popcms:loginUrl', 'gdLoginUrl', 1000, 2);
+\PoP\Root\App::getHookManager()->addFilter('popcms:loginUrl', 'gdLoginUrl', 1000, 2);
 function gdLoginUrl($login_url, $redirect = '')
 {
     if (enableLoginApplicationScreens()) {
@@ -54,7 +54,7 @@ function gdLoginUrl($login_url, $redirect = '')
     return $login_url;
 }
 
-HooksAPIFacade::getInstance()->addFilter('popcms:lostpasswordUrl', 'gdLostpasswordUrl', 1000, 2);
+\PoP\Root\App::getHookManager()->addFilter('popcms:lostpasswordUrl', 'gdLostpasswordUrl', 1000, 2);
 function gdLostpasswordUrl($lostpassword_url, $redirect = '')
 {
     if (enableLoginApplicationScreens()) {
@@ -71,7 +71,7 @@ function gdLostpasswordUrl($lostpassword_url, $redirect = '')
     return $lostpassword_url;
 }
 
-HooksAPIFacade::getInstance()->addFilter('popcms:logoutUrl', 'gdLogoutUrl', 1000, 2);
+\PoP\Root\App::getHookManager()->addFilter('popcms:logoutUrl', 'gdLogoutUrl', 1000, 2);
 function gdLogoutUrl($logout_url, $redirect = '')
 {
     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();

@@ -5,7 +5,7 @@ class PoPTheme_Wassup_GADWP_Installation
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('PoP:system-install', array($this,'updateSettings'));
+        \PoP\Root\App::getHookManager()->addAction('PoP:system-install', array($this,'updateSettings'));
     }
 
     public function updateSettings()

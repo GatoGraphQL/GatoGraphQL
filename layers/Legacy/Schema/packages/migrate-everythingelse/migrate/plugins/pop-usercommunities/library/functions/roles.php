@@ -4,14 +4,14 @@ use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 define('GD_URE_ROLE_COMMUNITY', 'community');
 
-HooksAPIFacade::getInstance()->addFilter('gdRoles', 'gdUreAddCommunityRole');
+\PoP\Root\App::getHookManager()->addFilter('gdRoles', 'gdUreAddCommunityRole');
 function gdUreAddCommunityRole($roles)
 {
     $roles[] = GD_URE_ROLE_COMMUNITY;
     return $roles;
 }
 
-HooksAPIFacade::getInstance()->addFilter('getUserRoleCombinations', 'getUserRoleCombinationsCommunityRole');
+\PoP\Root\App::getHookManager()->addFilter('getUserRoleCombinations', 'getUserRoleCombinationsCommunityRole');
 function getUserRoleCombinationsCommunityRole($user_role_combinations)
 {
 
@@ -45,7 +45,7 @@ function gdUreGetuserrole($userID)
     }
 
     // Allow to return Organization/Individual roles
-    return HooksAPIFacade::getInstance()->applyFilters(
+    return \PoP\Root\App::getHookManager()->applyFilters(
         'gdUreGetuserrole',
         $role,
         $userID
@@ -55,14 +55,14 @@ function gdUreGetuserrole($userID)
 
 
 // Make sure we always get the most specific role
-HooksAPIFacade::getInstance()->addFilter('UserObjectTypeResolver:getValue:role', 'gdUreGetuserroleHook', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('UserObjectTypeResolver:getValue:role', 'gdUreGetuserroleHook', 10, 2);
 function gdUreGetuserroleHook($role, $user_id)
 {
     return gdUreGetuserrole($user_id);
 }
 
 // Override the generic function with this one
-HooksAPIFacade::getInstance()->addFilter('getTheUserRole', 'gdUreGetTheUserRole', 10, 2);
+\PoP\Root\App::getHookManager()->addFilter('getTheUserRole', 'gdUreGetTheUserRole', 10, 2);
 function gdUreGetTheUserRole($role, $user_id)
 {
     return gdUreGetuserrole($user_id);

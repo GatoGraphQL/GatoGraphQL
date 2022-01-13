@@ -7,5 +7,5 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 function getWhoweareCoreUserIds()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('getWhoweareCoreUserIds', array());
+    return \PoP\Root\App::getHookManager()->applyFilters('getWhoweareCoreUserIds', array());
 }

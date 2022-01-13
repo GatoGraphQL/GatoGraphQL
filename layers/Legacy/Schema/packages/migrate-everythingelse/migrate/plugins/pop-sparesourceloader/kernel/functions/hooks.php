@@ -7,7 +7,7 @@ class PoP_SPAResourceLoader_Hooks
     {
 
         // Do not load the handlebars helpers from ResourceLoader, since the one from SPAResourceLoader will take over it
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ResourceLoader_Utils:registerHandlebarshelperScript',
             '__return_false'
         );

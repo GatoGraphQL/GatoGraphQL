@@ -22,16 +22,16 @@ class PoP_JSResourceLoaderProcessorManager {
 		$this->scripttag_attributes = array();
 
 		$this->inline_resources = array();
-		HooksAPIFacade::getInstance()->addAction('popcms:head', array($this, 'printScripts'));
+		\PoP\Root\App::getHookManager()->addAction('popcms:head', array($this, 'printScripts'));
 
-		HooksAPIFacade::getInstance()->addFilter(
+		\PoP\Root\App::getHookManager()->addFilter(
             'PoP_WebPlatform_ResourceLoaderMappingManager:resources',
             array($this, 'addResourcesToMap')
         );
 
         // Prepare the htmltag attributes before they are printed in the footer, but after all resources have been enqueued
         // That is needed to calculate PoP_ResourceLoaderProcessorUtils::$noncritical_resources, which happens triggered by `$popwebplatform_resourceloader_scriptsandstyles_registration->registerScripts();`
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             // 'popcms:printFooterScripts',
             'popcms:enqueueScripts',
             array($this, 'prepareScripttagAttributes'),
@@ -40,7 +40,7 @@ class PoP_JSResourceLoaderProcessorManager {
 
     	// Allow to add attributes 'async' or 'defer' to the script tag
 		// Taken from https://stackoverflow.com/questions/18944027/how-do-i-defer-or-async-this-wordpress-javascript-snippet-to-load-lastly-for-fas
-		HooksAPIFacade::getInstance()->addFilter(
+		\PoP\Root\App::getHookManager()->addFilter(
 			'PoP_HTMLTags_Utils:scripttag_attributes',
 			array($this, 'getScripttagAttributes')
 		);

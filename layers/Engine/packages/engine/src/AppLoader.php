@@ -20,7 +20,7 @@ class AppLoader extends UpstreamAppLoader
         // Boot all the components
         App::getComponentManager()->beforeBoot();
 
-        $hooksAPI = HooksAPIFacade::getInstance();
+        $hooksAPI = \PoP\Root\App::getHookManager();
         $hooksAPI->addAction(
             'popcms:boot',
             fn() => App::getAppStateManager()->initializeAppState(),

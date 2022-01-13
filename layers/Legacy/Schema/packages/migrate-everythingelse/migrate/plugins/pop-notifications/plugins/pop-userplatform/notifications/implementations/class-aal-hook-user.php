@@ -11,13 +11,13 @@ class PoP_Notifications_UserPlatform_Hook_Users /* extends AAL_Hook_Base*/
     {
 
         // User welcome message (function implemented already, but must connect it with the hook)
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'gd_createupdate_user:additionalsCreate',
             array(PoP_Notifications_UserPlatform_Utils::class, 'welcomeMessage')
         );
 
         // Changed password
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'gd_changepassword_user',
             array($this, 'changedPassword'),
             10,
@@ -25,7 +25,7 @@ class PoP_Notifications_UserPlatform_Hook_Users /* extends AAL_Hook_Base*/
         );
 
         // Updated profile
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'gd_createupdate_user:additionalsUpdate',
             array($this, 'updatedProfile'),
             10,

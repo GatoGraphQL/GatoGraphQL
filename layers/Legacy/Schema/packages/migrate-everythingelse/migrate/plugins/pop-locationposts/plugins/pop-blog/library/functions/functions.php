@@ -5,7 +5,7 @@ use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /**
  * Section Filters
  */
-HooksAPIFacade::getInstance()->addFilter('wassup_section_taxonomyterms', 'popLocationpostsSectionTaxonomyterms', 0);
+\PoP\Root\App::getHookManager()->addFilter('wassup_section_taxonomyterms', 'popLocationpostsSectionTaxonomyterms', 0);
 function popLocationpostsSectionTaxonomyterms($section_taxonomyterms)
 {
     if (POP_LOCATIONPOSTS_CAT_ALL) {
@@ -22,7 +22,7 @@ function popLocationpostsSectionTaxonomyterms($section_taxonomyterms)
     return $section_taxonomyterms;
 }
 
-HooksAPIFacade::getInstance()->addFilter('GD_FormInput_ContentSections:taxonomyterms:name', 'popLocationpostsSectionTaxonomytermsName', 10, 3);
+\PoP\Root\App::getHookManager()->addFilter('GD_FormInput_ContentSections:taxonomyterms:name', 'popLocationpostsSectionTaxonomytermsName', 10, 3);
 function popLocationpostsSectionTaxonomytermsName($name, $taxonomy, $term)
 {
     if (POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS) {

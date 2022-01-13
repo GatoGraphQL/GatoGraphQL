@@ -16,7 +16,7 @@ define('GD_JS_SETTINGS', $compact ? 'st' : 'settings');
 define('GD_JS_TARGET', $compact ? 'tg' : 'target');
 define('GD_JS_SKIPSTATEUPDATE', $compact ? 'sk' : 'skipstateupdate');
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsJsparams');
+\PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdJqueryConstantsJsparams');
 function gdJqueryConstantsJsparams($jqueryConstants)
 {
 

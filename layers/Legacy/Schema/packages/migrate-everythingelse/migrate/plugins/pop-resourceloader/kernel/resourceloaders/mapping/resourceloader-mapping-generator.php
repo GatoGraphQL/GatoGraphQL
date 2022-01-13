@@ -12,7 +12,7 @@ class PoP_WebPlatform_ResourceLoaderMappingGenerator {
 		$mapping = array();
 
 		// Get all the .js files from all the plugins
-		$resources = array_filter(HooksAPIFacade::getInstance()->applyFilters('PoP_WebPlatform_ResourceLoaderMappingManager:resources', array()));
+		$resources = array_filter(\PoP\Root\App::getHookManager()->applyFilters('PoP_WebPlatform_ResourceLoaderMappingManager:resources', array()));
 		$jsObjects = array();
 
 		$fileContents = '';

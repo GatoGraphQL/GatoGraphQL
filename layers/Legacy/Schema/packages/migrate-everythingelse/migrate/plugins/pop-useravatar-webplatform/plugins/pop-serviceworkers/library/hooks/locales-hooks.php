@@ -5,7 +5,7 @@ class PoP_UserAvatarProcessors_ServiceWorkers_Hooks_Locales
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::getHookManager()->addFilter(
             'PoP_ServiceWorkers_Job_CacheResources:precache',
             array($this, 'getPrecacheList'),
             10,

@@ -42,7 +42,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends P
                 ]
             );
         }
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+        if ($modules = \PoP\Root\App::getHookManager()->applyFilters(
             'Links:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module

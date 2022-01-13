@@ -6,13 +6,13 @@ class PoP_URE_Engine_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'ApplicationState:addVars',
             [$this, 'addVars'],
             10,
             1
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::getHookManager()->addAction(
             'augmentVarsProperties',
             [$this, 'augmentVarsProperties'],
             10,
