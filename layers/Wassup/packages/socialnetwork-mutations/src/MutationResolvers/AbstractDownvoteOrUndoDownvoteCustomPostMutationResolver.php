@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
 use PoP\Root\App;
+
 abstract class AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver extends AbstractCustomPostUpdateUserMetaValueMutationResolver
 {
     protected function eligible($post)

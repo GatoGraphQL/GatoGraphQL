@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
 use PoP\Root\App;
+
 class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
 {
     public const HOOK_QUERY = __CLASS__ . ':query';

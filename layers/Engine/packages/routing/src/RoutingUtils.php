@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Routing;
 
 use PoP\Root\App;
+
 class RoutingUtils
 {
     public static function getURLPath(): string

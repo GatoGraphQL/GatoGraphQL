@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\Root\App;
+
 trait DataloadModuleProcessorTrait
 {
     use FormattableModuleTrait;
