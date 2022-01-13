@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\SiteBuilderAPI;
 
 use PoP\API\Environment;
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component

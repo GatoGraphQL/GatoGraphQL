@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPosts;
 
 use PoP\Root\App;
 use PoP\API\Component as APIComponent;
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component

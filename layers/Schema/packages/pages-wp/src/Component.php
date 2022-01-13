@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PagesWP;
 
 use PoP\Root\App;
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 use PoPSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
 use PoPSchema\Pages\Component as PagesComponent;
 

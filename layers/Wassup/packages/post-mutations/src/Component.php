@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\PostMutations;
 
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component

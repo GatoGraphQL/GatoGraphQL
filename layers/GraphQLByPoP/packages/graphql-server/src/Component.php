@@ -12,7 +12,7 @@ use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfigurat
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component

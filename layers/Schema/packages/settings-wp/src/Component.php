@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SettingsWP;
 
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component

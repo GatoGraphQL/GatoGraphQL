@@ -9,7 +9,7 @@ use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\API\Configuration\Request;
 use PoP\CacheControl\Component as CacheControlComponent;
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
