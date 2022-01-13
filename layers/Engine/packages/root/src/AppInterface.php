@@ -73,31 +73,36 @@ interface AppInterface
      *
      * @throws LogicException
      */
-    public static function getComponent(string $componentClass): ComponentInterface;public function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void;
+    public static function getComponent(string $componentClass): ComponentInterface;
+    
+    /**
+     * Shortcut function.
+     */
+    public static function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void;
 
     /**
      * Shortcut function.
      */
-    public function removeFilter(string $tag, callable $function_to_remove, int $priority = 10): bool;
-    
+    public static function removeFilter(string $tag, callable $function_to_remove, int $priority = 10): bool;
+
     /**
      * Shortcut function.
      */
-    public function applyFilters(string $tag, mixed $value, mixed ...$args): mixed;
-    
+    public static function applyFilters(string $tag, mixed $value, mixed ...$args): mixed;
+
     /**
      * Shortcut function.
      */
-    public function addAction(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void;
-    
+    public static function addAction(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void;
+
     /**
      * Shortcut function.
      */
-    public function removeAction(string $tag, callable $function_to_remove, int $priority = 10): bool;
-    
+    public static function removeAction(string $tag, callable $function_to_remove, int $priority = 10): bool;
+
     /**
      * Shortcut function.
      */
-    public function doAction(string $tag, mixed ...$args): void;
-    
+    public static function doAction(string $tag, mixed ...$args): void;
+
 }

@@ -219,42 +219,42 @@ class App implements AppInterface
     /**
      * Shortcut function.
      */
-    public function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
+    final public static function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
     {
         self::getHookManager()->addFilter($tag, $function_to_add, $priority, $accepted_args);
     }
     /**
      * Shortcut function.
      */
-    public function removeFilter(string $tag, callable $function_to_remove, int $priority = 10): bool
+    final public static function removeFilter(string $tag, callable $function_to_remove, int $priority = 10): bool
     {
         return self::getHookManager()->removeFilter($tag, $function_to_remove, $priority);
     }
     /**
      * Shortcut function.
      */
-    public function applyFilters(string $tag, mixed $value, mixed ...$args): mixed
+    final public static function applyFilters(string $tag, mixed $value, mixed ...$args): mixed
     {
         return self::getHookManager()->applyFilters($tag, $value, ...$args);
     }
     /**
      * Shortcut function.
      */
-    public function addAction(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
+    final public static function addAction(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
     {
         self::getHookManager()->addAction($tag, $function_to_add, $priority, $accepted_args);
     }
     /**
      * Shortcut function.
      */
-    public function removeAction(string $tag, callable $function_to_remove, int $priority = 10): bool
+    final public static function removeAction(string $tag, callable $function_to_remove, int $priority = 10): bool
     {
         return self::getHookManager()->removeAction($tag, $function_to_remove, $priority);
     }
     /**
      * Shortcut function.
      */
-    public function doAction(string $tag, mixed ...$args): void
+    final public static function doAction(string $tag, mixed ...$args): void
     {
         self::getHookManager()->doAction($tag, ...$args);
     }
