@@ -1,6 +1,5 @@
 <?php
 namespace PoPSchema\TaxonomyMeta;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_TAXONOMYMETA_POP_ENGINE_MIN_VERSION', 0.1);

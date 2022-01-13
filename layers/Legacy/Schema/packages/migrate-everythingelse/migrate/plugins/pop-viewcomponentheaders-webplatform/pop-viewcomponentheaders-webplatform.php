@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Viewcomponent Headers Web Platform
 Description: Implementation of Viewcomponent Headers Web Platform for PoP

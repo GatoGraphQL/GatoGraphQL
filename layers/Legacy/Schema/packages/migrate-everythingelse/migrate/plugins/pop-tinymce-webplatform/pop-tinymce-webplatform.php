@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP TinyMCE Web Platform
 Description: Implementation of TinyMCE Web Platform for PoP

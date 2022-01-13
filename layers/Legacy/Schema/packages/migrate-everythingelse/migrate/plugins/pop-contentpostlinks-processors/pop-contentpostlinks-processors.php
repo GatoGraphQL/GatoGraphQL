@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Content Post Links Processors
 Description: Implementation of Content Post Links Processors for PoP

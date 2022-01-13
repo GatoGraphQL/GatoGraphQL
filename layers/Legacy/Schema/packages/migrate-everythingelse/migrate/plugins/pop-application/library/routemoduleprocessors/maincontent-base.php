@@ -1,6 +1,5 @@
 <?php
 namespace PoP\Application;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 abstract class AbstractMainContentRouteModuleProcessor extends \PoP\ModuleRouting\AbstractRouteModuleProcessor
 {

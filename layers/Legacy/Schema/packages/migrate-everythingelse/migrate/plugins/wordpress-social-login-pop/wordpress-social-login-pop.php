@@ -6,7 +6,6 @@ Description: Wordpress Social Login for the Platform of Platforms (PoP)
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('WSL_POP_VERSION', 0.107);
 define('WSL_POP_DIR', dirname(__FILE__));

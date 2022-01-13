@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PopThemeWassup_ContentPostLinks_Initialization
 {
     public function __construct()

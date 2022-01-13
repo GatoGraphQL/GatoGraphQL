@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PoP_HashtagsAndMentionsWebPlatform_Initialization
 {
     public function initialize()

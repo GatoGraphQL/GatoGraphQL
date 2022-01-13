@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 const GD_METAKEY_POST_LOCATIONPOSTCATEGORIES = 'locationpostcategories';
 

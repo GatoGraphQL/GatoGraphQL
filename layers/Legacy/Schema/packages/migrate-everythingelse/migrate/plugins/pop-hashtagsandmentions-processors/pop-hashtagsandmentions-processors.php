@@ -6,7 +6,6 @@ Description: Implementation of processors for the Hashtags and Mentions for the 
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

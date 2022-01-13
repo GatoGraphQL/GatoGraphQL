@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('\PoP\ComponentModel\Engine:getExtraUris', 'popthemeWassupExtraRoutes');
 function popthemeWassupExtraRoutes($extra_routes)

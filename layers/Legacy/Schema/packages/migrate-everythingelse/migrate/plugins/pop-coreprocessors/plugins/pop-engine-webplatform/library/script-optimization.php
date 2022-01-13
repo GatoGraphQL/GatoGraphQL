@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Add the jQuery script after displaying the page HTML, so move it out of the header
 \PoP\Root\App::getHookManager()->addAction('init', 'popReorderHeadScripts', 10000);

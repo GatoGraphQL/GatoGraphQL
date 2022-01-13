@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('GD_Core_Module_Processor_Blocks:jsmethod:latestcounts', 'popSwLatestcountsjsmethodsResettimestamp');
 function popSwLatestcountsjsmethodsResettimestamp($jsmethods)

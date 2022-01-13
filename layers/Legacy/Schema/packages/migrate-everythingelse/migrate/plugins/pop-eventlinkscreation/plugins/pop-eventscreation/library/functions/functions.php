@@ -1,6 +1,5 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('get_event_edit_url', 'maybeGetEventLinkEditUrl', 10, 2);

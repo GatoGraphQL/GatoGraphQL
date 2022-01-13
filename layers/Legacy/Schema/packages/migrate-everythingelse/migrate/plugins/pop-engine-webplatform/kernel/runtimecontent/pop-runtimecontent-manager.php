@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_CACHE_EXT_JS', '.js');
 

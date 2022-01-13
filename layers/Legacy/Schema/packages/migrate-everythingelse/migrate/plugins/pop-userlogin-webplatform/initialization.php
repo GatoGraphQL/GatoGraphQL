@@ -2,7 +2,6 @@
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\Facades\FileRendererFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_UserLoginWebPlatform_Initialization
 {

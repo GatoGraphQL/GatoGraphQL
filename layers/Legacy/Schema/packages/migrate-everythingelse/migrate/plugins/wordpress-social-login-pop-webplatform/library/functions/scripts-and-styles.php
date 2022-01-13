@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Load the .js file
 \PoP\Root\App::getHookManager()->addAction("init", "gdWslScriptsAndStyles");

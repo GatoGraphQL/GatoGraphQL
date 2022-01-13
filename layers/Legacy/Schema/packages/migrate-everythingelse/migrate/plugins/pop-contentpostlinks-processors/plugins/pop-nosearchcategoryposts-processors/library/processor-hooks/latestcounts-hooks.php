@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ContentPostLinks_NoSearchCategoryPosts_LatestCounts_Hooks
 {

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('route:icon', 'popcoreRouteIcon', 10, 3);

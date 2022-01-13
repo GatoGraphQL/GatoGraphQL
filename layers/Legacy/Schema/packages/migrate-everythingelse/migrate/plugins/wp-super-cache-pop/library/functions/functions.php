@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Remove all cache deleting when a comment is added or updated. That is because the property "Only refresh current page when comments made."
 // doesn't work, because the logic reads:

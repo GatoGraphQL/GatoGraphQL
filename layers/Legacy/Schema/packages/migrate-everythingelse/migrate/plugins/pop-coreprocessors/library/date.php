@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdJqueryConstantsDaterangeImpl');

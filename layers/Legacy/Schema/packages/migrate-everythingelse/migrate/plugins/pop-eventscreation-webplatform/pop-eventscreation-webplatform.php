@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Events Creation Web Platform
 Description: Implementation of Events Creation Web Platform for PoP

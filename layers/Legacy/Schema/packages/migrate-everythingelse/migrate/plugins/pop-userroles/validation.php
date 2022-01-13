@@ -1,6 +1,5 @@
 <?php
 namespace PoPSchema\UserRoles;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_USERROLES_POP_USERS_MIN_VERSION', 0.1);

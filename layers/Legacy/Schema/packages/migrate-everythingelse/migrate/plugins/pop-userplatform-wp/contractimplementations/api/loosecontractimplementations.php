@@ -1,6 +1,5 @@
 <?php
 namespace PoP\Engine\WP;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 use PoP\LooseContracts\Facades\LooseContractManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;

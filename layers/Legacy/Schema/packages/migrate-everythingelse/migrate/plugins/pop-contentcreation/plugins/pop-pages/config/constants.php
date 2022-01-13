@@ -1,6 +1,5 @@
 <?php
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 
 \PoP\Root\App::getHookManager()->addAction(

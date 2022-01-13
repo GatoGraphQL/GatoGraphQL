@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addAction('plugins_loaded', 'popAwsInitIncludes', 115);
 function popAwsInitIncludes() {

@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_FileUpload_Picture_Utils
 {

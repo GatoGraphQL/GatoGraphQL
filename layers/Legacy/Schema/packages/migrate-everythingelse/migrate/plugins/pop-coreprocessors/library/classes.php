@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('GD_CLASS_LAZYJS', 'pop-lazyjs');
 define('GD_CLASS_SPINNER', 'spinner');

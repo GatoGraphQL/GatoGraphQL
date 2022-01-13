@@ -3,7 +3,6 @@ use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_UserState_EngineHooks
 {

@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'popthemeWassupJqueryConstants');
 function popthemeWassupJqueryConstants($jqueryConstants)

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('pop_module:sidebar_author:components', 'gdUreAuthorsidebarsComponents', 10, 2);
 function gdUreAuthorsidebarsComponents($components, $section)

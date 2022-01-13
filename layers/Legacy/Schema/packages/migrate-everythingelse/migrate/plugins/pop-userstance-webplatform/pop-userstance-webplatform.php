@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP User Stance Web Platform
 Description: Implementation of User Stance Web Platform for PoP

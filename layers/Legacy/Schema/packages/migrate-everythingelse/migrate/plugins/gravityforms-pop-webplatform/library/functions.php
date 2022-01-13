@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addAction('init', 'gfpopRemoveTinymce', 0);
 function gfpopRemoveTinymce()

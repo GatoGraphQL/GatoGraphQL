@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class WPSC_PoP_Custer_Installation
 {
     public function __construct()

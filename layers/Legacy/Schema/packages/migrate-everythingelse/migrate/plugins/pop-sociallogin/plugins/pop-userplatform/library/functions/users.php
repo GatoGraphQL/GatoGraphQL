@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_SOCIALLOGIN_USERATTRIBUTE_SOCIALLOGIN', 'sociallogin-user');
 

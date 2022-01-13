@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Newsletter Web Platform
 Description: Implementation of Newsletter Web Platform for PoP

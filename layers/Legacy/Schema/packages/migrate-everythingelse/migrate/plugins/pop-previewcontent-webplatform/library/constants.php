@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_PARAMS_PREVIEW', 'preview');
 define('POP_PARAMS_PATH', 'path');

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Add Comments with TinyMCE Processors
 Description: Implementation of Add Comments with TinyMCE Processors for PoP

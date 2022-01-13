@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // From wp-admin/includes/ajax-actions.php function wp_ajax_send_link_to_editor()
 // If the URL is embeddable, then embed it already

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('GD_THEMEMODE_WASSUP_SIMPLE', 'simple');
 

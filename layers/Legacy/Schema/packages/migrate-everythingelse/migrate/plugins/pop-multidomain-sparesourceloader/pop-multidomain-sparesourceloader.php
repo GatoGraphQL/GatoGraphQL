@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Multidomain for SPA Resource Loader
 Description: Implementation of the multi-domain features for PoP SPA Resource Loader

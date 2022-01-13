@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Add a module to include Community members in the filter
 \PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_UserCardLayoutsBase:getAdditionalSubmodules', 'gdUreUsercardlayoutAddcommunitytemplate', 10, 2);

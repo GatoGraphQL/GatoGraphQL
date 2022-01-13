@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_Wassup_ServiceWorkers_ResourceLoader_Hooks_Fonts
 {

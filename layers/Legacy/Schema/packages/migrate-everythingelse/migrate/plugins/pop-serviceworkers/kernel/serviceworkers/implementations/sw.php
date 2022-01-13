@@ -4,7 +4,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 {

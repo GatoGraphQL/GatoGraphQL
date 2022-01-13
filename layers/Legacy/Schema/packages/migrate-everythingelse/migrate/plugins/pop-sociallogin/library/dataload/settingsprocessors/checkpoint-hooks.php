@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class WSL_SettingsProcessor_CheckpointHooks
 {

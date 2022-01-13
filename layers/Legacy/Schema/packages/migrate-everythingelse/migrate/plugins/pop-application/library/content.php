@@ -1,7 +1,6 @@
 <?php
 
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 function gdGetFavicon()
 {

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ServiceWorkers_WebPlatform_ResourceLoader_ScriptsAndStylesRegistration
 {

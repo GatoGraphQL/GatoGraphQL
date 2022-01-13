@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Hook the user's network function, adding the users belonging to the same communities as the user
 \PoP\Root\App::getHookManager()->addFilter('getUserNetworkusers', 'gdUreGetUserNetworkusers', 10, 2);

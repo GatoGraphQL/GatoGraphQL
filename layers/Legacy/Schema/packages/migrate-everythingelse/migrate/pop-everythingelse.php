@@ -1,6 +1,5 @@
 <?php
 namespace PoPSchema\EverythingElse;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class Plugins
 {

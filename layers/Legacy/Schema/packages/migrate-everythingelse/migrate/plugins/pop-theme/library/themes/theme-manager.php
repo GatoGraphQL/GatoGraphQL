@@ -1,6 +1,5 @@
 <?php
 namespace PoP\Theme\Themes;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class ThemeManager
 {

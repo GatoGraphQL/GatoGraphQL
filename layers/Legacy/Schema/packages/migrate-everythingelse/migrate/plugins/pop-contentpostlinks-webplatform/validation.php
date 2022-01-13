@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_CONTENTPOSTLINKSWEBPLATFORM_POP_CONTENTPOSTLINKS_MIN_VERSION', 0.1);

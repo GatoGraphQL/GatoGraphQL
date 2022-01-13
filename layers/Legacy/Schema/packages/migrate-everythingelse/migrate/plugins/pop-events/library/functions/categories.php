@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 /**
  * Needed to add the "All" category to all events, to list them for the Latest Everything Block

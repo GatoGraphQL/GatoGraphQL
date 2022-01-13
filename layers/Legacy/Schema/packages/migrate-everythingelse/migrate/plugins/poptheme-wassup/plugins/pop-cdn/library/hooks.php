@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\URLParams;
 
 class PoP_Wassup_CDN_Hooks

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Multidomain Processors
 Description: Implementation of processors for PoP Multidomain

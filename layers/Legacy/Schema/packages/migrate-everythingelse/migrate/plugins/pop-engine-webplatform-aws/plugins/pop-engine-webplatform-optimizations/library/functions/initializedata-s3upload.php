@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_WebPlatformEngine_AWS_InitializeData_S3Upload extends PoP_WebPlatformEngine_AWS_S3UploadBase
 {

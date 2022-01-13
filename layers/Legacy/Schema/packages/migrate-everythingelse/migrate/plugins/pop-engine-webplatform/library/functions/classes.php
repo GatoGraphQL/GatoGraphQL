@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_CLASS_LOADINGCONTENT', 'pop-loadingcontent');
 define('POP_CLASSPREFIX_MERGE', 'pop-merge-');

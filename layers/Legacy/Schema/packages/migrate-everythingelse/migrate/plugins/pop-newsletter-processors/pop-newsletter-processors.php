@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Newsletter Processors
 Description: Implementation of Newsletter Processors for PoP

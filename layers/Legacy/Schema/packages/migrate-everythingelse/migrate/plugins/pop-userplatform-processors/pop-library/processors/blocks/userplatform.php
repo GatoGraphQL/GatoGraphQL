@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_BlocksBase

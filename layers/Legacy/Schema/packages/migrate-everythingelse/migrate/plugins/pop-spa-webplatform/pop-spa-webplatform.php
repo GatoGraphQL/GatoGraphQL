@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Single-Page Application Web Platform
 Description: Implementation of SPA capabilities for PoP

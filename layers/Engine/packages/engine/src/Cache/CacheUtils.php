@@ -7,7 +7,6 @@ namespace PoP\Engine\Cache;
 use PoP\Root\App;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class CacheUtils
 {

@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 
 class PoP_Blog_SubmenuHooks

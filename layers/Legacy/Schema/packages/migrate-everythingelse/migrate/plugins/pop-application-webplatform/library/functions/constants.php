@@ -1,6 +1,5 @@
 <?php
 use PoP\Engine\Constants\FormInputConstants;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_VALUEFORMAT_BOOLTOSTRING', 'bool-to-str');
 

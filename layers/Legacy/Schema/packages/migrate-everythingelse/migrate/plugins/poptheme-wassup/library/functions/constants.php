@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_IDS_APPSTATUS', 'app-status');
 define('GD_INTERCEPT_TARGET_NAVIGATOR', 'navigator');

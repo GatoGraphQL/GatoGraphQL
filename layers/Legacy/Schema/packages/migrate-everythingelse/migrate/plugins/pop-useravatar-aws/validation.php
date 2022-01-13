@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_USERAVATAR_AWS_POP_USERAVATAR_MIN_VERSION', 0.1);

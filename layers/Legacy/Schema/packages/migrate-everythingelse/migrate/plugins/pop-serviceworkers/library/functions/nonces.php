@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Comment Leo 06/08/2017: no, it is not needed! A solution is to bring the nonce not when creating the editor, but when logging in! Then,
 // we can even keep the user_id as part of the nonce!!!!!

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CommonUserRolesProcessors_UserCommunities_CreateUpdateProfileHooks
 {

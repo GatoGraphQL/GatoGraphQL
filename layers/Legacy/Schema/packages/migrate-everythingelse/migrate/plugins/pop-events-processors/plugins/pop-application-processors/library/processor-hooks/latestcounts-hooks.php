@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Events\Constants\Scopes;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 

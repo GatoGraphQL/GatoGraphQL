@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Add Highlights Processors
 Description: Implementation of Add Highlights Processors for PoP

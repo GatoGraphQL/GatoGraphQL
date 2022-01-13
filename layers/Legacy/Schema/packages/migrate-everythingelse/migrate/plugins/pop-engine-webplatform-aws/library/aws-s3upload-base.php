@@ -2,7 +2,6 @@
 use Aws\Common\Aws;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_WebPlatformEngine_AWS_S3UploadBase extends PoP_AWS_S3UploadBase
 {

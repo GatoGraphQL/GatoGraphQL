@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;

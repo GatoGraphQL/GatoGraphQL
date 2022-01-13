@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_BOOTSTRAPCOLLECTIONPROCESSORS_POP_BOOTSTRAPPROCESSORS_MIN_VERSION', 0.1);

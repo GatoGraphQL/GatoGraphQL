@@ -1,6 +1,5 @@
 <?php
 namespace PoPSchema\UserState\Settings;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 abstract class SettingsProcessorBase
 {

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Event Links  Processors
 Description: Implementation of Event Links  Processors for PoP

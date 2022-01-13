@@ -1,6 +1,5 @@
 <?php
 use PoP\FileStore\Facades\FileRendererFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /**
  * Change styles according to the domain
  */

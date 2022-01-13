@@ -6,7 +6,6 @@ Description: Integration of GetPoP Demo for PoP Theme Wassup
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

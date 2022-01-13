@@ -1,6 +1,5 @@
 <?php
 namespace PoP\EditUsers;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_EDITUSERS_POP_ENGINE_MIN_VERSION', 0.1);

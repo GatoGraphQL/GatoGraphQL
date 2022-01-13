@@ -2,7 +2,6 @@
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_BasicBlocksBase
 {

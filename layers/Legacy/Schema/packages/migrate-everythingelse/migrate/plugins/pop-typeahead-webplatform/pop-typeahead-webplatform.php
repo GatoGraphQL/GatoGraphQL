@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Typeahead Web Platform
 Description: Implementation of Typeahead Web Platform for PoP

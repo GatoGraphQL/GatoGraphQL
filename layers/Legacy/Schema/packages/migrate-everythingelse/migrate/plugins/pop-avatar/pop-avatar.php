@@ -6,7 +6,6 @@ Description: Implementation of the Avatar plugin for the Platform of Platforms (
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

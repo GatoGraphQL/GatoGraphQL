@@ -6,7 +6,6 @@ Description: Collection of Processors for Social Login for the Platform of Platf
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_SOCIALLOGINPROCESSORS_VERSION', 0.109);
 define('POP_SOCIALLOGINPROCESSORS_DIR', dirname(__FILE__));

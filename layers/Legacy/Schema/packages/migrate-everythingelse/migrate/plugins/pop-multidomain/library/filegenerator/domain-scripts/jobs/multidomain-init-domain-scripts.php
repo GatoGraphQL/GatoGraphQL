@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_MultiDomain_InitDomainScripts_Config extends \PoP\FileStore\File\AbstractRenderableFileFragment
 {

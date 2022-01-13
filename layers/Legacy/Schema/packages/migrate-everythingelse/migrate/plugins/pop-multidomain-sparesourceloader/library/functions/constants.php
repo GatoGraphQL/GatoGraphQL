@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Load Plugin-specific Libraries

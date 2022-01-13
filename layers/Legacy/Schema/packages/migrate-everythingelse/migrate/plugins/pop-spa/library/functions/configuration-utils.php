@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD', 'popwebplatform-backgroundload');
 

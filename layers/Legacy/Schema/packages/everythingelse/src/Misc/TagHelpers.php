@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\EverythingElse\Misc;
 
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_CustomSimpleViewPreviewPostLayoutsBase extends PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase

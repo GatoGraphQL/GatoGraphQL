@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP SPA Resource Loader
 Description: Implementation of SPA Resource Loader for PoP

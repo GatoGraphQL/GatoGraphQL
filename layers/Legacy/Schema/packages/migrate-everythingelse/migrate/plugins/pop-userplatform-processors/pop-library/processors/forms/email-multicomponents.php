@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {

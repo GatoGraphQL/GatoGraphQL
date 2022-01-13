@@ -1,6 +1,5 @@
 <?php
 use PoP\FileStore\Facades\FileRendererFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoPTheme_WassupWebPlatform_Installation
 {

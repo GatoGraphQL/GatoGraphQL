@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Contact Us Web Platform
 Description: Implementation of Contact Us Web Platform for PoP

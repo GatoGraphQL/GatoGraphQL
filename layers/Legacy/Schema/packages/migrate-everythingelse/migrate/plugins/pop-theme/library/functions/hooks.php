@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('RequestUtils:current_url:remove_params', 'popThemeRemoveUrlparams');
 function popThemeRemoveUrlparams($remove_params)

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Content Creation Web Platform
 Description: Implementation of Content Creation Web Platform for PoP

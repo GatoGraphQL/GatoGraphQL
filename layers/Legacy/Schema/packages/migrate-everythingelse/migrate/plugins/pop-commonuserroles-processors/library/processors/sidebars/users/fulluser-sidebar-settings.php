@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('GD_SIDEBARSECTION_ORGANIZATION', 'organization');
 define('GD_SIDEBARSECTION_INDIVIDUAL', 'individual');

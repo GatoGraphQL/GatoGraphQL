@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 if (! defined('ABSPATH')) {

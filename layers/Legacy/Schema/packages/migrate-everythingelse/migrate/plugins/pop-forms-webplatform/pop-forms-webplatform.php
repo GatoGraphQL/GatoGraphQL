@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Forms Web Platform
 Description: Implementation of Forms Web Platform for PoP

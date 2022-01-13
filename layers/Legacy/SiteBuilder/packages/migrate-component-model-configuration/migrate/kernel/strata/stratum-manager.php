@@ -1,6 +1,5 @@
 <?php
 namespace PoP\ComponentModel;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class StratumManager
 {

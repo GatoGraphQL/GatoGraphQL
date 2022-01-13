@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Avatar_AWS_S3Upload extends PoP_AWS_S3UploadBase
 {

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PhotoSwipe_PoP_Initialization
 {
     public function initialize()

@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('PoPWebPlatform_Engine:request-meta', 'addToplevelVarsSilent');
 function addToplevelVarsSilent($meta)

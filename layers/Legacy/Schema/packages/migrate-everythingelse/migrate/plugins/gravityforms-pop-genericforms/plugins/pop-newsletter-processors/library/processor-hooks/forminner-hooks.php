@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Newsletter_Module_Processor_GFFormInnerHooks
 {

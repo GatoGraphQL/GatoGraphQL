@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Master Collection Web Platform
 Description: Implementation of Master Collection Web Platform for PoP

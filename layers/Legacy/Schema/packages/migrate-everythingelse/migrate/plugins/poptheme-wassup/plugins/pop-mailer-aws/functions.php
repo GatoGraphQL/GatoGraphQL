@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('PoP_Mailer_AWS_Engine:uploadToS3:configuration', 'popthemeWassupEmailConfiguration');
 function popthemeWassupEmailConfiguration($configuration)

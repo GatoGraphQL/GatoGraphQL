@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Add the source param whenever in an author
 \PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_CustomSubMenus:getUrl:author', 'gdUreAddSourceParamToSubmenu', 10, 3);

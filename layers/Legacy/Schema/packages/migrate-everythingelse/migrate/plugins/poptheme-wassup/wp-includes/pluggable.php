@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Copied from WP 4.3.1.
 if (!function_exists('wp_new_user_notification')) :

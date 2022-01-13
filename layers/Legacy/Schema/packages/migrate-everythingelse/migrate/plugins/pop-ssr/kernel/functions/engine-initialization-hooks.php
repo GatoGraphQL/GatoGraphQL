@@ -11,7 +11,6 @@ use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_SSR_EngineInitialization_Hooks
 {

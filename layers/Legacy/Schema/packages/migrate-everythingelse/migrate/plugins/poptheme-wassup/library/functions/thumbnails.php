@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 \PoP\Root\App::getHookManager()->addAction('after_setup_theme', 'gdThumbEnable');

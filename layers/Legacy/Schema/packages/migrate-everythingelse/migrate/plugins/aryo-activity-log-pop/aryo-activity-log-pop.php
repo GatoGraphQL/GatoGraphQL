@@ -6,7 +6,6 @@ Description: Activity Log for the Platform of Platforms (PoP)
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('AAL_POP_VERSION', 0.107);
 define('AAL_POP_DIR', dirname(__FILE__));

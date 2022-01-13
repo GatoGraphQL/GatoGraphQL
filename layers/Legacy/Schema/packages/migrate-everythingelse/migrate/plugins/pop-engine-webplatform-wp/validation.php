@@ -1,6 +1,5 @@
 <?php
 namespace PoP\EngineWebPlatform;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_ENGINEWEBPLATFORMWP_POP_ENGINEWP_MIN_VERSION', 0.1);

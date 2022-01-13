@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Execute last: remove the templates folder since the frame is added in the Lambda function instead
 // \PoP\Root\App::getHookManager()->addAction('sendemailToUsers:template_folder', '__return_false', PHP_INT_MAX);

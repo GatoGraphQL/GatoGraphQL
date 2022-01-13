@@ -1,7 +1,6 @@
 <?php
 use Aws\Common\Aws;
 
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_AWS_S3UploadBase
 {

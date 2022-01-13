@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:multilayout_labels', 'categorypostsMultilayoutLabels');

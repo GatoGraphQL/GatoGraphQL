@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_URE_Module_Processor_UpdateProfileForms extends PoP_Module_Processor_FormsBase
 {

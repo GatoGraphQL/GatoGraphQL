@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('PoP_UserCommunities_Module_Processor_SidebarMultiples:sidebar-layouts', 'gdUreAddSidebarLayouts', 10, 3);
 function gdUreAddSidebarLayouts($layouts, $author, array $module)

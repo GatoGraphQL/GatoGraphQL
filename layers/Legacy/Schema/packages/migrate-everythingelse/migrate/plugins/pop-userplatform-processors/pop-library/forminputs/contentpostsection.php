@@ -1,6 +1,5 @@
 <?php
 use PoP\Engine\FormInputs\SelectFormInput;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_FormInput_PostSection extends SelectFormInput
 {

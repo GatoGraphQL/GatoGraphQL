@@ -1,6 +1,5 @@
 <?php
 use PoP\Engine\FormInputs\MultipleSelectFormInput;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_FormInput_LinkCategories extends MultipleSelectFormInput
 {

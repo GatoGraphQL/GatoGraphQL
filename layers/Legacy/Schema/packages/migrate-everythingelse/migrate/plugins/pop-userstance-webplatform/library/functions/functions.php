@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:multilayout_labels', 'userstanceMultilayoutLabels');
 function userstanceMultilayoutLabels($labels)

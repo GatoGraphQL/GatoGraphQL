@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 define('GD_URLPARAM_RSSCAMPAIGN', 'campaign');

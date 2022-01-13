@@ -6,7 +6,6 @@ Description: Plug-in providing the webplatform for Bootstrap for the Platform of
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

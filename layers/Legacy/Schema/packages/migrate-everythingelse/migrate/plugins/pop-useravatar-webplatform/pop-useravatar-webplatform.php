@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP User Avatar Web Platform
 Description: Implementation of User Avatar Web Platform for PoP

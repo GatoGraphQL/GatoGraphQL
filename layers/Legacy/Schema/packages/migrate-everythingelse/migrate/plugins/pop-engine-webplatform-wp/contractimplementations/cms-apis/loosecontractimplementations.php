@@ -1,6 +1,5 @@
 <?php
 namespace PoP\EngineWebPlatform\WP;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\LooseContracts\Facades\LooseContractManagerFacade;
 
 class WebPlatformCMSLooseContractImplementations

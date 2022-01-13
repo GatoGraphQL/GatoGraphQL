@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_CommonPages_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBase
 {

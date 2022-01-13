@@ -6,7 +6,6 @@ Description: Processors for the GetPoP Demo website, implemented using the Wassu
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

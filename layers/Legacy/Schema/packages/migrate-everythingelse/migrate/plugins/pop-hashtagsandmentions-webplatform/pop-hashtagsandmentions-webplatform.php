@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Hashtags and Mentions Web Platform
 Description: Implementation of Hashtags and Mentions Web Platform for PoP

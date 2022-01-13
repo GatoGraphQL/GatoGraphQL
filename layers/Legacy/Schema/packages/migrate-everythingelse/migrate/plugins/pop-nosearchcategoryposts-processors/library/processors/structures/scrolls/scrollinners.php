@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {

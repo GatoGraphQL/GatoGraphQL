@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP No Search Category Posts Web Platform
 Description: Implementation of Content Category Posts Web Platform for PoP

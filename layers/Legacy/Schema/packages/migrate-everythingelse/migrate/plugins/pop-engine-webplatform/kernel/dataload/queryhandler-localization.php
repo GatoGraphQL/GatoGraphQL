@@ -1,7 +1,6 @@
 <?php
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('gd_jquery_constants', 'gdJqueryConstantsQueryhandler');
 function gdJqueryConstantsQueryhandler($jqueryConstants)

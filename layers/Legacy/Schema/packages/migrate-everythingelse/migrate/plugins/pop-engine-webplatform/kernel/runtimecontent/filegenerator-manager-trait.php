@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 trait FileGeneratorManagerTrait
 {

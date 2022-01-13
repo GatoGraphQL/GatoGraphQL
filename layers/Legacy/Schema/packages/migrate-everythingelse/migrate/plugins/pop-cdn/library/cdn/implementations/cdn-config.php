@@ -1,6 +1,5 @@
 <?php
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CDN_FileReproduction_ThumbprintsConfig extends PoP_CDN_FileReproduction
 {

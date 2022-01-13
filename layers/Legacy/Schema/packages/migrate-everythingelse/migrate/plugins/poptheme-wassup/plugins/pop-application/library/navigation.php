@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 

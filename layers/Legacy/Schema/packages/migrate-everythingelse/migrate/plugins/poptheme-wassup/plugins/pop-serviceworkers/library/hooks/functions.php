@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Enable ServiceWorkers to cache all TinyMCE files for the webplatform
 \PoP\Root\App::getHookManager()->addFilter('PoP_ServiceWorkers_Hooks_TinyMCE:enable', '__return_true');

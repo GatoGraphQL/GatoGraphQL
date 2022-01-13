@@ -6,7 +6,6 @@ Description: Implementation of processors for the SPA for the Platform of Platfo
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_CommonAutomatedEmails_AAL_ResourceLoader_Hooks
 {

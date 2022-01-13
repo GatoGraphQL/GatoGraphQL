@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('gdAcfGetKeysStoreAsSingle', 'gdAcfGetKeysStoreAsSingleCustomImpl');
 function gdAcfGetKeysStoreAsSingleCustomImpl($keys)

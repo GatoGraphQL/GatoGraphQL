@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class GD_URE_AAL_CustomMultipleLayoutHooks
 {

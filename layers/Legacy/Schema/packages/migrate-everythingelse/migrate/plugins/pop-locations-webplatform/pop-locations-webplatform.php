@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Locations Web Platform
 Description: Implementation of Locations Web Platform for PoP

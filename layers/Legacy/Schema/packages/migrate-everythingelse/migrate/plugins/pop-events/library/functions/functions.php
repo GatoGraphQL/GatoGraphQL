@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\Constants;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 

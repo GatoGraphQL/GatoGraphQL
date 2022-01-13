@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_PARAMS_PARAMSSCOPE_URL', 'paramsscope-url');
 

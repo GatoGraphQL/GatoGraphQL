@@ -1,7 +1,6 @@
 <?php
 
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('popcms:post:title', 'maybeGetTitleAsBasicContent', 10, 2);

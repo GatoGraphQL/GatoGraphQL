@@ -1,7 +1,6 @@
 <?php
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ApplicationProcessors_UserLogin_Hooks
 {

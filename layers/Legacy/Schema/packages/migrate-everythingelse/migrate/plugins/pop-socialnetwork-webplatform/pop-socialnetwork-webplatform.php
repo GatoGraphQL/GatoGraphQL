@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Social Network Web Platform
 Description: Implementation of Social Network Web Platform for PoP

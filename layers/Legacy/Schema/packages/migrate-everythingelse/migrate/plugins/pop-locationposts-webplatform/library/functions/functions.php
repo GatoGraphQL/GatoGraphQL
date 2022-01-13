@@ -1,6 +1,5 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('pop_modulemanager:multilayout_labels', 'gdSpEmMultilayoutLabels');
 function gdSpEmMultilayoutLabels($labels)

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_SPAResourceLoader_FileReproduction_InitialResourcesConfig extends PoP_SPAResourceLoader_FileReproduction_AddResourcesConfigBase
 {

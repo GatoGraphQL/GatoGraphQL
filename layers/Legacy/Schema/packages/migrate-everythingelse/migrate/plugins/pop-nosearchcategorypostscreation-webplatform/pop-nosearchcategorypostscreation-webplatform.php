@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP No Search Category Posts Creation Web Platform
 Description: Implementation of EventLinks Creation Web Platform for PoP

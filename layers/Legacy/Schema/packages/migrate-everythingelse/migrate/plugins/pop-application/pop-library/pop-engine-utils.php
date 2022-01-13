@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 define('POP_HOOK_POPMANAGERUTILS_EMBEDURL', 'PoP_Application_Engine_Utils:getEmbedUrl');
 define('POP_HOOK_POPMANAGERUTILS_PRINTURL', 'PoP_Application_Engine_Utils:getPrintUrl');

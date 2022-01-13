@@ -1,7 +1,6 @@
 <?php
 
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_WebPlatformEngineOptimizations_Initialization
 {

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('wp_get_attachment_image_attributes', 'gdWpGetAttachmentImageAttributesRemoveQuotes', 10, 2);
 function gdWpGetAttachmentImageAttributesRemoveQuotes($attr, $attachment)

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 class PoP_BootstrapCollectionWebPlatform_Initialization
 {
     public function initialize()

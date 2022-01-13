@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Theme Wassup Web Platform
 Description: Implementation of Theme Wassup Web Platform for PoP

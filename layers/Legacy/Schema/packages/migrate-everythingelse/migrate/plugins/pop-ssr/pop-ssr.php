@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Server-Side Rendering
 Description: Implementation of SSR capabilities for PoP

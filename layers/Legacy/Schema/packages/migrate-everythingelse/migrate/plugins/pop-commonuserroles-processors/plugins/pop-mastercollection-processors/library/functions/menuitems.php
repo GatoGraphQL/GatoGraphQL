@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('gdAuthorParentpageid', 'gdUreAuthorParentpageidImpl', 10, 2);
 function gdUreAuthorParentpageidImpl($pageid, $author_id = null)

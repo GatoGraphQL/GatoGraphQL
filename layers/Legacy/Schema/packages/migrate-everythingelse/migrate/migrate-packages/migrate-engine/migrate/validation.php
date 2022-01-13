@@ -1,6 +1,5 @@
 <?php
 namespace PoP\Engine;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class Validation

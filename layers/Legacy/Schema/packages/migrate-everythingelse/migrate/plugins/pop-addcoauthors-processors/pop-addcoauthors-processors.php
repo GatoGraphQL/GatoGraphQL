@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Add Coauthors Processors
 Description: Implementation of Add Coauthors Processors for PoP

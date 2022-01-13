@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 const GD_URE_ROLE_INDIVIDUAL = 'individual';

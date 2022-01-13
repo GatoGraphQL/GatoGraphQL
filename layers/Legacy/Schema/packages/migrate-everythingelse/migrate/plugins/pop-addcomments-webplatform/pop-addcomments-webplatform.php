@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Add Comments Web Platform
 Description: Implementation of Add Comments Web Platform for PoP

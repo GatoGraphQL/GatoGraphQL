@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('gdAcfGetKeysStoreAsSingle', 'userstanceAcfGetKeysStoreAsSingleCustom');
 function userstanceAcfGetKeysStoreAsSingleCustom($keys)

@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: PoP Avatar Foundation
 Description: Implementation of Avatar Foundation for PoP

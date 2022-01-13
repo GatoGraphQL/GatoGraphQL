@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {

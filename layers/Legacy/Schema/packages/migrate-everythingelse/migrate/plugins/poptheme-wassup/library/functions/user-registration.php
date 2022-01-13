@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 \PoP\Root\App::getHookManager()->addAction('show_user_profile', 'extraUserProfileFields', 1);

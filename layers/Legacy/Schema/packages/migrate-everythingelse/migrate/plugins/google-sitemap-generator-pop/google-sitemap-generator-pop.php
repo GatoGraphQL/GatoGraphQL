@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 /*
 Plugin Name: Google XML Sitemaps for PoP
 Description: Integration of plugin Google XML Sitemaps with PoP

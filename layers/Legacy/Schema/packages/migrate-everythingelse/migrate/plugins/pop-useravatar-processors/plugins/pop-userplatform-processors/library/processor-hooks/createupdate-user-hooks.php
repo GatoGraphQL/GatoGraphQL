@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_UserAvatarProcessors_UserPlatformProcessors_CreateUpdateUser_Hooks
 {

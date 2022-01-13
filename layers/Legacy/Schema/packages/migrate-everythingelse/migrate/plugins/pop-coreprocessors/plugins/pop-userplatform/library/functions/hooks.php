@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 \PoP\Root\App::getHookManager()->addFilter('PoP_Module_Processor_UserTypeaheadComponentFormInputsBase:thumbprint-query', 'addProfileRole');
 function addProfileRole($query)

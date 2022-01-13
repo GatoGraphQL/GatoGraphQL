@@ -1,5 +1,4 @@
 <?php
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoPThemeWassup_UserCommunities_ResourceLoader_Hooks

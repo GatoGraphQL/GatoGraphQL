@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_ServiceWorkers_WebPlatformEngineOptimization_ResourceLoader_Initialization
 {

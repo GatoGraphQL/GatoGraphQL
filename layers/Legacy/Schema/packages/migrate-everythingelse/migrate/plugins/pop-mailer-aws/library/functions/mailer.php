@@ -4,7 +4,6 @@ use Aws\Common\Aws;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 class PoP_Mailer_AWS_Engine
 {

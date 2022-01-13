@@ -1,6 +1,5 @@
 <?php
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Facades\Hooks\HooksAPIFacade;
 
 // Priority: execute just after the "website-environment" plugin has set all the environment constants
 // That is needed to set POP_CDNFOUNDATION_CDN_ASSETS_URI before
