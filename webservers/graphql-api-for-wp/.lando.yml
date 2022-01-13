@@ -39,8 +39,6 @@ services:
         - >-
           ../../layers/Engine/packages/access-control:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/access-control
         - >-
-          ../../layers/Engine/packages/basic-service:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/basic-service
-        - >-
           ../../layers/Engine/packages/cache-control:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/cache-control
         - >-
           ../../layers/Engine/packages/component-model:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/component-model
@@ -59,11 +57,7 @@ services:
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/guzzle-helpers
         - >-
-          ../../layers/Engine/packages/hooks-php:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/hooks-php
-        - >-
           ../../layers/Engine/packages/hooks-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/hooks-wp
-        - >-
-          ../../layers/Engine/packages/hooks:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/hooks
         - >-
           ../../layers/Engine/packages/loosecontracts:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/loosecontracts
         - >-
@@ -79,11 +73,7 @@ services:
         - >-
           ../../layers/Engine/packages/routing:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/routing
         - >-
-          ../../layers/Engine/packages/translation-mock:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/translation-mock
-        - >-
           ../../layers/Engine/packages/translation-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/translation-wp
-        - >-
-          ../../layers/Engine/packages/translation:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/translation
         - >-
           ../../layers/GraphQLAPIForWP/packages/external-dependency-wrappers:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/external-dependency-wrappers
         - >-
