@@ -2,7 +2,6 @@
 
 namespace PoP\HooksWP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**
