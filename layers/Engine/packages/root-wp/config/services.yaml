@@ -5,4 +5,4 @@ services:
         autoconfigure: true
 
     PoP\Root\Translation\TranslationAPIInterface:
-        class: \PoP\RootWP\TranslationAPI
+        class: \PoP\RootWP\Translation\TranslationAPI
