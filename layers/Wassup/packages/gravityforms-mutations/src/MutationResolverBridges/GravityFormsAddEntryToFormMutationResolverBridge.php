@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
-use PoP\Root\App;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\Root\App;
+use PoP\Root\Constants\HookNames;
 use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;
 use PoP\Root\Services\AutomaticallyInstantiatedServiceTrait;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
@@ -45,24 +46,24 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         // Execute before $hooksAPI->addAction('wp',  array('RGForms', 'maybe_process_form'), 9);
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
             App::addAction(
-                'popcms:boot',
+                HookNames::AFTER_BOOT_APPLICATION,
                 array($this, 'setup'),
                 5
             );
 
             // The 2 functions below must be executed in this order, otherwise 'renameFields' may remove the value filled by 'maybeFillFields'
             App::addAction(
-                'popcms:boot',
+                HookNames::AFTER_BOOT_APPLICATION,
                 array($this, 'renameFields'),
                 6
             );
             App::addAction(
-                'popcms:boot',
+                HookNames::AFTER_BOOT_APPLICATION,
                 array($this, 'maybeFillFields'),
                 7
             );
             App::addAction(
-                'popcms:boot',
+                HookNames::AFTER_BOOT_APPLICATION,
                 array($this, 'maybeValidateCaptcha'),
                 8
             );

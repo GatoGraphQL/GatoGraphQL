@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Endpoint;
 
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Constants\HookNames;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use PoP\Root\Services\BasicServiceTrait;
 
 class EndpointExecuterService extends AbstractAutomaticallyInstantiatedService
 {
@@ -30,7 +31,7 @@ class EndpointExecuterService extends AbstractAutomaticallyInstantiatedService
          * is loaded, and asking for `is_singular(CPT)` works.
          */
         \add_action(
-            'popcms:boot',
+            HookNames::AFTER_BOOT_APPLICATION,
             [$this, 'executeRequestedEndpoint']
         );
     }

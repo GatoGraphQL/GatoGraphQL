@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root;
 
 use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Constants\HookNames;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
 
@@ -349,6 +350,6 @@ class AppLoader implements AppLoaderInterface
         App::getComponentManager()->afterBoot();
 
         // Allow to inject functionality
-        App::doAction('popcms:boot');
+        App::doAction(HookNames::AFTER_BOOT_APPLICATION);
     }
 }

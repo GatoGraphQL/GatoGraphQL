@@ -6,6 +6,7 @@ namespace PoP\RootWP;
 
 use PoP\Root\App;
 use PoP\Root\AppLoader as UpstreamAppLoader;
+use PoP\Root\Constants\HookNames;
 
 class AppLoader extends UpstreamAppLoader
 {
@@ -47,7 +48,7 @@ class AppLoader extends UpstreamAppLoader
         // Allow to inject functionality
         App::addAction(
             $actionHook,
-            fn () => App::doAction('popcms:boot'),
+            fn () => App::doAction(HookNames::AFTER_BOOT_APPLICATION),
             10
         );
     }
