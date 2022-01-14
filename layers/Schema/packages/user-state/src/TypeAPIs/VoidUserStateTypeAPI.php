@@ -16,11 +16,11 @@ class VoidUserStateTypeAPI implements UserStateTypeAPIInterface
     {
         return false;
     }
-    public function getCurrentUser()
+    public function getCurrentUser(): ?object
     {
         return null;
     }
-    public function getCurrentUserID()
+    public function getCurrentUserID(): string|int|null
     {
         return null;
     }
