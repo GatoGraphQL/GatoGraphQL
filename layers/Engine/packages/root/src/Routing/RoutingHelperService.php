@@ -15,7 +15,7 @@ class RoutingHelperService implements RoutingHelperServiceInterface
     {
         // Allow to remove the language information from qTranslate (https://domain.com/en/...)
         return App::applyFilters(
-            '\PoP\Routing:uri-route',
+            HookNames::REQUEST_URI,
             $_SERVER['REQUEST_URI'] ?? '' // When executing PHPUnit tests there'll be no URI
         );
     }

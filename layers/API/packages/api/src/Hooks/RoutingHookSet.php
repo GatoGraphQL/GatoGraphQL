@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\API\Hooks;
 
-use PoP\Root\App;
 use PoP\API\Component;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
+use PoP\Root\Routing\HookNames;
 
 class RoutingHookSet extends AbstractHookSet
 {
@@ -37,7 +38,7 @@ class RoutingHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            '\PoP\Routing:uri-route',
+            HookNames::REQUEST_URI,
             array($this, 'getURIRoute')
         );
 
