@@ -7,7 +7,7 @@ class PoP_ModuleManager_UserMetaUtils
     public static function init(): void
     {
         \PoP\Root\App::addAction(
-            'popcms:shutdown',
+            'shutdown', // This is a WP hook, must migrate to a PoP one
             array('PoP_ModuleManager_UserMetaUtils', 'saveUserMeta')
         );
     }
