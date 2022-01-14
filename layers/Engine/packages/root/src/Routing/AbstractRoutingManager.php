@@ -49,12 +49,6 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
         return $this->routes;
     }
 
-    public function getCurrentNature(): string
-    {
-        // By default, everything is a standard route
-        return RouteNatures::GENERIC;
-    }
-
     public function getCurrentRoute(): string
     {
         $nature = $this->getCurrentNature();

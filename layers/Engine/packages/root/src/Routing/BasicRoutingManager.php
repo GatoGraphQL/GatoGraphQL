@@ -10,5 +10,11 @@ namespace PoP\Root\Routing;
  */
 class BasicRoutingManager extends AbstractRoutingManager
 {
-
+    /**
+     * By default, everything is a generic route
+     */
+    public function getCurrentNature(): string
+    {
+        return RouteNatures::GENERIC;
+    }
 }

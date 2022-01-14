@@ -16,6 +16,7 @@ class WPQueryRoutingManager extends AbstractRoutingManager
     public function getCurrentNature(): string
     {
         $this->init();
+        
         /** @var WP_Query */
         $query = $this->query;
         if ($this->isGeneric()) {
