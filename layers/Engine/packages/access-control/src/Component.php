@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\MandatoryDirectivesByConfiguration\Component::class,
-            \PoP\Engine\Component::class,
+            \PoP\ComponentModel\Component::class,
         ];
     }
 

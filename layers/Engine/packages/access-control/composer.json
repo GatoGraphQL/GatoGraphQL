@@ -165,7 +165,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/engine": "^0.9",
+        "getpop/component-model": "^0.9",
         "getpop/mandatory-directives-by-configuration": "^0.9"
     },
     "require-dev": {
