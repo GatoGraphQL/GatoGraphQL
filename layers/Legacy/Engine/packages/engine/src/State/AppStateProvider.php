@@ -10,7 +10,7 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Engine\Constants\Params;
 use PoP\Engine\ModuleFilters\HeadModule;
 use PoP\Engine\ModuleFilters\MainContentModule;
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
@@ -18,7 +18,8 @@ class AppStateProvider extends AbstractAppStateProvider
     private ?HeadModule $headModule = null;
     private ?ModulePaths $modulePaths = null;
     private ?MainContentModule $mainContentModule = null;
-    
+    private ?RouteModuleProcessorManagerInterface $routeModuleProcessorManager = null;
+
     final public function setHeadModule(HeadModule $headModule): void
     {
         $this->headModule = $headModule;
@@ -43,6 +44,14 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->mainContentModule ??= $this->instanceManager->getInstance(MainContentModule::class);
     }
+    final public function setRouteModuleProcessorManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void
+    {
+        $this->routeModuleProcessorManager = $routeModuleProcessorManager;
+    }
+    final protected function getRouteModuleProcessorManager(): RouteModuleProcessorManagerInterface
+    {
+        return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(RouteModuleProcessorManagerInterface::class);
+    }
 
     public function initialize(array &$state): void
     {
@@ -62,7 +71,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // Hence, calculate only at the very end
         // If filtering module by "maincontent", then calculate which is the main content module
         if (isset($state['modulefilter']) && $state['modulefilter'] === $this->mainContentModule->getName()) {
-            $state['maincontentmodule'] = RouteModuleProcessorManagerFacade::getInstance()->getRouteModuleByMostAllmatchingVarsProperties(\POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+            $state['maincontentmodule'] = $this->getRouteModuleProcessorManager()->getRouteModuleByMostAllmatchingVarsProperties(\POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
         }
     }
 }
