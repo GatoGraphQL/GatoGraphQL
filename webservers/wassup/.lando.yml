@@ -64,7 +64,6 @@ services:
           ../../layers/Engine/packages/function-fields:/app/vendor/getpop/function-fields
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
-        - '../../layers/Engine/packages/hooks-wp:/app/vendor/getpop/hooks-wp'
         - >-
           ../../layers/Engine/packages/loosecontracts:/app/vendor/getpop/loosecontracts
         - >-
@@ -77,12 +76,10 @@ services:
           ../../layers/SiteBuilder/packages/resourceloader:/app/vendor/getpop/resourceloader
         - '../../layers/SiteBuilder/packages/resources:/app/vendor/getpop/resources'
         - '../../layers/Engine/packages/root:/app/vendor/getpop/root'
-        - '../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp'
+        - '../../layers/Engine/packages/root-wp:/app/vendor/getpop/root-wp'
         - '../../layers/SiteBuilder/packages/site:/app/vendor/getpop/site'
         - '../../layers/SiteBuilder/packages/site-wp:/app/vendor/getpop/site-wp'
         - '../../layers/SiteBuilder/packages/spa:/app/vendor/getpop/spa'
-        - >-
-          ../../layers/Engine/packages/root-wp:/app/vendor/getpop/root-wp
         - >-
           ../../layers/Schema/packages/block-metadata-for-wp:/app/vendor/pop-schema/block-metadata-for-wp
         - >-

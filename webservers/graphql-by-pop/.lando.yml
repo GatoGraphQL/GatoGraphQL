@@ -45,7 +45,6 @@ services:
           ../../layers/Engine/packages/graphql-parser:/app/vendor/getpop/graphql-parser
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
-        - '../../layers/Engine/packages/hooks-wp:/app/vendor/getpop/hooks-wp'
         - >-
           ../../layers/Engine/packages/loosecontracts:/app/vendor/getpop/loosecontracts
         - >-
@@ -55,7 +54,6 @@ services:
         - >-
           ../../layers/Engine/packages/query-parsing:/app/vendor/getpop/query-parsing
         - '../../layers/Engine/packages/root:/app/vendor/getpop/root'
-        - '../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp'
         - >-
           ../../layers/Engine/packages/root-wp:/app/vendor/getpop/root-wp
         - >-

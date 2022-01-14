@@ -57,8 +57,6 @@ services:
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/guzzle-helpers
         - >-
-          ../../layers/Engine/packages/hooks-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/hooks-wp
-        - >-
           ../../layers/Engine/packages/loosecontracts:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/loosecontracts
         - >-
           ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/mandatory-directives-by-configuration
@@ -68,8 +66,6 @@ services:
           ../../layers/Engine/packages/query-parsing:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/query-parsing
         - >-
           ../../layers/Engine/packages/root:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/root
-        - >-
-          ../../layers/Engine/packages/routing-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/routing-wp
         - >-
           ../../layers/Engine/packages/root-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/root-wp
         - >-
