@@ -73,12 +73,14 @@ class RoutingHookSet extends AbstractHookSet
         if (!$componentConfiguration->overrideRequestURI()) {
             return $route;
         }
+        
         $homeURL = $this->getCmsService()->getHomeURL();
         $currentURL = $this->getRequestHelperService()->getCurrentURL();
+
         // Remove the protocol to avoid erroring on http/https
         $homeURL = preg_replace('#^https?://#', '', $homeURL);
         $currentURL = preg_replace('#^https?://#', '', $currentURL);
-        if (substr($currentURL, 0, strlen($homeURL)) != $homeURL) {
+        if (substr($currentURL, 0, strlen($homeURL)) !== $homeURL) {
             // This is too harsh. Just ignore hook
             // throw new Exception(sprintf(
             //     'The webserver is not configured properly, since the current URL \'%s\' does not contain the home URL \'%s\' (possibly the server name has not been set-up correctly)',
