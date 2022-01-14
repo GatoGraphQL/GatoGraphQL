@@ -17,7 +17,7 @@ class PoP_Mailer_AWS_Engine
         // Send all emails at the end of the PoP execution
         // Send the queue at the end
         \PoP\Root\App::addAction(
-            'popcms:shutdown',
+            'shutdown', // This is a WP hook, must migrate to a PoP one
             array($this, 'sendQueue'),
             10000
         );

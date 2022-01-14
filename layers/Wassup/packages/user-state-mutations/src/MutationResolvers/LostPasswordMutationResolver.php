@@ -51,7 +51,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
             '<p>%s</p><br/>',
             sprintf(
                 $this->__('Someone requested that the password be reset for your account on <a href="%s">%s</a>. If this was a mistake, or if it was not you who requested the password reset, just ignore this email and nothing will happen.', 'pop-application'),
-                GeneralUtils::maybeAddTrailingSlash($this->getCmsService()->getHomeURL()),
+                GeneralUtils::maybeAddTrailingSlash($this->getCMSService()->getHomeURL()),
                 $cmsapplicationapi->getSiteName()
             )
         );

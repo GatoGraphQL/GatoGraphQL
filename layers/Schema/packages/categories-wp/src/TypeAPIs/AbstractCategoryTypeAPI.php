@@ -151,7 +151,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     public function getCategoryBase()
     {
-        return $this->getCmsService()->getOption($this->getCategoryBaseOption());
+        return $this->getCMSService()->getOption($this->getCategoryBaseOption());
     }
 
     public function setPostCategories($post_id, array $categories, bool $append = false)

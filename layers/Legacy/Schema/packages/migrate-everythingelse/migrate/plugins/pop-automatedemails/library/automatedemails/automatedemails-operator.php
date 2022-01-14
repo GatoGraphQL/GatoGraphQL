@@ -7,7 +7,7 @@ class PoP_AutomatedEmails_Operator
     public function __construct()
     {
         \PoP\Root\App::addAction(
-            'popcms:shutdown',
+            'shutdown', // This is a WP hook, must migrate to a PoP one
             array($this, 'maybeSendAutomatedemail')
         );
     }
