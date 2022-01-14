@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -93,7 +93,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         }
 
         if ($ids) {
-            $nature = CustomPostRouteNatures::CUSTOMPOST;
+            $nature = CustomPostRequestNature::CUSTOMPOST;
             $merge = true;
 
             // Add the hook before the execution of the method, and remove it immediately afterwards

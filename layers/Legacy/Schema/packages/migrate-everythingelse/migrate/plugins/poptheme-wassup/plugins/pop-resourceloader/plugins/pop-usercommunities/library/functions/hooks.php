@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPThemeWassup_UserCommunities_ResourceLoader_Hooks
 {
@@ -15,7 +15,7 @@ class PoPThemeWassup_UserCommunities_ResourceLoader_Hooks
 
     public function getAuthorResourcesExtraVars($extra_vars, $nature, $ids)
     {
-        if ($nature == UserRouteNatures::USER) {
+        if ($nature == UserRequestNature::USER) {
             // Organization: it must add together the resources for both "source=community" and "source=user"
             // Then, for the organization and community roles, we must set the extra \PoP\Root\App::getState('source') value
             $source = array();

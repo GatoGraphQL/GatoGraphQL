@@ -7,8 +7,8 @@ namespace PoPSchema\PostCategories\ConditionalOnComponent\RESTAPI\RouteModulePro
 use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
-use PoP\Root\Routing\RouteNatures;
-use PoPSchema\Categories\Routing\RouteNatures as CategoryRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPSchema\Categories\Routing\RequestNature as CategoryRequestNature;
 use PoPSchema\PostCategories\Component;
 use PoPSchema\PostCategories\ComponentConfiguration;
 use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
@@ -41,7 +41,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
-        $ret[CategoryRouteNatures::CATEGORY][] = [
+        $ret[CategoryRequestNature::CATEGORY][] = [
             'module' => [
                 PostCategoryFieldDataloadModuleProcessor::class,
                 PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY,
@@ -83,7 +83,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
             ],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
@@ -105,7 +105,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 ],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[CategoryRouteNatures::CATEGORY][$route][] = [
+            $ret[CategoryRequestNature::CATEGORY][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,

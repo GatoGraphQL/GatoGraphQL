@@ -1,9 +1,9 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
@@ -20,7 +20,7 @@ class PoP_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPage
             POPTHEME_WASSUP_ROUTE_SUMMARY => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_AUTHORSUMMARY],
         );
         foreach ($modules as $route => $module) {
-            $ret[UserRouteNatures::USER][$route][] = ['module' => $module];
+            $ret[UserRequestNature::USER][$route][] = ['module' => $module];
         }
 
         // Override default module
@@ -29,7 +29,7 @@ class PoP_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPage
         );
         foreach ($routes as $route) {
             // Override the default Page Content module
-            $ret[RouteNatures::GENERIC][$route][] = ['module' => null];
+            $ret[RequestNature::GENERIC][$route][] = ['module' => null];
         }
 
         return $ret;
@@ -43,27 +43,27 @@ class PoP_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPage
         $ret = array();
 
         // 404
-        $ret[RouteNatures::NOTFOUND][] = [
+        $ret[RequestNature::NOTFOUND][] = [
             'module' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_404]
         ];
 
         // Home
-        $ret[RouteNatures::HOME][] = [
+        $ret[RequestNature::HOME][] = [
             'module' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_HOME]
         ];
 
         // Author
-        $ret[UserRouteNatures::USER][] = [
+        $ret[UserRequestNature::USER][] = [
             'module' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_AUTHOR]
         ];
 
         // Tag
-        $ret[TagRouteNatures::TAG][] = [
+        $ret[TagRequestNature::TAG][] = [
             'module' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_TAG]
         ];
 
         // Single
-        $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
+        $ret[CustomPostRequestNature::CUSTOMPOST][] = [
             'module' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_SINGLEPOST]
         ];
 

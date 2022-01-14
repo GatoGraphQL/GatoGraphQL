@@ -552,7 +552,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
     //         case self::MODULE_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_HOMECONTENT_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_HOMECONTENT_SCROLL_LIST:
-    //             return RouteNatures::HOME;
+    //             return RequestNature::HOME;
 
     //         case self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_DETAILS:
@@ -565,7 +565,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
     //         case self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_TAGCONTENT_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_DETAILS:
@@ -577,7 +577,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
     //         case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_TAGCONTENT_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_LIST:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
     //     }
 
     //     return parent::getNature($module);

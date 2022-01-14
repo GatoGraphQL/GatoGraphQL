@@ -1,7 +1,7 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 
 class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -16,7 +16,7 @@ class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionRouteModule
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
         }
 
         $modules = array(
@@ -24,7 +24,7 @@ class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionRouteModule
             POP_ADDHIGHLIGHTS_ROUTE_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;
@@ -37,7 +37,7 @@ class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionRouteModule
     {
         $ret = array();
 
-        $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
+        $ret[CustomPostRequestNature::CUSTOMPOST][] = [
             'module' => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR],
             'conditions' => [
                 'routing' => [

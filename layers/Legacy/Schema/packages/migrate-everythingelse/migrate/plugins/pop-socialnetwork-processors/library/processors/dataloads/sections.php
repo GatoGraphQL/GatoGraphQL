@@ -283,13 +283,13 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
     //         case self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_LIST:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
 
     //         case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_DETAILS:
@@ -303,7 +303,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
     //         case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_LIST:
-    //             return CustomPostRouteNatures::CUSTOMPOST;
+    //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

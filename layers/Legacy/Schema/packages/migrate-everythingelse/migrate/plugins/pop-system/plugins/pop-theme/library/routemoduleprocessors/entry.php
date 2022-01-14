@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoPSystem_Theme_Module_EntryRouteModuleProcessor extends \PoP\ModuleRouting\AbstractEntryRouteModuleProcessor
 {
@@ -15,7 +15,7 @@ class PoPSystem_Theme_Module_EntryRouteModuleProcessor extends \PoP\ModuleRoutin
             POP_SYSTEM_ROUTE_SYSTEM_GENERATETHEME => [PoP_System_Theme_Module_Processor_SystemActions::class, PoP_System_Theme_Module_Processor_SystemActions::MODULE_DATALOADACTION_SYSTEM_GENERATETHEME],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;

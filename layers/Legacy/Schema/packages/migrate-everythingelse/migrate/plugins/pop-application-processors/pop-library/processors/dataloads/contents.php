@@ -103,14 +103,14 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     //     switch ($module[1]) {
     //         case self::MODULE_DATALOAD_AUTHOR_CONTENT:
     //         case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_TAG_CONTENT:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
 
     //         case self::MODULE_DATALOAD_SINGLE_CONTENT:
     //         case self::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT:
-    //             return CustomPostRouteNatures::CUSTOMPOST;
+    //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

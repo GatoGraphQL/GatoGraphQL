@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class Wassup_EM_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -17,7 +17,7 @@ class Wassup_EM_Module_MainContentRouteModuleProcessor extends \PoP\Application\
             POP_LOCATIONS_ROUTE_LOCATIONS => [PoP_Locations_Module_Processor_CustomSectionBlocks::class, PoP_Locations_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONS_SCROLL],
         );
         foreach ($routemodules_allothers as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
         }
 
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTION);
@@ -26,14 +26,14 @@ class Wassup_EM_Module_MainContentRouteModuleProcessor extends \PoP\Application\
             POP_LOCATIONS_ROUTE_LOCATIONSMAP => [PoP_Module_Processor_LocationsMapBlocks::class, PoP_Module_Processor_LocationsMapBlocks::MODULE_BLOCK_STATICLOCATIONSMAP],
         );
         foreach ($routemodules_modals as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MODALS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_MODALS) {
-                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
             }
         }
 
@@ -41,14 +41,14 @@ class Wassup_EM_Module_MainContentRouteModuleProcessor extends \PoP\Application\
             POP_LOCATIONS_ROUTE_LOCATIONS => [PoP_Locations_Module_Processor_CustomSectionDataloads::class, PoP_Locations_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_LOCATIONS_TYPEAHEAD],
         );
         foreach ($routemodules_typeahead as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TYPEAHEAD,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_TYPEAHEAD) {
-                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
             }
         }
 

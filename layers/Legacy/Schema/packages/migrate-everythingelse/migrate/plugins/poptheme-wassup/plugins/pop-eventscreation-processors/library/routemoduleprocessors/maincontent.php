@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoP_EventsCreation_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -16,7 +16,7 @@ class PoP_EventsCreation_Module_MainContentRouteModuleProcessor extends \PoP\App
             POP_EVENTSCREATION_ROUTE_EDITEVENT => [GD_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_EM_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_EVENT_UPDATE],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
         }
 
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
@@ -26,14 +26,14 @@ class PoP_EventsCreation_Module_MainContentRouteModuleProcessor extends \PoP\App
             POP_EVENTSCREATION_ROUTE_MYPASTEVENTS => [PoP_EventsCreation_Module_Processor_MySectionBlocks::class, PoP_EventsCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYPASTEVENTS_TABLE_EDIT],
         );
         foreach ($routemodules_mycontent as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TABLE,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_TABLE) {
-                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_mycontent_simpleviewpreviews = array(
@@ -41,14 +41,14 @@ class PoP_EventsCreation_Module_MainContentRouteModuleProcessor extends \PoP\App
             POP_EVENTSCREATION_ROUTE_MYPASTEVENTS => [PoP_EventsCreation_Module_Processor_MySectionBlocks::class, PoP_EventsCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
         );
         foreach ($routemodules_mycontent_simpleviewpreviews as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_SIMPLEVIEW) {
-                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_mycontent_fullviewpreviews = array(
@@ -56,14 +56,14 @@ class PoP_EventsCreation_Module_MainContentRouteModuleProcessor extends \PoP\App
             POP_EVENTSCREATION_ROUTE_MYPASTEVENTS => [PoP_EventsCreation_Module_Processor_MySectionBlocks::class, PoP_EventsCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW],
         );
         foreach ($routemodules_mycontent_fullviewpreviews as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_FULLVIEW) {
-                $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
             }
         }
 

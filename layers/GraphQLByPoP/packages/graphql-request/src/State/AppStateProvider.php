@@ -8,7 +8,7 @@ use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLRequest\StaticHelpers\GraphQLQueryPayloadRetriever;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\API\Routing\RouteNatures;
+use PoP\API\Routing\RequestNature;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\State\AbstractAppStateProvider;
 
@@ -48,7 +48,7 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         // Single endpoint, starting at the Root object
-        $state['nature'] = RouteNatures::QUERY_ROOT;
+        $state['nature'] = RequestNature::QUERY_ROOT;
 
         // Get the GraphQL payload from POST
         $payload = GraphQLQueryPayloadRetriever::getGraphQLQueryPayload();

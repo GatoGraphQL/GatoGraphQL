@@ -1,8 +1,8 @@
 <?php
 
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class Wassup_EM_SocialNetwork_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -19,14 +19,14 @@ class Wassup_EM_SocialNetwork_Module_MainContentRouteModuleProcessor extends \Po
             POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $module) {
-            $ret[UserRouteNatures::USER][$route][] = [
+            $ret[UserRequestNature::USER][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_MAP) {
-                $ret[UserRouteNatures::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
             }
         }
 
@@ -38,14 +38,14 @@ class Wassup_EM_SocialNetwork_Module_MainContentRouteModuleProcessor extends \Po
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_MAP) {
-                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
 
@@ -55,14 +55,14 @@ class Wassup_EM_SocialNetwork_Module_MainContentRouteModuleProcessor extends \Po
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $module) {
-            $ret[TagRouteNatures::TAG][$route][] = [
+            $ret[TagRequestNature::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_tagusers == POP_FORMAT_MAP) {
-                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
             }
         }
 

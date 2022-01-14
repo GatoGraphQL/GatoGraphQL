@@ -7,7 +7,7 @@ namespace PoPSchema\PostTags\ConditionalOnComponent\API\RouteModuleProcessors;
 use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 use PoPSchema\Posts\Component as PostsComponent;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\PostTags\Component;
@@ -15,7 +15,7 @@ use PoPSchema\PostTags\ComponentConfiguration;
 use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
 use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
@@ -36,7 +36,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
-        $ret[TagRouteNatures::TAG][] = [
+        $ret[TagRequestNature::TAG][] = [
             'module' => [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
             'conditions' => [
                 'scheme' => APISchemes::API,
@@ -60,7 +60,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             $componentConfiguration->getPostTagsRoute() => [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
@@ -73,7 +73,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             $componentConfiguration->getPostsRoute() => [TagPostFieldDataloadModuleProcessor::class, TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[TagRouteNatures::TAG][$route][] = [
+            $ret[TagRequestNature::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,

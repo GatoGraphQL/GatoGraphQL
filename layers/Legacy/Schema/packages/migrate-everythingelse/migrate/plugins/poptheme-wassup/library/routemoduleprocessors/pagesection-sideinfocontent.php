@@ -1,10 +1,10 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 use PoP\Root\Routing\Routes as RoutingRoutes;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -19,14 +19,14 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
             POP_ROUTE_AUTHORS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
         }
 
         $modules = array(
             RoutingRoutes::$MAIN => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_MAINCONTENT_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
+            $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
         }
 
         $modules = array(
@@ -34,7 +34,7 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
             POP_ROUTE_DESCRIPTION => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[UserRouteNatures::USER][$route][] = ['module' => $module];
+            $ret[UserRequestNature::USER][$route][] = ['module' => $module];
         }
 
         return $ret;
@@ -48,17 +48,17 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
         $ret = array();
 
         // Default for Single
-        $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
+        $ret[CustomPostRequestNature::CUSTOMPOST][] = [
             'module' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_SIDEBAR]
         ];
 
         // Default for Author
-        $ret[UserRouteNatures::USER][] = [
+        $ret[UserRequestNature::USER][] = [
             'module' => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_SIDEBAR]
         ];
 
         // Default for Tag
-        $ret[TagRouteNatures::TAG][] = [
+        $ret[TagRequestNature::TAG][] = [
             'module' => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_TAG_SIDEBAR]
         ];
 
@@ -68,7 +68,7 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
             'PoPTheme_Wassup_PageSectionSettingsProcessor:sideinfo_home:blockgroup',
             [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR]
         );
-        $ret[RouteNatures::HOME][] = [
+        $ret[RequestNature::HOME][] = [
             'module' => $home_module,
         ];
 

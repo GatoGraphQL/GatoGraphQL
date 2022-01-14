@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoP_WebPlatformEngine_UtilsHooks
 {
@@ -17,7 +17,7 @@ class PoP_WebPlatformEngine_UtilsHooks
             // Comment Leo 19/11/2017: page ID POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL must be set at this plugin level, not on pop-serviceworkers
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
             $vars = &$vars_in_array[0];
-            $vars['nature'] = RouteNatures::GENERIC;//PageRouteNatures::PAGE;
+            $vars['nature'] = RequestNature::GENERIC;//PageRequestNature::PAGE;
             $vars['route'] = POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL;
         }
     }

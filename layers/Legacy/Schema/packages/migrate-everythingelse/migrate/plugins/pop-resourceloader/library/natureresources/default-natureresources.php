@@ -1,17 +1,17 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPSchema\Pages\Routing\RequestNature as PageRequestNature;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
 define('POP_RESOURCELOADERCONFIGURATION_HOME_FEED', 'feed');
@@ -39,7 +39,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
 
     public function addHomeResources(&$resources, $modulefilter, $options)
     {
-        $nature = RouteNatures::HOME;
+        $nature = RequestNature::HOME;
         $options = $this->maybeAddExtraVars($options, $nature);
 
         // Home resources: there are 2 schemes:
@@ -60,7 +60,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
 
     public function add404Resources(&$resources, $modulefilter, $options)
     {
-        $nature = RouteNatures::NOTFOUND;
+        $nature = RequestNature::NOTFOUND;
         $options = $this->maybeAddExtraVars($options, $nature);
 
         PoP_ResourceLoaderProcessorUtils::addResourcesFromCurrentVars($modulefilter, $resources, $nature, array(), false, array(), $options);
@@ -76,7 +76,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         );
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         if ($ids = $postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
-            $nature = TagRouteNatures::TAG;
+            $nature = TagRequestNature::TAG;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
 
             PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, $ids, false, $options);
@@ -130,7 +130,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         }
 
         if ($ids) {
-            $nature = UserRouteNatures::USER;
+            $nature = UserRequestNature::USER;
             $merge = true;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
 
@@ -140,7 +140,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
 
     public function addSingleResources(&$resources, $modulefilter, $options)
     {
-        $nature = CustomPostRouteNatures::CUSTOMPOST;
+        $nature = CustomPostRequestNature::CUSTOMPOST;
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         // Get one ID per category from the DB
@@ -233,7 +233,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
 
     public function addPageResources(&$resources, $modulefilter, $options)
     {
-        $nature = PageRouteNatures::PAGE;
+        $nature = PageRequestNature::PAGE;
         $options = $this->maybeAddExtraVars($options, $nature);
 
         PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, array(), false, $options);

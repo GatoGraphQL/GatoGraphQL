@@ -1,6 +1,6 @@
 <?php
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
@@ -46,7 +46,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     //     switch ($module[1]) {
     //         case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
     //         case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
     //     }
 
     //     return parent::getNature($module);

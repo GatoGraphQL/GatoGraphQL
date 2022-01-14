@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\Pages\Constants\ModelInstanceComponentTypes;
-use PoPSchema\Pages\Routing\RouteNatures;
+use PoPSchema\Pages\Routing\RequestNature;
 
 class VarsHookSet extends AbstractHookSet
 {
@@ -23,7 +23,7 @@ class VarsHookSet extends AbstractHookSet
     public function getModelInstanceComponentsFromAppState($components)
     {
         switch (App::getState('nature')) {
-            case RouteNatures::PAGE:
+            case RequestNature::PAGE:
                 $component_types = App::applyFilters(
                     '\PoPSchema\Pages\ModelInstanceProcessor_Utils:components_from_vars:type:page',
                     []

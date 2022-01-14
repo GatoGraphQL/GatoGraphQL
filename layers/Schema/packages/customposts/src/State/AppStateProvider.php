@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPosts\State;
 
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPSchema\CustomPosts\Routing\RouteNatures;
+use PoPSchema\CustomPosts\Routing\RequestNature;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
@@ -24,10 +24,10 @@ class AppStateProvider extends AbstractAppStateProvider
     public function augment(array &$state): void
     {
         $nature = $state['nature'];
-        $state['routing']['is-custompost'] = $nature === RouteNatures::CUSTOMPOST;
+        $state['routing']['is-custompost'] = $nature === RequestNature::CUSTOMPOST;
 
         // Attributes needed to match the RouteModuleProcessor vars conditions
-        if ($nature === RouteNatures::CUSTOMPOST) {
+        if ($nature === RequestNature::CUSTOMPOST) {
             $customPostID = $state['routing']['queried-object-id'];
             $state['routing']['queried-object-post-type'] = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
         }

@@ -1,9 +1,9 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -21,7 +21,7 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionRouteModulePro
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
+            $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
         }
 
         $modules = array(
@@ -31,7 +31,7 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionRouteModulePro
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[UserRouteNatures::USER][$route][] = ['module' => $module];
+            $ret[UserRequestNature::USER][$route][] = ['module' => $module];
         }
 
         $modules = array(
@@ -48,7 +48,7 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionRouteModulePro
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_GENERAL => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;
@@ -61,7 +61,7 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionRouteModulePro
     {
         $ret = array();
 
-        $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
+        $ret[CustomPostRequestNature::CUSTOMPOST][] = [
             'module' => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR],
             'conditions' => [
                 'routing' => [

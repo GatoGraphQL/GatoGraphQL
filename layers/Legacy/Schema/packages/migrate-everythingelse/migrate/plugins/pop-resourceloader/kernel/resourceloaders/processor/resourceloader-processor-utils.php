@@ -6,16 +6,16 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPSchema\Pages\Routing\PathUtils;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoPSchema\Pages\Routing\RequestNature as PageRequestNature;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_ResourceLoaderProcessorUtils {
 
@@ -150,7 +150,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
             // If there is more than one page, then add the tabs component (eg: feeds)
             // If there is only one page defined, then there is no need for the tabs (eg: homepage)
-            // $add_tabs = ($nature == RouteNatures::GENERIC/*PageRouteNatures::PAGE*/) ? false : count($route_formats) > 1;
+            // $add_tabs = ($nature == RequestNature::GENERIC/*PageRequestNature::PAGE*/) ? false : count($route_formats) > 1;
             $add_tabs = count($route_formats) > 1;
             foreach ($route_formats as $route => $formats) {
 
@@ -161,7 +161,7 @@ class PoP_ResourceLoaderProcessorUtils {
                         'format' => $format,
                     );
                     $original_layouts = array();
-                    if ($nature == RouteNatures::GENERIC/*PageRouteNatures::PAGE*/) {
+                    if ($nature == RequestNature::GENERIC/*PageRequestNature::PAGE*/) {
 
                         $ids = array(
                             $route,
@@ -386,7 +386,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // to add the resources for the default tabs for 'single'
         $paths = array();
 
-        if ($nature == PageRouteNatures::PAGE) {
+        if ($nature == PageRequestNature::PAGE) {
             // For the page nature, we must save the resources under the page path,
             // for all pages in the website
             foreach ($ids as $page_id) {
@@ -414,7 +414,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // Reset the cache
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == RouteNatures::GENERIC) {
+        } elseif ($nature == RequestNature::GENERIC) {
 
             $vars['routing'] = [];
             ApplicationState::augmentVarsProperties();
@@ -447,7 +447,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // Reset the cache
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == CustomPostRouteNatures::CUSTOMPOST) {
+        } elseif ($nature == CustomPostRequestNature::CUSTOMPOST) {
 
             foreach ($ids as $post_id) {
 
@@ -478,7 +478,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // or from 2 posts with different category
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == UserRouteNatures::USER) {
+        } elseif ($nature == UserRequestNature::USER) {
 
             foreach ($ids as $author) {
 
@@ -502,7 +502,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // Reset the cache
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == TagRouteNatures::TAG) {
+        } elseif ($nature == TagRequestNature::TAG) {
 
             // // Commented, because there is no difference in configuration for any particular tag,
             // // so we never inquire the current tag for obtaining the configuration. So no need for this
@@ -528,7 +528,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // Reset the cache
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == RouteNatures::HOME) {
+        } elseif ($nature == RequestNature::HOME) {
 
             $vars['routing'] = [];
             ApplicationState::augmentVarsProperties();
@@ -545,7 +545,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
             // // Reset the cache
             // $pop_module_processor_runtimecache->deleteCache();
-        } elseif ($nature == RouteNatures::NOTFOUND) {
+        } elseif ($nature == RequestNature::NOTFOUND) {
 
             $vars['routing'] = [];
             ApplicationState::augmentVarsProperties();
@@ -569,24 +569,24 @@ class PoP_ResourceLoaderProcessorUtils {
         if (!$loadingSite) {
 
             $flat_natures = array(
-                RouteNatures::HOME,
-                TagRouteNatures::TAG,
-                UserRouteNatures::USER,
+                RequestNature::HOME,
+                TagRequestNature::TAG,
+                UserRequestNature::USER,
             );
             $path_natures = array(
-                CustomPostRouteNatures::CUSTOMPOST,
-                PageRouteNatures::PAGE,
-                RouteNatures::GENERIC,
+                CustomPostRequestNature::CUSTOMPOST,
+                PageRequestNature::PAGE,
+                RequestNature::GENERIC,
             );
 
             // For natures where can have a tab, if the tab is the default one, then also
             // add an entry without the tab (we can't add t:default in JS since we don't know which is the default tab for each nature, just from the URL pattern)
             $noroute_natures = array(
                 // Comment Leo 10/04/2019: since switching from page to route, only routes cannot have a tab
-                // UserRouteNatures::USER,
-                // CustomPostRouteNatures::CUSTOMPOST,
-                // TagRouteNatures::TAG,
-                RouteNatures::GENERIC,
+                // UserRequestNature::USER,
+                // CustomPostRequestNature::CUSTOMPOST,
+                // TagRequestNature::TAG,
+                RequestNature::GENERIC,
             );
 
             $duplicate_noroute = in_array($nature, $noroute_natures) && $options['is-default-route'];

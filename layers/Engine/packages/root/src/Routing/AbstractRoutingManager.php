@@ -27,7 +27,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
      */
     public function getCurrentNature(): string
     {
-        return RouteNatures::GENERIC;
+        return RequestNature::GENERIC;
     }
 
     public function getCurrentRoute(): string
@@ -35,7 +35,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
         $nature = $this->getCurrentNature();
 
         // If it is a GENERIC route, then the URL path is already the route
-        if ($nature === RouteNatures::GENERIC) {
+        if ($nature === RequestNature::GENERIC) {
             return $this->getRoutingHelperService()->getRequestURIPath();
         }
 

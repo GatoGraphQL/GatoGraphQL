@@ -1,9 +1,9 @@
 <?php
 
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -554,7 +554,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //         case self::MODULE_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_TAGSTANCES_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_TAGSTANCES_PRO_SCROLL_FULLVIEW:
@@ -569,7 +569,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //         case self::MODULE_DATALOAD_TAGSTANCES_NEUTRAL_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_TAGSTANCES_AGAINST_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_TAGSTANCES_CAROUSEL:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
 
     //         case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_FULLVIEW:
@@ -583,7 +583,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //         case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST:
-    //             return CustomPostRouteNatures::CUSTOMPOST;
+    //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

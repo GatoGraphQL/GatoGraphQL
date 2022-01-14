@@ -7,7 +7,7 @@ namespace PoPSchema\PostTags\ConditionalOnComponent\RESTAPI\RouteModuleProcessor
 use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 use PoPSchema\Posts\Component as PostsComponent;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\PostTags\Component;
@@ -15,7 +15,7 @@ use PoPSchema\PostTags\ComponentConfiguration;
 use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
 use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -41,7 +41,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
-        $ret[TagRouteNatures::TAG][] = [
+        $ret[TagRequestNature::TAG][] = [
             'module' => [
                 PostTagFieldDataloadModuleProcessor::class,
                 PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAG,
@@ -83,7 +83,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
             ],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
@@ -105,7 +105,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 ],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[TagRouteNatures::TAG][$route][] = [
+            $ret[TagRequestNature::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,

@@ -7,7 +7,7 @@ namespace PoPSchema\CategoriesWP\Hooks;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\RootWP\Routing\HookNames;
-use PoPSchema\Categories\Routing\RouteNatures;
+use PoPSchema\Categories\Routing\RequestNature;
 use WP_Query;
 
 class RoutingStateHookSet extends AbstractHookSet
@@ -28,7 +28,7 @@ class RoutingStateHookSet extends AbstractHookSet
     public function getNature(string $nature, WP_Query $query): string
     {
         if ($query->is_category()) {
-            return RouteNatures::CATEGORY;
+            return RequestNature::CATEGORY;
         }
 
         return $nature;

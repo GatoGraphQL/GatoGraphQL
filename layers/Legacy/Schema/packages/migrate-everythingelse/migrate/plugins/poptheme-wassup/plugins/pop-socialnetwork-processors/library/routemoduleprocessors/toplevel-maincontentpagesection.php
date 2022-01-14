@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoPTheme_Wassup_SocialNetwork_Module_ContentPageSectionTopLevelRouteModuleProcessor extends PoP_Module_ContentPageSectionTopLevelRouteModuleProcessorBase
 {
@@ -24,7 +24,7 @@ class PoPTheme_Wassup_SocialNetwork_Module_ContentPageSectionTopLevelRouteModule
             POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::GENERIC][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_PageSectionContainers::class, PoP_Module_Processor_PageSectionContainers::MODULE_PAGESECTIONCONTAINER_HOLE],
                 'conditions' => [
                     'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,

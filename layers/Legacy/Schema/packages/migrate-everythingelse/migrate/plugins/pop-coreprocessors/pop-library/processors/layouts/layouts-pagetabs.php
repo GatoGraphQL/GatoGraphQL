@@ -4,10 +4,10 @@ use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabsLayoutsBase
 {
@@ -80,8 +80,8 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     //         case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
     //         case self::MODULE_LAYOUT_PAGETABS_SINGLE:
     //             $natures = array(
-    //                 self::MODULE_LAYOUT_PAGETABS_AUTHOR => UserRouteNatures::USER,
-    //                 self::MODULE_LAYOUT_PAGETABS_SINGLE => CustomPostRouteNatures::CUSTOMPOST,
+    //                 self::MODULE_LAYOUT_PAGETABS_AUTHOR => UserRequestNature::USER,
+    //                 self::MODULE_LAYOUT_PAGETABS_SINGLE => CustomPostRequestNature::CUSTOMPOST,
     //             );
 
     //             // For the default page add the thumbnail. For the others, add the pretitle

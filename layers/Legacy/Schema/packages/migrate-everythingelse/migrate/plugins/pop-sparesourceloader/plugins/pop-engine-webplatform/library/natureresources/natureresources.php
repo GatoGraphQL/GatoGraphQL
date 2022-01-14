@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoP_SPAResourceLoader_FrontEndEngine_NatureResources extends PoP_ResourceLoader_NatureResources_ProcessorBase
 {
@@ -11,7 +11,7 @@ class PoP_SPAResourceLoader_FrontEndEngine_NatureResources extends PoP_ResourceL
         // 1. blocks/formats for page POPTHEME_WASSUP_ROUTE_LOADERS_INITIALFRAMES are not defined in file settingsprocessor.php, so method getPageResources above will not work
         // 2. it must be handled for several targets, as configured through function getLoadersInitialframes()
         foreach (PoP_SPA_ConfigurationUtils::getBackgroundloadRouteConfigurations() as $route => $configuration) {
-            $nature = RouteNatures::GENERIC;
+            $nature = RequestNature::GENERIC;
             $ids = array(
                 $route,
             );

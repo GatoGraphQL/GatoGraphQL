@@ -1,7 +1,7 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class Wassup_URE_RoleProcessors_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
@@ -17,7 +17,7 @@ class Wassup_URE_RoleProcessors_Bootstrap_Module_MainPageSectionRouteModuleProce
             POP_USERCOMMUNITIES_ROUTE_MYMEMBERS => [PoP_UserCommunities_ModuleProcessor_SectionBlocks::class, PoP_UserCommunities_ModuleProcessor_SectionBlocks::MODULE_BLOCK_TABPANEL_MYMEMBERS],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
@@ -30,7 +30,7 @@ class Wassup_URE_RoleProcessors_Bootstrap_Module_MainPageSectionRouteModuleProce
             POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_ModuleProcessor_AuthorSectionBlocks::class, PoP_UserCommunities_ModuleProcessor_AuthorSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[UserRouteNatures::USER][$route][] = [
+            $ret[UserRequestNature::USER][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

@@ -13,7 +13,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 use PoP\Root\Routing\RoutingManagerInterface;
 
 class AppStateProvider extends AbstractAppStateProvider
@@ -83,8 +83,8 @@ class AppStateProvider extends AbstractAppStateProvider
     public function augment(array &$state): void
     {
         $nature = $state['nature'];
-        $state['routing']['is-standard'] = $nature === RouteNatures::GENERIC;
-        $state['routing']['is-home'] = $nature === RouteNatures::HOME;
-        $state['routing']['is-404'] = $nature === RouteNatures::NOTFOUND;
+        $state['routing']['is-standard'] = $nature === RequestNature::GENERIC;
+        $state['routing']['is-home'] = $nature === RequestNature::HOME;
+        $state['routing']['is-404'] = $nature === RequestNature::NOTFOUND;
     }
 }

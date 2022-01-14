@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoPTheme_Wassup_CategoryPostsCreation_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -34,7 +34,7 @@ class PoPTheme_Wassup_CategoryPostsCreation_Module_SideInfoContentPageSectionRou
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::GENERIC][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYCATEGORYPOSTS_SIDEBAR]
             ];
         }

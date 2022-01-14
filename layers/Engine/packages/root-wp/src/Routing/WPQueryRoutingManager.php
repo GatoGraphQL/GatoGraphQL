@@ -6,7 +6,7 @@ namespace PoP\RootWP\Routing;
 
 use PoP\Root\App;
 use PoP\Root\Routing\AbstractRoutingManager;
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 use WP_Query;
 
 class WPQueryRoutingManager extends AbstractRoutingManager implements WPQueryRoutingManagerInterface
@@ -41,13 +41,13 @@ class WPQueryRoutingManager extends AbstractRoutingManager implements WPQueryRou
         /** @var WP_Query */
         $query = $this->query;
         if ($this->isGeneric()) {
-            return RouteNatures::GENERIC;
+            return RequestNature::GENERIC;
         }
         if ($query->is_home() || $query->is_front_page()) {
-            return RouteNatures::HOME;
+            return RequestNature::HOME;
         }
         if ($query->is_404()) {
-            return RouteNatures::NOTFOUND;
+            return RequestNature::NOTFOUND;
         }
 
         // Allow plugins to implement their own natures

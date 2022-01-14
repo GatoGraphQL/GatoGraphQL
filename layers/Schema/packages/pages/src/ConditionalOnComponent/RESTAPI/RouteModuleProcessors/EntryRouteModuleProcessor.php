@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoPSchema\Pages\ModuleProcessors\FieldDataloadModuleProcessor;
-use PoPSchema\Pages\Routing\RouteNatures;
+use PoPSchema\Pages\Routing\RequestNature;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -24,7 +24,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
 
-        $ret[RouteNatures::PAGE][] = [
+        $ret[RequestNature::PAGE][] = [
             'module' => [
                 FieldDataloadModuleProcessor::class,
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_PAGE,

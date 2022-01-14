@@ -1,11 +1,11 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPTheme_Wassup_Blog_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -21,7 +21,7 @@ class PoPTheme_Wassup_Blog_Module_SideInfoContentPageSectionRouteModuleProcessor
             PostsComponentConfiguration::getPostsRoute() => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_POSTS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
+            $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
         }
 
         $modules = array(
@@ -29,7 +29,7 @@ class PoPTheme_Wassup_Blog_Module_SideInfoContentPageSectionRouteModuleProcessor
             PostsComponentConfiguration::getPostsRoute() => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORPOSTS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[UserRouteNatures::USER][$route][] = ['module' => $module];
+            $ret[UserRequestNature::USER][$route][] = ['module' => $module];
         }
 
         $modules = array(
@@ -41,7 +41,7 @@ class PoPTheme_Wassup_Blog_Module_SideInfoContentPageSectionRouteModuleProcessor
             POP_BLOG_ROUTE_SEARCHUSERS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_USERS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;
