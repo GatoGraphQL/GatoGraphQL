@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Configuration;
 
 use PoP\ComponentModel\Constants\Params;
-use PoP\Definitions\Configuration\Request as DefinitionsRequest;
-use PoP\Definitions\Constants\ParamValues as DefinitionsParamValues;
 
 class Request
 {
