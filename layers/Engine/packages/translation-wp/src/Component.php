@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\TranslationWP;
+namespace PoP\RootWP;
 
 use PoP\Root\Component\AbstractComponent;
 

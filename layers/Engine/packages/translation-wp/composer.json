@@ -179,12 +179,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\TranslationWP\\": "src"
+            "PoP\\RootWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\TranslationWP\\": "tests"
+            "PoP\\RootWP\\": "tests"
         }
     },
     "scripts": {

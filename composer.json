@@ -194,7 +194,7 @@
             "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/src",
             "PoP\\SiteWP\\": "layers/SiteBuilder/packages/site-wp/src",
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/src",
-            "PoP\\TranslationWP\\": "layers/Engine/packages/root-wp/src"
+            "PoP\\RootWP\\": "layers/Engine/packages/root-wp/src"
         }
     },
     "autoload-dev": {
@@ -353,7 +353,7 @@
             "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/tests",
             "PoP\\SiteWP\\": "layers/SiteBuilder/packages/site-wp/tests",
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/tests",
-            "PoP\\TranslationWP\\": "layers/Engine/packages/root-wp/tests"
+            "PoP\\RootWP\\": "layers/Engine/packages/root-wp/tests"
         }
     },
     "extra": {

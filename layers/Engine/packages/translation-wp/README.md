@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \PoP\TranslationWP\Component::class,
+    \PoP\RootWP\Component::class,
 ]);
 ```
 
