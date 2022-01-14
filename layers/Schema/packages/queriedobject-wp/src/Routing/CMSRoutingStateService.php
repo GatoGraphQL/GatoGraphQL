@@ -19,10 +19,10 @@ class CMSRoutingStateService implements CMSRoutingStateServiceInterface
         if ($this->isGeneric()) {
             return null;
         }
-        
+
         /** @var WP_Query */
         $query = $this->query;
-        
+
         if (
             $query->is_tag() ||
             $query->is_page() ||
@@ -39,11 +39,11 @@ class CMSRoutingStateService implements CMSRoutingStateServiceInterface
     public function getQueriedObjectId(): string | int | null
     {
         $this->init();
-        
+
         if ($this->isGeneric()) {
             return null;
         }
-        
+
         if (
             $this->query->is_tag() ||
             $this->query->is_page() ||
