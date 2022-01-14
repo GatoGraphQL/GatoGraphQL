@@ -63,7 +63,8 @@ class RoutingHookSet extends AbstractHookSet
 
     /**
      * Replace REQUEST_URI with the website's home URL.
-     * Watch out: If the homeURL is not contained in the current URL
+     *
+     * Watch out: If the homeURL is not contained in the current URL,
      * then there's a misconfiguration in the server
      */
     public function getURIRoute(string $route): string
@@ -73,7 +74,7 @@ class RoutingHookSet extends AbstractHookSet
         if (!$componentConfiguration->overrideRequestURI()) {
             return $route;
         }
-        
+
         $homeURL = $this->getCmsService()->getHomeURL();
         $currentURL = $this->getRequestHelperService()->getCurrentURL();
 
