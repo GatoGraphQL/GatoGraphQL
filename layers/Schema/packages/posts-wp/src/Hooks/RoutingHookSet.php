@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Posts\Hooks;
+namespace PoPSchema\PostsWP\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoP\Root\Routing\RouteHookNames;
+use PoP\RoutingWP\HookNames;
 use PoPSchema\Posts\Component;
 use PoPSchema\Posts\ComponentConfiguration;
 
@@ -15,7 +15,7 @@ class RoutingHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            RouteHookNames::ROUTES,
+            HookNames::ROUTES,
             [$this, 'registerRoutes']
         );
     }

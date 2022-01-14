@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\Hooks;
+namespace PoPSchema\UsersWP\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoP\Root\Routing\RouteHookNames;
-use PoPSchema\PostCategories\Component;
-use PoPSchema\PostCategories\ComponentConfiguration;
+use PoP\RoutingWP\HookNames;
+use PoPSchema\Users\Component;
+use PoPSchema\Users\ComponentConfiguration;
 
 class RoutingHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
         App::addAction(
-            RouteHookNames::ROUTES,
+            HookNames::ROUTES,
             [$this, 'registerRoutes']
         );
     }
@@ -26,7 +26,7 @@ class RoutingHookSet extends AbstractHookSet
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return [
             ...$routes,
-            $componentConfiguration->getPostCategoriesRoute(),
+            $componentConfiguration->getUsersRoute(),
         ];
     }
 }

@@ -15,6 +15,3 @@ services:
 
     PoPSchema\Users\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
-
-    PoPSchema\Users\Hooks\:
-        resource: '../src/Hooks/*'

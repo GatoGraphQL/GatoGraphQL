@@ -10,7 +10,7 @@ if (!defined('POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\Root\Routing\RouteHookNames::ROUTES,
+    \PoP\RoutingWP\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

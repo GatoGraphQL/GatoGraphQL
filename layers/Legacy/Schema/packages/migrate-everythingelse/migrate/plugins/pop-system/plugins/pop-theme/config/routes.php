@@ -10,7 +10,7 @@ if (!defined('POP_SYSTEM_ROUTE_SYSTEM_GENERATETHEME')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\Root\Routing\RouteHookNames::ROUTES,
+    \PoP\RoutingWP\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

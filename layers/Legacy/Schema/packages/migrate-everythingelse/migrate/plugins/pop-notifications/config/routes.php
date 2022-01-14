@@ -19,7 +19,7 @@ if (!defined('POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASUNREAD')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\Root\Routing\RouteHookNames::ROUTES,
+    \PoP\RoutingWP\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,
