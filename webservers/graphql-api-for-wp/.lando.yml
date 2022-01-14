@@ -71,8 +71,6 @@ services:
         - >-
           ../../layers/Engine/packages/routing-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/routing-wp
         - >-
-          ../../layers/Engine/packages/routing:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/routing
-        - >-
           ../../layers/Engine/packages/translation-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/translation-wp
         - >-
           ../../layers/GraphQLAPIForWP/packages/external-dependency-wrappers:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/external-dependency-wrappers
