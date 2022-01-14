@@ -30,23 +30,6 @@ class WPQueryRoutingManager extends AbstractRoutingManager implements WPQueryRou
                     []
                 )
             );
-
-            // // If there are partial endpoints, generate all the combinations of route + partial endpoint
-            // // For instance, route = "posts", endpoint = "/api/rest", combined route = "posts/api/rest"
-            // if ($partialEndpoints = array_filter(
-            //     (array) \PoP\Root\App::applyFilters(
-            //         'route-endpoints',
-            //         []
-            //     )
-            // )) {
-            //     // Attach the endpoints to each of the routes
-            //     $routes = $this->routes;
-            //     foreach ($routes as $route) {
-            //         foreach ($partialEndpoints as $endpoint) {
-            //             $this->routes[] = $route . '/' . trim($endpoint, '/');
-            //         }
-            //     }
-            // }
         }
         return $this->routes;
     }
