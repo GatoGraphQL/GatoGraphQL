@@ -12,3 +12,6 @@ services:
 
     PoP\Root\Routing\RoutingManagerInterface:
         class: \PoP\Root\Routing\BasicRoutingManager
+
+    PoP\Root\Routing\RoutingHelperServiceInterface:
+        class: \PoP\Root\Routing\RoutingHelperService

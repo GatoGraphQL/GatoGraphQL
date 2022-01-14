@@ -74,6 +74,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     /**
      * Remove unwanted data added to the REQUEST_URI, replacing
      * it with the website home URL.
+     *
      * Eg: the language information from qTranslate (https://domain.com/en/...)
      */
     public function overrideRequestURI(): bool
