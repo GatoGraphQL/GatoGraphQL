@@ -1,7 +1,7 @@
 <?php
 
-use PoP\Routing\RouteNatures;
-use PoP\Routing\Routes as RoutingRoutes;
+use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\Routes as RoutingRoutes;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;

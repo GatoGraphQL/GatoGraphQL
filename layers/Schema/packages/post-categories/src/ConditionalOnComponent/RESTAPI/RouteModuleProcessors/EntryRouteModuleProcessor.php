@@ -7,7 +7,7 @@ namespace PoPSchema\PostCategories\ConditionalOnComponent\RESTAPI\RouteModulePro
 use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RouteNatures;
 use PoPSchema\Categories\Routing\RouteNatures as CategoryRouteNatures;
 use PoPSchema\PostCategories\Component;
 use PoPSchema\PostCategories\ComponentConfiguration;

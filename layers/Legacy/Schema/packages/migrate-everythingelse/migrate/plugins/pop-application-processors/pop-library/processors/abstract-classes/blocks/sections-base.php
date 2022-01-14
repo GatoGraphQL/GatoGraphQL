@@ -6,7 +6,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingModuleInterface;
 use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RouteNatures;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;

@@ -1,5 +1,5 @@
 <?php
-use PoP\Routing\URLParams;
+use PoP\Root\Routing\URLParams;
 
 class PoP_Wassup_CDN_Hooks
 {

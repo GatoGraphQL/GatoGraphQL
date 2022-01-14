@@ -1,6 +1,6 @@
 <?php
 namespace PoP\ExampleModules;
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RouteNatures;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;

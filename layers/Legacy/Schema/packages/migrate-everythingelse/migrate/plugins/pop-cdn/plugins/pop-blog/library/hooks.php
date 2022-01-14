@@ -1,5 +1,5 @@
 <?php
-use PoP\Routing\URLParams;
+use PoP\Root\Routing\URLParams;
 use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 

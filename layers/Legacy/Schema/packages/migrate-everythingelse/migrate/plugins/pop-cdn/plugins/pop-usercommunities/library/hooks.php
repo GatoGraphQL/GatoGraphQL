@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Routing\URLParams;
+use PoP\Root\Routing\URLParams;
 
 class PoP_UserCommunities_CDN_Hooks
 {

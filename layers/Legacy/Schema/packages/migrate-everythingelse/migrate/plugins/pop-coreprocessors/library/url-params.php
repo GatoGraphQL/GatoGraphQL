@@ -1,5 +1,5 @@
 <?php
-use PoP\Routing\URLParams;
+use PoP\Root\Routing\URLParams;
 
 const GD_URLPARAM_INTERCEPTURLS = 'intercept-urls';
 const GD_URLPARAM_TITLE = 'title';

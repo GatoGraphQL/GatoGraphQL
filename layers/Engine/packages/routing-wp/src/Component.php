@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\Routing\Component::class,
+            \PoP\Root\Routing\Component::class,
         ];
     }
 

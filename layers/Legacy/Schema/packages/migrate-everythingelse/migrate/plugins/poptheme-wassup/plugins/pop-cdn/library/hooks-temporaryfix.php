@@ -1,5 +1,5 @@
 <?php
-use PoP\Routing\Routes as RoutingRoutes;
+use PoP\Root\Routing\Routes as RoutingRoutes;
 
 /**
 Temporary fix to address the following issue:

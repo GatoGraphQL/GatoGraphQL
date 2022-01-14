@@ -64,7 +64,7 @@ if (!defined('POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\Routing\RouteHookNames::ROUTES,
+    \PoP\Root\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

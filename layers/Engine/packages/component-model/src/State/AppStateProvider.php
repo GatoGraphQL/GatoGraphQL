@@ -13,8 +13,8 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
-use PoP\Routing\RouteNatures;
-use PoP\Routing\RoutingManagerInterface;
+use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RoutingManagerInterface;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
