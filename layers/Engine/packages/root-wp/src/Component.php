@@ -36,15 +36,6 @@ class Component extends AbstractComponent
         $this->initServices(dirname(__DIR__));
     }
 
-    /**
-     * Initialize services for the system container
-     */
-    protected function initializeSystemContainerServices(): void
-    {
-        // The same services injected into the application are injected into the system container
-        $this->initSystemServices(dirname(__DIR__), '', 'services.yaml');
-    }
-
     public function beforeBoot(): void
     {
         Cortex::boot();
