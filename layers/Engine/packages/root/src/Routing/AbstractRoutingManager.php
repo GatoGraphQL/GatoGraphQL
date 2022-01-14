@@ -33,7 +33,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
         if (isset($_REQUEST[Params::ROUTE])) {
             return trim(strtolower($_REQUEST[Params::ROUTE]), '/');
         }
-        
+
         // By default, use the "main" route
         return Routes::MAIN;
     }
