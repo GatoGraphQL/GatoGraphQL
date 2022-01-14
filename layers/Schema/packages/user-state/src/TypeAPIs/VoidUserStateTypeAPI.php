@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\QueriedObject\Routing;
+namespace PoPSchema\UserState\TypeAPIs;
 
 /**
  * Default "mock" service returning always a void response.
@@ -10,14 +10,17 @@ namespace PoPSchema\QueriedObject\Routing;
  *
  * This service is already injected to make PHPUnit work.
  */
-class VoidCMSRoutingStateService implements CMSRoutingStateServiceInterface
+class VoidUserStateTypeAPI implements UserStateTypeAPIInterface
 {
-    public function getQueriedObject(): ?object
+    public function isUserLoggedIn(): bool
+    {
+        return false;
+    }
+    public function getCurrentUser()
     {
         return null;
     }
-
-    public function getQueriedObjectId(): string | int | null
+    public function getCurrentUserID()
     {
         return null;
     }
