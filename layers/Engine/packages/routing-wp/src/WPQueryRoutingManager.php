@@ -9,7 +9,7 @@ use PoP\Root\Routing\AbstractRoutingManager;
 use PoP\Root\Routing\RouteNatures;
 use WP_Query;
 
-class RoutingManager extends AbstractRoutingManager
+class WPQueryRoutingManager extends AbstractRoutingManager
 {
     use RoutingManagerTrait;
 
