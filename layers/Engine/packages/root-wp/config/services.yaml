@@ -6,3 +6,9 @@ services:
 
     PoP\Root\Translation\TranslationAPIInterface:
         class: \PoP\RootWP\Translation\TranslationAPI
+
+    PoP\Root\Routing\RoutingManagerInterface:
+        class: \PoP\RootWP\Routing\WPQueryRoutingManager
+
+    PoP\RootWP\Routing\Hooks\:
+        resource: '../src/Hooks/*'

@@ -3,9 +3,3 @@ services:
         public: true
         autowire: true
         autoconfigure: true
-
-    PoP\Root\Routing\RoutingManagerInterface:
-        class: \PoP\RoutingWP\WPQueryRoutingManager
-
-    PoP\RoutingWP\Hooks\:
-        resource: '../src/Hooks/*'

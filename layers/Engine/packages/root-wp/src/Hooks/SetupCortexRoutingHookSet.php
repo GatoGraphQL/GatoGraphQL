@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\RoutingWP\Hooks;
+namespace PoP\RootWP\Routing\Hooks;
 
 use Brain\Cortex\Route\QueryRoute;
 use Brain\Cortex\Route\RouteCollectionInterface;
@@ -13,7 +13,7 @@ use PoP\Root\Routing\RoutingManagerInterface;
 use PoP\RoutingWP\WPQueries;
 use PoP\RoutingWP\WPQueryRoutingManagerInterface;
 
-class SetupCortexHookSet extends AbstractHookSet
+class SetupCortexRoutingHookSet extends AbstractHookSet
 {
     private ?RoutingManagerInterface $routingManager = null;
 
