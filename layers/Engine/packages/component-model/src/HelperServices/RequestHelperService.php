@@ -7,8 +7,6 @@ namespace PoP\ComponentModel\HelperServices;
 use PoP\Root\App;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\Root\Services\BasicServiceTrait;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 
