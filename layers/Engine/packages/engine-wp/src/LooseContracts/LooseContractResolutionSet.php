@@ -16,7 +16,6 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
             App::doAction('popcms:shutdown');
         });
         App::addAction('activate_plugin', function (): void {
-            App::doAction('popcms:componentInstalled');
             App::doAction('popcms:componentInstalledOrUninstalled');
         });
         App::addAction('deactivate_plugin', function (): void {
@@ -26,7 +25,6 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
 
         $this->getLooseContractManager()->implementHooks([
             'popcms:shutdown',
-            'popcms:componentInstalled',
             'popcms:componentUninstalled',
             'popcms:componentInstalledOrUninstalled',
         ]);
