@@ -10,5 +10,5 @@ services:
     PoP\Root\Routing\RoutingManagerInterface:
         class: \PoP\RootWP\Routing\WPQueryRoutingManager
 
-    PoP\RootWP\Routing\Hooks\:
+    PoP\RootWP\Hooks\:
         resource: '../src/Hooks/*'

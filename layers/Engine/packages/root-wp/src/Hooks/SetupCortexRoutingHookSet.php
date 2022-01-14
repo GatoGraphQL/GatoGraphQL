@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\RootWP\Routing\Hooks;
+namespace PoP\RootWP\Hooks;
 
 use Brain\Cortex\Route\QueryRoute;
 use Brain\Cortex\Route\RouteCollectionInterface;
