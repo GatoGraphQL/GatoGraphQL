@@ -1,5 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Root\App;
+use PoP\Root\Constants\HookNames;
 
 class PoPTheme_WassupManager
 {
@@ -7,24 +9,24 @@ class PoPTheme_WassupManager
     {
 
         // Catch hooks and forward them to the Themes and further on ThemeMods for their processing
-        \PoP\Root\App::addFilter(POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD, array($this, 'backgroundLoad'));
-        \PoP\Root\App::addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER, array($this, 'filteringbyShowfilter'));
-        \PoP\Root\App::addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, array($this, 'getBlocksidebarsOrientation'));
+        App::addFilter(POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD, array($this, 'backgroundLoad'));
+        App::addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER, array($this, 'filteringbyShowfilter'));
+        App::addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, array($this, 'getBlocksidebarsOrientation'));
 
-        \PoP\Root\App::addFilter(POP_HOOK_POPMANAGERUTILS_EMBEDURL, array($this, 'getEmbedUrl'));
-        \PoP\Root\App::addFilter(POP_HOOK_POPMANAGERUTILS_PRINTURL, array($this, 'getPrintUrl'));
-        \PoP\Root\App::addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN, array($this, 'isMainScrollable'));
+        App::addFilter(POP_HOOK_POPMANAGERUTILS_EMBEDURL, array($this, 'getEmbedUrl'));
+        App::addFilter(POP_HOOK_POPMANAGERUTILS_PRINTURL, array($this, 'getPrintUrl'));
+        App::addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN, array($this, 'isMainScrollable'));
 
         // ThemeStyle
-        \PoP\Root\App::addFilter(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE, array($this, 'getPagesectionsideLogosize'));
-        \PoP\Root\App::addFilter(POP_HOOK_CAROUSEL_USERS_GRIDCLASS, array($this, 'getCarouselUsersGridclass'));
-        \PoP\Root\App::addFilter(POP_HOOK_SCROLLINNER_THUMBNAIL_GRID, array($this, 'getScrollinnerThumbnailGrid'));
+        App::addFilter(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE, array($this, 'getPagesectionsideLogosize'));
+        App::addFilter(POP_HOOK_CAROUSEL_USERS_GRIDCLASS, array($this, 'getCarouselUsersGridclass'));
+        App::addFilter(POP_HOOK_SCROLLINNER_THUMBNAIL_GRID, array($this, 'getScrollinnerThumbnailGrid'));
 
-        \PoP\Root\App::addAction('popcms:boot', function() {
-            if (in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
-                \PoP\Root\App::addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD, array($this, 'getPagesectionjsmethod'), 10, 2);
-                \PoP\Root\App::addFilter(POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD, array($this, 'getBlockjsmethod'), 10, 2);
-                \PoP\Root\App::addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS, array($this, 'keepOpenTabs'));
+        App::addAction(HookNames::AFTER_BOOT_APPLICATION, function() {
+            if (in_array(POP_STRATUM_WEB, App::getState('strata'))) {
+                App::addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD, array($this, 'getPagesectionjsmethod'), 10, 2);
+                App::addFilter(POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD, array($this, 'getBlockjsmethod'), 10, 2);
+                App::addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS, array($this, 'keepOpenTabs'));
             }
         });
     }
@@ -41,7 +43,7 @@ class PoPTheme_WassupManager
             POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS,
             $theme->getName()
         );
-        return \PoP\Root\App::applyFilters($filtername, $bool);
+        return App::applyFilters($filtername, $bool);
     }
 
     public function getScrollinnerThumbnailGrid($grid)
@@ -56,7 +58,7 @@ class PoPTheme_WassupManager
             POP_HOOK_SCROLLINNER_THUMBNAIL_GRID,
             $theme->getName()
         );
-        return \PoP\Root\App::applyFilters($filtername, $grid);
+        return App::applyFilters($filtername, $grid);
     }
     public function getCarouselUsersGridclass($class)
     {
@@ -70,7 +72,7 @@ class PoPTheme_WassupManager
             POP_HOOK_CAROUSEL_USERS_GRIDCLASS,
             $theme->getName()
         );
-        return \PoP\Root\App::applyFilters($filtername, $class);
+        return App::applyFilters($filtername, $class);
     }
     public function getPagesectionsideLogosize($size)
     {
@@ -84,7 +86,7 @@ class PoPTheme_WassupManager
             POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE,
             $theme->getName()
         );
-        return \PoP\Root\App::applyFilters($filtername, $size);
+        return App::applyFilters($filtername, $size);
     }
     public function backgroundLoad($routeConfigurations)
     {
@@ -98,7 +100,7 @@ class PoPTheme_WassupManager
             POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD,
             $theme->getName()
         );
-        return \PoP\Root\App::applyFilters($filtername, $routeConfigurations);
+        return App::applyFilters($filtername, $routeConfigurations);
     }
     public function getPagesectionjsmethod($jsmethod, array $module)
     {
@@ -112,7 +114,7 @@ class PoPTheme_WassupManager
             POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD,
             $theme->getName()
         );
-        return \PoP\Root\App::applyFilters($filtername, $jsmethod, $module);
+        return App::applyFilters($filtername, $jsmethod, $module);
     }
     public function getBlockjsmethod($jsmethod, array $module)
     {
@@ -126,7 +128,7 @@ class PoPTheme_WassupManager
             POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD,
             $theme->getName()
         );
-        return \PoP\Root\App::applyFilters($filtername, $jsmethod, $module);
+        return App::applyFilters($filtername, $jsmethod, $module);
     }
     public function filteringbyShowfilter($showfilter)
     {
@@ -140,7 +142,7 @@ class PoPTheme_WassupManager
             POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER,
             $theme->getName()
         );
-        return \PoP\Root\App::applyFilters($filtername, $showfilter);
+        return App::applyFilters($filtername, $showfilter);
     }
     public function getBlocksidebarsOrientation($orientation)
     {
@@ -154,7 +156,7 @@ class PoPTheme_WassupManager
             POP_HOOK_BLOCKSIDEBARS_ORIENTATION,
             $theme->getName()
         );
-        return \PoP\Root\App::applyFilters($filtername, $orientation);
+        return App::applyFilters($filtername, $orientation);
     }
 
     public function getEmbedUrl($url)
@@ -169,7 +171,7 @@ class PoPTheme_WassupManager
             POP_HOOK_POPMANAGERUTILS_EMBEDURL,
             $theme->getName()
         );
-        return \PoP\Root\App::applyFilters($filtername, $url);
+        return App::applyFilters($filtername, $url);
     }
     public function getPrintUrl($url)
     {
@@ -183,7 +185,7 @@ class PoPTheme_WassupManager
             POP_HOOK_POPMANAGERUTILS_PRINTURL,
             $theme->getName()
         );
-        return \PoP\Root\App::applyFilters($filtername, $url);
+        return App::applyFilters($filtername, $url);
     }
     public function isMainScrollable($value)
     {
@@ -197,7 +199,7 @@ class PoPTheme_WassupManager
             POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN,
             $theme->getName()
         );
-        return \PoP\Root\App::applyFilters($filtername, $value);
+        return App::applyFilters($filtername, $value);
     }
 }
 

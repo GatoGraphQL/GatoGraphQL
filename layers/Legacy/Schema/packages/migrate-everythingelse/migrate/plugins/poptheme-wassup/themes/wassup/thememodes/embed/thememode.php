@@ -1,5 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Root\App;
+use PoP\Root\Constants\HookNames;
 
 define('GD_THEMEMODE_WASSUP_EMBED', 'embed');
 
@@ -8,17 +10,17 @@ class GD_ThemeMode_Wassup_Embed extends GD_ThemeMode_Wassup_Simple
     public function __construct()
     {
 
-        // \PoP\Root\App::addFilter('gd_jquery_constants', array($this, 'jqueryConstants'));
+        // App::addFilter('gd_jquery_constants', array($this, 'jqueryConstants'));
 
         // Hooks to allow the thememodes to do some functionality
-        \PoP\Root\App::addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'filteringbyShowfilter'));
+        App::addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'filteringbyShowfilter'));
 
         // The embed must make the main pageSection scrollable using perfect-scrollbar, so that the fullscreen mode works fine
-        \PoP\Root\App::addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN.':'.$this->getTheme()->getName().':'.$this->getName(), '__return_true');
+        App::addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN.':'.$this->getTheme()->getName().':'.$this->getName(), '__return_true');
 
-        \PoP\Root\App::addAction('popcms:boot', function() {
-            if (in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
-                \PoP\Root\App::addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getTheme()->getName().':'.$this->getName(), '__return_false');
+        App::addAction(HookNames::AFTER_BOOT_APPLICATION, function() {
+            if (in_array(POP_STRATUM_WEB, App::getState('strata'))) {
+                App::addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getTheme()->getName().':'.$this->getName(), '__return_false');
             }
         });
 
