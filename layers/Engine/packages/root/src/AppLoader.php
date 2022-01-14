@@ -326,6 +326,9 @@ class AppLoader implements AppLoaderInterface
 
         // Finally boot the components
         $this->bootApplicationForComponents();
+
+        // Allow to inject functionality
+        App::doAction('popcms:boot');
     }
 
     public function skipSchemaForComponent(ComponentInterface $component): bool
