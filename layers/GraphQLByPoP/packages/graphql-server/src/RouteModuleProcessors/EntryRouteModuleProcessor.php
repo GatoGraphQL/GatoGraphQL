@@ -7,6 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\RouteModuleProcessors;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLServer\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\API\Routing\RouteNatures;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 
@@ -24,13 +25,13 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     }
 
     /**
-     * @return array<array>
+     * @return array<string, array<array>>
      */
-    public function getModulesVarsProperties(): array
+    public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
 
-        $ret[] = [
+        $ret[RouteNatures::QUERY_ROOT][] = [
             'module' => [RootRelationalFieldDataloadModuleProcessor::class, RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT],
             'conditions' => [
                 'scheme' => APISchemes::API,
@@ -38,7 +39,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 'graphql-operation-type' => OperationTypes::QUERY,
             ],
         ];
-        $ret[] = [
+        $ret[RouteNatures::QUERY_ROOT][] = [
             'module' => [RootRelationalFieldDataloadModuleProcessor::class, RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT],
             'conditions' => [
                 'scheme' => APISchemes::API,

@@ -6,18 +6,19 @@ namespace PoP\API\RouteModuleProcessors;
 
 use PoP\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\API\Routing\RouteNatures;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
     /**
-     * @return array<array>
+     * @return array<string, array<array>>
      */
-    public function getModulesVarsProperties(): array
+    public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
 
-        $ret[] = [
+        $ret[RouteNatures::QUERY_ROOT][] = [
             'module' => [RootRelationalFieldDataloadModuleProcessor::class, RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT],
             'conditions' => [
                 'scheme' => APISchemes::API,

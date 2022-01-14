@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\State;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\API\Routing\RouteNatures;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
@@ -44,6 +45,7 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
     {
         $state['scheme'] = APISchemes::API;
         $state['datastructure'] = $this->getGraphQLDataStructureFormatter()->getName();
+        $state['nature'] = RouteNatures::QUERY_ROOT;
     }
 
     public function consolidate(array &$state): void
