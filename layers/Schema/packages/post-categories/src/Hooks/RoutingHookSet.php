@@ -6,7 +6,7 @@ namespace PoPSchema\PostCategories\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoP\Root\Routing\RouteHookNames;
+use PoP\RoutingWP\RouteHookNames;
 use PoPSchema\PostCategories\Component;
 use PoPSchema\PostCategories\ComponentConfiguration;
 

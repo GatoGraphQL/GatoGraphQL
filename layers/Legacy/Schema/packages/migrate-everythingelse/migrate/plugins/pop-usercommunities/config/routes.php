@@ -28,7 +28,7 @@ if (!defined('POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\Root\Routing\RouteHookNames::ROUTES,
+    \PoP\RoutingWP\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

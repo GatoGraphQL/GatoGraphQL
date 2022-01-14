@@ -10,7 +10,7 @@ if (!defined('POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\Root\Routing\RouteHookNames::ROUTES,
+    \PoP\RoutingWP\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

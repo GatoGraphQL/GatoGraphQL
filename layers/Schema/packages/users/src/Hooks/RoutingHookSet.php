@@ -6,7 +6,7 @@ namespace PoPSchema\Users\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoP\Root\Routing\RouteHookNames;
+use PoP\RoutingWP\RouteHookNames;
 use PoPSchema\Users\Component;
 use PoPSchema\Users\ComponentConfiguration;
 
