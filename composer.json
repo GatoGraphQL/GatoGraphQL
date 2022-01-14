@@ -347,13 +347,13 @@
             "PoP\\ResourceLoader\\": "layers/SiteBuilder/packages/resourceloader/tests",
             "PoP\\Resources\\": "layers/SiteBuilder/packages/resources/tests",
             "PoP\\Root\\": "layers/Engine/packages/root/tests",
+            "PoP\\RootWP\\": "layers/Engine/packages/root-wp/tests",
             "PoP\\RoutingWP\\": "layers/Engine/packages/routing-wp/tests",
             "PoP\\SPA\\": "layers/SiteBuilder/packages/spa/tests",
             "PoP\\SSG\\": "layers/SiteBuilder/packages/static-site-generator/tests",
             "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/tests",
             "PoP\\SiteWP\\": "layers/SiteBuilder/packages/site-wp/tests",
-            "PoP\\Site\\": "layers/SiteBuilder/packages/site/tests",
-            "PoP\\RootWP\\": "layers/Engine/packages/root-wp/tests"
+            "PoP\\Site\\": "layers/SiteBuilder/packages/site/tests"
         }
     },
     "extra": {
