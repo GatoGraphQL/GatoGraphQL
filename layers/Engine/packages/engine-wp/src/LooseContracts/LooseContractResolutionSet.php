@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\EngineWP\LooseContracts;
 
-use PoP\Root\App;
 use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 
 class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
