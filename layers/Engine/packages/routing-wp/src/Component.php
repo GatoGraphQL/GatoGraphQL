@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\RoutingWP;
 
-use Brain\Cortex;
 use PoP\Root\Component\AbstractComponent;
 
 /**
@@ -34,10 +33,5 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
-    }
-
-    public function beforeBoot(): void
-    {
-        Cortex::boot();
     }
 }

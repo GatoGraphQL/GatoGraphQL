@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\RootWP;
 
+use Brain\Cortex;
 use PoP\Root\Component\AbstractComponent;
 
 /**
@@ -42,5 +43,10 @@ class Component extends AbstractComponent
     {
         // The same services injected into the application are injected into the system container
         $this->initSystemServices(dirname(__DIR__), '', 'services.yaml');
+    }
+
+    public function beforeBoot(): void
+    {
+        Cortex::boot();
     }
 }
