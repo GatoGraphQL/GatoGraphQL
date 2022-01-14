@@ -46,7 +46,7 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->routingManager ??= $this->instanceManager->getInstance(RoutingManagerInterface::class);
     }
-    
+
     public function initialize(array &$state): void
     {
         /** @var ComponentConfiguration */

@@ -49,7 +49,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
         }
         return $this->routes;
     }
-    
+
     /**
      * By default, everything is a generic route
      */
