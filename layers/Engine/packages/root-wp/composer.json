@@ -154,7 +154,7 @@
     },
     "type": "library",
     "description": "Implementation of the Root package for WordPress",
-    "keywords": ["PoP", "translation", "WordPress"],
+    "keywords": ["PoP", "root", "WordPress"],
     "homepage": "https://github.com/getpop/root-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
