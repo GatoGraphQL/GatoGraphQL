@@ -53,7 +53,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $componentConfiguration->mustNamespaceTypes();
 
-        $state['nature'] = $this->getRoutingManager()->getCurrentNature();
+        $state['nature'] = $this->getRoutingManager()->getCurrentRequestNature();
         $state['route'] = $this->getRoutingManager()->getCurrentRoute();
         $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
         $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();

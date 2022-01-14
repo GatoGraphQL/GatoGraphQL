@@ -34,7 +34,7 @@ class WPQueryRoutingManager extends AbstractRoutingManager implements WPQueryRou
         return $this->routes;
     }
 
-    public function getCurrentNature(): string
+    public function getCurrentRequestNature(): string
     {
         $this->init();
 
@@ -53,7 +53,7 @@ class WPQueryRoutingManager extends AbstractRoutingManager implements WPQueryRou
         // Allow plugins to implement their own natures
         return (string) App::applyFilters(
             HookNames::NATURE,
-            parent::getCurrentNature(),
+            parent::getCurrentRequestNature(),
             $this->query
         );
     }

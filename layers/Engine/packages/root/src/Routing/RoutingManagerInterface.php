@@ -6,6 +6,6 @@ namespace PoP\Root\Routing;
 
 interface RoutingManagerInterface
 {
-    public function getCurrentNature(): string;
+    public function getCurrentRequestNature(): string;
     public function getCurrentRoute(): string;
 }
