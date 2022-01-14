@@ -26,6 +26,6 @@ abstract class AbstractAfterAppBootHookSet extends AbstractHookSet
     {
         return 10;
     }
-    
+
     abstract public function cmsBoot(): void;
 }
