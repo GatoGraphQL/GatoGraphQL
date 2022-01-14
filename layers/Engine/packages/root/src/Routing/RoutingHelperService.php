@@ -20,7 +20,7 @@ class RoutingHelperService implements RoutingHelperServiceInterface
         );
     }
 
-    public function getURLPath(): string
+    public function getRequestURIPath(): string
     {
         $route = $this->getRequestURI();
         $params_pos = strpos($route, '?');

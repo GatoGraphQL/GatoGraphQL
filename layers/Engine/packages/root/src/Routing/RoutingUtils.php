@@ -8,7 +8,7 @@ use PoP\Root\App;
 
 class RoutingUtils
 {
-    public static function getURLPath(): string
+    public static function getRequestURIPath(): string
     {
         // Allow to remove the language information from qTranslate (https://domain.com/en/...)
         $route = App::applyFilters(

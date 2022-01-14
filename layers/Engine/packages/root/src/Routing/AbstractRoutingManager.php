@@ -26,7 +26,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
 
         // If it is a ROUTE, then the URL path is already the route
         if ($nature === RouteNatures::GENERIC) {
-            return RoutingUtils::getURLPath();
+            return RoutingUtils::getRequestURIPath();
         }
 
         // If having set URL param "route", then use it

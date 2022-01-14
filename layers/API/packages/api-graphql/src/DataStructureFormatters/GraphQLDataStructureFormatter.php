@@ -143,7 +143,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             // // GraphQL places the queried data under entries 'data' => query => results
             // // Replicate this structure. Because we don't have a query name here,
             // // replace it with the queried URL path, which is known to the client
-            // $path = RoutingUtils::getURLPath();
+            // $path = RoutingUtils::getRequestURIPath();
             // // If there is no path, it is the single point of entry (homepage => root)
             // if (!$path) {
             //     $path = '/';
