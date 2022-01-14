@@ -29,12 +29,10 @@ class WPQueryRoutingManager extends AbstractRoutingManager
             return RouteNatures::NOTFOUND;
         }
 
-        $default = RouteNatures::GENERIC;
-
         // Allow plugins to implement their own natures
         return (string) App::applyFilters(
             'WPCMSRoutingState:nature',
-            $default,
+            parent::getCurrentNature(),
             $this->query
         );
     }
