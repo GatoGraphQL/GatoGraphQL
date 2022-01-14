@@ -19,7 +19,10 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         $ret = array();
 
         $ret[RouteNatures::QUERY_ROOT][] = [
-            'module' => [RootRelationalFieldDataloadModuleProcessor::class, RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT],
+            'module' => [
+                RootRelationalFieldDataloadModuleProcessor::class,
+                RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT
+            ],
             'conditions' => [
                 'scheme' => APISchemes::API,
             ],

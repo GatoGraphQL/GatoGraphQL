@@ -32,7 +32,10 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         $ret = array();
 
         $ret[RouteNatures::QUERY_ROOT][] = [
-            'module' => [RootRelationalFieldDataloadModuleProcessor::class, RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT],
+            'module' => [
+                RootRelationalFieldDataloadModuleProcessor::class,
+                RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT
+            ],
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),
@@ -40,7 +43,10 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             ],
         ];
         $ret[RouteNatures::QUERY_ROOT][] = [
-            'module' => [RootRelationalFieldDataloadModuleProcessor::class, RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT],
+            'module' => [
+                RootRelationalFieldDataloadModuleProcessor::class,
+                RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT
+            ],
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),
