@@ -28,7 +28,7 @@ if (!defined('POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\RoutingWP\RouteHookNames::ROUTES,
+    \PoP\RoutingWP\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

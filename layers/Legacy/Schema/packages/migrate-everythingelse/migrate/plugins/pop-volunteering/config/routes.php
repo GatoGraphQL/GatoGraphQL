@@ -10,7 +10,7 @@ if (!defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\RoutingWP\RouteHookNames::ROUTES,
+    \PoP\RoutingWP\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

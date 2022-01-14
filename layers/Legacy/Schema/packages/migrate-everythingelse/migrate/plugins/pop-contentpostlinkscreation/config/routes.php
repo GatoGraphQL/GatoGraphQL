@@ -16,7 +16,7 @@ if (!defined('POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\RoutingWP\RouteHookNames::ROUTES,
+    \PoP\RoutingWP\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

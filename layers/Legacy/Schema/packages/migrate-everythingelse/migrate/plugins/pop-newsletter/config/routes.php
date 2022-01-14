@@ -13,7 +13,7 @@ if (!defined('POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\RoutingWP\RouteHookNames::ROUTES,
+    \PoP\RoutingWP\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

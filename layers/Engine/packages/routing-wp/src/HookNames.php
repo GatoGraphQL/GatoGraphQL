@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\RoutingWP;
 
-class RouteHookNames
+class HookNames
 {
     public const ROUTES = __CLASS__ . ':routes';
 }

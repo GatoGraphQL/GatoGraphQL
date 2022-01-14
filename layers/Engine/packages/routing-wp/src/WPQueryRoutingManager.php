@@ -26,7 +26,7 @@ class WPQueryRoutingManager extends AbstractRoutingManager implements WPQueryRou
         if ($this->routes === null) {
             $this->routes = array_filter(
                 (array) App::applyFilters(
-                    RouteHookNames::ROUTES,
+                    HookNames::ROUTES,
                     []
                 )
             );

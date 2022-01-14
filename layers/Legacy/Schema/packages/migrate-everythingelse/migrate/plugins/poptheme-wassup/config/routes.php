@@ -22,7 +22,7 @@ if (!defined('POPTHEME_WASSUP_ROUTE_LOADERS_INITIALFRAMES')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\RoutingWP\RouteHookNames::ROUTES,
+    \PoP\RoutingWP\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,
