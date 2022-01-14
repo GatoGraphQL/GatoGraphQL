@@ -168,6 +168,7 @@
     ],
     "require": {
         "php": "^8.0",
+        "brain/cortex": "1.0.0-alpha.7",
         "getpop/root": "^0.9"
     },
     "require-dev": {
