@@ -2,7 +2,6 @@
 
 namespace PoPSitesWassup\PostLinkMutations;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

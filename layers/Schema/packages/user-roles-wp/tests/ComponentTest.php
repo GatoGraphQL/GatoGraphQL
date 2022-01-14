@@ -2,7 +2,6 @@
 
 namespace PoPSchema\UserRolesWP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

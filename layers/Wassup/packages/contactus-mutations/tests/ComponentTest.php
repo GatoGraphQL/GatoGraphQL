@@ -2,7 +2,6 @@
 
 namespace PoPSitesWassup\ContactUsMutations;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

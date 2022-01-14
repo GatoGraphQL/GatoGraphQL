@@ -2,7 +2,6 @@
 
 namespace GraphQLByPoP\GraphQLEndpointForWP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

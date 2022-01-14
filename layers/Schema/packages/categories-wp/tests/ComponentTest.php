@@ -2,7 +2,6 @@
 
 namespace PoPSchema\CategoriesWP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

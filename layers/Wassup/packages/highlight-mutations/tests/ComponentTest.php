@@ -2,7 +2,6 @@
 
 namespace PoPSitesWassup\HighlightMutations;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

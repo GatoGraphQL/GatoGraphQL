@@ -2,7 +2,6 @@
 
 namespace PoPSchema\CommentsWP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

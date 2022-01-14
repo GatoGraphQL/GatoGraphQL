@@ -2,7 +2,6 @@
 
 namespace PoP\DefinitionPersistence;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

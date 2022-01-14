@@ -2,7 +2,6 @@
 
 namespace PoPSitesWassup\CommentMutations;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

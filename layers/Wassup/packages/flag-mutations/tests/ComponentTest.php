@@ -2,7 +2,6 @@
 
 namespace PoPSitesWassup\FlagMutations;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

@@ -2,7 +2,6 @@
 
 namespace PoPSchema\PostCategoryMutationsWP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**
