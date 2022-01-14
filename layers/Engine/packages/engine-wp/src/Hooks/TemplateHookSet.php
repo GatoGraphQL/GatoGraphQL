@@ -26,12 +26,12 @@ class TemplateHookSet extends AbstractHookSet
     {
         App::addFilter(
             'template_include',
-            [$this, 'setTemplate'],
+            [$this, 'getTemplate'],
             // Execute last
             PHP_INT_MAX
         );
     }
-    public function setTemplate(string $template): string
+    public function getTemplate(string $template): string
     {
         // If doing JSON, for sure return json.php which only prints the encoded JSON
         if ($this->getApplicationStateHelperService()->doingJSON()) {
