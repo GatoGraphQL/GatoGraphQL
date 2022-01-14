@@ -2,7 +2,7 @@
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 \PoP\Root\App::addAction(
-    'popcms:init', 
+    'init', // Must migrate this WP hook to one from PoP (which executes before AFTER_BOOT_APPLICATION
     function () {
         // Use the assets url instead of the site url for all the scripts and styles
         $cmsService = CMSServiceFacade::getInstance();

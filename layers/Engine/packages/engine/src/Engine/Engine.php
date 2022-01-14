@@ -36,7 +36,6 @@ class Engine extends UpstreamEngine implements EngineInterface
     public function generateData(): void
     {
         // Check if there are hooks that must be implemented by the CMS, that have not been done so.
-        // Check here, since we can't rely on addAction('popcms:init') to check, since we don't know if it was implemented!
         if ($notImplementedHooks = $this->getLooseContractManager()->getNotImplementedRequiredHooks()) {
             throw new Exception(
                 sprintf(

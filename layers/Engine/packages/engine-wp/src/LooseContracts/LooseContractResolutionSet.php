@@ -12,11 +12,6 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     protected function resolveContracts(): void
     {
         // Actions
-        // 1. Init comes before boot. We don't have the requested post/user/etc
-        // parsed yet, so use with care
-        App::addAction('init', function (): void {
-            App::doAction('popcms:init');
-        });
         App::addAction('shutdown', function (): void {
             App::doAction('popcms:shutdown');
         });
@@ -30,7 +25,6 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
         });
 
         $this->getLooseContractManager()->implementHooks([
-            'popcms:init',
             'popcms:shutdown',
             'popcms:componentInstalled',
             'popcms:componentUninstalled',
