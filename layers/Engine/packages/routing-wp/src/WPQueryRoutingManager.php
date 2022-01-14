@@ -52,7 +52,7 @@ class WPQueryRoutingManager extends AbstractRoutingManager implements WPQueryRou
 
         // Allow plugins to implement their own natures
         return (string) App::applyFilters(
-            'WPCMSRoutingState:nature',
+            HookNames::NATURE,
             parent::getCurrentNature(),
             $this->query
         );
