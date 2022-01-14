@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\EngineWP;
 
-use PoP\Engine\AppLoader;
+use PoP\RootWP\AppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AbstractTestCase as UpstreamAbstractTestCase;
 use PoP\Root\AppLoaderInterface;

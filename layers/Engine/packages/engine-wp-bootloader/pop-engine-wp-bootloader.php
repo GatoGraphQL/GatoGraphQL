@@ -8,7 +8,7 @@ Author: Leonardo Losoviz
 */
 
 use PoP\Root\App;
-use PoP\Engine\AppLoader;
+use PoP\RootWP\AppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 
 if (!class_exists(App::class)) {
