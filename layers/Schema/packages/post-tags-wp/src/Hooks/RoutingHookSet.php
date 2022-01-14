@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\Hooks;
+namespace PoPSchema\PostTagsWP\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\RoutingWP\HookNames;
-use PoPSchema\PostCategories\Component;
-use PoPSchema\PostCategories\ComponentConfiguration;
+use PoPSchema\PostTags\Component;
+use PoPSchema\PostTags\ComponentConfiguration;
 
 class RoutingHookSet extends AbstractHookSet
 {
@@ -26,7 +26,7 @@ class RoutingHookSet extends AbstractHookSet
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return [
             ...$routes,
-            $componentConfiguration->getPostCategoriesRoute(),
+            $componentConfiguration->getPostTagsRoute(),
         ];
     }
 }
