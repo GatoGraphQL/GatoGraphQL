@@ -1,5 +1,5 @@
 {
-    "name": "getpop/translation-wp",
+    "name": "getpop/root-wp",
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
         "getpop/hooks-wp": "<0.8.9",
@@ -157,7 +157,7 @@
     "type": "library",
     "description": "Implementation of the Translation API for WordPress",
     "keywords": ["PoP", "translation", "WordPress"],
-    "homepage": "https://github.com/getpop/translation-wp",
+    "homepage": "https://github.com/getpop/root-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

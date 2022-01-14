@@ -16,12 +16,12 @@ Implementation of the Translation API for WordPress
 Via Composer
 
 ``` bash
-composer require getpop/translation-wp
+composer require getpop/root-wp
 ```
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/translation-wp`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/translation-wp).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/root-wp`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/root-wp).
 
 ## Usage
 
@@ -102,17 +102,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/getpop/translation-wp.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/getpop/root-wp.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/getpop/translation-wp/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/translation-wp.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/translation-wp.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/getpop/translation-wp.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/getpop/root-wp/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/root-wp.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/root-wp.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/getpop/root-wp.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/getpop/translation-wp
-[link-travis]: https://travis-ci.org/getpop/translation-wp
-[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/translation-wp/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/getpop/translation-wp
-[link-downloads]: https://packagist.org/packages/getpop/translation-wp
+[link-packagist]: https://packagist.org/packages/getpop/root-wp
+[link-travis]: https://travis-ci.org/getpop/root-wp
+[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/root-wp/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/getpop/root-wp
+[link-downloads]: https://packagist.org/packages/getpop/root-wp
 [link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso

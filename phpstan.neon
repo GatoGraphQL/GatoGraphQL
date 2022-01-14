@@ -106,7 +106,7 @@ includes:
     - layers/Schema/packages/taxonomymeta-wp/phpstan.neon.dist
     - layers/Schema/packages/taxonomyquery/phpstan.neon.dist
     - layers/Schema/packages/taxonomyquery-wp/phpstan.neon.dist
-    - layers/Engine/packages/translation-wp/phpstan.neon.dist
+    - layers/Engine/packages/root-wp/phpstan.neon.dist
     - layers/Schema/packages/user-avatars/phpstan.neon.dist
     - layers/Schema/packages/user-avatars-wp/phpstan.neon.dist
     - layers/Schema/packages/user-roles/phpstan.neon.dist

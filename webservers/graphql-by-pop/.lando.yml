@@ -57,7 +57,7 @@ services:
         - '../../layers/Engine/packages/root:/app/vendor/getpop/root'
         - '../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp'
         - >-
-          ../../layers/Engine/packages/translation-wp:/app/vendor/getpop/translation-wp
+          ../../layers/Engine/packages/root-wp:/app/vendor/getpop/root-wp
         - >-
           ../../layers/GraphQLByPoP/clients/graphiql:/app/wordpress/graphiql
         - >-
