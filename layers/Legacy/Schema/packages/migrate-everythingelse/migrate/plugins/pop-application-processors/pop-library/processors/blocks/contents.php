@@ -157,15 +157,15 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     //         case self::MODULE_BLOCK_AUTHOR_CONTENT:
     //         case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
 
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_BLOCK_TAG_CONTENT:
 
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
 
     //         case self::MODULE_BLOCK_SINGLE_CONTENT:
 
-    //             return CustomPostRouteNatures::CUSTOMPOST;
+    //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

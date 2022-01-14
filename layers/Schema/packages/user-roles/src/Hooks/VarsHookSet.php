@@ -9,7 +9,7 @@ use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\UserRoles\Constants\ModelInstanceComponentTypes;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
-use PoPSchema\Users\Routing\RouteNatures;
+use PoPSchema\Users\Routing\RequestNature;
 
 class VarsHookSet extends AbstractHookSet
 {
@@ -35,7 +35,7 @@ class VarsHookSet extends AbstractHookSet
     public function getModelInstanceComponentsFromAppState($components)
     {
         switch (App::getState('nature')) {
-            case RouteNatures::USER:
+            case RequestNature::USER:
                 $user_id = App::getState(['routing', 'queried-object-id']);
                 // Author: it may depend on its role
                 $component_types = App::applyFilters(

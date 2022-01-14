@@ -1,7 +1,7 @@
 <?php
 use PoPSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostObjectTypeResolver;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -167,14 +167,14 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
     //         case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW:
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
     //     }
 
     //     return parent::getNature($module);

@@ -1,8 +1,8 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPTheme_Wassup_Blog_Module_OnlyMainContentRouteModuleProcessor extends PoP_Module_OnlyMainContentRouteModuleProcessorBase
 {
@@ -24,14 +24,14 @@ class PoPTheme_Wassup_Blog_Module_OnlyMainContentRouteModuleProcessor extends Po
             POP_FORMAT_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_HOMECONTENT_SCROLL_LIST],
         );
         foreach ($format_modules as $format => $module) {
-            $ret[RouteNatures::HOME][] = [
+            $ret[RequestNature::HOME][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => $format,
                 ],
             ];
             if ($default_format_section == $format) {
-                $ret[RouteNatures::HOME][] = [
+                $ret[RequestNature::HOME][] = [
                     'module' => $module,
                 ];
             }
@@ -46,14 +46,14 @@ class PoPTheme_Wassup_Blog_Module_OnlyMainContentRouteModuleProcessor extends Po
             POP_FORMAT_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCONTENT_SCROLL_LIST],
         );
         foreach ($format_modules as $format => $module) {
-            $ret[UserRouteNatures::USER][] = [
+            $ret[UserRequestNature::USER][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => $format,
                 ],
             ];
             if ($default_format_section == $format) {
-                $ret[UserRouteNatures::USER][] = [
+                $ret[UserRequestNature::USER][] = [
                     'module' => $module,
                 ];
             }
@@ -68,14 +68,14 @@ class PoPTheme_Wassup_Blog_Module_OnlyMainContentRouteModuleProcessor extends Po
             POP_FORMAT_LIST => [PoPTheme_Wassup_Blog_Module_Processor_Groups::class, PoPTheme_Wassup_Blog_Module_Processor_Groups::MODULE_GROUP_TAGCONTENT_SCROLL_LIST],
         );
         foreach ($format_modules as $format => $module) {
-            $ret[TagRouteNatures::TAG][] = [
+            $ret[TagRequestNature::TAG][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => $format,
                 ],
             ];
             if ($default_format_section == $format) {
-                $ret[TagRouteNatures::TAG][] = [
+                $ret[TagRequestNature::TAG][] = [
                     'module' => $module,
                 ];
             }

@@ -11,7 +11,7 @@ use PoPSchema\Posts\Component;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnComponent\RESTAPI\Hooks\CustomPostHookSet;
-use PoPSchema\Users\Routing\RouteNatures;
+use PoPSchema\Users\Routing\RequestNature;
 
 class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModuleProcessor
 {
@@ -51,7 +51,7 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
                 ],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::USER][$route][] = [
+            $ret[RequestNature::USER][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,

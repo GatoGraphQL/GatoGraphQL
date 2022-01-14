@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\Routing;
 
-class RouteNatures
+class RequestNature
 {
     public const USER = 'user';
 }

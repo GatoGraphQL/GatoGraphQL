@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 use PoP\Root\State\AbstractAppStateProvider;
 
 /**
@@ -67,7 +67,7 @@ class AppStateProvider extends AbstractAppStateProvider
         ) {
             $state['scheme'] = null;
             $state['datastructure'] = null;
-            $state['nature'] = RouteNatures::GENERIC;
+            $state['nature'] = RequestNature::GENERIC;
         }
     }
 }

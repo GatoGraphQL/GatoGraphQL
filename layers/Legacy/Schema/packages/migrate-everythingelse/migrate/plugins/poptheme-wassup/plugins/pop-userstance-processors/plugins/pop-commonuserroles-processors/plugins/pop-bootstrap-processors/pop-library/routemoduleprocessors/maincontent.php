@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class UserStance_URE_Bootstrap_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -16,7 +16,7 @@ class UserStance_URE_Bootstrap_Module_MainContentRouteModuleProcessor extends \P
             POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_SectionTabPanelBlocks::class, UserStance_URE_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::GENERIC][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

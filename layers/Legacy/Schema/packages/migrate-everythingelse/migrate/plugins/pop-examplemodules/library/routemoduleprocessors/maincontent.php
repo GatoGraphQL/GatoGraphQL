@@ -1,10 +1,10 @@
 <?php
 namespace PoP\ExampleModules;
-use PoP\Root\Routing\RouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPSchema\Pages\Routing\RequestNature as PageRequestNature;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -14,32 +14,32 @@ class MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainConte
     public function getModulesVarsPropertiesByNature(): array
     {
         return array(
-            RouteNatures::HOME => [
+            RequestNature::HOME => [
                 [
                     'module' => [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_HOME],
                 ],
             ],
-            RouteNatures::NOTFOUND => [
+            RequestNature::NOTFOUND => [
                 [
                     'module' => [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_404],
                 ],
             ],
-            TagRouteNatures::TAG => [
+            TagRequestNature::TAG => [
                 [
                     'module' => [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_TAG],
                 ],
             ],
-            UserRouteNatures::USER => [
+            UserRequestNature::USER => [
                 [
                     'module' => [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_AUTHOR],
                 ],
             ],
-            CustomPostRouteNatures::CUSTOMPOST => [
+            CustomPostRequestNature::CUSTOMPOST => [
                 [
                     'module' => [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_SINGLE],
                 ],
             ],
-            PageRouteNatures::PAGE => [
+            PageRequestNature::PAGE => [
                 [
                     'module' => [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_PAGE],
                 ],

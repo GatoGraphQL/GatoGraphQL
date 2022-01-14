@@ -6,14 +6,14 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingModuleInterface;
 use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPSchema\Pages\Routing\RequestNature as PageRequestNature;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Processor_BlocksBase implements FormattableModuleInterface
 {
@@ -34,13 +34,13 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         // Add only if the current nature is the one expected by the block
         // if (\PoP\Root\App::getState('nature') == $this->getNature($module)) {
         switch (\PoP\Root\App::getState('nature')) {
-            case UserRouteNatures::USER:
+            case UserRequestNature::USER:
                 return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_AUTHOR];
 
-            case TagRouteNatures::TAG:
+            case TagRequestNature::TAG:
                 return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_TAG];
 
-            case CustomPostRouteNatures::CUSTOMPOST:
+            case CustomPostRequestNature::CUSTOMPOST:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getSingleSubmenu();
         }
         // }
@@ -54,13 +54,13 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         // Add only if the current nature is the one expected by the block
         // if (\PoP\Root\App::getState('nature') == $this->getNature($module)) {
         switch (\PoP\Root\App::getState('nature')) {
-            case UserRouteNatures::USER:
+            case UserRequestNature::USER:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getAuthorTitle();
 
-            case TagRouteNatures::TAG:
+            case TagRequestNature::TAG:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getTagTitle();
 
-            case CustomPostRouteNatures::CUSTOMPOST:
+            case CustomPostRequestNature::CUSTOMPOST:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getSingleTitle();
         }
         // }
@@ -76,20 +76,20 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
             switch (\PoP\Root\App::getState('nature')) {
-                case UserRouteNatures::USER:
+                case UserRequestNature::USER:
                     $url = $userTypeAPI->getUserURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                     return RequestUtils::addRoute($url, $route);
 
-                case TagRouteNatures::TAG:
+                case TagRequestNature::TAG:
                     $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                     return RequestUtils::addRoute($url, $route);
 
-                case PageRouteNatures::PAGE:
-                case CustomPostRouteNatures::CUSTOMPOST:
+                case PageRequestNature::PAGE:
+                case CustomPostRequestNature::CUSTOMPOST:
                     $url = $customPostTypeAPI->getPermalink(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                     return RequestUtils::addRoute($url, $route);
 
-                case RouteNatures::HOME:
+                case RequestNature::HOME:
                     $url = $cmsService->getHomeURL();
                     return RequestUtils::addRoute($url, $route);
             }

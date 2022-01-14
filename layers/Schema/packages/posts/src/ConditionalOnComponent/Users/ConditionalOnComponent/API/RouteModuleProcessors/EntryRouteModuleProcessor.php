@@ -10,7 +10,7 @@ use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoPSchema\Posts\Component;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
-use PoPSchema\Users\Routing\RouteNatures;
+use PoPSchema\Users\Routing\RequestNature;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
@@ -31,7 +31,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             ],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::USER][$route][] = [
+            $ret[RequestNature::USER][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,

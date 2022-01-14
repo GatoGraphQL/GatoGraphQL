@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Root\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoPThemeWassup_EM_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources_ProcessorBase
 {
@@ -9,7 +9,7 @@ class PoPThemeWassup_EM_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureRe
 
         // When processing POP_ADDLOCATIONS_ROUTE_ADDLOCATION, we need a configuration for both target=main and target=modals
         // Because giving no target (the default behaviour) will then choose target=modals, below explicitly create the configuration for target=main
-        $nature = RouteNatures::GENERIC;
+        $nature = RequestNature::GENERIC;
         $ids = array(
             POP_ADDLOCATIONS_ROUTE_ADDLOCATION,
         );

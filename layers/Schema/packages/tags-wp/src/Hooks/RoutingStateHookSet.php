@@ -7,7 +7,7 @@ namespace PoPSchema\TagsWP\Hooks;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\RootWP\Routing\HookNames;
-use PoPSchema\Tags\Routing\RouteNatures;
+use PoPSchema\Tags\Routing\RequestNature;
 use WP_Query;
 
 class RoutingStateHookSet extends AbstractHookSet
@@ -28,7 +28,7 @@ class RoutingStateHookSet extends AbstractHookSet
     public function getNature(string $nature, WP_Query $query): string
     {
         if ($query->is_tag()) {
-            return RouteNatures::TAG;
+            return RequestNature::TAG;
         }
 
         return $nature;

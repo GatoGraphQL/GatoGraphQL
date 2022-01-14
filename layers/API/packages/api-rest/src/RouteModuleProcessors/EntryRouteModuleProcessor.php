@@ -6,7 +6,7 @@ namespace PoP\RESTAPI\RouteModuleProcessors;
 
 use PoP\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\API\Routing\RouteNatures;
+use PoP\API\Routing\RequestNature;
 use PoP\Root\App;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
@@ -23,7 +23,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
 
-        $ret[RouteNatures::QUERY_ROOT][] = [
+        $ret[RequestNature::QUERY_ROOT][] = [
             'module' => [
                 RootRelationalFieldDataloadModuleProcessor::class,
                 RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT,

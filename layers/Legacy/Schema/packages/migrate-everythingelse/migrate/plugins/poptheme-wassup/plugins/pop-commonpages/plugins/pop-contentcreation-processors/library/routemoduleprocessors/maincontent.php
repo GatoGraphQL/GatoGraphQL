@@ -1,6 +1,6 @@
 <?php
 
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoPSchema\Pages\Routing\RequestNature as PageRequestNature;
 
 class PoP_CommonPages_ContentCreation_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -17,7 +17,7 @@ class PoP_CommonPages_ContentCreation_Module_MainContentRouteModuleProcessor ext
             POP_COMMONPAGES_PAGE_ADDCONTENTFAQ => [GD_CommonPages_Module_Processor_CustomBlocks::class, GD_CommonPages_Module_Processor_CustomBlocks::MODULE_BLOCK_ADDCONTENTFAQ],
         );
         foreach ($modules as $page => $module) {
-            $ret[PageRouteNatures::PAGE][] = [
+            $ret[PageRequestNature::PAGE][] = [
                 'module' => $module,
                 'conditions' => [
                     'routing' => [

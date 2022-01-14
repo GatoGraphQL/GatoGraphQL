@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes;
-use PoPSchema\CustomPosts\Routing\RouteNatures;
+use PoPSchema\CustomPosts\Routing\RequestNature;
 
 class VarsHookSet extends AbstractHookSet
 {
@@ -26,7 +26,7 @@ class VarsHookSet extends AbstractHookSet
 
         // Properties specific to each nature
         switch ($nature) {
-            case RouteNatures::CUSTOMPOST:
+            case RequestNature::CUSTOMPOST:
                 // Single may depend on its post_type and category
                 // Post and Event may be different
                 // Announcements and Articles (Posts), or Past Event and (Upcoming) Event may be different

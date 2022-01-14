@@ -7,7 +7,7 @@ namespace PoPSchema\PostCategories\Hooks;
 use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\CustomPosts\Routing\RouteNatures;
+use PoPSchema\CustomPosts\Routing\RequestNature;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 
@@ -49,7 +49,7 @@ class ModelInstanceHookSet extends AbstractHookSet
 
         // Properties specific to each nature
         if (
-            $nature == RouteNatures::CUSTOMPOST
+            $nature == RequestNature::CUSTOMPOST
             && App::getState(['routing', 'queried-object-post-type']) == $this->getPostTypeAPI()->getPostCustomPostType()
         ) {
             // Single may depend on its post_type and category

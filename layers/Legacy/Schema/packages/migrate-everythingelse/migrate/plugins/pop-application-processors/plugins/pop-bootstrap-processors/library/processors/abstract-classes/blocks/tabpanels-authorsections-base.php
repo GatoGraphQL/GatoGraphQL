@@ -4,7 +4,7 @@ abstract class PoP_Module_Processor_AuthorTabPanelSectionBlocksBase extends PoP_
 {
     // public function getNature(array $module)
     // {
-    //     return UserRouteNatures::USER;
+    //     return UserRequestNature::USER;
     // }
 
     protected function getControlgroupBottomSubmodule(array $module)

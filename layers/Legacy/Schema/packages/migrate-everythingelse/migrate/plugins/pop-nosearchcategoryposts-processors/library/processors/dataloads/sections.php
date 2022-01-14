@@ -1,7 +1,7 @@
 <?php
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -3334,7 +3334,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
     //         case self::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS17_CAROUSEL_CONTENT:
     //         case self::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS18_CAROUSEL_CONTENT:
     //         case self::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_DETAILS:
@@ -3496,7 +3496,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
     //         case self::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS17_CAROUSEL_CONTENT:
     //         case self::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_CAROUSEL_CONTENT:
     //         case self::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
     //     }
 
     //     return parent::getNature($module);

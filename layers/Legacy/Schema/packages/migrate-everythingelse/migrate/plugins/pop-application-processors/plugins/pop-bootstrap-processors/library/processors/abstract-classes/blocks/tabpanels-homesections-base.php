@@ -4,6 +4,6 @@ abstract class PoP_Module_Processor_HomeTabPanelSectionBlocksBase extends PoP_Mo
 {
     // public function getNature(array $module)
     // {
-    //     return RouteNatures::HOME;
+    //     return RequestNature::HOME;
     // }
 }
