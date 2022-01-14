@@ -56,7 +56,6 @@ services:
           ../../layers/Engine/packages/query-parsing:/app/vendor/getpop/query-parsing
         - '../../layers/Engine/packages/root:/app/vendor/getpop/root'
         - '../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp'
-        - '../../layers/Engine/packages/routing:/app/vendor/getpop/routing'
         - >-
           ../../layers/Engine/packages/translation-wp:/app/vendor/getpop/translation-wp
         - >-

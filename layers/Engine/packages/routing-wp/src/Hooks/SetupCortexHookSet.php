@@ -9,7 +9,7 @@ use Brain\Cortex\Route\QueryRoute;
 use Brain\Cortex\Route\RouteCollectionInterface;
 use Brain\Cortex\Route\RouteInterface;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoP\Routing\RoutingManagerInterface;
+use PoP\Root\Routing\RoutingManagerInterface;
 use PoP\RoutingWP\WPQueries;
 
 class SetupCortexHookSet extends AbstractHookSet

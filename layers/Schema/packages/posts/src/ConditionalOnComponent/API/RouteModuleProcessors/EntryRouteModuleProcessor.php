@@ -7,7 +7,7 @@ namespace PoPSchema\Posts\ConditionalOnComponent\API\RouteModuleProcessors;
 use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RouteNatures;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Posts\Component;
 use PoPSchema\Posts\ComponentConfiguration;

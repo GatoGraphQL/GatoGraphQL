@@ -9,3 +9,6 @@ services:
 
     PoP\Root\Registries\AppStateProviderRegistryInterface:
         class: \PoP\Root\Registries\AppStateProviderRegistry
+
+    PoP\Root\Routing\RoutingManagerInterface:
+        class: \PoP\Root\Routing\BasicRoutingManager

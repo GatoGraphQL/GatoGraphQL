@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\Routing;
+namespace PoP\Root\Constants;
 
-class URLParams
+class Params
 {
     public const ROUTE = 'route';
 }

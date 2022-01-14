@@ -5,24 +5,27 @@ declare(strict_types=1);
 namespace PoP\RoutingWP;
 
 use PoP\Root\App;
-use PoP\Routing\AbstractRoutingManager;
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\AbstractRoutingManager;
+use PoP\Root\Routing\RouteNatures;
 use WP_Query;
 
-class RoutingManager extends AbstractRoutingManager
+class WPQueryRoutingManager extends AbstractRoutingManager
 {
     use RoutingManagerTrait;
 
     public function getCurrentNature(): string
     {
         $this->init();
+
         /** @var WP_Query */
         $query = $this->query;
         if ($this->isGeneric()) {
             return RouteNatures::GENERIC;
-        } elseif ($query->is_home() || $query->is_front_page()) {
+        }
+        if ($query->is_home() || $query->is_front_page()) {
             return RouteNatures::HOME;
-        } elseif ($query->is_404()) {
+        }
+        if ($query->is_404()) {
             return RouteNatures::NOTFOUND;
         }
 

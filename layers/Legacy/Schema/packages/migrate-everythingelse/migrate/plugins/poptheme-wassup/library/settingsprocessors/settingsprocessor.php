@@ -1,5 +1,5 @@
 <?php
-use PoP\Routing\Routes as RoutingRoutes;
+use PoP\Root\Routing\Routes as RoutingRoutes;
 
 class PoPTheme_Wassup_Module_SettingsProcessor extends PoP_Module_SettingsProcessorBase
 {

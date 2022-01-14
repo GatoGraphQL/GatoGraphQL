@@ -171,7 +171,6 @@
         "getpop/graphql-parser": "^0.9",
         "getpop/loosecontracts": "^0.9",
         "getpop/modulerouting": "^0.9",
-        "getpop/routing": "^0.9",
         "jrfnl/php-cast-to-type": "^2.0",
         "league/pipeline": "^1.0",
         "psr/simple-cache": "^1.0",

@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\Routing\RoutingManagerInterface:
-        class: \PoP\RoutingWP\RoutingManager
+    PoP\Root\Routing\RoutingManagerInterface:
+        class: \PoP\RoutingWP\WPQueryRoutingManager
 
     PoP\RoutingWP\Hooks\:
         resource: '../src/Hooks/*'

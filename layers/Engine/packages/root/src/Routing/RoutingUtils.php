@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Routing;
+namespace PoP\Root\Routing;
 
 use PoP\Root\App;
 

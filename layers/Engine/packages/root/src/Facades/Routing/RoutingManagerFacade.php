@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\Routing\Facades;
+namespace PoP\Root\Facades\Routing;
 
 use PoP\Root\App;
-use PoP\Routing\RoutingManagerInterface;
+use PoP\Root\Routing\RoutingManagerInterface;
 
 class RoutingManagerFacade
 {

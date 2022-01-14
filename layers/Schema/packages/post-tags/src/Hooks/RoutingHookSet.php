@@ -6,7 +6,7 @@ namespace PoPSchema\PostTags\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoP\Routing\RouteHookNames;
+use PoP\Root\Routing\RouteHookNames;
 use PoPSchema\PostTags\Component;
 use PoPSchema\PostTags\ComponentConfiguration;
 

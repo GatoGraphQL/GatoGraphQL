@@ -1,6 +1,6 @@
 <?php
 use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\Routing\DefinitionGroups;
+use PoP\Root\Routing\DefinitionGroups;
 $definitionManager = DefinitionManagerFacade::getInstance();
 
 // System Pages
@@ -16,7 +16,7 @@ if (!defined('POP_SYSTEM_ROUTE_SYSTEM_INSTALL')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\Routing\RouteHookNames::ROUTES,
+    \PoP\Root\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

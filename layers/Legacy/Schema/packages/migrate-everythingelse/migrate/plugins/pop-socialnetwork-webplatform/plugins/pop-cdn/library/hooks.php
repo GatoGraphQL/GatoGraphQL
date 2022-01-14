@@ -1,5 +1,5 @@
 <?php
-use PoP\Routing\URLParams;
+use PoP\Root\Constants\Params;
 
 class PoP_SocialNetworkWebPlatform_CDN_Hooks
 {
@@ -38,7 +38,7 @@ class PoP_SocialNetworkWebPlatform_CDN_Hooks
             foreach ($routes as $route) {
                 // Array of: elem[0] = URL param, elem[1] = value
                 $noparamvalues[] = array(
-                    URLParams::ROUTE,
+                    Params::ROUTE,
                     $route
                 );
             }

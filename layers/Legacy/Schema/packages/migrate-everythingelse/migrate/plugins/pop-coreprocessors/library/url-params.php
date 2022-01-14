@@ -1,5 +1,5 @@
 <?php
-use PoP\Routing\URLParams;
+use PoP\Root\Constants\Params;
 
 const GD_URLPARAM_INTERCEPTURLS = 'intercept-urls';
 const GD_URLPARAM_TITLE = 'title';
@@ -42,7 +42,7 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
     $jqueryConstants['URLPARAM_OPERATION_REPLACEINLINE'] = GD_URLPARAM_OPERATION_REPLACEINLINE;
 
     $jqueryConstants['URLPARAM_FORMAT'] = \PoP\ConfigurationComponentModel\Constants\Params::FORMAT;
-    $jqueryConstants['URLPARAM_ROUTE'] = URLParams::ROUTE;
+    $jqueryConstants['URLPARAM_ROUTE'] = Params::ROUTE;
 
     $jqueryConstants['URLPARAM_DATAOUTPUTITEMS'] = \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS;
     $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_META'] = \PoP\ComponentModel\Constants\DataOutputItems::META;

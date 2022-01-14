@@ -1,6 +1,6 @@
 <?php
 use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\Routing\DefinitionGroups;
+use PoP\Root\Routing\DefinitionGroups;
 $definitionManager = DefinitionManagerFacade::getInstance();
 
 // Routes
@@ -22,7 +22,7 @@ if (!defined('POPTHEME_WASSUP_ROUTE_LOADERS_INITIALFRAMES')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\Routing\RouteHookNames::ROUTES,
+    \PoP\Root\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

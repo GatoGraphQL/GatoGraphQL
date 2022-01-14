@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Misc;
 
 use PoP\Root\App;
-use PoP\Routing\URLParams;
+use PoP\Root\Constants\Params;
 
 class RequestUtils
 {
@@ -36,7 +36,7 @@ class RequestUtils
 
     public static function addRoute($url, $route)
     {
-        return GeneralUtils::addQueryArgs([URLParams::ROUTE => $route], $url);
+        return GeneralUtils::addQueryArgs([Params::ROUTE => $route], $url);
     }
 
     public static function fetchingSite()
