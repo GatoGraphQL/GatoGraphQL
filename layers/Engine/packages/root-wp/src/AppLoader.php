@@ -10,29 +10,29 @@ use PoP\Root\AppLoader as UpstreamAppLoader;
 class AppLoader extends UpstreamAppLoader
 {
     /**
-     * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
-     * for them to execute any custom extra logic.
-     * Override to execute functions on CMS events.
+     * Override to execute logic on the proper WP action.
      */
     protected function bootApplicationForComponents(): void
     {
         // Boot all the components
         App::getComponentManager()->beforeBoot();
 
+        // Find the right action, depending if we are in wp-admin or in frontend
+        $actionHook = \is_admin() ? 'wp_loaded' : 'wp';
+
+        // Override when the functionality is executed
         App::addAction(
-            'popcms:boot',
+            $actionHook,
             fn() => App::getAppStateManager()->initializeAppState(),
             0
         );
-
         App::addAction(
-            'popcms:boot',
+            $actionHook,
             fn () => App::getComponentManager()->boot(),
             4
         );
-
         App::addAction(
-            'popcms:boot',
+            $actionHook,
             fn () => App::getComponentManager()->afterBoot(),
             8
         );
