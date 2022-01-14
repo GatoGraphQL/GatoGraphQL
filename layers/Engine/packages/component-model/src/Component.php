@@ -26,7 +26,6 @@ class Component extends AbstractComponent
             \PoP\GraphQLParser\Component::class,
             \PoP\LooseContracts\Component::class,
             \PoP\ModuleRouting\Component::class,
-            \PoP\Root\Routing\Component::class,
         ];
     }
 

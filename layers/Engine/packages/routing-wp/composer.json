@@ -169,7 +169,7 @@
         "php": "^8.0",
         "brain/cortex": "1.0.0-alpha.7",
         "getpop/hooks-wp": "^0.9",
-        "getpop/routing": "^0.9"
+        "getpop/root": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
