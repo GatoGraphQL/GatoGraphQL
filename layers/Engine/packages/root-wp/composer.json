@@ -153,7 +153,7 @@
         "pop-wp-schema/schema-commons": "<0.8.9"
     },
     "type": "library",
-    "description": "Implementation of the Translation API for WordPress",
+    "description": "Implementation of the Root package for WordPress",
     "keywords": ["PoP", "translation", "WordPress"],
     "homepage": "https://github.com/getpop/root-wp",
     "license": "GPL-2.0-or-later",
