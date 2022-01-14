@@ -9,9 +9,47 @@ use PoP\Root\Routing\AbstractRoutingManager;
 use PoP\Root\Routing\RouteNatures;
 use WP_Query;
 
-class WPQueryRoutingManager extends AbstractRoutingManager
+class WPQueryRoutingManager extends AbstractRoutingManager implements WPQueryRoutingManagerInterface
 {
     use RoutingManagerTrait;
+
+    /**
+     * @var string[]|null
+     */
+    private ?array $routes = null;
+
+    /**
+     * @return string[]
+     */
+    public function getRoutes(): array
+    {
+        if ($this->routes === null) {
+            $this->routes = array_filter(
+                (array) App::applyFilters(
+                    RouteHookNames::ROUTES,
+                    []
+                )
+            );
+
+            // // If there are partial endpoints, generate all the combinations of route + partial endpoint
+            // // For instance, route = "posts", endpoint = "/api/rest", combined route = "posts/api/rest"
+            // if ($partialEndpoints = array_filter(
+            //     (array) \PoP\Root\App::applyFilters(
+            //         'route-endpoints',
+            //         []
+            //     )
+            // )) {
+            //     // Attach the endpoints to each of the routes
+            //     $routes = $this->routes;
+            //     foreach ($routes as $route) {
+            //         foreach ($partialEndpoints as $endpoint) {
+            //             $this->routes[] = $route . '/' . trim($endpoint, '/');
+            //         }
+            //     }
+            // }
+        }
+        return $this->routes;
+    }
 
     public function getCurrentNature(): string
     {
