@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\RoutingWP\Hooks;
 
-use PoP\Root\App;
 use Brain\Cortex\Route\QueryRoute;
 use Brain\Cortex\Route\RouteCollectionInterface;
 use Brain\Cortex\Route\RouteInterface;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\Root\Routing\RoutingManagerInterface;
 use PoP\RoutingWP\WPQueries;
+use PoP\RoutingWP\WPQueryRoutingManagerInterface;
 
 class SetupCortexHookSet extends AbstractHookSet
 {
@@ -39,7 +40,9 @@ class SetupCortexHookSet extends AbstractHookSet
      */
     public function setupCortex(RouteCollectionInterface $routes): void
     {
-        foreach ($this->getRoutingManager()->getRoutes() as $route) {
+        /** @var WPQueryRoutingManagerInterface */
+        $routingManager = $this->getRoutingManager();
+        foreach ($routingManager->getRoutes() as $route) {
             $routes->addRoute(new QueryRoute(
                 $route,
                 fn (array $matches) => WPQueries::GENERIC_NATURE,
