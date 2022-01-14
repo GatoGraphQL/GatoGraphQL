@@ -1,5 +1,5 @@
 <?php
-use PoP\Root\Routing\URLParams;
+use PoP\Root\Constants\Params;
 use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
@@ -79,7 +79,7 @@ class PoP_CDN_Blog_CDNHooks
             );
             foreach ($routes as $route) {
                 $paramvalues[] = array(
-                    URLParams::ROUTE,
+                    Params::ROUTE,
                     $route
                 );
             }
