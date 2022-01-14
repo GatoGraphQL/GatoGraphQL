@@ -1,9 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoP\Routing\RoutingManagerInterface:
-        class: \PoP\Routing\RoutingManager
-
