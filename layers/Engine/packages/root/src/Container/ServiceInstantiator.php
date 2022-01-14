@@ -36,7 +36,7 @@ class ServiceInstantiator implements ServiceInstantiatorInterface
         if ($event !== null) {
             $servicesForEvent = array_filter(
                 $this->services,
-                fn ($service) => $service->getInstantiationEvent() == $event
+                fn ($service) => $service->getInstantiationEvent() === $event
             );
         }
         foreach ($servicesForEvent as $service) {
