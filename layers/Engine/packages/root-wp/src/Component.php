@@ -33,7 +33,16 @@ class Component extends AbstractComponent
         bool $skipSchema,
         array $skipSchemaComponentClasses,
     ): void {
+        $this->initServices(dirname(__DIR__), '', 'hybrid-services.yaml');
         $this->initServices(dirname(__DIR__));
+    }
+
+    /**
+     * Initialize services for the system container
+     */
+    protected function initializeSystemContainerServices(): void
+    {
+        $this->initSystemServices(dirname(__DIR__), '', 'hybrid-services.yaml');
     }
 
     public function beforeBoot(): void
