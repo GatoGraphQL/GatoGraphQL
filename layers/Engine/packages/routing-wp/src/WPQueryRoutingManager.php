@@ -16,14 +16,16 @@ class WPQueryRoutingManager extends AbstractRoutingManager
     public function getCurrentNature(): string
     {
         $this->init();
-        
+
         /** @var WP_Query */
         $query = $this->query;
         if ($this->isGeneric()) {
             return RouteNatures::GENERIC;
-        } elseif ($query->is_home() || $query->is_front_page()) {
+        }
+        if ($query->is_home() || $query->is_front_page()) {
             return RouteNatures::HOME;
-        } elseif ($query->is_404()) {
+        }
+        if ($query->is_404()) {
             return RouteNatures::NOTFOUND;
         }
 
