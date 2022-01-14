@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Hooks;
+namespace PoP\ComponentModel\Hooks;
 
-use PoP\Root\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Cache\TransientCacheInterface;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
-class CacheHookSet extends AbstractHookSet
+abstract class AbstractCacheHookSet extends AbstractHookSet
 {
     private ?PersistentCacheInterface $persistentCache = null;
     private ?TransientCacheInterface $transientCache = null;
@@ -33,19 +33,40 @@ class CacheHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        // When a plugin is activated/deactivated, ANY plugin, delete the corresponding cached files
-        // This is particularly important for the MEMORY, since we can't set by constants to not use it
-        App::addAction(
-            'popcms:componentInstalledOrUninstalled',
-            [$this, 'clear']
-        );
+        /**
+         * When a plugin/module/component/etc is activated/deactivated,
+         * delete the cached files from this application.
+         *
+         * For instance, for WordPress, these hooks must be provided:
+         * 
+         * - 'activate_plugin'
+         * - 'deactivate_plugin'
+         */
+        foreach ($this->getClearHookNames() as $hookName) {
+            App::addAction(
+                $hookName,
+                [$this, 'clear']
+            );
+        }
 
-        // Save all deferred cacheItems
+        /**
+         * Save all deferred cacheItems.
+         * 
+         * For instance, for WordPress, this hook must be provided:
+         *
+         * - 'shutdown'
+         */
         App::addAction(
-            'popcms:shutdown',
+            $this->getCommitHookName(),
             [$this, 'commit']
         );
     }
+
+    /**
+     * @return string[]
+     */
+    abstract protected function getClearHookNames(): array;
+    abstract protected function getCommitHookName(): string;
 
     public function clear(): void
     {
