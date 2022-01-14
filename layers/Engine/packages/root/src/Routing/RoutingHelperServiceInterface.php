@@ -6,5 +6,6 @@ namespace PoP\Root\Routing;
 
 interface RoutingHelperServiceInterface
 {
+    public function getRequestURI(): string;
     public function getURLPath(): string;
 }

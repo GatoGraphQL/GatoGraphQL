@@ -11,13 +11,18 @@ class RoutingHelperService implements RoutingHelperServiceInterface
 {
     use BasicServiceTrait;
 
-    public function getURLPath(): string
+    public function getRequestURI(): string
     {
         // Allow to remove the language information from qTranslate (https://domain.com/en/...)
-        $route = App::applyFilters(
+        return App::applyFilters(
             '\PoP\Routing:uri-route',
             $_SERVER['REQUEST_URI'] ?? '' // When executing PHPUnit tests there'll be no URI
         );
+    }
+
+    public function getURLPath(): string
+    {
+        $route = $this->getRequestURI();
         $params_pos = strpos($route, '?');
         if ($params_pos !== false) {
             $route = substr($route, 0, $params_pos);
