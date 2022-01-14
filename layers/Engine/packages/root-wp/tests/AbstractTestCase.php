@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\EngineWP;
+namespace PoP\RootWP;
 
 use PoP\RootWP\AppLoader;
 use PoP\RootWP\StateManagers\HookManager;
