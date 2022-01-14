@@ -10,7 +10,7 @@ if (!defined('POP_DOMAIN_ROUTE_LOADERS_INITIALIZEDOMAIN')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\RoutingWP\HookNames::ROUTES,
+    \PoP\RootWP\Routing\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

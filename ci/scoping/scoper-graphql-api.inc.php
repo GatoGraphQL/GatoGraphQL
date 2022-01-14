@@ -18,12 +18,12 @@ use Isolated\Symfony\Component\Finder\Finder;
  * Excluding the WordPress packages is feasible, because they do
  * not reference any external library.
  *
- * The only exception is getpop/routing-wp, which uses Brain\Cortex:
+ * The only exception is getpop/root-wp, which uses Brain\Cortex:
  *
- * in getpop/routing-wp/src/Component.php:
+ * in getpop/root-wp/src/Component.php:
  *   use Brain\Cortex;
  *
- * in getpop/routing-wp/src/Hooks/SetupCortexHookSet.php:
+ * in getpop/root-wp/src/Hooks/SetupCortexHookSet.php:
  *   use Brain\Cortex\Route\RouteCollectionInterface;
  *   use Brain\Cortex\Route\RouteInterface;
  *   use Brain\Cortex\Route\QueryRoute;
@@ -68,8 +68,8 @@ return [
             ])
             ->in(convertRelativeToFullPath('vendor')),
         Finder::create()->append([
-            convertRelativeToFullPath('vendor/getpop/routing-wp/src/Component.php'),
-            convertRelativeToFullPath('vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php'),
+            convertRelativeToFullPath('vendor/getpop/root-wp/src/Component.php'),
+            convertRelativeToFullPath('vendor/getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php'),
         ])
     ],
     'whitelist' => array_values(array_unique([

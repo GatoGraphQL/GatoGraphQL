@@ -10,7 +10,7 @@ if (!defined('POP_SYSTEMWP_ROUTE_SYSTEM_ACTIVATEPLUGINS')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\RoutingWP\HookNames::ROUTES,
+    \PoP\RootWP\Routing\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

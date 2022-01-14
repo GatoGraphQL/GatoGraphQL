@@ -65,7 +65,7 @@ if (!defined('POP_SOCIALNETWORK_ROUTE_SUBSCRIBEDTO')) {
 
 
 \PoP\Root\App::addFilter(
-    \PoP\RoutingWP\HookNames::ROUTES,
+    \PoP\RootWP\Routing\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

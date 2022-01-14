@@ -57,7 +57,6 @@ includes:
     - layers/GraphQLByPoP/packages/graphql-request/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-server/phpstan.neon.dist
     - layers/Engine/packages/guzzle-helpers/phpstan.neon.dist
-    - layers/Engine/packages/hooks-wp/phpstan.neon.dist
     - layers/Engine/packages/loosecontracts/phpstan.neon.dist
     - layers/Engine/packages/mandatory-directives-by-configuration/phpstan.neon.dist
     - layers/GraphQLAPIForWP/packages/markdown-convertor/phpstan.neon.dist
@@ -92,7 +91,6 @@ includes:
     - layers/Schema/packages/queriedobject-wp/phpstan.neon.dist
     - layers/Engine/packages/query-parsing/phpstan.neon.dist
     - layers/Engine/packages/root/phpstan.neon.dist
-    - layers/Engine/packages/routing-wp/phpstan.neon.dist
     - layers/Schema/packages/schema-commons/phpstan.neon.dist
     - layers/WPSchema/packages/schema-commons/phpstan.neon.dist
     - layers/Schema/packages/settings/phpstan.neon.dist
@@ -106,7 +104,7 @@ includes:
     - layers/Schema/packages/taxonomymeta-wp/phpstan.neon.dist
     - layers/Schema/packages/taxonomyquery/phpstan.neon.dist
     - layers/Schema/packages/taxonomyquery-wp/phpstan.neon.dist
-    - layers/Engine/packages/translation-wp/phpstan.neon.dist
+    - layers/Engine/packages/root-wp/phpstan.neon.dist
     - layers/Schema/packages/user-avatars/phpstan.neon.dist
     - layers/Schema/packages/user-avatars-wp/phpstan.neon.dist
     - layers/Schema/packages/user-roles/phpstan.neon.dist

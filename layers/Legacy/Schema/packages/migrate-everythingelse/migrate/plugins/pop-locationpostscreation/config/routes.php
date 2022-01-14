@@ -16,7 +16,7 @@ if (!defined('POP_LOCATIONPOSTSCREATION_ROUTE_EDITLOCATIONPOST')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\RoutingWP\HookNames::ROUTES,
+    \PoP\RootWP\Routing\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

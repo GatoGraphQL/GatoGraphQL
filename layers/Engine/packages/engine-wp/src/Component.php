@@ -20,9 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\Engine\Component::class,
-            \PoP\RoutingWP\Component::class,
-            \PoP\HooksWP\Component::class,
-            \PoP\TranslationWP\Component::class,
+            \PoP\RootWP\Component::class,
         ];
     }
 

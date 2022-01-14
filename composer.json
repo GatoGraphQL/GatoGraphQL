@@ -177,7 +177,6 @@
             "PoP\\GraphQLAPI\\": "layers/API/packages/api-graphql/src",
             "PoP\\GraphQLParser\\": "layers/Engine/packages/graphql-parser/src",
             "PoP\\GuzzleHelpers\\": "layers/Engine/packages/guzzle-helpers/src",
-            "PoP\\HooksWP\\": "layers/Engine/packages/hooks-wp/src",
             "PoP\\LooseContracts\\": "layers/Engine/packages/loosecontracts/src",
             "PoP\\MandatoryDirectivesByConfiguration\\": "layers/Engine/packages/mandatory-directives-by-configuration/src",
             "PoP\\ModuleRouting\\": "layers/Engine/packages/modulerouting/src",
@@ -188,13 +187,12 @@
             "PoP\\ResourceLoader\\": "layers/SiteBuilder/packages/resourceloader/src",
             "PoP\\Resources\\": "layers/SiteBuilder/packages/resources/src",
             "PoP\\Root\\": "layers/Engine/packages/root/src",
-            "PoP\\RoutingWP\\": "layers/Engine/packages/routing-wp/src",
+            "PoP\\RootWP\\": "layers/Engine/packages/root-wp/src",
             "PoP\\SPA\\": "layers/SiteBuilder/packages/spa/src",
             "PoP\\SSG\\": "layers/SiteBuilder/packages/static-site-generator/src",
             "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/src",
             "PoP\\SiteWP\\": "layers/SiteBuilder/packages/site-wp/src",
-            "PoP\\Site\\": "layers/SiteBuilder/packages/site/src",
-            "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/src"
+            "PoP\\Site\\": "layers/SiteBuilder/packages/site/src"
         }
     },
     "autoload-dev": {
@@ -337,7 +335,6 @@
             "PoP\\GraphQLAPI\\": "layers/API/packages/api-graphql/tests",
             "PoP\\GraphQLParser\\": "layers/Engine/packages/graphql-parser/tests",
             "PoP\\GuzzleHelpers\\": "layers/Engine/packages/guzzle-helpers/tests",
-            "PoP\\HooksWP\\": "layers/Engine/packages/hooks-wp/tests",
             "PoP\\LooseContracts\\": "layers/Engine/packages/loosecontracts/tests",
             "PoP\\MandatoryDirectivesByConfiguration\\": "layers/Engine/packages/mandatory-directives-by-configuration/tests",
             "PoP\\ModuleRouting\\": "layers/Engine/packages/modulerouting/tests",
@@ -347,13 +344,12 @@
             "PoP\\ResourceLoader\\": "layers/SiteBuilder/packages/resourceloader/tests",
             "PoP\\Resources\\": "layers/SiteBuilder/packages/resources/tests",
             "PoP\\Root\\": "layers/Engine/packages/root/tests",
-            "PoP\\RoutingWP\\": "layers/Engine/packages/routing-wp/tests",
+            "PoP\\RootWP\\": "layers/Engine/packages/root-wp/tests",
             "PoP\\SPA\\": "layers/SiteBuilder/packages/spa/tests",
             "PoP\\SSG\\": "layers/SiteBuilder/packages/static-site-generator/tests",
             "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/tests",
             "PoP\\SiteWP\\": "layers/SiteBuilder/packages/site-wp/tests",
-            "PoP\\Site\\": "layers/SiteBuilder/packages/site/tests",
-            "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/tests"
+            "PoP\\Site\\": "layers/SiteBuilder/packages/site/tests"
         }
     },
     "extra": {
@@ -385,7 +381,6 @@
         "getpop/function-fields": "0.8.9",
         "getpop/graphql-parser": "0.8.9",
         "getpop/guzzle-helpers": "0.8.9",
-        "getpop/hooks-wp": "0.8.9",
         "getpop/loosecontracts": "0.8.9",
         "getpop/mandatory-directives-by-configuration": "0.8.9",
         "getpop/modulerouting": "0.8.9",
@@ -394,14 +389,13 @@
         "getpop/resourceloader": "0.8.9",
         "getpop/resources": "0.8.9",
         "getpop/root": "0.8.9",
+        "getpop/root-wp": "0.8.9",
         "getpop/routing": "0.8.9",
-        "getpop/routing-wp": "0.8.9",
         "getpop/site": "0.8.9",
         "getpop/site-builder-api": "0.8.9",
         "getpop/site-wp": "0.8.9",
         "getpop/spa": "0.8.9",
         "getpop/static-site-generator": "0.8.9",
-        "getpop/translation-wp": "0.8.9",
         "graphql-api/extension-demo": "0.8.9",
         "graphql-api/external-dependency-wrappers": "0.8.9",
         "graphql-api/graphql-api-for-wp": "0.8.9",

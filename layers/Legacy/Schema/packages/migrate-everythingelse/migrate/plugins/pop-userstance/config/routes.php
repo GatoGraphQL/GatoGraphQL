@@ -55,7 +55,7 @@ if (!defined('POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\RoutingWP\HookNames::ROUTES,
+    \PoP\RootWP\Routing\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

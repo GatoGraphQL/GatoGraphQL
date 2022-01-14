@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use PoP\Engine\AppLoader;
-use PoP\HooksWP\StateManagers\HookManager;
+use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
 use RuntimeException;
