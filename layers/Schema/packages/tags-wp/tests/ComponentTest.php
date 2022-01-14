@@ -2,7 +2,6 @@
 
 namespace PoPSchema\TagsWP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

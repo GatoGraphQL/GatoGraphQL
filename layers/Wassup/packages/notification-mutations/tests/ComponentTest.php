@@ -2,7 +2,6 @@
 
 namespace PoPSitesWassup\NotificationMutations;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

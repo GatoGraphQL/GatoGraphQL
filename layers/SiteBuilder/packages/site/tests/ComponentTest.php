@@ -2,7 +2,6 @@
 
 namespace PoP\Site;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

@@ -6,6 +6,3 @@ services:
 
     PoPSchema\QueriedObject\State\:
         resource: '../src/State/*'
-
-    PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface:
-        class: \PoPSchema\QueriedObject\Routing\VoidCMSRoutingStateService

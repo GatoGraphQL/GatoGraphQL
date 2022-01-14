@@ -2,7 +2,6 @@
 
 namespace PoPSchema\UserStateMutationsWP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

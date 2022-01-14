@@ -2,7 +2,6 @@
 
 namespace PoPSitesWassup\StanceMutations;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

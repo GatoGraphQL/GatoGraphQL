@@ -2,7 +2,6 @@
 
 namespace PoP\APIEndpointsForWP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

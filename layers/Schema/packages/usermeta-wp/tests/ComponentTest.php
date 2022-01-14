@@ -2,7 +2,6 @@
 
 namespace PoPSchema\UserMetaWP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

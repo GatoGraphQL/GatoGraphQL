@@ -2,7 +2,6 @@
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

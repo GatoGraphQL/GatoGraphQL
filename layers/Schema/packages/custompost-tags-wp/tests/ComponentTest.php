@@ -2,7 +2,6 @@
 
 namespace PoPSchema\CustomPostTagsWP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

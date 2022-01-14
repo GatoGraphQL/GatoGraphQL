@@ -2,7 +2,6 @@
 
 namespace PoPSchema\CustomPostMediaWP;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**

@@ -2,7 +2,6 @@
 
 namespace PoPSitesWassup\SocialNetworkMutations;
 
-use PHPUnit\Framework\TestCase;
 use PoP\Root\AbstractComponentTest;
 
 /**
