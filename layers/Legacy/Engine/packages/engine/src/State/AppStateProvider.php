@@ -55,12 +55,12 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
-        if (isset($state['modulefilter']) && $state['modulefilter'] === $this->headModule->getName()) {
+        if ($state['modulefilter'] === $this->headModule->getName()) {
             if ($headmodule = $_REQUEST[Params::HEADMODULE] ?? null) {
                 $state['headmodule'] = ModuleUtils::getModuleFromOutputName($headmodule);
             }
         }
-        if (isset($state['modulefilter']) && $state['modulefilter'] === $this->modulePaths->getName()) {
+        if ($state['modulefilter'] === $this->modulePaths->getName()) {
             $state['modulepaths'] = ModulePathUtils::getModulePaths();
         }
     }
