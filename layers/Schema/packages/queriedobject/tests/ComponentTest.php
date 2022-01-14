@@ -4,6 +4,9 @@ namespace PoPSchema\QueriedObject;
 
 use PoP\Root\AbstractComponentTest;
 
-class ComponentTest extends AbstractComponentTest
+/**
+ * Made abstract to disable the test
+ */
+abstract class ComponentTest extends AbstractComponentTest
 {
 }
