@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Hooks;
+namespace PoP\Root\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Constants\HookNames;

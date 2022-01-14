@@ -11,7 +11,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterfac
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\Hooks\AbstractAfterAppBootHookSet;
+use PoP\Root\Hooks\AbstractAfterAppBootHookSet;
 
 abstract class AbstractAccessControlForFieldsHookSet extends AbstractAfterAppBootHookSet
 {
