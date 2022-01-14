@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\Hooks\AbstractHookSet;
 
-abstract class AbstractCMSBootHookSet extends AbstractHookSet
+abstract class AbstractAfterAppBootHookSet extends AbstractHookSet
 {
     /**
      * Initialize the hooks when the CMS initializes
