@@ -8,29 +8,55 @@ use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Configuration\EngineRequest;
 use PoP\ComponentModel\Configuration\Request;
-use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
-use PoP\Routing\Facades\RoutingManagerFacade;
 use PoP\Routing\RouteNatures;
+use PoP\Routing\RoutingManagerInterface;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?ModuleFilterManagerInterface $moduleFilterManager = null;
+    private ?RoutingManagerInterface $routingManager = null;
+
+    final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    final public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
+    {
+        $this->moduleFilterManager = $moduleFilterManager;
+    }
+    final protected function getModuleFilterManager(): ModuleFilterManagerInterface
+    {
+        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
+    }
+    final public function setRoutingManager(RoutingManagerInterface $routingManager): void
+    {
+        $this->routingManager = $routingManager;
+    }
+    final protected function getRoutingManager(): RoutingManagerInterface
+    {
+        return $this->routingManager ??= $this->instanceManager->getInstance(RoutingManagerInterface::class);
+    }
+    
     public function initialize(array &$state): void
     {
-        $routingManager = RoutingManagerFacade::getInstance();
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-
-        $state['nature'] = $routingManager->getCurrentNature();
-        $state['route'] = $routingManager->getCurrentRoute();
-        $state['modulefilter'] = $modulefilter_manager->getSelectedModuleFilterName();
-        $state['variables'] = $fieldQueryInterpreter->getVariablesFromRequest();
         $state['namespace-types-and-interfaces'] = $componentConfiguration->mustNamespaceTypes();
+
+        $state['nature'] = $this->getRoutingManager()->getCurrentNature();
+        $state['route'] = $this->getRoutingManager()->getCurrentRoute();
+        $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
+        $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
         $state['only-fieldname-as-outputkey'] = false;
         $state['are-mutations-enabled'] = true;
 
