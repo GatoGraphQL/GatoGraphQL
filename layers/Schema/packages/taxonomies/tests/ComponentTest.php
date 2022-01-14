@@ -2,7 +2,7 @@
 
 namespace PoPSchema\Taxonomies;
 
-use PoP\Engine\AbstractComponentTest;
+use PoP\Root\AbstractComponentTest;
 
 class ComponentTest extends AbstractComponentTest
 {

@@ -2,7 +2,7 @@
 
 namespace PoPSchema\CommentMeta;
 
-use PoP\Engine\AbstractComponentTest;
+use PoP\Root\AbstractComponentTest;
 
 class ComponentTest extends AbstractComponentTest
 {

@@ -2,7 +2,7 @@
 
 namespace PoPSchema\UserStateAccessControl;
 
-use PoP\Engine\AbstractComponentTest;
+use PoP\Root\AbstractComponentTest;
 
 class ComponentTest extends AbstractComponentTest
 {
