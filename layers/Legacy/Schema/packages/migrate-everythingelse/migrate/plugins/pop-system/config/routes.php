@@ -16,7 +16,7 @@ if (!defined('POP_SYSTEM_ROUTE_SYSTEM_INSTALL')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\RoutingWP\HookNames::ROUTES,
+    \PoP\RootWP\Routing\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

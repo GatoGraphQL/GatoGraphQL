@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\RoutingWP;
+namespace PoP\RootWP\Routing;
 
 class HookNames
 {

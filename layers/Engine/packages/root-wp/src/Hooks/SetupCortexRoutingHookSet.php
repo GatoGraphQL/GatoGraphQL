@@ -10,8 +10,8 @@ use Brain\Cortex\Route\RouteInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\Root\Routing\RoutingManagerInterface;
-use PoP\RoutingWP\WPQueries;
-use PoP\RoutingWP\WPQueryRoutingManagerInterface;
+use PoP\RootWP\Routing\WPQueries;
+use PoP\RootWP\Routing\WPQueryRoutingManagerInterface;
 
 class SetupCortexRoutingHookSet extends AbstractHookSet
 {

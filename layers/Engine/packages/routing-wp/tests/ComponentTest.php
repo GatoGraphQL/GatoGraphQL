@@ -1,6 +1,6 @@
 <?php
 
-namespace PoP\RoutingWP;
+namespace PoP\RootWP\Routing;
 
 use PoP\Root\AbstractComponentTest;
 

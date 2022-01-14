@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\QueriedObjectWP\Routing;
 
-use PoP\RoutingWP\RoutingManagerTrait;
+use PoP\RootWP\Routing\RoutingManagerTrait;
 use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
 use WP_Query;
 

@@ -22,7 +22,7 @@ if (!defined('POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA')) {
 }
 
 \PoP\Root\App::addFilter(
-    \PoP\RoutingWP\HookNames::ROUTES,
+    \PoP\RootWP\Routing\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

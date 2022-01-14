@@ -6,7 +6,7 @@ namespace PoPSchema\TagsWP\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoP\RoutingWP\HookNames;
+use PoP\RootWP\Routing\HookNames;
 use PoPSchema\Tags\Routing\RouteNatures;
 use WP_Query;
 
