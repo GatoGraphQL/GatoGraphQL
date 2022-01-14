@@ -2,7 +2,7 @@
 
  
 \PoP\Root\App::addAction(
-    'popcms:init', 
+    'init', // Must migrate this WP hook to one from PoP (which executes before AFTER_BOOT_APPLICATION
     'initWassupCdnImageAttributes'
 );
 function initWassupCdnImageAttributes()
