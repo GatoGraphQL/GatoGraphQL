@@ -9,9 +9,9 @@ use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\Hooks\AbstractCMSBootHookSet;
+use PoP\Root\Hooks\AbstractAfterAppBootHookSet;
 
-abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
+abstract class AbstractAccessControlForDirectivesHookSet extends AbstractAfterAppBootHookSet
 {
     private ?AccessControlManagerInterface $accessControlManager = null;
 
