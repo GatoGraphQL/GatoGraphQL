@@ -177,7 +177,6 @@
             "PoP\\GraphQLAPI\\": "layers/API/packages/api-graphql/src",
             "PoP\\GraphQLParser\\": "layers/Engine/packages/graphql-parser/src",
             "PoP\\GuzzleHelpers\\": "layers/Engine/packages/guzzle-helpers/src",
-            "PoP\\HooksWP\\": "layers/Engine/packages/hooks-wp/src",
             "PoP\\LooseContracts\\": "layers/Engine/packages/loosecontracts/src",
             "PoP\\MandatoryDirectivesByConfiguration\\": "layers/Engine/packages/mandatory-directives-by-configuration/src",
             "PoP\\ModuleRouting\\": "layers/Engine/packages/modulerouting/src",
@@ -188,13 +187,12 @@
             "PoP\\ResourceLoader\\": "layers/SiteBuilder/packages/resourceloader/src",
             "PoP\\Resources\\": "layers/SiteBuilder/packages/resources/src",
             "PoP\\Root\\": "layers/Engine/packages/root/src",
-            "PoP\\RoutingWP\\": "layers/Engine/packages/routing-wp/src",
+            "PoP\\RootWP\\": "layers/Engine/packages/root-wp/src",
             "PoP\\SPA\\": "layers/SiteBuilder/packages/spa/src",
             "PoP\\SSG\\": "layers/SiteBuilder/packages/static-site-generator/src",
             "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/src",
             "PoP\\SiteWP\\": "layers/SiteBuilder/packages/site-wp/src",
-            "PoP\\Site\\": "layers/SiteBuilder/packages/site/src",
-            "PoP\\RootWP\\": "layers/Engine/packages/root-wp/src"
+            "PoP\\Site\\": "layers/SiteBuilder/packages/site/src"
         }
     },
     "autoload-dev": {
@@ -337,7 +335,6 @@
             "PoP\\GraphQLAPI\\": "layers/API/packages/api-graphql/tests",
             "PoP\\GraphQLParser\\": "layers/Engine/packages/graphql-parser/tests",
             "PoP\\GuzzleHelpers\\": "layers/Engine/packages/guzzle-helpers/tests",
-            "PoP\\HooksWP\\": "layers/Engine/packages/hooks-wp/tests",
             "PoP\\LooseContracts\\": "layers/Engine/packages/loosecontracts/tests",
             "PoP\\MandatoryDirectivesByConfiguration\\": "layers/Engine/packages/mandatory-directives-by-configuration/tests",
             "PoP\\ModuleRouting\\": "layers/Engine/packages/modulerouting/tests",
@@ -348,7 +345,6 @@
             "PoP\\Resources\\": "layers/SiteBuilder/packages/resources/tests",
             "PoP\\Root\\": "layers/Engine/packages/root/tests",
             "PoP\\RootWP\\": "layers/Engine/packages/root-wp/tests",
-            "PoP\\RoutingWP\\": "layers/Engine/packages/routing-wp/tests",
             "PoP\\SPA\\": "layers/SiteBuilder/packages/spa/tests",
             "PoP\\SSG\\": "layers/SiteBuilder/packages/static-site-generator/tests",
             "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/tests",

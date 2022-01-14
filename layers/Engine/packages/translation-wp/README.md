@@ -1,4 +1,4 @@
-# PoP Translation for WordPress
+# Root for WordPress
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Implementation of the Translation API for WordPress
+Implementation of the Root package for WordPress
 
 ## Install
 
