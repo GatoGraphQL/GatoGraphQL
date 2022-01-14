@@ -2,7 +2,7 @@
 
 namespace PoPSchema\Media;
 
-use PoP\Engine\AbstractComponentTest;
+use PoP\Root\AbstractComponentTest;
 
 class ComponentTest extends AbstractComponentTest
 {

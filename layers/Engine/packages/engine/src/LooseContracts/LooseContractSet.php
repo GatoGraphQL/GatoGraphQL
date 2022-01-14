@@ -15,7 +15,6 @@ class LooseContractSet extends AbstractLooseContractSet
     {
         return [
             // Actions
-            'popcms:boot',
             'popcms:init',
             'popcms:shutdown',
             'popcms:componentInstalled',

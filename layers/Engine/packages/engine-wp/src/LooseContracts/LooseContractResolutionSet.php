@@ -17,13 +17,6 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
         App::addAction('init', function (): void {
             App::doAction('popcms:init');
         });
-        // 2. Boot once it has parsed the WP_Query, so that the requested post/user/etc
-        // is already processed and available. Only hook available is "wp"
-        // Watch out: "wp" doesn't trigger in the admin()!
-        // Hence, in that case, use "wp_loaded" instead
-        App::addAction(\is_admin() ? 'wp_loaded' : 'wp', function (): void {
-            App::doAction('popcms:boot');
-        });
         App::addAction('shutdown', function (): void {
             App::doAction('popcms:shutdown');
         });
@@ -38,7 +31,6 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
 
         $this->getLooseContractManager()->implementHooks([
             'popcms:init',
-            'popcms:boot',
             'popcms:shutdown',
             'popcms:componentInstalled',
             'popcms:componentUninstalled',

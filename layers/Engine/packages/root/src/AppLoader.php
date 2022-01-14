@@ -347,5 +347,8 @@ class AppLoader implements AppLoaderInterface
         App::getAppStateManager()->initializeAppState();
         App::getComponentManager()->boot();
         App::getComponentManager()->afterBoot();
+
+        // Allow to inject functionality
+        App::doAction('popcms:boot');
     }
 }

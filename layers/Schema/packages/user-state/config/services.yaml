@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoPSchema\UserState\TypeAPIs\UserStateTypeAPIInterface:
+        class: \PoPSchema\UserState\TypeAPIs\VoidUserStateTypeAPI
+
     PoPSchema\UserState\State\:
         resource: '../src/State/*'
 

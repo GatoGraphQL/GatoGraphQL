@@ -3,7 +3,7 @@
 namespace PoPSitesWassup\GravityFormsMutations;
 
 use PHPUnit\Framework\TestCase;
-use PoP\Engine\AbstractComponentTest;
+use PoP\Root\AbstractComponentTest;
 
 /**
  * Made abstract to disable the test

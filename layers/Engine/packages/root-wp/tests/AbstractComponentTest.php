@@ -1,6 +1,6 @@
 <?php
 
-namespace PoP\Engine;
+namespace PoP\RootWP;
 
 use PoP\Root\App;
 

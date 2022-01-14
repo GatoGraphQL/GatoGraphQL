@@ -2,7 +2,7 @@
 
 namespace GraphQLAPI\ExtensionDemo;
 
-use PoP\Engine\AbstractComponentTest;
+use PoP\Root\AbstractComponentTest;
 
 class ComponentTest extends AbstractComponentTest
 {
