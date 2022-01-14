@@ -44,5 +44,13 @@ class AppLoader extends UpstreamAppLoader
             fn () => App::getComponentManager()->afterBoot(),
             8
         );
+        App::addAction(
+            $actionHook,
+            function () : void {
+                // Allow to inject functionality
+                App::doAction('popcms:boot');
+            },
+            10
+        );
     }
 }
