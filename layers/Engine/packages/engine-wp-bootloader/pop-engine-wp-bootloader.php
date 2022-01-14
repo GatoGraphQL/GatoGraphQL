@@ -9,7 +9,7 @@ Author: Leonardo Losoviz
 
 use PoP\Root\App;
 use PoP\Engine\AppLoader;
-use PoP\HooksWP\StateManagers\HookManager;
+use PoP\RootWP\StateManagers\HookManager;
 
 if (!class_exists(App::class)) {
     return;
