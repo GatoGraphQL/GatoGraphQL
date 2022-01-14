@@ -9,19 +9,22 @@ use PoP\Definitions\Facades\DefinitionManagerFacade;
 use PoP\Engine\Environment;
 use PoP\Root\Hooks\AbstractHookSet;
 
-class DefinitionPersistenceHookSet extends AbstractHookSet
+abstract class AbstractDefinitionPersistenceHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
         App::addAction(
-            'popcms:shutdown',
+            $this->getHookName(),
             array($this, 'maybePersist')
         );
     }
+    
     public function maybePersist(): void
     {
         if (!Environment::disablePersistingDefinitionsOnEachRequest()) {
             DefinitionManagerFacade::getInstance()->maybeStoreDefinitionsPersistently();
         }
     }
+    
+    abstract protected function getHookName(): string;
 }
