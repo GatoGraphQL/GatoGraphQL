@@ -15,11 +15,15 @@ class CMSRoutingStateService implements CMSRoutingStateServiceInterface
     public function getQueriedObject(): ?object
     {
         $this->init();
-        /** @var WP_Query */
-        $query = $this->query;
+
         if ($this->isGeneric()) {
             return null;
-        } elseif (
+        }
+        
+        /** @var WP_Query */
+        $query = $this->query;
+        
+        if (
             $query->is_tag() ||
             $query->is_page() ||
             $query->is_single() ||
@@ -35,9 +39,12 @@ class CMSRoutingStateService implements CMSRoutingStateServiceInterface
     public function getQueriedObjectId(): string | int | null
     {
         $this->init();
+        
         if ($this->isGeneric()) {
             return null;
-        } elseif (
+        }
+        
+        if (
             $this->query->is_tag() ||
             $this->query->is_page() ||
             $this->query->is_single() ||

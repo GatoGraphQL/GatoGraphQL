@@ -22,6 +22,7 @@ trait RoutingManagerTrait
     {
         /** @var WP_Query */
         $query = $this->query;
+        
         // If we passed query args GENERIC_NATURE, then it's a route
         // Compare the keys only, because since PHP 8.0, comparing array values
         // (included in $query->query_vars) throws error
