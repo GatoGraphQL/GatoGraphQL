@@ -38,7 +38,7 @@ abstract class AbstractCacheHookSet extends AbstractHookSet
          * delete the cached files from this application.
          *
          * For instance, for WordPress, these hooks must be provided:
-         * 
+         *
          * - 'activate_plugin'
          * - 'deactivate_plugin'
          */
@@ -51,7 +51,7 @@ abstract class AbstractCacheHookSet extends AbstractHookSet
 
         /**
          * Save all deferred cacheItems.
-         * 
+         *
          * For instance, for WordPress, this hook must be provided:
          *
          * - 'shutdown'
