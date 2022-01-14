@@ -39,7 +39,7 @@ class RoutingHookSet extends AbstractHookSet
     {
         App::addFilter(
             HookNames::REQUEST_URI,
-            array($this, 'getURIRoute')
+            array($this, 'maybeOverrideURIRoute')
         );
 
         App::addFilter(
@@ -68,7 +68,7 @@ class RoutingHookSet extends AbstractHookSet
      * Watch out: If the homeURL is not contained in the current URL,
      * then there's a misconfiguration in the server
      */
-    public function getURIRoute(string $route): string
+    public function maybeOverrideURIRoute(string $route): string
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
