@@ -32,7 +32,7 @@ class AppLoader extends UpstreamAppLoader
         // Override when the functionality is executed
         App::addAction(
             $actionHook,
-            fn() => App::getAppStateManager()->initializeAppState(),
+            fn () => App::getAppStateManager()->initializeAppState(),
             0
         );
         App::addAction(
