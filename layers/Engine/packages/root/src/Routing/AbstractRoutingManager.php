@@ -26,22 +26,15 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
 
         // If it is a ROUTE, then the URL path is already the route
         if ($nature === RouteNatures::GENERIC) {
-            $route = RoutingUtils::getURLPath();
-        } else {
-            // If having set URL param "route", then use it
-            if (isset($_REQUEST[Params::ROUTE])) {
-                $route = trim(strtolower($_REQUEST[Params::ROUTE]), '/');
-            } else {
-                // If not, use the "main" route
-                $route = Routes::MAIN;
-            }
+            return RoutingUtils::getURLPath();
         }
 
-        // Allow to change it
-        return (string) App::applyFilters(
-            RouteHookNames::CURRENT_ROUTE,
-            $route,
-            $nature
-        );
+        // If having set URL param "route", then use it
+        if (isset($_REQUEST[Params::ROUTE])) {
+            return trim(strtolower($_REQUEST[Params::ROUTE]), '/');
+        }
+        
+        // By default, use the "main" route
+        return Routes::MAIN;
     }
 }
