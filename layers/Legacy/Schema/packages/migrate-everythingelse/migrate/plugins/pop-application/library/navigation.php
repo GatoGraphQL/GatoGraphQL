@@ -1,7 +1,12 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-\PoP\Root\App::addFilter('popcms:page:title', 'gdNavigationUpdateMenuItem', PHP_INT_MAX, 2);
+\PoP\Root\App::addFilter(
+    'the_title',// Must add a loose contract instead: 'popcms:page:title'
+    'gdNavigationUpdateMenuItem',
+    PHP_INT_MAX,
+    2
+);
 function gdNavigationUpdateMenuItem($title, $page_id)
 {
     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();

@@ -3,7 +3,12 @@
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
-\PoP\Root\App::addFilter('popcms:post:title', 'maybeGetTitleAsBasicContent', 10, 2);
+\PoP\Root\App::addFilter(
+    'the_title',// Must add a loose contract instead: 'popcms:post:title'
+    'maybeGetTitleAsBasicContent',
+    10,
+    2
+);
 function maybeGetTitleAsBasicContent($title, $post_id = null)
 {
     $post_types = \PoP\Root\App::applyFilters(

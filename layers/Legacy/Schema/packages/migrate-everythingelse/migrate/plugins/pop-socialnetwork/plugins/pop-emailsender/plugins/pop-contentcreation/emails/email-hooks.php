@@ -41,14 +41,14 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsNetworkCreatedpostUpdate'), 10, 2);
         // EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT:
         \PoP\Root\App::addAction(
-            'popcms:insertComment',
+            'wp_insert_comment',// Must add a loose contract instead: 'popcms:insertComment'
             array($this, 'emailnotificationsSubscribedtopicAddedcomment'),
             10,
             2
         );
         // EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT:
         \PoP\Root\App::addAction(
-            'popcms:insertComment',
+            'wp_insert_comment',// Must add a loose contract instead: 'popcms:insertComment'
             array($this, 'emailnotificationsNetworkAddedcomment'),
             10,
             2
