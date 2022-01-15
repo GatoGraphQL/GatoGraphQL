@@ -101,7 +101,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return $url;
                 }
                 /** @var string */
-                return $this->getCmsHelperService()->getLocalURLPath($url);
+                return $this->getCMSHelperService()->getLocalURLPath($url);
             case 'slug':
                 return $mediaItem->post_name;
         }

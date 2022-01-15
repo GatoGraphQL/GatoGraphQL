@@ -132,7 +132,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     public function getTagURLPath(string | int | object $tagObjectOrID): string
     {
         /** @var string */
-        return $this->getCmsHelperService()->getLocalURLPath($this->getTagURL($tagObjectOrID));
+        return $this->getCMSHelperService()->getLocalURLPath($this->getTagURL($tagObjectOrID));
     }
 
     public function getTagSlug(string | int | object $tagObjectOrID): string
