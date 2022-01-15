@@ -5,7 +5,7 @@ use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\ModuleProcessors\DataloadingModuleInterface;
 use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Root\Routing\RequestNature;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;

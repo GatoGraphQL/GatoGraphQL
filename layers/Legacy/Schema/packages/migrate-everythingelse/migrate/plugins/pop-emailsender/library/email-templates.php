@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 define('POP_EMAILTEMPLATE_EMAIL', 'email.html');
 define('POP_EMAILTEMPLATE_EMAILBODY', 'emailbody.html');

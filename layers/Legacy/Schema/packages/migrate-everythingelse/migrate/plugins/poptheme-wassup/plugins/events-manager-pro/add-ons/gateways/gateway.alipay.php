@@ -1,5 +1,5 @@
 <?php
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 require_once "gateway.alipay.core.php";

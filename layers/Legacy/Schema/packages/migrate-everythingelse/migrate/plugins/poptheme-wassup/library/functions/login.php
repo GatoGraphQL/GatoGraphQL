@@ -1,5 +1,5 @@
 <?php
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 /**
  * Change the expiration of the login cookie to much longer than 2 weeks

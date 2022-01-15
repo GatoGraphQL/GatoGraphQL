@@ -1,5 +1,5 @@
 <?php
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
 
 class PoP_ApplicationProcessors_UserLogin_Hooks

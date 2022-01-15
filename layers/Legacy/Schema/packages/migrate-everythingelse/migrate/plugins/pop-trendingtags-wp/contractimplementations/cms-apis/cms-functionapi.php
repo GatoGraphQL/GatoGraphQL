@@ -1,6 +1,6 @@
 <?php
 namespace PoP\TrendingTags\WP;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class FunctionAPI extends \PoP\TrendingTags\FunctionAPI_Base

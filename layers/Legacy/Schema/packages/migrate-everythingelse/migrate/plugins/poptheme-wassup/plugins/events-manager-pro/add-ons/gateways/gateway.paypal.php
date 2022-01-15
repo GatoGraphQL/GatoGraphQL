@@ -1,5 +1,5 @@
 <?php
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class EM_Gateway_Paypal extends EM_Gateway_Online

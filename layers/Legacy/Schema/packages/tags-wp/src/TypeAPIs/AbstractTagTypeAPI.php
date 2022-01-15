@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace EverythingElse\PoPSchema\TagsWP\TypeAPIs;
 
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 

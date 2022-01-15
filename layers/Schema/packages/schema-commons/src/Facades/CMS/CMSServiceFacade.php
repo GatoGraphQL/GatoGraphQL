@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Facades\CMS;
+namespace PoPSchema\SchemaCommons\Facades\CMS;
 
 use PoP\Root\App;
 use PoPSchema\SchemaCommons\CMS\CMSServiceInterface;
