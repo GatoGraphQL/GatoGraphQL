@@ -61,7 +61,7 @@ class PoP_Mentions
             0
         );
         \PoP\Root\App::addAction(
-            'popcms:insertComment',
+            'wp_insert_comment',// Must add a loose contract instead: 'popcms:insertComment'
             array($this, 'generateCommentTags'),
             0,
             2

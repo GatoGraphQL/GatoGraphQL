@@ -12,9 +12,6 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     protected function resolveContracts(): void
     {
         // Actions
-        App::addAction('wp_insert_comment', function ($comment_id, $comment): void {
-            App::doAction('popcms:insertComment', $comment_id, $comment);
-        }, 10, 2);
         App::addAction('spam_comment', function ($comment_id, $comment): void {
             App::doAction('popcms:spamComment', $comment_id, $comment);
         }, 10, 2);
@@ -23,7 +20,6 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
         }, 10, 2);
 
         $this->getLooseContractManager()->implementHooks([
-            'popcms:insertComment',
             'popcms:spamComment',
             'popcms:deleteComment',
         ]);
