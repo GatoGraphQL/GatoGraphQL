@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
-use PoP\Root\App;
+use Exception;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Constants\DataOutputModes;
@@ -16,11 +16,31 @@ use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Engine\Engine\Engine as UpstreamEngine;
 use PoP\Engine\FunctionAPIFactory;
+use PoP\Root\App;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
     const CACHETYPE_IMMUTABLESETTINGS = 'static-settings';
     const CACHETYPE_STATEFULSETTINGS = 'stateful-settings';
+
+
+    public function generateData(): void
+    {
+        /** @var LegacyPoP\LooseContracts\LooseContractManagerInterface */
+        $looseContractManager = $this->getLooseContractManager();
+
+        // Check if there are hooks that must be implemented by the CMS, that have not been done so.
+        if ($notImplementedHooks = $looseContractManager->getNotImplementedRequiredHooks()) {
+            throw new Exception(
+                sprintf(
+                    $this->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
+                    implode($this->__('", "'), $notImplementedHooks)
+                )
+            );
+        }
+
+        parent::generateData();
+    }
 
     protected function processAndGenerateData(): void
     {
