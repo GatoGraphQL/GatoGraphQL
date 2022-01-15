@@ -21,7 +21,6 @@ class Component extends AbstractComponent
         return [
             \PoP\ComponentModel\Component::class,
             \PoP\CacheControl\Component::class,
-            \PoP\GuzzleHelpers\Component::class,
             \PoP\FunctionFields\Component::class,
         ];
     }

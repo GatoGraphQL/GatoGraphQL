@@ -20,6 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\SchemaCommons\Component::class,
+            \PoP\GuzzleHelpers\Component::class,
         ];
     }
 
