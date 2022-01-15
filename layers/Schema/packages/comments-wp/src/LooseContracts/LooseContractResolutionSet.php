@@ -12,15 +12,11 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     protected function resolveContracts(): void
     {
         // Actions
-        App::addAction('spam_comment', function ($comment_id, $comment): void {
-            App::doAction('popcms:spamComment', $comment_id, $comment);
-        }, 10, 2);
         App::addAction('delete_comment', function ($comment_id, $comment): void {
             App::doAction('popcms:deleteComment', $comment_id, $comment);
         }, 10, 2);
 
         $this->getLooseContractManager()->implementHooks([
-            'popcms:spamComment',
             'popcms:deleteComment',
         ]);
 

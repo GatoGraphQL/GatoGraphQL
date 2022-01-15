@@ -15,7 +15,6 @@ class LooseContractSet extends AbstractLooseContractSet
     {
         return [
             // Actions
-            'popcms:spamComment',
             'popcms:deleteComment',
         ];
     }
