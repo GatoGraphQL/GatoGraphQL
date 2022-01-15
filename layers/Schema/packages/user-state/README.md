@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Directive <translate> to translate content using different provider APIs
+Enables users to log in and have user state
 
 ## Install
 
