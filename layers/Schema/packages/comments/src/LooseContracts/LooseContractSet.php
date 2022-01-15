@@ -11,17 +11,6 @@ class LooseContractSet extends AbstractLooseContractSet
     /**
      * @return string[]
      */
-    public function getRequiredHooks(): array
-    {
-        return [
-            // Actions
-            'popcms:deleteComment',
-        ];
-    }
-
-    /**
-     * @return string[]
-     */
     public function getRequiredNames(): array
     {
         return [

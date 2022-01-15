@@ -23,7 +23,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
 
         // When a comment is marked as spam, tell the user about content guidelines
         \PoP\Root\App::addAction(
-            'spam_comment',// Must add a loose contract instead: 'popcms:spamComment',
+            'spam_comment',// Must add a loose contract instead: 'popcms:spamComment'
             array($this, 'spamComment'),
             10,
             1
@@ -31,7 +31,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
 
         // When a comment is deleted from the system, delete all notifications about that comment
         \PoP\Root\App::addAction(
-            'popcms:deleteComment',
+            'delete_comment',// Must add a loose contract instead: 'popcms:deleteComment'
             array(PoP_AddComments_Notifications_API::class, 'clearComment'),
             10,
             1
