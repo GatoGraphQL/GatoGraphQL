@@ -91,8 +91,10 @@ includes:
     - layers/Schema/packages/queriedobject-wp/phpstan.neon.dist
     - layers/Engine/packages/query-parsing/phpstan.neon.dist
     - layers/Engine/packages/root/phpstan.neon.dist
+    - layers/Engine/packages/root-wp/phpstan.neon.dist
     - layers/Schema/packages/schema-commons/phpstan.neon.dist
     - layers/WPSchema/packages/schema-commons/phpstan.neon.dist
+    - layers/Schema/packages/schema-commons-wp/phpstan.neon.dist
     - layers/Schema/packages/settings/phpstan.neon.dist
     - layers/Schema/packages/settings-wp/phpstan.neon.dist
     - layers/Schema/packages/tags/phpstan.neon.dist
@@ -104,7 +106,6 @@ includes:
     - layers/Schema/packages/taxonomymeta-wp/phpstan.neon.dist
     - layers/Schema/packages/taxonomyquery/phpstan.neon.dist
     - layers/Schema/packages/taxonomyquery-wp/phpstan.neon.dist
-    - layers/Engine/packages/root-wp/phpstan.neon.dist
     - layers/Schema/packages/user-avatars/phpstan.neon.dist
     - layers/Schema/packages/user-avatars-wp/phpstan.neon.dist
     - layers/Schema/packages/user-roles/phpstan.neon.dist
