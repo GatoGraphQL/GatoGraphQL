@@ -21,7 +21,7 @@ composer require pop-schema/function-fields
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/function-fields`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/function-fields).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/function-fields`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/function-fields).
 
 ## Usage
 

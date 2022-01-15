@@ -40,8 +40,6 @@ services:
         - >-
           ../../layers/Engine/packages/field-query:/app/vendor/getpop/field-query
         - >-
-          ../../layers/Engine/packages/function-fields:/app/vendor/pop-schema/function-fields
-        - >-
           ../../layers/Engine/packages/graphql-parser:/app/vendor/getpop/graphql-parser
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
@@ -113,6 +111,8 @@ services:
           ../../layers/Schema/packages/customposts:/app/vendor/pop-schema/customposts
         - >-
           ../../layers/Schema/packages/external-endpoints:/app/vendor/pop-schema/external-endpoints
+        - >-
+          ../../layers/Schema/packages/function-fields:/app/vendor/pop-schema/function-fields
         - >-
           ../../layers/Schema/packages/generic-customposts:/app/vendor/pop-schema/generic-customposts
         - '../../layers/Schema/packages/media-wp:/app/vendor/pop-schema/media-wp'
