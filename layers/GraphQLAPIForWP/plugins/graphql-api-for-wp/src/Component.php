@@ -60,6 +60,7 @@ class Component extends AbstractPluginComponent
             \GraphQLAPI\ExternalDependencyWrappers\Component::class,
             \GraphQLAPI\MarkdownConvertor\Component::class,
             \GraphQLAPI\PluginUtils\Component::class,
+            \PoP\GuzzleHelpers\Component::class,
         ];
     }
 
