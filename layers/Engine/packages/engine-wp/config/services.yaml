@@ -6,6 +6,3 @@ services:
 
     PoP\EngineWP\Hooks\:
         resource: '../src/Hooks/*'
-
-    PoP\EngineWP\LooseContracts\:
-        resource: '../src/LooseContracts/*'

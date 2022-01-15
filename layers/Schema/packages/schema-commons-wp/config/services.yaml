@@ -13,3 +13,6 @@ services:
     PoPSchema\SchemaCommons\Error\ErrorManagerInterface:
         class: \PoPSchema\SchemaCommonsWP\Error\ErrorManager
 
+    PoPSchema\SchemaCommonsWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+
