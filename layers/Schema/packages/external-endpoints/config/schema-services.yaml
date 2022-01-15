@@ -5,3 +5,6 @@ services:
 
     # PoPSchema\ExternalEndpoints\FieldResolvers\:
     #     resource: '../src/FieldResolvers/*'
+
+    # PoPSchema\ExternalEndpoints\DirectiveResolvers\:
+    #     resource: '../src/DirectiveResolvers/*'
