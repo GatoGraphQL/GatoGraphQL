@@ -3,7 +3,7 @@ define('POP_EMAILFRAME_DEFAULT', 'default');
 define('POP_EMAILTEMPLATE_BUTTON', 'button.html');
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;

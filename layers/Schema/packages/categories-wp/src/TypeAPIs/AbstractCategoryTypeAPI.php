@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\CategoriesWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoP\Engine\CMS\CMSHelperServiceInterface;
-use PoP\Engine\CMS\CMSServiceInterface;
+use PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
+use PoPSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -146,7 +146,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     public function getCategoryURLPath(string | int | object $catObjectOrID): string
     {
         /** @var string */
-        return $this->getCmsHelperService()->getLocalURLPath($this->getCategoryURL($catObjectOrID));
+        return $this->getCMSHelperService()->getLocalURLPath($this->getCategoryURL($catObjectOrID));
     }
 
     public function getCategoryBase()

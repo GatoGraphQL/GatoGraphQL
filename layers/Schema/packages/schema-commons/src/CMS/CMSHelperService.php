@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\CMS;
+namespace PoPSchema\SchemaCommons\CMS;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\BasicServiceTrait;

@@ -7,6 +7,15 @@ services:
     PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface:
         class: \PoPSchema\SchemaCommons\Services\AllowOrDenySettingsService
 
+    PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface:
+        class: \PoPSchema\SchemaCommons\CMS\CMSHelperService
+
+    PoPSchema\SchemaCommons\Formatters\DateFormatterInterface:
+        class: \PoPSchema\SchemaCommons\Formatters\DateFormatter
+
+    PoPSchema\SchemaCommons\Error\ErrorHelperInterface:
+        class: \PoPSchema\SchemaCommons\Error\ErrorHelper
+
     PoPSchema\SchemaCommons\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
@@ -18,3 +27,9 @@ services:
 
     PoPSchema\SchemaCommons\ObjectSerializers\:
         resource: '../src/ObjectSerializers/*'
+
+    PoPSchema\SchemaCommons\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoPSchema\SchemaCommons\LooseContracts\:
+        resource: '../src/LooseContracts/*'

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\LooseContracts;
+namespace PoPSchema\SchemaCommons\LooseContracts;
 
 use PoP\LooseContracts\AbstractLooseContractSet;
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\TagsWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoP\Engine\CMS\CMSHelperServiceInterface;
+use PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
@@ -132,7 +132,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     public function getTagURLPath(string | int | object $tagObjectOrID): string
     {
         /** @var string */
-        return $this->getCmsHelperService()->getLocalURLPath($this->getTagURL($tagObjectOrID));
+        return $this->getCMSHelperService()->getLocalURLPath($this->getTagURL($tagObjectOrID));
     }
 
     public function getTagSlug(string | int | object $tagObjectOrID): string

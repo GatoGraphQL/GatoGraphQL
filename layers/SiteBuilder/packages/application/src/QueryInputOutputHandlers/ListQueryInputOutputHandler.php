@@ -11,7 +11,7 @@ use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler as UpstreamListQueryInputOutputHandler;
-use PoP\Engine\CMS\CMSServiceInterface;
+use PoPSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 

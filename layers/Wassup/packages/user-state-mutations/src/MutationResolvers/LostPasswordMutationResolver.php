@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\Engine\CMS\CMSServiceInterface;
+use PoPSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;

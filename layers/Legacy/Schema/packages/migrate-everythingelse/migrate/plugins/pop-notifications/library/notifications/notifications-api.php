@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class PoP_Notifications_API

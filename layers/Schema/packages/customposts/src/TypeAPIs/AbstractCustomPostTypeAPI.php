@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeAPIs;
 
 use PoP\Root\Services\BasicServiceTrait;
-use PoP\Engine\CMS\CMSHelperServiceInterface;
+use PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 
 abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
@@ -30,6 +30,6 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
         }
 
         /** @var string */
-        return $this->getCmsHelperService()->getLocalURLPath($permalink);
+        return $this->getCMSHelperService()->getLocalURLPath($permalink);
     }
 }

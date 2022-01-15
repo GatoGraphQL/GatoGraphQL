@@ -6,7 +6,7 @@ namespace PoPSchema\SchemaCommons\ModuleProcessors;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\Engine\CMS\CMSServiceInterface;
+use PoPSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor

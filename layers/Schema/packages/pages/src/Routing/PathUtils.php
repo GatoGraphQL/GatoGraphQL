@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\Routing;
 
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 
 class PathUtils

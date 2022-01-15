@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Formatters;
+namespace PoPSchema\SchemaCommons\Formatters;
 
 interface DateFormatterInterface
 {

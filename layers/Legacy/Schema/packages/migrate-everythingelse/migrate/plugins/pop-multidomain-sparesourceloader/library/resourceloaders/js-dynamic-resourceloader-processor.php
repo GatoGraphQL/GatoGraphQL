@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_MultiDomainSPAResourceLoader_DynamicJSResourceLoaderProcessor extends PoP_DynamicJSResourceLoaderProcessor
 {

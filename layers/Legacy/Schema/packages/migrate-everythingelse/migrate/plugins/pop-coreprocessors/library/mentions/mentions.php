@@ -2,7 +2,7 @@
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;

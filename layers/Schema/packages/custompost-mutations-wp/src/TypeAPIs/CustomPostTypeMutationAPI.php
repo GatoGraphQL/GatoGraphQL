@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPostMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\Error\Error;
 use PoP\Root\Services\BasicServiceTrait;
-use PoP\Engine\Error\ErrorHelperInterface;
+use PoPSchema\SchemaCommons\Error\ErrorHelperInterface;
 use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 
 /**

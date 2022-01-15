@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksBase

@@ -7,7 +7,7 @@ namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 use PoP\Root\App;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\Engine\CMS\CMSServiceInterface;
+use PoPSchema\SchemaCommons\CMS\CMSServiceInterface;
 
 class ActivatePluginsMutationResolver extends AbstractMutationResolver
 {

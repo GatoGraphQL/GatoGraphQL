@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoPWebPlatform_ResourceLoader_ScriptsAndStylesRegistration {
 

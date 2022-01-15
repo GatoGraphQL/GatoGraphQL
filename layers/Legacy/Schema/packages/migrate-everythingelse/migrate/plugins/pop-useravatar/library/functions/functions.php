@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class GD_FileUpload_Picture_Utils
 {

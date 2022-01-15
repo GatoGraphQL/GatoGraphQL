@@ -4,17 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\Engine\Error\ErrorManagerInterface:
-        class: \PoP\EngineWP\Error\ErrorManager
-
-    PoP\Engine\Formatters\DateFormatterInterface:
-        class: \PoP\EngineWP\Formatters\DateFormatter
-
-    PoP\Engine\CMS\CMSServiceInterface:
-        class: \PoP\EngineWP\CMS\CMSService
-
     PoP\EngineWP\Hooks\:
         resource: '../src/Hooks/*'
-
-    PoP\EngineWP\LooseContracts\:
-        resource: '../src/LooseContracts/*'

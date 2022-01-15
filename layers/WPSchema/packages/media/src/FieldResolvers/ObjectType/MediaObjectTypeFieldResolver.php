@@ -6,8 +6,8 @@ namespace PoPWPSchema\Media\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\CMS\CMSHelperServiceInterface;
-use PoP\Engine\Formatters\DateFormatterInterface;
+use PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
+use PoPSchema\SchemaCommons\Formatters\DateFormatterInterface;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use WP_Post;
@@ -101,7 +101,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return $url;
                 }
                 /** @var string */
-                return $this->getCmsHelperService()->getLocalURLPath($url);
+                return $this->getCMSHelperService()->getLocalURLPath($url);
             case 'slug':
                 return $mediaItem->post_name;
         }
