@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\Facades\CMS;
 
 use PoP\Root\App;
-use PoP\Engine\CMS\CMSServiceInterface;
+use PoPSchema\SchemaCommons\CMS\CMSServiceInterface;
 
 class CMSServiceFacade
 {

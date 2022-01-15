@@ -18,3 +18,6 @@ services:
 
     PoPSchema\SchemaCommons\ObjectSerializers\:
         resource: '../src/ObjectSerializers/*'
+
+    PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface:
+        class: \PoPSchema\SchemaCommons\CMS\CMSHelperService

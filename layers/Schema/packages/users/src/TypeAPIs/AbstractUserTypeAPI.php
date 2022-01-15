@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Users\TypeAPIs;
 
 use PoP\Root\Services\BasicServiceTrait;
-use PoP\Engine\CMS\CMSHelperServiceInterface;
+use PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 
 abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
 {

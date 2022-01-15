@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\CMS;
+namespace PoPSchema\SchemaCommons\CMS;
 
 interface CMSServiceInterface
 {

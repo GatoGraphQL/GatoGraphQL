@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\TagsWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoP\Engine\CMS\CMSHelperServiceInterface;
+use PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;

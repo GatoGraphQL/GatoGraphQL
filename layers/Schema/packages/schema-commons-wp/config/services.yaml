@@ -4,3 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoPSchema\SchemaCommons\CMS\CMSServiceInterface:
+        class: \PoP\EngineWP\CMS\CMSService
+

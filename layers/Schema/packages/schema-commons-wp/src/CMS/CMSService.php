@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\EngineWP\CMS;
 
-use PoP\Engine\CMS\CMSServiceInterface;
+use PoPSchema\SchemaCommons\CMS\CMSServiceInterface;
 
 use function get_option;
 use function get_site_url;
