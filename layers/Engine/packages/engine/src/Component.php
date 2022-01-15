@@ -19,7 +19,6 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\ComponentModel\Component::class,
             \PoP\CacheControl\Component::class,
             \PoP\FunctionFields\Component::class,
         ];
