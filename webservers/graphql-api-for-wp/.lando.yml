@@ -127,10 +127,6 @@ services:
         - >-
           ../../layers/Schema/packages/customposts:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/customposts
         - >-
-          ../../layers/Schema/packages/external-endpoints:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/external-endpoints
-        - >-
-          ../../layers/Schema/packages/function-fields:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/function-fields
-        - >-
           ../../layers/Schema/packages/generic-customposts:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/generic-customposts
         - >-
           ../../layers/Schema/packages/media-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/media-wp

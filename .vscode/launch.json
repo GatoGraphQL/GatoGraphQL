@@ -63,8 +63,6 @@
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/custompostmeta": "${workspaceFolder}/layers/Schema/packages/custompostmeta",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/customposts-wp": "${workspaceFolder}/layers/Schema/packages/customposts-wp",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/customposts": "${workspaceFolder}/layers/Schema/packages/customposts",
-              "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/external-endpoints": "${workspaceFolder}/layers/Schema/packages/external-endpoints",
-              "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/function-fields": "${workspaceFolder}/layers/Schema/packages/function-fields",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/generic-customposts": "${workspaceFolder}/layers/Schema/packages/generic-customposts",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/media-wp": "${workspaceFolder}/layers/Schema/packages/media-wp",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/media": "${workspaceFolder}/layers/Schema/packages/media",

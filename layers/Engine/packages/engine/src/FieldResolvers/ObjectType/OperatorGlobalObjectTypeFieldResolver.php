@@ -112,17 +112,17 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'if' => $this->__('If a boolean property is true, execute a field, else, execute another field', 'component-model'),
-            'not' => $this->__('Return the opposite value of a boolean property', 'component-model'),
-            'and' => $this->__('Return an `AND` operation among several boolean properties', 'component-model'),
-            'or' => $this->__('Return an `OR` operation among several boolean properties', 'component-model'),
-            'equals' => $this->__('Indicate if the result from a field equals a certain value', 'component-model'),
-            'empty' => $this->__('Indicate if a value is empty', 'component-model'),
-            'isNull' => $this->__('Indicate if a value is null', 'component-model'),
-            'extract' => $this->__('Given an object, it retrieves the data under a certain path', 'pop-component-model'),
-            'time' => $this->__('Return the time now (https://php.net/manual/en/function.time.php)', 'component-model'),
-            'echo' => $this->__('Repeat back the input, whatever it is', 'function-fields'),
-            'sprintf' => $this->__('Replace placeholders inside a string with provided values', 'function-fields'),
+            'if' => $this->__('If a boolean property is true, execute a field, else, execute another field', 'engine'),
+            'not' => $this->__('Return the opposite value of a boolean property', 'engine'),
+            'and' => $this->__('Return an `AND` operation among several boolean properties', 'engine'),
+            'or' => $this->__('Return an `OR` operation among several boolean properties', 'engine'),
+            'equals' => $this->__('Indicate if the result from a field equals a certain value', 'engine'),
+            'empty' => $this->__('Indicate if a value is empty', 'engine'),
+            'isNull' => $this->__('Indicate if a value is null', 'engine'),
+            'extract' => $this->__('Given an object, it retrieves the data under a certain path', 'engine'),
+            'time' => $this->__('Return the time now (https://php.net/manual/en/function.time.php)', 'engine'),
+            'echo' => $this->__('Repeat back the input, whatever it is', 'engine'),
+            'sprintf' => $this->__('Replace placeholders inside a string with provided values', 'engine'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -170,24 +170,24 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['if' => 'condition'] => $this->__('The condition to check if its value is `true` or `false`', 'component-model'),
-            ['if' => 'then'] => $this->__('The value to return if the condition evals to `true`', 'component-model'),
-            ['if' => 'else'] => $this->__('The value to return if the condition evals to `false`', 'component-model'),
-            ['not' => 'value'] => $this->__('The value from which to return its opposite value', 'component-model'),
+            ['if' => 'condition'] => $this->__('The condition to check if its value is `true` or `false`', 'engine'),
+            ['if' => 'then'] => $this->__('The value to return if the condition evals to `true`', 'engine'),
+            ['if' => 'else'] => $this->__('The value to return if the condition evals to `false`', 'engine'),
+            ['not' => 'value'] => $this->__('The value from which to return its opposite value', 'engine'),
             ['and' => 'values'],
             ['or' => 'values'] => sprintf(
-                $this->__('The array of values on which to execute the `%s` operation', 'component-model'),
+                $this->__('The array of values on which to execute the `%s` operation', 'engine'),
                 strtoupper($fieldName)
             ),
-            ['equals' => 'value1'] => $this->__('The first value to compare', 'component-model'),
-            ['equals' => 'value2'] => $this->__('The second value to compare', 'component-model'),
-            ['empty' => 'value'] => $this->__('The value to check if it is empty', 'component-model'),
-            ['isNull' => 'value'] => $this->__('The value to check if it is null', 'component-model'),
-            ['extract' => 'object'] => $this->__('The object to retrieve the data from', 'pop-component-model'),
-            ['extract' => 'path'] => $this->__('The path to retrieve data from the object. Paths are separated with \'.\' for each sublevel', 'pop-component-model'),
-            ['echo' => 'value'] => $this->__('The input to be echoed back', 'function-fields'),
-            ['sprintf' => 'string'] => $this->__('The string containing the placeholders', 'function-fields'),
-            ['sprintf' => 'values'] => $this->__('The values to replace the placeholders with inside the string', 'function-fields'),
+            ['equals' => 'value1'] => $this->__('The first value to compare', 'engine'),
+            ['equals' => 'value2'] => $this->__('The second value to compare', 'engine'),
+            ['empty' => 'value'] => $this->__('The value to check if it is empty', 'engine'),
+            ['isNull' => 'value'] => $this->__('The value to check if it is null', 'engine'),
+            ['extract' => 'object'] => $this->__('The object to retrieve the data from', 'engine'),
+            ['extract' => 'path'] => $this->__('The path to retrieve data from the object. Paths are separated with \'.\' for each sublevel', 'engine'),
+            ['echo' => 'value'] => $this->__('The input to be echoed back', 'engine'),
+            ['sprintf' => 'string'] => $this->__('The string containing the placeholders', 'engine'),
+            ['sprintf' => 'values'] => $this->__('The values to replace the placeholders with inside the string', 'engine'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
