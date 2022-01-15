@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Error;
+namespace PoPSchema\SchemaCommons\Error;
 
 use PoP\Root\Services\BasicServiceTrait;
 

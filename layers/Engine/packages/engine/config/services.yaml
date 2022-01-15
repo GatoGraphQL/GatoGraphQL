@@ -38,9 +38,6 @@ services:
     PoP\Engine\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoP\Engine\Error\ErrorHelperInterface:
-        class: \PoP\Engine\Error\ErrorHelper
-
     PoP\Engine\Schema\SchemaDefinitionServiceInterface:
         class: \PoP\Engine\Schema\SchemaDefinitionService
 

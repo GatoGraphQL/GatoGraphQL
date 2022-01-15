@@ -7,6 +7,9 @@ services:
     PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface:
         class: \PoPSchema\SchemaCommons\Services\AllowOrDenySettingsService
 
+    PoPSchema\SchemaCommons\Error\ErrorHelperInterface:
+        class: \PoPSchema\SchemaCommons\Error\ErrorHelper
+
     PoPSchema\SchemaCommons\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
