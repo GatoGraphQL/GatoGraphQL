@@ -1,5 +1,5 @@
 {
-    "name": "getpop/function-fields",
+    "name": "pop-schema/function-fields",
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
@@ -155,7 +155,7 @@
     "type": "library",
     "description": "Set of function global fields",
     "keywords": ["PoP", "function-fields"],
-    "homepage": "https://github.com/getpop/function-fields",
+    "homepage": "https://github.com/pop-schema/function-fields",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -166,7 +166,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/component-model": "^0.9"
+        "getpop/engine": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.0",
@@ -176,12 +176,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\FunctionFields\\": "src"
+            "PoPSchema\\FunctionFields\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\FunctionFields\\": "tests"
+            "PoPSchema\\FunctionFields\\": "tests"
         }
     },
     "scripts": {

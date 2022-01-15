@@ -47,7 +47,7 @@ includes:
     - layers/Schema/packages/external-endpoints/phpstan.neon.dist
     - layers/Engine/packages/field-query/phpstan.neon.dist
     - layers/Engine/packages/filestore/phpstan.neon.dist
-    - layers/Engine/packages/function-fields/phpstan.neon.dist
+    - layers/Schema/packages/function-fields/phpstan.neon.dist
     - layers/Schema/packages/generic-customposts/phpstan.neon.dist
     - layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-clients-for-wp/phpstan.neon.dist

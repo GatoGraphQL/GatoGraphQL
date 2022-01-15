@@ -3,11 +3,11 @@ services:
         public: true
         autowire: true
 
-    PoP\FunctionFields\FieldResolvers\:
+    PoPSchema\FunctionFields\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoP\FunctionFields\DirectiveResolvers\:
+    PoPSchema\FunctionFields\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
 
-    PoP\FunctionFields\TypeResolvers\:
+    PoPSchema\FunctionFields\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

@@ -18,7 +18,7 @@
         "php": "^8.0",
         "getpop/api-rest": "^0.9",
         "getpop/engine-wp-bootloader": "^0.9",
-        "getpop/function-fields": "^0.9",
+        "pop-schema/function-fields": "^0.9",
         "getpop/site-wp": "^0.9",
         "getpop/spa": "^0.9",
         "graphql-by-pop/graphql-server": "^0.9",

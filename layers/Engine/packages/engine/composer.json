@@ -8,7 +8,7 @@
         "getpop/hooks": "<0.8.9",
         "getpop/root": "<0.8.9",
         "getpop/engine-wp": "<0.8.9",
-        "getpop/function-fields": "<0.8.9",
+        "pop-schema/function-fields": "<0.8.9",
         "getpop/access-control": "<0.8.9",
         "getpop/definitions": "<0.8.9",
         "getpop/engine-wp-bootloader": "<0.8.9",
@@ -162,7 +162,6 @@
     "require": {
         "php": "^8.0",
         "getpop/cache-control": "^0.9",
-        "getpop/function-fields": "^0.9",
         "psr/cache": "^1.0"
     },
     "require-dev": {
