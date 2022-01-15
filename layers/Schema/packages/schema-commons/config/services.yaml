@@ -10,6 +10,9 @@ services:
     PoPSchema\SchemaCommons\Error\ErrorHelperInterface:
         class: \PoPSchema\SchemaCommons\Error\ErrorHelper
 
+    PoPSchema\SchemaCommons\Formatters\DateFormatterInterface:
+        class: \PoPSchema\SchemaCommons\Formatters\DateFormatter
+
     PoPSchema\SchemaCommons\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 

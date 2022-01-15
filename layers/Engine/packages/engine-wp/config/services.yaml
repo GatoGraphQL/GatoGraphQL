@@ -4,9 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\Engine\Formatters\DateFormatterInterface:
-        class: \PoP\EngineWP\Formatters\DateFormatter
-
     PoP\EngineWP\Hooks\:
         resource: '../src/Hooks/*'
 

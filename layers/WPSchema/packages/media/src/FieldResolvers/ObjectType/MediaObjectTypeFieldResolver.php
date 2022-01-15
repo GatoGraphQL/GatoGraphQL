@@ -7,7 +7,7 @@ namespace PoPWPSchema\Media\FieldResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
-use PoP\Engine\Formatters\DateFormatterInterface;
+use PoPSchema\SchemaCommons\Formatters\DateFormatterInterface;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use WP_Post;
