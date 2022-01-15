@@ -53,8 +53,6 @@ services:
         - >-
           ../../layers/Engine/packages/graphql-parser:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/graphql-parser
         - >-
-          ../../layers/Engine/packages/guzzle-helpers:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/guzzle-helpers
-        - >-
           ../../layers/Engine/packages/loosecontracts:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/loosecontracts
         - >-
           ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/mandatory-directives-by-configuration
@@ -126,10 +124,6 @@ services:
           ../../layers/Schema/packages/customposts-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/customposts-wp
         - >-
           ../../layers/Schema/packages/customposts:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/customposts
-        - >-
-          ../../layers/Schema/packages/external-endpoints:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/external-endpoints
-        - >-
-          ../../layers/Schema/packages/function-fields:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/function-fields
         - >-
           ../../layers/Schema/packages/generic-customposts:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/generic-customposts
         - >-

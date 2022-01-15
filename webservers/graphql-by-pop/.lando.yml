@@ -42,8 +42,6 @@ services:
         - >-
           ../../layers/Engine/packages/graphql-parser:/app/vendor/getpop/graphql-parser
         - >-
-          ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
-        - >-
           ../../layers/Engine/packages/loosecontracts:/app/vendor/getpop/loosecontracts
         - >-
           ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/vendor/getpop/mandatory-directives-by-configuration
@@ -109,10 +107,6 @@ services:
           ../../layers/Schema/packages/customposts-wp:/app/vendor/pop-schema/customposts-wp
         - >-
           ../../layers/Schema/packages/customposts:/app/vendor/pop-schema/customposts
-        - >-
-          ../../layers/Schema/packages/external-endpoints:/app/vendor/pop-schema/external-endpoints
-        - >-
-          ../../layers/Schema/packages/function-fields:/app/vendor/pop-schema/function-fields
         - >-
           ../../layers/Schema/packages/generic-customposts:/app/vendor/pop-schema/generic-customposts
         - '../../layers/Schema/packages/media-wp:/app/vendor/pop-schema/media-wp'
