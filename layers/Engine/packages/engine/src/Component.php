@@ -38,8 +38,5 @@ class Component extends AbstractComponent
         $this->initServices(dirname(__DIR__));
         $this->initServices(dirname(__DIR__), '/Overrides');
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
-        if (!Environment::disableGuzzleOperators()) {
-            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/Guzzle');
-        }
     }
 }
