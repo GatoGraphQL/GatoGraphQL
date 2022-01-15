@@ -110,10 +110,6 @@ services:
         - >-
           ../../layers/Schema/packages/customposts:/app/vendor/pop-schema/customposts
         - >-
-          ../../layers/Schema/packages/external-endpoints:/app/vendor/pop-schema/external-endpoints
-        - >-
-          ../../layers/Schema/packages/function-fields:/app/vendor/pop-schema/function-fields
-        - >-
           ../../layers/Schema/packages/generic-customposts:/app/vendor/pop-schema/generic-customposts
         - '../../layers/Schema/packages/media-wp:/app/vendor/pop-schema/media-wp'
         - '../../layers/Schema/packages/media:/app/vendor/pop-schema/media'
