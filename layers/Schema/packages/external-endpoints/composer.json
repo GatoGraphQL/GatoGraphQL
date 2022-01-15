@@ -166,6 +166,7 @@
     ],
     "require": {
         "php": "^8.0",
+        "getpop/guzzle-helpers": "^0.9",
         "pop-schema/schema-commons": "^0.9"
     },
     "require-dev": {

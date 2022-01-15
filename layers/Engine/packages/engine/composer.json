@@ -164,7 +164,6 @@
         "getpop/cache-control": "^0.9",
         "getpop/component-model": "^0.9",
         "getpop/function-fields": "^0.9",
-        "getpop/guzzle-helpers": "^0.9",
         "psr/cache": "^1.0"
     },
     "require-dev": {
