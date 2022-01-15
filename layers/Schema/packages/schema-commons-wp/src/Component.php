@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\QueriedObjectWP;
+namespace PoPSchema\SchemaCommonsWP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\QueriedObject\Component::class,
-            \PoPSchema\SchemaCommonsWP\Component::class,
+            \PoPSchema\SchemaCommons\Component::class,
+            \PoP\EngineWP\Component::class,
         ];
     }
 
