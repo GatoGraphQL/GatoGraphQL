@@ -15,7 +15,9 @@ class LooseContractSet extends AbstractLooseContractSet
     {
         return [
             // Options
-            'popcms:option:dateFormat',
+            'popcms:option:charset',
+            'popcms:option:gmtOffset',
+            'popcms:option:timezone',
         ];
     }
 }
