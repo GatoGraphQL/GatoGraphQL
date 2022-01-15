@@ -1,9 +1,0 @@
-parameters:
-	level: 8
-	paths:
-		- src
-		- tests
-	ignoreErrors:
-		-
-			message: '#^Match arm comparison between \*NEVER\* and (.*) is always false.$#'
-			path: src/FieldResolvers/ObjectType/OperatorGlobalObjectTypeFieldResolver.php
