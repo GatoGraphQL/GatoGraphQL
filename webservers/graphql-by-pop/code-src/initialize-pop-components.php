@@ -5,7 +5,6 @@ declare(strict_types=1);
 use PoP\Root\App;
 
 App::stockAndInitializeComponentClasses([
-    \PoPSchema\FunctionFields\Component::class,
     \PoPSchema\PostsWP\Component::class,
     \PoPSchema\PagesWP\Component::class,
     \PoPSchema\CustomPostMediaWP\Component::class,
