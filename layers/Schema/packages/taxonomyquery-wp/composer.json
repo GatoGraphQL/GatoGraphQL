@@ -165,7 +165,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/engine-wp": "^0.9",
+        "pop-schema/schema-commons-wp": "^0.9",
         "pop-schema/taxonomyquery": "^0.9"
     },
     "require-dev": {
