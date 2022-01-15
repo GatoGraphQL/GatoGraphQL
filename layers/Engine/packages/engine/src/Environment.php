@@ -14,9 +14,4 @@ class Environment
     {
         return getenv('DISABLE_PERSISTING_DEFINITIONS_ON_EACH_REQUEST') !== false ? strtolower(getenv('DISABLE_PERSISTING_DEFINITIONS_ON_EACH_REQUEST')) == "true" : false;
     }
-
-    public static function disableGuzzleOperators(): bool
-    {
-        return getenv('DISABLE_GUZZLE_OPERATORS') !== false ? strtolower(getenv('DISABLE_GUZZLE_OPERATORS')) == "true" : false;
-    }
 }

@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    # PoPSchema\ExternalEndpoints\FieldResolvers\:
-    #     resource: '../src/FieldResolvers/*'
+    PoPSchema\ExternalEndpoints\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
 
-    # PoPSchema\ExternalEndpoints\DirectiveResolvers\:
-    #     resource: '../src/DirectiveResolvers/*'
+    PoPSchema\ExternalEndpoints\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'

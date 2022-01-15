@@ -27,6 +27,7 @@
         "pop-schema/custompostmedia-mutations-wp": "dev-master",
         "pop-schema/custompostmedia-wp": "dev-master",
         "pop-schema/custompostmeta-wp": "dev-master",
+        "pop-schema/external-endpoints": "dev-master",
         "pop-schema/generic-customposts": "dev-master",
         "pop-schema/post-categories-wp": "dev-master",
         "pop-schema/post-category-mutations-wp": "dev-master",

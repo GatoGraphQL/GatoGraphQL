@@ -59,6 +59,7 @@ class Component extends AbstractComponent
                 \PoPSchema\PostCategoriesWP\Component::class,
                 \PoPSchema\MenusWP\Component::class,
                 \PoPSchema\SettingsWP\Component::class,
+                \PoPSchema\ExternalEndpoints\Component::class,
 
                 \PoPSchema\NotificationsWP\Component::class,
                 \PoPSchema\HighlightsWP\Component::class,

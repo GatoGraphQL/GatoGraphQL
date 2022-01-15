@@ -36,5 +36,6 @@ App::stockAndInitializeComponentClasses([
     \PoPWPSchema\UserMeta\Component::class,
     \GraphQLByPoP\GraphQLServer\Component::class,
     \PoP\RESTAPI\Component::class,
+    \PoPSchema\ExternalEndpoints\Component::class,
 ]);
 
