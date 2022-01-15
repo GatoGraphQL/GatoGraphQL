@@ -167,6 +167,10 @@ services:
           ../../layers/Schema/packages/schema-commons-wp:/app/vendor/pop-schema/schema-commons-wp
         - >-
           ../../layers/Schema/packages/schema-commons:/app/vendor/pop-schema/schema-commons
+        - >-
+          ../../layers/Schema/packages/external-endpoints:/app/vendor/pop-schema/external-endpoints
+        - >-
+          ../../layers/Schema/packages/generic-customposts:/app/vendor/pop-schema/generic-customposts
         - '../../layers/Schema/packages/stances:/app/vendor/pop-schema/stances'
         - >-
           ../../layers/Schema/packages/stances-wp:/app/vendor/pop-schema/stances-wp
