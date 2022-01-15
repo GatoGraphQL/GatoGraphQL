@@ -12,7 +12,6 @@
         "getpop/hooks": "<0.8.9",
         "getpop/root": "<0.8.9",
         "getpop/routing": "<0.8.9",
-        "pop-schema/function-fields": "<0.8.9",
         "getpop/access-control": "<0.8.9",
         "getpop/definitions": "<0.8.9",
         "getpop/engine": "<0.8.9",
