@@ -5,5 +5,5 @@ services:
         autoconfigure: true
 
     PoPSchema\SchemaCommons\CMS\CMSServiceInterface:
-        class: \PoP\EngineWP\CMS\CMSService
+        class: \PoPSchema\SchemaCommonsWP\CMS\CMSService
 
