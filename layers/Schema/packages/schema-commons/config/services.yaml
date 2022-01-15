@@ -19,5 +19,8 @@ services:
     PoPSchema\SchemaCommons\ObjectSerializers\:
         resource: '../src/ObjectSerializers/*'
 
+    PoPSchema\SchemaCommons\Hooks\:
+        resource: '../src/Hooks/*'
+
     PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface:
         class: \PoPSchema\SchemaCommons\CMS\CMSHelperService
