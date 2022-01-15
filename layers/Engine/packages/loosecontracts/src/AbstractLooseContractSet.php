@@ -28,7 +28,7 @@ abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiate
             $this->getRequiredNames()
         );
     }
-    
+
     /**
      * @return string[]
      */
