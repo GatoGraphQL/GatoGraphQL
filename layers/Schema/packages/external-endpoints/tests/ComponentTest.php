@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\FunctionFields;
+namespace PoPSchema\ExternalEndpoints;
 
 use PoP\Root\AbstractComponentTest;
 
