@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/stances": "^0.8",
-        "pop-schema/customposts-wp": "^0.8"
+        "pop-schema/stances": "^0.9",
+        "pop-schema/customposts-wp": "^0.9"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",

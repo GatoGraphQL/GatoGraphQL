@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/tags": "^0.8",
-        "pop-schema/migrate-everythingelse": "^0.8"
+        "pop-schema/tags": "^0.9",
+        "pop-schema/migrate-everythingelse": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.76",

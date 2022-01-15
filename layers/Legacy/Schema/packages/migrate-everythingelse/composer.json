@@ -16,9 +16,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/migrate-locations": "^0.8",
-        "pop-schema/migrate-locations-wp-em": "^0.8",
-        "pop-schema/migrate-events-wp-em": "^0.8"
+        "pop-schema/migrate-locations": "^0.9",
+        "pop-schema/migrate-locations-wp-em": "^0.9",
+        "pop-schema/migrate-events-wp-em": "^0.9"
     },
     "extra": {
         "branch-alias": {
