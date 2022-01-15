@@ -148,6 +148,8 @@ services:
         - >-
           ../../layers/Schema/packages/queriedobject:/app/vendor/pop-schema/queriedobject
         - >-
+          ../../layers/Schema/packages/schema-commons-wp:/app/vendor/pop-schema/schema-commons-wp
+        - >-
           ../../layers/Schema/packages/schema-commons:/app/vendor/pop-schema/schema-commons
         - >-
           ../../layers/Schema/packages/settings-wp:/app/vendor/pop-schema/settings-wp

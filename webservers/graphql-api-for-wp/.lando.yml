@@ -175,6 +175,8 @@ services:
         - >-
           ../../layers/Schema/packages/queriedobject:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/queriedobject
         - >-
+          ../../layers/Schema/packages/schema-commons-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/schema-commons-wp
+        - >-
           ../../layers/Schema/packages/schema-commons:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/schema-commons
         - >-
           ../../layers/Schema/packages/settings-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/settings-wp
