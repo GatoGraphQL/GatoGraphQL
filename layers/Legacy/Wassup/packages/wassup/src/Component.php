@@ -35,7 +35,6 @@ class Component extends AbstractComponent
             [
                 // These ones are working OK
                 \GraphQLByPoP\GraphQLServer\Component::class,
-                \PoPSchema\FunctionFields\Component::class,
                 \PoP\RESTAPI\Component::class,
                 \PoP\TraceTools\Component::class,
                 \PoPSchema\BlockMetadataWP\Component::class,
@@ -59,7 +58,6 @@ class Component extends AbstractComponent
                 \PoPSchema\PostCategoriesWP\Component::class,
                 \PoPSchema\MenusWP\Component::class,
                 \PoPSchema\SettingsWP\Component::class,
-                \PoPSchema\ExternalEndpoints\Component::class,
 
                 \PoPSchema\NotificationsWP\Component::class,
                 \PoPSchema\HighlightsWP\Component::class,
