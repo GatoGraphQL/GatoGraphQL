@@ -26,6 +26,7 @@
         "pop-schema/commentmeta-wp": "^0.9",
         "pop-schema/custompostmedia-wp": "^0.9",
         "pop-schema/custompostmeta-wp": "^0.9",
+        "pop-schema/external-endpoints": "dev-master",
         "pop-schema/pages-wp": "^0.9",
         "pop-schema/post-tags-wp": "^0.9",
         "pop-schema/post-categories-wp": "^0.9",
