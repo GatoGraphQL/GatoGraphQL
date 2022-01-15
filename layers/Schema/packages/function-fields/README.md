@@ -16,7 +16,7 @@ Package of function global fields
 Via Composer
 
 ``` bash
-composer require getpop/function-fields
+composer require pop-schema/function-fields
 ```
 
 ## Development
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \PoP\FunctionFields\Component::class,
+    \PoPSchema\FunctionFields\Component::class,
 ]);
 ```
 
@@ -110,17 +110,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/getpop/function-fields.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-schema/function-fields.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/getpop/function-fields/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/function-fields.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/function-fields.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/getpop/function-fields.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-schema/function-fields/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema/function-fields.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema/function-fields.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema/function-fields.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/getpop/function-fields
-[link-travis]: https://travis-ci.org/getpop/function-fields
-[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/function-fields/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/getpop/function-fields
-[link-downloads]: https://packagist.org/packages/getpop/function-fields
+[link-packagist]: https://packagist.org/packages/pop-schema/function-fields
+[link-travis]: https://travis-ci.org/pop-schema/function-fields
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/function-fields/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/function-fields
+[link-downloads]: https://packagist.org/packages/pop-schema/function-fields
 [link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso

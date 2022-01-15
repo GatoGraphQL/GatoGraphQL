@@ -1,6 +1,6 @@
 <?php
 
-namespace PoP\FunctionFields;
+namespace PoPSchema\FunctionFields;
 
 use PoP\Root\AbstractComponentTest;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\FunctionFields\DirectiveResolvers;
+namespace PoPSchema\FunctionFields\DirectiveResolvers;
 
 use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
 

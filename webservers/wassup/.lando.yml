@@ -61,7 +61,7 @@ services:
           ../../layers/Engine/packages/field-query:/app/vendor/getpop/field-query
         - '../../layers/Engine/packages/filestore:/app/vendor/getpop/filestore'
         - >-
-          ../../layers/Engine/packages/function-fields:/app/vendor/getpop/function-fields
+          ../../layers/Engine/packages/function-fields:/app/vendor/pop-schema/function-fields
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
         - >-

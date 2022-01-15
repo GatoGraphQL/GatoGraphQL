@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\CacheControl\Component::class,
-            \PoP\FunctionFields\Component::class,
+            \PoPSchema\FunctionFields\Component::class,
         ];
     }
 

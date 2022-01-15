@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\FunctionFields;
+namespace PoPSchema\FunctionFields;
 
 use PoP\Root\Component\AbstractComponent;
 

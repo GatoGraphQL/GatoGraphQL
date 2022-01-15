@@ -192,7 +192,7 @@ class Plugin extends AbstractMainPlugin
         return array_merge(
             parent::getSchemaComponentClassesToSkip(),
             [
-                \PoP\FunctionFields\Component::class,
+                \PoPSchema\FunctionFields\Component::class,
             ]
         );
     }
