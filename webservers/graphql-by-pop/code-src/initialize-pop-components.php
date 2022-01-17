@@ -16,7 +16,7 @@ App::stockAndInitializeComponentClasses([
     \PoPSchema\PostCategoriesWP\Component::class,
     \PoPSchema\MenusWP\Component::class,
     \PoPSchema\SettingsWP\Component::class,
-    \PoPSchema\BlockMetadataWP\Component::class,
+    \PoPWPSchema\BlockMetadataWP\Component::class,
     \PoPSchema\PostMutations\Component::class,
     \PoPSchema\CustomPostMediaMutationsWP\Component::class,
     \PoPSchema\PostTagMutationsWP\Component::class,

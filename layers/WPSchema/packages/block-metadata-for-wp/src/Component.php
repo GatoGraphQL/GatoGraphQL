@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\BlockMetadataWP;
+namespace PoPWPSchema\BlockMetadataWP;
 
 use PoP\Root\Component\AbstractComponent;
 

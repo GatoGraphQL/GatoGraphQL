@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\BlockMetadataWP\FieldResolvers\ObjectType;
+namespace PoPWPSchema\BlockMetadataWP\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;

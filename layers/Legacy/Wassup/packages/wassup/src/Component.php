@@ -37,7 +37,7 @@ class Component extends AbstractComponent
                 \GraphQLByPoP\GraphQLServer\Component::class,
                 \PoP\RESTAPI\Component::class,
                 \PoP\TraceTools\Component::class,
-                \PoPSchema\BlockMetadataWP\Component::class,
+                \PoPWPSchema\BlockMetadataWP\Component::class,
                 \PoPSchema\CDNDirective\Component::class,
                 \PoPSchema\ConvertCaseDirectives\Component::class,
                 \PoPSchema\CustomPostMediaWP\Component::class,

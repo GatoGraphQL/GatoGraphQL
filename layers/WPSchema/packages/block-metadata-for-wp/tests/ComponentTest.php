@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\BlockMetadataWP;
+namespace PoPWPSchema\BlockMetadataWP;
 
 use PoP\Root\AbstractComponentTest;
 

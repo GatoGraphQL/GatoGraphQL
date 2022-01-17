@@ -186,12 +186,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "PoPSchema\\BlockMetadataWP\\": "src"
+            "PoPWPSchema\\BlockMetadataWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\BlockMetadataWP\\": "tests"
+            "PoPWPSchema\\BlockMetadataWP\\": "tests"
         }
     },
     "scripts": {
