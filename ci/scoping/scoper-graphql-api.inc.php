@@ -51,12 +51,12 @@ return [
             ->notPath([
                 // Exclude libraries ending in "-wp"
                 '#getpop/[a-zA-Z0-9_-]*-wp/#',
-                '#pop-schema/[a-zA-Z0-9_-]*-wp/#',
+                '#pop-cms-schema/[a-zA-Z0-9_-]*-wp/#',
                 '#graphql-by-pop/[a-zA-Z0-9_-]*-wp/#',
                 // Exclude libraries from WPSchema
                 '#pop-wp-schema/#',
                 // Exclude all composer.json from own libraries (they get broken!)
-                '#[getpop|pop\-backbone|pop\-schema|pop\-wp\-schema|graphql\-by\-pop|graphql\-api]/*/composer.json#',
+                '#[getpop|pop\-backbone|pop\-schema|pop\-cms\-schema|pop\-wp\-schema|graphql\-by\-pop|graphql\-api]/*/composer.json#',
                 // Exclude libraries
                 '#symfony/deprecation-contracts/#',
                 '#ralouphie/getallheaders/#',
