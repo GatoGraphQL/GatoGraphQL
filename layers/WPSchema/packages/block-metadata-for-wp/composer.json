@@ -1,5 +1,5 @@
 {
-    "name": "pop-cms-schema/block-metadata-for-wp",
+    "name": "pop-wp-schema/block-metadata-for-wp",
     "type": "library",
     "description": "Integration with WordPress plugin \"Block Metadata\"",
     "keywords": ["PoP", "block-metadata-for-wp"],

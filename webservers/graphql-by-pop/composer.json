@@ -20,7 +20,7 @@
         "graphql-by-pop/graphql-voyager": "dev-master",
         "graphql-by-pop/graphql-server": "dev-master",
         "oomphinc/composer-installers-extender": "^2.0",
-        "pop-cms-schema/block-metadata-for-wp": "dev-master",
+        "pop-wp-schema/block-metadata-for-wp": "dev-master",
         "pop-cms-schema/comment-mutations-wp": "dev-master",
         "pop-cms-schema/commentmeta-wp": "dev-master",
         "pop-cms-schema/custompostmedia-mutations-wp": "dev-master",

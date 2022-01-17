@@ -429,7 +429,7 @@
         "graphql-by-pop/graphql-voyager": "self.version",
         "pop-backbone/graphql-parser": "self.version",
         "pop-backbone/php-hooks": "self.version",
-        "pop-cms-schema/block-metadata-for-wp": "self.version",
+        "pop-wp-schema/block-metadata-for-wp": "self.version",
         "pop-cms-schema/categories": "self.version",
         "pop-cms-schema/categories-wp": "self.version",
         "pop-cms-schema/comment-mutations": "self.version",

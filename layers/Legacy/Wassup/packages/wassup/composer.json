@@ -21,7 +21,7 @@
         "getpop/site-wp": "^0.9",
         "getpop/spa": "^0.9",
         "graphql-by-pop/graphql-server": "^0.9",
-        "pop-cms-schema/block-metadata-for-wp": "^0.9",
+        "pop-wp-schema/block-metadata-for-wp": "^0.9",
         "pop-cms-schema/commentmeta-wp": "^0.9",
         "pop-cms-schema/custompostmedia-wp": "^0.9",
         "pop-cms-schema/custompostmeta-wp": "^0.9",
