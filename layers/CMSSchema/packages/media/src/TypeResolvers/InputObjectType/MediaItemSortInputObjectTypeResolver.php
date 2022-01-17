@@ -6,7 +6,7 @@ namespace PoPSchema\Media\TypeResolvers\InputObjectType;
 
 use PoPSchema\Media\Constants\MediaItemOrderBy;
 use PoPSchema\Media\TypeResolvers\EnumType\MediaItemOrderByEnumTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 class MediaItemSortInputObjectTypeResolver extends SortInputObjectTypeResolver
 {

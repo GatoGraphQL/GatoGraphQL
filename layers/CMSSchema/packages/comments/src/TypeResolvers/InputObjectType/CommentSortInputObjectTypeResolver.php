@@ -6,7 +6,7 @@ namespace PoPSchema\Comments\TypeResolvers\InputObjectType;
 
 use PoPSchema\Comments\Constants\CommentOrderBy;
 use PoPSchema\Comments\TypeResolvers\EnumType\CommentOrderByEnumTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 class CommentSortInputObjectTypeResolver extends SortInputObjectTypeResolver
 {

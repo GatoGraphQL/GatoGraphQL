@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Order;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
-use PoPSchema\SchemaCommons\TypeResolvers\EnumType\OrderEnumTypeResolver;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\EnumType\OrderEnumTypeResolver;
 
 class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {

@@ -6,7 +6,7 @@ namespace PoPSchema\Menus\TypeResolvers\InputObjectType;
 
 use PoPSchema\Menus\Constants\MenuOrderBy;
 use PoPSchema\Menus\TypeResolvers\EnumType\MenuOrderByEnumTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 class MenuSortInputObjectTypeResolver extends SortInputObjectTypeResolver
 {

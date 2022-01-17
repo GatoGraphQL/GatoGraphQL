@@ -7,7 +7,7 @@ namespace PoPSchema\Users\TypeResolvers\InputObjectType;
 use PoP\Root\App;
 use PoPSchema\Users\Component;
 use PoPSchema\Users\ComponentConfiguration;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
 class UserPaginationInputObjectTypeResolver extends PaginationInputObjectTypeResolver
 {

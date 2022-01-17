@@ -7,7 +7,7 @@ namespace PoPSchema\GenericCustomPosts\TypeResolvers\InputObjectType;
 use PoP\Root\App;
 use PoPSchema\GenericCustomPosts\Component;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
 class GenericCustomPostPaginationInputObjectTypeResolver extends PaginationInputObjectTypeResolver
 {

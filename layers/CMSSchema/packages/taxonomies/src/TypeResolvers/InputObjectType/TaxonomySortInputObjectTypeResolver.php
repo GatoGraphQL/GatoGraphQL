@@ -6,7 +6,7 @@ namespace PoPSchema\Taxonomies\TypeResolvers\InputObjectType;
 
 use PoPSchema\Taxonomies\Constants\TaxonomyOrderBy;
 use PoPSchema\Taxonomies\TypeResolvers\EnumType\TaxonomyOrderByEnumTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 class TaxonomySortInputObjectTypeResolver extends SortInputObjectTypeResolver
 {

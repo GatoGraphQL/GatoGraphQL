@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
 use PoPSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 class CustomPostSortInputObjectTypeResolver extends SortInputObjectTypeResolver
 {

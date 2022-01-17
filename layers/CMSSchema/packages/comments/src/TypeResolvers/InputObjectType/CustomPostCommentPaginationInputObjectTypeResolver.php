@@ -7,7 +7,7 @@ namespace PoPSchema\Comments\TypeResolvers\InputObjectType;
 use PoP\Root\App;
 use PoPSchema\Comments\Component;
 use PoPSchema\Comments\ComponentConfiguration;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
 class CustomPostCommentPaginationInputObjectTypeResolver extends PaginationInputObjectTypeResolver
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons\TypeResolvers\EnumType;
+namespace PoPCMSSchema\SchemaCommons\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Order;

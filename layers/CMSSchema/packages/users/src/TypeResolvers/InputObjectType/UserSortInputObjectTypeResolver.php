@@ -6,7 +6,7 @@ namespace PoPSchema\Users\TypeResolvers\InputObjectType;
 
 use PoPSchema\Users\Constants\UserOrderBy;
 use PoPSchema\Users\TypeResolvers\EnumType\UserOrderByEnumTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 class UserSortInputObjectTypeResolver extends SortInputObjectTypeResolver
 {
