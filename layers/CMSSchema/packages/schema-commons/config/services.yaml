@@ -4,9 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface:
-        class: \PoPSchema\SchemaCommons\Services\AllowOrDenySettingsService
-
     PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface:
         class: \PoPSchema\SchemaCommons\CMS\CMSHelperService
 
@@ -24,9 +21,6 @@ services:
 
     PoPSchema\SchemaCommons\FormInputs\:
         resource: '../src/FormInputs/*'
-
-    PoPSchema\SchemaCommons\ObjectSerializers\:
-        resource: '../src/ObjectSerializers/*'
 
     PoPSchema\SchemaCommons\Hooks\:
         resource: '../src/Hooks/*'

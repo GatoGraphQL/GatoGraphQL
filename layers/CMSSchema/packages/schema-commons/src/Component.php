@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\Engine\Component::class,
+            \PoPSchema\SchemaCommons\Component::class,
         ];
     }
 
@@ -33,6 +33,5 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
-        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }
