@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Base functionality to add tags to custom posts",
-    "keywords": ["PoP", "custompost-tag-mutations"],
+    "keywords": ["PHP", "PoP", "custompost-tag-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/custompost-tag-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

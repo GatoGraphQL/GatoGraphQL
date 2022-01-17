@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/custompostmeta",
     "type": "library",
     "description": "WordPress-specific Custom Post Meta data model",
-    "keywords": ["PoP", "WP", "custompostmeta"],
+    "keywords": ["PHP", "PoP", "WP", "custompostmeta"],
     "homepage": "https://github.com/PoPWPSchema/custompostmeta",
     "license": "GPL-2.0-or-later",
     "authors": [

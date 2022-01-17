@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/schema-commons",
     "type": "library",
     "description": "WordPress-specific Schema Commons data model",
-    "keywords": ["PoP", "WP", "schema-commons"],
+    "keywords": ["PHP", "PoP", "WP", "schema-commons"],
     "homepage": "https://github.com/PoPWPSchema/schema-commons",
     "license": "GPL-2.0-or-later",
     "authors": [

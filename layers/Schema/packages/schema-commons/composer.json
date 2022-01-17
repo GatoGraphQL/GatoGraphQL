@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Code shared by the schema packages",
-    "keywords": ["PoP", "schema-commons"],
+    "keywords": ["PHP", "PoP", "schema-commons"],
     "homepage": "https://github.com/PoPSchema/schema-commons",
     "license": "GPL-2.0-or-later",
     "authors": [

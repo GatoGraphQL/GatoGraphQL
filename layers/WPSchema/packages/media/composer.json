@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/media",
     "type": "library",
     "description": "WordPress-specific Media data model",
-    "keywords": ["PoP", "WP", "media"],
+    "keywords": ["PHP", "PoP", "WP", "media"],
     "homepage": "https://github.com/PoPWPSchema/media",
     "license": "GPL-2.0-or-later",
     "authors": [

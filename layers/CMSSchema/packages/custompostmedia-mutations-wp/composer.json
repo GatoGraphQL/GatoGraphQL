@@ -150,7 +150,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Custom Post Media Mutations\"",
-    "keywords": ["PoP", "custompostmedia-mutations-wp"],
+    "keywords": ["PHP", "PoP", "custompostmedia-mutations-wp"],
     "homepage": "https://github.com/PoPCMSSchema/custompostmedia-mutations-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

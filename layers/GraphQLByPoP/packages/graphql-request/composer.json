@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Enables GraphQL for PoP to process the GraphQL query using the standard syntax",
-    "keywords": ["PoP", "graphql-request"],
+    "keywords": ["PHP", "PoP", "graphql-request"],
     "homepage": "https://github.com/GraphQLByPoP/graphql-request",
     "license": "GPL-2.0-or-later",
     "authors": [

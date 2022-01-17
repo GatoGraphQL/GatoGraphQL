@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Adds support for post meta",
-    "keywords": ["PoP", "custompostmeta"],
+    "keywords": ["PHP", "PoP", "custompostmeta"],
     "homepage": "https://github.com/PoPCMSSchema/custompostmeta",
     "license": "GPL-2.0-or-later",
     "authors": [

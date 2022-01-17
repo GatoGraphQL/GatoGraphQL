@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Adds support for comment mutations",
-    "keywords": ["PoP", "comment-mutations"],
+    "keywords": ["PHP", "PoP", "comment-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/comment-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

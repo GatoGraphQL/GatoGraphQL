@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Adds mutations for the \"contact us\" functionality",
-    "keywords": ["PoP", "contactus-mutations"],
+    "keywords": ["PHP", "PoP", "contactus-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/contactus-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

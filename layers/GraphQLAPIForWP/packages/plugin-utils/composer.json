@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "General utilities for the plugin, not dependent on WordPress",
-    "keywords": ["PoP", "plugin-utils"],
+    "keywords": ["PHP", "PoP", "plugin-utils"],
     "homepage": "https://github.com/GraphQLAPI/plugin-utils",
     "license": "GPL-2.0-or-later",
     "authors": [

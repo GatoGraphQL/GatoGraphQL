@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/everythingelse-mutations",
     "type": "library",
     "description": "Adds mutations for all the functionalities not yet thoroughly migrated to generic packages",
-    "keywords": ["PoP", "everythingelse-mutations"],
+    "keywords": ["PHP", "PoP", "everythingelse-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/everythingelse-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

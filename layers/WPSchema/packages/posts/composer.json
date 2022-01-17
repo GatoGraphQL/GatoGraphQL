@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/posts",
     "type": "library",
     "description": "WordPress-specific Post data model",
-    "keywords": ["PoP", "WP", "posts"],
+    "keywords": ["PHP", "PoP", "WP", "posts"],
     "homepage": "https://github.com/PoPWPSchema/posts",
     "license": "GPL-2.0-or-later",
     "authors": [

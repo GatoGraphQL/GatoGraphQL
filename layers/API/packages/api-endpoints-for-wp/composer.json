@@ -2,7 +2,7 @@
     "name": "getpop/api-endpoints-for-wp",
     "type": "library",
     "description": "Add pretty permalinks for the PoP API endpoints, for WordPress",
-    "keywords": ["PoP", "api-endpoints-for-wp"],
+    "keywords": ["PHP", "PoP", "api-endpoints-for-wp"],
     "homepage": "https://github.com/getpop/api-endpoints-for-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

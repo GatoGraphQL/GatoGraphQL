@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Implementation of PoP Engine for WordPress",
-    "keywords": ["PoP", "engine", "WordPress"],
+    "keywords": ["PHP", "PoP", "engine", "WordPress"],
     "homepage": "https://github.com/getpop/engine-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -151,7 +151,7 @@
     },
     "type": "library",
     "description": "GraphQL syntax parser",
-    "keywords": ["PoP", "GraphQL", "parser", "graphql-parser"],
+    "keywords": ["PHP", "PoP", "GraphQL", "parser", "graphql-parser"],
     "homepage": "https://github.com/getpop/graphql-parser",
     "license": "GPL-2.0-or-later",
     "authors": [

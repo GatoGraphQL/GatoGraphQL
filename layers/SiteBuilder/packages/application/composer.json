@@ -150,7 +150,7 @@
     },
     "type": "library",
     "description": "Create a component-based application",
-    "keywords": ["PoP", "application"],
+    "keywords": ["PHP", "PoP", "application"],
     "homepage": "https://github.com/getpop/application",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -151,7 +151,7 @@
     },
     "type": "library",
     "description": "GraphiQL and Voyager GraphQL Clients for WordPress",
-    "keywords": ["GraphQLByPoP", "graphql-clients-for-wp"],
+    "keywords": ["PHP", "GraphQLByPoP", "graphql-clients-for-wp"],
     "homepage": "https://github.com/GraphQLByPoP/graphql-clients-for-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

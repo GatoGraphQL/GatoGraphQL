@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/comments",
     "type": "library",
     "description": "Adds support for comments",
-    "keywords": ["PoP", "comments"],
+    "keywords": ["PHP", "PoP", "comments"],
     "homepage": "https://github.com/PoPCMSSchema/comments",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Component model for PoP, over which the component-based architecture is based",
-    "keywords": ["PoP", "field-query"],
+    "keywords": ["PHP", "PoP", "field-query"],
     "homepage": "https://github.com/getpop/field-query",
     "license": "GPL-2.0-or-later",
     "authors": [

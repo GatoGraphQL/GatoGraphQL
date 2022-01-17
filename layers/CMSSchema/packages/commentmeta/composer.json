@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Adds support for comment meta",
-    "keywords": ["PoP", "commentmeta"],
+    "keywords": ["PHP", "PoP", "commentmeta"],
     "homepage": "https://github.com/PoPCMSSchema/commentmeta",
     "license": "GPL-2.0-or-later",
     "authors": [

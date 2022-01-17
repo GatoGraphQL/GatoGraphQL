@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Taxonomies\"",
-    "keywords": ["PoP", "taxonomies-wp"],
+    "keywords": ["PHP", "PoP", "taxonomies-wp"],
     "homepage": "https://github.com/PoPCMSSchema/taxonomies-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

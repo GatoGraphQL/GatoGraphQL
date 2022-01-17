@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/migrate-everythingelse",
     "type": "library",
     "description": "(Temporary package) All the remaining code to migrate for PoP, which doesn't have a repo of its own",
-    "keywords": ["PoP", "everythingelse"],
+    "keywords": ["PHP", "PoP", "everythingelse"],
     "homepage": "https://github.com/PoPSchema/migrate-everythingelse",
     "license": "GPL-2.0-or-later",
     "authors": [

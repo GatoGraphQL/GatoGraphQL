@@ -2,7 +2,7 @@
     "name": "getpop/api",
     "type": "library",
     "description": "Component-based API",
-    "keywords": ["PoP", "api"],
+    "keywords": ["PHP", "PoP", "api"],
     "homepage": "https://github.com/getpop/api",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Adds mutations for flagging functionality",
-    "keywords": ["PoP", "flag-mutations"],
+    "keywords": ["PHP", "PoP", "flag-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/flag-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

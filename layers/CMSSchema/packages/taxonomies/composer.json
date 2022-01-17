@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Adds support for taxonomies",
-    "keywords": ["PoP", "taxonomies"],
+    "keywords": ["PHP", "PoP", "taxonomies"],
     "homepage": "https://github.com/PoPCMSSchema/taxonomies",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/comments",
     "type": "library",
     "description": "WordPress-specific Comment data model",
-    "keywords": ["PoP", "WP", "comments"],
+    "keywords": ["PHP", "PoP", "WP", "comments"],
     "homepage": "https://github.com/PoPWPSchema/comments",
     "license": "GPL-2.0-or-later",
     "authors": [

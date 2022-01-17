@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Provides definitions using emojis",
-    "keywords": ["PoP", "definitions-emoji"],
+    "keywords": ["PHP", "PoP", "definitions-emoji"],
     "homepage": "https://github.com/getpop/definitions-emoji",
     "license": "GPL-2.0-or-later",
     "authors": [

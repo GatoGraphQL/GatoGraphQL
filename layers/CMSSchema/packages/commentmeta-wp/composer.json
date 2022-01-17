@@ -151,7 +151,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Comment Meta\"",
-    "keywords": ["PoP", "commentmeta-wp"],
+    "keywords": ["PHP", "PoP", "commentmeta-wp"],
     "homepage": "https://github.com/PoPCMSSchema/commentmeta-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

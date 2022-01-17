@@ -151,7 +151,7 @@
     },
     "type": "library",
     "description": "Store definitions across sessions",
-    "keywords": ["PoP", "definitionpersistence"],
+    "keywords": ["PHP", "PoP", "definitionpersistence"],
     "homepage": "https://github.com/getpop/definitionpersistence",
     "license": "GPL-2.0-or-later",
     "authors": [

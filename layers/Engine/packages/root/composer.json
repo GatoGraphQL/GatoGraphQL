@@ -2,7 +2,7 @@
     "name": "getpop/root",
     "type": "library",
     "description": "Declaration of dependencies shared by all PoP components",
-    "keywords": ["PoP", "root"],
+    "keywords": ["PHP", "PoP", "root"],
     "homepage": "https://github.com/getpop/root",
     "license": "GPL-2.0-or-later",
     "authors": [

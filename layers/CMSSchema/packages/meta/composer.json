@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Adds support for meta",
-    "keywords": ["PoP", "meta"],
+    "keywords": ["PHP", "PoP", "meta"],
     "homepage": "https://github.com/PoPCMSSchema/meta",
     "license": "GPL-2.0-or-later",
     "authors": [

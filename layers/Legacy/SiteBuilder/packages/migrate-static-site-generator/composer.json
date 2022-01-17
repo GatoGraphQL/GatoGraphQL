@@ -2,7 +2,7 @@
     "name": "getpop/migrate-static-site-generator",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/getpop/static-site-generator",
-    "keywords": ["PoP", "static-site-generator"],
+    "keywords": ["PHP", "PoP", "static-site-generator"],
     "homepage": "https://github.com/getpop/migrate-static-site-generator",
     "license": "GPL-2.0-or-later",
     "authors": [

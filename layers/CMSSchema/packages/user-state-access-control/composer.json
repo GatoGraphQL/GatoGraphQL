@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/user-state-access-control",
     "type": "library",
     "description": "Access Control based on the user being logged-in or not",
-    "keywords": ["PoP", "UserStateAccessControl"],
+    "keywords": ["PHP", "PoP", "UserStateAccessControl"],
     "homepage": "https://github.com/PoPCMSSchema/user-state-access-control",
     "license": "GPL-2.0-or-later",
     "authors": [

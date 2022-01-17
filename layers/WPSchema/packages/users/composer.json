@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/users",
     "type": "library",
     "description": "WordPress-specific User data model",
-    "keywords": ["PoP", "WP", "users"],
+    "keywords": ["PHP", "PoP", "WP", "users"],
     "homepage": "https://github.com/PoPWPSchema/users",
     "license": "GPL-2.0-or-later",
     "authors": [

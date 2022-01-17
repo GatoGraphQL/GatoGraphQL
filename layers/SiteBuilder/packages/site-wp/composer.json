@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of package Site",
-    "keywords": ["PoP", "site", "WordPress"],
+    "keywords": ["PHP", "PoP", "site", "WordPress"],
     "homepage": "https://github.com/getpop/site-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

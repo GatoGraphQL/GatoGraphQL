@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Adds the configuration layer to the component model",
-    "keywords": ["PoP", "component-model-configuration"],
+    "keywords": ["PHP", "PoP", "component-model-configuration"],
     "homepage": "https://github.com/getpop/component-model-configuration",
     "license": "GPL-2.0-or-later",
     "authors": [

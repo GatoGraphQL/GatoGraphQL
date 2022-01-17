@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/stances",
     "type": "library",
     "description": "Adds support for stances",
-    "keywords": ["PoP", "stances"],
+    "keywords": ["PHP", "PoP", "stances"],
     "homepage": "https://github.com/PoPSchema/stances",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/post-tags",
     "type": "library",
     "description": "Adds support for post tags",
-    "keywords": ["PoP", "post-tags"],
+    "keywords": ["PHP", "PoP", "post-tags"],
     "homepage": "https://github.com/PoPCMSSchema/post-tags",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "getpop/api-clients",
     "type": "library",
     "description": "Utilities for implementing API clients",
-    "keywords": ["PoP", "api-clients"],
+    "keywords": ["PHP", "PoP", "api-clients"],
     "homepage": "https://github.com/getpop/api-clients",
     "license": "GPL-2.0-or-later",
     "authors": [

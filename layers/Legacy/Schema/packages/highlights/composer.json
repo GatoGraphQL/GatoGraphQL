@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/highlights",
     "type": "library",
     "description": "Adds support for highlights",
-    "keywords": ["PoP", "highlights"],
+    "keywords": ["PHP", "PoP", "highlights"],
     "homepage": "https://github.com/PoPSchema/highlights",
     "license": "GPL-2.0-or-later",
     "authors": [

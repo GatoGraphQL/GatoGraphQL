@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Custom Post Categories\"",
-    "keywords": ["PoP", "custompost-categories-wp"],
+    "keywords": ["PHP", "PoP", "custompost-categories-wp"],
     "homepage": "https://github.com/PoPCMSSchema/custompost-categories-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

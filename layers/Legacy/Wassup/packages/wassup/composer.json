@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/wassup",
     "type": "library",
     "description": "PoP site => Wassup",
-    "keywords": ["PoP", "wassup"],
+    "keywords": ["PHP", "PoP", "wassup"],
     "homepage": "https://github.com/PoPSites-Wassup/wassup",
     "license": "GPL-2.0-or-later",
     "authors": [

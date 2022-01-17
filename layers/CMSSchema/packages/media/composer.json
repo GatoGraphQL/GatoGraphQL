@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/media",
     "type": "library",
     "description": "Adds support for media",
-    "keywords": ["PoP", "media"],
+    "keywords": ["PHP", "PoP", "media"],
     "homepage": "https://github.com/PoPCMSSchema/media",
     "license": "GPL-2.0-or-later",
     "authors": [

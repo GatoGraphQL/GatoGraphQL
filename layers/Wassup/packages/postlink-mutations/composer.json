@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Adds support for post link mutations",
-    "keywords": ["PoP", "postlink-mutations"],
+    "keywords": ["PHP", "PoP", "postlink-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/postlink-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

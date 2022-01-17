@@ -2,7 +2,7 @@
     "name": "getpop/migrate-component-model-configuration",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/getpop/component-model-configuration. Target package description: Adds the configuration level to the component hierarchy, through which the data API can be extended into an application",
-    "keywords": ["PoP", "component-model-configuration"],
+    "keywords": ["PHP", "PoP", "component-model-configuration"],
     "homepage": "https://github.com/getpop/migrate-component-model-configuration",
     "license": "GPL-2.0-or-later",
     "authors": [

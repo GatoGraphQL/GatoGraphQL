@@ -2,7 +2,7 @@
     "name": "graphql-api/graphql-api-for-wp",
     "type": "wordpress-plugin",
     "description": "GraphQL API for WordPress",
-    "keywords": ["PoP", "WordPress", "GraphQL", "API"],
+    "keywords": ["PHP", "PoP", "WordPress", "GraphQL", "API"],
     "homepage": "https://github.com/GraphQLAPI/graphql-api-for-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Create a static version of the site",
-    "keywords": ["PoP", "static-site-generator"],
+    "keywords": ["PHP", "PoP", "static-site-generator"],
     "homepage": "https://github.com/getpop/static-site-generator",
     "license": "GPL-2.0-or-later",
     "authors": [

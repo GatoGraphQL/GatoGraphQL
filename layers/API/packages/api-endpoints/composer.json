@@ -2,7 +2,7 @@
     "name": "getpop/api-endpoints",
     "type": "library",
     "description": "Utilities for implementing API endpoints",
-    "keywords": ["PoP", "api-endpoints"],
+    "keywords": ["PHP", "PoP", "api-endpoints"],
     "homepage": "https://github.com/getpop/api-endpoints",
     "license": "GPL-2.0-or-later",
     "authors": [
