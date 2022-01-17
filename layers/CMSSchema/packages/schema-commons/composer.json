@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/schema-commons",
+    "name": "pop-cms-schema/schema-commons",
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\SchemaCommons\\": "src"
+            "PoPCMSSchema\\SchemaCommons\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\SchemaCommons\\": "tests"
+            "PoPCMSSchema\\SchemaCommons\\": "tests"
         }
     },
     "scripts": {

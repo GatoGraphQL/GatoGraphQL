@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\Engine\Component::class,
-            \PoPSchema\SchemaCommons\Component::class,
+            \PoPCMSSchema\SchemaCommons\Component::class,
         ];
     }
 

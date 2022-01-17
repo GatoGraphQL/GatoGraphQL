@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/schema-commons": "^0.9"
+        "pop-schema/schema-commons-wp": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",

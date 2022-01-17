@@ -17,7 +17,7 @@
     "require": {
         "php": "^8.0",
         "getpop/engine": "^0.9",
-        "pop-schema/schema-commons": "^0.9"
+        "pop-cms-schema/schema-commons": "^0.9"
     },
     "require-dev": {
         "pop-schema/customposts": "^0.9",

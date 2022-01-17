@@ -209,6 +209,7 @@
         "getpop/modulerouting": "^0.9",
         "getpop/query-parsing": "^0.9",
         "getpop/root": "^0.9",
+        "pop-cms-schema/schema-commons": "^0.9",
         "pop-schema/schema-commons": "^0.9"
     },
     "minimum-stability": "dev",
