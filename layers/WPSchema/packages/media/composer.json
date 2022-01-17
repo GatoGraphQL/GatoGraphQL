@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/media-wp": "^0.9",
+        "pop-cms-schema/media-wp": "^0.9",
         "pop-wp-schema/customposts": "^0.9",
         "pop-wp-schema/schema-commons": "^0.9"
     },

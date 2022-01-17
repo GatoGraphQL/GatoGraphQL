@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/highlights-wp",
+    "name": "pop-cms-schema/highlights-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Highlights\"",
     "keywords": ["PoP", "highlights-wp"],
@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/highlights": "^0.9",
-        "pop-schema/customposts-wp": "^0.9"
+        "pop-cms-schema/highlights": "^0.9",
+        "pop-cms-schema/customposts-wp": "^0.9"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",

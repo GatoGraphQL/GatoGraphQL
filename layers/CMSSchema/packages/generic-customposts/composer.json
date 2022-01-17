@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/generic-customposts",
+    "name": "pop-cms-schema/generic-customposts",
     "autoload": {
         "psr-4": {
             "PoPSchema\\GenericCustomPosts\\": "src"

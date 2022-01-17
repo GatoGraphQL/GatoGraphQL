@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/user-avatars-wp",
+    "name": "pop-cms-schema/user-avatars-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"User Avatars\"",
     "keywords": ["PoP", "user-avatars-wp"],
@@ -14,19 +14,19 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/user-avatars": "^0.9",
-        "pop-schema/users-wp": "^0.9"
+        "pop-cms-schema/user-avatars": "^0.9",
+        "pop-cms-schema/users-wp": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
         "phpunit/phpunit": ">=9.3",
-        "pop-schema/user-state-wp": "^0.9",
+        "pop-cms-schema/user-state-wp": "^0.9",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.0",
         "szepeviktor/phpstan-wordpress": "^1.0"
     },
     "suggest": {
-        "pop-schema/user-state-wp": "Integration with User State"
+        "pop-cms-schema/user-state-wp": "Integration with User State"
     },
     "autoload": {
         "psr-4": {

@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/queriedobject-wp",
+    "name": "pop-cms-schema/queriedobject-wp",
     "autoload": {
         "psr-4": {
             "PoPSchema\\QueriedObjectWP\\": "src"

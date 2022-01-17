@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/taxonomymeta-wp": "^0.9",
+        "pop-cms-schema/taxonomymeta-wp": "^0.9",
         "pop-wp-schema/meta": "^0.9"
     },
     "require-dev": {

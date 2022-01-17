@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/user-state-access-control",
+    "name": "pop-cms-schema/user-state-access-control",
     "type": "library",
     "description": "Access Control based on the user being logged-in or not",
     "keywords": ["PoP", "UserStateAccessControl"],
@@ -15,7 +15,7 @@
     "require": {
         "php": "^8.0",
         "getpop/access-control": "^0.9",
-        "pop-schema/user-state": "^0.9"
+        "pop-cms-schema/user-state": "^0.9"
     },
     "require-dev": {
         "getpop/cache-control": "^0.9",

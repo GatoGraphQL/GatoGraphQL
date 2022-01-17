@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/everythingelse",
+    "name": "pop-cms-schema/everythingelse",
     "type": "library",
     "description": "All code from a PoP application that has been migrated but not to its rightful and final destination",
     "keywords": ["PoP", "everythingelse"],
@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/tags": "^0.9",
-        "pop-schema/migrate-everythingelse": "^0.9"
+        "pop-cms-schema/tags": "^0.9",
+        "pop-cms-schema/migrate-everythingelse": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.76",

@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/meta",
+    "name": "pop-cms-schema/meta",
     "autoload": {
         "psr-4": {
             "PoPSchema\\Meta\\": "src"

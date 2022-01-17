@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/comments",
+    "name": "pop-cms-schema/comments",
     "type": "library",
     "description": "Adds support for comments",
     "keywords": ["PoP", "comments"],
@@ -14,17 +14,17 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/customposts": "^0.9"
+        "pop-cms-schema/customposts": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": ">=9.3",
-        "pop-schema/users": "^0.9",
+        "pop-cms-schema/users": "^0.9",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.0"
     },
     "suggest": {
-        "pop-schema/users": "Integration with Users"
+        "pop-cms-schema/users": "Integration with Users"
     },
     "autoload": {
         "psr-4": {

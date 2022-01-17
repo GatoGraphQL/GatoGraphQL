@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/user-roles-access-control",
+    "name": "pop-cms-schema/user-roles-access-control",
     "type": "library",
     "description": "Access Control based on the user having a given role/capability",
     "keywords": ["PoP", "UserRolesAccessControl"],
@@ -14,8 +14,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/user-roles": "^0.9",
-        "pop-schema/user-state-access-control": "^0.9"
+        "pop-cms-schema/user-roles": "^0.9",
+        "pop-cms-schema/user-state-access-control": "^0.9"
     },
     "require-dev": {
         "getpop/cache-control": "^0.9",

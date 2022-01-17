@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/post-categories",
+    "name": "pop-cms-schema/post-categories",
     "type": "library",
     "description": "Adds support for post categories",
     "keywords": ["PoP", "post-categories"],
@@ -14,8 +14,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/categories": "^0.9",
-        "pop-schema/posts": "^0.9"
+        "pop-cms-schema/categories": "^0.9",
+        "pop-cms-schema/posts": "^0.9"
     },
     "require-dev": {
         "getpop/api": "^0.9",

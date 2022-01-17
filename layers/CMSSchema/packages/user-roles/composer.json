@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/user-roles",
+    "name": "pop-cms-schema/user-roles",
     "autoload": {
         "psr-4": {
             "PoPSchema\\UserRoles\\": "src"

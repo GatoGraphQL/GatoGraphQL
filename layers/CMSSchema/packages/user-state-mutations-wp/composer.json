@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/user-state-mutations-wp",
+    "name": "pop-cms-schema/user-state-mutations-wp",
     "autoload": {
         "psr-4": {
             "PoPSchema\\UserStateMutationsWP\\": "src"

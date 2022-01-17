@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/custompost-mutations",
+    "name": "pop-cms-schema/custompost-mutations",
     "autoload": {
         "psr-4": {
             "PoPSchema\\CustomPostMutations\\": "src"

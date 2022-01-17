@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/comments-wp",
+    "name": "pop-cms-schema/comments-wp",
     "autoload": {
         "psr-4": {
             "PoPSchema\\CommentsWP\\": "src"

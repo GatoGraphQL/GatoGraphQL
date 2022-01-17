@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/post-tags",
+    "name": "pop-cms-schema/post-tags",
     "type": "library",
     "description": "Adds support for post tags",
     "keywords": ["PoP", "post-tags"],
@@ -14,8 +14,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/posts": "^0.9",
-        "pop-schema/tags": "^0.9"
+        "pop-cms-schema/posts": "^0.9",
+        "pop-cms-schema/tags": "^0.9"
     },
     "require-dev": {
         "getpop/api": "^0.9",

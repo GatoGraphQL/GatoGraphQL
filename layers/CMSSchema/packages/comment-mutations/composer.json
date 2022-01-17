@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/comment-mutations",
+    "name": "pop-cms-schema/comment-mutations",
     "autoload": {
         "psr-4": {
             "PoPSchema\\CommentMutations\\": "src"

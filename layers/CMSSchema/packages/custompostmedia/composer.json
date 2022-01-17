@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/custompostmedia",
+    "name": "pop-cms-schema/custompostmedia",
     "autoload": {
         "psr-4": {
             "PoPSchema\\CustomPostMedia\\": "src"

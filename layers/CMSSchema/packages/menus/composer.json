@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/menus",
+    "name": "pop-cms-schema/menus",
     "autoload": {
         "psr-4": {
             "PoPSchema\\Menus\\": "src"

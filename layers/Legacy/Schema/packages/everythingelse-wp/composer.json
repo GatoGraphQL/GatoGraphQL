@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/everythingelse-wp",
+    "name": "pop-cms-schema/everythingelse-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"EverythingElse\"",
     "keywords": ["PoP", "everythingelse-wp"],
@@ -16,11 +16,11 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/everythingelse": "^0.9",
+        "pop-cms-schema/everythingelse": "^0.9",
         "getpop/engine-wp": "^0.9"
     },
     "require-dev": {
-        "pop-schema/customposts": "^0.9",
+        "pop-cms-schema/customposts": "^0.9",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.11",
         "squizlabs/php_codesniffer": "^3.0",
@@ -28,7 +28,7 @@
         "johnpbloch/wordpress": ">=5.5"
     },
     "suggest": {
-        "pop-schema/customposts": "Integrates well with Custom Posts"
+        "pop-cms-schema/customposts": "Integrates well with Custom Posts"
     },
     "autoload": {
         "psr-4": {

@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/post-categories-wp",
+    "name": "pop-cms-schema/post-categories-wp",
     "autoload": {
         "psr-4": {
             "PoPSchema\\PostCategoriesWP\\": "src"

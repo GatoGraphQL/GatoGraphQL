@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/post-tag-mutations",
+    "name": "pop-cms-schema/post-tag-mutations",
     "autoload": {
         "psr-4": {
             "PoPSchema\\PostTagMutations\\": "src"

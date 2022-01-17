@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/settings",
+    "name": "pop-cms-schema/settings",
     "autoload": {
         "psr-4": {
             "PoPSchema\\Settings\\": "src"

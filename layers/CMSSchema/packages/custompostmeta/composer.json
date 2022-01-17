@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/custompostmeta",
+    "name": "pop-cms-schema/custompostmeta",
     "autoload": {
         "psr-4": {
             "PoPSchema\\CustomPostMeta\\": "src"

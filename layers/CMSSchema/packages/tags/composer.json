@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/tags",
+    "name": "pop-cms-schema/tags",
     "autoload": {
         "psr-4": {
             "PoPSchema\\Tags\\": "src"

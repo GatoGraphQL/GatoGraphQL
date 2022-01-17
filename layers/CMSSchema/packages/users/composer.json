@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/users",
+    "name": "pop-cms-schema/users",
     "type": "library",
     "description": "Adds support for users",
     "keywords": ["PoP", "users"],
@@ -14,19 +14,19 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/queriedobject": "^0.9"
+        "pop-cms-schema/queriedobject": "^0.9"
     },
     "require-dev": {
         "getpop/api": "^0.9",
         "getpop/api-rest": "^0.9",
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": ">=9.3",
-        "pop-schema/customposts": "^0.9",
+        "pop-cms-schema/customposts": "^0.9",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.0"
     },
     "suggest": {
-        "pop-schema/customposts": "Integrates well with Custom Posts",
+        "pop-cms-schema/customposts": "Integrates well with Custom Posts",
         "getpop/api": "Integrates well with API",
         "getpop/api-rest": "Integrates well with REST API"
     },

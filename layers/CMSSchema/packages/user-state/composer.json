@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/user-state",
+    "name": "pop-cms-schema/user-state",
     "autoload": {
         "psr-4": {
             "PoPSchema\\UserState\\": "src"

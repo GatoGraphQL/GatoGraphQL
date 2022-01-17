@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/taxonomymeta-wp",
+    "name": "pop-cms-schema/taxonomymeta-wp",
     "autoload": {
         "psr-4": {
             "PoPSchema\\TaxonomyMetaWP\\": "src"

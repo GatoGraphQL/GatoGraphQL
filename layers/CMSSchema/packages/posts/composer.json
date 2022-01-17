@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/posts",
+    "name": "pop-cms-schema/posts",
     "type": "library",
     "description": "Adds support for posts",
     "keywords": ["PoP", "posts"],
@@ -14,21 +14,21 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/customposts": "^0.9"
+        "pop-cms-schema/customposts": "^0.9"
     },
     "require-dev": {
         "getpop/api": "^0.9",
         "getpop/api-rest": "^0.9",
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": ">=9.3",
-        "pop-schema/users": "^0.9",
+        "pop-cms-schema/users": "^0.9",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.0"
     },
     "suggest": {
         "getpop/api": "Integrates well with API",
         "getpop/api-rest": "Integrates well with REST API",
-        "pop-schema/users": "Integrates well with Users"
+        "pop-cms-schema/users": "Integrates well with Users"
     },
     "autoload": {
         "psr-4": {

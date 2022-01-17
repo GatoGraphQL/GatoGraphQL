@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/pages-wp",
+    "name": "pop-cms-schema/pages-wp",
     "autoload": {
         "psr-4": {
             "PoPSchema\\PagesWP\\": "src"

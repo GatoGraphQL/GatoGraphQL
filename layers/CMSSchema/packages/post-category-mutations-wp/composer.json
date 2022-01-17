@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/post-category-mutations-wp",
+    "name": "pop-cms-schema/post-category-mutations-wp",
     "autoload": {
         "psr-4": {
             "PoPSchema\\PostCategoryMutationsWP\\": "src"

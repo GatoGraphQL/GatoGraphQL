@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/users-wp",
+    "name": "pop-cms-schema/users-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Users\"",
     "keywords": ["PoP", "users-wp"],
@@ -14,19 +14,19 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/queriedobject-wp": "^0.9",
-        "pop-schema/users": "^0.9"
+        "pop-cms-schema/queriedobject-wp": "^0.9",
+        "pop-cms-schema/users": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
         "phpunit/phpunit": ">=9.3",
-        "pop-schema/customposts-wp": "^0.9",
+        "pop-cms-schema/customposts-wp": "^0.9",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.0",
         "szepeviktor/phpstan-wordpress": "^1.0"
     },
     "suggest": {
-        "pop-schema/customposts-wp": "Integrates well with Custom Posts for WordPress"
+        "pop-cms-schema/customposts-wp": "Integrates well with Custom Posts for WordPress"
     },
     "autoload": {
         "psr-4": {

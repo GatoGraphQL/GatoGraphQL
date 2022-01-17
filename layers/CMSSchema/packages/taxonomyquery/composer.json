@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/taxonomyquery",
+    "name": "pop-cms-schema/taxonomyquery",
     "autoload": {
         "psr-4": {
             "PoPSchema\\TaxonomyQuery\\": "src"

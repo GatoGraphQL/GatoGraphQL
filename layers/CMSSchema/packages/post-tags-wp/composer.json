@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/post-tags-wp",
+    "name": "pop-cms-schema/post-tags-wp",
     "autoload": {
         "psr-4": {
             "PoPSchema\\PostTagsWP\\": "src"

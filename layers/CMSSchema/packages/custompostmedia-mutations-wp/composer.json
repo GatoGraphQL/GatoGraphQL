@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/custompostmedia-mutations-wp",
+    "name": "pop-cms-schema/custompostmedia-mutations-wp",
     "autoload": {
         "psr-4": {
             "PoPSchema\\CustomPostMediaMutationsWP\\": "src"

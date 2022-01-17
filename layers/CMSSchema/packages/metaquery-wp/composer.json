@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/metaquery-wp",
+    "name": "pop-cms-schema/metaquery-wp",
     "autoload": {
         "psr-4": {
             "PoPSchema\\MetaQueryWP\\": "src"

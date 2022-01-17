@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/user-avatars",
+    "name": "pop-cms-schema/user-avatars",
     "autoload": {
         "psr-4": {
             "PoPSchema\\UserAvatars\\": "src"

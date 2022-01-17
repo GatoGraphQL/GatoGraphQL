@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/schema-commons-wp",
+    "name": "pop-cms-schema/schema-commons-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Schema Commons\"",
     "keywords": ["PoP", "schema-commons-wp"],
@@ -20,7 +20,7 @@
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
         "phpunit/phpunit": ">=9.3",
-        "pop-schema/user-state-wp": "^0.9",
+        "pop-cms-schema/user-state-wp": "^0.9",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.0",
         "szepeviktor/phpstan-wordpress": "^1.0"

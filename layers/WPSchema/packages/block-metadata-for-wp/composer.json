@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/block-metadata-for-wp",
+    "name": "pop-cms-schema/block-metadata-for-wp",
     "type": "library",
     "description": "Integration with WordPress plugin \"Block Metadata\"",
     "keywords": ["PoP", "block-metadata-for-wp"],
@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/posts-wp": "^0.9"
+        "pop-cms-schema/posts-wp": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",

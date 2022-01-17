@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/usermeta",
+    "name": "pop-cms-schema/usermeta",
     "autoload": {
         "psr-4": {
             "PoPSchema\\UserMeta\\": "src"
