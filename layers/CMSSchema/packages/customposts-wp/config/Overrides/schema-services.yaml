@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver:
-        class: \PoPSchema\CustomPostsWP\Overrides\TypeResolvers\UnionType\CustomPostUnionTypeResolver
+    PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver:
+        class: \PoPCMSSchema\CustomPostsWP\Overrides\TypeResolvers\UnionType\CustomPostUnionTypeResolver

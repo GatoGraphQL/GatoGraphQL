@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Posts\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\Posts\FieldResolvers\ObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
@@ -10,11 +10,11 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoPSchema\CustomPosts\Component;
-use PoPSchema\CustomPosts\ComponentConfiguration;
-use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
-use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
-use PoPSchema\Posts\TypeResolvers\InputObjectType\PostByInputObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\Component;
+use PoPCMSSchema\CustomPosts\ComponentConfiguration;
+use PoPCMSSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
+use PoPCMSSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\PostByInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 

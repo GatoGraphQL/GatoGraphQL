@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\MetaQueryWP;
+namespace PoPCMSSchema\MetaQueryWP;
 
 use PoP\Root\AbstractComponentTest;
 

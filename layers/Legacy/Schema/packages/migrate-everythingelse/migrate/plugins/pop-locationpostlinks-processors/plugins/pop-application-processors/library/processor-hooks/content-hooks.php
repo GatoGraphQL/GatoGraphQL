@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
-use PoPSchema\Posts\Facades\PostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPCMSSchema\Posts\Facades\PostTypeAPIFacade;
 
 class PoPTheme_LocationPostLinks_ContentHooks
 {

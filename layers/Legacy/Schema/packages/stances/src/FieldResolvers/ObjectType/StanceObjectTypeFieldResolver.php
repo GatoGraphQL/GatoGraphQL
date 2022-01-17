@@ -12,13 +12,13 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\CustomPostMeta\Utils;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPCMSSchema\CustomPostMeta\Utils;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
-use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
+use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

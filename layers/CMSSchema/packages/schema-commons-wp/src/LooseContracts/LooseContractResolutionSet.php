@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommonsWP\LooseContracts;
+namespace PoPCMSSchema\SchemaCommonsWP\LooseContracts;
 
 use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 

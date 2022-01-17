@@ -1,6 +1,6 @@
 <?php
 
-use PoPSchema\Pages\Facades\PageTypeAPIFacade;
+use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
 
 \PoP\Root\App::addAction(
     'init', // Must migrate this WP hook to one from PoP (which executes before AFTER_BOOT_APPLICATION

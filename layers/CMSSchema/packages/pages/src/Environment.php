@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Pages;
+namespace PoPCMSSchema\Pages;
 
 class Environment
 {

@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface:
-        class: \PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI
+    PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface:
+        class: \PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI

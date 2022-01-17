@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\Hooks;
+namespace PoPCMSSchema\Comments\Hooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModuleProcessors\Constants;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\Comments\Constants\Params;
+use PoPCMSSchema\Comments\Constants\Params;
 
 class WhitelistParamHookSet extends AbstractHookSet
 {

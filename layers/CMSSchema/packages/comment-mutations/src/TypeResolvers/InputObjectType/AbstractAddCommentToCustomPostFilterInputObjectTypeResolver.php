@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\CommentMutations\Component;
-use PoPSchema\CommentMutations\ComponentConfiguration;
-use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\CommentMutations\Component;
+use PoPCMSSchema\CommentMutations\ComponentConfiguration;
+use PoPCMSSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 

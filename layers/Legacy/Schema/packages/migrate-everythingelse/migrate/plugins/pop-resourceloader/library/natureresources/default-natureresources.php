@@ -1,17 +1,17 @@
 <?php
 
 use PoP\Root\Routing\RequestNature;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
-use PoPSchema\Pages\Routing\RequestNature as PageRequestNature;
-use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Pages\Routing\RequestNature as PageRequestNature;
+use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
-use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
 define('POP_RESOURCELOADERCONFIGURATION_HOME_FEED', 'feed');
@@ -207,7 +207,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // Then, because these posts have the same path, their configuration must be merged together
             $paths = array();
             foreach ($ids as $id) {
-                $post_path = \PoPSchema\Posts\Engine_Utils::getCustomPostPath($id, true);
+                $post_path = \PoPCMSSchema\Posts\Engine_Utils::getCustomPostPath($id, true);
                 $paths[$post_path] = $paths[$post_path] ?? array();
                 $paths[$post_path][] = $id;
             }

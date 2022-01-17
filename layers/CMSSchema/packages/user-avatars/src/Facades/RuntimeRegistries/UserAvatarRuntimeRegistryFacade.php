@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserAvatars\Facades\RuntimeRegistries;
+namespace PoPCMSSchema\UserAvatars\Facades\RuntimeRegistries;
 
 use PoP\Root\App;
-use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
+use PoPCMSSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 
 class UserAvatarRuntimeRegistryFacade
 {

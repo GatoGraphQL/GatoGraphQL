@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UsersWP;
+namespace PoPCMSSchema\UsersWP;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\CustomPosts\Component as CustomPostsComponent;
+use PoPCMSSchema\CustomPosts\Component as CustomPostsComponent;
 
 /**
  * Initialize component
@@ -20,8 +20,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\Users\Component::class,
-            \PoPSchema\QueriedObjectWP\Component::class,
+            \PoPCMSSchema\Users\Component::class,
+            \PoPCMSSchema\QueriedObjectWP\Component::class,
         ];
     }
 
@@ -31,7 +31,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPostsWP\Component::class,
+            \PoPCMSSchema\CustomPostsWP\Component::class,
         ];
     }
 

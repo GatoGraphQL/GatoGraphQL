@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserAvatars;
+namespace PoPCMSSchema\UserAvatars;
 
 use PoP\Root\Component\AbstractComponentConfiguration;
 use PoP\Root\Component\EnvironmentValueHelpers;

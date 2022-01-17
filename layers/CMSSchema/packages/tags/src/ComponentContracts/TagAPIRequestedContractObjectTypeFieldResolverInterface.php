@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Tags\ComponentContracts;
+namespace PoPCMSSchema\Tags\ComponentContracts;
 
-use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
-use PoPSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
+use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 
 interface TagAPIRequestedContractObjectTypeFieldResolverInterface
 {

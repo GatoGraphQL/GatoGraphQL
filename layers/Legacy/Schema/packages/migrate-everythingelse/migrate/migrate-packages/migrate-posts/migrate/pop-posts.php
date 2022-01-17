@@ -6,7 +6,7 @@ Description: The foundation for a PoP Posts
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoPSchema\Posts;
+namespace PoPCMSSchema\Posts;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

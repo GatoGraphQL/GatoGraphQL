@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserState;
+namespace PoPCMSSchema\UserState;
 
 class Environment
 {

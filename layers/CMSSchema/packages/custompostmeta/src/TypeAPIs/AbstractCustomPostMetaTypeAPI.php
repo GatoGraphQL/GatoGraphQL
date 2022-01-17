@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMeta\TypeAPIs;
+namespace PoPCMSSchema\CustomPostMeta\TypeAPIs;
 
 use PoP\Root\App;
 use InvalidArgumentException;
-use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
-use PoPSchema\CustomPostMeta\Component;
-use PoPSchema\CustomPostMeta\ComponentConfiguration;
+use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
+use PoPCMSSchema\CustomPostMeta\Component;
+use PoPCMSSchema\CustomPostMeta\ComponentConfiguration;
 
 abstract class AbstractCustomPostMetaTypeAPI extends AbstractMetaTypeAPI implements CustomPostMetaTypeAPIInterface
 {

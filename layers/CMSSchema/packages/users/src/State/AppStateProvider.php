@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\State;
+namespace PoPCMSSchema\Users\State;
 
 use PoP\Root\State\AbstractAppStateProvider;
-use PoPSchema\Users\Routing\RequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature;
 
 class AppStateProvider extends AbstractAppStateProvider
 {

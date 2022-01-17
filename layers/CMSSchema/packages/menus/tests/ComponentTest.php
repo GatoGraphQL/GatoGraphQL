@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\Menus;
+namespace PoPCMSSchema\Menus;
 
 use PoP\Root\AbstractComponentTest;
 

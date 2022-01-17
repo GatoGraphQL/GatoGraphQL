@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType;
 
 class CustomPostByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeResolver
 {

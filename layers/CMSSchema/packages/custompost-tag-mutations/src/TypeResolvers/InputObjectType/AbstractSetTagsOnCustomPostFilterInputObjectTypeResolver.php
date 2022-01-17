@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostTagMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\TaxonomyMeta;
+namespace PoPCMSSchema\TaxonomyMeta;
 
 use PoP\Root\AbstractComponentTest;
 

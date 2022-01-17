@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\Users;
+namespace PoPCMSSchema\Users;
 
 use PoP\Root\AbstractComponentTest;
 

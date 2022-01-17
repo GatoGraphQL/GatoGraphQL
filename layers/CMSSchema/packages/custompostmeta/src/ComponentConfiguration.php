@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMeta;
+namespace PoPCMSSchema\CustomPostMeta;
 
 use PoP\Root\Component\AbstractComponentConfiguration;
 use PoP\Root\Component\EnvironmentValueHelpers;

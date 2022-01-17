@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractSetFeaturedImageOnCustomPostFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {

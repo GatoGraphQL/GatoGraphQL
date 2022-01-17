@@ -2,10 +2,10 @@
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
-use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
+use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {

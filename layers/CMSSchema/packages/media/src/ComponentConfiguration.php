@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media;
+namespace PoPCMSSchema\Media;
 
 use PoP\Root\Component\AbstractComponentConfiguration;
 use PoP\Root\Component\EnvironmentValueHelpers;

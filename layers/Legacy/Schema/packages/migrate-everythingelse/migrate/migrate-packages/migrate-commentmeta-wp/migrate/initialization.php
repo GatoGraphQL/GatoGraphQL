@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\CommentMeta\WP;
+namespace PoPCMSSchema\CommentMeta\WP;
 
 class Initialization
 {

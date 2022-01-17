@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\QueriedObject\State;
+namespace PoPCMSSchema\QueriedObject\State;
 
 use PoP\Root\App;
-use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
+use PoPCMSSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider

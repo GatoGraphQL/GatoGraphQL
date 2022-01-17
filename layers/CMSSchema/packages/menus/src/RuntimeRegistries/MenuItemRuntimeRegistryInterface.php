@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\RuntimeRegistries;
+namespace PoPCMSSchema\Menus\RuntimeRegistries;
 
-use PoPSchema\Menus\ObjectModels\MenuItem;
+use PoPCMSSchema\Menus\ObjectModels\MenuItem;
 
 interface MenuItemRuntimeRegistryInterface
 {

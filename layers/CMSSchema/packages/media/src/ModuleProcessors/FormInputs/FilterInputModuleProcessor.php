@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\ModuleProcessors\FormInputs;
+namespace PoPCMSSchema\Media\ModuleProcessors\FormInputs;
 
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
@@ -10,7 +10,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProces
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\Media\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Media\FilterInputProcessors\FilterInputProcessor;
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {

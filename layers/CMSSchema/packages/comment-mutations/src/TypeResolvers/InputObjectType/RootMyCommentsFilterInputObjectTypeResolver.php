@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType;
 
-use PoPSchema\Comments\TypeResolvers\InputObjectType\AbstractCommentsFilterInputObjectTypeResolver;
+use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\AbstractCommentsFilterInputObjectTypeResolver;
 
 class RootMyCommentsFilterInputObjectTypeResolver extends AbstractCommentsFilterInputObjectTypeResolver
 {

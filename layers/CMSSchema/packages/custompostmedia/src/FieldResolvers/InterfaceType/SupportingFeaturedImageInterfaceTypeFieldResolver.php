@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMedia\FieldResolvers\InterfaceType;
+namespace PoPCMSSchema\CustomPostMedia\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPSchema\CustomPostMedia\TypeResolvers\InterfaceType\SupportingFeaturedImageInterfaceTypeResolver;
-use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
+use PoPCMSSchema\CustomPostMedia\TypeResolvers\InterfaceType\SupportingFeaturedImageInterfaceTypeResolver;
+use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 
 class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {

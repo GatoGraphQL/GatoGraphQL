@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\UserMeta\WP;
+namespace PoPCMSSchema\UserMeta\WP;
 
 class Initialization
 {

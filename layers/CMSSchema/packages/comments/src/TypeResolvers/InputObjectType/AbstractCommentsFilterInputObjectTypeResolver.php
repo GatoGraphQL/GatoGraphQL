@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Comments\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\Comments\Component;
-use PoPSchema\Comments\ComponentConfiguration;
-use PoPSchema\Comments\Constants\CommentStatus;
-use PoPSchema\Comments\Constants\CommentTypes;
-use PoPSchema\Comments\FilterInputProcessors\FilterInputProcessor;
-use PoPSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
-use PoPSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
-use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor as CustomPostsFilterInputProcessor;
-use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
+use PoPCMSSchema\Comments\Component;
+use PoPCMSSchema\Comments\ComponentConfiguration;
+use PoPCMSSchema\Comments\Constants\CommentStatus;
+use PoPCMSSchema\Comments\Constants\CommentTypes;
+use PoPCMSSchema\Comments\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
+use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
+use PoPCMSSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor as CustomPostsFilterInputProcessor;
+use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;

@@ -4,11 +4,11 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface:
-        class: \PoPSchema\PagesWP\TypeAPIs\PageTypeAPI
+    PoPCMSSchema\Pages\TypeAPIs\PageTypeAPIInterface:
+        class: \PoPCMSSchema\PagesWP\TypeAPIs\PageTypeAPI
 
-    PoPSchema\PagesWP\LooseContracts\:
+    PoPCMSSchema\PagesWP\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPSchema\PagesWP\Hooks\:
+    PoPCMSSchema\PagesWP\Hooks\:
         resource: '../src/Hooks/*'

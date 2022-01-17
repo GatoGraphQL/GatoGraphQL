@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\QueriedObjectWP;
+namespace PoPCMSSchema\QueriedObjectWP;
 
 use PoP\Root\AbstractComponentTest;
 

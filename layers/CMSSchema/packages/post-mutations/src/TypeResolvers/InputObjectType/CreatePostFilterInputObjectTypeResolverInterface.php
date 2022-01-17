@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType;
 
-use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostFilterInputObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostFilterInputObjectTypeResolverInterface;
 
 interface CreatePostFilterInputObjectTypeResolverInterface extends CreateCustomPostFilterInputObjectTypeResolverInterface
 {

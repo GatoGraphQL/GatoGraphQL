@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\GenericCustomPosts\TypeResolvers\EnumType;
+namespace PoPCMSSchema\GenericCustomPosts\TypeResolvers\EnumType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPSchema\GenericCustomPosts\Component;
-use PoPSchema\GenericCustomPosts\ComponentConfiguration;
+use PoPCMSSchema\GenericCustomPosts\Component;
+use PoPCMSSchema\GenericCustomPosts\ComponentConfiguration;
 
 class GenericCustomPostEnumTypeResolver extends AbstractEnumTypeResolver
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagMutations\Facades;
+namespace PoPCMSSchema\PostTagMutations\Facades;
 
 use PoP\Root\App;
-use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
+use PoPCMSSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
 
 class PostTagTypeMutationAPIFacade
 {

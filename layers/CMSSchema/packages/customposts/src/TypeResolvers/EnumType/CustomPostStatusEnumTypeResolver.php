@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\TypeResolvers\EnumType;
+namespace PoPCMSSchema\CustomPosts\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPSchema\CustomPosts\Enums\CustomPostStatus;
+use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 
 class CustomPostStatusEnumTypeResolver extends AbstractEnumTypeResolver
 {

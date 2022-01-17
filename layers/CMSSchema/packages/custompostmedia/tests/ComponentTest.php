@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\CustomPostMedia;
+namespace PoPCMSSchema\CustomPostMedia;
 
 use PoP\Root\AbstractComponentTest;
 

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutations\MutationResolvers;
+namespace PoPCMSSchema\CommentMutations\MutationResolvers;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoPSchema\CommentMutations\Component;
-use PoPSchema\CommentMutations\ComponentConfiguration;
-use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
-use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
+use PoPCMSSchema\CommentMutations\Component;
+use PoPCMSSchema\CommentMutations\ComponentConfiguration;
+use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
+use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 /**
  * Add a comment to a custom post. The user may be logged-in or not

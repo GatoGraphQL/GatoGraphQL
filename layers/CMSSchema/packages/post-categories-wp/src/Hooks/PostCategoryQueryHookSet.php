@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategoriesWP\Hooks;
+namespace PoPCMSSchema\PostCategoriesWP\Hooks;
 
-use PoPSchema\CustomPostCategoriesWP\Hooks\AbstractCustomPostCategoryQueryHookSet;
+use PoPCMSSchema\CustomPostCategoriesWP\Hooks\AbstractCustomPostCategoryQueryHookSet;
 
 class PostCategoryQueryHookSet extends AbstractCustomPostCategoryQueryHookSet
 {

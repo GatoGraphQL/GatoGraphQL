@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMutations\TypeAPIs;
+namespace PoPCMSSchema\CustomPostMutations\TypeAPIs;
 
 use PoP\ComponentModel\Error\Error;
 

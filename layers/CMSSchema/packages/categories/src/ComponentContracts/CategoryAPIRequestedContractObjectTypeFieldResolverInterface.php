@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Categories\ComponentContracts;
+namespace PoPCMSSchema\Categories\ComponentContracts;
 
-use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
+use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 
 interface CategoryAPIRequestedContractObjectTypeFieldResolverInterface
 {

@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\TagsWP\LooseContracts\:
+    PoPCMSSchema\TagsWP\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPSchema\TagsWP\Hooks\:
+    PoPCMSSchema\TagsWP\Hooks\:
         resource: '../src/Hooks/*'

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\Menus\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType\MenuTypeDataLoader;
-use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
+use PoPCMSSchema\Menus\RelationalTypeDataLoaders\ObjectType\MenuTypeDataLoader;
+use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 
 class MenuObjectTypeResolver extends AbstractObjectTypeResolver
 {

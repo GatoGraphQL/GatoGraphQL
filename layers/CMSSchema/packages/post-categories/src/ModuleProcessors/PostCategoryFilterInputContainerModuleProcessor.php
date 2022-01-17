@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\ModuleProcessors;
+namespace PoPCMSSchema\PostCategories\ModuleProcessors;
 
-use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
+use PoPCMSSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
 
 class PostCategoryFilterInputContainerModuleProcessor extends CategoryFilterInputContainerModuleProcessor
 {

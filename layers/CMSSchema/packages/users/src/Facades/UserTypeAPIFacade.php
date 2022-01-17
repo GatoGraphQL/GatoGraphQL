@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\Facades;
+namespace PoPCMSSchema\Users\Facades;
 
 use PoP\Root\App;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class UserTypeAPIFacade
 {

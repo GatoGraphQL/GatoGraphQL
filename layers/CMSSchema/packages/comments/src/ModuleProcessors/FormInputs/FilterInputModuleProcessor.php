@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\ModuleProcessors\FormInputs;
+namespace PoPCMSSchema\Comments\ModuleProcessors\FormInputs;
 
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
@@ -10,11 +10,11 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProces
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPSchema\Comments\Constants\CommentStatus;
-use PoPSchema\Comments\Constants\CommentTypes;
-use PoPSchema\Comments\FilterInputProcessors\FilterInputProcessor;
-use PoPSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
-use PoPSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
+use PoPCMSSchema\Comments\Constants\CommentStatus;
+use PoPCMSSchema\Comments\Constants\CommentTypes;
+use PoPCMSSchema\Comments\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
+use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {

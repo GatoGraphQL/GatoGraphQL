@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\PostLinkMutations\MutationResolvers;
 
-use PoPSchema\CustomPostMutations\MutationResolvers\CreateCustomPostMutationResolverTrait;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateCustomPostMutationResolverTrait;
 
 class CreatePostLinkMutationResolver extends AbstractCreateUpdatePostLinkMutationResolver
 {

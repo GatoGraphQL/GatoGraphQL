@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;

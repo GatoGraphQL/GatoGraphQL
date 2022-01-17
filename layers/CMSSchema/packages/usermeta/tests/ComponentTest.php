@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\UserMeta;
+namespace PoPCMSSchema\UserMeta;
 
 use PoP\Root\AbstractComponentTest;
 

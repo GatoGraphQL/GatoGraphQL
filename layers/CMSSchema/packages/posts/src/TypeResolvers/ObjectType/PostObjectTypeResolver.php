@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Posts\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\Posts\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
-use PoPSchema\Posts\RelationalTypeDataLoaders\ObjectType\PostTypeDataLoader;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
+use PoPCMSSchema\Posts\RelationalTypeDataLoaders\ObjectType\PostTypeDataLoader;
 
 class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {

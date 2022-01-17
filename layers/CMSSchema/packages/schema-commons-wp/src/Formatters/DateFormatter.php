@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommonsWP\Formatters;
+namespace PoPCMSSchema\SchemaCommonsWP\Formatters;
 
 use PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface;
 

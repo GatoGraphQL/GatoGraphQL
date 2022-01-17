@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserAvatars\Facades;
+namespace PoPCMSSchema\UserAvatars\Facades;
 
 use PoP\Root\App;
-use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
+use PoPCMSSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
 
 class UserAvatarTypeAPIFacade
 {

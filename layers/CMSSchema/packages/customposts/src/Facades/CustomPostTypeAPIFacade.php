@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\Facades;
+namespace PoPCMSSchema\CustomPosts\Facades;
 
 use PoP\Root\App;
-use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 
 class CustomPostTypeAPIFacade
 {

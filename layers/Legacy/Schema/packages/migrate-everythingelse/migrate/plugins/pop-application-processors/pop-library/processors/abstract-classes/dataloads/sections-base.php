@@ -3,7 +3,7 @@ use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {

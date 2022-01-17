@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 
 abstract class AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {

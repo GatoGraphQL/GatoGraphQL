@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\CommentsWP\ConditionalOnComponent\Users\Hooks\:
+    PoPCMSSchema\CommentsWP\ConditionalOnComponent\Users\Hooks\:
         resource: '../../../src/ConditionalOnComponent/Users/Hooks/*'

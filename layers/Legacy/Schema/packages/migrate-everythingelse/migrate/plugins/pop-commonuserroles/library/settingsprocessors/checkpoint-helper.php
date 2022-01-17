@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\UserState\CheckpointProcessors\UserStateCheckpointProcessor;
+use PoPCMSSchema\UserState\CheckpointProcessors\UserStateCheckpointProcessor;
 
 const POPCOMMONUSERROLES_CHECKPOINTCONFIGURATION_PROFILEORGANIZATION_DATAFROMSERVER = array(
     [UserStateCheckpointProcessor::class, UserStateCheckpointProcessor::USERLOGGEDIN],

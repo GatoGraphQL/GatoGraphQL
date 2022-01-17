@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\ObjectModels;
+namespace PoPCMSSchema\Menus\ObjectModels;
 
 /**
  * Make properties public so they can be accessed directly

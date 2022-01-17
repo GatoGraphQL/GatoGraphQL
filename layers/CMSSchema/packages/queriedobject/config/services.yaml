@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\QueriedObject\State\:
+    PoPCMSSchema\QueriedObject\State\:
         resource: '../src/State/*'

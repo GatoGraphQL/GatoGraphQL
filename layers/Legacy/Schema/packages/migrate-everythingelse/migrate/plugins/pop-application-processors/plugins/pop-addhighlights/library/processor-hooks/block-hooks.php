@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_ApplicationProcessors_AddHighlights_BlockHooks
 {

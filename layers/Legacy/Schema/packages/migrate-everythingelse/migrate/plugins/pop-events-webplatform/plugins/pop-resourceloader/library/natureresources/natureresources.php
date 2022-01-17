@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
-use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;

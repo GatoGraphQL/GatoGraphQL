@@ -6,7 +6,7 @@ Description: The foundation for a PoP Comment Meta
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoPSchema\CommentMeta;
+namespace PoPCMSSchema\CommentMeta;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

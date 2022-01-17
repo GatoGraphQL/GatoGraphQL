@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategoryMutations\Hooks;
+namespace PoPCMSSchema\PostCategoryMutations\Hooks;
 
-use PoPSchema\CustomPostCategoryMutations\Hooks\AbstractMutationResolverHookSet;
-use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
-use PoPSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface;
-use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
+use PoPCMSSchema\CustomPostCategoryMutations\Hooks\AbstractMutationResolverHookSet;
+use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
+use PoPCMSSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface;
+use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 
 class MutationResolverHookSet extends AbstractMutationResolverHookSet
 {

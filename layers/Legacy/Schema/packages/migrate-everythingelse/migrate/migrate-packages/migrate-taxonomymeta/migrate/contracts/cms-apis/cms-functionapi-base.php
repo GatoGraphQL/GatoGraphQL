@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\TaxonomyMeta;
+namespace PoPCMSSchema\TaxonomyMeta;
 
 abstract class FunctionAPI_Base implements FunctionAPI
 {

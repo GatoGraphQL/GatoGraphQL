@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Comments\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPSchema\Comments\Component;
-use PoPSchema\Comments\ComponentConfiguration;
+use PoPCMSSchema\Comments\Component;
+use PoPCMSSchema\Comments\ComponentConfiguration;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
 class CustomPostCommentPaginationInputObjectTypeResolver extends PaginationInputObjectTypeResolver

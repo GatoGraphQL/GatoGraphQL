@@ -4,7 +4,7 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader:
-        class: \PoPSchema\CustomPostsWP\Overrides\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader
+    PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader:
+        class: \PoPCMSSchema\CustomPostsWP\Overrides\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader
 
 

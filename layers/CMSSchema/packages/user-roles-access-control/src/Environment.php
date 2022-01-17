@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesAccessControl;
+namespace PoPCMSSchema\UserRolesAccessControl;
 
 class Environment
 {

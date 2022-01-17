@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Media\ModuleProcessors\:
+    PoPCMSSchema\Media\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
-    PoPSchema\Media\FilterInputProcessors\:
+    PoPCMSSchema\Media\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'

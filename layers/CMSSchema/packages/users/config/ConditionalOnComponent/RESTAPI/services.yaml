@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Users\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\:
+    PoPCMSSchema\Users\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\:
         resource: '../../../src/ConditionalOnComponent/RESTAPI/RouteModuleProcessors/*'

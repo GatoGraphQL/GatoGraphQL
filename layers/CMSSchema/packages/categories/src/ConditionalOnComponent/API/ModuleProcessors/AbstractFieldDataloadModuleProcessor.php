@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Categories\ConditionalOnComponent\API\ModuleProcessors;
+namespace PoPCMSSchema\Categories\ConditionalOnComponent\API\ModuleProcessors;
 
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
-use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
-use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoPCMSSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
+use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media;
+namespace PoPCMSSchema\Media;
 
 class Environment
 {

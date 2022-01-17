@@ -10,7 +10,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\UserAccount\FunctionAPIFactory;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
 
 class ResetLostPasswordMutationResolver extends AbstractMutationResolver

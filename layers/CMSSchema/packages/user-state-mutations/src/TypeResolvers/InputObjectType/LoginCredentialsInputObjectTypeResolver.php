@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\UserStateMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 
 class LoginCredentialsInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {

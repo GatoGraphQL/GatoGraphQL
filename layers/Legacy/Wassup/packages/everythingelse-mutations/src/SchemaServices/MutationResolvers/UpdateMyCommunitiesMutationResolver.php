@@ -6,8 +6,8 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoPSchema\UserMeta\Utils;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\UserMeta\Utils;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
 {

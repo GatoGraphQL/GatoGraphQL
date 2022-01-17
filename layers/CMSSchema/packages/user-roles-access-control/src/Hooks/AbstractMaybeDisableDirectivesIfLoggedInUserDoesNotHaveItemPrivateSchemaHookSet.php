@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesAccessControl\Hooks;
+namespace PoPCMSSchema\UserRolesAccessControl\Hooks;
 
 use PoP\Root\App;
 use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet;

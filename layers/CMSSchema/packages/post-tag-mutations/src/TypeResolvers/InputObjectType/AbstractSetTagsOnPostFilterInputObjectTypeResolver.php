@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType;
 
-use PoPSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
-use PoPSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver;
+use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 
 abstract class AbstractSetTagsOnPostFilterInputObjectTypeResolver extends AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver
 {

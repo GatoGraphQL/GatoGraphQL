@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostMutations\MutationResolvers;
+namespace PoPCMSSchema\PostMutations\MutationResolvers;
 
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 
 abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {

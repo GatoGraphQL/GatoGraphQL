@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\CommentMeta\FieldResolvers\:
+    PoPCMSSchema\CommentMeta\FieldResolvers\:
         resource: '../src/FieldResolvers/*'

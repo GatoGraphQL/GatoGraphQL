@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_Processor_ScrollMapBlocksBase
 {

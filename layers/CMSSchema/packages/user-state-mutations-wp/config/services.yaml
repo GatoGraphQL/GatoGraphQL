@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface:
-        class: \PoPSchema\UserStateMutationsWP\TypeAPIs\UserStateTypeMutationAPI
+    PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface:
+        class: \PoPCMSSchema\UserStateMutationsWP\TypeAPIs\UserStateTypeMutationAPI

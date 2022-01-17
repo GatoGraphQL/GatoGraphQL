@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomyMetaWP\Hooks;
+namespace PoPCMSSchema\TaxonomyMetaWP\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\MetaQueryWP\Helpers\MetaQueryHelpers;
-use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPCMSSchema\MetaQueryWP\Helpers\MetaQueryHelpers;
+use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 
 class QueryHookSet extends AbstractHookSet
 {

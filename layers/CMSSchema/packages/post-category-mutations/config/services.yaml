@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\PostCategoryMutations\Hooks\:
+    PoPCMSSchema\PostCategoryMutations\Hooks\:
         resource: '../src/Hooks/*'

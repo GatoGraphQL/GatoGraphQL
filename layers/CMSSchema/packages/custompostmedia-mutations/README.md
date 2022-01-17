@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \PoPSchema\CustomPostMediaMutations\Component::class,
+    \PoPCMSSchema\CustomPostMediaMutations\Component::class,
 ]);
 ```
 

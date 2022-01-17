@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutations\TypeAPIs;
+namespace PoPCMSSchema\CommentMutations\TypeAPIs;
 
 use PoP\ComponentModel\Error\Error;
 

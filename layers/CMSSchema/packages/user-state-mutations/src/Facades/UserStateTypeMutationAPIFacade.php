@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateMutations\Facades;
+namespace PoPCMSSchema\UserStateMutations\Facades;
 
 use PoP\Root\App;
-use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
+use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 class UserStateTypeMutationAPIFacade
 {

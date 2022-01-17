@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Settings\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\Settings\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -12,7 +12,7 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
-use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
+use PoPCMSSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

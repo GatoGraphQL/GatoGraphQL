@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Taxonomies\TypeResolvers\:
+    PoPCMSSchema\Taxonomies\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

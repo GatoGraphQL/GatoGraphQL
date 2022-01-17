@@ -6,7 +6,7 @@ namespace PoPWPSchema\Posts\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\PostsWP\TypeAPIs\PostTypeAPI;
+use PoPCMSSchema\PostsWP\TypeAPIs\PostTypeAPI;
 
 class QueryHookSet extends AbstractHookSet
 {

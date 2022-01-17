@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\Pages;
+namespace PoPCMSSchema\Pages;
 
 use PoP\Root\AbstractComponentTest;
 

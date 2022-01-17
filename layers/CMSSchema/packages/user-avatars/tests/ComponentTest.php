@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\UserAvatars;
+namespace PoPCMSSchema\UserAvatars;
 
 use PoP\Root\AbstractComponentTest;
 

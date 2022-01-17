@@ -3,11 +3,11 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Users\FieldResolvers\:
+    PoPCMSSchema\Users\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPSchema\Users\TypeResolvers\:
+    PoPCMSSchema\Users\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPSchema\Users\RelationalTypeDataLoaders\:
+    PoPCMSSchema\Users\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Posts\ModuleProcessors;
+namespace PoPCMSSchema\Posts\ModuleProcessors;
 
 class PostFilterInputContainerModuleProcessor extends AbstractPostFilterInputContainerModuleProcessor
 {

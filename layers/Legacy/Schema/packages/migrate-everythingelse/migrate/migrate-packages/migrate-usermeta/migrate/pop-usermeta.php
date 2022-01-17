@@ -6,7 +6,7 @@ Description: The foundation for a PoP User Meta
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoPSchema\UserMeta;
+namespace PoPCMSSchema\UserMeta;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

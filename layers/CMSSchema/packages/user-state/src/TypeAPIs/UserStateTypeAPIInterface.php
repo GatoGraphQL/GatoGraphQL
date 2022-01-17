@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserState\TypeAPIs;
+namespace PoPCMSSchema\UserState\TypeAPIs;
 
 interface UserStateTypeAPIInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\TaxonomyMetaWP;
+namespace PoPCMSSchema\TaxonomyMetaWP;
 
 use PoP\Root\AbstractComponentTest;
 

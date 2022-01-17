@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserMeta\TypeAPIs;
+namespace PoPCMSSchema\UserMeta\TypeAPIs;
 
 use PoP\Root\App;
 use InvalidArgumentException;
-use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
-use PoPSchema\UserMeta\Component;
-use PoPSchema\UserMeta\ComponentConfiguration;
+use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
+use PoPCMSSchema\UserMeta\Component;
+use PoPCMSSchema\UserMeta\ComponentConfiguration;
 
 abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements UserMetaTypeAPIInterface
 {

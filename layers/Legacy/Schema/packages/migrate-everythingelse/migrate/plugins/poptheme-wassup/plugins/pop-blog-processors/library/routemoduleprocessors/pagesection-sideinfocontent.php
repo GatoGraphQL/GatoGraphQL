@@ -1,11 +1,11 @@
 <?php
 
 use PoP\Root\Routing\RequestNature;
-use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
-use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
-use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
-use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
+use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPTheme_Wassup_Blog_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommonsWP\CMS;
+namespace PoPCMSSchema\SchemaCommonsWP\CMS;
 
 use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 

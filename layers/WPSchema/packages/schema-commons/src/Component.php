@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\SchemaCommonsWP\Component::class,
+            \PoPCMSSchema\SchemaCommonsWP\Component::class,
         ];
     }
 

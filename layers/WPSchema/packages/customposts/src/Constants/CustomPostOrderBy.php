@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\Constants;
 
-use PoPSchema\CustomPosts\Constants\CustomPostOrderBy as UpstreamCustomPostOrderBy;
+use PoPCMSSchema\CustomPosts\Constants\CustomPostOrderBy as UpstreamCustomPostOrderBy;
 
 class CustomPostOrderBy extends UpstreamCustomPostOrderBy
 {

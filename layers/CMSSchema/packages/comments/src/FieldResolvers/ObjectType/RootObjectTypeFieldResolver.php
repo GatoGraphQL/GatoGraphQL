@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\Comments\FieldResolvers\ObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -12,18 +12,18 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoPSchema\Comments\Component;
-use PoPSchema\Comments\ComponentConfiguration;
-use PoPSchema\Comments\Constants\CommentStatus;
-use PoPSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
-use PoPSchema\Comments\ModuleProcessors\SingleCommentFilterInputContainerModuleProcessor;
-use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\Comments\TypeResolvers\InputObjectType\CommentByInputObjectTypeResolver;
-use PoPSchema\Comments\TypeResolvers\InputObjectType\CommentSortInputObjectTypeResolver;
-use PoPSchema\Comments\TypeResolvers\InputObjectType\RootCommentPaginationInputObjectTypeResolver;
-use PoPSchema\Comments\TypeResolvers\InputObjectType\RootCommentsFilterInputObjectTypeResolver;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPCMSSchema\Comments\Component;
+use PoPCMSSchema\Comments\ComponentConfiguration;
+use PoPCMSSchema\Comments\Constants\CommentStatus;
+use PoPCMSSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\Comments\ModuleProcessors\SingleCommentFilterInputContainerModuleProcessor;
+use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentByInputObjectTypeResolver;
+use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentSortInputObjectTypeResolver;
+use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\RootCommentPaginationInputObjectTypeResolver;
+use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\RootCommentsFilterInputObjectTypeResolver;
+use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;

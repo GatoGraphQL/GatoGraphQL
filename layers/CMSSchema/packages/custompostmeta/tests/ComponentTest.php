@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\CustomPostMeta;
+namespace PoPCMSSchema\CustomPostMeta;
 
 use PoP\Root\AbstractComponentTest;
 

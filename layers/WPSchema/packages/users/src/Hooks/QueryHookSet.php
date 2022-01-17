@@ -6,7 +6,7 @@ namespace PoPWPSchema\Users\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\UsersWP\TypeAPIs\UserTypeAPI;
+use PoPCMSSchema\UsersWP\TypeAPIs\UserTypeAPI;
 use PoPWPSchema\Users\Constants\UserOrderBy;
 
 class QueryHookSet extends AbstractHookSet

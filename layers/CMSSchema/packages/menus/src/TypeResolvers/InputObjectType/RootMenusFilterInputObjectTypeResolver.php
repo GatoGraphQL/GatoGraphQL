@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Menus\TypeResolvers\InputObjectType;
 
 class RootMenusFilterInputObjectTypeResolver extends AbstractMenusFilterInputObjectTypeResolver
 {

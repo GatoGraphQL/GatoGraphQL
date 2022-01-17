@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\TypeResolvers\EnumType;
+namespace PoPCMSSchema\Users\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPSchema\Users\Constants\UserOrderBy;
+use PoPCMSSchema\Users\Constants\UserOrderBy;
 
 class UserOrderByEnumTypeResolver extends AbstractEnumTypeResolver
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\Constants;
+namespace PoPCMSSchema\Users\Constants;
 
 class UserOrderBy
 {

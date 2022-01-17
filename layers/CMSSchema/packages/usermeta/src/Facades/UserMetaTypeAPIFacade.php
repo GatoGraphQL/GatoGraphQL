@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserMeta\Facades;
+namespace PoPCMSSchema\UserMeta\Facades;
 
 use PoP\Root\App;
-use PoPSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
+use PoPCMSSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
 
 class UserMetaTypeAPIFacade
 {

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\ConditionalOnComponent\Users\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\Media\ConditionalOnComponent\Users\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
-use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
+use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

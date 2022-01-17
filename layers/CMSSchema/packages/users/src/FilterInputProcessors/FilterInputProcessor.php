@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\FilterInputProcessors;
+namespace PoPCMSSchema\Users\FilterInputProcessors;
 
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 

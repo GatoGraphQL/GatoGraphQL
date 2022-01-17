@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Media\TypeResolvers\InputObjectType;
 
-use PoPSchema\Media\Constants\MediaItemOrderBy;
-use PoPSchema\Media\TypeResolvers\EnumType\MediaItemOrderByEnumTypeResolver;
+use PoPCMSSchema\Media\Constants\MediaItemOrderBy;
+use PoPCMSSchema\Media\TypeResolvers\EnumType\MediaItemOrderByEnumTypeResolver;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 class MediaItemSortInputObjectTypeResolver extends SortInputObjectTypeResolver

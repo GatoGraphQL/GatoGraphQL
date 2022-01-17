@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\QueriedObject;
+namespace PoPCMSSchema\QueriedObject;
 
 use PoP\Root\Component\AbstractComponent;
 

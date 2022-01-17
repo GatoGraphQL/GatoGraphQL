@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\ModuleProcessors;
+namespace PoPCMSSchema\Users\ModuleProcessors;
 
 use PoPCMSSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
-use PoPSchema\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class UserFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {

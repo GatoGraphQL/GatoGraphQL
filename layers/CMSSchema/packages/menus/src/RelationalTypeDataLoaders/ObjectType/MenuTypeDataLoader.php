@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType;
+namespace PoPCMSSchema\Menus\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
-use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
+use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 
 class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
 {

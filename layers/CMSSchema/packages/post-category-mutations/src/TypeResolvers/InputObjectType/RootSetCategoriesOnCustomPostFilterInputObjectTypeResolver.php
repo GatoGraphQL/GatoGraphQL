@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategoryMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\PostCategoryMutations\TypeResolvers\InputObjectType;
 
 class RootSetCategoriesOnCustomPostFilterInputObjectTypeResolver extends AbstractSetCategoriesOnPostFilterInputObjectTypeResolver
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRoles\Facades;
+namespace PoPCMSSchema\UserRoles\Facades;
 
 use PoP\Root\App;
-use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 
 class UserRoleTypeAPIFacade
 {

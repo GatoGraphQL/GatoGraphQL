@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategoryMutationsWP;
+namespace PoPCMSSchema\PostCategoryMutationsWP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,10 +19,10 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\PostCategoryMutations\Component::class,
-            \PoPSchema\CustomPostMutationsWP\Component::class,
-            \PoPSchema\PostCategoriesWP\Component::class,
-            \PoPSchema\UserStateWP\Component::class,
+            \PoPCMSSchema\PostCategoryMutations\Component::class,
+            \PoPCMSSchema\CustomPostMutationsWP\Component::class,
+            \PoPCMSSchema\PostCategoriesWP\Component::class,
+            \PoPCMSSchema\UserStateWP\Component::class,
         ];
     }
 

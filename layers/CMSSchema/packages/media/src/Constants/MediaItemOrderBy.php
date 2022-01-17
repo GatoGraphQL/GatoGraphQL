@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\Constants;
+namespace PoPCMSSchema\Media\Constants;
 
 class MediaItemOrderBy
 {

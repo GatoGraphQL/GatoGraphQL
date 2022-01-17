@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\UserRolesAccessControl;
+namespace PoPCMSSchema\UserRolesAccessControl;
 
 use PoP\Root\AbstractComponentTest;
 

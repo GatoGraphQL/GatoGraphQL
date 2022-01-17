@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentsWP;
+namespace PoPCMSSchema\CommentsWP;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Users\Component as UsersComponent;
+use PoPCMSSchema\Users\Component as UsersComponent;
 
 /**
  * Initialize component
@@ -20,8 +20,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\Comments\Component::class,
-            \PoPSchema\CustomPostsWP\Component::class,
+            \PoPCMSSchema\Comments\Component::class,
+            \PoPCMSSchema\CustomPostsWP\Component::class,
         ];
     }
 

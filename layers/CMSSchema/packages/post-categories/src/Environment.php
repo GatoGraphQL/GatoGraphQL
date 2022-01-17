@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories;
+namespace PoPCMSSchema\PostCategories;
 
 class Environment
 {

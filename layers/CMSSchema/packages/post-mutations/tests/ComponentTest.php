@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\PostMutations;
+namespace PoPCMSSchema\PostMutations;
 
 use PoP\Root\AbstractComponentTest;
 

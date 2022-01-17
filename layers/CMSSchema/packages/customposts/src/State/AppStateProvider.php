@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\State;
+namespace PoPCMSSchema\CustomPosts\State;
 
 use PoP\Root\State\AbstractAppStateProvider;
-use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPSchema\CustomPosts\Routing\RequestNature;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature;
 
 class AppStateProvider extends AbstractAppStateProvider
 {

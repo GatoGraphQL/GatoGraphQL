@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
+namespace PoPCMSSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
 use PoP\Root\App;
 use PoP\RESTAPI\Helpers\HookHelpers;

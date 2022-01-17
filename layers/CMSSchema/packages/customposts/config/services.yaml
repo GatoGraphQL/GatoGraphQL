@@ -4,17 +4,17 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\CustomPosts\State\:
+    PoPCMSSchema\CustomPosts\State\:
         resource: '../src/State/*'
 
-    PoPSchema\CustomPosts\Hooks\:
+    PoPCMSSchema\CustomPosts\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoPSchema\CustomPosts\LooseContracts\:
+    PoPCMSSchema\CustomPosts\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPSchema\CustomPosts\ModuleProcessors\:
+    PoPCMSSchema\CustomPosts\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
-    PoPSchema\CustomPosts\FilterInputProcessors\:
+    PoPCMSSchema\CustomPosts\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'

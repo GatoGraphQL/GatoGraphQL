@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\QueriedObject\FieldResolvers\:
+    PoPCMSSchema\QueriedObject\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPSchema\QueriedObject\TypeResolvers\:
+    PoPCMSSchema\QueriedObject\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

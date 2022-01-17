@@ -6,7 +6,7 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 
 use PoP\Root\App;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
-use PoPSchema\UserMeta\Utils;
+use PoPCMSSchema\UserMeta\Utils;
 
 class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolver
 {

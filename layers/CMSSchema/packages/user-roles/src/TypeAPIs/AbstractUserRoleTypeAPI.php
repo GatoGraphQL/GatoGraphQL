@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRoles\TypeAPIs;
+namespace PoPCMSSchema\UserRoles\TypeAPIs;
 
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;

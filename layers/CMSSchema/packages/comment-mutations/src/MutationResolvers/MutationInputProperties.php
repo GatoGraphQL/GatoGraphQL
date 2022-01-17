@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutations\MutationResolvers;
+namespace PoPCMSSchema\CommentMutations\MutationResolvers;
 
 class MutationInputProperties
 {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\GenericCustomPosts\RelationalTypeDataLoaders\ObjectType;
+namespace PoPCMSSchema\GenericCustomPosts\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\Root\App;
-use PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostTypeDataLoader;
-use PoPSchema\GenericCustomPosts\Component;
-use PoPSchema\GenericCustomPosts\ComponentConfiguration;
+use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostTypeDataLoader;
+use PoPCMSSchema\GenericCustomPosts\Component;
+use PoPCMSSchema\GenericCustomPosts\ComponentConfiguration;
 
 class GenericCustomPostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Comments\Overrides\TypeResolvers\EnumType;
 
-use PoPSchema\Comments\TypeResolvers\EnumType\CommentOrderByEnumTypeResolver as UpstreamCommentOrderByEnumTypeResolver;
+use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentOrderByEnumTypeResolver as UpstreamCommentOrderByEnumTypeResolver;
 use PoPWPSchema\Comments\Constants\CommentOrderBy;
 
 class CommentOrderByEnumTypeResolver extends UpstreamCommentOrderByEnumTypeResolver

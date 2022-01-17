@@ -7,7 +7,7 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoPSchema\Users\Constants\InputNames;
+use PoPCMSSchema\Users\Constants\InputNames;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\EditMembershipMutationResolver;
 
 class EditMembershipMutationResolverBridge extends AbstractComponentMutationResolverBridge

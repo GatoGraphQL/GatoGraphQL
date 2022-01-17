@@ -8,7 +8,7 @@ class PoP_UserCommunities_Installation
 
     public function installRoles()
     {
-        $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
+        $cmsuserrolesapi = \PoPCMSSchema\UserRoles\FunctionAPIFactory::getInstance();
         $cmsuserrolesapi->addRole(GD_URE_ROLE_COMMUNITY, 'GD Community', array());
     }
 }

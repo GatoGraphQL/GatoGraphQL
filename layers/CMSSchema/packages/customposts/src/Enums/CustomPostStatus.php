@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\Enums;
+namespace PoPCMSSchema\CustomPosts\Enums;
 
 class CustomPostStatus
 {

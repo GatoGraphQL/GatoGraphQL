@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\PostsWP;
+namespace PoPCMSSchema\PostsWP;
 
 use PoP\Root\AbstractComponentTest;
 

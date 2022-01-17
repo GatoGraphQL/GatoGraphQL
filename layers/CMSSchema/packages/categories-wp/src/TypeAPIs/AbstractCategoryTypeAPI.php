@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CategoriesWP\TypeAPIs;
+namespace PoPCMSSchema\CategoriesWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
-use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use WP_Error;
 use WP_Taxonomy;
 use WP_Term;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomyMetaWP;
+namespace PoPCMSSchema\TaxonomyMetaWP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,9 +19,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\TaxonomyMeta\Component::class,
-            \PoPSchema\TaxonomiesWP\Component::class,
-            \PoPSchema\MetaQueryWP\Component::class,
+            \PoPCMSSchema\TaxonomyMeta\Component::class,
+            \PoPCMSSchema\TaxonomiesWP\Component::class,
+            \PoPCMSSchema\MetaQueryWP\Component::class,
         ];
     }
 

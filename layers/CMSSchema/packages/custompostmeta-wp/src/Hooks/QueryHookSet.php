@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMetaWP\Hooks;
+namespace PoPCMSSchema\CustomPostMetaWP\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use PoPSchema\MetaQueryWP\Helpers\MetaQueryHelpers;
+use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
+use PoPCMSSchema\MetaQueryWP\Helpers\MetaQueryHelpers;
 
 class QueryHookSet extends AbstractHookSet
 {

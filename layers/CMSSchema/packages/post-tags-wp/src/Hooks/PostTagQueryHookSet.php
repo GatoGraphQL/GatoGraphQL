@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagsWP\Hooks;
+namespace PoPCMSSchema\PostTagsWP\Hooks;
 
-use PoPSchema\CustomPostTagsWP\Hooks\AbstractCustomPostTagQueryHookSet;
+use PoPCMSSchema\CustomPostTagsWP\Hooks\AbstractCustomPostTagQueryHookSet;
 
 class PostTagQueryHookSet extends AbstractCustomPostTagQueryHookSet
 {

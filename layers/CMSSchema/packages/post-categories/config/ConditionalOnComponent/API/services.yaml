@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\:
+    PoPCMSSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\:
         resource: '../../../src/ConditionalOnComponent/API/ModuleProcessors/*'
 
-    PoPSchema\PostCategories\ConditionalOnComponent\API\RouteModuleProcessors\:
+    PoPCMSSchema\PostCategories\ConditionalOnComponent\API\RouteModuleProcessors\:
         resource: '../../../src/ConditionalOnComponent/API/RouteModuleProcessors/*'

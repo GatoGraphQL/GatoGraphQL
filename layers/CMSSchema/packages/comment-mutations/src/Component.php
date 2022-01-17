@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutations;
+namespace PoPCMSSchema\CommentMutations;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Users\Component as UsersComponent;
+use PoPCMSSchema\Users\Component as UsersComponent;
 
 /**
  * Initialize component
@@ -20,8 +20,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\Comments\Component::class,
-            \PoPSchema\UserStateMutations\Component::class,
+            \PoPCMSSchema\Comments\Component::class,
+            \PoPCMSSchema\UserStateMutations\Component::class,
         ];
     }
 

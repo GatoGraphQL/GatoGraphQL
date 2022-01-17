@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\Media\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoPSchema\Media\RelationalTypeDataLoaders\ObjectType\MediaTypeDataLoader;
-use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use PoPCMSSchema\Media\RelationalTypeDataLoaders\ObjectType\MediaTypeDataLoader;
+use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 
 class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 {

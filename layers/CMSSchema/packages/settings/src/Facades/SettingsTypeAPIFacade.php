@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Settings\Facades;
+namespace PoPCMSSchema\Settings\Facades;
 
 use PoP\Root\App;
-use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
+use PoPCMSSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
 class SettingsTypeAPIFacade
 {

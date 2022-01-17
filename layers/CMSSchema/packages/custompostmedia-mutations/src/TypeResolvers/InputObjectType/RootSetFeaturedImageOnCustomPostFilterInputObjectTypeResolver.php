@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType;
 
 class RootSetFeaturedImageOnCustomPostFilterInputObjectTypeResolver extends AbstractSetFeaturedImageOnCustomPostFilterInputObjectTypeResolver
 {

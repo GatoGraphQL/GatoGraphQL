@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\Comments\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoPSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentTypeDataLoader;
-use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPCMSSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentTypeDataLoader;
+use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 
 class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 {

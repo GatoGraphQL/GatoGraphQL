@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserState\State;
+namespace PoPCMSSchema\UserState\State;
 
 use PoP\Root\State\AbstractAppStateProvider;
-use PoPSchema\UserState\TypeAPIs\UserStateTypeAPIInterface;
+use PoPCMSSchema\UserState\TypeAPIs\UserStateTypeAPIInterface;
 
 class AppStateProvider extends AbstractAppStateProvider
 {

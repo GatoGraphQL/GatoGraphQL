@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\TypeAPIs;
+namespace PoPCMSSchema\Menus\TypeAPIs;
 
-use PoPSchema\Menus\ObjectModels\MenuItem;
+use PoPCMSSchema\Menus\ObjectModels\MenuItem;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

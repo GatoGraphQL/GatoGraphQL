@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface:
-        class: \PoPSchema\MenusWP\TypeAPIs\MenuTypeAPI
+    PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface:
+        class: \PoPCMSSchema\MenusWP\TypeAPIs\MenuTypeAPI

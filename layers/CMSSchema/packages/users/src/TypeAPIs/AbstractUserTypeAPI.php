@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\TypeAPIs;
+namespace PoPCMSSchema\Users\TypeAPIs;
 
 use PoP\Root\Services\BasicServiceTrait;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\TypeResolvers\EnumType;
+namespace PoPCMSSchema\CustomPosts\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPSchema\CustomPosts\Constants\CustomPostOrderBy;
+use PoPCMSSchema\CustomPosts\Constants\CustomPostOrderBy;
 
 class CustomPostOrderByEnumTypeResolver extends AbstractEnumTypeResolver
 {

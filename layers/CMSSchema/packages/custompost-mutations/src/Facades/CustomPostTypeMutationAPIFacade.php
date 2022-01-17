@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMutations\Facades;
+namespace PoPCMSSchema\CustomPostMutations\Facades;
 
 use PoP\Root\App;
-use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 
 class CustomPostTypeMutationAPIFacade
 {

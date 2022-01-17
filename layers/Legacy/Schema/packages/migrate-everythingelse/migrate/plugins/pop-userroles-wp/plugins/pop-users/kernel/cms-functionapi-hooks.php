@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\UserRoles\WP;
+namespace PoPCMSSchema\UserRoles\WP;
 
 class FunctionAPIHooks {
 

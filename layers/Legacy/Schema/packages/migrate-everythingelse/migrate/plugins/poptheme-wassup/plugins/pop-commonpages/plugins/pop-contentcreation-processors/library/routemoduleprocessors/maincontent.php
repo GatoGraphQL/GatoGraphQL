@@ -1,6 +1,6 @@
 <?php
 
-use PoPSchema\Pages\Routing\RequestNature as PageRequestNature;
+use PoPCMSSchema\Pages\Routing\RequestNature as PageRequestNature;
 
 class PoP_CommonPages_ContentCreation_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {

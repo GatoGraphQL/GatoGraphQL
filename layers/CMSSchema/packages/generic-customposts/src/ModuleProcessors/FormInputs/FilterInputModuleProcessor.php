@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\GenericCustomPosts\ModuleProcessors\FormInputs;
+namespace PoPCMSSchema\GenericCustomPosts\ModuleProcessors\FormInputs;
 
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoPSchema\GenericCustomPosts\FilterInputProcessors\FilterInputProcessor;
-use PoPSchema\GenericCustomPosts\TypeResolvers\EnumType\GenericCustomPostEnumTypeResolver;
+use PoPCMSSchema\GenericCustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\GenericCustomPosts\TypeResolvers\EnumType\GenericCustomPostEnumTypeResolver;
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {

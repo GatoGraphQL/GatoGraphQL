@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface:
-        class: \PoPSchema\CustomPostMutationsWP\TypeAPIs\CustomPostTypeMutationAPI
+    PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface:
+        class: \PoPCMSSchema\CustomPostMutationsWP\TypeAPIs\CustomPostTypeMutationAPI
 
-    PoPSchema\CustomPostMutationsWP\LooseContracts\:
+    PoPCMSSchema\CustomPostMutationsWP\LooseContracts\:
         resource: '../src/LooseContracts/*'

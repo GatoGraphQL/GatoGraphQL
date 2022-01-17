@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostsWP\Overrides\TypeResolvers\UnionType;
+namespace PoPCMSSchema\CustomPostsWP\Overrides\TypeResolvers\UnionType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver as UpstreamCustomPostUnionTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver as UpstreamCustomPostUnionTypeResolver;
 
 class CustomPostUnionTypeResolver extends UpstreamCustomPostUnionTypeResolver
 {

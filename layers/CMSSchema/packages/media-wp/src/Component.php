@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\MediaWP;
+namespace PoPCMSSchema\MediaWP;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Users\Component as UsersComponent;
+use PoPCMSSchema\Users\Component as UsersComponent;
 
 /**
  * Initialize component
@@ -20,8 +20,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\Media\Component::class,
-            \PoPSchema\CustomPostsWP\Component::class,
+            \PoPCMSSchema\Media\Component::class,
+            \PoPCMSSchema\CustomPostsWP\Component::class,
         ];
     }
 
@@ -31,7 +31,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPSchema\UsersWP\Component::class,
+            \PoPCMSSchema\UsersWP\Component::class,
         ];
     }
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMutations;
+namespace PoPCMSSchema\CustomPostMutations;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Users\Component as UsersComponent;
+use PoPCMSSchema\Users\Component as UsersComponent;
 
 /**
  * Initialize component
@@ -20,9 +20,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPosts\Component::class,
-            \PoPSchema\UserRoles\Component::class,
-            \PoPSchema\UserStateMutations\Component::class,
+            \PoPCMSSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\UserRoles\Component::class,
+            \PoPCMSSchema\UserStateMutations\Component::class,
         ];
     }
 

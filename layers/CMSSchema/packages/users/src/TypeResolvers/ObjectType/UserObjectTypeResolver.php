@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\Users\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoPSchema\Users\RelationalTypeDataLoaders\ObjectType\UserTypeDataLoader;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\Users\RelationalTypeDataLoaders\ObjectType\UserTypeDataLoader;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class UserObjectTypeResolver extends AbstractObjectTypeResolver
 {

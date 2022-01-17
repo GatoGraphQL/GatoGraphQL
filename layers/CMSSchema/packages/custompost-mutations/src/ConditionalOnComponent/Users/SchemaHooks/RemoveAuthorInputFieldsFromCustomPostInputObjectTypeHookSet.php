@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMutations\ConditionalOnComponent\Users\SchemaHooks;
+namespace PoPCMSSchema\CustomPostMutations\ConditionalOnComponent\Users\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
-use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\AbstractMyCustomPostsFilterInputObjectTypeResolver;
-use PoPSchema\Users\SchemaHooks\AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\AbstractMyCustomPostsFilterInputObjectTypeResolver;
+use PoPCMSSchema\Users\SchemaHooks\AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet;
 
 class RemoveAuthorInputFieldsFromCustomPostInputObjectTypeHookSet extends AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet
 {

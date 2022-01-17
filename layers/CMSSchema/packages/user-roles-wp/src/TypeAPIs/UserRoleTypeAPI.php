@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesWP\TypeAPIs;
+namespace PoPCMSSchema\UserRolesWP\TypeAPIs;
 
-use PoPSchema\UserRoles\TypeAPIs\AbstractUserRoleTypeAPI;
+use PoPCMSSchema\UserRoles\TypeAPIs\AbstractUserRoleTypeAPI;
 use WP_User;
 
 class UserRoleTypeAPI extends AbstractUserRoleTypeAPI

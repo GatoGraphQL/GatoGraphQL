@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\PostCategories\TypeResolvers\InputObjectType;
 
-use PoPSchema\Categories\TypeResolvers\InputObjectType\AbstractCategoryByInputObjectTypeResolver;
+use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\AbstractCategoryByInputObjectTypeResolver;
 
 class PostCategoryByInputObjectTypeResolver extends AbstractCategoryByInputObjectTypeResolver
 {

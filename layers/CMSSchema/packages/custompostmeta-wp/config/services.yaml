@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface:
-        class: \PoPSchema\CustomPostMetaWP\TypeAPIs\CustomPostMetaTypeAPI
+    PoPCMSSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface:
+        class: \PoPCMSSchema\CustomPostMetaWP\TypeAPIs\CustomPostMetaTypeAPI
 
-    PoPSchema\CustomPostMetaWP\Hooks\:
+    PoPCMSSchema\CustomPostMetaWP\Hooks\:
         resource: '../src/Hooks/*'

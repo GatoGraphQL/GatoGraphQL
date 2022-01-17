@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\MetaQueryWP\Helpers;
+namespace PoPCMSSchema\MetaQueryWP\Helpers;
 
 class MetaQueryHelpers
 {

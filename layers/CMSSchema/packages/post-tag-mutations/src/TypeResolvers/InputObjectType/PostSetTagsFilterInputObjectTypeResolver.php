@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType;
 
 class PostSetTagsFilterInputObjectTypeResolver extends AbstractSetTagsOnPostFilterInputObjectTypeResolver
 {

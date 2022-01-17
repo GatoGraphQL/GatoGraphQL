@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategoryMutations\Facades;
+namespace PoPCMSSchema\PostCategoryMutations\Facades;
 
 use PoP\Root\App;
-use PoPSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface;
+use PoPCMSSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface;
 
 class PostCategoryTypeMutationAPIFacade
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UsersWP\TypeAPIs;
+namespace PoPCMSSchema\UsersWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Users\Constants\UserOrderBy;
-use PoPSchema\Users\TypeAPIs\AbstractUserTypeAPI;
+use PoPCMSSchema\Users\Constants\UserOrderBy;
+use PoPCMSSchema\Users\TypeAPIs\AbstractUserTypeAPI;
 use WP_User;
 use WP_User_Query;
 

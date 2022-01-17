@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\UserRoles\FieldResolvers\ObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\Translation\TranslationAPIInterface;
-use PoPSchema\UserRoles\Component;
-use PoPSchema\UserRoles\ComponentConfiguration;
+use PoPCMSSchema\UserRoles\Component;
+use PoPCMSSchema\UserRoles\ComponentConfiguration;
 
 trait RolesObjectTypeFieldResolverTrait
 {

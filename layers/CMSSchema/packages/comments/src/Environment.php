@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments;
+namespace PoPCMSSchema\Comments;
 
 class Environment
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\GenericCustomPosts;
+namespace PoPCMSSchema\GenericCustomPosts;
 
 class Environment
 {

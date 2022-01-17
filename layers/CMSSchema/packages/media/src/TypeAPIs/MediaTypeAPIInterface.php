@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\TypeAPIs;
+namespace PoPCMSSchema\Media\TypeAPIs;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

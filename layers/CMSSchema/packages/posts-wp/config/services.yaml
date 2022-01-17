@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface:
-        class: \PoPSchema\PostsWP\TypeAPIs\PostTypeAPI
+    PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface:
+        class: \PoPCMSSchema\PostsWP\TypeAPIs\PostTypeAPI
 
-    PoPSchema\PostsWP\Hooks\:
+    PoPCMSSchema\PostsWP\Hooks\:
         resource: '../src/Hooks/*'

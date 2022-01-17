@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface:
-        class: \PoPSchema\TaxonomyMetaWP\TypeAPIs\TaxonomyMetaTypeAPI
+    PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface:
+        class: \PoPCMSSchema\TaxonomyMetaWP\TypeAPIs\TaxonomyMetaTypeAPI
 
-    PoPSchema\TaxonomyMetaWP\Hooks\:
+    PoPCMSSchema\TaxonomyMetaWP\Hooks\:
         resource: '../src/Hooks/*'

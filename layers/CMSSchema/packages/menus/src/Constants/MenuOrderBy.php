@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\Constants;
+namespace PoPCMSSchema\Menus\Constants;
 
 class MenuOrderBy
 {

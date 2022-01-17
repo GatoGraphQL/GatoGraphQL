@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategoryMutationsWP\TypeAPIs;
+namespace PoPCMSSchema\PostCategoryMutationsWP\TypeAPIs;
 
-use PoPSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface;
+use PoPCMSSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

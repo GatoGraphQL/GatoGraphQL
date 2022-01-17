@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\QueriedObject;
+namespace PoPCMSSchema\QueriedObject;
 
 use PoP\Root\AbstractComponentTest;
 

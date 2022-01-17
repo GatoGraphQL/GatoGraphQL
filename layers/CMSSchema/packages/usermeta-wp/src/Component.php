@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserMetaWP;
+namespace PoPCMSSchema\UserMetaWP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,9 +19,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\UserMeta\Component::class,
-            \PoPSchema\UsersWP\Component::class,
-            \PoPSchema\MetaQueryWP\Component::class,
+            \PoPCMSSchema\UserMeta\Component::class,
+            \PoPCMSSchema\UsersWP\Component::class,
+            \PoPCMSSchema\MetaQueryWP\Component::class,
         ];
     }
 

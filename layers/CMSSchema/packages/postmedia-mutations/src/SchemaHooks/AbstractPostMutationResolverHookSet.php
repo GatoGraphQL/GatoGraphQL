@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostMediaMutations\SchemaHooks;
+namespace PoPCMSSchema\PostMediaMutations\SchemaHooks;
 
-use PoPSchema\CustomPostMediaMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
+use PoPCMSSchema\CustomPostMediaMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 
 /**
  * Made Abstract as to disable this class without deleting it

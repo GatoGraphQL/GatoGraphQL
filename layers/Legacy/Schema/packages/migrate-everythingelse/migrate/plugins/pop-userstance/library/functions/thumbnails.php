@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 \PoP\Root\App::addFilter('getThumbId:default', 'userstanceThumbDefaulthighlight', 10, 2);
 function userstanceThumbDefaulthighlight($thumb_id, $post_id)

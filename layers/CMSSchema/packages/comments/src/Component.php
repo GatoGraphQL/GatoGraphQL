@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments;
+namespace PoPCMSSchema\Comments;
 
 use PoP\Root\App;
 use PoP\API\Component as APIComponent;
 use PoP\RESTAPI\Component as RESTAPIComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Users\Component as UsersComponent;
+use PoPCMSSchema\Users\Component as UsersComponent;
 
 /**
  * Initialize component
@@ -23,7 +23,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\CustomPosts\Component::class,
         ];
     }
 
@@ -35,7 +35,7 @@ class Component extends AbstractComponent
         return [
             \PoP\API\Component::class,
             \PoP\RESTAPI\Component::class,
-            \PoPSchema\Users\Component::class,
+            \PoPCMSSchema\Users\Component::class,
         ];
     }
 

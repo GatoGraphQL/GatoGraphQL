@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\UserState\Settings;
+namespace PoPCMSSchema\UserState\Settings;
 
 use PoP\ComponentModel\State\ApplicationState;
 

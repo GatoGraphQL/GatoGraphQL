@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\QueriedObject\Routing;
+namespace PoPCMSSchema\QueriedObject\Routing;
 
 interface CMSRoutingStateServiceInterface
 {

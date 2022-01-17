@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPWPSchema\TaxonomyMeta\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPSchema\TaxonomyMeta\Component;
-use PoPSchema\TaxonomyMeta\ComponentConfiguration;
+use PoPCMSSchema\TaxonomyMeta\Component;
+use PoPCMSSchema\TaxonomyMeta\ComponentConfiguration;
 use PoPWPSchema\Meta\TypeResolvers\InputObjectType\AbstractMetaQueryInputObjectTypeResolver;
 
 class TaxonomyMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObjectTypeResolver

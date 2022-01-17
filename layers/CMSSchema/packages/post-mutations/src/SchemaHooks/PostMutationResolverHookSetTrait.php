@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostMutations\SchemaHooks;
+namespace PoPCMSSchema\PostMutations\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
-use PoPSchema\PostMutations\TypeResolvers\InputObjectType\CreatePostFilterInputObjectTypeResolverInterface;
-use PoPSchema\PostMutations\TypeResolvers\InputObjectType\UpdatePostFilterInputObjectTypeResolverInterface;
+use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\CreatePostFilterInputObjectTypeResolverInterface;
+use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\UpdatePostFilterInputObjectTypeResolverInterface;
 
 trait PostMutationResolverHookSetTrait
 {

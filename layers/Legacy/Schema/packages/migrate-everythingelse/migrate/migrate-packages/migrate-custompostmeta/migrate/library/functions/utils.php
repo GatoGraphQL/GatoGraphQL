@@ -1,14 +1,14 @@
 <?php
-namespace PoPSchema\CustomPostMeta;
+namespace PoPCMSSchema\CustomPostMeta;
 
-use PoPSchema\CustomPostMeta\Facades\CustomPostMetaTypeAPIFacade;
+use PoPCMSSchema\CustomPostMeta\Facades\CustomPostMetaTypeAPIFacade;
 
 class Utils
 {
     public static function getMetaKey($meta_key)
     {
         $functionapi = FunctionAPIFactory::getInstance();
-        return $functionapi->getMetaKey(\PoPSchema\Meta\Utils::getMetakeyPrefix().$meta_key);
+        return $functionapi->getMetaKey(\PoPCMSSchema\Meta\Utils::getMetakeyPrefix().$meta_key);
     }
 
     public static function getCustomPostMeta($post_id, $key, $single = false)
@@ -18,7 +18,7 @@ class Utils
     }
     public static function updateCustomPostMeta($post_id, $key, $values, $single = false, $boolean = false)
     {
-        $values = \PoPSchema\Meta\Utils::normalizeValues($values);
+        $values = \PoPCMSSchema\Meta\Utils::normalizeValues($values);
 
         // Add the values as independent values so each one of them can be searched using EXISTS on WP_Query
         $functionapi = FunctionAPIFactory::getInstance();

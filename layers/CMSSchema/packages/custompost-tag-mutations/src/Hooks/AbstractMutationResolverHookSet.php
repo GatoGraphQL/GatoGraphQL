@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostTagMutations\Hooks;
+namespace PoPCMSSchema\CustomPostTagMutations\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 
 abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 {

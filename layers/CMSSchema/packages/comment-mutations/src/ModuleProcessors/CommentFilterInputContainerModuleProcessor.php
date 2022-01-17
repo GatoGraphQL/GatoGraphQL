@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutations\ModuleProcessors;
+namespace PoPCMSSchema\CommentMutations\ModuleProcessors;
 
-use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor as UpstreamCommentFilterInputContainerModuleProcessor;
+use PoPCMSSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor as UpstreamCommentFilterInputContainerModuleProcessor;
 
 class CommentFilterInputContainerModuleProcessor extends UpstreamCommentFilterInputContainerModuleProcessor
 {

@@ -21,7 +21,7 @@ class PoP_Module_Processor_UserPlatformFilterInputProcessor extends AbstractFilt
         switch ($filterInput[1]) {
             case self::FILTERINPUT_BUTTONGROUP_CATEGORIES:
                 $query['meta-query'][] = [
-                    'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_CATEGORIES),
+                    'key' => \PoPCMSSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_CATEGORIES),
                     'value' => $value,
                     'compare' => 'IN',
                 ];

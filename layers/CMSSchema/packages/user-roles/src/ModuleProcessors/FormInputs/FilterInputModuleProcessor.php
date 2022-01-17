@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRoles\ModuleProcessors\FormInputs;
+namespace PoPCMSSchema\UserRoles\ModuleProcessors\FormInputs;
 
 use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {

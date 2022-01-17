@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\CustomPostMediaMutations;
+namespace PoPCMSSchema\CustomPostMediaMutations;
 
 use PoP\Root\AbstractComponentTest;
 

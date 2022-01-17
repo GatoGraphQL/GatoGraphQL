@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface:
-        class: \PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistry
+    PoPCMSSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface:
+        class: \PoPCMSSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistry

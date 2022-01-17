@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType;
 
-use PoPSchema\UserRoles\FieldResolvers\ObjectType\UserObjectTypeFieldResolver as UpstreamUserObjectTypeFieldResolver;
-use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
+use PoPCMSSchema\UserRoles\FieldResolvers\ObjectType\UserObjectTypeFieldResolver as UpstreamUserObjectTypeFieldResolver;
+use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 
 class UserObjectTypeFieldResolver extends UpstreamUserObjectTypeFieldResolver
 {

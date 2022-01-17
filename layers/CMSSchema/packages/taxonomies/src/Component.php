@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Taxonomies;
+namespace PoPCMSSchema\Taxonomies;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\CustomPosts\Component::class,
         ];
     }
 

@@ -3,14 +3,14 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\PostTags\FieldResolvers\:
+    PoPCMSSchema\PostTags\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPSchema\PostTags\TypeResolvers\:
+    PoPCMSSchema\PostTags\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPSchema\PostTags\RelationalTypeDataLoaders\:
+    PoPCMSSchema\PostTags\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
 
-    PoPSchema\PostTags\SchemaHooks\:
+    PoPCMSSchema\PostTags\SchemaHooks\:
         resource: '../src/SchemaHooks/*'

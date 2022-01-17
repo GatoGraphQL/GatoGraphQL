@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\ConditionalOnComponent\Users\SchemaHooks;
+namespace PoPCMSSchema\Media\ConditionalOnComponent\Users\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\Media\ModuleProcessors\MediaFilterInputContainerModuleProcessor;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\Media\ModuleProcessors\MediaFilterInputContainerModuleProcessor;
+use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
 {

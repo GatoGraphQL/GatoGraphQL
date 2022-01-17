@@ -7,15 +7,15 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\Root\Routing\RequestNature;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
-use PoPSchema\Pages\Facades\PageTypeAPIFacade;
-use PoPSchema\Pages\Routing\PathUtils;
-use PoPSchema\Pages\Routing\RequestNature as PageRequestNature;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
+use PoPCMSSchema\Pages\Routing\PathUtils;
+use PoPCMSSchema\Pages\Routing\RequestNature as PageRequestNature;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_ResourceLoaderProcessorUtils {
 
@@ -468,7 +468,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 // For the single nature, we must save the resources under the category path,
                 // for all the categories in the website
-                $path = GeneralUtils::maybeAddTrailingSlash(\PoPSchema\Posts\Engine_Utils::getCustomPostPath($post_id, true));
+                $path = GeneralUtils::maybeAddTrailingSlash(\PoPCMSSchema\Posts\Engine_Utils::getCustomPostPath($post_id, true));
                 $paths[] = $path;
 
                 self::addResourcesFromCurrentLoop($modulefilter, $resources[$path], $key, $merge, $options);

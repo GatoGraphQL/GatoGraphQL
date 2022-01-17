@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
-use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {

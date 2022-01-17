@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Settings\TypeAPIs;
+namespace PoPCMSSchema\Settings\TypeAPIs;
 
 use PoP\Root\App;
 use InvalidArgumentException;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
-use PoPSchema\Settings\Component;
-use PoPSchema\Settings\ComponentConfiguration;
+use PoPCMSSchema\Settings\Component;
+use PoPCMSSchema\Settings\ComponentConfiguration;
 
 abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
 {

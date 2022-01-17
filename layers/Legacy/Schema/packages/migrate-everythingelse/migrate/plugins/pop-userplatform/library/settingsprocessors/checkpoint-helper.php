@@ -1,6 +1,6 @@
 <?php
 use PoP\Engine\CheckpointProcessors\RequestCheckpointProcessor;
-use PoPSchema\UserState\CheckpointProcessors\UserStateCheckpointProcessor;
+use PoPCMSSchema\UserState\CheckpointProcessors\UserStateCheckpointProcessor;
 
 const POPUSERPLATFORM_CHECKPOINTCONFIGURATION_LOGGEDINPROFILE_STATIC = array(
 	[RequestCheckpointProcessor::class, RequestCheckpointProcessor::DOING_POST],

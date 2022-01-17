@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateAccessControl\ConfigurationEntries;
+namespace PoPCMSSchema\UserStateAccessControl\ConfigurationEntries;
 
 class UserStates
 {

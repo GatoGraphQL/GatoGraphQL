@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMutations\ModuleProcessors;
+namespace PoPCMSSchema\CustomPostMutations\ModuleProcessors;
 
 use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
-use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor as CustomPostFilterInputModuleProcessor;
+use PoPCMSSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
+use PoPCMSSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor as CustomPostFilterInputModuleProcessor;
 
 class CustomPostMutationFilterInputContainerModuleProcessor extends CustomPostFilterInputContainerModuleProcessor
 {

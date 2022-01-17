@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRoles\TypeAPIs;
+namespace PoPCMSSchema\UserRoles\TypeAPIs;
 
 interface UserRoleTypeAPIInterface
 {

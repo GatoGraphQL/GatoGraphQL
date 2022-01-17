@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\PostCategories\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPSchema\Categories\TypeResolvers\ObjectType\AbstractCategoryObjectTypeResolver;
-use PoPSchema\PostCategories\RelationalTypeDataLoaders\ObjectType\PostCategoryTypeDataLoader;
-use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\AbstractCategoryObjectTypeResolver;
+use PoPCMSSchema\PostCategories\RelationalTypeDataLoaders\ObjectType\PostCategoryTypeDataLoader;
+use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 
 class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 {

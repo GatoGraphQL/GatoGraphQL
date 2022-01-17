@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\CustomPostTagsWP;
+namespace PoPCMSSchema\CustomPostTagsWP;
 
 use PoP\Root\AbstractComponentTest;
 

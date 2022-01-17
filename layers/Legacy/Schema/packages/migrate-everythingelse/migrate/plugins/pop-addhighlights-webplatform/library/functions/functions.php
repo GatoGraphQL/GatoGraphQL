@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 \PoP\Root\App::addFilter('pop_modulemanager:multilayout_labels', 'wassupMultilayoutLabels');
 function wassupMultilayoutLabels($labels)

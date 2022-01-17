@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\Facades\RuntimeRegistries;
+namespace PoPCMSSchema\Menus\Facades\RuntimeRegistries;
 
 use PoP\Root\App;
-use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
+use PoPCMSSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 
 class MenuItemRuntimeRegistryFacade
 {

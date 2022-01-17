@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagMutations\MutationResolvers;
+namespace PoPCMSSchema\PostTagMutations\MutationResolvers;
 
-use PoPSchema\CustomPostTagMutations\MutationResolvers\AbstractSetTagsOnCustomPostMutationResolver;
-use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
-use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\AbstractSetTagsOnCustomPostMutationResolver;
+use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
+use PoPCMSSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
 
 class SetTagsOnPostMutationResolver extends AbstractSetTagsOnCustomPostMutationResolver
 {

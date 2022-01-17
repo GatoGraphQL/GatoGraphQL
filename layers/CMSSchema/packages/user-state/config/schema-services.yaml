@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\UserState\FieldResolvers\:
+    PoPCMSSchema\UserState\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPSchema\UserState\DirectiveResolvers\:
+    PoPCMSSchema\UserState\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'

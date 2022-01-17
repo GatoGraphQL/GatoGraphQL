@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\Tags;
+namespace PoPCMSSchema\Tags;
 
 use PoP\Root\AbstractComponentTest;
 

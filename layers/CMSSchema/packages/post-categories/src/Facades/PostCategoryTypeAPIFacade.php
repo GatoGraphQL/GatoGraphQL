@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\Facades;
+namespace PoPCMSSchema\PostCategories\Facades;
 
 use PoP\Root\App;
-use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 
 class PostCategoryTypeAPIFacade
 {

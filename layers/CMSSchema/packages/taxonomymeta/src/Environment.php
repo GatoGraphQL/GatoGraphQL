@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomyMeta;
+namespace PoPCMSSchema\TaxonomyMeta;
 
 class Environment
 {

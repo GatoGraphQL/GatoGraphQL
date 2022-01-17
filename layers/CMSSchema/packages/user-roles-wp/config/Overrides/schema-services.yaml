@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\UserRoles\FieldResolvers\ObjectType\RootRolesObjectTypeFieldResolver:
-        class: \PoPSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType\RootRolesObjectTypeFieldResolver
+    PoPCMSSchema\UserRoles\FieldResolvers\ObjectType\RootRolesObjectTypeFieldResolver:
+        class: \PoPCMSSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType\RootRolesObjectTypeFieldResolver
 
-    PoPSchema\UserRoles\FieldResolvers\ObjectType\UserObjectTypeFieldResolver:
-        class: \PoPSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType\UserObjectTypeFieldResolver
+    PoPCMSSchema\UserRoles\FieldResolvers\ObjectType\UserObjectTypeFieldResolver:
+        class: \PoPCMSSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType\UserObjectTypeFieldResolver

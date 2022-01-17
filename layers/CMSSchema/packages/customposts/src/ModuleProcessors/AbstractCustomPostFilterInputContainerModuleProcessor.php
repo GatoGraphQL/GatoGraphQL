@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\ModuleProcessors;
+namespace PoPCMSSchema\CustomPosts\ModuleProcessors;
 
 use PoPCMSSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 

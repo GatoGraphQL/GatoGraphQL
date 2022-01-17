@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoPSchema\Pages\Routing\PathUtils;
+use PoPCMSSchema\Pages\Routing\PathUtils;
  
 class PoP_CommonPagesWebPlatform_CDN_Hooks
 {

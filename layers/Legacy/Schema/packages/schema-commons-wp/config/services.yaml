@@ -4,6 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\SchemaCommonsWP\LooseContracts\:
+    PoPCMSSchema\SchemaCommonsWP\LooseContracts\:
         resource: '../src/LooseContracts/*'
 

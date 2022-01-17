@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTags\ModuleProcessors;
+namespace PoPCMSSchema\PostTags\ModuleProcessors;
 
-use PoPSchema\Tags\ModuleProcessors\TagFilterInputContainerModuleProcessor;
+use PoPCMSSchema\Tags\ModuleProcessors\TagFilterInputContainerModuleProcessor;
 
 class PostTagFilterInputContainerModuleProcessor extends TagFilterInputContainerModuleProcessor
 {

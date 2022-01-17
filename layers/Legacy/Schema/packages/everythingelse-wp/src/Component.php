@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\EverythingElseWP;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\CustomPosts\Component as CustomPostsComponent;
+use PoPCMSSchema\CustomPosts\Component as CustomPostsComponent;
 
 /**
  * Initialize component
@@ -31,7 +31,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\CustomPosts\Component::class,
         ];
     }
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Taxonomies\Constants;
+namespace PoPCMSSchema\Taxonomies\Constants;
 
 /**
  * Same list as defined for WordPress

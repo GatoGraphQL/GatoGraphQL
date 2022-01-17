@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Menus\TypeResolvers\InputObjectType;
 
-use PoPSchema\Menus\Constants\MenuOrderBy;
-use PoPSchema\Menus\TypeResolvers\EnumType\MenuOrderByEnumTypeResolver;
+use PoPCMSSchema\Menus\Constants\MenuOrderBy;
+use PoPCMSSchema\Menus\TypeResolvers\EnumType\MenuOrderByEnumTypeResolver;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 class MenuSortInputObjectTypeResolver extends SortInputObjectTypeResolver

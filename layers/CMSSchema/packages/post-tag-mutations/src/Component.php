@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagMutations;
+namespace PoPCMSSchema\PostTagMutations;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,9 +19,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPostTagMutations\Component::class,
-            \PoPSchema\PostMutations\Component::class,
-            \PoPSchema\PostTags\Component::class,
+            \PoPCMSSchema\CustomPostTagMutations\Component::class,
+            \PoPCMSSchema\PostMutations\Component::class,
+            \PoPCMSSchema\PostTags\Component::class,
         ];
     }
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMeta\Facades;
+namespace PoPCMSSchema\CustomPostMeta\Facades;
 
 use PoP\Root\App;
-use PoPSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
+use PoPCMSSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
 
 class CustomPostMetaTypeAPIFacade
 {

@@ -21,7 +21,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\Highlights\Component::class,
-            \PoPSchema\CustomPostsWP\Component::class,
+            \PoPCMSSchema\CustomPostsWP\Component::class,
         ];
     }
 

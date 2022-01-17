@@ -1,8 +1,8 @@
 <?php
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
-use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
-use PoPSchema\Users\RelationalTypeDataLoaders\ObjectType\UserTypeDataLoader;
+use PoPCMSSchema\CustomPostMutations\LooseContracts\LooseContractSet;
+use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPCMSSchema\Users\RelationalTypeDataLoaders\ObjectType\UserTypeDataLoader;
 
 define('GD_ROLE_PROFILE', 'profile');
 

@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\PostTags\ModuleProcessors\:
+    PoPCMSSchema\PostTags\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'

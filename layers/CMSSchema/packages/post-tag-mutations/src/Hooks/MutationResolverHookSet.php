@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagMutations\Hooks;
+namespace PoPCMSSchema\PostTagMutations\Hooks;
 
-use PoPSchema\CustomPostTagMutations\Hooks\AbstractMutationResolverHookSet;
-use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
-use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
-use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostTagMutations\Hooks\AbstractMutationResolverHookSet;
+use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
+use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
+use PoPCMSSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
 
 class MutationResolverHookSet extends AbstractMutationResolverHookSet
 {

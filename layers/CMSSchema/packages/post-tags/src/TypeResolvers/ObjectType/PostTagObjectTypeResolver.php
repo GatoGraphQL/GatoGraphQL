@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTags\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\PostTags\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use PoPSchema\PostTags\RelationalTypeDataLoaders\ObjectType\PostTagTypeDataLoader;
-use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
-use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
-use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
+use PoPCMSSchema\PostTags\RelationalTypeDataLoaders\ObjectType\PostTagTypeDataLoader;
+use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
 
 class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 {

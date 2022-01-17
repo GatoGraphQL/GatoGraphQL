@@ -10,7 +10,7 @@ use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberPrivilegeEnumTypeResol
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberStatusEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberTagEnumTypeResolver;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends AbstractObjectTypeFieldResolver
 {
@@ -148,7 +148,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
          // ----------------------------------------
             case 'memberstatus':
                 // object_id is the user whose membership was updated
-                $status = \PoPSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+                $status = \PoPCMSSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
 
                 // Filter status for the community: user_id
                 return gdUreCommunityMembershipstatusFilterbycommunity($status, $notification->user_id);
@@ -162,7 +162,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return $status->getSelectedValue();
 
             case 'memberprivileges':
-                $privileges = \PoPSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
+                $privileges = \PoPCMSSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
 
                 // Filter status for the community: user_id
                 return gdUreCommunityMembershipstatusFilterbycommunity($privileges, $notification->user_id);
@@ -176,7 +176,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return $privileges->getSelectedValue();
 
             case 'membertags':
-                $tags = \PoPSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
+                $tags = \PoPCMSSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
 
                 // Filter status for the community: user_id
                 return gdUreCommunityMembershipstatusFilterbycommunity($tags, $notification->user_id);

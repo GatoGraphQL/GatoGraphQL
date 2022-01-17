@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Users\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPSchema\Users\Component;
-use PoPSchema\Users\ComponentConfiguration;
+use PoPCMSSchema\Users\Component;
+use PoPCMSSchema\Users\ComponentConfiguration;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
 class UserPaginationInputObjectTypeResolver extends PaginationInputObjectTypeResolver

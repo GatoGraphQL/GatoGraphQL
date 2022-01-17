@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPostMeta\Hooks;
 
-use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
+use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPWPSchema\Meta\Hooks\AbstractMetaOrderByQueryHookSet;
 
 class CustomPostMetaOrderByQueryHookSet extends AbstractMetaOrderByQueryHookSet

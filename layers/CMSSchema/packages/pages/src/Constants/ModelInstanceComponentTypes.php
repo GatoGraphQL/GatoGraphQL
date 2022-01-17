@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Pages\Constants;
+namespace PoPCMSSchema\Pages\Constants;
 
 class ModelInstanceComponentTypes
 {

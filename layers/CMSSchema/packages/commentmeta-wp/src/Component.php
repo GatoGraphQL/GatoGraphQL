@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMetaWP;
+namespace PoPCMSSchema\CommentMetaWP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,9 +19,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CommentMeta\Component::class,
-            \PoPSchema\CommentsWP\Component::class,
-            \PoPSchema\MetaQueryWP\Component::class,
+            \PoPCMSSchema\CommentMeta\Component::class,
+            \PoPCMSSchema\CommentsWP\Component::class,
+            \PoPCMSSchema\MetaQueryWP\Component::class,
         ];
     }
 

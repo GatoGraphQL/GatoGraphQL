@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType;
+namespace PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\UnionType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 
 class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {

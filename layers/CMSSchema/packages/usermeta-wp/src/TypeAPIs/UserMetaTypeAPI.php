@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserMetaWP\TypeAPIs;
+namespace PoPCMSSchema\UserMetaWP\TypeAPIs;
 
-use PoPSchema\UserMeta\TypeAPIs\AbstractUserMetaTypeAPI;
+use PoPCMSSchema\UserMeta\TypeAPIs\AbstractUserMetaTypeAPI;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

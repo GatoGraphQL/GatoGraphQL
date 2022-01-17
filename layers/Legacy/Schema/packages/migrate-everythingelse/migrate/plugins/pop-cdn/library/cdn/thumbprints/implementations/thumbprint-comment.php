@@ -1,6 +1,6 @@
 <?php
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 

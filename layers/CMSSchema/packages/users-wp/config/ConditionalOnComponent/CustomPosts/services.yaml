@@ -4,11 +4,11 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Users\ConditionalOnComponent\CustomPosts\TypeAPIs\CustomPostUserTypeAPIInterface:
-        class: \PoPSchema\UsersWP\ConditionalOnComponent\CustomPosts\TypeAPIs\CustomPostUserTypeAPI
+    PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\TypeAPIs\CustomPostUserTypeAPIInterface:
+        class: \PoPCMSSchema\UsersWP\ConditionalOnComponent\CustomPosts\TypeAPIs\CustomPostUserTypeAPI
 
-    PoPSchema\UsersWP\ConditionalOnComponent\CustomPosts\LooseContracts\:
+    PoPCMSSchema\UsersWP\ConditionalOnComponent\CustomPosts\LooseContracts\:
         resource: '../../../src/ConditionalOnComponent/CustomPosts/LooseContracts/*'
 
-    PoPSchema\UsersWP\ConditionalOnComponent\CustomPosts\Hooks\:
+    PoPCMSSchema\UsersWP\ConditionalOnComponent\CustomPosts\Hooks\:
         resource: '../../../src/ConditionalOnComponent/CustomPosts/Hooks/*'

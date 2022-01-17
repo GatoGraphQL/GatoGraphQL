@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\Meta;
+namespace PoPCMSSchema\Meta;
 
 use PoP\Root\AbstractComponentTest;
 

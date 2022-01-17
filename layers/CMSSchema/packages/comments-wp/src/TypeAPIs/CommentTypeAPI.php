@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentsWP\TypeAPIs;
+namespace PoPCMSSchema\CommentsWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPSchema\Comments\Constants\CommentOrderBy;
-use PoPSchema\Comments\Constants\CommentStatus;
-use PoPSchema\Comments\Constants\CommentTypes;
-use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPCMSSchema\Comments\Constants\CommentOrderBy;
+use PoPCMSSchema\Comments\Constants\CommentStatus;
+use PoPCMSSchema\Comments\Constants\CommentTypes;
+use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Comment;

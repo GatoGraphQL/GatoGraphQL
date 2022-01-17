@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus;
+namespace PoPCMSSchema\Menus;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\Engine\Component::class,
-            \PoPSchema\Taxonomies\Component::class,
+            \PoPCMSSchema\Taxonomies\Component::class,
         ];
     }
 

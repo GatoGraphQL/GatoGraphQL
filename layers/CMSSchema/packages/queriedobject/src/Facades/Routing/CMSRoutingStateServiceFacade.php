@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\QueriedObject\Facades\Routing;
+namespace PoPCMSSchema\QueriedObject\Facades\Routing;
 
 use PoP\Root\App;
-use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
+use PoPCMSSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
 
 class CMSRoutingStateServiceFacade
 {

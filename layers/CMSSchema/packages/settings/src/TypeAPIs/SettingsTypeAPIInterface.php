@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Settings\TypeAPIs;
+namespace PoPCMSSchema\Settings\TypeAPIs;
 
 use InvalidArgumentException;
 

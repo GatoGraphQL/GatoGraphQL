@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\Comments;
+namespace PoPCMSSchema\Comments;
 
 use PoP\Root\AbstractComponentTest;
 

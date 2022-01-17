@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomyMeta\Facades;
+namespace PoPCMSSchema\TaxonomyMeta\Facades;
 
 use PoP\Root\App;
-use PoPSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
+use PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 
 class TaxonomyMetaTypeAPIFacade
 {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostMutations;
+namespace PoPCMSSchema\PostMutations;
 
 use PoP\Root\App;
 use PoP\API\Component as APIComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Users\Component as UsersComponent;
+use PoPCMSSchema\Users\Component as UsersComponent;
 
 /**
  * Initialize component
@@ -22,8 +22,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPostMutations\Component::class,
-            \PoPSchema\Posts\Component::class,
+            \PoPCMSSchema\CustomPostMutations\Component::class,
+            \PoPCMSSchema\Posts\Component::class,
         ];
     }
 
@@ -34,7 +34,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\API\Component::class,
-            \PoPSchema\Users\Component::class,
+            \PoPCMSSchema\Users\Component::class,
         ];
     }
 

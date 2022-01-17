@@ -8,7 +8,7 @@ class PoP_CDNWP_WP_Thumbprint_User extends PoP_CDN_Thumbprint_User
         return array_merge(
             parent::getQuery(),
             [
-                'meta_key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_LASTEDITED),
+                'meta_key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_LASTEDITED),
             ]
         );
     }

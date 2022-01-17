@@ -3,7 +3,7 @@
 namespace PoP\ApplicationTaxonomies\WP;
 
 use PoPSchema\EverythingElse\Misc\TagHelpers;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class FunctionAPI extends \PoP\ApplicationTaxonomies\FunctionAPI_Base
 {

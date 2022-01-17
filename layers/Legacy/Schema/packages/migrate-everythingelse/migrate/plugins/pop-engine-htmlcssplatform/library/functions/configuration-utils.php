@@ -1,6 +1,6 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPCMSSchema\CustomPosts\Types\Status;
 
 class PoP_HTMLCSSPlatform_ConfigurationUtils
 {

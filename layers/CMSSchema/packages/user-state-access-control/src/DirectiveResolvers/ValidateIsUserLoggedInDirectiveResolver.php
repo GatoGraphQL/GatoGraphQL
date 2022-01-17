@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateAccessControl\DirectiveResolvers;
+namespace PoPCMSSchema\UserStateAccessControl\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointDirectiveResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpointDirectiveResolver
 {

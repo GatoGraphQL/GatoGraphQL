@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Meta;
+namespace PoPCMSSchema\Meta;
 
 use PoP\Root\Component\AbstractComponent;
 

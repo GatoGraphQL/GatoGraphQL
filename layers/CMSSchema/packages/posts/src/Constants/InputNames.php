@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Posts\Constants;
+namespace PoPCMSSchema\Posts\Constants;
 
 class InputNames
 {

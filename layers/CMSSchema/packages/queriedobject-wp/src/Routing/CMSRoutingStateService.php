@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\QueriedObjectWP\Routing;
+namespace PoPCMSSchema\QueriedObjectWP\Routing;
 
 use PoP\RootWP\Routing\RoutingManagerTrait;
-use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
+use PoPCMSSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
 use WP_Query;
 
 class CMSRoutingStateService implements CMSRoutingStateServiceInterface

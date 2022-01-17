@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades;
+namespace PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Facades;
 
 use PoP\Root\App;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\TypeAPIs\CustomPostUserTypeAPIInterface;
+use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\TypeAPIs\CustomPostUserTypeAPIInterface;
 
 class CustomPostUserTypeAPIFacade
 {

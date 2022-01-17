@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagsWP\Hooks;
+namespace PoPCMSSchema\PostTagsWP\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\RootWP\Routing\HookNames;
-use PoPSchema\PostTags\Component;
-use PoPSchema\PostTags\ComponentConfiguration;
+use PoPCMSSchema\PostTags\Component;
+use PoPCMSSchema\PostTags\ComponentConfiguration;
 
 class RoutingHookSet extends AbstractHookSet
 {

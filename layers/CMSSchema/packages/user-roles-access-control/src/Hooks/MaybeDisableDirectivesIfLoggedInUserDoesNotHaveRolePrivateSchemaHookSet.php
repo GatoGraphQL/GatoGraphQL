@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesAccessControl\Hooks;
+namespace PoPCMSSchema\UserRolesAccessControl\Hooks;
 
-use PoPSchema\UserRolesAccessControl\Helpers\UserRoleHelper;
-use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
+use PoPCMSSchema\UserRolesAccessControl\Helpers\UserRoleHelper;
+use PoPCMSSchema\UserRolesAccessControl\Services\AccessControlGroups;
 
 class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extends AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivateSchemaHookSet
 {

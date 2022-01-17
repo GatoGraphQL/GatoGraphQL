@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateMutationsWP\TypeAPIs;
+namespace PoPCMSSchema\UserStateMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPCMSSchema\SchemaCommons\Error\ErrorHelperInterface;
-use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
+use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

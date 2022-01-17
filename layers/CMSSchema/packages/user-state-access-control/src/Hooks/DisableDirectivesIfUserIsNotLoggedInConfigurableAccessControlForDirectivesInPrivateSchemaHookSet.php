@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateAccessControl\Hooks;
+namespace PoPCMSSchema\UserStateAccessControl\Hooks;
 
-use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
+use PoPCMSSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 
 class DisableDirectivesIfUserIsNotLoggedInConfigurableAccessControlForDirectivesInPrivateSchemaHookSet extends AbstractUserStateConfigurableAccessControlForDirectivesInPrivateSchemaHookSet
 {

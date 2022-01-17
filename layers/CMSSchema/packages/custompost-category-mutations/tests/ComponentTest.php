@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\CustomPostCategoryMutations;
+namespace PoPCMSSchema\CustomPostCategoryMutations;
 
 use PoP\Root\AbstractComponentTest;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
-use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties as UpstreamMutationInputProperties;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties as UpstreamMutationInputProperties;
 
 class MutationInputProperties extends UpstreamMutationInputProperties
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTags\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\PostTags\FieldResolvers\ObjectType;
 
-use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPSchema\Tags\FieldResolvers\ObjectType\AbstractCustomPostListTagObjectTypeFieldResolver;
-use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
-use PoPSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
+use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoPCMSSchema\Tags\FieldResolvers\ObjectType\AbstractCustomPostListTagObjectTypeFieldResolver;
+use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 
 class CustomPostListPostTagObjectTypeFieldResolver extends AbstractCustomPostListTagObjectTypeFieldResolver
 {

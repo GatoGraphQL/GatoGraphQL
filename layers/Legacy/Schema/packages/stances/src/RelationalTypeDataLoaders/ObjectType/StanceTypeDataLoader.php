@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\RelationalTypeDataLoaders\ObjectType;
 
-use PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostTypeDataLoader;
+use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostTypeDataLoader;
 
 class StanceTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {

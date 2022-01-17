@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Meta\FieldResolvers\:
+    PoPCMSSchema\Meta\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPSchema\Meta\TypeResolvers\:
+    PoPCMSSchema\Meta\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

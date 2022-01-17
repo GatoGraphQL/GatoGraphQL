@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Pages\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Pages\TypeResolvers\InputObjectType;
 
 class RootPagesFilterInputObjectTypeResolver extends AbstractPagesFilterInputObjectTypeResolver
 {

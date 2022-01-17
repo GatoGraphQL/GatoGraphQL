@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategoriesWP;
+namespace PoPCMSSchema\PostCategoriesWP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\PostCategories\Component::class,
-            \PoPSchema\CustomPostCategoriesWP\Component::class,
+            \PoPCMSSchema\PostCategories\Component::class,
+            \PoPCMSSchema\CustomPostCategoriesWP\Component::class,
         ];
     }
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomyMeta\TypeAPIs;
+namespace PoPCMSSchema\TaxonomyMeta\TypeAPIs;
 
 use PoP\Root\App;
 use InvalidArgumentException;
-use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
-use PoPSchema\TaxonomyMeta\Component;
-use PoPSchema\TaxonomyMeta\ComponentConfiguration;
+use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
+use PoPCMSSchema\TaxonomyMeta\Component;
+use PoPCMSSchema\TaxonomyMeta\ComponentConfiguration;
 
 abstract class AbstractTaxonomyMetaTypeAPI extends AbstractMetaTypeAPI implements TaxonomyMetaTypeAPIInterface
 {

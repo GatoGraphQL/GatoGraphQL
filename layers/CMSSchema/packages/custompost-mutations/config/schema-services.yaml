@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\CustomPostMutations\FieldResolvers\:
+    PoPCMSSchema\CustomPostMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPSchema\CustomPostMutations\TypeResolvers\:
+    PoPCMSSchema\CustomPostMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

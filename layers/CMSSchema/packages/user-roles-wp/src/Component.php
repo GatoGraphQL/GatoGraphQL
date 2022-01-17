@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesWP;
+namespace PoPCMSSchema\UserRolesWP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\UserRoles\Component::class,
-            \PoPSchema\UsersWP\Component::class,
+            \PoPCMSSchema\UserRoles\Component::class,
+            \PoPCMSSchema\UsersWP\Component::class,
         ];
     }
 
@@ -30,7 +30,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPSchema\UserStateWP\Component::class,
+            \PoPCMSSchema\UserStateWP\Component::class,
         ];
     }
 

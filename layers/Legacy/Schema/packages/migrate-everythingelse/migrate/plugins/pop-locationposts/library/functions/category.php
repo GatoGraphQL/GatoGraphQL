@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
+use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 /**
  * Integration with Latest Everything Block

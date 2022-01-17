@@ -8,8 +8,8 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface;
-use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
-use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
+use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
+use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use WP_Post;
 
 class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver

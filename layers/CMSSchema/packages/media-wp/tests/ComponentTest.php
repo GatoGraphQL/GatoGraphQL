@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\MediaWP;
+namespace PoPCMSSchema\MediaWP;
 
 use PoP\Root\AbstractComponentTest;
 

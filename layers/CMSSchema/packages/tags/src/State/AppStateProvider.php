@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Tags\State;
+namespace PoPCMSSchema\Tags\State;
 
 use PoP\Root\State\AbstractAppStateProvider;
-use PoPSchema\Tags\Routing\RequestNature;
-use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+use PoPCMSSchema\Tags\Routing\RequestNature;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 
 class AppStateProvider extends AbstractAppStateProvider
 {

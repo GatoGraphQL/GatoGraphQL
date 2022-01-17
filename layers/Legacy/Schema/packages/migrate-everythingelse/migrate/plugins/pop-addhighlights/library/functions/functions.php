@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Engine\Route\RouteUtils;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 \PoP\Root\App::addFilter('gd-createupdateutils:edit-url', 'maybeGetHighlightEditUrl', 10, 2);
 function maybeGetHighlightEditUrl($url, $post_id)

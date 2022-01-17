@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SettingsWP\TypeAPIs;
+namespace PoPCMSSchema\SettingsWP\TypeAPIs;
 
-use PoPSchema\Settings\TypeAPIs\AbstractSettingsTypeAPI;
+use PoPCMSSchema\Settings\TypeAPIs\AbstractSettingsTypeAPI;
 
 class SettingsTypeAPI extends AbstractSettingsTypeAPI
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMedia\TypeAPIs;
+namespace PoPCMSSchema\CustomPostMedia\TypeAPIs;
 
 interface CustomPostMediaTypeAPIInterface
 {

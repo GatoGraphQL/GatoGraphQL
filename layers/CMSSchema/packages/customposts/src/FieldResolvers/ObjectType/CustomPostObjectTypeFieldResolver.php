@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\CustomPosts\FieldResolvers\ObjectType;
 
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 
 class CustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {

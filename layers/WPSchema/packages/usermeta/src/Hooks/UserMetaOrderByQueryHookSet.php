@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\UserMeta\Hooks;
 
-use PoPSchema\UsersWP\TypeAPIs\UserTypeAPI;
+use PoPCMSSchema\UsersWP\TypeAPIs\UserTypeAPI;
 use PoPWPSchema\Meta\Hooks\AbstractMetaOrderByQueryHookSet;
 
 class UserMetaOrderByQueryHookSet extends AbstractMetaOrderByQueryHookSet

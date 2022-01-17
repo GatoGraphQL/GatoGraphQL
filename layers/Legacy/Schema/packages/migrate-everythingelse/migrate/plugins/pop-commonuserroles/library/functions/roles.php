@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 const GD_URE_ROLE_INDIVIDUAL = 'individual';
 const GD_URE_ROLE_ORGANIZATION = 'organization';

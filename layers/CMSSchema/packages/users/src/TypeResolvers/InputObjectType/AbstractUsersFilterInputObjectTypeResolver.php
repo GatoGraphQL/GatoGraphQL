@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Users\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 

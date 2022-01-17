@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTags;
+namespace PoPCMSSchema\PostTags;
 
 use PoP\Root\App;
 use PoP\API\Component as APIComponent;
@@ -22,8 +22,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\Posts\Component::class,
-            \PoPSchema\Tags\Component::class,
+            \PoPCMSSchema\Posts\Component::class,
+            \PoPCMSSchema\Tags\Component::class,
         ];
     }
 

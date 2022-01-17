@@ -4,14 +4,14 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Pages\State\:
+    PoPCMSSchema\Pages\State\:
         resource: '../src/State/*'
 
-    PoPSchema\Pages\Hooks\:
+    PoPCMSSchema\Pages\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoPSchema\Pages\LooseContracts\:
+    PoPCMSSchema\Pages\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPSchema\Pages\ModuleProcessors\:
+    PoPCMSSchema\Pages\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'

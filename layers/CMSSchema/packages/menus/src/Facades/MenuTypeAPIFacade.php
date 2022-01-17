@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\Facades;
+namespace PoPCMSSchema\Menus\Facades;
 
 use PoP\Root\App;
-use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
+use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 
 class MenuTypeAPIFacade
 {

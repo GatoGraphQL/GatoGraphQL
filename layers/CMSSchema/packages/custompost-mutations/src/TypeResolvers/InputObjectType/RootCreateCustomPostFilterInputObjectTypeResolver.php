@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType;
 
 class RootCreateCustomPostFilterInputObjectTypeResolver extends AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver implements CreateCustomPostFilterInputObjectTypeResolverInterface
 {

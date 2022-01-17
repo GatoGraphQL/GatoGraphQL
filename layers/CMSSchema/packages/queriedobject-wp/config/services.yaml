@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface:
-        class: \PoPSchema\QueriedObjectWP\Routing\CMSRoutingStateService
+    PoPCMSSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface:
+        class: \PoPCMSSchema\QueriedObjectWP\Routing\CMSRoutingStateService

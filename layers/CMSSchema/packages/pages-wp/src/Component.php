@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PagesWP;
+namespace PoPCMSSchema\PagesWP;
 
 use PoP\Root\App;
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
-use PoPSchema\Pages\Component as PagesComponent;
+use PoPCMSSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
+use PoPCMSSchema\Pages\Component as PagesComponent;
 
 /**
  * Initialize component
@@ -22,8 +22,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\Pages\Component::class,
-            \PoPSchema\CustomPostsWP\Component::class,
+            \PoPCMSSchema\Pages\Component::class,
+            \PoPCMSSchema\CustomPostsWP\Component::class,
         ];
     }
 

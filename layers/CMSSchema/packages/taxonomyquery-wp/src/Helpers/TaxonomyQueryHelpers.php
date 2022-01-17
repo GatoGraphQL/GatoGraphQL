@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomyQueryWP\Helpers;
+namespace PoPCMSSchema\TaxonomyQueryWP\Helpers;
 
 class TaxonomyQueryHelpers
 {

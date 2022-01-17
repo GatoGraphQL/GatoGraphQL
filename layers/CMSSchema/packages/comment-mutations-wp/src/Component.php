@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutationsWP;
+namespace PoPCMSSchema\CommentMutationsWP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,9 +19,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CommentMutations\Component::class,
-            \PoPSchema\CommentsWP\Component::class,
-            \PoPSchema\UserStateWP\Component::class,
+            \PoPCMSSchema\CommentMutations\Component::class,
+            \PoPCMSSchema\CommentsWP\Component::class,
+            \PoPCMSSchema\UserStateWP\Component::class,
         ];
     }
 

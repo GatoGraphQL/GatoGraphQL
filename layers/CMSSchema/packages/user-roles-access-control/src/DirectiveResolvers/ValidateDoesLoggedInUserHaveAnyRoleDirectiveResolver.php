@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesAccessControl\DirectiveResolvers;
+namespace PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers;
 
 use PoP\Root\App;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 
 class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {

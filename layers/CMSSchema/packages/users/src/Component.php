@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users;
+namespace PoPCMSSchema\Users;
 
 use PoP\Root\App;
 use PoP\API\Component as APIComponent;
 use PoP\RESTAPI\Component as RESTAPIComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\CustomPosts\Component as CustomPostsComponent;
+use PoPCMSSchema\CustomPosts\Component as CustomPostsComponent;
 
 /**
  * Initialize component
@@ -23,7 +23,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\QueriedObject\Component::class,
+            \PoPCMSSchema\QueriedObject\Component::class,
         ];
     }
 
@@ -35,7 +35,7 @@ class Component extends AbstractComponent
         return [
             \PoP\API\Component::class,
             \PoP\RESTAPI\Component::class,
-            \PoPSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\CustomPosts\Component::class,
         ];
     }
 
@@ -62,7 +62,7 @@ class Component extends AbstractComponent
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/CustomPosts');
             $this->initSchemaServices(
                 dirname(__DIR__),
-                $skipSchema || in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses),
+                $skipSchema || in_array(\PoPCMSSchema\CustomPosts\Component::class, $skipSchemaComponentClasses),
                 '/ConditionalOnComponent/CustomPosts'
             );
             if (class_exists(APIComponent::class) && App::getComponent(APIComponent::class)->isEnabled()) {

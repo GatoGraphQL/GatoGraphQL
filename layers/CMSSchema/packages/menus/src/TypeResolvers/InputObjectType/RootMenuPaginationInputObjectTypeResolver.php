@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Menus\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPSchema\Menus\Component;
-use PoPSchema\Menus\ComponentConfiguration;
+use PoPCMSSchema\Menus\Component;
+use PoPCMSSchema\Menus\ComponentConfiguration;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
 class RootMenuPaginationInputObjectTypeResolver extends PaginationInputObjectTypeResolver

@@ -2,10 +2,10 @@
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Routing\RequestNature;
-use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
-use PoPSchema\Pages\Routing\RequestNature as PageRequestNature;
-use PoPSchema\Tags\Routing\RequestNature as TagRequestNature;
-use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Pages\Routing\RequestNature as PageRequestNature;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 define ('POP_RESOURCELOADERIDENTIFIER_FORMAT', 'f:');
 define ('POP_RESOURCELOADERIDENTIFIER_ROUTE', 't:');
@@ -78,7 +78,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                 case PageRequestNature::PAGE:
                 case CustomPostRequestNature::CUSTOMPOST:
 
-                    $path = GeneralUtils::maybeAddTrailingSlash(\PoPSchema\Posts\Engine_Utils::getCustomPostPath(\PoP\Root\App::getState(['routing', 'queried-object-id']), true));
+                    $path = GeneralUtils::maybeAddTrailingSlash(\PoPCMSSchema\Posts\Engine_Utils::getCustomPostPath(\PoP\Root\App::getState(['routing', 'queried-object-id']), true));
                     $path_resources[$nature][$path][$key] = $resources;
                     break;
             }

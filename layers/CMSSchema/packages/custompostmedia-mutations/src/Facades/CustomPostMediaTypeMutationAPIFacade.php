@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMediaMutations\Facades;
+namespace PoPCMSSchema\CustomPostMediaMutations\Facades;
 
 use PoP\Root\App;
-use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 
 class CustomPostMediaTypeMutationAPIFacade
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\TypeResolvers\EnumType;
+namespace PoPCMSSchema\Menus\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPSchema\Menus\Constants\MenuOrderBy;
+use PoPCMSSchema\Menus\Constants\MenuOrderBy;
 
 class MenuOrderByEnumTypeResolver extends AbstractEnumTypeResolver
 {

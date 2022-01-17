@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateMutations\TypeAPIs;
+namespace PoPCMSSchema\UserStateMutations\TypeAPIs;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

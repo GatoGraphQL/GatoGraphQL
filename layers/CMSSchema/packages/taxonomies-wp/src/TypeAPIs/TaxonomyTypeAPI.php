@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomiesWP\TypeAPIs;
+namespace PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Taxonomies\Constants\TaxonomyOrderBy;
-use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+use PoPCMSSchema\Taxonomies\Constants\TaxonomyOrderBy;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

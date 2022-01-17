@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTags;
+namespace PoPCMSSchema\PostTags;
 
 class Environment
 {

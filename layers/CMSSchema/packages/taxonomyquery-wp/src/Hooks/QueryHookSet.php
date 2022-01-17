@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomyQueryWP\Hooks;
+namespace PoPCMSSchema\TaxonomyQueryWP\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use PoPSchema\TaxonomyQueryWP\Helpers\TaxonomyQueryHelpers;
+use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
+use PoPCMSSchema\TaxonomyQueryWP\Helpers\TaxonomyQueryHelpers;
 
 class QueryHookSet extends AbstractHookSet
 {

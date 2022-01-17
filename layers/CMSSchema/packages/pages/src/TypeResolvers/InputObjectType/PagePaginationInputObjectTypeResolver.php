@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Pages\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Pages\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostPaginationInputObjectTypeResolver;
-use PoPSchema\Pages\Component;
-use PoPSchema\Pages\ComponentConfiguration;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostPaginationInputObjectTypeResolver;
+use PoPCMSSchema\Pages\Component;
+use PoPCMSSchema\Pages\ComponentConfiguration;
 
 class PagePaginationInputObjectTypeResolver extends CustomPostPaginationInputObjectTypeResolver
 {

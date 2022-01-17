@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Root\Routing\RequestNature;
-use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class Wassup_URE_RoleProcessors_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPWPSchema\CustomPostMeta\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPSchema\CustomPostMeta\Component;
-use PoPSchema\CustomPostMeta\ComponentConfiguration;
+use PoPCMSSchema\CustomPostMeta\Component;
+use PoPCMSSchema\CustomPostMeta\ComponentConfiguration;
 use PoPWPSchema\Meta\TypeResolvers\InputObjectType\AbstractMetaQueryInputObjectTypeResolver;
 
 class CustomPostMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObjectTypeResolver

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\FilterInputProcessors;
+namespace PoPCMSSchema\CustomPosts\FilterInputProcessors;
 
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
-use PoPSchema\CustomPosts\FilterInput\FilterInputHelper;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
+use PoPCMSSchema\CustomPosts\FilterInput\FilterInputHelper;
+use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {

@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\CustomPostMutations\LooseContracts\:
+    PoPCMSSchema\CustomPostMutations\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPSchema\CustomPostMutations\ModuleProcessors\:
+    PoPCMSSchema\CustomPostMutations\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'

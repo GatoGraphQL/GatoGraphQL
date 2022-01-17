@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMedia\Facades;
+namespace PoPCMSSchema\CustomPostMedia\Facades;
 
 use PoP\Root\App;
-use PoPSchema\CustomPostMedia\TypeAPIs\CustomPostMediaTypeAPIInterface;
+use PoPCMSSchema\CustomPostMedia\TypeAPIs\CustomPostMediaTypeAPIInterface;
 
 class CustomPostMediaTypeAPIFacade
 {

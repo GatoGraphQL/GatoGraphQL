@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRoles;
+namespace PoPCMSSchema\UserRoles;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\Users\Component::class,
+            \PoPCMSSchema\Users\Component::class,
         ];
     }
 

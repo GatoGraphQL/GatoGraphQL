@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentsWP\ConditionalOnComponent\Users\Hooks;
+namespace PoPCMSSchema\CommentsWP\ConditionalOnComponent\Users\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\Comments\ConditionalOnComponent\Users\Constants\CommentOrderBy;
-use PoPSchema\CommentsWP\TypeAPIs\CommentTypeAPI;
+use PoPCMSSchema\Comments\ConditionalOnComponent\Users\Constants\CommentOrderBy;
+use PoPCMSSchema\CommentsWP\TypeAPIs\CommentTypeAPI;
 
 class QueryHookSet extends AbstractHookSet
 {

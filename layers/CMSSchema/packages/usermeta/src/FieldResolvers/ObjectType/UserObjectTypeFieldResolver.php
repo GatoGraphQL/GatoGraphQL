@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserMeta\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\UserMeta\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
-use PoPSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
-use PoPSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
+use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
+use PoPCMSSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {

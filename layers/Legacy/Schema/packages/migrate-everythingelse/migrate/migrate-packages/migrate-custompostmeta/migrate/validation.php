@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\CustomPostMeta;
+namespace PoPCMSSchema\CustomPostMeta;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_POSTMETA_POP_ENGINE_MIN_VERSION', 0.1);

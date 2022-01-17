@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\UserRolesACL;
+namespace PoPCMSSchema\UserRolesACL;
 
 use PoP\Root\AbstractComponentTest;
 

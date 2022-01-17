@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\Constants;
+namespace PoPCMSSchema\Comments\Constants;
 
 class CommentOrderBy
 {

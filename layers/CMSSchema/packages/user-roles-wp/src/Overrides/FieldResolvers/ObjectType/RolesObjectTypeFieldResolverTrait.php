@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
+use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 
 trait RolesObjectTypeFieldResolverTrait
 {

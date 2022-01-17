@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\Menus\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoPSchema\Menus\ObjectModels\MenuItem;
-use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
-use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
-use PoPSchema\Menus\TypeResolvers\ObjectType\MenuItemObjectTypeResolver;
-use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
+use PoPCMSSchema\Menus\ObjectModels\MenuItem;
+use PoPCMSSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
+use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
+use PoPCMSSchema\Menus\TypeResolvers\ObjectType\MenuItemObjectTypeResolver;
+use PoPCMSSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver

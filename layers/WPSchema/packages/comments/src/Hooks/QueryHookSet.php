@@ -6,7 +6,7 @@ namespace PoPWPSchema\Comments\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\CommentsWP\TypeAPIs\CommentTypeAPI;
+use PoPCMSSchema\CommentsWP\TypeAPIs\CommentTypeAPI;
 use PoPWPSchema\Comments\Constants\CommentOrderBy;
 
 class QueryHookSet extends AbstractHookSet

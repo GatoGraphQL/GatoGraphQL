@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\ConditionalOnComponent\Users\Facades;
+namespace PoPCMSSchema\Media\ConditionalOnComponent\Users\Facades;
 
 use PoP\Root\App;
-use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
+use PoPCMSSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
 
 class UserMediaTypeAPIFacade
 {

@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CommentMetaWP\Component::class,
+            \PoPCMSSchema\CommentMetaWP\Component::class,
             \PoPWPSchema\Comments\Component::class,
             \PoPWPSchema\Meta\Component::class,
         ];

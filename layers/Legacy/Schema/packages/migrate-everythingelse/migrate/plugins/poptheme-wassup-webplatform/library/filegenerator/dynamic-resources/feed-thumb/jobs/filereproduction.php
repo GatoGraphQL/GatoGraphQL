@@ -1,6 +1,6 @@
 <?php
 
-use PoPSchema\Media\Facades\MediaTypeAPIFacade;
+use PoPCMSSchema\Media\Facades\MediaTypeAPIFacade;
 
 class PoPThemeWassup_FileReproduction_FeedThumb extends PoP_Engine_CSSFileReproductionBase
 {

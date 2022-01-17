@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\TypeResolvers\EnumType;
+namespace PoPCMSSchema\CustomPosts\TypeResolvers\EnumType;
 
 /**
  * Enable to search custom posts by additional statuses, such as "any"

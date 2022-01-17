@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategoriesWP\TypeAPIs;
+namespace PoPCMSSchema\PostCategoriesWP\TypeAPIs;
 
-use PoPSchema\CategoriesWP\TypeAPIs\AbstractCategoryTypeAPI;
-use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoPCMSSchema\CategoriesWP\TypeAPIs\AbstractCategoryTypeAPI;
+use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

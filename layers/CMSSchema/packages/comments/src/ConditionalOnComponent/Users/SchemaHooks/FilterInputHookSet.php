@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\ConditionalOnComponent\Users\SchemaHooks;
+namespace PoPCMSSchema\Comments\ConditionalOnComponent\Users\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\Comments\ConditionalOnComponent\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor as UserFilterInputModuleProcessor;
-use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\Comments\ConditionalOnComponent\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor as UserFilterInputModuleProcessor;
+use PoPCMSSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
+use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
 {

@@ -4,17 +4,17 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Tags\State\:
+    PoPCMSSchema\Tags\State\:
         resource: '../src/State/*'
 
-    PoPSchema\Tags\LooseContracts\:
+    PoPCMSSchema\Tags\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPSchema\Tags\ModuleProcessors\:
+    PoPCMSSchema\Tags\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
-    PoPSchema\Tags\FilterInputProcessors\:
+    PoPCMSSchema\Tags\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'
 
-    PoPSchema\Tags\TypeResolvers\:
+    PoPCMSSchema\Tags\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

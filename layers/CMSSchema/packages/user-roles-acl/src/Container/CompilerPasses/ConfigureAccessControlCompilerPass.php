@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesACL\Container\CompilerPasses;
+namespace PoPCMSSchema\UserRolesACL\Container\CompilerPasses;
 
 use PoP\AccessControl\Services\AccessControlGroups as AccessControlGroups;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
-use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
-use PoPSchema\UserRolesACL\Environment;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
-use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
-use PoPSchema\UserStateAccessControl\Services\AccessControlGroups as UserStateAccessControlGroups;
+use PoPCMSSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
+use PoPCMSSchema\UserRolesACL\Environment;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
+use PoPCMSSchema\UserStateAccessControl\Services\AccessControlGroups as UserStateAccessControlGroups;
 
 class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
 {

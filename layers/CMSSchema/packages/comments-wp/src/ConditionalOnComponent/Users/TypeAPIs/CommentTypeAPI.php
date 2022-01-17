@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentsWP\ConditionalOnComponent\Users\TypeAPIs;
+namespace PoPCMSSchema\CommentsWP\ConditionalOnComponent\Users\TypeAPIs;
 
-use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface;
+use PoPCMSSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface;
 use WP_Comment;
 
 /**

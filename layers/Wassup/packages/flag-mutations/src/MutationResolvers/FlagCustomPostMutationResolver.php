@@ -7,7 +7,7 @@ namespace PoPSitesWassup\FlagMutations\MutationResolvers;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 
 class FlagCustomPostMutationResolver extends AbstractMutationResolver
 {

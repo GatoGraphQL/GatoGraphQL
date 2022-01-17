@@ -35,7 +35,7 @@ function printUserPreferencesField($user_id, $input)
 {
     global $user_preferences;
     if ($user_preferences == null) {
-        $user_preferences = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES);
+        $user_preferences = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES);
     }
 
     $checked = isset($_POST['user_preferences']) ? in_array($input, $_POST['user_preferences']) : in_array($input, $user_preferences);
@@ -55,11 +55,11 @@ function extraUserProfileFields($user)
     <table class="form-table">
     <tr>
     <th><label for="title"><?php _e("Title", 'pop-coreprocessors'); ?></label></th>
-    <td><input type="text" name="title" id="title" value="<?php echo \PoPSchema\UserMeta\Utils::getUserMeta($user->ID, GD_METAKEY_PROFILE_TITLE, true) ?>" class="regular-text code" /></td>
+    <td><input type="text" name="title" id="title" value="<?php echo \PoPCMSSchema\UserMeta\Utils::getUserMeta($user->ID, GD_METAKEY_PROFILE_TITLE, true) ?>" class="regular-text code" /></td>
     </tr>
     <tr>
     <th><label for="short_description"><?php _e("Short Description", 'pop-coreprocessors'); ?></label></th>
-    <td><input type="text" name="short_description" id="short_description" value="<?php echo \PoPSchema\UserMeta\Utils::getUserMeta($user->ID, GD_METAKEY_PROFILE_SHORTDESCRIPTION, true) ?>" class="regular-text code" /></td>
+    <td><input type="text" name="short_description" id="short_description" value="<?php echo \PoPCMSSchema\UserMeta\Utils::getUserMeta($user->ID, GD_METAKEY_PROFILE_SHORTDESCRIPTION, true) ?>" class="regular-text code" /></td>
     </tr>
     </table>
     <h3><?php _e('Display email in the Profile page?', 'pop-coreprocessors') ?></h3>
@@ -67,7 +67,7 @@ function extraUserProfileFields($user)
     <tr>
     <th><label for="display_email"><?php _e('Display email in the Profile page?', 'pop-coreprocessors') ?></label></th>
     <td>
-    <?php echo GD_AdminUtils::formDropdown('display_email', gdBuildSelectOptions(array('Yes', 'No')), isset($_POST['display_email']) ? $_POST['display_email'] : (\PoPSchema\UserMeta\Utils::getUserMeta($user->ID, GD_METAKEY_PROFILE_DISPLAYEMAIL, true) ? "yes" : "no"), 'class="regular-text"'); ?>
+    <?php echo GD_AdminUtils::formDropdown('display_email', gdBuildSelectOptions(array('Yes', 'No')), isset($_POST['display_email']) ? $_POST['display_email'] : (\PoPCMSSchema\UserMeta\Utils::getUserMeta($user->ID, GD_METAKEY_PROFILE_DISPLAYEMAIL, true) ? "yes" : "no"), 'class="regular-text"'); ?>
     </td>
     </tr>
     </table>
@@ -183,7 +183,7 @@ function saveExtraUserInfo($user_id)
 
     if (defined('POP_USERPLATFORM_INITIALIZED')) {
         // Last Edited: needed for the user thumbprint
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, ComponentModelComponentInfo::get('time'));
+        \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, ComponentModelComponentInfo::get('time'));
     }
 }
 
@@ -195,11 +195,11 @@ function saveExtraUserProfileFields($user_id)
 
     saveExtraUserInfo($user_id);
 
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TITLE, $_POST['title'], true);
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $_POST['short_description'], true);
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, (isset($_POST['display_email']) && $_POST['display_email'] == "yes"), true, true);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TITLE, $_POST['title'], true);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $_POST['short_description'], true);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, (isset($_POST['display_email']) && $_POST['display_email'] == "yes"), true, true);
 
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $_POST['user_preferences']);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $_POST['user_preferences']);
 }
 
 
@@ -213,11 +213,11 @@ function saveExtraUserProfileFields($user_id)
 function gdUserContactmethods()
 {
     $contact = array(
-        \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_FACEBOOK) => TranslationAPIFacade::getInstance()->__('Facebook'),
-        \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_TWITTER) => TranslationAPIFacade::getInstance()->__('Twitter'),
-        \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_LINKEDIN) => TranslationAPIFacade::getInstance()->__('Linkedin'),
-        \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_YOUTUBE) => TranslationAPIFacade::getInstance()->__('Youtube'),
-        \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_INSTAGRAM) => TranslationAPIFacade::getInstance()->__('Instagram'),
+        \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_FACEBOOK) => TranslationAPIFacade::getInstance()->__('Facebook'),
+        \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_TWITTER) => TranslationAPIFacade::getInstance()->__('Twitter'),
+        \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_LINKEDIN) => TranslationAPIFacade::getInstance()->__('Linkedin'),
+        \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_YOUTUBE) => TranslationAPIFacade::getInstance()->__('Youtube'),
+        \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_INSTAGRAM) => TranslationAPIFacade::getInstance()->__('Instagram'),
     );
 
     return $contact;
@@ -245,7 +245,7 @@ function customExtraUserProfileFields($user)
             <td><input class="text-input" name="contact_person" type="text" id="contact_person" value="<?php if (isset($_POST['contact_person'])) {
                 echo $_POST["contact_person"];
                                                                                                         } else {
-                                                                                                            echo \PoPSchema\UserMeta\Utils::getUserMeta($user->ID, GD_URE_METAKEY_PROFILE_CONTACTPERSON, true);
+                                                                                                            echo \PoPCMSSchema\UserMeta\Utils::getUserMeta($user->ID, GD_URE_METAKEY_PROFILE_CONTACTPERSON, true);
                                                                                                         } ?>" /></td>
         </tr>
         <tr>
@@ -253,7 +253,7 @@ function customExtraUserProfileFields($user)
             <td><input class="text-input" name="contact_number" type="text" id="contact_number" value="<?php if (isset($_POST['contact_number'])) {
                 echo $_POST["contact_number"];
                                                                                                         } else {
-                                                                                                            echo \PoPSchema\UserMeta\Utils::getUserMeta($user->ID, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, true);
+                                                                                                            echo \PoPCMSSchema\UserMeta\Utils::getUserMeta($user->ID, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, true);
                                                                                                         } ?>" /></td>
         </tr>
     </tbody>
@@ -267,13 +267,13 @@ function customSaveExtraUserProfileFields($user_id)
         return;
     }
 
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTPERSON, esc_attr($_POST['contact_person']), true);
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, esc_attr($_POST['contact_number']), true);
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_FACEBOOK, esc_attr($_POST['facebook']), true);
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TWITTER, esc_attr($_POST['twitter']), true);
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LINKEDIN, esc_attr($_POST['linkedin']), true);
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_YOUTUBE, esc_attr($_POST['youtube']), true);
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_INSTAGRAM, esc_attr($_POST['instagram']), true);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTPERSON, esc_attr($_POST['contact_person']), true);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, esc_attr($_POST['contact_number']), true);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_FACEBOOK, esc_attr($_POST['facebook']), true);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TWITTER, esc_attr($_POST['twitter']), true);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LINKEDIN, esc_attr($_POST['linkedin']), true);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_YOUTUBE, esc_attr($_POST['youtube']), true);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_INSTAGRAM, esc_attr($_POST['instagram']), true);
 
     userNameUpdated($user_id);
 }

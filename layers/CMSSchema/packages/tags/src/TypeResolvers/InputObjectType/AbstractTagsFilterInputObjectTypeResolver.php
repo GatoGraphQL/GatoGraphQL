@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Tags\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Tags\TypeResolvers\InputObjectType;
 
-use PoPSchema\Taxonomies\TypeResolvers\InputObjectType\AbstractTaxonomiesFilterInputObjectTypeResolver;
+use PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType\AbstractTaxonomiesFilterInputObjectTypeResolver;
 
 abstract class AbstractTagsFilterInputObjectTypeResolver extends AbstractTaxonomiesFilterInputObjectTypeResolver
 {

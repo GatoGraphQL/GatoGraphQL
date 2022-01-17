@@ -1,6 +1,6 @@
 <?php
 
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class CAP_PoP_AddCoauthors_API extends PoP_AddCoauthors_API_Base implements PoP_AddCoauthors_API
 {

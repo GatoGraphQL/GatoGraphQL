@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Posts\ObjectTypeResolverPickers;
+namespace PoPCMSSchema\Posts\ObjectTypeResolverPickers;
 
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
+use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 abstract class AbstractPostObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {

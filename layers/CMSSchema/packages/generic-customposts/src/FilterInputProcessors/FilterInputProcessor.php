@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\GenericCustomPosts\FilterInputProcessors;
+namespace PoPCMSSchema\GenericCustomPosts\FilterInputProcessors;
 
 use PoP\Root\App;
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
-use PoPSchema\CustomPosts\FilterInput\FilterInputHelper;
-use PoPSchema\GenericCustomPosts\Component;
-use PoPSchema\GenericCustomPosts\ComponentConfiguration;
+use PoPCMSSchema\CustomPosts\FilterInput\FilterInputHelper;
+use PoPCMSSchema\GenericCustomPosts\Component;
+use PoPCMSSchema\GenericCustomPosts\ComponentConfiguration;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {

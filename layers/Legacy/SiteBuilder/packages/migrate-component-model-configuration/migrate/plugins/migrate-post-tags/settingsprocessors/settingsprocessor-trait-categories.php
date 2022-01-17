@@ -1,8 +1,8 @@
 <?php
 
-namespace PoPSchema\PostCategories;
+namespace PoPCMSSchema\PostCategories;
 
-use PoPSchema\PostCategories\ComponentConfiguration as PostCategoriesComponentConfiguration;
+use PoPCMSSchema\PostCategories\ComponentConfiguration as PostCategoriesComponentConfiguration;
 
 trait SettingsProcessor_Trait
 {

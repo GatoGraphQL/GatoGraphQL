@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserAvatars\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\UserAvatars\FieldResolvers\ObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoPSchema\UserAvatars\Component;
-use PoPSchema\UserAvatars\ComponentConfiguration;
-use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
-use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
-use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
-use PoPSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\UserAvatars\Component;
+use PoPCMSSchema\UserAvatars\ComponentConfiguration;
+use PoPCMSSchema\UserAvatars\ObjectModels\UserAvatar;
+use PoPCMSSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
+use PoPCMSSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
+use PoPCMSSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

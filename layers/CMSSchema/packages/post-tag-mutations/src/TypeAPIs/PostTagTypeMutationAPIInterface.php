@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagMutations\TypeAPIs;
+namespace PoPCMSSchema\PostTagMutations\TypeAPIs;
 
-use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 
 interface PostTagTypeMutationAPIInterface extends CustomPostTagTypeMutationAPIInterface
 {

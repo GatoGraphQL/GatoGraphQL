@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Media\TypeResolvers\InputObjectType;
 
 class RootMediaItemsFilterInputObjectTypeResolver extends AbstractMediaItemsFilterInputObjectTypeResolver
 {

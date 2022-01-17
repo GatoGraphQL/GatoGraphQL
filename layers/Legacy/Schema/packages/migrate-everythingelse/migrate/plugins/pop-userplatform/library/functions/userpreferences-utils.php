@@ -1,7 +1,7 @@
 <?php
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_UserPlatform_UserPreferencesUtils
 {
@@ -12,7 +12,7 @@ class PoP_UserPlatform_UserPreferencesUtils
         $query = array(
             'meta-query' => [
                 [
-                    'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_USERPREFERENCES),
+                    'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_USERPREFERENCES),
                     'value' => $value,
                     'compare' => 'IN',
                 ],

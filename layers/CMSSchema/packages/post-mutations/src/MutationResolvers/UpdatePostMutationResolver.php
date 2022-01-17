@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostMutations\MutationResolvers;
+namespace PoPCMSSchema\PostMutations\MutationResolvers;
 
-use PoPSchema\CustomPostMutations\MutationResolvers\UpdateCustomPostMutationResolverTrait;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\UpdateCustomPostMutationResolverTrait;
 
 class UpdatePostMutationResolver extends AbstractCreateUpdatePostMutationResolver
 {

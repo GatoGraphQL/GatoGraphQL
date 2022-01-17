@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserMeta\TypeAPIs;
+namespace PoPCMSSchema\UserMeta\TypeAPIs;
 
 use InvalidArgumentException;
-use PoPSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
+use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
 interface UserMetaTypeAPIInterface extends MetaTypeAPIInterface
 {

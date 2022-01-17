@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface:
-        class: \PoPSchema\CommentMutationsWP\TypeAPIs\CommentTypeMutationAPI
+    PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface:
+        class: \PoPCMSSchema\CommentMutationsWP\TypeAPIs\CommentTypeMutationAPI

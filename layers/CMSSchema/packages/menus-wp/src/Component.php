@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\MenusWP;
+namespace PoPCMSSchema\MenusWP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\Menus\Component::class,
-            \PoPSchema\SchemaCommonsWP\Component::class,
+            \PoPCMSSchema\Menus\Component::class,
+            \PoPCMSSchema\SchemaCommonsWP\Component::class,
         ];
     }
 

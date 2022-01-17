@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateWP\TypeAPIs;
+namespace PoPCMSSchema\UserStateWP\TypeAPIs;
 
-use PoPSchema\UserState\TypeAPIs\UserStateTypeAPIInterface;
+use PoPCMSSchema\UserState\TypeAPIs\UserStateTypeAPIInterface;
 
 class UserStateTypeAPI implements UserStateTypeAPIInterface
 {

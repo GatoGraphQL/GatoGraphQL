@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Tags\RelationalTypeDataLoaders\ObjectType;
+namespace PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 
 abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {

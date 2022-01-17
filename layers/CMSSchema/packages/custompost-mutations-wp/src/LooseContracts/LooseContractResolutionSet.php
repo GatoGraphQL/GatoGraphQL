@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMutationsWP\LooseContracts;
+namespace PoPCMSSchema\CustomPostMutationsWP\LooseContracts;
 
 use PoP\LooseContracts\AbstractLooseContractResolutionSet;
-use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
+use PoPCMSSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 
 class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
 {

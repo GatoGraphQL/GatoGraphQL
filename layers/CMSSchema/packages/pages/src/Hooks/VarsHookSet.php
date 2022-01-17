@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Pages\Hooks;
+namespace PoPCMSSchema\Pages\Hooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\Pages\Constants\ModelInstanceComponentTypes;
-use PoPSchema\Pages\Routing\RequestNature;
+use PoPCMSSchema\Pages\Constants\ModelInstanceComponentTypes;
+use PoPCMSSchema\Pages\Routing\RequestNature;
 
 class VarsHookSet extends AbstractHookSet
 {
@@ -25,7 +25,7 @@ class VarsHookSet extends AbstractHookSet
         switch (App::getState('nature')) {
             case RequestNature::PAGE:
                 $component_types = App::applyFilters(
-                    '\PoPSchema\Pages\ModelInstanceProcessor_Utils:components_from_vars:type:page',
+                    '\PoPCMSSchema\Pages\ModelInstanceProcessor_Utils:components_from_vars:type:page',
                     []
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_PAGE, $component_types)) {

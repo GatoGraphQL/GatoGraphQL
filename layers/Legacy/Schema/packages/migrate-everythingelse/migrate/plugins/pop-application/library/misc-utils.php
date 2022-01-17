@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 function getExcerptMore()
 {
@@ -51,7 +51,7 @@ function maybeAddHttp($url)
 //     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 //     if ($customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()) {
 //         if ($cats = getTheCategory($post_id)) {
-//             $cmstaxonomiesresolver = \PoPSchema\Taxonomies\ObjectPropertyResolverFactory::getInstance();
+//             $cmstaxonomiesresolver = \PoPCMSSchema\Taxonomies\ObjectPropertyResolverFactory::getInstance();
 //             foreach ($cats as $cat) {
 //                 $categories[] = $cmstaxonomiesresolver->getCategoryID($cat);
 //             }

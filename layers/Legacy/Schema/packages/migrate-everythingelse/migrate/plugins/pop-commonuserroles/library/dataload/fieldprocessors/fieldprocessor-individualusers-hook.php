@@ -3,7 +3,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class ObjectTypeFieldResolver_IndividualUsers extends AbstractObjectTypeFieldResolver
 {
@@ -70,7 +70,7 @@ class ObjectTypeFieldResolver_IndividualUsers extends AbstractObjectTypeFieldRes
         $user = $object;
         switch ($fieldName) {
             case 'individualinterests':
-                return \PoPSchema\UserMeta\Utils::getUserMeta($objectTypeResolver->getID($user), GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS);
+                return \PoPCMSSchema\UserMeta\Utils::getUserMeta($objectTypeResolver->getID($user), GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS);
 
             case 'hasIndividualDetails':
                 return !empty($objectTypeResolver->resolveValue($user, 'individualinterests', $variables, $expressions, $options));

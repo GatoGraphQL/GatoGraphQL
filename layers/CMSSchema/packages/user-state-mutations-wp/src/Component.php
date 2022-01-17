@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateMutationsWP;
+namespace PoPCMSSchema\UserStateMutationsWP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\UserStateMutations\Component::class,
-            \PoPSchema\UserStateWP\Component::class,
+            \PoPCMSSchema\UserStateMutations\Component::class,
+            \PoPCMSSchema\UserStateWP\Component::class,
         ];
     }
 

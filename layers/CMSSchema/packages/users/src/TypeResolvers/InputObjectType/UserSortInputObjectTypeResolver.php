@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Users\TypeResolvers\InputObjectType;
 
-use PoPSchema\Users\Constants\UserOrderBy;
-use PoPSchema\Users\TypeResolvers\EnumType\UserOrderByEnumTypeResolver;
+use PoPCMSSchema\Users\Constants\UserOrderBy;
+use PoPCMSSchema\Users\TypeResolvers\EnumType\UserOrderByEnumTypeResolver;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 class UserSortInputObjectTypeResolver extends SortInputObjectTypeResolver

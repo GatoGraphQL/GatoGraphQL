@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \PoPSchema\UserMeta\Component::class,
+    \PoPCMSSchema\UserMeta\Component::class,
 ]);
 ```
 

@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Types\Status;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -189,7 +189,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $customPostID = $customPostTypeAPI->getID;
             // AAL_Main::instance()->api->deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $customPostID, $clear_actions);
-            $cmspostsresolver = \PoPSchema\Posts\ObjectPropertyResolverFactory::getInstance();
+            $cmspostsresolver = \PoPCMSSchema\Posts\ObjectPropertyResolverFactory::getInstance();
             PoP_Notifications_API::deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $customPostID, $clear_actions);
 
             // Only after log the action

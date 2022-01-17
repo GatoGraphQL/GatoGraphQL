@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostCategoriesWP\Hooks;
+namespace PoPCMSSchema\CustomPostCategoriesWP\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
+use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 
 abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
 {

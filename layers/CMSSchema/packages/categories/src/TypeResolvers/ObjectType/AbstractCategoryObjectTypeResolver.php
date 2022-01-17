@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Categories\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\Categories\TypeResolvers\ObjectType;
 
-use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyObjectTypeResolver;
+use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use PoPCMSSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyObjectTypeResolver;
 
 abstract class AbstractCategoryObjectTypeResolver extends AbstractTaxonomyObjectTypeResolver implements CategoryObjectTypeResolverInterface
 {

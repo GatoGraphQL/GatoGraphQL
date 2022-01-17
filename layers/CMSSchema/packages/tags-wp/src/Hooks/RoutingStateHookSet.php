@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TagsWP\Hooks;
+namespace PoPCMSSchema\TagsWP\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\RootWP\Routing\HookNames;
-use PoPSchema\Tags\Routing\RequestNature;
+use PoPCMSSchema\Tags\Routing\RequestNature;
 use WP_Query;
 
 class RoutingStateHookSet extends AbstractHookSet

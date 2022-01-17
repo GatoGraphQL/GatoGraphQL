@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
 
 class PoP_AddComments_Notifications_NotificationHooks
 {

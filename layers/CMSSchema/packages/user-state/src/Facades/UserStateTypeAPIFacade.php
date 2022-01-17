@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserState\Facades;
+namespace PoPCMSSchema\UserState\Facades;
 
 use PoP\Root\App;
-use PoPSchema\UserState\TypeAPIs\UserStateTypeAPIInterface;
+use PoPCMSSchema\UserState\TypeAPIs\UserStateTypeAPIInterface;
 
 class UserStateTypeAPIFacade
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserAvatars;
+namespace PoPCMSSchema\UserAvatars;
 
 class Environment
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
+namespace PoPCMSSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UsersWP\Hooks;
+namespace PoPCMSSchema\UsersWP\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\RootWP\Routing\HookNames;
-use PoPSchema\Users\Component;
-use PoPSchema\Users\ComponentConfiguration;
+use PoPCMSSchema\Users\Component;
+use PoPCMSSchema\Users\ComponentConfiguration;
 
 class RoutingHookSet extends AbstractHookSet
 {

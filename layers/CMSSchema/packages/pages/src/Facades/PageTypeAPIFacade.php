@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Pages\Facades;
+namespace PoPCMSSchema\Pages\Facades;
 
 use PoP\Root\App;
-use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
+use PoPCMSSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 
 class PageTypeAPIFacade
 {

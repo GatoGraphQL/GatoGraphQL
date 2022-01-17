@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserState\CheckpointProcessors;
+namespace PoPCMSSchema\UserState\CheckpointProcessors;
 
 use PoP\Root\App;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;

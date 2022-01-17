@@ -3,14 +3,14 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\CommentMutations\FieldResolvers\:
+    PoPCMSSchema\CommentMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPSchema\CommentMutations\MutationResolvers\:
+    PoPCMSSchema\CommentMutations\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
 
-    PoPSchema\CommentMutations\SchemaHooks\:
+    PoPCMSSchema\CommentMutations\SchemaHooks\:
         resource: '../src/SchemaHooks/*'
 
-    PoPSchema\CommentMutations\TypeResolvers\:
+    PoPCMSSchema\CommentMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

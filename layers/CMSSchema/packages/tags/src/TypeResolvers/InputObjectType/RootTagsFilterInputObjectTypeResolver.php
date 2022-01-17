@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Tags\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Tags\TypeResolvers\InputObjectType;
 
 class RootTagsFilterInputObjectTypeResolver extends AbstractTagsFilterInputObjectTypeResolver
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRoles\SchemaHooks;
+namespace PoPCMSSchema\UserRoles\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -11,10 +11,10 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInte
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\UserRoles\Component;
-use PoPSchema\UserRoles\ComponentConfiguration;
-use PoPSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
-use PoPSchema\Users\TypeResolvers\InputObjectType\AbstractUsersFilterInputObjectTypeResolver;
+use PoPCMSSchema\UserRoles\Component;
+use PoPCMSSchema\UserRoles\ComponentConfiguration;
+use PoPCMSSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Users\TypeResolvers\InputObjectType\AbstractUsersFilterInputObjectTypeResolver;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {

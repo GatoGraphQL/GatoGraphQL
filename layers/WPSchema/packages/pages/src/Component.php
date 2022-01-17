@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\PagesWP\Component::class,
+            \PoPCMSSchema\PagesWP\Component::class,
             \PoPWPSchema\CustomPosts\Component::class,
         ];
     }

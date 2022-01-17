@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserAvatars\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\UserAvatars\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
-use PoPSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType\UserAvatarTypeDataLoader;
+use PoPCMSSchema\UserAvatars\ObjectModels\UserAvatar;
+use PoPCMSSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType\UserAvatarTypeDataLoader;
 
 class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 {

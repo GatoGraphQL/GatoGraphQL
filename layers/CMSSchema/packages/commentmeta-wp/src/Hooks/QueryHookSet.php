@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMetaWP\Hooks;
+namespace PoPCMSSchema\CommentMetaWP\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\CommentsWP\TypeAPIs\CommentTypeAPI;
-use PoPSchema\MetaQueryWP\Helpers\MetaQueryHelpers;
+use PoPCMSSchema\CommentsWP\TypeAPIs\CommentTypeAPI;
+use PoPCMSSchema\MetaQueryWP\Helpers\MetaQueryHelpers;
 
 class QueryHookSet extends AbstractHookSet
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Categories\TypeAPIs;
+namespace PoPCMSSchema\Categories\TypeAPIs;
 
-use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

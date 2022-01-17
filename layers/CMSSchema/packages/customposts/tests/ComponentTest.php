@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\CustomPosts;
+namespace PoPCMSSchema\CustomPosts;
 
 use PoP\Root\AbstractComponentTest;
 

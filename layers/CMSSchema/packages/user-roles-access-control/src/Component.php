@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesAccessControl;
+namespace PoPCMSSchema\UserRolesAccessControl;
 
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\Root\Component\AbstractComponent;
@@ -20,8 +20,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\UserRoles\Component::class,
-            \PoPSchema\UserStateAccessControl\Component::class,
+            \PoPCMSSchema\UserRoles\Component::class,
+            \PoPCMSSchema\UserStateAccessControl\Component::class,
         ];
     }
 

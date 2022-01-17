@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserState\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\UserState\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\Translation\TranslationAPIInterface;
-use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 trait UserStateObjectTypeFieldResolverTrait
 {

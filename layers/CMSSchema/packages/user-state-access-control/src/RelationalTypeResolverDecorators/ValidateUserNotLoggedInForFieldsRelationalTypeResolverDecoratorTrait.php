@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
+namespace PoPCMSSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
-use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInDirectiveResolver;
+use PoPCMSSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
+use PoPCMSSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInDirectiveResolver;
 
 trait ValidateUserNotLoggedInForFieldsRelationalTypeResolverDecoratorTrait
 {

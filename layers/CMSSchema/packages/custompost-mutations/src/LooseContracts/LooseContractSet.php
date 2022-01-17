@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMutations\LooseContracts;
+namespace PoPCMSSchema\CustomPostMutations\LooseContracts;
 
 use PoP\LooseContracts\AbstractLooseContractSet;
 

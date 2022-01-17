@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserRolesACL\Container\CompilerPasses\:
+    PoPCMSSchema\UserRolesACL\Container\CompilerPasses\:
         resource: '../src/Container/CompilerPasses/*'

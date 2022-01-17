@@ -4,11 +4,11 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserRoles\Hooks\:
+    PoPCMSSchema\UserRoles\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoPSchema\UserRoles\ModuleProcessors\:
+    PoPCMSSchema\UserRoles\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
-    PoPSchema\UserRoles\FilterInputProcessors\:
+    PoPCMSSchema\UserRoles\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'

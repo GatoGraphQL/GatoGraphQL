@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateMutations\MutationResolvers;
+namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoPSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
-use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
+use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
+use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 class LogoutUserMutationResolver extends AbstractMutationResolver
 {

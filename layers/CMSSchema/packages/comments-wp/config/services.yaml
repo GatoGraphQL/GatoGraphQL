@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface:
-        class: \PoPSchema\CommentsWP\TypeAPIs\CommentTypeAPI
+    PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface:
+        class: \PoPCMSSchema\CommentsWP\TypeAPIs\CommentTypeAPI
 
-    PoPSchema\CommentsWP\LooseContracts\:
+    PoPCMSSchema\CommentsWP\LooseContracts\:
         resource: '../src/LooseContracts/*'

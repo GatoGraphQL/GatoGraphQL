@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMediaMutations\Hooks;
+namespace PoPCMSSchema\CustomPostMediaMutations\Hooks;
 
 class CustomPostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {

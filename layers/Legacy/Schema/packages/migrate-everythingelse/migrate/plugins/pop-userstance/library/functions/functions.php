@@ -1,6 +1,6 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 \PoP\Root\App::addFilter('gd_postname', 'userstancePostname', 10, 2);
 function userstancePostname($name, $post_id = null)

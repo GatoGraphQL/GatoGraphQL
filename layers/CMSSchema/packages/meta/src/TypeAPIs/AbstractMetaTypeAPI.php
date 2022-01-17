@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Meta\TypeAPIs;
+namespace PoPCMSSchema\Meta\TypeAPIs;
 
 use InvalidArgumentException;
 use PoP\Root\Services\BasicServiceTrait;

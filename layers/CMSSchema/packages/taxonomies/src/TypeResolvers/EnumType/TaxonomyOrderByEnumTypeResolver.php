@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Taxonomies\TypeResolvers\EnumType;
+namespace PoPCMSSchema\Taxonomies\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPSchema\Taxonomies\Constants\TaxonomyOrderBy;
+use PoPCMSSchema\Taxonomies\Constants\TaxonomyOrderBy;
 
 class TaxonomyOrderByEnumTypeResolver extends AbstractEnumTypeResolver
 {

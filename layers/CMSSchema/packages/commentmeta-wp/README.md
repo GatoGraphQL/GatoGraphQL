@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \PoPSchema\CommentMetaWP\Component::class,
+    \PoPCMSSchema\CommentMetaWP\Component::class,
 ]);
 ```
 

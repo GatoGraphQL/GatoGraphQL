@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategoryMutations\SchemaHooks;
+namespace PoPCMSSchema\PostCategoryMutations\SchemaHooks;
 
-use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
-use PoPSchema\CustomPostCategoryMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
-use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
-use PoPSchema\PostMutations\SchemaHooks\PostMutationResolverHookSetTrait;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostCategoryMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
+use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
+use PoPCMSSchema\PostMutations\SchemaHooks\PostMutationResolverHookSetTrait;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {

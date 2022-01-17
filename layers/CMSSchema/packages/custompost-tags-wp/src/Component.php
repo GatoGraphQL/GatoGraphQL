@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostTagsWP;
+namespace PoPCMSSchema\CustomPostTagsWP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPostsWP\Component::class,
-            \PoPSchema\TagsWP\Component::class,
+            \PoPCMSSchema\CustomPostsWP\Component::class,
+            \PoPCMSSchema\TagsWP\Component::class,
         ];
     }
 }

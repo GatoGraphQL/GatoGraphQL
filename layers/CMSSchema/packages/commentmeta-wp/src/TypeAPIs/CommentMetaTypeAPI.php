@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMetaWP\TypeAPIs;
+namespace PoPCMSSchema\CommentMetaWP\TypeAPIs;
 
-use PoPSchema\CommentMeta\TypeAPIs\AbstractCommentMetaTypeAPI;
+use PoPCMSSchema\CommentMeta\TypeAPIs\AbstractCommentMetaTypeAPI;
 
 class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
 {

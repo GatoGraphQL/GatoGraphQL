@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserState\TypeAPIs\UserStateTypeAPIInterface:
-        class: \PoPSchema\UserStateWP\TypeAPIs\UserStateTypeAPI
+    PoPCMSSchema\UserState\TypeAPIs\UserStateTypeAPIInterface:
+        class: \PoPCMSSchema\UserStateWP\TypeAPIs\UserStateTypeAPI

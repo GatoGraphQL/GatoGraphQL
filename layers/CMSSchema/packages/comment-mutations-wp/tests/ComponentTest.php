@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\CommentMutationsWP;
+namespace PoPCMSSchema\CommentMutationsWP;
 
 use PoP\Root\AbstractComponentTest;
 

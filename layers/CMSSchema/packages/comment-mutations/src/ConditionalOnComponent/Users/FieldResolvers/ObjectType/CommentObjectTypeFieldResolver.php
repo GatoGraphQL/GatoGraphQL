@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutations\ConditionalOnComponent\Users\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\CommentMutations\ConditionalOnComponent\Users\FieldResolvers\ObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\CommentMutations\Component;
-use PoPSchema\CommentMutations\ComponentConfiguration;
-use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface as UserCommentTypeAPIInterface;
-use PoPSchema\Comments\FieldResolvers\ObjectType\CommentObjectTypeFieldResolver as UpstreamCommentObjectTypeFieldResolver;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\CommentMutations\Component;
+use PoPCMSSchema\CommentMutations\ComponentConfiguration;
+use PoPCMSSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface as UserCommentTypeAPIInterface;
+use PoPCMSSchema\Comments\FieldResolvers\ObjectType\CommentObjectTypeFieldResolver as UpstreamCommentObjectTypeFieldResolver;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 /**
  * Override fields from the upstream class, getting the data from the user

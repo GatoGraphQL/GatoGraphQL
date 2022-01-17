@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface:
-        class: \PoPSchema\PostTagsWP\TypeAPIs\PostTagTypeAPI
+    PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface:
+        class: \PoPCMSSchema\PostTagsWP\TypeAPIs\PostTagTypeAPI
 
-    PoPSchema\PostTagsWP\Hooks\:
+    PoPCMSSchema\PostTagsWP\Hooks\:
         resource: '../src/Hooks/*'

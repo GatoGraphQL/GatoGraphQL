@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMeta\TypeAPIs;
+namespace PoPCMSSchema\CustomPostMeta\TypeAPIs;
 
 use InvalidArgumentException;
-use PoPSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
+use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
 interface CustomPostMetaTypeAPIInterface extends MetaTypeAPIInterface
 {

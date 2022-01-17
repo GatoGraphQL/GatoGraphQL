@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
 use PoP\Root\App;
-use PoPSchema\Users\Constants\InputNames;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\Users\Constants\InputNames;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {

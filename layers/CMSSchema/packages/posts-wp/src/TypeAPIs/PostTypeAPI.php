@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostsWP\TypeAPIs;
+namespace PoPCMSSchema\PostsWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use PoPSchema\Posts\Component;
-use PoPSchema\Posts\ComponentConfiguration;
-use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
+use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
+use PoPCMSSchema\Posts\Component;
+use PoPCMSSchema\Posts\ComponentConfiguration;
+use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use WP_Post;
 
 use function get_post;

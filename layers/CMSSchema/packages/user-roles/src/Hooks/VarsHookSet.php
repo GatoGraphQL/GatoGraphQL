@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRoles\Hooks;
+namespace PoPCMSSchema\UserRoles\Hooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\UserRoles\Constants\ModelInstanceComponentTypes;
-use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
-use PoPSchema\Users\Routing\RequestNature;
+use PoPCMSSchema\UserRoles\Constants\ModelInstanceComponentTypes;
+use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use PoPCMSSchema\Users\Routing\RequestNature;
 
 class VarsHookSet extends AbstractHookSet
 {

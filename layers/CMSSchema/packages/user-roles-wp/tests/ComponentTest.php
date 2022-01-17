@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\UserRolesWP;
+namespace PoPCMSSchema\UserRolesWP;
 
 use PoP\Root\AbstractComponentTest;
 

@@ -4,12 +4,12 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface:
-        class: \PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI
+    PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface:
+        class: \PoPCMSSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI
 
-    PoPSchema\CustomPostsWP\LooseContracts\:
+    PoPCMSSchema\CustomPostsWP\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPSchema\CustomPostsWP\Hooks\:
+    PoPCMSSchema\CustomPostsWP\Hooks\:
         resource: '../src/Hooks/*'
 

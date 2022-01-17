@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts;
+namespace PoPCMSSchema\CustomPosts;
 
 use PoP\Root\App;
 use PoP\API\Component as APIComponent;
@@ -21,7 +21,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\QueriedObject\Component::class,
+            \PoPCMSSchema\QueriedObject\Component::class,
         ];
     }
 

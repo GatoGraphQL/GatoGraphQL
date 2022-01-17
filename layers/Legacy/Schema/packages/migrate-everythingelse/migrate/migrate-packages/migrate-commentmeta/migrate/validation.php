@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\CommentMeta;
+namespace PoPCMSSchema\CommentMeta;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_COMMENTMETA_POP_ENGINE_MIN_VERSION', 0.1);

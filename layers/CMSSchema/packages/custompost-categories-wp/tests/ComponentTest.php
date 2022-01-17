@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\CustomPostCategoriesWP;
+namespace PoPCMSSchema\CustomPostCategoriesWP;
 
 use PoP\Root\AbstractComponentTest;
 

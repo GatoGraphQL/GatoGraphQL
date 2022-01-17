@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface:
-        class: \PoPSchema\CustomPostMediaMutationsWP\TypeAPIs\CustomPostMediaTypeMutationAPI
+    PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface:
+        class: \PoPCMSSchema\CustomPostMediaMutationsWP\TypeAPIs\CustomPostMediaTypeMutationAPI

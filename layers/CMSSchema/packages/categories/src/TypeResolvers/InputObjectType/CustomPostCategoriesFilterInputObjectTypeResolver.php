@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Categories\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Categories\TypeResolvers\InputObjectType;
 
 class CustomPostCategoriesFilterInputObjectTypeResolver extends AbstractCategoriesFilterInputObjectTypeResolver
 {

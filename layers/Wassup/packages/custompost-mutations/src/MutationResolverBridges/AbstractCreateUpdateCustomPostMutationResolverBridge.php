@@ -8,10 +8,10 @@ use PoP\Root\App;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\MutationResolverBridges\AbstractCRUDComponentMutationResolverBridge;
 use PoP\EditPosts\HelperAPIFactory;
-use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
-use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPSchema\CustomPosts\Enums\CustomPostStatus;
-use PoPSchema\Posts\Constants\InputNames;
+use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
+use PoPCMSSchema\Posts\Constants\InputNames;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends AbstractCRUDComponentMutationResolverBridge

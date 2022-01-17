@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\Media;
+namespace PoPCMSSchema\Media;
 
 use PoP\Root\AbstractComponentTest;
 

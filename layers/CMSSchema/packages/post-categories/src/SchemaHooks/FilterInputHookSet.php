@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\SchemaHooks;
+namespace PoPCMSSchema\PostCategories\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\Categories\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
-use PoPSchema\Posts\ModuleProcessors\AbstractPostFilterInputContainerModuleProcessor;
+use PoPCMSSchema\Categories\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\Posts\ModuleProcessors\AbstractPostFilterInputContainerModuleProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
 {

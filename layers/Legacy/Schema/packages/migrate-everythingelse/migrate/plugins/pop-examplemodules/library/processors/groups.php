@@ -1,7 +1,7 @@
 <?php
 namespace PoP\ExampleModules;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
-use PoPSchema\Pages\Facades\PageTypeAPIFacade;
+use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
 
 class ModuleProcessor_Groups extends AbstractModuleProcessor
 {

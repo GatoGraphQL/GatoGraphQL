@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\UserStateMutationsWP;
+namespace PoPCMSSchema\UserStateMutationsWP;
 
 use PoP\Root\AbstractComponentTest;
 

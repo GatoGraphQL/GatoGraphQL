@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\TypeResolvers\EnumType;
+namespace PoPCMSSchema\Media\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPSchema\Media\Constants\MediaItemOrderBy;
+use PoPCMSSchema\Media\Constants\MediaItemOrderBy;
 
 class MediaItemOrderByEnumTypeResolver extends AbstractEnumTypeResolver
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateMutations\MutationResolvers;
+namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
 use PoP\Root\App;
 use PoP\Root\Translation\TranslationAPIInterface;

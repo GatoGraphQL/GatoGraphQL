@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface:
-        class: \PoPSchema\MediaWP\TypeAPIs\MediaTypeAPI
+    PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface:
+        class: \PoPCMSSchema\MediaWP\TypeAPIs\MediaTypeAPI

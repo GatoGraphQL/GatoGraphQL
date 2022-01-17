@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostCategoryMutations\TypeAPIs;
+namespace PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs;
 
 interface CustomPostCategoryTypeMutationAPIInterface
 {

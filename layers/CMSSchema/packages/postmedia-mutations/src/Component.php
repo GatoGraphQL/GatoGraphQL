@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostMediaMutations;
+namespace PoPCMSSchema\PostMediaMutations;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPostMediaMutations\Component::class,
-            \PoPSchema\PostMutations\Component::class,
+            \PoPCMSSchema\CustomPostMediaMutations\Component::class,
+            \PoPCMSSchema\PostMutations\Component::class,
         ];
     }
 

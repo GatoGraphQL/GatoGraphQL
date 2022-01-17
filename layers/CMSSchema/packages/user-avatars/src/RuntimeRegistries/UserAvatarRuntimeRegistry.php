@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserAvatars\RuntimeRegistries;
+namespace PoPCMSSchema\UserAvatars\RuntimeRegistries;
 
-use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
+use PoPCMSSchema\UserAvatars\ObjectModels\UserAvatar;
 
 class UserAvatarRuntimeRegistry implements UserAvatarRuntimeRegistryInterface
 {

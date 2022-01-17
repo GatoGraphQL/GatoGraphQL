@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface:
-        class: \PoPSchema\UserMetaWP\TypeAPIs\UserMetaTypeAPI
+    PoPCMSSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface:
+        class: \PoPCMSSchema\UserMetaWP\TypeAPIs\UserMetaTypeAPI
 
-    PoPSchema\UserMetaWP\Hooks\:
+    PoPCMSSchema\UserMetaWP\Hooks\:
         resource: '../src/Hooks/*'

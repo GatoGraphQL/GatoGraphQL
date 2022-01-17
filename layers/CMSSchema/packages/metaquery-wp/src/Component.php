@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\MetaQueryWP;
+namespace PoPCMSSchema\MetaQueryWP;
 
 use PoP\Root\Component\AbstractComponent;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMediaMutations\MutationResolvers;
+namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
 class MutationInputProperties
 {

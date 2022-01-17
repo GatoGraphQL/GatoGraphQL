@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPWPSchema\UserMeta\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPSchema\UserMeta\Component;
-use PoPSchema\UserMeta\ComponentConfiguration;
+use PoPCMSSchema\UserMeta\Component;
+use PoPCMSSchema\UserMeta\ComponentConfiguration;
 use PoPWPSchema\Meta\TypeResolvers\InputObjectType\AbstractMetaQueryInputObjectTypeResolver;
 
 class UserMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObjectTypeResolver

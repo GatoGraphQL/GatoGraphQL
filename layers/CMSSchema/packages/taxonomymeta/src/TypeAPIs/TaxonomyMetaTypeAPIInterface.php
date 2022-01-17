@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomyMeta\TypeAPIs;
+namespace PoPCMSSchema\TaxonomyMeta\TypeAPIs;
 
 use InvalidArgumentException;
-use PoPSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
+use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
 interface TaxonomyMetaTypeAPIInterface extends MetaTypeAPIInterface
 {

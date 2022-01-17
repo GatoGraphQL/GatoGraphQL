@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface:
-        class: \PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistry
+    PoPCMSSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface:
+        class: \PoPCMSSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistry
 
-    PoPSchema\Menus\ModuleProcessors\:
+    PoPCMSSchema\Menus\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'

@@ -30,7 +30,7 @@ class PoP_GSG_Installation
                     // Also add all the silent pages: if they are silent, their URL does not appear on the browser, so they can't show up in Google either
                     // Notice that `silentDocument` also includes `isAppshell` pages, so no need to add them
                     || (defined('POP_ENGINEWEBPLATFORM_INITIALIZED') && $settingsmanager->silentDocument($route))
-                    || (defined('POP_USERSTATE_INITIALIZED') && \PoPSchema\UserState\Settings\SettingsManagerFactory::getInstance()->requiresUserState($route))
+                    || (defined('POP_USERSTATE_INITIALIZED') && \PoPCMSSchema\UserState\Settings\SettingsManagerFactory::getInstance()->requiresUserState($route))
                 ) {
                     $pages[] = $route;
                 }

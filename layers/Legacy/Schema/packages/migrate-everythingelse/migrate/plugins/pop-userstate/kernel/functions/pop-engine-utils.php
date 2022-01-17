@@ -20,7 +20,7 @@ class PoP_UserState_Utils
 
     public static function routeRequiresUserState($route)
     {
-        $settingsmanager = \PoPSchema\UserState\Settings\SettingsManagerFactory::getInstance();
+        $settingsmanager = \PoPCMSSchema\UserState\Settings\SettingsManagerFactory::getInstance();
         return $settingsmanager->requiresUserState($route);
 
         // $checkpoint_configuration = RequestUtils::getCheckpointConfiguration($page_id);

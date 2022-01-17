@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\UserRoles\FieldResolvers\:
+    PoPCMSSchema\UserRoles\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPSchema\UserRoles\SchemaHooks\:
+    PoPCMSSchema\UserRoles\SchemaHooks\:
         resource: '../src/SchemaHooks/*'

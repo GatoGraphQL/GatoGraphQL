@@ -3,14 +3,14 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\PostTagMutations\FieldResolvers\:
+    PoPCMSSchema\PostTagMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPSchema\PostTagMutations\MutationResolvers\:
+    PoPCMSSchema\PostTagMutations\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
 
-    PoPSchema\PostTagMutations\TypeResolvers\:
+    PoPCMSSchema\PostTagMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPSchema\PostTagMutations\SchemaHooks\:
+    PoPCMSSchema\PostTagMutations\SchemaHooks\:
         resource: '../src/SchemaHooks/*'

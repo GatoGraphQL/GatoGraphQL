@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutations;
+namespace PoPCMSSchema\CommentMutations;
 
 class Environment
 {

@@ -4,14 +4,14 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Categories\State\:
+    PoPCMSSchema\Categories\State\:
         resource: '../src/State/*'
 
-    PoPSchema\Categories\LooseContracts\:
+    PoPCMSSchema\Categories\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPSchema\Categories\ModuleProcessors\:
+    PoPCMSSchema\Categories\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
-    PoPSchema\Categories\FilterInputProcessors\:
+    PoPCMSSchema\Categories\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'

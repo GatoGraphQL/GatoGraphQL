@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserRolesAccessControl\Hooks\:
+    PoPCMSSchema\UserRolesAccessControl\Hooks\:
         resource: '../src/Hooks/*'

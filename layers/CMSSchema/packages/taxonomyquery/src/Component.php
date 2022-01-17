@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomyQuery;
+namespace PoPCMSSchema\TaxonomyQuery;
 
 use PoP\Root\Component\AbstractComponent;
 

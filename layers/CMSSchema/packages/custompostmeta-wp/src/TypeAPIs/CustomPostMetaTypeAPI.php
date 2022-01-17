@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMetaWP\TypeAPIs;
+namespace PoPCMSSchema\CustomPostMetaWP\TypeAPIs;
 
-use PoPSchema\CustomPostMeta\TypeAPIs\AbstractCustomPostMetaTypeAPI;
+use PoPCMSSchema\CustomPostMeta\TypeAPIs\AbstractCustomPostMetaTypeAPI;
 
 class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
 {

@@ -4,11 +4,11 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserState\State\:
+    PoPCMSSchema\UserState\State\:
         resource: '../src/State/*'
 
-    PoPSchema\UserState\Hooks\:
+    PoPCMSSchema\UserState\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoPSchema\UserState\CheckpointProcessors\:
+    PoPCMSSchema\UserState\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'

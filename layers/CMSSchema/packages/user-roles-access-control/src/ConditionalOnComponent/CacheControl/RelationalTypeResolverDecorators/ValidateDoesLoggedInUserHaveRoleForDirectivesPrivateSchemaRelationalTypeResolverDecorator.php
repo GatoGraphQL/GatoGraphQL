@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesAccessControl\ConditionalOnComponent\CacheControl\RelationalTypeResolverDecorators;
+namespace PoPCMSSchema\UserRolesAccessControl\ConditionalOnComponent\CacheControl\RelationalTypeResolverDecorators;
 
-use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
+use PoPCMSSchema\UserRolesAccessControl\Services\AccessControlGroups;
 
 class ValidateDoesLoggedInUserHaveRoleForDirectivesPrivateSchemaRelationalTypeResolverDecorator extends AbstractValidateDoesLoggedInUserHaveItemForDirectivesPrivateSchemaRelationalTypeResolverDecorator
 {

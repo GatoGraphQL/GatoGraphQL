@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\CommentMetaWP;
+namespace PoPCMSSchema\CommentMetaWP;
 
 use PoP\Root\AbstractComponentTest;
 

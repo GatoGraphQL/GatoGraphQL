@@ -4,6 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface:
-        class: \PoPSchema\UserAvatarsWP\TypeAPIs\UserAvatarTypeAPI
+    PoPCMSSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface:
+        class: \PoPCMSSchema\UserAvatarsWP\TypeAPIs\UserAvatarTypeAPI
 

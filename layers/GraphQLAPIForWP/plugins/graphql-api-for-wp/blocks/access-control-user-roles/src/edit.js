@@ -3,7 +3,7 @@ import UserRoles from './user-roles';
 import { withAccessControlGroup } from '@graphqlapi/access-control';
 
 /**
- * Same constant as in \PoPSchema\UserRolesAccessControl\Services\AccessControlGroups::ROLES
+ * Same constant as in \PoPCMSSchema\UserRolesAccessControl\Services\AccessControlGroups::ROLES
  */
 const ACCESS_CONTROL_GROUP = 'roles';
 

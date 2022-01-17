@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs;
+namespace PoPCMSSchema\Comments\ConditionalOnComponent\Users\TypeAPIs;
 
 interface CommentTypeAPIInterface
 {

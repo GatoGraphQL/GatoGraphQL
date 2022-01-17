@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\ConditionalOnComponent\Users\Facades;
+namespace PoPCMSSchema\Comments\ConditionalOnComponent\Users\Facades;
 
 use PoP\Root\App;
-use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface;
+use PoPCMSSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface;
 
 class CommentTypeAPIFacade
 {

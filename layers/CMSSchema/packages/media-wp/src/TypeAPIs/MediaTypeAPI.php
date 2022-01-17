@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\MediaWP\TypeAPIs;
+namespace PoPCMSSchema\MediaWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use PoPSchema\Media\Component;
-use PoPSchema\Media\ComponentConfiguration;
-use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
+use PoPCMSSchema\Media\Component;
+use PoPCMSSchema\Media\ComponentConfiguration;
+use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use WP_Post;
 
 use function wp_get_attachment_image_src;

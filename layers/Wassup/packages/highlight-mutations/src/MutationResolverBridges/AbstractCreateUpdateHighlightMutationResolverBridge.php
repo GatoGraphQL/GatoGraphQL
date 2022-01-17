@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPSitesWassup\HighlightMutations\MutationResolverBridges;
 
 use PoP\Root\App;
-use PoPSchema\CustomPostMeta\Utils;
-use PoPSchema\CustomPosts\Enums\CustomPostStatus;
+use PoPCMSSchema\CustomPostMeta\Utils;
+use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateUpdateCustomPostMutationResolverBridge;
 
 abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends AbstractCreateUpdateCustomPostMutationResolverBridge

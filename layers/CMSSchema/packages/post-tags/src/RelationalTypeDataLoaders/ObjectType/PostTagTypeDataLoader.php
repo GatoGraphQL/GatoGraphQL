@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTags\RelationalTypeDataLoaders\ObjectType;
+namespace PoPCMSSchema\PostTags\RelationalTypeDataLoaders\ObjectType;
 
-use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
-use PoPSchema\Tags\RelationalTypeDataLoaders\ObjectType\AbstractTagTypeDataLoader;
-use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType\AbstractTagTypeDataLoader;
+use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 
 class PostTagTypeDataLoader extends AbstractTagTypeDataLoader
 {

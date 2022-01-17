@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Tags;
+namespace PoPCMSSchema\Tags;
 
 class Environment
 {

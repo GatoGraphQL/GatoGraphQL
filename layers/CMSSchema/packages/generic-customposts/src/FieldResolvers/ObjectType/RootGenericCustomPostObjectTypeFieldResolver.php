@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\GenericCustomPosts\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\GenericCustomPosts\FieldResolvers\ObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -12,16 +12,16 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoPSchema\CustomPosts\Component as CustomPostsComponent;
-use PoPSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfiguration;
-use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
-use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostByInputObjectTypeResolver;
-use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
-use PoPSchema\GenericCustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
-use PoPSchema\GenericCustomPosts\TypeResolvers\InputObjectType\GenericCustomPostPaginationInputObjectTypeResolver;
-use PoPSchema\GenericCustomPosts\TypeResolvers\InputObjectType\RootGenericCustomPostsFilterInputObjectTypeResolver;
-use PoPSchema\GenericCustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\Component as CustomPostsComponent;
+use PoPCMSSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfiguration;
+use PoPCMSSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostByInputObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
+use PoPCMSSchema\GenericCustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
+use PoPCMSSchema\GenericCustomPosts\TypeResolvers\InputObjectType\GenericCustomPostPaginationInputObjectTypeResolver;
+use PoPCMSSchema\GenericCustomPosts\TypeResolvers\InputObjectType\RootGenericCustomPostsFilterInputObjectTypeResolver;
+use PoPCMSSchema\GenericCustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;

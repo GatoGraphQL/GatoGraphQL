@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators\:
+    PoPCMSSchema\UserStateAccessControl\RelationalTypeResolverDecorators\:
         resource: '../src/RelationalTypeResolverDecorators/*'
 
-    PoPSchema\UserStateAccessControl\Hooks\:
+    PoPCMSSchema\UserStateAccessControl\Hooks\:
         resource: '../src/Hooks/*'

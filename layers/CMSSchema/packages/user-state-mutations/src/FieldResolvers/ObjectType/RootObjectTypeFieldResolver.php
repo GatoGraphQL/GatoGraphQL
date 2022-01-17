@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\UserStateMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -10,11 +10,11 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
-use PoPSchema\UserStateMutations\MutationResolvers\LoginUserOneofMutationResolver;
-use PoPSchema\UserStateMutations\MutationResolvers\LogoutUserMutationResolver;
-use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\UserStateMutations\TypeResolvers\InputObjectType\LoginUserByOneofInputObjectTypeResolver;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\UserStateMutations\MutationResolvers\LoginUserOneofMutationResolver;
+use PoPCMSSchema\UserStateMutations\MutationResolvers\LogoutUserMutationResolver;
+use PoPCMSSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\UserStateMutations\TypeResolvers\InputObjectType\LoginUserByOneofInputObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {

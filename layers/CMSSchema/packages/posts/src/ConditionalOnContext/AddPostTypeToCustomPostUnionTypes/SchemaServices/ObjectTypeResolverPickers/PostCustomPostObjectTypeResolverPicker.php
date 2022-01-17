@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Posts\ConditionalOnContext\AddPostTypeToCustomPostUnionTypes\SchemaServices\ObjectTypeResolverPickers;
+namespace PoPCMSSchema\Posts\ConditionalOnContext\AddPostTypeToCustomPostUnionTypes\SchemaServices\ObjectTypeResolverPickers;
 
-use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoPSchema\Posts\ObjectTypeResolverPickers\AbstractPostObjectTypeResolverPicker;
+use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
+use PoPCMSSchema\Posts\ObjectTypeResolverPickers\AbstractPostObjectTypeResolverPicker;
 
 class PostCustomPostObjectTypeResolverPicker extends AbstractPostObjectTypeResolverPicker
 {

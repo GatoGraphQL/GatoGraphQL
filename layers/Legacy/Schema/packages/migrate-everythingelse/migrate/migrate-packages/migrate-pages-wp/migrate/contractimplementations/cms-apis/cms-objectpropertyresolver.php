@@ -1,7 +1,7 @@
 <?php
-namespace PoPSchema\Pages\WP;
+namespace PoPCMSSchema\Pages\WP;
 
-class ObjectPropertyResolver extends \PoPSchema\Pages\ObjectPropertyResolver_Base
+class ObjectPropertyResolver extends \PoPCMSSchema\Pages\ObjectPropertyResolver_Base
 {
     public function getPageModified($page)
     {

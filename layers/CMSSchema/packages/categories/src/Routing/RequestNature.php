@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Categories\Routing;
+namespace PoPCMSSchema\Categories\Routing;
 
 class RequestNature
 {

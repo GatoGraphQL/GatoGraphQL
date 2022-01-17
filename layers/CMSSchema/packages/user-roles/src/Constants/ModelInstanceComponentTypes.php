@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRoles\Constants;
+namespace PoPCMSSchema\UserRoles\Constants;
 
 class ModelInstanceComponentTypes
 {

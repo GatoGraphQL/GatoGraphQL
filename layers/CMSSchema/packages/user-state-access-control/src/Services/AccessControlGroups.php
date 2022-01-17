@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateAccessControl\Services;
+namespace PoPCMSSchema\UserStateAccessControl\Services;
 
 class AccessControlGroups
 {

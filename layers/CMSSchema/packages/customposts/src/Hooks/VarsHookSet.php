@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\Hooks;
+namespace PoPCMSSchema\CustomPosts\Hooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes;
-use PoPSchema\CustomPosts\Routing\RequestNature;
+use PoPCMSSchema\CustomPosts\Constants\ModelInstanceComponentTypes;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature;
 
 class VarsHookSet extends AbstractHookSet
 {

@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\CustomPostMediaMutations\Hooks\:
+    PoPCMSSchema\CustomPostMediaMutations\Hooks\:
         resource: '../src/Hooks/*'

@@ -3,11 +3,11 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\CustomPostMediaMutations\FieldResolvers\:
+    PoPCMSSchema\CustomPostMediaMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPSchema\CustomPostMediaMutations\MutationResolvers\:
+    PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
 
-    PoPSchema\CustomPostMediaMutations\TypeResolvers\:
+    PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

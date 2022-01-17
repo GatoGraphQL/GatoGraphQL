@@ -3,11 +3,11 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\PostMutations\FieldResolvers\:
+    PoPCMSSchema\PostMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPSchema\PostMutations\MutationResolvers\:
+    PoPCMSSchema\PostMutations\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
 
-    PoPSchema\PostMutations\TypeResolvers\:
+    PoPCMSSchema\PostMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

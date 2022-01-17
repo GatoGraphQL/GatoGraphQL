@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Pages\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Pages\TypeResolvers\InputObjectType;
 
-use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostByInputObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostByInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
 class PageByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeResolver

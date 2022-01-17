@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Comments\TypeResolvers\InputObjectType;
 
 class RootCommentsFilterInputObjectTypeResolver extends AbstractCommentsFilterInputObjectTypeResolver
 {

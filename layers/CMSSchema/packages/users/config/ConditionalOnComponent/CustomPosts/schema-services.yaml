@@ -3,11 +3,11 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers\:
+    PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers\:
         resource: '../../../src/ConditionalOnComponent/CustomPosts/FieldResolvers/*'
 
-    PoPSchema\Users\ConditionalOnComponent\CustomPosts\TypeResolvers\:
+    PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\TypeResolvers\:
         resource: '../../../src/ConditionalOnComponent/CustomPosts/TypeResolvers/*'
 
-    PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks\:
+    PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks\:
         resource: '../../../src/ConditionalOnComponent/CustomPosts/SchemaHooks/*'

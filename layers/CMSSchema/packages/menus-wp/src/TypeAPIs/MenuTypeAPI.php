@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\MenusWP\TypeAPIs;
+namespace PoPCMSSchema\MenusWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPSchema\Menus\ObjectModels\MenuItem;
-use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
+use PoPCMSSchema\Menus\ObjectModels\MenuItem;
+use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use WP_Term;
 
 class MenuTypeAPI implements MenuTypeAPIInterface

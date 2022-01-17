@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomyMetaWP\TypeAPIs;
+namespace PoPCMSSchema\TaxonomyMetaWP\TypeAPIs;
 
-use PoPSchema\TaxonomyMeta\TypeAPIs\AbstractTaxonomyMetaTypeAPI;
+use PoPCMSSchema\TaxonomyMeta\TypeAPIs\AbstractTaxonomyMetaTypeAPI;
 
 class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
 {

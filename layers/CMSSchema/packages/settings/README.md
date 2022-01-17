@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \PoPSchema\Settings\Component::class,
+    \PoPCMSSchema\Settings\Component::class,
 ]);
 ```
 

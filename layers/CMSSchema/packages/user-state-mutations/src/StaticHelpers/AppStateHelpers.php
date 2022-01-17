@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateMutations\StaticHelpers;
+namespace PoPCMSSchema\UserStateMutations\StaticHelpers;
 
 use PoP\Root\App;
-use PoPSchema\UserState\Facades\UserStateTypeAPIFacade;
+use PoPCMSSchema\UserState\Facades\UserStateTypeAPIFacade;
 
 class AppStateHelpers
 {

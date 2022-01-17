@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTags\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\PostTags\TypeResolvers\InputObjectType;
 
-use PoPSchema\Tags\TypeResolvers\InputObjectType\AbstractTagByInputObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\AbstractTagByInputObjectTypeResolver;
 
 class PostTagByInputObjectTypeResolver extends AbstractTagByInputObjectTypeResolver
 {

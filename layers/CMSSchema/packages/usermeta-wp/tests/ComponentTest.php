@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\UserMetaWP;
+namespace PoPCMSSchema\UserMetaWP;
 
 use PoP\Root\AbstractComponentTest;
 

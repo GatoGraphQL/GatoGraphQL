@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\Users\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -11,7 +11,7 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Users\TypeResolvers\InputObjectType\UserByInputObjectTypeResolver;
+use PoPCMSSchema\Users\TypeResolvers\InputObjectType\UserByInputObjectTypeResolver;
 
 class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolver
 {

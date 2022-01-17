@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateAccessControl\Hooks;
+namespace PoPCMSSchema\UserStateAccessControl\Hooks;
 
 use PoP\Root\App;
 use PoP\AccessControl\Hooks\AbstractAccessControlForFieldsInPrivateSchemaHookSet;

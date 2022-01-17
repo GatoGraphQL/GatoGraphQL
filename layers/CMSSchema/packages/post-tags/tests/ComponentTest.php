@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\PostTags;
+namespace PoPCMSSchema\PostTags;
 
 use PoP\Root\AbstractComponentTest;
 

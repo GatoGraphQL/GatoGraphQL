@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 // Do not use the original WSL getAvatar function
 \PoP\Root\App::removeFilter('get_avatar', 'wsl_get_wp_user_custom_avatar', 10, 5);

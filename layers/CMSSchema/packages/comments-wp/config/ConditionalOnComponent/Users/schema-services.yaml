@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface:
-        class: \PoPSchema\CommentsWP\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPI
+    PoPCMSSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface:
+        class: \PoPCMSSchema\CommentsWP\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPI

@@ -4,9 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface:
-        class: \PoPSchema\UserRolesWP\TypeAPIs\UserRoleTypeAPI
+    PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface:
+        class: \PoPCMSSchema\UserRolesWP\TypeAPIs\UserRoleTypeAPI
 
-    PoPSchema\UserRolesWP\Hooks\:
+    PoPCMSSchema\UserRolesWP\Hooks\:
         resource: '../src/Hooks/*'
 

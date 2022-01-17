@@ -3,11 +3,11 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Menus\TypeResolvers\InputObjectType\MenuByInputObjectTypeResolver:
+    PoPCMSSchema\Menus\TypeResolvers\InputObjectType\MenuByInputObjectTypeResolver:
         class: PoPWPSchema\Menus\Overrides\TypeResolvers\InputObjectType\MenuByInputObjectTypeResolver
 
-    PoPSchema\Menus\TypeResolvers\InputObjectType\RootMenusFilterInputObjectTypeResolver:
+    PoPCMSSchema\Menus\TypeResolvers\InputObjectType\RootMenusFilterInputObjectTypeResolver:
         class: PoPWPSchema\Menus\Overrides\TypeResolvers\InputObjectType\RootMenusFilterInputObjectTypeResolver
 
-    PoPSchema\Menus\FieldResolvers\ObjectType\RootObjectTypeFieldResolver:
+    PoPCMSSchema\Menus\FieldResolvers\ObjectType\RootObjectTypeFieldResolver:
         class: PoPWPSchema\Menus\Overrides\FieldResolvers\ObjectType\RootObjectTypeFieldResolver

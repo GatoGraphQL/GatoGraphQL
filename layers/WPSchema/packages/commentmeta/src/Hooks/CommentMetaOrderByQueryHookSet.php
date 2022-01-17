@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CommentMeta\Hooks;
 
-use PoPSchema\CommentsWP\TypeAPIs\CommentTypeAPI;
+use PoPCMSSchema\CommentsWP\TypeAPIs\CommentTypeAPI;
 use PoPWPSchema\Meta\Constants\MetaOrderBy;
 use PoPWPSchema\Meta\Hooks\AbstractMetaOrderByQueryHookSet;
 

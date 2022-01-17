@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostsWP\ObjectTypeResolverPickers;
+namespace PoPCMSSchema\CustomPostsWP\ObjectTypeResolverPickers;
 
-use PoPSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface as UpstreamCustomPostObjectTypeResolverPickerInterface;
+use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface as UpstreamCustomPostObjectTypeResolverPickerInterface;
 
 interface CustomPostObjectTypeResolverPickerInterface extends UpstreamCustomPostObjectTypeResolverPickerInterface
 {

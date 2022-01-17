@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostCategoryMutations\MutationResolvers;
+namespace PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers;
 
 class MutationInputProperties
 {

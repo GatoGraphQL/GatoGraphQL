@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutationsWP\TypeAPIs;
+namespace PoPCMSSchema\CommentMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\Error\Error;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
+use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

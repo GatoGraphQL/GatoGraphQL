@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutations\Facades;
+namespace PoPCMSSchema\CommentMutations\Facades;
 
 use PoP\Root\App;
-use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
+use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 
 class CommentTypeMutationAPIFacade
 {

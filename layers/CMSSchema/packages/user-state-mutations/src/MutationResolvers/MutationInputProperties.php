@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateMutations\MutationResolvers;
+namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
 class MutationInputProperties
 {

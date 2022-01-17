@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Posts\ConditionalOnContext\AddPostTypeToCustomPostUnionTypes\SchemaServices\ObjectTypeResolverPickers\PostCustomPostObjectTypeResolverPicker:
-        class: '\PoPSchema\PostsWP\ConditionalOnContext\AddPostTypeToCustomPostUnionTypes\Overrides\SchemaServices\ObjectTypeResolverPickers\PostCustomPostObjectTypeResolverPicker'
+    PoPCMSSchema\Posts\ConditionalOnContext\AddPostTypeToCustomPostUnionTypes\SchemaServices\ObjectTypeResolverPickers\PostCustomPostObjectTypeResolverPicker:
+        class: '\PoPCMSSchema\PostsWP\ConditionalOnContext\AddPostTypeToCustomPostUnionTypes\Overrides\SchemaServices\ObjectTypeResolverPickers\PostCustomPostObjectTypeResolverPicker'

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\TypeResolvers\EnumType;
+namespace PoPCMSSchema\Comments\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPSchema\Comments\Constants\CommentTypes;
+use PoPCMSSchema\Comments\Constants\CommentTypes;
 
 class CommentTypeEnumTypeResolver extends AbstractEnumTypeResolver
 {

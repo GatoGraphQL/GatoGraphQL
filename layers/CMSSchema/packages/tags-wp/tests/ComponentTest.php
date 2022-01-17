@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\TagsWP;
+namespace PoPCMSSchema\TagsWP;
 
 use PoP\Root\AbstractComponentTest;
 

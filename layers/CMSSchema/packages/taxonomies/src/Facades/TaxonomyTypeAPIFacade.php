@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Taxonomies\Facades;
+namespace PoPCMSSchema\Taxonomies\Facades;
 
 use PoP\Root\App;
-use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 
 class TaxonomyTypeAPIFacade
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs;
+namespace PoPCMSSchema\Media\ConditionalOnComponent\Users\TypeAPIs;
 
 interface UserMediaTypeAPIInterface
 {

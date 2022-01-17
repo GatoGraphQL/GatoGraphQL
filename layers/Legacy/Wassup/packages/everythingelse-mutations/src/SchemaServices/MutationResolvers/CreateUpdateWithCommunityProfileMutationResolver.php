@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
 use PoP\Root\App;
-use PoPSchema\UserMeta\Utils;
+use PoPCMSSchema\UserMeta\Utils;
 class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfileMutationResolver
 {
     protected function additionalsCreate($user_id, $form_data): void

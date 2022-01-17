@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\MediaWP\ConditionalOnComponent\Users\TypeAPIs;
+namespace PoPCMSSchema\MediaWP\ConditionalOnComponent\Users\TypeAPIs;
 
-use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
+use PoPCMSSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
 
 use function get_post;
 

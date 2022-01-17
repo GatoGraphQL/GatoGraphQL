@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\Facades;
+namespace PoPCMSSchema\Media\Facades;
 
 use PoP\Root\App;
-use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 
 class MediaTypeAPIFacade
 {

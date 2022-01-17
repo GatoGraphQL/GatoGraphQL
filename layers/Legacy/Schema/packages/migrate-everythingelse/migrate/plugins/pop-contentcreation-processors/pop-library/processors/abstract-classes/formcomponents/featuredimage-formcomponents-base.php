@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoPSchema\Media\Facades\MediaTypeAPIFacade;
+use PoPCMSSchema\Media\Facades\MediaTypeAPIFacade;
 
 abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
 {

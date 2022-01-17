@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\Hooks;
+namespace PoPCMSSchema\PostCategories\Hooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\CustomPosts\Routing\RequestNature;
-use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
-use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature;
+use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 
 class ModelInstanceHookSet extends AbstractHookSet
 {

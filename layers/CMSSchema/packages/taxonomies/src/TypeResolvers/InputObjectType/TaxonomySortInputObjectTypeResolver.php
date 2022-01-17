@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Taxonomies\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType;
 
-use PoPSchema\Taxonomies\Constants\TaxonomyOrderBy;
-use PoPSchema\Taxonomies\TypeResolvers\EnumType\TaxonomyOrderByEnumTypeResolver;
+use PoPCMSSchema\Taxonomies\Constants\TaxonomyOrderBy;
+use PoPCMSSchema\Taxonomies\TypeResolvers\EnumType\TaxonomyOrderByEnumTypeResolver;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 class TaxonomySortInputObjectTypeResolver extends SortInputObjectTypeResolver

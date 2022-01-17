@@ -4,7 +4,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 
 abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
     protected function getObjectIDParamName(array $module, array &$props, &$data_properties)
     {
         if ($this->isUpdate($module)) {
-            return \PoPSchema\Posts\Constants\InputNames::POST_ID;
+            return \PoPCMSSchema\Posts\Constants\InputNames::POST_ID;
         }
         return null;
     }

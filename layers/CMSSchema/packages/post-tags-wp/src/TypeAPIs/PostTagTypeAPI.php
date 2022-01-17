@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagsWP\TypeAPIs;
+namespace PoPCMSSchema\PostTagsWP\TypeAPIs;
 
-use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
-use PoPSchema\TagsWP\TypeAPIs\AbstractTagTypeAPI;
+use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPCMSSchema\TagsWP\TypeAPIs\AbstractTagTypeAPI;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

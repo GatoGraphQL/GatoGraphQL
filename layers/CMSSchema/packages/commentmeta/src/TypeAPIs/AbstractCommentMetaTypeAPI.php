@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMeta\TypeAPIs;
+namespace PoPCMSSchema\CommentMeta\TypeAPIs;
 
 use PoP\Root\App;
 use InvalidArgumentException;
-use PoPSchema\CommentMeta\Component;
-use PoPSchema\CommentMeta\ComponentConfiguration;
-use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
+use PoPCMSSchema\CommentMeta\Component;
+use PoPCMSSchema\CommentMeta\ComponentConfiguration;
+use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 
 abstract class AbstractCommentMetaTypeAPI extends AbstractMetaTypeAPI implements CommentMetaTypeAPIInterface
 {

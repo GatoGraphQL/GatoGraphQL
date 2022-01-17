@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Meta\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\Meta\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
-use PoPSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
+use PoPCMSSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
+use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
 abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommonsWP;
+namespace PoPCMSSchema\SchemaCommonsWP;
 
 use PoP\Root\Component\AbstractComponent;
 

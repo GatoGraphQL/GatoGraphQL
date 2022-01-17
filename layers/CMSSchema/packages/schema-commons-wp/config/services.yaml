@@ -5,14 +5,14 @@ services:
         autoconfigure: true
 
     PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface:
-        class: \PoPSchema\SchemaCommonsWP\CMS\CMSService
+        class: \PoPCMSSchema\SchemaCommonsWP\CMS\CMSService
 
     PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface:
-        class: \PoPSchema\SchemaCommonsWP\Formatters\DateFormatter
+        class: \PoPCMSSchema\SchemaCommonsWP\Formatters\DateFormatter
 
     PoPCMSSchema\SchemaCommons\Error\ErrorManagerInterface:
-        class: \PoPSchema\SchemaCommonsWP\Error\ErrorManager
+        class: \PoPCMSSchema\SchemaCommonsWP\Error\ErrorManager
 
-    PoPSchema\SchemaCommonsWP\LooseContracts\:
+    PoPCMSSchema\SchemaCommonsWP\LooseContracts\:
         resource: '../src/LooseContracts/*'
 

@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface:
-        class: \PoPSchema\SettingsWP\TypeAPIs\SettingsTypeAPI
+    PoPCMSSchema\Settings\TypeAPIs\SettingsTypeAPIInterface:
+        class: \PoPCMSSchema\SettingsWP\TypeAPIs\SettingsTypeAPI

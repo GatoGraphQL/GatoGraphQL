@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Tags\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Tags\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPSchema\Tags\Component;
-use PoPSchema\Tags\ComponentConfiguration;
+use PoPCMSSchema\Tags\Component;
+use PoPCMSSchema\Tags\ComponentConfiguration;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
 class TagPaginationInputObjectTypeResolver extends PaginationInputObjectTypeResolver

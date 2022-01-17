@@ -4,7 +4,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 
 class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends AbstractObjectTypeFieldResolver
 {
@@ -82,12 +82,12 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
         switch ($fieldName) {
             case 'recommendPostURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
+                    \PoPCMSSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST));
 
             case 'unrecommendPostURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
+                    \PoPCMSSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNRECOMMENDPOST));
 
             case 'recommendPostCountPlus1':
@@ -98,12 +98,12 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
 
             case 'upvotePostURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
+                    \PoPCMSSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UPVOTEPOST));
 
             case 'undoUpvotePostURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
+                    \PoPCMSSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDOUPVOTEPOST));
 
             case 'upvotePostCountPlus1':
@@ -114,12 +114,12 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
 
             case 'downvotePostURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
+                    \PoPCMSSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST));
 
             case 'undoDownvotePostURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
+                    \PoPCMSSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST));
 
             case 'downvotePostCountPlus1':

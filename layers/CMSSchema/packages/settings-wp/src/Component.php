@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SettingsWP;
+namespace PoPCMSSchema\SettingsWP;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\Settings\Component::class,
-            \PoPSchema\SchemaCommonsWP\Component::class,
+            \PoPCMSSchema\Settings\Component::class,
+            \PoPCMSSchema\SchemaCommonsWP\Component::class,
         ];
     }
 

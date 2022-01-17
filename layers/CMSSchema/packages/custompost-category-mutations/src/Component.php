@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostCategoryMutations;
+namespace PoPCMSSchema\CustomPostCategoryMutations;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPostMutations\Component::class,
-            \PoPSchema\Categories\Component::class,
+            \PoPCMSSchema\CustomPostMutations\Component::class,
+            \PoPCMSSchema\Categories\Component::class,
         ];
     }
 }

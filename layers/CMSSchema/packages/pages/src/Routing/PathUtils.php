@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Pages\Routing;
+namespace PoPCMSSchema\Pages\Routing;
 
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
-use PoPSchema\Pages\Facades\PageTypeAPIFacade;
+use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
 
 class PathUtils
 {

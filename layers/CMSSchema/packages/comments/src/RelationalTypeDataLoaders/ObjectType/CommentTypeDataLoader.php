@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\RelationalTypeDataLoaders\ObjectType;
+namespace PoPCMSSchema\Comments\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
-use PoPSchema\Comments\Constants\CommentStatus;
-use PoPSchema\Comments\Constants\CommentTypes;
-use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPCMSSchema\Comments\Constants\CommentStatus;
+use PoPCMSSchema\Comments\Constants\CommentTypes;
+use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 

@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\UserStateMutations\Component::class,
+            \PoPCMSSchema\UserStateMutations\Component::class,
         ];
     }
 

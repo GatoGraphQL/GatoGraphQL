@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
+namespace PoPCMSSchema\PostCategories\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
 use PoP\Root\App;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
-use PoPSchema\Categories\Routing\RequestNature as CategoryRequestNature;
-use PoPSchema\PostCategories\Component;
-use PoPSchema\PostCategories\ComponentConfiguration;
-use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
-use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
-use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
-use PoPSchema\Posts\Component as PostsComponent;
-use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Categories\Routing\RequestNature as CategoryRequestNature;
+use PoPCMSSchema\PostCategories\Component;
+use PoPCMSSchema\PostCategories\ComponentConfiguration;
+use PoPCMSSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
+use PoPCMSSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
+use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoPCMSSchema\Posts\Component as PostsComponent;
+use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {

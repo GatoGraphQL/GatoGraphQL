@@ -7,7 +7,7 @@ namespace PoPSchema\EverythingElse\Misc;
 use PoP\Root\App;
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class TagHelpers
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserAvatarsWP\TypeAPIs;
+namespace PoPCMSSchema\UserAvatarsWP\TypeAPIs;
 
 use PoP\Root\Services\BasicServiceTrait;
-use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
+use PoPCMSSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
 use WP_User;
 
 class UserAvatarTypeAPI implements UserAvatarTypeAPIInterface

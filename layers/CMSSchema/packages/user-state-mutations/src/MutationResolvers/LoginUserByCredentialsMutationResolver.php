@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateMutations\MutationResolvers;
+namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use PoPSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
-use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
+use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
 {

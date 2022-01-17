@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommonsWP\Error;
+namespace PoPCMSSchema\SchemaCommonsWP\Error;
 
 use PoP\ComponentModel\Error\Error;
 use PoP\Root\Services\BasicServiceTrait;

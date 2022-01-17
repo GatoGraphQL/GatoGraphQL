@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMutations\MutationResolvers;
+namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 

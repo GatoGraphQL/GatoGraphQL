@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 trait PoP_UserPlatform_Module_SettingsProcessor_Trait
 {
