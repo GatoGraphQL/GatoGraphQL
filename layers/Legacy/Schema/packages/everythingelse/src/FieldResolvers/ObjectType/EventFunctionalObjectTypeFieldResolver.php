@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Events\FieldResolvers\ObjectType;
+namespace PoPCMSSchemaPRO\Events\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -10,8 +10,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
+use PoPCMSSchemaPRO\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchemaPRO\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 
 class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

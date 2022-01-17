@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\Events\Constants\Scopes;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchemaPRO\Events\Constants\Scopes;
+use PoPCMSSchemaPRO\Events\Facades\EventTypeAPIFacade;
 
 class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_SectionLatestCountsBase
 {

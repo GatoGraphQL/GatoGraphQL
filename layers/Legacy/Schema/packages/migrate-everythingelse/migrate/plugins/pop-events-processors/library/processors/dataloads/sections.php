@@ -2,8 +2,8 @@
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
+use PoPCMSSchemaPRO\Events\ModuleProcessors\PastEventModuleProcessorTrait;
+use PoPCMSSchemaPRO\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 

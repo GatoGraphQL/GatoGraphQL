@@ -2,7 +2,7 @@
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostObjectTypeResolver;
+use PoPCMSSchemaPRO\LocationPosts\TypeResolvers\ObjectType\LocationPostObjectTypeResolver;
 use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 class PoP_LocationPostCategoryLayouts_LayoutDataloadHooks

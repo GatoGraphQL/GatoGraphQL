@@ -10,9 +10,9 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
-use PoPSchema\EventTags\Facades\EventTagTypeAPIFacade;
+use PoPCMSSchemaPRO\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchemaPRO\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
+use PoPCMSSchemaPRO\EventTags\Facades\EventTagTypeAPIFacade;
 
 class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

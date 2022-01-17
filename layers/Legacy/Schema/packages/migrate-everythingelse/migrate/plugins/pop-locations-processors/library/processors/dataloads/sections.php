@@ -1,6 +1,6 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
+use PoPCMSSchemaPRO\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 
 class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {

@@ -1,6 +1,6 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchemaPRO\Events\Facades\EventTypeAPIFacade;
 
 \PoP\Root\App::addFilter('wassup_section_taxonomyterms', 'popEmSectionTaxonomyterms', 0);
 function popEmSectionTaxonomyterms($section_taxonomyterms)

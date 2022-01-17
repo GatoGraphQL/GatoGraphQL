@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchemaPRO\Events\Facades\EventTypeAPIFacade;
 
 \PoP\Root\App::addFilter('pop_module:allcontent:tax_query_items', 'popEmAllcontentTaxqueryItems');
 function popEmAllcontentTaxqueryItems($tax_query_items)

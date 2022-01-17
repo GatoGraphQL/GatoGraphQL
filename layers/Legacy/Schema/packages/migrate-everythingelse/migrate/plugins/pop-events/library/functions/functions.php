@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\Constants;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchemaPRO\Events\Facades\EventTypeAPIFacade;
 
 // \PoP\Root\App::addFilter('gd_dataload:post_types', 'gdEmAddEventPosttype');
 function gdEmAddEventPosttype($post_types)

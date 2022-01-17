@@ -1,7 +1,7 @@
 <?php
 
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchemaPRO\Events\Facades\EventTypeAPIFacade;
 
 class PoPTheme_Wassup_Events_RelatedPosts_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {

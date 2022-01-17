@@ -1,6 +1,6 @@
 <?php
 use PoP\Engine\ModuleProcessors\ObjectIDsFromURLParamModuleProcessorTrait;
-use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
+use PoPCMSSchemaPRO\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 
 class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_DataloadsBase
 {

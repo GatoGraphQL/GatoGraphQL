@@ -1,6 +1,6 @@
 <?php
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
+use PoPCMSSchemaPRO\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase

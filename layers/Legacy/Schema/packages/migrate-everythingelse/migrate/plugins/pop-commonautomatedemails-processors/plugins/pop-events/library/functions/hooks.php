@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchemaPRO\Events\Facades\EventTypeAPIFacade;
 
 class PoP_CommonAutomatedEmails_EM_Hooks
 {
