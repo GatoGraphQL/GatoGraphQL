@@ -14,6 +14,8 @@ class CodeQualityContainerConfigurationService extends AbstractCodeQualityContai
         return [
             $this->rootDirectory . '/layers/API/packages/*/src/*',
             $this->rootDirectory . '/layers/API/packages/*/tests/*',
+            $this->rootDirectory . '/layers/CMSSchema/packages/*/src/*',
+            $this->rootDirectory . '/layers/CMSSchema/packages/*/tests/*',
             $this->rootDirectory . '/layers/Engine/packages/*/src/*',
             $this->rootDirectory . '/layers/Engine/packages/*/tests/*',
             $this->rootDirectory . '/layers/GraphQLAPIForWP/packages/*/src/*',
