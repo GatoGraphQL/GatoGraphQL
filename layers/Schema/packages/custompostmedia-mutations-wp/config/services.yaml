@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface:
-        class: \PoPSchema\CustomPostMediaMutationsWP\TypeAPIs\CustomPostMediaTypeMutationAPI

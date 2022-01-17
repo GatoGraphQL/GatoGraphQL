@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class PoP_Notifications_API
@@ -83,7 +83,7 @@ class PoP_Notifications_API
         global $wpdb;
         $results = array();
         $cmsService = CMSServiceFacade::getInstance();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPCMSSchema\Users\FunctionAPIFactory::getInstance();
 
         // Merge with the defaults
         $args = array_merge(
@@ -222,7 +222,7 @@ class PoP_Notifications_API
                 ) {
                     $usernetwork_keys = array();
                     foreach ($usernetwork_metakeys as $metakey) {
-                        $usernetwork_keys[] = \PoPSchema\UserMeta\Utils::getMetaKey($metakey);
+                        $usernetwork_keys[] = \PoPCMSSchema\UserMeta\Utils::getMetaKey($metakey);
                     }
 
                     // $user_network_conditions: allow to hook more conditions into it

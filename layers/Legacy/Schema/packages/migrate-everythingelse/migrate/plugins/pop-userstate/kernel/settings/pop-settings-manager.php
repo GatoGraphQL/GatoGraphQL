@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\UserState\Settings;
+namespace PoPCMSSchema\UserState\Settings;
 
 class SettingsManager
 {

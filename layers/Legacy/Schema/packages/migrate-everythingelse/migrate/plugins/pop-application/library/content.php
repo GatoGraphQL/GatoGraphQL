@@ -1,6 +1,6 @@
 <?php
 
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 function gdGetFavicon()
 {

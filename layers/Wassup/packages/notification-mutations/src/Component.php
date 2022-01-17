@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\UserState\Component::class,
+            \PoPCMSSchema\UserState\Component::class,
         ];
     }
 

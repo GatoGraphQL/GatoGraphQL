@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Media\Overrides\TypeResolvers\EnumType;
 
-use PoPSchema\Media\TypeResolvers\EnumType\MediaItemOrderByEnumTypeResolver as UpstreamMediaItemOrderByEnumTypeResolver;
+use PoPCMSSchema\Media\TypeResolvers\EnumType\MediaItemOrderByEnumTypeResolver as UpstreamMediaItemOrderByEnumTypeResolver;
 use PoPWPSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPWPSchema\CustomPosts\Overrides\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolverTrait;
 

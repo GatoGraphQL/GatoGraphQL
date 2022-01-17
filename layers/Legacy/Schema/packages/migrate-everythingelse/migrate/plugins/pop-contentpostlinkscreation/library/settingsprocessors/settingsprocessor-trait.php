@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 trait PoP_ContentPostLinksCreation_Module_SettingsProcessor_Trait
 {

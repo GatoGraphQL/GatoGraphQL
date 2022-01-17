@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Comments\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoPCMSSchema\Comments\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+
+    PoPCMSSchema\Comments\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
+
+    PoPCMSSchema\Comments\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'

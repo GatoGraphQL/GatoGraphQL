@@ -18,7 +18,7 @@ class PoP_Module_Processor_ReferencesFilterInputProcessor extends AbstractFilter
 
             case self::FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
                 $query['meta-query'][] = [
-                    'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_REFERENCES),
+                    'key' => \PoPCMSSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_REFERENCES),
                     'value' => $value,
                     'compare' => 'IN',
                 ];

@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }

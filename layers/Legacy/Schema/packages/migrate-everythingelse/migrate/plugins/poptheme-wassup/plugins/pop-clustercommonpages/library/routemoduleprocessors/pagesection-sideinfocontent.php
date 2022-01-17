@@ -1,6 +1,6 @@
 <?php
 
-use PoPSchema\Pages\Routing\RequestNature as PageRequestNature;
+use PoPCMSSchema\Pages\Routing\RequestNature as PageRequestNature;
 
 class PoPTheme_Wassup_ClusterCommonPages_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {

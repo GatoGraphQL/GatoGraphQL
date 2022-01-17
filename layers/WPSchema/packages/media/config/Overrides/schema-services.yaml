@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Media\TypeResolvers\EnumType\MediaItemOrderByEnumTypeResolver:
+    PoPCMSSchema\Media\TypeResolvers\EnumType\MediaItemOrderByEnumTypeResolver:
         class: PoPWPSchema\Media\Overrides\TypeResolvers\EnumType\MediaItemOrderByEnumTypeResolver

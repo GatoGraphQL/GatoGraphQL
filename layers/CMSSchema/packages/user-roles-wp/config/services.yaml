@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface:
+        class: \PoPCMSSchema\UserRolesWP\TypeAPIs\UserRoleTypeAPI
+
+    PoPCMSSchema\UserRolesWP\Hooks\:
+        resource: '../src/Hooks/*'
+

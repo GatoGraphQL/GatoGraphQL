@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Pages\State\:
+        resource: '../src/State/*'
+
+    PoPCMSSchema\Pages\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoPCMSSchema\Pages\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+
+    PoPCMSSchema\Pages\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'

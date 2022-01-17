@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader:
+        class: \PoPCMSSchema\CustomPostsWP\Overrides\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader
+
+

@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\CommentsWP\ConditionalOnComponent\Users\Hooks\:
+        resource: '../../../src/ConditionalOnComponent/Users/Hooks/*'

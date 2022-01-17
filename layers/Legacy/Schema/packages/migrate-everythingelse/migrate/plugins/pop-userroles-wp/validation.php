@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\UserRoles\WP;
+namespace PoPCMSSchema\UserRoles\WP;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_USERROLESWP_POP_ENGINEWP_MIN_VERSION', 0.1);

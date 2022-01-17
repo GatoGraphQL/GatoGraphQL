@@ -6,7 +6,7 @@ Description: The foundation for a PoP Taxonomy Meta
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoPSchema\TaxonomyMeta;
+namespace PoPCMSSchema\TaxonomyMeta;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

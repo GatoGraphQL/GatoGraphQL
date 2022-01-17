@@ -79,131 +79,133 @@ services:
         - '../../layers/SiteBuilder/packages/site-wp:/app/vendor/getpop/site-wp'
         - '../../layers/SiteBuilder/packages/spa:/app/vendor/getpop/spa'
         - >-
-          ../../layers/Schema/packages/block-metadata-for-wp:/app/vendor/pop-schema/block-metadata-for-wp
+          ../../layers/WPSchema/packages/block-metadata-for-wp:/app/vendor/pop-wp-schema/block-metadata-for-wp
         - >-
-          ../../layers/Schema/packages/categories:/app/vendor/pop-schema/categories
+          ../../layers/CMSSchema/packages/categories:/app/vendor/pop-cms-schema/categories
         - >-
-          ../../layers/Schema/packages/categories-wp:/app/vendor/pop-schema/categories-wp
+          ../../layers/CMSSchema/packages/categories-wp:/app/vendor/pop-cms-schema/categories-wp
         - >-
-          ../../layers/Schema/packages/comment-mutations:/app/vendor/pop-schema/comment-mutations
+          ../../layers/CMSSchema/packages/comment-mutations:/app/vendor/pop-cms-schema/comment-mutations
         - >-
-          ../../layers/Schema/packages/comment-mutations-wp:/app/vendor/pop-schema/comment-mutations-wp
-        - '../../layers/Schema/packages/comments:/app/vendor/pop-schema/comments'
+          ../../layers/CMSSchema/packages/comment-mutations-wp:/app/vendor/pop-cms-schema/comment-mutations-wp
+        - '../../layers/CMSSchema/packages/comments:/app/vendor/pop-cms-schema/comments'
         - >-
-          ../../layers/Schema/packages/comments-wp:/app/vendor/pop-schema/comments-wp
+          ../../layers/CMSSchema/packages/comments-wp:/app/vendor/pop-cms-schema/comments-wp
         - >-
-          ../../layers/Schema/packages/custompost-mutations:/app/vendor/pop-schema/custompost-mutations
+          ../../layers/CMSSchema/packages/custompost-mutations:/app/vendor/pop-cms-schema/custompost-mutations
         - >-
-          ../../layers/Schema/packages/custompost-mutations-wp:/app/vendor/pop-schema/custompost-mutations-wp
+          ../../layers/CMSSchema/packages/custompost-mutations-wp:/app/vendor/pop-cms-schema/custompost-mutations-wp
         - >-
-          ../../layers/Schema/packages/custompostmedia:/app/vendor/pop-schema/custompostmedia
+          ../../layers/CMSSchema/packages/custompostmedia:/app/vendor/pop-cms-schema/custompostmedia
         - >-
-          ../../layers/Schema/packages/custompostmedia-wp:/app/vendor/pop-schema/custompostmedia-wp
+          ../../layers/CMSSchema/packages/custompostmedia-wp:/app/vendor/pop-cms-schema/custompostmedia-wp
         - >-
-          ../../layers/Schema/packages/custompostmedia-mutations:/app/vendor/pop-schema/custompostmedia-mutations
+          ../../layers/CMSSchema/packages/custompostmedia-mutations:/app/vendor/pop-cms-schema/custompostmedia-mutations
         - >-
-          ../../layers/Schema/packages/custompostmedia-mutations-wp:/app/vendor/pop-schema/custompostmedia-mutations-wp
+          ../../layers/CMSSchema/packages/custompostmedia-mutations-wp:/app/vendor/pop-cms-schema/custompostmedia-mutations-wp
         - >-
-          ../../layers/Schema/packages/custompost-tag-mutations:/app/vendor/pop-schema/custompost-tag-mutations
+          ../../layers/CMSSchema/packages/custompost-tag-mutations:/app/vendor/pop-cms-schema/custompost-tag-mutations
         - >-
-          ../../layers/Schema/packages/custompost-category-mutations:/app/vendor/pop-schema/custompost-category-mutations
+          ../../layers/CMSSchema/packages/custompost-category-mutations:/app/vendor/pop-cms-schema/custompost-category-mutations
         - >-
-          ../../layers/Schema/packages/custompost-tags-wp:/app/vendor/pop-schema/custompost-tags-wp
+          ../../layers/CMSSchema/packages/custompost-tags-wp:/app/vendor/pop-cms-schema/custompost-tags-wp
         - >-
-          ../../layers/Schema/packages/custompost-categories-wp:/app/vendor/pop-schema/custompost-categories-wp
+          ../../layers/CMSSchema/packages/custompost-categories-wp:/app/vendor/pop-cms-schema/custompost-categories-wp
         - >-
-          ../../layers/Schema/packages/customposts:/app/vendor/pop-schema/customposts
+          ../../layers/CMSSchema/packages/customposts:/app/vendor/pop-cms-schema/customposts
         - >-
-          ../../layers/Schema/packages/customposts-wp:/app/vendor/pop-schema/customposts-wp
+          ../../layers/CMSSchema/packages/customposts-wp:/app/vendor/pop-cms-schema/customposts-wp
         - >-
-          ../../layers/Legacy/Schema/packages/everythingelse:/app/vendor/pop-schema/everythingelse
+          ../../layers/Legacy/Schema/packages/everythingelse:/app/vendor/pop-cms-schema/everythingelse
         - >-
-          ../../layers/Legacy/Schema/packages/everythingelse-wp:/app/vendor/pop-schema/everythingelse-wp
+          ../../layers/Legacy/Schema/packages/everythingelse-wp:/app/vendor/pop-cms-schema/everythingelse-wp
         - >-
-          ../../layers/Schema/packages/highlights:/app/vendor/pop-schema/highlights
+          ../../layers/CMSSchema/packages/highlights:/app/vendor/pop-cms-schema/highlights
         - >-
-          ../../layers/Schema/packages/highlights-wp:/app/vendor/pop-schema/highlights-wp
-        - '../../layers/Schema/packages/media:/app/vendor/pop-schema/media'
-        - '../../layers/Schema/packages/media-wp:/app/vendor/pop-schema/media-wp'
-        - '../../layers/Schema/packages/menus:/app/vendor/pop-schema/menus'
-        - '../../layers/Schema/packages/menus-wp:/app/vendor/pop-schema/menus-wp'
-        - '../../layers/Schema/packages/settings:/app/vendor/pop-schema/settings'
-        - '../../layers/Schema/packages/settings-wp:/app/vendor/pop-schema/settings-wp'
+          ../../layers/CMSSchema/packages/highlights-wp:/app/vendor/pop-cms-schema/highlights-wp
+        - '../../layers/CMSSchema/packages/media:/app/vendor/pop-cms-schema/media'
+        - '../../layers/CMSSchema/packages/media-wp:/app/vendor/pop-cms-schema/media-wp'
+        - '../../layers/CMSSchema/packages/menus:/app/vendor/pop-cms-schema/menus'
+        - '../../layers/CMSSchema/packages/menus-wp:/app/vendor/pop-cms-schema/menus-wp'
+        - '../../layers/CMSSchema/packages/settings:/app/vendor/pop-cms-schema/settings'
+        - '../../layers/CMSSchema/packages/settings-wp:/app/vendor/pop-cms-schema/settings-wp'
         - >-
-          ../../layers/Schema/packages/notifications:/app/vendor/pop-schema/notifications
+          ../../layers/CMSSchema/packages/notifications:/app/vendor/pop-cms-schema/notifications
         - >-
-          ../../layers/Schema/packages/notifications-wp:/app/vendor/pop-schema/notifications-wp
-        - '../../layers/Schema/packages/pages:/app/vendor/pop-schema/pages'
-        - '../../layers/Schema/packages/pages-wp:/app/vendor/pop-schema/pages-wp'
+          ../../layers/CMSSchema/packages/notifications-wp:/app/vendor/pop-cms-schema/notifications-wp
+        - '../../layers/CMSSchema/packages/pages:/app/vendor/pop-cms-schema/pages'
+        - '../../layers/CMSSchema/packages/pages-wp:/app/vendor/pop-cms-schema/pages-wp'
         - >-
-          ../../layers/Schema/packages/post-category-mutations:/app/vendor/pop-schema/post-category-mutations
+          ../../layers/CMSSchema/packages/post-category-mutations:/app/vendor/pop-cms-schema/post-category-mutations
         - >-
-          ../../layers/Schema/packages/post-category-mutations-wp:/app/vendor/pop-schema/post-category-mutations-wp
+          ../../layers/CMSSchema/packages/post-category-mutations-wp:/app/vendor/pop-cms-schema/post-category-mutations-wp
         - >-
-          ../../layers/Schema/packages/post-mutations:/app/vendor/pop-schema/post-mutations
+          ../../layers/CMSSchema/packages/post-mutations:/app/vendor/pop-cms-schema/post-mutations
         - >-
-          ../../layers/Schema/packages/post-tag-mutations:/app/vendor/pop-schema/post-tag-mutations
+          ../../layers/CMSSchema/packages/post-tag-mutations:/app/vendor/pop-cms-schema/post-tag-mutations
         - >-
-          ../../layers/Schema/packages/post-tag-mutations-wp:/app/vendor/pop-schema/post-tag-mutations-wp
+          ../../layers/CMSSchema/packages/post-tag-mutations-wp:/app/vendor/pop-cms-schema/post-tag-mutations-wp
         - >-
-          ../../layers/Schema/packages/post-tags:/app/vendor/pop-schema/post-tags
+          ../../layers/CMSSchema/packages/post-tags:/app/vendor/pop-cms-schema/post-tags
         - >-
-          ../../layers/Schema/packages/post-tags-wp:/app/vendor/pop-schema/post-tags-wp
+          ../../layers/CMSSchema/packages/post-tags-wp:/app/vendor/pop-cms-schema/post-tags-wp
         - >-
-          ../../layers/Schema/packages/post-categories:/app/vendor/pop-schema/post-categories
+          ../../layers/CMSSchema/packages/post-categories:/app/vendor/pop-cms-schema/post-categories
         - >-
-          ../../layers/Schema/packages/post-categories-wp:/app/vendor/pop-schema/post-categories-wp
+          ../../layers/CMSSchema/packages/post-categories-wp:/app/vendor/pop-cms-schema/post-categories-wp
         - >-
-          ../../layers/Schema/packages/postmedia-mutations-wp:/app/vendor/pop-schema/postmedia-mutations-wp
-        - '../../layers/Schema/packages/posts:/app/vendor/pop-schema/posts'
-        - '../../layers/Schema/packages/posts-wp:/app/vendor/pop-schema/posts-wp'
+          ../../layers/CMSSchema/packages/postmedia-mutations-wp:/app/vendor/pop-cms-schema/postmedia-mutations-wp
+        - '../../layers/CMSSchema/packages/posts:/app/vendor/pop-cms-schema/posts'
+        - '../../layers/CMSSchema/packages/posts-wp:/app/vendor/pop-cms-schema/posts-wp'
         - >-
-          ../../layers/Schema/packages/queriedobject:/app/vendor/pop-schema/queriedobject
+          ../../layers/CMSSchema/packages/queriedobject:/app/vendor/pop-cms-schema/queriedobject
         - >-
-          ../../layers/Schema/packages/queriedobject-wp:/app/vendor/pop-schema/queriedobject-wp
+          ../../layers/CMSSchema/packages/queriedobject-wp:/app/vendor/pop-cms-schema/queriedobject-wp
         - >-
-          ../../layers/Schema/packages/schema-commons-wp:/app/vendor/pop-schema/schema-commons-wp
+          ../../layers/CMSSchema/packages/schema-commons-wp:/app/vendor/pop-cms-schema/schema-commons-wp
+        - >-
+          ../../layers/CMSSchema/packages/schema-commons:/app/vendor/pop-cms-schema/schema-commons
+        - >-
+          ../../layers/CMSSchema/packages/generic-customposts:/app/vendor/pop-cms-schema/generic-customposts
+        - '../../layers/CMSSchema/packages/stances:/app/vendor/pop-cms-schema/stances'
+        - >-
+          ../../layers/CMSSchema/packages/stances-wp:/app/vendor/pop-cms-schema/stances-wp
+        - '../../layers/CMSSchema/packages/tags:/app/vendor/pop-cms-schema/tags'
+        - '../../layers/CMSSchema/packages/tags-wp:/app/vendor/pop-cms-schema/tags-wp'
+        - >-
+          ../../layers/CMSSchema/packages/taxonomies:/app/vendor/pop-cms-schema/taxonomies
+        - >-
+          ../../layers/CMSSchema/packages/taxonomies-wp:/app/vendor/pop-cms-schema/taxonomies-wp
+        - >-
+          ../../layers/CMSSchema/packages/taxonomyquery:/app/vendor/pop-cms-schema/taxonomyquery
+        - >-
+          ../../layers/CMSSchema/packages/taxonomyquery-wp:/app/vendor/pop-cms-schema/taxonomyquery-wp
+        - >-
+          ../../layers/CMSSchema/packages/user-avatars-wp:/app/vendor/pop-cms-schema/user-avatars-wp
+        - >-
+          ../../layers/CMSSchema/packages/user-avatars:/app/vendor/pop-cms-schema/user-avatars
+        - >-
+          ../../layers/CMSSchema/packages/user-roles-access-control:/app/vendor/pop-cms-schema/user-roles-access-control
+        - >-
+          ../../layers/CMSSchema/packages/user-roles-acl:/app/vendor/pop-cms-schema/user-roles-acl
+        - >-
+          ../../layers/CMSSchema/packages/user-roles-wp:/app/vendor/pop-cms-schema/user-roles-wp
+        - >-
+          ../../layers/CMSSchema/packages/user-roles:/app/vendor/pop-cms-schema/user-roles
+        - >-
+          ../../layers/CMSSchema/packages/user-state:/app/vendor/pop-cms-schema/user-state
+        - >-
+          ../../layers/CMSSchema/packages/user-state-access-control:/app/vendor/pop-cms-schema/user-state-access-control
+        - >-
+          ../../layers/CMSSchema/packages/user-state-mutations:/app/vendor/pop-cms-schema/user-state-mutations
+        - >-
+          ../../layers/CMSSchema/packages/user-state-mutations-wp:/app/vendor/pop-cms-schema/user-state-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/user-state-wp:/app/vendor/pop-cms-schema/user-state-wp
+        - '../../layers/CMSSchema/packages/users-wp:/app/vendor/pop-cms-schema/users-wp'
+        - '../../layers/CMSSchema/packages/users:/app/vendor/pop-cms-schema/users'
         - >-
           ../../layers/Schema/packages/schema-commons:/app/vendor/pop-schema/schema-commons
-        - >-
-          ../../layers/Schema/packages/generic-customposts:/app/vendor/pop-schema/generic-customposts
-        - '../../layers/Schema/packages/stances:/app/vendor/pop-schema/stances'
-        - >-
-          ../../layers/Schema/packages/stances-wp:/app/vendor/pop-schema/stances-wp
-        - '../../layers/Schema/packages/tags:/app/vendor/pop-schema/tags'
-        - '../../layers/Schema/packages/tags-wp:/app/vendor/pop-schema/tags-wp'
-        - >-
-          ../../layers/Schema/packages/taxonomies:/app/vendor/pop-schema/taxonomies
-        - >-
-          ../../layers/Schema/packages/taxonomies-wp:/app/vendor/pop-schema/taxonomies-wp
-        - >-
-          ../../layers/Schema/packages/taxonomyquery:/app/vendor/pop-schema/taxonomyquery
-        - >-
-          ../../layers/Schema/packages/taxonomyquery-wp:/app/vendor/pop-schema/taxonomyquery-wp
-        - >-
-          ../../layers/Schema/packages/user-avatars-wp:/app/vendor/pop-schema/user-avatars-wp
-        - >-
-          ../../layers/Schema/packages/user-avatars:/app/vendor/pop-schema/user-avatars
-        - >-
-          ../../layers/Schema/packages/user-roles-access-control:/app/vendor/pop-schema/user-roles-access-control
-        - >-
-          ../../layers/Schema/packages/user-roles-acl:/app/vendor/pop-schema/user-roles-acl
-        - >-
-          ../../layers/Schema/packages/user-roles-wp:/app/vendor/pop-schema/user-roles-wp
-        - >-
-          ../../layers/Schema/packages/user-roles:/app/vendor/pop-schema/user-roles
-        - >-
-          ../../layers/Schema/packages/user-state:/app/vendor/pop-schema/user-state
-        - >-
-          ../../layers/Schema/packages/user-state-access-control:/app/vendor/pop-schema/user-state-access-control
-        - >-
-          ../../layers/Schema/packages/user-state-mutations:/app/vendor/pop-schema/user-state-mutations
-        - >-
-          ../../layers/Schema/packages/user-state-mutations-wp:/app/vendor/pop-schema/user-state-mutations-wp
-        - >-
-          ../../layers/Schema/packages/user-state-wp:/app/vendor/pop-schema/user-state-wp
-        - '../../layers/Schema/packages/users-wp:/app/vendor/pop-schema/users-wp'
-        - '../../layers/Schema/packages/users:/app/vendor/pop-schema/users'
         - '../../layers/WPSchema/packages/commentmeta:/app/vendor/pop-wp-schema/commentmeta'
         - '../../layers/WPSchema/packages/comments:/app/vendor/pop-wp-schema/comments'
         - '../../layers/WPSchema/packages/custompostmeta:/app/vendor/pop-wp-schema/custompostmeta'

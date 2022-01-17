@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\CustomPosts\Types\Status;
+use PoPCMSSchema\CustomPosts\Types\Status;
 
 class GD_CreateUpdate_Utils
 {

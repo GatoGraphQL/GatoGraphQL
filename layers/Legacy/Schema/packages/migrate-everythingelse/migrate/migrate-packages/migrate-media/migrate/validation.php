@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\Media;
+namespace PoPCMSSchema\Media;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_MEDIA_POP_ENGINE_MIN_VERSION', 0.1);

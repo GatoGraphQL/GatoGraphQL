@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 function userNameUpdated($user_id)
 {

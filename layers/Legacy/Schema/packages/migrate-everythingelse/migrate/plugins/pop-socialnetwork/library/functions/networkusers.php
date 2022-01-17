@@ -6,7 +6,7 @@
 
 function getUserFollowers($user_id)
 {
-    if ($followers = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_FOLLOWEDBY)) {
+    if ($followers = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_FOLLOWEDBY)) {
         return $followers;
     }
 

@@ -1,7 +1,7 @@
 <?php
-namespace PoPSchema\UserMeta\WP;
+namespace PoPCMSSchema\UserMeta\WP;
 
-class FunctionAPI extends \PoPSchema\UserMeta\FunctionAPI_Base
+class FunctionAPI extends \PoPCMSSchema\UserMeta\FunctionAPI_Base
 {
     public function deleteUserMeta($user_id, $meta_key, $meta_value = '')
     {

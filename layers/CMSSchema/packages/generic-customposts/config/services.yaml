@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\GenericCustomPosts\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
+
+    PoPCMSSchema\GenericCustomPosts\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'

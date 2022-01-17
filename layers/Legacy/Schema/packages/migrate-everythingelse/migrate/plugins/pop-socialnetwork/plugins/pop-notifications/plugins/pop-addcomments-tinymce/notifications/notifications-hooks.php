@@ -63,7 +63,7 @@ class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
                     $user_id,
                     $wpdb->comments,
                     $wpdb->commentmeta,
-                    \PoPSchema\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
+                    \PoPCMSSchema\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
                 ),
             )
         );
@@ -95,7 +95,7 @@ class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
                 $user_id,
                 $wpdb->comments,
                 $wpdb->commentmeta,
-                \PoPSchema\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
+                \PoPCMSSchema\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
             );
         }
 

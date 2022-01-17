@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\LooseContracts\:
+        resource: '../../../src/ConditionalOnComponent/CustomPosts/LooseContracts/*'
+
+    PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Hooks\:
+        resource: '../../../src/ConditionalOnComponent/CustomPosts/Hooks/*'
+
+    PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\:
+        resource: '../../../src/ConditionalOnComponent/CustomPosts/ModuleProcessors/*'
+
+    PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\FilterInputProcessors\:
+        resource: '../../../src/ConditionalOnComponent/CustomPosts/FilterInputProcessors/*'

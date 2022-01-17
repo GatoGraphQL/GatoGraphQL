@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\TaxonomyMeta\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
-use PoPSchema\Taxonomies\TypeResolvers\EnumType\TaxonomyOrderByEnumTypeResolver;
+use PoPCMSSchema\Taxonomies\TypeResolvers\EnumType\TaxonomyOrderByEnumTypeResolver;
 use PoPWPSchema\Meta\SchemaHooks\AbstractMetaOrderByEnumTypeHookSet;
 
 class TaxonomyMetaOrderByEnumTypeHookSet extends AbstractMetaOrderByEnumTypeHookSet

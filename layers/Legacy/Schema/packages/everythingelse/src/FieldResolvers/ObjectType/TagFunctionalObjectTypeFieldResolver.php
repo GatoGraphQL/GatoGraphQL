@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
-use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
 
 class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Users\TypeResolvers\EnumType\UserOrderByEnumTypeResolver:
+    PoPCMSSchema\Users\TypeResolvers\EnumType\UserOrderByEnumTypeResolver:
         class: PoPWPSchema\Users\Overrides\TypeResolvers\EnumType\UserOrderByEnumTypeResolver

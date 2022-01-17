@@ -19,9 +19,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPosts\Component::class,
-            \PoPSchema\Tags\Component::class,
-            \PoPSchema\UserState\Component::class,
+            \PoPCMSSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\Tags\Component::class,
+            \PoPCMSSchema\UserState\Component::class,
         ];
     }
 

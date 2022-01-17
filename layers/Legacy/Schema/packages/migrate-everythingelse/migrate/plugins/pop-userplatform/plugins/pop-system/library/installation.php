@@ -24,7 +24,7 @@ class PoP_UserPlatform_Installation
             )
         );
 
-        $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
+        $cmsuserrolesapi = \PoPCMSSchema\UserRoles\FunctionAPIFactory::getInstance();
         $cmsuserrolesapi->addRole(GD_ROLE_PROFILE, 'GD Profile', $capabilities);
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
 use PoP\Root\App;
-use PoPSchema\UserMeta\Utils;
+use PoPCMSSchema\UserMeta\Utils;
 
 class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationResolver
 {

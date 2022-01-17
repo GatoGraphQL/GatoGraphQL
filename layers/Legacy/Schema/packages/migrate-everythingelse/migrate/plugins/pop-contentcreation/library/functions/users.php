@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
-use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPCMSSchema\CustomPostMutations\LooseContracts\LooseContractSet;
+use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 function gdCurrentUserCanEdit($post_id = null)
 {

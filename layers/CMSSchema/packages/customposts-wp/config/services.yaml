@@ -1,0 +1,15 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface:
+        class: \PoPCMSSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI
+
+    PoPCMSSchema\CustomPostsWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+
+    PoPCMSSchema\CustomPostsWP\Hooks\:
+        resource: '../src/Hooks/*'
+

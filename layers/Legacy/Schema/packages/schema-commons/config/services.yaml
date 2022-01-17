@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\SchemaCommons\LooseContracts\:
+    PoPCMSSchema\SchemaCommons\LooseContracts\:
         resource: '../src/LooseContracts/*'

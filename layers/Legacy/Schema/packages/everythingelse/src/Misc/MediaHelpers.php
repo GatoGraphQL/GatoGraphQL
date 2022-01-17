@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMedia\Misc;
+namespace PoPCMSSchema\CustomPostMedia\Misc;
 
 use PoP\Root\App;
-use PoPSchema\CustomPostMedia\Facades\CustomPostMediaTypeAPIFacade;
+use PoPCMSSchema\CustomPostMedia\Facades\CustomPostMediaTypeAPIFacade;
 
 class MediaHelpers
 {

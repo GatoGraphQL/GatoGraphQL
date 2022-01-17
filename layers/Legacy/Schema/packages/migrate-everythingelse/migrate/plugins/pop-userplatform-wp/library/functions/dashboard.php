@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 /*
  * Function to remove all access to the backend (also edit one's profile) for Subscribers

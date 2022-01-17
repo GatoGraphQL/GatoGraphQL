@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoPSchema\GenericCustomPosts\ConditionalOnComponent\API\ModuleProcessors\:
-        resource: '../../../src/ConditionalOnComponent/API/ModuleProcessors/*'

@@ -1,6 +1,6 @@
 <?php
-use PoPSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 class PoP_Events_Engine_Hooks
 {

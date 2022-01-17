@@ -7,7 +7,7 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\Application\HelperAPIFactory;
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 
 class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver

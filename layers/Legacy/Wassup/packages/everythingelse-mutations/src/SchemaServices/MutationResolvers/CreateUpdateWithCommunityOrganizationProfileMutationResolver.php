@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoPSchema\UserRoles\FunctionAPIFactory;
+use PoPCMSSchema\UserRoles\FunctionAPIFactory;
 class CreateUpdateWithCommunityOrganizationProfileMutationResolver extends CreateUpdateWithCommunityProfileMutationResolver
 {
     use CreateUpdateOrganizationProfileMutationResolverTrait;

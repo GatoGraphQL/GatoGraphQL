@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\UserState\CheckpointProcessors\UserStateCheckpointProcessor;
+use PoPCMSSchema\UserState\CheckpointProcessors\UserStateCheckpointProcessor;
 
 const POPUSERLOGIN_CHECKPOINTCONFIGURATION_LOGGEDIN_ISADMINISTRATOR = array(
     [UserStateCheckpointProcessor::class, UserStateCheckpointProcessor::USERLOGGEDIN],

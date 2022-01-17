@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPThemeWassup_UserCommunities_ResourceLoader_Hooks
 {

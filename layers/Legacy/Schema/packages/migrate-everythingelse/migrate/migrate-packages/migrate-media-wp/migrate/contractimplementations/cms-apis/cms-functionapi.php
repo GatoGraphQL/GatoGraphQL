@@ -1,8 +1,8 @@
 <?php
 
-namespace PoPSchema\Media\WP;
+namespace PoPCMSSchema\Media\WP;
 
-class FunctionAPI extends \PoPSchema\Media\FunctionAPI_Base
+class FunctionAPI extends \PoPCMSSchema\Media\FunctionAPI_Base
 {
     public function getMediaObject($media_id)
     {

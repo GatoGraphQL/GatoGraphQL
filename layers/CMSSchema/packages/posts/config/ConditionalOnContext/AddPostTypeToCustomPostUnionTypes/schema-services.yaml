@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\Posts\ConditionalOnContext\AddPostTypeToCustomPostUnionTypes\SchemaServices\:
+        resource: '../../../src/ConditionalOnContext/AddPostTypeToCustomPostUnionTypes/SchemaServices/*'

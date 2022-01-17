@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\UserStateAccessControl\ConditionalOnComponent\CacheControl\RelationalTypeResolverDecorators\:
+        resource: '../../../src/ConditionalOnComponent/CacheControl/RelationalTypeResolverDecorators/*'

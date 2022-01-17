@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\Menus\FieldResolvers\ObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
+use PoPCMSSchema\Menus\Facades\MenuItemTypeAPIFacade;
 
 /**
  * Move the classes added to field "classes" to a hook!

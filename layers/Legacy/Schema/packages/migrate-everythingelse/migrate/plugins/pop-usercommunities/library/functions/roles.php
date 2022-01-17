@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 define('GD_URE_ROLE_COMMUNITY', 'community');
 

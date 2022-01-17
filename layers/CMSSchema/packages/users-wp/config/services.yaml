@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface:
+        class: \PoPCMSSchema\UsersWP\TypeAPIs\UserTypeAPI
+
+    PoPCMSSchema\UsersWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+
+    PoPCMSSchema\UsersWP\Hooks\:
+        resource: '../src/Hooks/*'

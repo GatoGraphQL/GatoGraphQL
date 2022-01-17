@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/migrate-everythingelse",
+    "name": "pop-cms-schema/migrate-everythingelse",
     "type": "library",
     "description": "(Temporary package) All the remaining code to migrate for PoP, which doesn't have a repo of its own",
     "keywords": ["PoP", "everythingelse"],
@@ -16,9 +16,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/migrate-locations": "^0.9",
-        "pop-schema/migrate-locations-wp-em": "^0.9",
-        "pop-schema/migrate-events-wp-em": "^0.9"
+        "pop-cms-schema/migrate-locations": "^0.9",
+        "pop-cms-schema/migrate-locations-wp-em": "^0.9",
+        "pop-cms-schema/migrate-events-wp-em": "^0.9"
     },
     "extra": {
         "branch-alias": {

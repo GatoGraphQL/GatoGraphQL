@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\UserMeta;
+namespace PoPCMSSchema\UserMeta;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_USERMETA_POP_ENGINE_MIN_VERSION', 0.1);

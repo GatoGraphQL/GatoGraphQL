@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 \PoP\Root\App::addFilter('gd_postname', 'locationpostsPostname', 10, 2);
 function locationpostsPostname($name, $post_id = null)

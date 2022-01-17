@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\Posts;
+namespace PoPCMSSchema\Posts;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_POSTS_POP_ENGINE_MIN_VERSION', 0.1);

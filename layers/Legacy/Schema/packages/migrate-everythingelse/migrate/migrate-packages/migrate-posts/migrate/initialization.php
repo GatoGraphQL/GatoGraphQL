@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\Posts;
+namespace PoPCMSSchema\Posts;
 
 class Initialization
 {

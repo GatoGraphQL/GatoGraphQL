@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoPSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnComponent\RESTAPI\Hooks\:
-        resource: '../../../../../src/ConditionalOnComponent/CustomPosts/ConditionalOnComponent/RESTAPI/Hooks/*'

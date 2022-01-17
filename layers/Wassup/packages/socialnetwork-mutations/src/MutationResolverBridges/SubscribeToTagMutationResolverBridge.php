@@ -6,7 +6,7 @@ namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\SubscribeToTagMutationResolver;
 
 class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValueMutationResolverBridge

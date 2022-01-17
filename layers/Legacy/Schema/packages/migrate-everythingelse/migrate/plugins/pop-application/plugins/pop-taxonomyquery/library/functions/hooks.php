@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\TaxonomyQuery;
+namespace PoPCMSSchema\TaxonomyQuery;
 
 class PoP_Application_TaxonomyQuery_Hooks
 {

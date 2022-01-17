@@ -27,7 +27,7 @@ class GD_CreateUpdate_Hooks
             if ($url) {
                         $link = gdGetNonceUrl(GD_NONCE_EDITURL, $url, $post_id);
                 $link = GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $post_id,
+                    \PoPCMSSchema\Posts\Constants\InputNames::POST_ID => $post_id,
                 ], $link);
             }
         }

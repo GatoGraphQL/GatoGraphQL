@@ -8,6 +8,6 @@
 function gdWslUreHookProcessLoginAfterWpInsertUser($user_id)
 {
     // GD_ROLE_PROFILE alredy added. Now add the Individual role
-    $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
+    $cmsuserrolesapi = \PoPCMSSchema\UserRoles\FunctionAPIFactory::getInstance();
     $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_INDIVIDUAL);
 }

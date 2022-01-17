@@ -35,9 +35,10 @@ Plugins can extend the GraphQL schema, to fetch their own data.
 - Website: [getpop.org](https://getpop.org)
 - Source code:
   - [Backbone](layers/Backbone): Libraries providing the architectural scaffolding.
-  - [Engine](layers/Engine): The basic libraries.
-  - [Schema](layers/Schema): Agnostic data entities (posts, users, comments, etc).
-  - [WPSchema](layers/WPSchema): WordPress-specific data elements.
+  - [Engine](layers/Engine): The engine of the application.
+  - [Schema](layers/Schema): Self-sufficient schema elements, such as directives.
+  - [CMSSchema](layers/CMSSchema): Schema elements abstracted away from the CMS through interfaces, and to be satisfied for some particular CMS.
+  - [WPSchema](layers/WPSchema): WordPress-specific schema elements.
   - [API](layers/API): Packages to access the schema data through an API, including REST and GraphQL.
 
 ## Site Builder (WIP)

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPWPSchema\Users\Overrides\TypeResolvers\EnumType;
 
 use PoP\Root\App;
-use PoPSchema\Users\Component;
-use PoPSchema\Users\ComponentConfiguration;
-use PoPSchema\Users\TypeResolvers\EnumType\UserOrderByEnumTypeResolver as UpstreamUserOrderByEnumTypeResolver;
+use PoPCMSSchema\Users\Component;
+use PoPCMSSchema\Users\ComponentConfiguration;
+use PoPCMSSchema\Users\TypeResolvers\EnumType\UserOrderByEnumTypeResolver as UpstreamUserOrderByEnumTypeResolver;
 use PoPWPSchema\Users\Constants\UserOrderBy;
 
 /**

@@ -3,8 +3,8 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Routing\Routes as RoutingRoutes;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Module_Processor_CustomSectionBlocksUtils
 {
@@ -110,7 +110,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
         $tag_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         $ret['meta-query'][] = [
-            'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS),
+            'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS),
             'value' => $tag_id,
             'compare' => 'IN'
         ];
@@ -125,7 +125,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
         // It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
         // And the Organization must've accepted it by leaving the Show As Member privilege on
         $ret['meta-query'][] = [
-            'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_FOLLOWSUSERS),
+            'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_FOLLOWSUSERS),
             'value' => $author,
             'compare' => 'IN'
         ];
@@ -140,7 +140,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
         // It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
         // And the Organization must've accepted it by leaving the Show As Member privilege on
         $ret['meta-query'][] = [
-            'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_FOLLOWEDBY),
+            'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_FOLLOWEDBY),
             'value' => $author,
             'compare' => 'IN'
         ];
@@ -153,7 +153,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
         // It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
         // And the Organization must've accepted it by leaving the Show As Member privilege on
         $ret['meta-query'][] = [
-            'key' => \PoPSchema\TaxonomyMeta\Utils::getMetaKey(GD_METAKEY_TERM_SUBSCRIBEDBY),
+            'key' => \PoPCMSSchema\TaxonomyMeta\Utils::getMetaKey(GD_METAKEY_TERM_SUBSCRIBEDBY),
             'value' => $author,
             'compare' => 'IN'
         ];
@@ -168,7 +168,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
         // Find all recommended posts by this author
         $ret['meta-query'][] = [
-            'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_RECOMMENDEDBY),
+            'key' => \PoPCMSSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_RECOMMENDEDBY),
             'value' => array($author),
             'compare' => 'IN'
         ];
@@ -191,7 +191,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
         // Find all related posts
         $ret['meta-query'][] = [
-            'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_RECOMMENDSPOSTS),
+            'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_RECOMMENDSPOSTS),
             'value' => array($post_id),
             'compare' => 'IN'
         ];
@@ -203,7 +203,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
         // Find all related posts
         $ret['meta-query'][] = [
-            'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_UPVOTESPOSTS),
+            'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_UPVOTESPOSTS),
             'value' => array($post_id),
             'compare' => 'IN'
         ];
@@ -215,7 +215,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
         // Find all related posts
         $ret['meta-query'][] = [
-            'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_DOWNVOTESPOSTS),
+            'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_DOWNVOTESPOSTS),
             'value' => array($post_id),
             'compare' => 'IN'
         ];

@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\Engine\Component::class,
-            \PoPSchema\SchemaCommons\Component::class,
+            \PoPCMSSchema\SchemaCommons\Component::class,
         ];
     }
 
@@ -30,7 +30,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\CustomPosts\Component::class,
         ];
     }
 

@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Users\State\:
+        resource: '../src/State/*'
+
+    PoPCMSSchema\Users\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+
+    PoPCMSSchema\Users\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'
+
+    PoPCMSSchema\Users\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'

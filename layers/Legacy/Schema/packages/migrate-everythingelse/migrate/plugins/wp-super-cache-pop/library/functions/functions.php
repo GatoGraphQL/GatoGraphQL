@@ -88,7 +88,7 @@ function popWpscDeletecommentscache($post_id)
     // - after 'pid' can have =, []=, or [number]=
     // - then must have $post_id
     // - then, it must either have & or be the end
-    $regex = '/[\?|&]'.\PoPSchema\Posts\Constants\InputNames::POST_ID.'(\[[0-9]+\])?='.$post_id.'(&|")/';
+    $regex = '/[\?|&]'.\PoPCMSSchema\Posts\Constants\InputNames::POST_ID.'(\[[0-9]+\])?='.$post_id.'(&|")/';
 
     // wp_cache_debug( "wp_cache_phase2_clean_cache: Cleaning cache in $blog_cache_dir" );
     if ($handle = @opendir($blog_cache_dir)) {

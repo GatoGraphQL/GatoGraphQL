@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface:
+        class: \PoPCMSSchema\TaxonomyMetaWP\TypeAPIs\TaxonomyMetaTypeAPI
+
+    PoPCMSSchema\TaxonomyMetaWP\Hooks\:
+        resource: '../src/Hooks/*'

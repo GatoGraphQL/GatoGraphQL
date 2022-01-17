@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\UserState\State\:
+        resource: '../src/State/*'
+
+    PoPCMSSchema\UserState\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoPCMSSchema\UserState\CheckpointProcessors\:
+        resource: '../src/CheckpointProcessors/*'

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\CustomPostMeta\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
-use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver;
 use PoPWPSchema\Meta\SchemaHooks\AbstractMetaOrderByEnumTypeHookSet;
 
 class CustomPostMetaOrderByEnumTypeHookSet extends AbstractMetaOrderByEnumTypeHookSet

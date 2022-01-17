@@ -1,7 +1,7 @@
 <?php
-namespace PoPSchema\CommentMeta\WP;
+namespace PoPCMSSchema\CommentMeta\WP;
 
-class FunctionAPI extends \PoPSchema\CommentMeta\FunctionAPI_Base
+class FunctionAPI extends \PoPCMSSchema\CommentMeta\FunctionAPI_Base
 {
     public function getMetaKey($meta_key)
     {

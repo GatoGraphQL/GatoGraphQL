@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Media\Facades\MediaTypeAPIFacade;
+use PoPCMSSchema\CustomPostMedia\Misc\MediaHelpers;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\Media\Facades\MediaTypeAPIFacade;
 
 // Allow posts to have menu_order. This is needed for the TPP Debate website,
 // to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
@@ -76,7 +76,7 @@ function gdGetThemeColor()
 
 function gdGetDocumentThumb($size = 'large')
 {
-    $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
+    $cmsmediaapi = \PoPCMSSchema\Media\FunctionAPIFactory::getInstance();
     if (\PoP\Root\App::getState(['routing', 'is-custompost']) || \PoP\Root\App::getState(['routing', 'is-page'])) {
         $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         if ($post_thumb_id = MediaHelpers::getThumbId($post_id)) {

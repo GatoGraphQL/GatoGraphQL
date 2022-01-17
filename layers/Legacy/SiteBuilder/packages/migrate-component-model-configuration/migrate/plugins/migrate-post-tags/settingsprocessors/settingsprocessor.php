@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\PostTags;
+namespace PoPCMSSchema\PostTags;
 
 class PoPPostTags_Module_SettingsProcessor extends \PoP\ComponentModel\Settings\SettingsProcessorBase
 {

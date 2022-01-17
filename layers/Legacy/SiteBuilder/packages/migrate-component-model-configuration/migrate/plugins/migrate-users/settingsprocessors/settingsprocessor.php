@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\Users;
+namespace PoPCMSSchema\Users;
 
 class PoPUsers_Module_SettingsProcessor extends \PoP\ComponentModel\Settings\SettingsProcessorBase
 {

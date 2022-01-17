@@ -7,8 +7,8 @@ class GD_DataLoad_QueryInputOutputHandler_EditMembership extends ActionExecution
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
-        $uid = $_REQUEST[\PoPSchema\Users\Constants\InputNames::USER_ID] ?? null;
-        $ret[\PoPSchema\Users\Constants\InputNames::USER_ID] = $uid;
+        $uid = $_REQUEST[\PoPCMSSchema\Users\Constants\InputNames::USER_ID] ?? null;
+        $ret[\PoPCMSSchema\Users\Constants\InputNames::USER_ID] = $uid;
         $ret[POP_INPUTNAME_NONCE] = gdCreateNonce(GD_NONCE_EDITMEMBERSHIPURL, $uid);
 
         return $ret;
@@ -18,8 +18,8 @@ class GD_DataLoad_QueryInputOutputHandler_EditMembership extends ActionExecution
 
     //     $ret = parent::getSharedbydomainsQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
-    //     $uid = $_REQUEST[\PoPSchema\Users\Constants\InputNames::USER_ID];
-    //     $ret[ParamConstants::PARAMS][\PoPSchema\Users\Constants\InputNames::USER_ID] = $uid;
+    //     $uid = $_REQUEST[\PoPCMSSchema\Users\Constants\InputNames::USER_ID];
+    //     $ret[ParamConstants::PARAMS][\PoPCMSSchema\Users\Constants\InputNames::USER_ID] = $uid;
     //     $ret[ParamConstants::PARAMS][POP_INPUTNAME_NONCE] = gdCreateNonce(GD_NONCE_EDITMEMBERSHIPURL, $uid);
 
     //     return $ret;

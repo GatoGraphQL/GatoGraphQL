@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
-use PoPSchema\Media\Facades\MediaTypeAPIFacade;
+use PoPCMSSchema\CustomPostMedia\Misc\MediaHelpers;
+use PoPCMSSchema\Media\Facades\MediaTypeAPIFacade;
 
 /**
  * Add the Featured Image to the feed
@@ -27,7 +27,7 @@ function gdRssFeaturedImage()
 }
 function gdRssPrintFeaturedImage($post_id)
 {
-    $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
+    $cmsmediaapi = \PoPCMSSchema\Media\FunctionAPIFactory::getInstance();
     if ($featuredimage_id = MediaHelpers::getThumbId($post_id)) {
         $featuredimage = $cmsmediaapi->getMediaObject($featuredimage_id);
         $mediaTypeAPI = MediaTypeAPIFacade::getInstance();

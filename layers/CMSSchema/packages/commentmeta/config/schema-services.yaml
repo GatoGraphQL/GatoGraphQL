@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\CommentMeta\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'

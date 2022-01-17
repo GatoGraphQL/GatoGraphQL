@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\Routing\RequestNature as UserRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_URE_Engine_Hooks
 {

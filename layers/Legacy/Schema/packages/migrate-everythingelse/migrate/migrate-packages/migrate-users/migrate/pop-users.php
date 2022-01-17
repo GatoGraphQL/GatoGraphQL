@@ -6,7 +6,7 @@ Description: The foundation for a PoP Users
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoPSchema\Users;
+namespace PoPCMSSchema\Users;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

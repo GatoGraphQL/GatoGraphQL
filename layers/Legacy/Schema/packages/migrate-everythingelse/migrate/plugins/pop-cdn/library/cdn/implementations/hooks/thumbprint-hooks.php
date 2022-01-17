@@ -42,7 +42,7 @@ class PoP_CDN_ThumbprintUserHooks
             // The author page displays the user information + user posts
             // So simply add the partial path for the author URL slug prefix, eg: 'u/',
             // to catch all URLs for the authors, such as getpop.org/en/u/leo/
-            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+            $cmsusersapi = \PoPCMSSchema\Users\FunctionAPIFactory::getInstance();
             $paths[] = $cmsusersapi->getAuthorBase().'/';
 
             // Please notice:

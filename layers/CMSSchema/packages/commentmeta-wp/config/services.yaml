@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface:
+        class: \PoPCMSSchema\CommentMetaWP\TypeAPIs\CommentMetaTypeAPI
+
+    PoPCMSSchema\CommentMetaWP\Hooks\:
+        resource: '../src/Hooks/*'

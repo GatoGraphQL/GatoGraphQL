@@ -47,7 +47,7 @@ class PoP_ServiceWorkers_UserState_Hooks
         // so there's no need to show the stuff immediately to the user, when it might be stale. Instead, go get the
         // latest data from the server, show cached data only if the user has no connection
         $settingsmanager = \PoP\ComponentModel\Settings\SettingsManagerFactory::getInstance();
-        $userstatesettingsmanager = \PoPSchema\UserState\Settings\SettingsManagerFactory::getInstance();
+        $userstatesettingsmanager = \PoPCMSSchema\UserState\Settings\SettingsManagerFactory::getInstance();
         foreach (\PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance()->getRoutes() as $route) {
             // Remove those pages which are silent but not appshell, and then filter all the pages which have no checkpoints
             if ($settingsmanager->silentDocument($route)
@@ -67,7 +67,7 @@ class PoP_ServiceWorkers_UserState_Hooks
         // Exclude all the dynamic pages: those needing user state
         if ($resourceType == 'json') {
             $settingsmanager = \PoP\ComponentModel\Settings\SettingsManagerFactory::getInstance();
-            $userstatesettingsmanager = \PoPSchema\UserState\Settings\SettingsManagerFactory::getInstance();
+            $userstatesettingsmanager = \PoPCMSSchema\UserState\Settings\SettingsManagerFactory::getInstance();
             foreach (\PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance()->getRoutes() as $route) {
                 // Skip if it is an internal page, we don't want to expose it
                 if ($settingsmanager->isForInternalUse($route)) {

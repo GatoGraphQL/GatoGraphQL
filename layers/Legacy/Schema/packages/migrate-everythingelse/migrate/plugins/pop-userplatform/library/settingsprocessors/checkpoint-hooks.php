@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 class PoP_UserPlatform_SettingsProcessor_CheckpointHooks
 {

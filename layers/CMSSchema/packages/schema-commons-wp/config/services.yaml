@@ -1,0 +1,18 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface:
+        class: \PoPCMSSchema\SchemaCommonsWP\CMS\CMSService
+
+    PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface:
+        class: \PoPCMSSchema\SchemaCommonsWP\Formatters\DateFormatter
+
+    PoPCMSSchema\SchemaCommons\Error\ErrorManagerInterface:
+        class: \PoPCMSSchema\SchemaCommonsWP\Error\ErrorManager
+
+    PoPCMSSchema\SchemaCommonsWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+

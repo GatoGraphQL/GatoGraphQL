@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface:
+        class: \PoPCMSSchema\UserMetaWP\TypeAPIs\UserMetaTypeAPI
+
+    PoPCMSSchema\UserMetaWP\Hooks\:
+        resource: '../src/Hooks/*'

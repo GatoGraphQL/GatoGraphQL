@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\UserRoles;
+namespace PoPCMSSchema\UserRoles;
 
 abstract class FunctionAPI_Base implements FunctionAPI
 {

@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface:
+        class: \PoPCMSSchema\PostsWP\TypeAPIs\PostTypeAPI
+
+    PoPCMSSchema\PostsWP\Hooks\:
+        resource: '../src/Hooks/*'

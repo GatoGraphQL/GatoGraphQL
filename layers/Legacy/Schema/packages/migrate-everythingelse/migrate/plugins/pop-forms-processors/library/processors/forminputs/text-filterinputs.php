@@ -4,8 +4,8 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
-use PoPSchema\Users\FilterInputProcessors\FilterInputProcessor as UserFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Users\FilterInputProcessors\FilterInputProcessor as UserFilterInputProcessor;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface

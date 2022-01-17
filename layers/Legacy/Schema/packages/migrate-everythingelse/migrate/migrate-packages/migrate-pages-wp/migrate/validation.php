@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\Pages\WP;
+namespace PoPCMSSchema\Pages\WP;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_PAGESWP_POP_ENGINEWP_MIN_VERSION', 0.1);

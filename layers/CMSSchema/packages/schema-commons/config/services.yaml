@@ -1,0 +1,29 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface:
+        class: \PoPCMSSchema\SchemaCommons\CMS\CMSHelperService
+
+    PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface:
+        class: \PoPCMSSchema\SchemaCommons\Formatters\DateFormatter
+
+    PoPCMSSchema\SchemaCommons\Error\ErrorHelperInterface:
+        class: \PoPCMSSchema\SchemaCommons\Error\ErrorHelper
+
+    PoPCMSSchema\SchemaCommons\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
+
+    PoPCMSSchema\SchemaCommons\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'
+
+    PoPCMSSchema\SchemaCommons\FormInputs\:
+        resource: '../src/FormInputs/*'
+
+    PoPCMSSchema\SchemaCommons\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoPCMSSchema\SchemaCommons\LooseContracts\:
+        resource: '../src/LooseContracts/*'

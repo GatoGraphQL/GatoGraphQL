@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoPSchema\UserMeta\Utils;
-use PoPSchema\UserRoles\FunctionAPIFactory;
+use PoPCMSSchema\UserMeta\Utils;
+use PoPCMSSchema\UserRoles\FunctionAPIFactory;
 trait CreateUpdateIndividualProfileMutationResolverTrait
 {
     protected function createuser($form_data)

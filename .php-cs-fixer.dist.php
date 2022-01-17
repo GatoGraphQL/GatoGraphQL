@@ -6,6 +6,8 @@ $finder = PhpCsFixer\Finder::create()
         __DIR__ . '/layers/API/packages/*/tests',
         __DIR__ . '/layers/Backbone/packages/*/src',
         __DIR__ . '/layers/Backbone/packages/*/tests',
+        __DIR__ . '/layers/CMSSchema/packages/*/src',
+        __DIR__ . '/layers/CMSSchema/packages/*/tests',
         __DIR__ . '/layers/Engine/packages/*/src',
         __DIR__ . '/layers/Engine/packages/*/tests',
         __DIR__ . '/layers/GraphQLAPIForWP/packages/*/src',

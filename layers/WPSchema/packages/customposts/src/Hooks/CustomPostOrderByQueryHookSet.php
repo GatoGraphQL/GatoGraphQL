@@ -6,7 +6,7 @@ namespace PoPWPSchema\CustomPosts\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
+use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPWPSchema\CustomPosts\Constants\CustomPostOrderBy;
 
 class CustomPostOrderByQueryHookSet extends AbstractHookSet

@@ -1,0 +1,20 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\CustomPosts\State\:
+        resource: '../src/State/*'
+
+    PoPCMSSchema\CustomPosts\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoPCMSSchema\CustomPosts\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+
+    PoPCMSSchema\CustomPosts\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
+
+    PoPCMSSchema\CustomPosts\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'

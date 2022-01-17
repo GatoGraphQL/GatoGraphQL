@@ -7,6 +7,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 function popPppResourceloaderPreviewLink($link, $post_id, $post)
 {
     return GeneralUtils::addQueryArgs([
-    	POP_PARAMS_PATH => GeneralUtils::maybeAddTrailingSlash(\PoPSchema\Posts\Engine_Utils::getCustomPostPath($post_id, true)),
+    	POP_PARAMS_PATH => GeneralUtils::maybeAddTrailingSlash(\PoPCMSSchema\Posts\Engine_Utils::getCustomPostPath($post_id, true)),
     ], $link);
 }

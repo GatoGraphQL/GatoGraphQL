@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface:
+        class: \PoPCMSSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistry
+
+    PoPCMSSchema\Menus\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'

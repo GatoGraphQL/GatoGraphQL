@@ -1,5 +1,5 @@
 <?php
-// use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+// use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 // \PoP\Root\App::addFilter('pop_modulemanager:multilayout_labels', 'nosearchcategorypostsMultilayoutLabels');
 // function nosearchcategorypostsMultilayoutLabels($labels) {

@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface:
+        class: \PoPCMSSchema\MenusWP\TypeAPIs\MenuTypeAPI

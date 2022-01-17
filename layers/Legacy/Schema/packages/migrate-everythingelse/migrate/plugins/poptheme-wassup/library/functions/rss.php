@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 define('GD_URLPARAM_RSSCAMPAIGN', 'campaign');
 define('GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST', 'dailypost-digest');

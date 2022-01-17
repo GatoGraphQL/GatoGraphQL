@@ -6,7 +6,7 @@ Description: Implementation of WordPress functions for PoP CMS
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoPSchema\UserRoles\WP;
+namespace PoPCMSSchema\UserRoles\WP;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition

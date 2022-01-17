@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CommentMutations\Component::class,
+            \PoPCMSSchema\CommentMutations\Component::class,
         ];
     }
 

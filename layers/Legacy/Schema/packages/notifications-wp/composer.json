@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema/notifications-wp",
+    "name": "pop-cms-schema/notifications-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Notifications\"",
     "keywords": ["PoP", "notifications-wp"],
@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/notifications": "^0.9",
-        "pop-schema/schema-commons-wp": "^0.9"
+        "pop-cms-schema/notifications": "^0.9",
+        "pop-cms-schema/schema-commons-wp": "^0.9"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",

@@ -6,7 +6,7 @@ Description: The foundation for a PoP Pages
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoPSchema\Pages;
+namespace PoPCMSSchema\Pages;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
