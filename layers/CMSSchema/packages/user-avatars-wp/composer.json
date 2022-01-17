@@ -180,12 +180,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\UserAvatarsWP\\": "src"
+            "PoPCMSSchema\\UserAvatarsWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\UserAvatarsWP\\": "tests"
+            "PoPCMSSchema\\UserAvatarsWP\\": "tests"
         }
     },
     "scripts": {

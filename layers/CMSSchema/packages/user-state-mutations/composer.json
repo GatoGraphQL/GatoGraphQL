@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\UserStateMutations\\": "src"
+            "PoPCMSSchema\\UserStateMutations\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\UserStateMutations\\": "tests"
+            "PoPCMSSchema\\UserStateMutations\\": "tests"
         }
     },
     "scripts": {

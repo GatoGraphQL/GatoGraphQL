@@ -179,12 +179,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\Categories\\": "src"
+            "PoPCMSSchema\\Categories\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\Categories\\": "tests"
+            "PoPCMSSchema\\Categories\\": "tests"
         }
     },
     "scripts": {

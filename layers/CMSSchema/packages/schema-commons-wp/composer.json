@@ -177,12 +177,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\SchemaCommonsWP\\": "src"
+            "PoPCMSSchema\\SchemaCommonsWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\SchemaCommonsWP\\": "tests"
+            "PoPCMSSchema\\SchemaCommonsWP\\": "tests"
         }
     },
     "scripts": {

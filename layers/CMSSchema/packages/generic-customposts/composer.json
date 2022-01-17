@@ -179,12 +179,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\GenericCustomPosts\\": "src"
+            "PoPCMSSchema\\GenericCustomPosts\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\GenericCustomPosts\\": "tests"
+            "PoPCMSSchema\\GenericCustomPosts\\": "tests"
         }
     },
     "scripts": {

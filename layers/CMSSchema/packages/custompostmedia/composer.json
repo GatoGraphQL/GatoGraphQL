@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\CustomPostMedia\\": "src"
+            "PoPCMSSchema\\CustomPostMedia\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\CustomPostMedia\\": "tests"
+            "PoPCMSSchema\\CustomPostMedia\\": "tests"
         }
     },
     "scripts": {

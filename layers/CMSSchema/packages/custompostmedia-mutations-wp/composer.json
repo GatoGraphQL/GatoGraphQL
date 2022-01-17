@@ -176,12 +176,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\CustomPostMediaMutationsWP\\": "src"
+            "PoPCMSSchema\\CustomPostMediaMutationsWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\CustomPostMediaMutationsWP\\": "tests"
+            "PoPCMSSchema\\CustomPostMediaMutationsWP\\": "tests"
         }
     },
     "scripts": {

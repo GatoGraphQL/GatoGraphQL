@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\UserMeta\\": "src"
+            "PoPCMSSchema\\UserMeta\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\UserMeta\\": "tests"
+            "PoPCMSSchema\\UserMeta\\": "tests"
         }
     },
     "scripts": {

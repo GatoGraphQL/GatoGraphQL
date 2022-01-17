@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\UserRolesACL\\": "src"
+            "PoPCMSSchema\\UserRolesACL\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\UserRolesACL\\": "tests"
+            "PoPCMSSchema\\UserRolesACL\\": "tests"
         }
     },
     "scripts": {

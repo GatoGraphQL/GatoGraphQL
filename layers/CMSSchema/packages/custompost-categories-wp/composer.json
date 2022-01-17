@@ -176,12 +176,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\CustomPostCategoriesWP\\": "src"
+            "PoPCMSSchema\\CustomPostCategoriesWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\CustomPostCategoriesWP\\": "tests"
+            "PoPCMSSchema\\CustomPostCategoriesWP\\": "tests"
         }
     },
     "scripts": {

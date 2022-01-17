@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\Settings\\": "src"
+            "PoPCMSSchema\\Settings\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\Settings\\": "tests"
+            "PoPCMSSchema\\Settings\\": "tests"
         }
     },
     "scripts": {

@@ -176,12 +176,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\CustomPostMetaWP\\": "src"
+            "PoPCMSSchema\\CustomPostMetaWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\CustomPostMetaWP\\": "tests"
+            "PoPCMSSchema\\CustomPostMetaWP\\": "tests"
         }
     },
     "scripts": {

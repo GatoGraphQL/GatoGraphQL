@@ -176,12 +176,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\PostTagMutationsWP\\": "src"
+            "PoPCMSSchema\\PostTagMutationsWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\PostTagMutationsWP\\": "tests"
+            "PoPCMSSchema\\PostTagMutationsWP\\": "tests"
         }
     },
     "scripts": {

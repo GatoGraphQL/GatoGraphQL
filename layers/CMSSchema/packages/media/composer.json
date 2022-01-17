@@ -179,12 +179,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\Media\\": "src"
+            "PoPCMSSchema\\Media\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\Media\\": "tests"
+            "PoPCMSSchema\\Media\\": "tests"
         }
     },
     "scripts": {

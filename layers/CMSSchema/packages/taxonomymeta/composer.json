@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\TaxonomyMeta\\": "src"
+            "PoPCMSSchema\\TaxonomyMeta\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\TaxonomyMeta\\": "tests"
+            "PoPCMSSchema\\TaxonomyMeta\\": "tests"
         }
     },
     "scripts": {

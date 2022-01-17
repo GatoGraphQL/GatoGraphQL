@@ -178,12 +178,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\PostMediaMutations\\": "src"
+            "PoPCMSSchema\\PostMediaMutations\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\PostMediaMutations\\": "tests"
+            "PoPCMSSchema\\PostMediaMutations\\": "tests"
         }
     },
     "scripts": {

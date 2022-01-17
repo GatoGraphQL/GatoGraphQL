@@ -176,12 +176,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\TaxonomiesWP\\": "src"
+            "PoPCMSSchema\\TaxonomiesWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\TaxonomiesWP\\": "tests"
+            "PoPCMSSchema\\TaxonomiesWP\\": "tests"
         }
     },
     "scripts": {

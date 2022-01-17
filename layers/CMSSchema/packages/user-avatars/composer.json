@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\UserAvatars\\": "src"
+            "PoPCMSSchema\\UserAvatars\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\UserAvatars\\": "tests"
+            "PoPCMSSchema\\UserAvatars\\": "tests"
         }
     },
     "scripts": {

@@ -179,12 +179,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\UserStateAccessControl\\": "src"
+            "PoPCMSSchema\\UserStateAccessControl\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\UserStateAccessControl\\": "tests"
+            "PoPCMSSchema\\UserStateAccessControl\\": "tests"
         }
     },
     "scripts": {

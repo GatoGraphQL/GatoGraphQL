@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\UserRoles\\": "src"
+            "PoPCMSSchema\\UserRoles\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\UserRoles\\": "tests"
+            "PoPCMSSchema\\UserRoles\\": "tests"
         }
     },
     "scripts": {

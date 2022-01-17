@@ -181,12 +181,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\PostMutations\\": "src"
+            "PoPCMSSchema\\PostMutations\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\PostMutations\\": "tests"
+            "PoPCMSSchema\\PostMutations\\": "tests"
         }
     },
     "scripts": {

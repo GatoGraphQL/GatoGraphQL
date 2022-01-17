@@ -176,12 +176,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\MetaQueryWP\\": "src"
+            "PoPCMSSchema\\MetaQueryWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\MetaQueryWP\\": "tests"
+            "PoPCMSSchema\\MetaQueryWP\\": "tests"
         }
     },
     "scripts": {

@@ -179,12 +179,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\Tags\\": "src"
+            "PoPCMSSchema\\Tags\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\Tags\\": "tests"
+            "PoPCMSSchema\\Tags\\": "tests"
         }
     },
     "scripts": {

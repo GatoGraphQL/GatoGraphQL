@@ -174,12 +174,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\QueriedObject\\": "src"
+            "PoPCMSSchema\\QueriedObject\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\QueriedObject\\": "tests"
+            "PoPCMSSchema\\QueriedObject\\": "tests"
         }
     },
     "scripts": {

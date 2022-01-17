@@ -179,12 +179,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\Comments\\": "src"
+            "PoPCMSSchema\\Comments\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\Comments\\": "tests"
+            "PoPCMSSchema\\Comments\\": "tests"
         }
     },
     "scripts": {

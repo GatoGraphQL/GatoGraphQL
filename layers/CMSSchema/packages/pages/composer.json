@@ -181,12 +181,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\Pages\\": "src"
+            "PoPCMSSchema\\Pages\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\Pages\\": "tests"
+            "PoPCMSSchema\\Pages\\": "tests"
         }
     },
     "scripts": {

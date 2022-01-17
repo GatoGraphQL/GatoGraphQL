@@ -176,12 +176,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\Menus\\": "src"
+            "PoPCMSSchema\\Menus\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\Menus\\": "tests"
+            "PoPCMSSchema\\Menus\\": "tests"
         }
     },
     "scripts": {

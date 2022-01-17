@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\CustomPostCategoryMutations\\": "src"
+            "PoPCMSSchema\\CustomPostCategoryMutations\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\CustomPostCategoryMutations\\": "tests"
+            "PoPCMSSchema\\CustomPostCategoryMutations\\": "tests"
         }
     },
     "scripts": {

@@ -176,12 +176,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\CommentMutationsWP\\": "src"
+            "PoPCMSSchema\\CommentMutationsWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\CommentMutationsWP\\": "tests"
+            "PoPCMSSchema\\CommentMutationsWP\\": "tests"
         }
     },
     "scripts": {

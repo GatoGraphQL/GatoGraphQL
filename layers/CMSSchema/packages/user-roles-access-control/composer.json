@@ -179,12 +179,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\UserRolesAccessControl\\": "src"
+            "PoPCMSSchema\\UserRolesAccessControl\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\UserRolesAccessControl\\": "tests"
+            "PoPCMSSchema\\UserRolesAccessControl\\": "tests"
         }
     },
     "scripts": {

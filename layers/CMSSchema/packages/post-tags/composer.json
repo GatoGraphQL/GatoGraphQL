@@ -181,12 +181,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\PostTags\\": "src"
+            "PoPCMSSchema\\PostTags\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\PostTags\\": "tests"
+            "PoPCMSSchema\\PostTags\\": "tests"
         }
     },
     "scripts": {

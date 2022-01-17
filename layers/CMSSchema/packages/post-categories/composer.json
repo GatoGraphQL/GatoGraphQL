@@ -181,12 +181,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\PostCategories\\": "src"
+            "PoPCMSSchema\\PostCategories\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\PostCategories\\": "tests"
+            "PoPCMSSchema\\PostCategories\\": "tests"
         }
     },
     "scripts": {

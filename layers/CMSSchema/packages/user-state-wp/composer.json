@@ -176,12 +176,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\UserStateWP\\": "src"
+            "PoPCMSSchema\\UserStateWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\UserStateWP\\": "tests"
+            "PoPCMSSchema\\UserStateWP\\": "tests"
         }
     },
     "scripts": {

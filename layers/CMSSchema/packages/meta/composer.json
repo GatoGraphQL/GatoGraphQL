@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\Meta\\": "src"
+            "PoPCMSSchema\\Meta\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\Meta\\": "tests"
+            "PoPCMSSchema\\Meta\\": "tests"
         }
     },
     "scripts": {
