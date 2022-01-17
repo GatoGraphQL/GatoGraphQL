@@ -9,8 +9,8 @@ use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\Root\Routing\HookNames;
 use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
-use PoPSchema\SchemaCommons\Component;
-use PoPSchema\SchemaCommons\ComponentConfiguration;
+use PoPCMSSchema\SchemaCommons\Component;
+use PoPCMSSchema\SchemaCommons\ComponentConfiguration;
 
 class RoutingHookSet extends AbstractHookSet
 {
