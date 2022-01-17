@@ -79,7 +79,7 @@ services:
         - '../../layers/SiteBuilder/packages/site-wp:/app/vendor/getpop/site-wp'
         - '../../layers/SiteBuilder/packages/spa:/app/vendor/getpop/spa'
         - >-
-          ../../layers/Schema/packages/block-metadata-for-wp:/app/vendor/pop-schema/block-metadata-for-wp
+          ../../layers/WPSchema/packages/block-metadata-for-wp:/app/vendor/pop-wp-schema/block-metadata-for-wp
         - >-
           ../../layers/Schema/packages/categories:/app/vendor/pop-schema/categories
         - >-
