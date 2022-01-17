@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons;
+namespace PoPCMSSchema\SchemaCommons;
 
 class Environment
 {

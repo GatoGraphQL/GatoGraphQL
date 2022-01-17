@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons;
+namespace PoPCMSSchema\SchemaCommons;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -33,5 +33,6 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }

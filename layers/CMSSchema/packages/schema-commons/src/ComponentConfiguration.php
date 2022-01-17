@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons;
+namespace PoPCMSSchema\SchemaCommons;
 
 use PoP\Root\Component\AbstractComponentConfiguration;
 use PoP\Root\Component\EnvironmentValueHelpers;
