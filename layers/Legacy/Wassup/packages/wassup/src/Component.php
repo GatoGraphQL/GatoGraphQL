@@ -41,7 +41,7 @@ class Component extends AbstractComponent
                 \PoPSchema\CDNDirective\Component::class,
                 \PoPSchema\ConvertCaseDirectives\Component::class,
                 \PoPCMSSchema\CustomPostMediaWP\Component::class,
-                \PoPSchema\GoogleTranslateDirectiveForCustomPosts\Component::class,
+                \PoPCMSSchema\GoogleTranslateDirectiveForCustomPosts\Component::class,
                 \PoPCMSSchema\PagesWP\Component::class,
                 \PoPCMSSchema\PostsWP\Component::class,
                 \PoPCMSSchema\PostTagsWP\Component::class,
