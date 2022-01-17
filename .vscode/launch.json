@@ -112,6 +112,7 @@
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/usermeta": "${workspaceFolder}/layers/CMSSchema/packages/usermeta",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/users-wp": "${workspaceFolder}/layers/CMSSchema/packages/users-wp",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/users": "${workspaceFolder}/layers/CMSSchema/packages/users",
+              "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/schema-commons": "${workspaceFolder}/layers/Schema/packages/schema-commons",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-wp-schema/commentmeta": "${workspaceFolder}/layers/WPSchema/packages/commentmeta",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-wp-schema/comments": "${workspaceFolder}/layers/WPSchema/packages/comments",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-wp-schema/custompostmeta": "${workspaceFolder}/layers/WPSchema/packages/custompostmeta",
