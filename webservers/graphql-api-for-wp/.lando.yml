@@ -225,6 +225,8 @@ services:
         - >-
           ../../layers/CMSSchema/packages/users:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/users
         - >-
+          ../../layers/Schema/packages/schema-commons:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/schema-commons
+        - >-
           ../../layers/WPSchema/packages/commentmeta:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-wp-schema/commentmeta
         - >-
           ../../layers/WPSchema/packages/comments:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-wp-schema/comments

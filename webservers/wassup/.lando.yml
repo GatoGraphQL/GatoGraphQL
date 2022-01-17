@@ -204,6 +204,8 @@ services:
           ../../layers/CMSSchema/packages/user-state-wp:/app/vendor/pop-cms-schema/user-state-wp
         - '../../layers/CMSSchema/packages/users-wp:/app/vendor/pop-cms-schema/users-wp'
         - '../../layers/CMSSchema/packages/users:/app/vendor/pop-cms-schema/users'
+        - >-
+          ../../layers/Schema/packages/schema-commons:/app/vendor/pop-schema/schema-commons
         - '../../layers/WPSchema/packages/commentmeta:/app/vendor/pop-wp-schema/commentmeta'
         - '../../layers/WPSchema/packages/comments:/app/vendor/pop-wp-schema/comments'
         - '../../layers/WPSchema/packages/custompostmeta:/app/vendor/pop-wp-schema/custompostmeta'
