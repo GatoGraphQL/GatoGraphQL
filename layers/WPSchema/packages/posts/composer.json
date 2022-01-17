@@ -93,7 +93,7 @@
         "pop-schema/taxonomies-wp": "<0.8.9",
         "pop-schema/comment-mutations-wp": "<0.8.9",
         "pop-schema/postmedia-wp": "<0.8.2",
-        "pop-schema/block-metadata-for-wp": "<0.8.9",
+        "pop-wp-schema/block-metadata-for-wp": "<0.8.9",
         "pop-schema/post-categories": "<0.8.9",
         "pop-schema/postmedia-mutations-wp": "<0.8.2",
         "pop-schema/user-roles-acl": "<0.8.9",

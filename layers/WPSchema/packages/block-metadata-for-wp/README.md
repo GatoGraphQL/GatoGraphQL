@@ -16,7 +16,7 @@ Make available the data exporting features from WordPress plugin "Block Metadata
 Via Composer
 
 ``` bash
-composer require pop-schema/block-metadata-for-wp
+composer require pop-wp-schema/block-metadata-for-wp
 ```
 
 ## Development
@@ -103,17 +103,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-schema/block-metadata-for-wp.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-wp-schema/block-metadata-for-wp.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-schema/block-metadata-for-wp/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema/block-metadata-for-wp.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema/block-metadata-for-wp.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema/block-metadata-for-wp.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-wp-schema/block-metadata-for-wp/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-wp-schema/block-metadata-for-wp.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-wp-schema/block-metadata-for-wp.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-wp-schema/block-metadata-for-wp.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-schema/block-metadata-for-wp
-[link-travis]: https://travis-ci.org/pop-schema/block-metadata-for-wp
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/block-metadata-for-wp/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/block-metadata-for-wp
-[link-downloads]: https://packagist.org/packages/pop-schema/block-metadata-for-wp
+[link-packagist]: https://packagist.org/packages/pop-wp-schema/block-metadata-for-wp
+[link-travis]: https://travis-ci.org/pop-wp-schema/block-metadata-for-wp
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-wp-schema/block-metadata-for-wp/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-wp-schema/block-metadata-for-wp
+[link-downloads]: https://packagist.org/packages/pop-wp-schema/block-metadata-for-wp
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors
