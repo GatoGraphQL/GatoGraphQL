@@ -32,7 +32,8 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {}
     },
     "scripts": {
         "ssh-server": "lando ssh",

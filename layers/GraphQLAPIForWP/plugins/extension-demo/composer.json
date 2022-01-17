@@ -195,7 +195,8 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {}
     },
     "replace": {
         "getpop/cache-control": "^0.9",

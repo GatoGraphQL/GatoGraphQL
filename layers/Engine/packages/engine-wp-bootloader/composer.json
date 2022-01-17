@@ -27,7 +27,11 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "boxuk/wp-muplugin-loader": true,
+            "composer/installers": true
+        }
     },
     "conflict": {
         "getpop/modulerouting": "<0.8.9",

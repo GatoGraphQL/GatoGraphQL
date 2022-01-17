@@ -18,7 +18,8 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {}
     },
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
