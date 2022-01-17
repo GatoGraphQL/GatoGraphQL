@@ -13,7 +13,6 @@
             "url": "https://github.com/leoloso/monorepo-builder.git"
         }
     ],
-    "minimum-stability": "dev",
     "replace": {
         "getpop/access-control": "self.version",
         "getpop/api": "self.version",
@@ -592,10 +591,21 @@
         "php": "^8.0",
         "ext-mbstring": "*",
         "boxuk/wp-muplugin-loader": "^1.5",
+        "brain/cortex": "1.0.0-alpha.7",
         "composer/installers": "~1.0",
+        "composer/semver": "^3.2",
+        "guzzlehttp/guzzle": "~6.3",
+        "jrfnl/php-cast-to-type": "^2.0",
+        "league/pipeline": "^1.0",
+        "michelf/php-markdown": "^1.9",
+        "pop-schema/schema-commons": "^0.9",
+        "psr/cache": "^1.0",
+        "psr/simple-cache": "^1.0",
+        "symfony/cache": "^5.1",
         "symfony/config": "^5.1",
         "symfony/dependency-injection": "^5.1",
         "symfony/dotenv": "^5.1",
+        "symfony/expression-language": "^5.1",
         "symfony/polyfill-php72": "^1.18",
         "symfony/polyfill-php73": "^1.18",
         "symfony/polyfill-php74": "^1.18",
@@ -612,5 +622,6 @@
     ],
     "homepage": "https://github.com/leoloso/PoP",
     "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
