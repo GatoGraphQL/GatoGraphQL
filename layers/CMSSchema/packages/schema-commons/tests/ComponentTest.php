@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\SchemaCommons;
+namespace PoPCMSSchema\SchemaCommons;
 
 use PoP\Root\AbstractComponentTest;
 
