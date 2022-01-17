@@ -16,7 +16,7 @@ Adds support for media
 Via Composer
 
 ``` bash
-composer require pop-schema/media
+composer require pop-cms-schema/media
 ```
 
 ## Development
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-schema/media.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/media.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-schema/media/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema/media.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema/media.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema/media.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-cms-schema/media/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/media.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/media.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/media.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-schema/media
-[link-travis]: https://travis-ci.org/pop-schema/media
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/media/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/media
-[link-downloads]: https://packagist.org/packages/pop-schema/media
+[link-packagist]: https://packagist.org/packages/pop-cms-schema/media
+[link-travis]: https://travis-ci.org/pop-cms-schema/media
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/media/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/media
+[link-downloads]: https://packagist.org/packages/pop-cms-schema/media
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

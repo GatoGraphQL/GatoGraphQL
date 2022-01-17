@@ -16,7 +16,7 @@ Implementation for WordPress of contracts from package "Custom Post Categories"
 Via Composer
 
 ``` bash
-composer require pop-schema/custompost-categories-wp
+composer require pop-cms-schema/custompost-categories-wp
 ```
 
 ## Development
@@ -103,17 +103,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-schema/custompost-categories-wp.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/custompost-categories-wp.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-schema/custompost-categories-wp/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema/custompost-categories-wp.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema/custompost-categories-wp.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema/custompost-categories-wp.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-cms-schema/custompost-categories-wp/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/custompost-categories-wp.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/custompost-categories-wp.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/custompost-categories-wp.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-schema/custompost-categories-wp
-[link-travis]: https://travis-ci.org/pop-schema/custompost-categories-wp
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/custompost-categories-wp/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/custompost-categories-wp
-[link-downloads]: https://packagist.org/packages/pop-schema/custompost-categories-wp
+[link-packagist]: https://packagist.org/packages/pop-cms-schema/custompost-categories-wp
+[link-travis]: https://travis-ci.org/pop-cms-schema/custompost-categories-wp
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/custompost-categories-wp/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/custompost-categories-wp
+[link-downloads]: https://packagist.org/packages/pop-cms-schema/custompost-categories-wp
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

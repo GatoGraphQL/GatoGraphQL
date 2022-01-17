@@ -16,7 +16,7 @@ Implementation for WordPress of contracts from package "User State"
 Via Composer
 
 ``` bash
-composer require pop-schema/user-state-wp
+composer require pop-cms-schema/user-state-wp
 ```
 
 ## Development
@@ -103,17 +103,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-schema/user-state-wp.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/user-state-wp.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-schema/user-state-wp/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema/user-state-wp.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema/user-state-wp.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema/user-state-wp.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-cms-schema/user-state-wp/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/user-state-wp.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/user-state-wp.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/user-state-wp.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-schema/user-state-wp
-[link-travis]: https://travis-ci.org/pop-schema/user-state-wp
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/user-state-wp/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/user-state-wp
-[link-downloads]: https://packagist.org/packages/pop-schema/user-state-wp
+[link-packagist]: https://packagist.org/packages/pop-cms-schema/user-state-wp
+[link-travis]: https://travis-ci.org/pop-cms-schema/user-state-wp
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/user-state-wp/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/user-state-wp
+[link-downloads]: https://packagist.org/packages/pop-cms-schema/user-state-wp
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors
