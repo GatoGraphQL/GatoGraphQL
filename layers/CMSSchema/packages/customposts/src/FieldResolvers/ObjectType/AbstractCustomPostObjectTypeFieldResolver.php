@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPosts\FieldResolvers\ObjectType;
 use DateTime;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\SchemaCommons\Formatters\DateFormatterInterface;
+use PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface;
 use PoPSchema\CustomPosts\FieldResolvers\InterfaceType\IsCustomPostInterfaceTypeFieldResolver;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;

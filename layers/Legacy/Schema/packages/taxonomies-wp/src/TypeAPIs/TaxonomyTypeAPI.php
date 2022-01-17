@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace EverythingElse\PoPSchema\TaxonomiesWP\TypeAPIs;
 
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 
 /**

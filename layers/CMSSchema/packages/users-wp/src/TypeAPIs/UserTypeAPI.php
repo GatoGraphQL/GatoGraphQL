@@ -6,7 +6,7 @@ namespace PoPSchema\UsersWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Constants\UserOrderBy;
 use PoPSchema\Users\TypeAPIs\AbstractUserTypeAPI;
 use WP_User;

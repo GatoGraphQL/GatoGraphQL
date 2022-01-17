@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
 
 class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job

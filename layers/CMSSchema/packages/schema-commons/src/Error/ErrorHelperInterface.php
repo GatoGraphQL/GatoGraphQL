@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons\Error;
+namespace PoPCMSSchema\SchemaCommons\Error;
 
 interface ErrorHelperInterface
 {

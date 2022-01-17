@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons\Facades\CMS;
+namespace PoPCMSSchema\SchemaCommons\Facades\CMS;
 
 use PoP\Root\App;
-use PoPSchema\SchemaCommons\CMS\CMSServiceInterface;
+use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 
 class CMSServiceFacade
 {

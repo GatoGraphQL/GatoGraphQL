@@ -2,7 +2,7 @@
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 define('POP_CDN_THUMBPRINT_COMMENT', 'comment');
 

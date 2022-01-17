@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons\Formatters;
+namespace PoPCMSSchema\SchemaCommons\Formatters;
 
 class DateFormatter implements DateFormatterInterface
 {

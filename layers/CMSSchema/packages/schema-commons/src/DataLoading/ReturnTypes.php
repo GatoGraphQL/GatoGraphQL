@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons\DataLoading;
+namespace PoPCMSSchema\SchemaCommons\DataLoading;
 
 class ReturnTypes
 {

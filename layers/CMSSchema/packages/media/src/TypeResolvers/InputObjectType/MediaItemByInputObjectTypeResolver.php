@@ -6,7 +6,7 @@ namespace PoPSchema\Media\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
 class MediaItemByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {

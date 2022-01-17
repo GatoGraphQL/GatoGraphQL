@@ -7,7 +7,7 @@ namespace PoPSchema\TaxonomiesWP\TypeAPIs;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Taxonomies\Constants\TaxonomyOrderBy;
 use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 

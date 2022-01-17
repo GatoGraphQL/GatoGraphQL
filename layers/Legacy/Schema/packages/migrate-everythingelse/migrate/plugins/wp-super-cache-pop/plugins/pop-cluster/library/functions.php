@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 // In file wp-content/plugins/wp-super-cache-pop/plugins/pop-cluster/plugins/pop-system/installation.php
 // Generate the .htaccess rules for the Gzip compression inside the cluster folder

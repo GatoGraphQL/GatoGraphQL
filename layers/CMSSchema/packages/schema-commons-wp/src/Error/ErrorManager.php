@@ -6,7 +6,7 @@ namespace PoPSchema\SchemaCommonsWP\Error;
 
 use PoP\ComponentModel\Error\Error;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPSchema\SchemaCommons\Error\AbstractErrorManager;
+use PoPCMSSchema\SchemaCommons\Error\AbstractErrorManager;
 use WP_Error;
 
 class ErrorManager extends AbstractErrorManager

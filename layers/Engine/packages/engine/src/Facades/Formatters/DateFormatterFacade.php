@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\Facades\Formatters;
 
 use PoP\Root\App;
-use PoPSchema\SchemaCommons\Formatters\DateFormatterInterface;
+use PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface;
 
 class DateFormatterFacade
 {

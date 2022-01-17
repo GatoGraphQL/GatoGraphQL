@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\ObjectModels;
 
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class Site
 {

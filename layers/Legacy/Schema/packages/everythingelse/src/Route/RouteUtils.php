@@ -6,7 +6,7 @@ namespace PoP\Engine\Route;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class RouteUtils
 {

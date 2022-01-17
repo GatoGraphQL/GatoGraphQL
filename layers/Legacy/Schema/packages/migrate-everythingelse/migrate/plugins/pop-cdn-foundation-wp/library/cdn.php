@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 // Priority: execute just after the "website-environment" plugin has set all the environment constants
 // That is needed to set POP_CDNFOUNDATION_CDN_ASSETS_URI before

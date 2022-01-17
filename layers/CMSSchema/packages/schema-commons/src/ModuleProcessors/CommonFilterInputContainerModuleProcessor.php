@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons\ModuleProcessors;
+namespace PoPCMSSchema\SchemaCommons\ModuleProcessors;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoPSchema\SchemaCommons\CMS\CMSServiceInterface;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
+use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {

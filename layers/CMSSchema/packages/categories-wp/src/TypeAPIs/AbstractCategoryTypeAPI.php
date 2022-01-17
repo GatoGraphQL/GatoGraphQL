@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPSchema\CategoriesWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
-use PoPSchema\SchemaCommons\CMS\CMSServiceInterface;
+use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
+use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use WP_Error;
 use WP_Taxonomy;

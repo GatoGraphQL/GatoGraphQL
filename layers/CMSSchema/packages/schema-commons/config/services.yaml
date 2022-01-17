@@ -4,26 +4,26 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\SchemaCommons\CMS\CMSHelperServiceInterface:
-        class: \PoPSchema\SchemaCommons\CMS\CMSHelperService
+    PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface:
+        class: \PoPCMSSchema\SchemaCommons\CMS\CMSHelperService
 
-    PoPSchema\SchemaCommons\Formatters\DateFormatterInterface:
-        class: \PoPSchema\SchemaCommons\Formatters\DateFormatter
+    PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface:
+        class: \PoPCMSSchema\SchemaCommons\Formatters\DateFormatter
 
-    PoPSchema\SchemaCommons\Error\ErrorHelperInterface:
-        class: \PoPSchema\SchemaCommons\Error\ErrorHelper
+    PoPCMSSchema\SchemaCommons\Error\ErrorHelperInterface:
+        class: \PoPCMSSchema\SchemaCommons\Error\ErrorHelper
 
-    PoPSchema\SchemaCommons\ModuleProcessors\:
+    PoPCMSSchema\SchemaCommons\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
-    PoPSchema\SchemaCommons\FilterInputProcessors\:
+    PoPCMSSchema\SchemaCommons\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'
 
-    PoPSchema\SchemaCommons\FormInputs\:
+    PoPCMSSchema\SchemaCommons\FormInputs\:
         resource: '../src/FormInputs/*'
 
-    PoPSchema\SchemaCommons\Hooks\:
+    PoPCMSSchema\SchemaCommons\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoPSchema\SchemaCommons\LooseContracts\:
+    PoPCMSSchema\SchemaCommons\LooseContracts\:
         resource: '../src/LooseContracts/*'

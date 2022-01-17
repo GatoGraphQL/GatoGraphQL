@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Pages\TypeResolvers\InputObjectType;
 
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostByInputObjectTypeResolver;
-use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
 class PageByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeResolver
 {

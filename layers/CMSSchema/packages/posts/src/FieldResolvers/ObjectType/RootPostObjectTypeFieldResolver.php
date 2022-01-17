@@ -16,7 +16,7 @@ use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerM
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\PostByInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolver
 {

@@ -4,7 +4,7 @@ use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\Definitions\Constants\ParamValues as DefinitionsParamValues;
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;

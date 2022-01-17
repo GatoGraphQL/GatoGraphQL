@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons\Hooks;
+namespace PoPCMSSchema\SchemaCommons\Hooks;
 
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\Root\Routing\HookNames;
-use PoPSchema\SchemaCommons\CMS\CMSServiceInterface;
+use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoPSchema\SchemaCommons\Component;
 use PoPSchema\SchemaCommons\ComponentConfiguration;
 

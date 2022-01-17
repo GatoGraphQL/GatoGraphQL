@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ModuleProcessors;
 
-use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
+use PoPCMSSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 use PoPSchema\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class UserFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor

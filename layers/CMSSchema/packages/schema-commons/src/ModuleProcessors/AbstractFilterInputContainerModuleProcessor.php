@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons\ModuleProcessors;
+namespace PoPCMSSchema\SchemaCommons\ModuleProcessors;
 
 use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputContainerModuleProcessor as UpstreamAbstractFilterInputContainerModuleProcessor;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 abstract class AbstractFilterInputContainerModuleProcessor extends UpstreamAbstractFilterInputContainerModuleProcessor
 {

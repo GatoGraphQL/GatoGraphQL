@@ -7,7 +7,7 @@ namespace PoPSchema\UserStateMutationsWP\TypeAPIs;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPSchema\SchemaCommons\Error\ErrorHelperInterface;
+use PoPCMSSchema\SchemaCommons\Error\ErrorHelperInterface;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 /**

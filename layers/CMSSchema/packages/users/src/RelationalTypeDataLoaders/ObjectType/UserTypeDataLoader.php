@@ -6,7 +6,7 @@ namespace PoPSchema\Users\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader

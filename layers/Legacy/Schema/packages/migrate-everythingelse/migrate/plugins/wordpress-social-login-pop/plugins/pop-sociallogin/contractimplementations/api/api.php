@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\UserMeta\Facades\UserMetaTypeAPIFacade;
 

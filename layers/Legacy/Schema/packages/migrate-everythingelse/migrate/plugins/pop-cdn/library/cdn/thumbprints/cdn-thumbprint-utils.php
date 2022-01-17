@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_CDN_Thumbprint_Utils
 {

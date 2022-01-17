@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoPSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\SPA\ModuleFilters\Page;
 
 abstract class PoP_SPAResourceLoader_FileReproduction_ResourcesConfigBase extends \PoP\FileStore\File\AbstractRenderableFileFragment

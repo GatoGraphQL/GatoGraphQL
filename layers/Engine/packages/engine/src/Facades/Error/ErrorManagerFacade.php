@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\Facades\Error;
 
 use PoP\Root\App;
-use PoPSchema\SchemaCommons\Error\ErrorManagerInterface;
+use PoPCMSSchema\SchemaCommons\Error\ErrorManagerInterface;
 
 class ErrorManagerFacade
 {
