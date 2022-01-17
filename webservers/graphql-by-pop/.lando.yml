@@ -65,8 +65,6 @@ services:
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-server:/app/vendor/graphql-by-pop/graphql-server
         - >-
-          ../../layers/Schema/packages/block-metadata-for-wp:/app/vendor/pop-schema/block-metadata-for-wp
-        - >-
           ../../layers/Schema/packages/categories-wp:/app/vendor/pop-schema/categories-wp
         - >-
           ../../layers/Schema/packages/categories:/app/vendor/pop-schema/categories
@@ -194,6 +192,8 @@ services:
           ../../layers/Schema/packages/usermeta:/app/vendor/pop-schema/usermeta
         - '../../layers/Schema/packages/users-wp:/app/vendor/pop-schema/users-wp'
         - '../../layers/Schema/packages/users:/app/vendor/pop-schema/users'
+        - >-
+          ../../layers/WPSchema/packages/block-metadata-for-wp:/app/vendor/pop-wp-schema/block-metadata-for-wp
         - '../../layers/WPSchema/packages/commentmeta:/app/vendor/pop-wp-schema/commentmeta'
         - '../../layers/WPSchema/packages/comments:/app/vendor/pop-wp-schema/comments'
         - '../../layers/WPSchema/packages/custompostmeta:/app/vendor/pop-wp-schema/custompostmeta'
