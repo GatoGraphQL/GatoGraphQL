@@ -154,7 +154,7 @@
     "type": "library",
     "description": "Adds support for taxonomy (category and tag) queries",
     "keywords": ["PoP", "taxonomyquery"],
-    "homepage": "https://github.com/PoPSchema/taxonomyquery",
+    "homepage": "https://github.com/PoPCMSSchema/taxonomyquery",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

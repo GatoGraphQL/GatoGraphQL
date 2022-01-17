@@ -156,7 +156,7 @@
     "type": "library",
     "description": "Integrates media with post mutations",
     "keywords": ["PoP", "postmedia-mutations"],
-    "homepage": "https://github.com/PoPSchema/postmedia-mutations",
+    "homepage": "https://github.com/PoPCMSSchema/postmedia-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

@@ -152,7 +152,7 @@
     "type": "library",
     "description": "Add categories to posts",
     "keywords": ["PoP", "post-category-mutations"],
-    "homepage": "https://github.com/PoPSchema/post-category-mutations",
+    "homepage": "https://github.com/PoPCMSSchema/post-category-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

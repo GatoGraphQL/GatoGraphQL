@@ -154,7 +154,7 @@
     "type": "library",
     "description": "Fetch settings from the site",
     "keywords": ["PoP", "settings"],
-    "homepage": "https://github.com/PoPSchema/settings",
+    "homepage": "https://github.com/PoPCMSSchema/settings",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

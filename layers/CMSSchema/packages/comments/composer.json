@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Adds support for comments",
     "keywords": ["PoP", "comments"],
-    "homepage": "https://github.com/PoPSchema/comments",
+    "homepage": "https://github.com/PoPCMSSchema/comments",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

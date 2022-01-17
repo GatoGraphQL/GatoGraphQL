@@ -152,7 +152,7 @@
     "type": "library",
     "description": "Adds support for custom post mutations",
     "keywords": ["PoP", "custompost-mutations"],
-    "homepage": "https://github.com/PoPSchema/custompost-mutations",
+    "homepage": "https://github.com/PoPCMSSchema/custompost-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

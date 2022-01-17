@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Access Control based on the user being logged-in or not",
     "keywords": ["PoP", "UserStateAccessControl"],
-    "homepage": "https://github.com/PoPSchema/user-state-access-control",
+    "homepage": "https://github.com/PoPCMSSchema/user-state-access-control",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

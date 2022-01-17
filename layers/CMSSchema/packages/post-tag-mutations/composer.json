@@ -152,7 +152,7 @@
     "type": "library",
     "description": "Add tags to posts",
     "keywords": ["PoP", "post-tag-mutations"],
-    "homepage": "https://github.com/PoPSchema/post-tag-mutations",
+    "homepage": "https://github.com/PoPCMSSchema/post-tag-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

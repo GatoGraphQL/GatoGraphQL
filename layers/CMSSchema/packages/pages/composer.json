@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Adds support for pages",
     "keywords": ["PoP", "pages"],
-    "homepage": "https://github.com/PoPSchema/pages",
+    "homepage": "https://github.com/PoPCMSSchema/pages",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

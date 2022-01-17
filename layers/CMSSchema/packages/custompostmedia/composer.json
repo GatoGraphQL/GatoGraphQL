@@ -153,7 +153,7 @@
     "type": "library",
     "description": "Deals with media elements added to custom posts",
     "keywords": ["PoP", "custompostmedia"],
-    "homepage": "https://github.com/PoPSchema/custompostmedia",
+    "homepage": "https://github.com/PoPCMSSchema/custompostmedia",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

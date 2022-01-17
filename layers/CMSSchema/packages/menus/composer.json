@@ -154,7 +154,7 @@
     "type": "library",
     "description": "Adds support for menus",
     "keywords": ["PoP", "menus"],
-    "homepage": "https://github.com/PoPSchema/menus",
+    "homepage": "https://github.com/PoPCMSSchema/menus",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

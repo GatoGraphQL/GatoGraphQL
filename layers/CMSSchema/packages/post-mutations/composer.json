@@ -153,7 +153,7 @@
     "type": "library",
     "description": "Adds support for post mutations",
     "keywords": ["PoP", "post-mutations"],
-    "homepage": "https://github.com/PoPSchema/post-mutations",
+    "homepage": "https://github.com/PoPCMSSchema/post-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

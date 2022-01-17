@@ -153,7 +153,7 @@
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Pages\"",
     "keywords": ["PoP", "pages-wp"],
-    "homepage": "https://github.com/PoPSchema/pages-wp",
+    "homepage": "https://github.com/PoPCMSSchema/pages-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

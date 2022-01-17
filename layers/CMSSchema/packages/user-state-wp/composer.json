@@ -153,7 +153,7 @@
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"User State\"",
     "keywords": ["PoP", "user-state-wp"],
-    "homepage": "https://github.com/PoPSchema/user-state-wp",
+    "homepage": "https://github.com/PoPCMSSchema/user-state-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

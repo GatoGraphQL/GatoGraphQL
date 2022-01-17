@@ -153,7 +153,7 @@
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Tags\"",
     "keywords": ["PoP", "tags-wp"],
-    "homepage": "https://github.com/PoPSchema/tags-wp",
+    "homepage": "https://github.com/PoPCMSSchema/tags-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

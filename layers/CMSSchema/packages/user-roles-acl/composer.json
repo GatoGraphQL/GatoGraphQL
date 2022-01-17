@@ -154,7 +154,7 @@
     "type": "library",
     "description": "Access Control List for User Roles",
     "keywords": ["PoP", "user-roles-acl"],
-    "homepage": "https://github.com/PoPSchema/user-roles-acl",
+    "homepage": "https://github.com/PoPCMSSchema/user-roles-acl",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

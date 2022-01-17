@@ -154,7 +154,7 @@
     "type": "library",
     "description": "Code shared by the schema packages",
     "keywords": ["PoP", "schema-commons"],
-    "homepage": "https://github.com/PoPSchema/schema-commons",
+    "homepage": "https://github.com/PoPCMSSchema/schema-commons",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

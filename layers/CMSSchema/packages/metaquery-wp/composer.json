@@ -154,7 +154,7 @@
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Meta Query\"",
     "keywords": ["PoP", "metaquery-wp"],
-    "homepage": "https://github.com/PoPSchema/metaquery-wp",
+    "homepage": "https://github.com/PoPCMSSchema/metaquery-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

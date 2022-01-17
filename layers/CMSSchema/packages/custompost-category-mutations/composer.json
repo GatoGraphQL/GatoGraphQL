@@ -153,7 +153,7 @@
     "type": "library",
     "description": "Base functionality to add categories to custom posts",
     "keywords": ["PoP", "custompost-category-mutations"],
-    "homepage": "https://github.com/PoPSchema/custompost-category-mutations",
+    "homepage": "https://github.com/PoPCMSSchema/custompost-category-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

@@ -153,7 +153,7 @@
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Custom Post Tags\"",
     "keywords": ["PoP", "custompost-tags-wp"],
-    "homepage": "https://github.com/PoPSchema/custompost-tags-wp",
+    "homepage": "https://github.com/PoPCMSSchema/custompost-tags-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

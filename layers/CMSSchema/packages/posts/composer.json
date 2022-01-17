@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Adds support for posts",
     "keywords": ["PoP", "posts"],
-    "homepage": "https://github.com/PoPSchema/posts",
+    "homepage": "https://github.com/PoPCMSSchema/posts",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

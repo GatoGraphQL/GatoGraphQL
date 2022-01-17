@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Users\"",
     "keywords": ["PoP", "users-wp"],
-    "homepage": "https://github.com/PoPSchema/users-wp",
+    "homepage": "https://github.com/PoPCMSSchema/users-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

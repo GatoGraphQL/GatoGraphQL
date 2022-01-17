@@ -154,7 +154,7 @@
     "type": "library",
     "description": "Adds support for taxonomies",
     "keywords": ["PoP", "taxonomies"],
-    "homepage": "https://github.com/PoPSchema/taxonomies",
+    "homepage": "https://github.com/PoPCMSSchema/taxonomies",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

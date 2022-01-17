@@ -154,7 +154,7 @@
     "type": "library",
     "description": "Adds support for tags",
     "keywords": ["PoP", "tags"],
-    "homepage": "https://github.com/PoPSchema/tags",
+    "homepage": "https://github.com/PoPCMSSchema/tags",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

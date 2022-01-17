@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Adds support for categories",
     "keywords": ["PoP", "categories"],
-    "homepage": "https://github.com/PoPSchema/categories",
+    "homepage": "https://github.com/PoPCMSSchema/categories",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

@@ -154,7 +154,7 @@
     "type": "library",
     "description": "Interfaces and helpers for custom posts (eg: posts, articles, etc)",
     "keywords": ["PoP", "customposts"],
-    "homepage": "https://github.com/PoPSchema/customposts",
+    "homepage": "https://github.com/PoPCMSSchema/customposts",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

@@ -153,7 +153,7 @@
     "type": "library",
     "description": "Integrates media with custom post mutations",
     "keywords": ["PoP", "custompostmedia-mutations"],
-    "homepage": "https://github.com/PoPSchema/custompostmedia-mutations",
+    "homepage": "https://github.com/PoPCMSSchema/custompostmedia-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

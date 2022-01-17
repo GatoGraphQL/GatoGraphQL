@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Adds support for post categories",
     "keywords": ["PoP", "post-categories"],
-    "homepage": "https://github.com/PoPSchema/post-categories",
+    "homepage": "https://github.com/PoPCMSSchema/post-categories",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

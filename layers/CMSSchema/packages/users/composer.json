@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Adds support for users",
     "keywords": ["PoP", "users"],
-    "homepage": "https://github.com/PoPSchema/users",
+    "homepage": "https://github.com/PoPCMSSchema/users",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
