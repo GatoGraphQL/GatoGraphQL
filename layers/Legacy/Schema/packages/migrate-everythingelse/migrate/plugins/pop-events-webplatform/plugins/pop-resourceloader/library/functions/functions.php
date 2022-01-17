@@ -1,5 +1,5 @@
 <?php
-use PoPCMSSchemaPRO\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Load Plugin-specific Libraries

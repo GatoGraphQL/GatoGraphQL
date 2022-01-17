@@ -1,5 +1,5 @@
 <?php
-use PoPCMSSchemaPRO\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 // \PoP\Root\App::addFilter('gdPostParentpageid', 'gdEmPostParentpageidImpl', 10, 2);
 // function gdEmPostParentpageidImpl($pageid, $post_id)

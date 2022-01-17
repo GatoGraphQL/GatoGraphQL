@@ -62,7 +62,7 @@ class Component extends AbstractComponent
                 \PoPSchema\NotificationsWP\Component::class,
                 \PoPSchema\HighlightsWP\Component::class,
                 // Moved to outside repo
-                // \PoPCMSSchemaPRO\LocationPostsWP\Component::class,
+                // \PoPCMSSchema\LocationPostsWP\Component::class,
                 \PoPSchema\StancesWP\Component::class,
             ],
             $skipLoadingUnmigratedComponents ? [] : [
@@ -83,7 +83,7 @@ class Component extends AbstractComponent
                 \PoPSitesWassup\ShareMutations\Component::class,
                 \PoPSitesWassup\VolunteerMutations\Component::class,
                 // Moved to outside repo
-                // \PoPCMSSchemaPRO\EventMutationsWPEM\Component::class,
+                // \PoPCMSSchema\EventMutationsWPEM\Component::class,
                 // \PoPSitesWassup\EventMutations\Component::class,
                 // \PoPSitesWassup\LocationMutations\Component::class,
                 // \PoPSitesWassup\LocationPostMutations\Component::class,
