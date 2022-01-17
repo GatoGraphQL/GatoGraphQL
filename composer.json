@@ -537,7 +537,12 @@
         "pop-wp-schema/users": "self.version"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "boxuk/wp-muplugin-loader": true,
+            "composer/installers": true,
+            "oomphinc/composer-installers-extender": true
+        }
     },
     "scripts": {
         "all": [
