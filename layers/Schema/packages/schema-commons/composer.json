@@ -1,5 +1,5 @@
 {
-    "name": "pop-cms-schema/schema-commons",
+    "name": "pop-schema/schema-commons",
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
