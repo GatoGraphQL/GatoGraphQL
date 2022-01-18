@@ -45,7 +45,7 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
         $ret['subcomponent-field'] = $this->getSubcomponentField($module);
         if ($layouts = $this->getLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );
         }

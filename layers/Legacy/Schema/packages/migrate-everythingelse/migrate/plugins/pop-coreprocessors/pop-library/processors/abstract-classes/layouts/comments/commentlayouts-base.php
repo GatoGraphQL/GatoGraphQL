@@ -115,7 +115,7 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
 
         if ($abovelayout_modules = $this->getAbovelayoutLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovelayout'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $abovelayout_modules
             );
         }

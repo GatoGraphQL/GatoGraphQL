@@ -91,13 +91,13 @@ abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_Quer
         }
         if ($headers = $this->getHeaderSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['headers'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $headers
             );
         }
         if ($footers = $this->getFullviewFooterSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['footers'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $footers
             );
         }

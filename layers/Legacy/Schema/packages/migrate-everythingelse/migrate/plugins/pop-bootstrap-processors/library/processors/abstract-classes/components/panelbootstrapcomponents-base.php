@@ -206,7 +206,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
         if ($panel_modules = $this->getPanelSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['panels'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $panel_modules
             );
         }

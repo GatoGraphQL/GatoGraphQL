@@ -195,7 +195,7 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataModul
 
         if ($layouts = $this->getLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );
         }

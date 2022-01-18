@@ -194,14 +194,14 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         if ($this->getBottomSubmodules($module)) {
             $ret[GD_JS_CLASSES]['bottom'] = 'clearfix';
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $this->getBottomSubmodules($module)
             );
             foreach ($this->getConditionalBottomSubmodules($module) as $conditionDataField => $conditionSubmodules) {
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_merge(
                     $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'],
                     array_map(
-                        [ModuleUtils::class, 'getModuleOutputName'],
+                        [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                         $conditionSubmodules
                     )
                 );

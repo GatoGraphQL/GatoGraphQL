@@ -57,7 +57,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataM
 
         if ($submodules = $this->getInnerSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-inners'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $submodules
             );
         }

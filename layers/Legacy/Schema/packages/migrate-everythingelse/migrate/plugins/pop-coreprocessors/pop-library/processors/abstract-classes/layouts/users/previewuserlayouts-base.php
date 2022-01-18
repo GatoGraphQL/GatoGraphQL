@@ -87,13 +87,13 @@ abstract class PoP_Module_Processor_PreviewUserLayoutsBase extends PoP_Module_Pr
 
         if ($belowavatar_modules = $this->getBelowavatarLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowavatar'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $belowavatar_modules
             );
         }
         if ($belowexcerpt_modules = $this->getBelowexcerptLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowexcerpt'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $belowexcerpt_modules
             );
         }

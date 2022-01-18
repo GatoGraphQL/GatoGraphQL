@@ -25,7 +25,7 @@ trait PoP_Engine_Module_Processor_InnerModules_Trait
 
         if ($submodules = $this->getInnerSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $submodules
             );
         }

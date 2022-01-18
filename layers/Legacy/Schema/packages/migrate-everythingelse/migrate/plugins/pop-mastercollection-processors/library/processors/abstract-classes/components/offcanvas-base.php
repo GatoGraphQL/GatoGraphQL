@@ -74,7 +74,7 @@ abstract class PoP_Module_Processor_OffcanvasBase extends PoPEngine_QueryDataMod
         }
         if ($submodules = $this->getSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $submodules
             );
         }

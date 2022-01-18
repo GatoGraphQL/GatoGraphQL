@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
 
         if ($submodules = $this->getInnerSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $submodules
             );
         }
@@ -52,7 +52,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
 
         if ($feedbackmessages = $this->getFeedbackmessageSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['feedbackmessages'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $feedbackmessages
             );
 
