@@ -10,7 +10,6 @@ use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
-use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\State\AbstractAppStateProvider;
 
@@ -52,12 +51,5 @@ class AppStateProvider extends AbstractAppStateProvider
         // By default, Standard GraphQL has introspection enabled, and PQL is not
         $enableGraphQLIntrospection = $componentConfiguration->enableGraphQLIntrospection();
         $state['graphql-introspection-enabled'] = $enableGraphQLIntrospection ?? $standardGraphQL;
-    }
-
-    public function consolidate(array &$state): void
-    {
-        if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
-            return;
-        }
     }
 }
