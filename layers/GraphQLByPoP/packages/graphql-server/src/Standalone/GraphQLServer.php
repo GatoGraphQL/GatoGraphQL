@@ -11,6 +11,7 @@ use PoP\Root\App;
 use PoPAPI\API\Facades\FieldQueryConvertorFacade;
 use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLServer
 {
@@ -44,13 +45,13 @@ class GraphQLServer
         // we can obtain the configuration (which may depend on hooks)
         $appLoader->addComponentClassConfiguration($this->componentClassConfiguration);
 
-        $appLoader->setInitialAppState($this->getGraphQLRequestAppState());
-
         $appLoader->bootApplication(
             $this->cacheContainerConfiguration,
             $this->containerNamespace,
             $this->containerDirectory
         );
+
+        $appLoader->setInitialAppState($this->getGraphQLRequestAppState());
 
         $appLoader->bootApplicationComponents();
     }
@@ -62,12 +63,17 @@ class GraphQLServer
     {
         return [
             'scheme' => Schemes::API,
-            'datastructure' => 'graphql', // Replace here with output from service
+            'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),
             'nature' => RequestNature::QUERY_ROOT,
             'only-fieldname-as-outputkey' => true,
             'standard-graphql' => true,
             'query' => '{}', // Added to avoid error message "The query in the body is empty"
         ];
+    }
+
+    protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    {
+        return App::getContainer()->get(GraphQLDataStructureFormatter::class);
     }
 
     public function execute(string $query, array $variables = []): void
