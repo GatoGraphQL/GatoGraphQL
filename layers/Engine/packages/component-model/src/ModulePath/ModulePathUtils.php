@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModulePath;
 
+use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 use PoP\ComponentModel\Tokens\ModulePath;
@@ -21,14 +22,9 @@ class ModulePathUtils
             return [];
         }
 
-        $paths = $_REQUEST[Params::MODULEPATHS];
-        if ($paths === null) {
+        $paths = Request::getModulePaths();
+        if (!$paths) {
             return [];
-        }
-
-        $modulePaths = [];
-        if (!is_array($paths)) {
-            $paths = array($paths);
         }
 
         // If any path is a substring from another one, then it is its root, and only this one will be taken into account, so remove its substrings
@@ -47,6 +43,7 @@ class ModulePathUtils
             }
         );
 
+        $modulePaths = [];
         foreach ($paths as $path) {
             // Each path must be converted to an array of the modules
             $modulePaths[] = ModulePathHelpersFacade::getInstance()->recastModulePath($path);

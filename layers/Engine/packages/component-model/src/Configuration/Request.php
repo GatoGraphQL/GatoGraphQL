@@ -61,4 +61,16 @@ class Request
     {
         return $_REQUEST[Params::MODULEFILTER] ?? null;
     }
+
+    /**
+     * @return string[]
+     */
+    public static function getModulePaths(): array
+    {
+        $modulePaths = $_REQUEST[Params::MODULEPATHS] ?? [];
+        if (!is_array($modulePaths)) {
+            return [$modulePaths];
+        }
+        return $modulePaths;
+    }
 }
