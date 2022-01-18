@@ -103,7 +103,7 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         $query = $state['query'];
-        if (empty($query)) {
+        if ($query === null) {
             $this->getFeedbackMessageStore()->addQueryError($this->__('The query in the body is empty', 'api'));
             return;
         }
