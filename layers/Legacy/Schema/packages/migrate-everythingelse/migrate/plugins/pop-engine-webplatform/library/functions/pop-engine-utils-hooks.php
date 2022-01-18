@@ -41,4 +41,11 @@ class PoP_WebPlatformEngine_UtilsHooks
  * Initialization
  */
 \PoP\Root\App::addAction('ApplicationState:addVars', array(PoP_WebPlatformEngine_UtilsHooks::class, 'addVars'), 1, 1); // Priority 1: execute immediately after PoP_Application_Engine_Utils, which has priority 0
+/**
+ * Warning: This hook was removed!
+ * Must override this logic via an AppStateProvider:
+ *
+ *   $state['routing']['queried-object'] = $queried_object;
+ *   $state['routing']['queried-object-id'] = $queried_object_id; 
+ */
 \PoP\Root\App::addFilter('ApplicationState:queried-object', array(PoP_WebPlatformEngine_UtilsHooks::class, 'getQueriedObject'));
