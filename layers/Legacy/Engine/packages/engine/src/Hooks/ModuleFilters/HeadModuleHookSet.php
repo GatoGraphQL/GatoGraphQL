@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
-use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\Engine\ModuleFilters\HeadModule;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class HeadModuleHookSet extends AbstractHookSet
 {
     private ?HeadModule $headModule = null;
+    private ?ModuleHelpersInterface $moduleHelpers = null;
     
     final public function setHeadModule(HeadModule $headModule): void
     {
@@ -21,6 +22,14 @@ class HeadModuleHookSet extends AbstractHookSet
     final protected function getHeadModule(): HeadModule
     {
         return $this->headModule ??= $this->instanceManager->getInstance(HeadModule::class);
+    }
+    final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
+    {
+        $this->moduleHelpers = $moduleHelpers;
+    }
+    final protected function getModuleHelpers(): ModuleHelpersInterface
+    {
+        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
     }
 
     protected function init(): void
@@ -35,7 +44,7 @@ class HeadModuleHookSet extends AbstractHookSet
     {
         if (App::getState('modulefilter') === $this->headModule->getName()) {
             if ($headmodule = App::getState('headmodule')) {
-                $components[] = $this->getTranslationAPI()->__('head module:', 'engine') . ModuleUtils::getModuleFullName($headmodule);
+                $components[] = $this->getTranslationAPI()->__('head module:', 'engine') . $this->getModuleHelpers()->getModuleFullName($headmodule);
             }
         }
 

@@ -6,7 +6,7 @@ namespace PoP\Engine\State;
 
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
-use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\Engine\Configuration\Request;
 use PoP\Engine\ModuleFilters\HeadModule;
 use PoP\Engine\ModuleFilters\MainContentModule;
@@ -23,6 +23,7 @@ class AppStateProvider extends AbstractAppStateProvider
     private ?MainContentModule $mainContentModule = null;
     private ?RouteModuleProcessorManagerInterface $routeModuleProcessorManager = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
+    private ?ModuleHelpersInterface $moduleHelpers = null;
 
     final public function setHeadModule(HeadModule $headModule): void
     {
@@ -64,6 +65,14 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
     }
+    final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
+    {
+        $this->moduleHelpers = $moduleHelpers;
+    }
+    final protected function getModuleHelpers(): ModuleHelpersInterface
+    {
+        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+    }
 
     public function augment(array &$state): void
     {
@@ -78,7 +87,7 @@ class AppStateProvider extends AbstractAppStateProvider
         if ($state['modulefilter'] === $this->headModule->getName()) {
             if ($enablePassingStateViaRequest) {
                 if ($headmodule = Request::getHeadModule()) {
-                    $state['headmodule'] = ModuleUtils::getModuleFromOutputName($headmodule);
+                    $state['headmodule'] = $this->getModuleHelpers()->getModuleFromOutputName($headmodule);
                 }
             }
         }
