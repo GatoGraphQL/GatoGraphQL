@@ -45,18 +45,24 @@ class GraphQLServer
         // we can obtain the configuration (which may depend on hooks)
         $appLoader->addComponentClassConfiguration($this->componentClassConfiguration);
 
+        // Boot the application
         $appLoader->bootApplication(
             $this->cacheContainerConfiguration,
             $this->containerNamespace,
             $this->containerDirectory
         );
 
+        // After booting the application, we can access the Application Container services
+        // Explicitly set the required state to execute GraphQL queries
         $appLoader->setInitialAppState($this->getGraphQLRequestAppState());
 
+        // Finally trigger booting the components
         $appLoader->bootApplicationComponents();
     }
 
     /**
+     * The required state to execute GraphQL queries.
+     *
      * @return array<string,mixed>
      */
     protected function getGraphQLRequestAppState(): array
@@ -76,6 +82,13 @@ class GraphQLServer
         return App::getContainer()->get(GraphQLDataStructureFormatter::class);
     }
 
+    /**
+     * The basic state for executing GraphQL queries is already set.
+     * In addition, inject the actual GraphQL query and variables,
+     * build the AST, and generate and print the data.
+     *
+     * @param array<string,mixed> $variables
+     */
     public function execute(string $query, array $variables = []): void
     {
         $appStateManager = App::getAppStateManager();
