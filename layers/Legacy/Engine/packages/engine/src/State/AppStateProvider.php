@@ -7,7 +7,7 @@ namespace PoP\Engine\State;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Engine\Constants\Params;
+use PoP\Engine\Configuration\Request;
 use PoP\Engine\ModuleFilters\HeadModule;
 use PoP\Engine\ModuleFilters\MainContentModule;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
@@ -68,7 +68,7 @@ class AppStateProvider extends AbstractAppStateProvider
 
         if ($state['modulefilter'] === $this->headModule->getName()) {
             if ($enablePassingStateViaRequest) {
-                if ($headmodule = $_REQUEST[Params::HEADMODULE] ?? null) {
+                if ($headmodule = Request::getHeadModule()) {
                     $state['headmodule'] = ModuleUtils::getModuleFromOutputName($headmodule);
                 }
             }
