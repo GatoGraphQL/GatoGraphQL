@@ -6,3 +6,6 @@ services:
 
     GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers\:
         resource: '../src/EndpointHandlers/*'
+
+    GraphQLByPoP\GraphQLEndpointForWP\State\:
+        resource: '../src/State/*'

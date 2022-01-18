@@ -19,7 +19,7 @@ class VoyagerClient extends AbstractClient
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->isVoyagerClientEndpointDisabled();
     }
-    protected function getEndpoint(): string
+    public function getEndpoint(): string
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
