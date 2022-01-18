@@ -31,6 +31,7 @@ use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Environment as CacheControlEnvironment;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
@@ -585,6 +586,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $mainPluginURL = App::getMainPlugin()->getPluginURL();
 
         $componentClassConfiguration = [];
+        $componentClassConfiguration[\PoP\Root\Component::class] = [
+            /**
+             * Can pass state for "variables" and "actions"
+             */
+            RootEnvironment::ENABLE_PASSING_STATE_VIA_REQUEST => true,
+        ];
         $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
             /**
              * Treat casting failures as errors, not warnings
