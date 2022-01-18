@@ -6,16 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 class GraphQLServerTest extends AbstractGraphQLServerTestCase
 {
-    /**
-     * @dataProvider queryProvider
-     */
-    public function testGraphQLServerExecution(string $query, array $response): void
-    {
-        $this->expectOutputString(json_encode($response));
-        self::getGraphQLServer()->execute($query);
-    }
-
-    public function queryProvider(): array
+    public function graphQLServerExecutionProvider(): array
     {
         return [
             'id' => [
