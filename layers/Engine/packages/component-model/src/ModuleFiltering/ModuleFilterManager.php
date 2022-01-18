@@ -9,6 +9,9 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
+use PoP\Root\App;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 
 class ModuleFilterManager implements ModuleFilterManagerInterface
 {
@@ -90,11 +93,17 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     {
         if ($this->selected_filter_name) {
             return $this->selected_filter_name;
-        } elseif ($selectedModuleFilterName = $_REQUEST[Params::MODULEFILTER] ?? null) {
-            // Only valid if there's a corresponding moduleFilter
-            if (in_array($selectedModuleFilterName, array_keys($this->modulefilters))) {
-                return $selectedModuleFilterName;
-            }
+        }
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
+            return null;
+        }
+        
+        // Only valid if there's a corresponding moduleFilter
+        $selectedModuleFilterName = $_REQUEST[Params::MODULEFILTER] ?? null;
+        if ($selectedModuleFilterName !== null && in_array($selectedModuleFilterName, array_keys($this->modulefilters))) {
+            return $selectedModuleFilterName;
         }
 
         return null;

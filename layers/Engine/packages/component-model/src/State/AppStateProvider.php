@@ -47,12 +47,13 @@ class AppStateProvider extends AbstractAppStateProvider
 
         $state['only-fieldname-as-outputkey'] = false;
         $state['are-mutations-enabled'] = true;
+        
+        $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
+        $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
 
         /** @var RootComponentConfiguration */
         $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
         if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
-            $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
-            $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
             $state['mangled'] = DefinitionsRequest::getMangledValue();
             $state['actionpath'] = Request::getActionPath();
             $state['actions'] = Request::getActions();
@@ -60,8 +61,6 @@ class AppStateProvider extends AbstractAppStateProvider
             $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
             $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
         } else {
-            $state['variables'] = [];
-            $state['modulefilter'] = null;
             $state['mangled'] = ParamValues::MANGLED_NONE;
             $state['actionpath'] = null;
             $state['actions'] = [];

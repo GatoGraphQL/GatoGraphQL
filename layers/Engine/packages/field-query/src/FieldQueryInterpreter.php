@@ -6,6 +6,9 @@ namespace PoP\FieldQuery;
 
 use PoP\Root\Services\BasicServiceTrait;
 use PoP\QueryParsing\QueryParserInterface;
+use PoP\Root\App;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use stdClass;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
@@ -137,6 +140,12 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      */
     protected function doGetVariablesFromRequest(): array
     {
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
+            return [];
+        }
+
         // Watch out! GraphiQL also uses the "variables" URL param, but as a string
         // Hence, check if this param is an array, and only then process it
         return array_merge(
