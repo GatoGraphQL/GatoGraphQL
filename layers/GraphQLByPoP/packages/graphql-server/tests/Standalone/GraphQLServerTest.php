@@ -19,11 +19,11 @@ class GraphQLServerTest extends AbstractGraphQLServerTestCase
     {
         return [
             'id' => [
-                <<<GRAPHQL
+                '
                 query {
                     id
                 }
-                GRAPHQL,
+                ',
                 [
                     'data' => [
                         'id' => 'root',
@@ -31,13 +31,13 @@ class GraphQLServerTest extends AbstractGraphQLServerTestCase
                 ]
             ],
             'self' => [
-                <<<GRAPHQL
+                '
                 query {
                     self {
                         id
                     }
                 }
-                GRAPHQL,
+                ',
                 [
                     'data' => [
                         'self' => [
