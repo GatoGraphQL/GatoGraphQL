@@ -36,7 +36,6 @@ use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -836,7 +835,7 @@ class Engine implements EngineInterface
         array &$props
     ): void {
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$this->getModuleFilterManager()->excludeModule($module, $props)) {
@@ -886,7 +885,7 @@ class Engine implements EngineInterface
         array &$props
     ): void {
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$this->getModuleFilterManager()->excludeModule($module, $props)) {
@@ -933,7 +932,7 @@ class Engine implements EngineInterface
         $array_pointer = &$array;
         foreach ($module_path as $submodule) {
             // Notice that when generating the array for the response, we don't use $module anymore, but $moduleOutputName
-            $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
+            $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($submodule);
 
             // If the path doesn't exist, create it
             if (!isset($array_pointer[$submoduleOutputName][$submodulesOutputProperty])) {
@@ -944,7 +943,7 @@ class Engine implements EngineInterface
             $array_pointer = &$array_pointer[$submoduleOutputName][$submodulesOutputProperty];
         }
 
-        $moduleOutputName = ModuleUtils::getModuleOutputName($module);
+        $moduleOutputName = $this->getModuleHelpers()->getModuleOutputName($module);
         $array_pointer[$moduleOutputName][$key] = $value;
     }
 
@@ -963,7 +962,7 @@ class Engine implements EngineInterface
 
     protected function getModulePathKey(array $module_path, array $module): string
     {
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
         return $moduleFullName . '-' . implode('.', $module_path);
     }
 
@@ -1056,7 +1055,7 @@ class Engine implements EngineInterface
             // The module is the last element in the path.
             // Notice that the module is removed from the path, providing the path to all its properties
             $module = array_pop($module_path);
-            $moduleFullName = ModuleUtils::getModuleFullName($module);
+            $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
             // Artificially set the current path on the path manager. It will be needed in getDatasetmeta, which calls getDataloadSource, which needs the current path
             $this->getModulePathManager()->setPropagationCurrentPath($module_path);
@@ -1064,7 +1063,7 @@ class Engine implements EngineInterface
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
             foreach ($module_path as $submodule) {
-                $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
+                $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($submodule);
                 $data_properties = &$data_properties[$submoduleFullName][$submodulesOutputProperty];
             }
             $data_properties = &$data_properties[$moduleFullName][DataLoading::DATA_PROPERTIES];
@@ -1093,7 +1092,7 @@ class Engine implements EngineInterface
             $props = &$root_props;
             $model_props = &$root_model_props;
             foreach ($module_path as $submodule) {
-                $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
+                $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($submodule);
                 $props = &$props[$submoduleFullName][Props::SUBMODULES];
                 $model_props = &$model_props[$submoduleFullName][Props::SUBMODULES];
             }
@@ -1261,7 +1260,7 @@ class Engine implements EngineInterface
                     $referencer_props = &$root_props;
                     $referencer_model_props = &$root_model_props;
                     foreach ($referencer_modulepath as $submodule) {
-                        $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
+                        $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($submodule);
                         $referencer_props = &$referencer_props[$submoduleFullName][Props::SUBMODULES];
                         $referencer_model_props = &$referencer_model_props[$submoduleFullName][Props::SUBMODULES];
                     }
@@ -2015,7 +2014,7 @@ class Engine implements EngineInterface
 
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
-                    $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
+                    $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($submodule);
                     $moduledata[$submoduleOutputName][$submodulesOutputProperty] = $moduledata[$submoduleOutputName][$submodulesOutputProperty] ?? [];
                     $moduledata = &$moduledata[$submoduleOutputName][$submodulesOutputProperty];
                 }
