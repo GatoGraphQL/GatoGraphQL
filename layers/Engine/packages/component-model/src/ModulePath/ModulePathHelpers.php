@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\ModulePath;
 
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\Tokens\ModulePath;
 use PoP\Root\App;
 use PoP\Root\Component as RootComponent;
@@ -18,6 +18,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
     use BasicServiceTrait;
 
     private ?ModulePathManagerInterface $modulePathManager = null;
+    private ?ModuleHelpersInterface $moduleHelpers = null;
 
     final public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
     {
@@ -26,6 +27,14 @@ class ModulePathHelpers implements ModulePathHelpersInterface
     final protected function getModulePathManager(): ModulePathManagerInterface
     {
         return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
+    }
+    final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
+    {
+        $this->moduleHelpers = $moduleHelpers;
+    }
+    final protected function getModuleHelpers(): ModuleHelpersInterface
+    {
+        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
     }
 
     public function getStringifiedModulePropagationCurrentPath(array $module): string
@@ -40,7 +49,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
         return implode(
             ModulePath::MODULE_SEPARATOR,
             array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [$this->getModuleHelpers(), 'getModuleOutputName'],
                 $modulepath
             )
         );
@@ -49,7 +58,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
     public function recastModulePath(string $modulepath_as_string): array
     {
         return array_map(
-            [ModuleUtils::class, 'getModuleFromOutputName'],
+            [$this->getModuleHelpers(), 'getModuleFromOutputName'],
             explode(
                 ModulePath::MODULE_SEPARATOR,
                 $modulepath_as_string

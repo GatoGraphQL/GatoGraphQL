@@ -35,6 +35,7 @@ use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -119,6 +120,7 @@ class Engine implements EngineInterface
     private ?EntryModuleManagerInterface $entryModuleManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ApplicationInfoInterface $applicationInfo = null;
+    private ?ModuleHelpersInterface $moduleHelpers = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -236,6 +238,14 @@ class Engine implements EngineInterface
     final protected function getApplicationInfo(): ApplicationInfoInterface
     {
         return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
+    }
+    final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
+    {
+        $this->moduleHelpers = $moduleHelpers;
+    }
+    final protected function getModuleHelpers(): ModuleHelpersInterface
+    {
+        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
     }
 
     public function getOutputData(): array
@@ -649,11 +659,10 @@ class Engine implements EngineInterface
             $filteredsettings = [];
             foreach ($not_excluded_module_sets as $modules) {
                 $filteredsettings[] = array_map(
-                    [ModuleUtils::class, 'getModuleOutputName'],
+                    [$this->getModuleHelpers(), 'getModuleOutputName'],
                     $modules
                 );
             }
-
             $meta['filteredmodules'] = $filteredsettings;
         }
 

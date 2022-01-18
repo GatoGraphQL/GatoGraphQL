@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\Root\App;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
@@ -15,13 +14,15 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
+use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\LooseContracts\NameResolverInterface;
+use PoP\Root\App;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 {
@@ -45,6 +46,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ModulePaths $modulePaths = null;
+    private ?ModuleHelpersInterface $moduleHelpers = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -109,6 +111,14 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     final protected function getModulePaths(): ModulePaths
     {
         return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
+    }
+    final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
+    {
+        $this->moduleHelpers = $moduleHelpers;
+    }
+    final protected function getModuleHelpers(): ModuleHelpersInterface
+    {
+        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
     }
 
     public function getSubmodules(array $module): array
@@ -361,7 +371,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $ret = array_merge(
                 $ret,
                 array_map(
-                    [ModuleUtils::class, 'getModuleFullName'],
+                    [$this->getModuleHelpers(), 'getModuleFullName'],
                     $module_or_modulepath
                 )
             );
@@ -376,7 +386,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($starting_from_modulepath) {
             // Convert it to string
             $startingFromModulepathFullNames = array_map(
-                [ModuleUtils::class, 'getModuleFullName'],
+                [$this->getModuleHelpers(), 'getModuleFullName'],
                 $starting_from_modulepath
             );
 
