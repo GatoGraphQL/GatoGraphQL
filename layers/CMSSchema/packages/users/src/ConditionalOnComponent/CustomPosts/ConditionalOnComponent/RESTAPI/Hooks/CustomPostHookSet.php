@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnCom
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoP\RESTAPI\Helpers\HookHelpers;
+use PoPAPI\RESTAPI\Helpers\HookHelpers;
 use PoPCMSSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 
 class CustomPostHookSet extends AbstractHookSet

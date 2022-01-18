@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\RESTAPI;
+namespace PoPAPI\RESTAPI;
 
 class Environment
 {

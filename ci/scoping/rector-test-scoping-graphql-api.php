@@ -43,7 +43,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         // So ignore all code depending on it, or it throws error:
         //   "Could not process
         //   "vendor/pop-schema/pages/src/ConditionalOnComponent/RESTAPI/RouteModuleProcessors/EntryRouteModuleProcessor.php" file, due to:
-        //   "Analyze error: "Class PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
+        //   "Analyze error: "Class PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
         '*/ConditionalOnComponent/RESTAPI/*',
 
         // // Exclude migrate libraries

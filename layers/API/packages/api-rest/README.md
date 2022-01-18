@@ -87,7 +87,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \PoP\RESTAPI\Component::class,
+    \PoPAPI\RESTAPI\Component::class,
 ]);
 ```
 

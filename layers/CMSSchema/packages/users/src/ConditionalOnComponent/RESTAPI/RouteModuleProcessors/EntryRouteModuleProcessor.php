@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
+use PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Users\Component;
 use PoPCMSSchema\Users\ComponentConfiguration;

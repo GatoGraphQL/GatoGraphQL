@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PostTags\ConditionalOnComponent\RESTAPI\RouteModuleProces
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
+use PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Posts\Component as PostsComponent;
 use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;

@@ -1,6 +1,6 @@
 <?php
 
-namespace PoP\RESTAPI;
+namespace PoPAPI\RESTAPI;
 
 use PoP\Root\AbstractComponentTest;
 

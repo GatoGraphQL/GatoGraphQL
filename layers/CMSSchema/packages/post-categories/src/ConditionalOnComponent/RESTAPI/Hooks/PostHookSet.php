@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PostCategories\ConditionalOnComponent\RESTAPI\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoP\RESTAPI\Helpers\HookHelpers;
+use PoPAPI\RESTAPI\Helpers\HookHelpers;
 use PoPCMSSchema\Posts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\EntryRouteModuleProcessor;
 
 class PostHookSet extends AbstractHookSet

@@ -116,6 +116,6 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
  */
 add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-    new PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor(new \PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter())
+    new PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor(new \PoPAPI\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter())
 	);
 }, 888200);

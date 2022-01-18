@@ -35,7 +35,7 @@ class Component extends AbstractComponent
             [
                 // These ones are working OK
                 \GraphQLByPoP\GraphQLServer\Component::class,
-                \PoP\RESTAPI\Component::class,
+                \PoPAPI\RESTAPI\Component::class,
                 \PoP\TraceTools\Component::class,
                 \PoPWPSchema\BlockMetadataWP\Component::class,
                 \PoPSchema\CDNDirective\Component::class,

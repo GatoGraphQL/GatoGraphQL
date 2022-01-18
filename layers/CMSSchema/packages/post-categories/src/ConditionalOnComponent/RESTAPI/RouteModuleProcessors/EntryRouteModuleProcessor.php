@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PostCategories\ConditionalOnComponent\RESTAPI\RouteModule
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
+use PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Categories\Routing\RequestNature as CategoryRequestNature;
 use PoPCMSSchema\PostCategories\Component;

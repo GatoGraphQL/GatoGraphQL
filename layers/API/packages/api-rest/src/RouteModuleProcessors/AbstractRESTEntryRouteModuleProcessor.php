@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoP\RESTAPI\RouteModuleProcessors;
+namespace PoPAPI\RESTAPI\RouteModuleProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Schema\FieldQueryConvertorInterface;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
-use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
-use PoP\RESTAPI\Helpers\HookHelpers;
+use PoPAPI\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
+use PoPAPI\RESTAPI\Helpers\HookHelpers;
 
 abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {

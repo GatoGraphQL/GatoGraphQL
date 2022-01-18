@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PostTags;
 
 use PoP\Root\App;
 use PoPAPI\API\Component as APIComponent;
-use PoP\RESTAPI\Component as RESTAPIComponent;
+use PoPAPI\RESTAPI\Component as RESTAPIComponent;
 use PoP\Root\Component\AbstractComponent;
 
 /**
@@ -34,7 +34,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPAPI\API\Component::class,
-            \PoP\RESTAPI\Component::class,
+            \PoPAPI\RESTAPI\Component::class,
         ];
     }
 

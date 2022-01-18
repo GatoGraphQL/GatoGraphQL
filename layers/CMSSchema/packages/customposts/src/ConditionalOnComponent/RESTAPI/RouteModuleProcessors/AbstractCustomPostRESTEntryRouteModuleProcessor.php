@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
 use PoP\Root\App;
-use PoP\RESTAPI\Helpers\HookHelpers;
-use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
+use PoPAPI\RESTAPI\Helpers\HookHelpers;
+use PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 
 class AbstractCustomPostRESTEntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {

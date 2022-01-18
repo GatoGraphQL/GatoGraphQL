@@ -32,7 +32,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPAPI\API\Component::class,
-            \PoP\RESTAPI\Component::class,
+            \PoPAPI\RESTAPI\Component::class,
         ];
     }
 

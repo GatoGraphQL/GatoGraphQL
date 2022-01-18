@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\RESTAPI\RouteModuleProcessors;
+namespace PoPAPI\RESTAPI\RouteModuleProcessors;
 
 use PoPAPI\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
 use PoPAPI\API\Response\Schemes as APISchemes;
