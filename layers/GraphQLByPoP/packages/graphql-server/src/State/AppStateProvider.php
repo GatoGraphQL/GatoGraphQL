@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\State;
 
 use PoP\Root\App;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
@@ -29,7 +31,14 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         $state['nested-mutations-enabled'] = null;
         $state['graphql-introspection-enabled'] = null;
-        $state['edit-schema'] = null;
+
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
+            $state['edit-schema'] = Request::editSchema();
+        } else {
+            $state['edit-schema'] = null;
+        }
     }
 
     public function consolidate(array &$state): void
@@ -37,7 +46,6 @@ class AppStateProvider extends AbstractAppStateProvider
         if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
             return;
         }
-        $state['edit-schema'] = Request::editSchema();
 
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
