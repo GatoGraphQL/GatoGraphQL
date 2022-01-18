@@ -41,28 +41,8 @@ class GraphQLServer
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
         $appLoader->addComponentClassConfiguration($this->componentClassConfiguration);
-    }
 
-    public function execute(string $query, array $variables = []): void
-    {
-        $appLoader = App::getAppLoader();
-
-        // Same for the initial AppState
-        $appLoader->setInitialAppState(array_merge(
-            $this->getGraphQLRequestAppState(),
-            [
-                'query' => $query,
-                'variables' => $variables,
-            ]
-        ));
-
-        $appLoader->bootApplication(
-            $this->cacheContainerConfiguration,
-            $this->containerNamespace,
-            $this->containerDirectory
-        );
-        $engine = EngineFacade::getInstance();
-        $engine->outputResponse();
+        $appLoader->setInitialAppState($this->getGraphQLRequestAppState());
     }
 
     /**
@@ -77,5 +57,24 @@ class GraphQLServer
             'only-fieldname-as-outputkey' => true,
             'standard-graphql' => true,
         ];
+    }
+
+    public function execute(string $query, array $variables = []): void
+    {
+        $appLoader = App::getAppLoader();
+
+        // Same for the initial AppState
+        $appLoader->mergeInitialAppState([
+            'query' => $query,
+            'variables' => $variables,
+        ]);
+
+        $appLoader->bootApplication(
+            $this->cacheContainerConfiguration,
+            $this->containerNamespace,
+            $this->containerDirectory
+        );
+        $engine = EngineFacade::getInstance();
+        $engine->outputResponse();
     }
 }
