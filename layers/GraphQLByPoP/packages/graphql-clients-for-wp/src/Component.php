@@ -21,7 +21,6 @@ class Component extends AbstractComponent
         return [
             \PoPAPI\APIClients\Component::class,
             \PoPAPI\APIEndpointsForWP\Component::class,
-            \GraphQLByPoP\GraphQLServer\Component::class,
         ];
     }
 

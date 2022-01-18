@@ -164,8 +164,7 @@
     "require": {
         "php": "^8.0",
         "pop-api/api-clients": "^0.9",
-        "pop-api/api-endpoints-for-wp": "^0.9",
-        "graphql-by-pop/graphql-server": "^0.9"
+        "pop-api/api-endpoints-for-wp": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
