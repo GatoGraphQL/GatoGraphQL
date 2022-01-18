@@ -15,8 +15,9 @@ class AppStateHelpers
     public static function resetCurrentUserInAppState(): void
     {
         $userStateTypeAPI = UserStateTypeAPIFacade::getInstance();
-        App::getAppStateManager()->override('is-user-logged-in', $userStateTypeAPI->isUserLoggedIn());
-        App::getAppStateManager()->override('current-user', $userStateTypeAPI->getCurrentUser());
-        App::getAppStateManager()->override('current-user-id', $userStateTypeAPI->getCurrentUserID());
+        $appStateManager = App::getAppStateManager();
+        $appStateManager->override('is-user-logged-in', $userStateTypeAPI->isUserLoggedIn());
+        $appStateManager->override('current-user', $userStateTypeAPI->getCurrentUser());
+        $appStateManager->override('current-user-id', $userStateTypeAPI->getCurrentUserID());
     }
 }

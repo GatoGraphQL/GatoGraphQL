@@ -361,17 +361,19 @@ class Engine implements EngineInterface
             // First make a backup of the current URI to set it again later
             $currentRoute = App::getState('route');
 
+            $appStateManager = App::getAppStateManager();
+
             // Process each extra URI, and merge its results with all others
             foreach ($extra_routes as $route) {
                 // Reset $vars so that it gets created anew
-                App::getAppStateManager()->override('route', $route);
+                $appStateManager->override('route', $route);
 
                 // Process the request with the new $vars and merge it with all other results
                 $this->processAndGenerateData();
             }
 
             // Set the previous values back
-            App::getAppStateManager()->override('route', $currentRoute);
+            $appStateManager->override('route', $currentRoute);
         }
 
         // Add session/site meta
