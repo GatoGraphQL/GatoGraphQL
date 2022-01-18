@@ -56,4 +56,9 @@ class Request
         }
         return $extraRoutes;
     }
+
+    public static function getModuleFilter(): ?string
+    {
+        return $_REQUEST[Params::MODULEFILTER] ?? null;
+    }
 }
