@@ -44,4 +44,16 @@ class Request
     {
         return $_REQUEST[Params::VERSION_CONSTRAINT_FOR_DIRECTIVES] ?? null;
     }
+
+    /**
+     * @return string[]
+     */
+    public static function getExtraRoutes(): array
+    {
+        $extraRoutes = $_REQUEST[Params::EXTRA_ROUTES] ?? [];
+        if (!is_array($extraRoutes)) {
+            return [$extraRoutes];
+        }
+        return $extraRoutes;
+    }
 }
