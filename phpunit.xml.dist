@@ -5,6 +5,7 @@
   bootstrap="lib/bootstrap-phpunit.php"
   colors="true"
   verbose="true"
+  stderr="true"
 >
   <coverage processUncoveredFiles="true">
     <include>
