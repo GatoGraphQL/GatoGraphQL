@@ -26,10 +26,9 @@ class StandaloneGraphQLApp
                 \GraphQLByPoP\GraphQLServer\Component::class,
             ]
         );
-        $this->makeExecutableSchema();
     }
 
-    protected function makeExecutableSchema(): void
+    public function execute(string $query, array $variables = []): void
     {
         App::initialize();
         $appLoader = App::getAppLoader();
@@ -46,16 +45,13 @@ class StandaloneGraphQLApp
             'scheme' => Schemes::API,
             'datastructure' => 'graphql',//,
             'nature' => RequestNature::QUERY_ROOT,
+            'only-fieldname-as-outputkey' => true,
+            'standard-graphql' => true,
+            'query' => $query,
+            'variables' => $variables,
         ]);
 
         $appLoader->bootApplication($this->cacheContainerConfiguration, $this->containerNamespace, $this->containerDirectory);
-    }
-
-    public function execute(string $query, array $variables = []): void
-    {
-        $appStateManager = App::getAppStateManager();
-        $appStateManager->override('query', $query);
-        $appStateManager->override('variables', $variables);
 
         $engine = EngineFacade::getInstance();
         $engine->outputResponse();
