@@ -16,7 +16,7 @@ Utilities for implementing API clients
 Via Composer
 
 ``` bash
-composer require getpop/api-clients
+composer require pop-api/api-clients
 ```
 
 ## Development
@@ -103,17 +103,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/getpop/api-clients.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-api/api-clients.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/getpop/api-clients/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/api-clients.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/api-clients.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/getpop/api-clients.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-api/api-clients/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-api/api-clients.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-api/api-clients.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-api/api-clients.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/getpop/api-clients
-[link-travis]: https://travis-ci.org/getpop/api-clients
-[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/api-clients/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/getpop/api-clients
-[link-downloads]: https://packagist.org/packages/getpop/api-clients
+[link-packagist]: https://packagist.org/packages/pop-api/api-clients
+[link-travis]: https://travis-ci.org/pop-api/api-clients
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-api/api-clients/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-api/api-clients
+[link-downloads]: https://packagist.org/packages/pop-api/api-clients
 [link-author]: https://github.com/getpop
 [link-contributors]: ../../../../../../contributors

@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Convert the application into a powerful API. Install the [GraphQL API](https://github.com/getpop/api-graphql) package to convert it into a GraphQL server, and the [REST API](https://github.com/getpop/api-rest) package to enable adding REST endpoints.
+Convert the application into a powerful API. Install the [GraphQL API](https://github.com/pop-api/api-graphql) package to convert it into a GraphQL server, and the [REST API](https://github.com/pop-api/api-rest) package to enable adding REST endpoints.
 
 ## Install
 
@@ -22,7 +22,7 @@ Follow the instructions under [Bootstrap a PoP API for WordPress](https://github
 Via Composer
 
 ``` bash
-composer require getpop/api
+composer require pop-api/api
 ```
 
 #### Enable pretty permalinks
@@ -115,7 +115,7 @@ Initialize the component:
 ]);
 ```
 
-> **Note:**<br/>To enable GraphQL and/or REST endpoints, the corresponding package must be installed: [GraphQL package](https://github.com/getpop/api-graphql), [REST package](https://github.com/getpop/api-rest) 
+> **Note:**<br/>To enable GraphQL and/or REST endpoints, the corresponding package must be installed: [GraphQL package](https://github.com/pop-api/api-graphql), [REST package](https://github.com/pop-api/api-rest) 
 
 1. Transform any URL into an API endpoint by adding:
 
@@ -127,7 +127,7 @@ Initialize the component:
 
 <!-- ## Features
 
-Please refer to the [features in the GraphQL package](https://github.com/getpop/api-graphql#features). -->
+Please refer to the [features in the GraphQL package](https://github.com/pop-api/api-graphql#features). -->
 
 <!--
 ### Query the root or URL-based resources
@@ -155,8 +155,8 @@ Please refer to the syntax from the [Field Query](https://github.com/getpop/fiel
 
 The API can transform the application into both a GraphQL and/or REST server, simply by installing the corresponding extension:
 
-- [GraphQL API](https://github.com/getpop/api-graphql)
-- [REST API](https://github.com/getpop/api-rest)
+- [GraphQL API](https://github.com/pop-api/api-graphql)
+- [REST API](https://github.com/pop-api/api-rest)
 
 The PoP API manages to provide all the same benefits of both REST and GraphQL APIs, **at the same time**:
 
@@ -557,18 +557,18 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/getpop/api.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-api/api.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/getpop/api/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/api.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/api.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/getpop/api.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-api/api/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-api/api.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-api/api.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-api/api.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/getpop/api
-[link-travis]: https://travis-ci.org/getpop/api
-[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/api/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/getpop/api
-[link-downloads]: https://packagist.org/packages/getpop/api
+[link-packagist]: https://packagist.org/packages/pop-api/api
+[link-travis]: https://travis-ci.org/pop-api/api
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-api/api/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-api/api
+[link-downloads]: https://packagist.org/packages/pop-api/api
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors
 

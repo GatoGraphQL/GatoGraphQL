@@ -16,7 +16,7 @@ Mirror the query in the API response
 Via Composer
 
 ``` bash
-composer require getpop/api-mirrorquery
+composer require pop-api/api-mirrorquery
 ```
 
 ## Development
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/getpop/api-mirrorquery.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-api/api-mirrorquery.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/getpop/api-mirrorquery/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/api-mirrorquery.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/api-mirrorquery.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/getpop/api-mirrorquery.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-api/api-mirrorquery/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-api/api-mirrorquery.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-api/api-mirrorquery.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-api/api-mirrorquery.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/getpop/api-mirrorquery
-[link-travis]: https://travis-ci.org/getpop/api-mirrorquery
-[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/api-mirrorquery/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/getpop/api-mirrorquery
-[link-downloads]: https://packagist.org/packages/getpop/api-mirrorquery
+[link-packagist]: https://packagist.org/packages/pop-api/api-mirrorquery
+[link-travis]: https://travis-ci.org/pop-api/api-mirrorquery
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-api/api-mirrorquery/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-api/api-mirrorquery
+[link-downloads]: https://packagist.org/packages/pop-api/api-mirrorquery
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

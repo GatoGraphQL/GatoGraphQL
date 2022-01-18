@@ -18,16 +18,16 @@
         "pop-cms-schema/posts": "^0.9"
     },
     "require-dev": {
-        "getpop/api": "^0.9",
-        "getpop/api-rest": "^0.9",
+        "pop-api/api": "^0.9",
+        "pop-api/api-rest": "^0.9",
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.0"
     },
     "suggest": {
-        "getpop/api": "Integrates well with API",
-        "getpop/api-rest": "Integrates well with REST API"
+        "pop-api/api": "Integrates well with API",
+        "pop-api/api-rest": "Integrates well with REST API"
     },
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
@@ -49,13 +49,13 @@
         "getpop/query-parsing": "<0.8.9",
         "getpop/field-query": "<0.8.9",
         "getpop/cache-control": "<0.8.9",
-        "getpop/api-rest": "<0.8.9",
-        "getpop/api-graphql": "<0.8.9",
-        "getpop/api-endpoints": "<0.8.9",
-        "getpop/api-endpoints-for-wp": "<0.8.9",
-        "getpop/api": "<0.8.9",
-        "getpop/api-clients": "<0.8.9",
-        "getpop/api-mirrorquery": "<0.8.9",
+        "pop-api/api-rest": "<0.8.9",
+        "pop-api/api-graphql": "<0.8.9",
+        "pop-api/api-endpoints": "<0.8.9",
+        "pop-api/api-endpoints-for-wp": "<0.8.9",
+        "pop-api/api": "<0.8.9",
+        "pop-api/api-clients": "<0.8.9",
+        "pop-api/api-mirrorquery": "<0.8.9",
         "pop-cms-schema/post-category-mutations": "<0.8.9",
         "pop-cms-schema/settings": "<0.8.9",
         "pop-cms-schema/user-state-access-control": "<0.8.9",

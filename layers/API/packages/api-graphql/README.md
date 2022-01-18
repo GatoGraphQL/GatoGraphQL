@@ -9,21 +9,21 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Extended/Upgraded implementation of GraphQL. This implementation is a package to be installed on top of the [PoP API](https://github.com/getpop/api).
+Extended/Upgraded implementation of GraphQL. This implementation is a package to be installed on top of the [PoP API](https://github.com/pop-api/api).
 
 ## Install
 
 Via Composer
 
 ``` bash
-composer require getpop/api-graphql
+composer require pop-api/api-graphql
 ```
 
 ## Development
 
 The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`API/packages/api-graphql`](https://github.com/leoloso/PoP/tree/master/layers/API/packages/api-graphql).
 
-To enable pretty API endpoint `/api/graphql/`, follow the instructions [here](https://github.com/getpop/api#enable-pretty-permalinks)
+To enable pretty API endpoint `/api/graphql/`, follow the instructions [here](https://github.com/pop-api/api#enable-pretty-permalinks)
 
 > Note: if you wish to install a fully-working API, please follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/leoloso/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented).
 
@@ -132,7 +132,7 @@ Please refer to the [Field Query](https://github.com/getpop/field-query) documen
 
 ## More information
 
-Please refer to package [API](https://github.com/getpop/api), on which the GraphQL API is based, and which contains plenty of extra documentation.
+Please refer to package [API](https://github.com/pop-api/api), on which the GraphQL API is based, and which contains plenty of extra documentation.
 -->
 
 ## Features
@@ -149,11 +149,11 @@ Namespaces ([proposed to be added to the GraphQL spec](https://github.com/graphq
 
 This is how the normal schema looks like [in the GraphQL Voyager](https://newapi.getpop.org/graphql-interactive/):
 
-![Interactive schema](https://raw.githubusercontent.com/getpop/api-graphql/master/assets/images/normal-interactive-schema.png)
+![Interactive schema](https://raw.githubusercontent.com/pop-api/api-graphql/master/assets/images/normal-interactive-schema.png)
 
 This is how it looks in [its namespaced version](https://newapi.getpop.org/graphql-interactive/?use_namespace=1):
 
-![Namespaced interactive schema](https://raw.githubusercontent.com/getpop/api-graphql/master/assets/images/namespaced-interactive-schema.png)
+![Namespaced interactive schema](https://raw.githubusercontent.com/pop-api/api-graphql/master/assets/images/namespaced-interactive-schema.png)
 
 ### Field/directive-based versioning
 
@@ -163,19 +163,19 @@ To select the version for the field/directive, we use the same [semver version c
 
 In [this query](https://newapi.getpop.org/graphiql/?query=query%20%7B%0A%20%20olderVersion%3AuserServiceURLs(versionConstraint%3A%220.1.0%22)%0A%20%20newerVersion%3AuserServiceURLs(versionConstraint%3A%220.2.0%22)%0A%7D), field `userServiceURLs` has 2 versions, `0.1.0` and `0.2.0`:
 
-![Querying a field using by version](https://raw.githubusercontent.com/getpop/api-graphql/master/assets/images/versioning-field-directives-1.jpg)
+![Querying a field using by version](https://raw.githubusercontent.com/pop-api/api-graphql/master/assets/images/versioning-field-directives-1.jpg)
 
 Let's use constraints with `^` and `>` to select the version. In [this query](https://newapi.getpop.org/graphiql/?query=query%20%7B%0A%20%20%23This%20will%20produce%20version%200.1.0%0A%20%20firstVersion%3AuserServiceURLs(versionConstraint%3A%22%5E0.1%22)%0A%20%20%23%20This%20will%20produce%20version%200.2.0%0A%20%20secondVersion%3AuserServiceURLs(versionConstraint%3A%22%3E0.1%22)%0A%20%20%23%20This%20will%20produce%20version%200.2.0%0A%20%20thirdVersion%3AuserServiceURLs(versionConstraint%3A%22%5E0.2%22)%0A%7D), constraint `"^0.1"` is resolved to version `"0.1.0"`, but constraint `">0.1"` is resolved to version `"0.2.0"`:
 
-![Querying a field using version constraints](https://raw.githubusercontent.com/getpop/api-graphql/master/assets/images/versioning-field-directives-2.jpg)
+![Querying a field using version constraints](https://raw.githubusercontent.com/pop-api/api-graphql/master/assets/images/versioning-field-directives-2.jpg)
 
 [This query](https://newapi.getpop.org/graphiql/?query=query%20%7B%0A%20%20post(by%3A{id%3A1})%20%7B%0A%20%20%20%20titleCase%3Atitle%40makeTitle(versionConstraint%3A%22%5E0.1%22)%0A%20%20%20%20upperCase%3Atitle%40makeTitle(versionConstraint%3A%22%5E0.2%22)%0A%20%20%7D%0A%7D) demonstrates it for directives:
 
-![Querying a directive using version constraints](https://raw.githubusercontent.com/getpop/api-graphql/master/assets/images/versioning-field-directives-3.jpg)
+![Querying a directive using version constraints](https://raw.githubusercontent.com/pop-api/api-graphql/master/assets/images/versioning-field-directives-3.jpg)
 
 Adding the `versionConstraint` parameter in the <a href='https://newapi.getpop.org/graphiql/?versionConstraint=^0.1&query=query {%0A%20 userServiceURLs%0A}'>GraphQL endpoint itself</a> will implicitly define that version constraint in all fields, and any field can still override this default value with its own `versionConstraint`, as in <a href='https://newapi.getpop.org/graphiql/?versionConstraint=^0.1&query=query {%0A%20 %23This will produce version 0.1.0%0A%20 implicitVersion%3A userServiceURLs%0A%20 %23This will produce version 0.2.0%0A%20 explicitVersion%3A userServiceURLs(versionConstraint%3A"^0.2")%0A}'>this query</a>:
 
-![Overriding a default version constraint](https://raw.githubusercontent.com/getpop/api-graphql/master/assets/images/versioning-field-directives-4.jpg)
+![Overriding a default version constraint](https://raw.githubusercontent.com/pop-api/api-graphql/master/assets/images/versioning-field-directives-4.jpg)
 
 ## PHP versions
 
@@ -255,17 +255,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/getpop/api-graphql.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-api/api-graphql.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/getpop/api-graphql/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/api-graphql.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/api-graphql.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/getpop/api-graphql.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-api/api-graphql/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-api/api-graphql.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-api/api-graphql.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-api/api-graphql.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/getpop/api-graphql
-[link-travis]: https://travis-ci.org/getpop/api-graphql
-[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/api-graphql/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/getpop/api-graphql
-[link-downloads]: https://packagist.org/packages/getpop/api-graphql
+[link-packagist]: https://packagist.org/packages/pop-api/api-graphql
+[link-travis]: https://travis-ci.org/pop-api/api-graphql
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-api/api-graphql/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-api/api-graphql
+[link-downloads]: https://packagist.org/packages/pop-api/api-graphql
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

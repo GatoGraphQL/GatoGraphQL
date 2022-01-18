@@ -14,7 +14,7 @@
     "prefer-stable": true,
     "require": {
         "php": "~8.0",
-        "getpop/api-rest": "dev-master",
+        "pop-api/api-rest": "dev-master",
         "getpop/engine-wp-bootloader": "dev-master",
         "graphql-by-pop/graphiql": "dev-master",
         "graphql-by-pop/graphql-voyager": "dev-master",
