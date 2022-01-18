@@ -66,6 +66,7 @@ class GraphQLServer
             'nature' => RequestNature::QUERY_ROOT,
             'only-fieldname-as-outputkey' => true,
             'standard-graphql' => true,
+            'query' => '{}', // Added to avoid error message "The query in the body is empty"
         ];
     }
 
@@ -88,7 +89,7 @@ class GraphQLServer
         if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
             $appStateManager->override('requested-query', $fieldQuerySet->getRequestedFieldQuery());
         }
-        
+
         $engine = EngineFacade::getInstance();
         $engine->outputResponse();
     }
