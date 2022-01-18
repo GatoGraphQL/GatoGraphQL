@@ -79,8 +79,8 @@ class AppStateProvider extends AbstractAppStateProvider
         // Passing the query via URL param?
         /** @var ComponentModelComponentConfiguration */
         $componentModelComponentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
-        $enableModifyingEngineBehaviorViaRequestParams = $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequestParams();
-        $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequestParams);
+        $enableModifyingEngineBehaviorViaRequest = $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequest();
+        $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequest);
     }
 
     /**

@@ -55,13 +55,13 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
         $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
 
-        $enableModifyingEngineBehaviorViaRequestParams = $componentConfiguration->enableModifyingEngineBehaviorViaRequestParams();
-        $state['output'] = EngineRequest::getOutput($enableModifyingEngineBehaviorViaRequestParams);
-        $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequestParams);
-        $state['datasourceselector'] = EngineRequest::getDataSourceSelector($enableModifyingEngineBehaviorViaRequestParams);
-        $state['datastructure'] = EngineRequest::getDataStructure($enableModifyingEngineBehaviorViaRequestParams);
-        $state['dataoutputmode'] = EngineRequest::getDataOutputMode($enableModifyingEngineBehaviorViaRequestParams);
-        $state['dboutputmode'] = EngineRequest::getDBOutputMode($enableModifyingEngineBehaviorViaRequestParams);
-        $state['scheme'] = EngineRequest::getScheme($enableModifyingEngineBehaviorViaRequestParams);
+        $enableModifyingEngineBehaviorViaRequest = $componentConfiguration->enableModifyingEngineBehaviorViaRequest();
+        $state['output'] = EngineRequest::getOutput($enableModifyingEngineBehaviorViaRequest);
+        $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequest);
+        $state['datasourceselector'] = EngineRequest::getDataSourceSelector($enableModifyingEngineBehaviorViaRequest);
+        $state['datastructure'] = EngineRequest::getDataStructure($enableModifyingEngineBehaviorViaRequest);
+        $state['dataoutputmode'] = EngineRequest::getDataOutputMode($enableModifyingEngineBehaviorViaRequest);
+        $state['dboutputmode'] = EngineRequest::getDBOutputMode($enableModifyingEngineBehaviorViaRequest);
+        $state['scheme'] = EngineRequest::getScheme($enableModifyingEngineBehaviorViaRequest);
     }
 }

@@ -234,7 +234,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     /**
      * Indicate if users can add URL params that modify the Engine's behavior.
      */
-    public function enableModifyingEngineBehaviorViaRequestParams(): bool
+    public function enableModifyingEngineBehaviorViaRequest(): bool
     {
         /** @var RootComponentConfiguration */
         $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
@@ -242,7 +242,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
             return false;
         }
 
-        $envVariable = Environment::ENABLE_MODIFYING_ENGINE_BEHAVIOR_VIA_REQUEST_PARAMS;
+        $envVariable = Environment::ENABLE_MODIFYING_ENGINE_BEHAVIOR_VIA_REQUEST;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
