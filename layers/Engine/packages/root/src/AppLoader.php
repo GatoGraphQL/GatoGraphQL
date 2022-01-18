@@ -370,7 +370,7 @@ class AppLoader implements AppLoaderInterface
      *
      * @param array<string,mixed> $initialAppState
      */
-    protected function bootApplicationComponents(array $initialAppState = []): void
+    public function bootApplicationComponents(array $initialAppState = []): void
     {
         $initialAppState = array_merge(
             $this->initialAppState,
