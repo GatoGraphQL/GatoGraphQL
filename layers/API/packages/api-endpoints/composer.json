@@ -181,12 +181,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\APIEndpoints\\": "src"
+            "PoPAPI\\APIEndpoints\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\APIEndpoints\\": "tests"
+            "PoPAPI\\APIEndpoints\\": "tests"
         }
     },
     "scripts": {

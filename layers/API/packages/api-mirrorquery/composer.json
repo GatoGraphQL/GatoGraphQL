@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\APIMirrorQuery\\": "src"
+            "PoPAPI\\APIMirrorQuery\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\APIMirrorQuery\\": "tests"
+            "PoPAPI\\APIMirrorQuery\\": "tests"
         }
     },
     "scripts": {

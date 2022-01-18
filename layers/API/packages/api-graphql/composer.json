@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\GraphQLAPI\\": "src"
+            "PoPAPI\\GraphQLAPI\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\GraphQLAPI\\": "tests"
+            "PoPAPI\\GraphQLAPI\\": "tests"
         }
     },
     "scripts": {

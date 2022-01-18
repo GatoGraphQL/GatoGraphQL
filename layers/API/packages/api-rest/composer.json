@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\RESTAPI\\": "src"
+            "PoPAPI\\RESTAPI\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\RESTAPI\\": "tests"
+            "PoPAPI\\RESTAPI\\": "tests"
         }
     },
     "scripts": {

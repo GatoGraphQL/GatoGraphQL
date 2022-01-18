@@ -182,12 +182,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\APIEndpointsForWP\\": "src"
+            "PoPAPI\\APIEndpointsForWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\APIEndpointsForWP\\": "tests"
+            "PoPAPI\\APIEndpointsForWP\\": "tests"
         }
     },
     "scripts": {
