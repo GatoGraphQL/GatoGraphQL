@@ -49,11 +49,10 @@ return [
                 'tests',
             ])
             ->notPath([
-                // Exclude libraries ending in "-wp"
-                '#getpop/[a-zA-Z0-9_-]*-wp/#',
-                '#pop-cms-schema/[a-zA-Z0-9_-]*-wp/#',
-                '#graphql-by-pop/[a-zA-Z0-9_-]*-wp/#',
-                // Exclude libraries from WPSchema
+                // Exclude all libraries for WordPress
+                // 1. Exclude libraries ending in "-wp" from general packages
+                '#[getpop|graphql\-by\-pop|pop\-api|pop\-cms\-schema]/[a-zA-Z0-9_-]*-wp/#',
+                // 2. Exclude all libraries from WPSchema
                 '#pop-wp-schema/#',
                 // Exclude all composer.json from own libraries (they get broken!)
                 '#[getpop|graphql\-api|graphql\-by\-pop|pop\-api|pop\-backbone|pop\-cms\-schema|pop\-schema|pop\-wp\-schema]/*/composer.json#',
