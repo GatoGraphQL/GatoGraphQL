@@ -6,6 +6,8 @@ namespace PoPCMSSchema\QueriedObject\State;
 
 use PoP\Root\App;
 use PoPCMSSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
@@ -23,11 +25,14 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
-        [$queried_object, $queried_object_id] = [
-            $this->getCMSRoutingStateService()->getQueriedObject(),
-            $this->getCMSRoutingStateService()->getQueriedObjectId()
-        ];
-        $state['routing']['queried-object'] = $queried_object;
-        $state['routing']['queried-object-id'] = $queried_object_id;
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
+            $state['routing']['queried-object'] = $this->getCMSRoutingStateService()->getQueriedObject();
+            $state['routing']['queried-object-id'] = $this->getCMSRoutingStateService()->getQueriedObjectId();
+        } else {
+            $state['routing']['queried-object'] = null;
+            $state['routing']['queried-object-id'] = null;
+        }
     }
 }
