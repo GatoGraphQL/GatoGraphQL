@@ -19,4 +19,5 @@ interface ModuleProcessorInterface extends UpstreamModuleProcessorInterface
     public function getMutableonrequestConfiguration(array $module, array &$props): array;
     public function getRelevantRoute(array $module, array &$props): ?string;
     public function getRelevantRouteCheckpointTarget(array $module, array &$props): string;
+    public function getDataloadSource(array $module, array &$props): string;
 }
