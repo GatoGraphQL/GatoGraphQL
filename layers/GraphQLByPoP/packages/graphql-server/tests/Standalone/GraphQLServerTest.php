@@ -15,6 +15,6 @@ class GraphQLServerTest extends AbstractGraphQLServerTestCase
             ]
         ];
         $this->expectOutputString(json_encode($response));
-        self::$graphQLServer->execute($query);
+        self::getGraphQLServer()->execute($query);
     }
 }

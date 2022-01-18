@@ -9,13 +9,18 @@ use PHPUnit\Framework\TestCase;
 
 abstract class AbstractGraphQLServerTestCase extends TestCase
 {
-    protected static ?GraphQLServer $graphQLServer = null;
+    private static ?GraphQLServer $graphQLServer = null;
 
     public static function setUpBeforeClass(): void
     {
         if (self::$graphQLServer === null) {
             self::$graphQLServer = new GraphQLServer(static::getGraphQLServerComponentClasses());
         }
+    }
+
+    protected static function getGraphQLServer(): GraphQLServer
+    {
+        return self::$graphQLServer;
     }
 
     /**
