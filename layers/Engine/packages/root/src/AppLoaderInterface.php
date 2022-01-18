@@ -34,6 +34,13 @@ interface AppLoaderInterface
     public function setInitialAppState(array $initialAppState): void;
 
     /**
+     * Merge some initial state
+     *
+     * @param array<string,mixed> $initialAppState
+     */
+    public function mergeInitialAppState(array $initialAppState): void;
+
+    /**
      * Add schema Component classes to skip initializing
      *
      * @param string[] $skipSchemaComponentClasses List of `Component` class which must not initialize their Schema services
