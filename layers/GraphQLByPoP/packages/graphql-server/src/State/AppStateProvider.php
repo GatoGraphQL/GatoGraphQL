@@ -42,6 +42,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // The PQL always has nested mutations enabled. Only the for the standard GraphQL server
         // @todo Remove 'standard-graphql' and this temporary code!
         $standardGraphQL = true;//$state['standard-graphql'];
+        /** @phpstan-ignore-next-line */
         $state['nested-mutations-enabled'] = $standardGraphQL ?
             $componentConfiguration->enableNestedMutations()
             : true;

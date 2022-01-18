@@ -39,7 +39,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['executable-query'] = null;
         $state['requested-query'] = null;
         $state['does-api-query-have-errors'] = null;
-        
+
         // Passing the query via URL param?
         /** @var ComponentModelComponentConfiguration */
         $componentModelComponentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
