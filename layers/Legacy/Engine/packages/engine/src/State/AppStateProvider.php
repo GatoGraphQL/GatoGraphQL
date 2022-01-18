@@ -11,6 +11,9 @@ use PoP\Engine\Constants\Params;
 use PoP\Engine\ModuleFilters\HeadModule;
 use PoP\Engine\ModuleFilters\MainContentModule;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
+use PoP\Root\App;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
@@ -55,13 +58,25 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function augment(array &$state): void
     {
+        if ($state['modulefilter'] === null) {
+            return;
+        }
+
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        $enablePassingStateViaRequest = $rootComponentConfiguration->enablePassingStateViaRequest();
+
         if ($state['modulefilter'] === $this->headModule->getName()) {
-            if ($headmodule = $_REQUEST[Params::HEADMODULE] ?? null) {
-                $state['headmodule'] = ModuleUtils::getModuleFromOutputName($headmodule);
+            if ($enablePassingStateViaRequest) {
+                if ($headmodule = $_REQUEST[Params::HEADMODULE] ?? null) {
+                    $state['headmodule'] = ModuleUtils::getModuleFromOutputName($headmodule);
+                }
             }
         }
         if ($state['modulefilter'] === $this->modulePaths->getName()) {
-            $state['modulepaths'] = ModulePathUtils::getModulePaths();
+            if ($enablePassingStateViaRequest) {
+                $state['modulepaths'] = ModulePathUtils::getModulePaths();
+            }
         }
         // Function `getRouteModuleByMostAllmatchingVarsProperties` actually needs to access all values in $state
         // Hence, calculate only at the very end
