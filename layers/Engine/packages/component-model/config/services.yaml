@@ -90,6 +90,9 @@ services:
     PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathManager
 
+    PoP\ComponentModel\Modules\ModuleHelpersInterface:
+        class: \PoP\ComponentModel\Modules\ModuleHelpers
+
     default_data_structure_formatter:
         class: PoP\ComponentModel\DataStructure\DefaultDataStructureFormatter
         public: false
