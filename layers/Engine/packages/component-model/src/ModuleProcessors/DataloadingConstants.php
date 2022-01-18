@@ -10,6 +10,5 @@ class DataloadingConstants
     const DATASOURCE = 'datasource';
     const QUERYARGS = 'query-args';
     const QUERYARGSFILTERINGMODULES = 'query-args-filtering-modules';
-    const SOURCE = 'dataload-source';
     const IGNOREREQUESTPARAMS = 'ignore-request-params';
 }

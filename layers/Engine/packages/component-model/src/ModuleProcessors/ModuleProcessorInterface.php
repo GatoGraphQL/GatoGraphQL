@@ -65,7 +65,6 @@ interface ModuleProcessorInterface
     public function getDataAccessCheckpoints(array $module, array &$props): array;
     public function getActionExecutionCheckpoints(array $module, array &$props): array;
     public function shouldExecuteMutation(array $module, array &$props): bool;
-    public function getDataloadSource(array $module, array &$props): string;
     public function getModulesToPropagateDataProperties(array $module): array;
     public function getModelSupplementaryDBObjectDataModuletree(array $module, array &$props): array;
     public function getModelSupplementaryDBObjectData(array $module, array &$props): array;
