@@ -24,8 +24,10 @@ class AppStateManager implements AppStateManagerInterface
      * Called by the AppLoader to initalize the state.
      *
      * Initialize application state
+     *
+     * @param array<string,mixed> $initialAppState
      */
-    public function initializeAppState(): void
+    public function initializeAppState(array $initialAppState): void
     {
         $this->state = [];
         $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
@@ -35,6 +37,16 @@ class AppStateManager implements AppStateManagerInterface
         foreach ($appStateProviders as $appStateProvider) {
             $appStateProvider->initialize($this->state);
         }
+
+        /**
+         * Only now override with the initial state.
+         * Then we can set 'route' and 'nature' when passing state
+         * via $_REQUEST is disabled, as when running PHPUnit.
+         */
+        $this->state = array_merge(
+            $this->state,
+            $initialAppState
+        );
 
         // Second pass: consolidate
         foreach ($appStateProviders as $appStateProvider) {

@@ -39,6 +39,12 @@ class AppLoader implements AppLoaderInterface
      */
     protected array $componentClassConfiguration = [];
     /**
+     * [key]: State key, [value]: Value
+     *
+     * @var array<string,mixed>
+     */
+    protected array $initialAppState = [];
+    /**
      * List of `Component` class which must not initialize their Schema services
      *
      * @var string[]
@@ -71,7 +77,7 @@ class AppLoader implements AppLoaderInterface
      * @param array<string, array<string, mixed>> $componentClassConfiguration [key]: Component class, [value]: Configuration
      */
     public function addComponentClassConfiguration(
-        array $componentClassConfiguration = []
+        array $componentClassConfiguration
     ): void {
         // Allow to override entries under each Component
         foreach ($componentClassConfiguration as $componentClass => $componentConfiguration) {
@@ -81,6 +87,15 @@ class AppLoader implements AppLoaderInterface
                 $componentConfiguration
             );
         }
+    }
+
+    /**
+     * Set the initial state, eg: when passing state via $_REQUEST is disabled
+     *
+     * @param array<string,mixed> $initialAppState
+     */
+    public function setInitialAppState(array $initialAppState): void {
+        $this->initialAppState = $initialAppState;
     }
 
     /**
@@ -326,7 +341,7 @@ class AppLoader implements AppLoaderInterface
         App::getContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
 
         // Finally boot the components
-        $this->bootApplicationForComponents();
+        $this->bootApplicationForComponents($this->initialAppState);
     }
 
     public function skipSchemaForComponent(ComponentInterface $component): bool
@@ -340,12 +355,14 @@ class AppLoader implements AppLoaderInterface
 
     /**
      * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
-     * for them to execute any custom extra logic
+     * for them to execute any custom extra logic.
+     *
+     * @param array<string,mixed> $initialAppState
      */
-    protected function bootApplicationForComponents(): void
+    protected function bootApplicationForComponents(array $initialAppState): void
     {
         App::getComponentManager()->beforeBoot();
-        App::getAppStateManager()->initializeAppState();
+        App::getAppStateManager()->initializeAppState($initialAppState);
         App::getComponentManager()->boot();
         App::getComponentManager()->afterBoot();
 

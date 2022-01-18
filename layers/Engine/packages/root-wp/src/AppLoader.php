@@ -12,8 +12,10 @@ class AppLoader extends UpstreamAppLoader
 {
     /**
      * Override to execute logic on the proper WP action.
+     *
+     * @param array<string,mixed> $initialAppState
      */
-    protected function bootApplicationForComponents(): void
+    protected function bootApplicationForComponents(array $initialAppState): void
     {
         // Boot all the components
         App::getComponentManager()->beforeBoot();
@@ -46,7 +48,7 @@ class AppLoader extends UpstreamAppLoader
             // Override when the functionality is executed
             App::addAction(
                 $actionHook,
-                fn () => App::getAppStateManager()->initializeAppState(),
+                fn () => App::getAppStateManager()->initializeAppState($initialAppState),
                 0
             );
             App::addAction(
