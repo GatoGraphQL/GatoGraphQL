@@ -42,6 +42,12 @@ class GraphQLServer
         $appLoader->addComponentClassConfiguration($this->componentClassConfiguration);
 
         $appLoader->setInitialAppState($this->getGraphQLRequestAppState());
+
+        $appLoader->bootApplication(
+            $this->cacheContainerConfiguration,
+            $this->containerNamespace,
+            $this->containerDirectory
+        );
     }
 
     /**
@@ -61,18 +67,11 @@ class GraphQLServer
     public function execute(string $query, array $variables = []): void
     {
         $appLoader = App::getAppLoader();
-
-        // Same for the initial AppState
-        $appLoader->mergeInitialAppState([
+        $appLoader->bootApplicationComponents([
             'query' => $query,
             'variables' => $variables,
         ]);
-
-        $appLoader->bootApplication(
-            $this->cacheContainerConfiguration,
-            $this->containerNamespace,
-            $this->containerDirectory
-        );
+        
         $engine = EngineFacade::getInstance();
         $engine->outputResponse();
     }
