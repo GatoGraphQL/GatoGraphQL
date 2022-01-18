@@ -15,3 +15,6 @@ services:
 
     PoP\Root\Routing\RoutingHelperServiceInterface:
         class: \PoP\Root\Routing\RoutingHelperService
+
+    PoP\Root\State\:
+        resource: '../src/State/*'

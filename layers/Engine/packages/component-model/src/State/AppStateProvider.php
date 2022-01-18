@@ -13,14 +13,11 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
-use PoP\Root\Routing\RequestNature;
-use PoP\Root\Routing\RoutingManagerInterface;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModuleFilterManagerInterface $moduleFilterManager = null;
-    private ?RoutingManagerInterface $routingManager = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -38,14 +35,6 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
     }
-    final public function setRoutingManager(RoutingManagerInterface $routingManager): void
-    {
-        $this->routingManager = $routingManager;
-    }
-    final protected function getRoutingManager(): RoutingManagerInterface
-    {
-        return $this->routingManager ??= $this->instanceManager->getInstance(RoutingManagerInterface::class);
-    }
 
     public function initialize(array &$state): void
     {
@@ -53,8 +42,6 @@ class AppStateProvider extends AbstractAppStateProvider
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $componentConfiguration->mustNamespaceTypes();
 
-        $state['nature'] = $this->getRoutingManager()->getCurrentRequestNature();
-        $state['route'] = $this->getRoutingManager()->getCurrentRoute();
         $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
         $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
         $state['only-fieldname-as-outputkey'] = false;
@@ -75,16 +62,5 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['dataoutputmode'] = EngineRequest::getDataOutputMode($enableModifyingEngineBehaviorViaRequestParams);
         $state['dboutputmode'] = EngineRequest::getDBOutputMode($enableModifyingEngineBehaviorViaRequestParams);
         $state['scheme'] = EngineRequest::getScheme($enableModifyingEngineBehaviorViaRequestParams);
-
-        // Set the routing state under a unified entry
-        $state['routing'] = [];
-    }
-
-    public function augment(array &$state): void
-    {
-        $nature = $state['nature'];
-        $state['routing']['is-standard'] = $nature === RequestNature::GENERIC;
-        $state['routing']['is-home'] = $nature === RequestNature::HOME;
-        $state['routing']['is-404'] = $nature === RequestNature::NOTFOUND;
     }
 }
