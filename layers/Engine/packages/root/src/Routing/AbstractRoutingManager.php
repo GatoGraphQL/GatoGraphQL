@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Routing;
 
+use PoP\Root\Configuration\Request;
 use PoP\Root\Constants\Params;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -40,8 +41,9 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
         }
 
         // If having set URL param "route", then use it
-        if (isset($_REQUEST[Params::ROUTE])) {
-            return trim(strtolower($_REQUEST[Params::ROUTE]), '/');
+        $route = Request::getRoute();
+        if ($route !== null) {
+            return $route;
         }
 
         // By default, use the "main" route
