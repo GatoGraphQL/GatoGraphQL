@@ -56,7 +56,7 @@ return [
                 // Exclude libraries from WPSchema
                 '#pop-wp-schema/#',
                 // Exclude all composer.json from own libraries (they get broken!)
-                '#[getpop|pop\-backbone|pop\-schema|pop\-cms\-schema|pop\-wp\-schema|graphql\-by\-pop|graphql\-api]/*/composer.json#',
+                '#[getpop|graphql\-api|graphql\-by\-pop|pop\-api|pop\-backbone|pop\-cms\-schema|pop\-schema|pop\-wp\-schema]/*/composer.json#',
                 // Exclude libraries
                 '#symfony/deprecation-contracts/#',
                 '#ralouphie/getallheaders/#',
