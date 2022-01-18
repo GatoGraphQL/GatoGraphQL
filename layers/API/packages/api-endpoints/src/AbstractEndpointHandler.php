@@ -6,14 +6,9 @@ namespace PoPAPI\APIEndpoints;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
-abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiatedService
+abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiatedService implements EndpointHandlerInterface
 {
     protected ?string $endpoint = null;
-
-    /**
-     * Provide the endpoint
-     */
-    abstract protected function getEndpoint(): string;
 
     /**
      * Initialize the client
