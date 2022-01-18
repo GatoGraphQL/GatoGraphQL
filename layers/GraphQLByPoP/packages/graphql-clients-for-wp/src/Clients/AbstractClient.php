@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 
-use PoP\APIClients\ClientTrait;
-use PoP\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
+use PoPAPI\APIClients\ClientTrait;
+use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 
 abstract class AbstractClient extends AbstractEndpointHandler
 {

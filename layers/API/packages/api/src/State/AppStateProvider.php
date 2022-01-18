@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\State;
+namespace PoPAPI\API\State;
 
-use PoP\API\Component as APIComponent;
-use PoP\API\ComponentConfiguration as APIComponentConfiguration;
-use PoP\API\Configuration\EngineRequest;
-use PoP\API\Constants\Actions;
-use PoP\API\Facades\FieldQueryConvertorFacade;
-use PoP\API\PersistedQueries\PersistedQueryUtils;
-use PoP\API\Response\Schemes as APISchemes;
+use PoPAPI\API\Component as APIComponent;
+use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
+use PoPAPI\API\Configuration\EngineRequest;
+use PoPAPI\API\Constants\Actions;
+use PoPAPI\API\Facades\FieldQueryConvertorFacade;
+use PoPAPI\API\PersistedQueries\PersistedQueryUtils;
+use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Configuration;
+namespace PoPAPI\API\Configuration;
 
-use PoP\API\Constants\Params;
-use PoP\API\Environment;
+use PoPAPI\API\Constants\Params;
+use PoPAPI\API\Environment;
 
 class Request
 {

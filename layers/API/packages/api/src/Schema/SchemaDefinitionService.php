@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Schema;
+namespace PoPAPI\API\Schema;
 
 use PoP\Root\App;
 use Exception;
-use PoP\API\Cache\CacheTypes;
-use PoP\API\Component;
-use PoP\API\ComponentConfiguration;
-use PoP\API\ObjectModels\SchemaDefinition\DirectiveSchemaDefinitionProvider;
-use PoP\API\ObjectModels\SchemaDefinition\EnumTypeSchemaDefinitionProvider;
-use PoP\API\ObjectModels\SchemaDefinition\InputObjectTypeSchemaDefinitionProvider;
-use PoP\API\ObjectModels\SchemaDefinition\InterfaceTypeSchemaDefinitionProvider;
-use PoP\API\ObjectModels\SchemaDefinition\ObjectTypeSchemaDefinitionProvider;
-use PoP\API\ObjectModels\SchemaDefinition\RootObjectTypeSchemaDefinitionProvider;
-use PoP\API\ObjectModels\SchemaDefinition\ScalarTypeSchemaDefinitionProvider;
-use PoP\API\ObjectModels\SchemaDefinition\TypeSchemaDefinitionProviderInterface;
-use PoP\API\ObjectModels\SchemaDefinition\UnionTypeSchemaDefinitionProvider;
-use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
-use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
+use PoPAPI\API\Cache\CacheTypes;
+use PoPAPI\API\Component;
+use PoPAPI\API\ComponentConfiguration;
+use PoPAPI\API\ObjectModels\SchemaDefinition\DirectiveSchemaDefinitionProvider;
+use PoPAPI\API\ObjectModels\SchemaDefinition\EnumTypeSchemaDefinitionProvider;
+use PoPAPI\API\ObjectModels\SchemaDefinition\InputObjectTypeSchemaDefinitionProvider;
+use PoPAPI\API\ObjectModels\SchemaDefinition\InterfaceTypeSchemaDefinitionProvider;
+use PoPAPI\API\ObjectModels\SchemaDefinition\ObjectTypeSchemaDefinitionProvider;
+use PoPAPI\API\ObjectModels\SchemaDefinition\RootObjectTypeSchemaDefinitionProvider;
+use PoPAPI\API\ObjectModels\SchemaDefinition\ScalarTypeSchemaDefinitionProvider;
+use PoPAPI\API\ObjectModels\SchemaDefinition\TypeSchemaDefinitionProviderInterface;
+use PoPAPI\API\ObjectModels\SchemaDefinition\UnionTypeSchemaDefinitionProvider;
+use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
+use PoPAPI\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;

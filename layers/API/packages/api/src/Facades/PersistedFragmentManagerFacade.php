@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Facades;
+namespace PoPAPI\API\Facades;
 
 use PoP\Root\App;
-use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
+use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
 
 class PersistedFragmentManagerFacade
 {

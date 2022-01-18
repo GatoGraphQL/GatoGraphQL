@@ -7,7 +7,7 @@ namespace PoP\GraphQLAPI\DataStructureFormatters;
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use PoP\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
+use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 use PoP\ComponentModel\Feedback\Tokens;
 
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter

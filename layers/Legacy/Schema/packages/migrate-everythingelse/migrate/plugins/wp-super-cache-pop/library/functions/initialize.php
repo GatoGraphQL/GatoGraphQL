@@ -1,5 +1,5 @@
 <?php
-use PoP\API\Response\Schemes as APISchemes;
+use PoPAPI\API\Response\Schemes as APISchemes;
 
 // This is needed to set header Content-type: application/json when doing ?output=json
 // IMPORTANT: We can't call doingJSON yet, since it would generate the application state

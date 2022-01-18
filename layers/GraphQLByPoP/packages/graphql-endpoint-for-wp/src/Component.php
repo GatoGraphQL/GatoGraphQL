@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\APIEndpointsForWP\Component::class,
+            \PoPAPI\APIEndpointsForWP\Component::class,
             \PoP\GraphQLAPI\Component::class,
         ];
     }

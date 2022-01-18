@@ -20,6 +20,6 @@ services:
     PoP\Engine\Schema\SchemaDefinitionServiceInterface:
         class: \GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionService
 
-    PoP\API\Schema\SchemaDefinitionServiceInterface:
+    PoPAPI\API\Schema\SchemaDefinitionServiceInterface:
         class: \GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionService
         

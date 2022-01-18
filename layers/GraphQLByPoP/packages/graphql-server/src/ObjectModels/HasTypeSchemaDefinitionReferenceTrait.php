@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaHelpers;
-use PoP\API\Schema\SchemaDefinition;
+use PoPAPI\API\Schema\SchemaDefinition;
 
 trait HasTypeSchemaDefinitionReferenceTrait
 {

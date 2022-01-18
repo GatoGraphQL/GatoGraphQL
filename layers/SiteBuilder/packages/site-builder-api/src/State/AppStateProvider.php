@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\SiteBuilderAPI\State;
 
-use PoP\API\Response\Schemes as APISchemes;
+use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\StratumManagerFactory;
 use PoP\ConfigurationComponentModel\Constants\Stratum;
 use PoP\Root\State\AbstractAppStateProvider;

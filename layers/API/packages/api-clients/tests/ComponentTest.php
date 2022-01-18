@@ -1,6 +1,6 @@
 <?php
 
-namespace PoP\APIClients;
+namespace PoPAPI\APIClients;
 
 use PoP\Root\AbstractComponentTest;
 

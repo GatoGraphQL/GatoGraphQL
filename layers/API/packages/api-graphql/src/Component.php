@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\APIMirrorQuery\Component::class,
+            \PoPAPI\APIMirrorQuery\Component::class,
         ];
     }
 

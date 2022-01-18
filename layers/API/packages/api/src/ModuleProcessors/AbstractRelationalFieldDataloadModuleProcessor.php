@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\ModuleProcessors;
+namespace PoPAPI\API\ModuleProcessors;
 
-use PoP\API\Constants\Formats;
+use PoPAPI\API\Constants\Formats;
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
 
 abstract class AbstractRelationalFieldDataloadModuleProcessor extends AbstractDataloadModuleProcessor

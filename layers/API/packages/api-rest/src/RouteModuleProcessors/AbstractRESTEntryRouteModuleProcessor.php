@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\RESTAPI\RouteModuleProcessors;
 
 use PoP\Root\App;
-use PoP\API\Schema\FieldQueryConvertorInterface;
+use PoPAPI\API\Schema\FieldQueryConvertorInterface;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoP\RESTAPI\Helpers\HookHelpers;

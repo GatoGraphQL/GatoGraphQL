@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoP\APIEndpointsForWP\EndpointHandlers;
+namespace PoPAPI\APIEndpointsForWP\EndpointHandlers;
 
 use PoP\Root\App;
-use PoP\API\Component as APIComponent;
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\APIEndpointsForWP\Component;
-use PoP\APIEndpointsForWP\ComponentConfiguration;
+use PoPAPI\API\Component as APIComponent;
+use PoPAPI\API\Response\Schemes as APISchemes;
+use PoPAPI\APIEndpointsForWP\Component;
+use PoPAPI\APIEndpointsForWP\ComponentConfiguration;
 use PoP\ComponentModel\Constants\Params;
 
 class NativeAPIEndpointHandler extends AbstractEndpointHandler

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\ObjectModels\SchemaDefinition;
+namespace PoPAPI\API\ObjectModels\SchemaDefinition;
 
-use PoP\API\Schema\SchemaDefinition;
+use PoPAPI\API\Schema\SchemaDefinition;
 
 abstract class AbstractNamedTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
 {

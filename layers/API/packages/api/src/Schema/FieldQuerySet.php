@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Schema;
+namespace PoPAPI\API\Schema;
 
 /**
  * Object containing a pair of [requestedFieldQuery, executableFieldQuery]

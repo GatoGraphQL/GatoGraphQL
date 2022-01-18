@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\API;
+namespace PoPAPI\API;
 
 use PoP\Root\App;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
-use PoP\API\Configuration\Request;
+use PoPAPI\API\Configuration\Request;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\Root\Component\AbstractComponent;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\APIEndpointsForWP\EndpointHandlers;
+namespace PoPAPI\APIEndpointsForWP\EndpointHandlers;
 
-use PoP\APIEndpoints\AbstractEndpointHandler as UpstreamAbstractEndpointHandler;
+use PoPAPI\APIEndpoints\AbstractEndpointHandler as UpstreamAbstractEndpointHandler;
 
 abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
 {

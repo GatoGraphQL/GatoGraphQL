@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\APIClients;
+namespace PoPAPI\APIClients;
 
 use PoP\ComponentModel\Configuration\RequestHelpers;
 

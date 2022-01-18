@@ -7,8 +7,8 @@ namespace GraphQLByPoP\GraphQLRequest\State;
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLRequest\StaticHelpers\GraphQLQueryPayloadRetriever;
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\API\Routing\RequestNature;
+use PoPAPI\API\Response\Schemes as APISchemes;
+use PoPAPI\API\Routing\RequestNature;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\State\AbstractAppStateProvider;
 

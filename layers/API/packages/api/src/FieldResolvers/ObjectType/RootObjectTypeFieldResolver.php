@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\FieldResolvers\ObjectType;
+namespace PoPAPI\API\FieldResolvers\ObjectType;
 
-use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
-use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
-use PoP\API\Schema\SchemaDefinitionServiceInterface;
+use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
+use PoPAPI\API\PersistedQueries\PersistedQueryManagerInterface;
+use PoPAPI\API\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;

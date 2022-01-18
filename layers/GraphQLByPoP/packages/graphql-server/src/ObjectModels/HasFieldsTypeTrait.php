@@ -8,7 +8,7 @@ use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use PoP\API\Schema\SchemaDefinition;
+use PoPAPI\API\Schema\SchemaDefinition;
 
 trait HasFieldsTypeTrait
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\APIMirrorQuery\DataStructureFormatters;
+namespace PoPAPI\APIMirrorQuery\DataStructureFormatters;
 
 use PoP\ComponentModel\DataStructure\XMLDataStructureFormatterTrait;
 
