@@ -11,7 +11,7 @@ use PoPAPI\APIEndpointsForWP\State\AbstractAPIEndpointHandlerAppStateProvider;
 class NativeAPIEndpointHandlerAppStateProvider extends AbstractAPIEndpointHandlerAppStateProvider
 {
     private ?NativeAPIEndpointHandler $nativeAPIEndpointHandler = null;
-    
+
     final public function setNativeAPIEndpointHandler(NativeAPIEndpointHandler $nativeAPIEndpointHandler): void
     {
         $this->nativeAPIEndpointHandler = $nativeAPIEndpointHandler;

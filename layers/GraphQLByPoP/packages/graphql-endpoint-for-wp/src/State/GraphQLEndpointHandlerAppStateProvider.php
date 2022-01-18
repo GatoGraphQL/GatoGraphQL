@@ -13,7 +13,7 @@ class GraphQLEndpointHandlerAppStateProvider extends AbstractAPIEndpointHandlerA
 {
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
     private ?GraphQLEndpointHandler $graphQLEndpointHandler = null;
-    
+
     final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
