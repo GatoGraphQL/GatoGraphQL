@@ -13,10 +13,14 @@ use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
-class GraphQLServer
+class GraphQLServer implements GraphQLServerInterface
 {
     private array $componentClasses;
 
+    /**
+     * @param string[] $componentClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
+     * @param array<string,mixed> $componentClassConfiguration Predefined configuration for the components
+     */
     public function __construct(
         array $componentClasses,
         private array $componentClassConfiguration = [],
@@ -27,6 +31,8 @@ class GraphQLServer
         $this->componentClasses = array_merge(
             $componentClasses,
             [
+                // This is the one Component that is required to produce the GraphQL server.
+                // The other classes provide the schema and extra functionality.
                 \GraphQLByPoP\GraphQLServer\Component::class,
             ]
         );
@@ -91,10 +97,12 @@ class GraphQLServer
      */
     public function execute(string $query, array $variables = []): void
     {
+        // Override the state
         $appStateManager = App::getAppStateManager();
         $appStateManager->override('query', $query);
         $appStateManager->override('variables', $variables);
 
+        // Convert the query to AST and set on the state
         [$operationType, $fieldQuery] = GraphQLQueryConvertorFacade::getInstance()->convertFromGraphQLToFieldQuery(
             $query,
             $variables,
@@ -109,6 +117,7 @@ class GraphQLServer
             $appStateManager->override('requested-query', $fieldQuerySet->getRequestedFieldQuery());
         }
 
+        // Generate the data, print the response to buffer, and send headers
         $engine = EngineFacade::getInstance();
         $engine->outputResponse();
     }
