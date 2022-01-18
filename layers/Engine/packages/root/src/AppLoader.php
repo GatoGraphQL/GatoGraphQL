@@ -94,7 +94,8 @@ class AppLoader implements AppLoaderInterface
      *
      * @param array<string,mixed> $initialAppState
      */
-    public function setInitialAppState(array $initialAppState): void {
+    public function setInitialAppState(array $initialAppState): void
+    {
         $this->initialAppState = $initialAppState;
     }
 

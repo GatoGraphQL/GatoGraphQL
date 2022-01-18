@@ -21,7 +21,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
             $callback,
         );
     }
-    
+
     public function enablePassingRoutingStateViaRequest(): bool
     {
         if (!$this->enablePassingStateViaRequest()) {

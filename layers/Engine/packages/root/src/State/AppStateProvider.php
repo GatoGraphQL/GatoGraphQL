@@ -27,7 +27,7 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        
+
         if ($componentConfiguration->enablePassingRoutingStateViaRequest()) {
             $state['nature'] = $this->getRoutingManager()->getCurrentRequestNature();
             $state['route'] = $this->getRoutingManager()->getCurrentRoute();

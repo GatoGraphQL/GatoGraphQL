@@ -47,7 +47,7 @@ class AppStateProvider extends AbstractAppStateProvider
 
         $state['only-fieldname-as-outputkey'] = false;
         $state['are-mutations-enabled'] = true;
-        
+
         $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
         $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
 

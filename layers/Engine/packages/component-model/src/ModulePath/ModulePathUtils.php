@@ -25,7 +25,7 @@ class ModulePathUtils
         if ($paths === null) {
             return [];
         }
-        
+
         $modulePaths = [];
         if (!is_array($paths)) {
             $paths = array($paths);
