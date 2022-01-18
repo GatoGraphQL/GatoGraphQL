@@ -67,7 +67,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
     }
 
     /**
-     * @return string[]
+     * @return array<string[]>
      */
     public function getModulePaths(): array
     {
