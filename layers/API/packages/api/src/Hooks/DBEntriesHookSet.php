@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Hooks;
+namespace PoPAPI\API\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
@@ -23,14 +23,14 @@ class DBEntriesHookSet extends AbstractHookSet
     {
         // Enable to add all fields starting with "__" (such as "__schema") as meta
         $dbname_datafields['meta'] = App::applyFilters(
-            'PoP\API\DataloaderHooks:metaFields',
+            'PoPAPI\API\DataloaderHooks:metaFields',
             [
                 'fullSchema',
                 'typeName',
             ]
         );
         $dbname_datafields['context'] = App::applyFilters(
-            'PoP\API\DataloaderHooks:contextFields',
+            'PoPAPI\API\DataloaderHooks:contextFields',
             [
                 'var',
                 'context',

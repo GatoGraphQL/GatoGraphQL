@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLClientsForWP;
 
 use PoP\Root\Component\AbstractComponentConfiguration;
-use PoP\APIEndpoints\EndpointUtils;
+use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\Component\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration

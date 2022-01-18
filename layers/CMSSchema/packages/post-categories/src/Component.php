@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostCategories;
 
 use PoP\Root\App;
-use PoP\API\Component as APIComponent;
-use PoP\RESTAPI\Component as RESTAPIComponent;
+use PoPAPI\API\Component as APIComponent;
+use PoPAPI\RESTAPI\Component as RESTAPIComponent;
 use PoP\Root\Component\AbstractComponent;
 
 /**
@@ -33,8 +33,8 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoP\API\Component::class,
-            \PoP\RESTAPI\Component::class,
+            \PoPAPI\API\Component::class,
+            \PoPAPI\RESTAPI\Component::class,
         ];
     }
 

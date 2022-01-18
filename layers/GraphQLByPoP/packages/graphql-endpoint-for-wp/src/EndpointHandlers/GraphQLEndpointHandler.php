@@ -7,12 +7,12 @@ namespace GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers;
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLEndpointForWP\Component;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration;
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
+use PoPAPI\API\Response\Schemes as APISchemes;
+use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 use PoP\ComponentModel\Constants\Params;
 use PoP\Root\Services\BasicServiceTrait;
-use PoP\GraphQLAPI\Component as GraphQLAPIComponent;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GraphQLAPI\Component as GraphQLAPIComponent;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLEndpointHandler extends AbstractEndpointHandler
 {

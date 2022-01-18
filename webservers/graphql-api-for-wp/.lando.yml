@@ -21,17 +21,17 @@ services:
         - >-
           ../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp:/app/wordpress/wp-content/plugins/graphql-api
         - >-
-          ../../layers/API/packages/api-clients:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/api-clients
+          ../../layers/API/packages/api-clients:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-api/api-clients
         - >-
-          ../../layers/API/packages/api-endpoints-for-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/api-endpoints-for-wp
+          ../../layers/API/packages/api-endpoints-for-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-api/api-endpoints-for-wp
         - >-
-          ../../layers/API/packages/api-endpoints:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/api-endpoints
+          ../../layers/API/packages/api-endpoints:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-api/api-endpoints
         - >-
-          ../../layers/API/packages/api-graphql:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/api-graphql
+          ../../layers/API/packages/api-graphql:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-api/api-graphql
         - >-
-          ../../layers/API/packages/api-mirrorquery:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/api-mirrorquery
+          ../../layers/API/packages/api-mirrorquery:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-api/api-mirrorquery
         - >-
-          ../../layers/API/packages/api:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/api
+          ../../layers/API/packages/api:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-api/api
         - >-
           ../../layers/Backbone/packages/graphql-parser:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-backbone/graphql-parser
         - >-

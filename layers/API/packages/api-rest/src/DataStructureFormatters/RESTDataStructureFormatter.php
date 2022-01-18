@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\RESTAPI\DataStructureFormatters;
+namespace PoPAPI\RESTAPI\DataStructureFormatters;
 
-use PoP\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
+use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 use PoP\ComponentModel\Engine\EngineInterface;
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter

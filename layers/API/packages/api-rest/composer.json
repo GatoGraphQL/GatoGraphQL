@@ -1,5 +1,5 @@
 {
-    "name": "getpop/api-rest",
+    "name": "pop-api/api-rest",
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
@@ -20,11 +20,11 @@
         "getpop/query-parsing": "<0.8.9",
         "getpop/field-query": "<0.8.9",
         "getpop/cache-control": "<0.8.9",
-        "getpop/api-graphql": "<0.8.9",
-        "getpop/api-endpoints": "<0.8.9",
-        "getpop/api-endpoints-for-wp": "<0.8.9",
-        "getpop/api": "<0.8.9",
-        "getpop/api-clients": "<0.8.9",
+        "pop-api/api-graphql": "<0.8.9",
+        "pop-api/api-endpoints": "<0.8.9",
+        "pop-api/api-endpoints-for-wp": "<0.8.9",
+        "pop-api/api": "<0.8.9",
+        "pop-api/api-clients": "<0.8.9",
         "pop-cms-schema/post-category-mutations": "<0.8.9",
         "pop-cms-schema/settings": "<0.8.9",
         "pop-cms-schema/user-state-access-control": "<0.8.9",
@@ -154,7 +154,7 @@
     "type": "library",
     "description": "Create REST endpoints in the PoP API",
     "keywords": ["PHP", "PoP", "api-rest"],
-    "homepage": "https://github.com/getpop/api-rest",
+    "homepage": "https://github.com/pop-api/api-rest",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -165,7 +165,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/api-mirrorquery": "^0.9"
+        "pop-api/api-mirrorquery": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.0",
@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\RESTAPI\\": "src"
+            "PoPAPI\\RESTAPI\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\RESTAPI\\": "tests"
+            "PoPAPI\\RESTAPI\\": "tests"
         }
     },
     "scripts": {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Configuration;
+namespace PoPAPI\API\Configuration;
 
-use PoP\API\Schema\QueryInputs;
+use PoPAPI\API\Schema\QueryInputs;
 
 /**
  * @see layers/Engine/packages/component-model/src/Configuration/EngineRequest.php

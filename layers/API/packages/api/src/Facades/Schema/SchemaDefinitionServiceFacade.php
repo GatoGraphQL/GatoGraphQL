@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Facades\Schema;
+namespace PoPAPI\API\Facades\Schema;
 
 use PoP\Root\App;
-use PoP\API\Schema\SchemaDefinitionServiceInterface;
+use PoPAPI\API\Schema\SchemaDefinitionServiceInterface;
 
 class SchemaDefinitionServiceFacade
 {

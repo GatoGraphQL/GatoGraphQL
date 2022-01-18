@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnComponent\API\ModuleProcessors;
 
 use PoP\Root\App;
-use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
+use PoPAPI\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;

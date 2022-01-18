@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Engine;
+namespace PoPAPI\API\Engine;
 
 use PoP\Root\App;
-use PoP\API\Component as APIComponent;
-use PoP\API\Constants\Actions;
-use PoP\API\Response\Schemes as APISchemes;
+use PoPAPI\API\Component as APIComponent;
+use PoPAPI\API\Constants\Actions;
+use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Constants\DataOutputModes;
 
 trait RemoveEntryModuleFromOutputEngineTrait

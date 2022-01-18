@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Hooks;
+namespace PoPAPI\API\Hooks;
 
-use PoP\API\Response\Schemes as APISchemes;
+use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 

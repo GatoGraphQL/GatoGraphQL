@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\APIClients;
+namespace PoPAPI\APIClients;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\APIEndpoints\Component::class,
+            \PoPAPI\APIEndpoints\Component::class,
         ];
     }
 }

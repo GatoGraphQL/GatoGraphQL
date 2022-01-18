@@ -1,6 +1,6 @@
 <?php
 
-use PoP\API\Response\Schemes as APISchemes;
+use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
@@ -17,7 +17,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
     //     $ret = array();
 
     //     // API
-    //     if (!\PoP\API\Environment::disableAPI()) {
+    //     if (!\PoPAPI\API\Environment::disableAPI()) {
     //         // Home
     //         $ret[RequestNature::HOME][] = [
     //             'module' => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
@@ -38,7 +38,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
         $ret = array();
 
         // API
-        if (!\PoP\API\Environment::disableAPI()) {
+        if (!\PoPAPI\API\Environment::disableAPI()) {
 
             // Page
             $routemodules = array(
@@ -116,6 +116,6 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
  */
 add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-    new PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor(new \PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter())
+    new PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor(new \PoPAPI\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter())
 	);
 }, 888200);

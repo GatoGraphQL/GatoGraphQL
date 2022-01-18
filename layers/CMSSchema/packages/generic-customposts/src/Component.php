@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\GenericCustomPosts;
 
 use PoP\Root\App;
-use PoP\API\Component as APIComponent;
+use PoPAPI\API\Component as APIComponent;
 use PoP\Root\Component\AbstractComponent;
 
 /**
@@ -31,7 +31,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoP\API\Component::class,
+            \PoPAPI\API\Component::class,
         ];
     }
 

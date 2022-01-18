@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\RESTAPI\RouteModuleProcessors;
+namespace PoPAPI\RESTAPI\RouteModuleProcessors;
 
-use PoP\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\API\Routing\RequestNature;
+use PoPAPI\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
+use PoPAPI\API\Response\Schemes as APISchemes;
+use PoPAPI\API\Routing\RequestNature;
 use PoP\Root\App;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor

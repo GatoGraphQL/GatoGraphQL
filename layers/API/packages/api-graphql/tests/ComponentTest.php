@@ -1,6 +1,6 @@
 <?php
 
-namespace PoP\GraphQLAPI;
+namespace PoPAPI\GraphQLAPI;
 
 use PoP\Root\AbstractComponentTest;
 

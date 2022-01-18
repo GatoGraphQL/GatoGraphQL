@@ -1,6 +1,6 @@
 <?php
 
-namespace PoP\APIMirrorQuery;
+namespace PoPAPI\APIMirrorQuery;
 
 use PoP\Root\AbstractComponentTest;
 

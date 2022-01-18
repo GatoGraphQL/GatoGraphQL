@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\PersistedQueries;
+namespace PoPAPI\API\PersistedQueries;
 
-use PoP\API\Schema\QuerySymbols;
-use PoP\API\Schema\SchemaDefinition;
+use PoPAPI\API\Schema\QuerySymbols;
+use PoPAPI\API\Schema\SchemaDefinition;
 
 abstract class AbstractPersistedQueryManager implements PersistedQueryManagerInterface
 {

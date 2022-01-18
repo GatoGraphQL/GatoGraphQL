@@ -1,6 +1,6 @@
 <?php
 
-namespace PoP\APIEndpointsForWP;
+namespace PoPAPI\APIEndpointsForWP;
 
 use PoP\Root\AbstractComponentTest;
 

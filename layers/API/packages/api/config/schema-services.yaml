@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoP\API\DirectiveResolvers\:
+    PoPAPI\API\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
 
-    PoP\API\FieldResolvers\:
+    PoPAPI\API\FieldResolvers\:
         resource: '../src/FieldResolvers/*'

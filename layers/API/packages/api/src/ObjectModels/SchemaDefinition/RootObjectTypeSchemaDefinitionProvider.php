@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\ObjectModels\SchemaDefinition;
+namespace PoPAPI\API\ObjectModels\SchemaDefinition;
 
 use PoP\Root\App;
-use PoP\API\Component;
-use PoP\API\ComponentConfiguration;
-use PoP\API\Schema\SchemaDefinition;
+use PoPAPI\API\Component;
+use PoPAPI\API\ComponentConfiguration;
+use PoPAPI\API\Schema\SchemaDefinition;
 
 /**
  * The RootObject has the special role of also calculating the

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\ObjectModels\SchemaDefinition;
+namespace PoPAPI\API\ObjectModels\SchemaDefinition;
 
-use PoP\API\Schema\SchemaDefinition;
-use PoP\API\Schema\TypeKinds;
+use PoPAPI\API\Schema\SchemaDefinition;
+use PoPAPI\API\Schema\TypeKinds;
 use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 
 class ScalarTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitionProvider

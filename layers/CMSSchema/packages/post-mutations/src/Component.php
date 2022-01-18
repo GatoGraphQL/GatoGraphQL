@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMutations;
 
 use PoP\Root\App;
-use PoP\API\Component as APIComponent;
+use PoPAPI\API\Component as APIComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoPCMSSchema\Users\Component as UsersComponent;
 
@@ -33,7 +33,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoP\API\Component::class,
+            \PoPAPI\API\Component::class,
             \PoPCMSSchema\Users\Component::class,
         ];
     }

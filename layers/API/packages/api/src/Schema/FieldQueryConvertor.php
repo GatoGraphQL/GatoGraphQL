@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Schema;
+namespace PoPAPI\API\Schema;
 
 use PoP\Root\App;
-use PoP\API\Component;
-use PoP\API\ComponentConfiguration;
-use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
-use PoP\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;
-use PoP\API\Schema\QuerySyntax as APIQuerySyntax;
+use PoPAPI\API\Component;
+use PoPAPI\API\ComponentConfiguration;
+use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
+use PoPAPI\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;
+use PoPAPI\API\Schema\QuerySyntax as APIQuerySyntax;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;

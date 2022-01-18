@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             // \PoP\ComponentModelConfiguration\Component::class,
-            \PoP\API\Component::class,
+            \PoPAPI\API\Component::class,
             \PoP\EmojiDefinitions\Component::class,
             \PoP\DefinitionPersistence\Component::class,
         ];

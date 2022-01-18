@@ -1,9 +1,9 @@
 {
-    "name": "getpop/api-endpoints-for-wp",
+    "name": "pop-api/api-endpoints-for-wp",
     "type": "library",
     "description": "Add pretty permalinks for the PoP API endpoints, for WordPress",
     "keywords": ["PHP", "PoP", "api-endpoints-for-wp"],
-    "homepage": "https://github.com/getpop/api-endpoints-for-wp",
+    "homepage": "https://github.com/pop-api/api-endpoints-for-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -20,7 +20,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/api-endpoints": "^0.9"
+        "pop-api/api-endpoints": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
@@ -49,11 +49,11 @@
         "getpop/query-parsing": "<0.8.9",
         "getpop/field-query": "<0.8.9",
         "getpop/cache-control": "<0.8.9",
-        "getpop/api-rest": "<0.8.9",
-        "getpop/api-graphql": "<0.8.9",
-        "getpop/api": "<0.8.9",
-        "getpop/api-clients": "<0.8.9",
-        "getpop/api-mirrorquery": "<0.8.9",
+        "pop-api/api-rest": "<0.8.9",
+        "pop-api/api-graphql": "<0.8.9",
+        "pop-api/api": "<0.8.9",
+        "pop-api/api-clients": "<0.8.9",
+        "pop-api/api-mirrorquery": "<0.8.9",
         "pop-cms-schema/post-category-mutations": "<0.8.9",
         "pop-cms-schema/settings": "<0.8.9",
         "pop-cms-schema/user-state-access-control": "<0.8.9",
@@ -182,12 +182,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\APIEndpointsForWP\\": "src"
+            "PoPAPI\\APIEndpointsForWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\APIEndpointsForWP\\": "tests"
+            "PoPAPI\\APIEndpointsForWP\\": "tests"
         }
     },
     "scripts": {

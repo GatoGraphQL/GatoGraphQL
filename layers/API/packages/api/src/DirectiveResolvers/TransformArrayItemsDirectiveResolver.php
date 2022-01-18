@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\DirectiveResolvers;
+namespace PoPAPI\API\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;

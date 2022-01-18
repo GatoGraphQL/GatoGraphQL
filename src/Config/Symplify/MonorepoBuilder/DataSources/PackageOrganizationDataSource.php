@@ -16,7 +16,7 @@ class PackageOrganizationDataSource
     public function getPackagePathOrganizations(): array
     {
         return [
-            'layers/API/packages' => 'getpop',
+            'layers/API/packages' => 'PoP-PoPAPI',
             'layers/Backbone/packages' => 'PoPBackbone',
             'layers/CMSSchema/packages' => 'PoPCMSSchema',
             'layers/Engine/packages' => 'getpop',

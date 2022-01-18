@@ -1,6 +1,6 @@
 <?php
 
-namespace PoP\APIEndpoints;
+namespace PoPAPI\APIEndpoints;
 
 use PoP\Root\AbstractComponentTest;
 

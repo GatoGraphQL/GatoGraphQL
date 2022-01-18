@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostCategories\ConditionalOnComponent\API\RouteModuleProcessors;
 
 use PoP\Root\App;
-use PoP\API\Response\Schemes as APISchemes;
+use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Categories\Routing\RequestNature as CategoryRequestNature;

@@ -16,7 +16,7 @@ Utilities for implementing API endpoints
 Via Composer
 
 ``` bash
-composer require getpop/api-endpoints
+composer require pop-api/api-endpoints
 ```
 
 ## Development
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \PoP\APIEndpoints\Component::class,
+    \PoPAPI\APIEndpoints\Component::class,
 ]);
 ```
 
@@ -103,17 +103,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/getpop/api-endpoints.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-api/api-endpoints.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/getpop/api-endpoints/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/api-endpoints.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/api-endpoints.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/getpop/api-endpoints.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-api/api-endpoints/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-api/api-endpoints.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-api/api-endpoints.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-api/api-endpoints.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/getpop/api-endpoints
-[link-travis]: https://travis-ci.org/getpop/api-endpoints
-[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/api-endpoints/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/getpop/api-endpoints
-[link-downloads]: https://packagist.org/packages/getpop/api-endpoints
+[link-packagist]: https://packagist.org/packages/pop-api/api-endpoints
+[link-travis]: https://travis-ci.org/pop-api/api-endpoints
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-api/api-endpoints/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-api/api-endpoints
+[link-downloads]: https://packagist.org/packages/pop-api/api-endpoints
 [link-author]: https://github.com/getpop
 [link-contributors]: ../../../../../../contributors

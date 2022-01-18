@@ -16,11 +16,11 @@ services:
       environment:
         XDEBUG_MODE:
       volumes:
-        - '../../layers/API/packages/api-graphql:/app/vendor/getpop/api-graphql'
+        - '../../layers/API/packages/api-graphql:/app/vendor/pop-api/api-graphql'
         - >-
-          ../../layers/API/packages/api-mirrorquery:/app/vendor/getpop/api-mirrorquery
-        - '../../layers/API/packages/api-rest:/app/vendor/getpop/api-rest'
-        - '../../layers/API/packages/api:/app/vendor/getpop/api'
+          ../../layers/API/packages/api-mirrorquery:/app/vendor/pop-api/api-mirrorquery
+        - '../../layers/API/packages/api-rest:/app/vendor/pop-api/api-rest'
+        - '../../layers/API/packages/api:/app/vendor/pop-api/api'
         - >-
           ../../layers/Backbone/packages/graphql-parser:/app/vendor/pop-backbone/graphql-parser
         - >-

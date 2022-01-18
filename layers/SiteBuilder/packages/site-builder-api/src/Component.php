@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\SiteBuilderAPI;
 
-use PoP\API\Environment;
+use PoPAPI\API\Environment;
 use PoP\Root\Component\AbstractComponent;
 
 /**
@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\API\Component::class,
+            \PoPAPI\API\Component::class,
         ];
     }
 

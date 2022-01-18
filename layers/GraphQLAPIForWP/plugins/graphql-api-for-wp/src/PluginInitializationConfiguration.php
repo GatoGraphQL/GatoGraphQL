@@ -615,9 +615,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
         ];
-        $componentClassConfiguration[\PoP\APIEndpointsForWP\Component::class] = [
+        $componentClassConfiguration[\PoPAPI\APIEndpointsForWP\Component::class] = [
             // Disable the Native endpoint
-            \PoP\APIEndpointsForWP\Environment::DISABLE_NATIVE_API_ENDPOINT => true,
+            \PoPAPI\APIEndpointsForWP\Environment::DISABLE_NATIVE_API_ENDPOINT => true,
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class] = [
             // Expose the "self" field when doing Low Level Query Editing
@@ -625,11 +625,11 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Do not send proactive deprecations
             GraphQLServerEnvironment::ENABLE_PROACTIVE_FEEDBACK_DEPRECATIONS => false,
         ];
-        $componentClassConfiguration[\PoP\API\Component::class] = [
+        $componentClassConfiguration[\PoPAPI\API\Component::class] = [
             // Do not expose global fields
-            \PoP\API\Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA => true,
+            \PoPAPI\API\Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA => true,
             // Enable Mutations?
-            \PoP\API\Environment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS),
+            \PoPAPI\API\Environment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS),
         ];
 
         // If doing ?behavior=unrestricted, always enable certain features

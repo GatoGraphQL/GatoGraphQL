@@ -12,7 +12,7 @@ class DBEntriesHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            'PoP\API\DataloaderHooks:metaFields',
+            'PoPAPI\API\DataloaderHooks:metaFields',
             array($this, 'moveEntriesUnderDBName')
         );
     }

@@ -6,8 +6,8 @@ namespace GraphQLAPI\GraphQLAPI\State;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\API\Response\Schemes as APISchemes;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\Routing\RequestNature;
 use PoP\Root\State\AbstractAppStateProvider;
 

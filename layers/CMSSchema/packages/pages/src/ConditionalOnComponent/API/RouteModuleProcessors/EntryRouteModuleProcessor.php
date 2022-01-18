@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Pages\ConditionalOnComponent\API\RouteModuleProcessors;
 
-use PoP\API\Response\Schemes as APISchemes;
+use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoPCMSSchema\Pages\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPCMSSchema\Pages\Routing\RequestNature;

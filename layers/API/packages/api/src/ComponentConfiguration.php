@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\API;
+namespace PoPAPI\API;
 
 use PoP\Root\App;
 use PoP\Root\Component\AbstractComponentConfiguration;

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Pages\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
 use PoP\Root\App;
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
+use PoPAPI\API\Response\Schemes as APISchemes;
+use PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoPCMSSchema\Pages\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPCMSSchema\Pages\Routing\RequestNature;
 

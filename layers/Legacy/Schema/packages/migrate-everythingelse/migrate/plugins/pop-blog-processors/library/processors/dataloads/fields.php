@@ -1,5 +1,5 @@
 <?php
-use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
+use PoPAPI\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;

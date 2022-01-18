@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\APIEndpointsForWP;
+namespace PoPAPI\APIEndpointsForWP;
 
 class Environment
 {

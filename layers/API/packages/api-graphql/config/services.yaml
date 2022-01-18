@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\GraphQLAPI\DataStructureFormatters\:
+    PoPAPI\GraphQLAPI\DataStructureFormatters\:
         resource: '../src/DataStructureFormatters/*'
