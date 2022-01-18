@@ -10,7 +10,6 @@ use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
-use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\State\AbstractAppStateProvider;
 
@@ -29,9 +28,6 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
-        $state['nested-mutations-enabled'] = null;
-        $state['graphql-introspection-enabled'] = null;
-
         /** @var RootComponentConfiguration */
         $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
         if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
@@ -39,19 +35,15 @@ class AppStateProvider extends AbstractAppStateProvider
         } else {
             $state['edit-schema'] = null;
         }
-    }
-
-    public function consolidate(array &$state): void
-    {
-        if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
-            return;
-        }
 
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
 
         // The PQL always has nested mutations enabled. Only the for the standard GraphQL server
-        $state['nested-mutations-enabled'] = $state['standard-graphql'] ?
+        // @todo Remove 'standard-graphql' and this temporary code!
+        $standardGraphQL = true;//$state['standard-graphql'];
+        /** @phpstan-ignore-next-line */
+        $state['nested-mutations-enabled'] = $standardGraphQL ?
             $componentConfiguration->enableNestedMutations()
             : true;
 
@@ -59,8 +51,6 @@ class AppStateProvider extends AbstractAppStateProvider
         // Otherwise, use the defaults:
         // By default, Standard GraphQL has introspection enabled, and PQL is not
         $enableGraphQLIntrospection = $componentConfiguration->enableGraphQLIntrospection();
-        $state['graphql-introspection-enabled'] = $enableGraphQLIntrospection !== null ?
-            $enableGraphQLIntrospection
-            : $state['standard-graphql'];
+        $state['graphql-introspection-enabled'] = $enableGraphQLIntrospection ?? $standardGraphQL;
     }
 }
