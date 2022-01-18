@@ -367,17 +367,11 @@ class AppLoader implements AppLoaderInterface
     /**
      * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
      * for them to execute any custom extra logic.
-     *
-     * @param array<string,mixed> $initialAppState
      */
-    public function bootApplicationComponents(array $initialAppState = []): void
+    public function bootApplicationComponents(): void
     {
-        $initialAppState = array_merge(
-            $this->initialAppState,
-            $initialAppState
-        );
         App::getComponentManager()->beforeBoot();
-        App::getAppStateManager()->initializeAppState($initialAppState);
+        App::getAppStateManager()->initializeAppState($this->initialAppState);
         App::getComponentManager()->boot();
         App::getComponentManager()->afterBoot();
 
