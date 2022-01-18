@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
@@ -58,13 +57,13 @@ abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine
 
         $segmentedbuttons = $this->getSegmentedbuttonSubmodules($module);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['segmentedbuttons'] = array_map(
-            [ModuleUtils::class, 'getModuleOutputName'], 
+            [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
             $segmentedbuttons
         );
 
         $segmentedbuttons = $this->getDropdownsegmentedbuttonSubmodules($module);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['dropdownsegmentedbuttons'] = array_map(
-            [ModuleUtils::class, 'getModuleOutputName'], 
+            [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
             $segmentedbuttons
         );
 

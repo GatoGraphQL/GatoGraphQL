@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
 {
@@ -70,8 +69,8 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
 
         $locations_typeahead = $this->getLocationsTypeaheadSubmodule($module);
         $map_module = $this->getMapSubmodule($module);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-individual'] = ModuleUtils::getModuleOutputName($map_module);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['locations'] = ModuleUtils::getModuleOutputName($locations_typeahead);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-individual'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($map_module);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['locations'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($locations_typeahead);
 
         $ret[GD_JS_CLASSES]['wrapper'] = $this->getProp($module, $props, 'wrapper-class');
         $ret[GD_JS_CLASSES]['map'] = $this->getProp($module, $props, 'map-class');

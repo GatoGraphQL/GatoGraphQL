@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -102,7 +101,7 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataModul
 
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $buttoninner = $this->getButtoninnerSubmodule($module);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['buttoninner'] = ModuleUtils::getModuleOutputName($buttoninner);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['buttoninner'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($buttoninner);
 
         return $ret;
     }

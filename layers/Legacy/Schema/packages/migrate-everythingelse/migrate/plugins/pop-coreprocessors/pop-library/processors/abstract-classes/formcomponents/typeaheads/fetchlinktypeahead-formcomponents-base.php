@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_FetchlinkTypeaheadFormComponentsBase extends PoP_Module_Processor_TypeaheadFormComponentsBase
 {
@@ -40,7 +39,7 @@ abstract class PoP_Module_Processor_FetchlinkTypeaheadFormComponentsBase extends
         // Hack: re-use multiple.tmpl
         $input = $this->getInputSubmodule($module);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = [
-            ModuleUtils::getModuleOutputName($input),
+            \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($input),
         ];
 
         return $ret;

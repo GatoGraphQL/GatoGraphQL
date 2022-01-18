@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -54,8 +53,8 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
         $mapdiv = $this->getMapdivSubmodule($module);
         $form = $this->getFormSubmodule($module);
 
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['form-createlocation'] = ModuleUtils::getModuleOutputName($form);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-div'] = ModuleUtils::getModuleOutputName($mapdiv);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['form-createlocation'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($form);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-div'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($mapdiv);
 
         return $ret;
     }

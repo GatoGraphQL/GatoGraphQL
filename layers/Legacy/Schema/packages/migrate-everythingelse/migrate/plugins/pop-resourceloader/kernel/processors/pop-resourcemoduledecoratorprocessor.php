@@ -2,7 +2,6 @@
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProcessor {
 
@@ -57,7 +56,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     function getDynamicResourcesMergedmoduletree(array $module, array &$props) {
 
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
 
         // If the module path has been set to true, then from this module downwards all modules are dynamic
         if ($this->isDynamicModule($module, $props)) {
@@ -131,7 +130,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     function getDynamicTemplateResourcesMergedmoduletree(array $module, array &$props) {
 
         $processor = $this->getDecoratedmoduleProcessor($module);
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();

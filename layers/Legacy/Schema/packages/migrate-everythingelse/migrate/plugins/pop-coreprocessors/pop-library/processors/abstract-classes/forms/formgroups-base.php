@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -68,7 +67,7 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataMo
 
         $component = $this->getComponentSubmodule($module);
         $component_processor = $moduleprocessor_manager->getProcessor($component);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['component'] = ModuleUtils::getModuleOutputName($component);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['component'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($component);
 
         // Re-use the label from the component
         if ($label = $this->getProp($module, $props, 'label')) {

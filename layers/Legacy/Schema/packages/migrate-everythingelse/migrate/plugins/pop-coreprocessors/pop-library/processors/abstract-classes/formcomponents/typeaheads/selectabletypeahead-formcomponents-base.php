@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extends PoP_Module_Processor_TypeaheadFormComponentsBase
 {
@@ -105,7 +104,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         $trigger_layout = $this->getTriggerLayoutSubmodule($module);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['trigger-layout'] = ModuleUtils::getModuleOutputName($trigger_layout);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($trigger_layout);
 
         if ($maxSelected = $this->getProp($module, $props, 'max-selected')) {
             $ret['max-selected'] = $maxSelected;

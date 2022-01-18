@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\FormInputs\FormInput;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class AbstractFormInputModuleProcessor extends AbstractQueryDataModuleProcessor implements FormInputModuleProcessorInterface
 {
@@ -53,7 +52,7 @@ abstract class AbstractFormInputModuleProcessor extends AbstractQueryDataModuleP
     // load that same module (it just accesses directly its value), then it fails retrieving the value since it tries get it from a different field name
     public function getName(array $module): string
     {
-        return ModuleUtils::getModuleOutputName($module);
+        return $this->getModuleHelpers()->getModuleOutputName($module);
     }
 
     public function getValue(array $module, ?array $source = null): mixed

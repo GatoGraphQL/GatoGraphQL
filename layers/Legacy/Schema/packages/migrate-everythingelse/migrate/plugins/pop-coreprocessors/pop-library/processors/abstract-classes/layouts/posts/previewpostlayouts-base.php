@@ -4,7 +4,6 @@ define('GD_CONSTANT_AUTHORPOSITION_ABOVETITLE', 'abovetitle');
 define('GD_CONSTANT_AUTHORPOSITION_BELOWCONTENT', 'belowcontent');
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Processor_PreviewObjectLayoutsBase
@@ -204,48 +203,48 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
 
         if ($belowthumb_modules = $this->getBelowthumbLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowthumb'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $belowthumb_modules
             );
         }
         if ($abovecontent_modules = $this->getAbovecontentSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovecontent'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $abovecontent_modules
             );
         }
         if ($belowcontent_modules = $this->getBelowcontentSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowcontent'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $belowcontent_modules
             );
         }
         if ($top_modules = $this->getTopSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['top'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $top_modules
             );
         }
         if ($bottom_modules = $this->getPreviewpostBottomSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $bottom_modules
             );
         }
         if ($beforecontent_modules = $this->getBeforecontentSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['beforecontent'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $beforecontent_modules
             );
         }
         if ($aftercontent_modules = $this->getAftercontentSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['aftercontent'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $aftercontent_modules
             );
         }
         if ($author_module = $this->getAuthorModule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['authors'] = ModuleUtils::getModuleOutputName($author_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($author_module);
             $ret['authors-position'] = $this->authorPositions($module);
             $ret['authors-sep'] = $this->getAuthorsSeparator($module, $props);
             if ($title_beforeauthors = $this->getTitleBeforeauthors($module, $props)) {
@@ -266,14 +265,14 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
         }
 
         if ($content_module = $this->getContentSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = ModuleUtils::getModuleOutputName($content_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($content_module);
         }
 
         if ($post_thumb = $this->getPostThumbSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['postthumb'] = ModuleUtils::getModuleOutputName($post_thumb);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['postthumb'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($post_thumb);
         } else {
             if ($author_avatar = $this->getAuthorAvatarModule($module)) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['author-avatar'] = ModuleUtils::getModuleOutputName($author_avatar);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['author-avatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($author_avatar);
             }
         }
 

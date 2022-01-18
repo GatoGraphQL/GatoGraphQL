@@ -3,7 +3,6 @@ use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoPThemeWassup_Utils
@@ -56,7 +55,7 @@ class PoPThemeWassup_Utils
                         // If the pageSection is sideinfo, open it as long as the block is not the EMPTYBLOCK
                         if ($possiblyOpenPageSection == PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODYSIDEINFO) {
                             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-                            $emptysideinfoModuleOutputName = ModuleUtils::getModuleOutputName([PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_EMPTYSIDEINFO]);
+                            $emptysideinfoModuleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_EMPTYSIDEINFO]);
                             if (in_array($emptysideinfoModuleOutputName, $pageSectionBlocks)) {
                                 continue;
                             }

@@ -8,7 +8,6 @@ use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 
@@ -133,7 +132,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
         // Calculate the dynamic data settings
         $entryModule = $engine->getEntryModule();
-        $entryModuleOutputName = ModuleUtils::getModuleOutputName($entryModule);
+        $entryModuleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($entryModule);
 
         // Get the static data properties
         // First check if there's a cache stored

@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_MultiplesBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -17,7 +16,7 @@ abstract class PoP_Module_Processor_MultiplesBase extends PoPEngine_QueryDataMod
 
         if ($submodules = $this->getSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $submodules
             );
         }

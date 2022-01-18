@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\Root\App;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
@@ -15,13 +14,14 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
-use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\LooseContracts\NameResolverInterface;
+use PoP\Root\App;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 {
@@ -45,6 +45,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ModulePaths $modulePaths = null;
+    private ?ModuleHelpersInterface $moduleHelpers = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -110,6 +111,14 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
     }
+    final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
+    {
+        $this->moduleHelpers = $moduleHelpers;
+    }
+    final protected function getModuleHelpers(): ModuleHelpersInterface
+    {
+        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+    }
 
     public function getSubmodules(array $module): array
     {
@@ -133,7 +142,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_modules_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
         // Convert the module to its string representation to access it in the array
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // Initialize. If this module had been added props, then use them already
         // 1st element to merge: the general props for this module passed down the line
@@ -336,7 +345,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
             // If the module were we are adding the att, is this same module, then we are already at the path
             // If it is not, then go down one level to that module
-            return ($moduleFullName !== ModuleUtils::getModuleFullName($module_or_modulepath));
+            return ($moduleFullName !== $this->getModuleHelpers()->getModuleFullName($module_or_modulepath));
         }
 
         return false;
@@ -361,7 +370,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $ret = array_merge(
                 $ret,
                 array_map(
-                    [ModuleUtils::class, 'getModuleFullName'],
+                    [$this->getModuleHelpers(), 'getModuleFullName'],
                     $module_or_modulepath
                 )
             );
@@ -376,7 +385,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($starting_from_modulepath) {
             // Convert it to string
             $startingFromModulepathFullNames = array_map(
-                [ModuleUtils::class, 'getModuleFullName'],
+                [$this->getModuleHelpers(), 'getModuleFullName'],
                 $starting_from_modulepath
             );
 
@@ -408,7 +417,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($this->isDescendantModule($module_or_modulepath, $props)) {
             // It is a child module
             $att_module = $module_or_modulepath;
-            $attModuleFullName = ModuleUtils::getModuleFullName($att_module);
+            $attModuleFullName = $this->getModuleHelpers()->getModuleFullName($att_module);
 
             // From the root of the $props we obtain the current module
             $moduleFullName = $this->getPathHeadModule($props);
@@ -485,11 +494,11 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         $module_props = &$props;
         foreach ($starting_from_modulepath as $pathlevelModule) {
-            $pathlevelModuleFullName = ModuleUtils::getModuleFullName($pathlevelModule);
+            $pathlevelModuleFullName = $this->getModuleHelpers()->getModuleFullName($pathlevelModule);
             $module_props = &$module_props[$pathlevelModuleFullName][Props::SUBMODULES];
         }
 
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
         return $module_props[$moduleFullName][$group] ?? array();
     }
     protected function addGroupProp(string $group, array $module_or_modulepath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void
@@ -617,7 +626,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         // Propagate to all submodules which have no typeResolver
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         if ($relationalTypeResolver = $this->getProp($module, $props, 'succeeding-typeResolver')) {
             $this->getModuleFilterManager()->prepareForPropagation($module, $props);
@@ -1103,7 +1112,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     protected function flattenDatasetmoduletreeDataProperties($propagate_fn, &$ret, array $module, array &$props): void
     {
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // Exclude the subcomponent modules here
         $this->getModuleFilterManager()->prepareForPropagation($module, $props);
@@ -1192,7 +1201,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, array $module, array &$props): void
     {
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // Combine the direct and conditionalOnDataField modules all together to iterate below
         $domainSwitchingSubmodules = $this->getDomainSwitchingSubmodules($module);

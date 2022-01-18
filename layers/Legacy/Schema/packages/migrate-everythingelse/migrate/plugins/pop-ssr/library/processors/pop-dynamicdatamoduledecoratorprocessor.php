@@ -2,7 +2,6 @@
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorProcessor
 {
@@ -131,7 +130,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     {
         global $pop_module_processordynamicdatadecorator_manager;
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
 
         // Exclude the subcomponent modules here
         $processor = $this->getDecoratedmoduleProcessor($module);
@@ -165,7 +164,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     {
         global $pop_module_processordynamicdatadecorator_manager;
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
 
         // If it has subcomponent modules, integrate them under 'subcomponents'
         $processor = $this->getDecoratedmoduleProcessor($module);

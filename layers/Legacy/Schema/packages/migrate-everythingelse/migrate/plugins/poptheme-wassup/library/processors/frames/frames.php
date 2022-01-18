@@ -2,7 +2,6 @@
 define('POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE', 'pagesections-side-logosize');
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
@@ -334,16 +333,16 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 $ret[GD_JS_CLASSES]['notifications'] = 'notifications pop-waypoints-context scrollable perfect-scrollbar vertical';
                 $ret[GD_JS_CLASSES]['notifications-count'] = 'badge';
 
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-addnew'] = ModuleUtils::getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOP_ADDNEW]);
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-userloggedin'] = ModuleUtils::getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN]);
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-usernotloggedin'] = ModuleUtils::getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN]);
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-about'] = ModuleUtils::getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_ABOUT]);
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['search'] = ModuleUtils::getModuleOutputName([PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::MODULE_FORM_EVERYTHINGQUICKLINKS]);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-addnew'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOP_ADDNEW]);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-userloggedin'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN]);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-usernotloggedin'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN]);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-about'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_ABOUT]);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['search'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::MODULE_FORM_EVERYTHINGQUICKLINKS]);
                 if (defined('POP_CLUSTERCOMMONPAGES_INITIALIZED')) {
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-oursponsors'] = ModuleUtils::getModuleOutputName([GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::class, GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_OURSPONSORS_TOPNAV_SCROLL]);
+                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-oursponsors'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::class, GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_OURSPONSORS_TOPNAV_SCROLL]);
                 }
                 if (defined('POP_NOTIFICATIONSPROCESSORS_INITIALIZED')) {
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-notifications'] = ModuleUtils::getModuleOutputName([AAL_PoPProcessors_Module_Processor_NotificationBlocks::class, AAL_PoPProcessors_Module_Processor_NotificationBlocks::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST]);
+                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-notifications'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([AAL_PoPProcessors_Module_Processor_NotificationBlocks::class, AAL_PoPProcessors_Module_Processor_NotificationBlocks::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST]);
                 }
                 break;
 
@@ -409,7 +408,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 );
 
                 $side = [PoP_Module_Processor_SideGroups::class, PoP_Module_Processor_SideGroups::MODULE_GROUP_SIDE];
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['side'] = ModuleUtils::getModuleOutputName($side);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['side'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($side);
                 break;
 
             case self::MODULE_FRAME_BACKGROUND:
@@ -422,7 +421,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 }
 
                 if (PoP_ApplicationProcessors_Utils::addBackgroundMenu()) {
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu'] = ModuleUtils::getModuleOutputName([self::class, self::MODULE_GROUP_BACKGROUNDMENU]);
+                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([self::class, self::MODULE_GROUP_BACKGROUNDMENU]);
                 }
                 break;
         }

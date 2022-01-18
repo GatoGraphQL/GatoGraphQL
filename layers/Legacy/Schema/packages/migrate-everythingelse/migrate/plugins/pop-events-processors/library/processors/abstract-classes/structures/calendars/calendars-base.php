@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_StructuresBase
 {
@@ -47,7 +46,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         if ($controlgroup = $this->getControlgroupSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controlgroup'] = ModuleUtils::getModuleOutputName($controlgroup);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controlgroup'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controlgroup);
         }
 
         return $ret;

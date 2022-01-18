@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -43,7 +42,7 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataMo
         $ret = parent::getImmutableConfiguration($module, $props);
 
         if ($inner = $this->getInnerSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inner'] = ModuleUtils::getModuleOutputName($inner);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inner'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($inner);
         }
 
         return $ret;

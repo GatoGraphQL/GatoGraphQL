@@ -2,7 +2,6 @@
 define('POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER', 'hook-dataloadingsbase-filteringbyshowfilter');
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 
 trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
@@ -20,7 +19,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
             if ($this->getProp($module, $props, 'show-filter')) {
                 $ret['show-filter'] = true;
             }
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['filter'] = ModuleUtils::getModuleOutputName($filter_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['filter'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($filter_module);
         }
 
         return $ret;

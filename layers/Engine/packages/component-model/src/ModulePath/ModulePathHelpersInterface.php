@@ -10,7 +10,7 @@ interface ModulePathHelpersInterface
     public function stringifyModulePath(array $modulepath): string;
     public function recastModulePath(string $modulepath_as_string): array;
     /**
-     * @return string[]
+     * @return array<string[]>
      */
     public function getModulePaths(): array;
 }

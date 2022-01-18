@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 trait FormComponentModuleDelegatorTrait
 {
@@ -16,7 +15,7 @@ trait FormComponentModuleDelegatorTrait
     }
     public function getDefaultValue(array $module, array &$props): mixed
     {
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);
         return $moduleprocessor_manager->getProcessor($formcomponent_module)->getDefaultValue($formcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
@@ -41,7 +40,7 @@ trait FormComponentModuleDelegatorTrait
     }
     public function getLabel(array $module, array &$props)
     {
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);
 

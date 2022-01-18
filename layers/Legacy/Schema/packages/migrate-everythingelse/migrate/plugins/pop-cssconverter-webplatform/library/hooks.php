@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 class PoP_WebPlatform_CSSConverter_Hooks
 {
     public function __construct()
@@ -24,7 +23,7 @@ class PoP_WebPlatform_CSSConverter_Hooks
         // After saving the configuration, we can manipulate it, to convert values if needed
         // Replace classes with styles, if set in the general props
         if ($processor->getProp($module, $props, 'convert-classes-to-styles')) {
-            $moduleOutputName = ModuleUtils::getModuleOutputName($module);
+            $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($module);
 
             // Classes to convert to styles are set in $configuration[GD_JS_CLASS] and $configuration[GD_JS_CLASSES]
             if ($allclasses = array_filter(explode(' ', $configuration[GD_JS_CLASS]))) {
