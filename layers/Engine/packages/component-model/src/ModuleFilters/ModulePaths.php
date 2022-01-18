@@ -4,11 +4,22 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFilters;
 
+use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
-use PoP\ComponentModel\ModulePath\ModulePathUtils;
 
 class ModulePaths extends AbstractModuleFilter
 {
+    private ?ModulePathHelpersInterface $modulePathHelpers = null;
+
+    final public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
+    {
+        $this->modulePathHelpers = $modulePathHelpers;
+    }
+    final protected function getModulePathHelpers(): ModulePathHelpersInterface
+    {
+        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+    }
+
     /**
      * @var array[]
      */
@@ -35,7 +46,7 @@ class ModulePaths extends AbstractModuleFilter
 
     protected function init(): void
     {
-        $this->paths = ModulePathUtils::getModulePaths();
+        $this->paths = $this->getModulePathHelpers()->getModulePaths();
         $this->propagation_unsettled_paths = $this->paths;
         $this->backlog_unsettled_paths = array();
     }

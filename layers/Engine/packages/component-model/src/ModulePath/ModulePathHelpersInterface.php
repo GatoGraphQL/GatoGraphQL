@@ -9,4 +9,8 @@ interface ModulePathHelpersInterface
     public function getStringifiedModulePropagationCurrentPath(array $module): string;
     public function stringifyModulePath(array $modulepath): string;
     public function recastModulePath(string $modulepath_as_string): array;
+    /**
+     * @return string[]
+     */
+    public function getModulePaths(): array;
 }

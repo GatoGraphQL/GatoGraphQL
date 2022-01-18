@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\State;
 
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
-use PoP\ComponentModel\ModulePath\ModulePathUtils;
+use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Engine\Configuration\Request;
 use PoP\Engine\ModuleFilters\HeadModule;
@@ -22,6 +22,7 @@ class AppStateProvider extends AbstractAppStateProvider
     private ?ModulePaths $modulePaths = null;
     private ?MainContentModule $mainContentModule = null;
     private ?RouteModuleProcessorManagerInterface $routeModuleProcessorManager = null;
+    private ?ModulePathHelpersInterface $modulePathHelpers = null;
 
     final public function setHeadModule(HeadModule $headModule): void
     {
@@ -55,6 +56,14 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(RouteModuleProcessorManagerInterface::class);
     }
+    final public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
+    {
+        $this->modulePathHelpers = $modulePathHelpers;
+    }
+    final protected function getModulePathHelpers(): ModulePathHelpersInterface
+    {
+        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+    }
 
     public function augment(array &$state): void
     {
@@ -75,7 +84,7 @@ class AppStateProvider extends AbstractAppStateProvider
         }
         if ($state['modulefilter'] === $this->modulePaths->getName()) {
             if ($enablePassingStateViaRequest) {
-                $state['modulepaths'] = ModulePathUtils::getModulePaths();
+                $state['modulepaths'] = $this->getModulePathHelpers()->getModulePaths();
             }
         }
         // Function `getRouteModuleByMostAllmatchingVarsProperties` actually needs to access all values in $state
