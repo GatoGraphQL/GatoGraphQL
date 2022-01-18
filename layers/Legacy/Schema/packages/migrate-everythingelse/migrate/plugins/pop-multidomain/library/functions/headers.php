@@ -7,7 +7,7 @@ function popMultidomainHeaders()
 {
     
     // Add the external URL's domain, only if we are on the External Page
-    if (\PoP\Root\App::getState(['routing', 'is-standard']) && \PoP\Root\App::getState('route') == POP_MULTIDOMAIN_ROUTE_EXTERNAL) {
+    if (\PoP\Root\App::getState(['routing', 'is-generic']) && \PoP\Root\App::getState('route') == POP_MULTIDOMAIN_ROUTE_EXTERNAL) {
         if ($external_url = $_REQUEST[\PoP\ComponentModel\Constants\Response::URL] ?? null) {
             printf(
                 '<link rel="canonical" href="%s">',

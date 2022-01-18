@@ -8,7 +8,7 @@ use PoP\Engine\Route\RouteUtils;
 \PoP\Root\App::addFilter(
     'document_title_parts',
     function ($title) {
-        if (\PoP\Root\App::getState(['routing', 'is-standard'])) {
+        if (\PoP\Root\App::getState(['routing', 'is-generic'])) {
             $title['title'] = strip_tags(RouteUtils::getRouteTitle(\PoP\Root\App::getState('route')));
         }
         return $title;

@@ -56,7 +56,7 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
     <?php
     if (\PoP\Root\App::getState(['routing', 'is-custompost']) || \PoP\Root\App::getState(['routing', 'is-page'])) {
         $description = gdGetPostDescription();
-    } elseif (\PoP\Root\App::getState(['routing', 'is-standard'])) {
+    } elseif (\PoP\Root\App::getState(['routing', 'is-generic'])) {
         $description = gdHeaderRouteDescription();
     } elseif (\PoP\Root\App::getState(['routing', 'is-user'])) {
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);

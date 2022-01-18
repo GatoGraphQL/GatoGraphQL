@@ -22,7 +22,7 @@ class PoP_ResourceLoader_EnqueueFileHooks
 
     protected function isForInternalUse()
     {
-        if (\PoP\Root\App::getState(['routing', 'is-standard'])) {
+        if (\PoP\Root\App::getState(['routing', 'is-generic'])) {
             $route = \PoP\Root\App::getState('route');
         
             $processor = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance()->getProcessor($route);

@@ -17,7 +17,7 @@ class PoP_AutomatedEmails_Operator
         global $pop_automatedemails_manager;
         $userTypeAPI = UserTypeAPIFacade::getInstance();
 
-        if (\PoP\Root\App::getState(['routing', 'is-standard'])) {
+        if (\PoP\Root\App::getState(['routing', 'is-generic'])) {
             $route = \PoP\Root\App::getState('route');
             if ($automatedemails = $pop_automatedemails_manager->getAutomatedEmails($route)) {
                 foreach ($automatedemails as $automatedemail) {
