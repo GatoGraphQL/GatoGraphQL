@@ -9,7 +9,7 @@ use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider

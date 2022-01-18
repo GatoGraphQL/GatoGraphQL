@@ -55,7 +55,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \PoP\GraphQLAPI\Component::class,
+    \PoPAPI\GraphQLAPI\Component::class,
 ]);
 ```
 

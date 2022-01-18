@@ -11,8 +11,8 @@ use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 use PoP\ComponentModel\Constants\Params;
 use PoP\Root\Services\BasicServiceTrait;
-use PoP\GraphQLAPI\Component as GraphQLAPIComponent;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GraphQLAPI\Component as GraphQLAPIComponent;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLEndpointHandler extends AbstractEndpointHandler
 {

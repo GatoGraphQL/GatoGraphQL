@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterServiceTagInterface;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use WP_Post;
 
 abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractCPTEndpointExecuter implements GraphQLQueryResolutionEndpointExecuterInterface, EndpointExecuterServiceTagInterface

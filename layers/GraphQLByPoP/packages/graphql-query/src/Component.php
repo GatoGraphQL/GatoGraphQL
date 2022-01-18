@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\Engine\Component::class,
-            \PoP\GraphQLAPI\Component::class,
+            \PoPAPI\GraphQLAPI\Component::class,
         ];
     }
 

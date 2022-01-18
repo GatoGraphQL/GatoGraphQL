@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\State;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
 

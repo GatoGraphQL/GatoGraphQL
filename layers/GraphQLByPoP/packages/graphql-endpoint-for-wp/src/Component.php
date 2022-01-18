@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPAPI\APIEndpointsForWP\Component::class,
-            \PoP\GraphQLAPI\Component::class,
+            \PoPAPI\GraphQLAPI\Component::class,
         ];
     }
 

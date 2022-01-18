@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLAPI\DataStructureFormatters;
+namespace PoPAPI\GraphQLAPI\DataStructureFormatters;
 
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Component;
