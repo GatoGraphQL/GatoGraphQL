@@ -36,10 +36,15 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
-        $state['query'] = null;
         $state['executable-query'] = null;
         $state['requested-query'] = null;
         $state['does-api-query-have-errors'] = null;
+        
+        // Passing the query via URL param?
+        /** @var ComponentModelComponentConfiguration */
+        $componentModelComponentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
+        $enableModifyingEngineBehaviorViaRequest = $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequest();
+        $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequest);
     }
 
     public function consolidate(array &$state): void
@@ -75,12 +80,6 @@ class AppStateProvider extends AbstractAppStateProvider
 
         // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)
         $state['does-api-query-have-errors'] = false;
-
-        // Passing the query via URL param?
-        /** @var ComponentModelComponentConfiguration */
-        $componentModelComponentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
-        $enableModifyingEngineBehaviorViaRequest = $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequest();
-        $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequest);
     }
 
     /**
