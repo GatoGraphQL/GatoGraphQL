@@ -11,8 +11,8 @@ class Environment
     public const CONTAINER_CONFIGURATION_CACHE_DIRECTORY = 'CONTAINER_CONFIGURATION_CACHE_DIRECTORY';
     public const THROW_EXCEPTION_IF_CACHE_SETUP_ERROR = 'THROW_EXCEPTION_IF_CACHE_SETUP_ERROR';
     public const APPLICATION_VERSION = 'APPLICATION_VERSION';
-    public const ENABLE_RETRIEVING_STATE_FROM_REQUEST = 'ENABLE_RETRIEVING_STATE_FROM_REQUEST';
-    public const ENABLE_RETRIEVING_ROUTING_STATE_FROM_REQUEST = 'ENABLE_RETRIEVING_ROUTING_STATE_FROM_REQUEST';
+    public const ENABLE_PASSING_STATE_VIA_REQUEST = 'ENABLE_PASSING_STATE_VIA_REQUEST';
+    public const ENABLE_PASSING_ROUTING_STATE_VIA_REQUEST = 'ENABLE_PASSING_ROUTING_STATE_VIA_REQUEST';
 
     /**
      * Environment
@@ -94,20 +94,20 @@ class Environment
     /**
      * Enable/disable setting AppState via data provided in $_REQUEST
      */
-    public static function enableRetrievingStateFromRequest(): bool
+    public static function enablePassingStateViaRequest(): bool
     {
-        return getenv(self::ENABLE_RETRIEVING_STATE_FROM_REQUEST) !== false ? getenv(self::ENABLE_RETRIEVING_STATE_FROM_REQUEST) : false;
+        return getenv(self::ENABLE_PASSING_STATE_VIA_REQUEST) !== false ? getenv(self::ENABLE_PASSING_STATE_VIA_REQUEST) : false;
     }
 
     /**
      * Enable/disable setting the routing via data provided in $_REQUEST
      */
-    public static function enableRetrievingRoutingStateFromRequest(): bool
+    public static function enablePassingRoutingStateViaRequest(): bool
     {
-        if (!self::enableRetrievingStateFromRequest()) {
+        if (!self::enablePassingStateViaRequest()) {
             return false;
         }
-        return getenv(self::ENABLE_RETRIEVING_ROUTING_STATE_FROM_REQUEST) !== false ? getenv(self::ENABLE_RETRIEVING_ROUTING_STATE_FROM_REQUEST) : false;
+        return getenv(self::ENABLE_PASSING_ROUTING_STATE_VIA_REQUEST) !== false ? getenv(self::ENABLE_PASSING_ROUTING_STATE_VIA_REQUEST) : false;
     }
 
     /**
