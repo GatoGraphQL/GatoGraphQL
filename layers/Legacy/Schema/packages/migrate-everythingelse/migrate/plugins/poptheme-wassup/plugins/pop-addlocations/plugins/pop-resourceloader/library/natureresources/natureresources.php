@@ -4,7 +4,7 @@ use PoP\Root\Routing\RequestNature;
 
 class PoPThemeWassup_EM_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources_ProcessorBase
 {
-    public function addStandardNatureResources(&$resources, $modulefilter, $options)
+    public function addGenericNatureResources(&$resources, $modulefilter, $options)
     {
 
         // When processing POP_ADDLOCATIONS_ROUTE_ADDLOCATION, we need a configuration for both target=main and target=modals

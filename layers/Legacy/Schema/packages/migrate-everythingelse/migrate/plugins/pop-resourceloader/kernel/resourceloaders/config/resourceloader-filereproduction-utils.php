@@ -50,7 +50,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
         $path_resources = array(
             'single' => array(),
             'page' => array(),
-            'standard' => array(),
+            'generic' => array(),
         );
 
         // Extract the resources from the current vars: needed when doing generate_bundlefile_on_runtime()
@@ -104,7 +104,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
             $path_resources = array(
                 'single' => $natureresources_manager->getSingleResources($modulefilter, $options),
                 'page' => $natureresources_manager->getPageResources($modulefilter, $options),
-                'standard' => $natureresources_manager->getStandardNatureResources($modulefilter, $options),
+                'generic' => $natureresources_manager->getGenericNatureResources($modulefilter, $options),
             );
         }
 

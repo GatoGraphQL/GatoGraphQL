@@ -10,7 +10,7 @@ class PoP_SPAResourceLoader_FileReproduction_InitialResourcesConfig extends PoP_
 
     protected function matchNature()
     {
-        return 'standard';
+        return 'generic';
     }
 
     protected function matchPaths()

@@ -81,12 +81,12 @@ class PoP_ResourceLoader_NatureResourcesManager {
         return $resources;
     }
     
-    function getStandardNatureResources($modulefilter, $options) {
+    function getGenericNatureResources($modulefilter, $options) {
     
         $resources = array();
         foreach ($this->processors as $processor) {
 
-            $processor->addStandardNatureResources($resources, $modulefilter, $options);
+            $processor->addGenericNatureResources($resources, $modulefilter, $options);
         }
 
         return $resources;

@@ -26,6 +26,6 @@ class PoP_ResourceLoader_NatureResources_ProcessorBase implements PoP_ResourceLo
     function addPageResources(&$resources, $modulefilter, $options) {
     }
     
-    function addStandardNatureResources(&$resources, $modulefilter, $options) {
+    function addGenericNatureResources(&$resources, $modulefilter, $options) {
     }
 }
