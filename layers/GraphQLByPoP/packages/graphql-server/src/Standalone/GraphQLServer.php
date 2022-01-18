@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer;
+namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 use PoP\Engine\Facades\Engine\EngineFacade;
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
 
-class StandaloneGraphQLApp
+class GraphQLServer
 {
     private array $componentClasses;
 

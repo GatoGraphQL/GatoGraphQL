@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer;
+namespace GraphQLByPoP\GraphQLServer\Standalone;
 
-class StandaloneGraphQLAppTestCase extends AbstractStandaloneGraphQLAppTestCase
+class GraphQLServerTest extends AbstractGraphQLServerTestCase
 {
     public function testHasDependedComponentClasses(): void
     {
@@ -15,6 +15,6 @@ class StandaloneGraphQLAppTestCase extends AbstractStandaloneGraphQLAppTestCase
             ]
         ];
         $this->expectOutputString(json_encode($response));
-        self::$standaloneGraphQLApp->execute($query);
+        self::$graphQLServer->execute($query);
     }
 }
