@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
+use PoP\Engine\Engine\EngineInterface;
 use PoP\Engine\Facades\Engine\EngineFacade;
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes;
@@ -26,34 +27,55 @@ class GraphQLServer
                 \GraphQLByPoP\GraphQLServer\Component::class,
             ]
         );
-    }
 
-    public function execute(string $query, array $variables = []): void
-    {
         App::initialize();
         $appLoader = App::getAppLoader();
         $appLoader->addComponentClassesToInitialize($this->componentClasses);
         $appLoader->initializeComponents();
-        $appLoader->bootSystem($this->cacheContainerConfiguration, $this->containerNamespace, $this->containerDirectory);
+        $appLoader->bootSystem(
+            $this->cacheContainerConfiguration,
+            $this->containerNamespace,
+            $this->containerDirectory
+        );
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
         $appLoader->addComponentClassConfiguration($this->componentClassConfiguration);
+    }
+
+    public function execute(string $query, array $variables = []): void
+    {
+        $appLoader = App::getAppLoader();
 
         // Same for the initial AppState
-        $appLoader->setInitialAppState([
+        $appLoader->setInitialAppState(array_merge(
+            $this->getGraphQLRequestAppState(),
+            [
+                'query' => $query,
+                'variables' => $variables,
+            ]
+        ));
+
+        $appLoader->bootApplication(
+            $this->cacheContainerConfiguration,
+            $this->containerNamespace,
+            $this->containerDirectory
+        );
+        $engine = EngineFacade::getInstance();
+        $engine->outputResponse();
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getGraphQLRequestAppState(): array
+    {
+        return [
             'scheme' => Schemes::API,
-            'datastructure' => 'graphql',//,
+            'datastructure' => 'graphql',
             'nature' => RequestNature::QUERY_ROOT,
             'only-fieldname-as-outputkey' => true,
             'standard-graphql' => true,
-            'query' => $query,
-            'variables' => $variables,
-        ]);
-
-        $appLoader->bootApplication($this->cacheContainerConfiguration, $this->containerNamespace, $this->containerDirectory);
-
-        $engine = EngineFacade::getInstance();
-        $engine->outputResponse();
+        ];
     }
 }
