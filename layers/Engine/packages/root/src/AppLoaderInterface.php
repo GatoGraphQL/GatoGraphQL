@@ -94,5 +94,13 @@ interface AppLoaderInterface
         ?string $containerDirectory = null
     ): void;
 
+    /**
+     * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
+     * for them to execute any custom extra logic.
+     *
+     * @param array<string,mixed> $initialAppState
+     */
+    public function bootApplicationComponents(array $initialAppState = []): void;
+
     public function skipSchemaForComponent(ComponentInterface $component): bool;
 }
