@@ -353,9 +353,6 @@ class AppLoader implements AppLoaderInterface
         $systemCompilerPassRegistry = SystemCompilerPassRegistryFacade::getInstance();
         $systemCompilerPasses = $systemCompilerPassRegistry->getCompilerPasses();
         App::getContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
-
-        // Finally boot the components
-        $this->bootApplicationComponents($this->initialAppState);
     }
 
     public function skipSchemaForComponent(ComponentInterface $component): bool
@@ -373,8 +370,12 @@ class AppLoader implements AppLoaderInterface
      *
      * @param array<string,mixed> $initialAppState
      */
-    protected function bootApplicationComponents(array $initialAppState): void
+    protected function bootApplicationComponents(array $initialAppState = []): void
     {
+        $initialAppState = array_merge(
+            $this->initialAppState,
+            $initialAppState
+        );
         App::getComponentManager()->beforeBoot();
         App::getAppStateManager()->initializeAppState($initialAppState);
         App::getComponentManager()->boot();

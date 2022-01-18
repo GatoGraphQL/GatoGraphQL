@@ -15,8 +15,13 @@ class AppLoader extends UpstreamAppLoader
      *
      * @param array<string,mixed> $initialAppState
      */
-    protected function bootApplicationComponents(array $initialAppState): void
+    protected function bootApplicationComponents(array $initialAppState = []): void
     {
+        $initialAppState = array_merge(
+            $this->initialAppState,
+            $initialAppState
+        );
+        
         // Boot all the components
         App::getComponentManager()->beforeBoot();
 
