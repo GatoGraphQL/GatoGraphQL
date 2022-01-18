@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\State;
 
+use PoP\Root\Environment;
 use PoP\Root\Routing\RoutingManagerInterface;
 use PoP\Root\Routing\RequestNature;
 
@@ -22,10 +23,13 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
-        $state['nature'] = $this->getRoutingManager()->getCurrentRequestNature();
-        $state['route'] = $this->getRoutingManager()->getCurrentRoute();
-
-        // Set the routing state under a unified entry
+        if (Environment::enablePassingRoutingStateViaRequest()) {
+            $state['nature'] = $this->getRoutingManager()->getCurrentRequestNature();
+            $state['route'] = $this->getRoutingManager()->getCurrentRoute();
+        } else {
+            $state['nature'] = RequestNature::GENERIC;
+            $state['route'] = '';
+        }
         $state['routing'] = [];
     }
 
