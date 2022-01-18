@@ -12,6 +12,7 @@ use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Root\App;
+use PoP\Root\Environment;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
@@ -42,11 +43,11 @@ class AppStateProvider extends AbstractAppStateProvider
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $componentConfiguration->mustNamespaceTypes();
 
-        $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
-        $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
         $state['only-fieldname-as-outputkey'] = false;
         $state['are-mutations-enabled'] = true;
-
+        
+        $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
+        $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
         $state['mangled'] = DefinitionsRequest::getMangledValue();
         $state['actionpath'] = Request::getActionPath();
         $state['actions'] = Request::getActions();

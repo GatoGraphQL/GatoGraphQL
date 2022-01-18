@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\Root\State;
 
-use PoP\Root\Environment;
-use PoP\Root\Routing\RoutingManagerInterface;
+use PoP\Root\App;
+use PoP\Root\Component;
+use PoP\Root\ComponentConfiguration;
 use PoP\Root\Routing\RequestNature;
+use PoP\Root\Routing\RoutingManagerInterface;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
@@ -23,7 +25,10 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
-        if (Environment::enablePassingRoutingStateViaRequest()) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        
+        if ($componentConfiguration->enablePassingRoutingStateViaRequest()) {
             $state['nature'] = $this->getRoutingManager()->getCurrentRequestNature();
             $state['route'] = $this->getRoutingManager()->getCurrentRoute();
         } else {

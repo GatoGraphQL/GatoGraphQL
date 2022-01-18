@@ -92,25 +92,6 @@ class Environment
     }
 
     /**
-     * Enable/disable setting AppState via data provided in $_REQUEST
-     */
-    public static function enablePassingStateViaRequest(): bool
-    {
-        return getenv(self::ENABLE_PASSING_STATE_VIA_REQUEST) !== false ? getenv(self::ENABLE_PASSING_STATE_VIA_REQUEST) : false;
-    }
-
-    /**
-     * Enable/disable setting the routing via data provided in $_REQUEST
-     */
-    public static function enablePassingRoutingStateViaRequest(): bool
-    {
-        if (!self::enablePassingStateViaRequest()) {
-            return false;
-        }
-        return getenv(self::ENABLE_PASSING_ROUTING_STATE_VIA_REQUEST) !== false ? getenv(self::ENABLE_PASSING_ROUTING_STATE_VIA_REQUEST) : false;
-    }
-
-    /**
      * By default it is PROD. For DEV we must set the env var
      */
     public static function getApplicationEnvironment(): string
