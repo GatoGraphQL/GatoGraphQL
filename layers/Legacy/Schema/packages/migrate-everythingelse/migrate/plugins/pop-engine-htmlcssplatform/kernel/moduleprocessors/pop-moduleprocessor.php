@@ -2,7 +2,6 @@
 use PoP\Application\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 
@@ -55,7 +54,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
     public function getID(array $module, array &$props): string
     {
-        $moduleOutputName = ModuleUtils::getModuleOutputName($module);
+        $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($module);
         // if ($this->fixedId($module, $props)) {
         // 	$pagesection_settings_id = $props['pagesection-moduleoutputname'];
         // 	$block_settings_id = $props['block-moduleoutputname'];
@@ -192,7 +191,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
     // 	$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
-    // 	$moduleOutputName = ModuleUtils::getModuleOutputName($module);
+    // 	$moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($module);
 
     // 	// Return initialized empty array at the last level
     // 	$ret = array();

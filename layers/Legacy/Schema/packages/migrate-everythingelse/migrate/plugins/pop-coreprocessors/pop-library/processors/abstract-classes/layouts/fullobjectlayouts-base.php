@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -82,10 +81,10 @@ abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_Quer
         );
 
         if ($title = $this->getTitleSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['title'] = ModuleUtils::getModuleOutputName($title);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['title'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($title);
         }
         if ($sidebar = $this->getSidebarSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['sidebar'] = ModuleUtils::getModuleOutputName($sidebar);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['sidebar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($sidebar);
             $ret[GD_JS_CLASSES]['sidebar'] = 'col-xsm-3 col-xsm-push-9';
             $ret[GD_JS_CLASSES]['content-body'] = 'col-xsm-9 col-xsm-pull-3';
         }

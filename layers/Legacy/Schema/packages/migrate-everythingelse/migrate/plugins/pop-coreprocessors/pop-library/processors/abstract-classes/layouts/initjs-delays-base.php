@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_InitJSDelayLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -32,7 +31,7 @@ abstract class PoP_Module_Processor_InitJSDelayLayoutsBase extends PoPEngine_Que
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         if ($layout = $this->getLayoutSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = ModuleUtils::getModuleOutputName($layout);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
         }
         
         return $ret;

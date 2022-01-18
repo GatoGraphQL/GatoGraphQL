@@ -6,7 +6,6 @@ use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\App;
 
@@ -208,7 +207,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
-                    $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
+                    $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($submodule);
                     $modulejsdata[$submoduleOutputName][ComponentModelComponentInfo::get('response-prop-submodules')] = $modulejsdata[$submoduleOutputName][ComponentModelComponentInfo::get('response-prop-submodules')] ?? array();
                     $modulejsdata = &$modulejsdata[$submoduleOutputName][ComponentModelComponentInfo::get('response-prop-submodules')];
                 }

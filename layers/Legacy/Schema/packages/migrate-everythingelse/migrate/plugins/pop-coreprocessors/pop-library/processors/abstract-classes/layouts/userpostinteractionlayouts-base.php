@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -65,7 +64,7 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         }
 
         if ($user_avatar = $this->getLoggedinUseravatarSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['useravatar'] = ModuleUtils::getModuleOutputName($user_avatar);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['useravatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($user_avatar);
         }
 
         $ret['add-useravatar'] = $this->addUseravatar($module, $props);

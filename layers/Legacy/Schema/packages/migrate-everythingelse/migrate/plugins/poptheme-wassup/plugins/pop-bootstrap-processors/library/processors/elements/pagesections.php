@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 const POP_MODULEID_PAGESECTIONCONTAINERID_HOLE = 'ps-hole';
@@ -226,7 +225,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         }
 
         // The module must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadModule` can work
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
         $module_props = array(
             $moduleFullName => &$props[$moduleFullName],
         );

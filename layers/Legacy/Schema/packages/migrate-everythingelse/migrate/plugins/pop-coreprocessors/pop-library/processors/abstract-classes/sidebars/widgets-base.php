@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -201,7 +200,7 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataModul
         }
         if ($quicklinkgroup = $this->getQuicklinkgroupSubmodule($module)) {
             $ret[GD_JS_CLASSES]['quicklinkgroup'] = 'sidebarwidget-quicklinkgroup pull-right';
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup'] = ModuleUtils::getModuleOutputName($quicklinkgroup);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup);
         }
 
         return $ret;

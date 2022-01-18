@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_MapAddMarkersBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -47,8 +46,8 @@ abstract class PoP_Module_Processor_MapAddMarkersBase extends PoPEngine_QueryDat
         $markers = $this->getMarkerscriptSubmodule($module);
         $resetmarkers = $this->getResetmarkerscriptSubmodule($module);
 
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-markers'] = ModuleUtils::getModuleOutputName($markers);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-resetmarkers'] = ModuleUtils::getModuleOutputName($resetmarkers);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-markers'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($markers);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-resetmarkers'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($resetmarkers);
         
         return $ret;
     }

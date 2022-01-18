@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_ScrollsBase extends PoP_Module_Processor_StructuresBase
 {
@@ -37,7 +36,7 @@ abstract class PoP_Module_Processor_ScrollsBase extends PoP_Module_Processor_Str
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         if ($this->useFetchmore($module, $props)) {
             $fetchmore = $this->getFetchmoreButtonSubmodule($module);
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['fetchmore'] = ModuleUtils::getModuleOutputName($fetchmore);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['fetchmore'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($fetchmore);
         }
         if ($description = $this->getProp($module, $props, 'description')) {
             $ret[GD_JS_DESCRIPTION] = $description;

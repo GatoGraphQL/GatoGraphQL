@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {

@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_ModalPageSectionsBase extends PoP_Module_Processor_BootstrapPageSectionsBase
 {
@@ -21,7 +20,7 @@ abstract class PoP_Module_Processor_ModalPageSectionsBase extends PoP_Module_Pro
         $ret = array();
 
         foreach ($this->getSubmodules($module) as $submodule) {
-            $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
+            $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($submodule);
             $ret[$submoduleOutputName] = 'modal-body';
         }
 

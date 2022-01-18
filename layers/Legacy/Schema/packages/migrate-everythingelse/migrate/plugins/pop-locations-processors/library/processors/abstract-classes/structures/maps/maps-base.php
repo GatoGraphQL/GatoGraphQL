@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class GD_EM_Module_Processor_MapsBase extends PoP_Module_Processor_StructuresBase
 {
@@ -38,7 +37,7 @@ abstract class GD_EM_Module_Processor_MapsBase extends PoP_Module_Processor_Stru
         $ret = parent::getImmutableConfiguration($module, $props);
 
         $mapdiv = $this->getMapdivSubmodule($module);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-div'] = ModuleUtils::getModuleOutputName($mapdiv);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-div'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($mapdiv);
         
         return $ret;
     }

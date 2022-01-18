@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_BasicBlocksBase
 {
@@ -54,12 +53,12 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
 
         if ($this->getProp($module, $props, 'show-controls-top')) {
             if ($controlgroup_top = $this->getControlgroupTopSubmodule($module)) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controlgroup-top'] = ModuleUtils::getModuleOutputName($controlgroup_top);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controlgroup-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controlgroup_top);
             }
         }
 
         if ($latestcount = $this->getLatestcountSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['latestcount'] = ModuleUtils::getModuleOutputName($latestcount);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['latestcount'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($latestcount);
         }
 
         if ($this->addClearfixdiv($module)) {
@@ -89,13 +88,13 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         // Also, only add submenu if single post is published, hence this goes under mutableonrequest
         if ($this->getProp($module, $props, 'show-submenu')) {
             if ($submenu = $this->getSubmenuSubmodule($module)) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['submenu'] = ModuleUtils::getModuleOutputName($submenu);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['submenu'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($submenu);
             }
         }
 
         if ($this->getProp($module, $props, 'show-controls-bottom')) {
             if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($module)) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controlgroup-bottom'] = ModuleUtils::getModuleOutputName($controlgroup_bottom);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controlgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controlgroup_bottom);
             }
         }
 
@@ -139,7 +138,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         if ($submenu = $this->getSubmenuSubmodule($module)) {
-            $moduleFullName = ModuleUtils::getModuleFullName($module);
+            $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
             $submenu_id = $moduleprocessor_manager->getProcessor($submenu)->getFrontendId($submenu, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
             $submenu_target = '#'.$submenu_id.'-xs';
             $this->setProp([PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_SUBMENUTOGGLE_XS], $props, 'submenu-target', $submenu_target);

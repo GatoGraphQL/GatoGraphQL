@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class GD_EM_Module_Processor_DateTimeLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -41,7 +40,7 @@ abstract class GD_EM_Module_Processor_DateTimeLayoutsBase extends PoPEngine_Quer
     
         if ($this->addDownloadlinks($module)) {
             $dropdownlinks_module = [GD_EM_Module_Processor_QuicklinkButtonGroups::class, GD_EM_Module_Processor_QuicklinkButtonGroups::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN];
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout-downloadlinks'] = ModuleUtils::getModuleOutputName($dropdownlinks_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout-downloadlinks'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($dropdownlinks_module);
 
             if ($downloadlinks_class = $this->getDownloadlinksClass($module)) {
                 $ret[GD_JS_CLASSES]['downloadlinks'] = $downloadlinks_class;

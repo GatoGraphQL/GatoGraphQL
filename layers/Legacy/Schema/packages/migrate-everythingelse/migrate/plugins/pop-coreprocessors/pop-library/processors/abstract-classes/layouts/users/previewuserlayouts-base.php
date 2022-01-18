@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_PreviewUserLayoutsBase extends PoP_Module_Processor_PreviewObjectLayoutsBase
 {
@@ -103,7 +102,7 @@ abstract class PoP_Module_Processor_PreviewUserLayoutsBase extends PoP_Module_Pr
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             if ($useravatar = $this->getUseravatarSubmodule($module)) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['useravatar'] = ModuleUtils::getModuleOutputName($useravatar);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['useravatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($useravatar);
             }
         }
 

@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -58,7 +57,7 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
         $ret = parent::getImmutableConfiguration($module, $props);
 
         if ($defaultLayout = $this->getDefaultLayoutSubmodule($module)) {
-            $ret['default-module'] = ModuleUtils::getModuleOutputName($defaultLayout);
+            $ret['default-module'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($defaultLayout);
         }
         $ret['condition-on-data-field-modules'] = array_map(
             [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],

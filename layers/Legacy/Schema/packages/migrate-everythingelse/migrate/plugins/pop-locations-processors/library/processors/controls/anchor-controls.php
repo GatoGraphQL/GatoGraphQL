@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
@@ -91,7 +90,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
                     $props,
                     'params',
                     array(
-                        'data-cookieid' => ModuleUtils::getModuleFullName($module).'-togglemap',
+                        'data-cookieid' => \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module).'-togglemap',
                         'data-cookietarget' => $this->getProp($module, $props, 'target')/*'#'.$props['block-id'].' > .blocksection-inners .collapse.map'*/,
                         'data-cookiecollapse' => 'show',
                         'data-togglecookiebtn' => 'self',

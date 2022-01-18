@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class PoP_ProcessorAutomatedEmailsBase extends PoP_AutomatedEmailsBase
@@ -34,7 +33,7 @@ class PoP_ProcessorAutomatedEmailsBase extends PoP_AutomatedEmailsBase
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $pagesection_settings_id = $this->getPagesectionSettingsid();
         $block_module = $this->getBlockModule();
-        $block_settings_id = ModuleUtils::getModuleOutputName($block_module);
+        $block_settings_id = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($block_module);
         $json = PoP_ServerSideRenderingFactory::getInstance()->getJson();
         return !empty($json['datasetmoduledata']['combinedstate']['dbobjectids'][$pagesection_settings_id][$block_settings_id]);
     }

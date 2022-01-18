@@ -1,7 +1,6 @@
 <?php
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Engine\Route\RouteUtils;
 
 abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataModuleProcessorBase

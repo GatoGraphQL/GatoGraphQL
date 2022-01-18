@@ -1,7 +1,6 @@
 <?php
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Processor_DataloadsBase
 {
@@ -47,7 +46,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
         }
 
         if ($status = $this->getStatusSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['status'] = ModuleUtils::getModuleOutputName($status);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['status'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($status);
         }
 
         if ($feedbackmessages = $this->getFeedbackmessageSubmodules($module)) {

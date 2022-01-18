@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_WindowBase extends PoPEngine_QueryDataModuleProcessorBase
 {

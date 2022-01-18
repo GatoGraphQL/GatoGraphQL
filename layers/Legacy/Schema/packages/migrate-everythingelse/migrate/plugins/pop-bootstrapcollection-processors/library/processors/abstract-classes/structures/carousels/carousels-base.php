@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 define('POP_COREPROCESSORS_CAROUSELMODE_STATIC', 'static');
 define('POP_COREPROCESSORS_CAROUSELMODE_AUTOMATIC', 'automatic');
@@ -76,14 +75,14 @@ abstract class PoP_Module_Processor_CarouselsBase extends PoP_Module_Processor_S
         $ret['mode'] = $this->getMode($module, $props);
 
         if ($controls_bottom = $this->getControlsBottomSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controls-bottom'] = ModuleUtils::getModuleOutputName($controls_bottom);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controls-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controls_bottom);
         }
         if ($controls_top = $this->getControlsTopSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controls-top'] = ModuleUtils::getModuleOutputName($controls_top);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controls-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controls_top);
         }
 
         if ($indicators = $this->getLayoutIndicatorSubmodules($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['carousel-indicators'] = ModuleUtils::getModuleOutputName($indicators);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['carousel-indicators'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($indicators);
             if ($indicators_class = $this->getIndicatorsClass($module, $props)) {
                 $ret[GD_JS_CLASSES]['indicators'] = $indicators_class;
             }

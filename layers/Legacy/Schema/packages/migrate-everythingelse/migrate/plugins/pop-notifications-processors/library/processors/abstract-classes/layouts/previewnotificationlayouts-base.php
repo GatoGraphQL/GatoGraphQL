@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -183,13 +182,13 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         }
 
         if ($link = $this->getLinkSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['link'] = ModuleUtils::getModuleOutputName($link);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['link'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($link);
         }
         if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-top'] = ModuleUtils::getModuleOutputName($quicklinkgroup_top);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_top);
         }
         if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-bottom'] = ModuleUtils::getModuleOutputName($quicklinkgroup_bottom);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_bottom);
         }
         if ($this->getBottomSubmodules($module)) {
             $ret[GD_JS_CLASSES]['bottom'] = 'clearfix';
@@ -209,10 +208,10 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         }
 
         if ($post_thumb = $this->getPostThumbSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['postthumb'] = ModuleUtils::getModuleOutputName($post_thumb);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['postthumb'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($post_thumb);
         } elseif (PoP_Application_ConfigurationUtils::useUseravatar()) {
             if ($user_avatar = $this->getUserAvatarModule($module)) {
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['user-avatar'] = ModuleUtils::getModuleOutputName($user_avatar);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['user-avatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($user_avatar);
             }
         }
 
