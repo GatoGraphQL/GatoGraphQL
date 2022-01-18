@@ -6,11 +6,9 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
-use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
@@ -18,7 +16,6 @@ use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
@@ -955,10 +952,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $this->addHeaddatasetmoduleDataProperties($ret, $module, $props);
         }
 
-        if ($dataload_source = $this->getDataloadSource($module, $props)) {
-            $ret[DataloadingConstants::SOURCE] = $dataload_source;
-        }
-
         // When loading data or execution an action, check if to validate checkpoints?
         // This is in MUTABLEONREQUEST instead of STATIC because the checkpoints can change depending on doingPost()
         // (such as done to set-up checkpoint configuration for POP_USERSTANCE_ROUTE_ADDOREDITSTANCE, or within POPUSERLOGIN_CHECKPOINTCONFIGURATION_REQUIREUSERSTATEONDOINGPOST)
@@ -1024,13 +1017,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getDatasetmeta(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
     {
-        $ret = array();
-
-        if ($dataload_source = $data_properties[DataloadingConstants::SOURCE] ?? null) {
-            $ret['dataloadsource'] = $dataload_source;
-        }
-
-        return $ret;
+        return [];
     }
 
     //-------------------------------------------------
@@ -1051,52 +1038,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         // By default, execute only if the module is targeted for execution and doing POST
         return 'POST' == $_SERVER['REQUEST_METHOD'] && App::getState('actionpath') == $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
-    }
-
-    public function getDataloadSource(array $module, array &$props): string
-    {
-        // Because a component can interact with itself by adding ?modulepaths=...,
-        // then, by default, we simply set the dataload source to point to itself!
-        $stringified_module_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
-        $ret = GeneralUtils::addQueryArgs(
-            [
-                Params::MODULEFILTER => $this->getModulePaths()->getName(),
-                Params::MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
-            ],
-            $this->getRequestHelperService()->getCurrentURL()
-        );
-
-        // If we are in the API currently, stay in the API
-        if ($scheme = App::getState('scheme')) {
-            $ret = GeneralUtils::addQueryArgs([
-                Params::SCHEME => $scheme,
-            ], $ret);
-        }
-
-        // Allow to add extra modulepaths set from above
-        if ($extra_module_paths = $this->getProp($module, $props, 'dataload-source-add-modulepaths')) {
-            foreach ($extra_module_paths as $modulepath) {
-                $ret = GeneralUtils::addQueryArgs([
-                    Params::MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($modulepath),
-                ], $ret);
-            }
-        }
-
-        // Add the actionpath too
-        if ($this->getComponentMutationResolverBridge($module) !== null) {
-            $ret = GeneralUtils::addQueryArgs([
-                Params::ACTION_PATH => $stringified_module_propagation_current_path,
-            ], $ret);
-        }
-
-        // If mangled, make it mandle
-        if ($mangled = App::getState('mangled')) {
-            $ret = GeneralUtils::addQueryArgs([
-                DefinitionsParams::MANGLED => $mangled,
-            ], $ret);
-        }
-
-        return $ret;
     }
 
     public function getModulesToPropagateDataProperties(array $module): array
