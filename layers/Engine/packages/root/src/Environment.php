@@ -11,6 +11,8 @@ class Environment
     public const CONTAINER_CONFIGURATION_CACHE_DIRECTORY = 'CONTAINER_CONFIGURATION_CACHE_DIRECTORY';
     public const THROW_EXCEPTION_IF_CACHE_SETUP_ERROR = 'THROW_EXCEPTION_IF_CACHE_SETUP_ERROR';
     public const APPLICATION_VERSION = 'APPLICATION_VERSION';
+    public const ENABLE_RETRIEVING_STATE_FROM_REQUEST = 'ENABLE_RETRIEVING_STATE_FROM_REQUEST';
+    public const ENABLE_RETRIEVING_ROUTING_STATE_FROM_REQUEST = 'ENABLE_RETRIEVING_ROUTING_STATE_FROM_REQUEST';
 
     /**
      * Environment
@@ -87,6 +89,25 @@ class Environment
     public static function getApplicationVersion(): ?string
     {
         return getenv(self::APPLICATION_VERSION) !== false ? getenv(self::APPLICATION_VERSION) : null;
+    }
+
+    /**
+     * Enable/disable setting AppState via data provided in $_REQUEST
+     */
+    public static function enableRetrievingStateFromRequest(): bool
+    {
+        return getenv(self::ENABLE_RETRIEVING_STATE_FROM_REQUEST) !== false ? getenv(self::ENABLE_RETRIEVING_STATE_FROM_REQUEST) : false;
+    }
+
+    /**
+     * Enable/disable setting the routing via data provided in $_REQUEST
+     */
+    public static function enableRetrievingRoutingStateFromRequest(): bool
+    {
+        if (!self::enableRetrievingStateFromRequest()) {
+            return false;
+        }
+        return getenv(self::ENABLE_RETRIEVING_ROUTING_STATE_FROM_REQUEST) !== false ? getenv(self::ENABLE_RETRIEVING_ROUTING_STATE_FROM_REQUEST) : false;
     }
 
     /**
