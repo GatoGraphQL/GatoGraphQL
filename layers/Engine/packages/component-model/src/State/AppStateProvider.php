@@ -11,8 +11,10 @@ use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
+use PoP\Definitions\Constants\ParamValues;
 use PoP\Root\App;
-use PoP\Root\Environment;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
@@ -45,15 +47,28 @@ class AppStateProvider extends AbstractAppStateProvider
 
         $state['only-fieldname-as-outputkey'] = false;
         $state['are-mutations-enabled'] = true;
-        
-        $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
-        $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
-        $state['mangled'] = DefinitionsRequest::getMangledValue();
-        $state['actionpath'] = Request::getActionPath();
-        $state['actions'] = Request::getActions();
-        $state['version-constraint'] = Request::getVersionConstraint();
-        $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
-        $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
+
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
+            $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
+            $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
+            $state['mangled'] = DefinitionsRequest::getMangledValue();
+            $state['actionpath'] = Request::getActionPath();
+            $state['actions'] = Request::getActions();
+            $state['version-constraint'] = Request::getVersionConstraint();
+            $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
+            $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
+        } else {
+            $state['variables'] = [];
+            $state['modulefilter'] = null;
+            $state['mangled'] = ParamValues::MANGLED_NONE;
+            $state['actionpath'] = null;
+            $state['actions'] = [];
+            $state['version-constraint'] = null;
+            $state['field-version-constraints'] = null;
+            $state['directive-version-constraints'] = null;
+        }
 
         $enableModifyingEngineBehaviorViaRequest = $componentConfiguration->enableModifyingEngineBehaviorViaRequest();
         $state['output'] = EngineRequest::getOutput($enableModifyingEngineBehaviorViaRequest);
