@@ -252,7 +252,7 @@ class AppLoader implements AppLoaderInterface
         App::getSystemContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
 
         // Finally boot the components
-        $this->bootSystemForComponents();
+        $this->bootSystemComponents();
     }
 
     /**
@@ -268,7 +268,7 @@ class AppLoader implements AppLoaderInterface
      * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
      * for them to execute any custom extra logic
      */
-    protected function bootSystemForComponents(): void
+    protected function bootSystemComponents(): void
     {
         App::getComponentManager()->bootSystem();
     }
@@ -353,9 +353,6 @@ class AppLoader implements AppLoaderInterface
         $systemCompilerPassRegistry = SystemCompilerPassRegistryFacade::getInstance();
         $systemCompilerPasses = $systemCompilerPassRegistry->getCompilerPasses();
         App::getContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
-
-        // Finally boot the components
-        $this->bootApplicationForComponents($this->initialAppState);
     }
 
     public function skipSchemaForComponent(ComponentInterface $component): bool
@@ -373,8 +370,12 @@ class AppLoader implements AppLoaderInterface
      *
      * @param array<string,mixed> $initialAppState
      */
-    protected function bootApplicationForComponents(array $initialAppState): void
+    public function bootApplicationComponents(array $initialAppState = []): void
     {
+        $initialAppState = array_merge(
+            $this->initialAppState,
+            $initialAppState
+        );
         App::getComponentManager()->beforeBoot();
         App::getAppStateManager()->initializeAppState($initialAppState);
         App::getComponentManager()->boot();

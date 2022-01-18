@@ -516,11 +516,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         try {
             // Boot all PoP components, from this plugin and all extensions
             $containerCacheConfiguration = $this->pluginInitializationConfiguration->getContainerCacheConfiguration();
-            App::getAppLoader()->bootApplication(
+            $appLoader = App::getAppLoader();
+            $appLoader->bootApplication(
                 $containerCacheConfiguration->cacheContainerConfiguration(),
                 $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
                 $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),
             );
+            $appLoader->bootApplicationComponents();
 
             // Custom logic
             $this->doBootApplication();
