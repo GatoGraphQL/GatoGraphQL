@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Engine;
 
 use Exception;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ComponentInfo;
+use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Constants\Actions;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataLoading;
@@ -45,6 +45,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\Root\App;
 use PoP\Root\Helpers\Methods;
+use PoP\Root\Services\BasicServiceTrait;
 
 class Engine implements EngineInterface
 {
@@ -313,8 +314,7 @@ class Engine implements EngineInterface
         $this->extra_routes = [];
 
         if (Environment::enableExtraRoutesByParams()) {
-            $this->extra_routes = $_REQUEST[Params::EXTRA_ROUTES] ?? [];
-            $this->extra_routes = is_array($this->extra_routes) ? $this->extra_routes : array($this->extra_routes);
+            $this->extra_routes = Request::getExtraRoutes();
         }
 
         // Enable to add extra URLs in a fixed manner
@@ -361,17 +361,19 @@ class Engine implements EngineInterface
             // First make a backup of the current URI to set it again later
             $currentRoute = App::getState('route');
 
+            $appStateManager = App::getAppStateManager();
+
             // Process each extra URI, and merge its results with all others
             foreach ($extra_routes as $route) {
                 // Reset $vars so that it gets created anew
-                App::getAppStateManager()->override('route', $route);
+                $appStateManager->override('route', $route);
 
                 // Process the request with the new $vars and merge it with all other results
                 $this->processAndGenerateData();
             }
 
             // Set the previous values back
-            App::getAppStateManager()->override('route', $currentRoute);
+            $appStateManager->override('route', $currentRoute);
         }
 
         // Add session/site meta

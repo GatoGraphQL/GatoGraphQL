@@ -7,20 +7,31 @@ namespace PoP\SiteBuilderAPI\State;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\StratumManagerFactory;
 use PoP\ConfigurationComponentModel\Constants\Stratum;
+use PoP\Root\App;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
     public function initialize(array &$state): void
     {
-        $platformmanager = StratumManagerFactory::getInstance();
-        $stratum = $platformmanager->getStratum();
-        $strata = $platformmanager->getStrata($stratum);
-        $stratum_isdefault = $platformmanager->isDefaultStratum();
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
+            $platformmanager = StratumManagerFactory::getInstance();
+            $stratum = $platformmanager->getStratum();
+            $strata = $platformmanager->getStrata($stratum);
+            $stratum_isdefault = $platformmanager->isDefaultStratum();
 
-        $state['stratum'] = $stratum;
-        $state['strata'] = $strata;
-        $state['stratum-isdefault'] = $stratum_isdefault;
+            $state['stratum'] = $stratum;
+            $state['strata'] = $strata;
+            $state['stratum-isdefault'] = $stratum_isdefault;
+        } else {
+            $state['stratum'] = null;
+            $state['strata'] = null;
+            $state['stratum-isdefault'] = null;
+        }
     }
 
     /**

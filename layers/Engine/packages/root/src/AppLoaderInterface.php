@@ -23,8 +23,15 @@ interface AppLoaderInterface
      * @param array<string, array<string, mixed>> $componentClassConfiguration [key]: Component class, [value]: Configuration
      */
     public function addComponentClassConfiguration(
-        array $componentClassConfiguration = []
+        array $componentClassConfiguration
     ): void;
+
+    /**
+     * Set the initial state, eg: when passing state via $_REQUEST is disabled
+     *
+     * @param array<string,mixed> $initialAppState
+     */
+    public function setInitialAppState(array $initialAppState): void;
 
     /**
      * Add schema Component classes to skip initializing

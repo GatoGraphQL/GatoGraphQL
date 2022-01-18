@@ -11,7 +11,10 @@ use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
+use PoP\Definitions\Constants\ParamValues;
 use PoP\Root\App;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
@@ -42,25 +45,37 @@ class AppStateProvider extends AbstractAppStateProvider
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $componentConfiguration->mustNamespaceTypes();
 
-        $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
-        $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
         $state['only-fieldname-as-outputkey'] = false;
         $state['are-mutations-enabled'] = true;
 
-        $state['mangled'] = DefinitionsRequest::getMangledValue();
-        $state['actionpath'] = Request::getActionPath();
-        $state['actions'] = Request::getActions();
-        $state['version-constraint'] = Request::getVersionConstraint();
-        $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
-        $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
+        $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
+        $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
 
-        $enableModifyingEngineBehaviorViaRequestParams = $componentConfiguration->enableModifyingEngineBehaviorViaRequestParams();
-        $state['output'] = EngineRequest::getOutput($enableModifyingEngineBehaviorViaRequestParams);
-        $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequestParams);
-        $state['datasourceselector'] = EngineRequest::getDataSourceSelector($enableModifyingEngineBehaviorViaRequestParams);
-        $state['datastructure'] = EngineRequest::getDataStructure($enableModifyingEngineBehaviorViaRequestParams);
-        $state['dataoutputmode'] = EngineRequest::getDataOutputMode($enableModifyingEngineBehaviorViaRequestParams);
-        $state['dboutputmode'] = EngineRequest::getDBOutputMode($enableModifyingEngineBehaviorViaRequestParams);
-        $state['scheme'] = EngineRequest::getScheme($enableModifyingEngineBehaviorViaRequestParams);
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
+            $state['mangled'] = DefinitionsRequest::getMangledValue();
+            $state['actionpath'] = Request::getActionPath();
+            $state['actions'] = Request::getActions();
+            $state['version-constraint'] = Request::getVersionConstraint();
+            $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
+            $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
+        } else {
+            $state['mangled'] = ParamValues::MANGLED_NONE;
+            $state['actionpath'] = null;
+            $state['actions'] = [];
+            $state['version-constraint'] = null;
+            $state['field-version-constraints'] = null;
+            $state['directive-version-constraints'] = null;
+        }
+
+        $enableModifyingEngineBehaviorViaRequest = $componentConfiguration->enableModifyingEngineBehaviorViaRequest();
+        $state['output'] = EngineRequest::getOutput($enableModifyingEngineBehaviorViaRequest);
+        $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequest);
+        $state['datasourceselector'] = EngineRequest::getDataSourceSelector($enableModifyingEngineBehaviorViaRequest);
+        $state['datastructure'] = EngineRequest::getDataStructure($enableModifyingEngineBehaviorViaRequest);
+        $state['dataoutputmode'] = EngineRequest::getDataOutputMode($enableModifyingEngineBehaviorViaRequest);
+        $state['dboutputmode'] = EngineRequest::getDBOutputMode($enableModifyingEngineBehaviorViaRequest);
+        $state['scheme'] = EngineRequest::getScheme($enableModifyingEngineBehaviorViaRequest);
     }
 }

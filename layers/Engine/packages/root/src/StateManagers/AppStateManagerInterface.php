@@ -12,8 +12,10 @@ interface AppStateManagerInterface
      * Called by the AppLoader to initalize the state.
      *
      * Initialize application state
+     *
+     * @param array<string,mixed> $initialAppState
      */
-    public function initializeAppState(): void;
+    public function initializeAppState(array $initialAppState): void;
 
     /**
      * @return array<string,mixed>

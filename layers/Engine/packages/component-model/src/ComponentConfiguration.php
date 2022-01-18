@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
+use PoP\Root\App;
 use PoP\Root\Component\AbstractComponentConfiguration;
 use PoP\Root\Component\EnvironmentValueHelpers;
 use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {
@@ -231,9 +234,15 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     /**
      * Indicate if users can add URL params that modify the Engine's behavior.
      */
-    public function enableModifyingEngineBehaviorViaRequestParams(): bool
+    public function enableModifyingEngineBehaviorViaRequest(): bool
     {
-        $envVariable = Environment::ENABLE_MODIFYING_ENGINE_BEHAVIOR_VIA_REQUEST_PARAMS;
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
+            return false;
+        }
+
+        $envVariable = Environment::ENABLE_MODIFYING_ENGINE_BEHAVIOR_VIA_REQUEST;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

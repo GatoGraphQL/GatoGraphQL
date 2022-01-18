@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFiltering;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
+use PoP\Root\App;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
+use PoP\Root\Services\BasicServiceTrait;
 
 class ModuleFilterManager implements ModuleFilterManagerInterface
 {
@@ -90,11 +94,17 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     {
         if ($this->selected_filter_name) {
             return $this->selected_filter_name;
-        } elseif ($selectedModuleFilterName = $_REQUEST[Params::MODULEFILTER] ?? null) {
-            // Only valid if there's a corresponding moduleFilter
-            if (in_array($selectedModuleFilterName, array_keys($this->modulefilters))) {
-                return $selectedModuleFilterName;
-            }
+        }
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
+            return null;
+        }
+
+        // Only valid if there's a corresponding moduleFilter
+        $selectedModuleFilterName = Request::getModuleFilter();
+        if ($selectedModuleFilterName !== null && in_array($selectedModuleFilterName, array_keys($this->modulefilters))) {
+            return $selectedModuleFilterName;
         }
 
         return null;
