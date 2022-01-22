@@ -132,6 +132,6 @@ jobs:
             # Exclude layers/Legacy/ which is not part of any project,
             # and DOES contain PHP 8.0 (it's not being downgraded)
             -   name: Run PHP Parallel Lint on PHP 7.1
-                run: php-parallel-lint/parallel-lint layers/ vendor/ --exclude layers/Legacy/ --exclude vendor/symfony/polyfill-ctype/bootstrap80.php --exclude vendor/symfony/polyfill-intl-grapheme/bootstrap80.php --exclude vendor/symfony/polyfill-intl-idn/bootstrap80.php --exclude vendor/symfony/polyfill-intl-normalizer/bootstrap80.php --exclude vendor/symfony/polyfill-mbstring/bootstrap80.php --exclude ${{ needs.provide_data.outputs.exclude_package_tests }}
+                run: php-parallel-lint/parallel-lint layers/ vendor/ --exclude layers/Legacy/ --exclude vendor/symfony/polyfill-ctype/bootstrap80.php --exclude vendor/symfony/polyfill-intl-grapheme/bootstrap80.php --exclude vendor/symfony/polyfill-intl-idn/bootstrap80.php --exclude vendor/symfony/polyfill-intl-normalizer/bootstrap80.php --exclude vendor/symfony/polyfill-mbstring/bootstrap80.php--exclude vendor/symfony/cache/DataCollector/CacheDataCollector.php --exclude vendor/symfony/cache/DoctrineProvider.php --exclude vendor/symfony/cache/Messenger/EarlyExpirationHandler.php --exclude vendor/symfony/dotenv/Command/DebugCommand.php --exclude vendor/symfony/dotenv/Command/DotenvDumpCommand.php --exclude vendor/symfony/string/Slugger/AsciiSlugger.php --exclude ${{ needs.provide_data.outputs.exclude_package_tests }}
 
 
