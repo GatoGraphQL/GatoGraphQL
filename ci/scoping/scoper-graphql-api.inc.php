@@ -23,7 +23,7 @@ use Isolated\Symfony\Component\Finder\Finder;
  * in getpop/root-wp/src/Component.php:
  *   use Brain\Cortex;
  *
- * in getpop/root-wp/src/Hooks/SetupCortexHookSet.php:
+ * in getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php:
  *   use Brain\Cortex\Route\RouteCollectionInterface;
  *   use Brain\Cortex\Route\RouteInterface;
  *   use Brain\Cortex\Route\QueryRoute;
