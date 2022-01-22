@@ -208,7 +208,9 @@ class ContainerConfigurationService
             fn (string $commandClass) => service($commandClass),
             $commandClasses
         );
-        $services->get(Application::class)
+
+        $services->set(Application::class)
+            ->public()
             ->call('addCommands', [$commandClassServices]);
     }
 
