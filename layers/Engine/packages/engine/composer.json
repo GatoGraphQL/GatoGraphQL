@@ -161,7 +161,7 @@
     "require": {
         "php": "^8.0",
         "getpop/cache-control": "^0.9",
-        "psr/cache": "^1.0"
+        "psr/cache": "^3.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.4",
