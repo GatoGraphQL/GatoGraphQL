@@ -8,13 +8,11 @@ use InvalidArgumentException;
 use PoP\Root\Environment;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 
 trait ContainerBuilderFactoryTrait
 {
-    protected Container $instance;
+    protected ContainerInterface $instance;
     protected bool $cacheContainerConfiguration;
     protected bool $cached;
     protected string $cacheFile;
@@ -114,7 +112,7 @@ trait ContainerBuilderFactoryTrait
             $this->instance = new $containerFullyQuantifiedClass();
         }
     }
-    public function getInstance(): Container
+    public function getInstance(): ContainerInterface
     {
         return $this->instance;
     }
