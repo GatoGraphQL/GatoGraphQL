@@ -170,7 +170,7 @@
         "getpop/modulerouting": "^0.9",
         "jrfnl/php-cast-to-type": "^2.0",
         "league/pipeline": "^1.0",
-        "psr/simple-cache": "^1.0",
+        "psr/simple-cache": "^3.0",
         "symfony/cache": "^6.0",
         "symfony/expression-language": "^6.0"
     },
