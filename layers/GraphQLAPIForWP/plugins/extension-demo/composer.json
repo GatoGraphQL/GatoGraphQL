@@ -171,7 +171,7 @@
         "graphql-api/graphql-api-for-wp": "^0.9",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
-        "squizlabs/php_codesniffer": "^3.0"
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "autoload": {
         "psr-4": {

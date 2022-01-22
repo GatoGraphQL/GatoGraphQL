@@ -23,7 +23,7 @@
         "phpunit/phpunit": "^9.5",
         "pop-cms-schema/users": "^0.9",
         "rector/rector": "^0.12",
-        "squizlabs/php_codesniffer": "^3.0"
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "suggest": {
         "pop-api/api": "Integrates well with API",

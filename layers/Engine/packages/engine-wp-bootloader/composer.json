@@ -19,7 +19,7 @@
         "getpop/root-wp": "^0.9"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.0"
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "extra": {
         "branch-alias": {
