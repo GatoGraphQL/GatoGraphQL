@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "boxuk/wp-muplugin-loader": "^1.5",
+        "boxuk/wp-muplugin-loader": "^1.6",
         "composer/installers": "~1.0",
         "getpop/root-wp": "^0.9"
     },
