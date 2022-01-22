@@ -188,6 +188,23 @@ return [
                     $content
                 );
             }
+            /**
+             * In these files, it prefixes the return type `self`.
+             * Undo it!
+             */
+            $symfonyPolyfillFilesWithSelfReturnType = array_map(
+                'convertRelativeToFullPath',
+                [
+                    'vendor/symfony/dependency-injection/Compiler/AutowirePass.php',
+                ]
+            );
+            if (in_array($filePath, $symfonyPolyfillFilesWithSelfReturnType)) {
+                return str_replace(
+                    "\\${prefix}\\self",
+                    'self',
+                    $content
+                );
+            }
 
             return $content;
         },
