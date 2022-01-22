@@ -19,7 +19,7 @@
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
-        "phpunit/phpunit": ">=9.3",
+        "phpunit/phpunit": "^9.5",
         "pop-cms-schema/user-state-wp": "^0.9",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.0",
