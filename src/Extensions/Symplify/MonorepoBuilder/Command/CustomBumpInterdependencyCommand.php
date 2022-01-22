@@ -12,7 +12,6 @@ use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\Validator\SourcesPresenceValidator;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
-use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
 final class CustomBumpInterdependencyCommand extends AbstractSymplifyCommand
