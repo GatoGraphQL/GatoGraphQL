@@ -39,6 +39,6 @@ final class AdditionalDowngradeRectorConfigsCommand extends AbstractSymplifyComm
 
         $this->symfonyStyle->writeln($additionalDowngradeRectorConfigs);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

@@ -42,6 +42,6 @@ final class PluginConfigEntriesJsonCommand extends AbstractSymplifyCommand
         $json = Json::encode($pluginConfigEntries);
         $this->symfonyStyle->writeln($json);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

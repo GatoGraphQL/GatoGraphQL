@@ -45,6 +45,6 @@ final class PackageEntriesJsonCommand extends AbstractSymplifyCommand
         $json = Json::encode($packageEntries);
         $this->symfonyStyle->writeln($json);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

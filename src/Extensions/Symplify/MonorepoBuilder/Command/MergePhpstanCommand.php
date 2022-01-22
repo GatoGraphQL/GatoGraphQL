@@ -57,6 +57,6 @@ final class MergePhpstanCommand extends AbstractSymplifyCommand
         $outputFilePath = (string) $input->getOption(Option::OUTPUT_FILE);
         $this->neonFilePrinter->printContentToOutputFile($neonFileContent, $outputFilePath);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

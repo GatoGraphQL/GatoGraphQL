@@ -59,6 +59,6 @@ final class SymlinkLocalPackageCommand extends AbstractSymplifyCommand
         );
         $this->symfonyStyle->success($message);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

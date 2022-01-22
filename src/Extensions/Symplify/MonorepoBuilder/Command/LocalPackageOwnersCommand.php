@@ -31,6 +31,6 @@ final class LocalPackageOwnersCommand extends AbstractSymplifyCommand
 
         $this->symfonyStyle->writeln(implode(' ', $localPackageOwners));
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

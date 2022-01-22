@@ -64,6 +64,6 @@ final class CustomBumpInterdependencyCommand extends AbstractSymplifyCommand
         $successMessage = sprintf('Inter-dependencies of packages were updated to "%s".', $version);
         $this->symfonyStyle->success($successMessage);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

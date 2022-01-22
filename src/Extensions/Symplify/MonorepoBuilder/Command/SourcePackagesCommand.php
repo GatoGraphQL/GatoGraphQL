@@ -95,6 +95,6 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
         $response = $asJSON ? Json::encode($sourcePackagePaths) : implode(' ', $sourcePackagePaths);
         $this->symfonyStyle->writeln($response);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

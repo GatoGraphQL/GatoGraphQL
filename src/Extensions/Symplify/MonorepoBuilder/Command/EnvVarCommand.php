@@ -51,6 +51,6 @@ final class EnvVarCommand extends AbstractSymplifyCommand
         // false => ""
         $this->symfonyStyle->writeln($environmentVariableValue);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }
