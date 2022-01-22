@@ -16,7 +16,7 @@
         "brain/cortex": "1.0.0-alpha.7",
         "composer/installers": "~1.0",
         "composer/semver": "^3.2",
-        "guzzlehttp/guzzle": "~6.3",
+        "guzzlehttp/guzzle": "^7.4",
         "jrfnl/php-cast-to-type": "^2.0",
         "league/pipeline": "^1.0",
         "michelf/php-markdown": "^1.9",
