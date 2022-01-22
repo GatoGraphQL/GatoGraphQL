@@ -20,7 +20,7 @@
     "require-dev": {
         "pop-api/api": "^0.9",
         "pop-api/api-rest": "^0.9",
-        "phpstan/phpstan": "^1.0",
+        "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.0"

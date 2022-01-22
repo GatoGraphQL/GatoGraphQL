@@ -18,7 +18,7 @@
         "pop-cms-schema/schema-commons": "^0.9"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.0",
+        "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": ">=9.3",
         "pop-cms-schema/users": "^0.9",
         "rector/rector": "^0.12",
