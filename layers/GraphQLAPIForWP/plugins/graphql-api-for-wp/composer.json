@@ -58,7 +58,7 @@
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.0",
-        "symfony/var-dumper": "^5.1",
+        "symfony/var-dumper": "^6.0",
         "szepeviktor/phpstan-wordpress": "^1.0"
     },
     "repositories": [
