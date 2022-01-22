@@ -6966,16 +6966,16 @@
         },
         {
             "name": "symplify/monorepo-builder",
-            "version": "10.0.14.2",
+            "version": "10.0.14.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leoloso/monorepo-builder.git",
-                "reference": "6b4530b93d29c18a15394ba7c5d96cddbe8e1234"
+                "reference": "6b7991ee280421c0bade6c1d2149480f18f965eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leoloso/monorepo-builder/zipball/6b4530b93d29c18a15394ba7c5d96cddbe8e1234",
-                "reference": "6b4530b93d29c18a15394ba7c5d96cddbe8e1234",
+                "url": "https://api.github.com/repos/leoloso/monorepo-builder/zipball/6b7991ee280421c0bade6c1d2149480f18f965eb",
+                "reference": "6b7991ee280421c0bade6c1d2149480f18f965eb",
                 "shasum": ""
             },
             "require": {
@@ -7052,7 +7052,7 @@
             ],
             "description": "Not only Composer tools to build a Monorepo.",
             "support": {
-                "source": "https://github.com/leoloso/monorepo-builder/tree/10.0.14.2"
+                "source": "https://github.com/leoloso/monorepo-builder/tree/10.0.14.20"
             },
             "funding": [
                 {
@@ -7064,7 +7064,7 @@
                     "url": "https://www.paypal.me/rectorphp"
                 }
             ],
-            "time": "2022-01-22T15:53:27+00:00"
+            "time": "2022-01-22T15:58:47+00:00"
         },
         {
             "name": "symplify/package-builder",
