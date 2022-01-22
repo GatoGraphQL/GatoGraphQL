@@ -35,7 +35,7 @@
         "symfony/yaml": "^6.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.2",
+        "friendsofphp/php-cs-fixer": "^3.5",
         "johnpbloch/wordpress": ">=5.5",
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": ">=9.3",
