@@ -18,7 +18,9 @@ use Isolated\Symfony\Component\Finder\Finder;
  * Excluding the WordPress packages is feasible, because they do
  * not reference any external library.
  *
- * The only exception is getpop/root-wp, which uses Brain\Cortex:
+ * The only exceptions are:
+ * 
+ * 1. getpop/root-wp, which uses Brain\Cortex:
  *
  * in getpop/root-wp/src/Component.php:
  *   use Brain\Cortex;
@@ -27,6 +29,10 @@ use Isolated\Symfony\Component\Finder\Finder;
  *   use Brain\Cortex\Route\RouteCollectionInterface;
  *   use Brain\Cortex\Route\RouteInterface;
  *   use Brain\Cortex\Route\QueryRoute;
+ *
+ * 2. layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/App.php, which uses Symfony:
+ *
+ *   use Symfony\Component\DependencyInjection\Container;
  *
  * Then, manually add these 2 files to scope Brain\Cortex.
  * This works without side effects, because there are no WordPress stubs in them.
@@ -69,6 +75,7 @@ return [
         Finder::create()->append([
             convertRelativeToFullPath('vendor/getpop/root-wp/src/Component.php'),
             convertRelativeToFullPath('vendor/getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php'),
+            convertRelativeToFullPath('src/App.php'),
         ])
     ],
     'whitelist' => array_values(array_unique([
