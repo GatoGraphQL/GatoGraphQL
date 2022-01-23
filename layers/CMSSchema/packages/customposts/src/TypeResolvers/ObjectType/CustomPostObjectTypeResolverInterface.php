@@ -8,5 +8,4 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 interface CustomPostObjectTypeResolverInterface extends ObjectTypeResolverInterface
 {
-
 }

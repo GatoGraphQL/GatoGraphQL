@@ -8,5 +8,4 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFi
 
 abstract class AbstractPostsFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver implements PostsFilterInputObjectTypeResolverInterface
 {
-
 }

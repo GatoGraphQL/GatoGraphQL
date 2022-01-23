@@ -11,11 +11,23 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PackageOrganizationDataS
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PHPStanDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersDataSource;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\AdditionalDowngradeRectorConfigsCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\CustomBumpInterdependencyCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\EnvVarCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\LocalPackageOwnersCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\MergePhpstanCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageEntriesJsonCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PluginConfigEntriesJsonCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SourcePackagesCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
+use Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 use Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\PackageBuilder\Neon\NeonPrinter;
+
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 class ContainerConfigurationService
 {
@@ -168,6 +180,11 @@ class ContainerConfigurationService
         $this->setCustomServices($services);
 
         /**
+         * Load all the command services
+         */
+        $this->addCommandServices($services);
+
+        /**
          * Release workers
          */
         $this->setReleaseWorkerServices($services);
@@ -179,6 +196,38 @@ class ContainerConfigurationService
             ->set(NeonPrinter::class) // Required to inject into PHPStanNeonContentProvider
             ->load('PoP\\PoP\\Config\\', $this->rootDirectory . '/src/Config/*')
             ->load('PoP\\PoP\\Extensions\\', $this->rootDirectory . '/src/Extensions/*');
+    }
+
+    private function addCommandServices(ServicesConfigurator $services): void
+    {
+        $commandClasses = $this->getCommandClasses();
+        if ($commandClasses === []) {
+            return;
+        }
+        $commandClassServices = array_map(
+            fn (string $commandClass) => service($commandClass),
+            $commandClasses
+        );
+        $services->get(Application::class)
+            ->call('addCommands', [$commandClassServices]);
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getCommandClasses(): array
+    {
+        return [
+            AdditionalDowngradeRectorConfigsCommand::class,
+            CustomBumpInterdependencyCommand::class,
+            EnvVarCommand::class,
+            LocalPackageOwnersCommand::class,
+            MergePhpstanCommand::class,
+            PackageEntriesJsonCommand::class,
+            PluginConfigEntriesJsonCommand::class,
+            SourcePackagesCommand::class,
+            SymlinkLocalPackageCommand::class,
+        ];
     }
 
     protected function setReleaseWorkerServices(ServicesConfigurator $services): void

@@ -7,12 +7,12 @@ namespace PoP\Root;
 use LogicException;
 use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\StateManagers\AppStateManagerInterface;
 use PoP\Root\StateManagers\ComponentManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
 use PoP\Root\Stores\MutationResolutionStore;
-use Symfony\Component\DependencyInjection\Container;
 
 /**
  * Single class hosting all the top-level instances to run the application
@@ -61,12 +61,12 @@ interface AppInterface
     /**
      * Shortcut function.
      */
-    public static function getContainer(): Container;
+    public static function getContainer(): ContainerInterface;
 
     /**
      * Shortcut function.
      */
-    public static function getSystemContainer(): Container;
+    public static function getSystemContainer(): ContainerInterface;
 
     /**
      * Shortcut function.

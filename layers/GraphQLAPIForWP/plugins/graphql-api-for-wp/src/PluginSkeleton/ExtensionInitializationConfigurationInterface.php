@@ -6,5 +6,4 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 interface ExtensionInitializationConfigurationInterface extends PluginInitializationConfigurationInterface
 {
-
 }
