@@ -170,9 +170,9 @@ trait ContainerBuilderFactoryTrait
                                 'namespace' => $this->getContainerNamespace(),
                                 /**
                                  * Extend from own Container since it must implement ContainerInterface.
-                                 * It must be fully-qualified, or PhpDumper will also add "PoPContainer\\"
+                                 * It must start with "\", or PhpDumper will also prepend "PoPContainer\\"
                                  */
-                                'base_class' => \PoP\Root\Container\Container::class,
+                                'base_class' => '\\' . Container::class,
                             ]
                         )
                     );
