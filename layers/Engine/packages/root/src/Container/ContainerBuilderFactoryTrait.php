@@ -168,8 +168,11 @@ trait ContainerBuilderFactoryTrait
                                 'class' => $this->getContainerClass(),
                                 // Save under own namespace to avoid conflicts
                                 'namespace' => $this->getContainerNamespace(),
-                                // Extend from own Container since it must implement ContainerInterface
-                                'base_class' => Container::class,
+                                /**
+                                 * Extend from own Container since it must implement ContainerInterface.
+                                 * It must be fully-qualified, or PhpDumper will also add "PoPContainer\\"
+                                 */
+                                'base_class' => \PoP\Root\Container\Container::class,
                             ]
                         )
                     );
