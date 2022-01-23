@@ -117,6 +117,14 @@ jobs:
             -   name: Downgrade code for production (to PHP 7.1)
                 run: ci/downgrade/downgrade_code.sh "${{ matrix.pluginConfig.rector_downgrade_config }}" "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.additional_rector_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
 
+            ################################################################################
+            # Temporary hack: fix the return type in Trait, not yet handled by Rector: https://github.com/rectorphp/rector/issues/???
+            -   name: Temporary hack - fix the return type in Trait
+                run: |
+                    sed -i 's/function getItem($key): CacheItem/function getItem($key): \\Psr\\Cache\\CacheItemInterface/' vendor/symfony/cache/Traits/AbstractAdapterTrait.php
+                working-directory: ${{ matrix.pluginConfig.path }}
+            ################################################################################
+
             -   name: Replace PHP version in plugin main file
                 run: |
                     sed -i 's/Requires PHP: 8.0/Requires PHP: 7.1/' ${{ matrix.pluginConfig.main_file }}
