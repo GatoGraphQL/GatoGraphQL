@@ -164,10 +164,12 @@ trait ContainerBuilderFactoryTrait
                     file_put_contents(
                         $this->cacheFile,
                         $dumper->dump(
-                            // Save under own namespace to avoid conflicts
                             [
-                                'namespace' => $this->getContainerNamespace(),
                                 'class' => $this->getContainerClass(),
+                                // Save under own namespace to avoid conflicts
+                                'namespace' => $this->getContainerNamespace(),
+                                // Extend from own Container since it must implement ContainerInterface
+                                'base_class' => Container::class,
                             ]
                         )
                     );
