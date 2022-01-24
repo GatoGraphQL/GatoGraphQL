@@ -8,6 +8,8 @@ class EditorHelpers
 {
     /**
      * Get the post type currently being created/edited in the editor
+     *
+     * phpcs:disable Generic.PHP.DisallowRequestSuperglobal
      */
     public function getEditingPostType(): ?string
     {

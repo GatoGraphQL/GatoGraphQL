@@ -82,7 +82,7 @@ class ModuleListTable extends AbstractItemListTable
      */
     protected function getCurrentView(): string
     {
-        return !empty($_REQUEST[self::URL_PARAM_MODULE_TYPE] ?? null) ? $_REQUEST[self::URL_PARAM_MODULE_TYPE] : '';
+        return $_POST[self::URL_PARAM_MODULE_TYPE] ?? $_GET[self::URL_PARAM_MODULE_TYPE] ?? '';
     }
 
     /**
@@ -99,7 +99,7 @@ class ModuleListTable extends AbstractItemListTable
         // Module page URL
         $url = admin_url(sprintf(
             'admin.php?page=%s',
-            esc_attr($_REQUEST['page'] ?? '')
+            esc_attr($_POST['page'] ?? $_GET['page'] ?? '')
         ));
 
         // All entries
@@ -306,7 +306,7 @@ class ModuleListTable extends AbstractItemListTable
         $currentView = $this->getCurrentView();
         $maybeCurrentViewParam = !empty($currentView) ? '&' . self::URL_PARAM_MODULE_TYPE . '=' . $currentView : '';
         $linkPlaceholder = '<a href="?page=%s&action=%s&item=%s&_wpnonce=%s' . ($maybeCurrentViewParam) . '">%s</a>';
-        $page = esc_attr($_REQUEST['page'] ?? '');
+        $page = esc_attr($_POST['page'] ?? $_GET['page'] ?? '');
         $actions = [];
         if ($item['is-enabled']) {
             // If it is enabled, offer to disable it
