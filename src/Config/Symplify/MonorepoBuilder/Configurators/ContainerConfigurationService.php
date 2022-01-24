@@ -11,6 +11,7 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PackageOrganizationDataS
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PHPStanDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\SkipDowngradeTestPathsDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\AdditionalDowngradeRectorConfigsCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\CustomBumpInterdependencyCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\EnvVarCommand;
@@ -18,6 +19,7 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\LocalPackageOwnersComman
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\MergePhpstanCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageEntriesJsonCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PluginConfigEntriesJsonCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SkipDowngradeTestPathsCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SourcePackagesCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
@@ -66,6 +68,16 @@ class ContainerConfigurationService
             $parameters->set(
                 CustomOption::PLUGIN_CONFIG_ENTRIES,
                 $pluginConfig->getPluginConfigEntries()
+            );
+        }
+
+        /**
+         * Skip files from testing for downgrades
+         */
+        if ($skipDowngradeTestFilesConfig = $this->getSkipDowngradeTestPathsDataSource($this->rootDirectory)) {
+            $parameters->set(
+                CustomOption::SKIP_DOWNGRADE_TEST_FILES,
+                $skipDowngradeTestFilesConfig->getSkipDowngradeTestPaths()
             );
         }
 
@@ -147,6 +159,11 @@ class ContainerConfigurationService
         return new PluginDataSource($this->rootDirectory);
     }
 
+    protected function getSkipDowngradeTestPathsDataSource(): ?SkipDowngradeTestPathsDataSource
+    {
+        return new SkipDowngradeTestPathsDataSource($this->rootDirectory);
+    }
+
     protected function getDowngradeRectorDataSource(): ?DowngradeRectorDataSource
     {
         return new DowngradeRectorDataSource($this->rootDirectory);
@@ -225,6 +242,7 @@ class ContainerConfigurationService
             MergePhpstanCommand::class,
             PackageEntriesJsonCommand::class,
             PluginConfigEntriesJsonCommand::class,
+            SkipDowngradeTestPathsCommand::class,
             SourcePackagesCommand::class,
             SymlinkLocalPackageCommand::class,
         ];
