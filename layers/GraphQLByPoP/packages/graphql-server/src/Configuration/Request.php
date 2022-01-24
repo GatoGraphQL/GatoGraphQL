@@ -14,7 +14,7 @@ class Request
     {
         $editSchema = $_POST[Params::EDIT_SCHEMA] ?? $_GET[Params::EDIT_SCHEMA] ?? null;
         if ($editSchema === null) {
-            return null;
+            return false;
         }
         return EnvironmentValueHelpers::toBool($editSchema);
     }
