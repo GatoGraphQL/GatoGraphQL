@@ -15,6 +15,29 @@ class SkipDowngradeTestFilesDataSource
      */
     public function getSkipDowngradeTestFiles(): array
     {
-        return [];
+        $relativeFiles = $this->getSkipDowngradeTestRelativeFiles();
+        if (false) {
+            return $relativeFiles;
+        }
+        return array_map(
+            fn (string $file) => $this->rootDir . '/' . $file,
+            $relativeFiles
+        );
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getSkipDowngradeTestRelativeFiles(): array
+    {
+        return [
+            // 'vendor/symfony/cache/Adapter/MemcachedAdapter.php',
+            'vendor/symfony/cache/DataCollector/CacheDataCollector.php',
+            'vendor/symfony/cache/DoctrineProvider.php',
+            'vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
+            'vendor/symfony/dotenv/Command/DebugCommand.php',
+            'vendor/symfony/dotenv/Command/DotenvDumpCommand.php',
+            'vendor/symfony/string/Slugger/AsciiSlugger.php',
+        ];
     }
 }
