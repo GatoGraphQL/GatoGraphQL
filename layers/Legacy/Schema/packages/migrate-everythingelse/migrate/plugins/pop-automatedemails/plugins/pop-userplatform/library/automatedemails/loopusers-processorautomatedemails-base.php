@@ -25,7 +25,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             $module = $engine->getEntryModule();
             $processor = $moduleprocessor_manager->getProcessor($module);
             $formatter = $dataStructureManager->getDataStructureFormatter();
-            $request = $_REQUEST;
+            $request = $_GET;
 
             // In order to obtain the dbobjectids from the results, located under pssId and bsId
             $pagesection_settings_id = $this->getPagesectionSettingsid();

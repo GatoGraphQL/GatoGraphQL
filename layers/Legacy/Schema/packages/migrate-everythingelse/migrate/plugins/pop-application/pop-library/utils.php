@@ -10,7 +10,7 @@ class PoP_Application_Utils
 
     public static function getRequestDomain()
     {
-        // Allow PoP Multidomain to override this value with the domain in the $_REQUEST
+        // Allow PoP Multidomain to override this value with the domain in the $_GET
         $cmsService = CMSServiceFacade::getInstance();
         return \PoP\Root\App::applyFilters(
             'PoP_Application_Utils:request-domain',

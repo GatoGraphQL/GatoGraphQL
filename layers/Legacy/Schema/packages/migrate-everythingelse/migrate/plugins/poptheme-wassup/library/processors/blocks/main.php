@@ -189,7 +189,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
             case self::MODULE_BLOCK_AUTHOR:
             case self::MODULE_BLOCK_TAG:
 
-                // When loading the whole site, only the main content can have components retrieve params from the $_REQUEST
+                // When loading the whole site, only the main content can have components retrieve params from the $_GET
                 // This way, passing &limit=4 doesn't affect the results on the top widgets
                 $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
                 $submodules = array_diff(

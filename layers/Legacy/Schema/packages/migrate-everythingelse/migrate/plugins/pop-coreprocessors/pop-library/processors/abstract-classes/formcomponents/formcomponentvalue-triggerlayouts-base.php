@@ -70,7 +70,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         $this->metaFormcomponentInitModuleRequestProps($module, $props);
 
         // Because the URL param and the field name are disassociated, instead of getting ->getValue (which gets the value for the fieldname),
-        // we do $_REQUEST instead
+        // we do $_GET instead
         if ($value = $_GET[$this->getUrlParam($module)] ?? null) {
             $trigger_module = $this->getTriggerSubmodule($module);
             $this->setProp($trigger_module, $props, 'default-value', $value);
