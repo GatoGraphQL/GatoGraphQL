@@ -26,7 +26,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST:
-                $pid = $_REQUEST[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID];
+                $pid = $_GET[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID];
                 return sprintf(
                     '<p>%s</p><h1>%s</h1>',
                     sprintf(

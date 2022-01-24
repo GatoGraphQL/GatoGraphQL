@@ -31,7 +31,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
 
             case self::CHECKPOINT_EDITINGCOMMUNITYMEMBER:
                 // Validate the user being edited is member of the community
-                $user_id = $_REQUEST[\PoPCMSSchema\Users\Constants\InputNames::USER_ID];
+                $user_id = $_GET[\PoPCMSSchema\Users\Constants\InputNames::USER_ID];
                 $community = $current_user_id;
                 $status = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
                 $community_status = gdUreFindCommunityMetavalues($community, $status);
@@ -42,8 +42,8 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
                 break;
 
             case self::CHECKPOINT_EDITMEMBERSHIPNONCE:
-                $user_id = $_REQUEST[\PoPCMSSchema\Users\Constants\InputNames::USER_ID];
-                $nonce = $_REQUEST[POP_INPUTNAME_NONCE];
+                $user_id = $_GET[\PoPCMSSchema\Users\Constants\InputNames::USER_ID];
+                $nonce = $_GET[POP_INPUTNAME_NONCE];
                 if (!gdVerifyNonce($nonce, GD_NONCE_EDITMEMBERSHIPURL, $user_id)) {
                     return new Error('nonceinvalid');
                 }

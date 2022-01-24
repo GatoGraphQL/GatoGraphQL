@@ -18,7 +18,7 @@ class GD_DataLoad_QueryInputOutputHandler_AddPost extends ActionExecutionQueryIn
     //             // If the post was not just created but actually updated (created first and then on that same page updated it)
     //             // then change the success code
     //             $pid = $dbobjectids[0];
-    //             if ($pid == $_REQUEST[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID]) {
+    //             if ($pid == $_GET[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID]) {
 
     //                 $ret['msgs'][0]['header']['code'] = 'update-success-header';
     //             }
@@ -42,8 +42,8 @@ class GD_DataLoad_QueryInputOutputHandler_AddPost extends ActionExecutionQueryIn
         // then the 'pid' is already sent in the request. Then already use it.
         // Otherwise, if we create a post successfully, then when editing the validation fails, it will delete the
         // 'pid' from the response and treat the next iteration as yet a new post
-        if (isset($_REQUEST[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID])) {
-            $pid = $_REQUEST[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID];
+        if (isset($_GET[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID])) {
+            $pid = $_GET[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID];
             $ret[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID] = $pid;
             $ret[POP_INPUTNAME_NONCE] = gdCreateNonce(GD_NONCE_EDITURL, $pid);
         }
@@ -76,7 +76,7 @@ class GD_DataLoad_QueryInputOutputHandler_AddPost extends ActionExecutionQueryIn
     //     // then the 'pid' is already sent in the request. Then already use it.
     //     // Otherwise, if we create a post successfully, then when editing the validation fails, it will delete the
     //     // 'pid' from the response and treat the next iteration as yet a new post
-    //     if ($pid = $_REQUEST[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID]) {
+    //     if ($pid = $_GET[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID]) {
     //         $ret[ParamConstants::PARAMS][\PoPCMSSchema\Posts\Constants\InputNames::POST_ID] = $pid;
     //         $ret[ParamConstants::PARAMS][POP_INPUTNAME_NONCE] = gdCreateNonce(GD_NONCE_EDITURL, $pid);
     //     }

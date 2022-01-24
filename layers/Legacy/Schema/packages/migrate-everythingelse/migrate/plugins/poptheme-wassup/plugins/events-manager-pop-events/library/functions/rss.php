@@ -22,13 +22,13 @@ function popEmGetRssPostlistCampaigns($campaigns)
 \PoP\Root\App::addFilter('em_rss_template_args', 'popEmRssTemplateArgs');
 function popEmRssTemplateArgs($args)
 {
-    if (isset($_REQUEST[GD_URLPARAM_RSSCAMPAIGN])) {
+    if (isset($_GET[GD_URLPARAM_RSSCAMPAIGN])) {
         // Change the scope
         $scope_days = array(
             GD_URLPARAM_RSSCAMPAIGN_UPCOMINGEVENTS_3DAYS => 3,
             GD_URLPARAM_RSSCAMPAIGN_UPCOMINGEVENTS_4DAYS => 4,
         );
-        if ($days = $scope_days[$_REQUEST[GD_URLPARAM_RSSCAMPAIGN]]) {
+        if ($days = $scope_days[$_GET[GD_URLPARAM_RSSCAMPAIGN]]) {
             $args['scope'] = $days.'-days';
         }
     }

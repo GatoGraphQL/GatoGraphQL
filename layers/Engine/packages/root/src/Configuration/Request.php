@@ -10,9 +10,10 @@ class Request
 {
     public static function getRoute(): ?string
     {
-        if (isset($_REQUEST[Params::ROUTE])) {
-            return trim(strtolower($_REQUEST[Params::ROUTE]), '/');
+        $route = $_POST[Params::ROUTE] ?? $_GET[Params::ROUTE] ?? null;
+        if ($route === null) {
+            return null;
         }
-        return null;
+        return trim(strtolower($route), '/');
     }
 }

@@ -28,7 +28,7 @@ class PoP_URE_Engine_Hooks
         if ($vars['nature'] == UserRequestNature::USER) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                $source = $_REQUEST[GD_URLPARAM_URECONTENTSOURCE] ?? null;
+                $source = $_GET[GD_URLPARAM_URECONTENTSOURCE] ?? null;
                 $sources = array(
                     GD_URLPARAM_URECONTENTSOURCE_USER,
                     GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,

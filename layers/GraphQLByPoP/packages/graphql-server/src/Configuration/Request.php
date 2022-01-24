@@ -12,10 +12,11 @@ class Request
 {
     public static function editSchema(): bool
     {
-        if (isset($_REQUEST[Params::EDIT_SCHEMA])) {
-            return EnvironmentValueHelpers::toBool($_REQUEST[Params::EDIT_SCHEMA]);
+        $editSchema = $_POST[Params::EDIT_SCHEMA] ?? $_GET[Params::EDIT_SCHEMA] ?? null;
+        if ($editSchema === null) {
+            return false;
         }
-        return false;
+        return EnvironmentValueHelpers::toBool($editSchema);
     }
 
     public static function getMutationScheme(): ?string
@@ -24,7 +25,7 @@ class Request
             return null;
         }
 
-        $scheme = $_REQUEST[Params::MUTATION_SCHEME] ?? null;
+        $scheme = $_POST[Params::MUTATION_SCHEME] ?? $_GET[Params::MUTATION_SCHEME] ?? null;
         if ($scheme === null) {
             return null;
         }
@@ -43,9 +44,10 @@ class Request
 
     public static function enableGraphQLIntrospection(): ?bool
     {
-        if (isset($_REQUEST[Params::ENABLE_GRAPHQL_INTROSPECTION])) {
-            return EnvironmentValueHelpers::toBool($_REQUEST[Params::ENABLE_GRAPHQL_INTROSPECTION]);
+        $enableGraphQLIntrospection = $_POST[Params::ENABLE_GRAPHQL_INTROSPECTION] ?? $_GET[Params::ENABLE_GRAPHQL_INTROSPECTION] ?? null;
+        if ($enableGraphQLIntrospection === null) {
+            return null;
         }
-        return null;
+        return EnvironmentValueHelpers::toBool($enableGraphQLIntrospection);
     }
 }

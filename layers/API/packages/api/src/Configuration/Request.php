@@ -15,7 +15,7 @@ class Request
             return null;
         }
 
-        $useNamespace = $_REQUEST[Params::USE_NAMESPACE] ?? null;
+        $useNamespace = $_GET[Params::USE_NAMESPACE] ?? null;
         if ($useNamespace === null) {
             return null;
         }

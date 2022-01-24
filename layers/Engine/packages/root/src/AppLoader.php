@@ -90,7 +90,7 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
-     * Set the initial state, eg: when passing state via $_REQUEST is disabled
+     * Set the initial state, eg: when passing state via the request is disabled
      *
      * @param array<string,mixed> $initialAppState
      */

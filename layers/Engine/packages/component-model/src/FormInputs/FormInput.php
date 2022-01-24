@@ -31,10 +31,9 @@ class FormInput
         return false;
     }
 
-    protected function getValueFromSource(array $source): mixed
+    protected function getValueFromSource(?array $source = null): mixed
     {
-        // If not set, it will be NULL
-        $value = $source[$this->getName()] ?? null;
+        $value = $this->getValueFromSourceOrRequest($source, $this->getName());
 
         // If it is multiple and the URL contains an empty value (eg: &searchfor[]=&), it will interpret it as array(''),
         // but instead it must be an empty array
@@ -53,13 +52,23 @@ class FormInput
         return $value;
     }
 
+    protected function getValueFromSourceOrRequest(?array $source = null, string $name): mixed
+    {
+        // If not set, it will be NULL
+        $value = null;
+        if ($source !== null) {
+            $value = $source[$name] ?? null;
+        }
+        return $value ?? $_POST[$name] ?? $_GET[$name] ?? null;
+    }
+
     public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * $_REQUEST has priority (for when editing post / user data, after submitting form this will override original post / user metadata values)
+     * $_POST/$_GET has priority (for when editing post / user data, after submitting form this will override original post / user metadata values)
      */
     public function getValue(?array $source = null): mixed
     {
@@ -72,15 +81,7 @@ class FormInput
             return $this->getDefaultValue();
         }
 
-        return $this->getValueFromSource($this->getSource($source));
-    }
-
-    /**
-     * If no source is passed, then use the request
-     */
-    protected function getSource(?array $source = null): array
-    {
-        return $source ?? $_REQUEST;
+        return $this->getValueFromSource($source);
     }
 
     /**
@@ -89,8 +90,10 @@ class FormInput
      */
     public function isInputSetInSource(?array $source = null): bool
     {
-        $source = $this->getSource($source);
-        return array_key_exists($this->getName(), $source);
+        $name = $this->getName();
+        return ($source !== null && array_key_exists($name, $source))
+            || array_key_exists($name, $_POST)
+            || array_key_exists($name, $_GET);
     }
 
     /**

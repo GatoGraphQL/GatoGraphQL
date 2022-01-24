@@ -14,11 +14,11 @@ class PoP_MultiDomain_Engine_Utils
     public static function addVars(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
-        $vars['domain'] = $_REQUEST[POP_URLPARAM_DOMAIN] ?? null;
+        $vars['domain'] = $_GET[POP_URLPARAM_DOMAIN] ?? null;
 
         // Add the external URL's domain, only if we are on the External Page
         if (\PoP\Root\App::getState(['routing', 'is-generic']) && $vars['route'] == POP_MULTIDOMAIN_ROUTE_EXTERNAL) {
-            if ($external_url = $_REQUEST[\PoP\ComponentModel\Constants\Response::URL] ?? null) {
+            if ($external_url = $_GET[\PoP\ComponentModel\Constants\Response::URL] ?? null) {
                 $vars['external-url-domain'] = GeneralUtils::getDomain($external_url);
             }
         }
