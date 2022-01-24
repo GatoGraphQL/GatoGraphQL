@@ -28,7 +28,7 @@ class SkipDowngradeTestFilesDataSource
     /**
      * @return string[]
      */
-    private function getSkipDowngradeTestRelativeFiles(): array
+    protected function getSkipDowngradeTestRelativeFiles(): array
     {
         return [
             // 'vendor/symfony/cache/Adapter/MemcachedAdapter.php',
