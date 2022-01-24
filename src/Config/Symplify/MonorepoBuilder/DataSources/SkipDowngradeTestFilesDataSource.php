@@ -15,21 +15,6 @@ class SkipDowngradeTestFilesDataSource
      */
     public function getSkipDowngradeTestFiles(): array
     {
-        $relativeFiles = $this->getSkipDowngradeTestRelativeFiles();
-        if (false) {
-            return $relativeFiles;
-        }
-        return array_map(
-            fn (string $file) => $this->rootDir . '/' . $file,
-            $relativeFiles
-        );
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function getSkipDowngradeTestRelativeFiles(): array
-    {
         return [
             // 'vendor/symfony/cache/Adapter/MemcachedAdapter.php',
             'vendor/symfony/cache/DataCollector/CacheDataCollector.php',
