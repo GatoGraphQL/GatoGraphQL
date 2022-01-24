@@ -262,4 +262,64 @@ class App implements AppInterface
     {
         self::getHookManager()->doAction($tag, ...$args);
     }
+
+    /**
+     * Shortcut function.
+     * 
+     * Equivalent of $_POST[$key] ?? $default
+     */
+    final public static function request(string $key, mixed $default = null): mixed
+    {
+        return self::getRequest()->request->get($key, $default);
+    }
+
+    /**
+     * Shortcut function.
+     * 
+     * Equivalent of $_GET[$key] ?? $default
+     */
+    final public static function query(string $key, mixed $default = null): mixed
+    {
+        return self::getRequest()->query->get($key, $default);
+    }
+
+    /**
+     * Shortcut function.
+     * 
+     * Equivalent of $_COOKIES[$key] ?? $default
+     */
+    final public static function cookies(string $key, mixed $default = null): mixed
+    {
+        return self::getRequest()->cookies->get($key, $default);
+    }
+
+    /**
+     * Shortcut function.
+     * 
+     * Equivalent of $_FILES[$key] ?? $default
+     */
+    final public static function files(string $key, mixed $default = null): mixed
+    {
+        return self::getRequest()->files->get($key, $default);
+    }
+
+    /**
+     * Shortcut function.
+     * 
+     * Equivalent of $_SERVER[$key] ?? $default
+     */
+    final public static function server(string $key, mixed $default = null): mixed
+    {
+        return self::getRequest()->server->get($key, $default);
+    }
+
+    /**
+     * Shortcut function.
+     * 
+     * Mostly equivalent to a subset of $_SERVER
+     */
+    final public static function headers(string $key, mixed $default = null): mixed
+    {
+        return self::getRequest()->headers->get($key, $default);
+    }
 }
