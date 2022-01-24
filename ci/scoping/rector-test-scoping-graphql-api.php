@@ -52,6 +52,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         // Exclude tests from libraries
         $pluginDir . '/vendor/nikic/fast-route/test/*',
         $pluginDir . '/vendor/psr/log/Psr/Log/Test/*',
+        $pluginDir . '/vendor/symfony/http-foundation/Test/*',
         $pluginDir . '/vendor/symfony/service-contracts/Test/*',
         $pluginDir . '/vendor/michelf/php-markdown/test/*',
         // Ignore errors from classes we don't have in our environment,
