@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "271bf9c1a719bb6ac32ad8891f616d65",
+    "content-hash": "e637d0201308ab9b864d3edf156f1930",
     "packages": [
         {
             "name": "boxuk/wp-muplugin-loader",
@@ -1896,6 +1896,78 @@
                 }
             ],
             "time": "2021-10-29T07:35:21+00:00"
+        },
+        {
+            "name": "symfony/http-foundation",
+            "version": "v6.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-foundation.git",
+                "reference": "ac1cd9b84bdea9a3a06cd2127e910afc8b276798"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/ac1cd9b84bdea9a3a06cd2127e910afc8b276798",
+                "reference": "ac1cd9b84bdea9a3a06cd2127e910afc8b276798",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.2",
+                "symfony/deprecation-contracts": "^2.1|^3",
+                "symfony/polyfill-mbstring": "~1.1"
+            },
+            "require-dev": {
+                "predis/predis": "~1.0",
+                "symfony/cache": "^5.4|^6.0",
+                "symfony/expression-language": "^5.4|^6.0",
+                "symfony/mime": "^5.4|^6.0"
+            },
+            "suggest": {
+                "symfony/mime": "To use the file extension guesser"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\HttpFoundation\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Defines an object-oriented layer for the HTTP specification",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/http-foundation/tree/v6.0.2"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-12-28T17:22:37+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -4783,16 +4855,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.12",
+            "version": "9.5.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "93d4bf4c37aec6384bb9e5d390d9049a463a7256"
+                "reference": "597cb647654ede35e43b137926dfdfef0fb11743"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/93d4bf4c37aec6384bb9e5d390d9049a463a7256",
-                "reference": "93d4bf4c37aec6384bb9e5d390d9049a463a7256",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/597cb647654ede35e43b137926dfdfef0fb11743",
+                "reference": "597cb647654ede35e43b137926dfdfef0fb11743",
                 "shasum": ""
             },
             "require": {
@@ -4870,7 +4942,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.12"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.13"
             },
             "funding": [
                 {
@@ -4882,7 +4954,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-21T05:54:47+00:00"
+            "time": "2022-01-24T07:33:35+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -6966,16 +7038,16 @@
         },
         {
             "name": "symplify/monorepo-builder",
-            "version": "10.0.14.20",
+            "version": "10.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leoloso/monorepo-builder.git",
-                "reference": "6b7991ee280421c0bade6c1d2149480f18f965eb"
+                "reference": "5b45ee7be9d301f518a941c5e057775eb944c749"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leoloso/monorepo-builder/zipball/6b7991ee280421c0bade6c1d2149480f18f965eb",
-                "reference": "6b7991ee280421c0bade6c1d2149480f18f965eb",
+                "url": "https://api.github.com/repos/leoloso/monorepo-builder/zipball/5b45ee7be9d301f518a941c5e057775eb944c749",
+                "reference": "5b45ee7be9d301f518a941c5e057775eb944c749",
                 "shasum": ""
             },
             "require": {
@@ -7052,7 +7124,7 @@
             ],
             "description": "Not only Composer tools to build a Monorepo.",
             "support": {
-                "source": "https://github.com/leoloso/monorepo-builder/tree/10.0.14.20"
+                "source": "https://github.com/leoloso/monorepo-builder/tree/10.0.15"
             },
             "funding": [
                 {
@@ -7064,7 +7136,7 @@
                     "url": "https://www.paypal.me/rectorphp"
                 }
             ],
-            "time": "2022-01-22T15:58:47+00:00"
+            "time": "2022-01-24T09:00:17+00:00"
         },
         {
             "name": "symplify/package-builder",
