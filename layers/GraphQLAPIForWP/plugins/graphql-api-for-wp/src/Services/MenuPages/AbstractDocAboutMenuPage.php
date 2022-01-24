@@ -44,7 +44,7 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
             'sanitize_file_name_chars',
             [$this, 'enableSpecialCharsForSanitization']
         );
-        $filename = $_REQUEST[RequestParams::DOC] ?? '';
+        $filename = $_GET[RequestParams::DOC] ?? '';
         $doc = \sanitize_file_name($filename . '.md');
         remove_filter(
             'sanitize_file_name_chars',

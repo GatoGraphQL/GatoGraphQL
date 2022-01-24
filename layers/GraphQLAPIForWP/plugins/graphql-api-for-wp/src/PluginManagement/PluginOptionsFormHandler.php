@@ -54,10 +54,10 @@ class PluginOptionsFormHandler
     public function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
     {
         global $pagenow;
+        $formOrigin = $_POST[SettingsMenuPage::FORM_ORIGIN] ?? null;
         if (
             $pagenow == 'options.php'
-            && isset($_REQUEST[SettingsMenuPage::FORM_ORIGIN])
-            && $_REQUEST[SettingsMenuPage::FORM_ORIGIN] == SettingsMenuPage::SETTINGS_FIELD
+            && $formOrigin === SettingsMenuPage::SETTINGS_FIELD
         ) {
             $value = $this->getNormalizedOptionValues();
             // Return the specific value to this module/option
