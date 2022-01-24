@@ -66,4 +66,8 @@ final class Option
      * @var string
      */
     public const SCOPED_ONLY = 'scoped-only';
+    /**
+     * @var string
+     */
+    public const RELATIVE = 'relative';
 }

@@ -6,6 +6,7 @@ namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command;
 
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
@@ -29,13 +30,20 @@ final class SkipDowngradeTestFilesCommand extends AbstractSymplifyCommand
     {
         $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Files that must be skiped from testing the downgrade');
+        $this->addOption(
+            Option::RELATIVE,
+            null,
+            InputOption::VALUE_NONE,
+            'Print relative paths.'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $SkipDowngradeTestFiles = implode(' ', $this->skipDowngradeTestFiles);
+        $relative = (bool) $input->getOption(Option::RELATIVE);
+        $skipDowngradeTestFiles = implode(' ', $this->skipDowngradeTestFiles);
 
-        $this->symfonyStyle->writeln($SkipDowngradeTestFiles);
+        $this->symfonyStyle->writeln($skipDowngradeTestFiles);
 
         return self::SUCCESS;
     }
