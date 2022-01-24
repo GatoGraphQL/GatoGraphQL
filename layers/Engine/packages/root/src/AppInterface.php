@@ -111,42 +111,42 @@ interface AppInterface
 
     /**
      * Shortcut function.
-     * 
+     *
      * Equivalent of $_POST[$key] ?? $default
      */
     public static function request(string $key, mixed $default = null): mixed;
 
     /**
      * Shortcut function.
-     * 
+     *
      * Equivalent of $_GET[$key] ?? $default
      */
     public static function query(string $key, mixed $default = null): mixed;
 
     /**
      * Shortcut function.
-     * 
+     *
      * Equivalent of $_COOKIES[$key] ?? $default
      */
     public static function cookies(string $key, mixed $default = null): mixed;
 
     /**
      * Shortcut function.
-     * 
+     *
      * Equivalent of $_FILES[$key] ?? $default
      */
     public static function files(string $key, mixed $default = null): mixed;
 
     /**
      * Shortcut function.
-     * 
+     *
      * Equivalent of $_SERVER[$key] ?? $default
      */
     public static function server(string $key, mixed $default = null): mixed;
 
     /**
      * Shortcut function.
-     * 
+     *
      * Mostly equivalent to a subset of $_SERVER
      */
     public static function headers(string $key, mixed $default = null): mixed;

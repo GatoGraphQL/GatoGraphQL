@@ -230,7 +230,7 @@ class App implements AppInterface, RootAppInterface
 
     /**
      * Shortcut function.
-     * 
+     *
      * Equivalent of $_POST[$key] ?? $default
      */
     final public static function request(string $key, mixed $default = null): mixed
@@ -240,7 +240,7 @@ class App implements AppInterface, RootAppInterface
 
     /**
      * Shortcut function.
-     * 
+     *
      * Equivalent of $_GET[$key] ?? $default
      */
     final public static function query(string $key, mixed $default = null): mixed
@@ -250,7 +250,7 @@ class App implements AppInterface, RootAppInterface
 
     /**
      * Shortcut function.
-     * 
+     *
      * Equivalent of $_COOKIES[$key] ?? $default
      */
     final public static function cookies(string $key, mixed $default = null): mixed
@@ -260,7 +260,7 @@ class App implements AppInterface, RootAppInterface
 
     /**
      * Shortcut function.
-     * 
+     *
      * Equivalent of $_FILES[$key] ?? $default
      */
     final public static function files(string $key, mixed $default = null): mixed
@@ -270,7 +270,7 @@ class App implements AppInterface, RootAppInterface
 
     /**
      * Shortcut function.
-     * 
+     *
      * Equivalent of $_SERVER[$key] ?? $default
      */
     final public static function server(string $key, mixed $default = null): mixed
@@ -280,7 +280,7 @@ class App implements AppInterface, RootAppInterface
 
     /**
      * Shortcut function.
-     * 
+     *
      * Mostly equivalent to a subset of $_SERVER
      */
     final public static function headers(string $key, mixed $default = null): mixed
