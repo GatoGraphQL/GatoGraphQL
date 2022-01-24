@@ -16,6 +16,7 @@ use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
+use PoP\Root\HttpFoundation\Request;
 use PoP\Root\StateManagers\AppStateManagerInterface;
 use PoP\Root\StateManagers\ComponentManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
@@ -87,6 +88,7 @@ class App implements AppInterface, RootAppInterface
     public static function initialize(
         ?AppLoaderInterface $appLoader = null,
         ?HookManagerInterface $hookManager = null,
+        ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManagerInterface $componentManager = null,
@@ -96,6 +98,7 @@ class App implements AppInterface, RootAppInterface
         RootApp::initialize(
             $appLoader,
             $hookManager,
+            $request,
             $containerBuilderFactory,
             $systemContainerBuilderFactory,
             $componentManager,
@@ -112,6 +115,11 @@ class App implements AppInterface, RootAppInterface
     public static function getHookManager(): HookManagerInterface
     {
         return RootApp::getHookManager();
+    }
+
+    public static function getRequest(): Request
+    {
+        return RootApp::getRequest();
     }
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory
@@ -218,5 +226,65 @@ class App implements AppInterface, RootAppInterface
     public static function doAction(string $tag, mixed ...$args): void
     {
         RootApp::doAction($tag, ...$args);
+    }
+
+    /**
+     * Shortcut function.
+     *
+     * Equivalent of $_POST[$key] ?? $default
+     */
+    final public static function request(string $key, mixed $default = null): mixed
+    {
+        return RootApp::request($key, $default);
+    }
+
+    /**
+     * Shortcut function.
+     *
+     * Equivalent of $_GET[$key] ?? $default
+     */
+    final public static function query(string $key, mixed $default = null): mixed
+    {
+        return RootApp::query($key, $default);
+    }
+
+    /**
+     * Shortcut function.
+     *
+     * Equivalent of $_COOKIES[$key] ?? $default
+     */
+    final public static function cookies(string $key, mixed $default = null): mixed
+    {
+        return RootApp::cookies($key, $default);
+    }
+
+    /**
+     * Shortcut function.
+     *
+     * Equivalent of $_FILES[$key] ?? $default
+     */
+    final public static function files(string $key, mixed $default = null): mixed
+    {
+        return RootApp::files($key, $default);
+    }
+
+    /**
+     * Shortcut function.
+     *
+     * Equivalent of $_SERVER[$key] ?? $default
+     */
+    final public static function server(string $key, mixed $default = null): mixed
+    {
+        return RootApp::server($key, $default);
+    }
+
+    /**
+     * Shortcut function.
+     *
+     * Mostly equivalent to a subset of $_SERVER
+     */
+    final public static function headers(string $key, mixed $default = null): mixed
+    {
+        return RootApp::headers($key, $default);
     }
 }
