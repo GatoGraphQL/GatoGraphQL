@@ -18,8 +18,6 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurat
 use Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\PackageBuilder\Neon\NeonPrinter;
 
-use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
-
 class ContainerConfigurationService
 {
     public function __construct(
