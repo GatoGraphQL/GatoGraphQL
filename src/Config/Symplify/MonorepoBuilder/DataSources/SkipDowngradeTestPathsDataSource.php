@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources;
 
-class SkipDowngradeTestFilesDataSource
+class SkipDowngradeTestPathsDataSource
 {
     public function __construct(protected string $rootDir)
     {
@@ -13,7 +13,7 @@ class SkipDowngradeTestFilesDataSource
     /**
      * @return string[]
      */
-    public function getSkipDowngradeTestFiles(): array
+    public function getSkipDowngradeTestPaths(): array
     {
         return [
             'layers/Legacy/',
