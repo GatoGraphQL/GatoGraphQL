@@ -15,8 +15,28 @@ class SkipDowngradeTestPathsDataSource
      */
     public function getSkipDowngradeTestPaths(): array
     {
+        return array_merge(
+            $this->getSkipDowngradeTestProjectPaths(),
+            $this->getSkipDowngradeTestVendorPaths()
+        );
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getSkipDowngradeTestProjectPaths(): array
+    {
         return [
             'layers/Legacy/',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getSkipDowngradeTestVendorPaths(): array
+    {
+        return [
             'vendor/symfony/polyfill-ctype/bootstrap80.php',
             'vendor/symfony/polyfill-intl-grapheme/bootstrap80.php',
             'vendor/symfony/polyfill-intl-idn/bootstrap80.php',
