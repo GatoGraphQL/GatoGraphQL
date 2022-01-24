@@ -44,7 +44,7 @@ class Request
 
     public static function enableGraphQLIntrospection(): ?bool
     {
-        $enableGraphQLIntrospection = $_POST[Params::ENABLE_GRAPHQL_INTROSPECTION ?? $_GET[Params::ENABLE_GRAPHQL_INTROSPECTION ?? null;
+        $enableGraphQLIntrospection = $_POST[Params::ENABLE_GRAPHQL_INTROSPECTION] ?? $_GET[Params::ENABLE_GRAPHQL_INTROSPECTION] ?? null;
         if ($enableGraphQLIntrospection === null) {
             return null;
         }
