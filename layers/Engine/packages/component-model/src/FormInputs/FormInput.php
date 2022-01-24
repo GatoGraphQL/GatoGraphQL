@@ -68,7 +68,7 @@ class FormInput
     }
 
     /**
-     * $_REQUEST has priority (for when editing post / user data, after submitting form this will override original post / user metadata values)
+     * $_POST/$_GET has priority (for when editing post / user data, after submitting form this will override original post / user metadata values)
      */
     public function getValue(?array $source = null): mixed
     {
@@ -82,14 +82,6 @@ class FormInput
         }
 
         return $this->getValueFromSource($source);
-    }
-
-    /**
-     * If no source is passed, then use the request
-     */
-    protected function getSource(?array $source = null): array
-    {
-        return $source ?? $_REQUEST;
     }
 
     /**
