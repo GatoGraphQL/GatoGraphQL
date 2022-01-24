@@ -115,6 +115,11 @@ class App implements AppInterface
         return self::$hookManager;
     }
 
+    public static function getRequest(): Request
+    {
+        return self::$request;
+    }
+
     public static function getContainerBuilderFactory(): ContainerBuilderFactory
     {
         return self::$containerBuilderFactory;
