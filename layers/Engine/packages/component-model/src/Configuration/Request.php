@@ -13,12 +13,12 @@ class Request
      */
     public static function getActions(): array
     {
-        return $_REQUEST[Params::ACTIONS] ?? [];
+        return $_POST[Params::ACTIONS] ?? $_GET[Params::ACTIONS] ?? [];
     }
 
     public static function getActionPath(): ?string
     {
-        return $_REQUEST[Params::ACTION_PATH] ?? null;
+        return $_POST[Params::ACTION_PATH] ?? $_GET[Params::ACTION_PATH] ?? null;
     }
 
     /**
@@ -26,7 +26,7 @@ class Request
      */
     public static function getVersionConstraint(): ?string
     {
-        return $_REQUEST[Params::VERSION_CONSTRAINT] ?? null;
+        return $_POST[Params::VERSION_CONSTRAINT] ?? $_GET[Params::VERSION_CONSTRAINT] ?? null;
     }
 
     /**
@@ -34,7 +34,7 @@ class Request
      */
     public static function getVersionConstraintsForFields(): ?array
     {
-        return $_REQUEST[Params::VERSION_CONSTRAINT_FOR_FIELDS] ?? null;
+        return $_POST[Params::VERSION_CONSTRAINT_FOR_FIELDS] ?? $_GET[Params::VERSION_CONSTRAINT_FOR_FIELDS] ?? null;
     }
 
     /**
@@ -42,7 +42,7 @@ class Request
      */
     public static function getVersionConstraintsForDirectives(): ?array
     {
-        return $_REQUEST[Params::VERSION_CONSTRAINT_FOR_DIRECTIVES] ?? null;
+        return $_POST[Params::VERSION_CONSTRAINT_FOR_DIRECTIVES] ?? $_GET[Params::VERSION_CONSTRAINT_FOR_DIRECTIVES] ?? null;
     }
 
     /**
@@ -50,7 +50,7 @@ class Request
      */
     public static function getExtraRoutes(): array
     {
-        $extraRoutes = $_REQUEST[Params::EXTRA_ROUTES] ?? [];
+        $extraRoutes = $_POST[Params::EXTRA_ROUTES] ?? $_GET[Params::EXTRA_ROUTES] ?? [];
         if (!is_array($extraRoutes)) {
             return [$extraRoutes];
         }
@@ -59,7 +59,7 @@ class Request
 
     public static function getModuleFilter(): ?string
     {
-        return $_REQUEST[Params::MODULEFILTER] ?? null;
+        return $_POST[Params::MODULEFILTER] ?? $_GET[Params::MODULEFILTER] ?? null;
     }
 
     /**
@@ -67,7 +67,7 @@ class Request
      */
     public static function getModulePaths(): array
     {
-        $modulePaths = $_REQUEST[Params::MODULEPATHS] ?? [];
+        $modulePaths = $_POST[Params::MODULEPATHS] ?? $_GET[Params::MODULEPATHS] ?? [];
         if (!is_array($modulePaths)) {
             return [$modulePaths];
         }

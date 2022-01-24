@@ -18,6 +18,6 @@ class EngineRequest
             return $default;
         }
 
-        return $_REQUEST[QueryInputs::QUERY] ?? $default;
+        return $_POST[QueryInputs::QUERY] ?? $_GET[QueryInputs::QUERY] ?? $default;
     }
 }

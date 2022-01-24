@@ -14,7 +14,7 @@ class RequestHelpers
      */
     public static function maybeAddParamToDebugRequest(string $url): string
     {
-        if (RootEnvironment::isApplicationEnvironmentDev() && isset($_REQUEST['XDEBUG_TRIGGER'])) {
+        if (RootEnvironment::isApplicationEnvironmentDev() && isset($_GET['XDEBUG_TRIGGER'])) {
             $url = GeneralUtils::addQueryArgs([
                 'XDEBUG_TRIGGER' => '',
             ], $url);

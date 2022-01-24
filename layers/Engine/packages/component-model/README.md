@@ -1970,7 +1970,7 @@ It is a global variable, hosted under `PoP_ModuleManager_Vars::$vars`, accessed 
 
 `$vars` acts as a single, central repository of information, where properties can be calculated just once or initialized with default values, and promoting consistency, by providing a unique place from where to fetch a certain value from anywhere in the application.
 
-For instance, property `output`, which is obtained through `$_REQUEST["output"]` and accepts values `"HTML"` or `"JSON"`, is accessed through `$vars['output']`, and is initialized to value `"HTML"` if `$_REQUEST["output"]` is empty.
+For instance, property `output`, which is obtained through `$_GET["output"]` and accepts values `"HTML"` or `"JSON"`, is accessed through `$vars['output']`, and is initialized to value `"HTML"` if `$_GET["output"]` is empty.
 
 **2. Properties which, upon changing their value, alter the component hierarchy**
 

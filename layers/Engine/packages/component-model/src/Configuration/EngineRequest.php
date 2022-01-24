@@ -30,7 +30,7 @@ class EngineRequest
             return $default;
         }
 
-        $output = $_REQUEST[Params::OUTPUT] ?? null;
+        $output = $_POST[Params::OUTPUT] ?? $_GET[Params::OUTPUT] ?? null;
         $outputs = [
             Outputs::HTML,
             Outputs::JSON,
@@ -48,7 +48,7 @@ class EngineRequest
             return $default;
         }
 
-        return $_REQUEST[Params::DATASTRUCTURE] ?? $default;
+        return $_POST[Params::DATASTRUCTURE] ?? $_GET[Params::DATASTRUCTURE] ?? $default;
     }
 
     public static function getScheme(bool $enableModifyingEngineBehaviorViaRequest): ?string
@@ -58,7 +58,7 @@ class EngineRequest
             return $default;
         }
 
-        return $_REQUEST[Params::SCHEME] ?? $default;
+        return $_POST[Params::SCHEME] ?? $_GET[Params::SCHEME] ?? $default;
     }
 
     public static function getDataSourceSelector(bool $enableModifyingEngineBehaviorViaRequest): string
@@ -68,7 +68,7 @@ class EngineRequest
             return $default;
         }
 
-        $dataSourceSelector = $_REQUEST[Params::DATA_SOURCE] ?? null;
+        $dataSourceSelector = $_POST[Params::DATA_SOURCE] ?? $_GET[Params::DATA_SOURCE] ?? null;
         $allDataSourceSelectors = [
             DataSourceSelectors::ONLYMODEL,
             DataSourceSelectors::MODELANDREQUEST,
@@ -86,7 +86,7 @@ class EngineRequest
             return $default;
         }
 
-        $dataOutputMode = $_REQUEST[Params::DATAOUTPUTMODE] ?? null;
+        $dataOutputMode = $_POST[Params::DATAOUTPUTMODE] ?? $_GET[Params::DATAOUTPUTMODE] ?? null;
         $dataOutputModes = [
             DataOutputModes::SPLITBYSOURCES,
             DataOutputModes::COMBINED,
@@ -104,7 +104,7 @@ class EngineRequest
             return $default;
         }
 
-        $dbOutputMode = $_REQUEST[Params::DATABASESOUTPUTMODE] ?? null;
+        $dbOutputMode = $_POST[Params::DATABASESOUTPUTMODE] ?? $_GET[Params::DATABASESOUTPUTMODE] ?? null;
         $dbOutputModes = array(
             DatabasesOutputModes::SPLITBYDATABASES,
             DatabasesOutputModes::COMBINED,
@@ -125,7 +125,7 @@ class EngineRequest
             return $default;
         }
 
-        $dataOutputItems = $_REQUEST[Params::DATA_OUTPUT_ITEMS] ?? [];
+        $dataOutputItems = $_POST[Params::DATA_OUTPUT_ITEMS] ?? $_GET[Params::DATA_OUTPUT_ITEMS] ?? [];
         if (!is_array($dataOutputItems)) {
             $dataOutputItems = explode(Param::VALUE_SEPARATOR, $dataOutputItems);
         }
