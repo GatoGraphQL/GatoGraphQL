@@ -16,6 +16,7 @@ use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
+use PoP\Root\HttpFoundation\Request;
 use PoP\Root\StateManagers\AppStateManagerInterface;
 use PoP\Root\StateManagers\ComponentManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
@@ -87,6 +88,7 @@ class App implements AppInterface, RootAppInterface
     public static function initialize(
         ?AppLoaderInterface $appLoader = null,
         ?HookManagerInterface $hookManager = null,
+        ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManagerInterface $componentManager = null,
@@ -96,6 +98,7 @@ class App implements AppInterface, RootAppInterface
         RootApp::initialize(
             $appLoader,
             $hookManager,
+            $request,
             $containerBuilderFactory,
             $systemContainerBuilderFactory,
             $componentManager,
@@ -112,6 +115,11 @@ class App implements AppInterface, RootAppInterface
     public static function getHookManager(): HookManagerInterface
     {
         return RootApp::getHookManager();
+    }
+
+    public static function getRequest(): Request
+    {
+        return RootApp::getRequest();
     }
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory

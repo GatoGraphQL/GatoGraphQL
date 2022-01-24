@@ -9,6 +9,7 @@ use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
+use PoP\Root\HttpFoundation\Request;
 use PoP\Root\StateManagers\AppStateManagerInterface;
 use PoP\Root\StateManagers\ComponentManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
@@ -29,6 +30,7 @@ interface AppInterface
     public static function initialize(
         ?AppLoaderInterface $appLoader = null,
         ?HookManagerInterface $hookManager = null,
+        ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManagerInterface $componentManager = null,
@@ -39,6 +41,8 @@ interface AppInterface
     public static function getAppLoader(): AppLoaderInterface;
 
     public static function getHookManager(): HookManagerInterface;
+
+    public static function getRequest(): Request;
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory;
 

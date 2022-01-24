@@ -9,6 +9,7 @@ use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
+use PoP\Root\HttpFoundation\Request;
 use PoP\Root\StateManagers\AppStateManager;
 use PoP\Root\StateManagers\AppStateManagerInterface;
 use PoP\Root\StateManagers\ComponentManager;
@@ -24,6 +25,7 @@ class App implements AppInterface
 {
     protected static AppLoaderInterface $appLoader;
     protected static HookManagerInterface $hookManager;
+    protected static Request $request;
     protected static ContainerBuilderFactory $containerBuilderFactory;
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
     protected static ComponentManagerInterface $componentManager;
@@ -42,6 +44,7 @@ class App implements AppInterface
     public static function initialize(
         ?AppLoaderInterface $appLoader = null,
         ?HookManagerInterface $hookManager = null,
+        ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManagerInterface $componentManager = null,
@@ -50,6 +53,7 @@ class App implements AppInterface
     ): void {
         self::$appLoader = $appLoader ?? static::createAppLoader();
         self::$hookManager = $hookManager ?? static::createHookManager();
+        self::$request = $request ?? static::createRequest();
         self::$containerBuilderFactory = $containerBuilderFactory ?? static::createContainerBuilderFactory();
         self::$systemContainerBuilderFactory = $systemContainerBuilderFactory ?? static::createSystemContainerBuilderFactory();
         self::$componentManager = $componentManager ?? static::createComponentManager();
@@ -69,6 +73,11 @@ class App implements AppInterface
     protected static function createHookManager(): HookManagerInterface
     {
         return new HookManager();
+    }
+
+    protected static function createRequest(): Request
+    {
+        return Request::createFromGlobals();
     }
 
     protected static function createContainerBuilderFactory(): ContainerBuilderFactory
