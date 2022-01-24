@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Symplify\MonorepoBuilder\Configurators;
 
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DataToAppendAndRemoveDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DowngradeRectorDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\EnvironmentVariablesDataSource;
@@ -11,6 +12,7 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PackageOrganizationDataS
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PHPStanDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\SkipDowngradeTestFilesDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\AdditionalDowngradeRectorConfigsCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\CustomBumpInterdependencyCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\EnvVarCommand;
@@ -18,16 +20,16 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\LocalPackageOwnersComman
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\MergePhpstanCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageEntriesJsonCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PluginConfigEntriesJsonCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SkipDowngradeTestFilesCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SourcePackagesCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 use Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\PackageBuilder\Neon\NeonPrinter;
-
-use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 class ContainerConfigurationService
 {
@@ -66,6 +68,16 @@ class ContainerConfigurationService
             $parameters->set(
                 CustomOption::PLUGIN_CONFIG_ENTRIES,
                 $pluginConfig->getPluginConfigEntries()
+            );
+        }
+
+        /**
+         * Skip files from testing for downgrades
+         */
+        if ($skipDowngradeTestFilesConfig = $this->getSkipDowngradeTestFilesDataSource($this->rootDirectory)) {
+            $parameters->set(
+                CustomOption::SKIP_DOWNGRADE_TEST_FILES,
+                $skipDowngradeTestFilesConfig->getSkipDowngradeTestFiles()
             );
         }
 
@@ -147,6 +159,11 @@ class ContainerConfigurationService
         return new PluginDataSource($this->rootDirectory);
     }
 
+    protected function getSkipDowngradeTestFilesDataSource(): ?SkipDowngradeTestFilesDataSource
+    {
+        return new SkipDowngradeTestFilesDataSource($this->rootDirectory);
+    }
+
     protected function getDowngradeRectorDataSource(): ?DowngradeRectorDataSource
     {
         return new DowngradeRectorDataSource($this->rootDirectory);
@@ -225,6 +242,7 @@ class ContainerConfigurationService
             MergePhpstanCommand::class,
             PackageEntriesJsonCommand::class,
             PluginConfigEntriesJsonCommand::class,
+            SkipDowngradeTestFilesCommand::class,
             SourcePackagesCommand::class,
             SymlinkLocalPackageCommand::class,
         ];

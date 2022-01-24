@@ -17,6 +17,10 @@ final class Option
     /**
      * @var string
      */
+    public const SKIP_DOWNGRADE_TEST_FILES = 'skip-downgrade-test-files';
+    /**
+     * @var string
+     */
     public const ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS = 'additional-downgrade-rector-configs';
     /**
      * @var string
