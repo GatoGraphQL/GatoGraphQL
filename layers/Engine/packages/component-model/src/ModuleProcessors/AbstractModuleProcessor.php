@@ -18,6 +18,8 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
@@ -223,7 +225,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $ret['skip-data-load'] = $skip_data_load;
         }
 
-        // Property 'ignore-request-params' => true makes a dataloading module not get values from $_REQUEST
+        // Property 'ignore-request-params' => true makes a dataloading module not get values from the request
         $ignore_params_from_request = $this->getProp($module, $props, 'ignore-request-params');
         if (!is_null($ignore_params_from_request)) {
             $ret['ignore-request-params'] = $ignore_params_from_request;
@@ -907,8 +909,14 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         // Fetch params from request?
-        $ignore_params_from_request = $this->getProp($module, $props, 'ignore-request-params');
-        if (!is_null($ignore_params_from_request)) {
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
+            $ignore_params_from_request = true;
+        } else {
+            $ignore_params_from_request = $this->getProp($module, $props, 'ignore-request-params');
+        }
+        if ($ignore_params_from_request !== null) {
             $ret[DataloadingConstants::IGNOREREQUESTPARAMS] = $ignore_params_from_request;
         }
 
