@@ -12,7 +12,7 @@ class Request
     public static function isMangled(): bool
     {
         // By default, it is mangled, if not mangled then param "mangled" must have value "none"
-        $mangled = $_POST[Params::MANGLED] || $_GET[Params::MANGLED] || null;
+        $mangled = $_POST[Params::MANGLED] ?? $_GET[Params::MANGLED] ?? null;
         return $mangled !== ParamValues::MANGLED_NONE;
     }
 
