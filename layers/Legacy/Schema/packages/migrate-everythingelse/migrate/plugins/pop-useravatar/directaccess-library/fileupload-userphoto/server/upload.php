@@ -16,7 +16,7 @@ class Upload
     {
 
         // Recreate the path to /uploads/fileupload-userphoto/
-        $upload_path = isset($_REQUEST['upload_path']) ? $_REQUEST['upload_path'] : "generic";
+        $upload_path = isset($_GET['upload_path']) ? $_GET['upload_path'] : "generic";
 
         $upload_dir = $upload_path.DIRECTORY_SEPARATOR;
         $upload_originaldir = $upload_dir.'original'.DIRECTORY_SEPARATOR;

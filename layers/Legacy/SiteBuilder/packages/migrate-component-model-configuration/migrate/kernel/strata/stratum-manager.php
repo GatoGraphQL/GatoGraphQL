@@ -26,7 +26,7 @@ class StratumManager
     public function init()
     {
         // Selected comes in URL param 'stratum'
-        $this->selected_stratum = $_REQUEST[\PoP\ConfigurationComponentModel\Constants\Params::STRATUM] ?? null;
+        $this->selected_stratum = $_GET[\PoP\ConfigurationComponentModel\Constants\Params::STRATUM] ?? null;
 
         // Check if the selected theme is inside $stratum_strata
         if (!$this->selected_stratum || !in_array($this->selected_stratum, array_keys($this->stratum_strata))) {

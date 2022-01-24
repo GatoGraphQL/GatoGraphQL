@@ -21,7 +21,7 @@ class PoP_Domain_Utils
 
     public static function getDomainFromRequest()
     {
-        $domain = $_REQUEST[POP_URLPARAM_DOMAIN] ?? null;
+        $domain = $_GET[POP_URLPARAM_DOMAIN] ?? null;
         return $domain ? urldecode($domain) : '';
     }
 }
