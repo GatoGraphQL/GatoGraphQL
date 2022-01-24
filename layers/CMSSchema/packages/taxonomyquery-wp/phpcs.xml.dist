@@ -9,6 +9,7 @@
     <rule ref="Generic.Files.LineLength.MaxExceeded">
         <severity>0</severity>
     </rule>
+    <rule ref="Generic.PHP.DisallowRequestSuperglobal"/>
 
     <arg name="colors" />
     <arg value="s" />
