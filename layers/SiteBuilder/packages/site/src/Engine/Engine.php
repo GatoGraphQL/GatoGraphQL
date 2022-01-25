@@ -6,6 +6,7 @@ namespace PoP\Site\Engine;
 
 use PoP\Application\Engine\Engine as UpstreamEngine;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
+use PoP\Root\App;
 
 class Engine extends UpstreamEngine
 {
@@ -20,11 +21,11 @@ class Engine extends UpstreamEngine
         return $this->applicationStateHelperService ??= $this->instanceManager->getInstance(ApplicationStateHelperServiceInterface::class);
     }
 
-    public function outputResponse(): void
+    public function generateDataAndPrepareResponse(): void
     {
         // If doing JSON, the response from the parent is already adequate
         if ($this->getApplicationStateHelperService()->doingJSON()) {
-            parent::outputResponse();
+            parent::generateDataAndPrepareResponse();
             return;
         }
 
@@ -36,6 +37,7 @@ class Engine extends UpstreamEngine
 
         // 2. Print the HTML
         // Code implemented maybe in pop-engine-htmlcssplatform/templates/index.php
-        echo '<html><body>TODO</body></html>';
+        $response = '<html><body>TODO</body></html>';
+        App::getResponse()->setContent($response);
     }
 }

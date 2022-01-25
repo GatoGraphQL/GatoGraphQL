@@ -21,7 +21,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         return App::getState('requested-query') ?? App::getState('executable-query') ?? [];
     }
 
-    public function getFormattedData($data)
+    public function getFormattedData(array $data): array
     {
         // Re-create the shape of the query by iterating through all objectIDs and all required fields,
         // getting the data from the corresponding dbKeyPath

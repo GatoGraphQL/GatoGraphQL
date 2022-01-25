@@ -8,6 +8,8 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPo
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\ClientEndpointAnnotatorInterface;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
+use PoP\EngineWP\Templates\TemplateHelpers;
+use PoP\Root\App;
 
 abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecuter implements EndpointExecuterServiceTagInterface
 {
@@ -29,9 +31,12 @@ abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecute
 
     public function executeEndpoint(): void
     {
-        // Print the HTML from the client, and that's it
-        echo $this->getClient()->getClientHTML();
-        die;
+        $response = App::getResponse();
+        $response->setContent($this->getClient()->getClientHTML());
+        $response->headers->set('content-type', 'text/html');
+
+        // Add a hook to send the Response to the client.
+        TemplateHelpers::sendResponseToClient();
     }
 
     abstract protected function getClient(): AbstractClient;

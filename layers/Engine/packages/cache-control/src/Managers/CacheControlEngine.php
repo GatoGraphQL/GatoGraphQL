@@ -33,21 +33,29 @@ class CacheControlEngine implements CacheControlEngineInterface
     }
 
     /**
-     * Calculate the request's max age as the minimum max age from all the requested fields
+     * Calculate the request's max age as the minimum max age from all the requested fields.
+     * Return an array with [key]: header name, [value]: header value
+     *
+     * @return array<string,string>|null
      */
-    public function getCacheControlHeader(): ?string
+    public function getCacheControlHeaders(): ?array
     {
-        if (!is_null($this->minimumMaxAge)) {
+        if ($this->minimumMaxAge !== null) {
             // If the minimum age is 0, send the "do not cache" instruction
             if ($this->minimumMaxAge === 0) {
-                return 'Cache-Control: no-store';
+                return [
+                    'Cache-Control' => 'no-store'
+                ];
             }
-            return sprintf(
-                'Cache-Control: max-age=%s',
-                $this->minimumMaxAge
-            );
+            return [
+                'Cache-Control' => sprintf(
+                    'max-age=%s',
+                    $this->minimumMaxAge
+                ),
+            ];
         }
-        // No field was requested, return no header
+
+        // No field was requested, return no headers
         return null;
     }
 }

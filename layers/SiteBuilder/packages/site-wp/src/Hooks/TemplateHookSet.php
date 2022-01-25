@@ -6,8 +6,7 @@ namespace PoP\SiteWP\Hooks;
 
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
-use PoP\EngineWP\Component;
-use PoP\EngineWP\ComponentInfo;
+use PoP\EngineWP\Templates\TemplateHelpers;
 use PoP\Root\App;
 
 class TemplateHookSet extends AbstractHookSet
@@ -28,8 +27,7 @@ class TemplateHookSet extends AbstractHookSet
         App::addFilter(
             'template_include',
             [$this, 'setTemplate'],
-            // Execute last
-            PHP_INT_MAX
+            PHP_INT_MAX // Execute last
         );
     }
 
@@ -37,9 +35,7 @@ class TemplateHookSet extends AbstractHookSet
     {
         // If doing JSON, for sure return json.php which only prints the encoded JSON
         if (!$this->getApplicationStateHelperService()->doingJSON()) {
-            /** @var ComponentInfo */
-            $componentInfo = App::getComponent(Component::class)->getInfo();
-            return $componentInfo->getTemplatesDir() . '/Output.php';
+            return TemplateHelpers::getGenerateDataAndSendResponseTemplateFile();
         }
         return $template;
     }
