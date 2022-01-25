@@ -12,6 +12,6 @@ class Environment
 
     public static function disableAccessControl(): bool
     {
-        return getenv(self::DISABLE_ACCESS_CONTROL) !== false ? strtolower(getenv(self::DISABLE_ACCESS_CONTROL)) == "true" : false;
+        return getenv(self::DISABLE_ACCESS_CONTROL) !== false ? strtolower(getenv(self::DISABLE_ACCESS_CONTROL)) === "true" : false;
     }
 }

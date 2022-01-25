@@ -6,7 +6,7 @@ class PoP_ResourceLoader_ServerUtils
 {
     public static function useCodeSplitting()
     {
-        return getenv('USE_CODE_SPLITTING') !== false ? strtolower(getenv('USE_CODE_SPLITTING')) == "true" : false;
+        return getenv('USE_CODE_SPLITTING') !== false ? strtolower(getenv('USE_CODE_SPLITTING')) === "true" : false;
     }
 
     public static function generateCodeSplittingFiles()
@@ -16,7 +16,7 @@ class PoP_ResourceLoader_ServerUtils
             return true;
         }
 
-        return getenv('GENERATE_CODE_SPLITTING_FILES') !== false ? strtolower(getenv('GENERATE_CODE_SPLITTING_FILES')) == "true" : false;
+        return getenv('GENERATE_CODE_SPLITTING_FILES') !== false ? strtolower(getenv('GENERATE_CODE_SPLITTING_FILES')) === "true" : false;
     }
 
     public static function includeResourcesInHeader()
@@ -99,7 +99,7 @@ class PoP_ResourceLoader_ServerUtils
             return true;
         }
 
-        return getenv('GENERATE_LOADING_FRAME_RESOURCE_MAPPING') !== false ? strtolower(getenv('GENERATE_LOADING_FRAME_RESOURCE_MAPPING')) == "true" : false;
+        return getenv('GENERATE_LOADING_FRAME_RESOURCE_MAPPING') !== false ? strtolower(getenv('GENERATE_LOADING_FRAME_RESOURCE_MAPPING')) === "true" : false;
     }
 
     public static function generateBundlefilesOnRuntime()
@@ -118,7 +118,7 @@ class PoP_ResourceLoader_ServerUtils
             return false;
         }
 
-        return getenv('GENERATE_BUNDLE_FILES_ON_RUNTIME') !== false ? strtolower(getenv('GENERATE_BUNDLE_FILES_ON_RUNTIME')) == "true" : false;
+        return getenv('GENERATE_BUNDLE_FILES_ON_RUNTIME') !== false ? strtolower(getenv('GENERATE_BUNDLE_FILES_ON_RUNTIME')) === "true" : false;
     }
 
     public static function generateBundleFiles()
@@ -128,7 +128,7 @@ class PoP_ResourceLoader_ServerUtils
             return false;
         }
 
-        return getenv('GENERATE_BUNDLE_FILES') !== false ? strtolower(getenv('GENERATE_BUNDLE_FILES')) == "true" : false;
+        return getenv('GENERATE_BUNDLE_FILES') !== false ? strtolower(getenv('GENERATE_BUNDLE_FILES')) === "true" : false;
     }
 
     public static function generateBundlegroupFiles()
@@ -138,7 +138,7 @@ class PoP_ResourceLoader_ServerUtils
             return false;
         }
 
-        return getenv('GENERATE_BUNDLEGROUP_FILES') !== false ? strtolower(getenv('GENERATE_BUNDLEGROUP_FILES')) == "true" : false;
+        return getenv('GENERATE_BUNDLEGROUP_FILES') !== false ? strtolower(getenv('GENERATE_BUNDLEGROUP_FILES')) === "true" : false;
     }
 
     public static function getBundlesChunkSize()
@@ -188,6 +188,6 @@ class PoP_ResourceLoader_ServerUtils
 
     public static function loadframeResources()
     {
-        return getenv('LOAD_FRAME_RESOURCES') !== false ? strtolower(getenv('LOAD_FRAME_RESOURCES')) == "true" : true;
+        return getenv('LOAD_FRAME_RESOURCES') !== false ? strtolower(getenv('LOAD_FRAME_RESOURCES')) === "true" : true;
     }
 }

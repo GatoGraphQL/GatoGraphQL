@@ -38,7 +38,7 @@ class Environment
     public static function cacheContainerConfiguration(): bool
     {
         $useCache = getenv(self::CACHE_CONTAINER_CONFIGURATION);
-        return $useCache !== false ? strtolower($useCache) == "true" : !self::isApplicationEnvironmentDev();
+        return $useCache !== false ? strtolower($useCache) === "true" : !self::isApplicationEnvironmentDev();
     }
 
     /**
@@ -80,7 +80,7 @@ class Environment
     public static function throwExceptionIfCacheSetupError(): bool
     {
         $throwException = getenv(self::THROW_EXCEPTION_IF_CACHE_SETUP_ERROR);
-        return $throwException !== false ? strtolower($throwException) == "true" : false;
+        return $throwException !== false ? strtolower($throwException) === "true" : false;
     }
 
     /**
@@ -107,11 +107,11 @@ class Environment
 
     public static function isApplicationEnvironmentProd(): bool
     {
-        return self::getApplicationEnvironment() == self::APPLICATION_ENVIRONMENT_PROD;
+        return self::getApplicationEnvironment() === self::APPLICATION_ENVIRONMENT_PROD;
     }
 
     public static function isApplicationEnvironmentDev(): bool
     {
-        return self::getApplicationEnvironment() == self::APPLICATION_ENVIRONMENT_DEV;
+        return self::getApplicationEnvironment() === self::APPLICATION_ENVIRONMENT_DEV;
     }
 }

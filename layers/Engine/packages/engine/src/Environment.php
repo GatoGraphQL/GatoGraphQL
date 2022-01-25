@@ -12,6 +12,6 @@ class Environment
 
     public static function disablePersistingDefinitionsOnEachRequest(): bool
     {
-        return getenv('DISABLE_PERSISTING_DEFINITIONS_ON_EACH_REQUEST') !== false ? strtolower(getenv('DISABLE_PERSISTING_DEFINITIONS_ON_EACH_REQUEST')) == "true" : false;
+        return getenv('DISABLE_PERSISTING_DEFINITIONS_ON_EACH_REQUEST') !== false ? strtolower(getenv('DISABLE_PERSISTING_DEFINITIONS_ON_EACH_REQUEST')) === "true" : false;
     }
 }

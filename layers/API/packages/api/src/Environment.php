@@ -17,11 +17,11 @@ class Environment
 
     public static function disableAPI(): bool
     {
-        return getenv(self::DISABLE_API) !== false ? strtolower(getenv(self::DISABLE_API)) == "true" : false;
+        return getenv(self::DISABLE_API) !== false ? strtolower(getenv(self::DISABLE_API)) === "true" : false;
     }
 
     public static function enableSettingNamespacingByURLParam(): bool
     {
-        return getenv(self::ENABLE_SETTING_NAMESPACING_BY_URL_PARAM) !== false ? strtolower(getenv(self::ENABLE_SETTING_NAMESPACING_BY_URL_PARAM)) == "true" : false;
+        return getenv(self::ENABLE_SETTING_NAMESPACING_BY_URL_PARAM) !== false ? strtolower(getenv(self::ENABLE_SETTING_NAMESPACING_BY_URL_PARAM)) === "true" : false;
     }
 }

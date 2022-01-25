@@ -26,7 +26,7 @@ class PoP_WebPlatform_ServerUtils
 
     public static function useLocalStorage()
     {
-        return getenv('USE_LOCAL_STORAGE') !== false ? strtolower(getenv('USE_LOCAL_STORAGE')) == "true" : false;
+        return getenv('USE_LOCAL_STORAGE') !== false ? strtolower(getenv('USE_LOCAL_STORAGE')) === "true" : false;
     }
 
     public static function useAppshell()
@@ -35,16 +35,16 @@ class PoP_WebPlatform_ServerUtils
             return false;
         }
 
-        return getenv('USE_APPSHELL') !== false ? strtolower(getenv('USE_APPSHELL')) == "true" : false;
+        return getenv('USE_APPSHELL') !== false ? strtolower(getenv('USE_APPSHELL')) === "true" : false;
     }
 
     public static function useProgressiveBooting()
     {
-        return getenv('USE_PROGRESSIVE_BOOTING') !== false ? strtolower(getenv('USE_PROGRESSIVE_BOOTING')) == "true" : false;
+        return getenv('USE_PROGRESSIVE_BOOTING') !== false ? strtolower(getenv('USE_PROGRESSIVE_BOOTING')) === "true" : false;
     }
 
     public static function disableJs()
     {
-        return getenv('DISABLE_JS') !== false ? strtolower(getenv('DISABLE_JS')) == "true" : false;
+        return getenv('DISABLE_JS') !== false ? strtolower(getenv('DISABLE_JS')) === "true" : false;
     }
 }

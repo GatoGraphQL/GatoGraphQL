@@ -8,12 +8,12 @@ class Environment
 {
     public static function disableRolesFields(): bool
     {
-        return getenv('DISABLE_ROLES_FIELDS') !== false ? strtolower(getenv('DISABLE_ROLES_FIELDS')) == "true" : false;
+        return getenv('DISABLE_ROLES_FIELDS') !== false ? strtolower(getenv('DISABLE_ROLES_FIELDS')) === "true" : false;
     }
 
     public static function userMustBeLoggedInToAccessRolesFields(): bool
     {
-        return getenv('USER_MUST_BE_LOGGED_IN_TO_ACCESS_ROLES_FIELDS') !== false ? strtolower(getenv('USER_MUST_BE_LOGGED_IN_TO_ACCESS_ROLES_FIELDS')) == "true" : false;
+        return getenv('USER_MUST_BE_LOGGED_IN_TO_ACCESS_ROLES_FIELDS') !== false ? strtolower(getenv('USER_MUST_BE_LOGGED_IN_TO_ACCESS_ROLES_FIELDS')) === "true" : false;
     }
 
     public static function anyRoleLoggedInUserMustHaveToAccessRolesFields(): array
