@@ -18,7 +18,7 @@ class GD_DataLoad_QueryInputOutputHandler_EditMembership extends ActionExecution
 
     //     $ret = parent::getSharedbydomainsQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
-    //     $uid = $_GET[\PoPCMSSchema\Users\Constants\InputNames::USER_ID];
+    //     $uid = App::query(\PoPCMSSchema\Users\Constants\InputNames::USER_ID);
     //     $ret[ParamConstants::PARAMS][\PoPCMSSchema\Users\Constants\InputNames::USER_ID] = $uid;
     //     $ret[ParamConstants::PARAMS][POP_INPUTNAME_NONCE] = gdCreateNonce(GD_NONCE_EDITMEMBERSHIPURL, $uid);
 

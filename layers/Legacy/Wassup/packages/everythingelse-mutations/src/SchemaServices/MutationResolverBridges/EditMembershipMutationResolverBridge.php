@@ -36,7 +36,7 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
         $form_data = array(
             'community' => $community,
             'user_id' => \PoP\Root\App::query(InputNames::USER_ID),
-            // 'nonce' => $_GET[POP_INPUTNAME_NONCE],
+            // 'nonce' => App::query(POP_INPUTNAME_NONCE),
             'status' => trim($this->getModuleProcessorManager()->getProcessor([\GD_URE_Module_Processor_SelectFormInputs::class, \GD_URE_Module_Processor_SelectFormInputs::MODULE_URE_FORMINPUT_MEMBERSTATUS])->getValue([\GD_URE_Module_Processor_SelectFormInputs::class, \GD_URE_Module_Processor_SelectFormInputs::MODULE_URE_FORMINPUT_MEMBERSTATUS])),
             'privileges' => $privileges ?? array(),
             'tags' => $tags ?? array(),
