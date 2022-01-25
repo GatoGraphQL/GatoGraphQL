@@ -85,7 +85,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         // Add the content type header
         $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
         if ($contentType = $dataStructureFormatter->getContentType()) {
-            $headers['Content-type'] = $contentType;
+            $headers['Content-Type'] = $contentType;
         }
 
         return $headers;
