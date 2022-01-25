@@ -10,6 +10,7 @@ use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\HttpFoundation\Request;
+use PoP\Root\HttpFoundation\Response;
 use PoP\Root\StateManagers\AppStateManagerInterface;
 use PoP\Root\StateManagers\ComponentManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
@@ -43,6 +44,8 @@ interface AppInterface
     public static function getHookManager(): HookManagerInterface;
 
     public static function getRequest(): Request;
+
+    public static function getResponse(): Response;
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory;
 

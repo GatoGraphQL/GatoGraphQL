@@ -10,6 +10,7 @@ use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\HttpFoundation\Request;
+use PoP\Root\HttpFoundation\Response;
 use PoP\Root\StateManagers\AppStateManager;
 use PoP\Root\StateManagers\AppStateManagerInterface;
 use PoP\Root\StateManagers\ComponentManager;
@@ -26,6 +27,7 @@ class App implements AppInterface
     protected static AppLoaderInterface $appLoader;
     protected static HookManagerInterface $hookManager;
     protected static Request $request;
+    protected static Response $response;
     protected static ContainerBuilderFactory $containerBuilderFactory;
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
     protected static ComponentManagerInterface $componentManager;
@@ -60,6 +62,8 @@ class App implements AppInterface
         self::$appStateManager = $appStateManager ?? static::createAppStateManager();
         self::$mutationResolutionStore = $mutationResolutionStore ?? static::createMutationResolutionStore();
 
+        self::$response = static::createResponse();
+
         // Inject the Components slated for initialization
         self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
         self::$componentClassesToInitialize = [];
@@ -78,6 +82,14 @@ class App implements AppInterface
     protected static function createRequest(): Request
     {
         return Request::createFromGlobals();
+    }
+
+    /**
+     * @see https://symfony.com/doc/current/components/http_foundation.html#response
+     */
+    protected static function createResponse(): Response
+    {
+        return new Response();
     }
 
     protected static function createContainerBuilderFactory(): ContainerBuilderFactory
@@ -118,6 +130,11 @@ class App implements AppInterface
     public static function getRequest(): Request
     {
         return self::$request;
+    }
+
+    public static function getResponse(): Response
+    {
+        return self::$response;
     }
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory
