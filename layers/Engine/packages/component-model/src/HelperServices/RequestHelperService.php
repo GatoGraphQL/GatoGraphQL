@@ -56,13 +56,13 @@ class RequestHelperService implements RequestHelperServiceInterface
      */
     public function getRequestedFullURL(bool $useHostRequestedByClient = false): string
     {
-        $s = empty(\PoP\Root\App::server("HTTPS"]) ? '' : (($_SERVER["HTTPS") == "on") ? "s" : "");
+        $s = \PoP\Root\App::server("HTTPS") === "on" ? "s" : "";
         $sp = strtolower(\PoP\Root\App::server("SERVER_PROTOCOL"));
         $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
         /**
          * The default ports (80 for HTTP and 443 for HTTPS) must be ignored
          */
-        $isDefaultPort = $s ? in_array(\PoP\Root\App::server("SERVER_PORT"], ["443", "80"]) : $_SERVER["SERVER_PORT") == "80";
+        $isDefaultPort = $s ? in_array(\PoP\Root\App::server("SERVER_PORT"), ["443", "80"]) : \PoP\Root\App::server("SERVER_PORT") == "80";
         $port = $isDefaultPort ? "" : (":" . \PoP\Root\App::server("SERVER_PORT"));
         /**
          * If accessing from Nginx, the server_name might point to localhost
@@ -71,7 +71,7 @@ class RequestHelperService implements RequestHelperServiceInterface
          *
          * @see https://stackoverflow.com/questions/2297403/what-is-the-difference-between-http-host-and-server-name-in-php
          */
-        $host = $useHostRequestedByClient ? \PoP\Root\App::server('HTTP_HOST'] : $_SERVER['SERVER_NAME');
+        $host = $useHostRequestedByClient ? \PoP\Root\App::server('HTTP_HOST') : \PoP\Root\App::server('SERVER_NAME');
         return $protocol . "://" . $host . $port . \PoP\Root\App::server('REQUEST_URI');
     }
 }
