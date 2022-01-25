@@ -22,7 +22,7 @@ class RequestCheckpointProcessor extends AbstractCheckpointProcessor
     {
         switch ($checkpoint[1]) {
             case self::DOING_POST:
-                if ('POST' != $_SERVER['REQUEST_METHOD']) {
+                if ('POST' !== $_SERVER['REQUEST_METHOD']) {
                     return new Error('notdoingpost');
                 }
                 break;
