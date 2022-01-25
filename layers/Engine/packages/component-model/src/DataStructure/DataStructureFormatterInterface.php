@@ -9,5 +9,5 @@ interface DataStructureFormatterInterface
     public function getName(): string;
     public function getFormattedData(array $data): array;
     public function getContentType(): string;
-    public function getResponse(array &$data): string;
+    public function getOutputContent(array &$data): string;
 }

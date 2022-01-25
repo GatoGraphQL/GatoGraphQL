@@ -14,7 +14,7 @@ trait PropertyDataStructureFormatterTrait
     /**
      * Iterate the array and print all the entries as a properties file
      */
-    public function getResponse(array &$data): string
+    public function getOutputContent(array &$data): string
     {
         $outputLines = [];
         $this->iterativelyAddOutputLines($outputLines, $data, '');
