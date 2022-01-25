@@ -53,7 +53,7 @@ class Environment
          * SERVER_NAME is used for if several applications are deployed
          * on the same server and they share the /tmp folder
          */
-        $sitename = strtolower($_SERVER['SERVER_NAME'] ?? '');
+        $sitename = strtolower(App::server('SERVER_NAME', ''));
         if ($applicationVersion = self::getApplicationVersion()) {
             return $sitename . '_' . $applicationVersion;
         }
