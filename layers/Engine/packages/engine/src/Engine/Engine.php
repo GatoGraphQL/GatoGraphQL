@@ -60,35 +60,34 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         // 3. Prepare the Response
         App::getResponse()->setContent($response);
-        // App::getResponse()->headers->set($key, $value);
 
         // 4. Send the headers
         $headers = $this->getHeaders();
-        foreach ($headers as $header) {
-            header($header);
+        foreach ($headers as $name => $value) {
+            header($name . ': ' . $value);
         }
     }
 
     /**
-     * @return string[]
+     * @return array<string,string>
      */
     protected function getHeaders(): array
     {
         // If CacheControl is enabled, add it to the headers
         $headers = [];
         if (App::getComponent(CacheControlComponent::class)->isEnabled()) {
-            if ($cacheControlHeader = $this->getCacheControlEngine()->getCacheControlHeader()) {
-                $headers[] = $cacheControlHeader;
+            if ($cacheControlHeaders = $this->getCacheControlEngine()->getCacheControlHeaders()) {
+                $headers = array_merge(
+                    $headers,
+                    $cacheControlHeaders
+                );
             }
         }
 
         // Add the content type header
         $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
         if ($contentType = $dataStructureFormatter->getContentType()) {
-            $headers[] = sprintf(
-                'Content-type: %s',
-                $contentType
-            );
+            $headers['Content-type'] = $contentType;
         }
         
         return $headers;
