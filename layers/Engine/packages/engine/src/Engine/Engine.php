@@ -54,17 +54,18 @@ class Engine extends UpstreamEngine implements EngineInterface
         $this->generateData();
 
         // 2. Get the data, and ask the formatter to output it
+        $data = $this->getOutputData();
         $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
+        $response = $dataStructureFormatter->getOutputContent($data);
 
-        // Send the headers
+        // 3. Print the data to buffer
+        echo $response;
+
+        // 4. Send the headers
         $headers = $this->getHeaders();
         foreach ($headers as $header) {
             header($header);
         }
-
-        $data = $this->getOutputData();
-        $response = $dataStructureFormatter->getOutputContent($data);
-        echo $response;
     }
 
     /**
