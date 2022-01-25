@@ -6,5 +6,4 @@ namespace PoP\GraphQLParser\Parser;
 
 interface ExtendedParserInterface extends ParserInterface
 {
-
 }

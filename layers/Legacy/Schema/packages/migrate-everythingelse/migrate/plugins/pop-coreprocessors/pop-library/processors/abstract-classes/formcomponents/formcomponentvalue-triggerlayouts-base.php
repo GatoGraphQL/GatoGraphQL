@@ -70,8 +70,8 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         $this->metaFormcomponentInitModuleRequestProps($module, $props);
 
         // Because the URL param and the field name are disassociated, instead of getting ->getValue (which gets the value for the fieldname),
-        // we do $_REQUEST instead
-        if ($value = $_REQUEST[$this->getUrlParam($module)] ?? null) {
+        // we do $_GET instead
+        if ($value = \PoP\Root\App::query($this->getUrlParam($module))) {
             $trigger_module = $this->getTriggerSubmodule($module);
             $this->setProp($trigger_module, $props, 'default-value', $value);
         }
@@ -185,7 +185,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
                 );
             }
             if ($this->getUrlParam($module) != $this->getName($module)) {
-                if ($urlparam_value = $_REQUEST[$this->getUrlParam($module)] ?? null) {
+                if ($urlparam_value = \PoP\Root\App::query($this->getUrlParam($module))) {
                     $value = array_merge(
                         $value,
                         is_array($urlparam_value) ? $urlparam_value : array($urlparam_value)

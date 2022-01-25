@@ -6,8 +6,9 @@ namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use PoPAPI\APIEndpoints\EndpointUtils;
+use PoP\Root\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoPAPI\APIEndpoints\EndpointUtils;
 
 /**
  * Helper class with functions to set the configuration in PoP components.
@@ -35,7 +36,7 @@ class PluginOptionsFormHandler
              */
             $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
             // Obtain the values from the POST and normalize them
-            $value = $_POST[SettingsMenuPage::SETTINGS_FIELD] ?? [];
+            $value = App::getRequest()->request->all()[SettingsMenuPage::SETTINGS_FIELD] ?? [];
             $this->normalizedOptionValuesCache = $settingsMenuPage->normalizeSettings($value);
         }
         return $this->normalizedOptionValuesCache;
@@ -56,8 +57,7 @@ class PluginOptionsFormHandler
         global $pagenow;
         if (
             $pagenow == 'options.php'
-            && isset($_REQUEST[SettingsMenuPage::FORM_ORIGIN])
-            && $_REQUEST[SettingsMenuPage::FORM_ORIGIN] == SettingsMenuPage::SETTINGS_FIELD
+            && App::request(SettingsMenuPage::FORM_ORIGIN) === SettingsMenuPage::SETTINGS_FIELD
         ) {
             $value = $this->getNormalizedOptionValues();
             // Return the specific value to this module/option

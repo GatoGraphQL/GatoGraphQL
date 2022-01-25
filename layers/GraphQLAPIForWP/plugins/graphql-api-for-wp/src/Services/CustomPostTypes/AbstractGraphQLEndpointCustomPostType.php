@@ -8,7 +8,6 @@ use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use WP_Post;
 

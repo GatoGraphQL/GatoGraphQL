@@ -163,7 +163,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
          * to display the release notes on the modal window
          */
         $aboutMenuPage = $this->getReleaseNoteOrAboutMenuPage();
-        if (isset($_GET['page']) && $_GET['page'] == $aboutMenuPage->getScreenID()) {
+        if (App::query('page') === $aboutMenuPage->getScreenID()) {
             if (
                 $hookName = \add_submenu_page(
                     $this->getMenuName(),

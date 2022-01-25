@@ -18,12 +18,14 @@ use Isolated\Symfony\Component\Finder\Finder;
  * Excluding the WordPress packages is feasible, because they do
  * not reference any external library.
  *
- * The only exception is getpop/root-wp, which uses Brain\Cortex:
+ * The only exceptions are:
+ * 
+ * 1. getpop/root-wp, which uses Brain\Cortex:
  *
  * in getpop/root-wp/src/Component.php:
  *   use Brain\Cortex;
  *
- * in getpop/root-wp/src/Hooks/SetupCortexHookSet.php:
+ * in getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php:
  *   use Brain\Cortex\Route\RouteCollectionInterface;
  *   use Brain\Cortex\Route\RouteInterface;
  *   use Brain\Cortex\Route\QueryRoute;
@@ -62,6 +64,7 @@ return [
                 // Exclude tests from libraries
                 '#nikic/fast-route/test/#',
                 '#psr/log/Psr/Log/Test/#',
+                '#symfony/http-foundation/Test/#',
                 '#symfony/service-contracts/Test/#',
                 '#michelf/php-markdown/test/#',
             ])
@@ -75,7 +78,9 @@ return [
         // Own namespaces
         // Watch out! Do NOT alter the order of PoPSchema, PoPWPSchema and PoP!
         // If PoP comes first, then PoPSchema is still scoped!
+        'PoPAPI\*',
         'PoPBackbone\*',
+        'PoPCMSSchema\*',
         'PoPSchema\*',
         'PoPWPSchema\*',
         'PoP\*',
@@ -185,6 +190,23 @@ return [
                 return str_replace(
                     "\\${prefix}\\parent",
                     'parent',
+                    $content
+                );
+            }
+            /**
+             * In these files, it prefixes the return type `self`.
+             * Undo it!
+             */
+            $symfonyPolyfillFilesWithSelfReturnType = array_map(
+                'convertRelativeToFullPath',
+                [
+                    'vendor/symfony/dependency-injection/Compiler/AutowirePass.php',
+                ]
+            );
+            if (in_array($filePath, $symfonyPolyfillFilesWithSelfReturnType)) {
+                return str_replace(
+                    "\\${prefix}\\self",
+                    'self',
                     $content
                 );
             }

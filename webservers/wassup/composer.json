@@ -48,6 +48,7 @@
         "allow-plugins": {
             "boxuk/wp-muplugin-loader": true,
             "composer/installers": true,
+            "johnpbloch/wordpress-core-installer": true,
             "oomphinc/composer-installers-extender": true
         }
     },

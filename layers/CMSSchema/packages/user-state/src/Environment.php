@@ -6,5 +6,4 @@ namespace PoPCMSSchema\UserState;
 
 class Environment
 {
-
 }

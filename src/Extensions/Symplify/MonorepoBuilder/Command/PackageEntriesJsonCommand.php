@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\PackageBuilder\Console\Command\CommandNaming;
 
 final class PackageEntriesJsonCommand extends AbstractSymplifyCommand
 {
@@ -22,6 +22,7 @@ final class PackageEntriesJsonCommand extends AbstractSymplifyCommand
 
     protected function configure(): void
     {
+        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Provides package entries in json format. Useful for GitHub Actions Workflow');
         $this->addOption(
             Option::FILTER,
@@ -43,6 +44,6 @@ final class PackageEntriesJsonCommand extends AbstractSymplifyCommand
         $json = Json::encode($packageEntries);
         $this->symfonyStyle->writeln($json);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

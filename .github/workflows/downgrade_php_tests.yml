@@ -29,6 +29,7 @@ jobs:
                 run: |
                     echo "::set-output name=package_srcs::$(vendor/bin/monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src)"
                     echo "::set-output name=exclude_package_tests::$(vendor/bin/monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=tests | sed -e 's/ / --exclude /g')"
+                    echo "::set-output name=skip_downgrade_test_paths::$(vendor/bin/monorepo-builder skip-downgrade-test-paths --config=config/monorepo-builder/skip-downgrade-test-paths.php | sed -e 's/ / --exclude /g')"
                     echo "::set-output name=generate_artifact_with_downgraded_code::$(vendor/bin/monorepo-builder env-var GENERATE_ARTIFACT_WITH_DOWNGRADED_CODE --config=config/monorepo-builder/env-var.php)"
                     echo "::set-output name=additional_downgrade_rector_configs::$(vendor/bin/monorepo-builder additional-downgrade-rector-configs --config=config/monorepo-builder/additional-downgrade-rector-configs.php)"
                     echo "::set-output name=local_package_owners::$(vendor/bin/monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)"
@@ -36,6 +37,7 @@ jobs:
         outputs:
             package_srcs: ${{ steps.output_data.outputs.package_srcs }}
             exclude_package_tests: ${{ steps.output_data.outputs.exclude_package_tests }}
+            skip_downgrade_test_paths: ${{ steps.output_data.outputs.skip_downgrade_test_paths }}
             generate_artifact: ${{ steps.output_data.outputs.generate_artifact_with_downgraded_code }}
             additional_downgrade_rector_configs: ${{ steps.output_data.outputs.additional_downgrade_rector_configs }}
             local_package_owners: ${{ steps.output_data.outputs.local_package_owners }}
@@ -132,6 +134,6 @@ jobs:
             # Exclude layers/Legacy/ which is not part of any project,
             # and DOES contain PHP 8.0 (it's not being downgraded)
             -   name: Run PHP Parallel Lint on PHP 7.1
-                run: php-parallel-lint/parallel-lint layers/ vendor/ --exclude layers/Legacy/ --exclude vendor/symfony/polyfill-ctype/bootstrap80.php --exclude vendor/symfony/polyfill-intl-grapheme/bootstrap80.php --exclude vendor/symfony/polyfill-intl-idn/bootstrap80.php --exclude vendor/symfony/polyfill-intl-normalizer/bootstrap80.php --exclude vendor/symfony/polyfill-mbstring/bootstrap80.php --exclude ${{ needs.provide_data.outputs.exclude_package_tests }}
+                run: php-parallel-lint/parallel-lint layers/ vendor/ --exclude ${{ needs.provide_data.outputs.skip_downgrade_test_paths }} --exclude ${{ needs.provide_data.outputs.exclude_package_tests }}
 
 

@@ -41,7 +41,7 @@ class AppStateManager implements AppStateManagerInterface
         /**
          * Only now override with the initial state.
          * Then we can set 'route' and 'nature' when passing state
-         * via $_REQUEST is disabled, as when running PHPUnit.
+         * via the request is disabled, as when running PHPUnit.
          */
         $this->state = array_merge(
             $this->state,

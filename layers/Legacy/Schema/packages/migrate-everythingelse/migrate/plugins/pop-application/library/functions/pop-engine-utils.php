@@ -9,7 +9,7 @@ class PoP_Application_ApplicationState
     public static function addVars(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
-        if ($timestamp = $_REQUEST[GD_URLPARAM_TIMESTAMP] ?? null) {
+        if ($timestamp = \PoP\Root\App::query(GD_URLPARAM_TIMESTAMP)) {
             $vars['timestamp'] = (int) $timestamp;
         }
 

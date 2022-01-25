@@ -96,8 +96,8 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     protected function getCommentData(array $form_data): array
     {
         $comment_data = [
-            'authorIP' => $_SERVER['REMOTE_ADDR'] ?? null,
-            'agent' => $_SERVER['HTTP_USER_AGENT'] ?? null,
+            'authorIP' => App::server('REMOTE_ADDR'),
+            'agent' => App::server('HTTP_USER_AGENT'),
             'content' => $form_data[MutationInputProperties::COMMENT],
             'parent' => $form_data[MutationInputProperties::PARENT_COMMENT_ID] ?? null,
             'customPostID' => $form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null,

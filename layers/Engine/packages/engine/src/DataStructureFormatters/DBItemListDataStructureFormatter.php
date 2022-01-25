@@ -33,7 +33,7 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
         }
     }
 
-    public function getFormattedData($data)
+    public function getFormattedData(array $data): array
     {
         // If we are requesting only the databases, then return these as a list of items
         $dataoutputitems = App::getState('dataoutputitems');

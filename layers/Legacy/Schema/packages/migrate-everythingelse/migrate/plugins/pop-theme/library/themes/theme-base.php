@@ -49,7 +49,7 @@ abstract class ThemeBase
 
     public function getThememode()
     {
-        $selected = $_REQUEST[GD_URLPARAM_THEMEMODE] ?? null;
+        $selected = \PoP\Root\App::query(GD_URLPARAM_THEMEMODE);
 
         if (!$selected || !isset($this->thememodes[$selected])) {
             $selected = $this->getDefaultThememodename();
@@ -60,7 +60,7 @@ abstract class ThemeBase
 
     public function getThemestyle()
     {
-        $selected = $_REQUEST[GD_URLPARAM_THEMESTYLE] ?? null;
+        $selected = \PoP\Root\App::query(GD_URLPARAM_THEMESTYLE);
 
         if (!$selected || !isset($this->themestyles[$selected])) {
             $selected = $this->getDefaultThemestylename();

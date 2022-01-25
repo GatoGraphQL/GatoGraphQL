@@ -144,7 +144,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     public function maybeRedirectAndExit(): void
     {
         if ($redirect = SettingsManagerFactory::getInstance()->getRedirectUrl()) {
-            if ($query = $_SERVER['QUERY_STRING']) {
+            if ($query = App::server('QUERY_STRING')) {
                 $redirect .= '?' . $query;
             }
 
@@ -154,12 +154,12 @@ class Engine extends UpstreamEngine implements EngineInterface
         }
     }
 
-    public function outputResponse(): void
+    public function generateDataAndPrepareResponse(): void
     {
         // Before anything: check if to do a redirect, and exit
         $this->maybeRedirectAndExit();
 
-        parent::outputResponse();
+        parent::generateDataAndPrepareResponse();
     }
 
     public function getSiteMeta(): array

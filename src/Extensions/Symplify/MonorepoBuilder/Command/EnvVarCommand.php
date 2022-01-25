@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
 final class EnvVarCommand extends AbstractSymplifyCommand
@@ -28,6 +28,7 @@ final class EnvVarCommand extends AbstractSymplifyCommand
 
     protected function configure(): void
     {
+        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Get the value for an environment variable set via the Monorepo Builder config');
         $this->addArgument(
             Option::ENVIRONMENT_VARIABLE_NAME,
@@ -49,6 +50,6 @@ final class EnvVarCommand extends AbstractSymplifyCommand
         // false => ""
         $this->symfonyStyle->writeln($environmentVariableValue);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

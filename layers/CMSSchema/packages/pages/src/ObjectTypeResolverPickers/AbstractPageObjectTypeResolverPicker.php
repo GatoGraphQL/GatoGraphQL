@@ -11,7 +11,6 @@ use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 
 abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?PageTypeAPIInterface $pageTypeAPI = null;
 

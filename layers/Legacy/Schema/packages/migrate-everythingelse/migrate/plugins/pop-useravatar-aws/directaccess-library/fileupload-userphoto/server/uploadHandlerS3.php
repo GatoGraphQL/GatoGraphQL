@@ -688,7 +688,7 @@ class UploadHandlerS3
 
     protected function handleFormData($file, $index)
     {
-        // Handle form data, e.g. $_REQUEST['description'][$index]
+        // Handle form data, e.g. $_GET['description'][$index]
     }
 
     protected function getScaledImageFilePaths($file_name, $version)
@@ -1437,8 +1437,8 @@ class UploadHandlerS3
     {
         if ($print_response) {
             $json = json_encode($content);
-            $redirect = isset($_REQUEST['redirect']) ?
-                stripslashes($_REQUEST['redirect']) : null;
+            $redirect = isset($_GET['redirect']) ?
+                stripslashes($_GET['redirect']) : null;
             if ($redirect) {
                 $this->header('Location: '.sprintf($redirect, rawurlencode($json)));
                 return;
@@ -1604,7 +1604,7 @@ class UploadHandlerS3
 
     public function post($print_response = true)
     {
-        if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
+        if (isset($_GET['_method']) && $_GET['_method'] === 'DELETE') {
             return $this->delete($print_response);
         }
         $upload = isset($_FILES[$this->options['param_name']]) ?

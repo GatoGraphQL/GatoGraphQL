@@ -112,13 +112,4 @@ trait ClientTrait
         $this->clientHTMLCache = $fileContents;
         return $this->clientHTMLCache;
     }
-
-    /**
-     * If the endpoint for the client is requested, print the client and exit
-     */
-    protected function executeEndpoint(): void
-    {
-        echo $this->getClientHTML();
-        die;
-    }
 }

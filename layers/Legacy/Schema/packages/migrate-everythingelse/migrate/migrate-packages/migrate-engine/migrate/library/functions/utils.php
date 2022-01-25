@@ -29,7 +29,7 @@ function arrayFlatten(array $array, bool $firstLevelOnly = false)
 
 function doingPost()
 {
-    return ('POST' == $_SERVER['REQUEST_METHOD']);
+    return ('POST' === \PoP\Root\App::server('REQUEST_METHOD'));
 }
 
 // Returns true if this is an Ajax call

@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\DataStructure;
 
 trait PropertyDataStructureFormatterTrait
 {
-    public function getContentType()
+    public function getContentType(): string
     {
         return 'text/plain';
     }
@@ -14,46 +14,46 @@ trait PropertyDataStructureFormatterTrait
     /**
      * Iterate the array and print all the entries as a properties file
      */
-    protected function printData(array &$data): void
+    public function getOutputContent(array &$data): string
     {
-        $this->iterativelyPrintDataEntries($data, '');
+        $outputLines = [];
+        $this->iterativelyAddOutputLines($outputLines, $data, '');
+        return implode(PHP_EOL, $outputLines);
     }
 
     /**
      * Iterate all the way down the data entries until it's not an array anymore, and then print the entry in a `property=value` format
      */
-    protected function iterativelyPrintDataEntries(array|string &$data, string $property): void
+    protected function iterativelyAddOutputLines(array &$outputLines, array|string &$data, string $property): void
     {
-        if (is_array($data)) {
-            foreach ($data as $key => &$value) {
-                if ($property) {
-                    // For 1-dimension arrays, spread the array as "property[index]"
-                    if (is_int($key)) {
-                        $nextLevelProperty = sprintf(
-                            '%s[%s]',
-                            $property,
-                            $key
-                        );
-                    } else {
-                        // For 2-dimension arrays, spread the array as "property.subproperty"
-                        $nextLevelProperty = sprintf(
-                            '%s.%s',
-                            $property,
-                            $key
-                        );
-                    }
-                } else {
-                    $nextLevelProperty = $key;
-                }
-                $this->iterativelyPrintDataEntries($value, $nextLevelProperty);
+        if (!is_array($data)) {
+            $outputLines[] = $this->getDataEntry($property, (string) $data);
+            return;
+        }
+        foreach ($data as $key => &$value) {
+            if ($property !== '' && is_int($key)) {
+                // For 1-dimension arrays, spread the array as "property[index]"
+                $nextLevelProperty = sprintf(
+                    '%s[%s]',
+                    $property,
+                    $key
+                );
+            } elseif ($property !== '') {
+                // For 2-dimension arrays, spread the array as "property.subproperty"
+                $nextLevelProperty = sprintf(
+                    '%s.%s',
+                    $property,
+                    $key
+                );
+            } else {
+                $nextLevelProperty = $key;
             }
-        } else {
-            $this->printDataEntry($property, (string) $data);
+            $this->iterativelyAddOutputLines($outputLines, $value, $nextLevelProperty);
         }
     }
 
-    protected function printDataEntry(string $property, string $value)
+    protected function getDataEntry(string $property, string $value): string
     {
-        echo $property . '=' . $value . PHP_EOL;
+        return $property . '=' . $value;
     }
 }

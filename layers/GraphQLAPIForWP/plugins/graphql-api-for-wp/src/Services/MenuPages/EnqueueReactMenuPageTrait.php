@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\App;
 
 trait EnqueueReactMenuPageTrait
 {
-
     /**
      * Enqueue the required assets and initialize the localized scripts
      */

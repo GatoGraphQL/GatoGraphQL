@@ -31,7 +31,7 @@ class AppStateProvider extends AbstractAppStateProvider
             // If not target, or invalid, reset it to "main"
             // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided
             // (ie initial load) and when target is provided (ie loading pageSection)
-            $target = strtolower($_REQUEST[Params::TARGET] ?? '');
+            $target = strtolower(App::request(Params::TARGET) ?? App::query(Params::TARGET, ''));
             $targets = (array) App::applyFilters(
                 'ApplicationState:targets',
                 [
@@ -45,7 +45,8 @@ class AppStateProvider extends AbstractAppStateProvider
             // If there is not format, then set it to 'default'
             // This is needed so that the /generate/ generated configurations under a $model_instance_id (based on the value of $state)
             // can match the same $model_instance_id when visiting that page
-            $format = isset($_REQUEST[Params::FORMAT]) ? strtolower($_REQUEST[Params::FORMAT]) : Values::DEFAULT;
+            $format = App::request(Params::FORMAT) ?? App::query(Params::FORMAT);
+            $format = $format !== null ? strtolower($format) : Values::DEFAULT;
 
             $state['target'] = $target;
             $state['format'] = $format;

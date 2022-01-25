@@ -57,7 +57,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
      */
     public function executeMutation(array &$data_properties): ?array
     {
-        if ($this->onlyExecuteWhenDoingPost() && 'POST' !== $_SERVER['REQUEST_METHOD']) {
+        if ($this->onlyExecuteWhenDoingPost() && 'POST' !== App::server('REQUEST_METHOD')) {
             return null;
         }
         $mutationResolver = $this->getMutationResolver();

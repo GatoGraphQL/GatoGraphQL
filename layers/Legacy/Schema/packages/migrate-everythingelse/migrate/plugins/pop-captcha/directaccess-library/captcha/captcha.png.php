@@ -18,8 +18,8 @@ require_once dirname(dirname(dirname(__FILE__))).'/library/captcha-utils/load.ph
 require_once 'validation.php';
 
 // If it reaches here, there are not issues. Proceed to generate the captcha
-$encoded = $_REQUEST['encoded'];
-$random = $_REQUEST['random'];
+$encoded = $_GET['encoded'];
+$random = $_GET['random'];
 
 if ($encoded && $random) {
     // Since these parameters were encoded, they must be decoded

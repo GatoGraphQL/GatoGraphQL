@@ -25,7 +25,7 @@ class ThemeManager
     {
 
         // Selected comes in URL param 'theme'
-        $selected = $_REQUEST[GD_URLPARAM_THEME] ?? null;
+        $selected = \PoP\Root\App::query(GD_URLPARAM_THEME);
 
         // Check if the selected theme is inside $themes
         if (!$selected || !in_array($selected, array_keys($this->themes))) {

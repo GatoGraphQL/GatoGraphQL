@@ -1679,7 +1679,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($this->isFieldArgumentValueAVariable($fieldArgValue)) {
             // Variables: allow to pass a field argument "key:$input", and then resolve it as ?variable[input]=value
             // Expected input is similar to GraphQL: https://graphql.org/learn/queries/#variables
-            // If not passed the variables parameter, use $_REQUEST["variables"] by default
+            // If not passed the variables parameter, get param "variables" from the request
             if (is_null($variables)) {
                 $variables = App::getState('variables');
             }

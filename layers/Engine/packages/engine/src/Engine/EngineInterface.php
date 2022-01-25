@@ -8,5 +8,5 @@ use PoP\ComponentModel\Engine\EngineInterface as UpstreamEngineInterface;
 
 interface EngineInterface extends UpstreamEngineInterface
 {
-    public function outputResponse(): void;
+    public function generateDataAndPrepareResponse(): void;
 }

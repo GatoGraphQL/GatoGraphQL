@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
-use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Error\Error;
 
 class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {

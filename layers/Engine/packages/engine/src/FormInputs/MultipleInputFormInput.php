@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\FormInputs;
 
 use PoP\ComponentModel\Facades\HelperServices\FormInputHelperServiceFacade;
+use PoP\Root\App;
 
 class MultipleInputFormInput extends MultipleSelectFormInput
 {
@@ -21,15 +22,16 @@ class MultipleInputFormInput extends MultipleSelectFormInput
         $this->subnames = $params['subnames'] ? $params['subnames'] : array();
     }
 
-    protected function getValueFromSource(array $source): mixed
+    protected function getValueFromSource(?array $source = null): mixed
     {
         $formInputHelperService = FormInputHelperServiceFacade::getInstance();
         $name = $this->getName();
         $value = array();
         foreach ($this->getSubnames() as $subname) {
             $fullSubname = $formInputHelperService->getMultipleInputName($name, $subname);
-            if (isset($source[$fullSubname])) {
-                $value[$subname] = $source[$fullSubname];
+            $subValue = $this->getValueFromSourceOrRequest($source, $fullSubname);
+            if ($subValue !== null) {
+                $value[$subname] = $subValue;
             }
         }
 
@@ -42,13 +44,15 @@ class MultipleInputFormInput extends MultipleSelectFormInput
 
     public function isInputSetInSource(?array $source = null): bool
     {
-        $source = $this->getSource($source);
-
         $formInputHelperService = FormInputHelperServiceFacade::getInstance();
         $name = $this->getName();
         foreach ($this->getSubnames() as $subname) {
             $fullSubname = $formInputHelperService->getMultipleInputName($name, $subname);
-            if (array_key_exists($fullSubname, $source)) {
+            if (
+                ($source !== null && array_key_exists($fullSubname, $source))
+                || App::getRequest()->request->has($fullSubname)
+                || App::getRequest()->query->has($fullSubname)
+            ) {
                 return true;
             }
         }

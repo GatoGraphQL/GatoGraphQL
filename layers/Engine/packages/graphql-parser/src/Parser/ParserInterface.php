@@ -8,5 +8,4 @@ use PoPBackbone\GraphQLParser\Parser\ParserInterface as UpstreamParserInterface;
 
 interface ParserInterface extends UpstreamParserInterface
 {
-
 }

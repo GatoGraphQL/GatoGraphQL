@@ -479,7 +479,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
             $this->getFragmentsFromRequest()
         );
 
-        // Since it's getting values from $_REQUEST, filter out whichever value is not a string
+        // Since it's getting values from $_GET, filter out whichever value is not a string
         // Eg: ?someParam['foo'] = 'bar' => $fragments['someParam'] is an array
         $fragments = array_filter(
             $fragments,
@@ -566,10 +566,10 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
 
     protected function doGetFragmentsFromRequest(): array
     {
-        // Each fragment is provided through $_REQUEST[fragments][fragmentName] or directly $_REQUEST[fragmentName]
+        // Each fragment is provided through $_GET[fragments][fragmentName] or directly $_GET[fragmentName]
         $fragments = array_merge(
-            $_REQUEST,
-            $_REQUEST['fragments'] ?? []
+            App::getRequest()->query->all(),
+            App::getRequest()->query->all()['fragments'] ?? []
         );
         // Remove those query args which, we already know, are not fragments
         foreach ($this->getForbiddenFragmentNames() as $queryParam) {

@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\SiteWP\Hooks;
 
-use PoP\Root\Hooks\AbstractHookSet;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
-use PoP\EngineWP\Component;
-use PoP\EngineWP\ComponentInfo;
+use PoP\EngineWP\HelperServices\TemplateHelpersInterface;
 use PoP\Root\App;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class TemplateHookSet extends AbstractHookSet
 {
     private ?ApplicationStateHelperServiceInterface $applicationStateHelperService = null;
+    private ?TemplateHelpersInterface $templateHelpers = null;
 
     final public function setApplicationStateHelperService(ApplicationStateHelperServiceInterface $applicationStateHelperService): void
     {
@@ -22,14 +22,21 @@ class TemplateHookSet extends AbstractHookSet
     {
         return $this->applicationStateHelperService ??= $this->instanceManager->getInstance(ApplicationStateHelperServiceInterface::class);
     }
+    final public function setTemplateHelpers(TemplateHelpersInterface $templateHelpers): void
+    {
+        $this->templateHelpers = $templateHelpers;
+    }
+    final protected function getTemplateHelpers(): TemplateHelpersInterface
+    {
+        return $this->templateHelpers ??= $this->instanceManager->getInstance(TemplateHelpersInterface::class);
+    }
 
     protected function init(): void
     {
         App::addFilter(
             'template_include',
             [$this, 'setTemplate'],
-            // Execute last
-            PHP_INT_MAX
+            PHP_INT_MAX // Execute last
         );
     }
 
@@ -37,9 +44,7 @@ class TemplateHookSet extends AbstractHookSet
     {
         // If doing JSON, for sure return json.php which only prints the encoded JSON
         if (!$this->getApplicationStateHelperService()->doingJSON()) {
-            /** @var ComponentInfo */
-            $componentInfo = App::getComponent(Component::class)->getInfo();
-            return $componentInfo->getTemplatesDir() . '/Output.php';
+            return $this->getTemplateHelpers()->getGenerateDataAndSendResponseTemplateFile();
         }
         return $template;
     }

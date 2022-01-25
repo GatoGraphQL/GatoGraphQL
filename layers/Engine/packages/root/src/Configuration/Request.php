@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\Root\Configuration;
 
+use PoP\Root\App;
 use PoP\Root\Constants\Params;
 
 class Request
 {
     public static function getRoute(): ?string
     {
-        if (isset($_REQUEST[Params::ROUTE])) {
-            return trim(strtolower($_REQUEST[Params::ROUTE]), '/');
+        $route = App::request(Params::ROUTE) ?? App::query(Params::ROUTE);
+        if ($route === null) {
+            return null;
         }
-        return null;
+        return trim(strtolower($route), '/');
     }
 }

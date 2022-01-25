@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\AbstractEndpointExecuter;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
-use PoP\EngineWP\Templates\TemplateHelpers;
+use PoP\EngineWP\HelperServices\TemplateHelpersInterface;
 use WP_Post;
 
 class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEndpointExecuterServiceTagInterface, GraphQLEndpointExecuterInterface
@@ -18,6 +18,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?QueryRetrieverInterface $queryRetriever = null;
     private ?EndpointHelpers $endpointHelpers = null;
+    private ?TemplateHelpersInterface $templateHelpers = null;
 
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -42,6 +43,14 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     final protected function getEndpointHelpers(): EndpointHelpers
     {
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+    }
+    final public function setTemplateHelpers(TemplateHelpersInterface $templateHelpers): void
+    {
+        $this->templateHelpers = $templateHelpers;
+    }
+    final protected function getTemplateHelpers(): TemplateHelpersInterface
+    {
+        return $this->templateHelpers ??= $this->instanceManager->getInstance(TemplateHelpersInterface::class);
     }
 
     /**
@@ -92,7 +101,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     {
         // Make sure the user has access to the editor
         if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
-            include TemplateHelpers::getTemplateFile();
+            include $this->getTemplateHelpers()->getGenerateDataAndSendResponseTemplateFile();
             die;
         }
     }
