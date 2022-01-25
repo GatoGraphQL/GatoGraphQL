@@ -144,7 +144,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         // (in file plugins/gravityforms/form_display.php function validate)
         // So here re-create that field
         if ($form_id = App::request('gform_submit')) {
-            $_POST['is_submit_' . $form_id] = true;
+            App::getRequest()->request->set('is_submit_' . $form_id, true);
         }
     }
 
@@ -174,7 +174,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
                     $moduleProcessor = $this->getModuleProcessorManager()->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]);
                     $name = $moduleProcessor->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]);
                     if (isset($fieldnames[$name])) {
-                        $_POST[$fieldnames[$name]] = $this->getUserTypeAPI()->getUserDisplayName($user_id);
+                        App::getRequest()->request->set($fieldnames[$name], $this->getUserTypeAPI()->getUserDisplayName($user_id));
                     }
 
                     // Fill the user email
@@ -182,7 +182,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
                     $moduleProcessor = $this->getModuleProcessorManager()->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL]);
                     $email = $moduleProcessor->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL]);
                     if (isset($fieldnames[$email])) {
-                        $_POST[$fieldnames[$email]] = $this->getUserTypeAPI()->getUserEmail($user_id);
+                        App::getRequest()->request->set($fieldnames[$email], $this->getUserTypeAPI()->getUserEmail($user_id));
                     }
                 }
             }
@@ -197,7 +197,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
             if ($fieldnames = $this->getFormFieldnames($form_id)) {
                 foreach ($fieldnames as $module_name => $gf_form_fieldname) {
                     // For each regular PoP module value, set it also under the expected form input name by Gravity Forms
-                    $_POST[$gf_form_fieldname] = $_POST[$module_name];
+                    App::getRequest()->request->set($gf_form_fieldname, App::request($module_name));
                 }
             }
         }
