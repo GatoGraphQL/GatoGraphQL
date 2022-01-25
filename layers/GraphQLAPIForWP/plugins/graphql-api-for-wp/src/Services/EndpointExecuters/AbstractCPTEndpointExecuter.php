@@ -42,7 +42,7 @@ abstract class AbstractCPTEndpointExecuter extends AbstractEndpointExecuter
     {
         // Use `''` instead of `null` so that the query resolution
         // works either without param or empty (?view=)
-        return ($_GET[RequestParams::VIEW] ?? '') === $this->getView();
+        return \PoP\Root\App::query(RequestParams::VIEW, '') === $this->getView();
     }
 
     abstract protected function getView(): string;

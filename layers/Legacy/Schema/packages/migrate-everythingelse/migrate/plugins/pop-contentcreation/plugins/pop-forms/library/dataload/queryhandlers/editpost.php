@@ -11,7 +11,7 @@ class GD_DataLoad_QueryInputOutputHandler_EditPost extends ActionExecutionQueryI
 
         // If the user is sending the '_wpnonce', because has sent a POST editing a post, then use that one, and make the nonce validation with it
         // The nonce must be passed already in the link, otherwise it will not work
-        $ret[POP_INPUTNAME_NONCE] = $_GET[POP_INPUTNAME_NONCE] ?? '';
+        $ret[POP_INPUTNAME_NONCE] = \PoP\Root\App::query(POP_INPUTNAME_NONCE, '');
 
         return $ret;
     }
@@ -25,7 +25,7 @@ class GD_DataLoad_QueryInputOutputHandler_EditPost extends ActionExecutionQueryI
 
     //     // If the user is sending the '_wpnonce', because has sent a POST editing a post, then use that one, and make the nonce validation with it
     //     // The nonce must be passed already in the link, otherwise it will not work
-    //     $ret[ParamConstants::PARAMS][POP_INPUTNAME_NONCE] = $_GET[POP_INPUTNAME_NONCE] ?? '';
+    //     $ret[ParamConstants::PARAMS][POP_INPUTNAME_NONCE] = \PoP\Root\App::query(POP_INPUTNAME_NONCE, '');
 
     //     return $ret;
     // }

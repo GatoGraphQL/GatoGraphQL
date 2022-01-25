@@ -126,11 +126,11 @@ class ModuleListTableAction extends AbstractListTableAction
         $isSingleAction = in_array($this->currentAction(), $actions);
         if ($isSingleAction) {
             // Verify the nonce
-            $nonce = \esc_attr($_POST['_wpnonce'] ?? $_GET['_wpnonce'] ?? '');
+            $nonce = \esc_attr($_POST['_wpnonce'] ?? \PoP\Root\App::query('_wpnonce', ''));
             if (!\wp_verify_nonce($nonce, 'graphql_api_enable_or_disable_module')) {
                 $noParamsCurrentURL = \admin_url(sprintf(
                     'admin.php?page=%s',
-                    $_GET['page'] ?? ''
+                    \PoP\Root\App::query('page', '')
                 ));
                 \wp_die(sprintf(
                     __('This URL is either stale or not valid. Please <a href="%s">click here to reload the page</a>, and try again', 'graphql-api'),

@@ -31,7 +31,7 @@ class AppStateProvider extends AbstractAppStateProvider
             // If not target, or invalid, reset it to "main"
             // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided
             // (ie initial load) and when target is provided (ie loading pageSection)
-            $target = strtolower($_POST[Params::TARGET] ?? $_GET[Params::TARGET] ?? '');
+            $target = strtolower($_POST[Params::TARGET] ?? \PoP\Root\App::query(Params::TARGET, ''));
             $targets = (array) App::applyFilters(
                 'ApplicationState:targets',
                 [
