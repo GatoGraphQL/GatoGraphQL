@@ -1760,7 +1760,7 @@ class ActionExecuter_Logout extends \PoP\Engine\AbstractActionExecuter {
 
   function execute(&$data_properties) 
   {
-    if ('POST' == $_SERVER['REQUEST_METHOD']) { 
+    if ('POST' == \PoP\Root\App::server('REQUEST_METHOD')) { 
 
       // If the user is not logged in, then return the error
       $vars = \PoP\ComponentModel\Engine_Vars::getVars();
@@ -1796,7 +1796,7 @@ Storing and accessing the execution results is done through function `setResult`
 ```php
 function execute(&$data_properties) 
 {
-  if ('POST' == $_SERVER['REQUEST_METHOD']) 
+  if ('POST' == \PoP\Root\App::server('REQUEST_METHOD')) 
   {
     // Function getFormData obtains the filled-in values in the form
     $form_data = $this->getFormData();

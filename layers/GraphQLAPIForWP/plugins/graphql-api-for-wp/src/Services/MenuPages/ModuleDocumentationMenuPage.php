@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use InvalidArgumentException;
+use PoP\Root\App;
 
 /**
  * Module Documentation menu page
@@ -65,7 +66,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
         // and then doing $_GET['module'], returns "Foo\\Bar\\module"
         // So parse the URL to extract the "module" param
         $result = [];
-        parse_str($_SERVER['REQUEST_URI'], $result);
+        parse_str(App::server('REQUEST_URI'), $result);
         $module = urldecode($result[RequestParams::MODULE]);
         try {
             $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);

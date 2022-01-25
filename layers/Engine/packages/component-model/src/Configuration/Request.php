@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Configuration;
 
 use PoP\ComponentModel\Constants\Params;
+use PoP\Root\App;
 
 class Request
 {
@@ -13,12 +14,12 @@ class Request
      */
     public static function getActions(): array
     {
-        return $_POST[Params::ACTIONS] ?? $_GET[Params::ACTIONS] ?? [];
+        return App::getRequest()->request->all()[Params::ACTIONS] ?? App::getRequest()->query->all()[Params::ACTIONS] ?? [];
     }
 
     public static function getActionPath(): ?string
     {
-        return $_POST[Params::ACTION_PATH] ?? $_GET[Params::ACTION_PATH] ?? null;
+        return App::request(Params::ACTION_PATH) ?? App::query(Params::ACTION_PATH);
     }
 
     /**
@@ -26,7 +27,7 @@ class Request
      */
     public static function getVersionConstraint(): ?string
     {
-        return $_POST[Params::VERSION_CONSTRAINT] ?? $_GET[Params::VERSION_CONSTRAINT] ?? null;
+        return App::request(Params::VERSION_CONSTRAINT) ?? App::query(Params::VERSION_CONSTRAINT);
     }
 
     /**
@@ -34,7 +35,7 @@ class Request
      */
     public static function getVersionConstraintsForFields(): ?array
     {
-        return $_POST[Params::VERSION_CONSTRAINT_FOR_FIELDS] ?? $_GET[Params::VERSION_CONSTRAINT_FOR_FIELDS] ?? null;
+        return App::request(Params::VERSION_CONSTRAINT_FOR_FIELDS) ?? App::query(Params::VERSION_CONSTRAINT_FOR_FIELDS);
     }
 
     /**
@@ -42,7 +43,7 @@ class Request
      */
     public static function getVersionConstraintsForDirectives(): ?array
     {
-        return $_POST[Params::VERSION_CONSTRAINT_FOR_DIRECTIVES] ?? $_GET[Params::VERSION_CONSTRAINT_FOR_DIRECTIVES] ?? null;
+        return App::request(Params::VERSION_CONSTRAINT_FOR_DIRECTIVES) ?? App::query(Params::VERSION_CONSTRAINT_FOR_DIRECTIVES);
     }
 
     /**
@@ -50,7 +51,7 @@ class Request
      */
     public static function getExtraRoutes(): array
     {
-        $extraRoutes = $_POST[Params::EXTRA_ROUTES] ?? $_GET[Params::EXTRA_ROUTES] ?? [];
+        $extraRoutes = App::getRequest()->request->all()[Params::EXTRA_ROUTES] ?? App::getRequest()->query->all()[Params::EXTRA_ROUTES] ?? [];
         if (!is_array($extraRoutes)) {
             return [$extraRoutes];
         }
@@ -59,7 +60,7 @@ class Request
 
     public static function getModuleFilter(): ?string
     {
-        return $_POST[Params::MODULEFILTER] ?? $_GET[Params::MODULEFILTER] ?? null;
+        return App::request(Params::MODULEFILTER) ?? App::query(Params::MODULEFILTER);
     }
 
     /**
@@ -67,7 +68,7 @@ class Request
      */
     public static function getModulePaths(): array
     {
-        $modulePaths = $_POST[Params::MODULEPATHS] ?? $_GET[Params::MODULEPATHS] ?? [];
+        $modulePaths = App::getRequest()->request->all()[Params::MODULEPATHS] ?? App::getRequest()->query->all()[Params::MODULEPATHS] ?? [];
         if (!is_array($modulePaths)) {
             return [$modulePaths];
         }

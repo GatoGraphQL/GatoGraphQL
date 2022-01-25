@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\Configuration;
 
+use PoP\Root\App;
 use PoPAPI\API\Schema\QueryInputs;
 
 /**
@@ -18,6 +19,6 @@ class EngineRequest
             return $default;
         }
 
-        return $_POST[QueryInputs::QUERY] ?? $_GET[QueryInputs::QUERY] ?? $default;
+        return App::request(QueryInputs::QUERY) ?? App::query(QueryInputs::QUERY, $default);
     }
 }

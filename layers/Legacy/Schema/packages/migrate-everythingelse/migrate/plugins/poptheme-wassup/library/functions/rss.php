@@ -25,7 +25,7 @@ function popthemeWassupRssFilter($query)
 {
     if ($query->is_feed) {
         // If it is the daily feed, then show only posts posted in the last 24 hs
-        if (($_GET[GD_URLPARAM_RSSCAMPAIGN] ?? null) == GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST) {
+        if ((\PoP\Root\App::query(GD_URLPARAM_RSSCAMPAIGN)) == GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST) {
             $query_today = array(
                 'column'  => 'post_date',
                 'after'   => '- 1 days'
@@ -90,7 +90,7 @@ function gdCustomRssFeaturedimageSize($img_attr)
     //     GD_URLPARAM_RSSCAMPAIGN_WEEKLY,
     // );
     // if (in_array($_GET[GD_URLPARAM_RSSCAMPAIGN], $campaigns)) {
-    if (in_array($_GET[GD_URLPARAM_RSSCAMPAIGN] ?? null, popGetRssPostlistCampaigns())) {
+    if (in_array(\PoP\Root\App::query(GD_URLPARAM_RSSCAMPAIGN), popGetRssPostlistCampaigns())) {
         $thumb_width = \PoP\Root\App::applyFilters(
             'poptheme_wassup_rss:thumb_width',
             132

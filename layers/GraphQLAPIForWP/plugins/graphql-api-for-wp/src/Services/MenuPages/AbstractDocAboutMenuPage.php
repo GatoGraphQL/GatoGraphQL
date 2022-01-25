@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 
 /**
@@ -44,7 +45,7 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
             'sanitize_file_name_chars',
             [$this, 'enableSpecialCharsForSanitization']
         );
-        $filename = $_GET[RequestParams::DOC] ?? '';
+        $filename = App::query(RequestParams::DOC, '');
         $doc = \sanitize_file_name($filename . '.md');
         remove_filter(
             'sanitize_file_name_chars',

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
+use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 
@@ -42,7 +43,7 @@ abstract class AbstractCPTEndpointExecuter extends AbstractEndpointExecuter
     {
         // Use `''` instead of `null` so that the query resolution
         // works either without param or empty (?view=)
-        return ($_GET[RequestParams::VIEW] ?? '') === $this->getView();
+        return App::query(RequestParams::VIEW, '') === $this->getView();
     }
 
     abstract protected function getView(): string;

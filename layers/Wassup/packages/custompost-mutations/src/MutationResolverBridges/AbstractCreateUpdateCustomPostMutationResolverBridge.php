@@ -45,7 +45,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
      */
     protected function getUpdateCustomPostID(): string | int | null
     {
-        return $_POST[InputNames::POST_ID] ?? $_GET[InputNames::POST_ID] ?? null;
+        return App::request(InputNames::POST_ID) ?? App::query(InputNames::POST_ID);
     }
 
     abstract protected function isUpdate(): bool;

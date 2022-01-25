@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Configuration;
 
+use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Constants\Params;
 use GraphQLByPoP\GraphQLServer\Environment;
 use PoP\Root\Component\EnvironmentValueHelpers;
@@ -12,7 +13,7 @@ class Request
 {
     public static function editSchema(): bool
     {
-        $editSchema = $_POST[Params::EDIT_SCHEMA] ?? $_GET[Params::EDIT_SCHEMA] ?? null;
+        $editSchema = App::request(Params::EDIT_SCHEMA) ?? App::query(Params::EDIT_SCHEMA);
         if ($editSchema === null) {
             return false;
         }
@@ -25,7 +26,7 @@ class Request
             return null;
         }
 
-        $scheme = $_POST[Params::MUTATION_SCHEME] ?? $_GET[Params::MUTATION_SCHEME] ?? null;
+        $scheme = App::request(Params::MUTATION_SCHEME) ?? App::query(Params::MUTATION_SCHEME);
         if ($scheme === null) {
             return null;
         }
@@ -44,7 +45,7 @@ class Request
 
     public static function enableGraphQLIntrospection(): ?bool
     {
-        $enableGraphQLIntrospection = $_POST[Params::ENABLE_GRAPHQL_INTROSPECTION] ?? $_GET[Params::ENABLE_GRAPHQL_INTROSPECTION] ?? null;
+        $enableGraphQLIntrospection = App::request(Params::ENABLE_GRAPHQL_INTROSPECTION) ?? App::query(Params::ENABLE_GRAPHQL_INTROSPECTION);
         if ($enableGraphQLIntrospection === null) {
             return null;
         }

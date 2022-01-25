@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
@@ -45,7 +46,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
     public function isServiceEnabled(): bool
     {
         // Only execute for GET operations
-        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
+        if (App::server('REQUEST_METHOD') !== 'GET') {
             return false;
         }
 

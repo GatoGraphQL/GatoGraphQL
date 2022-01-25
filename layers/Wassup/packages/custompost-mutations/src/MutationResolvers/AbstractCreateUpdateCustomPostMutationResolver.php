@@ -136,7 +136,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         // }
 
         // // The nonce comes directly as a parameter in the request, it's not a form field
-        // $nonce = $_GET[POP_INPUTNAME_NONCE];
+        // $nonce = App::query(POP_INPUTNAME_NONCE);
         // if (!gdVerifyNonce($nonce, GD_NONCE_EDITURL, $customPostID)) {
         //     $errors[] = $this->__('Incorrect URL', 'pop-application');
         //     return;

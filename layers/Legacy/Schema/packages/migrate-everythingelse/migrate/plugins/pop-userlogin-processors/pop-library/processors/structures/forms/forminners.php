@@ -92,7 +92,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
                 // If loading the page straight, then set the value on the input directly
                 // Otherwise, use Javascript to fill in the value
                 if (RequestUtils::loadingSite()) {
-                    if ($value = $_GET[POP_INPUTNAME_CODE] ?? null) {
+                    if ($value = \PoP\Root\App::query(POP_INPUTNAME_CODE)) {
                         $this->setProp([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE], $props, 'default-value'/*'selected-value'*/, $value);
                         $this->appendProp([PoP_Module_Processor_LoginFormGroups::class, PoP_Module_Processor_LoginFormGroups::MODULE_FORMINPUTGROUP_LOSTPWDRESET_CODE], $props, 'class', 'hidden');
                     }

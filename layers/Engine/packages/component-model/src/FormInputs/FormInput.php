@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FormInputs;
 
 use Exception;
+use PoP\Root\App;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class FormInput
@@ -59,7 +60,7 @@ class FormInput
         if ($source !== null) {
             $value = $source[$name] ?? null;
         }
-        return $value ?? $_POST[$name] ?? $_GET[$name] ?? null;
+        return $value ?? App::request($name) ?? App::query($name);
     }
 
     public function getName(): string
@@ -92,8 +93,8 @@ class FormInput
     {
         $name = $this->getName();
         return ($source !== null && array_key_exists($name, $source))
-            || array_key_exists($name, $_POST)
-            || array_key_exists($name, $_GET);
+            || App::getRequest()->request->has($name)
+            || App::getRequest()->query->has($name);
     }
 
     /**

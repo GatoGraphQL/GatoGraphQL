@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\Managers;
 
+use PoP\Root\App;
+
 class CacheControlEngine implements CacheControlEngineInterface
 {
     protected ?int $minimumMaxAge = null;
@@ -27,7 +29,7 @@ class CacheControlEngine implements CacheControlEngineInterface
      */
     protected function isCachingEnabled(): bool
     {
-        return $_SERVER['REQUEST_METHOD'] == 'GET';
+        return App::server('REQUEST_METHOD') === 'GET';
     }
 
     /**

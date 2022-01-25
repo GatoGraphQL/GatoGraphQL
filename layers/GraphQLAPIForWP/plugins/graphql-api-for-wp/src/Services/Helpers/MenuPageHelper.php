@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use PoP\Root\App;
 
 /**
  * About menu page
@@ -17,6 +18,6 @@ class MenuPageHelper
      */
     public function isDocumentationScreen(): bool
     {
-        return isset($_GET[RequestParams::TAB]) && $_GET[RequestParams::TAB] == RequestParams::TAB_DOCS;
+        return App::query(RequestParams::TAB) === RequestParams::TAB_DOCS;
     }
 }
