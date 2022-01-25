@@ -106,7 +106,7 @@ class ModelInstance implements ModelInstanceInterface
                 false
             )
         ) {
-            $components[] = $this->__('operation:', 'component-model') . ('POST' == $_SERVER['REQUEST_METHOD'] ? 'post' : 'get');
+            $components[] = $this->__('operation:', 'component-model') . ('POST' === $_SERVER['REQUEST_METHOD'] ? 'post' : 'get');
         }
         if ($mangled = App::getState('mangled')) {
             // By default it is mangled. To make it non-mangled, url must have param "mangled=none",
