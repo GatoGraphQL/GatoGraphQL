@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 
+use PoP\Root\App;
 use PoPAPI\APIClients\ClientTrait;
 use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 
@@ -11,7 +12,6 @@ abstract class AbstractClient extends AbstractEndpointHandler
 {
     use ClientTrait, WPClientTrait {
         WPClientTrait::getComponentBaseURL insteadof ClientTrait;
-        ClientTrait::executeEndpoint as upstreamExecuteEndpoint;
     }
 
     /**
@@ -50,11 +50,16 @@ abstract class AbstractClient extends AbstractEndpointHandler
     }
 
     /**
-     * Add a hook to send the Response to the client.
+     * If the endpoint for the client is requested,
+     * load the client's HTML code into the Response.
      */
     protected function executeEndpoint(): void
     {
-        $this->upstreamExecuteEndpoint();
+        $response = App::getResponse();
+        $response->setContent($this->getClientHTML());
+        $response->headers->set('content-type', 'text/html');
+
+        // Add a hook to send the Response to the client.
         $this->sendResponseToClient();
     }
 }

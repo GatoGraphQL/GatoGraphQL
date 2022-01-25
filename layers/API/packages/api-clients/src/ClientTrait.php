@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPAPI\APIClients;
 
 use PoP\ComponentModel\Configuration\RequestHelpers;
-use PoP\Root\App;
 
 trait ClientTrait
 {
@@ -112,17 +111,5 @@ trait ClientTrait
 
         $this->clientHTMLCache = $fileContents;
         return $this->clientHTMLCache;
-    }
-
-    /**
-     * If the endpoint for the client is requested,
-     * load the client's HTML code into the Response.
-     * Some other functionality must send it to the client.
-     */
-    protected function executeEndpoint(): void
-    {
-        $response = App::getResponse();
-        $response->setContent($this->getClientHTML());
-        $response->headers->set('content-type', 'text/html');
     }
 }
