@@ -84,7 +84,7 @@ class Component extends AbstractComponent
          * @var ServiceInstantiatorInterface
          */
         $serviceInstantiator = App::getContainer()->get(ServiceInstantiatorInterface::class);
-        $serviceInstantiator->initializeServices(ApplicationEvents::BEFORE_BOOT);
+        $serviceInstantiator->initializeServices(ApplicationEvents::COMPONENT_LOADED);
     }
 
     /**

@@ -10,7 +10,7 @@ class BeforeBootAttachExtensionCompilerPass extends AbstractAttachExtensionCompi
 {
     protected function getAttachExtensionEvent(): string
     {
-        return ApplicationEvents::BEFORE_BOOT;
+        return ApplicationEvents::COMPONENT_LOADED;
     }
 
     /**

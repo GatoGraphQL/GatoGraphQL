@@ -56,7 +56,7 @@ class Component extends AbstractComponent
         parent::componentLoaded();
 
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
-        $attachExtensionService->attachExtensions(ApplicationEvents::BEFORE_BOOT);
+        $attachExtensionService->attachExtensions(ApplicationEvents::COMPONENT_LOADED);
     }
 
     public function boot(): void
