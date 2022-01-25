@@ -7,12 +7,10 @@ namespace GraphQLAPI\GraphQLAPI\Services\Clients;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\Root\Services\BasicServiceTrait;
 
 class CustomEndpointGraphiQLClient extends GraphiQLClient
 {
     use CustomEndpointClientTrait;
-    use BasicServiceTrait;
 
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;

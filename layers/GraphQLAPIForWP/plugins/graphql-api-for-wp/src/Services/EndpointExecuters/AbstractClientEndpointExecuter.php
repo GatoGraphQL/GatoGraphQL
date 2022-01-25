@@ -8,12 +8,13 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPo
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\ClientEndpointAnnotatorInterface;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
-use PoP\EngineWP\Templates\TemplateHelpers;
+use PoP\EngineWP\HelperServices\TemplateHelpersInterface;
 use PoP\Root\App;
 
 abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecuter implements EndpointExecuterServiceTagInterface
 {
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
+    private ?TemplateHelpersInterface $templateHelpers = null;
 
     final public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
     {
@@ -22,6 +23,14 @@ abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecute
     final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
         return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+    }
+    final public function setTemplateHelpers(TemplateHelpersInterface $templateHelpers): void
+    {
+        $this->templateHelpers = $templateHelpers;
+    }
+    final protected function getTemplateHelpers(): TemplateHelpersInterface
+    {
+        return $this->templateHelpers ??= $this->instanceManager->getInstance(TemplateHelpersInterface::class);
     }
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
@@ -36,7 +45,7 @@ abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecute
         $response->headers->set('content-type', 'text/html');
 
         // Add a hook to send the Response to the client.
-        TemplateHelpers::sendResponseToClient();
+        $this->getTemplateHelpers()->sendResponseToClient();
     }
 
     abstract protected function getClient(): AbstractClient;
