@@ -10,6 +10,7 @@
         <severity>0</severity>
     </rule>
     <rule ref="Generic.PHP.DisallowRequestSuperglobal"/>
+    <rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable"/>
 
     <arg name="colors" />
     <arg value="s" />
