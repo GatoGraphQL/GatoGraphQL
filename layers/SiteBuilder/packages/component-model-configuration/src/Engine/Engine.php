@@ -154,12 +154,12 @@ class Engine extends UpstreamEngine implements EngineInterface
         }
     }
 
-    public function outputResponse(): void
+    public function generateDataAndPrintOutput(): void
     {
         // Before anything: check if to do a redirect, and exit
         $this->maybeRedirectAndExit();
 
-        parent::outputResponse();
+        parent::generateDataAndPrintOutput();
     }
 
     public function getSiteMeta(): array

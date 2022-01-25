@@ -48,7 +48,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         parent::generateData();
     }
 
-    public function outputResponse(): void
+    public function generateDataAndPrintOutput(): void
     {
         // 1. Generate the data
         $this->generateData();
@@ -64,6 +64,6 @@ class Engine extends UpstreamEngine implements EngineInterface
             }
         }
         $data = $this->getOutputData();
-        $formatter->outputResponse($data, $headers);
+        $formatter->generateDataAndPrintOutput($data, $headers);
     }
 }
