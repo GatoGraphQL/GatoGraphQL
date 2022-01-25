@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
+use PoP\Engine\ObjectModels\Root;
+
 class GraphQLServerTest extends AbstractGraphQLServerTestCase
 {
     public function graphQLServerExecutionProvider(): array
@@ -17,7 +19,7 @@ class GraphQLServerTest extends AbstractGraphQLServerTestCase
                 ',
                 [
                     'data' => [
-                        'id' => 'root',
+                        'id' => Root::ID,
                     ]
                 ]
             ],
@@ -32,7 +34,7 @@ class GraphQLServerTest extends AbstractGraphQLServerTestCase
                 [
                     'data' => [
                         'self' => [
-                            'id' => 'root',
+                            'id' => Root::ID,
                         ]
                     ]
                 ]
