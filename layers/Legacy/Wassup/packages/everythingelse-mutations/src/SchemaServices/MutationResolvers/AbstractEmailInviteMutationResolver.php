@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
 use PoP\Root\App;
-use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 

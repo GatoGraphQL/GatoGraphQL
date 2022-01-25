@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Error\Error;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**

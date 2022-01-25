@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
-use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor

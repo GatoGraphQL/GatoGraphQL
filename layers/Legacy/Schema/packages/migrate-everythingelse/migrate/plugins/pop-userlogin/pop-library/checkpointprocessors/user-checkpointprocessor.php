@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
-use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
