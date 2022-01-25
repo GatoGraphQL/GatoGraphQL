@@ -113,7 +113,7 @@ class ModuleListTableAction extends AbstractListTableAction
          * and we don't want to execute it again
          */
         if ($isBulkAction) {
-            $moduleIDs = (array) \esc_sql($_POST[self::INPUT_BULK_ACTION_IDS] ?? []);
+            $moduleIDs = (array) \esc_sql(App::getRequest()->request->all()[self::INPUT_BULK_ACTION_IDS] ?? []);
             if ($moduleIDs !== []) {
                 // Enable or disable
                 if (App::request('action') === self::ACTION_ENABLE || App::request('action2') === self::ACTION_ENABLE) {

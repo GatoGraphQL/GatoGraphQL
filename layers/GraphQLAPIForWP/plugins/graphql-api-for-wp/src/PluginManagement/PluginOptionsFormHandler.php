@@ -36,7 +36,7 @@ class PluginOptionsFormHandler
              */
             $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
             // Obtain the values from the POST and normalize them
-            $value = $_POST[SettingsMenuPage::SETTINGS_FIELD] ?? [];
+            $value = App::getRequest()->request->all()[SettingsMenuPage::SETTINGS_FIELD] ?? [];
             $this->normalizedOptionValuesCache = $settingsMenuPage->normalizeSettings($value);
         }
         return $this->normalizedOptionValuesCache;
