@@ -141,7 +141,7 @@ abstract class AbstractComponent implements ComponentInterface
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public function beforeBoot(): void
+    public function componentLoaded(): void
     {
     }
 

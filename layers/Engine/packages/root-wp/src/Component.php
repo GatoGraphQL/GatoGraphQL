@@ -45,7 +45,7 @@ class Component extends AbstractComponent
         $this->initSystemServices(dirname(__DIR__), '', 'hybrid-services.yaml');
     }
 
-    public function beforeBoot(): void
+    public function componentLoaded(): void
     {
         Cortex::boot();
     }
