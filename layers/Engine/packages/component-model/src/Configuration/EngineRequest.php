@@ -126,7 +126,7 @@ class EngineRequest
             return $default;
         }
 
-        $dataOutputItems = App::getRequest()->post->all()[Params::DATA_OUTPUT_ITEMS] ?? App::getRequest()->query->all()[Params::DATA_OUTPUT_ITEMS] ?? [];
+        $dataOutputItems = App::getRequest()->request->all()[Params::DATA_OUTPUT_ITEMS] ?? App::getRequest()->query->all()[Params::DATA_OUTPUT_ITEMS] ?? [];
         if (!is_array($dataOutputItems)) {
             $dataOutputItems = explode(Param::VALUE_SEPARATOR, $dataOutputItems);
         }

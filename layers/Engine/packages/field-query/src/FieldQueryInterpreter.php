@@ -150,9 +150,9 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         // Hence, check if this param is an array, and only then process it
         return array_merge(
             App::getRequest()->query->all(),
-            App::getRequest()->post->all(),
+            App::getRequest()->request->all(),
             App::getRequest()->query->has('variables') && is_array(App::getRequest()->query->all()['variables']) ? App::getRequest()->query->all()['variables'] : [],
-            App::getRequest()->post->has('variables') && is_array(App::getRequest()->post->all()['variables']) ? App::getRequest()->post->all()['variables'] : []
+            App::getRequest()->request->has('variables') && is_array(App::getRequest()->request->all()['variables']) ? App::getRequest()->request->all()['variables'] : []
         );
     }
 

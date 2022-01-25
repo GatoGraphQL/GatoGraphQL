@@ -14,7 +14,7 @@ class Request
      */
     public static function getActions(): array
     {
-        return App::getRequest()->post->all()[Params::ACTIONS] ?? App::getRequest()->query->all()[Params::ACTIONS] ?? [];
+        return App::getRequest()->request->all()[Params::ACTIONS] ?? App::getRequest()->query->all()[Params::ACTIONS] ?? [];
     }
 
     public static function getActionPath(): ?string
@@ -51,7 +51,7 @@ class Request
      */
     public static function getExtraRoutes(): array
     {
-        $extraRoutes = App::getRequest()->post->all()[Params::EXTRA_ROUTES] ?? App::getRequest()->query->all()[Params::EXTRA_ROUTES] ?? [];
+        $extraRoutes = App::getRequest()->request->all()[Params::EXTRA_ROUTES] ?? App::getRequest()->query->all()[Params::EXTRA_ROUTES] ?? [];
         if (!is_array($extraRoutes)) {
             return [$extraRoutes];
         }
@@ -68,7 +68,7 @@ class Request
      */
     public static function getModulePaths(): array
     {
-        $modulePaths = App::getRequest()->post->all()[Params::MODULEPATHS] ?? App::getRequest()->query->all()[Params::MODULEPATHS] ?? [];
+        $modulePaths = App::getRequest()->request->all()[Params::MODULEPATHS] ?? App::getRequest()->query->all()[Params::MODULEPATHS] ?? [];
         if (!is_array($modulePaths)) {
             return [$modulePaths];
         }
