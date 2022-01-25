@@ -20,11 +20,11 @@ class Engine extends UpstreamEngine
         return $this->applicationStateHelperService ??= $this->instanceManager->getInstance(ApplicationStateHelperServiceInterface::class);
     }
 
-    public function generateDataAndPrintOutput(): void
+    public function generateDataAndPrepareResponse(): void
     {
         // If doing JSON, the response from the parent is already adequate
         if ($this->getApplicationStateHelperService()->doingJSON()) {
-            parent::generateDataAndPrintOutput();
+            parent::generateDataAndPrepareResponse();
             return;
         }
 

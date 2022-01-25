@@ -48,7 +48,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         parent::generateData();
     }
 
-    public function generateDataAndPrintOutput(): void
+    public function generateDataAndPrepareResponse(): void
     {
         // 1. Generate the data
         $this->generateData();
