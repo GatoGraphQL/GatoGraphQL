@@ -34,7 +34,7 @@ class TemplateHookSet extends AbstractHookSet
     {
         // If doing JSON, for sure return json.php which only prints the encoded JSON
         if ($this->getApplicationStateHelperService()->doingJSON()) {
-            return TemplateHelpers::getTemplateFile();
+            return TemplateHelpers::getGenerateDataAndSendResponseTemplateFile();
         }
         return $template;
     }

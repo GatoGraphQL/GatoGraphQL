@@ -10,7 +10,7 @@ use PoP\EngineWP\ComponentInfo;
 
 class TemplateHelpers
 {
-    public static function getTemplateFile(): string
+    public static function getGenerateDataAndSendResponseTemplateFile(): string
     {
         /** @var ComponentInfo */
         $componentInfo = App::getComponent(Component::class)->getInfo();
