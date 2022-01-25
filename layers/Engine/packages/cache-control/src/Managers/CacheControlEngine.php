@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\CacheControl\Managers;
 
 use PoP\Root\App;
+
 class CacheControlEngine implements CacheControlEngineInterface
 {
     protected ?int $minimumMaxAge = null;
