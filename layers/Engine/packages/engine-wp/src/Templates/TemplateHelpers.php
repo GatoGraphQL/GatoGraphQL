@@ -16,4 +16,11 @@ class TemplateHelpers
         $componentInfo = App::getComponent(Component::class)->getInfo();
         return $componentInfo->getTemplatesDir() . '/GenerateDataAndSendResponse.php';
     }
+
+    public static function getSendResponseTemplateFile(): string
+    {
+        /** @var ComponentInfo */
+        $componentInfo = App::getComponent(Component::class)->getInfo();
+        return $componentInfo->getTemplatesDir() . '/SendResponse.php';
+    }
 }

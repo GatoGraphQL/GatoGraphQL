@@ -11,6 +11,7 @@ abstract class AbstractClient extends AbstractEndpointHandler
 {
     use ClientTrait, WPClientTrait {
         WPClientTrait::getComponentBaseURL insteadof ClientTrait;
+        ClientTrait::executeEndpoint as upstreamExecuteEndpoint;
     }
 
     /**
@@ -46,5 +47,14 @@ abstract class AbstractClient extends AbstractEndpointHandler
     protected function isClientDisabled(): bool
     {
         return false;
+    }
+
+    /**
+     * Add a hook to send the Response to the client.
+     */
+    protected function executeEndpoint(): void
+    {
+        $this->upstreamExecuteEndpoint();
+        $this->sendResponseToClient();
     }
 }

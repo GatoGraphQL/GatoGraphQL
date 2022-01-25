@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 
-use PoP\Root\App;
 use GraphQLByPoP\GraphQLClientsForWP\Component;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration;
 use GraphQLByPoP\GraphQLEndpointForWP\Component as GraphQLEndpointForWPComponent;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
+use PoP\EngineWP\Templates\TemplateHelpers;
+use PoP\Root\App;
 
 trait WPClientTrait
 {
@@ -37,5 +38,14 @@ trait WPClientTrait
         /** @var GraphQLEndpointForWPComponentConfiguration */
         $componentConfiguration = App::getComponent(GraphQLEndpointForWPComponent::class)->getConfiguration();
         return $componentConfiguration->getGraphQLAPIEndpoint();
+    }
+
+    protected function sendResponseToClient(): void
+    {
+        App::addFilter(
+            'template_include',
+            fn (string $template) => TemplateHelpers::getSendResponseTemplateFile(),
+            PHP_INT_MAX // Execute last
+        );
     }
 }
