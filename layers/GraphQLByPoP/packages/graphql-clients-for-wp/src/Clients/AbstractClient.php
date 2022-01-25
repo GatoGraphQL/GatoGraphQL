@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 
+use PoP\EngineWP\Templates\TemplateHelpers;
 use PoP\Root\App;
 use PoPAPI\APIClients\ClientTrait;
 use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
@@ -60,6 +61,6 @@ abstract class AbstractClient extends AbstractEndpointHandler
         $response->headers->set('content-type', 'text/html');
 
         // Add a hook to send the Response to the client.
-        $this->sendResponseToClient();
+        TemplateHelpers::sendResponseToClient();
     }
 }

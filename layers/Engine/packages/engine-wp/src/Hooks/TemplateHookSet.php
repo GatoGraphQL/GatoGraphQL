@@ -27,8 +27,7 @@ class TemplateHookSet extends AbstractHookSet
         App::addFilter(
             'template_include',
             [$this, 'getTemplate'],
-            // Execute last
-            PHP_INT_MAX
+            PHP_INT_MAX // Execute last
         );
     }
     public function getTemplate(string $template): string
