@@ -6,11 +6,13 @@ namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 
 use PoP\EngineWP\HelperServices\TemplateHelpersInterface;
 use PoP\Root\App;
+use PoP\Root\Services\BasicServiceTrait;
 use PoPAPI\APIClients\ClientTrait;
 use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 
 abstract class AbstractClient extends AbstractEndpointHandler
 {
+    use BasicServiceTrait;
     use ClientTrait, WPClientTrait {
         WPClientTrait::getComponentBaseURL insteadof ClientTrait;
     }
