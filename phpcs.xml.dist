@@ -11,6 +11,7 @@
     </rule>
     <rule ref="Generic.PHP.DisallowRequestSuperglobal"/>
     <rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable"/>
+    <rule ref="SlevomatCodingStandard.Arrays.DisallowImplicitArrayCreation"/>
 
     <arg name="colors" />
     <arg value="s" />
