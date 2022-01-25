@@ -37,7 +37,7 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
         return $data;
     }
 
-    public function outputResponse(&$data, array $headers = []): void
+    public function outputResponse(array &$data): void
     {
         $this->printData($data);
     }

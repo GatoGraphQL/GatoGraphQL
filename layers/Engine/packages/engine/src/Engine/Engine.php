@@ -75,6 +75,6 @@ class Engine extends UpstreamEngine implements EngineInterface
             header($header);
         }
         $data = $this->getOutputData();
-        $formatter->outputResponse($data, $headers);
+        $formatter->outputResponse($data);
     }
 }
