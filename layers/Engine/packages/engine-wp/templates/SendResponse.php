@@ -7,5 +7,5 @@ use PoP\Root\App;
 /**
  * Send the Response to the client
  */
-echo App::getResponse()->getContent();
 App::getResponse()->sendHeaders();
+echo App::getResponse()->getContent();
