@@ -67,7 +67,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     }
 
     /**
-     * @return array<string,string>
+     * @return string[]
      */
     protected function getHeaders(): array
     {
