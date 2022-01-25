@@ -101,7 +101,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getObjectIDParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDParamName(array $module, array &$props, array &$data_properties): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CONTACTUSER:

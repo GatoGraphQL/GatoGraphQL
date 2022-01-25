@@ -151,7 +151,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getObjectIDParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDParamName(array $module, array &$props, array &$data_properties): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
