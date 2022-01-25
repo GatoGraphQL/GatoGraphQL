@@ -58,8 +58,9 @@ class Engine extends UpstreamEngine implements EngineInterface
         $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
         $response = $dataStructureFormatter->getOutputContent($data);
 
-        // 3. Print the data to buffer
-        echo $response;
+        // 3. Prepare the Response
+        App::getResponse()->setContent($response);
+        // App::getResponse()->headers->set($key, $value);
 
         // 4. Send the headers
         $headers = $this->getHeaders();
