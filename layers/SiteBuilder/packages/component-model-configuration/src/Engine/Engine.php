@@ -144,7 +144,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     public function maybeRedirectAndExit(): void
     {
         if ($redirect = SettingsManagerFactory::getInstance()->getRedirectUrl()) {
-            if ($query = \PoP\Root\App::server('QUERY_STRING')) {
+            if ($query = App::server('QUERY_STRING')) {
                 $redirect .= '?' . $query;
             }
 

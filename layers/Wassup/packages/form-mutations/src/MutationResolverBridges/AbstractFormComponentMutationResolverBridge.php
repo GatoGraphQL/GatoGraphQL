@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\FormMutations\MutationResolverBridges;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
@@ -16,7 +17,7 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
      */
     public function executeMutation(array &$data_properties): ?array
     {
-        if ($this->onlyExecuteWhenDoingPost() && 'POST' !== \PoP\Root\App::server('REQUEST_METHOD')) {
+        if ($this->onlyExecuteWhenDoingPost() && 'POST' !== App::server('REQUEST_METHOD')) {
             return null;
         }
 

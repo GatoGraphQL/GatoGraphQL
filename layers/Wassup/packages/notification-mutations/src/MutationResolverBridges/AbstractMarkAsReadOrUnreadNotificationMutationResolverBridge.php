@@ -12,7 +12,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge exte
     public function getFormData(): array
     {
         $form_data = array(
-            'histid' => \PoP\Root\App::query($this->getRequestKey()),
+            'histid' => App::query($this->getRequestKey()),
             'user_id' => App::getState('current-user-id'),
         );
 

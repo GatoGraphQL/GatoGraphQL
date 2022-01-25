@@ -19,6 +19,6 @@ class EngineRequest
             return $default;
         }
 
-        return \PoP\Root\App::request(QueryInputs::QUERY) ?? App::query(QueryInputs::QUERY, $default);
+        return App::request(QueryInputs::QUERY) ?? App::query(QueryInputs::QUERY, $default);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\CheckpointProcessors;
 
+use PoP\Root\App;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\ComponentModel\Error\Error;
 
@@ -22,7 +23,7 @@ class RequestCheckpointProcessor extends AbstractCheckpointProcessor
     {
         switch ($checkpoint[1]) {
             case self::DOING_POST:
-                if ('POST' !== \PoP\Root\App::server('REQUEST_METHOD')) {
+                if ('POST' !== App::server('REQUEST_METHOD')) {
                     return new Error('notdoingpost');
                 }
                 break;
