@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Engine;
 
-use PoP\Root\App;
 use Exception;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\Engine\Engine as UpstreamEngine;
 use PoP\LooseContracts\LooseContractManagerInterface;
+use PoP\Root\App;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
@@ -54,8 +54,23 @@ class Engine extends UpstreamEngine implements EngineInterface
         $this->generateData();
 
         // 2. Get the data, and ask the formatter to output it
-        $formatter = $this->getDataStructureManager()->getDataStructureFormatter();
+        $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
 
+        // Send the headers
+        $headers = $this->getHeaders();
+        foreach ($headers as $header) {
+            header($header);
+        }
+
+        $data = $this->getOutputData();
+        $dataStructureFormatter->outputResponse($data);
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    protected function getHeaders(): array
+    {
         // If CacheControl is enabled, add it to the headers
         $headers = [];
         if (App::getComponent(CacheControlComponent::class)->isEnabled()) {
@@ -63,18 +78,16 @@ class Engine extends UpstreamEngine implements EngineInterface
                 $headers[] = $cacheControlHeader;
             }
         }
+
         // Add the content type header
-        if ($contentType = $formatter->getContentType()) {
+        $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
+        if ($contentType = $dataStructureFormatter->getContentType()) {
             $headers[] = sprintf(
                 'Content-type: %s',
                 $contentType
             );
         }
-        // Send the headers
-        foreach ($headers as $header) {
-            header($header);
-        }
-        $data = $this->getOutputData();
-        $formatter->outputResponse($data);
+        
+        return $headers;
     }
 }
