@@ -47,7 +47,7 @@ function aalPopNotifyallusersMetaBoxContent()
 
     wp_nonce_field(AAL_POP_NOTIFYALLUSERS_NONCE, 'aal_pop_notifyallusers_nonce');
 
-    $submitted = ('POST' === $_SERVER['REQUEST_METHOD']);
+    $submitted = ('POST' === \PoP\Root\App::server('REQUEST_METHOD'));
     if ($submitted) {
         $notification = $_POST['aal_pop_notifyallusers'] ?? '';
     }

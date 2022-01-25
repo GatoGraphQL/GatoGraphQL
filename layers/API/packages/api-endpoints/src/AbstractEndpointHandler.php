@@ -39,7 +39,7 @@ abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiated
     protected function getRequestedURI(): string
     {
         // Check if the URL ends with either /api/graphql/ or /api/rest/ or /api/
-        $uri = EndpointUtils::removeMarkersFromURI($_SERVER['REQUEST_URI']);
+        $uri = EndpointUtils::removeMarkersFromURI(\PoP\Root\App::server('REQUEST_URI'));
         // Same as the endpoint, make sure the URI has "/" in both ends
         return EndpointUtils::slashURI($uri);
     }

@@ -45,7 +45,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
     public function isServiceEnabled(): bool
     {
         // Only execute for GET operations
-        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+        if (\PoP\Root\App::server('REQUEST_METHOD') !== 'GET') {
             return false;
         }
 

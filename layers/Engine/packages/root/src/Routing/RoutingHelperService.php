@@ -16,7 +16,7 @@ class RoutingHelperService implements RoutingHelperServiceInterface
         // Allow to remove the language information from qTranslate (https://domain.com/en/...)
         return App::applyFilters(
             HookNames::REQUEST_URI,
-            $_SERVER['REQUEST_URI']
+            \PoP\Root\App::server('REQUEST_URI')
         );
     }
 

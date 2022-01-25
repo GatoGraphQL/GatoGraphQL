@@ -1045,7 +1045,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function shouldExecuteMutation(array $module, array &$props): bool
     {
         // By default, execute only if the module is targeted for execution and doing POST
-        return 'POST' === $_SERVER['REQUEST_METHOD'] && App::getState('actionpath') === $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
+        return 'POST' === \PoP\Root\App::server('REQUEST_METHOD') && App::getState('actionpath') === $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
     }
 
     public function getModulesToPropagateDataProperties(array $module): array

@@ -65,7 +65,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
         // and then doing $_GET['module'], returns "Foo\\Bar\\module"
         // So parse the URL to extract the "module" param
         $result = [];
-        parse_str($_SERVER['REQUEST_URI'], $result);
+        parse_str(\PoP\Root\App::server('REQUEST_URI'), $result);
         $module = urldecode($result[RequestParams::MODULE]);
         try {
             $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);

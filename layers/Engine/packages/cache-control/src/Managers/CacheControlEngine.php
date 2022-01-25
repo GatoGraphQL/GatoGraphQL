@@ -27,7 +27,7 @@ class CacheControlEngine implements CacheControlEngineInterface
      */
     protected function isCachingEnabled(): bool
     {
-        return $_SERVER['REQUEST_METHOD'] === 'GET';
+        return \PoP\Root\App::server('REQUEST_METHOD') === 'GET';
     }
 
     /**

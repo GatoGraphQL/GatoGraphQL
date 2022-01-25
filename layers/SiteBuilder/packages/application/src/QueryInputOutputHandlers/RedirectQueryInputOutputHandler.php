@@ -16,7 +16,7 @@ class RedirectQueryInputOutputHandler extends ActionExecutionQueryInputOutputHan
 
     //     // Add the Redirect to Param. If there is none, use the referrer.
     //     // This is useful when coming from the Login link above the Template, which can't pass the 'redirect_to' data
-    //     $query_args[\PoP\Application\Constants\Response::REDIRECT_TO] = $query_args[\PoP\Application\Constants\Response::REDIRECT_TO] ?? $_SERVER['HTTP_REFERER'];
+    //     $query_args[\PoP\Application\Constants\Response::REDIRECT_TO] = $query_args[\PoP\Application\Constants\Response::REDIRECT_TO] ?? \PoP\Root\App::server('HTTP_REFERER');
     // }
 
     public function getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
@@ -27,7 +27,7 @@ class RedirectQueryInputOutputHandler extends ActionExecutionQueryInputOutputHan
 
         // Add the Redirect to Param. If there is none, use the referrer.
         // This is useful when coming from the Login link above the Template, which can't pass the 'redirect_to' data
-        $ret[Response::REDIRECT_TO] = $query_args[Response::REDIRECT_TO] ?? $_SERVER['HTTP_REFERER'];
+        $ret[Response::REDIRECT_TO] = $query_args[Response::REDIRECT_TO] ?? \PoP\Root\App::server('HTTP_REFERER');
 
         return $ret;
     }

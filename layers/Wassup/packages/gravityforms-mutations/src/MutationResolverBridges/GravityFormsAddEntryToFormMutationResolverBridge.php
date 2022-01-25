@@ -44,7 +44,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     final public function initialize(): void
     {
         // Execute before $hooksAPI->addAction('wp',  array('RGForms', 'maybe_process_form'), 9);
-        if ('POST' === $_SERVER['REQUEST_METHOD']) {
+        if ('POST' === \PoP\Root\App::server('REQUEST_METHOD')) {
             App::addAction(
                 HookNames::AFTER_BOOT_APPLICATION,
                 array($this, 'setup'),

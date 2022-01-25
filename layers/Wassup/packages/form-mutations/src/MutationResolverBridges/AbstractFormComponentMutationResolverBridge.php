@@ -16,7 +16,7 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
      */
     public function executeMutation(array &$data_properties): ?array
     {
-        if ($this->onlyExecuteWhenDoingPost() && 'POST' !== $_SERVER['REQUEST_METHOD']) {
+        if ($this->onlyExecuteWhenDoingPost() && 'POST' !== \PoP\Root\App::server('REQUEST_METHOD')) {
             return null;
         }
 

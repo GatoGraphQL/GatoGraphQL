@@ -43,7 +43,7 @@ class EndpointHelpers
     public function isRequestingAdminConfigurableSchemaGraphQLEndpoint(): bool
     {
         return \is_admin()
-            && 'POST' === $_SERVER['REQUEST_METHOD']
+            && 'POST' === \PoP\Root\App::server('REQUEST_METHOD')
             && isset($_GET['page'])
             && $_GET['page'] === $this->getPluginMenu()->getName()
             && isset($_GET[RequestParams::ACTION])
