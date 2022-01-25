@@ -353,6 +353,9 @@ class AppLoader implements AppLoaderInterface
         $systemCompilerPassRegistry = SystemCompilerPassRegistryFacade::getInstance();
         $systemCompilerPasses = $systemCompilerPassRegistry->getCompilerPasses();
         App::getContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
+
+        // Initialize the components
+        App::getComponentManager()->beforeBoot();
     }
 
     public function skipSchemaForComponent(ComponentInterface $component): bool
@@ -370,7 +373,6 @@ class AppLoader implements AppLoaderInterface
      */
     public function bootApplicationComponents(): void
     {
-        App::getComponentManager()->beforeBoot();
         App::getAppStateManager()->initializeAppState($this->initialAppState);
         App::getComponentManager()->boot();
         App::getComponentManager()->afterBoot();
