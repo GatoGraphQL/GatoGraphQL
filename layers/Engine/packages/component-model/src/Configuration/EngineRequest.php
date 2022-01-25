@@ -49,7 +49,7 @@ class EngineRequest
             return $default;
         }
 
-        return $_POST[Params::DATASTRUCTURE] ?? $_GET[Params::DATASTRUCTURE] ?? $default;
+        return $_POST[Params::DATASTRUCTURE] ?? \PoP\Root\App::query(Params::DATASTRUCTURE, $default);
     }
 
     public static function getScheme(bool $enableModifyingEngineBehaviorViaRequest): ?string
@@ -59,7 +59,7 @@ class EngineRequest
             return $default;
         }
 
-        return $_POST[Params::SCHEME] ?? $_GET[Params::SCHEME] ?? $default;
+        return $_POST[Params::SCHEME] ?? \PoP\Root\App::query(Params::SCHEME, $default);
     }
 
     public static function getDataSourceSelector(bool $enableModifyingEngineBehaviorViaRequest): string
