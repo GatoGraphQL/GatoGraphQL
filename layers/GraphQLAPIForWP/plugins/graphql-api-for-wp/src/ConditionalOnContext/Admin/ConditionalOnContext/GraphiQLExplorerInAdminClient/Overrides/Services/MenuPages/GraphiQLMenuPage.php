@@ -115,7 +115,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
      */
     protected function getRequestedQuery(): ?string
     {
-        $query = $_POST[QueryInputs::QUERY] ?? \PoP\Root\App::query(QueryInputs::QUERY);
+        $query = \PoP\Root\App::request(QueryInputs::QUERY) ?? \PoP\Root\App::query(QueryInputs::QUERY);
         if (!$query) {
             return null;
         }

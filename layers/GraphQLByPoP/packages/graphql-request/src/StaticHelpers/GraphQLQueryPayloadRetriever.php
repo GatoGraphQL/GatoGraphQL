@@ -27,7 +27,7 @@ class GraphQLQueryPayloadRetriever
         $entries = ['query', 'variables', 'operationName'];
         foreach ($entries as $entry) {
             if (array_key_exists($entry, $_POST)) {
-                $payload[$entry] = $_POST[$entry];
+                $payload[$entry] = \PoP\Root\App::request($entry);
             }
         }
         return $payload;

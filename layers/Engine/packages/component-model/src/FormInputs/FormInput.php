@@ -60,7 +60,7 @@ class FormInput
         if ($source !== null) {
             $value = $source[$name] ?? null;
         }
-        return $value ?? $_POST[$name] ?? \PoP\Root\App::query($name);
+        return $value ?? \PoP\Root\App::request($name) ?? \PoP\Root\App::query($name);
     }
 
     public function getName(): string

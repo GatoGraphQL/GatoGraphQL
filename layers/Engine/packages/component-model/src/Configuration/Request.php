@@ -19,7 +19,7 @@ class Request
 
     public static function getActionPath(): ?string
     {
-        return $_POST[Params::ACTION_PATH] ?? App::query(Params::ACTION_PATH);
+        return \PoP\Root\App::request(Params::ACTION_PATH) ?? App::query(Params::ACTION_PATH);
     }
 
     /**
@@ -27,7 +27,7 @@ class Request
      */
     public static function getVersionConstraint(): ?string
     {
-        return $_POST[Params::VERSION_CONSTRAINT] ?? App::query(Params::VERSION_CONSTRAINT);
+        return \PoP\Root\App::request(Params::VERSION_CONSTRAINT) ?? App::query(Params::VERSION_CONSTRAINT);
     }
 
     /**
@@ -35,7 +35,7 @@ class Request
      */
     public static function getVersionConstraintsForFields(): ?array
     {
-        return $_POST[Params::VERSION_CONSTRAINT_FOR_FIELDS] ?? App::query(Params::VERSION_CONSTRAINT_FOR_FIELDS);
+        return \PoP\Root\App::request(Params::VERSION_CONSTRAINT_FOR_FIELDS) ?? App::query(Params::VERSION_CONSTRAINT_FOR_FIELDS);
     }
 
     /**
@@ -43,7 +43,7 @@ class Request
      */
     public static function getVersionConstraintsForDirectives(): ?array
     {
-        return $_POST[Params::VERSION_CONSTRAINT_FOR_DIRECTIVES] ?? App::query(Params::VERSION_CONSTRAINT_FOR_DIRECTIVES);
+        return \PoP\Root\App::request(Params::VERSION_CONSTRAINT_FOR_DIRECTIVES) ?? App::query(Params::VERSION_CONSTRAINT_FOR_DIRECTIVES);
     }
 
     /**
@@ -60,7 +60,7 @@ class Request
 
     public static function getModuleFilter(): ?string
     {
-        return $_POST[Params::MODULEFILTER] ?? App::query(Params::MODULEFILTER);
+        return \PoP\Root\App::request(Params::MODULEFILTER) ?? App::query(Params::MODULEFILTER);
     }
 
     /**

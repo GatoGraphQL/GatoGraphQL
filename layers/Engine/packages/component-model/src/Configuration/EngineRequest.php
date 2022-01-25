@@ -31,7 +31,7 @@ class EngineRequest
             return $default;
         }
 
-        $output = $_POST[Params::OUTPUT] ?? \PoP\Root\App::query(Params::OUTPUT);
+        $output = \PoP\Root\App::request(Params::OUTPUT) ?? \PoP\Root\App::query(Params::OUTPUT);
         $outputs = [
             Outputs::HTML,
             Outputs::JSON,
@@ -49,7 +49,7 @@ class EngineRequest
             return $default;
         }
 
-        return $_POST[Params::DATASTRUCTURE] ?? \PoP\Root\App::query(Params::DATASTRUCTURE, $default);
+        return \PoP\Root\App::request(Params::DATASTRUCTURE) ?? \PoP\Root\App::query(Params::DATASTRUCTURE, $default);
     }
 
     public static function getScheme(bool $enableModifyingEngineBehaviorViaRequest): ?string
@@ -59,7 +59,7 @@ class EngineRequest
             return $default;
         }
 
-        return $_POST[Params::SCHEME] ?? \PoP\Root\App::query(Params::SCHEME, $default);
+        return \PoP\Root\App::request(Params::SCHEME) ?? \PoP\Root\App::query(Params::SCHEME, $default);
     }
 
     public static function getDataSourceSelector(bool $enableModifyingEngineBehaviorViaRequest): string
@@ -69,7 +69,7 @@ class EngineRequest
             return $default;
         }
 
-        $dataSourceSelector = $_POST[Params::DATA_SOURCE] ?? \PoP\Root\App::query(Params::DATA_SOURCE);
+        $dataSourceSelector = \PoP\Root\App::request(Params::DATA_SOURCE) ?? \PoP\Root\App::query(Params::DATA_SOURCE);
         $allDataSourceSelectors = [
             DataSourceSelectors::ONLYMODEL,
             DataSourceSelectors::MODELANDREQUEST,
@@ -87,7 +87,7 @@ class EngineRequest
             return $default;
         }
 
-        $dataOutputMode = $_POST[Params::DATAOUTPUTMODE] ?? \PoP\Root\App::query(Params::DATAOUTPUTMODE);
+        $dataOutputMode = \PoP\Root\App::request(Params::DATAOUTPUTMODE) ?? \PoP\Root\App::query(Params::DATAOUTPUTMODE);
         $dataOutputModes = [
             DataOutputModes::SPLITBYSOURCES,
             DataOutputModes::COMBINED,
@@ -105,7 +105,7 @@ class EngineRequest
             return $default;
         }
 
-        $dbOutputMode = $_POST[Params::DATABASESOUTPUTMODE] ?? \PoP\Root\App::query(Params::DATABASESOUTPUTMODE);
+        $dbOutputMode = \PoP\Root\App::request(Params::DATABASESOUTPUTMODE) ?? \PoP\Root\App::query(Params::DATABASESOUTPUTMODE);
         $dbOutputModes = array(
             DatabasesOutputModes::SPLITBYDATABASES,
             DatabasesOutputModes::COMBINED,
