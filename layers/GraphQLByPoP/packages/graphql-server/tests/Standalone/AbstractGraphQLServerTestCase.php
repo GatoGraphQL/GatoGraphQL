@@ -34,10 +34,13 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
     /**
      * @dataProvider graphQLServerExecutionProvider
      */
-    public function testGraphQLServerExecution(string $query, array $response): void
+    public function testGraphQLServerExecution(string $query, array $expectedResponse): void
     {
-        $this->expectOutputString(json_encode($response));
-        self::getGraphQLServer()->execute($query);
+        $response = self::getGraphQLServer()->execute($query);
+        $this->assertJsonStringEqualsJsonString(
+            json_encode($expectedResponse),
+            $response->getContent()
+        );
     }
 
     abstract public function graphQLServerExecutionProvider(): array;
