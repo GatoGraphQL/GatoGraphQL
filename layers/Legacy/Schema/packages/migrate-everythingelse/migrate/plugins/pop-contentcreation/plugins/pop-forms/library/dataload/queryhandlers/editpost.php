@@ -7,7 +7,7 @@ class GD_DataLoad_QueryInputOutputHandler_EditPost extends ActionExecutionQueryI
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
-        $ret[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID] = $_GET[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID] ?? null;
+        $ret[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID] = \PoP\Root\App::query(\PoPCMSSchema\Posts\Constants\InputNames::POST_ID);
 
         // If the user is sending the '_wpnonce', because has sent a POST editing a post, then use that one, and make the nonce validation with it
         // The nonce must be passed already in the link, otherwise it will not work

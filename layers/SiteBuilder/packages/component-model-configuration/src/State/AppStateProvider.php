@@ -45,7 +45,7 @@ class AppStateProvider extends AbstractAppStateProvider
             // If there is not format, then set it to 'default'
             // This is needed so that the /generate/ generated configurations under a $model_instance_id (based on the value of $state)
             // can match the same $model_instance_id when visiting that page
-            $format = $_POST[Params::FORMAT] ?? $_GET[Params::FORMAT] ?? null;
+            $format = $_POST[Params::FORMAT] ?? \PoP\Root\App::query(Params::FORMAT);
             $format = $format !== null ? strtolower($format) : Values::DEFAULT;
 
             $state['target'] = $target;

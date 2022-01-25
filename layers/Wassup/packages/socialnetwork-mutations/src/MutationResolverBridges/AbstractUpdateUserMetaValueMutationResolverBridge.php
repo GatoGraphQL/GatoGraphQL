@@ -13,7 +13,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolverBridge extends Abstrac
     public function getFormData(): array
     {
         $form_data = array(
-            'target_id' => $_GET[$this->getRequestKey()] ?? null,
+            'target_id' => \PoP\Root\App::query($this->getRequestKey()),
         );
 
         return $form_data;

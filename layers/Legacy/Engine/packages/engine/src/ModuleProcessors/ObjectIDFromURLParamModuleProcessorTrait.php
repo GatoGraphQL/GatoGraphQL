@@ -9,6 +9,6 @@ trait ObjectIDFromURLParamModuleProcessorTrait
     abstract protected function getObjectIDParamName(array $module, array &$props, &$data_properties);
     protected function getObjectIDFromURLParam(array $module, array &$props, &$data_properties)
     {
-        return $_GET[$this->getObjectIDParamName($module, $props, $data_properties)] ?? null;
+        return \PoP\Root\App::query($this->getObjectIDParamName($module, $props, $data_properties));
     }
 }

@@ -30,7 +30,7 @@ class EngineRequest
             return $default;
         }
 
-        $output = $_POST[Params::OUTPUT] ?? $_GET[Params::OUTPUT] ?? null;
+        $output = $_POST[Params::OUTPUT] ?? \PoP\Root\App::query(Params::OUTPUT);
         $outputs = [
             Outputs::HTML,
             Outputs::JSON,
@@ -68,7 +68,7 @@ class EngineRequest
             return $default;
         }
 
-        $dataSourceSelector = $_POST[Params::DATA_SOURCE] ?? $_GET[Params::DATA_SOURCE] ?? null;
+        $dataSourceSelector = $_POST[Params::DATA_SOURCE] ?? \PoP\Root\App::query(Params::DATA_SOURCE);
         $allDataSourceSelectors = [
             DataSourceSelectors::ONLYMODEL,
             DataSourceSelectors::MODELANDREQUEST,
@@ -86,7 +86,7 @@ class EngineRequest
             return $default;
         }
 
-        $dataOutputMode = $_POST[Params::DATAOUTPUTMODE] ?? $_GET[Params::DATAOUTPUTMODE] ?? null;
+        $dataOutputMode = $_POST[Params::DATAOUTPUTMODE] ?? \PoP\Root\App::query(Params::DATAOUTPUTMODE);
         $dataOutputModes = [
             DataOutputModes::SPLITBYSOURCES,
             DataOutputModes::COMBINED,
@@ -104,7 +104,7 @@ class EngineRequest
             return $default;
         }
 
-        $dbOutputMode = $_POST[Params::DATABASESOUTPUTMODE] ?? $_GET[Params::DATABASESOUTPUTMODE] ?? null;
+        $dbOutputMode = $_POST[Params::DATABASESOUTPUTMODE] ?? \PoP\Root\App::query(Params::DATABASESOUTPUTMODE);
         $dbOutputModes = array(
             DatabasesOutputModes::SPLITBYDATABASES,
             DatabasesOutputModes::COMBINED,

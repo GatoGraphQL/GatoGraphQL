@@ -137,7 +137,7 @@ class ModuleListTableAction extends AbstractListTableAction
                     $noParamsCurrentURL
                 ));
             }
-            if ($moduleID = $_GET['item'] ?? null) {
+            if ($moduleID = \PoP\Root\App::query('item')) {
                 // Enable or disable
                 if (self::ACTION_ENABLE === $this->currentAction()) {
                     $this->setModulesEnabledValue([$moduleID], true);

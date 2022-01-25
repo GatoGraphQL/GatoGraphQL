@@ -10,7 +10,7 @@ trait ObjectIDsFromURLParamModuleProcessorTrait
     protected function getObjectIDsFromURLParam(array $module, array &$props, &$data_properties)
     {
         // When editing a post in the webplatform, set param "pid"
-        if ($idOrIDs = $_GET[$this->getObjectIDsParamName($module, $props, $data_properties)] ?? null) {
+        if ($idOrIDs = \PoP\Root\App::query($this->getObjectIDsParamName($module, $props, $data_properties))) {
             return is_array($idOrIDs) ? $idOrIDs : [$idOrIDs];
         }
         return [];

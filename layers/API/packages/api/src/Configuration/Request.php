@@ -15,7 +15,7 @@ class Request
             return null;
         }
 
-        $useNamespace = $_GET[Params::USE_NAMESPACE] ?? null;
+        $useNamespace = \PoP\Root\App::query(Params::USE_NAMESPACE);
         if ($useNamespace === null) {
             return null;
         }

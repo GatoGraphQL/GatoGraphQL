@@ -12,7 +12,7 @@ class Request
 {
     public static function editSchema(): bool
     {
-        $editSchema = $_POST[Params::EDIT_SCHEMA] ?? $_GET[Params::EDIT_SCHEMA] ?? null;
+        $editSchema = $_POST[Params::EDIT_SCHEMA] ?? \PoP\Root\App::query(Params::EDIT_SCHEMA);
         if ($editSchema === null) {
             return false;
         }
@@ -25,7 +25,7 @@ class Request
             return null;
         }
 
-        $scheme = $_POST[Params::MUTATION_SCHEME] ?? $_GET[Params::MUTATION_SCHEME] ?? null;
+        $scheme = $_POST[Params::MUTATION_SCHEME] ?? \PoP\Root\App::query(Params::MUTATION_SCHEME);
         if ($scheme === null) {
             return null;
         }
@@ -44,7 +44,7 @@ class Request
 
     public static function enableGraphQLIntrospection(): ?bool
     {
-        $enableGraphQLIntrospection = $_POST[Params::ENABLE_GRAPHQL_INTROSPECTION] ?? $_GET[Params::ENABLE_GRAPHQL_INTROSPECTION] ?? null;
+        $enableGraphQLIntrospection = $_POST[Params::ENABLE_GRAPHQL_INTROSPECTION] ?? \PoP\Root\App::query(Params::ENABLE_GRAPHQL_INTROSPECTION);
         if ($enableGraphQLIntrospection === null) {
             return null;
         }

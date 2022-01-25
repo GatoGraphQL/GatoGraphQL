@@ -10,6 +10,6 @@ class Request
 {
     public static function getHeadModule(): ?string
     {
-        return $_GET[Params::HEADMODULE] ?? null;
+        return \PoP\Root\App::query(Params::HEADMODULE);
     }
 }
