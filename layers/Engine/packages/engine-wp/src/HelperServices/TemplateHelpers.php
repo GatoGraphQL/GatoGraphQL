@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace PoP\EngineWP\Templates;
+namespace PoP\EngineWP\HelperServices;
 
 use PoP\Root\App;
 use PoP\EngineWP\Component;
 use PoP\EngineWP\ComponentInfo;
 
-class TemplateHelpers
+class TemplateHelpers implements TemplateHelpersInterface
 {
-    public static function getGenerateDataAndSendResponseTemplateFile(): string
+    public function getGenerateDataAndSendResponseTemplateFile(): string
     {
         /** @var ComponentInfo */
         $componentInfo = App::getComponent(Component::class)->getInfo();
         return $componentInfo->getTemplatesDir() . '/GenerateDataAndSendResponse.php';
     }
 
-    public static function getSendResponseTemplateFile(): string
+    public function getSendResponseTemplateFile(): string
     {
         /** @var ComponentInfo */
         $componentInfo = App::getComponent(Component::class)->getInfo();
@@ -27,7 +27,7 @@ class TemplateHelpers
     /**
      * Add a hook to send the Response to the client
      */
-    public static function sendResponseToClient(): void
+    public function sendResponseToClient(): void
     {
         App::addFilter(
             'template_include',

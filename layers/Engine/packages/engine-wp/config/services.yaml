@@ -6,3 +6,6 @@ services:
 
     PoP\EngineWP\Hooks\:
         resource: '../src/Hooks/*'
+
+    PoP\EngineWP\HelperServices\TemplateHelpersInterface:
+        class: \PoP\EngineWP\HelperServices\TemplateHelpers
