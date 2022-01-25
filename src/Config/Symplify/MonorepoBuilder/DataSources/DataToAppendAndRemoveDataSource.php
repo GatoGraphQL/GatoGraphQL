@@ -16,6 +16,7 @@ class DataToAppendAndRemoveDataSource
             'require-dev' => [
                 'symplify/monorepo-builder' => '^10.0',
                 'friendsofphp/php-cs-fixer' => '^3.5',
+                'slevomat/coding-standard' => '^7.0',
             ],
             'autoload' => [
                 'psr-4' => [

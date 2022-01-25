@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleFiltering;
 
 use PoP\ComponentModel\Configuration\Request;
-use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;

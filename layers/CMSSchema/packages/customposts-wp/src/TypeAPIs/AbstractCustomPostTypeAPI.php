@@ -321,6 +321,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         // Basic content: remove embeds, shortcodes, and tags
         // Remove unneeded filters, then add them again
         // @see wp-includes/default-filters.php
+        // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable
         $wp_embed = $GLOBALS['wp_embed'];
         App::removeFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
         App::removeFilter('the_content', 'wpautop');

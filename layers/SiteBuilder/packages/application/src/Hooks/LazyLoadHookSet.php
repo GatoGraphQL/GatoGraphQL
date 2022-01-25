@@ -13,7 +13,6 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ConfigurationComponentModel\Constants\Targets;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class LazyLoadHookSet extends AbstractHookSet

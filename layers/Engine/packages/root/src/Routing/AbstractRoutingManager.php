@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Root\Routing;
 
 use PoP\Root\Configuration\Request;
-use PoP\Root\Constants\Params;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractRoutingManager implements RoutingManagerInterface
