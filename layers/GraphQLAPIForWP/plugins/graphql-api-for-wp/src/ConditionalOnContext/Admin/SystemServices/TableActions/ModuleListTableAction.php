@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableA
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
+use PoP\Root\App;
 
 /**
  * Module List Table Action
@@ -76,7 +77,7 @@ class ModuleListTableAction extends AbstractListTableAction
              */
             // See if executing any of the actions
             $actions = $this->getActions();
-            $isBulkAction = in_array($_POST['action'] ?? null, $actions) || in_array($_POST['action2'] ?? null, $actions);
+            $isBulkAction = in_array(App::request('action'), $actions) || in_array(App::request('action2'), $actions);
             $isSingleAction = in_array($this->currentAction(), $actions);
             if ($isBulkAction || $isSingleAction) {
                 $message = \__('Operation successful', 'graphql-api');
@@ -105,7 +106,7 @@ class ModuleListTableAction extends AbstractListTableAction
         $this->processed = true;
 
         $actions = $this->getActions();
-        $isBulkAction = in_array($_POST['action'] ?? null, $actions) || in_array($_POST['action2'] ?? null, $actions);
+        $isBulkAction = in_array(App::request('action'), $actions) || in_array(App::request('action2'), $actions);
         /**
          * The Bulk takes precedence, because it's executed as a POST on the current URL
          * Then, the URL can contain an ?action=... which was just executed,
@@ -115,9 +116,9 @@ class ModuleListTableAction extends AbstractListTableAction
             $moduleIDs = (array) \esc_sql($_POST[self::INPUT_BULK_ACTION_IDS] ?? []);
             if ($moduleIDs !== []) {
                 // Enable or disable
-                if (($_POST['action'] ?? null) == self::ACTION_ENABLE || ($_POST['action2'] ?? null) == self::ACTION_ENABLE) {
+                if (App::request('action') === self::ACTION_ENABLE || App::request('action2') === self::ACTION_ENABLE) {
                     $this->setModulesEnabledValue($moduleIDs, true);
-                } elseif (($_POST['action'] ?? null) == self::ACTION_DISABLE || ($_POST['action2'] ?? null) == self::ACTION_DISABLE) {
+                } elseif (App::request('action') === self::ACTION_DISABLE || App::request('action2') === self::ACTION_DISABLE) {
                     $this->setModulesEnabledValue($moduleIDs, false);
                 }
             }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\ModuleProcessors\FormInputModuleProcessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\Root\App;
@@ -128,6 +129,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
 
     public function getFormData(): array
     {
+        /** @var FormInputModuleProcessorInterface */
         $formid_processor = $this->getModuleProcessorManager()->getProcessor([\GD_GF_Module_Processor_TextFormInputs::class, \GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID]);
         $form_data = array(
             'form_id' => $formid_processor->getValue([\GD_GF_Module_Processor_TextFormInputs::class, \GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID]),
@@ -141,7 +143,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         // Since GF 1.9.44, they setup field $_POST[ 'is_submit_' . $form['id'] ] )
         // (in file plugins/gravityforms/form_display.php function validate)
         // So here re-create that field
-        if ($form_id = $_POST["gform_submit"] ?? null) {
+        if ($form_id = App::request('gform_submit')) {
             $_POST['is_submit_' . $form_id] = true;
         }
     }
@@ -162,19 +164,23 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         // on the front-end anymore, instead fields PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME and PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL are
         // not visible when the user is logged in
         if (\PoP_FormUtils::useLoggedinuserData() && App::getState('is-user-logged-in')) {
-            if ($form_id = $_POST["gform_submit"] ?? null) {
+            if ($form_id = App::request('gform_submit')) {
                 // Hook the fieldnames from the configuration
                 if ($fieldnames = $this->getFormFieldnames($form_id)) {
                     $user_id = App::getState('current-user-id');
 
                     // Fill the user name
-                    $name = $this->getModuleProcessorManager()->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]);
+                    /** @var FormInputModuleProcessorInterface */
+                    $moduleProcessor = $this->getModuleProcessorManager()->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]);
+                    $name = $moduleProcessor->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]);
                     if (isset($fieldnames[$name])) {
                         $_POST[$fieldnames[$name]] = $this->getUserTypeAPI()->getUserDisplayName($user_id);
                     }
 
                     // Fill the user email
-                    $email = $this->getModuleProcessorManager()->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL]);
+                    /** @var FormInputModuleProcessorInterface */
+                    $moduleProcessor = $this->getModuleProcessorManager()->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL]);
+                    $email = $moduleProcessor->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL]);
                     if (isset($fieldnames[$email])) {
                         $_POST[$fieldnames[$email]] = $this->getUserTypeAPI()->getUserEmail($user_id);
                     }
@@ -186,7 +192,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     public function renameFields(): void
     {
         // We need to populate the $_POST using the input names needed by Gravity Forms
-        if ($form_id = $_POST["gform_submit"] ?? null) {
+        if ($form_id = App::request('gform_submit')) {
             // Hook the fieldnames from the configuration
             if ($fieldnames = $this->getFormFieldnames($form_id)) {
                 foreach ($fieldnames as $module_name => $gf_form_fieldname) {
@@ -204,15 +210,17 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         // Check only if the user is not logged in. When logged in, we never use the captcha
         if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             if (!(\PoP_FormUtils::useLoggedinuserData() && App::getState('is-user-logged-in'))) {
-                if ($form_id = $_POST["gform_submit"] ?? null) {
+                if ($form_id = App::request('gform_submit')) {
                     // Check if there's a captcha sent along
-                    $captcha_name = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA])->getName([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
-                    if ($captcha = $_POST[$captcha_name] ?? null) {
+                    /** @var FormInputModuleProcessorInterface */
+                    $moduleProcessor = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
+                    $captcha_name = $moduleProcessor->getName([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
+                    if ($captcha = App::request($captcha_name)) {
                         // Validate the captcha. If it fails, remove the attr "gform_submit" from $_POST
                         $captcha_validation = \GD_Captcha::validate($captcha);
                         if (GeneralUtils::isError($captcha_validation)) {
                             // By unsetting this value in the $_POST, the email won't be processed by function RGForms::maybe_process_form
-                            unset($_POST["gform_submit"]);
+                            App::getRequest()->request->remove('gform_submit');
                         }
                     }
                 }

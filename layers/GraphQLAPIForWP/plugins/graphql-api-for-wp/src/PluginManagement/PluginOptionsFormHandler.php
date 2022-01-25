@@ -6,8 +6,9 @@ namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use PoPAPI\APIEndpoints\EndpointUtils;
+use PoP\Root\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoPAPI\APIEndpoints\EndpointUtils;
 
 /**
  * Helper class with functions to set the configuration in PoP components.
@@ -54,10 +55,9 @@ class PluginOptionsFormHandler
     public function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
     {
         global $pagenow;
-        $formOrigin = $_POST[SettingsMenuPage::FORM_ORIGIN] ?? null;
         if (
             $pagenow == 'options.php'
-            && $formOrigin === SettingsMenuPage::SETTINGS_FIELD
+            && App::request(SettingsMenuPage::FORM_ORIGIN) === SettingsMenuPage::SETTINGS_FIELD
         ) {
             $value = $this->getNormalizedOptionValues();
             // Return the specific value to this module/option
