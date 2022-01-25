@@ -19,7 +19,7 @@ class AppStateProvider extends AbstractAppStateProvider
         /** @var RootComponentConfiguration */
         $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
         if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
-            $state['settingsformat'] = $_POST[Params::SETTINGSFORMAT] ?? $_GET[Params::SETTINGSFORMAT] ?? Values::DEFAULT;
+            $state['settingsformat'] = $_POST[Params::SETTINGSFORMAT] ?? App::query(Params::SETTINGSFORMAT, Values::DEFAULT);
         } else {
             $state['settingsformat'] = Values::DEFAULT;
         }
