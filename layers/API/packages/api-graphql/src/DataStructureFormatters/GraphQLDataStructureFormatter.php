@@ -17,7 +17,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return 'graphql';
     }
 
-    public function getFormattedData($data)
+    public function getFormattedData(array $data): array
     {
         $ret = [];
 

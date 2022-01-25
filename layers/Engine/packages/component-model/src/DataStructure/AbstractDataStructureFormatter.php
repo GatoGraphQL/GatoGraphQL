@@ -32,15 +32,8 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
 
-    public function getFormattedData($data)
+    public function getFormattedData(array $data): array
     {
         return $data;
     }
-
-    public function outputResponse(array &$data): void
-    {
-        $this->printData($data);
-    }
-
-    abstract protected function printData(array &$data): void;
 }

@@ -8,7 +8,7 @@ use SimpleXMLElement;
 
 trait XMLDataStructureFormatterTrait
 {
-    public function getContentType()
+    public function getContentType(): string
     {
         return 'text/xml';
     }
@@ -16,12 +16,12 @@ trait XMLDataStructureFormatterTrait
     /**
      * Iterate the array and print all the entries as a properties file
      */
-    protected function printData(array &$data): void
+    public function getResponse(array &$data): string
     {
         // Code taken from Function taken from https://stackoverflow.com/a/5965940
         $xml_data = new SimpleXMLElement('<?xml version="1.0"?><data></data>');
         $this->arrayToXML($data, $xml_data);
-        echo $xml_data->asXML();
+        return $xml_data->asXML();
     }
 
     /**

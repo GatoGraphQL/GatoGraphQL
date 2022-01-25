@@ -6,14 +6,14 @@ namespace PoP\ComponentModel\DataStructure;
 
 abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureFormatter
 {
-    public function getContentType()
+    public function getContentType(): string
     {
         return 'application/json';
     }
 
-    protected function printData(array &$data): void
+    public function getResponse(array &$data): string
     {
-        echo json_encode($data, $this->getJsonEncodeType() ?? 0);
+        return json_encode($data, $this->getJsonEncodeType() ?? 0);
     }
 
     protected function getJsonEncodeType(): ?int

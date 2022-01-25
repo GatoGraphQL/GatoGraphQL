@@ -63,7 +63,8 @@ class Engine extends UpstreamEngine implements EngineInterface
         }
 
         $data = $this->getOutputData();
-        $dataStructureFormatter->outputResponse($data);
+        $response = $dataStructureFormatter->getResponse($data);
+        echo $response;
     }
 
     /**
