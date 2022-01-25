@@ -95,8 +95,8 @@ trait QueryDataModuleProcessorTrait
 
             $params_from_request = array_filter(
                 array_merge(
-                    $_GET,
-                    $_POST
+                    App::getRequest()->query->all(),
+                    App::getRequest()->request->all()
                 ),
                 fn (string $param) => in_array($param, $whitelisted_params),
                 ARRAY_FILTER_USE_KEY

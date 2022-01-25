@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\FormInputs;
 
 use PoP\ComponentModel\Facades\HelperServices\FormInputHelperServiceFacade;
+use PoP\Root\App;
 
 class MultipleInputFormInput extends MultipleSelectFormInput
 {
@@ -49,8 +50,8 @@ class MultipleInputFormInput extends MultipleSelectFormInput
             $fullSubname = $formInputHelperService->getMultipleInputName($name, $subname);
             if (
                 ($source !== null && array_key_exists($fullSubname, $source))
-                || array_key_exists($fullSubname, $_POST)
-                || array_key_exists($fullSubname, $_GET)
+                || App::getRequest()->request->has($fullSubname)
+                || App::getRequest()->query->has($fullSubname)
             ) {
                 return true;
             }
