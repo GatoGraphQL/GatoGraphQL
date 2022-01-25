@@ -568,8 +568,8 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     {
         // Each fragment is provided through $_GET[fragments][fragmentName] or directly $_GET[fragmentName]
         $fragments = array_merge(
-            $_GET,
-            $_GET['fragments'] ?? []
+            App::getRequest()->query->all(),
+            App::getRequest()->query->all()['fragments'] ?? []
         );
         // Remove those query args which, we already know, are not fragments
         foreach ($this->getForbiddenFragmentNames() as $queryParam) {

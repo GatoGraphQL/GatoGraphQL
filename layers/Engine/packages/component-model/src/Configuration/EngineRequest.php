@@ -11,6 +11,7 @@ use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Tokens\Param;
+use PoP\Root\App;
 
 /**
  * Special Request class, with properties that modify the Engine's behavior.
@@ -125,7 +126,7 @@ class EngineRequest
             return $default;
         }
 
-        $dataOutputItems = $_POST[Params::DATA_OUTPUT_ITEMS] ?? $_GET[Params::DATA_OUTPUT_ITEMS] ?? [];
+        $dataOutputItems = App::getRequest()->post->all()[Params::DATA_OUTPUT_ITEMS] ?? App::getRequest()->query->all()[Params::DATA_OUTPUT_ITEMS] ?? [];
         if (!is_array($dataOutputItems)) {
             $dataOutputItems = explode(Param::VALUE_SEPARATOR, $dataOutputItems);
         }
