@@ -119,6 +119,6 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Generate the data, print the response to buffer, and send headers
         $engine = EngineFacade::getInstance();
-        $engine->outputResponse();
+        $engine->generateDataAndPrepareResponse();
     }
 }
