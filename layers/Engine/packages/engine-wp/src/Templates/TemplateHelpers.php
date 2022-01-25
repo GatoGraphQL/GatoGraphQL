@@ -14,6 +14,6 @@ class TemplateHelpers
     {
         /** @var ComponentInfo */
         $componentInfo = App::getComponent(Component::class)->getInfo();
-        return $componentInfo->getTemplatesDir() . '/Output.php';
+        return $componentInfo->getTemplatesDir() . '/GenerateDataAndPrintOutput.php';
     }
 }
