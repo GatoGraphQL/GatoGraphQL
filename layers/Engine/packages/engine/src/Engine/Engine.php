@@ -63,6 +63,17 @@ class Engine extends UpstreamEngine implements EngineInterface
                 $headers[] = $cacheControlHeader;
             }
         }
+        // Add the content type header
+        if ($contentType = $formatter->getContentType()) {
+            $headers[] = sprintf(
+                'Content-type: %s',
+                $contentType
+            );
+        }
+        // Send the headers
+        foreach ($headers as $header) {
+            header($header);
+        }
         $data = $this->getOutputData();
         $formatter->outputResponse($data, $headers);
     }

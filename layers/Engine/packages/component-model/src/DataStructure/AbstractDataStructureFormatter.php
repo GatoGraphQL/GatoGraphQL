@@ -39,22 +39,7 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
 
     public function outputResponse(&$data, array $headers = []): void
     {
-        $this->sendHeaders($headers);
         $this->printData($data);
-    }
-
-    protected function sendHeaders(array $headers = []): void
-    {
-        // Add the content type header
-        if ($contentType = $this->getContentType()) {
-            $headers[] = sprintf(
-                'Content-type: %s',
-                $contentType
-            );
-        }
-        foreach ($headers as $header) {
-            header($header);
-        }
     }
 
     abstract protected function printData(array &$data): void;
