@@ -62,7 +62,7 @@ class App implements AppInterface
         self::$appStateManager = $appStateManager ?? static::createAppStateManager();
         self::$mutationResolutionStore = $mutationResolutionStore ?? static::createMutationResolutionStore();
 
-        self::$response = static::createResponse();
+        static::regenerateResponse();
 
         // Inject the Components slated for initialization
         self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
@@ -115,6 +115,11 @@ class App implements AppInterface
     protected static function createMutationResolutionStore(): MutationResolutionStore
     {
         return new MutationResolutionStore();
+    }
+
+    public static function regenerateResponse(): void
+    {
+        self::$response = static::createResponse();
     }
 
     public static function getAppLoader(): AppLoaderInterface

@@ -39,6 +39,8 @@ interface AppInterface
         ?MutationResolutionStore $mutationResolutionStore = null,
     ): void;
 
+    public static function regenerateResponse(): void;
+
     public static function getAppLoader(): AppLoaderInterface;
 
     public static function getHookManager(): HookManagerInterface;

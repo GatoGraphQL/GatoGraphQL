@@ -108,6 +108,11 @@ class App implements AppInterface, RootAppInterface
         );
     }
 
+    public static function regenerateResponse(): void
+    {
+        RootApp::regenerateResponse();
+    }
+
     public static function getAppLoader(): AppLoaderInterface
     {
         return RootApp::getAppLoader();
