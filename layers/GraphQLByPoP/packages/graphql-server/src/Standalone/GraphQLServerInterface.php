@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
+use PoP\Root\HttpFoundation\Response;
+
 interface GraphQLServerInterface
 {
     /**
@@ -12,5 +14,5 @@ interface GraphQLServerInterface
      *
      * @param array<string,mixed> $variables
      */
-    public function execute(string $query, array $variables = []): void;
+    public function execute(string $query, array $variables = []): Response;
 }

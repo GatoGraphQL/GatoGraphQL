@@ -8,6 +8,7 @@ use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use PoP\Engine\Facades\Engine\EngineFacade;
 use PoP\Root\App;
+use PoP\Root\HttpFoundation\Response;
 use PoPAPI\API\Facades\FieldQueryConvertorFacade;
 use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
@@ -95,7 +96,7 @@ class GraphQLServer implements GraphQLServerInterface
      *
      * @param array<string,mixed> $variables
      */
-    public function execute(string $query, array $variables = []): void
+    public function execute(string $query, array $variables = []): Response
     {
         // Override the previous response, if any
         App::regenerateResponse();
@@ -123,5 +124,8 @@ class GraphQLServer implements GraphQLServerInterface
         // Generate the data, print the response to buffer, and send headers
         $engine = EngineFacade::getInstance();
         $engine->generateDataAndPrepareResponse();
+
+        // Return the Response, so the client can retrieve content and headers
+        return App::getResponse();
     }
 }
