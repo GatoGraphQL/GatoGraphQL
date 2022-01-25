@@ -66,10 +66,10 @@ class ComponentManager implements ComponentManagerInterface
     /**
      * Boot all components
      */
-    public function beforeBoot(): void
+    public function componentLoaded(): void
     {
         foreach ($this->components as $component) {
-            $component->beforeBoot();
+            $component->componentLoaded();
         }
     }
 

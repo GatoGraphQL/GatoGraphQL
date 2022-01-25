@@ -51,12 +51,12 @@ class Component extends AbstractComponent
         $this->initSystemServices(dirname(__DIR__));
     }
 
-    public function beforeBoot(): void
+    public function componentLoaded(): void
     {
-        parent::beforeBoot();
+        parent::componentLoaded();
 
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
-        $attachExtensionService->attachExtensions(ApplicationEvents::BEFORE_BOOT);
+        $attachExtensionService->attachExtensions(ApplicationEvents::COMPONENT_LOADED);
     }
 
     public function boot(): void

@@ -6,18 +6,15 @@ namespace PoP\RootWP;
 
 use PoP\Root\App;
 use PoP\Root\AppLoader as UpstreamAppLoader;
-use PoP\Root\Constants\HookNames;
 
 class AppLoader extends UpstreamAppLoader
 {
     /**
-     * Override to execute logic on the proper WP action.
+     * Override to execute logic only after all the plugins (and all the logic)
+     * has been loaded.
      */
     public function bootApplicationComponents(): void
     {
-        // Boot all the components
-        App::getComponentManager()->beforeBoot();
-
         /**
          * Find the right action hook to initialize the application,
          * depending if we are in wp-admin, in the WP REST API, or in the frontend.
@@ -43,27 +40,9 @@ class AppLoader extends UpstreamAppLoader
          */
         $actionHooks = \is_admin() ? ['wp_loaded'] : ['rest_api_init', 'wp'];
         foreach ($actionHooks as $actionHook) {
-            // Override when the functionality is executed
             App::addAction(
                 $actionHook,
-                fn () => App::getAppStateManager()->initializeAppState($this->initialAppState),
-                0
-            );
-            App::addAction(
-                $actionHook,
-                fn () => App::getComponentManager()->boot(),
-                4
-            );
-            App::addAction(
-                $actionHook,
-                fn () => App::getComponentManager()->afterBoot(),
-                8
-            );
-            // Allow to inject functionality
-            App::addAction(
-                $actionHook,
-                fn () => App::doAction(HookNames::AFTER_BOOT_APPLICATION),
-                10
+                fn () => parent::bootApplicationComponents()
             );
         }
     }

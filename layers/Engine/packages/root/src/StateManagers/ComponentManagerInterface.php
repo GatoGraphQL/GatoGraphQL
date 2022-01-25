@@ -32,7 +32,7 @@ interface ComponentManagerInterface
     /**
      * Boot all components
      */
-    public function beforeBoot(): void;
+    public function componentLoaded(): void;
 
     /**
      * Boot all components

@@ -14,7 +14,9 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
     public static function setUpBeforeClass(): void
     {
         self::$graphQLServer = new GraphQLServer(
-            static::getGraphQLServerComponentClasses()
+            static::getGraphQLServerComponentClasses(),
+            static::getGraphQLServerComponentClassConfiguration(),
+            false
         );
     }
 
@@ -27,6 +29,14 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
      * @return string[]
      */
     protected static function getGraphQLServerComponentClasses(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected static function getGraphQLServerComponentClassConfiguration(): array
     {
         return [];
     }

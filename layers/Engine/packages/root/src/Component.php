@@ -77,14 +77,14 @@ class Component extends AbstractComponent
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public function beforeBoot(): void
+    public function componentLoaded(): void
     {
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**
          * @var ServiceInstantiatorInterface
          */
         $serviceInstantiator = App::getContainer()->get(ServiceInstantiatorInterface::class);
-        $serviceInstantiator->initializeServices(ApplicationEvents::BEFORE_BOOT);
+        $serviceInstantiator->initializeServices(ApplicationEvents::COMPONENT_LOADED);
     }
 
     /**
