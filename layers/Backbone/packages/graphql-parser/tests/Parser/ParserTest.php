@@ -1154,7 +1154,7 @@ GRAPHQL;
         $filter = new stdClass();
         $filter->name = 'Pedro';
         $filter->age = 19;
-        $filter->relatives = new StdClass();
+        $filter->relatives = new stdClass();
         $filter->relatives->dad = 'Jacinto';
         $this->assertEquals($var->getDefaultValue()->getValue(), $filter);
 
