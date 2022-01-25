@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Root\App;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
@@ -49,7 +50,7 @@ function aalPopNotifyallusersMetaBoxContent()
 
     $submitted = ('POST' === \PoP\Root\App::server('REQUEST_METHOD'));
     if ($submitted) {
-        $notification = $_POST['aal_pop_notifyallusers'] ?? '';
+        $notification = App::request('aal_pop_notifyallusers', '');
     }
 
     _e('Notify all users: enter a message to link to this post:', 'pop-notifications');
@@ -74,7 +75,7 @@ function aalPopNotifyallusersMetaBoxSave($post_id)
         return;
     }
 
-    if (@!wp_verify_nonce($_POST['aal_pop_notifyallusers_nonce'] ?? '', AAL_POP_NOTIFYALLUSERS_NONCE)) {
+    if (@!wp_verify_nonce(App::request('aal_pop_notifyallusers_nonce', ''), AAL_POP_NOTIFYALLUSERS_NONCE)) {
         return $post_id;
     }
 
@@ -82,7 +83,7 @@ function aalPopNotifyallusersMetaBoxSave($post_id)
         return $post_id;
     }
 
-    if ($notification = trim($_POST['aal_pop_notifyallusers'] ?? '')) {
+    if ($notification = trim(App::request('aal_pop_notifyallusers', ''))) {
         PoP_Notifications_Utils::notifyAllUsers($post_id, $notification);
     }
 }
