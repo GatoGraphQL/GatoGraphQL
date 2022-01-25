@@ -97,6 +97,9 @@ class GraphQLServer implements GraphQLServerInterface
      */
     public function execute(string $query, array $variables = []): void
     {
+        // Override the previous response, if any
+        App::regenerateResponse();
+
         // Override the state
         $appStateManager = App::getAppStateManager();
         $appStateManager->override('query', $query);
