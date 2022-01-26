@@ -39,6 +39,7 @@ class App implements AppInterface
     protected static MutationResolutionStore $mutationResolutionStore;
     /** @var string[] */
     protected static array $componentClassesToInitialize = [];
+    public static bool $isHttpRequest;
 
     /**
      * This function must be invoked at the very beginning,
@@ -71,6 +72,13 @@ class App implements AppInterface
         // Inject the Components slated for initialization
         self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
         self::$componentClassesToInitialize = [];
+
+        /**
+         * Indicate if this App is invoked via an HTTP request.
+         * If not, it may be directly invoked as a PHP component,
+         * or from a PHPUnit test.
+         */
+        self::$isHttpRequest = self::server('REQUEST_METHOD') !== null;
     }
 
     protected static function createAppLoader(): AppLoaderInterface
