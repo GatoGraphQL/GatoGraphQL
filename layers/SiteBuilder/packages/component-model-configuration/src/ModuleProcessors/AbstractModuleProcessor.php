@@ -160,8 +160,12 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
         return $ret;
     }
 
-    public function getDataloadSource(array $module, array &$props): string
+    public function getDataloadSource(array $module, array &$props): ?string
     {
+        if (!App::isHTTPRequest()) {
+            return null;
+        }
+        
         // Because a component can interact with itself by adding ?modulepaths=...,
         // then, by default, we simply set the dataload source to point to itself!
         $stringified_module_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
