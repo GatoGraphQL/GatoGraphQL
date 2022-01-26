@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\HelperServices;
+namespace PoP\Engine\HelperServices;
 
 class FormInputHelperService implements FormInputHelperServiceInterface
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FormInputs;
 
-use PoP\ComponentModel\Facades\HelperServices\FormInputHelperServiceFacade;
+use PoP\Engine\Facades\HelperServices\FormInputHelperServiceFacade;
 use PoP\Root\App;
 
 class MultipleInputFormInput extends MultipleSelectFormInput
