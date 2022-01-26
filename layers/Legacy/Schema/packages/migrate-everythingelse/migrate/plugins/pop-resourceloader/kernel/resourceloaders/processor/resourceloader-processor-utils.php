@@ -1,5 +1,6 @@
 <?php
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
@@ -694,10 +695,11 @@ class PoP_ResourceLoaderProcessorUtils {
 
         // Generate the $props for this $vars, or re-use the already-calculated one from the current execution (for when generating bundle(group) files on runtime)
         $engine = EngineFacade::getInstance();
+        $engineState = App::getEngineState();
         // After setting the new $vars properties, we can obtain the entry module
         $entryModule = $engine->getEntryModule();
         if ($options['use-engine-entrymodule-props'] ?? null) {
-            $entry_model_props = $engine->engineState->model_props;
+            $entry_model_props = $engineState->model_props;
         } else {
             // To calculate all the resources below, we just need the static props.
             // Functions below should NOT rely on mutableonrequest props, or otherwise 2 posts may produce different resources,

@@ -1,9 +1,8 @@
 <?php
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class PoPThemeWassup_Utils
 {
@@ -39,8 +38,8 @@ class PoPThemeWassup_Utils
         // If PoP SSR is not defined, then there is no PoP_SSR_ServerUtils
         if (defined('POP_SSR_INITIALIZED')) {
             if (!PoP_SSR_ServerUtils::disableServerSideRendering()) {
-                $engine = EngineFacade::getInstance();
-                $data = $engine->engineState->data;
+                $engineState = App::getEngineState();
+                $data = $engineState->data;
                 $configuration = $data['modulesettings']['combinedstate']['configuration'];
                 // Because the pageSection names may be mangled (so that "body" will be "x3" or something like that),
                 // repeat the name of the pageSection/class below
