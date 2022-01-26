@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ItemProcessors\ItemProcessorManagerTrait;
 use PoP\ComponentModel\ItemProcessors\ProcessorItemUtils;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -205,8 +205,8 @@ class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManag
 		if (PoP_ResourceLoader_ServerUtils::includeResourcesInBody()) {
 
 			// Extract all the resources added through PoP_Processor->getResources($module, $props)
-			$engine = EngineFacade::getInstance();
-			if ($modules_resources = $engine->helperCalculations['module-resources']) {
+			$engineState = App::getEngineState();
+			if ($modules_resources = $engineState->helperCalculations['module-resources']) {
 				
 				return array_values(array_intersect($resources, $modules_resources));
 			}

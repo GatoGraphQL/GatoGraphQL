@@ -55,6 +55,8 @@ interface AppInterface
 
     public static function getComponentManager(): ComponentManagerInterface;
 
+    public static function getAppStateManager(): AppStateManagerInterface;
+
     public static function getMutationResolutionStore(): MutationResolutionStore;
 
     /**
@@ -83,6 +85,18 @@ interface AppInterface
      * @throws LogicException
      */
     public static function getComponent(string $componentClass): ComponentInterface;
+
+    /**
+     * Shortcut function.
+     * @param string|string[] $keyOrPath The property key, or a property path for array values
+     */
+    public static function getState(string|array $keyOrPath): mixed;
+
+    /**
+     * Shortcut function.
+     * @param string|string[] $keyOrPath The property key, or a property path for array values
+     */
+    public static function hasState(string|array $keyOrPath): mixed;
 
     /**
      * Shortcut function.

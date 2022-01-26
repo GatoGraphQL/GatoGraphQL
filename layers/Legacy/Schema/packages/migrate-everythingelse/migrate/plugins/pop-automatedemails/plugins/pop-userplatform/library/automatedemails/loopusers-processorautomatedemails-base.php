@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
@@ -34,7 +35,8 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
 
             // Set the recipient as the "current-user-id", pretending this user is logged in
             $vars = &ApplicationState::$vars;
-            // First, save the old values, to restore them later
+            $engineState = App::getEngineState();
+        // First, save the old values, to restore them later
             $keys = [
                 'is-user-logged-in',
                 'current-user',
@@ -60,7 +62,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
                 $request['hist_time'] = ($lastaccess && $lastaccess > $yesterday) ? $lastaccess : $yesterday;
 
                 // Regenerate the data
-                $data = $engine->getModuleData($module, $processor, $engine->props, $formatter, $request);
+                $data = $engine->getModuleData($module, $processor, $engineState->props, $formatter, $request);
 
                 // If the user has no notifications, then skip it
                 // Simply check if the dbobjectids for the user is empty, for the main block
