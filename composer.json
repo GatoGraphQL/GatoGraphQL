@@ -543,6 +543,7 @@
         "allow-plugins": {
             "boxuk/wp-muplugin-loader": true,
             "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "johnpbloch/wordpress-core-installer": true,
             "oomphinc/composer-installers-extender": true
         }
