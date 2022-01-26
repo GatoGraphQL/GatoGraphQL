@@ -87,6 +87,9 @@ services:
     PoP\ComponentModel\QueryInputOutputHandlers\:
         resource: '../src/QueryInputOutputHandlers/*'
 
+    PoP\ComponentModel\DataStructureFormatters\:
+        resource: '../src/DataStructureFormatters/*'
+
     PoP\ComponentModel\Error\ErrorProviderInterface:
         class: \PoP\ComponentModel\Error\ErrorProvider
 
