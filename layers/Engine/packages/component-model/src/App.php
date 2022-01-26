@@ -2,15 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI;
+namespace PoP\ComponentModel;
 
-use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
 use LogicException;
-use PoP\ComponentModel\App as ComponentModelApp;
-use PoP\ComponentModel\AppInterface as ComponentModelAppInterface;
 use PoP\ComponentModel\Engine\EngineState;
 use PoP\Root\App as RootApp;
 use PoP\Root\AppInterface as RootAppInterface;
@@ -33,53 +27,18 @@ use PoP\Root\Stores\MutationResolutionStore;
  * Using composition instead of inheritance, so that the original PoP\Root\App
  * is the single source of truth
  */
-class App implements AppInterface, ComponentModelAppInterface, RootAppInterface
+class App implements AppInterface, RootAppInterface
 {
-    protected static MainPluginManager $mainPluginManager;
-    protected static ExtensionManager $extensionManager;
+    protected static EngineState $engineState;
 
-    public static function initializePlugin(
-        ?MainPluginManager $mainPluginManager = null,
-        ?ExtensionManager $extensionManager = null,
-    ): void {
-        self::$mainPluginManager = $mainPluginManager ?? static::createMainPluginManager();
-        self::$extensionManager = $extensionManager ?? static::createExtensionManager();
-    }
-
-    protected static function createExtensionManager(): ExtensionManager
+    public static function getEngineState(): EngineState
     {
-        return new ExtensionManager();
+        return self::$engineState;
     }
-
-    protected static function createMainPluginManager(): MainPluginManager
+    
+    public static function regenerateEngineState(): void
     {
-        return new MainPluginManager();
-    }
-
-    public static function getMainPluginManager(): MainPluginManager
-    {
-        return self::$mainPluginManager;
-    }
-
-    public static function getExtensionManager(): ExtensionManager
-    {
-        return self::$extensionManager;
-    }
-
-    /**
-     * Shortcut function.
-     */
-    public static function getMainPlugin(): MainPluginInterface
-    {
-        return self::getMainPluginManager()->getPlugin();
-    }
-
-    /**
-     * Shortcut function.
-     */
-    public static function getExtension(string $extensionClass): ExtensionInterface
-    {
-        return self::getExtensionManager()->getExtension($extensionClass);
+        self::$engineState = new EngineState();
     }
 
     /**
@@ -109,16 +68,6 @@ class App implements AppInterface, ComponentModelAppInterface, RootAppInterface
             $appStateManager,
             $mutationResolutionStore,
         );
-    }
-
-    public static function getEngineState(): EngineState
-    {
-        return ComponentModelApp::getEngineState();
-    }
-
-    public static function regenerateEngineState(): void
-    {
-        ComponentModelApp::regenerateEngineState();
     }
 
     public static function regenerateResponse(): void
