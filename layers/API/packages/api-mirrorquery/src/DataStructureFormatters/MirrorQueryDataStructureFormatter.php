@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\APIMirrorQuery\DataStructureFormatters;
 
 use PoP\Root\App;
-use PoP\ComponentModel\DataStructure\AbstractJSONDataStructureFormatter;
+use PoP\ComponentModel\DataStructureFormatters\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 
 class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatter

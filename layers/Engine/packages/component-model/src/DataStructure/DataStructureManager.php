@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DataStructure;
 
+use PoP\ComponentModel\DataStructureFormatters\DataStructureFormatterInterface;
 use PoP\Root\App;
 
 class DataStructureManager implements DataStructureManagerInterface
