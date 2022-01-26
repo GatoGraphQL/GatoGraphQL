@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DataStructureFormatters;
 
-use PoP\ComponentModel\DataStructure\AbstractDataStructureFormatter;
+use PoP\ComponentModel\DataStructureFormatters\AbstractDataStructureFormatter;
 
 class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
 {

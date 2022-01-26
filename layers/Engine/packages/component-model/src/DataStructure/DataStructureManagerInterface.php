@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DataStructure;
 
+use PoP\ComponentModel\DataStructureFormatters\DataStructureFormatterInterface;
+
 interface DataStructureManagerInterface
 {
     public function addDataStructureFormatter(DataStructureFormatterInterface $formatter): void;
