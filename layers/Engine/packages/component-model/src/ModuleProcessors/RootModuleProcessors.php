@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\ModuleProcessors;
-
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+namespace PoP\ComponentModel\ModuleProcessors;
 
 class RootModuleProcessors extends AbstractModuleProcessor
 {
