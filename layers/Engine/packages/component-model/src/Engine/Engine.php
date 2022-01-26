@@ -248,7 +248,7 @@ class Engine implements EngineInterface
         }
 
         $engineState = App::getEngineState();
-        
+
         // The same page will have different hashs only because of those random elements added each time,
         // such as the unique_id and the current_time. So remove these to generate the hash
         /** @var ComponentInfo */
@@ -281,7 +281,7 @@ class Engine implements EngineInterface
     public function getExtraRoutes(): array
     {
         $engineState = App::getEngineState();
-        
+
         // The extra URIs must be cached! That is because we will change the requested URI in $vars, upon which the hook to inject extra URIs (eg: for page INITIALFRAMES) will stop working
         if ($engineState->extra_routes !== null) {
             return $engineState->extra_routes;
@@ -580,7 +580,7 @@ class Engine implements EngineInterface
             in_array(DataOutputItems::META, $dataoutputitems)
         ) {
             $engineState = App::getEngineState();
-            
+
             // Also add the request, session and site meta.
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
             // If it has extra-uris, pass along this information, so that the client can fetch the setting from under $model_instance_id ("mutableonmodel") and $uri ("mutableonrequest")

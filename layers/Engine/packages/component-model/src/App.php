@@ -22,7 +22,7 @@ class App extends AbstractRootAppProxy implements AppInterface
     {
         return self::$engineState;
     }
-    
+
     public static function regenerateEngineState(): void
     {
         self::$engineState = new EngineState();
