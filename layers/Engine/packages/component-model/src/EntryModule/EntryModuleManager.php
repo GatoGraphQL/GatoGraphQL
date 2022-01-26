@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\EntryModule;
+namespace PoP\ComponentModel\EntryModule;
 
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
