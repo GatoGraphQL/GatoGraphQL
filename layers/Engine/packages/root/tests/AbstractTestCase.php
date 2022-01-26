@@ -17,10 +17,9 @@ abstract class AbstractTestCase extends TestCase
     public static function setUpBeforeClass(): void
     {
         static::initializeApp(false, null, null, true);
-        self::$container = App::getContainer();
     }
 
-    protected static function initializeApp(
+    private static function initializeApp(
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
         ?string $containerDirectory = null,
@@ -41,7 +40,23 @@ abstract class AbstractTestCase extends TestCase
         );
 
         App::getAppLoader()->bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
+
+        // By now, we already have the container
+        self::$container = App::getContainer();
+
+        // Allow to modify the $_GET when testing
+        static::beforeBootApplicationComponents();
+
+        // Finish the initialization
         App::getAppLoader()->bootApplicationComponents();
+    }
+
+    /**
+     * Allow to modify the $_GET when testing.
+     */
+    protected static function beforeBootApplicationComponents(): void
+    {
+        // Do nothing
     }
 
     protected static function getAppLoader(): AppLoaderInterface
