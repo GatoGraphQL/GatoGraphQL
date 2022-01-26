@@ -372,7 +372,7 @@ class Engine implements EngineInterface
     protected function getHeaders(): array
     {
         $headers = [];
-        
+
         // Add the content type header
         $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
         if ($contentType = $dataStructureFormatter->getContentType()) {
