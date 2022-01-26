@@ -228,10 +228,7 @@ class Engine implements EngineInterface
         $engineState->entryModule = $this->getEntryModuleManager()->getEntryModule();
         if ($engineState->entryModule === null) {
             throw new Exception(
-                sprintf(
-                    'No entry module for this request (%s)',
-                    $this->getRequestHelperService()->getRequestedFullURL()
-                )
+                $this->__('No entry module for this request', 'component-model')
             );
         }
 
