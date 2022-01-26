@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\DataStructure;
+namespace PoP\ComponentModel\DataStructureFormatters;
 
 trait PropertyDataStructureFormatterTrait
 {
