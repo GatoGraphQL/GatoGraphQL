@@ -355,7 +355,7 @@ class Engine implements EngineInterface
         return $headers;
     }
 
-    public function generateData(): void
+    protected function generateData(): void
     {
         // Reset the state
         App::regenerateEngineState();

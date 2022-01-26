@@ -33,7 +33,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         return $this->cacheControlEngine ??= $this->instanceManager->getInstance(CacheControlEngineInterface::class);
     }
 
-    public function generateData(): void
+    protected function generateData(): void
     {
         // Check if there are loose contracts that must be implemented by the CMS, that have not been done so.
         if ($notImplementedNames = $this->getLooseContractManager()->getNotImplementedRequiredNames()) {

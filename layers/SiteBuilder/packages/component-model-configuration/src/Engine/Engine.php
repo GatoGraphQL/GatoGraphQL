@@ -23,8 +23,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     const CACHETYPE_IMMUTABLESETTINGS = 'static-settings';
     const CACHETYPE_STATEFULSETTINGS = 'stateful-settings';
 
-
-    public function generateData(): void
+    protected function generateData(): void
     {
         /** @var LegacyPoP\LooseContracts\LooseContractManagerInterface */
         $looseContractManager = $this->getLooseContractManager();
