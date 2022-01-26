@@ -9,3 +9,6 @@ services:
 
     PoP\Engine\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
+
+    PoP\Engine\HelperServices\FormInputHelperServiceInterface:
+        class: \PoP\Engine\HelperServices\FormInputHelperService
