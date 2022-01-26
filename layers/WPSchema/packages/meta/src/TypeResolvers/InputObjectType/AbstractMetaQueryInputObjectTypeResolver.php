@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
 use Exception;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -95,6 +96,19 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
         return match ($inputFieldName) {
             'type' => MetaQueryValueTypes::CHAR,
             default => parent::getInputFieldDescription($inputFieldName),
+        };
+    }
+
+    public function getInputFieldTypeModifiers(string $inputFieldName): int
+    {
+        return match ($inputFieldName) {
+            'key',
+            'type',
+            'compareBy',
+            'relation'
+                => SchemaTypeModifiers::MANDATORY,
+            default
+                => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
 
