@@ -34,9 +34,16 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
     {
         $nature = $this->getCurrentRequestNature();
 
+        // By default, use the "main" route
+        $default = Routes::MAIN;
+
         // If it is a GENERIC route, then the URL path is already the route
         if ($nature === RequestNature::GENERIC) {
-            return $this->getRoutingHelperService()->getRequestURIPath();
+            $requestURIPath = $this->getRoutingHelperService()->getRequestURIPath();
+            if ($requestURIPath === null) {
+                return $default;
+            }
+            return $requestURIPath;
         }
 
         // If having set URL param "route", then use it
@@ -45,7 +52,6 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
             return $route;
         }
 
-        // By default, use the "main" route
-        return Routes::MAIN;
+        return $default;
     }
 }
