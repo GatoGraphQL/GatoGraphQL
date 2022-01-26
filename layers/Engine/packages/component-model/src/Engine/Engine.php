@@ -309,6 +309,11 @@ class Engine implements EngineInterface
 
         $engineState->extra_routes = [];
 
+        /** Only enable for an HTTP request */
+        if (!App::isHTTPRequest()) {
+            return $engineState->extra_routes;
+        }
+
         if (Environment::enableExtraRoutesByParams()) {
             $engineState->extra_routes = Request::getExtraRoutes();
         }
@@ -682,9 +687,12 @@ class Engine implements EngineInterface
         $meta = array(
             Response::ENTRY_MODULE => $this->getEntryModule()[1],
             Response::UNIQUE_ID => $componentInfo->getUniqueID(),
-            Response::URL => $this->getRequestHelperService()->getCurrentURL(),
             'modelinstanceid' => $this->getModelInstance()->getModelInstanceId(),
         );
+        
+        if (App::isHTTPRequest()) {
+            $meta[Response::URL] = $this->getRequestHelperService()->getCurrentURL();
+        }
 
         $engineState = App::getEngineState();
         if ($engineState->backgroundload_urls) {
