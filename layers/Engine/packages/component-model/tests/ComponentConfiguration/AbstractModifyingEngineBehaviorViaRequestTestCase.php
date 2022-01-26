@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Engine\Engine;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment;
 use PoP\Root\AbstractTestCase;
 use PoP\Root\App;
@@ -55,7 +55,7 @@ abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends Abstrac
      */
     public function testEnableModifyingEngineBehaviorViaRequestEnvVar(): void
     {
-        $engine = $this->getService(Engine::class);
+        $engine = $this->getService(EngineInterface::class);
         $engine->generateDataAndPrepareResponse();
         $this->assertEquals(
             App::getResponse()->headers->get('content-type'),
