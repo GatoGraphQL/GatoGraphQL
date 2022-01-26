@@ -57,53 +57,9 @@ class Engine implements EngineInterface
     public const CACHETYPE_PROPS = 'props';
 
     /**
-     * @var mixed[]
+     * Keep all the state in a special object
      */
-    public array $data = [];
-    /**
-     * @var mixed[]
-     */
-    public array $helperCalculations = [];
-    /**
-     * @var mixed[]
-     */
-    public array $model_props = [];
-    /**
-     * @var mixed[]
-     */
-    public array $props = [];
-    /**
-     * @var string[]
-     */
-    protected array $nocache_fields = [];
-    /**
-     * @var array<string, mixed>
-     */
-    protected ?array $moduledata = null;
-    /**
-     * @var array<string, array>
-     */
-    protected array $dbdata = [];
-    /**
-     * @var array<string, array>
-     */
-    protected array $backgroundload_urls = [];
-    /**
-     * @var string[]
-     */
-    protected ?array $extra_routes = null;
-    protected ?bool $cachedsettings = null;
-    /**
-     * @var array<string, mixed>
-     */
-    protected array $outputData = [];
-    protected ?array $entryModule = null;
-
-    /**
-     * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional"
-     * @var array<string,array<string,mixed>>
-     */
-    protected array $relationalTypeOutputDBKeyIDsDataFields = [];
+    protected EngineState $engineState;
 
     private ?PersistentCacheInterface $persistentCache = null;
     private ?DataStructureManagerInterface $dataStructureManager = null;
@@ -247,6 +203,11 @@ class Engine implements EngineInterface
         return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
     }
 
+    protected function regenerateEngineState(): void
+    { 
+        $this->engineState = new EngineState();
+    }
+
     public function getOutputData(): array
     {
         return $this->outputData;
@@ -384,6 +345,9 @@ class Engine implements EngineInterface
 
     public function generateData(): void
     {
+        // Reset the state
+        $this->regenerateEngineState();
+
         App::doAction('\PoP\ComponentModel\Engine:beginning');
 
         // Process the request and obtain the results
