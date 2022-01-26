@@ -39,7 +39,7 @@ class App implements AppInterface
     protected static MutationResolutionStore $mutationResolutionStore;
     /** @var string[] */
     protected static array $componentClassesToInitialize = [];
-    public static bool $isHttpRequest;
+    public static bool $isHTTPRequest;
 
     /**
      * This function must be invoked at the very beginning,
@@ -78,7 +78,7 @@ class App implements AppInterface
          * If not, it may be directly invoked as a PHP component,
          * or from a PHPUnit test.
          */
-        self::$isHttpRequest = self::server('REQUEST_METHOD') !== null;
+        self::$isHTTPRequest = self::server('REQUEST_METHOD') !== null;
     }
 
     protected static function createAppLoader(): AppLoaderInterface
