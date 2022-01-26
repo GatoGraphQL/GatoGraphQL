@@ -438,8 +438,8 @@ class Engine implements EngineInterface
     protected function formatData(): void
     {
         $engineState = App::getEngineState();
-        $formatter = $this->getDataStructureManager()->getDataStructureFormatter();
-        $engineState->data = $formatter->getFormattedData($engineState->data);
+        $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
+        $engineState->data = $dataStructureFormatter->getFormattedData($engineState->data);
     }
 
     public function calculateOutputData(): void
