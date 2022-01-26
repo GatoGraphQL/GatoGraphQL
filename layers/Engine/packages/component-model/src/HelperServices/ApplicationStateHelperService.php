@@ -11,6 +11,6 @@ class ApplicationStateHelperService implements ApplicationStateHelperServiceInte
 {
     public function doingJSON(): bool
     {
-        return App::getState('output') == Outputs::JSON;
+        return App::getState('output') === Outputs::JSON;
     }
 }
