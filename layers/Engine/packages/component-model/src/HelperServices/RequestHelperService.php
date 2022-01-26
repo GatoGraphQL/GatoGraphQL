@@ -14,8 +14,12 @@ class RequestHelperService implements RequestHelperServiceInterface
 {
     use BasicServiceTrait;
 
-    public function getCurrentURL(): string
+    public function getCurrentURL(): ?string
     {
+        if (!App::isHTTPRequest()) {
+            return null;
+        }
+
         // Strip the Target and Output off it, users don't need to see those
         $remove_params = (array) App::applyFilters(
             'RequestUtils:current_url:remove_params',
@@ -54,8 +58,12 @@ class RequestHelperService implements RequestHelperServiceInterface
      *
      * @param boolean $useHostRequestedByClient If true, get the host from user-provided HTTP_HOST, otherwise from the server-defined SERVER_NAME
      */
-    public function getRequestedFullURL(bool $useHostRequestedByClient = false): string
+    public function getRequestedFullURL(bool $useHostRequestedByClient = false): ?string
     {
+        if (!App::isHTTPRequest()) {
+            return null;
+        }
+        
         $s = App::server("HTTPS") === "on" ? "s" : "";
         $sp = strtolower(App::server("SERVER_PROTOCOL"));
         $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
