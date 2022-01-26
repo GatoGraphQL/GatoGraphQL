@@ -86,6 +86,18 @@ interface AppInterface
 
     /**
      * Shortcut function.
+     * @param string|string[] $keyOrPath The property key, or a property path for array values
+     */
+    public static function getState(string|array $keyOrPath): mixed;
+
+    /**
+     * Shortcut function.
+     * @param string|string[] $keyOrPath The property key, or a property path for array values
+     */
+    public static function hasState(string|array $keyOrPath): mixed;
+
+    /**
+     * Shortcut function.
      */
     public static function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void;
 

@@ -139,6 +139,24 @@ abstract class AbstractRootAppProxy implements RootAppInterface
 
     /**
      * Shortcut function.
+     * @param string|string[] $keyOrPath The property key, or a property path for array values
+     */
+    final public static function getState(string|array $keyOrPath): mixed
+    {
+        return RootApp::getState($keyOrPath);
+    }
+
+    /**
+     * Shortcut function.
+     * @param string|string[] $keyOrPath The property key, or a property path for array values
+     */
+    final public static function hasState(string|array $keyOrPath): mixed
+    {
+        return RootApp::hasState($keyOrPath);
+    }
+
+    /**
+     * Shortcut function.
      */
     public static function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
     {
