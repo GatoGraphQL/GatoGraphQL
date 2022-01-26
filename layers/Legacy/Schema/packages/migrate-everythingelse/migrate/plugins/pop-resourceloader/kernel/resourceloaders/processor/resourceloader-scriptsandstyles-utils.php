@@ -490,10 +490,10 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
         // so this acts as preloading those templates, making the 2nd request faster
 
         // We are given a toplevel. Iterate through all the pageSections, and obtain their resources
-        $templateResources = $engine->helperCalculations['template-resources'];
+        $templateResources = $engine->engineState->helperCalculations['template-resources'];
 
         // Add all the pageSection methods
-        $data = $engine->data;
+        $data = $engine->engineState->data;
         $pageSectionJSMethods = $data['modulesettings']['combinedstate']['jsmethods']['pagesection'];
         $blockJSMethods = $data['modulesettings']['combinedstate']['jsmethods']['block'];
 
@@ -503,7 +503,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
         // Get all the resources the template is dependent on. Eg: inline CSS styles
         // $modules_resources = array_values(array_unique(arrayFlatten(array_values($data['modulesettings']['combinedstate']['module-resources'] ?? array()))));
-        $modules_resources = $engine->helperCalculations['module-resources'];
+        $modules_resources = $engine->engineState->helperCalculations['module-resources'];
 
         // Get all the resources from the current request, from the loaded Handlebars templates and Javascript methods
         self::$calculated_resources[$key] = PoP_ResourceLoaderProcessorUtils::calculateResources(true, $templateResources, $critical_methods, $noncritical_methods, $modules_resources, $model_instance_id, $options);

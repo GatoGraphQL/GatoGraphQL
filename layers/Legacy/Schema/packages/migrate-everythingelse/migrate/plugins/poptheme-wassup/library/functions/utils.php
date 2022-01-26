@@ -40,7 +40,7 @@ class PoPThemeWassup_Utils
         if (defined('POP_SSR_INITIALIZED')) {
             if (!PoP_SSR_ServerUtils::disableServerSideRendering()) {
                 $engine = EngineFacade::getInstance();
-                $data = $engine->data;
+                $data = $engine->engineState->data;
                 $configuration = $data['modulesettings']['combinedstate']['configuration'];
                 // Because the pageSection names may be mangled (so that "body" will be "x3" or something like that),
                 // repeat the name of the pageSection/class below

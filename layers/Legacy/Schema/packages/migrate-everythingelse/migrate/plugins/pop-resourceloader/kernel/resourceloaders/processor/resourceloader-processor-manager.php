@@ -206,7 +206,7 @@ class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManag
 
 			// Extract all the resources added through PoP_Processor->getResources($module, $props)
 			$engine = EngineFacade::getInstance();
-			if ($modules_resources = $engine->helperCalculations['module-resources']) {
+			if ($modules_resources = $engine->engineState->helperCalculations['module-resources']) {
 				
 				return array_values(array_intersect($resources, $modules_resources));
 			}

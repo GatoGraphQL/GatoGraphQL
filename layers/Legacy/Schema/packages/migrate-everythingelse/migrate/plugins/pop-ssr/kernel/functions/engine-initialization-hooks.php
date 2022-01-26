@@ -147,7 +147,7 @@ class PoP_SSR_EngineInitialization_Hooks
         if ($dynamic_data_properties === null) {
             global $pop_module_processordynamicdatadecorator_manager;
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-            $entry_model_props = $engine->model_props;
+            $entry_model_props = $engine->engineState->model_props;
             $dynamic_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($moduleprocessor_manager->getProcessor($entryModule))->getDynamicDataFieldsDatasetmoduletree($entryModule, $entry_model_props);
 
             if ($useCache) {

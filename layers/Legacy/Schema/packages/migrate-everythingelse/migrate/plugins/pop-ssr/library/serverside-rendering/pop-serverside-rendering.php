@@ -41,7 +41,7 @@ class PoP_ServerSideRendering
         if (!$this->data) {
             // The JSON is already encoded, as a String, so we must decode it to transformt it into an array
             $engine = EngineFacade::getInstance();
-            $this->data = $engine->data;
+            $this->data = $engine->engineState->data;
         }
     }
 

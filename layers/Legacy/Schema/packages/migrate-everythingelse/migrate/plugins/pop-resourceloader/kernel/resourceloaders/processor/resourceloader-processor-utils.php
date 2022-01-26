@@ -697,7 +697,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // After setting the new $vars properties, we can obtain the entry module
         $entryModule = $engine->getEntryModule();
         if ($options['use-engine-entrymodule-props'] ?? null) {
-            $entry_model_props = $engine->model_props;
+            $entry_model_props = $engine->engineState->model_props;
         } else {
             // To calculate all the resources below, we just need the static props.
             // Functions below should NOT rely on mutableonrequest props, or otherwise 2 posts may produce different resources,
