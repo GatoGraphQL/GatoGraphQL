@@ -39,7 +39,7 @@ class TemplateHookSet extends AbstractHookSet
             PHP_INT_MAX // Execute last
         );
     }
-    
+
     public function getTemplate(string $template): string
     {
         if ($this->useTemplate()) {
