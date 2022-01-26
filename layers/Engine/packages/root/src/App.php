@@ -39,7 +39,7 @@ class App implements AppInterface
     protected static MutationResolutionStore $mutationResolutionStore;
     /** @var string[] */
     protected static array $componentClassesToInitialize = [];
-    public static bool $isHTTPRequest;
+    protected static bool $isHTTPRequest;
 
     /**
      * This function must be invoked at the very beginning,
