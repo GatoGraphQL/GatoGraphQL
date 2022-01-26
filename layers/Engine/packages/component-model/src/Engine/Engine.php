@@ -346,6 +346,9 @@ class Engine implements EngineInterface
     {
         $headers = [];
 
+        // Maybe add the ETag header
+        $this->sendEtagHeader();
+
         // Add the content type header
         $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
         if ($contentType = $dataStructureFormatter->getContentType()) {
@@ -402,9 +405,6 @@ class Engine implements EngineInterface
 
         // Keep only the data that is needed to be sent, and encode it as JSON
         $this->calculateOutputData();
-
-        // Send the ETag-header
-        $this->sendEtagHeader();
     }
 
     protected function formatData(): void
