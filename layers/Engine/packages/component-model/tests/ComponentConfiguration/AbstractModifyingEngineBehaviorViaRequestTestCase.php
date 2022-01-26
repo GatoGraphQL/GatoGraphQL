@@ -16,17 +16,13 @@ use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends AbstractTestCase
 {
-    public static function setUpBeforeClass(): void
+    protected static function beforeBootApplicationComponents(): void
     {
-        $_REQUEST['output'] = 'json';
-        $_REQUEST[Params::DATASTRUCTURE] = 'html';
-        parent::setUpBeforeClass();
-
-        // /**
-        //  * Pretend we are sending ?datastructure=html in the request.
-        //  */
-        // $htmlDataStructureFormatter = self::$container->get(HTMLDataStructureFormatter::class);
-        // App::getRequest()->query->set(Params::DATASTRUCTURE, $htmlDataStructureFormatter->getName());        
+        /**
+         * Pretend we are sending ?datastructure=html in the request.
+         */
+        $htmlDataStructureFormatter = self::$container->get(HTMLDataStructureFormatter::class);
+        App::getRequest()->query->set(Params::DATASTRUCTURE, $htmlDataStructureFormatter->getName());        
     }
 
     /**
