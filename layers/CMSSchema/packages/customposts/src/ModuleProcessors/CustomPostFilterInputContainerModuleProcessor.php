@@ -40,7 +40,6 @@ class CustomPostFilterInputContainerModuleProcessor extends AbstractCustomPostFi
         $customPostFilterInputModules = [
             ...$this->getIDFilterInputModules(),
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
-            [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
         ];
         $unionCustomPostFilterInputModules = [
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES],
