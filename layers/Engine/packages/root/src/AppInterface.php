@@ -55,6 +55,8 @@ interface AppInterface
 
     public static function getComponentManager(): ComponentManagerInterface;
 
+    public static function getAppStateManager(): AppStateManagerInterface;
+
     public static function getMutationResolutionStore(): MutationResolutionStore;
 
     /**

@@ -94,6 +94,11 @@ abstract class AbstractRootAppProxy implements RootAppInterface
         return RootApp::getComponentManager();
     }
 
+    public static function getAppStateManager(): AppStateManagerInterface
+    {
+        return RootApp::getAppStateManager();
+    }
+
     public static function getMutationResolutionStore(): MutationResolutionStore
     {
         return RootApp::getMutationResolutionStore();
