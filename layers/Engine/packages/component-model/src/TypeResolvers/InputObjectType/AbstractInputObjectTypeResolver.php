@@ -226,10 +226,12 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              *      that those values are provided (but they are not!), triggering an error
              *      (eg: "Warning: Undefined property: stdClass::$key in .../meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php on line 159")
              */
-            if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface) {
+            if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface
+                && $this->initializeInputFieldInputObjectValue()
+            ) {
                 $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
                 $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
-                if (!$inputFieldTypeModifiersIsMandatory && $this->initializeInputFieldInputObjectValue()) {
+                if (!$inputFieldTypeModifiersIsMandatory && !$this->hasMandatoryInputFields($inputFieldTypeResolver)) {
                     $inputValue->$inputFieldName = new stdClass();
                 }
             }
@@ -400,6 +402,19 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         // Add all missing properties which have a default value
         return $coercedInputValue;
+    }
+
+    protected function hasMandatoryInputFields(InputObjectTypeResolverInterface $inputObjectTypeResolver): bool
+    {
+        $inputFieldNameTypeResolvers = $inputObjectTypeResolver->getConsolidatedInputFieldNameTypeResolvers();
+        foreach (array_keys($inputFieldNameTypeResolvers) as $inputFieldName) { 
+            $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
+            if ($inputFieldTypeModifiersIsMandatory) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
