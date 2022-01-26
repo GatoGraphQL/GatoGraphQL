@@ -20,7 +20,11 @@ use PoP\Root\StateManagers\HookManagerInterface;
 use PoP\Root\Stores\MutationResolutionStore;
 
 /**
- * Single class hosting all the top-level instances to run the application
+ * Keep all state in the application stored and accessible
+ * through this class, so that regenerating this class
+ * provides a new state.
+ *
+ * Needed for PHPUnit.
  */
 class App implements AppInterface
 {

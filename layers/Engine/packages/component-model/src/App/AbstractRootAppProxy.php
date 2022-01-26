@@ -20,11 +20,8 @@ use PoP\Root\StateManagers\HookManagerInterface;
 use PoP\Root\Stores\MutationResolutionStore;
 
 /**
- * Decorator wrapping the single class App hosting all the top-level instances,
- * plus addition of properties needed for the plugin.
- *
- * Using composition instead of inheritance, so that the original PoP\Root\App
- * is the single source of truth
+ * Using proxy instead of inheritance, so that the upstream App
+ * class is still the single source of truth for its own state
  */
 abstract class AbstractRootAppProxy implements RootAppInterface
 {

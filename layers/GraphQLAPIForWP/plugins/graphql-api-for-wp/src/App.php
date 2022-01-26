@@ -11,11 +11,11 @@ use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
 
 /**
- * Decorator wrapping the single class App hosting all the top-level instances,
- * plus addition of properties needed for the plugin.
+ * Keep all state in the application stored and accessible
+ * through this class, so that regenerating this class
+ * provides a new state.
  *
- * Using composition instead of inheritance, so that the original PoP\Root\App
- * is the single source of truth
+ * Needed for PHPUnit.
  */
 class App extends AbstractComponentModelAppProxy implements AppInterface
 {
