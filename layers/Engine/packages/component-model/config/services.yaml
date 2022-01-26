@@ -78,6 +78,12 @@ services:
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
 
+    PoP\ComponentModel\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
+
+    PoP\ComponentModel\RouteModuleProcessors\:
+        resource: '../src/RouteModuleProcessors/*'
+
     PoP\ComponentModel\QueryInputOutputHandlers\:
         resource: '../src/QueryInputOutputHandlers/*'
 
