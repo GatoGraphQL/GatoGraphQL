@@ -103,13 +103,13 @@ services:
         class: \PoP\ComponentModel\Modules\ModuleHelpers
 
     default_data_structure_formatter:
-        class: PoP\ComponentModel\DataStructureFormatters\DefaultDataStructureFormatter
+        class: PoP\ComponentModel\DataStructure\DefaultDataStructureFormatter
         public: false
 
     PoP\ComponentModel\DataStructure\DataStructureManagerInterface:
         class: \PoP\ComponentModel\DataStructure\DataStructureManager
         arguments:
-            PoP\ComponentModel\DataStructure\DataStructureFormatterInterface: '@default_data_structure_formatter'
+            PoP\ComponentModel\DataStructureFormatters\DataStructureFormatterInterface: '@default_data_structure_formatter'
 
     PoP\ComponentModel\ModulePath\ModulePathHelpersInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathHelpers
