@@ -348,6 +348,40 @@ class Engine implements EngineInterface
         return array($has_extra_routes, $model_instance_id, $current_uri);
     }
 
+    public function generateDataAndPrepareResponse(): void
+    {
+        // 1. Generate the data
+        $this->generateData();
+
+        // 2. Get the data, and ask the formatter to output it
+        $data = $this->getOutputData();
+        $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
+        $outputContent = $dataStructureFormatter->getOutputContent($data);
+
+        // 3. Prepare the Response
+        $response = App::getResponse();
+        $response->setContent($outputContent);
+        foreach ($this->getHeaders() as $name => $value) {
+            $response->headers->set($name, $value);
+        }
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    protected function getHeaders(): array
+    {
+        $headers = [];
+        
+        // Add the content type header
+        $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
+        if ($contentType = $dataStructureFormatter->getContentType()) {
+            $headers['Content-Type'] = $contentType;
+        }
+
+        return $headers;
+    }
+
     public function generateData(): void
     {
         App::doAction('\PoP\ComponentModel\Engine:beginning');
