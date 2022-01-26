@@ -210,24 +210,24 @@ class Engine implements EngineInterface
 
     public function getOutputData(): array
     {
-        return $this->outputData;
+        return $this->engineState->outputData;
     }
 
     public function addBackgroundUrl(string $url, array $targets): void
     {
-        $this->backgroundload_urls[$url] = $targets;
+        $this->engineState->backgroundload_urls[$url] = $targets;
     }
 
     public function getEntryModule(): array
     {
         // Use cached results
-        if ($this->entryModule !== null) {
-            return $this->entryModule;
+        if ($this->engineState->entryModule !== null) {
+            return $this->engineState->entryModule;
         }
 
         // Obtain, validate and cache
-        $this->entryModule = $this->getEntryModuleManager()->getEntryModule();
-        if ($this->entryModule === null) {
+        $this->engineState->entryModule = $this->getEntryModuleManager()->getEntryModule();
+        if ($this->engineState->entryModule === null) {
             throw new Exception(
                 sprintf(
                     'No entry module for this request (%s)',
@@ -236,7 +236,7 @@ class Engine implements EngineInterface
             );
         }
 
-        return $this->entryModule;
+        return $this->engineState->entryModule;
     }
 
     public function sendEtagHeader(): void
@@ -253,7 +253,7 @@ class Engine implements EngineInterface
                 $componentInfo->getRand(),
                 $componentInfo->getTime(),
             );
-            $commoncode = str_replace($differentiators, '', json_encode($this->data));
+            $commoncode = str_replace($differentiators, '', json_encode($this->engineState->data));
 
             // Also replace all those tags with content that, even if it's different, should not alter the output
             // Eg: comments-count. Because adding a comment does not delete the cache, then the comments-count is allowed
@@ -264,8 +264,8 @@ class Engine implements EngineInterface
             // and
             // "userpostactivity-count":1
             // Comment Leo 22/10/2017: ?module=settings doesn't have 'nocache-fields'
-            if ($this->nocache_fields) {
-                $commoncode = preg_replace('/"(' . implode('|', $this->nocache_fields) . ')":[0-9]+,?/', '', $commoncode);
+            if ($this->engineState->nocache_fields) {
+                $commoncode = preg_replace('/"(' . implode('|', $this->engineState->nocache_fields) . ')":[0-9]+,?/', '', $commoncode);
             }
 
             // Allow plug-ins to replace their own non-needed content (eg: thumbprints, defined in Core)
@@ -277,23 +277,23 @@ class Engine implements EngineInterface
     public function getExtraRoutes(): array
     {
         // The extra URIs must be cached! That is because we will change the requested URI in $vars, upon which the hook to inject extra URIs (eg: for page INITIALFRAMES) will stop working
-        if (!is_null($this->extra_routes)) {
-            return $this->extra_routes;
+        if ($this->engineState->extra_routes !== null) {
+            return $this->engineState->extra_routes;
         }
 
-        $this->extra_routes = [];
+        $this->engineState->extra_routes = [];
 
         if (Environment::enableExtraRoutesByParams()) {
-            $this->extra_routes = Request::getExtraRoutes();
+            $this->engineState->extra_routes = Request::getExtraRoutes();
         }
 
         // Enable to add extra URLs in a fixed manner
-        $this->extra_routes = App::applyFilters(
+        $this->engineState->extra_routes = App::applyFilters(
             '\PoP\ComponentModel\Engine:getExtraRoutes',
-            $this->extra_routes
+            $this->engineState->extra_routes
         );
 
-        return $this->extra_routes;
+        return $this->engineState->extra_routes;
     }
 
     public function listExtraRouteVars(): array
@@ -351,7 +351,7 @@ class Engine implements EngineInterface
         App::doAction('\PoP\ComponentModel\Engine:beginning');
 
         // Process the request and obtain the results
-        $this->data = $this->helperCalculations = [];
+        $this->engineState->data = $this->engineState->helperCalculations = [];
         $this->processAndGenerateData();
 
         /**
@@ -399,12 +399,12 @@ class Engine implements EngineInterface
     protected function formatData(): void
     {
         $formatter = $this->getDataStructureManager()->getDataStructureFormatter();
-        $this->data = $formatter->getFormattedData($this->data);
+        $this->engineState->data = $formatter->getFormattedData($this->engineState->data);
     }
 
     public function calculateOutputData(): void
     {
-        $this->outputData = $this->getEncodedDataObject($this->data);
+        $this->engineState->outputData = $this->getEncodedDataObject($this->engineState->data);
     }
 
     // Allow PoPWebPlatform_Engine to override this function
@@ -469,28 +469,28 @@ class Engine implements EngineInterface
 
         // Save it to be used by the children class
         // Static props are needed for both static/mutableonrequest operations, so build it always
-        $this->model_props = $this->getModelPropsModuletree($module);
+        $this->engineState->model_props = $this->getModelPropsModuletree($module);
 
         // If only getting static content, then no need to add the mutableonrequest props
         if ($datasourceselector == DataSourceSelectors::ONLYMODEL) {
-            $this->props = $this->model_props;
+            $this->engineState->props = $this->engineState->model_props;
         } else {
-            $this->props = $this->addRequestPropsModuletree($module, $this->model_props);
+            $this->engineState->props = $this->addRequestPropsModuletree($module, $this->engineState->model_props);
         }
 
         // Allow for extra operations (eg: calculate resources)
         App::doAction(
             '\PoP\ComponentModel\Engine:helperCalculations',
-            array(&$this->helperCalculations),
+            array(&$this->engineState->helperCalculations),
             $module,
-            array(&$this->props)
+            array(&$this->engineState->props)
         );
 
         $data = [];
         if (in_array(DataOutputItems::DATASET_MODULE_SETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
-                $this->getModuleDatasetSettings($module, $this->model_props, $this->props)
+                $this->getModuleDatasetSettings($module, $this->engineState->model_props, $this->engineState->props)
             );
         }
 
@@ -505,7 +505,7 @@ class Engine implements EngineInterface
         ) {
             $data = array_merge(
                 $data,
-                $this->getModuleData($module, $this->model_props, $this->props)
+                $this->getModuleData($module, $this->engineState->model_props, $this->engineState->props)
             );
 
             if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
@@ -556,8 +556,8 @@ class Engine implements EngineInterface
         // }
 
         // Do array_replace_recursive because it may already contain data from doing 'extra-uris'
-        $this->data = array_replace_recursive(
-            $this->data,
+        $this->engineState->data = array_replace_recursive(
+            $this->engineState->data,
             $data
         );
     }
@@ -574,15 +574,15 @@ class Engine implements EngineInterface
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
             // If it has extra-uris, pass along this information, so that the client can fetch the setting from under $model_instance_id ("mutableonmodel") and $uri ("mutableonrequest")
             if ($this->getExtraRoutes()) {
-                $this->data['requestmeta'][Response::MULTIPLE_ROUTES] = true;
+                $this->engineState->data['requestmeta'][Response::MULTIPLE_ROUTES] = true;
             }
             if ($sitemeta = $this->getSiteMeta()) {
-                $this->data['sitemeta'] = $sitemeta;
+                $this->engineState->data['sitemeta'] = $sitemeta;
             }
 
             if (in_array(DataOutputItems::SESSION, $dataoutputitems)) {
                 if ($sessionmeta = $this->getSessionMeta()) {
-                    $this->data['sessionmeta'] = $sessionmeta;
+                    $this->engineState->data['sessionmeta'] = $sessionmeta;
                 }
             }
         }
@@ -606,9 +606,9 @@ class Engine implements EngineInterface
         }
 
         // If there is no cached one, generate the configuration and cache it
-        $this->cachedsettings = false;
+        $this->engineState->cachedsettings = false;
         if ($immutable_datasetsettings !== null) {
-            $this->cachedsettings = true;
+            $this->engineState->cachedsettings = true;
         } else {
             $immutable_datasetsettings = $processor->getImmutableSettingsDatasetmoduletree($module, $model_props);
 
@@ -645,8 +645,8 @@ class Engine implements EngineInterface
             'modelinstanceid' => $this->getModelInstance()->getModelInstanceId(),
         );
 
-        if ($this->backgroundload_urls) {
-            $meta[Response::BACKGROUND_LOAD_URLS] = $this->backgroundload_urls;
+        if ($this->engineState->backgroundload_urls) {
+            $meta[Response::BACKGROUND_LOAD_URLS] = $this->engineState->backgroundload_urls;
         };
 
         // Starting from what modules must do the rendering. Allow for empty arrays (eg: modulepaths[]=somewhatevervalue)
@@ -697,8 +697,8 @@ class Engine implements EngineInterface
             }
 
             // Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
-            if (!is_null($this->cachedsettings)) {
-                $meta['cachedsettings'] = $this->cachedsettings;
+            if (!is_null($this->engineState->cachedsettings)) {
+                $meta['cachedsettings'] = $this->engineState->cachedsettings;
             };
         }
         return App::applyFilters(
@@ -983,13 +983,13 @@ class Engine implements EngineInterface
         if ($add_meta) {
             $immutable_datasetmodulemeta = $mutableonmodel_datasetmodulemeta = $mutableonrequest_datasetmodulemeta = [];
         }
-        $this->dbdata = [];
+        $this->engineState->dbdata = [];
 
         // Save all the BACKGROUND_LOAD urls to send back to the browser, to load immediately again (needed to fetch non-cacheable data-fields)
-        $this->backgroundload_urls = [];
+        $this->engineState->backgroundload_urls = [];
 
         // Load under global key (shared by all pagesections / blocks)
-        $this->relationalTypeOutputDBKeyIDsDataFields = [];
+        $this->engineState->relationalTypeOutputDBKeyIDsDataFields = [];
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
@@ -997,7 +997,7 @@ class Engine implements EngineInterface
             $root_module,
             array(&$root_model_props),
             array(&$root_props),
-            array(&$this->helperCalculations),
+            array(&$this->engineState->helperCalculations),
             $this
         );
 
@@ -1170,12 +1170,12 @@ class Engine implements EngineInterface
                     // Store the ids under $data under key dataload_name => id
                     $data_fields = $data_properties['data-fields'] ?? [];
                     $conditional_data_fields = $data_properties['conditional-data-fields'] ?? [];
-                    $this->combineIDsDatafields($this->relationalTypeOutputDBKeyIDsDataFields, $relationalTypeResolver, $relationalTypeOutputDBKey, $typeDBObjectIDs, $data_fields, $conditional_data_fields);
+                    $this->combineIDsDatafields($this->engineState->relationalTypeOutputDBKeyIDsDataFields, $relationalTypeResolver, $relationalTypeOutputDBKey, $typeDBObjectIDs, $data_fields, $conditional_data_fields);
 
                     // Add the IDs to the possibly-already produced IDs for this typeResolver
-                    $this->initializeTypeResolverEntry($this->dbdata, $relationalTypeOutputDBKey, $module_path_key);
-                    $this->dbdata[$relationalTypeOutputDBKey][$module_path_key]['ids'] = array_merge(
-                        $this->dbdata[$relationalTypeOutputDBKey][$module_path_key]['ids'],
+                    $this->initializeTypeResolverEntry($this->engineState->dbdata, $relationalTypeOutputDBKey, $module_path_key);
+                    $this->engineState->dbdata[$relationalTypeOutputDBKey][$module_path_key]['ids'] = array_merge(
+                        $this->engineState->dbdata[$relationalTypeOutputDBKey][$module_path_key]['ids'],
                         $typeDBObjectIDs
                     );
 
@@ -1199,14 +1199,14 @@ class Engine implements EngineInterface
                         $extend_ids = $extend_data_properties['ids'];
                         $extend_typeResolver = $extend_data_properties['resolver'];
 
-                        $this->combineIDsDatafields($this->relationalTypeOutputDBKeyIDsDataFields, $extend_typeResolver, $extendTypeOutputDBKey, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
+                        $this->combineIDsDatafields($this->engineState->relationalTypeOutputDBKeyIDsDataFields, $extend_typeResolver, $extendTypeOutputDBKey, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
 
                         // This is needed to add the typeResolver-extend IDs, for if nobody else creates an entry for this typeResolver
-                        $this->initializeTypeResolverEntry($this->dbdata, $extendTypeOutputDBKey, $module_path_key);
+                        $this->initializeTypeResolverEntry($this->engineState->dbdata, $extendTypeOutputDBKey, $module_path_key);
                     }
 
                     // Keep iterating for its subcomponents
-                    $this->integrateSubcomponentDataProperties($this->dbdata, $data_properties, $relationalTypeOutputDBKey, $module_path_key);
+                    $this->integrateSubcomponentDataProperties($this->engineState->dbdata, $data_properties, $relationalTypeOutputDBKey, $module_path_key);
                 }
             }
 
@@ -1217,19 +1217,19 @@ class Engine implements EngineInterface
                 if ($add_meta) {
                     $datasetmodulemeta = &$immutable_datasetmodulemeta;
                 }
-                $this->moduledata = &$immutable_moduledata;
+                $this->engineState->moduledata = &$immutable_moduledata;
             } elseif ($datasource == DataSources::MUTABLEONMODEL) {
                 $datasetmoduledata = &$mutableonmodel_datasetmoduledata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$mutableonmodel_datasetmodulemeta;
                 }
-                $this->moduledata = &$mutableonmodel_moduledata;
+                $this->engineState->moduledata = &$mutableonmodel_moduledata;
             } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
                 $datasetmoduledata = &$mutableonrequest_datasetmoduledata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$mutableonrequest_datasetmodulemeta;
                 }
-                $this->moduledata = &$mutableonrequest_moduledata;
+                $this->engineState->moduledata = &$mutableonrequest_moduledata;
             }
 
             // Integrate the dbobjectids into $datasetmoduledata
@@ -1281,8 +1281,8 @@ class Engine implements EngineInterface
             }
 
             // Incorporate the background URLs
-            $this->backgroundload_urls = array_merge(
-                $this->backgroundload_urls,
+            $this->engineState->backgroundload_urls = array_merge(
+                $this->engineState->backgroundload_urls,
                 $processor->getBackgroundurlsMergeddatasetmoduletree($module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
             );
 
@@ -1296,7 +1296,7 @@ class Engine implements EngineInterface
                 $mutation_checkpoint_validation,
                 $executed,
                 $dbObjectIDOrIDs,
-                array(&$this->helperCalculations),
+                array(&$this->engineState->helperCalculations),
                 $this
             );
         }
@@ -1391,7 +1391,7 @@ class Engine implements EngineInterface
             $root_module,
             array(&$root_model_props),
             array(&$root_props),
-            array(&$this->helperCalculations),
+            array(&$this->engineState->helperCalculations),
             $this
         );
 
@@ -1450,7 +1450,7 @@ class Engine implements EngineInterface
     {
         // Save all database elements here, under typeResolver
         $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $objectTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = [];
-        $this->nocache_fields = [];
+        $this->engineState->nocache_fields = [];
 
         // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
         // but we need to avoid fetching those DB objects that were already fetched in a previous iteration
@@ -1462,16 +1462,16 @@ class Engine implements EngineInterface
         $messages = [];
 
         // Iterate while there are dataloaders with data to be processed
-        while (!empty($this->relationalTypeOutputDBKeyIDsDataFields)) {
+        while (!empty($this->engineState->relationalTypeOutputDBKeyIDsDataFields)) {
             // Move the pointer to the first element, and get it
-            reset($this->relationalTypeOutputDBKeyIDsDataFields);
-            $relationalTypeOutputDBKey = key($this->relationalTypeOutputDBKeyIDsDataFields);
-            $relationalTypeResolver = $this->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['relationalTypeResolver'];
-            $ids_data_fields = $this->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'];
+            reset($this->engineState->relationalTypeOutputDBKeyIDsDataFields);
+            $relationalTypeOutputDBKey = key($this->engineState->relationalTypeOutputDBKeyIDsDataFields);
+            $relationalTypeResolver = $this->engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['relationalTypeResolver'];
+            $ids_data_fields = $this->engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'];
 
             // Remove the typeResolver element from the array, so it doesn't process it anymore
             // Do it immediately, so that subcomponents can load new IDs for this current typeResolver (eg: posts => related)
-            unset($this->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]);
+            unset($this->engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]);
 
             // If no ids to execute, then skip
             if (empty($ids_data_fields)) {
@@ -1667,11 +1667,11 @@ class Engine implements EngineInterface
 
             // Important: query like this: obtain keys first instead of iterating directly on array,
             // because it will keep adding elements
-            $typeResolver_dbdata = $this->dbdata[$relationalTypeOutputDBKey];
+            $typeResolver_dbdata = $this->engineState->dbdata[$relationalTypeOutputDBKey];
             foreach (array_keys($typeResolver_dbdata) as $module_path_key) {
-                $typeResolver_data = &$this->dbdata[$relationalTypeOutputDBKey][$module_path_key];
+                $typeResolver_data = &$this->engineState->dbdata[$relationalTypeOutputDBKey][$module_path_key];
 
-                unset($this->dbdata[$relationalTypeOutputDBKey][$module_path_key]);
+                unset($this->engineState->dbdata[$relationalTypeOutputDBKey][$module_path_key]);
 
                 // Check if it has subcomponents, and then bring this data
                 if ($subcomponents_data_properties = $typeResolver_data['subcomponents']) {
@@ -1911,20 +1911,20 @@ class Engine implements EngineInterface
                             // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
                             // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
                             // if ($id_subcomponent_data_fields) {
-                            $this->combineIDsDatafields($this->relationalTypeOutputDBKeyIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeOutputDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
+                            $this->combineIDsDatafields($this->engineState->relationalTypeOutputDBKeyIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeOutputDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
                             // }
                         }
-                        $this->initializeTypeResolverEntry($this->dbdata, $subcomponentTypeOutputDBKey, $module_path_key);
-                        $this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] = array_merge(
-                            $this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] ?? [],
+                        $this->initializeTypeResolverEntry($this->engineState->dbdata, $subcomponentTypeOutputDBKey, $module_path_key);
+                        $this->engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] = array_merge(
+                            $this->engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] ?? [],
                             $field_ids
                         );
-                        $this->integrateSubcomponentDataProperties($this->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputDBKey, $module_path_key);
+                        $this->integrateSubcomponentDataProperties($this->engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputDBKey, $module_path_key);
                     }
 
-                    if ($this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key] ?? null) {
-                        $this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] = array_unique($this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids']);
-                        $this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['data-fields'] = array_unique($this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['data-fields']);
+                    if ($this->engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key] ?? null) {
+                        $this->engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] = array_unique($this->engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids']);
+                        $this->engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['data-fields'] = array_unique($this->engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['data-fields']);
                     }
                 }
             }
@@ -2001,8 +2001,8 @@ class Engine implements EngineInterface
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
         // Integrate the feedback into $moduledata
-        if (!is_null($this->moduledata)) {
-            $moduledata = &$this->moduledata;
+        if (!is_null($this->engineState->moduledata)) {
+            $moduledata = &$this->engineState->moduledata;
 
             // Add the feedback into the object
             if ($feedback = $processor->getDataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
