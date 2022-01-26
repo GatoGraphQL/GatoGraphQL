@@ -7,6 +7,8 @@ namespace PoP\EngineWP\HelperServices;
 interface TemplateHelpersInterface
 {
     public function getGenerateDataAndPrepareAndSendResponseTemplateFile(): string;
+    
+    public function getGenerateDataAndPrepareResponseTemplateFile(): string;
 
     public function getSendResponseTemplateFile(): string;
 

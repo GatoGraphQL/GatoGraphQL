@@ -17,6 +17,13 @@ class TemplateHelpers implements TemplateHelpersInterface
         return $componentInfo->getTemplatesDir() . '/GenerateDataAndPrepareAndSendResponse.php';
     }
 
+    public function getGenerateDataAndPrepareResponseTemplateFile(): string
+    {
+        /** @var ComponentInfo */
+        $componentInfo = App::getComponent(Component::class)->getInfo();
+        return $componentInfo->getTemplatesDir() . '/GenerateDataAndPrepareResponse.php';
+    }
+
     public function getSendResponseTemplateFile(): string
     {
         /** @var ComponentInfo */
