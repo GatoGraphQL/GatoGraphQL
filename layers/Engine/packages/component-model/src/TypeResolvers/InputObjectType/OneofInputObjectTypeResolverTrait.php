@@ -65,11 +65,11 @@ trait OneofInputObjectTypeResolverTrait
     }
 
     /**
-     * Do not initialize the OneofInputObject for the unprovided values,
-     * otherwise its validation may show up in the errors
+     * Do not initialize the OneofInputObject, since we do not know
+     * which one option to initialize
      */
     protected function initializeInputFieldInputObjectValue(): bool
     {
-        return $this->isOneInputValueMandatory();
+        return false;
     }
 }
