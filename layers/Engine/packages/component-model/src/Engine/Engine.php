@@ -346,7 +346,6 @@ class Engine implements EngineInterface
         App::doAction('\PoP\ComponentModel\Engine:beginning');
 
         // Process the request and obtain the results
-        $this->engineState->data = $this->engineState->helperCalculations = [];
         $this->processAndGenerateData();
 
         /**
