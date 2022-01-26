@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Engine;
 
 use Exception;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\Component;
@@ -43,7 +44,6 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
-use PoP\Root\App;
 use PoP\Root\Helpers\Methods;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -203,11 +203,6 @@ class Engine implements EngineInterface
         return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
     }
 
-    protected function regenerateEngineState(): void
-    {
-        $this->engineState = new EngineState();
-    }
-
     public function getOutputData(): array
     {
         return $this->engineState->outputData;
@@ -346,7 +341,7 @@ class Engine implements EngineInterface
     public function generateData(): void
     {
         // Reset the state
-        $this->regenerateEngineState();
+        App::regenerateEngineState();
 
         App::doAction('\PoP\ComponentModel\Engine:beginning');
 
