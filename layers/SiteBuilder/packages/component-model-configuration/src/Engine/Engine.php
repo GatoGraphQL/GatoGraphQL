@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\Engine;
 
 use Exception;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Constants\DataOutputModes;
@@ -16,7 +17,6 @@ use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Engine\Engine\Engine as UpstreamEngine;
 use PoP\Engine\FunctionAPIFactory;
-use PoP\Root\App;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
@@ -51,6 +51,8 @@ class Engine extends UpstreamEngine implements EngineInterface
             return;
         }
 
+        $engineState = App::getEngineState();
+
         // Get the entry module based on the application configuration and the nature
         $module = $this->getEntryModule();
 
@@ -61,13 +63,13 @@ class Engine extends UpstreamEngine implements EngineInterface
         if (in_array(DataOutputItems::MODULESETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
-                $this->getModuleSettings($module, $this->engineState->model_props, $this->engineState->props)
+                $this->getModuleSettings($module, $engineState->model_props, $engineState->props)
             );
         }
 
         // Do array_replace_recursive because it may already contain data from doing 'extra-uris'
-        $this->engineState->data = array_replace_recursive(
-            $this->engineState->data,
+        $engineState->data = array_replace_recursive(
+            $engineState->data,
             $data
         );
     }
