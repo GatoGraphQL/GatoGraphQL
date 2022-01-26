@@ -8,6 +8,6 @@ class DisableModifyingEngineBehaviorViaRequestTest extends AbstractModifyingEngi
 {
     protected static function enableModifyingEngineBehaviorViaRequest(): bool
     {
-        return true;
+        return false;
     }
 }
