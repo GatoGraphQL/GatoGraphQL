@@ -408,7 +408,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     {
         $inputFieldNameTypeResolvers = $inputObjectTypeResolver->getConsolidatedInputFieldNameTypeResolvers();
         foreach (array_keys($inputFieldNameTypeResolvers) as $inputFieldName) { 
-            $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiers = $inputObjectTypeResolver->getConsolidatedInputFieldTypeModifiers($inputFieldName);
             $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
             if ($inputFieldTypeModifiersIsMandatory) {
                 return true;
