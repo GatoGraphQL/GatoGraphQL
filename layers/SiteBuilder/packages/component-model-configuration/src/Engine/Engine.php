@@ -61,13 +61,13 @@ class Engine extends UpstreamEngine implements EngineInterface
         if (in_array(DataOutputItems::MODULESETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
-                $this->getModuleSettings($module, $this->model_props, $this->props)
+                $this->getModuleSettings($module, $this->engineState->model_props, $this->engineState->props)
             );
         }
 
         // Do array_replace_recursive because it may already contain data from doing 'extra-uris'
-        $this->data = array_replace_recursive(
-            $this->data,
+        $this->engineState->data = array_replace_recursive(
+            $this->engineState->data,
             $data
         );
     }
