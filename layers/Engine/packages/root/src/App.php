@@ -179,6 +179,11 @@ class App implements AppInterface
         return self::$mutationResolutionStore;
     }
 
+    public static function isHTTPRequest(): bool
+    {
+        return self::$isHTTPRequest;
+    }
+
     /**
      * Store Component classes to be initialized, and
      * inject them into the AppLoader when this is initialized.

@@ -59,6 +59,8 @@ interface AppInterface
 
     public static function getMutationResolutionStore(): MutationResolutionStore;
 
+    public static function isHTTPRequest(): bool;
+
     /**
      * Store Component classes to be initialized, and
      * inject them into the AppLoader when this is initialized.
