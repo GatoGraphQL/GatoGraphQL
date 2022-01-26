@@ -56,4 +56,5 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
      * @return string[] Error messages
      */
     public function validateInputValue(stdClass $inputValue): array;
+    public function hasMandatoryInputFields(): bool;
 }
