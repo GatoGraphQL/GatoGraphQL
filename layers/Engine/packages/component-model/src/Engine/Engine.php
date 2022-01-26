@@ -317,10 +317,16 @@ class Engine implements EngineInterface
 
     public function generateDataAndPrepareResponse(): void
     {
-        // 1. Generate the data
         $this->generateData();
+        $this->prepareResponse();
+    }
 
-        // 2. Get the data, and ask the formatter to output it
+    /**
+     * Get the data, format it into the content, and set it
+     * (and the headers) on the Response
+     */
+    protected function prepareResponse(): void
+    {
         $data = $this->getOutputData();
         $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
         $outputContent = $dataStructureFormatter->getOutputContent($data);
