@@ -48,31 +48,14 @@ class Engine extends UpstreamEngine implements EngineInterface
         parent::generateData();
     }
 
-    public function generateDataAndPrepareResponse(): void
-    {
-        // 1. Generate the data
-        $this->generateData();
-
-        // 2. Get the data, and ask the formatter to output it
-        $data = $this->getOutputData();
-        $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
-        $outputContent = $dataStructureFormatter->getOutputContent($data);
-
-        // 3. Prepare the Response
-        $response = App::getResponse();
-        $response->setContent($outputContent);
-        foreach ($this->getHeaders() as $name => $value) {
-            $response->headers->set($name, $value);
-        }
-    }
-
     /**
      * @return array<string,string>
      */
     protected function getHeaders(): array
     {
+        $headers = parent::getHeaders();
+
         // If CacheControl is enabled, add it to the headers
-        $headers = [];
         if (App::getComponent(CacheControlComponent::class)->isEnabled()) {
             if ($cacheControlHeaders = $this->getCacheControlEngine()->getCacheControlHeaders()) {
                 $headers = array_merge(
@@ -80,12 +63,6 @@ class Engine extends UpstreamEngine implements EngineInterface
                     $cacheControlHeaders
                 );
             }
-        }
-
-        // Add the content type header
-        $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
-        if ($contentType = $dataStructureFormatter->getContentType()) {
-            $headers['Content-Type'] = $contentType;
         }
 
         return $headers;
