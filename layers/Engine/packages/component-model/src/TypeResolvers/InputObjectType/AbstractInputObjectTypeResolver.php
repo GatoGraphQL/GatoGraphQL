@@ -229,9 +229,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface
                 && $this->initializeInputFieldInputObjectValue()
             ) {
+                $inputObjectTypeResolver = $inputFieldTypeResolver;
                 $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
                 $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
-                if (!$inputFieldTypeModifiersIsMandatory && !$this->hasMandatoryInputFields($inputFieldTypeResolver)) {
+                if (!$inputFieldTypeModifiersIsMandatory && !$inputObjectTypeResolver->hasMandatoryInputFields()) {
                     $inputValue->$inputFieldName = new stdClass();
                 }
             }
@@ -404,11 +405,11 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $coercedInputValue;
     }
 
-    protected function hasMandatoryInputFields(InputObjectTypeResolverInterface $inputObjectTypeResolver): bool
+    public function hasMandatoryInputFields(): bool
     {
-        $inputFieldNameTypeResolvers = $inputObjectTypeResolver->getConsolidatedInputFieldNameTypeResolvers();
+        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
         foreach (array_keys($inputFieldNameTypeResolvers) as $inputFieldName) { 
-            $inputFieldTypeModifiers = $inputObjectTypeResolver->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
             $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
             if ($inputFieldTypeModifiersIsMandatory) {
                 return true;
