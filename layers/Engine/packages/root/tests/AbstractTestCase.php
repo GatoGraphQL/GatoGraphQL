@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class AbstractTestCase extends TestCase
 {
-    private static ?ContainerInterface $container = null;
+    protected static ?ContainerInterface $container = null;
 
     public static function setUpBeforeClass(): void
     {
