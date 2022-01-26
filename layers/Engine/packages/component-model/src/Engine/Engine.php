@@ -204,7 +204,7 @@ class Engine implements EngineInterface
     }
 
     protected function regenerateEngineState(): void
-    { 
+    {
         $this->engineState = new EngineState();
     }
 
