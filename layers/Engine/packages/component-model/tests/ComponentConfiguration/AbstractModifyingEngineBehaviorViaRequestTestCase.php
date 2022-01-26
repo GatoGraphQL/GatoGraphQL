@@ -22,7 +22,7 @@ abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends Abstrac
          * Pretend we are sending ?datastructure=html in the request.
          */
         $htmlDataStructureFormatter = self::$container->get(HTMLDataStructureFormatter::class);
-        App::getRequest()->query->set(Params::DATASTRUCTURE, $htmlDataStructureFormatter->getName());        
+        App::getRequest()->query->set(Params::DATASTRUCTURE, $htmlDataStructureFormatter->getName());
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends Abstrac
     }
 
     abstract protected static function enableModifyingEngineBehaviorViaRequest(): bool;
-    
+
     protected function getExpectedContentType(): string
     {
         if (static::enableModifyingEngineBehaviorViaRequest()) {
@@ -56,7 +56,7 @@ abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends Abstrac
     /**
      * Execute a request, pretending to do ?datastructure=html.
      * Depending on the value of env var ENABLE_MODIFYING_ENGINE_BEHAVIOR_VIA_REQUEST:
-     * 
+     *
      *   if `true`, then the output will be HTML.
      *   if `false`, then the output will be JSON (which is the default on)
      */
