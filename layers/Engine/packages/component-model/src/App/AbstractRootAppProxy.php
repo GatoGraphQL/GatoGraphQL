@@ -104,6 +104,11 @@ abstract class AbstractRootAppProxy implements RootAppInterface
         return RootApp::getMutationResolutionStore();
     }
 
+    public static function isHTTPRequest(): bool
+    {
+        return RootApp::isHTTPRequest();
+    }
+
     /**
      * Store Component classes to be initialized, and
      * inject them into the AppLoader when this is initialized.
