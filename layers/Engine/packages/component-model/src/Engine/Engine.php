@@ -325,7 +325,7 @@ class Engine implements EngineInterface
     public function listExtraRouteVars(): array
     {
         $model_instance_id = $current_uri = null;
-        if ($has_extra_routes = !empty($this->getExtraRoutes())) {
+        if ($has_extra_routes = $this->getExtraRoutes() !== []) {
             $model_instance_id = $this->getModelInstance()->getModelInstanceId();
             $current_uri = GeneralUtils::removeDomain(
                 $this->getRequestHelperService()->getCurrentURL()
