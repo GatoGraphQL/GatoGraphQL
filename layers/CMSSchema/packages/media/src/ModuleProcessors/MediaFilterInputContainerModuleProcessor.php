@@ -7,7 +7,6 @@ namespace PoPCMSSchema\Media\ModuleProcessors;
 use PoPCMSSchema\Media\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPCMSSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
 
 class MediaFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
