@@ -8,6 +8,11 @@ use PoP\ComponentModel\DataStructureFormatters\AbstractDataStructureFormatter;
 
 class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
 {
+    public function getName(): string
+    {
+        return 'html';
+    }
+
     public function getContentType(): string
     {
         return 'text/html';
@@ -75,10 +80,5 @@ class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
         }
         $str .= "</tbody></table>";
         return $str;
-    }
-
-    public function getName(): string
-    {
-        return 'html';
     }
 }
