@@ -238,19 +238,32 @@ class Engine implements EngineInterface
         return $engineState->entryModule;
     }
 
-    public function sendEtagHeader(): void
+    /**
+     * Maybe produce the ETag header.
+     *
+     * ETag is needed for the Service Workers.
+     *
+     * Also needed to use together with the Control-Cache header,
+     * to know when to refetch data from the server.
+     *
+     * @see https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching
+     */
+    protected function getEtagHeader(): ?string
     {
-        // ETag is needed for the Service Workers
-        // Also needed to use together with the Control-Cache header, to know when to refetch data from the server: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching
         $addEtagHeader = App::applyFilters('\PoP\ComponentModel\Engine:outputData:addEtagHeader', true);
         if (!$addEtagHeader) {
-            return;
+            return null;
         }
 
         $engineState = App::getEngineState();
 
-        // The same page will have different hashs only because of those random elements added each time,
-        // such as the unique_id and the current_time. So remove these to generate the hash
+        /**
+         * The same page will have different hashs only because
+         * of those random elements added each time, such as the unique_id
+         * and the current_time.
+         *
+         * So remove these to generate the hash.
+         */
         /** @var ComponentInfo */
         $componentInfo = App::getComponent(Component::class)->getInfo();
         $differentiators = array(
@@ -260,22 +273,32 @@ class Engine implements EngineInterface
         );
         $commoncode = str_replace($differentiators, '', json_encode($engineState->data));
 
-        // Also replace all those tags with content that, even if it's different, should not alter the output
-        // Eg: comments-count. Because adding a comment does not delete the cache, then the comments-count is allowed
-        // to be shown stale. So if adding a new comment, there's no need for the user to receive the
-        // "This page has been updated, click here to refresh it." notification
-        // Because we already got the JSON, then remove entries of the type:
-        // "userpostactivity-count":1, (if there are more elements after)
-        // and
-        // "userpostactivity-count":1
-        // Comment Leo 22/10/2017: ?module=settings doesn't have 'nocache-fields'
+        /**
+         * Also replace all those tags with content that, even if it's different,
+         * should not alter the output.
+         *
+         * Eg: comments-count. Because adding a comment does not delete the cache,
+         * then the comments-count is allowed to be shown stale.
+         * So if adding a new comment, there's no need for the user to receive the
+         * "This page has been updated, click here to refresh it." notification.
+         *
+         * Because we already got the JSON, then remove entries of the type:
+         * "userpostactivity-count":1, (if there are more elements after)
+         * and
+         * "userpostactivity-count":1
+         *
+         * Please notice: ?module=settings doesn't have 'nocache-fields'
+         */
         if ($engineState->nocache_fields) {
             $commoncode = preg_replace('/"(' . implode('|', $engineState->nocache_fields) . ')":[0-9]+,?/', '', $commoncode);
         }
 
         // Allow plug-ins to replace their own non-needed content (eg: thumbprints, defined in Core)
-        $commoncode = App::applyFilters('\PoP\ComponentModel\Engine:etag_header:commoncode', $commoncode);
-        App::getResponse()->headers->set('ETag', hash('md5', $commoncode));
+        $commoncode = App::applyFilters(
+            '\PoP\ComponentModel\Engine:etag_header:commoncode',
+            $commoncode
+        );
+        return hash('md5', $commoncode);
     }
 
     public function getExtraRoutes(): array
@@ -317,10 +340,16 @@ class Engine implements EngineInterface
 
     public function generateDataAndPrepareResponse(): void
     {
-        // 1. Generate the data
         $this->generateData();
+        $this->prepareResponse();
+    }
 
-        // 2. Get the data, and ask the formatter to output it
+    /**
+     * Get the data, format it into the content, and set it
+     * (and the headers) on the Response
+     */
+    protected function prepareResponse(): void
+    {
         $data = $this->getOutputData();
         $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
         $outputContent = $dataStructureFormatter->getOutputContent($data);
@@ -340,6 +369,12 @@ class Engine implements EngineInterface
     {
         $headers = [];
 
+        // Maybe add the ETag header
+        $etagHeader = $this->getEtagHeader();
+        if ($etagHeader !== null) {
+            $headers['ETag'] = $etagHeader;
+        }
+
         // Add the content type header
         $dataStructureFormatter = $this->getDataStructureManager()->getDataStructureFormatter();
         if ($contentType = $dataStructureFormatter->getContentType()) {
@@ -349,7 +384,7 @@ class Engine implements EngineInterface
         return $headers;
     }
 
-    public function generateData(): void
+    protected function generateData(): void
     {
         // Reset the state
         App::regenerateEngineState();
@@ -396,9 +431,6 @@ class Engine implements EngineInterface
 
         // Keep only the data that is needed to be sent, and encode it as JSON
         $this->calculateOutputData();
-
-        // Send the ETag-header
-        $this->sendEtagHeader();
     }
 
     protected function formatData(): void
