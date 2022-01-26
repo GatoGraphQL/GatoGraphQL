@@ -26,9 +26,6 @@ services:
     PoP\Engine\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
 
-    PoP\Engine\RouteModuleProcessors\:
-        resource: '../src/RouteModuleProcessors/*'
-
     PoP\Engine\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 

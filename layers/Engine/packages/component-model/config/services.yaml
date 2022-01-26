@@ -81,6 +81,9 @@ services:
     PoP\ComponentModel\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
+    PoP\ComponentModel\RouteModuleProcessors\:
+        resource: '../src/RouteModuleProcessors/*'
+
     PoP\ComponentModel\QueryInputOutputHandlers\:
         resource: '../src/QueryInputOutputHandlers/*'
 

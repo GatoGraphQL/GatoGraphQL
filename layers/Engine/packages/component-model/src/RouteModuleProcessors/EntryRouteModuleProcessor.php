@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\RouteModuleProcessors;
+namespace PoP\ComponentModel\RouteModuleProcessors;
 
-use PoP\Engine\ModuleProcessors\RootModuleProcessors;
+use PoP\ComponentModel\ModuleProcessors\RootModuleProcessors;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
