@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\Engine;
 
 use Exception;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Constants\DataOutputModes;
@@ -16,15 +17,13 @@ use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Engine\Engine\Engine as UpstreamEngine;
 use PoP\Engine\FunctionAPIFactory;
-use PoP\Root\App;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
     const CACHETYPE_IMMUTABLESETTINGS = 'static-settings';
     const CACHETYPE_STATEFULSETTINGS = 'stateful-settings';
 
-
-    public function generateData(): void
+    protected function generateData(): void
     {
         /** @var LegacyPoP\LooseContracts\LooseContractManagerInterface */
         $looseContractManager = $this->getLooseContractManager();
@@ -51,6 +50,8 @@ class Engine extends UpstreamEngine implements EngineInterface
             return;
         }
 
+        $engineState = App::getEngineState();
+
         // Get the entry module based on the application configuration and the nature
         $module = $this->getEntryModule();
 
@@ -61,13 +62,13 @@ class Engine extends UpstreamEngine implements EngineInterface
         if (in_array(DataOutputItems::MODULESETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
-                $this->getModuleSettings($module, $this->engineState->model_props, $this->engineState->props)
+                $this->getModuleSettings($module, $engineState->model_props, $engineState->props)
             );
         }
 
         // Do array_replace_recursive because it may already contain data from doing 'extra-uris'
-        $this->engineState->data = array_replace_recursive(
-            $this->engineState->data,
+        $engineState->data = array_replace_recursive(
+            $engineState->data,
             $data
         );
     }
@@ -79,9 +80,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
         /** @var ComponentModelComponentConfiguration */
         $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
-        if ($useCache = $componentConfiguration->useComponentModelCache()) {
-            $useCache = $this->persistentCache !== null;
-        }
+        $useCache = $componentConfiguration->useComponentModelCache();
 
         // From the state we know if to process static/staful content or both
         $datasourceselector = App::getState('datasourceselector');
@@ -90,21 +89,21 @@ class Engine extends UpstreamEngine implements EngineInterface
         // First check if there's a cache stored
         $immutable_settings = $mutableonmodel_settings = null;
         if ($useCache) {
-            $immutable_settings = $this->persistentCache->getCacheByModelInstance(self::CACHETYPE_IMMUTABLESETTINGS);
-            $mutableonmodel_settings = $this->persistentCache->getCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS);
+            $immutable_settings = $this->getPersistentCache()->getCacheByModelInstance(self::CACHETYPE_IMMUTABLESETTINGS);
+            $mutableonmodel_settings = $this->getPersistentCache()->getCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS);
         }
 
         // If there is no cached one, generate the configuration and cache it
         if ($immutable_settings === null) {
             $immutable_settings = $processor->getImmutableSettingsModuletree($module, $model_props);
             if ($useCache) {
-                $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_IMMUTABLESETTINGS, $immutable_settings);
+                $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_IMMUTABLESETTINGS, $immutable_settings);
             }
         }
         if ($mutableonmodel_settings === null) {
             $mutableonmodel_settings = $processor->getMutableonmodelSettingsModuletree($module, $model_props);
             if ($useCache) {
-                $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings);
+                $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings);
             }
         }
         if ($datasourceselector == DataSourceSelectors::MODELANDREQUEST) {

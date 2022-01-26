@@ -101,7 +101,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     {
         // Make sure the user has access to the editor
         if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
-            include $this->getTemplateHelpers()->getGenerateDataAndSendResponseTemplateFile();
+            include $this->getTemplateHelpers()->getGenerateDataAndPrepareAndSendResponseTemplateFile();
             die;
         }
     }

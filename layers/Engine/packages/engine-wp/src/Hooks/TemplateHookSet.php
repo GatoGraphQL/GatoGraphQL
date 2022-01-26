@@ -39,12 +39,20 @@ class TemplateHookSet extends AbstractHookSet
             PHP_INT_MAX // Execute last
         );
     }
+
     public function getTemplate(string $template): string
     {
-        // If doing JSON, for sure return json.php which only prints the encoded JSON
-        if ($this->getApplicationStateHelperService()->doingJSON()) {
-            return $this->getTemplateHelpers()->getGenerateDataAndSendResponseTemplateFile();
+        if ($this->useTemplate()) {
+            return $this->getTemplateHelpers()->getGenerateDataAndPrepareAndSendResponseTemplateFile();
         }
         return $template;
+    }
+
+    /**
+     * If doing JSON, return the template which prints the encoded JSON
+     */
+    protected function useTemplate(): bool
+    {
+        return $this->getApplicationStateHelperService()->doingJSON();
     }
 }

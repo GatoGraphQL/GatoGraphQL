@@ -10,11 +10,18 @@ use PoP\EngineWP\ComponentInfo;
 
 class TemplateHelpers implements TemplateHelpersInterface
 {
-    public function getGenerateDataAndSendResponseTemplateFile(): string
+    public function getGenerateDataAndPrepareAndSendResponseTemplateFile(): string
     {
         /** @var ComponentInfo */
         $componentInfo = App::getComponent(Component::class)->getInfo();
-        return $componentInfo->getTemplatesDir() . '/GenerateDataAndSendResponse.php';
+        return $componentInfo->getTemplatesDir() . '/GenerateDataAndPrepareAndSendResponse.php';
+    }
+
+    public function getGenerateDataAndPrepareResponseTemplateFile(): string
+    {
+        /** @var ComponentInfo */
+        $componentInfo = App::getComponent(Component::class)->getInfo();
+        return $componentInfo->getTemplatesDir() . '/GenerateDataAndPrepareResponse.php';
     }
 
     public function getSendResponseTemplateFile(): string
@@ -31,7 +38,7 @@ class TemplateHelpers implements TemplateHelpersInterface
     {
         App::addFilter(
             'template_include',
-            fn (string $template) => self::getSendResponseTemplateFile(),
+            fn (string $template) => $this->getSendResponseTemplateFile(),
             PHP_INT_MAX // Execute last
         );
     }
