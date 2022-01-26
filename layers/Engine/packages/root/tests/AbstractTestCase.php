@@ -19,7 +19,7 @@ abstract class AbstractTestCase extends TestCase
         static::initializeApp(false, null, null, true);
     }
 
-    private static function initializeApp(
+    final protected static function initializeApp(
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
         ?string $containerDirectory = null,
