@@ -13,6 +13,7 @@ use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPWPSchema\Meta\Constants\MetaQueryCompareByOperators;
 use PoPWPSchema\Meta\Constants\MetaQueryValueTypes;
 use PoPWPSchema\Meta\TypeResolvers\EnumType\MetaQueryValueTypeEnumTypeResolver;
+use PoPWPSchema\SchemaCommons\Constants\Relation;
 use PoPWPSchema\SchemaCommons\TypeResolvers\EnumType\RelationEnumTypeResolver;
 use stdClass;
 
@@ -95,6 +96,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
     {
         return match ($inputFieldName) {
             'type' => MetaQueryValueTypes::CHAR,
+            'relation' => Relation::AND,
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
