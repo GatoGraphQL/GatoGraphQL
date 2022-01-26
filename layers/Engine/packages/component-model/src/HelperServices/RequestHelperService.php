@@ -63,7 +63,7 @@ class RequestHelperService implements RequestHelperServiceInterface
         if (!App::isHTTPRequest()) {
             return null;
         }
-        
+
         $s = App::server("HTTPS") === "on" ? "s" : "";
         $sp = strtolower(App::server("SERVER_PROTOCOL"));
         $protocol = substr($sp, 0, strpos($sp, "/")) . $s;

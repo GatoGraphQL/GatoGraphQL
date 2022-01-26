@@ -60,7 +60,7 @@ class RoutingHookSet extends AbstractHookSet
         if ($currentURL === null) {
             return $route;
         }
-        
+
         $homeURL = $this->getCMSService()->getHomeURL();
 
         // Remove the protocol to avoid erroring on http/https

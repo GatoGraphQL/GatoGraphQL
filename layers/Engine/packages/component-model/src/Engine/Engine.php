@@ -689,7 +689,7 @@ class Engine implements EngineInterface
             Response::UNIQUE_ID => $componentInfo->getUniqueID(),
             'modelinstanceid' => $this->getModelInstance()->getModelInstanceId(),
         );
-        
+
         if (App::isHTTPRequest()) {
             $meta[Response::URL] = $this->getRequestHelperService()->getCurrentURL();
         }
