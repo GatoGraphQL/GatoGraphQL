@@ -374,7 +374,6 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
 
         $this->expectException(InvalidRequestException::class);
         $parser->parse($query);
-
     }
 
     public function failingQueryWithMetaDirectiveProvider(): array
