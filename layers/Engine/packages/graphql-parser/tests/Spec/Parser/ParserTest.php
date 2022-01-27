@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -32,6 +33,11 @@ class ParserTest extends AbstractTestCase
         return $this->getService(ParserInterface::class);
     }
 
+    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    {
+        return $this->getService(GraphQLErrorMessageProviderInterface::class);
+    }
+
     public function testEmptyParser()
     {
         $parser = $this->getParser();
@@ -43,6 +49,7 @@ class ParserTest extends AbstractTestCase
     public function testInvalidSelection()
     {
         $this->expectException(SyntaxErrorException::class);
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getUnexpectedTokenErrorMessage(Token::tokenName(Token::TYPE_RBRACE)));
         $parser = $this->getParser();
         $parser->parse('
         {
@@ -144,6 +151,21 @@ GRAPHQL;
         $parser = $this->getParser();
 
         $parser->parse($query);
+    }
+
+    public function wrongQueriesProvider()
+    {
+        return [
+            ['{ test (a: "asd", b: <basd>) { id }'],
+            ['{ test (asd: [..., asd]) { id } }'],
+            ['{ test (asd: { "a": 4, "m": null, "asd": false  "b": 5, "c" : { a }}) { id } }'],
+            ['asdasd'],
+            ['mutation { test(asd: ... ){ ...,asd, asd } }'],
+            ['mutation { test{ . test on Test { id } } }'],
+            ['mutation { test( a: "asdd'],
+            ['mutation { test( a: { "asd": 12 12'],
+            ['mutation { test( a: { "asd": 12'],
+        ];
     }
 
     public function testCommas()
@@ -405,21 +427,6 @@ GRAPHQL;
                 ], new Location(62, 22)),
             ]
         ), $document);
-    }
-
-    public function wrongQueriesProvider()
-    {
-        return [
-            ['{ test (a: "asd", b: <basd>) { id }'],
-            ['{ test (asd: [..., asd]) { id } }'],
-            ['{ test (asd: { "a": 4, "m": null, "asd": false  "b": 5, "c" : { a }}) { id } }'],
-            ['asdasd'],
-            ['mutation { test(asd: ... ){ ...,asd, asd } }'],
-            ['mutation { test{ . test on Test { id } } }'],
-            ['mutation { test( a: "asdd'],
-            ['mutation { test( a: { "asd": 12 12'],
-            ['mutation { test( a: { "asd": 12'],
-        ];
     }
 
     public function testInlineFragment()
@@ -1222,7 +1229,8 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInVariable()
     {
         $this->expectException(SyntaxErrorException::class);
-        $parser          = $this->getParser();
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateKeyInInputObjectSyntaxErrorMessage('name'));
+        $parser = $this->getParser();
         $parser->parse('
             query FilterUsers($filter: UserFilterInput = { name: "Pedro", name: "Juancho" }) {
               users(filter: $filter) {
@@ -1236,6 +1244,7 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInArgument()
     {
         $this->expectException(SyntaxErrorException::class);
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateKeyInInputObjectSyntaxErrorMessage('name'));
         $parser          = $this->getParser();
         $parser->parse('
             query FilterUsers {

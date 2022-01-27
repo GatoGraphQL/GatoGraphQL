@@ -6,29 +6,16 @@ namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
-use PoP\GraphQLParser\Response\OutputServiceInterface;
-use PoP\Root\App;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
-use stdClass;
+use PoP\Root\App;
 
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
-    private ?OutputServiceInterface $outputService = null;
-
-    final public function setOutputService(OutputServiceInterface $outputService): void
-    {
-        $this->outputService = $outputService;
-    }
-    final protected function getOutputService(): OutputServiceInterface
-    {
-        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
-    }
-
     /**
      * Replace `Directive` with `MetaDirective`, and nest the affected
      * directives inside.
@@ -82,7 +69,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                  */
                 if (isset($composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition])) {
                     throw new InvalidRequestException(
-                        $this->getAffectedDirectivesReferencedMoreThanOnceErrorMessage($directive),
+                        $this->getGraphQLErrorMessageProvider()->getAffectedDirectivesReferencedMoreThanOnceErrorMessage($directive),
                         $directive->getLocation()
                     );
                 }
@@ -162,7 +149,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         $argumentValue = $argument->getValue()->getValue();
         if ($argumentValue === null) {
             throw new InvalidRequestException(
-                $this->getAffectedDirectivesUnderPosNotEmptyErrorMessage($directive, $argument),
+                $this->getGraphQLErrorMessageProvider()->getAffectedDirectivesUnderPosNotEmptyErrorMessage($directive, $argument),
                 $argument->getLocation()
             );
         }
@@ -174,7 +161,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
         if ($argumentValue === []) {
             throw new InvalidRequestException(
-                $this->getAffectedDirectivesUnderPosNotEmptyErrorMessage($directive, $argument),
+                $this->getGraphQLErrorMessageProvider()->getAffectedDirectivesUnderPosNotEmptyErrorMessage($directive, $argument),
                 $argument->getLocation()
             );
         }
@@ -182,68 +169,20 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         foreach ($argumentValue as $argumentValueItem) {
             if (!is_int($argumentValueItem) || ((int)$argumentValueItem <= 0)) {
                 throw new InvalidRequestException(
-                    $this->getAffectedDirectivesUnderPosNotPositiveIntErrorMessage($directive, $argument, $argumentValueItem),
+                    $this->getGraphQLErrorMessageProvider()->getAffectedDirectivesUnderPosNotPositiveIntErrorMessage($directive, $argument, $argumentValueItem),
                     $argument->getLocation()
                 );
             }
             $nestedDirectivePos = $directivePos + (int)$argumentValueItem;
             if ($nestedDirectivePos >= $directiveCount) {
                 throw new InvalidRequestException(
-                    $this->getNoAffectedDirectiveUnderPosErrorMessage($directive, $argument, $argumentValueItem),
+                    $this->getGraphQLErrorMessageProvider()->getNoAffectedDirectiveUnderPosErrorMessage($directive, $argument, $argumentValueItem),
                     $argument->getLocation()
                 );
             }
         }
 
         return $argumentValue;
-    }
-
-    protected function getAffectedDirectivesReferencedMoreThanOnceErrorMessage(
-        Directive $directive,
-    ): string {
-        return \sprintf(
-            $this->__('Meta directive \'%s\' is nesting a directive already nested by another meta-directive', 'graphql-parser'),
-            $directive->getName()
-        );
-    }
-
-    protected function getAffectedDirectivesUnderPosNotEmptyErrorMessage(
-        Directive $directive,
-        Argument $argument
-    ): string {
-        return \sprintf(
-            $this->__('Argument \'%s\' in directive \'%s\' cannot be null or empty', 'graphql-parser'),
-            $argument->getName(),
-            $directive->getName()
-        );
-    }
-
-    protected function getAffectedDirectivesUnderPosNotPositiveIntErrorMessage(
-        Directive $directive,
-        Argument $argument,
-        mixed $itemValue
-    ): string {
-        return \sprintf(
-            $this->__('Argument \'%s\' in directive \'%s\' must be an array of positive integers, array item \'%s\' is not allowed', 'graphql-parser'),
-            $argument->getName(),
-            $directive->getName(),
-            is_array($itemValue) || ($itemValue instanceof stdClass)
-                ? $this->getOutputService()->jsonEncodeArrayOrStdClassValue($itemValue)
-                : $itemValue
-        );
-    }
-
-    protected function getNoAffectedDirectiveUnderPosErrorMessage(
-        Directive $directive,
-        Argument $argument,
-        int $itemValue
-    ): string {
-        return \sprintf(
-            $this->__('There is no directive in relative position \'%s\' from meta directive \'%s\', as indicated in argument \'%s\'', 'graphql-parser'),
-            $itemValue,
-            $directive->getName(),
-            $argument->getName(),
-        );
     }
 
     /**

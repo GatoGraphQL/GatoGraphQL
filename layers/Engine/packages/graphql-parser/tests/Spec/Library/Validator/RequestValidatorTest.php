@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Library\Validator;
 
-use PHPUnit\Framework\TestCase;
+use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument;
@@ -12,21 +12,35 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\AbstractTestCase;
 
-class RequestValidatorTest extends TestCase
+class RequestValidatorTest extends AbstractTestCase
 {
+    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    {
+        return $this->getService(GraphQLErrorMessageProviderInterface::class);
+    }
+
     /**
      * @dataProvider invalidRequestProvider
      */
     public function testInvalidRequests(ExecutableDocument $executableDocument)
     {
         $this->expectException(InvalidRequestException::class);
+        $exceptionMessages = [
+            'fragment-not-defined' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference'),
+            'fragment-not-defined-2' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference2'),
+            'fragment-not-used' => $this->getGraphQLErrorMessageProvider()->getFragmentNotUsedErrorMessage('reference2'),
+            'variable-not-defined' => $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('test'),
+            'variable-not-submitted' => $this->getGraphQLErrorMessageProvider()->getVariableNotSubmittedErrorMessage('test'),
+        ];
+        $this->expectExceptionMessage($exceptionMessages[$this->dataName()] ?? '');
         $executableDocument->validateAndInitialize();
     }
 
@@ -45,7 +59,7 @@ class RequestValidatorTest extends TestCase
         $variable3->setContext($context);
 
         return [
-            [
+            'fragment-not-defined' => [
                 (new ExecutableDocument(
                     new Document([
                         new QueryOperation(
@@ -63,7 +77,7 @@ class RequestValidatorTest extends TestCase
                     new Context()
                 )),
             ],
-            [
+            'fragment-not-defined-2' => [
                 (new ExecutableDocument(
                     new Document([
                         new QueryOperation(
@@ -82,9 +96,9 @@ class RequestValidatorTest extends TestCase
                         new Fragment('reference', 'TestType', [], [], new Location(1, 1))
                     ]),
                     new Context()
-                ))
+                )),
             ],
-            [
+            'fragment-not-used' => [
                 (new ExecutableDocument(
                     new Document([
                         new QueryOperation(
@@ -103,9 +117,9 @@ class RequestValidatorTest extends TestCase
                             new Fragment('reference2', 'TestType', [], [], new Location(1, 1))
                         ]),
                     new Context()
-                ))
+                )),
             ],
-            [
+            'variable-not-defined' => [
                 (new ExecutableDocument(
                     new Document([
                         new QueryOperation(
@@ -130,9 +144,9 @@ class RequestValidatorTest extends TestCase
                         )
                         ]),
                     new Context()
-                ))
+                )),
             ],
-            [
+            'variable-not-submitted' => [
                 (new ExecutableDocument(
                     new Document([
                         new QueryOperation(
@@ -151,7 +165,7 @@ class RequestValidatorTest extends TestCase
                         )
                         ]),
                     new Context()
-                ))
+                )),
             ]
         ];
     }

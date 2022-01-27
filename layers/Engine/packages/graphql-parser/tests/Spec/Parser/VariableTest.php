@@ -2,13 +2,20 @@
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
-use PHPUnit\Framework\TestCase;
+use LogicException;
+use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
+use PoP\Root\AbstractTestCase;
 
-class VariableTest extends TestCase
+class VariableTest extends AbstractTestCase
 {
+    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    {
+        return $this->getService(GraphQLErrorMessageProviderInterface::class);
+    }
+
     /**
      * Test if variable value equals expected value
      *
@@ -23,8 +30,8 @@ class VariableTest extends TestCase
 
     public function testGetNullValueException()
     {
-        $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('Context has not been set for variable \'foo\'');
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getContextNotSetErrorMessage('foo'));
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->getValue()->getValue();
     }

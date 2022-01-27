@@ -4,13 +4,26 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
+use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Services\StandaloneServiceTrait;
 
 class Document
 {
     use StandaloneServiceTrait;
+
+    private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+
+    final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
+    {
+        $this->graphQLErrorMessageProvider = $graphQLErrorMessageProvider;
+    }
+    final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    {
+        return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
+    }
 
     public function __construct(
         /** @var OperationInterface[] */
@@ -70,15 +83,10 @@ class Document
     {
         if ($this->getOperations() === []) {
             throw new InvalidRequestException(
-                $this->getNoOperationsDefinedInQueryErrorMessage(),
+                $this->getGraphQLErrorMessageProvider()->getNoOperationsDefinedInQueryErrorMessage(),
                 $this->getNonSpecificLocation()
             );
         }
-    }
-
-    protected function getNoOperationsDefinedInQueryErrorMessage(): string
-    {
-        return 'No operations defined in the query';
     }
 
     protected function getNonSpecificLocation(): Location
@@ -96,17 +104,12 @@ class Document
             $operationName = $operation->getName();
             if (in_array($operationName, $operationNames)) {
                 throw new InvalidRequestException(
-                    $this->getDuplicateOperationNameErrorMessage($operationName),
+                    $this->getGraphQLErrorMessageProvider()->getDuplicateOperationNameErrorMessage($operationName),
                     $this->getNonSpecificLocation()
                 );
             }
             $operationNames[] = $operationName;
         }
-    }
-
-    protected function getDuplicateOperationNameErrorMessage(string $operationName): string
-    {
-        return \sprintf($this->__('Operation name \'%s\' is duplicated', 'graphql-server'), $operationName);
     }
 
     /**
@@ -120,16 +123,11 @@ class Document
         foreach ($this->getOperations() as $operation) {
             if (empty($operation->getName())) {
                 throw new InvalidRequestException(
-                    $this->getEmptyOperationNameErrorMessage(),
+                    $this->getGraphQLErrorMessageProvider()->getEmptyOperationNameErrorMessage(),
                     $this->getNonSpecificLocation()
                 );
             }
         }
-    }
-
-    protected function getEmptyOperationNameErrorMessage(): string
-    {
-        return 'When submitting more than 1 operation, no operation name can be empty';
     }
 
     /**
@@ -143,16 +141,11 @@ class Document
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getFragmentNotDefinedInQueryErrorMessage($fragmentReference->getName()),
+                    $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage($fragmentReference->getName()),
                     $fragmentReference->getLocation()
                 );
             }
         }
-    }
-
-    protected function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
-    {
-        return \sprintf($this->__('Fragment \'%s\' is not defined in query', 'graphql-server'), $fragmentName);
     }
 
     /**
@@ -188,15 +181,10 @@ class Document
                 continue;
             }
             throw new InvalidRequestException(
-                $this->getFragmentNotUsedErrorMessage($fragment->getName()),
+                $this->getGraphQLErrorMessageProvider()->getFragmentNotUsedErrorMessage($fragment->getName()),
                 $fragment->getLocation()
             );
         }
-    }
-
-    protected function getFragmentNotUsedErrorMessage(string $fragmentName): string
-    {
-        return \sprintf($this->__('Fragment \'%s\' is not used', 'graphql-server'), $fragmentName);
     }
 
     /**
@@ -210,18 +198,13 @@ class Document
                 $variableName = $variable->getName();
                 if (in_array($variableName, $variableNames)) {
                     throw new InvalidRequestException(
-                        $this->getDuplicateVariableNameErrorMessage($variableName),
+                        $this->getGraphQLErrorMessageProvider()->getDuplicateVariableNameErrorMessage($variableName),
                         $this->getNonSpecificLocation()
                     );
                 }
                 $variableNames[] = $variableName;
             }
         }
-    }
-
-    protected function getDuplicateVariableNameErrorMessage(string $variableName): string
-    {
-        return \sprintf($this->__('Variable name \'%s\' is duplicated', 'graphql-server'), $variableName);
     }
 
     /**
@@ -235,16 +218,11 @@ class Document
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getVariableDoesNotExistErrorMessage($variableReference->getName()),
+                    $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage($variableReference->getName()),
                     $variableReference->getLocation()
                 );
             }
         }
-    }
-
-    protected function getVariableDoesNotExistErrorMessage(string $variableName): string
-    {
-        return \sprintf($this->__('Variable \'%s\' has not been defined in the operation', 'graphql-server'), $variableName);
     }
 
     /**
@@ -264,16 +242,11 @@ class Document
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getVariableNotUsedErrorMessage($variable->getName()),
+                    $this->getGraphQLErrorMessageProvider()->getVariableNotUsedErrorMessage($variable->getName()),
                     $variable->getLocation()
                 );
             }
         }
-    }
-
-    protected function getVariableNotUsedErrorMessage(string $variableName): string
-    {
-        return \sprintf($this->__('Variable \'%s\' is not used', 'graphql-server'), $variableName);
     }
 
     /**
@@ -357,16 +330,11 @@ class Document
             $argumentName = $argument->getName();
             if (in_array($argumentName, $argumentNames)) {
                 throw new InvalidRequestException(
-                    $this->getDuplicateArgumentErrorMessage($argumentName),
+                    $this->getGraphQLErrorMessageProvider()->getDuplicateArgumentErrorMessage($argumentName),
                     $argument->getLocation()
                 );
             }
             $argumentNames[] = $argumentName;
         }
-    }
-
-    protected function getDuplicateArgumentErrorMessage(string $argumentName): string
-    {
-        return \sprintf($this->__('Argument \'%s\' is duplicated', 'graphql-server'), $argumentName);
     }
 }

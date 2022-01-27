@@ -55,7 +55,7 @@ class Parser extends Tokenizer implements ParserInterface
 
                 default:
                     throw new SyntaxErrorException(
-                        $this->getIncorrectRequestSyntaxErrorMessage($this->lookAhead->getData()),
+                        $this->getGraphQLErrorMessageProvider()->getIncorrectRequestSyntaxErrorMessage($this->lookAhead->getData()),
                         $this->getLocation()
                     );
             }
@@ -76,19 +76,6 @@ class Parser extends Tokenizer implements ParserInterface
         return new Document(
             $operations,
             $fragments,
-        );
-    }
-
-    protected function getIncorrectRequestSyntaxErrorMessage(?string $syntax): string
-    {
-        $errorMessage = $this->__('Incorrect request syntax', 'graphql-server');
-        if ($syntax === null) {
-            return $errorMessage;
-        }
-        return \sprintf(
-            $this->__('%s: \'%s\'', 'graphql-server'),
-            $errorMessage,
-            $syntax
         );
     }
 
@@ -627,15 +614,10 @@ class Parser extends Tokenizer implements ParserInterface
                 => $this->parseList(false),
             default
                 => throw new SyntaxErrorException(
-                    $this->getCantParseArgumentErrorMessage(),
+                    $this->getGraphQLErrorMessageProvider()->getCantParseArgumentErrorMessage(),
                     $this->getLocation()
                 ),
         };
-    }
-
-    protected function getCantParseArgumentErrorMessage(): string
-    {
-        return 'Can\'t parse argument';
     }
 
     /**
@@ -658,7 +640,7 @@ class Parser extends Tokenizer implements ParserInterface
             // Validate no duplicated keys in InputObject
             if (property_exists($object, $key)) {
                 throw new SyntaxErrorException(
-                    $this->getDuplicateKeyInInputObjectSyntaxErrorMessage($key),
+                    $this->getGraphQLErrorMessageProvider()->getDuplicateKeyInInputObjectSyntaxErrorMessage($key),
                     $this->getTokenLocation($keyToken)
                 );
             }
@@ -669,11 +651,6 @@ class Parser extends Tokenizer implements ParserInterface
         $this->eat(Token::TYPE_RBRACE);
 
         return $createType ? $this->createInputObject($object, $this->getTokenLocation($startToken)) : $object;
-    }
-
-    protected function getDuplicateKeyInInputObjectSyntaxErrorMessage(string $key): string
-    {
-        return \sprintf($this->__('Input object has duplicate key \'%s\'', 'graphql-server'), $key);
     }
 
     protected function createInputObject(
