@@ -15,7 +15,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
-use PoP\GraphQLParser\Execution\ExecutableDocument;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Parser\ExtendedParserInterface;
 use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;

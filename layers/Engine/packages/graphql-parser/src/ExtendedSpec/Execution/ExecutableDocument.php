@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\Execution;
+namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
 use PoP\Root\Services\StandaloneServiceTrait;
 use PoP\GraphQLParser\Facades\Query\QueryAugmenterServiceFacade;
