@@ -195,7 +195,7 @@ class AstTest extends AbstractTestCase
     public function testVariableLogicException()
     {
         $this->expectException(LogicException::class);
-        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getContextNotSetErrorMessage('id'));
         $variable = new Variable('id', 'int', false, false, true, new Location(1, 1));
         $variable->getValue();
     }
