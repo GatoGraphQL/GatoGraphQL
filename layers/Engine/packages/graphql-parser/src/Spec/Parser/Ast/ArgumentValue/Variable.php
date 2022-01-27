@@ -15,7 +15,7 @@ use stdClass;
 class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
-    
+
     private ?Context $context = null;
 
     private bool $hasDefaultValue = false;

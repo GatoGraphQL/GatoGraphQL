@@ -20,7 +20,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     {
         return $this->getService(ParserInterface::class);
     }
-    
+
     public function testGetVariableFromContext()
     {
         $parser = $this->getParser();

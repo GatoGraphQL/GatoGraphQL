@@ -11,7 +11,7 @@ use PoP\Root\Services\StandaloneServiceTrait;
 class Document
 {
     use StandaloneServiceTrait;
-    
+
     public function __construct(
         /** @var OperationInterface[] */
         private array $operations,

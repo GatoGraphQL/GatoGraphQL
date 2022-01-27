@@ -13,7 +13,7 @@ use PoP\Root\Services\StandaloneServiceTrait;
 class VariableReference extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
-    
+
     public function __construct(
         private string $name,
         private ?Variable $variable,

@@ -10,7 +10,7 @@ use PoP\Root\Services\BasicServiceTrait;
 class Tokenizer
 {
     use BasicServiceTrait;
-    
+
     protected string $source;
     protected int $pos = 0;
     protected int $line = 1;

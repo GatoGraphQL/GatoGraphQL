@@ -13,7 +13,7 @@ use PoP\Root\Services\StandaloneServiceTrait;
 class ExecutableDocument implements ExecutableDocumentInterface
 {
     use StandaloneServiceTrait;
-    
+
     private ?array $requestedOperations = null;
 
     public function __construct(
