@@ -49,7 +49,7 @@ class ParserTest extends AbstractTestCase
     public function testInvalidSelection()
     {
         $this->expectException(SyntaxErrorException::class);
-        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getUnexpectedTokenErrorMessage(Token::tokenName(Token::TYPE_RBRACE)));
         $parser = $this->getParser();
         $parser->parse('
         {
