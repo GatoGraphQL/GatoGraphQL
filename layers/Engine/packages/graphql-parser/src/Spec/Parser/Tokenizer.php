@@ -165,7 +165,7 @@ class Tokenizer
             return $this->scanString();
         }
 
-        throw $this->createException('Can\t recognize token type');
+        throw $this->createException($this->getGraphQLErrorMessageProvider()->getCantRecognizeTokenTypeErrorMessage());
     }
 
     protected function checkFragment(): bool

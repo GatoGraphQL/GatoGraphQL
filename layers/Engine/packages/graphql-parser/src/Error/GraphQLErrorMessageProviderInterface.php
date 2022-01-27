@@ -48,6 +48,8 @@ interface GraphQLErrorMessageProviderInterface
 
     public function getUnexpectedStringEscapedCharacterErrorMessage(string $ch): string;
 
+    public function getCantRecognizeTokenTypeErrorMessage(): string;
+    
     public function getUnexpectedTokenErrorMessage(string $tokenName): string;
 
     public function getNoOperationsDefinedInQueryErrorMessage(): string;
