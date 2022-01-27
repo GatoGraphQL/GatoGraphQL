@@ -80,7 +80,7 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 
     public function getNoOperationNameProvidedErrorMessage(): string
     {
-        return 'The operation name must be provided';
+        return $this->__('The operation name must be provided', 'graphql-server');
     }
 
     public function getVariableNotSubmittedErrorMessage(string $variableName): string
