@@ -28,6 +28,20 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     }
 
     /**
+     * Property fields: Those fields which have a numeric key only
+     */
+    protected function getPropertyFields(array $module): array
+    {
+        $moduleAtts = $module[2] ?? null;
+        $fields = $this->getFields($module, $moduleAtts);
+        return array_values(array_filter(
+            $fields,
+            fn (string|int $key) => is_numeric($key),
+            ARRAY_FILTER_USE_KEY
+        ));
+    }
+
+    /**
      * Nested fields: Those fields which have a field as key and an array of submodules as value
      */
     protected function getFieldsWithNestedSubfields(array $module): array
@@ -40,20 +54,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             fn (string|int $key) => !is_numeric($key),
             ARRAY_FILTER_USE_KEY
         );
-    }
-
-    /**
-     * Property fields: Those fields which have a numeric key only
-     */
-    protected function getPropertyFields(array $module): array
-    {
-        $moduleAtts = $module[2] ?? null;
-        $fields = $this->getFields($module, $moduleAtts);
-        return array_values(array_filter(
-            $fields,
-            fn (string|int $key) => is_numeric($key),
-            ARRAY_FILTER_USE_KEY
-        ));
     }
 
     /**
