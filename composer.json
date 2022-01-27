@@ -429,7 +429,6 @@
         "pop-api/api-graphql": "self.version",
         "pop-api/api-mirrorquery": "self.version",
         "pop-api/api-rest": "self.version",
-        "pop-backbone/graphql-parser": "self.version",
         "pop-backbone/php-hooks": "self.version",
         "pop-cms-schema/categories": "self.version",
         "pop-cms-schema/categories-wp": "self.version",
