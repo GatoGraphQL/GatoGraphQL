@@ -34,7 +34,7 @@ interface GraphQLErrorMessageProviderInterface
 
     public function getNoOperationNameProvidedErrorMessage(): string;
 
-    public function getVariableHasntBeenSubmittedErrorMessage(string $variableName): string;
+    public function getVariableNotSubmittedErrorMessage(string $variableName): string;
 
     public function getExecuteValidationErrorMessage(string $methodName): string;
 

@@ -38,7 +38,7 @@ class RequestValidatorTest extends AbstractTestCase
             'fragment-not-defined-2' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference2'),
             'fragment-not-used' => $this->getGraphQLErrorMessageProvider()->getFragmentNotUsedErrorMessage('reference2'),
             'variable-not-defined' => $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('test'),
-            'variable-not-submitted' => $this->getGraphQLErrorMessageProvider()->getVariableHasntBeenSubmittedErrorMessage('test'),
+            'variable-not-submitted' => $this->getGraphQLErrorMessageProvider()->getVariableNotSubmittedErrorMessage('test'),
         ];
         $this->expectExceptionMessage($exceptionMessages[$this->dataName()] ?? '');
         $executableDocument->validateAndInitialize();

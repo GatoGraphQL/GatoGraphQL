@@ -147,7 +147,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getVariableHasntBeenSubmittedErrorMessage($variableReference->getName()),
+                    $this->getGraphQLErrorMessageProvider()->getVariableNotSubmittedErrorMessage($variableReference->getName()),
                     $variableReference->getLocation()
                 );
             }

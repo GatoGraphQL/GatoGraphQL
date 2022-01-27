@@ -83,7 +83,7 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
         return 'The operation name must be provided';
     }
 
-    public function getVariableHasntBeenSubmittedErrorMessage(string $variableName): string
+    public function getVariableNotSubmittedErrorMessage(string $variableName): string
     {
         return \sprintf($this->__('Variable \'%s\' hasn\'t been submitted', 'graphql-server'), $variableName);
     }
