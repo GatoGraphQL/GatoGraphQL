@@ -4,21 +4,27 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PHPUnit\Framework\TestCase;
+use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
-use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\Root\AbstractTestCase;
 
-class AstTest extends TestCase
+class AstTest extends AbstractTestCase
 {
+    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    {
+        return $this->getService(GraphQLErrorMessageProviderInterface::class);
+    }
+
     public function testArgument()
     {
         $argument = new Argument('test', new Literal('test', new Location(1, 1)), new Location(1, 1));

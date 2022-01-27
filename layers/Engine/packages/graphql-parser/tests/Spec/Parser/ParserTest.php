@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -30,6 +31,11 @@ class ParserTest extends AbstractTestCase
     protected function getParser(): ParserInterface
     {
         return $this->getService(ParserInterface::class);
+    }
+
+    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    {
+        return $this->getService(GraphQLErrorMessageProviderInterface::class);
     }
 
     public function testEmptyParser()
