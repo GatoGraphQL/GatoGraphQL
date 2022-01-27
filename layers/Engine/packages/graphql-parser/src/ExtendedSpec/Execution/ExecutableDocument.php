@@ -28,42 +28,4 @@ class ExecutableDocument extends UpstreamExecutableDocument
 
         return parent::extractRequestedOperations();
     }
-
-    protected function getNoOperationMatchesNameErrorMessage(string $operationName): string
-    {
-        return \sprintf(
-            $this->__('Operation with name \'%s\' does not exist', 'graphql-parser'),
-            $operationName
-        );
-    }
-
-    protected function getNoOperationNameProvidedErrorMessage(): string
-    {
-        return $this->__('The operation name must be provided', 'graphql-parser');
-    }
-
-    protected function getVariableHasntBeenDeclaredErrorMessage(string $variableName): string
-    {
-        return \sprintf(
-            $this->__('Variable \'%s\' hasn\'t been declared', 'graphql-parser'),
-            $variableName
-        );
-    }
-
-    protected function getVariableHasntBeenSubmittedErrorMessage(string $variableName): string
-    {
-        return \sprintf(
-            $this->__('Variable \'%s\' hasn\'t been submitted', 'graphql-parser'),
-            $variableName
-        );
-    }
-
-    protected function getExecuteValidationErrorMessage(string $methodName): string
-    {
-        return \sprintf(
-            $this->__('Before executing `%s`, must call `%s`', 'graphql-parser'),
-            $methodName,
-            'validateAndInitialize'
-        );
-    }
 }

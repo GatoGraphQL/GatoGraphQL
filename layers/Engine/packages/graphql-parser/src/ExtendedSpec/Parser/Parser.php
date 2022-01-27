@@ -22,26 +22,6 @@ use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 
 class Parser extends UpstreamParser implements ParserInterface
 {
-    use BasicServiceTrait;
-
-    protected function getIncorrectRequestSyntaxErrorMessage(?string $syntax): string
-    {
-        $errorMessage = $this->__('Incorrect request syntax', 'graphql-parser');
-        if ($syntax === null) {
-            return $errorMessage;
-        }
-        return \sprintf(
-            $this->__('%s: \'%s\'', 'graphql-parser'),
-            $errorMessage,
-            $syntax
-        );
-    }
-
-    protected function getCantParseArgumentErrorMessage(): string
-    {
-        return $this->__('Can\'t parse argument', 'graphql-parser');
-    }
-
     public function createDocument(
         /** @var OperationInterface[] */
         array $operations,
