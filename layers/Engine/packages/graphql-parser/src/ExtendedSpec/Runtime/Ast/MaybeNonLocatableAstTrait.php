@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\ExtendedSpec\Ast;
+namespace PoP\GraphQLParser\ExtendedSpec\Runtime\Ast;
 
 use PoP\GraphQLParser\Spec\Parser\Location;
 
