@@ -11,6 +11,7 @@ use PoP\GraphQLParser\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Parser\ExtendedParserInterface;
 use PoP\Root\AbstractTestCase;
+use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
@@ -107,6 +108,31 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
                         )
                     ]
                 ),
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider failingQueryWithMetaDirectiveProvider
+     */
+    public function testFailingMetaDirectives(string $query)
+    {
+        $parser = $this->getParser();
+
+        $this->expectException(InvalidRequestException::class);
+        $parser->parse($query);
+
+    }
+
+    public function failingQueryWithMetaDirectiveProvider(): array
+    {
+        return [
+            [
+                <<<GRAPHQL
+                    query {
+                        capabilities @forEach(affectDirectivesUnderPos: [2]) @upperCase
+                    }
+                GRAPHQL,
             ],
         ];
     }
