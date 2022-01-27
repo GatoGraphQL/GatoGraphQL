@@ -13,9 +13,10 @@ use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 use stdClass;
 
-abstract class AbstractExtendedParser extends Parser implements ExtendedParserInterface
+abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
     private ?OutputServiceInterface $outputService = null;
 

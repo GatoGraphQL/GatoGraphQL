@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\GraphQLParser\Parser;
+namespace PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
-use PoP\GraphQLParser\ExtendedSpec\Parser\AbstractExtendedParser;
+use PoP\GraphQLParser\ExtendedSpec\Parser\AbstractParser;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 
-class ExtendedParser extends AbstractExtendedParser
+class Parser extends AbstractParser
 {
     private ?MetaDirectiveRegistryInterface $metaDirectiveRegistry = null;
 

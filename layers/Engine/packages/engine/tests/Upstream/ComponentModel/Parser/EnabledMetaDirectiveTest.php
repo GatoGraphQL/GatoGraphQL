@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Upstream\ComponentModel\Parser;
 
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Directive;
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;

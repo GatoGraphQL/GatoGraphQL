@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Upstream\ComponentModel\Parser;
 
-use PoP\GraphQLParser\ExtendedSpec\Parser\ExtendedParserInterface;
+use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\Root\AbstractTestCase;
 
@@ -19,9 +19,9 @@ abstract class AbstractMetaDirectiveTest extends AbstractTestCase
 
     abstract protected static function enableComposableDirectives(): bool;
 
-    protected function getParser(): ExtendedParserInterface
+    protected function getParser(): ParserInterface
     {
-        return $this->getService(ExtendedParserInterface::class);
+        return $this->getService(ParserInterface::class);
     }
 
     /**
