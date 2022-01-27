@@ -282,6 +282,53 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
                     ]
                 ),
             ],
+            [
+                <<<GRAPHQL
+                    query {
+                        groupCapabilities @forEach(affectDirectivesUnderPos: [1,3]) @advancePointerInArrayOrObject(path: "group") @upperCase @lowerCase
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            '',
+                            [],
+                            [],
+                            [
+                                new LeafField(
+                                    'groupCapabilities',
+                                    null,
+                                    [],
+                                    [
+                                        new MetaDirective(
+                                            'forEach',
+                                            [
+                                                new Argument('affectDirectivesUnderPos', new InputList([1, 3], new Location(2, 62)), new Location(2, 36)),
+                                            ],
+                                            [
+                                                new MetaDirective(
+                                                    'advancePointerInArrayOrObject',
+                                                    [
+                                                        new Argument('path', new Literal('group', new Location(2, 107)), new Location(2, 100)),
+                                                    ],
+                                                    [
+                                                        new Directive('upperCase', [], new Location(2, 116)),
+                                                    ],
+                                                    new Location(2, 70)
+                                                ),
+                                                new Directive('lowerCase', [], new Location(2, 127)),
+                                            ],
+                                            new Location(2, 28)
+                                        ),
+                                    ],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ]
+                ),
+            ],
         ];
     }
 
