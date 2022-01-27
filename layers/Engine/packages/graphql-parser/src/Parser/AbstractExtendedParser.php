@@ -97,7 +97,7 @@ abstract class AbstractExtendedParser extends Parser implements ExtendedParserIn
             $directive = $metaDirectives[$directivePos] ?? $directives[$directivePos];
             $nestedUnderMetaDirectiveInRelativePosition = $composingMetaDirectiveRelativePosition[$directivePos] ?? null;
             if ($nestedUnderMetaDirectiveInRelativePosition === null) {
-                $rootDirectivePositions[] = $directivePos;
+                array_unshift($rootDirectivePositions, $directivePos);
                 $directivePos--;
                 continue;
             }
