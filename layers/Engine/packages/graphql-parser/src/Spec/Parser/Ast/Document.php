@@ -6,9 +6,12 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Services\StandaloneServiceTrait;
 
 class Document
 {
+    use StandaloneServiceTrait;
+    
     public function __construct(
         /** @var OperationInterface[] */
         private array $operations,
@@ -103,7 +106,7 @@ class Document
 
     protected function getDuplicateOperationNameErrorMessage(string $operationName): string
     {
-        return \sprintf('Operation name \'%s\' is duplicated', $operationName);
+        return \sprintf($this->__('Operation name \'%s\' is duplicated', 'graphql-server'), $operationName);
     }
 
     /**
@@ -149,7 +152,7 @@ class Document
 
     protected function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
     {
-        return sprintf('Fragment \'%s\' is not defined in query', $fragmentName);
+        return \sprintf($this->__('Fragment \'%s\' is not defined in query', 'graphql-server'), $fragmentName);
     }
 
     /**
@@ -193,7 +196,7 @@ class Document
 
     protected function getFragmentNotUsedErrorMessage(string $fragmentName): string
     {
-        return sprintf('Fragment \'%s\' is not used', $fragmentName);
+        return \sprintf($this->__('Fragment \'%s\' is not used', 'graphql-server'), $fragmentName);
     }
 
     /**
@@ -218,7 +221,7 @@ class Document
 
     protected function getDuplicateVariableNameErrorMessage(string $variableName): string
     {
-        return \sprintf('Variable name \'%s\' is duplicated', $variableName);
+        return \sprintf($this->__('Variable name \'%s\' is duplicated', 'graphql-server'), $variableName);
     }
 
     /**
@@ -241,7 +244,7 @@ class Document
 
     protected function getVariableDoesNotExistErrorMessage(string $variableName): string
     {
-        return sprintf('Variable \'%s\' has not been defined in the operation', $variableName);
+        return \sprintf($this->__('Variable \'%s\' has not been defined in the operation', 'graphql-server'), $variableName);
     }
 
     /**
@@ -270,7 +273,7 @@ class Document
 
     protected function getVariableNotUsedErrorMessage(string $variableName): string
     {
-        return sprintf('Variable \'%s\' is not used', $variableName);
+        return \sprintf($this->__('Variable \'%s\' is not used', 'graphql-server'), $variableName);
     }
 
     /**
@@ -364,6 +367,6 @@ class Document
 
     protected function getDuplicateArgumentErrorMessage(string $argumentName): string
     {
-        return \sprintf('Argument \'%s\' is duplicated', $argumentName);
+        return \sprintf($this->__('Argument \'%s\' is duplicated', 'graphql-server'), $argumentName);
     }
 }

@@ -118,7 +118,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
     protected function getNoOperationMatchesNameErrorMessage(string $operationName): string
     {
-        return \sprintf('Operation with name \'%s\' does not exist', $operationName);
+        return \sprintf($this->__('Operation with name \'%s\' does not exist', 'graphql-server'), $operationName);
     }
 
     protected function getNoOperationNameProvidedErrorMessage(): string
@@ -153,12 +153,12 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
     protected function getVariableHasntBeenDeclaredErrorMessage(string $variableName): string
     {
-        return \sprintf('Variable \'%s\' hasn\'t been declared', $variableName);
+        return \sprintf($this->__('Variable \'%s\' hasn\'t been declared', 'graphql-server'), $variableName);
     }
 
     protected function getVariableHasntBeenSubmittedErrorMessage(string $variableName): string
     {
-        return \sprintf('Variable \'%s\' hasn\'t been submitted', $variableName);
+        return \sprintf($this->__('Variable \'%s\' hasn\'t been submitted', 'graphql-server'), $variableName);
     }
 
     protected function propagateContext(OperationInterface $operation, ?Context $context): void
@@ -186,7 +186,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     protected function getExecuteValidationErrorMessage(string $methodName): string
     {
         return \sprintf(
-            'Before executing `%s`, must call `%s`',
+            $this->__('Before executing `%s`, must call `%s`', 'graphql-server'),
             $methodName,
             'validateAndInitialize'
         );

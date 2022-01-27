@@ -326,13 +326,13 @@ class Tokenizer
                     case 'u':
                         $codepoint = substr($this->source, $this->pos + 1, 4);
                         if (!preg_match('/[0-9A-Fa-f]{4}/', $codepoint)) {
-                            throw $this->createException(sprintf('Invalid string unicode escape sequece \'%s\'', $codepoint));
+                            throw $this->createException(sprintf($this->__('Invalid string unicode escape sequece \'%s\'', 'graphql-server'), $codepoint));
                         }
                         $ch = html_entity_decode("&#x{$codepoint};", ENT_QUOTES, 'UTF-8');
                         $this->pos += 4;
                         break;
                     default:
-                        throw $this->createException(sprintf('Unexpected string escaped character \'%s\'', $ch));
+                        throw $this->createException(sprintf($this->__('Unexpected string escaped character \'%s\'', 'graphql-server'), $ch));
                 }
             }
 

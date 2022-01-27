@@ -81,12 +81,12 @@ class Parser extends Tokenizer implements ParserInterface
 
     protected function getIncorrectRequestSyntaxErrorMessage(?string $syntax): string
     {
-        $errorMessage = 'Incorrect request syntax';
+        $errorMessage = $this->__('Incorrect request syntax', 'graphql-server');
         if ($syntax === null) {
             return $errorMessage;
         }
         return \sprintf(
-            '%s: \'%s\'',
+            $this->__('%s: \'%s\'', 'graphql-server'),
             $errorMessage,
             $syntax
         );
@@ -673,7 +673,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     protected function getDuplicateKeyInInputObjectSyntaxErrorMessage(string $key): string
     {
-        return \sprintf('Input object has duplicate key \'%s\'', $key);
+        return \sprintf($this->__('Input object has duplicate key \'%s\'', 'graphql-server'), $key);
     }
 
     protected function createInputObject(

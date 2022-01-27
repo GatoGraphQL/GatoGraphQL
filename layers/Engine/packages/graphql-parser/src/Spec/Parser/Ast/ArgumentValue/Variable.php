@@ -9,10 +9,13 @@ use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Services\StandaloneServiceTrait;
 use stdClass;
 
 class Variable extends AbstractAst implements WithValueInterface
 {
+    use StandaloneServiceTrait;
+    
     private ?Context $context = null;
 
     private bool $hasDefaultValue = false;
@@ -130,11 +133,11 @@ class Variable extends AbstractAst implements WithValueInterface
 
     protected function getContextNotSetErrorMessage(string $variableName): string
     {
-        return sprintf('Context has not been set for variable \'%s\'', $variableName);
+        return \sprintf($this->__('Context has not been set for variable \'%s\'', 'graphql-server'), $variableName);
     }
 
     protected function getValueIsNotSetForVariableErrorMessage(string $variableName): string
     {
-        return sprintf('Value is not set for variable \'%s\'', $variableName);
+        return \sprintf($this->__('Value is not set for variable \'%s\'', 'graphql-server'), $variableName);
     }
 }
