@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\Variable as ExtendedVariable;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Directive as ExtendedDirective;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
@@ -22,8 +21,6 @@ use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 
 class Parser extends UpstreamParser implements ParserInterface
 {
-    use BasicServiceTrait;
-    
     public function createDocument(
         /** @var OperationInterface[] */
         array $operations,
