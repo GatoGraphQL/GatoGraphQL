@@ -26,9 +26,15 @@ use stdClass;
 
 class ParserTest extends TestCase
 {
-    protected function getParser(): Parser
+    private ?Parser $parser = null;
+
+    public function setParser(Parser $parser): void
     {
-        return new Parser();
+        $this->parser = $parser;
+    }
+    public function getParser(): Parser
+    {
+        return $this->parser ??= new Parser();
     }
 
     public function testEmptyParser()
