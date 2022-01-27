@@ -29,8 +29,7 @@ class ParserTest extends AbstractTestCase
 {
     protected function getParser(): ParserInterface
     {
-        // return $this->getService(ParserInterface::class);
-        return new Parser();
+        return $this->getService(ParserInterface::class);
     }
 
     public function testEmptyParser()

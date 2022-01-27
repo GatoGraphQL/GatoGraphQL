@@ -11,7 +11,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\GraphQLParser\Spec\Parser\Parser;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\Root\AbstractTestCase;
 
@@ -19,8 +18,7 @@ class ExecutableDocumentTest extends AbstractTestCase
 {
     protected function getParser(): ParserInterface
     {
-        // return $this->getService(ParserInterface::class);
-        return new Parser();
+        return $this->getService(ParserInterface::class);
     }
     
     public function testGetVariableFromContext()
