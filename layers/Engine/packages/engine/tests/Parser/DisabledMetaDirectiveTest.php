@@ -7,26 +7,14 @@ namespace PoP\Engine\Parser;
 use PoP\GraphQLParser\Parser\Ast\Directive;
 use PoP\GraphQLParser\Parser\Ast\Document;
 use PoP\GraphQLParser\Parser\Ast\LeafField;
-use PoP\GraphQLParser\Parser\ExtendedParserInterface;
-use PoP\Root\AbstractTestCase;
 use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-/**
- * Execute the tests from the UpstreamParserTest, but using the ExtendedParser instead
- */
-class DisabledMetaDirectiveTest extends AbstractTestCase
+class DisabledMetaDirectiveTest extends AbstractMetaDirectiveTest
 {
-    protected static function getComponentClassConfiguration(): array
+    protected static function enableComposableDirectives(): bool
     {
-        $componentClassConfiguration = parent::getComponentClassConfiguration();
-        $componentClassConfiguration[\PoP\GraphQLParser\Component::class][\PoP\GraphQLParser\Environment::ENABLE_COMPOSABLE_DIRECTIVES] = false;
-        return $componentClassConfiguration;
-    }
-
-    protected function getParser(): ExtendedParserInterface
-    {
-        return $this->getService(ExtendedParserInterface::class);
+        return false;
     }
 
     /**

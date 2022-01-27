@@ -23,21 +23,11 @@ use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use PoPBackbone\GraphQLParser\Parser\ParserTest;
 
-/**
- * Execute the tests from the UpstreamParserTest, but using the ExtendedParser instead
- */
-class EnabledMetaDirectiveTest extends AbstractTestCase
+class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
 {
-    protected static function getComponentClassConfiguration(): array
+    protected static function enableComposableDirectives(): bool
     {
-        $componentClassConfiguration = parent::getComponentClassConfiguration();
-        $componentClassConfiguration[\PoP\GraphQLParser\Component::class][\PoP\GraphQLParser\Environment::ENABLE_COMPOSABLE_DIRECTIVES] = true;
-        return $componentClassConfiguration;
-    }
-
-    protected function getParser(): ExtendedParserInterface
-    {
-        return $this->getService(ExtendedParserInterface::class);
+        return true;
     }
 
     /**
