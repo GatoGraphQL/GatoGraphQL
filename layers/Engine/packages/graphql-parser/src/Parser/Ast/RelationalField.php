@@ -33,7 +33,7 @@ class RelationalField extends UpstreamRelationalField implements FieldInterface
             $arguments,
             $fieldsOrFragmentBonds,
             $directives,
-            $this->getLocation($location),
+            $this->getLocationOrPseudoLocation($location),
         );
     }
 

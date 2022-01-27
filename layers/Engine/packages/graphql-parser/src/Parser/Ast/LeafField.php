@@ -29,7 +29,7 @@ class LeafField extends UpstreamLeafField implements FieldInterface
             $alias,
             $arguments,
             $directives,
-            $this->getLocation($location),
+            $this->getLocationOrPseudoLocation($location),
         );
     }
 
