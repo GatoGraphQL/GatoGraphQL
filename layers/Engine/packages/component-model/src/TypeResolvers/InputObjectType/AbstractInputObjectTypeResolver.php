@@ -406,7 +406,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $coercedInputValue;
     }
 
-    public function hasMandatoryInputFields(): bool
+    final public function hasMandatoryInputFields(): bool
     {
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
         foreach (array_keys($inputFieldNameTypeResolvers) as $inputFieldName) {
