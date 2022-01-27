@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\GraphQLParser\Spec\Parser\ParserInterface:
-        class: \PoP\GraphQLParser\Spec\Parser\Parser
+    # PoP\GraphQLParser\Spec\Parser\ParserInterface:
+    #     class: \PoP\GraphQLParser\Spec\Parser\Parser
 
     PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface:
         class: \PoP\GraphQLParser\ExtendedSpec\Parser\Parser
