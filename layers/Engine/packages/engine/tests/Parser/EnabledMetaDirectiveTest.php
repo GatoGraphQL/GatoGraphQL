@@ -109,6 +109,44 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
                     ]
                 ),
             ],
+            [
+                <<<GRAPHQL
+                    query {
+                        capabilities @forEach(affectDirectivesUnderPos: [1,2]) @upperCase @lowerCase
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            '',
+                            [],
+                            [],
+                            [
+                                new LeafField(
+                                    'capabilities',
+                                    null,
+                                    [],
+                                    [
+                                        new MetaDirective(
+                                            'forEach',
+                                            [
+                                                new Argument('affectDirectivesUnderPos', new InputList([1, 2], new Location(2, 57)), new Location(2, 31)),
+                                            ],
+                                            [
+                                                new Directive('upperCase', [], new Location(2, 65)),
+                                                new Directive('lowerCase', [], new Location(2, 76)),
+                                            ],
+                                            new Location(2, 23)
+                                        )
+                                    ],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ]
+                ),
+            ],
         ];
     }
 
