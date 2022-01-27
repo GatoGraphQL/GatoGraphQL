@@ -134,6 +134,20 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
                     }
                 GRAPHQL,
             ],
+            [
+                <<<GRAPHQL
+                    query {
+                        capabilities @forEach(affectDirectivesUnderPos: [-2]) @upperCase
+                    }
+                GRAPHQL,
+            ],
+            [
+                <<<GRAPHQL
+                    query {
+                        capabilities @forEach(affectDirectivesUnderPos: [1,2]) @upperCase
+                    }
+                GRAPHQL,
+            ],
         ];
     }
 }
