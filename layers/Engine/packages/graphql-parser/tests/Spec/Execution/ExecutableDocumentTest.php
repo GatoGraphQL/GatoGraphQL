@@ -109,7 +109,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testNonUniqueOperation()
     {
         $this->expectException(InvalidRequestException::class);
-        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateOperationNameErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
@@ -135,7 +135,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testMissingVariableValue()
     {
         $this->expectException(InvalidRequestException::class);
-        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForVariableErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($format: String) {
@@ -153,7 +153,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testMissingVariableValueForDirective()
     {
         $this->expectException(InvalidRequestException::class);
-        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForVariableErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($includeUsers: Boolean) {
@@ -171,7 +171,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testOperationDoesNotExist()
     {
         $this->expectException(InvalidRequestException::class);
-        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getNoOperationMatchesNameErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
@@ -189,7 +189,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testNonInitializedRequest()
     {
         $this->expectException(InvalidRequestException::class);
-        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getExecuteValidationErrorMessage('getRequestedOperations'));
         $parser = $this->getParser();
         $document = $parser->parse('{ id }');
         $context = new Context();
