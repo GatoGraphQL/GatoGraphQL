@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Directive as ExtendedDirective;
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\LeafField as ExtendedLeafField;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\RelationalField as ExtendedRelationalField;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
@@ -20,18 +18,6 @@ use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 
 class Parser extends UpstreamParser implements ParserInterface
 {
-    public function createDocument(
-        /** @var OperationInterface[] */
-        array $operations,
-        /** @var Fragment[] */
-        array $fragments,
-    ) {
-        return new Document(
-            $operations,
-            $fragments,
-        );
-    }
-
     /**
      * @param Argument[] $arguments
      * @param Directive[] $directives
