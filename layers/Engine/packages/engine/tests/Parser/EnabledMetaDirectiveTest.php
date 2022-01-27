@@ -194,6 +194,52 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
             [
                 <<<GRAPHQL
                     query {
+                        groupCapabilities @forEach @advancePointerInArrayOrObject(path: "group", affectDirectivesUnderPos: [1,2]) @upperCase @lowerCase
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            '',
+                            [],
+                            [],
+                            [
+                                new LeafField(
+                                    'groupCapabilities',
+                                    null,
+                                    [],
+                                    [
+                                        new MetaDirective(
+                                            'forEach',
+                                            [],
+                                            [
+                                                new MetaDirective(
+                                                    'advancePointerInArrayOrObject',
+                                                    [
+                                                        new Argument('path', new Literal('group', new Location(2, 74)), new Location(2, 67)),
+                                                        new Argument('affectDirectivesUnderPos', new InputList([1, 2], new Location(2, 108)), new Location(2, 82)),
+                                                    ],
+                                                    [
+                                                        new Directive('upperCase', [], new Location(2, 116)),
+                                                        new Directive('lowerCase', [], new Location(2, 127)),
+                                                    ],
+                                                    new Location(2, 37)
+                                                )
+                                            ],
+                                            new Location(2, 28)
+                                        ),
+                                    ],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ]
+                ),
+            ],
+            [
+                <<<GRAPHQL
+                    query {
                         groupCapabilities @forEach @advancePointerInArrayOrObject(path: "group") @upperCase @lowerCase
                     }
                 GRAPHQL,
