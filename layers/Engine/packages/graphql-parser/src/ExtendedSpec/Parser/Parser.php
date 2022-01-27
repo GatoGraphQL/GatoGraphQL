@@ -22,6 +22,8 @@ use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 
 class Parser extends UpstreamParser implements ParserInterface
 {
+    use BasicServiceTrait;
+    
     public function createDocument(
         /** @var OperationInterface[] */
         array $operations,
