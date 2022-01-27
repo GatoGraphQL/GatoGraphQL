@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Execution;
 
+use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -13,6 +15,17 @@ use PoP\Root\Services\StandaloneServiceTrait;
 class ExecutableDocument implements ExecutableDocumentInterface
 {
     use StandaloneServiceTrait;
+
+    private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+
+    final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
+    {
+        $this->graphQLErrorMessageProvider = $graphQLErrorMessageProvider;
+    }
+    final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    {
+        return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
+    }
 
     private ?array $requestedOperations = null;
 
@@ -79,7 +92,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             // It can't be 0, or validation already fails in Document
             if (count($this->document->getOperations()) > 1) {
                 throw new InvalidRequestException(
-                    $this->getNoOperationNameProvidedErrorMessage(),
+                    $this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage(),
                     $this->getNonSpecificLocation()
                 );
             }
@@ -90,7 +103,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         $requestedOperations = $this->extractRequestedOperations();
         if ($requestedOperations === []) {
             throw new InvalidRequestException(
-                $this->getNoOperationMatchesNameErrorMessage($this->context->getOperationName()),
+                $this->getGraphQLErrorMessageProvider()->getNoOperationMatchesNameErrorMessage($this->context->getOperationName()),
                 $this->getNonSpecificLocation()
             );
         }
@@ -116,16 +129,6 @@ class ExecutableDocument implements ExecutableDocumentInterface
         ));
     }
 
-    protected function getNoOperationMatchesNameErrorMessage(string $operationName): string
-    {
-        return \sprintf($this->__('Operation with name \'%s\' does not exist', 'graphql-server'), $operationName);
-    }
-
-    protected function getNoOperationNameProvidedErrorMessage(): string
-    {
-        return 'The operation name must be provided';
-    }
-
     /**
      * Validate that all referenced variable are provided a value,
      * or they have a default value. Otherwise, throw an exception.
@@ -144,16 +147,11 @@ class ExecutableDocument implements ExecutableDocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getVariableHasntBeenSubmittedErrorMessage($variableReference->getName()),
+                    $this->getGraphQLErrorMessageProvider()->getVariableHasntBeenSubmittedErrorMessage($variableReference->getName()),
                     $variableReference->getLocation()
                 );
             }
         }
-    }
-
-    protected function getVariableHasntBeenSubmittedErrorMessage(string $variableName): string
-    {
-        return \sprintf($this->__('Variable \'%s\' hasn\'t been submitted', 'graphql-server'), $variableName);
     }
 
     protected function propagateContext(OperationInterface $operation, ?Context $context): void
@@ -171,19 +169,10 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         if ($this->requestedOperations === null) {
             throw new InvalidRequestException(
-                $this->getExecuteValidationErrorMessage(__FUNCTION__),
+                $this->getGraphQLErrorMessageProvider()->getExecuteValidationErrorMessage(__FUNCTION__),
                 $this->getNonSpecificLocation()
             );
         }
         return $this->requestedOperations;
-    }
-
-    protected function getExecuteValidationErrorMessage(string $methodName): string
-    {
-        return \sprintf(
-            $this->__('Before executing `%s`, must call `%s`', 'graphql-server'),
-            $methodName,
-            'validateAndInitialize'
-        );
     }
 }

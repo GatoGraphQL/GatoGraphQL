@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
 use LogicException;
+use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
+use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
@@ -15,6 +17,17 @@ use stdClass;
 class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
+
+    private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+
+    final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
+    {
+        $this->graphQLErrorMessageProvider = $graphQLErrorMessageProvider;
+    }
+    final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    {
+        return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
+    }
 
     private ?Context $context = null;
 
@@ -113,7 +126,7 @@ class Variable extends AbstractAst implements WithValueInterface
     public function getValue(): mixed
     {
         if ($this->context === null) {
-            throw new LogicException($this->getContextNotSetErrorMessage($this->name));
+            throw new LogicException($this->getGraphQLErrorMessageProvider()->getContextNotSetErrorMessage($this->name));
         }
         if ($this->context->hasVariableValue($this->name)) {
             $variableValue = $this->context->getVariableValue($this->name);
@@ -128,16 +141,6 @@ class Variable extends AbstractAst implements WithValueInterface
         if ($this->hasDefaultValue()) {
             return $this->getDefaultValue();
         }
-        throw new LogicException($this->getValueIsNotSetForVariableErrorMessage($this->name));
-    }
-
-    protected function getContextNotSetErrorMessage(string $variableName): string
-    {
-        return \sprintf($this->__('Context has not been set for variable \'%s\'', 'graphql-server'), $variableName);
-    }
-
-    protected function getValueIsNotSetForVariableErrorMessage(string $variableName): string
-    {
-        return \sprintf($this->__('Value is not set for variable \'%s\'', 'graphql-server'), $variableName);
+        throw new LogicException($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForVariableErrorMessage($this->name));
     }
 }
