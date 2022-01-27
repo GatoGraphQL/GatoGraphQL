@@ -14,7 +14,7 @@ class DocumentTest extends AbstractTestCase
     {
         return $this->getService(ParserInterface::class);
     }
-    
+
     protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
     {
         return $this->getService(GraphQLErrorMessageProviderInterface::class);
