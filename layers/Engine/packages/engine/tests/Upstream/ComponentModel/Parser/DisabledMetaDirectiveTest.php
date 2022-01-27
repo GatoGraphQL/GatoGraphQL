@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Parser;
+namespace PoP\Engine\Upstream\ComponentModel\Parser;
 
 use PoP\GraphQLParser\Parser\Ast\Directive;
 use PoP\GraphQLParser\Parser\Ast\Document;
