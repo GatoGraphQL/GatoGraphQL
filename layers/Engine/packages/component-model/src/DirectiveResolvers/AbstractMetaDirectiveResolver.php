@@ -4,15 +4,23 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\GraphQLParser\Component;
-use PoP\GraphQLParser\ComponentConfiguration;
+use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\FieldQuery\QueryHelpers;
+use PoP\GraphQLParser\Component;
+use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\Root\App;
 
 abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver implements MetaDirectiveResolverInterface
 {
+    /**
+     * @var array[]
+     */
+    protected array $nestedDirectivePipelineData = [];
+
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
@@ -29,6 +37,102 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->enableComposableDirectives();
+    }
+
+    public function dissectAndValidateDirectiveForSchema(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array &$fieldDirectiveFields,
+        array &$variables,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+        array &$schemaDeprecations,
+        array &$schemaNotices,
+        array &$schemaTraces
+    ): array {
+        // If it has nestedDirectives, extract them and validate them
+        $nestedFieldDirectives = $this->getFieldQueryInterpreter()->getFieldDirectives($this->directive, false);
+        if ($nestedFieldDirectives) {
+            $nestedDirectiveSchemaErrors = $nestedDirectiveSchemaWarnings = $nestedDirectiveSchemaDeprecations = $nestedDirectiveSchemaNotices = $nestedDirectiveSchemaTraces = [];
+            $nestedFieldDirectives = QueryHelpers::splitFieldDirectives($nestedFieldDirectives);
+            // Support repeated fields by adding a counter next to them
+            if (count($nestedFieldDirectives) != count(array_unique($nestedFieldDirectives))) {
+                // Find the repeated fields, and add a counter next to them
+                $expandedNestedFieldDirectives = [];
+                $counters = [];
+                foreach ($nestedFieldDirectives as $nestedFieldDirective) {
+                    if (!isset($counters[$nestedFieldDirective])) {
+                        $expandedNestedFieldDirectives[] = $nestedFieldDirective;
+                        $counters[$nestedFieldDirective] = 1;
+                    } else {
+                        $expandedNestedFieldDirectives[] = $nestedFieldDirective . FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . $counters[$nestedFieldDirective];
+                        $counters[$nestedFieldDirective]++;
+                    }
+                }
+                $nestedFieldDirectives = $expandedNestedFieldDirectives;
+            }
+            // Each composed directive will deal with the same fields as the current directive
+            $nestedFieldDirectiveFields = $fieldDirectiveFields;
+            foreach ($nestedFieldDirectives as $nestedFieldDirective) {
+                $nestedFieldDirectiveFields[$nestedFieldDirective] = $fieldDirectiveFields[$this->directive];
+            }
+            $this->nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
+                $nestedFieldDirectives,
+                $nestedFieldDirectiveFields,
+                true,
+                $variables,
+                $nestedDirectiveSchemaErrors,
+                $nestedDirectiveSchemaWarnings,
+                $nestedDirectiveSchemaDeprecations,
+                $nestedDirectiveSchemaNotices,
+                $nestedDirectiveSchemaTraces
+            );
+            foreach ($nestedDirectiveSchemaDeprecations as $nestedDirectiveSchemaDeprecation) {
+                array_unshift($nestedDirectiveSchemaDeprecation[Tokens::PATH], $this->directive);
+                $schemaDeprecations[] = $nestedDirectiveSchemaDeprecation;
+            }
+            foreach ($nestedDirectiveSchemaWarnings as $nestedDirectiveSchemaWarning) {
+                array_unshift($nestedDirectiveSchemaWarning[Tokens::PATH], $this->directive);
+                $schemaWarnings[] = $nestedDirectiveSchemaWarning;
+            }
+            foreach ($nestedDirectiveSchemaNotices as $nestedDirectiveSchemaNotice) {
+                array_unshift($nestedDirectiveSchemaNotice[Tokens::PATH], $this->directive);
+                $schemaNotices[] = $nestedDirectiveSchemaNotice;
+            }
+            foreach ($nestedDirectiveSchemaTraces as $nestedDirectiveSchemaTrace) {
+                array_unshift($nestedDirectiveSchemaTrace[Tokens::PATH], $this->directive);
+                $schemaTraces[] = $nestedDirectiveSchemaTrace;
+            }
+            // If there is any error, then we also can't proceed with the current directive.
+            // Throw an error for this level, and underlying errors as nested
+            if ($nestedDirectiveSchemaErrors) {
+                $schemaError = [
+                    Tokens::PATH => [$this->directive],
+                    Tokens::MESSAGE => $this->__('This directive can\'t be executed due to errors from its composed directives', 'component-model'),
+                ];
+                foreach ($nestedDirectiveSchemaErrors as $nestedDirectiveSchemaError) {
+                    array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $this->directive);
+                    $this->prependPathOnNestedErrors($nestedDirectiveSchemaError);
+                    $schemaError[Tokens::EXTENSIONS][Tokens::NESTED][] = $nestedDirectiveSchemaError;
+                }
+                $schemaErrors[] = $schemaError;
+                return [
+                    null, // $validDirective
+                    null, // $directiveName
+                    null, // $directiveArgs
+                ];
+            }
+        }
+
+        return parent::dissectAndValidateDirectiveForSchema(
+            $relationalTypeResolver,
+            $fieldDirectiveFields,
+            $variables,
+            $schemaErrors,
+            $schemaWarnings,
+            $schemaDeprecations,
+            $schemaNotices,
+            $schemaTraces,
+        );
     }
 
     /**
