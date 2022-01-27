@@ -151,11 +151,6 @@ class ExecutableDocument implements ExecutableDocumentInterface
         }
     }
 
-    protected function getVariableHasntBeenDeclaredErrorMessage(string $variableName): string
-    {
-        return \sprintf($this->__('Variable \'%s\' hasn\'t been declared', 'graphql-server'), $variableName);
-    }
-
     protected function getVariableHasntBeenSubmittedErrorMessage(string $variableName): string
     {
         return \sprintf($this->__('Variable \'%s\' hasn\'t been submitted', 'graphql-server'), $variableName);
