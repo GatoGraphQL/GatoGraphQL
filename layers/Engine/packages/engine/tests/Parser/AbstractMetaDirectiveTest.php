@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Parser;
 
+use PoP\GraphQLParser\Parser\Ast\Document;
 use PoP\GraphQLParser\Parser\ExtendedParserInterface;
 use PoP\Root\AbstractTestCase;
 
@@ -22,4 +23,18 @@ abstract class AbstractMetaDirectiveTest extends AbstractTestCase
     {
         return $this->getService(ExtendedParserInterface::class);
     }
+
+    /**
+     * @dataProvider queryWithMetaDirectiveProvider
+     */
+    public function testMetaDirectives(string $query, Document $expectedDocument)
+    {
+        $parser = $this->getParser();
+
+        $parsedDocument = $parser->parse($query);
+
+        $this->assertEquals($expectedDocument, $parsedDocument);
+    }
+
+    abstract public function queryWithMetaDirectiveProvider();
 }

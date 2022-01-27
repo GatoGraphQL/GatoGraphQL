@@ -30,18 +30,6 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
         return true;
     }
 
-    /**
-     * @dataProvider queryWithMetaDirectiveProvider
-     */
-    public function testMetaDirectives(string $query, Document $expectedDocument)
-    {
-        $parser = $this->getParser();
-
-        $parsedDocument = $parser->parse($query);
-
-        $this->assertEquals($expectedDocument, $parsedDocument);
-    }
-
     public function queryWithMetaDirectiveProvider()
     {
         return [
