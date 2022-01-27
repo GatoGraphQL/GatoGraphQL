@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoP\API\ConditionalOnComponent\CacheControl\ConditionalOnComponent\AccessControl\ConditionalOnContext\PrivateSchema\SchemaServices\:
+    PoPAPI\API\ConditionalOnComponent\CacheControl\ConditionalOnComponent\AccessControl\ConditionalOnContext\PrivateSchema\SchemaServices\:
         resource: '../../../../../../../src/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema/SchemaServices/*'

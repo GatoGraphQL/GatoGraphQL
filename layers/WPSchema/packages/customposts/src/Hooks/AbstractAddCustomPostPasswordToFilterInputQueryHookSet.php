@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\Hooks;
 
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\App;
+use PoP\Root\Hooks\AbstractHookSet;
 
 abstract class AbstractAddCustomPostPasswordToFilterInputQueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::addFilter(
             $this->getHookName(),
             [$this, 'convertCustomPostsQuery'],
             10,

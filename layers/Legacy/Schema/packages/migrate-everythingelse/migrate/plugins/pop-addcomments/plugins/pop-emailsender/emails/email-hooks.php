@@ -1,11 +1,10 @@
 <?php
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
-use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
+use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_AddComments_EmailSender_Hooks
 {
@@ -15,8 +14,8 @@ class PoP_AddComments_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Functional emails
         //----------------------------------------------------------------------
-        HooksAPIFacade::getInstance()->addAction(
-            'popcms:insertComment',
+        \PoP\Root\App::addAction(
+            'wp_insert_comment',// Must add a loose contract instead: 'popcms:insertComment'
             array($this, 'sendemailToUsersFromComment'),
             10,
             2
@@ -81,7 +80,7 @@ class PoP_AddComments_EmailSender_Hooks
             $post_id
         );
         // 2. Owner(s) of referenced posts
-        if ($references = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
+        if ($references = \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
             $post_ids = array_merge(
                 $post_ids,
                 $references

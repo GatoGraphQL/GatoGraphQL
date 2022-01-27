@@ -1,12 +1,11 @@
 <?php
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_SPAResourceLoader_EngineInitialization_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoPWebPlatform_Initialization:init-scripts',
             array($this, 'initScripts'),
             20

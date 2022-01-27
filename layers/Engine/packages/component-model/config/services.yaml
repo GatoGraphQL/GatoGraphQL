@@ -23,6 +23,9 @@ services:
     PoP\ComponentModel\Engine\EngineInterface:
         class: \PoP\ComponentModel\Engine\Engine
 
+    PoP\ComponentModel\EntryModule\EntryModuleManagerInterface:
+        class: \PoP\ComponentModel\EntryModule\EntryModuleManager
+
     PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface:
         class: \PoP\ComponentModel\ObjectSerialization\ObjectSerializationManager
 
@@ -45,17 +48,11 @@ services:
     PoP\ComponentModel\ModelInstance\ModelInstanceInterface:
         class: \PoP\ComponentModel\ModelInstance\ModelInstance
 
-    PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface:
-        class: \PoP\ComponentModel\MutationResolution\MutationResolutionManager
-
     PoP\ComponentModel\Info\ApplicationInfoInterface:
         class: \PoP\ComponentModel\Info\ApplicationInfo
 
     PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface:
         class: \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager
-
-    PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface:
-        class: \PoP\ComponentModel\HelperServices\FormInputHelperService
 
     PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\DataloadHelperService
@@ -69,20 +66,29 @@ services:
     PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\ApplicationStateHelperService
 
+    PoP\ComponentModel\State\:
+        resource: '../src/State/*'
+
     PoP\ComponentModel\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
 
     PoP\ComponentModel\FormInputs\:
         resource: '../src/FormInputs/*'
 
-    PoP\ComponentModel\Hooks\:
-        resource: '../src/Hooks/*'
-
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
 
+    PoP\ComponentModel\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
+
+    PoP\ComponentModel\RouteModuleProcessors\:
+        resource: '../src/RouteModuleProcessors/*'
+
     PoP\ComponentModel\QueryInputOutputHandlers\:
         resource: '../src/QueryInputOutputHandlers/*'
+
+    PoP\ComponentModel\DataStructureFormatters\:
+        resource: '../src/DataStructureFormatters/*'
 
     PoP\ComponentModel\Error\ErrorProviderInterface:
         class: \PoP\ComponentModel\Error\ErrorProvider
@@ -93,6 +99,9 @@ services:
     PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathManager
 
+    PoP\ComponentModel\Modules\ModuleHelpersInterface:
+        class: \PoP\ComponentModel\Modules\ModuleHelpers
+
     default_data_structure_formatter:
         class: PoP\ComponentModel\DataStructure\DefaultDataStructureFormatter
         public: false
@@ -100,7 +109,7 @@ services:
     PoP\ComponentModel\DataStructure\DataStructureManagerInterface:
         class: \PoP\ComponentModel\DataStructure\DataStructureManager
         arguments:
-            PoP\ComponentModel\DataStructure\DataStructureFormatterInterface: '@default_data_structure_formatter'
+            PoP\ComponentModel\DataStructureFormatters\DataStructureFormatterInterface: '@default_data_structure_formatter'
 
     PoP\ComponentModel\ModulePath\ModulePathHelpersInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathHelpers
@@ -146,8 +155,8 @@ services:
     PoP\ModuleRouting\RouteModuleProcessorManagerInterface:
         class: \PoP\ComponentModel\ModuleRouting\RouteModuleProcessorManager
 
-    PoP\GraphQLParser\Parser\ExtendedParserInterface:
-        class: \PoP\ComponentModel\GraphQLParser\Parser\ExtendedParser
+    PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface:
+        class: \PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser
 
     PoP\ComponentModel\Versioning\VersioningServiceInterface:
         class: \PoP\ComponentModel\Versioning\VersioningService

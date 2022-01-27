@@ -1,8 +1,8 @@
 <?php
 
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPTheme_Wassup_SocialNetwork_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -17,14 +17,14 @@ class PoPTheme_Wassup_SocialNetwork_Module_SideInfoContentPageSectionRouteModule
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
         }
 
         $modules = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_SUBSCRIBERS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
+            $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
         }
 
         $modules = array(
@@ -34,7 +34,7 @@ class PoPTheme_Wassup_SocialNetwork_Module_SideInfoContentPageSectionRouteModule
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDPOSTS => [PoP_SocialNetwork_Module_Processor_SidebarMultiples::class, PoP_SocialNetwork_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[UserRouteNatures::USER][$route][] = ['module' => $module];
+            $ret[UserRequestNature::USER][$route][] = ['module' => $module];
         }
 
         return $ret;

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Volunteering
 Description: Implementation of Volunteering for PoP
@@ -20,7 +19,7 @@ class PoP_Volunteering
     {
 
         // Priority: after PoP User Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888340);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888340);
     }
     public function init()
     {

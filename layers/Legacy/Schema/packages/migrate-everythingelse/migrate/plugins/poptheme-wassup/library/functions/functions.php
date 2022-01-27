@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:userloggedin_loadingmsg_target', 'gdCustomUserloggedinLoadingmsgTarget');
+\PoP\Root\App::addFilter('pop_modulemanager:userloggedin_loadingmsg_target', 'gdCustomUserloggedinLoadingmsgTarget');
 function gdCustomUserloggedinLoadingmsgTarget($target)
 {
 
@@ -14,10 +13,10 @@ function gdCustomUserloggedinLoadingmsgTarget($target)
  * Uniqueblocks
  */
 
-HooksAPIFacade::getInstance()->addFilter('RequestUtils:getFramecomponentModules', 'getWassupFramecomponentModules');
+\PoP\Root\App::addFilter('RequestUtils:getFramecomponentModules', 'getWassupFramecomponentModules');
 function getWassupFramecomponentModules($modules)
 {
-    if (HooksAPIFacade::getInstance()->applyFilters('poptheme_wassup_loadlatest', true)) {
+    if (\PoP\Root\App::applyFilters('poptheme_wassup_loadlatest', true)) {
         $modules[] = [GD_Core_Module_Processor_Blocks::class, GD_Core_Module_Processor_Blocks::MODULE_MULTIPLE_LATESTCOUNTS];
     }
 
@@ -25,13 +24,13 @@ function getWassupFramecomponentModules($modules)
 }
 
 
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:fetchtarget_settings', 'gdCustomFetchtargetSettings');
+\PoP\Root\App::addFilter('pop_modulemanager:fetchtarget_settings', 'gdCustomFetchtargetSettings');
 function gdCustomFetchtargetSettings($fetchtarget_settings)
 {
     return array_merge(
         $fetchtarget_settings,
         array(
-            // \PoP\ComponentModel\Constants\Targets::MAIN => POP_MODULEID_PAGESECTIONCONTAINERID_BODY, // Since creating targets "body", "hover" and "hole", no need for this one anymore, since this case will not happen
+            // \PoP\ConfigurationComponentModel\Constants\Targets::MAIN => POP_MODULEID_PAGESECTIONCONTAINERID_BODY, // Since creating targets "body", "hover" and "hole", no need for this one anymore, since this case will not happen
             POP_TARGET_BODY => POP_MODULEID_PAGESECTIONCONTAINERID_BODY,
             POP_TARGET_HOVER => POP_MODULEID_PAGESECTIONCONTAINERID_HOVER,
             POP_TARGET_HOLE => POP_MODULEID_PAGESECTIONCONTAINERID_HOLE,
@@ -49,7 +48,7 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
     );
 }
 
-// HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_MenuMultiplesBase:js-setting:add-active-parent-item', 'popAddMenuitemParentpageActive', 10, 3);
+// \PoP\Root\App::addFilter('PoP_Module_Processor_MenuMultiplesBase:js-setting:add-active-parent-item', 'popAddMenuitemParentpageActive', 10, 3);
 // function popAddMenuitemParentpageActive($add_active, array $module, array &$props) {
 
 //     // Only if not in Side or Top pageSections
@@ -66,7 +65,7 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
 //     return $add_active;
 // }
 
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:fetchpagesection_settings', 'gdCustomFetchpagesectionSettings');
+\PoP\Root\App::addFilter('pop_modulemanager:fetchpagesection_settings', 'gdCustomFetchpagesectionSettings');
 function gdCustomFetchpagesectionSettings($fetchpagesection_settings)
 {
     $settings_main = array(
@@ -107,7 +106,7 @@ function gdCustomFetchpagesectionSettings($fetchpagesection_settings)
 /**
  * Targets
  */
-HooksAPIFacade::getInstance()->addFilter('ApplicationState:targets', 'getCustomTargets');
+\PoP\Root\App::addFilter('ApplicationState:targets', 'getCustomTargets');
 function getCustomTargets($targets)
 {
     return array_merge(

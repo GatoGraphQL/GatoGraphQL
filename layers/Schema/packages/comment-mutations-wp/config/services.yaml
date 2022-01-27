@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface:
-        class: \PoPSchema\CommentMutationsWP\TypeAPIs\CommentTypeMutationAPI

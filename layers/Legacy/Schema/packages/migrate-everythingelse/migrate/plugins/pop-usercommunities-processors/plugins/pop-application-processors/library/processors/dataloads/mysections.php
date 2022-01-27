@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -96,15 +96,14 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
 
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
          // Members of the Community
             case self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
-                $current_user = $vars['global-userstate']['current-user-id'];
+                $current_user = \PoP\Root\App::getState('current-user-id');
                 if (gdUreIsCommunity($current_user)) {
                     $ret['meta-query'][] = [
-                        'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES),
+                        'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES),
                         'value' => $current_user,
                         'compare' => 'IN',
                     ];

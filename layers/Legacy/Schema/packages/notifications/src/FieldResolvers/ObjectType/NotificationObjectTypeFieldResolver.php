@@ -13,15 +13,15 @@ use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\IPScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
-use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -304,12 +304,12 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
             case 'histTimeNogmt':
                 // In the DB, the time is saved without GMT. However, in the front-end we need the GMT factored in,
                 // because moment.js will
-                return $notification->hist_time - ($this->getCmsService()->getOption($this->getNameResolver()->getName('popcms:option:gmtOffset')) * 3600);
+                return $notification->hist_time - ($this->getCMSService()->getOption($this->getNameResolver()->getName('popcms:option:gmtOffset')) * 3600);
             case 'histTimeReadable':
                 // Must convert date using GMT
                 return sprintf(
                     $this->getTranslationAPI()->__('%s ago', 'pop-notifications'),
-                    \humanTiming($notification->hist_time - ($this->getCmsService()->getOption($this->getNameResolver()->getName('popcms:option:gmtOffset')) * 3600))
+                    \humanTiming($notification->hist_time - ($this->getCMSService()->getOption($this->getNameResolver()->getName('popcms:option:gmtOffset')) * 3600))
                 );
 
             case 'status':

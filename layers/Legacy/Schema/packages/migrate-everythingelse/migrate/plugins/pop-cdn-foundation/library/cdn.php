@@ -1,15 +1,14 @@
 <?php
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
-HooksAPIFacade::getInstance()->addAction(
-    'popcms:init', 
+\PoP\Root\App::addAction(
+    'init', // Must migrate this WP hook to one from PoP (which executes before AFTER_BOOT_APPLICATION
     function () {
         // Use the assets url instead of the site url for all the scripts and styles
         $cmsService = CMSServiceFacade::getInstance();
         if (POP_CDNFOUNDATION_CDN_ASSETS_URI && (POP_CDNFOUNDATION_CDN_ASSETS_URI != $cmsService->getSiteURL())) {
-            HooksAPIFacade::getInstance()->addFilter('popcms:styleSrc', 'popCdnfoundationAssetsrc');
-            HooksAPIFacade::getInstance()->addFilter('popcms:scriptSrc', 'popCdnfoundationAssetsrc');
+            \PoP\Root\App::addFilter('popcms:styleSrc', 'popCdnfoundationAssetsrc');
+            \PoP\Root\App::addFilter('popcms:scriptSrc', 'popCdnfoundationAssetsrc');
         }
     },
     11000

@@ -9,7 +9,7 @@ use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
-use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
+use PoPCMSSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
 
 class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
 {

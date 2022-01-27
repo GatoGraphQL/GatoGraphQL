@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 abstract class PoP_Module_Processor_EventTypeaheadComponentFormInputsBase extends PoP_Module_Processor_PostTypeaheadComponentFormInputsBase
 {

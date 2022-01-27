@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * Override functions from WSL, from file plugins/wordpress-social-login/includes/widgets/wsl.error.pages.php
@@ -24,6 +23,6 @@ if (! function_exists('wsl_render_error_page')) {
         RequestUtils::$errors[] = $message;
 
         // keep these 2 LOC
-        HooksAPIFacade::getInstance()->doAction('wsl_clear_user_php_session');
+        \PoP\Root\App::doAction('wsl_clear_user_php_session');
     }
 }

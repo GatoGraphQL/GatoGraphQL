@@ -1,11 +1,10 @@
 <?php
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 // Add the 3-days and 4-days scope
 // Taken from http://wp-events-plugin.com/tutorials/create-your-own-event-scope/
-HooksAPIFacade::getInstance()->addFilter('em_events_build_sql_conditions', 'popEmRssEventsBuildSqlConditions', 1, 2);
+\PoP\Root\App::addFilter('em_events_build_sql_conditions', 'popEmRssEventsBuildSqlConditions', 1, 2);
 function popEmRssEventsBuildSqlConditions($conditions, $args)
 {
 
@@ -25,7 +24,7 @@ function popEmRssEventsBuildSqlConditions($conditions, $args)
     return $conditions;
 }
 
-HooksAPIFacade::getInstance()->addFilter('em_get_scopes', 'popEmRssScopes', 1, 1);
+\PoP\Root\App::addFilter('em_get_scopes', 'popEmRssScopes', 1, 1);
 function popEmRssScopes($scopes)
 {
 

@@ -1,6 +1,5 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -85,7 +84,7 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataModule
 
         if ($layouts = $this->getLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );
         }

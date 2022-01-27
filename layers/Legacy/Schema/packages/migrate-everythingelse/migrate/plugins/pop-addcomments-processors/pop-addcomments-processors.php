@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Add Comments Processors
 Description: Implementation of Add Comments Processors for PoP
@@ -21,7 +20,7 @@ class PoP_AddCommentsProcessors
     {
 
         // Priority: after PoP Notifications Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888850);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888850);
     }
     public function init()
     {

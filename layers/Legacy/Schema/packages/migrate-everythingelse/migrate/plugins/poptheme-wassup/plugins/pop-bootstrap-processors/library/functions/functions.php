@@ -1,10 +1,9 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * Uniqueblocks
  */
-HooksAPIFacade::getInstance()->addFilter('RequestUtils:getFramecomponentModules', 'getWassupBootstrapFramecomponentModules');
+\PoP\Root\App::addFilter('RequestUtils:getFramecomponentModules', 'getWassupBootstrapFramecomponentModules');
 function getWassupBootstrapFramecomponentModules($modules)
 {
     $modules[] = [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_EMBED];

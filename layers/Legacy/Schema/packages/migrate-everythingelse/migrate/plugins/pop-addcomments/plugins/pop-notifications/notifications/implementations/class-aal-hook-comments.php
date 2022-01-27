@@ -1,8 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
     exit;
@@ -15,7 +14,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
     {
 
         // Commented
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'gd_addcomment',
             array($this, 'commented'),
             10,
@@ -23,16 +22,16 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
         );
 
         // When a comment is marked as spam, tell the user about content guidelines
-        HooksAPIFacade::getInstance()->addAction(
-            'popcms:spamComment',
+        \PoP\Root\App::addAction(
+            'spam_comment',// Must add a loose contract instead: 'popcms:spamComment'
             array($this, 'spamComment'),
             10,
             1
         );
 
         // When a comment is deleted from the system, delete all notifications about that comment
-        HooksAPIFacade::getInstance()->addAction(
-            'popcms:deleteComment',
+        \PoP\Root\App::addAction(
+            'delete_comment',// Must add a loose contract instead: 'popcms:deleteComment'
             array(PoP_AddComments_Notifications_API::class, 'clearComment'),
             10,
             1
@@ -50,8 +49,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
     {
 
         // Enable if the current logged in user is the System Notification's defined user
-        $vars = ApplicationState::getVars();
-        if (!POP_ADDCOMMENTS_URLPLACEHOLDER_SPAMMEDCOMMENTNOTIFICATION || $vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
+        if (!POP_ADDCOMMENTS_URLPLACEHOLDER_SPAMMEDCOMMENTNOTIFICATION || \PoP\Root\App::getState('current-user-id') != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
             return;
         }
 

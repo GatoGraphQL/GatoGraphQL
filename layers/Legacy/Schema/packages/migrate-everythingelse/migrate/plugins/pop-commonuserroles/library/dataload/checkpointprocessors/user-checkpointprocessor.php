@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
-use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\State\ApplicationState;
 
 class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
@@ -19,8 +19,7 @@ class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
 
     public function validateCheckpoint(array $checkpoint): ?Error
     {
-        $vars = ApplicationState::getVars();
-        $current_user_id = $vars['global-userstate']['current-user-id'];
+        $current_user_id = \PoP\Root\App::getState('current-user-id');
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISPROFILEORGANIZATION:
                 if (!gdUreIsOrganization($current_user_id)) {

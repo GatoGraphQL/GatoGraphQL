@@ -1,5 +1,6 @@
 <?php
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Root\App;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoPTheme_Wassup_AE_NewsletterSpecialSinglePost extends PoPTheme_Wassup_AE_NewsletterRecipientsBase
 {
@@ -10,10 +11,11 @@ class PoPTheme_Wassup_AE_NewsletterSpecialSinglePost extends PoPTheme_Wassup_AE_
 
     protected function getSubject()
     {
-        if (isset($_REQUEST[\PoPSchema\Posts\Constants\InputNames::POST_ID])) {
+        $postID = App::query(\PoPCMSSchema\Posts\Constants\InputNames::POST_ID);
+        if ($postID !== null) {
             // The post id is passed through param pid
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            return $customPostTypeAPI->getTitle($_REQUEST[\PoPSchema\Posts\Constants\InputNames::POST_ID]);
+            return $customPostTypeAPI->getTitle($postID);
         }
         return '';
     }

@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\Root\App;
 
 class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase
 {
@@ -50,7 +51,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Mod
                         // If the post was not just created but actually updated (created first and then on that same page updated it)
                         // then change the success code
                         $pid = $dbobjectids[0];
-                        if (isset($_REQUEST[\PoPSchema\Posts\Constants\InputNames::POST_ID]) && $pid == $_REQUEST[\PoPSchema\Posts\Constants\InputNames::POST_ID]) {
+                        if ($pid === App::query(\PoPCMSSchema\Posts\Constants\InputNames::POST_ID)) {
                             $ret['msgs'][0]['header']['code'] = 'update-success-header';
                         }
                     }

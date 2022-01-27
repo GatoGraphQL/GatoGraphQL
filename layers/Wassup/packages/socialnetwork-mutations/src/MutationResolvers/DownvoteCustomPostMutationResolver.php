@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\UserMeta\Utils;
+use PoP\Root\App;
+use PoPCMSSchema\UserMeta\Utils;
 
 class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver
 {
@@ -24,8 +24,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
     {
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
-            $vars = ApplicationState::getVars();
-            $user_id = $vars['global-userstate']['current-user-id'];
+            $user_id = App::getState('current-user-id');
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user has not already recommended this post
@@ -46,23 +45,22 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->getHooksAPI()->doAction('gd_downvotepost', $target_id, $form_data);
+        App::doAction('gd_downvotepost', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = App::getState('current-user-id');
         $target_id = $form_data['target_id'];
 
         // Update value
         Utils::addUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS, $target_id);
-        \PoPSchema\CustomPostMeta\Utils::addCustomPostMeta($target_id, \GD_METAKEY_POST_DOWNVOTEDBY, $user_id);
+        \PoPCMSSchema\CustomPostMeta\Utils::addCustomPostMeta($target_id, \GD_METAKEY_POST_DOWNVOTEDBY, $user_id);
 
         // Update the counter
-        $count = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($target_id, \GD_METAKEY_POST_DOWNVOTECOUNT, true);
+        $count = \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($target_id, \GD_METAKEY_POST_DOWNVOTECOUNT, true);
         $count = $count ? $count : 0;
-        \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($target_id, \GD_METAKEY_POST_DOWNVOTECOUNT, ($count + 1), true);
+        \PoPCMSSchema\CustomPostMeta\Utils::updateCustomPostMeta($target_id, \GD_METAKEY_POST_DOWNVOTECOUNT, ($count + 1), true);
 
         // Had the user already executed the opposite (Up-vote => Down-vote, etc), then undo it
         $opposite = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS);

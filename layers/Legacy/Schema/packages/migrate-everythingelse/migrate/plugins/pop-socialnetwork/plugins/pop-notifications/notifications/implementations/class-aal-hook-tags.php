@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -14,8 +13,8 @@ class PoP_SocialNetwork_Notifications_Hook_Tags /* extends AAL_Hook_Base*/
     {
 
         // Subscribed to/Unsubscribed from
-        HooksAPIFacade::getInstance()->addAction('gd_subscribetotag', array($this, 'subscribedtoTag'));
-        HooksAPIFacade::getInstance()->addAction('gd_unsubscribefromtag', array($this, 'unsubscribedfromTag'));
+        \PoP\Root\App::addAction('gd_subscribetotag', array($this, 'subscribedtoTag'));
+        \PoP\Root\App::addAction('gd_unsubscribefromtag', array($this, 'unsubscribedfromTag'));
 
         // parent::__construct();
     }
@@ -32,7 +31,6 @@ class PoP_SocialNetwork_Notifications_Hook_Tags /* extends AAL_Hook_Base*/
 
     public function subscribedtounsubscribedfromTag($tag_id, $action)
     {
-        $vars = ApplicationState::getVars();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $tag = $postTagTypeAPI->getTag($tag_id);
@@ -41,7 +39,7 @@ class PoP_SocialNetwork_Notifications_Hook_Tags /* extends AAL_Hook_Base*/
                 'action'      => $action,
                 'object_type' => 'Taxonomy',
                 'object_subtype' => 'Tag',
-                'user_id'     => $vars['global-userstate']['current-user-id'],
+                'user_id'     => \PoP\Root\App::getState('current-user-id'),
                 'object_id'   => $tag_id,
                 'object_name' => $applicationtaxonomyapi->getTagSymbolName($tag),
             )

@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\SchemaCommonsWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+

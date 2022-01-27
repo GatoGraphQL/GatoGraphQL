@@ -5,12 +5,12 @@ use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberPrivilegeEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberStatusEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberTagEnumTypeResolver;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends AbstractObjectTypeFieldResolver
 {
@@ -133,7 +133,6 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
         array $options = []
     ): mixed {
         $notification = $object;
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
@@ -149,7 +148,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
          // ----------------------------------------
             case 'memberstatus':
                 // object_id is the user whose membership was updated
-                $status = \PoPSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+                $status = \PoPCMSSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
 
                 // Filter status for the community: user_id
                 return gdUreCommunityMembershipstatusFilterbycommunity($status, $notification->user_id);
@@ -163,7 +162,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return $status->getSelectedValue();
 
             case 'memberprivileges':
-                $privileges = \PoPSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
+                $privileges = \PoPCMSSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
 
                 // Filter status for the community: user_id
                 return gdUreCommunityMembershipstatusFilterbycommunity($privileges, $notification->user_id);
@@ -177,7 +176,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return $privileges->getSelectedValue();
 
             case 'membertags':
-                $tags = \PoPSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
+                $tags = \PoPCMSSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
 
                 // Filter status for the community: user_id
                 return gdUreCommunityMembershipstatusFilterbycommunity($tags, $notification->user_id);
@@ -226,7 +225,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
 
                     case URE_AAL_POP_ACTION_USER_UPDATEDUSERMEMBERSHIP:
                         // Change the message depending if the logged in user is the object of this action
-                        $recipient = ($vars['global-userstate']['current-user-id'] == $notification->object_id) ? TranslationAPIFacade::getInstance()->__('your', 'ure-pop') : sprintf('<strong>%s</strong>’s', $cmsengineapi->getUserDisplayName($notification->object_id));
+                        $recipient = (\PoP\Root\App::getState('current-user-id') == $notification->object_id) ? TranslationAPIFacade::getInstance()->__('your', 'ure-pop') : sprintf('<strong>%s</strong>’s', $cmsengineapi->getUserDisplayName($notification->object_id));
                         return sprintf(
                             TranslationAPIFacade::getInstance()->__('<strong>%s</strong> has updated %s membership settings:', 'ure-pop'),
                             $userTypeAPI->getUserDisplayName($notification->user_id),

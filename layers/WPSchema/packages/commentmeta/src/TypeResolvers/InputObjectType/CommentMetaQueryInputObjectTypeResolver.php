@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPWPSchema\CommentMeta\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPSchema\CommentMeta\Component;
-use PoPSchema\CommentMeta\ComponentConfiguration;
+use PoPCMSSchema\CommentMeta\Component;
+use PoPCMSSchema\CommentMeta\ComponentConfiguration;
 use PoPWPSchema\Meta\TypeResolvers\InputObjectType\AbstractMetaQueryInputObjectTypeResolver;
 
 class CommentMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObjectTypeResolver

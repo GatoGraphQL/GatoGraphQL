@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Hooks;
 
+use PoP\Root\App;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\Hooks\AbstractCMSBootHookSet;
+use PoP\Root\Hooks\AbstractAfterAppBootHookSet;
 
-abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHookSet
+abstract class AbstractAccessControlForFieldsHookSet extends AbstractAfterAppBootHookSet
 {
     private ?AccessControlManagerInterface $accessControlManager = null;
 
@@ -41,7 +42,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
         // If no field defined => it applies to any field
         if ($fieldNames = $this->getFieldNames()) {
             foreach ($fieldNames as $fieldName) {
-                $this->getHooksAPI()->addFilter(
+                App::addFilter(
                     HookHelpers::getHookNameToFilterField($fieldName),
                     array($this, 'maybeFilterFieldName'),
                     10,
@@ -49,7 +50,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
                 );
             }
         } else {
-            $this->getHooksAPI()->addFilter(
+            App::addFilter(
                 HookHelpers::getHookNameToFilterField(),
                 array($this, 'maybeFilterFieldName'),
                 10,

@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -140,14 +139,14 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
 
         if ($layouts = $this->getConditionSucceededSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );
         }
 
         if ($conditionfailed_layouts = $this->getConditionFailedSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['conditionfailed-layouts'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $conditionfailed_layouts
             );
         }

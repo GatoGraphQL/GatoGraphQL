@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\SPA\ModuleFilters\Page;
 
 abstract class PoP_SPAResourceLoader_FileReproduction_ResourcesConfigBase extends \PoP\FileStore\File\AbstractRenderableFileFragment
@@ -14,7 +14,7 @@ abstract class PoP_SPAResourceLoader_FileReproduction_ResourcesConfigBase extend
             'match-format' => $this->matchFormat(),
         );
 
-        // Calculate the resources for the current request already, to make sure we don't call the function with $vars modified
+        // Calculate the resources for the current request already, to make sure we don't call the function with the application state modified
         if (!PoP_ResourceLoader_ServerUtils::loadframeResources()) {
             // To obtain the list of all resources that are always loaded, we can simply calculate the resources for this actual request,
             // for page /generate-theme/ (POP_SYSTEM_ROUTE_SYSTEM_GENERATETHEME), which because it doesn't add blocks or anything to the output,

@@ -1,14 +1,13 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
  * Replace the "no alternate language available" message
  * Otherwise it prints:
  * Sorry, this entry is only available in Malay and English. For the sake of viewer convenience, the content is shown below in this site default language. You may click one of the links to switch the site language to another available language.
  */
-HooksAPIFacade::getInstance()->addFilter('popcomponent:multilingual:notavailablecontenttranslation', 'multilingualUseBlockAltlang', 10, 6);
+\PoP\Root\App::addFilter('popcomponent:multilingual:notavailablecontenttranslation', 'multilingualUseBlockAltlang', 10, 6);
 function multilingualUseBlockAltlang($output, $lang, $language_list, $alt_lang, $alt_content, $msg)
 {
     $pluginapi = PoP_Multilingual_FunctionsAPIFactory::getInstance();

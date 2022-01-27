@@ -1,11 +1,10 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * Add the language to the links to PoP and Verticals
  */
-HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_CustomPageSections:footer:poweredby-links', 'gdQtransxFooterlinks');
+\PoP\Root\App::addFilter('PoP_Module_Processor_CustomPageSections:footer:poweredby-links', 'gdQtransxFooterlinks');
 function gdQtransxFooterlinks($link)
 {
 
@@ -21,7 +20,7 @@ function gdQtransxFooterlinks($link)
     return $link;
 }
 
-HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_HTMLCodes:homewelcometitle', 'gdQtransxWelcomeLanguagelinks');
+\PoP\Root\App::addFilter('PoP_Module_Processor_HTMLCodes:homewelcometitle', 'gdQtransxWelcomeLanguagelinks');
 function gdQtransxWelcomeLanguagelinks($title)
 {
     if ($items = getMultilingualLanguageitems()) {

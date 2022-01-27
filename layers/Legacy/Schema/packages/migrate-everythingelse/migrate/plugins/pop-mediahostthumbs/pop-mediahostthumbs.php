@@ -6,7 +6,6 @@ Description: Configuration for external websites: Collection of default thumbs f
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -19,7 +18,7 @@ class PoP_MediaHostThumbs
     {
 
         // Priority: after PoP Add Post Links
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888370);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888370);
     }
     public function init()
     {

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoP_CommonUserRolesProcessors_Bootstrap_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -16,7 +16,7 @@ class PoP_CommonUserRolesProcessors_Bootstrap_Module_MainContentRouteModuleProce
             POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_SectionTabPanelBlocks::class, GD_URE_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_INDIVIDUALS],
         );
         foreach ($modules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

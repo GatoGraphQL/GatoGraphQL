@@ -1,15 +1,14 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPTheme_Wassup_EventsCreation_WebPlatform_PreloadHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
-            'wassup:extra-routes:initialframes:'.\PoP\ComponentModel\Constants\Targets::MAIN,
+        \PoP\Root\App::addFilter(
+            'wassup:extra-routes:initialframes:'.\PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
             array($this, 'maybeGetRoutesForMain')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'wassup:extra-routes:initialframes:'.POP_TARGET_ADDONS,
             array($this, 'maybeGetRoutesForAddons')
         );
@@ -17,7 +16,7 @@ class PoPTheme_Wassup_EventsCreation_WebPlatform_PreloadHooks
 
     public function maybeGetRoutesForMain($routes)
     {
-        if (PoP_Application_Utils::getAddcontentTarget() == \PoP\ComponentModel\Constants\Targets::MAIN) {
+        if (PoP_Application_Utils::getAddcontentTarget() == \PoP\ConfigurationComponentModel\Constants\Targets::MAIN) {
             $routes[] = POP_EVENTSCREATION_ROUTE_ADDEVENT;
         }
         return $routes;

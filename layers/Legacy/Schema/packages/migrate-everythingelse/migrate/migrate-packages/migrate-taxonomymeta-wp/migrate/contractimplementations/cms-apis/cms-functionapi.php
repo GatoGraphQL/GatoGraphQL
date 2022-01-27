@@ -1,7 +1,7 @@
 <?php
-namespace PoPSchema\TaxonomyMeta\WP;
+namespace PoPCMSSchema\TaxonomyMeta\WP;
 
-class FunctionAPI extends \PoPSchema\TaxonomyMeta\FunctionAPI_Base
+class FunctionAPI extends \PoPCMSSchema\TaxonomyMeta\FunctionAPI_Base
 {
     public function deleteTermMeta($term_id, $meta_key, $meta_value = '')
     {

@@ -1,18 +1,17 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_URE_Engine_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'ApplicationState:addVars',
             [$this, 'addVars'],
             10,
             1
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'augmentVarsProperties',
             [$this, 'augmentVarsProperties'],
             10,
@@ -20,15 +19,16 @@ class PoP_URE_Engine_Hooks
         );
     }
     /**
+     * @todo Migrate to AppStateProvider
      * @param array<array> $vars_in_array
      */
     public function addVars(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
-        if ($vars['nature'] == UserRouteNatures::USER) {
-            $author = $vars['routing-state']['queried-object-id'];
+        if ($vars['nature'] == UserRequestNature::USER) {
+            $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                $source = $_REQUEST[GD_URLPARAM_URECONTENTSOURCE] ?? null;
+                $source = \PoP\Root\App::query(GD_URLPARAM_URECONTENTSOURCE);
                 $sources = array(
                     GD_URLPARAM_URECONTENTSOURCE_USER,
                     GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,
@@ -43,14 +43,15 @@ class PoP_URE_Engine_Hooks
     }
 
     /**
+     * @todo Migrate to AppStateProvider
      * @param array<array> $vars_in_array
      */
     public function augmentVarsProperties(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
-        if ($vars['nature'] == UserRouteNatures::USER) {
-            $author = $vars['routing-state']['queried-object-id'];
-            $vars['routing-state']['queried-object-is-community'] = gdUreIsCommunity($author);
+        if ($vars['nature'] == UserRequestNature::USER) {
+            $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
+            $vars['routing']['queried-object-is-community'] = gdUreIsCommunity($author);
         }
     }
 }

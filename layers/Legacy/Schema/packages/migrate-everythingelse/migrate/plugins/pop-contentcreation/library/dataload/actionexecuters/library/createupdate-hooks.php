@@ -1,12 +1,11 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_CreateUpdate_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'popcms:editPostLink',
             array($this, 'editPostLink'),
             100,
@@ -19,7 +18,7 @@ class GD_CreateUpdate_Hooks
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
             // Hook to set the URL for other post types
-            $url = HooksAPIFacade::getInstance()->applyFilters(
+            $url = \PoP\Root\App::applyFilters(
                 'gd-createupdateutils:edit-url',
                 '',
                 $post_id
@@ -28,7 +27,7 @@ class GD_CreateUpdate_Hooks
             if ($url) {
                         $link = gdGetNonceUrl(GD_NONCE_EDITURL, $url, $post_id);
                 $link = GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $post_id,
+                    \PoPCMSSchema\Posts\Constants\InputNames::POST_ID => $post_id,
                 ], $link);
             }
         }

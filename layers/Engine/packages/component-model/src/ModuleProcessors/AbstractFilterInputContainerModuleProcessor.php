@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 
 abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor implements FilterInputContainerModuleProcessorInterface
@@ -16,7 +17,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
 
         // Enable extensions to add more FilterInputs
         foreach ($this->getFilterInputHookNames() as $filterInputHookName) {
-            $filterInputModules = $this->getHooksAPI()->applyFilters(
+            $filterInputModules = App::applyFilters(
                 $filterInputHookName,
                 $filterInputModules,
                 $module

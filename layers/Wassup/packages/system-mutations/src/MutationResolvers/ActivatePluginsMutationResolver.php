@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\Engine\CMS\CMSServiceInterface;
+use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 
 class ActivatePluginsMutationResolver extends AbstractMutationResolver
 {
@@ -33,7 +34,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     // Taken from https://wordpress.stackexchange.com/questions/4041/how-to-activate-plugins-via-code
     private function runActivatePlugin($plugin)
     {
-        $current = $this->getCmsService()->getOption('active_plugins');
+        $current = $this->getCMSService()->getOption('active_plugins');
         // @todo Rename package!
         // `plugin_basename` is a WordPress function,
         // so this package must be called "system-mutations-wp",
@@ -43,10 +44,10 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
         if (!in_array($plugin, $current)) {
             $current[] = $plugin;
             sort($current);
-            $this->getHooksAPI()->doAction('activate_plugin', trim($plugin));
+            App::doAction('activate_plugin', trim($plugin));
             update_option('active_plugins', $current);
-            $this->getHooksAPI()->doAction('activate_' . trim($plugin));
-            $this->getHooksAPI()->doAction('activated_plugin', trim($plugin));
+            App::doAction('activate_' . trim($plugin));
+            App::doAction('activated_plugin', trim($plugin));
             return true;
         }
 
@@ -57,7 +58,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     {
         // Plugins needed by the website. Check the website version, if it's the one indicated,
         // then proceed to install the required plugin
-        $plugin_version = $this->getHooksAPI()->applyFilters(
+        $plugin_version = App::applyFilters(
             'PoP:system-activateplugins:plugins',
             array()
         );

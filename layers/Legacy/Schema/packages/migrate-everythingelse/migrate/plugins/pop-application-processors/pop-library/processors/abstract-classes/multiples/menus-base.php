@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class PoP_Module_Processor_MenuMultiplesBase extends PoP_Module_Processor_MultiplesBase
 {
     protected function getActiveLinkMenuItemIds(array $module, array &$props)
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_MenuMultiplesBase:active-link-menu-item-ids',
             array(),
             $module,

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP No Search Category Posts Creation Web Platform
 Description: Implementation of EventLinks Creation Web Platform for PoP
@@ -20,7 +19,7 @@ class PoP_NoSearchCategoryPostsCreationWebPlatform
     {
 
         // Priority: after PoP Application Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888510);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888510);
     }
     public function init()
     {

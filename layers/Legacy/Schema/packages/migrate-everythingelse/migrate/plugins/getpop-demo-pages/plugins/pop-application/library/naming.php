@@ -1,8 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_catname', 'getpopdemoCategorypostsCatname', 10, 3);
+\PoP\Root\App::addFilter('gd_catname', 'getpopdemoCategorypostsCatname', 10, 3);
 function getpopdemoCategorypostsCatname($name, $cat_id, $format)
 {
     switch ($cat_id) {

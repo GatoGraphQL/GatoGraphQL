@@ -1,11 +1,11 @@
 <?php
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
@@ -482,7 +482,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
             return self::$calculated_resources[$key];
         }
 
-        $engine = EngineFacade::getInstance();
+        $engineState = App::getEngineState();
 
         // Comment Leo 20/10/2017: load always all the handlebars templates needed to render the page,
         // even if doing serverside-rendering so that we have already produced the HTML,
@@ -491,10 +491,10 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
         // so this acts as preloading those templates, making the 2nd request faster
 
         // We are given a toplevel. Iterate through all the pageSections, and obtain their resources
-        $templateResources = $engine->helperCalculations['template-resources'];
+        $templateResources = $engineState->helperCalculations['template-resources'];
 
         // Add all the pageSection methods
-        $data = $engine->data;
+        $data = $engineState->data;
         $pageSectionJSMethods = $data['modulesettings']['combinedstate']['jsmethods']['pagesection'];
         $blockJSMethods = $data['modulesettings']['combinedstate']['jsmethods']['block'];
 
@@ -504,7 +504,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
         // Get all the resources the template is dependent on. Eg: inline CSS styles
         // $modules_resources = array_values(array_unique(arrayFlatten(array_values($data['modulesettings']['combinedstate']['module-resources'] ?? array()))));
-        $modules_resources = $engine->helperCalculations['module-resources'];
+        $modules_resources = $engineState->helperCalculations['module-resources'];
 
         // Get all the resources from the current request, from the loaded Handlebars templates and Javascript methods
         self::$calculated_resources[$key] = PoP_ResourceLoaderProcessorUtils::calculateResources(true, $templateResources, $critical_methods, $noncritical_methods, $modules_resources, $model_instance_id, $options);
@@ -556,7 +556,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
                 $pop_resourceloader_currentroute_filegenerator_bundlefiles->generate($options);
 
                 // Trigger an action, to upload the files to S3
-                HooksAPIFacade::getInstance()->doAction(
+                \PoP\Root\App::doAction(
                     'PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils:generated-bundlefiles'
                 );
             }

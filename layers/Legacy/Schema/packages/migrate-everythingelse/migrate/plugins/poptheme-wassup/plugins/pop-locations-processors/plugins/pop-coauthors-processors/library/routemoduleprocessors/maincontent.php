@@ -1,6 +1,6 @@
 <?php
 
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 
 class Wassup_EM_CAP_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -17,14 +17,14 @@ class Wassup_EM_CAP_Module_MainContentRouteModuleProcessor extends \PoP\Applicat
             POP_ROUTE_AUTHORS => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_SINGLEAUTHORS_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_MAP) {
-                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
 

@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class UserStance_Module_Processor_StanceLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {

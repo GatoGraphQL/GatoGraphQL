@@ -1,9 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
@@ -92,15 +92,15 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     //     switch ($module[1]) {
     //         case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
     //         case self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
 
     //         case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
     //         case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
     //         case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
-    //             return CustomPostRouteNatures::CUSTOMPOST;
+    //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

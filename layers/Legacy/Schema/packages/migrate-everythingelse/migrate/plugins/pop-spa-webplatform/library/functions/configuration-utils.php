@@ -1,8 +1,8 @@
 <?php
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\SPA\ModuleFilters\Page;
 
 class PoP_SPAWebPlatform_ConfigurationUtils
@@ -20,13 +20,13 @@ class PoP_SPAWebPlatform_ConfigurationUtils
                 $page = $instanceManager->getInstance(Page::class);
 
                 $url = GeneralUtils::addQueryArgs([
-                    \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager::URLPARAM_MODULEFILTER => $page->getName(),
-                    \PoP\ComponentModel\Constants\Params::ACTIONS . '[]' => GD_URLPARAM_ACTION_PRELOAD,
+                    Params::MODULEFILTER => $page->getName(),
+                    Params::ACTIONS . '[]' => GD_URLPARAM_ACTION_PRELOAD,
                 ], $url);
             }
             $url_targets[$url] = $configuration['targets'];
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters('PoP_WebPlatform_ConfigurationUtils:backgroundload_urls', $url_targets);
+        return \PoP\Root\App::applyFilters('PoP_WebPlatform_ConfigurationUtils:backgroundload_urls', $url_targets);
     }
 }

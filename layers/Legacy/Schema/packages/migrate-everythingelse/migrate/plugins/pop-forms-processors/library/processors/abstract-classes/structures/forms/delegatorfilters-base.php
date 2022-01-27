@@ -1,8 +1,9 @@
 <?php
+use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\Engine\ModuleFilters\MainContentModule;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 define('GD_SUBMITFORMTYPE_DELEGATE', 'delegate');
 
@@ -25,7 +26,7 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
             $props,
             array(
                 'fetchparams' => array(
-                    ModuleFilterManager::URLPARAM_MODULEFILTER => $mainContentModule->getName(),
+                    Params::MODULEFILTER => $mainContentModule->getName(),
                 ),
             )
         );

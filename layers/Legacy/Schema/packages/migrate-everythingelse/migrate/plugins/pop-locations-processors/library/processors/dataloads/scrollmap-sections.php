@@ -1,12 +1,12 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
+use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
@@ -136,12 +136,12 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     //         case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP:
     //         case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
     //         case self::MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_TAGEVENTS_SCROLLMAP:
     //         case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
     //         case self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
     //     }
 
     //     return parent::getNature($module);

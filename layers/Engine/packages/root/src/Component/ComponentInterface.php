@@ -17,9 +17,9 @@ interface ComponentInterface
      * @param string[] $skipSchemaComponentClasses
      */
     public function initialize(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        array $configuration,
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void;
 
     /**
@@ -61,7 +61,7 @@ interface ComponentInterface
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public function beforeBoot(): void;
+    public function componentLoaded(): void;
 
     /**
      * Function called by the Bootloader when booting the system
@@ -99,6 +99,11 @@ interface ComponentInterface
      * Indicates if the Component is enabled
      */
     public function isEnabled(): bool;
+
+    /**
+     * Indicates if the Component must skipSchema
+     */
+    public function skipSchema(): bool;
 
     /**
      * ComponentConfiguration for the Component

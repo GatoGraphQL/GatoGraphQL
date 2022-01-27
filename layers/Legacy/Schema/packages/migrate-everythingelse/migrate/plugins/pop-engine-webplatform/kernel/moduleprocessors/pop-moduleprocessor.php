@@ -1,7 +1,5 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD', 'processorbase-pagesectionjsmethod');
 define('POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD', 'processorbase-blockjsmethod');
@@ -28,8 +26,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         $ret = parent::getImmutableSettings($module, $props);
 
         // Validate that the platform level includes this one
-        $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
             return $ret;
         }
 
@@ -41,7 +38,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         }
 
         // Allow PoP Resource Loader to inject this value
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-settings',
             $ret,
             $module,
@@ -55,7 +52,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         $jsmethods = $this->getJsmethods($module, $props);
 
         // Allow the theme to modify the jsmethods
-        return HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD, $jsmethods, $module);
+        return \PoP\Root\App::applyFilters(POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD, $jsmethods, $module);
 
         // // $ret data structure:
         // // module
@@ -229,12 +226,11 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         $ret = parent::getMutableonrequestConfiguration($module, $props);
 
         // Validate that the platform level includes this one
-        $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
             return $ret;
         }
 
-        $moduleOutputName = ModuleUtils::getModuleOutputName($module);
+        $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($module);
 
         // The Intercept URLs are runtime instead of static, since they contains information
         // given through the URL, which cannot not cached in the static file
@@ -246,7 +242,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         }
 
         // Allow CSS to Styles to modify these value
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-mutableonrequest-configuration',
             $ret,
             $module,
@@ -266,8 +262,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         $ret = parent::getImmutableConfiguration($module, $props);
 
         // Validate that the platform level includes this one
-        $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
             return $ret;
         }
 
@@ -302,7 +297,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         }
 
         // Allow PoP Resource Loader to inject this value
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-configuration',
             $ret,
             $module,
@@ -376,8 +371,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
     public function initModelProps(array $module, array &$props): void
     {
         // Validate that the platform level includes this one
-        $vars = ApplicationState::getVars();
-        if (in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
 
             $this->initWebPlatformModelProps($module, $props);
         }
@@ -398,8 +392,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
     public function initRequestProps(array $module, array &$props): void
     {
         // Validate that the platform level includes this one
-        $vars = ApplicationState::getVars();
-        if (in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
 
             $this->initWebPlatformRequestProps($module, $props);
         }
@@ -448,7 +441,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
     protected function getModuleFilteredPagesectionJsmethods(array $module, array &$props)
     {
         $jsmethod = $this->getPagesectionJsmethod($module, $props);
-        $jsmethod = HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD, $jsmethod, $module);
+        $jsmethod = \PoP\Root\App::applyFilters(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD, $jsmethod, $module);
 
         return $jsmethod;
     }

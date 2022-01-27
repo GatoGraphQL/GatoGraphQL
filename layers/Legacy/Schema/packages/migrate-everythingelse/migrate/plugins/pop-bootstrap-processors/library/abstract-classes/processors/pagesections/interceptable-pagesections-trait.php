@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 define('GD_CONSTANT_REPLICATETYPE_MULTIPLE', 'multiple');
 define('GD_CONSTANT_REPLICATETYPE_SINGLE', 'single');
@@ -11,7 +10,7 @@ trait PoP_Module_Processor_InterceptablePageSectionsTrait
     {
         $ret = parent::getModuleInterceptUrls($module, $props);
 
-        $moduleOutputName = ModuleUtils::getModuleOutputName($module);
+        $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($module);
 
         // Intercept current page
         $requestHelperService = RequestHelperServiceFacade::getInstance();

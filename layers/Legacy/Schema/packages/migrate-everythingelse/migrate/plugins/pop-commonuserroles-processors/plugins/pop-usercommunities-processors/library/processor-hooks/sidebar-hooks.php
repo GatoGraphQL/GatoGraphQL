@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('PoP_UserCommunities_Module_Processor_SidebarMultiples:sidebar-layouts', 'gdUreAddSidebarLayouts', 10, 3);
+\PoP\Root\App::addFilter('PoP_UserCommunities_Module_Processor_SidebarMultiples:sidebar-layouts', 'gdUreAddSidebarLayouts', 10, 3);
 function gdUreAddSidebarLayouts($layouts, $author, array $module)
 {
     if (gdUreIsOrganization($author)) {

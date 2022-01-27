@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\PersistedQueries;
+namespace PoPAPI\API\PersistedQueries;
 
 class PersistedQueryManager extends AbstractPersistedQueryManager
 {

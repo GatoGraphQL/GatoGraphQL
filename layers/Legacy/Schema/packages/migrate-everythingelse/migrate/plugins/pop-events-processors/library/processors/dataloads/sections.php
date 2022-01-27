@@ -1,11 +1,11 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
+use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -489,7 +489,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //         case self::MODULE_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP:
     //         case self::MODULE_DATALOAD_AUTHOREVENTSCALENDAR_CALENDAR:
     //         case self::MODULE_DATALOAD_AUTHOREVENTS_CAROUSEL:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_TAGEVENTS_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_DETAILS:
@@ -504,7 +504,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //         case self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP:
     //         case self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDAR:
     //         case self::MODULE_DATALOAD_TAGEVENTS_CAROUSEL:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
     //     }
 
     //     return parent::getNature($module);

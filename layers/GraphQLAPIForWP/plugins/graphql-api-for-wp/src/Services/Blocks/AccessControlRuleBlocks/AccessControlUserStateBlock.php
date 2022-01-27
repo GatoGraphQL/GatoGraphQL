@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
-use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
+use PoPCMSSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 
 /**
  * Access Control Disable Access block

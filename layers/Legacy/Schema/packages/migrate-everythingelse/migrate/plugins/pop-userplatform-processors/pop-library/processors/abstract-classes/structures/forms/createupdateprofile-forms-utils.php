@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class PoP_Module_Processor_CreateUpdateProfileFormsUtils
 {
@@ -35,7 +34,7 @@ abstract class PoP_Module_Processor_CreateUpdateProfileFormsUtils
             )+1, 
             0, 
             // Allow AgendaUrbana to remove LinkedIn            
-            HooksAPIFacade::getInstance()->applyFilters(
+            \PoP\Root\App::applyFilters(
                 'PoP_Module_Processor_CreateUpdateProfileFormsUtils:socialmedia',
                 array(
                     [PoP_Module_Processor_ProfileFormGroups::class, PoP_Module_Processor_ProfileFormGroups::MODULE_FORMINPUTGROUP_CUP_FACEBOOK],

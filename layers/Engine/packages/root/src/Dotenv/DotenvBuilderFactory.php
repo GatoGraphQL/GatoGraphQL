@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Dotenv;
 
+use PoP\Root\App;
 use Symfony\Component\Dotenv\Dotenv;
 
 class DotenvBuilderFactory
@@ -17,7 +18,7 @@ class DotenvBuilderFactory
         // If not set, use "/config" in the root directory
         $envConfigFolder = getenv('ENV_CONFIG_FOLDER');
         if (!$envConfigFolder) {
-            $envConfigFolder = $_SERVER['DOCUMENT_ROOT'] . '/config';
+            $envConfigFolder = App::server('DOCUMENT_ROOT', '') . '/config';
         }
 
         // If the file location has been set, then load the environment variables from .env files stored there

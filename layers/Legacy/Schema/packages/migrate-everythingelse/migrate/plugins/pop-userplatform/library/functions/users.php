@@ -1,17 +1,16 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 function gdUserAttributes()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdUserAttributes', array());
+    return \PoP\Root\App::applyFilters('gdUserAttributes', array());
 }
 
 function gdGetUserattributes($user_id)
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdGetUserattributes', array(), $user_id);
+    return \PoP\Root\App::applyFilters('gdGetUserattributes', array(), $user_id);
 }
 
 /**
@@ -20,8 +19,7 @@ function gdGetUserattributes($user_id)
 function userHasAccess($capability, $user_id = null)
 {
     if (is_null($user_id)) {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = \PoP\Root\App::getState('current-user-id');
     }
     $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
     return $userRoleTypeAPI->userCan($user_id, $capability);

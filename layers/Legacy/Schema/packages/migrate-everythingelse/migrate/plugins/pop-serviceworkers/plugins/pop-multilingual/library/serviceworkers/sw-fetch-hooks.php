@@ -1,27 +1,26 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_ServiceWorkers_QtransX_Job_Fetch_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:locales',
             array($this, 'getLocales')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:appshell_url',
             array($this, 'getAppshellUrl'),
             10,
             2
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:locales_byurl',
             array($this, 'getLocalesByurl')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:default_locale',
             array($this, 'getDefaultLocale')
         );

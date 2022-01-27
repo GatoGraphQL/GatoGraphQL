@@ -1,6 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_DropdownButtonControlsBase
 {
@@ -21,7 +20,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
             case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 $ret = array_merge(
                     $ret,
-                    HooksAPIFacade::getInstance()->applyFilters(
+                    \PoP\Root\App::applyFilters(
                         'PoP_Module_Processor_DropdownButtonControls:addrelatedpost-dropdown:buttons',
                         array()
                     )

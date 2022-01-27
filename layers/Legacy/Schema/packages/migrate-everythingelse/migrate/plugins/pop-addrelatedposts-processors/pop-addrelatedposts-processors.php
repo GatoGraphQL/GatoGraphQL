@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Add Related Posts Processors
 Description: Implementation of Add Related Posts Processors for PoP
@@ -20,7 +19,7 @@ class PoP_AddRelatedPostsProcessors
     {
 
         // Priority: after PoP Related Posts Processors and PoP Content Creation Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888860);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888860);
     }
     public function init()
     {

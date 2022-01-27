@@ -1,13 +1,12 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_UserStateModuleDecoratorProcessorHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             AbstractModuleProcessor::HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES,
             array($this, 'addHeaddatasetmoduleDataProperties'),
             10,

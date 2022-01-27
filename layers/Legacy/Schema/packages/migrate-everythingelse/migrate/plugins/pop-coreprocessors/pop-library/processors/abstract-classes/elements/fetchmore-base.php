@@ -3,7 +3,7 @@ use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\Application\QueryInputOutputHandlers\Utils;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -69,12 +69,11 @@ abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataMod
     public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-        $vars = ApplicationState::getVars();
-
+        
         // If it is lazy load, no need to calculate stop-fetching
         // If loading static data, then that's it
         // Do not send this value back when doing loadLatest, or it will mess up the original structure loading
-        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) || ($vars['loading-latest'] ?? null)) {
+        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) || (\PoP\Root\App::getState('loading-latest'))) {
             return $ret;
         }
 
@@ -84,9 +83,9 @@ abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataMod
 
         if (!$stopFetching && ($data_properties[DataloadingConstants::SOURCE] ?? null)) {
             $query_args = $data_properties[DataloadingConstants::QUERYARGS];
-            $pagenumber = $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER];
+            $pagenumber = $query_args[\PoP\ComponentModel\Constants\PaginationParams::PAGE_NUMBER];
             $ret['query-next-url'] = GeneralUtils::addQueryArgs([
-                \PoP\ComponentModel\Constants\Params::PAGE_NUMBER => $pagenumber+1,
+                \PoP\ComponentModel\Constants\PaginationParams::PAGE_NUMBER => $pagenumber+1,
             ], $data_properties[DataloadingConstants::SOURCE]);
         }
 

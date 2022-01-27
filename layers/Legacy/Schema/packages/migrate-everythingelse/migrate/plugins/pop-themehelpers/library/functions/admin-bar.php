@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 function hideAdminBarSettings()
 {
@@ -13,7 +12,7 @@ function hideAdminBarSettings()
 }
 function disableAdminBar()
 {
-    HooksAPIFacade::getInstance()->addFilter('show_admin_bar', '__return_false');
-    HooksAPIFacade::getInstance()->addAction('admin_print_scripts-profile.php', 'hideAdminBarSettings');
+    \PoP\Root\App::addFilter('show_admin_bar', '__return_false');
+    \PoP\Root\App::addAction('admin_print_scripts-profile.php', 'hideAdminBarSettings');
 }
-HooksAPIFacade::getInstance()->addAction('init', 'disableAdminBar', 9);
+\PoP\Root\App::addAction('init', 'disableAdminBar', 9);

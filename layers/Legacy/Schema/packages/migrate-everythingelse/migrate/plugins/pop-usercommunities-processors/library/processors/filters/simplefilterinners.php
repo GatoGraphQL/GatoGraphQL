@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_URE_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
@@ -32,7 +31,7 @@ class GD_URE_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proces
                 [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERUSER],
             ],
         ];
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+        if ($modules = \PoP\Root\App::applyFilters(
             'UserCommunities:SimpleFilterInners:inputmodules',
             $inputmodules[$module[1]],
             $module

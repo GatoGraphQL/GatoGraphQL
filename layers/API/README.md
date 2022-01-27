@@ -699,7 +699,7 @@ The example below implements the same logic as the case above, however coding th
 // 4. Customize data
 /?query=
   contentMesh(
-    githubRepo: "getpop/api-graphql",
+    githubRepo: "pop-api/api-graphql",
     weatherZone: AKZ017,
     photoPage: 3
   )@contentMesh
@@ -711,7 +711,7 @@ The example below implements the same logic as the case above, however coding th
 
 <a href="https://newapi.getpop.org/api/graphql/?query=contentMesh">View query results #3</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?query=contentMesh(githubRepo:%22getpop/api-graphql%22,weatherZone:AKZ017,photoPage:3)@contentMesh">View query results #4</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=contentMesh(githubRepo:%22pop-api/api-graphql%22,weatherZone:AKZ017,photoPage:3)@contentMesh">View query results #4</a>
 
 ### Persisted fragments
 
@@ -734,7 +734,7 @@ The example below demonstrates, once again, the same logic from the example abov
 
 // 4. Customize data
 /?
-githubRepo=getpop/api-graphql&
+githubRepo=pop-api/api-graphql&
 weatherZone=AKZ017&
 photoPage=3&
 query=
@@ -747,7 +747,7 @@ query=
 
 <a href="https://newapi.getpop.org/api/graphql/?query=--contentMesh">View query results #3</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?githubRepo=getpop/api-graphql&amp;weatherZone=AKZ017&amp;photoPage=3&amp;query=--contentMesh">View query results #4</a>
+<a href="https://newapi.getpop.org/api/graphql/?githubRepo=pop-api/api-graphql&amp;weatherZone=AKZ017&amp;photoPage=3&amp;query=--contentMesh">View query results #4</a>
 
 ### Persisted queries
 
@@ -762,7 +762,7 @@ In the `query` field, instead of passing the query, we pass a persisted query na
 
 // 2. Customize it with variables
 /?
-githubRepo=getpop/api-graphql&
+githubRepo=pop-api/api-graphql&
 weatherZone=AKZ017&
 photoPage=3&
 query=
@@ -771,7 +771,7 @@ query=
 
 <a href="https://newapi.getpop.org/api/graphql/?query=!contentMesh">View query results #1</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?githubRepo=getpop/api-graphql&amp;weatherZone=AKZ017&amp;photoPage=3&amp;query=!contentMesh">View query results #2</a>
+<a href="https://newapi.getpop.org/api/graphql/?githubRepo=pop-api/api-graphql&amp;weatherZone=AKZ017&amp;photoPage=3&amp;query=!contentMesh">View query results #2</a>
 
 ### Automatic namespacing of types
 

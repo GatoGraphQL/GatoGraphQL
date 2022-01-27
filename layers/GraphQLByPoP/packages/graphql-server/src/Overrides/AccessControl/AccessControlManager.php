@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Overrides\AccessControl;
 
 use GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface;
 use PoP\AccessControl\Services\AccessControlManager as UpstreamAccessControlManager;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 
 class AccessControlManager extends UpstreamAccessControlManager
 {

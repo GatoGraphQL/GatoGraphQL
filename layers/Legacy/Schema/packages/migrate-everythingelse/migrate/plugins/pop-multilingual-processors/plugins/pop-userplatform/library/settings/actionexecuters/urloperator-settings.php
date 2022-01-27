@@ -1,10 +1,9 @@
 <?php
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\SettingsMutationResolver;
 
-HooksAPIFacade::getInstance()->addAction(
-    'popcms:init',
+\PoP\Root\App::addAction(
+    'init', // Must migrate this WP hook to one from PoP (which executes before AFTER_BOOT_APPLICATION
     'gdQtInitsettings'
 );
 function gdQtInitsettings()

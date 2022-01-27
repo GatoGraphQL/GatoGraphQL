@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Events
 Description: Implementation of Events for PoP
@@ -20,7 +19,7 @@ class PoP_Migrate_Events
     {
 
         // Priority: after PoP Events
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888380);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888380);
     }
     public function init()
     {

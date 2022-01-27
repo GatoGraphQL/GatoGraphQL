@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPTheme_Wassup_EM_SidebarHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_SidebarMultiplesBase:modules',
             array($this, 'getSidebarSubmodules'),
             0,
@@ -17,7 +16,7 @@ class PoPTheme_Wassup_EM_SidebarHooks
     {
 
         // Add the Events Calendar to all Groups in the Sideinfo
-        $includeScreengroups = HooksAPIFacade::getInstance()->applyFilters(
+        $includeScreengroups = \PoP\Root\App::applyFilters(
             'PoPTheme_Wassup_EM_SidebarHooks:sidebar_modules:includeScreengroups',
             array(
                 POP_SCREENGROUP_CONTENTREAD,

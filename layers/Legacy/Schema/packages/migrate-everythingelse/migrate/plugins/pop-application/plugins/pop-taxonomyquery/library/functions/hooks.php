@@ -1,12 +1,11 @@
 <?php
-namespace PoPSchema\TaxonomyQuery;
-use PoP\Hooks\Facades\HooksAPIFacade;
+namespace PoPCMSSchema\TaxonomyQuery;
 
 class PoP_Application_TaxonomyQuery_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'useAllcontentCategories',
             array($this, 'useAllcontentCategories')
         );

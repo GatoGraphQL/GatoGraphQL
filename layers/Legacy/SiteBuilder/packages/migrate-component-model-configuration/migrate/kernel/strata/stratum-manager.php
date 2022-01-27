@@ -1,6 +1,5 @@
 <?php
 namespace PoP\ComponentModel;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class StratumManager
 {
@@ -11,7 +10,7 @@ class StratumManager
     public function __construct()
     {
         StratumManagerFactory::setInstance($this);
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'plugins_loaded',
             array($this, 'init'),
             888395
@@ -27,7 +26,7 @@ class StratumManager
     public function init()
     {
         // Selected comes in URL param 'stratum'
-        $this->selected_stratum = $_REQUEST[\PoP\ComponentModel\Constants\Params::STRATUM] ?? null;
+        $this->selected_stratum = \PoP\Root\App::query(\PoP\ConfigurationComponentModel\Constants\Params::STRATUM);
 
         // Check if the selected theme is inside $stratum_strata
         if (!$this->selected_stratum || !in_array($this->selected_stratum, array_keys($this->stratum_strata))) {
@@ -38,7 +37,7 @@ class StratumManager
     public function getDefaultStratum()
     {
         // By default, use the last defined stratum (the highest-level one) as the default
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'Stratum:default',
             $this->last_registered_stratum
         );

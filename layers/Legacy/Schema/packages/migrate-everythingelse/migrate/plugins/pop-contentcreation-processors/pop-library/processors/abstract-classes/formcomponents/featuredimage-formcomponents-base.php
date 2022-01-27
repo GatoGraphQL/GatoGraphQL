@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoPSchema\Media\Facades\MediaTypeAPIFacade;
+use PoPCMSSchema\Media\Facades\MediaTypeAPIFacade;
 
 abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
 {
@@ -39,7 +38,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         // Hack: re-use multiple.tmpl
         $featuredimageinner = $this->getFeaturedimageinnerSubmodule($module);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = [
-            ModuleUtils::getModuleOutputName($featuredimageinner),
+            \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($featuredimageinner),
         ];
 
         return $ret;

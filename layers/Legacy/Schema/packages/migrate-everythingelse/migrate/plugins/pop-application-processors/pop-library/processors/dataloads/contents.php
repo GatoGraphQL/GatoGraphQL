@@ -1,11 +1,10 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
+use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -32,10 +31,9 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        // $vars = ApplicationState::getVars();
         return match($module[1]) {
             // The Page Content block uses whichever is the current page
-            self::MODULE_DATALOAD_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//$vars['route'],
+            self::MODULE_DATALOAD_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//\PoP\Root\App::getState('route'),
             self::MODULE_DATALOAD_AUTHOR_CONTENT => POP_ROUTE_DESCRIPTION,
             self::MODULE_DATALOAD_TAG_CONTENT => POP_ROUTE_DESCRIPTION,
             default => parent::getRelevantRoute($module, $props),
@@ -46,12 +44,11 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     {
         $ret = parent::getInnerSubmodules($module);
 
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:
                 // Add the Sidebar on the top
-                if ($sidebar = HooksAPIFacade::getInstance()->applyFilters(
+                if ($sidebar = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomContentBlocks:author:sidebar',
                     [PoP_Module_Processor_CustomUserLayoutSidebars::class, PoP_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL],
                     $module
@@ -71,11 +68,11 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
             case self::MODULE_DATALOAD_SINGLE_CONTENT:
                 // Add the Sidebar on the top
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $top_sidebar = [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST];
 
                 // Allow Events Manager to change the sidebar
-                if ($top_sidebar = HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomContentBlocks:single-sidebar:top', $top_sidebar, $post_id)) {
+                if ($top_sidebar = \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomContentBlocks:single-sidebar:top', $top_sidebar, $post_id)) {
                     $ret[] = $top_sidebar;
                 }
 
@@ -84,7 +81,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
                 $bottom_sidebar = [PoPCore_Module_Processor_Contents::class, PoPCore_Module_Processor_Contents::MODULE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL];
 
                 // Allow Events Manager to change the sidebar
-                if ($bottom_sidebar = HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomContentBlocks:single-sidebar:bottom', $bottom_sidebar, $post_id)) {
+                if ($bottom_sidebar = \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomContentBlocks:single-sidebar:bottom', $bottom_sidebar, $post_id)) {
                     $ret[] = $bottom_sidebar;
                 }
                 break;
@@ -106,14 +103,14 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     //     switch ($module[1]) {
     //         case self::MODULE_DATALOAD_AUTHOR_CONTENT:
     //         case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_TAG_CONTENT:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
 
     //         case self::MODULE_DATALOAD_SINGLE_CONTENT:
     //         case self::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT:
-    //             return CustomPostRouteNatures::CUSTOMPOST;
+    //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

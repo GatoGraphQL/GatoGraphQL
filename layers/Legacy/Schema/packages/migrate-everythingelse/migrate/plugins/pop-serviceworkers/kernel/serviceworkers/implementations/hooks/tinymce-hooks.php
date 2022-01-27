@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ServiceWorkers_Hooks_TinyMCE
 {
@@ -13,20 +12,20 @@ class PoP_ServiceWorkers_Hooks_TinyMCE
         $this->content_css = $this->externalPlugins = $this->plugins = $this->others = array();
 
         // Execute last one
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'teeny_mce_before_init',
             array($this, 'storeTinymceResources'),
             PHP_INT_MAX,
             1
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'tiny_mce_before_init',
             array($this, 'storeTinymceResources'),
             PHP_INT_MAX,
             1
         );
         
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_CacheResources:precache',
             array($this, 'getPrecacheList'),
             1000,
@@ -36,7 +35,7 @@ class PoP_ServiceWorkers_Hooks_TinyMCE
 
     protected function enable()
     {
-        return HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkers_Hooks_TinyMCE:enable', false);
+        return \PoP\Root\App::applyFilters('PoP_ServiceWorkers_Hooks_TinyMCE:enable', false);
     }
 
     public function storeTinymceResources($mceInit)

@@ -1,14 +1,13 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_PostCategoryLayouts_LayoutDataloadHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Application:TypeResolver_Posts:multilayout-keys',
             array($this, 'addMultilayoutKeys'),
             10,

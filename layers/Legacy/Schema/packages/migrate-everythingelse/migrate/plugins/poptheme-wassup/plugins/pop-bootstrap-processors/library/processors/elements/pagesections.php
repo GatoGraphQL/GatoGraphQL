@@ -1,6 +1,4 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 const POP_MODULEID_PAGESECTIONCONTAINERID_HOLE = 'ps-hole';
@@ -227,14 +225,14 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         }
 
         // The module must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadModule` can work
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
         $module_props = array(
             $moduleFullName => &$props[$moduleFullName],
         );
         switch ($module[1]) {
             case self::MODULE_PAGESECTION_BODYSIDEINFO:
                 // Allow the Sideinfo's permanent Events Calendar to be lazy-load
-                HooksAPIFacade::getInstance()->doAction(
+                \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:sideinfo',
                     $module,
                     array(&$module_props),
@@ -244,7 +242,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
 
             case self::MODULE_PAGESECTION_BODY:
                 // Allow for compatibility for the Users Carousel in the Homepage to not be lazy-load
-                HooksAPIFacade::getInstance()->doAction(
+                \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:main',
                     $module,
                     array(&$module_props),
@@ -253,7 +251,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 break;
 
             case self::MODULE_PAGESECTION_HOVER:
-                HooksAPIFacade::getInstance()->doAction(
+                \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:hover',
                     $module,
                     array(&$module_props),
@@ -262,7 +260,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 break;
 
             case self::MODULE_PAGESECTION_MODALS:
-                HooksAPIFacade::getInstance()->doAction(
+                \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomModalPageSections:get_props_block_initial:modals',
                     $module,
                     array(&$props),

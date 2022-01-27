@@ -9,7 +9,8 @@ use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\Filesyste
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
-use PoP\Engine\AppLoader;
+use PoP\RootWP\AppLoader;
+use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
 use RuntimeException;
@@ -356,19 +357,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \add_action(
             'plugins_loaded',
             function (): void {
-                App::initialize(new AppLoader());
+                App::initialize(
+                    new AppLoader(),
+                    new HookManager()
+                );
             },
             PluginLifecyclePriorities::INITIALIZE_APP
-        );
-        \add_action(
-            'plugins_loaded',
-            function (): void {
-                if ($this->inititalizationException !== null) {
-                    return;
-                }
-                $this->initialize();
-            },
-            PluginLifecyclePriorities::INITIALIZE_PLUGIN
         );
         \add_action(
             'plugins_loaded',
@@ -522,11 +516,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         try {
             // Boot all PoP components, from this plugin and all extensions
             $containerCacheConfiguration = $this->pluginInitializationConfiguration->getContainerCacheConfiguration();
-            App::getAppLoader()->bootApplication(
+            $appLoader = App::getAppLoader();
+            $appLoader->bootApplication(
                 $containerCacheConfiguration->cacheContainerConfiguration(),
                 $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
                 $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),
             );
+            $appLoader->bootApplicationComponents();
 
             // Custom logic
             $this->doBootApplication();

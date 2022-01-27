@@ -2,8 +2,8 @@
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 

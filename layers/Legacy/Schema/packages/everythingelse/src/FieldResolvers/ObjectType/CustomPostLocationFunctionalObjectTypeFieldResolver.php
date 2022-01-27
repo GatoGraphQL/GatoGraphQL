@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Locations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\Locations\FieldResolvers\ObjectType;
 
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
-use PoPSchema\Posts\Constants\InputNames;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
+use PoPCMSSchema\Posts\Constants\InputNames;
 
 class CustomPostLocationFunctionalObjectTypeFieldResolver extends AbstractLocationFunctionalObjectTypeFieldResolver
 {

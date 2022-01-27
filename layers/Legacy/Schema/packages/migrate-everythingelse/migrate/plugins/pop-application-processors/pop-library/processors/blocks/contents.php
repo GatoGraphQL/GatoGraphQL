@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_BlocksBase
 {
@@ -25,10 +25,9 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        // $vars = ApplicationState::getVars();
         return match($module[1]) {
             // The Page Content block uses whichever is the current page
-            self::MODULE_BLOCK_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//$vars['route'],
+            self::MODULE_BLOCK_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//\PoP\Root\App::getState('route'),
             self::MODULE_BLOCK_AUTHOR_CONTENT => POP_ROUTE_DESCRIPTION,
             self::MODULE_BLOCK_TAG_CONTENT => POP_ROUTE_DESCRIPTION,
             default => parent::getRelevantRoute($module, $props),
@@ -40,8 +39,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
-                $vars = ApplicationState::getVars();
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 return sprintf(
                     '<p class="text-center"><a href="%s">%s</a></p>',
@@ -55,18 +53,17 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
     public function getTitle(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTHOR_CONTENT:
             case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $userTypeAPI->getUserDisplayName($author);
 
             case self::MODULE_BLOCK_SINGLE_CONTENT:
             case self::MODULE_BLOCK_PAGE_CONTENT:
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $customPostTypeAPI->getTitle($post_id);
         }
 
@@ -129,10 +126,9 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLE_CONTENT:
-                $vars = ApplicationState::getVars();
-
+                
                 // Also append the post_status, so we can hide the bottomsidebar for draft posts
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $this->appendProp($module, $props, 'runtime-class', $customPostTypeAPI->getCustomPostType($post_id) . '-' . $post_id);
                 $this->appendProp($module, $props, 'runtime-class', $customPostTypeAPI->getStatus($post_id));
                 break;
@@ -161,15 +157,15 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     //         case self::MODULE_BLOCK_AUTHOR_CONTENT:
     //         case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
 
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_BLOCK_TAG_CONTENT:
 
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
 
     //         case self::MODULE_BLOCK_SINGLE_CONTENT:
 
-    //             return CustomPostRouteNatures::CUSTOMPOST;
+    //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUserMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class ContactUserMutationResolver extends AbstractMutationResolver
 {
@@ -54,7 +55,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data): void
     {
-        $this->getHooksAPI()->doAction('pop_contactuser', $form_data);
+        App::doAction('pop_contactuser', $form_data);
     }
 
     protected function doExecute($form_data)

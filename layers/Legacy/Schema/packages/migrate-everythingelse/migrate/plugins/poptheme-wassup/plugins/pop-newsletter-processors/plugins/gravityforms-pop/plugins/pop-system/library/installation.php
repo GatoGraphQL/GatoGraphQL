@@ -1,12 +1,11 @@
 <?php
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPTheme_Wassup_GF_Install_FormEntries
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'PoP:system-install',
             array($this, 'systemInstall')
         );

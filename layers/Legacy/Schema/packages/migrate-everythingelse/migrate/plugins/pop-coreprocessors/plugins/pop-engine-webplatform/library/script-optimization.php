@@ -1,8 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 // Add the jQuery script after displaying the page HTML, so move it out of the header
-HooksAPIFacade::getInstance()->addAction('init', 'popReorderHeadScripts', 10000);
+\PoP\Root\App::addAction('init', 'popReorderHeadScripts', 10000);
 function popReorderHeadScripts()
 {
     
@@ -11,12 +10,12 @@ function popReorderHeadScripts()
         if (PoP_SSR_ServerUtils::includeScriptsAfterHtml()) {
             // Move the head scripts to the footer
             // Set in file wp-includes/default-filters.php
-            HooksAPIFacade::getInstance()->removeAction('wp_head', 'wp_print_head_scripts', 9);
-            HooksAPIFacade::getInstance()->addAction('wp_footer', 'wp_print_head_scripts', 1);
+            \PoP\Root\App::removeAction('wp_head', 'wp_print_head_scripts', 9);
+            \PoP\Root\App::addAction('wp_footer', 'wp_print_head_scripts', 1);
 
             // Move the `window._wpemojiSettings` <script> to the footer
-            HooksAPIFacade::getInstance()->removeAction('wp_head', 'print_emoji_detection_script', 7);
-            HooksAPIFacade::getInstance()->addAction('wp_footer', 'print_emoji_detection_script', 0);
+            \PoP\Root\App::removeAction('wp_head', 'print_emoji_detection_script', 7);
+            \PoP\Root\App::addAction('wp_footer', 'print_emoji_detection_script', 0);
         }
     }
 }

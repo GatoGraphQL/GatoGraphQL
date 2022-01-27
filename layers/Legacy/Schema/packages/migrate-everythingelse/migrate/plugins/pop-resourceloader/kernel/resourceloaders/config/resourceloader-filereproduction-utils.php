@@ -1,11 +1,11 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Routing\RouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Pages\Routing\RequestNature as PageRequestNature;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 define ('POP_RESOURCELOADERIDENTIFIER_FORMAT', 'f:');
 define ('POP_RESOURCELOADERIDENTIFIER_ROUTE', 't:');
@@ -50,7 +50,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
         $path_resources = array(
             'single' => array(),
             'page' => array(),
-            'standard' => array(),
+            'generic' => array(),
         );
 
         // Extract the resources from the current vars: needed when doing generate_bundlefile_on_runtime()
@@ -59,27 +59,26 @@ class PoP_ResourceLoader_FileReproduction_Utils {
             $options['use-engine-entrymodule-props'] = true;
             $resources = PoP_ResourceLoaderProcessorUtils::getResourcesFromCurrentVars($modulefilter, $options);
 
-            $vars = ApplicationState::getVars();
-            $nature = $vars['nature'];
+            $nature = \PoP\Root\App::getState('nature');
 
             $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
 
             // Assign it under the appropriate level in the object
             switch ($nature) {
 
-                case UserRouteNatures::USER:
-                case RouteNatures::HOME:
-                case TagRouteNatures::TAG:
-                case RouteNatures::NOTFOUND:
+                case UserRequestNature::USER:
+                case RequestNature::HOME:
+                case TagRequestNature::TAG:
+                case RequestNature::NOTFOUND:
 
                     $flat_resources[$nature][$key] = $resources;
                     break;
 
-                case RouteNatures::STANDARD:
-                case PageRouteNatures::PAGE:
-                case CustomPostRouteNatures::CUSTOMPOST:
+                case RequestNature::GENERIC:
+                case PageRequestNature::PAGE:
+                case CustomPostRequestNature::CUSTOMPOST:
 
-                    $path = GeneralUtils::maybeAddTrailingSlash(\PoPSchema\Posts\Engine_Utils::getCustomPostPath($vars['routing-state']['queried-object-id'], true));
+                    $path = GeneralUtils::maybeAddTrailingSlash(\PoPCMSSchema\Posts\Engine_Utils::getCustomPostPath(\PoP\Root\App::getState(['routing', 'queried-object-id']), true));
                     $path_resources[$nature][$path][$key] = $resources;
                     break;
             }
@@ -105,7 +104,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
             $path_resources = array(
                 'single' => $natureresources_manager->getSingleResources($modulefilter, $options),
                 'page' => $natureresources_manager->getPageResources($modulefilter, $options),
-                'standard' => $natureresources_manager->getStandardNatureResources($modulefilter, $options),
+                'generic' => $natureresources_manager->getGenericNatureResources($modulefilter, $options),
             );
         }
 

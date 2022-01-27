@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 function removeScheme($domain)
 {
@@ -30,14 +29,14 @@ function arrayFlatten(array $array, bool $firstLevelOnly = false)
 
 function doingPost()
 {
-    return ('POST' == $_SERVER['REQUEST_METHOD']);
+    return ('POST' === \PoP\Root\App::server('REQUEST_METHOD'));
 }
 
 // Returns true if this is an Ajax call
 function doingAjax()
 {
     $doingAjax = defined('DOING_AJAX') && DOING_AJAX;
-    return HooksAPIFacade::getInstance()->applyFilters('gd_doing_ajax', $doingAjax);
+    return \PoP\Root\App::applyFilters('gd_doing_ajax', $doingAjax);
 }
 
 function multiexplode($delimiters, $string)

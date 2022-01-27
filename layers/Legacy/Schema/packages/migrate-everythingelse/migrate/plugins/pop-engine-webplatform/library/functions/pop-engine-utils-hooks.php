@@ -1,11 +1,11 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoP_WebPlatformEngine_UtilsHooks
 {
     /**
+     * @todo Migrate to AppStateProvider
      * @param array<array> $vars_in_array
      */
     public static function addVars(array $vars_in_array): void
@@ -17,7 +17,7 @@ class PoP_WebPlatformEngine_UtilsHooks
             // Comment Leo 19/11/2017: page ID POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL must be set at this plugin level, not on pop-serviceworkers
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
             $vars = &$vars_in_array[0];
-            $vars['nature'] = RouteNatures::STANDARD;//PageRouteNatures::PAGE;
+            $vars['nature'] = RequestNature::GENERIC;//PageRequestNature::PAGE;
             $vars['route'] = POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL;
         }
     }
@@ -40,5 +40,12 @@ class PoP_WebPlatformEngine_UtilsHooks
 /**
  * Initialization
  */
-HooksAPIFacade::getInstance()->addAction('ApplicationState:addVars', array(PoP_WebPlatformEngine_UtilsHooks::class, 'addVars'), 1, 1); // Priority 1: execute immediately after PoP_Application_Engine_Utils, which has priority 0
-HooksAPIFacade::getInstance()->addFilter('ApplicationState:queried-object', array(PoP_WebPlatformEngine_UtilsHooks::class, 'getQueriedObject'));
+\PoP\Root\App::addAction('ApplicationState:addVars', array(PoP_WebPlatformEngine_UtilsHooks::class, 'addVars'), 1, 1); // Priority 1: execute immediately after PoP_Application_Engine_Utils, which has priority 0
+/**
+ * Warning: This hook was removed!
+ * Must override this logic via an AppStateProvider:
+ *
+ *   $state['routing']['queried-object'] = $queried_object;
+ *   $state['routing']['queried-object-id'] = $queried_object_id; 
+ */
+\PoP\Root\App::addFilter('ApplicationState:queried-object', array(PoP_WebPlatformEngine_UtilsHooks::class, 'getQueriedObject'));

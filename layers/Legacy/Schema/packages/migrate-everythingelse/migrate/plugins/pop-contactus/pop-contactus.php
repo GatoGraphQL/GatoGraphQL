@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Contact Us
 Description: Implementation of Contact Us for PoP
@@ -20,7 +19,7 @@ class PoP_ContactUs
     {
 
         // Priority: after PoP Application
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888310);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888310);
     }
     public function init()
     {

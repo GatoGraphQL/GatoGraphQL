@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
  * navigation.php
  */
-HooksAPIFacade::getInstance()->addFilter('route:icon', 'popLocationpostlinkscreationRouteIcon', 10, 3);
+\PoP\Root\App::addFilter('route:icon', 'popLocationpostlinkscreationRouteIcon', 10, 3);
 function popLocationpostlinkscreationRouteIcon($icon, $route, $html = true)
 {
     switch ($route) {
@@ -18,7 +17,7 @@ function popLocationpostlinkscreationRouteIcon($icon, $route, $html = true)
     return processIcon($icon, $fontawesome, $html);
 }
 
-HooksAPIFacade::getInstance()->addFilter('route:title', 'popLocationpostlinkscreationNavigationRouteTitle', 10, 2);
+\PoP\Root\App::addFilter('route:title', 'popLocationpostlinkscreationNavigationRouteTitle', 10, 2);
 function popLocationpostlinkscreationNavigationRouteTitle($title, $route)
 {
     $titles = [

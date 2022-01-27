@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\Application\HelperAPIFactory;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 
 class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
@@ -37,7 +38,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         }
 
         // Allow Organik Fundraising to override the content
-        $content = $this->getHooksAPI()->applyFilters(
+        $content = App::applyFilters(
             'GD_InviteUsers:emailcontent',
             $content,
             $sender_html,
@@ -91,7 +92,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         }
 
         // Allow Organik Fundraising to override the message
-        return $this->getHooksAPI()->applyFilters(
+        return App::applyFilters(
             'GD_InviteUsers:emailsubject',
             $subject,
             $sender_name

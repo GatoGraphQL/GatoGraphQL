@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\PersistedQueries;
+namespace PoPAPI\API\PersistedQueries;
 
-use PoP\API\Facades\PersistedQueryManagerFacade;
+use PoPAPI\API\Facades\PersistedQueryManagerFacade;
 
 class PersistedQueryUtils
 {

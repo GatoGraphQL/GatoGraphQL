@@ -1,12 +1,11 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Routing\URLParams;
+use PoP\Root\Constants\Params;
 
 class PoP_SocialNetworkWebPlatform_CDN_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:noParamValues',
             array($this, 'getThumbprintNoparamvalues'),
             10,
@@ -39,7 +38,7 @@ class PoP_SocialNetworkWebPlatform_CDN_Hooks
             foreach ($routes as $route) {
                 // Array of: elem[0] = URL param, elem[1] = value
                 $noparamvalues[] = array(
-                    URLParams::ROUTE,
+                    Params::ROUTE,
                     $route
                 );
             }

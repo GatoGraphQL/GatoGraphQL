@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\UserRolesWP\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\UserRolesWP\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\UserRolesWP\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'

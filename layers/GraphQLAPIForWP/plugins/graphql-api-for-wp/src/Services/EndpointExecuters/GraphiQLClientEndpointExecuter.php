@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\ClientEndpointAnnotatorInt
 use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\GraphiQLClientEndpointAnnotator;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 
-class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
+class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter
 {
     private ?CustomEndpointGraphiQLClient $customEndpointGraphiQLClient = null;
     private ?GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator = null;

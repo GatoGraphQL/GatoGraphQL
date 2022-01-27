@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\UserMeta\Utils;
+use PoP\Root\App;
+use PoPCMSSchema\UserMeta\Utils;
 
 class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationResolver
 {
@@ -13,8 +13,7 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
     {
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
-            $vars = ApplicationState::getVars();
-            $user_id = $vars['global-userstate']['current-user-id'];
+            $user_id = App::getState('current-user-id');
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user does currently follow that user
@@ -35,7 +34,7 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->getHooksAPI()->doAction('gd_unfollowuser', $target_id, $form_data);
+        App::doAction('gd_unfollowuser', $target_id, $form_data);
     }
 
     // protected function updateValue($value, $form_data) {
@@ -46,8 +45,7 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
     // }
     protected function update($form_data): string | int
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = App::getState('current-user-id');
         $target_id = $form_data['target_id'];
 
         // Update values

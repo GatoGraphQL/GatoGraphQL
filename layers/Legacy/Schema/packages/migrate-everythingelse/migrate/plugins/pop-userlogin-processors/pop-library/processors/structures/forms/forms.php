@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
 {

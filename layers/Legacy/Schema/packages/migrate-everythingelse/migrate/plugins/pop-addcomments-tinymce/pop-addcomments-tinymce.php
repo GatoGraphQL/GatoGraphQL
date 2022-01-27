@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Add Comments with TinyMCE
 Description: Implementation of Add Comments with TinyMCE for PoP
@@ -20,7 +19,7 @@ class PoP_AddCommentsTinyMCE
     {
 
         // Priority: after PoP Content Creation and PoP Add Comments
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888355);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888355);
     }
     public function init()
     {

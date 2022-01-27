@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPTheme_Wassup_AE_GF_NewsletterRecipientsHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoPTheme_Wassup_AE_NewsletterRecipientsBase:recipients',
             array($this, 'getRecipients')
         );

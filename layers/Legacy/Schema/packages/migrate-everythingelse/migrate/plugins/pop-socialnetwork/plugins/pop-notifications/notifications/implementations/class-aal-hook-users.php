@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -15,8 +14,8 @@ class PoP_SocialNetwork_Notifications_Hook_Users /* extends AAL_Hook_Base*/
     {
 
         // Follows/Unfollows user
-        HooksAPIFacade::getInstance()->addAction('gd_followuser', array($this, 'followsUser'));
-        HooksAPIFacade::getInstance()->addAction('gd_unfollowuser', array($this, 'unfollowsUser'));
+        \PoP\Root\App::addAction('gd_followuser', array($this, 'followsUser'));
+        \PoP\Root\App::addAction('gd_unfollowuser', array($this, 'unfollowsUser'));
 
         // parent::__construct();
     }
@@ -33,13 +32,12 @@ class PoP_SocialNetwork_Notifications_Hook_Users /* extends AAL_Hook_Base*/
 
     public function followunfollowsUser($user_id, $action)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         PoP_Notifications_Utils::insertLog(
             array(
                 'action'      => $action,
                 'object_type' => 'User',
-                'user_id'     => $vars['global-userstate']['current-user-id'],
+                'user_id'     => \PoP\Root\App::getState('current-user-id'),
                 'object_id'   => $user_id,
                 'object_name' => $userTypeAPI->getUserDisplayName($user_id),
             )

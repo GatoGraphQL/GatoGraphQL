@@ -1,7 +1,7 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\Facades\FileStoreFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ResourceLoader_FileGenerator_BundleFilesBase {
 
@@ -231,7 +231,7 @@ class PoP_ResourceLoader_FileGenerator_BundleFilesBase {
 
         // If we are generating the bundle(group) files on runtime, then trigger a hook to have these uploaded to S3
         if ($options['generate-item-triggerhook'] ?? null) {
-            HooksAPIFacade::getInstance()->doAction(
+            \PoP\Root\App::doAction(
                 'PoP_ResourceLoader_FileGenerator_BundleFilesBase:generate-item',
                 $file->getFilepath(),
                 $file->getGeneratedReferencedFiles(),
@@ -273,8 +273,7 @@ class PoP_ResourceLoader_FileGenerator_BundleFilesBase {
 
             // If it is an empty file, use the website version. This makes sure that an entry for this file is created in files bundle(group)-versions.json,
             // so that an empty file is not re-generated each time when using generate_bundlefile_on_runtime()
-            $vars = ApplicationState::getVars();
-            $version = $vars['version'];
+            $version = ApplicationInfoFacade::getInstance()->getVersion();
         }
 
         // Save it in hard disk for later use

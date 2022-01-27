@@ -1,20 +1,19 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Locations_PageSectionHooks
 {
     public function __construct()
     {
-        // HooksAPIFacade::getInstance()->addFilter(
+        // \PoP\Root\App::addFilter(
         //     'PoP_Module_Processor_CustomModalPageSections:getDialogClasses:modals',
         //     array($this, 'modalDialogClasses')
         // );
-        // HooksAPIFacade::getInstance()->addFilter(
+        // \PoP\Root\App::addFilter(
         //     'PoP_Module_Processor_CustomModalPageSections:getHeaderTitles:modals',
         //     array($this, 'modalHeaderTitles')
         // );
-        // HooksAPIFacade::getInstance()->addFilter(
+        // \PoP\Root\App::addFilter(
         //     'PoP_Module_Processor_CustomModalPageSections:getBodyClasses:modals',
         //     array($this, 'modalBodyClasses')
         // );

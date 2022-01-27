@@ -5,14 +5,13 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
-use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
+use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends AbstractObjectTypeFieldResolver
 {
@@ -104,7 +103,6 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $vars = ApplicationState::getVars();
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -167,7 +165,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                     case AAL_POP_ACTION_COMMENT_ADDED:
                         // TODO: Integrate with `CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()`
                         $comment = $commentTypeAPI->getComment($notification->object_id);
-                        $user_id = $vars['global-userstate']['current-user-id'];
+                        $user_id = \PoP\Root\App::getState('current-user-id');
 
                         // Change the message if the comment is a response to the user's comment
                         $message = TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> commented in %2$s <strong>%3$s</strong>', 'pop-notifications');
@@ -180,7 +178,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                         }
 
                         // Allow PoP Social Network to make the message more precise
-                        $message = HooksAPIFacade::getInstance()->applyFilters(
+                        $message = \PoP\Root\App::applyFilters(
                             'PoP_AddComments_DataLoad_TypeResolver_Notifications_Hook:comment-added:message',
                             $message,
                             $notification

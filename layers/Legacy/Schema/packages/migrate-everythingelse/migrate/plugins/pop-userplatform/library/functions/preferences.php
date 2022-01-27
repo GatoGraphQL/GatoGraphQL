@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_UserPlatform_Preferences
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'popcms:userRegister',
             array($this, 'grantDefaultPreferences'),
             10,
@@ -18,7 +17,7 @@ class PoP_UserPlatform_Preferences
      */
     protected function getDefaultPreferencesValues()
     {
-        return HooksAPIFacade::getInstance()->applyFilters('PoP_UserPlatform_Preferences:default:values', array());
+        return \PoP\Root\App::applyFilters('PoP_UserPlatform_Preferences:default:values', array());
     }
 
     /**
@@ -36,7 +35,7 @@ class PoP_UserPlatform_Preferences
     {
         $preferences_values = $this->getDefaultPreferencesValues();
         foreach ($user_ids as $user_id) {
-            \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $preferences_values);
+            \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $preferences_values);
         }
     }
 }

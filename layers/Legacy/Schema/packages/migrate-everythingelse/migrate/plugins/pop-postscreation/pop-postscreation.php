@@ -6,7 +6,6 @@ Description: The foundation for a PoP Posts Creation
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_PostsCreation
     {
 
         // Priority: after PoP Related Posts
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function init()
     {

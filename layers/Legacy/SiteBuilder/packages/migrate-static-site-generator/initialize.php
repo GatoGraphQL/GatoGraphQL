@@ -6,7 +6,7 @@ $class = (new class() extends \PoP\Root\Component\AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [];
     }
@@ -14,7 +14,7 @@ $class = (new class() extends \PoP\Root\Component\AbstractComponent
     /**
      * Boot component
      */
-    public static function beforeBoot(): void
+    public function beforeBoot(): void
     {
         parent::beforeBoot();
 
@@ -22,5 +22,5 @@ $class = (new class() extends \PoP\Root\Component\AbstractComponent
         require_once 'migrate/pop-static-site-generator.php';
     }
 });
-\PoP\Root\Managers\ComponentManager::register(get_class($class));
+\PoP\Root\StateManagers\ComponentManager::register(get_class($class));
 $class::initialize();

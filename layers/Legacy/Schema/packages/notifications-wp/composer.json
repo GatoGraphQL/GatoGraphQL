@@ -1,8 +1,8 @@
 {
-    "name": "pop-schema/notifications-wp",
+    "name": "pop-cms-schema/notifications-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Notifications\"",
-    "keywords": ["PoP", "notifications-wp"],
+    "keywords": ["PHP", "PoP", "notifications-wp"],
     "homepage": "https://github.com/PoPSchema/notifications-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
@@ -16,13 +16,13 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/notifications": "^0.8",
-        "getpop/engine-wp": "^0.8"
+        "pop-cms-schema/notifications": "^0.9",
+        "pop-cms-schema/schema-commons-wp": "^0.9"
     },
     "require-dev": {
-        "phpunit/phpunit": ">=9.3",
+        "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.11",
-        "squizlabs/php_codesniffer": "^3.0",
+        "squizlabs/php_codesniffer": "^3.6",
         "szepeviktor/phpstan-wordpress": "^0.7",
         "johnpbloch/wordpress": ">=5.5"
     },
@@ -49,6 +49,7 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {}
     }
 }

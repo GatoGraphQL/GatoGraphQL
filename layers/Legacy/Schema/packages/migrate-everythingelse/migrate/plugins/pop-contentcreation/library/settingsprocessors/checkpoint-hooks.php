@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ContentCreation_SettingsProcessor_CheckpointHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'ModuleProcessor:checkpoints',
             array($this, 'overrideCheckpoints')
         );

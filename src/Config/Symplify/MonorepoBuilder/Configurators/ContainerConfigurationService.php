@@ -11,6 +11,7 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PackageOrganizationDataS
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PHPStanDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\SkipDowngradeTestPathsDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
@@ -54,6 +55,16 @@ class ContainerConfigurationService
             $parameters->set(
                 CustomOption::PLUGIN_CONFIG_ENTRIES,
                 $pluginConfig->getPluginConfigEntries()
+            );
+        }
+
+        /**
+         * Skip files from testing for downgrades
+         */
+        if ($skipDowngradeTestFilesConfig = $this->getSkipDowngradeTestPathsDataSource($this->rootDirectory)) {
+            $parameters->set(
+                CustomOption::SKIP_DOWNGRADE_TEST_FILES,
+                $skipDowngradeTestFilesConfig->getSkipDowngradeTestPaths()
             );
         }
 
@@ -133,6 +144,11 @@ class ContainerConfigurationService
     protected function getPluginDataSource(): ?PluginDataSource
     {
         return new PluginDataSource($this->rootDirectory);
+    }
+
+    protected function getSkipDowngradeTestPathsDataSource(): ?SkipDowngradeTestPathsDataSource
+    {
+        return new SkipDowngradeTestPathsDataSource($this->rootDirectory);
     }
 
     protected function getDowngradeRectorDataSource(): ?DowngradeRectorDataSource

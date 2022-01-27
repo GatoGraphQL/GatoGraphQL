@@ -1,10 +1,10 @@
 <?php
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPostMedia\Facades\CustomPostMediaTypeAPIFacade;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
-use PoPSchema\Media\Facades\MediaTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPostMedia\Facades\CustomPostMediaTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
+use PoPCMSSchema\Media\Facades\MediaTypeAPIFacade;
 
 class GD_ContentCreation_Media_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends AbstractObjectTypeFieldResolver
 {
@@ -25,7 +25,7 @@ class GD_ContentCreation_Media_DataLoad_ObjectTypeFieldResolver_FunctionalPosts 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-			'featuredImageAttrs' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver::class,
+			'featuredImageAttrs' => \PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

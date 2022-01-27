@@ -1,12 +1,11 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 class PoP_CommonAutomatedEmails_EM_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoPTheme_Wassup_AE_Module_Processor_ContentDataloads:singlepost:sidebar',
             array($this, 'getSidebarLayout'),
             10,

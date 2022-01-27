@@ -1,12 +1,11 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_AutomatedEmails_WebPlatform_ResourceLoader_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter('getResourcesIncludeType', array($this, 'getResourcesIncludeType'));
+        \PoP\Root\App::addFilter('getResourcesIncludeType', array($this, 'getResourcesIncludeType'));
     }
 
     public function getResourcesIncludeType($type)
@@ -22,9 +21,8 @@ class PoP_AutomatedEmails_WebPlatform_ResourceLoader_Hooks
 
     protected function isAutomatedEmailRoute()
     {
-        $vars = ApplicationState::getVars();
-        if ($vars['routing-state']['is-standard']) {
-            $route = $vars['route'];
+        if (\PoP\Root\App::getState(['routing', 'is-generic'])) {
+            $route = \PoP\Root\App::getState('route');
             $automatedemail_routes = PoP_AutomatedEmails_WebPlatform_ResourceLoader_Utils::getAutomatedEmailRoutes();
             return in_array($route, $automatedemail_routes);
         }

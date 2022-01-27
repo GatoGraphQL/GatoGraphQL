@@ -6,10 +6,10 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
-use PoPSchema\Media\Facades\MediaTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
+use PoPCMSSchema\Media\Facades\MediaTypeAPIFacade;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFieldResolver
@@ -49,7 +49,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
 
         // Add the image description
         if ($add_description && $img) {
-            $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
+            $cmsmediaapi = \PoPCMSSchema\Media\FunctionAPIFactory::getInstance();
             if ($description = $cmsmediaapi->getMediaDescription($thumb_id)) {
                 $img['description'] = $description;
             }
@@ -77,8 +77,8 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'favicon' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver::class,
-            'thumb' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver::class,
+            'favicon' => \PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver::class,
+            'thumb' => \PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver::class,
             'thumbFullSrc' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
             'topics' => \PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'hasTopics' => \PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
@@ -187,7 +187,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
                 return gdGetPostauthors($objectTypeResolver->getID($post));
 
             case 'topics':
-                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_CATEGORIES);
+                return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_CATEGORIES);
 
             case 'hasTopics':
                 $topics = $objectTypeResolver->resolveValue($post, 'topics', $variables, $expressions, $options);
@@ -199,7 +199,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
                 return false;
 
             case 'appliesto':
-                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_APPLIESTO);
+                return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_APPLIESTO);
 
             case 'hasAppliesto':
                 $appliesto = $objectTypeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options);

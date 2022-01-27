@@ -6,7 +6,6 @@ Description: Implementation of PoP Master Collection Processors
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_MasterCollectionProcessors
     {
 
         // Priority: new section, after PoP Base Collection Processors section
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888700);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888700);
     }
     public function init()
     {

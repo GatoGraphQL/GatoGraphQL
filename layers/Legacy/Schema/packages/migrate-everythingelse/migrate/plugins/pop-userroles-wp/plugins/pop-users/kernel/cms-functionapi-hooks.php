@@ -1,12 +1,11 @@
 <?php
-namespace PoPSchema\UserRoles\WP;
-use PoP\Hooks\Facades\HooksAPIFacade;
+namespace PoPCMSSchema\UserRoles\WP;
 
 class FunctionAPIHooks {
 
 	public function __construct() {
 	
-		HooksAPIFacade::getInstance()->addFilter(
+		\PoP\Root\App::addFilter(
 		    'CMSAPI:users:query',
 		    [$this, 'convertUsersQuery'],
 		    10,

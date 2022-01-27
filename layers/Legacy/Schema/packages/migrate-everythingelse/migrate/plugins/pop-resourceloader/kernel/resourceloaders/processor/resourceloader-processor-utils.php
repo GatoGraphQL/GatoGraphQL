@@ -1,22 +1,22 @@
 <?php
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
-use PoP\Routing\RouteNatures;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Pages\Facades\PageTypeAPIFacade;
-use PoPSchema\Pages\Routing\PathUtils;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
+use PoPCMSSchema\Pages\Routing\PathUtils;
+use PoPCMSSchema\Pages\Routing\RequestNature as PageRequestNature;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_ResourceLoaderProcessorUtils {
 
@@ -128,7 +128,7 @@ class PoP_ResourceLoaderProcessorUtils {
                     foreach ($vars_properties as $vars_properties_set) {
                         $conditions = $vars_properties_set['conditions'];
                         // Add the format under the return variable
-                        $format = $conditions['format'] ?? \PoP\ComponentModel\Constants\Values::DEFAULT;
+                        $format = $conditions['format'] ?? \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT;
                         if (!in_array($format, $route_formats[$nature][$route])) {
                             $route_formats[$nature][$route][] = $format;
                         }
@@ -141,8 +141,6 @@ class PoP_ResourceLoaderProcessorUtils {
 
     public static function addResourcesFromSettingsprocessors($modulefilter, &$resources, $nature, $ids = array(), $merge = false, $options = array()) {
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
         // Keep the original values in the $vars, since they'll need to be changed to pretend we are in a different $request
         $vars = &ApplicationState::$vars;
 
@@ -153,7 +151,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
             // If there is more than one page, then add the tabs component (eg: feeds)
             // If there is only one page defined, then there is no need for the tabs (eg: homepage)
-            // $add_tabs = ($nature == RouteNatures::STANDARD/*PageRouteNatures::PAGE*/) ? false : count($route_formats) > 1;
+            // $add_tabs = ($nature == RequestNature::GENERIC/*PageRequestNature::PAGE*/) ? false : count($route_formats) > 1;
             $add_tabs = count($route_formats) > 1;
             foreach ($route_formats as $route => $formats) {
 
@@ -164,7 +162,7 @@ class PoP_ResourceLoaderProcessorUtils {
                         'format' => $format,
                     );
                     $original_layouts = array();
-                    if ($nature == RouteNatures::STANDARD/*PageRouteNatures::PAGE*/) {
+                    if ($nature == RequestNature::GENERIC/*PageRequestNature::PAGE*/) {
 
                         $ids = array(
                             $route,
@@ -176,7 +174,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                         // If this tab is the default one, an entry with no tab must also be created
                         // if ($route == RequestUtils::getNatureDefaultPage($nature)) {
-                        if ($format == \PoP\ComponentModel\Constants\Values::DEFAULT) {
+                        if ($format == \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT) {
                             $item_options['is-default-route'] = true;
                         }
                     }
@@ -299,9 +297,9 @@ class PoP_ResourceLoaderProcessorUtils {
                 'route',
                 'target',
                 'dataoutputitems',
-                'datasources',
+                'datasourceselector',
                 // Nature
-                'routing-state',
+                'routing',
             ),
             array_unique(array_keys($extra_vars))
         );
@@ -312,7 +310,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // Obtain the key under which to add the resources, which is a combination of components 'format', 'route' and 'target'
         // This code is replicated in function `loadResources` in resourceloader.js
         $params = array();
-        $format = $components['format'] ?? ($loadingSite ? '' : \PoP\ComponentModel\Constants\Values::DEFAULT);
+        $format = $components['format'] ?? ($loadingSite ? '' : \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT);
         $route = $components['route'];
 
         // Targets special cases: certain formats (eg: Navigator) are used only from a corresponding target
@@ -324,7 +322,7 @@ class PoP_ResourceLoaderProcessorUtils {
         if ($components['target'] ?? null) {
             $target = $components['target'];
         } else {
-            $format_targets = HooksAPIFacade::getInstance()->applyFilters(
+            $format_targets = \PoP\Root\App::applyFilters(
                 'PoP_ResourceLoaderProcessorUtils:resources-from-current-vars:format-targets',
                 array()
             );
@@ -335,9 +333,9 @@ class PoP_ResourceLoaderProcessorUtils {
                 // instead of "{}", which may make the JS produce an error
                 $target = $format_targets[$format];
                 $duplicate_as_default_format = true;
-                // $format = \PoP\ComponentModel\Constants\Values::DEFAULT;
+                // $format = \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT;
             } else {
-                $target = \PoP\ComponentModel\Constants\Targets::MAIN;
+                $target = \PoP\ConfigurationComponentModel\Constants\Targets::MAIN;
             }
         }
 
@@ -378,27 +376,27 @@ class PoP_ResourceLoaderProcessorUtils {
             \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             \PoP\ComponentModel\Constants\DataOutputItems::SESSION,
         );
-        $vars['datasources'] = \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST;
+        $vars['datasourceselector'] = \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST;
         $vars['format'] = $format;
         $vars['route'] = $route;
         $vars['target'] = $target;
-        // $vars['routing-state'] = array();
+        // $vars['routing'] = array();
         // ApplicationState::setNatureInGlobalState();
 
         // Save the list of all the paths. It will be needed later,
         // to add the resources for the default tabs for 'single'
         $paths = array();
 
-        if ($nature == PageRouteNatures::PAGE) {
+        if ($nature == PageRequestNature::PAGE) {
             // For the page nature, we must save the resources under the page path,
             // for all pages in the website
             foreach ($ids as $page_id) {
                 // Allow to set the extra vars
                 self::setExtraVarsProperties($vars, $extra_vars, $page_id);
 
-                $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $pageTypeAPI->getPage($page_id);
-                $vars['routing-state']['queried-object-id'] = $page_id;
+                $vars['routing'] = [];
+                $vars['routing']['queried-object'] = $pageTypeAPI->getPage($page_id);
+                $vars['routing']['queried-object-id'] = $page_id;
                 ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources,
@@ -417,9 +415,9 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // Reset the cache
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == RouteNatures::STANDARD) {
+        } elseif ($nature == RequestNature::GENERIC) {
 
-            $vars['routing-state'] = [];
+            $vars['routing'] = [];
             ApplicationState::augmentVarsProperties();
 
             // For the page nature, we must save the resources under the page path,
@@ -450,16 +448,16 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // Reset the cache
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == CustomPostRouteNatures::CUSTOMPOST) {
+        } elseif ($nature == CustomPostRequestNature::CUSTOMPOST) {
 
             foreach ($ids as $post_id) {
 
                 // Allow to set the extra vars
                 self::setExtraVarsProperties($vars, $extra_vars, $post_id);
 
-                $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $customPostTypeAPI->getCustomPost($post_id);
-                $vars['routing-state']['queried-object-id'] = $post_id;
+                $vars['routing'] = [];
+                $vars['routing']['queried-object'] = $customPostTypeAPI->getCustomPost($post_id);
+                $vars['routing']['queried-object-id'] = $post_id;
                 ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
@@ -471,26 +469,26 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 // For the single nature, we must save the resources under the category path,
                 // for all the categories in the website
-                $path = GeneralUtils::maybeAddTrailingSlash(\PoPSchema\Posts\Engine_Utils::getCustomPostPath($post_id, true));
+                $path = GeneralUtils::maybeAddTrailingSlash(\PoPCMSSchema\Posts\Engine_Utils::getCustomPostPath($post_id, true));
                 $paths[] = $path;
 
                 self::addResourcesFromCurrentLoop($modulefilter, $resources[$path], $key, $merge, $options);
 
-                // // We need to delete the cache, because PoP_VarsUtils::getModelInstanceComponentsFromVars() doesn't have all the information needed
+                // // We need to delete the cache, because PoP_VarsUtils::getModelInstanceComponentsFromAppState() doesn't have all the information needed
                 // // Eg: because the categories are not in $vars, it can't tell the difference between past and future events,
                 // // or from 2 posts with different category
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == UserRouteNatures::USER) {
+        } elseif ($nature == UserRequestNature::USER) {
 
             foreach ($ids as $author) {
 
                 // Allow to set the extra vars: "source" => "community"/"organization", with the value set under the author id
                 self::setExtraVarsProperties($vars, $extra_vars, $author);
 
-                $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $userTypeAPI->getUserById($author);
-                $vars['routing-state']['queried-object-id'] = $author;
+                $vars['routing'] = [];
+                $vars['routing']['queried-object'] = $userTypeAPI->getUserById($author);
+                $vars['routing']['queried-object-id'] = $author;
                 ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
@@ -505,7 +503,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // Reset the cache
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == TagRouteNatures::TAG) {
+        } elseif ($nature == TagRequestNature::TAG) {
 
             // // Commented, because there is no difference in configuration for any particular tag,
             // // so we never inquire the current tag for obtaining the configuration. So no need for this
@@ -514,9 +512,9 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Allow to set the extra vars
                 self::setExtraVarsProperties($vars, $extra_vars, $tag_id);
 
-                $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $postTagTypeAPI->getTag($tag_id);
-                $vars['routing-state']['queried-object-id'] = $tag_id;
+                $vars['routing'] = [];
+                $vars['routing']['queried-object'] = $postTagTypeAPI->getTag($tag_id);
+                $vars['routing']['queried-object-id'] = $tag_id;
                 ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
@@ -531,9 +529,9 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // Reset the cache
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == RouteNatures::HOME) {
+        } elseif ($nature == RequestNature::HOME) {
 
-            $vars['routing-state'] = [];
+            $vars['routing'] = [];
             ApplicationState::augmentVarsProperties();
 
             // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
@@ -548,9 +546,9 @@ class PoP_ResourceLoaderProcessorUtils {
 
             // // Reset the cache
             // $pop_module_processor_runtimecache->deleteCache();
-        } elseif ($nature == RouteNatures::NOTFOUND) {
+        } elseif ($nature == RequestNature::NOTFOUND) {
 
-            $vars['routing-state'] = [];
+            $vars['routing'] = [];
             ApplicationState::augmentVarsProperties();
 
             // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
@@ -572,24 +570,24 @@ class PoP_ResourceLoaderProcessorUtils {
         if (!$loadingSite) {
 
             $flat_natures = array(
-                RouteNatures::HOME,
-                TagRouteNatures::TAG,
-                UserRouteNatures::USER,
+                RequestNature::HOME,
+                TagRequestNature::TAG,
+                UserRequestNature::USER,
             );
             $path_natures = array(
-                CustomPostRouteNatures::CUSTOMPOST,
-                PageRouteNatures::PAGE,
-                RouteNatures::STANDARD,
+                CustomPostRequestNature::CUSTOMPOST,
+                PageRequestNature::PAGE,
+                RequestNature::GENERIC,
             );
 
             // For natures where can have a tab, if the tab is the default one, then also
             // add an entry without the tab (we can't add t:default in JS since we don't know which is the default tab for each nature, just from the URL pattern)
             $noroute_natures = array(
                 // Comment Leo 10/04/2019: since switching from page to route, only routes cannot have a tab
-                // UserRouteNatures::USER,
-                // CustomPostRouteNatures::CUSTOMPOST,
-                // TagRouteNatures::TAG,
-                RouteNatures::STANDARD,
+                // UserRequestNature::USER,
+                // CustomPostRequestNature::CUSTOMPOST,
+                // TagRequestNature::TAG,
+                RequestNature::GENERIC,
             );
 
             $duplicate_noroute = in_array($nature, $noroute_natures) && $options['is-default-route'];
@@ -619,7 +617,7 @@ class PoP_ResourceLoaderProcessorUtils {
             if ($duplicate_as_default_format) {
 
                 $defaultformat_params = $params;
-                $defaultformat_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.\PoP\ComponentModel\Constants\Values::DEFAULT;
+                $defaultformat_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.\PoP\ConfigurationComponentModel\Constants\Values::DEFAULT;
                 $defaultformat_key = implode(GD_SEPARATOR_RESOURCELOADER, $defaultformat_params);
 
                 if (in_array($nature, $flat_natures)) {
@@ -638,7 +636,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                     // If also duplicate, add the same entry without the tab
                     $defaultformat_noroute_params = $noroute_params;
-                    $defaultformat_noroute_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.\PoP\ComponentModel\Constants\Values::DEFAULT;
+                    $defaultformat_noroute_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.\PoP\ConfigurationComponentModel\Constants\Values::DEFAULT;
                     $defaultformat_noroute_key = implode(GD_SEPARATOR_RESOURCELOADER, $defaultformat_noroute_params);
 
                     if (in_array($nature, $flat_natures)) {
@@ -697,10 +695,11 @@ class PoP_ResourceLoaderProcessorUtils {
 
         // Generate the $props for this $vars, or re-use the already-calculated one from the current execution (for when generating bundle(group) files on runtime)
         $engine = EngineFacade::getInstance();
+        $engineState = App::getEngineState();
         // After setting the new $vars properties, we can obtain the entry module
         $entryModule = $engine->getEntryModule();
         if ($options['use-engine-entrymodule-props'] ?? null) {
-            $entry_model_props = $engine->model_props;
+            $entry_model_props = $engineState->model_props;
         } else {
             // To calculate all the resources below, we just need the static props.
             // Functions below should NOT rely on mutableonrequest props, or otherwise 2 posts may produce different resources,

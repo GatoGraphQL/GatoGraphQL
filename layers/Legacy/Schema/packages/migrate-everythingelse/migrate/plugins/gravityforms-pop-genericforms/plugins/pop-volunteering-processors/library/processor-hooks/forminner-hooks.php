@@ -1,17 +1,16 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Volunteering_Module_Processor_GFFormInnerHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'PoP_Module_Processor_GFFormInners:init-props',
             array($this, 'initModelProps'),
             10,
             3
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_GFFormInners:layouts',
             array($this, 'getLayoutSubmodules'),
             10,

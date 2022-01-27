@@ -1,8 +1,8 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -148,12 +148,12 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
     //         case self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST:
-    //             return CustomPostRouteNatures::CUSTOMPOST;
+    //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

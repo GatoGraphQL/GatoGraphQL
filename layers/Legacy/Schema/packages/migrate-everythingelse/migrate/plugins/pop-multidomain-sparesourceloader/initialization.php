@@ -24,8 +24,7 @@ class PoP_MultiDomainSPAResourceLoader_Initialization
     //     // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
     //     $cmswebplatformapi = \PoP\EngineWebPlatform\FunctionAPIFactory::getInstance();
     //     global $pop_multidomain_resourceloader_configfile;
-    //     $vars = ApplicationState::getVars();
-    //     $cmswebplatformapi->registerScript('pop-multidomain-sparesourceloader-config', $pop_multidomain_resourceloader_configfile->getFileurl(), array(PoP_ResourceLoaderProcessorUtils::getNoconflictResourceName([PoP_MultiDomain_JSResourceLoaderProcessor::class, PoP_MultiDomain_JSResourceLoaderProcessor::RESOURCE_MULTIDOMAIN])), $vars['version'], true);
+    //     $cmswebplatformapi->registerScript('pop-multidomain-sparesourceloader-config', $pop_multidomain_resourceloader_configfile->getFileurl(), array(PoP_ResourceLoaderProcessorUtils::getNoconflictResourceName([PoP_MultiDomain_JSResourceLoaderProcessor::class, PoP_MultiDomain_JSResourceLoaderProcessor::RESOURCE_MULTIDOMAIN])), ApplicationInfoFacade::getInstance()->getVersion(), true);
     //     $cmswebplatformapi->enqueueScript('pop-multidomain-sparesourceloader-config');
     // }
     // Same for multidomain-resourceloader.js

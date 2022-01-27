@@ -1,14 +1,13 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_AutomatedEmails_Operator
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
-            'popcms:shutdown',
+        \PoP\Root\App::addAction(
+            'shutdown', // This is a WP hook, must migrate to a PoP one
             array($this, 'maybeSendAutomatedemail')
         );
     }
@@ -16,15 +15,14 @@ class PoP_AutomatedEmails_Operator
     public function maybeSendAutomatedemail()
     {
         global $pop_automatedemails_manager;
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
 
-        if ($vars['routing-state']['is-standard']) {
-            $route = $vars['route'];
+        if (\PoP\Root\App::getState(['routing', 'is-generic'])) {
+            $route = \PoP\Root\App::getState('route');
             if ($automatedemails = $pop_automatedemails_manager->getAutomatedEmails($route)) {
                 foreach ($automatedemails as $automatedemail) {
                     // Allow to change the header to 'newsletter' under PoPTheme Wassup
-                    $header = HooksAPIFacade::getInstance()->applyFilters(
+                    $header = \PoP\Root\App::applyFilters(
                         'PoP_AutomatedEmails_Operator:automatedemail:header',
                         null
                     );

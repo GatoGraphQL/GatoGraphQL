@@ -1,11 +1,8 @@
 <?php
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class PoPThemeWassup_Utils
 {
@@ -13,15 +10,14 @@ class PoPThemeWassup_Utils
     public static function checkLoadingPagesectionModule()
     {
         if (is_null(self::$checkLoadingPagesectionModule)) {
-            $vars = ApplicationState::getVars();
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var ModulePaths */
             $modulePaths = $instanceManager->getInstance(ModulePaths::class);
 
             // If we are targeting specific module paths, then no need to validate. Otherwise, we must check that the module is under only 1 pageSection, or it may be repeated here and there
-            self::$checkLoadingPagesectionModule = HooksAPIFacade::getInstance()->applyFilters(
+            self::$checkLoadingPagesectionModule = \PoP\Root\App::applyFilters(
                 'PoPThemeWassup_Utils:checkLoadingPagesectionModule',
-                $vars['modulefilter'] !== $modulePaths->getName()
+                \PoP\Root\App::getState('modulefilter') !== $modulePaths->getName()
             );
         }
 
@@ -42,8 +38,8 @@ class PoPThemeWassup_Utils
         // If PoP SSR is not defined, then there is no PoP_SSR_ServerUtils
         if (defined('POP_SSR_INITIALIZED')) {
             if (!PoP_SSR_ServerUtils::disableServerSideRendering()) {
-                $engine = EngineFacade::getInstance();
-                $data = $engine->data;
+                $engineState = App::getEngineState();
+                $data = $engineState->data;
                 $configuration = $data['modulesettings']['combinedstate']['configuration'];
                 // Because the pageSection names may be mangled (so that "body" will be "x3" or something like that),
                 // repeat the name of the pageSection/class below
@@ -58,7 +54,7 @@ class PoPThemeWassup_Utils
                         // If the pageSection is sideinfo, open it as long as the block is not the EMPTYBLOCK
                         if ($possiblyOpenPageSection == PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODYSIDEINFO) {
                             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-                            $emptysideinfoModuleOutputName = ModuleUtils::getModuleOutputName([PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_EMPTYSIDEINFO]);
+                            $emptysideinfoModuleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_EMPTYSIDEINFO]);
                             if (in_array($emptysideinfoModuleOutputName, $pageSectionBlocks)) {
                                 continue;
                             }
@@ -70,7 +66,7 @@ class PoPThemeWassup_Utils
         }
 
         // Hook: allow Verticals to remove 'active-side' class
-        $active_classes = HooksAPIFacade::getInstance()->applyFilters(
+        $active_classes = \PoP\Root\App::applyFilters(
             'PoP_ApplicationProcessors_Utils:pagesectiongroup:active_pagesection_classes',
             $active_classes
         );

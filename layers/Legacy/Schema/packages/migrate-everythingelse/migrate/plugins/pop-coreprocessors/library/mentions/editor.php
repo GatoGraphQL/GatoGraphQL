@@ -1,14 +1,13 @@
 <?php
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
+use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
-HooksAPIFacade::getInstance()->addFilter('mce_external_plugins', 'gdMentionsExternalPlugins');
+\PoP\Root\App::addFilter('mce_external_plugins', 'gdMentionsExternalPlugins');
 function gdMentionsExternalPlugins($plugins)
 {
     if (is_admin()) {
@@ -28,8 +27,8 @@ function gdMentionsExternalPlugins($plugins)
 }
 
 
-HooksAPIFacade::getInstance()->addFilter('teeny_mce_before_init', 'gdMentionsBeforeInit');
-HooksAPIFacade::getInstance()->addFilter('tiny_mce_before_init', 'gdMentionsBeforeInit');
+\PoP\Root\App::addFilter('teeny_mce_before_init', 'gdMentionsBeforeInit');
+\PoP\Root\App::addFilter('tiny_mce_before_init', 'gdMentionsBeforeInit');
 function gdMentionsBeforeInit($mceInit)
 {
     if (is_admin() || PoP_WebPlatform_ServerUtils::disableJs()) {
@@ -57,7 +56,7 @@ function gdMentionsBeforeInit($mceInit)
     return $mceInit;
 }
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsMentionsManagerImpl');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'gdJqueryConstantsMentionsManagerImpl');
 function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 {
     $cmsService = CMSServiceFacade::getInstance();
@@ -71,11 +70,11 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
     $tags_url = RouteUtils::getRouteURL(PostTagsComponentConfiguration::getPostTagsRoute());
 
     // // Add a hook, so we can use the content CDN
-    // $users_url = HooksAPIFacade::getInstance()->applyFilters(
+    // $users_url = \PoP\Root\App::applyFilters(
     //   'pop_mentions:url:users',
     //   $users_url
     // );
-    // $tags_url = HooksAPIFacade::getInstance()->applyFilters(
+    // $tags_url = \PoP\Root\App::applyFilters(
     //   'pop_mentions:url:tags',
     //   $tags_url
     // );
@@ -109,7 +108,7 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 
     // Bring 10 times the pre-defined result set
     $users_baselineurl = GeneralUtils::addQueryArgs([
-        \PoP\ComponentModel\Constants\Params::LIMIT => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
+        \PoP\ComponentModel\Constants\PaginationParams::LIMIT => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
     ], $users_baselineurl);
 
     $users_baselineurl = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($users_baselineurl, POP_FORMAT_MENTION);
@@ -143,7 +142,7 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 
     // Bring 10 times the pre-defined result set
     $tags_baselineurl = GeneralUtils::addQueryArgs([
-        \PoP\ComponentModel\Constants\Params::LIMIT => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
+        \PoP\ComponentModel\Constants\PaginationParams::LIMIT => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
     ], $tags_baselineurl);
 
     $tags_baselineurl = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($tags_baselineurl, POP_FORMAT_MENTION);

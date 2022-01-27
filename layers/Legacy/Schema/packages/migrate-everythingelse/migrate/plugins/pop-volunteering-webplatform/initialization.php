@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 class PoP_VolunteeringWebPlatform_Initialization
 {
     public function initialize()
@@ -9,8 +8,8 @@ class PoP_VolunteeringWebPlatform_Initialization
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
             // After PoPTheme MESYM
-            HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'), 110);
-            HooksAPIFacade::getInstance()->addAction('popcms:printStyles', array($this, 'registerStyles'), 110);
+            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'), 110);
+            \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'), 110);
         }
 
         /**

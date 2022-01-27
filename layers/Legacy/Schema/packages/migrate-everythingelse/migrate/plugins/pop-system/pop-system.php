@@ -6,7 +6,6 @@ Description: Access system functionalities for the Platform of Platforms
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_System
     {
 
         // Priority: after PoP Forms
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888120);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888120);
     }
     public function init()
     {

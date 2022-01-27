@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
-use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
-use PoPSchema\CustomPostMeta\Utils;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver as UpstreamAbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPosts\Enums\CustomPostStatus;
-use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoP\Root\App;
+use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
+use PoPCMSSchema\CustomPostMeta\Utils;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver as UpstreamAbstractCreateUpdateCustomPostMutationResolver;
+use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
+use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAbstractCreateUpdateCustomPostMutationResolver
 {
@@ -34,7 +35,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
     protected function addParentCategories()
     {
-        return $this->getHooksAPI()->applyFilters(
+        return App::applyFilters(
             'GD_CreateUpdate_Post:add-parent-categories',
             false,
             $this
@@ -61,7 +62,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
     protected function getCategoriesErrorMessages()
     {
-        return $this->getHooksAPI()->applyFilters(
+        return App::applyFilters(
             'GD_CreateUpdate_Post:categories-validation:error',
             array(
                 'empty-categories' => $this->__('The categories have not been set', 'pop-application'),
@@ -135,7 +136,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         // }
 
         // // The nonce comes directly as a parameter in the request, it's not a form field
-        // $nonce = $_REQUEST[POP_INPUTNAME_NONCE];
+        // $nonce = App::query(POP_INPUTNAME_NONCE);
         // if (!gdVerifyNonce($nonce, GD_NONCE_EDITURL, $customPostID)) {
         //     $errors[] = $this->__('Incorrect URL', 'pop-application');
         //     return;

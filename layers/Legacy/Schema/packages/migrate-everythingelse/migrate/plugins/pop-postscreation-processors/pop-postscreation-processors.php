@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Posts Creation Processors
 Description: Implementation of Posts Creation Processors for PoP
@@ -20,7 +19,7 @@ class PoP_PostsCreationProcessors
     {
 
         // Priority: after PoP Content Creation Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888850);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888850);
     }
     public function init()
     {

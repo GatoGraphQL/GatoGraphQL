@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\SchemaCommons\FormInputs\OrderFormInput;
 
 class GD_FormInput_OrderPost extends OrderFormInput
 {

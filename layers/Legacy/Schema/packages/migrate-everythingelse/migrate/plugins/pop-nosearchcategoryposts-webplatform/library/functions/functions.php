@@ -1,8 +1,7 @@
 <?php
-// use PoP\Hooks\Facades\HooksAPIFacade;
-// use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+// use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
-// HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels', 'nosearchcategorypostsMultilayoutLabels');
+// \PoP\Root\App::addFilter('pop_modulemanager:multilayout_labels', 'nosearchcategorypostsMultilayoutLabels');
 // function nosearchcategorypostsMultilayoutLabels($labels) {
 
 //     $label = '<span class="label label-%s">%s</span>';

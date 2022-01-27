@@ -1,6 +1,6 @@
 <?php
 
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoPCMSSchema\Pages\Routing\RequestNature as PageRequestNature;
 
 class PoPTheme_Wassup_CommonPages_ContentCreation_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -15,10 +15,10 @@ class PoPTheme_Wassup_CommonPages_ContentCreation_Module_SideInfoContentPageSect
             POP_COMMONPAGES_PAGE_ABOUT_CONTENTGUIDELINES,
         );
         foreach ($pages as $page) {
-            $ret[PageRouteNatures::PAGE][] = [
+            $ret[PageRequestNature::PAGE][] = [
                 'module' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLEPAGE_ABOUT_SIDEBAR],
                 'conditions' => [
-                    'routing-state' => [
+                    'routing' => [
                         'queried-object-id' => $page,
                     ],
                 ],

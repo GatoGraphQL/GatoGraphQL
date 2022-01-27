@@ -1,8 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Types\Status;
+use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -14,11 +13,11 @@ class PoP_UserStance_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'GD_CreateUpdate_Stance:createAdditionals',
             array($this, 'createdStance')
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'GD_CreateUpdate_Stance:updateAdditionals',
             array($this, 'updatedStance'),
             10,
@@ -30,7 +29,7 @@ class PoP_UserStance_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
-            $referenced_post_id = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, true);
+            $referenced_post_id = \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, true);
             $this->referencedPost($post_id, $referenced_post_id);
         }
     }
@@ -41,7 +40,7 @@ class PoP_UserStance_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
             // If doing a create (changed "draft" to "publish"), then add all references
             if ($log['previous-status'] != Status::PUBLISHED) {
-                $referenced_post_id = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, true);
+                $referenced_post_id = \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, true);
                 $this->referencedPost($post_id, $referenced_post_id);
             }
         }

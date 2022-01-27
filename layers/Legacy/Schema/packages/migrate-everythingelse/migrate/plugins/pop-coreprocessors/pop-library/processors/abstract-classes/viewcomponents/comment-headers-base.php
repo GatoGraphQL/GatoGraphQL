@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -44,7 +43,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
         }
 
         if ($header = $this->getHeaderSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['header-post'] = ModuleUtils::getModuleOutputName($header);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['header-post'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($header);
         }
 
         return $ret;

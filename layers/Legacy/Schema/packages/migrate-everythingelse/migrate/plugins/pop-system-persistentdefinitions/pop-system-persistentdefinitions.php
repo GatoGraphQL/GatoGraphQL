@@ -6,7 +6,6 @@ Description: Implementation of Module Definitions for PoP modules
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_PersistentDefinitionsSystem
     {
 
         // Priority: after PoP System
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888220);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888220);
     }
     public function init()
     {

@@ -1,10 +1,9 @@
 <?php
 
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'maybeGetHighlightEditUrl', 10, 2);
+\PoP\Root\App::addFilter('gd-createupdateutils:edit-url', 'maybeGetHighlightEditUrl', 10, 2);
 function maybeGetHighlightEditUrl($url, $post_id)
 {
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -16,7 +15,7 @@ function maybeGetHighlightEditUrl($url, $post_id)
 }
 
 
-HooksAPIFacade::getInstance()->addFilter('get_title_as_basic_content:post_types', 'addHighlightsPostType');
+\PoP\Root\App::addFilter('get_title_as_basic_content:post_types', 'addHighlightsPostType');
 function addHighlightsPostType($post_types)
 {
     $post_types[] = \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;

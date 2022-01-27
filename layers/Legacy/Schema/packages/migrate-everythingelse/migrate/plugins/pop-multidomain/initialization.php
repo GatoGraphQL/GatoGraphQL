@@ -1,7 +1,7 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\Facades\FileRendererFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_MultiDomain_Initialization
 {
@@ -11,10 +11,10 @@ class PoP_MultiDomain_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
             
             // Inline scripts
-            HooksAPIFacade::getInstance()->addAction('popcms:head', array($this, 'printInlineScripts'));
+            \PoP\Root\App::addAction('popcms:head', array($this, 'printInlineScripts'));
         }
 
         /**
@@ -62,8 +62,7 @@ class PoP_MultiDomain_Initialization
             // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
             global $pop_multidomain_initdomainscripts_configfile;
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $vars = ApplicationState::getVars();
-                $cmswebplatformapi->registerScript('pop-multidomain-domainscripts', $pop_multidomain_initdomainscripts_configfile->getFileurl(), array(), $vars['version']);
+                $cmswebplatformapi->registerScript('pop-multidomain-domainscripts', $pop_multidomain_initdomainscripts_configfile->getFileurl(), array(), ApplicationInfoFacade::getInstance()->getVersion());
                 $cmswebplatformapi->enqueueScript('pop-multidomain-domainscripts');
             }
         }
@@ -76,8 +75,7 @@ class PoP_MultiDomain_Initialization
         //     // This file is generated dynamically, so it can't be added to any bundle or minified
         //     // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
         //     global $pop_multidomain_resourceloader_configfile;
-        //     $vars = ApplicationState::getVars();
-        //     $cmswebplatformapi->registerScript('pop-multidomain-sparesourceloader-config', $pop_multidomain_resourceloader_configfile->getFileurl(), array(PoP_ResourceLoaderProcessorUtils::getNoconflictResourceName([PoP_MultiDomain_JSResourceLoaderProcessor::class, PoP_MultiDomain_JSResourceLoaderProcessor::RESOURCE_MULTIDOMAIN])), $vars['version'], true);
+        //     $cmswebplatformapi->registerScript('pop-multidomain-sparesourceloader-config', $pop_multidomain_resourceloader_configfile->getFileurl(), array(PoP_ResourceLoaderProcessorUtils::getNoconflictResourceName([PoP_MultiDomain_JSResourceLoaderProcessor::class, PoP_MultiDomain_JSResourceLoaderProcessor::RESOURCE_MULTIDOMAIN])), ApplicationInfoFacade::getInstance()->getVersion(), true);
         //     $cmswebplatformapi->enqueueScript('pop-multidomain-sparesourceloader-config');
         // }
         // Same for multidomain-resourceloader.js

@@ -1,26 +1,25 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateUpdateCustomPostMutationResolverBridge;
 
 class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             AbstractCreateUpdateCustomPostMutationResolverBridge::HOOK_FORM_DATA_CREATE_OR_UPDATE,
             array($this, 'getFormData'),
             10
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_VALIDATE_CONTENT,
             array($this, 'validateContent'),
             10,
             2
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
             array($this, 'createUpdate'),
             10,
@@ -45,9 +44,9 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         // Save the link in the post meta
         $link = $form_data['link'];
         if ($link) {
-            \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINK, $link, true);
+            \PoPCMSSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINK, $link, true);
         } else {
-            \PoPSchema\CustomPostMeta\Utils::deleteCustomPostMeta($post_id, GD_METAKEY_POST_LINK);
+            \PoPCMSSchema\CustomPostMeta\Utils::deleteCustomPostMeta($post_id, GD_METAKEY_POST_LINK);
         }
     }
 

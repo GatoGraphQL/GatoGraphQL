@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_LatestCounts_Utils
 {
@@ -7,7 +6,7 @@ class GD_LatestCounts_Utils
     {
 
         // Allow URE to add Organization members
-        return HooksAPIFacade::getInstance()->applyFilters('latestcounts:author:classes', $classes, $module, $props);
+        return \PoP\Root\App::applyFilters('latestcounts:author:classes', $classes, $module, $props);
     }
 
     public static function getAllcontentClasses(array $module, array &$props)
@@ -29,6 +28,6 @@ class GD_LatestCounts_Utils
         }
 
         // WordPress can hook in the terms
-        return HooksAPIFacade::getInstance()->applyFilters('latestcounts:allcontent:classes', $ret, $module, $props);
+        return \PoP\Root\App::applyFilters('latestcounts:allcontent:classes', $ret, $module, $props);
     }
 }

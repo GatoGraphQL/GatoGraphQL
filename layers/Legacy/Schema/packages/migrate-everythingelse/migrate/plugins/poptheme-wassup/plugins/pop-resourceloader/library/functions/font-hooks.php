@@ -1,27 +1,26 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPTheme_Wassup_ResourceLoader_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'getWassupFontUrl:pathkey',
             array($this, 'getPathkey')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'getFontawesomeFontUrl:pathkey',
             array($this, 'getPathkey')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'getWassupFontPath',
             array($this, 'getFontPath'),
             10,
             2
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'getFontawesomeFontPath',
             array($this, 'getFontPath'),
             10,

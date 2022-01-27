@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\UserMeta\Utils;
+use PoP\Root\App;
+use PoPCMSSchema\UserMeta\Utils;
 
 class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationResolver
 {
@@ -13,8 +13,7 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
     {
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
-            $vars = ApplicationState::getVars();
-            $user_id = $vars['global-userstate']['current-user-id'];
+            $user_id = App::getState('current-user-id');
             $target_id = $form_data['target_id'];
 
             if ($user_id == $target_id) {
@@ -39,7 +38,7 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->getHooksAPI()->doAction('gd_followuser', $target_id, $form_data);
+        App::doAction('gd_followuser', $target_id, $form_data);
     }
 
     // protected function updateValue($value, $form_data) {
@@ -51,8 +50,7 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
 
     protected function update($form_data): string | int
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = App::getState('current-user-id');
         $target_id = $form_data['target_id'];
 
         // Comment Leo 02/10/2015: added redundant values, so that we can query for both "Who are my followers" and "Who I am following"

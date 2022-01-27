@@ -1,7 +1,6 @@
 <?php
 use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Routing\DefinitionGroups;
+use PoP\Root\Routing\DefinitionGroups;
 $definitionManager = DefinitionManagerFacade::getInstance();
 
 // Routes
@@ -10,8 +9,8 @@ if (!defined('POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS')) {
     define('POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS', $definitionManager->getUniqueDefinition('trending-tags', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
-    \PoP\Routing\RouteHookNames::ROUTES,
+\PoP\Root\App::addFilter(
+    \PoP\RootWP\Routing\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

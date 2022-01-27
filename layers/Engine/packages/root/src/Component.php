@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\ApplicationEvents;
 use PoP\Root\Container\HybridCompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ServiceInstantiatorInterface;
@@ -54,8 +54,8 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__), '', 'hybrid-services.yaml');
         $this->initServices(dirname(__DIR__));
@@ -77,14 +77,14 @@ class Component extends AbstractComponent
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public function beforeBoot(): void
+    public function componentLoaded(): void
     {
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**
          * @var ServiceInstantiatorInterface
          */
         $serviceInstantiator = App::getContainer()->get(ServiceInstantiatorInterface::class);
-        $serviceInstantiator->initializeServices(ApplicationEvents::BEFORE_BOOT);
+        $serviceInstantiator->initializeServices(ApplicationEvents::COMPONENT_LOADED);
     }
 
     /**

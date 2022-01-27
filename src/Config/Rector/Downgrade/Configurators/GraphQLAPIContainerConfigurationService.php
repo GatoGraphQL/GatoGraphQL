@@ -20,7 +20,7 @@ class GraphQLAPIContainerConfigurationService extends AbstractMainPluginDowngrad
                 // So ignore all code depending on it, or it throws error:
                 //   "Could not process
                 //   "vendor/pop-schema/pages/src/ConditionalOnComponent/RESTAPI/RouteModuleProcessors/EntryRouteModuleProcessor.php" file, due to:
-                //   "Analyze error: "Class PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
+                //   "Analyze error: "Class PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
                 '*/ConditionalOnComponent/RESTAPI/*',
 
                 // Even when downgrading all packages, skip Symfony's polyfills
@@ -43,6 +43,7 @@ class GraphQLAPIContainerConfigurationService extends AbstractMainPluginDowngrad
                 // Ignore errors from classes we don't have in our environment,
                 // or that come from referencing a class present in DEV, not PROD
                 // $this->pluginDir . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',
+                $this->pluginDir . '/vendor/symfony/cache/DataCollector/CacheDataCollector.php',
                 $this->pluginDir . '/vendor/symfony/cache/DoctrineProvider.php',
                 $this->pluginDir . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
                 $this->pluginDir . '/vendor/symfony/dotenv/Command/DebugCommand.php',

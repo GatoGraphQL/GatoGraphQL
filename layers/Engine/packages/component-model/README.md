@@ -1760,7 +1760,7 @@ class ActionExecuter_Logout extends \PoP\Engine\AbstractActionExecuter {
 
   function execute(&$data_properties) 
   {
-    if ('POST' == $_SERVER['REQUEST_METHOD']) { 
+    if ('POST' == \PoP\Root\App::server('REQUEST_METHOD')) { 
 
       // If the user is not logged in, then return the error
       $vars = \PoP\ComponentModel\Engine_Vars::getVars();
@@ -1796,7 +1796,7 @@ Storing and accessing the execution results is done through function `setResult`
 ```php
 function execute(&$data_properties) 
 {
-  if ('POST' == $_SERVER['REQUEST_METHOD']) 
+  if ('POST' == \PoP\Root\App::server('REQUEST_METHOD')) 
   {
     // Function getFormData obtains the filled-in values in the form
     $form_data = $this->getFormData();
@@ -1970,7 +1970,7 @@ It is a global variable, hosted under `PoP_ModuleManager_Vars::$vars`, accessed 
 
 `$vars` acts as a single, central repository of information, where properties can be calculated just once or initialized with default values, and promoting consistency, by providing a unique place from where to fetch a certain value from anywhere in the application.
 
-For instance, property `output`, which is obtained through `$_REQUEST["output"]` and accepts values `"HTML"` or `"JSON"`, is accessed through `$vars['output']`, and is initialized to value `"HTML"` if `$_REQUEST["output"]` is empty.
+For instance, property `output`, which is obtained through `$_GET["output"]` and accepts values `"HTML"` or `"JSON"`, is accessed through `$vars['output']`, and is initialized to value `"HTML"` if `$_GET["output"]` is empty.
 
 **2. Properties which, upon changing their value, alter the component hierarchy**
 

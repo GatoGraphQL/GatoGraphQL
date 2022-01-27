@@ -1,13 +1,12 @@
 <?php
 namespace PoP\EditUsers\WP;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\LooseContractManagerFacade;
 
 class CMSLooseContractImplementations
 {
 	public function __construct() {
 		
-		$hooksapi = HooksAPIFacade::getInstance();
+		$hooksapi = \PoP\Root\App::getHookManager();
 
 		// Actions
 		$hooksapi->addAction('delete_user', function($user_id, $reassign) use($hooksapi) {

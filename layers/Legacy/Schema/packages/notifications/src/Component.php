@@ -16,21 +16,21 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         return [
             \PoP\Engine\Component::class,
-            \PoPSchema\SchemaCommons\Component::class,
+            \PoPCMSSchema\SchemaCommons\Component::class,
         ];
     }
 
     /**
      * All conditional component classes that this component depends upon, to initialize them
      */
-    public static function getDependedConditionalComponentClasses(): array
+    public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\CustomPosts\Component::class,
         ];
     }
 
@@ -40,11 +40,10 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+    protected function initializeContainerServices(
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }

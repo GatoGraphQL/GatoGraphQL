@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoPTheme_Wassup_UserStance_CommonUserRoles_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -16,7 +16,7 @@ class PoPTheme_Wassup_UserStance_CommonUserRoles_Module_SideInfoContentPageSecti
             POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR]
             ];
         }

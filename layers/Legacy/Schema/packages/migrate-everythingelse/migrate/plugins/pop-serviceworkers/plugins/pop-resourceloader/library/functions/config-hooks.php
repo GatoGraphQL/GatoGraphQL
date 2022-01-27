@@ -1,12 +1,11 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ServiceWorkers_WebPlatform_ResourceLoader_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter('getEnqueuefileType', array($this, 'getEnqueuefileType'));
+        \PoP\Root\App::addFilter('getEnqueuefileType', array($this, 'getEnqueuefileType'));
     }
 
     public function getEnqueuefileType($type)

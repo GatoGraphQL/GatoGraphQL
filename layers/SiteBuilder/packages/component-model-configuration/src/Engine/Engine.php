@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
-use PoP\Root\App;
+use Exception;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Constants\DataOutputModes;
@@ -12,7 +13,6 @@ use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Engine\Engine\Engine as UpstreamEngine;
@@ -23,33 +23,52 @@ class Engine extends UpstreamEngine implements EngineInterface
     const CACHETYPE_IMMUTABLESETTINGS = 'static-settings';
     const CACHETYPE_STATEFULSETTINGS = 'stateful-settings';
 
+    protected function generateData(): void
+    {
+        /** @var LegacyPoP\LooseContracts\LooseContractManagerInterface */
+        $looseContractManager = $this->getLooseContractManager();
+
+        // Check if there are hooks that must be implemented by the CMS, that have not been done so.
+        if ($notImplementedHooks = $looseContractManager->getNotImplementedRequiredHooks()) {
+            throw new Exception(
+                sprintf(
+                    $this->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
+                    implode($this->__('", "'), $notImplementedHooks)
+                )
+            );
+        }
+
+        parent::generateData();
+    }
+
     protected function processAndGenerateData(): void
     {
         parent::processAndGenerateData();
 
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_CONFIGURATION, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_CONFIGURATION, App::getState('strata'))) {
             return;
         }
+
+        $engineState = App::getEngineState();
 
         // Get the entry module based on the application configuration and the nature
         $module = $this->getEntryModule();
 
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
-        $dataoutputitems = $vars['dataoutputitems'];
+        $dataoutputitems = App::getState('dataoutputitems');
 
         $data = [];
         if (in_array(DataOutputItems::MODULESETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
-                $this->getModuleSettings($module, $this->model_props, $this->props)
+                $this->getModuleSettings($module, $engineState->model_props, $engineState->props)
             );
         }
 
         // Do array_replace_recursive because it may already contain data from doing 'extra-uris'
-        $this->data = array_replace_recursive(
-            $this->data,
+        $engineState->data = array_replace_recursive(
+            $engineState->data,
             $data
         );
     }
@@ -61,36 +80,33 @@ class Engine extends UpstreamEngine implements EngineInterface
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
         /** @var ComponentModelComponentConfiguration */
         $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
-        if ($useCache = $componentConfiguration->useComponentModelCache()) {
-            $useCache = $this->persistentCache !== null;
-        }
+        $useCache = $componentConfiguration->useComponentModelCache();
 
         // From the state we know if to process static/staful content or both
-        $vars = ApplicationState::getVars();
-        $datasources = $vars['datasources'];
-        $dataoutputmode = $vars['dataoutputmode'];
+        $datasourceselector = App::getState('datasourceselector');
+        $dataoutputmode = App::getState('dataoutputmode');
 
         // First check if there's a cache stored
         $immutable_settings = $mutableonmodel_settings = null;
         if ($useCache) {
-            $immutable_settings = $this->persistentCache->getCacheByModelInstance(self::CACHETYPE_IMMUTABLESETTINGS);
-            $mutableonmodel_settings = $this->persistentCache->getCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS);
+            $immutable_settings = $this->getPersistentCache()->getCacheByModelInstance(self::CACHETYPE_IMMUTABLESETTINGS);
+            $mutableonmodel_settings = $this->getPersistentCache()->getCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS);
         }
 
         // If there is no cached one, generate the configuration and cache it
         if ($immutable_settings === null) {
             $immutable_settings = $processor->getImmutableSettingsModuletree($module, $model_props);
             if ($useCache) {
-                $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_IMMUTABLESETTINGS, $immutable_settings);
+                $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_IMMUTABLESETTINGS, $immutable_settings);
             }
         }
         if ($mutableonmodel_settings === null) {
             $mutableonmodel_settings = $processor->getMutableonmodelSettingsModuletree($module, $model_props);
             if ($useCache) {
-                $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings);
+                $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings);
             }
         }
-        if ($datasources == DataSourceSelectors::MODELANDREQUEST) {
+        if ($datasourceselector == DataSourceSelectors::MODELANDREQUEST) {
             $mutableonrequest_settings = $processor->getMutableonrequestSettingsModuletree($module, $props);
         }
 
@@ -127,7 +143,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     public function maybeRedirectAndExit(): void
     {
         if ($redirect = SettingsManagerFactory::getInstance()->getRedirectUrl()) {
-            if ($query = $_SERVER['QUERY_STRING']) {
+            if ($query = App::server('QUERY_STRING')) {
                 $redirect .= '?' . $query;
             }
 
@@ -137,24 +153,26 @@ class Engine extends UpstreamEngine implements EngineInterface
         }
     }
 
-    public function outputResponse(): void
+    public function generateDataAndPrepareResponse(): void
     {
         // Before anything: check if to do a redirect, and exit
         $this->maybeRedirectAndExit();
 
-        parent::outputResponse();
+        parent::generateDataAndPrepareResponse();
     }
 
     public function getSiteMeta(): array
     {
         $meta = parent::getSiteMeta();
         if ($this->addSiteMeta()) {
-            $vars = ApplicationState::getVars();
-            if ($vars['stratum'] ?? null) {
-                $meta[Params::STRATUM] = $vars['stratum'];
+            if (App::getState('stratum')) {
+                $meta[Params::STRATUM] = App::getState('stratum');
+            }
+            if (App::getState('format')) {
+                $meta[Params::SETTINGSFORMAT] = App::getState('format');
             }
         }
-        return $this->getHooksAPI()->applyFilters(
+        return App::applyFilters(
             '\PoPSiteBuilder\ComponentModel\Engine:site-meta',
             $meta
         );
@@ -176,7 +194,7 @@ class Engine extends UpstreamEngine implements EngineInterface
                 : $this->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
         }
 
-        return $this->getHooksAPI()->applyFilters(
+        return App::applyFilters(
             '\PoPSiteBuilder\ComponentModel\Engine:request-meta',
             $meta
         );

@@ -6,7 +6,6 @@ Description: Front-end module for the Platform of Platforms
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoPWebPlatform
     {
 
         // Priority: new section, after PoP Application section
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'plugins_loaded',
             function() {
                 if ($this->validate()) {
@@ -29,7 +28,7 @@ class PoPWebPlatform
             },
             392
         );
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888400);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888400);
     }
     public function init()
     {

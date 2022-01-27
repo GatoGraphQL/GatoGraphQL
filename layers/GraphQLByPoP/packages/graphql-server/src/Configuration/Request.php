@@ -4,43 +4,51 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Configuration;
 
-use PoP\BasicService\Component\EnvironmentValueHelpers;
+use PoP\Root\App;
+use GraphQLByPoP\GraphQLServer\Constants\Params;
+use GraphQLByPoP\GraphQLServer\Environment;
+use PoP\Root\Component\EnvironmentValueHelpers;
 
 class Request
 {
-    public const URLPARAM_EDIT_SCHEMA = 'edit_schema';
-    public const URLPARAM_MUTATION_SCHEME = 'mutation_scheme';
-    public const URLPARAM_ENABLE_GRAPHQL_INTROSPECTION = 'enable_graphql_introspection';
-
     public static function editSchema(): bool
     {
-        if (isset($_REQUEST[self::URLPARAM_EDIT_SCHEMA])) {
-            return EnvironmentValueHelpers::toBool($_REQUEST[self::URLPARAM_EDIT_SCHEMA]);
+        $editSchema = App::request(Params::EDIT_SCHEMA) ?? App::query(Params::EDIT_SCHEMA);
+        if ($editSchema === null) {
+            return false;
         }
-        return false;
+        return EnvironmentValueHelpers::toBool($editSchema);
     }
 
     public static function getMutationScheme(): ?string
     {
-        if (isset($_REQUEST[self::URLPARAM_MUTATION_SCHEME])) {
-            $scheme = $_REQUEST[self::URLPARAM_MUTATION_SCHEME];
-            $schemes = [
-                MutationSchemes::STANDARD,
-                MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
-                MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
-            ];
-            if (in_array($scheme, $schemes)) {
-                return $scheme;
-            }
+        if (!Environment::enableSettingMutationSchemeByURLParam()) {
+            return null;
         }
-        return null;
+
+        $scheme = App::request(Params::MUTATION_SCHEME) ?? App::query(Params::MUTATION_SCHEME);
+        if ($scheme === null) {
+            return null;
+        }
+
+        $schemes = [
+            MutationSchemes::STANDARD,
+            MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
+            MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
+        ];
+        if (!in_array($scheme, $schemes)) {
+            return null;
+        }
+
+        return $scheme;
     }
 
     public static function enableGraphQLIntrospection(): ?bool
     {
-        if (isset($_REQUEST[self::URLPARAM_ENABLE_GRAPHQL_INTROSPECTION])) {
-            return EnvironmentValueHelpers::toBool($_REQUEST[self::URLPARAM_ENABLE_GRAPHQL_INTROSPECTION]);
+        $enableGraphQLIntrospection = App::request(Params::ENABLE_GRAPHQL_INTROSPECTION) ?? App::query(Params::ENABLE_GRAPHQL_INTROSPECTION);
+        if ($enableGraphQLIntrospection === null) {
+            return null;
         }
-        return null;
+        return EnvironmentValueHelpers::toBool($enableGraphQLIntrospection);
     }
 }

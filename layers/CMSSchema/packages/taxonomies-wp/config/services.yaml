@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface:
+        class: \PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI

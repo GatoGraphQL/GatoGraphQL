@@ -1,12 +1,11 @@
 <?php
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_ApplicationProcessors_SPA_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_MultidomainProcessors_Module_Processor_Dataloads:backgroundurls',
             array($this, 'addBackgroundurls'),
             10,
@@ -34,7 +33,7 @@ class PoP_ApplicationProcessors_SPA_Hooks
             }
             
             // Allow to override (eg: for a given domain, the page slug may be different)
-            $url = HooksAPIFacade::getInstance()->applyFilters(
+            $url = \PoP\Root\App::applyFilters(
                 'PoP_ApplicationProcessors_SPA_Hooks:backgroundurls:backgroundurl',
                 $url,
                 $domain,

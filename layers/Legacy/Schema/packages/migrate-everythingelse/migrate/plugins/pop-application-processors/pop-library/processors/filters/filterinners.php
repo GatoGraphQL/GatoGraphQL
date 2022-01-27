@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
@@ -142,7 +141,7 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_ORDERPOST],
             ],
         ];
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+        if ($modules = \PoP\Root\App::applyFilters(
             'Blog:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 class WSL_PoPWebPlatform_Initialization
 {
     public function initialize()
@@ -8,7 +7,7 @@ class WSL_PoPWebPlatform_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            HooksAPIFacade::getInstance()->addAction("popcms:enqueueScripts", array($this, 'registerScripts'));
+            \PoP\Root\App::addAction("popcms:enqueueScripts", array($this, 'registerScripts'));
         }
 
         /**

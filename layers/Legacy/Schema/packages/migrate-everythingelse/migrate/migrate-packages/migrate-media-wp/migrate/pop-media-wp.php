@@ -6,8 +6,7 @@ Description: Implementation of WordPress functions for PoP CMS
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoPSchema\Media\WP;
-use PoP\Hooks\Facades\HooksAPIFacade;
+namespace PoPCMSSchema\Media\WP;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,13 +19,13 @@ class Plugin
     public function __construct()
     {
         include_once 'validation.php';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Media_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
 
         // Priority: mid section, after PoP Posts WP
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888255);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888255);
     }
     public function getProviderValidationClass($class)
     {

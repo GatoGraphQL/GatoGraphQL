@@ -16,7 +16,7 @@ class Component extends AbstractComponent
      *
      * @return string[]
      */
-    public static function getDependedComponentClasses(): array
+    public function getDependedComponentClasses(): array
     {
         /**
          * Comment Leo 17/03/2021:
@@ -35,35 +35,34 @@ class Component extends AbstractComponent
             [
                 // These ones are working OK
                 \GraphQLByPoP\GraphQLServer\Component::class,
-                \PoP\FunctionFields\Component::class,
-                \PoP\RESTAPI\Component::class,
+                \PoPAPI\RESTAPI\Component::class,
                 \PoP\TraceTools\Component::class,
-                \PoPSchema\BlockMetadataWP\Component::class,
+                \PoPWPSchema\BlockMetadataWP\Component::class,
                 \PoPSchema\CDNDirective\Component::class,
                 \PoPSchema\ConvertCaseDirectives\Component::class,
-                \PoPSchema\CustomPostMediaWP\Component::class,
-                \PoPSchema\GoogleTranslateDirectiveForCustomPosts\Component::class,
-                \PoPSchema\PagesWP\Component::class,
-                \PoPSchema\PostsWP\Component::class,
-                \PoPSchema\PostTagsWP\Component::class,
-                \PoPSchema\TaxonomyQueryWP\Component::class,
-                \PoPSchema\UserRolesACL\Component::class,
-                \PoPSchema\UserRolesWP\Component::class,
-                \PoPSchema\UserStateWP\Component::class,
-                \PoPSchema\PostMutations\Component::class,
-                \PoPSchema\CustomPostMediaMutationsWP\Component::class,
-                \PoPSchema\PostTagMutationsWP\Component::class,
-                \PoPSchema\PostCategoryMutationsWP\Component::class,
-                \PoPSchema\CommentMutationsWP\Component::class,
-                \PoPSchema\UserStateMutationsWP\Component::class,
-                \PoPSchema\PostCategoriesWP\Component::class,
-                \PoPSchema\MenusWP\Component::class,
-                \PoPSchema\SettingsWP\Component::class,
+                \PoPCMSSchema\CustomPostMediaWP\Component::class,
+                \PoPCMSSchema\GoogleTranslateDirectiveForCustomPosts\Component::class,
+                \PoPCMSSchema\PagesWP\Component::class,
+                \PoPCMSSchema\PostsWP\Component::class,
+                \PoPCMSSchema\PostTagsWP\Component::class,
+                \PoPCMSSchema\TaxonomyQueryWP\Component::class,
+                \PoPCMSSchema\UserRolesACL\Component::class,
+                \PoPCMSSchema\UserRolesWP\Component::class,
+                \PoPCMSSchema\UserStateWP\Component::class,
+                \PoPCMSSchema\PostMutations\Component::class,
+                \PoPCMSSchema\CustomPostMediaMutationsWP\Component::class,
+                \PoPCMSSchema\PostTagMutationsWP\Component::class,
+                \PoPCMSSchema\PostCategoryMutationsWP\Component::class,
+                \PoPCMSSchema\CommentMutationsWP\Component::class,
+                \PoPCMSSchema\UserStateMutationsWP\Component::class,
+                \PoPCMSSchema\PostCategoriesWP\Component::class,
+                \PoPCMSSchema\MenusWP\Component::class,
+                \PoPCMSSchema\SettingsWP\Component::class,
 
                 \PoPSchema\NotificationsWP\Component::class,
                 \PoPSchema\HighlightsWP\Component::class,
                 // Moved to outside repo
-                // \PoPSchema\LocationPostsWP\Component::class,
+                // \PoPCMSSchema\LocationPostsWP\Component::class,
                 \PoPSchema\StancesWP\Component::class,
             ],
             $skipLoadingUnmigratedComponents ? [] : [
@@ -84,7 +83,7 @@ class Component extends AbstractComponent
                 \PoPSitesWassup\ShareMutations\Component::class,
                 \PoPSitesWassup\VolunteerMutations\Component::class,
                 // Moved to outside repo
-                // \PoPSchema\EventMutationsWPEM\Component::class,
+                // \PoPCMSSchema\EventMutationsWPEM\Component::class,
                 // \PoPSitesWassup\EventMutations\Component::class,
                 // \PoPSitesWassup\LocationMutations\Component::class,
                 // \PoPSitesWassup\LocationPostMutations\Component::class,
@@ -105,13 +104,12 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeContainerServices(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+    protected function initializeContainerServices(
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
-        self::initServices(dirname(__DIR__));
-        self::initServices(dirname(__DIR__), '/Overrides');
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initServices(dirname(__DIR__));
+        $this->initServices(dirname(__DIR__), '/Overrides');
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Theme Web Platform
 Description: Implementation of Theme for PoP
@@ -20,7 +19,7 @@ class PoP_ThemeWebPlatform
     {
 
         // Priority: after PoP Engine Web Platform, inner circle
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888402);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888402);
     }
     public function init()
     {

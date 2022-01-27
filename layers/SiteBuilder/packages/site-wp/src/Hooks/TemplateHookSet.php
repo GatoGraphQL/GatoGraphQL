@@ -4,43 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\SiteWP\Hooks;
 
-use PoP\BasicService\AbstractHookSet;
-use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
-use PoP\EngineWP\Component;
-use PoP\EngineWP\ComponentInfo;
-use PoP\Root\App;
+use PoP\EngineWP\Hooks\TemplateHookSet as UpstreamTemplateHookSet;
 
-class TemplateHookSet extends AbstractHookSet
+class TemplateHookSet extends UpstreamTemplateHookSet
 {
-    private ?ApplicationStateHelperServiceInterface $applicationStateHelperService = null;
-
-    final public function setApplicationStateHelperService(ApplicationStateHelperServiceInterface $applicationStateHelperService): void
+    /**
+     * Also handle when not doing JSON, to print HTML
+     */
+    protected function useTemplate(): bool
     {
-        $this->applicationStateHelperService = $applicationStateHelperService;
-    }
-    final protected function getApplicationStateHelperService(): ApplicationStateHelperServiceInterface
-    {
-        return $this->applicationStateHelperService ??= $this->instanceManager->getInstance(ApplicationStateHelperServiceInterface::class);
-    }
-
-    protected function init(): void
-    {
-        $this->getHooksAPI()->addFilter(
-            'template_include',
-            [$this, 'setTemplate'],
-            // Execute last
-            PHP_INT_MAX
-        );
-    }
-
-    public function setTemplate(string $template): string
-    {
-        // If doing JSON, for sure return json.php which only prints the encoded JSON
-        if (!$this->getApplicationStateHelperService()->doingJSON()) {
-            /** @var ComponentInfo */
-            $componentInfo = App::getComponent(Component::class)->getInfo();
-            return $componentInfo->getTemplatesDir() . '/Output.php';
-        }
-        return $template;
+        return !$this->getApplicationStateHelperService()->doingJSON();
     }
 }

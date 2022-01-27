@@ -1,6 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 define('GD_URLPARAM_RSSCAMPAIGN', 'campaign');
 define('GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST', 'dailypost-digest');
@@ -13,7 +12,7 @@ define('GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST', 'dailypost-digest');
 
 function popGetRssPostlistCampaigns()
 {
-    return HooksAPIFacade::getInstance()->applyFilters(
+    return \PoP\Root\App::applyFilters(
         'popGetRssPostlistCampaigns',
         array(
             GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST,
@@ -21,12 +20,12 @@ function popGetRssPostlistCampaigns()
     );
 }
 
-HooksAPIFacade::getInstance()->addFilter('pre_get_posts', 'popthemeWassupRssFilter');
+\PoP\Root\App::addFilter('pre_get_posts', 'popthemeWassupRssFilter');
 function popthemeWassupRssFilter($query)
 {
     if ($query->is_feed) {
         // If it is the daily feed, then show only posts posted in the last 24 hs
-        if (($_REQUEST[GD_URLPARAM_RSSCAMPAIGN] ?? null) == GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST) {
+        if ((\PoP\Root\App::query(GD_URLPARAM_RSSCAMPAIGN)) == GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST) {
             $query_today = array(
                 'column'  => 'post_date',
                 'after'   => '- 1 days'
@@ -40,11 +39,11 @@ function popthemeWassupRssFilter($query)
 /**
  * Add the author link around the name when invoking 'the author' hook
  */
-HooksAPIFacade::getInstance()->addAction('rss2_ns', 'gdRssAuthorAddlink');
+\PoP\Root\App::addAction('rss2_ns', 'gdRssAuthorAddlink');
 function gdRssAuthorAddlink()
 {
     if (is_feed()) {
-        HooksAPIFacade::getInstance()->addFilter('the_author', 'gdRssAuthor');
+        \PoP\Root\App::addFilter('the_author', 'gdRssAuthor');
     }
 }
 function gdRssAuthor($output)
@@ -55,10 +54,9 @@ function gdRssAuthor($output)
     //     GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST,
     //     GD_URLPARAM_RSSCAMPAIGN_WEEKLY,
     // );
-    // if (is_feed() && in_array($_REQUEST[GD_URLPARAM_RSSCAMPAIGN], $campaigns)) {
+    // if (is_feed() && in_array($_GET[GD_URLPARAM_RSSCAMPAIGN], $campaigns)) {
 
-    // $vars = ApplicationState::getVars();
-    // $authordata = $vars['routing-state']['authordata']/*global $authordata*/;
+    // $authordata = \PoP\Root\App::getState(['routing', 'authordata'])/*global $authordata*/;
     global $authordata;
     $userTypeAPI = UserTypeAPIFacade::getInstance();
     $url = $userTypeAPI->getUserURL($authordata->ID);
@@ -76,13 +74,13 @@ function gdRssAuthor($output)
 
 function gdRssGetAuthorAnchorStyle()
 {
-    return HooksAPIFacade::getInstance()->applyFilters(
+    return \PoP\Root\App::applyFilters(
         'poptheme_wassup_rss:anchor_style',
         'word-wrap:break-word;color:#7a7a7b;font-weight:normal;text-decoration:underline;'
     );
 }
 
-HooksAPIFacade::getInstance()->addFilter('gdRssPrintFeaturedImage:img_attr', 'gdCustomRssFeaturedimageSize');
+\PoP\Root\App::addFilter('gdRssPrintFeaturedImage:img_attr', 'gdCustomRssFeaturedimageSize');
 function gdCustomRssFeaturedimageSize($img_attr)
 {
 
@@ -91,9 +89,9 @@ function gdCustomRssFeaturedimageSize($img_attr)
     //     GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST,
     //     GD_URLPARAM_RSSCAMPAIGN_WEEKLY,
     // );
-    // if (in_array($_REQUEST[GD_URLPARAM_RSSCAMPAIGN], $campaigns)) {
-    if (in_array($_REQUEST[GD_URLPARAM_RSSCAMPAIGN] ?? null, popGetRssPostlistCampaigns())) {
-        $thumb_width = HooksAPIFacade::getInstance()->applyFilters(
+    // if (in_array($_GET[GD_URLPARAM_RSSCAMPAIGN], $campaigns)) {
+    if (in_array(\PoP\Root\App::query(GD_URLPARAM_RSSCAMPAIGN), popGetRssPostlistCampaigns())) {
+        $thumb_width = \PoP\Root\App::applyFilters(
             'poptheme_wassup_rss:thumb_width',
             132
         );

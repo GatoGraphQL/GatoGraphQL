@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\API;
+namespace PoPAPI\API;
 
 class Environment
 {
@@ -10,7 +10,6 @@ class Environment
     public const EXECUTE_QUERY_BATCH_IN_STRICT_ORDER = 'EXECUTE_QUERY_BATCH_IN_STRICT_ORDER';
     public const ENABLE_EMBEDDABLE_FIELDS = 'ENABLE_EMBEDDABLE_FIELDS';
     public const ENABLE_MUTATIONS = 'ENABLE_MUTATIONS';
-    public const OVERRIDE_REQUEST_URI = 'OVERRIDE_REQUEST_URI';
     public const SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA = 'SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA';
     public const SORT_FULL_SCHEMA_ALPHABETICALLY = 'SORT_FULL_SCHEMA_ALPHABETICALLY';
     public const DISABLE_API = 'DISABLE_API';
@@ -18,11 +17,11 @@ class Environment
 
     public static function disableAPI(): bool
     {
-        return getenv(self::DISABLE_API) !== false ? strtolower(getenv(self::DISABLE_API)) == "true" : false;
+        return getenv(self::DISABLE_API) !== false ? strtolower(getenv(self::DISABLE_API)) === "true" : false;
     }
 
     public static function enableSettingNamespacingByURLParam(): bool
     {
-        return getenv(self::ENABLE_SETTING_NAMESPACING_BY_URL_PARAM) !== false ? strtolower(getenv(self::ENABLE_SETTING_NAMESPACING_BY_URL_PARAM)) == "true" : false;
+        return getenv(self::ENABLE_SETTING_NAMESPACING_BY_URL_PARAM) !== false ? strtolower(getenv(self::ENABLE_SETTING_NAMESPACING_BY_URL_PARAM)) === "true" : false;
     }
 }

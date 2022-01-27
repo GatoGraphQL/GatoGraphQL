@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\APIClients;
+namespace PoPAPI\APIClients;
 
 use PoP\ComponentModel\Configuration\RequestHelpers;
 
@@ -95,7 +95,7 @@ trait ClientTrait
         // if ($componentConfiguration->mustNamespaceTypes()) {
         //     $endpoint = GeneralUtils::addQueryArgs(
         //         [
-        //             Request::URLPARAM_USE_NAMESPACE => true,
+        //             APIParams::USE_NAMESPACE => true,
         //         ],
         //         $endpoint
         //     );
@@ -111,14 +111,5 @@ trait ClientTrait
 
         $this->clientHTMLCache = $fileContents;
         return $this->clientHTMLCache;
-    }
-
-    /**
-     * If the endpoint for the client is requested, print the client and exit
-     */
-    protected function executeEndpoint(): void
-    {
-        echo $this->getClientHTML();
-        die;
     }
 }

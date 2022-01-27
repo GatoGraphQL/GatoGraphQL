@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Social Network Processors
 Description: Implementation of Social Network Processors for PoP
@@ -20,7 +19,7 @@ class PoP_SocialNetworkProcessors
     {
 
         // Priority: after PoP Add Comments TinyMCE Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888860);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888860);
     }
     public function init()
     {

@@ -1,7 +1,6 @@
 <?php
 use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Routing\DefinitionGroups;
+use PoP\Root\Routing\DefinitionGroups;
 $definitionManager = DefinitionManagerFacade::getInstance();
 
 // Routes
@@ -10,8 +9,8 @@ if (!defined('POP_ADDLOCATIONS_ROUTE_ADDLOCATION')) {
 	define('POP_ADDLOCATIONS_ROUTE_ADDLOCATION', $definitionManager->getUniqueDefinition('add-location', DefinitionGroups::ROUTES));
 }
 
-HooksAPIFacade::getInstance()->addFilter(
-    \PoP\Routing\RouteHookNames::ROUTES,
+\PoP\Root\App::addFilter(
+    \PoP\RootWP\Routing\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

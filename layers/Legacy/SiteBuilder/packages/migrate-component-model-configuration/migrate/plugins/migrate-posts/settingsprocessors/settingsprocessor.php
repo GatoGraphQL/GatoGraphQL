@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\Posts;
+namespace PoPCMSSchema\Posts;
 
 class PoPPosts_Module_SettingsProcessor extends \PoP\ComponentModel\Settings\SettingsProcessorBase
 {

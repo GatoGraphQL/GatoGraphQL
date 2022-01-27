@@ -1,15 +1,13 @@
 <?php
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Definitions\Configuration\Request;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Definitions\Constants\Params as DefinitionsParams;
 
 class PoP_SPA_RequestMeta_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             '\PoP\ComponentModel\Engine:site-meta',
             array($this, 'getSiteMeta')
         );
@@ -27,10 +25,9 @@ class PoP_SPA_RequestMeta_Hooks
                 \PoP\ComponentModel\Constants\Params::VERSION,
                 \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
                 \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
-                \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT,
-                Request::URLPARAM_MANGLED,
-                \PoP\ComponentModel\Constants\Params::CONFIG,
-                \PoP\ComponentModel\Constants\Params::STRATUM,
+                \PoP\ConfigurationComponentModel\Constants\Params::SETTINGSFORMAT,
+                DefinitionsParams::MANGLED,
+                \PoP\ConfigurationComponentModel\Constants\Params::STRATUM,
             ];
             foreach ($elemKeys as $elemKey) {
                 if ($elemValue = $meta[$elemKey] ?? null) {
@@ -42,9 +39,8 @@ class PoP_SPA_RequestMeta_Hooks
             $pushurlprops = [];
 
             // Platform: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)
-            $vars = ApplicationState::getVars();
-            if ($vars['stratum'] && !$vars['stratum-isdefault']) {
-                $pushurlprops[\PoP\ComponentModel\Constants\Params::STRATUM] = $vars['stratum'];
+            if (\PoP\Root\App::getState('stratum') && !\PoP\Root\App::getState('stratum-isdefault')) {
+                $pushurlprops[\PoP\ConfigurationComponentModel\Constants\Params::STRATUM] = \PoP\Root\App::getState('stratum');
             }
 
             if ($pushurlprops) {

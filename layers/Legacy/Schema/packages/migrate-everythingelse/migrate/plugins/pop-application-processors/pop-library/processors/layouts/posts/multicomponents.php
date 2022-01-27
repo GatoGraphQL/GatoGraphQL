@@ -1,7 +1,6 @@
 <?php
 use PoP\Application\Constants\Actions;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor_MultiplesBase
 {
@@ -18,8 +17,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
 
     protected function getUserpostinteractionLayoutSubmodules(array $module)
     {
-        $vars = ApplicationState::getVars();
-        $loadingLazy = in_array(Actions::LOADLAZY, $vars['actions']);
+        $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
         switch ($module[1]) {
          // Highlights: it has a different set-up
             case self::MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
@@ -52,7 +50,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         }
 
         // Allow 3rd parties to modify the modules. Eg: for the TPP website we re-use the MESYM Theme but we modify some of its elements, eg: adding the "What do you think about TPP?" modules in the fullview templates
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'Wassup_Module_Processor_MultipleComponentLayouts:userpostinteraction_layouts',
             $layouts,
             $module

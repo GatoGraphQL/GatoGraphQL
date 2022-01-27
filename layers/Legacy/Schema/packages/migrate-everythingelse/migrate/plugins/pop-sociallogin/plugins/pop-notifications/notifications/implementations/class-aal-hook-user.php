@@ -1,6 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -12,13 +11,13 @@ class WSL_AAL_PoP_Hook_Users /* extends AAL_Hook_Base*/
     {
 
         // User welcome message (function implemented already, but must connect it with the hook)
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'popcomponent:sociallogin:usercreated',
             array(PoP_Notifications_UserPlatform_Utils::class, 'welcomeMessage')
         );
 
         // Prompt the user to change the email
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'popcomponent:sociallogin:usercreated',
             array($this, 'requestChangeEmail'),
             20, // Execute after the User Welcome Message

@@ -7,12 +7,10 @@ namespace GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers;
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLEndpointForWP\Component;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration;
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
-use PoP\ComponentModel\Constants\Params;
-use PoP\BasicService\BasicServiceTrait;
-use PoP\GraphQLAPI\Component as GraphQLAPIComponent;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
+use PoP\Root\Services\BasicServiceTrait;
+use PoPAPI\GraphQLAPI\Component as GraphQLAPIComponent;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLEndpointHandler extends AbstractEndpointHandler
 {
@@ -41,7 +39,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
     /**
      * Provide the endpoint
      */
-    protected function getEndpoint(): string
+    public function getEndpoint(): string
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
@@ -59,18 +57,5 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
             class_exists(GraphQLAPIComponent::class)
             && App::getComponent(GraphQLAPIComponent::class)->isEnabled()
             && !$componentConfiguration->isGraphQLAPIEndpointDisabled();
-    }
-
-    /**
-     * Indicate this is a GraphQL request
-     */
-    protected function executeEndpoint(): void
-    {
-        // Set the params on the request, to emulate that they were added by the user
-        $_REQUEST[Params::SCHEME] = APISchemes::API;
-        // Include qualified namespace here (instead of `use`) since we do didn't know if component is installed
-        $_REQUEST[Params::DATASTRUCTURE] = $this->getGraphQLDataStructureFormatter()->getName();
-        // Enable hooks
-        \do_action('EndpointHandler:setDoingGraphQL');
     }
 }

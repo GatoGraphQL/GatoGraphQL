@@ -4,30 +4,21 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolverBridges;
 
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\App;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
     use BasicServiceTrait;
 
-    private ?MutationResolutionManagerInterface $mutationResolutionManager = null;
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
-    final public function setMutationResolutionManager(MutationResolutionManagerInterface $mutationResolutionManager): void
-    {
-        $this->mutationResolutionManager = $mutationResolutionManager;
-    }
-    final protected function getMutationResolutionManager(): MutationResolutionManagerInterface
-    {
-        return $this->mutationResolutionManager ??= $this->instanceManager->getInstance(MutationResolutionManagerInterface::class);
-    }
     final public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->moduleProcessorManager = $moduleProcessorManager;
@@ -66,7 +57,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
      */
     public function executeMutation(array &$data_properties): ?array
     {
-        if ($this->onlyExecuteWhenDoingPost() && 'POST' !== $_SERVER['REQUEST_METHOD']) {
+        if ($this->onlyExecuteWhenDoingPost() && 'POST' !== App::server('REQUEST_METHOD')) {
             return null;
         }
         $mutationResolver = $this->getMutationResolver();
@@ -115,7 +106,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         $this->modifyDataProperties($data_properties, $result_id);
 
         // Save the result for some module to incorporate it into the query args
-        $this->getMutationResolutionManager()->setResult($this, $result_id);
+        App::getMutationResolutionStore()->setResult($this, $result_id);
 
         $return[ResponseConstants::SUCCESS] = true;
         if ($success_strings = $this->getSuccessStrings($result_id)) {

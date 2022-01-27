@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gdAcfGetKeysStoreAsArray', 'gdSocialnetworkAcfGetKeysStoreAsArray');
+\PoP\Root\App::addFilter('gdAcfGetKeysStoreAsArray', 'gdSocialnetworkAcfGetKeysStoreAsArray');
 function gdSocialnetworkAcfGetKeysStoreAsArray($keys)
 {
     $keys[] = GD_METAKEY_POST_RECOMMENDEDBY;

@@ -1,8 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::addFilter(
     'route:icon', 
     function($icon, $route, $html = true) {
         switch ($route) {
@@ -17,7 +16,7 @@ HooksAPIFacade::getInstance()->addFilter(
     3
 );
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::addFilter(
     'route:title', 
     function($title, $route) {
         $titles = [

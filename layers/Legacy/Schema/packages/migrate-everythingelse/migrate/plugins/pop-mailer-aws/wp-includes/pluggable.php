@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 if (!function_exists('wp_mail')) :
 /**
@@ -57,7 +56,7 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
      * @param array $args A compacted array of wp_mail() arguments, including the "to" email,
      *                    subject, message, headers, and attachments values.
      */
-    $props = HooksAPIFacade::getInstance()->applyFilters('wp_mail', compact('to', 'subject', 'message', 'headers', 'attachments'));
+    $props = \PoP\Root\App::applyFilters('wp_mail', compact('to', 'subject', 'message', 'headers', 'attachments'));
 
     if (isset($props['to'])) {
         $to = $props['to'];
@@ -219,7 +218,7 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
      *
      * @param string $from_email Email address to send from.
      */
-    $from_email = HooksAPIFacade::getInstance()->applyFilters('wp_mail_from', $from_email);
+    $from_email = \PoP\Root\App::applyFilters('wp_mail_from', $from_email);
 
     /**
      * Filters the name to associate with the "from" email address.
@@ -228,7 +227,7 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
      *
      * @param string $from_name Name associated with the "from" email address.
      */
-    $from_name = HooksAPIFacade::getInstance()->applyFilters('wp_mail_from_name', $from_name);
+    $from_name = \PoP\Root\App::applyFilters('wp_mail_from_name', $from_name);
 
     try {
         $phpmailer->setFrom($from_email, $from_name, false);
@@ -237,7 +236,7 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
         $mail_error_data['phpmailer_exception_code'] = $e->getCode();
 
         /** This filter is documented in wp-includes/pluggable.php */
-        HooksAPIFacade::getInstance()->doAction('wp_mail_failed', new WP_Error('wp_mail_failed', $e->getMessage(), $mail_error_data));
+        \PoP\Root\App::doAction('wp_mail_failed', new WP_Error('wp_mail_failed', $e->getMessage(), $mail_error_data));
 
         return false;
     }
@@ -302,7 +301,7 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
      *
      * @param string $content_type Default wp_mail() content type.
      */
-    $content_type = HooksAPIFacade::getInstance()->applyFilters('wp_mail_content_type', $content_type);
+    $content_type = \PoP\Root\App::applyFilters('wp_mail_content_type', $content_type);
 
     $phpmailer->ContentType = $content_type;
 
@@ -325,7 +324,7 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
      *
      * @param string $charset Default email charset.
      */
-    $phpmailer->CharSet = HooksAPIFacade::getInstance()->applyFilters('wp_mail_charset', $charset);
+    $phpmailer->CharSet = \PoP\Root\App::applyFilters('wp_mail_charset', $charset);
 
     // Set custom headers
     if (!empty($headers)) {
@@ -372,7 +371,7 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
          * @param WP_Error $error A WP_Error object with the phpmailerException message, and an array
          *                        containing the mail recipient, subject, message, headers, and attachments.
          */
-        HooksAPIFacade::getInstance()->doAction('wp_mail_failed', new WP_Error('wp_mail_failed', $e->getMessage(), $mail_error_data));
+        \PoP\Root\App::doAction('wp_mail_failed', new WP_Error('wp_mail_failed', $e->getMessage(), $mail_error_data));
 
         return false;
     }
@@ -391,7 +390,7 @@ function popMailerAwsWpMail($to, $subject, $message, $headers = '', $attachments
      * @param array $args A compacted array of wp_mail() arguments, including the "to" email,
      *                    subject, message, headers, and attachments values.
      */
-    $props = HooksAPIFacade::getInstance()->applyFilters('wp_mail', compact('to', 'subject', 'message', 'headers', 'attachments'));
+    $props = \PoP\Root\App::applyFilters('wp_mail', compact('to', 'subject', 'message', 'headers', 'attachments'));
 
     if (isset($props['to'])) {
         $to = $props['to'];

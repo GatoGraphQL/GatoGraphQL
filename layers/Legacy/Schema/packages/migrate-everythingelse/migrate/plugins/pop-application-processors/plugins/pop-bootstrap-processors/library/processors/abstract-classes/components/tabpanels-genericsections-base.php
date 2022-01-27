@@ -1,8 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends PoP_Module_Processor_FormatActiveTabPanelComponentsBase
 {
@@ -27,7 +26,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
             if ($processor instanceof FormattableModuleInterface) {
                 $format = $processor->getFormat($submodule);
                 if ($thumb = $format_thumbs[$format] ?? null) {
-                    $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
+                    $submoduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($submodule);
                     $ret[$submoduleFullName] = $thumb;
                 }
             }
@@ -60,7 +59,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
             if ($processor instanceof FormattableModuleInterface) {
                 $format = $processor->getFormat($submodule);
                 if ($title = $format_titles[$format] ?? null) {
-                    $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
+                    $submoduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($submodule);
                     $ret[$submoduleFullName] = $title;
                 }
             }

@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
 {
@@ -42,13 +41,13 @@ abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngi
         $keys = array();
         foreach ($this->getControlSubmodules($module) as $control) {
             $key = 'a'.$counter++;
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES][$key] = ModuleUtils::getModuleOutputName($control);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES][$key] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($control);
             $keys[] = $key;
         }
         $ret['settings-keys']['controls'] = $keys;
 
         if ($input = $this->getInputSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['input'] = ModuleUtils::getModuleOutputName($input);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($input);
         }
         return $ret;
     }

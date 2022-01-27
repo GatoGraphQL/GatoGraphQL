@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Response;
+namespace PoPAPI\API\Response;
 
 class Schemes
 {

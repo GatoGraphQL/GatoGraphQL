@@ -2,16 +2,15 @@
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Events\Constants\Scopes;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
+use PoPCMSSchema\Events\Constants\Scopes;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 
 class PoP_Events_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
     protected function useSimpleviewLayout()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_Events_Multilayout_Processor:use-simpleview-layout',
             false
         );

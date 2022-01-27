@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\GenericCustomPosts\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\GenericCustomPosts\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\GenericCustomPosts\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'

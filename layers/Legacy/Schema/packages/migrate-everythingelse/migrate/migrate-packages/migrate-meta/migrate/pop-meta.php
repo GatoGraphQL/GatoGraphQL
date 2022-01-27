@@ -6,8 +6,7 @@ Description: The foundation for a PoP Meta
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoPSchema\Meta;
-use PoP\Hooks\Facades\HooksAPIFacade;
+namespace PoPCMSSchema\Meta;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -21,7 +20,7 @@ class Plugins
     {
 
         // Priority: new section, after PoP CMS Model
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888204);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888204);
     }
     public function init()
     {

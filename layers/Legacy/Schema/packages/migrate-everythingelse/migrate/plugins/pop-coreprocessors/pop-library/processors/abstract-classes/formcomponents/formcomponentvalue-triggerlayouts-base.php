@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
@@ -71,8 +70,8 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         $this->metaFormcomponentInitModuleRequestProps($module, $props);
 
         // Because the URL param and the field name are disassociated, instead of getting ->getValue (which gets the value for the fieldname),
-        // we do $_REQUEST instead
-        if ($value = $_REQUEST[$this->getUrlParam($module)] ?? null) {
+        // we do $_GET instead
+        if ($value = \PoP\Root\App::query($this->getUrlParam($module))) {
             $trigger_module = $this->getTriggerSubmodule($module);
             $this->setProp($trigger_module, $props, 'default-value', $value);
         }
@@ -137,7 +136,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         }
 
         $trigger_module = $this->getTriggerSubmodule($module);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['trigger-layout'] = ModuleUtils::getModuleOutputName($trigger_module);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($trigger_module);
 
         $this->addMetaFormcomponentModuleConfiguration($ret, $module, $props);
 
@@ -186,7 +185,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
                 );
             }
             if ($this->getUrlParam($module) != $this->getName($module)) {
-                if ($urlparam_value = $_REQUEST[$this->getUrlParam($module)] ?? null) {
+                if ($urlparam_value = \PoP\Root\App::query($this->getUrlParam($module))) {
                     $value = array_merge(
                         $value,
                         is_array($urlparam_value) ? $urlparam_value : array($urlparam_value)
@@ -204,7 +203,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
             // The Typeahead set the data-settings under 'typeahead-trigger'
-            $moduleFullName = ModuleUtils::getModuleFullName($module);
+            $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
             $trigger_module = $this->getTriggerSubmodule($module);
             $trigger_data_properties = $moduleprocessor_manager->getProcessor($trigger_module)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
 

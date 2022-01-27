@@ -6,7 +6,6 @@ Description: The foundation for a PoP Content Post Links Creation
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_ContentPostLinksCreation
     {
 
         // Priority: after PoP Posts Creation
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888360);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888360);
     }
     public function init()
     {

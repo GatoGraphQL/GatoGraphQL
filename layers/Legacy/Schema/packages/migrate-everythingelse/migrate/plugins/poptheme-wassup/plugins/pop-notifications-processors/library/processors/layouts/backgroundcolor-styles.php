@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts extends PoP_Module_Processor_StylesLayoutsBase
 {
@@ -31,7 +30,7 @@ class PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts extends Po
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES:
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES:
                 return array(
-                    'background-color' => HooksAPIFacade::getInstance()->applyFilters(
+                    'background-color' => \PoP\Root\App::applyFilters(
                         'PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts:bgcolor',
                         'transparent',
                         $module

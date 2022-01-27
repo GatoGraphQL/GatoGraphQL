@@ -1,25 +1,24 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ResourceLoader_EngineInitialization_Hooks {
 
 	public function __construct() {
 
-		HooksAPIFacade::getInstance()->addFilter(
+		\PoP\Root\App::addFilter(
 			'PoPWebPlatform_Engine:enqueue-scripts:first-script-handle',
 			array($this, 'getFirstScriptHandle')
 		);
 
-		HooksAPIFacade::getInstance()->addAction(
+		\PoP\Root\App::addAction(
 			'\PoP\ComponentModel\Engine:helperCalculations',
 			array($this, 'generateHelperCalculations'),
 			10,
 			3
 		);
 
-		HooksAPIFacade::getInstance()->addFilter(
+		\PoP\Root\App::addFilter(
 			'PoPWebPlatform_Initialization:init-scripts',
 			array($this, 'initScripts'),
 			20

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Avatar Foundation
 Description: Implementation of Avatar Foundation for PoP
@@ -20,7 +19,7 @@ class PoP_AvatarFoundation
     {
 
         // Priority: after PoP Engine
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888110);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888110);
     }
     public function init()
     {

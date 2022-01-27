@@ -1,6 +1,6 @@
 <?php
 
-class PoP_CommonAutomatedEmails_EM_UserState_Module_SettingsProcessor extends \PoPSchema\UserState\Settings\SettingsProcessorBase
+class PoP_CommonAutomatedEmails_EM_UserState_Module_SettingsProcessor extends \PoPCMSSchema\UserState\Settings\SettingsProcessorBase
 {
     public function routesToProcess()
     {

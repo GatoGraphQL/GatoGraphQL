@@ -1,8 +1,8 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_MultiDomain_Utils
 {
@@ -10,9 +10,8 @@ class PoP_MultiDomain_Utils
     {
         // Must add the version (request will be routed through CDN)
         $cmsService = CMSServiceFacade::getInstance();
-        $vars = ApplicationState::getVars();
         $url = GeneralUtils::addQueryArgs([
-            'ver' => $vars['version'],
+            'ver' => ApplicationInfoFacade::getInstance()->getVersion(),
         ], $url);
         $subpath = substr($url, strlen($cmsService->getSiteURL()));
 
@@ -21,18 +20,17 @@ class PoP_MultiDomain_Utils
             $theme = $options['theme'];
             $thememode = $options['thememode'];
 
-            $vars = ApplicationState::getVars();
-            if ($theme && $vars['theme'] != $theme) {
-                $subpath = str_replace('/'.$vars['theme'].'/', '/'.$theme.'/', $subpath);
+            if ($theme && \PoP\Root\App::getState('theme') != $theme) {
+                $subpath = str_replace('/'.\PoP\Root\App::getState('theme').'/', '/'.$theme.'/', $subpath);
             }
-            if ($thememode && $vars['thememode'] != $thememode) {
-                $subpath = str_replace('/'.$vars['thememode'].'/', '/'.$thememode.'/', $subpath);
+            if ($thememode && \PoP\Root\App::getState('thememode') != $thememode) {
+                $subpath = str_replace('/'.\PoP\Root\App::getState('thememode').'/', '/'.$thememode.'/', $subpath);
             }
         }
 
         // Replace the local domain with the external one
         // Hook: also allow for PoP Cluster to replace the subpath /WEBSITE_NAME/ (after wp-content/pop-webplatform/) with the external website name
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_MultiDomain_Utils:transformUrl',
             $domain.$subpath,
             $subpath,
@@ -63,7 +61,7 @@ class PoP_MultiDomain_Utils
             $domain_properties[$domain]['default-theme'] = $default_themename;
             $domain_properties[$domain]['default-thememode'] = $default_thememodename;
         }
-        $domain_properties = HooksAPIFacade::getInstance()->applyFilters('PoP_MultiDomain_Utils:domain_properties', $domain_properties);
+        $domain_properties = \PoP\Root\App::applyFilters('PoP_MultiDomain_Utils:domain_properties', $domain_properties);
 
         // Add the ID to all domains
         foreach ($domain_properties as $domain => &$properties) {
@@ -71,7 +69,7 @@ class PoP_MultiDomain_Utils
             // $properties['id'] = RequestUtils::getDomainId($domain);
 
             // Allow to add the language, and then change the default language on a domain by domain basis
-            $properties['locale'] = HooksAPIFacade::getInstance()->applyFilters(
+            $properties['locale'] = \PoP\Root\App::applyFilters(
                 'pop_modulemanager:multidomain:locale',
                 $domain,
                 $domain

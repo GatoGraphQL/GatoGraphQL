@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\Engine\CMS\CMSServiceInterface;
+use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoP\Engine\Route\RouteUtils;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
 
 class LostPasswordMutationResolver extends AbstractMutationResolver
@@ -50,7 +51,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
             '<p>%s</p><br/>',
             sprintf(
                 $this->__('Someone requested that the password be reset for your account on <a href="%s">%s</a>. If this was a mistake, or if it was not you who requested the password reset, just ignore this email and nothing will happen.', 'pop-application'),
-                GeneralUtils::maybeAddTrailingSlash($this->getCmsService()->getHomeURL()),
+                GeneralUtils::maybeAddTrailingSlash($this->getCMSService()->getHomeURL()),
                 $cmsapplicationapi->getSiteName()
             )
         );
@@ -132,9 +133,9 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         $user_id = $this->getUserTypeAPI()->getUserId($user);
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $title = sprintf($this->__('[%s] Password Reset'), $cmsapplicationapi->getSiteName());
-        $title = $this->getHooksAPI()->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);
+        $title = App::applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);
         $message = $this->retrievePasswordMessage($key, $user_login, $user_id);
-        $message = $this->getHooksAPI()->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
+        $message = App::applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
 
         $user_email = $this->getUserTypeAPI()->getUserEmail($user);
         return PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);

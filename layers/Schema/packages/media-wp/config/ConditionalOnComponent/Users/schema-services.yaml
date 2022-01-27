@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-
-    PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface:
-        class: \PoPSchema\MediaWP\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPI

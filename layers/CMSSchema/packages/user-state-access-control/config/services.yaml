@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\UserStateAccessControl\RelationalTypeResolverDecorators\:
+        resource: '../src/RelationalTypeResolverDecorators/*'
+
+    PoPCMSSchema\UserStateAccessControl\Hooks\:
+        resource: '../src/Hooks/*'

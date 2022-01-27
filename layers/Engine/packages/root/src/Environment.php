@@ -11,6 +11,8 @@ class Environment
     public const CONTAINER_CONFIGURATION_CACHE_DIRECTORY = 'CONTAINER_CONFIGURATION_CACHE_DIRECTORY';
     public const THROW_EXCEPTION_IF_CACHE_SETUP_ERROR = 'THROW_EXCEPTION_IF_CACHE_SETUP_ERROR';
     public const APPLICATION_VERSION = 'APPLICATION_VERSION';
+    public const ENABLE_PASSING_STATE_VIA_REQUEST = 'ENABLE_PASSING_STATE_VIA_REQUEST';
+    public const ENABLE_PASSING_ROUTING_STATE_VIA_REQUEST = 'ENABLE_PASSING_ROUTING_STATE_VIA_REQUEST';
 
     /**
      * Environment
@@ -36,7 +38,7 @@ class Environment
     public static function cacheContainerConfiguration(): bool
     {
         $useCache = getenv(self::CACHE_CONTAINER_CONFIGURATION);
-        return $useCache !== false ? strtolower($useCache) == "true" : !self::isApplicationEnvironmentDev();
+        return $useCache !== false ? strtolower($useCache) === "true" : !self::isApplicationEnvironmentDev();
     }
 
     /**
@@ -51,7 +53,7 @@ class Environment
          * SERVER_NAME is used for if several applications are deployed
          * on the same server and they share the /tmp folder
          */
-        $sitename = strtolower($_SERVER['SERVER_NAME'] ?? '');
+        $sitename = strtolower(App::server('SERVER_NAME', ''));
         if ($applicationVersion = self::getApplicationVersion()) {
             return $sitename . '_' . $applicationVersion;
         }
@@ -78,7 +80,7 @@ class Environment
     public static function throwExceptionIfCacheSetupError(): bool
     {
         $throwException = getenv(self::THROW_EXCEPTION_IF_CACHE_SETUP_ERROR);
-        return $throwException !== false ? strtolower($throwException) == "true" : false;
+        return $throwException !== false ? strtolower($throwException) === "true" : false;
     }
 
     /**
@@ -105,11 +107,11 @@ class Environment
 
     public static function isApplicationEnvironmentProd(): bool
     {
-        return self::getApplicationEnvironment() == self::APPLICATION_ENVIRONMENT_PROD;
+        return self::getApplicationEnvironment() === self::APPLICATION_ENVIRONMENT_PROD;
     }
 
     public static function isApplicationEnvironmentDev(): bool
     {
-        return self::getApplicationEnvironment() == self::APPLICATION_ENVIRONMENT_DEV;
+        return self::getApplicationEnvironment() === self::APPLICATION_ENVIRONMENT_DEV;
     }
 }

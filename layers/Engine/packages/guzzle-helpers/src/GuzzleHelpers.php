@@ -9,7 +9,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\RequestOptions;
 use PoP\ComponentModel\Error\Error;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use Psr\Http\Message\ResponseInterface;
 
 class GuzzleHelpers
@@ -58,9 +58,9 @@ class GuzzleHelpers
         // which all contain +json, such as
         // application/ld+json or application/geo+json
         $isJSONContentType =
-            substr($contentType, 0, strlen('application/json')) == 'application/json'
+            substr($contentType, 0, strlen('application/json')) === 'application/json'
             || (
-                substr($contentType, 0, strlen('application/')) == 'application/'
+                substr($contentType, 0, strlen('application/')) === 'application/'
                 && str_contains($contentType, '+json')
             );
         if (!$isJSONContentType) {

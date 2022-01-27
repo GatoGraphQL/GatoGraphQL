@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\CustomPostMutations\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+
+    PoPCMSSchema\CustomPostMutations\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'

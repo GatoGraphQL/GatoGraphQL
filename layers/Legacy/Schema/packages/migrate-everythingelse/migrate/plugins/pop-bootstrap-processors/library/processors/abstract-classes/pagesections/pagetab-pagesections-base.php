@@ -43,8 +43,7 @@ abstract class PoP_Module_Processor_PageTabPageSectionsBase extends PoP_Module_P
     {
 
         // Do not open the tab for 404s
-        $vars = ApplicationState::getVars();
-        return !$vars['routing-state']['is-404'];
+        return !\PoP\Root\App::getState(['routing', 'is-404']);
     }
 
     public function getPagesectionJsmethod(array $module, array &$props)

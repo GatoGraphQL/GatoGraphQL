@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\UserRoles\FieldResolvers\ObjectType\RootRolesObjectTypeFieldResolver:
+        class: \PoPCMSSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType\RootRolesObjectTypeFieldResolver
+
+    PoPCMSSchema\UserRoles\FieldResolvers\ObjectType\UserObjectTypeFieldResolver:
+        class: \PoPCMSSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType\UserObjectTypeFieldResolver

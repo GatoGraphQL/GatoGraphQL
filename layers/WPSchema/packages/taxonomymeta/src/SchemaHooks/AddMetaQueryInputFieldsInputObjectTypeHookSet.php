@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\TaxonomyMeta\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
-use PoPSchema\Taxonomies\TypeResolvers\InputObjectType\AbstractTaxonomiesFilterInputObjectTypeResolver;
+use PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType\AbstractTaxonomiesFilterInputObjectTypeResolver;
 use PoPWPSchema\Meta\SchemaHooks\AbstractAddMetaQueryInputFieldsInputObjectTypeHookSet;
 use PoPWPSchema\Meta\TypeResolvers\InputObjectType\AbstractMetaQueryInputObjectTypeResolver;
 use PoPWPSchema\TaxonomyMeta\TypeResolvers\InputObjectType\TaxonomyMetaQueryInputObjectTypeResolver;

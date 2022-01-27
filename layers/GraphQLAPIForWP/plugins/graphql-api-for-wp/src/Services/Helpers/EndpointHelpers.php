@@ -8,9 +8,10 @@ use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
-use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
+use GraphQLByPoP\GraphQLServer\Constants\Params as GraphQLServerParams;
 use PoP\ComponentModel\Configuration\RequestHelpers;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\App;
+use PoP\Root\Services\BasicServiceTrait;
 
 class EndpointHelpers
 {
@@ -43,11 +44,9 @@ class EndpointHelpers
     public function isRequestingAdminConfigurableSchemaGraphQLEndpoint(): bool
     {
         return \is_admin()
-            && 'POST' == $_SERVER['REQUEST_METHOD']
-            && isset($_GET['page'])
-            && $_GET['page'] == $this->getPluginMenu()->getName()
-            && isset($_GET[RequestParams::ACTION])
-            && $_GET[RequestParams::ACTION] == RequestParams::ACTION_EXECUTE_QUERY;
+            && 'POST' === App::server('REQUEST_METHOD')
+            && App::query('page') === $this->getPluginMenu()->getName()
+            && App::query(RequestParams::ACTION) === RequestParams::ACTION_EXECUTE_QUERY;
     }
 
     /**
@@ -57,8 +56,7 @@ class EndpointHelpers
     public function isRequestingAdminFixedSchemaGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
-            && isset($_GET[RequestParams::BEHAVIOR])
-            && $_GET[RequestParams::BEHAVIOR] == RequestParams::BEHAVIOR_UNRESTRICTED;
+            && App::query(RequestParams::BEHAVIOR) === RequestParams::BEHAVIOR_UNRESTRICTED;
     }
 
     /**
@@ -68,7 +66,7 @@ class EndpointHelpers
     public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
-            && isset($_GET[RequestParams::PERSISTED_QUERY_ID]);
+            && App::getRequest()->query->has(RequestParams::PERSISTED_QUERY_ID);
     }
 
     /**
@@ -108,7 +106,7 @@ class EndpointHelpers
         if ($enableLowLevelQueryEditing) {
             // Add /?edit_schema=1 so the query-type directives are also visible
             if ($this->getModuleRegistry()->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING)) {
-                $endpoint = \add_query_arg(GraphQLServerRequest::URLPARAM_EDIT_SCHEMA, true, $endpoint);
+                $endpoint = \add_query_arg(GraphQLServerParams::EDIT_SCHEMA, true, $endpoint);
             }
         }
 
@@ -117,9 +115,9 @@ class EndpointHelpers
 
         // If namespaced, add /?use_namespace=1 to the endpoint
         // /** @var ComponentModelComponentConfiguration */
-        // $componentConfiguration = \PoP\Root\App::getComponent(ComponentModelComponent::class)->getConfiguration();
+        // $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
         // if ($componentConfiguration->mustNamespaceTypes()) {
-        //     $endpoint = \add_query_arg(APIRequest::URLPARAM_USE_NAMESPACE, true, $endpoint);
+        //     $endpoint = \add_query_arg(APIParams::USE_NAMESPACE, true, $endpoint);
         // }
         return $endpoint;
     }
@@ -153,7 +151,7 @@ class EndpointHelpers
 
     public function getAdminPersistedQueryCustomPostID(): ?int
     {
-        if ($persistedQueryID = $_REQUEST[RequestParams::PERSISTED_QUERY_ID] ?? null) {
+        if ($persistedQueryID = App::query(RequestParams::PERSISTED_QUERY_ID)) {
             return (int) $persistedQueryID;
         }
         return null;

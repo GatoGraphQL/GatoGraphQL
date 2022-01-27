@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * ACF plugin Functions
@@ -17,7 +16,7 @@ $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
 if ($cmsapplicationapi->isAdminPanel()) {
     // Only execute in the back-end: when editing the Communities values using ACF,
     // then we gotta transform and also save these values for the template-manager needed format
-    HooksAPIFacade::getInstance()->addFilter('acf/update_value', 'gdUreAcfCommunitymembershipUpdateCustomformat', 10, 3);
+    \PoP\Root\App::addFilter('acf/update_value', 'gdUreAcfCommunitymembershipUpdateCustomformat', 10, 3);
 }
 function gdUreAcfCommunitymembershipUpdateCustomformat($value, $post_id, $field)
 {
@@ -69,9 +68,9 @@ function gdUreAcfCommunitymembershipUpdateCustomformat($value, $post_id, $field)
         }
         
         $user_id = str_replace('user_', '', $post_id);
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS, $customformat_status);
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES, $customformat_privileges);
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS, $customformat_tags);
+        \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS, $customformat_status);
+        \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES, $customformat_privileges);
+        \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS, $customformat_tags);
     }
 
     return $value;
@@ -79,7 +78,7 @@ function gdUreAcfCommunitymembershipUpdateCustomformat($value, $post_id, $field)
 
 // These will be executed in the front-end, not in the back-end:
 // Transform from the custom format into ACF
-HooksAPIFacade::getInstance()->addAction('ure:user:add_new_communities', 'gdUreAcfUserAddnewcommunities', 10, 2);
+\PoP\Root\App::addAction('ure:user:add_new_communities', 'gdUreAcfUserAddnewcommunities', 10, 2);
 function gdUreAcfUserAddnewcommunities($user_id, $communities)
 {
 
@@ -95,7 +94,7 @@ function gdUreAcfUserAddnewcommunities($user_id, $communities)
     gdUreAcfUserUpdatecommunitiesmembership($user_id, $communities, $status, $privileges, $tags);
 }
 
-HooksAPIFacade::getInstance()->addAction('GD_EditMembership:update', 'gdUreAcfUserCommunitymembershipUpdate', 10, 5);
+\PoP\Root\App::addAction('GD_EditMembership:update', 'gdUreAcfUserCommunitymembershipUpdate', 10, 5);
 function gdUreAcfUserCommunitymembershipUpdate($user_id, $community, $status, $privileges, $tags)
 {
     gdUreAcfUserUpdatecommunitiesmembership($user_id, array($community), $status, $privileges, $tags);
@@ -144,7 +143,7 @@ function gdUreAcfUserUpdatecommunitiesmembership($user_id, $communities, $status
     // When creating a new user: if it is empty, we gotta create the value first
     // Taken from advanced-custom-fields/core/input.php function save_post( $post_id = 0 )
     // And called in function acfSavePost( $post_id = 0 ) {
-    // HooksAPIFacade::getInstance()->doAction('acf/save_post', $post_id);
+    // \PoP\Root\App::doAction('acf/save_post', $post_id);
     // }
     if ($update) {
         update_field(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSHIP, $value, $acf_user_id);

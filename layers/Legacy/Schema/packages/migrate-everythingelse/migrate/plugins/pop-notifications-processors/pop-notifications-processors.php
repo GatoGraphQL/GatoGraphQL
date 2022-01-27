@@ -6,7 +6,6 @@ Description: The foundation for a PoP Notifications Processors
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_NotificationsProcessors
     {
 
         // Priority: after PoP User Platform Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888840);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888840);
     }
     public function init()
     {

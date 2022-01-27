@@ -1,12 +1,11 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
  
 class PoP_UserStance_CDN_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
             array($this, 'getThumbprintPartialpaths'),
             10,

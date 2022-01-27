@@ -1,19 +1,18 @@
 <?php
 
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_Application_UserStance_LayoutHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomContentBlocks:single-sidebar:top',
             array($this, 'getTopSidebar'),
             10,
             2
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomContentBlocks:single-sidebar:bottom',
             array($this, 'getBottomSidebar'),
             10,

@@ -1,39 +1,25 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 // The editor filters are not initialized when fetching json page. So initialize it below
 // This way, function getValue('contentEditor') on typeResolver-posts.php
 // will process the right html output, and not the one the HTML tab (without <p> <br> etc tags)
 // Code copied from wp-includes/class-wp-editor.php => public static function editor( $content, $editor_id, $settings = array() )
-// Comment Leo 20/06/2017: this cannot be executed on 'init'! If doing so, function `loadingSite` initializes
-// ApplicationState::getVars() before the WordPress query vars are set, which means that
-// function is_home, isAuthor, isPage, etc, they all fail, returning always false
-// For that, instead execute when we have initialized PoP
-// HooksAPIFacade::getInstance()->addFilter('init', 'gdEditorInit');
-HooksAPIFacade::getInstance()->addFilter('\PoP\ComponentModel\Engine:beginning', 'gdEditorInit');
+\PoP\Root\App::addFilter('\PoP\ComponentModel\Engine:beginning', 'gdEditorInit');
 function gdEditorInit()
 {
     if (is_admin() || RequestUtils::loadingSite()) {
         return;
     }
 
-    // Since WP 4.3.0, the functions below are deprecated, replaced with 'format_for_editor'
-    // $default_editor = wp_default_editor();
-    // // 'html' is used for the "Text" editor tab.
-    // if ( 'html' === $default_editor ) {
-    //   HooksAPIFacade::getInstance()->addFilter('the_editor_content', 'wp_htmledit_pre');
-    // } else {
-    //   HooksAPIFacade::getInstance()->addFilter('the_editor_content', 'wp_richedit_pre');
-    // }
-    HooksAPIFacade::getInstance()->addFilter('the_editor_content', 'format_for_editor', 10, 2);
+    \PoP\Root\App::addFilter('the_editor_content', 'format_for_editor', 10, 2);
 }
 
 
 // Absolutely always state that the default editor is Visual. This way, function getValue('contentEditor') on typeResolver-posts.php
 // will process the right html output, and not the one the HTML tab (without <p> <br> etc tags)
-HooksAPIFacade::getInstance()->addFilter('wp_default_editor', 'gdWpDefaultEditor', 10000000, 1);
+\PoP\Root\App::addFilter('wp_default_editor', 'gdWpDefaultEditor', 10000000, 1);
 function gdWpDefaultEditor($default_editor)
 {
     if (is_admin()) {
@@ -46,8 +32,8 @@ function gdWpDefaultEditor($default_editor)
     return 'tinymce';
 }
 
-HooksAPIFacade::getInstance()->addFilter('teeny_mce_before_init', 'gdMceBeforeInit');
-HooksAPIFacade::getInstance()->addFilter('tiny_mce_before_init', 'gdMceBeforeInit');
+\PoP\Root\App::addFilter('teeny_mce_before_init', 'gdMceBeforeInit');
+\PoP\Root\App::addFilter('tiny_mce_before_init', 'gdMceBeforeInit');
 function gdMceBeforeInit($mceInit)
 {
     if (is_admin()) {
@@ -73,8 +59,8 @@ function gdMceBeforeInit($mceInit)
 // Solution: replace tinymce plugin wplink with link, and then implement solutions stated in these links:
 // - http://jsfiddle.net/e99xf/13/
 // - http://stackoverflow.com/questions/18111582/tinymce-4-links-plugin-modal-in-not-editable
-HooksAPIFacade::getInstance()->addFilter('teeny_mce_plugins', 'gdMcePluginsEdit');
-HooksAPIFacade::getInstance()->addFilter('tiny_mce_plugins', 'gdMcePluginsEdit');
+\PoP\Root\App::addFilter('teeny_mce_plugins', 'gdMcePluginsEdit');
+\PoP\Root\App::addFilter('tiny_mce_plugins', 'gdMcePluginsEdit');
 function gdMcePluginsEdit($plugins)
 {
     if (is_admin()) {
@@ -91,7 +77,7 @@ function gdMcePluginsEdit($plugins)
     return $plugins;
 }
 // Remove them also from the quicktags
-HooksAPIFacade::getInstance()->addFilter('quicktags_settings', 'gdQuicktagsSettings');
+\PoP\Root\App::addFilter('quicktags_settings', 'gdQuicktagsSettings');
 function gdQuicktagsSettings($qtInit)
 {
     if (is_admin()) {
@@ -102,7 +88,7 @@ function gdQuicktagsSettings($qtInit)
     $qtInit['buttons'] = str_replace(array(',link', ',fullscreen'), '', $qtInit['buttons']);
     return $qtInit;
 }
-HooksAPIFacade::getInstance()->addFilter('mce_buttons', 'gdMceButtonsEdit');
+\PoP\Root\App::addFilter('mce_buttons', 'gdMceButtonsEdit');
 function gdMceButtonsEdit($buttons)
 {
     if (is_admin()) {
@@ -126,7 +112,7 @@ function gdMceButtonsEdit($buttons)
     // array_splice($buttons, array_search('wp_adv', $buttons), 0, array('code'));
     return $buttons;
 }
-HooksAPIFacade::getInstance()->addFilter('mce_buttons_2', 'gdMceButtonsEdit2');
+\PoP\Root\App::addFilter('mce_buttons_2', 'gdMceButtonsEdit2');
 function gdMceButtonsEdit2($buttons)
 {
     if (is_admin()) {
@@ -148,7 +134,7 @@ function gdMceButtonsEdit2($buttons)
     array_splice($buttons, array_search('redo', $buttons)+1, 0, array('code'));
     return $buttons;
 }
-HooksAPIFacade::getInstance()->addFilter('mce_external_plugins', 'gdMceExternalPlugins');
+\PoP\Root\App::addFilter('mce_external_plugins', 'gdMceExternalPlugins');
 function gdMceExternalPlugins($plugins)
 {
     if (is_admin()) {
@@ -169,7 +155,7 @@ function gdMceExternalPlugins($plugins)
  * Add Media Hack
  * Always show the 'Add Media' button, even if the user is not logged in
  */
-HooksAPIFacade::getInstance()->addFilter('gdWpEditorSet', 'gdWpEditorSet');
+\PoP\Root\App::addFilter('gdWpEditorSet', 'gdWpEditorSet');
 function gdWpEditorSet($set)
 {
     $set['media_buttons'] = true;
@@ -179,7 +165,7 @@ function gdWpEditorSet($set)
 /**
  * Add 2 buttons: one for the Media, and one for Image Gallery
  */
-HooksAPIFacade::getInstance()->addAction('media_buttons', 'popMediaButtons', 20, 1);
+\PoP\Root\App::addAction('media_buttons', 'popMediaButtons', 20, 1);
 function popMediaButtons($editor_id = 'content')
 {
     if (!is_admin()) {

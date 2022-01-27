@@ -3,7 +3,6 @@ define('GD_CONSTANT_FULLVIEW_TITLEPOSITION_TOP', 'top');
 define('GD_CONSTANT_FULLVIEW_TITLEPOSITION_BODY', 'body');
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Processor_FullObjectLayoutsBase
 {
@@ -72,14 +71,14 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
 
         if ($abovecontent_modules = $this->getAbovecontentSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovecontent'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $abovecontent_modules
             );
         }
 
         if ($content_modules = $this->getContentSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $content_modules
             );
         }

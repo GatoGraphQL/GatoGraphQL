@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -31,7 +30,7 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         $urlparam = $this->getUrlparamSubmodule($module);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['urlparam'] = ModuleUtils::getModuleOutputName($urlparam);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['urlparam'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($urlparam);
 
         return $ret;
     }

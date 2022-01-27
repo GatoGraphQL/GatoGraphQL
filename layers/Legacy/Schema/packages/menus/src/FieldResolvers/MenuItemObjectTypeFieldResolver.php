@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Menus\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\Menus\FieldResolvers\ObjectType;
 
+use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
+use PoPCMSSchema\Menus\Facades\MenuItemTypeAPIFacade;
 
 /**
  * Move the classes added to field "classes" to a hook!
@@ -45,7 +46,7 @@ abstract class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
                 if ($objectID = $menuItemTypeAPI->getMenuItemObjectID($menuItem)) {
                     $classes[] = 'menu-item-object-id-' . $objectID;
                 }
-                return $this->getHooksAPI()->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array());
+                return App::applyFilters('menuitem:classes', array_filter($classes), $menuItem, array());
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

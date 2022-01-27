@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_MultiTargetIndentMenuLayouts extends PoP_Module_Processor_MultiTargetIndentMenuLayoutsBase
 {
@@ -21,7 +21,7 @@ class PoP_Module_Processor_MultiTargetIndentMenuLayouts extends PoP_Module_Proce
                 $ret[POP_TARGET_NAVIGATOR] = '<i class="fa fa-fw fa-angle-right"></i>';
                 
                 // $icon = '<i class="fa fa-fw fa-angle-right"></i>';
-                // $ret[\PoP\ComponentModel\Constants\Targets::MAIN] = $icon.TranslationAPIFacade::getInstance()->__('Main', 'pop-coreprocessors');
+                // $ret[\PoP\ConfigurationComponentModel\Constants\Targets::MAIN] = $icon.TranslationAPIFacade::getInstance()->__('Main', 'pop-coreprocessors');
                 // $ret[POP_TARGET_NAVIGATOR] = $icon.TranslationAPIFacade::getInstance()->__('Navigator', 'pop-coreprocessors');
                 // $ret[POP_TARGET_ADDONS] = $icon.TranslationAPIFacade::getInstance()->__('Floating', 'pop-coreprocessors');
                 break;

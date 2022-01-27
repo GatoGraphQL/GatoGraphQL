@@ -1,6 +1,5 @@
 <?php
 use PoP\FileStore\Facades\JSONFileStoreFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ResourceLoader_GeneratedResourcesManager {
 
@@ -12,8 +11,8 @@ class PoP_ResourceLoader_GeneratedResourcesManager {
 		$this->initialized = false;
 
 		// If the state changes, save it at the end of the execution
-        HooksAPIFacade::getInstance()->addAction(
-        	'popcms:shutdown',
+        \PoP\Root\App::addAction(
+        	'shutdown', // This is a WP hook, must migrate to a PoP one
         	array($this, 'maybeSave')
         );
 	}

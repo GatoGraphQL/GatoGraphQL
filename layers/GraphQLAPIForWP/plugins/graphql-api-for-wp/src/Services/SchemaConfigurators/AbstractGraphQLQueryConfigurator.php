@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 
 /**
  * Base class for configuring the persisted GraphQL query before its execution

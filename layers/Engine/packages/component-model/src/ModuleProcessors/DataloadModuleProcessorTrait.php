@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\Hooks\HooksAPIInterface;
+use PoP\Root\App;
 
 trait DataloadModuleProcessorTrait
 {
     use FormattableModuleTrait;
-
-    abstract protected function getHooksAPI(): HooksAPIInterface;
 
     public function getSubmodules(array $module): array
     {
@@ -45,7 +43,7 @@ trait DataloadModuleProcessorTrait
         /**
          * Allow to add more stuff
          */
-        $this->getHooksAPI()->doAction(
+        App::doAction(
             Constants::HOOK_DATALOAD_INIT_MODEL_PROPS,
             array(&$props),
             $module,

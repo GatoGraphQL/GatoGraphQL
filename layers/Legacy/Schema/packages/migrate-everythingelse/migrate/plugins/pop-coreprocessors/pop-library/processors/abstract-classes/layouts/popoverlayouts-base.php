@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_PopoverLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -46,10 +45,10 @@ abstract class PoP_Module_Processor_PopoverLayoutsBase extends PoPEngine_QueryDa
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         if ($layout = $this->getLayoutSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = ModuleUtils::getModuleOutputName($layout);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
         }
         if ($layout_content = $this->getLayoutContentSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout-content'] = ModuleUtils::getModuleOutputName($layout_content);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout-content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout_content);
         }
         
         return $ret;

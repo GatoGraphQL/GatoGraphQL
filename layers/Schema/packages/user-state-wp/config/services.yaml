@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoPSchema\UserState\TypeAPIs\UserStateTypeAPIInterface:
-        class: \PoPSchema\UserStateWP\TypeAPIs\UserStateTypeAPI

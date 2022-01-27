@@ -1,19 +1,18 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 class PoPTheme_Wassup_EM_ContentHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomContentBlocks:single-sidebar:top',
             array($this, 'getTopSidebar'),
             10,
             2
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomContentBlocks:single-sidebar:bottom',
             array($this, 'getBottomSidebar'),
             10,

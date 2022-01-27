@@ -1,13 +1,12 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Events\Constants\Scopes;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchema\Events\Constants\Scopes;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 class PoP_Events_Events_LatestCounts_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'latestcounts:allcontent:classes',
             array($this, 'getAllcontentClasses')
         );

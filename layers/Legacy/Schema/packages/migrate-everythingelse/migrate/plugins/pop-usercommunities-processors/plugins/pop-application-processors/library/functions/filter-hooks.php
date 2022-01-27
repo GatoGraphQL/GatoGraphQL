@@ -1,11 +1,10 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * Add the filtercomponents to all filters
  */
-HooksAPIFacade::getInstance()->addFilter('Users:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesUser', 10, 2);
+\PoP\Root\App::addFilter('Users:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesUser', 10, 2);
 function gdUreAddFiltercomponentCommunitiesUser($filterinputs, array $module)
 {
     if (in_array($module, [
@@ -28,7 +27,7 @@ function gdUreAddFiltercomponentCommunitiesUser($filterinputs, array $module)
     }
     return $filterinputs;
 }
-HooksAPIFacade::getInstance()->addFilter('SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponentCommunitiesUser', 10, 2);
+\PoP\Root\App::addFilter('SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponentCommunitiesUser', 10, 2);
 function gdUreAddSimpleFiltercomponentCommunitiesUser($filterinputs, array $module)
 {
     if (in_array($module, [
@@ -52,7 +51,7 @@ function gdUreAddSimpleFiltercomponentCommunitiesUser($filterinputs, array $modu
     return $filterinputs;
 }
 
-HooksAPIFacade::getInstance()->addFilter('FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesPost');
+\PoP\Root\App::addFilter('FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesPost');
 function gdUreAddFiltercomponentCommunitiesPost($filterinputs)
 {
     // Place the 'communities' component before the 'profiles' one, so that we can use {{lastGeneratedId}} to reference it
@@ -92,17 +91,16 @@ function gdUreAddFiltercomponentCommunitiesPost($filterinputs)
 }
 
 // Add the author users filtercomponent on the Community author page
-HooksAPIFacade::getInstance()->addFilter('Blog:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunityusers', 10, 2);
+\PoP\Root\App::addFilter('Blog:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunityusers', 10, 2);
 function gdUreAddFiltercomponentCommunityusers($filterinputs, array $module)
 {
     if (in_array($module, [
         [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORCONTENT],
     ])) {
-        $vars = ApplicationState::getVars();
-        $author = $vars['routing-state']['queried-object-id'];
+        $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Check if the user is showing the community. If showing user, then no need for this
-        if (gdUreIsCommunity($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
+        if (gdUreIsCommunity($author) && \PoP\Root\App::getState('source') == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
 
             // Add it after the search
             array_splice(
@@ -121,17 +119,16 @@ function gdUreAddFiltercomponentCommunityusers($filterinputs, array $module)
     }
     return $filterinputs;
 }
-HooksAPIFacade::getInstance()->addFilter('SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponentCommunityusers', 10, 2);
+\PoP\Root\App::addFilter('SimpleFilterInners:inputmodules', 'gdUreAddSimpleFiltercomponentCommunityusers', 10, 2);
 function gdUreAddSimpleFiltercomponentCommunityusers($filterinputs, array $module)
 {
     if (in_array($module, [
         [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],
     ])) {
-        $vars = ApplicationState::getVars();
-        $author = $vars['routing-state']['queried-object-id'];
+        $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Check if the user is showing the community. If showing user, then no need for this
-        if (gdUreIsCommunity($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
+        if (gdUreIsCommunity($author) && \PoP\Root\App::getState('source') == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
 
             // Add it after the search
             array_splice(

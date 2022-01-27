@@ -25,11 +25,11 @@ class Environment
 
     public static function enableSettingMutationSchemeByURLParam(): bool
     {
-        return getenv('ENABLE_SETTING_MUTATION_SCHEME_BY_URL_PARAM') !== false ? strtolower(getenv('ENABLE_SETTING_MUTATION_SCHEME_BY_URL_PARAM')) == "true" : false;
+        return getenv('ENABLE_SETTING_MUTATION_SCHEME_BY_URL_PARAM') !== false ? strtolower(getenv('ENABLE_SETTING_MUTATION_SCHEME_BY_URL_PARAM')) === "true" : false;
     }
 
     public static function enableEnablingGraphQLIntrospectionByURLParam(): bool
     {
-        return getenv('ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM') !== false ? strtolower(getenv('ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM')) == "true" : false;
+        return getenv('ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM') !== false ? strtolower(getenv('ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM')) === "true" : false;
     }
 }

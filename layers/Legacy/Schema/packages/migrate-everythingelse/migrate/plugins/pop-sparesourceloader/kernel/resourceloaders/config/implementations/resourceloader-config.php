@@ -1,12 +1,12 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\AbstractRenderableFileFragment
 {
@@ -28,11 +28,10 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
     {
         $configuration = parent::getConfiguration();
         $cmsService = CMSServiceFacade::getInstance();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPCMSSchema\Users\FunctionAPIFactory::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
-        $vars = ApplicationState::getVars();
-
+        
         // Domain
         $configuration['$domain'] = $cmsService->getSiteURL();
 
@@ -41,7 +40,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         $single_paths = array_map(array($postCategoryTypeAPI, 'getCategoryPath'), $categories);
 
         // Allow EM to add their own paths
-        $single_paths = HooksAPIFacade::getInstance()->applyFilters(
+        $single_paths = \PoP\Root\App::applyFilters(
             'PoP_SPAResourceLoader_FileReproduction_Config:configuration:category-paths',
             $single_paths
         );
@@ -59,7 +58,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
             .'/'
             .$pop_sparesourceloader_natureformatcombinationresources_configfile->getVariableFilename('{0}', '{1}');
         $configFileURLPlaceholder = GeneralUtils::addQueryArgs([
-            'ver' => $vars['version'],
+            'ver' => ApplicationInfoFacade::getInstance()->getVersion(),
         ], $configFileURLPlaceholder);
         $configuration['$configFileURLPlaceholder'] = $configFileURLPlaceholder;
 

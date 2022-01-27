@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\PostMutations\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\PostMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'
+
+    PoPCMSSchema\PostMutations\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'

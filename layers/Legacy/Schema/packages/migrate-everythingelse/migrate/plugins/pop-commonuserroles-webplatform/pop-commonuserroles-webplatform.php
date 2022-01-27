@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Common User Roles Web Platform
 Description: Implementation of Common User Roles Web Platform for PoP
@@ -21,7 +20,7 @@ class PoP_CommonUserRolesWebPlatform
     {
 
         // Priority: after PoP User Communities Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888580);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888580);
     }
     public function init()
     {

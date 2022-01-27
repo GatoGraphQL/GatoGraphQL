@@ -1,6 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CustomCodes extends PoP_Module_Processor_HTMLCodesBase
 {
@@ -19,7 +18,7 @@ class PoP_Module_Processor_CustomCodes extends PoP_Module_Processor_HTMLCodesBas
             case self::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
                 // Allow TPP Debate website to override this label with "Agree?"
                 $labels = array(
-                    self::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL => HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomCodes:updownvote:label', TranslationAPIFacade::getInstance()->__('Important?', 'poptheme-wassup')),
+                    self::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL => \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomCodes:updownvote:label', TranslationAPIFacade::getInstance()->__('Important?', 'poptheme-wassup')),
                 );
 
                 return sprintf(

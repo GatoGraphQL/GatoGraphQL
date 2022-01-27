@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\PluginConstants;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use InvalidArgumentException;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
 

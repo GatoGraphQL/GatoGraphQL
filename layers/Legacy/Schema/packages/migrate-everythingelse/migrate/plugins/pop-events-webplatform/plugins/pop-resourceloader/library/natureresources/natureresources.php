@@ -1,10 +1,9 @@
 <?php
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources_ProcessorBase
 {
@@ -32,7 +31,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         );
         // Watch out! Events with and without category POP_EVENTLINKS_CAT_EVENTLINKS have the same url path,
         // but different configuration, so we gotta select events with and without this category, and merge them all together
-        $independent_cats = HooksAPIFacade::getInstance()->applyFilters(
+        $independent_cats = \PoP\Root\App::applyFilters(
             'PoP_ApplicationProcessors_ResourceLoader_Hooks:single-resources:independent-cats',
             array()
         );
@@ -94,13 +93,13 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         }
 
         if ($ids) {
-            $nature = CustomPostRouteNatures::CUSTOMPOST;
+            $nature = CustomPostRequestNature::CUSTOMPOST;
             $merge = true;
 
             // Add the hook before the execution of the method, and remove it immediately afterwards
-            HooksAPIFacade::getInstance()->addFilter('em_get_event', array($this, 'forceEventScope'), PHP_INT_MAX, 2);
+            \PoP\Root\App::addFilter('em_get_event', array($this, 'forceEventScope'), PHP_INT_MAX, 2);
             PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, $ids, $merge, $options);
-            HooksAPIFacade::getInstance()->removeFilter('em_get_event', array($this, 'forceEventScope'), PHP_INT_MAX, 2);
+            \PoP\Root\App::removeFilter('em_get_event', array($this, 'forceEventScope'), PHP_INT_MAX, 2);
         }
     }
 

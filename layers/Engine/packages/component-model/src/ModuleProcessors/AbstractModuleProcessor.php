@@ -6,24 +6,22 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
-use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
-use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\BasicService\BasicServiceTrait;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Definitions\Configuration\Request;
-use PoP\GraphQLParser\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\LooseContracts\NameResolverInterface;
+use PoP\Root\App;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 {
@@ -47,6 +45,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ModulePaths $modulePaths = null;
+    private ?ModuleHelpersInterface $moduleHelpers = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -112,6 +111,14 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
     }
+    final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
+    {
+        $this->moduleHelpers = $moduleHelpers;
+    }
+    final protected function getModuleHelpers(): ModuleHelpersInterface
+    {
+        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+    }
 
     public function getSubmodules(array $module): array
     {
@@ -135,7 +142,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_modules_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
         // Convert the module to its string representation to access it in the array
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // Initialize. If this module had been added props, then use them already
         // 1st element to merge: the general props for this module passed down the line
@@ -219,7 +226,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $ret['skip-data-load'] = $skip_data_load;
         }
 
-        // Property 'ignore-request-params' => true makes a dataloading module not get values from $_REQUEST
+        // Property 'ignore-request-params' => true makes a dataloading module not get values from the request
         $ignore_params_from_request = $this->getProp($module, $props, 'ignore-request-params');
         if (!is_null($ignore_params_from_request)) {
             $ret['ignore-request-params'] = $ignore_params_from_request;
@@ -273,7 +280,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         /**
          * Allow to add more stuff
          */
-        $this->getHooksAPI()->doAction(
+        App::doAction(
             self::HOOK_INIT_MODEL_PROPS,
             array(&$props),
             $module,
@@ -301,7 +308,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         /**
          * Allow to add more stuff
          */
-        $this->getHooksAPI()->doAction(
+        App::doAction(
             self::HOOK_INIT_REQUEST_PROPS,
             array(&$props),
             $module,
@@ -338,7 +345,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
             // If the module were we are adding the att, is this same module, then we are already at the path
             // If it is not, then go down one level to that module
-            return ($moduleFullName !== ModuleUtils::getModuleFullName($module_or_modulepath));
+            return ($moduleFullName !== $this->getModuleHelpers()->getModuleFullName($module_or_modulepath));
         }
 
         return false;
@@ -363,7 +370,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $ret = array_merge(
                 $ret,
                 array_map(
-                    [ModuleUtils::class, 'getModuleFullName'],
+                    [$this->getModuleHelpers(), 'getModuleFullName'],
                     $module_or_modulepath
                 )
             );
@@ -378,7 +385,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($starting_from_modulepath) {
             // Convert it to string
             $startingFromModulepathFullNames = array_map(
-                [ModuleUtils::class, 'getModuleFullName'],
+                [$this->getModuleHelpers(), 'getModuleFullName'],
                 $starting_from_modulepath
             );
 
@@ -410,7 +417,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($this->isDescendantModule($module_or_modulepath, $props)) {
             // It is a child module
             $att_module = $module_or_modulepath;
-            $attModuleFullName = ModuleUtils::getModuleFullName($att_module);
+            $attModuleFullName = $this->getModuleHelpers()->getModuleFullName($att_module);
 
             // From the root of the $props we obtain the current module
             $moduleFullName = $this->getPathHeadModule($props);
@@ -487,11 +494,11 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         $module_props = &$props;
         foreach ($starting_from_modulepath as $pathlevelModule) {
-            $pathlevelModuleFullName = ModuleUtils::getModuleFullName($pathlevelModule);
+            $pathlevelModuleFullName = $this->getModuleHelpers()->getModuleFullName($pathlevelModule);
             $module_props = &$module_props[$pathlevelModuleFullName][Props::SUBMODULES];
         }
 
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
         return $module_props[$moduleFullName][$group] ?? array();
     }
     protected function addGroupProp(string $group, array $module_or_modulepath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void
@@ -619,7 +626,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         // Propagate to all submodules which have no typeResolver
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         if ($relationalTypeResolver = $this->getProp($module, $props, 'succeeding-typeResolver')) {
             $this->getModuleFilterManager()->prepareForPropagation($module, $props);
@@ -866,7 +873,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         /**
          * Allow to add more stuff
          */
-        $this->getHooksAPI()->doAction(
+        App::doAction(
             self::HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES,
             array(&$ret),
             $module,
@@ -906,8 +913,14 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         // Fetch params from request?
-        $ignore_params_from_request = $this->getProp($module, $props, 'ignore-request-params');
-        if (!is_null($ignore_params_from_request)) {
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
+            $ignore_params_from_request = true;
+        } else {
+            $ignore_params_from_request = $this->getProp($module, $props, 'ignore-request-params');
+        }
+        if ($ignore_params_from_request !== null) {
             $ret[DataloadingConstants::IGNOREREQUESTPARAMS] = $ignore_params_from_request;
         }
 
@@ -949,10 +962,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $datasource = $this->getDatasource($module, $props);
         if ($datasource == DataSources::MUTABLEONREQUEST) {
             $this->addHeaddatasetmoduleDataProperties($ret, $module, $props);
-        }
-
-        if ($dataload_source = $this->getDataloadSource($module, $props)) {
-            $ret[DataloadingConstants::SOURCE] = $dataload_source;
         }
 
         // When loading data or execution an action, check if to validate checkpoints?
@@ -1020,13 +1029,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getDatasetmeta(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
     {
-        $ret = array();
-
-        if ($dataload_source = $data_properties[DataloadingConstants::SOURCE] ?? null) {
-            $ret['dataloadsource'] = $dataload_source;
-        }
-
-        return $ret;
+        return [];
     }
 
     //-------------------------------------------------
@@ -1046,64 +1049,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function shouldExecuteMutation(array $module, array &$props): bool
     {
         // By default, execute only if the module is targeted for execution and doing POST
-        $vars = ApplicationState::getVars();
-        return 'POST' == $_SERVER['REQUEST_METHOD'] && $vars['actionpath'] == $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
-    }
-
-    public function getDataloadSource(array $module, array &$props): string
-    {
-        // Because a component can interact with itself by adding ?modulepaths=...,
-        // then, by default, we simply set the dataload source to point to itself!
-        $stringified_module_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
-        $ret = GeneralUtils::addQueryArgs(
-            [
-                ModuleFilterManager::URLPARAM_MODULEFILTER => $this->getModulePaths()->getName(),
-                ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
-            ],
-            $this->getRequestHelperService()->getCurrentURL()
-        );
-
-        // If we are in the API currently, stay in the API
-        $vars = ApplicationState::getVars();
-        if ($scheme = $vars['scheme']) {
-            $ret = GeneralUtils::addQueryArgs([
-                Params::SCHEME => $scheme,
-            ], $ret);
-        }
-
-        // Allow to add extra modulepaths set from above
-        if ($extra_module_paths = $this->getProp($module, $props, 'dataload-source-add-modulepaths')) {
-            foreach ($extra_module_paths as $modulepath) {
-                $ret = GeneralUtils::addQueryArgs([
-                    ModulePaths::URLPARAM_MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($modulepath),
-                ], $ret);
-            }
-        }
-
-        // Add the actionpath too
-        if ($this->getComponentMutationResolverBridge($module) !== null) {
-            $ret = GeneralUtils::addQueryArgs([
-                Params::ACTION_PATH => $stringified_module_propagation_current_path,
-            ], $ret);
-        }
-
-        // Add the format to the query url
-        if ($this instanceof FormattableModuleInterface) {
-            if ($format = $this->getFormat($module)) {
-                $ret = GeneralUtils::addQueryArgs([
-                    Params::FORMAT => $format,
-                ], $ret);
-            }
-        }
-
-        // If mangled, make it mandle
-        if ($mangled = $vars['mangled']) {
-            $ret = GeneralUtils::addQueryArgs([
-                Request::URLPARAM_MANGLED => $mangled,
-            ], $ret);
-        }
-
-        return $ret;
+        return 'POST' === App::server('REQUEST_METHOD') && App::getState('actionpath') === $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
     }
 
     public function getModulesToPropagateDataProperties(array $module): array
@@ -1119,7 +1065,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     protected function flattenDatasetmoduletreeDataProperties($propagate_fn, &$ret, array $module, array &$props): void
     {
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // Exclude the subcomponent modules here
         $this->getModuleFilterManager()->prepareForPropagation($module, $props);
@@ -1208,7 +1154,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, array $module, array &$props): void
     {
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // Combine the direct and conditionalOnDataField modules all together to iterate below
         $domainSwitchingSubmodules = $this->getDomainSwitchingSubmodules($module);

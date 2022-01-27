@@ -164,7 +164,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
                 // It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
                 // And the Organization must've accepted it by leaving the Show As Member privilege on
                 $ret['meta-query'][] = [
-                    'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_URE_METAKEY_POST_AUTHORROLE),
+                    'key' => \PoPCMSSchema\CustomPostMeta\Utils::getMetaKey(GD_URE_METAKEY_POST_AUTHORROLE),
                     'value' => $role,
                 ];
                 break;

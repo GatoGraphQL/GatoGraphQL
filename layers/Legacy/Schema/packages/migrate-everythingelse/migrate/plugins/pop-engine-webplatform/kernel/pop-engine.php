@@ -3,11 +3,11 @@
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\App;
 
 class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engine
 {
@@ -23,14 +23,14 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     {
         // Print needed scripts
         $this->scripts = $this->enqueue = $this->scripttag_attributes = array();
-        HooksAPIFacade::getInstance()->addAction('popcms:printFooterScripts', array($this, 'printScripts'));
+        \PoP\Root\App::addAction('popcms:printFooterScripts', array($this, 'printScripts'));
 
         // Priority 60: after priority 50 in wp-content/plugins/pop-engine-webplatform/kernel/resourceloader/initialization.php
-        HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'enqueueScripts'), 60);
+        \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'enqueueScripts'), 60);
 
         // Allow to add attributes crossorigin="anonymous"
         // Taken from https://stackoverflow.com/questions/18944027/how-do-i-defer-or-async-this-wordpress-javascript-snippet-to-load-lastly-for-fas
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_HTMLTags_Utils:scripttag_attributes',
             array($this, 'getScripttagAttributes')
         );
@@ -41,8 +41,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $ret = parent::getModuleSettings($module, $model_props, $props);
 
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, App::getState('strata'))) {
             return $ret;
         }
 
@@ -55,10 +54,9 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
 
         // From the state we know if to process static/staful content or both
-        $vars = ApplicationState::getVars();
-        $datasources = $vars['datasources'];
-        $dataoutputmode = $vars['dataoutputmode'];
-        $dataoutputitems = $vars['dataoutputitems'];
+        $datasourceselector = App::getState('datasourceselector');
+        $dataoutputmode = App::getState('dataoutputmode');
+        $dataoutputitems = App::getState('dataoutputitems');
 
         $add_settings = in_array(\PoP\ConfigurationComponentModel\Constants\DataOutputItems::MODULESETTINGS, $dataoutputitems);
 
@@ -81,7 +79,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 }
             }
 
-            if ($datasources == \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST) {
+            if ($datasourceselector == \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST) {
                 $mutableonrequest_jssettings = $processor->getMutableonrequestJssettingsModuletree($module, $props);
             }
 
@@ -136,8 +134,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         // Only add the extra information if the entry-module is of the right object class
         if ($root_processor instanceof PoP_WebPlatformQueryDataModuleProcessorBase) {
 
-            $vars = ApplicationState::getVars();
-            $dataoutputmode = $vars['dataoutputmode'];
+            $dataoutputmode = App::getState('dataoutputmode');
 
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
@@ -184,8 +181,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         parent::processAndAddModuleData($module_path, $module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
 
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, App::getState('strata'))) {
             return;
         }
 
@@ -211,7 +207,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
-                    $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
+                    $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($submodule);
                     $modulejsdata[$submoduleOutputName][ComponentModelComponentInfo::get('response-prop-submodules')] = $modulejsdata[$submoduleOutputName][ComponentModelComponentInfo::get('response-prop-submodules')] ?? array();
                     $modulejsdata = &$modulejsdata[$submoduleOutputName][ComponentModelComponentInfo::get('response-prop-submodules')];
                 }
@@ -229,8 +225,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $meta = parent::getRequestMeta();
 
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, App::getState('strata'))) {
             return $meta;
         }
 
@@ -255,11 +250,11 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
 
         // If preloading the request, then do not render it
-        if (in_array(GD_URLPARAM_ACTION_PRELOAD, $vars['actions'])) {
+        if (in_array(GD_URLPARAM_ACTION_PRELOAD, App::getState('actions'))) {
             $meta[POP_JS_DONOTRENDER] = true;
         }
 
-        $meta = HooksAPIFacade::getInstance()->applyFilters(
+        $meta = \PoP\Root\App::applyFilters(
             'PoPWebPlatform_Engine:request-meta',
             $meta
         );
@@ -282,13 +277,12 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $data = parent::getEncodedDataObject($data);
 
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, App::getState('strata'))) {
             return $data;
         }
 
         // Allow PoP Server-Side Rendering to inject this value
-        $data = HooksAPIFacade::getInstance()->applyFilters(
+        $data = \PoP\Root\App::applyFilters(
             'PoPWebPlatform_Engine:encoded-data-object',
             $data,
             $this
@@ -319,8 +313,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
     public function enqueueScripts()
     {
-        $vars = ApplicationState::getVars();
-        $version = $vars['version'];
+        $version = ApplicationInfoFacade::getInstance()->getVersion();
         $cmswebplatformapi = \PoP\EngineWebPlatform\FunctionAPIFactory::getInstance();
 
         $script = 'pop';
@@ -330,7 +323,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             $script = 'pop-app';
         }
         // Allow PoP Resource Loader to set its own "first script" instead
-        $script = HooksAPIFacade::getInstance()->applyFilters(
+        $script = \PoP\Root\App::applyFilters(
             'PoPWebPlatform_Engine:enqueue-scripts:first-script-handle',
             $script
         );
@@ -364,7 +357,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     // 	);
     // 	$json_settings['templates'] = $processor->getTemplates($module, $props);
 
-    // 	return HooksAPIFacade::getInstance()->applyFilters(
+    // 	return \PoP\Root\App::applyFilters(
     // 		'PoPWebPlatform_Engine:json-module-immutable-settings',
     // 		$json_settings,
     // 		$module,

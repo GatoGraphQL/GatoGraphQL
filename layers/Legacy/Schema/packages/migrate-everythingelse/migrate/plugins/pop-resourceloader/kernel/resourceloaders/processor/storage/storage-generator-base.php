@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class PoP_Engine_ResourceLoaderFileObjectBase  extends \PoP\FileStore\File\AbstractFile {
 
@@ -12,7 +11,7 @@ abstract class PoP_Engine_ResourceLoaderFileObjectBase  extends \PoP\FileStore\F
 	protected function getBaseDir(): string {
 
 		// Allow pop-cluster-resourceloader to change the dir to pop-cluster-generatecache/
-		return HooksAPIFacade::getInstance()->applyFilters(
+		return \PoP\Root\App::applyFilters(
 			'PoP_Engine_ResourceLoaderFileObjectBase:base-dir',
 			POP_RESOURCELOADER_GENERATECACHE_DIR,
 			defined('POP_THEME_INITIALIZED') && $this->acrossThememodes()
@@ -30,8 +29,7 @@ abstract class PoP_Engine_ResourceLoaderFileObjectBase  extends \PoP\FileStore\F
 				return '/shared';
 			}
 
-			$vars = ApplicationState::getVars();
-			return '/'.$vars['theme'].'/'.$vars['thememode'].'/'.$subfolder;
+						return '/'.\PoP\Root\App::getState('theme').'/'.\PoP\Root\App::getState('thememode').'/'.$subfolder;
 		}
 
 		return $subfolder;

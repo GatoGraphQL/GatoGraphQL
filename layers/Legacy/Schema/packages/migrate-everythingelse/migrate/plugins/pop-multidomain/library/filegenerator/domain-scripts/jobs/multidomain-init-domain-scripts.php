@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_MultiDomain_InitDomainScripts_Config extends \PoP\FileStore\File\AbstractRenderableFileFragment
 {
@@ -22,7 +21,7 @@ class PoP_MultiDomain_InitDomainScripts_Config extends \PoP\FileStore\File\Abstr
         $configuration = parent::getConfiguration();
 
         // Domain
-        $configuration['$domainScripts'] = HooksAPIFacade::getInstance()->applyFilters(
+        $configuration['$domainScripts'] = \PoP\Root\App::applyFilters(
             'PoP_MultiDomain_InitDomainScripts_Config:domain-scripts',
             array()
         );

@@ -1,11 +1,10 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Types\Status;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 {
@@ -36,10 +35,9 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     {
 
         // Do not add for the quickview, since it is a modal and can't open a new modal (eg: Embed) on top
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
                 if (in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
@@ -191,7 +189,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
             case self::MODULE_BLOCK_AUTHOR:
             case self::MODULE_BLOCK_TAG:
 
-                // When loading the whole site, only the main content can have components retrieve params from the $_REQUEST
+                // When loading the whole site, only the main content can have components retrieve params from the $_GET
                 // This way, passing &limit=4 doesn't affect the results on the top widgets
                 $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
                 $submodules = array_diff(
@@ -214,8 +212,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
-                $vars = ApplicationState::getVars();
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
                     $this->setProp($module, $props, 'show-submenu', false);
                     $this->setProp($module, $props, 'show-controls-bottom', false);
@@ -261,7 +258,6 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
     public function getTitle(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
@@ -269,13 +265,13 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 return TranslationAPIFacade::getInstance()->__('Oops, this page doesn\'t exist!', 'poptheme-wassup');
 
             case self::MODULE_BLOCK_SINGLEPOST:
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $customPostTypeAPI->getTitle($post_id);
 
             case self::MODULE_BLOCK_AUTHOR:
             case self::MODULE_BLOCK_AUTHORDESCRIPTION:
             case self::MODULE_BLOCK_AUTHORSUMMARY:
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $userTypeAPI->getUserDisplayName($author);
 
             case self::MODULE_BLOCK_TAG:
@@ -294,7 +290,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         switch ($module[1]) {
             case self::MODULE_BLOCK_HOME:
                 // Allow TPPDebate to override this
-                if ($top_modules = HooksAPIFacade::getInstance()->applyFilters(
+                if ($top_modules = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:home_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOMETOP]
@@ -313,7 +309,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 break;
 
             case self::MODULE_BLOCK_AUTHOR:
-                if ($top_modules = HooksAPIFacade::getInstance()->applyFilters(
+                if ($top_modules = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:author_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHORTOP],
@@ -332,7 +328,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 break;
 
             case self::MODULE_BLOCK_TAG:
-                if ($top_modules = HooksAPIFacade::getInstance()->applyFilters(
+                if ($top_modules = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:tag_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_TAG_WIDGETAREA],
@@ -372,7 +368,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                     [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT],
                     [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT],
                 );
-                $modules = HooksAPIFacade::getInstance()->applyFilters(
+                $modules = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:single',
                     $modules
                 );

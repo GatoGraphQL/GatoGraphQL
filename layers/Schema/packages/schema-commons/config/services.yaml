@@ -7,14 +7,5 @@ services:
     PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface:
         class: \PoPSchema\SchemaCommons\Services\AllowOrDenySettingsService
 
-    PoPSchema\SchemaCommons\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
-
-    PoPSchema\SchemaCommons\FilterInputProcessors\:
-        resource: '../src/FilterInputProcessors/*'
-
-    PoPSchema\SchemaCommons\FormInputs\:
-        resource: '../src/FormInputs/*'
-
     PoPSchema\SchemaCommons\ObjectSerializers\:
         resource: '../src/ObjectSerializers/*'

@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_RelatedPosts_SectionUtils
 {
@@ -13,13 +13,12 @@ class PoP_RelatedPosts_SectionUtils
         PoP_Application_SectionUtils::addDataloadqueryargsAllcontent($ret);
 
         if (is_null($post_id)) {
-            $vars = ApplicationState::getVars();
-            $post_id = $vars['routing-state']['queried-object-id'];
+            $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         }
 
         // Find all related posts
         $ret['meta-query'][] = [
-            'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_REFERENCES),
+            'key' => \PoPCMSSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_REFERENCES),
             'value' => array($post_id),
             'compare' => 'IN'
         ];

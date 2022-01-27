@@ -1,7 +1,7 @@
 <?php
-use PoPSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostObjectTypeResolver;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPCMSSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostObjectTypeResolver;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
@@ -96,11 +96,11 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     //     switch ($module[1]) {
     //         case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
     //         case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
     //     }
 
     //     return parent::getNature($module);

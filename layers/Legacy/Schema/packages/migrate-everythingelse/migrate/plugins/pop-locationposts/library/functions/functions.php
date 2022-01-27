@@ -1,8 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_postname', 'locationpostsPostname', 10, 2);
+\PoP\Root\App::addFilter('gd_postname', 'locationpostsPostname', 10, 2);
 function locationpostsPostname($name, $post_id = null)
 {
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -12,7 +11,7 @@ function locationpostsPostname($name, $post_id = null)
 
     return $name;
 }
-HooksAPIFacade::getInstance()->addFilter('gd_format_postname', 'locationpostsFormatPostname', 10, 3);
+\PoP\Root\App::addFilter('gd_format_postname', 'locationpostsFormatPostname', 10, 3);
 function locationpostsFormatPostname($name, $post_id, $format)
 {
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -26,7 +25,7 @@ function locationpostsFormatPostname($name, $post_id, $format)
 
     return $name;
 }
-HooksAPIFacade::getInstance()->addFilter('gd_posticon', 'locationpostsPosticon', 10, 2);
+\PoP\Root\App::addFilter('gd_posticon', 'locationpostsPosticon', 10, 2);
 function locationpostsPosticon($icon, $post_id = null)
 {
     if (defined('POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS') && POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS) {

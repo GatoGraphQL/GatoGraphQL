@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 define('POP_EMAIL_JOINSCOMMUNITIES', 'joinscommunities');
 
@@ -13,7 +12,7 @@ class PoP_URE_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Email Notifications
         //----------------------------------------------------------------------
-        HooksAPIFacade::getInstance()->addAction('gd_update_mycommunities:update', array($this, 'emailnotificationsNetworkJoinscommunity'), 10, 3);
+        \PoP\Root\App::addAction('gd_update_mycommunities:update', array($this, 'emailnotificationsNetworkJoinscommunity'), 10, 3);
     }
 
     public function emailnotificationsNetworkJoinscommunity($user_id, $form_data, $operationlog)

@@ -1,6 +1,5 @@
 <?php
 namespace PoP\UserAccount\WP;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 use PoP\LooseContracts\Facades\LooseContractManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
@@ -10,23 +9,23 @@ class CMSLooseContractImplementations extends AbstractLooseContractResolutionSet
 	protected function resolveContracts(): void
     {
 		// Filters.
-		$this->getHooksAPI()->addFilter('login_url', function($url, $redirect) {
-			return $this->getHooksAPI()->applyFilters('popcms:loginUrl', $url, $redirect);
+		\PoP\Root\App::addFilter('login_url', function($url, $redirect) {
+			return \PoP\Root\App::applyFilters('popcms:loginUrl', $url, $redirect);
 		}, 10, 2);
-		$this->getHooksAPI()->addFilter('lostpassword_url', function($url, $redirect) {
-			return $this->getHooksAPI()->applyFilters('popcms:lostPasswordUrl', $url, $redirect);
+		\PoP\Root\App::addFilter('lostpassword_url', function($url, $redirect) {
+			return \PoP\Root\App::applyFilters('popcms:lostPasswordUrl', $url, $redirect);
 		}, 10, 2);
-		$this->getHooksAPI()->addFilter('logout_url', function($url, $redirect) {
-			return $this->getHooksAPI()->applyFilters('popcms:logoutUrl', $url, $redirect);
+		\PoP\Root\App::addFilter('logout_url', function($url, $redirect) {
+			return \PoP\Root\App::applyFilters('popcms:logoutUrl', $url, $redirect);
 		}, 10, 2);
-		$this->getHooksAPI()->addFilter('auth_cookie_expiration', function($time_in_seconds, $user_id, $remember) {
-			return $this->getHooksAPI()->applyFilters('popcms:authCookieExpiration', $time_in_seconds, $user_id, $remember);
+		\PoP\Root\App::addFilter('auth_cookie_expiration', function($time_in_seconds, $user_id, $remember) {
+			return \PoP\Root\App::applyFilters('popcms:authCookieExpiration', $time_in_seconds, $user_id, $remember);
 		}, 10, 3);
-		$this->getHooksAPI()->addFilter('retrieve_password_title', function($title, $user_login, $user_data) {
-			return $this->getHooksAPI()->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user_data);
+		\PoP\Root\App::addFilter('retrieve_password_title', function($title, $user_login, $user_data) {
+			return \PoP\Root\App::applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user_data);
 		}, 10, 3);
-		$this->getHooksAPI()->addFilter('retrieve_password_message', function($message, $key, $user_login, $user_data) {
-			return $this->getHooksAPI()->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user_data);
+		\PoP\Root\App::addFilter('retrieve_password_message', function($message, $key, $user_login, $user_data) {
+			return \PoP\Root\App::applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user_data);
 		}, 10, 4);
 
 		$this->looseContractManager->implementHooks([
@@ -50,6 +49,6 @@ class CMSLooseContractImplementations extends AbstractLooseContractResolutionSet
 new CMSLooseContractImplementations(
 	LooseContractManagerFacade::getInstance(),
 	NameResolverFacade::getInstance(),
-	HooksAPIFacade::getInstance()
+	\PoP\Root\App::getHookManager()
 );
 

@@ -1,6 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
@@ -197,7 +196,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
 
             case self::MODULE_FORMINPUTGROUP_APPLIESTO:
                 // Allow to override by whoever is establishing the "applies to" values. Eg: "Select countries"
-                $label = HooksAPIFacade::getInstance()->applyFilters(
+                $label = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CreateUpdatePostFormInputGroups:appliesto:label',
                     TranslationAPIFacade::getInstance()->__('Applies to', 'poptheme-wassup')
                 );

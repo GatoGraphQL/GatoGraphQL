@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 class PoPTheme_Wassup_Installation
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('PoP:system-build', array($this, 'changeAuthorFlushrules'));
-        HooksAPIFacade::getInstance()->addAction('PoP:system-build', array($this, 'updateImageDefaultSize'));
+        \PoP\Root\App::addAction('PoP:system-build', array($this, 'changeAuthorFlushrules'));
+        \PoP\Root\App::addAction('PoP:system-build', array($this, 'updateImageDefaultSize'));
     }
 
     /**

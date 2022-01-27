@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Event Links Creation
 Description: Implementation of Event Links Creation for PoP
@@ -20,7 +19,7 @@ class PoP_EventLinksCreation
     {
 
         // Priority: after PoP Events Creation
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888390);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888390);
     }
     public function init()
     {

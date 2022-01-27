@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Share Processors
 Description: Implementation of Share Processors for PoP
@@ -21,7 +20,7 @@ class PoP_ShareProcessors
     {
 
         // Priority: after PoP Forms Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888820);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888820);
     }
     public function init()
     {

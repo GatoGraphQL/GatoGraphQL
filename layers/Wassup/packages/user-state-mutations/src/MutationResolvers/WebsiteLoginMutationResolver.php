@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
 use PoP\UserAccount\FunctionAPIFactory;
-use PoPSchema\UserStateMutations\MutationResolvers\LoginUserByCredentialsMutationResolver as UpstreamLoginUserByCredentialsMutationResolver;
+use PoPCMSSchema\UserStateMutations\MutationResolvers\LoginUserByCredentialsMutationResolver as UpstreamLoginUserByCredentialsMutationResolver;
 
 class LoginUserByCredentialsMutationResolver extends UpstreamLoginUserByCredentialsMutationResolver
 {

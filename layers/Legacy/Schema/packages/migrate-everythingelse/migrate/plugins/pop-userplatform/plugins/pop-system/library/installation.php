@@ -1,17 +1,16 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_UserPlatform_Installation
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('PoP:system-install', array($this, 'install'));
+        \PoP\Root\App::addAction('PoP:system-install', array($this, 'install'));
     }
 
     public function install()
     {
         // Allow the library to add extra capabilities to below roles
-        $capabilities = HooksAPIFacade::getInstance()->applyFilters(
+        $capabilities = \PoP\Root\App::applyFilters(
             'PoP_UserPlatform_Installation:install:capabilities',
             array(
                 'edit_posts' => true,
@@ -25,7 +24,7 @@ class PoP_UserPlatform_Installation
             )
         );
 
-        $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
+        $cmsuserrolesapi = \PoPCMSSchema\UserRoles\FunctionAPIFactory::getInstance();
         $cmsuserrolesapi->addRole(GD_ROLE_PROFILE, 'GD Profile', $capabilities);
     }
 }

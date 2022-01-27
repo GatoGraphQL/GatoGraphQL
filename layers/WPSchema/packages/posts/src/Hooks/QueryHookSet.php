@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Posts\Hooks;
 
-use PoP\BasicService\AbstractHookSet;
-use PoPSchema\PostsWP\TypeAPIs\PostTypeAPI;
+use PoP\Root\App;
+use PoP\Root\Hooks\AbstractHookSet;
+use PoPCMSSchema\PostsWP\TypeAPIs\PostTypeAPI;
 
 class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::addFilter(
             PostTypeAPI::HOOK_QUERY,
             [$this, 'convertCustomPostsQuery'],
             10,

@@ -7,11 +7,10 @@ namespace GraphQLByPoP\GraphQLServer\Schema;
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
-use PoP\API\Component as APIComponent;
-use PoP\API\ComponentConfiguration as APIComponentConfiguration;
-use PoP\ComponentModel\State\ApplicationState;
+use PoPAPI\API\Component as APIComponent;
+use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\API\Schema\SchemaDefinitionService;
+use PoPAPI\API\Schema\SchemaDefinitionService;
 
 class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements GraphQLSchemaDefinitionServiceInterface
 {
@@ -41,8 +40,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
      */
     public function getSchemaQueryRootObjectTypeResolver(): ObjectTypeResolverInterface
     {
-        $vars = ApplicationState::getVars();
-        if ($vars['nested-mutations-enabled']) {
+        if (App::getState('nested-mutations-enabled')) {
             return $this->getSchemaRootObjectTypeResolver();
         }
 
@@ -60,8 +58,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
         if (!$componentConfiguration->enableMutations()) {
             return null;
         }
-        $vars = ApplicationState::getVars();
-        if ($vars['nested-mutations-enabled']) {
+        if (App::getState('nested-mutations-enabled')) {
             return $this->getSchemaRootObjectTypeResolver();
         }
 

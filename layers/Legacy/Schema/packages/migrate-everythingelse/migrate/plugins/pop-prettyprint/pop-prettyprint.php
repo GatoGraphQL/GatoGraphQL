@@ -6,7 +6,6 @@ Description: Functionality for doing the PrettyPrint using Google's library: htt
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('POP_PRETTYPRINT_VERSION', 0.109);
 define('POP_PRETTYPRINT_VENDORRESOURCESVERSION', 0.100);
@@ -18,7 +17,7 @@ class PoP_PrettyPrint
     {
 
         // Priority: after PoP Application Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888510);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888510);
     }
 
     public function init()

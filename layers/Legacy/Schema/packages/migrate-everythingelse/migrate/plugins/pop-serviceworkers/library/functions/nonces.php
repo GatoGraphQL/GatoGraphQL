@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 // Comment Leo 06/08/2017: no, it is not needed! A solution is to bring the nonce not when creating the editor, but when logging in! Then,
 // we can even keep the user_id as part of the nonce!!!!!
@@ -13,7 +12,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 //  * since that value will always be stale and give back the value false. At least for the current nonce of just 1 day
 //  * So make the nonce a tiny bit longer
 //  */
-// HooksAPIFacade::getInstance()->addFilter('nonce_life', 'popSwNonceLife');
+// \PoP\Root\App::addFilter('nonce_life', 'popSwNonceLife');
 // function popSwNonceLife($nonce_life) {
 
 //     // 180 Days: this implies that the Service Workers cache must be regenerated every, at most, 180 days,

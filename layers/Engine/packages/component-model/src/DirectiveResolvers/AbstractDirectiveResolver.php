@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use Exception;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Component;
@@ -23,14 +23,11 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
-use PoP\FieldQuery\QueryHelpers;
 use PoP\Root\App;
 use PoP\Root\Environment as RootEnvironment;
 
@@ -74,10 +71,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * @var array<string, mixed>
      */
     protected array $directiveArgsForObjects = [];
-    /**
-     * @var array[]
-     */
-    protected array $nestedDirectivePipelineData = [];
 
     /**
      * @var array<string, array>
@@ -190,80 +183,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array &$schemaNotices,
         array &$schemaTraces
     ): array {
-        // If it has nestedDirectives, extract them and validate them
-        $nestedFieldDirectives = $this->getFieldQueryInterpreter()->getFieldDirectives($this->directive, false);
-        if ($nestedFieldDirectives) {
-            $nestedDirectiveSchemaErrors = $nestedDirectiveSchemaWarnings = $nestedDirectiveSchemaDeprecations = $nestedDirectiveSchemaNotices = $nestedDirectiveSchemaTraces = [];
-            $nestedFieldDirectives = QueryHelpers::splitFieldDirectives($nestedFieldDirectives);
-            // Support repeated fields by adding a counter next to them
-            if (count($nestedFieldDirectives) != count(array_unique($nestedFieldDirectives))) {
-                // Find the repeated fields, and add a counter next to them
-                $expandedNestedFieldDirectives = [];
-                $counters = [];
-                foreach ($nestedFieldDirectives as $nestedFieldDirective) {
-                    if (!isset($counters[$nestedFieldDirective])) {
-                        $expandedNestedFieldDirectives[] = $nestedFieldDirective;
-                        $counters[$nestedFieldDirective] = 1;
-                    } else {
-                        $expandedNestedFieldDirectives[] = $nestedFieldDirective . FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . $counters[$nestedFieldDirective];
-                        $counters[$nestedFieldDirective]++;
-                    }
-                }
-                $nestedFieldDirectives = $expandedNestedFieldDirectives;
-            }
-            // Each composed directive will deal with the same fields as the current directive
-            $nestedFieldDirectiveFields = $fieldDirectiveFields;
-            foreach ($nestedFieldDirectives as $nestedFieldDirective) {
-                $nestedFieldDirectiveFields[$nestedFieldDirective] = $fieldDirectiveFields[$this->directive];
-            }
-            $this->nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
-                $nestedFieldDirectives,
-                $nestedFieldDirectiveFields,
-                true,
-                $variables,
-                $nestedDirectiveSchemaErrors,
-                $nestedDirectiveSchemaWarnings,
-                $nestedDirectiveSchemaDeprecations,
-                $nestedDirectiveSchemaNotices,
-                $nestedDirectiveSchemaTraces
-            );
-            foreach ($nestedDirectiveSchemaDeprecations as $nestedDirectiveSchemaDeprecation) {
-                array_unshift($nestedDirectiveSchemaDeprecation[Tokens::PATH], $this->directive);
-                $schemaDeprecations[] = $nestedDirectiveSchemaDeprecation;
-            }
-            foreach ($nestedDirectiveSchemaWarnings as $nestedDirectiveSchemaWarning) {
-                array_unshift($nestedDirectiveSchemaWarning[Tokens::PATH], $this->directive);
-                $schemaWarnings[] = $nestedDirectiveSchemaWarning;
-            }
-            foreach ($nestedDirectiveSchemaNotices as $nestedDirectiveSchemaNotice) {
-                array_unshift($nestedDirectiveSchemaNotice[Tokens::PATH], $this->directive);
-                $schemaNotices[] = $nestedDirectiveSchemaNotice;
-            }
-            foreach ($nestedDirectiveSchemaTraces as $nestedDirectiveSchemaTrace) {
-                array_unshift($nestedDirectiveSchemaTrace[Tokens::PATH], $this->directive);
-                $schemaTraces[] = $nestedDirectiveSchemaTrace;
-            }
-            // If there is any error, then we also can't proceed with the current directive.
-            // Throw an error for this level, and underlying errors as nested
-            if ($nestedDirectiveSchemaErrors) {
-                $schemaError = [
-                    Tokens::PATH => [$this->directive],
-                    Tokens::MESSAGE => $this->__('This directive can\'t be executed due to errors from its composed directives', 'component-model'),
-                ];
-                foreach ($nestedDirectiveSchemaErrors as $nestedDirectiveSchemaError) {
-                    array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $this->directive);
-                    $this->prependPathOnNestedErrors($nestedDirectiveSchemaError);
-                    $schemaError[Tokens::EXTENSIONS][Tokens::NESTED][] = $nestedDirectiveSchemaError;
-                }
-                $schemaErrors[] = $schemaError;
-                return [
-                    null, // $validDirective
-                    null, // $directiveName
-                    null, // $directiveArgs
-                ];
-            }
-        }
-
         // First validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
         list(
             $validDirective,
@@ -443,7 +362,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * If this directive is tagged with a version...
              */
             $schemaDirectiveVersion = $this->getDirectiveVersion($relationalTypeResolver);
-            $vars = ApplicationState::getVars();
             /**
              * Get versionConstraint in this order:
              * 1. Passed as directive argument
@@ -453,7 +371,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $versionConstraint =
                 $directiveArgs[SchemaDefinition::VERSION_CONSTRAINT]
                 ?? $this->getVersioningService()->getVersionConstraintsForDirective($this->getDirectiveName())
-                ?? $vars['version-constraint'];
+                ?? App::getState('version-constraint');
             /**
              * If the query doesn't restrict the version, then do not process
              */
@@ -723,7 +641,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
-        $consolidatedDirectiveArgNameTypeResolvers = $this->getHooksAPI()->applyFilters(
+        $consolidatedDirectiveArgNameTypeResolvers = App::applyFilters(
             HookNames::DIRECTIVE_ARG_NAME_TYPE_RESOLVERS,
             $directiveArgNameTypeResolvers,
             $this,
@@ -758,7 +676,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgDescriptionCache)) {
             return $this->consolidatedDirectiveArgDescriptionCache[$cacheKey];
         }
-        $this->consolidatedDirectiveArgDescriptionCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedDirectiveArgDescriptionCache[$cacheKey] = App::applyFilters(
             HookNames::DIRECTIVE_ARG_DESCRIPTION,
             $this->getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
             $this,
@@ -779,7 +697,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgDefaultValueCache)) {
             return $this->consolidatedDirectiveArgDefaultValueCache[$cacheKey];
         }
-        $this->consolidatedDirectiveArgDefaultValueCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedDirectiveArgDefaultValueCache[$cacheKey] = App::applyFilters(
             HookNames::DIRECTIVE_ARG_DEFAULT_VALUE,
             $this->getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
             $this,
@@ -800,7 +718,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgTypeModifiersCache)) {
             return $this->consolidatedDirectiveArgTypeModifiersCache[$cacheKey];
         }
-        $this->consolidatedDirectiveArgTypeModifiersCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedDirectiveArgTypeModifiersCache[$cacheKey] = App::applyFilters(
             HookNames::DIRECTIVE_ARG_TYPE_MODIFIERS,
             $this->getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
             $this,
@@ -859,7 +777,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgExtensionsCache)) {
             return $this->consolidatedDirectiveArgExtensionsCache[$cacheKey];
         }
-        $this->consolidatedDirectiveArgExtensionsCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedDirectiveArgExtensionsCache[$cacheKey] = App::applyFilters(
             HookNames::DIRECTIVE_ARG_EXTENSIONS,
             $this->getDirectiveArgExtensionsSchemaDefinition($relationalTypeResolver, $directiveArgName),
             $this,

@@ -1,7 +1,7 @@
 <?php
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSitesWassup\FlagMutations\MutationResolverBridges\FlagCustomPostMutationResolverBridge;
 
 class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
@@ -101,11 +101,11 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getObjectIDParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDParamName(array $module, array &$props, array &$data_properties): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_FLAG:
-                return \PoPSchema\Posts\Constants\InputNames::POST_ID;
+                return \PoPCMSSchema\Posts\Constants\InputNames::POST_ID;
         }
         return null;
     }

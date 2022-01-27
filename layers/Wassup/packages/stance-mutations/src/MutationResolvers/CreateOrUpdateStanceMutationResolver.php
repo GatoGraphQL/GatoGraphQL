@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
-use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 
 class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMutationResolver
 {

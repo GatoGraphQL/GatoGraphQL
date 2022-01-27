@@ -1,7 +1,6 @@
 <?php
 
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_WebPlatformEngineOptimizations_Initialization
 {
@@ -11,7 +10,7 @@ class PoP_WebPlatformEngineOptimizations_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
         }
 
         /**
@@ -49,7 +48,7 @@ class PoP_WebPlatformEngineOptimizations_Initialization
                 // Comment Leo 19/11/2017: if we enable the "config" param, then add this resource always
                 // (Otherwise it fails because the configuration is cached but the list of modules to load is different)
                 // If not, then add it if we are generating the resources on runtime
-                if (ComponentModelComponentConfiguration::enableConfigByParams() || PoP_WebPlatformEngineOptimizations_ServerUtils::extractResponseIntoJsfilesOnRuntime()) {
+                if (PoP_WebPlatformEngineOptimizations_ServerUtils::extractResponseIntoJsfilesOnRuntime()) {
                     $cmswebplatformapi->registerScript('pop-initializedata', $libraries_js_folder.'/initializedata'.$suffix.'.js', array(), POP_ENGINEWEBPLATFORMOPTIMIZATIONS_VERSION, true);
                     $cmswebplatformapi->enqueueScript('pop-initializedata');
                 }

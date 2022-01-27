@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP User Platform
 Description: Implementation of User Platform for PoP
@@ -20,7 +19,7 @@ class PoP_UserPlatform
     {
 
         // Priority: after PoP User Login
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888330);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888330);
     }
     public function init()
     {

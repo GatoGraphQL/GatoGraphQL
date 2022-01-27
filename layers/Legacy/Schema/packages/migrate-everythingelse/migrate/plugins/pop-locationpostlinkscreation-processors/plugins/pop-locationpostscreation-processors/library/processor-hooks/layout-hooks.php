@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::addFilter(
 	'CommonPages_EM_Module_Processor_ControlButtonGroups:modules', 
 	'popLocationpostlinkscreationAddlocationpostButtons'
 );

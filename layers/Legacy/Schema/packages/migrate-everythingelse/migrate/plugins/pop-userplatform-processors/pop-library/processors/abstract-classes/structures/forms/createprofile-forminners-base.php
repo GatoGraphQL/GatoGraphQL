@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class PoP_Module_Processor_CreateProfileFormInnersBase extends PoP_Module_Processor_CreateUserFormInnersBase
 {
@@ -11,7 +10,7 @@ abstract class PoP_Module_Processor_CreateProfileFormInnersBase extends PoP_Modu
         PoP_Module_Processor_CreateUpdateProfileFormsUtils::getFormSubmodules($module, $components, $this);
 
         // Hook for Newsletter
-        $components = HooksAPIFacade::getInstance()->applyFilters('pop_module:createprofile:components', $components, $module, $this);
+        $components = \PoP\Root\App::applyFilters('pop_module:createprofile:components', $components, $module, $this);
 
         return $components;
     }

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Location Post Links Creation Web Platform
 Description: Implementation of LocationPostLinks Creation Web Platform for PoP
@@ -21,7 +20,7 @@ class PoP_LocationPostLinksCreationWebPlatform
     {
 
         // Priority: after PoP Location Posts Creation Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888570);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888570);
     }
     public function init()
     {

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Social Network
 Description: Implementation of Social Network for PoP
@@ -20,7 +19,7 @@ class PoP_SocialNetwork
     {
 
         // Priority: after PoP Add Comments TinyMCE
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888360);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888360);
     }
     public function init()
     {

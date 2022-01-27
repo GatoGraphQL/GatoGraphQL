@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -41,10 +40,10 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataMo
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         if ($script_customize = $this->getCustomizationSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-customize'] = ModuleUtils::getModuleOutputName($script_customize);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-customize'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($script_customize);
         }
         $markers = [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::MODULE_MAP_SCRIPT_MARKERS];
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-markers'] = ModuleUtils::getModuleOutputName($markers);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-markers'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($markers);
 
         return $ret;
     }

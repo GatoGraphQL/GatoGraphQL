@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Add Comments
 Description: Implementation of Add Comments for PoP
@@ -20,7 +19,7 @@ class PoP_AddComments
     {
 
         // Priority: after PoP Notifications
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function init()
     {

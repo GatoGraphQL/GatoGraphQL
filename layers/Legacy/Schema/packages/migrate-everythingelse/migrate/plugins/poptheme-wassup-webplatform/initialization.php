@@ -1,7 +1,7 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\Facades\FileRendererFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ThemeWassupWebPlatform_Initialization
 {
@@ -12,13 +12,13 @@ class PoP_ThemeWassupWebPlatform_Initialization
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
             // After PoP
-            HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'), 100);
+            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'), 100);
 
             // Priority 0: print "style.css" immediately, so it starts rendering and applying these styles before anything else
-            HooksAPIFacade::getInstance()->addAction('popcms:printStyles', array($this, 'registerStyles'), 0);
+            \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'), 0);
 
             // Inline styles
-            HooksAPIFacade::getInstance()->addAction('popcms:head', array($this, 'printInlineStyles'));
+            \PoP\Root\App::addAction('popcms:head', array($this, 'printInlineStyles'));
         }
 
         /**
@@ -222,13 +222,12 @@ class PoP_ThemeWassupWebPlatform_Initialization
             // This file is generated dynamically, so it can't be added to any bundle or minified
             // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
             global $popthemewassup_backgroundimage_file, $popthemewassup_feedthumb_file;
-            $vars = ApplicationState::getVars();
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $htmlcssplatformapi->registerStyle('poptheme-wassup-backgroundimage', $popthemewassup_backgroundimage_file->getFileurl(), array(), $vars['version']);
+                $htmlcssplatformapi->registerStyle('poptheme-wassup-backgroundimage', $popthemewassup_backgroundimage_file->getFileurl(), array(), ApplicationInfoFacade::getInstance()->getVersion());
                 $htmlcssplatformapi->enqueueStyle('poptheme-wassup-backgroundimage');
             }
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $htmlcssplatformapi->registerStyle('poptheme-wassup-feedthumb', $popthemewassup_feedthumb_file->getFileurl(), array(), $vars['version']);
+                $htmlcssplatformapi->registerStyle('poptheme-wassup-feedthumb', $popthemewassup_feedthumb_file->getFileurl(), array(), ApplicationInfoFacade::getInstance()->getVersion());
                 $htmlcssplatformapi->enqueueStyle('poptheme-wassup-feedthumb');
             }
         }

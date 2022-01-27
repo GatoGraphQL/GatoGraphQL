@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoP\Root\App;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
  * Extension of the Offline Gateway to provide for Bank Details
@@ -25,17 +25,16 @@ if (class_exists("EM_Gateway_Offline")) {
             //Booking Interception
 
             // These actions have already been added by gateway.offline.php, if they are not removed they are executed twice
-            HooksAPIFacade::getInstance()->removeAction('em_admin_event_booking_options_buttons', array($this, 'event_booking_options_buttons'), 10);
-            HooksAPIFacade::getInstance()->removeAction('em_admin_event_booking_options', array($this, 'event_booking_options'), 10);
-            HooksAPIFacade::getInstance()->removeAction('em_bookings_single_metabox_footer', array($this, 'add_payment_form'), 1, 1); //add payment to booking
-            HooksAPIFacade::getInstance()->removeAction('em_bookings_manual_booking', array($this, 'add_booking_form'), 1, 1);
+            \PoP\Root\App::removeAction('em_admin_event_booking_options_buttons', array($this, 'event_booking_options_buttons'), 10);
+            \PoP\Root\App::removeAction('em_admin_event_booking_options', array($this, 'event_booking_options'), 10);
+            \PoP\Root\App::removeAction('em_bookings_single_metabox_footer', array($this, 'add_payment_form'), 1, 1); //add payment to booking
+            \PoP\Root\App::removeAction('em_bookings_manual_booking', array($this, 'add_booking_form'), 1, 1);
         }
 
         public function emWpLocalizeScript($em_localized_js)
         {
             $cmsService = CMSServiceFacade::getInstance();
-            $vars = ApplicationState::getVars();
-            if ($vars['global-userstate']['is-user-logged-in'] && $cmsService->getOption('dbem_rsvp_enabled')) {
+            if (App::getState('is-user-logged-in') && $cmsService->getOption('dbem_rsvp_enabled')) {
                 $em_localized_js[$this->gateway . '_confirm'] = TranslationAPIFacade::getInstance()->__('Be aware that by approving a booking awaiting payment, a full payment transaction will be registered against this booking, meaning that it will be considered as paid.', 'dbem');
             }
             return $em_localized_js;
@@ -63,7 +62,7 @@ if (class_exists("EM_Gateway_Offline")) {
                     if (!empty($EM_Booking->email_not_sent)) {
                         $return['message'] .=  ' '.$cmsService->getOption('dbem_booking_feedback_nomail');
                     }
-                    return HooksAPIFacade::getInstance()->applyFilters('em_gateway_' . $this->gateway . '_booking_add', $return, $EM_Booking->getEvent(), $EM_Booking);
+                    return \PoP\Root\App::applyFilters('em_gateway_' . $this->gateway . '_booking_add', $return, $EM_Booking->getEvent(), $EM_Booking);
                 }
             }
             return $return;

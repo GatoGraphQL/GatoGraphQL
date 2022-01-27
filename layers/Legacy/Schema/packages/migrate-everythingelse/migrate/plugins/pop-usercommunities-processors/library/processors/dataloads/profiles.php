@@ -2,8 +2,8 @@
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\EditMembershipMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\InviteMembersMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\UpdateMyCommunitiesMutationResolverBridge;
@@ -146,17 +146,16 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
                 return $this->getObjectIDFromURLParam($module, $props, $data_properties);
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
-                $vars = ApplicationState::getVars();
-                return $vars['global-userstate']['current-user-id'];
+                return \PoP\Root\App::getState('current-user-id');
         }
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getObjectIDParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDParamName(array $module, array &$props, array &$data_properties): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
-                return \PoPSchema\Users\Constants\InputNames::USER_ID;
+                return \PoPCMSSchema\Users\Constants\InputNames::USER_ID;
         }
         return null;
     }

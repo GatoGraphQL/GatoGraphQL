@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {
@@ -29,7 +28,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
     {
 
         // Allow Mentions to add its required templates (User/Tag Mention Layout)
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_EditorFormInputsBase:editor_layouts',
             array()
         );

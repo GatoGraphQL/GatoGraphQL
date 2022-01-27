@@ -2,7 +2,6 @@
 
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * Helper functions, they have the same logic as the original javascript
@@ -209,7 +208,7 @@ class PoP_ServerSide_KernelHelpers
         $response = $popManager->getHtml($domain, $moduleName, $context);
 
         // Allow PoP Resource Loader to modify the response, to add embedded scripts
-        $response = HooksAPIFacade::getInstance()->applyFilters(
+        $response = \PoP\Root\App::applyFilters(
             'handlebars-helpers:enterModule:response',
             $response,
             $context,

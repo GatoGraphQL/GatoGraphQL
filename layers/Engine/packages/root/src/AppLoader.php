@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
+use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Constants\HookNames;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
-use PoP\Root\Managers\ComponentManager;
 
 /**
  * Application Loader
  */
-class AppLoader
+class AppLoader implements AppLoaderInterface
 {
     /**
      * Has the component been initialized?
@@ -38,11 +39,23 @@ class AppLoader
      */
     protected array $componentClassConfiguration = [];
     /**
+     * [key]: State key, [value]: Value
+     *
+     * @var array<string,mixed>
+     */
+    protected array $initialAppState = [];
+    /**
      * List of `Component` class which must not initialize their Schema services
      *
      * @var string[]
      */
     protected array $skipSchemaComponentClasses = [];
+    /**
+     * Cache if a component must skipSchema or not, stored under its class
+     *
+     * @var array<string,bool>
+     */
+    protected array $skipSchemaForComponentCache = [];
 
     /**
      * Add Component classes to be initialized
@@ -64,7 +77,7 @@ class AppLoader
      * @param array<string, array<string, mixed>> $componentClassConfiguration [key]: Component class, [value]: Configuration
      */
     public function addComponentClassConfiguration(
-        array $componentClassConfiguration = []
+        array $componentClassConfiguration
     ): void {
         // Allow to override entries under each Component
         foreach ($componentClassConfiguration as $componentClass => $componentConfiguration) {
@@ -77,12 +90,35 @@ class AppLoader
     }
 
     /**
+     * Set the initial state, eg: when passing state via the request is disabled
+     *
+     * @param array<string,mixed> $initialAppState
+     */
+    public function setInitialAppState(array $initialAppState): void
+    {
+        $this->initialAppState = $initialAppState;
+    }
+
+    /**
+     * Merge some initial state
+     *
+     * @param array<string,mixed> $initialAppState
+     */
+    public function mergeInitialAppState(array $initialAppState): void
+    {
+        $this->initialAppState = array_merge(
+            $this->initialAppState,
+            $initialAppState
+        );
+    }
+
+    /**
      * Add schema Component classes to skip initializing
      *
      * @param string[] $skipSchemaComponentClasses List of `Component` class which must not initialize their Schema services
      */
     public function addSchemaComponentClassesToSkip(
-        array $skipSchemaComponentClasses = []
+        array $skipSchemaComponentClasses
     ): void {
         $this->skipSchemaComponentClasses = array_merge(
             $this->skipSchemaComponentClasses,
@@ -204,6 +240,9 @@ class AppLoader
          */
         foreach ($this->orderedComponentClasses as $componentClass) {
             $component = App::getComponent($componentClass);
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $component->initializeSystem();
         }
         $systemCompilerPasses = array_map(
@@ -213,7 +252,7 @@ class AppLoader
         App::getSystemContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
 
         // Finally boot the components
-        $this->bootSystemForComponents();
+        $this->bootSystemComponents();
     }
 
     /**
@@ -226,10 +265,10 @@ class AppLoader
     }
 
     /**
-     * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
+     * Trigger "componentLoaded", "boot" and "afterBoot" events on all the Components,
      * for them to execute any custom extra logic
      */
-    protected function bootSystemForComponents(): void
+    protected function bootSystemComponents(): void
     {
         App::getComponentManager()->bootSystem();
     }
@@ -243,6 +282,9 @@ class AppLoader
         $compilerPassClasses = [];
         foreach ($this->orderedComponentClasses as $componentClass) {
             $component = App::getComponent($componentClass);
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $compilerPassClasses = [
                 ...$compilerPassClasses,
                 ...$component->getSystemContainerCompilerPassClasses()
@@ -255,7 +297,7 @@ class AppLoader
      * Boot the application. It does these steps:
      *
      * 1. Initialize the Application Container, have all Components inject services, and compile it
-     * 2. Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
+     * 2. Trigger "componentLoaded", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
      *
      * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
      * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
@@ -273,6 +315,9 @@ class AppLoader
          */
         foreach (array_reverse($this->orderedComponentClasses) as $componentClass) {
             $component = App::getComponent($componentClass);
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $component->customizeComponentClassConfiguration($this->componentClassConfiguration);
         }
 
@@ -291,8 +336,11 @@ class AppLoader
         foreach ($this->orderedComponentClasses as $componentClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
             $component = App::getComponent($componentClass);
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $componentConfiguration = $this->componentClassConfiguration[$componentClass] ?? [];
-            $skipSchemaForComponent = in_array($componentClass, $this->skipSchemaComponentClasses);
+            $skipSchemaForComponent = $this->skipSchemaForComponent($component);
             $component->initialize(
                 $componentConfiguration,
                 $skipSchemaForComponent,
@@ -306,18 +354,30 @@ class AppLoader
         $systemCompilerPasses = $systemCompilerPassRegistry->getCompilerPasses();
         App::getContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
 
-        // Finally boot the components
-        $this->bootApplicationForComponents();
+        // Initialize the components
+        App::getComponentManager()->componentLoaded();
+    }
+
+    public function skipSchemaForComponent(ComponentInterface $component): bool
+    {
+        $componentClass = \get_class($component);
+        if (!isset($this->skipSchemaForComponentCache[$componentClass])) {
+            $this->skipSchemaForComponentCache[$componentClass] = in_array($componentClass, $this->skipSchemaComponentClasses) || $component->skipSchema();
+        }
+        return $this->skipSchemaForComponentCache[$componentClass];
     }
 
     /**
-     * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
-     * for them to execute any custom extra logic
+     * Trigger "componentLoaded", "boot" and "afterBoot" events on all the Components,
+     * for them to execute any custom extra logic.
      */
-    protected function bootApplicationForComponents(): void
+    public function bootApplicationComponents(): void
     {
-        App::getComponentManager()->beforeBoot();
+        App::getAppStateManager()->initializeAppState($this->initialAppState);
         App::getComponentManager()->boot();
         App::getComponentManager()->afterBoot();
+
+        // Allow to inject functionality
+        App::doAction(HookNames::AFTER_BOOT_APPLICATION);
     }
 }

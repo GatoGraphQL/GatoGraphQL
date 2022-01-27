@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoPTheme_Wassup_CommonUserRoles_Module_ContentPageSectionTopLevelRouteModuleProcessor extends PoP_Module_ContentPageSectionTopLevelRouteModuleProcessorBase
 {
@@ -17,10 +17,10 @@ class PoPTheme_Wassup_CommonUserRoles_Module_ContentPageSectionTopLevelRouteModu
             POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
                 'conditions' => [
-                    'target' => \PoP\ComponentModel\Constants\Targets::MAIN,
+                    'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                 ],
             ];
         }

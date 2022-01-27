@@ -1,19 +1,12 @@
 <?php
 
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ResourceLoader_ServerUtils
 {
     public static function useCodeSplitting()
     {
-        // Allow to override the configuration
-        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('code-splitting');
-        if (!is_null($override)) {
-            return $override;
-        }
-
-        return getenv('USE_CODE_SPLITTING') !== false ? strtolower(getenv('USE_CODE_SPLITTING')) == "true" : false;
+        return getenv('USE_CODE_SPLITTING') !== false ? strtolower(getenv('USE_CODE_SPLITTING')) === "true" : false;
     }
 
     public static function generateCodeSplittingFiles()
@@ -23,7 +16,7 @@ class PoP_ResourceLoader_ServerUtils
             return true;
         }
 
-        return getenv('GENERATE_CODE_SPLITTING_FILES') !== false ? strtolower(getenv('GENERATE_CODE_SPLITTING_FILES')) == "true" : false;
+        return getenv('GENERATE_CODE_SPLITTING_FILES') !== false ? strtolower(getenv('GENERATE_CODE_SPLITTING_FILES')) === "true" : false;
     }
 
     public static function includeResourcesInHeader()
@@ -47,25 +40,9 @@ class PoP_ResourceLoader_ServerUtils
             return 'header';
         }
 
-        // Comment Leo 23/05/2018: we can't use the overrideConfiguration for the include-type, because resources.js will be generated differently depending on this value being 'header' or 'body':
-        // generating resources.js with 'header' will not include the dynamic-module-resources needed for 'body', so loading resources dynamically in the body will fail
-        // // Allow to override the configuration
-        // if (ComponentModelComponentConfiguration::getOverrideConfiguration('resources-header') === true) {
-
-        //     return 'header';
-        // }
-        // elseif (ComponentModelComponentConfiguration::getOverrideConfiguration('resources-body') === true) {
-
-        //     return 'body';
-        // }
-        // elseif (ComponentModelComponentConfiguration::getOverrideConfiguration('resources-body-inline') === true) {
-
-        //     return 'body-inline';
-        // }
-
         // Allow specific pages to set this value to false
         // Eg: when generating the Service Workers, we need to register all of the CSS files to output them in the precache list
-        if ($include_type = HooksAPIFacade::getInstance()->applyFilters('getResourcesIncludeType', '')) {
+        if ($include_type = \PoP\Root\App::applyFilters('getResourcesIncludeType', '')) {
             return $include_type;
         }
 
@@ -122,7 +99,7 @@ class PoP_ResourceLoader_ServerUtils
             return true;
         }
 
-        return getenv('GENERATE_LOADING_FRAME_RESOURCE_MAPPING') !== false ? strtolower(getenv('GENERATE_LOADING_FRAME_RESOURCE_MAPPING')) == "true" : false;
+        return getenv('GENERATE_LOADING_FRAME_RESOURCE_MAPPING') !== false ? strtolower(getenv('GENERATE_LOADING_FRAME_RESOURCE_MAPPING')) === "true" : false;
     }
 
     public static function generateBundlefilesOnRuntime()
@@ -141,7 +118,7 @@ class PoP_ResourceLoader_ServerUtils
             return false;
         }
 
-        return getenv('GENERATE_BUNDLE_FILES_ON_RUNTIME') !== false ? strtolower(getenv('GENERATE_BUNDLE_FILES_ON_RUNTIME')) == "true" : false;
+        return getenv('GENERATE_BUNDLE_FILES_ON_RUNTIME') !== false ? strtolower(getenv('GENERATE_BUNDLE_FILES_ON_RUNTIME')) === "true" : false;
     }
 
     public static function generateBundleFiles()
@@ -151,7 +128,7 @@ class PoP_ResourceLoader_ServerUtils
             return false;
         }
 
-        return getenv('GENERATE_BUNDLE_FILES') !== false ? strtolower(getenv('GENERATE_BUNDLE_FILES')) == "true" : false;
+        return getenv('GENERATE_BUNDLE_FILES') !== false ? strtolower(getenv('GENERATE_BUNDLE_FILES')) === "true" : false;
     }
 
     public static function generateBundlegroupFiles()
@@ -161,7 +138,7 @@ class PoP_ResourceLoader_ServerUtils
             return false;
         }
 
-        return getenv('GENERATE_BUNDLEGROUP_FILES') !== false ? strtolower(getenv('GENERATE_BUNDLEGROUP_FILES')) == "true" : false;
+        return getenv('GENERATE_BUNDLEGROUP_FILES') !== false ? strtolower(getenv('GENERATE_BUNDLEGROUP_FILES')) === "true" : false;
     }
 
     public static function getBundlesChunkSize()
@@ -177,20 +154,11 @@ class PoP_ResourceLoader_ServerUtils
 
     public static function getEnqueuefileType($disable_hooks = false)
     {
-        // Allow to override the configuration
-        if (ComponentModelComponentConfiguration::getOverrideConfiguration('load-bundlegroups') === true) {
-            return 'bundlegroup';
-        } elseif (ComponentModelComponentConfiguration::getOverrideConfiguration('load-bundles') === true) {
-            return 'bundle';
-        } elseif (ComponentModelComponentConfiguration::getOverrideConfiguration('load-resources') === true) {
-            return 'resource';
-        }
-
         if (!$disable_hooks) {
             // There are requests that can only work with a specific type
             // Eg: the AppShell, it must always use 'resource', or otherwise it will need to load extra bundle(group) files,
             // making the initial SW pre-fetch heavy, and not allowing to easily create the AppShell for the different thememodes (embed, print)
-            if ($enqueuefile_type = HooksAPIFacade::getInstance()->applyFilters('getEnqueuefileType', '')) {
+            if ($enqueuefile_type = \PoP\Root\App::applyFilters('getEnqueuefileType', '')) {
                 return $enqueuefile_type;
             }
         }
@@ -220,12 +188,6 @@ class PoP_ResourceLoader_ServerUtils
 
     public static function loadframeResources()
     {
-        // Allow to override the configuration
-        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('load-frame-resources');
-        if (!is_null($override)) {
-            return $override;
-        }
-
-        return getenv('LOAD_FRAME_RESOURCES') !== false ? strtolower(getenv('LOAD_FRAME_RESOURCES')) == "true" : true;
+        return getenv('LOAD_FRAME_RESOURCES') !== false ? strtolower(getenv('LOAD_FRAME_RESOURCES')) === "true" : true;
     }
 }

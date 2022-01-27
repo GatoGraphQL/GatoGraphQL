@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
+use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
 
@@ -62,7 +63,7 @@ abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalar
         /**
          * Allow to override/extend the enum values
          */
-        $this->consolidatedPossibleValuesCache = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedPossibleValuesCache = App::applyFilters(
             self::HOOK_POSSIBLE_VALUES,
             $this->getPossibleValues(),
             $this,

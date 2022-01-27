@@ -177,6 +177,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Clicking on "Save Changes" on the Settings page will always regenerate the schema
 - Prettyprint GraphQL queries in the module docs
 - Upgraded GraphiQL to the latest `v1.5.7`
+- Finished decoupling the GraphQL server code from WordPress
 
 ### Fixed
 

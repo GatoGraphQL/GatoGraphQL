@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 $compact = \PoP\ComponentModel\Environment::compactResponseJsonKeys();
 define('GD_JS_MODULE', $compact ? 'm' : 'module');
@@ -16,7 +15,7 @@ define('GD_JS_SETTINGS', $compact ? 'st' : 'settings');
 define('GD_JS_TARGET', $compact ? 'tg' : 'target');
 define('GD_JS_SKIPSTATEUPDATE', $compact ? 'sk' : 'skipstateupdate');
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsJsparams');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'gdJqueryConstantsJsparams');
 function gdJqueryConstantsJsparams($jqueryConstants)
 {
 

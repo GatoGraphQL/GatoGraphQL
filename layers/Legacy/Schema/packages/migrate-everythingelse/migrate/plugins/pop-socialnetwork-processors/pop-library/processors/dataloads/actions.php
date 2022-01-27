@@ -9,13 +9,13 @@ use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnfollowUserM
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnrecommendPostMutationResolverBridge;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnsubscribeFromTagMutationResolverBridge;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UpvoteCustomPostMutationResolverBridge;
-use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
+use PoP\Root\App;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -181,8 +181,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_UNDOUPVOTEPOST:
             case self::MODULE_DATALOADACTION_DOWNVOTEPOST:
             case self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST:
-                $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
-                if ($target_id = $gd_dataload_actionexecution_manager->getResult($this->getComponentMutationResolverBridge($module))) {
+                if ($target_id = App::getMutationResolutionStore()->getResult($this->getComponentMutationResolverBridge($module))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($target_id);
                 } else {
                     $data_properties[DataloadingConstants::SKIPDATALOAD] = true;
@@ -232,7 +231,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getObjectIDParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDParamName(array $module, array &$props, array &$data_properties): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
@@ -241,13 +240,13 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_UNDOUPVOTEPOST:
             case self::MODULE_DATALOADACTION_DOWNVOTEPOST:
             case self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST:
-                return \PoPSchema\Posts\Constants\InputNames::POST_ID;
+                return \PoPCMSSchema\Posts\Constants\InputNames::POST_ID;
             case self::MODULE_DATALOADACTION_SUBSCRIBETOTAG:
             case self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG:
-                return \PoPSchema\Tags\Constants\InputNames::TAG_ID;
+                return \PoPCMSSchema\Tags\Constants\InputNames::TAG_ID;
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
-                return \PoPSchema\Users\Constants\InputNames::USER_ID;
+                return \PoPCMSSchema\Users\Constants\InputNames::USER_ID;
         }
         return null;
     }

@@ -2,7 +2,6 @@
 use Aws\Common\Aws;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_WebPlatformEngine_AWS_S3UploadBase extends PoP_AWS_S3UploadBase
 {
@@ -10,7 +9,7 @@ class PoP_WebPlatformEngine_AWS_S3UploadBase extends PoP_AWS_S3UploadBase
     {
 
         // Register the AWS S3 domain in the Allowed Domains list
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'pop_modulemanager:allowed_domains',
             array($this, 'getAllowedDomains')
         );

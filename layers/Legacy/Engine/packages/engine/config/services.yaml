@@ -4,5 +4,11 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoP\Engine\State\:
+        resource: '../src/State/*'
+
     PoP\Engine\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
+
+    PoP\Engine\HelperServices\FormInputHelperServiceInterface:
+        class: \PoP\Engine\HelperServices\FormInputHelperService

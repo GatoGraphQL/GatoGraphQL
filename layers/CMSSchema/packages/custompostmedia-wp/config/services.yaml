@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\CustomPostMedia\TypeAPIs\CustomPostMediaTypeAPIInterface:
+        class: \PoPCMSSchema\CustomPostMediaWP\TypeAPIs\CustomPostMediaTypeAPI

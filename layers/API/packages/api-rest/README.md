@@ -9,21 +9,21 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-It enables to add REST endpoints to retrieve data for any URL-based resource. It is based on the [PoP API](https://github.com/getpop/api) package.
+It enables to add REST endpoints to retrieve data for any URL-based resource. It is based on the [PoP API](https://github.com/pop-api/api) package.
 
 ## Install
 
 Via Composer
 
 ``` bash
-composer require getpop/api-rest
+composer require pop-api/api-rest
 ```
 
 ## Development
 
 The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`API/packages/api-rest`](https://github.com/leoloso/PoP/tree/master/layers/API/packages/api-rest).
 
-<!-- To enable pretty API endpoint `/api/rest/`, follow the instructions [here](https://github.com/getpop/api#enable-pretty-permalinks) -->
+<!-- To enable pretty API endpoint `/api/rest/`, follow the instructions [here](https://github.com/pop-api/api#enable-pretty-permalinks) -->
 
 ### Enable pretty permalinks
 
@@ -87,7 +87,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \PoP\RESTAPI\Component::class,
+    \PoPAPI\RESTAPI\Component::class,
 ]);
 ```
 
@@ -109,7 +109,7 @@ _**Collection of posts, custom fields**_:<br/>
 
 <!-- ## More information
 
-Please refer to package [API](https://github.com/getpop/api), on which the REST API is based, and which contains plenty of extra documentation. -->
+Please refer to package [API](https://github.com/pop-api/api), on which the REST API is based, and which contains plenty of extra documentation. -->
 
 ## PHP versions
 
@@ -189,17 +189,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/getpop/api-rest.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-api/api-rest.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/getpop/api-rest/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/api-rest.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/api-rest.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/getpop/api-rest.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-api/api-rest/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-api/api-rest.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-api/api-rest.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-api/api-rest.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/getpop/api-rest
-[link-travis]: https://travis-ci.org/getpop/api-rest
-[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/api-rest/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/getpop/api-rest
-[link-downloads]: https://packagist.org/packages/getpop/api-rest
+[link-packagist]: https://packagist.org/packages/pop-api/api-rest
+[link-travis]: https://travis-ci.org/pop-api/api-rest
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-api/api-rest/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-api/api-rest
+[link-downloads]: https://packagist.org/packages/pop-api/api-rest
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

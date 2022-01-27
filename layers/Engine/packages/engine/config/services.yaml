@@ -17,14 +17,8 @@ services:
     PoP\Engine\ObjectModels\Root:
         class: \PoP\Engine\ObjectModels\Root
 
-    PoP\Engine\CMS\CMSHelperServiceInterface:
-        class: \PoP\Engine\CMS\CMSHelperService
-
     PoP\Engine\Hooks\:
         resource: '../src/Hooks/*'
-
-    PoP\Engine\LooseContracts\:
-        resource: '../src/LooseContracts/*'
 
     PoP\Engine\FormInputs\:
         resource: '../src/FormInputs/*'
@@ -32,23 +26,8 @@ services:
     PoP\Engine\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
 
-    PoP\Engine\RouteModuleProcessors\:
-        resource: '../src/RouteModuleProcessors/*'
-
-    PoP\Engine\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
-
     PoP\Engine\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoP\Engine\Error\ErrorHelperInterface:
-        class: \PoP\Engine\Error\ErrorHelper
-
     PoP\Engine\Schema\SchemaDefinitionServiceInterface:
         class: \PoP\Engine\Schema\SchemaDefinitionService
-
-    PoP\Engine\Formatters\DateFormatterInterface:
-        class: \PoP\Engine\Formatters\DateFormatter
-
-    PoP\ComponentModel\EntryModule\EntryModuleManagerInterface:
-        class: \PoP\Engine\EntryModule\EntryModuleManager

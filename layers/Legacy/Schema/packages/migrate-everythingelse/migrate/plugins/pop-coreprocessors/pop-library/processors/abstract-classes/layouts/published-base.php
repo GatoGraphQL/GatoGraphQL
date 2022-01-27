@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPosts\Types\Status;
 
 abstract class PoP_Module_Processor_PostStatusDateLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {

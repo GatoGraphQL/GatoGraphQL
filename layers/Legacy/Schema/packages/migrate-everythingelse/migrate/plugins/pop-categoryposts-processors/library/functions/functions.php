@@ -1,9 +1,9 @@
 <?php
-// use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-// use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+// use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+// use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 // use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-// HooksAPIFacade::getInstance()->addFilter('gdPostParentpageid', 'categorypostsPostParentpageid', 10, 2);
+// \PoP\Root\App::addFilter('gdPostParentpageid', 'categorypostsPostParentpageid', 10, 2);
 // function categorypostsPostParentpageid($pageid, $post_id)
 // {
     // $postTypeAPI = PostTypeAPIFacade::getInstance();

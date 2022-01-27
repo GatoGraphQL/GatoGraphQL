@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoPTheme_Wassup_PoPSW_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -15,7 +15,7 @@ class PoPTheme_Wassup_PoPSW_Module_MainContentRouteModuleProcessor extends \PoP\
             POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL => [GD_Core_Module_Processor_HTMLCodes::class, GD_Core_Module_Processor_HTMLCodes::MODULE_CODE_APPSHELL],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;

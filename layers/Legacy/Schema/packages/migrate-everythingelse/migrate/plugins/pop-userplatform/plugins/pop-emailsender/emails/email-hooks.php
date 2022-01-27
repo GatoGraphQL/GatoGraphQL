@@ -1,8 +1,7 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_UserPlatform_EmailSender_Hooks
 {
@@ -12,13 +11,13 @@ class PoP_UserPlatform_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Notifications to the admin
         //----------------------------------------------------------------------
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_profile:additionalsCreate', array($this, 'sendemailToAdminCreateuser'), 100, 1);
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_profile:additionalsUpdate', array($this, 'sendemailToAdminUpdateuser'), 100, 1);
+        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', array($this, 'sendemailToAdminCreateuser'), 100, 1);
+        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsUpdate', array($this, 'sendemailToAdminUpdateuser'), 100, 1);
     
         //----------------------------------------------------------------------
         // User registration
         //----------------------------------------------------------------------
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_profile:additionalsCreate', array($this, 'sendemailUserwelcome'), 100, 1);
+        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', array($this, 'sendemailUserwelcome'), 100, 1);
     }
 
     /**
@@ -77,7 +76,7 @@ class PoP_UserPlatform_EmailSender_Hooks
         $msg .= PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);
 
         if ($routes = array_filter(
-                HooksAPIFacade::getInstance()->applyFilters(
+                \PoP\Root\App::applyFilters(
                     'sendemailUserwelcome:create_routes', 
                     array()
                 )

@@ -7,7 +7,6 @@ Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
 namespace PoP\TrendingTags\WP;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,13 +19,13 @@ class Plugin
     public function __construct()
     {
         include_once 'validation.php';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_TrendingTags_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
 
         // Priority: mid section, after PoP Tags WP
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888260);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888260);
     }
     public function getProviderValidationClass($class)
     {

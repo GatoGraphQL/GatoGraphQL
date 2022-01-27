@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ShareMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
@@ -37,7 +38,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data): void
     {
-        $this->getHooksAPI()->doAction('pop_sharebyemail', $form_data);
+        App::doAction('pop_sharebyemail', $form_data);
     }
 
     protected function doExecute($form_data)

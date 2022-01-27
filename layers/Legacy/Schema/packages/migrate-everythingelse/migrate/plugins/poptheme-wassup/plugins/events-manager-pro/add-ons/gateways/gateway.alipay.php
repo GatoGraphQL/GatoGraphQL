@@ -1,7 +1,6 @@
 <?php
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 require_once "gateway.alipay.core.php";
 
@@ -63,7 +62,7 @@ if (class_exists("EM_Gateway_Online")) {
             $alipay_vars['sign'] = $mysign;
             $alipay_vars['sign_type'] = 'MD5';
 
-            return HooksAPIFacade::getInstance()->applyFilters('em_gateway_alipay_get_paypal_vars', $alipay_vars, $EM_Booking, $this);
+            return \PoP\Root\App::applyFilters('em_gateway_alipay_get_paypal_vars', $alipay_vars, $EM_Booking, $this);
         }
 
         public function buildSign($vars)
@@ -165,11 +164,11 @@ if (class_exists("EM_Gateway_Online")) {
                             //TODO do something if pp payment not enough
                             $EM_Booking->setStatus(0); //Set back to normal "pending"
                         }
-                        HooksAPIFacade::getInstance()->doAction('em_payment_processed', $EM_Booking, $this);
+                        \PoP\Root\App::doAction('em_payment_processed', $EM_Booking, $this);
                     }
                 } else {
                     if ($_POST['trade_status'] == 'TRADE_FINISHED' || $_POST['trade_status'] == 'TRADE_SUCCESS') {
-                        $message = HooksAPIFacade::getInstance()->applyFilters(
+                        $message = \PoP\Root\App::applyFilters(
                             'em_gateway_alipay_bad_booking_email',
                             "
 	A Payment has been received by Alipay for a non-existent booking.
@@ -310,6 +309,6 @@ if (class_exists("EM_Gateway_Online")) {
     }
     EM_Gateways::register_gateway('alipay', 'EM_Gateway_Alipay');
 
-    //HooksAPIFacade::getInstance()->addAction('emp_alipay_cron', 'emGatewayBookingTimeout');
+    //\PoP\Root\App::addAction('emp_alipay_cron', 'emGatewayBookingTimeout');
 }
 ?>

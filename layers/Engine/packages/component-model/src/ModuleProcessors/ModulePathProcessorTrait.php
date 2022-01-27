@@ -8,13 +8,14 @@ use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentInfo;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
-use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\Root\App;
 
 trait ModulePathProcessorTrait
 {
     abstract protected function getModuleProcessorManager(): ModuleProcessorManagerInterface;
     abstract protected function getModuleFilterManager(): ModuleFilterManagerInterface;
+    abstract protected function getModuleHelpers(): ModuleHelpersInterface;
 
     protected function getModuleProcessor(array $module)
     {
@@ -24,8 +25,8 @@ trait ModulePathProcessorTrait
     protected function executeOnSelfAndPropagateToDatasetmodules($eval_self_fn, $propagate_fn, array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
     {
         $ret = [];
-        $key = ModuleUtils::getModuleOutputName($module);
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $key = $this->getModuleHelpers()->getModuleOutputName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$this->getModuleFilterManager()->excludeModule($module, $props)) {
@@ -62,7 +63,7 @@ trait ModulePathProcessorTrait
 
     protected function executeOnSelfAndMergeWithDatasetmodules($eval_self_fn, $propagate_fn, array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
     {
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$this->getModuleFilterManager()->excludeModule($module, $props)) {
@@ -95,8 +96,8 @@ trait ModulePathProcessorTrait
     protected function executeOnSelfAndPropagateToModules($eval_self_fn, $propagate_fn, array $module, array &$props, $use_module_output_name_as_key = true, $options = array())
     {
         $ret = [];
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
-        $key = $use_module_output_name_as_key ? ModuleUtils::getModuleOutputName($module) : $moduleFullName;
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
+        $key = $use_module_output_name_as_key ? $this->getModuleHelpers()->getModuleOutputName($module) : $moduleFullName;
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$this->getModuleFilterManager()->excludeModule($module, $props)) {
@@ -133,7 +134,7 @@ trait ModulePathProcessorTrait
 
     protected function executeOnSelfAndMergeWithModules($eval_self_fn, $propagate_fn, array $module, array &$props, $recursive = true)
     {
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$this->getModuleFilterManager()->excludeModule($module, $props)) {

@@ -6,7 +6,6 @@ Description: The foundation for a PoP Add Coauthors
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_AddCoauthors
     {
 
         // Priority: after PoP User Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888340);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888340);
     }
     public function init()
     {

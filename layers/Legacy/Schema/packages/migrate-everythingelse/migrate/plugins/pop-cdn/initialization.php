@@ -1,7 +1,7 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\Facades\FileRendererFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_CDN_Initialization
 {
@@ -11,10 +11,10 @@ class PoP_CDN_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
             
             // Inline scripts
-            HooksAPIFacade::getInstance()->addAction('popcms:head', array($this, 'printInlineScripts'));
+            \PoP\Root\App::addAction('popcms:head', array($this, 'printInlineScripts'));
         }
 
         /**
@@ -52,8 +52,7 @@ class PoP_CDN_Initialization
             // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
             global $pop_cdn_configfile;
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $vars = ApplicationState::getVars();
-                $cmswebplatformapi->registerScript('pop-cdn-config', $pop_cdn_configfile->getFileurl(), array(), $vars['version'], true);
+                $cmswebplatformapi->registerScript('pop-cdn-config', $pop_cdn_configfile->getFileurl(), array(), ApplicationInfoFacade::getInstance()->getVersion(), true);
                 $cmswebplatformapi->enqueueScript('pop-cdn-config');
             }
         }

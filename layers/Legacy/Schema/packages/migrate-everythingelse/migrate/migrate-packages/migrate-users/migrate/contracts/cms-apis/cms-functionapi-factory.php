@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\Users;
+namespace PoPCMSSchema\Users;
 
 class FunctionAPIFactory
 {

@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_EventsProcessors_MyPreferencesHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_UserMultipleComponents:emaildigests:modules',
             array($this, 'getEmaildigestsForminputgroups')
         );

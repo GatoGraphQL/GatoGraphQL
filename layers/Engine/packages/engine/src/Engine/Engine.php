@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Engine;
 
-use PoP\Root\App;
 use Exception;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\Engine\Engine as UpstreamEngine;
 use PoP\LooseContracts\LooseContractManagerInterface;
+use PoP\Root\App;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
@@ -33,18 +33,9 @@ class Engine extends UpstreamEngine implements EngineInterface
         return $this->cacheControlEngine ??= $this->instanceManager->getInstance(CacheControlEngineInterface::class);
     }
 
-    public function generateData(): void
+    protected function generateData(): void
     {
-        // Check if there are hooks that must be implemented by the CMS, that have not been done so.
-        // Check here, since we can't rely on addAction('popcms:init') to check, since we don't know if it was implemented!
-        if ($notImplementedHooks = $this->getLooseContractManager()->getNotImplementedRequiredHooks()) {
-            throw new Exception(
-                sprintf(
-                    $this->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
-                    implode($this->__('", "'), $notImplementedHooks)
-                )
-            );
-        }
+        // Check if there are loose contracts that must be implemented by the CMS, that have not been done so.
         if ($notImplementedNames = $this->getLooseContractManager()->getNotImplementedRequiredNames()) {
             throw new Exception(
                 sprintf(
@@ -57,22 +48,23 @@ class Engine extends UpstreamEngine implements EngineInterface
         parent::generateData();
     }
 
-    public function outputResponse(): void
+    /**
+     * @return array<string,string>
+     */
+    protected function getHeaders(): array
     {
-        // 1. Generate the data
-        $this->generateData();
-
-        // 2. Get the data, and ask the formatter to output it
-        $formatter = $this->getDataStructureManager()->getDataStructureFormatter();
+        $headers = parent::getHeaders();
 
         // If CacheControl is enabled, add it to the headers
-        $headers = [];
         if (App::getComponent(CacheControlComponent::class)->isEnabled()) {
-            if ($cacheControlHeader = $this->getCacheControlEngine()->getCacheControlHeader()) {
-                $headers[] = $cacheControlHeader;
+            if ($cacheControlHeaders = $this->getCacheControlEngine()->getCacheControlHeaders()) {
+                $headers = array_merge(
+                    $headers,
+                    $cacheControlHeaders
+                );
             }
         }
-        $data = $this->getOutputData();
-        $formatter->outputResponse($data, $headers);
+
+        return $headers;
     }
 }

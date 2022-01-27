@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\MenusWP\TypeAPIs;
+namespace PoPCMSSchema\MenusWP\TypeAPIs;
 
 use WP_Post;
 

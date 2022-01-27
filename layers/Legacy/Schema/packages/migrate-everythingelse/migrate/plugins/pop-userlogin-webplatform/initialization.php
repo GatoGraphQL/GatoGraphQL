@@ -1,7 +1,7 @@
 <?php
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FileStore\Facades\FileRendererFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_UserLoginWebPlatform_Initialization
 {
@@ -11,11 +11,11 @@ class PoP_UserLoginWebPlatform_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
-            HooksAPIFacade::getInstance()->addAction('popcms:printStyles', array($this, 'registerStyles'), 100);
+            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'), 100);
 
             // Inline styles
-            HooksAPIFacade::getInstance()->addAction('popcms:head', array($this, 'printInlineStyles'));
+            \PoP\Root\App::addAction('popcms:head', array($this, 'printInlineStyles'));
         }
 
         /**
@@ -75,8 +75,7 @@ class PoP_UserLoginWebPlatform_Initialization
             // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
             global $popcore_userloggedinstyles_file;
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $vars = ApplicationState::getVars();
-                $htmlcssplatformapi->registerStyle('pop-userlogin-webplatform-userloggedin', $popcore_userloggedinstyles_file->getFileurl(), array(), $vars['version']);
+                $htmlcssplatformapi->registerStyle('pop-userlogin-webplatform-userloggedin', $popcore_userloggedinstyles_file->getFileurl(), array(), ApplicationInfoFacade::getInstance()->getVersion());
                 $htmlcssplatformapi->enqueueStyle('pop-userlogin-webplatform-userloggedin');
             }
         }

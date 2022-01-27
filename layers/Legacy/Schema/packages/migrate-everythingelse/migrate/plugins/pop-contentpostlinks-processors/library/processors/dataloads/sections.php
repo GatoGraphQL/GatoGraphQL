@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 
 class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -213,14 +213,14 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
     //         case self::MODULE_DATALOAD_AUTHORLINKS_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_AUTHORLINKS_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_AUTHORLINKS_SCROLL_LIST:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
 
     //         case self::MODULE_DATALOAD_TAGLINKS_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_TAGLINKS_SCROLL_SIMPLEVIEW:
     //         case self::MODULE_DATALOAD_TAGLINKS_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_TAGLINKS_SCROLL_LIST:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
     //     }
 
     //     return parent::getNature($module);

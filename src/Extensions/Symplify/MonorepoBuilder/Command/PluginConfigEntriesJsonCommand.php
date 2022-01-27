@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\PackageBuilder\Console\Command\CommandNaming;
 
 final class PluginConfigEntriesJsonCommand extends AbstractSymplifyCommand
 {
@@ -22,6 +22,7 @@ final class PluginConfigEntriesJsonCommand extends AbstractSymplifyCommand
 
     protected function configure(): void
     {
+        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Provides plugin configuration entries in json format. Useful for GitHub Actions Workflow');
         $this->addOption(
             Option::SCOPED_ONLY,
@@ -40,6 +41,6 @@ final class PluginConfigEntriesJsonCommand extends AbstractSymplifyCommand
         $json = Json::encode($pluginConfigEntries);
         $this->symfonyStyle->writeln($json);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

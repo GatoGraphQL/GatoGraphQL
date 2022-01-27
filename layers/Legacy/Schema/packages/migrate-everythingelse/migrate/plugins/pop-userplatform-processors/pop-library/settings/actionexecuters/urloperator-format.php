@@ -8,7 +8,7 @@ class GD_Settings_UrlOperator_Format extends GD_Settings_UrlOperator
         switch ($field) {
             case self::MODULE_FORMINPUT_SETTINGSFORMAT:
                 $url = GeneralUtils::addQueryArgs([
-                	\PoP\ComponentModel\Constants\Params::FORMAT => $value,
+                	\PoP\ConfigurationComponentModel\Constants\Params::FORMAT => $value,
                 ], $url);
                 break;
         }

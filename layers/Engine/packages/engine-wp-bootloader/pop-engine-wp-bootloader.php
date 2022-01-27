@@ -8,7 +8,8 @@ Author: Leonardo Losoviz
 */
 
 use PoP\Root\App;
-use PoP\Engine\AppLoader;
+use PoP\RootWP\AppLoader;
+use PoP\RootWP\StateManagers\HookManager;
 
 if (!class_exists(App::class)) {
     return;
@@ -21,8 +22,12 @@ if (!class_exists(App::class)) {
  * or not based on their required plugins being active.
  */
 \add_action('plugins_loaded', function(): void {
-    App::initialize(new AppLoader());
+    App::initialize(
+        new AppLoader(),
+        new HookManager()
+    );
     App::getAppLoader()->initializeComponents();
     App::getAppLoader()->bootSystem();
     App::getAppLoader()->bootApplication();
+    App::getAppLoader()->bootApplicationComponents();
 });

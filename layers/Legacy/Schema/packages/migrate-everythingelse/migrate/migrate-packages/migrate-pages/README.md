@@ -7,7 +7,7 @@ Code to be migrated, from legacy to modern PHP code ([read more here](https://gi
 Via Composer
 
 ``` bash
-composer require pop-schema/migrate-pages
+composer require pop-cms-schema/migrate-pages
 ```
 
 ## Development
@@ -27,17 +27,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-schema/pages.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/pages.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-schema/pages/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema/pages.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema/pages.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema/pages.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-cms-schema/pages/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/pages.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/pages.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/pages.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-schema/pages
-[link-travis]: https://travis-ci.org/pop-schema/pages
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/pages/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/pages
-[link-downloads]: https://packagist.org/packages/pop-schema/pages
+[link-packagist]: https://packagist.org/packages/pop-cms-schema/pages
+[link-travis]: https://travis-ci.org/pop-cms-schema/pages
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/pages/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/pages
+[link-downloads]: https://packagist.org/packages/pop-cms-schema/pages
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

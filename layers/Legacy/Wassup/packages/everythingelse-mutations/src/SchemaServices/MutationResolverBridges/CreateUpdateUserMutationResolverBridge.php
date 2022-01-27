@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\Root\App;
 use Exception;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\EditUsers\HelperAPIFactory;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateUserMutationResolver;
 
@@ -34,14 +34,13 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         // For the update, gotta return the success string
         // If user is logged in => It's Update
         // Otherwise => It's Create
-        $vars = ApplicationState::getVars();
-        if ($vars['global-userstate']['is-user-logged-in']) {
+        if (App::getState('is-user-logged-in')) {
             // Allow PoP Service Workers to add the attr to avoid the link being served from the browser cache
             return sprintf(
                 $this->getTranslationAPI()->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
-                getAuthorProfileUrl($vars['global-userstate']['current-user-id']),
+                getAuthorProfileUrl(App::getState('current-user-id')),
                 \PoP_Application_Utils::getPreviewTarget(),
-                $this->getHooksAPI()->applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
+                App::applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
             );
         }
     }
@@ -50,8 +49,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     {
         $cmseditusershelpers = HelperAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['is-user-logged-in'] ? $vars['global-userstate']['current-user-id'] : '';
+        $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $inputs = $this->getFormInputs();
         $form_data = array(
             'user_id' => $user_id,
@@ -69,7 +67,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         }
 
         // Allow to add extra inputs
-        $form_data = $this->getHooksAPI()->applyFilters('gd_createupdate_user:form_data', $form_data);
+        $form_data = App::applyFilters('gd_createupdate_user:form_data', $form_data);
 
         if ($user_id) {
             $form_data = $this->getUpdateuserFormData($form_data);
@@ -83,7 +81,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     protected function getCreateuserFormData(array $form_data)
     {
         // Allow to add extra inputs
-        $form_data = $this->getHooksAPI()->applyFilters('gd_createupdate_user:form_data:create', $form_data);
+        $form_data = App::applyFilters('gd_createupdate_user:form_data:create', $form_data);
 
         return $form_data;
     }
@@ -91,7 +89,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     protected function getUpdateuserFormData(array $form_data)
     {
         // Allow to add extra inputs
-        $form_data = $this->getHooksAPI()->applyFilters('gd_createupdate_user:form_data:update', $form_data);
+        $form_data = App::applyFilters('gd_createupdate_user:form_data:update', $form_data);
 
         return $form_data;
     }
@@ -112,7 +110,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
             $form_inputs['captcha'] = null;
         }
 
-        $inputs = $this->getHooksAPI()->applyFilters(
+        $inputs = App::applyFilters(
             'GD_CreateUpdate_User:form-inputs',
             $form_inputs
         );

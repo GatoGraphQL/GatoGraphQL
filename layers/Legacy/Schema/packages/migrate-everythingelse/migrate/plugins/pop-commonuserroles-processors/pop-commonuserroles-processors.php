@@ -6,7 +6,6 @@ Description: Implementation of PoP Common User Roles Processors
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_CommonUserRolesProcessors
     {
 
         // Priority: after PoP User Communities Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888880);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888880);
     }
     public function init()
     {

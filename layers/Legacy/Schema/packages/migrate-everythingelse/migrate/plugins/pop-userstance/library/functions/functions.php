@@ -1,9 +1,8 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_postname', 'userstancePostname', 10, 2);
+\PoP\Root\App::addFilter('gd_postname', 'userstancePostname', 10, 2);
 function userstancePostname($name, $post_id = null)
 {
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -13,7 +12,7 @@ function userstancePostname($name, $post_id = null)
 
     return $name;
 }
-HooksAPIFacade::getInstance()->addFilter('gd_format_postname', 'userstanceFormatPostname', 10, 3);
+\PoP\Root\App::addFilter('gd_format_postname', 'userstanceFormatPostname', 10, 3);
 function userstanceFormatPostname($name, $post_id, $format)
 {
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -27,7 +26,7 @@ function userstanceFormatPostname($name, $post_id, $format)
 
     return $name;
 }
-HooksAPIFacade::getInstance()->addFilter('gd_posticon', 'userstancePosticon', 10, 2);
+\PoP\Root\App::addFilter('gd_posticon', 'userstancePosticon', 10, 2);
 function userstancePosticon($icon, $post_id = null)
 {
     if (defined('POP_USERSTANCE_ROUTE_STANCES') && POP_USERSTANCE_ROUTE_STANCES) {
@@ -40,7 +39,7 @@ function userstancePosticon($icon, $post_id = null)
     return $icon;
 }
 
-// HooksAPIFacade::getInstance()->addFilter('gdPostParentpageid', 'userstancePostParentpageid', 10, 2);
+// \PoP\Root\App::addFilter('gdPostParentpageid', 'userstancePostParentpageid', 10, 2);
 // function userstancePostParentpageid($pageid, $post_id)
 // {
 //     if (defined('POP_USERSTANCE_ROUTE_STANCES') && POP_USERSTANCE_ROUTE_STANCES) {
@@ -53,7 +52,7 @@ function userstancePosticon($icon, $post_id = null)
 //     return $pageid;
 // }
 
-HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'userstanceCreateupdateutilsEditUrl', 10, 2);
+\PoP\Root\App::addFilter('gd-createupdateutils:edit-url', 'userstanceCreateupdateutilsEditUrl', 10, 2);
 function userstanceCreateupdateutilsEditUrl($url, $post_id)
 {
     if (defined('POP_USERSTANCE_ROUTE_EDITSTANCE') && POP_USERSTANCE_ROUTE_EDITSTANCE) {
@@ -66,7 +65,7 @@ function userstanceCreateupdateutilsEditUrl($url, $post_id)
     return $url;
 }
 
-HooksAPIFacade::getInstance()->addFilter('get_title_as_basic_content:post_types', 'addUserstancePostType');
+\PoP\Root\App::addFilter('get_title_as_basic_content:post_types', 'addUserstancePostType');
 function addUserstancePostType($post_types)
 {
     $post_types[] = POP_USERSTANCE_POSTTYPE_USERSTANCE;

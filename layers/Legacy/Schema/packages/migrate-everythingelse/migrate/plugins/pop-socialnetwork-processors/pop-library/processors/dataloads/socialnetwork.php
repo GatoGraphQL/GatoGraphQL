@@ -1,10 +1,10 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
-use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
+use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -52,8 +52,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             case self::MODULE_DATALOAD_UPVOTESPOSTS:
             case self::MODULE_DATALOAD_DOWNVOTESPOSTS:
                 // If the user is not logged in, then do not load the data
-                $vars = ApplicationState::getVars();
-                if (!PoP_UserState_Utils::currentRouteRequiresUserState() || !$vars['global-userstate']['is-user-logged-in']) {
+                if (!PoP_UserState_Utils::currentRouteRequiresUserState() || !\PoP\Root\App::getState('is-user-logged-in')) {
                     $ret[DataloadingConstants::SKIPDATALOAD] = true;
                 }
                 break;
@@ -100,8 +99,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         // All of these modules require the user to be logged in
-        $vars = ApplicationState::getVars();
-        if (!$vars['global-userstate']['is-user-logged-in']) {
+        if (!\PoP\Root\App::getState('is-user-logged-in')) {
             return [];
         }
 
@@ -114,8 +112,8 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         ];
 
         if ($metaKey = $metaKeys[$module[1]] ?? null) {
-            $userID = $vars['global-userstate']['current-user-id'];
-            return \PoPSchema\UserMeta\Utils::getUserMeta($userID, $metaKey) ?? [];
+            $userID = \PoP\Root\App::getState('current-user-id');
+            return \PoPCMSSchema\UserMeta\Utils::getUserMeta($userID, $metaKey) ?? [];
         }
 
         return parent::getObjectIDOrIDs($module, $props, $data_properties);

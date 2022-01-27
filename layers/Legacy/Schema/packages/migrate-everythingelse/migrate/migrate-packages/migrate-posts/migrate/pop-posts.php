@@ -6,8 +6,7 @@ Description: The foundation for a PoP Posts
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoPSchema\Posts;
-use PoP\Hooks\Facades\HooksAPIFacade;
+namespace PoPCMSSchema\Posts;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -21,7 +20,7 @@ class Plugins
     {
 
         // Priority: new section, after PoP Engine section
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888210);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888210);
     }
     public function init()
     {

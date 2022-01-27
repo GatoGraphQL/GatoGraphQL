@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Social Media Providers Processors
 Description: Implementation of Social Media Providers Processors for PoP
@@ -20,7 +19,7 @@ class PoP_SocialMediaProvidersProcessors
     {
 
         // Priority: after PoP Application Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888810);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888810);
     }
     public function init()
     {

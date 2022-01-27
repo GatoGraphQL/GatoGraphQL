@@ -45,23 +45,22 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
     {
         $ret = parent::getMutableonrequestConfiguration($module, $props);
 
-        $vars = ApplicationState::getVars();
-
+        
         // Using runtimeconfiguration, because the URL can vary for Single, it must not be cached in the configuration
         if ($header_type = $this->getHeaderType($module, $props)) {
             if ($headers_data = $this->getHeadersData($module, $props)) {
                 $headers = array();
-                $url = $headers_data['url'];
+                $url = (string)$headers_data['url'];
                 $default_active_format = PoP_Application_Utils::getDefaultformatByScreen($headers_data['screen']);
                 foreach ($headers_data['formats'] as $format => $subformats) {
                     $header = array(
                         'url' => GeneralUtils::addQueryArgs([
-                            \PoP\ComponentModel\Constants\Params::FORMAT => $format,
+                            \PoP\ConfigurationComponentModel\Constants\Params::FORMAT => $format,
                         ], $url),
                         'title' => $headers_data['titles'][$format],
                         'fontawesome' => $headers_data['icons'][$format],
                     );
-                    if (($vars['format'] == $format) || ((!$vars['format'] || $vars['format'] == \PoP\ComponentModel\Constants\Values::DEFAULT) && ($format == $default_active_format))) {
+                    if ((\PoP\Root\App::getState('format') == $format) || ((!\PoP\Root\App::getState('format') || \PoP\Root\App::getState('format') == \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT) && ($format == $default_active_format))) {
                         $header['active'] = true;
                     }
                     if ($subformats) {
@@ -69,12 +68,12 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
                         foreach ($subformats as $subformat) {
                             $subheader = array(
                                 'url' => GeneralUtils::addQueryArgs([
-                                    \PoP\ComponentModel\Constants\Params::FORMAT => $subformat,
+                                    \PoP\ConfigurationComponentModel\Constants\Params::FORMAT => $subformat,
                                 ], $url),
                                 'title' => $headers_data['titles'][$subformat],
                                 'fontawesome' => $headers_data['icons'][$subformat],
                             );
-                            if (($vars['format'] == $subformat) || ((!$vars['format'] || $vars['format'] == \PoP\ComponentModel\Constants\Values::DEFAULT) && ($subformat == $default_active_format))) {
+                            if ((\PoP\Root\App::getState('format') == $subformat) || ((!\PoP\Root\App::getState('format') || \PoP\Root\App::getState('format') == \PoP\ConfigurationComponentModel\Constants\Values::DEFAULT) && ($subformat == $default_active_format))) {
                                 $subheader['active'] = true;
                                 $header['active'] = true;
                             }

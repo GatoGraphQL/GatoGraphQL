@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Viewcomponent Headers Web Platform
 Description: Implementation of Viewcomponent Headers Web Platform for PoP
@@ -22,7 +21,7 @@ class PoP_ViewcomponentHeadersWebPlatform
     {
 
         // Priority: after PoP Application Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888510);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888510);
     }
     public function init()
     {

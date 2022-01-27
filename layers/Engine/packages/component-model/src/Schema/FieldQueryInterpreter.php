@@ -16,7 +16,6 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
@@ -1680,10 +1679,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($this->isFieldArgumentValueAVariable($fieldArgValue)) {
             // Variables: allow to pass a field argument "key:$input", and then resolve it as ?variable[input]=value
             // Expected input is similar to GraphQL: https://graphql.org/learn/queries/#variables
-            // If not passed the variables parameter, use $_REQUEST["variables"] by default
+            // If not passed the variables parameter, get param "variables" from the request
             if (is_null($variables)) {
-                $vars = ApplicationState::getVars();
-                $variables = $vars['variables'];
+                $variables = App::getState('variables');
             }
             $variableName = substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_VARIABLE_PREFIX));
             if (isset($variables[$variableName])) {
@@ -1924,8 +1922,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function getNoAliasFieldOutputKey(string $field): string
     {
         // GraphQL: Use fieldName only
-        $vars = ApplicationState::getVars();
-        if ($vars['only-fieldname-as-outputkey'] ?? null) {
+        if (App::getState('only-fieldname-as-outputkey')) {
             return $this->getFieldName($field);
         }
         return parent::getNoAliasFieldOutputKey($field);

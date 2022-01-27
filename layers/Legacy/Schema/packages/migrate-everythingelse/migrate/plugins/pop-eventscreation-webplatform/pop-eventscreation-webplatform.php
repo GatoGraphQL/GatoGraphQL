@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Events Creation Web Platform
 Description: Implementation of Events Creation Web Platform for PoP
@@ -21,7 +20,7 @@ class PoP_EventsCreationWebPlatform
     {
 
         // Priority: after PoP Events Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888580);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888580);
     }
     public function init()
     {

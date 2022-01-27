@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Application;
 
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             // \PoP\ComponentModelConfiguration\Component::class,
-            \PoP\API\Component::class,
+            \PoPAPI\API\Component::class,
             \PoP\EmojiDefinitions\Component::class,
             \PoP\DefinitionPersistence\Component::class,
         ];
@@ -32,8 +32,8 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
         $this->initServices(dirname(__DIR__), '/Overrides');

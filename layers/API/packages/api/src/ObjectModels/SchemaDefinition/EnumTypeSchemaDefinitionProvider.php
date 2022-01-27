@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\ObjectModels\SchemaDefinition;
+namespace PoPAPI\API\ObjectModels\SchemaDefinition;
 
-use PoP\API\Schema\TypeKinds;
+use PoPAPI\API\Schema\TypeKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 

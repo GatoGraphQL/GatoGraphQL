@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\Users;
+namespace PoPCMSSchema\Users;
 
 abstract class FunctionAPI_Base implements FunctionAPI
 {

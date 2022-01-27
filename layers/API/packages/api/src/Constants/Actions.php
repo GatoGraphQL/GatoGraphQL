@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Constants;
+namespace PoPAPI\API\Constants;
 
 class Actions
 {

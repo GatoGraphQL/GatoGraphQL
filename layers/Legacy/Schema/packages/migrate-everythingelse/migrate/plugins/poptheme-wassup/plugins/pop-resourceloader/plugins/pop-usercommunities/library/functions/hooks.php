@@ -1,12 +1,11 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPThemeWassup_UserCommunities_ResourceLoader_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoPThemeWassup_ResourceLoader_Hooks:extra-vars',
             array($this, 'getAuthorResourcesExtraVars'),
             10,
@@ -16,9 +15,9 @@ class PoPThemeWassup_UserCommunities_ResourceLoader_Hooks
 
     public function getAuthorResourcesExtraVars($extra_vars, $nature, $ids)
     {
-        if ($nature == UserRouteNatures::USER) {
+        if ($nature == UserRequestNature::USER) {
             // Organization: it must add together the resources for both "source=community" and "source=user"
-            // Then, for the organization and community roles, we must set the extra $vars['source'] value
+            // Then, for the organization and community roles, we must set the extra \PoP\Root\App::getState('source') value
             $source = array();
             foreach ($ids as $author_id) {
                 // We only set-up the value for GD_URLPARAM_URECONTENTSOURCE_COMMUNITY.

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Add Related Posts
 Description: Implementation of Add Related Posts for PoP
@@ -20,7 +19,7 @@ class PoP_AddRelatedPosts
     {
 
         // Priority: after PoP Related Posts and PoP Content Creation
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888360);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888360);
     }
     public function init()
     {

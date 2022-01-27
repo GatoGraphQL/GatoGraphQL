@@ -1,18 +1,17 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class PoP_TinyMCEHashtags
 {
     public function __construct()
     {
         if (!is_admin()) {
-            HooksAPIFacade::getInstance()->addFilter('mce_buttons', array($this, 'registerButton'));
-            HooksAPIFacade::getInstance()->addFilter('mce_external_plugins', array($this, 'externalPlugins'));
-            HooksAPIFacade::getInstance()->addFilter('teeny_mce_before_init', array($this, 'beforeInit'));
-            HooksAPIFacade::getInstance()->addFilter('tiny_mce_before_init', array($this, 'beforeInit'));
+            \PoP\Root\App::addFilter('mce_buttons', array($this, 'registerButton'));
+            \PoP\Root\App::addFilter('mce_external_plugins', array($this, 'externalPlugins'));
+            \PoP\Root\App::addFilter('teeny_mce_before_init', array($this, 'beforeInit'));
+            \PoP\Root\App::addFilter('tiny_mce_before_init', array($this, 'beforeInit'));
         }
     }
 
@@ -60,7 +59,7 @@ class PoP_TinyMCEHashtags
         foreach (POP_COREPROCESSORS_HASHTAGS_EDITORACCESS as $tag_id) {
             $values[] = TagHelpers::getTagSymbolNameDescription($postTagTypeAPI->getTag($tag_id));
         }
-        $title = HooksAPIFacade::getInstance()->applyFilters('PoP_TinyMCEHashtags:title', TranslationAPIFacade::getInstance()->__('#Hashtags', 'pop-coreprocessors'));
+        $title = \PoP\Root\App::applyFilters('PoP_TinyMCEHashtags:title', TranslationAPIFacade::getInstance()->__('#Hashtags', 'pop-coreprocessors'));
         $options = array(
             'values' => $values,
             'title' => $title,

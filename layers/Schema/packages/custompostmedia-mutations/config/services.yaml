@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoPSchema\CustomPostMediaMutations\Hooks\:
-        resource: '../src/Hooks/*'

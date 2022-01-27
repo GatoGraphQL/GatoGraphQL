@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 define('POP_EMAILTEMPLATE_EMAIL', 'email.html');
 define('POP_EMAILTEMPLATE_EMAILBODY', 'emailbody.html');
@@ -29,7 +28,7 @@ class PoP_EmailSender_Templates
     public function getModuleFolders()
     {
         if (!$this->template_folders) {
-            $this->template_folders = HooksAPIFacade::getInstance()->applyFilters(
+            $this->template_folders = \PoP\Root\App::applyFilters(
                 'sendemailToUsers:template_folders',
                 array(
                     POP_EMAILSENDER_DIR_RESOURCES.'/email-templates/default/',

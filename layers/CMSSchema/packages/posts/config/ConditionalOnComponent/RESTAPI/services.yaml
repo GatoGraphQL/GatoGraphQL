@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Posts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\:
+        resource: '../../../src/ConditionalOnComponent/RESTAPI/RouteModuleProcessors/*'

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\APIMirrorQuery\DataStructureFormatters;
+namespace PoPAPI\APIMirrorQuery\DataStructureFormatters;
 
-use PoP\ComponentModel\DataStructure\PropertyDataStructureFormatterTrait;
+use PoP\ComponentModel\DataStructureFormatters\PropertyDataStructureFormatterTrait;
 
 class PropertyMirrorQueryDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {

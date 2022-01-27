@@ -1,17 +1,16 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
-use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
+use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Types\Status;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 define('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');
@@ -28,34 +27,34 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         // Functional emails
         //----------------------------------------------------------------------
         // User tagged
-        HooksAPIFacade::getInstance()->addAction('PoP_Mentions:post_tags:tagged_users', array($this, 'sendemailToUsersTaggedInPost'), 10, 3);
-        HooksAPIFacade::getInstance()->addAction('PoP_Mentions:comment_tags:tagged_users', array($this, 'sendemailToUsersTaggedInComment'), 10, 2);
+        \PoP\Root\App::addAction('PoP_Mentions:post_tags:tagged_users', array($this, 'sendemailToUsersTaggedInPost'), 10, 3);
+        \PoP\Root\App::addAction('PoP_Mentions:comment_tags:tagged_users', array($this, 'sendemailToUsersTaggedInComment'), 10, 2);
 
         //----------------------------------------------------------------------
         // Email Notifications
         //----------------------------------------------------------------------
         // EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT:
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsSubscribedtopicCreatedpostCreate'), 10, 1);
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsSubscribedtopicCreatedpostUpdate'), 10, 2);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsSubscribedtopicCreatedpostCreate'), 10, 1);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsSubscribedtopicCreatedpostUpdate'), 10, 2);
         // EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsNetworkCreatedpostCreate'), 10, 1);
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsNetworkCreatedpostUpdate'), 10, 2);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsNetworkCreatedpostCreate'), 10, 1);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsNetworkCreatedpostUpdate'), 10, 2);
         // EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT:
-        HooksAPIFacade::getInstance()->addAction(
-            'popcms:insertComment',
+        \PoP\Root\App::addAction(
+            'wp_insert_comment',// Must add a loose contract instead: 'popcms:insertComment'
             array($this, 'emailnotificationsSubscribedtopicAddedcomment'),
             10,
             2
         );
         // EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT:
-        HooksAPIFacade::getInstance()->addAction(
-            'popcms:insertComment',
+        \PoP\Root\App::addAction(
+            'wp_insert_comment',// Must add a loose contract instead: 'popcms:insertComment'
             array($this, 'emailnotificationsNetworkAddedcomment'),
             10,
             2
         );
         // EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC:
-        HooksAPIFacade::getInstance()->addAction('gd_subscribetotag', array($this, 'emailnotificationsNetworkSubscribedtotopic'), 10, 1);
+        \PoP\Root\App::addAction('gd_subscribetotag', array($this, 'emailnotificationsNetworkSubscribedtotopic'), 10, 1);
     }
 
     /**
@@ -93,7 +92,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         }
 
         // Do not send for RIPESS
-        if (!HooksAPIFacade::getInstance()->applyFilters('PoP_EmailSender_Hooks:sendemailToUsersnetworkFromPost:enabled', true)) {
+        if (!\PoP\Root\App::applyFilters('PoP_EmailSender_Hooks:sendemailToUsersnetworkFromPost:enabled', true)) {
             return;
         }
 
@@ -194,15 +193,14 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             $post_title = $customPostTypeAPI->getTitle($post_id);
             $footer = PoP_UserPlatform_EmailSenderUtils::getPreferencesFooter(TranslationAPIFacade::getInstance()->__('You are receiving this notification for having subscribed to tags/topics added in this post.', 'pop-emailsender'));
 
-            $vars = ApplicationState::getVars();
             foreach ($post_tags as $tag_id) {
                 // Get all the users who subscribed to each tag
-                if ($tag_subscribers = \PoPSchema\TaxonomyMeta\Utils::getTermMeta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
+                if ($tag_subscribers = \PoPCMSSchema\TaxonomyMeta\Utils::getTermMeta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
                     // From those, remove all users who got an email in a previous email function
                     if ($tag_subscribers = array_diff($tag_subscribers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_CREATEDCONTENT))) {
                         // Keep only the users with the corresponding preference on
                         // Do not send to the current user
-                        if ($tag_subscribers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT, $tag_subscribers, array($vars['global-userstate']['current-user-id']))) {
+                        if ($tag_subscribers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT, $tag_subscribers, array(\PoP\Root\App::getState('current-user-id')))) {
                             $emails = $names = array();
                             foreach ($tag_subscribers as $subscribeduser) {
                                 $emails[] = $userTypeAPI->getUserEmail($subscribeduser);
@@ -324,15 +322,14 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             $post_title = $customPostTypeAPI->getTitle($post_id);
             $footer = PoP_UserPlatform_EmailSenderUtils::getPreferencesFooter(TranslationAPIFacade::getInstance()->__('You are receiving this notification for having subscribed to tags/topics added in this comment/post.', 'pop-emailsender'));
 
-            $vars = ApplicationState::getVars();
             foreach ($post_tags as $tag_id) {
                 // Get all the users who subscribed to each tag
-                if ($tag_subscribers = \PoPSchema\TaxonomyMeta\Utils::getTermMeta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
+                if ($tag_subscribers = \PoPCMSSchema\TaxonomyMeta\Utils::getTermMeta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
                     // From those, remove all users who got an email in a previous email function
                     if ($tag_subscribers = array_diff($tag_subscribers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_ADDEDCOMMENT))) {
                         // Keep only the users with the corresponding preference on
                         // Do not send to the current user
-                        if ($tag_subscribers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT, $tag_subscribers, array($vars['global-userstate']['current-user-id']))) {
+                        if ($tag_subscribers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT, $tag_subscribers, array(\PoP\Root\App::getState('current-user-id')))) {
                             $emails = $names = array();
                             foreach ($tag_subscribers as $tag_subscriber) {
                                 $emails[] = $userTypeAPI->getUserEmail($tag_subscriber);
@@ -374,8 +371,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     }
     public function emailnotificationsNetworkSubscribedtotopic($tag_id)
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = \PoP\Root\App::getState('current-user-id');
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
 
         // Get the current user's network's users (followers + members of same communities)

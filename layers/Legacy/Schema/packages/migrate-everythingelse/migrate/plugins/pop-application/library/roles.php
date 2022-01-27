@@ -1,12 +1,11 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 function gdRoles()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdRoles', array());
+    return \PoP\Root\App::applyFilters('gdRoles', array());
 }
 
 function getUserRoleCombinations()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('getUserRoleCombinations', array());
+    return \PoP\Root\App::applyFilters('getUserRoleCombinations', array());
 }

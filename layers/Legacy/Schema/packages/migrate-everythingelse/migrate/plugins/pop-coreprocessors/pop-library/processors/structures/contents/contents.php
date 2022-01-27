@@ -33,8 +33,7 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
 
     public function initModelProps(array $module, array &$props): void
     {
-        $vars = ApplicationState::getVars();
-
+        
         switch ($module[1]) {
             case self::MODULE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL:
             case self::MODULE_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL:

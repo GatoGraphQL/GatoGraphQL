@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
 {
@@ -7,28 +6,28 @@ class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
     {
 
         // Hook into the API: Where statements
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_AddComments_Notifications_NotificationHooks:select_from_comment_post_id:unions',
             array($this, 'getSelectFromCommentPostIdUnions'),
             10,
             2
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_AddComments_Notifications_NotificationHooks:select_from_comment_id:ors',
             array($this, 'getSelectFromCommentIdOrs'),
             10,
             2
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:useractivityposts:comment_id_ors',
             array($this, 'getUseractivitypostsCommentIdOrs'),
             10,
             2
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_AddComments_Notifications_NotificationHooks:object_id:unions',
             array($this, 'getUseractivitycommentsObjectIdUnions'),
             10,
@@ -64,7 +63,7 @@ class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
                     $user_id,
                     $wpdb->comments,
                     $wpdb->commentmeta,
-                    \PoPSchema\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
+                    \PoPCMSSchema\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
                 ),
             )
         );
@@ -96,7 +95,7 @@ class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
                 $user_id,
                 $wpdb->comments,
                 $wpdb->commentmeta,
-                \PoPSchema\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
+                \PoPCMSSchema\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
             );
         }
 

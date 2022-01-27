@@ -1,7 +1,6 @@
 <?php
 
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_MasterCollectionWebPlatform_Initialization
 {
@@ -11,8 +10,8 @@ class PoP_MasterCollectionWebPlatform_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
-            HooksAPIFacade::getInstance()->addAction('popcms:printStyles', array($this, 'registerStyles'), 100);
+            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'), 100);
         }
 
         /**
@@ -324,7 +323,7 @@ class PoP_MasterCollectionWebPlatform_Initialization
                 $cmswebplatformapi->enqueueScript('pop-mastercollection-addeditpost');
 
                 // Comment Leo 19/11/2017: load the appshell file if either: enabling the config, using the appshell, or allowing for Service Workers, which use the appshell to load content when offline
-                if (ComponentModelComponentConfiguration::enableConfigByParams() || PoP_WebPlatform_ServerUtils::useAppshell() || (defined('POP_SERVICEWORKERS_INITIALIZED') && !PoP_ServiceWorkers_ServerUtils::disableServiceworkers())) {
+                if (PoP_WebPlatform_ServerUtils::useAppshell() || (defined('POP_SERVICEWORKERS_INITIALIZED') && !PoP_ServiceWorkers_ServerUtils::disableServiceworkers())) {
                     $cmswebplatformapi->registerScript('pop-appshell', $libraries_js_folder.'/appshell'.$suffix.'.js', array(), POP_MASTERCOLLECTIONWEBPLATFORM_VERSION, true);
                     $cmswebplatformapi->enqueueScript('pop-appshell');
                 }

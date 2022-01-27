@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPTheme_Wassup_FrontEnd_MultiDomain_Cluster_Utils
 {
     public static function init(): void
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_MultiDomain_Utils:transformUrl',
             array(PoPTheme_Wassup_FrontEnd_MultiDomain_Cluster_Utils::class, 'transformUrl'),
             10,

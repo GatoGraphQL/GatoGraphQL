@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -108,7 +107,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
 
         if ($thumb_extras = $this->getExtraThumbLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['thumb-extras'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $thumb_extras
             );
         }

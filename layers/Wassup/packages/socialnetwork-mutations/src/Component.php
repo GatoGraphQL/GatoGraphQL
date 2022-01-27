@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations;
 
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -19,9 +19,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPosts\Component::class,
-            \PoPSchema\Tags\Component::class,
-            \PoPSchema\UserState\Component::class,
+            \PoPCMSSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\Tags\Component::class,
+            \PoPCMSSchema\UserState\Component::class,
         ];
     }
 
@@ -31,8 +31,8 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }

@@ -1,12 +1,11 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class UREPoP_RoleProcessors_ControlGroup_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomControlGroups:blockauthorpostlist:layouts',
             array($this, 'getLayoutSubmodules')
         );
@@ -14,8 +13,7 @@ class UREPoP_RoleProcessors_ControlGroup_Hooks
 
     public function getLayoutSubmodules($layouts)
     {
-        $vars = ApplicationState::getVars();
-        $author = $vars['routing-state']['queried-object-id'];
+        $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
 
         // Add the Switch Community/Community+Members if the author is a community
         if (gdUreIsCommunity($author)) {

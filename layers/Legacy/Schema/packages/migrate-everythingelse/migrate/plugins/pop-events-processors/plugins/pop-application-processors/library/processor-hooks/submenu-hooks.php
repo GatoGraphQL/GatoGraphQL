@@ -1,16 +1,15 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class Wassup_EM_BP_SubmenuHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:author:routes',
             array($this, 'addRoutes')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:tag:routes',
             array($this, 'addRoutes')
         );
@@ -31,8 +30,7 @@ class Wassup_EM_BP_SubmenuHooks
                 ),
                 $event_subheaders
             );
-            $vars = ApplicationState::getVars();
-            $route = $vars['route'];
+            $route = \PoP\Root\App::getState('route');
             if (in_array($route, $event_subheaders)) {
                 $routes[$route] = array();
             }

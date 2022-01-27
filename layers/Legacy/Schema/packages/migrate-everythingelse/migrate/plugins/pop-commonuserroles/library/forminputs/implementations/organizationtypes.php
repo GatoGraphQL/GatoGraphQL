@@ -1,7 +1,6 @@
 <?php
 use PoP\Engine\FormInputs\MultipleSelectFormInput;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_FormInput_OrganizationTypes extends MultipleSelectFormInput
 {
@@ -23,7 +22,7 @@ class GD_FormInput_OrganizationTypes extends MultipleSelectFormInput
 
         $values = array_merge(
             $values,
-            HooksAPIFacade::getInstance()->applyFilters('wassup_organizationtypes', $types)
+            \PoP\Root\App::applyFilters('wassup_organizationtypes', $types)
         );
 
         return $values;

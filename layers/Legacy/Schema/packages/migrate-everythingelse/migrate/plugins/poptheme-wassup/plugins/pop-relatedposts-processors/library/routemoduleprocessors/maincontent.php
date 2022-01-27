@@ -1,6 +1,6 @@
 <?php
 
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 
 class PoPTheme_Wassup_RelatedPosts_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -18,70 +18,70 @@ class PoPTheme_Wassup_RelatedPosts_Module_MainContentRouteModuleProcessor extend
             POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_singlesection == POP_FORMAT_DETAILS) {
-                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
         $routemodules_simpleview = array(
             POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW],
         );
         foreach ($routemodules_simpleview as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_singlesection == POP_FORMAT_SIMPLEVIEW) {
-                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
         $routemodules_fullview = array(
             POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_singlesection == POP_FORMAT_FULLVIEW) {
-                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
         $routemodules_thumbnail = array(
             POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_singlesection == POP_FORMAT_THUMBNAIL) {
-                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
         $routemodules_list = array(
             POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_singlesection == POP_FORMAT_LIST) {
-                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
 

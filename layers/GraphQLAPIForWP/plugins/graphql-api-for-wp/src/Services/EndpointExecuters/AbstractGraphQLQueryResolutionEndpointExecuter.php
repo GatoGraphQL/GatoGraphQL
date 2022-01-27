@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
+use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterServiceTagInterface;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
-use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use WP_Post;
 
-abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEndpointExecuter
+abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractCPTEndpointExecuter implements GraphQLQueryResolutionEndpointExecuterInterface, EndpointExecuterServiceTagInterface
 {
-    use EndpointResolverTrait;
-
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
     private ?QueryRetrieverInterface $queryRetriever = null;
-    private ?GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet = null;
 
     final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {
@@ -34,14 +30,6 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEn
     {
         return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }
-    final public function setGraphQLRequestVarsHookSet(GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet): void
-    {
-        $this->graphQLRequestVarsHookSet = $graphQLRequestVarsHookSet;
-    }
-    final protected function getGraphQLRequestVarsHookSet(): GraphQLRequestVarsHookSet
-    {
-        return $this->graphQLRequestVarsHookSet ??= $this->instanceManager->getInstance(GraphQLRequestVarsHookSet::class);
-    }
 
     protected function getView(): string
     {
@@ -50,13 +38,14 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEn
 
     public function executeEndpoint(): void
     {
-        $this->executeGraphQLQuery();
+        // Nothing to do, required application state already set
+        // in the corresponding AppStateProvider
     }
 
     /**
      * Indicate if the GraphQL variables must override the URL params
      */
-    protected function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool
+    public function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool
     {
         // If null, we are in the admin (eg: editing a Persisted Query),
         // and there's no need to override params

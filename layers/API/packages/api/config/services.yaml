@@ -4,26 +4,29 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\API\Schema\FieldQueryConvertorInterface:
-        class: \PoP\API\Schema\FieldQueryConvertor
+    PoPAPI\API\Schema\FieldQueryConvertorInterface:
+        class: \PoPAPI\API\Schema\FieldQueryConvertor
 
-    PoP\API\PersistedQueries\PersistedFragmentManagerInterface:
-        class: \PoP\API\PersistedQueries\PersistedFragmentManager
+    PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface:
+        class: \PoPAPI\API\PersistedQueries\PersistedFragmentManager
 
-    PoP\API\PersistedQueries\PersistedQueryManagerInterface:
-        class: \PoP\API\PersistedQueries\PersistedQueryManager
+    PoPAPI\API\PersistedQueries\PersistedQueryManagerInterface:
+        class: \PoPAPI\API\PersistedQueries\PersistedQueryManager
 
-    PoP\API\Schema\SchemaDefinitionServiceInterface:
-        class: \PoP\API\Schema\SchemaDefinitionService
+    PoPAPI\API\Schema\SchemaDefinitionServiceInterface:
+        class: \PoPAPI\API\Schema\SchemaDefinitionService
 
-    PoP\API\Schema\FieldQueryInterpreterInterface:
-        class: \PoP\API\Schema\FieldQueryInterpreter
+    PoPAPI\API\Schema\FieldQueryInterpreterInterface:
+        class: \PoPAPI\API\Schema\FieldQueryInterpreter
 
-    PoP\API\Hooks\:
+    PoPAPI\API\State\:
+        resource: '../src/State/*'
+
+    PoPAPI\API\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoP\API\RouteModuleProcessors\:
+    PoPAPI\API\RouteModuleProcessors\:
         resource: '../src/RouteModuleProcessors/*'
 
-    PoP\API\ModuleProcessors\:
+    PoPAPI\API\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'

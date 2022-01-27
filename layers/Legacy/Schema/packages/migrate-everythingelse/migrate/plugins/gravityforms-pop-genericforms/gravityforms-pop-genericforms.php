@@ -6,7 +6,6 @@ Description: Implementation of the Generic Forms plugin using Gravity Forms for 
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -21,7 +20,7 @@ class GFPoPGenericForms
     {
 
         // Priority: after PoP Social Network Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888870);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888870);
     }
 
     public function init()

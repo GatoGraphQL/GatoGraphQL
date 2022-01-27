@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
@@ -30,7 +29,7 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
     protected function canInputMultipleCategories()
     {
         return false;
-        // return HooksAPIFacade::getInstance()->applyFilters(
+        // return \PoP\Root\App::applyFilters(
         //     'GD_CreateUpdate_Post:multiple-categories',
         //     true
         // );

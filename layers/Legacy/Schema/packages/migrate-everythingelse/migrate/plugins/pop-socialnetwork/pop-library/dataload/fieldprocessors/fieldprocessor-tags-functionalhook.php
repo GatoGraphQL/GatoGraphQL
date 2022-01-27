@@ -3,8 +3,8 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 
 class GD_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObjectTypeFieldResolver
 {
@@ -61,12 +61,12 @@ class GD_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObjectTypeFieldRe
         switch ($fieldName) {
             case 'subscribeToTagURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Tags\Constants\InputNames::TAG_ID => $objectTypeResolver->getID($tag),
+                    \PoPCMSSchema\Tags\Constants\InputNames::TAG_ID => $objectTypeResolver->getID($tag),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_SUBSCRIBETOTAG));
 
             case 'unsubscribeFromTagURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Tags\Constants\InputNames::TAG_ID => $objectTypeResolver->getID($tag),
+                    \PoPCMSSchema\Tags\Constants\InputNames::TAG_ID => $objectTypeResolver->getID($tag),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNSUBSCRIBEFROMTAG));
         }
 

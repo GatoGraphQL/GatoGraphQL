@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
+use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Processor_ContentSingleInnersBase
 {
@@ -28,7 +27,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
                 break;
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters('UserStance_Module_Processor_SingleContentInners:commentssingle_layouts', $layouts, $module);
+        return \PoP\Root\App::applyFilters('UserStance_Module_Processor_SingleContentInners:commentssingle_layouts', $layouts, $module);
     }
 
     public function getLayoutSubmodules(array $module)
@@ -72,8 +71,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_CONTENTINNER_STANCESINGLE:
-                $vars = ApplicationState::getVars();
-                $post_id = $vars['routing-state']['queried-object-id'];
+                $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if (POP_USERSTANCE_TERM_STANCE_PRO && $taxonomyapi->hasTerm(POP_USERSTANCE_TERM_STANCE_PRO, POP_USERSTANCE_TAXONOMY_STANCE, $post_id)) {
                     $class = 'alert-success';
                 } elseif (POP_USERSTANCE_TERM_STANCE_AGAINST && $taxonomyapi->hasTerm(POP_USERSTANCE_TERM_STANCE_AGAINST, POP_USERSTANCE_TAXONOMY_STANCE, $post_id)) {

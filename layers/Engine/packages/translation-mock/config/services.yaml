@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoP\Translation\TranslationAPIInterface:
-        class: \PoP\TranslationMock\TranslationAPI

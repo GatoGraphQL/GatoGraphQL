@@ -2,24 +2,32 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Configuration;
+namespace PoPAPI\API\Configuration;
+
+use PoP\Root\App;
+use PoPAPI\API\Constants\Params;
+use PoPAPI\API\Environment;
 
 class Request
 {
-    public const URLPARAM_USE_NAMESPACE = 'use_namespace';
-
     public static function mustNamespaceTypes(): ?bool
     {
-        if (isset($_REQUEST[self::URLPARAM_USE_NAMESPACE])) {
-            return in_array(
-                strtolower($_REQUEST[self::URLPARAM_USE_NAMESPACE]),
-                [
-                    "true",
-                    "on",
-                    "1"
-                ]
-            );
+        if (!Environment::enableSettingNamespacingByURLParam()) {
+            return null;
         }
-        return null;
+
+        $useNamespace = App::query(Params::USE_NAMESPACE);
+        if ($useNamespace === null) {
+            return null;
+        }
+
+        return in_array(
+            strtolower($useNamespace),
+            [
+                "true",
+                "on",
+                "1"
+            ]
+        );
     }
 }

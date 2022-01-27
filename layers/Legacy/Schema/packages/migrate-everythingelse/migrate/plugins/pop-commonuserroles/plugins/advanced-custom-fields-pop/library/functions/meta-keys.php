@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gdAcfGetKeysStoreAsArray', 'gdUreAcfGetKeysStoreAsArrayCustomImpl');
+\PoP\Root\App::addFilter('gdAcfGetKeysStoreAsArray', 'gdUreAcfGetKeysStoreAsArrayCustomImpl');
 function gdUreAcfGetKeysStoreAsArrayCustomImpl($keys)
 {
     $keys[] = GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES;

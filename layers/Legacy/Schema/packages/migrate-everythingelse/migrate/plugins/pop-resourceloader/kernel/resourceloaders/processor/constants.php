@@ -1,6 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-
 const POP_RESOURCELOADER_RESOURCETYPE_JS = 'js';
 const POP_RESOURCELOADER_RESOURCETYPE_CSS = 'css';
 const POP_RESOURCELOADER_RESOURCESUBTYPE_NORMAL = 'normal';
@@ -11,7 +9,7 @@ const POP_RESOURCELOADER_LOADINGTYPE_IMMEDIATE = 'immediate';
 const POP_RESOURCELOADER_LOADINGTYPE_ASYNC = 'async';
 const POP_RESOURCELOADER_LOADINGTYPE_DEFER = 'defer';
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'popWebPlatformResourceloaderJqueryConstants');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'popWebPlatformResourceloaderJqueryConstants');
 function popWebPlatformResourceloaderJqueryConstants($jqueryConstants) {
 
 	if (PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {

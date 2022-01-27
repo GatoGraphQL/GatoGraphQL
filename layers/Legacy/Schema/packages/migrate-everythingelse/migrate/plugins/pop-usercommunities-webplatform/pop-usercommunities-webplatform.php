@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP User Communities Web Platform
 Description: Implementation of User Communities Web Platform for PoP
@@ -21,7 +20,7 @@ class PoP_UserCommunitiesWebPlatform
     {
 
         // Priority: after PoP Social Network Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888570);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888570);
     }
     public function init()
     {

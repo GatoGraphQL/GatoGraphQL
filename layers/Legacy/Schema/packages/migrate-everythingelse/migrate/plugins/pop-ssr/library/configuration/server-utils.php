@@ -12,13 +12,7 @@ class PoP_SSR_ServerUtils
             return false;
         }
 
-        // Allow to override the configuration
-        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('disable-serverside-rendering');
-        if (!is_null($override)) {
-            return $override;
-        }
-
-        return getenv('DISABLE_SERVER_SIDE_RENDERING') !== false ? strtolower(getenv('DISABLE_SERVER_SIDE_RENDERING')) == "true" : false;
+        return getenv('DISABLE_SERVER_SIDE_RENDERING') !== false ? strtolower(getenv('DISABLE_SERVER_SIDE_RENDERING')) === "true" : false;
     }
 
     public static function removeDatabasesFromOutput()
@@ -29,7 +23,7 @@ class PoP_SSR_ServerUtils
             return false;
         }
 
-        return getenv('REMOVE_DATABASES_FROM_OUTPUT') !== false ? strtolower(getenv('REMOVE_DATABASES_FROM_OUTPUT')) == "true" : false;
+        return getenv('REMOVE_DATABASES_FROM_OUTPUT') !== false ? strtolower(getenv('REMOVE_DATABASES_FROM_OUTPUT')) === "true" : false;
     }
 
     public static function includeScriptsAfterHtml()
@@ -38,12 +32,6 @@ class PoP_SSR_ServerUtils
             return false;
         }
 
-        // Allow to override the configuration
-        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('scripts-end');
-        if (!is_null($override)) {
-            return $override;
-        }
-
-        return getenv('INCLUDE_SCRIPTS_AFTER_HTML') !== false ? strtolower(getenv('INCLUDE_SCRIPTS_AFTER_HTML')) == "true" : false;
+        return getenv('INCLUDE_SCRIPTS_AFTER_HTML') !== false ? strtolower(getenv('INCLUDE_SCRIPTS_AFTER_HTML')) === "true" : false;
     }
 }

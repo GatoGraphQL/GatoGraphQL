@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPTheme_Wassup_Core_ServiceWorkers_Hooks_Scripts
 {
@@ -7,7 +6,7 @@ class PoPTheme_Wassup_Core_ServiceWorkers_Hooks_Scripts
     {
 
         // Priority 100: after wp-hooks.php adds the scripts
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_CacheResources:precache',
             array($this, 'getPrecacheList'),
             100,

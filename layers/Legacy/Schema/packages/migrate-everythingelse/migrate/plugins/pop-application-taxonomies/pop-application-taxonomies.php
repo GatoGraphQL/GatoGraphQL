@@ -7,7 +7,6 @@ Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
 namespace PoP\ApplicationTaxonomies;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class Plugins
     public function __construct()
     {
         // Priority: new section, after PoP Posts
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888205);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888205);
     }
     public function init()
     {

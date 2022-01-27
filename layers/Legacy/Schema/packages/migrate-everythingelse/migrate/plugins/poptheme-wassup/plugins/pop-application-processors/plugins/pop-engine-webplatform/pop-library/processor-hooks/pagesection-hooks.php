@@ -1,17 +1,16 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPTheme_Wassup_ApplicationProcessors_WebPlatform_PageSectionHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:sideinfo',
             array($this, 'initModelPropsHover'),
             10,
             3
         );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:addons',
             array($this, 'initModelPropsAddons'),
             10,

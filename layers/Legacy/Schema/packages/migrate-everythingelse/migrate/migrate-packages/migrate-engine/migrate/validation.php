@@ -1,13 +1,12 @@
 <?php
 namespace PoP\Engine;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class Validation
 {
     public function getProviderValidationClass()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_Engine_Validation:provider-validation-class',
             null
         );
@@ -17,12 +16,12 @@ class Validation
         $success = true;
         $provider_validation_class = $this->getProviderValidationClass();
         if (is_null($provider_validation_class)) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'providerinstall_warning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'providerinstall_warning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'providerinstall_warning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'providerinstall_warning'));
             $success = false;
         } elseif (!(new $provider_validation_class())->validate()) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'providerinitialize_warning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'providerinitialize_warning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'providerinitialize_warning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'providerinitialize_warning'));
             $success = false;
         }
 

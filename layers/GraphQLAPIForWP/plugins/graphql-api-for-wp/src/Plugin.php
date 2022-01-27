@@ -172,7 +172,7 @@ class Plugin extends AbstractMainPlugin
             /** @var ModulesMenuPage */
             $modulesMenuPage = $systemInstanceManager->getInstance(ModulesMenuPage::class);
             if (
-                (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
+                (App::query('page') === $modulesMenuPage->getScreenID())
                 && !$menuPageHelper->isDocumentationScreen()
             ) {
                 /** @var ModuleListTableAction */

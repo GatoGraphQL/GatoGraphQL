@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
 {
@@ -23,7 +22,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
 
     public function getLabel(array $module, array &$props)
     {
-        $moduleFullName = ModuleUtils::getModuleFullName($module);
+        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $input = $this->getInputSubmodule($module);
 
@@ -72,7 +71,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         $input = $this->getInputSubmodule($module);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['input'] = ModuleUtils::getModuleOutputName($input);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['input'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($input);
 
         return $ret;
     }

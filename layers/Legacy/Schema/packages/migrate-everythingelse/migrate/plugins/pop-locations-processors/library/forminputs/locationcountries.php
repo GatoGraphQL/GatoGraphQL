@@ -1,5 +1,5 @@
 <?php
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\FormInputs\SelectFormInput;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 

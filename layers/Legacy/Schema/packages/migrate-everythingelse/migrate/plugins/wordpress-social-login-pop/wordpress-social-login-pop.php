@@ -6,7 +6,6 @@ Description: Wordpress Social Login for the Platform of Platforms (PoP)
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('WSL_POP_VERSION', 0.107);
 define('WSL_POP_DIR', dirname(__FILE__));
@@ -21,13 +20,13 @@ class WSL_PoP
     public function __construct()
     {
         include_once 'validation.php';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_SocialLogin_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
 
         // Priority: after PoP Social Login
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888370);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888370);
     }
     public function getProviderValidationClass($class)
     {

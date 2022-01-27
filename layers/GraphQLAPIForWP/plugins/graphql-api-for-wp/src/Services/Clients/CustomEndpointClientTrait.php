@@ -40,7 +40,7 @@ trait CustomEndpointClientTrait
         // /** @var ComponentModelComponentConfiguration */
         // $componentConfiguration = \PoP\Root\App::getComponent(ComponentModelComponent::class)->getConfiguration();
         // if ($componentConfiguration->mustNamespaceTypes()) {
-        //     $endpointURL = \add_query_arg(APIRequest::URLPARAM_USE_NAMESPACE, true, $endpointURL);
+        //     $endpointURL = \add_query_arg(APIParams::USE_NAMESPACE, true, $endpointURL);
         // }
         return $endpointURL;
     }

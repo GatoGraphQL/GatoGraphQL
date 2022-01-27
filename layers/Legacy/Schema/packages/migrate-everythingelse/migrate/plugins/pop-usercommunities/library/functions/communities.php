@@ -2,14 +2,13 @@
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 function gdUreGetCommunities($user_id): array
 {
-    return \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES) ?? [];
+    return \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES) ?? [];
 }
 
 function gdUreGetActivecontributingcontentcommunitymembers($community)
@@ -24,17 +23,17 @@ function gdUreGetActivecontributingcontentcommunitymembers($community)
         'meta-query' => [
             'relation' => 'AND',
             [
-                'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES),
+                'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES),
                 'value' => $community,
                 'compare' => 'IN'
             ],
             [
-                'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS),
+                'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS),
                 'value' => gdUreGetCommunityMetavalue($community, GD_URE_METAVALUE_PROFILE_COMMUNITIES_MEMBERSTATUS_ACTIVE),
                 'compare' => 'IN'
             ],
             [
-                'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES),
+                'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES),
                 'value' => gdUreGetCommunityMetavalue($community, GD_URE_METAVALUE_PROFILE_COMMUNITIES_MEMBERPRIVILEGES_CONTRIBUTECONTENT),
                 'compare' => 'IN'
             ],
@@ -51,8 +50,7 @@ function gdUreGetCommunityMetavalueContributecontent($user_id)
 
 function gdUreGetCommunityMetavalueCurrentcommunity($value)
 {
-    $vars = ApplicationState::getVars();
-    $community = $vars['global-userstate']['current-user-id'];
+    $community = \PoP\Root\App::getState('current-user-id');
     return gdUreGetCommunityMetavalue($community, $value);
 }
 
@@ -69,9 +67,9 @@ function gdUreUserAddnewcommunities($user_id, $communities)
         return;
     }
 
-    $status = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
-    $privileges = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
-    $tags = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
+    $status = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+    $privileges = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
+    $tags = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
 
     // When creating a new user account, these will be empty, so get the default ones
     if (!$status) {
@@ -91,12 +89,12 @@ function gdUreUserAddnewcommunities($user_id, $communities)
     }
 
     // Update the DB
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS, $status);
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES, $privileges);
-    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS, $tags);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS, $status);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES, $privileges);
+    \PoPCMSSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS, $tags);
 
     // Allow ACF to also save the value in the DB
-    HooksAPIFacade::getInstance()->doAction('ure:user:add_new_communities', $user_id, $communities);
+    \PoP\Root\App::doAction('ure:user:add_new_communities', $user_id, $communities);
 }
 
 function gdUreFindCommunityMetavalues($community, $values, $extract_metavalue = true)
@@ -126,11 +124,11 @@ function gdUreFindCommunityMetavalues($community, $values, $extract_metavalue = 
 function gdUreGetCommunitiesStatusActive($user_id): array
 {
     // Filter the community roles where the user is accepted as a member
-    if ($community_status = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS)) {
+    if ($community_status = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS)) {
         $statusactive_communities = array_values(array_filter(array_map('gdUreGetCommunitiesStatusActiveFilter', $community_status)));
 
         // Get the communities the user says he/she belongs to
-        $userchosen_communities = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES) ?? [];
+        $userchosen_communities = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES) ?? [];
 
         // Return the intersection of these 2
         return array_values(array_intersect($statusactive_communities, $userchosen_communities));
@@ -154,8 +152,7 @@ function gdUreGetCommunitiesStatusActiveFilter($value)
 
 function gdUreCommunityMembershipstatusFilterbycurrentcommunity($values)
 {
-    $vars = ApplicationState::getVars();
-    return gdUreCommunityMembershipstatusFilterbycommunity($values, $vars['global-userstate']['current-user-id']);
+    return gdUreCommunityMembershipstatusFilterbycommunity($values, \PoP\Root\App::getState('current-user-id'));
 }
 
 function gdUreCommunityMembershipstatusFilterbycommunity($values, $community)
@@ -180,7 +177,7 @@ function gdUreEditMembershipUrl($user_id, $inline = false)
     $nonce = gdCreateNonce(GD_NONCE_EDITMEMBERSHIPURL, $user_id);
     $url = GeneralUtils::addQueryArgs([
         POP_INPUTNAME_NONCE => $nonce,
-        \PoPSchema\Users\Constants\InputNames::USER_ID => $user_id,
+        \PoPCMSSchema\Users\Constants\InputNames::USER_ID => $user_id,
     ], RouteUtils::getRouteURL(POP_USERCOMMUNITIES_ROUTE_EDITMEMBERSHIP));
 
     return $url;

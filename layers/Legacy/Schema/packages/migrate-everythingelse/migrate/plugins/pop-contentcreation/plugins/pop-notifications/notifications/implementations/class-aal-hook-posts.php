@@ -1,9 +1,8 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Types\Status;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -17,9 +16,9 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     {
 
         // Created/Updated/Removed Post
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'createdPost'));
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'updatedPost'), 10, 2);
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'createdPost'));
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'updatedPost'), 10, 2);
+        \PoP\Root\App::addAction(
             'popcms:transitionPostStatus',
             array($this, 'removedPost'),
             10,
@@ -29,7 +28,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         // Admin approval
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if ($cmsapplicationapi->isAdminPanel()) {
-            HooksAPIFacade::getInstance()->addAction(
+            \PoP\Root\App::addAction(
                 'popcms:transitionPostStatus',
                 array($this, 'adminApprovalPost'),
                 10,
@@ -48,7 +47,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $skip = !in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_ContentCreation_Notifications_Hook_Posts:skipNotificationForPost',
             $skip,
             $post_id
@@ -151,8 +150,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     {
 
         // Enable if the current logged in user is the System Notification's defined user
-        $vars = ApplicationState::getVars();
-        if ($vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
+        if (\PoP\Root\App::getState('current-user-id') != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
             return;
         }
 
@@ -191,7 +189,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $customPostID = $customPostTypeAPI->getID;
             // AAL_Main::instance()->api->deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $customPostID, $clear_actions);
-            $cmspostsresolver = \PoPSchema\Posts\ObjectPropertyResolverFactory::getInstance();
+            $cmspostsresolver = \PoPCMSSchema\Posts\ObjectPropertyResolverFactory::getInstance();
             PoP_Notifications_API::deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $customPostID, $clear_actions);
 
             // Only after log the action

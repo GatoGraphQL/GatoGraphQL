@@ -6,7 +6,6 @@ Description: Implementation of processors for the Location Post Category Layouts
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_LocationPostCategoryLayoutsProcessors
     {
 
         // Priority: after PoP Location Post Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888891);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888891);
     }
     public function init()
     {

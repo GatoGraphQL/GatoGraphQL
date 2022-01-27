@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Constants\DataLoading;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
+use PoP\ConfigurationComponentModel\Constants\Params;
+use PoP\Definitions\Constants\Params as DefinitionsParams;
 
 abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor implements ModuleProcessorInterface
 {
@@ -105,7 +110,7 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
     protected function maybeOverrideCheckpoints($checkpoints)
     {
         // Allow URE to add the extra checkpoint condition of the user having the Profile role
-        return $this->getHooksAPI()->applyFilters(
+        return App::applyFilters(
             'ModuleProcessor:checkpoints',
             $checkpoints
         );
@@ -131,5 +136,86 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
         }
 
         return parent::getActionExecutionCheckpoints($module, $props);
+    }
+
+    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $module, array &$props): array
+    {
+        $ret = parent::getMutableonrequestHeaddatasetmoduleDataProperties($module, $props);
+
+        if ($dataload_source = $this->getDataloadSource($module, $props)) {
+            $ret[DataloadingConstants::SOURCE] = $dataload_source;
+        }
+
+        return $ret;
+    }
+
+    public function getDatasetmeta(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
+    {
+        $ret = parent::getDatasetmeta($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
+
+        if ($dataload_source = $data_properties[DataloadingConstants::SOURCE] ?? null) {
+            $ret['dataloadsource'] = $dataload_source;
+        }
+
+        return $ret;
+    }
+
+    public function getDataloadSource(array $module, array &$props): ?string
+    {
+        if (!App::isHTTPRequest()) {
+            return null;
+        }
+
+        // Because a component can interact with itself by adding ?modulepaths=...,
+        // then, by default, we simply set the dataload source to point to itself!
+        $stringified_module_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
+        $ret = GeneralUtils::addQueryArgs(
+            [
+                Params::MODULEFILTER => $this->getModulePaths()->getName(),
+                Params::MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
+            ],
+            $this->getRequestHelperService()->getCurrentURL()
+        );
+
+        // If we are in the API currently, stay in the API
+        if ($scheme = App::getState('scheme')) {
+            $ret = GeneralUtils::addQueryArgs([
+                Params::SCHEME => $scheme,
+            ], $ret);
+        }
+
+        // Allow to add extra modulepaths set from above
+        if ($extra_module_paths = $this->getProp($module, $props, 'dataload-source-add-modulepaths')) {
+            foreach ($extra_module_paths as $modulepath) {
+                $ret = GeneralUtils::addQueryArgs([
+                    Params::MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($modulepath),
+                ], $ret);
+            }
+        }
+
+        // Add the actionpath too
+        if ($this->getComponentMutationResolverBridge($module) !== null) {
+            $ret = GeneralUtils::addQueryArgs([
+                Params::ACTION_PATH => $stringified_module_propagation_current_path,
+            ], $ret);
+        }
+
+        // If mangled, make it mandle
+        if ($mangled = App::getState('mangled')) {
+            $ret = GeneralUtils::addQueryArgs([
+                DefinitionsParams::MANGLED => $mangled,
+            ], $ret);
+        }
+
+        // Add the format to the query url
+        if ($this instanceof FormattableModuleInterface) {
+            if ($format = $this->getFormat($module)) {
+                $ret = GeneralUtils::addQueryArgs([
+                    Params::FORMAT => $format,
+                ], $ret);
+            }
+        }
+
+        return $ret;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPSitesWassup\EventMutations\MutationResolverBridges\CreateEventMutationResolverBridge;
 use PoPSitesWassup\EventMutations\MutationResolverBridges\UpdateEventMutationResolverBridge;
 
@@ -110,11 +110,11 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getObjectIDParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDParamName(array $module, array &$props, array &$data_properties): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENT_UPDATE:
-                return \PoPSchema\Posts\Constants\InputNames::POST_ID;
+                return \PoPCMSSchema\Posts\Constants\InputNames::POST_ID;
         }
         return null;
     }

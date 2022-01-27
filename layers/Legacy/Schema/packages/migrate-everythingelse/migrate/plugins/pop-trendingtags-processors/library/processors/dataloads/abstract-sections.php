@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 
 abstract class Abstract_PoP_TrendingTags_Module_Processor_SectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {

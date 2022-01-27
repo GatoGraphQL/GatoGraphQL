@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
 {
@@ -40,36 +38,10 @@ abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
         }
 
         // Check the expected ?view=... is requested
-        if (!$this->isClientRequested()) {
-            return false;
-        }
-
-        // Check we're loading the corresponding CPT
-        $customPostType = $this->getCustomPostType();
-        if (!\is_singular($customPostType->getCustomPostType())) {
-            return false;
-        }
-
-        // Check the endpoint is not disabled
-        global $post;
-        if (!$customPostType->isEndpointEnabled($post)) {
+        if (!$this->isEndpointBeingRequested()) {
             return false;
         }
 
         return true;
     }
-
-    abstract protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface;
-
-    /**
-     * Check the expected ?view=... is requested.
-     */
-    protected function isClientRequested(): bool
-    {
-        // Use `''` instead of `null` so that the query resolution
-        // works either without param or empty (?view=)
-        return ($_REQUEST[RequestParams::VIEW] ?? '') === $this->getView();
-    }
-
-    abstract protected function getView(): string;
 }

@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_thumb_defaultlink:link_categories', 'popEventlinksAddEventlinkCategory');
+\PoP\Root\App::addFilter('gd_thumb_defaultlink:link_categories', 'popEventlinksAddEventlinkCategory');
 function popEventlinksAddEventlinkCategory($categories)
 {
 

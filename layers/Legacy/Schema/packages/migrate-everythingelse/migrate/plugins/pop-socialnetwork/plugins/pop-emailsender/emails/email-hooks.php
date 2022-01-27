@@ -1,10 +1,9 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 define('POP_EMAIL_FOLLOWSUSER', 'followsuser');
 define('POP_EMAIL_RECOMMENDSPOST', 'recommendspost');
@@ -22,21 +21,21 @@ class PoP_SocialNetwork_EmailSender_Hooks
         // Functional emails
         //----------------------------------------------------------------------
         // User followed
-        HooksAPIFacade::getInstance()->addAction('gd_followuser', array($this, 'followuser'), 10, 1);
+        \PoP\Root\App::addAction('gd_followuser', array($this, 'followuser'), 10, 1);
 
         // Post recommended
-        HooksAPIFacade::getInstance()->addAction('gd_recommendpost', array($this, 'recommendpost'), 10, 1);
+        \PoP\Root\App::addAction('gd_recommendpost', array($this, 'recommendpost'), 10, 1);
 
         //----------------------------------------------------------------------
         // Email Notifications
         //----------------------------------------------------------------------
         // EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST:
-        HooksAPIFacade::getInstance()->addAction('gd_recommendpost', array($this, 'emailnotificationsNetworkRecommendedpost'), 10, 1);
+        \PoP\Root\App::addAction('gd_recommendpost', array($this, 'emailnotificationsNetworkRecommendedpost'), 10, 1);
         // EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER:
-        HooksAPIFacade::getInstance()->addAction('gd_followuser', array($this, 'emailnotificationsNetworkFolloweduser'), 10, 1);
+        \PoP\Root\App::addAction('gd_followuser', array($this, 'emailnotificationsNetworkFolloweduser'), 10, 1);
         // EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST:
-        HooksAPIFacade::getInstance()->addAction('gd_upvotepost', array($this, 'emailnotificationsNetworkUpvotedpost'), 10, 1);
-        HooksAPIFacade::getInstance()->addAction('gd_downvotepost', array($this, 'emailnotificationsNetworkDownvotedpost'), 10, 1);
+        \PoP\Root\App::addAction('gd_upvotepost', array($this, 'emailnotificationsNetworkUpvotedpost'), 10, 1);
+        \PoP\Root\App::addAction('gd_downvotepost', array($this, 'emailnotificationsNetworkDownvotedpost'), 10, 1);
     }
 
     /**
@@ -45,8 +44,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
 
     public function emailnotificationsNetworkFolloweduser($target_id)
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = \PoP\Root\App::getState('current-user-id');
 
         // Get the current user's network's users (followers + members of same communities)
         $networkusers = PoP_SocialNetwork_EmailUtils::getUserNetworkusers($user_id);
@@ -89,8 +87,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
     }
     public function emailnotificationsNetworkRecommendedpost($post_id)
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = \PoP\Root\App::getState('current-user-id');
 
         // Get the current user's network's users (followers + members of same communities)
         $networkusers = PoP_SocialNetwork_EmailUtils::getUserNetworkusers($user_id);
@@ -143,8 +140,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
     }
     protected function emailnotificationsNetworkUpdownvotedpost($post_id, $upvote)
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = \PoP\Root\App::getState('current-user-id');
 
         // Get the current user's network's users (followers + members of same communities)
         $networkusers = PoP_SocialNetwork_EmailUtils::getUserNetworkusers($user_id);
@@ -200,8 +196,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
     {
         if (!in_array($target_id, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_FOLLOWSUSER))) {
             $userTypeAPI = UserTypeAPIFacade::getInstance();
-            $vars = ApplicationState::getVars();
-            $user_id = $vars['global-userstate']['current-user-id'];
+            $user_id = \PoP\Root\App::getState('current-user-id');
             $user_html = PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);
 
             $target_url = $userTypeAPI->getUserURL($target_id);
@@ -231,8 +226,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
     public function recommendpost($post_id)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = \PoP\Root\App::getState('current-user-id');
         $user_html = PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);
 
         $post_name = gdGetPostname($post_id);

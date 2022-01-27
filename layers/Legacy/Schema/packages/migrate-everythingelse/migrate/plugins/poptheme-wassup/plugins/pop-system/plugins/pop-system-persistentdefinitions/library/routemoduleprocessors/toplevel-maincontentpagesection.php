@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoPTheme_Wassup_SystemPersistentDefinitions_Module_ContentPageSectionTopLevelRouteModuleProcessor extends PoP_Module_ContentPageSectionTopLevelRouteModuleProcessorBase
 {
@@ -15,10 +15,10 @@ class PoPTheme_Wassup_SystemPersistentDefinitions_Module_ContentPageSectionTopLe
             POP_SYSTEM_ROUTE_SYSTEM_SAVEDEFINITIONFILE,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_PageSectionContainers::class, PoP_Module_Processor_PageSectionContainers::MODULE_PAGESECTIONCONTAINER_HOLE],
                 'conditions' => [
-                    'target' => \PoP\ComponentModel\Constants\Targets::MAIN,
+                    'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                 ],
             ];
         }

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\FieldResolvers\ObjectType;
+namespace PoPAPI\API\FieldResolvers\ObjectType;
 
-use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
-use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
-use PoP\API\Schema\SchemaDefinitionServiceInterface;
+use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
+use PoPAPI\API\PersistedQueries\PersistedQueryManagerInterface;
+use PoPAPI\API\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

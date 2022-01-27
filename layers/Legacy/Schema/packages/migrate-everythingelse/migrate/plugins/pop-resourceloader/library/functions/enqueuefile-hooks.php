@@ -1,12 +1,11 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ResourceLoader_EnqueueFileHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter('getEnqueuefileType', array($this, 'getEnqueuefileType'));
+        \PoP\Root\App::addFilter('getEnqueuefileType', array($this, 'getEnqueuefileType'));
     }
 
     public function getEnqueuefileType($type)
@@ -23,9 +22,8 @@ class PoP_ResourceLoader_EnqueueFileHooks
 
     protected function isForInternalUse()
     {
-        $vars = ApplicationState::getVars();
-        if ($vars['routing-state']['is-standard']) {
-            $route = $vars['route'];
+        if (\PoP\Root\App::getState(['routing', 'is-generic'])) {
+            $route = \PoP\Root\App::getState('route');
         
             $processor = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance()->getProcessor($route);
             if ($internals = $processor->isForInternalUse()) {

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
@@ -23,7 +22,7 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_ORDERCOMMENT],
             ],
         ];
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+        if ($modules = \PoP\Root\App::applyFilters(
             'Comments:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module

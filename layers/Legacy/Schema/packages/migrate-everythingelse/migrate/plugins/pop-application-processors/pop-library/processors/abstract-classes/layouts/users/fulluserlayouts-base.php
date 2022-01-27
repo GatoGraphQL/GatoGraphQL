@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class PoP_Module_Processor_CustomFullUserLayoutsBase extends PoP_Module_Processor_FullUserLayoutsBase
 {
@@ -8,7 +7,7 @@ abstract class PoP_Module_Processor_CustomFullUserLayoutsBase extends PoP_Module
     {
 
         // Allow URE to Change it, to inject the (Organization / Organization+Members) links
-        // return HooksAPIFacade::getInstance()->applyFilters(
+        // return \PoP\Root\App::applyFilters(
         //     'PoP_Module_Processor_CustomFullUserLayoutsBase:title_module',
         //     PoP_Module_Processor_CustomFullUserTitleLayouts::MODULE_LAYOUT_FULLUSERTITLE
         // );

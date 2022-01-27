@@ -16,7 +16,7 @@ class Upload
     {
 
         // Recreate the path to /uploads/fileupload-userphoto/
-        $upload_path = isset($_REQUEST['upload_path']) ? $_REQUEST['upload_path'] : "generic";
+        $upload_path = isset($_GET['upload_path']) ? $_GET['upload_path'] : "generic";
 
         $upload_dir = $upload_path.DIRECTORY_SEPARATOR;
         $upload_originaldir = $upload_dir.'original'.DIRECTORY_SEPARATOR;
@@ -71,17 +71,17 @@ class Upload
         $vars = $this->getVars();
 
         // Make sure all these folders exists, create them if not
-        if (!file_exists($vars['user_upload_thumb_fullpath'])) {
-            @mkdir($vars['user_upload_thumb_fullpath'], 0777, true);
+        if (!file_exists(\PoP\Root\App::getState('user_upload_thumb_fullpath'))) {
+            @mkdir(\PoP\Root\App::getState('user_upload_thumb_fullpath'), 0777, true);
         }
-        if (!file_exists($vars['user_upload_photo_fullpath'])) {
-            @mkdir($vars['user_upload_photo_fullpath'], 0777, true);
+        if (!file_exists(\PoP\Root\App::getState('user_upload_photo_fullpath'))) {
+            @mkdir(\PoP\Root\App::getState('user_upload_photo_fullpath'), 0777, true);
         }
-        if (!file_exists($vars['user_upload_original_fullpath'])) {
-            @mkdir($vars['user_upload_original_fullpath'], 0777, true);
+        if (!file_exists(\PoP\Root\App::getState('user_upload_original_fullpath'))) {
+            @mkdir(\PoP\Root\App::getState('user_upload_original_fullpath'), 0777, true);
         }
-        if (!file_exists($vars['user_upload_avatars_fullpath'])) {
-            @mkdir($vars['user_upload_avatars_fullpath'], 0777, true);
+        if (!file_exists(\PoP\Root\App::getState('user_upload_avatars_fullpath'))) {
+            @mkdir(\PoP\Root\App::getState('user_upload_avatars_fullpath'), 0777, true);
         }
 
         // Initialize the handler

@@ -2,23 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PoP\API;
+namespace PoPAPI\API;
 
 use PoP\Root\App;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
-use PoP\API\Configuration\Request;
+use PoPAPI\API\Configuration\Request;
 use PoP\CacheControl\Component as CacheControlComponent;
-use PoP\BasicService\Component\AbstractComponent;
-use PoP\Root\Component\CanDisableComponentTrait;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use CanDisableComponentTrait;
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -42,6 +39,11 @@ class Component extends AbstractComponent
         ];
     }
 
+    protected function resolveEnabled(): bool
+    {
+        return !Environment::disableAPI();
+    }
+
     /**
      * Set the default component configuration
      *
@@ -51,11 +53,9 @@ class Component extends AbstractComponent
         array &$componentClassConfiguration
     ): void {
         // If passing ?use_namespace=1, set it on the configuration
-        if (Environment::enableSettingNamespacingByURLParam()) {
-            $useNamespacing = Request::mustNamespaceTypes();
-            if ($useNamespacing !== null) {
-                $componentClassConfiguration[\PoP\ComponentModel\Component::class][\PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES] = $useNamespacing;
-            }
+        $useNamespacing = Request::mustNamespaceTypes();
+        if ($useNamespacing !== null) {
+            $componentClassConfiguration[\PoP\ComponentModel\Component::class][\PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES] = $useNamespacing;
         }
     }
 
@@ -65,37 +65,30 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
-        if ($this->isEnabled()) {
-            $this->initServices(dirname(__DIR__));
-            $this->initServices(dirname(__DIR__), '/Overrides');
-            $this->initSchemaServices(dirname(__DIR__), $skipSchema);
+        $this->initServices(dirname(__DIR__));
+        $this->initServices(dirname(__DIR__), '/Overrides');
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
-            // Conditional packages
-            if (class_exists(AccessControlComponent::class)) {
-                $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/AccessControl');
-            }
-
-            /** @var AccessControlComponentConfiguration */
-            $componentConfiguration = App::getComponent(AccessControlComponent::class)->getConfiguration();
-            if (
-                class_exists(CacheControlComponent::class)
-                && class_exists(AccessControlComponent::class)
-                && $componentConfiguration->canSchemaBePrivate()
-            ) {
-                $this->initSchemaServices(
-                    dirname(__DIR__),
-                    $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses),
-                    '/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema'
-                );
-            }
+        // Conditional packages
+        if (class_exists(AccessControlComponent::class)) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/AccessControl');
         }
-    }
 
-    protected function resolveEnabled(): bool
-    {
-        return !Environment::disableAPI();
+        /** @var AccessControlComponentConfiguration */
+        $componentConfiguration = App::getComponent(AccessControlComponent::class)->getConfiguration();
+        if (
+            class_exists(CacheControlComponent::class)
+            && class_exists(AccessControlComponent::class)
+            && $componentConfiguration->canSchemaBePrivate()
+        ) {
+            $this->initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses),
+                '/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema'
+            );
+        }
     }
 }

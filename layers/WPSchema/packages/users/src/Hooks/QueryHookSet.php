@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Users\Hooks;
 
-use PoP\BasicService\AbstractHookSet;
-use PoPSchema\UsersWP\TypeAPIs\UserTypeAPI;
+use PoP\Root\App;
+use PoP\Root\Hooks\AbstractHookSet;
+use PoPCMSSchema\UsersWP\TypeAPIs\UserTypeAPI;
 use PoPWPSchema\Users\Constants\UserOrderBy;
 
 class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::addFilter(
             UserTypeAPI::HOOK_ORDERBY_QUERY_ARG_VALUE,
             [$this, 'getOrderByQueryArgValue']
         );

@@ -1,7 +1,7 @@
 <?php
 
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 class PoPTheme_Wassup_Events_CAP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -19,10 +19,10 @@ class PoPTheme_Wassup_Events_CAP_Module_SideInfoContentPageSectionRouteModulePro
             POP_ROUTE_AUTHORS => [PoP_Events_CoAuthors_Module_Processor_SidebarMultiples::class, PoP_Events_CoAuthors_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
-                    'routing-state' => [
+                    'routing' => [
                         'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
                         'queried-object-is-past-event' => true,
                     ],
@@ -35,10 +35,10 @@ class PoPTheme_Wassup_Events_CAP_Module_SideInfoContentPageSectionRouteModulePro
             POP_ROUTE_AUTHORS => [PoP_Events_CoAuthors_Module_Processor_SidebarMultiples::class, PoP_Events_CoAuthors_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
-                    'routing-state' => [
+                    'routing' => [
                         'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
                     ],
                 ],

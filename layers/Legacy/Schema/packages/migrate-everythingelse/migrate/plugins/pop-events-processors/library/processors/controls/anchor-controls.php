@@ -2,10 +2,9 @@
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
@@ -54,7 +53,6 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     }
     public function getHref(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {
@@ -69,17 +67,17 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 return RouteUtils::getRouteURL($route);
 
             case self::MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 // Allow URE to add the ContentSource
-                return HooksAPIFacade::getInstance()->applyFilters(
+                return \PoP\Root\App::applyFilters(
                     'GD_EM_Module_Processor_CustomAnchorControls:pastevents:url',
                     RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS),
                     $author
                 );
 
             case self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
-                $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                 return RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS);
         }
 

@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPCMSSchema\CustomPosts\Types\Status;
 
 abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -48,8 +48,7 @@ abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Pr
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
 
         // Logged-in author
-        $vars = ApplicationState::getVars();
-        $ret['authors'] = [$vars['global-userstate']['current-user-id']];
+        $ret['authors'] = [\PoP\Root\App::getState('current-user-id')];
 
         return $ret;
     }

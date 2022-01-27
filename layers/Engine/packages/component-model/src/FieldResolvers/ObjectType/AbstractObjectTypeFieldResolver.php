@@ -29,7 +29,6 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -291,7 +290,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldDescriptionCache)) {
             return $this->consolidatedFieldDescriptionCache[$cacheKey];
         }
-        $this->consolidatedFieldDescriptionCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedFieldDescriptionCache[$cacheKey] = App::applyFilters(
             HookNames::OBJECT_TYPE_FIELD_DESCRIPTION,
             $this->getFieldDescription($objectTypeResolver, $fieldName),
             $this,
@@ -312,7 +311,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldDeprecationMessageCache)) {
             return $this->consolidatedFieldDeprecationMessageCache[$cacheKey];
         }
-        $this->consolidatedFieldDeprecationMessageCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedFieldDeprecationMessageCache[$cacheKey] = App::applyFilters(
             HookNames::OBJECT_TYPE_FIELD_DEPRECATION_MESSAGE,
             $this->getFieldDeprecationMessage($objectTypeResolver, $fieldName),
             $this,
@@ -393,7 +392,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
-        $consolidatedFieldArgNameTypeResolvers = $this->getHooksAPI()->applyFilters(
+        $consolidatedFieldArgNameTypeResolvers = App::applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
             $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
             $this,
@@ -442,7 +441,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedAdminFieldArgNamesCache)) {
             return $this->consolidatedAdminFieldArgNamesCache[$cacheKey];
         }
-        $this->consolidatedAdminFieldArgNamesCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedAdminFieldArgNamesCache[$cacheKey] = App::applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
             $this->getAdminFieldArgNames($objectTypeResolver, $fieldName),
             $this,
@@ -463,7 +462,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgDescriptionCache)) {
             return $this->consolidatedFieldArgDescriptionCache[$cacheKey];
         }
-        $this->consolidatedFieldArgDescriptionCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedFieldArgDescriptionCache[$cacheKey] = App::applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_DESCRIPTION,
             $this->getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
@@ -485,7 +484,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgDefaultValueCache)) {
             return $this->consolidatedFieldArgDefaultValueCache[$cacheKey];
         }
-        $this->consolidatedFieldArgDefaultValueCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedFieldArgDefaultValueCache[$cacheKey] = App::applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_DEFAULT_VALUE,
             $this->getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
@@ -507,7 +506,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgTypeModifiersCache)) {
             return $this->consolidatedFieldArgTypeModifiersCache[$cacheKey];
         }
-        $this->consolidatedFieldArgTypeModifiersCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedFieldArgTypeModifiersCache[$cacheKey] = App::applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_TYPE_MODIFIERS,
             $this->getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
@@ -567,7 +566,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->schemaFieldArgExtensionsCache)) {
             return $this->schemaFieldArgExtensionsCache[$cacheKey];
         }
-        $this->schemaFieldArgExtensionsCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->schemaFieldArgExtensionsCache[$cacheKey] = App::applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_EXTENSIONS,
             $this->getFieldArgExtensionsSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
@@ -649,7 +648,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * If this field is tagged with a version...
              */
             $schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $fieldName);
-            $vars = ApplicationState::getVars();
             /**
              * Get versionConstraint in this order:
              * 1. Passed as field argument
@@ -667,7 +665,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     $objectTypeResolver->getTypeName(),
                     $fieldName
                 )
-                ?? $vars['version-constraint'];
+                ?? App::getState('version-constraint');
             /**
              * If the query doesn't restrict the version, then do not process
              */
@@ -939,7 +937,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldExtensionsCache)) {
             return $this->consolidatedFieldExtensionsCache[$cacheKey];
         }
-        $this->consolidatedFieldExtensionsCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedFieldExtensionsCache[$cacheKey] = App::applyFilters(
             HookNames::OBJECT_TYPE_FIELD_EXTENSIONS,
             $this->getFieldExtensionsSchemaDefinition($objectTypeResolver, $fieldName),
             $this,
@@ -1146,7 +1144,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         string $fieldName,
         array $fieldArgs,
     ): array {
-        return $this->getHooksAPI()->applyFilters(
+        return App::applyFilters(
             HookNames::OBJECT_TYPE_MUTATION_FIELD_ARGS,
             $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
             $this,
@@ -1258,7 +1256,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         object $object,
         string $fieldName,
     ): array {
-        return $this->getHooksAPI()->applyFilters(
+        return App::applyFilters(
             HookNames::OBJECT_TYPE_MUTATION_FIELD_ARGS_FOR_OBJECT,
             $this->getMutationFieldArgsForObject(
                 $mutationFieldArgs,

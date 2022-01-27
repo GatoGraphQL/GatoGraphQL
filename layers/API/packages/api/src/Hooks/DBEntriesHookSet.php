@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Hooks;
+namespace PoPAPI\API\Hooks;
 
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\App;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class DBEntriesHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::addFilter(
             'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
             array($this, 'moveEntriesUnderDBName'),
             10,
@@ -21,15 +22,15 @@ class DBEntriesHookSet extends AbstractHookSet
     public function moveEntriesUnderDBName(array $dbname_datafields): array
     {
         // Enable to add all fields starting with "__" (such as "__schema") as meta
-        $dbname_datafields['meta'] = $this->getHooksAPI()->applyFilters(
-            'PoP\API\DataloaderHooks:metaFields',
+        $dbname_datafields['meta'] = App::applyFilters(
+            'PoPAPI\API\DataloaderHooks:metaFields',
             [
                 'fullSchema',
                 'typeName',
             ]
         );
-        $dbname_datafields['context'] = $this->getHooksAPI()->applyFilters(
-            'PoP\API\DataloaderHooks:contextFields',
+        $dbname_datafields['context'] = App::applyFilters(
+            'PoPAPI\API\DataloaderHooks:contextFields',
             [
                 'var',
                 'context',

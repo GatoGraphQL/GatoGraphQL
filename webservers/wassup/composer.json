@@ -20,8 +20,8 @@
     ],
     "require": {
         "php": "~8.0",
-        "getpop/engine-wp-bootloader": "^0.8",
-        "pop-sites-wassup/wassup": "^0.8",
+        "getpop/engine-wp-bootloader": "^0.9",
+        "pop-sites-wassup/wassup": "^0.9",
         "oomphinc/composer-installers-extender": "^2.0",
         "wpackagist-plugin/events-manager":"^5.9",
         "wpackagist-plugin/aryo-activity-log":"^2.5"
@@ -44,7 +44,13 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "boxuk/wp-muplugin-loader": true,
+            "composer/installers": true,
+            "johnpbloch/wordpress-core-installer": true,
+            "oomphinc/composer-installers-extender": true
+        }
     },
     "scripts": {
         "ssh-server": "lando ssh",

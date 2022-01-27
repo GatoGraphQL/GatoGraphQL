@@ -6,7 +6,6 @@ Description: Collection of Processors for Social Login for the Platform of Platf
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('POP_SOCIALLOGINPROCESSORS_VERSION', 0.109);
 define('POP_SOCIALLOGINPROCESSORS_DIR', dirname(__FILE__));
@@ -17,7 +16,7 @@ class PoP_SocialLoginProcessors
     {
 
         // Priority: after PoP Notifications Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888850);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888850);
     }
 
     public function init()

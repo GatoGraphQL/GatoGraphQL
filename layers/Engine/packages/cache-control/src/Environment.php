@@ -10,6 +10,6 @@ class Environment
 
     public static function disableCacheControl(): bool
     {
-        return getenv('DISABLE_CACHE_CONTROL') !== false ? strtolower(getenv('DISABLE_CACHE_CONTROL')) == "true" : false;
+        return getenv('DISABLE_CACHE_CONTROL') !== false ? strtolower(getenv('DISABLE_CACHE_CONTROL')) === "true" : false;
     }
 }

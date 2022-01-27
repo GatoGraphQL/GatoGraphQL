@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class GD_FileUpload_Picture_Utils
 {
@@ -12,7 +11,7 @@ class GD_FileUpload_Picture_Utils
 
         // Initialize
         if (is_null(self::$action_url)) {
-            self::$action_url = HooksAPIFacade::getInstance()->applyFilters(
+            self::$action_url = \PoP\Root\App::applyFilters(
                 'GD_FileUpload_UserPhoto:action-url',
                 self::getActionUrlFromBasedir(dirname(dirname(dirname(__FILE__))))
             );

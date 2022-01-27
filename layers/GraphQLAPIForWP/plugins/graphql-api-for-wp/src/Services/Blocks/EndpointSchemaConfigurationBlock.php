@@ -114,7 +114,7 @@ EOF;
         } elseif ($schemaConfigurationID > 0) {
             $schemaConfigurationObject = \get_post($schemaConfigurationID);
             if (!is_null($schemaConfigurationObject)) {
-                $schemaConfigurationDescription = $this->getCptUtils()->getCustomPostDescription($schemaConfigurationObject);
+                $schemaConfigurationDescription = $this->getCPTUtils()->getCustomPostDescription($schemaConfigurationObject);
                 $permalink = \get_permalink($schemaConfigurationObject->ID);
                 $schemaConfigurationContent = ($permalink ?
                     \sprintf(

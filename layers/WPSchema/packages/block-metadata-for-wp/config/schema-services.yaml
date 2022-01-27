@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPWPSchema\BlockMetadataWP\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'

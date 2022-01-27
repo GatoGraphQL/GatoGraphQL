@@ -1,7 +1,6 @@
 <?php
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
  * This class is a parent class which online gateways may extend. There are various variables and functions that are automatically taken care of by
@@ -34,11 +33,11 @@ if (class_exists("EM_Gateway")) {
             $this->status_txt = sprintf(TranslationAPIFacade::getInstance()->__('Awaiting %s Payment', 'poptheme-wassup'), TranslationAPIFacade::getInstance()->__($this->title, 'poptheme-wassup'));            // Change Leo
             $cron = 'emp_'.$this->gateway.'_cron';            // Change Leo
             if ($this->is_active()) {
-                HooksAPIFacade::getInstance()->addAction('em_gateway_js', array($this,'emGatewayJs'));
+                \PoP\Root\App::addAction('em_gateway_js', array($this,'emGatewayJs'));
                 //Gateway-Specific
-                HooksAPIFacade::getInstance()->addAction('em_template_my_bookings_header', array($this,'sayThanks')); //say thanks on my_bookings page
-                HooksAPIFacade::getInstance()->addFilter('em_bookings_table_booking_actions_4', array($this,'bookingsTableActions'), 1, 2);
-                HooksAPIFacade::getInstance()->addFilter('em_my_bookings_booking_actions', array($this,'emMyBookingsBookingActions'), 1, 2);
+                \PoP\Root\App::addAction('em_template_my_bookings_header', array($this,'sayThanks')); //say thanks on my_bookings page
+                \PoP\Root\App::addFilter('em_bookings_table_booking_actions_4', array($this,'bookingsTableActions'), 1, 2);
+                \PoP\Root\App::addFilter('em_my_bookings_booking_actions', array($this,'emMyBookingsBookingActions'), 1, 2);
                 //set up cron
                 if (has_action($cron, 'em_gateway_booking_timeout')) {             // Change Leo
                     $timestamp = wp_next_scheduled($cron);
@@ -117,7 +116,7 @@ if (class_exists("EM_Gateway")) {
         {
             parent::bookingAdd($EM_Event, $EM_Booking, $post_validation);
             if (!defined('DOING_AJAX')) { //we aren't doing ajax here, so we should provide a way to edit the $EM_Notices ojbect.
-                HooksAPIFacade::getInstance()->addAction('option_dbem_booking_feedback', array($this, 'bookingFormFeedbackFallback'));
+                \PoP\Root\App::addAction('option_dbem_booking_feedback', array($this, 'bookingFormFeedbackFallback'));
             }
         }
 

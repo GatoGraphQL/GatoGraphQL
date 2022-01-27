@@ -1,8 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('pop_module:allcontent:tax_query_items', 'popEmAllcontentTaxqueryItems');
+\PoP\Root\App::addFilter('pop_module:allcontent:tax_query_items', 'popEmAllcontentTaxqueryItems');
 function popEmAllcontentTaxqueryItems($tax_query_items)
 {
     if (POP_EVENTS_CAT_ALL) {

@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\API\ConditionalOnComponent\AccessControl\Hooks\:
+    PoPAPI\API\ConditionalOnComponent\AccessControl\Hooks\:
         resource: '../../../src/ConditionalOnComponent/AccessControl/Hooks/*'

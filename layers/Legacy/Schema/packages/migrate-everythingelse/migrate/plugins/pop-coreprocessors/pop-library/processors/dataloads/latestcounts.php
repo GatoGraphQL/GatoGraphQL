@@ -2,7 +2,7 @@
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -80,14 +80,13 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
 
     public function initModelProps(array $module, array &$props): void
     {
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
                 // It can be invisible, nothing to show
                 $this->appendProp($module, $props, 'class', 'hidden');
 
                 // Do not load initially. Load only needed when executing the setTimeout with loadLatest
-                if ($vars['fetching-site'] ?? null) {
+                if (\PoP\Root\App::getState('fetching-site')) {
                     $this->setProp($module, $props, 'skip-data-load', true);
                 }
                 break;

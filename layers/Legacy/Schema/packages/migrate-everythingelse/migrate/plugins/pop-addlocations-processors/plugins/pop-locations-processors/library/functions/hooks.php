@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_AddLocations_LocationsProcessors_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'GD_EM_Module_Processor_InputGroupFormComponents:control-layout',
             array($this, 'getControlLayout')
         );

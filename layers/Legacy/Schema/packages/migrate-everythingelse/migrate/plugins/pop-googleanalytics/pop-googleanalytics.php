@@ -6,7 +6,6 @@ Description: Integration with Google Analytics for the Platform of Platforms (Po
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('POP_GOOGLEANALYTICS_VERSION', 0.110);
 define('POP_GOOGLEANALYTICS_DIR', dirname(__FILE__));
@@ -17,7 +16,7 @@ class PoP_GoogleAnalytics
     {
 
         // Priority: after PoP Application Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888510);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888510);
     }
 
     public function init()

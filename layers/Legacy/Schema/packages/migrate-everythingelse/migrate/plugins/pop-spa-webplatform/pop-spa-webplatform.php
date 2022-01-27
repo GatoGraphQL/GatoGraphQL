@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Single-Page Application Web Platform
 Description: Implementation of SPA capabilities for PoP
@@ -21,7 +20,7 @@ class PoP_SPAWebPlatform
     {
 
         // Priority: after PoP Server-Side Rendering, inner circle
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888404);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888404);
     }
     public function init()
     {

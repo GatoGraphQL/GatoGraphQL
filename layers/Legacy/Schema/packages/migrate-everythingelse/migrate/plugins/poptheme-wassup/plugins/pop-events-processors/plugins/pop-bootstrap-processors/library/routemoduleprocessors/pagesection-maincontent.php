@@ -1,8 +1,8 @@
 <?php
 
-use PoP\Routing\RouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class EMPoP_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
@@ -19,7 +19,7 @@ class EMPoP_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Mod
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SectionTabPanelBlocks::class, GD_EM_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_EVENTSCALENDAR],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
@@ -33,7 +33,7 @@ class EMPoP_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Mod
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::class, GD_EM_Module_Processor_AuthorSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[UserRouteNatures::USER][$route][] = [
+            $ret[UserRequestNature::USER][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
@@ -47,7 +47,7 @@ class EMPoP_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Mod
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_TagSectionTabPanelBlocks::class, GD_EM_Module_Processor_TagSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_TAGEVENTSCALENDAR],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[TagRouteNatures::TAG][$route][] = [
+            $ret[TagRequestNature::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

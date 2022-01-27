@@ -1,29 +1,28 @@
 <?php
 
 use PoP\ConfigurationComponentModel\Facades\Engine\EngineFacade;
+use PoP\EngineWP\Facades\HelperServices\TemplateHelpersFacade;
+use PoP\Root\App;
 
 $engine = EngineFacade::getInstance();
-// $engine->outputResponse();
 $engine->maybeRedirectAndExit();
-$engine->generateData();
 
-// $vars = ApplicationState::getVars();
-// include $vars['theme-path'].'/mainpagesection.php';
+$templateHelpers = TemplateHelpersFacade::getInstance();
+include $templateHelpers->getGenerateDataAndPrepareResponseTemplateFile();
 
-// Allow PoP SSR to inject the server-side rendered HTML
-
-// $class = PoP_HTMLCSSPlatformEngine_Module_Utils::getMergeClass([PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_TOP]);
-// $cached_settings = $engine->isCachedSettings() ? "true" : "false";
+/**
+ * Send the headers to the client
+ */
+App::getResponse()->sendHeaders();
 
 get_header();
 ?>
 
 	<div id="<?php echo POP_ID_ENTRY ?>">
+		<?php /** @todo Print the HTML code through Response in App, instead of PoP_HTMLCSSPlatformEngine_Module_Utils::getMainHtml() */ ?>
+		<?php echo App::getResponse()->getContent() ?>
 		<?php echo PoP_HTMLCSSPlatformEngine_Module_Utils::getMainHtml() ?>
 	</div>
 
 <?php
 get_footer();
-
-// // Allow extra functionalities. Eg: Save the logged-in user meta information
-// $engine->triggerOutputHooks();

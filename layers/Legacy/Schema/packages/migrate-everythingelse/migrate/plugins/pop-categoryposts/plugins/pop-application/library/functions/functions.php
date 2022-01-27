@@ -1,12 +1,11 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
-use PoPSchema\Posts\Facades\PostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPCMSSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-HooksAPIFacade::getInstance()->addFilter('gd_postname', 'blogPostname', 10, 3);
+\PoP\Root\App::addFilter('gd_postname', 'blogPostname', 10, 3);
 function blogPostname($name, $post_id, $format)
 {
     $postTypeAPI = PostTypeAPIFacade::getInstance();
@@ -24,7 +23,7 @@ function blogPostname($name, $post_id, $format)
 }
 
 
-HooksAPIFacade::getInstance()->addFilter('gd_posticon', 'blogPosticon', 10, 2);
+\PoP\Root\App::addFilter('gd_posticon', 'blogPosticon', 10, 2);
 function blogPosticon($icon, $post_id)
 {
     $postTypeAPI = PostTypeAPIFacade::getInstance();

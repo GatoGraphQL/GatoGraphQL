@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Locations Processors
 Description: Implementation of Locations Processors for PoP
@@ -21,7 +20,7 @@ class PoP_LocationsProcessors
     {
 
         // Priority: after PoP Social Network Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888870);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888870);
     }
     public function init()
     {

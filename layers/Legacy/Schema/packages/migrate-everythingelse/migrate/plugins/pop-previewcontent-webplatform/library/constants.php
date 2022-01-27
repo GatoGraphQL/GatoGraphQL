@@ -1,10 +1,9 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('POP_PARAMS_PREVIEW', 'preview');
 define('POP_PARAMS_PATH', 'path');
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'pppPopWebPlatformJqueryConstants');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'pppPopWebPlatformJqueryConstants');
 function pppPopWebPlatformJqueryConstants($jqueryConstants)
 {
     $jqueryConstants['PARAMS_PREVIEW'] = POP_PARAMS_PREVIEW;

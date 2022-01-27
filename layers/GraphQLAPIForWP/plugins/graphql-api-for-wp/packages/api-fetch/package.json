@@ -7,7 +7,7 @@
     "url": "https://github.com/GraphQLAPI/graphql-api.git",
     "directory": "packages/api-fetch"
   },
-  "keywords": [
+  "keywords": ["PHP", 
     "GraphQL",
     "API",
     "WordPress",

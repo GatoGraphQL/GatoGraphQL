@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addAction('plugins_loaded', 'popAwsInitIncludes', 115);
+\PoP\Root\App::addAction('plugins_loaded', 'popAwsInitIncludes', 115);
 function popAwsInitIncludes() {
 	
 	// If we have installed plug-in "Amazon Web Services", then the AWS SDK has already been loaded by it

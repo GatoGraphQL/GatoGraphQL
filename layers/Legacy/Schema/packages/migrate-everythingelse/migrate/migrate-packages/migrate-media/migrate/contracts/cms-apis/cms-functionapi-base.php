@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\Media;
+namespace PoPCMSSchema\Media;
 
 abstract class FunctionAPI_Base implements FunctionAPI
 {

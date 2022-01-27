@@ -1,12 +1,11 @@
 <?php
 
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 function gdGetFavicon()
 {
     $cmsService = CMSServiceFacade::getInstance();
-    return HooksAPIFacade::getInstance()->applyFilters(
+    return \PoP\Root\App::applyFilters(
         'gdGetFavicon',
         $cmsService->getHomeURL() . '/favicon.ico'
     );

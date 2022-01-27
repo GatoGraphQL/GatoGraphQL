@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\TaxonomyMeta;
+namespace PoPCMSSchema\TaxonomyMeta;
 
 interface FunctionAPI
 {

@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface:
+        class: \PoPCMSSchema\PostCategoriesWP\TypeAPIs\PostCategoryTypeAPI
+
+    PoPCMSSchema\PostCategoriesWP\Hooks\:
+        resource: '../src/Hooks/*'

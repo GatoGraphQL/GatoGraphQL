@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\UpdateUserAvatarMutationResolver;
 
 class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationResolverBridge
@@ -29,8 +29,7 @@ class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationRe
 
     public function getFormData(): array
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['is-user-logged-in'] ? $vars['global-userstate']['current-user-id'] : '';
+        $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $form_data = array(
             'user_id' => $user_id,
         );

@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\CustomPostMeta\WP;
+namespace PoPCMSSchema\CustomPostMeta\WP;
 
 class Initialization
 {

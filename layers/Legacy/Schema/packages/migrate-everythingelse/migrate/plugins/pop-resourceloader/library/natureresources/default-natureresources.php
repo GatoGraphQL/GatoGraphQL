@@ -1,18 +1,17 @@
 <?php
 
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Routing\RouteNatures;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoP\Root\Routing\RequestNature;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Pages\Routing\RequestNature as PageRequestNature;
+use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
 define('POP_RESOURCELOADERCONFIGURATION_HOME_FEED', 'feed');
@@ -23,9 +22,9 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
     {
 
         // Organization: it must add together the resources for both "source=community" and "source=user"
-        // Then, for the organization and community roles, we must set the extra $vars['source'] value
+        // Then, for the organization and community roles, we must set the extra \PoP\Root\App::getState('source') value
         // Add a hook to allow PoP Common User Roles to set it
-        if ($extra_vars = HooksAPIFacade::getInstance()->applyFilters(
+        if ($extra_vars = \PoP\Root\App::applyFilters(
             'PoPThemeWassup_ResourceLoader_Hooks:extra-vars',
             array(),
             $nature,
@@ -40,14 +39,14 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
 
     public function addHomeResources(&$resources, $modulefilter, $options)
     {
-        $nature = RouteNatures::HOME;
+        $nature = RequestNature::HOME;
         $options = $this->maybeAddExtraVars($options, $nature);
 
         // Home resources: there are 2 schemes:
         // 1. GetPoP: a single page
         // 2. MESYM: a feed of posts, with formats
         // Allow to select the right configuration through hooks
-        $scheme = HooksAPIFacade::getInstance()->applyFilters(
+        $scheme = \PoP\Root\App::applyFilters(
             'PoPThemeWassup_ResourceLoader_HomeHooks:home-resources:scheme',
             POP_RESOURCELOADERCONFIGURATION_HOME_FEED
         );
@@ -61,7 +60,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
 
     public function add404Resources(&$resources, $modulefilter, $options)
     {
-        $nature = RouteNatures::NOTFOUND;
+        $nature = RequestNature::NOTFOUND;
         $options = $this->maybeAddExtraVars($options, $nature);
 
         PoP_ResourceLoaderProcessorUtils::addResourcesFromCurrentVars($modulefilter, $resources, $nature, array(), false, array(), $options);
@@ -77,7 +76,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         );
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         if ($ids = $postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
-            $nature = TagRouteNatures::TAG;
+            $nature = TagRequestNature::TAG;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
 
             PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, $ids, false, $options);
@@ -131,7 +130,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         }
 
         if ($ids) {
-            $nature = UserRouteNatures::USER;
+            $nature = UserRequestNature::USER;
             $merge = true;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
 
@@ -141,7 +140,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
 
     public function addSingleResources(&$resources, $modulefilter, $options)
     {
-        $nature = CustomPostRouteNatures::CUSTOMPOST;
+        $nature = CustomPostRequestNature::CUSTOMPOST;
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         // Get one ID per category from the DB
@@ -158,7 +157,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // Allow to filter the categories.
             // This is needed so that Articles/Announcements/etc similar-configuration categories
             // can be generated only once
-            $categories = HooksAPIFacade::getInstance()->applyFilters(
+            $categories = \PoP\Root\App::applyFilters(
                 'PoPThemeWassup_ResourceLoader_Hooks:single_resources:categories',
                 $all_categories
             );
@@ -208,7 +207,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // Then, because these posts have the same path, their configuration must be merged together
             $paths = array();
             foreach ($ids as $id) {
-                $post_path = \PoPSchema\Posts\Engine_Utils::getCustomPostPath($id, true);
+                $post_path = \PoPCMSSchema\Posts\Engine_Utils::getCustomPostPath($id, true);
                 $paths[$post_path] = $paths[$post_path] ?? array();
                 $paths[$post_path][] = $id;
             }
@@ -234,7 +233,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
 
     public function addPageResources(&$resources, $modulefilter, $options)
     {
-        $nature = PageRouteNatures::PAGE;
+        $nature = PageRequestNature::PAGE;
         $options = $this->maybeAddExtraVars($options, $nature);
 
         PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, array(), false, $options);

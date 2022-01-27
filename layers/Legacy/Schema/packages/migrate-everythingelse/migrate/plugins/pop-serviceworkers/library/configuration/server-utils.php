@@ -10,12 +10,6 @@ class PoP_ServiceWorkers_ServerUtils
             return false;
         }
 
-        // Allow to override the configuration
-        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('disable-sw');
-        if (!is_null($override)) {
-            return $override;
-        }
-
-        return getenv('DISABLE_SERVICE_WORKERS') !== false ? strtolower(getenv('DISABLE_SERVICE_WORKERS')) == "true" : false;
+        return getenv('DISABLE_SERVICE_WORKERS') !== false ? strtolower(getenv('DISABLE_SERVICE_WORKERS')) === "true" : false;
     }
 }

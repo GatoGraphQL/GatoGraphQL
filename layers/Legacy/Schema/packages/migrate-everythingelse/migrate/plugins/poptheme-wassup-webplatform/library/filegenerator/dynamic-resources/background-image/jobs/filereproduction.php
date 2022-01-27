@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPThemeWassup_FileReproduction_BackgroundImage extends PoP_Engine_CSSFileReproductionBase
 {
@@ -21,7 +20,7 @@ class PoPThemeWassup_FileReproduction_BackgroundImage extends PoP_Engine_CSSFile
     {
         $configuration = parent::getConfiguration();
 
-        $bgImageArgs = HooksAPIFacade::getInstance()->applyFilters(
+        $bgImageArgs = \PoP\Root\App::applyFilters(
             'PoPThemeWassup_FileReproduction_BackgroundImage:args',
             array(
                 'color' => '#ffffff',

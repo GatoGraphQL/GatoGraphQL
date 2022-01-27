@@ -1,8 +1,8 @@
 {
-    "name": "pop-schema/everythingelse",
+    "name": "pop-cms-schema/everythingelse",
     "type": "library",
     "description": "All code from a PoP application that has been migrated but not to its rightful and final destination",
-    "keywords": ["PoP", "everythingelse"],
+    "keywords": ["PHP", "PoP", "everythingelse"],
     "homepage": "https://github.com/PoPSchema/everythingelse",
     "license": "GPL-2.0-or-later",
     "authors": [
@@ -16,14 +16,14 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/tags": "^0.8",
-        "pop-schema/migrate-everythingelse": "^0.8"
+        "pop-cms-schema/tags": "^0.9",
+        "pop-cms-schema/migrate-everythingelse": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.76",
-        "phpunit/phpunit": ">=9.3",
+        "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.11",
-        "squizlabs/php_codesniffer": "^3.0"
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "autoload": {
         "psr-4": {
@@ -47,6 +47,7 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {}
     }
 }

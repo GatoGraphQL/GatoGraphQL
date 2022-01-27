@@ -27,6 +27,7 @@ class MonorepoContainerConfigurationService extends AbstractDowngradeContainerCo
                 // Ignore errors from classes we don't have in our environment,
                 // or that come from referencing a class present in DEV, not PROD
                 // $this->rootDirectory . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',
+                $this->rootDirectory . '/vendor/symfony/cache/DataCollector/CacheDataCollector.php',
                 $this->rootDirectory . '/vendor/symfony/cache/DoctrineProvider.php',
                 $this->rootDirectory . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
                 $this->rootDirectory . '/vendor/symfony/dotenv/Command/DebugCommand.php',

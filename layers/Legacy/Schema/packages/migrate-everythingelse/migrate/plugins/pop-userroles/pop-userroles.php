@@ -6,8 +6,7 @@ Description: The foundation for a PoP User Roles
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoPSchema\UserRoles;
-use PoP\Hooks\Facades\HooksAPIFacade;
+namespace PoPCMSSchema\UserRoles;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -21,7 +20,7 @@ class Plugins
     {
 
         // Priority: new section, after PoP Users
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888205);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888205);
     }
     public function init()
     {

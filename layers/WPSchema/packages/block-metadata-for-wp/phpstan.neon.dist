@@ -1,0 +1,11 @@
+parameters:
+	level: 8
+	paths:
+		- src
+	ignoreErrors:
+		- 
+			message: '#Call to static method get_block_data\(\) on an unknown class Leoloso\\BlockMetadata\\Data\.#'
+			path: src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php
+		- 
+			message: '#Call to static method get_block_metadata\(\) on an unknown class Leoloso\\BlockMetadata\\Metadata\.#'
+			path: src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php

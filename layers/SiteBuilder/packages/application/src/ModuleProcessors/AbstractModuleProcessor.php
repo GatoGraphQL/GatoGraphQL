@@ -4,15 +4,27 @@ declare(strict_types=1);
 
 namespace PoP\Application\ModuleProcessors;
 
+use PoP\Root\App;
 use PoP\Application\Constants\Actions;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ConfigurationComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;
+use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoP\SiteBuilderAPI\ModuleProcessors\AddAPIQueryToSourcesModuleProcessorTrait;
 
 abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor implements ModuleProcessorInterface
 {
     use AddAPIQueryToSourcesModuleProcessorTrait;
+
+    private ?CMSServiceInterface $cmsService = null;
+
+    final public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    final protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+    }
 
     public function getDatasetmeta(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
     {
@@ -55,7 +67,6 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
     {
         parent::addHeaddatasetmoduleDataProperties($ret, $module, $props);
 
-        $vars = ApplicationState::getVars();
 
         // Is the component lazy-load?
         $ret[DataloadingConstants::LAZYLOAD] = $this->isLazyload($module, $props);
@@ -66,7 +77,7 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
         $ret[DataloadingConstants::SKIPDATALOAD] =
             (
                 $ret[DataloadingConstants::LAZYLOAD] &&
-                !in_array(Actions::LOADLAZY, $vars['actions'])
+                !in_array(Actions::LOADLAZY, App::getState('actions'))
             ) ||
             $ret[DataloadingConstants::EXTERNALLOAD] ||
             $this->getProp($module, $props, 'skip-data-load');
@@ -101,7 +112,7 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
     public function queriesExternalDomain(array $module, array &$props): bool
     {
         if ($sources = $this->getDataloadMultidomainSources($module, $props)) {
-            $domain = $this->getCmsService()->getSiteURL();
+            $domain = $this->getCMSService()->getSiteURL();
             foreach ($sources as $source) {
                 if (substr($source, 0, strlen($domain)) != $domain) {
                     return true;

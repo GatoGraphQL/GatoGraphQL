@@ -1,8 +1,8 @@
 <?php
 
-namespace PoPSchema\Users\WP;
+namespace PoPCMSSchema\Users\WP;
 
-class FunctionAPI extends \PoPSchema\Users\FunctionAPI_Base
+class FunctionAPI extends \PoPCMSSchema\Users\FunctionAPI_Base
 {
     public function getAuthorBase()
     {

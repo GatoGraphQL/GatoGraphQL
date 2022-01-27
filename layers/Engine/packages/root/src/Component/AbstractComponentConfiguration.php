@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Root\Component;
 
+use PoP\Root\App;
+use PoP\Root\Helpers\ClassHelpers;
+
 abstract class AbstractComponentConfiguration implements ComponentConfigurationInterface
 {
     final public function __construct(
@@ -48,6 +51,37 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
             $this->configuration[$envVariable] = $callback !== null ? $callback($envValue) : $envValue;
         }
 
+        if (!$this->enableHook($envVariable)) {
+            return $this->configuration[$envVariable];
+        }
+
+        $class = $this->getComponentClass();
+        $hookName = ComponentConfigurationHelpers::getHookName(
+            $class,
+            $envVariable
+        );
+        $this->configuration[$envVariable] = App::applyFilters(
+            $hookName,
+            $this->configuration[$envVariable],
+            $class,
+            $envVariable
+        );
+
         return $this->configuration[$envVariable];
+    }
+
+    protected function enableHook(string $envVariable): bool
+    {
+        return true;
+    }
+
+    /**
+     * Package's Component class, of type ComponentInterface.
+     * By standard, it is "NamespaceOwner\Project\Component::class"
+     */
+    protected function getComponentClass(): string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        return $classNamespace . '\\Component';
     }
 }

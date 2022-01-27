@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace EverythingElse\PoPSchema\CategoriesWP\TypeAPIs;
+namespace EverythingElse\PoPCMSSchema\CategoriesWP\TypeAPIs;
 
-use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Domain_Utils
 {
     public static function init(): void
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Application_Utils:request-domain',
             array(self::class, 'maybeGetRequestDomain')
         );
@@ -22,7 +21,7 @@ class PoP_Domain_Utils
 
     public static function getDomainFromRequest()
     {
-        $domain = $_REQUEST[POP_URLPARAM_DOMAIN] ?? null;
+        $domain = \PoP\Root\App::query(POP_URLPARAM_DOMAIN);
         return $domain ? urldecode($domain) : '';
     }
 }

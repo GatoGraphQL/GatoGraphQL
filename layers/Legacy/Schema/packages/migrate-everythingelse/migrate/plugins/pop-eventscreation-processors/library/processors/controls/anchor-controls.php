@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
@@ -42,7 +42,6 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
     }
     public function getHref(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS:

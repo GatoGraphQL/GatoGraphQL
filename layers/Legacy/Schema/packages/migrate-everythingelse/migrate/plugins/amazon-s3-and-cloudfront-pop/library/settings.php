@@ -1,10 +1,9 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Allow to hardcode the settings, so no need to input them as options in the DB
 //-------------------------------------------------------------------------------------
-HooksAPIFacade::getInstance()->addFilter('aws_get_setting', 'wassupAwsGetSetting', 10, 2);
+\PoP\Root\App::addFilter('aws_get_setting', 'wassupAwsGetSetting', 10, 2);
 function wassupAwsGetSetting($setting, $key)
 {
 

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_FormUtils
 {
@@ -10,6 +9,6 @@ class PoP_FormUtils
      */
     public static function useLoggedinuserData()
     {
-        return HooksAPIFacade::getInstance()->applyFilters('PoP_FormUtils:useLoggedinuserData', true);
+        return \PoP\Root\App::applyFilters('PoP_FormUtils:useLoggedinuserData', true);
     }
 }

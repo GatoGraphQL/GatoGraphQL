@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\APIMirrorQuery;
+namespace PoPAPI\APIMirrorQuery;
 
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\API\Component::class,
+            \PoPAPI\API\Component::class,
         ];
     }
     /**
@@ -28,8 +28,8 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
     }

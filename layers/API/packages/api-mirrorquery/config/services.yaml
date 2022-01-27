@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\APIMirrorQuery\DataStructureFormatters\:
+    PoPAPI\APIMirrorQuery\DataStructureFormatters\:
         resource: '../src/DataStructureFormatters/*'

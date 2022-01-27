@@ -1,8 +1,8 @@
 <?php
 
-use PoP\Routing\RouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
 
 class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
@@ -20,7 +20,7 @@ class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionRouteModuleP
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDPOSTS => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORRECOMMENDEDPOSTS],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
@@ -33,7 +33,7 @@ class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionRouteModuleP
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGSUBSCRIBERS],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[TagRouteNatures::TAG][$route][] = [
+            $ret[TagRequestNature::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
@@ -48,7 +48,7 @@ class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionRouteModuleP
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

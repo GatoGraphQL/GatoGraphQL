@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface:
+        class: \PoPCMSSchema\CustomPostMetaWP\TypeAPIs\CustomPostMetaTypeAPI
+
+    PoPCMSSchema\CustomPostMetaWP\Hooks\:
+        resource: '../src/Hooks/*'

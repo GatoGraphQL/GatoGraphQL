@@ -1,6 +1,5 @@
 <?php
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 
 class PoP_CSSResourceLoaderProcessorManager {
 
@@ -10,7 +9,7 @@ class PoP_CSSResourceLoaderProcessorManager {
 
 		$this->inline_resources = array();
 
-		HooksAPIFacade::getInstance()->addAction('popcms:head', array($this, 'printStyles'));
+		\PoP\Root\App::addAction('popcms:head', array($this, 'printStyles'));
 	}
 
 	function printStyle(array $resource) {
@@ -84,9 +83,7 @@ class PoP_CSSResourceLoaderProcessorManager {
 		$loading_bundle = $enqueuefile_type == 'bundlegroup' || $enqueuefile_type == 'bundle';
 		$bundlestyles_properties = array();
 		if ($loading_bundle) {
-
-			$vars = ApplicationState::getVars();
-			$version = $vars['version'];
+			$version = ApplicationInfoFacade::getInstance()->getVersion();
 			$file = $this->getFile($enqueuefile_type, $acrossThememodes);
 			
 			// Enqueue the bundleGroups

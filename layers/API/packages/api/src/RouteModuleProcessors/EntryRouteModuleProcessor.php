@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\RouteModuleProcessors;
+namespace PoPAPI\API\RouteModuleProcessors;
 
-use PoP\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
-use PoP\API\Response\Schemes as APISchemes;
+use PoPAPI\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
+use PoPAPI\API\Response\Schemes as APISchemes;
+use PoPAPI\API\Routing\RequestNature;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
-use PoP\Routing\RouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
@@ -18,8 +18,11 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     {
         $ret = array();
 
-        $ret[RouteNatures::HOME][] = [
-            'module' => [RootRelationalFieldDataloadModuleProcessor::class, RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT],
+        $ret[RequestNature::QUERY_ROOT][] = [
+            'module' => [
+                RootRelationalFieldDataloadModuleProcessor::class,
+                RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT
+            ],
             'conditions' => [
                 'scheme' => APISchemes::API,
             ],

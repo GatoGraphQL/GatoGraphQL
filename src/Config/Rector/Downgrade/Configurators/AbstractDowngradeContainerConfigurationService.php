@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 
-use DateTimeInterface;
-use PoPSchema\SchemaCommons\Polyfill\PHP72\DateTimeInterface as PolyfillDateTimeInterface;
+// use DateTimeInterface;
+// use PoPSchema\SchemaCommons\Polyfill\PHP72\DateTimeInterface as PolyfillDateTimeInterface;
+// use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
+// use Rector\Renaming\ValueObject\RenameClassAndConstFetch;
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
-use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
-use Rector\Renaming\ValueObject\RenameClassAndConstFetch;
 use Rector\Set\ValueObject\DowngradeLevelSetList;
 
 abstract class AbstractDowngradeContainerConfigurationService extends AbstractContainerConfigurationService

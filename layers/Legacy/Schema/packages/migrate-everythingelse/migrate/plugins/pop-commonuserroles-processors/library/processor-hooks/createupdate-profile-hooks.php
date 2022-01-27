@@ -1,15 +1,14 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_CommonUserRolesProcessors_CreateUpdateProfileHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'GD_CreateUpdate_ProfileOrganization_Trait:form-inputs',
             array($this, 'getProfileorganizationFormInputs')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'GD_CreateUpdate_ProfileIndividual_Trait:form-inputs',
             array($this, 'getProfileindividualFormInputs')
         );

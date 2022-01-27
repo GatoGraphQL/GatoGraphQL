@@ -1,12 +1,11 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * Follow users / recommend posts: the information is redundant, saving each entry on both entities (user/user and user/post)
  * So that both (eg: "Who I am following" and "Who are my followers") can be queried and with pagination
  * Priority 0: it executes before saving the value on the db, so we can first get the previous value and compare to get a delta of additions/deletions
  */
-HooksAPIFacade::getInstance()->addFilter('acf/update_value', 'gd_acf_userfunctionalities_duplicatedata', 0, 3);
+\PoP\Root\App::addFilter('acf/update_value', 'gd_acf_userfunctionalities_duplicatedata', 0, 3);
 function gd_acf_userfunctionalities_duplicatedata($value, $post_id, $field)
 {
     $key = $field['name'];
@@ -28,7 +27,7 @@ function gd_acf_userfunctionalities_duplicatedata($value, $post_id, $field)
         $new_value = $value ? $value : array();
 
         // Calculate the delta of additions/deletions
-        $current_value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, $key);
+        $current_value = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, $key);
         $additions = array_diff($new_value, $current_value);
         $deletions = array_diff($current_value, $new_value);
 
@@ -40,20 +39,20 @@ function gd_acf_userfunctionalities_duplicatedata($value, $post_id, $field)
                 $count_metakey = GD_METAKEY_PROFILE_FOLLOWERSCOUNT;
             }
             foreach ($additions as $target_id) {
-                \PoPSchema\UserMeta\Utils::addUserMeta($target_id, $value_metakey, $user_id);
+                \PoPCMSSchema\UserMeta\Utils::addUserMeta($target_id, $value_metakey, $user_id);
 
                 // Update the counter
-                $count = \PoPSchema\UserMeta\Utils::getUserMeta($target_id, $count_metakey, true);
+                $count = \PoPCMSSchema\UserMeta\Utils::getUserMeta($target_id, $count_metakey, true);
                 $count = $count ? $count : 0;
-                \PoPSchema\UserMeta\Utils::updateUserMeta($target_id, $count_metakey, ($count + 1), true);
+                \PoPCMSSchema\UserMeta\Utils::updateUserMeta($target_id, $count_metakey, ($count + 1), true);
             }
             foreach ($deletions as $target_id) {
-                \PoPSchema\UserMeta\Utils::deleteUserMeta($target_id, $value_metakey, $user_id);
+                \PoPCMSSchema\UserMeta\Utils::deleteUserMeta($target_id, $value_metakey, $user_id);
 
                 // Update the counter
-                $count = \PoPSchema\UserMeta\Utils::getUserMeta($target_id, $count_metakey, true);
+                $count = \PoPCMSSchema\UserMeta\Utils::getUserMeta($target_id, $count_metakey, true);
                 $count = $count ? $count : 0;
-                \PoPSchema\UserMeta\Utils::updateUserMeta($target_id, $count_metakey, ($count - 1), true);
+                \PoPCMSSchema\UserMeta\Utils::updateUserMeta($target_id, $count_metakey, ($count - 1), true);
             }
         } elseif (in_array($key, $postfunction_keys)) {
             if ($key == GD_METAKEY_PROFILE_RECOMMENDSPOSTS) {
@@ -67,20 +66,20 @@ function gd_acf_userfunctionalities_duplicatedata($value, $post_id, $field)
                 $count_metakey = GD_METAKEY_POST_DOWNVOTECOUNT;
             }
             foreach ($additions as $target_id) {
-                \PoPSchema\CustomPostMeta\Utils::addCustomPostMeta($target_id, $value_metakey, $user_id);
+                \PoPCMSSchema\CustomPostMeta\Utils::addCustomPostMeta($target_id, $value_metakey, $user_id);
 
                 // Update the counter
-                $count = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($target_id, $count_metakey, true);
+                $count = \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($target_id, $count_metakey, true);
                 $count = $count ? $count : 0;
-                \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($target_id, $count_metakey, ($count + 1), true);
+                \PoPCMSSchema\CustomPostMeta\Utils::updateCustomPostMeta($target_id, $count_metakey, ($count + 1), true);
             }
             foreach ($deletions as $target_id) {
-                \PoPSchema\CustomPostMeta\Utils::deleteCustomPostMeta($target_id, $value_metakey, $user_id);
+                \PoPCMSSchema\CustomPostMeta\Utils::deleteCustomPostMeta($target_id, $value_metakey, $user_id);
 
                 // Update the counter
-                $count = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($target_id, $count_metakey, true);
+                $count = \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($target_id, $count_metakey, true);
                 $count = $count ? $count : 0;
-                \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($target_id, $count_metakey, ($count - 1), true);
+                \PoPCMSSchema\CustomPostMeta\Utils::updateCustomPostMeta($target_id, $count_metakey, ($count - 1), true);
             }
         } elseif (in_array($key, $termfunction_keys)) {
             // For each one of this (user/post), add the current $user_id as the one who follows/recommends them
@@ -89,20 +88,20 @@ function gd_acf_userfunctionalities_duplicatedata($value, $post_id, $field)
                 $count_metakey = GD_METAKEY_TERM_SUBSCRIBERSCOUNT;
             }
             foreach ($additions as $target_id) {
-                \PoPSchema\TaxonomyMeta\Utils::addTermMeta($target_id, $value_metakey, $user_id);
+                \PoPCMSSchema\TaxonomyMeta\Utils::addTermMeta($target_id, $value_metakey, $user_id);
 
                 // Update the counter
-                $count = \PoPSchema\TaxonomyMeta\Utils::getTermMeta($target_id, $count_metakey, true);
+                $count = \PoPCMSSchema\TaxonomyMeta\Utils::getTermMeta($target_id, $count_metakey, true);
                 $count = $count ? $count : 0;
-                \PoPSchema\TaxonomyMeta\Utils::updateTermMeta($target_id, $count_metakey, ($count + 1), true);
+                \PoPCMSSchema\TaxonomyMeta\Utils::updateTermMeta($target_id, $count_metakey, ($count + 1), true);
             }
             foreach ($deletions as $target_id) {
-                \PoPSchema\TaxonomyMeta\Utils::deleteTermMeta($target_id, $value_metakey, $user_id);
+                \PoPCMSSchema\TaxonomyMeta\Utils::deleteTermMeta($target_id, $value_metakey, $user_id);
 
                 // Update the counter
-                $count = \PoPSchema\TaxonomyMeta\Utils::getTermMeta($target_id, $count_metakey, true);
+                $count = \PoPCMSSchema\TaxonomyMeta\Utils::getTermMeta($target_id, $count_metakey, true);
                 $count = $count ? $count : 0;
-                \PoPSchema\TaxonomyMeta\Utils::updateTermMeta($target_id, $count_metakey, ($count - 1), true);
+                \PoPCMSSchema\TaxonomyMeta\Utils::updateTermMeta($target_id, $count_metakey, ($count - 1), true);
             }
         }
     }

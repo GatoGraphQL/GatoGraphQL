@@ -1,15 +1,14 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * Change Author permalink from 'author' to 'u'
  */
 function getAuthorBase() {
-    return HooksAPIFacade::getInstance()->applyFilters('author-base', '');
+    return \PoP\Root\App::applyFilters('author-base', '');
 }
 
 // change author/username base to users/userID
-HooksAPIFacade::getInstance()->addAction('init', 'changeAuthorPermalinks');
+\PoP\Root\App::addAction('init', 'changeAuthorPermalinks');
 function changeAuthorPermalinks()
 {
 
@@ -23,18 +22,18 @@ function changeAuthorPermalinks()
     }
 }
 
-HooksAPIFacade::getInstance()->addFilter('query_vars', 'usersQueryVars');
-function usersQueryVars($vars)
+\PoP\Root\App::addFilter('query_vars', 'usersQueryVars');
+function usersQueryVars($queryVars)
 {
 
     if ($authorBase = getAuthorBase()) {
         // add lid to the valid list of variables
         $new_vars = array($authorBase);
-        $vars = $new_vars + $vars;
+        $queryVars = $new_vars + $queryVars;
     }
-    return $vars;
+    return $queryVars;
 }
-HooksAPIFacade::getInstance()->addFilter('generate_rewrite_rules', 'userRewriteRules');
+\PoP\Root\App::addFilter('generate_rewrite_rules', 'userRewriteRules');
 function userRewriteRules($wp_rewrite)
 {
     if ($authorBase = getAuthorBase()) {

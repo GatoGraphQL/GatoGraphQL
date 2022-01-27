@@ -85,7 +85,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             return $this->consolidatedInputFieldNameTypeResolversCache;
         }
 
-        $consolidatedInputFieldNameTypeResolvers = $this->getHooksAPI()->applyFilters(
+        $consolidatedInputFieldNameTypeResolvers = App::applyFilters(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
             $this->getInputFieldNameTypeResolvers(),
             $this,
@@ -117,7 +117,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             return $this->consolidatedAdminInputFieldNames;
         }
 
-        $this->consolidatedAdminInputFieldNames = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedAdminInputFieldNames = App::applyFilters(
             HookNames::ADMIN_INPUT_FIELD_NAMES,
             $this->getAdminInputFieldNames(),
             $this,
@@ -134,7 +134,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldDescriptionCache)) {
             return $this->consolidatedInputFieldDescriptionCache[$inputFieldName];
         }
-        $this->consolidatedInputFieldDescriptionCache[$inputFieldName] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedInputFieldDescriptionCache[$inputFieldName] = App::applyFilters(
             HookNames::INPUT_FIELD_DESCRIPTION,
             $this->getInputFieldDescription($inputFieldName),
             $this,
@@ -152,7 +152,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldDefaultValueCache)) {
             return $this->consolidatedInputFieldDefaultValueCache[$inputFieldName];
         }
-        $this->consolidatedInputFieldDefaultValueCache[$inputFieldName] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedInputFieldDefaultValueCache[$inputFieldName] = App::applyFilters(
             HookNames::INPUT_FIELD_DEFAULT_VALUE,
             $this->getInputFieldDefaultValue($inputFieldName),
             $this,
@@ -170,7 +170,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldTypeModifiersCache)) {
             return $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName];
         }
-        $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName] = App::applyFilters(
             HookNames::INPUT_FIELD_TYPE_MODIFIERS,
             $this->getInputFieldTypeModifiers($inputFieldName),
             $this,
@@ -212,13 +212,28 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputValue->$inputFieldName = $inputFieldDefaultValue;
                 continue;
             }
-            // If it is an InputObject, and it is non-mandatory, set it to {}
-            // so it has the chance to set its own default values
-            // (If it is mandatory, then rather let it fail)
-            if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface) {
+            /**
+             * If it is an InputObject, set it to {} so it has the chance
+             * to set its own default values.
+             *
+             * Do it only if:
+             *
+             *   1. It is non-mandatory, or otherwise it's better to let the
+             *      validation fail ("error: mandatory input ... was not provided")
+             *
+             *   2. All its inputs are non-mandatory, or otherwise the logic
+             *      (eg: in `integrateInputValueToFilteringQueryArgs`) will assume
+             *      that those values are provided (but they are not!), triggering an error
+             *      (eg: "Warning: Undefined property: stdClass::$key in .../meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php on line 159")
+             */
+            if (
+                $inputFieldTypeResolver instanceof InputObjectTypeResolverInterface
+                && $this->initializeInputFieldInputObjectValue()
+            ) {
+                $inputObjectTypeResolver = $inputFieldTypeResolver;
                 $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
                 $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
-                if (!$inputFieldTypeModifiersIsMandatory && $this->initializeInputFieldInputObjectValue()) {
+                if (!$inputFieldTypeModifiersIsMandatory && !$inputObjectTypeResolver->hasMandatoryInputFields()) {
                     $inputValue->$inputFieldName = new stdClass();
                 }
             }
@@ -389,6 +404,19 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         // Add all missing properties which have a default value
         return $coercedInputValue;
+    }
+
+    final public function hasMandatoryInputFields(): bool
+    {
+        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
+        foreach (array_keys($inputFieldNameTypeResolvers) as $inputFieldName) {
+            $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
+            if ($inputFieldTypeModifiersIsMandatory) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -563,7 +591,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         if (array_key_exists($inputFieldName, $this->consolidatedInputFieldExtensionsCache)) {
             return $this->consolidatedInputFieldExtensionsCache[$inputFieldName];
         }
-        $this->consolidatedInputFieldExtensionsCache[$inputFieldName] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedInputFieldExtensionsCache[$inputFieldName] = App::applyFilters(
             HookNames::INPUT_FIELD_EXTENSIONS,
             $this->getInputFieldExtensionsSchemaDefinition($inputFieldName),
             $this,

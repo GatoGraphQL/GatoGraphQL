@@ -1,13 +1,12 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Pages\Routing\PathUtils;
+use PoPCMSSchema\Pages\Routing\PathUtils;
  
 class PoP_CommonPagesWebPlatform_CDN_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
             array($this, 'getThumbprintPartialpaths'),
             10,

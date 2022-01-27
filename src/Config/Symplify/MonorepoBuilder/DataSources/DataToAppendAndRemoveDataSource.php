@@ -14,8 +14,9 @@ class DataToAppendAndRemoveDataSource
         // Install also the monorepo-builder! So it can be used in CI
         return [
             'require-dev' => [
-                'symplify/monorepo-builder' => '^9.0',
-                'friendsofphp/php-cs-fixer' => '^3.2',
+                'symplify/monorepo-builder' => '^10.0',
+                'friendsofphp/php-cs-fixer' => '^3.5',
+                'slevomat/coding-standard' => '^7.0',
             ],
             'autoload' => [
                 'psr-4' => [

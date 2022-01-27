@@ -1,7 +1,7 @@
 <?php
-namespace PoPSchema\Users;
+namespace PoPCMSSchema\Users;
 
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 trait SettingsProcessor_Trait
 {

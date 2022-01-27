@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Application_UserStance_ResourceLoaderProcessor_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_FrontEnd_ResourceLoaderProcessor:dependencies:manager',
             array($this, 'getManagerDependencies')
         );

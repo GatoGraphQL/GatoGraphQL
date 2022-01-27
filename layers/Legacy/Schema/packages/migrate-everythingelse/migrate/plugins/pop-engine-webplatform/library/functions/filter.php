@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsForminputInputImpl');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'gdJqueryConstantsForminputInputImpl');
 function gdJqueryConstantsForminputInputImpl($jqueryConstants)
 {
     $jqueryConstants['FORM_INPUT'] = GD_FORM_INPUT;

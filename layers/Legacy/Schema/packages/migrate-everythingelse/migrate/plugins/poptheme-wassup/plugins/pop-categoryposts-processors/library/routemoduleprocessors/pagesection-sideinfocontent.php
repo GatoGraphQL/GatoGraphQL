@@ -1,8 +1,8 @@
 <?php
 
-use PoP\Routing\RouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPTheme_Wassup_CategoryPosts_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -36,17 +36,17 @@ class PoPTheme_Wassup_CategoryPosts_Module_SideInfoContentPageSectionRouteModule
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
         );
         foreach ($routes as $route) {
-            $ret[UserRouteNatures::USER][$route][] = [
+            $ret[UserRequestNature::USER][$route][] = [
                 'module' => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR]
             ];
         }
         foreach ($routes as $route) {
-            $ret[TagRouteNatures::TAG][$route][] = [
+            $ret[TagRequestNature::TAG][$route][] = [
                 'module' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_CATEGORYPOSTS_SIDEBAR]
             ];
         }
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_CATEGORYPOSTS_SIDEBAR]
             ];
         }

@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ServiceWorkers_WebPlatform_ResourceLoader_Initialization
 {
@@ -10,16 +9,16 @@ class PoP_ServiceWorkers_WebPlatform_ResourceLoader_Initialization
         // Unhook the default function, instead hook the one here, which registers not just the current resources,
         // but all of them! This way, all resources will make it to the precache list and be cached in SW
         global $popwebplatform_resourceloader_initialization;
-        HooksAPIFacade::getInstance()->removeAction('popcms:enqueueScripts', array($popwebplatform_resourceloader_initialization, 'registerScripts'));
-        HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
-        HooksAPIFacade::getInstance()->removeAction('popcms:printStyles', array($popwebplatform_resourceloader_initialization, 'registerStyles'));
-        HooksAPIFacade::getInstance()->addAction('popcms:printStyles', array($this, 'registerStyles'));
+        \PoP\Root\App::removeAction('popcms:enqueueScripts', array($popwebplatform_resourceloader_initialization, 'registerScripts'));
+        \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+        \PoP\Root\App::removeAction('popcms:printStyles', array($popwebplatform_resourceloader_initialization, 'registerStyles'));
+        \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'));
 
         // When generating the Service Workers, we need to register all of the CSS files to output them in the precache list
-        HooksAPIFacade::getInstance()->addFilter('getResourcesIncludeType', array($this, 'getResourcesIncludeType'));
+        \PoP\Root\App::addFilter('getResourcesIncludeType', array($this, 'getResourcesIncludeType'));
 
         // Always use the SW creation in 'resource' mode, to avoid $bundle(group)s being enqueued instead of $resources
-        HooksAPIFacade::getInstance()->addFilter('getEnqueuefileType', array($this, 'getEnqueuefileType'));
+        \PoP\Root\App::addFilter('getEnqueuefileType', array($this, 'getEnqueuefileType'));
     }
 
     public function getResourcesIncludeType($type)

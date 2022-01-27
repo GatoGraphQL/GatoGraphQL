@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_AddHighlights_LayoutHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomControlGroups:userpostinteraction:layouts',
             array($this, 'addUserpostinteractionLayouts')
         );

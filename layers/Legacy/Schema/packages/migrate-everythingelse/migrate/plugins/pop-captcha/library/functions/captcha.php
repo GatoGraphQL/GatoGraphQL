@@ -1,7 +1,6 @@
 <?php
-use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\Error\Error;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
  * Copied from:
@@ -18,7 +17,7 @@ class GD_Captcha
         $random = rawurlencode($random);
 
         // Allow to override the image src URL, as to set the private key from the website's environment-constants
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'GD_Captcha:image-src',
             sprintf(POP_CAPTCHA_URL.'/directaccess-library/captcha/captcha.png.php?encoded=%s&random=%s', $encoded, $random),
             $encoded,

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\ApplicationEvents;
 
 /**
@@ -24,6 +24,8 @@ class Component extends AbstractComponent
             \PoP\Definitions\Component::class,
             \PoP\FieldQuery\Component::class,
             \PoP\GraphQLParser\Component::class,
+            \PoP\LooseContracts\Component::class,
+            \PoP\ModuleRouting\Component::class,
         ];
     }
 
@@ -33,8 +35,8 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
         $this->initServices(dirname(__DIR__), '/Overrides');
@@ -49,17 +51,12 @@ class Component extends AbstractComponent
         $this->initSystemServices(dirname(__DIR__));
     }
 
-    public function beforeBoot(): void
+    public function componentLoaded(): void
     {
-        parent::beforeBoot();
-
-        // Initialize the Component Configuration
-        /** @var ComponentConfiguration */
-        $componentConfiguration = $this->getConfiguration();
-        $componentConfiguration->init();
+        parent::componentLoaded();
 
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
-        $attachExtensionService->attachExtensions(ApplicationEvents::BEFORE_BOOT);
+        $attachExtensionService->attachExtensions(ApplicationEvents::COMPONENT_LOADED);
     }
 
     public function boot(): void

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP User Login Web Platform
 Description: Implementation of User Login Web Platform for PoP
@@ -21,7 +20,7 @@ class PoP_UserLoginWebPlatform
     {
 
         // Priority: after PoP Email Sender Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888520);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888520);
     }
     public function init()
     {

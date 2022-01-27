@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Hooks;
 
+use PoP\Root\App;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\Hooks\AbstractCMSBootHookSet;
+use PoP\Root\Hooks\AbstractAfterAppBootHookSet;
 
-abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
+abstract class AbstractAccessControlForDirectivesHookSet extends AbstractAfterAppBootHookSet
 {
     private ?AccessControlManagerInterface $accessControlManager = null;
 
@@ -37,7 +38,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
         ) {
             /** @var string[] $directiveNames */
             foreach ($directiveNames as $directiveName) {
-                $this->getHooksAPI()->addFilter(
+                App::addFilter(
                     HookHelpers::getHookNameToFilterDirective($directiveName),
                     array($this, 'maybeFilterDirectiveName'),
                     10,
@@ -45,7 +46,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
                 );
             }
         } else {
-            $this->getHooksAPI()->addFilter(
+            App::addFilter(
                 HookHelpers::getHookNameToFilterDirective(),
                 array($this, 'maybeFilterDirectiveName'),
                 10,

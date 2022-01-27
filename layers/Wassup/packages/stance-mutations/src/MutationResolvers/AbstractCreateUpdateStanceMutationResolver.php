@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\Root\App;
 use PoP\EditPosts\FunctionAPIFactory;
-use PoPSchema\CustomPostMeta\Utils;
-use PoPSchema\CustomPosts\Enums\CustomPostStatus;
+use PoPCMSSchema\CustomPostMeta\Utils;
+use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
@@ -63,10 +63,9 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         $referenced_id = $form_data['stancetarget'];
 
         // Check if there is already an existing stance
-        $vars = ApplicationState::getVars();
         $query = array(
             'status' => array(CustomPostStatus::PUBLISH, CustomPostStatus::DRAFT),
-            'authors' => [$vars['global-userstate']['current-user-id']],
+            'authors' => [App::getState('current-user-id')],
         );
         if ($referenced_id) {
             \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $referenced_id);
@@ -122,7 +121,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         }
 
         // Allow for URE to add the AuthorRole meta value
-        $this->getHooksAPI()->doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $form_data);
+        App::doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $form_data);
     }
 
     protected function updateAdditionals(string | int $post_id, array $form_data, array $log): void
@@ -130,6 +129,6 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         parent::updateAdditionals($post_id, $form_data, $log);
 
         // Allow for URE to add the AuthorRole meta value
-        $this->getHooksAPI()->doAction('GD_CreateUpdate_Stance:updateAdditionals', $post_id, $form_data, $log);
+        App::doAction('GD_CreateUpdate_Stance:updateAdditionals', $post_id, $form_data, $log);
     }
 }

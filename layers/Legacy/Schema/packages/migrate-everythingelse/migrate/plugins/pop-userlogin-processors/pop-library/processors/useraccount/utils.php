@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Module_Processor_UserAccountUtils
 {
@@ -7,7 +6,7 @@ class PoP_Module_Processor_UserAccountUtils
     {
 
         // Allow WSL to add the FB/Twitter Login
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_UserAccountUtils:login:modules',
             array()
         );

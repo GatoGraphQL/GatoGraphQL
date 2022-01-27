@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\Categories\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'

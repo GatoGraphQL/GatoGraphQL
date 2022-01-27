@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP CDN WordPress
 Description: Implementation of the CDN for PoP
@@ -19,7 +18,7 @@ class PoP_CDNWP
     public function __construct()
     {
         // Priority: after PoP Engine Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888412);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888412);
     }
     public function init()
     {

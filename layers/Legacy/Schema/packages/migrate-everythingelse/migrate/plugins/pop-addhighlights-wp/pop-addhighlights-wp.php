@@ -6,7 +6,6 @@ Description: The foundation for a PoP Add Highlights WordPress
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -22,7 +21,7 @@ class PoP_AddHighlightsWP
     public function __construct()
     {
         // Priority: after PoP Add Related Posts
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888372);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888372);
     }
     public function init()
     {

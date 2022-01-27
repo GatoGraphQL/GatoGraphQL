@@ -8,7 +8,7 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
 final class AdditionalDowngradeRectorConfigsCommand extends AbstractSymplifyCommand
@@ -27,6 +27,7 @@ final class AdditionalDowngradeRectorConfigsCommand extends AbstractSymplifyComm
 
     protected function configure(): void
     {
+        $this->setName(CommandNaming::classToName(self::class));
         // Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
         $this->setDescription('Space-separated list of additional downgrade Rector config files');
     }
@@ -37,6 +38,6 @@ final class AdditionalDowngradeRectorConfigsCommand extends AbstractSymplifyComm
 
         $this->symfonyStyle->writeln($additionalDowngradeRectorConfigs);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

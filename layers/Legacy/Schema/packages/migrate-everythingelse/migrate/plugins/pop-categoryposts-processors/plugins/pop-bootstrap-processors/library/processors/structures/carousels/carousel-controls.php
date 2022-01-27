@@ -2,8 +2,8 @@
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -343,7 +343,6 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
     }
     protected function getTitleLink(array $module, array &$props)
     {
-        $vars = ApplicationState::getVars();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $routes = array(
@@ -415,11 +414,11 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
         if ($route = $routes[$module[1]] ?? null) {
             return RouteUtils::getRouteURL($route);
         } elseif ($route = $authorroutes[$module[1]] ?? null) {
-            $author = $vars['routing-state']['queried-object-id'];
+            $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $url = $userTypeAPI->getUserURL($author);
             return RequestUtils::addRoute($url, $route);
         } elseif ($route = $tagroutes[$module[1]] ?? null) {
-            $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
+            $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
             return RequestUtils::addRoute($url, $route);
         }
 

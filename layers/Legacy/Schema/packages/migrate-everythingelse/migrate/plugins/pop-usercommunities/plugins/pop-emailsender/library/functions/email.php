@@ -1,16 +1,15 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 /**
  * Create / Update Post
  */
 
 // Send an email to the new Communities: when the user updated the communities
-HooksAPIFacade::getInstance()->addAction('gd_update_mycommunities:update', 'gdUreSendemailUpdatemycommunities', 100, 3);
+\PoP\Root\App::addAction('gd_update_mycommunities:update', 'gdUreSendemailUpdatemycommunities', 100, 3);
 function gdUreSendemailUpdatemycommunities($user_id, $form_data, $operationlog)
 {
     gdUreSendemailCommunityNewmember($user_id, $operationlog['new-communities']);

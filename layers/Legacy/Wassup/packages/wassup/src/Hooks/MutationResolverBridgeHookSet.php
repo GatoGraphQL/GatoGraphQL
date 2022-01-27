@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\Wassup\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
+use PoP\Root\App;
+use PoP\Root\Hooks\AbstractHookSet;
 use PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\GravityFormsAddEntryToFormMutationResolverBridge;
 
 class MutationResolverBridgeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addAction(
+        App::addAction(
             GravityFormsAddEntryToFormMutationResolverBridge::HOOK_FORM_FIELDNAMES,
             array($this, 'getFieldnames'),
             10,

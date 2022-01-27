@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\SchemaCommons\SchemaHooks;
 
+use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 
 abstract class AbstractConvertDateQueryInputFieldToArrayInputObjectTypeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::addFilter(
             HookNames::INPUT_FIELD_TYPE_MODIFIERS,
             [$this, 'getInputFieldTypeModifiers'],
             10,

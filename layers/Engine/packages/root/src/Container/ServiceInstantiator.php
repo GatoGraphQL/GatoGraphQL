@@ -24,7 +24,7 @@ class ServiceInstantiator implements ServiceInstantiatorInterface
     }
     /**
      * The SystemContainer requires no events => pass null
-     * The ApplicationContainer has 3 events (beforeBoot, boot, afterBoot)
+     * The ApplicationContainer has 3 events (componentLoaded, boot, afterBoot)
      */
     public function initializeServices(?string $event = null): void
     {
@@ -36,7 +36,7 @@ class ServiceInstantiator implements ServiceInstantiatorInterface
         if ($event !== null) {
             $servicesForEvent = array_filter(
                 $this->services,
-                fn ($service) => $service->getInstantiationEvent() == $event
+                fn ($service) => $service->getInstantiationEvent() === $event
             );
         }
         foreach ($servicesForEvent as $service) {

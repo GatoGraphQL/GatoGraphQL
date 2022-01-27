@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('GD_DATALOAD_USER_ATTRIBUTES', 'userattributes');
 
@@ -8,7 +7,7 @@ class PoP_UserPlatform_UserStance_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks:user-feedback',
             array($this, 'getUserFeedback')
         );
@@ -16,11 +15,10 @@ class PoP_UserPlatform_UserStance_Hooks
 
     public function getUserFeedback($user_feedback)
     {
-        $vars = ApplicationState::getVars();
         $user_attributes = array();
-        $user_logged_in = $vars['global-userstate']['is-user-logged-in'];
+        $user_logged_in = \PoP\Root\App::getState('is-user-logged-in');
         if ($user_logged_in) {
-            $user_id = $vars['global-userstate']['current-user-id'];
+            $user_id = \PoP\Root\App::getState('current-user-id');
             
             // User attributes: eg: is WSL user? Needed to hide "Change Password" link for these users
             $user_attributes = array_values(

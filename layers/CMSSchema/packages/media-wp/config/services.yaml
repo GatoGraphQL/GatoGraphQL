@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface:
+        class: \PoPCMSSchema\MediaWP\TypeAPIs\MediaTypeAPI

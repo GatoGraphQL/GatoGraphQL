@@ -1,7 +1,8 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\App;
+use PoP\Root\Constants\HookNames;
 
 define('GD_THEME_WASSUP', 'wassup');
 
@@ -9,27 +10,26 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter('\PoP\Theme\Themes\ThemeManagerUtils:getThemeDir:'.$this->getName(), array($this, 'themeDir'));
+        App::addFilter('\PoP\Theme\Themes\ThemeManagerUtils:getThemeDir:'.$this->getName(), array($this, 'themeDir'));
 
         // Hooks to allow the thememodes to do some functionality
-        HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD.':'.$this->getName(), array($this, 'backgroundLoad'));
-        HooksAPIFacade::getInstance()->addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getName(), array($this, 'filteringbyShowfilter'));
-        HooksAPIFacade::getInstance()->addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION.':'.$this->getName(), array($this, 'getSidebarOrientation'));
+        App::addFilter(POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD.':'.$this->getName(), array($this, 'backgroundLoad'));
+        App::addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getName(), array($this, 'filteringbyShowfilter'));
+        App::addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION.':'.$this->getName(), array($this, 'getSidebarOrientation'));
 
-        HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPMANAGERUTILS_EMBEDURL.':'.$this->getName(), array($this, 'getEmbedUrl'));
-        HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPMANAGERUTILS_PRINTURL.':'.$this->getName(), array($this, 'getPrintUrl'));
-        HooksAPIFacade::getInstance()->addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN.':'.$this->getName(), array($this, 'isMainScrollable'));
+        App::addFilter(POP_HOOK_POPMANAGERUTILS_EMBEDURL.':'.$this->getName(), array($this, 'getEmbedUrl'));
+        App::addFilter(POP_HOOK_POPMANAGERUTILS_PRINTURL.':'.$this->getName(), array($this, 'getPrintUrl'));
+        App::addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN.':'.$this->getName(), array($this, 'isMainScrollable'));
 
         // ThemeStyle
-        HooksAPIFacade::getInstance()->addFilter(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE.':'.$this->getName(), array($this, 'getPagesectionsideLogosize'));
-        HooksAPIFacade::getInstance()->addFilter(POP_HOOK_CAROUSEL_USERS_GRIDCLASS.':'.$this->getName(), array($this, 'getCarouselUsersGridclass'));
-        HooksAPIFacade::getInstance()->addFilter(POP_HOOK_SCROLLINNER_THUMBNAIL_GRID.':'.$this->getName(), array($this, 'getScrollinnerThumbnailGrid'));
+        App::addFilter(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE.':'.$this->getName(), array($this, 'getPagesectionsideLogosize'));
+        App::addFilter(POP_HOOK_CAROUSEL_USERS_GRIDCLASS.':'.$this->getName(), array($this, 'getCarouselUsersGridclass'));
+        App::addFilter(POP_HOOK_SCROLLINNER_THUMBNAIL_GRID.':'.$this->getName(), array($this, 'getScrollinnerThumbnailGrid'));
 
-        HooksAPIFacade::getInstance()->addAction('popcms:boot', function() {
-            $vars = ApplicationState::getVars();
-            if (in_array(POP_STRATUM_WEB, $vars['strata'])) {
-                HooksAPIFacade::getInstance()->addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD.':'.$this->getName(), array($this, 'getPagesectionJsmethod'), 10, 2);
-                HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getName(), array($this, 'keepOpenTabs'));
+        App::addAction(HookNames::AFTER_BOOT_APPLICATION, function() {
+            if (in_array(POP_STRATUM_WEB, App::getState('strata'))) {
+                App::addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD.':'.$this->getName(), array($this, 'getPagesectionJsmethod'), 10, 2);
+                App::addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getName(), array($this, 'keepOpenTabs'));
             }
         });
 
@@ -50,7 +50,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
     {
 
         // Allow to override this value. Eg: GetPoP needs the Simple theme.
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return App::applyFilters(
             'GD_Theme_Wassup:thememode:default',
             GD_THEMEMODE_WASSUP_SLIDING
         );
@@ -60,7 +60,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
     {
 
         // Allow to override this value. Eg: GetPoP needs the Simple theme.
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return App::applyFilters(
             'GD_Theme_Wassup:themestyle:default',
             GD_THEMESTYLE_WASSUP_SWIFT
         );
@@ -74,7 +74,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
     //         $this->getName(),
     //         $this->getThemestyle()->getName()
     //     );
-    //     return HooksAPIFacade::getInstance()->applyFilters($filtername, $bool);
+    //     return App::applyFilters($filtername, $bool);
     // }
     // function reopenTabs($bool) {
 
@@ -84,7 +84,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
     //         $this->getName(),
     //         $this->getThemestyle()->getName()
     //     );
-    //     return HooksAPIFacade::getInstance()->applyFilters($filtername, $bool);
+    //     return App::applyFilters($filtername, $bool);
     // }
     public function keepOpenTabs($bool)
     {
@@ -94,7 +94,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
             $this->getName(),
             $this->getThememode()->getName()
         );
-        return HooksAPIFacade::getInstance()->applyFilters($filtername, $bool);
+        return App::applyFilters($filtername, $bool);
     }
 
     public function getScrollinnerThumbnailGrid($grid)
@@ -105,7 +105,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
             $this->getName(),
             $this->getThemestyle()->getName()
         );
-        return HooksAPIFacade::getInstance()->applyFilters($filtername, $grid);
+        return App::applyFilters($filtername, $grid);
     }
 
     public function getCarouselUsersGridclass($class)
@@ -116,7 +116,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
             $this->getName(),
             $this->getThemestyle()->getName()
         );
-        return HooksAPIFacade::getInstance()->applyFilters($filtername, $class);
+        return App::applyFilters($filtername, $class);
     }
 
     public function getPagesectionsideLogosize($size)
@@ -127,7 +127,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
             $this->getName(),
             $this->getThemestyle()->getName()
         );
-        return HooksAPIFacade::getInstance()->applyFilters($filtername, $size);
+        return App::applyFilters($filtername, $size);
     }
 
     public function backgroundLoad($routeConfigurations)
@@ -140,7 +140,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
             $this->getName(),
             $this->getThememode()->getName()
         );
-        return HooksAPIFacade::getInstance()->applyFilters($filtername, $routeConfigurations);
+        return App::applyFilters($filtername, $routeConfigurations);
     }
     public function getPagesectionJsmethod($jsmethod, array $module)
     {
@@ -152,7 +152,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
             $this->getName(),
             $this->getThememode()->getName()
         );
-        return HooksAPIFacade::getInstance()->applyFilters($filtername, $jsmethod, $module);
+        return App::applyFilters($filtername, $jsmethod, $module);
     }
     public function filteringbyShowfilter($showfilter)
     {
@@ -164,7 +164,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
             $this->getName(),
             $this->getThememode()->getName()
         );
-        return HooksAPIFacade::getInstance()->applyFilters($filtername, $showfilter);
+        return App::applyFilters($filtername, $showfilter);
     }
     public function getSidebarOrientation($orientation)
     {
@@ -176,7 +176,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
             $this->getName(),
             $this->getThememode()->getName()
         );
-        return HooksAPIFacade::getInstance()->applyFilters($filtername, $orientation);
+        return App::applyFilters($filtername, $orientation);
     }
     public function getEmbedUrl($url)
     {
@@ -208,19 +208,18 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
             $this->getName(),
             $this->getThememode()->getName()
         );
-        return HooksAPIFacade::getInstance()->applyFilters($filtername, $value);
+        return App::applyFilters($filtername, $value);
     }
 
 
 
     protected function addUrlParams($url)
     {
-        $vars = ApplicationState::getVars();
-
+        
         // Add the themestyle, if it is not the default one
-        if (!$vars['themestyle-isdefault']) {
+        if (!Root\App::getState('themestyle-isdefault')) {
             $url = GeneralUtils::addQueryArgs([
-                GD_URLPARAM_THEMESTYLE => $vars['themestyle'],
+                GD_URLPARAM_THEMESTYLE => App::getState('themestyle'),
             ], $url);
         }
 

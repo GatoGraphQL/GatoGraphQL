@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
@@ -73,7 +73,6 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
         switch ($module[1]) {
             case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
             case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
-                $vars = ApplicationState::getVars();
                 $sources = array(
                     self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY => GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,
                     self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER => GD_URLPARAM_URECONTENTSOURCE_USER,
@@ -81,7 +80,7 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
                 $source = $sources[$module[1]];
 
                 $this->appendProp($module, $props, 'class', 'btn btn-sm btn-default');
-                if ($source == $vars['source']) {
+                if ($source == \PoP\Root\App::getState('source')) {
                     $this->appendProp($module, $props, 'class', 'active');
                 }
                 break;

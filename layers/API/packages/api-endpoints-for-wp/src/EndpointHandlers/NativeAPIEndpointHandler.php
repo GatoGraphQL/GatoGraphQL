@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\APIEndpointsForWP\EndpointHandlers;
+namespace PoPAPI\APIEndpointsForWP\EndpointHandlers;
 
 use PoP\Root\App;
-use PoP\API\Component as APIComponent;
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\APIEndpointsForWP\Component;
-use PoP\APIEndpointsForWP\ComponentConfiguration;
-use PoP\ComponentModel\Constants\Params;
+use PoPAPI\API\Component as APIComponent;
+use PoPAPI\APIEndpointsForWP\Component;
+use PoPAPI\APIEndpointsForWP\ComponentConfiguration;
 
 class NativeAPIEndpointHandler extends AbstractEndpointHandler
 {
@@ -26,7 +24,7 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
     /**
      * Provide the endpoint
      */
-    protected function getEndpoint(): string
+    public function getEndpoint(): string
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
@@ -42,16 +40,5 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return App::getComponent(APIComponent::class)->isEnabled()
             && !$componentConfiguration->isNativeAPIEndpointDisabled();
-    }
-
-    /**
-     * Indicate this is an API request
-     */
-    protected function executeEndpoint(): void
-    {
-        // Set the params on the request, to emulate that they were added by the user
-        $_REQUEST[Params::SCHEME] = APISchemes::API;
-        // Enable hooks
-        \do_action('EndpointHandler:setDoingAPI');
     }
 }

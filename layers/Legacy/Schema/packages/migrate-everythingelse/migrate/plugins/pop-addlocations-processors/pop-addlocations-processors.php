@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Add Locations Processors
 Description: Implementation of Add Locations Processors for PoP
@@ -21,7 +20,7 @@ class PoP_AddLocationsProcessors
     {
 
         // Priority: after PoP Locations Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888880);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888880);
     }
     public function init()
     {

@@ -1,12 +1,11 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * preloading fonts
  */
 $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
 if (!$cmsapplicationapi->isAdminPanel()) {
-    HooksAPIFacade::getInstance()->addAction('popcms:head', 'popHeaderWassupPreloadfonts');
+    \PoP\Root\App::addAction('popcms:head', 'popHeaderWassupPreloadfonts');
 }
 function popHeaderWassupPreloadfonts()
 {
@@ -25,7 +24,7 @@ function getWassupFontUrl($pathkey = null)
         $pathkey = 'local';
 
         // Allow PoP Resource Loader to hook in its values
-        $pathkey = HooksAPIFacade::getInstance()->applyFilters(
+        $pathkey = \PoP\Root\App::applyFilters(
             'getWassupFontUrl:pathkey',
             $pathkey
         );
@@ -41,7 +40,7 @@ function getWassupFontPath($pathkey)
     }
 
     // Allow PoP Resource Loader to hook in its values
-    return HooksAPIFacade::getInstance()->applyFilters(
+    return \PoP\Root\App::applyFilters(
         'getWassupFontPath',
         $local_font_path,
         $pathkey

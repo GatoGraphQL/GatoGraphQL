@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 abstract class AbstractPluginComponent extends AbstractComponent implements PluginComponentInterface
 {
@@ -54,8 +54,8 @@ abstract class AbstractPluginComponent extends AbstractComponent implements Plug
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         $pluginFolder = $this->getPluginFolder();
         if ($pluginFolder === null) {

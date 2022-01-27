@@ -1,4 +1,3 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('popcomponent:coauthors:supportedposttypes', 'gdEmAddEventPosttype');
+\PoP\Root\App::addFilter('popcomponent:coauthors:supportedposttypes', 'gdEmAddEventPosttype');

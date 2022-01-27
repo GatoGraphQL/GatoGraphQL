@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Content Creation
 Description: Implementation of Content Creation for PoP
@@ -20,7 +19,7 @@ class PoP_ContentCreation
     {
 
         // Priority: after PoP Notifications
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function init()
     {

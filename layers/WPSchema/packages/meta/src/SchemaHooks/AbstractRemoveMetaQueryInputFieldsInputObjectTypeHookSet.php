@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Meta\SchemaHooks;
 
+use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 
 abstract class AbstractRemoveMetaQueryInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::addFilter(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
             [$this, 'getInputFieldNameTypeResolvers'],
             100,

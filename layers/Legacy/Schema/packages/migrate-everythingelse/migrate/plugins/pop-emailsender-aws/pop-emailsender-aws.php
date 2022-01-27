@@ -6,7 +6,6 @@ Description: Use AWS for Sending emails for the Platform of Platforms (PoP). It 
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -21,7 +20,7 @@ class PoP_EmailSender_AWS
     {
 
         // Priority: after PoP Email Sender
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888320);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888320);
     }
     public function init()
     {

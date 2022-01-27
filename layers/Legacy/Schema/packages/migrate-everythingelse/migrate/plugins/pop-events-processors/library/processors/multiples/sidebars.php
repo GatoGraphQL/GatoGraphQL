@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
@@ -50,12 +49,11 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
         if ($block = $blocks[$module[1]] ?? null) {
             $ret[] = $block;
         } else {
-            $vars = ApplicationState::getVars();
             switch ($module[1]) {
                 case self::MODULE_MULTIPLE_AUTHOREVENTS_SIDEBAR:
                 case self::MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR:
                 case self::MODULE_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR:
-                    $author = $vars['routing-state']['queried-object-id'];
+                    $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                     $filters = array(
                         self::MODULE_MULTIPLE_AUTHOREVENTS_SIDEBAR => [GD_EM_Module_Processor_CustomSectionSidebarInners::class, GD_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTS],
                         self::MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR => [GD_EM_Module_Processor_CustomSectionSidebarInners::class, GD_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS],
@@ -64,7 +62,7 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
                     $ret[] = $filters[$module[1]];
 
                     // Allow User Role Editor to add blocks specific to that user role
-                    $ret = HooksAPIFacade::getInstance()->applyFilters(
+                    $ret = \PoP\Root\App::applyFilters(
                         'PoP_EM_Module_Processor_SidebarMultiples:inner-modules',
                         $ret,
                         $author

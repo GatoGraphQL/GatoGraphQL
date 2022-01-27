@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\UserRoles;
+namespace PoPCMSSchema\UserRoles;
 
 class FunctionAPIFactory
 {

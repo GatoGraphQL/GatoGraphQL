@@ -1,6 +1,5 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -48,11 +47,11 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
         $ret[GD_JS_TITLES]['inresponseto'] = $this->getInresponsetoTitle($module, $props);
 
         if ($post_module = $this->getPostSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['post'] = ModuleUtils::getModuleOutputName((array) $post_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['post'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $post_module);
         }
 
         if ($comment_module = $this->getCommentSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['comment'] = ModuleUtils::getModuleOutputName((array) $comment_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['comment'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $comment_module);
         }
 
         return $ret;

@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\PostCategories\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoPCMSSchema\PostCategories\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'

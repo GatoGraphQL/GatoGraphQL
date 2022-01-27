@@ -3,13 +3,12 @@
 define('POP_EMAIL_CREATEDCONTENT', 'created-content');
 
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Types\Status;
+use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_ContentCreation_EmailSender_Hooks
 {
@@ -18,30 +17,30 @@ class PoP_ContentCreation_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Notifications to the admin
         //----------------------------------------------------------------------
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'sendemailToAdminUpdatepost'), 100, 1);
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToAdminCreatepost'), 100, 1);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'sendemailToAdminUpdatepost'), 100, 1);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToAdminCreatepost'), 100, 1);
 
         //----------------------------------------------------------------------
         // Email Notifications
         //----------------------------------------------------------------------
         // Late priority, so they send the email if PoP SocialNetwork has not done so before
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsGeneralNewpostCreate'), 100, 1);
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsGeneralNewpostUpdate'), 100, 2);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsGeneralNewpostCreate'), 100, 1);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsGeneralNewpostUpdate'), 100, 2);
 
         //----------------------------------------------------------------------
         // Functional emails
         //----------------------------------------------------------------------
         // Post created/updated/approved
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToUsersFromPostCreate'), 100, 1);
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToUsersFromPostCreate'), 100, 1);
+        \PoP\Root\App::addAction(
             'popcms:pendingToPublish',
             array($this, 'sendemailToUsersFromPostPostapproved'),
             10,
             1
         );
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToUsersFromPostReferencescreate'), 10, 1);
-        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'sendemailToUsersFromPostReferencesupdate'), 10, 2);
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToUsersFromPostReferencescreate'), 10, 1);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'sendemailToUsersFromPostReferencesupdate'), 10, 2);
+        \PoP\Root\App::addAction(
             'popcms:pendingToPublish',
             array($this, 'sendemailToUsersFromPostReferencestransition'),
             10,
@@ -216,8 +215,7 @@ class PoP_ContentCreation_EmailSender_Hooks
 
         // Keep only the users with the corresponding preference on
         // Do not send to the current user
-        $vars = ApplicationState::getVars();
-        $users = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_GENERAL_NEWPOST, array(), array($vars['global-userstate']['current-user-id']));
+        $users = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_GENERAL_NEWPOST, array(), array(\PoP\Root\App::getState('current-user-id')));
         if ($users) {
             // From those, remove all users who got an email in a previous email function
             if ($users = array_diff($users, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_CREATEDCONTENT))) {
@@ -298,12 +296,12 @@ class PoP_ContentCreation_EmailSender_Hooks
         $skip = !in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
 
         // Check if for a given type of post the email must not be sent (eg: Highlights)
-        if (HooksAPIFacade::getInstance()->applyFilters('post_references:skip_sendemail', $skip, $post_id)) {
+        if (\PoP\Root\App::applyFilters('post_references:skip_sendemail', $skip, $post_id)) {
             return;
         }
 
         // Check if the post has references. If so, also send email to the owners of those
-        if ($references = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
+        if ($references = \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
             $post_name = gdGetPostname($post_id);
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
             foreach ($references as $reference_post_id) {

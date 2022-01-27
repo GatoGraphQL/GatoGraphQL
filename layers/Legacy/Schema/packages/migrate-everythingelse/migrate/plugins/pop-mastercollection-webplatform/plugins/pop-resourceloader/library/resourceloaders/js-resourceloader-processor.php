@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
@@ -298,7 +297,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
                 $dependencies[] = [PoP_CoreProcessors_Bootstrap_VendorJSResourceLoaderProcessor::class, PoP_CoreProcessors_Bootstrap_VendorJSResourceLoaderProcessor::RESOURCE_EXTERNAL_BOOTSTRAPMULTISELECT];
                 
                 // Allow to hook extra CSS styles
-                if ($extra_dependencies = HooksAPIFacade::getInstance()->applyFilters('PoP_CoreProcessors_Bootstrap_ResourceLoaderProcessor:dependencies:multiselect', array())) {
+                if ($extra_dependencies = \PoP\Root\App::applyFilters('PoP_CoreProcessors_Bootstrap_ResourceLoaderProcessor:dependencies:multiselect', array())) {
                     $dependencies = array_merge(
                         $dependencies,
                         $extra_dependencies

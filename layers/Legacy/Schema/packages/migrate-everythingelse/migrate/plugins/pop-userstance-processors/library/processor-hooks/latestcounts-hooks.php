@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_UserStance_LatestCounts_ClassesHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'latestcounts:allcontent:classes',
             array($this, 'getAllcontentClasses')
         );

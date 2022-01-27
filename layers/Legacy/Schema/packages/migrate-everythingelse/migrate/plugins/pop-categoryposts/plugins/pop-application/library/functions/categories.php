@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('getTheMainCategories', 'getCategorypostsTheMainCategories');
+\PoP\Root\App::addFilter('getTheMainCategories', 'getCategorypostsTheMainCategories');
 function getCategorypostsTheMainCategories($cats)
 {
     return array_merge(

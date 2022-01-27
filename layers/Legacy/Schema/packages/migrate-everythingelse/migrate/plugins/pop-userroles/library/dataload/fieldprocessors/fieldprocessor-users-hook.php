@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\UserRoles;
+namespace PoPCMSSchema\UserRoles;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -7,9 +7,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
@@ -123,7 +122,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
                 $user_roles = $userRoleTypeAPI->getUserRoles($objectTypeResolver->getID($user));
                 // Allow to hook for URE: Make sure we always get the most specific role
                 // Otherwise, users like Leo get role 'administrator'
-                return HooksAPIFacade::getInstance()->applyFilters(
+                return \PoP\Root\App::applyFilters(
                     'UserObjectTypeResolver:getValue:role',
                     array_shift($user_roles),
                     $objectTypeResolver->getID($user)

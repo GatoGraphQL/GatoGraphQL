@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Location Post Links Creation Processors
 Description: Implementation of Location Post Links Creation Processors for PoP
@@ -20,9 +19,9 @@ class PoP_LocationPostLinksCreationProcessors
     {
 
         // // Priority: after PoP Location Posts Creation Processors
-        // HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888870);
+        // \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888870);
         // Priority: after PoP Location Posts Creation Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888910);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888910);
     }
     public function init()
     {

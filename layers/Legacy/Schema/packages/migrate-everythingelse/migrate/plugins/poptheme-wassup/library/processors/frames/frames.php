@@ -2,11 +2,9 @@
 define('POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE', 'pagesections-side-logosize');
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -84,7 +82,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
 
                 // Save the state of the Main Navigation being open or not: open by default, by adding class "active-side"
                 // to the pageSectionGroup, but if the user clicks, then it's dismissed
-                if (HooksAPIFacade::getInstance()->applyFilters(
+                if (\PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomPageSections:jsmethods:toggleside',
                     true,
                     $module
@@ -253,7 +251,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 }
 
                 // Allow TPPDebate to override the social media
-                $ret['socialmedias'] = HooksAPIFacade::getInstance()->applyFilters(
+                $ret['socialmedias'] = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomPageSections:frame-top:socialmedias',
                     array()
                 );
@@ -279,7 +277,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                     $ret['links']['useravatar'] = RouteUtils::getRouteURL(POP_USERAVATAR_ROUTE_EDITAVATAR);
                 }
                 // Allow TPPDebate to override the titles
-                $ret[GD_JS_TITLES] = HooksAPIFacade::getInstance()->applyFilters(
+                $ret[GD_JS_TITLES] = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomPageSections:frame-top:titles',
                     array(
                         'home' => TranslationAPIFacade::getInstance()->__('Home', 'poptheme-wassup'),
@@ -292,8 +290,8 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                         'footer' => sprintf(
                             TranslationAPIFacade::getInstance()->__('Powered by <a href="%s" target="_blank">the PoP framework</a> through <a href="%s" target="_blank">Verticals</a>', 'poptheme-wassup'),
                             // Allow qTrans to add the language
-                            HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomPageSections:footer:poweredby-links', POPTHEME_WASSUP_LINK_GETPOP),
-                            HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomPageSections:footer:poweredby-links', POPTHEME_WASSUP_LINK_VERTICALS)
+                            \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomPageSections:footer:poweredby-links', POPTHEME_WASSUP_LINK_GETPOP),
+                            \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomPageSections:footer:poweredby-links', POPTHEME_WASSUP_LINK_VERTICALS)
                         ),
                         'about' => TranslationAPIFacade::getInstance()->__('About us', 'poptheme-wassup'),
                         'myprofile' => TranslationAPIFacade::getInstance()->__('My Profile', 'poptheme-wassup'),
@@ -335,16 +333,16 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 $ret[GD_JS_CLASSES]['notifications'] = 'notifications pop-waypoints-context scrollable perfect-scrollbar vertical';
                 $ret[GD_JS_CLASSES]['notifications-count'] = 'badge';
 
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-addnew'] = ModuleUtils::getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOP_ADDNEW]);
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-userloggedin'] = ModuleUtils::getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN]);
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-usernotloggedin'] = ModuleUtils::getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN]);
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-about'] = ModuleUtils::getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_ABOUT]);
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['search'] = ModuleUtils::getModuleOutputName([PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::MODULE_FORM_EVERYTHINGQUICKLINKS]);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-addnew'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOP_ADDNEW]);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-userloggedin'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN]);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-usernotloggedin'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN]);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu-about'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_TOPNAV_ABOUT]);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['search'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::MODULE_FORM_EVERYTHINGQUICKLINKS]);
                 if (defined('POP_CLUSTERCOMMONPAGES_INITIALIZED')) {
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-oursponsors'] = ModuleUtils::getModuleOutputName([GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::class, GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_OURSPONSORS_TOPNAV_SCROLL]);
+                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-oursponsors'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::class, GD_ClusterCommonPages_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_OURSPONSORS_TOPNAV_SCROLL]);
                 }
                 if (defined('POP_NOTIFICATIONSPROCESSORS_INITIALIZED')) {
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-notifications'] = ModuleUtils::getModuleOutputName([AAL_PoPProcessors_Module_Processor_NotificationBlocks::class, AAL_PoPProcessors_Module_Processor_NotificationBlocks::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST]);
+                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-notifications'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([AAL_PoPProcessors_Module_Processor_NotificationBlocks::class, AAL_PoPProcessors_Module_Processor_NotificationBlocks::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST]);
                 }
                 break;
 
@@ -391,7 +389,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 $title = $cmsapplicationapi->getSiteName();
 
                 // Allow the ThemeStyle to override the logo size
-                $size = HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE, 'large');
+                $size = \PoP\Root\App::applyFilters(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE, 'large');
                 $logo = gdLogo($size);
                 $ret['logo-main'] = array(
                     'src' => $logo[0],
@@ -410,7 +408,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 );
 
                 $side = [PoP_Module_Processor_SideGroups::class, PoP_Module_Processor_SideGroups::MODULE_GROUP_SIDE];
-                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['side'] = ModuleUtils::getModuleOutputName($side);
+                $ret[GD_JS_SUBMODULEOUTPUTNAMES]['side'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($side);
                 break;
 
             case self::MODULE_FRAME_BACKGROUND:
@@ -423,7 +421,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 }
 
                 if (PoP_ApplicationProcessors_Utils::addBackgroundMenu()) {
-                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu'] = ModuleUtils::getModuleOutputName([self::class, self::MODULE_GROUP_BACKGROUNDMENU]);
+                    $ret[GD_JS_SUBMODULEOUTPUTNAMES]['menu'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName([self::class, self::MODULE_GROUP_BACKGROUNDMENU]);
                 }
                 break;
         }
@@ -439,7 +437,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
         switch ($module[1]) {
             case self::MODULE_FRAME_TOPSIMPLE:
             case self::MODULE_FRAME_TOPEMBED:
-                $ret[GD_JS_TITLES]['document'] = HooksAPIFacade::getInstance()->applyFilters(
+                $ret[GD_JS_TITLES]['document'] = \PoP\Root\App::applyFilters(
                     'GD_DataLoad_QueryInputOutputHandler_FrameTopSimplePageSection:document_title',
                     $cmsapplicationapi->getDocumentTitle()
                 );

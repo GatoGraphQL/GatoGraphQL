@@ -1,7 +1,6 @@
 <?php
 use PoP\Engine\FormInputs\MultipleSelectFormInput;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_FormInput_ContactUs_Topics extends MultipleSelectFormInput
 {
@@ -10,7 +9,7 @@ class GD_FormInput_ContactUs_Topics extends MultipleSelectFormInput
         $values = parent::getAllValues($label);
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
 
-        $topics = HooksAPIFacade::getInstance()->applyFilters(
+        $topics = \PoP\Root\App::applyFilters(
             'gd_gf_contactus_topics',
             array(
                 TranslationAPIFacade::getInstance()->__('General', 'pop-genericforms'),

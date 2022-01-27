@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutationResolver
@@ -20,7 +21,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
 
     protected function additionals($target_id, $form_data): void
     {
-        $this->getHooksAPI()->doAction('gd_updateusermetavalue', $target_id, $form_data);
+        App::doAction('gd_updateusermetavalue', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int

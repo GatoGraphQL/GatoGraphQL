@@ -22,6 +22,6 @@ trait AutomaticallyInstantiatedServiceTrait
 
     public function getInstantiationEvent(): string
     {
-        return ApplicationEvents::BEFORE_BOOT;
+        return ApplicationEvents::COMPONENT_LOADED;
     }
 }

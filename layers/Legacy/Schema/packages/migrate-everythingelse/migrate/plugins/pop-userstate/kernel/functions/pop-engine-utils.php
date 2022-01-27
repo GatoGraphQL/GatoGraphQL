@@ -9,19 +9,18 @@ class PoP_UserState_Utils
 
         // We can force loading the userstate by passing param ?action=loaduserstate
         // Then, for this case, we can assume that the current page requires user state
-        $vars = ApplicationState::getVars();
-        if (in_array(POP_ACTION_LOADUSERSTATE, $vars['actions'])) {
+        if (in_array(POP_ACTION_LOADUSERSTATE, \PoP\Root\App::getState('actions'))) {
             return true;
         }
 
         // Otherwise, obtain the current page id and check specifically the configuration for that page
-        $route = $vars['route'];
+        $route = \PoP\Root\App::getState('route');
         return self::routeRequiresUserState($route);
     }
 
     public static function routeRequiresUserState($route)
     {
-        $settingsmanager = \PoPSchema\UserState\Settings\SettingsManagerFactory::getInstance();
+        $settingsmanager = \PoPCMSSchema\UserState\Settings\SettingsManagerFactory::getInstance();
         return $settingsmanager->requiresUserState($route);
 
         // $checkpoint_configuration = RequestUtils::getCheckpointConfiguration($page_id);

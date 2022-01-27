@@ -1,17 +1,16 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPWebPlatform_ResourceLoader_Initialization {
 
 	public function __construct() {
 
-		// Wait until the system is initialized, so we can access $vars
+		// Wait until the system is initialized, so we can access the application state
 		// These 2 functions (register and localize) are separated into 2 calls, so that they can independently 
 		// be unhooked (eg: by Service Workers)
-		HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'), 50);
-		HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'localizeScripts'), 70);
-		HooksAPIFacade::getInstance()->addAction('popcms:printStyles', array($this, 'registerStyles'), 50);
+		\PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'), 50);
+		\PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'localizeScripts'), 70);
+		\PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'), 50);
 	}
 
 	function registerScripts() {

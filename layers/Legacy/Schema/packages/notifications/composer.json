@@ -1,8 +1,8 @@
 {
-    "name": "pop-schema/notifications",
+    "name": "pop-cms-schema/notifications",
     "type": "library",
     "description": "Adds support for notifications",
-    "keywords": ["PoP", "notifications"],
+    "keywords": ["PHP", "PoP", "notifications"],
     "homepage": "https://github.com/PoPSchema/notifications",
     "license": "GPL-2.0-or-later",
     "authors": [
@@ -16,18 +16,18 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "getpop/engine": "^0.8",
-        "pop-schema/schema-commons": "^0.8"
+        "getpop/engine": "^0.9",
+        "pop-cms-schema/schema-commons": "^0.9"
     },
     "require-dev": {
-        "pop-schema/customposts": "^0.8",
+        "pop-cms-schema/customposts": "^0.9",
         "phpstan/phpstan": "^0.12.76",
-        "phpunit/phpunit": ">=9.3",
+        "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.11",
-        "squizlabs/php_codesniffer": "^3.0"
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "suggest": {
-        "pop-schema/customposts": "Integration with Posts"
+        "pop-cms-schema/customposts": "Integration with Posts"
     },
     "autoload": {
         "psr-4": {
@@ -51,6 +51,7 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {}
     }
 }

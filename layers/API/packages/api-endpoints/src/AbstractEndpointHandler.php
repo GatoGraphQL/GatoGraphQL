@@ -2,18 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoP\APIEndpoints;
+namespace PoPAPI\APIEndpoints;
 
+use PoP\Root\App;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
-abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiatedService
+abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiatedService implements EndpointHandlerInterface
 {
     protected ?string $endpoint = null;
-
-    /**
-     * Provide the endpoint
-     */
-    abstract protected function getEndpoint(): string;
 
     /**
      * Initialize the client
@@ -44,7 +40,7 @@ abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiated
     protected function getRequestedURI(): string
     {
         // Check if the URL ends with either /api/graphql/ or /api/rest/ or /api/
-        $uri = EndpointUtils::removeMarkersFromURI($_SERVER['REQUEST_URI']);
+        $uri = EndpointUtils::removeMarkersFromURI(App::server('REQUEST_URI'));
         // Same as the endpoint, make sure the URI has "/" in both ends
         return EndpointUtils::slashURI($uri);
     }

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * user followers and network
@@ -7,7 +6,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 function getUserFollowers($user_id)
 {
-    if ($followers = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_FOLLOWEDBY)) {
+    if ($followers = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_FOLLOWEDBY)) {
         return $followers;
     }
 
@@ -17,7 +16,7 @@ function getUserNetworkusers($user_id)
 {
 
     // Allow URE to override with the same-community users
-    return HooksAPIFacade::getInstance()->applyFilters(
+    return \PoP\Root\App::applyFilters(
         'getUserNetworkusers',
         getUserFollowers($user_id),
         $user_id

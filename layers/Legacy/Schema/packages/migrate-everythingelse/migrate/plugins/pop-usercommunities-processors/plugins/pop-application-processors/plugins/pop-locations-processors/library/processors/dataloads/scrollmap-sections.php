@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
@@ -66,7 +66,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
     // {
     //     switch ($module[1]) {
     //         case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
-    //             return UserRouteNatures::USER;
+    //             return UserRequestNature::USER;
     //     }
 
     //     return parent::getNature($module);
@@ -95,8 +95,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
         switch ($module[1]) {
          // Members of the Community
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
-                $vars = ApplicationState::getVars();
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // If the profile is not a community, then return no users at all (Eg: a community opting out from having members)
                 if (gdUreIsCommunity($author)) {
                     URE_CommunityUtils::addDataloadqueryargsCommunitymembers($ret, $author);
@@ -123,8 +122,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
         switch ($module[1]) {
          // Members of the Community
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
-                $vars = ApplicationState::getVars();
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // If the profile is not a community, then return no users at all (Eg: a community opting out from having members)
                 if (!gdUreIsCommunity($author)) {
                     $this->setProp($module, $props, 'skip-data-load', true);

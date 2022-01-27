@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * Allow to retrieve Original Size "Avatars" (these original ones need not be squared)
@@ -11,7 +10,7 @@ function gdGetAvatarPhotoinfo($user_id, $use_default = true)
     // Change PoP: If the function has a filter, then execute this one instead
     // This way we allow the AWS logic to take over
     if (has_filter('gdGetAvatarPhotoinfo:override')) {
-        return HooksAPIFacade::getInstance()->applyFilters('gdGetAvatarPhotoinfo:override', array(), $user_id, $use_default);
+        return \PoP\Root\App::applyFilters('gdGetAvatarPhotoinfo:override', array(), $user_id, $use_default);
     }
 
     // If the user has no avatar/photo, use the default one
@@ -52,7 +51,7 @@ function gdAvatarExtractUrl($avatar)
  * Return the default avatar
  */
 // Hook is added through the Plug-in (interface) implementation
-// HooksAPIFacade::getInstance()->addFilter('gd_avatar_default', 'getDefaultAvatar', 1, 5);
+// \PoP\Root\App::addFilter('gd_avatar_default', 'getDefaultAvatar', 1, 5);
 function getDefaultAvatar($avatar, $id_or_email, $size, $default, $alt)
 {
 

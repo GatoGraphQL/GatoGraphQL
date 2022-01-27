@@ -105,7 +105,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
      */
     public function getSchemaComponentClassesToSkip(): array
     {
-        return $this->extensionInitializationConfiguration?->getSchemaComponentClassesToSkip() ?? parent::getSchemaComponentClassesToSkip();
+        return $this->extensionInitializationConfiguration?->getSchemaComponentClassesToSkip() ?? [];
     }
 
     /**

@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
-use PoP\BasicService\BasicServiceTrait;
+use PoP\Root\Services\BasicServiceTrait;
 use PoP\QueryParsing\QueryParserInterface;
+use PoP\Root\App;
+use PoP\Root\Component as RootComponent;
+use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use stdClass;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
@@ -137,13 +140,19 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      */
     protected function doGetVariablesFromRequest(): array
     {
+        /** @var RootComponentConfiguration */
+        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
+            return [];
+        }
+
         // Watch out! GraphiQL also uses the "variables" URL param, but as a string
         // Hence, check if this param is an array, and only then process it
         return array_merge(
-            $_REQUEST,
-            isset($_REQUEST['variables']) && is_array($_REQUEST['variables']) ?
-                $_REQUEST['variables']
-                : []
+            App::getRequest()->query->all(),
+            App::getRequest()->request->all(),
+            App::getRequest()->query->has('variables') && is_array(App::getRequest()->query->all()['variables']) ? App::getRequest()->query->all()['variables'] : [],
+            App::getRequest()->request->has('variables') && is_array(App::getRequest()->request->all()['variables']) ? App::getRequest()->request->all()['variables'] : []
         );
     }
 

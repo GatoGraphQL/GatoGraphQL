@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 // Routes
 //--------------------------------------------------------
@@ -64,8 +63,8 @@ if (!defined('POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS19'
 	define('POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS19', false);
 }
 
-HooksAPIFacade::getInstance()->addFilter(
-    \PoP\Routing\RouteHookNames::ROUTES,
+\PoP\Root\App::addFilter(
+    \PoP\RootWP\Routing\HookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

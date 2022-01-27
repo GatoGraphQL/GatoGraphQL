@@ -1,10 +1,9 @@
 <?php
 
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Pages\Facades\PageTypeAPIFacade;
+use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
 
-HooksAPIFacade::getInstance()->addAction(
-    'popcms:init',
+\PoP\Root\App::addAction(
+    'init', // Must migrate this WP hook to one from PoP (which executes before AFTER_BOOT_APPLICATION
     function () {
         if (defined('POP_ADDCOMMENTS_PAGEPLACEHOLDER_SPAMMEDCOMMENTNOTIFICATION')) {
             $pageTypeAPI = PageTypeAPIFacade::getInstance();

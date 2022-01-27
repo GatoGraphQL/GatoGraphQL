@@ -1,40 +1,39 @@
 <?php
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class PoP_SSR_EngineInitialization_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'webplatform-engine:main_html',
             array($this, 'getMainHtml')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoPWebPlatform_Initialization:init-scripts',
             array($this, 'initScripts')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoPWebPlatform_Engine:encoded-data-object',
             array($this, 'getEncodedDataObject'),
             10,
             2
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'add-scripts:where',
             array($this, 'getScriptsWhere')
         );
@@ -134,7 +133,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
         // Calculate the dynamic data settings
         $entryModule = $engine->getEntryModule();
-        $entryModuleOutputName = ModuleUtils::getModuleOutputName($entryModule);
+        $entryModuleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($entryModule);
 
         // Get the static data properties
         // First check if there's a cache stored
@@ -149,7 +148,8 @@ class PoP_SSR_EngineInitialization_Hooks
         if ($dynamic_data_properties === null) {
             global $pop_module_processordynamicdatadecorator_manager;
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-            $entry_model_props = $engine->model_props;
+            $engineState = App::getEngineState();
+            $entry_model_props = $engineState->model_props;
             $dynamic_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($moduleprocessor_manager->getProcessor($entryModule))->getDynamicDataFieldsDatasetmoduletree($entryModule, $entry_model_props);
 
             if ($useCache) {

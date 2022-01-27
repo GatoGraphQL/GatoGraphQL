@@ -1,11 +1,11 @@
 <?php
 
-use PoP\API\Response\Schemes as APISchemes;
+use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
-use PoP\Routing\RouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
@@ -17,9 +17,9 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
     //     $ret = array();
 
     //     // API
-    //     if (!\PoP\API\Environment::disableAPI()) {
+    //     if (!\PoPAPI\API\Environment::disableAPI()) {
     //         // Home
-    //         $ret[RouteNatures::HOME][] = [
+    //         $ret[RequestNature::HOME][] = [
     //             'module' => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
     //             'conditions' => [
     //                 'scheme' => APISchemes::API,
@@ -38,14 +38,14 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
         $ret = array();
 
         // API
-        if (!\PoP\API\Environment::disableAPI()) {
+        if (!\PoPAPI\API\Environment::disableAPI()) {
 
             // Page
             $routemodules = array(
                 POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
             );
             foreach ($routemodules as $route => $module) {
-                $ret[RouteNatures::STANDARD][$route][] = [
+                $ret[RequestNature::GENERIC][$route][] = [
                     'module' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,
@@ -58,7 +58,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
                 POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
             );
             foreach ($routemodules as $route => $module) {
-                $ret[RouteNatures::STANDARD][$route][] = [
+                $ret[RequestNature::GENERIC][$route][] = [
                     'module' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,
@@ -72,7 +72,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
                 POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST],
             );
             foreach ($routemodules as $route => $module) {
-                $ret[UserRouteNatures::USER][$route][] = [
+                $ret[UserRequestNature::USER][$route][] = [
                     'module' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,
@@ -85,7 +85,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
                 POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST],
             );
             foreach ($routemodules as $route => $module) {
-                $ret[TagRouteNatures::TAG][$route][] = [
+                $ret[TagRequestNature::TAG][$route][] = [
                     'module' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,
@@ -98,7 +98,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
                 POP_ROUTE_AUTHORS => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST],
             );
             foreach ($routemodules as $route => $module) {
-                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                     'module' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,
@@ -116,6 +116,6 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
  */
 add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-    new PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor(new \PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter())
+    new PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor(new \PoPAPI\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter())
 	);
 }, 888200);

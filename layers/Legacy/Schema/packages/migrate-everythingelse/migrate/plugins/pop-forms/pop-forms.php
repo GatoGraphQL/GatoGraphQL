@@ -6,7 +6,6 @@ Description: Implementation of forms for PoP sites.
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_Forms
     {
 
         // Priority: after PoP Application
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888305);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888305);
     }
 
     public function init()

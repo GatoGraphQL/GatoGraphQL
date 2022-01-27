@@ -6,7 +6,6 @@ Description: Processors for different Sections for the Wassup Theme for PoP—Pl
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_CommonPages
     {
 
         // Priority: after ...
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888880);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888880);
     }
 
     public function init()

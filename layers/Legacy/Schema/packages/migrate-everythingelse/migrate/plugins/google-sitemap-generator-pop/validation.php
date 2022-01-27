@@ -1,6 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_GSG_POP_CMSWP_MIN_VERSION', 0.1);
 
@@ -11,22 +10,22 @@ class PoP_GSG_Validation
         $success = true;
 
         if (!defined('POP_ENGINEWP_VERSION')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'installWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'installWarning'));
             $success = false;
         } elseif (!defined('POP_ENGINEWP_INITIALIZED')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'initializeWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (POP_GSG_POP_CMSWP_MIN_VERSION > POP_ENGINEWP_VERSION) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'versionWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this, 'versionWarning'));
         }
 
         // Validate plug-in
         if (!class_exists('GoogleSitemapGeneratorLoader')) {
-            HooksAPIFacade::getInstance()->addAction('admin_notices', array($this,'pluginWarning'));
-            HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::addAction('admin_notices', array($this,'pluginWarning'));
+            \PoP\Root\App::addAction('network_admin_notices', array($this,'pluginWarning'));
             $success = false;
         }
 

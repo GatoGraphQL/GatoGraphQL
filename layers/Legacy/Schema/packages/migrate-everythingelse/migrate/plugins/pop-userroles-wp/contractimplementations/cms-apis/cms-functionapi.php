@@ -1,7 +1,7 @@
 <?php
-namespace PoPSchema\UserRoles\WP;
+namespace PoPCMSSchema\UserRoles\WP;
 
-class FunctionAPI extends \PoPSchema\UserRoles\FunctionAPI_Base
+class FunctionAPI extends \PoPCMSSchema\UserRoles\FunctionAPI_Base
 {
     public function addRole($role, $role_name, $capabilities = array())
     {

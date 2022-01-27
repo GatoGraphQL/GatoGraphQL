@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace EverythingElse\PoPSchema\TaxonomiesWP\TypeAPIs;
+namespace EverythingElse\PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

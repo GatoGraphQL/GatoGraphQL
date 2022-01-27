@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\SchemaCommons;
 
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\SchemaCommons\Component::class,
+            \PoPCMSSchema\SchemaCommonsWP\Component::class,
         ];
     }
 
@@ -29,8 +29,8 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
         $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');

@@ -1,25 +1,24 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Media\Facades\MediaTypeAPIFacade;
+use PoPCMSSchema\CustomPostMedia\Misc\MediaHelpers;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\Media\Facades\MediaTypeAPIFacade;
 
 // Allow posts to have menu_order. This is needed for the TPP Debate website,
 // to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
-HooksAPIFacade::getInstance()->addAction('admin_init', 'gdPostsMenuorder');
+\PoP\Root\App::addAction('admin_init', 'gdPostsMenuorder');
 function gdPostsMenuorder()
 {
     add_post_type_support('post', 'page-attributes');
 }
 
 // Make the tinymce always rich edit, also if user is logged out, or accessing the website using wget (so we can use wget to call /system/popinstall and save the service-workers.js file properly)
-HooksAPIFacade::getInstance()->addFilter('user_can_richedit', '__return_true', PHP_INT_MAX);
+\PoP\Root\App::addFilter('user_can_richedit', '__return_true', PHP_INT_MAX);
 
 /**
  * Add Media: do ALWAYS add a link to the image
  */
-HooksAPIFacade::getInstance()->addFilter('media_send_to_editor', 'wassupMediaSendToEditor', 0, 3);
+\PoP\Root\App::addFilter('media_send_to_editor', 'wassupMediaSendToEditor', 0, 3);
 function wassupMediaSendToEditor($html, $id, $attachment)
 {
 
@@ -38,10 +37,9 @@ function wassupMediaSendToEditor($html, $id, $attachment)
 
 function gdGetPostDescription()
 {
-    $vars = ApplicationState::getVars();
     $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-    $post_id = $vars['routing-state']['queried-object-id'];
+    $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
     $excerpt = $customPostTypeAPI->getExcerpt($post_id);
 
     // If the excerpt is empty, return the post content instead
@@ -62,35 +60,33 @@ function gdGetPostDescription()
 
 function gdHeaderRouteDescription()
 {
-    $vars = ApplicationState::getVars();
-    $route = $vars['route'];
-    return HooksAPIFacade::getInstance()->applyFilters('gdHeaderRouteDescription', '', $route);
+    $route = \PoP\Root\App::getState('route');
+    return \PoP\Root\App::applyFilters('gdHeaderRouteDescription', '', $route);
 }
 
 function gdHeaderSiteDescription()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdHeaderSiteDescription', '');
+    return \PoP\Root\App::applyFilters('gdHeaderSiteDescription', '');
 }
 
 function gdGetThemeColor()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('gdGetThemeColor', '#FFFFFF');
+    return \PoP\Root\App::applyFilters('gdGetThemeColor', '#FFFFFF');
 }
 
 function gdGetDocumentThumb($size = 'large')
 {
-    $vars = ApplicationState::getVars();
-    $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
-    if ($vars['routing-state']['is-custompost'] || $vars['routing-state']['is-page']) {
-        $post_id = $vars['routing-state']['queried-object-id'];
+    $cmsmediaapi = \PoPCMSSchema\Media\FunctionAPIFactory::getInstance();
+    if (\PoP\Root\App::getState(['routing', 'is-custompost']) || \PoP\Root\App::getState(['routing', 'is-page'])) {
+        $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         if ($post_thumb_id = MediaHelpers::getThumbId($post_id)) {
             $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
             $thumb = $mediaTypeAPI->getImageProperties($post_thumb_id, $size);
             $thumb_mime_type = $cmsmediaapi->getMediaMimeType($post_thumb_id);
         }
-    } elseif ($vars['routing-state']['is-user']) {
+    } elseif (\PoP\Root\App::getState(['routing', 'is-user'])) {
         if (defined('POP_AVATAR_INITIALIZED')) {
-            $author = $vars['routing-state']['queried-object-id'];
+            $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $userphoto = gdGetAvatarPhotoinfo($author);
             $thumb = $userphoto['src'];
             $thumb_mime_type = '';

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class Wassup_Newsletter_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -16,7 +16,7 @@ class Wassup_Newsletter_Module_MainContentRouteModuleProcessor extends \PoP\Appl
             POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION => [PoP_Newsletter_Module_Processor_Blocks::class, PoP_Newsletter_Module_Processor_Blocks::MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;

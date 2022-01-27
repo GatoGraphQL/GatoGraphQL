@@ -1,10 +1,9 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 class PoP_CSSConverter_Installation
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('PoP:system-build', array($this, 'systemBuild'));
+        \PoP\Root\App::addAction('PoP:system-build', array($this, 'systemBuild'));
     }
 
     public function systemBuild()

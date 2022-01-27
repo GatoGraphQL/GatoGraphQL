@@ -1,19 +1,19 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoP\Root\App;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 // These are Notification names as defined in the Gravity Forms settings for the form
 define('GD_GF_NOTIFICATION_PROFILES', 'Notification to Profiles');
 define('GD_GF_NOTIFICATION_POSTAUTHORS', 'Notification to Post Owners');
 define('GD_GF_NOTIFICATION_DESTINATIONEMAIL', 'Notification to Destination Email');
 
-HooksAPIFacade::getInstance()->addFilter("gform_notification", "gdGfChangeAutoresponderEmailProfiles", 10, 3);
+\PoP\Root\App::addFilter("gform_notification", "gdGfChangeAutoresponderEmailProfiles", 10, 3);
 function gdGfChangeAutoresponderEmailProfiles($notification, $form, $entry)
 {
     if ($notification['name'] == GD_GF_NOTIFICATION_PROFILES) {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        if ($profiles_ids = $_POST[\PoPSchema\Users\Constants\InputNames::USER_ID] ?? []) {
+        if ($profiles_ids = App::getRequest()->request->all()[\PoPCMSSchema\Users\Constants\InputNames::USER_ID] ?? []) {
             $emails = array();
             $profiles = explode(',', $profiles_ids);
             foreach ($profiles as $profile_id) {
@@ -27,12 +27,12 @@ function gdGfChangeAutoresponderEmailProfiles($notification, $form, $entry)
     return $notification;
 }
 
-HooksAPIFacade::getInstance()->addFilter("gform_notification", "gdGfChangeAutoresponderEmailPostowners", 10, 3);
+\PoP\Root\App::addFilter("gform_notification", "gdGfChangeAutoresponderEmailPostowners", 10, 3);
 function gdGfChangeAutoresponderEmailPostowners($notification, $form, $entry)
 {
     if ($notification['name'] == GD_GF_NOTIFICATION_POSTAUTHORS) {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        if ($post_ids = $_POST[\PoPSchema\Posts\Constants\InputNames::POST_ID] ?? []) {
+        if ($post_ids = App::getRequest()->request->all()[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID] ?? []) {
             $emails = array();
             foreach (explode(',', $post_ids) as $post_id) {
                 $profiles = gdGetPostauthors($post_id);
@@ -50,7 +50,7 @@ function gdGfChangeAutoresponderEmailPostowners($notification, $form, $entry)
 
 
 // Add the general layout of the MESYM newsletters to the email
-HooksAPIFacade::getInstance()->addFilter("gform_notification", "gdGfEmailLayout", 10, 3);
+\PoP\Root\App::addFilter("gform_notification", "gdGfEmailLayout", 10, 3);
 function gdGfEmailLayout($notification, $form, $entry)
 {
     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
@@ -65,11 +65,11 @@ function gdGfEmailLayout($notification, $form, $entry)
 
     // Check if the recipient of the email is known. If so, extract their names
     if ($notification['name'] == GD_GF_NOTIFICATION_PROFILES) {
-        if ($ids = $_POST[\PoPSchema\Users\Constants\InputNames::USER_ID] ?? []) {
+        if ($ids = App::getRequest()->request->all()[\PoPCMSSchema\Users\Constants\InputNames::USER_ID] ?? []) {
             $user_ids = explode(',', $ids);
         }
     } elseif ($notification['name'] == GD_GF_NOTIFICATION_POSTAUTHORS) {
-        if ($post_ids = $_POST[\PoPSchema\Posts\Constants\InputNames::POST_ID] ?? []) {
+        if ($post_ids = App::getRequest()->request->all()[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID] ?? []) {
             foreach (explode(',', $post_ids) as $post_id) {
                 $user_ids = array_merge(
                     $user_ids,

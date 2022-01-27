@@ -1,8 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\ChangeUserPasswordMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\InviteUsersMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\UpdateMyPreferencesMutationResolverBridge;
@@ -81,8 +80,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYPREFERENCES:
-                $vars = ApplicationState::getVars();
-                return $vars['global-userstate']['current-user-id'];
+                return \PoP\Root\App::getState('current-user-id');
         }
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
@@ -145,10 +143,9 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
 
     public function initModelProps(array $module, array &$props): void
     {
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
-                if ($extra_checkpoint_msgs = HooksAPIFacade::getInstance()->applyFilters(
+                if ($extra_checkpoint_msgs = \PoP\Root\App::applyFilters(
                     'PoP_UserLogin_Module_Processor_Blocks:extra-checkpoint-msgs:change-pwd',
                     array(),
                     $module

@@ -1,8 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -23,7 +22,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
     {
         $ret = parent::getInnerSubmodules($module);
 
-        $orientation = HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, 'vertical');
+        $orientation = \PoP\Root\App::applyFilters(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, 'vertical');
         $vertical = ($orientation == 'vertical');
 
         $block_inners = array(
@@ -46,10 +45,10 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
     // {
     //     switch ($module[1]) {
     //         case self::MODULE_DATALOAD_TAG_SIDEBAR:
-    //             return TagRouteNatures::TAG;
+    //             return TagRequestNature::TAG;
 
     //         case self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR:
-    //             return CustomPostRouteNatures::CUSTOMPOST;
+    //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

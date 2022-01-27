@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class GD_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_WidgetsBase
 {

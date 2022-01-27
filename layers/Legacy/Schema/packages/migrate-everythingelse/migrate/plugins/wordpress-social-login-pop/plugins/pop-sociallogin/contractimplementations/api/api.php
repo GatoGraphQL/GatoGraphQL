@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\UserMeta\Facades\UserMetaTypeAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\UserMeta\Facades\UserMetaTypeAPIFacade;
 
 class WSLPoP_SocialLogin_API extends PoP_SocialLogin_API_Base implements PoP_SocialLogin_API
 {

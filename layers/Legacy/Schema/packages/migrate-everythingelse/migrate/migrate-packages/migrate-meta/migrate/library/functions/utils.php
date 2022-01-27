@@ -1,5 +1,5 @@
 <?php
-namespace PoPSchema\Meta;
+namespace PoPCMSSchema\Meta;
 
 class Utils
 {

@@ -10,11 +10,10 @@ class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
     public function getSubmodules(array $module): array
     {
         // If fetching a page, then load only the required pageSection modules and nothing else
-        $vars = ApplicationState::getVars();
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var Page */
         $page = $instanceManager->getInstance(Page::class);
-        if (isset($vars['modulefilter']) && $vars['modulefilter'] == $page->getName()) {
+        if (\PoP\Root\App::getState('modulefilter') == $page->getName()) {
             $ret = array();
 
             switch ($module[1]) {

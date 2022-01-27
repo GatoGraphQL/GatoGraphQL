@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_UserLoginWP_WP_EmailSender_Hooks
 {
@@ -8,14 +7,14 @@ class PoP_UserLoginWP_WP_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Functional emails
         //----------------------------------------------------------------------
-        HooksAPIFacade::getInstance()->addAction('retrieve_password_key', array($this, 'retrievePasswordKey'));
-        HooksAPIFacade::getInstance()->addFilter('send_password_change_email', array($this, 'donotsend'), PHP_INT_MAX, 1);
-        HooksAPIFacade::getInstance()->addFilter('send_email_change_email', array($this, 'donotsend'), PHP_INT_MAX, 1);
+        \PoP\Root\App::addAction('retrieve_password_key', array($this, 'retrievePasswordKey'));
+        \PoP\Root\App::addFilter('send_password_change_email', array($this, 'donotsend'), PHP_INT_MAX, 1);
+        \PoP\Root\App::addFilter('send_email_change_email', array($this, 'donotsend'), PHP_INT_MAX, 1);
     }
 
     public function retrievePasswordKey()
     {
-        HooksAPIFacade::getInstance()->addFilter('wp_mail_content_type', array($this, 'setHtmlContentType'));
+        \PoP\Root\App::addFilter('wp_mail_content_type', array($this, 'setHtmlContentType'));
     }
     public function setHtmlContentType($content_type)
     {

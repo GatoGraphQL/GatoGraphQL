@@ -1,11 +1,11 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
-use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
+use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
@@ -317,8 +317,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
-                $vars = ApplicationState::getVars();
-                $author = $vars['routing-state']['queried-object-id'];
+                $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return sprintf(
                     '<br/><p class="text-center"><a href="%s">%s</a></p>',
                     $userTypeAPI->getUserURL($author),

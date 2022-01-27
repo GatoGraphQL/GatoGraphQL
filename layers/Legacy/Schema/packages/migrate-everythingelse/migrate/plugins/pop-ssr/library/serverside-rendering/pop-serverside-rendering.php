@@ -1,9 +1,8 @@
 <?php
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_ServerSideRendering
 {
@@ -40,8 +39,8 @@ class PoP_ServerSideRendering
         // Obtain the JSON from the Engine
         if (!$this->data) {
             // The JSON is already encoded, as a String, so we must decode it to transformt it into an array
-            $engine = EngineFacade::getInstance();
-            $this->data = $engine->data;
+            $engineState = App::getEngineState();
+            $this->data = $engineState->data;
         }
     }
 
@@ -210,8 +209,7 @@ class PoP_ServerSideRendering
 
         // If the target was provided, then check that the current page has that target to render the html
         // Eg: addons pageSection must have target "addons", if not do nothing
-        $vars = ApplicationState::getVars();
-        if (!is_null($target) && $target != $vars['target']) {
+        if (!is_null($target) && $target != \PoP\Root\App::getState('target')) {
             return '';
         }
 

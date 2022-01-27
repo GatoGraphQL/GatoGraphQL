@@ -5,8 +5,8 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 
 class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends AbstractObjectTypeFieldResolver
 {

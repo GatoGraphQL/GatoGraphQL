@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CommentMeta;
 
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CommentMetaWP\Component::class,
+            \PoPCMSSchema\CommentMetaWP\Component::class,
             \PoPWPSchema\Comments\Component::class,
             \PoPWPSchema\Meta\Component::class,
         ];
@@ -31,8 +31,8 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);

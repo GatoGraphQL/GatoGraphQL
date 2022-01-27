@@ -6,7 +6,6 @@ Description: Implementations of automated emails for PoP
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_CommonAutomatedEmails
     {
 
         // Priority: after PoP Automated Emails
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888420);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888420);
     }
 
     public function init()

@@ -1,8 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsDaterangeImpl');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'gdJqueryConstantsDaterangeImpl');
 function gdJqueryConstantsDaterangeImpl($jqueryConstants)
 {
     $jqueryConstants['DATERANGE_SEPARATOR'] = ' - ';

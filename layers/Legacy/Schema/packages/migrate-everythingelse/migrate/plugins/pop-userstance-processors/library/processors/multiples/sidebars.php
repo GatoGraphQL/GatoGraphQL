@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
@@ -53,7 +52,7 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
         switch ($module[1]) {
             case self::MODULE_MULTIPLE_AUTHOR_STANCES_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR:
-                $ret = HooksAPIFacade::getInstance()->applyFilters(
+                $ret = \PoP\Root\App::applyFilters(
                     'PoPVP_Module_Processor_SidebarMultiples:inner-modules:authorstances',
                     $ret
                 );

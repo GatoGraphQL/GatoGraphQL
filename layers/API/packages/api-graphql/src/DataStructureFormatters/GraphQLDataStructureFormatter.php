@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLAPI\DataStructureFormatters;
+namespace PoPAPI\GraphQLAPI\DataStructureFormatters;
 
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use PoP\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
+use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 use PoP\ComponentModel\Feedback\Tokens;
 
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
@@ -17,7 +17,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return 'graphql';
     }
 
-    public function getFormattedData($data)
+    public function getFormattedData(array $data): array
     {
         $ret = [];
 
@@ -140,17 +140,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
 
         if ($resultData = parent::getFormattedData($data)) {
-            // // GraphQL places the queried data under entries 'data' => query => results
-            // // Replicate this structure. Because we don't have a query name here,
-            // // replace it with the queried URL path, which is known to the client
-            // $path = RoutingUtils::getURLPath();
-            // // If there is no path, it is the single point of entry (homepage => root)
-            // if (!$path) {
-            //     $path = '/';
-            // }
-            // $ret['data'] = [
-            //     $path => $resultData,
-            // ];
             $ret['data'] = $resultData;
         }
 

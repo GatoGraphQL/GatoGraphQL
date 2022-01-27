@@ -6,7 +6,6 @@ Description: Implementation of processors for the Typeahead for the Platform of 
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -21,7 +20,7 @@ class PoP_TypeaheadProcessors
     {
 
         // Priority: after PoP Application Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888810);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888810);
     }
     public function init()
     {

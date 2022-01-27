@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\FormInputs\SelectFormInput;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_FormInput_SettingsFormat extends SelectFormInput
 {
@@ -38,8 +38,7 @@ class GD_FormInput_SettingsFormat extends SelectFormInput
 
     public function getDefaultValue(): mixed
     {
-        $vars = ApplicationState::getVars();
-        if ($selected = $vars['settingsformat']) {
+        if ($selected = \PoP\Root\App::getState('settingsformat')) {
             $allvalues = array(
                 POP_FORMAT_SIMPLEVIEW,
                 POP_FORMAT_FULLVIEW,

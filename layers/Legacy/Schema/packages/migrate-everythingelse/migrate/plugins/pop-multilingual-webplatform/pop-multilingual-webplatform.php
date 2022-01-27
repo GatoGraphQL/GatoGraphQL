@@ -6,7 +6,6 @@ Description: Implementation of PoP Multilingual Web Platform for PoP
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('POP_MULTILINGUALWEBPLATFORM_VERSION', 0.109);
 define('POP_MULTILINGUALWEBPLATFORM_DIR', dirname(__FILE__));
@@ -17,7 +16,7 @@ class PoP_MultilingualWebPlatform
     {
 
         // Priority: after PoP Application Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888510);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888510);
     }
 
     public function init()

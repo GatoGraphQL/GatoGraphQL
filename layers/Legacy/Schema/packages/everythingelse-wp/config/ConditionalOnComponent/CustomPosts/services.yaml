@@ -4,6 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface:
+    PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface:
         class: \PoPSchema\EverythingElseWP\ConditionalOnComponent\CustomPosts\TypeAPIs\CustomPostTypeAPI
 

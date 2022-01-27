@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Processor_ButtonGroupsBase
 {

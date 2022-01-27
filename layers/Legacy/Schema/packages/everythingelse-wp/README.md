@@ -16,7 +16,7 @@ Implementation for WordPress of contracts from package "EverythingElse"
 Via Composer
 
 ``` bash
-composer require pop-schema/everythingelse-wp
+composer require pop-cms-schema/everythingelse-wp
 ```
 
 ## Development
@@ -103,17 +103,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-schema/everythingelse-wp.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/everythingelse-wp.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-schema/everythingelse-wp/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema/everythingelse-wp.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema/everythingelse-wp.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema/everythingelse-wp.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-cms-schema/everythingelse-wp/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/everythingelse-wp.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/everythingelse-wp.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/everythingelse-wp.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-schema/everythingelse-wp
-[link-travis]: https://travis-ci.org/pop-schema/everythingelse-wp
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/everythingelse-wp/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/everythingelse-wp
-[link-downloads]: https://packagist.org/packages/pop-schema/everythingelse-wp
+[link-packagist]: https://packagist.org/packages/pop-cms-schema/everythingelse-wp
+[link-travis]: https://travis-ci.org/pop-cms-schema/everythingelse-wp
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/everythingelse-wp/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/everythingelse-wp
+[link-downloads]: https://packagist.org/packages/pop-cms-schema/everythingelse-wp
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

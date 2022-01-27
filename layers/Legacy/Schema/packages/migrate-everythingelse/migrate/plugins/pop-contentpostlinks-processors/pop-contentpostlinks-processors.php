@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Content Post Links Processors
 Description: Implementation of Content Post Links Processors for PoP
@@ -20,7 +19,7 @@ class PoP_ContentPostLinksProcessors
     {
 
         // Priority: after PoP Category Posts Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888830);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888830);
     }
     public function init()
     {

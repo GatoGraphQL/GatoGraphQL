@@ -6,7 +6,6 @@ Description: Implementation of PoP User Communities
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_UserCommunities
     {
 
         // Priority: after PoP Social Network
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888370);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888370);
     }
     public function init()
     {

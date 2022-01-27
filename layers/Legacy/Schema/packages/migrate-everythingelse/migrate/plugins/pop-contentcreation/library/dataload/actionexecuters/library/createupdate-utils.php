@@ -1,6 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPCMSSchema\CustomPosts\Types\Status;
 
 class GD_CreateUpdate_Utils
 {
@@ -8,7 +7,7 @@ class GD_CreateUpdate_Utils
     {
 
         // Global constant defining if posts in the website can be created straight or subject to moderation
-        return HooksAPIFacade::getInstance()->applyFilters('GD_CreateUpdate_Utils:moderate', false);
+        return \PoP\Root\App::applyFilters('GD_CreateUpdate_Utils:moderate', false);
     }
 
     public static function getUpdatepostStatus($status, $moderate)

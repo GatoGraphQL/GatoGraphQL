@@ -1,9 +1,9 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Types\Status;
+use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Notifications_Utils
 {
@@ -31,8 +31,7 @@ class PoP_Notifications_Utils
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         if (!$user_id) {
-            $vars = ApplicationState::getVars();
-            $user_id = $vars['global-userstate']['current-user-id'];
+            $user_id = \PoP\Root\App::getState('current-user-id');
         }
 
         self::insertLog(

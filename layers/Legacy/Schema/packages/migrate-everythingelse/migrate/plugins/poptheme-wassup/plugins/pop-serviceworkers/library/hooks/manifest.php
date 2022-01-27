@@ -1,19 +1,18 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPTheme_Wassup_ServiceWorkers_Hooks_Manifest
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_ServiceWorkersManager:manifest:icons',
             array($this, 'icons')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_ServiceWorkersManager:manifest:theme_color',
             array($this, 'color')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_ServiceWorkersManager:manifest:background_color',
             array($this, 'color')
         );
@@ -21,7 +20,7 @@ class PoPTheme_Wassup_ServiceWorkers_Hooks_Manifest
 
     public function color($color)
     {
-        if ($appcolor = HooksAPIFacade::getInstance()->applyFilters('PoPTheme_Wassup_ServiceWorkers_Hooks_Manifest:color', '')) {
+        if ($appcolor = \PoP\Root\App::applyFilters('PoPTheme_Wassup_ServiceWorkers_Hooks_Manifest:color', '')) {
             return $appcolor;
         }
         
@@ -38,7 +37,7 @@ class PoPTheme_Wassup_ServiceWorkers_Hooks_Manifest
             '512x512',
         );
 
-        $imagename = HooksAPIFacade::getInstance()->applyFilters('PoPTheme_Wassup_ServiceWorkers_Hooks_Manifest:imagename', 'launcher-icon-');
+        $imagename = \PoP\Root\App::applyFilters('PoPTheme_Wassup_ServiceWorkers_Hooks_Manifest:imagename', 'launcher-icon-');
         $htmlcssplatformapi = \PoP\EngineHTMLCSSPlatform\FunctionAPIFactory::getInstance();
         $path = $htmlcssplatformapi->getAssetsDirectoryURI().'/';
 

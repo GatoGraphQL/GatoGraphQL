@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
+use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 /**
  * Integration with Latest Everything Block
  */
-HooksAPIFacade::getInstance()->addFilter('pop_module:allcontent:tax_query_items', 'popLocationpostsSearchablecontentTaxquery');
+\PoP\Root\App::addFilter('pop_module:allcontent:tax_query_items', 'popLocationpostsSearchablecontentTaxquery');
 function popLocationpostsSearchablecontentTaxquery($tax_query_items)
 {
     if (POP_LOCATIONPOSTS_CAT_ALL) {
@@ -29,10 +28,10 @@ function popLocationpostsSearchablecontentTaxquery($tax_query_items)
  * Needed to add the "All" category to all events, to list them for the Latest Everything Block
  */
 // Do always add the 'All' Category when creating/updating a locationpost
-HooksAPIFacade::getInstance()->addAction('init', 'popLocationpostsInitAddAllCategory');
+\PoP\Root\App::addAction('init', 'popLocationpostsInitAddAllCategory');
 function popLocationpostsInitAddAllCategory()
 {
-    HooksAPIFacade::getInstance()->addAction('save_post_'.POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST, 'popLocationpostsAddAllCategory', 10, 1);
+    \PoP\Root\App::addAction('save_post_'.POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST, 'popLocationpostsAddAllCategory', 10, 1);
 }
 function popLocationpostsAddAllCategory($post_id)
 {

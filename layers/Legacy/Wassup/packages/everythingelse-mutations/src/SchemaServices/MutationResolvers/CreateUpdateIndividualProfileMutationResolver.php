@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoPSchema\UserMeta\Utils;
+use PoPCMSSchema\UserMeta\Utils;
 class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileMutationResolver
 {
     use CreateUpdateIndividualProfileMutationResolverTrait;

@@ -1,15 +1,14 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Bootstrap_ResourceLoader_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'getBootstrapFontUrl:pathkey',
             array($this, 'getPathkey')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'getBootstrapFontPath',
             array($this, 'getFontPath'),
             10,

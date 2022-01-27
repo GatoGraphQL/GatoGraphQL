@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
 final class MergePhpstanCommand extends AbstractSymplifyCommand
@@ -28,6 +28,7 @@ final class MergePhpstanCommand extends AbstractSymplifyCommand
 
     protected function configure(): void
     {
+        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Create the PHPStan config for the monorepo, including all PHPStan config files from all packages');
         $this->addOption(
             Option::OUTPUT_FILE,
@@ -55,6 +56,6 @@ final class MergePhpstanCommand extends AbstractSymplifyCommand
         $outputFilePath = (string) $input->getOption(Option::OUTPUT_FILE);
         $this->neonFilePrinter->printContentToOutputFile($neonFileContent, $outputFilePath);
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

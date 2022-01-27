@@ -1,10 +1,9 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * Create page on the initial user welcome email
  */
-HooksAPIFacade::getInstance()->addFilter('sendemailUserwelcome:create_routes', 'popLocationpostlinkscreationSendemailCreateRoutes');
+\PoP\Root\App::addFilter('sendemailUserwelcome:create_routes', 'popLocationpostlinkscreationSendemailCreateRoutes');
 function popLocationpostlinkscreationSendemailCreateRoutes($routes)
 {
     $routes = array_merge(

@@ -18,12 +18,14 @@ use Isolated\Symfony\Component\Finder\Finder;
  * Excluding the WordPress packages is feasible, because they do
  * not reference any external library.
  *
- * The only exception is getpop/routing-wp, which uses Brain\Cortex:
+ * The only exceptions are:
+ * 
+ * 1. getpop/root-wp, which uses Brain\Cortex:
  *
- * in getpop/routing-wp/src/Component.php:
+ * in getpop/root-wp/src/Component.php:
  *   use Brain\Cortex;
  *
- * in getpop/routing-wp/src/Hooks/SetupCortexHookSet.php:
+ * in getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php:
  *   use Brain\Cortex\Route\RouteCollectionInterface;
  *   use Brain\Cortex\Route\RouteInterface;
  *   use Brain\Cortex\Route\QueryRoute;
@@ -49,34 +51,36 @@ return [
                 'tests',
             ])
             ->notPath([
-                // Exclude libraries ending in "-wp"
-                '#getpop/[a-zA-Z0-9_-]*-wp/#',
-                '#pop-schema/[a-zA-Z0-9_-]*-wp/#',
-                '#graphql-by-pop/[a-zA-Z0-9_-]*-wp/#',
-                // Exclude libraries from WPSchema
+                // Exclude all libraries for WordPress
+                // 1. Exclude libraries ending in "-wp" from general packages
+                '#[getpop|graphql\-by\-pop|pop\-api|pop\-cms\-schema]/[a-zA-Z0-9_-]*-wp/#',
+                // 2. Exclude all libraries from WPSchema
                 '#pop-wp-schema/#',
                 // Exclude all composer.json from own libraries (they get broken!)
-                '#[getpop|pop\-backbone|pop\-schema|pop\-wp\-schema|graphql\-by\-pop|graphql\-api]/*/composer.json#',
+                '#[getpop|graphql\-api|graphql\-by\-pop|pop\-api|pop\-backbone|pop\-cms\-schema|pop\-schema|pop\-wp\-schema]/*/composer.json#',
                 // Exclude libraries
                 '#symfony/deprecation-contracts/#',
                 '#ralouphie/getallheaders/#',
                 // Exclude tests from libraries
                 '#nikic/fast-route/test/#',
                 '#psr/log/Psr/Log/Test/#',
+                '#symfony/http-foundation/Test/#',
                 '#symfony/service-contracts/Test/#',
                 '#michelf/php-markdown/test/#',
             ])
             ->in(convertRelativeToFullPath('vendor')),
         Finder::create()->append([
-            convertRelativeToFullPath('vendor/getpop/routing-wp/src/Component.php'),
-            convertRelativeToFullPath('vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php'),
+            convertRelativeToFullPath('vendor/getpop/root-wp/src/Component.php'),
+            convertRelativeToFullPath('vendor/getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php'),
         ])
     ],
     'whitelist' => array_values(array_unique([
         // Own namespaces
         // Watch out! Do NOT alter the order of PoPSchema, PoPWPSchema and PoP!
         // If PoP comes first, then PoPSchema is still scoped!
+        'PoPAPI\*',
         'PoPBackbone\*',
+        'PoPCMSSchema\*',
         'PoPSchema\*',
         'PoPWPSchema\*',
         'PoP\*',
@@ -186,6 +190,23 @@ return [
                 return str_replace(
                     "\\${prefix}\\parent",
                     'parent',
+                    $content
+                );
+            }
+            /**
+             * In these files, it prefixes the return type `self`.
+             * Undo it!
+             */
+            $symfonyPolyfillFilesWithSelfReturnType = array_map(
+                'convertRelativeToFullPath',
+                [
+                    'vendor/symfony/dependency-injection/Compiler/AutowirePass.php',
+                ]
+            );
+            if (in_array($filePath, $symfonyPolyfillFilesWithSelfReturnType)) {
+                return str_replace(
+                    "\\${prefix}\\self",
+                    'self',
                     $content
                 );
             }

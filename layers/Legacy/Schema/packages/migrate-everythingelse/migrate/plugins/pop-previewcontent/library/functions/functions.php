@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Types\Status;
 
-HooksAPIFacade::getInstance()->addFilter('gd-createupdate-post:execute:successstring', 'gdPppCreateupdateAddPreviewLink', 10, 3);
+\PoP\Root\App::addFilter('gd-createupdate-post:execute:successstring', 'gdPppCreateupdateAddPreviewLink', 10, 3);
 function gdPppCreateupdateAddPreviewLink($success_string, $post_id, $status)
 {
     if (in_array($status, array(Status::DRAFT, Status::PENDING))) {
@@ -13,9 +12,9 @@ function gdPppCreateupdateAddPreviewLink($success_string, $post_id, $status)
         $previewurl = $pluginapi->getPreviewLink($post_id);
 
         // Allow to inject data-sw-networkfirst="true"
-        $previewurl_params = HooksAPIFacade::getInstance()->applyFilters('gd_ppp_previewurl_link_params', '');
+        $previewurl_params = \PoP\Root\App::applyFilters('gd_ppp_previewurl_link_params', '');
         if ($previewurl) {
-            $previewurl_target = HooksAPIFacade::getInstance()->applyFilters('gd_ppp_previewurl_target', \PoP\ComponentModel\Constants\Targets::MAIN);
+            $previewurl_target = \PoP\Root\App::applyFilters('gd_ppp_previewurl_target', \PoP\ConfigurationComponentModel\Constants\Targets::MAIN);
             $success_string .= sprintf(
                 ' <a href="%1$s" target="%2$s" class="btn btn-xs btn-primary" %4$s><i class="fa fa-fw fa-eye"></i>%3$s</a>',
                 $previewurl,
@@ -29,7 +28,7 @@ function gdPppCreateupdateAddPreviewLink($success_string, $post_id, $status)
     return $success_string;
 }
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::addFilter(
     AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
     'gdPppAddPublicPreview',
     10,

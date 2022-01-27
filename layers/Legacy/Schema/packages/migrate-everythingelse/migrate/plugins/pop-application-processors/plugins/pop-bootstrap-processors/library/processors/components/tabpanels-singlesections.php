@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Processor_SingleSectionTabPanelComponentsBase
 {
@@ -101,7 +100,7 @@ class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Pr
         }
 
         // Allow Events Manager to add the Map format
-        $ret = HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_SingleSectionTabPanelComponents:modules', $ret, $module);
+        $ret = \PoP\Root\App::applyFilters('PoP_Module_Processor_SingleSectionTabPanelComponents:modules', $ret, $module);
 
         return $ret;
     }
@@ -195,7 +194,7 @@ class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Pr
         }
 
         if ($ret) {
-            return HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_SingleSectionTabPanelComponents:panel_headers', $ret, $module);
+            return \PoP\Root\App::applyFilters('PoP_Module_Processor_SingleSectionTabPanelComponents:panel_headers', $ret, $module);
         }
 
         return parent::getPanelHeaders($module, $props);

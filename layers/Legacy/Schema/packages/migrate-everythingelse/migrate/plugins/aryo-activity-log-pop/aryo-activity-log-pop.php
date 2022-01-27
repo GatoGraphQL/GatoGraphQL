@@ -6,7 +6,6 @@ Description: Activity Log for the Platform of Platforms (PoP)
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('AAL_POP_VERSION', 0.107);
 define('AAL_POP_DIR', dirname(__FILE__));
@@ -24,13 +23,13 @@ class AAL_PoP
         include_once 'maintenance/load.php';
 
         include_once 'validation.php';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Notifications_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
 
         // Priority: after PoP Notifications
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function getProviderValidationClass($class)
     {

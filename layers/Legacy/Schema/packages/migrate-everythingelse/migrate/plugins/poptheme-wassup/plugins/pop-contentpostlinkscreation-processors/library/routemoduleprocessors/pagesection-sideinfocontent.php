@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoPTheme_Wassup_ContentPostLinksCreation_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -15,7 +15,7 @@ class PoPTheme_Wassup_ContentPostLinksCreation_Module_SideInfoContentPageSection
             POP_CONTENTPOSTLINKSCREATION_ROUTE_MYCONTENTPOSTLINKS => [PoP_ContentPostLinksCreation_Module_Processor_SidebarMultiples::class, PoP_ContentPostLinksCreation_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYCONTENTPOSTLINKS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;

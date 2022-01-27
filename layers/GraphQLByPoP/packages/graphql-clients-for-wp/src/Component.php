@@ -4,18 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLClientsForWP;
 
-use PoP\Root\App;
-use GraphQLByPoP\GraphQLServer\Component as GraphQLServerComponent;
-use PoP\BasicService\Component\AbstractComponent;
-use PoP\Root\Component\CanDisableComponentTrait;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use CanDisableComponentTrait;
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -24,9 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\APIClients\Component::class,
-            \PoP\APIEndpointsForWP\Component::class,
-            \GraphQLByPoP\GraphQLServer\Component::class,
+            \PoPAPI\APIClients\Component::class,
+            \PoPAPI\APIEndpointsForWP\Component::class,
         ];
     }
 
@@ -36,21 +30,14 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
-        if ($this->isEnabled()) {
-            $this->initServices(dirname(__DIR__));
-            /** @var ComponentConfiguration */
-            $componentConfiguration = $this->getConfiguration();
-            if ($componentConfiguration->useGraphiQLExplorer()) {
-                $this->initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
-            }
+        $this->initServices(dirname(__DIR__));
+        /** @var ComponentConfiguration */
+        $componentConfiguration = $this->getConfiguration();
+        if ($componentConfiguration->useGraphiQLExplorer()) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
         }
-    }
-
-    protected function resolveEnabled(): bool
-    {
-        return App::getComponent(GraphQLServerComponent::class)->isEnabled();
     }
 }

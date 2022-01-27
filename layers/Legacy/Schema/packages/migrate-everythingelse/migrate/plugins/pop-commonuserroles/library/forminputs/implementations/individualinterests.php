@@ -1,6 +1,5 @@
 <?php
 use PoP\Engine\FormInputs\MultipleSelectFormInput;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_FormInput_IndividualInterests extends MultipleSelectFormInput
 {
@@ -11,7 +10,7 @@ class GD_FormInput_IndividualInterests extends MultipleSelectFormInput
         // The values here must be input from outside, to allow any potential website to add their own LinkCategories conveniently
         $values = array_merge(
             $values,
-            HooksAPIFacade::getInstance()->applyFilters('wassup_individualinterests', array())
+            \PoP\Root\App::applyFilters('wassup_individualinterests', array())
         );
 
         return $values;

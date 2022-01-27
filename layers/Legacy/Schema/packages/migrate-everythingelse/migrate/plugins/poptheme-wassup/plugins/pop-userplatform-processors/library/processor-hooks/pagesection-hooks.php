@@ -1,16 +1,15 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPTheme_Wassup_PoPCore_PageSectionHooks
 {
     public function __construct()
     {
-        // HooksAPIFacade::getInstance()->addFilter(
+        // \PoP\Root\App::addFilter(
         //     'PoP_Module_Processor_CustomModalPageSections:getHeaderTitles:modals',
         //     array($this, 'modalHeaderTitles')
         // );
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'PoP_Module_Processor_CustomModalPageSections:get_props_block_initial:modals',
             array($this, 'initModelProps'),
             10,

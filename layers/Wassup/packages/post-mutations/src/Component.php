@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\PostMutations;
 
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSitesWassup\CustomPostMutations\Component::class,
-            \PoPSchema\PostMutations\Component::class,
+            \PoPCMSSchema\PostMutations\Component::class,
         ];
     }
 
@@ -30,8 +30,8 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }

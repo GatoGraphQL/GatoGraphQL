@@ -2,10 +2,8 @@
 use PoP\Application\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQueryDataModuleProcessor
 {
@@ -56,7 +54,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
     public function getID(array $module, array &$props): string
     {
-        $moduleOutputName = ModuleUtils::getModuleOutputName($module);
+        $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($module);
         // if ($this->fixedId($module, $props)) {
         // 	$pagesection_settings_id = $props['pagesection-moduleoutputname'];
         // 	$block_settings_id = $props['block-moduleoutputname'];
@@ -193,7 +191,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
     // 	$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
-    // 	$moduleOutputName = ModuleUtils::getModuleOutputName($module);
+    // 	$moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($module);
 
     // 	// Return initialized empty array at the last level
     // 	$ret = array();
@@ -231,8 +229,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         $ret = parent::getMutableonrequestConfiguration($module, $props);
 
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
             return $ret;
         }
 
@@ -248,7 +245,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         }
 
         // Allow CSS to Styles to modify these value
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_HTMLCSSPlatformQueryDataModuleProcessorBase:module-mutableonrequest-configuration',
             $ret,
             $module,
@@ -268,8 +265,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         $ret = parent::getImmutableConfiguration($module, $props);
 
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
             return $ret;
         }
 
@@ -311,7 +307,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         if ($previousmodules_ids = $this->getProp($module, $props, 'previousmodules-ids')) {
             // We receive entries of key => module, convert them to key => moduleOutputName
             $ret[GD_JS_PREVIOUSMODULESIDS] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $previousmodules_ids
             );
         }
@@ -332,7 +328,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         }
 
         // Allow PoP Resource Loader to inject this value
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'PoP_HTMLCSSPlatformQueryDataModuleProcessorBase:module-immutable-configuration',
             $ret,
             $module,
@@ -365,8 +361,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     public function initModelProps(array $module, array &$props): void
     {
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
+        if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
 
             if ($dbobject_params = $this->getDbobjectParams($module)) {
                 $this->mergeProp($module, $props, 'dbobject-params', $dbobject_params);
@@ -391,8 +386,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     public function initRequestProps(array $module, array &$props): void
     {
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
+        if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
             $this->initHTMLCSSPlatformRequestProps($module, $props);
         }
         parent::initRequestProps($module, $props);

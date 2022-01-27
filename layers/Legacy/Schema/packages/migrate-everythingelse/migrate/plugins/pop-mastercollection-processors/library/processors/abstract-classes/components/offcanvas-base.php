@@ -1,6 +1,5 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_OffcanvasBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -74,7 +73,7 @@ abstract class PoP_Module_Processor_OffcanvasBase extends PoPEngine_QueryDataMod
         }
         if ($submodules = $this->getSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'],
+                [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $submodules
             );
         }

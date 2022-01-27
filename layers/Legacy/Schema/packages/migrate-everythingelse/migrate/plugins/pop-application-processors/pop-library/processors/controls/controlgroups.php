@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
@@ -80,7 +79,7 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
 
             case self::MODULE_CONTROLGROUP_BLOCKAUTHORPOSTLIST:
                 // Allow URE to add the Switch Organization/Organization+Members if the author is an organization
-                $layouts = HooksAPIFacade::getInstance()->applyFilters(
+                $layouts = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomControlGroups:blockauthorpostlist:layouts',
                     array(
                         [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCK],
@@ -181,7 +180,7 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
 
             case self::MODULE_CONTROLGROUP_USERPOSTINTERACTION:
                 // Allow TPPDebate to add the "What do you think about TPP?" before these layouts
-                if ($layouts = HooksAPIFacade::getInstance()->applyFilters(
+                if ($layouts = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomControlGroups:userpostinteraction:layouts',
                     array(
                         [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT],
@@ -198,7 +197,7 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
         }
 
         // Allow PoP Section Processors to add the FAQ buttons
-        if ($layouts = HooksAPIFacade::getInstance()->applyFilters(
+        if ($layouts = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_CustomControlGroups:layouts',
             array(),
             $module

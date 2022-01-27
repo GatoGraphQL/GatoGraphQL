@@ -5,6 +5,7 @@
   bootstrap="lib/bootstrap-phpunit.php"
   colors="true"
   verbose="true"
+  stderr="true"
 >
   <coverage processUncoveredFiles="true">
     <include>
@@ -16,4 +17,7 @@
     <directory>layers/**/packages/**/tests</directory>
     <directory>layers/**/plugins/**/tests</directory>
   </testsuite>
+  <php>
+    <env name="APPLICATION_ENVIRONMENT" value="development"/>
+  </php>
 </phpunit>

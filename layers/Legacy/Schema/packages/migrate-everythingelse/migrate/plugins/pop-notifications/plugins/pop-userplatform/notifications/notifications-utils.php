@@ -1,6 +1,6 @@
 <?php
 
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Notifications_UserPlatform_Utils
 {

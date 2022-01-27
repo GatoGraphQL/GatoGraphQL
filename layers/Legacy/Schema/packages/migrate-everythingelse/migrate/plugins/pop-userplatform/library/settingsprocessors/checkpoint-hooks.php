@@ -1,12 +1,11 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 class PoP_UserPlatform_SettingsProcessor_CheckpointHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'ModuleProcessor:checkpoints',
             array($this, 'overrideCheckpoints')
         );

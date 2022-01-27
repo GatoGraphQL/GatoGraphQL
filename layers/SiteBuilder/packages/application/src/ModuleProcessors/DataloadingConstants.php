@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Application\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants as UpstreamDataloadingConstants;
+use PoP\ConfigurationComponentModel\ModuleProcessors\DataloadingConstants as UpstreamDataloadingConstants;
 
 class DataloadingConstants extends UpstreamDataloadingConstants
 {

@@ -1,6 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
 {
@@ -82,7 +81,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
 
                     if ($module == [self::class, self::MODULE_HTMLCODE_HOMEWELCOMETOP] || $module == [self::class, self::MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP]) {
                              // Allow qTrans to add the language links
-                        $description = HooksAPIFacade::getInstance()->applyFilters(
+                        $description = \PoP\Root\App::applyFilters(
                             'PoP_Module_Processor_HTMLCodes:homewelcometitle',
                             $description,
                             $module

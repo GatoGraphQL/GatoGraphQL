@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels', 'userstanceMultilayoutLabels');
+\PoP\Root\App::addFilter('pop_modulemanager:multilayout_labels', 'userstanceMultilayoutLabels');
 function userstanceMultilayoutLabels($labels)
 {
     $stance_names = PoP_UserStance_PostNameUtils::getTermNames();

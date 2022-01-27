@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
 
+use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
 use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
-use PoP\BasicService\AbstractHookSet;
-use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
+use PoP\Root\Hooks\AbstractHookSet;
+use PoPCMSSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
 use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class QueryHookSet extends AbstractHookSet
 {
@@ -29,7 +30,7 @@ class QueryHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::addFilter(
             CustomPostTypeAPI::HOOK_QUERY,
             [$this, 'convertCustomPostsQuery'],
             10,

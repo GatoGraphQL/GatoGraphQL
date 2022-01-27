@@ -1,13 +1,12 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 // Link to image / Gallery: add "data-size" attr with the dimensions of the pic linked to
 // Problem: This will also add the data-size attr when selecting "Custom Url" option, so that the
 // link is not actually pointing to the image. But as long as that url is not a link to another internal image,
 // which will have its own dimensions, then this is not a serious issue
-HooksAPIFacade::getInstance()->addFilter('wp_get_attachment_link', 'psPopWpGetAttachmentLink', 10, 2);
-HooksAPIFacade::getInstance()->addFilter('image_send_to_editor', 'psPopWpGetAttachmentLink', 10, 2);
-HooksAPIFacade::getInstance()->addFilter('media_send_to_editor', 'psPopWpGetAttachmentLink', 10, 2);
+\PoP\Root\App::addFilter('wp_get_attachment_link', 'psPopWpGetAttachmentLink', 10, 2);
+\PoP\Root\App::addFilter('image_send_to_editor', 'psPopWpGetAttachmentLink', 10, 2);
+\PoP\Root\App::addFilter('media_send_to_editor', 'psPopWpGetAttachmentLink', 10, 2);
 function psPopWpGetAttachmentLink($link, $id)
 {
 

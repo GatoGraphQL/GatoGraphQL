@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Locations Web Platform
 Description: Implementation of Locations Web Platform for PoP
@@ -21,7 +20,7 @@ class PoP_LocationsWebPlatform
     {
 
         // Priority: after PoP User Platform Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888540);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888540);
     }
     public function init()
     {

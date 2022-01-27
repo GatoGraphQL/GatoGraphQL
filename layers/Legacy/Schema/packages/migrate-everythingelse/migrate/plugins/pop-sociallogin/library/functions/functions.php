@@ -1,12 +1,10 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 function getSocialloginProvider($user_id = null)
 {
     if (is_null($user_id)) {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = \PoP\Root\App::getState('current-user-id');
     }
 
     $api = PoP_SocialLogin_APIFactory::getInstance();
@@ -26,7 +24,7 @@ function getSocialloginNetworklinks()
 }
 
 // Change the user's display name
-HooksAPIFacade::getInstance()->addAction(
+\PoP\Root\App::addAction(
     'popcomponent:sociallogin:usercreated', 
     'userNameUpdated', 
     1

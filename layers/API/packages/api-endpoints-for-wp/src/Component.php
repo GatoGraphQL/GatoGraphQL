@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\APIEndpointsForWP;
+namespace PoPAPI\APIEndpointsForWP;
 
-use PoP\BasicService\Component\AbstractComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\APIEndpoints\Component::class,
+            \PoPAPI\APIEndpoints\Component::class,
         ];
     }
 
@@ -29,8 +29,8 @@ class Component extends AbstractComponent
      * @param string[] $skipSchemaComponentClasses
      */
     protected function initializeContainerServices(
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
     }

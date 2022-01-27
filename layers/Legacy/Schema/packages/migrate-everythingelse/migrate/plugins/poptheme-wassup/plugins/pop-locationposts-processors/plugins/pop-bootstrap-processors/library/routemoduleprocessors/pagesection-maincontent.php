@@ -1,8 +1,8 @@
 <?php
 
-use PoP\Routing\RouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPTheme_Wassup_SP_EM_Bootstrap_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -15,7 +15,7 @@ class PoPTheme_Wassup_SP_EM_Bootstrap_Module_MainContentRouteModuleProcessor ext
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks::class, PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_LOCATIONPOSTS],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
@@ -27,7 +27,7 @@ class PoPTheme_Wassup_SP_EM_Bootstrap_Module_MainContentRouteModuleProcessor ext
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelBlocks::class, PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_AUTHORLOCATIONPOSTS],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[UserRouteNatures::USER][$route][] = [
+            $ret[UserRequestNature::USER][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
@@ -39,7 +39,7 @@ class PoPTheme_Wassup_SP_EM_Bootstrap_Module_MainContentRouteModuleProcessor ext
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_TagSectionTabPanelBlocks::class, PoP_LocationPosts_Module_Processor_TagSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_TAGLOCATIONPOSTS],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[TagRouteNatures::TAG][$route][] = [
+            $ret[TagRequestNature::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

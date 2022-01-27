@@ -1,10 +1,9 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsWslImpl');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'gdJqueryConstantsWslImpl');
 function gdJqueryConstantsWslImpl($jqueryConstants)
 {
-    $jqueryConstants['SOCIALLOGIN_LOGINUSER_CLOSETIME'] = HooksAPIFacade::getInstance()->applyFilters('sociallogin:loginuser:closetime', 1500);
+    $jqueryConstants['SOCIALLOGIN_LOGINUSER_CLOSETIME'] = \PoP\Root\App::applyFilters('sociallogin:loginuser:closetime', 1500);
     
     return $jqueryConstants;
 }

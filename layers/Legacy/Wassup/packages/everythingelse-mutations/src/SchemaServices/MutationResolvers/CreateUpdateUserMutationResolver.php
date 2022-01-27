@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\Root\App;
+use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\EditUsers\FunctionAPIFactory;
 
 class CreateUpdateUserMutationResolver extends AbstractMutationResolver
@@ -183,8 +183,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     {
         // If user is logged in => It's Update
         // Otherwise => It's Create
-        $vars = ApplicationState::getVars();
-        if ($vars['global-userstate']['is-user-logged-in']) {
+        if (App::getState('is-user-logged-in')) {
             return $this->update($form_data);
         }
 
@@ -193,23 +192,22 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     protected function additionals($user_id, $form_data): void
     {
-        $this->getHooksAPI()->doAction('gd_createupdate_user:additionals', $user_id, $form_data);
+        App::doAction('gd_createupdate_user:additionals', $user_id, $form_data);
     }
     protected function additionalsUpdate($user_id, $form_data): void
     {
-        $this->getHooksAPI()->doAction('gd_createupdate_user:additionalsUpdate', $user_id, $form_data);
+        App::doAction('gd_createupdate_user:additionalsUpdate', $user_id, $form_data);
     }
     protected function additionalsCreate($user_id, $form_data): void
     {
-        $this->getHooksAPI()->doAction('gd_createupdate_user:additionalsCreate', $user_id, $form_data);
+        App::doAction('gd_createupdate_user:additionalsCreate', $user_id, $form_data);
     }
 
     public function validateErrors(array $form_data): array
     {
         $errors = [];
         $this->validateContent($errors, $form_data);
-        $vars = ApplicationState::getVars();
-        if ($vars['global-userstate']['is-user-logged-in']) {
+        if (App::getState('is-user-logged-in')) {
             $this->validateUpdateContent($errors, $form_data);
         } else {
             $this->validateCreateContent($errors, $form_data);

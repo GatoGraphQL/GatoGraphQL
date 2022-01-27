@@ -1,13 +1,12 @@
 <?php
 use PoP\FileStore\Facades\FileRendererFacade;
 use PoP\FileStore\Facades\FileStoreFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPWebPlatform_SPAResourceLoader_InstallationHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('PoPWebPlatform_Installation:generateResources', array($this, 'generateResources'));
+        \PoP\Root\App::addAction('PoPWebPlatform_Installation:generateResources', array($this, 'generateResources'));
     }
 
     public function generateResources()

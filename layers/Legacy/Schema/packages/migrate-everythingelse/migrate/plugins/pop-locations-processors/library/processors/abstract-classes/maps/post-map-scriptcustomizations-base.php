@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_Module_Processor_MapScriptCustomizationsBase
 {
@@ -91,11 +90,11 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         );
 
         if ($authors_module = $this->getAuthorsModule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['authors'] = ModuleUtils::getModuleOutputName($authors_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['authors'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($authors_module);
             $ret['authors-sep'] = $this->getAuthorsSeparator($module, $props);
         }
         if ($layout_extra = $this->getLayoutExtraSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout-extra'] = ModuleUtils::getModuleOutputName($layout_extra);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout-extra'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout_extra);
         }
 
         return $ret;

@@ -1,6 +1,5 @@
 <?php
-namespace PoPSchema\UserState\Settings;
-use PoP\Hooks\Facades\HooksAPIFacade;
+namespace PoPCMSSchema\UserState\Settings;
 
 abstract class SettingsProcessorBase
 {
@@ -11,8 +10,8 @@ abstract class SettingsProcessorBase
         // all constants have been set by then (otherwise, in file settingsprocessor.pht
         // it may add the configuration under page "POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01",
         // it is not treated as false if the constant has not been defined)
-        HooksAPIFacade::getInstance()->addAction(
-            'popcms:init', 
+        \PoP\Root\App::addAction(
+            'init', // Must migrate this WP hook to one from PoP (which executes before AFTER_BOOT_APPLICATION
             array($this, 'init'), 
             PHP_INT_MAX
         );

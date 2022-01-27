@@ -2,20 +2,11 @@
 
 namespace PoP\ModuleRouting;
 
-use PoP\Root\AbstractTestCase;
+use PoP\Root\AbstractComponentTest;
 
 /**
  * Made abstract to disable the test
  */
-abstract class ComponentTest extends AbstractTestCase
+abstract class ComponentTest extends AbstractComponentTest
 {
-    // /**
-    //  * The component must have some dependency (only the root has not)
-    //  */
-    // public function testHasDependedComponentClasses(): void
-    // {
-    //     $this->assertNotEmpty(
-    //         \PoP\Root\App::getComponent(Component::class)->getDependedComponentClasses()
-    //     );
-    // }
 }

@@ -2,9 +2,7 @@
 define('POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER', 'hook-dataloadingsbase-filteringbyshowfilter');
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
 {
@@ -13,8 +11,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
         $ret = parent::getImmutableConfiguration($module, $props);
 
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
             return $ret;
         }
 
@@ -22,7 +19,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
             if ($this->getProp($module, $props, 'show-filter')) {
                 $ret['show-filter'] = true;
             }
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['filter'] = ModuleUtils::getModuleOutputName($filter_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['filter'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($filter_module);
         }
 
         return $ret;
@@ -31,8 +28,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
     public function initModelProps(array $module, array &$props): void
     {
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
+        if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
 
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -65,8 +61,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
     public function initRequestProps(array $module, array &$props): void
     {
         // Validate that the strata includes the required stratum
-        $vars = ApplicationState::getVars();
-        if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
+        if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
 
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -80,7 +75,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
                     // http://m3l.localhost/calendar/?calendaryear=2014&calendarmonth=7&searchfor&filter=events-calendar
                     // it doesn't even show any param being filtered (month or year not chosen in filter)
                     // Comment Leo 15/04/2015: do not show the filter even if filtering for EMBED and PRINT
-                    if (HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER, true)) {
+                    if (\PoP\Root\App::applyFilters(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER, true)) {
                         // if ($filter = $moduleprocessor_manager->getProcessor($filter_module)->getFilter($filter_module)) {
                         $filterVisible = $this->getProp($module, $props, 'filter-visible');
                         // if ($filterVisible || \PoP\Engine\FilterUtils::filteringBy($filter)) {

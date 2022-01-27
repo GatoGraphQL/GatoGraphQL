@@ -1,8 +1,7 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'popUserloginJqueryConstants');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'popUserloginJqueryConstants');
 function popUserloginJqueryConstants($jqueryConstants)
 {
 

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class PoPTheme_Wassup_UserLogin_Module_ContentPageSectionTopLevelRouteModuleProcessor extends PoP_Module_ContentPageSectionTopLevelRouteModuleProcessorBase
 {
@@ -18,10 +18,10 @@ class PoPTheme_Wassup_UserLogin_Module_ContentPageSectionTopLevelRouteModuleProc
             POP_USERLOGIN_ROUTE_LOSTPWDRESET,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
                 'conditions' => [
-                    'target' => \PoP\ComponentModel\Constants\Targets::MAIN,
+                    'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                 ],
             ];
         }
@@ -31,10 +31,10 @@ class PoPTheme_Wassup_UserLogin_Module_ContentPageSectionTopLevelRouteModuleProc
             POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA,
         );
         foreach ($routes as $route) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => [PoP_Module_Processor_PageSectionContainers::class, PoP_Module_Processor_PageSectionContainers::MODULE_PAGESECTIONCONTAINER_HOLE],
                 'conditions' => [
-                    'target' => \PoP\ComponentModel\Constants\Targets::MAIN,
+                    'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                 ],
             ];
         }

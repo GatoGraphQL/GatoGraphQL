@@ -8,7 +8,7 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\LocalPackageOwnersProvider;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
-use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\PackageBuilder\Console\Command\CommandNaming;
 
 final class LocalPackageOwnersCommand extends AbstractSymplifyCommand
 {
@@ -20,6 +20,7 @@ final class LocalPackageOwnersCommand extends AbstractSymplifyCommand
 
     protected function configure(): void
     {
+        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Space-separated list of local package owners in the monorepo');
     }
 
@@ -29,6 +30,6 @@ final class LocalPackageOwnersCommand extends AbstractSymplifyCommand
 
         $this->symfonyStyle->writeln(implode(' ', $localPackageOwners));
 
-        return ShellCode::SUCCESS;
+        return self::SUCCESS;
     }
 }

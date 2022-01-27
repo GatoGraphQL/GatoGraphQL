@@ -6,7 +6,6 @@ Description: Collection of Web Platform for Social Login for the Platform of Pla
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('POP_SOCIALLOGINWEBPLATFORM_VERSION', 0.109);
 define('POP_SOCIALLOGINWEBPLATFORM_DIR', dirname(__FILE__));
@@ -18,7 +17,7 @@ class PoP_SocialLoginWebPlatform
     {
 
         // Priority: after PoP Notifications Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888550);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888550);
     }
 
     public function init()

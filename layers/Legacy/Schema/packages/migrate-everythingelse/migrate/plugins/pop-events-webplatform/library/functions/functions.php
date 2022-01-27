@@ -1,10 +1,9 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Events\Constants\Scopes;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Events\Constants\Scopes;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels', 'gdEmCustomMultilayoutLabels');
+\PoP\Root\App::addFilter('pop_modulemanager:multilayout_labels', 'gdEmCustomMultilayoutLabels');
 function gdEmCustomMultilayoutLabels($labels)
 {
     $eventTypeAPI = EventTypeAPIFacade::getInstance();

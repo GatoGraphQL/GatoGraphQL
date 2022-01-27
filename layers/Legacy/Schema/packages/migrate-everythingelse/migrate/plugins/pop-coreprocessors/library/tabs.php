@@ -1,20 +1,14 @@
 <?php
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_IDS_TABS_REMEMBERCHECKBOX', 'tabs-remember');
 
-HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'popcoreTabsJqueryConstants');
+\PoP\Root\App::addFilter('gd_jquery_constants', 'popcoreTabsJqueryConstants');
 function popcoreTabsJqueryConstants($jqueryConstants)
 {
-
-    // Do not open the tabs if setting the config by the querystring on the URL
-    $vars = ApplicationState::getVars();
-    $opentabs = !$vars['config'];
-    $opentabs = HooksAPIFacade::getInstance()->applyFilters(
+    $opentabs = \PoP\Root\App::applyFilters(
         'popcoreTabsJqueryConstants:opentabs',
-        $opentabs
+        true
     );
     $jqueryConstants['OPENTABS'] = $opentabs ? true : "";
 
@@ -66,7 +60,7 @@ function popcoreTabsJqueryConstants($jqueryConstants)
             )
         )
     );
-    $jqueryConstants['TABS_REOPENMSG'] = HooksAPIFacade::getInstance()->applyFilters('pop_sw_message:reopentabs', $message);
+    $jqueryConstants['TABS_REOPENMSG'] = \PoP\Root\App::applyFilters('pop_sw_message:reopentabs', $message);
 
     return $jqueryConstants;
 }

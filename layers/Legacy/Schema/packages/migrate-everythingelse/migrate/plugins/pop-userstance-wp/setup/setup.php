@@ -1,6 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserStanceWP_Setup
 {
@@ -11,7 +10,7 @@ class PoP_UserStanceWP_Setup
             array($this, 'rewriteFlush')
         );
     
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'init',
             array($this, 'installPostType')
         );

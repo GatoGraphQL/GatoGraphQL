@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP User Platform Processors
 Description: Implementation of User Platform Processors for PoP
@@ -21,7 +20,7 @@ class PoP_UserPlatformProcessors
     {
 
         // Priority: after PoP User Login Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888830);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888830);
     }
     public function init()
     {

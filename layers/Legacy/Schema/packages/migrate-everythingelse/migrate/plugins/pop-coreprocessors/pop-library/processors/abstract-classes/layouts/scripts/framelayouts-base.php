@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_ScriptFrameLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -38,8 +37,8 @@ abstract class PoP_Module_Processor_ScriptFrameLayoutsBase extends PoPEngine_Que
 
         $layout = $this->getLayoutSubmodule($module);
         $script = $this->getScriptSubmodule($module);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = ModuleUtils::getModuleOutputName($layout);
-        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['script'] = ModuleUtils::getModuleOutputName($script);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
+        $ret[GD_JS_SUBMODULEOUTPUTNAMES]['script'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($script);
 
         return $ret;
     }

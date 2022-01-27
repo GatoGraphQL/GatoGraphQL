@@ -1,9 +1,8 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'popLocationpostlinkscreationCreateupdateutilsEditUrl', 100, 2);
+\PoP\Root\App::addFilter('gd-createupdateutils:edit-url', 'popLocationpostlinkscreationCreateupdateutilsEditUrl', 100, 2);
 function popLocationpostlinkscreationCreateupdateutilsEditUrl($url, $post_id)
 {
     if (defined('POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS') && POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS && defined('POP_LOCATIONPOSTLINKSCREATION_ROUTE_EDITLOCATIONPOSTLINK') && POP_LOCATIONPOSTLINKSCREATION_ROUTE_EDITLOCATIONPOSTLINK) {

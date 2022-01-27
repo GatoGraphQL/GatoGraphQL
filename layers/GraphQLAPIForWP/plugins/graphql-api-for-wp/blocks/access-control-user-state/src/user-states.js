@@ -1,9 +1,9 @@
 /**
- * Same value as in PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates::IN
+ * Same value as in PoPCMSSchema\UserStateAccessControl\ConfigurationEntries\UserStates::IN
  */
 const IN = 'in';
 /**
- * Same value as in PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates::OUT
+ * Same value as in PoPCMSSchema\UserStateAccessControl\ConfigurationEntries\UserStates::OUT
  */
 const OUT = 'out';
 

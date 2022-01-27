@@ -6,7 +6,6 @@ Description: Integration with plug-in Co-Authors Plus for the Platform of Platfo
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('CAP_POP_VERSION', 0.110);
 define('CAP_POP_DIR', dirname(__FILE__));
@@ -16,17 +15,17 @@ class CAP_PoP
     public function __construct()
     {
         include_once 'validation.php';
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Coauthors_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_AddCoauthors_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
 
         // Priority: after PoP Add Coauthors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function getProviderValidationClass($class)
     {

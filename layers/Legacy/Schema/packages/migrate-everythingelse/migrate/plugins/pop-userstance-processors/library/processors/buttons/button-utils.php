@@ -1,17 +1,15 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_Module_Processor_ButtonUtils
 {
     public static function getSinglepostAddstanceTitle()
     {
-        $vars = ApplicationState::getVars();
-        $post_id = $vars['routing-state']['queried-object-id'];
+        $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
     
         // Allow Events to have a different title
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'UserStance_Module_Processor_ButtonUtils:singlepost:title',
             TranslationAPIFacade::getInstance()->__('After reading this information', 'pop-userstance-processors'),
             $post_id
@@ -22,7 +20,7 @@ class UserStance_Module_Processor_ButtonUtils
     {
 
         // Allow Events to have a different title
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return \PoP\Root\App::applyFilters(
             'UserStance_Module_Processor_ButtonUtils:fullview:title',
             TranslationAPIFacade::getInstance()->__('After reading this information', 'pop-userstance-processors')
         );

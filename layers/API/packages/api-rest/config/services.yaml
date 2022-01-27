@@ -4,10 +4,10 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\RESTAPI\RouteModuleProcessors\:
+    PoPAPI\RESTAPI\RouteModuleProcessors\:
         resource: '../src/RouteModuleProcessors/*'
         public: true
 
-    PoP\RESTAPI\DataStructureFormatters\:
+    PoPAPI\RESTAPI\DataStructureFormatters\:
         resource: '../src/DataStructureFormatters/*'
         public: true

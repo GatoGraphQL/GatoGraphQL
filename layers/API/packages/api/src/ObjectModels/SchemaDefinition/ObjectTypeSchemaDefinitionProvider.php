@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\ObjectModels\SchemaDefinition;
+namespace PoPAPI\API\ObjectModels\SchemaDefinition;
 
 use PoP\Root\App;
-use PoP\API\Schema\SchemaDefinition;
-use PoP\API\Schema\SchemaDefinitionHelpers;
-use PoP\API\Schema\TypeKinds;
+use PoPAPI\API\Schema\SchemaDefinition;
+use PoPAPI\API\Schema\SchemaDefinitionHelpers;
+use PoPAPI\API\Schema\TypeKinds;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;

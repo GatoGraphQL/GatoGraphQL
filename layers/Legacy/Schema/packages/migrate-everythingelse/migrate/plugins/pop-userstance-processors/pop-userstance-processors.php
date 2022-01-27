@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP User Stance Processors
 Description: Implementation of User Stance Processors for PoP
@@ -20,7 +19,7 @@ class PoP_UserStanceProcessors
     {
 
         // Priority: after PoP Content Creation Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888860);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888860);
     }
     public function init()
     {

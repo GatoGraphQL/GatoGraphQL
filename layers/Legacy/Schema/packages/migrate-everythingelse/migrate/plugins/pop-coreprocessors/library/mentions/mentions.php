@@ -2,15 +2,14 @@
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 /**
  * Copied from plugin `hashtagger` (https://wordpress.org/plugins/hashtagger/)
@@ -56,13 +55,13 @@ class PoP_Mentions
         $this->regex_users =    '/(?<!\w)@([a-z0-9-._]+[a-z0-9])/iu';
 
         // Save the tags immediately
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'popcms:savePost',
             array($this, 'generatePostTags'),
             0
         );
-        HooksAPIFacade::getInstance()->addAction(
-            'popcms:insertComment',
+        \PoP\Root\App::addAction(
+            'wp_insert_comment',// Must add a loose contract instead: 'popcms:insertComment'
             array($this, 'generateCommentTags'),
             0,
             2
@@ -73,19 +72,19 @@ class PoP_Mentions
             // Can't use filter "the_content" because it doesn't work with page How to use website on MESYM
             // So quick fix: ignore for pages. Since the_content does not pass the post_id, we use another hook
             // Execute before wpautop, or otherwise the hashtags after <p> don't work
-            HooksAPIFacade::getInstance()->addFilter('pop_content', array($this, 'processContentPost'), 5, 2);
+            \PoP\Root\App::addFilter('pop_content', array($this, 'processContentPost'), 5, 2);
 
             // Comment Leo 08/05/2016: Do not enable for excerpts, because somehow sometimes it fails (eg: with MESYM Documentary Night event) deleting everything
-            // HooksAPIFacade::getInstance()->addFilter('pop_excerpt', array($this, 'processContentPost'), 9999, 2);
+            // \PoP\Root\App::addFilter('pop_excerpt', array($this, 'processContentPost'), 9999, 2);
             // Execute before wpautop
-            HooksAPIFacade::getInstance()->addFilter('gd_comments_content', array($this, 'processContent'), 5);
+            \PoP\Root\App::addFilter('gd_comments_content', array($this, 'processContent'), 5);
         }
     }
 
     // this function extracts the hashtags from content and adds them as tags to the post
     public function generatePostTags($post_id)
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPCMSSchema\Users\FunctionAPIFactory::getInstance();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
@@ -99,14 +98,14 @@ class PoP_Mentions
 
             // Allow Events Manager to also add its own tags with its own taxonomy
             // This is needed so we can search using parameter 'tag' with events, using the common slug
-            HooksAPIFacade::getInstance()->doAction('PoP_Mentions:post_tags:add', $post_id, $tags);
+            \PoP\Root\App::doAction('PoP_Mentions:post_tags:add', $post_id, $tags);
 
             // Extract all user_nicenames and notify them they were tagged
             // Get the previous ones, as to send an email only to the new ones
-            $previous_taggedusers_ids = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS);
+            $previous_taggedusers_ids = \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS);
 
             // First delete all existing users, then add all new ones
-            \PoPSchema\CustomPostMeta\Utils::deleteCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS);
+            \PoPCMSSchema\CustomPostMeta\Utils::deleteCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS);
             if ($user_nicenames = $this->getUserNicenamesFromContent($content)) {
                 $taggedusers_ids = array();
                 foreach ($user_nicenames as $user_nicename) {
@@ -116,11 +115,11 @@ class PoP_Mentions
                 }
 
                 if ($taggedusers_ids) {
-                    \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS, $taggedusers_ids);
+                    \PoPCMSSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS, $taggedusers_ids);
 
                     // Send an email to all newly tagged users
                     if ($newly_taggedusers_ids = array_diff($taggedusers_ids, $previous_taggedusers_ids)) {
-                        HooksAPIFacade::getInstance()->doAction('PoP_Mentions:post_tags:tagged_users', $post_id, $taggedusers_ids, $newly_taggedusers_ids);
+                        \PoP\Root\App::doAction('PoP_Mentions:post_tags:tagged_users', $post_id, $taggedusers_ids, $newly_taggedusers_ids);
                     }
                 }
             }
@@ -129,7 +128,7 @@ class PoP_Mentions
 
     public function generateCommentTags($comment_id, $comment)
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPCMSSchema\Users\FunctionAPIFactory::getInstance();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
@@ -145,12 +144,12 @@ class PoP_Mentions
                 ),
                 [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]
             );
-            \PoPSchema\CommentMeta\Utils::updateCommentMeta($comment_id, GD_METAKEY_COMMENT_TAGS, $tag_ids);
+            \PoPCMSSchema\CommentMeta\Utils::updateCommentMeta($comment_id, GD_METAKEY_COMMENT_TAGS, $tag_ids);
         }
 
         // Allow Events Manager to also add its own tags with its own taxonomy
         // This is needed so we can search using parameter 'tag' with events, using the common slug
-        HooksAPIFacade::getInstance()->doAction('PoP_Mentions:post_tags:add', $commentTypeAPI->getCommentPostId($comment), $tags);
+        \PoP\Root\App::doAction('PoP_Mentions:post_tags:add', $commentTypeAPI->getCommentPostId($comment), $tags);
 
         if ($user_nicenames = $this->getUserNicenamesFromContent($commentTypeAPI->getCommentContent($comment))) {
             $taggedusers_ids = array();
@@ -161,10 +160,10 @@ class PoP_Mentions
             }
 
             if ($taggedusers_ids) {
-                \PoPSchema\CommentMeta\Utils::updateCommentMeta($comment_id, GD_METAKEY_COMMENT_TAGGEDUSERS, $taggedusers_ids);
+                \PoPCMSSchema\CommentMeta\Utils::updateCommentMeta($comment_id, GD_METAKEY_COMMENT_TAGGEDUSERS, $taggedusers_ids);
 
                 // Send an email to all newly tagged users
-                HooksAPIFacade::getInstance()->doAction('PoP_Mentions:comment_tags:tagged_users', $comment_id, $taggedusers_ids);
+                \PoP\Root\App::doAction('PoP_Mentions:comment_tags:tagged_users', $comment_id, $taggedusers_ids);
             }
         }
     }
@@ -248,7 +247,7 @@ class PoP_Mentions
     {
 		$cmsService = CMSServiceFacade::getInstance();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPCMSSchema\Users\FunctionAPIFactory::getInstance();
         // get by nickname or by login name
         $user = $cmsusersapi->getUserBySlug($match[1]);
         if (!$user) {

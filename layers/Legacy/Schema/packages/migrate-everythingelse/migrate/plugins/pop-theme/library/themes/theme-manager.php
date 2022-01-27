@@ -1,6 +1,5 @@
 <?php
 namespace PoP\Theme\Themes;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class ThemeManager
 {
@@ -11,8 +10,8 @@ class ThemeManager
     {
         ThemeManagerFactory::setInstance($this);
         $this->themes = array();
-        HooksAPIFacade::getInstance()->addAction(
-            'popcms:init',
+        \PoP\Root\App::addAction(
+            'init', // Must migrate this WP hook to one from PoP (which executes before AFTER_BOOT_APPLICATION
             array($this, 'init')
         );
     }
@@ -26,7 +25,7 @@ class ThemeManager
     {
 
         // Selected comes in URL param 'theme'
-        $selected = $_REQUEST[GD_URLPARAM_THEME] ?? null;
+        $selected = \PoP\Root\App::query(GD_URLPARAM_THEME);
 
         // Check if the selected theme is inside $themes
         if (!$selected || !in_array($selected, array_keys($this->themes))) {
@@ -38,7 +37,7 @@ class ThemeManager
 
     public function getDefaultThemename()
     {
-        return HooksAPIFacade::getInstance()->applyFilters('\PoP\Theme\Themes\ThemeManager:default', null);
+        return \PoP\Root\App::applyFilters('\PoP\Theme\Themes\ThemeManager:default', null);
         ;
     }
 

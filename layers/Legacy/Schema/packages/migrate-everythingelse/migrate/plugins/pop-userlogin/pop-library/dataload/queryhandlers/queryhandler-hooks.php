@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 define('GD_DATALOAD_GETUSERINFO', 'getuserinfo');
 
@@ -15,7 +14,7 @@ class PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             '\PoP\ComponentModel\Engine:session-meta',
             array($this, 'getSessionMeta')
         );
@@ -25,20 +24,19 @@ class PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks
     {
         // Get the user info? (used for pages where user logged in is needed. Generally same as with checkpoints)
         if (PoP_UserLogin_Utils::getUserInfo()) {
-            $vars = ApplicationState::getVars();
             $userTypeAPI = UserTypeAPIFacade::getInstance();
             $user_id = '';
             $user_name = '';
             $user_url = '';
-            $user_logged_in = $vars['global-userstate']['is-user-logged-in'];
+            $user_logged_in = \PoP\Root\App::getState('is-user-logged-in');
             if ($user_logged_in) {
-                $user_id = $vars['global-userstate']['current-user-id'];
+                $user_id = \PoP\Root\App::getState('current-user-id');
                 $user_name = $userTypeAPI->getUserDisplayName($user_id);
                 $user_url = $userTypeAPI->getUserURL($user_id);
             }
             
             // Allow PoP Application User Avatar to add the user avatar
-            $meta[GD_DATALOAD_USER] = HooksAPIFacade::getInstance()->applyFilters(
+            $meta[GD_DATALOAD_USER] = \PoP\Root\App::applyFilters(
                 'PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks:user-feedback',
                 array(
                     GD_DATALOAD_USER_LOGGEDIN => $user_logged_in,

@@ -6,7 +6,6 @@ Description: Library for converting CSS into its corresponding styles, used for 
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -21,7 +20,7 @@ class PoP_CSSConverter
     {
 
         // Priority: after PoP System
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888130);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888130);
     }
     public function init()
     {

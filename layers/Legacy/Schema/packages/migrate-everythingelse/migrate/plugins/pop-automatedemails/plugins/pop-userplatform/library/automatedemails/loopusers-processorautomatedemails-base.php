@@ -1,11 +1,11 @@
 <?php
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEmailsBase
 {
@@ -26,16 +26,17 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             $module = $engine->getEntryModule();
             $processor = $moduleprocessor_manager->getProcessor($module);
             $formatter = $dataStructureManager->getDataStructureFormatter();
-            $request = $_REQUEST;
+            $request = $_GET;
 
             // In order to obtain the dbobjectids from the results, located under pssId and bsId
             $pagesection_settings_id = $this->getPagesectionSettingsid();
             $block_module = $this->getBlockModule();
-            $block_settings_id = ModuleUtils::getModuleOutputName($block_module);
+            $block_settings_id = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($block_module);
 
             // Set the recipient as the "current-user-id", pretending this user is logged in
             $vars = &ApplicationState::$vars;
-            // First, save the old values, to restore them later
+            $engineState = App::getEngineState();
+        // First, save the old values, to restore them later
             $keys = [
                 'is-user-logged-in',
                 'current-user',
@@ -43,16 +44,16 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             ];
             $user_global_state = [];
             foreach ($keys as $key) {
-                $user_global_state[$key] = $vars['global-userstate'][$key];
+                $user_global_state[$key] = $vars[$key];
             }
             // Then, can start to modify the global state
-            $vars['global-userstate']['is-user-logged-in'] = true;
+            $vars['is-user-logged-in'] = true;
 
             $yesterday = strtotime("-1 day", ComponentModelComponentInfo::get('time'));
             foreach ($users as $user_id) {
                 // Set the recipient as the "current-user-id", pretending this user is logged in
-                $vars['global-userstate']['current-user'] = $userTypeAPI->getUserById($user_id)/*new WP_User($user_id, '')*/;
-                $vars['global-userstate']['current-user-id'] = $user_id;
+                $vars['current-user'] = $userTypeAPI->getUserById($user_id)/*new WP_User($user_id, '')*/;
+                $vars['current-user-id'] = $user_id;
 
                 // Return the notifications from within the last 24 hs, or from the last time the user was last seen in the website, whatever is higher
                 // By default, use last 24 hs
@@ -61,7 +62,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
                 $request['hist_time'] = ($lastaccess && $lastaccess > $yesterday) ? $lastaccess : $yesterday;
 
                 // Regenerate the data
-                $data = $engine->getModuleData($module, $processor, $engine->props, $formatter, $request);
+                $data = $engine->getModuleData($module, $processor, $engineState->props, $formatter, $request);
 
                 // If the user has no notifications, then skip it
                 // Simply check if the dbobjectids for the user is empty, for the main block
@@ -89,7 +90,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
 
             // Restore the old global_status
             foreach ($keys as $key) {
-                $vars['global-userstate'][$key] = $user_global_state[$key];
+                $vars[$key] = $user_global_state[$key];
             }
         }
         return $emails;

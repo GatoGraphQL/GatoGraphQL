@@ -1,10 +1,9 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * Uniqueblocks
  */
-HooksAPIFacade::getInstance()->addFilter('RequestUtils:getFramecomponentModules', 'getUserloginFramecomponentModules');
+\PoP\Root\App::addFilter('RequestUtils:getFramecomponentModules', 'getUserloginFramecomponentModules');
 function getUserloginFramecomponentModules($modules)
 {
 

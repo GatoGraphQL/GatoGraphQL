@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * User IDs
@@ -7,5 +6,5 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 function getWhoweareCoreUserIds()
 {
-    return HooksAPIFacade::getInstance()->applyFilters('getWhoweareCoreUserIds', array());
+    return \PoP\Root\App::applyFilters('getWhoweareCoreUserIds', array());
 }

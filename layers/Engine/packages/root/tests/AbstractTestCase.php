@@ -6,27 +6,29 @@ namespace PoP\Root;
 
 use PHPUnit\Framework\TestCase;
 use PoP\Root\Helpers\ClassHelpers;
+use PoP\Root\StateManagers\HookManager;
+use PoP\Root\StateManagers\HookManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class AbstractTestCase extends TestCase
 {
-    private static ?ContainerInterface $container = null;
+    protected static ?ContainerInterface $container = null;
 
     public static function setUpBeforeClass(): void
     {
-        if (self::$container === null) {
-            static::initializeApp(false, null, null, true);
-            self::$container = App::getContainer();
-        }
+        static::initializeApp(false, null, null, true);
     }
 
-    protected static function initializeApp(
+    final protected static function initializeApp(
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null,
         ?string $containerDirectory = null,
         bool $isDev = false
     ): void {
-        App::initialize(static::getAppLoader());
+        App::initialize(
+            static::getAppLoader(),
+            static::getHookManager(),
+        );
         App::getAppLoader()->addComponentClassesToInitialize(static::getComponentClassesToInitialize());
         App::getAppLoader()->initializeComponents($isDev);
         App::getAppLoader()->bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
@@ -38,11 +40,33 @@ abstract class AbstractTestCase extends TestCase
         );
 
         App::getAppLoader()->bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
+
+        // By now, we already have the container
+        self::$container = App::getContainer();
+
+        // Allow to modify the $_GET when testing
+        static::beforeBootApplicationComponents();
+
+        // Finish the initialization
+        App::getAppLoader()->bootApplicationComponents();
     }
 
-    protected static function getAppLoader(): AppLoader
+    /**
+     * Allow to modify the $_GET when testing.
+     */
+    protected static function beforeBootApplicationComponents(): void
+    {
+        // Do nothing
+    }
+
+    protected static function getAppLoader(): AppLoaderInterface
     {
         return new AppLoader();
+    }
+
+    protected static function getHookManager(): HookManagerInterface
+    {
+        return new HookManager();
     }
 
     /**

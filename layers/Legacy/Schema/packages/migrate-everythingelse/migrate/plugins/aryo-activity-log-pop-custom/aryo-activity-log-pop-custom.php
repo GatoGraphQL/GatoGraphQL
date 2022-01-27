@@ -6,7 +6,6 @@ Description: Custom version of Activity Log for the Platform of Platforms (PoP)
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('AAL_POPCUSTOM_VERSION', 0.107);
 define('AAL_POPCUSTOM_DIR', dirname(__FILE__));
@@ -17,7 +16,7 @@ class AAL_PoPCustom
     {
 
         // Priority: after AAL PoP
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888370);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888370);
     }
 
     public function init()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\SiteBuilderAPI\ModuleProcessors;
 
-use PoP\API\Schema\QueryInputs;
+use PoPAPI\API\Schema\QueryInputs;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\FieldQuery\QuerySyntax;

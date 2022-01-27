@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Comments\ConditionalOnComponent\RESTAPI\Hooks\:
+        resource: '../../../src/ConditionalOnComponent/RESTAPI/Hooks/*'

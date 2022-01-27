@@ -6,8 +6,7 @@ Description: The foundation for a PoP Media
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoPSchema\Media;
-use PoP\Hooks\Facades\HooksAPIFacade;
+namespace PoPCMSSchema\Media;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -21,7 +20,7 @@ class Plugins
     {
 
         // Priority: new section, after PoP Posts
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888205);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888205);
     }
     public function init()
     {

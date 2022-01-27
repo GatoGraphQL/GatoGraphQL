@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace PoP\Engine\Hooks\ModuleFilters;
 
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\Engine\ModuleFilters\HeadModule;
-use PoP\Hooks\AbstractHookSet;
+use PoP\Root\App;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class HeadModuleHookSet extends AbstractHookSet
 {
     private ?HeadModule $headModule = null;
+    private ?ModuleHelpersInterface $moduleHelpers = null;
     
     final public function setHeadModule(HeadModule $headModule): void
     {
@@ -22,38 +23,28 @@ class HeadModuleHookSet extends AbstractHookSet
     {
         return $this->headModule ??= $this->instanceManager->getInstance(HeadModule::class);
     }
+    final public function setModuleHelpers(ModuleHelpersInterface $moduleHelpers): void
+    {
+        $this->moduleHelpers = $moduleHelpers;
+    }
+    final protected function getModuleHelpers(): ModuleHelpersInterface
+    {
+        return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+    }
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::addFilter(
             ModelInstance::HOOK_COMPONENTSFROMVARS_RESULT,
             [$this, 'maybeAddComponent']
         );
-        $this->getHooksAPI()->addAction(
-            'ApplicationState:addVars',
-            [$this, 'addVars'],
-            10,
-            1
-        );
     }
-    /**
-     * @param array<array> $vars_in_array
-     */
-    public function addVars(array $vars_in_array): void
-    {
-        [&$vars] = $vars_in_array;
-        if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->headModule->getName()) {
-            if ($headmodule = $_REQUEST[HeadModule::URLPARAM_HEADMODULE] ?? null) {
-                $vars['headmodule'] = ModuleUtils::getModuleFromOutputName($headmodule);
-            }
-        }
-    }
+    
     public function maybeAddComponent($components)
     {
-        $vars = ApplicationState::getVars();
-        if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->headModule->getName()) {
-            if ($headmodule = $vars['headmodule']) {
-                $components[] = $this->getTranslationAPI()->__('head module:', 'engine') . ModuleUtils::getModuleFullName($headmodule);
+        if (App::getState('modulefilter') === $this->headModule->getName()) {
+            if ($headmodule = App::getState('headmodule')) {
+                $components[] = $this->getTranslationAPI()->__('head module:', 'engine') . $this->getModuleHelpers()->getModuleFullName($headmodule);
             }
         }
 

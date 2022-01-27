@@ -1,6 +1,5 @@
 <?php
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_WebPlatform_ConfigurationUtils
 {
@@ -8,7 +7,7 @@ class PoP_WebPlatform_ConfigurationUtils
     {
         $cmsService = CMSServiceFacade::getInstance();
         $homeurl = $cmsService->getSiteURL();
-        return array_values(array_unique(HooksAPIFacade::getInstance()->applyFilters(
+        return array_values(array_unique(\PoP\Root\App::applyFilters(
             'pop_modulemanager:allowed_domains',
             array(
                 $homeurl,

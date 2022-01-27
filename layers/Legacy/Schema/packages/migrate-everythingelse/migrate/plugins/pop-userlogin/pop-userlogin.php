@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP User Login
 Description: Implementation of User Login for PoP
@@ -20,7 +19,7 @@ class PoP_UserLogin
     {
 
         // Priority: after PoP Email Sender
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888320);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888320);
     }
     public function init()
     {

@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_ViewComponentButtonsBase extends PoP_Module_Processor_PreloadTargetDataButtonsBase
 {
@@ -45,7 +44,7 @@ abstract class PoP_Module_Processor_ViewComponentButtonsBase extends PoP_Module_
         }
 
         if ($header = $this->getHeaderSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['header'] = ModuleUtils::getModuleOutputName($header);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['header'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($header);
         }
 
         return $ret;

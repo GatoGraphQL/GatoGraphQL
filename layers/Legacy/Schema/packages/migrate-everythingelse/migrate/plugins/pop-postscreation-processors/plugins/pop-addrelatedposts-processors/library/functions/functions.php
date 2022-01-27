@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter(
+\PoP\Root\App::addFilter(
 	'PoP_Module_Processor_DropdownButtonControls:addrelatedpost-dropdown:buttons', 
 	'popPostscreationAddrelatedpostButtons', 
 	0

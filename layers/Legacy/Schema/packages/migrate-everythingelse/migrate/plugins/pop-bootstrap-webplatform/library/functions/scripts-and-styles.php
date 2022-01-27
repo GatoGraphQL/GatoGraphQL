@@ -1,12 +1,11 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * preloading fonts
  */
 $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
 if (!$cmsapplicationapi->isAdminPanel()) {
-    HooksAPIFacade::getInstance()->addAction('popcms:head', 'popBootstrapwebplatformPreloadfonts');
+    \PoP\Root\App::addAction('popcms:head', 'popBootstrapwebplatformPreloadfonts');
 }
 function popBootstrapwebplatformPreloadfonts()
 {
@@ -24,7 +23,7 @@ function getBootstrapFontUrl($pathkey = null)
         }
 
         // Allow PoP Resource Loader to hook in its values
-        $pathkey = HooksAPIFacade::getInstance()->applyFilters(
+        $pathkey = \PoP\Root\App::applyFilters(
             'getBootstrapFontUrl:pathkey',
             $pathkey
         );
@@ -42,7 +41,7 @@ function getBootstrapFontPath($pathkey)
     }
     
     // Allow PoP Resource Loader to hook in its values
-    return HooksAPIFacade::getInstance()->applyFilters(
+    return \PoP\Root\App::applyFilters(
         'getBootstrapFontPath',
         $local_font_path,
         $pathkey

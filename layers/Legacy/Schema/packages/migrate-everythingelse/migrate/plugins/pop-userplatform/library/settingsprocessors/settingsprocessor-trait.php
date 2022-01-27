@@ -1,8 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 trait PoP_UserPlatform_Module_SettingsProcessor_Trait
 {
@@ -25,7 +24,7 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
     {
         return array(
             // Allow the Change Password checkpoints to be overriden. Eg: by adding only non-WSL users
-            POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE => HooksAPIFacade::getInstance()->applyFilters(
+            POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE => \PoP\Root\App::applyFilters(
                 'Wassup_Module_SettingsProcessor:changepwdprofile:checkpoints',
                 UserStateCheckpointSets::LOGGEDIN_STATIC//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_STATIC),
             ),
@@ -40,12 +39,11 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
         $ret = array();
 
         // Only add the configuration if we are on the corresponding page
-        $vars = ApplicationState::getVars();
-        if ($vars['routing-state']['is-standard'] && $vars['global-userstate']['is-user-logged-in']) {
-            $route = $vars['route'];
+        if (\PoP\Root\App::getState(['routing', 'is-generic']) && \PoP\Root\App::getState('is-user-logged-in')) {
+            $route = \PoP\Root\App::getState('route');
             if ($route == POP_USERPLATFORM_ROUTE_EDITPROFILE) {
                 // Allow PoP Common User Roles to fill in these redirects according to their roles
-                if ($redirect_url = HooksAPIFacade::getInstance()->applyFilters(
+                if ($redirect_url = \PoP\Root\App::applyFilters(
                     'UserPlatform:redirect_url:edit_profile',
                     null
                 )
@@ -54,7 +52,7 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
                 }
             } elseif ($route == POP_USERPLATFORM_ROUTE_MYPROFILE) {
                 $userTypeAPI = UserTypeAPIFacade::getInstance();
-                $current_user_id = $vars['global-userstate']['current-user-id'];
+                $current_user_id = \PoP\Root\App::getState('current-user-id');
                 $ret[POP_USERPLATFORM_ROUTE_MYPROFILE] = $userTypeAPI->getUserURL($current_user_id);
             }
         }

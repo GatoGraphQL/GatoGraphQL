@@ -1,6 +1,5 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extends PoP_Module_Processor_ButtonInnersBase
 {
@@ -29,7 +28,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
 
         if ($location_module = $this->getLocationModule($module)) {
             $ret['separator'] = $this->separator($module, $props);
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['location-layout'] = ModuleUtils::getModuleOutputName($location_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['location-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($location_module);
         } else {
             $ret[GD_JS_TITLES] = array(
                 'locations' => TranslationAPIFacade::getInstance()->__('Locations', 'em-popprocessors')

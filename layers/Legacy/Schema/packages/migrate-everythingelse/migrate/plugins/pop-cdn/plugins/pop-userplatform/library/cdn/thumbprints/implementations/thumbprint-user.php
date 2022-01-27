@@ -1,8 +1,8 @@
 <?php
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 define('POP_CDN_THUMBPRINT_USER', 'user');
 
@@ -19,7 +19,7 @@ class PoP_CDN_Thumbprint_User extends PoP_CDN_ThumbprintBase
             // 'fields' => 'ID',
             'limit' => 1,
             // Moved under WordPress-specific file
-            // 'meta_key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_LASTEDITED),
+            // 'meta_key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_LASTEDITED),
             // 'orderby' => 'meta_value',
             'orderby' => NameResolverFacade::getInstance()->getName('popcomponent:userplatform:dbcolumn:orderby:users:lastediteddate'),
             'order' => 'DESC',
@@ -36,7 +36,7 @@ class PoP_CDN_Thumbprint_User extends PoP_CDN_ThumbprintBase
 
     public function getTimestamp($user_id)
     {
-        return \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, true);
+        return \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, true);
     }
 }
 

@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\APIEndpointsForWP\EndpointHandlers\:
+    PoPAPI\APIEndpointsForWP\EndpointHandlers\:
         resource: '../src/EndpointHandlers/*'
+
+    PoPAPI\APIEndpointsForWP\State\:
+        resource: '../src/State/*'
 

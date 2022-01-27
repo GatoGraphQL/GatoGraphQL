@@ -1,21 +1,20 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addAction('init', 'gdAddScriptsHeaderHook');
+\PoP\Root\App::addAction('init', 'gdAddScriptsHeaderHook');
 function gdAddScriptsHeaderHook()
 {
     if (!is_admin()) {
 
         // Allow PoP Server-Side Rendering to change from header to footer
-        $where = HooksAPIFacade::getInstance()->applyFilters(
+        $where = \PoP\Root\App::applyFilters(
             'add-scripts:where',
             'header'
         );
 
         if ($where == 'header') {
-            HooksAPIFacade::getInstance()->addAction('wp_head', 'gdAddScriptsHeader', 0);
+            \PoP\Root\App::addAction('wp_head', 'gdAddScriptsHeader', 0);
         } elseif ($where == 'footer') {
-            HooksAPIFacade::getInstance()->addAction('wp_footer', 'gdAddScriptsHeader', 0);
+            \PoP\Root\App::addAction('wp_footer', 'gdAddScriptsHeader', 0);
         }
     }
 }

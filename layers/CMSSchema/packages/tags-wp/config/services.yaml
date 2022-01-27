@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\TagsWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+
+    PoPCMSSchema\TagsWP\Hooks\:
+        resource: '../src/Hooks/*'

@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Engine;
 
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 abstract class FunctionAPI_Base implements FunctionAPI
 {

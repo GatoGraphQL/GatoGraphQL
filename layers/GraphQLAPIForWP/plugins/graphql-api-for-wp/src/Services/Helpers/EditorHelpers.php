@@ -8,6 +8,9 @@ class EditorHelpers
 {
     /**
      * Get the post type currently being created/edited in the editor
+     *
+     * phpcs:disable Generic.PHP.DisallowRequestSuperglobal
+     * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable
      */
     public function getEditingPostType(): ?string
     {
@@ -48,6 +51,8 @@ class EditorHelpers
 
     /**
      * Get the post ID currently being edited in the editor
+     *
+     * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable
      */
     public function getEditingPostID(): ?int
     {

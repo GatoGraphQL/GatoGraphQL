@@ -1,16 +1,17 @@
 <?php
+
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Application_RequestMeta_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             '\PoP\ComponentModel\Engine:request-meta',
             array($this, 'getRequestMeta')
         );
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             '\PoP\ComponentModel\Engine:site-meta',
             array($this, 'getSiteMeta')
         );
@@ -27,8 +28,7 @@ class PoP_Application_RequestMeta_Hooks
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $meta['sitename'] = $cmsapplicationapi->getSiteName();
-        $vars = ApplicationState::getVars();
-        $meta['version'] = $vars['version'];
+        $meta['version'] = ApplicationInfoFacade::getInstance()->getVersion();
         return $meta;
     }
 }

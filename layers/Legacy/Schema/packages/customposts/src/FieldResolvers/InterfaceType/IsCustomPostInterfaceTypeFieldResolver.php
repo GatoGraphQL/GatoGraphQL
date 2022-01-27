@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\FieldResolvers\InterfaceType;
+namespace PoPCMSSchema\CustomPosts\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
+use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 
 class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeFieldResolver

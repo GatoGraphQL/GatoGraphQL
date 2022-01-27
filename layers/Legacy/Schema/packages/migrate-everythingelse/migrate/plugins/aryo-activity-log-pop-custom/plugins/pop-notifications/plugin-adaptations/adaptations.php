@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * Make plugin Activity Log compatible with PoP
@@ -12,5 +11,5 @@ $instance->settings = new AAL_PoP_Settings();
 $instance->notifications = new AAL_PoP_Notifications();
 
 // Remove unwanted ads
-HooksAPIFacade::getInstance()->removeAction('admin_notices', array( &$instance->ui, 'admin_notices' ));
-HooksAPIFacade::getInstance()->removeAction('wp_ajax_aal_install_elementor_set_admin_notice_viewed', array( &$instance->ui, 'ajax_aal_install_elementor_set_admin_notice_viewed' ));
+\PoP\Root\App::removeAction('admin_notices', array( &$instance->ui, 'admin_notices' ));
+\PoP\Root\App::removeAction('wp_ajax_aal_install_elementor_set_admin_notice_viewed', array( &$instance->ui, 'ajax_aal_install_elementor_set_admin_notice_viewed' ));

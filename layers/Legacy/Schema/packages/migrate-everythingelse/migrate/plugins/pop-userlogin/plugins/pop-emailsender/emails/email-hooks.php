@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_UserLogin_EmailSender_Hooks
 {
@@ -11,9 +10,9 @@ class PoP_UserLogin_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Functional emails
         //----------------------------------------------------------------------
-        HooksAPIFacade::getInstance()->addFilter('popcms:retrievePasswordTitle', array($this, 'retrievePasswordTitle'));
-        HooksAPIFacade::getInstance()->addFilter('popcms:retrievePasswordMessage', array($this, 'retrievePasswordMessage'), PHP_INT_MAX, 4);
-        HooksAPIFacade::getInstance()->addAction('gd_lostpasswordreset', array($this, 'lostpasswordreset'), 10, 1);
+        \PoP\Root\App::addFilter('popcms:retrievePasswordTitle', array($this, 'retrievePasswordTitle'));
+        \PoP\Root\App::addFilter('popcms:retrievePasswordMessage', array($this, 'retrievePasswordMessage'), PHP_INT_MAX, 4);
+        \PoP\Root\App::addAction('gd_lostpasswordreset', array($this, 'lostpasswordreset'), 10, 1);
     }
 
     public function retrievePasswordTitle($title)

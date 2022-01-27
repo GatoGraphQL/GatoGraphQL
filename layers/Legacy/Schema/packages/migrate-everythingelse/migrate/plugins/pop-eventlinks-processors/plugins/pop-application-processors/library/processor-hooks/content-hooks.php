@@ -1,13 +1,12 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 class PoPTheme_EM_Processors_ContentHooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_Module_Processor_Contents:inner_module',
             array($this, 'contentInner'),
             10,
@@ -18,8 +17,7 @@ class PoPTheme_EM_Processors_ContentHooks
     public function contentInner($inner, array $module)
     {
         if (($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE])) {
-            $vars = ApplicationState::getVars();
-            $post_id = $vars['routing-state']['queried-object-id'];
+            $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $eventTypeAPI = EventTypeAPIFacade::getInstance();
             if ($eventTypeAPI->isEvent($post_id)) {
                 $event = $eventTypeAPI->getEvent($post_id);

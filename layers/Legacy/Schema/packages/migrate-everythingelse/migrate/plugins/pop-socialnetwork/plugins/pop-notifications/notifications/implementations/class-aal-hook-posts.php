@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -12,12 +11,12 @@ class PoP_SocialNetwork_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     {
         
         // Recommended/Unrecommend/Upvote/Downvote Post
-        HooksAPIFacade::getInstance()->addAction('gd_recommendpost', array($this, 'recommendedPost'));
-        HooksAPIFacade::getInstance()->addAction('gd_unrecommendpost', array($this, 'unrecommendedPost'));
-        HooksAPIFacade::getInstance()->addAction('gd_upvotepost', array($this, 'upvotedPost'));
-        HooksAPIFacade::getInstance()->addAction('gd_undoupvotepost', array($this, 'undidUpvotePost'));
-        HooksAPIFacade::getInstance()->addAction('gd_downvotepost', array($this, 'downvotedPost'));
-        HooksAPIFacade::getInstance()->addAction('gd_undodownvotepost', array($this, 'undidDownvotePost'));
+        \PoP\Root\App::addAction('gd_recommendpost', array($this, 'recommendedPost'));
+        \PoP\Root\App::addAction('gd_unrecommendpost', array($this, 'unrecommendedPost'));
+        \PoP\Root\App::addAction('gd_upvotepost', array($this, 'upvotedPost'));
+        \PoP\Root\App::addAction('gd_undoupvotepost', array($this, 'undidUpvotePost'));
+        \PoP\Root\App::addAction('gd_downvotepost', array($this, 'downvotedPost'));
+        \PoP\Root\App::addAction('gd_undodownvotepost', array($this, 'undidDownvotePost'));
         
         // parent::__construct();
     }

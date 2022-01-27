@@ -1,16 +1,15 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * No need from any avatar size from this plugin
  */
-HooksAPIFacade::getInstance()->addFilter('coauthors_guest_author_avatar_sizes', 'emptyArray', 10000);
+\PoP\Root\App::addFilter('coauthors_guest_author_avatar_sizes', 'emptyArray', 10000);
 function emptyArray($anything)
 {
     return array();
 }
 
-HooksAPIFacade::getInstance()->addFilter('CMSAPI:customposts:query', 'maybeRemoveSupressFilters');
+\PoP\Root\App::addFilter('CMSAPI:customposts:query', 'maybeRemoveSupressFilters');
 function maybeRemoveSupressFilters($query)
 {
 	// If filtering by author, let it also be a co-author

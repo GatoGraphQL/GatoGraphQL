@@ -1,6 +1,5 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor_DropdownButtonControlsBase
 {
@@ -43,7 +42,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         }
 
         // Allow PoP Generic Forms Processors to add modules
-        $modules = HooksAPIFacade::getInstance()->applyFilters(
+        $modules = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_DropdownButtonQuicklinks:modules',
             $modules,
             $module

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Root\App;
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
-use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\UserMeta\Utils;
+use PoPCMSSchema\UserMeta\Utils;
 
 class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFromTagMutationResolver
 {
@@ -14,8 +14,7 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
     {
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
-            $vars = ApplicationState::getVars();
-            $user_id = $vars['global-userstate']['current-user-id'];
+            $user_id = App::getState('current-user-id');
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user has not already subscribed to this tag
@@ -38,23 +37,22 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->getHooksAPI()->doAction('gd_subscribetotag', $target_id, $form_data);
+        App::doAction('gd_subscribetotag', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int
     {
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
+        $user_id = App::getState('current-user-id');
         $target_id = $form_data['target_id'];
 
         // Update value
         Utils::addUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, $target_id);
-        \PoPSchema\TaxonomyMeta\Utils::addTermMeta($target_id, \GD_METAKEY_TERM_SUBSCRIBEDBY, $user_id);
+        \PoPCMSSchema\TaxonomyMeta\Utils::addTermMeta($target_id, \GD_METAKEY_TERM_SUBSCRIBEDBY, $user_id);
 
         // Update the counter
-        $count = \PoPSchema\TaxonomyMeta\Utils::getTermMeta($target_id, \GD_METAKEY_TERM_SUBSCRIBERSCOUNT, true);
+        $count = \PoPCMSSchema\TaxonomyMeta\Utils::getTermMeta($target_id, \GD_METAKEY_TERM_SUBSCRIBERSCOUNT, true);
         $count = $count ? $count : 0;
-        \PoPSchema\TaxonomyMeta\Utils::updateTermMeta($target_id, \GD_METAKEY_TERM_SUBSCRIBERSCOUNT, ($count + 1), true);
+        \PoPCMSSchema\TaxonomyMeta\Utils::updateTermMeta($target_id, \GD_METAKEY_TERM_SUBSCRIBERSCOUNT, ($count + 1), true);
 
         return parent::update($form_data);
     }

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 /*
 Plugin Name: PoP Social Network Web Platform
 Description: Implementation of Social Network Web Platform for PoP
@@ -21,7 +20,7 @@ class PoP_SocialNetworkWebPlatform
     {
 
         // Priority: after PoP Add Comments TinyMCE Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888560);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888560);
     }
     public function init()
     {

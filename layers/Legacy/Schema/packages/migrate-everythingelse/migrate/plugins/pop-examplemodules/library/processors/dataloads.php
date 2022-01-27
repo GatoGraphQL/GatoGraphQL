@@ -3,12 +3,12 @@ namespace PoP\ExampleModules;
 
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
-use PoPSchema\Pages\Facades\PageTypeAPIFacade;
-use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
+use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
+use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
+use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
 {
@@ -97,14 +97,13 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
 
-        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
-                $ret['authors'] = [$vars['routing-state']['queried-object-id']];
+                $ret['authors'] = [\PoP\Root\App::getState(['routing', 'queried-object-id'])];
                 break;
 
             case self::MODULE_EXAMPLE_TAGLATESTPOSTS:
-                $ret['tag-ids'] = [$vars['routing-state']['queried-object-id']];
+                $ret['tag-ids'] = [\PoP\Root\App::getState(['routing', 'queried-object-id'])];
                 break;
         }
 

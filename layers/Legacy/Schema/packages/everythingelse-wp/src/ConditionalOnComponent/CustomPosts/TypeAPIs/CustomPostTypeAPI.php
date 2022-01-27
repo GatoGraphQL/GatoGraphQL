@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElseWP\ConditionalOnComponent\CustomPosts\TypeAPIs;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\App;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class CustomPostTypeAPI extends \PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI
+class CustomPostTypeAPI extends \PoPCMSSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI
 {
     public function getExcerpt(string | int | object $customPostObjectOrID): ?string
     {
@@ -31,7 +31,7 @@ class CustomPostTypeAPI extends \PoPSchema\CustomPostsWP\TypeAPIs\CustomPostType
                 $readmore
             ) :
             $customPost->post_excerpt;
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return App::applyFilters(
             'get_the_excerpt',
             $value,
             $customPostID

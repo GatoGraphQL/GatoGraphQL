@@ -7,7 +7,6 @@ Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
 namespace PoP\EmailSender\WP;
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -21,7 +20,7 @@ class Plugins
     {
 
         // Priority: after PoP Email Sender
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888320);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888320);
     }
     public function init()
     {

@@ -1,6 +1,5 @@
 <?php
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_ServiceWorkersManager
 {
@@ -49,31 +48,31 @@ class PoP_ServiceWorkersManager
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $blogname = $cmsapplicationapi->getSiteName();
         $description = $cmsapplicationapi->getSiteDescription();
-        if ($short_name = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:short_name', $blogname)) {
+        if ($short_name = \PoP\Root\App::applyFilters('PoP_ServiceWorkersManager:manifest:short_name', $blogname)) {
             $json['short_name'] = $short_name;
         }
-        if ($description = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:description', $description)) {
+        if ($description = \PoP\Root\App::applyFilters('PoP_ServiceWorkersManager:manifest:description', $description)) {
             $json['description'] = $description;
         }
-        if ($name = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:name', $blogname)) {
+        if ($name = \PoP\Root\App::applyFilters('PoP_ServiceWorkersManager:manifest:name', $blogname)) {
             $json['name'] = $name;
         }
-        if ($icons = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:icons', array())) {
+        if ($icons = \PoP\Root\App::applyFilters('PoP_ServiceWorkersManager:manifest:icons', array())) {
             $json['icons'] = $icons;
         }
-        if ($start_url = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:start_url', $cmsService->getSiteURL())) {
+        if ($start_url = \PoP\Root\App::applyFilters('PoP_ServiceWorkersManager:manifest:start_url', $cmsService->getSiteURL())) {
             $json['start_url'] = $start_url;
         }
-        if ($display = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:display', 'standalone')) {
+        if ($display = \PoP\Root\App::applyFilters('PoP_ServiceWorkersManager:manifest:display', 'standalone')) {
             $json['display'] = $display;
         }
-        if ($orientation = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:orientation', 'portrait')) {
+        if ($orientation = \PoP\Root\App::applyFilters('PoP_ServiceWorkersManager:manifest:orientation', 'portrait')) {
             $json['orientation'] = $orientation;
         }
-        if ($theme_color = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:theme_color', '#fff')) {
+        if ($theme_color = \PoP\Root\App::applyFilters('PoP_ServiceWorkersManager:manifest:theme_color', '#fff')) {
             $json['theme_color'] = $theme_color;
         }
-        if ($background_color = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:background_color', '#fff')) {
+        if ($background_color = \PoP\Root\App::applyFilters('PoP_ServiceWorkersManager:manifest:background_color', '#fff')) {
             $json['background_color'] = $background_color;
         }
 

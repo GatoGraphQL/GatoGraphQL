@@ -1,21 +1,20 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Application_Hooks
 {
 	public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'PoP_Application_SectionUtils:dataloadqueryargs-allcontent',
             array($this, 'addAllcontentQueryargs')
         );
 
-        HooksAPIFacade::getInstance()->addAction(
+        \PoP\Root\App::addAction(
             'PoP_Application_SectionUtils:dataloadqueryargs-allcontent-bysingletag',
             array($this, 'addAllcontentBySingleTagQueryargs')
         );
 
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'latestcounts:allcontent:classes',
             array($this, 'getAllcontentClasses')
         );

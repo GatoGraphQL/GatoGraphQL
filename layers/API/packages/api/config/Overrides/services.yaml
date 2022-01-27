@@ -5,10 +5,10 @@ services:
         autoconfigure: true
 
     PoP\Engine\Schema\SchemaDefinitionServiceInterface:
-        class: \PoP\API\Schema\SchemaDefinitionService
+        class: \PoPAPI\API\Schema\SchemaDefinitionService
 
     # Override the services from FieldQuery and ComponentModel
     PoP\FieldQuery\FieldQueryInterpreterInterface:
-        class: \PoP\API\Schema\FieldQueryInterpreter
+        class: \PoPAPI\API\Schema\FieldQueryInterpreter
     PoP\ComponentModel\Schema\FieldQueryInterpreterInterface:
-        class: \PoP\API\Schema\FieldQueryInterpreter
+        class: \PoPAPI\API\Schema\FieldQueryInterpreter

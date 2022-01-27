@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 class WPSC_PoP_Custer_Installation
 {
     public function __construct()
@@ -8,17 +7,17 @@ class WPSC_PoP_Custer_Installation
         /**
           * Load a customized config for each website
           */
-        HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this, 'addCustomConfig'));
+        \PoP\Root\App::addAction('PoP:system-generate', array($this, 'addCustomConfig'));
         
         /**
          * Add $_SERVER["SERVER_NAME"] to the cache path, so we can have several websites hosted all together yet each having its own CACHE folder
          */
-        HooksAPIFacade::getInstance()->addAction('PoP:system-build', array($this, 'setCachePath'));
+        \PoP\Root\App::addAction('PoP:system-build', array($this, 'setCachePath'));
         
         /**
          * Generate the .htaccess rules for the Gzip compression inside the cluster folder
          */
-        HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this, 'gzipRules'));
+        \PoP\Root\App::addAction('PoP:system-generate', array($this, 'gzipRules'));
     }
 
     public function addCustomConfig()

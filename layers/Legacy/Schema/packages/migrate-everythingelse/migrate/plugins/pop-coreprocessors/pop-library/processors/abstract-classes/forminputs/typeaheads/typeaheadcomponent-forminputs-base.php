@@ -1,10 +1,9 @@
 <?php
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {
@@ -16,7 +15,7 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         // we must make sure that this module is delivered on the ResourceLoader when doing code-splitting
         if (defined('POP_RESOURCELOADER_INITIALIZED')) {
             $this->resources = array();
-            HooksAPIFacade::getInstance()->addFilter(
+            \PoP\Root\App::addFilter(
                 'PoP_CoreProcessors_ResourceLoaderProcessor:typeahead:templates',
                 array($this, 'getDependencies')
             );
@@ -125,14 +124,14 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         $cmsService = CMSServiceFacade::getInstance();
         $limit = $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10;
         return GeneralUtils::addQueryArgs([
-            \PoP\ComponentModel\Constants\Params::LIMIT => $limit,
+            \PoP\ComponentModel\Constants\PaginationParams::LIMIT => $limit,
         ], $url);
     }
     protected function getRemoteUrl(array $module, array &$props)
     {
         $url = $this->getSourceUrl($module, $props);
         return GeneralUtils::addQueryArgs([
-            \PoP\ComponentModel\Constants\Params::LIMIT => 12,
+            \PoP\ComponentModel\Constants\PaginationParams::LIMIT => 12,
         ], $url);
     }
     protected function getStaticSuggestions(array $module, array &$props)

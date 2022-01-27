@@ -8,19 +8,19 @@ use PoP\Root\App;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Engine\Component;
 use PoP\Engine\ComponentConfiguration;
-use PoP\BasicService\AbstractHookSet;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class VarsHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        App::addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
-            array($this, 'getModelInstanceComponentsFromVars')
+            array($this, 'getModelInstanceComponentsFromAppState')
         );
     }
 
-    public function getModelInstanceComponentsFromVars($components)
+    public function getModelInstanceComponentsFromAppState($components)
     {
         // Removing fields changes the configuration
         /** @var ComponentConfiguration */

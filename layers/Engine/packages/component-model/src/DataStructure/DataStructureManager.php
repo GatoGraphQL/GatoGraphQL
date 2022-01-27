@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DataStructure;
 
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\DataStructureFormatters\DataStructureFormatterInterface;
+use PoP\Root\App;
 
 class DataStructureManager implements DataStructureManagerInterface
 {
@@ -35,9 +36,8 @@ class DataStructureManager implements DataStructureManagerInterface
         };
 
         // Return the one saved in the vars
-        $vars = ApplicationState::getVars();
-        $name = $vars['datastructure'];
-        if ($name && isset($this->formatters[$name])) {
+        $name = App::getState('datastructure');
+        if ($name !== null && isset($this->formatters[$name])) {
             return $this->formatters[$name];
         };
 

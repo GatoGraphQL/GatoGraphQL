@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_SPAResourceLoader_Initialization
 {
@@ -10,7 +9,7 @@ class PoP_SPAResourceLoader_Initialization
         // $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         // if (!$cmsapplicationapi->isAdminPanel()) {
 
-        //     HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+        //     \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
         // }
 
         /**
@@ -55,7 +54,7 @@ class PoP_SPAResourceLoader_Initialization
 
     //     // No need to declare this file here, since it's already defined in the sparesourceloader-processor
     //     // Also, if not doing code splitting, then no need for the resourceLoader config file
-    //     // if (\PoP\ComponentModel\Environment::enableConfigByParams() || PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
+    //     // if (PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
 
     //     //     $cmswebplatformapi->registerScript('pop-codesplit-jslibrary-manager', $libraries_js_folder.'/codesplit-jslibrary-manager'.$suffix.'.js', array('jquery'), POP_SPARESOURCELOADER_VERSION, true);
     //     //     $cmswebplatformapi->enqueueScript('pop-codesplit-jslibrary-manager');
@@ -69,8 +68,7 @@ class PoP_SPAResourceLoader_Initialization
     //     //     // This file is generated dynamically, so it can't be added to any bundle or minified
     //     //     // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
     //     //     global $pop_sparesourceloader_configfile;
-    //     //     $vars = ApplicationState::getVars();
-    //     //     $cmswebplatformapi->registerScript('pop-sparesourceloader-config', $pop_sparesourceloader_configfile->getFileurl(), array(PoP_SPAResourceLoaderProcessorUtils::getNoconflictResourceName(POP_SPARESOURCELOADER_SPARESOURCELOADER)), $vars['version'], true);
+    //     //     $cmswebplatformapi->registerScript('pop-sparesourceloader-config', $pop_sparesourceloader_configfile->getFileurl(), array(PoP_SPAResourceLoaderProcessorUtils::getNoconflictResourceName(POP_SPARESOURCELOADER_SPARESOURCELOADER)), ApplicationInfoFacade::getInstance()->getVersion(), true);
     //     //     $cmswebplatformapi->enqueueScript('pop-sparesourceloader-config');
     //     // }
     // }

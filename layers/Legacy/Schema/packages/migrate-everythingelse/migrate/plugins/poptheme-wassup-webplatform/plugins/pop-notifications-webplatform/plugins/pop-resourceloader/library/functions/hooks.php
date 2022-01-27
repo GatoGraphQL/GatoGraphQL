@@ -1,11 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PopThemeWassup_AAL_ResourceLoaderProcessor_Hooks
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addFilter(
+        \PoP\Root\App::addFilter(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-resources',
             array($this, 'getModuleCssResources'),
             10,

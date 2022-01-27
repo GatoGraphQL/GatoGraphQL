@@ -8,5 +8,4 @@ use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateUpd
 
 abstract class AbstractCreateUpdateStanceMutationResolverBridge extends AbstractCreateUpdateCustomPostMutationResolverBridge
 {
-
 }

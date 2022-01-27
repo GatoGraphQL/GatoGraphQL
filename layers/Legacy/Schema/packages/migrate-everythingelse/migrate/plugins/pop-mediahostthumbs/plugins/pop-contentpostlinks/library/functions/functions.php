@@ -1,7 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('getThumbId:default', 'popContentpostlinksDefaultlink', 10, 2);
+\PoP\Root\App::addFilter('getThumbId:default', 'popContentpostlinksDefaultlink', 10, 2);
 function popContentpostlinksDefaultlink($thumb_id, $post_id)
 {
 

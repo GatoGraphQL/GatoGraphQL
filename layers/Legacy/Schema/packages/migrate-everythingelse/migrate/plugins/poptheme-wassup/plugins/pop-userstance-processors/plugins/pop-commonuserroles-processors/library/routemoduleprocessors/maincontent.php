@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Routing\RouteNatures;
+use PoP\Root\Routing\RequestNature;
 
 class UserStance_URE_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -18,14 +18,14 @@ class UserStance_URE_Module_MainContentRouteModuleProcessor extends \PoP\Applica
             POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL],
         );
         foreach ($routemodules_carousels as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CAROUSEL,
                 ],
             ];
             if ($default_format_votes == POP_FORMAT_CAROUSEL) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
             }
         }
 
@@ -34,14 +34,14 @@ class UserStance_URE_Module_MainContentRouteModuleProcessor extends \PoP\Applica
             POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_votes == POP_FORMAT_FULLVIEW) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -49,14 +49,14 @@ class UserStance_URE_Module_MainContentRouteModuleProcessor extends \PoP\Applica
             POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_votes == POP_FORMAT_THUMBNAIL) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
             }
         }
         $routemodules_list = array(
@@ -64,14 +64,14 @@ class UserStance_URE_Module_MainContentRouteModuleProcessor extends \PoP\Applica
             POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = [
+            $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_votes == POP_FORMAT_LIST) {
-                $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
             }
         }
 

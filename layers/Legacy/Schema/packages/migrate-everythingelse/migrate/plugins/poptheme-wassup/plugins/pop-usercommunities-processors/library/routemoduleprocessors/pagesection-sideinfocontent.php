@@ -1,7 +1,7 @@
 <?php
 
-use PoP\Routing\RouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Root\Routing\RequestNature;
+use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPTheme_Wassup_UserCommunities_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -16,10 +16,10 @@ class PoPTheme_Wassup_UserCommunities_Module_SideInfoContentPageSectionRouteModu
             POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_Module_Processor_SidebarMultiples::class, PoP_UserCommunities_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[UserRouteNatures::USER][$route][] = [
+            $ret[UserRequestNature::USER][$route][] = [
                 'module' => $module,
                 'conditions' => [
-                    'routing-state' => [
+                    'routing' => [
                         'queried-object-is-community' => true,
                     ],
                 ],
@@ -31,7 +31,7 @@ class PoPTheme_Wassup_UserCommunities_Module_SideInfoContentPageSectionRouteModu
             POP_USERCOMMUNITIES_ROUTE_MYMEMBERS => [PoP_UserCommunities_Module_Processor_SidebarMultiples::class, PoP_UserCommunities_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYMEMBERS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
         }
 
         return $ret;

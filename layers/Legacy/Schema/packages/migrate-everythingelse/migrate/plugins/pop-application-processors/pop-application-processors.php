@@ -6,7 +6,6 @@ Description: Collection of processors for PoP Application
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -20,7 +19,7 @@ class PoP_ApplicationProcessors
     {
 
         // Priority: new section, after PoP Master Collection Processors section
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888800);
+        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888800);
     }
     public function init()
     {
