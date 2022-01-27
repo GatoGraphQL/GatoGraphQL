@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PHPUnit\Framework\TestCase;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\Root\AbstractTestCase;
 
-class DocumentTest extends TestCase
+class DocumentTest extends AbstractTestCase
 {
+    protected function getParser(): ParserInterface
+    {
+        return $this->getService(ParserInterface::class);
+    }
+
     public function testValidationWorks()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
 
         // Validate that there are no errors <= no Exception is thrown
         $document = $parser->parse('
@@ -56,7 +61,7 @@ class DocumentTest extends TestCase
     public function testMissingFragmentReferencedByFragment()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
               factions(names:$names_0, test: $query) {
@@ -74,7 +79,7 @@ class DocumentTest extends TestCase
     public function testFragmentNotUsed()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
               factions(names:$names_0, test: $query) {
@@ -112,7 +117,7 @@ class DocumentTest extends TestCase
     public function testFragmentMissing()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
               factions(names:$names_0, test: $query) {
@@ -127,7 +132,7 @@ class DocumentTest extends TestCase
     public function testVariableNotUsed()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String, $notUsedVar: Boolean) {
               factions(names:$names_0, test: $query) {
@@ -141,7 +146,7 @@ class DocumentTest extends TestCase
     public function testVariableMissing()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
               factions(names:$names_0, test: $query, someOther: $missingVar) {
@@ -155,7 +160,7 @@ class DocumentTest extends TestCase
     public function testVariableMissingInDirective()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
               id
@@ -170,7 +175,7 @@ class DocumentTest extends TestCase
     public function testVariableMissingInInputObject()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query {
               id
@@ -185,7 +190,7 @@ class DocumentTest extends TestCase
     public function testVariableMissingInInputList()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query {
               id
@@ -199,7 +204,7 @@ class DocumentTest extends TestCase
 
     public function testVariableInFragment()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($includeName: Boolean) {
               id
@@ -220,7 +225,7 @@ class DocumentTest extends TestCase
     public function testVariableMissingInFragment()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute {
               id
@@ -240,7 +245,7 @@ class DocumentTest extends TestCase
     public function testNoOperationsDefined()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             fragment F0 on Ship {
                 id,
@@ -253,7 +258,7 @@ class DocumentTest extends TestCase
     public function testUniqueOperationName()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
                 users {
@@ -273,7 +278,7 @@ class DocumentTest extends TestCase
     public function testUniqueOperationNameAcrossOps()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
                 users {
@@ -293,7 +298,7 @@ class DocumentTest extends TestCase
     public function testUniqueVariableName()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($someVar: String, $someVar: Boolean) {
                 users {
@@ -308,7 +313,7 @@ class DocumentTest extends TestCase
     public function testNonEmptyOperationName()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
                 users {
@@ -331,7 +336,7 @@ class DocumentTest extends TestCase
     public function testDuplicateArgument($query)
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse($query);
         $document->validate();
     }

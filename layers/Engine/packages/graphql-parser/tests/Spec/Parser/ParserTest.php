@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PHPUnit\Framework\TestCase;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -22,19 +21,15 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\ParserInterface;
+use PoP\Root\AbstractTestCase;
 use stdClass;
 
-class ParserTest extends TestCase
+class ParserTest extends AbstractTestCase
 {
-    private ?Parser $parser = null;
-
-    public function setParser(Parser $parser): void
+    protected function getParser(): ParserInterface
     {
-        $this->parser = $parser;
-    }
-    public function getParser(): Parser
-    {
-        return $this->parser ??= new Parser();
+        return $this->getService(ParserInterface::class);
     }
 
     public function testEmptyParser()

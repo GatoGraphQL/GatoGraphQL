@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
-use PoP\Root\AbstractTestCase;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -12,7 +11,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\GraphQLParser\Spec\Parser\Parser;
+use PoP\GraphQLParser\Spec\Parser\ParserInterface;
+use PoP\Root\AbstractTestCase;
 
 abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
 {
@@ -28,9 +28,14 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
 
     abstract protected static function enabled(): bool;
 
+    protected function getParser(): ParserInterface
+    {
+        return $this->getService(ParserInterface::class);
+    }
+
     public function testMultipleQueryExecution(): void
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query One {
                 film(id: 1) {

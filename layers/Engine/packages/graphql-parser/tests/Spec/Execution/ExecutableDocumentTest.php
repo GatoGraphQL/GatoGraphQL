@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Execution;
 
-use PHPUnit\Framework\TestCase;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -12,13 +11,19 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\GraphQLParser\Spec\Parser\Parser;
+use PoP\GraphQLParser\Spec\Parser\ParserInterface;
+use PoP\Root\AbstractTestCase;
 
-class ExecutableDocumentTest extends TestCase
+class ExecutableDocumentTest extends AbstractTestCase
 {
+    protected function getParser(): ParserInterface
+    {
+        return $this->getService(ParserInterface::class);
+    }
+    
     public function testGetVariableFromContext()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
 
         // Validate that there are no errors <= no Exception is thrown
         $document = $parser->parse('
@@ -39,7 +44,7 @@ class ExecutableDocumentTest extends TestCase
 
     public function testGetVariableDefaultValue()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($includeUsers: Boolean = true) {
               users {
@@ -56,7 +61,7 @@ class ExecutableDocumentTest extends TestCase
 
     public function testRequestDefinedOperation()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
               users {
@@ -73,7 +78,7 @@ class ExecutableDocumentTest extends TestCase
 
     public function testRequestOneOfDefinedOperation()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
               users {
@@ -98,7 +103,7 @@ class ExecutableDocumentTest extends TestCase
     public function testNonUniqueOperation()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
               users {
@@ -123,7 +128,7 @@ class ExecutableDocumentTest extends TestCase
     public function testMissingVariableValue()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($format: String) {
               users {
@@ -140,7 +145,7 @@ class ExecutableDocumentTest extends TestCase
     public function testMissingVariableValueForDirective()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($includeUsers: Boolean) {
               users {
@@ -157,7 +162,7 @@ class ExecutableDocumentTest extends TestCase
     public function testOperationDoesNotExist()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
               users {
@@ -174,7 +179,7 @@ class ExecutableDocumentTest extends TestCase
     public function testNonInitializedRequest()
     {
         $this->expectException(InvalidRequestException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('{ id }');
         $context = new Context();
         $executableDocument = new ExecutableDocument($document, $context);
@@ -183,7 +188,7 @@ class ExecutableDocumentTest extends TestCase
 
     public function testRequestedOperationsMatchOperations()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('{ film(id: 1 filmID: 2) { title } }');
         $context = new Context();
         $executableDocument = new ExecutableDocument($document, $context);
@@ -205,7 +210,7 @@ class ExecutableDocumentTest extends TestCase
 
     public function testRequestedOperation()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             query One {
                 film(id: 1) {
