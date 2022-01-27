@@ -347,28 +347,28 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
     public function failingQueryWithMetaDirectiveProvider(): array
     {
         return [
-            [
+            'no-directive-under-pos' => [
                 <<<GRAPHQL
                     query {
                         capabilities @forEach(affectDirectivesUnderPos: [2]) @upperCase
                     }
                 GRAPHQL,
             ],
-            [
+            'no-negative-pos' => [
                 <<<GRAPHQL
                     query {
                         capabilities @forEach(affectDirectivesUnderPos: [-2]) @upperCase
                     }
                 GRAPHQL,
             ],
-            [
+            'no-2nd-directive-under-pos' => [
                 <<<GRAPHQL
                     query {
                         capabilities @forEach(affectDirectivesUnderPos: [1,2]) @upperCase
                     }
                 GRAPHQL,
             ],
-            [
+            'directive-referenced-only-once' => [
                 <<<GRAPHQL
                     query {
                         groupCapabilities @forEach(affectDirectivesUnderPos: [1,2]) @advancePointerInArrayOrObject(path: "group") @upperCase @lowerCase
