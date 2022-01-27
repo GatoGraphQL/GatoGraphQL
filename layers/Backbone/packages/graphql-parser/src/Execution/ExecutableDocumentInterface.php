@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Execution;
 
-use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Document;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 

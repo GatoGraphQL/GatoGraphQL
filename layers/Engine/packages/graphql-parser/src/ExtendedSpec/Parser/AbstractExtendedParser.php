@@ -9,7 +9,7 @@ use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Response\OutputServiceInterface;
 use PoP\Root\App;
-use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Location;

@@ -8,7 +8,7 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Directive;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
-use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;

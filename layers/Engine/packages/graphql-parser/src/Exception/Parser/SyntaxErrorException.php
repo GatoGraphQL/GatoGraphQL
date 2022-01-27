@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPBackbone\GraphQLParser\Exception\Parser;
+namespace PoP\GraphQLParser\Exception\Parser;
 
 class SyntaxErrorException extends AbstractParserError
 {

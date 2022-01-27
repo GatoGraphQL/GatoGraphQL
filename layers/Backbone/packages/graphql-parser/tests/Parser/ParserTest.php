@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser;
 
 use PHPUnit\Framework\TestCase;
-use PoPBackbone\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;

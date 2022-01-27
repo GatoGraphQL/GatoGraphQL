@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Execution;
 
 use PHPUnit\Framework\TestCase;
-use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
 use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;

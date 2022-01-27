@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser;
 
 use PHPUnit\Framework\TestCase;
-use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 
 class DocumentTest extends TestCase
 {

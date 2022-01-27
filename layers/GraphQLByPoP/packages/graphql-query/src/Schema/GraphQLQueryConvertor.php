@@ -18,7 +18,7 @@ use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ExtendedParserInterface;
-use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
+use PoP\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Execution\ExecutableDocumentInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
