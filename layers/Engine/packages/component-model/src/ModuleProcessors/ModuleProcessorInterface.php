@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\GraphQLParser\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 
 interface ModuleProcessorInterface
 {

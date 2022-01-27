@@ -7,8 +7,10 @@ namespace PoPAPI\API\ModuleProcessors;
 use PoP\Root\App;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\FieldQuery\QueryHelpers;
-use PoP\GraphQLParser\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\ExtendedSpec\Runtime\Ast\FieldInterface as ExtendedFieldInterface;
+use PoP\GraphQLParser\ExtendedSpec\Runtime\Ast\LeafField as ExtendedLeafField;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
@@ -25,7 +27,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
          */
         return array_filter(
             $this->getPropertyFields($module),
-            fn (LeafField $field) => !$field->isSkipOutputIfNull(),
+            fn (LeafField $field) => !($field instanceof ExtendedLeafField) || !$field->isSkipOutputIfNull(),
         );
     }
 
@@ -66,7 +68,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         // Process only the fields without "skip output if null". Those will be processed on function `getConditionalOnDataFieldDomainSwitchingSubmodules`
         $fieldNestedFields = array_filter(
             $this->getFieldsWithNestedSubfields($module),
-            fn (FieldInterface $field) => !$field->isSkipOutputIfNull(),
+            fn (FieldInterface $field) => !($field instanceof ExtendedFieldInterface) || !$field->isSkipOutputIfNull(),
             ARRAY_FILTER_USE_KEY
         );
 
@@ -105,11 +107,11 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         // Calculate the property fields with "skip output if null" on true
         $propertyFields = array_filter(
             $this->getPropertyFields($module),
-            fn (FieldInterface $field) => $field->isSkipOutputIfNull(),
+            fn (FieldInterface $field) => $field instanceof ExtendedFieldInterface && $field->isSkipOutputIfNull(),
         );
         $relationalFields = array_keys(array_filter(
             $this->getFieldsWithNestedSubfields($module),
-            fn (FieldInterface $field) => $field->isSkipOutputIfNull(),
+            fn (FieldInterface $field) => $field instanceof ExtendedFieldInterface && $field->isSkipOutputIfNull(),
             ARRAY_FILTER_USE_KEY
         ));
         $fields = array_values(array_unique(array_merge(
@@ -167,7 +169,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         // Calculate the nested fields with "skip output if null" on true
         $fieldNestedFields = array_filter(
             $this->getFieldsWithNestedSubfields($module),
-            fn (FieldInterface $field) => $field->isSkipOutputIfNull(),
+            fn (FieldInterface $field) => $field instanceof ExtendedFieldInterface && $field->isSkipOutputIfNull(),
             ARRAY_FILTER_USE_KEY
         );
 
