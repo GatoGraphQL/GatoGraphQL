@@ -26,9 +26,14 @@ use stdClass;
 
 class ParserTest extends TestCase
 {
+    protected function getParser(): Parser
+    {
+        return new Parser();
+    }
+
     public function testEmptyParser()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document = $parser->parse('');
 
         $this->assertEquals(new Document([], []), $document);
@@ -37,7 +42,7 @@ class ParserTest extends TestCase
     public function testInvalidSelection()
     {
         $this->expectException(SyntaxErrorException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
         $parser->parse('
         {
             test {
@@ -63,7 +68,7 @@ query {
 }
 GRAPHQL;
 
-        $parser     = new Parser();
+        $parser     = $this->getParser();
         $document = $parser->parse($query);
 
         $this->assertEquals($document, new Document(
@@ -135,14 +140,14 @@ GRAPHQL;
     public function testWrongQueries(string $query)
     {
         $this->expectException(SyntaxErrorException::class);
-        $parser = new Parser();
+        $parser = $this->getParser();
 
         $parser->parse($query);
     }
 
     public function testCommas()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document   = $parser->parse('{ foo,       ,,  , bar  }');
         $this->assertEquals(new Document(
             [
@@ -162,7 +167,7 @@ GRAPHQL;
 
     public function testQueryWithNoFields()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document   = $parser->parse('{ name }');
         $this->assertEquals(new Document(
             [
@@ -181,7 +186,7 @@ GRAPHQL;
 
     public function testQueryWithFields()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document   = $parser->parse('{ post, user { name } }');
         $this->assertEquals(new Document(
             [
@@ -203,7 +208,7 @@ GRAPHQL;
 
     public function testFragmentWithFields()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
         $document   = $parser->parse('
             fragment FullType on __Type {
                 kind
@@ -226,7 +231,7 @@ GRAPHQL;
 
     public function testInspectionQuery()
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
 
         $document = $parser->parse('
             query IntrospectionQuery {
@@ -418,7 +423,7 @@ GRAPHQL;
 
     public function testInlineFragment()
     {
-        $parser          = new Parser();
+        $parser          = $this->getParser();
         $document = $parser->parse('
             {
                 test: test {
@@ -460,7 +465,7 @@ GRAPHQL;
      */
     public function testMutations($query, $structure)
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
 
         $document = $parser->parse($query);
 
@@ -568,7 +573,7 @@ GRAPHQL;
      */
     public function testParser($query, $structure)
     {
-        $parser          = new Parser();
+        $parser          = $this->getParser();
         $document = $parser->parse($query);
 
         $this->assertEquals($structure, $document);
@@ -833,7 +838,7 @@ GRAPHQL;
      */
     public function testDirectives($query, $structure)
     {
-        $parser = new Parser();
+        $parser = $this->getParser();
 
         $document = $parser->parse($query);
 
@@ -1103,7 +1108,7 @@ GRAPHQL;
     public function testVariableDefaultValue()
     {
         // Test with non-null default value
-        $parser          = new Parser();
+        $parser          = $this->getParser();
         $document = $parser->parse('
             query ($format: String = "small"){
               user {
@@ -1119,7 +1124,7 @@ GRAPHQL;
         $this->assertEquals('small', $var->getValue()->getValue());
 
         // Test with null default value
-        $parser          = new Parser();
+        $parser          = $this->getParser();
         $document = $parser->parse('
             query ($format: String = null){
               user {
@@ -1138,7 +1143,7 @@ GRAPHQL;
     public function testInputObjectVariableValue()
     {
         // Test with default value
-        $parser          = new Parser();
+        $parser          = $this->getParser();
         $document = $parser->parse('
             query FilterUsers($filter: UserFilterInput = { name: "Pedro", age: 19, relatives: { dad: "Jacinto" } }) {
               users(filter: $filter) {
@@ -1159,7 +1164,7 @@ GRAPHQL;
         $this->assertEquals($var->getDefaultValue()->getValue(), $filter);
 
         // Test injecting in Context
-        $parser          = new Parser();
+        $parser          = $this->getParser();
         $document = $parser->parse('
         query FilterUsers($filter: UserFilterInput!) {
             users(filter: $filter) {
@@ -1178,7 +1183,7 @@ GRAPHQL;
     public function testInputListVariableValue()
     {
         // Test with default value
-        $parser          = new Parser();
+        $parser          = $this->getParser();
         $document = $parser->parse('
             query FilterPosts($ids: [ID!]! = [3, 5, {id: 5}]) {
               posts(ids: $ids) {
@@ -1197,7 +1202,7 @@ GRAPHQL;
         $this->assertEquals($var->getDefaultValue()->getValue(), $ids);
 
         // Test injecting in Context
-        $parser          = new Parser();
+        $parser          = $this->getParser();
         $document = $parser->parse('
         query FilterPosts($ids: [ID!]!) {
             posts(ids: $ids) {
@@ -1216,7 +1221,7 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInVariable()
     {
         $this->expectException(SyntaxErrorException::class);
-        $parser          = new Parser();
+        $parser          = $this->getParser();
         $parser->parse('
             query FilterUsers($filter: UserFilterInput = { name: "Pedro", name: "Juancho" }) {
               users(filter: $filter) {
@@ -1230,7 +1235,7 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInArgument()
     {
         $this->expectException(SyntaxErrorException::class);
-        $parser          = new Parser();
+        $parser          = $this->getParser();
         $parser->parse('
             query FilterUsers {
               users(filter: { name: "Pedro", name: "Juancho" }) {
