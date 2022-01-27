@@ -33,6 +33,7 @@ class RequestValidatorTest extends AbstractTestCase
     public function testInvalidRequests(ExecutableDocument $executableDocument)
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $executableDocument->validateAndInitialize();
     }
 

@@ -67,6 +67,7 @@ class DocumentTest extends AbstractTestCase
     public function testMissingFragmentReferencedByFragment()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -85,6 +86,7 @@ class DocumentTest extends AbstractTestCase
     public function testFragmentNotUsed()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -123,6 +125,7 @@ class DocumentTest extends AbstractTestCase
     public function testFragmentMissing()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -138,6 +141,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableNotUsed()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String, $notUsedVar: Boolean) {
@@ -152,6 +156,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissing()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -166,6 +171,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissingInDirective()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -181,6 +187,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissingInInputObject()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query {
@@ -196,6 +203,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissingInInputList()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query {
@@ -231,6 +239,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissingInFragment()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute {
@@ -251,6 +260,7 @@ class DocumentTest extends AbstractTestCase
     public function testNoOperationsDefined()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             fragment F0 on Ship {
@@ -264,6 +274,7 @@ class DocumentTest extends AbstractTestCase
     public function testUniqueOperationName()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
@@ -284,6 +295,7 @@ class DocumentTest extends AbstractTestCase
     public function testUniqueOperationNameAcrossOps()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
@@ -304,6 +316,7 @@ class DocumentTest extends AbstractTestCase
     public function testUniqueVariableName()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($someVar: String, $someVar: Boolean) {
@@ -319,6 +332,7 @@ class DocumentTest extends AbstractTestCase
     public function testNonEmptyOperationName()
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
@@ -342,6 +356,7 @@ class DocumentTest extends AbstractTestCase
     public function testDuplicateArgument($query)
     {
         $this->expectException(InvalidRequestException::class);
+        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
         $document = $parser->parse($query);
         $document->validate();
