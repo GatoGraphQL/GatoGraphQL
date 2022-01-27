@@ -148,7 +148,6 @@ GRAPHQL;
     public function testWrongQueries(string $query)
     {
         $this->expectException(SyntaxErrorException::class);
-        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
         $parser = $this->getParser();
 
         $parser->parse($query);
@@ -1230,8 +1229,8 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInVariable()
     {
         $this->expectException(SyntaxErrorException::class);
-        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
-        $parser          = $this->getParser();
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateKeyInInputObjectSyntaxErrorMessage('name'));
+        $parser = $this->getParser();
         $parser->parse('
             query FilterUsers($filter: UserFilterInput = { name: "Pedro", name: "Juancho" }) {
               users(filter: $filter) {
