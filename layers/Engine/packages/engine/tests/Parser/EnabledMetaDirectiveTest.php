@@ -45,9 +45,7 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
                                     [
                                         new MetaDirective(
                                             'forEach',
-                                            [
-                                                // new Argument('if', new Literal(true, new Location(2, 28)), new Location(2, 24)),
-                                            ],
+                                            [],
                                             [
                                                 new Directive('upperCase', [], new Location(2, 32)),
                                             ],
