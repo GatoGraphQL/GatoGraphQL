@@ -72,6 +72,19 @@ abstract class AbstractExtendedParser extends Parser implements ExtendedParserIn
                 : $this->getAffectDirectivesUnderPosArgumentDefaultValue($directive);
 
             foreach ($affectDirectivesUnderPositions as $affectDirectiveUnderPosition) {
+                /**
+                 * Every directive can be referenced only once.
+                 *
+                 * Eg: This query is not valid (@upperCase is referenced twice):
+                 *
+                 *   { groupCapabilities @forEach(affectDirectivesUnderPos: [1,2]) @advancePointerInArrayOrObject @upperCase }
+                 */
+                if (isset($composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition])) {
+                    throw new InvalidRequestException(
+                        $this->getAffectedDirectivesReferencedMoreThanOnceErrorMessage($directive),
+                        $directive->getLocation()
+                    );
+                }
                 $composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition] = $affectDirectiveUnderPosition;
             }
             $directivePos++;
@@ -182,6 +195,15 @@ abstract class AbstractExtendedParser extends Parser implements ExtendedParserIn
         }
 
         return $argumentValue;
+    }
+
+    protected function getAffectedDirectivesReferencedMoreThanOnceErrorMessage(
+        Directive $directive,
+    ): string {
+        return \sprintf(
+            $this->__('Meta directive \'%s\' is nesting a directive already nested by another meta-directive', 'graphql-parser'),
+            $directive->getName()
+        );
     }
 
     protected function getAffectedDirectivesUnderPosNotEmptyErrorMessage(
