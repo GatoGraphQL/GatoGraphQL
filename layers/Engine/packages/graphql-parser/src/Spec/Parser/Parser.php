@@ -79,9 +79,17 @@ class Parser extends Tokenizer implements ParserInterface
         );
     }
 
-    protected function getIncorrectRequestSyntaxErrorMessage(string $syntax): string
+    protected function getIncorrectRequestSyntaxErrorMessage(?string $syntax): string
     {
-        return \sprintf('Incorrect request syntax: \'%s\'', $syntax);
+        $errorMessage = 'Incorrect request syntax';
+        if ($syntax === null) {
+            return $errorMessage;
+        }
+        return \sprintf(
+            '%s: \'%s\'',
+            $errorMessage,
+            $syntax
+        );
     }
 
     private function init(string $source): void
