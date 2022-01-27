@@ -8,9 +8,12 @@ use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Services\StandaloneServiceTrait;
 
 class ExecutableDocument implements ExecutableDocumentInterface
 {
+    use StandaloneServiceTrait;
+    
     private ?array $requestedOperations = null;
 
     public function __construct(
