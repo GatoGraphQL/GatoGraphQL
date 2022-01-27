@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\Parser;
+namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\Root\Services\BasicServiceTrait;
-use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable as ExtendedVariable;
-use PoP\GraphQLParser\Parser\Ast\Directive as ExtendedDirective;
-use PoP\GraphQLParser\Parser\Ast\Document;
-use PoP\GraphQLParser\Parser\Ast\LeafField as ExtendedLeafField;
-use PoP\GraphQLParser\Parser\Ast\RelationalField as ExtendedRelationalField;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\Variable as ExtendedVariable;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Directive as ExtendedDirective;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\LeafField as ExtendedLeafField;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\RelationalField as ExtendedRelationalField;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;

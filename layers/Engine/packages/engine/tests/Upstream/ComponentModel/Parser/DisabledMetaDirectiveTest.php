@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Upstream\ComponentModel\Parser;
 
-use PoP\GraphQLParser\Parser\Ast\Directive;
-use PoP\GraphQLParser\Parser\Ast\Document;
-use PoP\GraphQLParser\Parser\Ast\LeafField;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Directive;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Location;
 

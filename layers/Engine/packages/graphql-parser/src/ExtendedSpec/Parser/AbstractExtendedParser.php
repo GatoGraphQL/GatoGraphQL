@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\Parser;
+namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
-use PoP\GraphQLParser\Parser\Ast\MetaDirective;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Response\OutputServiceInterface;
 use PoP\Root\App;
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;

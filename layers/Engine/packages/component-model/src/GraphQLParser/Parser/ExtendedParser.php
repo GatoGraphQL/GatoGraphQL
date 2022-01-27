@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\GraphQLParser\Parser;
 
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
-use PoP\GraphQLParser\Parser\AbstractExtendedParser;
+use PoP\GraphQLParser\ExtendedSpec\Parser\AbstractExtendedParser;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 

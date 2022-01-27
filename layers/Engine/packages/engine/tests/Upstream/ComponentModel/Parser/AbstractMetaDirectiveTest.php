@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Upstream\ComponentModel\Parser;
 
-use PoP\GraphQLParser\Parser\Ast\Document;
-use PoP\GraphQLParser\Parser\ExtendedParserInterface;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
+use PoP\GraphQLParser\ExtendedSpec\Parser\ExtendedParserInterface;
 use PoP\Root\AbstractTestCase;
 
 abstract class AbstractMetaDirectiveTest extends AbstractTestCase

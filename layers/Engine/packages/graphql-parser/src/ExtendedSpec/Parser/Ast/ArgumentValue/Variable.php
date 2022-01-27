@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\Parser\Ast\ArgumentValue;
+namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue;
 
 use PoP\Root\Services\StandaloneServiceTrait;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable as UpstreamVariable;

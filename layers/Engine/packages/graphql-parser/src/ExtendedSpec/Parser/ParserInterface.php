@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\Parser;
+namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoPBackbone\GraphQLParser\Parser\ParserInterface as UpstreamParserInterface;
 
