@@ -191,6 +191,51 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
                     ]
                 ),
             ],
+            [
+                <<<GRAPHQL
+                    query {
+                        groupCapabilities @forEach @advancePointerInArrayOrObject(path: "group") @upperCase @lowerCase
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            '',
+                            [],
+                            [],
+                            [
+                                new LeafField(
+                                    'groupCapabilities',
+                                    null,
+                                    [],
+                                    [
+                                        new MetaDirective(
+                                            'forEach',
+                                            [],
+                                            [
+                                                new MetaDirective(
+                                                    'advancePointerInArrayOrObject',
+                                                    [
+                                                        new Argument('path', new Literal('group', new Location(2, 74)), new Location(2, 67)),
+                                                    ],
+                                                    [
+                                                        new Directive('upperCase', [], new Location(2, 83)),
+                                                    ],
+                                                    new Location(2, 37)
+                                                )
+                                            ],
+                                            new Location(2, 28)
+                                        ),
+                                        new Directive('lowerCase', [], new Location(2, 94)),
+                                    ],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ]
+                ),
+            ],
         ];
     }
 
