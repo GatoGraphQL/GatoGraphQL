@@ -33,7 +33,14 @@ class RequestValidatorTest extends AbstractTestCase
     public function testInvalidRequests(ExecutableDocument $executableDocument)
     {
         $this->expectException(InvalidRequestException::class);
-        // $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getErrorMessage());
+        $exceptionMessages = [
+            'fragment-not-defined' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference'),
+            'fragment-not-defined-2' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference2'),
+            'fragment-not-used' => $this->getGraphQLErrorMessageProvider()->getFragmentNotUsedErrorMessage('reference2'),
+            'variable-not-defined' => $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('test'),
+            'variable-not-submitted' => $this->getGraphQLErrorMessageProvider()->getVariableHasntBeenSubmittedErrorMessage('test'),
+        ];
+        $this->expectExceptionMessage($exceptionMessages[$this->dataName()] ?? '');
         $executableDocument->validateAndInitialize();
     }
 
@@ -52,7 +59,7 @@ class RequestValidatorTest extends AbstractTestCase
         $variable3->setContext($context);
 
         return [
-            [
+            'fragment-not-defined' => [
                 (new ExecutableDocument(
                     new Document([
                         new QueryOperation(
@@ -70,7 +77,7 @@ class RequestValidatorTest extends AbstractTestCase
                     new Context()
                 )),
             ],
-            [
+            'fragment-not-defined-2' => [
                 (new ExecutableDocument(
                     new Document([
                         new QueryOperation(
@@ -89,9 +96,9 @@ class RequestValidatorTest extends AbstractTestCase
                         new Fragment('reference', 'TestType', [], [], new Location(1, 1))
                     ]),
                     new Context()
-                ))
+                )),
             ],
-            [
+            'fragment-not-used' => [
                 (new ExecutableDocument(
                     new Document([
                         new QueryOperation(
@@ -110,9 +117,9 @@ class RequestValidatorTest extends AbstractTestCase
                             new Fragment('reference2', 'TestType', [], [], new Location(1, 1))
                         ]),
                     new Context()
-                ))
+                )),
             ],
-            [
+            'variable-not-defined' => [
                 (new ExecutableDocument(
                     new Document([
                         new QueryOperation(
@@ -137,9 +144,9 @@ class RequestValidatorTest extends AbstractTestCase
                         )
                         ]),
                     new Context()
-                ))
+                )),
             ],
-            [
+            'variable-not-submitted' => [
                 (new ExecutableDocument(
                     new Document([
                         new QueryOperation(
@@ -158,7 +165,7 @@ class RequestValidatorTest extends AbstractTestCase
                         )
                         ]),
                     new Context()
-                ))
+                )),
             ]
         ];
     }
