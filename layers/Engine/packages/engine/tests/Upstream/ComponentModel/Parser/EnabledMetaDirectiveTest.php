@@ -9,11 +9,11 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
-use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
-use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
-use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
-use PoPBackbone\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
+use PoP\GraphQLParser\Spec\Parser\Location;
 
 class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
 {

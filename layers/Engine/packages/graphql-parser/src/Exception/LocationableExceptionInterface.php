@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Exception;
 
-use PoPBackbone\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Location;
 
 interface LocationableExceptionInterface
 {

@@ -10,9 +10,9 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Response\OutputServiceInterface;
 use PoP\Root\App;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
-use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
-use PoPBackbone\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Location;
 use stdClass;
 
 abstract class AbstractExtendedParser extends Parser implements ExtendedParserInterface

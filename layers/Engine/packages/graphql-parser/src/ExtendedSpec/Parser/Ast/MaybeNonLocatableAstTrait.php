@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast;
 
-use PoPBackbone\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Location;
 
 trait MaybeNonLocatableAstTrait
 {

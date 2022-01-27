@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast;
 
 use PoP\Root\Services\StandaloneServiceTrait;
-use PoPBackbone\GraphQLParser\Parser\Ast\Document as UpstreamDocument;
+use PoP\GraphQLParser\Spec\Parser\Ast\Document as UpstreamDocument;
 
 class Document extends UpstreamDocument
 {

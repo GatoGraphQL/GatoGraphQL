@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast;
 
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Directive as ExtendedDirective;
-use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
-use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
-use PoPBackbone\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Location;
 
 class MetaDirective extends ExtendedDirective
 {

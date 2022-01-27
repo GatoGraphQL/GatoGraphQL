@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue;
 
 use PoP\Root\Services\StandaloneServiceTrait;
-use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable as UpstreamVariable;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable as UpstreamVariable;
 
 class Variable extends UpstreamVariable
 {

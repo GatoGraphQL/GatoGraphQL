@@ -10,15 +10,15 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Directive as ExtendedDirective;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\LeafField as ExtendedLeafField;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\RelationalField as ExtendedRelationalField;
-use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
-use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
-use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
-use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
-use PoPBackbone\GraphQLParser\Parser\Ast\FragmentBondInterface;
-use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
-use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
-use PoPBackbone\GraphQLParser\Parser\Location;
-use PoPBackbone\GraphQLParser\Parser\Parser as UpstreamParser;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 
 class Parser extends UpstreamParser implements ParserInterface
 {

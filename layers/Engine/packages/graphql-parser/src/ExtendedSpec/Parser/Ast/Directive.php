@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast;
 
-use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
-use PoPBackbone\GraphQLParser\Parser\Ast\Directive as UpstreamDirective;
-use PoPBackbone\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive as UpstreamDirective;
+use PoP\GraphQLParser\Spec\Parser\Location;
 
 class Directive extends UpstreamDirective
 {

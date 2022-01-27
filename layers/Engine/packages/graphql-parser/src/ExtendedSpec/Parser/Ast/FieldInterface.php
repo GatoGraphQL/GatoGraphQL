@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast;
 
-use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface as UpstreamFieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface as UpstreamFieldInterface;
 
 interface FieldInterface extends UpstreamFieldInterface
 {

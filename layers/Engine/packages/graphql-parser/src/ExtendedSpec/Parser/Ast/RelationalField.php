@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast;
 
-use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
-use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
-use PoPBackbone\GraphQLParser\Parser\Ast\FragmentBondInterface;
-use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField as UpstreamRelationalField;
-use PoPBackbone\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField as UpstreamRelationalField;
+use PoP\GraphQLParser\Spec\Parser\Location;
 
 class RelationalField extends UpstreamRelationalField implements FieldInterface
 {
