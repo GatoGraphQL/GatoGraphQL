@@ -24,8 +24,6 @@ services:
           ../../layers/API/packages/api-mirrorquery:/app/vendor/pop-api/api-mirrorquery
         - '../../layers/API/packages/api-rest:/app/vendor/pop-api/api-rest'
         - >-
-          ../../layers/Backbone/packages/graphql-parser:/app/vendor/pop-backbone/graphql-parser
-        - >-
           ../../layers/Backbone/packages/php-hooks:/app/vendor/pop-backbone/php-hooks
         - >-
           ../../layers/Engine/packages/graphql-parser:/app/vendor/getpop/graphql-parser

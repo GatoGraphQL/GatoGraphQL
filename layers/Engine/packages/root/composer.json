@@ -14,6 +14,7 @@
     ],
     "require": {
         "php": "^8.0",
+        "ext-mbstring": "*",
         "pop-backbone/php-hooks": "^0.9",
         "symfony/config": "^6.0",
         "symfony/dependency-injection": "^6.0",

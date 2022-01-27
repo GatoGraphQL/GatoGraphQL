@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Upstream\ComponentModel\Parser;
 
-use PoP\GraphQLParser\Parser\Ast\Directive;
-use PoP\GraphQLParser\Parser\Ast\Document;
-use PoP\GraphQLParser\Parser\Ast\LeafField;
-use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
-use PoPBackbone\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\Document;
+use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
+use PoP\GraphQLParser\Spec\Parser\Location;
 
 class DisabledMetaDirectiveTest extends AbstractMetaDirectiveTest
 {

@@ -51,7 +51,6 @@ includes:
     - layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-clients-for-wp/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/phpstan.neon.dist
-    - layers/Backbone/packages/graphql-parser/phpstan.neon.dist
     - layers/Engine/packages/graphql-parser/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-query/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-request/phpstan.neon.dist

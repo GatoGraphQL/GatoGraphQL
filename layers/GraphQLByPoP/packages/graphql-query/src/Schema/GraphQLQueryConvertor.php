@@ -15,26 +15,26 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
-use PoP\GraphQLParser\Execution\ExecutableDocument;
-use PoP\GraphQLParser\Parser\Ast\MetaDirective;
-use PoP\GraphQLParser\Parser\ExtendedParserInterface;
-use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
-use PoPBackbone\GraphQLParser\Execution\Context;
-use PoPBackbone\GraphQLParser\Execution\ExecutableDocumentInterface;
-use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
-use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
-use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
-use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
-use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
-use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
-use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
-use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
-use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
-use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
-use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
-use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
+use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
+use PoP\GraphQLParser\Exception\LocationableExceptionInterface;
+use PoP\GraphQLParser\Spec\Execution\Context;
+use PoP\GraphQLParser\Spec\Execution\ExecutableDocumentInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use stdClass;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
@@ -44,7 +44,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?IncludeDirectiveResolver $includeDirectiveResolver = null;
-    private ?ExtendedParserInterface $extendedParser = null;
+    private ?ParserInterface $parser = null;
 
     final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -70,13 +70,13 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     {
         return $this->includeDirectiveResolver ??= $this->instanceManager->getInstance(IncludeDirectiveResolver::class);
     }
-    final public function setExtendedParser(ExtendedParserInterface $extendedParser): void
+    final public function setParser(ParserInterface $parser): void
     {
-        $this->extendedParser = $extendedParser;
+        $this->parser = $parser;
     }
-    final protected function getExtendedParser(): ExtendedParserInterface
+    final protected function getParser(): ParserInterface
     {
-        return $this->extendedParser ??= $this->instanceManager->getInstance(ExtendedParserInterface::class);
+        return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
     }
 
     /**
@@ -508,7 +508,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
          * If some variable hasn't been submitted, it will throw an Exception.
          * Let it bubble up
          */
-        $document = $this->getExtendedParser()->parse($payload);
+        $document = $this->getParser()->parse($payload);
         $executableDocument = (new ExecutableDocument($document, new Context($operationName, $variableValues)))->validateAndInitialize();
         return $executableDocument;
     }

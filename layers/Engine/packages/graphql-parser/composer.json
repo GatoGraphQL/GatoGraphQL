@@ -163,8 +163,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/root": "^0.9",
-        "pop-backbone/graphql-parser": "^0.9"
+        "getpop/root": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.4",
