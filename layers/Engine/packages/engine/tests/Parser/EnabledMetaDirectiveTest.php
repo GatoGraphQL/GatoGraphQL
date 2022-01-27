@@ -4,26 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Parser;
 
-use PoP\ComponentModel\GraphQLParser\Parser\ExtendedParser;
 use PoP\GraphQLParser\Parser\Ast\Directive;
 use PoP\GraphQLParser\Parser\Ast\Document;
 use PoP\GraphQLParser\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Parser\Ast\MetaDirective;
-use PoP\GraphQLParser\Parser\ExtendedParserInterface;
-use PoP\Root\AbstractTestCase;
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
-use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
-use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
-use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
-use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Location;
-use PoPBackbone\GraphQLParser\Parser\ParserTest;
 
 class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
 {
