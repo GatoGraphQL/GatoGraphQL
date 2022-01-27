@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\Variable as ExtendedVariable;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Directive as ExtendedDirective;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\LeafField as ExtendedLeafField;
@@ -30,24 +29,6 @@ class Parser extends UpstreamParser implements ParserInterface
         return new Document(
             $operations,
             $fragments,
-        );
-    }
-
-    protected function createVariable(
-        string $name,
-        string $type,
-        bool $isRequired,
-        bool $isArray,
-        bool $isArrayElementRequired,
-        Location $location,
-    ): Variable {
-        return new ExtendedVariable(
-            $name,
-            $type,
-            $isRequired,
-            $isArray,
-            $isArrayElementRequired,
-            $location,
         );
     }
 
