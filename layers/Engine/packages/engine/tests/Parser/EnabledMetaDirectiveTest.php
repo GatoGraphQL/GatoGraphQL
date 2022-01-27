@@ -368,6 +368,13 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
                     }
                 GRAPHQL,
             ],
+            [
+                <<<GRAPHQL
+                    query {
+                        groupCapabilities @forEach(affectDirectivesUnderPos: [1,2]) @advancePointerInArrayOrObject(path: "group") @upperCase @lowerCase
+                    }
+                GRAPHQL
+            ],
         ];
     }
 }
