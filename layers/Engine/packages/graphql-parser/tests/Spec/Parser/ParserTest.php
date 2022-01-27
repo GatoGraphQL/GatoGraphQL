@@ -154,6 +154,21 @@ GRAPHQL;
         $parser->parse($query);
     }
 
+    public function wrongQueriesProvider()
+    {
+        return [
+            ['{ test (a: "asd", b: <basd>) { id }'],
+            ['{ test (asd: [..., asd]) { id } }'],
+            ['{ test (asd: { "a": 4, "m": null, "asd": false  "b": 5, "c" : { a }}) { id } }'],
+            ['asdasd'],
+            ['mutation { test(asd: ... ){ ...,asd, asd } }'],
+            ['mutation { test{ . test on Test { id } } }'],
+            ['mutation { test( a: "asdd'],
+            ['mutation { test( a: { "asd": 12 12'],
+            ['mutation { test( a: { "asd": 12'],
+        ];
+    }
+
     public function testCommas()
     {
         $parser = $this->getParser();
@@ -413,21 +428,6 @@ GRAPHQL;
                 ], new Location(62, 22)),
             ]
         ), $document);
-    }
-
-    public function wrongQueriesProvider()
-    {
-        return [
-            ['{ test (a: "asd", b: <basd>) { id }'],
-            ['{ test (asd: [..., asd]) { id } }'],
-            ['{ test (asd: { "a": 4, "m": null, "asd": false  "b": 5, "c" : { a }}) { id } }'],
-            ['asdasd'],
-            ['mutation { test(asd: ... ){ ...,asd, asd } }'],
-            ['mutation { test{ . test on Test { id } } }'],
-            ['mutation { test( a: "asdd'],
-            ['mutation { test( a: { "asd": 12 12'],
-            ['mutation { test( a: { "asd": 12'],
-        ];
     }
 
     public function testInlineFragment()
