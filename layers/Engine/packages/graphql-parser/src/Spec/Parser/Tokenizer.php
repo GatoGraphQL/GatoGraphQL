@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\Root\Services\BasicServiceTrait;
 
 class Tokenizer
 {
+    use BasicServiceTrait;
+    
     protected string $source;
     protected int $pos = 0;
     protected int $line = 1;
@@ -371,6 +374,6 @@ class Tokenizer
      */
     protected function createUnexpectedTokenTypeException($tokenType)
     {
-        return $this->createException(sprintf('Unexpected token \'%s\'', Token::tokenName($tokenType)));
+        return $this->createException(sprintf($this->__('Unexpected token \'%s\'', 'graphql-server'), Token::tokenName($tokenType)));
     }
 }
