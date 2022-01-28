@@ -302,7 +302,7 @@ class Document implements DocumentInterface
     protected function assertAllVariablesExist(): void
     {
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getVariableReferencesInOperation($this->getFragments()) as $variableReference) {
+            foreach ($this->getVariableReferencesInOperation($operation) as $variableReference) {
                 if ($variableReference->getVariable() !== null) {
                     continue;
                 }
@@ -317,36 +317,34 @@ class Document implements DocumentInterface
     /**
      * Gather all the VariableReference within the Operation.
      *
-     * @param Fragment[] $fragments
      * @return VariableReference[]
      */
-    protected function getVariableReferencesInOperation(array $fragments): array
+    protected function getVariableReferencesInOperation(OperationInterface $operation): array
     {
         return array_merge(
-            $this->getVariableReferencesInFieldsOrFragments($this->fieldsOrFragmentBonds, $fragments),
-            $this->getVariableReferencesInDirectives($this->directives)
+            $this->getVariableReferencesInFieldsOrFragments($operation->getFieldsOrFragmentBonds()),
+            $this->getVariableReferencesInDirectives($operation->getDirectives())
         );
     }
 
     /**
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
-     * @param Fragment[] $fragments
      * @return VariableReference[]
      */
-    protected function getVariableReferencesInFieldsOrFragments(array $fieldsOrFragmentBonds, array $fragments): array
+    protected function getVariableReferencesInFieldsOrFragments(array $fieldsOrFragmentBonds): array
     {
         $variableReferences = [];
         foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
             if ($fieldOrFragmentBond instanceof FragmentReference) {
                 /** @var FragmentReference */
                 $fragmentReference = $fieldOrFragmentBond;
-                $fragment = $this->getFragment($fragments, $fragmentReference->getName());
+                $fragment = $this->getFragment($fragmentReference->getName());
                 if ($fragment === null) {
                     continue;
                 }
                 $variableReferences = array_merge(
                     $variableReferences,
-                    $this->getVariableReferencesInFieldsOrFragments($fragment->getFieldsOrFragmentBonds(), $fragments)
+                    $this->getVariableReferencesInFieldsOrFragments($fragment->getFieldsOrFragmentBonds())
                 );
                 continue;
             }
@@ -355,7 +353,7 @@ class Document implements DocumentInterface
                 $inlineFragment = $fieldOrFragmentBond;
                 $variableReferences = array_merge(
                     $variableReferences,
-                    $this->getVariableReferencesInFieldsOrFragments($inlineFragment->getFieldsOrFragmentBonds(), $fragments)
+                    $this->getVariableReferencesInFieldsOrFragments($inlineFragment->getFieldsOrFragmentBonds())
                 );
                 continue;
             }
@@ -371,7 +369,7 @@ class Document implements DocumentInterface
                 $relationalField = $field;
                 $variableReferences = array_merge(
                     $variableReferences,
-                    $this->getVariableReferencesInFieldsOrFragments($relationalField->getFieldsOrFragmentBonds(), $fragments)
+                    $this->getVariableReferencesInFieldsOrFragments($relationalField->getFieldsOrFragmentBonds())
                 );
                 continue;
             }
@@ -449,7 +447,7 @@ class Document implements DocumentInterface
     {
         foreach ($this->getOperations() as $operation) {
             $referencedVariableNames = [];
-            foreach ($operation->getVariableReferencesInOperation($this->getFragments()) as $variableReference) {
+            foreach ($this->getVariableReferencesInOperation($operation) as $variableReference) {
                 $referencedVariableNames[] = $variableReference->getName();
             }
             $referencedVariableNames = array_values(array_unique($referencedVariableNames));
