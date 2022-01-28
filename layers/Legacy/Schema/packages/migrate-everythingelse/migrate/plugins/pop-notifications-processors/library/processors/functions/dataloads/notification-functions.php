@@ -1,5 +1,5 @@
 <?php
-use PoP\Root\App;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 use PoPSitesWassup\NotificationMutations\MutationResolverBridges\MarkAllAsReadNotificationMutationResolverBridge;

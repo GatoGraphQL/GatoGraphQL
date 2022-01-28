@@ -9,7 +9,7 @@ use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnfollowUserM
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnrecommendPostMutationResolverBridge;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnsubscribeFromTagMutationResolverBridge;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UpvoteCustomPostMutationResolverBridge;
-use PoP\Root\App;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
