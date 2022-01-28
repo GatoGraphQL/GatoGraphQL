@@ -83,6 +83,52 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
+    /**
+     * @dataProvider cyclicalFragmentQueryProvider
+     */
+    public function testNoCyclicalFragments(string $query)
+    {
+        $this->expectException(InvalidRequestException::class);
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getCyclicalFragmentErrorMessage('UserProps'));
+        $parser = $this->getParser();
+        $document = $parser->parse($query);
+        $document->validate();
+    }
+
+    public function cyclicalFragmentQueryProvider(): array
+    {
+        return [
+            'direct' => ['
+                query {
+                    users {
+                        id,
+                        ...UserProps
+                    }
+                }
+
+                fragment UserProps on User {
+                    ...UserProps
+                }
+            '],
+            'looping' => ['
+                query {
+                    users {
+                        id,
+                        ...UserProps
+                    }
+                }
+
+                fragment UserProps on User {
+                    ...MoreUserProps
+                }
+
+                fragment MoreUserProps on User {
+                    ...UserProps
+                }
+            '],
+        ];
+    }
+
     public function testFragmentNotUsed()
     {
         $this->expectException(InvalidRequestException::class);

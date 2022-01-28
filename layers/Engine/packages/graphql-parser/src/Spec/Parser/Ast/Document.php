@@ -10,7 +10,7 @@ use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Services\StandaloneServiceTrait;
 
-class Document
+class Document implements DocumentInterface
 {
     use StandaloneServiceTrait;
 
@@ -69,6 +69,7 @@ class Document
         $this->assertOperationNamesUnique();
         $this->assertNonEmptyOperationName();
         $this->assertFragmentReferencesAreValid();
+        $this->assertNoCyclicalFragments();
         $this->assertFragmentsAreUsed();
         $this->assertVariableNamesUnique();
         $this->assertAllVariablesExist();
@@ -136,7 +137,7 @@ class Document
     protected function assertFragmentReferencesAreValid(): void
     {
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getFragmentReferences($this->getFragments()) as $fragmentReference) {
+            foreach ($this->getFragmentReferencesInOperation($operation) as $fragmentReference) {
                 if ($this->getFragment($fragmentReference->getName()) !== null) {
                     continue;
                 }
@@ -149,6 +150,91 @@ class Document
     }
 
     /**
+     * Gather all the FragmentReference within the Operation.
+     *
+     * @return FragmentReference[]
+     */
+    public function getFragmentReferencesInOperation(OperationInterface $operation): array
+    {
+        $referencedFragmentNames = [];
+        return $this->getFragmentReferencesInFieldsOrFragmentBonds($operation->getFieldsOrFragmentBonds(), $referencedFragmentNames);
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param string[] $referencedFragmentNames To stop cyclical fragments
+     * @return FragmentReference[]
+     */
+    protected function getFragmentReferencesInFieldsOrFragmentBonds(array $fieldsOrFragmentBonds, array &$referencedFragmentNames): array
+    {
+        $fragmentReferences = [];
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof LeafField) {
+                continue;
+            }
+            if (
+                $fieldOrFragmentBond instanceof InlineFragment
+                || $fieldOrFragmentBond instanceof RelationalField
+            ) {
+                $fragmentReferences = array_merge(
+                    $fragmentReferences,
+                    $this->getFragmentReferencesInFieldsOrFragmentBonds($fieldOrFragmentBond->getFieldsOrFragmentBonds(), $referencedFragmentNames)
+                );
+                continue;
+            }
+            /** @var FragmentReference */
+            $fragmentReference = $fieldOrFragmentBond;
+            /**
+             * Avoid cyclical references
+             */
+            if (in_array($fragmentReference->getName(), $referencedFragmentNames)) {
+                continue;
+            }
+            $fragmentReferences[] = $fragmentReference;
+            $referencedFragmentNames[] = $fragmentReference->getName();
+            $fragment = $this->getFragment($fragmentReference->getName());
+            if ($fragment === null) {
+                continue;
+            }
+            $fragmentReferences = array_merge(
+                $fragmentReferences,
+                $this->getFragmentReferencesInFieldsOrFragmentBonds($fragment->getFieldsOrFragmentBonds(), $referencedFragmentNames)
+            );
+        }
+        return $fragmentReferences;
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertNoCyclicalFragments(): void
+    {
+        foreach ($this->getFragments() as $fragment) {
+            $fragmentReferences = $this->getFragmentReferencesInFragment($fragment);
+            foreach ($fragmentReferences as $fragmentReference) {
+                if ($fragmentReference->getName() !== $fragment->getName()) {
+                    continue;
+                }
+                throw new InvalidRequestException(
+                    $this->getGraphQLErrorMessageProvider()->getCyclicalFragmentErrorMessage($fragmentReference->getName()),
+                    $fragmentReference->getLocation()
+                );
+            }
+        }
+    }
+
+    /**
+     * Gather all the FragmentReference within the Operation.
+     *
+     * @return FragmentReference[]
+     */
+    public function getFragmentReferencesInFragment(Fragment $fragment): array
+    {
+        $referencedFragmentNames = [];
+        return $this->getFragmentReferencesInFieldsOrFragmentBonds($fragment->getFieldsOrFragmentBonds(), $referencedFragmentNames);
+    }
+
+    /**
      * @throws InvalidRequestException
      */
     protected function assertFragmentsAreUsed(): void
@@ -157,7 +243,7 @@ class Document
 
         // Collect fragment references in all operations
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getFragmentReferences($this->getFragments()) as $fragmentReference) {
+            foreach ($this->getFragmentReferencesInOperation($operation) as $fragmentReference) {
                 $referencedFragmentNames[] = $fragmentReference->getName();
             }
         }
