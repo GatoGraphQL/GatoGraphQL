@@ -53,10 +53,27 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
               id
             }
         ');
-        $context = new Context('__ALL');
-        $executableDocument = new ExecutableDocument($document, $context);
-        $executableDocument->validateAndInitialize();
-        $allQueryOperation = new QueryOperation(
+        $queryTwoOperation = new QueryOperation(
+            'Two',
+            [],
+            [],
+            [
+                new RelationalField(
+                    'post',
+                    null,
+                    [
+                        new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22)),
+                    ],
+                    [
+                        new LeafField('title', null, [], [], new Location(10, 21)),
+                    ],
+                    [],
+                    new Location(9, 17)
+                )
+            ],
+            new Location(8, 19)
+        );
+        $queryAllOperation = new QueryOperation(
             '__ALL',
             [],
             [],
@@ -65,7 +82,11 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
             ],
             new Location(14, 19)
         );
-        $this->assertEquals(
+        
+        // Test the __ALL operationName => execute all operations
+        $context = new Context('__ALL');
+        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument->validateAndInitialize();$this->assertEquals(
             $this->enabled() ?
                 [
                     new QueryOperation('One', [], [], [
@@ -75,16 +96,21 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
                             new LeafField('title', null, [], [], new Location(4, 21)),
                         ], [], new Location(3, 17))
                     ], new Location(2, 19)),
-                    new QueryOperation('Two', [], [], [
-                        new RelationalField('post', null, [
-                            new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22)),
-                        ], [
-                            new LeafField('title', null, [], [], new Location(10, 21)),
-                        ], [], new Location(9, 17))
-                    ], new Location(8, 19)),
+                    $queryTwoOperation,
                 ] : [
-                    $allQueryOperation,
+                    $queryAllOperation,
                 ],
+            $executableDocument->getRequestedOperations()
+        );
+
+        // Test any other operationName than __ALL
+        $context = new Context('Two');
+        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument->validateAndInitialize();
+        $this->assertEquals(
+            [
+                $queryTwoOperation,
+            ],
             $executableDocument->getRequestedOperations()
         );
     }
