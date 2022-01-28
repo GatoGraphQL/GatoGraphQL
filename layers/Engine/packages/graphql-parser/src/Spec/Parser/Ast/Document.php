@@ -72,6 +72,7 @@ class Document implements DocumentInterface
         $this->assertOperationNamesUnique();
         $this->assertNonEmptyOperationName();
         $this->assertFragmentReferencesAreValid();
+        $this->assertFragmentNamesUnique();
         $this->assertNoCyclicalFragments();
         $this->assertFragmentsAreUsed();
         $this->assertVariableNamesUnique();
@@ -205,6 +206,24 @@ class Document implements DocumentInterface
             );
         }
         return $fragmentReferences;
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertFragmentNamesUnique(): void
+    {
+        $fragmentNames = [];
+        foreach ($this->getFragments() as $fragment) {
+            $fragmentName = $fragment->getName();
+            if (in_array($fragmentName, $fragmentNames)) {
+                throw new InvalidRequestException(
+                    $this->getGraphQLErrorMessageProvider()->getDuplicateFragmentNameErrorMessage($fragmentName),
+                    $this->getNonSpecificLocation()
+                );
+            }
+            $fragmentNames[] = $fragmentName;
+        }
     }
 
     /**
