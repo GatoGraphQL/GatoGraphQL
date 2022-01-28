@@ -109,6 +109,17 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
             ],
             new Location(14, 19)
         );
+
+        // Test any other operationName than __ALL
+        $context = new Context('Two');
+        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument->validateAndInitialize();
+        $this->assertEquals(
+            [
+                $queryTwoOperation,
+            ],
+            $executableDocument->getRequestedOperations()
+        );
         
         // Test the __ALL operationName => execute all operations
         $context = new Context('__ALL');
@@ -143,16 +154,5 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
                 $executableDocument->getRequestedOperations()
             );
         }
-
-        // Test any other operationName than __ALL
-        $context = new Context('Two');
-        $executableDocument = new ExecutableDocument($document, $context);
-        $executableDocument->validateAndInitialize();
-        $this->assertEquals(
-            [
-                $queryTwoOperation,
-            ],
-            $executableDocument->getRequestedOperations()
-        );
     }
 }
