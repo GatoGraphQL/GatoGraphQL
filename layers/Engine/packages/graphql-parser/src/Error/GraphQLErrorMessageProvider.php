@@ -160,6 +160,11 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
         return \sprintf($this->__('Fragment \'%s\' is not defined in query', 'graphql-server'), $fragmentName);
     }
 
+    public function getCircularFragmentErrorMessage(string $fragmentName): string
+    {
+        return \sprintf($this->__('Fragment \'%s\' is circular', 'graphql-server'), $fragmentName);
+    }
+
     public function getFragmentNotUsedErrorMessage(string $fragmentName): string
     {
         return \sprintf($this->__('Fragment \'%s\' is not used', 'graphql-server'), $fragmentName);
