@@ -136,7 +136,7 @@ class Document implements DocumentInterface
     protected function assertFragmentReferencesAreValid(): void
     {
         foreach ($this->getOperations() as $operation) {
-            foreach ($this->getFragmentReferences($operation) as $fragmentReference) {
+            foreach ($this->getFragmentReferencesInOperation($operation) as $fragmentReference) {
                 if ($this->getFragment($fragmentReference->getName()) !== null) {
                     continue;
                 }
@@ -157,7 +157,7 @@ class Document implements DocumentInterface
 
         // Collect fragment references in all operations
         foreach ($this->getOperations() as $operation) {
-            foreach ($this->getFragmentReferences($operation) as $fragmentReference) {
+            foreach ($this->getFragmentReferencesInOperation($operation) as $fragmentReference) {
                 $referencedFragmentNames[] = $fragmentReference->getName();
             }
         }
@@ -343,7 +343,7 @@ class Document implements DocumentInterface
      *
      * @return FragmentReference[]
      */
-    public function getFragmentReferences(OperationInterface $operation): array
+    public function getFragmentReferencesInOperation(OperationInterface $operation): array
     {
         $referencedFragmentNames = [];
         return $this->getFragmentReferencesInFieldsOrFragmentBonds($operation->getFieldsOrFragmentBonds(), $referencedFragmentNames);
