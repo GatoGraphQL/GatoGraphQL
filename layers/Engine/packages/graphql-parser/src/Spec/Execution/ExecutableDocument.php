@@ -89,53 +89,33 @@ class ExecutableDocument implements ExecutableDocumentInterface
     protected function assertAndGetRequestedOperations(): array
     {
         if ($this->context->getOperationName() === '') {
-            return $this->getNonRequestedOperation();
+            // It can't be 0, or validation already fails in Document
+            if (count($this->document->getOperations()) > 1) {
+                throw new InvalidRequestException(
+                    $this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage(),
+                    $this->getNonSpecificLocation()
+                );
+            }
+            // There is exactly 1 operation
+            return $this->document->getOperations();
         }
 
-        $requestedOperations = $this->extractRequestedOperations();
+        $requestedOperations = array_values(array_filter(
+            $this->document->getOperations(),
+            fn (OperationInterface $operation) => $operation->getName() === $this->context->getOperationName()
+        ));
         if ($requestedOperations === []) {
             throw new InvalidRequestException(
                 $this->getGraphQLErrorMessageProvider()->getNoOperationMatchesNameErrorMessage($this->context->getOperationName()),
                 $this->getNonSpecificLocation()
             );
         }
-
-        // There can be many operations
         return $requestedOperations;
-    }
-
-    /**
-     * @return OperationInterface[]
-     * @throws InvalidRequestException
-     */
-    protected function getNonRequestedOperation(): array
-    {
-        // It can't be 0, or validation already fails in Document
-        if (count($this->document->getOperations()) > 1) {
-            throw new InvalidRequestException(
-                $this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage(),
-                $this->getNonSpecificLocation()
-            );
-        }
-        // There is exactly 1 operation
-        return $this->document->getOperations();
     }
 
     protected function getNonSpecificLocation(): Location
     {
         return new Location(1, 1);
-    }
-
-    /**
-     * @return OperationInterface[]
-     */
-    protected function extractRequestedOperations(): array
-    {
-        $operationName = $this->context->getOperationName();
-        return array_values(array_filter(
-            $this->document->getOperations(),
-            fn (OperationInterface $operation) => $operation->getName() === $operationName
-        ));
     }
 
     /**
