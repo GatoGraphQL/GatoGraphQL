@@ -17,7 +17,6 @@ use PoP\Root\HttpFoundation\Response;
 use PoP\Root\StateManagers\AppStateManagerInterface;
 use PoP\Root\StateManagers\ComponentManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
-use PoP\Root\Stores\MutationResolutionStore;
 
 /**
  * Using proxy instead of inheritance, so that the upstream App
@@ -40,7 +39,6 @@ abstract class AbstractRootAppProxy implements RootAppInterface
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManagerInterface $componentManager = null,
         ?AppStateManagerInterface $appStateManager = null,
-        ?MutationResolutionStore $mutationResolutionStore = null,
     ): void {
         RootApp::initialize(
             $appLoader,
@@ -50,7 +48,6 @@ abstract class AbstractRootAppProxy implements RootAppInterface
             $systemContainerBuilderFactory,
             $componentManager,
             $appStateManager,
-            $mutationResolutionStore,
         );
     }
 
@@ -97,11 +94,6 @@ abstract class AbstractRootAppProxy implements RootAppInterface
     public static function getAppStateManager(): AppStateManagerInterface
     {
         return RootApp::getAppStateManager();
-    }
-
-    public static function getMutationResolutionStore(): MutationResolutionStore
-    {
-        return RootApp::getMutationResolutionStore();
     }
 
     public static function isHTTPRequest(): bool

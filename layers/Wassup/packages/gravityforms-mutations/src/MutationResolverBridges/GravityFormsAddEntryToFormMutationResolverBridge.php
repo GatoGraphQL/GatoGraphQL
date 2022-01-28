@@ -8,7 +8,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\FormInputModuleProcessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\Root\App;
+use PoP\ComponentModel\App;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;
 use PoP\Root\Services\AutomaticallyInstantiatedServiceTrait;

@@ -14,7 +14,6 @@ use PoP\Root\HttpFoundation\Response;
 use PoP\Root\StateManagers\AppStateManagerInterface;
 use PoP\Root\StateManagers\ComponentManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
-use PoP\Root\Stores\MutationResolutionStore;
 
 /**
  * Single class hosting all the top-level instances to run the application
@@ -36,7 +35,6 @@ interface AppInterface
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManagerInterface $componentManager = null,
         ?AppStateManagerInterface $appStateManager = null,
-        ?MutationResolutionStore $mutationResolutionStore = null,
     ): void;
 
     public static function regenerateResponse(): void;
@@ -56,8 +54,6 @@ interface AppInterface
     public static function getComponentManager(): ComponentManagerInterface;
 
     public static function getAppStateManager(): AppStateManagerInterface;
-
-    public static function getMutationResolutionStore(): MutationResolutionStore;
 
     public static function isHTTPRequest(): bool;
 
