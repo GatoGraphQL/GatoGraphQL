@@ -10,7 +10,7 @@ use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Services\StandaloneServiceTrait;
 
-class Document
+class Document implements DocumentInterface
 {
     use StandaloneServiceTrait;
 
