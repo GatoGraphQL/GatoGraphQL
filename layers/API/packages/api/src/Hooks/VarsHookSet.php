@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\Hooks;
 
-use PoP\Root\App;
-use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
+use PoPAPI\API\Response\Schemes as APISchemes;
 
 class VarsHookSet extends AbstractHookSet
 {
