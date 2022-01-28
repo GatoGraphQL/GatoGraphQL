@@ -8,8 +8,9 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
+use PoP\ComponentModel\AppInterface as UpstreamAppInterface;
 
-interface AppInterface
+interface AppInterface extends UpstreamAppInterface
 {
     public static function initializePlugin(
         ?MainPluginManager $mainPluginManager = null,
