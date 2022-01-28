@@ -13,7 +13,6 @@ use PoP\Root\App;
 
 class ExecutableDocument extends UpstreamExecutableDocument
 {
-
     /**
      * Override to support the "multiple query execution" feature:
      * If passing operationName `__ALL`, or passing no operationName

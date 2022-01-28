@@ -121,7 +121,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
             ],
             $executableDocument->getRequestedOperations()
         );
-        
+
         // Test the __ALL operationName => execute all operations
         $context = new Context('__ALL');
         $executableDocument = new ExecutableDocument($document, $context);
@@ -136,7 +136,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
                 ],
             $executableDocument->getRequestedOperations()
         );
-        
+
         // Passing no operationName, and has __ALL in document => execute all operations
         // If env var disabled => we must get an error "Must indicate operationName"
         $context = new Context('');
@@ -155,7 +155,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
                 $executableDocument->getRequestedOperations()
             );
         }
-        
+
         // Passing no operationName, and does not have __ALL in document =>
         // we must get an error "Must indicate operationName"
         $query = str_replace('__ALL', '__not_ALL', $query);
