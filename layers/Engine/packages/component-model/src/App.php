@@ -6,6 +6,7 @@ namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\App\AbstractRootAppProxy;
 use PoP\ComponentModel\Engine\EngineState;
+use PoP\ComponentModel\Stores\MutationResolutionStore;
 
 /**
  * Keep all state in the application stored and accessible
@@ -17,14 +18,25 @@ use PoP\ComponentModel\Engine\EngineState;
 class App extends AbstractRootAppProxy implements AppInterface
 {
     protected static EngineState $engineState;
+    protected static MutationResolutionStore $mutationResolutionStore;
 
     public static function getEngineState(): EngineState
     {
         return self::$engineState;
     }
 
+    public static function getMutationResolutionStore(): MutationResolutionStore
+    {
+        return self::$mutationResolutionStore;
+    }
+
     public static function regenerateEngineState(): void
     {
         self::$engineState = new EngineState();
+    }
+
+    public static function regenerateMutationResolutionStore(): void
+    {
+        self::$mutationResolutionStore = new MutationResolutionStore();
     }
 }

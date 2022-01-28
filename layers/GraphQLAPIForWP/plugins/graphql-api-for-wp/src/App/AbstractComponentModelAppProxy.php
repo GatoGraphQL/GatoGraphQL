@@ -8,6 +8,7 @@ use PoP\ComponentModel\App as ComponentModelApp;
 use PoP\ComponentModel\App\AbstractRootAppProxy;
 use PoP\ComponentModel\AppInterface as ComponentModelAppInterface;
 use PoP\ComponentModel\Engine\EngineState;
+use PoP\ComponentModel\Stores\MutationResolutionStore;
 
 /**
  * Using proxy instead of inheritance, so that the upstream App
@@ -15,6 +16,11 @@ use PoP\ComponentModel\Engine\EngineState;
  */
 abstract class AbstractComponentModelAppProxy extends AbstractRootAppProxy implements ComponentModelAppInterface
 {
+    public static function getMutationResolutionStore(): MutationResolutionStore
+    {
+        return ComponentModelApp::getMutationResolutionStore();
+    }
+
     public static function getEngineState(): EngineState
     {
         return ComponentModelApp::getEngineState();

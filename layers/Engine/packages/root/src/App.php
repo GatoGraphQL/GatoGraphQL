@@ -17,7 +17,6 @@ use PoP\Root\StateManagers\ComponentManager;
 use PoP\Root\StateManagers\ComponentManagerInterface;
 use PoP\Root\StateManagers\HookManager;
 use PoP\Root\StateManagers\HookManagerInterface;
-use PoP\Root\Stores\MutationResolutionStore;
 
 /**
  * Keep all state in the application stored and accessible
@@ -36,7 +35,6 @@ class App implements AppInterface
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
     protected static ComponentManagerInterface $componentManager;
     protected static AppStateManagerInterface $appStateManager;
-    protected static MutationResolutionStore $mutationResolutionStore;
     /** @var string[] */
     protected static array $componentClassesToInitialize = [];
     protected static bool $isHTTPRequest;
@@ -56,7 +54,6 @@ class App implements AppInterface
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ComponentManagerInterface $componentManager = null,
         ?AppStateManagerInterface $appStateManager = null,
-        ?MutationResolutionStore $mutationResolutionStore = null,
     ): void {
         self::$appLoader = $appLoader ?? static::createAppLoader();
         self::$hookManager = $hookManager ?? static::createHookManager();
@@ -65,7 +62,6 @@ class App implements AppInterface
         self::$systemContainerBuilderFactory = $systemContainerBuilderFactory ?? static::createSystemContainerBuilderFactory();
         self::$componentManager = $componentManager ?? static::createComponentManager();
         self::$appStateManager = $appStateManager ?? static::createAppStateManager();
-        self::$mutationResolutionStore = $mutationResolutionStore ?? static::createMutationResolutionStore();
 
         static::regenerateResponse();
 
@@ -124,11 +120,6 @@ class App implements AppInterface
         return new AppStateManager();
     }
 
-    protected static function createMutationResolutionStore(): MutationResolutionStore
-    {
-        return new MutationResolutionStore();
-    }
-
     public static function regenerateResponse(): void
     {
         self::$response = static::createResponse();
@@ -172,11 +163,6 @@ class App implements AppInterface
     public static function getAppStateManager(): AppStateManagerInterface
     {
         return self::$appStateManager;
-    }
-
-    public static function getMutationResolutionStore(): MutationResolutionStore
-    {
-        return self::$mutationResolutionStore;
     }
 
     public static function isHTTPRequest(): bool
