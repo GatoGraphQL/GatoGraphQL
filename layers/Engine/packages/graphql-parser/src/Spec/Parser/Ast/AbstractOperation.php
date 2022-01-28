@@ -44,54 +44,6 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     }
 
     /**
-     * Gather all the FragmentReference within the Operation.
-     *
-     * @param Fragment[] $fragments
-     * @return FragmentReference[]
-     */
-    public function getFragmentReferences(array $fragments): array
-    {
-        return $this->getFragmentReferencesInFieldsOrFragmentBonds($this->fieldsOrFragmentBonds, $fragments);
-    }
-
-    /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
-     * @param Fragment[] $fragments
-     * @return FragmentReference[]
-     */
-    protected function getFragmentReferencesInFieldsOrFragmentBonds(array $fieldsOrFragmentBonds, array $fragments): array
-    {
-        $fragmentReferences = [];
-        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
-            if ($fieldOrFragmentBond instanceof LeafField) {
-                continue;
-            }
-            if (
-                $fieldOrFragmentBond instanceof InlineFragment
-                || $fieldOrFragmentBond instanceof RelationalField
-            ) {
-                $fragmentReferences = array_merge(
-                    $fragmentReferences,
-                    $this->getFragmentReferencesInFieldsOrFragmentBonds($fieldOrFragmentBond->getFieldsOrFragmentBonds(), $fragments)
-                );
-                continue;
-            }
-            /** @var FragmentReference */
-            $fragmentReference = $fieldOrFragmentBond;
-            $fragmentReferences[] = $fragmentReference;
-            $fragment = $this->getFragment($fragments, $fragmentReference->getName());
-            if ($fragment === null) {
-                continue;
-            }
-            $fragmentReferences = array_merge(
-                $fragmentReferences,
-                $this->getFragmentReferencesInFieldsOrFragmentBonds($fragment->getFieldsOrFragmentBonds(), $fragments)
-            );
-        }
-        return $fragmentReferences;
-    }
-
-    /**
      * Gather all the VariableReference within the Operation.
      *
      * @param Fragment[] $fragments

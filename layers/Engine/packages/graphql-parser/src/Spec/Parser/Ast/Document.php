@@ -337,4 +337,61 @@ class Document implements DocumentInterface
             $argumentNames[] = $argumentName;
         }
     }
+
+    /**
+     * Gather all the FragmentReference within the Operation.
+     *
+     * @param Fragment[] $fragments
+     * @return FragmentReference[]
+     */
+    public function getFragmentReferences(array $fragments): array
+    {
+        $referencedFragmentNames = [];
+        return $this->getFragmentReferencesInFieldsOrFragmentBonds($this->fieldsOrFragmentBonds, $fragments, $referencedFragmentNames);
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param Fragment[] $fragments
+     * @param string[] $referencedFragmentNames To stop circular fragments
+     * @return FragmentReference[]
+     */
+    protected function getFragmentReferencesInFieldsOrFragmentBonds(array $fieldsOrFragmentBonds, array $fragments, array &$referencedFragmentNames): array
+    {
+        $fragmentReferences = [];
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof LeafField) {
+                continue;
+            }
+            if (
+                $fieldOrFragmentBond instanceof InlineFragment
+                || $fieldOrFragmentBond instanceof RelationalField
+            ) {
+                $fragmentReferences = array_merge(
+                    $fragmentReferences,
+                    $this->getFragmentReferencesInFieldsOrFragmentBonds($fieldOrFragmentBond->getFieldsOrFragmentBonds(), $fragments, $referencedFragmentNames)
+                );
+                continue;
+            }
+            /** @var FragmentReference */
+            $fragmentReference = $fieldOrFragmentBond;
+            /**
+             * Avoid circular references
+             */
+            if (in_array($fragmentReference->getName(), $referencedFragmentNames)) {
+                continue;
+            }
+            $fragmentReferences[] = $fragmentReference;
+            $referencedFragmentNames[] = $fragmentReference->getName();
+            $fragment = $this->getFragment($fragments, $fragmentReference->getName());
+            if ($fragment === null) {
+                continue;
+            }
+            $fragmentReferences = array_merge(
+                $fragmentReferences,
+                $this->getFragmentReferencesInFieldsOrFragmentBonds($fragment->getFieldsOrFragmentBonds(), $fragments, $referencedFragmentNames)
+            );
+        }
+        return $fragmentReferences;
+    }
 }
