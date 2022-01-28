@@ -136,7 +136,7 @@ class Document implements DocumentInterface
     protected function assertFragmentReferencesAreValid(): void
     {
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getFragmentReferences($this->getFragments()) as $fragmentReference) {
+            foreach ($this->getFragmentReferences($operation) as $fragmentReference) {
                 if ($this->getFragment($fragmentReference->getName()) !== null) {
                     continue;
                 }
@@ -157,7 +157,7 @@ class Document implements DocumentInterface
 
         // Collect fragment references in all operations
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getFragmentReferences($this->getFragments()) as $fragmentReference) {
+            foreach ($this->getFragmentReferences($operation) as $fragmentReference) {
                 $referencedFragmentNames[] = $fragmentReference->getName();
             }
         }
@@ -341,22 +341,20 @@ class Document implements DocumentInterface
     /**
      * Gather all the FragmentReference within the Operation.
      *
-     * @param Fragment[] $fragments
      * @return FragmentReference[]
      */
-    public function getFragmentReferences(array $fragments): array
+    public function getFragmentReferences(OperationInterface $operation): array
     {
         $referencedFragmentNames = [];
-        return $this->getFragmentReferencesInFieldsOrFragmentBonds($this->fieldsOrFragmentBonds, $fragments, $referencedFragmentNames);
+        return $this->getFragmentReferencesInFieldsOrFragmentBonds($operation->getFieldsOrFragmentBonds(), $referencedFragmentNames);
     }
 
     /**
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
-     * @param Fragment[] $fragments
      * @param string[] $referencedFragmentNames To stop circular fragments
      * @return FragmentReference[]
      */
-    protected function getFragmentReferencesInFieldsOrFragmentBonds(array $fieldsOrFragmentBonds, array $fragments, array &$referencedFragmentNames): array
+    protected function getFragmentReferencesInFieldsOrFragmentBonds(array $fieldsOrFragmentBonds, array &$referencedFragmentNames): array
     {
         $fragmentReferences = [];
         foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
@@ -369,7 +367,7 @@ class Document implements DocumentInterface
             ) {
                 $fragmentReferences = array_merge(
                     $fragmentReferences,
-                    $this->getFragmentReferencesInFieldsOrFragmentBonds($fieldOrFragmentBond->getFieldsOrFragmentBonds(), $fragments, $referencedFragmentNames)
+                    $this->getFragmentReferencesInFieldsOrFragmentBonds($fieldOrFragmentBond->getFieldsOrFragmentBonds(), $referencedFragmentNames)
                 );
                 continue;
             }
@@ -383,13 +381,13 @@ class Document implements DocumentInterface
             }
             $fragmentReferences[] = $fragmentReference;
             $referencedFragmentNames[] = $fragmentReference->getName();
-            $fragment = $this->getFragment($fragments, $fragmentReference->getName());
+            $fragment = $this->getFragment($fragmentReference->getName());
             if ($fragment === null) {
                 continue;
             }
             $fragmentReferences = array_merge(
                 $fragmentReferences,
-                $this->getFragmentReferencesInFieldsOrFragmentBonds($fragment->getFieldsOrFragmentBonds(), $fragments, $referencedFragmentNames)
+                $this->getFragmentReferencesInFieldsOrFragmentBonds($fragment->getFieldsOrFragmentBonds(), $referencedFragmentNames)
             );
         }
         return $fragmentReferences;
