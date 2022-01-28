@@ -43,7 +43,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
     public function testMultipleQueryExecution(): void
     {
         $parser = $this->getParser();
-        $document = $parser->parse('
+        $query = '
             query One {
                 film(id: 1) {
                     title
@@ -57,9 +57,10 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
             }
 
             query __ALL {
-              id
+                id
             }
-        ');
+        ';
+        $document = $parser->parse($query);
         $queryOneOperation = new QueryOperation(
             'One',
             [],
@@ -105,7 +106,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
             [],
             [],
             [
-                new LeafField('id', null, [], [], new Location(15, 15))
+                new LeafField('id', null, [], [], new Location(15, 17))
             ],
             new Location(14, 19)
         );
@@ -154,5 +155,13 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
                 $executableDocument->getRequestedOperations()
             );
         }
+        
+        // Passing no operationName, and does not have __ALL in document =>
+        // we must get an error "Must indicate operationName"
+        $query = str_replace('__ALL', '__not_ALL', $query);
+        $document = $parser->parse($query);
+        $executableDocument = new ExecutableDocument($document, $context);
+        $this->expectException(InvalidRequestException::class);
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage());
     }
 }

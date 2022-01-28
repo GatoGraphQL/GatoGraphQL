@@ -32,7 +32,6 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
             $operations,
             fn (OperationInterface $operation) => $operation->getName() !== ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
         ));
-
         if (
             // Passing operationName=__ALL
             strtoupper($operationName) === ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME
