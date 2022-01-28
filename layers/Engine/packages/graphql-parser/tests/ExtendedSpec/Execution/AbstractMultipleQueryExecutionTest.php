@@ -163,5 +163,6 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
         $executableDocument = new ExecutableDocument($document, $context);
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage());
+        $executableDocument->validateAndInitialize();
     }
 }
