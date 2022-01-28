@@ -82,7 +82,6 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
                             new LeafField('title', null, [], [], new Location(10, 21)),
                         ], [], new Location(9, 17))
                     ], new Location(8, 19)),
-                    $allQueryOperation,
                 ] : [
                     $allQueryOperation,
                 ],
