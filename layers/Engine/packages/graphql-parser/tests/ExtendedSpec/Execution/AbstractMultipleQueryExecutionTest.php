@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
+use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -33,6 +35,11 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
         return $this->getService(ParserInterface::class);
     }
 
+    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    {
+        return $this->getService(GraphQLErrorMessageProviderInterface::class);
+    }
+
     public function testMultipleQueryExecution(): void
     {
         $parser = $this->getParser();
@@ -53,6 +60,26 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
               id
             }
         ');
+        $queryOneOperation = new QueryOperation(
+            'One',
+            [],
+            [],
+            [
+                new RelationalField(
+                    'film',
+                    null,
+                    [
+                        new Argument('id', new Literal(1, new Location(3, 26)), new Location(3, 22)),
+                    ],
+                    [
+                        new LeafField('title', null, [], [], new Location(4, 21)),
+                    ],
+                    [],
+                    new Location(3, 17)
+                )
+            ],
+            new Location(2, 19)
+        );
         $queryTwoOperation = new QueryOperation(
             'Two',
             [],
@@ -86,22 +113,36 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
         // Test the __ALL operationName => execute all operations
         $context = new Context('__ALL');
         $executableDocument = new ExecutableDocument($document, $context);
-        $executableDocument->validateAndInitialize();$this->assertEquals(
+        $executableDocument->validateAndInitialize();
+        $this->assertEquals(
             $this->enabled() ?
                 [
-                    new QueryOperation('One', [], [], [
-                        new RelationalField('film', null, [
-                            new Argument('id', new Literal(1, new Location(3, 26)), new Location(3, 22)),
-                        ], [
-                            new LeafField('title', null, [], [], new Location(4, 21)),
-                        ], [], new Location(3, 17))
-                    ], new Location(2, 19)),
+                    $queryOneOperation,
                     $queryTwoOperation,
                 ] : [
                     $queryAllOperation,
                 ],
             $executableDocument->getRequestedOperations()
         );
+        
+        // Passing no operationName, and has __ALL in document => execute all operations
+        // If env var disabled => we must get an error "Must indicate operationName"
+        $context = new Context('');
+        $executableDocument = new ExecutableDocument($document, $context);
+        if (!$this->enabled()) {
+            $this->expectException(InvalidRequestException::class);
+            $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage());
+        }
+        $executableDocument->validateAndInitialize();
+        if ($this->enabled()) {
+            $this->assertEquals(
+                [
+                    $queryOneOperation,
+                    $queryTwoOperation,
+                ],
+                $executableDocument->getRequestedOperations()
+            );
+        }
 
         // Test any other operationName than __ALL
         $context = new Context('Two');
