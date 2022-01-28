@@ -69,6 +69,7 @@ class Document implements DocumentInterface
         $this->assertOperationNamesUnique();
         $this->assertNonEmptyOperationName();
         $this->assertFragmentReferencesAreValid();
+        $this->assertNoCircularFragments();
         $this->assertFragmentsAreUsed();
         $this->assertVariableNamesUnique();
         $this->assertAllVariablesExist();
@@ -146,6 +147,36 @@ class Document implements DocumentInterface
                 );
             }
         }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertNoCircularFragments(): void
+    {
+        foreach ($this->getFragments() as $fragment) {
+            $fragmentReferences = $this->getFragmentReferencesInFragment($fragment);
+            foreach ($fragmentReferences as $fragmentReference) {
+                if ($fragmentReference->getName() !== $fragment->getName()) {
+                    continue;
+                }
+                throw new InvalidRequestException(
+                    $this->getGraphQLErrorMessageProvider()->getCircularFragmentErrorMessage($fragmentReference->getName()),
+                    $fragmentReference->getLocation()
+                );
+            }
+        }
+    }
+
+    /**
+     * Gather all the FragmentReference within the Operation.
+     *
+     * @return FragmentReference[]
+     */
+    public function getFragmentReferencesInFragment(Fragment $fragment): array
+    {
+        $referencedFragmentNames = [];
+        return $this->getFragmentReferencesInFieldsOrFragmentBonds($fragment->getFieldsOrFragmentBonds(), $referencedFragmentNames);
     }
 
     /**
