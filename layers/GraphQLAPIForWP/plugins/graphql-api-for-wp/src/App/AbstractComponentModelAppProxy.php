@@ -16,14 +16,14 @@ use PoP\ComponentModel\Stores\MutationResolutionStore;
  */
 abstract class AbstractComponentModelAppProxy extends AbstractRootAppProxy implements ComponentModelAppInterface
 {
-    public static function getMutationResolutionStore(): MutationResolutionStore
-    {
-        return ComponentModelApp::getMutationResolutionStore();
-    }
-
     public static function getEngineState(): EngineState
     {
         return ComponentModelApp::getEngineState();
+    }
+
+    public static function getMutationResolutionStore(): MutationResolutionStore
+    {
+        return ComponentModelApp::getMutationResolutionStore();
     }
 
     public static function regenerateEngineState(): void
