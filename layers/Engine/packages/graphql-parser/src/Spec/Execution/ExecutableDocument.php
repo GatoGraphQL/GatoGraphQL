@@ -100,33 +100,22 @@ class ExecutableDocument implements ExecutableDocumentInterface
             return $this->document->getOperations();
         }
 
-        $requestedOperations = $this->extractRequestedOperations();
+        $requestedOperations = array_values(array_filter(
+            $this->document->getOperations(),
+            fn (OperationInterface $operation) => $operation->getName() === $this->context->getOperationName()
+        ));
         if ($requestedOperations === []) {
             throw new InvalidRequestException(
                 $this->getGraphQLErrorMessageProvider()->getNoOperationMatchesNameErrorMessage($this->context->getOperationName()),
                 $this->getNonSpecificLocation()
             );
         }
-
-        // There can be many operations
         return $requestedOperations;
     }
 
     protected function getNonSpecificLocation(): Location
     {
         return new Location(1, 1);
-    }
-
-    /**
-     * @return OperationInterface[]
-     */
-    protected function extractRequestedOperations(): array
-    {
-        $operationName = $this->context->getOperationName();
-        return array_values(array_filter(
-            $this->document->getOperations(),
-            fn (OperationInterface $operation) => $operation->getName() === $operationName
-        ));
     }
 
     /**

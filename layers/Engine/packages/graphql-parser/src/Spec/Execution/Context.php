@@ -13,7 +13,7 @@ class Context
         /** @var array<string, mixed> */
         private array $variableValues = [],
     ) {
-        $this->operationName = $operationName ?? '';
+        $this->operationName = $operationName !== null ? trim($operationName) : '';
     }
 
     public function getOperationName(): string
