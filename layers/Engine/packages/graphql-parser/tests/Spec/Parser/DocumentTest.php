@@ -86,10 +86,10 @@ class DocumentTest extends AbstractTestCase
     /**
      * @dataProvider circularFragmentQueryProvider
      */
-    public function testNoCircularFragments(string $query)
+    public function testNoCyclicalFragments(string $query)
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getCircularFragmentErrorMessage('UserProps'));
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getCyclicalFragmentErrorMessage('UserProps'));
         $parser = $this->getParser();
         $document = $parser->parse($query);
         $document->validate();

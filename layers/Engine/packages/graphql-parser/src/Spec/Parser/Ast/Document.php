@@ -69,7 +69,7 @@ class Document implements DocumentInterface
         $this->assertOperationNamesUnique();
         $this->assertNonEmptyOperationName();
         $this->assertFragmentReferencesAreValid();
-        $this->assertNoCircularFragments();
+        $this->assertNoCyclicalFragments();
         $this->assertFragmentsAreUsed();
         $this->assertVariableNamesUnique();
         $this->assertAllVariablesExist();
@@ -162,7 +162,7 @@ class Document implements DocumentInterface
 
     /**
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
-     * @param string[] $referencedFragmentNames To stop circular fragments
+     * @param string[] $referencedFragmentNames To stop cyclical fragments
      * @return FragmentReference[]
      */
     protected function getFragmentReferencesInFieldsOrFragmentBonds(array $fieldsOrFragmentBonds, array &$referencedFragmentNames): array
@@ -185,7 +185,7 @@ class Document implements DocumentInterface
             /** @var FragmentReference */
             $fragmentReference = $fieldOrFragmentBond;
             /**
-             * Avoid circular references
+             * Avoid cyclical references
              */
             if (in_array($fragmentReference->getName(), $referencedFragmentNames)) {
                 continue;
@@ -207,7 +207,7 @@ class Document implements DocumentInterface
     /**
      * @throws InvalidRequestException
      */
-    protected function assertNoCircularFragments(): void
+    protected function assertNoCyclicalFragments(): void
     {
         foreach ($this->getFragments() as $fragment) {
             $fragmentReferences = $this->getFragmentReferencesInFragment($fragment);
@@ -216,7 +216,7 @@ class Document implements DocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getCircularFragmentErrorMessage($fragmentReference->getName()),
+                    $this->getGraphQLErrorMessageProvider()->getCyclicalFragmentErrorMessage($fragmentReference->getName()),
                     $fragmentReference->getLocation()
                 );
             }
