@@ -302,7 +302,7 @@ class Document implements DocumentInterface
     protected function assertAllVariablesExist(): void
     {
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getVariableReferences($this->getFragments()) as $variableReference) {
+            foreach ($operation->getVariableReferencesInOperation($this->getFragments()) as $variableReference) {
                 if ($variableReference->getVariable() !== null) {
                     continue;
                 }
@@ -320,7 +320,7 @@ class Document implements DocumentInterface
      * @param Fragment[] $fragments
      * @return VariableReference[]
      */
-    protected function getVariableReferences(array $fragments): array
+    protected function getVariableReferencesInOperation(array $fragments): array
     {
         return array_merge(
             $this->getVariableReferencesInFieldsOrFragments($this->fieldsOrFragmentBonds, $fragments),
@@ -449,7 +449,7 @@ class Document implements DocumentInterface
     {
         foreach ($this->getOperations() as $operation) {
             $referencedVariableNames = [];
-            foreach ($operation->getVariableReferences($this->getFragments()) as $variableReference) {
+            foreach ($operation->getVariableReferencesInOperation($this->getFragments()) as $variableReference) {
                 $referencedVariableNames[] = $variableReference->getName();
             }
             $referencedVariableNames = array_values(array_unique($referencedVariableNames));

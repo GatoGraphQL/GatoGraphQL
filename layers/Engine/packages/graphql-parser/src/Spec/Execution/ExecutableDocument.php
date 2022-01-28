@@ -138,7 +138,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     protected function assertAllVariablesHaveValue(): void
     {
         foreach ($this->document->getOperations() as $operation) {
-            foreach ($operation->getVariableReferences($this->document->getFragments()) as $variableReference) {
+            foreach ($operation->getVariableReferencesInOperation($this->document->getFragments()) as $variableReference) {
                 $variable = $variableReference->getVariable();
                 if (
                     array_key_exists($variable->getName(), $this->context->getVariableValues())
