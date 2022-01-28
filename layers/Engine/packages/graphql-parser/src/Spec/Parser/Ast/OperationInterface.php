@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 
 interface OperationInterface extends LocatableInterface, WithDirectivesInterface, WithFieldsOrFragmentBondsInterface
 {
