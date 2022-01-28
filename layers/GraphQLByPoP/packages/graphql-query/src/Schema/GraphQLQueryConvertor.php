@@ -14,6 +14,7 @@ use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Exception\LocationableExceptionInterface;
+use PoP\GraphQLParser\Exception\Parser\AbstractParserError;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
@@ -145,28 +146,33 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $operationType,
                 $fieldQueryPaths
             ) = $this->convertRequestToFieldQueryPaths($request);
+        } catch (AbstractParserError $parserError) {
+            // The error description is the exception message
+            $errorMessage = $parserError->getMessage();
+            $extensions = [
+                'location' => $parserError->getLocation()->toArray(),
+            ];
+            
+            $this->getFeedbackMessageStore()->addQueryError($errorMessage, $extensions);
+
+            // Returning nothing will not process the query
+            return [
+                null,
+                []
+            ];
         } catch (Exception $e) {
             /**
              * Send the exception error to the response, but only for DEV.
              * Otherwise, it's a potential security exposure.
              */
             $errorMessage = RootEnvironment::isApplicationEnvironmentDev() ?
-                $e->getMessage()
-                : $this->__('There was an unexpected error', 'graphql-query');
+                sprintf(
+                    $this->__('[Exception (Visible on DEV only)] %s', 'graphql-parser'),
+                    $e->getMessage()
+                ) : $this->__('There was an unexpected error', 'graphql-query');
 
-            // Retrieve the location of the error
-            $location = ($e instanceof LocationableExceptionInterface) ?
-                $e->getLocation()->toArray() :
-                null;
+            $this->getFeedbackMessageStore()->addQueryError($errorMessage);
 
-            $extensions = [];
-            if (!is_null($location)) {
-                $extensions['location'] = $location;
-            }
-
-            $this->getFeedbackMessageStore()->addQueryError($errorMessage, $extensions);
-
-            // Returning nothing will not process the query
             return [
                 null,
                 []
