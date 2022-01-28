@@ -7,6 +7,9 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Services\StandaloneServiceTrait;
 
@@ -154,7 +157,7 @@ class Document implements DocumentInterface
      *
      * @return FragmentReference[]
      */
-    public function getFragmentReferencesInOperation(OperationInterface $operation): array
+    protected function getFragmentReferencesInOperation(OperationInterface $operation): array
     {
         $referencedFragmentNames = [];
         return $this->getFragmentReferencesInFieldsOrFragmentBonds($operation->getFieldsOrFragmentBonds(), $referencedFragmentNames);
@@ -228,7 +231,7 @@ class Document implements DocumentInterface
      *
      * @return FragmentReference[]
      */
-    public function getFragmentReferencesInFragment(Fragment $fragment): array
+    protected function getFragmentReferencesInFragment(Fragment $fragment): array
     {
         $referencedFragmentNames = [];
         return $this->getFragmentReferencesInFieldsOrFragmentBonds($fragment->getFieldsOrFragmentBonds(), $referencedFragmentNames);
@@ -299,7 +302,7 @@ class Document implements DocumentInterface
     protected function assertAllVariablesExist(): void
     {
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getVariableReferences($this->getFragments()) as $variableReference) {
+            foreach ($this->getVariableReferencesInOperation($operation) as $variableReference) {
                 if ($variableReference->getVariable() !== null) {
                     continue;
                 }
@@ -312,13 +315,139 @@ class Document implements DocumentInterface
     }
 
     /**
+     * Gather all the VariableReference within the Operation.
+     *
+     * @return VariableReference[]
+     */
+    public function getVariableReferencesInOperation(OperationInterface $operation): array
+    {
+        return array_merge(
+            $this->getVariableReferencesInFieldsOrFragments($operation->getFieldsOrFragmentBonds()),
+            $this->getVariableReferencesInDirectives($operation->getDirectives())
+        );
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @return VariableReference[]
+     */
+    protected function getVariableReferencesInFieldsOrFragments(array $fieldsOrFragmentBonds): array
+    {
+        $variableReferences = [];
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                /** @var FragmentReference */
+                $fragmentReference = $fieldOrFragmentBond;
+                $fragment = $this->getFragment($fragmentReference->getName());
+                if ($fragment === null) {
+                    continue;
+                }
+                $variableReferences = array_merge(
+                    $variableReferences,
+                    $this->getVariableReferencesInFieldsOrFragments($fragment->getFieldsOrFragmentBonds())
+                );
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $variableReferences = array_merge(
+                    $variableReferences,
+                    $this->getVariableReferencesInFieldsOrFragments($inlineFragment->getFieldsOrFragmentBonds())
+                );
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            $variableReferences = array_merge(
+                $variableReferences,
+                $this->getVariableReferencesInArguments($field->getArguments()),
+                $this->getVariableReferencesInDirectives($field->getDirectives())
+            );
+            if ($field instanceof RelationalField) {
+                /** @var RelationalField */
+                $relationalField = $field;
+                $variableReferences = array_merge(
+                    $variableReferences,
+                    $this->getVariableReferencesInFieldsOrFragments($relationalField->getFieldsOrFragmentBonds())
+                );
+                continue;
+            }
+        }
+        return $variableReferences;
+    }
+
+    /**
+     * @param Directive[] $directives
+     * @return VariableReference[]
+     */
+    protected function getVariableReferencesInDirectives(array $directives): array
+    {
+        $variableReferences = [];
+        foreach ($directives as $directive) {
+            $variableReferences = array_merge(
+                $variableReferences,
+                $this->getVariableReferencesInArguments($directive->getArguments())
+            );
+        }
+        return $variableReferences;
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @return VariableReference[]
+     */
+    protected function getVariableReferencesInArguments(array $arguments): array
+    {
+        $variableReferences = [];
+        foreach ($arguments as $argument) {
+            $variableReferences = array_merge(
+                $variableReferences,
+                $this->getVariableReferencesInArgumentValue($argument->getValue())
+            );
+        }
+        return $variableReferences;
+    }
+
+    /**
+     * @return VariableReference[]
+     */
+    protected function getVariableReferencesInArgumentValue(WithValueInterface $argumentValue): array
+    {
+        if ($argumentValue instanceof VariableReference) {
+            return [$argumentValue];
+        }
+        if (!($argumentValue instanceof InputObject || $argumentValue instanceof InputList)) {
+            return [];
+        }
+        // Get references within InputObjects and Lists
+        $variableReferences = [];
+        $listValues = (array)$argumentValue->getAstValue();
+        foreach ($listValues as $listValue) {
+            if (!($listValue instanceof VariableReference || $listValue instanceof WithValueInterface)) {
+                continue;
+            }
+            if ($listValue instanceof VariableReference) {
+                $variableReferences[] = $listValue;
+                continue;
+            }
+            /** @var WithValueInterface $listValue */
+            $variableReferences = array_merge(
+                $variableReferences,
+                $this->getVariableReferencesInArgumentValue($listValue)
+            );
+        }
+        return $variableReferences;
+    }
+
+    /**
      * @throws InvalidRequestException
      */
     protected function assertAllVariablesAreUsed(): void
     {
         foreach ($this->getOperations() as $operation) {
             $referencedVariableNames = [];
-            foreach ($operation->getVariableReferences($this->getFragments()) as $variableReference) {
+            foreach ($this->getVariableReferencesInOperation($operation) as $variableReference) {
                 $referencedVariableNames[] = $variableReference->getName();
             }
             $referencedVariableNames = array_values(array_unique($referencedVariableNames));
