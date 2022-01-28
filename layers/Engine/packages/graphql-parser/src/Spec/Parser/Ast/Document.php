@@ -154,7 +154,7 @@ class Document implements DocumentInterface
      *
      * @return FragmentReference[]
      */
-    public function getFragmentReferencesInOperation(OperationInterface $operation): array
+    protected function getFragmentReferencesInOperation(OperationInterface $operation): array
     {
         $referencedFragmentNames = [];
         return $this->getFragmentReferencesInFieldsOrFragmentBonds($operation->getFieldsOrFragmentBonds(), $referencedFragmentNames);
@@ -228,7 +228,7 @@ class Document implements DocumentInterface
      *
      * @return FragmentReference[]
      */
-    public function getFragmentReferencesInFragment(Fragment $fragment): array
+    protected function getFragmentReferencesInFragment(Fragment $fragment): array
     {
         $referencedFragmentNames = [];
         return $this->getFragmentReferencesInFieldsOrFragmentBonds($fragment->getFieldsOrFragmentBonds(), $referencedFragmentNames);
