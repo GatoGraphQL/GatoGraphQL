@@ -98,7 +98,7 @@ class DocumentTest extends AbstractTestCase
     public function circularFragmentQueryProvider(): array
     {
         return [
-            ['
+            'direct' => ['
                 query {
                     users {
                         id,
@@ -110,7 +110,7 @@ class DocumentTest extends AbstractTestCase
                     ...UserProps
                 }
             '],
-            ['
+            'looping' => ['
                 query {
                     users {
                         id,
