@@ -84,7 +84,7 @@ class DocumentTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider circularFragmentQueryProvider
+     * @dataProvider cyclicalFragmentQueryProvider
      */
     public function testNoCyclicalFragments(string $query)
     {
@@ -95,7 +95,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function circularFragmentQueryProvider(): array
+    public function cyclicalFragmentQueryProvider(): array
     {
         return [
             'direct' => ['
