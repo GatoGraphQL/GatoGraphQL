@@ -160,6 +160,11 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
         return \sprintf($this->__('Fragment \'%s\' is not defined in query', 'graphql-server'), $fragmentName);
     }
 
+    public function getDuplicateFragmentNameErrorMessage(string $fragmentName): string
+    {
+        return \sprintf($this->__('Fragment name \'%s\' is duplicated', 'graphql-server'), $fragmentName);
+    }
+
     public function getCyclicalFragmentErrorMessage(string $fragmentName): string
     {
         return \sprintf($this->__('Fragment \'%s\' is cyclical', 'graphql-server'), $fragmentName);

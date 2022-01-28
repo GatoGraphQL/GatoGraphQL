@@ -37,6 +37,7 @@ class RequestValidatorTest extends AbstractTestCase
             'fragment-not-defined' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference'),
             'fragment-not-defined-2' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference2'),
             'fragment-not-used' => $this->getGraphQLErrorMessageProvider()->getFragmentNotUsedErrorMessage('reference2'),
+            'fragment-name-duplicated' => $this->getGraphQLErrorMessageProvider()->getDuplicateFragmentNameErrorMessage('reference2'),
             'variable-not-defined' => $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('test'),
             'variable-not-submitted' => $this->getGraphQLErrorMessageProvider()->getVariableNotSubmittedErrorMessage('test'),
         ];
@@ -114,6 +115,27 @@ class RequestValidatorTest extends AbstractTestCase
                         )
                         ], [
                             new Fragment('reference', 'TestType', [], [], new Location(1, 1)),
+                            new Fragment('reference2', 'TestType', [], [], new Location(1, 1))
+                        ]),
+                    new Context()
+                )),
+            ],
+            'fragment-name-duplicated' => [
+                (new ExecutableDocument(
+                    new Document([
+                        new QueryOperation(
+                            'saranga',
+                            [],
+                            [],
+                            [
+                                new RelationalField('test', null, [], [
+                                    new FragmentReference('reference2', new Location(1, 1)),
+                                ], [], new Location(1, 1))
+                            ],
+                            new Location(1, 1)
+                        )
+                        ], [
+                            new Fragment('reference2', 'TestType', [], [], new Location(1, 1)),
                             new Fragment('reference2', 'TestType', [], [], new Location(1, 1))
                         ]),
                     new Context()
