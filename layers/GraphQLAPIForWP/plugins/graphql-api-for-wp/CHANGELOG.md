@@ -173,6 +173,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Return an error if access is not allowed for the option name or meta key
 - Further implemented GraphQL query validations
   - No cyclical fragment references
+  - No duplicate fragment names
 - Query `extensions` in the schema introspection
   - Implemented extension `isAdminElement`
 - Performance improvement: Avoid regenerating the container when the schema is modified
