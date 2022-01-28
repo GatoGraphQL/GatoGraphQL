@@ -10,4 +10,10 @@ interface DocumentInterface
     public function getFragments(): array;
     public function getFragment(string $name): ?Fragment;
     public function validate(): void;
+    /**
+     * Gather all the VariableReference within the Operation.
+     *
+     * @return VariableReference[]
+     */
+    public function getVariableReferencesInOperation(OperationInterface $operation): array;
 }

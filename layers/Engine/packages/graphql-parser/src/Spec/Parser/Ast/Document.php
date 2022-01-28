@@ -319,7 +319,7 @@ class Document implements DocumentInterface
      *
      * @return VariableReference[]
      */
-    protected function getVariableReferencesInOperation(OperationInterface $operation): array
+    public function getVariableReferencesInOperation(OperationInterface $operation): array
     {
         return array_merge(
             $this->getVariableReferencesInFieldsOrFragments($operation->getFieldsOrFragmentBonds()),
