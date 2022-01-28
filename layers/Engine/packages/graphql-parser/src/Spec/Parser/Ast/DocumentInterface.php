@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
+
 interface DocumentInterface
 {
     public function getOperations(): array;
