@@ -59,7 +59,7 @@ interface GraphQLErrorMessageProviderInterface
     public function getEmptyOperationNameErrorMessage(): string;
 
     public function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string;
-    
+
     public function getDuplicateFragmentNameErrorMessage(string $fragmentName): string;
 
     public function getCyclicalFragmentErrorMessage(string $fragmentName): string;
