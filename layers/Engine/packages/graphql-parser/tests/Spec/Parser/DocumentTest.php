@@ -83,6 +83,52 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
+    /**
+     * @dataProvider circularFragmentQueryProvider
+     */
+    public function testNoCircularFragments(string $query)
+    {
+        $this->expectException(InvalidRequestException::class);
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getCircularFragmentErrorMessage('UserProps'));
+        $parser = $this->getParser();
+        $document = $parser->parse($query);
+        $document->validate();
+    }
+
+    public function circularFragmentQueryProvider(): array
+    {
+        return [
+            ['
+                query {
+                    users {
+                        id,
+                        ...UserProps
+                    }
+                }
+
+                fragment UserProps on User {
+                    ...UserProps
+                }
+            '],
+            ['
+                query {
+                    users {
+                        id,
+                        ...UserProps
+                    }
+                }
+
+                fragment UserProps on User {
+                    ...MoreUserProps
+                }
+
+                fragment MoreUserProps on User {
+                    ...UserProps
+                }
+            '],
+        ];
+    }
+
     public function testFragmentNotUsed()
     {
         $this->expectException(InvalidRequestException::class);
