@@ -13,7 +13,6 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
-use PoP\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserError;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
@@ -152,7 +151,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             $extensions = [
                 'location' => $parserError->getLocation()->toArray(),
             ];
-            
+
             $this->getFeedbackMessageStore()->addQueryError($errorMessage, $extensions);
 
             // Returning nothing will not process the query
