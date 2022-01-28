@@ -153,7 +153,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             $errorMessage = RootEnvironment::isApplicationEnvironmentDev() ?
                 $e->getMessage()
                 : $this->__('There was an unexpected error', 'graphql-query');
-            
+
             // Retrieve the location of the error
             $location = ($e instanceof LocationableExceptionInterface) ?
                 $e->getLocation()->toArray() :
@@ -163,7 +163,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             if (!is_null($location)) {
                 $extensions['location'] = $location;
             }
-            
+
             $this->getFeedbackMessageStore()->addQueryError($errorMessage, $extensions);
 
             // Returning nothing will not process the query
