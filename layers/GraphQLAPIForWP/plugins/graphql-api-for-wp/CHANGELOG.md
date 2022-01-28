@@ -171,6 +171,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Validate constraints for field and directive arguments
 - Added options "default limit" and "max limit" for Posts and Pages
 - Return an error if access is not allowed for the option name or meta key
+- Further implemented GraphQL query validations
+  - No cyclical fragment references
 - Query `extensions` in the schema introspection
   - Implemented extension `isAdminElement`
 - Performance improvement: Avoid regenerating the container when the schema is modified
