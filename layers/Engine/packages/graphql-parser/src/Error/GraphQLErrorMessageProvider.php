@@ -162,7 +162,7 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 
     public function getCyclicalFragmentErrorMessage(string $fragmentName): string
     {
-        return \sprintf($this->__('Fragment \'%s\' is circular', 'graphql-server'), $fragmentName);
+        return \sprintf($this->__('Fragment \'%s\' is cyclical', 'graphql-server'), $fragmentName);
     }
 
     public function getFragmentNotUsedErrorMessage(string $fragmentName): string
