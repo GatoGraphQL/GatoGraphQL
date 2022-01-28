@@ -37,7 +37,7 @@ class RequestValidatorTest extends AbstractTestCase
             'fragment-not-defined' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference'),
             'fragment-not-defined-2' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference2'),
             'fragment-not-used' => $this->getGraphQLErrorMessageProvider()->getFragmentNotUsedErrorMessage('reference2'),
-            'fragment-name-unique' => $this->getGraphQLErrorMessageProvider()->getDuplicateFragmentNameErrorMessage('reference2'),
+            'fragment-name-duplicated' => $this->getGraphQLErrorMessageProvider()->getDuplicateFragmentNameErrorMessage('reference2'),
             'variable-not-defined' => $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('test'),
             'variable-not-submitted' => $this->getGraphQLErrorMessageProvider()->getVariableNotSubmittedErrorMessage('test'),
         ];
@@ -120,7 +120,7 @@ class RequestValidatorTest extends AbstractTestCase
                     new Context()
                 )),
             ],
-            'fragment-name-unique' => [
+            'fragment-name-duplicated' => [
                 (new ExecutableDocument(
                     new Document([
                         new QueryOperation(
