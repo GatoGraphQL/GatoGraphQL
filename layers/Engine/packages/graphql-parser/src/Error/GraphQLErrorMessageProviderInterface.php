@@ -34,8 +34,6 @@ interface GraphQLErrorMessageProviderInterface
 
     public function getNoOperationNameProvidedErrorMessage(): string;
 
-    public function getVariableNotSubmittedErrorMessage(string $variableName): string;
-
     public function getExecuteValidationErrorMessage(string $methodName): string;
 
     public function getIncorrectRequestSyntaxErrorMessage(?string $syntax): string;
@@ -77,4 +75,6 @@ interface GraphQLErrorMessageProviderInterface
     public function getContextNotSetErrorMessage(string $variableName): string;
 
     public function getValueIsNotSetForVariableErrorMessage(string $variableName): string;
+
+    public function getVariableDoesNotExistErrorMessage(string $variableReferenceName): string;
 }
