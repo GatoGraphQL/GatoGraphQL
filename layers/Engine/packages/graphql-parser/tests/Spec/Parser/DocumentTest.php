@@ -132,6 +132,24 @@ class DocumentTest extends AbstractTestCase
                     ...UserProps
                 }
             '],
+            'looping-via-inline-fragment' => ['
+                query {
+                    users {
+                        id,
+                        ...UserProps
+                    }
+                }
+
+                fragment UserProps on User {
+                    ... on User{
+                        ...MoreUserProps
+                    }
+                }
+
+                fragment MoreUserProps on User {
+                    ...UserProps
+                }
+            '],
         ];
     }
 
