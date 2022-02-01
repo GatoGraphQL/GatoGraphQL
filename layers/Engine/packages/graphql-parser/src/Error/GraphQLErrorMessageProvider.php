@@ -10,11 +10,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 {
     use BasicServiceTrait;
 
-    public function getInvalidStringUnicodeEscapeSequenceErrorMessage(string $codepoint): string
-    {
-        return \sprintf($this->__('Invalid string unicode escape sequece \'%s\'', 'graphql-server'), $codepoint);
-    }
-
     public function getUnexpectedStringEscapedCharacterErrorMessage(string $ch): string
     {
         return \sprintf($this->__('Unexpected string escaped character \'%s\'', 'graphql-server'), $ch);

@@ -6,6 +6,7 @@ namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLParserErrorMessageProvider;
 use PoP\Root\Services\BasicServiceTrait;
 
 class Tokenizer
@@ -19,6 +20,7 @@ class Tokenizer
     protected Token $lookAhead;
 
     private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+    private ?GraphQLParserErrorMessageProvider $graphQLParserErrorMessageProvider = null;
 
     final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
     {
@@ -27,6 +29,14 @@ class Tokenizer
     final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
     {
         return $this->graphQLErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLErrorMessageProviderInterface::class);
+    }
+    final public function setGraphQLParserErrorMessageProvider(GraphQLParserErrorMessageProvider $graphQLParserErrorMessageProvider): void
+    {
+        $this->graphQLParserErrorMessageProvider = $graphQLParserErrorMessageProvider;
+    }
+    final protected function getGraphQLParserErrorMessageProvider(): GraphQLParserErrorMessageProvider
+    {
+        return $this->graphQLParserErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLParserErrorMessageProvider::class);
     }
 
     protected function initTokenizer(string $source): void
@@ -337,7 +347,7 @@ class Tokenizer
                     case 'u':
                         $codepoint = substr($this->source, $this->pos + 1, 4);
                         if (!preg_match('/[0-9A-Fa-f]{4}/', $codepoint)) {
-                            throw $this->createException($this->getGraphQLErrorMessageProvider()->getInvalidStringUnicodeEscapeSequenceErrorMessage($codepoint));
+                            throw $this->createException($this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_3, $codepoint));
                         }
                         $ch = html_entity_decode("&#x{$codepoint};", ENT_QUOTES, 'UTF-8');
                         $this->pos += 4;

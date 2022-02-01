@@ -31,7 +31,6 @@ use stdClass;
 class Parser extends Tokenizer implements ParserInterface
 {
     private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
-    private ?GraphQLParserErrorMessageProvider $graphQLParserErrorMessageProvider = null;
 
     final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
@@ -40,14 +39,6 @@ class Parser extends Tokenizer implements ParserInterface
     final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
         return $this->graphQLSpecErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLSpecErrorMessageProvider::class);
-    }
-    final public function setGraphQLParserErrorMessageProvider(GraphQLParserErrorMessageProvider $graphQLParserErrorMessageProvider): void
-    {
-        $this->graphQLParserErrorMessageProvider = $graphQLParserErrorMessageProvider;
-    }
-    final protected function getGraphQLParserErrorMessageProvider(): GraphQLParserErrorMessageProvider
-    {
-        return $this->graphQLParserErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLParserErrorMessageProvider::class);
     }
 
     /** @var OperationInterface[] */
