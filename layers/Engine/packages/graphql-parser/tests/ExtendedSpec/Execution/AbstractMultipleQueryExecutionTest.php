@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
@@ -35,12 +34,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
     {
         return $this->getService(ParserInterface::class);
     }
-
-    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
-    {
-        return $this->getService(GraphQLErrorMessageProviderInterface::class);
-    }
-
+    
     protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
         return $this->getService(GraphQLSpecErrorMessageProvider::class);

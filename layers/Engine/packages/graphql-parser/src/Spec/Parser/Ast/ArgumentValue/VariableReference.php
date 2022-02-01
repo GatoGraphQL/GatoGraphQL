@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
 use LogicException;
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
-use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
 use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
@@ -18,17 +16,8 @@ class VariableReference extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
 
-    private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
     private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
 
-    final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
-    {
-        $this->graphQLErrorMessageProvider = $graphQLErrorMessageProvider;
-    }
-    final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
-    {
-        return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
-    }
     final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
         $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;

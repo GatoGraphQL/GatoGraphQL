@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackMessage\GraphQLParserErrorMessageProvider;
 use PoP\Root\Services\BasicServiceTrait;
@@ -19,17 +18,8 @@ class Tokenizer
     protected int $lineStart = 0;
     protected Token $lookAhead;
 
-    private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
     private ?GraphQLParserErrorMessageProvider $graphQLParserErrorMessageProvider = null;
 
-    final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
-    {
-        $this->graphQLErrorMessageProvider = $graphQLErrorMessageProvider;
-    }
-    final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
-    {
-        return $this->graphQLErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLErrorMessageProviderInterface::class);
-    }
     final public function setGraphQLParserErrorMessageProvider(GraphQLParserErrorMessageProvider $graphQLParserErrorMessageProvider): void
     {
         $this->graphQLParserErrorMessageProvider = $graphQLParserErrorMessageProvider;

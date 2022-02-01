@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\Root\AbstractTestCase;
@@ -15,12 +14,7 @@ class DocumentTest extends AbstractTestCase
     {
         return $this->getService(ParserInterface::class);
     }
-
-    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
-    {
-        return $this->getService(GraphQLErrorMessageProviderInterface::class);
-    }
-
+    
     protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
         return $this->getService(GraphQLSpecErrorMessageProvider::class);

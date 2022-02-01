@@ -3,7 +3,6 @@
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use LogicException;
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -12,11 +11,6 @@ use PoP\Root\AbstractTestCase;
 
 class VariableTest extends AbstractTestCase
 {
-    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
-    {
-        return $this->getService(GraphQLErrorMessageProviderInterface::class);
-    }
-
     protected function getFeedbackMessageProvider(): FeedbackMessageProvider
     {
         return $this->getService(FeedbackMessageProvider::class);

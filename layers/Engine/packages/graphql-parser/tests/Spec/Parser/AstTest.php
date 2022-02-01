@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use LogicException;
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -22,11 +21,6 @@ use PoP\Root\AbstractTestCase;
 
 class AstTest extends AbstractTestCase
 {
-    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
-    {
-        return $this->getService(GraphQLErrorMessageProviderInterface::class);
-    }
-
     protected function getFeedbackMessageProvider(): FeedbackMessageProvider
     {
         return $this->getService(FeedbackMessageProvider::class);
