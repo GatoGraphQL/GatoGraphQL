@@ -52,10 +52,6 @@ interface GraphQLErrorMessageProviderInterface
 
     public function getNoOperationsDefinedInQueryErrorMessage(): string;
 
-    public function getDuplicateOperationNameErrorMessage(string $operationName): string;
-
-    public function getEmptyOperationNameErrorMessage(): string;
-
     public function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string;
 
     public function getDuplicateFragmentNameErrorMessage(string $fragmentName): string;
@@ -73,6 +69,4 @@ interface GraphQLErrorMessageProviderInterface
     public function getDuplicateArgumentErrorMessage(string $argumentName): string;
 
     public function getContextNotSetErrorMessage(string $variableName): string;
-
-    public function getValueIsNotSetForRequiredVariableErrorMessage(string $variableName): string;
 }

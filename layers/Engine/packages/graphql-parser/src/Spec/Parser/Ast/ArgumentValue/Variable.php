@@ -7,10 +7,12 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 use LogicException;
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
+use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 use stdClass;
 
@@ -19,6 +21,7 @@ class Variable extends AbstractAst implements WithValueInterface
     use StandaloneServiceTrait;
 
     private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
     final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
     {
@@ -27,6 +30,14 @@ class Variable extends AbstractAst implements WithValueInterface
     final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
     {
         return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
+    }
+    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    {
+        $this->feedbackMessageProvider = $feedbackMessageProvider;
+    }
+    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    {
+        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackMessageProvider::class);
     }
 
     private ?Context $context = null;
@@ -142,7 +153,7 @@ class Variable extends AbstractAst implements WithValueInterface
             return $this->getDefaultValue();
         }
         if ($this->isRequired()) {
-            throw new LogicException($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForRequiredVariableErrorMessage($this->name));
+            throw new LogicException($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1001, $this->name));
         }
         return null;
     }

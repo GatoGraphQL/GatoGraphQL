@@ -140,16 +140,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
         return $this->__('No operations defined in the query', 'graphql-server');
     }
 
-    public function getDuplicateOperationNameErrorMessage(string $operationName): string
-    {
-        return \sprintf($this->__('Operation name \'%s\' is duplicated', 'graphql-server'), $operationName);
-    }
-
-    public function getEmptyOperationNameErrorMessage(): string
-    {
-        return $this->__('When submitting more than 1 operation, no operation name can be empty', 'graphql-server');
-    }
-
     public function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
     {
         return \sprintf($this->__('Fragment \'%s\' is not defined in query', 'graphql-server'), $fragmentName);
@@ -193,10 +183,5 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
     public function getContextNotSetErrorMessage(string $variableName): string
     {
         return \sprintf($this->__('Context has not been set for variable \'%s\'', 'graphql-server'), $variableName);
-    }
-
-    public function getValueIsNotSetForRequiredVariableErrorMessage(string $variableName): string
-    {
-        return \sprintf($this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'), $variableName);
     }
 }

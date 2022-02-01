@@ -6,6 +6,7 @@ namespace PoP\GraphQLParser\Spec\Library\Validator;
 
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -27,6 +28,11 @@ class RequestValidatorTest extends AbstractTestCase
         return $this->getService(GraphQLErrorMessageProviderInterface::class);
     }
 
+    protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    {
+        return $this->getService(FeedbackMessageProvider::class);
+    }
+
     /**
      * @dataProvider invalidRequestProvider
      */
@@ -39,7 +45,7 @@ class RequestValidatorTest extends AbstractTestCase
             'fragment-not-used' => $this->getGraphQLErrorMessageProvider()->getFragmentNotUsedErrorMessage('reference2'),
             'fragment-name-duplicated' => $this->getGraphQLErrorMessageProvider()->getDuplicateFragmentNameErrorMessage('reference2'),
             'variable-not-defined' => $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('test'),
-            'variable-value-not-set' => $this->getGraphQLErrorMessageProvider()->getValueIsNotSetForRequiredVariableErrorMessage('test'),
+            'variable-value-not-set' => $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1001, 'test'),
         ];
         $this->expectExceptionMessage($exceptionMessages[$this->dataName()] ?? '');
         $executableDocument->validateAndInitialize();
