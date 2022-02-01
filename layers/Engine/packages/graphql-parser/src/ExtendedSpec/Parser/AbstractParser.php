@@ -8,6 +8,7 @@ use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLExtendedSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -16,6 +17,17 @@ use PoP\Root\App;
 
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
+    private ?GraphQLExtendedSpecErrorMessageProvider $graphQLExtendedSpecErrorMessageProvider = null;
+
+    final public function setGraphQLExtendedSpecErrorMessageProvider(GraphQLExtendedSpecErrorMessageProvider $graphQLExtendedSpecErrorMessageProvider): void
+    {
+        $this->graphQLExtendedSpecErrorMessageProvider = $graphQLExtendedSpecErrorMessageProvider;
+    }
+    final protected function getGraphQLExtendedSpecErrorMessageProvider(): GraphQLExtendedSpecErrorMessageProvider
+    {
+        return $this->graphQLExtendedSpecErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLExtendedSpecErrorMessageProvider::class);
+    }
+
     /**
      * Replace `Directive` with `MetaDirective`, and nest the affected
      * directives inside.
@@ -69,7 +81,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                  */
                 if (isset($composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition])) {
                     throw new InvalidRequestException(
-                        $this->getGraphQLErrorMessageProvider()->getAffectedDirectivesReferencedMoreThanOnceErrorMessage($directive),
+                        $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E1, $directive->getName()),
                         $directive->getLocation()
                     );
                 }

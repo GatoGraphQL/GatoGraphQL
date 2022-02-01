@@ -25,15 +25,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
         return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
     }
 
-    public function getAffectedDirectivesReferencedMoreThanOnceErrorMessage(
-        Directive $directive,
-    ): string {
-        return \sprintf(
-            $this->__('Meta directive \'%s\' is nesting a directive already nested by another meta-directive', 'graphql-parser'),
-            $directive->getName()
-        );
-    }
-
     public function getAffectedDirectivesUnderPosNotEmptyErrorMessage(
         Directive $directive,
         Argument $argument

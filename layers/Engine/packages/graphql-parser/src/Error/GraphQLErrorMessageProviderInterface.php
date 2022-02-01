@@ -9,10 +9,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 
 interface GraphQLErrorMessageProviderInterface
 {
-    public function getAffectedDirectivesReferencedMoreThanOnceErrorMessage(
-        Directive $directive,
-    ): string;
-
     public function getAffectedDirectivesUnderPosNotEmptyErrorMessage(
         Directive $directive,
         Argument $argument
