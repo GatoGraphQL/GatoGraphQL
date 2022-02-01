@@ -120,7 +120,7 @@ class Document implements DocumentInterface
             $operationName = $operation->getName();
             if (in_array($operationName, $operationNames)) {
                 throw new InvalidRequestException(
-                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E0001, $operationName),
+                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_2_1_1, $operationName),
                     $this->getNonSpecificLocation()
                 );
             }

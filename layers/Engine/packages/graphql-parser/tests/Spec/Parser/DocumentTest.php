@@ -326,7 +326,7 @@ class DocumentTest extends AbstractTestCase
     public function testUniqueOperationName()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E0001, 'SomeQuery'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_2_1_1, 'SomeQuery'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
@@ -347,7 +347,7 @@ class DocumentTest extends AbstractTestCase
     public function testUniqueOperationNameAcrossOps()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E0001, 'SomeQuery'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_2_1_1, 'SomeQuery'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {

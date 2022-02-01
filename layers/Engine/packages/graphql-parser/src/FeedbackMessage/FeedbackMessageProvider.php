@@ -8,7 +8,6 @@ use PoP\Root\FeedbackMessage\AbstractFeedbackMessageProvider;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {
-    public const E0001 = '1';
     public const E0002 = '2';
     public const E1001 = '1001';
 
@@ -64,7 +63,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getCodes(): array
     {
         return [
-            self::E0001,
             self::E0002,
             self::E1001,
 
@@ -114,14 +112,13 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match($code) {
-            self::E0001 => $this->__('Operation name \'%s\' is duplicated', 'graphql-server'),
             self::E0002 => $this->__('When the document contains more than one operation, there can be no anonymous operation', 'graphql-server'),
             self::E1001 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
 
             self::E_5_1 => '__provide__',
             self::E_5_1_1 => '__provide__',
             self::E_5_2_1 => '__provide__',
-            self::E_5_2_1_1 => '__provide__',
+            self::E_5_2_1_1 => $this->__('Operation name \'%s\' is duplicated', 'graphql-server'),
             self::E_5_2_2 => '__provide__',
             self::E_5_2_2_1 => '__provide__',
             self::E_5_2_3 => '__provide__',
@@ -166,7 +163,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getSpecifiedByURL(string $code): ?string
     {
         return match($code) {
-            self::E0001 => 'https://spec.graphql.org/draft/#sec-Operation-Name-Uniqueness',
             self::E0002 => 'https://spec.graphql.org/draft/#sec-Lone-Anonymous-Operation',
             self::E1001 => 'https://spec.graphql.org/draft/#sec-All-Variable-Usages-are-Allowed',
             
