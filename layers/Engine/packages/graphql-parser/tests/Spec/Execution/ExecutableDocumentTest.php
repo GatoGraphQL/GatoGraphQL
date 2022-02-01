@@ -211,7 +211,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testOperationDoesNotExist()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1, 'AnotherOp'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_A, 'AnotherOp'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {

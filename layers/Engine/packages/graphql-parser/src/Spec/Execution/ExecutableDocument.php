@@ -117,7 +117,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         ));
         if ($requestedOperations === []) {
             throw new InvalidRequestException(
-                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1, $this->context->getOperationName()),
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_A, $this->context->getOperationName()),
                 $this->getNonSpecificLocation()
             );
         }
