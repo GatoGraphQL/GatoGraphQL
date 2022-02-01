@@ -66,6 +66,25 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getMessagePlaceholder(int $code): string
     {
         return match($code) {
+            self::E0001 => '',
+            self::E0002 => '',
+            self::E0003 => '',
+            self::E0004 => '',
+            self::E0005 => '',
+            self::E0006 => '',
+            self::E0007 => '',
+            self::E0008 => '',
+            self::E0009 => '',
+            self::E0010 => '',
+            self::E0011 => '',
+            self::E0012 => '',
+            self::E0013 => '',
+            self::E0014 => '',
+            self::E0015 => '',
+            self::E0016 => '',
+            self::E0017 => '',
+            self::E0018 => '',
+            self::E0019 => '',
             self::E1001 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };
@@ -74,6 +93,25 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getSpecifiedByURL(int $code): ?string
     {
         return match($code) {
+            self::E0001 => '',
+            self::E0002 => '',
+            self::E0003 => '',
+            self::E0004 => '',
+            self::E0005 => '',
+            self::E0006 => '',
+            self::E0007 => '',
+            self::E0008 => '',
+            self::E0009 => '',
+            self::E0010 => '',
+            self::E0011 => '',
+            self::E0012 => '',
+            self::E0013 => '',
+            self::E0014 => '',
+            self::E0015 => '',
+            self::E0016 => '',
+            self::E0017 => '',
+            self::E0018 => '',
+            self::E0019 => '',
             self::E1001 => 'https://spec.graphql.org/draft/#sec-All-Variable-Usages-are-Allowed',
             default => parent::getSpecifiedByURL($code),
         };
