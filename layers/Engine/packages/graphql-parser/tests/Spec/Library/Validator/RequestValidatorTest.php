@@ -40,8 +40,8 @@ class RequestValidatorTest extends AbstractTestCase
     {
         $this->expectException(InvalidRequestException::class);
         $exceptionMessages = [
-            'fragment-not-defined' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference'),
-            'fragment-not-defined-2' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference2'),
+            'fragment-not-defined' => $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_1_2, 'reference'),
+            'fragment-not-defined-2' => $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_1_2, 'reference2'),
             'fragment-not-used' => $this->getGraphQLErrorMessageProvider()->getFragmentNotUsedErrorMessage('reference2'),
             'fragment-name-duplicated' => $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_1_1, 'reference2'),
             'variable-not-defined' => $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('test'),

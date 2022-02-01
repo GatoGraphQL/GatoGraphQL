@@ -73,7 +73,7 @@ class DocumentTest extends AbstractTestCase
     public function testMissingFragmentReferencedByFragment()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('F1'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_1_2, 'F1'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -138,7 +138,7 @@ class DocumentTest extends AbstractTestCase
     public function testFragmentNotUsed()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('F0'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_1_2, 'F0'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -177,7 +177,7 @@ class DocumentTest extends AbstractTestCase
     public function testFragmentMissing()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('F2'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_1_2, 'F2'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {

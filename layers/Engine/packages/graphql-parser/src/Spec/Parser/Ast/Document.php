@@ -157,7 +157,7 @@ class Document implements DocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage($fragmentReference->getName()),
+                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_1_2, $fragmentReference->getName()),
                     $fragmentReference->getLocation()
                 );
             }
