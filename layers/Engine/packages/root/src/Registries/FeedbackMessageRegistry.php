@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Registries;
 
+use PoP\Root\FeedbackMessage\FeedbackMessageEntryKeys;
 use PoP\Root\FeedbackMessage\FeedbackMessageProviderInterface;
 
 class FeedbackMessageRegistry implements FeedbackMessageRegistryInterface
