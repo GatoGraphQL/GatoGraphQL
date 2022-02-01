@@ -82,6 +82,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                 if (isset($composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition])) {
                     throw new InvalidRequestException(
                         $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E1, $directive->getName()),
+                        $this->getGraphQLExtendedSpecErrorMessageProvider()->getNamespacedCode(GraphQLExtendedSpecErrorMessageProvider::E1),
                         $directive->getLocation()
                     );
                 }
@@ -162,6 +163,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         if ($argumentValue === null) {
             throw new InvalidRequestException(
                 $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E2, $argument->getName(), $directive->getName()),
+                $this->getGraphQLExtendedSpecErrorMessageProvider()->getNamespacedCode(GraphQLExtendedSpecErrorMessageProvider::E2),
                 $argument->getLocation()
             );
         }
@@ -174,6 +176,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         if ($argumentValue === []) {
             throw new InvalidRequestException(
                 $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E2, $argument->getName(), $directive->getName()),
+                $this->getGraphQLExtendedSpecErrorMessageProvider()->getNamespacedCode(GraphQLExtendedSpecErrorMessageProvider::E2),
                 $argument->getLocation()
             );
         }
@@ -181,24 +184,16 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         foreach ($argumentValue as $argumentValueItem) {
             if (!is_int($argumentValueItem) || ((int)$argumentValueItem <= 0)) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(
-                        GraphQLExtendedSpecErrorMessageProvider::E3,
-                        $argument->getName(),
-                        $directive->getName(),
-                        $argumentValueItem
-                    ),
+                    $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E3, $argument->getName(), $directive->getName(), $argumentValueItem),
+                    $this->getGraphQLExtendedSpecErrorMessageProvider()->getNamespacedCode(GraphQLExtendedSpecErrorMessageProvider::E3),
                     $argument->getLocation()
                 );
             }
             $nestedDirectivePos = $directivePos + (int)$argumentValueItem;
             if ($nestedDirectivePos >= $directiveCount) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(
-                        GraphQLExtendedSpecErrorMessageProvider::E4,
-                        $argumentValueItem,
-                        $directive->getName(),
-                        $argument->getName()
-                    ),
+                    $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E4, $argumentValueItem, $directive->getName(), $argument->getName()),
+                    $this->getGraphQLExtendedSpecErrorMessageProvider()->getNamespacedCode(GraphQLExtendedSpecErrorMessageProvider::E4),
                     $argument->getLocation()
                 );
             }

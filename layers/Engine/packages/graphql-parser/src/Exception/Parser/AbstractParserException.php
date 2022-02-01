@@ -12,9 +12,15 @@ abstract class AbstractParserException extends Exception implements Locationable
 {
     public function __construct(
         string $message,
+        private string $namespacedCode,
         private Location $location,
     ) {
         parent::__construct($message);
+    }
+
+    public function getNamespacedCode(): string
+    {
+        return $this->namespacedCode;
     }
 
     public function getLocation(): Location

@@ -69,6 +69,7 @@ class Parser extends Tokenizer implements ParserInterface
                 default:
                     throw new SyntaxErrorException(
                         $this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_1, $this->lookAhead->getData()),
+                        $this->getGraphQLParserErrorMessageProvider()->getNamespacedCode(GraphQLParserErrorMessageProvider::E_1),
                         $this->getLocation()
                     );
             }
@@ -628,6 +629,7 @@ class Parser extends Tokenizer implements ParserInterface
             default
                 => throw new SyntaxErrorException(
                     $this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_2),
+                    $this->getGraphQLParserErrorMessageProvider()->getNamespacedCode(GraphQLParserErrorMessageProvider::E_2),
                     $this->getLocation()
                 ),
         };
@@ -654,6 +656,7 @@ class Parser extends Tokenizer implements ParserInterface
             if (property_exists($object, $key)) {
                 throw new SyntaxErrorException(
                     $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_6_2, $key),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_6_2),
                     $this->getTokenLocation($keyToken)
                 );
             }

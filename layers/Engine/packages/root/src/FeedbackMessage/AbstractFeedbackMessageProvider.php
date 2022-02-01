@@ -14,7 +14,7 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
 
     final public function getNamespacedCode(string $code): string
     {
-        return $$this->getNamespace() . $code;
+        return $this->getNamespace() . $code;
     }
 
     protected function getNamespace(): string
