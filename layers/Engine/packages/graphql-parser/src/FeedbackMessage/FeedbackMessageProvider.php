@@ -11,9 +11,9 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public const E0002 = '2';
     public const E1001 = '1001';
 
-    public const E_5_1 = '5.1';
+    // public const E_5_1 = '5.1';
     public const E_5_1_1 = '5.1.1';
-    public const E_5_2_1 = '5.2.1';
+    // public const E_5_2_1 = '5.2.1';
     public const E_5_2_1_1 = '5.2.1.1';
     public const E_5_2_2 = '5.2.2';
     public const E_5_2_2_1 = '5.2.2.1';
@@ -66,9 +66,9 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E0002,
             self::E1001,
 
-            self::E_5_1,
+            // self::E_5_1,
             self::E_5_1_1,
-            self::E_5_2_1,
+            // self::E_5_2_1,
             self::E_5_2_1_1,
             self::E_5_2_2,
             self::E_5_2_2_1,
@@ -115,9 +115,9 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E0002 => $this->__('When the document contains more than one operation, there can be no anonymous operation', 'graphql-server'),
             self::E1001 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
 
-            self::E_5_1 => '__provide__',
+            // self::E_5_1 => '__provide__',
             self::E_5_1_1 => '__provide__',
-            self::E_5_2_1 => '__provide__',
+            // self::E_5_2_1 => '__provide__',
             self::E_5_2_1_1 => $this->__('Operation name \'%s\' is duplicated', 'graphql-server'),
             self::E_5_2_2 => '__provide__',
             self::E_5_2_2_1 => '__provide__',
@@ -166,9 +166,9 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E0002 => 'https://spec.graphql.org/draft/#sec-Lone-Anonymous-Operation',
             self::E1001 => 'https://spec.graphql.org/draft/#sec-All-Variable-Usages-are-Allowed',
             
-            self::E_5_1 => 'https://spec.graphql.org/draft/#sec-Documents',
+            // self::E_5_1 => 'https://spec.graphql.org/draft/#sec-Documents',
             self::E_5_1_1 => 'https://spec.graphql.org/draft/#sec-Executable-Definitions',
-            self::E_5_2_1 => 'https://spec.graphql.org/draft/#sec-Named-Operation-Definitions',
+            // self::E_5_2_1 => 'https://spec.graphql.org/draft/#sec-Named-Operation-Definitions',
             self::E_5_2_1_1 => 'https://spec.graphql.org/draft/#sec-Operation-Name-Uniqueness',
             self::E_5_2_2 => 'https://spec.graphql.org/draft/#sec-Anonymous-Operation-Definitions',
             self::E_5_2_2_1 => 'https://spec.graphql.org/draft/#sec-Lone-Anonymous-Operation',
