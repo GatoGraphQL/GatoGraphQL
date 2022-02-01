@@ -67,7 +67,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     {
         return match($code) {
             self::E0001 => $this->__('Operation name \'%s\' is duplicated', 'graphql-server'),
-            self::E0002 => '',
+            self::E0002 => $this->__('When submitting more than 1 operation, no operation name can be empty', 'graphql-server'),
             self::E0003 => '',
             self::E0004 => '',
             self::E0005 => '',
@@ -94,7 +94,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     {
         return match($code) {
             self::E0001 => 'https://spec.graphql.org/draft/#sec-Operation-Name-Uniqueness',
-            self::E0002 => '',
+            self::E0002 => 'https://spec.graphql.org/draft/#sec-Lone-Anonymous-Operation',
             self::E0003 => '',
             self::E0004 => '',
             self::E0005 => '',
