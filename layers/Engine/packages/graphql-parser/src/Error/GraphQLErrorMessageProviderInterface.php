@@ -75,6 +75,4 @@ interface GraphQLErrorMessageProviderInterface
     public function getContextNotSetErrorMessage(string $variableName): string;
 
     public function getValueIsNotSetForVariableErrorMessage(string $variableName): string;
-
-    public function getVariableDoesNotExistErrorMessage(string $variableReferenceName): string;
 }
