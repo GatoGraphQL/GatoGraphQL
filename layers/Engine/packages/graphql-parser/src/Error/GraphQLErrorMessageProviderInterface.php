@@ -6,8 +6,6 @@ namespace PoP\GraphQLParser\Error;
 
 interface GraphQLErrorMessageProviderInterface
 {
-    public function getNoOperationNameProvidedErrorMessage(): string;
-
     public function getExecuteValidationErrorMessage(string $methodName): string;
 
     public function getIncorrectRequestSyntaxErrorMessage(?string $syntax): string;

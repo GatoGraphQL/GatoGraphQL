@@ -10,11 +10,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 {
     use BasicServiceTrait;
 
-    public function getNoOperationNameProvidedErrorMessage(): string
-    {
-        return $this->__('The operation name must be provided', 'graphql-server');
-    }
-
     public function getExecuteValidationErrorMessage(string $methodName): string
     {
         return \sprintf(

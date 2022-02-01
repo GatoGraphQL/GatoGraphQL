@@ -6,6 +6,7 @@ namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -38,6 +39,11 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
     protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
     {
         return $this->getService(GraphQLErrorMessageProviderInterface::class);
+    }
+
+    protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
+    {
+        return $this->getService(GraphQLSpecErrorMessageProvider::class);
     }
 
     public function testMultipleQueryExecution(): void
@@ -143,7 +149,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
         $executableDocument = new ExecutableDocument($document, $context);
         if (!$this->enabled()) {
             $this->expectException(InvalidRequestException::class);
-            $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage());
+            $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_B));
         }
         $executableDocument->validateAndInitialize();
         if ($this->enabled()) {
@@ -162,7 +168,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
         $document = $parser->parse($query);
         $executableDocument = new ExecutableDocument($document, $context);
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage());
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_B));
         $executableDocument->validateAndInitialize();
     }
 }

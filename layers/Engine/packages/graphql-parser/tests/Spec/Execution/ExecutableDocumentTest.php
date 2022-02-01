@@ -115,7 +115,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testNonUniqueOperation()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage());
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_B));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {

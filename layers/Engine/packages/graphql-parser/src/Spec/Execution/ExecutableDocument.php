@@ -103,7 +103,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             // It can't be 0, or validation already fails in Document
             if (count($this->document->getOperations()) > 1) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage(),
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_B),
                     $this->getNonSpecificLocation()
                 );
             }
