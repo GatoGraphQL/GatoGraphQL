@@ -13,7 +13,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
-use PoP\GraphQLParser\Exception\Parser\AbstractParserError;
+use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
@@ -145,7 +145,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $operationType,
                 $fieldQueryPaths
             ) = $this->convertRequestToFieldQueryPaths($request);
-        } catch (AbstractParserError $parserError) {
+        } catch (AbstractParserException $parserError) {
             // The error description is the exception message
             $errorMessage = $parserError->getMessage();
             $extensions = [

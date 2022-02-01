@@ -8,7 +8,7 @@ use Exception;
 use PoP\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-abstract class AbstractParserError extends Exception implements LocationableExceptionInterface
+abstract class AbstractParserException extends Exception implements LocationableExceptionInterface
 {
     public function __construct(
         string $message,
