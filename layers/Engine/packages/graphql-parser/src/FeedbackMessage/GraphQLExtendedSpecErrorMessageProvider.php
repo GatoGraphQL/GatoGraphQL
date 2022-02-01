@@ -37,7 +37,7 @@ class GraphQLExtendedSpecErrorMessageProvider extends AbstractFeedbackMessagePro
         return match($code) {
             self::E1 => $this->__('Meta directive \'%s\' is nesting a directive already nested by another meta-directive', 'graphql-parser'),
             self::E2 => $this->__('Argument \'%1$s\' in directive \'%2$s\' cannot be null or empty', 'graphql-parser'),
-            self::E3 => '',
+            self::E3 => $this->__('Argument \'%1$s\' in directive \'%2$s\' must be an array of positive integers, array item \'%3$s\' is not allowed', 'graphql-parser'),
             self::E4 => '',
             default => parent::getMessagePlaceholder($code),
         };

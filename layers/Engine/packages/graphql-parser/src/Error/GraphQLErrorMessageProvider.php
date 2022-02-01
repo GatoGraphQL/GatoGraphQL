@@ -4,41 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Error;
 
-use PoP\GraphQLParser\Response\OutputServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\Root\Services\BasicServiceTrait;
-use stdClass;
 
 class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterface
 {
     use BasicServiceTrait;
-
-    private ?OutputServiceInterface $outputService = null;
-
-    final public function setOutputService(OutputServiceInterface $outputService): void
-    {
-        $this->outputService = $outputService;
-    }
-    final protected function getOutputService(): OutputServiceInterface
-    {
-        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
-    }
-
-    public function getAffectedDirectivesUnderPosNotPositiveIntErrorMessage(
-        Directive $directive,
-        Argument $argument,
-        mixed $itemValue
-    ): string {
-        return \sprintf(
-            $this->__('Argument \'%s\' in directive \'%s\' must be an array of positive integers, array item \'%s\' is not allowed', 'graphql-parser'),
-            $argument->getName(),
-            $directive->getName(),
-            is_array($itemValue) || ($itemValue instanceof stdClass)
-                ? $this->getOutputService()->jsonEncodeArrayOrStdClassValue($itemValue)
-                : $itemValue
-        );
-    }
 
     public function getNoAffectedDirectiveUnderPosErrorMessage(
         Directive $directive,

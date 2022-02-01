@@ -181,7 +181,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         foreach ($argumentValue as $argumentValueItem) {
             if (!is_int($argumentValueItem) || ((int)$argumentValueItem <= 0)) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getAffectedDirectivesUnderPosNotPositiveIntErrorMessage($directive, $argument, $argumentValueItem),
+                    $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(
+                        GraphQLExtendedSpecErrorMessageProvider::E3,
+                        $argument->getName(),
+                        $directive->getName(),
+                        $argumentValueItem
+                    ),
                     $argument->getLocation()
                 );
             }
