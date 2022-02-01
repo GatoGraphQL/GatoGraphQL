@@ -53,7 +53,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         $this->requestedOperations = null;
 
         $this->document->validate();
-        $this->assertAllVariablesHaveValue();
+        $this->assertAllMandatoryVariablesHaveValue();
 
         // Obtain the operations that must be executed
         $this->requestedOperations = $this->assertAndGetRequestedOperations();
@@ -119,24 +119,25 @@ class ExecutableDocument implements ExecutableDocumentInterface
     }
 
     /**
-     * Validate that all referenced variable are provided a value,
+     * Validate that all referenced mandatory variable are provided a value,
      * or they have a default value. Otherwise, throw an exception.
      *
      * @throws InvalidRequestException
      */
-    protected function assertAllVariablesHaveValue(): void
+    protected function assertAllMandatoryVariablesHaveValue(): void
     {
         foreach ($this->document->getOperations() as $operation) {
             foreach ($this->document->getVariableReferencesInOperation($operation) as $variableReference) {
                 $variable = $variableReference->getVariable();
                 if (
-                    array_key_exists($variable->getName(), $this->context->getVariableValues())
+                    !$variable->isRequired()
+                    || array_key_exists($variable->getName(), $this->context->getVariableValues())
                     || $variable->hasDefaultValue()
                 ) {
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getValueIsNotSetForVariableErrorMessage($variableReference->getName()),
+                    $this->getGraphQLErrorMessageProvider()->getValueIsNotSetForRequiredVariableErrorMessage($variableReference->getName()),
                     $variableReference->getLocation()
                 );
             }
