@@ -21,7 +21,7 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
 
     protected function getCodeToStr(int $code): string
     {
-        return (string) $code;
+        return \str_pad((string) $code, 4, "0", \STR_PAD_LEFT);
     }
 
     final public function getMessage(int $code, string|int|float|bool ...$args): string
