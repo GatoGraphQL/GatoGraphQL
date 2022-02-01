@@ -8,7 +8,7 @@ use PoP\Root\FeedbackMessage\AbstractFeedbackMessageProvider;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {
-    public const E1001 = 1;
+    public const E1001 = 1001;
 
     protected function getNamespace(): string
     {
