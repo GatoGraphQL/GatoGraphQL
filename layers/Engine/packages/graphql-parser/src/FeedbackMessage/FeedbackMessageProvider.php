@@ -23,7 +23,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public const E_5_5_1_2 = '5.5.1.2';
     public const E_5_5_1_3 = '5.5.1.3';
     public const E_5_5_1_4 = '5.5.1.4';
-    public const E_5_5_2 = '5.5.2';
     public const E_5_5_2_1 = '5.5.2.1';
     public const E_5_5_2_2 = '5.5.2.2';
     public const E_5_5_2_3 = '5.5.2.3';
@@ -70,7 +69,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_5_1_2,
             self::E_5_5_1_3,
             self::E_5_5_1_4,
-            self::E_5_5_2,
             self::E_5_5_2_1,
             self::E_5_5_2_2,
             self::E_5_5_2_3,
@@ -108,11 +106,10 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_4_2 => $this->__('Argument \'%s\' is duplicated', 'graphql-server'),
             self::E_5_4_2_1 => 'TODO: satisfy',
             self::E_5_5_1_1 => $this->__('Fragment name \'%s\' is duplicated', 'graphql-server'),
-            self::E_5_5_1_2 => $this->__('Fragment \'%s\' is not defined in query', 'graphql-server'),
+            self::E_5_5_1_2 => 'TODO: satisfy',
             self::E_5_5_1_3 => 'TODO: satisfy',
             self::E_5_5_1_4 => $this->__('Fragment \'%s\' is not used', 'graphql-server'),
-            self::E_5_5_2 => '__provide__',
-            self::E_5_5_2_1 => '__provide__',
+            self::E_5_5_2_1 => $this->__('Fragment \'%s\' is not defined in document', 'graphql-server'),
             self::E_5_5_2_2 => '__provide__',
             self::E_5_5_2_3 => '__provide__',
             self::E_5_5_2_3_1 => '__provide__',
@@ -159,7 +156,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_5_1_2 => 'https://spec.graphql.org/draft/#sec-Fragment-Spread-Type-Existence',
             self::E_5_5_1_3 => 'https://spec.graphql.org/draft/#sec-Fragments-On-Composite-Types',
             self::E_5_5_1_4 => 'https://spec.graphql.org/draft/#sec-Fragments-Must-Be-Used',
-            self::E_5_5_2 => 'https://spec.graphql.org/draft/#sec-Fragment-Spreads',
             self::E_5_5_2_1 => 'https://spec.graphql.org/draft/#sec-Fragment-spread-target-defined',
             self::E_5_5_2_2 => 'https://spec.graphql.org/draft/#sec-Fragment-spreads-must-not-form-cycles',
             self::E_5_5_2_3 => 'https://spec.graphql.org/draft/#sec-Fragment-spread-is-possible',

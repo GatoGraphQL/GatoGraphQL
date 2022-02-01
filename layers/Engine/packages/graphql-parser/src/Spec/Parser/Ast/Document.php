@@ -157,7 +157,7 @@ class Document implements DocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_1_2, $fragmentReference->getName()),
+                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_2_1, $fragmentReference->getName()),
                     $fragmentReference->getLocation()
                 );
             }
