@@ -204,9 +204,4 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
     {
         return \sprintf($this->__('Value is not set for variable \'%s\'', 'graphql-server'), $variableName);
     }
-
-    public function getVariableDoesNotExistErrorMessage(string $variableReferenceName): string
-    {
-        return \sprintf($this->__('No variable exists for variable reference \'%s\'', 'graphql-server'), $variableReferenceName);
-    }
 }
