@@ -30,7 +30,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public const E_5_5_2_3_2 = '5.5.2.3.2';
     public const E_5_5_2_3_3 = '5.5.2.3.3';
     public const E_5_5_2_3_4 = '5.5.2.3.4';
-    public const E_5_6 = '5.6';
     public const E_5_6_1 = '5.6.1';
     public const E_5_6_2 = '5.6.2';
     public const E_5_6_3 = '5.6.3';
@@ -76,7 +75,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_5_2_3_2,
             self::E_5_5_2_3_3,
             self::E_5_5_2_3_4,
-            self::E_5_6,
             self::E_5_6_1,
             self::E_5_6_2,
             self::E_5_6_3,
@@ -111,20 +109,19 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_5_1_4 => $this->__('Fragment \'%s\' is not used', 'graphql-server'),
             self::E_5_5_2_1 => $this->__('Fragment \'%s\' is not defined in document', 'graphql-server'),
             self::E_5_5_2_2 => $this->__('Fragment \'%s\' is cyclical', 'graphql-server'),
-            self::E_5_5_2_3 => '__provide__',
-            self::E_5_5_2_3_1 => '__provide__',
-            self::E_5_5_2_3_2 => '__provide__',
-            self::E_5_5_2_3_3 => '__provide__',
-            self::E_5_5_2_3_4 => '__provide__',
-            self::E_5_6 => '__provide__',
-            self::E_5_6_1 => '__provide__',
-            self::E_5_6_2 => '__provide__',
-            self::E_5_6_3 => '__provide__',
-            self::E_5_6_4 => '__provide__',
-            self::E_5_7_1 => '__provide__',
-            self::E_5_7_2 => '__provide__',
-            self::E_5_7_3 => '__provide__',
-            self::E_5_8_1 => '__provide__',
+            self::E_5_5_2_3 => 'TODO: satisfy',
+            self::E_5_5_2_3_1 => 'TODO: satisfy',
+            self::E_5_5_2_3_2 => 'TODO: satisfy',
+            self::E_5_5_2_3_3 => 'TODO: satisfy',
+            self::E_5_5_2_3_4 => 'TODO: satisfy',
+            self::E_5_6_1 => 'TODO: satisfy',
+            self::E_5_6_2 => 'TODO: satisfy',
+            self::E_5_6_3 => 'TODO: satisfy',
+            self::E_5_6_4 => 'TODO: satisfy',
+            self::E_5_7_1 => 'TODO: satisfy',
+            self::E_5_7_2 => 'TODO: satisfy',
+            self::E_5_7_3 => 'TODO: satisfy',
+            self::E_5_8_1 => $this->__('Variable name \'%s\' is duplicated', 'graphql-server'),
             self::E_5_8_2 => '__provide__',
             self::E_5_8_3 => '__provide__',
             self::E_5_8_4 => '__provide__',
@@ -163,7 +160,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_5_2_3_2 => 'https://spec.graphql.org/draft/#sec-Abstract-Spreads-in-Object-Scope',
             self::E_5_5_2_3_3 => 'https://spec.graphql.org/draft/#sec-Object-Spreads-In-Abstract-Scope',
             self::E_5_5_2_3_4 => 'https://spec.graphql.org/draft/#sec-Abstract-Spreads-in-Abstract-Scope',
-            self::E_5_6 => 'https://spec.graphql.org/draft/#sec-Values',
             self::E_5_6_1 => 'https://spec.graphql.org/draft/#sec-Values-of-Correct-Type',
             self::E_5_6_2 => 'https://spec.graphql.org/draft/#sec-Input-Object-Field-Names',
             self::E_5_6_3 => 'https://spec.graphql.org/draft/#sec-Input-Object-Field-Uniqueness',

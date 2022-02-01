@@ -386,7 +386,7 @@ class DocumentTest extends AbstractTestCase
     public function testUniqueVariableName()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateVariableNameErrorMessage('someVar'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_1, 'someVar'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($someVar: String, $someVar: Boolean) {

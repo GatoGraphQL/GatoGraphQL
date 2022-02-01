@@ -317,7 +317,7 @@ class Document implements DocumentInterface
                 $variableName = $variable->getName();
                 if (in_array($variableName, $variableNames)) {
                     throw new InvalidRequestException(
-                        $this->getGraphQLErrorMessageProvider()->getDuplicateVariableNameErrorMessage($variableName),
+                        $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_1, $variableName),
                         $this->getNonSpecificLocation()
                     );
                 }
