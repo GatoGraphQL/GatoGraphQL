@@ -4,13 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Error;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-
 interface GraphQLErrorMessageProviderInterface
 {
-    public function getNoOperationMatchesNameErrorMessage(string $operationName): string;
-
     public function getNoOperationNameProvidedErrorMessage(): string;
 
     public function getExecuteValidationErrorMessage(string $methodName): string;

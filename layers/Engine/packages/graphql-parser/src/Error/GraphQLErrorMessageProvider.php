@@ -10,11 +10,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 {
     use BasicServiceTrait;
 
-    public function getNoOperationMatchesNameErrorMessage(string $operationName): string
-    {
-        return \sprintf($this->__('Operation with name \'%s\' does not exist', 'graphql-server'), $operationName);
-    }
-
     public function getNoOperationNameProvidedErrorMessage(): string
     {
         return $this->__('The operation name must be provided', 'graphql-server');
