@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\FeedbackMessage;
 use PoP\Root\FeedbackMessage\AbstractFeedbackMessageProvider;
 use PoP\Root\FeedbackMessage\FeedbackMessageCategories;
 
-class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
+class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
 {
     // public const E_5_1_1 = '5.1.1';
     public const E_5_2_1_1 = '5.2.1.1';

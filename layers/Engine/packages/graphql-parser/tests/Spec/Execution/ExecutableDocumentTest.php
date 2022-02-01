@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\Spec\Execution;
 
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -28,9 +28,9 @@ class ExecutableDocumentTest extends AbstractTestCase
         return $this->getService(GraphQLErrorMessageProviderInterface::class);
     }
 
-    protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->getService(FeedbackMessageProvider::class);
+        return $this->getService(GraphQLSpecErrorMessageProvider::class);
     }
 
     public function testGetVariableFromContext()
@@ -158,7 +158,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testMissingRequiredVariableValue()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_5, 'format'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, 'format'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($format: String!) {
@@ -193,7 +193,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testMissingRequiredVariableValueForDirective()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_5, 'includeUsers'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, 'includeUsers'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($includeUsers: Boolean!) {

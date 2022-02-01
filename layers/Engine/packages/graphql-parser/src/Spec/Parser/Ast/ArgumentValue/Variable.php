@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 use LogicException;
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
-use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
@@ -21,7 +21,7 @@ class Variable extends AbstractAst implements WithValueInterface
     use StandaloneServiceTrait;
 
     private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
-    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
+    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
 
     final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
     {
@@ -31,13 +31,13 @@ class Variable extends AbstractAst implements WithValueInterface
     {
         return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
     }
-    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
-        $this->feedbackMessageProvider = $feedbackMessageProvider;
+        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
     }
-    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackMessageProvider::class);
+        return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
     }
 
     private ?Context $context = null;
@@ -153,7 +153,7 @@ class Variable extends AbstractAst implements WithValueInterface
             return $this->getDefaultValue();
         }
         if ($this->isRequired()) {
-            throw new LogicException($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_5, $this->name));
+            throw new LogicException($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, $this->name));
         }
         return null;
     }

@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\Spec\Execution;
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
-use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -19,7 +19,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     use StandaloneServiceTrait;
 
     private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
-    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
+    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
 
     final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
     {
@@ -29,13 +29,13 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
     }
-    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
-        $this->feedbackMessageProvider = $feedbackMessageProvider;
+        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
     }
-    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackMessageProvider::class);
+        return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
     }
 
     private ?array $requestedOperations = null;
@@ -148,7 +148,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_5, $variableReference->getName()),
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, $variableReference->getName()),
                     $variableReference->getLocation()
                 );
             }
