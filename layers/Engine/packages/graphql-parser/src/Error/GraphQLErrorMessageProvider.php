@@ -10,15 +10,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 {
     use BasicServiceTrait;
 
-    public function getExecuteValidationErrorMessage(string $methodName): string
-    {
-        return \sprintf(
-            $this->__('Before executing `%s`, must call `%s`', 'graphql-server'),
-            $methodName,
-            'validateAndInitialize'
-        );
-    }
-
     public function getIncorrectRequestSyntaxErrorMessage(?string $syntax): string
     {
         $errorMessage = $this->__('Incorrect request syntax', 'graphql-server');

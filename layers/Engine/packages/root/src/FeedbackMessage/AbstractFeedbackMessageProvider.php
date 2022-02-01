@@ -40,6 +40,16 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
         );
     }
 
+    public function getCategory(string $code): string
+    {
+        throw new Exception(
+            \sprintf(
+                $this->__('There is no category for code \'%s\'', 'root'),
+                $code
+            )
+        );
+    }
+
     public function getSpecifiedByURL(string $code): ?string
     {
         return null;

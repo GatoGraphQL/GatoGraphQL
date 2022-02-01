@@ -6,6 +6,7 @@ namespace PoP\GraphQLParser\Spec\Execution;
 
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
 use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -31,6 +32,11 @@ class ExecutableDocumentTest extends AbstractTestCase
     protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
         return $this->getService(GraphQLSpecErrorMessageProvider::class);
+    }
+
+    protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    {
+        return $this->getService(FeedbackMessageProvider::class);
     }
 
     public function testGetVariableFromContext()
@@ -229,7 +235,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testNonInitializedRequest()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getExecuteValidationErrorMessage('getRequestedOperations'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, 'getRequestedOperations'),);
         $parser = $this->getParser();
         $document = $parser->parse('{ id }');
         $context = new Context();

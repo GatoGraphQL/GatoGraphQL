@@ -7,6 +7,7 @@ namespace PoP\GraphQLParser\Spec\Execution;
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
+use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
 use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
@@ -20,6 +21,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
     private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
     private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
+    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
     final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
     {
@@ -36,6 +38,14 @@ class ExecutableDocument implements ExecutableDocumentInterface
     final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
         return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
+    }
+    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    {
+        $this->feedbackMessageProvider = $feedbackMessageProvider;
+    }
+    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    {
+        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackMessageProvider::class);
     }
 
     private ?array $requestedOperations = null;
@@ -170,7 +180,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         if ($this->requestedOperations === null) {
             throw new InvalidRequestException(
-                $this->getGraphQLErrorMessageProvider()->getExecuteValidationErrorMessage(__FUNCTION__),
+                $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, __FUNCTION__),
                 $this->getNonSpecificLocation()
             );
         }
