@@ -148,7 +148,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1001, $variableReference->getName()),
+                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_5, $variableReference->getName()),
                     $variableReference->getLocation()
                 );
             }

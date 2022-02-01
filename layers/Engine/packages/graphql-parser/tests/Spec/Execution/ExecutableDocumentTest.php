@@ -158,7 +158,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testMissingRequiredVariableValue()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1001, 'format'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_5, 'format'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($format: String!) {
@@ -193,7 +193,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testMissingRequiredVariableValueForDirective()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1001, 'includeUsers'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_5, 'includeUsers'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($includeUsers: Boolean!) {

@@ -8,8 +8,6 @@ use PoP\Root\FeedbackMessage\AbstractFeedbackMessageProvider;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {
-    public const E1001 = '1001';
-
     // public const E_5_1 = '5.1';
     public const E_5_1_1 = '5.1.1';
     // public const E_5_2_1 = '5.2.1';
@@ -62,8 +60,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getCodes(): array
     {
         return [
-            self::E1001,
-
             // self::E_5_1,
             self::E_5_1_1,
             // self::E_5_2_1,
@@ -110,8 +106,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match($code) {
-            self::E1001 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
-
             // self::E_5_1 => '__provide__',
             self::E_5_1_1 => '__provide__',
             // self::E_5_2_1 => '__provide__',
@@ -151,7 +145,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_8_2 => '__provide__',
             self::E_5_8_3 => '__provide__',
             self::E_5_8_4 => '__provide__',
-            self::E_5_8_5 => '__provide__',
+            self::E_5_8_5 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
 
             default => parent::getMessagePlaceholder($code),
         };
@@ -160,8 +154,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getSpecifiedByURL(string $code): ?string
     {
         return match($code) {
-            self::E1001 => 'https://spec.graphql.org/draft/#sec-All-Variable-Usages-are-Allowed',
-            
             // self::E_5_1 => 'https://spec.graphql.org/draft/#sec-Documents',
             self::E_5_1_1 => 'https://spec.graphql.org/draft/#sec-Executable-Definitions',
             // self::E_5_2_1 => 'https://spec.graphql.org/draft/#sec-Named-Operation-Definitions',
