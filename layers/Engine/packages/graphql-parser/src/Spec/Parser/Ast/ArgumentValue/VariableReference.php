@@ -55,6 +55,7 @@ class VariableReference extends AbstractAst implements WithValueInterface
         if ($this->variable === null) {
             throw new InvalidRequestException(
                 $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, $this->name),
+                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_3),
                 $this->getLocation()
             );
         }

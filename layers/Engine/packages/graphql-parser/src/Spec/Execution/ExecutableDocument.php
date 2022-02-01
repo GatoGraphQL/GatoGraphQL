@@ -103,6 +103,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             if (count($this->document->getOperations()) > 1) {
                 throw new InvalidRequestException(
                     $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_B),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_B),
                     $this->getNonSpecificLocation()
                 );
             }
@@ -117,6 +118,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         if ($requestedOperations === []) {
             throw new InvalidRequestException(
                 $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_A, $this->context->getOperationName()),
+                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_A),
                 $this->getNonSpecificLocation()
             );
         }
@@ -148,6 +150,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
                 }
                 throw new InvalidRequestException(
                     $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, $variableReference->getName()),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_5),
                     $variableReference->getLocation()
                 );
             }
@@ -170,6 +173,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         if ($this->requestedOperations === null) {
             throw new InvalidRequestException(
                 $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, __FUNCTION__),
+                $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
                 $this->getNonSpecificLocation()
             );
         }

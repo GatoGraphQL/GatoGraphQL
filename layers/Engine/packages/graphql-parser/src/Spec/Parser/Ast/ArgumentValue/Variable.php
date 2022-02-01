@@ -138,6 +138,7 @@ class Variable extends AbstractAst implements WithValueInterface
         if ($this->context === null) {
             throw new InvalidRequestException(
                 $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E2, $this->name),
+                $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E2),
                 $this->getLocation()
             );
         }
@@ -157,6 +158,7 @@ class Variable extends AbstractAst implements WithValueInterface
         if ($this->isRequired()) {
             throw new InvalidRequestException(
                 $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, $this->name),
+                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_5),
                 $this->getLocation()
             );
         }
