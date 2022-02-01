@@ -6,6 +6,7 @@ namespace PoP\Root\Feedback;
 
 interface FeedbackMessageProviderInterface
 {
+    public function getNamespace(): string;
     /**
      * @return array<string,string> [key]: code, [value]: message placeholder
      */
