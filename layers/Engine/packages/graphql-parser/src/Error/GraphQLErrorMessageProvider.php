@@ -140,11 +140,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
         return $this->__('No operations defined in the query', 'graphql-server');
     }
 
-    public function getCyclicalFragmentErrorMessage(string $fragmentName): string
-    {
-        return \sprintf($this->__('Fragment \'%s\' is cyclical', 'graphql-server'), $fragmentName);
-    }
-
     public function getDuplicateVariableNameErrorMessage(string $variableName): string
     {
         return \sprintf($this->__('Variable name \'%s\' is duplicated', 'graphql-server'), $variableName);

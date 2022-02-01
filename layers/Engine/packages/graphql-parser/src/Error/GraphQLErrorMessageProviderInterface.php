@@ -52,8 +52,6 @@ interface GraphQLErrorMessageProviderInterface
 
     public function getNoOperationsDefinedInQueryErrorMessage(): string;
 
-    public function getCyclicalFragmentErrorMessage(string $fragmentName): string;
-
     public function getDuplicateVariableNameErrorMessage(string $variableName): string;
 
     public function getVariableNotDefinedInOperationErrorMessage(string $variableName): string;

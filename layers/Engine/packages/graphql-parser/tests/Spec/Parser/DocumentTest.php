@@ -95,7 +95,7 @@ class DocumentTest extends AbstractTestCase
     public function testNoCyclicalFragments(string $query)
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getCyclicalFragmentErrorMessage('UserProps'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_2_2, 'UserProps'));
         $parser = $this->getParser();
         $document = $parser->parse($query);
         $document->validate();
@@ -135,7 +135,7 @@ class DocumentTest extends AbstractTestCase
         ];
     }
 
-    public function testFragmentNotUsed()
+    public function testReferencedFragmentNotExisting()
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_2_1, 'F0'));

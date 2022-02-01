@@ -249,7 +249,7 @@ class Document implements DocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getCyclicalFragmentErrorMessage($fragmentReference->getName()),
+                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_2_2, $fragmentReference->getName()),
                     $fragmentReference->getLocation()
                 );
             }

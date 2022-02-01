@@ -110,7 +110,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_5_1_3 => 'TODO: satisfy',
             self::E_5_5_1_4 => $this->__('Fragment \'%s\' is not used', 'graphql-server'),
             self::E_5_5_2_1 => $this->__('Fragment \'%s\' is not defined in document', 'graphql-server'),
-            self::E_5_5_2_2 => '__provide__',
+            self::E_5_5_2_2 => $this->__('Fragment \'%s\' is cyclical', 'graphql-server'),
             self::E_5_5_2_3 => '__provide__',
             self::E_5_5_2_3_1 => '__provide__',
             self::E_5_5_2_3_2 => '__provide__',
