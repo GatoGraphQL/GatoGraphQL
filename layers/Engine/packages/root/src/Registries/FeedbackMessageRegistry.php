@@ -28,4 +28,9 @@ class FeedbackMessageRegistry implements FeedbackMessageRegistryInterface
     {
         return $this->feedbackMessageEntries;
     }
+
+    public function getFeedbackMessageEntry(string $namespacedCode): ?array
+    {
+        return $this->feedbackMessageEntries[$namespacedCode] ?? null;
+    }
 }
