@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoP\Root\FeedbackMessage;
 
 use PoP\Root\Helpers\ClassHelpers;
-use PoP\Root\Registries\FeedbackMessageCategories;
+use PoP\Root\FeedbackMessage\FeedbackMessageCategories;
 
 abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProviderInterface
 {
-    final public function getNamespacedCode(string $code): string
+    final public function getNamespacedCode(int $code): string
     {
-        return $$this->getNamespace() . $code;
+        return $$this->getNamespace() . $this->getCodeToStr($code);
     }
 
     protected function getNamespace(): string
@@ -19,17 +19,25 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
         return ClassHelpers::getClassPSR4Namespace(\get_called_class());
     }
 
-    final public function getMessage(string $code, string|int|float|bool ...$args): string
+    protected function getCodeToStr(int $code): string
     {
-        return \sprintf($code, ...$args);
+        return (string) $code;
+    }
+
+    final public function getMessage(int $code, string|int|float|bool ...$args): string
+    {
+        return \sprintf(
+            $this->getMessagePlaceholder($code),
+            ...$args
+        );
     }
     
-    public function getCategory(string $code): string
+    public function getCategory(int $code): string
     {
         return FeedbackMessageCategories::ERROR;
     }
 
-    public function getSpecifiedByURL(string $code): ?string
+    public function getSpecifiedByURL(int $code): ?string
     {
         return null;
     }

@@ -8,25 +8,27 @@ use PoP\Root\FeedbackMessage\AbstractFeedbackMessageProvider;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {
+    public const E0001 = 1;
+
     protected function getNamespace(): string
     {
         return 'gql';
     }
 
     /**
-     * @return string[]
+     * @return int[]
      */
     public function getCodes(): array
     {
         return [];
     }
 
-    public function getMessagePlaceholder(string $code): string
+    public function getMessagePlaceholder(int $code): string
     {
         return '';
     }
 
-    public function getSpecifiedByURL(string $code): ?string
+    public function getSpecifiedByURL(int $code): ?string
     {
         return null;
     }
