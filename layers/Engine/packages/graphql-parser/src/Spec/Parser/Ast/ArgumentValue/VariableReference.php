@@ -53,7 +53,7 @@ class VariableReference extends AbstractAst implements WithValueInterface
     public function getValue(): mixed
     {
         if ($this->variable === null) {
-            throw new LogicException($this->getGraphQLErrorMessageProvider()->getVariableDoesNotExistErrorMessage($this->name));
+            throw new LogicException($this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage($this->name));
         }
 
         return $this->variable->getValue();
