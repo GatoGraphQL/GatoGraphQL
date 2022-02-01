@@ -58,6 +58,8 @@ class RequestValidatorTest extends AbstractTestCase
         $variable2->setContext($context);
         $variable3 = new Variable('test3', 'Int', false, false, true, new Location(1, 1));
         $variable3->setContext($context);
+        $requiredVariable = new Variable('test', 'Int', true, false, true, new Location(1, 1));
+        $requiredVariable->setContext($context);
 
         return [
             'fragment-not-defined' => [
@@ -177,8 +179,7 @@ class RequestValidatorTest extends AbstractTestCase
                             [],
                             [
                                 new RelationalField('test', null, [
-                                    new Argument('test', new VariableReference('test', $variable1, new Location(1, 1)), new Location(1, 1)),
-                                    new Argument('test2', new VariableReference('test2', $variable2, new Location(1, 1)), new Location(1, 1)),
+                                    new Argument('test', new VariableReference('test', $requiredVariable, new Location(1, 1)), new Location(1, 1)),
                                 ], [
                                     new LeafField('test', null, [], [], new Location(1, 1))
                                 ], [], new Location(1, 1))
