@@ -38,7 +38,7 @@ class GraphQLParserErrorMessageProvider extends AbstractFeedbackMessageProvider
 
     public function getMessagePlaceholder(string $code): string
     {
-        return match($code) {
+        return match ($code) {
             self::E_1 => $this->__('Incorrect request syntax: %s', 'graphql-server'),
             self::E_2 => $this->__('Can\'t parse argument', 'graphql-parser'),
             self::E_3 => $this->__('Invalid string unicode escape sequece \'%s\'', 'graphql-server'),
@@ -48,7 +48,7 @@ class GraphQLParserErrorMessageProvider extends AbstractFeedbackMessageProvider
             default => parent::getMessagePlaceholder($code),
         };
     }
-    
+
     public function getCategory(string $code): string
     {
         return FeedbackMessageCategories::ERROR;

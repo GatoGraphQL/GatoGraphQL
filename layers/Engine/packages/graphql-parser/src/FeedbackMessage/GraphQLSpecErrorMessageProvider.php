@@ -98,7 +98,7 @@ class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
 
     public function getMessagePlaceholder(string $code): string
     {
-        return match($code) {
+        return match ($code) {
             // self::E_5_1_1 => 'not_applicable',
             self::E_5_2_1_1 => $this->__('Operation name \'%s\' is duplicated', 'graphql-server'),
             self::E_5_2_2_1 => $this->__('When the document contains more than one operation, there can be no anonymous operation', 'graphql-server'),
@@ -138,7 +138,7 @@ class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
             default => parent::getMessagePlaceholder($code),
         };
     }
-    
+
     public function getCategory(string $code): string
     {
         return FeedbackMessageCategories::ERROR;
@@ -146,7 +146,7 @@ class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
 
     public function getSpecifiedByURL(string $code): ?string
     {
-        return match($code) {
+        return match ($code) {
             // self::E_5_1_1 => 'https://spec.graphql.org/draft/#sec-Executable-Definitions',
             self::E_5_2_1_1 => 'https://spec.graphql.org/draft/#sec-Operation-Name-Uniqueness',
             self::E_5_2_2_1 => 'https://spec.graphql.org/draft/#sec-Lone-Anonymous-Operation',

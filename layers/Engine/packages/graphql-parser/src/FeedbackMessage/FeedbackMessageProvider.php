@@ -25,16 +25,16 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 
     public function getMessagePlaceholder(string $code): string
     {
-        return match($code) {
+        return match ($code) {
             self::E1 => $this->__('Before executing `%s`, must call `validateAndInitialize`', 'graphql-server'),
             self::E2 => $this->__('Context has not been set for variable \'%s\'', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };
     }
-    
+
     public function getCategory(string $code): string
     {
-        return match($code) {
+        return match ($code) {
             self::E1,
             self::E2
                 => FeedbackMessageCategories::ERROR,
