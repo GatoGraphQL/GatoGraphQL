@@ -6,7 +6,7 @@ namespace PoP\Root\Container\CompilerPasses;
 
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 use PoP\Root\Registries\FeedbackMessageRegistryInterface;
-use PoP\Root\Feedback\FeedbackMessageProviderInterface;
+use PoP\Root\FeedbackMessage\FeedbackMessageProviderInterface;
 
 class RegisterFeedbackMessageProviderCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
 {

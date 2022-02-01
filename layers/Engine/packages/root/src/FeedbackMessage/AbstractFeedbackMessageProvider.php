@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\Feedback;
+namespace PoP\Root\FeedbackMessage;
 
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Registries\FeedbackMessageCategories;
