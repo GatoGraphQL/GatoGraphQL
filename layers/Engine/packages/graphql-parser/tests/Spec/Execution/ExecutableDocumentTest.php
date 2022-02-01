@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Execution;
 
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -23,9 +23,9 @@ class ExecutableDocumentTest extends AbstractTestCase
         return $this->getService(ParserInterface::class);
     }
 
-    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->getService(GraphQLErrorMessageProviderInterface::class);
+        return $this->getService(GraphQLSpecErrorMessageProvider::class);
     }
 
     protected function getFeedbackMessageProvider(): FeedbackMessageProvider
@@ -115,7 +115,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testNonUniqueOperation()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage());
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_B));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
@@ -158,7 +158,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testMissingRequiredVariableValue()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1001, 'format'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, 'format'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($format: String!) {
@@ -193,7 +193,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testMissingRequiredVariableValueForDirective()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1001, 'includeUsers'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, 'includeUsers'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($includeUsers: Boolean!) {
@@ -211,7 +211,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testOperationDoesNotExist()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getNoOperationMatchesNameErrorMessage('AnotherOp'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_A, 'AnotherOp'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
@@ -229,7 +229,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testNonInitializedRequest()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getExecuteValidationErrorMessage('getRequestedOperations'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, 'getRequestedOperations'),);
         $parser = $this->getParser();
         $document = $parser->parse('{ id }');
         $context = new Context();

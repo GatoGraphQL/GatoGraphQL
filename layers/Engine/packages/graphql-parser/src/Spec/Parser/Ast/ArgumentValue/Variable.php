@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
 use LogicException;
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
-use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
 use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
@@ -20,16 +19,16 @@ class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
 
-    private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
     private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
-    final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
+    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
-        $this->graphQLErrorMessageProvider = $graphQLErrorMessageProvider;
+        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
     }
-    final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
+        return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
     }
     final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
     {
@@ -137,7 +136,7 @@ class Variable extends AbstractAst implements WithValueInterface
     public function getValue(): mixed
     {
         if ($this->context === null) {
-            throw new LogicException($this->getGraphQLErrorMessageProvider()->getContextNotSetErrorMessage($this->name));
+            throw new LogicException($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E2, $this->name));
         }
         if ($this->context->hasVariableValue($this->name)) {
             $variableValue = $this->context->getVariableValue($this->name);
@@ -153,7 +152,7 @@ class Variable extends AbstractAst implements WithValueInterface
             return $this->getDefaultValue();
         }
         if ($this->isRequired()) {
-            throw new LogicException($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1001, $this->name));
+            throw new LogicException($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, $this->name));
         }
         return null;
     }

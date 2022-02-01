@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Root\FeedbackMessage;
 
 use Exception;
-use PoP\Root\FeedbackMessage\FeedbackMessageCategories;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -40,10 +39,15 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
             )
         );
     }
-    
+
     public function getCategory(string $code): string
     {
-        return FeedbackMessageCategories::ERROR;
+        throw new Exception(
+            \sprintf(
+                $this->__('There is no category for code \'%s\'', 'root'),
+                $code
+            )
+        );
     }
 
     public function getSpecifiedByURL(string $code): ?string

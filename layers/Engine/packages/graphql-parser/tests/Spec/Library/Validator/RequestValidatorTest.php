@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Library\Validator;
 
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -23,14 +22,9 @@ use PoP\Root\AbstractTestCase;
 
 class RequestValidatorTest extends AbstractTestCase
 {
-    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->getService(GraphQLErrorMessageProviderInterface::class);
-    }
-
-    protected function getFeedbackMessageProvider(): FeedbackMessageProvider
-    {
-        return $this->getService(FeedbackMessageProvider::class);
+        return $this->getService(GraphQLSpecErrorMessageProvider::class);
     }
 
     /**
@@ -40,12 +34,12 @@ class RequestValidatorTest extends AbstractTestCase
     {
         $this->expectException(InvalidRequestException::class);
         $exceptionMessages = [
-            'fragment-not-defined' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference'),
-            'fragment-not-defined-2' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference2'),
-            'fragment-not-used' => $this->getGraphQLErrorMessageProvider()->getFragmentNotUsedErrorMessage('reference2'),
-            'fragment-name-duplicated' => $this->getGraphQLErrorMessageProvider()->getDuplicateFragmentNameErrorMessage('reference2'),
-            'variable-not-defined' => $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('test'),
-            'variable-value-not-set' => $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1001, 'test'),
+            'fragment-not-defined' => $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_2_1, 'reference'),
+            'fragment-not-defined-2' => $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_2_1, 'reference2'),
+            'fragment-not-used' => $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_1_4, 'reference2'),
+            'fragment-name-duplicated' => $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_1_1, 'reference2'),
+            'variable-not-defined' => $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, 'test'),
+            'variable-value-not-set' => $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, 'test'),
         ];
         $this->expectExceptionMessage($exceptionMessages[$this->dataName()] ?? '');
         $executableDocument->validateAndInitialize();

@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Execution;
 
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
 use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -18,16 +17,16 @@ class ExecutableDocument implements ExecutableDocumentInterface
 {
     use StandaloneServiceTrait;
 
-    private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
     private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
-    final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
+    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
-        $this->graphQLErrorMessageProvider = $graphQLErrorMessageProvider;
+        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
     }
-    final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
+        return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
     }
     final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
     {
@@ -103,7 +102,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             // It can't be 0, or validation already fails in Document
             if (count($this->document->getOperations()) > 1) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage(),
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_B),
                     $this->getNonSpecificLocation()
                 );
             }
@@ -117,7 +116,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         ));
         if ($requestedOperations === []) {
             throw new InvalidRequestException(
-                $this->getGraphQLErrorMessageProvider()->getNoOperationMatchesNameErrorMessage($this->context->getOperationName()),
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_A, $this->context->getOperationName()),
                 $this->getNonSpecificLocation()
             );
         }
@@ -148,7 +147,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1001, $variableReference->getName()),
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, $variableReference->getName()),
                     $variableReference->getLocation()
                 );
             }
@@ -170,7 +169,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         if ($this->requestedOperations === null) {
             throw new InvalidRequestException(
-                $this->getGraphQLErrorMessageProvider()->getExecuteValidationErrorMessage(__FUNCTION__),
+                $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, __FUNCTION__),
                 $this->getNonSpecificLocation()
             );
         }

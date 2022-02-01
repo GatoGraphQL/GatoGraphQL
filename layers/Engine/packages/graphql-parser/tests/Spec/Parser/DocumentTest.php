@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\Root\AbstractTestCase;
 
 class DocumentTest extends AbstractTestCase
@@ -16,14 +15,9 @@ class DocumentTest extends AbstractTestCase
         return $this->getService(ParserInterface::class);
     }
 
-    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->getService(GraphQLErrorMessageProviderInterface::class);
-    }
-
-    protected function getFeedbackMessageProvider(): FeedbackMessageProvider
-    {
-        return $this->getService(FeedbackMessageProvider::class);
+        return $this->getService(GraphQLSpecErrorMessageProvider::class);
     }
 
     public function testValidationWorks()
@@ -73,7 +67,7 @@ class DocumentTest extends AbstractTestCase
     public function testMissingFragmentReferencedByFragment()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('F1'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_2_1, 'F1'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -95,7 +89,7 @@ class DocumentTest extends AbstractTestCase
     public function testNoCyclicalFragments(string $query)
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getCyclicalFragmentErrorMessage('UserProps'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_2_2, 'UserProps'));
         $parser = $this->getParser();
         $document = $parser->parse($query);
         $document->validate();
@@ -132,13 +126,31 @@ class DocumentTest extends AbstractTestCase
                     ...UserProps
                 }
             '],
+            'looping-via-inline-fragment' => ['
+                query {
+                    users {
+                        id,
+                        ...UserProps
+                    }
+                }
+
+                fragment UserProps on User {
+                    ... on User{
+                        ...MoreUserProps
+                    }
+                }
+
+                fragment MoreUserProps on User {
+                    ...UserProps
+                }
+            '],
         ];
     }
 
-    public function testFragmentNotUsed()
+    public function testReferencedFragmentNotExisting()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('F0'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_2_1, 'F0'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -177,7 +189,7 @@ class DocumentTest extends AbstractTestCase
     public function testFragmentMissing()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('F2'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_2_1, 'F2'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -193,7 +205,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableNotUsed()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getVariableNotUsedErrorMessage('notUsedVar'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_4, 'notUsedVar'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String, $notUsedVar: Boolean) {
@@ -208,7 +220,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissing()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('missingVar'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, 'missingVar'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -223,7 +235,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissingInDirective()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('missingVar'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, 'missingVar'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -239,7 +251,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissingInInputObject()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('search'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, 'search'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query {
@@ -255,7 +267,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissingInInputList()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('id'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, 'id'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query {
@@ -291,7 +303,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissingInFragment()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('missingVar'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, 'missingVar'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute {
@@ -312,7 +324,7 @@ class DocumentTest extends AbstractTestCase
     public function testNoOperationsDefined()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getNoOperationsDefinedInQueryErrorMessage());
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_C));
         $parser = $this->getParser();
         $document = $parser->parse('
             fragment F0 on Ship {
@@ -326,7 +338,7 @@ class DocumentTest extends AbstractTestCase
     public function testUniqueOperationName()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E0001, 'SomeQuery'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_2_1_1, 'SomeQuery'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
@@ -347,7 +359,7 @@ class DocumentTest extends AbstractTestCase
     public function testUniqueOperationNameAcrossOps()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E0001, 'SomeQuery'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_2_1_1, 'SomeQuery'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
@@ -368,7 +380,7 @@ class DocumentTest extends AbstractTestCase
     public function testUniqueVariableName()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateVariableNameErrorMessage('someVar'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_1, 'someVar'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($someVar: String, $someVar: Boolean) {
@@ -384,7 +396,7 @@ class DocumentTest extends AbstractTestCase
     public function testNonEmptyOperationName()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E0002));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_2_2_1));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
@@ -408,7 +420,7 @@ class DocumentTest extends AbstractTestCase
     public function testDuplicateArgument($query)
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateArgumentErrorMessage('format'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_4_2, 'format'));
         $parser = $this->getParser();
         $document = $parser->parse($query);
         $document->validate();
