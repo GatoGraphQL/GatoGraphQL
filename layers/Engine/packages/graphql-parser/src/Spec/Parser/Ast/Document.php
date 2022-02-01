@@ -337,7 +337,7 @@ class Document implements DocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage($variableReference->getName()),
+                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_3, $variableReference->getName()),
                     $variableReference->getLocation()
                 );
             }

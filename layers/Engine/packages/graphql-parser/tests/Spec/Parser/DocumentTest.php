@@ -226,7 +226,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissing()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('missingVar'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_3, 'missingVar'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -241,7 +241,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissingInDirective()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('missingVar'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_3, 'missingVar'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
@@ -257,7 +257,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissingInInputObject()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('search'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_3, 'search'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query {
@@ -273,7 +273,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissingInInputList()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('id'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_3, 'id'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query {
@@ -309,7 +309,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableMissingInFragment()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('missingVar'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_3, 'missingVar'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute {

@@ -140,11 +140,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
         return $this->__('No operations defined in the query', 'graphql-server');
     }
 
-    public function getVariableNotDefinedInOperationErrorMessage(string $variableName): string
-    {
-        return \sprintf($this->__('Variable \'%s\' has not been defined in the operation', 'graphql-server'), $variableName);
-    }
-
     public function getVariableNotUsedErrorMessage(string $variableName): string
     {
         return \sprintf($this->__('Variable \'%s\' is not used', 'graphql-server'), $variableName);
