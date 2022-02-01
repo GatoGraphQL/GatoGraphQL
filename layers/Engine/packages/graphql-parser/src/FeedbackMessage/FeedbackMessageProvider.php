@@ -8,7 +8,7 @@ use PoP\Root\FeedbackMessage\AbstractFeedbackMessageProvider;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {
-    public const E0001 = 1;
+    public const E1001 = 1;
 
     protected function getNamespace(): string
     {
@@ -21,14 +21,14 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getCodes(): array
     {
         return [
-            self::E0001,
+            self::E1001,
         ];
     }
 
     public function getMessagePlaceholder(int $code): string
     {
         return match($code) {
-            self::E0001 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
+            self::E1001 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -36,7 +36,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getSpecifiedByURL(int $code): ?string
     {
         return match($code) {
-            self::E0001 => 'https://spec.graphql.org/draft/#sec-All-Variable-Usages-are-Allowed',
+            self::E1001 => 'https://spec.graphql.org/draft/#sec-All-Variable-Usages-are-Allowed',
             default => parent::getSpecifiedByURL($code),
         };
     }

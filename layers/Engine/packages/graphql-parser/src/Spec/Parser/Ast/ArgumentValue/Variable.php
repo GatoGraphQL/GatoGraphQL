@@ -153,7 +153,7 @@ class Variable extends AbstractAst implements WithValueInterface
             return $this->getDefaultValue();
         }
         if ($this->isRequired()) {
-            throw new LogicException($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E0001, $this->name));
+            throw new LogicException($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1001, $this->name));
         }
         return null;
     }
