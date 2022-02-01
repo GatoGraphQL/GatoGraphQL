@@ -10,11 +10,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 {
     use BasicServiceTrait;
 
-    public function getUnexpectedStringEscapedCharacterErrorMessage(string $ch): string
-    {
-        return \sprintf($this->__('Unexpected string escaped character \'%s\'', 'graphql-server'), $ch);
-    }
-
     public function getCantRecognizeTokenTypeErrorMessage(): string
     {
         return $this->__('Can\t recognize token type', 'graphql-server');

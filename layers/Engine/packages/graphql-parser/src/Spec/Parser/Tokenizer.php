@@ -353,7 +353,7 @@ class Tokenizer
                         $this->pos += 4;
                         break;
                     default:
-                        throw $this->createException($this->getGraphQLErrorMessageProvider()->getUnexpectedStringEscapedCharacterErrorMessage($ch));
+                        throw $this->createException($this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_4, $ch));
                 }
             }
 
