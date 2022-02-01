@@ -13,9 +13,9 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
 {
     use BasicServiceTrait;
 
-    final public function getNamespacedCode(int $code): string
+    final public function getNamespacedCode(string $code): string
     {
-        return $$this->getNamespace() . $this->getCodeToStr($code);
+        return $$this->getNamespace() . $code;
     }
 
     protected function getNamespace(): string
@@ -23,12 +23,7 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
         return ClassHelpers::getClassPSR4Namespace(\get_called_class());
     }
 
-    protected function getCodeToStr(int $code): string
-    {
-        return \str_pad((string) $code, 4, "0", \STR_PAD_LEFT);
-    }
-
-    final public function getMessage(int $code, string|int|float|bool ...$args): string
+    final public function getMessage(string $code, string|int|float|bool ...$args): string
     {
         return \sprintf(
             $this->getMessagePlaceholder($code),
@@ -36,7 +31,7 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
         );
     }
 
-    public function getMessagePlaceholder(int $code): string
+    public function getMessagePlaceholder(string $code): string
     {
         throw new Exception(
             \sprintf(
@@ -46,12 +41,12 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
         );
     }
     
-    public function getCategory(int $code): string
+    public function getCategory(string $code): string
     {
         return FeedbackMessageCategories::ERROR;
     }
 
-    public function getSpecifiedByURL(int $code): ?string
+    public function getSpecifiedByURL(string $code): ?string
     {
         return null;
     }

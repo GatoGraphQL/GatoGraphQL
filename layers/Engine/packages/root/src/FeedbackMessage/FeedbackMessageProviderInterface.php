@@ -7,12 +7,12 @@ namespace PoP\Root\FeedbackMessage;
 interface FeedbackMessageProviderInterface
 {
     /**
-     * @return int[]
+     * @return string[]
      */
     public function getCodes(): array;
-    public function getNamespacedCode(int $code): string;
-    public function getMessagePlaceholder(int $code): string;
-    public function getMessage(int $code, string|int|float|bool ...$args): string;
-    public function getCategory(int $code): string;
-    public function getSpecifiedByURL(int $code): ?string;
+    public function getNamespacedCode(string $code): string;
+    public function getMessagePlaceholder(string $code): string;
+    public function getMessage(string $code, string|int|float|bool ...$args): string;
+    public function getCategory(string $code): string;
+    public function getSpecifiedByURL(string $code): ?string;
 }

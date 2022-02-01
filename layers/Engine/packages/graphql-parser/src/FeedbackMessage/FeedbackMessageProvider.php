@@ -8,26 +8,26 @@ use PoP\Root\FeedbackMessage\AbstractFeedbackMessageProvider;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {
-    public const E0001 = 1;
-    public const E0002 = 2;
-    public const E0003 = 3;
-    public const E0004 = 4;
-    public const E0005 = 5;
-    public const E0006 = 6;
-    public const E0007 = 7;
-    public const E0008 = 8;
-    public const E0009 = 9;
-    public const E0010 = 10;
-    public const E0011 = 11;
-    public const E0012 = 12;
-    public const E0013 = 13;
-    public const E0014 = 14;
-    public const E0015 = 15;
-    public const E0016 = 16;
-    public const E0017 = 17;
-    public const E0018 = 18;
-    public const E0019 = 19;
-    public const E1001 = 1001;
+    public const E0001 = '1';
+    public const E0002 = '2';
+    public const E0003 = '3';
+    public const E0004 = '4';
+    public const E0005 = '5';
+    public const E0006 = '6';
+    public const E0007 = '7';
+    public const E0008 = '8';
+    public const E0009 = '9';
+    public const E0010 = '10';
+    public const E0011 = '11';
+    public const E0012 = '12';
+    public const E0013 = '13';
+    public const E0014 = '14';
+    public const E0015 = '15';
+    public const E0016 = '16';
+    public const E0017 = '17';
+    public const E0018 = '18';
+    public const E0019 = '19';
+    public const E1001 = '1001';
 
     protected function getNamespace(): string
     {
@@ -35,7 +35,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     }
 
     /**
-     * @return int[]
+     * @return string[]
      */
     public function getCodes(): array
     {
@@ -63,11 +63,11 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
         ];
     }
 
-    public function getMessagePlaceholder(int $code): string
+    public function getMessagePlaceholder(string $code): string
     {
         return match($code) {
             self::E0001 => $this->__('Operation name \'%s\' is duplicated', 'graphql-server'),
-            self::E0002 => $this->__('When submitting more than 1 operation, no operation name can be empty', 'graphql-server'),
+            self::E0002 => $this->__('When the document contains more than one operation, there can be no anonymous operation', 'graphql-server'),
             self::E0003 => '',
             self::E0004 => '',
             self::E0005 => '',
@@ -90,7 +90,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
         };
     }
 
-    public function getSpecifiedByURL(int $code): ?string
+    public function getSpecifiedByURL(string $code): ?string
     {
         return match($code) {
             self::E0001 => 'https://spec.graphql.org/draft/#sec-Operation-Name-Uniqueness',
