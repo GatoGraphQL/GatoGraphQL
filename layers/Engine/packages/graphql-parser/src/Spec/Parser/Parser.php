@@ -626,7 +626,7 @@ class Parser extends Tokenizer implements ParserInterface
                 => $this->parseList(false),
             default
                 => throw new SyntaxErrorException(
-                    $this->getGraphQLErrorMessageProvider()->getCantParseArgumentErrorMessage(),
+                    $this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_2),
                     $this->getLocation()
                 ),
         };

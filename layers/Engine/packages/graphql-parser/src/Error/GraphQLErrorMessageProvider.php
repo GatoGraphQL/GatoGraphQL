@@ -10,11 +10,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 {
     use BasicServiceTrait;
 
-    public function getCantParseArgumentErrorMessage(): string
-    {
-        return $this->__('Can\'t parse argument', 'graphql-parser');
-    }
-
     public function getDuplicateKeyInInputObjectSyntaxErrorMessage(string $key): string
     {
         return \sprintf($this->__('Input object has duplicate key \'%s\'', 'graphql-server'), $key);

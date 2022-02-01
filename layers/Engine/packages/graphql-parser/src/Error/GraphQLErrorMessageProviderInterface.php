@@ -6,8 +6,6 @@ namespace PoP\GraphQLParser\Error;
 
 interface GraphQLErrorMessageProviderInterface
 {
-    public function getCantParseArgumentErrorMessage(): string;
-
     public function getDuplicateKeyInInputObjectSyntaxErrorMessage(string $key): string;
 
     public function getInvalidStringUnicodeEscapeSequenceErrorMessage(string $codepoint): string;
