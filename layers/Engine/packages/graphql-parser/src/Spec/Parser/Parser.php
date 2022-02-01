@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
@@ -28,6 +29,17 @@ use stdClass;
 
 class Parser extends Tokenizer implements ParserInterface
 {
+    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
+
+    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
+    {
+        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
+    }
+    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
+    {
+        return $this->graphQLSpecErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLSpecErrorMessageProvider::class);
+    }
+
     /** @var OperationInterface[] */
     private array $operations = [];
     /** @var Fragment[] */
@@ -55,7 +67,7 @@ class Parser extends Tokenizer implements ParserInterface
 
                 default:
                     throw new SyntaxErrorException(
-                        $this->getGraphQLErrorMessageProvider()->getIncorrectRequestSyntaxErrorMessage($this->lookAhead->getData()),
+                        $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_2, $this->lookAhead->getData()),
                         $this->getLocation()
                     );
             }

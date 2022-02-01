@@ -10,19 +10,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 {
     use BasicServiceTrait;
 
-    public function getIncorrectRequestSyntaxErrorMessage(?string $syntax): string
-    {
-        $errorMessage = $this->__('Incorrect request syntax', 'graphql-server');
-        if ($syntax === null) {
-            return $errorMessage;
-        }
-        return \sprintf(
-            $this->__('%s: \'%s\'', 'graphql-server'),
-            $errorMessage,
-            $syntax
-        );
-    }
-
     public function getCantParseArgumentErrorMessage(): string
     {
         return $this->__('Can\'t parse argument', 'graphql-parser');
