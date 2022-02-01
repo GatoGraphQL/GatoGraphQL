@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
-use LogicException;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
@@ -48,12 +48,15 @@ class VariableReference extends AbstractAst implements WithValueInterface
     /**
      * Get the value from the context or from the variable
      *
-     * @throws LogicException
+     * @throws InvalidRequestException
      */
     public function getValue(): mixed
     {
         if ($this->variable === null) {
-            throw new LogicException($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, $this->name));
+            throw new InvalidRequestException(
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, $this->name),
+                $this->getLocation()
+            );
         }
 
         return $this->variable->getValue();

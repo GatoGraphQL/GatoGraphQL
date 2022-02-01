@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
-use LogicException;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
 use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
@@ -131,12 +131,15 @@ class Variable extends AbstractAst implements WithValueInterface
      * Get the value from the context or from the variable
      *
      * @return InputList|InputObject|Literal|null
-     * @throws LogicException
+     * @throws InvalidRequestException
      */
     public function getValue(): mixed
     {
         if ($this->context === null) {
-            throw new LogicException($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E2, $this->name));
+            throw new InvalidRequestException(
+                $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E2, $this->name),
+                $this->getLocation()
+            );
         }
         if ($this->context->hasVariableValue($this->name)) {
             $variableValue = $this->context->getVariableValue($this->name);
@@ -152,7 +155,10 @@ class Variable extends AbstractAst implements WithValueInterface
             return $this->getDefaultValue();
         }
         if ($this->isRequired()) {
-            throw new LogicException($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, $this->name));
+            throw new InvalidRequestException(
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, $this->name),
+                $this->getLocation()
+            );
         }
         return null;
     }
