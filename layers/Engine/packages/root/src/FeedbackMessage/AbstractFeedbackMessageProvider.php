@@ -39,7 +39,10 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
     public function getMessagePlaceholder(int $code): string
     {
         throw new Exception(
-            $this->__('There is no message placeholder for feedback message with code \'%s\'', $code)
+            \sprintf(
+                $this->__('There is no message placeholder for code \'%s\'', 'root'),
+                $code
+            )
         );
     }
     
