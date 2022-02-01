@@ -9,7 +9,6 @@ use PoP\Root\FeedbackMessage\FeedbackMessageCategories;
 
 class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
 {
-    public const E_2 = '2';
     // public const E_5_1_1 = '5.1.1';
     public const E_5_2_1_1 = '5.2.1.1';
     public const E_5_2_2_1 = '5.2.2.1';
@@ -58,7 +57,6 @@ class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
     public function getCodes(): array
     {
         return [
-            self::E_2,
             // self::E_5_1_1,
             self::E_5_2_1_1,
             self::E_5_2_2_1,
@@ -101,7 +99,6 @@ class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match($code) {
-            self::E_2 => $this->__('Incorrect request syntax: %s', 'graphql-server'),
             // self::E_5_1_1 => 'not_applicable',
             self::E_5_2_1_1 => $this->__('Operation name \'%s\' is duplicated', 'graphql-server'),
             self::E_5_2_2_1 => $this->__('When the document contains more than one operation, there can be no anonymous operation', 'graphql-server'),
@@ -150,7 +147,6 @@ class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
     public function getSpecifiedByURL(string $code): ?string
     {
         return match($code) {
-            self::E_2 => 'https://spec.graphql.org/draft/#sec-Language',
             // self::E_5_1_1 => 'https://spec.graphql.org/draft/#sec-Executable-Definitions',
             self::E_5_2_1_1 => 'https://spec.graphql.org/draft/#sec-Operation-Name-Uniqueness',
             self::E_5_2_2_1 => 'https://spec.graphql.org/draft/#sec-Lone-Anonymous-Operation',

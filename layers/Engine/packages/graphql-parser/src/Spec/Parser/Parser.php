@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
-use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLParserErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
@@ -29,15 +29,15 @@ use stdClass;
 
 class Parser extends Tokenizer implements ParserInterface
 {
-    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
+    private ?GraphQLParserErrorMessageProvider $graphQLParserErrorMessageProvider = null;
 
-    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
+    final public function setGraphQLParserErrorMessageProvider(GraphQLParserErrorMessageProvider $graphQLParserErrorMessageProvider): void
     {
-        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
+        $this->graphQLParserErrorMessageProvider = $graphQLParserErrorMessageProvider;
     }
-    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
+    final protected function getGraphQLParserErrorMessageProvider(): GraphQLParserErrorMessageProvider
     {
-        return $this->graphQLSpecErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLSpecErrorMessageProvider::class);
+        return $this->graphQLParserErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLParserErrorMessageProvider::class);
     }
 
     /** @var OperationInterface[] */
@@ -67,7 +67,7 @@ class Parser extends Tokenizer implements ParserInterface
 
                 default:
                     throw new SyntaxErrorException(
-                        $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_2, $this->lookAhead->getData()),
+                        $this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_1, $this->lookAhead->getData()),
                         $this->getLocation()
                     );
             }
