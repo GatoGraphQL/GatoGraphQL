@@ -384,7 +384,7 @@ class DocumentTest extends AbstractTestCase
     public function testNonEmptyOperationName()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E0002));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_2_2_1));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {

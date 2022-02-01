@@ -139,7 +139,7 @@ class Document implements DocumentInterface
         foreach ($this->getOperations() as $operation) {
             if (empty($operation->getName())) {
                 throw new InvalidRequestException(
-                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E0002),
+                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_2_2_1),
                     $this->getNonSpecificLocation()
                 );
             }
