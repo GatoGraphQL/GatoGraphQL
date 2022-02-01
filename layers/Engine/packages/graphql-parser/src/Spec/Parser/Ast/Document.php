@@ -487,7 +487,7 @@ class Document implements DocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getVariableNotUsedErrorMessage($variable->getName()),
+                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_4, $variable->getName()),
                     $variable->getLocation()
                 );
             }

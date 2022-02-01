@@ -52,7 +52,5 @@ interface GraphQLErrorMessageProviderInterface
 
     public function getNoOperationsDefinedInQueryErrorMessage(): string;
 
-    public function getVariableNotUsedErrorMessage(string $variableName): string;
-
     public function getContextNotSetErrorMessage(string $variableName): string;
 }

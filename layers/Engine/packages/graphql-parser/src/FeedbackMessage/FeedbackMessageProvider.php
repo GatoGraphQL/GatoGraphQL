@@ -124,7 +124,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_8_1 => $this->__('Variable name \'%s\' is duplicated', 'graphql-server'),
             self::E_5_8_2 => 'TODO: satisfy',
             self::E_5_8_3 => $this->__('Variable \'%s\' has not been defined in the operation', 'graphql-server'),
-            self::E_5_8_4 => '__provide__',
+            self::E_5_8_4 => $this->__('Variable \'%s\' is not used', 'graphql-server'),
             self::E_5_8_5 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
 
             default => parent::getMessagePlaceholder($code),

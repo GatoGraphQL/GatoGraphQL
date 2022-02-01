@@ -211,7 +211,7 @@ class DocumentTest extends AbstractTestCase
     public function testVariableNotUsed()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getVariableNotUsedErrorMessage('notUsedVar'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_8_4, 'notUsedVar'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String, $notUsedVar: Boolean) {
