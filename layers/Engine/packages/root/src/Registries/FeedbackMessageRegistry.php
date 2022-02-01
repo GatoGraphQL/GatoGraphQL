@@ -15,10 +15,10 @@ class FeedbackMessageRegistry implements FeedbackMessageRegistryInterface
 
     public function useFeedbackMessageProvider(FeedbackMessageProviderInterface $feedbackMessageProvider): void
     {
-        foreach ($feedbackMessageProvider->getCodeMessagePlaceholders() as $code => $messagePlaceholder) {
+        foreach ($feedbackMessageProvider->getCodes() as $code) {
             $this->feedbackMessageEntries[$feedbackMessageProvider->getNamespacedCode($code)] = [
                 FeedbackMessageEntryKeys::CATEGORY => $feedbackMessageProvider->getCategory($code),
-                FeedbackMessageEntryKeys::MESSAGE_PLACEHOLDER => $messagePlaceholder,
+                FeedbackMessageEntryKeys::MESSAGE_PLACEHOLDER => $feedbackMessageProvider->getMessagePlaceholder($code),
                 FeedbackMessageEntryKeys::SPECIFIED_BY_URL => $feedbackMessageProvider->getSpecifiedByURL($code),
             ];
         }

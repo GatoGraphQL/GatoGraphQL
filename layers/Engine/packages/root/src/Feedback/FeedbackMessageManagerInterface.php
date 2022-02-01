@@ -6,5 +6,4 @@ namespace PoP\Root\Feedback;
 
 interface FeedbackMessageManagerInterface
 {
-    public function getFeedbackMessage(string $code, string|int|float|bool ...$args): string;
 }

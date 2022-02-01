@@ -13,10 +13,15 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
     {
         return $$this->getNamespace() . $code;
     }
-    
+
     protected function getNamespace(): string
     {
         return ClassHelpers::getClassPSR4Namespace(\get_called_class());
+    }
+
+    final public function getMessage(string $code, string|int|float|bool ...$args): string
+    {
+        return \sprintf($code, ...$args);
     }
     
     public function getCategory(string $code): string
