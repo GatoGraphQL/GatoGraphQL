@@ -229,7 +229,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testNonInitializedRequest()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, 'getRequestedOperations'),);
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, 'getRequestedOperations'));
         $parser = $this->getParser();
         $document = $parser->parse('{ id }');
         $context = new Context();
