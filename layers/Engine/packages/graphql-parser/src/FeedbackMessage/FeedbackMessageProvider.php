@@ -99,15 +99,15 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match($code) {
-            // self::E_5_1_1 => '__not_applicable__',
+            // self::E_5_1_1 => 'not_applicable',
             self::E_5_2_1_1 => $this->__('Operation name \'%s\' is duplicated', 'graphql-server'),
             self::E_5_2_2_1 => $this->__('When the document contains more than one operation, there can be no anonymous operation', 'graphql-server'),
-            // self::E_5_2_3_1 => '__subscriptions_not_yet_supported__',
-            self::E_5_3_1 => '__provide__',
-            self::E_5_3_2 => '__provide__',
-            self::E_5_3_3 => '__provide__',
-            self::E_5_4_1 => '__provide__',
-            self::E_5_4_2 => '__provide__',
+            // self::E_5_2_3_1 => 'subscriptions_not_yet_supported',
+            self::E_5_3_1 => 'TODO: satisfy',
+            self::E_5_3_2 => 'TODO: satisfy',
+            self::E_5_3_3 => 'TODO: satisfy',
+            self::E_5_4_1 => 'TODO: satisfy',
+            self::E_5_4_2 => $this->__('Argument \'%s\' is duplicated', 'graphql-server'),
             self::E_5_4_2_1 => '__provide__',
             self::E_5_5_1 => '__provide__',
             self::E_5_5_1_1 => '__provide__',

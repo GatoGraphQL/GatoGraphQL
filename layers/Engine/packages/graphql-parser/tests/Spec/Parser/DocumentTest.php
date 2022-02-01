@@ -408,7 +408,7 @@ class DocumentTest extends AbstractTestCase
     public function testDuplicateArgument($query)
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateArgumentErrorMessage('format'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_4_2, 'format'));
         $parser = $this->getParser();
         $document = $parser->parse($query);
         $document->validate();

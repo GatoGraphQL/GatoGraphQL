@@ -175,11 +175,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
         return \sprintf($this->__('Variable \'%s\' is not used', 'graphql-server'), $variableName);
     }
 
-    public function getDuplicateArgumentErrorMessage(string $argumentName): string
-    {
-        return \sprintf($this->__('Argument \'%s\' is duplicated', 'graphql-server'), $argumentName);
-    }
-
     public function getContextNotSetErrorMessage(string $variableName): string
     {
         return \sprintf($this->__('Context has not been set for variable \'%s\'', 'graphql-server'), $variableName);

@@ -575,7 +575,7 @@ class Document implements DocumentInterface
             $argumentName = $argument->getName();
             if (in_array($argumentName, $argumentNames)) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getDuplicateArgumentErrorMessage($argumentName),
+                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_4_2, $argumentName),
                     $argument->getLocation()
                 );
             }
