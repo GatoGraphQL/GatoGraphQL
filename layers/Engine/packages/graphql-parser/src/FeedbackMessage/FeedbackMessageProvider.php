@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\FeedbackMessage;
 
-use Exception;
 use PoP\Root\FeedbackMessage\AbstractFeedbackMessageProvider;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
