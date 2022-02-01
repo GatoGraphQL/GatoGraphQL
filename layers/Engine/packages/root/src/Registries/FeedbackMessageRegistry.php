@@ -18,9 +18,9 @@ class FeedbackMessageRegistry implements FeedbackMessageRegistryInterface
         $namespace = $feedbackMessageProvider->getNamespace();
         foreach ($feedbackMessageProvider->getCodeMessagePlaceholders() as $code => $messagePlaceholder) {
             $this->feedbackMessageEntries[$this->getNamespacedCode($namespace, $code)] = [
-                'category' => $feedbackMessageProvider->getCategory($code),
-                'messagePlaceholder' => $messagePlaceholder,
-                'specifiedByURL' => $feedbackMessageProvider->getSpecifiedByURL($code),
+                FeedbackMessageEntryKeys::CATEGORY => $feedbackMessageProvider->getCategory($code),
+                FeedbackMessageEntryKeys::MESSAGE_PLACEHOLDER => $messagePlaceholder,
+                FeedbackMessageEntryKeys::SPECIFIED_BY_URL => $feedbackMessageProvider->getSpecifiedByURL($code),
             ];
         }
     }
