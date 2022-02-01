@@ -9,11 +9,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 
 interface GraphQLErrorMessageProviderInterface
 {
-    public function getAffectedDirectivesUnderPosNotEmptyErrorMessage(
-        Directive $directive,
-        Argument $argument
-    ): string;
-
     public function getAffectedDirectivesUnderPosNotPositiveIntErrorMessage(
         Directive $directive,
         Argument $argument,

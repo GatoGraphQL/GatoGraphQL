@@ -161,7 +161,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         $argumentValue = $argument->getValue()->getValue();
         if ($argumentValue === null) {
             throw new InvalidRequestException(
-                $this->getGraphQLErrorMessageProvider()->getAffectedDirectivesUnderPosNotEmptyErrorMessage($directive, $argument),
+                $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E2, $argument->getName(), $directive->getName()),
                 $argument->getLocation()
             );
         }
@@ -173,7 +173,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
         if ($argumentValue === []) {
             throw new InvalidRequestException(
-                $this->getGraphQLErrorMessageProvider()->getAffectedDirectivesUnderPosNotEmptyErrorMessage($directive, $argument),
+                $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E2, $argument->getName(), $directive->getName()),
                 $argument->getLocation()
             );
         }

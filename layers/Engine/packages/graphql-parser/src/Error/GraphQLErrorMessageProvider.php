@@ -25,17 +25,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
         return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
     }
 
-    public function getAffectedDirectivesUnderPosNotEmptyErrorMessage(
-        Directive $directive,
-        Argument $argument
-    ): string {
-        return \sprintf(
-            $this->__('Argument \'%s\' in directive \'%s\' cannot be null or empty', 'graphql-parser'),
-            $argument->getName(),
-            $directive->getName()
-        );
-    }
-
     public function getAffectedDirectivesUnderPosNotPositiveIntErrorMessage(
         Directive $directive,
         Argument $argument,
