@@ -6,5 +6,4 @@ namespace PoP\GraphQLParser\Error;
 
 interface GraphQLErrorMessageProviderInterface
 {
-    public function getContextNotSetErrorMessage(string $variableName): string;
 }

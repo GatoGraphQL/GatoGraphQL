@@ -10,8 +10,4 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 {
     use BasicServiceTrait;
 
-    public function getContextNotSetErrorMessage(string $variableName): string
-    {
-        return \sprintf($this->__('Context has not been set for variable \'%s\'', 'graphql-server'), $variableName);
-    }
 }

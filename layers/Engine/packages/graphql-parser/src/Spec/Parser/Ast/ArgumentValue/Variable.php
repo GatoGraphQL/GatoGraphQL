@@ -7,6 +7,7 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 use LogicException;
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
+use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
 use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
@@ -22,6 +23,7 @@ class Variable extends AbstractAst implements WithValueInterface
 
     private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
     private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
+    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
     final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
     {
@@ -38,6 +40,14 @@ class Variable extends AbstractAst implements WithValueInterface
     final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
         return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
+    }
+    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    {
+        $this->feedbackMessageProvider = $feedbackMessageProvider;
+    }
+    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    {
+        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackMessageProvider::class);
     }
 
     private ?Context $context = null;
@@ -137,7 +147,7 @@ class Variable extends AbstractAst implements WithValueInterface
     public function getValue(): mixed
     {
         if ($this->context === null) {
-            throw new LogicException($this->getGraphQLErrorMessageProvider()->getContextNotSetErrorMessage($this->name));
+            throw new LogicException($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E2, $this->name));
         }
         if ($this->context->hasVariableValue($this->name)) {
             $variableValue = $this->context->getVariableValue($this->name);
