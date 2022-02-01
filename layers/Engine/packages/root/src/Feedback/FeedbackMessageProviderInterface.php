@@ -6,10 +6,10 @@ namespace PoP\Root\Feedback;
 
 interface FeedbackMessageProviderInterface
 {
-    public function getNamespace(): string;
     /**
      * @return array<string,string> [key]: code, [value]: message placeholder
      */
+    public function getNamespacedCode(string $code): string;
     public function getCodeMessagePlaceholders(): array;
     public function getCategory(string $code): string;
     public function getSpecifiedByURL(string $code): ?string;

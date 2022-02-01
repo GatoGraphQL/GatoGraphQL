@@ -15,9 +15,8 @@ class FeedbackMessageRegistry implements FeedbackMessageRegistryInterface
 
     public function useFeedbackMessageProvider(FeedbackMessageProviderInterface $feedbackMessageProvider): void
     {
-        $namespace = $feedbackMessageProvider->getNamespace();
         foreach ($feedbackMessageProvider->getCodeMessagePlaceholders() as $code => $messagePlaceholder) {
-            $this->feedbackMessageEntries[$this->getNamespacedCode($namespace, $code)] = [
+            $this->feedbackMessageEntries[$feedbackMessageProvider->getNamespacedCode($code)] = [
                 FeedbackMessageEntryKeys::CATEGORY => $feedbackMessageProvider->getCategory($code),
                 FeedbackMessageEntryKeys::MESSAGE_PLACEHOLDER => $messagePlaceholder,
                 FeedbackMessageEntryKeys::SPECIFIED_BY_URL => $feedbackMessageProvider->getSpecifiedByURL($code),
@@ -31,10 +30,5 @@ class FeedbackMessageRegistry implements FeedbackMessageRegistryInterface
     public function getFeedbackMessageEntries(): array
     {
         return $this->feedbackMessageEntries;
-    }
-
-    protected function getNamespacedCode(string $namespace, string $code): string
-    {
-        return $namespace . $code;
     }
 }

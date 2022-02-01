@@ -9,7 +9,12 @@ use PoP\Root\Registries\FeedbackMessageCategories;
 
 abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProviderInterface
 {
-    public function getNamespace(): string
+    final public function getNamespacedCode(string $code): string
+    {
+        return $$this->getNamespace() . $code;
+    }
+    
+    protected function getNamespace(): string
     {
         return ClassHelpers::getClassPSR4Namespace(\get_called_class());
     }
