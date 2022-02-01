@@ -132,10 +132,8 @@ class ExecutableDocumentTest extends AbstractTestCase
         $this->assertTrue(true);
     }
 
-    public function testMissingVariableValue()
+    public function testNotRequiredVariableValue()
     {
-        $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForVariableErrorMessage('format'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($format: String) {
@@ -148,15 +146,51 @@ class ExecutableDocumentTest extends AbstractTestCase
         $context = new Context();
         $executableDocument = new ExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        $this->assertTrue(true);
     }
 
-    public function testMissingVariableValueForDirective()
+    public function testMissingRequiredVariableValue()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForVariableErrorMessage('includeUsers'));
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForRequiredVariableErrorMessage('format'));
+        $parser = $this->getParser();
+        $document = $parser->parse('
+            query SomeQuery($format: String!) {
+              users {
+                id
+                name(format: $format)
+              }
+            }
+        ');
+        $context = new Context();
+        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument->validateAndInitialize();
+    }
+
+    public function testNonRequiredVariableValueForDirective()
+    {
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($includeUsers: Boolean) {
+              users {
+                id
+                name @include(if: $includeUsers)
+              }
+            }
+        ');
+        $context = new Context();
+        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument->validateAndInitialize();
+        $this->assertTrue(true);
+    }
+
+    public function testMissingRequiredVariableValueForDirective()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForRequiredVariableErrorMessage('includeUsers'));
+        $parser = $this->getParser();
+        $document = $parser->parse('
+            query SomeQuery($includeUsers: Boolean!) {
               users {
                 id
                 name @include(if: $includeUsers)
