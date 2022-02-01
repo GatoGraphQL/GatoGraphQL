@@ -62,11 +62,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
         return \sprintf($this->__('Unexpected token \'%s\'', 'graphql-server'), $tokenName);
     }
 
-    public function getNoOperationsDefinedInQueryErrorMessage(): string
-    {
-        return $this->__('No operations defined in the query', 'graphql-server');
-    }
-
     public function getContextNotSetErrorMessage(string $variableName): string
     {
         return \sprintf($this->__('Context has not been set for variable \'%s\'', 'graphql-server'), $variableName);

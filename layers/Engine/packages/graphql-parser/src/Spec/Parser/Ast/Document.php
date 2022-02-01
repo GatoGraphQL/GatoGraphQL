@@ -99,7 +99,7 @@ class Document implements DocumentInterface
     {
         if ($this->getOperations() === []) {
             throw new InvalidRequestException(
-                $this->getGraphQLErrorMessageProvider()->getNoOperationsDefinedInQueryErrorMessage(),
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_C),
                 $this->getNonSpecificLocation()
             );
         }

@@ -22,7 +22,5 @@ interface GraphQLErrorMessageProviderInterface
 
     public function getUnexpectedTokenErrorMessage(string $tokenName): string;
 
-    public function getNoOperationsDefinedInQueryErrorMessage(): string;
-
     public function getContextNotSetErrorMessage(string $variableName): string;
 }

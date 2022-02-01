@@ -330,7 +330,7 @@ class DocumentTest extends AbstractTestCase
     public function testNoOperationsDefined()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getNoOperationsDefinedInQueryErrorMessage());
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_C));
         $parser = $this->getParser();
         $document = $parser->parse('
             fragment F0 on Ship {
