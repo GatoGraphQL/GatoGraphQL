@@ -9,7 +9,7 @@ use PoP\Root\FeedbackMessage\FeedbackMessageCategories;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {
-    public const E_5_1_1 = '5.1.1';
+    // public const E_5_1_1 = '5.1.1';
     public const E_5_2_1_1 = '5.2.1.1';
     public const E_5_2_2_1 = '5.2.2.1';
     public const E_5_2_3 = '5.2.3';
@@ -58,7 +58,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getCodes(): array
     {
         return [
-            self::E_5_1_1,
+            // self::E_5_1_1,
             self::E_5_2_1_1,
             self::E_5_2_2_1,
             self::E_5_2_3,
@@ -101,7 +101,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match($code) {
-            self::E_5_1_1 => '__provide__',
+            // self::E_5_1_1 => '__not_applicable__',
             self::E_5_2_1_1 => $this->__('Operation name \'%s\' is duplicated', 'graphql-server'),
             self::E_5_2_2_1 => $this->__('When the document contains more than one operation, there can be no anonymous operation', 'graphql-server'),
             self::E_5_2_3 => '__provide__',
@@ -151,7 +151,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getSpecifiedByURL(string $code): ?string
     {
         return match($code) {
-            self::E_5_1_1 => 'https://spec.graphql.org/draft/#sec-Executable-Definitions',
+            // self::E_5_1_1 => 'https://spec.graphql.org/draft/#sec-Executable-Definitions',
             self::E_5_2_1_1 => 'https://spec.graphql.org/draft/#sec-Operation-Name-Uniqueness',
             self::E_5_2_2_1 => 'https://spec.graphql.org/draft/#sec-Lone-Anonymous-Operation',
             self::E_5_2_3 => 'https://spec.graphql.org/draft/#sec-Subscription-Operation-Definitions',
