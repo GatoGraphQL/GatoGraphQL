@@ -24,9 +24,6 @@ class FeedbackMessageRegistry implements FeedbackMessageRegistryInterface
         }
     }
 
-    /**
-     * @return array<string,array<string,string>> [key] Namespaced code, [value] Array of ['message' => ..., 'specifiedByURL' => ...]
-     */
     public function getFeedbackMessageEntries(): array
     {
         return $this->feedbackMessageEntries;
