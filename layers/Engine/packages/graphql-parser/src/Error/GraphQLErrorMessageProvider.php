@@ -197,6 +197,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 
     public function getValueIsNotSetForVariableErrorMessage(string $variableName): string
     {
-        return \sprintf($this->__('Value is not set for variable \'%s\'', 'graphql-server'), $variableName);
+        return \sprintf($this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'), $variableName);
     }
 }
