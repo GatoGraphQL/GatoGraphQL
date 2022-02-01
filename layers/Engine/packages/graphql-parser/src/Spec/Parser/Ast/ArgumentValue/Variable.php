@@ -142,7 +142,7 @@ class Variable extends AbstractAst implements WithValueInterface
             return $this->getDefaultValue();
         }
         if ($this->isRequired()) {
-            throw new LogicException($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForVariableErrorMessage($this->name));
+            throw new LogicException($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForRequiredVariableErrorMessage($this->name));
         }
         return null;
     }

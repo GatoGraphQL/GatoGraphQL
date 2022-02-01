@@ -152,7 +152,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testMissingRequiredVariableValue()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForVariableErrorMessage('format'));
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForRequiredVariableErrorMessage('format'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($format: String!) {
@@ -187,7 +187,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testMissingRequiredVariableValueForDirective()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForVariableErrorMessage('includeUsers'));
+        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForRequiredVariableErrorMessage('includeUsers'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery($includeUsers: Boolean!) {

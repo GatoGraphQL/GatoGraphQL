@@ -39,7 +39,7 @@ class RequestValidatorTest extends AbstractTestCase
             'fragment-not-used' => $this->getGraphQLErrorMessageProvider()->getFragmentNotUsedErrorMessage('reference2'),
             'fragment-name-duplicated' => $this->getGraphQLErrorMessageProvider()->getDuplicateFragmentNameErrorMessage('reference2'),
             'variable-not-defined' => $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('test'),
-            'variable-value-not-set' => $this->getGraphQLErrorMessageProvider()->getValueIsNotSetForVariableErrorMessage('test'),
+            'variable-value-not-set' => $this->getGraphQLErrorMessageProvider()->getValueIsNotSetForRequiredVariableErrorMessage('test'),
         ];
         $this->expectExceptionMessage($exceptionMessages[$this->dataName()] ?? '');
         $executableDocument->validateAndInitialize();
