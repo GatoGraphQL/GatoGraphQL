@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\FeedbackMessage;
 
+use Exception;
 use PoP\Root\FeedbackMessage\AbstractFeedbackMessageProvider;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
@@ -20,16 +21,24 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
      */
     public function getCodes(): array
     {
-        return [];
+        return [
+            self::E0001,
+        ];
     }
 
     public function getMessagePlaceholder(int $code): string
     {
-        return '';
+        return match($code) {
+            self::E0001 => '',
+            default => parent::getMessagePlaceholder($code),
+        };
     }
 
     public function getSpecifiedByURL(int $code): ?string
     {
-        return null;
+        return match($code) {
+            self::E0001 => '',
+            default => parent::getSpecifiedByURL($code),
+        };
     }
 }

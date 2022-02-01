@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\Root\FeedbackMessage;
 
-use PoP\Root\Helpers\ClassHelpers;
+use Exception;
 use PoP\Root\FeedbackMessage\FeedbackMessageCategories;
+use PoP\Root\Helpers\ClassHelpers;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProviderInterface
 {
+    use BasicServiceTrait;
+
     final public function getNamespacedCode(int $code): string
     {
         return $$this->getNamespace() . $this->getCodeToStr($code);
@@ -29,6 +33,13 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
         return \sprintf(
             $this->getMessagePlaceholder($code),
             ...$args
+        );
+    }
+
+    public function getMessagePlaceholder(int $code): string
+    {
+        throw new Exception(
+            $this->__('There is no message placeholder for feedback message with code \'%s\'', $code)
         );
     }
     
