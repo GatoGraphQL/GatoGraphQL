@@ -6,7 +6,5 @@ namespace PoP\GraphQLParser\Error;
 
 interface GraphQLErrorMessageProviderInterface
 {
-    public function getUnexpectedTokenErrorMessage(string $tokenName): string;
-
     public function getContextNotSetErrorMessage(string $variableName): string;
 }

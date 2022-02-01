@@ -14,6 +14,7 @@ class GraphQLParserErrorMessageProvider extends AbstractFeedbackMessageProvider
     public const E_3 = '3';
     public const E_4 = '4';
     public const E_5 = '5';
+    public const E_6 = '6';
 
     protected function getNamespace(): string
     {
@@ -31,6 +32,7 @@ class GraphQLParserErrorMessageProvider extends AbstractFeedbackMessageProvider
             self::E_3,
             self::E_4,
             self::E_5,
+            self::E_6,
         ];
     }
 
@@ -42,6 +44,7 @@ class GraphQLParserErrorMessageProvider extends AbstractFeedbackMessageProvider
             self::E_3 => $this->__('Invalid string unicode escape sequece \'%s\'', 'graphql-server'),
             self::E_4 => $this->__('Unexpected string escaped character \'%s\'', 'graphql-server'),
             self::E_5 => $this->__('Can\t recognize token type', 'graphql-server'),
+            self::E_6 => $this->__('Unexpected token \'%s\'', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };
     }

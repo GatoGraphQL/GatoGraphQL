@@ -395,6 +395,6 @@ class Tokenizer
      */
     protected function createUnexpectedTokenTypeException($tokenType)
     {
-        return $this->createException($this->getGraphQLErrorMessageProvider()->getUnexpectedTokenErrorMessage(Token::tokenName($tokenType)));
+        return $this->createException($this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_6, Token::tokenName($tokenType)));
     }
 }

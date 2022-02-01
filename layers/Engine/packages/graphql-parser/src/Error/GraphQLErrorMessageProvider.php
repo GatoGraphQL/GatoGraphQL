@@ -10,11 +10,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 {
     use BasicServiceTrait;
 
-    public function getUnexpectedTokenErrorMessage(string $tokenName): string
-    {
-        return \sprintf($this->__('Unexpected token \'%s\'', 'graphql-server'), $tokenName);
-    }
-
     public function getContextNotSetErrorMessage(string $variableName): string
     {
         return \sprintf($this->__('Context has not been set for variable \'%s\'', 'graphql-server'), $variableName);

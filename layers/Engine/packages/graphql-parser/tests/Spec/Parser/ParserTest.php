@@ -6,6 +6,7 @@ namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLParserErrorMessageProvider;
 use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -39,6 +40,11 @@ class ParserTest extends AbstractTestCase
         return $this->getService(GraphQLSpecErrorMessageProvider::class);
     }
 
+    protected function getGraphQLParserErrorMessageProvider(): GraphQLParserErrorMessageProvider
+    {
+        return $this->getService(GraphQLParserErrorMessageProvider::class);
+    }
+
     protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
     {
         return $this->getService(GraphQLErrorMessageProviderInterface::class);
@@ -55,7 +61,7 @@ class ParserTest extends AbstractTestCase
     public function testInvalidSelection()
     {
         $this->expectException(SyntaxErrorException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getUnexpectedTokenErrorMessage(Token::tokenName(Token::TYPE_RBRACE)));
+        $this->expectExceptionMessage($this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_6, Token::tokenName(Token::TYPE_RBRACE)));
         $parser = $this->getParser();
         $parser->parse('
         {
