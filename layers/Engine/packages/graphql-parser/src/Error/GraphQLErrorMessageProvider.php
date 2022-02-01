@@ -10,11 +10,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 {
     use BasicServiceTrait;
 
-    public function getCantRecognizeTokenTypeErrorMessage(): string
-    {
-        return $this->__('Can\t recognize token type', 'graphql-server');
-    }
-
     public function getUnexpectedTokenErrorMessage(string $tokenName): string
     {
         return \sprintf($this->__('Unexpected token \'%s\'', 'graphql-server'), $tokenName);

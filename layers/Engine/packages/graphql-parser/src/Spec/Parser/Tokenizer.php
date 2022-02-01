@@ -175,7 +175,7 @@ class Tokenizer
             return $this->scanString();
         }
 
-        throw $this->createException($this->getGraphQLErrorMessageProvider()->getCantRecognizeTokenTypeErrorMessage());
+        throw $this->createException($this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_5));
     }
 
     protected function checkFragment(): bool
