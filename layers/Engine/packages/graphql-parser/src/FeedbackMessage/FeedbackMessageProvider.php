@@ -126,7 +126,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_8_3 => $this->__('Variable \'%s\' has not been defined in the operation', 'graphql-server'),
             self::E_5_8_4 => $this->__('Variable \'%s\' is not used', 'graphql-server'),
             self::E_5_8_5 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
-
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -172,7 +171,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_8_3 => 'https://spec.graphql.org/draft/#sec-All-Variable-Uses-Defined',
             self::E_5_8_4 => 'https://spec.graphql.org/draft/#sec-All-Variables-Used',
             self::E_5_8_5 => 'https://spec.graphql.org/draft/#sec-All-Variable-Usages-are-Allowed',
-
             default => parent::getSpecifiedByURL($code),
         };
     }
