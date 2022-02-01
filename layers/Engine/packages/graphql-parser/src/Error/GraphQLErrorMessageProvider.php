@@ -145,11 +145,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
         return \sprintf($this->__('Fragment \'%s\' is cyclical', 'graphql-server'), $fragmentName);
     }
 
-    public function getFragmentNotUsedErrorMessage(string $fragmentName): string
-    {
-        return \sprintf($this->__('Fragment \'%s\' is not used', 'graphql-server'), $fragmentName);
-    }
-
     public function getDuplicateVariableNameErrorMessage(string $variableName): string
     {
         return \sprintf($this->__('Variable name \'%s\' is duplicated', 'graphql-server'), $variableName);
