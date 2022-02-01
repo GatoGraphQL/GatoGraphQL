@@ -19,7 +19,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public const E_5_4_1 = '5.4.1';
     public const E_5_4_2 = '5.4.2';
     public const E_5_4_2_1 = '5.4.2.1';
-    public const E_5_5_1 = '5.5.1';
     public const E_5_5_1_1 = '5.5.1.1';
     public const E_5_5_1_2 = '5.5.1.2';
     public const E_5_5_1_3 = '5.5.1.3';
@@ -67,7 +66,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_4_1,
             self::E_5_4_2,
             self::E_5_4_2_1,
-            self::E_5_5_1,
             self::E_5_5_1_1,
             self::E_5_5_1_2,
             self::E_5_5_1_3,
@@ -108,9 +106,8 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_3_3 => 'TODO: satisfy',
             self::E_5_4_1 => 'TODO: satisfy',
             self::E_5_4_2 => $this->__('Argument \'%s\' is duplicated', 'graphql-server'),
-            self::E_5_4_2_1 => '__provide__',
-            self::E_5_5_1 => '__provide__',
-            self::E_5_5_1_1 => '__provide__',
+            self::E_5_4_2_1 => 'TODO: satisfy',
+            self::E_5_5_1_1 => $this->__('Fragment name \'%s\' is duplicated', 'graphql-server'),
             self::E_5_5_1_2 => '__provide__',
             self::E_5_5_1_3 => '__provide__',
             self::E_5_5_1_4 => '__provide__',
@@ -158,7 +155,6 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_4_1 => 'https://spec.graphql.org/draft/#sec-Argument-Names',
             self::E_5_4_2 => 'https://spec.graphql.org/draft/#sec-Argument-Uniqueness',
             self::E_5_4_2_1 => 'https://spec.graphql.org/draft/#sec-Required-Arguments',
-            self::E_5_5_1 => 'https://spec.graphql.org/draft/#sec-Fragment-Declarations',
             self::E_5_5_1_1 => 'https://spec.graphql.org/draft/#sec-Fragment-Name-Uniqueness',
             self::E_5_5_1_2 => 'https://spec.graphql.org/draft/#sec-Fragment-Spread-Type-Existence',
             self::E_5_5_1_3 => 'https://spec.graphql.org/draft/#sec-Fragments-On-Composite-Types',

@@ -229,7 +229,7 @@ class Document implements DocumentInterface
             $fragmentName = $fragment->getName();
             if (in_array($fragmentName, $fragmentNames)) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getDuplicateFragmentNameErrorMessage($fragmentName),
+                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E_5_5_1_1, $fragmentName),
                     $this->getNonSpecificLocation()
                 );
             }
