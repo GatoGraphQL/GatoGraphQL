@@ -66,7 +66,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getMessagePlaceholder(int $code): string
     {
         return match($code) {
-            self::E0001 => '',
+            self::E0001 => $this->__('Operation name \'%s\' is duplicated', 'graphql-server'),
             self::E0002 => '',
             self::E0003 => '',
             self::E0004 => '',
@@ -93,7 +93,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getSpecifiedByURL(int $code): ?string
     {
         return match($code) {
-            self::E0001 => '',
+            self::E0001 => 'https://spec.graphql.org/draft/#sec-Operation-Name-Uniqueness',
             self::E0002 => '',
             self::E0003 => '',
             self::E0004 => '',

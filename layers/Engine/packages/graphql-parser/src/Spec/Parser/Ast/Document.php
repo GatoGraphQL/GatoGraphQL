@@ -7,10 +7,12 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
+use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 
 class Document implements DocumentInterface
@@ -18,6 +20,7 @@ class Document implements DocumentInterface
     use StandaloneServiceTrait;
 
     private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
     final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
     {
@@ -26,6 +29,14 @@ class Document implements DocumentInterface
     final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
     {
         return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
+    }
+    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    {
+        $this->feedbackMessageProvider = $feedbackMessageProvider;
+    }
+    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    {
+        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackMessageProvider::class);
     }
 
     public function __construct(
@@ -109,7 +120,7 @@ class Document implements DocumentInterface
             $operationName = $operation->getName();
             if (in_array($operationName, $operationNames)) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getDuplicateOperationNameErrorMessage($operationName),
+                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E0001, $operationName),
                     $this->getNonSpecificLocation()
                 );
             }

@@ -52,8 +52,6 @@ interface GraphQLErrorMessageProviderInterface
 
     public function getNoOperationsDefinedInQueryErrorMessage(): string;
 
-    public function getDuplicateOperationNameErrorMessage(string $operationName): string;
-
     public function getEmptyOperationNameErrorMessage(): string;
 
     public function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string;

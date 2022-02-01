@@ -6,6 +6,7 @@ namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
 use PoP\Root\AbstractTestCase;
 
 class DocumentTest extends AbstractTestCase
@@ -18,6 +19,11 @@ class DocumentTest extends AbstractTestCase
     protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
     {
         return $this->getService(GraphQLErrorMessageProviderInterface::class);
+    }
+
+    protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    {
+        return $this->getService(FeedbackMessageProvider::class);
     }
 
     public function testValidationWorks()
@@ -320,7 +326,7 @@ class DocumentTest extends AbstractTestCase
     public function testUniqueOperationName()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateOperationNameErrorMessage('SomeQuery'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E0001, 'SomeQuery'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
@@ -341,7 +347,7 @@ class DocumentTest extends AbstractTestCase
     public function testUniqueOperationNameAcrossOps()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateOperationNameErrorMessage('SomeQuery'));
+        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E0001, 'SomeQuery'));
         $parser = $this->getParser();
         $document = $parser->parse('
             query SomeQuery {
