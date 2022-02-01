@@ -4,26 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Error;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\Root\Services\BasicServiceTrait;
 
 class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterface
 {
     use BasicServiceTrait;
-
-    public function getNoAffectedDirectiveUnderPosErrorMessage(
-        Directive $directive,
-        Argument $argument,
-        int $itemValue
-    ): string {
-        return \sprintf(
-            $this->__('There is no directive in relative position \'%s\' from meta directive \'%s\', as indicated in argument \'%s\'', 'graphql-parser'),
-            $itemValue,
-            $directive->getName(),
-            $argument->getName(),
-        );
-    }
 
     public function getNoOperationMatchesNameErrorMessage(string $operationName): string
     {

@@ -9,12 +9,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 
 interface GraphQLErrorMessageProviderInterface
 {
-    public function getNoAffectedDirectiveUnderPosErrorMessage(
-        Directive $directive,
-        Argument $argument,
-        int $itemValue
-    ): string;
-
     public function getNoOperationMatchesNameErrorMessage(string $operationName): string;
 
     public function getNoOperationNameProvidedErrorMessage(): string;

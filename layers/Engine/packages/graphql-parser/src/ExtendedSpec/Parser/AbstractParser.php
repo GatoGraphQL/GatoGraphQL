@@ -193,7 +193,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $nestedDirectivePos = $directivePos + (int)$argumentValueItem;
             if ($nestedDirectivePos >= $directiveCount) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getNoAffectedDirectiveUnderPosErrorMessage($directive, $argument, $argumentValueItem),
+                    $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(
+                        GraphQLExtendedSpecErrorMessageProvider::E4,
+                        $argumentValueItem,
+                        $directive->getName(),
+                        $argument->getName()
+                    ),
                     $argument->getLocation()
                 );
             }
