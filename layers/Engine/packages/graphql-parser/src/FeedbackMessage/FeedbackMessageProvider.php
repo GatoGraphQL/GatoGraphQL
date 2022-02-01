@@ -28,7 +28,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getMessagePlaceholder(int $code): string
     {
         return match($code) {
-            self::E0001 => '',
+            self::E0001 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -36,7 +36,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getSpecifiedByURL(int $code): ?string
     {
         return match($code) {
-            self::E0001 => '',
+            self::E0001 => 'https://spec.graphql.org/draft/#sec-All-Variable-Usages-are-Allowed',
             default => parent::getSpecifiedByURL($code),
         };
     }

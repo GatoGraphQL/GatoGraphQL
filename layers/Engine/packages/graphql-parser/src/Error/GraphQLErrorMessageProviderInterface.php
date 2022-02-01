@@ -73,6 +73,4 @@ interface GraphQLErrorMessageProviderInterface
     public function getDuplicateArgumentErrorMessage(string $argumentName): string;
 
     public function getContextNotSetErrorMessage(string $variableName): string;
-
-    public function getValueIsNotSetForRequiredVariableErrorMessage(string $variableName): string;
 }
