@@ -4,19 +4,25 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Upstream\ComponentModel\Parser;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLExtendedSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
 class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
 {
+    protected function getGraphQLExtendedSpecErrorMessageProvider(): GraphQLExtendedSpecErrorMessageProvider
+    {
+        return $this->getService(GraphQLExtendedSpecErrorMessageProvider::class);
+    }
+
     protected static function enableComposableDirectives(): bool
     {
         return true;
@@ -371,8 +377,37 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
     public function testFailingMetaDirectives(string $query)
     {
         $parser = $this->getParser();
-
+        $errorMessages = [
+            'no-directive-under-pos' => $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(
+                GraphQLExtendedSpecErrorMessageProvider::E4,
+                2,
+                'forEach',
+                'affectDirectivesUnderPos',
+            ),
+            'no-negative-pos' => $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(
+                GraphQLExtendedSpecErrorMessageProvider::E3,
+                'affectDirectivesUnderPos',
+                'forEach',
+                -2,
+            ),
+            'no-2nd-directive-under-pos' => $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(
+                GraphQLExtendedSpecErrorMessageProvider::E4,
+                2,
+                'forEach',
+                'affectDirectivesUnderPos',
+            ),
+            'directive-referenced-only-once' => $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(
+                GraphQLExtendedSpecErrorMessageProvider::E1,
+                'advancePointerInArrayOrObject',
+            ),
+            'no-empty-pos' => $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(
+                GraphQLExtendedSpecErrorMessageProvider::E2,
+                'affectDirectivesUnderPos',
+                'forEach',
+            ),
+        ];
         $this->expectException(InvalidRequestException::class);
+        $this->expectErrorMessage($errorMessages[$this->dataName()]);
         $parser->parse($query);
     }
 
@@ -404,6 +439,13 @@ class EnabledMetaDirectiveTest extends AbstractMetaDirectiveTest
                 <<<GRAPHQL
                     query {
                         groupCapabilities @forEach(affectDirectivesUnderPos: [1,2]) @advancePointerInArrayOrObject(path: "group") @upperCase @lowerCase
+                    }
+                GRAPHQL
+            ],
+            'no-empty-pos' => [
+                <<<GRAPHQL
+                    query {
+                        groupCapabilities @forEach(affectDirectivesUnderPos: []) @upperCase
                     }
                 GRAPHQL
             ],
