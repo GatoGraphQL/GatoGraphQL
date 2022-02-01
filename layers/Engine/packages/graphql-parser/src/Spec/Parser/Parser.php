@@ -6,6 +6,7 @@ namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackMessage\GraphQLParserErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
@@ -29,8 +30,17 @@ use stdClass;
 
 class Parser extends Tokenizer implements ParserInterface
 {
+    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
     private ?GraphQLParserErrorMessageProvider $graphQLParserErrorMessageProvider = null;
 
+    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
+    {
+        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
+    }
+    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
+    {
+        return $this->graphQLSpecErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLSpecErrorMessageProvider::class);
+    }
     final public function setGraphQLParserErrorMessageProvider(GraphQLParserErrorMessageProvider $graphQLParserErrorMessageProvider): void
     {
         $this->graphQLParserErrorMessageProvider = $graphQLParserErrorMessageProvider;
@@ -652,7 +662,7 @@ class Parser extends Tokenizer implements ParserInterface
             // Validate no duplicated keys in InputObject
             if (property_exists($object, $key)) {
                 throw new SyntaxErrorException(
-                    $this->getGraphQLErrorMessageProvider()->getDuplicateKeyInInputObjectSyntaxErrorMessage($key),
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_6_2, $key),
                     $this->getTokenLocation($keyToken)
                 );
             }

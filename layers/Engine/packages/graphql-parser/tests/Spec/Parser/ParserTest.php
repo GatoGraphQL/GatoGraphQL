@@ -6,6 +6,7 @@ namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -31,6 +32,11 @@ class ParserTest extends AbstractTestCase
     protected function getParser(): ParserInterface
     {
         return $this->getService(ParserInterface::class);
+    }
+
+    protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
+    {
+        return $this->getService(GraphQLSpecErrorMessageProvider::class);
     }
 
     protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
@@ -1229,7 +1235,7 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInVariable()
     {
         $this->expectException(SyntaxErrorException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateKeyInInputObjectSyntaxErrorMessage('name'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_6_2, 'name'));
         $parser = $this->getParser();
         $parser->parse('
             query FilterUsers($filter: UserFilterInput = { name: "Pedro", name: "Juancho" }) {
@@ -1244,7 +1250,7 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInArgument()
     {
         $this->expectException(SyntaxErrorException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateKeyInInputObjectSyntaxErrorMessage('name'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_6_2, 'name'));
         $parser          = $this->getParser();
         $parser->parse('
             query FilterUsers {

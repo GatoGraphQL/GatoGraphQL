@@ -10,11 +10,6 @@ class GraphQLErrorMessageProvider implements GraphQLErrorMessageProviderInterfac
 {
     use BasicServiceTrait;
 
-    public function getDuplicateKeyInInputObjectSyntaxErrorMessage(string $key): string
-    {
-        return \sprintf($this->__('Input object has duplicate key \'%s\'', 'graphql-server'), $key);
-    }
-
     public function getInvalidStringUnicodeEscapeSequenceErrorMessage(string $codepoint): string
     {
         return \sprintf($this->__('Invalid string unicode escape sequece \'%s\'', 'graphql-server'), $codepoint);
