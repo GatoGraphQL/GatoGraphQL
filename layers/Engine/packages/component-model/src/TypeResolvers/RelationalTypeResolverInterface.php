@@ -30,10 +30,10 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
     public function enqueueFillingObjectsFromIDs(array $ids_data_fields): void;
     public function fillObjects(
         array $ids_data_fields,
-        array &$unionDBKeyIDs,
+        array $unionDBKeyIDs,
+        array $previousDBItems,
+        array $variables,
         array &$dbItems,
-        array &$previousDBItems,
-        array &$variables,
         array &$messages,
         array &$objectErrors,
         array &$objectWarnings,

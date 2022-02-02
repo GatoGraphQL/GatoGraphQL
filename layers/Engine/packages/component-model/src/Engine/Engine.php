@@ -1550,9 +1550,9 @@ class Engine implements EngineInterface
             $objectIDItems = $relationalTypeResolver->fillObjects(
                 $ids_data_fields,
                 $combinedUnionDBKeyIDs,
-                $iterationDBItems,
                 $previousDBItems,
                 $variables,
+                $iterationDBItems,
                 $messages,
                 $iterationObjectErrors,
                 $iterationObjectWarnings,
