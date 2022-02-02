@@ -1507,8 +1507,12 @@ class Engine implements EngineInterface
         // but we need to avoid fetching those DB objects that were already fetched in a previous iteration
         $already_loaded_ids_data_fields = [];
 
-        // The variables come from $vars
+        /**
+         * The variables initially come from the AppState, but then they
+         * can be modified by directiveResolvers (eg: for @export)
+         */
         $variables = App::getState('variables');
+
         // Initiate a new $messages interchange across directives
         $messages = [];
 
@@ -1539,6 +1543,10 @@ class Engine implements EngineInterface
                 );
             }
 
+            /**
+             * Regenerate the schema/object FeedbackStore, to handle
+             * errors/warnings/logs/etc per iteration
+             */
             App::getFeedbackStore()->regenerateSchemaFeedbackStore();
             App::getFeedbackStore()->regenerateObjectFeedbackStore();
 
