@@ -34,11 +34,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $queryErrors
+     * @param array $queryError
      */
-    public function setQueryErrors(array $queryErrors): void
+    public function addQueryError(array $queryError): void
     {
-        $this->queryErrors = $queryErrors;
+        $this->queryErrors[] = $queryError;
     }
 
     /**
@@ -50,11 +50,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $schemaErrors
+     * @param array $schemaError
      */
-    public function setSchemaErrors(array $schemaErrors): void
+    public function addSchemaError(array $schemaError): void
     {
-        $this->schemaErrors = $schemaErrors;
+        $this->schemaErrors[] = $schemaError;
     }
 
     /**
@@ -66,11 +66,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $objectErrors
+     * @param array $objectError
      */
-    public function setObjectErrors(array $objectErrors): void
+    public function addObjectError(array $objectError): void
     {
-        $this->objectErrors = $objectErrors;
+        $this->objectErrors[] = $objectError;
     }
 
     /**
@@ -82,11 +82,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $queryWarnings
+     * @param array $queryWarning
      */
-    public function setQueryWarnings(array $queryWarnings): void
+    public function addQueryWarning(array $queryWarning): void
     {
-        $this->queryWarnings = $queryWarnings;
+        $this->queryWarnings[] = $queryWarning;
     }
 
     /**
@@ -98,11 +98,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $schemaWarnings
+     * @param array $schemaWarning
      */
-    public function setSchemaWarnings(array $schemaWarnings): void
+    public function addSchemaWarning(array $schemaWarning): void
     {
-        $this->schemaWarnings = $schemaWarnings;
+        $this->schemaWarnings[] = $schemaWarning;
     }
 
     /**
@@ -114,11 +114,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $objectWarnings
+     * @param array $objectWarning
      */
-    public function setObjectWarnings(array $objectWarnings): void
+    public function addObjectWarning(array $objectWarning): void
     {
-        $this->objectWarnings = $objectWarnings;
+        $this->objectWarnings[] = $objectWarning;
     }
 
     /**
@@ -130,11 +130,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $queryDeprecations
+     * @param array $queryDeprecation
      */
-    public function setQueryDeprecations(array $queryDeprecations): void
+    public function addQueryDeprecation(array $queryDeprecation): void
     {
-        $this->queryDeprecations = $queryDeprecations;
+        $this->queryDeprecations[] = $queryDeprecation;
     }
 
     /**
@@ -146,11 +146,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $schemaDeprecations
+     * @param array $schemaDeprecation
      */
-    public function setSchemaDeprecations(array $schemaDeprecations): void
+    public function addSchemaDeprecation(array $schemaDeprecation): void
     {
-        $this->schemaDeprecations = $schemaDeprecations;
+        $this->schemaDeprecations[] = $schemaDeprecation;
     }
 
     /**
@@ -162,11 +162,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $objectDeprecations
+     * @param array $objectDeprecation
      */
-    public function setObjectDeprecations(array $objectDeprecations): void
+    public function addObjectDeprecation(array $objectDeprecation): void
     {
-        $this->objectDeprecations = $objectDeprecations;
+        $this->objectDeprecations[] = $objectDeprecation;
     }
 
     /**
@@ -178,11 +178,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $queryNotices
+     * @param array $queryNotice
      */
-    public function setQueryNotices(array $queryNotices): void
+    public function addQueryNotice(array $queryNotice): void
     {
-        $this->queryNotices = $queryNotices;
+        $this->queryNotices[] = $queryNotice;
     }
 
     /**
@@ -194,11 +194,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $schemaNotices
+     * @param array $schemaNotice
      */
-    public function setSchemaNotices(array $schemaNotices): void
+    public function addSchemaNotice(array $schemaNotice): void
     {
-        $this->schemaNotices = $schemaNotices;
+        $this->schemaNotices[] = $schemaNotice;
     }
 
     /**
@@ -210,11 +210,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $objectNotices
+     * @param array $objectNotice
      */
-    public function setObjectNotices(array $objectNotices): void
+    public function addObjectNotice(array $objectNotice): void
     {
-        $this->objectNotices = $objectNotices;
+        $this->objectNotices[] = $objectNotice;
     }
 
     /**
@@ -226,11 +226,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $queryLogs
+     * @param array $queryLog
      */
-    public function setQueryLogs(array $queryLogs): void
+    public function addQueryLog(array $queryLog): void
     {
-        $this->queryLogs = $queryLogs;
+        $this->queryLogs[] = $queryLog;
     }
 
     /**
@@ -242,11 +242,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $schemaLogs
+     * @param array $schemaLog
      */
-    public function setSchemaLogs(array $schemaLogs): void
+    public function addSchemaLog(array $schemaLog): void
     {
-        $this->schemaLogs = $schemaLogs;
+        $this->schemaLogs[] = $schemaLog;
     }
 
     /**
@@ -258,11 +258,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $objectLogs
+     * @param array $objectLog
      */
-    public function setObjectLogs(array $objectLogs): void
+    public function addObjectLog(array $objectLog): void
     {
-        $this->objectLogs = $objectLogs;
+        $this->objectLogs[] = $objectLog;
     }
 
     /**
@@ -274,11 +274,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $queryTraces
+     * @param array $queryTrace
      */
-    public function setQueryTraces(array $queryTraces): void
+    public function addQueryTrace(array $queryTrace): void
     {
-        $this->queryTraces = $queryTraces;
+        $this->queryTraces[] = $queryTrace;
     }
 
     /**
@@ -290,11 +290,11 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $schemaTraces
+     * @param array $schemaTrace
      */
-    public function setSchemaTraces(array $schemaTraces): void
+    public function addSchemaTrace(array $schemaTrace): void
     {
-        $this->schemaTraces = $schemaTraces;
+        $this->schemaTraces[] = $schemaTrace;
     }
 
     /**
@@ -306,10 +306,10 @@ class FeedbackMessageStore
     }
 
     /**
-     * @param array $objectTraces
+     * @param array $objectTrace
      */
-    public function setObjectTraces(array $objectTraces): void
+    public function addObjectTrace(array $objectTrace): void
     {
-        $this->objectTraces = $objectTraces;
+        $this->objectTraces[] = $objectTrace;
     }
 }
