@@ -78,13 +78,13 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$idsDataFields,
+        array $idsDataFields,
+        array $succeedingPipelineDirectiveResolverInstances,
+        array $objectIDItems,
+        array $unionDBKeyIDs,
+        array $previousDBItems,
         array &$succeedingPipelineIDsDataFields,
-        array &$succeedingPipelineDirectiveResolverInstances,
-        array &$objectIDItems,
-        array &$unionDBKeyIDs,
         array &$dbItems,
-        array &$previousDBItems,
         array &$variables,
         array &$messages,
         array &$objectErrors,

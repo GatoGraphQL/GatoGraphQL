@@ -385,6 +385,7 @@ class Engine implements EngineInterface
     {
         // Reset the state
         App::regenerateEngineState();
+        App::regenerateFeedbackStore();
         App::regenerateMutationResolutionStore();
 
         App::doAction('\PoP\ComponentModel\Engine:beginning');
@@ -550,7 +551,7 @@ class Engine implements EngineInterface
             if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
                 $data = array_merge(
                     $data,
-                    $this->getDatabases()
+                    $this->generateDatabases()
                 );
             }
         }
@@ -1494,7 +1495,7 @@ class Engine implements EngineInterface
         return $dbname_entries;
     }
 
-    public function getDatabases(): array
+    protected function generateDatabases(): array
     {
         $engineState = App::getEngineState();
 
@@ -1506,8 +1507,12 @@ class Engine implements EngineInterface
         // but we need to avoid fetching those DB objects that were already fetched in a previous iteration
         $already_loaded_ids_data_fields = [];
 
-        // The variables come from $vars
+        /**
+         * The variables initially come from the AppState, but then they
+         * can be modified by directiveResolvers (eg: for @export)
+         */
         $variables = App::getState('variables');
+
         // Initiate a new $messages interchange across directives
         $messages = [];
 
@@ -1538,6 +1543,13 @@ class Engine implements EngineInterface
                 );
             }
 
+            /**
+             * Regenerate the schema/object FeedbackStore, to handle
+             * errors/warnings/logs/etc per iteration
+             */
+            App::getFeedbackStore()->regenerateSchemaFeedbackStore();
+            App::getFeedbackStore()->regenerateObjectFeedbackStore();
+
             $database_key = $relationalTypeResolver->getTypeOutputDBKey();
 
             // Execute the typeResolver for all combined ids
@@ -1546,8 +1558,8 @@ class Engine implements EngineInterface
             $objectIDItems = $relationalTypeResolver->fillObjects(
                 $ids_data_fields,
                 $combinedUnionDBKeyIDs,
-                $iterationDBItems,
                 $previousDBItems,
+                $iterationDBItems,
                 $variables,
                 $messages,
                 $iterationObjectErrors,
@@ -1846,7 +1858,7 @@ class Engine implements EngineInterface
         array &$already_loaded_ids_data_fields,
         array &$unionDBKeyIDs,
         array &$combinedUnionDBKeyIDs,
-        array &$objectIDItems,
+        array $objectIDItems,
     ): void {
         $engineState = App::getEngineState();
         $database_key = $targetObjectTypeResolver->getTypeOutputDBKey();

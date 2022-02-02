@@ -6,6 +6,7 @@ namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\App\AbstractRootAppProxy;
 use PoP\ComponentModel\Engine\EngineState;
+use PoP\ComponentModel\Feedback\FeedbackStore;
 use PoP\ComponentModel\Stores\MutationResolutionStore;
 use PoP\ComponentModel\Stores\MutationResolutionStoreInterface;
 
@@ -19,11 +20,17 @@ use PoP\ComponentModel\Stores\MutationResolutionStoreInterface;
 class App extends AbstractRootAppProxy implements AppInterface
 {
     protected static EngineState $engineState;
+    protected static FeedbackStore $feedbackStore;
     protected static MutationResolutionStoreInterface $mutationResolutionStore;
 
     public static function getEngineState(): EngineState
     {
         return self::$engineState;
+    }
+
+    public static function getFeedbackStore(): FeedbackStore
+    {
+        return self::$feedbackStore;
     }
 
     public static function getMutationResolutionStore(): MutationResolutionStoreInterface
@@ -34,6 +41,11 @@ class App extends AbstractRootAppProxy implements AppInterface
     public static function regenerateEngineState(): void
     {
         self::$engineState = new EngineState();
+    }
+
+    public static function regenerateFeedbackStore(): void
+    {
+        self::$feedbackStore = new FeedbackStore();
     }
 
     public static function regenerateMutationResolutionStore(): void

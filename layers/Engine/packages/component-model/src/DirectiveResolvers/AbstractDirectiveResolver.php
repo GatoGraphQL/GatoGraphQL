@@ -543,7 +543,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Indicate that there is data in variable $idsDataFields
      */
-    protected function hasIDsDataFields(array &$idsDataFields): bool
+    protected function hasIDsDataFields(array $idsDataFields): bool
     {
         foreach ($idsDataFields as $id => &$data_fields) {
             if ($data_fields['direct'] ?? null) {
@@ -877,12 +877,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // and keep passing down the rest of the array to the next stages
         list(
             $relationalTypeResolver,
-            $pipelineIDsDataFields,
             $pipelineDirectiveResolverInstances,
             $objectIDItems,
             $unionDBKeyIDs,
-            $dbItems,
             $previousDBItems,
+            $pipelineIDsDataFields,
+            $dbItems,
             $variables,
             $messages,
             $objectErrors,
@@ -938,12 +938,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $this->resolveDirective(
                     $relationalTypeResolver,
                     $idsDataFields,
-                    $pipelineIDsDataFields,
                     $pipelineDirectiveResolverInstances,
                     $objectIDItems,
                     $unionDBKeyIDs,
-                    $dbItems,
                     $previousDBItems,
+                    $pipelineIDsDataFields,
+                    $dbItems,
                     $variables,
                     $messages,
                     $objectErrors,
@@ -983,12 +983,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // 3. Re-create the payload from the modified variables
         return DirectivePipelineUtils::convertArgumentsToPayload(
             $relationalTypeResolver,
-            $pipelineIDsDataFields,
             $pipelineDirectiveResolverInstances,
             $objectIDItems,
             $unionDBKeyIDs,
-            $dbItems,
             $previousDBItems,
+            $pipelineIDsDataFields,
+            $dbItems,
             $variables,
             $messages,
             $objectErrors,
@@ -1012,9 +1012,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $failureMessage,
         array $failedFields,
-        array &$idsDataFields,
+        array $idsDataFields,
         array &$succeedingPipelineIDsDataFields,
-        array &$objectIDItems,
+        array $objectIDItems,
         array &$dbItems,
         array &$objectErrors,
         array &$objectWarnings

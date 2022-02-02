@@ -98,13 +98,13 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$idsDataFields,
+        array $idsDataFields,
+        array $succeedingPipelineDirectiveResolverInstances,
+        array $objectIDItems,
+        array $unionDBKeyIDs,
+        array $previousDBItems,
         array &$succeedingPipelineIDsDataFields,
-        array &$succeedingPipelineDirectiveResolverInstances,
-        array &$objectIDItems,
-        array &$unionDBKeyIDs,
         array &$dbItems,
-        array &$previousDBItems,
         array &$variables,
         array &$messages,
         array &$objectErrors,
@@ -118,14 +118,27 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $this->regenerateAndExecuteFunction($relationalTypeResolver, $objectIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $this->regenerateAndExecuteFunction($relationalTypeResolver, $objectIDItems, $idsDataFields, $previousDBItems, $dbItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
     }
 
     /**
      * Execute a function on the affected field
      */
-    protected function regenerateAndExecuteFunction(RelationalTypeResolverInterface $relationalTypeResolver, array &$objectIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): void
-    {
+    protected function regenerateAndExecuteFunction(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $objectIDItems,
+        array $idsDataFields,
+        array $previousDBItems,
+        array &$dbItems,
+        array &$variables,
+        array &$messages,
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+        array &$schemaDeprecations,
+    ): void {
         $function = $this->directiveArgsForSchema['function'];
         $addArguments = $this->directiveArgsForSchema['addArguments'] ?? [];
         $target = $this->directiveArgsForSchema['target'] ?? null;
@@ -281,9 +294,9 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
         string $field,
-        array &$objectIDItems,
+        array $objectIDItems,
         array &$dbItems,
-        array &$previousDBItems,
+        array $previousDBItems,
         array &$variables,
         array &$messages,
         array &$objectErrors,

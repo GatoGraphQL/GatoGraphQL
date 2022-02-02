@@ -65,13 +65,13 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$idsDataFields,
+        array $idsDataFields,
+        array $succeedingPipelineDirectiveResolverInstances,
+        array $objectIDItems,
+        array $unionDBKeyIDs,
+        array $previousDBItems,
         array &$succeedingPipelineIDsDataFields,
-        array &$succeedingPipelineDirectiveResolverInstances,
-        array &$objectIDItems,
-        array &$unionDBKeyIDs,
         array &$dbItems,
-        array &$previousDBItems,
         array &$variables,
         array &$messages,
         array &$objectErrors,
@@ -188,8 +188,10 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 }
             }
         }
+
         // 2. Execute the function for all arrayItems
-        $this->regenerateAndExecuteFunction($relationalTypeResolver, $objectIDItems, $arrayItemIdsProperties, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $this->regenerateAndExecuteFunction($relationalTypeResolver, $objectIDItems, $arrayItemIdsProperties, $previousDBItems, $dbItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+
         // 3. Composer the array from the results for each array item
         foreach ($idsDataFields as $id => $dataFields) {
             $object = $objectIDItems[$id];
@@ -278,9 +280,9 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
         string $field,
-        array &$objectIDItems,
+        array $objectIDItems,
         array &$dbItems,
-        array &$previousDBItems,
+        array $previousDBItems,
         array &$variables,
         array &$messages,
         array &$objectErrors,
