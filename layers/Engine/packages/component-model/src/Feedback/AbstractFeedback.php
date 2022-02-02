@@ -13,7 +13,7 @@ class AbstractFeedback implements FeedbackInterface
         protected string $code,
         protected Location $location,
         protected array $data = [],
-    ) {        
+    ) {
     }
 
     public function getMessage(): string

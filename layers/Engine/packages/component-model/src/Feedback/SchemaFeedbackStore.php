@@ -18,7 +18,7 @@ class SchemaFeedbackStore
     private array $schemaLogs = [];
     /** @var SchemaFeedbackInterface[] */
     private array $schemaTraces = [];
-    
+
     /**
      * @return SchemaFeedbackInterface[]
      */

@@ -27,7 +27,7 @@ class AbstractSchemaFeedback extends AbstractQueryFeedback implements SchemaFeed
             $extensions,
         );
     }
-    
+
     public function getRelationalTypeResolver(): RelationalTypeResolverInterface
     {
         return $this->relationalTypeResolver;

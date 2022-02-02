@@ -18,7 +18,7 @@ class QueryFeedbackStore
     private array $queryLogs = [];
     /** @var QueryFeedbackInterface[] */
     private array $queryTraces = [];
-    
+
     /**
      * @return QueryFeedbackInterface[]
      */

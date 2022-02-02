@@ -31,7 +31,7 @@ class AbstractObjectFeedback extends AbstractSchemaFeedback implements ObjectFee
             $extensions,
         );
     }
-    
+
     /**
      * @return array<string|int>
      */
