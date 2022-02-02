@@ -9,11 +9,11 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class AbstractQueryFeedback extends AbstractFeedback implements QueryFeedbackInterface
 {
     public function __construct(
-        ?string $message = null,
-        ?string $code = null,
-        ?Location $location = null,
-        ?array $data = null,
-        ?array $extensions = null,
+        string $message,
+        string $code,
+        Location $location,
+        array $data = [],
+        protected array $extensions = [],
     ) {
         parent::__construct(
             $message,
@@ -24,9 +24,9 @@ class AbstractQueryFeedback extends AbstractFeedback implements QueryFeedbackInt
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getExtensions(): ?array
+    public function getExtensions(): array
     {
         return $this->extensions;
     }

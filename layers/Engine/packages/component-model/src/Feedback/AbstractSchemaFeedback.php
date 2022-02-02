@@ -10,13 +10,13 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class AbstractSchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInterface
 {
     public function __construct(
-        ?string $message = null,
-        ?string $code = null,
-        ?Location $location = null,
-        ?array $data = null,
-        ?array $extensions = null,
-        protected ?TypeInterface $type = null,
-        protected ?string $field = null,
+        string $message,
+        string $code,
+        Location $location,
+        array $data = [],
+        array $extensions = [],
+        protected TypeInterface $type,
+        protected string $field,
     ) {
         parent::__construct(
             $message,
@@ -27,12 +27,12 @@ class AbstractSchemaFeedback extends AbstractQueryFeedback implements SchemaFeed
         );
     }
     
-    public function getType(): ?TypeInterface
+    public function getType(): TypeInterface
     {
         return $this->type;
     }
 
-    public function getField(): ?string
+    public function getField(): string
     {
         return $this->field;
     }

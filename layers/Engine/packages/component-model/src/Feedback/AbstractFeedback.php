@@ -9,32 +9,32 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class AbstractFeedback implements FeedbackInterface
 {
     public function __construct(
-        protected ?string $message = null,
-        protected ?string $code = null,
-        protected ?Location $location = null,
-        protected ?array $data = null,
+        protected string $message,
+        protected string $code,
+        protected Location $location,
+        protected array $data = [],
     ) {        
     }
 
-    public function getMessage(): ?string
+    public function getMessage(): string
     {
         return $this->message;
     }
 
-    public function getCode(): ?string
+    public function getCode(): string
     {
         return $this->code;
     }
 
-    public function getLocation(): ?Location
+    public function getLocation(): Location
     {
         return $this->location;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getData(): ?array
+    public function getData(): array
     {
         return $this->data;
     }

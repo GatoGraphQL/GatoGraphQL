@@ -10,14 +10,14 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class AbstractObjectFeedback extends AbstractSchemaFeedback implements ObjectFeedbackInterface
 {
     public function __construct(
-        ?string $message = null,
-        ?string $code = null,
-        ?Location $location = null,
-        ?array $data = null,
-        ?array $extensions = null,
-        ?TypeInterface $type = null,
-        ?string $field = null,
-        protected string|int|null $objectID = null,
+        string $message,
+        string $code,
+        Location $location,
+        array $data = [],
+        array $extensions = [],
+        TypeInterface $type,
+        string $field,
+        protected string|int $objectID,
     ) {
         parent::__construct(
             $message,
@@ -30,7 +30,7 @@ class AbstractObjectFeedback extends AbstractSchemaFeedback implements ObjectFee
         );
     }
     
-    public function getObjectID(): string|int|null
+    public function getObjectID(): string|int
     {
         return $this->objectID;
     }
