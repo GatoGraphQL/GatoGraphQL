@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
-class FeedbackMessageStore
+class FeedbackStore
 {
     private array $queryErrors = [];
     private array $schemaErrors = [];

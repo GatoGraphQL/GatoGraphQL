@@ -8,7 +8,7 @@ use PoP\ComponentModel\App as ComponentModelApp;
 use PoP\ComponentModel\App\AbstractRootAppProxy;
 use PoP\ComponentModel\AppInterface as ComponentModelAppInterface;
 use PoP\ComponentModel\Engine\EngineState;
-use PoP\ComponentModel\Feedback\FeedbackMessageStore;
+use PoP\ComponentModel\Feedback\FeedbackStore;
 use PoP\ComponentModel\Stores\MutationResolutionStoreInterface;
 
 /**
@@ -22,9 +22,9 @@ abstract class AbstractComponentModelAppProxy extends AbstractRootAppProxy imple
         return ComponentModelApp::getEngineState();
     }
 
-    public static function getFeedbackMessageStore(): FeedbackMessageStore
+    public static function getFeedbackStore(): FeedbackStore
     {
-        return ComponentModelApp::getFeedbackMessageStore();
+        return ComponentModelApp::getFeedbackStore();
     }
 
     public static function getMutationResolutionStore(): MutationResolutionStoreInterface
@@ -37,9 +37,9 @@ abstract class AbstractComponentModelAppProxy extends AbstractRootAppProxy imple
         ComponentModelApp::regenerateEngineState();
     }
 
-    public static function regenerateFeedbackMessageStore(): void
+    public static function regenerateFeedbackStore(): void
     {
-        ComponentModelApp::regenerateFeedbackMessageStore();
+        ComponentModelApp::regenerateFeedbackStore();
     }
 
     public static function regenerateMutationResolutionStore(): void
