@@ -216,7 +216,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
 
                 // The value is an array or an stdClass. Unpack all the elements into their own property
                 $array = (array) $value;
-                if ($arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $objectIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations)) {
+                if ($arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $objectIDItems, $previousDBItems, $dbItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations)) {
                     $execute = true;
                     foreach ($arrayItems as $key => &$value) {
                         // Add into the $idsDataFields object for the array items
@@ -333,7 +333,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                     // If there are errors, it will return null. Don't add the errors again
                     $arrayItemObjectErrors = $arrayItemObjectWarnings = $arrayItemObjectDeprecations = [];
                     $array = (array) $value;
-                    $arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $objectIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemObjectErrors, $arrayItemObjectWarnings, $arrayItemObjectDeprecations);
+                    $arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $objectIDItems, $previousDBItems, $dbItems, $variables, $messages, $arrayItemObjectErrors, $arrayItemObjectWarnings, $arrayItemObjectDeprecations);
                     // The value is an array. Unpack all the elements into their own property
                     foreach (array_keys($arrayItems) as $key) {
                         $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
@@ -399,7 +399,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     /**
      * Return the items to iterate on
      */
-    abstract protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array $objectIDItems, array &$dbItems, array $previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array;
+    abstract protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array $objectIDItems, array $previousDBItems, array &$dbItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array;
 
     /**
      * Create a property for storing the array item in the current object
