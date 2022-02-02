@@ -51,10 +51,7 @@ class FeedbackStore
         return $this->queryErrors;
     }
 
-    /**
-     * @param array $queryError
-     */
-    public function addQueryError(array $queryError): void
+    public function addQueryError(QueryFeedbackInterface $queryError): void
     {
         $this->queryErrors[] = $queryError;
     }
@@ -67,10 +64,7 @@ class FeedbackStore
         return $this->schemaErrors;
     }
 
-    /**
-     * @param array $schemaError
-     */
-    public function addSchemaError(array $schemaError): void
+    public function addSchemaError(SchemaFeedbackInterface $schemaError): void
     {
         $this->schemaErrors[] = $schemaError;
     }
@@ -83,10 +77,7 @@ class FeedbackStore
         return $this->objectErrors;
     }
 
-    /**
-     * @param array $objectError
-     */
-    public function addObjectError(array $objectError): void
+    public function addObjectError(ObjectFeedbackInterface $objectError): void
     {
         $this->objectErrors[] = $objectError;
     }
@@ -99,10 +90,7 @@ class FeedbackStore
         return $this->queryWarnings;
     }
 
-    /**
-     * @param array $queryWarning
-     */
-    public function addQueryWarning(array $queryWarning): void
+    public function addQueryWarning(QueryFeedbackInterface $queryWarning): void
     {
         $this->queryWarnings[] = $queryWarning;
     }
@@ -115,10 +103,7 @@ class FeedbackStore
         return $this->schemaWarnings;
     }
 
-    /**
-     * @param array $schemaWarning
-     */
-    public function addSchemaWarning(array $schemaWarning): void
+    public function addSchemaWarning(SchemaFeedbackInterface $schemaWarning): void
     {
         $this->schemaWarnings[] = $schemaWarning;
     }
@@ -131,10 +116,7 @@ class FeedbackStore
         return $this->objectWarnings;
     }
 
-    /**
-     * @param array $objectWarning
-     */
-    public function addObjectWarning(array $objectWarning): void
+    public function addObjectWarning(ObjectFeedbackInterface $objectWarning): void
     {
         $this->objectWarnings[] = $objectWarning;
     }
@@ -147,10 +129,7 @@ class FeedbackStore
         return $this->queryDeprecations;
     }
 
-    /**
-     * @param array $queryDeprecation
-     */
-    public function addQueryDeprecation(array $queryDeprecation): void
+    public function addQueryDeprecation(QueryFeedbackInterface $queryDeprecation): void
     {
         $this->queryDeprecations[] = $queryDeprecation;
     }
@@ -163,10 +142,7 @@ class FeedbackStore
         return $this->schemaDeprecations;
     }
 
-    /**
-     * @param array $schemaDeprecation
-     */
-    public function addSchemaDeprecation(array $schemaDeprecation): void
+    public function addSchemaDeprecation(SchemaFeedbackInterface $schemaDeprecation): void
     {
         $this->schemaDeprecations[] = $schemaDeprecation;
     }
@@ -179,10 +155,7 @@ class FeedbackStore
         return $this->objectDeprecations;
     }
 
-    /**
-     * @param array $objectDeprecation
-     */
-    public function addObjectDeprecation(array $objectDeprecation): void
+    public function addObjectDeprecation(ObjectFeedbackInterface $objectDeprecation): void
     {
         $this->objectDeprecations[] = $objectDeprecation;
     }
@@ -195,10 +168,7 @@ class FeedbackStore
         return $this->queryNotices;
     }
 
-    /**
-     * @param array $queryNotice
-     */
-    public function addQueryNotice(array $queryNotice): void
+    public function addQueryNotice(QueryFeedbackInterface $queryNotice): void
     {
         $this->queryNotices[] = $queryNotice;
     }
@@ -211,10 +181,7 @@ class FeedbackStore
         return $this->schemaNotices;
     }
 
-    /**
-     * @param array $schemaNotice
-     */
-    public function addSchemaNotice(array $schemaNotice): void
+    public function addSchemaNotice(SchemaFeedbackInterface $schemaNotice): void
     {
         $this->schemaNotices[] = $schemaNotice;
     }
@@ -227,10 +194,7 @@ class FeedbackStore
         return $this->objectNotices;
     }
 
-    /**
-     * @param array $objectNotice
-     */
-    public function addObjectNotice(array $objectNotice): void
+    public function addObjectNotice(ObjectFeedbackInterface $objectNotice): void
     {
         $this->objectNotices[] = $objectNotice;
     }
@@ -243,10 +207,7 @@ class FeedbackStore
         return $this->queryLogs;
     }
 
-    /**
-     * @param array $queryLog
-     */
-    public function addQueryLog(array $queryLog): void
+    public function addQueryLog(QueryFeedbackInterface $queryLog): void
     {
         $this->queryLogs[] = $queryLog;
     }
@@ -259,10 +220,7 @@ class FeedbackStore
         return $this->schemaLogs;
     }
 
-    /**
-     * @param array $schemaLog
-     */
-    public function addSchemaLog(array $schemaLog): void
+    public function addSchemaLog(SchemaFeedbackInterface $schemaLog): void
     {
         $this->schemaLogs[] = $schemaLog;
     }
@@ -275,10 +233,7 @@ class FeedbackStore
         return $this->objectLogs;
     }
 
-    /**
-     * @param array $objectLog
-     */
-    public function addObjectLog(array $objectLog): void
+    public function addObjectLog(ObjectFeedbackInterface $objectLog): void
     {
         $this->objectLogs[] = $objectLog;
     }
@@ -291,10 +246,7 @@ class FeedbackStore
         return $this->queryTraces;
     }
 
-    /**
-     * @param array $queryTrace
-     */
-    public function addQueryTrace(array $queryTrace): void
+    public function addQueryTrace(QueryFeedbackInterface $queryTrace): void
     {
         $this->queryTraces[] = $queryTrace;
     }
@@ -307,10 +259,7 @@ class FeedbackStore
         return $this->schemaTraces;
     }
 
-    /**
-     * @param array $schemaTrace
-     */
-    public function addSchemaTrace(array $schemaTrace): void
+    public function addSchemaTrace(SchemaFeedbackInterface $schemaTrace): void
     {
         $this->schemaTraces[] = $schemaTrace;
     }
@@ -323,10 +272,7 @@ class FeedbackStore
         return $this->objectTraces;
     }
 
-    /**
-     * @param array $objectTrace
-     */
-    public function addObjectTrace(array $objectTrace): void
+    public function addObjectTrace(ObjectFeedbackInterface $objectTrace): void
     {
         $this->objectTraces[] = $objectTrace;
     }
