@@ -56,11 +56,6 @@ class Engine implements EngineInterface
     public const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
     public const CACHETYPE_PROPS = 'props';
 
-    /**
-     * Keep all the state in a special object
-     */
-    protected EngineState $engineState;
-
     private ?PersistentCacheInterface $persistentCache = null;
     private ?DataStructureManagerInterface $dataStructureManager = null;
     private ?ModelInstanceInterface $modelInstance = null;
