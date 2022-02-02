@@ -188,7 +188,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 }
             }
         }
-        
+
         // 2. Execute the function for all arrayItems
         $this->regenerateAndExecuteFunction($relationalTypeResolver, $objectIDItems, $arrayItemIdsProperties, $previousDBItems, $dbItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
