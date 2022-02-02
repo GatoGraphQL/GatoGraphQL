@@ -12,6 +12,7 @@ class AbstractFeedback implements FeedbackInterface
         protected string $message,
         protected string $code,
         protected Location $location,
+        /** @var array<string, mixed> */
         protected array $data = [],
     ) {
     }
@@ -32,7 +33,7 @@ class AbstractFeedback implements FeedbackInterface
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function getData(): array
     {

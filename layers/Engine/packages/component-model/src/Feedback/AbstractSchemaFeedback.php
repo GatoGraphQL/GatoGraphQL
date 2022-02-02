@@ -16,7 +16,9 @@ class AbstractSchemaFeedback extends AbstractQueryFeedback implements SchemaFeed
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var string[] */
         protected array $fields,
+        /** @var array<string, mixed> */
         array $data = [],
+        /** @var array<string, mixed> */
         array $extensions = [],
     ) {
         parent::__construct(

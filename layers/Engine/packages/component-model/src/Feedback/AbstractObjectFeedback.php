@@ -18,7 +18,9 @@ class AbstractObjectFeedback extends AbstractSchemaFeedback implements ObjectFee
         array $fields,
         /** @var array<string|int> */
         protected array $objectIDs,
+        /** @var array<string, mixed> */
         array $data = [],
+        /** @var array<string, mixed> */
         array $extensions = [],
     ) {
         parent::__construct(

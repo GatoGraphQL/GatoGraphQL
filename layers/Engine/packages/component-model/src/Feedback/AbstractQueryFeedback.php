@@ -12,7 +12,9 @@ class AbstractQueryFeedback extends AbstractFeedback implements QueryFeedbackInt
         string $message,
         string $code,
         Location $location,
+        /** @var array<string, mixed> */
         array $data = [],
+        /** @var array<string, mixed> */
         protected array $extensions = [],
     ) {
         parent::__construct(
@@ -24,7 +26,7 @@ class AbstractQueryFeedback extends AbstractFeedback implements QueryFeedbackInt
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function getExtensions(): array
     {
