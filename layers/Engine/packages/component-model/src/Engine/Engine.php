@@ -549,7 +549,7 @@ class Engine implements EngineInterface
             if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
                 $data = array_merge(
                     $data,
-                    $this->getDatabases()
+                    $this->generateDatabases()
                 );
             }
         }
@@ -1493,7 +1493,7 @@ class Engine implements EngineInterface
         return $dbname_entries;
     }
 
-    public function getDatabases(): array
+    protected function generateDatabases(): array
     {
         $engineState = App::getEngineState();
 
