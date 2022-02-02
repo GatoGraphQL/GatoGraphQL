@@ -385,6 +385,7 @@ class Engine implements EngineInterface
     {
         // Reset the state
         App::regenerateEngineState();
+        App::regenerateFeedbackStore();
         App::regenerateMutationResolutionStore();
 
         App::doAction('\PoP\ComponentModel\Engine:beginning');
