@@ -877,12 +877,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // and keep passing down the rest of the array to the next stages
         list(
             $relationalTypeResolver,
-            $pipelineIDsDataFields,
             $pipelineDirectiveResolverInstances,
             $objectIDItems,
             $unionDBKeyIDs,
             $previousDBItems,
             $variables,
+            $pipelineIDsDataFields,
             $dbItems,
             $messages,
             $objectErrors,
@@ -983,12 +983,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // 3. Re-create the payload from the modified variables
         return DirectivePipelineUtils::convertArgumentsToPayload(
             $relationalTypeResolver,
-            $pipelineIDsDataFields,
             $pipelineDirectiveResolverInstances,
             $objectIDItems,
             $unionDBKeyIDs,
             $previousDBItems,
             $variables,
+            $pipelineIDsDataFields,
             $dbItems,
             $messages,
             $objectErrors,

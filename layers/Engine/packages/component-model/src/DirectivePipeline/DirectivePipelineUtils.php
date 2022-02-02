@@ -10,12 +10,12 @@ class DirectivePipelineUtils
 {
     public static function convertArgumentsToPayload(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$pipelineIDsDataFields,
         array $pipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousDBItems,
         array &$variables,
+        array &$pipelineIDsDataFields,
         array &$dbItems,
         array &$messages,
         array &$objectErrors,
@@ -31,12 +31,12 @@ class DirectivePipelineUtils
     ): array {
         return [
             'typeResolver' => &$relationalTypeResolver,
-            'pipelineIDsDataFields' => &$pipelineIDsDataFields,
             'pipelineDirectiveResolverInstances' => &$pipelineDirectiveResolverInstances,
             'objectIDItems' => &$objectIDItems,
             'unionDBKeyIDs' => &$unionDBKeyIDs,
             'previousDBItems' => &$previousDBItems,
             'variables' => &$variables,
+            'pipelineIDsDataFields' => &$pipelineIDsDataFields,
             'dbItems' => &$dbItems,
             'messages' => &$messages,
             'objectErrors' => &$objectErrors,
@@ -56,12 +56,12 @@ class DirectivePipelineUtils
     {
         return [
             &$payload['typeResolver'],
-            &$payload['pipelineIDsDataFields'],
             &$payload['pipelineDirectiveResolverInstances'],
             &$payload['objectIDItems'],
             &$payload['unionDBKeyIDs'],
             &$payload['previousDBItems'],
             &$payload['variables'],
+            &$payload['pipelineIDsDataFields'],
             &$payload['dbItems'],
             &$payload['messages'],
             &$payload['objectErrors'],

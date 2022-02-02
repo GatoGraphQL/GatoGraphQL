@@ -37,12 +37,12 @@ class DirectivePipelineDecorator
         $payload = $this->pipeline->__invoke(
             DirectivePipelineUtils::convertArgumentsToPayload(
                 $relationalTypeResolver,
-                $pipelineIDsDataFields,
                 $pipelineDirectiveResolverInstances,
                 $objectIDItems,
                 $unionDBKeyIDs,
                 $previousDBItems,
                 $variables,
+                $pipelineIDsDataFields,
                 $dbItems,
                 $messages,
                 $objectErrors,
@@ -59,12 +59,12 @@ class DirectivePipelineDecorator
         );
         list(
             $relationalTypeResolver,
-            $pipelineIDsDataFields,
             $pipelineDirectiveResolverInstances,
             $objectIDItems,
             $unionDBKeyIDs,
             $previousDBItems,
             $variables,
+            $pipelineIDsDataFields,
             $dbItems,
             $messages,
             $objectErrors,
