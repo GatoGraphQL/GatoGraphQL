@@ -32,8 +32,18 @@ abstract class AbstractComponentModelAppProxy extends AbstractRootAppProxy imple
         return ComponentModelApp::getMutationResolutionStore();
     }
 
-    public static function resetState(): void
+    public static function regenerateEngineState(): void
     {
-        ComponentModelApp::resetState();
+        ComponentModelApp::regenerateEngineState();
+    }
+
+    public static function regenerateFeedbackStore(): void
+    {
+        ComponentModelApp::regenerateFeedbackStore();
+    }
+
+    public static function regenerateMutationResolutionStore(): void
+    {
+        ComponentModelApp::regenerateMutationResolutionStore();
     }
 }
