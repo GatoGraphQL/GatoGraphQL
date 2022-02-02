@@ -1538,8 +1538,9 @@ class Engine implements EngineInterface
                 );
             }
 
-            App::regenerateFeedbackStore();
-            
+            App::getFeedbackStore()->regenerateSchemaFeedbackStore();
+            App::getFeedbackStore()->regenerateObjectFeedbackStore();
+
             $database_key = $relationalTypeResolver->getTypeOutputDBKey();
 
             // Execute the typeResolver for all combined ids
