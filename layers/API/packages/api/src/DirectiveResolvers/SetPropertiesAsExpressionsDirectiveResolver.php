@@ -127,7 +127,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array $variables,
+        array &$variables,
         array &$succeedingPipelineIDsDataFields,
         array &$dbItems,
         array &$messages,

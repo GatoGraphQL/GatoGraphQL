@@ -32,7 +32,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array $ids_data_fields,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array $variables,
+        array &$variables,
         array &$dbItems,
         array &$messages,
         array &$objectErrors,

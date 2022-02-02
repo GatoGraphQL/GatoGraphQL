@@ -20,7 +20,7 @@ class DirectivePipelineDecorator
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array $variables,
+        array &$variables,
         array &$dbItems,
         array &$messages,
         array &$objectErrors,
