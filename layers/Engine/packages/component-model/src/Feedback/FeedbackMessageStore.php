@@ -6,51 +6,24 @@ namespace PoP\ComponentModel\Feedback;
 
 class FeedbackMessageStore
 {
-    private array $queryErrors;
-    private array $schemaErrors;
-    private array $objectErrors;
-    private array $queryWarnings;
-    private array $schemaWarnings;
-    private array $objectWarnings;
-    private array $queryDeprecations;
-    private array $schemaDeprecations;
-    private array $objectDeprecations;
-    private array $queryNotices;
-    private array $schemaNotices;
-    private array $objectNotices;
-    private array $queryLogs;
-    private array $schemaLogs;
-    private array $objectLogs;
-    private array $queryTraces;
-    private array $schemaTraces;
-    private array $objectTraces;
-
-    public function __construct()
-    {
-        $this->regenerate();
-    }
-
-    public function regenerate(): void
-    {
-        $this->queryErrors = [];
-        $this->schemaErrors = [];
-        $this->objectErrors = [];
-        $this->queryWarnings = [];
-        $this->schemaWarnings = [];
-        $this->objectWarnings = [];
-        $this->queryDeprecations = [];
-        $this->schemaDeprecations = [];
-        $this->objectDeprecations = [];
-        $this->queryNotices = [];
-        $this->schemaNotices = [];
-        $this->objectNotices = [];
-        $this->queryLogs = [];
-        $this->schemaLogs = [];
-        $this->objectLogs = [];
-        $this->queryTraces = [];
-        $this->schemaTraces = [];
-        $this->objectTraces = [];
-    }
+    private array $queryErrors = [];
+    private array $schemaErrors = [];
+    private array $objectErrors = [];
+    private array $queryWarnings = [];
+    private array $schemaWarnings = [];
+    private array $objectWarnings = [];
+    private array $queryDeprecations = [];
+    private array $schemaDeprecations = [];
+    private array $objectDeprecations = [];
+    private array $queryNotices = [];
+    private array $schemaNotices = [];
+    private array $objectNotices = [];
+    private array $queryLogs = [];
+    private array $schemaLogs = [];
+    private array $objectLogs = [];
+    private array $queryTraces = [];
+    private array $schemaTraces = [];
+    private array $objectTraces = [];
 
     /**
      * @return array
