@@ -689,11 +689,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
         // Process them
         $this->processFillingObjectsFromIDs(
-            $objectIDItems,
             $unionDBKeyIDs,
-            $dbItems,
+            $objectIDItems,
             $previousDBItems,
             $variables,
+            $dbItems,
             $messages,
             $objectErrors,
             $objectWarnings,
@@ -995,11 +995,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     protected function processFillingObjectsFromIDs(
-        array &$objectIDItems,
-        array &$unionDBKeyIDs,
+        array $unionDBKeyIDs,
+        array $objectIDItems,
+        array $previousDBItems,
+        array $variables,
         array &$dbItems,
-        array &$previousDBItems,
-        array &$variables,
         array &$messages,
         array &$objectErrors,
         array &$objectWarnings,
