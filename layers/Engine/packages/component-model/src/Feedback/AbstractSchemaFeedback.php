@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
 class AbstractSchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInterface
@@ -15,7 +15,7 @@ class AbstractSchemaFeedback extends AbstractQueryFeedback implements SchemaFeed
         Location $location,
         array $data = [],
         array $extensions = [],
-        protected TypeInterface $type,
+        protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var string[] */
         protected array $fields,
     ) {
@@ -28,9 +28,9 @@ class AbstractSchemaFeedback extends AbstractQueryFeedback implements SchemaFeed
         );
     }
     
-    public function getType(): TypeInterface
+    public function getRelationalTypeResolver(): RelationalTypeResolverInterface
     {
-        return $this->type;
+        return $this->relationalTypeResolver;
     }
 
     /**
