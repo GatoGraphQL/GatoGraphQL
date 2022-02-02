@@ -38,18 +38,10 @@ class App extends AbstractRootAppProxy implements AppInterface
         return self::$mutationResolutionStore;
     }
 
-    public static function regenerateEngineState(): void
+    public static function resetState(): void
     {
         self::$engineState = new EngineState();
-    }
-
-    public static function regenerateFeedbackStore(): void
-    {
         self::$feedbackStore = new FeedbackStore();
-    }
-
-    public static function regenerateMutationResolutionStore(): void
-    {
         self::$mutationResolutionStore = new MutationResolutionStore();
     }
 }

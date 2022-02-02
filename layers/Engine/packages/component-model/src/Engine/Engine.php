@@ -384,8 +384,7 @@ class Engine implements EngineInterface
     protected function generateData(): void
     {
         // Reset the state
-        App::regenerateEngineState();
-        App::regenerateMutationResolutionStore();
+        App::resetState();
 
         App::doAction('\PoP\ComponentModel\Engine:beginning');
 
