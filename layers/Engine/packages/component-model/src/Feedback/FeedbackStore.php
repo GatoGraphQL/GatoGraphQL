@@ -6,27 +6,45 @@ namespace PoP\ComponentModel\Feedback;
 
 class FeedbackStore
 {
+    /** @var QueryFeedbackInterface[] */
     private array $queryErrors = [];
+    /** @var SchemaFeedbackInterface[] */
     private array $schemaErrors = [];
+    /** @var ObjectFeedbackInterface[] */
     private array $objectErrors = [];
+    /** @var QueryFeedbackInterface[] */
     private array $queryWarnings = [];
+    /** @var SchemaFeedbackInterface[] */
     private array $schemaWarnings = [];
+    /** @var ObjectFeedbackInterface[] */
     private array $objectWarnings = [];
+    /** @var QueryFeedbackInterface[] */
     private array $queryDeprecations = [];
+    /** @var SchemaFeedbackInterface[] */
     private array $schemaDeprecations = [];
+    /** @var ObjectFeedbackInterface[] */
     private array $objectDeprecations = [];
+    /** @var QueryFeedbackInterface[] */
     private array $queryNotices = [];
+    /** @var SchemaFeedbackInterface[] */
     private array $schemaNotices = [];
+    /** @var ObjectFeedbackInterface[] */
     private array $objectNotices = [];
+    /** @var QueryFeedbackInterface[] */
     private array $queryLogs = [];
+    /** @var SchemaFeedbackInterface[] */
     private array $schemaLogs = [];
+    /** @var ObjectFeedbackInterface[] */
     private array $objectLogs = [];
+    /** @var QueryFeedbackInterface[] */
     private array $queryTraces = [];
+    /** @var SchemaFeedbackInterface[] */
     private array $schemaTraces = [];
+    /** @var ObjectFeedbackInterface[] */
     private array $objectTraces = [];
 
     /**
-     * @return array
+     * @return QueryFeedbackInterface[]
      */
     public function getQueryErrors(): array
     {
@@ -42,7 +60,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return SchemaFeedbackInterface[]
      */
     public function getSchemaErrors(): array
     {
@@ -58,7 +76,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return ObjectFeedbackInterface[]
      */
     public function getObjectErrors(): array
     {
@@ -74,7 +92,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return QueryFeedbackInterface[]
      */
     public function getQueryWarnings(): array
     {
@@ -90,7 +108,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return SchemaFeedbackInterface[]
      */
     public function getSchemaWarnings(): array
     {
@@ -106,7 +124,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return ObjectFeedbackInterface[]
      */
     public function getObjectWarnings(): array
     {
@@ -122,7 +140,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return QueryFeedbackInterface[]
      */
     public function getQueryDeprecations(): array
     {
@@ -138,7 +156,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return SchemaFeedbackInterface[]
      */
     public function getSchemaDeprecations(): array
     {
@@ -154,7 +172,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return ObjectFeedbackInterface[]
      */
     public function getObjectDeprecations(): array
     {
@@ -170,7 +188,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return QueryFeedbackInterface[]
      */
     public function getQueryNotices(): array
     {
@@ -186,7 +204,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return SchemaFeedbackInterface[]
      */
     public function getSchemaNotices(): array
     {
@@ -202,7 +220,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return ObjectFeedbackInterface[]
      */
     public function getObjectNotices(): array
     {
@@ -218,7 +236,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return QueryFeedbackInterface[]
      */
     public function getQueryLogs(): array
     {
@@ -234,7 +252,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return SchemaFeedbackInterface[]
      */
     public function getSchemaLogs(): array
     {
@@ -250,7 +268,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return ObjectFeedbackInterface[]
      */
     public function getObjectLogs(): array
     {
@@ -266,7 +284,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return QueryFeedbackInterface[]
      */
     public function getQueryTraces(): array
     {
@@ -282,7 +300,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return SchemaFeedbackInterface[]
      */
     public function getSchemaTraces(): array
     {
@@ -298,7 +316,7 @@ class FeedbackStore
     }
 
     /**
-     * @return array
+     * @return ObjectFeedbackInterface[]
      */
     public function getObjectTraces(): array
     {
