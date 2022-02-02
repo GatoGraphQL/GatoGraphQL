@@ -13,11 +13,11 @@ class AbstractSchemaFeedback extends AbstractQueryFeedback implements SchemaFeed
         string $message,
         string $code,
         Location $location,
-        array $data = [],
-        array $extensions = [],
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var string[] */
         protected array $fields,
+        array $data = [],
+        array $extensions = [],
     ) {
         parent::__construct(
             $message,

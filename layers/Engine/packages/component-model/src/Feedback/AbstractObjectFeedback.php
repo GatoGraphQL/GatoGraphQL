@@ -13,22 +13,22 @@ class AbstractObjectFeedback extends AbstractSchemaFeedback implements ObjectFee
         string $message,
         string $code,
         Location $location,
-        array $data = [],
-        array $extensions = [],
         RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var string[] */
         array $fields,
         /** @var array<string|int> */
         protected array $objectIDs,
+        array $data = [],
+        array $extensions = [],
     ) {
         parent::__construct(
             $message,
             $code,
             $location,
-            $data,
-            $extensions,
             $relationalTypeResolver,
             $fields,
+            $data,
+            $extensions,
         );
     }
     
