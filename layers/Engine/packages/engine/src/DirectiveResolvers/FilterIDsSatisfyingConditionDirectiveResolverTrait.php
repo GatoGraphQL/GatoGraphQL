@@ -11,8 +11,19 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
 {
     use RemoveIDsDataFieldsDirectiveResolverTrait;
 
-    protected function getIDsSatisfyingCondition(RelationalTypeResolverInterface $relationalTypeResolver, array $objectIDItems, array $idsDataFields, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations)
-    {
+    /**
+     * @return array<string|int>
+     */
+    protected function getIDsSatisfyingCondition(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $objectIDItems,
+        array $idsDataFields,
+        array &$variables,
+        array &$messages,
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations,
+    ): array {
         // Check the condition field. If it is satisfied, then skip those fields
         $idsSatisfyingCondition = [];
         foreach (array_keys($idsDataFields) as $id) {
