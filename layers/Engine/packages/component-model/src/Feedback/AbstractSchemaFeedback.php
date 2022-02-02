@@ -16,7 +16,8 @@ class AbstractSchemaFeedback extends AbstractQueryFeedback implements SchemaFeed
         array $data = [],
         array $extensions = [],
         protected TypeInterface $type,
-        protected string $field,
+        /** @var string[] */
+        protected array $fields,
     ) {
         parent::__construct(
             $message,
@@ -32,8 +33,11 @@ class AbstractSchemaFeedback extends AbstractQueryFeedback implements SchemaFeed
         return $this->type;
     }
 
-    public function getField(): string
+    /**
+     * @return string[]
+     */
+    public function getFields(): array
     {
-        return $this->field;
+        return $this->fields;
     }
 }

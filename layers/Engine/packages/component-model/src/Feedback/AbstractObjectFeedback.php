@@ -16,8 +16,10 @@ class AbstractObjectFeedback extends AbstractSchemaFeedback implements ObjectFee
         array $data = [],
         array $extensions = [],
         TypeInterface $type,
-        string $field,
-        protected string|int $objectID,
+        /** @var string[] */
+        array $fields,
+        /** @var array<string|int> */
+        protected array $objectIDs,
     ) {
         parent::__construct(
             $message,
@@ -26,12 +28,15 @@ class AbstractObjectFeedback extends AbstractSchemaFeedback implements ObjectFee
             $data,
             $extensions,
             $type,
-            $field,
+            $fields,
         );
     }
     
-    public function getObjectID(): string|int
+    /**
+     * @return array<string|int>
+     */
+    public function getObjectIDs(): array
     {
-        return $this->objectID;
+        return $this->objectIDs;
     }
 }
