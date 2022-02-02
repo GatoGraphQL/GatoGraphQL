@@ -1850,7 +1850,7 @@ class Engine implements EngineInterface
         array &$already_loaded_ids_data_fields,
         array &$unionDBKeyIDs,
         array &$combinedUnionDBKeyIDs,
-        array &$objectIDItems,
+        array $objectIDItems,
     ): void {
         $engineState = App::getEngineState();
         $database_key = $targetObjectTypeResolver->getTypeOutputDBKey();

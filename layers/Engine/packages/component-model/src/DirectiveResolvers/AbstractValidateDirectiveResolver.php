@@ -57,9 +57,9 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
 
     protected function validateAndFilterFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$idsDataFields,
+        array $idsDataFields,
         array &$succeedingPipelineIDsDataFields,
-        array &$objectIDItems,
+        array $objectIDItems,
         array &$dbItems,
         array &$variables,
         array &$schemaErrors,

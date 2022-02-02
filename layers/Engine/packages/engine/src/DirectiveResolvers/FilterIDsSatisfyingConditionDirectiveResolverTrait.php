@@ -11,7 +11,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
 {
     use RemoveIDsDataFieldsDirectiveResolverTrait;
 
-    protected function getIdsSatisfyingCondition(RelationalTypeResolverInterface $relationalTypeResolver, array &$objectIDItems, array &$idsDataFields, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations)
+    protected function getIdsSatisfyingCondition(RelationalTypeResolverInterface $relationalTypeResolver, array $objectIDItems, array $idsDataFields, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations)
     {
         // Check the condition field. If it is satisfied, then skip those fields
         $idsSatisfyingCondition = [];
@@ -36,7 +36,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
         return $idsSatisfyingCondition;
     }
 
-    protected function removeDataFieldsForIDs(array &$idsDataFields, array &$idsToRemove, array &$succeedingPipelineIDsDataFields)
+    protected function removeDataFieldsForIDs(array $idsDataFields, array &$idsToRemove, array &$succeedingPipelineIDsDataFields)
     {
         // Calculate the $idsDataFields that must be removed from all the upcoming stages of the pipeline
         $idsDataFieldsToRemove = array_filter(

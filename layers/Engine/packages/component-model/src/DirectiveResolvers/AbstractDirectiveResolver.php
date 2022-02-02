@@ -543,7 +543,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Indicate that there is data in variable $idsDataFields
      */
-    protected function hasIDsDataFields(array &$idsDataFields): bool
+    protected function hasIDsDataFields(array $idsDataFields): bool
     {
         foreach ($idsDataFields as $id => &$data_fields) {
             if ($data_fields['direct'] ?? null) {
@@ -1012,9 +1012,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $failureMessage,
         array $failedFields,
-        array &$idsDataFields,
+        array $idsDataFields,
         array &$succeedingPipelineIDsDataFields,
-        array &$objectIDItems,
+        array $objectIDItems,
         array &$dbItems,
         array &$objectErrors,
         array &$objectWarnings
