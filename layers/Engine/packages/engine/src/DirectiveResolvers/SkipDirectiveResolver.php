@@ -61,7 +61,7 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaTraces
     ): void {
         // Check the condition field. If it is satisfied, then skip those fields
-        $idsToRemove = $this->getIdsSatisfyingCondition($relationalTypeResolver, $objectIDItems, $idsDataFields, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations);
+        $idsToRemove = $this->getIDsSatisfyingCondition($relationalTypeResolver, $objectIDItems, $idsDataFields, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations);
         $this->removeDataFieldsForIDs($idsDataFields, $idsToRemove, $succeedingPipelineIDsDataFields);
     }
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
