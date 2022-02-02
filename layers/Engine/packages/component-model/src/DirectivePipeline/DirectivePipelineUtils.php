@@ -11,9 +11,9 @@ class DirectivePipelineUtils
     public static function convertArgumentsToPayload(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$pipelineIDsDataFields,
-        array &$pipelineDirectiveResolverInstances,
+        array $pipelineDirectiveResolverInstances,
         array $objectIDItems,
-        array &$unionDBKeyIDs,
+        array $unionDBKeyIDs,
         array $previousDBItems,
         array &$variables,
         array &$dbItems,
