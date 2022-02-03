@@ -1875,7 +1875,7 @@ class Engine implements EngineInterface
             if ($code = $queryFeedbackEntry->getCode()) {
                 $queryFeedbackEntryExtensions['code'] = $code;
             }
-            $queryFeedbackEntryExtensions['location'] = $queryFeedbackEntry->getLocation();
+            $queryFeedbackEntryExtensions['location'] = $queryFeedbackEntry->getLocation()->toArray();
             $output[$queryFeedbackEntry->getMessage()] = $queryFeedbackEntryExtensions;
         }
         return $output;
