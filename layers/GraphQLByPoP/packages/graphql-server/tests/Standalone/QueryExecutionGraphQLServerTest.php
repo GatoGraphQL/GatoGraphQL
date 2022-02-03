@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 use PoP\Engine\ObjectModels\Root;
 
-class GraphQLServerTest extends AbstractGraphQLServerTestCase
+class QueryExecutionGraphQLServerTest extends AbstractQueryExecutionGraphQLServerTestCase
 {
     public function graphQLServerExecutionProvider(): array
     {
