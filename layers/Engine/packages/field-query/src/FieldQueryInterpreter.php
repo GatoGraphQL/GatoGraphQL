@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Feedback\QueryFeedback;
+use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\QueryParsing\QueryParserInterface;
-use PoP\Root\App;
 use PoP\Root\Component as RootComponent;
 use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
+use PoP\Root\Services\BasicServiceTrait;
 use stdClass;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
@@ -109,10 +111,10 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         }
         // If the field name is missing, show an error
         if ($pos === 0) {
-            $this->getFeedbackMessageStore()->addQueryError(sprintf(
+            App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                 $this->__('Name in \'%s\' is missing', 'field-query'),
                 $field
-            ));
+            ), '', new Location(1, 1)));
             return '';
         }
         // Extract the query until the found position
@@ -188,7 +190,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 && $fieldArgsOpeningSymbolPos === false
             )
         ) {
-            $this->getFeedbackMessageStore()->addQueryError(sprintf(
+            App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                 $this->__(
                     'Arguments \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
                     'field-query'
@@ -196,7 +198,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 $field,
                 QuerySyntax::SYMBOL_FIELDARGS_OPENING,
                 QuerySyntax::SYMBOL_FIELDARGS_CLOSING
-            ));
+            ), '', new Location(1, 1)));
             return null;
         }
 
@@ -339,17 +341,17 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             $aliasSymbolPos = $fieldAliasPositionSpan[self::ALIAS_POSITION_KEY];
             if ($aliasSymbolPos === 0) {
                 // Only there is the alias, nothing to alias to
-                $this->getFeedbackMessageStore()->addQueryError(sprintf(
+                App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                     $this->__('The field to be aliased in \'%s\' is missing', 'field-query'),
                     $field
-                ));
+                ), '', new Location(1, 1)));
                 return null;
             } elseif ($aliasSymbolPos === strlen($field) - 1) {
                 // Only the "@" was added, but the alias is missing
-                $this->getFeedbackMessageStore()->addQueryError(sprintf(
+                App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                     $this->__('Alias in \'%s\' is missing', 'field-query'),
                     $field
-                ));
+                ), '', new Location(1, 1)));
                 return null;
             }
 
@@ -454,7 +456,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 && $fieldDirectivesOpeningSymbolPos === false
             )
         ) {
-            $this->getFeedbackMessageStore()->addQueryError(sprintf(
+            App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                 $this->__(
                     'Directive \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
                     'field-query'
@@ -462,7 +464,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 $field,
                 QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING,
                 QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING
-            ));
+            ), '', new Location(1, 1)));
             return null;
         }
 

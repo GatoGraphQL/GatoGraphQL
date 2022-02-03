@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\Root\App;
 use Exception;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Error\ErrorDataTokens;
 use PoP\ComponentModel\Error\ErrorServiceInterface;
+use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
@@ -28,6 +29,7 @@ use PoP\FieldQuery\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use PoP\GraphQLParser\Spec\Parser\Location;
 use stdClass;
 
 class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements FieldQueryInterpreterInterface
@@ -1688,10 +1690,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 return $variables[$variableName];
             }
             // If the variable is not set, then show the error under entry "variableErrors"
-            $this->getFeedbackMessageStore()->addQueryError(sprintf(
+            App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                 $this->__('Variable \'%s\' is undefined', 'pop-component-model'),
                 $variableName
-            ));
+            ), '', new Location(1, 1)));
             return null;
         }
 
@@ -1824,10 +1826,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 return $expressions[$expressionName];
             }
             // If the expression is not set, then show the error under entry "expressionErrors"
-            $this->getFeedbackMessageStore()->addQueryError(sprintf(
+            App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                 $this->__('Expression \'%s\' is undefined', 'pop-component-model'),
                 $expressionName
-            ));
+            ), '', new Location(1, 1)));
             return null;
         } elseif ($this->isFieldArgumentValueAField($fieldArgValue)) {
             // Execute as field
@@ -1841,11 +1843,11 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 // Show the error message, and return nothing
                 /** @var Error */
                 $error = $resolvedValue;
-                $this->getFeedbackMessageStore()->addQueryError(sprintf(
+                App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                     $this->__('Executing field \'%s\' produced error: %s', 'pop-component-model'),
                     $fieldArgValue,
                     $error->getMessageOrCode()
-                ));
+                ), '', new Location(1, 1)));
                 return null;
             }
             return $resolvedValue;
