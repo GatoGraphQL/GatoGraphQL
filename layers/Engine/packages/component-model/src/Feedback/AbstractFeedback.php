@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Feedback;
 
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class AbstractFeedback implements FeedbackInterface
+abstract class AbstractFeedback implements FeedbackInterface
 {
     public function __construct(
         protected string $message,
