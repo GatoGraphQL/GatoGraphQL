@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
 use Exception;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
@@ -19,6 +21,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
@@ -407,14 +410,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     }
                     if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
                         $id = $this->getID($object);
-                        $objectDeprecations = [];
+                        $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
                         foreach ($maybeDeprecations as $deprecation) {
-                            $objectDeprecations[(string)$id][] = [
-                                Tokens::PATH => [$field],
-                                Tokens::MESSAGE => $deprecation,
-                            ];
+                            $objectFeedbackStore->addObjectDeprecation(
+                                new ObjectFeedback(
+                                    $deprecation,
+                                    '',
+                                    new Location(1, 1),
+                                    $this,
+                                    [$field],
+                                    [$id]
+                                )
+                            );
                         }
-                        $this->getFeedbackMessageStore()->addObjectDeprecations($objectDeprecations);
                     }
                 }
                 if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {

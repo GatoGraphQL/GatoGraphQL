@@ -1638,6 +1638,14 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
+            foreach (App::getFeedbackStore()->objectFeedbackStore->getObjectDeprecations() as $objectDeprecation) {
+                foreach ($objectDeprecation->getObjectIDs() as $id) {
+                    $iterationObjectDeprecations[(string)$id][] = [
+                        Tokens::PATH => $objectDeprecation->getFields(),
+                        Tokens::MESSAGE => $objectDeprecation->getMessage(),
+                    ];
+                }
+            }
             /** @phpstan-ignore-next-line */
             if ($iterationObjectDeprecations) {
                 $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationObjectDeprecations, true, $relationalTypeResolver);
@@ -1840,17 +1848,6 @@ class Engine implements EngineInterface
         $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaDeprecations);
         $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
 
-        if ($objectDeprecations = $objectFeedbackStore->getObjectDeprecations()) {
-            $ret['objectDeprecations'] ??= [];
-            foreach ($objectDeprecations as $objectDeprecation) {
-                foreach ($objectDeprecation->getObjectIDs() as $id) {
-                    $objectDeprecations[(string)$id][] = [
-                        Tokens::PATH => $objectDeprecation->getFields(),
-                        Tokens::MESSAGE => $objectDeprecation->getMessage(),
-                    ];
-                }
-            }
-        }
 
         // Execute a hook to process the traces (in advance, we don't do anything with them)
         App::doAction(
