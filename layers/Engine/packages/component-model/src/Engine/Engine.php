@@ -2053,10 +2053,7 @@ class Engine implements EngineInterface
 
         // Combine all the databases or send them separate
         if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
-            $ret[$name] = array_merge(
-                $ret[$name] ?? [],
-                $entries
-            );
+            $ret[$name] = $entries;
             return;
         }
 
@@ -2077,10 +2074,7 @@ class Engine implements EngineInterface
                         }
                     }
                 }
-                $ret[$name] = array_merge(
-                    $ret[$name] ?? [],
-                    $combined_databases
-                );
+                $ret[$name] = $combined_databases;
             }
         }
     }
@@ -2090,14 +2084,12 @@ class Engine implements EngineInterface
         if ($entries === []) {
             return;
         }
+
         $dboutputmode = App::getState('dboutputmode');
 
         // Combine all the databases or send them separate
         if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
-            $ret[$name] = array_merge(
-                $ret[$name],
-                $entries
-            );
+            $ret[$name] = $entries;
             return;
         }
         
@@ -2111,10 +2103,7 @@ class Engine implements EngineInterface
                         $database
                     );
                 }
-                $ret[$name] = array_merge(
-                    $ret[$name],
-                    $combined_databases
-                );
+                $ret[$name] = $combined_databases;
             }
         }
     }
