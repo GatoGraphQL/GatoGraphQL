@@ -4,20 +4,56 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\ModuleProcessors;
 
-use PoP\Root\App;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\FieldQuery\QueryHelpers;
+use PoP\GraphQLParser\Spec\Parser\Location;
+use PoPAPI\API\FeedbackMessageProviders\FeedbackMessageProvider;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
+    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
+
+    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    {
+        $this->feedbackMessageProvider = $feedbackMessageProvider;
+    }
+    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    {
+        return $this->feedbackMessageProvider ??= $this->instanceManager->getInstance(FeedbackMessageProvider::class);
+    }
+
     protected function getFields(array $module, $moduleAtts): array
     {
         // If it is a virtual module, the fields are coded inside the virtual module atts
         if (!is_null($moduleAtts)) {
             return $moduleAtts['fields'];
         }
-        // If it is a normal module, it is the first added, then simply get the fields from the application state
-        return App::getState('executable-query') ?? [];
+
+        /**
+         * If it is a normal module, it is the first added,
+         * then simply get the fields from the application state.
+         *
+         * If the 'query' was not provided or empty, then add an error.
+         */
+        $executableQuery = App::getState('executable-query');
+        /**
+         * @todo: When removing the FieldQueryConvertor, this will not be an array anymore,
+         *        so remove this line and uncomment the one below
+         */
+        // if ($executableQuery === null) {
+        if ($executableQuery === []) {
+            App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(
+                new QueryFeedback(
+                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1),
+                    $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
+                    new Location(1, 1)
+                )
+            );
+            return [];
+        }
+        return $executableQuery;
     }
 
     /**

@@ -115,14 +115,11 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         $query = $state['query'];
-        if ($query === null) {
-            App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(
-                new QueryFeedback(
-                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1),
-                    $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
-                    new Location(1, 1)
-                )
-            );
+        if ($query === null || trim($query) === '') {
+            /**
+             * No need to return any error here, that will be done
+             * when processing the query in the Engine
+             */
             return;
         }
 

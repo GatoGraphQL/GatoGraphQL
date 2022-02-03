@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLQuery\Schema;
 use Exception;
 use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
-use InvalidArgumentException;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
@@ -513,12 +512,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         array $variableValues,
         ?string $operationName = null
     ): ExecutableDocumentInterface {
-        if (empty($payload)) {
-            throw new InvalidArgumentException(
-                $this->__('Must provide an operation.', 'graphql-query')
-            );
-        }
-
         /**
          * If some variable hasn't been submitted, it will throw an Exception.
          * Let it bubble up
