@@ -6,4 +6,5 @@ namespace PoP\ComponentModel\Feedback;
 
 interface ObjectFeedbackInterface extends SchemaFeedbackInterface
 {
+    public function getObjectIDs(): array;
 }
