@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 
 class IntrospectionQueryGraphQLServerTest extends AbstractGraphQLServerTestCase
 {
@@ -116,7 +117,7 @@ class IntrospectionQueryGraphQLServerTest extends AbstractGraphQLServerTestCase
                 "data" => [
                     "__schema" => [
                         "queryType" => [
-                            "name" => "QueryRoot"
+                            "name" => $this->getService(QueryRootObjectTypeResolver::class)->getTypeName()
                         ],
                         "mutationType" => [
                             "name" => $this->getService(MutationRootObjectTypeResolver::class)->getTypeName()
@@ -158,7 +159,7 @@ class IntrospectionQueryGraphQLServerTest extends AbstractGraphQLServerTestCase
                             ],
                             [
                                 "kind" => "OBJECT",
-                                "name" => "QueryRoot",
+                                "name" => $this->getService(QueryRootObjectTypeResolver::class)->getTypeName(),
                                 "description" => "Query type, starting from which the query is executed",
                                 "fields" => [
                                     [
@@ -230,7 +231,7 @@ class IntrospectionQueryGraphQLServerTest extends AbstractGraphQLServerTestCase
                                         "args" => [],
                                         "type" => [
                                             "kind" => "OBJECT",
-                                            "name" => "QueryRoot",
+                                            "name" => $this->getService(QueryRootObjectTypeResolver::class)->getTypeName(),
                                             "ofType" => null
                                         ]
                                     ]
@@ -1572,7 +1573,7 @@ class IntrospectionQueryGraphQLServerTest extends AbstractGraphQLServerTestCase
                                     ],
                                     [
                                         "kind" => "OBJECT",
-                                        "name" => "QueryRoot",
+                                        "name" => $this->getService(QueryRootObjectTypeResolver::class)->getTypeName(),
                                         "ofType" => null
                                     ],
                                     [
