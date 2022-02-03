@@ -11,7 +11,7 @@ class SchemaFeedback extends QueryFeedback implements SchemaFeedbackInterface
 {
     public function __construct(
         string $message,
-        string $code,
+        ?string $code,
         Location $location,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var string[] */

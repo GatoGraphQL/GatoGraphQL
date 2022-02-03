@@ -10,7 +10,7 @@ abstract class AbstractFeedback implements FeedbackInterface
 {
     public function __construct(
         protected string $message,
-        protected string $code,
+        protected ?string $code,
         protected Location $location,
         /** @var array<string, mixed> */
         protected array $data = [],
@@ -22,7 +22,7 @@ abstract class AbstractFeedback implements FeedbackInterface
         return $this->message;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }

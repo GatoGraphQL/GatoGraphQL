@@ -10,7 +10,7 @@ class QueryFeedback extends AbstractFeedback implements QueryFeedbackInterface
 {
     public function __construct(
         string $message,
-        string $code,
+        ?string $code,
         Location $location,
         /** @var array<string, mixed> */
         array $data = [],

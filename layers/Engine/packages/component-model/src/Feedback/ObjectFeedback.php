@@ -11,7 +11,7 @@ class ObjectFeedback extends SchemaFeedback implements ObjectFeedbackInterface
 {
     public function __construct(
         string $message,
-        string $code,
+        ?string $code,
         Location $location,
         RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var string[] */
