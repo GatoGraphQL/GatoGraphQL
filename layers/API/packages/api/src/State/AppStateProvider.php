@@ -118,8 +118,8 @@ class AppStateProvider extends AbstractAppStateProvider
         if ($query === null) {
             App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(
                 new QueryFeedback(
-                    $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
                     $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1),
+                    $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
                     new Location(1, 1)
                 )
             );
