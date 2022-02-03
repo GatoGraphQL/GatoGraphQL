@@ -2094,7 +2094,10 @@ class Engine implements EngineInterface
 
         // Combine all the databases or send them separate
         if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
-            $ret[$name] = $entries;
+            $ret[$name] = array_merge(
+                $ret[$name],
+                $entries
+            );
             return;
         }
         
@@ -2108,7 +2111,10 @@ class Engine implements EngineInterface
                         $database
                     );
                 }
-                $ret[$name] = $combined_databases;
+                $ret[$name] = array_merge(
+                    $ret[$name],
+                    $combined_databases
+                );
             }
         }
     }
