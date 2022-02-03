@@ -203,12 +203,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $storedObjectWarnings
             );
         }
-        if ($storedObjectDeprecations = $this->getFeedbackMessageStore()->retrieveAndClearObjectDeprecations($id)) {
-            $objectDeprecations[$id] = array_merge(
-                $objectDeprecations[$id] ?? [],
-                $storedObjectDeprecations
-            );
-        }
 
         return $value;
     }

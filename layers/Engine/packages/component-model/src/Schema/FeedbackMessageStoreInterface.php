@@ -9,10 +9,8 @@ use PoP\FieldQuery\FeedbackMessageStoreInterface as UpstreamFeedbackMessageStore
 interface FeedbackMessageStoreInterface extends UpstreamFeedbackMessageStoreInterface
 {
     public function addObjectWarnings(array $objectWarnings);
-    public function addObjectDeprecations(array $objectDeprecations);
     public function addSchemaWarnings(array $schemaWarnings);
     public function retrieveAndClearObjectWarnings(string | int $objectID): ?array;
-    public function retrieveAndClearObjectDeprecations(string | int $objectID): ?array;
     public function addSchemaError(string $dbKey, string $field, string $error);
     public function retrieveAndClearSchemaErrors(): array;
     public function retrieveAndClearSchemaWarnings(): array;

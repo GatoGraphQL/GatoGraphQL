@@ -39,15 +39,6 @@ class FeedbackMessageStore extends UpstreamFeedbackMessageStore implements Feedb
             );
         }
     }
-    public function addObjectDeprecations(array $objectDeprecations): void
-    {
-        foreach ($objectDeprecations as $objectID => $objectDeprecations) {
-            $this->objectDeprecations[$objectID] = array_merge(
-                $this->objectDeprecations[$objectID] ?? [],
-                $objectDeprecations
-            );
-        }
-    }
     public function addSchemaWarnings(array $schemaWarnings): void
     {
         $this->schemaWarnings = array_merge(
@@ -60,12 +51,6 @@ class FeedbackMessageStore extends UpstreamFeedbackMessageStore implements Feedb
         $objectWarnings = $this->objectWarnings[$objectID] ?? null;
         unset($this->objectWarnings[$objectID]);
         return $objectWarnings;
-    }
-    public function retrieveAndClearObjectDeprecations(string | int $objectID): ?array
-    {
-        $objectDeprecations = $this->objectDeprecations[$objectID] ?? null;
-        unset($this->objectDeprecations[$objectID]);
-        return $objectDeprecations;
     }
 
     public function addSchemaError(string $dbKey, string $field, string $error): void
