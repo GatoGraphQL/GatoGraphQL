@@ -68,6 +68,7 @@ class Document implements DocumentInterface
      */
     public function validate(): void
     {
+        $this->assertQueryNotEmpty();
         $this->assertOperationsDefined();
         $this->assertOperationNamesUnique();
         $this->assertNonEmptyOperationName();
@@ -84,12 +85,26 @@ class Document implements DocumentInterface
     /**
      * @throws InvalidRequestException
      */
+    protected function assertQueryNotEmpty(): void
+    {
+        if ($this->getOperations() === [] && $this->getFragments() === []) {
+            throw new InvalidRequestException(
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_C),
+                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_C),
+                $this->getNonSpecificLocation()
+            );
+        }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
     protected function assertOperationsDefined(): void
     {
         if ($this->getOperations() === []) {
             throw new InvalidRequestException(
-                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_C),
-                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_C),
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_D),
+                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_D),
                 $this->getNonSpecificLocation()
             );
         }

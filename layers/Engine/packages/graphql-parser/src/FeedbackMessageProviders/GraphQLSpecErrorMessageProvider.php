@@ -45,6 +45,7 @@ class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
     public const E_6_1_A = '6.1.a';
     public const E_6_1_B = '6.1.b';
     public const E_6_1_C = '6.1.c';
+    public const E_6_1_D = '6.1.d';
 
     protected function getNamespace(): string
     {
@@ -93,6 +94,7 @@ class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
             self::E_6_1_A,
             self::E_6_1_B,
             self::E_6_1_C,
+            self::E_6_1_D,
         ];
     }
 
@@ -134,7 +136,8 @@ class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_8_5 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
             self::E_6_1_A => $this->__('Operation with name \'%s\' does not exist', 'graphql-server'),
             self::E_6_1_B => $this->__('When the document contains more than one operation, the operation name to execute must be provided', 'graphql-server'),
-            self::E_6_1_C => $this->__('No operations defined in the document', 'graphql-server'),
+            self::E_6_1_C => $this->__('The query has not been provided', 'graphql-server'),
+            self::E_6_1_D => $this->__('No operations defined in the document', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -182,7 +185,8 @@ class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
             self::E_5_8_5 => 'https://spec.graphql.org/draft/#sec-All-Variable-Usages-are-Allowed',
             self::E_6_1_A,
             self::E_6_1_B,
-            self::E_6_1_C
+            self::E_6_1_C,
+            self::E_6_1_D
                 => 'https://spec.graphql.org/draft/#sec-Executing-Requests',
             default => parent::getSpecifiedByURL($code),
         };
