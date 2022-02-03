@@ -22,6 +22,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
@@ -395,7 +396,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         new ObjectFeedback(
                             $deprecationEntry[Tokens::MESSAGE],
                             '',
-                            new Location(1, 1),
+                            LocationHelper::getNonSpecificLocation(),
                             $this,
                             $deprecationEntry[Tokens::PATH],
                             [$id]
@@ -421,7 +422,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 new ObjectFeedback(
                                     $deprecation,
                                     '',
-                                    new Location(1, 1),
+                                    LocationHelper::getNonSpecificLocation(),
                                     $this,
                                     [$field],
                                     [$id]

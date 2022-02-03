@@ -10,6 +10,7 @@ use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 
@@ -104,7 +105,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
                 throw new InvalidRequestException(
                     $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_B),
                     $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_B),
-                    $this->getNonSpecificLocation()
+                    LocationHelper::getNonSpecificLocation()
                 );
             }
             // There is exactly 1 operation
@@ -119,15 +120,10 @@ class ExecutableDocument implements ExecutableDocumentInterface
             throw new InvalidRequestException(
                 $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_A, $this->context->getOperationName()),
                 $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_A),
-                $this->getNonSpecificLocation()
+                LocationHelper::getNonSpecificLocation()
             );
         }
         return $requestedOperations;
-    }
-
-    protected function getNonSpecificLocation(): Location
-    {
-        return new Location(1, 1);
     }
 
     /**
@@ -174,7 +170,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             throw new InvalidRequestException(
                 $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, __FUNCTION__),
                 $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
-                $this->getNonSpecificLocation()
+                LocationHelper::getNonSpecificLocation()
             );
         }
         return $this->requestedOperations;
