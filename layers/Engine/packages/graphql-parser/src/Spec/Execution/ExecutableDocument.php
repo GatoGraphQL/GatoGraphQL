@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Execution;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackMessage\FeedbackMessageProvider;
-use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackMessageProviders\FeedbackMessageProvider;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;

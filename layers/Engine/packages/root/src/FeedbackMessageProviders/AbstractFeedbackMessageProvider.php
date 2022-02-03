@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\FeedbackMessage;
+namespace PoP\Root\FeedbackMessageProviders;
 
 use Exception;
 use PoP\Root\Helpers\ClassHelpers;

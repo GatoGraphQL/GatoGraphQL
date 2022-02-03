@@ -6,7 +6,7 @@ namespace PoP\Engine\Upstream\ComponentModel\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
-use PoP\GraphQLParser\FeedbackMessage\GraphQLExtendedSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLExtendedSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;

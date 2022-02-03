@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
-use PoP\GraphQLParser\FeedbackMessage\GraphQLParserErrorMessageProvider;
-use PoP\GraphQLParser\FeedbackMessage\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLParserErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
