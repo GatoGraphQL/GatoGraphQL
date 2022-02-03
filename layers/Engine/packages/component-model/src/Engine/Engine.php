@@ -1807,7 +1807,7 @@ class Engine implements EngineInterface
             }
         }
 
-        $queryFeedbackStore = App::getFeedbackStore()->getQueryFeedbackStore();
+        $queryFeedbackStore = App::getFeedbackStore()->queryFeedbackStore;
         
         // Add the feedback (errors, warnings, deprecations) into the output
         if ($queryErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {

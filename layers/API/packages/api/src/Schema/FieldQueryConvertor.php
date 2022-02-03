@@ -153,7 +153,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                                     $bookmark,
                                     $commafields
                                 );
-                                App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(new QueryFeedback($errorMessage, '', new Location(1, 1)));
+                                App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback($errorMessage, '', new Location(1, 1)));
                                 unset($bookmarkPaths[QueryTokens::TOKEN_BOOKMARK_PREV]);
                                 continue;
                             }
@@ -175,7 +175,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                             // If the validation is a string, then it's an error
                             if (is_string($errorMessageOrSymbolPositions)) {
                                 $error = (string)$errorMessageOrSymbolPositions;
-                                App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(new QueryFeedback($error, '', new Location(1, 1)));
+                                App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback($error, '', new Location(1, 1)));
                                 unset($bookmarkPaths[QueryTokens::TOKEN_BOOKMARK_PREV]);
                                 // Exit 2 levels, so it doesn't process the whole query section, not just the property
                                 continue 2;
@@ -212,7 +212,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                         // If the validation is a string, then it's an error
                         if (is_string($errorMessageOrSymbolPositions)) {
                             $error = (string)$errorMessageOrSymbolPositions;
-                            App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(new QueryFeedback($error, '', new Location(1, 1)));
+                            App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback($error, '', new Location(1, 1)));
                             // Exit 1 levels, so it ignores only this property but keeps processing the others
                             continue;
                         }
@@ -494,7 +494,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         foreach ($fragments as $fragmentName => $fragment) {
             $fragmentDotNotations = $this->getQueryParser()->splitElements($fragment, FieldQueryQuerySyntax::SYMBOL_OPERATIONS_SEPARATOR, [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING], [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING], FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
             if (count($fragmentDotNotations) >= 2) {
-                App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(new QueryFeedback(sprintf(
+                App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                     $errorMessage,
                     $fragmentName,
                     $fragment,
@@ -505,7 +505,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
             }
             $fragmentCommaFields = $this->getQueryParser()->splitElements($fragment, FieldQueryQuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR, [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING], [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING], FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
             if (count($fragmentCommaFields) >= 2) {
-                App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(new QueryFeedback(sprintf(
+                App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                     $errorMessage,
                     $fragmentName,
                     $fragment,
@@ -701,7 +701,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         // Validate the fragment name is not forbidden
         $forbiddenFragmentNames = $this->getForbiddenFragmentNames();
         if (in_array($fragmentName, $forbiddenFragmentNames)) {
-            App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(new QueryFeedback(sprintf(
+            App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                 $this->__('Fragment name \'%s\' is forbidden, please use another one. (All forbidden fragment names are: \'%s\'.)', 'api'),
                 $fragmentName,
                 implode(
@@ -723,14 +723,14 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         if ($aliasSymbolPos !== false) {
             if ($aliasSymbolPos === 0) {
                 // Only there is the alias, nothing to alias to
-                App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(new QueryFeedback(sprintf(
+                App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                     $this->__('The fragment to be aliased in \'%s\' is missing', 'api'),
                     $fragmentName
                 ), '', new Location(1, 1)));
                 return null;
             } elseif ($aliasSymbolPos === strlen($fragmentName) - 1) {
                 // Only the "@" was added, but the alias is missing
-                App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(new QueryFeedback(sprintf(
+                App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                     $this->__('Alias in \'%s\' is missing', 'api'),
                     $fragmentName
                 ), '', new Location(1, 1)));
@@ -760,7 +760,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         if ($fieldDirectivesOpeningSymbolPos !== false || $fieldDirectivesClosingSymbolPos !== false) {
             // First check both "<" and ">" are present, or it's an error
             if ($fieldDirectivesOpeningSymbolPos === false || $fieldDirectivesClosingSymbolPos === false) {
-                App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(new QueryFeedback(sprintf(
+                App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                     $this->__('Fragment \'%s\' must contain both \'%s\' and \'%s\' to define directives, so it has been ignored', 'api'),
                     $fragmentName,
                     FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING,
@@ -780,7 +780,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         }
         $fragment = $this->getFragment($fragmentName, $fragments);
         if (!$fragment) {
-            App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(new QueryFeedback(sprintf(
+            App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                 $this->__('Fragment \'%s\' is undefined, so it has been ignored', 'api'),
                 $fragmentName
             ), '', new Location(1, 1)));
@@ -815,7 +815,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                 if ($fragmentFieldDirectivesOpeningSymbolPos !== false || $fragmentFieldDirectivesClosingSymbolPos !== false) {
                     // First check both "<" and ">" are present, or it's an error
                     if ($fragmentFieldDirectivesOpeningSymbolPos === false || $fragmentFieldDirectivesClosingSymbolPos === false) {
-                        App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(new QueryFeedback(sprintf(
+                        App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                             $this->__('Fragment field \'%s\' must contain both \'%s\' and \'%s\' to define directives, so it has been ignored', 'api'),
                             $fragmentField,
                             FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING,
@@ -906,7 +906,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                 // Replace with the actual fragment
                 $resolvedFragment = $this->resolveFragmentOrAddError($pipeField, $fragments);
                 if (is_null($resolvedFragment)) {
-                    App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(new QueryFeedback(sprintf(
+                    App::getFeedbackStore()->queryFeedbackStore->addQueryError(new QueryFeedback(sprintf(
                         $this->__('Because fragment \'%s\' has errors, query section \'%s\' has been ignored', 'api'),
                         $pipeField,
                         $commafields

@@ -6,9 +6,9 @@ namespace PoP\ComponentModel\Feedback;
 
 class FeedbackStore
 {
-    private QueryFeedbackStore $queryFeedbackStore;
-    private SchemaFeedbackStore $schemaFeedbackStore;
-    private ObjectFeedbackStore $objectFeedbackStore;
+    public QueryFeedbackStore $queryFeedbackStore;
+    public SchemaFeedbackStore $schemaFeedbackStore;
+    public ObjectFeedbackStore $objectFeedbackStore;
 
     public function __construct()
     {
@@ -28,20 +28,5 @@ class FeedbackStore
     public function regenerateObjectFeedbackStore(): void
     {
         $this->objectFeedbackStore = new ObjectFeedbackStore();
-    }
-
-    public function getQueryFeedbackStore(): QueryFeedbackStore
-    {
-        return $this->queryFeedbackStore;
-    }
-
-    public function getSchemaFeedbackStore(): SchemaFeedbackStore
-    {
-        return $this->schemaFeedbackStore;
-    }
-
-    public function getObjectFeedbackStore(): ObjectFeedbackStore
-    {
-        return $this->objectFeedbackStore;
     }
 }
