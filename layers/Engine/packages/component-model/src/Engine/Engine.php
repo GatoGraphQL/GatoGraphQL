@@ -1831,8 +1831,17 @@ class Engine implements EngineInterface
                 $this->getQueryFeedbackEntriesForOutput($queryErrors)
             );
         }
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectDeprecations);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectNotices);
+        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaErrors', $schemaErrors);
+        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaWarnings);
+        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaDeprecations);
+        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
+
         if ($objectDeprecations = $objectFeedbackStore->getObjectDeprecations()) {
-            $ret['objectDeprecations'] = [];
+            $ret['objectDeprecations'] ??= [];
             foreach ($objectDeprecations as $objectDeprecation) {
                 foreach ($objectDeprecation->getObjectIDs() as $id) {
                     $objectDeprecations[(string)$id][] = [
@@ -1842,14 +1851,6 @@ class Engine implements EngineInterface
                 }
             }
         }
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectDeprecations);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectNotices);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaErrors', $schemaErrors);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaWarnings);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaDeprecations);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
 
         // Execute a hook to process the traces (in advance, we don't do anything with them)
         App::doAction(
