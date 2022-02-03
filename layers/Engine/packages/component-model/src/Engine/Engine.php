@@ -1806,12 +1806,28 @@ class Engine implements EngineInterface
             }
         }
 
+        $queryFeedbackStore = App::getFeedbackStore()->getQueryFeedbackStore();
+        
         // Add the feedback (errors, warnings, deprecations) into the output
         if ($queryErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
             $ret['queryErrors'] = $queryErrors;
         }
+        if ($queryErrors = $queryFeedbackStore->getQueryErrors()) {
+            // @todo: Also send the code/Location/extensions
+            $ret['queryErrors'] ??= [];
+            foreach ($queryErrors as $queryError) {
+                $ret['queryErrors'][] = $queryError->getMessage();
+            }
+        }
         if ($queryWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
             $ret['queryWarnings'] = $queryWarnings;
+        }
+        if ($queryWarnings = $queryFeedbackStore->getQueryWarnings()) {
+            // @todo: Also send the code/Location/extensions
+            $ret['queryWarnings'] ??= [];
+            foreach ($queryWarnings as $queryWarning) {
+                $ret['queryWarnings'][] = $queryWarning->getMessage();
+            }
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
