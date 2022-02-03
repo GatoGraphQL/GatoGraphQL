@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Feedback;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class AbstractSchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInterface
+class SchemaFeedback extends QueryFeedback implements SchemaFeedbackInterface
 {
     public function __construct(
         string $message,
