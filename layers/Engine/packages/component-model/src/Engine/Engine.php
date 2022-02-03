@@ -27,6 +27,7 @@ use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\QueryFeedbackInterface;
+use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
@@ -1808,6 +1809,8 @@ class Engine implements EngineInterface
         }
 
         $queryFeedbackStore = App::getFeedbackStore()->queryFeedbackStore;
+        $schemaFeedbackStore = App::getFeedbackStore()->schemaFeedbackStore;
+        $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
         
         // Add the feedback (errors, warnings, deprecations) into the output
         if ($queryErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
@@ -1827,6 +1830,17 @@ class Engine implements EngineInterface
                 $ret['queryWarnings'] ?? [],
                 $this->getQueryFeedbackEntriesForOutput($queryErrors)
             );
+        }
+        if ($objectDeprecations = $objectFeedbackStore->getObjectDeprecations()) {
+            $ret['objectDeprecations'] = [];
+            foreach ($objectDeprecations as $objectDeprecation) {
+                foreach ($objectDeprecation->getObjectIDs() as $id) {
+                    $objectDeprecations[(string)$id][] = [
+                        Tokens::PATH => $objectDeprecation->getFields(),
+                        Tokens::MESSAGE => $objectDeprecation->getMessage(),
+                    ];
+                }
+            }
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
@@ -2073,24 +2087,28 @@ class Engine implements EngineInterface
 
     protected function maybeCombineAndAddSchemaEntries(array &$ret, string $name, array $entries): void
     {
-        if ($entries) {
-            $dboutputmode = App::getState('dboutputmode');
+        if ($entries === []) {
+            return;
+        }
+        $dboutputmode = App::getState('dboutputmode');
 
-            // Combine all the databases or send them separate
-            if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
-                $ret[$name] = $entries;
-            } elseif ($dboutputmode == DatabasesOutputModes::COMBINED) {
-                // Filter to make sure there are entries
-                if ($entries = array_filter($entries)) {
-                    $combined_databases = [];
-                    foreach ($entries as $database_name => $database) {
-                        $combined_databases = array_merge_recursive(
-                            $combined_databases,
-                            $database
-                        );
-                    }
-                    $ret[$name] = $combined_databases;
+        // Combine all the databases or send them separate
+        if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
+            $ret[$name] = $entries;
+            return;
+        }
+        
+        if ($dboutputmode == DatabasesOutputModes::COMBINED) {
+            // Filter to make sure there are entries
+            if ($entries = array_filter($entries)) {
+                $combined_databases = [];
+                foreach ($entries as $database_name => $database) {
+                    $combined_databases = array_merge_recursive(
+                        $combined_databases,
+                        $database
+                    );
                 }
+                $ret[$name] = $combined_databases;
             }
         }
     }
