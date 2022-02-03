@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\FeedbackMessage;
+namespace PoP\GraphQLParser\FeedbackMessageProviders;
 
-use PoP\Root\FeedbackMessage\AbstractFeedbackMessageProvider;
+use PoP\Root\FeedbackMessageProviders\AbstractFeedbackMessageProvider;
 use PoP\Root\FeedbackMessage\FeedbackMessageCategories;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider

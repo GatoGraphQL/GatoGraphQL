@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
-use PoP\GraphQLParser\FeedbackMessage\GraphQLParserErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLParserErrorMessageProvider;
 use PoP\Root\Services\BasicServiceTrait;
 
 class Tokenizer

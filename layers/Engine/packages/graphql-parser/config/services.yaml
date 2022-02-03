@@ -16,5 +16,5 @@ services:
     PoP\GraphQLParser\Response\OutputServiceInterface:
         class: \PoP\GraphQLParser\Response\OutputService
 
-    PoP\GraphQLParser\FeedbackMessage\:
-        resource: '../src/FeedbackMessage/*'
+    PoP\GraphQLParser\FeedbackMessageProviders\:
+        resource: '../src/FeedbackMessageProviders/*'

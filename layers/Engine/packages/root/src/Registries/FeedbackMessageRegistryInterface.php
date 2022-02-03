@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Registries;
 
-use PoP\Root\FeedbackMessage\FeedbackMessageProviderInterface;
+use PoP\Root\FeedbackMessageProviders\FeedbackMessageProviderInterface;
 
 interface FeedbackMessageRegistryInterface
 {
