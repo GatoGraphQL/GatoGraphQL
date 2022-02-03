@@ -26,6 +26,7 @@ use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\QueryFeedbackInterface;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
@@ -1813,21 +1814,19 @@ class Engine implements EngineInterface
             $ret['queryErrors'] = $queryErrors;
         }
         if ($queryErrors = $queryFeedbackStore->getQueryErrors()) {
-            // @todo: Also send the code/Location/extensions
-            $ret['queryErrors'] ??= [];
-            foreach ($queryErrors as $queryError) {
-                $ret['queryErrors'][] = $queryError->getMessage();
-            }
+            $ret['queryErrors'] = array_merge(
+                $ret['queryErrors'] ?? [],
+                $this->getQueryFeedbackEntriesForOutput($queryErrors)
+            );
         }
         if ($queryWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
             $ret['queryWarnings'] = $queryWarnings;
         }
         if ($queryWarnings = $queryFeedbackStore->getQueryWarnings()) {
-            // @todo: Also send the code/Location/extensions
-            $ret['queryWarnings'] ??= [];
-            foreach ($queryWarnings as $queryWarning) {
-                $ret['queryWarnings'][] = $queryWarning->getMessage();
-            }
+            $ret['queryWarnings'] = array_merge(
+                $ret['queryWarnings'] ?? [],
+                $this->getQueryFeedbackEntriesForOutput($queryErrors)
+            );
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
@@ -1862,6 +1861,24 @@ class Engine implements EngineInterface
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
 
         return $ret;
+    }
+
+    /**
+     * @param QueryFeedbackInterface[] $queryFeedbackEntries
+     * @return array<string,mixed>
+     */
+    protected function getQueryFeedbackEntriesForOutput(array $queryFeedbackEntries): array
+    {
+        $output = [];
+        foreach ($queryFeedbackEntries as $queryFeedbackEntry) {
+            $queryFeedbackEntryExtensions = $queryFeedbackEntry->getExtensions();
+            if ($code = $queryFeedbackEntry->getCode()) {
+                $queryFeedbackEntryExtensions['code'] = $code;
+            }
+            $queryFeedbackEntryExtensions['location'] = $queryFeedbackEntry->getLocation();
+            $output[$queryFeedbackEntry->getMessage()] = $queryFeedbackEntryExtensions;
+        }
+        return $output;
     }
 
     protected function processSubcomponentData(
