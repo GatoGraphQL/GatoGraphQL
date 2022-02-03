@@ -34,26 +34,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         /**
          * If it is a normal module, it is the first added,
          * then simply get the fields from the application state.
-         *
-         * If the 'query' was not provided or empty, then add an error.
          */
-        $executableQuery = App::getState('executable-query');
-        /**
-         * @todo: When removing the FieldQueryConvertor, this will not be an array anymore,
-         *        so remove this line and uncomment the one below
-         */
-        // if ($executableQuery === null) {
-        if ($executableQuery === []) {
-            App::getFeedbackStore()->getQueryFeedbackStore()->addQueryError(
-                new QueryFeedback(
-                    $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1),
-                    $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
-                    new Location(1, 1)
-                )
-            );
-            return [];
-        }
-        return $executableQuery;
+        return App::getState('executable-query') ?? [];
     }
 
     /**
