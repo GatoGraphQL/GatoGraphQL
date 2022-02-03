@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\Schema;
 
-use PoP\Root\App;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\FieldQuery\QueryHelpers;
+use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
+use PoP\FieldQuery\QueryUtils;
+use PoP\QueryParsing\QueryParserInterface;
+use PoP\Root\Services\BasicServiceTrait;
 use PoPAPI\API\Component;
 use PoPAPI\API\ComponentConfiguration;
 use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoPAPI\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;
 use PoPAPI\API\Schema\QuerySyntax as APIQuerySyntax;
-use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\Root\Services\BasicServiceTrait;
-use PoP\FieldQuery\QueryHelpers;
-use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
-use PoP\FieldQuery\QueryUtils;
-use PoP\QueryParsing\QueryParserInterface;
 
 use function count;
 use function strlen;
