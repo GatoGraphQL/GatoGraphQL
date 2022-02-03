@@ -5,25 +5,11 @@ declare(strict_types=1);
 namespace PoPAPI\API\ModuleProcessors;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\FieldQuery\QueryHelpers;
-use PoP\GraphQLParser\Spec\Parser\Location;
-use PoPAPI\API\FeedbackMessageProviders\FeedbackMessageProvider;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
-    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
-
-    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
-    {
-        $this->feedbackMessageProvider = $feedbackMessageProvider;
-    }
-    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
-    {
-        return $this->feedbackMessageProvider ??= $this->instanceManager->getInstance(FeedbackMessageProvider::class);
-    }
-
     protected function getFields(array $module, $moduleAtts): array
     {
         // If it is a virtual module, the fields are coded inside the virtual module atts
