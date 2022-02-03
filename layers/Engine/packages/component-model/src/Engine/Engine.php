@@ -1817,7 +1817,7 @@ class Engine implements EngineInterface
         }
 
         $queryFeedbackStore = App::getFeedbackStore()->queryFeedbackStore;
-        
+
         // Add the feedback (errors, warnings, deprecations) into the output
         if ($queryErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
             $ret['queryErrors'] = $queryErrors;
@@ -2088,7 +2088,7 @@ class Engine implements EngineInterface
             $ret[$name] = $entries;
             return;
         }
-        
+
         if ($dboutputmode == DatabasesOutputModes::COMBINED) {
             // Filter to make sure there are entries
             if ($entries = array_filter($entries)) {

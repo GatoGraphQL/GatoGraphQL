@@ -9,7 +9,6 @@ use PoP\GraphQLParser\FeedbackMessageProviders\FeedbackMessageProvider;
 use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
-use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;

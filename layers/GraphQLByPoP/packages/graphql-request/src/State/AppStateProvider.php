@@ -69,7 +69,7 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         $state['standard-graphql'] = true;
-        
+
         // @todo Remove this code, to temporarily convert back from GraphQL to PoP query
         // ---------------------------------------------
         list(
