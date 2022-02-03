@@ -2031,31 +2031,36 @@ class Engine implements EngineInterface
     {
         // Do not add the "database", "userstatedatabase" entries unless there are values in them
         // Otherwise, it messes up integrating the current databases in the webplatform with those from the response when deep merging them
-        if ($entries) {
-            $dboutputmode = App::getState('dboutputmode');
+        if ($entries === []) {
+            return;
+        }
 
-            // Combine all the databases or send them separate
-            if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
-                $ret[$name] = $entries;
-            } elseif ($dboutputmode == DatabasesOutputModes::COMBINED) {
-                // Filter to make sure there are entries
-                if ($entries = array_filter($entries)) {
-                    $combined_databases = [];
-                    foreach ($entries as $database_name => $database) {
-                        // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
-                        foreach ($database as $database_key => $dbItems) {
-                            foreach ($dbItems as $dbobject_id => $dbobject_values) {
-                                $combined_databases[$database_key][(string)$dbobject_id] = array_merge(
-                                    $combined_databases[$database_key][(string)$dbobject_id] ?? [],
-                                    // If field "id" for this type has been disabled (eg: by ACL),
-                                    // then $dbObject may be `null`
-                                    $dbobject_values ?? []
-                                );
-                            }
+        $dboutputmode = App::getState('dboutputmode');
+
+        // Combine all the databases or send them separate
+        if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
+            $ret[$name] = $entries;
+            return;
+        }
+
+        if ($dboutputmode == DatabasesOutputModes::COMBINED) {
+            // Filter to make sure there are entries
+            if ($entries = array_filter($entries)) {
+                $combined_databases = [];
+                foreach ($entries as $database_name => $database) {
+                    // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
+                    foreach ($database as $database_key => $dbItems) {
+                        foreach ($dbItems as $dbobject_id => $dbobject_values) {
+                            $combined_databases[$database_key][(string)$dbobject_id] = array_merge(
+                                $combined_databases[$database_key][(string)$dbobject_id] ?? [],
+                                // If field "id" for this type has been disabled (eg: by ACL),
+                                // then $dbObject may be `null`
+                                $dbobject_values ?? []
+                            );
                         }
                     }
-                    $ret[$name] = $combined_databases;
                 }
+                $ret[$name] = $combined_databases;
             }
         }
     }
