@@ -6,6 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServer;
 use PHPUnit\Framework\TestCase;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 abstract class AbstractGraphQLServerTestCase extends TestCase
 {
@@ -17,6 +18,11 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
             static::getGraphQLServerComponentClasses(),
             static::getGraphQLServerComponentClassConfiguration()
         );
+    }
+
+    protected function getService(string $service): mixed
+    {
+        return InstanceManagerFacade::getInstance()->getInstance($service);
     }
 
     protected static function getGraphQLServer(): GraphQLServer
@@ -40,10 +46,7 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         return [];
     }
 
-    /**
-     * @dataProvider graphQLServerExecutionProvider
-     */
-    public function testGraphQLServerExecution(string $query, array $expectedResponse): void
+    protected function assertGraphQLQueryExecution(string $query, array $expectedResponse): void
     {
         $response = self::getGraphQLServer()->execute($query);
         $this->assertJsonStringEqualsJsonString(
@@ -51,6 +54,4 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
             $response->getContent()
         );
     }
-
-    abstract public function graphQLServerExecutionProvider(): array;
 }
