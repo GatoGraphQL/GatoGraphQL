@@ -1631,10 +1631,12 @@ class Engine implements EngineInterface
                 $iterationFeedbackStoreObjectWarnings = [];
                 $fields = $objectWarning->getFields();
                 $message = $objectWarning->getMessage();
-                $extensions = $objectWarning->getExtensions();
-                if ($location = $objectWarning->getLocation()) {
-                    $extensions['location'] = $location->toArray();
-                }
+                $extensions = array_merge(
+                    $objectWarning->getExtensions(),
+                    [
+                        'location' => $objectWarning->getLocation()->toArray(),
+                    ]
+                );
                 foreach ($objectWarning->getObjectIDs() as $id) {
                     $iterationFeedbackStoreObjectWarnings[(string)$id][] = [
                         Tokens::PATH => $fields,
@@ -1666,10 +1668,12 @@ class Engine implements EngineInterface
                 $iterationFeedbackStoreObjectDeprecations = [];
                 $fields = $objectDeprecation->getFields();
                 $message = $objectDeprecation->getMessage();
-                $extensions = $objectDeprecation->getExtensions();
-                if ($location = $objectDeprecation->getLocation()) {
-                    $extensions['location'] = $location->toArray();
-                }
+                $extensions = array_merge(
+                    $objectDeprecation->getExtensions(),
+                    [
+                        'location' => $objectDeprecation->getLocation()->toArray(),
+                    ]
+                );
                 foreach ($objectDeprecation->getObjectIDs() as $id) {
                     $iterationFeedbackStoreObjectDeprecations[(string)$id][] = [
                         Tokens::PATH => $fields,
@@ -1716,10 +1720,12 @@ class Engine implements EngineInterface
             $feedbackStoreSchemaErrors = App::getFeedbackStore()->schemaFeedbackStore->getSchemaErrors();
             foreach ($feedbackStoreSchemaErrors as $schemaError) {
                 $iterationFeedbackStoreSchemaErrors = [];
-                $extensions = $schemaError->getExtensions();
-                if ($location = $schemaError->getLocation()) {
-                    $extensions['location'] = $location->toArray();
-                }
+                $extensions = array_merge(
+                    $schemaError->getExtensions(),
+                    [
+                        'location' => $schemaError->getLocation()->toArray(),
+                    ]
+                );
                 $iterationFeedbackStoreSchemaErrors[] = [
                     Tokens::PATH => $schemaError->getFields(),
                     Tokens::MESSAGE => $schemaError->getMessage(),
@@ -1746,10 +1752,12 @@ class Engine implements EngineInterface
             $feedbackStoreSchemaWarnings = App::getFeedbackStore()->schemaFeedbackStore->getSchemaWarnings();
             foreach ($feedbackStoreSchemaWarnings as $schemaWarning) {
                 $iterationFeedbackStoreSchemaWarnings = [];
-                $extensions = $schemaWarning->getExtensions();
-                if ($location = $schemaWarning->getLocation()) {
-                    $extensions['location'] = $location->toArray();
-                }
+                $extensions = array_merge(
+                    $schemaWarning->getExtensions(),
+                    [
+                        'location' => $schemaWarning->getLocation()->toArray(),
+                    ]
+                );
                 $iterationFeedbackStoreSchemaWarnings[] = [
                     Tokens::PATH => $schemaWarning->getFields(),
                     Tokens::MESSAGE => $schemaWarning->getMessage(),
