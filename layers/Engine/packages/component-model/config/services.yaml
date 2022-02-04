@@ -72,6 +72,9 @@ services:
     PoP\ComponentModel\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
 
+    PoP\ComponentModel\FeedbackMessageProviders\:
+        resource: '../src/FeedbackMessageProviders/*'
+
     PoP\ComponentModel\FormInputs\:
         resource: '../src/FormInputs/*'
 
