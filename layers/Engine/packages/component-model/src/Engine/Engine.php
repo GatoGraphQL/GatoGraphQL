@@ -1630,6 +1630,14 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
+            foreach (App::getFeedbackStore()->objectFeedbackStore->getObjectWarnings() as $objectWarning) {
+                foreach ($objectWarning->getObjectIDs() as $id) {
+                    $iterationObjectWarnings[(string)$id][] = [
+                        Tokens::PATH => $objectWarning->getFields(),
+                        Tokens::MESSAGE => $objectWarning->getMessage(),
+                    ];
+                }
+            }
             /** @phpstan-ignore-next-line */
             if ($iterationObjectWarnings) {
                 $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationObjectWarnings, true, $relationalTypeResolver);
