@@ -1695,11 +1695,11 @@ class Engine implements EngineInterface
                     $dbNameStoreSchemaErrors
                 );
             }
-            if ($storeSchemaWarnings = $this->getFeedbackMessageStore()->retrieveAndClearSchemaWarnings()) {
-                $iterationSchemaWarnings = array_merge(
-                    $iterationSchemaWarnings,
-                    $storeSchemaWarnings
-                );
+            foreach (App::getFeedbackStore()->schemaFeedbackStore->getSchemaWarnings() as $schemaWarning) {
+                $iterationSchemaWarnings[] = [
+                    Tokens::PATH => $schemaWarning->getFields(),
+                    Tokens::MESSAGE => $schemaWarning->getMessage(),
+                ];
             }
             /** @phpstan-ignore-next-line */
             if ($iterationSchemaWarnings) {

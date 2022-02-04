@@ -29,14 +29,6 @@ class FeedbackMessageStore extends UpstreamFeedbackMessageStore implements Feedb
      * @var string[]
      */
     protected array $logEntries = [];
-    
-    public function addSchemaWarnings(array $schemaWarnings): void
-    {
-        $this->schemaWarnings = array_merge(
-            $this->schemaWarnings,
-            $schemaWarnings
-        );
-    }
 
     public function addSchemaError(string $dbKey, string $field, string $error): void
     {
@@ -50,12 +42,6 @@ class FeedbackMessageStore extends UpstreamFeedbackMessageStore implements Feedb
         $schemaErrors = $this->schemaErrors;
         $this->schemaErrors = [];
         return $schemaErrors;
-    }
-    public function retrieveAndClearSchemaWarnings(): array
-    {
-        $schemaWarnings = $this->schemaWarnings;
-        $this->schemaWarnings = [];
-        return $schemaWarnings;
     }
     public function getSchemaErrorsForField(string $dbKey, string $field): ?array
     {

@@ -10,6 +10,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
@@ -346,7 +347,20 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
             // Store the warnings to be read if needed
             if ($schemaWarnings) {
-                $this->getFeedbackMessageStore()->addSchemaWarnings($schemaWarnings);
+                $schemaFeedbackStore = App::getFeedbackStore()->schemaFeedbackStore;
+                foreach ($schemaWarnings as $warningEntry) {
+                    $schemaFeedbackStore->addSchemaWarning(
+                        new SchemaFeedback(
+                            $warningEntry[Tokens::MESSAGE],
+                            null,
+                            [],
+                            LocationHelper::getNonSpecificLocation(),
+                            $warningEntry[Tokens::EXTENSIONS] ?? [],
+                            $this,
+                            $warningEntry[Tokens::PATH],
+                        )
+                    );
+                }
             }
             if ($schemaErrors) {
                 return $this->getErrorProvider()->getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
