@@ -26,7 +26,7 @@ use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Feedback\QueryFeedbackInterface;
+use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -1824,25 +1824,25 @@ class Engine implements EngineInterface
             }
         }
 
-        $queryFeedbackStore = App::getFeedbackStore()->queryFeedbackStore;
+        $documentFeedbackStore = App::getFeedbackStore()->documentFeedbackStore;
 
         // Add the feedback (errors, warnings, deprecations) into the output
         if ($queryErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
             $ret['queryErrors'] = $queryErrors;
         }
-        if ($queryErrors = $queryFeedbackStore->getQueryErrors()) {
+        if ($queryErrors = $documentFeedbackStore->getDocumentErrors()) {
             $ret['queryErrors'] = array_merge(
                 $ret['queryErrors'] ?? [],
-                $this->getQueryFeedbackEntriesForOutput($queryErrors)
+                $this->getDocumentFeedbackEntriesForOutput($queryErrors)
             );
         }
         if ($queryWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
             $ret['queryWarnings'] = $queryWarnings;
         }
-        if ($queryWarnings = $queryFeedbackStore->getQueryWarnings()) {
+        if ($queryWarnings = $documentFeedbackStore->getDocumentWarnings()) {
             $ret['queryWarnings'] = array_merge(
                 $ret['queryWarnings'] ?? [],
-                $this->getQueryFeedbackEntriesForOutput($queryErrors)
+                $this->getDocumentFeedbackEntriesForOutput($queryErrors)
             );
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
@@ -1882,19 +1882,19 @@ class Engine implements EngineInterface
     }
 
     /**
-     * @param QueryFeedbackInterface[] $queryFeedbackEntries
+     * @param DocumentFeedbackInterface[] $documentFeedbackEntries
      * @return array<string,mixed>
      */
-    protected function getQueryFeedbackEntriesForOutput(array $queryFeedbackEntries): array
+    protected function getDocumentFeedbackEntriesForOutput(array $documentFeedbackEntries): array
     {
         $output = [];
-        foreach ($queryFeedbackEntries as $queryFeedbackEntry) {
-            $queryFeedbackEntryExtensions = $queryFeedbackEntry->getExtensions();
-            if ($code = $queryFeedbackEntry->getCode()) {
-                $queryFeedbackEntryExtensions['code'] = $code;
+        foreach ($documentFeedbackEntries as $documentFeedbackEntry) {
+            $documentFeedbackEntryExtensions = $documentFeedbackEntry->getExtensions();
+            if ($code = $documentFeedbackEntry->getCode()) {
+                $documentFeedbackEntryExtensions['code'] = $code;
             }
-            $queryFeedbackEntryExtensions['location'] = $queryFeedbackEntry->getLocation()->toArray();
-            $output[$queryFeedbackEntry->getMessage()] = $queryFeedbackEntryExtensions;
+            $documentFeedbackEntryExtensions['location'] = $documentFeedbackEntry->getLocation()->toArray();
+            $output[$documentFeedbackEntry->getMessage()] = $documentFeedbackEntryExtensions;
         }
         return $output;
     }

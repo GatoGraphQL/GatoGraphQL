@@ -6,23 +6,27 @@ namespace PoP\ComponentModel\Feedback;
 
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class QueryFeedback extends AbstractFeedback implements QueryFeedbackInterface
+abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFeedbackInterface
 {
     public function __construct(
         string $message,
         ?string $code,
-        Location $location,
         /** @var array<string, mixed> */
         array $data = [],
+        protected Location $location,
         /** @var array<string, mixed> */
         protected array $extensions = [],
     ) {
         parent::__construct(
             $message,
             $code,
-            $location,
             $data,
         );
+    }
+
+    public function getLocation(): Location
+    {
+        return $this->location;
     }
 
     /**
