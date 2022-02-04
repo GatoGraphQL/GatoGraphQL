@@ -12,23 +12,23 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
     public function __construct(
         string $message,
         ?string $code,
-        /** @var array<string, mixed> */
-        array $data = [],
         Location $location,
-        /** @var array<string, mixed> */
-        array $extensions = [],
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var string[] */
         protected array $fields,
         /** @var array<string|int> */
         protected array $objectIDs,
+        /** @var array<string, mixed> */
+        array $extensions = [],
+        /** @var array<string, mixed> */
+        array $data = [],
     ) {
         parent::__construct(
             $message,
             $code,
-            $data,
             $location,
             $extensions,
+            $data,
         );
     }
 

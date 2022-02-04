@@ -11,11 +11,11 @@ abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFe
     public function __construct(
         string $message,
         ?string $code,
-        /** @var array<string, mixed> */
-        array $data = [],
         protected Location $location,
         /** @var array<string, mixed> */
         protected array $extensions = [],
+        /** @var array<string, mixed> */
+        array $data = [],
     ) {
         parent::__construct(
             $message,

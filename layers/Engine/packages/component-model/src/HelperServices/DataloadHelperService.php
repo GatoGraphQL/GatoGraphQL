@@ -95,9 +95,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
                     new SchemaFeedback(
                         $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, $subcomponent_data_field_outputkey),
                         $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
-                        [],
                         LocationHelper::getNonSpecificLocation(),
-                        [],
                         $objectTypeResolver,
                         [$subcomponent_data_field_outputkey],
                     )
