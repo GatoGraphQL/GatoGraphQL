@@ -389,12 +389,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         new ObjectFeedback(
                             $warningEntry[Tokens::MESSAGE],
                             null,
+                            [],
                             LocationHelper::getNonSpecificLocation(),
+                            $warningEntry[Tokens::EXTENSIONS] ?? [],
                             $this,
                             $warningEntry[Tokens::PATH],
                             [$id],
-                            [],
-                            $warningEntry[Tokens::EXTENSIONS] ?? [],
                         )
                     );
                 }
@@ -410,12 +410,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         new ObjectFeedback(
                             $deprecationEntry[Tokens::MESSAGE],
                             null,
+                            [],
                             LocationHelper::getNonSpecificLocation(),
+                            $deprecationEntry[Tokens::EXTENSIONS] ?? [],
                             $this,
                             $deprecationEntry[Tokens::PATH],
                             [$id],
-                            [],
-                            $deprecationEntry[Tokens::EXTENSIONS] ?? [],
                         )
                     );
                 }
@@ -438,7 +438,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 new ObjectFeedback(
                                     $deprecation,
                                     null,
+                                    [],
                                     LocationHelper::getNonSpecificLocation(),
+                                    [],
                                     $this,
                                     [$field],
                                     [$id]
