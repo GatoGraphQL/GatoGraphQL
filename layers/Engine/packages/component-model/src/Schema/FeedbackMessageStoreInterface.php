@@ -8,7 +8,6 @@ use PoP\FieldQuery\FeedbackMessageStoreInterface as UpstreamFeedbackMessageStore
 
 interface FeedbackMessageStoreInterface extends UpstreamFeedbackMessageStoreInterface
 {
-    public function getSchemaErrorsForField(string $dbKey, string $field): ?array;
     public function addLogEntry(string $entry): void;
     public function maybeAddLogEntry(string $entry): void;
     public function getLogEntries(): array;

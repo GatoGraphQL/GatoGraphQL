@@ -30,11 +30,6 @@ class FeedbackMessageStore extends UpstreamFeedbackMessageStore implements Feedb
      */
     protected array $logEntries = [];
 
-    public function getSchemaErrorsForField(string $dbKey, string $field): ?array
-    {
-        return $this->schemaErrors[$dbKey][$field] ?? null;
-    }
-
     public function addLogEntry(string $entry): void
     {
         $this->logEntries[] = $entry;

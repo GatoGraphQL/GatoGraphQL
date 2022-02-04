@@ -130,14 +130,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 continue;
             }
             
-            // Watch out! If the property has already been loaded from a previous iteration, in some cases it can create trouble!
-            // But make sure that there truly are subproperties! It could also be a schemaError.
-            // Eg: ?query=posts.title.id, then no need to transform "title" from string to {"id" => ...}
-            if ($this->getFeedbackMessageStore()->getSchemaErrorsForField($dbKey, $nestedField)) {
-                $dbObjectRet[$nestedFieldOutputKey] = $dbObject[$uniqueNestedFieldOutputKey];
-                continue;
-            }
-            
             // The first field, "id", needs not be concatenated. All the others do need
             $nextField = ($concatenateField ? $objectKeyPath . '.' : '') . $uniqueNestedFieldOutputKey;
 
