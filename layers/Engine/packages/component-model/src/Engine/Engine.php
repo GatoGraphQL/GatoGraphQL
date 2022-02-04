@@ -1647,7 +1647,7 @@ class Engine implements EngineInterface
                 $iterationDBKey = $objectWarning->getRelationalTypeResolver()->getTypeOutputDBKey();
                 $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreObjectWarnings, true, $relationalTypeResolver);
                 foreach ($dbNameWarningEntries as $dbname => $idEntries) {
-                    foreach ($idEntries as $id => $idEntries) {
+                    foreach ($idEntries as $id => $entries) {
                         $objectWarnings[$dbname][$iterationDBKey][$id] = array_merge(
                             $schemaErrors[$dbname][$iterationDBKey][$id] ?? [],
                             $entries
@@ -1684,7 +1684,7 @@ class Engine implements EngineInterface
                 $iterationDBKey = $objectDeprecation->getRelationalTypeResolver()->getTypeOutputDBKey();
                 $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreObjectDeprecations, true, $objectDeprecation->getRelationalTypeResolver());
                 foreach ($dbNameDeprecationEntries as $dbname => $idEntries) {
-                    foreach ($idEntries as $id => $idEntries) {
+                    foreach ($idEntries as $id => $entries) {
                         $objectDeprecations[$dbname][$iterationDBKey][$id] = array_merge(
                             $schemaErrors[$dbname][$iterationDBKey][$id] ?? [],
                             $entries
