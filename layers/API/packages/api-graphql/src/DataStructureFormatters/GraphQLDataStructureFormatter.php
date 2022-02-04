@@ -23,10 +23,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
         // Add errors
         $errors = $warnings = $deprecations = $notices = $traces = [];
-        if (isset($data['queryErrors'])) {
+        if (isset($data['documentErrors'])) {
             $errors = array_merge(
                 $errors,
-                $this->reformatQueryEntries($data['queryErrors'])
+                $this->reformatDocumentEntries($data['documentErrors'])
             );
         }
         if (isset($data['schemaErrors'])) {
@@ -62,7 +62,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($data['queryWarnings'] ?? null) {
             $warnings = array_merge(
                 $warnings,
-                $this->reformatQueryEntries($data['queryWarnings'])
+                $this->reformatDocumentEntries($data['queryWarnings'])
             );
         }
         if ($warnings) {
@@ -259,7 +259,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         ];
     }
 
-    protected function reformatQueryEntries($entries)
+    protected function reformatDocumentEntries($entries)
     {
         $ret = [];
         foreach ($entries as $message => $extensions) {

@@ -1827,13 +1827,13 @@ class Engine implements EngineInterface
         $documentFeedbackStore = App::getFeedbackStore()->documentFeedbackStore;
 
         // Add the feedback (errors, warnings, deprecations) into the output
-        if ($queryErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
-            $ret['queryErrors'] = $queryErrors;
+        if ($documentErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
+            $ret['documentErrors'] = $documentErrors;
         }
-        if ($queryErrors = $documentFeedbackStore->getDocumentErrors()) {
-            $ret['queryErrors'] = array_merge(
-                $ret['queryErrors'] ?? [],
-                $this->getDocumentFeedbackEntriesForOutput($queryErrors)
+        if ($documentErrors = $documentFeedbackStore->getDocumentErrors()) {
+            $ret['documentErrors'] = array_merge(
+                $ret['documentErrors'] ?? [],
+                $this->getDocumentFeedbackEntriesForOutput($documentErrors)
             );
         }
         if ($queryWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
@@ -1842,7 +1842,7 @@ class Engine implements EngineInterface
         if ($queryWarnings = $documentFeedbackStore->getDocumentWarnings()) {
             $ret['queryWarnings'] = array_merge(
                 $ret['queryWarnings'] ?? [],
-                $this->getDocumentFeedbackEntriesForOutput($queryErrors)
+                $this->getDocumentFeedbackEntriesForOutput($documentErrors)
             );
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
