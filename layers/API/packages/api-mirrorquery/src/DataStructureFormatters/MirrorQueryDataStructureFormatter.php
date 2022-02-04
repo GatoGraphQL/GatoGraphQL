@@ -118,18 +118,18 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         foreach ($nestedFields as $nestedField => $nestedPropertyFields) {
             $nestedFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($nestedField);
             $uniqueNestedFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputDBKey($dbKey, $nestedField);
-            
+
             // If the key doesn't exist, then do nothing. This supports the "skip output if null" behaviour: if it is to be skipped, there will be no value (which is different than a null)
             if (!array_key_exists($uniqueNestedFieldOutputKey, $dbObject)) {
                 continue;
             }
-            
+
             // If it's null, directly assign the null to the result
             if ($dbObject[$uniqueNestedFieldOutputKey] === null) {
                 $dbObjectRet[$nestedFieldOutputKey] = null;
                 continue;
             }
-            
+
             // The first field, "id", needs not be concatenated. All the others do need
             $nextField = ($concatenateField ? $objectKeyPath . '.' : '') . $uniqueNestedFieldOutputKey;
 
@@ -144,7 +144,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 $dbObjectRet[$nestedFieldOutputKey] = [];
                 continue;
             }
-            
+
             if (!empty($dbObjectNestedPropertyRet)) {
                 // 1. If we load a relational property as its ID, and then load properties on the corresponding object, then it will fail because it will attempt to add a property to a non-array element
                 // Eg: /posts/api/graphql/?query=id|author,author.name will first return "author => 1" and on the "1" element add property "name"

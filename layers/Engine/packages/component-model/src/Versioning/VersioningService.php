@@ -34,7 +34,7 @@ class VersioningService implements VersioningServiceInterface
     protected function initializeVersionConstraintsForFields(): void
     {
         $generalFeedbackStore = App::getFeedbackStore()->generalFeedbackStore;
-        
+
         // Iterate through entries in `fieldVersionConstraints` and set them into a dictionary
         $this->versionConstraintsForFields = [];
         foreach ((App::getState('field-version-constraints') ?? []) as $typeField => $versionConstraint) {

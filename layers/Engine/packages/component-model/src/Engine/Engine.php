@@ -1458,7 +1458,7 @@ class Engine implements EngineInterface
         if (!$entries) {
             return [];
         }
-        
+
         // By default place everything under "primary"
         $dbname_entries = [
             'primary' => $entries,
@@ -1878,7 +1878,7 @@ class Engine implements EngineInterface
                 }
             }
             // }
-            
+
             /**
              * Regenerate the schema/object FeedbackStore, to reset the
              * state of errors/warnings/logs/etc for the next iteration
