@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\Wassup\MutationResolvers;
 
-use PoP\ComponentModel\Environment;
+use PoP\Application\Environment;
 class CreateOrUpdateStanceMutationResolver extends \PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutationResolver
 {
     protected function getCreatepostData($form_data)

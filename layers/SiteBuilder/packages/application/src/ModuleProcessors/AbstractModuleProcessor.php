@@ -6,7 +6,7 @@ namespace PoP\Application\ModuleProcessors;
 
 use PoP\Root\App;
 use PoP\Application\Constants\Actions;
-use PoP\ComponentModel\Environment;
+use PoP\Application\Environment;
 use PoP\ConfigurationComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;
 use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoP\SiteBuilderAPI\ModuleProcessors\AddAPIQueryToSourcesModuleProcessorTrait;
