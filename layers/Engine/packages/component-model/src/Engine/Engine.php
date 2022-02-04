@@ -1988,7 +1988,7 @@ class Engine implements EngineInterface
 
     /**
      * @param DocumentFeedbackInterface[] $documentFeedbackEntries
-     * @return array<string,mixed>
+     * @return array<array<string,mixed>>
      */
     protected function getDocumentFeedbackEntriesForOutput(array $documentFeedbackEntries): array
     {
