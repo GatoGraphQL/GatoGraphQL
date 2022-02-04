@@ -118,53 +118,59 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         foreach ($nestedFields as $nestedField => $nestedPropertyFields) {
             $nestedFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($nestedField);
             $uniqueNestedFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputDBKey($dbKey, $nestedField);
+            
             // If the key doesn't exist, then do nothing. This supports the "skip output if null" behaviour: if it is to be skipped, there will be no value (which is different than a null)
-            if (array_key_exists($uniqueNestedFieldOutputKey, $dbObject)) {
-                // If it's null, directly assign the null to the result
-                if (is_null($dbObject[$uniqueNestedFieldOutputKey])) {
-                    $dbObjectRet[$nestedFieldOutputKey] = null;
+            if (!array_key_exists($uniqueNestedFieldOutputKey, $dbObject)) {
+                continue;
+            }
+            
+            // If it's null, directly assign the null to the result
+            if ($dbObject[$uniqueNestedFieldOutputKey] === null) {
+                $dbObjectRet[$nestedFieldOutputKey] = null;
+                continue;
+            }
+            
+            // Watch out! If the property has already been loaded from a previous iteration, in some cases it can create trouble!
+            // But make sure that there truly are subproperties! It could also be a schemaError.
+            // Eg: ?query=posts.title.id, then no need to transform "title" from string to {"id" => ...}
+            if ($this->getFeedbackMessageStore()->getSchemaErrorsForField($dbKey, $nestedField)) {
+                $dbObjectRet[$nestedFieldOutputKey] = $dbObject[$uniqueNestedFieldOutputKey];
+                continue;
+            }
+            
+            // The first field, "id", needs not be concatenated. All the others do need
+            $nextField = ($concatenateField ? $objectKeyPath . '.' : '') . $uniqueNestedFieldOutputKey;
+
+            // The type with ID may be stored under $unionDBKeyIDs
+            $unionDBKeyID = $unionDBKeyIDs[$dbKey][$objectID][$uniqueNestedFieldOutputKey] ?? null;
+
+            // Add a new subarray for the nested property
+            $dbObjectNestedPropertyRet = &$dbObjectRet[$nestedFieldOutputKey];
+
+            // If it is an empty array, then directly add an empty array as the result
+            if (is_array($dbObject[$uniqueNestedFieldOutputKey]) && empty($dbObject[$uniqueNestedFieldOutputKey])) {
+                $dbObjectRet[$nestedFieldOutputKey] = [];
+                continue;
+            }
+            
+            if (!empty($dbObjectNestedPropertyRet)) {
+                // 1. If we load a relational property as its ID, and then load properties on the corresponding object, then it will fail because it will attempt to add a property to a non-array element
+                // Eg: /posts/api/graphql/?query=id|author,author.name will first return "author => 1" and on the "1" element add property "name"
+                // Then, if this situation happens, simply override the ID (which is a scalar value, such as an int or string) with an object with the 'id' property
+                if (!is_array($dbObjectNestedPropertyRet)) {
+                    $dbObjectRet[$nestedFieldOutputKey] = [
+                        'id' => $dbObjectRet[$nestedFieldOutputKey],
+                    ];
                 } else {
-                    // Watch out! If the property has already been loaded from a previous iteration, in some cases it can create trouble!
-                    // But make sure that there truly are subproperties! It could also be a schemaError.
-                    // Eg: ?query=posts.title.id, then no need to transform "title" from string to {"id" => ...}
-                    if ($this->getFeedbackMessageStore()->getSchemaErrorsForField($dbKey, $nestedField)) {
-                        $dbObjectRet[$nestedFieldOutputKey] = $dbObject[$uniqueNestedFieldOutputKey];
-                    } else {
-                        // The first field, "id", needs not be concatenated. All the others do need
-                        $nextField = ($concatenateField ? $objectKeyPath . '.' : '') . $uniqueNestedFieldOutputKey;
-
-                        // The type with ID may be stored under $unionDBKeyIDs
-                        $unionDBKeyID = $unionDBKeyIDs[$dbKey][$objectID][$uniqueNestedFieldOutputKey] ?? null;
-
-                        // Add a new subarray for the nested property
-                        $dbObjectNestedPropertyRet = &$dbObjectRet[$nestedFieldOutputKey];
-
-                        // If it is an empty array, then directly add an empty array as the result
-                        if (is_array($dbObject[$uniqueNestedFieldOutputKey]) && empty($dbObject[$uniqueNestedFieldOutputKey])) {
-                            $dbObjectRet[$nestedFieldOutputKey] = [];
-                        } else {
-                            if (!empty($dbObjectNestedPropertyRet)) {
-                                // 1. If we load a relational property as its ID, and then load properties on the corresponding object, then it will fail because it will attempt to add a property to a non-array element
-                                // Eg: /posts/api/graphql/?query=id|author,author.name will first return "author => 1" and on the "1" element add property "name"
-                                // Then, if this situation happens, simply override the ID (which is a scalar value, such as an int or string) with an object with the 'id' property
-                                if (!is_array($dbObjectNestedPropertyRet)) {
-                                    $dbObjectRet[$nestedFieldOutputKey] = [
-                                        'id' => $dbObjectRet[$nestedFieldOutputKey],
-                                    ];
-                                } else {
-                                    // 2. If the previous iteration loaded an array of IDs, then override this value with an empty array and initialize the ID again to this object, through adding property 'id' on the next iteration
-                                    // Eg: /api/graphql/?query=tags,tags.name
-                                    $dbObjectRet[$nestedFieldOutputKey] = [];
-                                    if (!in_array('id', $nestedPropertyFields)) {
-                                        array_unshift($nestedPropertyFields, 'id');
-                                    }
-                                }
-                            }
-                            $this->addData($dbObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionDBKeyIDs, $unionDBKeyID ?? $dbObject[$uniqueNestedFieldOutputKey], $nextField, $dbKeyPaths);
-                        }
+                    // 2. If the previous iteration loaded an array of IDs, then override this value with an empty array and initialize the ID again to this object, through adding property 'id' on the next iteration
+                    // Eg: /api/graphql/?query=tags,tags.name
+                    $dbObjectRet[$nestedFieldOutputKey] = [];
+                    if (!in_array('id', $nestedPropertyFields)) {
+                        array_unshift($nestedPropertyFields, 'id');
                     }
                 }
             }
+            $this->addData($dbObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionDBKeyIDs, $unionDBKeyID ?? $dbObject[$uniqueNestedFieldOutputKey], $nextField, $dbKeyPaths);
         }
     }
 }
