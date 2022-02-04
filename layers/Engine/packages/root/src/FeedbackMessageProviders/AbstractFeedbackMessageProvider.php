@@ -19,7 +19,7 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
 
     protected function getNamespace(): string
     {
-        return ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        return ClassHelpers::getClassPSR4Namespace(\get_called_class()) . '\\';
     }
 
     final public function getMessage(string $code, string|int|float|bool ...$args): string
