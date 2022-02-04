@@ -382,7 +382,20 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
             // Store the warnings to be read if needed
             if ($maybeObjectWarnings) {
-                $this->getFeedbackMessageStore()->addObjectWarnings($maybeObjectWarnings);
+                $id = $this->getID($object);
+                $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
+                foreach ($maybeObjectWarnings as $warningEntry) {
+                    $objectFeedbackStore->addObjectWarning(
+                        new ObjectFeedback(
+                            $warningEntry[Tokens::MESSAGE],
+                            null,
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                            $warningEntry[Tokens::PATH],
+                            [$id]
+                        )
+                    );
+                }
             }
             if ($maybeObjectErrors) {
                 return $this->getErrorProvider()->getNestedObjectErrorsFieldError($maybeObjectErrors, $fieldName);

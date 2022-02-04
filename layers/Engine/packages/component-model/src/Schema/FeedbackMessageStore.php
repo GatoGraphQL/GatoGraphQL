@@ -29,28 +29,13 @@ class FeedbackMessageStore extends UpstreamFeedbackMessageStore implements Feedb
      * @var string[]
      */
     protected array $logEntries = [];
-
-    public function addObjectWarnings(array $objectWarnings): void
-    {
-        foreach ($objectWarnings as $objectID => $objectWarnings) {
-            $this->objectWarnings[$objectID] = array_merge(
-                $this->objectWarnings[$objectID] ?? [],
-                $objectWarnings
-            );
-        }
-    }
+    
     public function addSchemaWarnings(array $schemaWarnings): void
     {
         $this->schemaWarnings = array_merge(
             $this->schemaWarnings,
             $schemaWarnings
         );
-    }
-    public function retrieveAndClearObjectWarnings(string | int $objectID): ?array
-    {
-        $objectWarnings = $this->objectWarnings[$objectID] ?? null;
-        unset($this->objectWarnings[$objectID]);
-        return $objectWarnings;
     }
 
     public function addSchemaError(string $dbKey, string $field, string $error): void

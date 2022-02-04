@@ -251,13 +251,6 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
                 ];
                 $functionValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $validFunction, $variables, $expressions, $options);
-                // Merge the objectWarnings, if any
-                if ($storedObjectWarnings = $this->getFeedbackMessageStore()->retrieveAndClearObjectWarnings($id)) {
-                    $objectWarnings[$id] = array_merge(
-                        $objectWarnings[$id] ?? [],
-                        $storedObjectWarnings
-                    );
-                }
 
                 // If there was an error (eg: a missing mandatory argument), then the function will be of type Error
                 if (GeneralUtils::isError($functionValue)) {
