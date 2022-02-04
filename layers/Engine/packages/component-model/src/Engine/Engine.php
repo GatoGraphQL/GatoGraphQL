@@ -27,6 +27,7 @@ use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
+use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -1824,9 +1825,17 @@ class Engine implements EngineInterface
             }
         }
 
+        // Add the feedback (errors, warnings, deprecations) into the output
+        $generalFeedbackStore = App::getFeedbackStore()->generalFeedbackStore;
+        if ($generalErrors = $generalFeedbackStore->getGeneralErrors()) {
+            $ret['generalErrors'] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
+        }
+        if ($generalWarnings = $generalFeedbackStore->getGeneralWarnings()) {
+            $ret['generalWarnings'] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
+        }
+
         $documentFeedbackStore = App::getFeedbackStore()->documentFeedbackStore;
 
-        // Add the feedback (errors, warnings, deprecations) into the output
         if ($documentErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
             $ret['documentErrors'] = $documentErrors;
         }
@@ -1842,7 +1851,7 @@ class Engine implements EngineInterface
         if ($documentWarnings = $documentFeedbackStore->getDocumentWarnings()) {
             $ret['documentWarnings'] = array_merge(
                 $ret['documentWarnings'] ?? [],
-                $this->getDocumentFeedbackEntriesForOutput($documentErrors)
+                $this->getDocumentFeedbackEntriesForOutput($documentWarnings)
             );
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
@@ -1879,6 +1888,23 @@ class Engine implements EngineInterface
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
 
         return $ret;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $generalFeedbackEntries
+     * @return array<string,mixed>
+     */
+    protected function getGeneralFeedbackEntriesForOutput(array $generalFeedbackEntries): array
+    {
+        $output = [];
+        foreach ($generalFeedbackEntries as $generalFeedbackEntry) {
+            $generalFeedbackEntryExtensions = [];
+            if ($code = $generalFeedbackEntry->getCode()) {
+                $generalFeedbackEntryExtensions['code'] = $code;
+            }
+            $output[$generalFeedbackEntry->getMessage()] = $generalFeedbackEntryExtensions;
+        }
+        return $output;
     }
 
     /**

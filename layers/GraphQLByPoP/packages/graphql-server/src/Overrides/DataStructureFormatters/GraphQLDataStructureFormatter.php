@@ -132,7 +132,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     /**
      * Override the parent function, to place the locations from outside extensions
      */
-    protected function getQueryEntry(string $message, array $extensions): array
+    protected function getDocumentEntry(string $message, array $extensions): array
     {
         $entry = [
             'message' => $message,
@@ -145,7 +145,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         // if ($this->addTopLevelExtensionsEntryToResponse()) {
         if (
             $extensions = array_merge(
-                $this->getQueryEntryExtensions(),
+                $this->getDocumentEntryExtensions(),
                 $extensions
             )
         ) {
@@ -158,12 +158,12 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     /**
      * Change properties for GraphQL
      */
-    protected function getQueryEntryExtensions(): array
+    protected function getDocumentEntryExtensions(): array
     {
         if (App::getState('standard-graphql')) {
             // Do not print "type" => "query"
             return [];
         }
-        return parent::getQueryEntryExtensions();
+        return parent::getDocumentEntryExtensions();
     }
 }

@@ -23,6 +23,12 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
         // Add errors
         $errors = $warnings = $deprecations = $notices = $traces = [];
+        if (isset($data['generalErrors'])) {
+            $errors = array_merge(
+                $errors,
+                $this->reformatGeneralEntries($data['generalErrors'])
+            );
+        }
         if (isset($data['documentErrors'])) {
             $errors = array_merge(
                 $errors,
@@ -50,8 +56,17 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // Eg: `{ posts(searchfor: ["posts"]) { id } }` will fail casting fieldArg `searchfor`,
         // raising a warning, but field `posts` is still executed, retrieving all results.
         // If the user is not told that there was an error/warning, it's very confusing
-        if ($data['objectWarnings'] ?? null) {
-            $warnings = $this->reformatDBEntries($data['objectWarnings']);
+        if ($data['generalWarnings'] ?? null) {
+            $warnings = array_merge(
+                $warnings,
+                $this->reformatGeneralEntries($data['generalWarnings'])
+            );
+        }
+        if ($data['documentWarnings'] ?? null) {
+            $warnings = array_merge(
+                $warnings,
+                $this->reformatDocumentEntries($data['documentWarnings'])
+            );
         }
         if ($data['schemaWarnings'] ?? null) {
             $warnings = array_merge(
@@ -59,10 +74,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 $this->reformatSchemaEntries($data['schemaWarnings'])
             );
         }
-        if ($data['documentWarnings'] ?? null) {
+        if ($data['objectWarnings'] ?? null) {
             $warnings = array_merge(
                 $warnings,
-                $this->reformatDocumentEntries($data['documentWarnings'])
+                $this->reformatDBEntries($data['objectWarnings'])
             );
         }
         if ($warnings) {
@@ -263,12 +278,12 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     {
         $ret = [];
         foreach ($entries as $message => $extensions) {
-            $ret[] = $this->getQueryEntry($message, $extensions);
+            $ret[] = $this->getDocumentEntry($message, $extensions);
         }
         return $ret;
     }
 
-    protected function getQueryEntry(string $message, array $extensions): array
+    protected function getDocumentEntry(string $message, array $extensions): array
     {
         $entry = [
             'message' => $message,
@@ -276,7 +291,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // if ($this->addTopLevelExtensionsEntryToResponse()) {
         if (
             $extensions = array_merge(
-                $this->getQueryEntryExtensions(),
+                $this->getDocumentEntryExtensions(),
                 $extensions
             )
         ) {
@@ -286,10 +301,30 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
-    protected function getQueryEntryExtensions(): array
+    protected function getDocumentEntryExtensions(): array
     {
         return [
-            'type' => 'query',
+            'type' => 'document',
         ];
+    }
+
+    protected function reformatGeneralEntries($entries)
+    {
+        $ret = [];
+        foreach ($entries as $message => $extensions) {
+            $ret[] = $this->getGeneralEntry($message, $extensions);
+        }
+        return $ret;
+    }
+
+    protected function getGeneralEntry(string $message, array $extensions): array
+    {
+        $entry = [
+            'message' => $message,
+        ];
+        if ($extensions = $this->getDocumentEntryExtensions()) {
+            $entry['extensions'] = $this->reformatExtensions($extensions);
+        };
+        return $entry;
     }
 }
