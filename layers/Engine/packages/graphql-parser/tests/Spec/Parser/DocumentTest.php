@@ -321,10 +321,19 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testNoOperationsDefined()
+    public function testEmptyQuery()
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_C));
+        $parser = $this->getParser();
+        $document = $parser->parse('');
+        $document->validate();
+    }
+
+    public function testNoOperationsDefined()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_D));
         $parser = $this->getParser();
         $document = $parser->parse('
             fragment F0 on Ship {

@@ -4,34 +4,34 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\State;
 
-use PoPAPI\API\Component as APIComponent;
-use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
-use PoPAPI\API\Configuration\EngineRequest;
-use PoPAPI\API\Constants\Actions;
-use PoPAPI\API\Facades\FieldQueryConvertorFacade;
-use PoPAPI\API\PersistedQueries\PersistedQueryUtils;
-use PoPAPI\API\Response\Schemes as APISchemes;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
-use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
+use PoPAPI\API\Component as APIComponent;
+use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
+use PoPAPI\API\Configuration\EngineRequest;
+use PoPAPI\API\Constants\Actions;
+use PoPAPI\API\Facades\FieldQueryConvertorFacade;
+use PoPAPI\API\FeedbackMessageProviders\FeedbackMessageProvider;
+use PoPAPI\API\PersistedQueries\PersistedQueryUtils;
+use PoPAPI\API\Response\Schemes as APISchemes;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
-    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
-    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
     {
-        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->feedbackMessageProvider = $feedbackMessageProvider;
     }
-    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
     {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+        return $this->feedbackMessageProvider ??= $this->instanceManager->getInstance(FeedbackMessageProvider::class);
     }
 
     public function initialize(array &$state): void
@@ -103,8 +103,11 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         $query = $state['query'];
-        if ($query === null) {
-            $this->getFeedbackMessageStore()->addQueryError($this->__('The query in the body is empty', 'api'));
+        if ($query === null || trim($query) === '') {
+            /**
+             * No need to return any error here, that will be done
+             * when processing the query in the Engine
+             */
             return;
         }
 

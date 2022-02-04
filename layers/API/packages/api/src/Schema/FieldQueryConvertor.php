@@ -11,7 +11,7 @@ use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoPAPI\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;
 use PoPAPI\API\Schema\QuerySyntax as APIQuerySyntax;
 use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Root\Services\BasicServiceTrait;
 use PoP\FieldQuery\QueryHelpers;

@@ -480,19 +480,19 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     continue;
                 }
                 $fieldOrDirectiveArgName = $orderedFieldOrDirectiveArgNames[$i];
-                // Log the found fieldOrDirectiveArgName
-                // Must re-cast to this package's class, to avoid IDE showing error
-                /** @var FeedbackMessageStoreInterface */
-                $feedbackMessageStore = $this->getFeedbackMessageStore();
-                $feedbackMessageStore->maybeAddLogEntry(
-                    sprintf(
-                        $this->__('In field or directive \'%s\', the argument on position number %s (with value \'%s\') is resolved as argument \'%s\'', 'pop-component-model'),
-                        $fieldOrDirective,
-                        $i + 1,
-                        $fieldOrDirectiveArgValue,
-                        $fieldOrDirectiveArgName
-                    )
-                );
+                // // Log the found fieldOrDirectiveArgName
+                // // Must re-cast to this package's class, to avoid IDE showing error
+                // /** @var FeedbackMessageStoreInterface */
+                // $feedbackMessageStore = $this->getFeedbackMessageStore();
+                // $feedbackMessageStore->maybeAddLogEntry(
+                //     sprintf(
+                //         $this->__('In field or directive \'%s\', the argument on position number %s (with value \'%s\') is resolved as argument \'%s\'', 'pop-component-model'),
+                //         $fieldOrDirective,
+                //         $i + 1,
+                //         $fieldOrDirectiveArgValue,
+                //         $fieldOrDirectiveArgName
+                //     )
+                // );
             } else {
                 $fieldOrDirectiveArgName = trim(substr($fieldOrDirectiveArg, 0, $separatorPos));
                 $fieldOrDirectiveArgValue = trim(substr($fieldOrDirectiveArg, $separatorPos + strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR)));

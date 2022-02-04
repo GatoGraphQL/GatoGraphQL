@@ -11,4 +11,5 @@ class FeedbackMessageCategories
     public const SUGGESTION = 'suggestion';
     public const NOTICE = 'notice';
     public const DEPRECATION = 'deprecation';
+    public const LOG = 'log';
 }

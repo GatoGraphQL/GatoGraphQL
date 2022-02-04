@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\ModuleProcessors;
 
-use PoP\Root\App;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\FieldQuery\QueryHelpers;
 
@@ -16,7 +16,11 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         if (!is_null($moduleAtts)) {
             return $moduleAtts['fields'];
         }
-        // If it is a normal module, it is the first added, then simply get the fields from the application state
+
+        /**
+         * If it is a normal module, it is the first added,
+         * then simply get the fields from the application state.
+         */
         return App::getState('executable-query') ?? [];
     }
 
