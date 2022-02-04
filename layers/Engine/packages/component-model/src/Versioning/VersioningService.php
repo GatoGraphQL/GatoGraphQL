@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Versioning;
 
-use PoP\Root\App;
-use PoP\Root\Services\BasicServiceTrait;
-use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Feedback\GeneralFeedback;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\Root\Services\BasicServiceTrait;
 
 class VersioningService implements VersioningServiceInterface
 {
@@ -39,28 +39,33 @@ class VersioningService implements VersioningServiceInterface
     {
         // Iterate through entries in `fieldVersionConstraints` and set them into a dictionary
         $this->versionConstraintsForFields = [];
-        $schemaWarnings = [];
+        $generalWarningMessages = [];
         foreach ((App::getState('field-version-constraints') ?? []) as $typeField => $versionConstraint) {
             // All fields are defined as "$type.$fieldName". If not, it's an error
             $entry = explode(self::TYPE_FIELD_SEPARATOR, $typeField);
             if (count($entry) != 2) {
-                $schemaWarnings[] = [
-                    Tokens::PATH => [$typeField],
-                    Tokens::MESSAGE => sprintf(
-                        $this->__('URL param \'fieldVersionConstraints\' expects the type and field name separated by \'%s\' (eg: \'%s\'), so the following value has been ignored: \'%s\'', 'component-model'),
-                        self::TYPE_FIELD_SEPARATOR,
-                        '?fieldVersionConstraints[Post.title]=^0.1',
-                        $typeField
-                    ),
-                ];
+                $generalWarningMessages[] = sprintf(
+                    $this->__('URL param \'fieldVersionConstraints\' expects the type and field name separated by \'%s\' (eg: \'%s\'), so the following value has been ignored: \'%s\'', 'component-model'),
+                    self::TYPE_FIELD_SEPARATOR,
+                    '?fieldVersionConstraints[Post.title]=^0.1',
+                    $typeField
+                );
                 continue;
             }
             $maybeNamespacedTypeName = $entry[0];
             $fieldName = $entry[1];
             $this->versionConstraintsForFields[$maybeNamespacedTypeName][$fieldName] = $versionConstraint;
         }
-        if ($schemaWarnings) {
-            $this->getFeedbackMessageStore()->addSchemaWarnings($schemaWarnings);
+        if ($generalWarningMessages) {
+            $generalFeedbackStore = App::getFeedbackStore()->generalFeedbackStore;
+            foreach ($generalWarningMessages as $warningMessage) {
+                $generalFeedbackStore->addGeneralWarning(
+                    new GeneralFeedback(
+                        $warningMessage,
+                        null
+                    )
+                );
+            }
         }
     }
 
