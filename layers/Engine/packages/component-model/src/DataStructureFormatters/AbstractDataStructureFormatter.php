@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DataStructureFormatters;
 
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Root\Services\BasicServiceTrait;
 

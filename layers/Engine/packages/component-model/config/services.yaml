@@ -135,11 +135,6 @@ services:
     PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface:
         class: \PoP\ComponentModel\Registries\MetaDirectiveRegistry
 
-    PoP\FieldQuery\FeedbackMessageStoreInterface:
-        class: \PoP\ComponentModel\Schema\FeedbackMessageStore
-    PoP\ComponentModel\Schema\FeedbackMessageStoreInterface:
-        class: \PoP\ComponentModel\Schema\FeedbackMessageStore
-
     PoP\ComponentModel\Schema\FieldQueryInterpreterInterface:
         class: \PoP\ComponentModel\Schema\FieldQueryInterpreter
 

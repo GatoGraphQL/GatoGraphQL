@@ -11,7 +11,7 @@ use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Component as APIComponent;
 use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;

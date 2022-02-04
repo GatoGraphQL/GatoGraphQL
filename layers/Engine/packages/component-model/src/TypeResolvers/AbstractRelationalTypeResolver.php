@@ -16,7 +16,7 @@ use PoP\ComponentModel\Error\ErrorProviderInterface;
 use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;

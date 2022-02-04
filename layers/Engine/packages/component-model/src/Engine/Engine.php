@@ -40,7 +40,7 @@ use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;

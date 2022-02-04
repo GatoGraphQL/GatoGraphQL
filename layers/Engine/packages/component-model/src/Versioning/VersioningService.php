@@ -8,7 +8,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Feedback\GeneralFeedback;
 use PoP\ComponentModel\FeedbackMessageProviders\FeedbackMessageProvider;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
 class VersioningService implements VersioningServiceInterface

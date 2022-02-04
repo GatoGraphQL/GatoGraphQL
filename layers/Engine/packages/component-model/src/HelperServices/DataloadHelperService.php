@@ -10,7 +10,7 @@ use PoP\ComponentModel\FeedbackMessageProviders\FeedbackMessageProvider;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\FilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
