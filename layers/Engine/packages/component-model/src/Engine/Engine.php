@@ -1546,13 +1546,6 @@ class Engine implements EngineInterface
                 );
             }
 
-            /**
-             * Regenerate the schema/object FeedbackStore, to handle
-             * errors/warnings/logs/etc per iteration
-             */
-            App::getFeedbackStore()->regenerateSchemaFeedbackStore();
-            App::getFeedbackStore()->regenerateObjectFeedbackStore();
-
             $database_key = $relationalTypeResolver->getTypeOutputDBKey();
 
             // Execute the typeResolver for all combined ids
@@ -1807,6 +1800,14 @@ class Engine implements EngineInterface
                 }
             }
             // }
+            
+            /**
+             * Regenerate the schema/object FeedbackStore, to reset the
+             * state of errors/warnings/logs/etc for the next iteration
+             */
+            $feedbackStore = App::getFeedbackStore();
+            $feedbackStore->regenerateSchemaFeedbackStore();
+            $feedbackStore->regenerateObjectFeedbackStore();
         }
 
         $ret = [];

@@ -15,6 +15,8 @@ class FeedbackStore
     {
         $this->regenerateGeneralFeedbackStore();
         $this->regenerateDocumentFeedbackStore();
+        $this->regenerateSchemaFeedbackStore();
+        $this->regenerateObjectFeedbackStore();
     }
 
     public function regenerateGeneralFeedbackStore(): void
