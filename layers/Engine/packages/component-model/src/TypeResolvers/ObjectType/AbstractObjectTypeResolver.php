@@ -377,7 +377,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $fieldArgs,
                 $maybeObjectErrors,
                 $maybeObjectWarnings,
-                $maybeDeprecations,
+                $maybeObjectDeprecations,
             ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions);
 
             // Store the warnings to be read if needed
@@ -387,10 +387,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             if ($maybeObjectErrors) {
                 return $this->getErrorProvider()->getNestedObjectErrorsFieldError($maybeObjectErrors, $fieldName);
             }
-            if ($maybeDeprecations) {
+            if ($maybeObjectDeprecations) {
                 $id = $this->getID($object);
                 $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
-                foreach ($maybeDeprecations as $deprecationEntry) {
+                foreach ($maybeObjectDeprecations as $deprecationEntry) {
                     $objectFeedbackStore->addObjectDeprecation(
                         new ObjectFeedback(
                             $deprecationEntry[Tokens::MESSAGE],
