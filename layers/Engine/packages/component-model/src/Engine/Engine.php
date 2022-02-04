@@ -1629,6 +1629,7 @@ class Engine implements EngineInterface
                     $iterationObjectWarnings[(string)$id][] = [
                         Tokens::PATH => $objectWarning->getFields(),
                         Tokens::MESSAGE => $objectWarning->getMessage(),
+                        Tokens::EXTENSIONS => $objectWarning->getExtensions(),
                     ];
                 }
             }
@@ -1645,6 +1646,7 @@ class Engine implements EngineInterface
                     $iterationObjectDeprecations[(string)$id][] = [
                         Tokens::PATH => $objectDeprecation->getFields(),
                         Tokens::MESSAGE => $objectDeprecation->getMessage(),
+                        Tokens::EXTENSIONS => $objectDeprecation->getExtensions(),
                     ];
                 }
             }
@@ -1692,6 +1694,7 @@ class Engine implements EngineInterface
                 $iterationSchemaWarnings[] = [
                     Tokens::PATH => $schemaWarning->getFields(),
                     Tokens::MESSAGE => $schemaWarning->getMessage(),
+                    Tokens::EXTENSIONS => $schemaWarning->getExtensions(),
                 ];
             }
             /** @phpstan-ignore-next-line */
