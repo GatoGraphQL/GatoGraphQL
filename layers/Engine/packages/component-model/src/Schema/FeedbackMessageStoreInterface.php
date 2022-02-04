@@ -8,7 +8,4 @@ use PoP\FieldQuery\FeedbackMessageStoreInterface as UpstreamFeedbackMessageStore
 
 interface FeedbackMessageStoreInterface extends UpstreamFeedbackMessageStoreInterface
 {
-    public function addLogEntry(string $entry): void;
-    public function maybeAddLogEntry(string $entry): void;
-    public function getLogEntries(): array;
 }

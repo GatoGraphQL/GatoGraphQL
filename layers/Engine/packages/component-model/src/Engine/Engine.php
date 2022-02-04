@@ -1960,7 +1960,7 @@ class Engine implements EngineInterface
         // Show logs only if both enabled, and passing the action in the URL
         if (Environment::enableShowLogs()) {
             if (in_array(Actions::SHOW_LOGS, App::getState('actions'))) {
-                $ret['logEntries'] = $this->getFeedbackMessageStore()->getLogEntries();
+                $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getDocumentLogs());
             }
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
@@ -1998,8 +1998,14 @@ class Engine implements EngineInterface
             if ($code = $documentFeedbackEntry->getCode()) {
                 $documentFeedbackEntryExtensions['code'] = $code;
             }
+            if ($data = $documentFeedbackEntry->getData()) {
+                $documentFeedbackEntryExtensions['data'] = $data;
+            }
             $documentFeedbackEntryExtensions['location'] = $documentFeedbackEntry->getLocation()->toArray();
-            $output[$documentFeedbackEntry->getMessage()] = $documentFeedbackEntryExtensions;
+            $output[] = [
+                'message' => $documentFeedbackEntry->getMessage(),
+                'extensions' => $documentFeedbackEntryExtensions,
+            ];
         }
         return $output;
     }
