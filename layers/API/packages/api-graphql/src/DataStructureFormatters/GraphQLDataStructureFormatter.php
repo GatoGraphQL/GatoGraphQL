@@ -188,6 +188,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($message = $item[Tokens::MESSAGE] ?? null) {
             $entry['message'] = $message;
         }
+        if ($locations = $item[Tokens::LOCATIONS] ?? null) {
+            $entry['locations'] = $locations;
+        }
         if ($name = $item[Tokens::NAME] ?? null) {
             $entry['name'] = $name;
         }
@@ -249,6 +252,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($message = $item[Tokens::MESSAGE] ?? null) {
             $entry['message'] = $message;
         }
+        if ($locations = $item[Tokens::LOCATIONS] ?? null) {
+            $entry['locations'] = $locations;
+        }
         if ($name = $item[Tokens::NAME] ?? null) {
             $entry['name'] = $name;
         }
@@ -277,27 +283,17 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function reformatDocumentEntries($entries)
     {
         $ret = [];
-        foreach ($entries as $message => $extensions) {
-            $ret[] = $this->getDocumentEntry($message, $extensions);
+        foreach ($entries as $entry) {
+            $ret[] = $this->getDocumentEntry($entry);
         }
         return $ret;
     }
 
-    protected function getDocumentEntry(string $message, array $extensions): array
+    protected function getDocumentEntry(array $entry): array
     {
-        $entry = [
-            'message' => $message,
-        ];
-        // if ($this->addTopLevelExtensionsEntryToResponse()) {
-        if (
-            $extensions = array_merge(
-                $this->getDocumentEntryExtensions(),
-                $extensions
-            )
-        ) {
+        if ($extensions = $entry[Tokens::EXTENSIONS] ?? null) {
             $entry['extensions'] = $this->reformatExtensions($extensions);
-        };
-        // }
+        }
         return $entry;
     }
 

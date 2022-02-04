@@ -15,11 +15,13 @@ class ErrorQueryExecutionGraphQLServerTest extends AbstractQueryExecutionGraphQL
                 [
                     'errors' => [
                         [
-                            "location" => [
-                                "column" => 1,
-                                "line" => 1
+                            "message" => "The query has not been provided",
+                            "locations" => [
+                                [
+                                    "column" => 1,
+                                    "line" => 1
+                                ]
                             ],
-                            "message" => "The query has not been provided"
                         ]
                     ]
                 ]

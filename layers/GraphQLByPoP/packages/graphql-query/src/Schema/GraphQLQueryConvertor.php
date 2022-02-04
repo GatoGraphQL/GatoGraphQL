@@ -148,7 +148,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             // The error description is the exception message
             $errorMessage = $parserError->getMessage();
             $extensions = [
-                'location' => $parserError->getLocation()->toArray(),
+                'locations' => [$parserError->getLocation()->toArray()],
             ];
 
             $this->getFeedbackMessageStore()->addQueryError($errorMessage, $extensions);

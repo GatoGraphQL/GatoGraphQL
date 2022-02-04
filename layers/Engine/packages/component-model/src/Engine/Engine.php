@@ -1631,16 +1631,13 @@ class Engine implements EngineInterface
                 $iterationFeedbackStoreObjectWarnings = [];
                 $fields = $objectWarning->getFields();
                 $message = $objectWarning->getMessage();
-                $extensions = array_merge(
-                    $objectWarning->getExtensions(),
-                    [
-                        'location' => $objectWarning->getLocation()->toArray(),
-                    ]
-                );
+                $locations = [$objectWarning->getLocation()->toArray()];
+                $extensions = $objectWarning->getExtensions();
                 foreach ($objectWarning->getObjectIDs() as $id) {
                     $iterationFeedbackStoreObjectWarnings[(string)$id][] = [
                         Tokens::PATH => $fields,
                         Tokens::MESSAGE => $message,
+                        Tokens::LOCATIONS => $locations,
                         Tokens::EXTENSIONS => $extensions,
                     ];
                 }
@@ -1668,16 +1665,13 @@ class Engine implements EngineInterface
                 $iterationFeedbackStoreObjectDeprecations = [];
                 $fields = $objectDeprecation->getFields();
                 $message = $objectDeprecation->getMessage();
-                $extensions = array_merge(
-                    $objectDeprecation->getExtensions(),
-                    [
-                        'location' => $objectDeprecation->getLocation()->toArray(),
-                    ]
-                );
+                $locations = [$objectDeprecation->getLocation()->toArray()];
+                $extensions = $objectDeprecation->getExtensions();
                 foreach ($objectDeprecation->getObjectIDs() as $id) {
                     $iterationFeedbackStoreObjectDeprecations[(string)$id][] = [
                         Tokens::PATH => $fields,
                         Tokens::MESSAGE => $message,
+                        Tokens::LOCATIONS => $locations,
                         Tokens::EXTENSIONS => $extensions,
                     ];
                 }
@@ -1720,16 +1714,11 @@ class Engine implements EngineInterface
             $feedbackStoreSchemaErrors = App::getFeedbackStore()->schemaFeedbackStore->getSchemaErrors();
             foreach ($feedbackStoreSchemaErrors as $schemaError) {
                 $iterationFeedbackStoreSchemaErrors = [];
-                $extensions = array_merge(
-                    $schemaError->getExtensions(),
-                    [
-                        'location' => $schemaError->getLocation()->toArray(),
-                    ]
-                );
                 $iterationFeedbackStoreSchemaErrors[] = [
                     Tokens::PATH => $schemaError->getFields(),
                     Tokens::MESSAGE => $schemaError->getMessage(),
-                    Tokens::EXTENSIONS => $extensions,
+                    Tokens::LOCATIONS => [$schemaError->getLocation()->toArray()],
+                    Tokens::EXTENSIONS => $schemaError->getExtensions(),
                 ];
                 $iterationDBKey = $schemaError->getRelationalTypeResolver()->getTypeOutputDBKey();
                 $dbNameSchemaErrorEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreSchemaErrors, false, $relationalTypeResolver);
@@ -1752,16 +1741,11 @@ class Engine implements EngineInterface
             $feedbackStoreSchemaWarnings = App::getFeedbackStore()->schemaFeedbackStore->getSchemaWarnings();
             foreach ($feedbackStoreSchemaWarnings as $schemaWarning) {
                 $iterationFeedbackStoreSchemaWarnings = [];
-                $extensions = array_merge(
-                    $schemaWarning->getExtensions(),
-                    [
-                        'location' => $schemaWarning->getLocation()->toArray(),
-                    ]
-                );
                 $iterationFeedbackStoreSchemaWarnings[] = [
                     Tokens::PATH => $schemaWarning->getFields(),
                     Tokens::MESSAGE => $schemaWarning->getMessage(),
-                    Tokens::EXTENSIONS => $extensions,
+                    Tokens::LOCATIONS => [$schemaWarning->getLocation()->toArray()],
+                    Tokens::EXTENSIONS => $schemaWarning->getExtensions(),
                 ];
                 $iterationDBKey = $schemaWarning->getRelationalTypeResolver()->getTypeOutputDBKey();
                 $dbNameSchemaWarningEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreSchemaWarnings, false, $relationalTypeResolver);
@@ -1915,8 +1899,22 @@ class Engine implements EngineInterface
 
         $documentFeedbackStore = App::getFeedbackStore()->documentFeedbackStore;
 
-        if ($documentErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
-            $ret['documentErrors'] = $documentErrors;
+        if ($queryErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
+            $queryDocumentErrors = [];
+            foreach ($queryErrors as $message => $extensions) {
+                $queryDocumentError =  [
+                    Tokens::MESSAGE => $message,
+                ];
+                if ($locations = $extensions['locations'] ?? null) {
+                    $queryDocumentError[Tokens::LOCATIONS] = $locations;
+                    unset($extensions['locations']);
+                }
+                if ($extensions !== []) {
+                    $queryDocumentError[Tokens::EXTENSIONS] = $extensions;
+                }
+                $queryDocumentErrors[] = $queryDocumentError;
+            }
+            $ret['documentErrors'] = $queryDocumentErrors;
         }
         if ($documentErrors = $documentFeedbackStore->getDocumentErrors()) {
             $ret['documentErrors'] = array_merge(
@@ -2001,11 +1999,15 @@ class Engine implements EngineInterface
             if ($data = $documentFeedbackEntry->getData()) {
                 $documentFeedbackEntryExtensions['data'] = $data;
             }
-            $documentFeedbackEntryExtensions['location'] = $documentFeedbackEntry->getLocation()->toArray();
-            $output[] = [
-                'message' => $documentFeedbackEntry->getMessage(),
-                'extensions' => $documentFeedbackEntryExtensions,
-            ];
+            $output[] = array_merge(
+                [
+                    Tokens::MESSAGE => $documentFeedbackEntry->getMessage(),
+                    Tokens::LOCATIONS => [$documentFeedbackEntry->getLocation()->toArray()],
+                ],
+                $documentFeedbackEntryExtensions !== [] ? [
+                    Tokens::EXTENSIONS => $documentFeedbackEntryExtensions,
+                ] : []
+            );
         }
         return $output;
     }
