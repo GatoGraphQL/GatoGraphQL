@@ -11,7 +11,6 @@ use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
-use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Component as APIComponent;
 use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
@@ -24,17 +23,8 @@ use PoPAPI\API\Response\Schemes as APISchemes;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
-    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
-    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-    }
-    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
-    {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
-    }
     final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
     {
         $this->feedbackMessageProvider = $feedbackMessageProvider;

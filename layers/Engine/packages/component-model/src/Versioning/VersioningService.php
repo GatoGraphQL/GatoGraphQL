@@ -8,7 +8,6 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Feedback\GeneralFeedback;
 use PoP\ComponentModel\FeedbackMessageProviders\FeedbackMessageProvider;
-use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
 class VersioningService implements VersioningServiceInterface
@@ -18,17 +17,8 @@ class VersioningService implements VersioningServiceInterface
     private ?array $versionConstraintsForFields = null;
     private ?array $versionConstraintsForDirectives = null;
 
-    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
-    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-    }
-    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
-    {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
-    }
     final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
     {
         $this->feedbackMessageProvider = $feedbackMessageProvider;

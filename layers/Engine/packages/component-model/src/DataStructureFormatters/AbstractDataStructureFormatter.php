@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DataStructureFormatters;
 
-use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -12,17 +11,8 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
 {
     use BasicServiceTrait;
 
-    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
-    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-    }
-    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
-    {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
-    }
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;

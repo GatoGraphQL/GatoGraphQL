@@ -10,7 +10,6 @@ use PoP\ComponentModel\FeedbackMessageProviders\FeedbackMessageProvider;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\FilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -22,19 +21,10 @@ class DataloadHelperService implements DataloadHelperServiceInterface
 {
     use BasicServiceTrait;
 
-    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
     private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
-    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-    }
-    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
-    {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
-    }
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;

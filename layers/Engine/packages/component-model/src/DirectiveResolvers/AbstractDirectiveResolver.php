@@ -19,7 +19,6 @@ use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveRe
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
-use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -57,7 +56,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected array $schemaDirectiveArgsCache = [];
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?SemverHelperServiceInterface $semverHelperService = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
@@ -106,14 +104,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
-    }
-    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-    }
-    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
-    {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
     final public function setSemverHelperService(SemverHelperServiceInterface $semverHelperService): void
     {
