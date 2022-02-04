@@ -59,10 +59,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 $this->reformatSchemaEntries($data['schemaWarnings'])
             );
         }
-        if ($data['queryWarnings'] ?? null) {
+        if ($data['documentWarnings'] ?? null) {
             $warnings = array_merge(
                 $warnings,
-                $this->reformatDocumentEntries($data['queryWarnings'])
+                $this->reformatDocumentEntries($data['documentWarnings'])
             );
         }
         if ($warnings) {

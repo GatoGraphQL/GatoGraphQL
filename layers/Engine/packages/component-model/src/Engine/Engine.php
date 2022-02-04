@@ -1836,12 +1836,12 @@ class Engine implements EngineInterface
                 $this->getDocumentFeedbackEntriesForOutput($documentErrors)
             );
         }
-        if ($queryWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
-            $ret['queryWarnings'] = $queryWarnings;
+        if ($documentWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
+            $ret['documentWarnings'] = $documentWarnings;
         }
-        if ($queryWarnings = $documentFeedbackStore->getDocumentWarnings()) {
-            $ret['queryWarnings'] = array_merge(
-                $ret['queryWarnings'] ?? [],
+        if ($documentWarnings = $documentFeedbackStore->getDocumentWarnings()) {
+            $ret['documentWarnings'] = array_merge(
+                $ret['documentWarnings'] ?? [],
                 $this->getDocumentFeedbackEntriesForOutput($documentErrors)
             );
         }
