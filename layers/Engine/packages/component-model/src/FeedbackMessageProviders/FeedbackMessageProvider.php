@@ -11,7 +11,8 @@ use PoP\Root\FeedbackMessage\FeedbackMessageCategories;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {
-    public const W1 = '1';
+    public const W1 = 'w1';
+    public const E1 = 'e1';
 
     /**
      * @return string[]
@@ -20,6 +21,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     {
         return [
             self::W1,
+            self::E1,
         ];
     }
 
@@ -27,6 +29,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     {
         return match ($code) {
             self::W1 => $this->__('URL param \'' . Params::VERSION_CONSTRAINT_FOR_FIELDS . '\' expects the type and field name separated by \'' . Constants::TYPE_FIELD_SEPARATOR . '\' (eg: \'?' . Params::VERSION_CONSTRAINT_FOR_FIELDS . '[Post' . Constants::TYPE_FIELD_SEPARATOR . 'title]=^0.1\'), so the following value has been ignored: \'%s\'', 'component-model'),
+            self::E1 => $this->__('Field \'%s\' is not a connection', 'pop-component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -35,6 +38,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     {
         return match ($code) {
             self::W1 => FeedbackMessageCategories::WARNING,
+            self::E1 => FeedbackMessageCategories::ERROR,
             default => parent::getCategory($code),
         };
     }

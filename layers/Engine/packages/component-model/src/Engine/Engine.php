@@ -865,9 +865,9 @@ class Engine implements EngineInterface
             if ($noTargetObjectTypeResolverDataItems) {
                 $this->doAddDatasetToDatabase($database, $dbKey, $noTargetObjectTypeResolverDataItems);
             }
-        } else {
-            $this->doAddDatasetToDatabase($database, $dbKey, $dataitems);
+            return;
         }
+        $this->doAddDatasetToDatabase($database, $dbKey, $dataitems);
     }
 
     protected function getInterreferencedModuleFullpaths(array $module, array &$props): array
@@ -1455,46 +1455,48 @@ class Engine implements EngineInterface
         bool $entryHasId,
         RelationalTypeResolverInterface $relationalTypeResolver
     ): array {
-        $dbname_entries = [];
-        if ($entries) {
-            // By default place everything under "primary"
-            $dbname_entries['primary'] = $entries;
+        if (!$entries) {
+            return [];
+        }
+        
+        // By default place everything under "primary"
+        $dbname_entries = [
+            'primary' => $entries,
+        ];
 
-            // Allow to inject what data fields must be placed under what dbNames
-            // Array of key: dbName, values: data-fields
-            $dbname_datafields = App::applyFilters(
-                'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
-                [],
-                $relationalTypeResolver
-            );
-            foreach ($dbname_datafields as $dbname => $data_fields) {
-                // Move these data fields under "meta" DB name
-                if ($entryHasId) {
-                    foreach ($dbname_entries['primary'] as $id => $dbObject) {
-                        $entry_data_fields_to_move = array_intersect(
-                            // If field "id" for this type has been disabled (eg: by ACL),
-                            // then $dbObject may be `null`
-                            array_keys($dbObject ?? []),
-                            $data_fields
-                        );
-                        foreach ($entry_data_fields_to_move as $data_field) {
-                            $dbname_entries[$dbname][$id][$data_field] = $dbname_entries['primary'][$id][$data_field];
-                            unset($dbname_entries['primary'][$id][$data_field]);
-                        }
-                    }
-                } else {
+        // Allow to inject what data fields must be placed under what dbNames
+        // Array of key: dbName, values: data-fields
+        $dbname_datafields = App::applyFilters(
+            'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
+            [],
+            $relationalTypeResolver
+        );
+        foreach ($dbname_datafields as $dbname => $data_fields) {
+            // Move these data fields under "meta" DB name
+            if ($entryHasId) {
+                foreach ($dbname_entries['primary'] as $id => $dbObject) {
                     $entry_data_fields_to_move = array_intersect(
-                        array_keys($dbname_entries['primary']),
+                        // If field "id" for this type has been disabled (eg: by ACL),
+                        // then $dbObject may be `null`
+                        array_keys($dbObject ?? []),
                         $data_fields
                     );
                     foreach ($entry_data_fields_to_move as $data_field) {
-                        $dbname_entries[$dbname][$data_field] = $dbname_entries['primary'][$data_field];
-                        unset($dbname_entries['primary'][$data_field]);
+                        $dbname_entries[$dbname][$id][$data_field] = $dbname_entries['primary'][$id][$data_field];
+                        unset($dbname_entries['primary'][$id][$data_field]);
                     }
                 }
+                continue;
+            }
+            $entry_data_fields_to_move = array_intersect(
+                array_keys($dbname_entries['primary']),
+                $data_fields
+            );
+            foreach ($entry_data_fields_to_move as $data_field) {
+                $dbname_entries[$dbname][$data_field] = $dbname_entries['primary'][$data_field];
+                unset($dbname_entries['primary'][$data_field]);
             }
         }
-
         return $dbname_entries;
     }
 
@@ -1624,30 +1626,66 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
-            foreach (App::getFeedbackStore()->objectFeedbackStore->getObjectWarnings() as $objectWarning) {
+            $feedbackStoreObjectWarnings = App::getFeedbackStore()->objectFeedbackStore->getObjectWarnings();
+            foreach ($feedbackStoreObjectWarnings as $objectWarning) {
+                $iterationFeedbackStoreObjectWarnings = [];
+                $fields = $objectWarning->getFields();
+                $message = $objectWarning->getMessage();
+                $extensions = $objectWarning->getExtensions();
+                if ($location = $objectWarning->getLocation()) {
+                    $extensions['location'] = $location->toArray();
+                }
                 foreach ($objectWarning->getObjectIDs() as $id) {
-                    $iterationObjectWarnings[(string)$id][] = [
-                        Tokens::PATH => $objectWarning->getFields(),
-                        Tokens::MESSAGE => $objectWarning->getMessage(),
-                        Tokens::EXTENSIONS => $objectWarning->getExtensions(),
+                    $iterationFeedbackStoreObjectWarnings[(string)$id][] = [
+                        Tokens::PATH => $fields,
+                        Tokens::MESSAGE => $message,
+                        Tokens::EXTENSIONS => $extensions,
                     ];
+                }
+                $iterationDBKey = $objectWarning->getRelationalTypeResolver()->getTypeOutputDBKey();
+                $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreObjectWarnings, true, $relationalTypeResolver);
+                foreach ($dbNameWarningEntries as $dbname => $idEntries) {
+                    foreach ($idEntries as $id => $idEntries) {
+                        $objectWarnings[$dbname][$iterationDBKey][$id] = array_merge(
+                            $schemaErrors[$dbname][$iterationDBKey][$id] ?? [],
+                            $entries
+                        );
+                    }
                 }
             }
             /** @phpstan-ignore-next-line */
-            if ($iterationObjectWarnings) {
+            if ($iterationObjectWarnings !== []) {
                 $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationObjectWarnings, true, $relationalTypeResolver);
                 foreach ($dbNameWarningEntries as $dbname => $entries) {
                     $objectWarnings[$dbname] ??= [];
                     $this->addDatasetToDatabase($objectWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
-            foreach (App::getFeedbackStore()->objectFeedbackStore->getObjectDeprecations() as $objectDeprecation) {
+            $feedbackStoreObjectDeprecations = App::getFeedbackStore()->objectFeedbackStore->getObjectDeprecations();
+            foreach ($feedbackStoreObjectDeprecations as $objectDeprecation) {
+                $iterationFeedbackStoreObjectDeprecations = [];
+                $fields = $objectDeprecation->getFields();
+                $message = $objectDeprecation->getMessage();
+                $extensions = $objectDeprecation->getExtensions();
+                if ($location = $objectDeprecation->getLocation()) {
+                    $extensions['location'] = $location->toArray();
+                }
                 foreach ($objectDeprecation->getObjectIDs() as $id) {
-                    $iterationObjectDeprecations[(string)$id][] = [
-                        Tokens::PATH => $objectDeprecation->getFields(),
-                        Tokens::MESSAGE => $objectDeprecation->getMessage(),
-                        Tokens::EXTENSIONS => $objectDeprecation->getExtensions(),
+                    $iterationFeedbackStoreObjectDeprecations[(string)$id][] = [
+                        Tokens::PATH => $fields,
+                        Tokens::MESSAGE => $message,
+                        Tokens::EXTENSIONS => $extensions,
                     ];
+                }
+                $iterationDBKey = $objectDeprecation->getRelationalTypeResolver()->getTypeOutputDBKey();
+                $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreObjectDeprecations, true, $objectDeprecation->getRelationalTypeResolver());
+                foreach ($dbNameDeprecationEntries as $dbname => $idEntries) {
+                    foreach ($idEntries as $id => $idEntries) {
+                        $objectDeprecations[$dbname][$iterationDBKey][$id] = array_merge(
+                            $schemaErrors[$dbname][$iterationDBKey][$id] ?? [],
+                            $entries
+                        );
+                    }
                 }
             }
             /** @phpstan-ignore-next-line */
@@ -1675,8 +1713,28 @@ class Engine implements EngineInterface
                 }
             }
 
-            $storeSchemaErrors = $this->getFeedbackMessageStore()->retrieveAndClearSchemaErrors();
-            if ($iterationSchemaErrors !== [] || $storeSchemaErrors !== []) {
+            $feedbackStoreSchemaErrors = App::getFeedbackStore()->schemaFeedbackStore->getSchemaErrors();
+            foreach ($feedbackStoreSchemaErrors as $schemaError) {
+                $iterationFeedbackStoreSchemaErrors = [];
+                $extensions = $schemaError->getExtensions();
+                if ($location = $schemaError->getLocation()) {
+                    $extensions['location'] = $location->toArray();
+                }
+                $iterationFeedbackStoreSchemaErrors[] = [
+                    Tokens::PATH => $schemaError->getFields(),
+                    Tokens::MESSAGE => $schemaError->getMessage(),
+                    Tokens::EXTENSIONS => $extensions,
+                ];
+                $iterationDBKey = $schemaError->getRelationalTypeResolver()->getTypeOutputDBKey();
+                $dbNameSchemaErrorEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreSchemaErrors, false, $relationalTypeResolver);
+                foreach ($dbNameSchemaErrorEntries as $dbname => $entries) {
+                    $schemaErrors[$dbname][$iterationDBKey] = array_merge(
+                        $schemaErrors[$dbname][$iterationDBKey] ?? [],
+                        $entries
+                    );
+                }
+            }
+            if ($iterationSchemaErrors !== []) {
                 $dbNameSchemaErrorEntries = $this->moveEntriesUnderDBName($iterationSchemaErrors, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaErrorEntries as $dbname => $entries) {
                     $schemaErrors[$dbname][$database_key] = array_merge(
@@ -1684,21 +1742,30 @@ class Engine implements EngineInterface
                         $entries
                     );
                 }
-                $dbNameStoreSchemaErrors = $this->moveEntriesUnderDBName($storeSchemaErrors, false, $relationalTypeResolver);
-                $schemaErrors = array_merge_recursive(
-                    $schemaErrors,
-                    $dbNameStoreSchemaErrors
-                );
             }
-            foreach (App::getFeedbackStore()->schemaFeedbackStore->getSchemaWarnings() as $schemaWarning) {
-                $iterationSchemaWarnings[] = [
+            $feedbackStoreSchemaWarnings = App::getFeedbackStore()->schemaFeedbackStore->getSchemaWarnings();
+            foreach ($feedbackStoreSchemaWarnings as $schemaWarning) {
+                $iterationFeedbackStoreSchemaWarnings = [];
+                $extensions = $schemaWarning->getExtensions();
+                if ($location = $schemaWarning->getLocation()) {
+                    $extensions['location'] = $location->toArray();
+                }
+                $iterationFeedbackStoreSchemaWarnings[] = [
                     Tokens::PATH => $schemaWarning->getFields(),
                     Tokens::MESSAGE => $schemaWarning->getMessage(),
-                    Tokens::EXTENSIONS => $schemaWarning->getExtensions(),
+                    Tokens::EXTENSIONS => $extensions,
                 ];
+                $iterationDBKey = $schemaWarning->getRelationalTypeResolver()->getTypeOutputDBKey();
+                $dbNameSchemaWarningEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreSchemaWarnings, false, $relationalTypeResolver);
+                foreach ($dbNameSchemaWarningEntries as $dbname => $entries) {
+                    $schemaWarnings[$dbname][$iterationDBKey] = array_merge(
+                        $schemaWarnings[$dbname][$iterationDBKey] ?? [],
+                        $entries
+                    );
+                }
             }
             /** @phpstan-ignore-next-line */
-            if ($iterationSchemaWarnings) {
+            if ($iterationSchemaWarnings !== []) {
                 $iterationSchemaWarnings = array_intersect_key($iterationSchemaWarnings, array_unique(array_map('serialize', $iterationSchemaWarnings)));
                 $dbNameSchemaWarningEntries = $this->moveEntriesUnderDBName($iterationSchemaWarnings, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaWarningEntries as $dbname => $entries) {
