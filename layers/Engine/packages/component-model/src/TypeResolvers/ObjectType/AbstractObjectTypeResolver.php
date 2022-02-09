@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
 use Exception;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\ObjectFeedback;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
@@ -19,6 +22,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
@@ -343,7 +347,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
             // Store the warnings to be read if needed
             if ($schemaWarnings) {
-                $this->getFeedbackMessageStore()->addSchemaWarnings($schemaWarnings);
+                $schemaFeedbackStore = App::getFeedbackStore()->schemaFeedbackStore;
+                foreach ($schemaWarnings as $warningEntry) {
+                    $schemaFeedbackStore->addSchemaWarning(
+                        new SchemaFeedback(
+                            $warningEntry[Tokens::MESSAGE],
+                            null,
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                            $warningEntry[Tokens::PATH],
+                            $warningEntry[Tokens::EXTENSIONS] ?? [],
+                        )
+                    );
+                }
             }
             if ($schemaErrors) {
                 return $this->getErrorProvider()->getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
@@ -374,26 +390,46 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $fieldArgs,
                 $maybeObjectErrors,
                 $maybeObjectWarnings,
-                $maybeDeprecationMessages,
+                $maybeObjectDeprecations,
             ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions);
 
             // Store the warnings to be read if needed
             if ($maybeObjectWarnings) {
-                $this->getFeedbackMessageStore()->addObjectWarnings($maybeObjectWarnings);
+                $id = $this->getID($object);
+                $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
+                foreach ($maybeObjectWarnings as $warningEntry) {
+                    $objectFeedbackStore->addObjectWarning(
+                        new ObjectFeedback(
+                            $warningEntry[Tokens::MESSAGE],
+                            null,
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                            $warningEntry[Tokens::PATH],
+                            [$id],
+                            $warningEntry[Tokens::EXTENSIONS] ?? [],
+                        )
+                    );
+                }
             }
             if ($maybeObjectErrors) {
                 return $this->getErrorProvider()->getNestedObjectErrorsFieldError($maybeObjectErrors, $fieldName);
             }
-            if ($maybeDeprecationMessages) {
+            if ($maybeObjectDeprecations) {
                 $id = $this->getID($object);
-                $objectDeprecations = [];
-                foreach ($maybeDeprecationMessages as $deprecationMessage) {
-                    $objectDeprecations[(string)$id][] = [
-                        Tokens::PATH => [$field],
-                        Tokens::MESSAGE => $deprecationMessage,
-                    ];
+                $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
+                foreach ($maybeObjectDeprecations as $deprecationEntry) {
+                    $objectFeedbackStore->addObjectDeprecation(
+                        new ObjectFeedback(
+                            $deprecationEntry[Tokens::MESSAGE],
+                            null,
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                            $deprecationEntry[Tokens::PATH],
+                            [$id],
+                            $deprecationEntry[Tokens::EXTENSIONS] ?? [],
+                        )
+                    );
                 }
-                $this->getFeedbackMessageStore()->addObjectDeprecations($objectDeprecations);
             }
 
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
@@ -407,14 +443,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     }
                     if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
                         $id = $this->getID($object);
-                        $objectDeprecations = [];
+                        $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
                         foreach ($maybeDeprecations as $deprecation) {
-                            $objectDeprecations[(string)$id][] = [
-                                Tokens::PATH => [$field],
-                                Tokens::MESSAGE => $deprecation,
-                            ];
+                            $objectFeedbackStore->addObjectDeprecation(
+                                new ObjectFeedback(
+                                    $deprecation,
+                                    null,
+                                    LocationHelper::getNonSpecificLocation(),
+                                    $this,
+                                    [$field],
+                                    [$id],
+                                )
+                            );
                         }
-                        $this->getFeedbackMessageStore()->addObjectDeprecations($objectDeprecations);
                     }
                 }
                 if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {

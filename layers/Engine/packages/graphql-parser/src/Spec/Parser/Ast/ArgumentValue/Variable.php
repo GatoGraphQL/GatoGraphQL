@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
-use LogicException;
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
-use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\FeedbackMessageProviders\FeedbackMessageProvider;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 use stdClass;
 
@@ -18,15 +19,24 @@ class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
 
-    private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
+    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
-    final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
+    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
-        $this->graphQLErrorMessageProvider = $graphQLErrorMessageProvider;
+        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
     }
-    final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
+        return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
+    }
+    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    {
+        $this->feedbackMessageProvider = $feedbackMessageProvider;
+    }
+    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    {
+        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackMessageProvider::class);
     }
 
     private ?Context $context = null;
@@ -121,12 +131,16 @@ class Variable extends AbstractAst implements WithValueInterface
      * Get the value from the context or from the variable
      *
      * @return InputList|InputObject|Literal|null
-     * @throws LogicException
+     * @throws InvalidRequestException
      */
     public function getValue(): mixed
     {
         if ($this->context === null) {
-            throw new LogicException($this->getGraphQLErrorMessageProvider()->getContextNotSetErrorMessage($this->name));
+            throw new InvalidRequestException(
+                $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E2, $this->name),
+                $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E2),
+                $this->getLocation()
+            );
         }
         if ($this->context->hasVariableValue($this->name)) {
             $variableValue = $this->context->getVariableValue($this->name);
@@ -141,6 +155,13 @@ class Variable extends AbstractAst implements WithValueInterface
         if ($this->hasDefaultValue()) {
             return $this->getDefaultValue();
         }
-        throw new LogicException($this->getGraphQLErrorMessageProvider()->getValueIsNotSetForVariableErrorMessage($this->name));
+        if ($this->isRequired()) {
+            throw new InvalidRequestException(
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, $this->name),
+                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_5),
+                $this->getLocation()
+            );
+        }
+        return null;
     }
 }

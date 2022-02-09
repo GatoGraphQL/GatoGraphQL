@@ -11,7 +11,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\Root\App;
+use PoP\ComponentModel\App;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {

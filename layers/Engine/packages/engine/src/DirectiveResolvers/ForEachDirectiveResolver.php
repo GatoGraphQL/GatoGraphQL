@@ -70,8 +70,20 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObj
     /**
      * Iterate on all items from the array
      */
-    protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$objectIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array
-    {
+    protected function getArrayItems(
+        array &$array,
+        int | string $id,
+        string $field,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $objectIDItems,
+        array $previousDBItems,
+        array &$dbItems,
+        array &$variables,
+        array &$messages,
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations,
+    ): ?array {
         if ($if = $this->directiveArgsForSchema['if'] ?? null) {
             // If it is a field, execute the function against all the values in the array
             // Those that satisfy the condition stay, the others are filtered out
@@ -86,13 +98,6 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObj
                     $this->addExpressionForObject($id, Expressions::NAME_VALUE, $value, $messages);
                     $expressions = $this->getExpressionsForObject($id, $variables, $messages);
                     $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $if, $variables, $expressions, $options);
-                    // Merge the objectWarnings, if any
-                    if ($storedObjectWarnings = $this->getFeedbackMessageStore()->retrieveAndClearObjectWarnings($id)) {
-                        $objectWarnings[$id] = array_merge(
-                            $objectWarnings[$id] ?? [],
-                            $storedObjectWarnings
-                        );
-                    }
                     if (GeneralUtils::isError($resolvedValue)) {
                         // Show the error message, and return nothing
                         /** @var Error */

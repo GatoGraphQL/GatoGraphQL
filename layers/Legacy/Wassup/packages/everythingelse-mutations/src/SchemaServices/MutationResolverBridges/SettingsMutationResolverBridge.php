@@ -7,7 +7,7 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\Root\App;
+use PoP\ComponentModel\App;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\SettingsMutationResolver;
 
 class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBridge

@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 trait RemoveIDsDataFieldsDirectiveResolverTrait
 {
     protected function removeIDsDataFields(
-        array &$idsDataFieldsToRemove,
+        array $idsDataFieldsToRemove,
         array &$succeedingPipelineIDsDataFields
     ): void {
         // For each combination of ID and field, remove them from the upcoming pipeline stages
@@ -35,9 +35,9 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
      */
     protected function setIDsDataFieldsAsNull(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$idsDataFieldsToSetAsNull,
+        array $idsDataFieldsToSetAsNull,
+        array $objectIDItems,
         array &$dbItems,
-        array &$objectIDItems,
     ): void {
         foreach (array_keys($idsDataFieldsToSetAsNull) as $id) {
             $object = $objectIDItems[$id];

@@ -19,6 +19,6 @@ class CustomCMSCodeFunctionAPI extends FunctionAPI
 /**
  * Initialize
  */
-if (!\PoP\ComponentModel\Environment::disableCustomCMSCode()) {
+if (!\PoP\Application\Environment::disableCustomCMSCode()) {
     new CustomCMSCodeFunctionAPI();
 }

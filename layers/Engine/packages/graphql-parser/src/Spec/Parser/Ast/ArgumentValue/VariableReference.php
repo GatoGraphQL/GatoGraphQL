@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
-use LogicException;
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
-use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 
 class VariableReference extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
 
-    private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
 
-    final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
+    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
-        $this->graphQLErrorMessageProvider = $graphQLErrorMessageProvider;
+        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
     }
-    final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
+        return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
     }
 
     public function __construct(
@@ -48,12 +48,16 @@ class VariableReference extends AbstractAst implements WithValueInterface
     /**
      * Get the value from the context or from the variable
      *
-     * @throws LogicException
+     * @throws InvalidRequestException
      */
     public function getValue(): mixed
     {
         if ($this->variable === null) {
-            throw new LogicException($this->getGraphQLErrorMessageProvider()->getVariableDoesNotExistErrorMessage($this->name));
+            throw new InvalidRequestException(
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, $this->name),
+                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_3),
+                $this->getLocation()
+            );
         }
 
         return $this->variable->getValue();

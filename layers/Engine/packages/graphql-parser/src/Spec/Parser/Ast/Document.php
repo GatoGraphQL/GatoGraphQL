@@ -4,25 +4,28 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
-use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 
-class Document
+class Document implements DocumentInterface
 {
     use StandaloneServiceTrait;
 
-    private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
 
-    final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
+    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
-        $this->graphQLErrorMessageProvider = $graphQLErrorMessageProvider;
+        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
     }
-    final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
+        return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
     }
 
     public function __construct(
@@ -65,10 +68,13 @@ class Document
      */
     public function validate(): void
     {
+        $this->assertQueryNotEmpty();
         $this->assertOperationsDefined();
         $this->assertOperationNamesUnique();
         $this->assertNonEmptyOperationName();
         $this->assertFragmentReferencesAreValid();
+        $this->assertFragmentNamesUnique();
+        $this->assertNoCyclicalFragments();
         $this->assertFragmentsAreUsed();
         $this->assertVariableNamesUnique();
         $this->assertAllVariablesExist();
@@ -79,19 +85,29 @@ class Document
     /**
      * @throws InvalidRequestException
      */
-    protected function assertOperationsDefined(): void
+    protected function assertQueryNotEmpty(): void
     {
-        if ($this->getOperations() === []) {
+        if ($this->getOperations() === [] && $this->getFragments() === []) {
             throw new InvalidRequestException(
-                $this->getGraphQLErrorMessageProvider()->getNoOperationsDefinedInQueryErrorMessage(),
-                $this->getNonSpecificLocation()
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_C),
+                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_C),
+                LocationHelper::getNonSpecificLocation()
             );
         }
     }
 
-    protected function getNonSpecificLocation(): Location
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertOperationsDefined(): void
     {
-        return new Location(1, 1);
+        if ($this->getOperations() === []) {
+            throw new InvalidRequestException(
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_D),
+                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_D),
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
     }
 
     /**
@@ -104,8 +120,9 @@ class Document
             $operationName = $operation->getName();
             if (in_array($operationName, $operationNames)) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getDuplicateOperationNameErrorMessage($operationName),
-                    $this->getNonSpecificLocation()
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_2_1_1, $operationName),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_2_1_1),
+                    LocationHelper::getNonSpecificLocation()
                 );
             }
             $operationNames[] = $operationName;
@@ -123,8 +140,9 @@ class Document
         foreach ($this->getOperations() as $operation) {
             if (empty($operation->getName())) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getEmptyOperationNameErrorMessage(),
-                    $this->getNonSpecificLocation()
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_2_2_1),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_2_2_1),
+                    LocationHelper::getNonSpecificLocation()
                 );
             }
         }
@@ -136,16 +154,122 @@ class Document
     protected function assertFragmentReferencesAreValid(): void
     {
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getFragmentReferences($this->getFragments()) as $fragmentReference) {
+            foreach ($this->getFragmentReferencesInOperation($operation) as $fragmentReference) {
                 if ($this->getFragment($fragmentReference->getName()) !== null) {
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage($fragmentReference->getName()),
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_2_1, $fragmentReference->getName()),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_5_2_1),
                     $fragmentReference->getLocation()
                 );
             }
         }
+    }
+
+    /**
+     * Gather all the FragmentReference within the Operation.
+     *
+     * @return FragmentReference[]
+     */
+    protected function getFragmentReferencesInOperation(OperationInterface $operation): array
+    {
+        $referencedFragmentNames = [];
+        return $this->getFragmentReferencesInFieldsOrFragmentBonds($operation->getFieldsOrFragmentBonds(), $referencedFragmentNames);
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param string[] $referencedFragmentNames To stop cyclical fragments
+     * @return FragmentReference[]
+     */
+    protected function getFragmentReferencesInFieldsOrFragmentBonds(array $fieldsOrFragmentBonds, array &$referencedFragmentNames): array
+    {
+        $fragmentReferences = [];
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof LeafField) {
+                continue;
+            }
+            if (
+                $fieldOrFragmentBond instanceof InlineFragment
+                || $fieldOrFragmentBond instanceof RelationalField
+            ) {
+                $fragmentReferences = array_merge(
+                    $fragmentReferences,
+                    $this->getFragmentReferencesInFieldsOrFragmentBonds($fieldOrFragmentBond->getFieldsOrFragmentBonds(), $referencedFragmentNames)
+                );
+                continue;
+            }
+            /** @var FragmentReference */
+            $fragmentReference = $fieldOrFragmentBond;
+            /**
+             * Avoid cyclical references
+             */
+            if (in_array($fragmentReference->getName(), $referencedFragmentNames)) {
+                continue;
+            }
+            $fragmentReferences[] = $fragmentReference;
+            $referencedFragmentNames[] = $fragmentReference->getName();
+            $fragment = $this->getFragment($fragmentReference->getName());
+            if ($fragment === null) {
+                continue;
+            }
+            $fragmentReferences = array_merge(
+                $fragmentReferences,
+                $this->getFragmentReferencesInFieldsOrFragmentBonds($fragment->getFieldsOrFragmentBonds(), $referencedFragmentNames)
+            );
+        }
+        return $fragmentReferences;
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertFragmentNamesUnique(): void
+    {
+        $fragmentNames = [];
+        foreach ($this->getFragments() as $fragment) {
+            $fragmentName = $fragment->getName();
+            if (in_array($fragmentName, $fragmentNames)) {
+                throw new InvalidRequestException(
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_1_1, $fragmentName),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_5_1_1),
+                    LocationHelper::getNonSpecificLocation()
+                );
+            }
+            $fragmentNames[] = $fragmentName;
+        }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertNoCyclicalFragments(): void
+    {
+        foreach ($this->getFragments() as $fragment) {
+            $fragmentReferences = $this->getFragmentReferencesInFragment($fragment);
+            foreach ($fragmentReferences as $fragmentReference) {
+                if ($fragmentReference->getName() !== $fragment->getName()) {
+                    continue;
+                }
+                throw new InvalidRequestException(
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_2_2, $fragmentReference->getName()),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_5_2_2),
+                    $fragmentReference->getLocation()
+                );
+            }
+        }
+    }
+
+    /**
+     * Gather all the FragmentReference within the Operation.
+     *
+     * @return FragmentReference[]
+     */
+    protected function getFragmentReferencesInFragment(Fragment $fragment): array
+    {
+        $referencedFragmentNames = [];
+        return $this->getFragmentReferencesInFieldsOrFragmentBonds($fragment->getFieldsOrFragmentBonds(), $referencedFragmentNames);
     }
 
     /**
@@ -157,7 +281,7 @@ class Document
 
         // Collect fragment references in all operations
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getFragmentReferences($this->getFragments()) as $fragmentReference) {
+            foreach ($this->getFragmentReferencesInOperation($operation) as $fragmentReference) {
                 $referencedFragmentNames[] = $fragmentReference->getName();
             }
         }
@@ -181,7 +305,8 @@ class Document
                 continue;
             }
             throw new InvalidRequestException(
-                $this->getGraphQLErrorMessageProvider()->getFragmentNotUsedErrorMessage($fragment->getName()),
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_1_4, $fragment->getName()),
+                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_5_1_4),
                 $fragment->getLocation()
             );
         }
@@ -198,8 +323,9 @@ class Document
                 $variableName = $variable->getName();
                 if (in_array($variableName, $variableNames)) {
                     throw new InvalidRequestException(
-                        $this->getGraphQLErrorMessageProvider()->getDuplicateVariableNameErrorMessage($variableName),
-                        $this->getNonSpecificLocation()
+                        $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_1, $variableName),
+                        $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_1),
+                        LocationHelper::getNonSpecificLocation()
                     );
                 }
                 $variableNames[] = $variableName;
@@ -213,16 +339,143 @@ class Document
     protected function assertAllVariablesExist(): void
     {
         foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getVariableReferences($this->getFragments()) as $variableReference) {
+            foreach ($this->getVariableReferencesInOperation($operation) as $variableReference) {
                 if ($variableReference->getVariable() !== null) {
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage($variableReference->getName()),
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, $variableReference->getName()),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_3),
                     $variableReference->getLocation()
                 );
             }
         }
+    }
+
+    /**
+     * Gather all the VariableReference within the Operation.
+     *
+     * @return VariableReference[]
+     */
+    public function getVariableReferencesInOperation(OperationInterface $operation): array
+    {
+        return array_merge(
+            $this->getVariableReferencesInFieldsOrFragments($operation->getFieldsOrFragmentBonds()),
+            $this->getVariableReferencesInDirectives($operation->getDirectives())
+        );
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @return VariableReference[]
+     */
+    protected function getVariableReferencesInFieldsOrFragments(array $fieldsOrFragmentBonds): array
+    {
+        $variableReferences = [];
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                /** @var FragmentReference */
+                $fragmentReference = $fieldOrFragmentBond;
+                $fragment = $this->getFragment($fragmentReference->getName());
+                if ($fragment === null) {
+                    continue;
+                }
+                $variableReferences = array_merge(
+                    $variableReferences,
+                    $this->getVariableReferencesInFieldsOrFragments($fragment->getFieldsOrFragmentBonds())
+                );
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $variableReferences = array_merge(
+                    $variableReferences,
+                    $this->getVariableReferencesInFieldsOrFragments($inlineFragment->getFieldsOrFragmentBonds())
+                );
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            $variableReferences = array_merge(
+                $variableReferences,
+                $this->getVariableReferencesInArguments($field->getArguments()),
+                $this->getVariableReferencesInDirectives($field->getDirectives())
+            );
+            if ($field instanceof RelationalField) {
+                /** @var RelationalField */
+                $relationalField = $field;
+                $variableReferences = array_merge(
+                    $variableReferences,
+                    $this->getVariableReferencesInFieldsOrFragments($relationalField->getFieldsOrFragmentBonds())
+                );
+                continue;
+            }
+        }
+        return $variableReferences;
+    }
+
+    /**
+     * @param Directive[] $directives
+     * @return VariableReference[]
+     */
+    protected function getVariableReferencesInDirectives(array $directives): array
+    {
+        $variableReferences = [];
+        foreach ($directives as $directive) {
+            $variableReferences = array_merge(
+                $variableReferences,
+                $this->getVariableReferencesInArguments($directive->getArguments())
+            );
+        }
+        return $variableReferences;
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @return VariableReference[]
+     */
+    protected function getVariableReferencesInArguments(array $arguments): array
+    {
+        $variableReferences = [];
+        foreach ($arguments as $argument) {
+            $variableReferences = array_merge(
+                $variableReferences,
+                $this->getVariableReferencesInArgumentValue($argument->getValue())
+            );
+        }
+        return $variableReferences;
+    }
+
+    /**
+     * @return VariableReference[]
+     */
+    protected function getVariableReferencesInArgumentValue(WithValueInterface $argumentValue): array
+    {
+        if ($argumentValue instanceof VariableReference) {
+            return [$argumentValue];
+        }
+        if (!($argumentValue instanceof InputObject || $argumentValue instanceof InputList)) {
+            return [];
+        }
+        // Get references within InputObjects and Lists
+        $variableReferences = [];
+        $listValues = (array)$argumentValue->getAstValue();
+        foreach ($listValues as $listValue) {
+            if (!($listValue instanceof VariableReference || $listValue instanceof WithValueInterface)) {
+                continue;
+            }
+            if ($listValue instanceof VariableReference) {
+                $variableReferences[] = $listValue;
+                continue;
+            }
+            /** @var WithValueInterface $listValue */
+            $variableReferences = array_merge(
+                $variableReferences,
+                $this->getVariableReferencesInArgumentValue($listValue)
+            );
+        }
+        return $variableReferences;
     }
 
     /**
@@ -232,7 +485,7 @@ class Document
     {
         foreach ($this->getOperations() as $operation) {
             $referencedVariableNames = [];
-            foreach ($operation->getVariableReferences($this->getFragments()) as $variableReference) {
+            foreach ($this->getVariableReferencesInOperation($operation) as $variableReference) {
                 $referencedVariableNames[] = $variableReference->getName();
             }
             $referencedVariableNames = array_values(array_unique($referencedVariableNames));
@@ -242,7 +495,8 @@ class Document
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getVariableNotUsedErrorMessage($variable->getName()),
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_4, $variable->getName()),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_4),
                     $variable->getLocation()
                 );
             }
@@ -330,7 +584,8 @@ class Document
             $argumentName = $argument->getName();
             if (in_array($argumentName, $argumentNames)) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getDuplicateArgumentErrorMessage($argumentName),
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_4_2, $argumentName),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_4_2),
                     $argument->getLocation()
                 );
             }

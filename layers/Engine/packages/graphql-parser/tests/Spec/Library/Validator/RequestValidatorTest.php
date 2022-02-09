@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Library\Validator;
 
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -22,9 +22,9 @@ use PoP\Root\AbstractTestCase;
 
 class RequestValidatorTest extends AbstractTestCase
 {
-    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->getService(GraphQLErrorMessageProviderInterface::class);
+        return $this->getService(GraphQLSpecErrorMessageProvider::class);
     }
 
     /**
@@ -34,11 +34,12 @@ class RequestValidatorTest extends AbstractTestCase
     {
         $this->expectException(InvalidRequestException::class);
         $exceptionMessages = [
-            'fragment-not-defined' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference'),
-            'fragment-not-defined-2' => $this->getGraphQLErrorMessageProvider()->getFragmentNotDefinedInQueryErrorMessage('reference2'),
-            'fragment-not-used' => $this->getGraphQLErrorMessageProvider()->getFragmentNotUsedErrorMessage('reference2'),
-            'variable-not-defined' => $this->getGraphQLErrorMessageProvider()->getVariableNotDefinedInOperationErrorMessage('test'),
-            'variable-not-submitted' => $this->getGraphQLErrorMessageProvider()->getVariableNotSubmittedErrorMessage('test'),
+            'fragment-not-defined' => $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_2_1, 'reference'),
+            'fragment-not-defined-2' => $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_2_1, 'reference2'),
+            'fragment-not-used' => $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_1_4, 'reference2'),
+            'fragment-name-duplicated' => $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_1_1, 'reference2'),
+            'variable-not-defined' => $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, 'test'),
+            'variable-value-not-set' => $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, 'test'),
         ];
         $this->expectExceptionMessage($exceptionMessages[$this->dataName()] ?? '');
         $executableDocument->validateAndInitialize();
@@ -57,6 +58,8 @@ class RequestValidatorTest extends AbstractTestCase
         $variable2->setContext($context);
         $variable3 = new Variable('test3', 'Int', false, false, true, new Location(1, 1));
         $variable3->setContext($context);
+        $requiredVariable = new Variable('test', 'Int', true, false, true, new Location(1, 1));
+        $requiredVariable->setContext($context);
 
         return [
             'fragment-not-defined' => [
@@ -119,6 +122,27 @@ class RequestValidatorTest extends AbstractTestCase
                     new Context()
                 )),
             ],
+            'fragment-name-duplicated' => [
+                (new ExecutableDocument(
+                    new Document([
+                        new QueryOperation(
+                            'saranga',
+                            [],
+                            [],
+                            [
+                                new RelationalField('test', null, [], [
+                                    new FragmentReference('reference2', new Location(1, 1)),
+                                ], [], new Location(1, 1))
+                            ],
+                            new Location(1, 1)
+                        )
+                        ], [
+                            new Fragment('reference2', 'TestType', [], [], new Location(1, 1)),
+                            new Fragment('reference2', 'TestType', [], [], new Location(1, 1))
+                        ]),
+                    new Context()
+                )),
+            ],
             'variable-not-defined' => [
                 (new ExecutableDocument(
                     new Document([
@@ -146,7 +170,7 @@ class RequestValidatorTest extends AbstractTestCase
                     new Context()
                 )),
             ],
-            'variable-not-submitted' => [
+            'variable-value-not-set' => [
                 (new ExecutableDocument(
                     new Document([
                         new QueryOperation(
@@ -155,8 +179,7 @@ class RequestValidatorTest extends AbstractTestCase
                             [],
                             [
                                 new RelationalField('test', null, [
-                                    new Argument('test', new VariableReference('test', $variable1, new Location(1, 1)), new Location(1, 1)),
-                                    new Argument('test2', new VariableReference('test2', $variable2, new Location(1, 1)), new Location(1, 1)),
+                                    new Argument('test', new VariableReference('test', $requiredVariable, new Location(1, 1)), new Location(1, 1)),
                                 ], [
                                     new LeafField('test', null, [], [], new Location(1, 1))
                                 ], [], new Location(1, 1))

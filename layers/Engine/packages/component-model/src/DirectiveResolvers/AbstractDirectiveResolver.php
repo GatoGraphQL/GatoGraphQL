@@ -19,7 +19,6 @@ use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveRe
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -57,7 +56,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected array $schemaDirectiveArgsCache = [];
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?SemverHelperServiceInterface $semverHelperService = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
@@ -106,14 +104,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
-    }
-    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-    }
-    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
-    {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
     final public function setSemverHelperService(SemverHelperServiceInterface $semverHelperService): void
     {
@@ -543,7 +533,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Indicate that there is data in variable $idsDataFields
      */
-    protected function hasIDsDataFields(array &$idsDataFields): bool
+    protected function hasIDsDataFields(array $idsDataFields): bool
     {
         foreach ($idsDataFields as $id => &$data_fields) {
             if ($data_fields['direct'] ?? null) {
@@ -877,12 +867,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // and keep passing down the rest of the array to the next stages
         list(
             $relationalTypeResolver,
-            $pipelineIDsDataFields,
             $pipelineDirectiveResolverInstances,
             $objectIDItems,
             $unionDBKeyIDs,
-            $dbItems,
             $previousDBItems,
+            $pipelineIDsDataFields,
+            $dbItems,
             $variables,
             $messages,
             $objectErrors,
@@ -938,12 +928,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $this->resolveDirective(
                     $relationalTypeResolver,
                     $idsDataFields,
-                    $pipelineIDsDataFields,
                     $pipelineDirectiveResolverInstances,
                     $objectIDItems,
                     $unionDBKeyIDs,
-                    $dbItems,
                     $previousDBItems,
+                    $pipelineIDsDataFields,
+                    $dbItems,
                     $variables,
                     $messages,
                     $objectErrors,
@@ -983,12 +973,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // 3. Re-create the payload from the modified variables
         return DirectivePipelineUtils::convertArgumentsToPayload(
             $relationalTypeResolver,
-            $pipelineIDsDataFields,
             $pipelineDirectiveResolverInstances,
             $objectIDItems,
             $unionDBKeyIDs,
-            $dbItems,
             $previousDBItems,
+            $pipelineIDsDataFields,
+            $dbItems,
             $variables,
             $messages,
             $objectErrors,
@@ -1012,9 +1002,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $failureMessage,
         array $failedFields,
-        array &$idsDataFields,
+        array $idsDataFields,
         array &$succeedingPipelineIDsDataFields,
-        array &$objectIDItems,
+        array $objectIDItems,
         array &$dbItems,
         array &$objectErrors,
         array &$objectWarnings
@@ -1056,8 +1046,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $this->setIDsDataFieldsAsNull(
                 $relationalTypeResolver,
                 $idsDataFieldsToRemove,
-                $dbItems,
                 $objectIDItems,
+                $dbItems,
             );
         }
 

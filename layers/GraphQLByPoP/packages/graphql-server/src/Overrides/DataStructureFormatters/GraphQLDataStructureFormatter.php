@@ -129,41 +129,16 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         }
         return parent::getSchemaEntryExtensions($dbKey, $item);
     }
-    /**
-     * Override the parent function, to place the locations from outside extensions
-     */
-    protected function getQueryEntry(string $message, array $extensions): array
-    {
-        $entry = [
-            'message' => $message,
-        ];
-        // Add the "location" directly, not under "extensions"
-        if ($location = $extensions['location'] ?? null) {
-            unset($extensions['location']);
-            $entry['location'] = $location;
-        }
-        // if ($this->addTopLevelExtensionsEntryToResponse()) {
-        if (
-            $extensions = array_merge(
-                $this->getQueryEntryExtensions(),
-                $extensions
-            )
-        ) {
-            $entry['extensions'] = $extensions;
-        };
-        // }
-        return $entry;
-    }
 
     /**
      * Change properties for GraphQL
      */
-    protected function getQueryEntryExtensions(): array
+    protected function getDocumentEntryExtensions(): array
     {
         if (App::getState('standard-graphql')) {
             // Do not print "type" => "query"
             return [];
         }
-        return parent::getQueryEntryExtensions();
+        return parent::getDocumentEntryExtensions();
     }
 }

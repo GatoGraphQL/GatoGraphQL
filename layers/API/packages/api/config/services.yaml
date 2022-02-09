@@ -30,3 +30,6 @@ services:
 
     PoPAPI\API\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
+
+    PoPAPI\API\FeedbackMessageProviders\:
+        resource: '../src/FeedbackMessageProviders/*'

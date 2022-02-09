@@ -52,13 +52,13 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$idsDataFields,
+        array $idsDataFields,
+        array $succeedingPipelineDirectiveResolverInstances,
+        array $objectIDItems,
+        array $unionDBKeyIDs,
+        array $previousDBItems,
         array &$succeedingPipelineIDsDataFields,
-        array &$succeedingPipelineDirectiveResolverInstances,
-        array &$objectIDItems,
-        array &$unionDBKeyIDs,
         array &$dbItems,
-        array &$previousDBItems,
         array &$variables,
         array &$messages,
         array &$objectErrors,
@@ -81,10 +81,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     protected function resolveValueForObjects(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$objectIDItems,
-        array &$idsDataFields,
+        array $objectIDItems,
+        array $idsDataFields,
         array &$dbItems,
-        array &$previousDBItems,
+        array $previousDBItems,
         array &$variables,
         array &$messages,
         array &$objectErrors,
@@ -154,7 +154,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         object $object,
         array $dataFields,
         array &$dbItems,
-        array &$previousDBItems,
+        array $previousDBItems,
         array &$variables,
         array &$expressions,
         array &$objectErrors,
@@ -172,7 +172,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         object $object,
         string $field,
         array &$dbItems,
-        array &$previousDBItems,
+        array $previousDBItems,
         array &$variables,
         array &$expressions,
         array &$objectErrors,
@@ -189,28 +189,13 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         $id,
         object $object,
         string $field,
-        array &$previousDBItems,
+        array $previousDBItems,
         array &$variables,
         array &$expressions,
         array &$objectWarnings,
         array &$objectDeprecations
     ) {
-        $value = $relationalTypeResolver->resolveValue($object, $field, $variables, $expressions);
-        // Merge the objectWarnings and objectDeprecations, if any
-        if ($storedObjectWarnings = $this->getFeedbackMessageStore()->retrieveAndClearObjectWarnings($id)) {
-            $objectWarnings[$id] = array_merge(
-                $objectWarnings[$id] ?? [],
-                $storedObjectWarnings
-            );
-        }
-        if ($storedObjectDeprecations = $this->getFeedbackMessageStore()->retrieveAndClearObjectDeprecations($id)) {
-            $objectDeprecations[$id] = array_merge(
-                $objectDeprecations[$id] ?? [],
-                $storedObjectDeprecations
-            );
-        }
-
-        return $value;
+        return $relationalTypeResolver->resolveValue($object, $field, $variables, $expressions);
     }
 
     protected function addValueForObject(

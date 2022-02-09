@@ -4,32 +4,27 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\HelperServices;
 
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
+use PoP\ComponentModel\FeedbackMessageProviders\FeedbackMessageProvider;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\FilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\Services\BasicServiceTrait;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
 {
     use BasicServiceTrait;
 
-    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
-    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-    }
-    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
-    {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
-    }
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
@@ -45,6 +40,14 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     final protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+    }
+    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    {
+        $this->feedbackMessageProvider = $feedbackMessageProvider;
+    }
+    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    {
+        return $this->feedbackMessageProvider ??= $this->instanceManager->getInstance(FeedbackMessageProvider::class);
     }
 
     /**
@@ -78,12 +81,13 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             if ($objectTypeResolver->hasObjectTypeFieldResolversForField($subcomponent_data_field)) {
                 // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                 $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
-                $this->getFeedbackMessageStore()->addSchemaError(
-                    $objectTypeResolver->getTypeOutputDBKey(),
-                    $subcomponent_data_field_outputkey,
-                    sprintf(
-                        $this->__('Field \'%s\' is not a connection', 'pop-component-model'),
-                        $subcomponent_data_field_outputkey
+                App::getFeedbackStore()->schemaFeedbackStore->addSchemaError(
+                    new SchemaFeedback(
+                        $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, $subcomponent_data_field_outputkey),
+                        $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
+                        LocationHelper::getNonSpecificLocation(),
+                        $objectTypeResolver,
+                        [$subcomponent_data_field_outputkey],
                     )
                 );
             }

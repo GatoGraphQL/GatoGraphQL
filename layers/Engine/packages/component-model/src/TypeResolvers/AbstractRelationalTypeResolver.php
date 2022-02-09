@@ -16,7 +16,6 @@ use PoP\ComponentModel\Error\ErrorProviderInterface;
 use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;
@@ -59,21 +58,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     private array $directiveResolverInstanceCache = [];
 
-    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ErrorProviderInterface $errorProvider = null;
     private ?DataloadingEngineInterface $dataloadingEngine = null;
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
     private ?ErrorServiceInterface $errorService = null;
 
-    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-    }
-    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
-    {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
-    }
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
@@ -626,9 +616,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     public function fillObjects(
         array $ids_data_fields,
-        array &$unionDBKeyIDs,
+        array $unionDBKeyIDs,
+        array $previousDBItems,
         array &$dbItems,
-        array &$previousDBItems,
         array &$variables,
         array &$messages,
         array &$objectErrors,
@@ -689,10 +679,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
         // Process them
         $this->processFillingObjectsFromIDs(
-            $objectIDItems,
             $unionDBKeyIDs,
-            $dbItems,
+            $objectIDItems,
             $previousDBItems,
+            $dbItems,
             $variables,
             $messages,
             $objectErrors,
@@ -995,10 +985,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     protected function processFillingObjectsFromIDs(
-        array &$objectIDItems,
-        array &$unionDBKeyIDs,
+        array $unionDBKeyIDs,
+        array $objectIDItems,
+        array $previousDBItems,
         array &$dbItems,
-        array &$previousDBItems,
         array &$variables,
         array &$messages,
         array &$objectErrors,
@@ -1141,8 +1131,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $directiveResolverInstances,
                 $objectIDItems,
                 $unionDBKeyIDs,
-                $dbItems,
                 $previousDBItems,
+                $dbItems,
                 $variables,
                 $messages,
                 $directivePipelineIDObjectErrors,

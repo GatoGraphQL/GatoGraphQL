@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLParserErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -33,9 +34,14 @@ class ParserTest extends AbstractTestCase
         return $this->getService(ParserInterface::class);
     }
 
-    protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->getService(GraphQLErrorMessageProviderInterface::class);
+        return $this->getService(GraphQLSpecErrorMessageProvider::class);
+    }
+
+    protected function getGraphQLParserErrorMessageProvider(): GraphQLParserErrorMessageProvider
+    {
+        return $this->getService(GraphQLParserErrorMessageProvider::class);
     }
 
     public function testEmptyParser()
@@ -49,7 +55,7 @@ class ParserTest extends AbstractTestCase
     public function testInvalidSelection()
     {
         $this->expectException(SyntaxErrorException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getUnexpectedTokenErrorMessage(Token::tokenName(Token::TYPE_RBRACE)));
+        $this->expectExceptionMessage($this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_6, Token::tokenName(Token::TYPE_RBRACE)));
         $parser = $this->getParser();
         $parser->parse('
         {
@@ -1229,7 +1235,7 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInVariable()
     {
         $this->expectException(SyntaxErrorException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateKeyInInputObjectSyntaxErrorMessage('name'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_6_2, 'name'));
         $parser = $this->getParser();
         $parser->parse('
             query FilterUsers($filter: UserFilterInput = { name: "Pedro", name: "Juancho" }) {
@@ -1244,7 +1250,7 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInArgument()
     {
         $this->expectException(SyntaxErrorException::class);
-        $this->expectExceptionMessage($this->getGraphQLErrorMessageProvider()->getDuplicateKeyInInputObjectSyntaxErrorMessage('name'));
+        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_6_2, 'name'));
         $parser          = $this->getParser();
         $parser->parse('
             query FilterUsers {

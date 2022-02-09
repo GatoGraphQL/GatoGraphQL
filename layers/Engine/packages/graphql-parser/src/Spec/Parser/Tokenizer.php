@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLParserErrorMessageProvider;
 use PoP\Root\Services\BasicServiceTrait;
 
 class Tokenizer
@@ -18,15 +18,15 @@ class Tokenizer
     protected int $lineStart = 0;
     protected Token $lookAhead;
 
-    private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+    private ?GraphQLParserErrorMessageProvider $graphQLParserErrorMessageProvider = null;
 
-    final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
+    final public function setGraphQLParserErrorMessageProvider(GraphQLParserErrorMessageProvider $graphQLParserErrorMessageProvider): void
     {
-        $this->graphQLErrorMessageProvider = $graphQLErrorMessageProvider;
+        $this->graphQLParserErrorMessageProvider = $graphQLParserErrorMessageProvider;
     }
-    final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    final protected function getGraphQLParserErrorMessageProvider(): GraphQLParserErrorMessageProvider
     {
-        return $this->graphQLErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLErrorMessageProviderInterface::class);
+        return $this->graphQLParserErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLParserErrorMessageProvider::class);
     }
 
     protected function initTokenizer(string $source): void
@@ -165,7 +165,10 @@ class Tokenizer
             return $this->scanString();
         }
 
-        throw $this->createException($this->getGraphQLErrorMessageProvider()->getCantRecognizeTokenTypeErrorMessage());
+        throw $this->createException(
+            $this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_5),
+            $this->getGraphQLParserErrorMessageProvider()->getNamespacedCode(GraphQLParserErrorMessageProvider::E_5)
+        );
     }
 
     protected function checkFragment(): bool
@@ -275,9 +278,9 @@ class Tokenizer
         }
     }
 
-    protected function createException(string $message): SyntaxErrorException
+    protected function createException(string $message, string $namespacedCode): SyntaxErrorException
     {
-        return new SyntaxErrorException($message, $this->getLocation());
+        return new SyntaxErrorException($message, $namespacedCode, $this->getLocation());
     }
 
     protected function getLocation(): Location
@@ -337,13 +340,19 @@ class Tokenizer
                     case 'u':
                         $codepoint = substr($this->source, $this->pos + 1, 4);
                         if (!preg_match('/[0-9A-Fa-f]{4}/', $codepoint)) {
-                            throw $this->createException($this->getGraphQLErrorMessageProvider()->getInvalidStringUnicodeEscapeSequenceErrorMessage($codepoint));
+                            throw $this->createException(
+                                $this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_3, $codepoint),
+                                $this->getGraphQLParserErrorMessageProvider()->getNamespacedCode(GraphQLParserErrorMessageProvider::E_3)
+                            );
                         }
                         $ch = html_entity_decode("&#x{$codepoint};", ENT_QUOTES, 'UTF-8');
                         $this->pos += 4;
                         break;
                     default:
-                        throw $this->createException($this->getGraphQLErrorMessageProvider()->getUnexpectedStringEscapedCharacterErrorMessage($ch));
+                        throw $this->createException(
+                            $this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_4, $ch),
+                            $this->getGraphQLParserErrorMessageProvider()->getNamespacedCode(GraphQLParserErrorMessageProvider::E_4)
+                        );
                 }
             }
 
@@ -385,6 +394,9 @@ class Tokenizer
      */
     protected function createUnexpectedTokenTypeException($tokenType)
     {
-        return $this->createException($this->getGraphQLErrorMessageProvider()->getUnexpectedTokenErrorMessage(Token::tokenName($tokenType)));
+        return $this->createException(
+            $this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_6, Token::tokenName($tokenType)),
+            $this->getGraphQLParserErrorMessageProvider()->getNamespacedCode(GraphQLParserErrorMessageProvider::E_6)
+        );
     }
 }

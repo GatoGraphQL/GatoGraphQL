@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Exception\Parser;
 
-class SyntaxErrorException extends AbstractParserError
+class SyntaxErrorException extends AbstractParserException
 {
 }

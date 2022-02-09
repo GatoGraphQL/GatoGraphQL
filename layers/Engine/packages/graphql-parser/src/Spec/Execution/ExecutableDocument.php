@@ -4,27 +4,37 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Execution;
 
-use PoP\GraphQLParser\Error\GraphQLErrorMessageProviderInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\Facades\Error\GraphQLErrorMessageProviderFacade;
+use PoP\GraphQLParser\FeedbackMessageProviders\FeedbackMessageProvider;
+use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
-use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 
 class ExecutableDocument implements ExecutableDocumentInterface
 {
     use StandaloneServiceTrait;
 
-    private ?GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider = null;
+    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
+    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
-    final public function setGraphQLErrorMessageProvider(GraphQLErrorMessageProviderInterface $graphQLErrorMessageProvider): void
+    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
-        $this->graphQLErrorMessageProvider = $graphQLErrorMessageProvider;
+        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
     }
-    final protected function getGraphQLErrorMessageProvider(): GraphQLErrorMessageProviderInterface
+    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
     {
-        return $this->graphQLErrorMessageProvider ??= GraphQLErrorMessageProviderFacade::getInstance();
+        return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
+    }
+    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    {
+        $this->feedbackMessageProvider = $feedbackMessageProvider;
+    }
+    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    {
+        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackMessageProvider::class);
     }
 
     private ?array $requestedOperations = null;
@@ -53,7 +63,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         $this->requestedOperations = null;
 
         $this->document->validate();
-        $this->assertAllVariablesHaveValue();
+        $this->assertAllMandatoryVariablesHaveValue();
 
         // Obtain the operations that must be executed
         $this->requestedOperations = $this->assertAndGetRequestedOperations();
@@ -92,62 +102,50 @@ class ExecutableDocument implements ExecutableDocumentInterface
             // It can't be 0, or validation already fails in Document
             if (count($this->document->getOperations()) > 1) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getNoOperationNameProvidedErrorMessage(),
-                    $this->getNonSpecificLocation()
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_B),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_B),
+                    LocationHelper::getNonSpecificLocation()
                 );
             }
             // There is exactly 1 operation
             return $this->document->getOperations();
         }
 
-        $requestedOperations = $this->extractRequestedOperations();
+        $requestedOperations = array_values(array_filter(
+            $this->document->getOperations(),
+            fn (OperationInterface $operation) => $operation->getName() === $this->context->getOperationName()
+        ));
         if ($requestedOperations === []) {
             throw new InvalidRequestException(
-                $this->getGraphQLErrorMessageProvider()->getNoOperationMatchesNameErrorMessage($this->context->getOperationName()),
-                $this->getNonSpecificLocation()
+                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_A, $this->context->getOperationName()),
+                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_A),
+                LocationHelper::getNonSpecificLocation()
             );
         }
-
-        // There can be many operations
         return $requestedOperations;
     }
 
-    protected function getNonSpecificLocation(): Location
-    {
-        return new Location(1, 1);
-    }
-
     /**
-     * @return OperationInterface[]
-     */
-    protected function extractRequestedOperations(): array
-    {
-        $operationName = $this->context->getOperationName();
-        return array_values(array_filter(
-            $this->document->getOperations(),
-            fn (OperationInterface $operation) => $operation->getName() === $operationName
-        ));
-    }
-
-    /**
-     * Validate that all referenced variable are provided a value,
+     * Validate that all referenced mandatory variable are provided a value,
      * or they have a default value. Otherwise, throw an exception.
      *
      * @throws InvalidRequestException
      */
-    protected function assertAllVariablesHaveValue(): void
+    protected function assertAllMandatoryVariablesHaveValue(): void
     {
         foreach ($this->document->getOperations() as $operation) {
-            foreach ($operation->getVariableReferences($this->document->getFragments()) as $variableReference) {
+            foreach ($this->document->getVariableReferencesInOperation($operation) as $variableReference) {
                 $variable = $variableReference->getVariable();
                 if (
-                    array_key_exists($variable->getName(), $this->context->getVariableValues())
+                    !$variable->isRequired()
+                    || array_key_exists($variable->getName(), $this->context->getVariableValues())
                     || $variable->hasDefaultValue()
                 ) {
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLErrorMessageProvider()->getVariableNotSubmittedErrorMessage($variableReference->getName()),
+                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, $variableReference->getName()),
+                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_5),
                     $variableReference->getLocation()
                 );
             }
@@ -169,8 +167,9 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         if ($this->requestedOperations === null) {
             throw new InvalidRequestException(
-                $this->getGraphQLErrorMessageProvider()->getExecuteValidationErrorMessage(__FUNCTION__),
-                $this->getNonSpecificLocation()
+                $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, __FUNCTION__),
+                $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
+                LocationHelper::getNonSpecificLocation()
             );
         }
         return $this->requestedOperations;

@@ -4,21 +4,18 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLQuery\Schema;
 
-use PoP\Root\App;
 use Exception;
 use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
-use InvalidArgumentException;
-use PoP\Root\Services\BasicServiceTrait;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
+use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
-use PoP\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocumentInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -35,6 +32,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\Root\App;
+use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Services\BasicServiceTrait;
 use stdClass;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
@@ -144,19 +144,33 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $operationType,
                 $fieldQueryPaths
             ) = $this->convertRequestToFieldQueryPaths($request);
-        } catch (Exception $e) {
-            // Save the error
-            $errorMessage = $e->getMessage();
-            // Retrieve the location of the error
-            $location = ($e instanceof LocationableExceptionInterface) ?
-                $e->getLocation()->toArray() :
-                null;
-            $extensions = [];
-            if (!is_null($location)) {
-                $extensions['location'] = $location;
-            }
+        } catch (AbstractParserException $parserError) {
+            // The error description is the exception message
+            $errorMessage = $parserError->getMessage();
+            $extensions = [
+                'locations' => [$parserError->getLocation()->toArray()],
+            ];
+
             $this->getFeedbackMessageStore()->addQueryError($errorMessage, $extensions);
+
             // Returning nothing will not process the query
+            return [
+                null,
+                []
+            ];
+        } catch (Exception $e) {
+            /**
+             * Send the exception error to the response, but only for DEV.
+             * Otherwise, it's a potential security exposure.
+             */
+            $errorMessage = RootEnvironment::isApplicationEnvironmentDev() ?
+                sprintf(
+                    $this->__('[Exception (Visible on DEV only)] %s', 'graphql-parser'),
+                    $e->getMessage()
+                ) : $this->__('There was an unexpected error', 'graphql-query');
+
+            $this->getFeedbackMessageStore()->addQueryError($errorMessage);
+
             return [
                 null,
                 []
@@ -498,12 +512,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         array $variableValues,
         ?string $operationName = null
     ): ExecutableDocumentInterface {
-        if (empty($payload)) {
-            throw new InvalidArgumentException(
-                $this->__('Must provide an operation.', 'graphql-query')
-            );
-        }
-
         /**
          * If some variable hasn't been submitted, it will throw an Exception.
          * Let it bubble up

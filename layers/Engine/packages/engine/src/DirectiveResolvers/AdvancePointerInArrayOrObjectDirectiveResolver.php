@@ -78,8 +78,20 @@ class AdvancePointerInArrayOrObjectDirectiveResolver extends AbstractApplyNested
     /**
      * Directly point to the element under the specified path
      */
-    protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$objectIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array
-    {
+    protected function getArrayItems(
+        array &$array,
+        int | string $id,
+        string $field,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $objectIDItems,
+        array $previousDBItems,
+        array &$dbItems,
+        array &$variables,
+        array &$messages,
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations,
+    ): ?array {
         $path = $this->directiveArgsForSchema['path'];
 
         // If the path doesn't exist, add the error and return
