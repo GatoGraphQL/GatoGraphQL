@@ -97,8 +97,8 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $this->setIDsDataFieldsAsNull(
                     $relationalTypeResolver,
                     $idsDataFieldsToRemove,
-                    $dbItems,
                     $objectIDItems,
+                    $dbItems,
                 );
             }
         }

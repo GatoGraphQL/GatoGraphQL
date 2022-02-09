@@ -1046,8 +1046,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $this->setIDsDataFieldsAsNull(
                 $relationalTypeResolver,
                 $idsDataFieldsToRemove,
-                $dbItems,
                 $objectIDItems,
+                $dbItems,
             );
         }
 
