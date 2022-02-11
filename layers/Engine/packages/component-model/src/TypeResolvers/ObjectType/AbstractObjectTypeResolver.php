@@ -278,7 +278,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
-        
+
         list(
             $validField,
             $fieldName,
@@ -292,7 +292,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
-        
+
         list(
             $validField,
             $fieldName,
@@ -306,7 +306,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
-        
+
         list(
             $validField,
             $fieldName,
@@ -620,7 +620,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Everything is good, return the value (which could also be an Error!)
             return $value;
         }
-        
+
         return $this->getErrorProvider()->getNoObjectTypeFieldResolverProcessesFieldError(
             $this->getMaybeNamespacedTypeName(),
             $this->getID($object),
