@@ -392,15 +392,15 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     }
 
     /**
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
         object $object,
         string $field,
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $variables,
+        array $expressions,
         array $options = []
     ): mixed {
         // Check that a typeResolver from this Union can process this object, or return an arror
