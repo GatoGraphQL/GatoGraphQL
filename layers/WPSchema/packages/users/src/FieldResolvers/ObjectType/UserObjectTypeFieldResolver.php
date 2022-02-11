@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Users\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use DateTime;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -124,7 +125,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         array $fieldArgs,
         array $variables,
         array $expressions,
-        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         /** @var WP_User */

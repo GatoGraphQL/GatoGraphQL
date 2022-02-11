@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Comments\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -89,7 +90,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         array $fieldArgs,
         array $variables,
         array $expressions,
-        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         /** @var WP_Comment */
