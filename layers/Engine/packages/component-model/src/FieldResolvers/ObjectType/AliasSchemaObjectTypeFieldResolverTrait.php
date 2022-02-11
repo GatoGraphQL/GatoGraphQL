@@ -440,8 +440,9 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         $object,
         string $fieldName,
         array $fieldArgs,
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $variables,
+        array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
