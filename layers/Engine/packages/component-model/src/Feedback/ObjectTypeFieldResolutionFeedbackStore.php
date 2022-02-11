@@ -6,94 +6,94 @@ namespace PoP\ComponentModel\Feedback;
 
 class ObjectTypeFieldResolutionFeedbackStore
 {
-    // /** @var FieldResolutionFeedbackInterface[] */
-    // private array $fieldResolutionErrors = [];
-    // /** @var FieldResolutionFeedbackInterface[] */
-    // private array $fieldResolutionWarnings = [];
-    // /** @var FieldResolutionFeedbackInterface[] */
-    // private array $fieldResolutionDeprecations = [];
-    // /** @var FieldResolutionFeedbackInterface[] */
-    // private array $fieldResolutionNotices = [];
-    // /** @var FieldResolutionFeedbackInterface[] */
-    // private array $fieldResolutionLogs = [];
-    // /** @var FieldResolutionFeedbackInterface[] */
-    // private array $fieldResolutionTraces = [];
+    /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
+    private array $objectTypeFieldResolutionErrors = [];
+    /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
+    private array $objectTypeFieldResolutionWarnings = [];
+    /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
+    private array $objectTypeFieldResolutionDeprecations = [];
+    /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
+    private array $objectTypeFieldResolutionNotices = [];
+    /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
+    private array $objectTypeFieldResolutionLogs = [];
+    /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
+    private array $objectTypeFieldResolutionTraces = [];
 
-    // /**
-    //  * @return FieldResolutionFeedbackInterface[]
-    //  */
-    // public function getFieldResolutionErrors(): array
-    // {
-    //     return $this->fieldResolutionErrors;
-    // }
+    /**
+     * @return ObjectTypeFieldResolutionFeedbackInterface[]
+     */
+    public function getFieldResolutionErrors(): array
+    {
+        return $this->objectTypeFieldResolutionErrors;
+    }
 
-    // public function addFieldResolutionError(FieldResolutionFeedbackInterface $fieldResolutionError): void
-    // {
-    //     $this->fieldResolutionErrors[] = $fieldResolutionError;
-    // }
+    public function addFieldResolutionError(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionError): void
+    {
+        $this->objectTypeFieldResolutionErrors[] = $objectTypeFieldResolutionError;
+    }
 
-    // /**
-    //  * @return FieldResolutionFeedbackInterface[]
-    //  */
-    // public function getFieldResolutionWarnings(): array
-    // {
-    //     return $this->fieldResolutionWarnings;
-    // }
+    /**
+     * @return ObjectTypeFieldResolutionFeedbackInterface[]
+     */
+    public function getFieldResolutionWarnings(): array
+    {
+        return $this->objectTypeFieldResolutionWarnings;
+    }
 
-    // public function addFieldResolutionWarning(FieldResolutionFeedbackInterface $fieldResolutionWarning): void
-    // {
-    //     $this->fieldResolutionWarnings[] = $fieldResolutionWarning;
-    // }
+    public function addFieldResolutionWarning(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionWarning): void
+    {
+        $this->objectTypeFieldResolutionWarnings[] = $objectTypeFieldResolutionWarning;
+    }
 
-    // /**
-    //  * @return FieldResolutionFeedbackInterface[]
-    //  */
-    // public function getFieldResolutionDeprecations(): array
-    // {
-    //     return $this->fieldResolutionDeprecations;
-    // }
+    /**
+     * @return ObjectTypeFieldResolutionFeedbackInterface[]
+     */
+    public function getFieldResolutionDeprecations(): array
+    {
+        return $this->objectTypeFieldResolutionDeprecations;
+    }
 
-    // public function addFieldResolutionDeprecation(FieldResolutionFeedbackInterface $fieldResolutionDeprecation): void
-    // {
-    //     $this->fieldResolutionDeprecations[] = $fieldResolutionDeprecation;
-    // }
+    public function addFieldResolutionDeprecation(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionDeprecation): void
+    {
+        $this->objectTypeFieldResolutionDeprecations[] = $objectTypeFieldResolutionDeprecation;
+    }
 
-    // /**
-    //  * @return FieldResolutionFeedbackInterface[]
-    //  */
-    // public function getFieldResolutionNotices(): array
-    // {
-    //     return $this->fieldResolutionNotices;
-    // }
+    /**
+     * @return ObjectTypeFieldResolutionFeedbackInterface[]
+     */
+    public function getFieldResolutionNotices(): array
+    {
+        return $this->objectTypeFieldResolutionNotices;
+    }
 
-    // public function addFieldResolutionNotice(FieldResolutionFeedbackInterface $fieldResolutionNotice): void
-    // {
-    //     $this->fieldResolutionNotices[] = $fieldResolutionNotice;
-    // }
+    public function addFieldResolutionNotice(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionNotice): void
+    {
+        $this->objectTypeFieldResolutionNotices[] = $objectTypeFieldResolutionNotice;
+    }
 
-    // /**
-    //  * @return FieldResolutionFeedbackInterface[]
-    //  */
-    // public function getFieldResolutionLogs(): array
-    // {
-    //     return $this->fieldResolutionLogs;
-    // }
+    /**
+     * @return ObjectTypeFieldResolutionFeedbackInterface[]
+     */
+    public function getFieldResolutionLogs(): array
+    {
+        return $this->objectTypeFieldResolutionLogs;
+    }
 
-    // public function addFieldResolutionLog(FieldResolutionFeedbackInterface $fieldResolutionLog): void
-    // {
-    //     $this->fieldResolutionLogs[] = $fieldResolutionLog;
-    // }
+    public function addFieldResolutionLog(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionLog): void
+    {
+        $this->objectTypeFieldResolutionLogs[] = $objectTypeFieldResolutionLog;
+    }
 
-    // /**
-    //  * @return FieldResolutionFeedbackInterface[]
-    //  */
-    // public function getFieldResolutionTraces(): array
-    // {
-    //     return $this->fieldResolutionTraces;
-    // }
+    /**
+     * @return ObjectTypeFieldResolutionFeedbackInterface[]
+     */
+    public function getFieldResolutionTraces(): array
+    {
+        return $this->objectTypeFieldResolutionTraces;
+    }
 
-    // public function addFieldResolutionTrace(FieldResolutionFeedbackInterface $fieldResolutionTrace): void
-    // {
-    //     $this->fieldResolutionTraces[] = $fieldResolutionTrace;
-    // }
+    public function addFieldResolutionTrace(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionTrace): void
+    {
+        $this->objectTypeFieldResolutionTraces[] = $objectTypeFieldResolutionTrace;
+    }
 }
