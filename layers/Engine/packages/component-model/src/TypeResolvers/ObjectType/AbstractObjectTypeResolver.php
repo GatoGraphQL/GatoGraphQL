@@ -14,6 +14,7 @@ use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -526,6 +527,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 if ($fieldTypeIsNonNullable) {
                     return $this->getErrorProvider()->getNonNullableFieldError($fieldName);
                 }
+            } elseif (GeneralUtils::isError($value)) {
+                // If it's an Error, can return straight
+                return $value;
             } elseif (
                 $objectTypeFieldResolver->validateResolvedFieldType(
                     $this,
@@ -617,7 +621,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 }
             }
 
-            // Everything is good, return the value (which could also be an Error!)
+            // Everything is good, return the value
             return $value;
         }
 
