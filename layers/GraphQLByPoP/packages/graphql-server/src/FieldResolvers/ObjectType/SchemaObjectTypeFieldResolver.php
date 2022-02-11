@@ -131,8 +131,8 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
@@ -140,8 +140,8 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         object $object,
         string $fieldName,
         array $fieldArgs,
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $variables,
+        array $expressions,
         array $options = []
     ): mixed {
         /** @var Schema */

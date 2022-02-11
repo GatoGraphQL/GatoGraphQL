@@ -47,15 +47,15 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array &$schemaTraces
     ): array;
     /**
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
         object $object,
         string $field,
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $variables,
+        array $expressions,
         array $options = []
     ): mixed;
     /**
