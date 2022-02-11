@@ -467,7 +467,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
             foreach ((array) $addExpressions as $key => $value) {
                 // Evaluate the $value, since it may be a function
                 if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($value)) {
-                    $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $value, $variables, $expressions, $options);
+                    $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $value, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                     if (GeneralUtils::isError($resolvedValue)) {
                         // Show the error message, and return nothing
                         /** @var Error */
@@ -492,7 +492,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 $existingValue = $this->getExpressionForObject($id, (string) $key, $messages) ?? [];
                 // Evaluate the $value, since it may be a function
                 if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($value)) {
-                    $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $value, $variables, $expressions, $options);
+                    $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $value, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                     if (GeneralUtils::isError($resolvedValue)) {
                         // Show the error message, and return nothing
                         /** @var Error */

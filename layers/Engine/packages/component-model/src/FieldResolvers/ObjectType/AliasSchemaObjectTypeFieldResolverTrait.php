@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -440,8 +441,9 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         $object,
         string $fieldName,
         array $fieldArgs,
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $variables,
+        array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
@@ -452,6 +454,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
             $fieldArgs,
             $variables,
             $expressions,
+            $objectTypeFieldResolutionFeedbackStore,
             $options
         );
     }

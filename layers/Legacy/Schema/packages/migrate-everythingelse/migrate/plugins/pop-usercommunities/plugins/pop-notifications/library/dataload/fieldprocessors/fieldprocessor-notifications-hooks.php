@@ -130,6 +130,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $notification = $object;
@@ -154,7 +155,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return gdUreCommunityMembershipstatusFilterbycommunity($status, $notification->user_id);
 
             case 'memberStatusByName':
-                $selected = $objectTypeResolver->resolveValue($notification, 'memberstatus', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($notification, 'memberstatus', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -168,7 +169,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return gdUreCommunityMembershipstatusFilterbycommunity($privileges, $notification->user_id);
 
             case 'memberPrivilegesByName':
-                $selected = $objectTypeResolver->resolveValue($notification, 'memberprivileges', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($notification, 'memberprivileges', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -182,7 +183,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return gdUreCommunityMembershipstatusFilterbycommunity($tags, $notification->user_id);
 
             case 'memberTagsByName':
-                $selected = $objectTypeResolver->resolveValue($notification, 'membertags', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($notification, 'membertags', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -244,7 +245,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

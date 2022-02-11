@@ -1836,7 +1836,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $options = [
                 AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
             ];
-            $resolvedValue = $relationalTypeResolver->resolveValue($object, (string)$fieldArgValue, $variables, $expressions, $options);
+            $resolvedValue = $relationalTypeResolver->resolveValue($object, (string)$fieldArgValue, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
             if (GeneralUtils::isError($resolvedValue)) {
                 // Show the error message, and return nothing
                 /** @var Error */

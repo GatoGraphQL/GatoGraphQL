@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeExtensions;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\NamedTypeExtensionsObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -73,6 +74,7 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
         array $fieldArgs,
         array $variables,
         array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         /** @var NamedTypeExtensions */
@@ -80,7 +82,7 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
         return match ($fieldName) {
             'elementName' => $namedTypeExtensions->getTypeElementName(),
             'namespacedName' => $namedTypeExtensions->getTypeNamespacedName(),
-            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options),
+            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options),
         };
     }
 

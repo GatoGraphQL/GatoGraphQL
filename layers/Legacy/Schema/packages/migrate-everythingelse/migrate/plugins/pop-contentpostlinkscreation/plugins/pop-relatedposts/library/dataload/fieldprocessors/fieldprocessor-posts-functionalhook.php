@@ -52,6 +52,7 @@ class GD_ContentPostLinksCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPos
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $post = $object;
@@ -67,7 +68,7 @@ class GD_ContentPostLinksCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPos
                 ], RouteUtils::getRouteURL($route));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

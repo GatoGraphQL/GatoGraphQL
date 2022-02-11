@@ -50,16 +50,17 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObje
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $tag = $object;
         switch ($fieldName) {
              // Needed for tinyMCE-mention plug-in
             case 'mentionQueryby':
-                return $objectTypeResolver->resolveValue($tag, 'name', $variables, $expressions, $options);
+                return $objectTypeResolver->resolveValue($tag, 'name', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

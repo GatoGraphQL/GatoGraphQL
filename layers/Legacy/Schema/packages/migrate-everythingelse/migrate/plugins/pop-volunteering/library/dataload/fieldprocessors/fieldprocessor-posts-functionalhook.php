@@ -53,6 +53,7 @@ class PoP_Volunteering_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $post = $object;
@@ -65,7 +66,7 @@ class PoP_Volunteering_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 ], RouteUtils::getRouteURL(POP_VOLUNTEERING_ROUTE_VOLUNTEER));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

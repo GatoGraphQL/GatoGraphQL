@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
+use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use PoP\Engine\Facades\Engine\EngineFacade;
@@ -34,7 +35,7 @@ class GraphQLServer implements GraphQLServerInterface
             [
                 // This is the one Component that is required to produce the GraphQL server.
                 // The other classes provide the schema and extra functionality.
-                \GraphQLByPoP\GraphQLServer\Component::class,
+                Component::class,
             ]
         );
 

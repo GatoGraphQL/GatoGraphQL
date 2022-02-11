@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\BlockMetadataWP\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use Leoloso\BlockMetadata\Data;
 use Leoloso\BlockMetadata\Metadata;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -141,6 +142,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $fieldArgs,
         array $variables,
         array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $post = $object;
@@ -182,6 +184,6 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return (object) $block_metadata;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

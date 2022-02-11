@@ -68,6 +68,7 @@ class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldReso
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $user = $object;
@@ -76,10 +77,10 @@ class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldReso
                 return URE_CommunityUtils::getCommunityMembers($objectTypeResolver->getID($user));
 
             case 'hasMembers':
-                return !empty($objectTypeResolver->resolveValue($user, 'members', $variables, $expressions, $options));
+                return !empty($objectTypeResolver->resolveValue($user, 'members', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

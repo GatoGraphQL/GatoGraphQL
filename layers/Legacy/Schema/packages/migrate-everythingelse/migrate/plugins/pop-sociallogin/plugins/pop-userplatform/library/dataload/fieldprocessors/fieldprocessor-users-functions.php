@@ -65,6 +65,7 @@ class GD_WSL_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolv
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $user = $object;
@@ -75,7 +76,7 @@ class GD_WSL_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolv
                 return $userTypeAPI->getUserWebsiteUrl($user);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

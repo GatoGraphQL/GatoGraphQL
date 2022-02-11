@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -157,6 +158,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
         array $fieldArgs,
         array $variables,
         array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $post = $object;
@@ -189,11 +191,11 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'hasLoggedInUserStances':
-                $referencedby = $objectTypeResolver->resolveValue($object, 'loggedInUserStances', $variables, $expressions, $options);
+                $referencedby = $objectTypeResolver->resolveValue($object, 'loggedInUserStances', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 return !empty($referencedby);
 
             case 'editStanceURL':
-                if ($referencedby = $objectTypeResolver->resolveValue($object, 'loggedInUserStances', $variables, $expressions, $options)) {
+                if ($referencedby = $objectTypeResolver->resolveValue($object, 'loggedInUserStances', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     return urldecode($cmseditpostsapi->getEditPostLink($referencedby[0]));
                 }
                 return null;
@@ -218,7 +220,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
 
             case 'stanceName':
             case 'catName':
-                $selected = $objectTypeResolver->resolveValue($object, 'stance', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($object, 'stance', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -226,6 +228,6 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 return $stance->getSelectedValue();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

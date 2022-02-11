@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoPAPI\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoPAPI\API\Schema\SchemaDefinitionServiceInterface;
@@ -121,6 +122,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $fieldArgs,
         array $variables,
         array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         switch ($fieldName) {
@@ -131,6 +133,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return (object) $schemaDefinitionService->getFullSchemaDefinition();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

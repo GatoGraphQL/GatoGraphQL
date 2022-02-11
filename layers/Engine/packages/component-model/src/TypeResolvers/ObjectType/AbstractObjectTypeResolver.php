@@ -10,6 +10,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -477,11 +478,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 return $this->getErrorProvider()->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
             }
 
+            $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             // Resolve the value. If the field resolver throws an Exception,
             // catch it and return the equivalent GraphQL error so that it
             // fails gracefully in production (but not on development!)
             try {
-                $value = $objectTypeFieldResolver->resolveValue($this, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+                $value = $objectTypeFieldResolver->resolveValue($this, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
             } catch (Exception $e) {
                 if (RootEnvironment::isApplicationEnvironmentDev()) {
                     throw $e;

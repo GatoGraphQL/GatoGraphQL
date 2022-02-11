@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Locations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -65,11 +66,12 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
         array $fieldArgs,
         array $variables,
         array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         switch ($fieldName) {
             case 'locationsmapURL':
-                $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $options);
+                $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($locations)) {
                     return null;
                 }
@@ -86,6 +88,6 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
                     );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

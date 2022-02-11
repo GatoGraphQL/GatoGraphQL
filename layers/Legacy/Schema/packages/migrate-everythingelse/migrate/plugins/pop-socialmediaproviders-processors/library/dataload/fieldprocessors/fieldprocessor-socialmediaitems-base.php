@@ -103,15 +103,16 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         switch ($fieldName) {
             case 'shareURL':
-                $url = $objectTypeResolver->resolveValue($object, 'url', $variables, $expressions, $options);
+                $url = $objectTypeResolver->resolveValue($object, 'url', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($url)) {
                     return $url;
                 }
-                $title = $objectTypeResolver->resolveValue($object, $this->getTitleField(), $variables, $expressions, $options);
+                $title = $objectTypeResolver->resolveValue($object, $this->getTitleField(), $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($title)) {
                     return $title;
                 }
@@ -119,6 +120,6 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
                 return $this->getShareUrl($url, $title, $providerURLs[$fieldArgs['provider']]);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

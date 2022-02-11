@@ -85,6 +85,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
@@ -109,7 +110,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
                 return (int) \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_DOWNVOTECOUNT, true);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

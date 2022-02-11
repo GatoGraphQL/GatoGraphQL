@@ -61,12 +61,13 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers e
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $user = $object;
         switch ($fieldName) {
             case 'individualInterestsByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'individualinterests', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($user, 'individualinterests', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -74,7 +75,7 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers e
                 return $individualinterests->getSelectedValue();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

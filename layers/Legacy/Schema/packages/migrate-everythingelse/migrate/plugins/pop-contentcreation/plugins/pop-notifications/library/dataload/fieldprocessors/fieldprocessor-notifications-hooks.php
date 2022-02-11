@@ -89,6 +89,7 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
@@ -209,7 +210,7 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

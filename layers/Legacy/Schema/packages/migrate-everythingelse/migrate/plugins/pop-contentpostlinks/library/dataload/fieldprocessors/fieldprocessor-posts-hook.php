@@ -143,6 +143,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $post = $object;
@@ -160,7 +161,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
                 return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_LINKACCESS, true);
 
             case 'linkAccessByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'linkaccess', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'linkaccess', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -171,7 +172,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
                 return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_LINKCATEGORIES);
 
             case 'linkCategoriesByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -179,13 +180,13 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
                 return $linkcategories->getSelectedValue();
 
             case 'hasLinkCategories':
-                if ($objectTypeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $options)) {
+                if ($objectTypeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     return true;
                 }
                 return false;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

@@ -76,6 +76,7 @@ class WSL_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $notification = $object;
@@ -111,7 +112,7 @@ class WSL_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

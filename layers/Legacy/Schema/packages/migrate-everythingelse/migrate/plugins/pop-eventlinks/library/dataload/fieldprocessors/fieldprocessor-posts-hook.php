@@ -81,6 +81,7 @@ class GD_EM_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFie
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $event = $object;
@@ -92,7 +93,7 @@ class GD_EM_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFie
                 return PoP_ContentPostLinks_Utils::getLinkContent($event);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

@@ -65,19 +65,20 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends Abstract
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $comment = $object;
         switch ($fieldName) {
             case 'contentClipped':
-                $content = $objectTypeResolver->resolveValue($object, 'content', $variables, $expressions, $options);
+                $content = $objectTypeResolver->resolveValue($object, 'content', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($content)) {
                     return $content;
                 }
                 return limitString(strip_tags($content), 250);
 
             case 'replycommentURL':
-                $customPostID = $objectTypeResolver->resolveValue($object, 'customPostID', $variables, $expressions, $options);
+                $customPostID = $objectTypeResolver->resolveValue($object, 'customPostID', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($customPostID)) {
                     return null;
                 }
@@ -90,7 +91,7 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends Abstract
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

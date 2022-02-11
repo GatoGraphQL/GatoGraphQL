@@ -50,6 +50,7 @@ class PPPPoP_DataLoad_ObjectTypeFieldResolver_FunctionalProfiles extends Abstrac
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $pluginapi = PoP_PreviewContent_FunctionsAPIFactory::getInstance();
@@ -60,7 +61,7 @@ class PPPPoP_DataLoad_ObjectTypeFieldResolver_FunctionalProfiles extends Abstrac
                 return $pluginapi->getPreviewLink($objectTypeResolver->getID($post));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

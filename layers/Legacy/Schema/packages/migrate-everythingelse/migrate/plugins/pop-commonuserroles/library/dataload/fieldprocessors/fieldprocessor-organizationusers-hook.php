@@ -78,6 +78,7 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $user = $object;
@@ -96,13 +97,13 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
 
             case 'hasOrganizationDetails':
                 return
-                    $objectTypeResolver->resolveValue($user, 'organizationtypes', $variables, $expressions, $options) ||
-                    $objectTypeResolver->resolveValue($user, 'organizationcategories', $variables, $expressions, $options) ||
-                    $objectTypeResolver->resolveValue($user, 'contactPerson', $variables, $expressions, $options) ||
-                    $objectTypeResolver->resolveValue($user, 'contactNumber', $variables, $expressions, $options);
+                    $objectTypeResolver->resolveValue($user, 'organizationtypes', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options) ||
+                    $objectTypeResolver->resolveValue($user, 'organizationcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options) ||
+                    $objectTypeResolver->resolveValue($user, 'contactPerson', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options) ||
+                    $objectTypeResolver->resolveValue($user, 'contactNumber', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 
