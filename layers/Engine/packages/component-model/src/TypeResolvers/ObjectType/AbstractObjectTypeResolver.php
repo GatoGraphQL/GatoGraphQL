@@ -481,7 +481,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // catch it and return the equivalent GraphQL error so that it
             // fails gracefully in production (but not on development!)
             try {
-                $value = $objectTypeFieldResolver->resolveValue($this, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+                $value = $objectTypeFieldResolver->resolveValue($this, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
             } catch (Exception $e) {
                 if (RootEnvironment::isApplicationEnvironmentDev()) {
                     throw $e;

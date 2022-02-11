@@ -90,7 +90,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         switch ($fieldName) {
             case 'multilayoutKeys':
                 // Override the "post" implementation: instead of depending on categories, depend on the scope of the event (future/current/past)
-                $scope = $objectTypeResolver->resolveValue($event, 'scope', $variables, $expressions, $options);
+                $scope = $objectTypeResolver->resolveValue($event, 'scope', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($scope)) {
                     return $scope;
                 }
@@ -101,7 +101,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                 );
 
             case 'latestcountsTriggerValues':
-                $scope = $objectTypeResolver->resolveValue($event, 'scope', $variables, $expressions, $options);
+                $scope = $objectTypeResolver->resolveValue($event, 'scope', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($scope)) {
                     return $scope;
                 }
@@ -111,6 +111,6 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

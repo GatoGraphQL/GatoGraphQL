@@ -132,6 +132,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $customPostTypeAPI->getCustomPostType($customPost);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

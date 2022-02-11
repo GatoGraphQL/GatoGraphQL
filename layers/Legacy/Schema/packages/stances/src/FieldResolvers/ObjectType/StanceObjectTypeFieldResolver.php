@@ -164,7 +164,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
             case 'stance':
                 // The stance is the category
-                return $objectTypeResolver->resolveValue($object, 'mainCategory', $variables, $expressions, $options);
+                return $objectTypeResolver->resolveValue($object, 'mainCategory', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
 
             // The Stance has no title, so return the excerpt instead.
             // Needed for when adding a comment on the Stance, where it will say: Add comment for...
@@ -185,9 +185,9 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
             case 'hasStanceTarget':
                 // Cannot use !is_null because getCustomPostMeta returns "" when there's no entry, instead of null
-                return $objectTypeResolver->resolveValue($object, 'stancetarget', $variables, $expressions, $options);
+                return $objectTypeResolver->resolveValue($object, 'stancetarget', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

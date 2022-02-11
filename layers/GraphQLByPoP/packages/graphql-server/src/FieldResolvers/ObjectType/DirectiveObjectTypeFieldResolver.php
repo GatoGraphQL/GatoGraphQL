@@ -157,6 +157,6 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $directive->getExtensions()->getID();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

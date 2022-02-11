@@ -153,6 +153,6 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
                 return App::getAppStateManager()->all();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

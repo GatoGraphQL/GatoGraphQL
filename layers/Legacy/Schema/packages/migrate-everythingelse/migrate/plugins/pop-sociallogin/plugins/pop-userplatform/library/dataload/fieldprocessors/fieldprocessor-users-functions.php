@@ -75,7 +75,7 @@ class GD_WSL_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolv
                 return $userTypeAPI->getUserWebsiteUrl($user);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

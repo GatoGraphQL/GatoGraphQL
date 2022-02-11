@@ -91,10 +91,11 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
                     $this->getFieldQueryInterpreter()->getField('blockMetadata', $fieldArgs),
                     $variables,
                     $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
                     $options
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

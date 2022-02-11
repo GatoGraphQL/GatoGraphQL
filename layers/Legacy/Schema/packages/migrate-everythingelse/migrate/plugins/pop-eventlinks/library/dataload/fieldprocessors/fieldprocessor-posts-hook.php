@@ -92,7 +92,7 @@ class GD_EM_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFie
                 return PoP_ContentPostLinks_Utils::getLinkContent($event);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

@@ -56,10 +56,10 @@ class PoP_UserAvatar_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends Ab
         switch ($fieldName) {
             case 'fileUploadPictureURL':
                 // URL which will upload the images for the user
-                return GD_FileUpload_Picture_Utils::getFileuploadUrl($objectTypeResolver->resolveValue($object, 'id', $variables, $expressions, $options));
+                return GD_FileUpload_Picture_Utils::getFileuploadUrl($objectTypeResolver->resolveValue($object, 'id', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

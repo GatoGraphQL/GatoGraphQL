@@ -72,7 +72,7 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalOrganizationUsers
         $user = $object;
         switch ($fieldName) {
             case 'organizationTypesByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'organizationtypes', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($user, 'organizationtypes', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -80,7 +80,7 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalOrganizationUsers
                 return $organizationtypes->getSelectedValue();
 
             case 'organizationCategoriesByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'organizationcategories', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($user, 'organizationcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -88,7 +88,7 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalOrganizationUsers
                 return $organizationcategories->getSelectedValue();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

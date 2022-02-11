@@ -128,14 +128,14 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
                     $objectTypeResolver->getID($user)
                 );
             case 'hasRole':
-                $role = $objectTypeResolver->resolveValue($user, 'role', $variables, $expressions, $options);
+                $role = $objectTypeResolver->resolveValue($user, 'role', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($role)) {
                     return $role;
                 }
                 return $role == $fieldArgs['role'];
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

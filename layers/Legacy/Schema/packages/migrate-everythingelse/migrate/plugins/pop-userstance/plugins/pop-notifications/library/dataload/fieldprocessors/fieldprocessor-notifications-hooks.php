@@ -112,7 +112,7 @@ class UserStance_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends 
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

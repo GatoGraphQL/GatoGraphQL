@@ -96,6 +96,6 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 ], RouteUtils::getRouteURL($route));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

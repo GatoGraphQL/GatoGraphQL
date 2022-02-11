@@ -68,7 +68,7 @@ class GD_PostsCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 ], RouteUtils::getRouteURL($route));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

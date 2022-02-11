@@ -104,7 +104,7 @@ class PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification extends A
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

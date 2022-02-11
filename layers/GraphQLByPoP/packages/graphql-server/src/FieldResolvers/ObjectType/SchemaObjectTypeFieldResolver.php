@@ -154,7 +154,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'directives' => $schema->getDirectiveIDs(),
             'type' => $schema->getTypeID($fieldArgs['name']),
             'extensions' => $schema->getExtensions()->getID(),
-            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options),
+            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options),
         };
     }
 

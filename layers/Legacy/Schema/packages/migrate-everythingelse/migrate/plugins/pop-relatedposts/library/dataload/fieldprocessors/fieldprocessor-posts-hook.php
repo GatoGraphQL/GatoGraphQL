@@ -93,22 +93,22 @@ class PoP_RelatedPosts_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
                 return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_REFERENCES) ?? [];
 
             case 'hasReferences':
-                $references = $objectTypeResolver->resolveValue($object, 'references', $variables, $expressions, $options);
+                $references = $objectTypeResolver->resolveValue($object, 'references', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 return !empty($references);
 
             case 'referencedby':
                 return PoP_RelatedPosts_SectionUtils::getReferencedby($objectTypeResolver->getID($post));
 
             case 'hasReferencedBy':
-                $referencedby = $objectTypeResolver->resolveValue($object, 'referencedby', $variables, $expressions, $options);
+                $referencedby = $objectTypeResolver->resolveValue($object, 'referencedby', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 return !empty($referencedby);
 
             case 'referencedByCount':
-                $referencedby = $objectTypeResolver->resolveValue($object, 'referencedby', $variables, $expressions, $options);
+                $referencedby = $objectTypeResolver->resolveValue($object, 'referencedby', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 return count($referencedby);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

@@ -162,6 +162,6 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $field->getExtensions()->getID();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

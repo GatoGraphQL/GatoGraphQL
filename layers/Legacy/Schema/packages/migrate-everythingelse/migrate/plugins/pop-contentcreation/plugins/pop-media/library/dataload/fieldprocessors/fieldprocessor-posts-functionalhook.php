@@ -65,7 +65,7 @@ class GD_ContentCreation_Media_DataLoad_ObjectTypeFieldResolver_FunctionalPosts 
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

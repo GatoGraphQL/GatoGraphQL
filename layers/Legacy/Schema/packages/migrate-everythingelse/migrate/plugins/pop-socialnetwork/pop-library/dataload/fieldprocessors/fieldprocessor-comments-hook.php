@@ -61,7 +61,7 @@ class GD_DataLoad_ObjectTypeFieldResolver_Comments extends AbstractObjectTypeFie
                 return \PoPCMSSchema\CommentMeta\Utils::getCommentMeta($objectTypeResolver->getID($comment), GD_METAKEY_COMMENT_TAGGEDUSERS) ?? [];
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface

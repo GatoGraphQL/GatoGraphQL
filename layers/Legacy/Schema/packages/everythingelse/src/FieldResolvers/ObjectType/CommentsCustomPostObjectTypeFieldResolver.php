@@ -72,9 +72,9 @@ class CommentsCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         switch ($fieldName) {
             case 'commentsURL':
                 // @todo: fix this, add the ?#comment_id=... to the post URL
-                return $objectTypeResolver->resolveValue($post, 'url', $variables, $expressions, $options);
+                return $objectTypeResolver->resolveValue($post, 'url', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

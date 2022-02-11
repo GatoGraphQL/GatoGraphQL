@@ -108,6 +108,6 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return \is_sticky($post->ID);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

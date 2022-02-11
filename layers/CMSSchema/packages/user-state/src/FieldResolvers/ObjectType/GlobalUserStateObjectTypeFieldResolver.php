@@ -65,6 +65,6 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
                 return App::getState('current-user-id');
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

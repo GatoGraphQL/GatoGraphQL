@@ -38,7 +38,7 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
                     }
                 }
                 if ($menuParam === null) {
-                    return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+                    return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 }
                 $menu = wp_get_nav_menu_object($menuParam);
                 if ($menu === false) {
@@ -47,6 +47,6 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
                 return $menu->term_id;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

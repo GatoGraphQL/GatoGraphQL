@@ -452,6 +452,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
             $fieldArgs,
             $variables,
             $expressions,
+            $objectTypeFieldResolutionFeedbackStore,
             $options
         );
     }

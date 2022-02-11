@@ -65,7 +65,7 @@ class PoP_Volunteering_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 ], RouteUtils::getRouteURL(POP_VOLUNTEERING_ROUTE_VOLUNTEER));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

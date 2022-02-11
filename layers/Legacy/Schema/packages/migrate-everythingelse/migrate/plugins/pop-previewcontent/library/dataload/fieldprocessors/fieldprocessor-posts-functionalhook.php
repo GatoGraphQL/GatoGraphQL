@@ -60,7 +60,7 @@ class PPPPoP_DataLoad_ObjectTypeFieldResolver_FunctionalProfiles extends Abstrac
                 return $pluginapi->getPreviewLink($objectTypeResolver->getID($post));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

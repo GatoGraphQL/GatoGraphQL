@@ -81,13 +81,13 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
         switch ($fieldName) {
             case 'multilayoutKeys':
                 // If multiple-layouts, then we need 'objectType' and 'action' data-fields
-                $object_type = $objectTypeResolver->resolveValue($notification, 'objectType', $variables, $expressions, $options);
-                $action = $objectTypeResolver->resolveValue($notification, 'action', $variables, $expressions, $options);
+                $object_type = $objectTypeResolver->resolveValue($notification, 'objectType', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $action = $objectTypeResolver->resolveValue($notification, 'action', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 return array(
                     $object_type . '-' . $action,
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

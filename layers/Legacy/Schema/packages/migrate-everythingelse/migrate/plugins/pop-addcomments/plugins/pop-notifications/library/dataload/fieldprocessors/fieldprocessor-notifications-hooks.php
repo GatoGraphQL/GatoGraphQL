@@ -115,7 +115,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                 switch ($notification->action) {
                     case AAL_POP_ACTION_COMMENT_ADDED:
                         // comment-object-id is the object-id
-                        return $objectTypeResolver->resolveValue($object, FieldQueryInterpreterFacade::getInstance()->getField('objectID', $fieldArgs), $variables, $expressions, $options);
+                        return $objectTypeResolver->resolveValue($object, FieldQueryInterpreterFacade::getInstance()->getField('objectID', $fieldArgs), $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 }
                 return null;
 
@@ -194,7 +194,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

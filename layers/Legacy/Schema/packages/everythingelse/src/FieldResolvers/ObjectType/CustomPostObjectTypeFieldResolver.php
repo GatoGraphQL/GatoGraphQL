@@ -76,7 +76,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_LOCATIONS) ?? [];
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

@@ -131,6 +131,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return (object) $schemaDefinitionService->getFullSchemaDefinition();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

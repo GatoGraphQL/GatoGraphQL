@@ -65,7 +65,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extend
                 ], RouteUtils::getRouteURL(POP_CONTENTCREATION_ROUTE_FLAG));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

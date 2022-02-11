@@ -71,9 +71,9 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
     ): mixed {
         switch ($fieldName) {
             case 'endpoint':
-                return APIUtils::getEndpoint($objectTypeResolver->resolveValue($object, 'url', $variables, $expressions, $options));
+                return APIUtils::getEndpoint($objectTypeResolver->resolveValue($object, 'url', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

@@ -203,6 +203,6 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $this->getUserTypeAPI()->getUserWebsiteUrl($user);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

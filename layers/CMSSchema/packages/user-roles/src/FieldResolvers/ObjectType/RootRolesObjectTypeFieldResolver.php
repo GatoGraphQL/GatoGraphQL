@@ -77,6 +77,6 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $this->getUserRoleTypeAPI()->getCapabilities();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

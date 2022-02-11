@@ -112,7 +112,7 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications ext
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

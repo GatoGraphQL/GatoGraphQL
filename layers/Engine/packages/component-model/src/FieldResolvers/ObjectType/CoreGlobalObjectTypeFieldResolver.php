@@ -204,6 +204,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 return in_array($interface, $implementedInterfaceNames);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

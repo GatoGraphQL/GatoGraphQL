@@ -100,6 +100,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 return $comment->comment_author_IP;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

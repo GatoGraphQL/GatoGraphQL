@@ -161,6 +161,6 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
                 return $tagTypeAPI->getCustomPostTagCount($objectTypeResolver->getID($customPost), $query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

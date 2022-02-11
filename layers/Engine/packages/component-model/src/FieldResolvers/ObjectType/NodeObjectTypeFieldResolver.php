@@ -81,7 +81,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'self'
                 => $objectTypeResolver->getID($object),
             default
-                => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options),
+                => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options),
         };
     }
 

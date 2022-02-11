@@ -133,7 +133,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'locations':
                 // Events can have no location
                 $value = array();
-                $location = $objectTypeResolver->resolveValue($event, 'location', $variables, $expressions, $options);
+                $location = $objectTypeResolver->resolveValue($event, 'location', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($location)) {
                     return $location;
                 } elseif ($location) {
@@ -171,6 +171,6 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

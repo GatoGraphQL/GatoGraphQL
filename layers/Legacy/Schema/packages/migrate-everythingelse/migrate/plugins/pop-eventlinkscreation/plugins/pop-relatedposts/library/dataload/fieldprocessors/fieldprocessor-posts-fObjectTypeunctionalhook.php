@@ -68,7 +68,7 @@ class PoP_EventLinksCreation_DataLoad_FunctionalObjectTypeFieldResolver extends 
                 ], RouteUtils::getRouteURL($route));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

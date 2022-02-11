@@ -77,15 +77,15 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
         switch ($fieldName) {
             case 'multilayoutKeys':
                 return array(
-                    $objectTypeResolver->resolveValue($user, 'role', $variables, $expressions, $options),
+                    $objectTypeResolver->resolveValue($user, 'role', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options),
                 );
 
              // Needed for tinyMCE-mention plug-in
             case 'mentionQueryby':
-                return $objectTypeResolver->resolveValue($user, 'displayName', $variables, $expressions, $options);
+                return $objectTypeResolver->resolveValue($user, 'displayName', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
 
             case 'descriptionFormatted':
-                $value = $objectTypeResolver->resolveValue($user, 'description', $variables, $expressions, $options);
+                $value = $objectTypeResolver->resolveValue($user, 'description', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 return $cmsapplicationhelpers->makeClickable($cmsapplicationhelpers->convertLinebreaksToHTML(strip_tags($value)));
 
             case 'excerpt':
@@ -98,7 +98,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
                 return $cmsapplicationhelpers->makeClickable(limitString(strip_tags($cmsapplicationhelpers->convertLinebreaksToHTML($userTypeAPI->getUserDescription($objectTypeResolver->getID($user)))), $length, $readmore));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

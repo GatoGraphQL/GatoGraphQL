@@ -110,7 +110,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 $value = array();
                 $type = strtolower($objectTypeResolver->getTypeName());
                 // If it has categories, use it. Otherwise, only use the post type
-                if ($cats = $objectTypeResolver->resolveValue($post, 'categories', $variables, $expressions, $options)) {
+                if ($cats = $objectTypeResolver->resolveValue($post, 'categories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     foreach ($cats as $cat) {
                         $value[] = $type.'-'.$cat;
                     }
@@ -121,7 +121,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
 
          // Needed for using handlebars helper "compare" to compare a category id in a buttongroup, which is taken as a string, inside a list of cats, which must then also be strings
             case 'catsByName':
-                $cats = $objectTypeResolver->resolveValue($post, 'categories', $variables, $expressions, $options);
+                $cats = $objectTypeResolver->resolveValue($post, 'categories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $value = array();
                 foreach ($cats as $cat) {
                     $value[] = strval($cat);
@@ -140,7 +140,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
 
             case 'topicsByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'topics', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'topics', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -148,7 +148,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 return $categories->getSelectedValue();
 
             case 'appliestoByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -156,7 +156,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 return $appliesto->getSelectedValue();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

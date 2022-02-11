@@ -70,7 +70,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends 
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNFOLLOWUSER));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

@@ -114,7 +114,7 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications ex
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

@@ -71,7 +71,7 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
                 return PoP_AddPostLinks_Utils::getLink($objectTypeResolver->getID($post));
 
             case 'hasLink':
-                $link = $objectTypeResolver->resolveValue($post, 'link', $variables, $expressions, $options);
+                $link = $objectTypeResolver->resolveValue($post, 'link', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($link)) {
                     return $link;
                 } elseif ($link) {
@@ -80,7 +80,7 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
                 return false;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

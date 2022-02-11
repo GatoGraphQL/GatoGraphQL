@@ -76,7 +76,7 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
         $directiveExtensions = $object;
         return match ($fieldName) {
             'needsDataToExecute' => $directiveExtensions->needsDataToExecute(),
-            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options),
+            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options),
         };
     }
 

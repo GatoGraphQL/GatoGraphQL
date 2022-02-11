@@ -134,7 +134,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'hasStances':
-                $referencedby = $objectTypeResolver->resolveValue($object, 'stances', $variables, $expressions, $options);
+                $referencedby = $objectTypeResolver->resolveValue($object, 'stances', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 return !empty($referencedby);
 
             case 'stanceProCount':
@@ -161,6 +161,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $customPostTypeAPI->getCustomPostCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

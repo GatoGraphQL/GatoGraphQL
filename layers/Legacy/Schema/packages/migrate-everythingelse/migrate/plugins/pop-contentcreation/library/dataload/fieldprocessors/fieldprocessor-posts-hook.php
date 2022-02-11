@@ -111,7 +111,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
                 return $cmseditpostsapi->getDeletePostLink($objectTypeResolver->getID($post));
 
             case 'coauthors':
-                $authors = $objectTypeResolver->resolveValue($object, FieldQueryInterpreterFacade::getInstance()->getField('authors', $fieldArgs), $variables, $expressions, $options);
+                $authors = $objectTypeResolver->resolveValue($object, FieldQueryInterpreterFacade::getInstance()->getField('authors', $fieldArgs), $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
 
                 // This function only makes sense when the user is logged in
                 if (\PoP\Root\App::getState('is-user-logged-in')) {
@@ -123,7 +123,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
                 return $authors;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

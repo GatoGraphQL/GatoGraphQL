@@ -166,6 +166,6 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
                 return $categoryTypeAPI->getCategoryCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

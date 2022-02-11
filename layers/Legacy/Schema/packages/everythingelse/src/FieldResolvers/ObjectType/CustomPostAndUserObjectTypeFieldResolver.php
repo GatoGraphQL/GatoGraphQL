@@ -95,14 +95,14 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     ): mixed {
         switch ($fieldName) {
             case 'hasLocation':
-                $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $options);
+                $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($locations)) {
                     return $locations;
                 }
                 return !empty($locations);
 
             case 'location':
-                $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $options);
+                $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($locations)) {
                     return $locations;
                 } elseif ($locations) {
@@ -111,6 +111,6 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

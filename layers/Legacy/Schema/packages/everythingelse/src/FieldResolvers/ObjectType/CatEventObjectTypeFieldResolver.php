@@ -97,7 +97,7 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $value;
 
             case 'catName':
-                $cat = $objectTypeResolver->resolveValue($event, 'mainCategory', $variables, $expressions, $options);
+                $cat = $objectTypeResolver->resolveValue($event, 'mainCategory', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($cat)) {
                     return $cat;
                 } elseif ($cat) {
@@ -106,6 +106,6 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

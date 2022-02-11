@@ -86,7 +86,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
                 return gdUreEditMembershipUrl($objectTypeResolver->getID($user), true);
 
             case 'memberStatusByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'memberstatus', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($user, 'memberstatus', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -94,7 +94,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
                 return $status->getSelectedValue();
 
             case 'memberPrivilegesByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'memberprivileges', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($user, 'memberprivileges', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -102,7 +102,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
                 return $privileges->getSelectedValue();
 
             case 'memberTagsByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'membertags', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($user, 'membertags', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -110,7 +110,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
                 return $tags->getSelectedValue();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

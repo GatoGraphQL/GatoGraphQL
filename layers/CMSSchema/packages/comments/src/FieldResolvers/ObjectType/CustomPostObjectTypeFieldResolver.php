@@ -79,7 +79,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 return $this->getCommentTypeAPI()->areCommentsOpen($objectTypeResolver->getID($post));
 
             case 'hasComments':
-                return $objectTypeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $options) > 0;
+                return $objectTypeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options) > 0;
         }
 
         $query = array_merge(
@@ -96,6 +96,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 return $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

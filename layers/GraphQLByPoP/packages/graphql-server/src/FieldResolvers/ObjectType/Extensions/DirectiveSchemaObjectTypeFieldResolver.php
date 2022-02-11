@@ -92,7 +92,7 @@ class DirectiveSchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         $directive = $object;
         return match ($fieldName) {
             'kind' => $directive->getKind(),
-            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options),
+            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options),
         };
     }
 

@@ -75,6 +75,6 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
                 return App::getState('is-user-logged-in');
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

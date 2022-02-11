@@ -68,7 +68,7 @@ class PoP_LocationPostLinksCreation_DataLoad_ObjectTypeFieldResolver_FunctionalP
                 ], RouteUtils::getRouteURL($route));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

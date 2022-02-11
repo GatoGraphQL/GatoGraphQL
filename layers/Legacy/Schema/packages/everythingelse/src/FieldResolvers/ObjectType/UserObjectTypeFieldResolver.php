@@ -76,7 +76,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return Utils::getUserMeta($objectTypeResolver->getID($user), GD_METAKEY_PROFILE_LOCATIONS) ?? [];
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

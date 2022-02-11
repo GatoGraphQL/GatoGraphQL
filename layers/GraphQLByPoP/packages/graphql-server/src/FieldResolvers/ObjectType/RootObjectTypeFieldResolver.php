@@ -151,6 +151,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     ),
                     $variables,
                     $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
                     $options
                 );
                 if (GeneralUtils::isError($schemaID)) {
@@ -162,7 +163,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $schema->getTypeID($fieldArgs['name']);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

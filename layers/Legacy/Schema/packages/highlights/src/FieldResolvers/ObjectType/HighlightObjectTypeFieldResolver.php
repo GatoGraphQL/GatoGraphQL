@@ -129,13 +129,13 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return Utils::getCustomPostMeta($objectTypeResolver->getID($highlight), GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
 
             case 'highlightedPostURL':
-                $highlightedPost = $objectTypeResolver->resolveValue($highlight, 'highlightedpost', $variables, $expressions, $options);
+                $highlightedPost = $objectTypeResolver->resolveValue($highlight, 'highlightedpost', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if (GeneralUtils::isError($highlightedPost)) {
                     return $highlightedPost;
                 }
                 return $customPostTypeAPI->getPermalink($highlightedPost);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

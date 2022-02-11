@@ -81,6 +81,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $this->getCustomPostUserTypeAPI()->getAuthorID($object);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
