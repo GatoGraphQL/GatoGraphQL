@@ -52,6 +52,7 @@ class GD_ContentCreation_Media_DataLoad_ObjectTypeFieldResolver_FunctionalPosts 
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $customPostMediaTypeAPI = CustomPostMediaTypeAPIFacade::getInstance();

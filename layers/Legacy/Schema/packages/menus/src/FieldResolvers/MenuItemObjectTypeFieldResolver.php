@@ -28,6 +28,7 @@ abstract class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $menuItemTypeAPI = MenuItemTypeAPIFacade::getInstance();

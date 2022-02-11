@@ -113,6 +113,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $categoryTypeAPI = $this->getCategoryTypeAPI();

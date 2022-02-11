@@ -68,6 +68,7 @@ class SchemaExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldRes
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         /** @var SchemaExtensions */

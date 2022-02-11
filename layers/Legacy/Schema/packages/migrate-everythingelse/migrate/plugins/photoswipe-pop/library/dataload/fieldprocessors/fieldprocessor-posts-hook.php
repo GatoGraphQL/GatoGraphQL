@@ -52,6 +52,7 @@ class PS_POP_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFi
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $post = $object;

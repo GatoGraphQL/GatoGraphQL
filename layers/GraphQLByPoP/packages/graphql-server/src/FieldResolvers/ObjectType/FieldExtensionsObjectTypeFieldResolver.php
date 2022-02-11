@@ -73,6 +73,7 @@ class FieldExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         /** @var FieldExtensions */

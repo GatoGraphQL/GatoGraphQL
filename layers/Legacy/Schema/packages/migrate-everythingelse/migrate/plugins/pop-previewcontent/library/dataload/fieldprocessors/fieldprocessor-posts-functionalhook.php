@@ -50,6 +50,7 @@ class PPPPoP_DataLoad_ObjectTypeFieldResolver_FunctionalProfiles extends Abstrac
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $pluginapi = PoP_PreviewContent_FunctionsAPIFactory::getInstance();

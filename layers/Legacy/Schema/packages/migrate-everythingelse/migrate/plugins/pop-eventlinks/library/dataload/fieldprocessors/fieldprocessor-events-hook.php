@@ -81,6 +81,7 @@ class GD_EM_DataLoad_ObjectTypeFieldResolver_Events extends AbstractObjectTypeFi
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $event = $object;

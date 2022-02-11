@@ -65,6 +65,7 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends Abstract
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $comment = $object;

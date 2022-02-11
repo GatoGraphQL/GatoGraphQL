@@ -101,6 +101,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();

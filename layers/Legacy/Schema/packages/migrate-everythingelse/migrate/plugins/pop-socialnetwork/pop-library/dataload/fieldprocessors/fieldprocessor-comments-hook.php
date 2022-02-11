@@ -52,6 +52,7 @@ class GD_DataLoad_ObjectTypeFieldResolver_Comments extends AbstractObjectTypeFie
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $comment = $object;

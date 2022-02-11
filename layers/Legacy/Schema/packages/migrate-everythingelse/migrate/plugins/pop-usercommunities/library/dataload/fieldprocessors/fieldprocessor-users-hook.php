@@ -92,6 +92,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $user = $object;

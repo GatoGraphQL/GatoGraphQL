@@ -150,6 +150,7 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         // Simply return the value of the property in the object

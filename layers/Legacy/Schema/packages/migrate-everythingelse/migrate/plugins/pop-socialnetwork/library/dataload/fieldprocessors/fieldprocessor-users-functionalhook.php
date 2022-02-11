@@ -52,6 +52,7 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $user = $object;

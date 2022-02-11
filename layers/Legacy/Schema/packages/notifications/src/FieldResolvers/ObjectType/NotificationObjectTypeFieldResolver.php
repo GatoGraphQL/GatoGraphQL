@@ -273,6 +273,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $notification = $object;

@@ -76,6 +76,7 @@ class PoP_Notifications_UserLogin_DataLoad_ObjectTypeFieldResolver_Notifications
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $notification = $object;

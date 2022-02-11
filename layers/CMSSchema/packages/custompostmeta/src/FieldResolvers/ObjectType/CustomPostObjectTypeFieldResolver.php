@@ -48,6 +48,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $customPost = $object;

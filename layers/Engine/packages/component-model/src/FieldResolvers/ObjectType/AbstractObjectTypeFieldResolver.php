@@ -1219,6 +1219,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         // If a MutationResolver is declared, let it resolve the value

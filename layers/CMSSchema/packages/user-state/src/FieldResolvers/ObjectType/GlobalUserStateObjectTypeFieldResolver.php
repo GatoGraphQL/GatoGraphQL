@@ -58,6 +58,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         switch ($fieldName) {

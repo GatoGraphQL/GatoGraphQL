@@ -71,6 +71,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed;
     /**

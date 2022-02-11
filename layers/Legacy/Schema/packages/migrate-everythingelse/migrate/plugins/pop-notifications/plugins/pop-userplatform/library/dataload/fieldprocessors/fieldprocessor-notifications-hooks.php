@@ -77,6 +77,7 @@ class PoP_Notifications_UserPlatform_DataLoad_ObjectTypeFieldResolver_Notificati
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();

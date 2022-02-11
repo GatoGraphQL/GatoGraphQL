@@ -66,6 +66,7 @@ class GD_ApplicationProcessors_DataLoad_ObjectTypeFieldResolver_Posts extends Ab
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $post = $object;

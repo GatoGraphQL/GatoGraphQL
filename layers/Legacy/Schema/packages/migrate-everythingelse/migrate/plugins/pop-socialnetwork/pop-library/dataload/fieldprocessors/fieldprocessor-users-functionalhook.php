@@ -55,6 +55,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends 
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $user = $object;

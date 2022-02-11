@@ -52,6 +52,7 @@ class PoP_EventLinksCreation_DataLoad_FunctionalObjectTypeFieldResolver extends 
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $post = $object;

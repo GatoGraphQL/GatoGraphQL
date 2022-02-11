@@ -78,6 +78,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $customPostTypeAPI = $this->getCustomPostTypeAPI();

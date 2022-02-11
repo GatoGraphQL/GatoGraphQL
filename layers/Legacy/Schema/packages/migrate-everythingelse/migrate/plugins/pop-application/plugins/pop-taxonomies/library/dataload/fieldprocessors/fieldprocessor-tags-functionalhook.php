@@ -50,6 +50,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObje
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $tag = $object;

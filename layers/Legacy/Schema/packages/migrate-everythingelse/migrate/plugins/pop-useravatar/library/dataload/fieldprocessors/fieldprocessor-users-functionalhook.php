@@ -50,6 +50,7 @@ class PoP_UserAvatar_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends Ab
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $user = $object;

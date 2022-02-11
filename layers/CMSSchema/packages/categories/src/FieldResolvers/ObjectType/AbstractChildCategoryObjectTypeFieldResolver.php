@@ -147,6 +147,7 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $category = $object;

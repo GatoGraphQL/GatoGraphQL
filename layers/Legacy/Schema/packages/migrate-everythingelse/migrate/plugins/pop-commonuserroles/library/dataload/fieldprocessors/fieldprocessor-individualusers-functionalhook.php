@@ -61,6 +61,7 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers e
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $user = $object;

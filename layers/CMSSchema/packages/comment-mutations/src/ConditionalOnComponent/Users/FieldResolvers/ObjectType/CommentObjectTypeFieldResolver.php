@@ -92,6 +92,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $comment = $object;

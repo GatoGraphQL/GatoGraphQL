@@ -53,6 +53,7 @@ class PoP_Volunteering_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $post = $object;

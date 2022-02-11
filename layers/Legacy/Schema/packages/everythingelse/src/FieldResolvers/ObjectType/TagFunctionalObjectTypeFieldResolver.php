@@ -77,6 +77,7 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $applicationtaxonomyapi = FunctionAPIFactory::getInstance();

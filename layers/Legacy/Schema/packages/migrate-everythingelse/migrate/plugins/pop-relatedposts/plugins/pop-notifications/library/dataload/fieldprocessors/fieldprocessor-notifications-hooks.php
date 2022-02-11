@@ -77,6 +77,7 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications ex
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $userTypeAPI = UserTypeAPIFacade::getInstance();

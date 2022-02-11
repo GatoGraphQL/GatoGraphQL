@@ -52,6 +52,7 @@ class PoP_LocationPostLinksCreation_DataLoad_ObjectTypeFieldResolver_FunctionalP
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $post = $object;
