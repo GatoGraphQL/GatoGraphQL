@@ -571,9 +571,6 @@ class Parser extends Tokenizer implements ParserInterface
         throw $this->createUnexpectedException($this->lookAhead);
     }
 
-    /**
-     * @param string|int|float|bool|null $value
-     */
     public function createLiteral(
         string|int|float|bool|null $value,
         Location $location

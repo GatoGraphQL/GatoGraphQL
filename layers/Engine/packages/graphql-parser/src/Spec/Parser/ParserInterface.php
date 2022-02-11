@@ -11,9 +11,6 @@ interface ParserInterface
 {
     public function parse(string $source): Document;
 
-    /**
-     * @param string|int|float|bool|null $value
-     */
     public function createLiteral(
         string|int|float|bool|null $value,
         Location $location
