@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Error\ErrorServiceInterface;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Root\App;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -86,12 +87,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $previousDBItems,
             $variables,
             $messages,
+            $engineIterationFeedbackStore,
             $objectErrors,
             $objectWarnings,
-            $objectDeprecations,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations
+            $objectDeprecations
         );
     }
 
@@ -103,12 +102,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array $previousDBItems,
         array &$variables,
         array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations
     ): void {
         $enqueueFillingObjectsFromIDs = [];
         foreach (array_keys($idsDataFields) as $id) {
@@ -131,7 +128,22 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             }
 
             $expressions = $this->getExpressionsForObject($id, $variables, $messages);
-            $this->resolveValuesForObject($relationalTypeResolver, $id, $object, $idsDataFields[(string)$id]['direct'], $dbItems, $previousDBItems, $variables, $expressions, $objectErrors, $objectWarnings, $objectDeprecations);
+            $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            $this->resolveValuesForObject(
+                $relationalTypeResolver,
+                $id,
+                $object,
+                $idsDataFields[(string)$id]['direct'],
+                $dbItems,
+                $previousDBItems,
+                $variables,
+                $expressions,
+                $engineIterationFeedbackStore,
+                $objectTypeFieldResolutionFeedbackStore,
+                $objectErrors,
+                $objectWarnings,
+                $objectDeprecations
+            );
 
             // Add the conditional data fields
             // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
@@ -173,6 +185,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array $previousDBItems,
         array &$variables,
         array &$expressions,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations
@@ -187,6 +201,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $previousDBItems,
                 $variables,
                 $expressions,
+                $engineIterationFeedbackStore,
+                $objectTypeFieldResolutionFeedbackStore,
                 $objectErrors,
                 $objectWarnings,
                 $objectDeprecations
@@ -203,6 +219,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array $previousDBItems,
         array &$variables,
         array &$expressions,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations
@@ -216,6 +234,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $previousDBItems,
             $variables,
             $expressions,
+            $objectTypeFieldResolutionFeedbackStore,
             $objectWarnings,
             $objectDeprecations
         );
@@ -226,6 +245,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $field,
             $value,
             $dbItems,
+            $engineIterationFeedbackStore,
+            $objectTypeFieldResolutionFeedbackStore,
             $objectErrors
         );
     }
@@ -238,6 +259,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array $previousDBItems,
         array &$variables,
         array &$expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array &$objectWarnings,
         array &$objectDeprecations
     ) {
@@ -256,6 +278,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         string $field,
         mixed $value,
         array &$dbItems,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array &$objectErrors,
     ): void {
         $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey(
