@@ -340,6 +340,7 @@ trait AliasSchemaDirectiveResolverTrait
             $dbItems,
             $variables,
             $messages,
+            $engineIterationFeedbackStore,
             $objectErrors,
             $objectWarnings,
             $objectDeprecations,

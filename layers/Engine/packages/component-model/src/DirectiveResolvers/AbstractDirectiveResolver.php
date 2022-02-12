@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use Exception;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Component;
@@ -13,6 +12,7 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
@@ -29,6 +29,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeReso
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\Root\App;
 use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 {
@@ -924,6 +925,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (!$this->needsIDsDataFieldsToExecute() || $this->hasIDsDataFields($idsDataFields)) {
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
+            $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
             try {
                 $this->resolveDirective(
                     $relationalTypeResolver,
@@ -936,6 +938,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $dbItems,
                     $variables,
                     $messages,
+                    $engineIterationFeedbackStore,
                     $objectErrors,
                     $objectWarnings,
                     $objectDeprecations,

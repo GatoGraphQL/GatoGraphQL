@@ -65,6 +65,7 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
             $previousDBItems,
             $variables,
             $messages,
+            $engineIterationFeedbackStore,
             $objectErrors,
             $objectWarnings,
             $objectDeprecations,
