@@ -342,9 +342,16 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 }
             }
 
-            /** @var ComponentModelComponentConfiguration */
-            $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
-            $setFailingFieldResponseAsNull = $componentConfiguration->setFailingFieldResponseAsNull();
+            if ($nestedSchemaErrors !== [] || $nestedIDObjectErrors !== []) {
+                /** @var ComponentModelComponentConfiguration */
+                $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
+                $setFailingFieldResponseAsNull = $componentConfiguration->setFailingFieldResponseAsNull();
+                // If any item fails, set the whole response field as null
+                if ($setFailingFieldResponseAsNull) {
+                    $dbItems[(string)$id][$fieldOutputKey] = null;
+                    return;
+                }
+            }
 
             // 3. Compose the array from the results for each array item
             foreach ($idsDataFields as $id => $dataFields) {
@@ -419,11 +426,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                                     $error->getMessageOrCode()
                                 ),
                             ];
-                            if ($setFailingFieldResponseAsNull) {
-                                $arrayItemValue = null;
-                                // Place the result for the array in the original property
-                                $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $objectTraces, $id, $fieldOutputKey, $key, $arrayItemValue);
-                            }
                             continue;
                         }
                         // Place the result for the array in the original property
