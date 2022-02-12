@@ -6,12 +6,14 @@ namespace PoP\Engine\DirectiveResolvers;
 
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\Dataloading\Expressions;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\Dataloading\Expressions;
 
 class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver
 {
@@ -80,6 +82,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObj
         array &$dbItems,
         array &$variables,
         array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
@@ -97,7 +100,15 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObj
                     $this->addExpressionForObject($id, Expressions::NAME_KEY, $key, $messages);
                     $this->addExpressionForObject($id, Expressions::NAME_VALUE, $value, $messages);
                     $expressions = $this->getExpressionsForObject($id, $variables, $messages);
-                    $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $if, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                    $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                    $resolvedValue = $relationalTypeResolver->resolveValue(
+                        $objectIDItems[(string)$id],
+                        $if,
+                        $variables,
+                        $expressions,
+                        $objectTypeFieldResolutionFeedbackStore,
+                        $options
+                    );
                     if (GeneralUtils::isError($resolvedValue)) {
                         // Show the error message, and return nothing
                         /** @var Error */

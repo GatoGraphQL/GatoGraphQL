@@ -6,11 +6,12 @@ namespace PoP\Engine\DirectiveResolvers;
 
 use Exception;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\Misc\OperatorHelpers;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\Misc\OperatorHelpers;
 use stdClass;
 
 class AdvancePointerInArrayOrObjectDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver
@@ -88,6 +89,7 @@ class AdvancePointerInArrayOrObjectDirectiveResolver extends AbstractApplyNested
         array &$dbItems,
         array &$variables,
         array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,

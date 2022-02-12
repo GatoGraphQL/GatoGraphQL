@@ -270,7 +270,15 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 $options = [
                     AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
                 ];
-                $functionValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $validFunction, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                $functionValue = $relationalTypeResolver->resolveValue(
+                    $objectIDItems[(string)$id],
+                    $validFunction,
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
 
                 // If there was an error (eg: a missing mandatory argument), then the function will be of type Error
                 if (GeneralUtils::isError($functionValue)) {
