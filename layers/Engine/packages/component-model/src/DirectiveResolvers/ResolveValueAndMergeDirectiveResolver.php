@@ -267,7 +267,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $object,
             $field,
             $variables,
-            $expressions
+            $expressions,
+            $objectTypeFieldResolutionFeedbackStore,
         );
     }
 

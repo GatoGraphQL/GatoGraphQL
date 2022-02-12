@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\App;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalMetaDirectiveResolver;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
@@ -16,9 +16,10 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Component;
 use PoP\Engine\ComponentConfiguration;
 use PoP\Engine\Dataloading\Expressions;
+use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
-use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\Root\App;
 use stdClass;
 
 abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver extends AbstractGlobalMetaDirectiveResolver
@@ -239,8 +240,24 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $arrayItemIdsProperties[(string)$id]['direct'][] = $arrayItemProperty;
                     }
                     $arrayItemIdsProperties[(string)$id]['conditional'] = [];
-
-                    $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $objectIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+                    $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                    $this->addExpressionsForObject(
+                        $relationalTypeResolver,
+                        $id,
+                        $field,
+                        $objectIDItems,
+                        $dbItems,
+                        $previousDBItems,
+                        $variables,
+                        $messages,
+                        $objectTypeFieldResolutionFeedbackStore,
+                        $objectErrors,
+                        $objectWarnings,
+                        $objectDeprecations,
+                        $schemaErrors,
+                        $schemaWarnings,
+                        $schemaDeprecations
+                    );
                 }
             }
         }
@@ -441,6 +458,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         array $previousDBItems,
         array &$variables,
         array &$messages,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
@@ -469,7 +487,14 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
             foreach ((array) $addExpressions as $key => $value) {
                 // Evaluate the $value, since it may be a function
                 if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($value)) {
-                    $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $value, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                    $resolvedValue = $relationalTypeResolver->resolveValue(
+                        $objectIDItems[(string)$id],
+                        $value,
+                        $variables,
+                        $expressions,
+                        $objectTypeFieldResolutionFeedbackStore,
+                        $options
+                    );
                     if (GeneralUtils::isError($resolvedValue)) {
                         // Show the error message, and return nothing
                         /** @var Error */
