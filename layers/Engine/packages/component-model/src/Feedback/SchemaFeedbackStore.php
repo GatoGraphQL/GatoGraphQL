@@ -7,93 +7,93 @@ namespace PoP\ComponentModel\Feedback;
 class SchemaFeedbackStore
 {
     /** @var SchemaFeedbackInterface[] */
-    private array $schemaErrors = [];
+    private array $errors = [];
     /** @var SchemaFeedbackInterface[] */
-    private array $schemaWarnings = [];
+    private array $warnings = [];
     /** @var SchemaFeedbackInterface[] */
-    private array $schemaDeprecations = [];
+    private array $deprecations = [];
     /** @var SchemaFeedbackInterface[] */
-    private array $schemaNotices = [];
+    private array $notices = [];
     /** @var SchemaFeedbackInterface[] */
-    private array $schemaLogs = [];
+    private array $logs = [];
     /** @var SchemaFeedbackInterface[] */
-    private array $schemaTraces = [];
+    private array $traces = [];
 
     /**
      * @return SchemaFeedbackInterface[]
      */
-    public function getSchemaErrors(): array
+    public function getErrors(): array
     {
-        return $this->schemaErrors;
+        return $this->errors;
     }
 
-    public function addSchemaError(SchemaFeedbackInterface $schemaError): void
+    public function addError(SchemaFeedbackInterface $error): void
     {
-        $this->schemaErrors[] = $schemaError;
-    }
-
-    /**
-     * @return SchemaFeedbackInterface[]
-     */
-    public function getSchemaWarnings(): array
-    {
-        return $this->schemaWarnings;
-    }
-
-    public function addSchemaWarning(SchemaFeedbackInterface $schemaWarning): void
-    {
-        $this->schemaWarnings[] = $schemaWarning;
+        $this->errors[] = $error;
     }
 
     /**
      * @return SchemaFeedbackInterface[]
      */
-    public function getSchemaDeprecations(): array
+    public function getWarnings(): array
     {
-        return $this->schemaDeprecations;
+        return $this->warnings;
     }
 
-    public function addSchemaDeprecation(SchemaFeedbackInterface $schemaDeprecation): void
+    public function addWarning(SchemaFeedbackInterface $warning): void
     {
-        $this->schemaDeprecations[] = $schemaDeprecation;
-    }
-
-    /**
-     * @return SchemaFeedbackInterface[]
-     */
-    public function getSchemaNotices(): array
-    {
-        return $this->schemaNotices;
-    }
-
-    public function addSchemaNotice(SchemaFeedbackInterface $schemaNotice): void
-    {
-        $this->schemaNotices[] = $schemaNotice;
+        $this->warnings[] = $warning;
     }
 
     /**
      * @return SchemaFeedbackInterface[]
      */
-    public function getSchemaLogs(): array
+    public function getDeprecations(): array
     {
-        return $this->schemaLogs;
+        return $this->deprecations;
     }
 
-    public function addSchemaLog(SchemaFeedbackInterface $schemaLog): void
+    public function addDeprecation(SchemaFeedbackInterface $deprecation): void
     {
-        $this->schemaLogs[] = $schemaLog;
+        $this->deprecations[] = $deprecation;
     }
 
     /**
      * @return SchemaFeedbackInterface[]
      */
-    public function getSchemaTraces(): array
+    public function getNotices(): array
     {
-        return $this->schemaTraces;
+        return $this->notices;
     }
 
-    public function addSchemaTrace(SchemaFeedbackInterface $schemaTrace): void
+    public function addNotice(SchemaFeedbackInterface $notice): void
     {
-        $this->schemaTraces[] = $schemaTrace;
+        $this->notices[] = $notice;
+    }
+
+    /**
+     * @return SchemaFeedbackInterface[]
+     */
+    public function getLogs(): array
+    {
+        return $this->logs;
+    }
+
+    public function addLog(SchemaFeedbackInterface $log): void
+    {
+        $this->logs[] = $log;
+    }
+
+    /**
+     * @return SchemaFeedbackInterface[]
+     */
+    public function getTraces(): array
+    {
+        return $this->traces;
+    }
+
+    public function addTrace(SchemaFeedbackInterface $trace): void
+    {
+        $this->traces[] = $trace;
     }
 }

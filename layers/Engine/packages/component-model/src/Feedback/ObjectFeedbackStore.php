@@ -7,93 +7,93 @@ namespace PoP\ComponentModel\Feedback;
 class ObjectFeedbackStore
 {
     /** @var ObjectFeedbackInterface[] */
-    private array $objectErrors = [];
+    private array $errors = [];
     /** @var ObjectFeedbackInterface[] */
-    private array $objectWarnings = [];
+    private array $warnings = [];
     /** @var ObjectFeedbackInterface[] */
-    private array $objectDeprecations = [];
+    private array $deprecations = [];
     /** @var ObjectFeedbackInterface[] */
-    private array $objectNotices = [];
+    private array $notices = [];
     /** @var ObjectFeedbackInterface[] */
-    private array $objectLogs = [];
+    private array $logs = [];
     /** @var ObjectFeedbackInterface[] */
-    private array $objectTraces = [];
+    private array $traces = [];
 
     /**
      * @return ObjectFeedbackInterface[]
      */
-    public function getObjectErrors(): array
+    public function getErrors(): array
     {
-        return $this->objectErrors;
+        return $this->errors;
     }
 
-    public function addObjectError(ObjectFeedbackInterface $objectError): void
+    public function addError(ObjectFeedbackInterface $error): void
     {
-        $this->objectErrors[] = $objectError;
-    }
-
-    /**
-     * @return ObjectFeedbackInterface[]
-     */
-    public function getObjectWarnings(): array
-    {
-        return $this->objectWarnings;
-    }
-
-    public function addObjectWarning(ObjectFeedbackInterface $objectWarning): void
-    {
-        $this->objectWarnings[] = $objectWarning;
+        $this->errors[] = $error;
     }
 
     /**
      * @return ObjectFeedbackInterface[]
      */
-    public function getObjectDeprecations(): array
+    public function getWarnings(): array
     {
-        return $this->objectDeprecations;
+        return $this->warnings;
     }
 
-    public function addObjectDeprecation(ObjectFeedbackInterface $objectDeprecation): void
+    public function addWarning(ObjectFeedbackInterface $warning): void
     {
-        $this->objectDeprecations[] = $objectDeprecation;
-    }
-
-    /**
-     * @return ObjectFeedbackInterface[]
-     */
-    public function getObjectNotices(): array
-    {
-        return $this->objectNotices;
-    }
-
-    public function addObjectNotice(ObjectFeedbackInterface $objectNotice): void
-    {
-        $this->objectNotices[] = $objectNotice;
+        $this->warnings[] = $warning;
     }
 
     /**
      * @return ObjectFeedbackInterface[]
      */
-    public function getObjectLogs(): array
+    public function getDeprecations(): array
     {
-        return $this->objectLogs;
+        return $this->deprecations;
     }
 
-    public function addObjectLog(ObjectFeedbackInterface $objectLog): void
+    public function addDeprecation(ObjectFeedbackInterface $deprecation): void
     {
-        $this->objectLogs[] = $objectLog;
+        $this->deprecations[] = $deprecation;
     }
 
     /**
      * @return ObjectFeedbackInterface[]
      */
-    public function getObjectTraces(): array
+    public function getNotices(): array
     {
-        return $this->objectTraces;
+        return $this->notices;
     }
 
-    public function addObjectTrace(ObjectFeedbackInterface $objectTrace): void
+    public function addNotice(ObjectFeedbackInterface $notice): void
     {
-        $this->objectTraces[] = $objectTrace;
+        $this->notices[] = $notice;
+    }
+
+    /**
+     * @return ObjectFeedbackInterface[]
+     */
+    public function getLogs(): array
+    {
+        return $this->logs;
+    }
+
+    public function addLog(ObjectFeedbackInterface $log): void
+    {
+        $this->logs[] = $log;
+    }
+
+    /**
+     * @return ObjectFeedbackInterface[]
+     */
+    public function getTraces(): array
+    {
+        return $this->traces;
+    }
+
+    public function addTrace(ObjectFeedbackInterface $trace): void
+    {
+        $this->traces[] = $trace;
     }
 }
