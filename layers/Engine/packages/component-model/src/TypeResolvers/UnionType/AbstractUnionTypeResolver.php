@@ -410,7 +410,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         if ($targetObjectTypeResolver === null) {
             return $this->getUnresolvedObjectError($object);
         }
-        
+
         // Delegate to that typeResolver to obtain the value
         // Because the schema validation cannot be performed through the UnionTypeResolver, since it depends on each dbObject, indicate that it must be done in resolveValue
         $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] = true;
