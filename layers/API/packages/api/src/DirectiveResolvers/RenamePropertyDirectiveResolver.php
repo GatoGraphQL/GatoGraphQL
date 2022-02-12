@@ -41,6 +41,7 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
         array &$dbItems,
         array &$variables,
         array &$messages,
+        \PoP\ComponentModel\Feedback\EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
