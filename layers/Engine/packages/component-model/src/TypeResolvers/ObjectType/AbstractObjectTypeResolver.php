@@ -366,7 +366,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($schemaWarnings) {
             $schemaFeedbackStore = App::getFeedbackStore()->schemaFeedbackStore;
             foreach ($schemaWarnings as $warningEntry) {
-                $schemaFeedbackStore->addSchemaWarning(
+                $schemaFeedbackStore->addWarning(
                     new SchemaFeedback(
                         $warningEntry[Tokens::MESSAGE],
                         null,
@@ -415,7 +415,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $id = $this->getID($object);
             $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
             foreach ($maybeObjectWarnings as $warningEntry) {
-                $objectFeedbackStore->addObjectWarning(
+                $objectFeedbackStore->addWarning(
                     new ObjectFeedback(
                         $warningEntry[Tokens::MESSAGE],
                         null,
@@ -435,7 +435,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $id = $this->getID($object);
             $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
             foreach ($maybeObjectDeprecations as $deprecationEntry) {
-                $objectFeedbackStore->addObjectDeprecation(
+                $objectFeedbackStore->addDeprecation(
                     new ObjectFeedback(
                         $deprecationEntry[Tokens::MESSAGE],
                         null,
@@ -462,7 +462,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $id = $this->getID($object);
                     $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
                     foreach ($maybeDeprecations as $deprecation) {
-                        $objectFeedbackStore->addObjectDeprecation(
+                        $objectFeedbackStore->addDeprecation(
                             new ObjectFeedback(
                                 $deprecation,
                                 null,
