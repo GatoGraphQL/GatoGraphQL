@@ -22,12 +22,12 @@ class ObjectTypeFieldResolutionFeedbackStore
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
-    public function getFieldResolutionErrors(): array
+    public function getObjectTypeFieldResolutionErrors(): array
     {
         return $this->objectTypeFieldResolutionErrors;
     }
 
-    public function addFieldResolutionError(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionError): void
+    public function addObjectTypeFieldResolutionError(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionError): void
     {
         $this->objectTypeFieldResolutionErrors[] = $objectTypeFieldResolutionError;
     }
@@ -35,12 +35,12 @@ class ObjectTypeFieldResolutionFeedbackStore
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
-    public function getFieldResolutionWarnings(): array
+    public function getObjectTypeFieldResolutionWarnings(): array
     {
         return $this->objectTypeFieldResolutionWarnings;
     }
 
-    public function addFieldResolutionWarning(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionWarning): void
+    public function addObjectTypeFieldResolutionWarning(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionWarning): void
     {
         $this->objectTypeFieldResolutionWarnings[] = $objectTypeFieldResolutionWarning;
     }
@@ -48,12 +48,12 @@ class ObjectTypeFieldResolutionFeedbackStore
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
-    public function getFieldResolutionDeprecations(): array
+    public function getObjectTypeFieldResolutionDeprecations(): array
     {
         return $this->objectTypeFieldResolutionDeprecations;
     }
 
-    public function addFieldResolutionDeprecation(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionDeprecation): void
+    public function addObjectTypeFieldResolutionDeprecation(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionDeprecation): void
     {
         $this->objectTypeFieldResolutionDeprecations[] = $objectTypeFieldResolutionDeprecation;
     }
@@ -61,12 +61,12 @@ class ObjectTypeFieldResolutionFeedbackStore
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
-    public function getFieldResolutionNotices(): array
+    public function getObjectTypeFieldResolutionNotices(): array
     {
         return $this->objectTypeFieldResolutionNotices;
     }
 
-    public function addFieldResolutionNotice(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionNotice): void
+    public function addObjectTypeFieldResolutionNotice(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionNotice): void
     {
         $this->objectTypeFieldResolutionNotices[] = $objectTypeFieldResolutionNotice;
     }
@@ -74,12 +74,12 @@ class ObjectTypeFieldResolutionFeedbackStore
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
-    public function getFieldResolutionLogs(): array
+    public function getObjectTypeFieldResolutionLogs(): array
     {
         return $this->objectTypeFieldResolutionLogs;
     }
 
-    public function addFieldResolutionLog(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionLog): void
+    public function addObjectTypeFieldResolutionLog(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionLog): void
     {
         $this->objectTypeFieldResolutionLogs[] = $objectTypeFieldResolutionLog;
     }
@@ -87,12 +87,12 @@ class ObjectTypeFieldResolutionFeedbackStore
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
-    public function getFieldResolutionTraces(): array
+    public function getObjectTypeFieldResolutionTraces(): array
     {
         return $this->objectTypeFieldResolutionTraces;
     }
 
-    public function addFieldResolutionTrace(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionTrace): void
+    public function addObjectTypeFieldResolutionTrace(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionTrace): void
     {
         $this->objectTypeFieldResolutionTraces[] = $objectTypeFieldResolutionTrace;
     }
