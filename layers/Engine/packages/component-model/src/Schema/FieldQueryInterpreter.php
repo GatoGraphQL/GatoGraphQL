@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\Root\App;
 use Exception;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -12,6 +11,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Error\ErrorDataTokens;
 use PoP\ComponentModel\Error\ErrorServiceInterface;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
@@ -28,6 +28,7 @@ use PoP\FieldQuery\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use PoP\Root\App;
 use stdClass;
 
 class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements FieldQueryInterpreterInterface
@@ -1836,7 +1837,15 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $options = [
                 AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
             ];
-            $resolvedValue = $relationalTypeResolver->resolveValue($object, (string)$fieldArgValue, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+            $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            $resolvedValue = $relationalTypeResolver->resolveValue(
+                $object,
+                (string)$fieldArgValue,
+                $variables,
+                $expressions,
+                $objectTypeFieldResolutionFeedbackStore,
+                $options
+            );
             if (GeneralUtils::isError($resolvedValue)) {
                 // Show the error message, and return nothing
                 /** @var Error */

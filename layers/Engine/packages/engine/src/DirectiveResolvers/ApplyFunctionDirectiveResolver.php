@@ -7,14 +7,16 @@ namespace PoP\Engine\DirectiveResolvers;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 
 class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -107,6 +109,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$dbItems,
         array &$variables,
         array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
@@ -187,7 +190,24 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 }
 
                 // Place all the reserved expressions into the `$expressions` context: $value
-                $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $objectIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+                $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                $this->addExpressionsForObject(
+                    $relationalTypeResolver,
+                    $id,
+                    $field,
+                    $objectIDItems,
+                    $dbItems,
+                    $previousDBItems,
+                    $variables,
+                    $messages,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $objectErrors,
+                    $objectWarnings,
+                    $objectDeprecations,
+                    $schemaErrors,
+                    $schemaWarnings,
+                    $schemaDeprecations
+                );
 
                 // Generate the fieldArgs from combining the query with the values in the context, through $variables
                 $expressions = $this->getExpressionsForObject($id, $variables, $messages);
@@ -250,7 +270,15 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 $options = [
                     AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
                 ];
-                $functionValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $validFunction, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                $functionValue = $relationalTypeResolver->resolveValue(
+                    $objectIDItems[(string)$id],
+                    $validFunction,
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
 
                 // If there was an error (eg: a missing mandatory argument), then the function will be of type Error
                 if (GeneralUtils::isError($functionValue)) {
@@ -292,6 +320,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array $previousDBItems,
         array &$variables,
         array &$messages,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,

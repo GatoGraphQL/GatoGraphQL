@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
@@ -316,6 +317,7 @@ trait AliasSchemaDirectiveResolverTrait
         array &$dbItems,
         array &$variables,
         array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
@@ -339,6 +341,7 @@ trait AliasSchemaDirectiveResolverTrait
             $dbItems,
             $variables,
             $messages,
+            $engineIterationFeedbackStore,
             $objectErrors,
             $objectWarnings,
             $objectDeprecations,
