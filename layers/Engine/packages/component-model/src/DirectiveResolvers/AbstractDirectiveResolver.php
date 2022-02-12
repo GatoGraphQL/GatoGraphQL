@@ -12,7 +12,6 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
@@ -876,6 +875,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $dbItems,
             $variables,
             $messages,
+            $engineIterationFeedbackStore,
             $objectErrors,
             $objectWarnings,
             $objectDeprecations,
@@ -925,7 +925,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (!$this->needsIDsDataFieldsToExecute() || $this->hasIDsDataFields($idsDataFields)) {
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
-            $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
             try {
                 $this->resolveDirective(
                     $relationalTypeResolver,
@@ -984,6 +983,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $dbItems,
             $variables,
             $messages,
+            $engineIterationFeedbackStore,
             $objectErrors,
             $objectWarnings,
             $objectDeprecations,

@@ -27,6 +27,7 @@ use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
@@ -40,13 +41,13 @@ use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
-use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
+use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\Root\Helpers\Methods;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -1549,6 +1550,7 @@ class Engine implements EngineInterface
             }
 
             $database_key = $relationalTypeResolver->getTypeOutputDBKey();
+            $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
 
             // Execute the typeResolver for all combined ids
             $iterationDBItems = $iterationObjectErrors = $iterationObjectWarnings = $iterationObjectDeprecations = $iterationObjectNotices = $iterationObjectTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = [];
@@ -1560,6 +1562,7 @@ class Engine implements EngineInterface
                 $iterationDBItems,
                 $variables,
                 $messages,
+                $engineIterationFeedbackStore,
                 $iterationObjectErrors,
                 $iterationObjectWarnings,
                 $iterationObjectDeprecations,

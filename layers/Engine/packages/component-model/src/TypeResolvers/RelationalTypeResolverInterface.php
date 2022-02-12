@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -36,6 +37,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array &$dbItems,
         array &$variables,
         array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,

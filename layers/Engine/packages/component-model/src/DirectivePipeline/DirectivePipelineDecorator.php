@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectivePipeline;
 
 use League\Pipeline\PipelineInterface;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class DirectivePipelineDecorator
@@ -23,6 +24,7 @@ class DirectivePipelineDecorator
         array &$dbItems,
         array &$variables,
         array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
@@ -45,6 +47,7 @@ class DirectivePipelineDecorator
                 $dbItems,
                 $variables,
                 $messages,
+                $engineIterationFeedbackStore,
                 $objectErrors,
                 $objectWarnings,
                 $objectDeprecations,
@@ -67,6 +70,7 @@ class DirectivePipelineDecorator
             $dbItems,
             $variables,
             $messages,
+            $engineIterationFeedbackStore,
             $objectErrors,
             $objectWarnings,
             $objectDeprecations,

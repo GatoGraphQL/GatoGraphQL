@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
-use PoP\Root\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -14,6 +13,7 @@ use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Error\ErrorProviderInterface;
 use PoP\ComponentModel\Error\ErrorServiceInterface;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -21,6 +21,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use PoP\Root\App;
 
 abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver implements RelationalTypeResolverInterface
 {
@@ -621,6 +622,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$dbItems,
         array &$variables,
         array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
@@ -685,6 +687,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $dbItems,
             $variables,
             $messages,
+            $engineIterationFeedbackStore,
             $objectErrors,
             $objectWarnings,
             $objectDeprecations,
@@ -991,6 +994,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$dbItems,
         array &$variables,
         array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
@@ -1135,6 +1139,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $dbItems,
                 $variables,
                 $messages,
+                $engineIterationFeedbackStore,
                 $directivePipelineIDObjectErrors,
                 $objectWarnings,
                 $objectDeprecations,

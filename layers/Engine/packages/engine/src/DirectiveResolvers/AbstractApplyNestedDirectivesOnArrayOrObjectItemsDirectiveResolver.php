@@ -304,6 +304,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 $dbItems,
                 $variables,
                 $messages,
+                $engineIterationFeedbackStore,
                 $nestedIDObjectErrors,
                 $objectWarnings,
                 $objectDeprecations,

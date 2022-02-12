@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectivePipeline;
 
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class DirectivePipelineUtils
@@ -18,6 +19,7 @@ class DirectivePipelineUtils
         array &$dbItems,
         array &$variables,
         array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
@@ -39,6 +41,7 @@ class DirectivePipelineUtils
             'dbItems' => &$dbItems,
             'variables' => &$variables,
             'messages' => &$messages,
+            'engineIterationFeedbackStore' => &$engineIterationFeedbackStore,
             'objectErrors' => &$objectErrors,
             'objectWarnings' => &$objectWarnings,
             'objectDeprecations' => &$objectDeprecations,
@@ -64,6 +67,7 @@ class DirectivePipelineUtils
             &$payload['dbItems'],
             &$payload['variables'],
             &$payload['messages'],
+            &$payload['engineIterationFeedbackStore'],
             &$payload['objectErrors'],
             &$payload['objectWarnings'],
             &$payload['objectDeprecations'],
