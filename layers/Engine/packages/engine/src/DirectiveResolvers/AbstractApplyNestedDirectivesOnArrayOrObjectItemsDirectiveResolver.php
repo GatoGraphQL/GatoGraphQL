@@ -320,7 +320,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
             );
 
             // If there was an error, prepend the path
-            if ($nestedSchemaErrors) {
+            if ($nestedSchemaErrors !== []) {
                 $schemaError = [
                     Tokens::PATH => [$this->directive],
                     Tokens::MESSAGE => $this->__('The nested directive has produced errors', 'component-model'),
@@ -332,7 +332,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 }
                 $schemaErrors[] = $schemaError;
             }
-            if ($nestedIDObjectErrors) {
+
+            if ($nestedIDObjectErrors !== []) {
                 foreach ($nestedIDObjectErrors as $id => $nestedObjectErrors) {
                     foreach ($nestedObjectErrors as &$nestedDBError) {
                         array_unshift($nestedDBError[Tokens::PATH], $this->directive);
@@ -342,13 +343,18 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 }
             }
 
+            // If any item fails, maybe set the whole response field as null
             if ($nestedSchemaErrors !== [] || $nestedIDObjectErrors !== []) {
                 /** @var ComponentModelComponentConfiguration */
                 $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
                 $setFailingFieldResponseAsNull = $componentConfiguration->setFailingFieldResponseAsNull();
-                // If any item fails, set the whole response field as null
                 if ($setFailingFieldResponseAsNull) {
-                    $dbItems[(string)$id][$fieldOutputKey] = null;
+                    foreach ($idsDataFields as $id => $dataFields) {
+                        foreach ($dataFields['direct'] as $field) {
+                            $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
+                            $dbItems[(string)$id][$fieldOutputKey] = null;
+                        }
+                    }
                     return;
                 }
             }
