@@ -41,7 +41,7 @@ class VersioningService implements VersioningServiceInterface
             // All fields are defined as "$type.$fieldName". If not, it's an error
             $entry = explode(Constants::TYPE_FIELD_SEPARATOR, $typeField);
             if (count($entry) !== 2) {
-                $generalFeedbackStore->addGeneralWarning(
+                $generalFeedbackStore->addWarning(
                     new GeneralFeedback(
                         $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::W1, $typeField),
                         $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::W1)

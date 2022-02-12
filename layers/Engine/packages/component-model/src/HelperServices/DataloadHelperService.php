@@ -81,7 +81,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             if ($objectTypeResolver->hasObjectTypeFieldResolversForField($subcomponent_data_field)) {
                 // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                 $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
-                App::getFeedbackStore()->schemaFeedbackStore->addSchemaError(
+                App::getFeedbackStore()->schemaFeedbackStore->addError(
                     new SchemaFeedback(
                         $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, $subcomponent_data_field_outputkey),
                         $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),

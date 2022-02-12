@@ -7,93 +7,93 @@ namespace PoP\ComponentModel\Feedback;
 class DocumentFeedbackStore
 {
     /** @var DocumentFeedbackInterface[] */
-    private array $documentErrors = [];
+    private array $errors = [];
     /** @var DocumentFeedbackInterface[] */
-    private array $documentWarnings = [];
+    private array $warnings = [];
     /** @var DocumentFeedbackInterface[] */
-    private array $documentDeprecations = [];
+    private array $deprecations = [];
     /** @var DocumentFeedbackInterface[] */
-    private array $documentNotices = [];
+    private array $notices = [];
     /** @var DocumentFeedbackInterface[] */
-    private array $documentLogs = [];
+    private array $logs = [];
     /** @var DocumentFeedbackInterface[] */
-    private array $documentTraces = [];
+    private array $traces = [];
 
     /**
      * @return DocumentFeedbackInterface[]
      */
-    public function getDocumentErrors(): array
+    public function getErrors(): array
     {
-        return $this->documentErrors;
+        return $this->errors;
     }
 
-    public function addDocumentError(DocumentFeedbackInterface $documentError): void
+    public function addError(DocumentFeedbackInterface $error): void
     {
-        $this->documentErrors[] = $documentError;
-    }
-
-    /**
-     * @return DocumentFeedbackInterface[]
-     */
-    public function getDocumentWarnings(): array
-    {
-        return $this->documentWarnings;
-    }
-
-    public function addDocumentWarning(DocumentFeedbackInterface $documentWarning): void
-    {
-        $this->documentWarnings[] = $documentWarning;
+        $this->errors[] = $error;
     }
 
     /**
      * @return DocumentFeedbackInterface[]
      */
-    public function getDocumentDeprecations(): array
+    public function getWarnings(): array
     {
-        return $this->documentDeprecations;
+        return $this->warnings;
     }
 
-    public function addDocumentDeprecation(DocumentFeedbackInterface $documentDeprecation): void
+    public function addWarning(DocumentFeedbackInterface $warning): void
     {
-        $this->documentDeprecations[] = $documentDeprecation;
-    }
-
-    /**
-     * @return DocumentFeedbackInterface[]
-     */
-    public function getDocumentNotices(): array
-    {
-        return $this->documentNotices;
-    }
-
-    public function addDocumentNotice(DocumentFeedbackInterface $documentNotice): void
-    {
-        $this->documentNotices[] = $documentNotice;
+        $this->warnings[] = $warning;
     }
 
     /**
      * @return DocumentFeedbackInterface[]
      */
-    public function getDocumentLogs(): array
+    public function getDeprecations(): array
     {
-        return $this->documentLogs;
+        return $this->deprecations;
     }
 
-    public function addDocumentLog(DocumentFeedbackInterface $documentLog): void
+    public function addDeprecation(DocumentFeedbackInterface $deprecation): void
     {
-        $this->documentLogs[] = $documentLog;
+        $this->deprecations[] = $deprecation;
     }
 
     /**
      * @return DocumentFeedbackInterface[]
      */
-    public function getDocumentTraces(): array
+    public function getNotices(): array
     {
-        return $this->documentTraces;
+        return $this->notices;
     }
 
-    public function addDocumentTrace(DocumentFeedbackInterface $documentTrace): void
+    public function addNotice(DocumentFeedbackInterface $notice): void
     {
-        $this->documentTraces[] = $documentTrace;
+        $this->notices[] = $notice;
+    }
+
+    /**
+     * @return DocumentFeedbackInterface[]
+     */
+    public function getLogs(): array
+    {
+        return $this->logs;
+    }
+
+    public function addLog(DocumentFeedbackInterface $log): void
+    {
+        $this->logs[] = $log;
+    }
+
+    /**
+     * @return DocumentFeedbackInterface[]
+     */
+    public function getTraces(): array
+    {
+        return $this->traces;
+    }
+
+    public function addTrace(DocumentFeedbackInterface $trace): void
+    {
+        $this->traces[] = $trace;
     }
 }

@@ -7,93 +7,93 @@ namespace PoP\ComponentModel\Feedback;
 class ObjectTypeFieldResolutionFeedbackStore
 {
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
-    private array $objectTypeFieldResolutionErrors = [];
+    private array $errors = [];
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
-    private array $objectTypeFieldResolutionWarnings = [];
+    private array $warnings = [];
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
-    private array $objectTypeFieldResolutionDeprecations = [];
+    private array $deprecations = [];
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
-    private array $objectTypeFieldResolutionNotices = [];
+    private array $notices = [];
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
-    private array $objectTypeFieldResolutionLogs = [];
+    private array $logs = [];
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
-    private array $objectTypeFieldResolutionTraces = [];
+    private array $traces = [];
 
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
-    public function getObjectTypeFieldResolutionErrors(): array
+    public function getErrors(): array
     {
-        return $this->objectTypeFieldResolutionErrors;
+        return $this->errors;
     }
 
-    public function addObjectTypeFieldResolutionError(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionError): void
+    public function addError(ObjectTypeFieldResolutionFeedbackInterface $error): void
     {
-        $this->objectTypeFieldResolutionErrors[] = $objectTypeFieldResolutionError;
-    }
-
-    /**
-     * @return ObjectTypeFieldResolutionFeedbackInterface[]
-     */
-    public function getObjectTypeFieldResolutionWarnings(): array
-    {
-        return $this->objectTypeFieldResolutionWarnings;
-    }
-
-    public function addObjectTypeFieldResolutionWarning(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionWarning): void
-    {
-        $this->objectTypeFieldResolutionWarnings[] = $objectTypeFieldResolutionWarning;
+        $this->errors[] = $error;
     }
 
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
-    public function getObjectTypeFieldResolutionDeprecations(): array
+    public function getWarnings(): array
     {
-        return $this->objectTypeFieldResolutionDeprecations;
+        return $this->warnings;
     }
 
-    public function addObjectTypeFieldResolutionDeprecation(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionDeprecation): void
+    public function addWarning(ObjectTypeFieldResolutionFeedbackInterface $warning): void
     {
-        $this->objectTypeFieldResolutionDeprecations[] = $objectTypeFieldResolutionDeprecation;
-    }
-
-    /**
-     * @return ObjectTypeFieldResolutionFeedbackInterface[]
-     */
-    public function getObjectTypeFieldResolutionNotices(): array
-    {
-        return $this->objectTypeFieldResolutionNotices;
-    }
-
-    public function addObjectTypeFieldResolutionNotice(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionNotice): void
-    {
-        $this->objectTypeFieldResolutionNotices[] = $objectTypeFieldResolutionNotice;
+        $this->warnings[] = $warning;
     }
 
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
-    public function getObjectTypeFieldResolutionLogs(): array
+    public function getDeprecations(): array
     {
-        return $this->objectTypeFieldResolutionLogs;
+        return $this->deprecations;
     }
 
-    public function addObjectTypeFieldResolutionLog(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionLog): void
+    public function addDeprecation(ObjectTypeFieldResolutionFeedbackInterface $deprecation): void
     {
-        $this->objectTypeFieldResolutionLogs[] = $objectTypeFieldResolutionLog;
+        $this->deprecations[] = $deprecation;
     }
 
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
-    public function getObjectTypeFieldResolutionTraces(): array
+    public function getNotices(): array
     {
-        return $this->objectTypeFieldResolutionTraces;
+        return $this->notices;
     }
 
-    public function addObjectTypeFieldResolutionTrace(ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionTrace): void
+    public function addNotice(ObjectTypeFieldResolutionFeedbackInterface $notice): void
     {
-        $this->objectTypeFieldResolutionTraces[] = $objectTypeFieldResolutionTrace;
+        $this->notices[] = $notice;
+    }
+
+    /**
+     * @return ObjectTypeFieldResolutionFeedbackInterface[]
+     */
+    public function getLogs(): array
+    {
+        return $this->logs;
+    }
+
+    public function addLog(ObjectTypeFieldResolutionFeedbackInterface $log): void
+    {
+        $this->logs[] = $log;
+    }
+
+    /**
+     * @return ObjectTypeFieldResolutionFeedbackInterface[]
+     */
+    public function getTraces(): array
+    {
+        return $this->traces;
+    }
+
+    public function addTrace(ObjectTypeFieldResolutionFeedbackInterface $trace): void
+    {
+        $this->traces[] = $trace;
     }
 }

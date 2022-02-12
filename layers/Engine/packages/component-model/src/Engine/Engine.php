@@ -1626,7 +1626,7 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
-            $feedbackStoreObjectWarnings = App::getFeedbackStore()->objectFeedbackStore->getObjectWarnings();
+            $feedbackStoreObjectWarnings = App::getFeedbackStore()->objectFeedbackStore->getWarnings();
             foreach ($feedbackStoreObjectWarnings as $objectWarning) {
                 $iterationFeedbackStoreObjectWarnings = [];
                 $fields = $objectWarning->getFields();
@@ -1660,7 +1660,7 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
-            $feedbackStoreObjectDeprecations = App::getFeedbackStore()->objectFeedbackStore->getObjectDeprecations();
+            $feedbackStoreObjectDeprecations = App::getFeedbackStore()->objectFeedbackStore->getDeprecations();
             foreach ($feedbackStoreObjectDeprecations as $objectDeprecation) {
                 $iterationFeedbackStoreObjectDeprecations = [];
                 $fields = $objectDeprecation->getFields();
@@ -1711,7 +1711,7 @@ class Engine implements EngineInterface
                 }
             }
 
-            $feedbackStoreSchemaErrors = App::getFeedbackStore()->schemaFeedbackStore->getSchemaErrors();
+            $feedbackStoreSchemaErrors = App::getFeedbackStore()->schemaFeedbackStore->getErrors();
             foreach ($feedbackStoreSchemaErrors as $schemaError) {
                 $iterationFeedbackStoreSchemaErrors = [];
                 $iterationFeedbackStoreSchemaErrors[] = [
@@ -1738,7 +1738,7 @@ class Engine implements EngineInterface
                     );
                 }
             }
-            $feedbackStoreSchemaWarnings = App::getFeedbackStore()->schemaFeedbackStore->getSchemaWarnings();
+            $feedbackStoreSchemaWarnings = App::getFeedbackStore()->schemaFeedbackStore->getWarnings();
             foreach ($feedbackStoreSchemaWarnings as $schemaWarning) {
                 $iterationFeedbackStoreSchemaWarnings = [];
                 $iterationFeedbackStoreSchemaWarnings[] = [
@@ -1890,10 +1890,10 @@ class Engine implements EngineInterface
 
         // Add the feedback (errors, warnings, deprecations) into the output
         $generalFeedbackStore = App::getFeedbackStore()->generalFeedbackStore;
-        if ($generalErrors = $generalFeedbackStore->getGeneralErrors()) {
+        if ($generalErrors = $generalFeedbackStore->getErrors()) {
             $ret['generalErrors'] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
         }
-        if ($generalWarnings = $generalFeedbackStore->getGeneralWarnings()) {
+        if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
             $ret['generalWarnings'] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
         }
 
@@ -1916,7 +1916,7 @@ class Engine implements EngineInterface
             }
             $ret['documentErrors'] = $queryDocumentErrors;
         }
-        if ($documentErrors = $documentFeedbackStore->getDocumentErrors()) {
+        if ($documentErrors = $documentFeedbackStore->getErrors()) {
             $ret['documentErrors'] = array_merge(
                 $ret['documentErrors'] ?? [],
                 $this->getDocumentFeedbackEntriesForOutput($documentErrors)
@@ -1925,7 +1925,7 @@ class Engine implements EngineInterface
         if ($documentWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
             $ret['documentWarnings'] = $documentWarnings;
         }
-        if ($documentWarnings = $documentFeedbackStore->getDocumentWarnings()) {
+        if ($documentWarnings = $documentFeedbackStore->getWarnings()) {
             $ret['documentWarnings'] = array_merge(
                 $ret['documentWarnings'] ?? [],
                 $this->getDocumentFeedbackEntriesForOutput($documentWarnings)
@@ -1958,7 +1958,7 @@ class Engine implements EngineInterface
         // Show logs only if both enabled, and passing the action in the URL
         if (Environment::enableShowLogs()) {
             if (in_array(Actions::SHOW_LOGS, App::getState('actions'))) {
-                $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getDocumentLogs());
+                $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
             }
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
