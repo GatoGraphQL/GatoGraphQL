@@ -154,7 +154,7 @@
     "type": "library",
     "description": "Mirror the query in the API response",
     "keywords": ["PHP", "PoP", "api-mirrorquery"],
-    "homepage": "https://github.com/pop-api/api-mirrorquery",
+    "homepage": "https://github.com/PoP-PoPAPI/api-mirrorquery",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

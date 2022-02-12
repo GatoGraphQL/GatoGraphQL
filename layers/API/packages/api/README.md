@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Convert the application into a powerful API. Install the [GraphQL API](https://github.com/pop-api/api-graphql) package to convert it into a GraphQL server, and the [REST API](https://github.com/pop-api/api-rest) package to enable adding REST endpoints.
+Convert the application into a powerful API. Install the [GraphQL API](https://github.com/PoP-PoPAPI/api-graphql) package to convert it into a GraphQL server, and the [REST API](https://github.com/PoP-PoPAPI/api-rest) package to enable adding REST endpoints.
 
 ## Install
 
@@ -115,7 +115,7 @@ Initialize the component:
 ]);
 ```
 
-> **Note:**<br/>To enable GraphQL and/or REST endpoints, the corresponding package must be installed: [GraphQL package](https://github.com/pop-api/api-graphql), [REST package](https://github.com/pop-api/api-rest) 
+> **Note:**<br/>To enable GraphQL and/or REST endpoints, the corresponding package must be installed: [GraphQL package](https://github.com/PoP-PoPAPI/api-graphql), [REST package](https://github.com/PoP-PoPAPI/api-rest) 
 
 1. Transform any URL into an API endpoint by adding:
 
@@ -127,7 +127,7 @@ Initialize the component:
 
 <!-- ## Features
 
-Please refer to the [features in the GraphQL package](https://github.com/pop-api/api-graphql#features). -->
+Please refer to the [features in the GraphQL package](https://github.com/PoP-PoPAPI/api-graphql#features). -->
 
 <!--
 ### Query the root or URL-based resources
@@ -155,8 +155,8 @@ Please refer to the syntax from the [Field Query](https://github.com/getpop/fiel
 
 The API can transform the application into both a GraphQL and/or REST server, simply by installing the corresponding extension:
 
-- [GraphQL API](https://github.com/pop-api/api-graphql)
-- [REST API](https://github.com/pop-api/api-rest)
+- [GraphQL API](https://github.com/PoP-PoPAPI/api-graphql)
+- [REST API](https://github.com/PoP-PoPAPI/api-rest)
 
 The PoP API manages to provide all the same benefits of both REST and GraphQL APIs, **at the same time**:
 

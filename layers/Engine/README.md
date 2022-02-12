@@ -151,7 +151,7 @@ Because it was originally conceived for WordPress, PoP's current implementation 
 
 ## Response specification
 
-The output from requesting a URL can contain several layers: At its core it is a data layer (enough for [implementing an API](https://github.com/pop-api/api)), which can be further extended by a configuration layer (to implement a website).
+The output from requesting a URL can contain several layers: At its core it is a data layer (enough for [implementing an API](https://github.com/PoP-PoPAPI/api)), which can be further extended by a configuration layer (to implement a website).
 
 ### 1. Data layer
 
@@ -281,7 +281,7 @@ The configuration layer can provide those properties and values required to buil
 
 <!-- ## Success stories
 
-PoP is the foundation for the [GraphQL API for PoP](https://github.com/pop-api/api-graphql), an exceptional implementation of [GraphQL](https://graphql.org) which supports features not typically supported in GraphQL: HTTP caching, composable fields, composable directives, linear complexity time to resolve queries, and native federation and decentralization, among others.
+PoP is the foundation for the [GraphQL API for PoP](https://github.com/PoP-PoPAPI/api-graphql), an exceptional implementation of [GraphQL](https://graphql.org) which supports features not typically supported in GraphQL: HTTP caching, composable fields, composable directives, linear complexity time to resolve queries, and native federation and decentralization, among others.
 
 In the near future, PoP will enable to [build websites](https://github.com/getpop/site) and [export them as static](https://github.com/getpop/static-site-generator). -->
 
@@ -292,7 +292,7 @@ Among others, PoP is suitable for the following applications:
 
 ### 👉🏽 As an API
 
-The [PoP API](https://github.com/pop-api/api) can combine the best of both GraphQL and REST in a single API: no under or over-fetching or data while supporting server-side cache and not being open to DoS attacks. Through extension [GraphQL API](https://github.com/pop-api/api-graphql) the application becomes a GraphQL server, and through extension [REST API](https://github.com/pop-api/api-rest) the application can add custom REST endpoints.
+The [PoP API](https://github.com/PoP-PoPAPI/api) can combine the best of both GraphQL and REST in a single API: no under or over-fetching or data while supporting server-side cache and not being open to DoS attacks. Through extension [GraphQL API](https://github.com/PoP-PoPAPI/api-graphql) the application becomes a GraphQL server, and through extension [REST API](https://github.com/PoP-PoPAPI/api-rest) the application can add custom REST endpoints.
 
 ### 👉🏽 As a hybrid dynamic/static website (currently not available)
 
@@ -468,8 +468,8 @@ Currently, most of the technical documentation is found on these repositories:
 - [Component Model](https://github.com/getpop/component-model)<!--- [Engine](https://github.com/getpop/engine): Adds services over the component model -- >
 - [Configuration for Component Model](https://github.com/getpop/component-model-configuration)
 - [GraphQL](https://github.com/getpop/graphql)
-- [GraphQL API](https://github.com/pop-api/api-graphql)
-- [API](https://github.com/pop-api/api)
+- [GraphQL API](https://github.com/PoP-PoPAPI/api-graphql)
+- [API](https://github.com/PoP-PoPAPI/api)
 - [Field Query](https://github.com/getpop/field-query)
 <!---- [Application](https://github.com/getpop/application) 
 [Static Site Generator](https://github.com/getpop/static-site-generator) -- >
@@ -564,9 +564,9 @@ To allow the website's service-worker.js be able to cache content coming from th
 
 The following articles concern how different features in PoP were implemented:
 
-🔗 [Intro to PoP API, a new GraphQL server in PHP](https://slides.com/leoloso/graphql): Description of how the [GraphQL API for PoP](https://github.com/pop-api/api-graphql) compares against a typical [GraphQL](https://graphql.org)
+🔗 [Intro to PoP API, a new GraphQL server in PHP](https://slides.com/leoloso/graphql): Description of how the [GraphQL API for PoP](https://github.com/PoP-PoPAPI/api-graphql) compares against a typical [GraphQL](https://graphql.org)
 
-🔗 [Demonstrating the PoP API, an implementation of GraphQL on steroids](https://leoloso.com/posts/demonstrating-pop-api-graphql-on-steroids/): Step-by-step description of solving a complex use case using the [GraphQL API for PoP](https://github.com/pop-api/api-graphql)
+🔗 [Demonstrating the PoP API, an implementation of GraphQL on steroids](https://leoloso.com/posts/demonstrating-pop-api-graphql-on-steroids/): Step-by-step description of solving a complex use case using the [GraphQL API for PoP](https://github.com/PoP-PoPAPI/api-graphql)
 
 🔗 Abstracting WordPress Code To Reuse With Other CMSs: [Concepts (Part 1)](https://www.smashingmagazine.com/2019/11/abstracting-wordpress-code-cms-concepts/) and [Implementation (Part 2)](https://www.smashingmagazine.com/2019/11/abstracting-wordpress-code-reuse-with-other-cms-implementation/): Design and implementation of strategies to make PoP become CMS-agnostic
 

@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Extended/Upgraded implementation of GraphQL. This implementation is a package to be installed on top of the [PoP API](https://github.com/pop-api/api).
+Extended/Upgraded implementation of GraphQL. This implementation is a package to be installed on top of the [PoP API](https://github.com/PoP-PoPAPI/api).
 
 ## Install
 
@@ -23,7 +23,7 @@ composer require pop-api/api-graphql
 
 The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`API/packages/api-graphql`](https://github.com/leoloso/PoP/tree/master/layers/API/packages/api-graphql).
 
-To enable pretty API endpoint `/api/graphql/`, follow the instructions [here](https://github.com/pop-api/api#enable-pretty-permalinks)
+To enable pretty API endpoint `/api/graphql/`, follow the instructions [here](https://github.com/PoP-PoPAPI/api#enable-pretty-permalinks)
 
 > Note: if you wish to install a fully-working API, please follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/leoloso/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented).
 
@@ -132,7 +132,7 @@ Please refer to the [Field Query](https://github.com/getpop/field-query) documen
 
 ## More information
 
-Please refer to package [API](https://github.com/pop-api/api), on which the GraphQL API is based, and which contains plenty of extra documentation.
+Please refer to package [API](https://github.com/PoP-PoPAPI/api), on which the GraphQL API is based, and which contains plenty of extra documentation.
 -->
 
 ## Features

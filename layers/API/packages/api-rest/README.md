@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-It enables to add REST endpoints to retrieve data for any URL-based resource. It is based on the [PoP API](https://github.com/pop-api/api) package.
+It enables to add REST endpoints to retrieve data for any URL-based resource. It is based on the [PoP API](https://github.com/PoP-PoPAPI/api) package.
 
 ## Install
 
@@ -23,7 +23,7 @@ composer require pop-api/api-rest
 
 The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`API/packages/api-rest`](https://github.com/leoloso/PoP/tree/master/layers/API/packages/api-rest).
 
-<!-- To enable pretty API endpoint `/api/rest/`, follow the instructions [here](https://github.com/pop-api/api#enable-pretty-permalinks) -->
+<!-- To enable pretty API endpoint `/api/rest/`, follow the instructions [here](https://github.com/PoP-PoPAPI/api#enable-pretty-permalinks) -->
 
 ### Enable pretty permalinks
 
@@ -109,7 +109,7 @@ _**Collection of posts, custom fields**_:<br/>
 
 <!-- ## More information
 
-Please refer to package [API](https://github.com/pop-api/api), on which the REST API is based, and which contains plenty of extra documentation. -->
+Please refer to package [API](https://github.com/PoP-PoPAPI/api), on which the REST API is based, and which contains plenty of extra documentation. -->
 
 ## PHP versions
 
