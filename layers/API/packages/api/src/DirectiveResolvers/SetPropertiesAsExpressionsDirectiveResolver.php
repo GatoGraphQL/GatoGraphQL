@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\DirectiveResolvers;
 
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -131,7 +132,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
         array &$dbItems,
         array &$variables,
         array &$messages,
-        \PoP\ComponentModel\Feedback\EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,

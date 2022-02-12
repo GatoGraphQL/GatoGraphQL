@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\DirectiveResolvers;
 
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Error\Error;
@@ -74,7 +75,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         array &$dbItems,
         array &$variables,
         array &$messages,
-        \PoP\ComponentModel\Feedback\EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,

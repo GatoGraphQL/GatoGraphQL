@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\Root\App;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalMetaDirectiveResolver;
@@ -108,7 +109,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         array &$dbItems,
         array &$variables,
         array &$messages,
-        \PoP\ComponentModel\Feedback\EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,

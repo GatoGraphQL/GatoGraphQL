@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveKinds;
@@ -139,7 +140,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         array &$dbItems,
         array &$variables,
         array &$messages,
-        \PoP\ComponentModel\Feedback\EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,

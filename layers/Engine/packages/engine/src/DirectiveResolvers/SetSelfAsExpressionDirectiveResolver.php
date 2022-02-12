@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveKinds;
@@ -80,7 +81,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
         array &$dbItems,
         array &$variables,
         array &$messages,
-        \PoP\ComponentModel\Feedback\EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,

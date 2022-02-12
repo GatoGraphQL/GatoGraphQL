@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\FieldQuery\QueryHelpers;
@@ -66,7 +67,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
         array &$dbItems,
         array &$variables,
         array &$messages,
-        \PoP\ComponentModel\Feedback\EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
