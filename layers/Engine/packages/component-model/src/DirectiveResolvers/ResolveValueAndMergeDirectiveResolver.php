@@ -94,7 +94,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         );
     }
 
-    protected function resolveValueForObjects(
+    private function resolveValueForObjects(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $objectIDItems,
         array $idsDataFields,
@@ -176,7 +176,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         }
     }
 
-    protected function resolveValuesForObject(
+    private function resolveValuesForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
         object $object,
@@ -210,7 +210,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         }
     }
 
-    protected function resolveValueForObject(
+    private function resolveValueForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
         object $object,
@@ -251,7 +251,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         );
     }
 
-    protected function resolveFieldValue(
+    private function resolveFieldValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         object $object,
@@ -272,7 +272,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         );
     }
 
-    protected function addValueForObject(
+    private function addValueForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
         object $object,
