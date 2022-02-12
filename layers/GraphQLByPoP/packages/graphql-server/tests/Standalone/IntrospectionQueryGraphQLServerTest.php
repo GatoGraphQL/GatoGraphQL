@@ -1482,16 +1482,16 @@ class IntrospectionQueryGraphQLServerTest extends AbstractGraphQLServerTestCase
                                 "enumValues" => null,
                                 "possibleTypes" => null
                             ],
-                            [
-                                "kind" => "SCALAR",
-                                "name" => "DangerouslyDynamic",
-                                "description" => "Special scalar type which is not coerced or validated. In particular, it does not need to validate if it is an array or not, as GraphQL requires based on the applied WrappingType (such as `[String]`).",
-                                "fields" => null,
-                                "inputFields" => null,
-                                "interfaces" => null,
-                                "enumValues" => null,
-                                "possibleTypes" => null
-                            ],
+                            // [
+                            //     "kind" => "SCALAR",
+                            //     "name" => "DangerouslyDynamic",
+                            //     "description" => "Special scalar type which is not coerced or validated. In particular, it does not need to validate if it is an array or not, as GraphQL requires based on the applied WrappingType (such as `[String]`).",
+                            //     "fields" => null,
+                            //     "inputFields" => null,
+                            //     "interfaces" => null,
+                            //     "enumValues" => null,
+                            //     "possibleTypes" => null
+                            // ],
                             [
                                 "kind" => "SCALAR",
                                 "name" => "ID",
