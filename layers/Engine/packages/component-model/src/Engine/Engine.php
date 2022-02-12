@@ -791,26 +791,29 @@ class Engine implements EngineInterface
 
     private function doAddDatasetToDatabase(
         array &$database,
-        string $database_key,
+        string $dbKey,
         array $dataitems
     ): void {
-        // Save in the database under the corresponding database-key (this way, different dataloaders, like 'list-users' and 'author',
-        // can both save their results under database key 'users'
-        if (!isset($database[$database_key])) {
-            $database[$database_key] = $dataitems;
-        } else {
-            $dbKey = $database_key;
-            // array_merge_recursive doesn't work as expected (it merges 2 hashmap arrays into an array, so then I manually do a foreach instead)
-            foreach ($dataitems as $id => $dbobject_values) {
-                if (!isset($database[$dbKey][(string)$id])) {
-                    $database[$dbKey][(string)$id] = [];
-                }
+        /**
+         * Save in the database under the corresponding database-key.
+         * This way, different dataloaders, like 'list-users' and 'author',
+         * can both save their results under database key 'users'
+         */
+        if (!isset($database[$dbKey])) {
+            $database[$dbKey] = $dataitems;
+            return;
+        }
 
-                $database[$dbKey][(string)$id] = array_merge(
-                    $database[$dbKey][(string)$id],
-                    $dbobject_values
-                );
-            }
+        /**
+         * array_merge_recursive doesn't work as expected:
+         * It merges 2 hashmap arrays into an array,
+         * so then we must do a foreach instead
+         */
+        foreach ($dataitems as $id => $dbobject_values) {
+            $database[$dbKey][(string)$id] = array_merge(
+                $database[$dbKey][(string)$id] ?? [],
+                $dbobject_values
+            );
         }
     }
 
