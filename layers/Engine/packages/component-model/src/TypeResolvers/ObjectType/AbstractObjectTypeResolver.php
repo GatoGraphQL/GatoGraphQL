@@ -340,6 +340,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         string $field,
         array $variables,
         array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field);
@@ -478,12 +479,20 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 return $this->getErrorProvider()->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
             }
 
-            $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             // Resolve the value. If the field resolver throws an Exception,
             // catch it and return the equivalent GraphQL error so that it
             // fails gracefully in production (but not on development!)
             try {
-                $value = $objectTypeFieldResolver->resolveValue($this, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $value = $objectTypeFieldResolver->resolveValue(
+                    $this,
+                    $object,
+                    $fieldName,
+                    $fieldArgs,
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
             } catch (Exception $e) {
                 if (RootEnvironment::isApplicationEnvironmentDev()) {
                     throw $e;

@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
-use PoP\Root\App;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Root\App;
 
 abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver implements UnionTypeResolverInterface
 {
@@ -401,6 +402,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         string $field,
         array $variables,
         array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         // Check that a typeResolver from this Union can process this object, or return an arror
@@ -408,10 +410,18 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         if ($targetObjectTypeResolver === null) {
             return $this->getUnresolvedObjectError($object);
         }
+        
         // Delegate to that typeResolver to obtain the value
         // Because the schema validation cannot be performed through the UnionTypeResolver, since it depends on each dbObject, indicate that it must be done in resolveValue
         $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] = true;
-        return $targetObjectTypeResolver->resolveValue($object, $field, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+        return $targetObjectTypeResolver->resolveValue(
+            $object,
+            $field,
+            $variables,
+            $expressions,
+            $objectTypeFieldResolutionFeedbackStore,
+            $options
+        );
     }
 
     /**
