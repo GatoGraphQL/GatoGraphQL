@@ -252,4 +252,20 @@ class ComponentConfiguration extends AbstractComponentConfiguration
             $callback,
         );
     }
+
+    /**
+     * @return string[]
+     */
+    public function enableFeedbackCategoryExtensions(): array
+    {
+        $envVariable = Environment::ENABLE_FEEDBACK_CATEGORY_EXTENSIONS;
+        $defaultValue = [];
+        $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }
