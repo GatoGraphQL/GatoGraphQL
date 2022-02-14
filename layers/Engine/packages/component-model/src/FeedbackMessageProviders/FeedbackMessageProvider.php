@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FeedbackMessageProviders;
 use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Constants\Params;
 use PoP\Root\FeedbackMessageProviders\AbstractFeedbackMessageProvider;
-use PoP\Root\FeedbackMessage\FeedbackMessageCategories;
+use PoP\Root\FeedbackMessage\FeedbackCategories;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {
@@ -37,8 +37,8 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getCategory(string $code): string
     {
         return match ($code) {
-            self::W1 => FeedbackMessageCategories::WARNING,
-            self::E1 => FeedbackMessageCategories::ERROR,
+            self::W1 => FeedbackCategories::WARNING,
+            self::E1 => FeedbackCategories::ERROR,
             default => parent::getCategory($code),
         };
     }

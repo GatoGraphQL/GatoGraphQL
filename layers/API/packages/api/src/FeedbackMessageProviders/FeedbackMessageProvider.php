@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\API\FeedbackMessageProviders;
 
 use PoP\Root\FeedbackMessageProviders\AbstractFeedbackMessageProvider;
-use PoP\Root\FeedbackMessage\FeedbackMessageCategories;
+use PoP\Root\FeedbackMessage\FeedbackCategories;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {
@@ -32,7 +32,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
     public function getCategory(string $code): string
     {
         return match ($code) {
-            self::E1 => FeedbackMessageCategories::ERROR,
+            self::E1 => FeedbackCategories::ERROR,
             default => parent::getCategory($code),
         };
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\FeedbackMessage;
 
-class FeedbackMessageCategories
+class FeedbackCategories
 {
     public const ERROR = 'error';
     public const WARNING = 'warning';
