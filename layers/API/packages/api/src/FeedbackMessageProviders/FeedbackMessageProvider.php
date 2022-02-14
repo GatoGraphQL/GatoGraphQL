@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\API\FeedbackMessageProviders;
 
 use PoP\Root\FeedbackMessageProviders\AbstractFeedbackMessageProvider;
-use PoP\Root\FeedbackMessage\FeedbackCategories;
+use PoP\Root\Feedback\FeedbackCategories;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {

@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FeedbackMessageProviders;
 use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Constants\Params;
 use PoP\Root\FeedbackMessageProviders\AbstractFeedbackMessageProvider;
-use PoP\Root\FeedbackMessage\FeedbackCategories;
+use PoP\Root\Feedback\FeedbackCategories;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {
