@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\FeedbackMessageProviders;
 
 use PoP\Root\FeedbackMessageProviders\AbstractFeedbackMessageProvider;
-use PoP\Root\FeedbackMessage\FeedbackMessageCategories;
+use PoP\Root\Feedback\FeedbackCategories;
 
 class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
 {
@@ -144,7 +144,7 @@ class GraphQLSpecErrorMessageProvider extends AbstractFeedbackMessageProvider
 
     public function getCategory(string $code): string
     {
-        return FeedbackMessageCategories::ERROR;
+        return FeedbackCategories::ERROR;
     }
 
     public function getSpecifiedByURL(string $code): ?string

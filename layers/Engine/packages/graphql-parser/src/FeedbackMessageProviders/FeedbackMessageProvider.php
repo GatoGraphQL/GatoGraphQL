@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\FeedbackMessageProviders;
 
 use PoP\Root\FeedbackMessageProviders\AbstractFeedbackMessageProvider;
-use PoP\Root\FeedbackMessage\FeedbackMessageCategories;
+use PoP\Root\Feedback\FeedbackCategories;
 
 class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
 {
@@ -37,7 +37,7 @@ class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
         return match ($code) {
             self::E1,
             self::E2
-                => FeedbackMessageCategories::ERROR,
+                => FeedbackCategories::ERROR,
             default => parent::getCategory($code),
         };
     }
