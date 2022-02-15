@@ -256,7 +256,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     /**
      * @return string[]
      */
-    public function enableFeedbackCategoryExtensions(): array
+    public function getEnabledFeedbackCategoryExtensions(): array
     {
         $envVariable = Environment::ENABLE_FEEDBACK_CATEGORY_EXTENSIONS;
         $defaultValue = [];
