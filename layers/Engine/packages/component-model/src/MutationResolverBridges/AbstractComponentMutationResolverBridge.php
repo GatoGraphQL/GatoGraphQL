@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolverBridges;
 
+use Exception;
 use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -28,7 +29,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
 
-    public function getSuccessString(string | int $result_id): ?string
+    public function getSuccessString(string | int $resultID): ?string
     {
         return null;
     }
@@ -36,9 +37,9 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     /**
      * @return string[]
      */
-    public function getSuccessStrings(string | int $result_id): array
+    public function getSuccessStrings(string | int $resultID): array
     {
-        $success_string = $this->getSuccessString($result_id);
+        $success_string = $this->getSuccessString($resultID);
         return $success_string !== null ? [$success_string] : [];
     }
 
@@ -86,36 +87,46 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             $warningTypeKey = $warningTypeKeys[$errorType];
             $return[$warningTypeKey] = $warnings;
         }
-        $result_id = $mutationResolver->executeMutation($form_data);
-        if (GeneralUtils::isError($result_id)) {
+
+        $errors = [];
+        try {
+            $resultID = $mutationResolver->executeMutation($form_data);
+        } catch (Exception $e) {
+            $errors[] = $e->getMessage();
+            $errorTypeKey = ResponseConstants::ERRORSTRINGS;
+        }
+        if (GeneralUtils::isError($resultID)) {
             /** @var Error */
-            $error = $result_id;
-            $errors = [];
-            if ($errorTypeKey == ErrorTypes::DESCRIPTIONS) {
-                $errors[] = $error->getMessageOrCode();
-            } elseif ($errorTypeKey == ErrorTypes::CODES) {
+            $error = $resultID;
+            if ($errorType === ErrorTypes::CODES) {
                 $errors[] = $error->getCode();
+            } else {
+                // $errorType => ErrorTypes::DESCRIPTIONS
+                $errors[] = $error->getMessageOrCode();
             }
-            $return[$errorTypeKey] = $errors;
+        }
+        if ($errors !== []) {
             if ($this->skipDataloadIfError()) {
                 // Bring no results
                 $data_properties[DataloadingConstants::SKIPDATALOAD] = true;
             }
+            $return[$errorTypeKey] = $errors;
             return $return;
         }
-        $this->modifyDataProperties($data_properties, $result_id);
+
+        $this->modifyDataProperties($data_properties, $resultID);
 
         // Save the result for some module to incorporate it into the query args
-        App::getMutationResolutionStore()->setResult($this, $result_id);
+        App::getMutationResolutionStore()->setResult($this, $resultID);
 
         $return[ResponseConstants::SUCCESS] = true;
-        if ($success_strings = $this->getSuccessStrings($result_id)) {
+        if ($success_strings = $this->getSuccessStrings($resultID)) {
             $return[ResponseConstants::SUCCESSSTRINGS] = $success_strings;
         }
         return $return;
     }
 
-    protected function modifyDataProperties(array &$data_properties, string | int $result_id): void
+    protected function modifyDataProperties(array &$data_properties, string | int $resultID): void
     {
     }
 }

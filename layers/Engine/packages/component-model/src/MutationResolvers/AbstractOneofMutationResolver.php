@@ -122,6 +122,9 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         return key($formData);
     }
 
+    /**
+     * @throws QueryResolutionException
+     */
     final public function executeMutation(array $formData): mixed
     {
         [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($formData);
