@@ -9,6 +9,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Root\Exception\ImpossibleToHappenException;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPWPSchema\Meta\Constants\MetaQueryCompareByOperators;
 use PoPWPSchema\Meta\Constants\MetaQueryValueTypes;
@@ -223,7 +224,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
             MetaQueryCompareByOperators::REGEXP => 'REGEXP',
             MetaQueryCompareByOperators::NOT_REGEXP => 'NOT REGEXP',
             MetaQueryCompareByOperators::RLIKE => 'RLIKE',
-            default => throw new GenericException(sprintf('Unknown operator \'%s\'', $operator)),
+            default => throw new ImpossibleToHappenException(sprintf('Unknown operator \'%s\'', $operator)),
         };
     }
 }
