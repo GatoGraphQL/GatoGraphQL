@@ -122,14 +122,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             $callback = $mapping['callback'] ?? null;
             \add_filter(
                 $hookName,
-                function (mixed $currentValue) use ($userSettingsManager, $optionModule, $option, $callback) {
-                    /**
-                     * If the Setting name for the option was renamed,
-                     * this will not be found, then do nothing
-                     */
-                    if (!$userSettingsManager->hasSetting($optionModule, $option)) {
-                        return $currentValue;
-                    }
+                function () use ($userSettingsManager, $optionModule, $option, $callback) {
                     $value = $userSettingsManager->getSetting($optionModule, $option);
                     if ($callback !== null) {
                         return $callback($value);
