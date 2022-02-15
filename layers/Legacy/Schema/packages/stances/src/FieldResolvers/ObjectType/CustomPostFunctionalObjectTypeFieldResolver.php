@@ -224,7 +224,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 $params = array(
                     'selected' => $selected
                 );
-                $stance = new \GD_FormInput_Stance($params);
+                $stance = new \GD_FormInput_Stance('', $params);
                 return $stance->getSelectedValue();
         }
 

@@ -145,7 +145,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 $params = array(
                     'selected' => $selected
                 );
-                $categories = new GD_FormInput_Categories($params);
+                $categories = new GD_FormInput_Categories('', $params);
                 return $categories->getSelectedValue();
 
             case 'appliestoByName':
@@ -153,7 +153,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 $params = array(
                     'selected' => $selected
                 );
-                $appliesto = new GD_FormInput_AppliesTo($params);
+                $appliesto = new GD_FormInput_AppliesTo('', $params);
                 return $appliesto->getSelectedValue();
         }
 

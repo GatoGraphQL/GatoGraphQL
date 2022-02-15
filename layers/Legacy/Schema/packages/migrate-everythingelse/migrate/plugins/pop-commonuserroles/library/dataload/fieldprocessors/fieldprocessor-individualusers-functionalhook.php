@@ -71,7 +71,7 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers e
                 $params = array(
                     'selected' => $selected
                 );
-                $individualinterests = new GD_FormInput_IndividualInterests($params);
+                $individualinterests = new GD_FormInput_IndividualInterests('', $params);
                 return $individualinterests->getSelectedValue();
         }
 

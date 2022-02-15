@@ -77,7 +77,7 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalOrganizationUsers
                 $params = array(
                     'selected' => $selected
                 );
-                $organizationtypes = new GD_FormInput_OrganizationTypes($params);
+                $organizationtypes = new GD_FormInput_OrganizationTypes('', $params);
                 return $organizationtypes->getSelectedValue();
 
             case 'organizationCategoriesByName':
@@ -85,7 +85,7 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalOrganizationUsers
                 $params = array(
                     'selected' => $selected
                 );
-                $organizationcategories = new GD_FormInput_OrganizationCategories($params);
+                $organizationcategories = new GD_FormInput_OrganizationCategories('', $params);
                 return $organizationcategories->getSelectedValue();
         }
 

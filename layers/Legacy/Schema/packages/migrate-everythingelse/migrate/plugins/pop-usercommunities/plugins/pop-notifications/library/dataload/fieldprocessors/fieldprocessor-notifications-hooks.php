@@ -159,7 +159,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 $params = array(
                     'selected' => $selected
                 );
-                $status = new GD_URE_FormInput_MultiMemberStatus($params);
+                $status = new GD_URE_FormInput_MultiMemberStatus('', $params);
                 return $status->getSelectedValue();
 
             case 'memberprivileges':
@@ -173,7 +173,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 $params = array(
                     'selected' => $selected
                 );
-                $privileges = new GD_URE_FormInput_FilterMemberPrivileges($params);
+                $privileges = new GD_URE_FormInput_FilterMemberPrivileges('', $params);
                 return $privileges->getSelectedValue();
 
             case 'membertags':
@@ -187,7 +187,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 $params = array(
                     'selected' => $selected
                 );
-                $tags = new GD_URE_FormInput_FilterMemberTags($params);
+                $tags = new GD_URE_FormInput_FilterMemberTags('', $params);
                 return $tags->getSelectedValue();
          // ----------------------------------------
 
