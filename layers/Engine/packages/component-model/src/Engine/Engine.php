@@ -1967,7 +1967,6 @@ class Engine implements EngineInterface
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
         }
         if ($sendFeedbackTraces) {
-        // if (Environment::showTracesInResponse()) {
             $this->maybeCombineAndAddDatabaseEntries($ret, 'objectTraces', $objectTraces);
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaTraces', $schemaTraces);
         }

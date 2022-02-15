@@ -49,11 +49,6 @@ class Environment
         return getenv('ENABLE_SHOW_LOGS') !== false ? strtolower(getenv('ENABLE_SHOW_LOGS')) === "true" : false;
     }
 
-    public static function showTracesInResponse(): bool
-    {
-        return getenv('SHOW_TRACES_IN_RESPONSE') !== false ? strtolower(getenv('SHOW_TRACES_IN_RESPONSE')) === "true" : false;
-    }
-
     /**
      * Use 'modules' or 'm' in the JS context. Used to compress the file size in PROD
      */
