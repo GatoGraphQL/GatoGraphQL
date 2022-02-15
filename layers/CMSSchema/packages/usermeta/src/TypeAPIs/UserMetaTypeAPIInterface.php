@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserMeta\TypeAPIs;
 
-use InvalidArgumentException;
+use PoPCMSSchema\Meta\Exception\MetaKeyNotAllowedException;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
 interface UserMetaTypeAPIInterface extends MetaTypeAPIInterface
@@ -16,7 +16,7 @@ interface UserMetaTypeAPIInterface extends MetaTypeAPIInterface
      * Otherwise, return the value.
      *
      * @param array<string,mixed> $options
-     * @throws InvalidArgumentException
+     * @throws MetaKeyNotAllowedException
      */
     public function getUserMeta(string | int $userID, string $key, bool $single = false, array $options = []): mixed;
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserMeta\TypeAPIs;
 
 use PoP\Root\App;
-use InvalidArgumentException;
+use PoPCMSSchema\Meta\Exception\MetaKeyNotAllowedException;
 use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 use PoPCMSSchema\UserMeta\Component;
 use PoPCMSSchema\UserMeta\ComponentConfiguration;
@@ -19,7 +19,7 @@ abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements Us
      * Otherwise, return the value.
      *
      * @param array<string,mixed> $options
-     * @throws InvalidArgumentException
+     * @throws MetaKeyNotAllowedException
      */
     final public function getUserMeta(string | int $userID, string $key, bool $single = false, array $options = []): mixed
     {

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMeta\TypeAPIs;
 
 use PoP\Root\App;
-use InvalidArgumentException;
-use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 use PoPCMSSchema\CustomPostMeta\Component;
 use PoPCMSSchema\CustomPostMeta\ComponentConfiguration;
+use PoPCMSSchema\Meta\Exception\MetaKeyNotAllowedException;
+use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 
 abstract class AbstractCustomPostMetaTypeAPI extends AbstractMetaTypeAPI implements CustomPostMetaTypeAPIInterface
 {
@@ -19,7 +19,7 @@ abstract class AbstractCustomPostMetaTypeAPI extends AbstractMetaTypeAPI impleme
      * Otherwise, return the value.
      *
      * @param array<string,mixed> $options
-     * @throws InvalidArgumentException
+     * @throws MetaKeyNotAllowedException
      */
     final public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false, array $options = []): mixed
     {
