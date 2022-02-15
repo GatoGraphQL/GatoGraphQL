@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\StateManagers;
 
-use LogicException;
+use PoP\Root\Exception\AppStateNotExistsException;
 use PoP\Root\Facades\Registries\AppStateProviderRegistryFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoP\Root\Translation\TranslationAPIInterface;
@@ -87,12 +87,12 @@ class AppStateManager implements AppStateManagerInterface
     }
 
     /**
-     * @throws LogicException If there is no state under the provided key
+     * @throws AppStateNotExistsException If there is no state under the provided key
      */
     public function get(string $key): mixed
     {
         if (!array_key_exists($key, $this->state)) {
-            throw new LogicException(
+            throw new AppStateNotExistsException(
                 \sprintf(
                     $this->getTranslationAPI()->__('There is no application state under key \'%s\'', 'root'),
                     $key
@@ -103,14 +103,14 @@ class AppStateManager implements AppStateManagerInterface
     }
 
     /**
-     * @throws LogicException If there is no state under the provided path
+     * @throws AppStateNotExistsException If there is no state under the provided path
      */
     public function getUnder(array $path): mixed
     {
         $state = &$this->state;
         foreach ($path as $pathItem) {
             if (!array_key_exists($pathItem, $state)) {
-                throw new LogicException(
+                throw new AppStateNotExistsException(
                     \sprintf(
                         $this->getTranslationAPI()->__('There is no application state under path \'%s\'', 'root'),
                         implode(
