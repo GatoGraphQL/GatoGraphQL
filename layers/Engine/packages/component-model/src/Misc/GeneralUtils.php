@@ -129,4 +129,17 @@ class GeneralUtils
         $parse = parse_url($url);
         return $parse['path'];
     }
+
+    /**
+     * @return mixed[]
+     */
+    public static function iterableToArray(iterable $iterable): array
+    {
+        if (is_array($iterable)) {
+            return $iterable;
+        }
+        $array = [];
+        array_push($array, ...$iterable);
+        return $array;
+    }
 }
