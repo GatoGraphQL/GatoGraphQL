@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Root\StateManagers;
 
-use LogicException;
 use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Exception\ComponentNotExistsException;
 
 /**
  * Keep a reference to all Components
@@ -30,12 +30,12 @@ class ComponentManager implements ComponentManagerInterface
     }
 
     /**
-     * @throws LogicException If the class of the component does not exist or has not been initialized
+     * @throws ComponentNotExistsException If the class of the component does not exist or has not been initialized
      */
     public function getComponent(string $componentClass): ComponentInterface
     {
         if (!isset($this->components[$componentClass])) {
-            throw new LogicException(\sprintf(
+            throw new ComponentNotExistsException(\sprintf(
                 'Component of class \'%s\' does not exist, or it has not been added for initialization',
                 $componentClass
             ));
