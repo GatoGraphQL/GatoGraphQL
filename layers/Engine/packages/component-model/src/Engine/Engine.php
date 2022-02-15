@@ -28,6 +28,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
@@ -1899,8 +1900,17 @@ class Engine implements EngineInterface
         if ($generalErrors = $generalFeedbackStore->getErrors()) {
             $ret['generalErrors'] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
         }
-        if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
-            $ret['generalWarnings'] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
+
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $sendFeedbackWarnings = in_array(FeedbackCategories::WARNING, $componentConfiguration->getEnabledFeedbackCategoryExtensions());
+        $sendFeedbackDeprecations = in_array(FeedbackCategories::DEPRECATION, $componentConfiguration->getEnabledFeedbackCategoryExtensions());
+        $sendFeedbackNotices = in_array(FeedbackCategories::NOTICE, $componentConfiguration->getEnabledFeedbackCategoryExtensions());
+
+        if ($sendFeedbackWarnings) {
+            if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
+                $ret['generalWarnings'] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
+            }
         }
 
         $documentFeedbackStore = App::getFeedbackStore()->documentFeedbackStore;
@@ -1928,23 +1938,31 @@ class Engine implements EngineInterface
                 $this->getDocumentFeedbackEntriesForOutput($documentErrors)
             );
         }
-        if ($documentWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
-            $ret['documentWarnings'] = $documentWarnings;
-        }
-        if ($documentWarnings = $documentFeedbackStore->getWarnings()) {
-            $ret['documentWarnings'] = array_merge(
-                $ret['documentWarnings'] ?? [],
-                $this->getDocumentFeedbackEntriesForOutput($documentWarnings)
-            );
+        if ($sendFeedbackWarnings) {
+            if ($documentWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
+                $ret['documentWarnings'] = $documentWarnings;
+            }
+            if ($documentWarnings = $documentFeedbackStore->getWarnings()) {
+                $ret['documentWarnings'] = array_merge(
+                    $ret['documentWarnings'] ?? [],
+                    $this->getDocumentFeedbackEntriesForOutput($documentWarnings)
+                );
+            }
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectDeprecations);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectNotices);
         $this->maybeCombineAndAddSchemaEntries($ret, 'schemaErrors', $schemaErrors);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaWarnings);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaDeprecations);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
+        if ($sendFeedbackWarnings) {
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
+            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaWarnings);
+        }
+        if ($sendFeedbackDeprecations) {
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectDeprecations);
+            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaDeprecations);
+        }
+        if ($sendFeedbackNotices) {
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectNotices);
+            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
+        }
 
 
         // Execute a hook to process the traces (in advance, we don't do anything with them)
