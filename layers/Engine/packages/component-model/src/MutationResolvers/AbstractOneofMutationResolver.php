@@ -129,8 +129,13 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
     final public function validateErrors(array $formData): array
     {
-        [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($formData);
-        return $inputFieldMutationResolver->validateErrors((array)$inputFieldFormData);
+        try {
+            [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($formData);
+            return $inputFieldMutationResolver->validateErrors((array)$inputFieldFormData);
+        } catch (QueryResolutionException $e) {
+            // Return the error message from the exception
+            return [$e->getMessage()];
+        }
     }
     final public function validateWarnings(array $formData): array
     {
@@ -138,6 +143,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
             [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($formData);
             return $inputFieldMutationResolver->validateWarnings((array)$inputFieldFormData);
         } catch (QueryResolutionException $e) {
+            // Do nothing since the Error will already return the problem
             return [];
         }
     }

@@ -10,11 +10,17 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
 {
     use BasicServiceTrait;
 
+    /**
+     * @return string[]
+     */
     public function validateErrors(array $form_data): array
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     */
     public function validateWarnings(array $form_data): array
     {
         return [];
