@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
 use ArgumentCountError;
-use Exception;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Error\ErrorProviderInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
