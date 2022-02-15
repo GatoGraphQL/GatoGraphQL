@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
-use PoP\Root\Exception\GenericSystemException;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
@@ -16,6 +15,7 @@ use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Engine\Engine\Engine as UpstreamEngine;
+use PoP\Engine\Exception\ContractNotSatisfiedException;
 use PoP\Engine\FunctionAPIFactory;
 
 class Engine extends UpstreamEngine implements EngineInterface
@@ -30,7 +30,7 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         // Check if there are hooks that must be implemented by the CMS, that have not been done so.
         if ($notImplementedHooks = $looseContractManager->getNotImplementedRequiredHooks()) {
-            throw new GenericSystemException(
+            throw new ContractNotSatisfiedException(
                 sprintf(
                     $this->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
                     implode($this->__('", "'), $notImplementedHooks)
