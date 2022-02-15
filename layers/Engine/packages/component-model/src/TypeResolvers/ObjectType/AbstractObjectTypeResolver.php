@@ -7,6 +7,8 @@ namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\Component;
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
@@ -25,7 +27,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
-use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Exception\AbstractClientException;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
@@ -482,6 +484,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Resolve the value. If the field resolver throws an Exception,
             // catch it and return the equivalent GraphQL error so that it
             // fails gracefully in production (but not on development!)
+            $errorMessage = null;
             try {
                 $value = $objectTypeFieldResolver->resolveValue(
                     $this,
@@ -493,17 +496,25 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $objectTypeFieldResolutionFeedbackStore,
                     $options
                 );
+            } catch (AbstractClientException $e) {
+                $errorMessage = $e->getMessage();
             } catch (Exception $e) {
-                if (RootEnvironment::isApplicationEnvironmentDev()) {
-                    throw $e;
+                /** @var ComponentConfiguration */
+                $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+                if ($componentConfiguration->logExceptionErrorMessages()) {
+                    // @todo: Implement for Log
                 }
+                $errorMessage = $componentConfiguration->sendExceptionErrorMessages()
+                    ? $e->getMessage()
+                    : sprintf(
+                        $this->__('Resolving field \'%s\' produced an exception, please contact the admin', 'component-model'),
+                        $field
+                    );
+            }
+            if ($errorMessage !== null) {
                 return new Error(
-                    'exception',
-                    sprintf(
-                        $this->__('Resolving field \'%s\' produced an exception, with message: \'%s\'. Please contact the admin.', 'component-model'),
-                        $field,
-                        $e->getMessage()
-                    )
+                    'field-resolution-error',
+                    $errorMessage
                 );
             }
 
