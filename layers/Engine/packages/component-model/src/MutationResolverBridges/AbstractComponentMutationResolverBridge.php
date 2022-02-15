@@ -89,6 +89,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         }
 
         $errors = [];
+        $resultID = null;
         try {
             $resultID = $mutationResolver->executeMutation($form_data);
         } catch (Exception $e) {
