@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\StateManagers;
 
-use LogicException;
+use PoP\Root\Exception\AppStateNotExistsException;
 
 interface AppStateManagerInterface
 {
@@ -28,12 +28,12 @@ interface AppStateManagerInterface
     public function override(string $key, mixed $value): void;
 
     /**
-     * @throws LogicException If there is no state under the provided key
+     * @throws AppStateNotExistsException If there is no state under the provided key
      */
     public function get(string $key): mixed;
 
     /**
-     * @throws LogicException If there is no state under the provided path
+     * @throws AppStateNotExistsException If there is no state under the provided path
      */
     public function getUnder(array $path): mixed;
 
