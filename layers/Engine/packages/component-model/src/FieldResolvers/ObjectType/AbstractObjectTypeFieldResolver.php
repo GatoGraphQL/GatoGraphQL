@@ -1221,16 +1221,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 if ($componentConfiguration->logExceptionErrorMessages()) {
                     // @todo: Implement for Log
                 }
-                $errorMessage = sprintf(
-                    $this->__('Resolving mutation \'%s\' produced an exception, %s', 'component-model'),
-                    $fieldName,
-                    $componentConfiguration->sendExceptionErrorMessages()
-                        ? sprintf(
-                            $this->__('with message: \'%s\'', 'component-model'),
-                            $e->getMessage()
-                        )
-                        : $this->__('please contact the admin', 'component-model') 
-                );
+                $errorMessage = $componentConfiguration->sendExceptionErrorMessages()
+                    ? $e->getMessage()
+                    : sprintf(
+                        $this->__('Resolving mutation \'%s\' produced an exception, please contact the admin', 'component-model'),
+                        $fieldName
+                    );
             }
             if ($errorMessage !== null) {
                 return new Error(
