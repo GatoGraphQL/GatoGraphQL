@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
+use GraphQLAPI\GraphQLAPI\Exception\PluginBackendException;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
-use InvalidArgumentException;
 
 interface ModuleRegistryInterface
 {
@@ -19,7 +19,7 @@ interface ModuleRegistryInterface
         bool $onlyVisible = true
     ): array;
     /**
-     * @throws InvalidArgumentException If module does not exist
+     * @throws PluginBackendException If module does not exist
      */
     public function getModuleResolver(string $module): ModuleResolverInterface;
     public function isModuleEnabled(string $module): bool;

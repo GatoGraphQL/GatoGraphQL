@@ -6,12 +6,12 @@ namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use GraphQLAPI\GraphQLAPI\Exception\PluginBackendException;
 use GraphQLAPI\GraphQLAPI\PluginConstants;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
-use InvalidArgumentException;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractContentParser implements ContentParserInterface
 {
@@ -76,7 +76,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      * Parse the file's Markdown into HTML Content
      *
      * @param string $relativePathDir Dir relative to the /docs/${lang}/ folder
-     * @throws InvalidArgumentException When the file is not found
+     * @throws PluginBackendException When the file is not found
      */
     public function getContent(
         string $filename,
@@ -96,7 +96,7 @@ abstract class AbstractContentParser implements ContentParserInterface
             $file = \trailingslashit($this->getDefaultFileDir()) . $filename;
             // Make sure this file exists
             if (!file_exists($file)) {
-                throw new InvalidArgumentException(sprintf(
+                throw new PluginBackendException(sprintf(
                     \__('File \'%s\' does not exist', 'graphql-api'),
                     $file
                 ));
@@ -104,7 +104,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         }
         $fileContent = file_get_contents($file);
         if ($fileContent === false) {
-            throw new InvalidArgumentException(sprintf(
+            throw new PluginBackendException(sprintf(
                 \__('File \'%s\' is corrupted', 'graphql-api'),
                 $file
             ));

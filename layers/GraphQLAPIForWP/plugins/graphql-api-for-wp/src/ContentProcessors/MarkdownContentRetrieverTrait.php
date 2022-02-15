@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
-use InvalidArgumentException;
+use GraphQLAPI\GraphQLAPI\Exception\PluginBackendException;
 
 trait MarkdownContentRetrieverTrait
 {
@@ -27,7 +27,7 @@ trait MarkdownContentRetrieverTrait
                 $relativePathDir,
                 $options
             );
-        } catch (InvalidArgumentException) {
+        } catch (PluginBackendException) {
             return null;
         }
     }
