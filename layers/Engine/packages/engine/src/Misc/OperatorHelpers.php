@@ -10,6 +10,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class OperatorHelpers
 {
+    /**
+     * @throws RuntimeOperationException
+     */
     protected static function throwNoArrayItemUnderPathException(array $data, string $path): void
     {
         $translationAPI = TranslationAPIFacade::getInstance();
@@ -19,6 +22,9 @@ class OperatorHelpers
             json_encode($data)
         ));
     }
+    /**
+     * @throws RuntimeOperationException
+     */
     public static function &getPointerToArrayItemUnderPath(array &$data, string $path): array
     {
         $dataPointer = &$data;
@@ -48,6 +54,9 @@ class OperatorHelpers
         }
         return $dataPointer;
     }
+    /**
+     * @throws RuntimeOperationException
+     */
     public static function setValueToArrayItemUnderPath(array &$data, string $path, $value): void
     {
         $dataPointer = &$data;
