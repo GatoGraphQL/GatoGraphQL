@@ -13,7 +13,7 @@ class OperatorHelpers
     protected static function throwNoArrayItemUnderPathException(array $data, string $path): void
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        throw new Exception(sprintf(
+        throw new \PoP\Root\Exception\GenericException(sprintf(
             $translationAPI->__('Path \'%s\' is not reachable for object: %s', 'pop-component-model'),
             $path,
             json_encode($data)

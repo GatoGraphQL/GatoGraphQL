@@ -58,7 +58,7 @@ class QueryParser implements QueryParserInterface
                 fn ($string) => strlen($string) > 1
             )
         ) {
-            throw new Exception(
+            throw new \PoP\Root\Exception\GenericException(
                 sprintf(
                     $this->__('Only strings of length 1 are valid in function `splitElements`, for params `$skipFromChars` and `$skipUntilChars`. The following string(s) are not valid: \'%s\''),
                     implode(

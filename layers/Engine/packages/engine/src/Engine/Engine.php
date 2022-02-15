@@ -37,7 +37,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     {
         // Check if there are loose contracts that must be implemented by the CMS, that have not been done so.
         if ($notImplementedNames = $this->getLooseContractManager()->getNotImplementedRequiredNames()) {
-            throw new Exception(
+            throw new \PoP\Root\Exception\GenericException(
                 sprintf(
                     $this->__('The following names have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
                     implode($this->__('", "'), $notImplementedNames)

@@ -226,7 +226,7 @@ class Engine implements EngineInterface
         // Obtain, validate and cache
         $engineState->entryModule = $this->getEntryModuleManager()->getEntryModule();
         if ($engineState->entryModule === null) {
-            throw new Exception(
+            throw new \PoP\Root\Exception\GenericException(
                 $this->__('No entry module for this request', 'component-model')
             );
         }

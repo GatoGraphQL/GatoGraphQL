@@ -32,7 +32,7 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
 
     public function getMessagePlaceholder(string $code): string
     {
-        throw new Exception(
+        throw new \PoP\Root\Exception\GenericException(
             \sprintf(
                 $this->__('There is no message placeholder for code \'%s\'', 'root'),
                 $code
@@ -42,7 +42,7 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
 
     public function getCategory(string $code): string
     {
-        throw new Exception(
+        throw new \PoP\Root\Exception\GenericException(
             \sprintf(
                 $this->__('There is no category for code \'%s\'', 'root'),
                 $code

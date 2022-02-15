@@ -223,7 +223,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
             MetaQueryCompareByOperators::REGEXP => 'REGEXP',
             MetaQueryCompareByOperators::NOT_REGEXP => 'NOT REGEXP',
             MetaQueryCompareByOperators::RLIKE => 'RLIKE',
-            default => throw new Exception(sprintf('Unknown operator \'%s\'', $operator)),
+            default => throw new \PoP\Root\Exception\GenericException(sprintf('Unknown operator \'%s\'', $operator)),
         };
     }
 }

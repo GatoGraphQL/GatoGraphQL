@@ -78,7 +78,7 @@ class Schema
             TypeKinds::SCALAR => new ScalarType($fullSchemaDefinition, $typeSchemaDefinitionPath),
             TypeKinds::ENUM => new EnumType($fullSchemaDefinition, $typeSchemaDefinitionPath),
             TypeKinds::INPUT_OBJECT => new InputObjectType($fullSchemaDefinition, $typeSchemaDefinitionPath),
-            default => throw new Exception(sprintf(
+            default => throw new \PoP\Root\Exception\GenericException(sprintf(
                 $this->__('Unknown type kind \'%s\'', 'graphql-server'),
                 $typeKind
             )),

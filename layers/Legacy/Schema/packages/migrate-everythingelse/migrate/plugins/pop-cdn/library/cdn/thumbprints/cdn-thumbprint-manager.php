@@ -26,7 +26,7 @@ class PoP_CDN_ThumbprintManager
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         $thumbprint = $this->thumbprints[$name];
         if (!$thumbprint) {
-            throw new Exception(
+            throw new \PoP\Root\Exception\GenericException(
                 sprintf(
                     'Error: there is no thumbprint with name \'%s\' (%s)',
                     $name,

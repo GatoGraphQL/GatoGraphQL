@@ -542,7 +542,7 @@ class PoP_ServerSideManager
 
         // If it reached here, it's because there is some error. This should be enabled only on DEV
         if (PoP_HTMLCSSPlatform_ServerUtils::throwExceptionOnTemplateError()) {
-            throw new Exception($error);
+            throw new \PoP\Root\Exception\GenericException($error);
         }
 
         error_log($error);

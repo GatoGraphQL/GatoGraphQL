@@ -360,7 +360,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         if ($typeResolver instanceof InputObjectTypeResolverInterface) {
             return new InputObjectTypeSchemaDefinitionProvider($typeResolver);
         }
-        throw new Exception(sprintf(
+        throw new \PoP\Root\Exception\GenericException(sprintf(
             $this->__('No type identified for TypeResolver with class \'%s\'', 'api'),
             get_class($typeResolver)
         ));

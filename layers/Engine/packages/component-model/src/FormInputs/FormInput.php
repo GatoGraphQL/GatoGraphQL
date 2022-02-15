@@ -17,7 +17,7 @@ class FormInput
     {
         if (!isset($params['name'])) {
             $translationAPI = TranslationAPIFacade::getInstance();
-            throw new Exception(
+            throw new \PoP\Root\Exception\GenericException(
                 $translationAPI->__('Mandatory property \'name\' in \'$params\' is missing', 'component-model')
             );
         }

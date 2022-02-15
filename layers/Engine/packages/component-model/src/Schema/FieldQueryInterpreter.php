@@ -156,7 +156,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
             $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($object);
             if ($targetObjectTypeResolver === null) {
-                throw new Exception(
+                throw new \PoP\Root\Exception\GenericException(
                     sprintf(
                         $this->__('The Union Type \'%s\' does not provide a target ObjectTypeResolver for the object', 'component-model'),
                         $relationalTypeResolver->getMaybeNamespacedTypeName()
