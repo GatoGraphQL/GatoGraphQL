@@ -268,4 +268,30 @@ class ComponentConfiguration extends AbstractComponentConfiguration
             $callback,
         );
     }
+
+    public function sendExceptionErrorMessages(): bool
+    {
+        $envVariable = Environment::SEND_EXCEPTION_ERROR_MESSAGES;
+        $defaultValue = RootEnvironment::isApplicationEnvironmentDev();
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    public function logExceptionErrorMessages(): bool
+    {
+        $envVariable = Environment::LOG_EXCEPTION_ERROR_MESSAGES;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }
