@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
-use GraphQLAPI\GraphQLAPI\Exception\PluginBackendException;
+use GraphQLAPI\GraphQLAPI\Exception\ContentNotExistsException;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\Root\App;
 
@@ -70,7 +70,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
         $module = urldecode($result[RequestParams::MODULE]);
         try {
             $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
-        } catch (PluginBackendException) {
+        } catch (ContentNotExistsException) {
             return sprintf(
                 '<p>%s</p>',
                 sprintf(

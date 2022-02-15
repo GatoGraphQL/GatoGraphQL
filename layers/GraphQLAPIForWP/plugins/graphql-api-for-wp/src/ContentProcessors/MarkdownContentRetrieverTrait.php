@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
-use GraphQLAPI\GraphQLAPI\Exception\PluginBackendException;
+use GraphQLAPI\GraphQLAPI\Exception\ContentNotExistsException;
 
 trait MarkdownContentRetrieverTrait
 {
@@ -27,7 +27,7 @@ trait MarkdownContentRetrieverTrait
                 $relativePathDir,
                 $options
             );
-        } catch (PluginBackendException) {
+        } catch (ContentNotExistsException) {
             return null;
         }
     }
