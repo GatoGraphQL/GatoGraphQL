@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
+use PoP\Root\Exception\GenericException;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Component;
@@ -304,7 +305,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                     );
                 }
                 if ($notImplementingInterfaceTypeResolvers) {
-                    throw new \PoP\Root\Exception\GenericException(
+                    throw new GenericException(
                         sprintf(
                             $this->__('Union Type \'%s\' is defined to implement interface \'%s\', hence its Type members must also satisfy this interface, but the following ones do not: \'%s\'', 'component-model'),
                             $this->getMaybeNamespacedTypeName(),

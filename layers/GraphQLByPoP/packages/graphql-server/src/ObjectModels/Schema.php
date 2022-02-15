@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
+use PoP\Root\Exception\GenericException;
 use Exception;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
@@ -78,7 +79,7 @@ class Schema
             TypeKinds::SCALAR => new ScalarType($fullSchemaDefinition, $typeSchemaDefinitionPath),
             TypeKinds::ENUM => new EnumType($fullSchemaDefinition, $typeSchemaDefinitionPath),
             TypeKinds::INPUT_OBJECT => new InputObjectType($fullSchemaDefinition, $typeSchemaDefinitionPath),
-            default => throw new \PoP\Root\Exception\GenericException(sprintf(
+            default => throw new GenericException(sprintf(
                 $this->__('Unknown type kind \'%s\'', 'graphql-server'),
                 $typeKind
             )),

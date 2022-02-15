@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
+use PoP\Root\Exception\GenericException;
 use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
@@ -226,7 +227,7 @@ class Engine implements EngineInterface
         // Obtain, validate and cache
         $engineState->entryModule = $this->getEntryModuleManager()->getEntryModule();
         if ($engineState->entryModule === null) {
-            throw new \PoP\Root\Exception\GenericException(
+            throw new GenericException(
                 $this->__('No entry module for this request', 'component-model')
             );
         }

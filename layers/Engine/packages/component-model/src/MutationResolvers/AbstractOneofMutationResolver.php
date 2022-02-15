@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
+use PoP\Root\Exception\GenericException;
 use PoP\Root\App;
 use Exception;
 use stdClass;
@@ -48,7 +49,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     {
         $oneofInputObjectFormDataSize = count((array)$oneofInputObjectFormData);
         if ($oneofInputObjectFormDataSize !== 1) {
-            throw new \PoP\Root\Exception\GenericException(
+            throw new GenericException(
                 sprintf(
                     $this->__('Only and exactly 1 input field must be provided to the OneofMutationResolver, but %s were provided', 'component-model'),
                     $oneofInputObjectFormDataSize
@@ -66,7 +67,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     {
         $inputFieldMutationResolver = $this->getConsolidatedInputFieldNameMutationResolvers()[$inputFieldName] ?? null;
         if ($inputFieldMutationResolver === null) {
-            throw new \PoP\Root\Exception\GenericException(
+            throw new GenericException(
                 sprintf(
                     $this->__('There is no MutationResolver for input field with name \'%s\'', 'component-model'),
                     $inputFieldName
@@ -111,7 +112,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     {
         $formDataSize = count($formData);
         if ($formDataSize !== 1) {
-            throw new \PoP\Root\Exception\GenericException(
+            throw new GenericException(
                 sprintf(
                     $this->__('The OneofMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'component-model'),
                     $formDataSize,

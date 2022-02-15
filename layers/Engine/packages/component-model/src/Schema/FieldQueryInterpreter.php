@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use PoP\Root\Exception\GenericException;
 use Exception;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -156,7 +157,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
             $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($object);
             if ($targetObjectTypeResolver === null) {
-                throw new \PoP\Root\Exception\GenericException(
+                throw new GenericException(
                     sprintf(
                         $this->__('The Union Type \'%s\' does not provide a target ObjectTypeResolver for the object', 'component-model'),
                         $relationalTypeResolver->getMaybeNamespacedTypeName()

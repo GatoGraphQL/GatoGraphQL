@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
+use PoP\Root\Exception\GenericException;
 use Exception;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
@@ -223,7 +224,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
             MetaQueryCompareByOperators::REGEXP => 'REGEXP',
             MetaQueryCompareByOperators::NOT_REGEXP => 'NOT REGEXP',
             MetaQueryCompareByOperators::RLIKE => 'RLIKE',
-            default => throw new \PoP\Root\Exception\GenericException(sprintf('Unknown operator \'%s\'', $operator)),
+            default => throw new GenericException(sprintf('Unknown operator \'%s\'', $operator)),
         };
     }
 }
