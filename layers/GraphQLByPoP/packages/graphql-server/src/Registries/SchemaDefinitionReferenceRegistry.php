@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\Registries;
 
 use PoP\Root\Exception\GenericException;
 use PoP\Root\App;
-use Exception;
 use PoP\GraphQLParser\Component as GraphQLParserComponent;
 use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;

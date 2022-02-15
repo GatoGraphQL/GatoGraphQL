@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Engine;
 
 use PoP\Root\Exception\GenericException;
-use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;

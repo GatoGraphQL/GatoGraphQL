@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\Root\Exception\GenericException;
-use Exception;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;

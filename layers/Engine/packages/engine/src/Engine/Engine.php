@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Engine\Engine;
 
 use PoP\Root\Exception\GenericException;
-use Exception;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\Engine\Engine as UpstreamEngine;

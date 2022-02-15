@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\QueryParsing;
 
 use PoP\Root\Exception\GenericException;
-use Exception;
 use PoP\Root\Services\BasicServiceTrait;
 
 class QueryParser implements QueryParserInterface

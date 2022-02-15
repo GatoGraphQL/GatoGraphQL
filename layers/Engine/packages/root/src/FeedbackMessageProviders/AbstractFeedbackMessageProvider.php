@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Root\FeedbackMessageProviders;
 
 use PoP\Root\Exception\GenericException;
-use Exception;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Services\BasicServiceTrait;
 

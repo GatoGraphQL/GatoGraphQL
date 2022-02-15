@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\Root\Exception\GenericException;
-use Exception;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;

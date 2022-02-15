@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FormInputs;
 
 use PoP\Root\Exception\GenericException;
-use Exception;
 use PoP\Root\App;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 

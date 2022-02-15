@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
 use PoP\Root\Exception\GenericException;
-use Exception;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
