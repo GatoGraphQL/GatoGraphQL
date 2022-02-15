@@ -21,6 +21,7 @@ class Environment
     public const ENABLE_UNION_TYPE_IMPLEMENTING_INTERFACE_TYPE = 'ENABLE_UNION_TYPE_IMPLEMENTING_INTERFACE_TYPE';
     public const SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA = 'SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA';
     public const ENABLE_MODIFYING_ENGINE_BEHAVIOR_VIA_REQUEST = 'ENABLE_MODIFYING_ENGINE_BEHAVIOR_VIA_REQUEST';
+    public const ENABLE_FEEDBACK_CATEGORY_EXTENSIONS = 'ENABLE_FEEDBACK_CATEGORY_EXTENSIONS';
 
     /**
      * Indicate if to enable to restrict a field and directive by version,
@@ -41,16 +42,6 @@ class Environment
     public static function enableExtraRoutesByParams(): bool
     {
         return getenv('ENABLE_EXTRA_ROUTES_BY_PARAMS') !== false ? strtolower(getenv('ENABLE_EXTRA_ROUTES_BY_PARAMS')) === "true" : false;
-    }
-
-    public static function enableShowLogs(): bool
-    {
-        return getenv('ENABLE_SHOW_LOGS') !== false ? strtolower(getenv('ENABLE_SHOW_LOGS')) === "true" : false;
-    }
-
-    public static function showTracesInResponse(): bool
-    {
-        return getenv('SHOW_TRACES_IN_RESPONSE') !== false ? strtolower(getenv('SHOW_TRACES_IN_RESPONSE')) === "true" : false;
     }
 
     /**

@@ -28,6 +28,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
@@ -1899,8 +1900,20 @@ class Engine implements EngineInterface
         if ($generalErrors = $generalFeedbackStore->getErrors()) {
             $ret['generalErrors'] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
         }
-        if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
-            $ret['generalWarnings'] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
+
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $enabledFeedbackCategoryExtensions = $componentConfiguration->getEnabledFeedbackCategoryExtensions();
+        $sendFeedbackWarnings = in_array(FeedbackCategories::WARNING, $enabledFeedbackCategoryExtensions);
+        $sendFeedbackDeprecations = in_array(FeedbackCategories::DEPRECATION, $enabledFeedbackCategoryExtensions);
+        $sendFeedbackNotices = in_array(FeedbackCategories::NOTICE, $enabledFeedbackCategoryExtensions);
+        $sendFeedbackTraces = in_array(FeedbackCategories::TRACE, $enabledFeedbackCategoryExtensions);
+        $sendFeedbackLogs = in_array(FeedbackCategories::LOG, $enabledFeedbackCategoryExtensions);
+
+        if ($sendFeedbackWarnings) {
+            if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
+                $ret['generalWarnings'] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
+            }
         }
 
         $documentFeedbackStore = App::getFeedbackStore()->documentFeedbackStore;
@@ -1928,41 +1941,37 @@ class Engine implements EngineInterface
                 $this->getDocumentFeedbackEntriesForOutput($documentErrors)
             );
         }
-        if ($documentWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
-            $ret['documentWarnings'] = $documentWarnings;
-        }
-        if ($documentWarnings = $documentFeedbackStore->getWarnings()) {
-            $ret['documentWarnings'] = array_merge(
-                $ret['documentWarnings'] ?? [],
-                $this->getDocumentFeedbackEntriesForOutput($documentWarnings)
-            );
+        if ($sendFeedbackWarnings) {
+            if ($documentWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
+                $ret['documentWarnings'] = $documentWarnings;
+            }
+            if ($documentWarnings = $documentFeedbackStore->getWarnings()) {
+                $ret['documentWarnings'] = array_merge(
+                    $ret['documentWarnings'] ?? [],
+                    $this->getDocumentFeedbackEntriesForOutput($documentWarnings)
+                );
+            }
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectDeprecations);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectNotices);
         $this->maybeCombineAndAddSchemaEntries($ret, 'schemaErrors', $schemaErrors);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaWarnings);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaDeprecations);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
-
-
-        // Execute a hook to process the traces (in advance, we don't do anything with them)
-        App::doAction(
-            '\PoP\ComponentModel\Engine:traces:schema',
-            $schemaTraces
-        );
-        App::doAction(
-            '\PoP\ComponentModel\Engine:traces:db',
-            $objectTraces
-        );
-        if (Environment::showTracesInResponse()) {
+        if ($sendFeedbackWarnings) {
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
+            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaWarnings);
+        }
+        if ($sendFeedbackDeprecations) {
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectDeprecations);
+            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaDeprecations);
+        }
+        if ($sendFeedbackNotices) {
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectNotices);
+            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
+        }
+        if ($sendFeedbackTraces) {
             $this->maybeCombineAndAddDatabaseEntries($ret, 'objectTraces', $objectTraces);
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaTraces', $schemaTraces);
         }
-
-        // Show logs only if both enabled, and passing the action in the URL
-        if (Environment::enableShowLogs()) {
+        if ($sendFeedbackLogs) {
+            // Show logs only if both enabled, and passing the action in the URL
             if (in_array(Actions::SHOW_LOGS, App::getState('actions'))) {
                 $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
             }
