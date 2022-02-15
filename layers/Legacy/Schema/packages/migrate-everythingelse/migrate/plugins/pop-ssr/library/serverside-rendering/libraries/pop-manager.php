@@ -4,7 +4,7 @@ use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Root\Exception\GenericException;
+use PoP\Root\Exception\GenericSystemException;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_ServerSideManager
@@ -543,7 +543,7 @@ class PoP_ServerSideManager
 
         // If it reached here, it's because there is some error. This should be enabled only on DEV
         if (PoP_HTMLCSSPlatform_ServerUtils::throwExceptionOnTemplateError()) {
-            throw new GenericException($error);
+            throw new GenericSystemException($error);
         }
 
         error_log($error);

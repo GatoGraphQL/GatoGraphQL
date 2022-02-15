@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\Root\Exception\GenericException;
+use PoP\Root\Exception\GenericSystemException;
 use PoP\Root\App;
 use Exception;
 use PoP\Application\HelperAPIFactory;
@@ -44,7 +44,7 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
         // If any input is null, throw an exception
         $null_inputs = array_filter($inputs, 'is_null');
         if ($null_inputs) {
-            throw new GenericException(
+            throw new GenericSystemException(
                 sprintf(
                     'No form inputs defined for: %s',
                     '"' . implode('", "', array_keys($null_inputs)) . '"'
