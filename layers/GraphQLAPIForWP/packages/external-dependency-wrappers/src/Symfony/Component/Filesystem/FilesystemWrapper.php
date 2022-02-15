@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem;
 
-use RuntimeException;
+use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -25,7 +25,7 @@ class FilesystemWrapper
      *
      * @param string|iterable $files A filename, an array of files, or a \Traversable instance to remove
      *
-     * @throws RuntimeException When removal fails
+     * @throws IOException When removal fails
      */
     public function remove(string|iterable $files): void
     {
@@ -33,7 +33,7 @@ class FilesystemWrapper
             $this->fileSystem->remove($files);
         } catch (IOExceptionInterface $e) {
             // Throw own exception
-            throw new RuntimeException($e->getMessage());
+            throw new IOException($e->getMessage(), 0, $e);
         }
     }
 }
