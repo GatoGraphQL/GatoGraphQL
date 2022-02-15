@@ -1903,9 +1903,12 @@ class Engine implements EngineInterface
 
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        $sendFeedbackWarnings = in_array(FeedbackCategories::WARNING, $componentConfiguration->getEnabledFeedbackCategoryExtensions());
-        $sendFeedbackDeprecations = in_array(FeedbackCategories::DEPRECATION, $componentConfiguration->getEnabledFeedbackCategoryExtensions());
-        $sendFeedbackNotices = in_array(FeedbackCategories::NOTICE, $componentConfiguration->getEnabledFeedbackCategoryExtensions());
+        $enabledFeedbackCategoryExtensions = $componentConfiguration->getEnabledFeedbackCategoryExtensions();
+        $sendFeedbackWarnings = in_array(FeedbackCategories::WARNING, $enabledFeedbackCategoryExtensions);
+        $sendFeedbackDeprecations = in_array(FeedbackCategories::DEPRECATION, $enabledFeedbackCategoryExtensions);
+        $sendFeedbackNotices = in_array(FeedbackCategories::NOTICE, $enabledFeedbackCategoryExtensions);
+        $sendFeedbackTraces = in_array(FeedbackCategories::TRACE, $enabledFeedbackCategoryExtensions);
+        $sendFeedbackLogs = in_array(FeedbackCategories::LOG, $enabledFeedbackCategoryExtensions);
 
         if ($sendFeedbackWarnings) {
             if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
@@ -1963,14 +1966,14 @@ class Engine implements EngineInterface
             $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectNotices);
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
         }
-
-        if (Environment::showTracesInResponse()) {
+        if ($sendFeedbackTraces) {
+        // if (Environment::showTracesInResponse()) {
             $this->maybeCombineAndAddDatabaseEntries($ret, 'objectTraces', $objectTraces);
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaTraces', $schemaTraces);
         }
-
+        if ($sendFeedbackLogs) {
         // Show logs only if both enabled, and passing the action in the URL
-        if (Environment::enableShowLogs()) {
+        // if (Environment::enableShowLogs()) {
             if (in_array(Actions::SHOW_LOGS, App::getState('actions'))) {
                 $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
             }
