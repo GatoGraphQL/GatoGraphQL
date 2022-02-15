@@ -6,9 +6,9 @@ namespace PoP\GraphQLParser\Exception\Parser;
 
 use PoP\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\Root\Exception\AbstractException;
+use PoP\Root\Exception\AbstractClientException;
 
-abstract class AbstractParserException extends AbstractException implements LocationableExceptionInterface
+abstract class AbstractParserException extends AbstractClientException implements LocationableExceptionInterface
 {
     public function __construct(
         string $message,

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Exception;
 
-use PoP\Root\Exception\AbstractException;
+use PoP\Root\Exception\AbstractSystemException;
 
-final class ContractNotSatisfiedException extends AbstractException
+final class ContractNotSatisfiedException extends AbstractSystemException
 {
 }

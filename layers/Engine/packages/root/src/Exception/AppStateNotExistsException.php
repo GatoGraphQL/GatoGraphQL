@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Root\Exception;
 
-final class AppStateNotExistsException extends AbstractException
+final class AppStateNotExistsException extends AbstractSystemException
 {
 }
