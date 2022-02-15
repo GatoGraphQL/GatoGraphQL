@@ -42,7 +42,7 @@ abstract class AbstractFormInputModuleProcessor extends AbstractQueryDataModuleP
         if (!isset($this->formInputs[$inputName])) {
             $options = $this->getInputOptions($module);
             $inputClass = $this->getInputClass($module);
-            $this->formInputs[$inputName] = new $inputClass($options);
+            $this->formInputs[$inputName] = new $inputClass($inputName, $options);
         }
         return $this->formInputs[$inputName];
     }
@@ -82,8 +82,6 @@ abstract class AbstractFormInputModuleProcessor extends AbstractQueryDataModuleP
 
     public function getInputOptions(array $module): array
     {
-        return [
-            'name' => $this->getName($module),
-        ];
+        return [];
     }
 }

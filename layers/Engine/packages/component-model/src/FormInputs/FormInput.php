@@ -4,24 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FormInputs;
 
-use PoP\Root\Exception\GenericException;
 use PoP\Root\App;
-use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class FormInput
 {
     public string $name;
     public mixed $selected = null;
 
-    public function __construct($params = array())
+    public function __construct(string $name, array $params)
     {
-        if (!isset($params['name'])) {
-            $translationAPI = TranslationAPIFacade::getInstance();
-            throw new GenericException(
-                $translationAPI->__('Mandatory property \'name\' in \'$params\' is missing', 'component-model')
-            );
-        }
-        $this->name = $params['name'];
+        $this->name = $name;
 
         // Selected value. If provided, use it
         $this->selected = $params['selected'] ?? null;

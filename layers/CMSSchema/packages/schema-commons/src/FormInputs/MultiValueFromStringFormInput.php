@@ -11,9 +11,9 @@ class MultiValueFromStringFormInput extends FormInput
 {
     private $separator;
 
-    public function __construct($params = array())
+    public function __construct(string $name, array $params)
     {
-        parent::__construct($params);
+        parent::__construct($name, $params);
         $this->separator = $params['separator'] ?? Param::VALUE_SEPARATOR;
     }
 

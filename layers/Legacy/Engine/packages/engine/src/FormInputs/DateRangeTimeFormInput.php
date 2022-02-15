@@ -8,9 +8,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class DateRangeTimeFormInput extends MultipleInputFormInput
 {
-    public function __construct($params = array())
+    public function __construct(string $name, array $params)
     {
-        parent::__construct($params);
+        parent::__construct($name, $params);
 
         // Re-implement to re-create the "readable" input from the other inputs
         if (!isset($params['selected']) && $this->selected) {
