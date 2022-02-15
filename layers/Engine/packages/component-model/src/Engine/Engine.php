@@ -1964,16 +1964,6 @@ class Engine implements EngineInterface
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
         }
 
-
-        // Execute a hook to process the traces (in advance, we don't do anything with them)
-        App::doAction(
-            '\PoP\ComponentModel\Engine:traces:schema',
-            $schemaTraces
-        );
-        App::doAction(
-            '\PoP\ComponentModel\Engine:traces:db',
-            $objectTraces
-        );
         if (Environment::showTracesInResponse()) {
             $this->maybeCombineAndAddDatabaseEntries($ret, 'objectTraces', $objectTraces);
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaTraces', $schemaTraces);
