@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
@@ -14,6 +13,7 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
@@ -39,6 +39,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeReso
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
+use PoP\Root\Exception\AbstractClientException;
 
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface
 {
@@ -1209,12 +1210,32 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $object,
                 $fieldName
             );
+            $errorMessage = null;
             try {
                 return $mutationResolver->executeMutation($mutationFieldArgs);
+            } catch (AbstractClientException $e) {
+                $errorMessage = $e->getMessage();
             } catch (Exception $e) {
+                /** @var ComponentConfiguration */
+                $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+                if ($componentConfiguration->logExceptionErrorMessages()) {
+                    // @todo: Implement for Log
+                }
+                $errorMessage = sprintf(
+                    $this->__('Resolving mutation \'%s\' produced an exception, %s', 'component-model'),
+                    $fieldName,
+                    $componentConfiguration->sendExceptionErrorMessages()
+                        ? sprintf(
+                            $this->__('with message: \'%s\'', 'component-model'),
+                            $e->getMessage()
+                        )
+                        : $this->__('please contact the admin', 'component-model') 
+                );
+            }
+            if ($errorMessage !== null) {
                 return new Error(
                     'mutation-error',
-                    $e->getMessage(),
+                    $errorMessage
                 );
             }
         }
