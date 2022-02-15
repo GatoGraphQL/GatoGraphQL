@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Misc;
 
-use PoP\Root\Exception\GenericException;
 use PoP\Engine\Constants\OperationSymbols;
+use PoP\Engine\Exception\RuntimeOperationException;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class OperatorHelpers
@@ -13,7 +13,7 @@ class OperatorHelpers
     protected static function throwNoArrayItemUnderPathException(array $data, string $path): void
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        throw new GenericException(sprintf(
+        throw new RuntimeOperationException(sprintf(
             $translationAPI->__('Path \'%s\' is not reachable for object: %s', 'pop-component-model'),
             $path,
             json_encode($data)
