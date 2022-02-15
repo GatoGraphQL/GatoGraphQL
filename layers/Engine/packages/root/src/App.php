@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use LogicException;
 use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
+use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\StateManagers\AppStateManager;
@@ -204,7 +204,7 @@ class App implements AppInterface
     /**
      * Shortcut function.
      *
-     * @throws LogicException
+     * @throws ComponentNotExistsException
      */
     final public static function getComponent(string $componentClass): ComponentInterface
     {
