@@ -18,7 +18,7 @@ class FormInput
 
         // Selected value. If provided, use it
         $this->selected = $selected;
-        
+
         $this->params = $params;
     }
 
