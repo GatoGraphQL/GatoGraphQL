@@ -19,9 +19,6 @@ services:
     PoPCMSSchema\SchemaCommons\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'
 
-    PoPCMSSchema\SchemaCommons\FormInputs\:
-        resource: '../src/FormInputs/*'
-
     PoPCMSSchema\SchemaCommons\Hooks\:
         resource: '../src/Hooks/*'
 

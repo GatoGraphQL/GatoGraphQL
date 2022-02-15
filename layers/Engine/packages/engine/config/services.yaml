@@ -20,9 +20,6 @@ services:
     PoP\Engine\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoP\Engine\FormInputs\:
-        resource: '../src/FormInputs/*'
-
     PoP\Engine\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
 

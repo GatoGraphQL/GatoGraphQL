@@ -75,9 +75,6 @@ services:
     PoP\ComponentModel\FeedbackMessageProviders\:
         resource: '../src/FeedbackMessageProviders/*'
 
-    PoP\ComponentModel\FormInputs\:
-        resource: '../src/FormInputs/*'
-
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
 
