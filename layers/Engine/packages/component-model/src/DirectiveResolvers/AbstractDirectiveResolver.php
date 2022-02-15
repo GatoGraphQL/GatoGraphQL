@@ -370,13 +370,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             }
             /**
              * Compare using semantic versioning constraint rules, as used by Composer
-             * If passing a wrong value to validate against (eg: "saraza" instead of "1.0.0"), it will throw an Exception
              */
-            try {
-                return $this->getSemverHelperService()->satisfies($schemaDirectiveVersion, $versionConstraint);
-            } catch (Exception) {
-                return false;
-            }
+            return $this->getSemverHelperService()->satisfies($schemaDirectiveVersion, $versionConstraint);
         }
         return true;
     }
