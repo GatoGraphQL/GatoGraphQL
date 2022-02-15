@@ -1971,8 +1971,7 @@ class Engine implements EngineInterface
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaTraces', $schemaTraces);
         }
         if ($sendFeedbackLogs) {
-        // Show logs only if both enabled, and passing the action in the URL
-        // if (Environment::enableShowLogs()) {
+            // Show logs only if both enabled, and passing the action in the URL
             if (in_array(Actions::SHOW_LOGS, App::getState('actions'))) {
                 $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
             }

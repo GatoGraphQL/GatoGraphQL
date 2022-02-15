@@ -44,11 +44,6 @@ class Environment
         return getenv('ENABLE_EXTRA_ROUTES_BY_PARAMS') !== false ? strtolower(getenv('ENABLE_EXTRA_ROUTES_BY_PARAMS')) === "true" : false;
     }
 
-    public static function enableShowLogs(): bool
-    {
-        return getenv('ENABLE_SHOW_LOGS') !== false ? strtolower(getenv('ENABLE_SHOW_LOGS')) === "true" : false;
-    }
-
     /**
      * Use 'modules' or 'm' in the JS context. Used to compress the file size in PROD
      */
