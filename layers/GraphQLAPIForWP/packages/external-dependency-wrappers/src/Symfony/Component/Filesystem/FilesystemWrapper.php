@@ -48,7 +48,7 @@ class FilesystemWrapper
             throw new IOException(
                 \sprintf(
                     $this->getTranslationAPI()->__('Could not remove file(s) or folder(s): %s', 'external-dependency-wrappers'),
-                    $fileItems 
+                    $fileItems
                 ),
                 0,
                 $e

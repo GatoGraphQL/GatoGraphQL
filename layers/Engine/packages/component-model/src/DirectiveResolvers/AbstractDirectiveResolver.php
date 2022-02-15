@@ -965,7 +965,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                             $this->__('with message: \'%s\'', 'component-model'),
                             $e->getMessage()
                         )
-                        : $this->__('please contact the admin', 'component-model') 
+                        : $this->__('please contact the admin', 'component-model')
                 );
             }
             if ($failureMessage !== null) {
