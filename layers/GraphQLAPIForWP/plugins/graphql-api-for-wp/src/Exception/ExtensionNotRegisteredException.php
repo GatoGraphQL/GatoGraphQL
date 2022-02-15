@@ -6,6 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Exception;
 
 use PoP\Root\Exception\AbstractException;
 
-final class ContentNotExistsException extends AbstractException
+final class ExtensionNotRegisteredException extends AbstractException
 {
 }
