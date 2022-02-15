@@ -76,19 +76,19 @@ class ModuleRegistry implements ModuleRegistryInterface
         if ($onlyEnabled) {
             $modules = array_filter(
                 $modules,
-                fn ($module) => $this->isModuleEnabled($module)
+                fn (string $module) => $this->isModuleEnabled($module)
             );
         }
         if ($onlyHasSettings) {
             $modules = array_filter(
                 $modules,
-                fn ($module) => $this->getModuleResolver($module)->hasSettings($module)
+                fn (string $module) => $this->getModuleResolver($module)->hasSettings($module)
             );
         }
         if ($onlyVisible) {
             $modules = array_filter(
                 $modules,
-                fn ($module) => !$this->getModuleResolver($module)->isHidden($module)
+                fn (string $module) => !$this->getModuleResolver($module)->isHidden($module)
             );
         }
         return $modules;
