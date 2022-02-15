@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Registries;
 
-use PoP\Root\Exception\GenericException;
-use PoP\Root\App;
-use PoP\GraphQLParser\Component as GraphQLParserComponent;
-use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
+use PoP\ComponentModel\Cache\PersistentCacheInterface;
+use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Exception\SchemaReferenceException;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Engine\Cache\CacheUtils;
+use PoP\GraphQLParser\Component as GraphQLParserComponent;
+use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
+use PoP\Root\App;
+use PoP\Root\Services\BasicServiceTrait;
 use PoPAPI\API\Component as APIComponent;
 use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
 use PoPAPI\API\Schema\SchemaDefinitionServiceInterface;
 use PoPAPI\API\Schema\TypeKinds;
-use PoP\ComponentModel\Cache\PersistentCacheInterface;
-use PoP\ComponentModel\Directives\DirectiveKinds;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Root\Services\BasicServiceTrait;
-use PoP\Engine\Cache\CacheUtils;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface
 {
@@ -360,7 +360,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $schemaDefinitionPath = $schemaDefinitionReferenceObject->getSchemaDefinitionPath();
         $schemaDefinitionReferenceObjectID = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID($schemaDefinitionPath);
         if (isset($this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID])) {
-            throw new GenericException(sprintf(
+            throw new SchemaReferenceException(sprintf(
                 $this->__('A Schema Definition Reference Object with id \'%s\s has already been registered', 'graphql-server'),
                 $schemaDefinitionReferenceObjectID
             ));
