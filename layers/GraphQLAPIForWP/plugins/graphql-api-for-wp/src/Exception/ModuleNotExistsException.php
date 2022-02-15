@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Exception;
 
-use PoP\Root\Exception\AbstractException;
+use PoP\Root\Exception\AbstractSystemException;
 
-final class ModuleNotExistsException extends AbstractException
+final class ModuleNotExistsException extends AbstractSystemException
 {
 }
