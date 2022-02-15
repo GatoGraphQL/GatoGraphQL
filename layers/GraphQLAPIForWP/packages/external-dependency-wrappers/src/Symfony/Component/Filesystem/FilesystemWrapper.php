@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem;
 
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Root\Services\StandaloneServiceTrait;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -13,6 +15,8 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class FilesystemWrapper
 {
+    use StandaloneServiceTrait;
+
     private Filesystem $fileSystem;
 
     public function __construct()
@@ -32,8 +36,23 @@ class FilesystemWrapper
         try {
             $this->fileSystem->remove($files);
         } catch (IOExceptionInterface $e) {
+            if (is_string($files)) {
+                $fileItems = $files;
+            } else {
+                $fileItems = implode(
+                    $this->getTranslationAPI()->__(', ', 'external-dependency-wrappers'),
+                    GeneralUtils::iterableToArray($files)
+                );
+            }
             // Throw own exception
-            throw new IOException($e->getMessage(), 0, $e);
+            throw new IOException(
+                \sprintf(
+                    $this->getTranslationAPI()->__('Could not remove file(s) or folder(s): %s', 'external-dependency-wrappers'),
+                    $fileItems
+                ),
+                0,
+                $e
+            );
         }
     }
 }

@@ -27,7 +27,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\Root\App;
-use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
@@ -920,6 +920,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (!$this->needsIDsDataFieldsToExecute() || $this->hasIDsDataFields($idsDataFields)) {
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
+            $failureMessage = null;
             try {
                 $this->resolveDirective(
                     $relationalTypeResolver,
@@ -944,15 +945,30 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $schemaNotices,
                     $schemaTraces
                 );
-            } catch (Exception $e) {
-                if (RootEnvironment::isApplicationEnvironmentDev()) {
-                    throw $e;
-                }
+            } catch (AbstractClientException $e) {
                 $failureMessage = sprintf(
-                    $this->__('Resolving directive \'%s\' produced an exception, with message: \'%s\'', 'component-model'),
+                    $this->__('Resolving directive \'%s\' produced error: \'%s\'', 'component-model'),
                     $this->directive,
                     $e->getMessage()
                 );
+            } catch (Exception $e) {
+                /** @var ComponentConfiguration */
+                $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+                if ($componentConfiguration->logExceptionErrorMessages()) {
+                    // @todo: Implement for Log
+                }
+                $failureMessage = sprintf(
+                    $this->__('Resolving directive \'%s\' produced an exception, %s', 'component-model'),
+                    $this->directive,
+                    $componentConfiguration->sendExceptionErrorMessages()
+                        ? sprintf(
+                            $this->__('with message: \'%s\'', 'component-model'),
+                            $e->getMessage()
+                        )
+                        : $this->__('please contact the admin', 'component-model')
+                );
+            }
+            if ($failureMessage !== null) {
                 $this->processFailure(
                     $relationalTypeResolver,
                     $failureMessage,

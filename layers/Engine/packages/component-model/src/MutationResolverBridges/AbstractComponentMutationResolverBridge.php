@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\MutationResolverBridges;
 
 use Exception;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Component;
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\App;
+use PoP\Root\Exception\AbstractClientException;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
@@ -88,30 +91,40 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             $return[$warningTypeKey] = $warnings;
         }
 
-        $errors = [];
+        $errorCodeOrMessage = null;
         $resultID = null;
         try {
             $resultID = $mutationResolver->executeMutation($form_data);
+        } catch (AbstractClientException $e) {
+            $errorCodeOrMessage = $e->getMessage();
+            $errorTypeKey = ResponseConstants::ERRORSTRINGS;
         } catch (Exception $e) {
-            $errors[] = $e->getMessage();
+            /** @var ComponentConfiguration */
+            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+            if ($componentConfiguration->logExceptionErrorMessages()) {
+                // @todo: Implement for Log
+            }
+            $errorCodeOrMessage = $componentConfiguration->sendExceptionErrorMessages()
+                ? $e->getMessage()
+                : $this->__('Resolving the mutation produced an exception, please contact the admin', 'component-model');
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;
         }
         if (GeneralUtils::isError($resultID)) {
             /** @var Error */
             $error = $resultID;
             if ($errorType === ErrorTypes::CODES) {
-                $errors[] = $error->getCode();
+                $errorCodeOrMessage = $error->getCode();
             } else {
                 // $errorType => ErrorTypes::DESCRIPTIONS
-                $errors[] = $error->getMessageOrCode();
+                $errorCodeOrMessage = $error->getMessageOrCode();
             }
         }
-        if ($errors !== []) {
+        if ($errorCodeOrMessage !== null) {
             if ($this->skipDataloadIfError()) {
                 // Bring no results
                 $data_properties[DataloadingConstants::SKIPDATALOAD] = true;
             }
-            $return[$errorTypeKey] = $errors;
+            $return[$errorTypeKey] = [$errorCodeOrMessage];
             return $return;
         }
 
