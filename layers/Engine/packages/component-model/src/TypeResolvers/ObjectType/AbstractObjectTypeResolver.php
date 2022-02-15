@@ -484,6 +484,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Resolve the value. If the field resolver throws an Exception,
             // catch it and return the equivalent GraphQL error so that it
             // fails gracefully in production (but not on development!)
+            $value = null;
             $errorMessage = null;
             try {
                 $value = $objectTypeFieldResolver->resolveValue(
