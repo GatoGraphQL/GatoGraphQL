@@ -134,12 +134,17 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
     final public function validateWarnings(array $formData): array
     {
-        [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($formData);
-        return $inputFieldMutationResolver->validateWarnings((array)$inputFieldFormData);
+        try {
+            [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($formData);
+            return $inputFieldMutationResolver->validateWarnings((array)$inputFieldFormData);
+        } catch (QueryResolutionException $e) {
+            return [];
+        }
     }
     /**
      * @param array<string,mixed> $formData
      * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the current input field's form data
+     * @throws QueryResolutionException If there is not MutationResolver for the input field
      */
     final protected function getInputFieldMutationResolverAndFormData(array $formData): array
     {

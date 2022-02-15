@@ -1002,17 +1002,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null) {
             $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
-            /**
-             * If it throws an Exception do nothing, since the error will
-             * also be caught when validating the inputs
-             */
-            try {
-                $warnings = array_merge(
-                    $warnings,
-                    $mutationResolver->validateWarnings($mutationFieldArgs)
-                );
-            } catch (Exception) {
-            }
+            $warnings = array_merge(
+                $warnings,
+                $mutationResolver->validateWarnings($mutationFieldArgs)
+            );
         }
         return $warnings;
     }
