@@ -12,7 +12,6 @@ use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ComponentInfo;
 use PoP\ComponentModel\Configuration\Request;
-use PoP\ComponentModel\Constants\Actions;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataOutputItems;
@@ -1971,10 +1970,7 @@ class Engine implements EngineInterface
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaTraces', $schemaTraces);
         }
         if ($sendFeedbackLogs) {
-            // Show logs only if both enabled, and passing the action in the URL
-            if (in_array(Actions::SHOW_LOGS, App::getState('actions'))) {
-                $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
-            }
+            $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
