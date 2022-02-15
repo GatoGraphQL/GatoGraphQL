@@ -2,6 +2,7 @@
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
+use PoP\Root\Exception\GenericException;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_ServerSideRendering
@@ -141,7 +142,7 @@ class PoP_ServerSideRendering
 
         if (!$path = $this->template_paths[$template]) {
             $requestHelperService = RequestHelperServiceFacade::getInstance();
-            throw new Exception(
+            throw new GenericException(
                 sprintf(
                     'No path registered for $template \'%s\', for $module \'%s\' (%s)',
                     $template,
@@ -174,7 +175,7 @@ class PoP_ServerSideRendering
 
         if (!$module) {
             $requestHelperService = RequestHelperServiceFacade::getInstance();
-            throw new Exception(
+            throw new GenericException(
                 sprintf(
                     '$module cannot be null (%s)',
                     $requestHelperService->getRequestedFullURL()
@@ -218,7 +219,7 @@ class PoP_ServerSideRendering
         // $pagesection_settings_id of the global configuration
         $configuration = $this->getJsonConfiguration();
         if (!$pagesection_configuration = $configuration[$pagesection_settings_id]) {
-            throw new Exception(
+            throw new GenericException(
                 sprintf(
                     'No configuration in context for $pagesection_settings_id \'%s\' (%s)',
                     $pagesection_settings_id,
@@ -231,7 +232,7 @@ class PoP_ServerSideRendering
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
         $popManager->expandJSKeys($pagesection_configuration);
         if (!$pagesection_module = $pagesection_configuration[GD_JS_MODULE]) {
-            throw new Exception(
+            throw new GenericException(
                 sprintf(
                     'No template defined in context (%s)',
                     $requestHelperService->getRequestedFullURL()

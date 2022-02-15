@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\Schema;
 
+use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\App;
-use Exception;
 use PoPAPI\API\Cache\CacheTypes;
 use PoPAPI\API\Component;
 use PoPAPI\API\ComponentConfiguration;
@@ -330,7 +330,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     }
 
     /**
-     * @throws Exception If the TypeResolver does not belong to any of the known groups
+     * @throws ImpossibleToHappenException If the TypeResolver does not belong to any of the known groups
      */
     protected function getTypeResolverSchemaDefinitionProvider(
         TypeResolverInterface $typeResolver,
@@ -360,7 +360,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         if ($typeResolver instanceof InputObjectTypeResolverInterface) {
             return new InputObjectTypeSchemaDefinitionProvider($typeResolver);
         }
-        throw new Exception(sprintf(
+        throw new ImpossibleToHappenException(sprintf(
             $this->__('No type identified for TypeResolver with class \'%s\'', 'api'),
             get_class($typeResolver)
         ));

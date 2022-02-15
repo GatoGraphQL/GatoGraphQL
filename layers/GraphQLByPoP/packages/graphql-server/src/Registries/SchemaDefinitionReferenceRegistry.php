@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Registries;
 
+use PoP\Root\Exception\GenericException;
 use PoP\Root\App;
-use Exception;
 use PoP\GraphQLParser\Component as GraphQLParserComponent;
 use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
@@ -360,7 +360,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $schemaDefinitionPath = $schemaDefinitionReferenceObject->getSchemaDefinitionPath();
         $schemaDefinitionReferenceObjectID = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID($schemaDefinitionPath);
         if (isset($this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID])) {
-            throw new Exception(sprintf(
+            throw new GenericException(sprintf(
                 $this->__('A Schema Definition Reference Object with id \'%s\s has already been registered', 'graphql-server'),
                 $schemaDefinitionReferenceObjectID
             ));

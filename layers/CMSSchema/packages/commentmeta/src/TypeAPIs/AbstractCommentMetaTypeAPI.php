@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CommentMeta\TypeAPIs;
 
 use PoP\Root\App;
-use InvalidArgumentException;
 use PoPCMSSchema\CommentMeta\Component;
 use PoPCMSSchema\CommentMeta\ComponentConfiguration;
+use PoPCMSSchema\Meta\Exception\MetaKeyNotAllowedException;
 use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 
 abstract class AbstractCommentMetaTypeAPI extends AbstractMetaTypeAPI implements CommentMetaTypeAPIInterface
@@ -19,7 +19,7 @@ abstract class AbstractCommentMetaTypeAPI extends AbstractMetaTypeAPI implements
      * Otherwise, return the value.
      *
      * @param array<string,mixed> $options
-     * @throws InvalidArgumentException
+     * @throws MetaKeyNotAllowedException
      */
     final public function getCommentMeta(string | int $commentID, string $key, bool $single = false, array $options = []): mixed
     {

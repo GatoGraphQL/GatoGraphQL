@@ -1,6 +1,7 @@
 <?php
 
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
+use PoP\Root\Exception\GenericException;
 
 class PoP_CDN_ThumbprintManager
 {
@@ -26,7 +27,7 @@ class PoP_CDN_ThumbprintManager
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         $thumbprint = $this->thumbprints[$name];
         if (!$thumbprint) {
-            throw new Exception(
+            throw new GenericException(
                 sprintf(
                     'Error: there is no thumbprint with name \'%s\' (%s)',
                     $name,

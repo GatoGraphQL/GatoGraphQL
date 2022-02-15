@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Meta\TypeAPIs;
 
-use InvalidArgumentException;
 use PoP\Root\Services\BasicServiceTrait;
+use PoPCMSSchema\Meta\Exception\MetaKeyNotAllowedException;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
 abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface
@@ -35,12 +35,12 @@ abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface
     /**
      * If the allow/denylist validation fails, throw an exception.
      *
-     * @throws InvalidArgumentException
+     * @throws MetaKeyNotAllowedException
      */
     final protected function assertIsMetaKeyAllowed(string $key): void
     {
         if (!$this->validateIsMetaKeyAllowed($key)) {
-            throw new InvalidArgumentException(
+            throw new MetaKeyNotAllowedException(
                 sprintf(
                     $this->__('There is no meta with key \'%s\'', 'commentmeta'),
                     $key

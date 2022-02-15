@@ -68,7 +68,7 @@ class RoutingHookSet extends AbstractHookSet
         $currentURL = preg_replace('#^https?://#', '', $currentURL);
         if (substr($currentURL, 0, strlen($homeURL)) !== $homeURL) {
             // This is too harsh. Just ignore hook
-            // throw new Exception(sprintf(
+            // throw new GenericException(sprintf(
             //     'The webserver is not configured properly, since the current URL \'%s\' does not contain the home URL \'%s\' (possibly the server name has not been set-up correctly)',
             //     $currentURL,
             //     $homeURL

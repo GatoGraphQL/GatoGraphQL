@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\App;
 
-use LogicException;
 use PoP\Root\App as RootApp;
 use PoP\Root\AppInterface as RootAppInterface;
 use PoP\Root\AppLoaderInterface;
@@ -12,6 +11,7 @@ use PoP\Root\Component\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
+use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\StateManagers\AppStateManagerInterface;
@@ -132,7 +132,7 @@ abstract class AbstractRootAppProxy implements RootAppInterface
     /**
      * Shortcut function.
      *
-     * @throws LogicException
+     * @throws ComponentNotExistsException
      */
     final public static function getComponent(string $componentClass): ComponentInterface
     {

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
+use GraphQLAPI\GraphQLAPI\Exception\ModuleNotExistsException;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
-use InvalidArgumentException;
 
 class ModuleRegistry implements ModuleRegistryInterface
 {
@@ -94,12 +94,12 @@ class ModuleRegistry implements ModuleRegistryInterface
         return $modules;
     }
     /**
-     * @throws InvalidArgumentException If module does not exist
+     * @throws ModuleNotExistsException If module does not exist
      */
     public function getModuleResolver(string $module): ModuleResolverInterface
     {
         if (!isset($this->moduleResolversByModule[$module])) {
-            throw new InvalidArgumentException(sprintf(
+            throw new ModuleNotExistsException(sprintf(
                 \__('Module \'%s\' does not exist', 'graphql-api'),
                 $module
             ));

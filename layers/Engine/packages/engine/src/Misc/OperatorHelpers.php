@@ -4,21 +4,27 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Misc;
 
-use Exception;
 use PoP\Engine\Constants\OperationSymbols;
+use PoP\Engine\Exception\RuntimeOperationException;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class OperatorHelpers
 {
+    /**
+     * @throws RuntimeOperationException
+     */
     protected static function throwNoArrayItemUnderPathException(array $data, string $path): void
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        throw new Exception(sprintf(
+        throw new RuntimeOperationException(sprintf(
             $translationAPI->__('Path \'%s\' is not reachable for object: %s', 'pop-component-model'),
             $path,
             json_encode($data)
         ));
     }
+    /**
+     * @throws RuntimeOperationException
+     */
     public static function &getPointerToArrayItemUnderPath(array &$data, string $path): array
     {
         $dataPointer = &$data;
@@ -48,6 +54,9 @@ class OperatorHelpers
         }
         return $dataPointer;
     }
+    /**
+     * @throws RuntimeOperationException
+     */
     public static function setValueToArrayItemUnderPath(array &$data, string $path, $value): void
     {
         $dataPointer = &$data;

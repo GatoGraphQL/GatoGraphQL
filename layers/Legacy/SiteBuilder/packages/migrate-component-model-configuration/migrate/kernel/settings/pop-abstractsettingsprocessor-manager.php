@@ -2,6 +2,7 @@
 namespace PoP\ComponentModel\Settings;
 
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
+use PoP\Root\Exception\GenericException;
 
 abstract class AbstractSettingsProcessorManager
 {
@@ -41,7 +42,7 @@ abstract class AbstractSettingsProcessorManager
         }
 
         $requestHelperService = RequestHelperServiceFacade::getInstance();
-        throw new \Exception(
+        throw new GenericException(
             sprintf(
                 'No Settings Processor for $route \'%s\' (%s)',
                 $route,

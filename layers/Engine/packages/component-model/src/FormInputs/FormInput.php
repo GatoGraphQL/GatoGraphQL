@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FormInputs;
 
-use Exception;
+use PoP\Root\Exception\GenericException;
 use PoP\Root\App;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
@@ -17,7 +17,7 @@ class FormInput
     {
         if (!isset($params['name'])) {
             $translationAPI = TranslationAPIFacade::getInstance();
-            throw new Exception(
+            throw new GenericException(
                 $translationAPI->__('Mandatory property \'name\' in \'$params\' is missing', 'component-model')
             );
         }

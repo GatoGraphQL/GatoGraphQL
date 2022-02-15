@@ -8,7 +8,7 @@ class PoP_ServerSide_ModHelpers
     {
         // Comment Leo: Not needed in PHP => Commented out
         // if (count($arguments) < 3) {
-        //     throw new Exception("Handlebars Helper equal needs 2 parameters");
+        //     throw new \PoP\Root\Exception\GenericException("Handlebars Helper equal needs 2 parameters");
         // }
             
         $offset = $options['hash']['offset'] ?? 0;

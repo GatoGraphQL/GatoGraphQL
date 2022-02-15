@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
+use GraphQLAPI\GraphQLAPI\Exception\MainPluginNotRegisteredException;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
-use LogicException;
 
 class MainPluginManager extends AbstractPluginManager
 {
@@ -42,7 +42,7 @@ class MainPluginManager extends AbstractPluginManager
     public function getPlugin(): MainPluginInterface
     {
         if ($this->mainPlugin === null) {
-            throw new LogicException(
+            throw new MainPluginNotRegisteredException(
                 __('The main plugin has not been registered yet', 'graphql-api')
             );
         }

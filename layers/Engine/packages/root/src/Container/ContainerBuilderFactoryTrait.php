@@ -6,6 +6,7 @@ namespace PoP\Root\Container;
 
 use InvalidArgumentException;
 use PoP\Root\Environment;
+use RuntimeException;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
@@ -62,7 +63,7 @@ trait ContainerBuilderFactoryTrait
             if ($cacheSetupSuccess && !is_dir($directory)) {
                 if (@mkdir($directory, 0777, true) === false) {
                     if ($throwExceptionIfCacheSetupError) {
-                        throw new \RuntimeException(sprintf(
+                        throw new RuntimeException(sprintf(
                             'The directory %s could not be created.',
                             $directory
                         ));

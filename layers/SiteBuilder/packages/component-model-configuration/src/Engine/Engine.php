@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
-use Exception;
+use PoP\Root\Exception\GenericException;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
@@ -30,7 +30,7 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         // Check if there are hooks that must be implemented by the CMS, that have not been done so.
         if ($notImplementedHooks = $looseContractManager->getNotImplementedRequiredHooks()) {
-            throw new Exception(
+            throw new GenericException(
                 sprintf(
                     $this->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
                     implode($this->__('", "'), $notImplementedHooks)

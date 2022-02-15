@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\FeedbackMessageProviders;
 
-use Exception;
+use PoP\Root\Exception\MisconfiguredServiceException;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -32,7 +32,7 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
 
     public function getMessagePlaceholder(string $code): string
     {
-        throw new Exception(
+        throw new MisconfiguredServiceException(
             \sprintf(
                 $this->__('There is no message placeholder for code \'%s\'', 'root'),
                 $code
@@ -42,7 +42,7 @@ abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProvide
 
     public function getCategory(string $code): string
     {
-        throw new Exception(
+        throw new MisconfiguredServiceException(
             \sprintf(
                 $this->__('There is no category for code \'%s\'', 'root'),
                 $code
