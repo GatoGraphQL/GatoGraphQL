@@ -88,26 +88,17 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
 
             case 'memberStatusByName':
                 $selected = $objectTypeResolver->resolveValue($user, 'memberstatus', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $status = new GD_URE_FormInput_MultiMemberStatus('', $params);
+                $status = new GD_URE_FormInput_MultiMemberStatus('', $selected);
                 return $status->getSelectedValue();
 
             case 'memberPrivilegesByName':
                 $selected = $objectTypeResolver->resolveValue($user, 'memberprivileges', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $privileges = new GD_URE_FormInput_FilterMemberPrivileges('', $params);
+                $privileges = new GD_URE_FormInput_FilterMemberPrivileges('', $selected);
                 return $privileges->getSelectedValue();
 
             case 'memberTagsByName':
                 $selected = $objectTypeResolver->resolveValue($user, 'membertags', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $tags = new GD_URE_FormInput_FilterMemberTags('', $params);
+                $tags = new GD_URE_FormInput_FilterMemberTags('', $selected);
                 return $tags->getSelectedValue();
         }
 

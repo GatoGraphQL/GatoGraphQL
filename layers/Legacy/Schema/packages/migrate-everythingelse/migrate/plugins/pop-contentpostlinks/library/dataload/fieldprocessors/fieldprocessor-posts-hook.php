@@ -162,10 +162,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
 
             case 'linkAccessByName':
                 $selected = $objectTypeResolver->resolveValue($post, 'linkaccess', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $linkaccess = new GD_FormInput_LinkAccessDescription('', $params);
+                $linkaccess = new GD_FormInput_LinkAccessDescription('', $selected);
                 return $linkaccess->getSelectedValue();
 
             case 'linkcategories':
@@ -173,10 +170,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
 
             case 'linkCategoriesByName':
                 $selected = $objectTypeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $linkcategories = new GD_FormInput_LinkCategories('', $params);
+                $linkcategories = new GD_FormInput_LinkCategories('', $selected);
                 return $linkcategories->getSelectedValue();
 
             case 'hasLinkCategories':

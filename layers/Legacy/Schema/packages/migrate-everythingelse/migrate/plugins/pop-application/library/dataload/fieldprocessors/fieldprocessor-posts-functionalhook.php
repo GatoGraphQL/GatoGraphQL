@@ -142,18 +142,12 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
 
             case 'topicsByName':
                 $selected = $objectTypeResolver->resolveValue($post, 'topics', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $categories = new GD_FormInput_Categories('', $params);
+                $categories = new GD_FormInput_Categories('', $selected);
                 return $categories->getSelectedValue();
 
             case 'appliestoByName':
                 $selected = $objectTypeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $appliesto = new GD_FormInput_AppliesTo('', $params);
+                $appliesto = new GD_FormInput_AppliesTo('', $selected);
                 return $appliesto->getSelectedValue();
         }
 

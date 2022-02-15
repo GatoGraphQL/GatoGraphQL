@@ -156,10 +156,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
 
             case 'memberStatusByName':
                 $selected = $objectTypeResolver->resolveValue($notification, 'memberstatus', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $status = new GD_URE_FormInput_MultiMemberStatus('', $params);
+                $status = new GD_URE_FormInput_MultiMemberStatus('', $selected);
                 return $status->getSelectedValue();
 
             case 'memberprivileges':
@@ -170,10 +167,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
 
             case 'memberPrivilegesByName':
                 $selected = $objectTypeResolver->resolveValue($notification, 'memberprivileges', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $privileges = new GD_URE_FormInput_FilterMemberPrivileges('', $params);
+                $privileges = new GD_URE_FormInput_FilterMemberPrivileges('', $selected);
                 return $privileges->getSelectedValue();
 
             case 'membertags':
@@ -184,10 +178,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
 
             case 'memberTagsByName':
                 $selected = $objectTypeResolver->resolveValue($notification, 'membertags', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $tags = new GD_URE_FormInput_FilterMemberTags('', $params);
+                $tags = new GD_URE_FormInput_FilterMemberTags('', $selected);
                 return $tags->getSelectedValue();
          // ----------------------------------------
 

@@ -68,10 +68,7 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers e
         switch ($fieldName) {
             case 'individualInterestsByName':
                 $selected = $objectTypeResolver->resolveValue($user, 'individualinterests', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $individualinterests = new GD_FormInput_IndividualInterests('', $params);
+                $individualinterests = new GD_FormInput_IndividualInterests('', $selected);
                 return $individualinterests->getSelectedValue();
         }
 

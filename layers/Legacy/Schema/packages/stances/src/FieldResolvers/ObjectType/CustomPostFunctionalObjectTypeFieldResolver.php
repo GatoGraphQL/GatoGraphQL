@@ -221,10 +221,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
             case 'stanceName':
             case 'catName':
                 $selected = $objectTypeResolver->resolveValue($object, 'stance', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $stance = new \GD_FormInput_Stance('', $params);
+                $stance = new \GD_FormInput_Stance('', $selected);
                 return $stance->getSelectedValue();
         }
 

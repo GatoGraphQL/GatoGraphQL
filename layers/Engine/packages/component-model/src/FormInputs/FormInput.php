@@ -9,14 +9,17 @@ use PoP\Root\App;
 class FormInput
 {
     public string $name;
-    public mixed $selected = null;
+    public mixed $selected;
+    public array $params;
 
-    public function __construct(string $name, array $params)
+    public function __construct(string $name, mixed $selected = null, array $params = [])
     {
         $this->name = $name;
 
         // Selected value. If provided, use it
-        $this->selected = $params['selected'] ?? null;
+        $this->selected = $selected;
+        
+        $this->params = $params;
     }
 
     public function isMultiple(): bool
@@ -66,7 +69,7 @@ class FormInput
     public function getValue(?array $source = null): mixed
     {
         // Empty values (eg: '', array()) can be the value. Only if NULL get a default value
-        if (!is_null($this->selected)) {
+        if ($this->selected !== null) {
             return $this->selected;
         }
 
