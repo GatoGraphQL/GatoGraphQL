@@ -128,7 +128,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             }
 
             $expressions = $this->getExpressionsForObject($id, $variables, $messages);
-            $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $this->resolveValuesForObject(
                 $relationalTypeResolver,
                 $id,
@@ -139,7 +138,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $variables,
                 $expressions,
                 $engineIterationFeedbackStore,
-                $objectTypeFieldResolutionFeedbackStore,
                 $objectErrors,
                 $objectWarnings,
                 $objectDeprecations
@@ -186,7 +184,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations
@@ -202,7 +199,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $variables,
                 $expressions,
                 $engineIterationFeedbackStore,
-                $objectTypeFieldResolutionFeedbackStore,
                 $objectErrors,
                 $objectWarnings,
                 $objectDeprecations
@@ -220,12 +216,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations
     ): void {
         // Get the value, and add it to the database
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $value = $this->resolveFieldValue(
             $relationalTypeResolver,
             $id,
