@@ -87,7 +87,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
                         $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
                         LocationHelper::getNonSpecificLocation(),
                         $objectTypeResolver,
-                        [$subcomponent_data_field_outputkey],
+                        $subcomponent_data_field,
                     )
                 );
             }

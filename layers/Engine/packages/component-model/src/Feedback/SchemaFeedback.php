@@ -14,8 +14,7 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         ?string $code,
         Location $location,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
-        /** @var string[] */
-        protected array $fields,
+        protected string $field,
         /** @var array<string, mixed> */
         array $extensions = [],
         /** @var array<string, mixed> */
@@ -35,11 +34,8 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         return $this->relationalTypeResolver;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getFields(): array
+    public function getField(): string
     {
-        return $this->fields;
+        return $this->field;
     }
 }

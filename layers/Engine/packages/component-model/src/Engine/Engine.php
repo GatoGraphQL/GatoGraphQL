@@ -1635,18 +1635,17 @@ class Engine implements EngineInterface
             $feedbackStoreObjectWarnings = App::getFeedbackStore()->objectFeedbackStore->getWarnings();
             foreach ($feedbackStoreObjectWarnings as $objectWarning) {
                 $iterationFeedbackStoreObjectWarnings = [];
-                $fields = $objectWarning->getFields();
+                $field = $objectWarning->getField();
+                $objectID = $objectWarning->getObjectID();
                 $message = $objectWarning->getMessage();
                 $locations = [$objectWarning->getLocation()->toArray()];
                 $extensions = $objectWarning->getExtensions();
-                foreach ($objectWarning->getObjectIDs() as $id) {
-                    $iterationFeedbackStoreObjectWarnings[(string)$id][] = [
-                        Tokens::PATH => $fields,
-                        Tokens::MESSAGE => $message,
-                        Tokens::LOCATIONS => $locations,
-                        Tokens::EXTENSIONS => $extensions,
-                    ];
-                }
+                $iterationFeedbackStoreObjectWarnings[(string)$objectID][] = [
+                    Tokens::PATH => [$field],
+                    Tokens::MESSAGE => $message,
+                    Tokens::LOCATIONS => $locations,
+                    Tokens::EXTENSIONS => $extensions,
+                ];
                 $iterationDBKey = $objectWarning->getRelationalTypeResolver()->getTypeOutputDBKey();
                 $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreObjectWarnings, true, $relationalTypeResolver);
                 foreach ($dbNameWarningEntries as $dbname => $idEntries) {
@@ -1669,18 +1668,17 @@ class Engine implements EngineInterface
             $feedbackStoreObjectDeprecations = App::getFeedbackStore()->objectFeedbackStore->getDeprecations();
             foreach ($feedbackStoreObjectDeprecations as $objectDeprecation) {
                 $iterationFeedbackStoreObjectDeprecations = [];
-                $fields = $objectDeprecation->getFields();
+                $field = $objectDeprecation->getField();
+                $objectID = $objectDeprecation->getObjectID();
                 $message = $objectDeprecation->getMessage();
                 $locations = [$objectDeprecation->getLocation()->toArray()];
                 $extensions = $objectDeprecation->getExtensions();
-                foreach ($objectDeprecation->getObjectIDs() as $id) {
-                    $iterationFeedbackStoreObjectDeprecations[(string)$id][] = [
-                        Tokens::PATH => $fields,
-                        Tokens::MESSAGE => $message,
-                        Tokens::LOCATIONS => $locations,
-                        Tokens::EXTENSIONS => $extensions,
-                    ];
-                }
+                $iterationFeedbackStoreObjectDeprecations[(string)$objectID][] = [
+                    Tokens::PATH => [$field],
+                    Tokens::MESSAGE => $message,
+                    Tokens::LOCATIONS => $locations,
+                    Tokens::EXTENSIONS => $extensions,
+                ];
                 $iterationDBKey = $objectDeprecation->getRelationalTypeResolver()->getTypeOutputDBKey();
                 $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreObjectDeprecations, true, $objectDeprecation->getRelationalTypeResolver());
                 foreach ($dbNameDeprecationEntries as $dbname => $idEntries) {
@@ -1721,7 +1719,7 @@ class Engine implements EngineInterface
             foreach ($feedbackStoreSchemaErrors as $schemaError) {
                 $iterationFeedbackStoreSchemaErrors = [];
                 $iterationFeedbackStoreSchemaErrors[] = [
-                    Tokens::PATH => $schemaError->getFields(),
+                    Tokens::PATH => [$schemaError->getField()],
                     Tokens::MESSAGE => $schemaError->getMessage(),
                     Tokens::LOCATIONS => [$schemaError->getLocation()->toArray()],
                     Tokens::EXTENSIONS => $schemaError->getExtensions(),
@@ -1748,7 +1746,7 @@ class Engine implements EngineInterface
             foreach ($feedbackStoreSchemaWarnings as $schemaWarning) {
                 $iterationFeedbackStoreSchemaWarnings = [];
                 $iterationFeedbackStoreSchemaWarnings[] = [
-                    Tokens::PATH => $schemaWarning->getFields(),
+                    Tokens::PATH => [$schemaWarning->getField()],
                     Tokens::MESSAGE => $schemaWarning->getMessage(),
                     Tokens::LOCATIONS => [$schemaWarning->getLocation()->toArray()],
                     Tokens::EXTENSIONS => $schemaWarning->getExtensions(),
