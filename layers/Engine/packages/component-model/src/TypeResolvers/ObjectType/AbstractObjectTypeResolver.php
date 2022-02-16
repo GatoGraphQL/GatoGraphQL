@@ -519,7 +519,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
             if ($validateSchemaOnObject) {
                 if ($maybeErrors = $objectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
-                    return $this->getValidationFailedError($fieldName, $maybeErrors);
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            $this->getValidationFailedErrorMessage($fieldName, $maybeErrors),
+                            ErrorCodes::VALIDATION_FAILED,
+                            LocationHelper::getNonSpecificLocation(),
+                        )
+                    );
+                    return null;
                 }
                 if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
                     $id = $this->getID($object);
@@ -539,7 +546,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 }
             }
             if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {
-                return $this->getValidationFailedError($fieldName, $validationErrorDescriptions);
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $this->getValidationFailedErrorMessage($fieldName, $validationErrorDescriptions),
+                        ErrorCodes::VALIDATION_FAILED,
+                        LocationHelper::getNonSpecificLocation(),
+                    )
+                );
+                return null;
             }
 
             // Resolve the value. If the field resolver throws an Exception,
@@ -815,23 +829,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * Needed for compatibility with CustomPostUnionTypeResolver
      * (so that data-fields aimed for another post_type are not retrieved)
      */
-    protected function getValidationFailedError(string $fieldName, array $validationDescriptions): Error
+    protected function getValidationFailedErrorMessage(string $fieldName, array $validationDescriptions): string
     {
         if (count($validationDescriptions) == 1) {
-            return new Error(
-                ErrorCodes::VALIDATION_FAILED,
-                $validationDescriptions[0],
-                [ErrorDataTokens::FIELD_NAME => $fieldName]
-            );
+            return $validationDescriptions[0];
         }
-        return new Error(
-            ErrorCodes::VALIDATION_FAILED,
-            sprintf(
-                $this->__('Field \'%s\' could not be processed due to previous error(s): \'%s\'', 'pop-component-model'),
-                $fieldName,
-                implode($this->__('\', \'', 'pop-component-model'), $validationDescriptions)
-            ),
-            [ErrorDataTokens::FIELD_NAME => $fieldName]
+        return sprintf(
+            $this->__('Field \'%s\' could not be processed due to previous error(s): \'%s\'', 'pop-component-model'),
+            $fieldName,
+            implode($this->__('\', \'', 'pop-component-model'), $validationDescriptions)
         );
     }
 
