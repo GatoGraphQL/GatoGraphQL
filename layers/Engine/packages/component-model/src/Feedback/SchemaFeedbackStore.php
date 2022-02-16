@@ -33,6 +33,14 @@ class SchemaFeedbackStore
     }
 
     /**
+     * @param SchemaFeedbackInterface[] $errors
+     */
+    public function setErrors(array $errors): void
+    {
+        $this->errors = $errors;
+    }
+
+    /**
      * @return SchemaFeedbackInterface[]
      */
     public function getWarnings(): array
@@ -43,6 +51,14 @@ class SchemaFeedbackStore
     public function addWarning(SchemaFeedbackInterface $warning): void
     {
         $this->warnings[] = $warning;
+    }
+
+    /**
+     * @param SchemaFeedbackInterface[] $warnings
+     */
+    public function setWarnings(array $warnings): void
+    {
+        $this->warnings = $warnings;
     }
 
     /**
@@ -59,6 +75,14 @@ class SchemaFeedbackStore
     }
 
     /**
+     * @param SchemaFeedbackInterface[] $deprecations
+     */
+    public function setDeprecations(array $deprecations): void
+    {
+        $this->deprecations = $deprecations;
+    }
+
+    /**
      * @return SchemaFeedbackInterface[]
      */
     public function getNotices(): array
@@ -69,6 +93,14 @@ class SchemaFeedbackStore
     public function addNotice(SchemaFeedbackInterface $notice): void
     {
         $this->notices[] = $notice;
+    }
+
+    /**
+     * @param SchemaFeedbackInterface[] $notices
+     */
+    public function setNotices(array $notices): void
+    {
+        $this->notices = $notices;
     }
 
     /**
@@ -85,6 +117,14 @@ class SchemaFeedbackStore
     }
 
     /**
+     * @param SchemaFeedbackInterface[] $logs
+     */
+    public function setLogs(array $logs): void
+    {
+        $this->logs = $logs;
+    }
+
+    /**
      * @return SchemaFeedbackInterface[]
      */
     public function getTraces(): array
@@ -95,5 +135,13 @@ class SchemaFeedbackStore
     public function addTrace(SchemaFeedbackInterface $trace): void
     {
         $this->traces[] = $trace;
+    }
+
+    /**
+     * @param SchemaFeedbackInterface[] $traces
+     */
+    public function setTraces(array $traces): void
+    {
+        $this->traces = $traces;
     }
 }

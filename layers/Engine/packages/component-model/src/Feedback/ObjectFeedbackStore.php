@@ -91,6 +91,14 @@ class ObjectFeedbackStore
     }
 
     /**
+     * @param ObjectFeedbackInterface[] $errors
+     */
+    public function setErrors(array $errors): void
+    {
+        $this->errors = $errors;
+    }
+
+    /**
      * @return ObjectFeedbackInterface[]
      */
     public function getWarnings(): array
@@ -101,6 +109,14 @@ class ObjectFeedbackStore
     public function addWarning(ObjectFeedbackInterface $warning): void
     {
         $this->warnings[] = $warning;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $warnings
+     */
+    public function setWarnings(array $warnings): void
+    {
+        $this->warnings = $warnings;
     }
 
     /**
@@ -117,6 +133,14 @@ class ObjectFeedbackStore
     }
 
     /**
+     * @param ObjectFeedbackInterface[] $deprecations
+     */
+    public function setDeprecations(array $deprecations): void
+    {
+        $this->deprecations = $deprecations;
+    }
+
+    /**
      * @return ObjectFeedbackInterface[]
      */
     public function getNotices(): array
@@ -127,6 +151,14 @@ class ObjectFeedbackStore
     public function addNotice(ObjectFeedbackInterface $notice): void
     {
         $this->notices[] = $notice;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $notices
+     */
+    public function setNotices(array $notices): void
+    {
+        $this->notices = $notices;
     }
 
     /**
@@ -143,6 +175,14 @@ class ObjectFeedbackStore
     }
 
     /**
+     * @param ObjectFeedbackInterface[] $logs
+     */
+    public function setLogs(array $logs): void
+    {
+        $this->logs = $logs;
+    }
+
+    /**
      * @return ObjectFeedbackInterface[]
      */
     public function getTraces(): array
@@ -153,5 +193,13 @@ class ObjectFeedbackStore
     public function addTrace(ObjectFeedbackInterface $trace): void
     {
         $this->traces[] = $trace;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $traces
+     */
+    public function setTraces(array $traces): void
+    {
+        $this->traces = $traces;
     }
 }
