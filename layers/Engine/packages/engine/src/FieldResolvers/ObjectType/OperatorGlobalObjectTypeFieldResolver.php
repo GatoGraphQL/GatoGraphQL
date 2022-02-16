@@ -6,7 +6,7 @@ namespace PoP\Engine\FieldResolvers\ObjectType;
 
 use ArgumentCountError;
 use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Error\ErrorProviderInterface;
+use PoP\ComponentModel\Error\ErrorDataTokens;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -23,7 +23,6 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?ErrorProviderInterface $errorProvider = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -48,14 +47,6 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
-    final public function setErrorProvider(ErrorProviderInterface $errorProvider): void
-    {
-        $this->errorProvider = $errorProvider;
-    }
-    final protected function getErrorProvider(): ErrorProviderInterface
-    {
-        return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -263,10 +254,10 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     $array = (array) $fieldArgs['object'];
                     $pointerToArrayItemUnderPath = OperatorHelpers::getPointerToArrayItemUnderPath($array, $fieldArgs['path']);
                 } catch (RuntimeOperationException $e) {
-                    return $this->getErrorProvider()->getError(
-                        $fieldName,
+                    return new Error(
                         'path-not-reachable',
-                        $e->getMessage()
+                        $e->getMessage(),
+                        [ErrorDataTokens::FIELD_NAME => $fieldName]
                     );
                 }
                 return $pointerToArrayItemUnderPath;
