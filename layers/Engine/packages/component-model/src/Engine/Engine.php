@@ -2081,7 +2081,7 @@ class Engine implements EngineInterface
         ObjectFeedbackInterface $objectFeedback,
         array &$objectFeedbackEntries
     ): void {
-        $objectFeedbackEntries[(string)$objectFeedback->getObjectID()][] = [
+        $entry = [
             Tokens::PATH => $objectFeedback->getDirective() !== null
                 ? [$objectFeedback->getField(), $objectFeedback->getDirective()]
                 : [$objectFeedback->getField()],
@@ -2089,6 +2089,16 @@ class Engine implements EngineInterface
             Tokens::LOCATIONS => [$objectFeedback->getLocation()->toArray()],
             Tokens::EXTENSIONS => $objectFeedback->getExtensions(),
         ];
+        if ($nestedObjectFeedbackEntries = $objectFeedback->getNested()) {
+            $entry[Tokens::NESTED] = [];
+            foreach ($nestedObjectFeedbackEntries as $nestedObjectFeedbackEntry) {
+                $this->transferObjectFeedbackEntries(
+                    $nestedObjectFeedbackEntry,
+                    $entry[Tokens::NESTED]
+                );
+            }
+        }
+        $objectFeedbackEntries[(string)$objectFeedback->getObjectID()][] = $entry;
     }
 
     private function transferSchemaFeedback(
@@ -2139,12 +2149,22 @@ class Engine implements EngineInterface
         SchemaFeedbackInterface $schemaFeedback,
         array &$schemaFeedbackEntries
     ): void {
-        $schemaFeedbackEntries[] = [
+        $entry = [
             Tokens::PATH => [$schemaFeedback->getField()],
             Tokens::MESSAGE => $schemaFeedback->getMessage(),
             Tokens::LOCATIONS => [$schemaFeedback->getLocation()->toArray()],
             Tokens::EXTENSIONS => $schemaFeedback->getExtensions(),
         ];
+        if ($nestedSchemaFeedbackEntries = $schemaFeedback->getNested()) {
+            $entry[Tokens::NESTED] = [];
+            foreach ($nestedSchemaFeedbackEntries as $nestedSchemaFeedbackEntry) {
+                $this->transferSchemaFeedbackEntries(
+                    $nestedSchemaFeedbackEntry,
+                    $entry[Tokens::NESTED]
+                );
+            }
+        }
+        $schemaFeedbackEntries[] = $entry;
     }
 
     /**
