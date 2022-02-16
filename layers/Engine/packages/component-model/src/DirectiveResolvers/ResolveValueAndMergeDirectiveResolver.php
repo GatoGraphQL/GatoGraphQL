@@ -231,6 +231,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         );
         
         // 2. Transfer the feedback
+        $engineIterationFeedbackStore->incorporate(
+            $objectTypeFieldResolutionFeedbackStore,
+            $relationalTypeResolver,
+            $field,
+            $id,
+        );
 
         // 3. Add the output in the DB
         $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey(

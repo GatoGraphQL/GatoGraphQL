@@ -30,6 +30,24 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         );
     }
 
+    public static function fromObjectTypeFieldResolutionFeedback(
+        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $field,
+        string|int $objectID
+    ): self {
+        return new self(
+            $objectTypeFieldResolutionFeedback->getMessage(),
+            $objectTypeFieldResolutionFeedback->getCode(),
+            $objectTypeFieldResolutionFeedback->getLocation(),
+            $relationalTypeResolver,
+            $field,
+            $objectID,
+            $objectTypeFieldResolutionFeedback->getExtensions(),
+            $objectTypeFieldResolutionFeedback->getData()
+        );
+    }
+
     public function getRelationalTypeResolver(): RelationalTypeResolverInterface
     {
         return $this->relationalTypeResolver;
