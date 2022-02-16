@@ -244,13 +244,22 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $field,
             $object,
         );
-        // The dataitem can contain both rightful values and also errors (eg: when the field doesn't exist, or the field validation fails)
-        // Extract the errors and add them on the other array
-        if (GeneralUtils::isError($value)) {
-            // Extract the error message
-            /** @var Error */
-            $error = $value;
-            $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$field]);
+        if (GeneralUtils::isError($value) || $objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            if (GeneralUtils::isError($value)) {
+                /** @var Error */
+                $error = $value;
+                $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$field]);
+            } else {
+                foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
+                    $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput(
+                        new Error(
+                            $objectTypeFieldResolutionFeedbackError->getCode(),
+                            $objectTypeFieldResolutionFeedbackError->getMessage()
+                        ),
+                        [$field]
+                    );
+                }
+            }
 
             // For GraphQL, set the response for the failing field as null
             /** @var ComponentConfiguration */
