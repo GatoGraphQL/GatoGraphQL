@@ -29,6 +29,8 @@ use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
+use PoP\ComponentModel\Feedback\ObjectFeedbackInterface;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -2012,24 +2014,34 @@ class Engine implements EngineInterface
         array &$iterationSchemaNotices,
         array &$iterationSchemaTraces
     ): void {
-        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
-            $iterationObjectErrors[(string)$objectTypeFieldResolutionFeedbackError->getObjectID()][] = $this->getErrorService()->getErrorOutput(
+        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectFeedbackError) {
+            $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorService()->getErrorOutput(
                 new Error(
-                    $objectTypeFieldResolutionFeedbackError->getCode(),
-                    $objectTypeFieldResolutionFeedbackError->getMessage(),
-                    $objectTypeFieldResolutionFeedbackError->getExtensions(),
+                    $objectFeedbackError->getCode(),
+                    $objectFeedbackError->getMessage(),
+                    $objectFeedbackError->getExtensions(),
                 ),
-                [$objectTypeFieldResolutionFeedbackError->getField()]
+                [$objectFeedbackError->getField()]
             );
         }
-        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
-            $iterationObjectWarnings[(string)$objectTypeFieldResolutionFeedbackWarning->getObjectID()][] = [
-                Tokens::PATH => [$objectTypeFieldResolutionFeedbackWarning->getField()],
-                Tokens::MESSAGE => $objectTypeFieldResolutionFeedbackWarning->getMessage(),
-                Tokens::LOCATIONS => [$objectTypeFieldResolutionFeedbackWarning->getLocation()->toArray()],
-                Tokens::EXTENSIONS => $objectTypeFieldResolutionFeedbackWarning->getExtensions(),
-            ];
+        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getWarnings() as $objectFeedbackWarning) {
+            $this->transferObjectFeedbackEntries(
+                $objectFeedbackWarning,
+                $iterationObjectWarnings,
+            );
         }
+    }
+
+    private function transferObjectFeedbackEntries(
+        ObjectFeedbackInterface $objectFeedback,
+        array &$objectFeedbackEntries
+    ): void {
+        $objectFeedbackEntries[(string)$objectFeedback->getObjectID()][] = [
+            Tokens::PATH => [$objectFeedback->getField()],
+            Tokens::MESSAGE => $objectFeedback->getMessage(),
+            Tokens::LOCATIONS => [$objectFeedback->getLocation()->toArray()],
+            Tokens::EXTENSIONS => $objectFeedback->getExtensions(),
+        ];
     }
 
     /**
