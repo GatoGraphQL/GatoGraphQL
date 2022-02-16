@@ -389,16 +389,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 LocationHelper::getNonSpecificLocation(),
             ));
             return null;
-            // return new Error(
-            //     ErrorCodes::NO_FIELD,
-            //     sprintf(
-            //         $this->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
-            //         $fieldName,
-            //         $this->getMaybeNamespacedTypeName(),
-            //         $this->getID($object)
-            //     ),
-            //     [ErrorDataTokens::FIELD_NAME => $fieldName]
-            // );
         }
 
         // Get the value from a fieldResolver, from the first one who can deliver the value
