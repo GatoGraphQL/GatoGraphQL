@@ -2082,7 +2082,9 @@ class Engine implements EngineInterface
         array &$objectFeedbackEntries
     ): void {
         $objectFeedbackEntries[(string)$objectFeedback->getObjectID()][] = [
-            Tokens::PATH => [$objectFeedback->getField()],
+            Tokens::PATH => $objectFeedback->getDirective() !== null
+                ? [$objectFeedback->getField(), $objectFeedback->getDirective()]
+                : [$objectFeedback->getField()],
             Tokens::MESSAGE => $objectFeedback->getMessage(),
             Tokens::LOCATIONS => [$objectFeedback->getLocation()->toArray()],
             Tokens::EXTENSIONS => $objectFeedback->getExtensions(),

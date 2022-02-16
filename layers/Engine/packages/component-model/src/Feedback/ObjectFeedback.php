@@ -16,6 +16,7 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         protected string $field,
         protected string|int $objectID,
+        protected ?string $directive = null,
         /** @var array<string, mixed> */
         array $extensions = [],
         /** @var array<string, mixed> */
@@ -43,6 +44,7 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
             $relationalTypeResolver,
             $field,
             $objectID,
+            null,
             $objectTypeFieldResolutionFeedback->getExtensions(),
             $objectTypeFieldResolutionFeedback->getData()
         );
@@ -61,5 +63,10 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
     public function getObjectID(): string|int
     {
         return $this->objectID;
+    }
+
+    public function getDirective(): ?string
+    {
+        return $this->directive;
     }
 }

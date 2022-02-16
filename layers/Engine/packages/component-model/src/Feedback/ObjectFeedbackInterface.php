@@ -11,4 +11,5 @@ interface ObjectFeedbackInterface extends QueryFeedbackInterface
     public function getRelationalTypeResolver(): RelationalTypeResolverInterface;
     public function getField(): string;
     public function getObjectID(): string | int;
+    public function getDirective(): ?string;
 }

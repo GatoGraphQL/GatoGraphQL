@@ -474,6 +474,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         $this,
                         $field, //$warningEntry[Tokens::PATH],
                         $id,
+                        null,
                         $warningEntry[Tokens::EXTENSIONS] ?? [],
                     )
                 );
@@ -504,6 +505,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         $this,
                         $field, //$deprecationEntry[Tokens::PATH],
                         $id,
+                        null,
                         $deprecationEntry[Tokens::EXTENSIONS] ?? [],
                     )
                 );
