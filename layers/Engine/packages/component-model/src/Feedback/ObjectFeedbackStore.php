@@ -27,49 +27,49 @@ class ObjectFeedbackStore
         string $field,
         string|int $objectID,
     ): void {
-        foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $fieldResolutionError) {
+        foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
             $this->errors[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
-                $fieldResolutionError,
+                $objectTypeFieldResolutionFeedbackError,
                 $relationalTypeResolver,
                 $field,
                 $objectID,
             );
         }
-        foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $fieldResolutionWarning) {
+        foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
             $this->warnings[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
-                $fieldResolutionWarning,
+                $objectTypeFieldResolutionFeedbackWarning,
                 $relationalTypeResolver,
                 $field,
                 $objectID,
             );
         }
-        foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $fieldResolutionDeprecation) {
+        foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $objectTypeFieldResolutionFeedbackDeprecation) {
             $this->deprecations[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
-                $fieldResolutionDeprecation,
+                $objectTypeFieldResolutionFeedbackDeprecation,
                 $relationalTypeResolver,
                 $field,
                 $objectID,
             );
         }
-        foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $fieldResolutionNotice) {
+        foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
             $this->notices[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
-                $fieldResolutionNotice,
+                $objectTypeFieldResolutionFeedbackNotice,
                 $relationalTypeResolver,
                 $field,
                 $objectID,
             );
         }
-        foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $fieldResolutionLog) {
+        foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
             $this->logs[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
-                $fieldResolutionLog,
+                $objectTypeFieldResolutionFeedbackLog,
                 $relationalTypeResolver,
                 $field,
                 $objectID,
             );
         }
-        foreach ($objectTypeFieldResolutionFeedbackStore->getTraces() as $fieldResolutionTrace) {
+        foreach ($objectTypeFieldResolutionFeedbackStore->getTraces() as $objectTypeFieldResolutionFeedbackTrace) {
             $this->traces[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
-                $fieldResolutionTrace,
+                $objectTypeFieldResolutionFeedbackTrace,
                 $relationalTypeResolver,
                 $field,
                 $objectID,
