@@ -31,6 +31,7 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -2014,6 +2015,32 @@ class Engine implements EngineInterface
         array &$iterationSchemaNotices,
         array &$iterationSchemaTraces
     ): void {
+        $this->transferObjectFeedback(
+            $engineIterationFeedbackStore,
+            $iterationObjectErrors,
+            $iterationObjectWarnings,
+            $iterationObjectDeprecations,
+            $iterationObjectNotices,
+            $iterationObjectTraces,
+        );
+        $this->transferSchemaFeedback(
+            $engineIterationFeedbackStore,
+            $iterationSchemaErrors,
+            $iterationSchemaWarnings,
+            $iterationSchemaDeprecations,
+            $iterationSchemaNotices,
+            $iterationSchemaTraces
+        );
+    }
+
+    private function transferObjectFeedback(
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        array &$iterationObjectErrors,
+        array &$iterationObjectWarnings,
+        array &$iterationObjectDeprecations,
+        array &$iterationObjectNotices,
+        array &$iterationObjectTraces,
+    ): void {
         foreach ($engineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectFeedbackError) {
             $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorService()->getErrorOutput(
                 new Error(
@@ -2059,6 +2086,62 @@ class Engine implements EngineInterface
             Tokens::MESSAGE => $objectFeedback->getMessage(),
             Tokens::LOCATIONS => [$objectFeedback->getLocation()->toArray()],
             Tokens::EXTENSIONS => $objectFeedback->getExtensions(),
+        ];
+    }
+
+    private function transferSchemaFeedback(
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        array &$iterationSchemaErrors,
+        array &$iterationSchemaWarnings,
+        array &$iterationSchemaDeprecations,
+        array &$iterationSchemaNotices,
+        array &$iterationSchemaTraces
+    ): void {
+        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
+            $iterationSchemaErrors[] = $this->getErrorService()->getErrorOutput(
+                new Error(
+                    $schemaFeedbackError->getCode(),
+                    $schemaFeedbackError->getMessage(),
+                    $schemaFeedbackError->getExtensions(),
+                ),
+                [$schemaFeedbackError->getField()]
+            );
+        }
+        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getWarnings() as $schemaFeedbackWarning) {
+            $this->transferSchemaFeedbackEntries(
+                $schemaFeedbackWarning,
+                $iterationSchemaWarnings,
+            );
+        }
+        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getDeprecations() as $schemaFeedbackDeprecation) {
+            $this->transferSchemaFeedbackEntries(
+                $schemaFeedbackDeprecation,
+                $iterationSchemaDeprecations,
+            );
+        }
+        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getTraces() as $schemaFeedbackTrace) {
+            $this->transferSchemaFeedbackEntries(
+                $schemaFeedbackTrace,
+                $iterationSchemaTraces,
+            );
+        }
+        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
+            $this->transferSchemaFeedbackEntries(
+                $schemaFeedbackNotice,
+                $iterationSchemaNotices,
+            );
+        }
+    }
+
+    private function transferSchemaFeedbackEntries(
+        SchemaFeedbackInterface $schemaFeedback,
+        array &$schemaFeedbackEntries
+    ): void {
+        $schemaFeedbackEntries[] = [
+            Tokens::PATH => [$schemaFeedback->getField()],
+            Tokens::MESSAGE => $schemaFeedback->getMessage(),
+            Tokens::LOCATIONS => [$schemaFeedback->getLocation()->toArray()],
+            Tokens::EXTENSIONS => $schemaFeedback->getExtensions(),
         ];
     }
 
