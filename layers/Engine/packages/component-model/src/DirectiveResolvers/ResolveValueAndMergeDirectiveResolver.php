@@ -220,65 +220,15 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$objectWarnings,
         array &$objectDeprecations
     ): void {
-        // Get the value, and add it to the database
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $value = $this->resolveFieldValue(
-            $relationalTypeResolver,
-            $id,
-            $object,
-            $field,
-            $previousDBItems,
-            $variables,
-            $expressions,
-            $objectTypeFieldResolutionFeedbackStore,
-            $objectWarnings,
-            $objectDeprecations
-        );
-        $this->addValueForObject(
-            $relationalTypeResolver,
-            $id,
-            $object,
-            $field,
-            $value,
-            $dbItems,
-            $engineIterationFeedbackStore,
-            $objectTypeFieldResolutionFeedbackStore,
-            $objectErrors
-        );
-    }
-
-    private function resolveFieldValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        $id,
-        object $object,
-        string $field,
-        array $previousDBItems,
-        array &$variables,
-        array &$expressions,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array &$objectWarnings,
-        array &$objectDeprecations
-    ) {
-        return $relationalTypeResolver->resolveValue(
+        $value = $relationalTypeResolver->resolveValue(
             $object,
             $field,
             $variables,
             $expressions,
             $objectTypeFieldResolutionFeedbackStore,
         );
-    }
-
-    private function addValueForObject(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string | int $id,
-        object $object,
-        string $field,
-        mixed $value,
-        array &$dbItems,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array &$objectErrors,
-    ): void {
+        
         $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey(
             $relationalTypeResolver,
             $field,
