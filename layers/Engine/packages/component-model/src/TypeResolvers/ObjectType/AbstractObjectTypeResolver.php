@@ -574,10 +574,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     );
             }
             if ($errorMessage !== null) {
-                return new Error(
-                    'field-resolution-error',
-                    $errorMessage
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorMessage,
+                        'field-resolution-error',
+                        LocationHelper::getNonSpecificLocation(),
+                    )
                 );
+                return null;
             }
 
             /**
