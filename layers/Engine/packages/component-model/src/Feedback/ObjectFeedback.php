@@ -21,6 +21,8 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         array $extensions = [],
         /** @var array<string, mixed> */
         array $data = [],
+        /** @var ObjectFeedbackInterface[] */
+        protected array $nested = [],
     ) {
         parent::__construct(
             $message,
@@ -68,5 +70,13 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
     public function getDirective(): ?string
     {
         return $this->directive;
+    }
+
+    /**
+     * @return ObjectFeedbackInterface[]
+     */
+    public function getNested(): array
+    {
+        return $this->nested;
     }
 }

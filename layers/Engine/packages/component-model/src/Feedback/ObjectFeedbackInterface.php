@@ -12,4 +12,8 @@ interface ObjectFeedbackInterface extends QueryFeedbackInterface
     public function getField(): string;
     public function getObjectID(): string | int;
     public function getDirective(): ?string;
+    /**
+     * @return ObjectFeedbackInterface[]
+     */
+    public function getNested(): array;
 }
