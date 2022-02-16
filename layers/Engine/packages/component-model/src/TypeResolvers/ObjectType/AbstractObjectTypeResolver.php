@@ -14,6 +14,7 @@ use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Error\ErrorCodes;
 use PoP\ComponentModel\Error\ErrorDataTokens;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -370,19 +371,34 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     ): mixed {
         $objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field);
         if ($objectTypeFieldResolvers === []) {
-            // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
-            // Needed for compatibility with CustomPostUnionTypeResolver (so that data-fields aimed for another post_type are not retrieved)
+            /**
+             * Return an error to indicate that no fieldResolver processes this field,
+             * which is different than returning a null value.
+             * Needed for compatibility with CustomPostUnionTypeResolver
+             * (so that data-fields aimed for another post_type are not retrieved)
+             */
             $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
-            return new Error(
-                ErrorCodes::NO_FIELD,
+            $objectTypeFieldResolutionFeedbackStore->addError(new ObjectTypeFieldResolutionFeedback(
                 sprintf(
                     $this->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
                     $fieldName,
                     $this->getMaybeNamespacedTypeName(),
                     $this->getID($object)
                 ),
-                [ErrorDataTokens::FIELD_NAME => $fieldName]
-            );
+                ErrorCodes::NO_FIELD,
+                LocationHelper::getNonSpecificLocation(),
+            ));
+            return null;
+            // return new Error(
+            //     ErrorCodes::NO_FIELD,
+            //     sprintf(
+            //         $this->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
+            //         $fieldName,
+            //         $this->getMaybeNamespacedTypeName(),
+            //         $this->getID($object)
+            //     ),
+            //     [ErrorDataTokens::FIELD_NAME => $fieldName]
+            // );
         }
 
         // Get the value from a fieldResolver, from the first one who can deliver the value
