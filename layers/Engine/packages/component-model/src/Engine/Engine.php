@@ -2030,6 +2030,24 @@ class Engine implements EngineInterface
                 $iterationObjectWarnings,
             );
         }
+        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getDeprecations() as $objectFeedbackDeprecation) {
+            $this->transferObjectFeedbackEntries(
+                $objectFeedbackDeprecation,
+                $iterationObjectDeprecations,
+            );
+        }
+        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getTraces() as $objectFeedbackTrace) {
+            $this->transferObjectFeedbackEntries(
+                $objectFeedbackTrace,
+                $iterationObjectTraces,
+            );
+        }
+        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getNotices() as $objectFeedbackNotice) {
+            $this->transferObjectFeedbackEntries(
+                $objectFeedbackNotice,
+                $iterationObjectNotices,
+            );
+        }
     }
 
     private function transferObjectFeedbackEntries(
