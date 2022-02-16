@@ -10,7 +10,6 @@ use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalMetaDirectiveResolver;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -22,12 +21,13 @@ use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use stdClass;
 
 abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver extends AbstractGlobalMetaDirectiveResolver
 {
+    use InvokeRelationalTypeResolverDirectiveResolverTrait;
+
     /**
      * Use a value that can't be part of a fieldName, that's legible, and that conveys the meaning of sublevel. The value "." is adequate
      */
@@ -606,45 +606,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         }
     }
 
-    /**
-     * @return bool Indicates if there were errors
-     */
-    protected function transferNestedDirectiveFeedback(
-        int | string $id,
-        string $field,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        string $errorMessage,
-    ): bool {
-        // Transfer the feedback, but without the errors
-        $errors = $objectTypeFieldResolutionFeedbackStore->getErrors();
-        $objectTypeFieldResolutionFeedbackStore->setErrors([]);
-        $engineIterationFeedbackStore->incorporate(
-            $objectTypeFieldResolutionFeedbackStore,
-            $relationalTypeResolver,
-            $field,
-            $id,
-        );
-
-        // If there was an error, add it as nested
-        if ($errors !== []) {
-            $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                new ObjectFeedback(
-                    $errorMessage,
-                    'nested-directive-error',
-                    LocationHelper::getNonSpecificLocation(),
-                    $relationalTypeResolver,
-                    $field,
-                    $id,
-                    $this->directive,
-                    [],
-                    [],
-                    $errors
-                )
-            );
-            return true;
-        }
-        return false;
+    protected function getDirective(): string
+    {
+        return $this->directive;
     }
 }
