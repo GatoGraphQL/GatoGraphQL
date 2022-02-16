@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
@@ -25,6 +24,7 @@ use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
@@ -48,6 +48,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
+use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Helpers\Methods;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -75,6 +76,7 @@ class Engine implements EngineInterface
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?ModuleHelpersInterface $moduleHelpers = null;
+    private ?ErrorServiceInterface $errorService = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -200,6 +202,14 @@ class Engine implements EngineInterface
     final protected function getModuleHelpers(): ModuleHelpersInterface
     {
         return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+    }
+    final public function setErrorService(ErrorServiceInterface $errorService): void
+    {
+        $this->errorService = $errorService;
+    }
+    final protected function getErrorService(): ErrorServiceInterface
+    {
+        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
     }
 
     public function getOutputData(): array
@@ -1624,8 +1634,17 @@ class Engine implements EngineInterface
                     }
                 }
             }
+            foreach ($engineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
+                $iterationObjectErrors[(string)$objectTypeFieldResolutionFeedbackError->getObjectID()][] = $this->getErrorService()->getErrorOutput(
+                    new Error(
+                        $objectTypeFieldResolutionFeedbackError->getCode(),
+                        $objectTypeFieldResolutionFeedbackError->getMessage()
+                    ),
+                    [$objectTypeFieldResolutionFeedbackError->getField()]
+                );
+            }
             /** @phpstan-ignore-next-line */
-            if ($iterationObjectErrors) {
+            if ($iterationObjectErrors !== []) {
                 $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationObjectErrors, true, $relationalTypeResolver);
                 foreach ($dbNameErrorEntries as $dbname => $entries) {
                     $objectErrors[$dbname] ??= [];
