@@ -14,10 +14,8 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         ?string $code,
         Location $location,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
-        /** @var string[] */
-        protected array $fields,
-        /** @var array<string|int> */
-        protected array $objectIDs,
+        protected string $field,
+        protected string|int $objectID,
         /** @var array<string, mixed> */
         array $extensions = [],
         /** @var array<string, mixed> */
@@ -37,19 +35,13 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         return $this->relationalTypeResolver;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getFields(): array
+    public function getField(): string
     {
-        return $this->fields;
+        return $this->field;
     }
 
-    /**
-     * @return array<string|int>
-     */
-    public function getObjectIDs(): array
+    public function getObjectID(): string|int
     {
-        return $this->objectIDs;
+        return $this->objectID;
     }
 }
