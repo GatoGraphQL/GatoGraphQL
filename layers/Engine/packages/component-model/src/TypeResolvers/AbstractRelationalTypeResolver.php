@@ -11,7 +11,6 @@ use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Error\ErrorProviderInterface;
 use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -60,7 +59,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     private array $directiveResolverInstanceCache = [];
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    private ?ErrorProviderInterface $errorProvider = null;
     private ?DataloadingEngineInterface $dataloadingEngine = null;
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
     private ?ErrorServiceInterface $errorService = null;
@@ -72,14 +70,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
-    }
-    final public function setErrorProvider(ErrorProviderInterface $errorProvider): void
-    {
-        $this->errorProvider = $errorProvider;
-    }
-    final protected function getErrorProvider(): ErrorProviderInterface
-    {
-        return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
     }
     final public function setDataloadingEngine(DataloadingEngineInterface $dataloadingEngine): void
     {
