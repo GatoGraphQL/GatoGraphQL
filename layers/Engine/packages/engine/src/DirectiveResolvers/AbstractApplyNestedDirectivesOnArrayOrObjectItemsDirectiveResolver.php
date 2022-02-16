@@ -258,7 +258,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $arrayItemIdsProperties[(string)$id]['direct'][] = $arrayItemProperty;
                     }
                     $arrayItemIdsProperties[(string)$id]['conditional'] = [];
-                    $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                     $this->addExpressionsForObject(
                         $relationalTypeResolver,
                         $id,
@@ -268,7 +267,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $previousDBItems,
                         $variables,
                         $messages,
-                        $objectTypeFieldResolutionFeedbackStore,
                         $objectErrors,
                         $objectWarnings,
                         $objectDeprecations,
@@ -509,7 +507,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         array $previousDBItems,
         array &$variables,
         array &$messages,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
@@ -538,6 +535,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
             foreach ((array) $addExpressions as $key => $value) {
                 // Evaluate the $value, since it may be a function
                 if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($value)) {
+                    $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                     $resolvedValue = $relationalTypeResolver->resolveValue(
                         $objectIDItems[(string)$id],
                         $value,
@@ -570,6 +568,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 $existingValue = $this->getExpressionForObject($id, (string) $key, $messages) ?? [];
                 // Evaluate the $value, since it may be a function
                 if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($value)) {
+                    $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                     $resolvedValue = $relationalTypeResolver->resolveValue(
                         $objectIDItems[(string)$id],
                         $value,
