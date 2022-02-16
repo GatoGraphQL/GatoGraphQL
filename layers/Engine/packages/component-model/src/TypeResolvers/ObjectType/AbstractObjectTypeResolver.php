@@ -11,6 +11,8 @@ use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Error\ErrorCodes;
+use PoP\ComponentModel\Error\ErrorDataTokens;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
@@ -19,6 +21,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverIn
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -26,8 +29,10 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\GraphQLParser\Response\OutputServiceInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
+use stdClass;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
@@ -71,6 +76,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     protected ?array $implementedInterfaceTypeFieldResolversCache = null;
 
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?OutputServiceInterface $outputService = null;
+    private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
 
     final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
@@ -79,6 +86,22 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    final public function setOutputService(OutputServiceInterface $outputService): void
+    {
+        $this->outputService = $outputService;
+    }
+    final protected function getOutputService(): OutputServiceInterface
+    {
+        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
+    }
+    final public function setObjectSerializationManager(ObjectSerializationManagerInterface $objectSerializationManager): void
+    {
+        $this->objectSerializationManager = $objectSerializationManager;
+    }
+    final protected function getObjectSerializationManager(): ObjectSerializationManagerInterface
+    {
+        return $this->objectSerializationManager ??= $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
     }
 
     /**
@@ -350,7 +373,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
             // Needed for compatibility with CustomPostUnionTypeResolver (so that data-fields aimed for another post_type are not retrieved)
             $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
-            return $this->getErrorProvider()->getNoFieldError($this->getID($object), $fieldName, $this->getMaybeNamespacedTypeName());
+            return new Error(
+                ErrorCodes::NO_FIELD,
+                sprintf(
+                    $this->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
+                    $fieldName,
+                    $this->getMaybeNamespacedTypeName(),
+                    $this->getID($object)
+                ),
+                [ErrorDataTokens::FIELD_NAME => $fieldName]
+            );
         }
 
         // Get the value from a fieldResolver, from the first one who can deliver the value
@@ -381,7 +413,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
         }
         if ($schemaErrors) {
-            return $this->getErrorProvider()->getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
+            return new Error(
+                ErrorCodes::NESTED_SCHEMA_ERRORS,
+                sprintf(
+                    $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
+                    $fieldName
+                ),
+                [
+                    ErrorDataTokens::FIELD_NAME => $fieldName,
+                    'argumentErrors' => $schemaErrors,
+                ]
+            );
         }
 
         // Important: calculate 'isAnyFieldArgumentValueDynamic' before resolving the args for the object
@@ -431,7 +473,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
         }
         if ($maybeObjectErrors) {
-            return $this->getErrorProvider()->getNestedObjectErrorsFieldError($maybeObjectErrors, $fieldName);
+            return new Error(
+                ErrorCodes::NESTED_DB_ERRORS,
+                sprintf(
+                    $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
+                    $fieldName
+                ),
+                [
+                    ErrorDataTokens::FIELD_NAME => $fieldName,
+                    'argumentErrors' => $maybeObjectErrors,
+                ]
+            );
         }
         if ($maybeObjectDeprecations) {
             $id = $this->getID($object);
@@ -458,7 +510,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
             if ($validateSchemaOnObject) {
                 if ($maybeErrors = $objectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
-                    return $this->getErrorProvider()->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
+                    return $this->getValidationFailedError($fieldName, $maybeErrors);
                 }
                 if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
                     $id = $this->getID($object);
@@ -478,7 +530,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 }
             }
             if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {
-                return $this->getErrorProvider()->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
+                return $this->getValidationFailedError($fieldName, $validationErrorDescriptions);
             }
 
             // Resolve the value. If the field resolver throws an Exception,
@@ -548,7 +600,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $fieldTypeModifiers = $objectTypeFieldResolver->getFieldTypeModifiers($this, $field);
                 $fieldTypeIsNonNullable = ($fieldTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) === SchemaTypeModifiers::NON_NULLABLE;
                 if ($fieldTypeIsNonNullable) {
-                    return $this->getErrorProvider()->getNonNullableFieldError($fieldName);
+                    return new Error(
+                        ErrorCodes::NON_NULLABLE_FIELD,
+                        sprintf(
+                            $this->__('Non-nullable field \'%s\' cannot return null', 'pop-component-model'),
+                            $fieldName
+                        ),
+                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    );
                 }
             } elseif (GeneralUtils::isError($value)) {
                 // If it's an Error, can return straight
@@ -587,13 +646,36 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     !$fieldIsArrayType
                     && is_array($value)
                 ) {
-                    return $this->getErrorProvider()->getMustNotBeArrayFieldError($fieldName, $value);
+                    return new Error(
+                        ErrorCodes::MUST_NOT_BE_ARRAY_FIELD,
+                        sprintf(
+                            $this->__('Field \'%s\' must not return an array, but returned \'%s\'', 'pop-component-model'),
+                            $fieldName,
+                            $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                        ),
+                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    );
                 }
                 if (
                     $fieldIsArrayType
                     && !is_array($value)
                 ) {
-                    return $this->getErrorProvider()->getMustBeArrayFieldError($fieldName, $value);
+                    if ($value instanceof stdClass) {
+                        $valueAsString = $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value);
+                    } elseif (is_object($value)) {
+                        $valueAsString = $this->getObjectSerializationManager()->serialize($value);
+                    } else {
+                        $valueAsString = (string) $value;
+                    }
+                    return new Error(
+                        ErrorCodes::MUST_BE_ARRAY_FIELD,
+                        sprintf(
+                            $this->__('Field \'%s\' must return an array, but returned \'%s\'', 'pop-component-model'),
+                            $fieldName,
+                            $valueAsString
+                        ),
+                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    );
                 }
                 $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
                 if (
@@ -604,7 +686,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         fn (mixed $arrayItem) => $arrayItem === null
                     )
                 ) {
-                    return $this->getErrorProvider()->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
+                    return new Error(
+                        ErrorCodes::ARRAY_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
+                        sprintf(
+                            $this->__('Field \'%s\' must not return an array with null items', 'pop-component-model'),
+                            $fieldName
+                        ),
+                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    );
                 }
                 $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
                 if (
@@ -615,7 +704,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         fn (mixed $arrayItem) => is_array($arrayItem)
                     )
                 ) {
-                    return $this->getErrorProvider()->getMustNotBeArrayOfArraysFieldError($fieldName, $value);
+                    return new Error(
+                        ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
+                        sprintf(
+                            $this->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'pop-component-model'),
+                            $fieldName,
+                            $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                        ),
+                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    );
                 }
                 if (
                     $fieldIsArrayOfArraysType
@@ -626,7 +723,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         fn (mixed $arrayItem) => !is_array($arrayItem) && $arrayItem !== null
                     )
                 ) {
-                    return $this->getErrorProvider()->getMustBeArrayOfArraysFieldError($fieldName, $value);
+                    return new Error(
+                        ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
+                        sprintf(
+                            $this->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'pop-component-model'),
+                            $fieldName,
+                            $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                        ),
+                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    );
                 }
                 $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
                 if (
@@ -640,7 +745,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         ) !== [],
                     )
                 ) {
-                    return $this->getErrorProvider()->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
+                    return new Error(
+                        ErrorCodes::ARRAY_OF_ARRAYS_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
+                        sprintf(
+                            $this->__('Field \'%s\' must not return an array of arrays with null items', 'pop-component-model'),
+                            $fieldName
+                        ),
+                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    );
                 }
             }
 
@@ -648,11 +760,41 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return $value;
         }
 
-        return $this->getErrorProvider()->getNoObjectTypeFieldResolverProcessesFieldError(
-            $this->getMaybeNamespacedTypeName(),
-            $this->getID($object),
-            $fieldName,
-            $fieldArgs,
+        return new Error(
+            ErrorCodes::NO_FIELD_RESOLVER_UNIT_PROCESSES_FIELD,
+            sprintf(
+                $this->__('No FieldResolver for object type \'%s\' processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
+                $this->getMaybeNamespacedTypeName(),
+                $fieldName,
+                (string) $this->getID($object)
+            ),
+            [ErrorDataTokens::FIELD_NAME => $fieldName]
+        );
+    }
+
+    /**
+     * Return an error to indicate that no fieldResolver processes this field,
+     * which is different than returning a null value.
+     * Needed for compatibility with CustomPostUnionTypeResolver
+     * (so that data-fields aimed for another post_type are not retrieved)
+     */
+    protected function getValidationFailedError(string $fieldName, array $validationDescriptions): Error
+    {
+        if (count($validationDescriptions) == 1) {
+            return new Error(
+                ErrorCodes::VALIDATION_FAILED,
+                $validationDescriptions[0],
+                [ErrorDataTokens::FIELD_NAME => $fieldName]
+            );
+        }
+        return new Error(
+            ErrorCodes::VALIDATION_FAILED,
+            sprintf(
+                $this->__('Field \'%s\' could not be processed due to previous error(s): \'%s\'', 'pop-component-model'),
+                $fieldName,
+                implode($this->__('\', \'', 'pop-component-model'), $validationDescriptions)
+            ),
+            [ErrorDataTokens::FIELD_NAME => $fieldName]
         );
     }
 
