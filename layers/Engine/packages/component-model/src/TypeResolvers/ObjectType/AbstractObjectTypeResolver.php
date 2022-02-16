@@ -420,18 +420,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 );
             }
         }
+
         if ($schemaErrors) {
-            return new Error(
-                ErrorCodes::NESTED_SCHEMA_ERRORS,
-                sprintf(
-                    $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
-                    $fieldName
-                ),
-                [
-                    ErrorDataTokens::FIELD_NAME => $fieldName,
-                    'argumentErrors' => $schemaErrors,
-                ]
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    sprintf(
+                        $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
+                        $fieldName
+                    ),
+                    ErrorCodes::NESTED_SCHEMA_ERRORS,
+                    LocationHelper::getNonSpecificLocation(),
+                )
             );
+            return null;
         }
 
         // Important: calculate 'isAnyFieldArgumentValueDynamic' before resolving the args for the object
@@ -481,17 +482,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
         }
         if ($maybeObjectErrors) {
-            return new Error(
-                ErrorCodes::NESTED_DB_ERRORS,
-                sprintf(
-                    $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
-                    $fieldName
-                ),
-                [
-                    ErrorDataTokens::FIELD_NAME => $fieldName,
-                    'argumentErrors' => $maybeObjectErrors,
-                ]
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    sprintf(
+                        $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
+                        $fieldName
+                    ),
+                    ErrorCodes::NESTED_DB_ERRORS,
+                    LocationHelper::getNonSpecificLocation(),
+                )
             );
+            return null;
         }
         if ($maybeObjectDeprecations) {
             $id = $this->getID($object);
