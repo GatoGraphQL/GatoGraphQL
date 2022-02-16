@@ -1634,15 +1634,19 @@ class Engine implements EngineInterface
                     }
                 }
             }
-            foreach ($engineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
-                $iterationObjectErrors[(string)$objectTypeFieldResolutionFeedbackError->getObjectID()][] = $this->getErrorService()->getErrorOutput(
-                    new Error(
-                        $objectTypeFieldResolutionFeedbackError->getCode(),
-                        $objectTypeFieldResolutionFeedbackError->getMessage()
-                    ),
-                    [$objectTypeFieldResolutionFeedbackError->getField()]
-                );
-            }
+            $this->transferFeedback(
+                $engineIterationFeedbackStore,
+                $iterationObjectErrors,
+                $iterationObjectWarnings,
+                $iterationObjectDeprecations,
+                $iterationObjectNotices,
+                $iterationObjectTraces,
+                $iterationSchemaErrors,
+                $iterationSchemaWarnings,
+                $iterationSchemaDeprecations,
+                $iterationSchemaNotices,
+                $iterationSchemaTraces
+            );
             /** @phpstan-ignore-next-line */
             if ($iterationObjectErrors !== []) {
                 $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationObjectErrors, true, $relationalTypeResolver);
@@ -1993,6 +1997,39 @@ class Engine implements EngineInterface
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
 
         return $ret;
+    }
+
+    private function transferFeedback(
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        array &$iterationObjectErrors,
+        array &$iterationObjectWarnings,
+        array &$iterationObjectDeprecations,
+        array &$iterationObjectNotices,
+        array &$iterationObjectTraces,
+        array &$iterationSchemaErrors,
+        array &$iterationSchemaWarnings,
+        array &$iterationSchemaDeprecations,
+        array &$iterationSchemaNotices,
+        array &$iterationSchemaTraces
+    ): void {
+        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
+            $iterationObjectErrors[(string)$objectTypeFieldResolutionFeedbackError->getObjectID()][] = $this->getErrorService()->getErrorOutput(
+                new Error(
+                    $objectTypeFieldResolutionFeedbackError->getCode(),
+                    $objectTypeFieldResolutionFeedbackError->getMessage(),
+                    $objectTypeFieldResolutionFeedbackError->getExtensions(),
+                ),
+                [$objectTypeFieldResolutionFeedbackError->getField()]
+            );
+        }
+        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
+            $iterationObjectWarnings[(string)$objectTypeFieldResolutionFeedbackWarning->getObjectID()][] = [
+                Tokens::PATH => [$objectTypeFieldResolutionFeedbackWarning->getField()],
+                Tokens::MESSAGE => $objectTypeFieldResolutionFeedbackWarning->getMessage(),
+                Tokens::LOCATIONS => [$objectTypeFieldResolutionFeedbackWarning->getLocation()->toArray()],
+                Tokens::EXTENSIONS => $objectTypeFieldResolutionFeedbackWarning->getExtensions(),
+            ];
+        }
     }
 
     /**
