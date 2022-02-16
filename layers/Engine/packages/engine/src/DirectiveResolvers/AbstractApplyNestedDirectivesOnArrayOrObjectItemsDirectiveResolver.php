@@ -269,6 +269,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $previousDBItems,
                         $variables,
                         $messages,
+                        $engineIterationFeedbackStore,
                         $objectErrors,
                         $objectWarnings,
                         $objectDeprecations,
@@ -509,6 +510,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         array $previousDBItems,
         array &$variables,
         array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
@@ -546,20 +548,21 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $objectTypeFieldResolutionFeedbackStore,
                         $options
                     );
-                    if (GeneralUtils::isError($resolvedValue)) {
-                        // Show the error message, and return nothing
-                        /** @var Error */
-                        $error = $resolvedValue;
-                        $objectErrors[(string)$id][] = [
-                            Tokens::PATH => [$this->directive],
-                            Tokens::MESSAGE => sprintf(
-                                $this->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
-                                $value,
-                                $id,
-                                $error->getMessageOrCode(),
-                                $key
-                            ),
-                        ];
+                    $errorMessage = sprintf(
+                        $this->__('Executing field \'%s\' on object with ID \'%s\' produced error(s). Setting expression \'%s\' was ignored', 'pop-component-model'),
+                        $value,
+                        $id,
+                        $key
+                    );
+                    $hasErrors = $this->transferNestedDirectiveFeedback(
+                        $id,
+                        $field,
+                        $relationalTypeResolver,
+                        $engineIterationFeedbackStore,
+                        $objectTypeFieldResolutionFeedbackStore,
+                        $errorMessage,
+                    );
+                    if ($hasErrors) {
                         continue;
                     }
                     $value = $resolvedValue;
@@ -579,20 +582,21 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $objectTypeFieldResolutionFeedbackStore,
                         $options
                     );
-                    if (GeneralUtils::isError($resolvedValue)) {
-                        // Show the error message, and return nothing
-                        /** @var Error */
-                        $error = $resolvedValue;
-                        $objectErrors[(string)$id][] = [
-                            Tokens::PATH => [$this->directive],
-                            Tokens::MESSAGE => sprintf(
-                                $this->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
-                                $value,
-                                $id,
-                                $error->getMessageOrCode(),
-                                $key
-                            ),
-                        ];
+                    $errorMessage = sprintf(
+                        $this->__('Executing field \'%s\' on object with ID \'%s\' produced error(s). Setting expression \'%s\' was ignored', 'pop-component-model'),
+                        $value,
+                        $id,
+                        $key
+                    );
+                    $hasErrors = $this->transferNestedDirectiveFeedback(
+                        $id,
+                        $field,
+                        $relationalTypeResolver,
+                        $engineIterationFeedbackStore,
+                        $objectTypeFieldResolutionFeedbackStore,
+                        $errorMessage,
+                    );
+                    if ($hasErrors) {
                         continue;
                     }
                     $existingValue[] = $resolvedValue;
