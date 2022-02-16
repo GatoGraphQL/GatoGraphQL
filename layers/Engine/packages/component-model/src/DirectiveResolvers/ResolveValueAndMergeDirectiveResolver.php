@@ -220,6 +220,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$objectWarnings,
         array &$objectDeprecations
     ): void {
+        // 1. Resolve the value against the TypeResolver
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $value = $relationalTypeResolver->resolveValue(
             $object,
@@ -229,6 +230,9 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $objectTypeFieldResolutionFeedbackStore,
         );
         
+        // 2. Transfer the feedback
+
+        // 3. Add the output in the DB
         $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey(
             $relationalTypeResolver,
             $field,
