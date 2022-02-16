@@ -378,16 +378,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              * (so that data-fields aimed for another post_type are not retrieved)
              */
             $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
-            $objectTypeFieldResolutionFeedbackStore->addError(new ObjectTypeFieldResolutionFeedback(
-                sprintf(
-                    $this->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
-                    $fieldName,
-                    $this->getMaybeNamespacedTypeName(),
-                    $this->getID($object)
-                ),
-                ErrorCodes::NO_FIELD,
-                LocationHelper::getNonSpecificLocation(),
-            ));
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    sprintf(
+                        $this->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
+                        $fieldName,
+                        $this->getMaybeNamespacedTypeName(),
+                        $this->getID($object)
+                    ),
+                    ErrorCodes::NO_FIELD,
+                    LocationHelper::getNonSpecificLocation(),
+                )
+            );
             return null;
         }
 
