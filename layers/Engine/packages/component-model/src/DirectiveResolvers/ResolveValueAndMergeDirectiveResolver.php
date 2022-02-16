@@ -249,16 +249,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 /** @var Error */
                 $error = $value;
                 $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$field]);
-            } else {
-                foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
-                    $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput(
-                        new Error(
-                            $objectTypeFieldResolutionFeedbackError->getCode(),
-                            $objectTypeFieldResolutionFeedbackError->getMessage()
-                        ),
-                        [$field]
-                    );
-                }
             }
 
             // For GraphQL, set the response for the failing field as null
