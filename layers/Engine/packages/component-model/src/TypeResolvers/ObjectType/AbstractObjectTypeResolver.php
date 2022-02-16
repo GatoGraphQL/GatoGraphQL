@@ -613,14 +613,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $fieldTypeModifiers = $objectTypeFieldResolver->getFieldTypeModifiers($this, $field);
                 $fieldTypeIsNonNullable = ($fieldTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) === SchemaTypeModifiers::NON_NULLABLE;
                 if ($fieldTypeIsNonNullable) {
-                    return new Error(
-                        ErrorCodes::NON_NULLABLE_FIELD,
-                        sprintf(
-                            $this->__('Non-nullable field \'%s\' cannot return null', 'pop-component-model'),
-                            $fieldName
-                        ),
-                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            sprintf(
+                                $this->__('Non-nullable field \'%s\' cannot return null', 'pop-component-model'),
+                                $fieldName
+                            ),
+                            ErrorCodes::NON_NULLABLE_FIELD,
+                            LocationHelper::getNonSpecificLocation(),
+                        )
                     );
+                    return null;
                 }
             } elseif (GeneralUtils::isError($value)) {
                 // If it's an Error, can return straight
@@ -659,15 +662,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     !$fieldIsArrayType
                     && is_array($value)
                 ) {
-                    return new Error(
-                        ErrorCodes::MUST_NOT_BE_ARRAY_FIELD,
-                        sprintf(
-                            $this->__('Field \'%s\' must not return an array, but returned \'%s\'', 'pop-component-model'),
-                            $fieldName,
-                            $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
-                        ),
-                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            sprintf(
+                                $this->__('Field \'%s\' must not return an array, but returned \'%s\'', 'pop-component-model'),
+                                $fieldName,
+                                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                            ),
+                            ErrorCodes::MUST_NOT_BE_ARRAY_FIELD,
+                            LocationHelper::getNonSpecificLocation(),
+                        )
                     );
+                    return null;
                 }
                 if (
                     $fieldIsArrayType
@@ -680,15 +686,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     } else {
                         $valueAsString = (string) $value;
                     }
-                    return new Error(
-                        ErrorCodes::MUST_BE_ARRAY_FIELD,
-                        sprintf(
-                            $this->__('Field \'%s\' must return an array, but returned \'%s\'', 'pop-component-model'),
-                            $fieldName,
-                            $valueAsString
-                        ),
-                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            sprintf(
+                                $this->__('Field \'%s\' must return an array, but returned \'%s\'', 'pop-component-model'),
+                                $fieldName,
+                                $valueAsString
+                            ),
+                            ErrorCodes::MUST_BE_ARRAY_FIELD,
+                            LocationHelper::getNonSpecificLocation(),
+                        )
                     );
+                    return null;
                 }
                 $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
                 if (
@@ -699,14 +708,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         fn (mixed $arrayItem) => $arrayItem === null
                     )
                 ) {
-                    return new Error(
-                        ErrorCodes::ARRAY_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
-                        sprintf(
-                            $this->__('Field \'%s\' must not return an array with null items', 'pop-component-model'),
-                            $fieldName
-                        ),
-                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            sprintf(
+                                $this->__('Field \'%s\' must not return an array with null items', 'pop-component-model'),
+                                $fieldName
+                            ),
+                            ErrorCodes::ARRAY_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
+                            LocationHelper::getNonSpecificLocation(),
+                        )
                     );
+                    return null;
                 }
                 $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
                 if (
@@ -717,15 +729,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         fn (mixed $arrayItem) => is_array($arrayItem)
                     )
                 ) {
-                    return new Error(
-                        ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
-                        sprintf(
-                            $this->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'pop-component-model'),
-                            $fieldName,
-                            $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
-                        ),
-                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            sprintf(
+                                $this->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'pop-component-model'),
+                                $fieldName,
+                                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                            ),
+                            ErrorCodes::MUST_NOT_BE_ARRAY_OF_ARRAYS_FIELD,
+                            LocationHelper::getNonSpecificLocation(),
+                        )
                     );
+                    return null;
                 }
                 if (
                     $fieldIsArrayOfArraysType
@@ -736,15 +751,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         fn (mixed $arrayItem) => !is_array($arrayItem) && $arrayItem !== null
                     )
                 ) {
-                    return new Error(
-                        ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
-                        sprintf(
-                            $this->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'pop-component-model'),
-                            $fieldName,
-                            $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
-                        ),
-                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            sprintf(
+                                $this->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'pop-component-model'),
+                                $fieldName,
+                                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                            ),
+                            ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
+                            LocationHelper::getNonSpecificLocation(),
+                        )
                     );
+                    return null;
                 }
                 $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
                 if (
@@ -758,14 +776,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         ) !== [],
                     )
                 ) {
-                    return new Error(
-                        ErrorCodes::ARRAY_OF_ARRAYS_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
-                        sprintf(
-                            $this->__('Field \'%s\' must not return an array of arrays with null items', 'pop-component-model'),
-                            $fieldName
-                        ),
-                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            sprintf(
+                                $this->__('Field \'%s\' must not return an array of arrays with null items', 'pop-component-model'),
+                                $fieldName
+                            ),
+                            ErrorCodes::ARRAY_OF_ARRAYS_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
+                            LocationHelper::getNonSpecificLocation(),
+                        )
                     );
+                    return null;
                 }
             }
 
@@ -773,16 +794,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return $value;
         }
 
-        return new Error(
-            ErrorCodes::NO_FIELD_RESOLVER_UNIT_PROCESSES_FIELD,
-            sprintf(
-                $this->__('No FieldResolver for object type \'%s\' processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
-                $this->getMaybeNamespacedTypeName(),
-                $fieldName,
-                (string) $this->getID($object)
-            ),
-            [ErrorDataTokens::FIELD_NAME => $fieldName]
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                sprintf(
+                    $this->__('No FieldResolver for object type \'%s\' processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
+                    $this->getMaybeNamespacedTypeName(),
+                    $fieldName,
+                    (string) $this->getID($object)
+                ),
+                ErrorCodes::NO_FIELD_RESOLVER_UNIT_PROCESSES_FIELD,
+                LocationHelper::getNonSpecificLocation(),
+            )
         );
+        return null;
     }
 
     /**
