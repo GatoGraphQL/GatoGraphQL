@@ -406,7 +406,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         null,
                         LocationHelper::getNonSpecificLocation(),
                         $this,
-                        $field,//$warningEntry[Tokens::PATH],
+                        $field, //$warningEntry[Tokens::PATH],
                         $warningEntry[Tokens::EXTENSIONS] ?? [],
                     )
                 );
@@ -465,7 +465,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         null,
                         LocationHelper::getNonSpecificLocation(),
                         $this,
-                        $field,//$warningEntry[Tokens::PATH],
+                        $field, //$warningEntry[Tokens::PATH],
                         $id,
                         $warningEntry[Tokens::EXTENSIONS] ?? [],
                     )
@@ -495,7 +495,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         null,
                         LocationHelper::getNonSpecificLocation(),
                         $this,
-                        $field,//$deprecationEntry[Tokens::PATH],
+                        $field, //$deprecationEntry[Tokens::PATH],
                         $id,
                         $deprecationEntry[Tokens::EXTENSIONS] ?? [],
                     )
