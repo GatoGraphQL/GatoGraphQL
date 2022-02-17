@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\CheckpointProcessors;
 
 use PoP\ComponentModel\Checkpoint\CheckpointError;
-use PoP\ComponentModel\Error\Error;
 
 interface CheckpointProcessorInterface
 {
@@ -15,7 +14,7 @@ interface CheckpointProcessorInterface
     public function getCheckpointsToProcess(): array;
 
     /**
-     * @return Error|null `null` if successful, or Error with a descriptive error message otherwise
+     * @return CheckpointError|null `null` if successful, or CheckpointError with a descriptive error message and code otherwise
      */
     public function validateCheckpoint(array $checkpoint): ?CheckpointError;
 }
