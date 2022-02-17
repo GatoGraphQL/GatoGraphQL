@@ -1017,7 +1017,7 @@ class Engine implements EngineInterface
         // Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
         foreach ($checkpoints as $checkpoint) {
             $maybeCheckpointError = $this->getCheckpointProcessorManager()->getProcessor($checkpoint)->validateCheckpoint($checkpoint);
-            if (GeneralUtils::isError($maybeCheckpointError)) {
+            if ($maybeCheckpointError !== null) {
                 return $maybeCheckpointError;
             }
         }
