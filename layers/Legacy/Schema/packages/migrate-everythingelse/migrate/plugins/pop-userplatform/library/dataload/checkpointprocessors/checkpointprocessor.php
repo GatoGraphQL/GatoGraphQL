@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\ComponentModel\Error\Error;
 
@@ -15,7 +16,7 @@ class PoPCore_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?CheckpointError
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_PROFILEACCESS:

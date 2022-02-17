@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\ComponentModel\Error\Error;
 use PoP\Root\App;
@@ -16,7 +17,7 @@ class GD_ContentCreation_Dataload_UserCheckpointProcessor extends AbstractCheckp
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?CheckpointError
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_USERCANEDIT:

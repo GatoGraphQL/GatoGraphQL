@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\ComponentModel\Error\Error;
 
@@ -11,7 +12,7 @@ class PoP_MultiDomain_Dataload_CheckpointProcessor extends AbstractCheckpointPro
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?CheckpointError
     {
         switch ($checkpoint[1]) {
             case PoP_Domain_Dataload_CheckpointProcessor::GD_DATALOAD_CHECKPOINT_DOMAINVALID:

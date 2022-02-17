@@ -1,8 +1,8 @@
 <?php
 
+use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\State\ApplicationState;
 
 class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
@@ -17,7 +17,7 @@ class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?CheckpointError
     {
         $current_user_id = \PoP\Root\App::getState('current-user-id');
         switch ($checkpoint[1]) {
