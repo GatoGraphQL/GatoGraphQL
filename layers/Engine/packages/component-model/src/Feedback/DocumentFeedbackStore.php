@@ -138,7 +138,7 @@ class DocumentFeedbackStore
     }
 
     /**
-     * @param DocumentFeedbackInterface[] $errors
+     * @param DocumentFeedbackInterface[] $traces
      */
     public function setTraces(array $traces): void
     {

@@ -15,9 +15,6 @@ trait InvokeRelationalTypeResolverDirectiveResolverTrait
 {
     abstract protected function getDirective(): string;
     
-    /**
-     * @return bool Indicates if there were errors
-     */
     protected function maybeNestDirectiveFeedback(
         RelationalTypeResolverInterface $relationalTypeResolver,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
