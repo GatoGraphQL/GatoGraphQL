@@ -91,6 +91,7 @@ class GuzzleHelpers
      * @param string $url The Endpoint URL
      * @param array $bodyJSONQueries The form params
      * @return mixed The payload if successful as an array
+     * @throws GuzzleInvalidResponseException
      */
     public static function requestSingleURLMultipleQueriesAsyncJSON(string $url, array $bodyJSONQueries = [], string $method = 'POST'): mixed
     {
