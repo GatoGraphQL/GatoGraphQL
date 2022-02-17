@@ -72,7 +72,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
         switch ($fieldName) {
             case 'locationsmapURL':
                 $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($locations)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return null;
                 }
                 return

@@ -136,7 +136,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // Events can have no location
                 $value = array();
                 $location = $objectTypeResolver->resolveValue($event, 'location', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($location)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $location;
                 } elseif ($location) {
                     $value[] = $location;

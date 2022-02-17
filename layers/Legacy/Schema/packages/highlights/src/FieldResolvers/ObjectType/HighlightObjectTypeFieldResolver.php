@@ -119,7 +119,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'title':
             case 'excerpt':
             case 'content':
-                $value = $customPostTypeAPI->getPlainTextContent($highlight);
+                $value = $customPostTypeAPI->getRawContent($highlight);
                 if ($fieldName == 'title') {
                     return limitString($value, 100);
                 } elseif ($fieldName == 'excerpt') {
@@ -132,7 +132,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
             case 'highlightedPostURL':
                 $highlightedPost = $objectTypeResolver->resolveValue($highlight, 'highlightedpost', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($highlightedPost)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $highlightedPost;
                 }
                 return $customPostTypeAPI->getPermalink($highlightedPost);

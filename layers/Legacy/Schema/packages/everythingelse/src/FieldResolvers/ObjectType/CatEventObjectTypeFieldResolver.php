@@ -100,7 +100,7 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
             case 'catName':
                 $cat = $objectTypeResolver->resolveValue($event, 'mainCategory', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($cat)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $cat;
                 } elseif ($cat) {
                     return $eventTagTypeAPI->getTermName($cat, $eventTypeAPI->getEventCategoryTaxonomy());

@@ -156,7 +156,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     $objectTypeFieldResolutionFeedbackStore,
                     $options
                 );
-                if (GeneralUtils::isError($schemaID)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $schemaID;
                 }
                 // Obtain the instance of the schema
