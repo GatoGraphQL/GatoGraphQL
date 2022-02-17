@@ -48,7 +48,8 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
             $objectID,
             null,
             $objectTypeFieldResolutionFeedback->getExtensions(),
-            $objectTypeFieldResolutionFeedback->getData()
+            $objectTypeFieldResolutionFeedback->getData(),
+            $objectTypeFieldResolutionFeedback->getNested()
         );
     }
 
