@@ -18,7 +18,7 @@ trait InvokeRelationalTypeResolverDirectiveResolverTrait
     /**
      * @return bool Indicates if there were errors
      */
-    protected function transferNestedDirectiveFeedback(
+    protected function maybeNestDirectiveFeedback(
         RelationalTypeResolverInterface $relationalTypeResolver,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         string $errorMessage,
