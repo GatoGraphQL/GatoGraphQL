@@ -5,13 +5,23 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\CheckpointProcessors;
 
 use PoP\ComponentModel\Checkpoint\CheckpointError;
+use PoP\ComponentModel\FeedbackMessageProviders\CheckpointErrorMessageProvider;
 use PoP\Root\App;
-use PoP\ComponentModel\Error\Error;
 
 class MutationCheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public const HOOK_MUTATIONS_NOT_SUPPORTED_ERROR_MSG = __CLASS__ . ':MutationsNotSupportedErrorMsg';
     public const ENABLED_MUTATIONS = 'enabled-mutations';
+
+    private ?CheckpointErrorMessageProvider $checkpointErrorMessageProvider = null;
+
+    final public function setCheckpointErrorMessageProvider(CheckpointErrorMessageProvider $checkpointErrorMessageProvider): void
+    {
+        $this->checkpointErrorMessageProvider = $checkpointErrorMessageProvider;
+    }
+    final protected function getCheckpointErrorMessageProvider(): CheckpointErrorMessageProvider
+    {
+        return $this->checkpointErrorMessageProvider ??= $this->instanceManager->getInstance(CheckpointErrorMessageProvider::class);
+    }
 
     public function getCheckpointsToProcess(): array
     {
@@ -25,13 +35,9 @@ class MutationCheckpointProcessor extends AbstractCheckpointProcessor
         switch ($checkpoint[1]) {
             case self::ENABLED_MUTATIONS:
                 if (!App::getState('are-mutations-enabled')) {
-                    $errorMessage = App::applyFilters(
-                        self::HOOK_MUTATIONS_NOT_SUPPORTED_ERROR_MSG,
-                        $this->__('Mutations cannot be executed', 'component-model')
-                    );
-                    return new Error(
-                        'mutations-not-supported',
-                        $errorMessage
+                    return new CheckpointError(
+                        $this->getCheckpointErrorMessageProvider()->getMessage(CheckpointErrorMessageProvider::E1),
+                        $this->getCheckpointErrorMessageProvider()->getNamespacedCode(CheckpointErrorMessageProvider::E1),
                     );
                 }
                 break;
