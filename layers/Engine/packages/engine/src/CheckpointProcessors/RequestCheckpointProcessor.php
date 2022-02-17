@@ -41,7 +41,6 @@ class RequestCheckpointProcessor extends AbstractCheckpointProcessor
                         $this->getCheckpointErrorMessageProvider()->getMessage(CheckpointErrorMessageProvider::E1),
                         $this->getCheckpointErrorMessageProvider()->getNamespacedCode(CheckpointErrorMessageProvider::E1),
                     );
-                    return new Error('notdoingpost');
                 }
                 break;
         }
