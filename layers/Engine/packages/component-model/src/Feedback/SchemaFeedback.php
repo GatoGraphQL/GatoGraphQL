@@ -10,7 +10,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInterface
 {
     public function __construct(
-        FeedbackResolution $feedbackResolution,
+        FeedbackItemResolution $feedbackItemResolution,
         Location $location,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         protected string $field,
@@ -22,7 +22,7 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         protected array $nested = [],
     ) {
         parent::__construct(
-            $feedbackResolution,
+            $feedbackItemResolution,
             $location,
             $extensions,
             $data,

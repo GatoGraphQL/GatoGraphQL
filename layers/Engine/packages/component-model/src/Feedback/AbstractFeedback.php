@@ -7,15 +7,15 @@ namespace PoP\ComponentModel\Feedback;
 abstract class AbstractFeedback implements FeedbackInterface
 {
     public function __construct(
-        protected FeedbackResolution $feedbackResolution,
+        protected FeedbackItemResolution $feedbackItemResolution,
         /** @var array<string, mixed> */
         protected array $data = [],
     ) {
     }
 
-    public function getFeedbackResolution(): FeedbackResolution
+    public function getFeedbackItemResolution(): FeedbackItemResolution
     {
-        return $this->feedbackResolution;
+        return $this->feedbackItemResolution;
     }
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
-class FeedbackResolution
+class FeedbackItemResolution
 {
     public function __construct(
         protected string $feedbackProviderServiceClass,

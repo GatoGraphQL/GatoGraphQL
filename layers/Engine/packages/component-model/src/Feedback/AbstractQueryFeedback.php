@@ -9,7 +9,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFeedbackInterface
 {
     public function __construct(
-        FeedbackResolution $feedbackResolution,
+        FeedbackItemResolution $feedbackItemResolution,
         protected Location $location,
         /** @var array<string, mixed> */
         protected array $extensions = [],
@@ -17,7 +17,7 @@ abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFe
         array $data = [],
     ) {
         parent::__construct(
-            $feedbackResolution,
+            $feedbackItemResolution,
             $data,
         );
     }
