@@ -386,6 +386,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     ),
                     ErrorCodes::NO_FIELD,
                     LocationHelper::getNonSpecificLocation(),
+                    $this,
                 )
             );
             return null;
@@ -428,6 +429,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     ),
                     ErrorCodes::NESTED_SCHEMA_ERRORS,
                     LocationHelper::getNonSpecificLocation(),
+                    $this,
                 )
             );
             return null;
@@ -489,6 +491,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     ),
                     ErrorCodes::NESTED_DB_ERRORS,
                     LocationHelper::getNonSpecificLocation(),
+                    $this,
                 )
             );
             return null;
@@ -524,6 +527,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             $this->getValidationFailedErrorMessage($fieldName, $maybeErrors),
                             ErrorCodes::VALIDATION_FAILED,
                             LocationHelper::getNonSpecificLocation(),
+                            $this,
                         )
                     );
                     return null;
@@ -551,6 +555,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         $this->getValidationFailedErrorMessage($fieldName, $validationErrorDescriptions),
                         ErrorCodes::VALIDATION_FAILED,
                         LocationHelper::getNonSpecificLocation(),
+                        $this,
                     )
                 );
                 return null;
@@ -593,6 +598,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         $errorMessage,
                         'field-resolution-error',
                         LocationHelper::getNonSpecificLocation(),
+                        $this,
                     )
                 );
                 return null;
@@ -635,6 +641,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             ),
                             ErrorCodes::NON_NULLABLE_FIELD,
                             LocationHelper::getNonSpecificLocation(),
+                            $this,
                         )
                     );
                     return null;
@@ -685,6 +692,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             ),
                             ErrorCodes::MUST_NOT_BE_ARRAY_FIELD,
                             LocationHelper::getNonSpecificLocation(),
+                            $this,
                         )
                     );
                     return null;
@@ -709,6 +717,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             ),
                             ErrorCodes::MUST_BE_ARRAY_FIELD,
                             LocationHelper::getNonSpecificLocation(),
+                            $this,
                         )
                     );
                     return null;
@@ -730,6 +739,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             ),
                             ErrorCodes::ARRAY_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
                             LocationHelper::getNonSpecificLocation(),
+                            $this,
                         )
                     );
                     return null;
@@ -752,6 +762,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             ),
                             ErrorCodes::MUST_NOT_BE_ARRAY_OF_ARRAYS_FIELD,
                             LocationHelper::getNonSpecificLocation(),
+                            $this,
                         )
                     );
                     return null;
@@ -774,6 +785,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             ),
                             ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
                             LocationHelper::getNonSpecificLocation(),
+                            $this,
                         )
                     );
                     return null;
@@ -798,6 +810,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             ),
                             ErrorCodes::ARRAY_OF_ARRAYS_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
                             LocationHelper::getNonSpecificLocation(),
+                            $this,
                         )
                     );
                     return null;
@@ -818,6 +831,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ),
                 ErrorCodes::NO_FIELD_RESOLVER_UNIT_PROCESSES_FIELD,
                 LocationHelper::getNonSpecificLocation(),
+                $this,
             )
         );
         return null;
