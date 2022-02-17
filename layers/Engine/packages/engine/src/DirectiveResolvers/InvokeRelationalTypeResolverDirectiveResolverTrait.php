@@ -6,6 +6,7 @@ namespace PoP\Engine\DirectiveResolvers;
 
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -37,15 +38,12 @@ trait InvokeRelationalTypeResolverDirectiveResolverTrait
 
         // If there was an error, add it as nested
         if ($errors !== []) {
-            $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                new ObjectFeedback(
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
                     $errorMessage,
                     'nested-directive-error',
                     LocationHelper::getNonSpecificLocation(),
                     $relationalTypeResolver,
-                    $field,
-                    $id,
-                    $this->getDirective(),
                     [],
                     [],
                     $errors
