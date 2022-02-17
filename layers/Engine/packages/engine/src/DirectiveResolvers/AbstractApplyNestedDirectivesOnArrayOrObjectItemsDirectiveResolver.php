@@ -8,11 +8,9 @@ use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalMetaDirectiveResolver;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Component;
@@ -419,22 +417,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $arrayItemValue = $dbItems[(string)$id][$arrayItemPropertyOutputKey];
                         // Remove this temporary property from $dbItems
                         unset($dbItems[(string)$id][$arrayItemPropertyOutputKey]);
-                        // Validate it's not an error
-                        if (GeneralUtils::isError($arrayItemValue)) {
-                            /** @var Error */
-                            $error = $arrayItemValue;
-                            $objectErrors[(string)$id][] = [
-                                Tokens::PATH => [$this->directive],
-                                Tokens::MESSAGE => sprintf(
-                                    $this->__('Transformation of element with key \'%s\' on array from property \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
-                                    $key,
-                                    $fieldOutputKey,
-                                    $id,
-                                    $error->getMessageOrCode()
-                                ),
-                            ];
-                            continue;
-                        }
                         // Place the result for the array in the original property
                         $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $objectTraces, $id, $fieldOutputKey, $key, $arrayItemValue);
                     }
