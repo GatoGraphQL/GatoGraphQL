@@ -6,7 +6,6 @@ namespace PoP\Engine\CheckpointProcessors;
 
 use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
-use PoP\ComponentModel\Error\Error;
 use PoP\Engine\FeedbackMessageProviders\CheckpointErrorMessageProvider;
 use PoP\Root\App;
 

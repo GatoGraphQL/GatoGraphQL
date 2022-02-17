@@ -50,7 +50,7 @@ class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
                     return new CheckpointError(
                         $this->getCheckpointErrorMessageProvider()->getMessage(CheckpointErrorMessageProvider::E2),
                         $this->getCheckpointErrorMessageProvider()->getNamespacedCode(CheckpointErrorMessageProvider::E2),
-                    );  
+                    );
                 }
                 break;
         }
