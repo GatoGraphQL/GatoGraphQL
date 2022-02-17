@@ -10,8 +10,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements ObjectTypeFieldResolutionFeedbackInterface
 {
     public function __construct(
-        string $message,
-        ?string $code,
+        FeedbackResolution $feedbackResolution,
         Location $location,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var array<string, mixed> */
@@ -22,8 +21,7 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
         protected array $nested = [],
     ) {
         parent::__construct(
-            $message,
-            $code,
+            $feedbackResolution,
             $location,
             $extensions,
             $data,
