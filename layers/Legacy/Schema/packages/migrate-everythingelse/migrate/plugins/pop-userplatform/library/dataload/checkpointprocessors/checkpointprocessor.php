@@ -15,7 +15,7 @@ class PoPCore_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?Error
+    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_PROFILEACCESS:

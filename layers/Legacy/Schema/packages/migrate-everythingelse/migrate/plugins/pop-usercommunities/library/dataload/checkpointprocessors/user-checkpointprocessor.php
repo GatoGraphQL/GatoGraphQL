@@ -19,7 +19,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?Error
+    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError
     {
         $current_user_id = \PoP\Root\App::getState('current-user-id');
         switch ($checkpoint[1]) {

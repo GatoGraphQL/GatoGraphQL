@@ -16,5 +16,5 @@ interface CheckpointProcessorInterface
     /**
      * @return Error|null `null` if successful, or Error with a descriptive error message otherwise
      */
-    public function validateCheckpoint(array $checkpoint): ?Error;
+    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError;
 }

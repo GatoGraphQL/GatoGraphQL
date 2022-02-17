@@ -19,7 +19,7 @@ class RequestCheckpointProcessor extends AbstractCheckpointProcessor
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?Error
+    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError
     {
         switch ($checkpoint[1]) {
             case self::DOING_POST:

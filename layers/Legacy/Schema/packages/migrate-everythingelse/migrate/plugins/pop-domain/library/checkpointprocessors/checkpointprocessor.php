@@ -13,7 +13,7 @@ class PoP_Domain_Dataload_CheckpointProcessor extends AbstractCheckpointProcesso
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?Error
+    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_DOMAINVALID:

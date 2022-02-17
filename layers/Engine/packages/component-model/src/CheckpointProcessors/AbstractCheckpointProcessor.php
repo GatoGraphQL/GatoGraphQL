@@ -14,7 +14,7 @@ abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterfa
     /**
      * By default there's no problem
      */
-    public function validateCheckpoint(array $checkpoint): ?Error
+    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError
     {
         return null;
     }

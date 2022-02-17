@@ -17,7 +17,7 @@ class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?Error
+    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError
     {
         $current_user_id = \PoP\Root\App::getState('current-user-id');
         switch ($checkpoint[1]) {

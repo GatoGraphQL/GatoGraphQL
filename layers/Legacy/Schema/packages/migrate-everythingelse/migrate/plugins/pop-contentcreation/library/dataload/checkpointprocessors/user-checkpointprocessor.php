@@ -16,7 +16,7 @@ class GD_ContentCreation_Dataload_UserCheckpointProcessor extends AbstractCheckp
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?Error
+    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_USERCANEDIT:
