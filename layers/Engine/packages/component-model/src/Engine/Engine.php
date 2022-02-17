@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
+use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -1012,7 +1013,7 @@ class Engine implements EngineInterface
         $array_pointer[$moduleOutputName][$key] = $value;
     }
 
-    public function validateCheckpoints(array $checkpoints): bool | Error
+    public function validateCheckpoints(array $checkpoints): ?CheckpointError
     {
         // Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
         foreach ($checkpoints as $checkpoint) {
@@ -1022,7 +1023,7 @@ class Engine implements EngineInterface
             }
         }
 
-        return true;
+        return null;
     }
 
     protected function getModulePathKey(array $module_path, array $module): string
@@ -1151,7 +1152,7 @@ class Engine implements EngineInterface
             if ($load_data && $checkpoints = ($data_properties[DataLoading::DATA_ACCESS_CHECKPOINTS] ?? null)) {
                 // Check if the module fails checkpoint validation. If so, it must not load its data or execute the componentMutationResolverBridge
                 $dataaccess_checkpoint_validation = $this->validateCheckpoints($checkpoints);
-                $load_data = !GeneralUtils::isError($dataaccess_checkpoint_validation);
+                $load_data = $dataaccess_checkpoint_validation !== null;
             }
 
             // The $props is directly moving the array to the corresponding path
@@ -1202,7 +1203,7 @@ class Engine implements EngineInterface
                     if ($mutation_checkpoints = $data_properties[DataLoading::ACTION_EXECUTION_CHECKPOINTS] ?? null) {
                         // Check if the module fails checkpoint validation. If so, it must not load its data or execute the componentMutationResolverBridge
                         $mutation_checkpoint_validation = $this->validateCheckpoints($mutation_checkpoints);
-                        $execute = !GeneralUtils::isError($mutation_checkpoint_validation);
+                        $execute = $mutation_checkpoint_validation !== null;
                     }
                     if ($execute) {
                         $executed = $componentMutationResolverBridge->executeMutation($data_properties);

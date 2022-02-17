@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointSets\CheckpointSets;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -18,7 +19,6 @@ use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
@@ -1039,7 +1039,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected function getValidationCheckpointsErrorMessage(
         array $checkpointSet,
-        Error $error,
+        CheckpointError $checkpointError,
         string $errorMessage,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
@@ -1062,13 +1062,19 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($checkpointSets = $this->getValidationCheckpointSets($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
             $errorMessages = [];
             foreach ($checkpointSets as $checkpointSet) {
-                $validation = $this->getEngine()->validateCheckpoints($checkpointSet);
-                if (GeneralUtils::isError($validation)) {
-                    /** @var Error */
-                    $error = $validation;
-                    $errorMessage = $error->getMessageOrCode();
+                $checkpointError = $this->getEngine()->validateCheckpoints($checkpointSet);
+                if ($checkpointError !== null) {
+                    $errorMessage = $checkpointError->getMessage();
                     // Allow to customize the error message for the failing entity
-                    $errorMessages[] = $this->getValidationCheckpointsErrorMessage($checkpointSet, $error, $errorMessage, $objectTypeResolver, $object, $fieldName, $fieldArgs);
+                    $errorMessages[] = $this->getValidationCheckpointsErrorMessage(
+                        $checkpointSet,
+                        $checkpointError,
+                        $errorMessage,
+                        $objectTypeResolver,
+                        $object,
+                        $fieldName,
+                        $fieldArgs
+                    );
                 }
             }
             if ($errorMessages) {
