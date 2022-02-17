@@ -537,10 +537,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $key
                     );
                     $hasErrors = $this->transferNestedDirectiveFeedback(
-                        $id,
-                        $field,
                         $relationalTypeResolver,
-                        $engineIterationFeedbackStore,
                         $objectTypeFieldResolutionFeedbackStore,
                         $errorMessage,
                     );
@@ -571,10 +568,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $key
                     );
                     $hasErrors = $this->transferNestedDirectiveFeedback(
-                        $id,
-                        $field,
                         $relationalTypeResolver,
-                        $engineIterationFeedbackStore,
                         $objectTypeFieldResolutionFeedbackStore,
                         $errorMessage,
                     );

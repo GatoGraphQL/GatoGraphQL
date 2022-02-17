@@ -19,25 +19,14 @@ trait InvokeRelationalTypeResolverDirectiveResolverTrait
      * @return bool Indicates if there were errors
      */
     protected function transferNestedDirectiveFeedback(
-        int | string $id,
-        string $field,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         string $errorMessage,
     ): bool {
-        // Transfer the feedback, but without the errors
-        $errors = $objectTypeFieldResolutionFeedbackStore->getErrors();
-        $objectTypeFieldResolutionFeedbackStore->setErrors([]);
-        $engineIterationFeedbackStore->incorporate(
-            $objectTypeFieldResolutionFeedbackStore,
-            $relationalTypeResolver,
-            $field,
-            $id,
-        );
-
         // If there was an error, add it as nested
+        $errors = $objectTypeFieldResolutionFeedbackStore->getErrors();
         if ($errors !== []) {
+            $objectTypeFieldResolutionFeedbackStore->setErrors([]);
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $errorMessage,
