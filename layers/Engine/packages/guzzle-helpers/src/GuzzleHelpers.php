@@ -90,7 +90,7 @@ class GuzzleHelpers
      * Execute several JSON requests asynchronously using the same endpoint URL and different queries
      *
      * @param string $url The Endpoint URL
-     * @param array<int|string,string> $bodyJSONQueries The form params
+     * @param array<int|string,array<string,mixed>> $bodyJSONQueries The form params
      * @return array<string,mixed> The payload if successful
      * @throws GuzzleInvalidResponseException
      */
@@ -107,7 +107,7 @@ class GuzzleHelpers
      * Execute several JSON requests asynchronously
      *
      * @param string[] $urls The endpoints to fetch
-     * @param array<int|string,string> $bodyJSONQueries the bodyJSONQuery to attach to each URL, on the same order provided in param $urls
+     * @param array<int|string,array<string,mixed>> $bodyJSONQueries the bodyJSONQuery to attach to each URL, on the same order provided in param $urls
      * @return array<string,mixed> The payload if successful
      * @throws GuzzleInvalidResponseException
      */
