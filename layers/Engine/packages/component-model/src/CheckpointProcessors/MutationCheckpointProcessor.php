@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\CheckpointProcessors;
 
+use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
 
@@ -19,7 +20,7 @@ class MutationCheckpointProcessor extends AbstractCheckpointProcessor
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Checkpoint\CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?CheckpointError
     {
         switch ($checkpoint[1]) {
             case self::ENABLED_MUTATIONS:
