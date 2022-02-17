@@ -48,4 +48,10 @@ class FeedbackItemResolution
         $feedbackItemProvider = $this->getFeedbackItemProvider();
         return $feedbackItemProvider->getMessage($this->code, ...$this->messageParams);
     }
+
+    final public function getNamespacedCode(): string
+    {
+        $feedbackItemProvider = $this->getFeedbackItemProvider();
+        return $feedbackItemProvider->getNamespacedCode($this->code);
+    }
 }
