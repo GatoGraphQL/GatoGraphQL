@@ -12,12 +12,12 @@ class FeedbackItemRegistry implements FeedbackItemRegistryInterface
     /**
      * @var array<string,array<string,string>> [key] Namespaced code, [value] Array of ['category' => ..., 'messagePlaceholder' => ..., 'specifiedByURL' => ...]
      */
-    protected array $feedbackMessageEntries = [];
+    protected array $feedbackItemEntries = [];
 
     public function useFeedbackItemProvider(FeedbackItemProviderInterface $feedbackItemProvider): void
     {
         foreach ($feedbackItemProvider->getCodes() as $code) {
-            $this->feedbackMessageEntries[$feedbackItemProvider->getNamespacedCode($code)] = [
+            $this->feedbackItemEntries[$feedbackItemProvider->getNamespacedCode($code)] = [
                 FeedbackItemKeys::CATEGORY => $feedbackItemProvider->getCategory($code),
                 FeedbackItemKeys::MESSAGE_PLACEHOLDER => $feedbackItemProvider->getMessagePlaceholder($code),
                 FeedbackItemKeys::SPECIFIED_BY_URL => $feedbackItemProvider->getSpecifiedByURL($code),
@@ -25,13 +25,13 @@ class FeedbackItemRegistry implements FeedbackItemRegistryInterface
         }
     }
 
-    public function getFeedbackMessageEntries(): array
+    public function getFeedbackItemEntries(): array
     {
-        return $this->feedbackMessageEntries;
+        return $this->feedbackItemEntries;
     }
 
-    public function getFeedbackMessageEntry(string $namespacedCode): ?array
+    public function getFeedbackItemEntry(string $namespacedCode): ?array
     {
-        return $this->feedbackMessageEntries[$namespacedCode] ?? null;
+        return $this->feedbackItemEntries[$namespacedCode] ?? null;
     }
 }
