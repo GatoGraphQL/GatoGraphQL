@@ -48,8 +48,7 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
             );
         }
         return new self(
-            $objectTypeFieldResolutionFeedback->getMessage(),
-            $objectTypeFieldResolutionFeedback->getCode(),
+            $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
             $objectTypeFieldResolutionFeedback->getLocation(),
             $relationalTypeResolver,
             $field,
