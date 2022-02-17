@@ -8,7 +8,7 @@ use PoP\Root\FeedbackItemProviders\FeedbackItemProviderInterface;
 
 interface FeedbackItemRegistryInterface
 {
-    public function useFeedbackItemProvider(FeedbackItemProviderInterface $feedbackMessageProvider): void;
+    public function useFeedbackItemProvider(FeedbackItemProviderInterface $feedbackItemProvider): void;
 
     /**
      * @return array<string,array<string,string>> [key] Namespaced code, [value] Array of ['category' => ..., 'messagePlaceholder' => ..., 'specifiedByURL' => ...]

@@ -17,15 +17,15 @@ class VersioningService implements VersioningServiceInterface
     private ?array $versionConstraintsForFields = null;
     private ?array $versionConstraintsForDirectives = null;
 
-    private ?FeedbackItemProvider $feedbackMessageProvider = null;
+    private ?FeedbackItemProvider $feedbackItemProvider = null;
 
-    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackMessageProvider): void
+    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackItemProvider): void
     {
-        $this->feedbackMessageProvider = $feedbackMessageProvider;
+        $this->feedbackItemProvider = $feedbackItemProvider;
     }
     final protected function getFeedbackItemProvider(): FeedbackItemProvider
     {
-        return $this->feedbackMessageProvider ??= $this->instanceManager->getInstance(FeedbackItemProvider::class);
+        return $this->feedbackItemProvider ??= $this->instanceManager->getInstance(FeedbackItemProvider::class);
     }
 
     /**

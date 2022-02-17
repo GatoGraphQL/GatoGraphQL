@@ -23,15 +23,15 @@ use PoPAPI\API\Response\Schemes as APISchemes;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
-    private ?FeedbackItemProvider $feedbackMessageProvider = null;
+    private ?FeedbackItemProvider $feedbackItemProvider = null;
 
-    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackMessageProvider): void
+    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackItemProvider): void
     {
-        $this->feedbackMessageProvider = $feedbackMessageProvider;
+        $this->feedbackItemProvider = $feedbackItemProvider;
     }
     final protected function getFeedbackItemProvider(): FeedbackItemProvider
     {
-        return $this->feedbackMessageProvider ??= $this->instanceManager->getInstance(FeedbackItemProvider::class);
+        return $this->feedbackItemProvider ??= $this->instanceManager->getInstance(FeedbackItemProvider::class);
     }
 
     public function initialize(array &$state): void

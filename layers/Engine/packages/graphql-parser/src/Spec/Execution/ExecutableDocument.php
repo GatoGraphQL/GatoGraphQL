@@ -18,7 +18,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     use StandaloneServiceTrait;
 
     private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
-    private ?FeedbackItemProvider $feedbackMessageProvider = null;
+    private ?FeedbackItemProvider $feedbackItemProvider = null;
 
     final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
@@ -28,13 +28,13 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
     }
-    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackMessageProvider): void
+    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackItemProvider): void
     {
-        $this->feedbackMessageProvider = $feedbackMessageProvider;
+        $this->feedbackItemProvider = $feedbackItemProvider;
     }
     final protected function getFeedbackItemProvider(): FeedbackItemProvider
     {
-        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackItemProvider::class);
+        return $this->feedbackItemProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackItemProvider::class);
     }
 
     private ?array $requestedOperations = null;

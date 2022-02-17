@@ -23,7 +23,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
-    private ?FeedbackItemProvider $feedbackMessageProvider = null;
+    private ?FeedbackItemProvider $feedbackItemProvider = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -41,13 +41,13 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     {
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
-    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackMessageProvider): void
+    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackItemProvider): void
     {
-        $this->feedbackMessageProvider = $feedbackMessageProvider;
+        $this->feedbackItemProvider = $feedbackItemProvider;
     }
     final protected function getFeedbackItemProvider(): FeedbackItemProvider
     {
-        return $this->feedbackMessageProvider ??= $this->instanceManager->getInstance(FeedbackItemProvider::class);
+        return $this->feedbackItemProvider ??= $this->instanceManager->getInstance(FeedbackItemProvider::class);
     }
 
     /**

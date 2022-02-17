@@ -14,13 +14,13 @@ class FeedbackItemRegistry implements FeedbackItemRegistryInterface
      */
     protected array $feedbackMessageEntries = [];
 
-    public function useFeedbackItemProvider(FeedbackItemProviderInterface $feedbackMessageProvider): void
+    public function useFeedbackItemProvider(FeedbackItemProviderInterface $feedbackItemProvider): void
     {
-        foreach ($feedbackMessageProvider->getCodes() as $code) {
-            $this->feedbackMessageEntries[$feedbackMessageProvider->getNamespacedCode($code)] = [
-                FeedbackItemKeys::CATEGORY => $feedbackMessageProvider->getCategory($code),
-                FeedbackItemKeys::MESSAGE_PLACEHOLDER => $feedbackMessageProvider->getMessagePlaceholder($code),
-                FeedbackItemKeys::SPECIFIED_BY_URL => $feedbackMessageProvider->getSpecifiedByURL($code),
+        foreach ($feedbackItemProvider->getCodes() as $code) {
+            $this->feedbackMessageEntries[$feedbackItemProvider->getNamespacedCode($code)] = [
+                FeedbackItemKeys::CATEGORY => $feedbackItemProvider->getCategory($code),
+                FeedbackItemKeys::MESSAGE_PLACEHOLDER => $feedbackItemProvider->getMessagePlaceholder($code),
+                FeedbackItemKeys::SPECIFIED_BY_URL => $feedbackItemProvider->getSpecifiedByURL($code),
             ];
         }
     }
