@@ -39,6 +39,16 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         string $field,
         string|int $objectID
     ): self {
+        /** @var ObjectFeedbackInterface[] */
+        $nestedObjectFeedbackEntries = [];
+        foreach ($objectTypeFieldResolutionFeedback->getNested() as $nestedObjectTypeFieldResolutionFeedback) {
+            $nestedObjectFeedbackEntries[] = static::fromObjectTypeFieldResolutionFeedback(
+                $nestedObjectTypeFieldResolutionFeedback,
+                $relationalTypeResolver,
+                $field,
+                $objectID
+            );
+        }
         return new self(
             $objectTypeFieldResolutionFeedback->getMessage(),
             $objectTypeFieldResolutionFeedback->getCode(),
@@ -49,7 +59,7 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
             null,
             $objectTypeFieldResolutionFeedback->getExtensions(),
             $objectTypeFieldResolutionFeedback->getData(),
-            $objectTypeFieldResolutionFeedback->getNested()
+            $nestedObjectFeedbackEntries
         );
     }
 
