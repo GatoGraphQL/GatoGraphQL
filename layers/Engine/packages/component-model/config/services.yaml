@@ -72,8 +72,8 @@ services:
     PoP\ComponentModel\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
 
-    PoP\ComponentModel\FeedbackMessageProviders\:
-        resource: '../src/FeedbackMessageProviders/*'
+    PoP\ComponentModel\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'
 
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'

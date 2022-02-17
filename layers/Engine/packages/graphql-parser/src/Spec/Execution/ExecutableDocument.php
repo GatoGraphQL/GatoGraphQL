@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Execution;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackMessageProviders\FeedbackMessageProvider;
-use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -18,7 +18,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     use StandaloneServiceTrait;
 
     private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
-    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
+    private ?FeedbackItemProvider $feedbackMessageProvider = null;
 
     final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
@@ -28,13 +28,13 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
     }
-    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackMessageProvider): void
     {
         $this->feedbackMessageProvider = $feedbackMessageProvider;
     }
-    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    final protected function getFeedbackItemProvider(): FeedbackItemProvider
     {
-        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackMessageProvider::class);
+        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackItemProvider::class);
     }
 
     private ?array $requestedOperations = null;
@@ -167,8 +167,8 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         if ($this->requestedOperations === null) {
             throw new InvalidRequestException(
-                $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, __FUNCTION__),
-                $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
+                $this->getFeedbackItemProvider()->getMessage(FeedbackItemProvider::E1, __FUNCTION__),
+                $this->getFeedbackItemProvider()->getNamespacedCode(FeedbackItemProvider::E1),
                 LocationHelper::getNonSpecificLocation()
             );
         }

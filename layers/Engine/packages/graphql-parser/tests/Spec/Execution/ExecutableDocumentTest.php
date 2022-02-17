@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Execution;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackMessageProviders\FeedbackMessageProvider;
-use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -28,9 +28,9 @@ class ExecutableDocumentTest extends AbstractTestCase
         return $this->getService(GraphQLSpecErrorMessageProvider::class);
     }
 
-    protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    protected function getFeedbackItemProvider(): FeedbackItemProvider
     {
-        return $this->getService(FeedbackMessageProvider::class);
+        return $this->getService(FeedbackItemProvider::class);
     }
 
     public function testGetVariableFromContext()
@@ -229,7 +229,7 @@ class ExecutableDocumentTest extends AbstractTestCase
     public function testNonInitializedRequest()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, 'getRequestedOperations'));
+        $this->expectExceptionMessage($this->getFeedbackItemProvider()->getMessage(FeedbackItemProvider::E1, 'getRequestedOperations'));
         $parser = $this->getParser();
         $document = $parser->parse('{ id }');
         $context = new Context();

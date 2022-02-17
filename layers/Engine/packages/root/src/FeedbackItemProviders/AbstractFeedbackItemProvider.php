@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\FeedbackMessageProviders;
+namespace PoP\Root\FeedbackItemProviders;
 
 use PoP\Root\Exception\MisconfiguredServiceException;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Services\BasicServiceTrait;
 
-abstract class AbstractFeedbackMessageProvider implements FeedbackMessageProviderInterface
+abstract class AbstractFeedbackItemProvider implements FeedbackItemProviderInterface
 {
     use BasicServiceTrait;
 

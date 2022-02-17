@@ -6,7 +6,7 @@ namespace PoP\Engine\CheckpointProcessors;
 
 use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
-use PoP\Engine\FeedbackMessageProviders\CheckpointErrorMessageProvider;
+use PoP\Engine\FeedbackItemProviders\CheckpointErrorMessageProvider;
 use PoP\Root\App;
 
 class RequestCheckpointProcessor extends AbstractCheckpointProcessor

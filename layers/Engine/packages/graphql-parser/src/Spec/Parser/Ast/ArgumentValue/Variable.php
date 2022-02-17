@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackMessageProviders\FeedbackMessageProvider;
-use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorMessageProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
@@ -20,7 +20,7 @@ class Variable extends AbstractAst implements WithValueInterface
     use StandaloneServiceTrait;
 
     private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
-    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
+    private ?FeedbackItemProvider $feedbackMessageProvider = null;
 
     final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
     {
@@ -30,13 +30,13 @@ class Variable extends AbstractAst implements WithValueInterface
     {
         return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
     }
-    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackMessageProvider): void
     {
         $this->feedbackMessageProvider = $feedbackMessageProvider;
     }
-    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    final protected function getFeedbackItemProvider(): FeedbackItemProvider
     {
-        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackMessageProvider::class);
+        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackItemProvider::class);
     }
 
     private ?Context $context = null;
@@ -137,8 +137,8 @@ class Variable extends AbstractAst implements WithValueInterface
     {
         if ($this->context === null) {
             throw new InvalidRequestException(
-                $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E2, $this->name),
-                $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E2),
+                $this->getFeedbackItemProvider()->getMessage(FeedbackItemProvider::E2, $this->name),
+                $this->getFeedbackItemProvider()->getNamespacedCode(FeedbackItemProvider::E2),
                 $this->getLocation()
             );
         }

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\FeedbackMessageProviders;
+namespace PoP\ComponentModel\FeedbackItemProviders;
 
 use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Constants\Params;
-use PoP\Root\FeedbackMessageProviders\AbstractFeedbackMessageProvider;
+use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 
-class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
+class FeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public const W1 = 'w1';
     public const E1 = 'e1';

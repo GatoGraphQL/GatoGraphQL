@@ -6,9 +6,9 @@ namespace PoP\Root\Container\CompilerPasses;
 
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 use PoP\Root\Registries\FeedbackMessageRegistryInterface;
-use PoP\Root\FeedbackMessageProviders\FeedbackMessageProviderInterface;
+use PoP\Root\FeedbackItemProviders\FeedbackItemProviderInterface;
 
-class RegisterFeedbackMessageProviderCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
+class RegisterFeedbackItemProviderCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
@@ -16,10 +16,10 @@ class RegisterFeedbackMessageProviderCompilerPass extends AbstractInjectServiceI
     }
     protected function getServiceClass(): string
     {
-        return FeedbackMessageProviderInterface::class;
+        return FeedbackItemProviderInterface::class;
     }
     protected function getRegistryMethodCallName(): string
     {
-        return 'useFeedbackMessageProvider';
+        return 'useFeedbackItemProvider';
     }
 }

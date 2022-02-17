@@ -29,5 +29,5 @@ services:
     PoP\Engine\Schema\SchemaDefinitionServiceInterface:
         class: \PoP\Engine\Schema\SchemaDefinitionService
 
-    PoP\Engine\FeedbackMessageProviders\:
-        resource: '../src/FeedbackMessageProviders/*'
+    PoP\Engine\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

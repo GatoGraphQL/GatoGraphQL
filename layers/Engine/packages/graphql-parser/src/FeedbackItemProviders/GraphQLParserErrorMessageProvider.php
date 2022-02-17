@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\FeedbackMessageProviders;
+namespace PoP\GraphQLParser\FeedbackItemProviders;
 
-use PoP\Root\FeedbackMessageProviders\AbstractFeedbackMessageProvider;
+use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\Root\Feedback\FeedbackCategories;
 
-class GraphQLParserErrorMessageProvider extends AbstractFeedbackMessageProvider
+class GraphQLParserErrorMessageProvider extends AbstractFeedbackItemProvider
 {
     public const E_1 = '1';
     public const E_2 = '2';

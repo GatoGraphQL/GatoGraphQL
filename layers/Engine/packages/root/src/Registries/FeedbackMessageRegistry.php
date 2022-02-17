@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root\Registries;
 
 use PoP\Root\Feedback\FeedbackItemKeys;
-use PoP\Root\FeedbackMessageProviders\FeedbackMessageProviderInterface;
+use PoP\Root\FeedbackItemProviders\FeedbackItemProviderInterface;
 
 class FeedbackMessageRegistry implements FeedbackMessageRegistryInterface
 {
@@ -14,7 +14,7 @@ class FeedbackMessageRegistry implements FeedbackMessageRegistryInterface
      */
     protected array $feedbackMessageEntries = [];
 
-    public function useFeedbackMessageProvider(FeedbackMessageProviderInterface $feedbackMessageProvider): void
+    public function useFeedbackItemProvider(FeedbackItemProviderInterface $feedbackMessageProvider): void
     {
         foreach ($feedbackMessageProvider->getCodes() as $code) {
             $this->feedbackMessageEntries[$feedbackMessageProvider->getNamespacedCode($code)] = [

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\FeedbackMessageProviders;
+namespace PoP\Root\FeedbackItemProviders;
 
-interface FeedbackMessageProviderInterface
+interface FeedbackItemProviderInterface
 {
     /**
      * @return string[]
