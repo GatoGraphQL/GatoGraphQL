@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Registries;
 
-use PoP\Root\Feedback\FeedbackItemKeys;
+use PoP\Root\Feedback\FeedbackItemEntryKeys;
 use PoP\Root\FeedbackItemProviders\FeedbackItemProviderInterface;
 
 class FeedbackItemRegistry implements FeedbackItemRegistryInterface
@@ -18,9 +18,9 @@ class FeedbackItemRegistry implements FeedbackItemRegistryInterface
     {
         foreach ($feedbackItemProvider->getCodes() as $code) {
             $this->feedbackItemEntries[$feedbackItemProvider->getNamespacedCode($code)] = [
-                FeedbackItemKeys::CATEGORY => $feedbackItemProvider->getCategory($code),
-                FeedbackItemKeys::MESSAGE_PLACEHOLDER => $feedbackItemProvider->getMessagePlaceholder($code),
-                FeedbackItemKeys::SPECIFIED_BY_URL => $feedbackItemProvider->getSpecifiedByURL($code),
+                FeedbackItemEntryKeys::CATEGORY => $feedbackItemProvider->getCategory($code),
+                FeedbackItemEntryKeys::MESSAGE_PLACEHOLDER => $feedbackItemProvider->getMessagePlaceholder($code),
+                FeedbackItemEntryKeys::SPECIFIED_BY_URL => $feedbackItemProvider->getSpecifiedByURL($code),
             ];
         }
     }
