@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorMessageProvider;
 use PoP\Root\AbstractTestCase;
 
 class DocumentTest extends AbstractTestCase

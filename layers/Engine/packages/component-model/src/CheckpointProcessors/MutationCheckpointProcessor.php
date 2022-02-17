@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\CheckpointProcessors;
 
 use PoP\ComponentModel\Checkpoint\CheckpointError;
-use PoP\ComponentModel\FeedbackMessageProviders\CheckpointErrorMessageProvider;
+use PoP\ComponentModel\FeedbackItemProviders\CheckpointErrorMessageProvider;
 use PoP\Root\App;
 
 class MutationCheckpointProcessor extends AbstractCheckpointProcessor

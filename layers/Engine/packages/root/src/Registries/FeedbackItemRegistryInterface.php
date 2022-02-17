@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoP\Root\Registries;
 
-use PoP\Root\FeedbackMessageProviders\FeedbackMessageProviderInterface;
+use PoP\Root\FeedbackItemProviders\FeedbackItemProviderInterface;
 
-interface FeedbackMessageRegistryInterface
+interface FeedbackItemRegistryInterface
 {
-    public function useFeedbackMessageProvider(FeedbackMessageProviderInterface $feedbackMessageProvider): void;
+    public function useFeedbackItemProvider(FeedbackItemProviderInterface $feedbackItemProvider): void;
 
     /**
      * @return array<string,array<string,string>> [key] Namespaced code, [value] Array of ['category' => ..., 'messagePlaceholder' => ..., 'specifiedByURL' => ...]
      */
-    public function getFeedbackMessageEntries(): array;
+    public function getFeedbackItemEntries(): array;
 
     /**
      * @return array|null Array of ['category' => ..., 'messagePlaceholder' => ..., 'specifiedByURL' => ...], or null if no entry exists for that code
      */
-    public function getFeedbackMessageEntry(string $namespacedCode): ?array;
+    public function getFeedbackItemEntry(string $namespacedCode): ?array;
 }

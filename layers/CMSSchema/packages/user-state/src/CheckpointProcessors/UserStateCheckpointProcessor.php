@@ -7,7 +7,7 @@ namespace PoPCMSSchema\UserState\CheckpointProcessors;
 use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\Root\App;
-use PoPCMSSchema\UserState\FeedbackMessageProviders\CheckpointErrorMessageProvider;
+use PoPCMSSchema\UserState\FeedbackItemProviders\CheckpointErrorMessageProvider;
 
 class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
 {

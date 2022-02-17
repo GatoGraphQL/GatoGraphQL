@@ -10,8 +10,8 @@ services:
     PoP\Root\Registries\AppStateProviderRegistryInterface:
         class: \PoP\Root\Registries\AppStateProviderRegistry
 
-    PoP\Root\Registries\FeedbackMessageRegistryInterface:
-        class: \PoP\Root\Registries\FeedbackMessageRegistry
+    PoP\Root\Registries\FeedbackItemRegistryInterface:
+        class: \PoP\Root\Registries\FeedbackItemRegistry
 
     PoP\Root\Routing\RoutingManagerInterface:
         class: \PoP\Root\Routing\BasicRoutingManager

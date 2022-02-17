@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\API\FeedbackMessageProviders;
+namespace PoPAPI\API\FeedbackItemProviders;
 
-use PoP\Root\FeedbackMessageProviders\AbstractFeedbackMessageProvider;
+use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 
-class FeedbackMessageProvider extends AbstractFeedbackMessageProvider
+class FeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public const E1 = '1';
 

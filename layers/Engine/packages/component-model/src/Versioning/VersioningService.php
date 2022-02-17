@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Versioning;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Feedback\GeneralFeedback;
-use PoP\ComponentModel\FeedbackMessageProviders\FeedbackMessageProvider;
+use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\Root\Services\BasicServiceTrait;
 
 class VersioningService implements VersioningServiceInterface
@@ -17,15 +17,15 @@ class VersioningService implements VersioningServiceInterface
     private ?array $versionConstraintsForFields = null;
     private ?array $versionConstraintsForDirectives = null;
 
-    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
+    private ?FeedbackItemProvider $feedbackItemProvider = null;
 
-    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
+    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackItemProvider): void
     {
-        $this->feedbackMessageProvider = $feedbackMessageProvider;
+        $this->feedbackItemProvider = $feedbackItemProvider;
     }
-    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
+    final protected function getFeedbackItemProvider(): FeedbackItemProvider
     {
-        return $this->feedbackMessageProvider ??= $this->instanceManager->getInstance(FeedbackMessageProvider::class);
+        return $this->feedbackItemProvider ??= $this->instanceManager->getInstance(FeedbackItemProvider::class);
     }
 
     /**
@@ -43,8 +43,8 @@ class VersioningService implements VersioningServiceInterface
             if (count($entry) !== 2) {
                 $generalFeedbackStore->addWarning(
                     new GeneralFeedback(
-                        $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::W1, $typeField),
-                        $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::W1)
+                        $this->getFeedbackItemProvider()->getMessage(FeedbackItemProvider::W1, $typeField),
+                        $this->getFeedbackItemProvider()->getNamespacedCode(FeedbackItemProvider::W1)
                     )
                 );
                 continue;
