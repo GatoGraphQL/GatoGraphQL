@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface EngineInterface
@@ -22,7 +22,7 @@ interface EngineInterface
     public function getRequestMeta(): array;
     public function getSessionMeta(): array;
     public function getSiteMeta(): array;
-    public function validateCheckpoints(array $checkpoints): bool | Error;
+    public function validateCheckpoints(array $checkpoints): ?CheckpointError;
     public function getModuleData(array $root_module, array $root_model_props, array $root_props): array;
     public function moveEntriesUnderDBName(array $entries, bool $entryHasId, RelationalTypeResolverInterface $relationalTypeResolver): array;
 }

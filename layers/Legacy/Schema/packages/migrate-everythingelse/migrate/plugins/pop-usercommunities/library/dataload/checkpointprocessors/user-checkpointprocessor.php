@@ -1,8 +1,8 @@
 <?php
 
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
@@ -19,13 +19,13 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?Error
+    public function validateCheckpoint(array $checkpoint): ?CheckpointError
     {
         $current_user_id = \PoP\Root\App::getState('current-user-id');
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY:
                 if (!gdUreIsCommunity($current_user_id)) {
-                    return new Error('profilenotcommunity');
+                    return new CheckpointError('profilenotcommunity', 'profilenotcommunity');
                 }
                 break;
 
@@ -37,7 +37,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
                 $community_status = gdUreFindCommunityMetavalues($community, $status);
 
                 if (empty($community_status)) {
-                    return new Error('editingnotcommunitymember');
+                    return new CheckpointError('editingnotcommunitymember', 'editingnotcommunitymember');
                 }
                 break;
 
@@ -45,7 +45,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
                 $user_id = App::query(\PoPCMSSchema\Users\Constants\InputNames::USER_ID);
                 $nonce = App::query(POP_INPUTNAME_NONCE);
                 if (!gdVerifyNonce($nonce, GD_NONCE_EDITMEMBERSHIPURL, $user_id)) {
-                    return new Error('nonceinvalid');
+                    return new CheckpointError('nonceinvalid', 'nonceinvalid');
                 }
                 break;
         }

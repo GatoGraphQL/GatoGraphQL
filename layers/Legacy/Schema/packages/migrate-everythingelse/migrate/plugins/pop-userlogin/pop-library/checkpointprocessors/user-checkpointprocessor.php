@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\State\ApplicationState;
@@ -15,14 +16,14 @@ class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointPr
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?Error
+    public function validateCheckpoint(array $checkpoint): ?CheckpointError
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR:
                 $user_id = \PoP\Root\App::getState('current-user-id');
                 $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
                 if (!$userRoleTypeAPI->hasRole($user_id, 'administrator')) {
-                    return new Error('userisnotadmin');
+                    return new CheckpointError('userisnotadmin', 'userisnotadmin');
                 }
                 break;
         }

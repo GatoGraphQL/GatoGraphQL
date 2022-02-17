@@ -1,6 +1,6 @@
 <?php
+use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
-use PoP\ComponentModel\Error\Error;
 
 class PoP_Domain_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
 {
@@ -13,14 +13,14 @@ class PoP_Domain_Dataload_CheckpointProcessor extends AbstractCheckpointProcesso
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?Error
+    public function validateCheckpoint(array $checkpoint): ?CheckpointError
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_DOMAINVALID:
                 // Check if the domain passed in param 'domain' is allowed
                 $domain = PoP_Domain_Utils::getDomainFromRequest();
                 if (!$domain) {
-                    return new Error('domainempty');
+                    return new CheckpointError('domainempty', 'domainempty');
                 }
                 break;
         }

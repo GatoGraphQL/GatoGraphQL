@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Engine\EngineInterface;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValidateConditionDirectiveResolver
@@ -27,8 +26,8 @@ abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValid
     protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $checkpointSet = $this->getValidationCheckpointSet($relationalTypeResolver);
-        $validation = $this->getEngine()->validateCheckpoints($checkpointSet);
-        return !GeneralUtils::isError($validation);
+        $checkpointError = $this->getEngine()->validateCheckpoints($checkpointSet);
+        return $checkpointError !== null;
     }
 
     /**
