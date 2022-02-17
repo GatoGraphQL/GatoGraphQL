@@ -10,6 +10,7 @@ use PoP\Root\Feedback\FeedbackCategories;
 class CheckpointErrorMessageProvider extends AbstractFeedbackMessageProvider
 {
     public const E1 = '1';
+    public const E2 = '2';
 
     /**
      * @return string[]
@@ -18,13 +19,15 @@ class CheckpointErrorMessageProvider extends AbstractFeedbackMessageProvider
     {
         return [
             self::E1,
+            self::E2,
         ];
     }
 
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('Meta directive \'%s\' is nesting a directive already nested by another meta-directive', 'graphql-parser'),
+            self::E1 => $this->__('The user is not logged-in', 'user-state'),
+            self::E2 => $this->__('The user is logged-in', 'user-state'),
             default => parent::getMessagePlaceholder($code),
         };
     }
