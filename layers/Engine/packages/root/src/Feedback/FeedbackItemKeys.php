@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\FeedbackMessage;
+namespace PoP\Root\Feedback;
 
-class FeedbackMessageEntryKeys
+class FeedbackItemKeys
 {
     public const CATEGORY = 'category';
     public const MESSAGE_PLACEHOLDER = 'messagePlaceholder';

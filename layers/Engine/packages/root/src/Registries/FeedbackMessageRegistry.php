@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Registries;
 
-use PoP\Root\FeedbackMessage\FeedbackMessageEntryKeys;
+use PoP\Root\Feedback\FeedbackItemKeys;
 use PoP\Root\FeedbackMessageProviders\FeedbackMessageProviderInterface;
 
 class FeedbackMessageRegistry implements FeedbackMessageRegistryInterface
@@ -18,9 +18,9 @@ class FeedbackMessageRegistry implements FeedbackMessageRegistryInterface
     {
         foreach ($feedbackMessageProvider->getCodes() as $code) {
             $this->feedbackMessageEntries[$feedbackMessageProvider->getNamespacedCode($code)] = [
-                FeedbackMessageEntryKeys::CATEGORY => $feedbackMessageProvider->getCategory($code),
-                FeedbackMessageEntryKeys::MESSAGE_PLACEHOLDER => $feedbackMessageProvider->getMessagePlaceholder($code),
-                FeedbackMessageEntryKeys::SPECIFIED_BY_URL => $feedbackMessageProvider->getSpecifiedByURL($code),
+                FeedbackItemKeys::CATEGORY => $feedbackMessageProvider->getCategory($code),
+                FeedbackItemKeys::MESSAGE_PLACEHOLDER => $feedbackMessageProvider->getMessagePlaceholder($code),
+                FeedbackItemKeys::SPECIFIED_BY_URL => $feedbackMessageProvider->getSpecifiedByURL($code),
             ];
         }
     }
