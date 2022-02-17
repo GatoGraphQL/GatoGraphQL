@@ -19,8 +19,8 @@ class GuzzleHelpers
      * Execute a JSON request to the passed endpoint URL and form params
      *
      * @param string $url The Endpoint URL
-     * @param array $bodyJSONQuery The form params
-     * @return array The payload if successful as an array
+     * @param array<string,mixed> $bodyJSONQuery The form params
+     * @return array<string,mixed> The payload if successful as an array
      * @throws GuzzleRequestException
      * @throws GuzzleInvalidResponseException
      */
@@ -43,9 +43,10 @@ class GuzzleHelpers
     }
 
     /**
+     * @return array<string,mixed>
      * @throws GuzzleInvalidResponseException
      */
-    protected static function validateAndDecodeJSONResponse(ResponseInterface $response): mixed
+    protected static function validateAndDecodeJSONResponse(ResponseInterface $response): array
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         if ($response->getStatusCode() !== 200) {
@@ -89,10 +90,11 @@ class GuzzleHelpers
      * Execute several JSON requests asynchronously using the same endpoint URL and different queries
      *
      * @param string $url The Endpoint URL
-     * @param array $bodyJSONQueries The form params
-     * @return mixed The payload if successful as an array
+     * @param array<int|string,array<string,mixed>> $bodyJSONQueries The form params
+     * @return array<string,mixed> The payload if successful
+     * @throws GuzzleInvalidResponseException
      */
-    public static function requestSingleURLMultipleQueriesAsyncJSON(string $url, array $bodyJSONQueries = [], string $method = 'POST'): mixed
+    public static function requestSingleURLMultipleQueriesAsyncJSON(string $url, array $bodyJSONQueries = [], string $method = 'POST'): array
     {
         $urls = [];
         for ($i = 0; $i < count($bodyJSONQueries); $i++) {
@@ -104,11 +106,12 @@ class GuzzleHelpers
     /**
      * Execute several JSON requests asynchronously
      *
-     * @param array $urls The endpoints to fetch
-     * @param array $bodyJSONQueries the bodyJSONQuery to attach to each URL, on the same order provided in param $urls
+     * @param string[] $urls The endpoints to fetch
+     * @param array<int|string,array<string,mixed>> $bodyJSONQueries the bodyJSONQuery to attach to each URL, on the same order provided in param $urls
+     * @return array<string,mixed> The payload if successful
      * @throws GuzzleInvalidResponseException
      */
-    public static function requestAsyncJSON(array $urls, array $bodyJSONQueries = [], string $method = 'POST'): mixed
+    public static function requestAsyncJSON(array $urls, array $bodyJSONQueries = [], string $method = 'POST'): array
     {
         if (!$urls) {
             return [];

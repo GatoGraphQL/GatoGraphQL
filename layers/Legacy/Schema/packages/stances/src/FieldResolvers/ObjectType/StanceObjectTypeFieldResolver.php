@@ -174,7 +174,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'excerpt':
             case 'content':
                 // Add the quotes around the content for the Stance
-                $value = $customPostTypeAPI->getPlainTextContent($stance);
+                $value = $customPostTypeAPI->getRawContent($stance);
                 if ($fieldName == 'title') {
                     return limitString($value, 100);
                 } elseif ($fieldName == 'excerpt') {

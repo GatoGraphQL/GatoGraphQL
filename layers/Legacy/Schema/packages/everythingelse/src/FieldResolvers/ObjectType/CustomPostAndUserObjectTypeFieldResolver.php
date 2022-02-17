@@ -98,16 +98,17 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
         switch ($fieldName) {
             case 'hasLocation':
                 $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($locations)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $locations;
                 }
                 return !empty($locations);
 
             case 'location':
                 $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($locations)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $locations;
-                } elseif ($locations) {
+                }
+                if ($locations) {
                     return $locations[0];
                 }
                 return null;

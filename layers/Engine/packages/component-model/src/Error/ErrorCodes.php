@@ -12,6 +12,7 @@ class ErrorCodes
     public const MUST_BE_ARRAY_FIELD = 'must-be-array-field';
     public const ARRAY_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD = 'array-must-not-have-empty-field';
     public const MUST_BE_ARRAY_OF_ARRAYS_FIELD = 'must-be-array-of-arrays-field';
+    public const MUST_NOT_BE_ARRAY_OF_ARRAYS_FIELD = 'must-not-be-array-of-arrays-field';
     public const ARRAY_OF_ARRAYS_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD = 'array-of-arrays-must-not-have-empty-field';
     public const NO_FIELD = 'no-field';
     public const VALIDATION_FAILED = 'validation-failed';

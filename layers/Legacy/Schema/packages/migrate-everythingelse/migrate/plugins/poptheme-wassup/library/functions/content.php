@@ -49,7 +49,7 @@ function gdGetPostDescription()
             array("\n\r", "\n", "\r", "\t"),
             array(' ', '', '', ' '),
             limitString(
-                $customPostTypeAPI->getPlainTextContent($post_id),
+                $customPostTypeAPI->getRawContent($post_id),
                 300
             )
         );

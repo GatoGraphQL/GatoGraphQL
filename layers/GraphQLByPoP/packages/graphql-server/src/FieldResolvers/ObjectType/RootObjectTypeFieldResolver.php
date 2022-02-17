@@ -10,7 +10,6 @@ use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaTypeDa
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -156,7 +155,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     $objectTypeFieldResolutionFeedbackStore,
                     $options
                 );
-                if (GeneralUtils::isError($schemaID)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $schemaID;
                 }
                 // Obtain the instance of the schema

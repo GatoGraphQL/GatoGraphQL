@@ -19,6 +19,8 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         array $extensions = [],
         /** @var array<string, mixed> */
         array $data = [],
+        /** @var SchemaFeedbackInterface[] */
+        protected array $nested = [],
     ) {
         parent::__construct(
             $message,
@@ -37,5 +39,13 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
     public function getField(): string
     {
         return $this->field;
+    }
+
+    /**
+     * @return SchemaFeedbackInterface[]
+     */
+    public function getNested(): array
+    {
+        return $this->nested;
     }
 }

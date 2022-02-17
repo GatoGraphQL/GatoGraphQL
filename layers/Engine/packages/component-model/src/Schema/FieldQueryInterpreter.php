@@ -1846,14 +1846,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $objectTypeFieldResolutionFeedbackStore,
                 $options
             );
-            if (GeneralUtils::isError($resolvedValue)) {
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 // Show the error message, and return nothing
-                /** @var Error */
-                $error = $resolvedValue;
+                // Showing first error only because this code will soon be removed anyway
+                $errors = $objectTypeFieldResolutionFeedbackStore->getErrors();
                 $this->getFeedbackMessageStore()->addQueryError(sprintf(
                     $this->__('Executing field \'%s\' produced error: %s', 'pop-component-model'),
                     $fieldArgValue,
-                    $error->getMessageOrCode()
+                    $errors[0]->getMessage()
                 ));
                 return null;
             }

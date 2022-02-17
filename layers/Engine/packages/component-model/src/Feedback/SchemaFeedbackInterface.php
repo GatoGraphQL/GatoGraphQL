@@ -10,4 +10,8 @@ interface SchemaFeedbackInterface extends QueryFeedbackInterface
 {
     public function getRelationalTypeResolver(): RelationalTypeResolverInterface;
     public function getField(): string;
+    /**
+     * @return SchemaFeedbackInterface[]
+     */
+    public function getNested(): array;
 }

@@ -33,6 +33,14 @@ class DocumentFeedbackStore
     }
 
     /**
+     * @param DocumentFeedbackInterface[] $errors
+     */
+    public function setErrors(array $errors): void
+    {
+        $this->errors = $errors;
+    }
+
+    /**
      * @return DocumentFeedbackInterface[]
      */
     public function getWarnings(): array
@@ -43,6 +51,14 @@ class DocumentFeedbackStore
     public function addWarning(DocumentFeedbackInterface $warning): void
     {
         $this->warnings[] = $warning;
+    }
+
+    /**
+     * @param DocumentFeedbackInterface[] $warnings
+     */
+    public function setWarnings(array $warnings): void
+    {
+        $this->warnings = $warnings;
     }
 
     /**
@@ -59,6 +75,14 @@ class DocumentFeedbackStore
     }
 
     /**
+     * @param DocumentFeedbackInterface[] $deprecations
+     */
+    public function setDeprecations(array $deprecations): void
+    {
+        $this->deprecations = $deprecations;
+    }
+
+    /**
      * @return DocumentFeedbackInterface[]
      */
     public function getNotices(): array
@@ -69,6 +93,14 @@ class DocumentFeedbackStore
     public function addNotice(DocumentFeedbackInterface $notice): void
     {
         $this->notices[] = $notice;
+    }
+
+    /**
+     * @param DocumentFeedbackInterface[] $notices
+     */
+    public function setNotices(array $notices): void
+    {
+        $this->notices = $notices;
     }
 
     /**
@@ -85,6 +117,14 @@ class DocumentFeedbackStore
     }
 
     /**
+     * @param DocumentFeedbackInterface[] $logs
+     */
+    public function setLogs(array $logs): void
+    {
+        $this->logs = $logs;
+    }
+
+    /**
      * @return DocumentFeedbackInterface[]
      */
     public function getTraces(): array
@@ -95,5 +135,13 @@ class DocumentFeedbackStore
     public function addTrace(DocumentFeedbackInterface $trace): void
     {
         $this->traces[] = $trace;
+    }
+
+    /**
+     * @param DocumentFeedbackInterface[] $traces
+     */
+    public function setTraces(array $traces): void
+    {
+        $this->traces = $traces;
     }
 }

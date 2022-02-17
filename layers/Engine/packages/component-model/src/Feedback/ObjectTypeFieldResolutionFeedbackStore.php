@@ -33,6 +33,14 @@ class ObjectTypeFieldResolutionFeedbackStore
     }
 
     /**
+     * @param ObjectTypeFieldResolutionFeedbackInterface[] $errors
+     */
+    public function setErrors(array $errors): void
+    {
+        $this->errors = $errors;
+    }
+
+    /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
     public function getWarnings(): array
@@ -43,6 +51,14 @@ class ObjectTypeFieldResolutionFeedbackStore
     public function addWarning(ObjectTypeFieldResolutionFeedbackInterface $warning): void
     {
         $this->warnings[] = $warning;
+    }
+
+    /**
+     * @param ObjectTypeFieldResolutionFeedbackInterface[] $warnings
+     */
+    public function setWarnings(array $warnings): void
+    {
+        $this->warnings = $warnings;
     }
 
     /**
@@ -59,6 +75,14 @@ class ObjectTypeFieldResolutionFeedbackStore
     }
 
     /**
+     * @param ObjectTypeFieldResolutionFeedbackInterface[] $deprecations
+     */
+    public function setDeprecations(array $deprecations): void
+    {
+        $this->deprecations = $deprecations;
+    }
+
+    /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
     public function getNotices(): array
@@ -69,6 +93,14 @@ class ObjectTypeFieldResolutionFeedbackStore
     public function addNotice(ObjectTypeFieldResolutionFeedbackInterface $notice): void
     {
         $this->notices[] = $notice;
+    }
+
+    /**
+     * @param ObjectTypeFieldResolutionFeedbackInterface[] $notices
+     */
+    public function setNotices(array $notices): void
+    {
+        $this->notices = $notices;
     }
 
     /**
@@ -85,6 +117,14 @@ class ObjectTypeFieldResolutionFeedbackStore
     }
 
     /**
+     * @param ObjectTypeFieldResolutionFeedbackInterface[] $logs
+     */
+    public function setLogs(array $logs): void
+    {
+        $this->logs = $logs;
+    }
+
+    /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
     public function getTraces(): array
@@ -95,5 +135,13 @@ class ObjectTypeFieldResolutionFeedbackStore
     public function addTrace(ObjectTypeFieldResolutionFeedbackInterface $trace): void
     {
         $this->traces[] = $trace;
+    }
+
+    /**
+     * @param ObjectTypeFieldResolutionFeedbackInterface[] $traces
+     */
+    public function setTraces(array $traces): void
+    {
+        $this->traces = $traces;
     }
 }

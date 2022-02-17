@@ -137,14 +137,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
             case 'hasHighlights':
                 $referencedbyCount = $objectTypeResolver->resolveValue($object, 'highlightsCount', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($referencedbyCount)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $referencedbyCount;
                 }
                 return $referencedbyCount > 0;
 
             case 'highlightsCount':
                 $referencedby = $objectTypeResolver->resolveValue($object, 'highlights', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($referencedby)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $referencedby;
                 }
                 return count($referencedby);

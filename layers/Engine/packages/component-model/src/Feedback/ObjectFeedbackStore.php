@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+
 class ObjectFeedbackStore
 {
     /** @var ObjectFeedbackInterface[] */
@@ -19,6 +21,62 @@ class ObjectFeedbackStore
     /** @var ObjectFeedbackInterface[] */
     private array $traces = [];
 
+    public function incorporate(
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $field,
+        string|int $objectID,
+    ): void {
+        foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
+            $this->errors[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackError,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
+            $this->warnings[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackWarning,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $objectTypeFieldResolutionFeedbackDeprecation) {
+            $this->deprecations[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackDeprecation,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
+            $this->notices[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackNotice,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
+            $this->logs[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackLog,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getTraces() as $objectTypeFieldResolutionFeedbackTrace) {
+            $this->traces[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackTrace,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+            );
+        }
+    }
+
     /**
      * @return ObjectFeedbackInterface[]
      */
@@ -30,6 +88,14 @@ class ObjectFeedbackStore
     public function addError(ObjectFeedbackInterface $error): void
     {
         $this->errors[] = $error;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $errors
+     */
+    public function setErrors(array $errors): void
+    {
+        $this->errors = $errors;
     }
 
     /**
@@ -46,6 +112,14 @@ class ObjectFeedbackStore
     }
 
     /**
+     * @param ObjectFeedbackInterface[] $warnings
+     */
+    public function setWarnings(array $warnings): void
+    {
+        $this->warnings = $warnings;
+    }
+
+    /**
      * @return ObjectFeedbackInterface[]
      */
     public function getDeprecations(): array
@@ -56,6 +130,14 @@ class ObjectFeedbackStore
     public function addDeprecation(ObjectFeedbackInterface $deprecation): void
     {
         $this->deprecations[] = $deprecation;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $deprecations
+     */
+    public function setDeprecations(array $deprecations): void
+    {
+        $this->deprecations = $deprecations;
     }
 
     /**
@@ -72,6 +154,14 @@ class ObjectFeedbackStore
     }
 
     /**
+     * @param ObjectFeedbackInterface[] $notices
+     */
+    public function setNotices(array $notices): void
+    {
+        $this->notices = $notices;
+    }
+
+    /**
      * @return ObjectFeedbackInterface[]
      */
     public function getLogs(): array
@@ -85,6 +175,14 @@ class ObjectFeedbackStore
     }
 
     /**
+     * @param ObjectFeedbackInterface[] $logs
+     */
+    public function setLogs(array $logs): void
+    {
+        $this->logs = $logs;
+    }
+
+    /**
      * @return ObjectFeedbackInterface[]
      */
     public function getTraces(): array
@@ -95,5 +193,13 @@ class ObjectFeedbackStore
     public function addTrace(ObjectFeedbackInterface $trace): void
     {
         $this->traces[] = $trace;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $traces
+     */
+    public function setTraces(array $traces): void
+    {
+        $this->traces = $traces;
     }
 }

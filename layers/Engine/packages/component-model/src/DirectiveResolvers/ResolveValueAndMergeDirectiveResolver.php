@@ -8,12 +8,10 @@ use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\App;
@@ -128,7 +126,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             }
 
             $expressions = $this->getExpressionsForObject($id, $variables, $messages);
-            $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $this->resolveValuesForObject(
                 $relationalTypeResolver,
                 $id,
@@ -139,7 +136,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $variables,
                 $expressions,
                 $engineIterationFeedbackStore,
-                $objectTypeFieldResolutionFeedbackStore,
                 $objectErrors,
                 $objectWarnings,
                 $objectDeprecations
@@ -186,7 +182,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations
@@ -202,7 +197,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $variables,
                 $expressions,
                 $engineIterationFeedbackStore,
-                $objectTypeFieldResolutionFeedbackStore,
                 $objectErrors,
                 $objectWarnings,
                 $objectDeprecations
@@ -220,82 +214,35 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations
     ): void {
-        // Get the value, and add it to the database
-        $value = $this->resolveFieldValue(
-            $relationalTypeResolver,
-            $id,
-            $object,
-            $field,
-            $previousDBItems,
-            $variables,
-            $expressions,
-            $objectTypeFieldResolutionFeedbackStore,
-            $objectWarnings,
-            $objectDeprecations
-        );
-        $this->addValueForObject(
-            $relationalTypeResolver,
-            $id,
-            $object,
-            $field,
-            $value,
-            $dbItems,
-            $engineIterationFeedbackStore,
-            $objectTypeFieldResolutionFeedbackStore,
-            $objectErrors
-        );
-    }
-
-    private function resolveFieldValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        $id,
-        object $object,
-        string $field,
-        array $previousDBItems,
-        array &$variables,
-        array &$expressions,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array &$objectWarnings,
-        array &$objectDeprecations
-    ) {
-        return $relationalTypeResolver->resolveValue(
+        // 1. Resolve the value against the TypeResolver
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $value = $relationalTypeResolver->resolveValue(
             $object,
             $field,
             $variables,
             $expressions,
             $objectTypeFieldResolutionFeedbackStore,
         );
-    }
 
-    private function addValueForObject(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string | int $id,
-        object $object,
-        string $field,
-        mixed $value,
-        array &$dbItems,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array &$objectErrors,
-    ): void {
+        // 2. Transfer the feedback
+        $engineIterationFeedbackStore->incorporate(
+            $objectTypeFieldResolutionFeedbackStore,
+            $relationalTypeResolver,
+            $field,
+            $id,
+        );
+
+        // 3. Add the output in the DB
         $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey(
             $relationalTypeResolver,
             $field,
             $object,
         );
-        // The dataitem can contain both rightful values and also errors (eg: when the field doesn't exist, or the field validation fails)
-        // Extract the errors and add them on the other array
-        if (GeneralUtils::isError($value)) {
-            // Extract the error message
-            /** @var Error */
-            $error = $value;
-            $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$field]);
-
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // For GraphQL, set the response for the failing field as null
             /** @var ComponentConfiguration */
             $componentConfiguration = App::getComponent(Component::class)->getConfiguration();

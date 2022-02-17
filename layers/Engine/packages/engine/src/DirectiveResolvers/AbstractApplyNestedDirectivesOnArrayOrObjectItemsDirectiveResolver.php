@@ -8,11 +8,9 @@ use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalMetaDirectiveResolver;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Component;
@@ -26,6 +24,8 @@ use stdClass;
 
 abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver extends AbstractGlobalMetaDirectiveResolver
 {
+    use InvokeRelationalTypeResolverDirectiveResolverTrait;
+
     /**
      * Use a value that can't be part of a fieldName, that's legible, and that conveys the meaning of sublevel. The value "." is adequate
      */
@@ -258,7 +258,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $arrayItemIdsProperties[(string)$id]['direct'][] = $arrayItemProperty;
                     }
                     $arrayItemIdsProperties[(string)$id]['conditional'] = [];
-                    $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                     $this->addExpressionsForObject(
                         $relationalTypeResolver,
                         $id,
@@ -268,7 +267,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $previousDBItems,
                         $variables,
                         $messages,
-                        $objectTypeFieldResolutionFeedbackStore,
+                        $engineIterationFeedbackStore,
                         $objectErrors,
                         $objectWarnings,
                         $objectDeprecations,
@@ -418,22 +417,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $arrayItemValue = $dbItems[(string)$id][$arrayItemPropertyOutputKey];
                         // Remove this temporary property from $dbItems
                         unset($dbItems[(string)$id][$arrayItemPropertyOutputKey]);
-                        // Validate it's not an error
-                        if (GeneralUtils::isError($arrayItemValue)) {
-                            /** @var Error */
-                            $error = $arrayItemValue;
-                            $objectErrors[(string)$id][] = [
-                                Tokens::PATH => [$this->directive],
-                                Tokens::MESSAGE => sprintf(
-                                    $this->__('Transformation of element with key \'%s\' on array from property \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
-                                    $key,
-                                    $fieldOutputKey,
-                                    $id,
-                                    $error->getMessageOrCode()
-                                ),
-                            ];
-                            continue;
-                        }
                         // Place the result for the array in the original property
                         $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $objectTraces, $id, $fieldOutputKey, $key, $arrayItemValue);
                     }
@@ -509,7 +492,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         array $previousDBItems,
         array &$variables,
         array &$messages,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
@@ -538,6 +521,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
             foreach ((array) $addExpressions as $key => $value) {
                 // Evaluate the $value, since it may be a function
                 if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($value)) {
+                    $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                     $resolvedValue = $relationalTypeResolver->resolveValue(
                         $objectIDItems[(string)$id],
                         $value,
@@ -546,20 +530,18 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $objectTypeFieldResolutionFeedbackStore,
                         $options
                     );
-                    if (GeneralUtils::isError($resolvedValue)) {
-                        // Show the error message, and return nothing
-                        /** @var Error */
-                        $error = $resolvedValue;
-                        $objectErrors[(string)$id][] = [
-                            Tokens::PATH => [$this->directive],
-                            Tokens::MESSAGE => sprintf(
-                                $this->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
-                                $value,
-                                $id,
-                                $error->getMessageOrCode(),
-                                $key
-                            ),
-                        ];
+                    $errorMessage = sprintf(
+                        $this->__('Executing field \'%s\' on object with ID \'%s\' produced error(s). Setting expression \'%s\' was ignored', 'pop-component-model'),
+                        $value,
+                        $id,
+                        $key
+                    );
+                    $this->maybeNestDirectiveFeedback(
+                        $relationalTypeResolver,
+                        $objectTypeFieldResolutionFeedbackStore,
+                        $errorMessage,
+                    );
+                    if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                         continue;
                     }
                     $value = $resolvedValue;
@@ -570,6 +552,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 $existingValue = $this->getExpressionForObject($id, (string) $key, $messages) ?? [];
                 // Evaluate the $value, since it may be a function
                 if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($value)) {
+                    $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                     $resolvedValue = $relationalTypeResolver->resolveValue(
                         $objectIDItems[(string)$id],
                         $value,
@@ -578,20 +561,18 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $objectTypeFieldResolutionFeedbackStore,
                         $options
                     );
-                    if (GeneralUtils::isError($resolvedValue)) {
-                        // Show the error message, and return nothing
-                        /** @var Error */
-                        $error = $resolvedValue;
-                        $objectErrors[(string)$id][] = [
-                            Tokens::PATH => [$this->directive],
-                            Tokens::MESSAGE => sprintf(
-                                $this->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
-                                $value,
-                                $id,
-                                $error->getMessageOrCode(),
-                                $key
-                            ),
-                        ];
+                    $errorMessage = sprintf(
+                        $this->__('Executing field \'%s\' on object with ID \'%s\' produced error(s). Setting expression \'%s\' was ignored', 'pop-component-model'),
+                        $value,
+                        $id,
+                        $key
+                    );
+                    $this->maybeNestDirectiveFeedback(
+                        $relationalTypeResolver,
+                        $objectTypeFieldResolutionFeedbackStore,
+                        $errorMessage,
+                    );
+                    if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                         continue;
                     }
                     $existingValue[] = $resolvedValue;
@@ -599,5 +580,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 $this->addExpressionForObject($id, (string) $key, $existingValue, $messages);
             }
         }
+    }
+
+    protected function getDirective(): string
+    {
+        return $this->directive;
     }
 }

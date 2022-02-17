@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
@@ -25,10 +24,13 @@ use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
+use PoP\ComponentModel\Feedback\ObjectFeedbackInterface;
+use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -48,6 +50,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
+use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Helpers\Methods;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -75,6 +78,7 @@ class Engine implements EngineInterface
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?ModuleHelpersInterface $moduleHelpers = null;
+    private ?ErrorServiceInterface $errorService = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -200,6 +204,14 @@ class Engine implements EngineInterface
     final protected function getModuleHelpers(): ModuleHelpersInterface
     {
         return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
+    }
+    final public function setErrorService(ErrorServiceInterface $errorService): void
+    {
+        $this->errorService = $errorService;
+    }
+    final protected function getErrorService(): ErrorServiceInterface
+    {
+        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
     }
 
     public function getOutputData(): array
@@ -1624,8 +1636,21 @@ class Engine implements EngineInterface
                     }
                 }
             }
+            $this->transferFeedback(
+                $engineIterationFeedbackStore,
+                $iterationObjectErrors,
+                $iterationObjectWarnings,
+                $iterationObjectDeprecations,
+                $iterationObjectNotices,
+                $iterationObjectTraces,
+                $iterationSchemaErrors,
+                $iterationSchemaWarnings,
+                $iterationSchemaDeprecations,
+                $iterationSchemaNotices,
+                $iterationSchemaTraces
+            );
             /** @phpstan-ignore-next-line */
-            if ($iterationObjectErrors) {
+            if ($iterationObjectErrors !== []) {
                 $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationObjectErrors, true, $relationalTypeResolver);
                 foreach ($dbNameErrorEntries as $dbname => $entries) {
                     $objectErrors[$dbname] ??= [];
@@ -1974,6 +1999,171 @@ class Engine implements EngineInterface
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
 
         return $ret;
+    }
+
+    private function transferFeedback(
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        array &$iterationObjectErrors,
+        array &$iterationObjectWarnings,
+        array &$iterationObjectDeprecations,
+        array &$iterationObjectNotices,
+        array &$iterationObjectTraces,
+        array &$iterationSchemaErrors,
+        array &$iterationSchemaWarnings,
+        array &$iterationSchemaDeprecations,
+        array &$iterationSchemaNotices,
+        array &$iterationSchemaTraces
+    ): void {
+        $this->transferObjectFeedback(
+            $engineIterationFeedbackStore,
+            $iterationObjectErrors,
+            $iterationObjectWarnings,
+            $iterationObjectDeprecations,
+            $iterationObjectNotices,
+            $iterationObjectTraces,
+        );
+        $this->transferSchemaFeedback(
+            $engineIterationFeedbackStore,
+            $iterationSchemaErrors,
+            $iterationSchemaWarnings,
+            $iterationSchemaDeprecations,
+            $iterationSchemaNotices,
+            $iterationSchemaTraces
+        );
+    }
+
+    private function transferObjectFeedback(
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        array &$iterationObjectErrors,
+        array &$iterationObjectWarnings,
+        array &$iterationObjectDeprecations,
+        array &$iterationObjectNotices,
+        array &$iterationObjectTraces,
+    ): void {
+        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectFeedbackError) {
+            $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorService()->getErrorOutput(
+                new Error(
+                    $objectFeedbackError->getCode(),
+                    $objectFeedbackError->getMessage(),
+                    $objectFeedbackError->getExtensions(),
+                ),
+                [$objectFeedbackError->getField()]
+            );
+        }
+        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getWarnings() as $objectFeedbackWarning) {
+            $this->transferObjectFeedbackEntries(
+                $objectFeedbackWarning,
+                $iterationObjectWarnings,
+            );
+        }
+        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getDeprecations() as $objectFeedbackDeprecation) {
+            $this->transferObjectFeedbackEntries(
+                $objectFeedbackDeprecation,
+                $iterationObjectDeprecations,
+            );
+        }
+        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getTraces() as $objectFeedbackTrace) {
+            $this->transferObjectFeedbackEntries(
+                $objectFeedbackTrace,
+                $iterationObjectTraces,
+            );
+        }
+        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getNotices() as $objectFeedbackNotice) {
+            $this->transferObjectFeedbackEntries(
+                $objectFeedbackNotice,
+                $iterationObjectNotices,
+            );
+        }
+    }
+
+    private function transferObjectFeedbackEntries(
+        ObjectFeedbackInterface $objectFeedback,
+        array &$objectFeedbackEntries
+    ): void {
+        $entry = [
+            Tokens::PATH => $objectFeedback->getDirective() !== null
+                ? [$objectFeedback->getField(), $objectFeedback->getDirective()]
+                : [$objectFeedback->getField()],
+            Tokens::MESSAGE => $objectFeedback->getMessage(),
+            Tokens::LOCATIONS => [$objectFeedback->getLocation()->toArray()],
+            Tokens::EXTENSIONS => $objectFeedback->getExtensions(),
+        ];
+        if ($nestedObjectFeedbackEntries = $objectFeedback->getNested()) {
+            $entry[Tokens::NESTED] = [];
+            foreach ($nestedObjectFeedbackEntries as $nestedObjectFeedbackEntry) {
+                $this->transferObjectFeedbackEntries(
+                    $nestedObjectFeedbackEntry,
+                    $entry[Tokens::NESTED]
+                );
+            }
+        }
+        $objectFeedbackEntries[(string)$objectFeedback->getObjectID()][] = $entry;
+    }
+
+    private function transferSchemaFeedback(
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        array &$iterationSchemaErrors,
+        array &$iterationSchemaWarnings,
+        array &$iterationSchemaDeprecations,
+        array &$iterationSchemaNotices,
+        array &$iterationSchemaTraces
+    ): void {
+        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
+            $iterationSchemaErrors[] = $this->getErrorService()->getErrorOutput(
+                new Error(
+                    $schemaFeedbackError->getCode(),
+                    $schemaFeedbackError->getMessage(),
+                    $schemaFeedbackError->getExtensions(),
+                ),
+                [$schemaFeedbackError->getField()]
+            );
+        }
+        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getWarnings() as $schemaFeedbackWarning) {
+            $this->transferSchemaFeedbackEntries(
+                $schemaFeedbackWarning,
+                $iterationSchemaWarnings,
+            );
+        }
+        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getDeprecations() as $schemaFeedbackDeprecation) {
+            $this->transferSchemaFeedbackEntries(
+                $schemaFeedbackDeprecation,
+                $iterationSchemaDeprecations,
+            );
+        }
+        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getTraces() as $schemaFeedbackTrace) {
+            $this->transferSchemaFeedbackEntries(
+                $schemaFeedbackTrace,
+                $iterationSchemaTraces,
+            );
+        }
+        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
+            $this->transferSchemaFeedbackEntries(
+                $schemaFeedbackNotice,
+                $iterationSchemaNotices,
+            );
+        }
+    }
+
+    private function transferSchemaFeedbackEntries(
+        SchemaFeedbackInterface $schemaFeedback,
+        array &$schemaFeedbackEntries
+    ): void {
+        $entry = [
+            Tokens::PATH => [$schemaFeedback->getField()],
+            Tokens::MESSAGE => $schemaFeedback->getMessage(),
+            Tokens::LOCATIONS => [$schemaFeedback->getLocation()->toArray()],
+            Tokens::EXTENSIONS => $schemaFeedback->getExtensions(),
+        ];
+        if ($nestedSchemaFeedbackEntries = $schemaFeedback->getNested()) {
+            $entry[Tokens::NESTED] = [];
+            foreach ($nestedSchemaFeedbackEntries as $nestedSchemaFeedbackEntry) {
+                $this->transferSchemaFeedbackEntries(
+                    $nestedSchemaFeedbackEntry,
+                    $entry[Tokens::NESTED]
+                );
+            }
+        }
+        $schemaFeedbackEntries[] = $entry;
     }
 
     /**
