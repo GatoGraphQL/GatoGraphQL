@@ -7,7 +7,7 @@ namespace PoP\Root\Registries;
 use PoP\Root\Feedback\FeedbackItemKeys;
 use PoP\Root\FeedbackItemProviders\FeedbackItemProviderInterface;
 
-class FeedbackMessageRegistry implements FeedbackMessageRegistryInterface
+class FeedbackItemRegistry implements FeedbackItemRegistryInterface
 {
     /**
      * @var array<string,array<string,string>> [key] Namespaced code, [value] Array of ['category' => ..., 'messagePlaceholder' => ..., 'specifiedByURL' => ...]

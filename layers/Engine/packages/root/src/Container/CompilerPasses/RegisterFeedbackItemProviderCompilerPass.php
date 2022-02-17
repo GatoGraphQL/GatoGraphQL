@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoP\Root\Container\CompilerPasses;
 
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
-use PoP\Root\Registries\FeedbackMessageRegistryInterface;
+use PoP\Root\Registries\FeedbackItemRegistryInterface;
 use PoP\Root\FeedbackItemProviders\FeedbackItemProviderInterface;
 
 class RegisterFeedbackItemProviderCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
-        return FeedbackMessageRegistryInterface::class;
+        return FeedbackItemRegistryInterface::class;
     }
     protected function getServiceClass(): string
     {

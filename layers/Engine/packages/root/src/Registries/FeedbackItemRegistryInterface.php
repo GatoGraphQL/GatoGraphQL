@@ -6,7 +6,7 @@ namespace PoP\Root\Registries;
 
 use PoP\Root\FeedbackItemProviders\FeedbackItemProviderInterface;
 
-interface FeedbackMessageRegistryInterface
+interface FeedbackItemRegistryInterface
 {
     public function useFeedbackItemProvider(FeedbackItemProviderInterface $feedbackMessageProvider): void;
 
