@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
 use ArgumentCountError;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Error\ErrorDataTokens;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -17,6 +16,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\Exception\RuntimeOperationException;
 use PoP\Engine\Misc\OperatorHelpers;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
@@ -254,11 +254,15 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     $array = (array) $fieldArgs['object'];
                     $pointerToArrayItemUnderPath = OperatorHelpers::getPointerToArrayItemUnderPath($array, $fieldArgs['path']);
                 } catch (RuntimeOperationException $e) {
-                    return new Error(
-                        'path-not-reachable',
-                        $e->getMessage(),
-                        [ErrorDataTokens::FIELD_NAME => $fieldName]
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            $e->getMessage(),
+                            'path-not-reachable',
+                            LocationHelper::getNonSpecificLocation(),
+                            $objectTypeResolver,
+                        )
                     );
+                    return null;
                 }
                 return $pointerToArrayItemUnderPath;
             case 'time':
@@ -271,13 +275,15 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 try {
                     return sprintf($fieldArgs['string'], ...$fieldArgs['values']);
                 } catch (ArgumentCountError $e) {
-                    return new Error(
-                        'sprintf-wrong-params',
-                        sprintf(
-                            $this->__('There was an error executing `sprintf`: %s', 'engine'),
-                            $e->getMessage()
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            $e->getMessage(),
+                            'sprintf-wrong-params',
+                            LocationHelper::getNonSpecificLocation(),
+                            $objectTypeResolver,
                         )
                     );
+                    return null;
                 }
         }
 
