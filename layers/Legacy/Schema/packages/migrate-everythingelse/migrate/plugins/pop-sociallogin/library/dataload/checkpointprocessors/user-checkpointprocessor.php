@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
-use PoP\ComponentModel\Error\Error;
 
 class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
@@ -19,7 +18,7 @@ class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_NONSOCIALLOGINUSER:
                 if (isSocialloginUser()) {
-                    return new Error('sociallogin-user');
+                    return new CheckpointError('sociallogin-user', 'sociallogin-user');
                 }
                 break;
         }
