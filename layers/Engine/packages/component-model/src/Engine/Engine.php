@@ -1663,7 +1663,7 @@ class Engine implements EngineInterface
                 $iterationFeedbackStoreObjectWarnings = [];
                 $field = $objectWarning->getField();
                 $objectID = $objectWarning->getObjectID();
-                $message = $objectWarning->getMessage();
+                $message = $objectWarning->getFeedbackItemResolution()->getMessage();
                 $locations = [$objectWarning->getLocation()->toArray()];
                 $extensions = $objectWarning->getExtensions();
                 $iterationFeedbackStoreObjectWarnings[(string)$objectID][] = [
@@ -1696,7 +1696,7 @@ class Engine implements EngineInterface
                 $iterationFeedbackStoreObjectDeprecations = [];
                 $field = $objectDeprecation->getField();
                 $objectID = $objectDeprecation->getObjectID();
-                $message = $objectDeprecation->getMessage();
+                $message = $objectDeprecation->getFeedbackItemResolution()->getMessage();
                 $locations = [$objectDeprecation->getLocation()->toArray()];
                 $extensions = $objectDeprecation->getExtensions();
                 $iterationFeedbackStoreObjectDeprecations[(string)$objectID][] = [
@@ -1746,7 +1746,7 @@ class Engine implements EngineInterface
                 $iterationFeedbackStoreSchemaErrors = [];
                 $iterationFeedbackStoreSchemaErrors[] = [
                     Tokens::PATH => [$schemaError->getField()],
-                    Tokens::MESSAGE => $schemaError->getMessage(),
+                    Tokens::MESSAGE => $schemaError->getFeedbackItemResolution()->getMessage(),
                     Tokens::LOCATIONS => [$schemaError->getLocation()->toArray()],
                     Tokens::EXTENSIONS => $schemaError->getExtensions(),
                 ];
@@ -1773,7 +1773,7 @@ class Engine implements EngineInterface
                 $iterationFeedbackStoreSchemaWarnings = [];
                 $iterationFeedbackStoreSchemaWarnings[] = [
                     Tokens::PATH => [$schemaWarning->getField()],
-                    Tokens::MESSAGE => $schemaWarning->getMessage(),
+                    Tokens::MESSAGE => $schemaWarning->getFeedbackItemResolution()->getMessage(),
                     Tokens::LOCATIONS => [$schemaWarning->getLocation()->toArray()],
                     Tokens::EXTENSIONS => $schemaWarning->getExtensions(),
                 ];
@@ -2044,8 +2044,8 @@ class Engine implements EngineInterface
         foreach ($engineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectFeedbackError) {
             $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorService()->getErrorOutput(
                 new Error(
-                    $objectFeedbackError->getCode(),
-                    $objectFeedbackError->getMessage(),
+                    $objectFeedbackError->getFeedbackItemResolution()->getNamespacedCode(),
+                    $objectFeedbackError->getFeedbackItemResolution()->getMessage(),
                     $objectFeedbackError->getExtensions(),
                 ),
                 [$objectFeedbackError->getField()]
@@ -2085,7 +2085,7 @@ class Engine implements EngineInterface
             Tokens::PATH => $objectFeedback->getDirective() !== null
                 ? [$objectFeedback->getField(), $objectFeedback->getDirective()]
                 : [$objectFeedback->getField()],
-            Tokens::MESSAGE => $objectFeedback->getMessage(),
+            Tokens::MESSAGE => $objectFeedback->getFeedbackItemResolution()->getMessage(),
             Tokens::LOCATIONS => [$objectFeedback->getLocation()->toArray()],
             Tokens::EXTENSIONS => $objectFeedback->getExtensions(),
         ];
@@ -2112,8 +2112,8 @@ class Engine implements EngineInterface
         foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
             $iterationSchemaErrors[] = $this->getErrorService()->getErrorOutput(
                 new Error(
-                    $schemaFeedbackError->getCode(),
-                    $schemaFeedbackError->getMessage(),
+                    $schemaFeedbackError->getFeedbackItemResolution()->getNamespacedCode(),
+                    $schemaFeedbackError->getFeedbackItemResolution()->getMessage(),
                     $schemaFeedbackError->getExtensions(),
                 ),
                 [$schemaFeedbackError->getField()]
@@ -2151,7 +2151,7 @@ class Engine implements EngineInterface
     ): void {
         $entry = [
             Tokens::PATH => [$schemaFeedback->getField()],
-            Tokens::MESSAGE => $schemaFeedback->getMessage(),
+            Tokens::MESSAGE => $schemaFeedback->getFeedbackItemResolution()->getMessage(),
             Tokens::LOCATIONS => [$schemaFeedback->getLocation()->toArray()],
             Tokens::EXTENSIONS => $schemaFeedback->getExtensions(),
         ];
@@ -2176,10 +2176,10 @@ class Engine implements EngineInterface
         $output = [];
         foreach ($generalFeedbackEntries as $generalFeedbackEntry) {
             $generalFeedbackEntryExtensions = [];
-            if ($code = $generalFeedbackEntry->getCode()) {
+            if ($code = $generalFeedbackEntry->getFeedbackItemResolution()->getNamespacedCode()) {
                 $generalFeedbackEntryExtensions['code'] = $code;
             }
-            $output[$generalFeedbackEntry->getMessage()] = $generalFeedbackEntryExtensions;
+            $output[$generalFeedbackEntry->getFeedbackItemResolution()->getMessage()] = $generalFeedbackEntryExtensions;
         }
         return $output;
     }
@@ -2193,7 +2193,7 @@ class Engine implements EngineInterface
         $output = [];
         foreach ($documentFeedbackEntries as $documentFeedbackEntry) {
             $documentFeedbackEntryExtensions = $documentFeedbackEntry->getExtensions();
-            if ($code = $documentFeedbackEntry->getCode()) {
+            if ($code = $documentFeedbackEntry->getFeedbackItemResolution()->getNamespacedCode()) {
                 $documentFeedbackEntryExtensions['code'] = $code;
             }
             if ($data = $documentFeedbackEntry->getData()) {
@@ -2201,7 +2201,7 @@ class Engine implements EngineInterface
             }
             $output[] = array_merge(
                 [
-                    Tokens::MESSAGE => $documentFeedbackEntry->getMessage(),
+                    Tokens::MESSAGE => $documentFeedbackEntry->getFeedbackItemResolution()->getMessage(),
                     Tokens::LOCATIONS => [$documentFeedbackEntry->getLocation()->toArray()],
                 ],
                 $documentFeedbackEntryExtensions !== [] ? [
