@@ -536,12 +536,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $id,
                         $key
                     );
-                    $hasErrors = $this->maybeNestDirectiveFeedback(
+                    $this->maybeNestDirectiveFeedback(
                         $relationalTypeResolver,
                         $objectTypeFieldResolutionFeedbackStore,
                         $errorMessage,
                     );
-                    if ($hasErrors) {
+                    if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                         continue;
                     }
                     $value = $resolvedValue;
@@ -567,12 +567,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $id,
                         $key
                     );
-                    $hasErrors = $this->maybeNestDirectiveFeedback(
+                    $this->maybeNestDirectiveFeedback(
                         $relationalTypeResolver,
                         $objectTypeFieldResolutionFeedbackStore,
                         $errorMessage,
                     );
-                    if ($hasErrors) {
+                    if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                         continue;
                     }
                     $existingValue[] = $resolvedValue;

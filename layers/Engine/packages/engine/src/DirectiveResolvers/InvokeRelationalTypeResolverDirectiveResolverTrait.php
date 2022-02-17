@@ -22,7 +22,7 @@ trait InvokeRelationalTypeResolverDirectiveResolverTrait
         RelationalTypeResolverInterface $relationalTypeResolver,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         string $errorMessage,
-    ): bool {
+    ): void {
         // If there was an error, add it as nested
         $errors = $objectTypeFieldResolutionFeedbackStore->getErrors();
         if ($errors !== []) {
@@ -38,8 +38,6 @@ trait InvokeRelationalTypeResolverDirectiveResolverTrait
                     $errors
                 )
             );
-            return true;
         }
-        return false;
     }
 }
