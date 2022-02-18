@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\FeedbackItemProviders;
+namespace PoP\Engine\FeedbackItemProviders;
 
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\Root\Feedback\FeedbackCategories;
 
-class CheckpointErrorMessageProvider extends AbstractFeedbackItemProvider
+class CheckpointErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public const E1 = '1';
 
@@ -24,7 +24,7 @@ class CheckpointErrorMessageProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('Mutations cannot be executed', 'component-model'),
+            self::E1 => $this->__('REQUEST_METHOD is not \'POST\'', 'engine'),
             default => parent::getMessagePlaceholder($code),
         };
     }

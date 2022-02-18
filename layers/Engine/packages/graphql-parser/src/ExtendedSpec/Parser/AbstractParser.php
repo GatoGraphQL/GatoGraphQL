@@ -8,7 +8,7 @@ use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -17,15 +17,15 @@ use PoP\Root\App;
 
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
-    private ?GraphQLExtendedSpecErrorMessageProvider $graphQLExtendedSpecErrorMessageProvider = null;
+    private ?GraphQLExtendedSpecErrorFeedbackItemProvider $graphQLExtendedSpecErrorFeedbackItemProvider = null;
 
-    final public function setGraphQLExtendedSpecErrorMessageProvider(GraphQLExtendedSpecErrorMessageProvider $graphQLExtendedSpecErrorMessageProvider): void
+    final public function setGraphQLExtendedSpecErrorFeedbackItemProvider(GraphQLExtendedSpecErrorFeedbackItemProvider $graphQLExtendedSpecErrorFeedbackItemProvider): void
     {
-        $this->graphQLExtendedSpecErrorMessageProvider = $graphQLExtendedSpecErrorMessageProvider;
+        $this->graphQLExtendedSpecErrorFeedbackItemProvider = $graphQLExtendedSpecErrorFeedbackItemProvider;
     }
-    final protected function getGraphQLExtendedSpecErrorMessageProvider(): GraphQLExtendedSpecErrorMessageProvider
+    final protected function getGraphQLExtendedSpecErrorFeedbackItemProvider(): GraphQLExtendedSpecErrorFeedbackItemProvider
     {
-        return $this->graphQLExtendedSpecErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLExtendedSpecErrorMessageProvider::class);
+        return $this->graphQLExtendedSpecErrorFeedbackItemProvider ??= $this->instanceManager->getInstance(GraphQLExtendedSpecErrorFeedbackItemProvider::class);
     }
 
     /**
@@ -81,8 +81,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                  */
                 if (isset($composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition])) {
                     throw new InvalidRequestException(
-                        $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E1, $directive->getName()),
-                        $this->getGraphQLExtendedSpecErrorMessageProvider()->getNamespacedCode(GraphQLExtendedSpecErrorMessageProvider::E1),
+                        $this->getGraphQLExtendedSpecErrorFeedbackItemProvider()->getMessage(GraphQLExtendedSpecErrorFeedbackItemProvider::E1, $directive->getName()),
+                        $this->getGraphQLExtendedSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLExtendedSpecErrorFeedbackItemProvider::E1),
                         $directive->getLocation()
                     );
                 }
@@ -162,8 +162,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         $argumentValue = $argument->getValue()->getValue();
         if ($argumentValue === null) {
             throw new InvalidRequestException(
-                $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E2, $argument->getName(), $directive->getName()),
-                $this->getGraphQLExtendedSpecErrorMessageProvider()->getNamespacedCode(GraphQLExtendedSpecErrorMessageProvider::E2),
+                $this->getGraphQLExtendedSpecErrorFeedbackItemProvider()->getMessage(GraphQLExtendedSpecErrorFeedbackItemProvider::E2, $argument->getName(), $directive->getName()),
+                $this->getGraphQLExtendedSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLExtendedSpecErrorFeedbackItemProvider::E2),
                 $argument->getLocation()
             );
         }
@@ -175,8 +175,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
         if ($argumentValue === []) {
             throw new InvalidRequestException(
-                $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E2, $argument->getName(), $directive->getName()),
-                $this->getGraphQLExtendedSpecErrorMessageProvider()->getNamespacedCode(GraphQLExtendedSpecErrorMessageProvider::E2),
+                $this->getGraphQLExtendedSpecErrorFeedbackItemProvider()->getMessage(GraphQLExtendedSpecErrorFeedbackItemProvider::E2, $argument->getName(), $directive->getName()),
+                $this->getGraphQLExtendedSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLExtendedSpecErrorFeedbackItemProvider::E2),
                 $argument->getLocation()
             );
         }
@@ -184,16 +184,16 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         foreach ($argumentValue as $argumentValueItem) {
             if (!is_int($argumentValueItem) || ((int)$argumentValueItem <= 0)) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E3, $argument->getName(), $directive->getName(), $argumentValueItem),
-                    $this->getGraphQLExtendedSpecErrorMessageProvider()->getNamespacedCode(GraphQLExtendedSpecErrorMessageProvider::E3),
+                    $this->getGraphQLExtendedSpecErrorFeedbackItemProvider()->getMessage(GraphQLExtendedSpecErrorFeedbackItemProvider::E3, $argument->getName(), $directive->getName(), $argumentValueItem),
+                    $this->getGraphQLExtendedSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLExtendedSpecErrorFeedbackItemProvider::E3),
                     $argument->getLocation()
                 );
             }
             $nestedDirectivePos = $directivePos + (int)$argumentValueItem;
             if ($nestedDirectivePos >= $directiveCount) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLExtendedSpecErrorMessageProvider()->getMessage(GraphQLExtendedSpecErrorMessageProvider::E4, $argumentValueItem, $directive->getName(), $argument->getName()),
-                    $this->getGraphQLExtendedSpecErrorMessageProvider()->getNamespacedCode(GraphQLExtendedSpecErrorMessageProvider::E4),
+                    $this->getGraphQLExtendedSpecErrorFeedbackItemProvider()->getMessage(GraphQLExtendedSpecErrorFeedbackItemProvider::E4, $argumentValueItem, $directive->getName(), $argument->getName()),
+                    $this->getGraphQLExtendedSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLExtendedSpecErrorFeedbackItemProvider::E4),
                     $argument->getLocation()
                 );
             }

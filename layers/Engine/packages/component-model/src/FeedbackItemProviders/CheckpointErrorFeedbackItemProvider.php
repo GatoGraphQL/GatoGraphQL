@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\UserState\FeedbackItemProviders;
+namespace PoP\ComponentModel\FeedbackItemProviders;
 
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\Root\Feedback\FeedbackCategories;
 
-class CheckpointErrorMessageProvider extends AbstractFeedbackItemProvider
+class CheckpointErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public const E1 = '1';
-    public const E2 = '2';
 
     /**
      * @return string[]
@@ -19,15 +18,13 @@ class CheckpointErrorMessageProvider extends AbstractFeedbackItemProvider
     {
         return [
             self::E1,
-            self::E2,
         ];
     }
 
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('The user is not logged-in', 'user-state'),
-            self::E2 => $this->__('The user is logged-in', 'user-state'),
+            self::E1 => $this->__('Mutations cannot be executed', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
