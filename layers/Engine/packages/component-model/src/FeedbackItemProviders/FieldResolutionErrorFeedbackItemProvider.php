@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FeedbackItemProviders;
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\Root\Feedback\FeedbackCategories;
 
-class FieldResolutionErrorMessageProvider extends AbstractFeedbackItemProvider
+class FieldResolutionErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public const E1 = '1';
     public const E2 = '2';
@@ -50,7 +50,7 @@ class FieldResolutionErrorMessageProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('Mutations cannot be executed', 'component-model'),
+            self::E1 => $this->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'component-model'),
             self::E2 => null,
             self::E3 => null,
             self::E4 => null,
