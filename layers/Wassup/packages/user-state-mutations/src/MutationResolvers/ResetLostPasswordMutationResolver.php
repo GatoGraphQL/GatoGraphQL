@@ -73,16 +73,15 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
             return new Error(
                 'error-wrongcode'
             );
-        } else {
-            $user = $cmsuseraccountapi->checkPasswordResetKey($rp_key, $rp_login);
-            if (!$user) {
-                return new Error(
-                    'error-invalidkey'
-                );
-            }
-            if (GeneralUtils::isError($user)) {
-                return $user;
-            }
+        }
+        $user = $cmsuseraccountapi->checkPasswordResetKey($rp_key, $rp_login);
+        if (!$user) {
+            return new Error(
+                'error-invalidkey'
+            );
+        }
+        if (GeneralUtils::isError($user)) {
+            return $user;
         }
 
         // Do the actual password reset
