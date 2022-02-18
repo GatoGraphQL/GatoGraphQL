@@ -604,6 +604,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 FeedbackItemProvider::class,
                                 FeedbackItemProvider::E3,
                                 [
+                                    $fieldName,
                                     $e->getMessage(),
                                 ]
                             ),
@@ -617,7 +618,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             FeedbackItemProvider::class,
-                            FeedbackItemProvider::E4
+                            FeedbackItemProvider::E4,
+                            [
+                                $fieldName,
+                            ]
                         ),
                         LocationHelper::getNonSpecificLocation(),
                         $this,
