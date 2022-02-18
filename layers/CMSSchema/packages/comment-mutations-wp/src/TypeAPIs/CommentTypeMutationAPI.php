@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CommentMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\Error\Error;
 use PoP\Root\Services\BasicServiceTrait;
+use PoPCMSSchema\CommentMutations\Exception\CommentCRUDException;
 use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 
 /**
@@ -15,7 +16,10 @@ class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
 {
     use BasicServiceTrait;
 
-    public function insertComment(array $comment_data): string | int | Error
+    /**
+     * @throws CommentCRUDException In case of error
+     */
+    public function insertComment(array $comment_data): string | int
     {
         // Convert the parameters
         if (isset($comment_data['userID'])) {
@@ -56,8 +60,7 @@ class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
         }
         $commentID = \wp_insert_comment($comment_data);
         if ($commentID === false) {
-            return new Error(
-                'insert-comment-error',
+            throw new CommentCRUDException(
                 $this->__('Could not create the comment', 'comment-mutations-wp')
             );
         }
