@@ -615,7 +615,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 if ($componentConfiguration->logExceptionErrorMessages()) {
                     // @todo: Implement for Log
                 }
-                if ($e instanceof AbstractClientException
+                if (
+                    $e instanceof AbstractClientException
                     || $componentConfiguration->sendExceptionErrorMessages()
                 ) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
