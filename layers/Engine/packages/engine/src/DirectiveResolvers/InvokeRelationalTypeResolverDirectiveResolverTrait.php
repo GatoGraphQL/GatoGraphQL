@@ -18,7 +18,6 @@ trait InvokeRelationalTypeResolverDirectiveResolverTrait
     protected function maybeNestDirectiveFeedback(
         RelationalTypeResolverInterface $relationalTypeResolver,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        string $errorMessage,
     ): void {
         // If there was an error, add it as nested
         $errors = $objectTypeFieldResolutionFeedbackStore->getErrors();

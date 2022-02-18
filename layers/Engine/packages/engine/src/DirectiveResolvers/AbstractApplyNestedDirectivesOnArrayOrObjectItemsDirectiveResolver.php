@@ -530,16 +530,9 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $objectTypeFieldResolutionFeedbackStore,
                         $options
                     );
-                    $errorMessage = sprintf(
-                        $this->__('Executing field \'%s\' on object with ID \'%s\' produced error(s). Setting expression \'%s\' was ignored', 'pop-component-model'),
-                        $value,
-                        $id,
-                        $key
-                    );
                     $this->maybeNestDirectiveFeedback(
                         $relationalTypeResolver,
                         $objectTypeFieldResolutionFeedbackStore,
-                        $errorMessage,
                     );
                     if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                         continue;
@@ -561,16 +554,9 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $objectTypeFieldResolutionFeedbackStore,
                         $options
                     );
-                    $errorMessage = sprintf(
-                        $this->__('Executing field \'%s\' on object with ID \'%s\' produced error(s). Setting expression \'%s\' was ignored', 'pop-component-model'),
-                        $value,
-                        $id,
-                        $key
-                    );
                     $this->maybeNestDirectiveFeedback(
                         $relationalTypeResolver,
                         $objectTypeFieldResolutionFeedbackStore,
-                        $errorMessage,
                     );
                     if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                         continue;
