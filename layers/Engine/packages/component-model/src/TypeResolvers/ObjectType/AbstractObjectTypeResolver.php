@@ -11,11 +11,13 @@ use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Error\ErrorCodes;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -378,13 +380,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    sprintf(
-                        $this->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'component-model'),
-                        $fieldName,
-                        $this->getMaybeNamespacedTypeName(),
-                        $this->getID($object)
+                    new FeedbackItemResolution(
+                        FieldResolutionErrorFeedbackItemProvider::class,
+                        FieldResolutionErrorFeedbackItemProvider::E1,
+                        [
+                            $fieldName,
+                            $this->getMaybeNamespacedTypeName(),
+                            $this->getID($object),
+                        ]
                     ),
-                    ErrorCodes::NO_FIELD,
                     LocationHelper::getNonSpecificLocation(),
                     $this,
                 )
