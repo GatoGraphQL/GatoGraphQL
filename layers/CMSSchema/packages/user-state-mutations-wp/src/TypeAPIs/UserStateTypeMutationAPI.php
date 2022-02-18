@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserStateMutationsWP\TypeAPIs;
 
 use PoP\Root\Services\BasicServiceTrait;
-use PoPCMSSchema\SchemaCommons\Error\ErrorHelperInterface;
 use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
 use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 use WP_Error;
@@ -16,17 +15,6 @@ use WP_Error;
 class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
     use BasicServiceTrait;
-
-    private ?ErrorHelperInterface $errorHelper = null;
-
-    final public function setErrorHelper(ErrorHelperInterface $errorHelper): void
-    {
-        $this->errorHelper = $errorHelper;
-    }
-    final protected function getErrorHelper(): ErrorHelperInterface
-    {
-        return $this->errorHelper ??= $this->instanceManager->getInstance(ErrorHelperInterface::class);
-    }
 
     /**
      * @return mixed Result or Error

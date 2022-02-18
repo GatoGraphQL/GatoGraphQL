@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostMutationsWP\TypeAPIs;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
-use PoPCMSSchema\SchemaCommons\Error\ErrorHelperInterface;
 use WP_Error;
 
 /**
@@ -16,17 +15,6 @@ use WP_Error;
 class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
     use BasicServiceTrait;
-
-    private ?ErrorHelperInterface $errorHelper = null;
-
-    final public function setErrorHelper(ErrorHelperInterface $errorHelper): void
-    {
-        $this->errorHelper = $errorHelper;
-    }
-    final protected function getErrorHelper(): ErrorHelperInterface
-    {
-        return $this->errorHelper ??= $this->instanceManager->getInstance(ErrorHelperInterface::class);
-    }
 
     protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array &$query): void
     {
