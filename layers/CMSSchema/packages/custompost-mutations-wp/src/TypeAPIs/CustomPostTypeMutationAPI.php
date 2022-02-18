@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMutationsWP\TypeAPIs;
 
 use PoP\Root\Services\BasicServiceTrait;
-use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDException;
+use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\SchemaCommons\Error\ErrorHelperInterface;
 use WP_Error;
@@ -55,7 +55,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     /**
      * @param array<string, mixed> $data
      * @return string|int the ID of the created custom post
-     * @throws CustomPostCRUDException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     public function createCustomPost(array $data): string | int
     {
@@ -65,7 +65,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */
             $error = $postIDOrError;
-            throw new CustomPostCRUDException(
+            throw new CustomPostCRUDMutationException(
                 $error->get_error_message()
             );
         }
@@ -77,7 +77,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     /**
      * @param array<string, mixed> $data
      * @return string|int the ID of the updated custom post
-     * @throws CustomPostCRUDException If there was an error (eg: Custom Post does not exists)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
     public function updateCustomPost(array $data): string | int
     {
@@ -87,7 +87,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */
             $error = $postIDOrError;
-            throw new CustomPostCRUDException(
+            throw new CustomPostCRUDMutationException(
                 $error->get_error_message()
             );
         }

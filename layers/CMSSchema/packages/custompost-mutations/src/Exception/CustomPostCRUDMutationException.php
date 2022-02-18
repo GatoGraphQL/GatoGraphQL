@@ -6,6 +6,6 @@ namespace PoPCMSSchema\CustomPostMutations\Exception;
 
 use PoP\Root\Exception\AbstractSystemException;
 
-final class CustomPostCRUDException extends AbstractSystemException
+final class CustomPostCRUDMutationException extends AbstractSystemException
 {
 }

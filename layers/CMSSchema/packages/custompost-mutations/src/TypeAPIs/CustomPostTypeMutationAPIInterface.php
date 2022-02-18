@@ -12,13 +12,13 @@ interface CustomPostTypeMutationAPIInterface
     /**
      * @param array<string, mixed> $data
      * @return string|int the ID of the created custom post
-     * @throws CustomPostCRUDException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     public function createCustomPost(array $data): string | int;
     /**
      * @param array<string, mixed> $data
      * @return string|int the ID of the updated custom post
-     * @throws CustomPostCRUDException If there was an error (eg: Custom Post does not exists)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
     public function updateCustomPost(array $data): string | int;
     public function canUserEditCustomPost(string | int $userID, string | int $customPostID): bool;

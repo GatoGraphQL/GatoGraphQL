@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
 use PoP\Root\Exception\AbstractException;
-use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDException;
+use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 
 trait CreateCustomPostMutationResolverTrait
 {
@@ -20,7 +20,7 @@ trait CreateCustomPostMutationResolverTrait
 
     /**
      * @return string|int The ID of the created entity
-     * @throws CustomPostCRUDException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     abstract protected function create(array $form_data): string | int;
 

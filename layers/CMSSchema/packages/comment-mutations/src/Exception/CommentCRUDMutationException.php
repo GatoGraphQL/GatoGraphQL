@@ -6,6 +6,6 @@ namespace PoPCMSSchema\CommentMutations\Exception;
 
 use PoP\Root\Exception\AbstractSystemException;
 
-final class CommentCRUDException extends AbstractSystemException
+final class CommentCRUDMutationException extends AbstractSystemException
 {
 }

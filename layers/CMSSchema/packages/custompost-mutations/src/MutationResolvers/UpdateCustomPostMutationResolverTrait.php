@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
 use PoP\Root\Exception\AbstractException;
-use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDException;
+use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 
 trait UpdateCustomPostMutationResolverTrait
 {
@@ -20,7 +20,7 @@ trait UpdateCustomPostMutationResolverTrait
 
     /**
      * @return string|int The ID of the updated entity
-     * @throws CustomPostCRUDException If there was an error (eg: Custom Post does not exists)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
     abstract protected function update(array $form_data): string | int;
 

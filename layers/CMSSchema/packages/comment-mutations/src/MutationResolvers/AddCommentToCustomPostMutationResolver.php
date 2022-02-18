@@ -9,7 +9,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoPCMSSchema\CommentMutations\Component;
 use PoPCMSSchema\CommentMutations\ComponentConfiguration;
-use PoPCMSSchema\CommentMutations\Exception\CommentCRUDException;
+use PoPCMSSchema\CommentMutations\Exception\CommentCRUDMutationException;
 use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
@@ -133,7 +133,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @throws CommentCRUDException In case of error
+     * @throws CommentCRUDMutationException In case of error
      */
     protected function insertComment(array $comment_data): string | int
     {

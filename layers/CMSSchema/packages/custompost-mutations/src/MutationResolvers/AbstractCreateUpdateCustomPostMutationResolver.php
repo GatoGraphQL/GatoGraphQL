@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
-use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDException;
+use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
@@ -277,7 +277,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param array<string, mixed> $post_data
      * @return string|int the ID of the updated custom post
-     * @throws CustomPostCRUDException If there was an error (eg: Custom Post does not exists)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
     protected function executeUpdateCustomPost(array $post_data): string | int
     {
@@ -297,7 +297,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the updated entity
-     * @throws CustomPostCRUDException If there was an error (eg: Custom Post does not exists)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
     protected function update(array $form_data): string | int
     {
@@ -327,7 +327,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param array<string, mixed> $post_data
      * @return string|int the ID of the created custom post
-     * @throws CustomPostCRUDException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     protected function executeCreateCustomPost(array $post_data): string | int
     {
@@ -336,7 +336,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the created entity
-     * @throws CustomPostCRUDException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     protected function create(array $form_data): string | int
     {
