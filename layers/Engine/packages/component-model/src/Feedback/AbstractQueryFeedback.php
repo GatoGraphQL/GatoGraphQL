@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
 abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFeedbackInterface
