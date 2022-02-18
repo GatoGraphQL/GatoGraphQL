@@ -54,6 +54,10 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
         return false;
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws \PoP\Root\Exception\AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         // Plugins needed by the website. Check the website version, if it's the one indicated,

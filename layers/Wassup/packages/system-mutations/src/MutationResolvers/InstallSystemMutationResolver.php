@@ -21,6 +21,10 @@ class InstallSystemMutationResolver extends AbstractMutationResolver
         return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws \PoP\Root\Exception\AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         // Save the new version on the DB

@@ -38,6 +38,10 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
         return \PoP_Notifications_API::setStatus($form_data['histid'], $form_data['user_id'], $this->getStatus());
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws \PoP\Root\Exception\AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $hist_ids = $this->setStatus($form_data);

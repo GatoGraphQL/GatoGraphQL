@@ -137,6 +137,10 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $this->getCommentTypeMutationAPI()->insertComment($comment_data);
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws \PoP\Root\Exception\AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $comment_data = $this->getCommentData($form_data);

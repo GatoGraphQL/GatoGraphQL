@@ -202,8 +202,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     {
         $post_data = parent::getUpdateCustomPostData($form_data);
 
-        $this->addCustomPostType($post_data);
-
         // Status: If provided, Validate the value is permitted, or get the default value otherwise
         if ($status = $post_data['status']) {
             $post_data['status'] = \GD_CreateUpdate_Utils::getUpdatepostStatus($status, $this->moderate());

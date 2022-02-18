@@ -8,6 +8,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class FileUploadPictureMutationResolver extends AbstractMutationResolver
 {
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws \PoP\Root\Exception\AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         // Copy the images to the fileupload-userphoto upload folder

@@ -4,12 +4,24 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDException;
+
 trait UpdateCustomPostMutationResolverTrait
 {
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws \PoP\Root\Exception\AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         return $this->update($form_data);
     }
+
+    /**
+     * @return string|int The ID of the updated entity
+     * @throws CustomPostCRUDException If there was an error (eg: Custom Post does not exists)
+     */
+    abstract protected function update(array $form_data): string | int;
 
     public function validateErrors(array $form_data): array
     {

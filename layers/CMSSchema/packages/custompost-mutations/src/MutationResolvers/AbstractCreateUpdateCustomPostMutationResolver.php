@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
-use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\LooseContracts\NameResolverInterface;
+use PoP\Root\App;
+use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDException;
 use PoPCMSSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
-use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
@@ -272,17 +273,17 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         ];
         $this->addCreateUpdateCustomPostData($post_data, $form_data);
 
-        // $this->addCustomPostType($post_data);
-
         return $post_data;
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param array<string, mixed> $post_data
+     * @return string|int the ID of the updated custom post
+     * @throws CustomPostCRUDException If there was an error (eg: Custom Post does not exists)
      */
-    protected function executeUpdateCustomPost(array $data): string | int | null | Error
+    protected function executeUpdateCustomPost(array $post_data): string | int
     {
-        return $this->getCustomPostTypeMutationAPI()->updateCustomPost($data);
+        return $this->getCustomPostTypeMutationAPI()->updateCustomPost($post_data);
     }
 
     protected function createUpdateCustomPost(array $form_data, int | string $customPostID): void
@@ -291,17 +292,16 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     protected function getUpdateCustomPostDataLog(int | string $customPostID, array $form_data): array
     {
-        $log = array(
+        return [
             'previous-status' => $this->getCustomPostTypeAPI()->getStatus($customPostID),
-        );
-
-        return $log;
+        ];
     }
 
     /**
-     * @return string|int|Error The ID of the updated entity, or an Error
+     * @return string|int The ID of the updated entity
+     * @throws CustomPostCRUDException If there was an error (eg: Custom Post does not exists)
      */
-    protected function update(array $form_data): string | int | Error
+    protected function update(array $form_data): string | int
     {
         $post_data = $this->getUpdateCustomPostData($form_data);
         $customPostID = $post_data['id'];
@@ -311,16 +311,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         // - Add user notification of post being referenced, only when the reference is new (otherwise it will add the notification each time the user updates the post)
         $log = $this->getUpdateCustomPostDataLog($customPostID, $form_data);
 
-        $result = $this->executeUpdateCustomPost($post_data);
-
-        if (GeneralUtils::isError($result)) {
-            return $result;
-        } elseif ($result === null) {
-            return new Error(
-                'update-error',
-                $this->__('Oops, there was a problem... this is embarrassing, huh?', 'custompost-mutations')
-            );
-        }
+        $customPostID = $this->executeUpdateCustomPost($post_data);
 
         $this->createUpdateCustomPost($form_data, $customPostID);
 
@@ -331,34 +322,28 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         // Inject Share profiles here
         App::doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $form_data);
         App::doAction(self::HOOK_EXECUTE_UPDATE, $customPostID, $log, $form_data);
+
         return $customPostID;
     }
 
     /**
-     * @param array<string, mixed> $data
-     * @return string|int|null|Error the ID of the created custom post
+     * @param array<string, mixed> $post_data
+     * @return string|int the ID of the created custom post
+     * @throws CustomPostCRUDException If there was an error (eg: some Custom Post creation validation failed)
      */
-    protected function executeCreateCustomPost(array $data): string | int | null | Error
+    protected function executeCreateCustomPost(array $post_data): string | int
     {
-        return $this->getCustomPostTypeMutationAPI()->createCustomPost($data);
+        return $this->getCustomPostTypeMutationAPI()->createCustomPost($post_data);
     }
 
     /**
-     * @return string|int|Error The ID of the created entity, or an Error
+     * @return string|int The ID of the created entity
+     * @throws CustomPostCRUDException If there was an error (eg: some Custom Post creation validation failed)
      */
-    protected function create(array $form_data): string | int | Error
+    protected function create(array $form_data): string | int
     {
         $post_data = $this->getCreateCustomPostData($form_data);
         $customPostID = $this->executeCreateCustomPost($post_data);
-
-        if (GeneralUtils::isError($customPostID)) {
-            return $customPostID;
-        } elseif ($customPostID === null) {
-            return new Error(
-                'create-error',
-                $this->__('Oops, there was a problem... this is embarrassing, huh?', 'custompost-mutations')
-            );
-        }
 
         $this->createUpdateCustomPost($form_data, $customPostID);
 

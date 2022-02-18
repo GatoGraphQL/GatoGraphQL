@@ -71,6 +71,10 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
         return \PoP_EmailSender_Utils::sendEmail($form_data['email'], $subject, $msg);
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws \PoP\Root\Exception\AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $result = $this->doExecute($form_data);

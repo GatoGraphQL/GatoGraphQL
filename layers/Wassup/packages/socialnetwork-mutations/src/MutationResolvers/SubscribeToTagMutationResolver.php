@@ -40,7 +40,11 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
         App::doAction('gd_subscribetotag', $target_id, $form_data);
     }
 
-    protected function update($form_data): string | int
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws \PoP\Root\Exception\AbstractException In case of error
+     */
+    protected function update(array $form_data): string | int
     {
         $user_id = App::getState('current-user-id');
         $target_id = $form_data['target_id'];

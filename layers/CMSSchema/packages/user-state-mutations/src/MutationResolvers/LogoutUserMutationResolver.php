@@ -30,6 +30,10 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
         $this->validateUserIsLoggedIn($errors);
         return $errors;
     }
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws \PoP\Root\Exception\AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $user_id = App::getState('current-user-id');

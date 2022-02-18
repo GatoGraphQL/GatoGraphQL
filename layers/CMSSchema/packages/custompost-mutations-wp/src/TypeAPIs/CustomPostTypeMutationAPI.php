@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutationsWP\TypeAPIs;
 
-use PoP\ComponentModel\Error\Error;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPCMSSchema\SchemaCommons\Error\ErrorHelperInterface;
+use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDException;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
+use PoPCMSSchema\SchemaCommons\Error\ErrorHelperInterface;
+use WP_Error;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -53,33 +54,48 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     }
     /**
      * @param array<string, mixed> $data
-     * @return string|int|null the ID of the created custom post, or null if there was an error
+     * @return string|int the ID of the created custom post
+     * @throws CustomPostCRUDException If there was an error (eg: some Custom Post creation validation failed)
      */
-    public function createCustomPost(array $data): string | int | null | Error
+    public function createCustomPost(array $data): string | int
     {
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
         $postIDOrError = \wp_insert_post($data, true);
-        // If the returned ID is 0, the creation failed
-        if ($postIDOrError === 0) {
-            return new Error(
-                'add-custompost-error',
-                $this->__('Could not create the custom post', 'custompost-mutations-wp')
+        if ($postIDOrError instanceof WP_Error) {
+            /** @var WP_Error */
+            $error = $postIDOrError;
+            throw new CustomPostCRUDException(
+                $error->get_error_message()
             );
         }
-        return $this->getErrorHelper()->returnResultOrConvertError($postIDOrError);
+        /** @var int */
+        $postID = $postIDOrError;
+        return $postID;
     }
+
     /**
      * @param array<string, mixed> $data
-     * @return string|int|null the ID of the updated custom post, or null if the post doesn't exist
+     * @return string|int the ID of the updated custom post
+     * @throws CustomPostCRUDException If there was an error (eg: Custom Post does not exists)
      */
-    public function updateCustomPost(array $data): string | int | null | Error
+    public function updateCustomPost(array $data): string | int
     {
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
         $postIDOrError = \wp_update_post($data, true);
-        return $this->getErrorHelper()->returnResultOrConvertError($postIDOrError);
+        if ($postIDOrError instanceof WP_Error) {
+            /** @var WP_Error */
+            $error = $postIDOrError;
+            throw new CustomPostCRUDException(
+                $error->get_error_message()
+            );
+        }
+        /** @var int */
+        $postID = $postIDOrError;
+        return $postID;
     }
+
     public function canUserEditCustomPost(string | int $userID, string | int $customPostID): bool
     {
         return \user_can($userID, 'edit_post', $customPostID);

@@ -20,6 +20,10 @@ class MarkAllAsReadNotificationMutationResolver extends AbstractMutationResolver
         return \PoP_Notifications_API::setStatusMultipleNotifications($form_data['user_id'], \AAL_POP_STATUS_READ);
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws \PoP\Root\Exception\AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $hist_ids = $this->markAllAsRead($form_data);
