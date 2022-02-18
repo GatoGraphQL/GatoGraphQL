@@ -661,11 +661,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 if ($fieldTypeIsNonNullable) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Non-nullable field \'%s\' cannot return null', 'component-model'),
-                                $fieldName
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E3,
+                                [
+                                    $fieldName,
+                                ]
                             ),
-                            ErrorCodes::NON_NULLABLE_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -711,12 +713,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Field \'%s\' must not return an array, but returned \'%s\'', 'component-model'),
-                                $fieldName,
-                                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E4,
+                                [
+                                    $fieldName,
+                                    $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                                ]
                             ),
-                            ErrorCodes::MUST_NOT_BE_ARRAY_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -736,12 +740,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     }
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Field \'%s\' must return an array, but returned \'%s\'', 'component-model'),
-                                $fieldName,
-                                $valueAsString
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E5,
+                                [
+                                    $fieldName,
+                                    $valueAsString,
+                                ]
                             ),
-                            ErrorCodes::MUST_BE_ARRAY_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -759,11 +765,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Field \'%s\' must not return an array with null items', 'component-model'),
-                                $fieldName
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E6,
+                                [
+                                    $fieldName,
+                                ]
                             ),
-                            ErrorCodes::ARRAY_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -781,12 +789,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'component-model'),
-                                $fieldName,
-                                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E7,
+                                [
+                                    $fieldName,
+                                    $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value),
+                                ]
                             ),
-                            ErrorCodes::MUST_NOT_BE_ARRAY_OF_ARRAYS_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -804,12 +814,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'component-model'),
-                                $fieldName,
-                                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E8,
+                                [
+                                    $fieldName,
+                                    $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value),
+                                ]
                             ),
-                            ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -830,11 +842,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Field \'%s\' must not return an array of arrays with null items', 'component-model'),
-                                $fieldName
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E9,
+                                [
+                                    $fieldName,
+                                ]
                             ),
-                            ErrorCodes::ARRAY_OF_ARRAYS_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -849,13 +863,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
-                sprintf(
-                    $this->__('No FieldResolver for object type \'%s\' processes field \'%s\' for object with ID \'%s\'', 'component-model'),
-                    $this->getMaybeNamespacedTypeName(),
-                    $fieldName,
-                    (string) $this->getID($object)
+                new FeedbackItemResolution(
+                    FieldResolutionErrorFeedbackItemProvider::class,
+                    FieldResolutionErrorFeedbackItemProvider::E10,
+                    [
+                        $this->getMaybeNamespacedTypeName(),
+                        $fieldName,
+                        $this->getID($object)
+                    ]
                 ),
-                ErrorCodes::NO_FIELD_RESOLVER_UNIT_PROCESSES_FIELD,
                 LocationHelper::getNonSpecificLocation(),
                 $this,
             )
