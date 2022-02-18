@@ -195,7 +195,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $errorMessage = sprintf(
                 $this->__(
                     'There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'',
-                    'pop-component-model'
+                    'component-model'
                 ),
                 $fieldName,
                 $this->getMaybeNamespacedTypeName(),
@@ -205,7 +205,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $errorMessage = sprintf(
                 $this->__(
                     'There is no field \'%s\' on type \'%s\'',
-                    'pop-component-model'
+                    'component-model'
                 ),
                 $fieldName,
                 $this->getMaybeNamespacedTypeName()
@@ -379,7 +379,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     sprintf(
-                        $this->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
+                        $this->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'component-model'),
                         $fieldName,
                         $this->getMaybeNamespacedTypeName(),
                         $this->getID($object)
@@ -424,7 +424,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     sprintf(
-                        $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
+                        $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'component-model'),
                         $fieldName
                     ),
                     ErrorCodes::NESTED_SCHEMA_ERRORS,
@@ -486,7 +486,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     sprintf(
-                        $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
+                        $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'component-model'),
                         $fieldName
                     ),
                     ErrorCodes::NESTED_DB_ERRORS,
@@ -636,7 +636,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             sprintf(
-                                $this->__('Non-nullable field \'%s\' cannot return null', 'pop-component-model'),
+                                $this->__('Non-nullable field \'%s\' cannot return null', 'component-model'),
                                 $fieldName
                             ),
                             ErrorCodes::NON_NULLABLE_FIELD,
@@ -686,7 +686,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             sprintf(
-                                $this->__('Field \'%s\' must not return an array, but returned \'%s\'', 'pop-component-model'),
+                                $this->__('Field \'%s\' must not return an array, but returned \'%s\'', 'component-model'),
                                 $fieldName,
                                 $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
                             ),
@@ -711,7 +711,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             sprintf(
-                                $this->__('Field \'%s\' must return an array, but returned \'%s\'', 'pop-component-model'),
+                                $this->__('Field \'%s\' must return an array, but returned \'%s\'', 'component-model'),
                                 $fieldName,
                                 $valueAsString
                             ),
@@ -734,7 +734,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             sprintf(
-                                $this->__('Field \'%s\' must not return an array with null items', 'pop-component-model'),
+                                $this->__('Field \'%s\' must not return an array with null items', 'component-model'),
                                 $fieldName
                             ),
                             ErrorCodes::ARRAY_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
@@ -756,7 +756,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             sprintf(
-                                $this->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'pop-component-model'),
+                                $this->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'component-model'),
                                 $fieldName,
                                 $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
                             ),
@@ -779,7 +779,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             sprintf(
-                                $this->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'pop-component-model'),
+                                $this->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'component-model'),
                                 $fieldName,
                                 $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
                             ),
@@ -805,7 +805,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             sprintf(
-                                $this->__('Field \'%s\' must not return an array of arrays with null items', 'pop-component-model'),
+                                $this->__('Field \'%s\' must not return an array of arrays with null items', 'component-model'),
                                 $fieldName
                             ),
                             ErrorCodes::ARRAY_OF_ARRAYS_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
@@ -824,7 +824,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
                 sprintf(
-                    $this->__('No FieldResolver for object type \'%s\' processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
+                    $this->__('No FieldResolver for object type \'%s\' processes field \'%s\' for object with ID \'%s\'', 'component-model'),
                     $this->getMaybeNamespacedTypeName(),
                     $fieldName,
                     (string) $this->getID($object)
@@ -849,9 +849,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return $validationDescriptions[0];
         }
         return sprintf(
-            $this->__('Field \'%s\' could not be processed due to previous error(s): \'%s\'', 'pop-component-model'),
+            $this->__('Field \'%s\' could not be processed due to previous error(s): \'%s\'', 'component-model'),
             $fieldName,
-            implode($this->__('\', \'', 'pop-component-model'), $validationDescriptions)
+            implode($this->__('\', \'', 'component-model'), $validationDescriptions)
         );
     }
 
