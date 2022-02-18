@@ -51,7 +51,7 @@ class FieldResolutionErrorFeedbackItemProvider extends AbstractFeedbackItemProvi
     {
         return match ($code) {
             self::E1 => $this->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'component-model'),
-            self::E2 => null,
+            self::E2 => $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'component-model'),
             self::E3 => null,
             self::E4 => null,
             self::E5 => null,
