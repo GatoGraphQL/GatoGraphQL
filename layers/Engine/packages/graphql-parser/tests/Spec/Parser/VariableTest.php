@@ -2,6 +2,7 @@
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
@@ -31,7 +32,7 @@ class VariableTest extends AbstractTestCase
     public function testGetNullValueException()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackItemProvider()->getMessage(FeedbackItemProvider::E2, 'foo'));
+        $this->expectExceptionMessage((new FeedbackItemResolution(FeedbackItemProvider::class, FeedbackItemProvider::E2, ['foo']))->getMessage());
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->getValue()->getValue();
     }

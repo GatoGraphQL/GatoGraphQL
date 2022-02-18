@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
@@ -143,7 +144,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
         $executableDocument = new ExecutableDocument($document, $context);
         if (!$this->enabled()) {
             $this->expectException(InvalidRequestException::class);
-            $this->expectExceptionMessage($this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_6_1_B));
+            $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_6_1_B))->getMessage());
         }
         $executableDocument->validateAndInitialize();
         if ($this->enabled()) {
@@ -162,7 +163,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
         $document = $parser->parse($query);
         $executableDocument = new ExecutableDocument($document, $context);
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_6_1_B));
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_6_1_B))->getMessage());
         $executableDocument->validateAndInitialize();
     }
 }
