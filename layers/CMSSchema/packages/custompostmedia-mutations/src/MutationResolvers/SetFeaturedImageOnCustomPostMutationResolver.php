@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
@@ -25,7 +26,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
 
     /**
      * @param array<string,mixed> $form_data
-     * @throws \PoP\Root\Exception\AbstractException In case of error
+     * @throws AbstractException In case of error
      */
     public function executeMutation(array $form_data): mixed
     {

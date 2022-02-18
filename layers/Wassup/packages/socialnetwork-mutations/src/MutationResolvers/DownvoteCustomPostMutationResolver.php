@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 
@@ -50,7 +51,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
 
     /**
      * @param array<string,mixed> $form_data
-     * @throws \PoP\Root\Exception\AbstractException In case of error
+     * @throws AbstractException In case of error
      */
     protected function update(array $form_data): string | int
     {

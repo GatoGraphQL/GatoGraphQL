@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 
@@ -38,15 +39,13 @@ class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommend
     }
 
     // protected function updateValue($value, $form_data) {
-
     //     // Add the user to follow to the list
     //     $target_id = $form_data['target_id'];
     //     $value[] = $target_id;
     // }
-
     /**
      * @param array<string,mixed> $form_data
-     * @throws \PoP\Root\Exception\AbstractException In case of error
+     * @throws AbstractException In case of error
      */
     protected function update(array $form_data): string | int
     {

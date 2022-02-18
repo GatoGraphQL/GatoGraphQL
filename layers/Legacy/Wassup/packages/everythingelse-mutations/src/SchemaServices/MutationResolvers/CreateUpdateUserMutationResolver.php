@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -173,7 +174,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     /**
      * @param array<string,mixed> $form_data
-     * @throws \PoP\Root\Exception\AbstractException In case of error
+     * @throws AbstractException In case of error
      */
     public function executeMutation(array $form_data): mixed
     {
@@ -213,7 +214,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     /**
      * @return mixed The ID of the updated entity, or an Error
-     * @throws \PoP\Root\Exception\AbstractException In case of error
+     * @throws AbstractException In case of error
      */
     protected function update(array $form_data): string | int
     {
@@ -231,7 +232,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     /**
      * @return mixed The ID of the created entity, or an Error
-     * @throws \PoP\Root\Exception\AbstractException In case of error
+     * @throws AbstractException In case of error
      */
     protected function create(array $form_data): string | int
     {

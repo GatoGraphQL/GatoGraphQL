@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\UserAccount\FunctionAPIFactory;
 
@@ -59,7 +59,7 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
 
     /**
      * @param array<string,mixed> $form_data
-     * @throws \PoP\Root\Exception\AbstractException In case of error
+     * @throws AbstractException In case of error
      */
     public function executeMutation(array $form_data): mixed
     {

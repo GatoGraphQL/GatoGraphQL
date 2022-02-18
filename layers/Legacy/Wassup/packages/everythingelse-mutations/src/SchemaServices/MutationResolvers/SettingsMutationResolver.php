@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
@@ -27,7 +28,7 @@ class SettingsMutationResolver extends AbstractMutationResolver
 
     /**
      * @param array<string,mixed> $form_data
-     * @throws \PoP\Root\Exception\AbstractException In case of error
+     * @throws AbstractException In case of error
      */
     public function executeMutation(array $form_data): mixed
     {
