@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\CheckpointProcessors;
 
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 use PoP\Root\App;
 
@@ -36,9 +35,9 @@ class MutationCheckpointProcessor extends AbstractCheckpointProcessor
         switch ($checkpoint[1]) {
             case self::ENABLED_MUTATIONS:
                 if (!App::getState('are-mutations-enabled')) {
-                    return new CheckpointError(
-                        $this->getCheckpointErrorFeedbackItemProvider()->getMessage(CheckpointErrorFeedbackItemProvider::E1),
-                        $this->getCheckpointErrorFeedbackItemProvider()->getNamespacedCode(CheckpointErrorFeedbackItemProvider::E1),
+                    return new FeedbackItemResolution(
+                        CheckpointErrorFeedbackItemProvider::class,
+                        CheckpointErrorFeedbackItemProvider::E1
                     );
                 }
                 break;
