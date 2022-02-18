@@ -36,8 +36,14 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
         $result = \wp_signon($credentials);
 
         if ($result instanceof WP_Error) {
+            $errorMessage = $result->get_error_code() === 'incorrect_password'
+                ? sprintf(
+                    $this->__('The password you entered for the username \'%s\' is incorrect.', 'user-state-mutations'),
+                    $credentials['user_login']
+                )
+                : $result->get_error_message();
             throw new UserStateMutationException(
-                $result->get_error_message()
+                $errorMessage
             );
         }
 
