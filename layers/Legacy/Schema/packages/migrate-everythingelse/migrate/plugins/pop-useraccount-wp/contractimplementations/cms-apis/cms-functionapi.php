@@ -1,7 +1,6 @@
 <?php
 namespace PoP\UserAccount\WP;
 
-use PoP\Engine\Facades\ErrorHandling\ErrorHelperFacade;
 use PoP\Root\Exception\GenericClientException;
 use WP_Error;
 

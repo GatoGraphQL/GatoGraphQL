@@ -8,10 +8,7 @@ services:
         class: \PoPCMSSchema\SchemaCommons\CMS\CMSHelperService
 
     PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface:
-        class: \PoPCMSSchema\SchemaCommons\Formatters\DateFormatter
-
-    PoPCMSSchema\SchemaCommons\Error\ErrorHelperInterface:
-        class: \PoPCMSSchema\SchemaCommons\Error\ErrorHelper
+        class: \PoPCMSSchema\SchemaCommons\Formatters\DateFormatterErrorHelper
 
     PoPCMSSchema\SchemaCommons\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
