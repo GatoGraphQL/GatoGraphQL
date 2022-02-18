@@ -19,10 +19,6 @@ class FieldResolutionErrorFeedbackItemProvider extends AbstractFeedbackItemProvi
     public const E8 = '8';
     public const E9 = '9';
     public const E10 = '10';
-    public const E11 = '11';
-    public const E12 = '12';
-    public const E13 = '13';
-    public const E14 = '14';
 
     /**
      * @return string[]
@@ -40,10 +36,6 @@ class FieldResolutionErrorFeedbackItemProvider extends AbstractFeedbackItemProvi
             self::E8,
             self::E9,
             self::E10,
-            self::E11,
-            self::E12,
-            self::E13,
-            self::E14,
         ];
     }
 
@@ -60,10 +52,6 @@ class FieldResolutionErrorFeedbackItemProvider extends AbstractFeedbackItemProvi
             self::E8 => $this->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'component-model'),
             self::E9 => $this->__('Field \'%s\' must not return an array of arrays with null items', 'component-model'),
             self::E10 => $this->__('No FieldResolver for object type \'%s\' processes field \'%s\' for object with ID \'%s\'', 'component-model'),
-            self::E11 => null,
-            self::E12 => null,
-            self::E13 => null,
-            self::E14 => null,
             default => parent::getMessagePlaceholder($code),
         };
     }
