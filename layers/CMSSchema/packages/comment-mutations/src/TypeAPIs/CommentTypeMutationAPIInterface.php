@@ -14,5 +14,5 @@ interface CommentTypeMutationAPIInterface
     /**
      * @throws CommentCRUDException In case of error
      */
-    public function insertComment(array $comment_data): string | int
+    public function insertComment(array $comment_data): string | int;
 }
