@@ -1853,7 +1853,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $this->getFeedbackMessageStore()->addQueryError(sprintf(
                     $this->__('Executing field \'%s\' produced error: %s', 'pop-component-model'),
                     $fieldArgValue,
-                    $errors[0]->getMessage()
+                    $errors[0]->getFeedbackItemResolution()->getMessage()
                 ));
                 return null;
             }

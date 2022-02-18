@@ -10,12 +10,15 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\Error\ErrorCodes;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -195,7 +198,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $errorMessage = sprintf(
                 $this->__(
                     'There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'',
-                    'pop-component-model'
+                    'component-model'
                 ),
                 $fieldName,
                 $this->getMaybeNamespacedTypeName(),
@@ -205,7 +208,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $errorMessage = sprintf(
                 $this->__(
                     'There is no field \'%s\' on type \'%s\'',
-                    'pop-component-model'
+                    'component-model'
                 ),
                 $fieldName,
                 $this->getMaybeNamespacedTypeName()
@@ -378,13 +381,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    sprintf(
-                        $this->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
-                        $fieldName,
-                        $this->getMaybeNamespacedTypeName(),
-                        $this->getID($object)
+                    new FeedbackItemResolution(
+                        FieldResolutionErrorFeedbackItemProvider::class,
+                        FieldResolutionErrorFeedbackItemProvider::E1,
+                        [
+                            $fieldName,
+                            $this->getMaybeNamespacedTypeName(),
+                            $this->getID($object),
+                        ]
                     ),
-                    ErrorCodes::NO_FIELD,
                     LocationHelper::getNonSpecificLocation(),
                     $this,
                 )
@@ -409,8 +414,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             foreach ($schemaWarnings as $warningEntry) {
                 $schemaFeedbackStore->addWarning(
                     new SchemaFeedback(
-                        $warningEntry[Tokens::MESSAGE],
-                        null,
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::W1,
+                            [
+                                $warningEntry[Tokens::MESSAGE],
+                            ]
+                        ),
                         LocationHelper::getNonSpecificLocation(),
                         $this,
                         $field, //$warningEntry[Tokens::PATH],
@@ -423,11 +433,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($schemaErrors) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    sprintf(
-                        $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
-                        $fieldName
+                    new FeedbackItemResolution(
+                        FieldResolutionErrorFeedbackItemProvider::class,
+                        FieldResolutionErrorFeedbackItemProvider::E2,
+                        [
+                            $fieldName,
+                        ]
                     ),
-                    ErrorCodes::NESTED_SCHEMA_ERRORS,
                     LocationHelper::getNonSpecificLocation(),
                     $this,
                 )
@@ -470,8 +482,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             foreach ($maybeObjectWarnings as $warningEntry) {
                 $objectFeedbackStore->addWarning(
                     new ObjectFeedback(
-                        $warningEntry[Tokens::MESSAGE],
-                        null,
+                        new FeedbackItemResolution(
+                            FeedbackItemProvider::class,
+                            FeedbackItemProvider::W1,
+                            [
+                                $warningEntry[Tokens::MESSAGE],
+                            ]
+                        ),
                         LocationHelper::getNonSpecificLocation(),
                         $this,
                         $field, //$warningEntry[Tokens::PATH],
@@ -485,11 +502,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($maybeObjectErrors) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    sprintf(
-                        $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
-                        $fieldName
+                    new FeedbackItemResolution(
+                        FieldResolutionErrorFeedbackItemProvider::class,
+                        FieldResolutionErrorFeedbackItemProvider::E2,
+                        [
+                            $fieldName,
+                        ]
                     ),
-                    ErrorCodes::NESTED_DB_ERRORS,
                     LocationHelper::getNonSpecificLocation(),
                     $this,
                 )
@@ -502,8 +521,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             foreach ($maybeObjectDeprecations as $deprecationEntry) {
                 $objectFeedbackStore->addDeprecation(
                     new ObjectFeedback(
-                        $deprecationEntry[Tokens::MESSAGE],
-                        null,
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::D1,
+                            [
+                                $deprecationEntry[Tokens::MESSAGE],
+                            ]
+                        ),
                         LocationHelper::getNonSpecificLocation(),
                         $this,
                         $field, //$deprecationEntry[Tokens::PATH],
@@ -522,14 +546,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
             if ($validateSchemaOnObject) {
                 if ($maybeErrors = $objectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            $this->getValidationFailedErrorMessage($fieldName, $maybeErrors),
-                            ErrorCodes::VALIDATION_FAILED,
-                            LocationHelper::getNonSpecificLocation(),
-                            $this,
-                        )
-                    );
+                    // @todo Return FeedbackItemResolution instead of strings here, and bubble up directly
+                    // Then uncomment/fix code below
+                    // $objectTypeFieldResolutionFeedbackStore->addError(
+                    //     new ObjectTypeFieldResolutionFeedback(
+                    //         $this->getValidationFailedErrorMessage($fieldName, $maybeErrors),
+                    //         ErrorCodes::VALIDATION_FAILED,
+                    //         LocationHelper::getNonSpecificLocation(),
+                    //         $this,
+                    //     )
+                    // );
                     return null;
                 }
                 if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
@@ -538,8 +564,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     foreach ($maybeDeprecations as $deprecation) {
                         $objectFeedbackStore->addDeprecation(
                             new ObjectFeedback(
-                                $deprecation,
-                                null,
+                                new FeedbackItemResolution(
+                                    GenericFeedbackItemProvider::class,
+                                    GenericFeedbackItemProvider::D1,
+                                    [
+                                        $deprecation,
+                                    ]
+                                ),
                                 LocationHelper::getNonSpecificLocation(),
                                 $this,
                                 $field,
@@ -550,14 +581,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 }
             }
             if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $this->getValidationFailedErrorMessage($fieldName, $validationErrorDescriptions),
-                        ErrorCodes::VALIDATION_FAILED,
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
-                    )
-                );
+                // @todo Return FeedbackItemResolution instead of strings here, and bubble up directly
+                // Then uncomment/fix code below
+                // $objectTypeFieldResolutionFeedbackStore->addError(
+                //     new ObjectTypeFieldResolutionFeedback(
+                //         $this->getValidationFailedErrorMessage($fieldName, $validationErrorDescriptions),
+                //         ErrorCodes::VALIDATION_FAILED,
+                //         LocationHelper::getNonSpecificLocation(),
+                //         $this,
+                //     )
+                // );
                 return null;
             }
 
@@ -565,7 +598,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // catch it and return the equivalent GraphQL error so that it
             // fails gracefully in production (but not on development!)
             $value = null;
-            $errorMessage = null;
             try {
                 $value = $objectTypeFieldResolver->resolveValue(
                     $this,
@@ -577,26 +609,41 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $objectTypeFieldResolutionFeedbackStore,
                     $options
                 );
-            } catch (AbstractClientException $e) {
-                $errorMessage = $e->getMessage();
             } catch (Exception $e) {
                 /** @var ComponentConfiguration */
                 $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
                 if ($componentConfiguration->logExceptionErrorMessages()) {
                     // @todo: Implement for Log
                 }
-                $errorMessage = $componentConfiguration->sendExceptionErrorMessages()
-                    ? $e->getMessage()
-                    : sprintf(
-                        $this->__('Resolving field \'%s\' produced an exception, please contact the admin', 'component-model'),
-                        $field
+                if (
+                    $e instanceof AbstractClientException
+                    || $componentConfiguration->sendExceptionErrorMessages()
+                ) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E3,
+                                [
+                                    $fieldName,
+                                    $e->getMessage(),
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                        )
                     );
-            }
-            if ($errorMessage !== null) {
+                    return null;
+                }
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        $errorMessage,
-                        'field-resolution-error',
+                        new FeedbackItemResolution(
+                            FeedbackItemProvider::class,
+                            FeedbackItemProvider::E4,
+                            [
+                                $fieldName,
+                            ]
+                        ),
                         LocationHelper::getNonSpecificLocation(),
                         $this,
                     )
@@ -635,11 +682,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 if ($fieldTypeIsNonNullable) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Non-nullable field \'%s\' cannot return null', 'pop-component-model'),
-                                $fieldName
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E3,
+                                [
+                                    $fieldName,
+                                ]
                             ),
-                            ErrorCodes::NON_NULLABLE_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -685,12 +734,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Field \'%s\' must not return an array, but returned \'%s\'', 'pop-component-model'),
-                                $fieldName,
-                                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E4,
+                                [
+                                    $fieldName,
+                                    $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                                ]
                             ),
-                            ErrorCodes::MUST_NOT_BE_ARRAY_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -710,12 +761,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     }
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Field \'%s\' must return an array, but returned \'%s\'', 'pop-component-model'),
-                                $fieldName,
-                                $valueAsString
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E5,
+                                [
+                                    $fieldName,
+                                    $valueAsString,
+                                ]
                             ),
-                            ErrorCodes::MUST_BE_ARRAY_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -733,11 +786,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Field \'%s\' must not return an array with null items', 'pop-component-model'),
-                                $fieldName
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E6,
+                                [
+                                    $fieldName,
+                                ]
                             ),
-                            ErrorCodes::ARRAY_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -755,12 +810,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'pop-component-model'),
-                                $fieldName,
-                                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E7,
+                                [
+                                    $fieldName,
+                                    $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value),
+                                ]
                             ),
-                            ErrorCodes::MUST_NOT_BE_ARRAY_OF_ARRAYS_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -778,12 +835,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'pop-component-model'),
-                                $fieldName,
-                                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E8,
+                                [
+                                    $fieldName,
+                                    $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value),
+                                ]
                             ),
-                            ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -804,11 +863,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            sprintf(
-                                $this->__('Field \'%s\' must not return an array of arrays with null items', 'pop-component-model'),
-                                $fieldName
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E9,
+                                [
+                                    $fieldName,
+                                ]
                             ),
-                            ErrorCodes::ARRAY_OF_ARRAYS_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                         )
@@ -823,13 +884,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
-                sprintf(
-                    $this->__('No FieldResolver for object type \'%s\' processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
-                    $this->getMaybeNamespacedTypeName(),
-                    $fieldName,
-                    (string) $this->getID($object)
+                new FeedbackItemResolution(
+                    FieldResolutionErrorFeedbackItemProvider::class,
+                    FieldResolutionErrorFeedbackItemProvider::E10,
+                    [
+                        $this->getMaybeNamespacedTypeName(),
+                        $fieldName,
+                        $this->getID($object)
+                    ]
                 ),
-                ErrorCodes::NO_FIELD_RESOLVER_UNIT_PROCESSES_FIELD,
                 LocationHelper::getNonSpecificLocation(),
                 $this,
             )
@@ -837,23 +900,25 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return null;
     }
 
-    /**
-     * Return an error to indicate that no fieldResolver processes this field,
-     * which is different than returning a null value.
-     * Needed for compatibility with CustomPostUnionTypeResolver
-     * (so that data-fields aimed for another post_type are not retrieved)
-     */
-    protected function getValidationFailedErrorMessage(string $fieldName, array $validationDescriptions): string
-    {
-        if (count($validationDescriptions) == 1) {
-            return $validationDescriptions[0];
-        }
-        return sprintf(
-            $this->__('Field \'%s\' could not be processed due to previous error(s): \'%s\'', 'pop-component-model'),
-            $fieldName,
-            implode($this->__('\', \'', 'pop-component-model'), $validationDescriptions)
-        );
-    }
+    // @todo Return FeedbackItemResolution instead of strings here, and bubble up directly
+    // Then remove code below
+    // /**
+    //  * Return an error to indicate that no fieldResolver processes this field,
+    //  * which is different than returning a null value.
+    //  * Needed for compatibility with CustomPostUnionTypeResolver
+    //  * (so that data-fields aimed for another post_type are not retrieved)
+    //  */
+    // protected function getValidationFailedErrorMessage(string $fieldName, array $validationDescriptions): string
+    // {
+    //     if (count($validationDescriptions) == 1) {
+    //         return $validationDescriptions[0];
+    //     }
+    //     return sprintf(
+    //         $this->__('Field \'%s\' could not be processed due to previous error(s): \'%s\'', 'component-model'),
+    //         $fieldName,
+    //         implode($this->__('\', \'', 'component-model'), $validationDescriptions)
+    //     );
+    // }
 
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
     {

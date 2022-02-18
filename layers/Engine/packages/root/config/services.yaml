@@ -21,3 +21,6 @@ services:
 
     PoP\Root\State\:
         resource: '../src/State/*'
+
+    PoP\Root\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

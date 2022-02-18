@@ -6,8 +6,7 @@ namespace PoP\ComponentModel\Feedback;
 
 interface FeedbackInterface
 {
-    public function getMessage(): string;
-    public function getCode(): ?string;
+    public function getFeedbackItemResolution(): FeedbackItemResolution;
     /**
      * @return array<string, mixed>
      */

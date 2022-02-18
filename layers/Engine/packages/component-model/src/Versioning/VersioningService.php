@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Versioning;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Constants;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\GeneralFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\Root\Services\BasicServiceTrait;
@@ -43,8 +44,13 @@ class VersioningService implements VersioningServiceInterface
             if (count($entry) !== 2) {
                 $generalFeedbackStore->addWarning(
                     new GeneralFeedback(
-                        $this->getFeedbackItemProvider()->getMessage(FeedbackItemProvider::W1, $typeField),
-                        $this->getFeedbackItemProvider()->getNamespacedCode(FeedbackItemProvider::W1)
+                        new FeedbackItemResolution(
+                            FeedbackItemProvider::class,
+                            FeedbackItemProvider::W1,
+                            [
+                                $typeField,
+                            ]
+                        )
                     )
                 );
                 continue;
