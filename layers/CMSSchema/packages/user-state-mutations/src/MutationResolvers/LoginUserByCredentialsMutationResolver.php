@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\UserStateMutations\Exception\UserLoginMutationException;
 use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
 use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
@@ -73,8 +73,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         if ($is_email) {
             $user = $this->getUserTypeAPI()->getUserByEmail($username_or_email);
             if (!$user) {
-                return new Error(
-                    'no-user',
+                throw new UserLoginMutationException(
                     $this->__('There is no user registered with that email address.')
                 );
             }
