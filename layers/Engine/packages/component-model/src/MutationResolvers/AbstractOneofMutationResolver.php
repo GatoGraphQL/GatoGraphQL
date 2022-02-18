@@ -174,8 +174,6 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
          */
         // $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $oneofInputObjectFormData);
         // return [$inputFieldMutationResolver, $inputFieldFormData];
-        /** @var MutationResolverInterface $inputFieldMutationResolver */
-        /** @var stdClass $inputFieldFormData */
         return [$inputFieldMutationResolver, $oneofInputObjectFormData];
     }
 }
