@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\CheckpointProcessors;
 
-use PoP\ComponentModel\Checkpoint\CheckpointError;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\Engine\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 use PoP\Root\App;
@@ -31,14 +31,14 @@ class RequestCheckpointProcessor extends AbstractCheckpointProcessor
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {
             case self::DOING_POST:
                 if ('POST' !== App::server('REQUEST_METHOD')) {
-                    return new CheckpointError(
-                        $this->getCheckpointErrorFeedbackItemProvider()->getMessage(CheckpointErrorFeedbackItemProvider::E1),
-                        $this->getCheckpointErrorFeedbackItemProvider()->getNamespacedCode(CheckpointErrorFeedbackItemProvider::E1),
+                    return new FeedbackItemResolution(
+                        CheckpointErrorFeedbackItemProvider::class,
+                        CheckpointErrorFeedbackItemProvider::E1
                     );
                 }
                 break;

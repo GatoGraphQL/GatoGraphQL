@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
-use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -29,6 +28,7 @@ use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
@@ -1013,13 +1013,13 @@ class Engine implements EngineInterface
         $array_pointer[$moduleOutputName][$key] = $value;
     }
 
-    public function validateCheckpoints(array $checkpoints): ?CheckpointError
+    public function validateCheckpoints(array $checkpoints): ?FeedbackItemResolution
     {
         // Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
         foreach ($checkpoints as $checkpoint) {
-            $maybeCheckpointError = $this->getCheckpointProcessorManager()->getProcessor($checkpoint)->validateCheckpoint($checkpoint);
-            if ($maybeCheckpointError !== null) {
-                return $maybeCheckpointError;
+            $feedbackItemResolution = $this->getCheckpointProcessorManager()->getProcessor($checkpoint)->validateCheckpoint($checkpoint);
+            if ($feedbackItemResolution !== null) {
+                return $feedbackItemResolution;
             }
         }
 

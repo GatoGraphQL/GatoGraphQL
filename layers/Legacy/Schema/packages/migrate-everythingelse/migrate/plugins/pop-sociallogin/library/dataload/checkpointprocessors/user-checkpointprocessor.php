@@ -1,6 +1,6 @@
 <?php
-use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
@@ -13,12 +13,12 @@ class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_NONSOCIALLOGINUSER:
                 if (isSocialloginUser()) {
-                    return new CheckpointError('sociallogin-user', 'sociallogin-user');
+                    return new FeedbackItemResolution('sociallogin-user', 'sociallogin-user');
                 }
                 break;
         }

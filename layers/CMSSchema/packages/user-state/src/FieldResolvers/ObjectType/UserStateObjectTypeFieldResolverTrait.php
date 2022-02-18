@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserState\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\Checkpoint\CheckpointError;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\Translation\TranslationAPIInterface;
 use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
@@ -33,9 +33,9 @@ trait UserStateObjectTypeFieldResolverTrait
      * @param array<string, mixed> $fieldArgs
      */
     protected function getValidationCheckpointsErrorMessage(
-        array $checkpointSet,
-        CheckpointError $checkpointError,
         string $errorMessage,
+        array $checkpointSet,
+        FeedbackItemResolution $feedbackItemResolution,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,

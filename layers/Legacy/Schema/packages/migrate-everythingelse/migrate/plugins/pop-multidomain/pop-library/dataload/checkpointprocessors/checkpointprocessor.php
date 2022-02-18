@@ -1,6 +1,6 @@
 <?php
-use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 class PoP_MultiDomain_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
 {
@@ -11,18 +11,18 @@ class PoP_MultiDomain_Dataload_CheckpointProcessor extends AbstractCheckpointPro
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {
             case PoP_Domain_Dataload_CheckpointProcessor::CHECKPOINT_DOMAINVALID:
                 // Check if the domain passed in param 'domain' is allowed
                 $domain = PoP_Domain_Utils::getDomainFromRequest();
                 if (!$domain) {
-                    return new CheckpointError('domainempty', 'domainempty');
+                    return new FeedbackItemResolution('domainempty', 'domainempty');
                 }
                 $allowed_domains = PoP_WebPlatform_ConfigurationUtils::getAllowedDomains();
                 if (!in_array($domain, $allowed_domains)) {
-                    return new CheckpointError('domainnotvalid', 'domainnotvalid');
+                    return new FeedbackItemResolution('domainnotvalid', 'domainnotvalid');
                 }
                 break;
         }

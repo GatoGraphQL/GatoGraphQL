@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserState\CheckpointProcessors;
 
-use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\App;
 use PoPCMSSchema\UserState\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 
@@ -33,23 +33,23 @@ class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {
             case self::USERLOGGEDIN:
                 if (!App::getState('is-user-logged-in')) {
-                    return new CheckpointError(
-                        $this->getCheckpointErrorFeedbackItemProvider()->getMessage(CheckpointErrorFeedbackItemProvider::E1),
-                        $this->getCheckpointErrorFeedbackItemProvider()->getNamespacedCode(CheckpointErrorFeedbackItemProvider::E1),
+                    return new FeedbackItemResolution(
+                        CheckpointErrorFeedbackItemProvider::class,
+                        CheckpointErrorFeedbackItemProvider::E1
                     );
                 }
                 break;
 
             case self::USERNOTLOGGEDIN:
                 if (App::getState('is-user-logged-in')) {
-                    return new CheckpointError(
-                        $this->getCheckpointErrorFeedbackItemProvider()->getMessage(CheckpointErrorFeedbackItemProvider::E2),
-                        $this->getCheckpointErrorFeedbackItemProvider()->getNamespacedCode(CheckpointErrorFeedbackItemProvider::E2),
+                    return new FeedbackItemResolution(
+                        CheckpointErrorFeedbackItemProvider::class,
+                        CheckpointErrorFeedbackItemProvider::E2
                     );
                 }
                 break;
