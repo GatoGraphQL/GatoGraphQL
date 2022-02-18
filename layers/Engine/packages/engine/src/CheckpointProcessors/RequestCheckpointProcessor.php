@@ -37,9 +37,9 @@ class RequestCheckpointProcessor extends AbstractCheckpointProcessor
         switch ($checkpoint[1]) {
             case self::DOING_POST:
                 if ('POST' !== App::server('REQUEST_METHOD')) {
-                    return new CheckpointError(
-                        $this->getCheckpointErrorFeedbackItemProvider()->getMessage(CheckpointErrorFeedbackItemProvider::E1),
-                        $this->getCheckpointErrorFeedbackItemProvider()->getNamespacedCode(CheckpointErrorFeedbackItemProvider::E1),
+                    return new FeedbackItemResolution(
+                        CheckpointErrorFeedbackItemProvider::class,
+                        CheckpointErrorFeedbackItemProvider::E1
                     );
                 }
                 break;
