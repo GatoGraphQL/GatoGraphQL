@@ -13,7 +13,7 @@ class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Feedback\FeedbackItemResolution
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_NONSOCIALLOGINUSER:

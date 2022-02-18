@@ -6,6 +6,7 @@ namespace PoPCMSSchema\UserState\CheckpointProcessors;
 
 use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\App;
 use PoPCMSSchema\UserState\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 
@@ -33,7 +34,7 @@ class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {
             case self::USERLOGGEDIN:

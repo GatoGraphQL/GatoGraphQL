@@ -11,7 +11,7 @@ class PoP_MultiDomain_Dataload_CheckpointProcessor extends AbstractCheckpointPro
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?\PoP\ComponentModel\Feedback\FeedbackItemResolution
     {
         switch ($checkpoint[1]) {
             case PoP_Domain_Dataload_CheckpointProcessor::CHECKPOINT_DOMAINVALID:

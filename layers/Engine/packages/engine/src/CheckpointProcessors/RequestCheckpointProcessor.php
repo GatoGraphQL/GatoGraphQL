@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\CheckpointProcessors;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\Engine\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
@@ -31,7 +32,7 @@ class RequestCheckpointProcessor extends AbstractCheckpointProcessor
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?CheckpointError
+    public function validateCheckpoint(array $checkpoint): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {
             case self::DOING_POST:
