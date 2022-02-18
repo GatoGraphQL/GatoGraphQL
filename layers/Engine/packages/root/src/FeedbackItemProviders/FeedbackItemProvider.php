@@ -9,6 +9,8 @@ use PoP\Root\Feedback\FeedbackCategories;
 class FeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public const E1 = 'e1';
+    public const D1 = 'd1';
+    public const L1 = 'l1';
 
     /**
      * @return string[]
@@ -17,14 +19,20 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return [
             self::E1,
+            self::D1,
+            self::L1,
         ];
     }
 
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('%s', 'component-model'),
-            default => parent::getMessagePlaceholder($code),
+            self::E1,
+            self::D1,
+            self::L1
+                => $this->__('%s', 'component-model'),
+            default
+                => parent::getMessagePlaceholder($code),
         };
     }
 
@@ -32,6 +40,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             self::E1 => FeedbackCategories::ERROR,
+            self::D1 => FeedbackCategories::DEPRECATION,
+            self::L1 => FeedbackCategories::LOG,
             default => parent::getCategory($code),
         };
     }

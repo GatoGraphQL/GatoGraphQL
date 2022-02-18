@@ -33,6 +33,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeReso
 use PoP\GraphQLParser\Response\OutputServiceInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
+use PoP\Root\FeedbackItemProviders\FeedbackItemProvider as RootFeedbackItemProvider;
 use stdClass;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
@@ -481,8 +482,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             foreach ($maybeObjectWarnings as $warningEntry) {
                 $objectFeedbackStore->addWarning(
                     new ObjectFeedback(
-                        $warningEntry[Tokens::MESSAGE],
-                        null,
+                        new FeedbackItemResolution(
+                            FeedbackItemProvider::class,
+                            FeedbackItemProvider::W1,
+                            [
+                                $warningEntry[Tokens::MESSAGE],
+                            ]
+                        ),
                         LocationHelper::getNonSpecificLocation(),
                         $this,
                         $field, //$warningEntry[Tokens::PATH],
@@ -515,8 +521,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             foreach ($maybeObjectDeprecations as $deprecationEntry) {
                 $objectFeedbackStore->addDeprecation(
                     new ObjectFeedback(
-                        $deprecationEntry[Tokens::MESSAGE],
-                        null,
+                        new FeedbackItemResolution(
+                            RootFeedbackItemProvider::class,
+                            RootFeedbackItemProvider::D1,
+                            [
+                                $deprecationEntry[Tokens::MESSAGE],
+                            ]
+                        ),
                         LocationHelper::getNonSpecificLocation(),
                         $this,
                         $field, //$deprecationEntry[Tokens::PATH],
@@ -553,8 +564,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     foreach ($maybeDeprecations as $deprecation) {
                         $objectFeedbackStore->addDeprecation(
                             new ObjectFeedback(
-                                $deprecation,
-                                null,
+                                new FeedbackItemResolution(
+                                    RootFeedbackItemProvider::class,
+                                    RootFeedbackItemProvider::D1,
+                                    [
+                                        $deprecation,
+                                    ]
+                                ),
                                 LocationHelper::getNonSpecificLocation(),
                                 $this,
                                 $field,
