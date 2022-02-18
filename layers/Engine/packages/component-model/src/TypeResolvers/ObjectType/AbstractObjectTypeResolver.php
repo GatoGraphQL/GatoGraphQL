@@ -413,8 +413,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             foreach ($schemaWarnings as $warningEntry) {
                 $schemaFeedbackStore->addWarning(
                     new SchemaFeedback(
-                        $warningEntry[Tokens::MESSAGE],
-                        null,
+                        new FeedbackItemResolution(
+                            FeedbackItemProvider::class,
+                            FeedbackItemProvider::W1,
+                            [
+                                $warningEntry[Tokens::MESSAGE],
+                            ]
+                        ),
                         LocationHelper::getNonSpecificLocation(),
                         $this,
                         $field, //$warningEntry[Tokens::PATH],

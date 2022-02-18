@@ -43,8 +43,8 @@ class VersioningService implements VersioningServiceInterface
             if (count($entry) !== 2) {
                 $generalFeedbackStore->addWarning(
                     new GeneralFeedback(
-                        $this->getFeedbackItemProvider()->getMessage(FeedbackItemProvider::W1, $typeField),
-                        $this->getFeedbackItemProvider()->getNamespacedCode(FeedbackItemProvider::W1)
+                        $this->getFeedbackItemProvider()->getMessage(FeedbackItemProvider::W2, $typeField),
+                        $this->getFeedbackItemProvider()->getNamespacedCode(FeedbackItemProvider::W2)
                     )
                 );
                 continue;

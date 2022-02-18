@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\HelperServices;
 
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -83,8 +84,13 @@ class DataloadHelperService implements DataloadHelperServiceInterface
                 $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
                 App::getFeedbackStore()->schemaFeedbackStore->addError(
                     new SchemaFeedback(
-                        $this->getFeedbackItemProvider()->getMessage(FeedbackItemProvider::E1, $subcomponent_data_field_outputkey),
-                        $this->getFeedbackItemProvider()->getNamespacedCode(FeedbackItemProvider::E1),
+                        new FeedbackItemResolution(
+                            FeedbackItemProvider::class,
+                            FeedbackItemProvider::E1,
+                            [
+                                $subcomponent_data_field_outputkey,
+                            ]
+                        ),
                         LocationHelper::getNonSpecificLocation(),
                         $objectTypeResolver,
                         $subcomponent_data_field,
