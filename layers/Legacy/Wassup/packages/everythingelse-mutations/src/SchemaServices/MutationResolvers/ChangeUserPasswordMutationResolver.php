@@ -66,10 +66,6 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
         $user_data = $this->getChangepasswordData($form_data);
         $result = $this->executeChangepassword($user_data);
 
-        if (GeneralUtils::isError($result)) {
-            return $result;
-        }
-
         $user_id = $user_data['ID'];
 
         App::doAction('gd_changepassword_user', $user_id, $form_data);

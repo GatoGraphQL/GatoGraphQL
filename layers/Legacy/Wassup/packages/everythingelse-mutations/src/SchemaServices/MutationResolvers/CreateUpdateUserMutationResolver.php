@@ -148,10 +148,6 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
         $result = $this->executeUpdateuser($user_data);
 
-        if (GeneralUtils::isError($result)) {
-            return $result;
-        }
-
         $this->createupdateuser($user_id, $form_data);
 
         return $user_id;
@@ -167,10 +163,6 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     {
         $user_data = $this->getCreateuserData($form_data);
         $result = $this->executeCreateuser($user_data);
-
-        if (GeneralUtils::isError($result)) {
-            return $result;
-        }
 
         $user_id = $result;
 
@@ -221,33 +213,29 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     /**
      * @return mixed The ID of the updated entity, or an Error
+     * @throws \PoP\Root\Exception\AbstractException In case of error
      */
-    protected function update(array $form_data): string | int | Error
+    protected function update(array $form_data): string | int
     {
         // Do the Post update
         $user_id = $this->updateuser($form_data);
-        if (GeneralUtils::isError($user_id)) {
-            return $user_id;
-        }
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionalsUpdate($user_id, $form_data);
         $this->additionals($user_id, $form_data);
 
         // Trigger to update the display_name and nickname
-        userNameUpdated($user_id);
+        \userNameUpdated($user_id);
         return $user_id;
     }
 
     /**
      * @return mixed The ID of the created entity, or an Error
+     * @throws \PoP\Root\Exception\AbstractException In case of error
      */
-    protected function create(array $form_data): string | int | Error
+    protected function create(array $form_data): string | int
     {
         $user_id = $this->createuser($form_data);
-        if (GeneralUtils::isError($user_id)) {
-            return $user_id;
-        }
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionalsCreate($user_id, $form_data);
