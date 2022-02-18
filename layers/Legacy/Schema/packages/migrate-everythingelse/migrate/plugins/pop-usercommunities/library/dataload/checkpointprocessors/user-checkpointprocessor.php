@@ -1,7 +1,6 @@
 <?php
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 

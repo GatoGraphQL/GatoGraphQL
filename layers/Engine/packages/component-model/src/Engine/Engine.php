@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
-use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
