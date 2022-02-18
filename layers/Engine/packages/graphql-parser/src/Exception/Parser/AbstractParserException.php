@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Exception\Parser;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Exception\AbstractClientException;
@@ -11,16 +12,10 @@ use PoP\Root\Exception\AbstractClientException;
 abstract class AbstractParserException extends AbstractClientException implements LocationableExceptionInterface
 {
     public function __construct(
-        string $message,
-        private string $namespacedCode,
+        FeedbackItemResolution $feedbackItemResolution,
         private Location $location,
     ) {
-        parent::__construct($message);
-    }
-
-    public function getNamespacedCode(): string
-    {
-        return $this->namespacedCode;
+        parent::__construct($feedbackItemResolution->getMessage());
     }
 
     public function getLocation(): Location

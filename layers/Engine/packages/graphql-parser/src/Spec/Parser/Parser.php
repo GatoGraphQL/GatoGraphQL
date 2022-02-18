@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -68,8 +69,13 @@ class Parser extends Tokenizer implements ParserInterface
 
                 default:
                     throw new SyntaxErrorException(
-                        $this->getGraphQLParserErrorFeedbackItemProvider()->getMessage(GraphQLParserErrorFeedbackItemProvider::E_1, $this->lookAhead->getData()),
-                        $this->getGraphQLParserErrorFeedbackItemProvider()->getNamespacedCode(GraphQLParserErrorFeedbackItemProvider::E_1),
+                        new FeedbackItemResolution(
+                            GraphQLParserErrorFeedbackItemProvider::class,
+                            GraphQLParserErrorFeedbackItemProvider::E_1,
+                            [
+                                $this->lookAhead->getData(),
+                            ]
+                        ),
                         $this->getLocation()
                     );
             }
@@ -625,8 +631,10 @@ class Parser extends Tokenizer implements ParserInterface
                 => $this->parseList(false),
             default
                 => throw new SyntaxErrorException(
-                    $this->getGraphQLParserErrorFeedbackItemProvider()->getMessage(GraphQLParserErrorFeedbackItemProvider::E_2),
-                    $this->getGraphQLParserErrorFeedbackItemProvider()->getNamespacedCode(GraphQLParserErrorFeedbackItemProvider::E_2),
+                    new FeedbackItemResolution(
+                        GraphQLParserErrorFeedbackItemProvider::class,
+                        GraphQLParserErrorFeedbackItemProvider::E_2
+                    ),
                     $this->getLocation()
                 ),
         };
@@ -652,8 +660,13 @@ class Parser extends Tokenizer implements ParserInterface
             // Validate no duplicated keys in InputObject
             if (property_exists($object, $key)) {
                 throw new SyntaxErrorException(
-                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_6_2, $key),
-                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_6_2),
+                    new FeedbackItemResolution(
+                        GraphQLSpecErrorFeedbackItemProvider::class,
+                        GraphQLSpecErrorFeedbackItemProvider::E_5_6_2,
+                        [
+                            $key,
+                        ]
+                    ),
                     $this->getTokenLocation($keyToken)
                 );
             }

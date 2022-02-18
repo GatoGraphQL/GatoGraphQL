@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -55,7 +56,7 @@ class ParserTest extends AbstractTestCase
     public function testInvalidSelection()
     {
         $this->expectException(SyntaxErrorException::class);
-        $this->expectExceptionMessage($this->getGraphQLParserErrorFeedbackItemProvider()->getMessage(GraphQLParserErrorFeedbackItemProvider::E_6, Token::tokenName(Token::TYPE_RBRACE)));
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_6, [Token::tokenName(Token::TYPE_RBRACE)]))->getMessage());
         $parser = $this->getParser();
         $parser->parse('
         {
@@ -1235,7 +1236,7 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInVariable()
     {
         $this->expectException(SyntaxErrorException::class);
-        $this->expectExceptionMessage($this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_6_2, 'name'));
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_6_2, ['name']))->getMessage());
         $parser = $this->getParser();
         $parser->parse('
             query FilterUsers($filter: UserFilterInput = { name: "Pedro", name: "Juancho" }) {
@@ -1250,7 +1251,7 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInArgument()
     {
         $this->expectException(SyntaxErrorException::class);
-        $this->expectExceptionMessage($this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_6_2, 'name'));
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_6_2, ['name']))->getMessage());
         $parser          = $this->getParser();
         $parser->parse('
             query FilterUsers {

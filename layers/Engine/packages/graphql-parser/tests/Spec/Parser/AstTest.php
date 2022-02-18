@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
@@ -195,7 +196,7 @@ class AstTest extends AbstractTestCase
     public function testVariableLogicException()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackItemProvider()->getMessage(FeedbackItemProvider::E2, 'id'));
+        $this->expectExceptionMessage((new FeedbackItemResolution(FeedbackItemProvider::class, FeedbackItemProvider::E2, ['id']))->getMessage());
         $variable = new Variable('id', 'int', false, false, true, new Location(1, 1));
         $variable->getValue();
     }
