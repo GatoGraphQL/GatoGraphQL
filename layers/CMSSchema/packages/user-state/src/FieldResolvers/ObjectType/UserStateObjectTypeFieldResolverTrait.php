@@ -33,9 +33,9 @@ trait UserStateObjectTypeFieldResolverTrait
      * @param array<string, mixed> $fieldArgs
      */
     protected function getValidationCheckpointsErrorMessage(
+        string $errorMessage,
         array $checkpointSet,
         FeedbackItemResolution $feedbackItemResolution,
-        string $errorMessage,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
