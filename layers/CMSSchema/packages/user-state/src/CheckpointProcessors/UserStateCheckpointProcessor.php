@@ -47,7 +47,7 @@ class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
 
             case self::USERNOTLOGGEDIN:
                 if (App::getState('is-user-logged-in')) {
-                    return new CheckpointErrorFeedbackItemProvider(
+                    return new FeedbackItemResolution(
                         CheckpointErrorFeedbackItemProvider::class,
                         CheckpointErrorFeedbackItemProvider::E2
                     );
