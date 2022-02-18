@@ -59,7 +59,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     {
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
-        $postIDOrError = \wp_insert_post($data);
+        $postIDOrError = \wp_insert_post($data, true);
         // If the returned ID is 0, the creation failed
         if ($postIDOrError === 0) {
             return new Error(
@@ -77,7 +77,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     {
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
-        $postIDOrError = \wp_update_post($data);
+        $postIDOrError = \wp_update_post($data, true);
         return $this->getErrorHelper()->returnResultOrConvertError($postIDOrError);
     }
     public function canUserEditCustomPost(string | int $userID, string | int $customPostID): bool
