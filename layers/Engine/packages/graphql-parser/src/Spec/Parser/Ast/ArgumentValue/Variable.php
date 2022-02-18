@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -137,8 +138,13 @@ class Variable extends AbstractAst implements WithValueInterface
     {
         if ($this->context === null) {
             throw new InvalidRequestException(
-                $this->getFeedbackItemProvider()->getMessage(FeedbackItemProvider::E2, $this->name),
-                $this->getFeedbackItemProvider()->getNamespacedCode(FeedbackItemProvider::E2),
+                new FeedbackItemResolution(
+                    FeedbackItemProvider::class,
+                    FeedbackItemProvider::E2,
+                    [
+                        $this->name,
+                    ]
+                ),
                 $this->getLocation()
             );
         }
@@ -157,8 +163,13 @@ class Variable extends AbstractAst implements WithValueInterface
         }
         if ($this->isRequired()) {
             throw new InvalidRequestException(
-                $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_8_5, $this->name),
-                $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_8_5),
+                new FeedbackItemResolution(
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    GraphQLSpecErrorFeedbackItemProvider::E_5_8_5,
+                    [
+                        $this->name,
+                    ]
+                ),
                 $this->getLocation()
             );
         }

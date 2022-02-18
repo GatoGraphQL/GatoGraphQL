@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
@@ -54,8 +55,13 @@ class VariableReference extends AbstractAst implements WithValueInterface
     {
         if ($this->variable === null) {
             throw new InvalidRequestException(
-                $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, $this->name),
-                $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_8_3),
+                new FeedbackItemResolution(
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    GraphQLSpecErrorFeedbackItemProvider::E_5_8_3,
+                    [
+                        $this->name,
+                    ]
+                ),
                 $this->getLocation()
             );
         }
