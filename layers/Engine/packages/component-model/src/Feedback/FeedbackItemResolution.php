@@ -16,7 +16,7 @@ class FeedbackItemResolution
         protected string $feedbackProviderServiceClass,
         protected string $code,
         /** @var array<string|int|float|bool> */
-        protected array $messageParams,
+        protected array $messageParams = [],
     ) { 
     }
 
