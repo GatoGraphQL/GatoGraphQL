@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\TypeAPIs;
 
+use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
 interface UserStateTypeMutationAPIInterface
 {
     /**
-     * @return mixed Result or Error
+     * @throws UserStateMutationException In case of error
      */
-    public function login(array $credentials): mixed;
+    public function login(array $credentials): object;
     public function logout(): void;
 }

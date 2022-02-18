@@ -17,9 +17,9 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
     use BasicServiceTrait;
 
     /**
-     * @return mixed Result or Error
+     * @throws UserStateMutationException In case of error
      */
-    public function login(array $credentials): mixed
+    public function login(array $credentials): object
     {
         // Convert params
         if (isset($credentials['login'])) {
