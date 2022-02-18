@@ -24,16 +24,6 @@ class ExecutableDocumentTest extends AbstractTestCase
         return $this->getService(ParserInterface::class);
     }
 
-    protected function getGraphQLSpecErrorFeedbackItemProvider(): GraphQLSpecErrorFeedbackItemProvider
-    {
-        return $this->getService(GraphQLSpecErrorFeedbackItemProvider::class);
-    }
-
-    protected function getFeedbackItemProvider(): FeedbackItemProvider
-    {
-        return $this->getService(FeedbackItemProvider::class);
-    }
-
     public function testGetVariableFromContext()
     {
         $parser = $this->getParser();

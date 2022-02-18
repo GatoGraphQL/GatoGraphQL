@@ -22,11 +22,6 @@ use PoP\Root\AbstractTestCase;
 
 class AstTest extends AbstractTestCase
 {
-    protected function getFeedbackItemProvider(): FeedbackItemProvider
-    {
-        return $this->getService(FeedbackItemProvider::class);
-    }
-
     public function testArgument()
     {
         $argument = new Argument('test', new Literal('test', new Location(1, 1)), new Location(1, 1));

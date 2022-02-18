@@ -31,17 +31,6 @@ use stdClass;
 
 class Parser extends Tokenizer implements ParserInterface
 {
-    private ?GraphQLSpecErrorFeedbackItemProvider $graphQLSpecErrorFeedbackItemProvider = null;
-
-    final public function setGraphQLSpecErrorFeedbackItemProvider(GraphQLSpecErrorFeedbackItemProvider $graphQLSpecErrorFeedbackItemProvider): void
-    {
-        $this->graphQLSpecErrorFeedbackItemProvider = $graphQLSpecErrorFeedbackItemProvider;
-    }
-    final protected function getGraphQLSpecErrorFeedbackItemProvider(): GraphQLSpecErrorFeedbackItemProvider
-    {
-        return $this->graphQLSpecErrorFeedbackItemProvider ??= $this->instanceManager->getInstance(GraphQLSpecErrorFeedbackItemProvider::class);
-    }
-
     /** @var OperationInterface[] */
     private array $operations = [];
     /** @var Fragment[] */

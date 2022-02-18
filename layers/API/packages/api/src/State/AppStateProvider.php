@@ -17,23 +17,11 @@ use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
 use PoPAPI\API\Configuration\EngineRequest;
 use PoPAPI\API\Constants\Actions;
 use PoPAPI\API\Facades\FieldQueryConvertorFacade;
-use PoPAPI\API\FeedbackItemProviders\FeedbackItemProvider;
 use PoPAPI\API\PersistedQueries\PersistedQueryUtils;
 use PoPAPI\API\Response\Schemes as APISchemes;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
-    private ?FeedbackItemProvider $feedbackItemProvider = null;
-
-    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackItemProvider): void
-    {
-        $this->feedbackItemProvider = $feedbackItemProvider;
-    }
-    final protected function getFeedbackItemProvider(): FeedbackItemProvider
-    {
-        return $this->feedbackItemProvider ??= $this->instanceManager->getInstance(FeedbackItemProvider::class);
-    }
-
     public function initialize(array &$state): void
     {
         $state['executable-query'] = null;

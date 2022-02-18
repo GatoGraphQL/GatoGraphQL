@@ -18,17 +18,6 @@ class VersioningService implements VersioningServiceInterface
     private ?array $versionConstraintsForFields = null;
     private ?array $versionConstraintsForDirectives = null;
 
-    private ?FeedbackItemProvider $feedbackItemProvider = null;
-
-    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackItemProvider): void
-    {
-        $this->feedbackItemProvider = $feedbackItemProvider;
-    }
-    final protected function getFeedbackItemProvider(): FeedbackItemProvider
-    {
-        return $this->feedbackItemProvider ??= $this->instanceManager->getInstance(FeedbackItemProvider::class);
-    }
-
     /**
      * Initialize the dictionary with the version constraints for specific fields in the schema
      */

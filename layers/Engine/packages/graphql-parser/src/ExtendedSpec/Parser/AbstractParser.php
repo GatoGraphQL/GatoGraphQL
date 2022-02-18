@@ -18,17 +18,6 @@ use PoP\Root\App;
 
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
-    private ?GraphQLExtendedSpecErrorFeedbackItemProvider $graphQLExtendedSpecErrorFeedbackItemProvider = null;
-
-    final public function setGraphQLExtendedSpecErrorFeedbackItemProvider(GraphQLExtendedSpecErrorFeedbackItemProvider $graphQLExtendedSpecErrorFeedbackItemProvider): void
-    {
-        $this->graphQLExtendedSpecErrorFeedbackItemProvider = $graphQLExtendedSpecErrorFeedbackItemProvider;
-    }
-    final protected function getGraphQLExtendedSpecErrorFeedbackItemProvider(): GraphQLExtendedSpecErrorFeedbackItemProvider
-    {
-        return $this->graphQLExtendedSpecErrorFeedbackItemProvider ??= $this->instanceManager->getInstance(GraphQLExtendedSpecErrorFeedbackItemProvider::class);
-    }
-
     /**
      * Replace `Directive` with `MetaDirective`, and nest the affected
      * directives inside.

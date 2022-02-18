@@ -11,32 +11,11 @@ use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 
 class ExecutableDocument implements ExecutableDocumentInterface
 {
     use StandaloneServiceTrait;
-
-    private ?GraphQLSpecErrorFeedbackItemProvider $graphQLSpecErrorFeedbackItemProvider = null;
-    private ?FeedbackItemProvider $feedbackItemProvider = null;
-
-    final public function setGraphQLSpecErrorFeedbackItemProvider(GraphQLSpecErrorFeedbackItemProvider $graphQLSpecErrorFeedbackItemProvider): void
-    {
-        $this->graphQLSpecErrorFeedbackItemProvider = $graphQLSpecErrorFeedbackItemProvider;
-    }
-    final protected function getGraphQLSpecErrorFeedbackItemProvider(): GraphQLSpecErrorFeedbackItemProvider
-    {
-        return $this->graphQLSpecErrorFeedbackItemProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorFeedbackItemProvider::class);
-    }
-    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackItemProvider): void
-    {
-        $this->feedbackItemProvider = $feedbackItemProvider;
-    }
-    final protected function getFeedbackItemProvider(): FeedbackItemProvider
-    {
-        return $this->feedbackItemProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackItemProvider::class);
-    }
 
     private ?array $requestedOperations = null;
 

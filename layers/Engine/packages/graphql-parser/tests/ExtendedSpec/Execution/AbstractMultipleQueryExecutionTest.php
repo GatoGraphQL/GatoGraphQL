@@ -36,11 +36,6 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
         return $this->getService(ParserInterface::class);
     }
 
-    protected function getGraphQLSpecErrorFeedbackItemProvider(): GraphQLSpecErrorFeedbackItemProvider
-    {
-        return $this->getService(GraphQLSpecErrorFeedbackItemProvider::class);
-    }
-
     public function testMultipleQueryExecution(): void
     {
         $parser = $this->getParser();

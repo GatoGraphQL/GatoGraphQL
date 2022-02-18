@@ -23,11 +23,6 @@ use PoP\Root\AbstractTestCase;
 
 class RequestValidatorTest extends AbstractTestCase
 {
-    protected function getGraphQLSpecErrorFeedbackItemProvider(): GraphQLSpecErrorFeedbackItemProvider
-    {
-        return $this->getService(GraphQLSpecErrorFeedbackItemProvider::class);
-    }
-
     /**
      * @dataProvider invalidRequestProvider
      */

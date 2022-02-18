@@ -19,17 +19,6 @@ class Tokenizer
     protected int $lineStart = 0;
     protected Token $lookAhead;
 
-    private ?GraphQLParserErrorFeedbackItemProvider $graphQLParserErrorFeedbackItemProvider = null;
-
-    final public function setGraphQLParserErrorFeedbackItemProvider(GraphQLParserErrorFeedbackItemProvider $graphQLParserErrorFeedbackItemProvider): void
-    {
-        $this->graphQLParserErrorFeedbackItemProvider = $graphQLParserErrorFeedbackItemProvider;
-    }
-    final protected function getGraphQLParserErrorFeedbackItemProvider(): GraphQLParserErrorFeedbackItemProvider
-    {
-        return $this->graphQLParserErrorFeedbackItemProvider ??= $this->instanceManager->getInstance(GraphQLParserErrorFeedbackItemProvider::class);
-    }
-
     protected function initTokenizer(string $source): void
     {
         $this->resetTokenizer();

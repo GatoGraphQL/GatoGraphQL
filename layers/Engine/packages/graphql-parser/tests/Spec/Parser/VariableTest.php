@@ -12,11 +12,6 @@ use PoP\Root\AbstractTestCase;
 
 class VariableTest extends AbstractTestCase
 {
-    protected function getFeedbackItemProvider(): FeedbackItemProvider
-    {
-        return $this->getService(FeedbackItemProvider::class);
-    }
-
     /**
      * Test if variable value equals expected value
      *

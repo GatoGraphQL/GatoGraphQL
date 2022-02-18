@@ -35,16 +35,6 @@ class ParserTest extends AbstractTestCase
         return $this->getService(ParserInterface::class);
     }
 
-    protected function getGraphQLSpecErrorFeedbackItemProvider(): GraphQLSpecErrorFeedbackItemProvider
-    {
-        return $this->getService(GraphQLSpecErrorFeedbackItemProvider::class);
-    }
-
-    protected function getGraphQLParserErrorFeedbackItemProvider(): GraphQLParserErrorFeedbackItemProvider
-    {
-        return $this->getService(GraphQLParserErrorFeedbackItemProvider::class);
-    }
-
     public function testEmptyParser()
     {
         $parser = $this->getParser();

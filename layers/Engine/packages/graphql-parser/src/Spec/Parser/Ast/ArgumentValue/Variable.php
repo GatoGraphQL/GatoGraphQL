@@ -12,33 +12,12 @@ use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 use stdClass;
 
 class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
-
-    private ?GraphQLSpecErrorFeedbackItemProvider $graphQLSpecErrorFeedbackItemProvider = null;
-    private ?FeedbackItemProvider $feedbackItemProvider = null;
-
-    final public function setGraphQLSpecErrorFeedbackItemProvider(GraphQLSpecErrorFeedbackItemProvider $graphQLSpecErrorFeedbackItemProvider): void
-    {
-        $this->graphQLSpecErrorFeedbackItemProvider = $graphQLSpecErrorFeedbackItemProvider;
-    }
-    final protected function getGraphQLSpecErrorFeedbackItemProvider(): GraphQLSpecErrorFeedbackItemProvider
-    {
-        return $this->graphQLSpecErrorFeedbackItemProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorFeedbackItemProvider::class);
-    }
-    final public function setFeedbackItemProvider(FeedbackItemProvider $feedbackItemProvider): void
-    {
-        $this->feedbackItemProvider = $feedbackItemProvider;
-    }
-    final protected function getFeedbackItemProvider(): FeedbackItemProvider
-    {
-        return $this->feedbackItemProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackItemProvider::class);
-    }
 
     private ?Context $context = null;
 
