@@ -18,7 +18,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\Exception\RuntimeOperationException;
 use PoP\Engine\Misc\OperatorHelpers;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
-use PoP\Root\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
@@ -259,8 +259,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
-                                FeedbackItemProvider::class,
-                                FeedbackItemProvider::E1,
+                                GenericFeedbackItemProvider::class,
+                                GenericFeedbackItemProvider::E1,
                                 [
                                     $e->getMessage(),
                                 ]
@@ -285,8 +285,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
-                                FeedbackItemProvider::class,
-                                FeedbackItemProvider::E1,
+                                GenericFeedbackItemProvider::class,
+                                GenericFeedbackItemProvider::E1,
                                 [
                                     $e->getMessage(),
                                 ]

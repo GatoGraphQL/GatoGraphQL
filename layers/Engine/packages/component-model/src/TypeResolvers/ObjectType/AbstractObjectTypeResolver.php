@@ -18,6 +18,7 @@ use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -33,7 +34,6 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeReso
 use PoP\GraphQLParser\Response\OutputServiceInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
-use PoP\Root\FeedbackItemProviders\FeedbackItemProvider as RootFeedbackItemProvider;
 use stdClass;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
@@ -415,8 +415,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $schemaFeedbackStore->addWarning(
                     new SchemaFeedback(
                         new FeedbackItemResolution(
-                            FeedbackItemProvider::class,
-                            FeedbackItemProvider::W1,
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::W1,
                             [
                                 $warningEntry[Tokens::MESSAGE],
                             ]
@@ -522,8 +522,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $objectFeedbackStore->addDeprecation(
                     new ObjectFeedback(
                         new FeedbackItemResolution(
-                            RootFeedbackItemProvider::class,
-                            RootFeedbackItemProvider::D1,
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::D1,
                             [
                                 $deprecationEntry[Tokens::MESSAGE],
                             ]
@@ -565,8 +565,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         $objectFeedbackStore->addDeprecation(
                             new ObjectFeedback(
                                 new FeedbackItemResolution(
-                                    RootFeedbackItemProvider::class,
-                                    RootFeedbackItemProvider::D1,
+                                    GenericFeedbackItemProvider::class,
+                                    GenericFeedbackItemProvider::D1,
                                     [
                                         $deprecation,
                                     ]

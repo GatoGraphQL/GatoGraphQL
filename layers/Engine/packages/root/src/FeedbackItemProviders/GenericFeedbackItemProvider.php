@@ -6,7 +6,7 @@ namespace PoP\Root\FeedbackItemProviders;
 
 use PoP\Root\Feedback\FeedbackCategories;
 
-class FeedbackItemProvider extends AbstractFeedbackItemProvider
+class GenericFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public const E1 = 'e1';
     public const D1 = 'd1';
