@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutationsWP\TypeAPIs;
 
-use PoP\ComponentModel\Error\Error;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPCMSSchema\CommentMutations\Exception\CommentCRUDException;
 use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;

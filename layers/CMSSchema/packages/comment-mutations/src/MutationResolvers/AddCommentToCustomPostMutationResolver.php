@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CommentMutations\MutationResolvers;
 
 use PoP\Root\Exception\AbstractException;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoPCMSSchema\CommentMutations\Component;

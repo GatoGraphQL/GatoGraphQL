@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\MutationResolvers;
 
 use PoP\Root\Exception\AbstractException;
+
 interface MutationResolverInterface
 {
     /**

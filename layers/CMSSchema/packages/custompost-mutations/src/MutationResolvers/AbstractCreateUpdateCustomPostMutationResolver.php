@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
