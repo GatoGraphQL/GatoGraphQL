@@ -7,22 +7,22 @@ namespace PoPCMSSchema\UserState\CheckpointProcessors;
 use PoP\ComponentModel\Checkpoint\CheckpointError;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\Root\App;
-use PoPCMSSchema\UserState\FeedbackItemProviders\CheckpointErrorMessageProvider;
+use PoPCMSSchema\UserState\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 
 class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
 {
     public const USERLOGGEDIN = 'userloggedin';
     public const USERNOTLOGGEDIN = 'usernotloggedin';
 
-    private ?CheckpointErrorMessageProvider $checkpointErrorMessageProvider = null;
+    private ?CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider = null;
 
-    final public function setCheckpointErrorMessageProvider(CheckpointErrorMessageProvider $checkpointErrorMessageProvider): void
+    final public function setCheckpointErrorFeedbackItemProvider(CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider): void
     {
-        $this->checkpointErrorMessageProvider = $checkpointErrorMessageProvider;
+        $this->checkpointErrorFeedbackItemProvider = $checkpointErrorFeedbackItemProvider;
     }
-    final protected function getCheckpointErrorMessageProvider(): CheckpointErrorMessageProvider
+    final protected function getCheckpointErrorFeedbackItemProvider(): CheckpointErrorFeedbackItemProvider
     {
-        return $this->checkpointErrorMessageProvider ??= $this->instanceManager->getInstance(CheckpointErrorMessageProvider::class);
+        return $this->checkpointErrorFeedbackItemProvider ??= $this->instanceManager->getInstance(CheckpointErrorFeedbackItemProvider::class);
     }
 
     public function getCheckpointsToProcess(): array
@@ -39,8 +39,8 @@ class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
             case self::USERLOGGEDIN:
                 if (!App::getState('is-user-logged-in')) {
                     return new CheckpointError(
-                        $this->getCheckpointErrorMessageProvider()->getMessage(CheckpointErrorMessageProvider::E1),
-                        $this->getCheckpointErrorMessageProvider()->getNamespacedCode(CheckpointErrorMessageProvider::E1),
+                        $this->getCheckpointErrorFeedbackItemProvider()->getMessage(CheckpointErrorFeedbackItemProvider::E1),
+                        $this->getCheckpointErrorFeedbackItemProvider()->getNamespacedCode(CheckpointErrorFeedbackItemProvider::E1),
                     );
                 }
                 break;
@@ -48,8 +48,8 @@ class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
             case self::USERNOTLOGGEDIN:
                 if (App::getState('is-user-logged-in')) {
                     return new CheckpointError(
-                        $this->getCheckpointErrorMessageProvider()->getMessage(CheckpointErrorMessageProvider::E2),
-                        $this->getCheckpointErrorMessageProvider()->getNamespacedCode(CheckpointErrorMessageProvider::E2),
+                        $this->getCheckpointErrorFeedbackItemProvider()->getMessage(CheckpointErrorFeedbackItemProvider::E2),
+                        $this->getCheckpointErrorFeedbackItemProvider()->getNamespacedCode(CheckpointErrorFeedbackItemProvider::E2),
                     );
                 }
                 break;

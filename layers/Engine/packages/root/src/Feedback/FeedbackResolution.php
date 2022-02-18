@@ -11,7 +11,7 @@ class FeedbackResolution
         protected string $code,
         /** @var array<string|int|float|bool> */
         protected array $messageParams,
-    ) { 
+    ) {
     }
 
     public function getFeedbackProviderServiceClass(): string

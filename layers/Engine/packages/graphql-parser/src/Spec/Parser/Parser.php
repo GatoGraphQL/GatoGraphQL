@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorMessageProvider;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
@@ -30,15 +30,15 @@ use stdClass;
 
 class Parser extends Tokenizer implements ParserInterface
 {
-    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
+    private ?GraphQLSpecErrorFeedbackItemProvider $graphQLSpecErrorFeedbackItemProvider = null;
 
-    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
+    final public function setGraphQLSpecErrorFeedbackItemProvider(GraphQLSpecErrorFeedbackItemProvider $graphQLSpecErrorFeedbackItemProvider): void
     {
-        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
+        $this->graphQLSpecErrorFeedbackItemProvider = $graphQLSpecErrorFeedbackItemProvider;
     }
-    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
+    final protected function getGraphQLSpecErrorFeedbackItemProvider(): GraphQLSpecErrorFeedbackItemProvider
     {
-        return $this->graphQLSpecErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLSpecErrorMessageProvider::class);
+        return $this->graphQLSpecErrorFeedbackItemProvider ??= $this->instanceManager->getInstance(GraphQLSpecErrorFeedbackItemProvider::class);
     }
 
     /** @var OperationInterface[] */
@@ -68,8 +68,8 @@ class Parser extends Tokenizer implements ParserInterface
 
                 default:
                     throw new SyntaxErrorException(
-                        $this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_1, $this->lookAhead->getData()),
-                        $this->getGraphQLParserErrorMessageProvider()->getNamespacedCode(GraphQLParserErrorMessageProvider::E_1),
+                        $this->getGraphQLParserErrorFeedbackItemProvider()->getMessage(GraphQLParserErrorFeedbackItemProvider::E_1, $this->lookAhead->getData()),
+                        $this->getGraphQLParserErrorFeedbackItemProvider()->getNamespacedCode(GraphQLParserErrorFeedbackItemProvider::E_1),
                         $this->getLocation()
                     );
             }
@@ -625,8 +625,8 @@ class Parser extends Tokenizer implements ParserInterface
                 => $this->parseList(false),
             default
                 => throw new SyntaxErrorException(
-                    $this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_2),
-                    $this->getGraphQLParserErrorMessageProvider()->getNamespacedCode(GraphQLParserErrorMessageProvider::E_2),
+                    $this->getGraphQLParserErrorFeedbackItemProvider()->getMessage(GraphQLParserErrorFeedbackItemProvider::E_2),
+                    $this->getGraphQLParserErrorFeedbackItemProvider()->getNamespacedCode(GraphQLParserErrorFeedbackItemProvider::E_2),
                     $this->getLocation()
                 ),
         };
@@ -652,8 +652,8 @@ class Parser extends Tokenizer implements ParserInterface
             // Validate no duplicated keys in InputObject
             if (property_exists($object, $key)) {
                 throw new SyntaxErrorException(
-                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_6_2, $key),
-                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_6_2),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_6_2, $key),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_6_2),
                     $this->getTokenLocation($keyToken)
                 );
             }

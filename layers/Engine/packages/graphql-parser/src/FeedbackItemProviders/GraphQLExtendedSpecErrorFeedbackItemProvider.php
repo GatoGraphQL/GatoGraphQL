@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\FeedbackItemProviders;
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\Root\Feedback\FeedbackCategories;
 
-class GraphQLExtendedSpecErrorMessageProvider extends AbstractFeedbackItemProvider
+class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public const E1 = '1';
     public const E2 = '2';

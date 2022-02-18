@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
@@ -17,15 +17,15 @@ class Document implements DocumentInterface
 {
     use StandaloneServiceTrait;
 
-    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
+    private ?GraphQLSpecErrorFeedbackItemProvider $graphQLSpecErrorFeedbackItemProvider = null;
 
-    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
+    final public function setGraphQLSpecErrorFeedbackItemProvider(GraphQLSpecErrorFeedbackItemProvider $graphQLSpecErrorFeedbackItemProvider): void
     {
-        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
+        $this->graphQLSpecErrorFeedbackItemProvider = $graphQLSpecErrorFeedbackItemProvider;
     }
-    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
+    final protected function getGraphQLSpecErrorFeedbackItemProvider(): GraphQLSpecErrorFeedbackItemProvider
     {
-        return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
+        return $this->graphQLSpecErrorFeedbackItemProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorFeedbackItemProvider::class);
     }
 
     public function __construct(
@@ -89,8 +89,8 @@ class Document implements DocumentInterface
     {
         if ($this->getOperations() === [] && $this->getFragments() === []) {
             throw new InvalidRequestException(
-                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_C),
-                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_C),
+                $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_6_1_C),
+                $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_6_1_C),
                 LocationHelper::getNonSpecificLocation()
             );
         }
@@ -103,8 +103,8 @@ class Document implements DocumentInterface
     {
         if ($this->getOperations() === []) {
             throw new InvalidRequestException(
-                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_6_1_D),
-                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_6_1_D),
+                $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_6_1_D),
+                $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_6_1_D),
                 LocationHelper::getNonSpecificLocation()
             );
         }
@@ -120,8 +120,8 @@ class Document implements DocumentInterface
             $operationName = $operation->getName();
             if (in_array($operationName, $operationNames)) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_2_1_1, $operationName),
-                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_2_1_1),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_2_1_1, $operationName),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_2_1_1),
                     LocationHelper::getNonSpecificLocation()
                 );
             }
@@ -140,8 +140,8 @@ class Document implements DocumentInterface
         foreach ($this->getOperations() as $operation) {
             if (empty($operation->getName())) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_2_2_1),
-                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_2_2_1),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_2_2_1),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_2_2_1),
                     LocationHelper::getNonSpecificLocation()
                 );
             }
@@ -159,8 +159,8 @@ class Document implements DocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_2_1, $fragmentReference->getName()),
-                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_5_2_1),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_5_2_1, $fragmentReference->getName()),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_5_2_1),
                     $fragmentReference->getLocation()
                 );
             }
@@ -232,8 +232,8 @@ class Document implements DocumentInterface
             $fragmentName = $fragment->getName();
             if (in_array($fragmentName, $fragmentNames)) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_1_1, $fragmentName),
-                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_5_1_1),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_1, $fragmentName),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_1),
                     LocationHelper::getNonSpecificLocation()
                 );
             }
@@ -253,8 +253,8 @@ class Document implements DocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_2_2, $fragmentReference->getName()),
-                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_5_2_2),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_5_2_2, $fragmentReference->getName()),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_5_2_2),
                     $fragmentReference->getLocation()
                 );
             }
@@ -305,8 +305,8 @@ class Document implements DocumentInterface
                 continue;
             }
             throw new InvalidRequestException(
-                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_5_1_4, $fragment->getName()),
-                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_5_1_4),
+                $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_4, $fragment->getName()),
+                $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_4),
                 $fragment->getLocation()
             );
         }
@@ -323,8 +323,8 @@ class Document implements DocumentInterface
                 $variableName = $variable->getName();
                 if (in_array($variableName, $variableNames)) {
                     throw new InvalidRequestException(
-                        $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_1, $variableName),
-                        $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_1),
+                        $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_8_1, $variableName),
+                        $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_8_1),
                         LocationHelper::getNonSpecificLocation()
                     );
                 }
@@ -344,8 +344,8 @@ class Document implements DocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_3, $variableReference->getName()),
-                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_3),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, $variableReference->getName()),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_8_3),
                     $variableReference->getLocation()
                 );
             }
@@ -495,8 +495,8 @@ class Document implements DocumentInterface
                     continue;
                 }
                 throw new InvalidRequestException(
-                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_4, $variable->getName()),
-                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_4),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_8_4, $variable->getName()),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_8_4),
                     $variable->getLocation()
                 );
             }
@@ -584,8 +584,8 @@ class Document implements DocumentInterface
             $argumentName = $argument->getName();
             if (in_array($argumentName, $argumentNames)) {
                 throw new InvalidRequestException(
-                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_4_2, $argumentName),
-                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_4_2),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getMessage(GraphQLSpecErrorFeedbackItemProvider::E_5_4_2, $argumentName),
+                    $this->getGraphQLSpecErrorFeedbackItemProvider()->getNamespacedCode(GraphQLSpecErrorFeedbackItemProvider::E_5_4_2),
                     $argument->getLocation()
                 );
             }

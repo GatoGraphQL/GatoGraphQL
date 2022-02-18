@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\CheckpointProcessors;
 
 use PoP\ComponentModel\Checkpoint\CheckpointError;
-use PoP\ComponentModel\FeedbackItemProviders\CheckpointErrorMessageProvider;
+use PoP\ComponentModel\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 use PoP\Root\App;
 
 class MutationCheckpointProcessor extends AbstractCheckpointProcessor
 {
     public const ENABLED_MUTATIONS = 'enabled-mutations';
 
-    private ?CheckpointErrorMessageProvider $checkpointErrorMessageProvider = null;
+    private ?CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider = null;
 
-    final public function setCheckpointErrorMessageProvider(CheckpointErrorMessageProvider $checkpointErrorMessageProvider): void
+    final public function setCheckpointErrorFeedbackItemProvider(CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider): void
     {
-        $this->checkpointErrorMessageProvider = $checkpointErrorMessageProvider;
+        $this->checkpointErrorFeedbackItemProvider = $checkpointErrorFeedbackItemProvider;
     }
-    final protected function getCheckpointErrorMessageProvider(): CheckpointErrorMessageProvider
+    final protected function getCheckpointErrorFeedbackItemProvider(): CheckpointErrorFeedbackItemProvider
     {
-        return $this->checkpointErrorMessageProvider ??= $this->instanceManager->getInstance(CheckpointErrorMessageProvider::class);
+        return $this->checkpointErrorFeedbackItemProvider ??= $this->instanceManager->getInstance(CheckpointErrorFeedbackItemProvider::class);
     }
 
     public function getCheckpointsToProcess(): array
@@ -36,8 +36,8 @@ class MutationCheckpointProcessor extends AbstractCheckpointProcessor
             case self::ENABLED_MUTATIONS:
                 if (!App::getState('are-mutations-enabled')) {
                     return new CheckpointError(
-                        $this->getCheckpointErrorMessageProvider()->getMessage(CheckpointErrorMessageProvider::E1),
-                        $this->getCheckpointErrorMessageProvider()->getNamespacedCode(CheckpointErrorMessageProvider::E1),
+                        $this->getCheckpointErrorFeedbackItemProvider()->getMessage(CheckpointErrorFeedbackItemProvider::E1),
+                        $this->getCheckpointErrorFeedbackItemProvider()->getNamespacedCode(CheckpointErrorFeedbackItemProvider::E1),
                     );
                 }
                 break;
