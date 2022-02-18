@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
 use ArgumentCountError;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
@@ -17,6 +18,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\Exception\RuntimeOperationException;
 use PoP\Engine\Misc\OperatorHelpers;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\FeedbackItemProviders\FeedbackItemProvider;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
@@ -256,8 +258,13 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 } catch (RuntimeOperationException $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            $e->getMessage(),
-                            'path-not-reachable',
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E1,
+                                [
+                                    $e->getMessage(),
+                                ]
+                            ),
                             LocationHelper::getNonSpecificLocation(),
                             $objectTypeResolver,
                         )
@@ -277,8 +284,13 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 } catch (ArgumentCountError $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            $e->getMessage(),
-                            'sprintf-wrong-params',
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E1,
+                                [
+                                    $e->getMessage(),
+                                ]
+                            ),
                             LocationHelper::getNonSpecificLocation(),
                             $objectTypeResolver,
                         )
