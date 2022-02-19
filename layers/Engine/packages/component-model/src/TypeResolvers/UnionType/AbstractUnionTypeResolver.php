@@ -18,6 +18,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Response\OutputServiceInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 
@@ -27,6 +28,17 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * @var ObjectTypeResolverPickerInterface[]
      */
     protected ?array $objectTypeResolverPickers = null;
+    
+    private ?OutputServiceInterface $outputService = null;
+    
+    final public function setOutputService(OutputServiceInterface $outputService): void
+    {
+        $this->outputService = $outputService;
+    }
+    final protected function getOutputService(): OutputServiceInterface
+    {
+        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
+    }
 
     public function getUnionTypeInterfaceTypeResolvers(): array
     {
@@ -407,7 +419,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                         FeedbackItemProvider::class,
                         FeedbackItemProvider::E8,
                         [
-                            json_encode($object),
+                            $this->getOutputService()->jsonEncodeArrayOrStdClassValue($object),
                         ]
                     ),
                     LocationHelper::getNonSpecificLocation(),
