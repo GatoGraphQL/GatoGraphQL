@@ -23,7 +23,6 @@ use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -2042,14 +2041,7 @@ class Engine implements EngineInterface
         array &$iterationObjectTraces,
     ): void {
         foreach ($engineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectFeedbackError) {
-            $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorService()->getErrorOutput(
-                new Error(
-                    $objectFeedbackError->getFeedbackItemResolution()->getNamespacedCode(),
-                    $objectFeedbackError->getFeedbackItemResolution()->getMessage(),
-                    $objectFeedbackError->getExtensions(),
-                ),
-                [$objectFeedbackError->getField()]
-            );
+            $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorOutput($objectFeedbackError);
         }
         foreach ($engineIterationFeedbackStore->objectFeedbackStore->getWarnings() as $objectFeedbackWarning) {
             $this->transferObjectFeedbackEntries(
@@ -2075,6 +2067,24 @@ class Engine implements EngineInterface
                 $iterationObjectNotices,
             );
         }
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected function getErrorOutput(SchemaFeedbackInterface | ObjectFeedbackInterface $schemaOrObjectFeedback, ?array $path = null, ?string $argName = null): array
+    {
+        return [
+            Tokens::MESSAGE => $schemaOrObjectFeedback->getFeedbackItemResolution()->getMessage(),
+            Tokens::PATH => [$schemaOrObjectFeedback->getField()],
+            Tokens::LOCATIONS => [$schemaOrObjectFeedback->getLocation()->toArray()],
+            Tokens::EXTENSIONS => array_merge(
+                $schemaOrObjectFeedback->getExtensions(),
+                [
+                    'code' => $schemaOrObjectFeedback->getFeedbackItemResolution()->getNamespacedCode(),
+                ]
+            )
+        ];
     }
 
     private function transferObjectFeedbackEntries(
@@ -2110,14 +2120,7 @@ class Engine implements EngineInterface
         array &$iterationSchemaTraces
     ): void {
         foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
-            $iterationSchemaErrors[] = $this->getErrorService()->getErrorOutput(
-                new Error(
-                    $schemaFeedbackError->getFeedbackItemResolution()->getNamespacedCode(),
-                    $schemaFeedbackError->getFeedbackItemResolution()->getMessage(),
-                    $schemaFeedbackError->getExtensions(),
-                ),
-                [$schemaFeedbackError->getField()]
-            );
+            $iterationSchemaErrors[] = $this->getErrorOutput($schemaFeedbackError);
         }
         foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getWarnings() as $schemaFeedbackWarning) {
             $this->transferSchemaFeedbackEntries(
