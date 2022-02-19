@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
-use PoP\Root\Exception\AbstractException;
-use PoP\Root\App;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
+use PoP\Root\Exception\GenericClientException;
 use PoP\UserAccount\FunctionAPIFactory;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
@@ -70,19 +69,9 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         $rp_login = $decoded['login'];
 
         if (!$rp_key || !$rp_login) {
-            return new Error(
-                'error-wrongcode'
-            );
+            throw new GenericClientException($this->__('Wrong code', ''));
         }
         $user = $cmsuseraccountapi->checkPasswordResetKey($rp_key, $rp_login);
-        if (!$user) {
-            return new Error(
-                'error-invalidkey'
-            );
-        }
-        if (GeneralUtils::isError($user)) {
-            return $user;
-        }
 
         // Do the actual password reset
         $cmsuseraccountapi->resetPassword($user, $pwd);

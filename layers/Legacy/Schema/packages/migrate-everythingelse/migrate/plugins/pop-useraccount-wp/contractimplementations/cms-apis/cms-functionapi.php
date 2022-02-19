@@ -22,6 +22,9 @@ class FunctionAPI extends \PoP\UserAccount\FunctionAPI_Base
         return wp_check_password($password, $hash);
     }
 
+    /**
+     * @throws GenericClientException
+     */
     public function checkPasswordResetKey($key, $login)
     {
         $result = check_password_reset_key($key, $login);
