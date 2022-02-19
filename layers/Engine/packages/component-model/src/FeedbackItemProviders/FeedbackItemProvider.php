@@ -19,6 +19,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public const E5 = 'e5';
     public const E6 = 'e6';
     public const E7 = 'e7';
+    public const E8 = 'e8';
 
     /**
      * @return string[]
@@ -34,6 +35,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E5,
             self::E6,
             self::E7,
+            self::E8,
         ];
     }
 
@@ -48,6 +50,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E5 => $this->__('Directive \'%s\' could not be resolved due to its nested error(s)', 'component-model'),
             self::E6 => $this->__('Resolving mutation \'%s\' triggered exception: \'%s\'', 'component-model'),
             self::E7 => $this->__('Resolving mutation \'%s\' triggered an exception, please contact the admin', 'component-model'),
+            self::E8 => $this->__('No TypeResolver resolves object \'%s\'', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -63,7 +66,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E4,
             self::E5,
             self::E6,
-            self::E7
+            self::E7,
+            self::E8
                 => FeedbackCategories::ERROR,
             default
                 => parent::getCategory($code),
