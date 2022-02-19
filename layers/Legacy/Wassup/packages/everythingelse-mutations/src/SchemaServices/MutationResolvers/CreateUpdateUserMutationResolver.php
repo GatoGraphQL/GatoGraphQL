@@ -80,7 +80,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             $captcha = $form_data['captcha'];
 
-            $captcha_validation = GD_Captcha::validate($captcha);
+            $captcha_validation = \GD_Captcha::validate($captcha);
             if (GeneralUtils::isError($captcha_validation)) {
                 /** @var Error */
                 $error = $captcha_validation;
