@@ -10,16 +10,19 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 
 abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver implements RelationalTypeResolverInterface
@@ -593,18 +596,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return array_keys($ids_data_fields);
     }
 
-    protected function getUnresolvedObjectIDError(string | int $objectID)
-    {
-        return new Error(
-            'unresolved-resultitem-id',
-            sprintf(
-                $this->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'component-model'),
-                $this->getMaybeNamespacedTypeName(),
-                $objectID
-            )
-        );
-    }
-
     public function fillObjects(
         array $ids_data_fields,
         array $unionDBKeyIDs,
@@ -641,13 +632,20 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Show an error for all objects that couldn't be processed
         $resolvedObjectIDs = $this->getIDsToQuery($objectIDItems);
         $unresolvedObjectIDs = [];
+        $schemaFeedbackStore = $engineIterationFeedbackStore->schemaFeedbackStore;
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
-            $error = $this->getUnresolvedObjectIDError($unresolvedObjectID);
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
             $failedFields = $ids_data_fields[$unresolvedObjectID]['direct'] ?? [];
             // Add in $schemaErrors instead of $objectErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             foreach ($failedFields as $failedField) {
-                $schemaErrors[] = $this->getErrorService()->getErrorOutput($error, [$failedField]);
+                $schemaFeedbackStore->addError(
+                    new SchemaFeedback(
+                        $this->getUnresolvedObjectIDErrorFeedbackItemResolution($unresolvedObjectID),
+                        LocationHelper::getNonSpecificLocation(),
+                        $this,
+                        $failedField,
+                    )
+                );
             }
 
             // Indicate that this ID must be removed from the results
@@ -691,6 +689,18 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         );
 
         return $objectIDItems;
+    }
+
+    protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string | int $objectID): FeedbackItemResolution
+    {
+        return new FeedbackItemResolution(
+            FeedbackItemProvider::class,
+            FeedbackItemProvider::E9,
+            [
+                $this->getMaybeNamespacedTypeName(),
+                $objectID
+            ]
+        );
     }
 
     /**

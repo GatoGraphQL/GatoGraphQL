@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\TypeResolvers\UnionType;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
@@ -386,14 +385,14 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return null;
     }
 
-    protected function getUnresolvedObjectIDError(string | int $objectID)
+    protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string | int $objectID): FeedbackItemResolution
     {
-        return new Error(
-            'unresolved-resultitem-id',
-            sprintf(
-                $this->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'component-model'),
-                (string) $objectID
-            )
+        return new FeedbackItemResolution(
+            FeedbackItemProvider::class,
+            FeedbackItemProvider::E10,
+            [
+                $objectID
+            ]
         );
     }
 
