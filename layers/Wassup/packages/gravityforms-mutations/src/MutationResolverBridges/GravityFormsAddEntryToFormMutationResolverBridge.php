@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\FormInputModuleProcessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
