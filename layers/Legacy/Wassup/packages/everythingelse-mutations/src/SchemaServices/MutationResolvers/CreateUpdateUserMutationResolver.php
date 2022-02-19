@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\Root\Exception\AbstractException;
-use PoP\Root\App;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\EditUsers\FunctionAPIFactory;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
+use PoP\Root\Exception\GenericClientException;
 
 class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 {
@@ -79,12 +80,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         // Validate the captcha
         if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             $captcha = $form_data['captcha'];
-
-            $captcha_validation = \GD_Captcha::validate($captcha);
-            if (GeneralUtils::isError($captcha_validation)) {
-                /** @var Error */
-                $error = $captcha_validation;
-                $errors[] = $error->getMessageOrCode();
+            try {
+                \GD_Captcha::assertIsValid($captcha);
+            } catch (GenericClientException $e) {
+                $errors[] = $e->getMessage();
             }
         }
     }
