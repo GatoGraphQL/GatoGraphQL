@@ -369,7 +369,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $schemaErrors[] = [
                     Tokens::PATH => [$fieldDirective],
                     Tokens::MESSAGE => sprintf(
-                        $this->__('There is no directive with name \'%s\'', 'pop-component-model'),
+                        $this->__('There is no directive with name \'%s\'', 'component-model'),
                         $directiveName
                     ),
                 ];
@@ -381,11 +381,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $schemaErrors[] = [
                     Tokens::PATH => [$fieldDirective],
                     Tokens::MESSAGE => sprintf(
-                        $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'pop-component-model'),
+                        $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'component-model'),
                         $directiveName,
                         json_encode($directiveArgs),
                         implode(
-                            $this->__('\', \'', 'pop-component-model'),
+                            $this->__('\', \'', 'component-model'),
                             $fieldDirectiveFields[$fieldDirective]
                         )
                     ),
@@ -399,7 +399,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $schemaErrors[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => sprintf(
-                            $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'pop-component-model'),
+                            $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'component-model'),
                             $directiveName,
                             json_encode($directiveArgs),
                             $field
@@ -598,7 +598,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return new Error(
             'unresolved-resultitem-id',
             sprintf(
-                $this->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
+                $this->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'component-model'),
                 $this->getMaybeNamespacedTypeName(),
                 $objectID
             )
