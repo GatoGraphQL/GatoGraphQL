@@ -23,7 +23,6 @@ use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
@@ -78,7 +77,6 @@ class Engine implements EngineInterface
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?ModuleHelpersInterface $moduleHelpers = null;
-    private ?ErrorServiceInterface $errorService = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -204,14 +202,6 @@ class Engine implements EngineInterface
     final protected function getModuleHelpers(): ModuleHelpersInterface
     {
         return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
-    }
-    final public function setErrorService(ErrorServiceInterface $errorService): void
-    {
-        $this->errorService = $errorService;
-    }
-    final protected function getErrorService(): ErrorServiceInterface
-    {
-        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
     }
 
     public function getOutputData(): array

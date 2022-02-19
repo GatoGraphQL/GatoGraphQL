@@ -8,7 +8,6 @@ use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
-use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -18,17 +17,6 @@ use PoP\Root\App;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
-    private ?ErrorServiceInterface $errorService = null;
-
-    final public function setErrorService(ErrorServiceInterface $errorService): void
-    {
-        $this->errorService = $errorService;
-    }
-    final protected function getErrorService(): ErrorServiceInterface
-    {
-        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
-    }
-
     public function getDirectiveName(): string
     {
         return 'resolveValueAndMerge';
