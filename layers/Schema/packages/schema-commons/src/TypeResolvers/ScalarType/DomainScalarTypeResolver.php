@@ -34,7 +34,7 @@ class DomainScalarTypeResolver extends AbstractScalarTypeResolver
             return null;
         }
 
-        $this->validateFilterVar($inputValue, $schemaInputValidationFeedbackStore, $schemaInputValidationFeedbackStore, \FILTER_VALIDATE_DOMAIN);
+        $this->validateFilterVar($inputValue, $schemaInputValidationFeedbackStore, \FILTER_VALIDATE_DOMAIN);
         if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;
         }
