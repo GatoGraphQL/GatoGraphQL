@@ -125,10 +125,6 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         // Generate something random for a password reset key.
         $key = $cmsuseraccountapi->getPasswordResetKey($user);
 
-        if (GeneralUtils::isError($key)) {
-            return $key;
-        }
-
         /*
         * The blogname option is escaped with esc_html on the way into the database
         * in sanitize_option we want to reverse this for the plain text arena of emails.
@@ -143,6 +139,6 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         $message = App::applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
 
         $user_email = $this->getUserTypeAPI()->getUserEmail($user);
-        return PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);
+        return \PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);
     }
 }
