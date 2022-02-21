@@ -28,8 +28,10 @@ class DangerouslyDynamicScalarTypeResolver extends AbstractScalarTypeResolver
     /**
      * This method will never be called for DangerouslyDynamicScalar
      */
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object {
         return $inputValue;
     }
 

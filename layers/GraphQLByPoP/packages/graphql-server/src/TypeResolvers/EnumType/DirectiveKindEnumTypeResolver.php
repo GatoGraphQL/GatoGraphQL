@@ -40,8 +40,10 @@ class DirectiveKindEnumTypeResolver extends AbstractEnumTypeResolver
      * Convert the DirectiveKind enum from UPPERCASE as input, to lowercase
      * as defined in DirectiveKinds.php
      */
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object {
         return parent::coerceValue(strtolower($inputValue));
     }
 

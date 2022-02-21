@@ -180,8 +180,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName];
     }
 
-    final public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
+    final public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object {
         if (!($inputValue instanceof stdClass)) {
             return $this->getError(
                 sprintf(

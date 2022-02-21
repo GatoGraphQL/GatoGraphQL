@@ -30,8 +30,10 @@ class JSONObjectScalarTypeResolver extends AbstractScalarTypeResolver
         return 'https://datatracker.ietf.org/doc/html/rfc7159';
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object {
         if (!($inputValue instanceof stdClass)) {
             return $this->getError(
                 sprintf(

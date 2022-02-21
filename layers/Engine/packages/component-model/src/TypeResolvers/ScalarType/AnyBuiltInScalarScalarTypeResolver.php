@@ -21,8 +21,10 @@ class AnyBuiltInScalarScalarTypeResolver extends AbstractScalarTypeResolver
     /**
      * Accept anything and everything, other than arrays and objects
      */
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object {
         if ($error = $this->validateIsNotStdClass($inputValue)) {
             return $error;
         }

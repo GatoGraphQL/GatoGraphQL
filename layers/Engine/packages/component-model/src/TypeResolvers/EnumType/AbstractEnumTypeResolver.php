@@ -60,8 +60,10 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      *
      * This function simply returns the same value always.
      */
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object {
         $enumValues = $this->getConsolidatedEnumValues();
         if (!in_array($inputValue, $enumValues)) {
             $nonDeprecatedEnumValues = array_filter(

@@ -24,8 +24,10 @@ class MACAddressScalarTypeResolver extends AbstractScalarTypeResolver
         return $this->__('MAC (media access control) address scalar, such as 00:1A:C2:7B:00:47', 'component-model');
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object {
         if ($error = $this->validateIsString($inputValue)) {
             return $error;
         }

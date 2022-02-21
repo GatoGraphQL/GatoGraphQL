@@ -27,8 +27,10 @@ abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalar
 
     public const HOOK_POSSIBLE_VALUES = __CLASS__ . ':possible-values';
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object {
         if ($error = $this->validateIsNotStdClass($inputValue)) {
             return $error;
         }
