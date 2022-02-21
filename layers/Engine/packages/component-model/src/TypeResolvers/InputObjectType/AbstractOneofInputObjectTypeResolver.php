@@ -23,11 +23,12 @@ abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectT
     protected function coerceInputObjectValue(
         stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
-    ): stdClass|Error {
-    {
-        if ($error = $this->validateOneofInputObjectValue($inputValue)) {
-            return $error;
+    ): ?stdClass {
+        $this->validateOneofInputObjectValue($inputValue, $schemaInputValidationFeedbackStore);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
+
         return parent::coerceInputObjectValue($inputValue, $schemaInputValidationFeedbackStore);
     }
 }
