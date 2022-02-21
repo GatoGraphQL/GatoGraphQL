@@ -36,7 +36,8 @@ class FloatScalarTypeResolver extends AbstractScalarTypeResolver
 
         $castInputValue = CastToType::_float($inputValue);
         if ($castInputValue === null) {
-            return $this->getError($this->getDefaultErrorMessage($inputValue));
+            $this->addDefaultErrorMessage($inputValue, $schemaInputValidationFeedbackStore);
+            return null;
         }
         return (float) $castInputValue;
     }

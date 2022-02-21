@@ -36,7 +36,8 @@ class IntScalarTypeResolver extends AbstractScalarTypeResolver
 
         $castInputValue = CastToType::_int($inputValue);
         if ($castInputValue === null) {
-            return $this->getError($this->getDefaultErrorMessage($inputValue));
+            $this->addDefaultErrorMessage($inputValue, $schemaInputValidationFeedbackStore);
+            return null;
         }
         return (int) $castInputValue;
     }
