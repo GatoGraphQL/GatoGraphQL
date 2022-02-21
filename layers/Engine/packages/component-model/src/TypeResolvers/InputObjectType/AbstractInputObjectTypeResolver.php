@@ -189,13 +189,21 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         if (!($inputValue instanceof stdClass)) {
-            return $this->getError(
-                sprintf(
-                    $this->__('Input object of type \'%s\' cannot be casted from input value \'%s\'', 'component-model'),
-                    $this->getMaybeNamespacedTypeName(),
-                    $inputValue
-                )
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E15,
+                        [
+                            $this->getMaybeNamespacedTypeName(),
+                            $inputValue
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this
+                ),
             );
+            return null;
         }
         return $this->coerceInputObjectValue($inputValue, $schemaInputValidationFeedbackStore);
     }

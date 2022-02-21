@@ -23,6 +23,8 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
     public const E12 = 'e12';
     public const E13 = 'e13';
     public const E14 = 'e14';
+    public const E15 = 'e15';
+    public const E16 = 'e16';
 
     /**
      * @return string[]
@@ -44,6 +46,8 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
             self::E12,
             self::E13,
             self::E14,
+            self::E15,
+            self::E16,
         ];
     }
 
@@ -64,6 +68,8 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
             self::E12 => $this->__('Argument \'%s\' expects an array of arrays, but value \'%s\' was provided', 'component-model'),
             self::E13 => $this->__('Argument \'%s\' cannot receive an array of arrays with `null` values', 'component-model'),
             self::E14 => $this->__('Value \'%1$s\' for enum type \'%2$s\' is not valid (the only valid values are: \'%3$s\')', 'component-model'),
+            self::E15 => $this->__('Input object of type \'%s\' cannot be casted from input value \'%s\'', 'component-model'),
+            self::E16 => $this->__('Cannot cast value \'%s\' for type \'%s\'', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
