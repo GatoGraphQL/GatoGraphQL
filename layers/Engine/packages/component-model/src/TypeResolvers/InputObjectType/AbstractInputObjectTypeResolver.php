@@ -339,20 +339,20 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
 
-            // @todo: Remove this, replace with param
-            $schemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-
+            
             // Cast (or "coerce" in GraphQL terms) the value
+            $coerceInputSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $coercedInputFieldValue = $this->getInputCoercingService()->coerceInputValue(
                 $inputFieldTypeResolver,
                 $inputFieldValue,
                 $inputFieldIsArrayType,
                 $inputFieldIsArrayOfArraysType,
-                $schemaInputValidationFeedbackStore,
+                $coerceInputSchemaInputValidationFeedbackStore,
             );
+            $schemaInputValidationFeedbackStore->incorporate($coerceInputSchemaInputValidationFeedbackStore);
 
             // Check if the coercion produced errors
-            if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            if ($coerceInputSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 continue;
             }
 

@@ -19,6 +19,35 @@ class SchemaInputValidationFeedbackStore
     /** @var SchemaInputValidationFeedbackInterface[] */
     private array $traces = [];
 
+    public function incorporate(
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void {
+        $this->errors = array_merge(
+            $this->errors,
+            $schemaInputValidationFeedbackStore->getErrors()
+        );
+        $this->warnings = array_merge(
+            $this->warnings,
+            $schemaInputValidationFeedbackStore->getWarnings()
+        );
+        $this->deprecations = array_merge(
+            $this->deprecations,
+            $schemaInputValidationFeedbackStore->getDeprecations()
+        );
+        $this->notices = array_merge(
+            $this->notices,
+            $schemaInputValidationFeedbackStore->getNotices()
+        );
+        $this->logs = array_merge(
+            $this->logs,
+            $schemaInputValidationFeedbackStore->getLogs()
+        );
+        $this->traces = array_merge(
+            $this->traces,
+            $schemaInputValidationFeedbackStore->getTraces()
+        );
+    }
+
     /**
      * @return SchemaInputValidationFeedbackInterface[]
      */
