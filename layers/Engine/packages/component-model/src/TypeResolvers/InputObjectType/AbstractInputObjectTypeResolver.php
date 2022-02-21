@@ -337,38 +337,18 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
 
             // Custom validations for the field
-            $maybeCoercedInputFieldValueErrorMessages = $this->resolveCoercedInputFieldValueErrorMessages(
+            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $this->resolveCoercedInputFieldValueErrorMessages(
                 $inputFieldTypeResolver,
                 $inputFieldName,
                 $coercedInputFieldValue,
+                $separateSchemaInputValidationFeedbackStore,
             );
-            if ($maybeCoercedInputFieldValueErrorMessages !== []) {
-                // @todo Pass store to resolveCoercedInputFieldValueErrorMessages
-                // $schemaInputValidationFeedbackStore->addError(
-                //     new SchemaInputValidationFeedback(
-                //         new FeedbackItemResolution(
-                //             InputValueCoercionErrorFeedbackItemProvider::class,
-                //             InputValueCoercionErrorFeedbackItemProvider::E4,
-                //             [
-                //                 $this->getMaybeNamespacedTypeName(),
-                //             ]
-                //         ),
-                //         LocationHelper::getNonSpecificLocation(),
-                //         $this
-                //     ),
-                // );
-                // foreach ($maybeCoercedInputFieldValueErrorMessages as $coercedInputFieldValueErrorMessage) {
-                //     $errors[] = new Error(
-                //         $this->getErrorCode(),
-                //         $coercedInputFieldValueErrorMessage,
-                //         [
-                //             Tokens::ARGUMENT_PATH => [$inputFieldName],
-                //         ]
-                //     );
-                // }
+            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 continue;
             }
-
+            
             // The input field is valid, add to the resulting InputObject
             $coercedInputValue->$inputFieldName = $coercedInputFieldValue;
         }
@@ -443,8 +423,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         InputTypeResolverInterface $inputFieldTypeResolver,
         string $inputFieldName,
         mixed $coercedInputFieldValue,
-    ): array {
-        return [];
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void {
     }
 
     /**
