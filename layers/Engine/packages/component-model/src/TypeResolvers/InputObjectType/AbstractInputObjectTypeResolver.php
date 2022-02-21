@@ -273,7 +273,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              * these values by types `String` and `[String]`.
              */
             if ($inputFieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
-                $coercedInputValue->$inputFieldName = $this->getDangerouslyDynamicScalarTypeResolver()->coerceValue($inputFieldValue);
+                $coercedInputValue->$inputFieldName = $inputFieldValue;
                 continue;
             }
 
