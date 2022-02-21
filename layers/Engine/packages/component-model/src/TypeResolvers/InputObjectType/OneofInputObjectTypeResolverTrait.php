@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
@@ -15,7 +14,6 @@ use stdClass;
 
 trait OneofInputObjectTypeResolverTrait
 {
-    abstract protected function getErrorCode(): string;
     abstract protected function getTranslationAPI(): TranslationAPIInterface;
     abstract public function getMaybeNamespacedTypeName(): string;
 

@@ -78,12 +78,4 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     {
         return null;
     }
-
-    final protected function getErrorCode(): string
-    {
-        return sprintf(
-            '%s-cast',
-            $this->getTypeName()
-        );
-    }
 }
