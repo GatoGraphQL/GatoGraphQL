@@ -34,13 +34,16 @@ class URLAbsolutePathScalarTypeResolver extends AbstractScalarTypeResolver
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object {
-        if ($error = $this->validateIsString($inputValue)) {
-            return $error;
+        $this->validateIsString($inputValue, $schemaInputValidationFeedbackStore);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
 
-        if ($error = $this->validateFilterVar('http://www.example.com' . $inputValue, \FILTER_VALIDATE_URL)) {
-            return $error;
+        $this->validateFilterVar('http://www.example.com' . $inputValue, $schemaInputValidationFeedbackStore, \FILTER_VALIDATE_URL);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
+
         return $inputValue;
     }
 }

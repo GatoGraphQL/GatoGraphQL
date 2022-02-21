@@ -34,8 +34,9 @@ class PhoneNumberScalarTypeResolver extends AbstractScalarTypeResolver
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object {
-        if ($error = $this->validateIsString($inputValue)) {
-            return $error;
+        $this->validateIsString($inputValue, $schemaInputValidationFeedbackStore);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
 
         if (\preg_match('/(\+{1}[0-9]{1,3}[0-9]{8,9})/', $inputValue) !== 1) {

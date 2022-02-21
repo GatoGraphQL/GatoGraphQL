@@ -29,13 +29,16 @@ class IPScalarTypeResolver extends AbstractScalarTypeResolver
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object {
-        if ($error = $this->validateIsString($inputValue)) {
-            return $error;
+        $this->validateIsString($inputValue, $schemaInputValidationFeedbackStore);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
 
-        if ($error = $this->validateFilterVar($inputValue, \FILTER_VALIDATE_IP)) {
-            return $error;
+        $this->validateFilterVar($inputValue, $schemaInputValidationFeedbackStore, \FILTER_VALIDATE_IP);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
+
         return $inputValue;
     }
 }

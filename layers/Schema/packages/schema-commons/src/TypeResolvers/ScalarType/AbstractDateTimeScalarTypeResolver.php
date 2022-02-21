@@ -30,8 +30,9 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object {
-        if ($error = $this->validateIsString($inputValue)) {
-            return $error;
+        $this->validateIsString($inputValue, $schemaInputValidationFeedbackStore);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
 
         /**
