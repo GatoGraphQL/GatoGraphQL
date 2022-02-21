@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
-use PoP\Root\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\App;
 use stdClass;
 
 abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements EnumTypeResolverInterface
@@ -71,14 +75,22 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
                 $enumValues,
                 fn (string $enumValue) => empty($this->getConsolidatedEnumValueDeprecationMessage($enumValue))
             );
-            return $this->getError(
-                sprintf(
-                    $this->__('Value \'%1$s\' for enum type \'%2$s\' is not valid (the only valid values are: \'%3$s\')', 'component-model'),
-                    $inputValue,
-                    $this->getMaybeNamespacedTypeName(),
-                    implode($this->__('\', \''), $nonDeprecatedEnumValues)
-                )
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E1,
+                        [
+                            $inputValue,
+                            $this->getMaybeNamespacedTypeName(),
+                            implode($this->__('\', \''), $nonDeprecatedEnumValues)
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this
+                ),
             );
+            return null;
         }
         return $inputValue;
     }
