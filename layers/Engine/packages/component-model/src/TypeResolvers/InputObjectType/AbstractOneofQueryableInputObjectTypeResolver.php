@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use stdClass;
 
