@@ -55,8 +55,6 @@ class InputCoercingService implements InputCoercingServiceInterface
      * checking that the WrappingType is respected.
      *
      * Eg: `["hello"]` must be `[String]`, can't be `[[String]]` or `String`.
-     *
-     * @return string|null The error message if the validation fails, or null otherwise
      */
     public function validateInputArrayModifiers(
         InputTypeResolverInterface $inputTypeResolver,

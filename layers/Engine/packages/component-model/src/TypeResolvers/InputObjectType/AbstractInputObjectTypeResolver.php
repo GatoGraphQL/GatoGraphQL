@@ -422,8 +422,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
     /**
      * Custom validations to execute on the input field.
-     *
-     * @return string[] The produced error messages, if any
      */
     protected function validateCoercedInputFieldValue(
         InputTypeResolverInterface $inputFieldTypeResolver,
