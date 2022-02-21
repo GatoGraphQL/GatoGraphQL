@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use CastToType;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use stdClass;
 
 /**
@@ -39,7 +39,8 @@ class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
 
         $castInputValue = CastToType::_bool($inputValue);
         if ($castInputValue === null) {
-            return $this->getError($this->getDefaultErrorMessage($inputValue));
+            $this->addDefaultErrorMessage($inputValue, $schemaInputValidationFeedbackStore);
+            return null;
         }
         return (bool) $castInputValue;
     }
