@@ -27,9 +27,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * @var ObjectTypeResolverPickerInterface[]
      */
     protected ?array $objectTypeResolverPickers = null;
-    
+
     private ?OutputServiceInterface $outputService = null;
-    
+
     final public function setOutputService(OutputServiceInterface $outputService): void
     {
         $this->outputService = $outputService;

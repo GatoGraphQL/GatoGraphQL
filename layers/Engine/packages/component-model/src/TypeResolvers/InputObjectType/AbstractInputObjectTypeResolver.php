@@ -327,7 +327,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 continue;
             }
-            
+
             // Cast (or "coerce" in GraphQL terms) the value
             $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $coercedInputFieldValue = $this->getInputCoercingService()->coerceInputValue(
@@ -354,7 +354,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 continue;
             }
-            
+
             // The input field is valid, add to the resulting InputObject
             $coercedInputValue->$inputFieldName = $coercedInputFieldValue;
         }

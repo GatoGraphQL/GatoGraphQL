@@ -1135,7 +1135,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $separateSchemaInputValidationFeedbackStore,
             );
 
-            // Check if the coercion produced errors            
+            // Check if the coercion produced errors
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 $this->setCastingErrorsForArgument(
                     $fieldOrDirectiveArgs,
@@ -1174,7 +1174,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array &$failedCastingFieldOrDirectiveArgErrors,
         string $argName,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore
-    ): void {        
+    ): void {
         $coercedArgValueErrors = [];
         foreach ($schemaInputValidationFeedbackStore->getErrors() as $error) {
             $coercedArgValueErrors[] = new Error(
