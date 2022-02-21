@@ -36,13 +36,15 @@ interface InputCoercingServiceInterface
      * @return string|null The error message if the validation fails, or null otherwise
      */
     public function validateInputArrayModifiers(
+        InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
         string $inputName,
         bool $inputIsArrayType,
         bool $inputIsNonNullArrayItemsType,
         bool $inputIsArrayOfArraysType,
         bool $inputIsNonNullArrayOfArraysItemsType,
-    ): ?string;
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void;
 
     /**
      * Coerce the input value, corresponding to the array type

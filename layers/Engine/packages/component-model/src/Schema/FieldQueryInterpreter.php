@@ -1105,25 +1105,28 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
 
             // Validate that the expected array/non-array input is provided
-            $maybeErrorMessage = $this->getInputCoercingService()->validateInputArrayModifiers(
+            $schemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $this->getInputCoercingService()->validateInputArrayModifiers(
+                $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $argName,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsNonNullArrayItemsType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
+                $schemaInputValidationFeedbackStore,
             );
-            if ($maybeErrorMessage !== null) {
-                $failedCastingFieldOrDirectiveArgErrors[$argName] = new Error(
-                    sprintf('%s-cast', $argName),
-                    $maybeErrorMessage
+            if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+                $this->setCastingErrorsForArgument(
+                    $fieldOrDirectiveArgs,
+                    $failedCastingFieldOrDirectiveArgErrors,
+                    $argName,
+                    $schemaInputValidationFeedbackStore,
                 );
-                unset($fieldOrDirectiveArgs[$argName]);
                 continue;
             }
 
             // Cast (or "coerce" in GraphQL terms) the value
-            $schemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
@@ -1134,23 +1137,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
             // Check if the coercion produced errors            
             if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
-                $coercedArgValueErrors = [];
-                foreach ($schemaInputValidationFeedbackStore->getErrors() as $error) {
-                    $coercedArgValueErrors[] = new Error(
-                        'casting',
-                        $error->getFeedbackItemResolution()->getMessage(),
-                    );
-                }
-                $castingError = count($coercedArgValueErrors) === 1 ?
-                    $coercedArgValueErrors[0]
-                    : new Error(
-                        'casting',
-                        $this->__('Casting cannot be done due to nested errors', 'component-model'),
-                        null,
-                        $coercedArgValueErrors
-                    );
-                $failedCastingFieldOrDirectiveArgErrors[$argName] = $castingError;
-                unset($fieldOrDirectiveArgs[$argName]);
+                $this->setCastingErrorsForArgument(
+                    $fieldOrDirectiveArgs,
+                    $failedCastingFieldOrDirectiveArgErrors,
+                    $argName,
+                    $schemaInputValidationFeedbackStore,
+                );
                 continue;
             }
 
@@ -1172,6 +1164,34 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $fieldOrDirectiveArgs[$argName] = $coercedArgValue;
         }
         return $fieldOrDirectiveArgs;
+    }
+
+    /**
+     * @param array<string,Error> $failedCastingFieldOrDirectiveArgErrors
+     */
+    protected function setCastingErrorsForArgument(
+        array $fieldOrDirectiveArgs,
+        array &$failedCastingFieldOrDirectiveArgErrors,
+        string $argName,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore
+    ): void {        
+        $coercedArgValueErrors = [];
+        foreach ($schemaInputValidationFeedbackStore->getErrors() as $error) {
+            $coercedArgValueErrors[] = new Error(
+                'casting',
+                $error->getFeedbackItemResolution()->getMessage(),
+            );
+        }
+        $castingError = count($coercedArgValueErrors) === 1 ?
+            $coercedArgValueErrors[0]
+            : new Error(
+                'casting',
+                $this->__('Casting cannot be done due to nested errors', 'component-model'),
+                null,
+                $coercedArgValueErrors
+            );
+        $failedCastingFieldOrDirectiveArgErrors[$argName] = $castingError;
+        unset($fieldOrDirectiveArgs[$argName]);
     }
 
     /**

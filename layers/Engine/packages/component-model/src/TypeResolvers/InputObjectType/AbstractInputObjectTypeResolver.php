@@ -306,53 +306,33 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             );
 
             // Validate that the expected array/non-array input is provided
-            $maybeErrorMessage = $this->getInputCoercingService()->validateInputArrayModifiers(
+            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $this->getInputCoercingService()->validateInputArrayModifiers(
+                $inputFieldTypeResolver,
                 $inputFieldValue,
                 $inputFieldName,
                 $inputFieldIsArrayType,
                 $inputFieldIsNonNullArrayItemsType,
                 $inputFieldIsArrayOfArraysType,
                 $inputFieldIsNonNullArrayOfArraysItemsType,
+                $separateSchemaInputValidationFeedbackStore,
             );
-            if ($maybeErrorMessage !== null) {
-                // @todo Pass store to validateInputArrayModifiers
-                // $schemaInputValidationFeedbackStore->addError(
-                //     new SchemaInputValidationFeedback(
-                //         new FeedbackItemResolution(
-                //             InputValueCoercionErrorFeedbackItemProvider::class,
-                //             InputValueCoercionErrorFeedbackItemProvider::E4,
-                //             [
-                //                 $this->getMaybeNamespacedTypeName(),
-                //             ]
-                //         ),
-                //         LocationHelper::getNonSpecificLocation(),
-                //         $this
-                //     ),
-                // );
-                // $errors[] = new Error(
-                //     $this->getErrorCode(),
-                //     $maybeErrorMessage,
-                //     [
-                //         Tokens::ARGUMENT_PATH => [$inputFieldName],
-                //     ]
-                // );
+            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 continue;
             }
-
             
             // Cast (or "coerce" in GraphQL terms) the value
-            $coerceInputSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $coercedInputFieldValue = $this->getInputCoercingService()->coerceInputValue(
                 $inputFieldTypeResolver,
                 $inputFieldValue,
                 $inputFieldIsArrayType,
                 $inputFieldIsArrayOfArraysType,
-                $coerceInputSchemaInputValidationFeedbackStore,
+                $separateSchemaInputValidationFeedbackStore,
             );
-            $schemaInputValidationFeedbackStore->incorporate($coerceInputSchemaInputValidationFeedbackStore);
-
-            // Check if the coercion produced errors
-            if ($coerceInputSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 continue;
             }
 

@@ -16,6 +16,12 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
     public const E5 = 'e5';
     public const E6 = 'e6';
     public const E7 = 'e7';
+    public const E8 = 'e8';
+    public const E9 = 'e9';
+    public const E10 = 'e10';
+    public const E11 = 'e11';
+    public const E12 = 'e12';
+    public const E13 = 'e13';
 
     /**
      * @return string[]
@@ -30,6 +36,12 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
             self::E5,
             self::E6,
             self::E7,
+            self::E8,
+            self::E9,
+            self::E10,
+            self::E11,
+            self::E12,
+            self::E13,
         ];
     }
 
@@ -43,6 +55,12 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
             self::E5 => $this->__('Mandatory input field \'%s\' in input object \'%s\' has not been provided'),
             self::E6 => $this->getTranslationAPI()->__('The oneof input object \'%s\' must receive exactly 1 input, but \'%s\' inputs were provided (\'%s\')', 'component-model'),
             self::E7 => $this->getTranslationAPI()->__('No input value was provided to the oneof input object \'%s\'', 'component-model'),
+            self::E8 => $this->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'pop-component-model'),
+            self::E9 => null,
+            self::E10 => null,
+            self::E11 => null,
+            self::E12 => null,
+            self::E13 => null,
             default => parent::getMessagePlaceholder($code),
         };
     }

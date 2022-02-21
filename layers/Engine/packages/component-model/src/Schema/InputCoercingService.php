@@ -6,9 +6,13 @@ namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -55,32 +59,54 @@ class InputCoercingService implements InputCoercingServiceInterface
      * @return string|null The error message if the validation fails, or null otherwise
      */
     public function validateInputArrayModifiers(
+        InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
         string $inputName,
         bool $inputIsArrayType,
         bool $inputIsNonNullArrayItemsType,
         bool $inputIsArrayOfArraysType,
         bool $inputIsNonNullArrayOfArraysItemsType,
-    ): ?string {
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void {
         if (
             !$inputIsArrayType
             && is_array($inputValue)
         ) {
-            return sprintf(
-                $this->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'pop-component-model'),
-                $inputName,
-                json_encode($inputValue)
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E8,
+                        [
+                            $inputName,
+                            json_encode($inputValue),
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $inputTypeResolver
+                ),
             );
+            return;
         }
         if (
             $inputIsArrayType
             && !is_array($inputValue)
         ) {
-            return sprintf(
-                $this->__('Argument \'%s\' expects an array, but value \'%s\' was provided', 'pop-component-model'),
-                $inputName,
-                $inputValue
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E9,
+                        [
+                            $inputName,
+                            $inputValue,
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $inputTypeResolver
+                ),
             );
+            return;
         }
         if (
             $inputIsNonNullArrayItemsType
@@ -90,10 +116,20 @@ class InputCoercingService implements InputCoercingServiceInterface
                 fn ($arrayItem) => $arrayItem === null
             )
         ) {
-            return sprintf(
-                $this->__('Argument \'%s\' cannot receive an array with `null` values', 'pop-component-model'),
-                $inputName
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E10,
+                        [
+                            $inputName,
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $inputTypeResolver
+                ),
             );
+            return;
         }
         if (
             $inputIsArrayType
@@ -103,11 +139,21 @@ class InputCoercingService implements InputCoercingServiceInterface
                 fn ($arrayItem) => is_array($arrayItem)
             )
         ) {
-            return sprintf(
-                $this->__('Argument \'%s\' cannot receive an array containing arrays as elements', 'pop-component-model'),
-                $inputName,
-                json_encode($inputValue)
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E11,
+                        [
+                            $inputName,
+                            json_encode($inputValue),
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $inputTypeResolver
+                ),
             );
+            return;
         }
         if (
             $inputIsArrayOfArraysType
@@ -118,11 +164,21 @@ class InputCoercingService implements InputCoercingServiceInterface
                 fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
             )
         ) {
-            return sprintf(
-                $this->__('Argument \'%s\' expects an array of arrays, but value \'%s\' was provided', 'pop-component-model'),
-                $inputName,
-                json_encode($inputValue)
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E12,
+                        [
+                            $inputName,
+                            json_encode($inputValue),
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $inputTypeResolver
+                ),
             );
+            return;
         }
         if (
             $inputIsNonNullArrayOfArraysItemsType
@@ -135,12 +191,21 @@ class InputCoercingService implements InputCoercingServiceInterface
                 ) !== [],
             )
         ) {
-            return sprintf(
-                $this->__('Argument \'%s\' cannot receive an array of arrays with `null` values', 'pop-component-model'),
-                $inputName
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E13,
+                        [
+                            $inputName,
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $inputTypeResolver
+                ),
             );
+            return;
         }
-        return null;
     }
 
     /**
