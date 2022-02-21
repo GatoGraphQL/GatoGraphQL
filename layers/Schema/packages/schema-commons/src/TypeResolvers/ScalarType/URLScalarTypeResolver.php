@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
 
@@ -29,15 +30,20 @@ class URLScalarTypeResolver extends AbstractScalarTypeResolver
         return 'https://url.spec.whatwg.org/#url-representation';
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
-        if ($error = $this->validateIsString($inputValue)) {
-            return $error;
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object|null {
+        $this->validateIsString($inputValue, $schemaInputValidationFeedbackStore);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
 
-        if ($error = $this->validateFilterVar($inputValue, \FILTER_VALIDATE_URL)) {
-            return $error;
+        $this->validateFilterVar($inputValue, $schemaInputValidationFeedbackStore, \FILTER_VALIDATE_URL);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
+
         return $inputValue;
     }
 }

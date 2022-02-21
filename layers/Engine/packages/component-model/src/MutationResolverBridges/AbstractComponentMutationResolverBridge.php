@@ -8,8 +8,6 @@ use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
@@ -91,12 +89,12 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             $return[$warningTypeKey] = $warnings;
         }
 
-        $errorCodeOrMessage = null;
+        $errorMessage = null;
         $resultID = null;
         try {
             $resultID = $mutationResolver->executeMutation($form_data);
         } catch (AbstractClientException $e) {
-            $errorCodeOrMessage = $e->getMessage();
+            $errorMessage = $e->getMessage();
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;
         } catch (Exception $e) {
             /** @var ComponentConfiguration */
@@ -104,27 +102,17 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             if ($componentConfiguration->logExceptionErrorMessages()) {
                 // @todo: Implement for Log
             }
-            $errorCodeOrMessage = $componentConfiguration->sendExceptionErrorMessages()
+            $errorMessage = $componentConfiguration->sendExceptionErrorMessages()
                 ? $e->getMessage()
                 : $this->__('Resolving the mutation produced an exception, please contact the admin', 'component-model');
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;
         }
-        if (GeneralUtils::isError($resultID)) {
-            /** @var Error */
-            $error = $resultID;
-            if ($errorType === ErrorTypes::CODES) {
-                $errorCodeOrMessage = $error->getCode();
-            } else {
-                // $errorType => ErrorTypes::DESCRIPTIONS
-                $errorCodeOrMessage = $error->getMessageOrCode();
-            }
-        }
-        if ($errorCodeOrMessage !== null) {
+        if ($errorMessage !== null) {
             if ($this->skipDataloadIfError()) {
                 // Bring no results
                 $data_properties[DataloadingConstants::SKIPDATALOAD] = true;
             }
-            $return[$errorTypeKey] = [$errorCodeOrMessage];
+            $return[$errorTypeKey] = [$errorMessage];
             return $return;
         }
 

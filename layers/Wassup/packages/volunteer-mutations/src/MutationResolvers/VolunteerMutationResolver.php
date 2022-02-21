@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\VolunteerMutations\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -104,6 +105,10 @@ class VolunteerMutationResolver extends AbstractMutationResolver
         return \PoP_EmailSender_Utils::sendemailToUsersFromPost(array($form_data['target-id']), $subject, $msg);
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $result = $this->doExecute($form_data);

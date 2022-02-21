@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
@@ -12,6 +13,10 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];

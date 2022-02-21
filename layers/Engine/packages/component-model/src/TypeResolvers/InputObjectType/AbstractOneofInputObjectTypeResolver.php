@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use stdClass;
 
 /**
@@ -19,11 +19,15 @@ abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectT
     /**
      * Validate that there is exactly one input set
      */
-    protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
-    {
-        if ($error = $this->validateOneofInputObjectValue($inputValue)) {
-            return $error;
+    protected function coerceInputObjectValue(
+        stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): ?stdClass {
+        $this->validateOneofInputObjectValue($inputValue, $schemaInputValidationFeedbackStore);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
-        return parent::coerceInputObjectValue($inputValue);
+
+        return parent::coerceInputObjectValue($inputValue, $schemaInputValidationFeedbackStore);
     }
 }

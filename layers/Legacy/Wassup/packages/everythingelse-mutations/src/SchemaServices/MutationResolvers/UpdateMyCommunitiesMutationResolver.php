@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPCMSSchema\UserMeta\Utils;
@@ -22,6 +23,10 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
     
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $user_id = $form_data['user_id'];

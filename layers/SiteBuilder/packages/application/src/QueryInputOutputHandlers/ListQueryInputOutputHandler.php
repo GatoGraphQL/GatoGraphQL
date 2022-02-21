@@ -9,10 +9,11 @@ use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\PaginationParams;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler as UpstreamListQueryInputOutputHandler;
-use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
+use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 
 class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 {
@@ -41,7 +42,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         return $this->getCMSService()->getOption($this->getNameResolver()->getName('popcms:option:limit'));
     }
 
-    public function getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
+    public function getQueryState(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
     {
         $ret = parent::getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
@@ -68,7 +69,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         return $ret;
     }
 
-    public function getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
+    public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 

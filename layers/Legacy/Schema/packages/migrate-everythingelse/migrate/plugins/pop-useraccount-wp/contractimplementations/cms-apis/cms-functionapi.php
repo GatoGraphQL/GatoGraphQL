@@ -1,15 +1,18 @@
 <?php
 namespace PoP\UserAccount\WP;
 
-use PoP\Engine\Facades\ErrorHandling\ErrorHelperFacade;
+use PoP\Root\Exception\GenericClientException;
+use WP_Error;
 
 class FunctionAPI extends \PoP\UserAccount\FunctionAPI_Base
 {
     public function getPasswordResetKey($user_data)
     {
         $result = get_password_reset_key($user_data);
-        $errorHelper = ErrorHelperFacade::getInstance();
-        return $errorHelper->returnResultOrConvertError($result);
+        if ($result instanceof WP_Error) {
+            throw new GenericClientException($result->get_error_message());
+        }
+        return $result;
     }
 
     public function checkPassword($user_id, $password)
@@ -19,11 +22,16 @@ class FunctionAPI extends \PoP\UserAccount\FunctionAPI_Base
         return wp_check_password($password, $hash);
     }
 
+    /**
+     * @throws GenericClientException
+     */
     public function checkPasswordResetKey($key, $login)
     {
         $result = check_password_reset_key($key, $login);
-        $errorHelper = ErrorHelperFacade::getInstance();
-        return $errorHelper->returnResultOrConvertError($result);
+        if ($result instanceof WP_Error) {
+            throw new GenericClientException($result->get_error_message());
+        }
+        return $result;
     }
 
     protected function convertQueryArgsFromPoPToCMSForInsertUpdateUser(&$query)

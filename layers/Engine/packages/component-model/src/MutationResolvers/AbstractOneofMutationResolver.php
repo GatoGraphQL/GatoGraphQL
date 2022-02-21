@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\MutationResolvers;
 
 use PoP\ComponentModel\Exception\QueryResolutionException;
 use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
 use stdClass;
 
 abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
@@ -107,43 +108,49 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @return string The current input field's name
      * @throws QueryResolutionException If more than 1 argument is passed to the field executing the OneofMutation
      */
-    protected function getOneofInputObjectFieldName(array $formData): string
+    protected function getOneofInputObjectFieldName(array $form_data): string
     {
-        $formDataSize = count($formData);
+        $formDataSize = count($form_data);
         if ($formDataSize !== 1) {
             throw new QueryResolutionException(
                 sprintf(
                     $this->__('The OneofMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'component-model'),
                     $formDataSize,
-                    implode('\'%s\'', array_keys($formData))
+                    implode('\'%s\'', array_keys($form_data))
                 )
             );
         }
-        return key($formData);
+        return key($form_data);
     }
 
     /**
-     * @throws QueryResolutionException
+     * @throws AbstractException In case of error
      */
-    final public function executeMutation(array $formData): mixed
+    final public function executeMutation(array $form_data): mixed
     {
-        [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($formData);
+        [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($form_data);
+        /** @var MutationResolverInterface $inputFieldMutationResolver */
+        /** @var stdClass $inputFieldFormData */
         return $inputFieldMutationResolver->executeMutation((array)$inputFieldFormData);
     }
-    final public function validateErrors(array $formData): array
+    final public function validateErrors(array $form_data): array
     {
         try {
-            [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($formData);
+            [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($form_data);
+            /** @var MutationResolverInterface $inputFieldMutationResolver */
+            /** @var stdClass $inputFieldFormData */
             return $inputFieldMutationResolver->validateErrors((array)$inputFieldFormData);
         } catch (QueryResolutionException $e) {
             // Return the error message from the exception
             return [$e->getMessage()];
         }
     }
-    final public function validateWarnings(array $formData): array
+    final public function validateWarnings(array $form_data): array
     {
         try {
-            [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($formData);
+            [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($form_data);
+            /** @var MutationResolverInterface $inputFieldMutationResolver */
+            /** @var stdClass $inputFieldFormData */
             return $inputFieldMutationResolver->validateWarnings((array)$inputFieldFormData);
         } catch (QueryResolutionException $e) {
             // Do nothing since the Error will already return the problem
@@ -151,15 +158,15 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         }
     }
     /**
-     * @param array<string,mixed> $formData
+     * @param array<string,mixed> $form_data
      * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the current input field's form data
      * @throws QueryResolutionException If there is not MutationResolver for the input field
      */
-    final protected function getInputFieldMutationResolverAndFormData(array $formData): array
+    final protected function getInputFieldMutationResolverAndFormData(array $form_data): array
     {
-        $inputFieldName = $this->getOneofInputObjectFieldName($formData);
+        $inputFieldName = $this->getOneofInputObjectFieldName($form_data);
         /** @var stdClass */
-        $oneofInputObjectFormData = $formData[$inputFieldName];
+        $oneofInputObjectFormData = $form_data[$inputFieldName];
         $inputFieldMutationResolver = $this->getInputFieldMutationResolver($inputFieldName);
         /**
          * @todo Review this commenting works for different oneof mutations

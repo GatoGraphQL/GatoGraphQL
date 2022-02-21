@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoPSchema\SchemaCommons\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use stdClass;
 
 /**
@@ -29,19 +34,30 @@ class PhoneNumberScalarTypeResolver extends AbstractScalarTypeResolver
         return 'https://datatracker.ietf.org/doc/html/rfc3966#section-5.1';
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
-        if ($error = $this->validateIsString($inputValue)) {
-            return $error;
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object|null {
+        $this->validateIsString($inputValue, $schemaInputValidationFeedbackStore);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
 
         if (\preg_match('/(\+{1}[0-9]{1,3}[0-9]{8,9})/', $inputValue) !== 1) {
-            return $this->getError(
-                sprintf(
-                    $this->__('The format for type \'%s\' is not right: it must be satisfied via regex /(\+{1}[0-9]{1,3}[0-9]{8,9})/', 'component-model'),
-                    $this->getMaybeNamespacedTypeName()
-                )
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E3,
+                        [
+                            $this->getMaybeNamespacedTypeName(),
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this
+                ),
             );
+            return null;
         }
         return $inputValue;
     }

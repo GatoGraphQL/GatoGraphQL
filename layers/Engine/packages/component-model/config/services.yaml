@@ -93,9 +93,6 @@ services:
     PoP\ComponentModel\Error\ErrorProviderInterface:
         class: \PoP\ComponentModel\Error\ErrorProvider
 
-    PoP\ComponentModel\Error\ErrorServiceInterface:
-        class: \PoP\ComponentModel\Error\ErrorService
-
     PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathManager
 

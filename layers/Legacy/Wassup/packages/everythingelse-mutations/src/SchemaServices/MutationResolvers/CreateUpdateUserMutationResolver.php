@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\Root\App;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\EditUsers\FunctionAPIFactory;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
+use PoP\Root\Exception\GenericClientException;
 
 class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 {
@@ -78,12 +78,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         // Validate the captcha
         if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             $captcha = $form_data['captcha'];
-
-            $captcha_validation = GD_Captcha::validate($captcha);
-            if (GeneralUtils::isError($captcha_validation)) {
-                /** @var Error */
-                $error = $captcha_validation;
-                $errors[] = $error->getMessageOrCode();
+            try {
+                \GD_Captcha::assertIsValid($captcha);
+            } catch (GenericClientException $e) {
+                $errors[] = $e->getMessage();
             }
         }
     }
@@ -148,10 +146,6 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
         $result = $this->executeUpdateuser($user_data);
 
-        if (GeneralUtils::isError($result)) {
-            return $result;
-        }
-
         $this->createupdateuser($user_id, $form_data);
 
         return $user_id;
@@ -168,10 +162,6 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         $user_data = $this->getCreateuserData($form_data);
         $result = $this->executeCreateuser($user_data);
 
-        if (GeneralUtils::isError($result)) {
-            return $result;
-        }
-
         $user_id = $result;
 
         $this->createupdateuser($user_id, $form_data);
@@ -179,6 +169,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $user_id;
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         // If user is logged in => It's Update
@@ -217,33 +211,29 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     /**
      * @return mixed The ID of the updated entity, or an Error
+     * @throws AbstractException In case of error
      */
-    protected function update(array $form_data): string | int | Error
+    protected function update(array $form_data): string | int
     {
         // Do the Post update
         $user_id = $this->updateuser($form_data);
-        if (GeneralUtils::isError($user_id)) {
-            return $user_id;
-        }
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionalsUpdate($user_id, $form_data);
         $this->additionals($user_id, $form_data);
 
         // Trigger to update the display_name and nickname
-        userNameUpdated($user_id);
+        \userNameUpdated($user_id);
         return $user_id;
     }
 
     /**
      * @return mixed The ID of the created entity, or an Error
+     * @throws AbstractException In case of error
      */
-    protected function create(array $form_data): string | int | Error
+    protected function create(array $form_data): string | int
     {
         $user_id = $this->createuser($form_data);
-        if (GeneralUtils::isError($user_id)) {
-            return $user_id;
-        }
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionalsCreate($user_id, $form_data);

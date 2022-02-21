@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutationsWP\TypeAPIs;
 
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPCMSSchema\SchemaCommons\Error\ErrorHelperInterface;
+use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
 use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
+use WP_Error;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -17,21 +16,10 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
     use BasicServiceTrait;
 
-    private ?ErrorHelperInterface $errorHelper = null;
-
-    final public function setErrorHelper(ErrorHelperInterface $errorHelper): void
-    {
-        $this->errorHelper = $errorHelper;
-    }
-    final protected function getErrorHelper(): ErrorHelperInterface
-    {
-        return $this->errorHelper ??= $this->instanceManager->getInstance(ErrorHelperInterface::class);
-    }
-
     /**
-     * @return mixed Result or Error
+     * @throws UserStateMutationException In case of error
      */
-    public function login(array $credentials): mixed
+    public function login(array $credentials): object
     {
         // Convert params
         if (isset($credentials['login'])) {
@@ -47,37 +35,22 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
         }
         $result = \wp_signon($credentials);
 
-        // If it is an error, convert from WP_Error to Error
-        $result = $this->getErrorHelper()->returnResultOrConvertError($result);
-
-        // Set the current user already, so that it already says "user logged in" for the toplevel feedback
-        if (GeneralUtils::isError($result)) {
-            /** @var Error */
-            $error = $result;
-            return $this->maybeChangeErrorMessage($error, $credentials);
+        if ($result instanceof WP_Error) {
+            $errorMessage = $result->get_error_code() === 'incorrect_password'
+                ? sprintf(
+                    $this->__('The password you entered for the username \'%s\' is incorrect.', 'user-state-mutations'),
+                    $credentials['user_login']
+                )
+                : $result->get_error_message();
+            throw new UserStateMutationException(
+                $errorMessage
+            );
         }
 
         $user = $result;
         \wp_set_current_user($user->ID);
 
         return $result;
-    }
-
-    protected function maybeChangeErrorMessage(Error $error, array $credentials): Error
-    {
-        // Transform the error message from WordPress
-        $errorCode = $error->getCode();
-        if ($errorCode === 'incorrect_password') {
-            return new Error(
-                'incorrect_password',
-                sprintf(
-                    $this->__('The password you entered for the username \'%s\' is incorrect.', 'user-state-mutations'),
-                    $credentials['user_login']
-                )
-            );
-        }
-
-        return $error;
     }
 
     public function logout(): void

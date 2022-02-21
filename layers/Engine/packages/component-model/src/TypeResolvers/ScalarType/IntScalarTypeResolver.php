@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use CastToType;
 use stdClass;
 
@@ -24,15 +25,19 @@ class IntScalarTypeResolver extends AbstractScalarTypeResolver
         return $this->__('The Int scalar type represents non-fractional signed whole numeric values.', 'component-model');
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
-        if ($error = $this->validateIsNotStdClass($inputValue)) {
-            return $error;
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object|null {
+        $this->validateIsNotStdClass($inputValue, $schemaInputValidationFeedbackStore);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
 
         $castInputValue = CastToType::_int($inputValue);
         if ($castInputValue === null) {
-            return $this->getError($this->getDefaultErrorMessage($inputValue));
+            $this->addDefaultErrorMessage($inputValue, $schemaInputValidationFeedbackStore);
+            return null;
         }
         return (int) $castInputValue;
     }

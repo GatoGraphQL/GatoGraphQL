@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ShareMutations\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -71,6 +72,10 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
         return \PoP_EmailSender_Utils::sendEmail($form_data['email'], $subject, $msg);
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $result = $this->doExecute($form_data);

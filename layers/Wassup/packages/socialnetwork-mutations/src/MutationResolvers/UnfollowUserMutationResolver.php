@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 
@@ -38,12 +39,15 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
     }
 
     // protected function updateValue($value, $form_data) {
-
     //     // Remove the user from the list
     //     $target_id = $form_data['target_id'];
     //     array_splice($value, array_search($target_id, $value), 1);
     // }
-    protected function update($form_data): string | int
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
+    protected function update(array $form_data): string | int
     {
         $user_id = App::getState('current-user-id');
         $target_id = $form_data['target_id'];

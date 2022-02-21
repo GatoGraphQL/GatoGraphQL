@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use CastToType;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
@@ -23,10 +24,13 @@ class NumericScalarTypeResolver extends AbstractScalarTypeResolver
     /**
      * Cast to either Int or Float
      */
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
-        if ($error = $this->validateIsNotStdClass($inputValue)) {
-            return $error;
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object|null {
+        $this->validateIsNotStdClass($inputValue, $schemaInputValidationFeedbackStore);
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
         $castInputValue = CastToType::_int($inputValue);
         if ($castInputValue !== null) {
@@ -36,6 +40,7 @@ class NumericScalarTypeResolver extends AbstractScalarTypeResolver
         if ($castInputValue !== null) {
             return (float) $castInputValue;
         }
-        return $this->getError($this->getDefaultErrorMessage($inputValue));
+        $this->addDefaultErrorMessage($inputValue, $schemaInputValidationFeedbackStore);
+        return null;
     }
 }

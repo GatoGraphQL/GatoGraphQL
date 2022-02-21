@@ -10,16 +10,18 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 
 abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver implements RelationalTypeResolverInterface
@@ -61,7 +63,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?DataloadingEngineInterface $dataloadingEngine = null;
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
-    private ?ErrorServiceInterface $errorService = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -86,14 +87,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
         return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
-    }
-    final public function setErrorService(ErrorServiceInterface $errorService): void
-    {
-        $this->errorService = $errorService;
-    }
-    final protected function getErrorService(): ErrorServiceInterface
-    {
-        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
     }
 
     /**
@@ -369,7 +362,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $schemaErrors[] = [
                     Tokens::PATH => [$fieldDirective],
                     Tokens::MESSAGE => sprintf(
-                        $this->__('There is no directive with name \'%s\'', 'pop-component-model'),
+                        $this->__('There is no directive with name \'%s\'', 'component-model'),
                         $directiveName
                     ),
                 ];
@@ -381,11 +374,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $schemaErrors[] = [
                     Tokens::PATH => [$fieldDirective],
                     Tokens::MESSAGE => sprintf(
-                        $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'pop-component-model'),
+                        $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'component-model'),
                         $directiveName,
                         json_encode($directiveArgs),
                         implode(
-                            $this->__('\', \'', 'pop-component-model'),
+                            $this->__('\', \'', 'component-model'),
                             $fieldDirectiveFields[$fieldDirective]
                         )
                     ),
@@ -399,7 +392,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $schemaErrors[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => sprintf(
-                            $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'pop-component-model'),
+                            $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'component-model'),
                             $directiveName,
                             json_encode($directiveArgs),
                             $field
@@ -593,18 +586,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return array_keys($ids_data_fields);
     }
 
-    protected function getUnresolvedObjectIDError(string | int $objectID)
-    {
-        return new Error(
-            'unresolved-resultitem-id',
-            sprintf(
-                $this->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
-                $this->getMaybeNamespacedTypeName(),
-                $objectID
-            )
-        );
-    }
-
     public function fillObjects(
         array $ids_data_fields,
         array $unionDBKeyIDs,
@@ -641,13 +622,20 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Show an error for all objects that couldn't be processed
         $resolvedObjectIDs = $this->getIDsToQuery($objectIDItems);
         $unresolvedObjectIDs = [];
+        $schemaFeedbackStore = $engineIterationFeedbackStore->schemaFeedbackStore;
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
-            $error = $this->getUnresolvedObjectIDError($unresolvedObjectID);
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
             $failedFields = $ids_data_fields[$unresolvedObjectID]['direct'] ?? [];
             // Add in $schemaErrors instead of $objectErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             foreach ($failedFields as $failedField) {
-                $schemaErrors[] = $this->getErrorService()->getErrorOutput($error, [$failedField]);
+                $schemaFeedbackStore->addError(
+                    new SchemaFeedback(
+                        $this->getUnresolvedObjectIDErrorFeedbackItemResolution($unresolvedObjectID),
+                        LocationHelper::getNonSpecificLocation(),
+                        $this,
+                        $failedField,
+                    )
+                );
             }
 
             // Indicate that this ID must be removed from the results
@@ -691,6 +679,18 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         );
 
         return $objectIDItems;
+    }
+
+    protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string | int $objectID): FeedbackItemResolution
+    {
+        return new FeedbackItemResolution(
+            FeedbackItemProvider::class,
+            FeedbackItemProvider::E9,
+            [
+                $this->getMaybeNamespacedTypeName(),
+                $objectID
+            ]
+        );
     }
 
     /**

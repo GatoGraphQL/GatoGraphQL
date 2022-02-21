@@ -21,7 +21,6 @@ use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemPro
 use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
@@ -652,6 +651,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
 
             /**
+             * If there were errors, return already
+             */
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                return null;
+            }
+
+            /**
              * Validate that the value is what was defined in the schema, or throw a corresponding error.
              *
              * Items being validated:
@@ -695,9 +701,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     );
                     return null;
                 }
-            } elseif (GeneralUtils::isError($value)) {
-                // If it's an Error, can return straight
-                return $value;
             } elseif (
                 $objectTypeFieldResolver->validateResolvedFieldType(
                     $this,

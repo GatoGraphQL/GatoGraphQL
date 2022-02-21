@@ -17,6 +17,11 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public const E3 = 'e3';
     public const E4 = 'e4';
     public const E5 = 'e5';
+    public const E6 = 'e6';
+    public const E7 = 'e7';
+    public const E8 = 'e8';
+    public const E9 = 'e9';
+    public const E10 = 'e10';
 
     /**
      * @return string[]
@@ -30,6 +35,11 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E3,
             self::E4,
             self::E5,
+            self::E6,
+            self::E7,
+            self::E8,
+            self::E9,
+            self::E10,
         ];
     }
 
@@ -42,6 +52,11 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E3 => $this->__('Resolving field \'%s\' triggered exception: \'%s\'', 'component-model'),
             self::E4 => $this->__('Resolving field \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E5 => $this->__('Directive \'%s\' could not be resolved due to its nested error(s)', 'component-model'),
+            self::E6 => $this->__('Resolving mutation \'%s\' triggered exception: \'%s\'', 'component-model'),
+            self::E7 => $this->__('Resolving mutation \'%s\' triggered an exception, please contact the admin', 'component-model'),
+            self::E8 => $this->__('No TypeResolver resolves object \'%s\'', 'component-model'),
+            self::E9 => $this->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'component-model'),
+            self::E10 => $this->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -55,7 +70,12 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E2,
             self::E3,
             self::E4,
-            self::E5
+            self::E5,
+            self::E6,
+            self::E7,
+            self::E8,
+            self::E9,
+            self::E10
                 => FeedbackCategories::ERROR,
             default
                 => parent::getCategory($code),

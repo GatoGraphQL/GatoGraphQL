@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
-use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use stdClass;
 
 abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implements ScalarTypeResolverInterface
@@ -56,45 +60,93 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         return $scalarValue;
     }
 
-    final protected function validateIsNotStdClass(string|int|float|bool|stdClass $inputValue): ?Error
-    {
-        // Fail if passing an array for unsupporting types
-        if ($inputValue instanceof stdClass) {
-            return $this->getError(
-                sprintf(
-                    $this->__('An object cannot be casted to type \'%s\'', 'component-model'),
-                    $this->getMaybeNamespacedTypeName()
-                )
-            );
+    final protected function validateIsNotStdClass(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void {
+        if (!($inputValue instanceof stdClass)) {
+            return;
         }
-        return null;
+        $schemaInputValidationFeedbackStore->addError(
+            new SchemaInputValidationFeedback(
+                new FeedbackItemResolution(
+                    InputValueCoercionErrorFeedbackItemProvider::class,
+                    InputValueCoercionErrorFeedbackItemProvider::E1,
+                    [
+                        $this->getMaybeNamespacedTypeName(),
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation(),
+                $this
+            ),
+        );
     }
 
-    final protected function validateFilterVar(mixed $inputValue, int $filter, array|int $options = []): ?Error
-    {
+    final protected function validateFilterVar(
+        mixed $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        int $filter,
+        array|int $options = [],
+    ): void {
         $valid = \filter_var($inputValue, $filter, $options);
-        if ($valid === false) {
-            return $this->getError(
-                sprintf(
-                    $this->__('The format for \'%s\' is not right for type \'%s\'', 'component-model'),
-                    $inputValue,
-                    $this->getMaybeNamespacedTypeName()
-                )
-            );
+        if ($valid !== false) {
+            return;
         }
-        return null;
+        $schemaInputValidationFeedbackStore->addError(
+            new SchemaInputValidationFeedback(
+                new FeedbackItemResolution(
+                    InputValueCoercionErrorFeedbackItemProvider::class,
+                    InputValueCoercionErrorFeedbackItemProvider::E2,
+                    [
+                        $inputValue,
+                        $this->getMaybeNamespacedTypeName(),
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation(),
+                $this
+            ),
+        );
     }
 
-    final protected function validateIsString(string|int|float|bool|stdClass $inputValue): ?Error
-    {
-        if (!is_string($inputValue)) {
-            return $this->getError(
-                sprintf(
-                    $this->__('Type \'%s\' must be provided as a string', 'component-model'),
-                    $this->getMaybeNamespacedTypeName()
-                )
-            );
+    final protected function validateIsString(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void {
+        if (is_string($inputValue)) {
+            return;
         }
-        return null;
+        $schemaInputValidationFeedbackStore->addError(
+            new SchemaInputValidationFeedback(
+                new FeedbackItemResolution(
+                    InputValueCoercionErrorFeedbackItemProvider::class,
+                    InputValueCoercionErrorFeedbackItemProvider::E3,
+                    [
+                        $this->getMaybeNamespacedTypeName(),
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation(),
+                $this
+            ),
+        );
+    }
+
+    protected function addDefaultErrorMessage(
+        mixed $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void {
+        $schemaInputValidationFeedbackStore->addError(
+            new SchemaInputValidationFeedback(
+                new FeedbackItemResolution(
+                    InputValueCoercionErrorFeedbackItemProvider::class,
+                    InputValueCoercionErrorFeedbackItemProvider::E16,
+                    [
+                        $inputValue,
+                        $this->getMaybeNamespacedTypeName(),
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation(),
+                $this
+            ),
+        );
     }
 }

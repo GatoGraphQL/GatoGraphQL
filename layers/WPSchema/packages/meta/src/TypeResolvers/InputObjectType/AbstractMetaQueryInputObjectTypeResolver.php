@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPWPSchema\Meta\Constants\MetaQueryCompareByOperators;
 use PoPWPSchema\Meta\Constants\MetaQueryValueTypes;
+use PoPWPSchema\Meta\FeedbackItemProviders\FeedbackItemProvider;
 use PoPWPSchema\Meta\TypeResolvers\EnumType\MetaQueryValueTypeEnumTypeResolver;
 use PoPWPSchema\SchemaCommons\Constants\Relation;
 use PoPWPSchema\SchemaCommons\TypeResolvers\EnumType\RelationEnumTypeResolver;
@@ -116,14 +121,13 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
 
     /**
      * Custom validations to execute on the input field.
-     *
-     * @return string[] The produced error messages, if any
      */
-    protected function resolveCoercedInputFieldValueErrorMessages(
+    protected function validateCoercedInputFieldValue(
         InputTypeResolverInterface $inputFieldTypeResolver,
         string $inputFieldName,
         mixed $coercedInputFieldValue,
-    ): array {
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void {
         switch ($inputFieldName) {
             case 'key':
                 if (
@@ -133,19 +137,28 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
                         $this->getAllowOrDenyBehavior(),
                     )
                 ) {
-                    return [
-                        sprintf(
-                            $this->__('There is no meta with key \'%s\'', 'meta'),
-                            $coercedInputFieldValue
-                        )
-                    ];
+                    $schemaInputValidationFeedbackStore->addError(
+                        new SchemaInputValidationFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E1,
+                                [
+                                    $coercedInputFieldValue,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $inputFieldTypeResolver
+                        ),
+                    );
+                    return;
                 }
                 break;
         }
-        return parent::resolveCoercedInputFieldValueErrorMessages(
+        parent::validateCoercedInputFieldValue(
             $inputFieldTypeResolver,
             $inputFieldName,
             $coercedInputFieldValue,
+            $schemaInputValidationFeedbackStore,
         );
     }
 

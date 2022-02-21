@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Error\Error;
+use PoP\Root\Exception\GenericClientException;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 /**
@@ -25,14 +25,16 @@ class GD_Captcha
         );
     }
 
-    public static function validate($value)
+    /**
+     * @throws GenericClientException
+     */
+    public static function assertIsValid($value)
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         // No captcha?
         $captcha = $value['input'];
         if (empty($captcha)) {
-            return new Error(
-                'captcha-empty',
+            throw new GenericClientException(
                 $translationAPI->__('Captcha is empty.', 'pop-coreprocessors')
             );
         }
@@ -45,12 +47,9 @@ class GD_Captcha
         $userinput_encoded = PoP_CaptchaEncodeDecode::encode($captcha, $random);
 
         if ($userinput_encoded !== $encoded) {
-            return new Error(
-                'captcha-mismatch',
+            throw new GenericClientException(
                 $translationAPI->__('Captcha doesn\'t match.', 'pop-coreprocessors')
             );
         }
-
-        return true;
     }
 }

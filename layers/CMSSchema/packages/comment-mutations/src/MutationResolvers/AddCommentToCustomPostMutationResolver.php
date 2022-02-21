@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\MutationResolvers;
 
-use PoP\Root\App;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Root\Exception\AbstractException;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Root\App;
 use PoPCMSSchema\CommentMutations\Component;
 use PoPCMSSchema\CommentMutations\ComponentConfiguration;
+use PoPCMSSchema\CommentMutations\Exception\CommentCRUDMutationException;
 use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
@@ -132,18 +132,22 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $comment_data;
     }
 
-    protected function insertComment(array $comment_data): string | int | Error
+    /**
+     * @throws CommentCRUDMutationException In case of error
+     */
+    protected function insertComment(array $comment_data): string | int
     {
         return $this->getCommentTypeMutationAPI()->insertComment($comment_data);
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $comment_data = $this->getCommentData($form_data);
         $comment_id = $this->insertComment($comment_data);
-        if (GeneralUtils::isError($comment_id)) {
-            return $comment_id;
-        }
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionals($comment_id, $form_data);

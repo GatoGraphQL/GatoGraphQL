@@ -12,9 +12,10 @@ use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
@@ -37,6 +38,7 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
@@ -1216,29 +1218,40 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $object,
                 $fieldName
             );
-            $errorMessage = null;
             try {
                 return $mutationResolver->executeMutation($mutationFieldArgs);
-            } catch (AbstractClientException $e) {
-                $errorMessage = $e->getMessage();
             } catch (Exception $e) {
                 /** @var ComponentConfiguration */
                 $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
                 if ($componentConfiguration->logExceptionErrorMessages()) {
                     // @todo: Implement for Log
                 }
-                $errorMessage = $componentConfiguration->sendExceptionErrorMessages()
-                    ? $e->getMessage()
-                    : sprintf(
-                        $this->__('Resolving mutation \'%s\' produced an exception, please contact the admin', 'component-model'),
-                        $fieldName
+                $sendExceptionToClient = $e instanceof AbstractClientException
+                    || $componentConfiguration->sendExceptionErrorMessages();
+                $feedbackItemResolution = $sendExceptionToClient
+                    ? new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        FeedbackItemProvider::E6,
+                        [
+                            $fieldName,
+                            $e->getMessage()
+                        ]
+                    )
+                    : new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        FeedbackItemProvider::E7,
+                        [
+                            $fieldName
+                        ]
                     );
-            }
-            if ($errorMessage !== null) {
-                return new Error(
-                    'mutation-error',
-                    $errorMessage
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $feedbackItemResolution,
+                        LocationHelper::getNonSpecificLocation(),
+                        $objectTypeResolver,
+                    )
                 );
+                return null;
             }
         }
         // Base case: If the fieldName exists as property in the object, then retrieve it

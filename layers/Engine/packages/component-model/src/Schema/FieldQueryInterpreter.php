@@ -8,10 +8,9 @@ use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Error\ErrorDataTokens;
-use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
@@ -97,7 +96,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     private array $fieldsByTypeAndFieldOutputKey = [];
 
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
-    private ?ErrorServiceInterface $errorService = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
 
@@ -108,14 +106,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
-    }
-    final public function setErrorService(ErrorServiceInterface $errorService): void
-    {
-        $this->errorService = $errorService;
-    }
-    final protected function getErrorService(): ErrorServiceInterface
-    {
-        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
     }
     final public function setInputCoercingService(InputCoercingServiceInterface $inputCoercingService): void
     {
@@ -966,10 +956,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     /** @var Error */
                     $error = $directiveArgValue;
                     if ($errorData = $error->getData()) {
-                        $errorFieldOrDirective = $errorData[ErrorDataTokens::FIELD_NAME] ?? null;
+                        $errorFieldOrDirective = $errorData['fieldName'] ?? null;
                     }
                     $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
-                    $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$errorFieldOrDirective], $directiveArgName);
+                    $objectErrors[(string)$id][] = $this->getTempErrorOutput($error, [$errorFieldOrDirective], $directiveArgName);
                     $fieldOrDirectiveArgs[$directiveArgName] = null;
                     continue;
                 }
@@ -1114,20 +1104,24 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
 
             // Validate that the expected array/non-array input is provided
-            $maybeErrorMessage = $this->getInputCoercingService()->validateInputArrayModifiers(
+            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $this->getInputCoercingService()->validateInputArrayModifiers(
+                $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $argName,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsNonNullArrayItemsType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
+                $separateSchemaInputValidationFeedbackStore,
             );
-            if ($maybeErrorMessage !== null) {
-                $failedCastingFieldOrDirectiveArgErrors[$argName] = new Error(
-                    sprintf('%s-cast', $argName),
-                    $maybeErrorMessage
+            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+                $this->setCastingErrorsForArgument(
+                    $fieldOrDirectiveArgs,
+                    $failedCastingFieldOrDirectiveArgErrors,
+                    $argName,
+                    $separateSchemaInputValidationFeedbackStore,
                 );
-                unset($fieldOrDirectiveArgs[$argName]);
                 continue;
             }
 
@@ -1137,25 +1131,17 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
+                $separateSchemaInputValidationFeedbackStore,
             );
 
             // Check if the coercion produced errors
-            $maybeCoercedArgValueErrors = $this->getInputCoercingService()->extractErrorsFromCoercedInputValue(
-                $coercedArgValue,
-                $fieldOrDirectiveArgIsArrayType,
-                $fieldOrDirectiveArgIsArrayOfArraysType,
-            );
-            if ($maybeCoercedArgValueErrors !== []) {
-                $castingError = count($maybeCoercedArgValueErrors) === 1 ?
-                    $maybeCoercedArgValueErrors[0]
-                    : new Error(
-                        'casting',
-                        $this->__('Casting cannot be done due to nested errors', 'component-model'),
-                        null,
-                        $maybeCoercedArgValueErrors
-                    );
-                $failedCastingFieldOrDirectiveArgErrors[$argName] = $castingError;
-                unset($fieldOrDirectiveArgs[$argName]);
+            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+                $this->setCastingErrorsForArgument(
+                    $fieldOrDirectiveArgs,
+                    $failedCastingFieldOrDirectiveArgErrors,
+                    $argName,
+                    $separateSchemaInputValidationFeedbackStore,
+                );
                 continue;
             }
 
@@ -1177,6 +1163,34 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $fieldOrDirectiveArgs[$argName] = $coercedArgValue;
         }
         return $fieldOrDirectiveArgs;
+    }
+
+    /**
+     * @param array<string,Error> $failedCastingFieldOrDirectiveArgErrors
+     */
+    protected function setCastingErrorsForArgument(
+        array &$fieldOrDirectiveArgs,
+        array &$failedCastingFieldOrDirectiveArgErrors,
+        string $argName,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore
+    ): void {
+        $coercedArgValueErrors = [];
+        foreach ($schemaInputValidationFeedbackStore->getErrors() as $error) {
+            $coercedArgValueErrors[] = new Error(
+                'casting',
+                $error->getFeedbackItemResolution()->getMessage(),
+            );
+        }
+        $castingError = count($coercedArgValueErrors) === 1 ?
+            $coercedArgValueErrors[0]
+            : new Error(
+                'casting',
+                $this->__('Casting cannot be done due to nested errors', 'component-model'),
+                null,
+                $coercedArgValueErrors
+            );
+        $failedCastingFieldOrDirectiveArgErrors[$argName] = $castingError;
+        unset($fieldOrDirectiveArgs[$argName]);
     }
 
     /**
@@ -1496,7 +1510,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     );
                 }
                 // Either treat it as an error or a warning
-                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($directiveArgError, [$fieldDirective], $failedCastingDirectiveArgName);
+                $schemaWarningOrError = $this->getTempErrorOutput($directiveArgError, [$fieldDirective], $failedCastingDirectiveArgName);
                 if ($treatTypeCoercingFailuresAsErrors) {
                     $schemaErrors[] = $schemaWarningOrError;
                 } else {
@@ -1598,7 +1612,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     );
                 }
                 // Either treat it as an error or a warning
-                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($fieldArgError, [$field], $failedCastingFieldArgName);
+                $schemaWarningOrError = $this->getTempErrorOutput($fieldArgError, [$field], $failedCastingFieldArgName);
                 if ($treatTypeCoercingFailuresAsErrors) {
                     $schemaErrors[] = $schemaWarningOrError;
                 } else {
@@ -1613,6 +1627,34 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             return $this->filterFieldOrDirectiveArgs($castedFieldArgs);
         }
         return $castedFieldArgs;
+    }
+
+    /**
+     * @todo Function added temporarily, remove!!!!
+     * @param string[]|null $path
+     * @return array<string, mixed>
+     */
+    public function getTempErrorOutput(Error $error, ?array $path = null, ?string $argName = null): array
+    {
+        $errorOutput = [
+            Tokens::MESSAGE => $error->getMessageOrCode(),
+        ];
+        if ($path !== null) {
+            $errorOutput[Tokens::PATH] = $path;
+        }
+        if ($data = $error->getData()) {
+            $errorOutput[Tokens::EXTENSIONS] = $data;
+        }
+        if ($argName !== null) {
+            $errorOutput[Tokens::EXTENSIONS][Tokens::ARGUMENT_PATH] = array_merge(
+                [$argName],
+                $errorOutput[Tokens::EXTENSIONS][Tokens::ARGUMENT_PATH] ?? []
+            );
+        }
+        foreach ($error->getNestedErrors() as $nestedError) {
+            $errorOutput[Tokens::EXTENSIONS][Tokens::NESTED][] = $this->getTempErrorOutput($nestedError, null, $argName);
+        }
+        return $errorOutput;
     }
 
     /**
