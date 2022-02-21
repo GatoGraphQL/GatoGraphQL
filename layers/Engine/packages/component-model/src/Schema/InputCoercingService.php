@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\Root\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Root\App;
+use PoP\Root\Services\BasicServiceTrait;
 
 class InputCoercingService implements InputCoercingServiceInterface
 {
@@ -152,7 +153,8 @@ class InputCoercingService implements InputCoercingServiceInterface
         InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
         bool $inputIsArrayType,
-        bool $inputIsArrayOfArraysType
+        bool $inputIsArrayOfArraysType,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): mixed {
         if ($inputValue === null) {
             return null;

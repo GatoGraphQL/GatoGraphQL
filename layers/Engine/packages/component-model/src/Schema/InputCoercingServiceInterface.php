@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
@@ -51,7 +52,8 @@ interface InputCoercingServiceInterface
         InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
         bool $inputIsArrayType,
-        bool $inputIsArrayOfArraysType
+        bool $inputIsArrayOfArraysType,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): mixed;
 
     /**

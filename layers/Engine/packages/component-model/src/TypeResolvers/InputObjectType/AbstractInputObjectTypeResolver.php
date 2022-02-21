@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
-use PoP\Root\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
@@ -17,6 +17,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\Root\App;
 use stdClass;
 
 abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver implements InputObjectTypeResolverInterface
@@ -316,12 +317,16 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
 
+            // @todo: Remove this, replace with param
+            $schemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+
             // Cast (or "coerce" in GraphQL terms) the value
             $coercedInputFieldValue = $this->getInputCoercingService()->coerceInputValue(
                 $inputFieldTypeResolver,
                 $inputFieldValue,
                 $inputFieldIsArrayType,
                 $inputFieldIsArrayOfArraysType,
+                $schemaInputValidationFeedbackStore,
             );
 
             // Check if the coercion produced errors

@@ -10,6 +10,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
@@ -1122,11 +1123,13 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
 
             // Cast (or "coerce" in GraphQL terms) the value
+            $schemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
+                $schemaInputValidationFeedbackStore,
             );
 
             // Check if the coercion produced errors
