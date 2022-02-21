@@ -6,9 +6,7 @@ namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Root\App;
@@ -179,39 +177,6 @@ class InputCoercingService implements InputCoercingServiceInterface
         }
         // Otherwise, simply cast the given value directly
         return $inputTypeResolver->coerceValue($inputValue);
-    }
-
-    /**
-     * Extract the Errors produced when coercing the input values
-     *
-     * @return Error[] Errors from coercing the input value
-     */
-    public function extractErrorsFromCoercedInputValue(
-        mixed $inputValue,
-        bool $inputIsArrayType,
-        bool $inputIsArrayOfArraysType
-    ): array {
-        if ($inputIsArrayOfArraysType) {
-            return GeneralUtils::arrayFlatten(array_filter(
-                $inputValue ?? [],
-                fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? false : array_filter(
-                    $arrayArgValueElem,
-                    fn (mixed $arrayOfArraysArgValueElem) => GeneralUtils::isError($arrayOfArraysArgValueElem)
-                )
-            ));
-        }
-        if ($inputIsArrayType) {
-            return array_values(array_filter(
-                $inputValue ?? [],
-                fn (mixed $arrayArgValueElem) => GeneralUtils::isError($arrayArgValueElem)
-            ));
-        }
-        if (GeneralUtils::isError($inputValue)) {
-            return [
-                $inputValue,
-            ];
-        }
-        return [];
     }
 
     /**

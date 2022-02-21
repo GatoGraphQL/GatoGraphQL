@@ -330,17 +330,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             );
 
             // Check if the coercion produced errors
-            $maybeCoercedInputFieldValueErrors = $this->getInputCoercingService()->extractErrorsFromCoercedInputValue(
-                $coercedInputFieldValue,
-                $inputFieldIsArrayType,
-                $inputFieldIsArrayOfArraysType,
-            );
-            if ($maybeCoercedInputFieldValueErrors !== []) {
-                $errors[] = $this->convergeCoercedInputFieldValueError(
-                    $inputFieldTypeResolver,
-                    $inputFieldName,
-                    $maybeCoercedInputFieldValueErrors,
-                );
+            if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
                 continue;
             }
 
@@ -431,41 +421,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     protected function initializeInputFieldInputObjectValue(): bool
     {
         return true;
-    }
-
-    /**
-     * Converge multiple Errors as nested under a single Error
-     *
-     * @param Error[] $coercedInputFieldValueErrors
-     */
-    protected function convergeCoercedInputFieldValueError(
-        InputTypeResolverInterface $inputFieldTypeResolver,
-        string $inputFieldName,
-        array $coercedInputFieldValueErrors,
-    ): Error {
-        // Prepend the arg path to the error(s)
-        foreach ($coercedInputFieldValueErrors as $error) {
-            $this->prependArgPathToError($error, [$inputFieldName]);
-        }
-
-        // Only 1 Error: bubble it up directly
-        if (count($coercedInputFieldValueErrors) === 1) {
-            return $coercedInputFieldValueErrors[0];
-        }
-
-        // Many nested errors: Create a new Error with all of them
-        return new Error(
-            $this->getErrorCode(),
-            sprintf(
-                $this->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
-                $inputFieldName,
-                $inputFieldTypeResolver->getMaybeNamespacedTypeName()
-            ),
-            [
-                Tokens::ARGUMENT_PATH => [$inputFieldName],
-            ],
-            $coercedInputFieldValueErrors
-        );
     }
 
     /**

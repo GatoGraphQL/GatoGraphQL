@@ -57,17 +57,6 @@ interface InputCoercingServiceInterface
     ): mixed;
 
     /**
-     * Extract the Errors produced when coercing the input values
-     *
-     * @return Error[] Errors from coercing the input value
-     */
-    public function extractErrorsFromCoercedInputValue(
-        mixed $inputValue,
-        bool $inputIsArrayType,
-        bool $inputIsArrayOfArraysType
-    ): array;
-
-    /**
      * If applicable, get the deprecation messages for the input value
      *
      * @return string[]
