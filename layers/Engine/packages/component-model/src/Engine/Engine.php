@@ -1836,8 +1836,7 @@ class Engine implements EngineInterface
              * Regenerate the SchemaFeedbackStore, to reset the
              * state of errors/warnings/logs/etc for the next iteration
              */
-            $feedbackStore = App::getFeedbackStore();
-            $feedbackStore->regenerateSchemaFeedbackStore();
+            App::getFeedbackStore()->regenerateSchemaFeedbackStore();
         }
 
         $ret = [];
