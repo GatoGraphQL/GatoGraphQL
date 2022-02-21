@@ -16,7 +16,7 @@ abstract class PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase ext
 
         // Feedback comes from the Action Execution response
         // If $executed != null, then $checkpoint succeded, no need to ask for this condition before printing the messages
-        if ($data_properties[\PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS] && GeneralUtils::isError($actionexecution_checkpoint_validation)) {
+        if ($data_properties[\PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS] && $actionexecution_checkpoint_validation !== null) {
             $msg = array(
                 'codes' => array(
                     $actionexecution_checkpoint_validation->getCode()

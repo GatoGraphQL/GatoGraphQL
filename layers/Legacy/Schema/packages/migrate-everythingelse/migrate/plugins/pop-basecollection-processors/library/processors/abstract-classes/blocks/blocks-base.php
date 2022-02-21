@@ -116,7 +116,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         $ret = parent::getJsdataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
         if ($this->showDisabledLayer($module, $props) && $this->showDisabledLayerIfCheckpointFailed($module, $props)) {
-            $ret['blockHandleDisabledLayer']['checkpoint-failed'] = $dataaccess_checkpoint_validation !== null || GeneralUtils::isError($actionexecution_checkpoint_validation);
+            $ret['blockHandleDisabledLayer']['checkpoint-failed'] = $dataaccess_checkpoint_validation !== null || $actionexecution_checkpoint_validation !== null;
         }
 
         return $ret;
@@ -260,7 +260,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
     public function getDataFeedback(array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-        if ($dataaccess_checkpoint_validation !== null || GeneralUtils::isError($actionexecution_checkpoint_validation)) {
+        if ($dataaccess_checkpoint_validation !== null || $actionexecution_checkpoint_validation !== null) {
             $ret['checkpoint-failed'] = true;
         }
 
