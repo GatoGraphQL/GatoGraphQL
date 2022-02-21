@@ -1170,7 +1170,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      * @param array<string,Error> $failedCastingFieldOrDirectiveArgErrors
      */
     protected function setCastingErrorsForArgument(
-        array $fieldOrDirectiveArgs,
+        array &$fieldOrDirectiveArgs,
         array &$failedCastingFieldOrDirectiveArgErrors,
         string $argName,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore
