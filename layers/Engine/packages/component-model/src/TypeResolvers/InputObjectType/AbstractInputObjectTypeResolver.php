@@ -7,8 +7,11 @@ namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -17,6 +20,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use stdClass;
 
@@ -199,7 +203,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     protected function coerceInputObjectValue(
         stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
-    ): stdClass|Error {
+    ): ?stdClass {
         $coercedInputValue = new stdClass();
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
 
@@ -244,22 +248,22 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
         }
 
-        /** @var Error[] */
-        $errors = [];
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
             // Check that the input field exists
             $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
             if ($inputFieldTypeResolver === null) {
-                $errors[] = new Error(
-                    $this->getErrorCode(),
-                    sprintf(
-                        $this->__('There is no input field \'%s\' in input object \'%s\''),
-                        $inputFieldName,
-                        $this->getMaybeNamespacedTypeName()
+                $schemaInputValidationFeedbackStore->addError(
+                    new SchemaInputValidationFeedback(
+                        new FeedbackItemResolution(
+                            InputValueCoercionErrorFeedbackItemProvider::class,
+                            InputValueCoercionErrorFeedbackItemProvider::E4,
+                            [
+                                $this->getMaybeNamespacedTypeName(),
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $this
                     ),
-                    [
-                        Tokens::ARGUMENT_PATH => [$inputFieldName],
-                    ]
                 );
                 continue;
             }
@@ -311,13 +315,27 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldIsNonNullArrayOfArraysItemsType,
             );
             if ($maybeErrorMessage !== null) {
-                $errors[] = new Error(
-                    $this->getErrorCode(),
-                    $maybeErrorMessage,
-                    [
-                        Tokens::ARGUMENT_PATH => [$inputFieldName],
-                    ]
-                );
+                // @todo Pass store to validateInputArrayModifiers
+                // $schemaInputValidationFeedbackStore->addError(
+                //     new SchemaInputValidationFeedback(
+                //         new FeedbackItemResolution(
+                //             InputValueCoercionErrorFeedbackItemProvider::class,
+                //             InputValueCoercionErrorFeedbackItemProvider::E4,
+                //             [
+                //                 $this->getMaybeNamespacedTypeName(),
+                //             ]
+                //         ),
+                //         LocationHelper::getNonSpecificLocation(),
+                //         $this
+                //     ),
+                // );
+                // $errors[] = new Error(
+                //     $this->getErrorCode(),
+                //     $maybeErrorMessage,
+                //     [
+                //         Tokens::ARGUMENT_PATH => [$inputFieldName],
+                //     ]
+                // );
                 continue;
             }
 
@@ -345,15 +363,29 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $coercedInputFieldValue,
             );
             if ($maybeCoercedInputFieldValueErrorMessages !== []) {
-                foreach ($maybeCoercedInputFieldValueErrorMessages as $coercedInputFieldValueErrorMessage) {
-                    $errors[] = new Error(
-                        $this->getErrorCode(),
-                        $coercedInputFieldValueErrorMessage,
-                        [
-                            Tokens::ARGUMENT_PATH => [$inputFieldName],
-                        ]
-                    );
-                }
+                // @todo Pass store to resolveCoercedInputFieldValueErrorMessages
+                // $schemaInputValidationFeedbackStore->addError(
+                //     new SchemaInputValidationFeedback(
+                //         new FeedbackItemResolution(
+                //             InputValueCoercionErrorFeedbackItemProvider::class,
+                //             InputValueCoercionErrorFeedbackItemProvider::E4,
+                //             [
+                //                 $this->getMaybeNamespacedTypeName(),
+                //             ]
+                //         ),
+                //         LocationHelper::getNonSpecificLocation(),
+                //         $this
+                //     ),
+                // );
+                // foreach ($maybeCoercedInputFieldValueErrorMessages as $coercedInputFieldValueErrorMessage) {
+                //     $errors[] = new Error(
+                //         $this->getErrorCode(),
+                //         $coercedInputFieldValueErrorMessage,
+                //         [
+                //             Tokens::ARGUMENT_PATH => [$inputFieldName],
+                //         ]
+                //     );
+                // }
                 continue;
             }
 
@@ -374,31 +406,26 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;
             }
-            $errors[] = new Error(
-                $this->getErrorCode(),
-                sprintf(
-                    $this->__('Mandatory input field \'%s\' in input object \'%s\' has not been provided'),
-                    $inputFieldName,
-                    $this->getMaybeNamespacedTypeName()
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E5,
+                        [
+                            $inputFieldName,
+                            $this->getMaybeNamespacedTypeName(),
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this
                 ),
-                [
-                    Tokens::ARGUMENT_PATH => [$inputFieldName],
-                ]
             );
             continue;
         }
 
         // If there was any error, return it
-        if ($errors) {
-            return count($errors) === 1 ?
-                $errors[0]
-                : $this->getError(
-                    sprintf(
-                        $this->__('Casting input object of type \'%s\' produced errors', 'component-model'),
-                        $this->getMaybeNamespacedTypeName()
-                    ),
-                    $errors
-                );
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
 
         // Add all missing properties which have a default value
