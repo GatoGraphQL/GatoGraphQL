@@ -73,7 +73,7 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
 
             case 'hasLink':
                 $link = $objectTypeResolver->resolveValue($post, 'link', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($link)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $link;
                 } elseif ($link) {
                     return true;

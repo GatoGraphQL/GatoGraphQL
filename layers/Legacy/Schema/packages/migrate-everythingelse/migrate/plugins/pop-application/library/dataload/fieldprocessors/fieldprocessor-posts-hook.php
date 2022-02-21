@@ -179,7 +179,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
 
             case 'thumbFullSrc':
                 $thumb = $objectTypeResolver->resolveValue($post, FieldQueryInterpreterFacade::getInstance()->getField('thumb', ['size' => 'full', 'addDescription' => true]), $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($thumb)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $thumb;
                 }
                 return $thumb['src'];
@@ -192,7 +192,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
 
             case 'hasTopics':
                 $topics = $objectTypeResolver->resolveValue($post, 'topics', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($topics)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $topics;
                 } elseif ($topics) {
                     return true;
@@ -204,7 +204,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
 
             case 'hasAppliesto':
                 $appliesto = $objectTypeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($appliesto)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $appliesto;
                 } elseif ($appliesto) {
                     return true;

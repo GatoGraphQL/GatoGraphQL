@@ -109,11 +109,11 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
         switch ($fieldName) {
             case 'shareURL':
                 $url = $objectTypeResolver->resolveValue($object, 'url', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($url)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $url;
                 }
                 $title = $objectTypeResolver->resolveValue($object, $this->getTitleField(), $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($title)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $title;
                 }
                 $providerURLs = $this->socialMediaProviderEnumTypeResolver->getEnumValues();

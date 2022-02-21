@@ -72,14 +72,14 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends Abstract
         switch ($fieldName) {
             case 'contentClipped':
                 $content = $objectTypeResolver->resolveValue($object, 'content', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($content)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $content;
                 }
                 return limitString(strip_tags($content), 250);
 
             case 'replycommentURL':
                 $customPostID = $objectTypeResolver->resolveValue($object, 'customPostID', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                if (GeneralUtils::isError($customPostID)) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return null;
                 }
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
