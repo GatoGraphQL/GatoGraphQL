@@ -13,7 +13,6 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
@@ -408,10 +407,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         // Store the warnings to be read if needed
         if ($schemaWarnings) {
-            $schemaFeedbackStore = App::getFeedbackStore()->schemaFeedbackStore;
             foreach ($schemaWarnings as $warningEntry) {
-                $schemaFeedbackStore->addWarning(
-                    new SchemaFeedback(
+                $objectTypeFieldResolutionFeedbackStore->addWarning(
+                    new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             GenericFeedbackItemProvider::class,
                             GenericFeedbackItemProvider::W1,
@@ -421,8 +419,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         ),
                         LocationHelper::getNonSpecificLocation(),
                         $this,
-                        $field, //$warningEntry[Tokens::PATH],
                         $warningEntry[Tokens::EXTENSIONS] ?? [],
+                        // $field, //$warningEntry[Tokens::PATH],
                     )
                 );
             }
