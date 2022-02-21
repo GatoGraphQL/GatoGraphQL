@@ -1833,7 +1833,7 @@ class Engine implements EngineInterface
             // }
 
             /**
-             * Regenerate the schema/object FeedbackStore, to reset the
+             * Regenerate the SchemaFeedbackStore, to reset the
              * state of errors/warnings/logs/etc for the next iteration
              */
             $feedbackStore = App::getFeedbackStore();
