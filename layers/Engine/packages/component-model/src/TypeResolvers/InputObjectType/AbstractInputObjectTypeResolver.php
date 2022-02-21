@@ -338,7 +338,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
             // Custom validations for the field
             $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-            $this->resolveCoercedInputFieldValueErrorMessages(
+            $this->validateCoercedInputFieldValue(
                 $inputFieldTypeResolver,
                 $inputFieldName,
                 $coercedInputFieldValue,
@@ -419,7 +419,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
      *
      * @return string[] The produced error messages, if any
      */
-    protected function resolveCoercedInputFieldValueErrorMessages(
+    protected function validateCoercedInputFieldValue(
         InputTypeResolverInterface $inputFieldTypeResolver,
         string $inputFieldName,
         mixed $coercedInputFieldValue,

@@ -124,7 +124,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
      *
      * @return string[] The produced error messages, if any
      */
-    protected function resolveCoercedInputFieldValueErrorMessages(
+    protected function validateCoercedInputFieldValue(
         InputTypeResolverInterface $inputFieldTypeResolver,
         string $inputFieldName,
         mixed $coercedInputFieldValue,
@@ -156,7 +156,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
                 }
                 break;
         }
-        parent::resolveCoercedInputFieldValueErrorMessages(
+        parent::validateCoercedInputFieldValue(
             $inputFieldTypeResolver,
             $inputFieldName,
             $coercedInputFieldValue,
