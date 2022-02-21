@@ -33,7 +33,7 @@ class UUIDScalarTypeResolver extends AbstractScalarTypeResolver
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
-    ): string|int|float|bool|object {
+    ): string|int|float|bool|object|null {
         $this->validateIsString($inputValue, $schemaInputValidationFeedbackStore);
         if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;

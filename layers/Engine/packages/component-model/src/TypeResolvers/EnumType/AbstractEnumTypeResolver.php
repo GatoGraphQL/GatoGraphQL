@@ -64,7 +64,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
-    ): string|int|float|bool|object {
+    ): string|int|float|bool|object|null {
         $enumValues = $this->getConsolidatedEnumValues();
         if (!in_array($inputValue, $enumValues)) {
             $nonDeprecatedEnumValues = array_filter(

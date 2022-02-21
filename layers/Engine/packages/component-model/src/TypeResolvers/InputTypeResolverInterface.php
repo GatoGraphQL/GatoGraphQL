@@ -24,16 +24,16 @@ interface InputTypeResolverInterface extends TypeResolverInterface
      * (such as field argument `"Hallo!"` in `{ echo(msg: "Hallo!") }`)
      * into the corresponding scalar entity (in this case, a String).
      *
-     * Return an instance of Error if the coercing cannot be done,
-     * with a descriptive error message.
+     * Return `null` if the coercing cannot be done, and add an error
+     * with a descriptive message to `$schemaInputValidationFeedbackStore`.
      *
      * @param string|int|float|bool|stdClass $inputValue the (custom) scalar in any format: itself (eg: an object) or its representation (eg: as a string)
-     * @return string|int|float|bool|object the coerced (custom) scalar, or an instance of Error if it can't be done
+     * @return string|int|float|bool|object|null the coerced (custom) scalar, or `null` if it can't be done
      *
      * @see https://spec.graphql.org/draft/#sec-Input-Values
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
-    ): string|int|float|bool|object;
+    ): string|int|float|bool|object|null;
 }

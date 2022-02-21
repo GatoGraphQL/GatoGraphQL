@@ -28,7 +28,7 @@ class IntScalarTypeResolver extends AbstractScalarTypeResolver
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
-    ): string|int|float|bool|object {
+    ): string|int|float|bool|object|null {
         $this->validateIsNotStdClass($inputValue, $schemaInputValidationFeedbackStore);
         if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;
