@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\Root\App;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
@@ -42,7 +43,7 @@ class DirectiveKindEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object {
         return parent::coerceValue(strtolower($inputValue));
     }

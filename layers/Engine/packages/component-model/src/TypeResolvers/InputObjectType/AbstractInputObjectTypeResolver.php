@@ -182,7 +182,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
     final public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object {
         if (!($inputValue instanceof stdClass)) {
             return $this->getError(

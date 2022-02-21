@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\Root\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -62,7 +63,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object {
         $enumValues = $this->getConsolidatedEnumValues();
         if (!in_array($inputValue, $enumValues)) {

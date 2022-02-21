@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use CastToType;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
@@ -25,7 +26,7 @@ class NumericScalarTypeResolver extends AbstractScalarTypeResolver
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object {
         if ($error = $this->validateIsNotStdClass($inputValue)) {
             return $error;

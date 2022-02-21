@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
@@ -29,7 +30,7 @@ abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalar
 
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object {
         if ($error = $this->validateIsNotStdClass($inputValue)) {
             return $error;

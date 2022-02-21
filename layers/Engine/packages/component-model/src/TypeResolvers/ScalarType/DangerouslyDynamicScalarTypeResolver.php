@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use stdClass;
 
 /**
@@ -30,7 +31,7 @@ class DangerouslyDynamicScalarTypeResolver extends AbstractScalarTypeResolver
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object {
         return $inputValue;
     }

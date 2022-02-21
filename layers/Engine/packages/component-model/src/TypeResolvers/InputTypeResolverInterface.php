@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use stdClass;
 
 /**
@@ -33,6 +34,6 @@ interface InputTypeResolverInterface extends TypeResolverInterface
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        \PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object;
 }
