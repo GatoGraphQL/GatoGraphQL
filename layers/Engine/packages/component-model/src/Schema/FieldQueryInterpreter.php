@@ -1105,7 +1105,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
 
             // Validate that the expected array/non-array input is provided
-            $schemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $this->getInputCoercingService()->validateInputArrayModifiers(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
@@ -1114,14 +1114,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldOrDirectiveArgIsNonNullArrayItemsType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
-                $schemaInputValidationFeedbackStore,
+                $separateSchemaInputValidationFeedbackStore,
             );
-            if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 $this->setCastingErrorsForArgument(
                     $fieldOrDirectiveArgs,
                     $failedCastingFieldOrDirectiveArgErrors,
                     $argName,
-                    $schemaInputValidationFeedbackStore,
+                    $separateSchemaInputValidationFeedbackStore,
                 );
                 continue;
             }
@@ -1132,16 +1132,16 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
-                $schemaInputValidationFeedbackStore,
+                $separateSchemaInputValidationFeedbackStore,
             );
 
             // Check if the coercion produced errors            
-            if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 $this->setCastingErrorsForArgument(
                     $fieldOrDirectiveArgs,
                     $failedCastingFieldOrDirectiveArgErrors,
                     $argName,
-                    $schemaInputValidationFeedbackStore,
+                    $separateSchemaInputValidationFeedbackStore,
                 );
                 continue;
             }
