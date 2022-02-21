@@ -55,12 +55,12 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
             self::E5 => $this->__('Mandatory input field \'%s\' in input object \'%s\' has not been provided'),
             self::E6 => $this->getTranslationAPI()->__('The oneof input object \'%s\' must receive exactly 1 input, but \'%s\' inputs were provided (\'%s\')', 'component-model'),
             self::E7 => $this->getTranslationAPI()->__('No input value was provided to the oneof input object \'%s\'', 'component-model'),
-            self::E8 => $this->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'pop-component-model'),
-            self::E9 => null,
-            self::E10 => null,
-            self::E11 => null,
-            self::E12 => null,
-            self::E13 => null,
+            self::E8 => $this->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'component-model'),
+            self::E9 => $this->__('Argument \'%s\' expects an array, but value \'%s\' was provided', 'component-model'),
+            self::E10 => $this->__('Argument \'%s\' cannot receive an array with `null` values', 'component-model'),
+            self::E11 => $this->__('Argument \'%s\' cannot receive an array containing arrays as elements', 'component-model'),
+            self::E12 => $this->__('Argument \'%s\' expects an array of arrays, but value \'%s\' was provided', 'component-model'),
+            self::E13 => $this->__('Argument \'%s\' cannot receive an array of arrays with `null` values', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
