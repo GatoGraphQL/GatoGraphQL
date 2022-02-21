@@ -2423,7 +2423,7 @@ class Engine implements EngineInterface
         array $module,
         array &$props,
         array $data_properties,
-        $dataaccess_checkpoint_validation,
+        ?FeedbackItemResolution $dataaccess_checkpoint_validation,
         $mutation_checkpoint_validation,
         $executed,
         $objectIDs

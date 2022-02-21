@@ -5,6 +5,7 @@ use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\App;
@@ -173,7 +174,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         array $module,
         array &$props,
         array $data_properties,
-        $dataaccess_checkpoint_validation,
+        ?FeedbackItemResolution $dataaccess_checkpoint_validation,
         $mutation_checkpoint_validation,
         $executed,
         $objectIDs

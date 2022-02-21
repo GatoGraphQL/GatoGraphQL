@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
@@ -9,7 +10,7 @@ abstract class PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase ext
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
+    public function getDataFeedback(array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 

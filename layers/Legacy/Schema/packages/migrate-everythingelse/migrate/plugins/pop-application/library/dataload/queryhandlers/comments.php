@@ -1,5 +1,6 @@
 <?php
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\LooseContracts\Facades\NameResolverFacade;
@@ -24,19 +25,7 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
         $query_args['orderby'] = NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:comments:date');
     }
 
-    // function getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-
-    //     $ret = parent::getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-
-    //     $query_args = $data_properties[ParamConstants::QUERYARGS];
-
-    //     // Add the post_id, so we know what post to fetch comments from when filtering
-    //     $ret[ParamConstants::PARAMS][\PoPCMSSchema\Comments\Constants\Params::COMMENT_POST_ID] = $query_args[\PoPCMSSchema\Comments\Constants\Params::COMMENT_POST_ID];
-
-    //     return $ret;
-    // }
-
-    public function getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
+    public function getQueryParams($data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
@@ -47,18 +36,6 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
 
         return $ret;
     }
-
-    // function getDatafeedback($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-
-    //     $ret = parent::getDatafeedback($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-
-    //     $query_args = $data_properties[ParamConstants::QUERYARGS];
-
-    //     // Add the post_id, so we know what post to fetch comments from when filtering
-    //     $ret[ParamConstants::PARAMS][\PoPCMSSchema\Comments\Constants\Params::COMMENT_POST_ID] = $query_args[\PoPCMSSchema\Comments\Constants\Params::COMMENT_POST_ID];
-
-    //     return $ret;
-    // }
 }
 
 /**

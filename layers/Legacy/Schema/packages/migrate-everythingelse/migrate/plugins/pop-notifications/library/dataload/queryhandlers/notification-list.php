@@ -1,6 +1,7 @@
 <?php
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\State\ApplicationState;
 
@@ -43,7 +44,7 @@ class GD_DataLoad_QueryInputOutputHandler_NotificationList extends ListQueryInpu
         $query_args['hist_time_compare'] = $this->getHistTimeCompare($query_args);
     }
 
-    public function getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
+    public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
@@ -56,36 +57,6 @@ class GD_DataLoad_QueryInputOutputHandler_NotificationList extends ListQueryInpu
 
         return $ret;
     }
-
-    // function getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-
-    //     $ret = parent::getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-
-    //     // Send the hist_time back only for dynamic pages, so the time does not get cached
-    //     // It will always work fine, since /notifications is mutableonrequestdata, so the first time it is invoked it will get that current time and set it
-    //     if (PoP_UserState_Utils::currentRouteRequiresUserState()) {
-
-    //         $query_args = $data_properties[ParamConstants::QUERYARGS];
-    //         $ret[ParamConstants::PARAMS]['hist_time'] = $query_args['hist_time'];
-    //     }
-
-    //     return $ret;
-    // }
-
-    // function getDatafeedback($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-
-    //     $ret = parent::getDatafeedback($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-
-    //     // Send the hist_time back only for dynamic pages, so the time does not get cached
-    //     // It will always work fine, since /notifications is mutableonrequestdata, so the first time it is invoked it will get that current time and set it
-    //     if (PoP_UserState_Utils::currentRouteRequiresUserState()) {
-
-    //         $query_args = $data_properties[ParamConstants::QUERYARGS];
-    //         $ret[ParamConstants::PARAMS]['hist_time'] = $query_args['hist_time'];
-    //     }
-
-    //     return $ret;
-    // }
 }
 
 /**

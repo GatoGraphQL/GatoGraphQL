@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentInfo;
 use PoP\ComponentModel\Constants\Props;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\Root\App;
@@ -22,7 +23,7 @@ trait ModulePathProcessorTrait
         return $this->getModuleProcessorManager()->getProcessor($module);
     }
 
-    protected function executeOnSelfAndPropagateToDatasetmodules($eval_self_fn, $propagate_fn, array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+    protected function executeOnSelfAndPropagateToDatasetmodules($eval_self_fn, $propagate_fn, array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
     {
         $ret = [];
         $key = $this->getModuleHelpers()->getModuleOutputName($module);
@@ -61,7 +62,7 @@ trait ModulePathProcessorTrait
         return $ret;
     }
 
-    protected function executeOnSelfAndMergeWithDatasetmodules($eval_self_fn, $propagate_fn, array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+    protected function executeOnSelfAndMergeWithDatasetmodules($eval_self_fn, $propagate_fn, array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
     {
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 

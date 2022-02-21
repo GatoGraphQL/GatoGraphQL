@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\Application\Hooks;
 
-use PoP\Root\App;
 use PoP\Application\Constants\Actions;
 use PoP\Application\ModuleFilters\Lazy;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\Params;
-use PoP\ConfigurationComponentModel\Constants\Targets;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ConfigurationComponentModel\Constants\Targets;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class LazyLoadHookSet extends AbstractHookSet
@@ -65,7 +66,7 @@ class LazyLoadHookSet extends AbstractHookSet
         $helperCalculations['has-lazy-load'] = false;
     }
 
-    public function calculateDataloadingModuleData(array $module, $module_props_in_array, $data_properties_in_array, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs, $helperCalculations_in_array): void
+    public function calculateDataloadingModuleData(array $module, $module_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs, $helperCalculations_in_array): void
     {
         $data_properties = &$data_properties_in_array[0];
 

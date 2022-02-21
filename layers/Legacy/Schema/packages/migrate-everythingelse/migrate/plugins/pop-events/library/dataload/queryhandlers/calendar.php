@@ -1,6 +1,7 @@
 <?php
 
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\AbstractQueryInputOutputHandler;
 
@@ -29,7 +30,7 @@ class GD_DataLoad_QueryInputOutputHandler_Calendar extends AbstractQueryInputOut
         $query_args[\PoP\ComponentModel\Constants\PaginationParams::LIMIT] = 0;
     }
 
-    public function getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
+    public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
@@ -41,28 +42,6 @@ class GD_DataLoad_QueryInputOutputHandler_Calendar extends AbstractQueryInputOut
 
         return $ret;
     }
-
-    // function getSharedbydomainsQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-
-    //     $ret = parent::getSharedbydomainsQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-
-    //     $query_args = $data_properties[ParamConstants::QUERYARGS];
-
-    //     // Send back the year / month
-    //     $ret[ParamConstants::VISIBLEPARAMS][GD_URLPARAM_YEAR] = $query_args[GD_URLPARAM_YEAR];
-    //     $ret[ParamConstants::VISIBLEPARAMS][GD_URLPARAM_MONTH] = $query_args[GD_URLPARAM_MONTH];
-
-    //     return $ret;
-    // }
-    // function getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-
-    //     $ret = parent::getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-
-    //     // Never stop fetching! (Or otherwise it doesn't allow to go prev/next with Calendar buttons)
-    //     $ret[GD_URLPARAM_STOPFETCHING] = false;
-
-    //     return $ret;
-    // }
 }
 
 /**
