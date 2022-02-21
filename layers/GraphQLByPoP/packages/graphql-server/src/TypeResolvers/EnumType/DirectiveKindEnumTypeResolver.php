@@ -45,7 +45,7 @@ class DirectiveKindEnumTypeResolver extends AbstractEnumTypeResolver
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
-        return parent::coerceValue(strtolower($inputValue));
+        return parent::coerceValue(strtolower($inputValue), $schemaInputValidationFeedbackStore);
     }
 
     /**
