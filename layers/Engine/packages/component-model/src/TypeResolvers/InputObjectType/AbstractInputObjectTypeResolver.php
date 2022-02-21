@@ -6,11 +6,9 @@ namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
-use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
@@ -433,18 +431,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         mixed $coercedInputFieldValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): void {
-    }
-
-    /**
-     * @param string[] $argPath
-     */
-    protected function prependArgPathToError(Error &$error, array $argPath): void
-    {
-        $errorData = $error->getData();
-        $error->addData(Tokens::ARGUMENT_PATH, array_merge(
-            $argPath,
-            $errorData[Tokens::ARGUMENT_PATH] ?? []
-        ));
     }
 
     /**
