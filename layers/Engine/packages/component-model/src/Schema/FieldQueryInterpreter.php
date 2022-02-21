@@ -951,19 +951,18 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $id = $relationalTypeResolver->getID($object);
             foreach ($fieldOrDirectiveArgs as $directiveArgName => $directiveArgValue) {
                 $directiveArgValue = $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $directiveArgValue, $variables, $expressions);
-                // @todo This code was commented as to avoid migrating `Error` and `isError` and `getErrorOutput`, since this class will be completely removed soon anyway
-                // // Validate it
-                // if (GeneralUtils::isError($directiveArgValue)) {
-                //     /** @var Error */
-                //     $error = $directiveArgValue;
-                //     if ($errorData = $error->getData()) {
-                //         $errorFieldOrDirective = $errorData[ErrorDataTokens::FIELD_NAME] ?? null;
-                //     }
-                //     $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
-                //     $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$errorFieldOrDirective], $directiveArgName);
-                //     $fieldOrDirectiveArgs[$directiveArgName] = null;
-                //     continue;
-                // }
+                // Validate it
+                if (GeneralUtils::isError($directiveArgValue)) {
+                    /** @var Error */
+                    $error = $directiveArgValue;
+                    if ($errorData = $error->getData()) {
+                        $errorFieldOrDirective = $errorData['fieldName'] ?? null;
+                    }
+                    $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
+                    $objectErrors[(string)$id][] = $this->getTempErrorOutput($error, [$errorFieldOrDirective], $directiveArgName);
+                    $fieldOrDirectiveArgs[$directiveArgName] = null;
+                    continue;
+                }
                 $fieldOrDirectiveArgs[$directiveArgName] = $directiveArgValue;
             }
             return $this->filterFieldOrDirectiveArgs($fieldOrDirectiveArgs);
@@ -1494,35 +1493,34 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $composedDirectiveArgTypeName
                     );
                 }
-                // @todo This code was commented as to avoid migrating `Error` and `isError` and `getErrorOutput`, since this class will be completely removed soon anyway
-                // $directiveArgError = $failedCastingDirectiveArgErrors[$failedCastingDirectiveArgName] ?? null;
-                // if ($directiveArgError !== null) {
-                //     $encodedValue = $directiveArgs[$failedCastingDirectiveArgName] instanceof stdClass || is_array($directiveArgs[$failedCastingDirectiveArgName])
-                //         ? json_encode($directiveArgs[$failedCastingDirectiveArgName])
-                //         : $directiveArgs[$failedCastingDirectiveArgName];
-                //     $directiveArgError = new Error(
-                //         sprintf('%s-error', $failedCastingDirectiveArgName),
-                //         sprintf(
-                //             $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
-                //             $directiveName,
-                //             $encodedValue,
-                //             $failedCastingDirectiveArgName,
-                //             $composedDirectiveArgTypeName
-                //         )
-                //     );
-                // }
-                // // Either treat it as an error or a warning
-                // $schemaWarningOrError = $this->getErrorService()->getErrorOutput($directiveArgError, [$fieldDirective], $failedCastingDirectiveArgName);
-                // if ($treatTypeCoercingFailuresAsErrors) {
-                //     $schemaErrors[] = $schemaWarningOrError;
-                // } else {
-                //     // Override the message
-                //     $schemaWarningOrError[Tokens::MESSAGE] = sprintf(
-                //         $this->__('%1$s. It has been ignored', 'pop-component-model'),
-                //         $schemaWarningOrError[Tokens::MESSAGE]
-                //     );
-                //     $schemaWarnings[] = $schemaWarningOrError;
-                // }
+                $directiveArgError = $failedCastingDirectiveArgErrors[$failedCastingDirectiveArgName] ?? null;
+                if ($directiveArgError !== null) {
+                    $encodedValue = $directiveArgs[$failedCastingDirectiveArgName] instanceof stdClass || is_array($directiveArgs[$failedCastingDirectiveArgName])
+                        ? json_encode($directiveArgs[$failedCastingDirectiveArgName])
+                        : $directiveArgs[$failedCastingDirectiveArgName];
+                    $directiveArgError = new Error(
+                        sprintf('%s-error', $failedCastingDirectiveArgName),
+                        sprintf(
+                            $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
+                            $directiveName,
+                            $encodedValue,
+                            $failedCastingDirectiveArgName,
+                            $composedDirectiveArgTypeName
+                        )
+                    );
+                }
+                // Either treat it as an error or a warning
+                $schemaWarningOrError = $this->getTempErrorOutput($directiveArgError, [$fieldDirective], $failedCastingDirectiveArgName);
+                if ($treatTypeCoercingFailuresAsErrors) {
+                    $schemaErrors[] = $schemaWarningOrError;
+                } else {
+                    // Override the message
+                    $schemaWarningOrError[Tokens::MESSAGE] = sprintf(
+                        $this->__('%1$s. It has been ignored', 'pop-component-model'),
+                        $schemaWarningOrError[Tokens::MESSAGE]
+                    );
+                    $schemaWarnings[] = $schemaWarningOrError;
+                }
             }
             return $this->filterFieldOrDirectiveArgs($castedDirectiveArgs);
         }
@@ -1597,39 +1595,66 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $composedFieldArgTypeName
                     );
                 }
-                // @todo This code was commented as to avoid migrating `Error` and `isError` and `getErrorOutput`, since this class will be completely removed soon anyway
-                // $fieldArgError = $failedCastingFieldArgErrors[$failedCastingFieldArgName] ?? null;
-                // if ($fieldArgError === null) {
-                //     $encodedValue = $fieldArgs[$failedCastingFieldArgName] instanceof stdClass || is_array($fieldArgs[$failedCastingFieldArgName])
-                //         ? json_encode($fieldArgs[$failedCastingFieldArgName])
-                //         : $fieldArgs[$failedCastingFieldArgName];
-                //     $fieldArgError = new Error(
-                //         sprintf('%s-error', $failedCastingFieldArgName),
-                //         sprintf(
-                //             $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
-                //             $fieldName,
-                //             $encodedValue,
-                //             $failedCastingFieldArgName,
-                //             $composedFieldArgTypeName
-                //         )
-                //     );
-                // }
-                // // Either treat it as an error or a warning
-                // $schemaWarningOrError = $this->getErrorService()->getErrorOutput($fieldArgError, [$field], $failedCastingFieldArgName);
-                // if ($treatTypeCoercingFailuresAsErrors) {
-                //     $schemaErrors[] = $schemaWarningOrError;
-                // } else {
-                //     // Override the message
-                //     $schemaWarningOrError[Tokens::MESSAGE] = sprintf(
-                //         $this->__('%1$s. It has been ignored', 'pop-component-model'),
-                //         $schemaWarningOrError[Tokens::MESSAGE]
-                //     );
-                //     $schemaWarnings[] = $schemaWarningOrError;
-                // }
+                $fieldArgError = $failedCastingFieldArgErrors[$failedCastingFieldArgName] ?? null;
+                if ($fieldArgError === null) {
+                    $encodedValue = $fieldArgs[$failedCastingFieldArgName] instanceof stdClass || is_array($fieldArgs[$failedCastingFieldArgName])
+                        ? json_encode($fieldArgs[$failedCastingFieldArgName])
+                        : $fieldArgs[$failedCastingFieldArgName];
+                    $fieldArgError = new Error(
+                        sprintf('%s-error', $failedCastingFieldArgName),
+                        sprintf(
+                            $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
+                            $fieldName,
+                            $encodedValue,
+                            $failedCastingFieldArgName,
+                            $composedFieldArgTypeName
+                        )
+                    );
+                }
+                // Either treat it as an error or a warning
+                $schemaWarningOrError = $this->getTempErrorOutput($fieldArgError, [$field], $failedCastingFieldArgName);
+                if ($treatTypeCoercingFailuresAsErrors) {
+                    $schemaErrors[] = $schemaWarningOrError;
+                } else {
+                    // Override the message
+                    $schemaWarningOrError[Tokens::MESSAGE] = sprintf(
+                        $this->__('%1$s. It has been ignored', 'pop-component-model'),
+                        $schemaWarningOrError[Tokens::MESSAGE]
+                    );
+                    $schemaWarnings[] = $schemaWarningOrError;
+                }
             }
             return $this->filterFieldOrDirectiveArgs($castedFieldArgs);
         }
         return $castedFieldArgs;
+    }
+
+    /**
+     * @todo Function added temporarily, remove!!!!
+     * @param string[]|null $path
+     * @return array<string, mixed>
+     */
+    public function getTempErrorOutput(Error $error, ?array $path = null, ?string $argName = null): array
+    {
+        $errorOutput = [
+            Tokens::MESSAGE => $error->getMessageOrCode(),
+        ];
+        if ($path !== null) {
+            $errorOutput[Tokens::PATH] = $path;
+        }
+        if ($data = $error->getData()) {
+            $errorOutput[Tokens::EXTENSIONS] = $data;
+        }
+        if ($argName !== null) {
+            $errorOutput[Tokens::EXTENSIONS][Tokens::ARGUMENT_PATH] = array_merge(
+                [$argName],
+                $errorOutput[Tokens::EXTENSIONS][Tokens::ARGUMENT_PATH] ?? []
+            );
+        }
+        foreach ($error->getNestedErrors() as $nestedError) {
+            $errorOutput[Tokens::EXTENSIONS][Tokens::NESTED][] = $this->getTempErrorOutput($nestedError, null, $argName);
+        }
+        return $errorOutput;
     }
 
     /**
