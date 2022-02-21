@@ -130,4 +130,24 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
             ),
         );
     }
+
+    protected function addDefaultErrorMessage(
+        mixed $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void {
+        $schemaInputValidationFeedbackStore->addError(
+            new SchemaInputValidationFeedback(
+                new FeedbackItemResolution(
+                    InputValueCoercionErrorFeedbackItemProvider::class,
+                    InputValueCoercionErrorFeedbackItemProvider::E16,
+                    [
+                        $inputValue,
+                        $this->getMaybeNamespacedTypeName(),
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation(),
+                $this
+            ),
+        );
+    }
 }
