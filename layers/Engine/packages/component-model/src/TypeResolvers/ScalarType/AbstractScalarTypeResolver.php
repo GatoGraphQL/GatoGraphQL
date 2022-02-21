@@ -65,22 +65,22 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): void {
-        // Fail if passing an array for unsupporting types
-        if ($inputValue instanceof stdClass) {
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
-                    new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E1,
-                        [
-                            $this->getMaybeNamespacedTypeName(),
-                        ]
-                    ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
-                ),
-            );
+        if (!($inputValue instanceof stdClass)) {
+            return;
         }
+        $schemaInputValidationFeedbackStore->addError(
+            new SchemaInputValidationFeedback(
+                new FeedbackItemResolution(
+                    InputValueCoercionErrorFeedbackItemProvider::class,
+                    InputValueCoercionErrorFeedbackItemProvider::E1,
+                    [
+                        $this->getMaybeNamespacedTypeName(),
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation(),
+                $this
+            ),
+        );
     }
 
     final protected function validateFilterVar(
@@ -90,42 +90,44 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         array|int $options = [],
     ): void {
         $valid = \filter_var($inputValue, $filter, $options);
-        if ($valid === false) {
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
-                    new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E2,
-                        [
-                            $inputValue,
-                            $this->getMaybeNamespacedTypeName(),
-                        ]
-                    ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
-                ),
-            );
+        if ($valid !== false) {
+            return;
         }
+        $schemaInputValidationFeedbackStore->addError(
+            new SchemaInputValidationFeedback(
+                new FeedbackItemResolution(
+                    InputValueCoercionErrorFeedbackItemProvider::class,
+                    InputValueCoercionErrorFeedbackItemProvider::E2,
+                    [
+                        $inputValue,
+                        $this->getMaybeNamespacedTypeName(),
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation(),
+                $this
+            ),
+        );
     }
 
     final protected function validateIsString(
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): void {
-        if (!is_string($inputValue)) {
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
-                    new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E3,
-                        [
-                            $this->getMaybeNamespacedTypeName(),
-                        ]
-                    ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
-                ),
-            );
+        if (is_string($inputValue)) {
+            return;
         }
+        $schemaInputValidationFeedbackStore->addError(
+            new SchemaInputValidationFeedback(
+                new FeedbackItemResolution(
+                    InputValueCoercionErrorFeedbackItemProvider::class,
+                    InputValueCoercionErrorFeedbackItemProvider::E3,
+                    [
+                        $this->getMaybeNamespacedTypeName(),
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation(),
+                $this
+            ),
+        );
     }
 }
