@@ -1680,6 +1680,11 @@ class Engine implements EngineInterface
                 }
             }
 
+            /**
+             * The SchemaFeedbackStore is processed also within each iteration.
+             * It processes the information here, and at the end of the loop
+             * it will regenerated a new instance for the next iteration.
+             */
             $feedbackStoreSchemaErrors = App::getFeedbackStore()->schemaFeedbackStore->getErrors();
             foreach ($feedbackStoreSchemaErrors as $schemaError) {
                 $iterationFeedbackStoreSchemaErrors = [];
