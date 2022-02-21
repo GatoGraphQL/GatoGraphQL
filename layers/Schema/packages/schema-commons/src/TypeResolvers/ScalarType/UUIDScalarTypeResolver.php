@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoPSchema\SchemaCommons\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use stdClass;
 
 /**
@@ -40,12 +44,20 @@ class UUIDScalarTypeResolver extends AbstractScalarTypeResolver
         }
 
         if (\preg_match('/^{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}}?$/', $inputValue) !== 1) {
-            return $this->getError(
-                sprintf(
-                    $this->__('The format for type \'%s\' is not right: it must be satisfied via regex /^{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}}?$/', 'component-model'),
-                    $this->getMaybeNamespacedTypeName()
-                )
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E4,
+                        [
+                            $this->getMaybeNamespacedTypeName(),
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this
+                ),
             );
+            return null;
         }
         return $inputValue;
     }

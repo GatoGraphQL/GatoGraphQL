@@ -9,3 +9,6 @@ services:
 
     PoPSchema\SchemaCommons\ObjectSerializers\:
         resource: '../src/ObjectSerializers/*'
+
+    PoPSchema\SchemaCommons\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

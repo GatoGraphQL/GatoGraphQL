@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
-use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\App;
+use PoPSchema\SchemaCommons\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use stdClass;
 
 /**
@@ -39,14 +43,22 @@ abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalar
 
         $possibleValues = $this->getConsolidatedPossibleValues();
         if (!in_array($inputValue, $possibleValues)) {
-            return $this->getError(
-                sprintf(
-                    $this->__('Value \'%1$s\' for type \'%2$s\' is not valid (the only valid values are: \'%3$s\')', 'component-model'),
-                    $inputValue,
-                    $this->getMaybeNamespacedTypeName(),
-                    implode($this->__('\', \''), $possibleValues)
-                )
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E2,
+                        [
+                            $inputValue,
+                            $this->getMaybeNamespacedTypeName(),
+                            implode($this->__('\', \''), $possibleValues),
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this
+                ),
             );
+            return null;
         }
 
         return (string) $inputValue;

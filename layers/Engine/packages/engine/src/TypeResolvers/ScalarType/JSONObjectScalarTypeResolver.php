@@ -36,13 +36,8 @@ class JSONObjectScalarTypeResolver extends AbstractScalarTypeResolver
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         if (!($inputValue instanceof stdClass)) {
-            return $this->getError(
-                sprintf(
-                    $this->__('Cannot cast value \'%s\' to type \'%s\'', 'component-model'),
-                    $inputValue,
-                    $this->getMaybeNamespacedTypeName()
-                )
-            );
+            $this->addDefaultErrorMessage($inputValue, $schemaInputValidationFeedbackStore);
+            return null;
         }
         return $inputValue;
     }
