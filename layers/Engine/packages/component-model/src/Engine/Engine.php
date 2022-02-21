@@ -1647,62 +1647,12 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
-            $feedbackStoreObjectWarnings = App::getFeedbackStore()->objectFeedbackStore->getWarnings();
-            foreach ($feedbackStoreObjectWarnings as $objectWarning) {
-                $iterationFeedbackStoreObjectWarnings = [];
-                $field = $objectWarning->getField();
-                $objectID = $objectWarning->getObjectID();
-                $message = $objectWarning->getFeedbackItemResolution()->getMessage();
-                $locations = [$objectWarning->getLocation()->toArray()];
-                $extensions = $objectWarning->getExtensions();
-                $iterationFeedbackStoreObjectWarnings[(string)$objectID][] = [
-                    Tokens::PATH => [$field],
-                    Tokens::MESSAGE => $message,
-                    Tokens::LOCATIONS => $locations,
-                    Tokens::EXTENSIONS => $extensions,
-                ];
-                $iterationDBKey = $objectWarning->getRelationalTypeResolver()->getTypeOutputDBKey();
-                $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreObjectWarnings, true, $relationalTypeResolver);
-                foreach ($dbNameWarningEntries as $dbname => $idEntries) {
-                    foreach ($idEntries as $id => $entries) {
-                        $objectWarnings[$dbname][$iterationDBKey][$id] = array_merge(
-                            $schemaErrors[$dbname][$iterationDBKey][$id] ?? [],
-                            $entries
-                        );
-                    }
-                }
-            }
             /** @phpstan-ignore-next-line */
             if ($iterationObjectWarnings !== []) {
                 $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationObjectWarnings, true, $relationalTypeResolver);
                 foreach ($dbNameWarningEntries as $dbname => $entries) {
                     $objectWarnings[$dbname] ??= [];
                     $this->addDatasetToDatabase($objectWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
-                }
-            }
-            $feedbackStoreObjectDeprecations = App::getFeedbackStore()->objectFeedbackStore->getDeprecations();
-            foreach ($feedbackStoreObjectDeprecations as $objectDeprecation) {
-                $iterationFeedbackStoreObjectDeprecations = [];
-                $field = $objectDeprecation->getField();
-                $objectID = $objectDeprecation->getObjectID();
-                $message = $objectDeprecation->getFeedbackItemResolution()->getMessage();
-                $locations = [$objectDeprecation->getLocation()->toArray()];
-                $extensions = $objectDeprecation->getExtensions();
-                $iterationFeedbackStoreObjectDeprecations[(string)$objectID][] = [
-                    Tokens::PATH => [$field],
-                    Tokens::MESSAGE => $message,
-                    Tokens::LOCATIONS => $locations,
-                    Tokens::EXTENSIONS => $extensions,
-                ];
-                $iterationDBKey = $objectDeprecation->getRelationalTypeResolver()->getTypeOutputDBKey();
-                $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreObjectDeprecations, true, $objectDeprecation->getRelationalTypeResolver());
-                foreach ($dbNameDeprecationEntries as $dbname => $idEntries) {
-                    foreach ($idEntries as $id => $entries) {
-                        $objectDeprecations[$dbname][$iterationDBKey][$id] = array_merge(
-                            $schemaErrors[$dbname][$iterationDBKey][$id] ?? [],
-                            $entries
-                        );
-                    }
                 }
             }
             /** @phpstan-ignore-next-line */
@@ -1888,7 +1838,6 @@ class Engine implements EngineInterface
              */
             $feedbackStore = App::getFeedbackStore();
             $feedbackStore->regenerateSchemaFeedbackStore();
-            $feedbackStore->regenerateObjectFeedbackStore();
         }
 
         $ret = [];

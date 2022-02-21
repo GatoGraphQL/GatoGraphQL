@@ -9,14 +9,12 @@ class FeedbackStore
     public GeneralFeedbackStore $generalFeedbackStore;
     public DocumentFeedbackStore $documentFeedbackStore;
     public SchemaFeedbackStore $schemaFeedbackStore;
-    public ObjectFeedbackStore $objectFeedbackStore;
 
     public function __construct()
     {
         $this->regenerateGeneralFeedbackStore();
         $this->regenerateDocumentFeedbackStore();
         $this->regenerateSchemaFeedbackStore();
-        $this->regenerateObjectFeedbackStore();
     }
 
     public function regenerateGeneralFeedbackStore(): void
@@ -32,10 +30,5 @@ class FeedbackStore
     public function regenerateSchemaFeedbackStore(): void
     {
         $this->schemaFeedbackStore = new SchemaFeedbackStore();
-    }
-
-    public function regenerateObjectFeedbackStore(): void
-    {
-        $this->objectFeedbackStore = new ObjectFeedbackStore();
     }
 }
