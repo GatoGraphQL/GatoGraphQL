@@ -2038,7 +2038,7 @@ class Engine implements EngineInterface
                     'code' => $feedbackItemResolution->getNamespacedCode(),
                 ],
                 $specifiedByURL !== null ? [
-                    'specifiedByURL' => $specifiedByURL,
+                    'specifiedBy' => $specifiedByURL,
                 ] : []
             )
         ];
