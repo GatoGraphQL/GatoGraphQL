@@ -2019,7 +2019,15 @@ class Engine implements EngineInterface
     {
         return [
             Tokens::MESSAGE => $schemaOrObjectFeedback->getFeedbackItemResolution()->getMessage(),
-            Tokens::PATH => [$schemaOrObjectFeedback->getField()],
+            Tokens::PATH => array_merge(
+                [
+                    $schemaOrObjectFeedback->getField(),
+                ],
+                $schemaOrObjectFeedback->getDirective() !== null ?
+                [
+                    $schemaOrObjectFeedback->getDirective(),
+                ] : []
+            ),
             Tokens::LOCATIONS => [$schemaOrObjectFeedback->getLocation()->toArray()],
             Tokens::EXTENSIONS => array_merge(
                 $schemaOrObjectFeedback->getExtensions(),
