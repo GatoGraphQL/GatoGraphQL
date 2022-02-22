@@ -31,7 +31,7 @@ class GenericFeedbackItemProvider extends UpstreamGenericFeedbackItemProvider
             self::W1,
             self::N1,
             self::S1
-                => $this->__('%s', 'component-model'),
+                => '%s',
             default
                 => parent::getMessagePlaceholder($code),
         };

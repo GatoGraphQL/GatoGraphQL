@@ -30,7 +30,7 @@ class GenericFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E1,
             self::D1,
             self::L1
-                => $this->__('%s', 'component-model'),
+                => '%s',
             default
                 => parent::getMessagePlaceholder($code),
         };
