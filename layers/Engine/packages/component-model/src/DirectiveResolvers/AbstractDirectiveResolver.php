@@ -265,7 +265,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $nestedObjectErrors,
             $nestedObjectWarnings,
             $nestedObjectDeprecationMessages,
-        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions);
+        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions, $engineIterationFeedbackStore,);
 
         // Store the args, they may be used in `resolveDirective`
         $objectID = $relationalTypeResolver->getID($object);

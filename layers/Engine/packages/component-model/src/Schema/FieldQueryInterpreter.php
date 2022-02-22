@@ -9,6 +9,7 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -837,7 +838,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         object $object,
         string $field,
         ?array $variables,
-        ?array $expressions
+        ?array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
         $objectErrors = $objectWarnings = $objectDeprecations = [];
         $validAndResolvedField = $field;
@@ -886,7 +888,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         object $object,
         string $fieldDirective,
         array $variables,
-        array $expressions
+        array $expressions,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         $objectErrors = $objectWarnings = $objectDeprecations = [];
         $validAndResolvedDirective = $fieldDirective;

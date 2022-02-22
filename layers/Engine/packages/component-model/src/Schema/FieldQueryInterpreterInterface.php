@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\FieldQuery\FieldQueryInterpreterInterface as UpstreamFieldQueryInterpreterInterface;
@@ -79,7 +81,8 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         object $object,
         string $field,
         ?array $variables,
-        ?array $expressions
+        ?array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
     public function extractDirectiveArgumentsForObject(
         DirectiveResolverInterface $directiveResolver,
@@ -87,7 +90,8 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         object $object,
         string $directive,
         array $variables,
-        array $expressions
+        array $expressions,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
     public function maybeConvertFieldArgumentValue(mixed $fieldArgValue, ?array $variables = null): mixed;
     public function maybeConvertFieldArgumentArrayOrObjectValue(mixed $fieldArgValue, ?array $variables = null): mixed;

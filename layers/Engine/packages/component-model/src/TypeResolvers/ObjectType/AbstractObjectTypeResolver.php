@@ -469,7 +469,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $maybeObjectErrors,
             $maybeObjectWarnings,
             $maybeObjectDeprecations,
-        ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions);
+        ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore);
 
         // Store the warnings to be read if needed
         if ($maybeObjectWarnings) {
