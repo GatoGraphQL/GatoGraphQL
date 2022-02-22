@@ -256,9 +256,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         object $object,
         array &$variables,
         array &$expressions,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         list(
             $validDirective,
@@ -275,22 +273,76 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
         // Store errors (if any)
         foreach ($nestedObjectErrors as $id => $fieldOutputKeyErrorMessages) {
-            $objectErrors[$id] = array_merge(
-                $objectErrors[$id] ?? [],
-                $fieldOutputKeyErrorMessages
-            );
+            foreach ($fieldOutputKeyErrorMessages as $fieldOutputKeyErrorMessage) {
+                $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                    new ObjectFeedback(
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::E1,
+                            [
+                                $fieldOutputKeyErrorMessage[Tokens::MESSAGE],
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $relationalTypeResolver,
+                        $fieldOutputKeyErrorMessage[Tokens::PATH][0], // @todo Make sure to remove this horrible hack to extract the $field
+                        $id,
+                        $this->directive,
+                    )
+                );
+                $objectErrors[$id] = array_merge(
+                    $objectErrors[$id] ?? [],
+                    $fieldOutputKeyErrorMessages
+                );
+            }
         }
         foreach ($nestedObjectWarnings as $id => $fieldOutputKeyWarningMessages) {
-            $objectWarnings[$id] = array_merge(
-                $objectWarnings[$id] ?? [],
-                $fieldOutputKeyWarningMessages
-            );
+            foreach ($fieldOutputKeyWarningMessages as $fieldOutputKeyWarningMessage) {
+                $engineIterationFeedbackStore->objectFeedbackStore->addWarning(
+                    new ObjectFeedback(
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::E1,
+                            [
+                                $fieldOutputKeyWarningMessage[Tokens::MESSAGE],
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $relationalTypeResolver,
+                        $fieldOutputKeyWarningMessage[Tokens::PATH][0], // @todo Make sure to remove this horrible hack to extract the $field
+                        $id,
+                        $this->directive,
+                    )
+                );
+                $objectWarnings[$id] = array_merge(
+                    $objectWarnings[$id] ?? [],
+                    $fieldOutputKeyWarningMessages
+                );
+            }
         }
         foreach ($nestedObjectDeprecationMessages as $id => $fieldOutputKeyDeprecationMessages) {
-            $objectDeprecations[$id] = array_merge(
-                $objectDeprecations[$id] ?? [],
-                $fieldOutputKeyDeprecationMessages
-            );
+            foreach ($fieldOutputKeyDeprecationMessages as $fieldOutputKeyDeprecationMessage) {
+                $engineIterationFeedbackStore->objectFeedbackStore->addDeprecation(
+                    new ObjectFeedback(
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::E1,
+                            [
+                                $fieldOutputKeyDeprecationMessage[Tokens::MESSAGE],
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $relationalTypeResolver,
+                        $fieldOutputKeyDeprecationMessage[Tokens::PATH][0], // @todo Make sure to remove this horrible hack to extract the $field
+                        $id,
+                        $this->directive,
+                    )
+                );
+                $objectDeprecations[$id] = array_merge(
+                    $objectDeprecations[$id] ?? [],
+                    $fieldOutputKeyDeprecationMessages
+                );
+            }
         }
 
         /**
