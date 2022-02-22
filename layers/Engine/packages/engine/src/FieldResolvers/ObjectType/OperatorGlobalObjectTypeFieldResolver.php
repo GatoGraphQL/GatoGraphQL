@@ -16,7 +16,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\Exception\RuntimeOperationException;
-use PoP\Engine\Misc\OperatorHelpers;
+use PoP\Engine\HelperServices\ArrayTraversionHelperServiceInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 
@@ -25,6 +25,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?ArrayTraversionHelperServiceInterface $arrayTraversionHelperService = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -49,6 +50,14 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setArrayTraversionHelperService(ArrayTraversionHelperServiceInterface $arrayTraversionHelperService): void
+    {
+        $this->arrayTraversionHelperService = $arrayTraversionHelperService;
+    }
+    final protected function getArrayTraversionHelperService(): ArrayTraversionHelperServiceInterface
+    {
+        return $this->arrayTraversionHelperService ??= $this->instanceManager->getInstance(ArrayTraversionHelperServiceInterface::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -254,7 +263,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'extract':
                 try {
                     $array = (array) $fieldArgs['object'];
-                    $pointerToArrayItemUnderPath = OperatorHelpers::getPointerToArrayItemUnderPath($array, $fieldArgs['path']);
+                    $pointerToArrayItemUnderPath = $this->getArrayTraversionHelperService()->getPointerToArrayItemUnderPath($array, $fieldArgs['path']);
                 } catch (RuntimeOperationException $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
