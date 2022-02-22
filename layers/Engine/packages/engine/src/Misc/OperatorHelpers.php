@@ -40,6 +40,11 @@ class OperatorHelpers
             // If we reached the end of the array and can't keep going down any level more, then it's an error
             self::throwNoArrayItemUnderPathException($data, $path);
         }
+
+        if (!is_array($dataPointer)) {
+            self::throwItemUnderPathIsNotArrayException($dataPointer, $path);
+        }
+
         return $dataPointer;
     }
 
@@ -50,12 +55,25 @@ class OperatorHelpers
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         throw new RuntimeOperationException(sprintf(
-            $translationAPI->__('Path \'%s\' is not reachable for object: %s', 'pop-component-model'),
+            $translationAPI->__('Path \'%s\' is not reachable for object: %s', 'component-model'),
             $path,
             json_encode($data)
         ));
     }
-    
+
+    /**
+     * @throws RuntimeOperationException
+     */
+    protected static function throwItemUnderPathIsNotArrayException(mixed $dataPointer, string $path): void
+    {
+        $translationAPI = TranslationAPIFacade::getInstance();
+        throw new RuntimeOperationException(sprintf(
+            $translationAPI->__('The item under path \'%s\' (with value \'%s\') is not an array', 'component-model'),
+            $path,
+            $dataPointer
+        ));
+    }
+
     /**
      * @throws RuntimeOperationException
      */
