@@ -418,7 +418,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         // Remove this temporary property from $dbItems
                         unset($dbItems[(string)$id][$arrayItemPropertyOutputKey]);
                         // Place the result for the array in the original property
-                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $objectTraces, $id, $fieldOutputKey, $key, $arrayItemValue);
+                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $engineIterationFeedbackStore, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $objectTraces, $id, $field, $fieldOutputKey, $key, $arrayItemValue);
                     }
                 }
             }
@@ -430,15 +430,17 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     protected function addProcessedItemBackToDBItems(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$dbItems,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
         array &$objectNotices,
         array &$objectTraces,
         $id,
+        string $field,
         string $fieldOutputKey,
         int|string $arrayItemKey,
-        $arrayItemValue
+        mixed $arrayItemValue
     ): void {
         if (is_array($dbItems[(string)$id][$fieldOutputKey])) {
             $dbItems[(string)$id][$fieldOutputKey][$arrayItemKey] = $arrayItemValue;
