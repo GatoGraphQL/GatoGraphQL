@@ -152,3 +152,6 @@ services:
 
     PoP\ComponentModel\Versioning\VersioningServiceInterface:
         class: \PoP\ComponentModel\Versioning\VersioningService
+
+    PoP\ComponentModel\Response\OutputServiceInterface:
+        class: \PoP\ComponentModel\Response\OutputService

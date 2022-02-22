@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\Response;
+namespace PoP\ComponentModel\Response;
 
 use stdClass;
 
