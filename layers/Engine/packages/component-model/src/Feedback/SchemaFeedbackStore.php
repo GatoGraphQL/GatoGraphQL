@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+
 class SchemaFeedbackStore
 {
     /** @var SchemaFeedbackInterface[] */
@@ -18,6 +20,55 @@ class SchemaFeedbackStore
     private array $logs = [];
     /** @var SchemaFeedbackInterface[] */
     private array $traces = [];
+
+    public function incorporate(
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $field,
+    ): void {
+        foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
+            $this->errors[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackError,
+                $relationalTypeResolver,
+                $field,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
+            $this->warnings[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackWarning,
+                $relationalTypeResolver,
+                $field,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $objectTypeFieldResolutionFeedbackDeprecation) {
+            $this->deprecations[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackDeprecation,
+                $relationalTypeResolver,
+                $field,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
+            $this->notices[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackNotice,
+                $relationalTypeResolver,
+                $field,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
+            $this->logs[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackLog,
+                $relationalTypeResolver,
+                $field,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getTraces() as $objectTypeFieldResolutionFeedbackTrace) {
+            $this->traces[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackTrace,
+                $relationalTypeResolver,
+                $field,
+            );
+        }
+    }
 
     /**
      * @return SchemaFeedbackInterface[]

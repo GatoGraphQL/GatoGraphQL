@@ -29,6 +29,31 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         );
     }
 
+    public static function fromObjectTypeFieldResolutionFeedback(
+        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $field
+    ): self {
+        /** @var SchemaFeedbackInterface[] */
+        $nestedSchemaFeedbackEntries = [];
+        foreach ($objectTypeFieldResolutionFeedback->getNested() as $nestedObjectTypeFieldResolutionFeedback) {
+            $nestedSchemaFeedbackEntries[] = static::fromObjectTypeFieldResolutionFeedback(
+                $nestedObjectTypeFieldResolutionFeedback,
+                $relationalTypeResolver,
+                $field
+            );
+        }
+        return new self(
+            $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
+            $objectTypeFieldResolutionFeedback->getLocation(),
+            $relationalTypeResolver,
+            $field,
+            $objectTypeFieldResolutionFeedback->getExtensions(),
+            $objectTypeFieldResolutionFeedback->getData(),
+            $nestedSchemaFeedbackEntries
+        );
+    }
+
     public function getRelationalTypeResolver(): RelationalTypeResolverInterface
     {
         return $this->relationalTypeResolver;

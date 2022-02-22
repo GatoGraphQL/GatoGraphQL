@@ -75,7 +75,15 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         ?array &$schemaWarnings = null,
     ): array;
     public function extractFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, ?array $variables = null): array;
-    public function extractDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $directive, ?array $variables = null, bool $disableDynamicFields = false): array;
+    public function extractDirectiveArgumentsForSchema(
+        DirectiveResolverInterface $directiveResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $directive,
+        array $fieldDirectiveFields,
+        array $variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        bool $disableDynamicFields = false
+    ): array;
     public function extractFieldArgumentsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,

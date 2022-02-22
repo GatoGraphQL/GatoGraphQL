@@ -26,6 +26,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public const E12 = 'e12';
     public const E13 = 'e13';
     public const E14 = 'e14';
+    public const E15 = 'e15';
 
     /**
      * @return string[]
@@ -48,6 +49,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E12,
             self::E13,
             self::E14,
+            self::E15,
         ];
     }
 
@@ -68,7 +70,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E11 => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'', 'component-model'),
             self::E12 => $this->__('Resolving directive \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E13 => $this->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
-            self::E14 => $this->__('Expression \'%s\' is undefined', 'pop-component-model'),
+            self::E14 => $this->__('Expression \'%s\' is undefined', 'component-model'),
+            self::E15 => $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -91,7 +94,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E11,
             self::E12,
             self::E13,
-            self::E14
+            self::E14,
+            self::E15
                 => FeedbackCategories::ERROR,
             default
                 => parent::getCategory($code),

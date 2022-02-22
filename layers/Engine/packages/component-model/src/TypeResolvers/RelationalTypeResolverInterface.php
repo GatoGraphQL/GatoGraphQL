@@ -73,6 +73,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array &$fieldDirectiveFields,
         bool $areNestedDirectives,
         array &$variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,

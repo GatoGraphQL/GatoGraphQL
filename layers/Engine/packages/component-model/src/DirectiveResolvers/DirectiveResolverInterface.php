@@ -44,6 +44,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$fieldDirectiveFields,
         array &$variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,

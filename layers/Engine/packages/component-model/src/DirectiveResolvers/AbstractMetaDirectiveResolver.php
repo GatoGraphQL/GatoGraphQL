@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
@@ -43,6 +44,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$fieldDirectiveFields,
         array &$variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
@@ -80,6 +82,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
                 $nestedFieldDirectiveFields,
                 true,
                 $variables,
+                $engineIterationFeedbackStore,
                 $nestedDirectiveSchemaErrors,
                 $nestedDirectiveSchemaWarnings,
                 $nestedDirectiveSchemaDeprecations,
@@ -127,6 +130,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
             $relationalTypeResolver,
             $fieldDirectiveFields,
             $variables,
+            $engineIterationFeedbackStore,
             $schemaErrors,
             $schemaWarnings,
             $schemaDeprecations,

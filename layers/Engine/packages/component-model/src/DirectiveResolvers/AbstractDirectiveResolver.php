@@ -173,6 +173,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$fieldDirectiveFields,
         array &$variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
@@ -191,7 +192,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $this,
             $relationalTypeResolver,
             $this->directive,
+            $fieldDirectiveFields,
             $variables,
+            $engineIterationFeedbackStore,
             $this->disableDynamicFieldsFromDirectiveArgs()
         );
 
