@@ -1130,75 +1130,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $variables,
                 $messages,
                 $engineIterationFeedbackStore,
-                $directivePipelineIDObjectErrors,
+                $objectErrors,
                 $objectWarnings,
                 $objectDeprecations,
                 $objectNotices,
                 $objectTraces,
-                $directivePipelineSchemaErrors,
+                $schemaErrors,
                 $schemaWarnings,
                 $schemaDeprecations,
                 $schemaNotices,
                 $schemaTraces
             );
-
-            // If any directive failed execution, then prepend the path on the error
-            if ($directivePipelineSchemaErrors) {
-                // Extract the failing fields from the path of the thrown error
-                $failingFieldSchemaErrors = [];
-                foreach ($directivePipelineSchemaErrors as $directivePipelineSchemaError) {
-                    $schemaErrorFailingField = $directivePipelineSchemaError[Tokens::PATH][0];
-                    if ($failingFields = $fieldDirectiveFields[$schemaErrorFailingField] ?? []) {
-                        foreach ($failingFields as $failingField) {
-                            $schemaError = $directivePipelineSchemaError;
-                            array_unshift($schemaError[Tokens::PATH], $failingField);
-                            $this->prependPathOnNestedErrors($schemaError, $failingField);
-                            $failingFieldSchemaErrors[$failingField][] = $schemaError;
-                        }
-                    } else {
-                        $schemaErrors[] = $directivePipelineSchemaError;
-                    }
-                }
-                foreach ($failingFieldSchemaErrors as $failingField => $failingSchemaErrors) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$failingField],
-                        Tokens::MESSAGE => $this->__('This field can\'t be executed due to errors from its directives', 'component-model'),
-                        Tokens::EXTENSIONS => [
-                            Tokens::NESTED => $failingSchemaErrors,
-                        ],
-                    ];
-                }
-            }
-            if ($directivePipelineIDObjectErrors) {
-                // Extract the failing fields from the path of the thrown error
-                $failingFieldIDObjectErrors = [];
-                foreach ($directivePipelineIDObjectErrors as $id => $directivePipelineObjectErrors) {
-                    foreach ($directivePipelineObjectErrors as $directivePipelineDBError) {
-                        $dbErrorFailingField = $directivePipelineDBError[Tokens::PATH][0];
-                        if ($failingFields = $fieldDirectiveFields[$dbErrorFailingField] ?? []) {
-                            foreach ($failingFields as $failingField) {
-                                $dbError = $directivePipelineDBError;
-                                array_unshift($dbError[Tokens::PATH], $failingField);
-                                $this->prependPathOnNestedErrors($dbError, $failingField);
-                                $failingFieldIDObjectErrors[$failingField][$id][] = $dbError;
-                            }
-                        } else {
-                            $objectErrors[$id][] = $directivePipelineDBError;
-                        }
-                    }
-                }
-                foreach ($failingFieldIDObjectErrors as $failingField => $failingIDObjectErrors) {
-                    foreach ($failingIDObjectErrors as $id => $failingObjectErrors) {
-                        $objectErrors[$id][] = [
-                            Tokens::PATH => [$failingField],
-                            Tokens::MESSAGE => $this->__('This field can\'t be executed due to errors from its directives', 'component-model'),
-                            Tokens::EXTENSIONS => [
-                                Tokens::NESTED => $failingObjectErrors,
-                            ],
-                        ];
-                    }
-                }
-            }
         }
     }
 
