@@ -12,7 +12,11 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
@@ -26,8 +30,10 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
+use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
@@ -920,7 +926,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (!$this->needsIDsDataFieldsToExecute() || $this->hasIDsDataFields($idsDataFields)) {
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
-            $failureMessage = null;
+            $feedbackItemResolution = null;
             try {
                 $this->resolveDirective(
                     $relationalTypeResolver,
@@ -946,10 +952,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $schemaTraces
                 );
             } catch (AbstractClientException $e) {
-                $failureMessage = sprintf(
-                    $this->__('Resolving directive \'%s\' produced error: \'%s\'', 'component-model'),
-                    $this->directive,
-                    $e->getMessage()
+                $feedbackItemResolution = new FeedbackItemResolution(
+                    GenericFeedbackItemProvider::class,
+                    GenericFeedbackItemProvider::E1,
+                    [
+                        $e->getMessage(),
+                    ]
                 );
             } catch (Exception $e) {
                 /** @var ComponentConfiguration */
@@ -957,26 +965,29 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 if ($componentConfiguration->logExceptionErrorMessages()) {
                     // @todo: Implement for Log
                 }
-                $failureMessage = sprintf(
-                    $this->__('Resolving directive \'%s\' produced an exception, %s', 'component-model'),
-                    $this->directive,
-                    $componentConfiguration->sendExceptionErrorMessages()
-                        ? sprintf(
-                            $this->__('with message: \'%s\'', 'component-model'),
-                            $e->getMessage()
-                        )
-                        : $this->__('please contact the admin', 'component-model')
-                );
+                $feedbackItemResolution = $componentConfiguration->sendExceptionErrorMessages()
+                    ? new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        FeedbackItemProvider::E11,
+                        [
+                            $e->getMessage(),
+                        ]
+                    )
+                    : new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        FeedbackItemProvider::E12
+                    );
             }
-            if ($failureMessage !== null) {
+            if ($feedbackItemResolution !== null) {
                 $this->processFailure(
                     $relationalTypeResolver,
-                    $failureMessage,
+                    $feedbackItemResolution,
                     [],
                     $idsDataFields,
                     $pipelineIDsDataFields,
                     $objectIDItems,
                     $dbItems,
+                    $engineIterationFeedbackStore,
                     $objectErrors,
                     $objectWarnings
                 );
@@ -1014,12 +1025,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     protected function processFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $failureMessage,
+        FeedbackItemResolution $feedbackItemResolution,
         array $failedFields,
         array $idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array $objectIDItems,
         array &$dbItems,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectErrors,
         array &$objectWarnings
     ): void {
@@ -1066,53 +1078,71 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
 
         // Show the failureMessage either as error or as warning
-        $directiveName = $this->getDirectiveName();
         if ($setFailingFieldResponseAsNull) {
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $failedField) {
-                    $objectErrors[(string)$id][] = [
-                        Tokens::PATH => [$failedField, $this->directive],
-                        Tokens::MESSAGE => $failureMessage,
-                    ];
+                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                        new ObjectFeedback(
+                            $feedbackItemResolution,
+                            LocationHelper::getNonSpecificLocation(),
+                            $relationalTypeResolver,
+                            $failedField,
+                            $id,
+                            $this->directive,
+                        )
+                    );
                 }
             }
         } elseif ($removeFieldIfDirectiveFailed) {
-            if (count($failedFields) == 1) {
-                $message = $this->__('%s. Field \'%s\' has been removed from the directive pipeline', 'component-model');
-            } else {
-                $message = $this->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
-            }
+            // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
+            // if (count($failedFields) == 1) {
+            //     $message = $this->__('%s. Field \'%s\' has been removed from the directive pipeline', 'component-model');
+            // } else {
+            //     $message = $this->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
+            // }
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $failedField) {
-                    $objectErrors[(string)$id][] = [
-                        Tokens::PATH => [$failedField, $this->directive],
-                        Tokens::MESSAGE => sprintf(
-                            $message,
-                            $failureMessage,
-                            implode($this->__('\', \''), $failedFields)
-                        ),
-                    ];
+                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                        new ObjectFeedback(
+                            $feedbackItemResolution,
+                            LocationHelper::getNonSpecificLocation(),
+                            $relationalTypeResolver,
+                            $failedField,
+                            $id,
+                            $this->directive,
+                        )
+                    );
+                    // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
+                    // $objectErrors[(string)$id][] = [
+                    //     Tokens::PATH => [$failedField, $this->directive],
+                    //     Tokens::MESSAGE => sprintf(
+                    //         $message,
+                    //         $failureMessage,
+                    //         implode($this->__('\', \''), $failedFields)
+                    //     ),
+                    // ];
                 }
             }
         } else {
-            if (count($failedFields) === 1) {
-                $message = $this->__('%s. Execution of directive \'%s\' has been ignored on field \'%s\'', 'component-model');
-            } else {
-                $message = $this->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
-            }
-            foreach ($idsDataFieldsToRemove as $id => $dataFields) {
-                foreach ($dataFields['direct'] as $failedField) {
-                    $objectWarnings[(string)$id][] = [
-                        Tokens::PATH => [$failedField, $this->directive],
-                        Tokens::MESSAGE => sprintf(
-                            $message,
-                            $failureMessage,
-                            $directiveName,
-                            implode($this->__('\', \''), $failedFields)
-                        ),
-                    ];
-                }
-            }
+            // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
+            // if (count($failedFields) === 1) {
+            //     $message = $this->__('%s. Execution of directive \'%s\' has been ignored on field \'%s\'', 'component-model');
+            // } else {
+            //     $message = $this->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
+            // }
+            // foreach ($idsDataFieldsToRemove as $id => $dataFields) {
+            //     foreach ($dataFields['direct'] as $failedField) {
+            //         $objectWarnings[(string)$id][] = [
+            //             Tokens::PATH => [$failedField, $this->directive],
+            //             Tokens::MESSAGE => sprintf(
+            //                 $message,
+            //                 $failureMessage,
+            //                 $directiveName,
+            //                 implode($this->__('\', \''), $failedFields)
+            //             ),
+            //         ];
+            //     }
+            // }
         }
     }
 

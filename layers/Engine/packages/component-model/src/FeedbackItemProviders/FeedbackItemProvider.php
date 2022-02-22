@@ -22,6 +22,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public const E8 = 'e8';
     public const E9 = 'e9';
     public const E10 = 'e10';
+    public const E11 = 'e11';
+    public const E12 = 'e12';
 
     /**
      * @return string[]
@@ -40,6 +42,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E8,
             self::E9,
             self::E10,
+            self::E11,
+            self::E12,
         ];
     }
 
@@ -57,6 +61,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E8 => $this->__('No TypeResolver resolves object \'%s\'', 'component-model'),
             self::E9 => $this->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'component-model'),
             self::E10 => $this->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'component-model'),
+            self::E11 => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'', 'component-model'),
+            self::E12 => $this->__('Resolving directive \'%s\' triggered an exception, please contact the admin', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -75,7 +81,9 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E7,
             self::E8,
             self::E9,
-            self::E10
+            self::E10,
+            self::E11,
+            self::E12
                 => FeedbackCategories::ERROR,
             default
                 => parent::getCategory($code),
