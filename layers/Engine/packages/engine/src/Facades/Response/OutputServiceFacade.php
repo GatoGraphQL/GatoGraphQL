@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\Facades\Response;
+namespace PoP\Engine\Facades\Response;
 
 use PoP\Root\App;
-use PoP\GraphQLParser\Response\OutputServiceInterface;
+use PoP\Engine\Response\OutputServiceInterface;
 
 class OutputServiceFacade
 {

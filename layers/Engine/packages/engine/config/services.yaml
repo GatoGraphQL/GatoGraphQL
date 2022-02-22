@@ -32,5 +32,8 @@ services:
     PoP\Engine\HelperServices\ArrayTraversionHelperServiceInterface:
         class: \PoP\Engine\HelperServices\ArrayTraversionHelperService
 
+    PoP\Engine\Response\OutputServiceInterface:
+        class: \PoP\Engine\Response\OutputService
+
     PoP\Engine\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
