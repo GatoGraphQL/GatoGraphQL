@@ -6,7 +6,7 @@ namespace PoP\Engine\HelperServices;
 
 use PoP\Engine\Constants\OperationSymbols;
 use PoP\Engine\Exception\RuntimeOperationException;
-use PoP\Engine\Response\OutputServiceInterface;
+use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
 class ArrayTraversionHelperService implements ArrayTraversionHelperServiceInterface
