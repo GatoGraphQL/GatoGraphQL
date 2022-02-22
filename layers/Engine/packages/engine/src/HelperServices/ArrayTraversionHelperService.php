@@ -105,7 +105,7 @@ class ArrayTraversionHelperService implements ArrayTraversionHelperServiceInterf
             }
             $dataPointer = &$dataPointer[$pathLevel];
         }
-        
+
         // We reached the end. Set the value
         $dataPointer = $value;
     }
