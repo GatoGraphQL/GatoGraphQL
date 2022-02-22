@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\HelperServices;
 
+use PoP\Engine\Exception\RuntimeOperationException;
+
 interface ArrayTraversionHelperServiceInterface
 {
     /**
