@@ -2017,23 +2017,29 @@ class Engine implements EngineInterface
      */
     protected function getErrorOutput(SchemaFeedbackInterface | ObjectFeedbackInterface $schemaOrObjectFeedback, ?array $path = null, ?string $argName = null): array
     {
+        $feedbackItemResolution = $schemaOrObjectFeedback->getFeedbackItemResolution();
+        $directive = $schemaOrObjectFeedback->getDirective();
+        $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
         return [
-            Tokens::MESSAGE => $schemaOrObjectFeedback->getFeedbackItemResolution()->getMessage(),
+            Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
             Tokens::PATH => array_merge(
                 [
                     $schemaOrObjectFeedback->getField(),
                 ],
-                $schemaOrObjectFeedback->getDirective() !== null ?
+                $directive !== null ?
                 [
-                    $schemaOrObjectFeedback->getDirective(),
+                    $directive,
                 ] : []
             ),
             Tokens::LOCATIONS => [$schemaOrObjectFeedback->getLocation()->toArray()],
             Tokens::EXTENSIONS => array_merge(
                 $schemaOrObjectFeedback->getExtensions(),
                 [
-                    'code' => $schemaOrObjectFeedback->getFeedbackItemResolution()->getNamespacedCode(),
-                ]
+                    'code' => $feedbackItemResolution->getNamespacedCode(),
+                ],
+                $specifiedByURL !== null ? [
+                    'specifiedByURL' => $specifiedByURL,
+                ] : []
             )
         ];
     }
