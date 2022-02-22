@@ -54,4 +54,10 @@ class FeedbackItemResolution
         $feedbackItemProvider = $this->getFeedbackItemProvider();
         return $feedbackItemProvider->getNamespacedCode($this->code);
     }
+
+    final public function getSpecifiedByURL(): ?string
+    {
+        $feedbackItemProvider = $this->getFeedbackItemProvider();
+        return $feedbackItemProvider->getSpecifiedByURL($this->code);
+    }
 }
