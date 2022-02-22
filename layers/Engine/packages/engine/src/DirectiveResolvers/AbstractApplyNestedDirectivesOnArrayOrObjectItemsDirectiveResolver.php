@@ -9,6 +9,8 @@ use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfigur
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalMetaDirectiveResolver;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
@@ -16,9 +18,11 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Component;
 use PoP\Engine\ComponentConfiguration;
 use PoP\Engine\Dataloading\Expressions;
+use PoP\Engine\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use stdClass;
 
@@ -154,26 +158,33 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 // Validate that the property exists
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
                 if (!$isValueInDBItems && !array_key_exists($fieldOutputKey, $previousDBItems[$dbKey][(string)$id] ?? [])) {
-                    if ($fieldOutputKey != $field) {
-                        $objectErrors[(string)$id][] = [
-                            Tokens::PATH => [$this->directive],
-                            Tokens::MESSAGE => sprintf(
-                                $this->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
-                                $field,
-                                $fieldOutputKey,
-                                $id
-                            ),
-                        ];
-                    } else {
-                        $objectErrors[(string)$id][] = [
-                            Tokens::PATH => [$this->directive],
-                            Tokens::MESSAGE => sprintf(
-                                $this->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
-                                $fieldOutputKey,
-                                $id
-                            ),
-                        ];
-                    }
+                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                        new ObjectFeedback(
+                            $fieldOutputKey !== $field ?
+                                new FeedbackItemResolution(
+                                    FeedbackItemProvider::class,
+                                    FeedbackItemProvider::E1,
+                                    [
+                                        $field,
+                                        $fieldOutputKey,
+                                        $id
+                                    ]
+                                )
+                                : new FeedbackItemResolution(
+                                    FeedbackItemProvider::class,
+                                    FeedbackItemProvider::E2,
+                                    [
+                                        $fieldOutputKey,
+                                        $id
+                                    ]
+                                ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $relationalTypeResolver,
+                            $field,
+                            $id,
+                            $this->directive,
+                        )
+                    );
                     continue;
                 }
 
@@ -188,26 +199,33 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
 
                 // Validate that the value is an array or stdClass
                 if (!(is_array($value) || ($value instanceof stdClass))) {
-                    if ($fieldOutputKey != $field) {
-                        $objectErrors[(string)$id][] = [
-                            Tokens::PATH => [$this->directive],
-                            Tokens::MESSAGE => sprintf(
-                                $this->__('The value for field \'%s\' (under property \'%s\') is not an array, so execution of this directive can\'t continue', 'component-model'),
-                                $field,
-                                $fieldOutputKey,
-                                $id
-                            ),
-                        ];
-                    } else {
-                        $objectErrors[(string)$id][] = [
-                            Tokens::PATH => [$this->directive],
-                            Tokens::MESSAGE => sprintf(
-                                $this->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'component-model'),
-                                $fieldOutputKey,
-                                $id
-                            ),
-                        ];
-                    }
+                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                        new ObjectFeedback(
+                            $fieldOutputKey !== $field ?
+                                new FeedbackItemResolution(
+                                    FeedbackItemProvider::class,
+                                    FeedbackItemProvider::E3,
+                                    [
+                                        $field,
+                                        $fieldOutputKey,
+                                        $id
+                                    ]
+                                )
+                                : new FeedbackItemResolution(
+                                    FeedbackItemProvider::class,
+                                    FeedbackItemProvider::E4,
+                                    [
+                                        $fieldOutputKey,
+                                        $id
+                                    ]
+                                ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $relationalTypeResolver,
+                            $field,
+                            $id,
+                            $this->directive,
+                        )
+                    );
                     continue;
                 }
 
