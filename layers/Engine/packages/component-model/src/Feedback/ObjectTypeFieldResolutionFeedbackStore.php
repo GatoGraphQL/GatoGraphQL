@@ -19,6 +19,35 @@ class ObjectTypeFieldResolutionFeedbackStore
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
     private array $traces = [];
 
+    public function incorporate(
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $this->errors = array_merge(
+            $this->errors,
+            $objectTypeFieldResolutionFeedbackStore->getErrors()
+        );
+        $this->warnings = array_merge(
+            $this->warnings,
+            $objectTypeFieldResolutionFeedbackStore->getWarnings()
+        );
+        $this->deprecations = array_merge(
+            $this->deprecations,
+            $objectTypeFieldResolutionFeedbackStore->getDeprecations()
+        );
+        $this->notices = array_merge(
+            $this->notices,
+            $objectTypeFieldResolutionFeedbackStore->getNotices()
+        );
+        $this->logs = array_merge(
+            $this->logs,
+            $objectTypeFieldResolutionFeedbackStore->getLogs()
+        );
+        $this->traces = array_merge(
+            $this->traces,
+            $objectTypeFieldResolutionFeedbackStore->getTraces()
+        );
+    }
+
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */

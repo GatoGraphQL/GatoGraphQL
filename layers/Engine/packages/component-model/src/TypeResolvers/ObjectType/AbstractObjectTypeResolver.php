@@ -462,6 +462,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
 
         // Once again, the $validField becomes the $field
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
             $field,
             $fieldName,
@@ -469,7 +470,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $maybeObjectErrors,
             $maybeObjectWarnings,
             $maybeObjectDeprecations,
-        ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore);
+        ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
 
         // Store the warnings to be read if needed
         if ($maybeObjectWarnings) {
@@ -505,6 +507,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $this,
                 )
             );
+            return null;
+        }
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
         if ($maybeObjectDeprecations) {

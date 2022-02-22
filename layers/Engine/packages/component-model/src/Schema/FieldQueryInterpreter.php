@@ -10,9 +10,12 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
@@ -28,7 +31,9 @@ use PoP\FieldQuery\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
+use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 use stdClass;
 
 class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements FieldQueryInterpreterInterface
@@ -851,7 +856,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         );
         // Only need to extract arguments if they have fields or arrays
         $fieldOutputKey = $this->getFieldOutputKey($field);
-        $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $objectErrors);
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $castingObjectErrors = $castingObjectWarnings = [];
         $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $castingObjectErrors, $castingObjectWarnings, $objectDeprecations);
@@ -864,7 +871,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $objectWarnings[(string)$id] = $castingObjectWarnings;
             }
         }
-        if ($objectErrors) {
+        if ($objectErrors || $separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $validAndResolvedField = null;
         } elseif ($extractedFieldArgs != $fieldArgs) {
             // There are 2 reasons why the field might have changed:
@@ -886,6 +893,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
+        array $fields,
         string $fieldDirective,
         array $variables,
         array $expressions,
@@ -902,7 +910,18 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         );
         // Only need to extract arguments if they have fields or arrays
         $directiveOutputKey = $this->getDirectiveOutputKey($fieldDirective);
-        $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $directiveOutputKey, $variables, $expressions, $objectErrors);
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $directiveOutputKey, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore);
+        // Transfer the feedback
+        $objectID = $relationalTypeResolver->getID($object);
+        foreach ($fields as $field) {
+            $engineIterationFeedbackStore->incorporate(
+                $objectTypeFieldResolutionFeedbackStore,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+            );
+        }
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $castingObjectErrors = $castingObjectWarnings = [];
         $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $castingObjectErrors, $castingObjectWarnings, $objectDeprecations);
@@ -915,7 +934,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $objectWarnings[(string)$id] = $castingObjectWarnings;
             }
         }
-        if ($objectErrors) {
+        if ($objectErrors !== [] || $objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $validAndResolvedDirective = null;
         } elseif ($extractedDirectiveArgs != $directiveArgs) {
             // There are 2 reasons why the fieldDirective might have changed:
@@ -941,7 +960,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         string $fieldOrDirectiveOutputKey,
         ?array $variables,
         ?array $expressions,
-        array &$objectErrors
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
         // Only need to extract arguments if they have fields or arrays
         if (
@@ -951,22 +970,16 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 )
             )
         ) {
-            $id = $relationalTypeResolver->getID($object);
-            foreach ($fieldOrDirectiveArgs as $directiveArgName => $directiveArgValue) {
-                $directiveArgValue = $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $directiveArgValue, $variables, $expressions);
+            foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $fieldOrDirectiveArgValue) {
+                $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                $fieldOrDirectiveArgValue = $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $fieldOrDirectiveArgValue, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
+                $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
                 // Validate it
-                if (GeneralUtils::isError($directiveArgValue)) {
-                    /** @var Error */
-                    $error = $directiveArgValue;
-                    if ($errorData = $error->getData()) {
-                        $errorFieldOrDirective = $errorData['fieldName'] ?? null;
-                    }
-                    $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
-                    $objectErrors[(string)$id][] = $this->getTempErrorOutput($error, [$errorFieldOrDirective], $directiveArgName);
-                    $fieldOrDirectiveArgs[$directiveArgName] = null;
+                if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                    $fieldOrDirectiveArgs[$fieldOrDirectiveArgName] = null;
                     continue;
                 }
-                $fieldOrDirectiveArgs[$directiveArgName] = $directiveArgValue;
+                $fieldOrDirectiveArgs[$fieldOrDirectiveArgName] = $fieldOrDirectiveArgValue;
             }
             return $this->filterFieldOrDirectiveArgs($fieldOrDirectiveArgs);
         }
@@ -1849,13 +1862,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         object $object,
         mixed $fieldArgValue,
         ?array $variables,
-        ?array $expressions
+        ?array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
             return array_map(
-                function ($fieldArgValueElem) use ($relationalTypeResolver, $object, $variables, $expressions) {
-                    return $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $fieldArgValueElem, $variables, $expressions);
+                function ($fieldArgValueElem) use ($relationalTypeResolver, $object, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore) {
+                    return $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $fieldArgValueElem, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore);
                 },
                 (array)$fieldArgValue
             );
@@ -1866,23 +1880,32 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             // Expressions: allow to pass a field argument "key:%input%", which is passed when executing the directive through $expressions
             // Trim it so that "%{ self }%" is equivalent to "%{self}%". This is needed to set expressions through Symfony's DependencyInjection component (since %...% is reserved for its own parameters!)
             $expressionName = trim(substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING), strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING) - strlen(QuerySyntax::SYMBOL_EXPRESSION_CLOSING)));
-            if (isset($expressions[$expressionName])) {
-                return $expressions[$expressionName];
+            if (!isset($expressions[$expressionName])) {
+                // If the expression is not set, then show the error under entry "expressionErrors"
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            FeedbackItemProvider::class,
+                            FeedbackItemProvider::E14,
+                            [
+                                $expressionName,
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $relationalTypeResolver,
+                    )
+                );
+                return null;
             }
-            // If the expression is not set, then show the error under entry "expressionErrors"
-            $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                $this->__('Expression \'%s\' is undefined', 'pop-component-model'),
-                $expressionName
-            ));
-            return null;
-        } elseif ($this->isFieldArgumentValueAField($fieldArgValue)) {
+            return $expressions[$expressionName];
+        }
+        if ($this->isFieldArgumentValueAField($fieldArgValue)) {
             // Execute as field
             // It is important to force the validation, because if a needed argument is provided with an error, it needs to be validated, casted and filtered out,
             // and if this wrong param is not "dynamic", then the validation would not take place
             $options = [
                 AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
             ];
-            $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $resolvedValue = $relationalTypeResolver->resolveValue(
                 $object,
                 (string)$fieldArgValue,
@@ -1892,14 +1915,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $options
             );
             if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                // Show the error message, and return nothing
-                // Showing first error only because this code will soon be removed anyway
-                $errors = $objectTypeFieldResolutionFeedbackStore->getErrors();
-                $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                    $this->__('Executing field \'%s\' produced error: %s', 'pop-component-model'),
-                    $fieldArgValue,
-                    $errors[0]->getFeedbackItemResolution()->getMessage()
-                ));
                 return null;
             }
             return $resolvedValue;

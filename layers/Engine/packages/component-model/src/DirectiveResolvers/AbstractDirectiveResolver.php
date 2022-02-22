@@ -254,6 +254,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function dissectAndValidateDirectiveForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
+        array $fields,
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -265,7 +266,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $nestedObjectErrors,
             $nestedObjectWarnings,
             $nestedObjectDeprecationMessages,
-        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions, $engineIterationFeedbackStore,);
+        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $fields, $this->directive, $variables, $expressions, $engineIterationFeedbackStore,);
 
         // Store the args, they may be used in `resolveDirective`
         $objectID = $relationalTypeResolver->getID($object);
