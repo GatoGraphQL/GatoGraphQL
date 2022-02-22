@@ -29,5 +29,8 @@ services:
     PoP\Engine\Schema\SchemaDefinitionServiceInterface:
         class: \PoP\Engine\Schema\SchemaDefinitionService
 
+    PoP\Engine\HelperServices\ArrayTraversionHelperServiceInterface:
+        class: \PoP\Engine\HelperServices\ArrayTraversionHelperService
+
     PoP\Engine\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
