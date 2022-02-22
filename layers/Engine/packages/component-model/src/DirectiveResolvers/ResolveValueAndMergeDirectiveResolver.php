@@ -9,10 +9,14 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
@@ -94,19 +98,30 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$objectDeprecations,
     ): void {
         $enqueueFillingObjectsFromIDs = [];
-        foreach (array_keys($idsDataFields) as $id) {
+        foreach ($idsDataFields as $id => $dataFields) {
             // Obtain its ID and the required data-fields for that ID
             $object = $objectIDItems[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if ($object === null) {
-                $objectErrors[(string)$id][] = [
-                    Tokens::PATH => ['id'],
-                    Tokens::MESSAGE => sprintf(
-                        $this->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
-                        $id
-                    ),
-                ];
+                foreach ($dataFields['direct'] as $field) {
+                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                        new ObjectFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E13,
+                                [
+                                    $id,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $relationalTypeResolver,
+                            $field,
+                            $id,
+                            $this->directive,
+                        )
+                    );
+                }
                 // This is currently pointing to NULL and returning this entry in the database. Remove it
                 // (this will also avoid errors in the Engine, which expects this result to be an array and can't be null)
                 unset($dbItems[(string)$id]);
