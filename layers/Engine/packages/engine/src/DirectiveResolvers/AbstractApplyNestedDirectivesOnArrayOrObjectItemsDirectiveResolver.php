@@ -336,30 +336,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 $schemaTraces
             );
 
-            // If there was an error, prepend the path
-            if ($nestedSchemaErrors !== []) {
-                $schemaError = [
-                    Tokens::PATH => [$this->directive],
-                    Tokens::MESSAGE => $this->__('The nested directive has produced errors', 'component-model'),
-                ];
-                foreach ($nestedSchemaErrors as $nestedSchemaError) {
-                    array_unshift($nestedSchemaError[Tokens::PATH], $this->directive);
-                    $this->prependPathOnNestedErrors($nestedSchemaError);
-                    $schemaError[Tokens::EXTENSIONS][Tokens::NESTED][] = $nestedSchemaError;
-                }
-                $schemaErrors[] = $schemaError;
-            }
-
-            if ($nestedIDObjectErrors !== []) {
-                foreach ($nestedIDObjectErrors as $id => $nestedObjectErrors) {
-                    foreach ($nestedObjectErrors as &$nestedDBError) {
-                        array_unshift($nestedDBError[Tokens::PATH], $this->directive);
-                        $this->prependPathOnNestedErrors($nestedDBError);
-                    }
-                    $objectErrors[(string) $id] = $nestedObjectErrors;
-                }
-            }
-
             // If any item fails, maybe set the whole response field as null
             if ($nestedSchemaErrors !== [] || $nestedIDObjectErrors !== []) {
                 /** @var ComponentModelComponentConfiguration */
