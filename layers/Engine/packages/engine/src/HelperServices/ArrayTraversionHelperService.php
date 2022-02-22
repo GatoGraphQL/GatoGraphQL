@@ -6,11 +6,23 @@ namespace PoP\Engine\HelperServices;
 
 use PoP\Engine\Constants\OperationSymbols;
 use PoP\Engine\Exception\RuntimeOperationException;
+use PoP\GraphQLParser\Response\OutputServiceInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
 class ArrayTraversionHelperService implements ArrayTraversionHelperServiceInterface
 {
     use BasicServiceTrait;
+
+    private ?OutputServiceInterface $outputService = null;
+
+    final public function setOutputService(OutputServiceInterface $outputService): void
+    {
+        $this->outputService = $outputService;
+    }
+    final protected function getOutputService(): OutputServiceInterface
+    {
+        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
+    }
 
     /**
      * @throws RuntimeOperationException If the path cannot be reached under the array, or if its value is not an array
@@ -59,7 +71,7 @@ class ArrayTraversionHelperService implements ArrayTraversionHelperServiceInterf
             sprintf(
                 $this->__('Path \'%s\' is not reachable for object: %s', 'component-model'),
                 $path,
-                json_encode($data)
+                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($data)
             )
         );
     }
