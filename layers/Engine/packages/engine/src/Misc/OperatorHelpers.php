@@ -77,7 +77,7 @@ class OperatorHelpers
     /**
      * @throws RuntimeOperationException
      */
-    public static function setValueToArrayItemUnderPath(array &$data, string $path, $value): void
+    public static function setValueToArrayItemUnderPath(array &$data, string $path, mixed $value): void
     {
         $dataPointer = &$data;
 
@@ -89,6 +89,7 @@ class OperatorHelpers
             }
             $dataPointer = &$dataPointer[$pathLevel];
         }
+        
         // We reached the end. Set the value
         $dataPointer = $value;
     }
