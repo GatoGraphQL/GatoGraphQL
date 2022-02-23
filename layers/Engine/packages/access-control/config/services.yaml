@@ -9,3 +9,6 @@ services:
 
     PoP\AccessControl\Hooks\:
         resource: '../src/Hooks/*'
+
+    PoP\AccessControl\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'
