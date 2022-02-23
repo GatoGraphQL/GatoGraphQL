@@ -698,7 +698,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         );
         $directiveArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($relationalTypeResolver, $fieldDirective, $directiveArgs, $variables, $objectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $directiveArgs = $this->castDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
+        $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
         // Enable the directiveResolver to add its own code validations
         $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
         // Transfer the feedback
@@ -834,7 +834,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $directiveOutputKey = $this->getDirectiveOutputKey($fieldDirective);
         $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $directiveOutputKey, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $directiveArgs = $this->castDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
+        $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
         // Transfer the feedback
         $objectID = $relationalTypeResolver->getID($object);
         foreach ($fields as $field) {
@@ -899,6 +899,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function castDirectiveArguments(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
+        string $directive,
         array $directiveArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         bool $forSchema
@@ -1096,13 +1097,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function castDirectiveArgumentsForSchema(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldDirective,
         array $directiveArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         bool $disableDynamicFields = false
     ): array {
         // If the directive doesn't allow dynamic fields (Eg: <cacheControl(maxAge:id())>), then treat it as not for schema
         $forSchema = !$disableDynamicFields;
-        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $forSchema);
+        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $forSchema);
     }
 
     protected function castFieldArgumentsForSchema(
@@ -1117,10 +1119,11 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function castDirectiveArgumentsForObject(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
+        string $directive,
         array $directiveArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
-        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, false);
+        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $directive, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, false);
     }
 
     protected function castFieldArgumentsForObject(
@@ -1284,6 +1287,20 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldArgNameDefaultValues;
     }
 
+    protected function castAndValidateDirectiveArgumentsForSchema(
+        DirectiveResolverInterface $directiveResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldDirective,
+        array $directiveArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        bool $disableDynamicFields = false
+    ): array {
+        if ($directiveArgs) {
+            return $this->castDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
+        }
+        return $directiveArgs;
+    }
+
     protected function castAndValidateFieldArgumentsForSchema(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
@@ -1300,6 +1317,16 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             return $castedFieldArgs;
         }
         return $fieldArgs;
+    }
+
+    protected function castAndValidateDirectiveArgumentsForObject(
+        DirectiveResolverInterface $directiveResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldDirective,
+        array $directiveArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array {
+        return $this->castDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
     }
 
     protected function castAndValidateFieldArgumentsForObject(
