@@ -181,7 +181,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
                                 GenericFeedbackItemProvider::class,
-                                GenericFeedbackItemProvider::D1,
+                                GenericFeedbackItemProvider::E1,
                                 [
                                     $error,
                                 ]
@@ -225,7 +225,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     GenericFeedbackItemProvider::class,
-                    GenericFeedbackItemProvider::D1,
+                    GenericFeedbackItemProvider::E1,
                     [
                         $errorMessage,
                     ]
@@ -264,7 +264,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::D1,
+                            GenericFeedbackItemProvider::W1,
                             [
                                 $warning,
                             ]
