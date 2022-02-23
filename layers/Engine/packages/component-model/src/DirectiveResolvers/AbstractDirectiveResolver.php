@@ -187,9 +187,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $validDirective,
             $directiveName,
             $directiveArgs,
-            $directiveSchemaErrors,
-            $directiveSchemaWarnings,
-            $directiveSchemaDeprecations
         ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForSchema(
             $this,
             $relationalTypeResolver,
@@ -203,19 +200,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // Store the args, they may be used in `resolveDirective`
         $this->directiveArgsForSchema = $directiveArgs;
 
-        // If there were errors, warning or deprecations, integrate them into the feedback objects
-        $schemaErrors = array_merge(
-            $schemaErrors,
-            $directiveSchemaErrors
-        );
-        $schemaWarnings = array_merge(
-            $schemaWarnings,
-            $directiveSchemaWarnings
-        );
-        $schemaDeprecations = array_merge(
-            $schemaDeprecations,
-            $directiveSchemaDeprecations
-        );
         return [
             $validDirective,
             $directiveName,
