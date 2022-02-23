@@ -1296,9 +1296,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         bool $disableDynamicFields = false
     ): array {
         if ($directiveArgs) {
-            $castingDirectiveArgDeprecationMessages = [];
             $castedDirectiveArgs = $this->castDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
-            return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $castingDirectiveArgDeprecationMessages, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
+            return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
         }
         return $directiveArgs;
     }
@@ -1310,14 +1309,13 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         if ($fieldArgs) {
-            $castingFieldArgDeprecationMessages = [];
             $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $castedFieldArgs = $this->castFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
             $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
             if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 return null;
             }
-            return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $castingFieldArgDeprecationMessages, $field, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
+            return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $field, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
         }
         return $fieldArgs;
     }
@@ -1329,9 +1327,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array $directiveArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        $castingDirectiveArgDeprecationMessages = [];
         $castedDirectiveArgs = $this->castDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
-        return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $castingDirectiveArgDeprecationMessages, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
+        return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
     }
 
     protected function castAndValidateFieldArgumentsForObject(
@@ -1340,41 +1337,23 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array $fieldArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
     ): ?array {
-        $castingFieldArgDeprecationMessages = [];
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $castedFieldArgs = $this->castFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
-        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $castingFieldArgDeprecationMessages, $field, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
+        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $field, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
     }
 
     protected function validateAndFilterCastDirectiveArguments(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $castedDirectiveArgs,
-        array &$castingDirectiveArgDeprecationMessages,
         string $fieldDirective,
         array $directiveArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
-        // Add the deprecations
-        foreach ($castingDirectiveArgDeprecationMessages as $castingDirectiveArgDeprecationMessage) {
-            $objectTypeFieldResolutionFeedbackStore->addDeprecation(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        GenericFeedbackItemProvider::class,
-                        GenericFeedbackItemProvider::D1,
-                        [
-                            $castingDirectiveArgDeprecationMessage,
-                        ]
-                    ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $relationalTypeResolver,
-                )
-            );
-        }
         return $castedDirectiveArgs;
     }
 
@@ -1394,27 +1373,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function validateAndFilterCastFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
         array $castedFieldArgs,
-        array &$castingFieldArgDeprecationMessages,
         string $field,
         array $fieldArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
-        // Add the deprecations
-        foreach ($castingFieldArgDeprecationMessages as $castingFieldArgDeprecationMessage) {
-            $objectTypeFieldResolutionFeedbackStore->addDeprecation(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        GenericFeedbackItemProvider::class,
-                        GenericFeedbackItemProvider::D1,
-                        [
-                            $castingFieldArgDeprecationMessage,
-                        ]
-                    ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $objectTypeResolver,
-                )
-            );
-        }
         return $castedFieldArgs;
     }
 
