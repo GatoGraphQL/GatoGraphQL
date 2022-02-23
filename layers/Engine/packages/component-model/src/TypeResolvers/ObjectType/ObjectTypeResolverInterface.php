@@ -15,11 +15,11 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
 {
     public function getFieldSchemaDefinition(string $field): ?array;
     public function hasObjectTypeFieldResolversForField(string $field): bool;
-    public function resolveFieldValidationErrorQualifiedEntries(
+    public function collectFieldValidationErrorQualifiedEntries(
         string $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
-    ): array;
+    ): void;
     public function collectFieldValidationWarningQualifiedEntries(
         string $field,
         array $variables,

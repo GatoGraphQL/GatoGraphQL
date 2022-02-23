@@ -160,11 +160,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
     }
 
-    final public function resolveFieldValidationErrorQualifiedEntries(
+    final public function collectFieldValidationErrorQualifiedEntries(
         string $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
-    ): array {
+    ): void {
         list(
             $validField,
             $fieldName,
@@ -172,7 +172,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         // Dissecting the field may already fail, then already return the error
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return [];
+            return;
         }
         if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
             if ($maybeErrors = $executableObjectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
@@ -192,7 +192,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     );
                 }
             }
-            return $schemaErrors;
         }
 
         // If we reach here, no fieldResolver processes this field, which is an error
@@ -222,12 +221,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $this->getMaybeNamespacedTypeName()
             );
         }
-        return [
-            [
-                Tokens::PATH => [$field],
-                Tokens::MESSAGE => $errorMessage,
-            ],
-        ];
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    GenericFeedbackItemProvider::class,
+                    GenericFeedbackItemProvider::D1,
+                    [
+                        $errorMessage,
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation(),
+                $this,
+            )
+        );
     }
 
     final public function collectFieldValidationWarningQualifiedEntries(

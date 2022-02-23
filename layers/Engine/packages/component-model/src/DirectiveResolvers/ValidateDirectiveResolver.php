@@ -95,23 +95,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
 
-        if ($schemaValidationErrors = $objectTypeResolver->resolveFieldValidationErrorQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore)) {
-            foreach ($schemaValidationErrors as $errorMessage) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::E1,
-                            [
-                                $errorMessage,
-                            ]
-                        ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $relationalTypeResolver,
-                    )
-                );
-            }
-        }
+        $objectTypeResolver->collectFieldValidationErrorQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         $objectTypeResolver->collectFieldValidationWarningQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         $objectTypeResolver->collectFieldDeprecationQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
