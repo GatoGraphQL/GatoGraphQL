@@ -272,7 +272,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $schemaWarnings;
     }
 
-    final public function validateFieldDeprecationQualifiedEntries(
+    final public function collectFieldDeprecationQualifiedEntries(
         string $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
