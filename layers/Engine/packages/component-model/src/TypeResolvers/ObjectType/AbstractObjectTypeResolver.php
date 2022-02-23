@@ -341,17 +341,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $fieldMutationResolver !== null;
     }
 
-    final protected function dissectFieldForSchema(string $field): array
+    final protected function dissectFieldForSchema(string $field, array $variables, ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore): array
     {
         if (!isset($this->dissectedFieldForSchemaCache[$field])) {
-            $this->dissectedFieldForSchemaCache[$field] = $this->doDissectFieldForSchema($field);
+            $this->dissectedFieldForSchemaCache[$field] = $this->doDissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         }
         return $this->dissectedFieldForSchemaCache[$field];
     }
 
-    private function doDissectFieldForSchema(string $field): array
+    private function doDissectFieldForSchema(string $field, array $variables, ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore): array
     {
-        return $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this, $field);
+        return $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this, $field, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**
@@ -453,13 +453,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // For instance: ?query=posts(limit:3),post(id:$id).id|title&id=112
         // We can also force it through an option. This is needed when the field is created on runtime.
         // Eg: through the <transform> directive, in which case no parameter is dynamic anymore by the time it reaches here, yet it was not validated statically either
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $validateSchemaOnObject =
             ($options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? null) ||
             FieldQueryUtils::isAnyFieldArgumentValueDynamic(
                 array_values(
-                    $this->getFieldQueryInterpreter()->extractFieldArguments($this, $field) ?? []
+                    $this->getFieldQueryInterpreter()->extractFieldArguments($this, $field, $variables, $separateObjectTypeFieldResolutionFeedbackStore) ?? []
                 )
             );
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return null;
+        }
 
         // Once again, the $validField becomes the $field
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();

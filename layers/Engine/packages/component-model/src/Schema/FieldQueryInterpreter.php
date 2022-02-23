@@ -551,7 +551,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     public function extractFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
-        ?array $variables = null,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         ?array &$schemaErrors = null,
         ?array &$schemaWarnings = null,
     ): ?array {
@@ -563,6 +564,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $objectTypeResolver,
                 $field,
                 $variables,
+                $objectTypeFieldResolutionFeedbackStore,
                 $fieldSchemaErrors,
                 $fieldSchemaWarnings,
             );
@@ -589,16 +591,20 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
         ?array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array &$schemaErrors,
         array &$schemaWarnings,
     ): ?array {
         // Iterate all the elements, and extract them into the array
         $fieldArgumentNameTypeResolvers = $this->getFieldArgumentNameTypeResolvers($objectTypeResolver, $field);
         if ($fieldArgumentNameTypeResolvers === null) {
-            $schemaErrors[] = [
-                Tokens::PATH => [$field],
-                Tokens::MESSAGE => $this->getNoFieldErrorFeedbackItemResolution($objectTypeResolver, $field),
-            ];
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $this->getNoFieldErrorFeedbackItemResolution($objectTypeResolver, $field),
+                    LocationHelper::getNonSpecificLocation(),
+                    $objectTypeResolver,
+                )
+            );
             return null;
         }
         /** @var array */
@@ -656,7 +662,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     public function extractFieldArgumentsForSchema(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
-        ?array $variables = null
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
         $schemaErrors = [];
         $schemaWarnings = [];
@@ -667,6 +674,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $objectTypeResolver,
             $field,
             $variables,
+            $objectTypeFieldResolutionFeedbackStore,
             $schemaErrors,
             $schemaWarnings,
         );
@@ -859,8 +867,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $field,
-        ?array $variables,
-        ?array $expressions,
+        array $variables,
+        array $expressions,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
         $objectErrors = $objectWarnings = $objectDeprecations = [];
@@ -869,7 +877,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments(
             $objectTypeResolver,
             $field,
-            $variables
+            $variables,
+            $objectTypeFieldResolutionFeedbackStore
         );
         // Only need to extract arguments if they have fields or arrays
         $fieldOutputKey = $this->getFieldOutputKey($field);

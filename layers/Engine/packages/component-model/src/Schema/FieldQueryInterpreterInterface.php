@@ -62,7 +62,8 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
     public function extractFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
-        ?array $variables = null,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         ?array &$schemaErrors = null,
         ?array &$schemaWarnings = null,
     ): ?array;
@@ -74,7 +75,12 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         ?array &$schemaErrors = null,
         ?array &$schemaWarnings = null,
     ): array;
-    public function extractFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, ?array $variables = null): array;
+    public function extractFieldArgumentsForSchema(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array;
     public function extractDirectiveArgumentsForSchema(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -88,8 +94,8 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $field,
-        ?array $variables,
-        ?array $expressions,
+        array $variables,
+        array $expressions,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
     public function extractDirectiveArgumentsForObject(
