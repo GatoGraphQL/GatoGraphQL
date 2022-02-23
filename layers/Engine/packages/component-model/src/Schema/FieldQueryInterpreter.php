@@ -1296,8 +1296,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         bool $disableDynamicFields = false
     ): array {
         if ($directiveArgs) {
-            $castedDirectiveArgs = $this->castDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
-            return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
+            return $this->castDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
         }
         return $directiveArgs;
     }
@@ -1327,8 +1326,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array $directiveArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        $castedDirectiveArgs = $this->castDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
-        return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
+        return $this->castDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
     }
 
     protected function castAndValidateFieldArgumentsForObject(
@@ -1344,17 +1342,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             return null;
         }
         return $castedFieldArgs;
-    }
-
-    protected function validateAndFilterCastDirectiveArguments(
-        DirectiveResolverInterface $directiveResolver,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        array $castedDirectiveArgs,
-        string $fieldDirective,
-        array $directiveArgs,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
-        return $castedDirectiveArgs;
     }
 
     /**
