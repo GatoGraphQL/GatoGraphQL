@@ -29,6 +29,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public const E15 = 'e15';
     public const E16 = 'e16';
     public const E17 = 'e17';
+    public const E18 = 'e18';
+    public const E19 = 'e19';
 
     /**
      * @return string[]
@@ -54,6 +56,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E15,
             self::E16,
             self::E17,
+            self::E18,
+            self::E19,
         ];
     }
 
@@ -78,6 +82,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E15 => $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
             self::E16 => $this->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
             self::E17 => $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
+            self::E18 => $this->__('Validation failed for directives in fields \'%s\'', 'component-model') ,
+            self::E19 => $this->__('Validation failed for fields \'%s\'', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -103,7 +109,9 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E14,
             self::E15,
             self::E16,
-            self::E17
+            self::E17,
+            self::E18,
+            self::E19
                 => FeedbackCategories::ERROR,
             default
                 => parent::getCategory($code),

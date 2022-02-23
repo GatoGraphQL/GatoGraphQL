@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Root\App;
 
 abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
@@ -54,7 +55,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $this->validateAndFilterFields($relationalTypeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $objectIDItems, $dbItems, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $this->validateAndFilterFields($relationalTypeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $objectIDItems, $dbItems, $variables, $engineIterationFeedbackStore, $schemaErrors, $schemaWarnings, $schemaDeprecations);
     }
 
     protected function validateAndFilterFields(
@@ -64,6 +65,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array $objectIDItems,
         array &$dbItems,
         array &$variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations
@@ -78,7 +80,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $data_fields['direct']
             )));
         }
-        $this->validateFields($relationalTypeResolver, $dataFields, $schemaErrors, $schemaWarnings, $schemaDeprecations, $variables, $failedDataFields);
+        $this->validateFields($relationalTypeResolver, $dataFields, $variables, $engineIterationFeedbackStore, $schemaErrors, $schemaWarnings, $schemaDeprecations, $failedDataFields);
 
         // Remove from the data_fields list to execute on the object for the next stages of the pipeline
         if ($failedDataFields) {
@@ -116,5 +118,14 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         // }
     }
 
-    abstract protected function validateFields(RelationalTypeResolverInterface $relationalTypeResolver, array $dataFields, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables, array &$failedDataFields): void;
+    abstract protected function validateFields(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $dataFields,
+        array &$variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+        array &$schemaDeprecations,
+        array &$failedDataFields,
+    ): void;
 }

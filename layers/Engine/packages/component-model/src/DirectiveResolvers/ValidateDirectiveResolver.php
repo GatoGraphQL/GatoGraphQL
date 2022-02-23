@@ -6,10 +6,15 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -42,18 +47,30 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         return PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE;
     }
 
-    protected function validateFields(RelationalTypeResolverInterface $relationalTypeResolver, array $dataFields, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables, array &$failedDataFields): void
-    {
+    protected function validateFields(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $dataFields,
+        array &$variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+        array &$schemaDeprecations,
+        array &$failedDataFields,
+    ): void {
         foreach ($dataFields as $field) {
-            $success = $this->validateField($relationalTypeResolver, $field, $schemaErrors, $schemaWarnings, $schemaDeprecations, $variables);
+            $success = $this->validateField($relationalTypeResolver, $field, $variables, $engineIterationFeedbackStore);
             if (!$success) {
                 $failedDataFields[] = $field;
             }
         }
     }
 
-    protected function validateField(RelationalTypeResolverInterface $relationalTypeResolver, string $field, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables): bool
-    {
+    protected function validateField(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $field,
+        array &$variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): bool {
         /**
          * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
          * (that depends on each object), it can't resolve this functionality
@@ -68,23 +85,62 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         // Check for errors first, warnings and deprecations then
         $success = true;
         if ($schemaValidationErrors = $objectTypeResolver->resolveFieldValidationErrorQualifiedEntries($field, $variables)) {
-            $schemaErrors = array_merge(
-                $schemaErrors,
-                $schemaValidationErrors
-            );
+            foreach ($schemaValidationErrors as $errorMessage) {
+                $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                    new SchemaFeedback(
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::E1,
+                            [
+                                $errorMessage,
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $relationalTypeResolver,
+                        $field,
+                        $this->directive,
+                    )
+                );
+            }
             $success = false;
         }
         if ($schemaValidationWarnings = $objectTypeResolver->resolveFieldValidationWarningQualifiedEntries($field, $variables)) {
-            $schemaWarnings = array_merge(
-                $schemaWarnings,
-                $schemaValidationWarnings
-            );
+            foreach ($schemaValidationWarnings as $warningMessage) {
+                $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
+                    new SchemaFeedback(
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::W1,
+                            [
+                                $warningMessage,
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $relationalTypeResolver,
+                        $field,
+                        $this->directive,
+                    )
+                );
+            }
         }
         if ($schemaValidationDeprecations = $objectTypeResolver->resolveFieldDeprecationQualifiedEntries($field, $variables)) {
-            $schemaDeprecations = array_merge(
-                $schemaDeprecations,
-                $schemaValidationDeprecations
-            );
+            foreach ($schemaValidationDeprecations as $deprecationMessage) {
+                $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
+                    new SchemaFeedback(
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::D1,
+                            [
+                                $deprecationMessage,
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $relationalTypeResolver,
+                        $field,
+                        $this->directive,
+                    )
+                );
+            }
         }
         return $success;
     }
