@@ -787,26 +787,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return null;
     }
 
-    // @todo Return FeedbackItemResolution instead of strings here, and bubble up directly
-    // Then remove code below
-    // /**
-    //  * Return an error to indicate that no fieldResolver processes this field,
-    //  * which is different than returning a null value.
-    //  * Needed for compatibility with CustomPostUnionTypeResolver
-    //  * (so that data-fields aimed for another post_type are not retrieved)
-    //  */
-    // protected function getValidationFailedErrorMessage(string $fieldName, array $validationDescriptions): string
-    // {
-    //     if (count($validationDescriptions) == 1) {
-    //         return $validationDescriptions[0];
-    //     }
-    //     return sprintf(
-    //         $this->__('Field \'%s\' could not be processed due to previous error(s): \'%s\'', 'component-model'),
-    //         $fieldName,
-    //         implode($this->__('\', \'', 'component-model'), $validationDescriptions)
-    //     );
-    // }
-
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
     {
         $cacheKey = $global ? 'global' : 'non-global';
