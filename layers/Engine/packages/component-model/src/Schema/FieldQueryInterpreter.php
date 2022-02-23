@@ -768,24 +768,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $objectTypeResolver = $relationalTypeResolver;
         if ($fieldOrDirectiveArgs) {
             foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
-                // Validate it
-                if (
-                    $maybeErrors = $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema(
-                        $objectTypeResolver,
-                        $argValue,
-                        $variables,
-                        $objectTypeFieldResolutionFeedbackStore,
-                    )
-                ) {
-                    foreach ($maybeErrors as $schemaError) {
-                        array_unshift($schemaError[Tokens::PATH], $fieldOrDirective);
-                        $this->prependPathOnNestedErrors($schemaError, $fieldOrDirective);
-                        $schemaErrors[] = $schemaError;
-                    }
-                    // Because it's an error, set the value to null, so it will be filtered out
-                    $fieldOrDirectiveArgs[$argName] = null;
-                }
-                // Find warnings and deprecations
+                // Validate it, and extract warnings and deprecations
+                $this->collectFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
                 $this->collectFieldArgumentValueWarningQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
                 $this->collectFieldArgumentValueDeprecationQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
             }
@@ -1902,17 +1886,18 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldArgValue;
     }
 
-    protected function resolveFieldArgumentValueErrorQualifiedEntriesForSchema(
+    protected function collectFieldArgumentValueErrorQualifiedEntriesForSchema(
         ObjectTypeResolverInterface $objectTypeResolver,
         mixed $fieldArgValue,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
+    ): void {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
-            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables, $objectTypeFieldResolutionFeedbackStore) {
-                return $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables, $objectTypeFieldResolutionFeedbackStore);
-            }, $fieldArgValue)));
+            foreach ($fieldArgValue as $fieldArgValueElem) {
+                $this->collectFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables, $objectTypeFieldResolutionFeedbackStore);
+            }
+            return;
         }
 
         // If the result fieldArgValue is a string (i.e. not numeric), and it has brackets (...),
@@ -1927,15 +1912,13 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
             // If there is no "(" or ")", or if the ")" is not at the end, of if the "(" is at the beginning, then it's simply a string
             if ($fieldArgsClosingSymbolPos !== (strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_FIELDARGS_CLOSING)) || $fieldArgsOpeningSymbolPos === false || $fieldArgsOpeningSymbolPos === 0) {
-                return [];
+                return;
             }
 
             // If it reached here, it's a field! Validate it, or show an error
             $objectTypeResolver->collectFieldValidationErrorQualifiedEntries($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
-            return [];
+            return;
         }
-
-        return [];
     }
 
     protected function collectFieldArgumentValueWarningQualifiedEntriesForSchema(
