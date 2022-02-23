@@ -60,7 +60,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         $code = (count($capabilities) === 1)
             ? ($isValidatingDirective ? FeedbackItemProvider::E1 : FeedbackItemProvider::E2)
             : ($isValidatingDirective ? FeedbackItemProvider::E3 : FeedbackItemProvider::E4);
-            
+
         return new FeedbackItemResolution(
             FeedbackItemProvider::class,
             $code,

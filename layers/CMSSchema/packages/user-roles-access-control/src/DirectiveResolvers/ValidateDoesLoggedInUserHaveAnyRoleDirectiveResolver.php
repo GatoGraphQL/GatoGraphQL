@@ -60,7 +60,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         $code = (count($roles) === 1)
             ? ($isValidatingDirective ? FeedbackItemProvider::E5 : FeedbackItemProvider::E6)
             : ($isValidatingDirective ? FeedbackItemProvider::E7 : FeedbackItemProvider::E8);
-            
+
         return new FeedbackItemResolution(
             FeedbackItemProvider::class,
             $code,
