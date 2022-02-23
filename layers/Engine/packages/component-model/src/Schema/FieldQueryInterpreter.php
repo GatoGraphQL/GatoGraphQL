@@ -1562,8 +1562,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $composedFieldArgTypeName
                     );
                 }
-                // @todo Check if to uncomment this
-                // if ($fieldArgError === null) {
+                if ($fieldArgError === null) {
                     $maybeEncodedValue = $fieldArgs[$failedCastingFieldArgName] instanceof stdClass || is_array($fieldArgs[$failedCastingFieldArgName])
                         ? json_encode($fieldArgs[$failedCastingFieldArgName])
                         : $fieldArgs[$failedCastingFieldArgName];
@@ -1577,15 +1576,15 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                             $composedFieldArgTypeName
                         ]
                     );
-                // } else {
-                //     $feedbackItemResolution = new FeedbackItemResolution(
-                //         GenericFeedbackItemProvider::class,
-                //         GenericFeedbackItemProvider::E1,
-                //         [
-                //             $fieldArgError
-                //         ]
-                //     );
-                // }
+                } else {
+                    $feedbackItemResolution = new FeedbackItemResolution(
+                        GenericFeedbackItemProvider::class,
+                        GenericFeedbackItemProvider::E1,
+                        [
+                            $fieldArgError->getMessage(),
+                        ]
+                    );
+                }
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         $feedbackItemResolution,
