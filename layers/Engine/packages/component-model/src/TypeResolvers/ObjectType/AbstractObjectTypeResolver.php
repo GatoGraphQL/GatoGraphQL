@@ -292,11 +292,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
-
+        
+        // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrorQualifiedEntries, so don't duplicate output
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
             $validField,
             $fieldName,
-        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
         return $executableObjectTypeFieldResolver->getFieldTypeResolver($this, $fieldName);
     }
 
@@ -310,10 +312,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
+        // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrorQualifiedEntries, so don't duplicate output
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
             $validField,
             $fieldName,
-        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
         return $executableObjectTypeFieldResolver->getFieldTypeModifiers($this, $fieldName);
     }
 
@@ -327,10 +331,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
+        // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrorQualifiedEntries, so don't duplicate output
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
             $validField,
             $fieldName,
-        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
         return $executableObjectTypeFieldResolver->getFieldMutationResolver($this, $fieldName);
     }
 
@@ -340,6 +346,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
+
+        // @todo Hack to provide needed vars
         $variables = [];
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
