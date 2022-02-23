@@ -155,18 +155,20 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      *
      * @param array<string, mixed> $fieldArgs
      */
-    public function getValidationErrorDescriptions(
+    public function collectValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs
-    ): array {
+        array $fieldArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
-        return $aliasedObjectTypeFieldResolver->getValidationErrorDescriptions(
+        $aliasedObjectTypeFieldResolver->collectValidationErrorDescriptions(
             $objectTypeResolver,
             $object,
             $this->getAliasedFieldName($fieldName),
-            $fieldArgs
+            $fieldArgs,
+            $objectTypeFieldResolutionFeedbackStore,
         );
     }
 

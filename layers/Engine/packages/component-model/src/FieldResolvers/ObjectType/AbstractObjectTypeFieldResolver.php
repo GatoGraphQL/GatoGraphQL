@@ -1129,33 +1129,27 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function getValidationErrorDescriptions(
+    public function collectValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs
-    ): array {
+        array $fieldArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // Can perform validation through checkpoints
         if ($checkpointSets = $this->getValidationCheckpointSets($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
-            $errorMessages = [];
             foreach ($checkpointSets as $checkpointSet) {
                 $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpointSet);
                 if ($feedbackItemResolution !== null) {
-                    $errorMessage = $feedbackItemResolution->getMessage();
-                    // Allow to customize the error message for the failing entity
-                    $errorMessages[] = $this->getValidationCheckpointsErrorMessage(
-                        $errorMessage,
-                        $checkpointSet,
-                        $feedbackItemResolution,
-                        $objectTypeResolver,
-                        $object,
-                        $fieldName,
-                        $fieldArgs
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            $feedbackItemResolution,
+                            LocationHelper::getNonSpecificLocation(),
+                            $objectTypeResolver
+                        )
                     );
+                    return;
                 }
-            }
-            if ($errorMessages) {
-                return $errorMessages;
             }
         }
 
@@ -1169,10 +1163,24 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $object,
                 $fieldName
             );
-            return $mutationResolver->validateErrors($mutationFieldArgs);
+            $maybeErrors = $mutationResolver->validateErrors($mutationFieldArgs);
+            foreach ($maybeErrors as $error) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::E1,
+                            [
+                                $error,
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $objectTypeResolver,
+                    )
+                );
+            }
+            return;
         }
-
-        return [];
     }
 
     /**

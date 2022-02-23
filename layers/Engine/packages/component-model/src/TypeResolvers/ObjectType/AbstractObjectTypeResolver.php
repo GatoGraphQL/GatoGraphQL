@@ -469,17 +469,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     return null;
                 }
             }
-            if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {
-                // @todo Return FeedbackItemResolution instead of strings here, and bubble up directly
-                // Then uncomment/fix code below
-                // $objectTypeFieldResolutionFeedbackStore->addError(
-                //     new ObjectTypeFieldResolutionFeedback(
-                //         $this->getValidationFailedErrorMessage($fieldName, $validationErrorDescriptions),
-                //         ErrorCodes::VALIDATION_FAILED,
-                //         LocationHelper::getNonSpecificLocation(),
-                //         $this,
-                //     )
-                // );
+            
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            $objectTypeFieldResolver->collectValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 return null;
             }
 
