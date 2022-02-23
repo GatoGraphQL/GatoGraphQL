@@ -16,6 +16,7 @@ use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
@@ -683,8 +684,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         return true;
     }
-    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
-    {
+    public function collectFieldValidationErrorDescriptions(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         /**
          * Validate all mandatory args have been provided
          */
@@ -702,7 +707,20 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 ResolverTypes::FIELD
             )
         ) {
-            return [$maybeError];
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        GenericFeedbackItemProvider::class,
+                        GenericFeedbackItemProvider::E1,
+                        [
+                            $maybeError,
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $objectTypeResolver,
+                )
+            );
+            return;
         }
 
         if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs)) {
@@ -716,7 +734,22 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     $fieldArgs
                 )
             ) {
-                return $maybeErrors;
+                foreach ($maybeErrors as $error) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                GenericFeedbackItemProvider::class,
+                                GenericFeedbackItemProvider::E1,
+                                [
+                                    $error,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $objectTypeResolver,
+                        )
+                    );
+                }
+                return;
             }
         }
 
@@ -726,15 +759,46 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
             $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
-            return $mutationResolver->validateErrors($mutationFieldArgs);
+            $maybeErrors = $mutationResolver->validateErrors($mutationFieldArgs);
+            foreach ($maybeErrors as $error) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::E1,
+                            [
+                                $error,
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $objectTypeResolver,
+                    )
+                );
+            }
+            return;
         }
 
         // Custom validations
-        return $this->doResolveSchemaValidationErrorDescriptions(
+        $maybeErrors = $this->doResolveSchemaValidationErrorDescriptions(
             $objectTypeResolver,
             $fieldName,
             $fieldArgs,
         );
+        foreach ($maybeErrors as $error) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        GenericFeedbackItemProvider::class,
+                        GenericFeedbackItemProvider::E1,
+                        [
+                            $error,
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $objectTypeResolver,
+                )
+            );
+        }
     }
 
     public function validateResolvedFieldType(

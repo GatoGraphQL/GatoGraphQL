@@ -13,7 +13,6 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
@@ -174,66 +173,48 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
         }
-        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
-            if ($maybeErrors = $executableObjectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
-                foreach ($maybeErrors as $error) {
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            new FeedbackItemResolution(
-                                GenericFeedbackItemProvider::class,
-                                GenericFeedbackItemProvider::E1,
-                                [
-                                    $error,
-                                ]
-                            ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $this,
-                        )
-                    );
-                }
-            }
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($executableObjectTypeFieldResolver === null) {
+            /**
+             * If the error happened from requesting a version that doesn't exist, show an appropriate error message
+             */
+            $useSemanticVersionConstraints = Environment::enableSemanticVersionConstraints()
+                && ($versionConstraint = $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null);
+            $errorMessage = $useSemanticVersionConstraints
+                ? sprintf(
+                    $this->__(
+                        'There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'',
+                        'component-model'
+                    ),
+                    $fieldName,
+                    $this->getMaybeNamespacedTypeName(),
+                    $versionConstraint,
+                )
+                : sprintf(
+                    $this->__(
+                        'There is no field \'%s\' on type \'%s\'',
+                        'component-model'
+                    ),
+                    $fieldName,
+                    $this->getMaybeNamespacedTypeName()
+                );
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        GenericFeedbackItemProvider::class,
+                        GenericFeedbackItemProvider::E1,
+                        [
+                            $errorMessage,
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this,
+                )
+            );
+            return;
         }
 
-        // If we reach here, no fieldResolver processes this field, which is an error
-        /**
-         * If the error happened from requesting a version that doesn't exist, show an appropriate error message
-         */
-        if (
-            Environment::enableSemanticVersionConstraints()
-            && ($versionConstraint = $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null)
-        ) {
-            $errorMessage = sprintf(
-                $this->__(
-                    'There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'',
-                    'component-model'
-                ),
-                $fieldName,
-                $this->getMaybeNamespacedTypeName(),
-                $versionConstraint,
-            );
-        } else {
-            $errorMessage = sprintf(
-                $this->__(
-                    'There is no field \'%s\' on type \'%s\'',
-                    'component-model'
-                ),
-                $fieldName,
-                $this->getMaybeNamespacedTypeName()
-            );
-        }
-        $objectTypeFieldResolutionFeedbackStore->addError(
-            new ObjectTypeFieldResolutionFeedback(
-                new FeedbackItemResolution(
-                    GenericFeedbackItemProvider::class,
-                    GenericFeedbackItemProvider::E1,
-                    [
-                        $errorMessage,
-                    ]
-                ),
-                LocationHelper::getNonSpecificLocation(),
-                $this,
-            )
-        );
+        $executableObjectTypeFieldResolver->collectFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
     }
 
     final public function collectFieldValidationWarningQualifiedEntries(
@@ -496,17 +477,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 continue;
             }
             if ($validateSchemaOnObject) {
-                if ($maybeErrors = $objectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
-                    // @todo Return FeedbackItemResolution instead of strings here, and bubble up directly
-                    // Then uncomment/fix code below
-                    // $objectTypeFieldResolutionFeedbackStore->addError(
-                    //     new ObjectTypeFieldResolutionFeedback(
-                    //         $this->getValidationFailedErrorMessage($fieldName, $maybeErrors),
-                    //         ErrorCodes::VALIDATION_FAILED,
-                    //         LocationHelper::getNonSpecificLocation(),
-                    //         $this,
-                    //     )
-                    // );
+                $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                $objectTypeFieldResolver->collectFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+                $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+                if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return null;
                 }
                 if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
