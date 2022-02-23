@@ -64,8 +64,6 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         string $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        ?array &$schemaErrors = null,
-        ?array &$schemaWarnings = null,
     ): ?array;
     public function extractDirectiveArguments(
         DirectiveResolverInterface $directiveResolver,

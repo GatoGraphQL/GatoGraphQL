@@ -511,8 +511,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         string $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        ?array &$schemaErrors = null,
-        ?array &$schemaWarnings = null,
     ): ?array {
         $variablesHash = $this->getVariablesHash($variables);
         $objectTypeResolverClass = get_class($objectTypeResolver);
@@ -614,8 +612,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $field,
             $variables,
             $objectTypeFieldResolutionFeedbackStore,
-            $schemaErrors,
-            $schemaWarnings,
         );
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         // If there is no resolver for the field, we will already have an error by now
