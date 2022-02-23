@@ -491,69 +491,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $field,
             $fieldName,
             $fieldArgs,
-            $maybeObjectErrors,
-            $maybeObjectWarnings,
-            $maybeObjectDeprecations,
         ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
 
-        // Store the warnings to be read if needed
-        if ($maybeObjectWarnings) {
-            foreach ($maybeObjectWarnings as $warningEntry) {
-                $objectTypeFieldResolutionFeedbackStore->addWarning(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            FeedbackItemProvider::class,
-                            FeedbackItemProvider::W1,
-                            [
-                                $warningEntry[Tokens::MESSAGE],
-                            ]
-                        ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
-                        $warningEntry[Tokens::EXTENSIONS] ?? [],
-                        // $field, //$warningEntry[Tokens::PATH],
-                    )
-                );
-            }
-        }
-        if ($maybeObjectErrors) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        FieldResolutionErrorFeedbackItemProvider::class,
-                        FieldResolutionErrorFeedbackItemProvider::E2,
-                        [
-                            $fieldName,
-                        ]
-                    ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this,
-                )
-            );
-            return null;
-        }
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
-        }
-        if ($maybeObjectDeprecations) {
-            foreach ($maybeObjectDeprecations as $deprecationEntry) {
-                $objectTypeFieldResolutionFeedbackStore->addDeprecation(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::D1,
-                            [
-                                $deprecationEntry[Tokens::MESSAGE],
-                            ]
-                        ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
-                        $deprecationEntry[Tokens::EXTENSIONS] ?? [],
-                        // $field, //$deprecationEntry[Tokens::PATH],
-                    )
-                );
-            }
         }
 
         foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {

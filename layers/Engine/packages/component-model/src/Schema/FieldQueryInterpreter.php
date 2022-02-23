@@ -889,7 +889,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array $expressions,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
-        $objectErrors = $objectWarnings = $objectDeprecations = [];
         $validAndResolvedField = $field;
         $fieldName = $this->getFieldName($field);
         $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments(
@@ -917,9 +916,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $validAndResolvedField,
             $fieldName,
             $fieldArgs ?? [],
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations
         ];
     }
 
