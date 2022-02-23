@@ -612,16 +612,16 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         );
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         // If there is no resolver for the field, we will already have an error by now
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return [
                 null,
                 $fieldName,
                 $fieldArgs ?? [],
             ];
         }
-        $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $variables, $objectTypeFieldResolutionFeedbackStore);
-        // Cast the values to their appropriate type. If casting fails, the value returns as null
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+        // Cast the values to their appropriate type. If casting fails, the value returns as null
         $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
 
