@@ -223,11 +223,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return;
         }
 
+        // @todo Fix: deprecations and warnings are already added with errors, then don't add again
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
             $validField,
             $fieldName,
             $fieldArgs,
-        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
         /**
          * If the field is not valid, the fieldArgs may be empty,
          * and getting warnings on the field may not work correctly
@@ -264,11 +266,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return;
         }
 
+        // @todo Fix: deprecations and warnings are already added with errors, then don't add again
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
             $validField,
             $fieldName,
             $fieldArgs,
-        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
         /**
          * If the field is not valid, the fieldArgs may be empty,
          * and getting deprecations on the field may not work correctly
