@@ -26,7 +26,7 @@ class ObjectFeedbackStore
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $field,
         string|int $objectID,
-        ?string $directive,
+        ?string $directive = null,
     ): void {
         foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
             $this->errors[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
