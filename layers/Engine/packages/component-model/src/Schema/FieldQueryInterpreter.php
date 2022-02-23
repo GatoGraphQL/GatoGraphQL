@@ -13,6 +13,7 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
@@ -1084,8 +1085,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $fieldOrDirectiveArgIsArrayOfArraysType,
                 );
                 foreach ($deprecationMessages as $deprecationMessage) {
-                    $objectTypeFieldResolutionFeedbackStore->addDeprecation(
-                        new ObjectTypeFieldResolutionFeedback(
+                    $separateSchemaInputValidationFeedbackStore->addDeprecation(
+                        new SchemaInputValidationFeedback(
                             new FeedbackItemResolution(
                                 GenericFeedbackItemProvider::class,
                                 GenericFeedbackItemProvider::D1,
@@ -1094,7 +1095,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                                 ]
                             ),
                             LocationHelper::getNonSpecificLocation(),
-                            $relationalTypeResolver,
+                            $fieldOrDirectiveArgTypeResolver,
                         )
                     );
                 }
