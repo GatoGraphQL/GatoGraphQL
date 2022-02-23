@@ -25,11 +25,11 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
-    public function resolveFieldDeprecationQualifiedEntries(
+    public function validateFieldDeprecationQualifiedEntries(
         string $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array;
+    ): void;
     public function getFieldTypeResolver(
         string $field,
         array $variables,

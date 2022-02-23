@@ -129,23 +129,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
                 );
             }
         }
-        if ($schemaValidationDeprecations = $objectTypeResolver->resolveFieldDeprecationQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore)) {
-            foreach ($schemaValidationDeprecations as $deprecationMessage) {
-                $objectTypeFieldResolutionFeedbackStore->addDeprecation(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::D1,
-                            [
-                                $deprecationMessage,
-                            ]
-                        ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $relationalTypeResolver,
-                    )
-                );
-            }
-        }
+        $objectTypeResolver->validateFieldDeprecationQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string

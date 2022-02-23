@@ -272,14 +272,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $schemaWarnings;
     }
 
-    final public function resolveFieldDeprecationQualifiedEntries(
+    final public function validateFieldDeprecationQualifiedEntries(
         string $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
+    ): void {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
-            return [];
+            return;
         }
 
         list(
@@ -292,7 +292,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * and getting deprecations on the field may not work correctly
          */
         if ($validField === null) {
-            return [];
+            return;
         }
         if ($maybeDeprecationMessages = $executableObjectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
             foreach ($maybeDeprecationMessages as $deprecationMessage) {
@@ -311,7 +311,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 );
             }
         }
-        return $schemaDeprecations;
     }
 
     final public function getFieldTypeResolver(
