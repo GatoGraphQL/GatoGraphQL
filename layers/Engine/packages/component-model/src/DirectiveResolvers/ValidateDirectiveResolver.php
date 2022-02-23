@@ -8,8 +8,10 @@ use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterfa
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -58,8 +60,20 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         array &$failedDataFields,
     ): void {
         foreach ($dataFields as $field) {
-            $success = $this->validateField($relationalTypeResolver, $field, $variables, $engineIterationFeedbackStore);
-            if (!$success) {
+            $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            $this->validateField(
+                $relationalTypeResolver,
+                $field,
+                $variables,
+                $objectTypeFieldResolutionFeedbackStore
+            );
+            $engineIterationFeedbackStore->schemaFeedbackStore->incorporate(
+                $objectTypeFieldResolutionFeedbackStore,
+                $relationalTypeResolver,
+                $field,
+                $this->directive
+            );
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 $failedDataFields[] = $field;
             }
         }
@@ -69,25 +83,23 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $field,
         array &$variables,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): bool {
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         /**
          * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
          * (that depends on each object), it can't resolve this functionality
          */
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
-            return true;
+            return;
         }
 
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
 
-        // Check for errors first, warnings and deprecations then
-        $success = true;
         if ($schemaValidationErrors = $objectTypeResolver->resolveFieldValidationErrorQualifiedEntries($field, $variables)) {
             foreach ($schemaValidationErrors as $errorMessage) {
-                $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                    new SchemaFeedback(
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             GenericFeedbackItemProvider::class,
                             GenericFeedbackItemProvider::E1,
@@ -97,17 +109,14 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
                         ),
                         LocationHelper::getNonSpecificLocation(),
                         $relationalTypeResolver,
-                        $field,
-                        $this->directive,
                     )
                 );
             }
-            $success = false;
         }
         if ($schemaValidationWarnings = $objectTypeResolver->resolveFieldValidationWarningQualifiedEntries($field, $variables)) {
             foreach ($schemaValidationWarnings as $warningMessage) {
-                $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
-                    new SchemaFeedback(
+                $objectTypeFieldResolutionFeedbackStore->addWarning(
+                    new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             GenericFeedbackItemProvider::class,
                             GenericFeedbackItemProvider::W1,
@@ -117,16 +126,14 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
                         ),
                         LocationHelper::getNonSpecificLocation(),
                         $relationalTypeResolver,
-                        $field,
-                        $this->directive,
                     )
                 );
             }
         }
         if ($schemaValidationDeprecations = $objectTypeResolver->resolveFieldDeprecationQualifiedEntries($field, $variables)) {
             foreach ($schemaValidationDeprecations as $deprecationMessage) {
-                $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
-                    new SchemaFeedback(
+                $objectTypeFieldResolutionFeedbackStore->addDeprecation(
+                    new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             GenericFeedbackItemProvider::class,
                             GenericFeedbackItemProvider::D1,
@@ -136,13 +143,10 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
                         ),
                         LocationHelper::getNonSpecificLocation(),
                         $relationalTypeResolver,
-                        $field,
-                        $this->directive,
                     )
                 );
             }
         }
-        return $success;
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
