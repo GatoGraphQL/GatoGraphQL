@@ -918,7 +918,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $schemaInputValidationFeedbackStore,
             $forSchema
         );
-        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation($schemaInputValidationFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation(
+            $schemaInputValidationFeedbackStore,
+            $relationalTypeResolver,
+        );
         return $castDirectiveArguments;
     }
 
@@ -953,7 +956,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $schemaInputValidationFeedbackStore,
             $forSchema
         );
-        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation($schemaInputValidationFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation(
+            $schemaInputValidationFeedbackStore,
+            $objectTypeResolver,
+        );
         return $castFieldArguments;
     }
 

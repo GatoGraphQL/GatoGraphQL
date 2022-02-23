@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+
 class ObjectTypeFieldResolutionFeedbackStore
 {
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
@@ -50,32 +52,68 @@ class ObjectTypeFieldResolutionFeedbackStore
 
     public function incorporateSchemaInputValidation(
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        RelationalTypeResolverInterface $relationalTypeResolver,
     ): void {
-        // @todo Implement incorporateSchemaInputValidationFeedbackStore
-        // $this->errors = array_merge(
-        //     $this->errors,
-        //     $schemaInputValidationFeedbackStore->getErrors()
-        // );
-        // $this->warnings = array_merge(
-        //     $this->warnings,
-        //     $schemaInputValidationFeedbackStore->getWarnings()
-        // );
-        // $this->deprecations = array_merge(
-        //     $this->deprecations,
-        //     $schemaInputValidationFeedbackStore->getDeprecations()
-        // );
-        // $this->notices = array_merge(
-        //     $this->notices,
-        //     $schemaInputValidationFeedbackStore->getNotices()
-        // );
-        // $this->logs = array_merge(
-        //     $this->logs,
-        //     $schemaInputValidationFeedbackStore->getLogs()
-        // );
-        // $this->traces = array_merge(
-        //     $this->traces,
-        //     $schemaInputValidationFeedbackStore->getTraces()
-        // );
+        $this->errors = array_merge(
+            $this->errors,
+            array_map(
+                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
+                    $schemaInputValidationFeedback,
+                    $relationalTypeResolver,
+                ),
+                $schemaInputValidationFeedbackStore->getErrors()
+            )
+        );
+        $this->warnings = array_merge(
+            $this->warnings,
+            array_map(
+                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
+                    $schemaInputValidationFeedback,
+                    $relationalTypeResolver,
+                ),
+                $schemaInputValidationFeedbackStore->getWarnings()
+            )
+        );
+        $this->deprecations = array_merge(
+            $this->deprecations,
+            array_map(
+                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
+                    $schemaInputValidationFeedback,
+                    $relationalTypeResolver,
+                ),
+                $schemaInputValidationFeedbackStore->getDeprecations()
+            )
+        );
+        $this->notices = array_merge(
+            $this->notices,
+            array_map(
+                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
+                    $schemaInputValidationFeedback,
+                    $relationalTypeResolver,
+                ),
+                $schemaInputValidationFeedbackStore->getNotices()
+            )
+        );
+        $this->logs = array_merge(
+            $this->logs,
+            array_map(
+                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
+                    $schemaInputValidationFeedback,
+                    $relationalTypeResolver,
+                ),
+                $schemaInputValidationFeedbackStore->getLogs()
+            )
+        );
+        $this->traces = array_merge(
+            $this->traces,
+            array_map(
+                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
+                    $schemaInputValidationFeedback,
+                    $relationalTypeResolver,
+                ),
+                $schemaInputValidationFeedbackStore->getTraces()
+            )
+        );
     }
 
     /**
