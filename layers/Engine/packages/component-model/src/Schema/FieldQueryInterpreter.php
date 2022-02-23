@@ -1315,7 +1315,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 return null;
             }
-            return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $field, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
+            return $castedFieldArgs;
         }
         return $fieldArgs;
     }
@@ -1343,7 +1343,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
-        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $field, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
+        return $castedFieldArgs;
     }
 
     protected function validateAndFilterCastDirectiveArguments(
@@ -1368,16 +1368,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 (!is_array($fieldArgValue) && GeneralUtils::isError($fieldArgValue))
                 || (is_array($fieldArgValue) && !empty($this->getFailedCastingFieldArgs($fieldArgValue)))
         );
-    }
-
-    protected function validateAndFilterCastFieldArguments(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        array $castedFieldArgs,
-        string $field,
-        array $fieldArgs,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
-        return $castedFieldArgs;
     }
 
     /**
