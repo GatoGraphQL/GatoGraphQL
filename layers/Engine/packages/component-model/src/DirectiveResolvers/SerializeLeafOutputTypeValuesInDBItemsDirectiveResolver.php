@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\LeafOutputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
@@ -75,7 +76,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
             $targetObjectTypeResolver = $relationalTypeResolver;
         }
 
-        foreach (array_keys($idsDataFields) as $id) {
+        foreach ($idsDataFields as $id => $dataFields) {
             // Obtain its ID and the required data-fields for that ID
             $object = $objectIDItems[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
@@ -86,9 +87,18 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
             if ($isUnionTypeResolver) {
                 $targetObjectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
             }
-            $dataFields = $idsDataFields[(string)$id]['direct'];
-            foreach ($dataFields as $field) {
-                $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field);
+            foreach ($dataFields['direct'] as $field) {
+                $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+                $engineIterationFeedbackStore->objectFeedbackStore->incorporate(
+                    $separateObjectTypeFieldResolutionFeedbackStore,
+                    $targetObjectTypeResolver,
+                    $field,
+                    $id
+                );
+                if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                    continue;
+                }
                 if (!($fieldTypeResolver instanceof LeafOutputTypeResolverInterface)) {
                     continue;
                 }

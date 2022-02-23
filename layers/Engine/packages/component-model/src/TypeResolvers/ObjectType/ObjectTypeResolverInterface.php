@@ -30,7 +30,11 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
-    public function getFieldTypeResolver(string $field): ?ConcreteTypeResolverInterface;
+    public function getFieldTypeResolver(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?ConcreteTypeResolverInterface;
     public function getFieldTypeModifiers(string $field): ?int;
     public function getFieldMutationResolver(string $field): ?MutationResolverInterface;
     public function isFieldAMutation(string $field): ?bool;

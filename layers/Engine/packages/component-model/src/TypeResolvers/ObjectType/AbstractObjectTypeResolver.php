@@ -293,8 +293,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $schemaDeprecations;
     }
 
-    final public function getFieldTypeResolver(string $field): ?ConcreteTypeResolverInterface
-    {
+    final public function getFieldTypeResolver(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?ConcreteTypeResolverInterface {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
             return null;
@@ -303,7 +306,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         list(
             $validField,
             $fieldName,
-        ) = $this->dissectFieldForSchema($field);
+        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         return $executableObjectTypeFieldResolver->getFieldTypeResolver($this, $fieldName);
     }
 
