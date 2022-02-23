@@ -1986,6 +1986,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
             $objectTypeResolver->collectFieldDeprecationQualifiedEntries($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+            return [];
         }
 
         return [];
