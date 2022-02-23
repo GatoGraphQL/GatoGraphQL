@@ -1114,21 +1114,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    protected function getValidationCheckpointsErrorMessage(
-        string $errorMessage,
-        array $checkpointSet,
-        FeedbackItemResolution $feedbackItemResolution,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        string $fieldName,
-        array $fieldArgs
-    ): string {
-        return $errorMessage;
-    }
-
-    /**
-     * @param array<string, mixed> $fieldArgs
-     */
     public function collectValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
