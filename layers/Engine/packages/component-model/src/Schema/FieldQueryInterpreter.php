@@ -1054,12 +1054,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
-                $this->setCastingErrorsForArgument(
-                    $fieldOrDirectiveArgs,
-                    $failedCastingFieldOrDirectiveArgErrors,
-                    $argName,
-                    $separateSchemaInputValidationFeedbackStore,
-                );
                 continue;
             }
 
@@ -1074,12 +1068,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
-                $this->setCastingErrorsForArgument(
-                    $fieldOrDirectiveArgs,
-                    $failedCastingFieldOrDirectiveArgErrors,
-                    $argName,
-                    $separateSchemaInputValidationFeedbackStore,
-                );
                 continue;
             }
 
@@ -1112,34 +1100,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $fieldOrDirectiveArgs[$argName] = $coercedArgValue;
         }
         return $fieldOrDirectiveArgs;
-    }
-
-    /**
-     * @param array<string,Error> $failedCastingFieldOrDirectiveArgErrors
-     */
-    protected function setCastingErrorsForArgument(
-        array &$fieldOrDirectiveArgs,
-        array &$failedCastingFieldOrDirectiveArgErrors,
-        string $argName,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore
-    ): void {
-        $coercedArgValueErrors = [];
-        foreach ($schemaInputValidationFeedbackStore->getErrors() as $error) {
-            $coercedArgValueErrors[] = new Error(
-                'casting',
-                $error->getFeedbackItemResolution()->getMessage(),
-            );
-        }
-        $castingError = count($coercedArgValueErrors) === 1 ?
-            $coercedArgValueErrors[0]
-            : new Error(
-                'casting',
-                $this->__('Casting cannot be done due to nested errors', 'component-model'),
-                null,
-                $coercedArgValueErrors
-            );
-        $failedCastingFieldOrDirectiveArgErrors[$argName] = $castingError;
-        unset($fieldOrDirectiveArgs[$argName]);
     }
 
     /**
