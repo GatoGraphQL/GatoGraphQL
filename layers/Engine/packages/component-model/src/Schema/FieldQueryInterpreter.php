@@ -898,18 +898,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $castingObjectErrors = $castingObjectWarnings = [];
         $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($castingObjectErrors || $castingObjectWarnings) {
-            $id = $objectTypeResolver->getID($object);
-            if ($castingObjectErrors) {
-                $objectErrors[(string)$id] = $castingObjectErrors;
-            }
-            if ($castingObjectWarnings) {
-                $objectWarnings[(string)$id] = $castingObjectWarnings;
-            }
-        }
         if ($objectErrors || $separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $validAndResolvedField = null;
         } elseif ($extractedFieldArgs != $fieldArgs) {
