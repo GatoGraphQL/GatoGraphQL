@@ -863,7 +863,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $schemaWarnings[] = $schemaWarning;
                     }
                 }
-                if ($maybeDeprecations = $this->resolveFieldArgumentValueDeprecationQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables)) {
+                if ($maybeDeprecations = $this->resolveFieldArgumentValueDeprecationQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore)) {
                     foreach ($maybeDeprecations as $schemaDeprecation) {
                         array_unshift($schemaDeprecation[Tokens::PATH], $fieldOrDirective);
                         $schemaDeprecations[] = $schemaDeprecation;
@@ -2052,18 +2052,22 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return [];
     }
 
-    protected function resolveFieldArgumentValueDeprecationQualifiedEntriesForSchema(ObjectTypeResolverInterface $objectTypeResolver, mixed $fieldArgValue, ?array $variables): array
-    {
+    protected function resolveFieldArgumentValueDeprecationQualifiedEntriesForSchema(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        mixed $fieldArgValue,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
-            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables) {
-                return $this->resolveFieldArgumentValueDeprecationQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables);
+            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables, $objectTypeFieldResolutionFeedbackStore) {
+                return $this->resolveFieldArgumentValueDeprecationQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables, $objectTypeFieldResolutionFeedbackStore);
             }, $fieldArgValue)));
         }
 
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            return $objectTypeResolver->resolveFieldDeprecationQualifiedEntries($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveFieldDeprecationQualifiedEntries($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
         }
 
         return [];

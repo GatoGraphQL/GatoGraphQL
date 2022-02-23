@@ -257,8 +257,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $schemaWarnings;
     }
 
-    final public function resolveFieldDeprecationQualifiedEntries(string $field, array &$variables = null): array
-    {
+    final public function resolveFieldDeprecationQualifiedEntries(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
             return [];
@@ -271,7 +274,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $schemaErrors,
             $schemaWarnings,
             $schemaDeprecations,
-        ) = $this->dissectFieldForSchema($field);
+        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         /**
          * If the field is not valid, the fieldArgs may be empty,
          * and getting deprecations on the field may not work correctly

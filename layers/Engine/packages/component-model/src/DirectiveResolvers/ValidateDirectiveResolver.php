@@ -130,7 +130,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
                 );
             }
         }
-        if ($schemaValidationDeprecations = $objectTypeResolver->resolveFieldDeprecationQualifiedEntries($field, $variables)) {
+        if ($schemaValidationDeprecations = $objectTypeResolver->resolveFieldDeprecationQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore)) {
             foreach ($schemaValidationDeprecations as $deprecationMessage) {
                 $objectTypeFieldResolutionFeedbackStore->addDeprecation(
                     new ObjectTypeFieldResolutionFeedback(
