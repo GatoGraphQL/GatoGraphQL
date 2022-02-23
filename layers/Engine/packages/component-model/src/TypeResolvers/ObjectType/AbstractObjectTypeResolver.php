@@ -280,23 +280,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($validField === null) {
             return;
         }
-        if ($maybeDeprecationMessages = $executableObjectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
-            foreach ($maybeDeprecationMessages as $deprecationMessage) {
-                $objectTypeFieldResolutionFeedbackStore->addDeprecation(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::D1,
-                            [
-                                $deprecationMessage,
-                            ]
-                        ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
-                    )
-                );
-            }
-        }
+        $executableObjectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
     }
 
     final public function getFieldTypeResolver(
@@ -479,27 +463,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             if ($validateSchemaOnObject) {
                 $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                 $objectTypeFieldResolver->collectFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+                $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
                 $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
                 if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return null;
-                }
-                if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
-                    foreach ($maybeDeprecations as $deprecation) {
-                        $objectTypeFieldResolutionFeedbackStore->addDeprecation(
-                            new ObjectTypeFieldResolutionFeedback(
-                                new FeedbackItemResolution(
-                                    GenericFeedbackItemProvider::class,
-                                    GenericFeedbackItemProvider::D1,
-                                    [
-                                        $deprecation,
-                                    ]
-                                ),
-                                LocationHelper::getNonSpecificLocation(),
-                                $this,
-                                // $field,
-                            )
-                        );
-                    }
                 }
             }
             if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {

@@ -60,10 +60,12 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         array $fieldArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
-    /**
-     * @return string[]
-     */
-    public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
+    public function collectFieldValidationDeprecationMessages(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed> $variables

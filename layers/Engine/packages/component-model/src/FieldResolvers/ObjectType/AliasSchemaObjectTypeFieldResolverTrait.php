@@ -98,13 +98,18 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
-    {
+    public function collectFieldValidationDeprecationMessages(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
-        return $aliasedObjectTypeFieldResolver->resolveFieldValidationDeprecationMessages(
+        $aliasedObjectTypeFieldResolver->collectFieldValidationDeprecationMessages(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName),
-            $fieldArgs
+            $fieldArgs,
+            $objectTypeFieldResolutionFeedbackStore,
         );
     }
 

@@ -858,21 +858,32 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return [];
     }
 
-    public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
-    {
-        $fieldDeprecationMessages = [];
-
-        // Deprecations for the field
+    public function collectFieldValidationDeprecationMessages(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $fieldDeprecationMessage = $this->getConsolidatedFieldDeprecationMessage($objectTypeResolver, $fieldName);
         if ($fieldDeprecationMessage !== null) {
-            $fieldDeprecationMessages[] = sprintf(
-                $this->__('Field \'%s\' is deprecated: %s', 'component-model'),
-                $fieldName,
-                $fieldDeprecationMessage
+            $objectTypeFieldResolutionFeedbackStore->addDeprecation(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        GenericFeedbackItemProvider::class,
+                        GenericFeedbackItemProvider::D1,
+                        [
+                            sprintf(
+                                $this->__('Field \'%s\' is deprecated: %s', 'component-model'),
+                                $fieldName,
+                                $fieldDeprecationMessage
+                            ),
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $objectTypeResolver,
+                )
             );
         }
-
-        return $fieldDeprecationMessages;
     }
 
     /**
