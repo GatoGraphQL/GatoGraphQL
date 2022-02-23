@@ -842,12 +842,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($fieldOrDirectiveArgs) {
             foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
                 // Validate it
-                if ($maybeErrors = $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema(
-                    $objectTypeResolver,
-                    $argValue,
-                    $variables,
-                    $objectTypeFieldResolutionFeedbackStore,
-                )) {
+                if (
+                    $maybeErrors = $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema(
+                        $objectTypeResolver,
+                        $argValue,
+                        $variables,
+                        $objectTypeFieldResolutionFeedbackStore,
+                    )
+                ) {
                     foreach ($maybeErrors as $schemaError) {
                         array_unshift($schemaError[Tokens::PATH], $fieldOrDirective);
                         $this->prependPathOnNestedErrors($schemaError, $fieldOrDirective);
@@ -1994,8 +1996,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     ): array {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
-            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables, $objectTypeFieldResolutionFeedbackStore,) {
-                return $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables, $objectTypeFieldResolutionFeedbackStore,);
+            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables, $objectTypeFieldResolutionFeedbackStore) {
+                return $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables, $objectTypeFieldResolutionFeedbackStore);
             }, $fieldArgValue)));
         }
 

@@ -269,7 +269,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $nestedObjectErrors,
             $nestedObjectWarnings,
             $nestedObjectDeprecationMessages,
-        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $fields, $this->directive, $variables, $expressions, $engineIterationFeedbackStore,);
+        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $fields, $this->directive, $variables, $expressions, $engineIterationFeedbackStore);
 
         // Store the args, they may be used in `resolveDirective`
         $objectID = $relationalTypeResolver->getID($object);
@@ -294,10 +294,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         $this->directive,
                     )
                 );
-                $objectErrors[$id] = array_merge(
-                    $objectErrors[$id] ?? [],
-                    $fieldOutputKeyErrorMessages
-                );
             }
         }
         foreach ($nestedObjectWarnings as $id => $fieldOutputKeyWarningMessages) {
@@ -317,10 +313,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         $id,
                         $this->directive,
                     )
-                );
-                $objectWarnings[$id] = array_merge(
-                    $objectWarnings[$id] ?? [],
-                    $fieldOutputKeyWarningMessages
                 );
             }
         }
@@ -342,10 +334,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         $this->directive,
                     )
                 );
-                $objectDeprecations[$id] = array_merge(
-                    $objectDeprecations[$id] ?? [],
-                    $fieldOutputKeyDeprecationMessages
-                );
             }
         }
 
@@ -360,11 +348,25 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $directiveArgs
                 )
             ) {
-                foreach ($maybeErrors as $errorMessage) {
-                    $objectErrors[$objectID][] = [
-                        Tokens::PATH => [$this->directive],
-                        Tokens::MESSAGE => $errorMessage,
-                    ];
+                foreach ($fields as $field) {
+                    foreach ($maybeErrors as $errorMessage) {
+                        $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                            new ObjectFeedback(
+                                new FeedbackItemResolution(
+                                    GenericFeedbackItemProvider::class,
+                                    GenericFeedbackItemProvider::E1,
+                                    [
+                                        $errorMessage,
+                                    ]
+                                ),
+                                LocationHelper::getNonSpecificLocation(),
+                                $relationalTypeResolver,
+                                $field,
+                                $id,
+                                $this->directive,
+                            )
+                        );
+                    }
                 }
             }
         }
