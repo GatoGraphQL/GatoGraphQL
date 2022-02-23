@@ -310,8 +310,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $executableObjectTypeFieldResolver->getFieldTypeResolver($this, $fieldName);
     }
 
-    final public function getFieldTypeModifiers(string $field): ?int
-    {
+    final public function getFieldTypeModifiers(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?int {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
             return null;
@@ -320,7 +323,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         list(
             $validField,
             $fieldName,
-        ) = $this->dissectFieldForSchema($field);
+        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         return $executableObjectTypeFieldResolver->getFieldTypeModifiers($this, $fieldName);
     }
 

@@ -115,7 +115,16 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
                 }
 
                 /** @var int */
-                $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field);
+                $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+                $engineIterationFeedbackStore->objectFeedbackStore->incorporate(
+                    $separateObjectTypeFieldResolutionFeedbackStore,
+                    $targetObjectTypeResolver,
+                    $field,
+                    $id
+                );
+                if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                    continue;
+                }
                 $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
                 // Serialize the scalar/enum value stored in $dbItems
