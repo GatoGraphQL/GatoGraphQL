@@ -23,9 +23,10 @@ class ObjectTypeFieldResolutionFeedbackStore
         ObjectTypeFieldResolutionFeedbackStore|SchemaInputValidationFeedbackStore $objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore,
     ): void {
         if ($objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore instanceof ObjectTypeFieldResolutionFeedbackStore) {
-            return $this->incorporateObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore);
+            $this->incorporateObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore);
+            return;
         }
-        return $this->incorporateSchemaInputValidationFeedbackStore($objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore);
+        $this->incorporateSchemaInputValidationFeedbackStore($objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore);
     }
 
     protected function incorporateObjectTypeFieldResolutionFeedbackStore(
