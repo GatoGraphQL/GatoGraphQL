@@ -160,14 +160,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
     }
 
-    final public function resolveFieldValidationErrorQualifiedEntries(string $field, array &$variables = null): array
-    {
+    final public function resolveFieldValidationErrorQualifiedEntries(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
+    ): array {
         list(
             $validField,
             $fieldName,
             $fieldArgs,
             $schemaErrors,
-        ) = $this->dissectFieldForSchema($field);
+        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         // Dissecting the field may already fail, then already return the error
         if ($schemaErrors) {
             return $schemaErrors;

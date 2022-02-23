@@ -689,7 +689,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $schemaDeprecations,
             ];
         }
-        $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $variables, $objectTypeFieldResolutionFeedbackStore, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
@@ -770,9 +770,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $schemaErrors,
             $schemaWarnings,
         );
-        $directiveArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($relationalTypeResolver, $fieldDirective, $directiveArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
-        // Cast the values to their appropriate type. If casting fails, the value returns as null
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $directiveArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($relationalTypeResolver, $fieldDirective, $directiveArgs, $variables, $objectTypeFieldResolutionFeedbackStore, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        // Cast the values to their appropriate type. If casting fails, the value returns as null
         $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
         // Enable the directiveResolver to add its own code validations
         $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
@@ -820,8 +820,16 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
     }
 
-    protected function validateExtractedFieldOrDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldOrDirective, array $fieldOrDirectiveArgs, ?array $variables, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
-    {
+    protected function validateExtractedFieldOrDirectiveArgumentsForSchema(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldOrDirective,
+        array $fieldOrDirectiveArgs,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+        array &$schemaDeprecations
+    ): array {
         // The UnionTypeResolver cannot validate, it needs to delegate to each targetObjectTypeResolver
         // which will be done on Object, not on Schema.
         // This situation can only happen for Directive
@@ -834,7 +842,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($fieldOrDirectiveArgs) {
             foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
                 // Validate it
-                if ($maybeErrors = $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables)) {
+                if ($maybeErrors = $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema(
+                    $objectTypeResolver,
+                    $argValue,
+                    $variables,
+                    $objectTypeFieldResolutionFeedbackStore,
+                )) {
                     foreach ($maybeErrors as $schemaError) {
                         array_unshift($schemaError[Tokens::PATH], $fieldOrDirective);
                         $this->prependPathOnNestedErrors($schemaError, $fieldOrDirective);
@@ -1983,12 +1996,16 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldArgValue;
     }
 
-    protected function resolveFieldArgumentValueErrorQualifiedEntriesForSchema(ObjectTypeResolverInterface $objectTypeResolver, mixed $fieldArgValue, ?array $variables): array
-    {
+    protected function resolveFieldArgumentValueErrorQualifiedEntriesForSchema(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        mixed $fieldArgValue,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
-            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables) {
-                return $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables);
+            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables, $objectTypeFieldResolutionFeedbackStore,) {
+                return $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables, $objectTypeFieldResolutionFeedbackStore,);
             }, $fieldArgValue)));
         }
 
@@ -2008,7 +2025,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
 
             // If it reached here, it's a field! Validate it, or show an error
-            return $objectTypeResolver->resolveFieldValidationErrorQualifiedEntries($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveFieldValidationErrorQualifiedEntries($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
         }
 
         return [];
