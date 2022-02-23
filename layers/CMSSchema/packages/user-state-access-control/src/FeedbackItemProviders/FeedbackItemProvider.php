@@ -30,10 +30,10 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('You must be logged in to access directives in field(s) \'%s\' for type \'%s\'', 'user-state-access-control'),
-            self::E2 => $this->__('You must be logged in to access field(s) \'%s\' for type \'%s\'', 'user-state-access-control'),
-            self::E3 => $this->__('You must not be logged in to access directives in field(s) \'%s\' for type \'%s\'', 'user-state-access-control'),
-            self::E4 => $this->__('You must not be logged in to access field(s) \'%s\' for type \'%s\'', 'user-state-access-control'),
+            self::E1 => $this->__('You must be logged in to access directives in field(s) \'%1$s\' for type \'%2$s\'', 'user-state-access-control'),
+            self::E2 => $this->__('You must be logged in to access field(s) \'%1$s\' for type \'%2$s\'', 'user-state-access-control'),
+            self::E3 => $this->__('You must not be logged in to access directives in field(s) \'%1$s\' for type \'%2$s\'', 'user-state-access-control'),
+            self::E4 => $this->__('You must not be logged in to access field(s) \'%1$s\' for type \'%2$s\'', 'user-state-access-control'),
             default => parent::getMessagePlaceholder($code),
         };
     }
