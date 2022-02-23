@@ -177,10 +177,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
             if ($maybeErrors = $executableObjectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeErrors as $error) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$field],
-                        Tokens::MESSAGE => $error,
-                    ];
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                GenericFeedbackItemProvider::class,
+                                GenericFeedbackItemProvider::D1,
+                                [
+                                    $error,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                        )
+                    );
                 }
             }
             return $schemaErrors;
@@ -245,10 +254,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
         if ($maybeWarnings = $executableObjectTypeFieldResolver->resolveFieldValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
             foreach ($maybeWarnings as $warning) {
-                $schemaWarnings[] = [
-                    Tokens::PATH => [$field],
-                    Tokens::MESSAGE => $warning,
-                ];
+                $objectTypeFieldResolutionFeedbackStore->addWarning(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::D1,
+                            [
+                                $warning,
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $this,
+                    )
+                );
             }
         }
         return $schemaWarnings;
@@ -278,10 +296,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
         if ($maybeDeprecationMessages = $executableObjectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
             foreach ($maybeDeprecationMessages as $deprecationMessage) {
-                $schemaDeprecations[] = [
-                    Tokens::PATH => [$field],
-                    Tokens::MESSAGE => $deprecationMessage,
-                ];
+                $objectTypeFieldResolutionFeedbackStore->addDeprecation(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::D1,
+                            [
+                                $deprecationMessage,
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $this,
+                    )
+                );
             }
         }
         return $schemaDeprecations;
@@ -441,7 +468,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 )
             );
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        
+
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
