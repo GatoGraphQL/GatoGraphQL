@@ -71,9 +71,8 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directive,
-        ?array $variables = null,
-        ?array &$schemaErrors = null,
-        ?array &$schemaWarnings = null,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
     public function extractFieldArgumentsForSchema(
         ObjectTypeResolverInterface $objectTypeResolver,
