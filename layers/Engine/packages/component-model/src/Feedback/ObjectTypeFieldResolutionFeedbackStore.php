@@ -20,6 +20,15 @@ class ObjectTypeFieldResolutionFeedbackStore
     private array $traces = [];
 
     public function incorporate(
+        ObjectTypeFieldResolutionFeedbackStore|SchemaInputValidationFeedbackStore $objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore,
+    ): void {
+        if ($objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore instanceof ObjectTypeFieldResolutionFeedbackStore) {
+            return $this->incorporateObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore);
+        }
+        return $this->incorporateSchemaInputValidationFeedbackStore($objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore);
+    }
+
+    protected function incorporateObjectTypeFieldResolutionFeedbackStore(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $this->errors = array_merge(
@@ -46,6 +55,36 @@ class ObjectTypeFieldResolutionFeedbackStore
             $this->traces,
             $objectTypeFieldResolutionFeedbackStore->getTraces()
         );
+    }
+
+    protected function incorporateSchemaInputValidationFeedbackStore(
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void {
+        // @todo Implement incorporateSchemaInputValidationFeedbackStore
+        // $this->errors = array_merge(
+        //     $this->errors,
+        //     $schemaInputValidationFeedbackStore->getErrors()
+        // );
+        // $this->warnings = array_merge(
+        //     $this->warnings,
+        //     $schemaInputValidationFeedbackStore->getWarnings()
+        // );
+        // $this->deprecations = array_merge(
+        //     $this->deprecations,
+        //     $schemaInputValidationFeedbackStore->getDeprecations()
+        // );
+        // $this->notices = array_merge(
+        //     $this->notices,
+        //     $schemaInputValidationFeedbackStore->getNotices()
+        // );
+        // $this->logs = array_merge(
+        //     $this->logs,
+        //     $schemaInputValidationFeedbackStore->getLogs()
+        // );
+        // $this->traces = array_merge(
+        //     $this->traces,
+        //     $schemaInputValidationFeedbackStore->getTraces()
+        // );
     }
 
     /**

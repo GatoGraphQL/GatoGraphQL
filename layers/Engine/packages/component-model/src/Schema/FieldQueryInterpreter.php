@@ -909,14 +909,17 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         bool $forSchema
     ): array {
         $directiveArgSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver);
-        return $this->castFieldOrDirectiveArguments(
+        $schemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $castDirectiveArguments = $this->castFieldOrDirectiveArguments(
             $relationalTypeResolver,
             $directiveArgs,
             $directiveArgSchemaDefinition,
             $failedCastingDirectiveArgErrors,
-            $objectTypeFieldResolutionFeedbackStore,
+            $schemaInputValidationFeedbackStore,
             $forSchema
         );
+        $objectTypeFieldResolutionFeedbackStore->incorporate($schemaInputValidationFeedbackStore);
+        return $castDirectiveArguments;
     }
 
     /**
@@ -941,14 +944,17 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
             return null;
         }
-        return $this->castFieldOrDirectiveArguments(
+        $schemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $castFieldArguments = $this->castFieldOrDirectiveArguments(
             $objectTypeResolver,
             $fieldArgs,
             $fieldArgSchemaDefinition,
             $failedCastingFieldArgErrors,
-            $objectTypeFieldResolutionFeedbackStore,
+            $schemaInputValidationFeedbackStore,
             $forSchema
         );
+        $objectTypeFieldResolutionFeedbackStore->incorporate($schemaInputValidationFeedbackStore);
+        return $castFieldArguments;
     }
 
     /**
@@ -959,7 +965,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array $fieldOrDirectiveArgs,
         array $fieldOrDirectiveArgSchemaDefinition,
         array &$failedCastingFieldOrDirectiveArgErrors,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
         bool $forSchema
     ): array {
         // Cast all argument values
@@ -1046,6 +1052,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
                 $separateSchemaInputValidationFeedbackStore,
             );
+            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 $this->setCastingErrorsForArgument(
                     $fieldOrDirectiveArgs,
@@ -1057,6 +1064,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
 
             // Cast (or "coerce" in GraphQL terms) the value
+            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
@@ -1064,8 +1072,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $separateSchemaInputValidationFeedbackStore,
             );
-
-            // Check if the coercion produced errors
+            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 $this->setCastingErrorsForArgument(
                     $fieldOrDirectiveArgs,
@@ -1085,7 +1092,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $fieldOrDirectiveArgIsArrayOfArraysType,
                 );
                 foreach ($deprecationMessages as $deprecationMessage) {
-                    $separateSchemaInputValidationFeedbackStore->addDeprecation(
+                    $schemaInputValidationFeedbackStore->addDeprecation(
                         new SchemaInputValidationFeedback(
                             new FeedbackItemResolution(
                                 GenericFeedbackItemProvider::class,
