@@ -222,8 +222,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ];
     }
 
-    final public function resolveFieldValidationWarningQualifiedEntries(string $field, array &$variables = null): array
-    {
+    final public function resolveFieldValidationWarningQualifiedEntries(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
             return [];
@@ -235,7 +238,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldArgs,
             $schemaErrors,
             $schemaWarnings,
-        ) = $this->dissectFieldForSchema($field);
+        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         /**
          * If the field is not valid, the fieldArgs may be empty,
          * and getting warnings on the field may not work correctly
