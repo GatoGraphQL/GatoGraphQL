@@ -68,6 +68,11 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         return $this->field;
     }
 
+    public function getDirective(): ?string
+    {
+        return $this->directive;
+    }
+
     /**
      * @return SchemaFeedbackInterface[]
      */
