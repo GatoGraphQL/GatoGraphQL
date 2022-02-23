@@ -619,7 +619,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldArgs ?? [],
             ];
         }
-        $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $variables, $objectTypeFieldResolutionFeedbackStore, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $variables, $objectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
@@ -698,7 +698,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $variables,
             $objectTypeFieldResolutionFeedbackStore,
         );
-        $directiveArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($relationalTypeResolver, $fieldDirective, $directiveArgs, $variables, $objectTypeFieldResolutionFeedbackStore, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $directiveArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($relationalTypeResolver, $fieldDirective, $directiveArgs, $variables, $objectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
         // Enable the directiveResolver to add its own code validations
@@ -753,9 +753,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array $fieldOrDirectiveArgs,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations
     ): array {
         // The UnionTypeResolver cannot validate, it needs to delegate to each targetObjectTypeResolver
         // which will be done on Object, not on Schema.
