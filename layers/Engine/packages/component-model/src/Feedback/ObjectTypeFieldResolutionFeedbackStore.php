@@ -20,16 +20,6 @@ class ObjectTypeFieldResolutionFeedbackStore
     private array $traces = [];
 
     public function incorporate(
-        ObjectTypeFieldResolutionFeedbackStore|SchemaInputValidationFeedbackStore $objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore,
-    ): void {
-        if ($objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore instanceof ObjectTypeFieldResolutionFeedbackStore) {
-            $this->incorporateObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore);
-            return;
-        }
-        $this->incorporateSchemaInputValidationFeedbackStore($objectTypeFieldResolutionOrSchemaInputValidationFeedbackStore);
-    }
-
-    protected function incorporateObjectTypeFieldResolutionFeedbackStore(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $this->errors = array_merge(
@@ -58,7 +48,7 @@ class ObjectTypeFieldResolutionFeedbackStore
         );
     }
 
-    protected function incorporateSchemaInputValidationFeedbackStore(
+    public function incorporateSchemaInputValidation(
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): void {
         // @todo Implement incorporateSchemaInputValidationFeedbackStore
