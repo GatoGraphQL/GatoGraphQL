@@ -6,3 +6,6 @@ services:
 
     PoPCMSSchema\UserRolesAccessControl\Hooks\:
         resource: '../src/Hooks/*'
+
+    PoPCMSSchema\UserRolesAccessControl\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'
