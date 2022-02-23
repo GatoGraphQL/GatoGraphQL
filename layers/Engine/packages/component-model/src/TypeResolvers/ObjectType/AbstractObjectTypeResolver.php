@@ -422,7 +422,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldArgs,
             $schemaErrors,
             $schemaWarnings,
-        ) = $this->dissectFieldForSchema($field);
+        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
 
         // Store the warnings to be read if needed
         if ($schemaWarnings) {
