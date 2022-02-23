@@ -112,23 +112,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
                 );
             }
         }
-        if ($schemaValidationWarnings = $objectTypeResolver->resolveFieldValidationWarningQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore)) {
-            foreach ($schemaValidationWarnings as $warningMessage) {
-                $objectTypeFieldResolutionFeedbackStore->addWarning(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::W1,
-                            [
-                                $warningMessage,
-                            ]
-                        ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $relationalTypeResolver,
-                    )
-                );
-            }
-        }
+        $objectTypeResolver->collectFieldValidationWarningQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         $objectTypeResolver->collectFieldDeprecationQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
 

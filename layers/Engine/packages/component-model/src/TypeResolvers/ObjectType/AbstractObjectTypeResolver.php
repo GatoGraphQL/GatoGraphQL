@@ -230,14 +230,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ];
     }
 
-    final public function resolveFieldValidationWarningQualifiedEntries(
+    final public function collectFieldValidationWarningQualifiedEntries(
         string $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
+    ): void {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
-            return [];
+            return;
         }
 
         list(
@@ -250,7 +250,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * and getting warnings on the field may not work correctly
          */
         if ($validField === null) {
-            return [];
+            return;
         }
         if ($maybeWarnings = $executableObjectTypeFieldResolver->resolveFieldValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
             foreach ($maybeWarnings as $warning) {
@@ -269,7 +269,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 );
             }
         }
-        return $schemaWarnings;
     }
 
     final public function collectFieldDeprecationQualifiedEntries(
