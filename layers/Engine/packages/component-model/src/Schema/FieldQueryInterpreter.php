@@ -923,7 +923,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     }
 
     /**
-     * @param array<string,Error> $failedCastingFieldArgErrors
+     * @param array<string,string> $failedCastingFieldArgErrors
      */
     protected function castFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -1120,7 +1120,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     }
 
     /**
-     * @param array<string,Error> $failedCastingFieldArgErrors
+     * @param array<string,string> $failedCastingFieldArgErrors
      */
     protected function castFieldArgumentsForSchema(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -1147,7 +1147,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     }
 
     /**
-     * @param array<string,Error> $failedCastingFieldArgErrors
+     * @param array<string,string> $failedCastingFieldArgErrors
      */
     protected function castFieldArgumentsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -1469,7 +1469,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     }
 
     /**
-     * @param array<string,Error> $failedCastingFieldArgErrors
+     * @param array<string,string> $failedCastingFieldArgErrors
      */
     protected function validateAndFilterCastFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -1513,7 +1513,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
             /** @var array */
             $fieldArgNameSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
-            foreach ($failedCastingFieldArgErrors as $failedCastingFieldArgName => $fieldArgError) {
+            foreach ($failedCastingFieldArgErrors as $failedCastingFieldArgName => $fieldArgErrorMessage) {
                 // If it is Error, also show the error message
                 $fieldArgIsArrayType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::IS_ARRAY] ?? false;
                 $fieldArgIsArrayOfArraysType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
@@ -1530,7 +1530,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $composedFieldArgTypeName
                     );
                 }
-                if ($fieldArgError === null) {
+                if ($fieldArgErrorMessage === null) {
                     $maybeEncodedValue = $fieldArgs[$failedCastingFieldArgName] instanceof stdClass || is_array($fieldArgs[$failedCastingFieldArgName])
                         ? json_encode($fieldArgs[$failedCastingFieldArgName])
                         : $fieldArgs[$failedCastingFieldArgName];
@@ -1549,7 +1549,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         GenericFeedbackItemProvider::class,
                         GenericFeedbackItemProvider::E1,
                         [
-                            $fieldArgError->getMessage(),
+                            $fieldArgErrorMessage,
                         ]
                     );
                 }
