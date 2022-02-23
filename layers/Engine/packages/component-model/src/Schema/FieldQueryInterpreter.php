@@ -608,7 +608,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $objectTypeResolver,
             $field,
             $variables,
-            $objectTypeFieldResolutionFeedbackStore,
+            $separateObjectTypeFieldResolutionFeedbackStore,
         );
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         // If there is no resolver for the field, we will already have an error by now
