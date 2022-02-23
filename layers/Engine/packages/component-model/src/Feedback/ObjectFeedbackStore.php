@@ -26,6 +26,7 @@ class ObjectFeedbackStore
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $field,
         string|int $objectID,
+        ?string $directive,
     ): void {
         foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
             $this->errors[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
@@ -33,6 +34,7 @@ class ObjectFeedbackStore
                 $relationalTypeResolver,
                 $field,
                 $objectID,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
@@ -41,6 +43,7 @@ class ObjectFeedbackStore
                 $relationalTypeResolver,
                 $field,
                 $objectID,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $objectTypeFieldResolutionFeedbackDeprecation) {
@@ -49,6 +52,7 @@ class ObjectFeedbackStore
                 $relationalTypeResolver,
                 $field,
                 $objectID,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
@@ -57,6 +61,7 @@ class ObjectFeedbackStore
                 $relationalTypeResolver,
                 $field,
                 $objectID,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
@@ -65,6 +70,7 @@ class ObjectFeedbackStore
                 $relationalTypeResolver,
                 $field,
                 $objectID,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getTraces() as $objectTypeFieldResolutionFeedbackTrace) {
@@ -73,6 +79,7 @@ class ObjectFeedbackStore
                 $relationalTypeResolver,
                 $field,
                 $objectID,
+                $directive,
             );
         }
     }
