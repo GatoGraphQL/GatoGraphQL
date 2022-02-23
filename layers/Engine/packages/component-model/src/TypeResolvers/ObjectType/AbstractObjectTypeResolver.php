@@ -169,11 +169,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $validField,
             $fieldName,
             $fieldArgs,
-            $schemaErrors,
         ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         // Dissecting the field may already fail, then already return the error
-        if ($schemaErrors) {
-            return $schemaErrors;
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return [];
         }
         if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
             if ($maybeErrors = $executableObjectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
@@ -236,15 +235,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $validField,
             $fieldName,
             $fieldArgs,
-            $schemaErrors,
-            $schemaWarnings,
         ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         /**
          * If the field is not valid, the fieldArgs may be empty,
          * and getting warnings on the field may not work correctly
          */
         if ($validField === null) {
-            return $schemaWarnings;
+            return [];
         }
         if ($maybeWarnings = $executableObjectTypeFieldResolver->resolveFieldValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
             foreach ($maybeWarnings as $warning) {
@@ -271,16 +268,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $validField,
             $fieldName,
             $fieldArgs,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
         ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         /**
          * If the field is not valid, the fieldArgs may be empty,
          * and getting deprecations on the field may not work correctly
          */
         if ($validField === null) {
-            return $schemaDeprecations;
+            return [];
         }
         if ($maybeDeprecationMessages = $executableObjectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
             foreach ($maybeDeprecationMessages as $deprecationMessage) {
@@ -416,49 +410,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Get the value from a fieldResolver, from the first one who can deliver the value
         // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $object)
         // Important: $validField becomes $field: remove all invalid fieldArgs before executing `resolveValue` on the fieldResolver
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
             $field,
             $fieldName,
             $fieldArgs,
-            $schemaErrors,
-            $schemaWarnings,
-        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
 
-        // Store the warnings to be read if needed
-        if ($schemaWarnings) {
-            foreach ($schemaWarnings as $warningEntry) {
-                $objectTypeFieldResolutionFeedbackStore->addWarning(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::W1,
-                            [
-                                $warningEntry[Tokens::MESSAGE],
-                            ]
-                        ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
-                        $warningEntry[Tokens::EXTENSIONS] ?? [],
-                        // $field, //$warningEntry[Tokens::PATH],
-                    )
-                );
-            }
-        }
-
-        if ($schemaErrors) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        FieldResolutionErrorFeedbackItemProvider::class,
-                        FieldResolutionErrorFeedbackItemProvider::E2,
-                        [
-                            $fieldName,
-                        ]
-                    ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this,
-                )
-            );
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
@@ -481,6 +441,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 )
             );
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }

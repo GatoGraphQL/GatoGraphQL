@@ -601,9 +601,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
-        $schemaErrors = [];
-        $schemaWarnings = [];
-        $schemaDeprecations = [];
         $validAndResolvedField = $field;
         $fieldName = $this->getFieldName($field);
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
@@ -615,14 +612,11 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         );
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         // If there is no resolver for the field, we will already have an error by now
-        if ($schemaErrors !== [] || $objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return [
                 null,
                 $fieldName,
                 $fieldArgs ?? [],
-                $schemaErrors,
-                $schemaWarnings,
-                $schemaDeprecations,
             ];
         }
         $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $variables, $objectTypeFieldResolutionFeedbackStore, $schemaErrors, $schemaWarnings, $schemaDeprecations);
@@ -644,9 +638,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $validAndResolvedField,
             $fieldName,
             $fieldArgs,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
         ];
     }
 
