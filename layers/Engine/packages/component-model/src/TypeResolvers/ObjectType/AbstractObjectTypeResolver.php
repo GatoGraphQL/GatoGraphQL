@@ -63,10 +63,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @var array<string, array>
      */
-    private array $dissectedFieldForSchemaCache = [];
-    /**
-     * @var array<string, array>
-     */
     private array $fieldNamesResolvedByObjectTypeFieldResolver = [];
     /**
      * @var InterfaceTypeFieldResolverInterface[]|null
@@ -352,14 +348,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final protected function dissectFieldForSchema(string $field, array $variables, ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore): array
     {
-        if (!isset($this->dissectedFieldForSchemaCache[$field])) {
-            $this->dissectedFieldForSchemaCache[$field] = $this->doDissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
-        }
-        return $this->dissectedFieldForSchemaCache[$field];
-    }
-
-    private function doDissectFieldForSchema(string $field, array $variables, ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore): array
-    {
         return $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this, $field, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
 
@@ -469,7 +457,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     return null;
                 }
             }
-            
+
             $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $objectTypeFieldResolver->collectValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
             $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
