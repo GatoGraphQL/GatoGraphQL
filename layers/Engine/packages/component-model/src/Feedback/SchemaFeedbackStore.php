@@ -25,12 +25,14 @@ class SchemaFeedbackStore
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $field,
+        ?string $directive,
     ): void {
         foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
             $this->errors[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackError,
                 $relationalTypeResolver,
                 $field,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
@@ -38,6 +40,7 @@ class SchemaFeedbackStore
                 $objectTypeFieldResolutionFeedbackWarning,
                 $relationalTypeResolver,
                 $field,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $objectTypeFieldResolutionFeedbackDeprecation) {
@@ -45,6 +48,7 @@ class SchemaFeedbackStore
                 $objectTypeFieldResolutionFeedbackDeprecation,
                 $relationalTypeResolver,
                 $field,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
@@ -52,6 +56,7 @@ class SchemaFeedbackStore
                 $objectTypeFieldResolutionFeedbackNotice,
                 $relationalTypeResolver,
                 $field,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
@@ -59,6 +64,7 @@ class SchemaFeedbackStore
                 $objectTypeFieldResolutionFeedbackLog,
                 $relationalTypeResolver,
                 $field,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getTraces() as $objectTypeFieldResolutionFeedbackTrace) {
@@ -66,6 +72,7 @@ class SchemaFeedbackStore
                 $objectTypeFieldResolutionFeedbackTrace,
                 $relationalTypeResolver,
                 $field,
+                $directive,
             );
         }
     }
