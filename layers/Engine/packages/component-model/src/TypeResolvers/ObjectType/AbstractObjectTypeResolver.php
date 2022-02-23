@@ -350,11 +350,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
-
+        $variables = [];
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
             $validField,
             $fieldName,
-        ) = $this->dissectFieldForSchema($field);
+        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         $fieldMutationResolver = $executableObjectTypeFieldResolver->getFieldMutationResolver($this, $fieldName);
         return $fieldMutationResolver !== null;
     }
