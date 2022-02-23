@@ -15,6 +15,8 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -238,18 +240,31 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * By default, validate if there are deprecated fields
      */
-    public function validateDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
-    {
+    public function validateDirectiveArgumentsForSchema(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $directiveName,
+        array $directiveArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array {
         $deprecationMessages = $this->resolveDirectiveValidationDeprecationMessages(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs
         );
         foreach ($deprecationMessages as $deprecationMessage) {
-            $schemaDeprecations[] = [
-                Tokens::PATH => [$this->directive],
-                Tokens::MESSAGE => $deprecationMessage,
-            ];
+            $objectTypeFieldResolutionFeedbackStore->addDeprecation(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        GenericFeedbackItemProvider::class,
+                        GenericFeedbackItemProvider::D1,
+                        [
+                            $deprecationMessage,
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $relationalTypeResolver,
+                )
+            );
         }
         return $directiveArgs;
     }

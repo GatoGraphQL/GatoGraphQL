@@ -685,9 +685,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         bool $disableDynamicFields = false
     ): array {
-        $schemaErrors = [];
-        $schemaWarnings = [];
-        $schemaDeprecations = [];
         $validAndResolvedDirective = $fieldDirective;
         $directiveName = $this->getFieldDirectiveName($fieldDirective);
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
@@ -702,7 +699,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
         // Enable the directiveResolver to add its own code validations
-        $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
         // Transfer the feedback
         foreach ($fieldDirectiveFields as $fieldDirective => $fields) {
             foreach ($fields as $field) {
@@ -715,7 +712,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
 
         // If there's an error, those args will be removed. Then, re-create the fieldDirective to pass it to the function below
-        if ($schemaErrors !== [] || $objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $validAndResolvedDirective = null;
         } elseif ($extractedDirectiveArgs != $directiveArgs) {
             // There are 2 reasons why the fieldDirective might have changed:
@@ -727,9 +724,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $validAndResolvedDirective,
             $directiveName,
             $directiveArgs,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
         ];
     }
 
