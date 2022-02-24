@@ -351,18 +351,9 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
             /**
              * Assign the input field to the resulting InputObject,
-             * whether it succeeded or has errors.
-             *
-             * If it has errors: Don't assign the var to `null`, like this:
-             *
-             *     coercedInputValue->$inputFieldName = null;
-             * 
-             * because the coerced value could be a List, which will have
-             * `null` on the failing positions, but not on the whole
-             * field value.
-             *
-             * Later on, only if the List can't contain null values,
-             * must the engine set the field value to null.
+             * whether it succeeded or has errors, because the coerced
+             * value could be a List with `null` on the failing positions,
+             * but not on the whole field value.
              *
              * From the GraphQL spec:
              * 
@@ -372,6 +363,23 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              */
             $coercedInputValue->$inputFieldName = $coercedInputFieldValue;
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+                /**
+                 * If the input field is a non-nullable List and it has errors,
+                 * then it must be set to null.
+                 *
+                 * From the GraphQL spec:
+                 * 
+                 *     If a list’s item type is nullable, then errors occurring during preparation or coercion of an individual item in the list must result in a the value null at that position in the list along with a field error added to the response. If a list’s item type is non-null, a field error occurring at an individual item in the list must result in a field error for the entire list.
+                 *
+                 * @see https://spec.graphql.org/draft/#sec-List.Result-Coercion
+                 */
+                if (
+                    ($inputFieldIsArrayType && $inputFieldIsNonNullArrayItemsType)
+                    || ($inputFieldIsArrayOfArraysType && $inputFieldIsNonNullArrayOfArraysItemsType)
+                ) {
+                    $coercedInputValue->$inputFieldName = null;
+                }
+                
                 $mustErrorBePropagated = $mustErrorBePropagated || $inputFieldTypeModifiersIsMandatory;
                 continue;
             }
