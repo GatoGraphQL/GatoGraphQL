@@ -1060,45 +1060,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $separateSchemaInputValidationFeedbackStore,
             );
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-            
-            /**
-             * Assign the coerced value to the field/directive arg,
-             * whether it succeeded or has errors.
-             *
-             * It works with errors too, because the coerced value
-             * with errors could be a List with `null` on the failing
-             * positions, but not on the whole field value.
-             *
-             * Eg: casting to [String]:
-             *
-             *     [1, "a", 3] => [1, null, 3]
-             *
-             * Right below it will check, in case there are errors,
-             * if the arg is a non-nullable List and,
-             * then, set the whole value to null.
-             *
-             * Eg: casting to [String!]:
-             *
-             *     [1, "a", 3] => null
-             *
-             * From the GraphQL spec:
-             * 
-             *     If a list’s item type is nullable, then errors occurring during preparation or coercion of an individual item in the list must result in a the value null at that position in the list along with a field error added to the response. If a list’s item type is non-null, a field error occurring at an individual item in the list must result in a field error for the entire list.
-             *
-             * @see https://spec.graphql.org/draft/#sec-List.Result-Coercion
-             */
-            $fieldOrDirectiveArgs[$argName] = $coercedArgValue;
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
-                /**
-                 * If the arg is a non-nullable List and it has errors,
-                 * then it must be set to null.
-                 */
-                if (
-                    ($fieldOrDirectiveArgIsArrayType && $fieldOrDirectiveArgIsNonNullArrayItemsType)
-                    || ($fieldOrDirectiveArgIsArrayOfArraysType && $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType)
-                ) {
-                    $fieldOrDirectiveArgs[$argName] = null;
-                }
+                $fieldOrDirectiveArgs[$argName] = null;
                 continue;
             }
 
@@ -1126,8 +1089,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     );
                 }
             }
+
+            // No errors, assign the value
+            $fieldOrDirectiveArgs[$argName] = $coercedArgValue;
         }
-        
         return $fieldOrDirectiveArgs;
     }
 
