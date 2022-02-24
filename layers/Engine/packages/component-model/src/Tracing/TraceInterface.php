@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Feedback;
+namespace PoP\ComponentModel\Tracing;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 

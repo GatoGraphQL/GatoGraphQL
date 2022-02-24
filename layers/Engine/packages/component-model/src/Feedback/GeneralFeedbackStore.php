@@ -16,8 +16,6 @@ class GeneralFeedbackStore
     private array $notices = [];
     /** @var GeneralFeedbackInterface[] */
     private array $logs = [];
-    /** @var TraceInterface[] */
-    private array $traces = [];
 
     /**
      * @return GeneralFeedbackInterface[]
@@ -122,26 +120,5 @@ class GeneralFeedbackStore
     public function setLogs(array $logs): void
     {
         $this->logs = $logs;
-    }
-
-    /**
-     * @return TraceInterface[]
-     */
-    public function getTraces(): array
-    {
-        return $this->traces;
-    }
-
-    public function addTrace(TraceInterface $trace): void
-    {
-        $this->traces[] = $trace;
-    }
-
-    /**
-     * @param TraceInterface[] $traces
-     */
-    public function setTraces(array $traces): void
-    {
-        $this->traces = $traces;
     }
 }
