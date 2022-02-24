@@ -1339,34 +1339,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     }
 
     /**
-     * @todo Function added temporarily, remove!!!!
-     * @param string[]|null $path
-     * @return array<string, mixed>
-     */
-    public function getTempErrorOutput(Error $error, ?array $path = null, ?string $argName = null): array
-    {
-        $errorOutput = [
-            Tokens::MESSAGE => $error->getMessageOrCode(),
-        ];
-        if ($path !== null) {
-            $errorOutput[Tokens::PATH] = $path;
-        }
-        if ($data = $error->getData()) {
-            $errorOutput[Tokens::EXTENSIONS] = $data;
-        }
-        if ($argName !== null) {
-            $errorOutput[Tokens::EXTENSIONS][Tokens::ARGUMENT_PATH] = array_merge(
-                [$argName],
-                $errorOutput[Tokens::EXTENSIONS][Tokens::ARGUMENT_PATH] ?? []
-            );
-        }
-        foreach ($error->getNestedErrors() as $nestedError) {
-            $errorOutput[Tokens::EXTENSIONS][Tokens::NESTED][] = $this->getTempErrorOutput($nestedError, null, $argName);
-        }
-        return $errorOutput;
-    }
-
-    /**
      * The value may be:
      * - A variable, if it starts with "$"
      * - An array, if it is surrounded with brackets and split with commas ([..., ..., ...])
