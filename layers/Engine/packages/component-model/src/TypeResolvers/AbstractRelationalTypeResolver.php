@@ -181,105 +181,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         ];
 
         // Resolve from directive into their actual object instance.
-        $directiveSchemaErrors = $directiveSchemaWarnings = $directiveSchemaDeprecations = $directiveSchemaNotices = $directiveSchemaTraces = [];
         $directiveResolverInstanceData = $this->validateAndResolveInstances(
             $fieldDirectives,
             $fieldDirectiveFields,
             $variables,
             $engineIterationFeedbackStore,
-            $directiveSchemaErrors,
-            $directiveSchemaWarnings,
-            $directiveSchemaDeprecations,
-            $directiveSchemaNotices,
-            $directiveSchemaTraces
+            $schemaErrors,
+            $schemaWarnings,
+            $schemaDeprecations,
+            $schemaNotices,
+            $schemaTraces
         );
-        // If it is a root directives, then add the fields where they appear into the errors/warnings/deprecations
-        if (!$areNestedDirectives) {
-            // In the case of an error, Maybe prepend the field(s) containing the directive.
-            // Eg: when the directive name doesn't exist: /?query=id<skipanga>
-            foreach ($directiveSchemaErrors as $directiveSchemaError) {
-                $directive = $directiveSchemaError[Tokens::PATH][0];
-                if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    foreach ($directiveFields as $directiveField) {
-                        $schemaError = $directiveSchemaError;
-                        array_unshift($schemaError[Tokens::PATH], $directiveField);
-                        $this->prependPathOnNestedErrors($schemaError, $directiveField);
-                        $schemaErrors[] = $schemaError;
-                    }
-                } else {
-                    $schemaErrors[] = $directiveSchemaError;
-                }
-            }
-            foreach ($directiveSchemaWarnings as $directiveSchemaWarning) {
-                $directive = $directiveSchemaWarning[Tokens::PATH][0];
-                if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    foreach ($directiveFields as $directiveField) {
-                        $schemaWarning = $directiveSchemaWarning;
-                        array_unshift($schemaWarning[Tokens::PATH], $directiveField);
-                        $schemaWarnings[] = $schemaWarning;
-                    }
-                } else {
-                    $schemaWarnings[] = $directiveSchemaWarning;
-                }
-            }
-            foreach ($directiveSchemaDeprecations as $directiveSchemaDeprecation) {
-                $directive = $directiveSchemaDeprecation[Tokens::PATH][0];
-                if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    foreach ($directiveFields as $directiveField) {
-                        $schemaDeprecation = $directiveSchemaDeprecation;
-                        array_unshift($schemaDeprecation[Tokens::PATH], $directiveField);
-                        $schemaDeprecations[] = $schemaDeprecation;
-                    }
-                } else {
-                    $schemaDeprecations[] = $directiveSchemaDeprecation;
-                }
-            }
-            foreach ($directiveSchemaNotices as $directiveSchemaNotice) {
-                $directive = $directiveSchemaNotice[Tokens::PATH][0];
-                if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    foreach ($directiveFields as $directiveField) {
-                        $schemaNotice = $directiveSchemaNotice;
-                        array_unshift($schemaNotice[Tokens::PATH], $directiveField);
-                        $schemaNotices[] = $schemaNotice;
-                    }
-                } else {
-                    $schemaNotices[] = $directiveSchemaNotice;
-                }
-            }
-            foreach ($directiveSchemaTraces as $directiveSchemaTrace) {
-                $directive = $directiveSchemaTrace[Tokens::PATH][0];
-                if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    foreach ($directiveFields as $directiveField) {
-                        $schemaTrace = $directiveSchemaTrace;
-                        array_unshift($schemaTrace[Tokens::PATH], $directiveField);
-                        $schemaTraces[] = $schemaTrace;
-                    }
-                } else {
-                    $schemaTraces[] = $directiveSchemaTrace;
-                }
-            }
-        } else {
-            $schemaErrors = array_merge(
-                $schemaErrors,
-                $directiveSchemaErrors
-            );
-            $schemaWarnings = array_merge(
-                $schemaWarnings,
-                $directiveSchemaWarnings
-            );
-            $schemaDeprecations = array_merge(
-                $schemaDeprecations,
-                $directiveSchemaDeprecations
-            );
-            $schemaNotices = array_merge(
-                $schemaNotices,
-                $directiveSchemaNotices
-            );
-            $schemaTraces = array_merge(
-                $schemaTraces,
-                $directiveSchemaTraces
-            );
-        }
 
         // Create an array with the dataFields affected by each directive, in order in which they will be invoked
         foreach ($directiveResolverInstanceData as $instanceID => $directiveResolverInstanceData) {
@@ -290,6 +202,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectivesByPosition[$pipelinePosition][] = $directiveResolverInstanceData['fieldDirective'];
             $directiveFieldsByPosition[$pipelinePosition][] = $directiveResolverInstanceData['fields'];
         }
+
         // Once we have them ordered, we can simply discard the positions, keep only the values
         // Each item has 3 elements: the directiveResolverInstance, its fieldDirective, and the fields it affects
         $pipelineData = [];
@@ -302,6 +215,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 ];
             }
         }
+        
         return $pipelineData;
     }
 
