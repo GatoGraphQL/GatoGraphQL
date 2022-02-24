@@ -231,7 +231,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         );
 
         // 2. Transfer the feedback
-        $engineIterationFeedbackStore->objectFeedbackStore->incorporate(
+        $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
             $objectTypeFieldResolutionFeedbackStore,
             $relationalTypeResolver,
             $field,

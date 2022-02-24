@@ -90,7 +90,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
             foreach ($dataFields['direct'] as $field) {
                 $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                 $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
-                $engineIterationFeedbackStore->objectFeedbackStore->incorporate(
+                $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                     $separateObjectTypeFieldResolutionFeedbackStore,
                     $targetObjectTypeResolver,
                     $field,
@@ -116,7 +116,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
 
                 /** @var int */
                 $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
-                $engineIterationFeedbackStore->objectFeedbackStore->incorporate(
+                $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                     $separateObjectTypeFieldResolutionFeedbackStore,
                     $targetObjectTypeResolver,
                     $field,

@@ -66,7 +66,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
                 $variables,
                 $objectTypeFieldResolutionFeedbackStore
             );
-            $engineIterationFeedbackStore->schemaFeedbackStore->incorporate(
+            $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                 $objectTypeFieldResolutionFeedbackStore,
                 $relationalTypeResolver,
                 $field,

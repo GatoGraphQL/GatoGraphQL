@@ -54,7 +54,6 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         // If it has nestedDirectives, extract them and validate them
         $nestedFieldDirectives = $this->getFieldQueryInterpreter()->getFieldDirectives($this->directive, false);
         if ($nestedFieldDirectives) {
-            $nestedDirectiveSchemaErrors = $nestedDirectiveSchemaWarnings = $nestedDirectiveSchemaDeprecations = $nestedDirectiveSchemaNotices = $nestedDirectiveSchemaTraces = [];
             $nestedFieldDirectives = QueryHelpers::splitFieldDirectives($nestedFieldDirectives);
             // Support repeated fields by adding a counter next to them
             if (count($nestedFieldDirectives) != count(array_unique($nestedFieldDirectives))) {
@@ -77,47 +76,23 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
             foreach ($nestedFieldDirectives as $nestedFieldDirective) {
                 $nestedFieldDirectiveFields[$nestedFieldDirective] = $fieldDirectiveFields[$this->directive];
             }
+            $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
             $this->nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
                 $nestedFieldDirectives,
                 $nestedFieldDirectiveFields,
                 true,
                 $variables,
-                $engineIterationFeedbackStore,
-                $nestedDirectiveSchemaErrors,
-                $nestedDirectiveSchemaWarnings,
-                $nestedDirectiveSchemaDeprecations,
-                $nestedDirectiveSchemaNotices,
-                $nestedDirectiveSchemaTraces
+                $separateEngineIterationFeedbackStore,
+                $schemaErrors,
+                $schemaWarnings,
+                $schemaDeprecations,
+                $schemaNotices,
+                $schemaTraces
             );
-            foreach ($nestedDirectiveSchemaDeprecations as $nestedDirectiveSchemaDeprecation) {
-                array_unshift($nestedDirectiveSchemaDeprecation[Tokens::PATH], $this->directive);
-                $schemaDeprecations[] = $nestedDirectiveSchemaDeprecation;
-            }
-            foreach ($nestedDirectiveSchemaWarnings as $nestedDirectiveSchemaWarning) {
-                array_unshift($nestedDirectiveSchemaWarning[Tokens::PATH], $this->directive);
-                $schemaWarnings[] = $nestedDirectiveSchemaWarning;
-            }
-            foreach ($nestedDirectiveSchemaNotices as $nestedDirectiveSchemaNotice) {
-                array_unshift($nestedDirectiveSchemaNotice[Tokens::PATH], $this->directive);
-                $schemaNotices[] = $nestedDirectiveSchemaNotice;
-            }
-            foreach ($nestedDirectiveSchemaTraces as $nestedDirectiveSchemaTrace) {
-                array_unshift($nestedDirectiveSchemaTrace[Tokens::PATH], $this->directive);
-                $schemaTraces[] = $nestedDirectiveSchemaTrace;
-            }
+            $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
             // If there is any error, then we also can't proceed with the current directive.
             // Throw an error for this level, and underlying errors as nested
-            if ($nestedDirectiveSchemaErrors) {
-                $schemaError = [
-                    Tokens::PATH => [$this->directive],
-                    Tokens::MESSAGE => $this->__('This directive can\'t be executed due to errors from its composed directives', 'component-model'),
-                ];
-                foreach ($nestedDirectiveSchemaErrors as $nestedDirectiveSchemaError) {
-                    array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $this->directive);
-                    $this->prependPathOnNestedErrors($nestedDirectiveSchemaError);
-                    $schemaError[Tokens::EXTENSIONS][Tokens::NESTED][] = $nestedDirectiveSchemaError;
-                }
-                $schemaErrors[] = $schemaError;
+            if ($separateEngineIterationFeedbackStore->hasErrors()) {
                 return [
                     null, // $validDirective
                     null, // $directiveName

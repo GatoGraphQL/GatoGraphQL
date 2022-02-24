@@ -65,7 +65,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         $variables = [];
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $subcomponentFieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($subcomponent_data_field, $variables, $objectTypeFieldResolutionFeedbackStore);
-        App::getFeedbackStore()->schemaFeedbackStore->incorporate($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, $subcomponent_data_field);
+        App::getFeedbackStore()->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, $subcomponent_data_field);
         if (
             $subcomponentFieldTypeResolver === null
             || !($subcomponentFieldTypeResolver instanceof RelationalTypeResolverInterface)

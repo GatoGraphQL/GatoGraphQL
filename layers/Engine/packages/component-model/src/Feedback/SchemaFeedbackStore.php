@@ -20,6 +20,31 @@ class SchemaFeedbackStore
     private array $logs = [];
 
     public function incorporate(
+        SchemaFeedbackStore $schemaFeedbackStore,
+    ): void {
+        $this->errors = array_merge(
+            $this->errors,
+            $schemaFeedbackStore->getErrors()
+        );
+        $this->warnings = array_merge(
+            $this->warnings,
+            $schemaFeedbackStore->getWarnings()
+        );
+        $this->deprecations = array_merge(
+            $this->deprecations,
+            $schemaFeedbackStore->getDeprecations()
+        );
+        $this->notices = array_merge(
+            $this->notices,
+            $schemaFeedbackStore->getNotices()
+        );
+        $this->logs = array_merge(
+            $this->logs,
+            $schemaFeedbackStore->getLogs()
+        );
+    }
+
+    public function incorporateFromObjectTypeFieldResolutionFeedbackStore(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $field,

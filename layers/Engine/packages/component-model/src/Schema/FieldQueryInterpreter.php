@@ -684,7 +684,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         // Transfer the feedback
         foreach ($fieldDirectiveFields as $fieldDirective => $fields) {
             foreach ($fields as $field) {
-                $engineIterationFeedbackStore->schemaFeedbackStore->incorporate(
+                $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                     $objectTypeFieldResolutionFeedbackStore,
                     $relationalTypeResolver,
                     $field,
@@ -814,7 +814,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         // Transfer the feedback
         $objectID = $relationalTypeResolver->getID($object);
         foreach ($fields as $field) {
-            $engineIterationFeedbackStore->objectFeedbackStore->incorporate(
+            $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                 $objectTypeFieldResolutionFeedbackStore,
                 $relationalTypeResolver,
                 $field,
