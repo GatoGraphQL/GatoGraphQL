@@ -15,6 +15,7 @@ use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -406,28 +407,67 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // Validate against the directiveResolver
                 if ($maybeErrors = $directiveResolverInstance->resolveDirectiveValidationErrorDescriptions($this, $directiveName, $directiveArgs)) {
                     foreach ($maybeErrors as $error) {
-                        $schemaErrors[] = [
-                            Tokens::PATH => [$fieldDirective],
-                            Tokens::MESSAGE => $error,
-                        ];
+                        foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                                new SchemaFeedback(
+                                    new FeedbackItemResolution(
+                                        GenericFeedbackItemProvider::class,
+                                        GenericFeedbackItemProvider::E1,
+                                        [
+                                            $error,
+                                        ]
+                                    ),
+                                    LocationHelper::getNonSpecificLocation(),
+                                    $this,
+                                    $field,
+                                    $this->directive,
+                                )
+                            );
+                        }
                     }
                     continue;
                 }
 
                 // Check for warnings
                 if ($warningDescription = $directiveResolverInstance->resolveDirectiveWarningDescription($this)) {
-                    $schemaWarnings[] = [
-                        Tokens::PATH => [$fieldDirective],
-                        Tokens::MESSAGE => $warningDescription,
-                    ];
+                    foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                        $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
+                            new SchemaFeedback(
+                                new FeedbackItemResolution(
+                                    GenericFeedbackItemProvider::class,
+                                    GenericFeedbackItemProvider::W1,
+                                    [
+                                        $warningDescription,
+                                    ]
+                                ),
+                                LocationHelper::getNonSpecificLocation(),
+                                $this,
+                                $field,
+                                $this->directive,
+                            )
+                        );
+                    }
                 }
 
                 // Check for deprecations
                 if ($deprecationMessage = $directiveResolverInstance->getDirectiveDeprecationMessage($this)) {
-                    $schemaDeprecations[] = [
-                        Tokens::PATH => [$fieldDirective],
-                        Tokens::MESSAGE => $deprecationMessage,
-                    ];
+                    foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                        $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
+                            new SchemaFeedback(
+                                new FeedbackItemResolution(
+                                    GenericFeedbackItemProvider::class,
+                                    GenericFeedbackItemProvider::D1,
+                                    [
+                                        $deprecationMessage,
+                                    ]
+                                ),
+                                LocationHelper::getNonSpecificLocation(),
+                                $this,
+                                $field,
+                                $this->directive,
+                            )
+                        );
+                    }
                 }
             }
 
