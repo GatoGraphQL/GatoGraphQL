@@ -121,12 +121,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         array &$objectWarnings,
         array &$objectDeprecations,
         array &$objectNotices,
-        array &$objectTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
         array &$schemaNotices,
-        array &$schemaTraces
     ): void {
 
         // If there are no composed directives to execute, then nothing to do
@@ -343,12 +341,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 $objectWarnings,
                 $objectDeprecations,
                 $objectNotices,
-                $objectTraces,
                 $nestedSchemaErrors,
                 $schemaWarnings,
                 $schemaDeprecations,
                 $schemaNotices,
-                $schemaTraces
             );
 
             // If any item fails, maybe set the whole response field as null
@@ -427,7 +423,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         // Remove this temporary property from $dbItems
                         unset($dbItems[(string)$id][$arrayItemPropertyOutputKey]);
                         // Place the result for the array in the original property
-                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $engineIterationFeedbackStore, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $objectTraces, $id, $field, $fieldOutputKey, $key, $arrayItemValue);
+                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $engineIterationFeedbackStore, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $id, $field, $fieldOutputKey, $key, $arrayItemValue);
                     }
                 }
             }
@@ -444,7 +440,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         array &$objectWarnings,
         array &$objectDeprecations,
         array &$objectNotices,
-        array &$objectTraces,
         $id,
         string $field,
         string $fieldOutputKey,

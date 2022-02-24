@@ -42,12 +42,10 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array &$objectWarnings,
         array &$objectDeprecations,
         array &$objectNotices,
-        array &$objectTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
         array &$schemaNotices,
-        array &$schemaTraces
     ): array;
     /**
      * @param array<string, mixed> $variables
@@ -77,7 +75,6 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array &$schemaWarnings,
         array &$schemaDeprecations,
         array &$schemaNotices,
-        array &$schemaTraces
     ): array;
     /**
      * @return array<string,DirectiveResolverInterface>|null

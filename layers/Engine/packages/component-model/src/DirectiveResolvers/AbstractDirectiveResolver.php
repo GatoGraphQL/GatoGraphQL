@@ -180,7 +180,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array &$schemaWarnings,
         array &$schemaDeprecations,
         array &$schemaNotices,
-        array &$schemaTraces
     ): array {
         // First validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
         list(
@@ -924,12 +923,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $objectWarnings,
             $objectDeprecations,
             $objectNotices,
-            $objectTraces,
             $schemaErrors,
             $schemaWarnings,
             $schemaDeprecations,
             $schemaNotices,
-            $schemaTraces
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);
 
         // Extract the head, keep passing down the rest
@@ -954,12 +951,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         //     $objectWarnings,
         //     $objectDeprecations,
         //     $objectNotices,
-        //     $objectTraces,
         //     $schemaErrors,
         //     $schemaWarnings,
         //     $schemaDeprecations,
         //     $schemaNotices,
-        //     $schemaTraces
         // );
 
         // 2. Execute operation.
@@ -987,12 +982,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $objectWarnings,
                     $objectDeprecations,
                     $objectNotices,
-                    $objectTraces,
                     $schemaErrors,
                     $schemaWarnings,
                     $schemaDeprecations,
                     $schemaNotices,
-                    $schemaTraces
                 );
             } catch (AbstractClientException $e) {
                 $feedbackItemResolution = new FeedbackItemResolution(
@@ -1053,12 +1046,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $objectWarnings,
             $objectDeprecations,
             $objectNotices,
-            $objectTraces,
             $schemaErrors,
             $schemaWarnings,
             $schemaDeprecations,
             $schemaNotices,
-            $schemaTraces
         );
     }
 

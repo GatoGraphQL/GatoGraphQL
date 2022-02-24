@@ -57,12 +57,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$objectWarnings,
         array &$objectDeprecations,
         array &$objectNotices,
-        array &$objectTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
         array &$schemaNotices,
-        array &$schemaTraces
     ): void {
         // Iterate data, extract into final results
         if (!$objectIDItems) {

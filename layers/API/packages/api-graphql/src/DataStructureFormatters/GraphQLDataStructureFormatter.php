@@ -22,7 +22,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         $ret = [];
 
         // Add errors
-        $errors = $warnings = $deprecations = $notices = $traces = [];
+        $errors = $warnings = $deprecations = $notices = [];
         if (isset($data['generalErrors'])) {
             $errors = array_merge(
                 $errors,
@@ -111,22 +111,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 }
                 if ($notices) {
                     $ret['extensions']['notices'] = $notices;
-                }
-            }
-
-            // Add traces
-            if ($componentConfiguration->enableProactiveFeedbackTraces()) {
-                if ($data['objectTraces'] ?? null) {
-                    $traces = $this->reformatDBEntries($data['objectTraces']);
-                }
-                if ($data['schemaTraces'] ?? null) {
-                    $traces = array_merge(
-                        $traces,
-                        $this->reformatSchemaEntries($data['schemaTraces'])
-                    );
-                }
-                if ($traces) {
-                    $ret['extensions']['traces'] = $traces;
                 }
             }
 

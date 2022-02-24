@@ -221,7 +221,6 @@ trait AliasSchemaDirectiveResolverTrait
         array &$schemaWarnings,
         array &$schemaDeprecations,
         array &$schemaNotices,
-        array &$schemaTraces
     ): array {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->dissectAndValidateDirectiveForSchema(
@@ -233,7 +232,6 @@ trait AliasSchemaDirectiveResolverTrait
             $schemaWarnings,
             $schemaDeprecations,
             $schemaNotices,
-            $schemaTraces
         );
     }
 
@@ -321,12 +319,10 @@ trait AliasSchemaDirectiveResolverTrait
         array &$objectWarnings,
         array &$objectDeprecations,
         array &$objectNotices,
-        array &$objectTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
         array &$schemaNotices,
-        array &$schemaTraces
     ): void {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         $aliasedDirectiveResolver->resolveDirective(
@@ -345,12 +341,10 @@ trait AliasSchemaDirectiveResolverTrait
             $objectWarnings,
             $objectDeprecations,
             $objectNotices,
-            $objectTraces,
             $schemaErrors,
             $schemaWarnings,
             $schemaDeprecations,
             $schemaNotices,
-            $schemaTraces
         );
     }
 

@@ -50,7 +50,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         array &$schemaWarnings,
         array &$schemaDeprecations,
         array &$schemaNotices,
-        array &$schemaTraces
     ): array;
 
     /**
@@ -116,12 +115,10 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         array &$objectWarnings,
         array &$objectDeprecations,
         array &$objectNotices,
-        array &$objectTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
         array &$schemaNotices,
-        array &$schemaTraces
     ): void;
     /**
      * A directive can decide to not be added to the schema, eg: when it is repeated/implemented several times
