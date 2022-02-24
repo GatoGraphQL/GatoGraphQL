@@ -951,22 +951,19 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectiveDirectFields = array_unique($fieldDirectiveDirectFields);
 
             // Validate and resolve the directives into instances and fields they operate on
-            $directivePipelineSchemaErrors = [];
+            $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
             $directivePipelineData = $this->resolveDirectivesIntoPipelineData(
                 $fieldDirectives,
                 $fieldDirectiveFields,
                 $variables,
-                $engineIterationFeedbackStore,
-                $directivePipelineSchemaErrors,
+                $separateEngineIterationFeedbackStore,
+                $schemaErrors,
                 $schemaWarnings,
                 $schemaDeprecations,
                 $schemaNotices,
                 $schemaTraces
             );
-            $schemaErrors = array_merge(
-                $schemaErrors,
-                $directivePipelineSchemaErrors
-            );
+            $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
 
             // If any directive failed validation and the field must be set to `null`,
             // then skip processing that field altogether
@@ -974,12 +971,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             /** @var ComponentConfiguration */
             $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
             if (
-                !empty($directivePipelineSchemaErrors)
+                $separateEngineIterationFeedbackStore->hasErrors()
                 && $componentConfiguration->removeFieldIfDirectiveFailed()
             ) {
-                // Extract the failing fields from the path of the thrown error
-                foreach ($directivePipelineSchemaErrors as $directivePipelineSchemaError) {
-                    $schemaErrorFailingFields[] = $directivePipelineSchemaError[Tokens::PATH][0];
+                // Extract the failing fields from the errors
+                foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $error) {
+                    $schemaErrorFailingFields[] = $error->getField();
+                }
+                foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $error) {
+                    $schemaErrorFailingFields[] = $error->getField();
                 }
                 $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
                 // Set those fields as null
@@ -1031,8 +1031,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $pipelineIDsDataFields[] = $directiveIDFields;
                 $directiveResolverInstances[] = $directiveResolverInstance;
             }
-
-            $directivePipelineSchemaErrors = $directivePipelineIDObjectErrors = [];
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
             $directivePipeline = $this->getDirectivePipelineService()->getDirectivePipeline($directiveResolverInstances);
