@@ -1950,12 +1950,10 @@ class Engine implements EngineInterface
         array &$iterationObjectWarnings,
         array &$iterationObjectDeprecations,
         array &$iterationObjectNotices,
-        array &$iterationObjectTraces,
         array &$iterationSchemaErrors,
         array &$iterationSchemaWarnings,
         array &$iterationSchemaDeprecations,
         array &$iterationSchemaNotices,
-        array &$iterationSchemaTraces
     ): void {
         $this->transferObjectFeedback(
             $engineIterationFeedbackStore,
@@ -1963,7 +1961,6 @@ class Engine implements EngineInterface
             $iterationObjectWarnings,
             $iterationObjectDeprecations,
             $iterationObjectNotices,
-            $iterationObjectTraces,
         );
         $this->transferSchemaFeedback(
             $engineIterationFeedbackStore,
@@ -1971,7 +1968,6 @@ class Engine implements EngineInterface
             $iterationSchemaWarnings,
             $iterationSchemaDeprecations,
             $iterationSchemaNotices,
-            $iterationSchemaTraces
         );
     }
 
@@ -1981,7 +1977,6 @@ class Engine implements EngineInterface
         array &$iterationObjectWarnings,
         array &$iterationObjectDeprecations,
         array &$iterationObjectNotices,
-        array &$iterationObjectTraces,
     ): void {
         foreach ($engineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectFeedbackError) {
             $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorOutput($objectFeedbackError);
@@ -1996,12 +1991,6 @@ class Engine implements EngineInterface
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackDeprecation,
                 $iterationObjectDeprecations,
-            );
-        }
-        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getTraces() as $objectFeedbackTrace) {
-            $this->transferObjectFeedbackEntries(
-                $objectFeedbackTrace,
-                $iterationObjectTraces,
             );
         }
         foreach ($engineIterationFeedbackStore->objectFeedbackStore->getNotices() as $objectFeedbackNotice) {
@@ -2073,8 +2062,7 @@ class Engine implements EngineInterface
         array &$iterationSchemaErrors,
         array &$iterationSchemaWarnings,
         array &$iterationSchemaDeprecations,
-        array &$iterationSchemaNotices,
-        array &$iterationSchemaTraces
+        array &$iterationSchemaNotices
     ): void {
         foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
             $iterationSchemaErrors[] = $this->getErrorOutput($schemaFeedbackError);
@@ -2089,12 +2077,6 @@ class Engine implements EngineInterface
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackDeprecation,
                 $iterationSchemaDeprecations,
-            );
-        }
-        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getTraces() as $schemaFeedbackTrace) {
-            $this->transferSchemaFeedbackEntries(
-                $schemaFeedbackTrace,
-                $iterationSchemaTraces,
             );
         }
         foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
