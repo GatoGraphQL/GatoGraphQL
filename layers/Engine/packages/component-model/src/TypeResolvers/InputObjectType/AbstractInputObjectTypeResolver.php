@@ -215,7 +215,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         /**
          * If an input field has an error:
          * 
-         * - If it's nullable, then only the field is set to null
+         * - If it's nullable, then only that input field is set to null
          * - If it's non-nullable, then the whole InputObject must be set to null
          */
         $mustErrorBePropagated = false;
