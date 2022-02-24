@@ -71,7 +71,6 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
     public function resolveDirectivesIntoPipelineData(
         array $fieldDirectives,
         array &$fieldDirectiveFields,
-        bool $areNestedDirectives,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$schemaErrors,

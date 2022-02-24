@@ -155,7 +155,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     public function resolveDirectivesIntoPipelineData(
         array $fieldDirectives,
         array &$fieldDirectiveFields,
-        bool $areNestedDirectives,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$schemaErrors,
@@ -215,7 +214,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 ];
             }
         }
-        
+
         return $pipelineData;
     }
 
@@ -956,7 +955,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directivePipelineData = $this->resolveDirectivesIntoPipelineData(
                 $fieldDirectives,
                 $fieldDirectiveFields,
-                false,
                 $variables,
                 $engineIterationFeedbackStore,
                 $directivePipelineSchemaErrors,

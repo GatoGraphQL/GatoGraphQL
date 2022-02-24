@@ -79,7 +79,6 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
             $this->nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
                 $nestedFieldDirectives,
                 $nestedFieldDirectiveFields,
-                true,
                 $variables,
                 $separateEngineIterationFeedbackStore,
                 $schemaErrors,
