@@ -1633,12 +1633,10 @@ class Engine implements EngineInterface
                 $iterationObjectWarnings,
                 $iterationObjectDeprecations,
                 $iterationObjectNotices,
-                $iterationObjectTraces,
                 $iterationSchemaErrors,
                 $iterationSchemaWarnings,
                 $iterationSchemaDeprecations,
                 $iterationSchemaNotices,
-                $iterationSchemaTraces
             );
             /** @phpstan-ignore-next-line */
             if ($iterationObjectErrors !== []) {
