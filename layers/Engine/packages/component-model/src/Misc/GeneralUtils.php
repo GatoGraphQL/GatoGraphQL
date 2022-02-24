@@ -22,14 +22,6 @@ class GeneralUtils
         return $randomString;
     }
 
-    /**
-     * Check if the thing is of type Error
-     */
-    public static function isError(mixed $thing): bool
-    {
-        return $thing !== null && $thing instanceof Error;
-    }
-
     // Taken from https://gist.github.com/SeanCannon/6585889
     public static function arrayFlatten(mixed $items, $deep = false)
     {
