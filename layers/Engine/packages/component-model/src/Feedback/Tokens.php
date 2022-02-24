@@ -12,6 +12,5 @@ class Tokens
     const LOCATIONS = 'locations';
     const NESTED = 'nested';
     const EXTENSIONS = 'extensions';
-    const ID_FIELDS = 'idFields';
     const ARGUMENT_PATH = 'argumentPath';
 }
