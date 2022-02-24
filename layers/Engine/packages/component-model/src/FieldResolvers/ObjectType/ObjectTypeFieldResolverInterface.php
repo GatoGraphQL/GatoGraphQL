@@ -51,9 +51,6 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool;
-    /**
-     * @return string[]
-     */
     public function collectFieldValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,

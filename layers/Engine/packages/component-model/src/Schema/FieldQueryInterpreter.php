@@ -679,7 +679,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
         // Enable the directiveResolver to add its own code validations
-        $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
+        if ($directiveArgs !== null) {
+            $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
+        }
         // Transfer the feedback
         foreach ($fieldDirectiveFields as $fieldDirective => $fields) {
             foreach ($fields as $field) {
@@ -694,7 +696,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         // If there's an error, those args will be removed. Then, re-create the fieldDirective to pass it to the function below
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $validAndResolvedDirective = null;
-        } elseif ($extractedDirectiveArgs != $directiveArgs) {
+        } elseif ($extractedDirectiveArgs !== $directiveArgs) {
             // There are 2 reasons why the fieldDirective might have changed:
             // 1. validField: There are $schemaWarnings: remove the directiveArgs that failed
             // 2. resolvedField: Some directiveArg was a variable: replace it with its value
@@ -807,7 +809,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $validAndResolvedDirective = null;
-        } elseif ($extractedDirectiveArgs != $directiveArgs) {
+        } elseif ($extractedDirectiveArgs !== $directiveArgs) {
             // There are 2 reasons why the fieldDirective might have changed:
             // 1. validField: There are $objectWarnings: remove the directiveArgs that failed
             // 2. resolvedField: Some directiveArg was a variable: replace it with its value
@@ -1252,7 +1254,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array $directiveArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         bool $disableDynamicFields = false
-    ): array {
+    ): ?array {
         if ($directiveArgs) {
             $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $castedDirectiveArgs = $this->castDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $separateObjectTypeFieldResolutionFeedbackStore, $disableDynamicFields);

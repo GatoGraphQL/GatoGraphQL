@@ -271,7 +271,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                             $field,
-                            $this->directive,
                         )
                     );
                 }
@@ -298,7 +297,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                             $field,
-                            $this->directive,
                         )
                     );
                 }
@@ -322,7 +320,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                             LocationHelper::getNonSpecificLocation(),
                             $this,
                             $field,
-                            $this->directive,
                         )
                     );
                     continue;
@@ -389,7 +386,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                     LocationHelper::getNonSpecificLocation(),
                                     $this,
                                     $field,
-                                    $this->directive,
                                 )
                             );
                         }
@@ -412,7 +408,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 LocationHelper::getNonSpecificLocation(),
                                 $this,
                                 $field,
-                                $this->directive,
                             )
                         );
                     }
@@ -433,7 +428,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 LocationHelper::getNonSpecificLocation(),
                                 $this,
                                 $field,
-                                $this->directive,
                             )
                         );
                     }
@@ -472,7 +466,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 LocationHelper::getNonSpecificLocation(),
                                 $this,
                                 $field,
-                                $this->directive,
                             )
                         );
                     }
