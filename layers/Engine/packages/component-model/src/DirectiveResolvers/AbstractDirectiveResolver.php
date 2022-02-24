@@ -208,20 +208,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Add the directive to the head of the error path, for all nested errors
-     */
-    protected function prependPathOnNestedErrors(array &$nestedDirectiveSchemaError): void
-    {
-
-        if (isset($nestedDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
-            foreach ($nestedDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$deeplyNestedDirectiveSchemaError) {
-                array_unshift($deeplyNestedDirectiveSchemaError[Tokens::PATH], $this->directive);
-                $this->prependPathOnNestedErrors($deeplyNestedDirectiveSchemaError);
-            }
-        }
-    }
-
-    /**
      * By default, validate if there are deprecated fields
      */
     public function validateDirectiveArgumentsForSchema(
