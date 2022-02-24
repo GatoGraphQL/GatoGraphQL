@@ -729,9 +729,9 @@ GRAPHQL;
                                 'user',
                                 null,
                                 [
-                                    new Argument('id', new Literal('10', new Location(1, 13)), new Location(1, 9)),
+                                    new Argument('id', new Literal(10, new Location(1, 13)), new Location(1, 9)),
                                     new Argument('name', new Literal('max', new Location(1, 24)), new Location(1, 17)),
-                                    new Argument('float', new Literal('123.123', new Location(1, 37)), new Location(1, 30)),
+                                    new Argument('float', new Literal(123.123, new Location(1, 37)), new Location(1, 30)),
                                 ],
                                 [
                                     new LeafField('id', null, [], [], new Location(1, 49)),
