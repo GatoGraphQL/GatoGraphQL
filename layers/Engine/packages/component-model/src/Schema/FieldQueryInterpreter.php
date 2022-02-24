@@ -780,7 +780,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array $expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
-        $objectErrors = $objectWarnings = $objectDeprecations = [];
         $validAndResolvedDirective = $fieldDirective;
         $directiveName = $this->getFieldDirectiveName($fieldDirective);
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
@@ -818,9 +817,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $validAndResolvedDirective,
             $directiveName,
             $directiveArgs,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations
         ];
     }
 

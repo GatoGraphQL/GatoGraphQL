@@ -250,81 +250,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $validDirective,
             $directiveName,
             $directiveArgs,
-            $nestedObjectErrors,
-            $nestedObjectWarnings,
-            $nestedObjectDeprecationMessages,
         ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $fields, $this->directive, $variables, $expressions, $engineIterationFeedbackStore);
 
         // Store the args, they may be used in `resolveDirective`
         $objectID = $relationalTypeResolver->getID($object);
         $this->directiveArgsForObjects[$objectID] = $directiveArgs;
 
-        // Store errors (if any)
-        foreach ($nestedObjectErrors as $id => $fieldOutputKeyErrorMessages) {
-            foreach ($fieldOutputKeyErrorMessages as $fieldOutputKeyErrorMessage) {
-                $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                    new ObjectFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::E1,
-                            [
-                                $fieldOutputKeyErrorMessage[Tokens::MESSAGE],
-                            ]
-                        ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $relationalTypeResolver,
-                        $fieldOutputKeyErrorMessage[Tokens::PATH][0], // @todo Make sure to remove this horrible hack to extract the $field
-                        $id,
-                        $this->directive,
-                    )
-                );
-            }
-        }
-        foreach ($nestedObjectWarnings as $id => $fieldOutputKeyWarningMessages) {
-            foreach ($fieldOutputKeyWarningMessages as $fieldOutputKeyWarningMessage) {
-                $engineIterationFeedbackStore->objectFeedbackStore->addWarning(
-                    new ObjectFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::E1,
-                            [
-                                $fieldOutputKeyWarningMessage[Tokens::MESSAGE],
-                            ]
-                        ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $relationalTypeResolver,
-                        $fieldOutputKeyWarningMessage[Tokens::PATH][0], // @todo Make sure to remove this horrible hack to extract the $field
-                        $id,
-                        $this->directive,
-                    )
-                );
-            }
-        }
-        foreach ($nestedObjectDeprecationMessages as $id => $fieldOutputKeyDeprecationMessages) {
-            foreach ($fieldOutputKeyDeprecationMessages as $fieldOutputKeyDeprecationMessage) {
-                $engineIterationFeedbackStore->objectFeedbackStore->addDeprecation(
-                    new ObjectFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::E1,
-                            [
-                                $fieldOutputKeyDeprecationMessage[Tokens::MESSAGE],
-                            ]
-                        ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $relationalTypeResolver,
-                        $fieldOutputKeyDeprecationMessage[Tokens::PATH][0], // @todo Make sure to remove this horrible hack to extract the $field
-                        $id,
-                        $this->directive,
-                    )
-                );
-            }
-        }
-
         /**
          * Validate directive argument constraints, only if there are no previous errors
          */
-        if (!$nestedObjectErrors) {
+        if (!$engineIterationFeedbackStore->hasErrors()) {
             if (
                 $maybeErrors = $this->resolveDirectiveArgumentErrors(
                     $relationalTypeResolver,
@@ -346,7 +281,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                                 LocationHelper::getNonSpecificLocation(),
                                 $relationalTypeResolver,
                                 $field,
-                                $id,
+                                $objectID,
                                 $this->directive,
                             )
                         );
