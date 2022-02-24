@@ -12,7 +12,7 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Component;
@@ -131,10 +131,25 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
 
         // If there are no composed directives to execute, then nothing to do
         if (!$this->nestedDirectivePipelineData) {
-            $schemaWarnings[] = [
-                Tokens::PATH => [$this->directive],
-                Tokens::MESSAGE => $this->__('No composed directives were provided, so nothing to do for this directive', 'component-model'),
-            ];
+            foreach ($idsDataFields as $id => $dataFields) {
+                foreach ($dataFields['direct'] as $field) {
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E5,
+                                [
+                                    $this->getDirectiveName(),
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $relationalTypeResolver,
+                            $field,
+                            $this->directive,
+                        )
+                    );
+                }
+            }
             return;
         }
 
