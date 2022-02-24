@@ -22,7 +22,8 @@ class EngineIterationFeedbackStore
         $this->objectFeedbackStore->incorporate($engineIterationFeedbackStore->objectFeedbackStore);
     }
 
-    public function hasErrors(): bool {
+    public function hasErrors(): bool
+    {
         return $this->schemaFeedbackStore->getErrors() !== []
             || $this->objectFeedbackStore->getErrors() !== [];
     }

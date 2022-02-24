@@ -292,7 +292,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
-        
+
         // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrorQualifiedEntries, so don't duplicate output
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
