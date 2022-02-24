@@ -82,14 +82,6 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): void {
         // The name of the variable is always set to "self", accessed as $self
         $dbKey = $relationalTypeResolver->getTypeOutputDBKey();

@@ -175,10 +175,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array &$fieldDirectiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): array {
         // First validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
         list(
@@ -853,14 +849,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $variables,
             $messages,
             $engineIterationFeedbackStore,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectNotices,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);
 
         // Extract the head, keep passing down the rest
@@ -881,14 +869,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         //     $previousDBItems,
         //     $variables,
         //     $messages,
-        //     $objectErrors,
-        //     $objectWarnings,
-        //     $objectDeprecations,
-        //     $objectNotices,
-        //     $schemaErrors,
-        //     $schemaWarnings,
-        //     $schemaDeprecations,
-        //     $schemaNotices,
         // );
 
         // 2. Execute operation.
@@ -912,14 +892,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $variables,
                     $messages,
                     $engineIterationFeedbackStore,
-                    $objectErrors,
-                    $objectWarnings,
-                    $objectDeprecations,
-                    $objectNotices,
-                    $schemaErrors,
-                    $schemaWarnings,
-                    $schemaDeprecations,
-                    $schemaNotices,
                 );
             } catch (AbstractClientException $e) {
                 $feedbackItemResolution = new FeedbackItemResolution(
@@ -958,8 +930,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $objectIDItems,
                     $dbItems,
                     $engineIterationFeedbackStore,
-                    $objectErrors,
-                    $objectWarnings
                 );
             }
         }
@@ -976,14 +946,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $variables,
             $messages,
             $engineIterationFeedbackStore,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectNotices,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
         );
     }
 
@@ -1000,8 +962,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $objectIDItems,
         array &$dbItems,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings
     ): void {
         $allFieldsFailed = empty($failedFields);
         if ($allFieldsFailed) {

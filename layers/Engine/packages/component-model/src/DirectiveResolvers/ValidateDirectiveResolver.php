@@ -49,9 +49,6 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         array $dataFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
         array &$failedDataFields,
     ): void {
         foreach ($dataFields as $field) {

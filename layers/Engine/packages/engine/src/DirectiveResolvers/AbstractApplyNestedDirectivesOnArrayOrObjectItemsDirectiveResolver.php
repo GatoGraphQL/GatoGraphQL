@@ -117,14 +117,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): void {
 
         // If there are no composed directives to execute, then nothing to do
@@ -264,9 +256,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $variables,
                         $messages,
                         $engineIterationFeedbackStore,
-                        $objectErrors,
-                        $objectWarnings,
-                        $objectDeprecations
                     )
                 ) {
                     $execute = true;
@@ -299,12 +288,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $variables,
                         $messages,
                         $engineIterationFeedbackStore,
-                        $objectErrors,
-                        $objectWarnings,
-                        $objectDeprecations,
-                        $schemaErrors,
-                        $schemaWarnings,
-                        $schemaDeprecations
                     );
                 }
             }
@@ -325,7 +308,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 $pipelineArrayItemIdsProperties[] = $arrayItemIdsProperties;
             }
             // 2. Execute the composed directive pipeline on all arrayItems
-            $nestedSchemaErrors = $nestedIDObjectErrors = [];
+            $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
             $nestedDirectivePipeline->resolveDirectivePipeline(
                 $relationalTypeResolver,
                 $pipelineArrayItemIdsProperties, // Here we pass the properties to the array elements!
@@ -336,19 +319,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 $dbItems,
                 $variables,
                 $messages,
-                $engineIterationFeedbackStore,
-                $nestedIDObjectErrors,
-                $objectWarnings,
-                $objectDeprecations,
-                $objectNotices,
-                $nestedSchemaErrors,
-                $schemaWarnings,
-                $schemaDeprecations,
-                $schemaNotices,
+                $separateEngineIterationFeedbackStore,
             );
+            $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
 
             // If any item fails, maybe set the whole response field as null
-            if ($nestedSchemaErrors !== [] || $nestedIDObjectErrors !== []) {
+            if ($separateEngineIterationFeedbackStore->hasErrors()) {
                 /** @var ComponentModelComponentConfiguration */
                 $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
                 $setFailingFieldResponseAsNull = $componentConfiguration->setFailingFieldResponseAsNull();
@@ -390,7 +366,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                     $fieldDirectives = $fieldParts[4];
 
                     // If there are errors, it will return null. Don't add the errors again
-                    $arrayItemObjectErrors = $arrayItemObjectWarnings = $arrayItemObjectDeprecations = [];
                     $array = (array) $value;
                     $arrayItems = $this->getArrayItems(
                         $array,
@@ -403,9 +378,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $variables,
                         $messages,
                         $engineIterationFeedbackStore,
-                        $arrayItemObjectErrors,
-                        $arrayItemObjectWarnings,
-                        $arrayItemObjectDeprecations
                     );
                     // The value is an array. Unpack all the elements into their own property
                     foreach (array_keys($arrayItems) as $key) {
@@ -423,7 +395,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         // Remove this temporary property from $dbItems
                         unset($dbItems[(string)$id][$arrayItemPropertyOutputKey]);
                         // Place the result for the array in the original property
-                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $engineIterationFeedbackStore, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $id, $field, $fieldOutputKey, $key, $arrayItemValue);
+                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $engineIterationFeedbackStore, $id, $field, $fieldOutputKey, $key, $arrayItemValue);
                     }
                 }
             }
@@ -436,15 +408,11 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$dbItems,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        $id,
+        string|int $id,
         string $field,
         string $fieldOutputKey,
         int|string $arrayItemKey,
-        mixed $arrayItemValue
+        mixed $arrayItemValue,
     ): void {
         if (is_array($dbItems[(string)$id][$fieldOutputKey])) {
             $dbItems[(string)$id][$fieldOutputKey][$arrayItemKey] = $arrayItemValue;
@@ -468,9 +436,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
     ): ?array;
 
     /**
@@ -499,12 +464,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations
     ): void {
         // Enable the query to provide variables to pass down
         $addExpressions = $this->directiveArgsForSchema['addExpressions'] ?? [];

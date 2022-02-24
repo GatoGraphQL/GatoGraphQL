@@ -53,14 +53,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): void {
         // Iterate data, extract into final results
         if (!$objectIDItems) {
@@ -75,9 +67,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $variables,
             $messages,
             $engineIterationFeedbackStore,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations
         );
     }
 
@@ -90,9 +79,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
     ): void {
         $enqueueFillingObjectsFromIDs = [];
         foreach ($idsDataFields as $id => $dataFields) {
@@ -136,9 +122,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $variables,
                 $expressions,
                 $engineIterationFeedbackStore,
-                $objectErrors,
-                $objectWarnings,
-                $objectDeprecations
             );
 
             // Add the conditional data fields
@@ -182,9 +165,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations
     ): void {
         foreach ($dataFields as $field) {
             $this->resolveValueForObject(
@@ -197,9 +177,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $variables,
                 $expressions,
                 $engineIterationFeedbackStore,
-                $objectErrors,
-                $objectWarnings,
-                $objectDeprecations
             );
         }
     }
@@ -214,9 +191,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations
     ): void {
         // 1. Resolve the value against the TypeResolver
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();

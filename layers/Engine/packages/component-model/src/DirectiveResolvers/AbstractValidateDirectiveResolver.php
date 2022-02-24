@@ -43,16 +43,8 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): void {
-        $this->validateAndFilterFields($relationalTypeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $objectIDItems, $dbItems, $variables, $engineIterationFeedbackStore, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $this->validateAndFilterFields($relationalTypeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $objectIDItems, $dbItems, $variables, $engineIterationFeedbackStore);
     }
 
     protected function validateAndFilterFields(
@@ -63,9 +55,6 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array &$dbItems,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations
     ): void {
         // Validate that the schema and the provided data match, eg: passing mandatory values
         // (Such as fieldArg "status" for field "isStatus")
@@ -77,7 +66,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $data_fields['direct']
             )));
         }
-        $this->validateFields($relationalTypeResolver, $dataFields, $variables, $engineIterationFeedbackStore, $schemaErrors, $schemaWarnings, $schemaDeprecations, $failedDataFields);
+        $this->validateFields($relationalTypeResolver, $dataFields, $variables, $engineIterationFeedbackStore, $failedDataFields);
 
         // Remove from the data_fields list to execute on the object for the next stages of the pipeline
         if ($failedDataFields) {
@@ -110,7 +99,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         // // Because on the leaves we encounter an empty array, all fields are conditional fields (even if they are on the leaves)
         // foreach ($idsDataFields as $id => $data_fields) {
         //     foreach ($data_fields['conditional'] as $conditionField => $conditionalFields) {
-        //         $this->validateAndFilterConditionalFields($relationalTypeResolver, $conditionField, $idsDataFields[$id]['conditional'], $dataFields, $schemaErrors, $schemaWarnings, $schemaDeprecations, $variables, $failedDataFields);
+        //         $this->validateAndFilterConditionalFields($relationalTypeResolver, $conditionField, $idsDataFields[$id]['conditional'], $dataFields, $variables, $failedDataFields);
         //     }
         // }
     }
@@ -120,9 +109,6 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array $dataFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
         array &$failedDataFields,
     ): void;
 }

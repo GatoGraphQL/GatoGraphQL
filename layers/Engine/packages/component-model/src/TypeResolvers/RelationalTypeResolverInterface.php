@@ -38,14 +38,6 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): array;
     /**
      * @param array<string, mixed> $variables
@@ -71,10 +63,6 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array &$fieldDirectiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): array;
     /**
      * @return array<string,DirectiveResolverInterface>|null

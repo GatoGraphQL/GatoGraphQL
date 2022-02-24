@@ -41,9 +41,6 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
         array $dataFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
         array &$failedDataFields,
     ): void {
         if (!$this->validateCondition($relationalTypeResolver)) {

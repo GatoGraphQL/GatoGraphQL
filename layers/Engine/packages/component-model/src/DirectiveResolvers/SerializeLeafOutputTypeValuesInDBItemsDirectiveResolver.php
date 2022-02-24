@@ -51,14 +51,6 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): void {
         if (!$objectIDItems) {
             return;

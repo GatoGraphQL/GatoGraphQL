@@ -20,14 +20,6 @@ class DirectivePipelineUtils
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): array {
         return [
             'typeResolver' => &$relationalTypeResolver,
@@ -40,14 +32,6 @@ class DirectivePipelineUtils
             'variables' => &$variables,
             'messages' => &$messages,
             'engineIterationFeedbackStore' => &$engineIterationFeedbackStore,
-            'objectErrors' => &$objectErrors,
-            'objectWarnings' => &$objectWarnings,
-            'objectDeprecations' => &$objectDeprecations,
-            'objectNotices' => &$objectNotices,
-            'schemaErrors' => &$schemaErrors,
-            'schemaWarnings' => &$schemaWarnings,
-            'schemaDeprecations' => &$schemaDeprecations,
-            'schemaNotices' => &$schemaNotices,
         ];
     }
 

@@ -157,10 +157,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$fieldDirectiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): array {
         /**
         * All directives are placed somewhere in the pipeline. There are 5 positions:
@@ -184,10 +180,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectiveFields,
             $variables,
             $engineIterationFeedbackStore,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
         );
 
         // Create an array with the dataFields affected by each directive, in order in which they will be invoked
@@ -221,10 +213,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array $fieldDirectiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): array {
         $instances = [];
         // Count how many times each directive is added
@@ -359,10 +347,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $fieldDirectiveFields,
                     $variables,
                     $separateEngineIterationFeedbackStore,
-                    $schemaErrors,
-                    $schemaWarnings,
-                    $schemaDeprecations,
-                    $schemaNotices,
                 );
                 $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
                 /** @phpstan-ignore-next-line */
@@ -548,14 +532,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): array {
         // Obtain the data for the required object IDs
         $objectIDItems = [];
@@ -618,14 +594,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $variables,
             $messages,
             $engineIterationFeedbackStore,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectNotices,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
         );
 
         return $objectIDItems;
@@ -935,14 +903,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): void {
         // Iterate while there are directives with data to be processed
         while (!empty($this->fieldDirectiveIDFields)) {
@@ -988,10 +948,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $fieldDirectiveFields,
                 $variables,
                 $separateEngineIterationFeedbackStore,
-                $schemaErrors,
-                $schemaWarnings,
-                $schemaDeprecations,
-                $schemaNotices,
             );
             $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
 
@@ -1075,14 +1031,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $variables,
                 $messages,
                 $engineIterationFeedbackStore,
-                $objectErrors,
-                $objectWarnings,
-                $objectDeprecations,
-                $objectNotices,
-                $schemaErrors,
-                $schemaWarnings,
-                $schemaDeprecations,
-                $schemaNotices,
             );
         }
     }

@@ -217,10 +217,6 @@ trait AliasSchemaDirectiveResolverTrait
         array &$fieldDirectiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): array {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->dissectAndValidateDirectiveForSchema(
@@ -228,10 +224,6 @@ trait AliasSchemaDirectiveResolverTrait
             $fieldDirectiveFields,
             $variables,
             $engineIterationFeedbackStore,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
         );
     }
 
@@ -315,14 +307,6 @@ trait AliasSchemaDirectiveResolverTrait
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): void {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         $aliasedDirectiveResolver->resolveDirective(
@@ -337,14 +321,6 @@ trait AliasSchemaDirectiveResolverTrait
             $variables,
             $messages,
             $engineIterationFeedbackStore,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectNotices,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
         );
     }
 

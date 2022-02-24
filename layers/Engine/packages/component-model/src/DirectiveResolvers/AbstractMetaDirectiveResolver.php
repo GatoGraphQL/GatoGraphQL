@@ -44,10 +44,6 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         array &$fieldDirectiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): array {
         // If it has nestedDirectives, extract them and validate them
         $nestedFieldDirectives = $this->getFieldQueryInterpreter()->getFieldDirectives($this->directive, false);
@@ -80,10 +76,6 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
                 $nestedFieldDirectiveFields,
                 $variables,
                 $separateEngineIterationFeedbackStore,
-                $schemaErrors,
-                $schemaWarnings,
-                $schemaDeprecations,
-                $schemaNotices,
             );
             $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
             // If there is any error, then we also can't proceed with the current directive.
@@ -102,10 +94,6 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
             $fieldDirectiveFields,
             $variables,
             $engineIterationFeedbackStore,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
         );
     }
 

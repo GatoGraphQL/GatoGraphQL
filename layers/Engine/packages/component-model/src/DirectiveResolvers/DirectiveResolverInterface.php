@@ -46,10 +46,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         array &$fieldDirectiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): array;
 
     /**
@@ -111,14 +107,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
     ): void;
     /**
      * A directive can decide to not be added to the schema, eg: when it is repeated/implemented several times
