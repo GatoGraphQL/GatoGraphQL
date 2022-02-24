@@ -51,14 +51,18 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool;
-    /**
-     * @return string[]
-     */
-    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
-    /**
-     * @return string[]
-     */
-    public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
+    public function collectFieldValidationErrorDescriptions(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
+    public function collectFieldValidationDeprecationMessages(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed> $variables
@@ -112,14 +116,14 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
     /**
      * @param array<string, mixed> $fieldArgs
-     * @return string[]
      */
-    public function getValidationErrorDescriptions(
+    public function collectValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs
-    ): array;
+        array $fieldArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
     /**
      * Define if to use the version to decide if to process the field or not
      */

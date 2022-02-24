@@ -14,12 +14,9 @@ abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFe
         protected Location $location,
         /** @var array<string, mixed> */
         protected array $extensions = [],
-        /** @var array<string, mixed> */
-        array $data = [],
     ) {
         parent::__construct(
             $feedbackItemResolution,
-            $data,
         );
     }
 

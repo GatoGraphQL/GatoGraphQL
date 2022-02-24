@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Misc;
 
-use PoP\ComponentModel\Error\Error;
-
 class GeneralUtils
 {
     // Taken from http://stackoverflow.com/questions/4356289/php-random-string-generator
@@ -20,14 +18,6 @@ class GeneralUtils
             $randomString .= time();
         }
         return $randomString;
-    }
-
-    /**
-     * Check if the thing is of type Error
-     */
-    public static function isError(mixed $thing): bool
-    {
-        return $thing !== null && $thing instanceof Error;
     }
 
     // Taken from https://gist.github.com/SeanCannon/6585889

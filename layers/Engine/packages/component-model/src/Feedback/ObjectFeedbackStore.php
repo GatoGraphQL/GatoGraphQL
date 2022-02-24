@@ -18,14 +18,38 @@ class ObjectFeedbackStore
     private array $notices = [];
     /** @var ObjectFeedbackInterface[] */
     private array $logs = [];
-    /** @var ObjectFeedbackInterface[] */
-    private array $traces = [];
 
     public function incorporate(
+        ObjectFeedbackStore $objectFeedbackStore,
+    ): void {
+        $this->errors = array_merge(
+            $this->errors,
+            $objectFeedbackStore->getErrors()
+        );
+        $this->warnings = array_merge(
+            $this->warnings,
+            $objectFeedbackStore->getWarnings()
+        );
+        $this->deprecations = array_merge(
+            $this->deprecations,
+            $objectFeedbackStore->getDeprecations()
+        );
+        $this->notices = array_merge(
+            $this->notices,
+            $objectFeedbackStore->getNotices()
+        );
+        $this->logs = array_merge(
+            $this->logs,
+            $objectFeedbackStore->getLogs()
+        );
+    }
+
+    public function incorporateFromObjectTypeFieldResolutionFeedbackStore(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $field,
         string|int $objectID,
+        ?string $directive = null,
     ): void {
         foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
             $this->errors[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
@@ -33,6 +57,7 @@ class ObjectFeedbackStore
                 $relationalTypeResolver,
                 $field,
                 $objectID,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
@@ -41,6 +66,7 @@ class ObjectFeedbackStore
                 $relationalTypeResolver,
                 $field,
                 $objectID,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $objectTypeFieldResolutionFeedbackDeprecation) {
@@ -49,6 +75,7 @@ class ObjectFeedbackStore
                 $relationalTypeResolver,
                 $field,
                 $objectID,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
@@ -57,6 +84,7 @@ class ObjectFeedbackStore
                 $relationalTypeResolver,
                 $field,
                 $objectID,
+                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
@@ -65,14 +93,7 @@ class ObjectFeedbackStore
                 $relationalTypeResolver,
                 $field,
                 $objectID,
-            );
-        }
-        foreach ($objectTypeFieldResolutionFeedbackStore->getTraces() as $objectTypeFieldResolutionFeedbackTrace) {
-            $this->traces[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
-                $objectTypeFieldResolutionFeedbackTrace,
-                $relationalTypeResolver,
-                $field,
-                $objectID,
+                $directive,
             );
         }
     }
@@ -180,26 +201,5 @@ class ObjectFeedbackStore
     public function setLogs(array $logs): void
     {
         $this->logs = $logs;
-    }
-
-    /**
-     * @return ObjectFeedbackInterface[]
-     */
-    public function getTraces(): array
-    {
-        return $this->traces;
-    }
-
-    public function addTrace(ObjectFeedbackInterface $trace): void
-    {
-        $this->traces[] = $trace;
-    }
-
-    /**
-     * @param ObjectFeedbackInterface[] $traces
-     */
-    public function setTraces(array $traces): void
-    {
-        $this->traces = $traces;
     }
 }

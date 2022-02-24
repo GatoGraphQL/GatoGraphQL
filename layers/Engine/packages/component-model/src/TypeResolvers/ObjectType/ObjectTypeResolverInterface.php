@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -14,12 +15,36 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
 {
     public function getFieldSchemaDefinition(string $field): ?array;
     public function hasObjectTypeFieldResolversForField(string $field): bool;
-    public function resolveFieldValidationErrorQualifiedEntries(string $field, array &$variables = null): array;
-    public function resolveFieldValidationWarningQualifiedEntries(string $field, array &$variables = null): array;
-    public function resolveFieldDeprecationQualifiedEntries(string $field, array &$variables = null): array;
-    public function getFieldTypeResolver(string $field): ?ConcreteTypeResolverInterface;
-    public function getFieldTypeModifiers(string $field): ?int;
-    public function getFieldMutationResolver(string $field): ?MutationResolverInterface;
+    public function collectFieldValidationErrorQualifiedEntries(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
+    ): void;
+    public function collectFieldValidationWarningQualifiedEntries(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
+    public function collectFieldDeprecationQualifiedEntries(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
+    public function getFieldTypeResolver(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?ConcreteTypeResolverInterface;
+    public function getFieldTypeModifiers(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?int;
+    public function getFieldMutationResolver(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?MutationResolverInterface;
     public function isFieldAMutation(string $field): ?bool;
     public function getAllMandatoryDirectivesForFields(): array;
     /**

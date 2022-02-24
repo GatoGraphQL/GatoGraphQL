@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
@@ -215,22 +216,14 @@ trait AliasSchemaDirectiveResolverTrait
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$fieldDirectiveFields,
         array &$variables,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->dissectAndValidateDirectiveForSchema(
             $relationalTypeResolver,
             $fieldDirectiveFields,
             $variables,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
-            $schemaTraces
+            $engineIterationFeedbackStore,
         );
     }
 
@@ -241,18 +234,14 @@ trait AliasSchemaDirectiveResolverTrait
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->validateDirectiveArgumentsForSchema(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations
+            $objectTypeFieldResolutionFeedbackStore,
         );
     }
 
@@ -318,16 +307,6 @@ trait AliasSchemaDirectiveResolverTrait
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$objectTraces,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
     ): void {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         $aliasedDirectiveResolver->resolveDirective(
@@ -342,16 +321,6 @@ trait AliasSchemaDirectiveResolverTrait
             $variables,
             $messages,
             $engineIterationFeedbackStore,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectNotices,
-            $objectTraces,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
-            $schemaTraces
         );
     }
 

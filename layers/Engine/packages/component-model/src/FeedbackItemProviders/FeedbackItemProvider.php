@@ -22,6 +22,19 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public const E8 = 'e8';
     public const E9 = 'e9';
     public const E10 = 'e10';
+    public const E11 = 'e11';
+    public const E12 = 'e12';
+    public const E13 = 'e13';
+    public const E14 = 'e14';
+    public const E15 = 'e15';
+    public const E16 = 'e16';
+    public const E17 = 'e17';
+    public const E18 = 'e18';
+    public const E19 = 'e19';
+    public const E20 = 'e20';
+    public const E21 = 'e21';
+    public const E22 = 'e22';
+    public const E23 = 'e23';
 
     /**
      * @return string[]
@@ -40,6 +53,19 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E8,
             self::E9,
             self::E10,
+            self::E11,
+            self::E12,
+            self::E13,
+            self::E14,
+            self::E15,
+            self::E16,
+            self::E17,
+            self::E18,
+            self::E19,
+            self::E20,
+            self::E21,
+            self::E22,
+            self::E23,
         ];
     }
 
@@ -57,6 +83,19 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E8 => $this->__('No TypeResolver resolves object \'%s\'', 'component-model'),
             self::E9 => $this->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'component-model'),
             self::E10 => $this->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'component-model'),
+            self::E11 => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'', 'component-model'),
+            self::E12 => $this->__('Resolving directive \'%s\' triggered an exception, please contact the admin', 'component-model'),
+            self::E13 => $this->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
+            self::E14 => $this->__('Expression \'%s\' is undefined', 'component-model'),
+            self::E15 => $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
+            self::E16 => $this->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
+            self::E17 => $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
+            self::E18 => $this->__('Validation failed for directives in fields \'%s\'', 'component-model') ,
+            self::E19 => $this->__('Validation failed for fields \'%s\'', 'component-model'),
+            self::E20 => $this->__('There is no directive with name \'%s\'', 'component-model'),
+            self::E21 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'component-model'),
+            self::E22 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'component-model'),
+            self::E23 => $this->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -75,7 +114,20 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E7,
             self::E8,
             self::E9,
-            self::E10
+            self::E10,
+            self::E11,
+            self::E12,
+            self::E13,
+            self::E14,
+            self::E15,
+            self::E16,
+            self::E17,
+            self::E18,
+            self::E19,
+            self::E20,
+            self::E21,
+            self::E22,
+            self::E23
                 => FeedbackCategories::ERROR,
             default
                 => parent::getCategory($code),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
@@ -15,8 +16,6 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var array<string, mixed> */
         array $extensions = [],
-        /** @var array<string, mixed> */
-        array $data = [],
         /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
         protected array $nested = [],
     ) {
@@ -24,7 +23,27 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
             $feedbackItemResolution,
             $location,
             $extensions,
-            $data,
+        );
+    }
+
+    public static function fromSchemaInputValidationFeedback(
+        SchemaInputValidationFeedbackInterface $schemaInputValidationFeedback,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+    ): self {
+        /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
+        $nestedObjectTypeFieldResolutionFeedbackEntries = [];
+        foreach ($schemaInputValidationFeedback->getNested() as $nestedSchemaInputValidationFeedback) {
+            $nestedObjectTypeFieldResolutionFeedbackEntries[] = static::fromSchemaInputValidationFeedback(
+                $nestedSchemaInputValidationFeedback,
+                $relationalTypeResolver,
+            );
+        }
+        return new self(
+            $schemaInputValidationFeedback->getFeedbackItemResolution(),
+            $schemaInputValidationFeedback->getLocation(),
+            $relationalTypeResolver,
+            $schemaInputValidationFeedback->getExtensions(),
+            $nestedObjectTypeFieldResolutionFeedbackEntries
         );
     }
 

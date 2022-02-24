@@ -13,8 +13,8 @@ use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -155,13 +155,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     public function resolveDirectivesIntoPipelineData(
         array $fieldDirectives,
         array &$fieldDirectiveFields,
-        bool $areNestedDirectives,
         array &$variables,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         /**
         * All directives are placed somewhere in the pipeline. There are 5 positions:
@@ -180,104 +175,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         ];
 
         // Resolve from directive into their actual object instance.
-        $directiveSchemaErrors = $directiveSchemaWarnings = $directiveSchemaDeprecations = $directiveSchemaNotices = $directiveSchemaTraces = [];
         $directiveResolverInstanceData = $this->validateAndResolveInstances(
             $fieldDirectives,
             $fieldDirectiveFields,
             $variables,
-            $directiveSchemaErrors,
-            $directiveSchemaWarnings,
-            $directiveSchemaDeprecations,
-            $directiveSchemaNotices,
-            $directiveSchemaTraces
+            $engineIterationFeedbackStore,
         );
-        // If it is a root directives, then add the fields where they appear into the errors/warnings/deprecations
-        if (!$areNestedDirectives) {
-            // In the case of an error, Maybe prepend the field(s) containing the directive.
-            // Eg: when the directive name doesn't exist: /?query=id<skipanga>
-            foreach ($directiveSchemaErrors as $directiveSchemaError) {
-                $directive = $directiveSchemaError[Tokens::PATH][0];
-                if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    foreach ($directiveFields as $directiveField) {
-                        $schemaError = $directiveSchemaError;
-                        array_unshift($schemaError[Tokens::PATH], $directiveField);
-                        $this->prependPathOnNestedErrors($schemaError, $directiveField);
-                        $schemaErrors[] = $schemaError;
-                    }
-                } else {
-                    $schemaErrors[] = $directiveSchemaError;
-                }
-            }
-            foreach ($directiveSchemaWarnings as $directiveSchemaWarning) {
-                $directive = $directiveSchemaWarning[Tokens::PATH][0];
-                if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    foreach ($directiveFields as $directiveField) {
-                        $schemaWarning = $directiveSchemaWarning;
-                        array_unshift($schemaWarning[Tokens::PATH], $directiveField);
-                        $schemaWarnings[] = $schemaWarning;
-                    }
-                } else {
-                    $schemaWarnings[] = $directiveSchemaWarning;
-                }
-            }
-            foreach ($directiveSchemaDeprecations as $directiveSchemaDeprecation) {
-                $directive = $directiveSchemaDeprecation[Tokens::PATH][0];
-                if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    foreach ($directiveFields as $directiveField) {
-                        $schemaDeprecation = $directiveSchemaDeprecation;
-                        array_unshift($schemaDeprecation[Tokens::PATH], $directiveField);
-                        $schemaDeprecations[] = $schemaDeprecation;
-                    }
-                } else {
-                    $schemaDeprecations[] = $directiveSchemaDeprecation;
-                }
-            }
-            foreach ($directiveSchemaNotices as $directiveSchemaNotice) {
-                $directive = $directiveSchemaNotice[Tokens::PATH][0];
-                if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    foreach ($directiveFields as $directiveField) {
-                        $schemaNotice = $directiveSchemaNotice;
-                        array_unshift($schemaNotice[Tokens::PATH], $directiveField);
-                        $schemaNotices[] = $schemaNotice;
-                    }
-                } else {
-                    $schemaNotices[] = $directiveSchemaNotice;
-                }
-            }
-            foreach ($directiveSchemaTraces as $directiveSchemaTrace) {
-                $directive = $directiveSchemaTrace[Tokens::PATH][0];
-                if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    foreach ($directiveFields as $directiveField) {
-                        $schemaTrace = $directiveSchemaTrace;
-                        array_unshift($schemaTrace[Tokens::PATH], $directiveField);
-                        $schemaTraces[] = $schemaTrace;
-                    }
-                } else {
-                    $schemaTraces[] = $directiveSchemaTrace;
-                }
-            }
-        } else {
-            $schemaErrors = array_merge(
-                $schemaErrors,
-                $directiveSchemaErrors
-            );
-            $schemaWarnings = array_merge(
-                $schemaWarnings,
-                $directiveSchemaWarnings
-            );
-            $schemaDeprecations = array_merge(
-                $schemaDeprecations,
-                $directiveSchemaDeprecations
-            );
-            $schemaNotices = array_merge(
-                $schemaNotices,
-                $directiveSchemaNotices
-            );
-            $schemaTraces = array_merge(
-                $schemaTraces,
-                $directiveSchemaTraces
-            );
-        }
 
         // Create an array with the dataFields affected by each directive, in order in which they will be invoked
         foreach ($directiveResolverInstanceData as $instanceID => $directiveResolverInstanceData) {
@@ -288,6 +191,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectivesByPosition[$pipelinePosition][] = $directiveResolverInstanceData['fieldDirective'];
             $directiveFieldsByPosition[$pipelinePosition][] = $directiveResolverInstanceData['fields'];
         }
+
         // Once we have them ordered, we can simply discard the positions, keep only the values
         // Each item has 3 elements: the directiveResolverInstance, its fieldDirective, and the fields it affects
         $pipelineData = [];
@@ -300,32 +204,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 ];
             }
         }
-        return $pipelineData;
-    }
 
-    /**
-     * Add the field(s) to the head of the error path, for all nested errors
-     */
-    protected function prependPathOnNestedErrors(array &$directiveSchemaError, string $directiveField): void
-    {
-        if (!isset($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
-            return;
-        }
-        foreach ($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$nestedDirectiveSchemaError) {
-            array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $directiveField);
-            $this->prependPathOnNestedErrors($nestedDirectiveSchemaError, $directiveField);
-        }
+        return $pipelineData;
     }
 
     protected function validateAndResolveInstances(
         array $fieldDirectives,
         array $fieldDirectiveFields,
         array &$variables,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         $instances = [];
         // Count how many times each directive is added
@@ -358,46 +245,71 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectiveResolverInstances = $this->getDirectiveResolverInstancesForDirective($fieldDirective, $fieldDirectiveFields[$enqueuedFieldDirective], $variables);
             $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
             // If there is no directive with this name, show an error and skip it
-            if (is_null($fieldDirectiveResolverInstances)) {
-                $schemaErrors[] = [
-                    Tokens::PATH => [$fieldDirective],
-                    Tokens::MESSAGE => sprintf(
-                        $this->__('There is no directive with name \'%s\'', 'component-model'),
-                        $directiveName
-                    ),
-                ];
+            if ($fieldDirectiveResolverInstances === null) {
+                foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E20,
+                                [
+                                    $directiveName,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                            $field,
+                        )
+                    );
+                }
                 continue;
             }
             $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
 
             if (empty($fieldDirectiveResolverInstances)) {
-                $schemaErrors[] = [
-                    Tokens::PATH => [$fieldDirective],
-                    Tokens::MESSAGE => sprintf(
-                        $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'component-model'),
-                        $directiveName,
-                        json_encode($directiveArgs),
-                        implode(
-                            $this->__('\', \'', 'component-model'),
-                            $fieldDirectiveFields[$fieldDirective]
+                foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E21,
+                                [
+                                    $directiveName,
+                                    json_encode($directiveArgs),
+                                    implode(
+                                        $this->__('\', \'', 'component-model'),
+                                        $fieldDirectiveFields[$fieldDirective]
+                                    ),
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                            $field,
                         )
-                    ),
-                ];
+                    );
+                }
                 continue;
             }
 
             foreach ($fieldDirectiveFields[$enqueuedFieldDirective] as $field) {
                 $directiveResolverInstance = $fieldDirectiveResolverInstances[$field] ?? null;
-                if (is_null($directiveResolverInstance)) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$fieldDirective],
-                        Tokens::MESSAGE => sprintf(
-                            $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'component-model'),
-                            $directiveName,
-                            json_encode($directiveArgs),
-                            $field
-                        ),
-                    ];
+                if ($directiveResolverInstance === null) {
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E22,
+                                [
+                                    $directiveName,
+                                    json_encode($directiveArgs),
+                                    $field,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                            $field,
+                        )
+                    );
                     continue;
                 }
 
@@ -421,23 +333,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directiveResolverInstance = $instanceData['instance'];
             $directiveResolverFields = $instanceData['fields'];
             // If the enqueued and the fieldDirective are different, it's because it is a repeated one
-            $isRepeatedFieldDirective = $fieldDirective != $enqueuedFieldDirective;
+            $isRepeatedFieldDirective = $fieldDirective !== $enqueuedFieldDirective;
             // If it is a repeated directive, no need to do the validation again
-            if ($isRepeatedFieldDirective) {
-                // If there is an existing error, then skip adding this resolver to the pipeline
-                if (
-                    !empty(array_filter(
-                        $schemaErrors,
-                        function ($schemaError) use ($fieldDirective) {
-                            return $schemaError[Tokens::PATH][0] == $fieldDirective;
-                        }
-                    ))
-                ) {
-                    continue;
-                }
-            } else {
+            if (!$isRepeatedFieldDirective) {
                 // Validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
-                $fieldSchemaErrors = [];
+                $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
                 list(
                     $validFieldDirective,
                     $directiveName,
@@ -446,46 +346,75 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $this,
                     $fieldDirectiveFields,
                     $variables,
-                    $fieldSchemaErrors,
-                    $schemaWarnings,
-                    $schemaDeprecations,
-                    $schemaNotices,
-                    $schemaTraces
+                    $separateEngineIterationFeedbackStore,
                 );
+                $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
                 /** @phpstan-ignore-next-line */
-                if ($fieldSchemaErrors) {
-                    $schemaErrors = array_merge(
-                        $schemaErrors,
-                        $fieldSchemaErrors
-                    );
+                if ($separateEngineIterationFeedbackStore->hasErrors()) {
                     continue;
                 }
 
                 // Validate against the directiveResolver
                 if ($maybeErrors = $directiveResolverInstance->resolveDirectiveValidationErrorDescriptions($this, $directiveName, $directiveArgs)) {
                     foreach ($maybeErrors as $error) {
-                        $schemaErrors[] = [
-                            Tokens::PATH => [$fieldDirective],
-                            Tokens::MESSAGE => $error,
-                        ];
+                        foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                                new SchemaFeedback(
+                                    new FeedbackItemResolution(
+                                        GenericFeedbackItemProvider::class,
+                                        GenericFeedbackItemProvider::E1,
+                                        [
+                                            $error,
+                                        ]
+                                    ),
+                                    LocationHelper::getNonSpecificLocation(),
+                                    $this,
+                                    $field,
+                                )
+                            );
+                        }
                     }
                     continue;
                 }
 
                 // Check for warnings
                 if ($warningDescription = $directiveResolverInstance->resolveDirectiveWarningDescription($this)) {
-                    $schemaWarnings[] = [
-                        Tokens::PATH => [$fieldDirective],
-                        Tokens::MESSAGE => $warningDescription,
-                    ];
+                    foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                        $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
+                            new SchemaFeedback(
+                                new FeedbackItemResolution(
+                                    GenericFeedbackItemProvider::class,
+                                    GenericFeedbackItemProvider::W1,
+                                    [
+                                        $warningDescription,
+                                    ]
+                                ),
+                                LocationHelper::getNonSpecificLocation(),
+                                $this,
+                                $field,
+                            )
+                        );
+                    }
                 }
 
                 // Check for deprecations
                 if ($deprecationMessage = $directiveResolverInstance->getDirectiveDeprecationMessage($this)) {
-                    $schemaDeprecations[] = [
-                        Tokens::PATH => [$fieldDirective],
-                        Tokens::MESSAGE => $deprecationMessage,
-                    ];
+                    foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                        $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
+                            new SchemaFeedback(
+                                new FeedbackItemResolution(
+                                    GenericFeedbackItemProvider::class,
+                                    GenericFeedbackItemProvider::D1,
+                                    [
+                                        $deprecationMessage,
+                                    ]
+                                ),
+                                LocationHelper::getNonSpecificLocation(),
+                                $this,
+                                $field,
+                            )
+                        );
+                    }
                 }
             }
 
@@ -507,14 +436,23 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $directiveResolverFields,
                         $alreadyProcessingFields
                     );
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$fieldDirective],
-                        Tokens::MESSAGE => sprintf(
-                            $this->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
-                            $fieldDirective,
-                            implode('\', \'', $alreadyProcessingFields)
-                        ),
-                    ];
+                    foreach ($alreadyProcessingFields as $field) {
+                        $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                            new SchemaFeedback(
+                                new FeedbackItemResolution(
+                                    FeedbackItemProvider::class,
+                                    FeedbackItemProvider::E23,
+                                    [
+                                        $fieldDirective,
+                                        implode('\', \'', $alreadyProcessingFields),
+                                    ]
+                                ),
+                                LocationHelper::getNonSpecificLocation(),
+                                $this,
+                                $field,
+                            )
+                        );
+                    }
                     // If after removing the duplicated fields there are still others, process them
                     // Otherwise, skip
                     if (!$directiveResolverFields) {
@@ -594,16 +532,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$objectTraces,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
     ): array {
         // Obtain the data for the required object IDs
         $objectIDItems = [];
@@ -666,16 +594,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $variables,
             $messages,
             $engineIterationFeedbackStore,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectNotices,
-            $objectTraces,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
-            $schemaTraces
         );
 
         return $objectIDItems;
@@ -985,16 +903,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$objectTraces,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
     ): void {
         // Iterate while there are directives with data to be processed
         while (!empty($this->fieldDirectiveIDFields)) {
@@ -1034,22 +942,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectiveDirectFields = array_unique($fieldDirectiveDirectFields);
 
             // Validate and resolve the directives into instances and fields they operate on
-            $directivePipelineSchemaErrors = [];
+            $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
             $directivePipelineData = $this->resolveDirectivesIntoPipelineData(
                 $fieldDirectives,
                 $fieldDirectiveFields,
-                false,
                 $variables,
-                $directivePipelineSchemaErrors,
-                $schemaWarnings,
-                $schemaDeprecations,
-                $schemaNotices,
-                $schemaTraces
+                $separateEngineIterationFeedbackStore,
             );
-            $schemaErrors = array_merge(
-                $schemaErrors,
-                $directivePipelineSchemaErrors
-            );
+            $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
 
             // If any directive failed validation and the field must be set to `null`,
             // then skip processing that field altogether
@@ -1057,12 +957,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             /** @var ComponentConfiguration */
             $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
             if (
-                !empty($directivePipelineSchemaErrors)
+                $separateEngineIterationFeedbackStore->hasErrors()
                 && $componentConfiguration->removeFieldIfDirectiveFailed()
             ) {
-                // Extract the failing fields from the path of the thrown error
-                foreach ($directivePipelineSchemaErrors as $directivePipelineSchemaError) {
-                    $schemaErrorFailingFields[] = $directivePipelineSchemaError[Tokens::PATH][0];
+                // Extract the failing fields from the errors
+                foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $error) {
+                    $schemaErrorFailingFields[] = $error->getField();
+                }
+                foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $error) {
+                    $schemaErrorFailingFields[] = $error->getField();
                 }
                 $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
                 // Set those fields as null
@@ -1115,8 +1018,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $directiveResolverInstances[] = $directiveResolverInstance;
             }
 
-            $directivePipelineSchemaErrors = $directivePipelineIDObjectErrors = [];
-
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
             $directivePipeline = $this->getDirectivePipelineService()->getDirectivePipeline($directiveResolverInstances);
             $directivePipeline->resolveDirectivePipeline(
@@ -1130,75 +1031,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $variables,
                 $messages,
                 $engineIterationFeedbackStore,
-                $directivePipelineIDObjectErrors,
-                $objectWarnings,
-                $objectDeprecations,
-                $objectNotices,
-                $objectTraces,
-                $directivePipelineSchemaErrors,
-                $schemaWarnings,
-                $schemaDeprecations,
-                $schemaNotices,
-                $schemaTraces
             );
-
-            // If any directive failed execution, then prepend the path on the error
-            if ($directivePipelineSchemaErrors) {
-                // Extract the failing fields from the path of the thrown error
-                $failingFieldSchemaErrors = [];
-                foreach ($directivePipelineSchemaErrors as $directivePipelineSchemaError) {
-                    $schemaErrorFailingField = $directivePipelineSchemaError[Tokens::PATH][0];
-                    if ($failingFields = $fieldDirectiveFields[$schemaErrorFailingField] ?? []) {
-                        foreach ($failingFields as $failingField) {
-                            $schemaError = $directivePipelineSchemaError;
-                            array_unshift($schemaError[Tokens::PATH], $failingField);
-                            $this->prependPathOnNestedErrors($schemaError, $failingField);
-                            $failingFieldSchemaErrors[$failingField][] = $schemaError;
-                        }
-                    } else {
-                        $schemaErrors[] = $directivePipelineSchemaError;
-                    }
-                }
-                foreach ($failingFieldSchemaErrors as $failingField => $failingSchemaErrors) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$failingField],
-                        Tokens::MESSAGE => $this->__('This field can\'t be executed due to errors from its directives', 'component-model'),
-                        Tokens::EXTENSIONS => [
-                            Tokens::NESTED => $failingSchemaErrors,
-                        ],
-                    ];
-                }
-            }
-            if ($directivePipelineIDObjectErrors) {
-                // Extract the failing fields from the path of the thrown error
-                $failingFieldIDObjectErrors = [];
-                foreach ($directivePipelineIDObjectErrors as $id => $directivePipelineObjectErrors) {
-                    foreach ($directivePipelineObjectErrors as $directivePipelineDBError) {
-                        $dbErrorFailingField = $directivePipelineDBError[Tokens::PATH][0];
-                        if ($failingFields = $fieldDirectiveFields[$dbErrorFailingField] ?? []) {
-                            foreach ($failingFields as $failingField) {
-                                $dbError = $directivePipelineDBError;
-                                array_unshift($dbError[Tokens::PATH], $failingField);
-                                $this->prependPathOnNestedErrors($dbError, $failingField);
-                                $failingFieldIDObjectErrors[$failingField][$id][] = $dbError;
-                            }
-                        } else {
-                            $objectErrors[$id][] = $directivePipelineDBError;
-                        }
-                    }
-                }
-                foreach ($failingFieldIDObjectErrors as $failingField => $failingIDObjectErrors) {
-                    foreach ($failingIDObjectErrors as $id => $failingObjectErrors) {
-                        $objectErrors[$id][] = [
-                            Tokens::PATH => [$failingField],
-                            Tokens::MESSAGE => $this->__('This field can\'t be executed due to errors from its directives', 'component-model'),
-                            Tokens::EXTENSIONS => [
-                                Tokens::NESTED => $failingObjectErrors,
-                            ],
-                        ];
-                    }
-                }
-            }
         }
     }
 

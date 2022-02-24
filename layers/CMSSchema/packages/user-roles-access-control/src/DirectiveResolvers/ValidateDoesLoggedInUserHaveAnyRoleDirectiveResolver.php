@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers;
 
-use PoP\Root\App;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Root\App;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use PoPCMSSchema\UserRolesAccessControl\FeedbackItemProviders\FeedbackItemProvider;
 
 class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
@@ -51,30 +53,28 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         return !empty(array_intersect($roles, $userRoles));
     }
 
-    protected function getValidationFailedMessage(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): string
+    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
     {
         $roles = $this->directiveArgsForSchema['roles'];
         $isValidatingDirective = $this->isValidatingDirective();
-        if (count($roles) == 1) {
-            $errorMessage = $isValidatingDirective ?
-                $this->__('You must have role \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
-                $this->__('You must have role \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
-        } else {
-            $errorMessage = $isValidatingDirective ?
-                $this->__('You must have any role from among \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
-                $this->__('You must have any role from among \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
-        }
-        return sprintf(
-            $errorMessage,
-            implode(
-                $this->__('\', \''),
-                $roles
-            ),
-            implode(
-                $this->__('\', \''),
-                $failedDataFields
-            ),
-            $relationalTypeResolver->getMaybeNamespacedTypeName()
+        $code = (count($roles) === 1)
+            ? ($isValidatingDirective ? FeedbackItemProvider::E5 : FeedbackItemProvider::E6)
+            : ($isValidatingDirective ? FeedbackItemProvider::E7 : FeedbackItemProvider::E8);
+
+        return new FeedbackItemResolution(
+            FeedbackItemProvider::class,
+            $code,
+            [
+                implode(
+                    $this->__('\', \''),
+                    $roles
+                ),
+                implode(
+                    $this->__('\', \''),
+                    $failedDataFields
+                ),
+                $relationalTypeResolver->getMaybeNamespacedTypeName(),
+            ]
         );
     }
 

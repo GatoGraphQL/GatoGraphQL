@@ -9,3 +9,6 @@ services:
 
     PoPCMSSchema\UserStateAccessControl\Hooks\:
         resource: '../src/Hooks/*'
+
+    PoPCMSSchema\UserStateAccessControl\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

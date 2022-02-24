@@ -20,16 +20,6 @@ class DirectivePipelineUtils
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$objectTraces,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
     ): array {
         return [
             'typeResolver' => &$relationalTypeResolver,
@@ -42,16 +32,6 @@ class DirectivePipelineUtils
             'variables' => &$variables,
             'messages' => &$messages,
             'engineIterationFeedbackStore' => &$engineIterationFeedbackStore,
-            'objectErrors' => &$objectErrors,
-            'objectWarnings' => &$objectWarnings,
-            'objectDeprecations' => &$objectDeprecations,
-            'objectNotices' => &$objectNotices,
-            'objectTraces' => &$objectTraces,
-            'schemaErrors' => &$schemaErrors,
-            'schemaWarnings' => &$schemaWarnings,
-            'schemaDeprecations' => &$schemaDeprecations,
-            'schemaNotices' => &$schemaNotices,
-            'schemaTraces' => &$schemaTraces,
         ];
     }
 
@@ -72,12 +52,10 @@ class DirectivePipelineUtils
             &$payload['objectWarnings'],
             &$payload['objectDeprecations'],
             &$payload['objectNotices'],
-            &$payload['objectTraces'],
             &$payload['schemaErrors'],
             &$payload['schemaWarnings'],
             &$payload['schemaDeprecations'],
             &$payload['schemaNotices'],
-            &$payload['schemaTraces'],
         ];
     }
 }

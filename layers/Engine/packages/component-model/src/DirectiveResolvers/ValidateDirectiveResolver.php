@@ -6,6 +6,8 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -42,51 +44,53 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         return PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE;
     }
 
-    protected function validateFields(RelationalTypeResolverInterface $relationalTypeResolver, array $dataFields, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables, array &$failedDataFields): void
-    {
+    protected function validateFields(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $dataFields,
+        array &$variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        array &$failedDataFields,
+    ): void {
         foreach ($dataFields as $field) {
-            $success = $this->validateField($relationalTypeResolver, $field, $schemaErrors, $schemaWarnings, $schemaDeprecations, $variables);
-            if (!$success) {
+            $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            $this->validateField(
+                $relationalTypeResolver,
+                $field,
+                $variables,
+                $objectTypeFieldResolutionFeedbackStore
+            );
+            $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+                $objectTypeFieldResolutionFeedbackStore,
+                $relationalTypeResolver,
+                $field,
+                $this->directive
+            );
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 $failedDataFields[] = $field;
             }
         }
     }
 
-    protected function validateField(RelationalTypeResolverInterface $relationalTypeResolver, string $field, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables): bool
-    {
+    protected function validateField(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $field,
+        array &$variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         /**
          * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
          * (that depends on each object), it can't resolve this functionality
          */
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
-            return true;
+            return;
         }
 
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
 
-        // Check for errors first, warnings and deprecations then
-        $success = true;
-        if ($schemaValidationErrors = $objectTypeResolver->resolveFieldValidationErrorQualifiedEntries($field, $variables)) {
-            $schemaErrors = array_merge(
-                $schemaErrors,
-                $schemaValidationErrors
-            );
-            $success = false;
-        }
-        if ($schemaValidationWarnings = $objectTypeResolver->resolveFieldValidationWarningQualifiedEntries($field, $variables)) {
-            $schemaWarnings = array_merge(
-                $schemaWarnings,
-                $schemaValidationWarnings
-            );
-        }
-        if ($schemaValidationDeprecations = $objectTypeResolver->resolveFieldDeprecationQualifiedEntries($field, $variables)) {
-            $schemaDeprecations = array_merge(
-                $schemaDeprecations,
-                $schemaValidationDeprecations
-            );
-        }
-        return $success;
+        $objectTypeResolver->collectFieldValidationErrorQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        $objectTypeResolver->collectFieldValidationWarningQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        $objectTypeResolver->collectFieldDeprecationQualifiedEntries($field, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string

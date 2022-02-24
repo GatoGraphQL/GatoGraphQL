@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\FieldQuery\FieldQueryInterpreterInterface as UpstreamFieldQueryInterpreterInterface;
@@ -60,34 +62,48 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
     public function extractFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
-        ?array $variables = null,
-        ?array &$schemaErrors = null,
-        ?array &$schemaWarnings = null,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array;
     public function extractDirectiveArguments(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directive,
-        ?array $variables = null,
-        ?array &$schemaErrors = null,
-        ?array &$schemaWarnings = null,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
-    public function extractFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, ?array $variables = null): array;
-    public function extractDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $directive, ?array $variables = null, bool $disableDynamicFields = false): array;
+    public function extractFieldArgumentsForSchema(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array;
+    public function extractDirectiveArgumentsForSchema(
+        DirectiveResolverInterface $directiveResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $directive,
+        array $fieldDirectiveFields,
+        array $variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        bool $disableDynamicFields = false
+    ): array;
     public function extractFieldArgumentsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $field,
-        ?array $variables,
-        ?array $expressions
+        array $variables,
+        array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
     public function extractDirectiveArgumentsForObject(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
+        array $fields,
         string $directive,
         array $variables,
-        array $expressions
+        array $expressions,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
     public function maybeConvertFieldArgumentValue(mixed $fieldArgValue, ?array $variables = null): mixed;
     public function maybeConvertFieldArgumentArrayOrObjectValue(mixed $fieldArgValue, ?array $variables = null): mixed;

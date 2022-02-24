@@ -7,12 +7,14 @@ namespace PoP\ComponentModel\Schema;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
-use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
@@ -27,7 +29,9 @@ use PoP\FieldQuery\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
+use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 use stdClass;
 
 class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements FieldQueryInterpreterInterface
@@ -45,22 +49,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      * @var array<string, array>
      */
     private array $extractedDirectiveArgumentsCache = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $extractedFieldArgumentErrorsCache = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $extractedFieldArgumentWarningsCache = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $extractedDirectiveArgumentErrorsCache = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $extractedDirectiveArgumentWarningsCache = [];
     /**
      * @var array<string, array<string, array<string, InputTypeResolverInterface>|null>>
      */
@@ -334,36 +322,18 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldDirective,
-        ?array $variables = null,
-        ?array &$schemaErrors = null,
-        ?array &$schemaWarnings = null,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
         $variablesHash = $this->getVariablesHash($variables);
         $relationalTypeResolverClass = get_class($relationalTypeResolver);
         if (!isset($this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash])) {
-            $fieldSchemaWarnings = $fieldSchemaErrors = [];
             $this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash] = $this->doExtractDirectiveArguments(
                 $directiveResolver,
                 $relationalTypeResolver,
                 $fieldDirective,
                 $variables,
-                $fieldSchemaErrors,
-                $fieldSchemaWarnings,
-            );
-            $this->extractedDirectiveArgumentErrorsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash] = $fieldSchemaErrors;
-            $this->extractedDirectiveArgumentWarningsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash] = $fieldSchemaWarnings;
-        }
-        // Integrate the errors/warnings too
-        if ($schemaErrors !== null) {
-            $schemaErrors = array_merge(
-                $schemaErrors,
-                $this->extractedDirectiveArgumentErrorsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash]
-            );
-        }
-        if ($schemaWarnings !== null) {
-            $schemaWarnings = array_merge(
-                $schemaWarnings,
-                $this->extractedDirectiveArgumentWarningsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash]
+                $objectTypeFieldResolutionFeedbackStore,
             );
         }
         return $this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash];
@@ -374,8 +344,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldDirective,
         ?array $variables,
-        array &$schemaErrors,
-        array &$schemaWarnings,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
         $directiveArgumentNameDefaultValues = $this->getDirectiveArgumentNameDefaultValues($directiveResolver, $relationalTypeResolver);
         // Iterate all the elements, and extract them into the array
@@ -383,14 +352,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $directiveArgumentNameTypeResolvers = $this->getDirectiveArgumentNameTypeResolvers($directiveResolver, $relationalTypeResolver);
             $orderedDirectiveArgNamesEnabled = $directiveResolver->enableOrderedSchemaDirectiveArgs($relationalTypeResolver);
             return $this->extractAndValidateFielOrDirectiveArguments(
+                $relationalTypeResolver,
                 $fieldDirective,
                 $directiveArgElems,
                 $orderedDirectiveArgNamesEnabled,
                 $directiveArgumentNameTypeResolvers,
                 $directiveArgumentNameDefaultValues,
                 $variables,
-                $schemaErrors,
-                $schemaWarnings,
+                $objectTypeFieldResolutionFeedbackStore,
                 ResolverTypes::DIRECTIVE
             );
         }
@@ -407,15 +376,15 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      * @param array<string, InputTypeResolverInterface> $fieldOrDirectiveArgumentNameTypeResolvers
      */
     protected function extractAndValidateFielOrDirectiveArguments(
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldOrDirective,
         array $fieldOrDirectiveArgElems,
         bool $orderedFieldOrDirectiveArgNamesEnabled,
         array $fieldOrDirectiveArgumentNameTypeResolvers,
         array $fieldOrDirectiveArgumentNameDefaultValues,
         ?array $variables,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        string $resolverType
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        string $resolverType,
     ): array {
         if ($orderedFieldOrDirectiveArgNamesEnabled) {
             $orderedFieldOrDirectiveArgNames = array_keys($fieldOrDirectiveArgumentNameTypeResolvers);
@@ -423,7 +392,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $fieldOrDirectiveArgs = [];
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        $treatUndefinedFieldOrDirectiveArgsAsErrors = $componentConfiguration->treatUndefinedFieldOrDirectiveArgsAsErrors();
         $setFailingFieldResponseAsNull = $componentConfiguration->setFailingFieldResponseAsNull();
         for ($i = 0; $i < count($fieldOrDirectiveArgElems); $i++) {
             $fieldOrDirectiveArg = $fieldOrDirectiveArgElems[$i];
@@ -440,33 +408,33 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldOrDirectiveArgValue = $fieldOrDirectiveArg;
                 if (!$orderedFieldOrDirectiveArgNamesEnabled || !isset($orderedFieldOrDirectiveArgNames[$i])) {
                     $errorMessage = sprintf(
-                        $this->__('The argument on position number %s (with value \'%s\') has its name missing, and %s. Please define the query using the \'key%svalue\' format', 'pop-component-model'),
+                        $this->__('The argument on position number %s (with value \'%s\') has its name missing, and %s. Please define the query using the \'key%svalue\' format', 'component-model'),
                         $i + 1,
                         $fieldOrDirectiveArgValue,
                         $orderedFieldOrDirectiveArgNamesEnabled ?
-                            $this->__('documentation for this argument in the schema definition has not been defined, hence it can\'t be deduced from there', 'pop-component-model') :
-                            $this->__('retrieving this information from the schema definition is not enabled for the field', 'pop-component-model'),
+                            $this->__('documentation for this argument in the schema definition has not been defined, hence it can\'t be deduced from there', 'component-model') :
+                            $this->__('retrieving this information from the schema definition is not enabled for the field', 'component-model'),
                         QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR
                     );
-                    if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
-                        $schemaErrors[] = [
-                            Tokens::PATH => [$fieldOrDirective],
-                            Tokens::MESSAGE => ($resolverType === ResolverTypes::FIELD || $setFailingFieldResponseAsNull) ?
-                                $errorMessage
-                                : sprintf(
-                                    $this->__('%s. The directive has been ignored', 'pop-component-model'),
-                                    $errorMessage
-                                ),
-                        ];
-                    } else {
-                        $schemaWarnings[] = [
-                            Tokens::PATH => [$fieldOrDirective],
-                            Tokens::MESSAGE => sprintf(
-                                $this->__('%s. This argument has been ignored', 'pop-component-model'),
-                                $errorMessage
-                            ),
-                        ];
+                    if ($resolverType === ResolverTypes::DIRECTIVE && !$setFailingFieldResponseAsNull) {
+                        $errorMessage = sprintf(
+                            $this->__('%s. The directive has been ignored', 'component-model'),
+                            $errorMessage
+                        );
                     }
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                GenericFeedbackItemProvider::class,
+                                GenericFeedbackItemProvider::E1,
+                                [
+                                    $errorMessage,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $relationalTypeResolver,
+                        )
+                    );
                     // Ignore extracting this argument
                     continue;
                 }
@@ -477,7 +445,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 // $feedbackMessageStore = $this->getFeedbackMessageStore();
                 // $feedbackMessageStore->maybeAddLogEntry(
                 //     sprintf(
-                //         $this->__('In field or directive \'%s\', the argument on position number %s (with value \'%s\') is resolved as argument \'%s\'', 'pop-component-model'),
+                //         $this->__('In field or directive \'%s\', the argument on position number %s (with value \'%s\') is resolved as argument \'%s\'', 'component-model'),
                 //         $fieldOrDirective,
                 //         $i + 1,
                 //         $fieldOrDirectiveArgValue,
@@ -491,37 +459,31 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 // But don't skip it! It may be that the engine accepts the property, it is just not documented!
                 if (!array_key_exists($fieldOrDirectiveArgName, $fieldOrDirectiveArgumentNameTypeResolvers)) {
                     $errorMessage = sprintf(
-                        $this->__('On %1$s \'%2$s\', there is no argument with name \'%3$s\'', 'pop-component-model'),
+                        $this->__('On %1$s \'%2$s\', there is no argument with name \'%3$s\'', 'component-model'),
                         $resolverType == ResolverTypes::FIELD ? $this->__('field', 'component-model') : $this->__('directive', 'component-model'),
                         $this->getFieldName($fieldOrDirective),
                         $fieldOrDirectiveArgName
                     );
-                    if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
-                        $schemaErrors[] = [
-                            Tokens::PATH => [$fieldOrDirective],
-                            Tokens::MESSAGE => ($resolverType === ResolverTypes::FIELD || $setFailingFieldResponseAsNull) ?
-                                $errorMessage
-                                : sprintf(
-                                    $this->__('%s. The directive has been ignored', 'pop-component-model'),
-                                    $errorMessage
-                                ),
-                                Tokens::EXTENSIONS => [
-                                    Tokens::ARGUMENT_PATH => [$fieldOrDirectiveArgName],
-                                ],
-                        ];
-                        continue;
-                    } else {
-                        $schemaWarnings[] = [
-                            Tokens::PATH => [$fieldOrDirective],
-                            Tokens::MESSAGE => sprintf(
-                                $this->__('%s, so it may have no effect (it has not been removed from the query, though)', 'pop-component-model'),
-                                $errorMessage
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                GenericFeedbackItemProvider::class,
+                                GenericFeedbackItemProvider::E1,
+                                [
+                                    $errorMessage,
+                                ]
                             ),
-                            Tokens::EXTENSIONS => [
-                                Tokens::ARGUMENT_PATH => [$fieldOrDirectiveArgName],
-                            ],
-                        ];
+                            LocationHelper::getNonSpecificLocation(),
+                            $relationalTypeResolver,
+                        )
+                    );
+                    if ($resolverType === ResolverTypes::DIRECTIVE && !$setFailingFieldResponseAsNull) {
+                        $errorMessage = sprintf(
+                            $this->__('%s. The directive has been ignored', 'component-model'),
+                            $errorMessage
+                        );
                     }
+                    continue;
                 }
             }
 
@@ -545,35 +507,17 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     public function extractFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
-        ?array $variables = null,
-        ?array &$schemaErrors = null,
-        ?array &$schemaWarnings = null,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         $variablesHash = $this->getVariablesHash($variables);
         $objectTypeResolverClass = get_class($objectTypeResolver);
         if (!array_key_exists($variablesHash, $this->extractedFieldArgumentsCache[$objectTypeResolverClass][$field] ?? [])) {
-            $fieldSchemaErrors = $fieldSchemaWarnings = [];
             $this->extractedFieldArgumentsCache[$objectTypeResolverClass][$field][$variablesHash] = $this->doExtractFieldArguments(
                 $objectTypeResolver,
                 $field,
                 $variables,
-                $fieldSchemaErrors,
-                $fieldSchemaWarnings,
-            );
-            $this->extractedFieldArgumentErrorsCache[$objectTypeResolverClass][$field][$variablesHash] = $fieldSchemaErrors;
-            $this->extractedFieldArgumentWarningsCache[$objectTypeResolverClass][$field][$variablesHash] = $fieldSchemaWarnings;
-        }
-        // Integrate the errors/warnings too
-        if ($schemaErrors !== null) {
-            $schemaErrors = array_merge(
-                $schemaErrors,
-                $this->extractedFieldArgumentErrorsCache[$objectTypeResolverClass][$field][$variablesHash]
-            );
-        }
-        if ($schemaWarnings !== null) {
-            $schemaWarnings = array_merge(
-                $schemaWarnings,
-                $this->extractedFieldArgumentWarningsCache[$objectTypeResolverClass][$field][$variablesHash]
+                $objectTypeFieldResolutionFeedbackStore,
             );
         }
         return $this->extractedFieldArgumentsCache[$objectTypeResolverClass][$field][$variablesHash];
@@ -583,16 +527,18 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
         ?array $variables,
-        array &$schemaErrors,
-        array &$schemaWarnings,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         // Iterate all the elements, and extract them into the array
         $fieldArgumentNameTypeResolvers = $this->getFieldArgumentNameTypeResolvers($objectTypeResolver, $field);
         if ($fieldArgumentNameTypeResolvers === null) {
-            $schemaErrors[] = [
-                Tokens::PATH => [$field],
-                Tokens::MESSAGE => $this->getNoFieldErrorMessage($objectTypeResolver, $field),
-            ];
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $this->getNoFieldErrorFeedbackItemResolution($objectTypeResolver, $field),
+                    LocationHelper::getNonSpecificLocation(),
+                    $objectTypeResolver,
+                )
+            );
             return null;
         }
         /** @var array */
@@ -602,14 +548,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $fieldSchemaDefinition = $objectTypeResolver->getFieldSchemaDefinition($field);
             $orderedFieldArgsEnabled = $fieldSchemaDefinition[SchemaDefinition::ORDERED_ARGS_ENABLED] ?? false;
             return $this->extractAndValidateFielOrDirectiveArguments(
+                $objectTypeResolver,
                 $field,
                 $fieldArgElems,
                 $orderedFieldArgsEnabled,
                 $fieldArgumentNameTypeResolvers,
                 $fieldOrDirectiveArgumentNameDefaultValues,
                 $variables,
-                $schemaErrors,
-                $schemaWarnings,
+                $objectTypeFieldResolutionFeedbackStore,
                 ResolverTypes::FIELD
             );
         }
@@ -617,69 +563,52 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldOrDirectiveArgumentNameDefaultValues;
     }
 
-    protected function getNoFieldErrorMessage(ObjectTypeResolverInterface $objectTypeResolver, string $field): string
+    protected function getNoFieldErrorFeedbackItemResolution(ObjectTypeResolverInterface $objectTypeResolver, string $field): FeedbackItemResolution
     {
-        return sprintf(
-            $this->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
-            $this->getFieldName($field),
-            $objectTypeResolver->getMaybeNamespacedTypeName()
-        );
-    }
-
-    protected function filterFieldOrDirectiveArgs(array $fieldOrDirectiveArgs): array
-    {
-        // Remove all errors, allow null values
-        return array_filter(
-            $fieldOrDirectiveArgs,
-            function ($elem): bool {
-                // If the input is `[[String]]`, must then validate if any subitem is Error
-                if (is_array($elem)) {
-                    // Filter elements in the array. If any is missing, filter the array out
-                    $filteredElem = $this->filterFieldOrDirectiveArgs($elem);
-                    return count($elem) === count($filteredElem);
-                }
-                // Remove only Errors. Keep NULL, '', 0, false and []
-                return !GeneralUtils::isError($elem);
-            }
+        return new FeedbackItemResolution(
+            FeedbackItemProvider::class,
+            FeedbackItemProvider::E16,
+            [
+                $this->getFieldName($field),
+                $objectTypeResolver->getMaybeNamespacedTypeName()
+            ]
         );
     }
 
     public function extractFieldArgumentsForSchema(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
-        ?array $variables = null
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
-        $schemaErrors = [];
-        $schemaWarnings = [];
-        $schemaDeprecations = [];
         $validAndResolvedField = $field;
         $fieldName = $this->getFieldName($field);
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments(
             $objectTypeResolver,
             $field,
             $variables,
-            $schemaErrors,
-            $schemaWarnings,
+            $separateObjectTypeFieldResolutionFeedbackStore,
         );
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         // If there is no resolver for the field, we will already have an error by now
-        if ($schemaErrors) {
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return [
                 null,
                 $fieldName,
                 $fieldArgs ?? [],
-                $schemaErrors,
-                $schemaWarnings,
-                $schemaDeprecations,
             ];
         }
-        $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
 
         // If there's an error, those args will be removed. Then, re-create the fieldDirective to pass it to the function below
-        if ($schemaErrors) {
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $validAndResolvedField = null;
-        } elseif ($extractedFieldArgs != $fieldArgs) {
+        } elseif ($extractedFieldArgs !== $fieldArgs) {
             // There are 2 reasons why the field might have changed:
             // 1. validField: There are $schemaWarnings: remove the fieldArgs that failed
             // 2. resolvedField: Some fieldArg was a variable: replace it with its value
@@ -689,9 +618,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $validAndResolvedField,
             $fieldName,
             $fieldArgs,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
         ];
     }
 
@@ -734,32 +660,43 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldDirective,
-        ?array $variables = null,
+        array $fieldDirectiveFields,
+        array $variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
         bool $disableDynamicFields = false
     ): array {
-        $schemaErrors = [];
-        $schemaWarnings = [];
-        $schemaDeprecations = [];
         $validAndResolvedDirective = $fieldDirective;
         $directiveName = $this->getFieldDirectiveName($fieldDirective);
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $extractedDirectiveArgs = $directiveArgs = $this->extractDirectiveArguments(
             $directiveResolver,
             $relationalTypeResolver,
             $fieldDirective,
             $variables,
-            $schemaErrors,
-            $schemaWarnings,
+            $objectTypeFieldResolutionFeedbackStore,
         );
-        $directiveArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($relationalTypeResolver, $fieldDirective, $directiveArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $directiveArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($relationalTypeResolver, $fieldDirective, $directiveArgs, $variables, $objectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations, $disableDynamicFields);
+        $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
         // Enable the directiveResolver to add its own code validations
-        $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        if ($directiveArgs !== null) {
+            $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
+        }
+        // Transfer the feedback
+        foreach ($fieldDirectiveFields as $fieldDirective => $fields) {
+            foreach ($fields as $field) {
+                $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $relationalTypeResolver,
+                    $field,
+                );
+            }
+        }
 
         // If there's an error, those args will be removed. Then, re-create the fieldDirective to pass it to the function below
-        if ($schemaErrors) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $validAndResolvedDirective = null;
-        } elseif ($extractedDirectiveArgs != $directiveArgs) {
+        } elseif ($extractedDirectiveArgs !== $directiveArgs) {
             // There are 2 reasons why the fieldDirective might have changed:
             // 1. validField: There are $schemaWarnings: remove the directiveArgs that failed
             // 2. resolvedField: Some directiveArg was a variable: replace it with its value
@@ -769,28 +706,16 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $validAndResolvedDirective,
             $directiveName,
             $directiveArgs,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
         ];
     }
 
-    /**
-     * Add the field or directive to the head of the error path, for all nested errors
-     */
-    protected function prependPathOnNestedErrors(array &$nestedFieldOrDirectiveSchemaError, string $fieldOrDirective): void
-    {
-
-        if (isset($nestedFieldOrDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
-            foreach ($nestedFieldOrDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$deeplyNestedFieldOrDirectiveSchemaError) {
-                array_unshift($deeplyNestedFieldOrDirectiveSchemaError[Tokens::PATH], $fieldOrDirective);
-                $this->prependPathOnNestedErrors($deeplyNestedFieldOrDirectiveSchemaError, $fieldOrDirective);
-            }
-        }
-    }
-
-    protected function validateExtractedFieldOrDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldOrDirective, array $fieldOrDirectiveArgs, ?array $variables, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
-    {
+    protected function validateExtractedFieldOrDirectiveArgumentsForSchema(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldOrDirective,
+        array $fieldOrDirectiveArgs,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array {
         // The UnionTypeResolver cannot validate, it needs to delegate to each targetObjectTypeResolver
         // which will be done on Object, not on Schema.
         // This situation can only happen for Directive
@@ -800,34 +725,11 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
-        if ($fieldOrDirectiveArgs) {
-            foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
-                // Validate it
-                if ($maybeErrors = $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables)) {
-                    foreach ($maybeErrors as $schemaError) {
-                        array_unshift($schemaError[Tokens::PATH], $fieldOrDirective);
-                        $this->prependPathOnNestedErrors($schemaError, $fieldOrDirective);
-                        $schemaErrors[] = $schemaError;
-                    }
-                    // Because it's an error, set the value to null, so it will be filtered out
-                    $fieldOrDirectiveArgs[$argName] = null;
-                }
-                // Find warnings and deprecations
-                if ($maybeWarnings = $this->resolveFieldArgumentValueWarningQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables)) {
-                    foreach ($maybeWarnings as $schemaWarning) {
-                        array_unshift($schemaWarning[Tokens::PATH], $fieldOrDirective);
-                        $schemaWarnings[] = $schemaWarning;
-                    }
-                }
-                if ($maybeDeprecations = $this->resolveFieldArgumentValueDeprecationQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables)) {
-                    foreach ($maybeDeprecations as $schemaDeprecation) {
-                        array_unshift($schemaDeprecation[Tokens::PATH], $fieldOrDirective);
-                        $schemaDeprecations[] = $schemaDeprecation;
-                    }
-                }
-            }
-            // If there was an error, remove those entries
-            $fieldOrDirectiveArgs = $this->filterFieldOrDirectiveArgs($fieldOrDirectiveArgs);
+        foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
+            // Nested dynamic fields: Validation, warnings and deprecations
+            $this->collectFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+            $this->collectFieldArgumentValueWarningQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+            $this->collectFieldArgumentValueDeprecationQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
         }
         return $fieldOrDirectiveArgs;
     }
@@ -836,35 +738,28 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $field,
-        ?array $variables,
-        ?array $expressions
+        array $variables,
+        array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
-        $objectErrors = $objectWarnings = $objectDeprecations = [];
         $validAndResolvedField = $field;
         $fieldName = $this->getFieldName($field);
         $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments(
             $objectTypeResolver,
             $field,
-            $variables
+            $variables,
+            $objectTypeFieldResolutionFeedbackStore
         );
         // Only need to extract arguments if they have fields or arrays
         $fieldOutputKey = $this->getFieldOutputKey($field);
-        $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $objectErrors);
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $castingObjectErrors = $castingObjectWarnings = [];
-        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $castingObjectErrors, $castingObjectWarnings, $objectDeprecations);
-        if ($castingObjectErrors || $castingObjectWarnings) {
-            $id = $objectTypeResolver->getID($object);
-            if ($castingObjectErrors) {
-                $objectErrors[(string)$id] = $castingObjectErrors;
-            }
-            if ($castingObjectWarnings) {
-                $objectWarnings[(string)$id] = $castingObjectWarnings;
-            }
-        }
-        if ($objectErrors) {
+        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $validAndResolvedField = null;
-        } elseif ($extractedFieldArgs != $fieldArgs) {
+        } elseif ($extractedFieldArgs !== $fieldArgs) {
             // There are 2 reasons why the field might have changed:
             // 1. validField: There are $objectWarnings: remove the fieldArgs that failed
             // 2. resolvedField: Some fieldArg was a variable: replace it with its value
@@ -874,9 +769,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $validAndResolvedField,
             $fieldName,
             $fieldArgs ?? [],
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations
         ];
     }
 
@@ -884,37 +776,40 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
+        array $fields,
         string $fieldDirective,
         array $variables,
-        array $expressions
+        array $expressions,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
-        $objectErrors = $objectWarnings = $objectDeprecations = [];
         $validAndResolvedDirective = $fieldDirective;
         $directiveName = $this->getFieldDirectiveName($fieldDirective);
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $extractedDirectiveArgs = $directiveArgs = $this->extractDirectiveArguments(
             $directiveResolver,
             $relationalTypeResolver,
             $fieldDirective,
             $variables,
+            $objectTypeFieldResolutionFeedbackStore,
         );
         // Only need to extract arguments if they have fields or arrays
         $directiveOutputKey = $this->getDirectiveOutputKey($fieldDirective);
-        $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $directiveOutputKey, $variables, $expressions, $objectErrors);
+        $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $directiveOutputKey, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $castingObjectErrors = $castingObjectWarnings = [];
-        $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $castingObjectErrors, $castingObjectWarnings, $objectDeprecations);
-        if ($castingObjectErrors || $castingObjectWarnings) {
-            $id = $relationalTypeResolver->getID($object);
-            if ($castingObjectErrors) {
-                $objectErrors[(string)$id] = $castingObjectErrors;
-            }
-            if ($castingObjectWarnings) {
-                $objectWarnings[(string)$id] = $castingObjectWarnings;
-            }
+        $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
+        // Transfer the feedback
+        $objectID = $relationalTypeResolver->getID($object);
+        foreach ($fields as $field) {
+            $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+                $objectTypeFieldResolutionFeedbackStore,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+            );
         }
-        if ($objectErrors) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $validAndResolvedDirective = null;
-        } elseif ($extractedDirectiveArgs != $directiveArgs) {
+        } elseif ($extractedDirectiveArgs !== $directiveArgs) {
             // There are 2 reasons why the fieldDirective might have changed:
             // 1. validField: There are $objectWarnings: remove the directiveArgs that failed
             // 2. resolvedField: Some directiveArg was a variable: replace it with its value
@@ -924,10 +819,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $validAndResolvedDirective,
             $directiveName,
             $directiveArgs,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectDeprecations
         ];
     }
 
@@ -938,7 +829,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         string $fieldOrDirectiveOutputKey,
         ?array $variables,
         ?array $expressions,
-        array &$objectErrors
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
         // Only need to extract arguments if they have fields or arrays
         if (
@@ -948,87 +839,83 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 )
             )
         ) {
-            $id = $relationalTypeResolver->getID($object);
-            foreach ($fieldOrDirectiveArgs as $directiveArgName => $directiveArgValue) {
-                $directiveArgValue = $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $directiveArgValue, $variables, $expressions);
+            foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $fieldOrDirectiveArgValue) {
+                $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                $fieldOrDirectiveArgValue = $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $fieldOrDirectiveArgValue, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
+                $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
                 // Validate it
-                if (GeneralUtils::isError($directiveArgValue)) {
-                    /** @var Error */
-                    $error = $directiveArgValue;
-                    if ($errorData = $error->getData()) {
-                        $errorFieldOrDirective = $errorData['fieldName'] ?? null;
-                    }
-                    $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
-                    $objectErrors[(string)$id][] = $this->getTempErrorOutput($error, [$errorFieldOrDirective], $directiveArgName);
-                    $fieldOrDirectiveArgs[$directiveArgName] = null;
+                if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                    $fieldOrDirectiveArgs[$fieldOrDirectiveArgName] = null;
                     continue;
                 }
-                $fieldOrDirectiveArgs[$directiveArgName] = $directiveArgValue;
+                $fieldOrDirectiveArgs[$fieldOrDirectiveArgName] = $fieldOrDirectiveArgValue;
             }
-            return $this->filterFieldOrDirectiveArgs($fieldOrDirectiveArgs);
         }
         return $fieldOrDirectiveArgs;
     }
 
-    /**
-     * @param array<string,Error> $failedCastingDirectiveArgErrors
-     */
     protected function castDirectiveArguments(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directive,
         array $directiveArgs,
-        array &$failedCastingDirectiveArgErrors,
-        array &$castingDirectiveArgDeprecationMessages,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         bool $forSchema
     ): array {
         $directiveArgSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver);
-        return $this->castFieldOrDirectiveArguments(
+        $schemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $castDirectiveArguments = $this->castFieldOrDirectiveArguments(
+            $relationalTypeResolver,
             $directiveArgs,
             $directiveArgSchemaDefinition,
-            $failedCastingDirectiveArgErrors,
-            $castingDirectiveArgDeprecationMessages,
+            $schemaInputValidationFeedbackStore,
             $forSchema
         );
+        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation(
+            $schemaInputValidationFeedbackStore,
+            $relationalTypeResolver,
+        );
+        return $castDirectiveArguments;
     }
 
-    /**
-     * @param array<string,Error> $failedCastingFieldArgErrors
-     */
     protected function castFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
         array $fieldArgs,
-        array &$failedCastingFieldArgErrors,
-        array &$schemaOrObjectErrors,
-        array &$castingFieldArgDeprecationMessages,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         bool $forSchema
     ): ?array {
         $fieldArgSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
         if ($fieldArgSchemaDefinition === null) {
-            $schemaOrObjectErrors[] = [
-                Tokens::PATH => [$field],
-                Tokens::MESSAGE => $this->getNoFieldErrorMessage($objectTypeResolver, $field),
-            ];
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $this->getNoFieldErrorFeedbackItemResolution($objectTypeResolver, $field),
+                    LocationHelper::getNonSpecificLocation(),
+                    $objectTypeResolver,
+                )
+            );
             return null;
         }
-        return $this->castFieldOrDirectiveArguments(
+        $schemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $castFieldArguments = $this->castFieldOrDirectiveArguments(
+            $objectTypeResolver,
             $fieldArgs,
             $fieldArgSchemaDefinition,
-            $failedCastingFieldArgErrors,
-            $castingFieldArgDeprecationMessages,
+            $schemaInputValidationFeedbackStore,
             $forSchema
         );
+        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation(
+            $schemaInputValidationFeedbackStore,
+            $objectTypeResolver,
+        );
+        return $castFieldArguments;
     }
 
-    /**
-     * @param array<string,Error> $failedCastingFieldOrDirectiveArgErrors
-     */
     protected function castFieldOrDirectiveArguments(
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array $fieldOrDirectiveArgs,
         array $fieldOrDirectiveArgSchemaDefinition,
-        array &$failedCastingFieldOrDirectiveArgErrors,
-        array &$castingFieldOrDirectiveArgDeprecationMessages,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
         bool $forSchema
     ): array {
         // Cast all argument values
@@ -1115,17 +1002,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
                 $separateSchemaInputValidationFeedbackStore,
             );
+            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
-                $this->setCastingErrorsForArgument(
-                    $fieldOrDirectiveArgs,
-                    $failedCastingFieldOrDirectiveArgErrors,
-                    $argName,
-                    $separateSchemaInputValidationFeedbackStore,
-                );
+                $fieldOrDirectiveArgs[$argName] = null;
                 continue;
             }
 
             // Cast (or "coerce" in GraphQL terms) the value
+            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
@@ -1133,15 +1017,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $separateSchemaInputValidationFeedbackStore,
             );
-
-            // Check if the coercion produced errors
+            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
-                $this->setCastingErrorsForArgument(
-                    $fieldOrDirectiveArgs,
-                    $failedCastingFieldOrDirectiveArgErrors,
-                    $argName,
-                    $separateSchemaInputValidationFeedbackStore,
-                );
+                $fieldOrDirectiveArgs[$argName] = null;
                 continue;
             }
 
@@ -1153,10 +1031,21 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $fieldOrDirectiveArgIsArrayType,
                     $fieldOrDirectiveArgIsArrayOfArraysType,
                 );
-                $castingFieldOrDirectiveArgDeprecationMessages = array_merge(
-                    $castingFieldOrDirectiveArgDeprecationMessages,
-                    $deprecationMessages
-                );
+                foreach ($deprecationMessages as $deprecationMessage) {
+                    $schemaInputValidationFeedbackStore->addDeprecation(
+                        new SchemaInputValidationFeedback(
+                            new FeedbackItemResolution(
+                                GenericFeedbackItemProvider::class,
+                                GenericFeedbackItemProvider::D1,
+                                [
+                                    $deprecationMessage,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $fieldOrDirectiveArgTypeResolver,
+                        )
+                    );
+                }
             }
 
             // No errors, assign the value
@@ -1165,78 +1054,45 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldOrDirectiveArgs;
     }
 
-    /**
-     * @param array<string,Error> $failedCastingFieldOrDirectiveArgErrors
-     */
-    protected function setCastingErrorsForArgument(
-        array &$fieldOrDirectiveArgs,
-        array &$failedCastingFieldOrDirectiveArgErrors,
-        string $argName,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore
-    ): void {
-        $coercedArgValueErrors = [];
-        foreach ($schemaInputValidationFeedbackStore->getErrors() as $error) {
-            $coercedArgValueErrors[] = new Error(
-                'casting',
-                $error->getFeedbackItemResolution()->getMessage(),
-            );
-        }
-        $castingError = count($coercedArgValueErrors) === 1 ?
-            $coercedArgValueErrors[0]
-            : new Error(
-                'casting',
-                $this->__('Casting cannot be done due to nested errors', 'component-model'),
-                null,
-                $coercedArgValueErrors
-            );
-        $failedCastingFieldOrDirectiveArgErrors[$argName] = $castingError;
-        unset($fieldOrDirectiveArgs[$argName]);
-    }
-
-    /**
-     * @param array<string,Error> $failedCastingDirectiveArgErrors
-     */
-    protected function castDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$failedCastingDirectiveArgErrors, array &$castingDirectiveArgDeprecationMessages, bool $disableDynamicFields = false): array
-    {
+    protected function castDirectiveArgumentsForSchema(
+        DirectiveResolverInterface $directiveResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldDirective,
+        array $directiveArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        bool $disableDynamicFields = false
+    ): array {
         // If the directive doesn't allow dynamic fields (Eg: <cacheControl(maxAge:id())>), then treat it as not for schema
         $forSchema = !$disableDynamicFields;
-        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrors, $castingDirectiveArgDeprecationMessages, $forSchema);
+        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $forSchema);
     }
 
-    /**
-     * @param array<string,Error> $failedCastingFieldArgErrors
-     */
     protected function castFieldArgumentsForSchema(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
         array $fieldArgs,
-        array &$failedCastingFieldArgErrors,
-        array &$schemaErrors,
-        array &$castingFieldArgDeprecationMessages,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $schemaErrors, $castingFieldArgDeprecationMessages, true);
+        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $objectTypeFieldResolutionFeedbackStore, true);
     }
 
-    /**
-     * @param array<string,Error> $failedCastingDirectiveArgErrors
-     */
-    protected function castDirectiveArgumentsForObject(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $directive, array $directiveArgs, array &$failedCastingDirectiveArgErrors, array &$castingDirectiveArgDeprecationMessages): array
-    {
-        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $directive, $directiveArgs, $failedCastingDirectiveArgErrors, $castingDirectiveArgDeprecationMessages, false);
+    protected function castDirectiveArgumentsForObject(
+        DirectiveResolverInterface $directiveResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $directive,
+        array $directiveArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array {
+        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $directive, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, false);
     }
 
-    /**
-     * @param array<string,Error> $failedCastingFieldArgErrors
-     */
     protected function castFieldArgumentsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
         array $fieldArgs,
-        array &$failedCastingFieldArgErrors,
-        array &$objectErrors,
-        array &$castingFieldArgDeprecationMessages,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $objectErrors, $castingFieldArgDeprecationMessages, false);
+        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $objectTypeFieldResolutionFeedbackStore, false);
     }
 
     /**
@@ -1391,270 +1247,76 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldArgNameDefaultValues;
     }
 
-    protected function castAndValidateDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, bool $disableDynamicFields = false): array
-    {
+    protected function castAndValidateDirectiveArgumentsForSchema(
+        DirectiveResolverInterface $directiveResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldDirective,
+        array $directiveArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        bool $disableDynamicFields = false
+    ): ?array {
         if ($directiveArgs) {
-            $failedCastingDirectiveArgErrors = [];
-            $castingDirectiveArgDeprecationMessages = [];
-            $castedDirectiveArgs = $this->castDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrors, $castingDirectiveArgDeprecationMessages, $disableDynamicFields);
-            return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrors, $castingDirectiveArgDeprecationMessages, $fieldDirective, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            $castedDirectiveArgs = $this->castDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $separateObjectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                return null;
+            }
+            return $castedDirectiveArgs;
         }
         return $directiveArgs;
     }
 
-    protected function castAndValidateFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): ?array
-    {
+    protected function castAndValidateFieldArgumentsForSchema(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $field,
+        array $fieldArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array {
         if ($fieldArgs) {
-            $failedCastingFieldArgErrors = [];
-            $castingSchemaErrors = [];
-            $castingFieldArgDeprecationMessages = [];
-            $castedFieldArgs = $this->castFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $castingSchemaErrors, $castingFieldArgDeprecationMessages);
-            if ($castingSchemaErrors) {
-                $schemaErrors = array_merge(
-                    $schemaErrors,
-                    $castingSchemaErrors
-                );
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            $castedFieldArgs = $this->castFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 return null;
             }
-            return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrors, $castingFieldArgDeprecationMessages, $field, $fieldArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+            return $castedFieldArgs;
         }
         return $fieldArgs;
     }
 
-    protected function castAndValidateDirectiveArgumentsForObject(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array
-    {
-        $failedCastingDirectiveArgErrors = [];
-        $castingDirectiveArgDeprecationMessages = [];
-        $castedDirectiveArgs = $this->castDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrors, $castingDirectiveArgDeprecationMessages);
-        return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrors, $castingDirectiveArgDeprecationMessages, $fieldDirective, $directiveArgs, $objectErrors, $objectWarnings, $objectDeprecations);
-    }
-
-    protected function castAndValidateFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array
-    {
-        $failedCastingFieldArgErrors = [];
-        $castingObjectErrors = [];
-        $castingFieldArgDeprecationMessages = [];
-        $castedFieldArgs = $this->castFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $castingObjectErrors, $castingFieldArgDeprecationMessages);
-        if ($castingObjectErrors) {
-            $objectErrors = array_merge(
-                $objectErrors,
-                $castingObjectErrors
-            );
-            return null;
-        }
-        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrors, $castingFieldArgDeprecationMessages, $field, $fieldArgs, $objectErrors, $objectWarnings, $objectDeprecations);
-    }
-
-    /**
-     * @param array<string,Error> $failedCastingDirectiveArgErrors
-     */
-    protected function validateAndFilterCastDirectiveArguments(
+    protected function castAndValidateDirectiveArgumentsForObject(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $castedDirectiveArgs,
-        array &$failedCastingDirectiveArgErrors,
-        array &$castingDirectiveArgDeprecationMessages,
         string $fieldDirective,
         array $directiveArgs,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-    ): array {
-        // Add the deprecations
-        foreach ($castingDirectiveArgDeprecationMessages as $castingDirectiveArgDeprecationMessage) {
-            $schemaDeprecations[] = [
-                Tokens::PATH => [$fieldDirective],
-                Tokens::MESSAGE => $castingDirectiveArgDeprecationMessage,
-            ];
-        }
-
-        // If any casting can't be done, show an error
-        if ($failedCastingDirectiveArgErrors) {
-            $directiveName = $this->getFieldDirectiveName($fieldDirective);
-            $directiveArgNameTypeResolvers = $this->getDirectiveArgumentNameTypeResolvers($directiveResolver, $relationalTypeResolver);
-            $directiveArgNameSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver);
-            /** @var ComponentConfiguration */
-            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-            $treatTypeCoercingFailuresAsErrors = $componentConfiguration->treatTypeCoercingFailuresAsErrors();
-            foreach (array_keys($failedCastingDirectiveArgErrors) as $failedCastingDirectiveArgName) {
-                // If it is Error, also show the error message
-                $directiveArgIsArrayType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::IS_ARRAY] ?? false;
-                $directiveArgIsArrayOfArraysType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
-                $composedDirectiveArgTypeResolver = $directiveArgNameTypeResolvers[$failedCastingDirectiveArgName];
-                $composedDirectiveArgTypeName = $composedDirectiveArgTypeResolver->getMaybeNamespacedTypeName();
-                if ($directiveArgIsArrayOfArraysType) {
-                    $composedDirectiveArgTypeName = sprintf(
-                        $this->__('array of arrays of %s', 'pop-component-model'),
-                        $composedDirectiveArgTypeName
-                    );
-                } elseif ($directiveArgIsArrayType) {
-                    $composedDirectiveArgTypeName = sprintf(
-                        $this->__('array of %s', 'pop-component-model'),
-                        $composedDirectiveArgTypeName
-                    );
-                }
-                $directiveArgError = $failedCastingDirectiveArgErrors[$failedCastingDirectiveArgName] ?? null;
-                if ($directiveArgError !== null) {
-                    $encodedValue = $directiveArgs[$failedCastingDirectiveArgName] instanceof stdClass || is_array($directiveArgs[$failedCastingDirectiveArgName])
-                        ? json_encode($directiveArgs[$failedCastingDirectiveArgName])
-                        : $directiveArgs[$failedCastingDirectiveArgName];
-                    $directiveArgError = new Error(
-                        sprintf('%s-error', $failedCastingDirectiveArgName),
-                        sprintf(
-                            $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
-                            $directiveName,
-                            $encodedValue,
-                            $failedCastingDirectiveArgName,
-                            $composedDirectiveArgTypeName
-                        )
-                    );
-                }
-                // Either treat it as an error or a warning
-                $schemaWarningOrError = $this->getTempErrorOutput($directiveArgError, [$fieldDirective], $failedCastingDirectiveArgName);
-                if ($treatTypeCoercingFailuresAsErrors) {
-                    $schemaErrors[] = $schemaWarningOrError;
-                } else {
-                    // Override the message
-                    $schemaWarningOrError[Tokens::MESSAGE] = sprintf(
-                        $this->__('%1$s. It has been ignored', 'pop-component-model'),
-                        $schemaWarningOrError[Tokens::MESSAGE]
-                    );
-                    $schemaWarnings[] = $schemaWarningOrError;
-                }
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array {
+        if ($directiveArgs) {
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            $castedDirectiveArgs = $this->castDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                return null;
             }
-            return $this->filterFieldOrDirectiveArgs($castedDirectiveArgs);
+            return $castedDirectiveArgs;
         }
-        return $castedDirectiveArgs;
+        return $directiveArgs;
     }
 
-    /**
-     * Any element that is Error, or any array that contains an error
-     */
-    protected function getFailedCastingFieldArgs(array $castedFieldArgs): array
-    {
-        return array_filter(
-            $castedFieldArgs,
-            fn (mixed $fieldArgValue) =>
-                (!is_array($fieldArgValue) && GeneralUtils::isError($fieldArgValue))
-                || (is_array($fieldArgValue) && !empty($this->getFailedCastingFieldArgs($fieldArgValue)))
-        );
-    }
-
-    /**
-     * @param array<string,Error> $failedCastingFieldArgErrors
-     */
-    protected function validateAndFilterCastFieldArguments(
+    protected function castAndValidateFieldArgumentsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
-        array $castedFieldArgs,
-        array &$failedCastingFieldArgErrors,
-        array &$castingFieldArgDeprecationMessages,
         string $field,
         array $fieldArgs,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-    ): array {
-        // Add the deprecations
-        foreach ($castingFieldArgDeprecationMessages as $castingFieldArgDeprecationMessage) {
-            $schemaDeprecations[] = [
-                Tokens::PATH => [$field],
-                Tokens::MESSAGE => $castingFieldArgDeprecationMessage,
-            ];
-        }
-
-        // If any casting can't be done, show an error
-        if ($failedCastingFieldArgErrors) {
-            $fieldName = $this->getFieldName($field);
-            $fieldArgNameTypeResolvers = $this->getFieldArgumentNameTypeResolvers($objectTypeResolver, $field);
-            if ($fieldArgNameTypeResolvers === null) {
-                $schemaErrors[] = [
-                    Tokens::PATH => [$field],
-                    Tokens::MESSAGE => $this->getNoFieldErrorMessage($objectTypeResolver, $field),
-                ];
-                return $castedFieldArgs;
-            }
-            /** @var array */
-            $fieldArgNameSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
-            /** @var ComponentConfiguration */
-            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-            $treatTypeCoercingFailuresAsErrors = $componentConfiguration->treatTypeCoercingFailuresAsErrors();
-            foreach (array_keys($failedCastingFieldArgErrors) as $failedCastingFieldArgName) {
-                // If it is Error, also show the error message
-                $fieldArgIsArrayType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::IS_ARRAY] ?? false;
-                $fieldArgIsArrayOfArraysType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
-                $composedFieldArgTypeResolver = $fieldArgNameTypeResolvers[$failedCastingFieldArgName];
-                $composedFieldArgTypeName = $composedFieldArgTypeResolver->getMaybeNamespacedTypeName();
-                if ($fieldArgIsArrayOfArraysType) {
-                    $composedFieldArgTypeName = sprintf(
-                        $this->__('array of arrays of %s', 'pop-component-model'),
-                        $composedFieldArgTypeName
-                    );
-                } elseif ($fieldArgIsArrayType) {
-                    $composedFieldArgTypeName = sprintf(
-                        $this->__('array of %s', 'pop-component-model'),
-                        $composedFieldArgTypeName
-                    );
-                }
-                $fieldArgError = $failedCastingFieldArgErrors[$failedCastingFieldArgName] ?? null;
-                if ($fieldArgError === null) {
-                    $encodedValue = $fieldArgs[$failedCastingFieldArgName] instanceof stdClass || is_array($fieldArgs[$failedCastingFieldArgName])
-                        ? json_encode($fieldArgs[$failedCastingFieldArgName])
-                        : $fieldArgs[$failedCastingFieldArgName];
-                    $fieldArgError = new Error(
-                        sprintf('%s-error', $failedCastingFieldArgName),
-                        sprintf(
-                            $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
-                            $fieldName,
-                            $encodedValue,
-                            $failedCastingFieldArgName,
-                            $composedFieldArgTypeName
-                        )
-                    );
-                }
-                // Either treat it as an error or a warning
-                $schemaWarningOrError = $this->getTempErrorOutput($fieldArgError, [$field], $failedCastingFieldArgName);
-                if ($treatTypeCoercingFailuresAsErrors) {
-                    $schemaErrors[] = $schemaWarningOrError;
-                } else {
-                    // Override the message
-                    $schemaWarningOrError[Tokens::MESSAGE] = sprintf(
-                        $this->__('%1$s. It has been ignored', 'pop-component-model'),
-                        $schemaWarningOrError[Tokens::MESSAGE]
-                    );
-                    $schemaWarnings[] = $schemaWarningOrError;
-                }
-            }
-            return $this->filterFieldOrDirectiveArgs($castedFieldArgs);
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
+    ): ?array {
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $castedFieldArgs = $this->castFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return null;
         }
         return $castedFieldArgs;
-    }
-
-    /**
-     * @todo Function added temporarily, remove!!!!
-     * @param string[]|null $path
-     * @return array<string, mixed>
-     */
-    public function getTempErrorOutput(Error $error, ?array $path = null, ?string $argName = null): array
-    {
-        $errorOutput = [
-            Tokens::MESSAGE => $error->getMessageOrCode(),
-        ];
-        if ($path !== null) {
-            $errorOutput[Tokens::PATH] = $path;
-        }
-        if ($data = $error->getData()) {
-            $errorOutput[Tokens::EXTENSIONS] = $data;
-        }
-        if ($argName !== null) {
-            $errorOutput[Tokens::EXTENSIONS][Tokens::ARGUMENT_PATH] = array_merge(
-                [$argName],
-                $errorOutput[Tokens::EXTENSIONS][Tokens::ARGUMENT_PATH] ?? []
-            );
-        }
-        foreach ($error->getNestedErrors() as $nestedError) {
-            $errorOutput[Tokens::EXTENSIONS][Tokens::NESTED][] = $this->getTempErrorOutput($nestedError, null, $argName);
-        }
-        return $errorOutput;
     }
 
     /**
@@ -1732,7 +1394,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
             // If the variable is not set, then show the error under entry "variableErrors"
             $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                $this->__('Variable \'%s\' is undefined', 'pop-component-model'),
+                $this->__('Variable \'%s\' is undefined', 'component-model'),
                 $variableName
             ));
             return null;
@@ -1819,10 +1481,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if (is_array($fieldArgValue) || $isObject) {
             // Resolve each element the same way
             // For object: Cast back and forth from array to stdClass
-            $fieldOrDirectiveArgs = $this->filterFieldOrDirectiveArgs(
-                array_map(function ($arrayValueElem) use ($variables) {
-                    return $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables);
-                }, (array) $fieldArgValue)
+            $fieldOrDirectiveArgs = array_map(
+                fn (mixed $arrayValueElem) => $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables),
+                (array) $fieldArgValue
             );
             if ($isObject) {
                 return (object) $fieldOrDirectiveArgs;
@@ -1846,13 +1507,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         object $object,
         mixed $fieldArgValue,
         ?array $variables,
-        ?array $expressions
+        ?array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
             return array_map(
-                function ($fieldArgValueElem) use ($relationalTypeResolver, $object, $variables, $expressions) {
-                    return $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $fieldArgValueElem, $variables, $expressions);
+                function ($fieldArgValueElem) use ($relationalTypeResolver, $object, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore) {
+                    return $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $fieldArgValueElem, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore);
                 },
                 (array)$fieldArgValue
             );
@@ -1863,23 +1525,32 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             // Expressions: allow to pass a field argument "key:%input%", which is passed when executing the directive through $expressions
             // Trim it so that "%{ self }%" is equivalent to "%{self}%". This is needed to set expressions through Symfony's DependencyInjection component (since %...% is reserved for its own parameters!)
             $expressionName = trim(substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING), strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING) - strlen(QuerySyntax::SYMBOL_EXPRESSION_CLOSING)));
-            if (isset($expressions[$expressionName])) {
-                return $expressions[$expressionName];
+            if (!isset($expressions[$expressionName])) {
+                // If the expression is not set, then show the error under entry "expressionErrors"
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            FeedbackItemProvider::class,
+                            FeedbackItemProvider::E14,
+                            [
+                                $expressionName,
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $relationalTypeResolver,
+                    )
+                );
+                return null;
             }
-            // If the expression is not set, then show the error under entry "expressionErrors"
-            $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                $this->__('Expression \'%s\' is undefined', 'pop-component-model'),
-                $expressionName
-            ));
-            return null;
-        } elseif ($this->isFieldArgumentValueAField($fieldArgValue)) {
+            return $expressions[$expressionName];
+        }
+        if ($this->isFieldArgumentValueAField($fieldArgValue)) {
             // Execute as field
             // It is important to force the validation, because if a needed argument is provided with an error, it needs to be validated, casted and filtered out,
             // and if this wrong param is not "dynamic", then the validation would not take place
             $options = [
                 AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
             ];
-            $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $resolvedValue = $relationalTypeResolver->resolveValue(
                 $object,
                 (string)$fieldArgValue,
@@ -1889,14 +1560,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $options
             );
             if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                // Show the error message, and return nothing
-                // Showing first error only because this code will soon be removed anyway
-                $errors = $objectTypeFieldResolutionFeedbackStore->getErrors();
-                $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                    $this->__('Executing field \'%s\' produced error: %s', 'pop-component-model'),
-                    $fieldArgValue,
-                    $errors[0]->getFeedbackItemResolution()->getMessage()
-                ));
                 return null;
             }
             return $resolvedValue;
@@ -1905,13 +1568,18 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldArgValue;
     }
 
-    protected function resolveFieldArgumentValueErrorQualifiedEntriesForSchema(ObjectTypeResolverInterface $objectTypeResolver, mixed $fieldArgValue, ?array $variables): array
-    {
+    protected function collectFieldArgumentValueErrorQualifiedEntriesForSchema(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        mixed $fieldArgValue,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
-            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables) {
-                return $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables);
-            }, $fieldArgValue)));
+            foreach ($fieldArgValue as $fieldArgValueElem) {
+                $this->collectFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables, $objectTypeFieldResolutionFeedbackStore);
+            }
+            return;
         }
 
         // If the result fieldArgValue is a string (i.e. not numeric), and it has brackets (...),
@@ -1926,48 +1594,55 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
             // If there is no "(" or ")", or if the ")" is not at the end, of if the "(" is at the beginning, then it's simply a string
             if ($fieldArgsClosingSymbolPos !== (strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_FIELDARGS_CLOSING)) || $fieldArgsOpeningSymbolPos === false || $fieldArgsOpeningSymbolPos === 0) {
-                return [];
+                return;
             }
 
             // If it reached here, it's a field! Validate it, or show an error
-            return $objectTypeResolver->resolveFieldValidationErrorQualifiedEntries($fieldArgValue, $variables);
+            $objectTypeResolver->collectFieldValidationErrorQualifiedEntries($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+            return;
         }
-
-        return [];
     }
 
-    protected function resolveFieldArgumentValueWarningQualifiedEntriesForSchema(ObjectTypeResolverInterface $objectTypeResolver, mixed $fieldArgValue, ?array $variables): array
-    {
+    protected function collectFieldArgumentValueWarningQualifiedEntriesForSchema(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        mixed $fieldArgValue,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
-            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables) {
-                return $this->resolveFieldArgumentValueWarningQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables);
-            }, $fieldArgValue)));
+            foreach ($fieldArgValue as $fieldArgValueElem) {
+                $this->collectFieldArgumentValueWarningQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables, $objectTypeFieldResolutionFeedbackStore);
+            }
+            return;
         }
 
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            return $objectTypeResolver->resolveFieldValidationWarningQualifiedEntries($fieldArgValue, $variables);
+            $objectTypeResolver->collectFieldValidationWarningQualifiedEntries($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+            return;
         }
-
-        return [];
     }
 
-    protected function resolveFieldArgumentValueDeprecationQualifiedEntriesForSchema(ObjectTypeResolverInterface $objectTypeResolver, mixed $fieldArgValue, ?array $variables): array
-    {
+    protected function collectFieldArgumentValueDeprecationQualifiedEntriesForSchema(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        mixed $fieldArgValue,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
-            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables) {
-                return $this->resolveFieldArgumentValueDeprecationQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables);
-            }, $fieldArgValue)));
+            foreach ($fieldArgValue as $fieldArgValueElem) {
+                $this->collectFieldArgumentValueDeprecationQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables, $objectTypeFieldResolutionFeedbackStore);
+            }
+            return;
         }
 
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            return $objectTypeResolver->resolveFieldDeprecationQualifiedEntries($fieldArgValue, $variables);
+            $objectTypeResolver->collectFieldDeprecationQualifiedEntries($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+            return;
         }
-
-        return [];
     }
 
     protected function getNoAliasFieldOutputKey(string $field): string

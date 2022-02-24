@@ -25,16 +25,6 @@ class DirectivePipelineDecorator
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$objectTraces,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
     ): void {
         $payload = $this->pipeline->__invoke(
             DirectivePipelineUtils::convertArgumentsToPayload(
@@ -48,16 +38,6 @@ class DirectivePipelineDecorator
                 $variables,
                 $messages,
                 $engineIterationFeedbackStore,
-                $objectErrors,
-                $objectWarnings,
-                $objectDeprecations,
-                $objectNotices,
-                $objectTraces,
-                $schemaErrors,
-                $schemaWarnings,
-                $schemaDeprecations,
-                $schemaNotices,
-                $schemaTraces
             )
         );
         list(
@@ -71,16 +51,6 @@ class DirectivePipelineDecorator
             $variables,
             $messages,
             $engineIterationFeedbackStore,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectNotices,
-            $objectTraces,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
-            $schemaTraces
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);
     }
 }

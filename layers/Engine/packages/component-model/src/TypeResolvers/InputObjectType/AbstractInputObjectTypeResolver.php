@@ -264,6 +264,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                             InputValueCoercionErrorFeedbackItemProvider::class,
                             InputValueCoercionErrorFeedbackItemProvider::E4,
                             [
+                                $inputFieldName,
                                 $this->getMaybeNamespacedTypeName(),
                             ]
                         ),

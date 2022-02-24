@@ -10,6 +10,7 @@ interface SchemaFeedbackInterface extends QueryFeedbackInterface
 {
     public function getRelationalTypeResolver(): RelationalTypeResolverInterface;
     public function getField(): string;
+    public function getDirective(): ?string;
     /**
      * @return SchemaFeedbackInterface[]
      */

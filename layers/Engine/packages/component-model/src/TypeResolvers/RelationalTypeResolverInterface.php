@@ -38,16 +38,6 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$objectTraces,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
     ): array;
     /**
      * @param array<string, mixed> $variables
@@ -71,13 +61,8 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
     public function resolveDirectivesIntoPipelineData(
         array $fieldDirectives,
         array &$fieldDirectiveFields,
-        bool $areNestedDirectives,
         array &$variables,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
     /**
      * @return array<string,DirectiveResolverInterface>|null

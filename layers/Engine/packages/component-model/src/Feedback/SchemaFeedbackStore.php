@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+
 class SchemaFeedbackStore
 {
     /** @var SchemaFeedbackInterface[] */
@@ -16,8 +18,79 @@ class SchemaFeedbackStore
     private array $notices = [];
     /** @var SchemaFeedbackInterface[] */
     private array $logs = [];
-    /** @var SchemaFeedbackInterface[] */
-    private array $traces = [];
+
+    public function incorporate(
+        SchemaFeedbackStore $schemaFeedbackStore,
+    ): void {
+        $this->errors = array_merge(
+            $this->errors,
+            $schemaFeedbackStore->getErrors()
+        );
+        $this->warnings = array_merge(
+            $this->warnings,
+            $schemaFeedbackStore->getWarnings()
+        );
+        $this->deprecations = array_merge(
+            $this->deprecations,
+            $schemaFeedbackStore->getDeprecations()
+        );
+        $this->notices = array_merge(
+            $this->notices,
+            $schemaFeedbackStore->getNotices()
+        );
+        $this->logs = array_merge(
+            $this->logs,
+            $schemaFeedbackStore->getLogs()
+        );
+    }
+
+    public function incorporateFromObjectTypeFieldResolutionFeedbackStore(
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $field,
+        ?string $directive = null,
+    ): void {
+        foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
+            $this->errors[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackError,
+                $relationalTypeResolver,
+                $field,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
+            $this->warnings[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackWarning,
+                $relationalTypeResolver,
+                $field,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $objectTypeFieldResolutionFeedbackDeprecation) {
+            $this->deprecations[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackDeprecation,
+                $relationalTypeResolver,
+                $field,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
+            $this->notices[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackNotice,
+                $relationalTypeResolver,
+                $field,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
+            $this->logs[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackLog,
+                $relationalTypeResolver,
+                $field,
+                $directive,
+            );
+        }
+    }
 
     /**
      * @return SchemaFeedbackInterface[]
@@ -122,26 +195,5 @@ class SchemaFeedbackStore
     public function setLogs(array $logs): void
     {
         $this->logs = $logs;
-    }
-
-    /**
-     * @return SchemaFeedbackInterface[]
-     */
-    public function getTraces(): array
-    {
-        return $this->traces;
-    }
-
-    public function addTrace(SchemaFeedbackInterface $trace): void
-    {
-        $this->traces[] = $trace;
-    }
-
-    /**
-     * @param SchemaFeedbackInterface[] $traces
-     */
-    public function setTraces(array $traces): void
-    {
-        $this->traces = $traces;
     }
 }

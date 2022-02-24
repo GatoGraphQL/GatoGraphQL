@@ -392,6 +392,7 @@ class Engine implements EngineInterface
         // Reset the state
         App::regenerateEngineState();
         App::regenerateFeedbackStore();
+        App::regenerateTracingStore();
         App::regenerateMutationResolutionStore();
 
         App::doAction('\PoP\ComponentModel\Engine:beginning');
@@ -1511,7 +1512,7 @@ class Engine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $objectTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = [];
+        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = [];
         $engineState->nocache_fields = [];
 
         // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
@@ -1558,7 +1559,7 @@ class Engine implements EngineInterface
             $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
 
             // Execute the typeResolver for all combined ids
-            $iterationDBItems = $iterationObjectErrors = $iterationObjectWarnings = $iterationObjectDeprecations = $iterationObjectNotices = $iterationObjectTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = [];
+            $iterationDBItems = $iterationObjectErrors = $iterationObjectWarnings = $iterationObjectDeprecations = $iterationObjectNotices = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = [];
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $objectIDItems = $relationalTypeResolver->fillObjects(
                 $ids_data_fields,
@@ -1572,12 +1573,10 @@ class Engine implements EngineInterface
                 $iterationObjectWarnings,
                 $iterationObjectDeprecations,
                 $iterationObjectNotices,
-                $iterationObjectTraces,
                 $iterationSchemaErrors,
                 $iterationSchemaWarnings,
                 $iterationSchemaDeprecations,
                 $iterationSchemaNotices,
-                $iterationSchemaTraces
             );
 
             // Save in the database under the corresponding database-key
@@ -1632,12 +1631,10 @@ class Engine implements EngineInterface
                 $iterationObjectWarnings,
                 $iterationObjectDeprecations,
                 $iterationObjectNotices,
-                $iterationObjectTraces,
                 $iterationSchemaErrors,
                 $iterationSchemaWarnings,
                 $iterationSchemaDeprecations,
                 $iterationSchemaNotices,
-                $iterationSchemaTraces
             );
             /** @phpstan-ignore-next-line */
             if ($iterationObjectErrors !== []) {
@@ -1669,14 +1666,6 @@ class Engine implements EngineInterface
                 foreach ($dbNameNoticeEntries as $dbname => $entries) {
                     $objectNotices[$dbname] ??= [];
                     $this->addDatasetToDatabase($objectNotices[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
-                }
-            }
-            /** @phpstan-ignore-next-line */
-            if ($iterationObjectTraces) {
-                $dbNameTraceEntries = $this->moveEntriesUnderDBName($iterationObjectTraces, true, $relationalTypeResolver);
-                foreach ($dbNameTraceEntries as $dbname => $entries) {
-                    $objectTraces[$dbname] ??= [];
-                    $this->addDatasetToDatabase($objectTraces[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
 
@@ -1759,17 +1748,6 @@ class Engine implements EngineInterface
                 foreach ($dbNameSchemaNoticeEntries as $dbname => $entries) {
                     $schemaNotices[$dbname][$database_key] = array_merge(
                         $schemaNotices[$dbname][$database_key] ?? [],
-                        $entries
-                    );
-                }
-            }
-            /** @phpstan-ignore-next-line */
-            if ($iterationSchemaTraces) {
-                $iterationSchemaTraces = array_intersect_key($iterationSchemaTraces, array_unique(array_map('serialize', $iterationSchemaTraces)));
-                $dbNameSchemaTraceEntries = $this->moveEntriesUnderDBName($iterationSchemaTraces, false, $relationalTypeResolver);
-                foreach ($dbNameSchemaTraceEntries as $dbname => $entries) {
-                    $schemaTraces[$dbname][$database_key] = array_merge(
-                        $schemaTraces[$dbname][$database_key] ?? [],
                         $entries
                     );
                 }
@@ -1872,7 +1850,6 @@ class Engine implements EngineInterface
         $sendFeedbackWarnings = in_array(FeedbackCategories::WARNING, $enabledFeedbackCategoryExtensions);
         $sendFeedbackDeprecations = in_array(FeedbackCategories::DEPRECATION, $enabledFeedbackCategoryExtensions);
         $sendFeedbackNotices = in_array(FeedbackCategories::NOTICE, $enabledFeedbackCategoryExtensions);
-        $sendFeedbackTraces = in_array(FeedbackCategories::TRACE, $enabledFeedbackCategoryExtensions);
         $sendFeedbackLogs = in_array(FeedbackCategories::LOG, $enabledFeedbackCategoryExtensions);
 
         if ($sendFeedbackWarnings) {
@@ -1931,10 +1908,6 @@ class Engine implements EngineInterface
             $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectNotices);
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
         }
-        if ($sendFeedbackTraces) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectTraces', $objectTraces);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaTraces', $schemaTraces);
-        }
         if ($sendFeedbackLogs) {
             $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
         }
@@ -1950,12 +1923,10 @@ class Engine implements EngineInterface
         array &$iterationObjectWarnings,
         array &$iterationObjectDeprecations,
         array &$iterationObjectNotices,
-        array &$iterationObjectTraces,
         array &$iterationSchemaErrors,
         array &$iterationSchemaWarnings,
         array &$iterationSchemaDeprecations,
         array &$iterationSchemaNotices,
-        array &$iterationSchemaTraces
     ): void {
         $this->transferObjectFeedback(
             $engineIterationFeedbackStore,
@@ -1963,7 +1934,6 @@ class Engine implements EngineInterface
             $iterationObjectWarnings,
             $iterationObjectDeprecations,
             $iterationObjectNotices,
-            $iterationObjectTraces,
         );
         $this->transferSchemaFeedback(
             $engineIterationFeedbackStore,
@@ -1971,7 +1941,6 @@ class Engine implements EngineInterface
             $iterationSchemaWarnings,
             $iterationSchemaDeprecations,
             $iterationSchemaNotices,
-            $iterationSchemaTraces
         );
     }
 
@@ -1981,7 +1950,6 @@ class Engine implements EngineInterface
         array &$iterationObjectWarnings,
         array &$iterationObjectDeprecations,
         array &$iterationObjectNotices,
-        array &$iterationObjectTraces,
     ): void {
         foreach ($engineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectFeedbackError) {
             $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorOutput($objectFeedbackError);
@@ -1998,12 +1966,6 @@ class Engine implements EngineInterface
                 $iterationObjectDeprecations,
             );
         }
-        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getTraces() as $objectFeedbackTrace) {
-            $this->transferObjectFeedbackEntries(
-                $objectFeedbackTrace,
-                $iterationObjectTraces,
-            );
-        }
         foreach ($engineIterationFeedbackStore->objectFeedbackStore->getNotices() as $objectFeedbackNotice) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackNotice,
@@ -2017,15 +1979,29 @@ class Engine implements EngineInterface
      */
     protected function getErrorOutput(SchemaFeedbackInterface | ObjectFeedbackInterface $schemaOrObjectFeedback, ?array $path = null, ?string $argName = null): array
     {
+        $feedbackItemResolution = $schemaOrObjectFeedback->getFeedbackItemResolution();
+        $directive = $schemaOrObjectFeedback->getDirective();
+        $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
         return [
-            Tokens::MESSAGE => $schemaOrObjectFeedback->getFeedbackItemResolution()->getMessage(),
-            Tokens::PATH => [$schemaOrObjectFeedback->getField()],
+            Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
+            Tokens::PATH => array_merge(
+                [
+                    $schemaOrObjectFeedback->getField(),
+                ],
+                $directive !== null ?
+                [
+                    $directive,
+                ] : []
+            ),
             Tokens::LOCATIONS => [$schemaOrObjectFeedback->getLocation()->toArray()],
             Tokens::EXTENSIONS => array_merge(
                 $schemaOrObjectFeedback->getExtensions(),
                 [
-                    'code' => $schemaOrObjectFeedback->getFeedbackItemResolution()->getNamespacedCode(),
-                ]
+                    'code' => $feedbackItemResolution->getNamespacedCode(),
+                ],
+                $specifiedByURL !== null ? [
+                    'specifiedBy' => $specifiedByURL,
+                ] : []
             )
         ];
     }
@@ -2059,8 +2035,7 @@ class Engine implements EngineInterface
         array &$iterationSchemaErrors,
         array &$iterationSchemaWarnings,
         array &$iterationSchemaDeprecations,
-        array &$iterationSchemaNotices,
-        array &$iterationSchemaTraces
+        array &$iterationSchemaNotices
     ): void {
         foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
             $iterationSchemaErrors[] = $this->getErrorOutput($schemaFeedbackError);
@@ -2075,12 +2050,6 @@ class Engine implements EngineInterface
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackDeprecation,
                 $iterationSchemaDeprecations,
-            );
-        }
-        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getTraces() as $schemaFeedbackTrace) {
-            $this->transferSchemaFeedbackEntries(
-                $schemaFeedbackTrace,
-                $iterationSchemaTraces,
             );
         }
         foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
@@ -2141,9 +2110,6 @@ class Engine implements EngineInterface
             $documentFeedbackEntryExtensions = $documentFeedbackEntry->getExtensions();
             if ($code = $documentFeedbackEntry->getFeedbackItemResolution()->getNamespacedCode()) {
                 $documentFeedbackEntryExtensions['code'] = $code;
-            }
-            if ($data = $documentFeedbackEntry->getData()) {
-                $documentFeedbackEntryExtensions['data'] = $data;
             }
             $output[] = array_merge(
                 [

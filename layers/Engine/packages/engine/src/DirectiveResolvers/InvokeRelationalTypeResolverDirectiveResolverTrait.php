@@ -35,7 +35,6 @@ trait InvokeRelationalTypeResolverDirectiveResolverTrait
                     LocationHelper::getNonSpecificLocation(),
                     $relationalTypeResolver,
                     [],
-                    [],
                     $errors
                 )
             );

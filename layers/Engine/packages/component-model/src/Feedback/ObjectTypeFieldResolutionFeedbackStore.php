@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+
 class ObjectTypeFieldResolutionFeedbackStore
 {
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
@@ -16,8 +18,87 @@ class ObjectTypeFieldResolutionFeedbackStore
     private array $notices = [];
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
     private array $logs = [];
-    /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
-    private array $traces = [];
+
+    public function incorporate(
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $this->errors = array_merge(
+            $this->errors,
+            $objectTypeFieldResolutionFeedbackStore->getErrors()
+        );
+        $this->warnings = array_merge(
+            $this->warnings,
+            $objectTypeFieldResolutionFeedbackStore->getWarnings()
+        );
+        $this->deprecations = array_merge(
+            $this->deprecations,
+            $objectTypeFieldResolutionFeedbackStore->getDeprecations()
+        );
+        $this->notices = array_merge(
+            $this->notices,
+            $objectTypeFieldResolutionFeedbackStore->getNotices()
+        );
+        $this->logs = array_merge(
+            $this->logs,
+            $objectTypeFieldResolutionFeedbackStore->getLogs()
+        );
+    }
+
+    public function incorporateSchemaInputValidation(
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+    ): void {
+        $this->errors = array_merge(
+            $this->errors,
+            array_map(
+                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
+                    $schemaInputValidationFeedback,
+                    $relationalTypeResolver,
+                ),
+                $schemaInputValidationFeedbackStore->getErrors()
+            )
+        );
+        $this->warnings = array_merge(
+            $this->warnings,
+            array_map(
+                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
+                    $schemaInputValidationFeedback,
+                    $relationalTypeResolver,
+                ),
+                $schemaInputValidationFeedbackStore->getWarnings()
+            )
+        );
+        $this->deprecations = array_merge(
+            $this->deprecations,
+            array_map(
+                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
+                    $schemaInputValidationFeedback,
+                    $relationalTypeResolver,
+                ),
+                $schemaInputValidationFeedbackStore->getDeprecations()
+            )
+        );
+        $this->notices = array_merge(
+            $this->notices,
+            array_map(
+                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
+                    $schemaInputValidationFeedback,
+                    $relationalTypeResolver,
+                ),
+                $schemaInputValidationFeedbackStore->getNotices()
+            )
+        );
+        $this->logs = array_merge(
+            $this->logs,
+            array_map(
+                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
+                    $schemaInputValidationFeedback,
+                    $relationalTypeResolver,
+                ),
+                $schemaInputValidationFeedbackStore->getLogs()
+            )
+        );
+    }
 
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
@@ -122,26 +203,5 @@ class ObjectTypeFieldResolutionFeedbackStore
     public function setLogs(array $logs): void
     {
         $this->logs = $logs;
-    }
-
-    /**
-     * @return ObjectTypeFieldResolutionFeedbackInterface[]
-     */
-    public function getTraces(): array
-    {
-        return $this->traces;
-    }
-
-    public function addTrace(ObjectTypeFieldResolutionFeedbackInterface $trace): void
-    {
-        $this->traces[] = $trace;
-    }
-
-    /**
-     * @param ObjectTypeFieldResolutionFeedbackInterface[] $traces
-     */
-    public function setTraces(array $traces): void
-    {
-        $this->traces = $traces;
     }
 }

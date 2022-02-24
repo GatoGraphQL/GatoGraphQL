@@ -18,8 +18,6 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         protected ?string $directive = null,
         /** @var array<string, mixed> */
         array $extensions = [],
-        /** @var array<string, mixed> */
-        array $data = [],
         /** @var ObjectFeedbackInterface[] */
         protected array $nested = [],
     ) {
@@ -27,7 +25,6 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
             $feedbackItemResolution,
             $location,
             $extensions,
-            $data,
         );
     }
 
@@ -35,7 +32,8 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $field,
-        string|int $objectID
+        string|int $objectID,
+        ?string $directive
     ): self {
         /** @var ObjectFeedbackInterface[] */
         $nestedObjectFeedbackEntries = [];
@@ -44,7 +42,8 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
                 $nestedObjectTypeFieldResolutionFeedback,
                 $relationalTypeResolver,
                 $field,
-                $objectID
+                $objectID,
+                $directive
             );
         }
         return new self(
@@ -53,9 +52,8 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
             $relationalTypeResolver,
             $field,
             $objectID,
-            null,
+            $directive,
             $objectTypeFieldResolutionFeedback->getExtensions(),
-            $objectTypeFieldResolutionFeedback->getData(),
             $nestedObjectFeedbackEntries
         );
     }

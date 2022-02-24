@@ -68,16 +68,6 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$objectTraces,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
     ): void {
         if ($idsDataFields) {
             // Iterate through all the arguments, calculate the maxAge for each of them,
@@ -163,16 +153,6 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                     $variables,
                     $messages,
                     $engineIterationFeedbackStore,
-                    $objectErrors,
-                    $objectWarnings,
-                    $objectDeprecations,
-                    $objectNotices,
-                    $objectTraces,
-                    $schemaErrors,
-                    $schemaWarnings,
-                    $schemaDeprecations,
-                    $schemaNotices,
-                    $schemaTraces
                 );
             }
             // That's it, we are done!
@@ -192,16 +172,6 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
             $variables,
             $messages,
             $engineIterationFeedbackStore,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectNotices,
-            $objectTraces,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
-            $schemaTraces
         );
     }
 }

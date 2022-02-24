@@ -16,8 +16,6 @@ class GeneralFeedbackStore
     private array $notices = [];
     /** @var GeneralFeedbackInterface[] */
     private array $logs = [];
-    /** @var GeneralFeedbackInterface[] */
-    private array $traces = [];
 
     /**
      * @return GeneralFeedbackInterface[]
@@ -30,6 +28,14 @@ class GeneralFeedbackStore
     public function addError(GeneralFeedbackInterface $error): void
     {
         $this->errors[] = $error;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $errors
+     */
+    public function setErrors(array $errors): void
+    {
+        $this->errors = $errors;
     }
 
     /**
@@ -46,6 +52,14 @@ class GeneralFeedbackStore
     }
 
     /**
+     * @param GeneralFeedbackInterface[] $warnings
+     */
+    public function setWarnings(array $warnings): void
+    {
+        $this->warnings = $warnings;
+    }
+
+    /**
      * @return GeneralFeedbackInterface[]
      */
     public function getDeprecations(): array
@@ -56,6 +70,14 @@ class GeneralFeedbackStore
     public function addDeprecation(GeneralFeedbackInterface $deprecation): void
     {
         $this->deprecations[] = $deprecation;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $deprecations
+     */
+    public function setDeprecations(array $deprecations): void
+    {
+        $this->deprecations = $deprecations;
     }
 
     /**
@@ -72,6 +94,14 @@ class GeneralFeedbackStore
     }
 
     /**
+     * @param GeneralFeedbackInterface[] $notices
+     */
+    public function setNotices(array $notices): void
+    {
+        $this->notices = $notices;
+    }
+
+    /**
      * @return GeneralFeedbackInterface[]
      */
     public function getLogs(): array
@@ -85,15 +115,10 @@ class GeneralFeedbackStore
     }
 
     /**
-     * @return GeneralFeedbackInterface[]
+     * @param GeneralFeedbackInterface[] $logs
      */
-    public function getTraces(): array
+    public function setLogs(array $logs): void
     {
-        return $this->traces;
-    }
-
-    public function addTrace(GeneralFeedbackInterface $trace): void
-    {
-        $this->traces[] = $trace;
+        $this->logs = $logs;
     }
 }
