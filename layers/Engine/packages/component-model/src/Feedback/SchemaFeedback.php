@@ -17,8 +17,6 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         protected ?string $directive = null,
         /** @var array<string, mixed> */
         array $extensions = [],
-        /** @var array<string, mixed> */
-        array $data = [],
         /** @var SchemaFeedbackInterface[] */
         protected array $nested = [],
     ) {
@@ -26,7 +24,6 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
             $feedbackItemResolution,
             $location,
             $extensions,
-            $data,
         );
     }
 
@@ -53,7 +50,6 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
             $field,
             $directive,
             $objectTypeFieldResolutionFeedback->getExtensions(),
-            $objectTypeFieldResolutionFeedback->getData(),
             $nestedSchemaFeedbackEntries
         );
     }

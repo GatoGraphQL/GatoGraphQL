@@ -18,8 +18,6 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         protected ?string $directive = null,
         /** @var array<string, mixed> */
         array $extensions = [],
-        /** @var array<string, mixed> */
-        array $data = [],
         /** @var ObjectFeedbackInterface[] */
         protected array $nested = [],
     ) {
@@ -27,7 +25,6 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
             $feedbackItemResolution,
             $location,
             $extensions,
-            $data,
         );
     }
 
@@ -57,7 +54,6 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
             $objectID,
             $directive,
             $objectTypeFieldResolutionFeedback->getExtensions(),
-            $objectTypeFieldResolutionFeedback->getData(),
             $nestedObjectFeedbackEntries
         );
     }

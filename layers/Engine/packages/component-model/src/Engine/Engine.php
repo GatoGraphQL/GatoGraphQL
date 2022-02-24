@@ -2139,9 +2139,6 @@ class Engine implements EngineInterface
             if ($code = $documentFeedbackEntry->getFeedbackItemResolution()->getNamespacedCode()) {
                 $documentFeedbackEntryExtensions['code'] = $code;
             }
-            if ($data = $documentFeedbackEntry->getData()) {
-                $documentFeedbackEntryExtensions['data'] = $data;
-            }
             $output[] = array_merge(
                 [
                     Tokens::MESSAGE => $documentFeedbackEntry->getFeedbackItemResolution()->getMessage(),

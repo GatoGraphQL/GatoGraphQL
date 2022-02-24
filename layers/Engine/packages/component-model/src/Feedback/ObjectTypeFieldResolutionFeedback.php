@@ -16,8 +16,6 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var array<string, mixed> */
         array $extensions = [],
-        /** @var array<string, mixed> */
-        array $data = [],
         /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
         protected array $nested = [],
     ) {
@@ -25,7 +23,6 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
             $feedbackItemResolution,
             $location,
             $extensions,
-            $data,
         );
     }
 
@@ -46,7 +43,6 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
             $schemaInputValidationFeedback->getLocation(),
             $relationalTypeResolver,
             $schemaInputValidationFeedback->getExtensions(),
-            $schemaInputValidationFeedback->getData(),
             $nestedObjectTypeFieldResolutionFeedbackEntries
         );
     }
