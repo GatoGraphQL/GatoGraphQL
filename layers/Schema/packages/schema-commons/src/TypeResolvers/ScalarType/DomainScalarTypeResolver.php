@@ -29,12 +29,16 @@ class DomainScalarTypeResolver extends AbstractScalarTypeResolver
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
+        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
         $this->validateIsString($inputValue, $schemaInputValidationFeedbackStore);
-        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;
         }
 
-        $this->validateFilterVar($inputValue, $schemaInputValidationFeedbackStore, \FILTER_VALIDATE_DOMAIN);
+        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $this->validateFilterVar($inputValue, $separateSchemaInputValidationFeedbackStore, \FILTER_VALIDATE_DOMAIN);
+        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
         if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;
         }

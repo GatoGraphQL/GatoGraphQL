@@ -29,12 +29,16 @@ class RegexScalarTypeResolver extends AbstractScalarTypeResolver
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
+        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
         $this->validateIsString($inputValue, $schemaInputValidationFeedbackStore);
-        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;
         }
 
-        $this->validateFilterVar($inputValue, $schemaInputValidationFeedbackStore, \FILTER_VALIDATE_REGEXP);
+        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $this->validateFilterVar($inputValue, $separateSchemaInputValidationFeedbackStore, \FILTER_VALIDATE_REGEXP);
+        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
         if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;
         }
