@@ -274,14 +274,24 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectiveResolverInstances = $this->getDirectiveResolverInstancesForDirective($fieldDirective, $fieldDirectiveFields[$enqueuedFieldDirective], $variables);
             $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
             // If there is no directive with this name, show an error and skip it
-            if (is_null($fieldDirectiveResolverInstances)) {
-                $schemaErrors[] = [
-                    Tokens::PATH => [$fieldDirective],
-                    Tokens::MESSAGE => sprintf(
-                        $this->__('There is no directive with name \'%s\'', 'component-model'),
-                        $directiveName
-                    ),
-                ];
+            if ($fieldDirectiveResolverInstances === null) {
+                foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E20,
+                                [
+                                    $directiveName,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                            $field,
+                            $this->directive,
+                        )
+                    );
+                }
                 continue;
             }
             $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
@@ -353,7 +363,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
             } else {
                 // Validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
-                $fieldSchemaErrors = [];
+                $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
                 list(
                     $validFieldDirective,
                     $directiveName,
@@ -362,19 +372,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $this,
                     $fieldDirectiveFields,
                     $variables,
-                    $engineIterationFeedbackStore,
-                    $fieldSchemaErrors,
+                    $separateEngineIterationFeedbackStore,
+                    $schemaErrors,
                     $schemaWarnings,
                     $schemaDeprecations,
                     $schemaNotices,
                     $schemaTraces
                 );
+                $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
                 /** @phpstan-ignore-next-line */
-                if ($fieldSchemaErrors) {
-                    $schemaErrors = array_merge(
-                        $schemaErrors,
-                        $fieldSchemaErrors
-                    );
+                if ($separateEngineIterationFeedbackStore->hasErrors()) {
                     continue;
                 }
 
