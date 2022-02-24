@@ -1339,19 +1339,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     }
 
     /**
-     * Any element that is Error, or any array that contains an error
-     */
-    protected function getFailedCastingFieldArgs(array $castedFieldArgs): array
-    {
-        return array_filter(
-            $castedFieldArgs,
-            fn (mixed $fieldArgValue) =>
-                (!is_array($fieldArgValue) && GeneralUtils::isError($fieldArgValue))
-                || (is_array($fieldArgValue) && !empty($this->getFailedCastingFieldArgs($fieldArgValue)))
-        );
-    }
-
-    /**
      * @todo Function added temporarily, remove!!!!
      * @param string[]|null $path
      * @return array<string, mixed>
