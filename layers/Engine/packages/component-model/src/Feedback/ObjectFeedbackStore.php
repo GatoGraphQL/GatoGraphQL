@@ -18,8 +18,6 @@ class ObjectFeedbackStore
     private array $notices = [];
     /** @var ObjectFeedbackInterface[] */
     private array $logs = [];
-    /** @var TraceInterface[] */
-    private array $traces = [];
 
     public function incorporate(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -67,15 +65,6 @@ class ObjectFeedbackStore
         foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
             $this->logs[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackLog,
-                $relationalTypeResolver,
-                $field,
-                $objectID,
-                $directive,
-            );
-        }
-        foreach ($objectTypeFieldResolutionFeedbackStore->getTraces() as $objectTypeFieldResolutionFeedbackTrace) {
-            $this->traces[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
-                $objectTypeFieldResolutionFeedbackTrace,
                 $relationalTypeResolver,
                 $field,
                 $objectID,
@@ -187,26 +176,5 @@ class ObjectFeedbackStore
     public function setLogs(array $logs): void
     {
         $this->logs = $logs;
-    }
-
-    /**
-     * @return TraceInterface[]
-     */
-    public function getTraces(): array
-    {
-        return $this->traces;
-    }
-
-    public function addTrace(TraceInterface $trace): void
-    {
-        $this->traces[] = $trace;
-    }
-
-    /**
-     * @param TraceInterface[] $traces
-     */
-    public function setTraces(array $traces): void
-    {
-        $this->traces = $traces;
     }
 }

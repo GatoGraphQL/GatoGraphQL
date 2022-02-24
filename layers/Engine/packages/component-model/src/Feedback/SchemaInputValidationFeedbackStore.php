@@ -16,8 +16,6 @@ class SchemaInputValidationFeedbackStore
     private array $notices = [];
     /** @var SchemaInputValidationFeedbackInterface[] */
     private array $logs = [];
-    /** @var SchemaInputValidationFeedbackInterface[] */
-    private array $traces = [];
 
     public function incorporate(
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
@@ -41,10 +39,6 @@ class SchemaInputValidationFeedbackStore
         $this->logs = array_merge(
             $this->logs,
             $schemaInputValidationFeedbackStore->getLogs()
-        );
-        $this->traces = array_merge(
-            $this->traces,
-            $schemaInputValidationFeedbackStore->getTraces()
         );
     }
 
@@ -151,26 +145,5 @@ class SchemaInputValidationFeedbackStore
     public function setLogs(array $logs): void
     {
         $this->logs = $logs;
-    }
-
-    /**
-     * @return SchemaInputValidationFeedbackInterface[]
-     */
-    public function getTraces(): array
-    {
-        return $this->traces;
-    }
-
-    public function addTrace(SchemaInputValidationFeedbackInterface $trace): void
-    {
-        $this->traces[] = $trace;
-    }
-
-    /**
-     * @param SchemaInputValidationFeedbackInterface[] $traces
-     */
-    public function setTraces(array $traces): void
-    {
-        $this->traces = $traces;
     }
 }

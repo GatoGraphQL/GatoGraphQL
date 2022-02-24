@@ -18,8 +18,6 @@ class ObjectTypeFieldResolutionFeedbackStore
     private array $notices = [];
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
     private array $logs = [];
-    /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
-    private array $traces = [];
 
     public function incorporate(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -43,10 +41,6 @@ class ObjectTypeFieldResolutionFeedbackStore
         $this->logs = array_merge(
             $this->logs,
             $objectTypeFieldResolutionFeedbackStore->getLogs()
-        );
-        $this->traces = array_merge(
-            $this->traces,
-            $objectTypeFieldResolutionFeedbackStore->getTraces()
         );
     }
 
@@ -102,16 +96,6 @@ class ObjectTypeFieldResolutionFeedbackStore
                     $relationalTypeResolver,
                 ),
                 $schemaInputValidationFeedbackStore->getLogs()
-            )
-        );
-        $this->traces = array_merge(
-            $this->traces,
-            array_map(
-                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
-                    $schemaInputValidationFeedback,
-                    $relationalTypeResolver,
-                ),
-                $schemaInputValidationFeedbackStore->getTraces()
             )
         );
     }
@@ -219,26 +203,5 @@ class ObjectTypeFieldResolutionFeedbackStore
     public function setLogs(array $logs): void
     {
         $this->logs = $logs;
-    }
-
-    /**
-     * @return ObjectTypeFieldResolutionFeedbackInterface[]
-     */
-    public function getTraces(): array
-    {
-        return $this->traces;
-    }
-
-    public function addTrace(ObjectTypeFieldResolutionFeedbackInterface $trace): void
-    {
-        $this->traces[] = $trace;
-    }
-
-    /**
-     * @param ObjectTypeFieldResolutionFeedbackInterface[] $traces
-     */
-    public function setTraces(array $traces): void
-    {
-        $this->traces = $traces;
     }
 }

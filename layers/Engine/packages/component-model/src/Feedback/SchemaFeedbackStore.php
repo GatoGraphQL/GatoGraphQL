@@ -18,8 +18,6 @@ class SchemaFeedbackStore
     private array $notices = [];
     /** @var SchemaFeedbackInterface[] */
     private array $logs = [];
-    /** @var TraceInterface[] */
-    private array $traces = [];
 
     public function incorporate(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -62,14 +60,6 @@ class SchemaFeedbackStore
         foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
             $this->logs[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackLog,
-                $relationalTypeResolver,
-                $field,
-                $directive,
-            );
-        }
-        foreach ($objectTypeFieldResolutionFeedbackStore->getTraces() as $objectTypeFieldResolutionFeedbackTrace) {
-            $this->traces[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
-                $objectTypeFieldResolutionFeedbackTrace,
                 $relationalTypeResolver,
                 $field,
                 $directive,
@@ -180,26 +170,5 @@ class SchemaFeedbackStore
     public function setLogs(array $logs): void
     {
         $this->logs = $logs;
-    }
-
-    /**
-     * @return TraceInterface[]
-     */
-    public function getTraces(): array
-    {
-        return $this->traces;
-    }
-
-    public function addTrace(TraceInterface $trace): void
-    {
-        $this->traces[] = $trace;
-    }
-
-    /**
-     * @param TraceInterface[] $traces
-     */
-    public function setTraces(array $traces): void
-    {
-        $this->traces = $traces;
     }
 }
