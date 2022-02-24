@@ -578,24 +578,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         );
     }
 
-    protected function filterFieldOrDirectiveArgs(array $fieldOrDirectiveArgs): array
-    {
-        // Remove all errors, allow null values
-        return array_filter(
-            $fieldOrDirectiveArgs,
-            function ($elem): bool {
-                // If the input is `[[String]]`, must then validate if any subitem is Error
-                if (is_array($elem)) {
-                    // Filter elements in the array. If any is missing, filter the array out
-                    $filteredElem = $this->filterFieldOrDirectiveArgs($elem);
-                    return count($elem) === count($filteredElem);
-                }
-                // Remove only Errors. Keep NULL, '', 0, false and []
-                return !GeneralUtils::isError($elem);
-            }
-        );
-    }
-
     public function extractFieldArgumentsForSchema(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
@@ -758,15 +740,11 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
-        if ($fieldOrDirectiveArgs) {
-            foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
-                // Validate it, and extract warnings and deprecations
-                $this->collectFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
-                $this->collectFieldArgumentValueWarningQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
-                $this->collectFieldArgumentValueDeprecationQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
-            }
-            // If there was an error, remove those entries
-            $fieldOrDirectiveArgs = $this->filterFieldOrDirectiveArgs($fieldOrDirectiveArgs);
+        foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
+            // Nested dynamic fields: Validation, warnings and deprecations
+            $this->collectFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+            $this->collectFieldArgumentValueWarningQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+            $this->collectFieldArgumentValueDeprecationQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
         }
         return $fieldOrDirectiveArgs;
     }
@@ -891,7 +869,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 }
                 $fieldOrDirectiveArgs[$fieldOrDirectiveArgName] = $fieldOrDirectiveArgValue;
             }
-            return $this->filterFieldOrDirectiveArgs($fieldOrDirectiveArgs);
         }
         return $fieldOrDirectiveArgs;
     }
@@ -1564,10 +1541,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if (is_array($fieldArgValue) || $isObject) {
             // Resolve each element the same way
             // For object: Cast back and forth from array to stdClass
-            $fieldOrDirectiveArgs = $this->filterFieldOrDirectiveArgs(
-                array_map(function ($arrayValueElem) use ($variables) {
-                    return $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables);
-                }, (array) $fieldArgValue)
+            $fieldOrDirectiveArgs = array_map(
+                fn (mixed $arrayValueElem) => $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables),
+                (array) $fieldArgValue
             );
             if ($isObject) {
                 return (object) $fieldOrDirectiveArgs;
