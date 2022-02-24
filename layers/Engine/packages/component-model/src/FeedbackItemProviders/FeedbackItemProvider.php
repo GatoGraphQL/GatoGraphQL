@@ -31,6 +31,10 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public const E17 = 'e17';
     public const E18 = 'e18';
     public const E19 = 'e19';
+    public const E20 = 'e20';
+    public const E21 = 'e21';
+    public const E22 = 'e22';
+    public const E23 = 'e23';
 
     /**
      * @return string[]
@@ -58,6 +62,10 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E17,
             self::E18,
             self::E19,
+            self::E20,
+            self::E21,
+            self::E22,
+            self::E23,
         ];
     }
 
@@ -84,6 +92,10 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E17 => $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
             self::E18 => $this->__('Validation failed for directives in fields \'%s\'', 'component-model') ,
             self::E19 => $this->__('Validation failed for fields \'%s\'', 'component-model'),
+            self::E20 => $this->__('There is no directive with name \'%s\'', 'component-model'),
+            self::E21 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'component-model'),
+            self::E22 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'component-model'),
+            self::E23 => $this->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -111,7 +123,11 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E16,
             self::E17,
             self::E18,
-            self::E19
+            self::E19,
+            self::E20,
+            self::E21,
+            self::E22,
+            self::E23
                 => FeedbackCategories::ERROR,
             default
                 => parent::getCategory($code),

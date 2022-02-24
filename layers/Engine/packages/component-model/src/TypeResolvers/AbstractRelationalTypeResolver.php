@@ -297,33 +297,51 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
 
             if (empty($fieldDirectiveResolverInstances)) {
-                $schemaErrors[] = [
-                    Tokens::PATH => [$fieldDirective],
-                    Tokens::MESSAGE => sprintf(
-                        $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'component-model'),
-                        $directiveName,
-                        json_encode($directiveArgs),
-                        implode(
-                            $this->__('\', \'', 'component-model'),
-                            $fieldDirectiveFields[$fieldDirective]
+                foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E21,
+                                [
+                                    $directiveName,
+                                    json_encode($directiveArgs),
+                                    implode(
+                                        $this->__('\', \'', 'component-model'),
+                                        $fieldDirectiveFields[$fieldDirective]
+                                    ),
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                            $field,
+                            $this->directive,
                         )
-                    ),
-                ];
+                    );
+                }
                 continue;
             }
 
             foreach ($fieldDirectiveFields[$enqueuedFieldDirective] as $field) {
                 $directiveResolverInstance = $fieldDirectiveResolverInstances[$field] ?? null;
-                if (is_null($directiveResolverInstance)) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$fieldDirective],
-                        Tokens::MESSAGE => sprintf(
-                            $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'component-model'),
-                            $directiveName,
-                            json_encode($directiveArgs),
-                            $field
-                        ),
-                    ];
+                if ($directiveResolverInstance === null) {
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E22,
+                                [
+                                    $directiveName,
+                                    json_encode($directiveArgs),
+                                    $field,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                            $field,
+                            $this->directive,
+                        )
+                    );
                     continue;
                 }
 
@@ -431,14 +449,24 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $directiveResolverFields,
                         $alreadyProcessingFields
                     );
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$fieldDirective],
-                        Tokens::MESSAGE => sprintf(
-                            $this->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
-                            $fieldDirective,
-                            implode('\', \'', $alreadyProcessingFields)
-                        ),
-                    ];
+                    foreach ($alreadyProcessingFields as $field) {
+                        $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                            new SchemaFeedback(
+                                new FeedbackItemResolution(
+                                    FeedbackItemProvider::class,
+                                    FeedbackItemProvider::E23,
+                                    [
+                                        $fieldDirective,
+                                        implode('\', \'', $alreadyProcessingFields),
+                                    ]
+                                ),
+                                LocationHelper::getNonSpecificLocation(),
+                                $this,
+                                $field,
+                                $this->directive,
+                            )
+                        );
+                    }
                     // If after removing the duplicated fields there are still others, process them
                     // Otherwise, skip
                     if (!$directiveResolverFields) {
