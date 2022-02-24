@@ -212,6 +212,13 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     ): ?stdClass {
         $coercedInputValue = new stdClass();
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
+        /**
+         * If an input field has an error:
+         * 
+         * - If it's nullable, then only the field is set to null
+         * - If it's non-nullable, then the whole InputObject must be set to null
+         */
+        $mustErrorBePropagated = false;
 
         /**
          * Inject all properties with default value
@@ -293,6 +300,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
 
             $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
             $inputFieldIsArrayType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
             $inputFieldIsNonNullArrayItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
             $inputFieldIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
@@ -326,6 +334,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             );
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+                $coercedInputValue->$inputFieldName = null;
+                $mustErrorBePropagated = $mustErrorBePropagated || $inputFieldTypeModifiersIsMandatory;
                 continue;
             }
 
@@ -340,6 +350,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             );
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+                $coercedInputValue->$inputFieldName = null;
+                $mustErrorBePropagated = $mustErrorBePropagated || $inputFieldTypeModifiersIsMandatory;
                 continue;
             }
 
@@ -353,6 +365,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             );
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+                $coercedInputValue->$inputFieldName = null;
+                $mustErrorBePropagated = $mustErrorBePropagated || $inputFieldTypeModifiersIsMandatory;
                 continue;
             }
 
@@ -373,6 +387,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;
             }
+            $mustErrorBePropagated = true;
             $schemaInputValidationFeedbackStore->addError(
                 new SchemaInputValidationFeedback(
                     new FeedbackItemResolution(
@@ -387,11 +402,13 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                     $this
                 ),
             );
-            continue;
         }
 
-        // If there was any error, return it
-        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+        /**
+         * If there was any error on a non-nullable input field,
+         * the whole InputObject must be null
+         */
+        if ($mustErrorBePropagated) {
             return null;
         }
 
