@@ -708,20 +708,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ];
     }
 
-    /**
-     * Add the field or directive to the head of the error path, for all nested errors
-     */
-    protected function prependPathOnNestedErrors(array &$nestedFieldOrDirectiveSchemaError, string $fieldOrDirective): void
-    {
-
-        if (isset($nestedFieldOrDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
-            foreach ($nestedFieldOrDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$deeplyNestedFieldOrDirectiveSchemaError) {
-                array_unshift($deeplyNestedFieldOrDirectiveSchemaError[Tokens::PATH], $fieldOrDirective);
-                $this->prependPathOnNestedErrors($deeplyNestedFieldOrDirectiveSchemaError, $fieldOrDirective);
-            }
-        }
-    }
-
     protected function validateExtractedFieldOrDirectiveArgumentsForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldOrDirective,
