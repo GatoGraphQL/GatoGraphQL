@@ -366,21 +366,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directiveResolverInstance = $instanceData['instance'];
             $directiveResolverFields = $instanceData['fields'];
             // If the enqueued and the fieldDirective are different, it's because it is a repeated one
-            $isRepeatedFieldDirective = $fieldDirective != $enqueuedFieldDirective;
+            $isRepeatedFieldDirective = $fieldDirective !== $enqueuedFieldDirective;
             // If it is a repeated directive, no need to do the validation again
-            if ($isRepeatedFieldDirective) {
-                // If there is an existing error, then skip adding this resolver to the pipeline
-                if (
-                    !empty(array_filter(
-                        $schemaErrors,
-                        function ($schemaError) use ($fieldDirective) {
-                            return $schemaError[Tokens::PATH][0] == $fieldDirective;
-                        }
-                    ))
-                ) {
-                    continue;
-                }
-            } else {
+            if (!$isRepeatedFieldDirective) {
                 // Validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
                 $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
                 list(
