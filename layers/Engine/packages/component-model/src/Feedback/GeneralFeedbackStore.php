@@ -33,6 +33,14 @@ class GeneralFeedbackStore
     }
 
     /**
+     * @param GeneralFeedbackInterface[] $errors
+     */
+    public function setErrors(array $errors): void
+    {
+        $this->errors = $errors;
+    }
+
+    /**
      * @return GeneralFeedbackInterface[]
      */
     public function getWarnings(): array
@@ -43,6 +51,14 @@ class GeneralFeedbackStore
     public function addWarning(GeneralFeedbackInterface $warning): void
     {
         $this->warnings[] = $warning;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $warnings
+     */
+    public function setWarnings(array $warnings): void
+    {
+        $this->warnings = $warnings;
     }
 
     /**
@@ -59,6 +75,14 @@ class GeneralFeedbackStore
     }
 
     /**
+     * @param GeneralFeedbackInterface[] $deprecations
+     */
+    public function setDeprecations(array $deprecations): void
+    {
+        $this->deprecations = $deprecations;
+    }
+
+    /**
      * @return GeneralFeedbackInterface[]
      */
     public function getNotices(): array
@@ -69,6 +93,14 @@ class GeneralFeedbackStore
     public function addNotice(GeneralFeedbackInterface $notice): void
     {
         $this->notices[] = $notice;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $notices
+     */
+    public function setNotices(array $notices): void
+    {
+        $this->notices = $notices;
     }
 
     /**
@@ -85,6 +117,14 @@ class GeneralFeedbackStore
     }
 
     /**
+     * @param GeneralFeedbackInterface[] $logs
+     */
+    public function setLogs(array $logs): void
+    {
+        $this->logs = $logs;
+    }
+
+    /**
      * @return GeneralFeedbackInterface[]
      */
     public function getTraces(): array
@@ -95,5 +135,13 @@ class GeneralFeedbackStore
     public function addTrace(GeneralFeedbackInterface $trace): void
     {
         $this->traces[] = $trace;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $traces
+     */
+    public function setTraces(array $traces): void
+    {
+        $this->traces = $traces;
     }
 }
