@@ -766,7 +766,7 @@ GRAPHQL;
                 ),
             ],
             [
-                '{ allUsers : users ( id: [ 1, "2", true, null] ) { id } }',
+                '{ allUsers : users ( id: [ 1, 1.5, "2", true, null] ) { id } }',
                 new Document(
                     [
                         new QueryOperation(
@@ -778,10 +778,10 @@ GRAPHQL;
                                     'users',
                                     'allUsers',
                                     [
-                                        new Argument('id', new InputList([1, "2", true, null], new Location(1, 26)), new Location(1, 22)),
+                                        new Argument('id', new InputList([1, 1.5, "2", true, null], new Location(1, 26)), new Location(1, 22)),
                                     ],
                                     [
-                                        new LeafField('id', null, [], [], new Location(1, 52)),
+                                        new LeafField('id', null, [], [], new Location(1, 57)),
                                     ],
                                     [],
                                     new Location(1, 14)
