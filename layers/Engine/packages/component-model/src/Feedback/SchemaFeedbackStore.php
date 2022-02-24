@@ -18,7 +18,7 @@ class SchemaFeedbackStore
     private array $notices = [];
     /** @var SchemaFeedbackInterface[] */
     private array $logs = [];
-    /** @var SchemaTraceInterface[] */
+    /** @var TraceInterface[] */
     private array $traces = [];
 
     public function incorporate(
@@ -183,20 +183,20 @@ class SchemaFeedbackStore
     }
 
     /**
-     * @return SchemaTraceInterface[]
+     * @return TraceInterface[]
      */
     public function getTraces(): array
     {
         return $this->traces;
     }
 
-    public function addTrace(SchemaTraceInterface $trace): void
+    public function addTrace(TraceInterface $trace): void
     {
         $this->traces[] = $trace;
     }
 
     /**
-     * @param SchemaTraceInterface[] $traces
+     * @param TraceInterface[] $traces
      */
     public function setTraces(array $traces): void
     {

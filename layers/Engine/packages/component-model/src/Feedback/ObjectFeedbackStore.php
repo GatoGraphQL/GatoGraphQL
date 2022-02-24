@@ -18,7 +18,7 @@ class ObjectFeedbackStore
     private array $notices = [];
     /** @var ObjectFeedbackInterface[] */
     private array $logs = [];
-    /** @var ObjectTraceInterface[] */
+    /** @var TraceInterface[] */
     private array $traces = [];
 
     public function incorporate(
@@ -190,20 +190,20 @@ class ObjectFeedbackStore
     }
 
     /**
-     * @return ObjectTraceInterface[]
+     * @return TraceInterface[]
      */
     public function getTraces(): array
     {
         return $this->traces;
     }
 
-    public function addTrace(ObjectTraceInterface $trace): void
+    public function addTrace(TraceInterface $trace): void
     {
         $this->traces[] = $trace;
     }
 
     /**
-     * @param ObjectTraceInterface[] $traces
+     * @param TraceInterface[] $traces
      */
     public function setTraces(array $traces): void
     {
