@@ -219,20 +219,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $pipelineData;
     }
 
-    /**
-     * Add the field(s) to the head of the error path, for all nested errors
-     */
-    protected function prependPathOnNestedErrors(array &$directiveSchemaError, string $directiveField): void
-    {
-        if (!isset($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
-            return;
-        }
-        foreach ($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$nestedDirectiveSchemaError) {
-            array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $directiveField);
-            $this->prependPathOnNestedErrors($nestedDirectiveSchemaError, $directiveField);
-        }
-    }
-
     protected function validateAndResolveInstances(
         array $fieldDirectives,
         array $fieldDirectiveFields,
