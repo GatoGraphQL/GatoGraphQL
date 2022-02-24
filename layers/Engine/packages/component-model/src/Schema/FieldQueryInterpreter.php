@@ -1074,7 +1074,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
              *     [1, "a", 3] => [1, null, 3]
              *
              * Right below it will check, in case there are errors,
-             * if the input field is a non-nullable List and,
+             * if the arg is a non-nullable List and,
              * then, set the whole value to null.
              *
              * Eg: casting to [String!]:
@@ -1090,7 +1090,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $fieldOrDirectiveArgs[$argName] = $coercedArgValue;
             if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 /**
-                 * If the input field is a non-nullable List and it has errors,
+                 * If the arg is a non-nullable List and it has errors,
                  * then it must be set to null.
                  */
                 if (
