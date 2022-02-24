@@ -16,7 +16,7 @@ class DocumentFeedbackStore
     private array $notices = [];
     /** @var DocumentFeedbackInterface[] */
     private array $logs = [];
-    /** @var DocumentFeedbackInterface[] */
+    /** @var DocumentTraceInterface[] */
     private array $traces = [];
 
     /**
@@ -125,20 +125,20 @@ class DocumentFeedbackStore
     }
 
     /**
-     * @return DocumentFeedbackInterface[]
+     * @return DocumentTraceInterface[]
      */
     public function getTraces(): array
     {
         return $this->traces;
     }
 
-    public function addTrace(DocumentFeedbackInterface $trace): void
+    public function addTrace(DocumentTraceInterface $trace): void
     {
         $this->traces[] = $trace;
     }
 
     /**
-     * @param DocumentFeedbackInterface[] $traces
+     * @param DocumentTraceInterface[] $traces
      */
     public function setTraces(array $traces): void
     {
