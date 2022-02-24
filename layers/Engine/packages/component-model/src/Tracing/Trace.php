@@ -12,10 +12,12 @@ class Trace implements TraceInterface
         protected string|int $id,
         /** @var array<string,mixed> */
         protected array $data = [],
+        protected ?string $directive = null,
+        /** @var array<string|int,string[]> */
+        protected ?array $idFields = null,
         protected ?RelationalTypeResolverInterface $relationalTypeResolver = null,
         protected ?string $field = null,
         protected string|int|null $objectID = null,
-        protected ?string $directive = null,
     ) {
     }
 
@@ -32,6 +34,19 @@ class Trace implements TraceInterface
         return $this->data;
     }
 
+    public function getDirective(): ?string
+    {
+        return $this->directive;
+    }
+
+    /**
+     * @return array<string|int,string[]>|null
+     */
+    public function getIDFields(): ?array
+    {
+        return $this->idFields;
+    }
+
     public function getRelationalTypeResolver(): ?RelationalTypeResolverInterface
     {
         return $this->relationalTypeResolver;
@@ -45,10 +60,5 @@ class Trace implements TraceInterface
     public function getObjectID(): string|int|null
     {
         return $this->objectID;
-    }
-
-    public function getDirective(): ?string
-    {
-        return $this->directive;
     }
 }

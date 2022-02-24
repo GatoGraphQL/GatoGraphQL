@@ -13,8 +13,12 @@ interface TraceInterface
      * @return array<string,mixed>
      */
     public function getData(): array;
+    /**
+     * @return array<string|int,string[]>|null
+     */
+    public function getIDFields(): ?array;
+    public function getDirective(): ?string;
     public function getRelationalTypeResolver(): ?RelationalTypeResolverInterface;
     public function getField(): ?string;
     public function getObjectID(): string|int|null;
-    public function getDirective(): ?string;
 }
