@@ -1520,6 +1520,7 @@ class Engine implements EngineInterface
             FeedbackCategories::WARNING => [],
             FeedbackCategories::DEPRECATION => [],
             FeedbackCategories::NOTICE => [],
+            FeedbackCategories::LOG => [],
         ];
         $engineState->nocache_fields = [];
 
@@ -1727,7 +1728,7 @@ class Engine implements EngineInterface
         $sendFeedbackWarnings = in_array(FeedbackCategories::WARNING, $enabledFeedbackCategoryExtensions);
         $sendFeedbackDeprecations = in_array(FeedbackCategories::DEPRECATION, $enabledFeedbackCategoryExtensions);
         $sendFeedbackNotices = in_array(FeedbackCategories::NOTICE, $enabledFeedbackCategoryExtensions);
-        $sendFeedbackLogs = in_array(FeedbackCategories::LOG, $enabledFeedbackCategoryExtensions);
+        $sendFeedbackLogs = true || in_array(FeedbackCategories::LOG, $enabledFeedbackCategoryExtensions);
 
         if ($sendFeedbackWarnings) {
             if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
@@ -1787,7 +1788,14 @@ class Engine implements EngineInterface
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::NOTICE, $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
         }
         if ($sendFeedbackLogs) {
-            $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
+            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::LOG, $schemaFeedbackEntries[FeedbackCategories::LOG]);
+            if ($documentLogs = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs())) {
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] = array_merge(
+                    $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG],
+                    $documentLogs
+                );
+            }
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
@@ -1933,6 +1941,21 @@ class Engine implements EngineInterface
             $database_key,
             $objectIDItems
         );
+
+        $iterationObjectLogs = [];
+        foreach ($objectFeedbackStore->getLogs() as $objectFeedbackLog) {
+            $this->transferObjectFeedbackEntries(
+                $objectFeedbackLog,
+                $iterationObjectLogs,
+            );
+        }
+        $this->addObjectEntriesToDestinationArray(
+            $iterationObjectLogs,
+            $objectFeedbackEntries[FeedbackCategories::LOG],
+            $relationalTypeResolver,
+            $database_key,
+            $objectIDItems
+        );
     }
 
     private function transferObjectFeedbackEntries(
@@ -2010,6 +2033,20 @@ class Engine implements EngineInterface
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaNotices,
             $schemaFeedbackEntries[FeedbackCategories::NOTICE],
+            $relationalTypeResolver,
+            $database_key,
+        );
+
+        $iterationSchemaLogs = [];
+        foreach ($schemaFeedbackStore->getLogs() as $schemaFeedbackLog) {
+            $this->transferSchemaFeedbackEntries(
+                $schemaFeedbackLog,
+                $iterationSchemaLogs,
+            );
+        }
+        $this->addSchemaEntriesToDestinationArray(
+            $iterationSchemaLogs,
+            $schemaFeedbackEntries[FeedbackCategories::LOG],
             $relationalTypeResolver,
             $database_key,
         );

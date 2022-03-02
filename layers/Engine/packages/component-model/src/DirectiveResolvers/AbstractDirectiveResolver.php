@@ -839,6 +839,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // The one corresponding to the current stage is at the head. Take it out from there,
         // and keep passing down the rest of the array to the next stages
         list(
+            /** @var RelationalTypeResolverInterface */
             $relationalTypeResolver,
             $pipelineDirectiveResolverInstances,
             $objectIDItems,
@@ -848,6 +849,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $dbItems,
             $variables,
             $messages,
+            /** @var EngineIterationFeedbackStore */
             $engineIterationFeedbackStore,
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);
 
@@ -905,7 +907,27 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 /** @var ComponentConfiguration */
                 $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
                 if ($componentConfiguration->logExceptionErrorMessages()) {
-                    // @todo: Implement for Log
+                    foreach ($idsDataFields as $id => $dataFields) {
+                        foreach ($dataFields['direct'] as $field) {
+                            $engineIterationFeedbackStore->objectFeedbackStore->addLog(
+                                new ObjectFeedback(
+                                    new FeedbackItemResolution(
+                                        FeedbackItemProvider::class,
+                                        FeedbackItemProvider::E11,
+                                        [
+                                            $this->directive,
+                                            $e->getMessage(),
+                                        ]
+                                    ),
+                                    LocationHelper::getNonSpecificLocation(),
+                                    $relationalTypeResolver,
+                                    $field,
+                                    $id,
+                                    $this->directive
+                                )
+                            );
+                        }
+                    }
                 }
                 $feedbackItemResolution = $componentConfiguration->sendExceptionErrorMessages()
                     ? new FeedbackItemResolution(
