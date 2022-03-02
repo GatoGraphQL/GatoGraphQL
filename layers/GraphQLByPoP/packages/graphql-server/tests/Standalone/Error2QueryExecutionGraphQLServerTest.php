@@ -25,6 +25,7 @@ class Error2QueryExecutionGraphQLServerTest extends AbstractQueryExecutionGraphQ
                         [
                             "message" => "Field 'id' is not a connection",
                             "extensions" => [
+                                "code" => "PoP\\ComponentModel\\e1",
                                 "field" => "id",
                                 "type" => "QueryRoot",
                             ],
