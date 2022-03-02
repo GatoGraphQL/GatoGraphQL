@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPAPI\GraphQLAPI\DataStructureFormatters;
 
-use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
+use PoP\ComponentModel\Constants\Response;
+use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\Root\App;
+use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
@@ -35,16 +37,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 $this->reformatDocumentEntries($data['documentErrors'])
             );
         }
-        if (isset($data['schemaErrors'])) {
+        if (isset($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR])) {
             $errors = array_merge(
                 $errors,
-                $this->reformatSchemaEntries($data['schemaErrors'])
+                $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR])
             );
         }
-        if (isset($data['objectErrors'])) {
+        if (isset($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR])) {
             $errors = array_merge(
                 $errors,
-                $this->reformatDBEntries($data['objectErrors'])
+                $this->reformatDBEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR])
             );
         }
         if ($errors) {
@@ -68,16 +70,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 $this->reformatDocumentEntries($data['documentWarnings'])
             );
         }
-        if ($data['schemaWarnings'] ?? null) {
+        if ($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING] ?? null) {
             $warnings = array_merge(
                 $warnings,
-                $this->reformatSchemaEntries($data['schemaWarnings'])
+                $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING])
             );
         }
-        if ($data['objectWarnings'] ?? null) {
+        if ($data[Response::OBJECT_FEEDBACK][FeedbackCategories::WARNING] ?? null) {
             $warnings = array_merge(
                 $warnings,
-                $this->reformatDBEntries($data['objectWarnings'])
+                $this->reformatDBEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::WARNING])
             );
         }
         if ($warnings) {
@@ -100,13 +102,13 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             /** @var ComponentConfiguration */
             $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
             if ($componentConfiguration->enableProactiveFeedbackNotices()) {
-                if ($data['objectNotices'] ?? null) {
-                    $notices = $this->reformatDBEntries($data['objectNotices']);
+                if ($data[Response::OBJECT_FEEDBACK][FeedbackCategories::NOTICE] ?? null) {
+                    $notices = $this->reformatDBEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::NOTICE]);
                 }
-                if ($data['schemaNotices'] ?? null) {
+                if ($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::NOTICE] ?? null) {
                     $notices = array_merge(
                         $notices,
-                        $this->reformatSchemaEntries($data['schemaNotices'])
+                        $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::NOTICE])
                     );
                 }
                 if ($notices) {
@@ -116,13 +118,13 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
             // Add deprecations
             if ($componentConfiguration->enableProactiveFeedbackDeprecations()) {
-                if ($data['objectDeprecations'] ?? null) {
-                    $deprecations = $this->reformatDBEntries($data['objectDeprecations']);
+                if ($data[Response::OBJECT_FEEDBACK][FeedbackCategories::DEPRECATION] ?? null) {
+                    $deprecations = $this->reformatDBEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::DEPRECATION]);
                 }
-                if ($data['schemaDeprecations'] ?? null) {
+                if ($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::DEPRECATION] ?? null) {
                     $deprecations = array_merge(
                         $deprecations,
-                        $this->reformatSchemaEntries($data['schemaDeprecations'])
+                        $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::DEPRECATION])
                     );
                 }
                 if ($deprecations) {
@@ -132,8 +134,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
             // Add logs
             if ($componentConfiguration->enableProactiveFeedbackLogs()) {
-                if ($data['logEntries'] ?? null) {
-                    $ret['extensions']['logs'] = $data['logEntries'];
+                if ($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] ?? null) {
+                    $ret['extensions']['logs'] = $data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG];
                 }
             }
         }

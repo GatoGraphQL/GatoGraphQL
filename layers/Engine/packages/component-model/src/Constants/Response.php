@@ -12,4 +12,8 @@ class Response
     public const URL = 'url';
     public const ERROR = 'error';
     public const MULTIPLE_ROUTES = 'multiple-routes';
+    public const GENERAL_FEEDBACK = 'generalFeedback';
+    public const DOCUMENT_FEEDBACK = 'documentFeedback';
+    public const OBJECT_FEEDBACK = 'objectFeedback';
+    public const SCHEMA_FEEDBACK = 'schemaFeedback';
 }

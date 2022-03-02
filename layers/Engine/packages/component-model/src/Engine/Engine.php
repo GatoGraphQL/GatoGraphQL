@@ -1766,22 +1766,23 @@ class Engine implements EngineInterface
                 );
             }
         }
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectFeedbackEntries[FeedbackCategories::ERROR]);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaErrors', $schemaFeedbackEntries[FeedbackCategories::ERROR]);
+        $ret[Response::OBJECT_FEEDBACK] = $ret[Response::SCHEMA_FEEDBACK] = [];
+        $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::ERROR, $objectFeedbackEntries[FeedbackCategories::ERROR]);
+        $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::ERROR, $schemaFeedbackEntries[FeedbackCategories::ERROR]);
         if ($sendFeedbackWarnings) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectFeedbackEntries[FeedbackCategories::WARNING]);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaFeedbackEntries[FeedbackCategories::WARNING]);
+            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::WARNING, $objectFeedbackEntries[FeedbackCategories::WARNING]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::WARNING, $schemaFeedbackEntries[FeedbackCategories::WARNING]);
         }
         if ($sendFeedbackDeprecations) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectFeedbackEntries[FeedbackCategories::DEPRECATION]);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaFeedbackEntries[FeedbackCategories::DEPRECATION]);
+            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::DEPRECATION, $objectFeedbackEntries[FeedbackCategories::DEPRECATION]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::DEPRECATION, $schemaFeedbackEntries[FeedbackCategories::DEPRECATION]);
         }
         if ($sendFeedbackNotices) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectFeedbackEntries[FeedbackCategories::NOTICE]);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
+            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::NOTICE, $objectFeedbackEntries[FeedbackCategories::NOTICE]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::NOTICE, $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
         }
         if ($sendFeedbackLogs) {
-            $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
+            $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
