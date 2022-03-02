@@ -25,16 +25,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
         // Add errors
         $errors = $warnings = $deprecations = $notices = [];
-        if (isset($data['generalErrors'])) {
+        if (isset($data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR])) {
             $errors = array_merge(
                 $errors,
-                $this->reformatGeneralEntries($data['generalErrors'])
+                $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR])
             );
         }
-        if (isset($data['documentErrors'])) {
+        if (isset($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR])) {
             $errors = array_merge(
                 $errors,
-                $this->reformatDocumentEntries($data['documentErrors'])
+                $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR])
             );
         }
         if (isset($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR])) {
@@ -58,16 +58,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // Eg: `{ posts(searchfor: ["posts"]) { id } }` will fail casting fieldArg `searchfor`,
         // raising a warning, but field `posts` is still executed, retrieving all results.
         // If the user is not told that there was an error/warning, it's very confusing
-        if ($data['generalWarnings'] ?? null) {
+        if ($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] ?? null) {
             $warnings = array_merge(
                 $warnings,
-                $this->reformatGeneralEntries($data['generalWarnings'])
+                $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING])
             );
         }
-        if ($data['documentWarnings'] ?? null) {
+        if ($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? null) {
             $warnings = array_merge(
                 $warnings,
-                $this->reformatDocumentEntries($data['documentWarnings'])
+                $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING])
             );
         }
         if ($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING] ?? null) {

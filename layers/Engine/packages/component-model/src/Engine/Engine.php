@@ -1708,12 +1708,17 @@ class Engine implements EngineInterface
             App::getFeedbackStore()->regenerateSchemaFeedbackStore();
         }
 
-        $ret = [];
+        $ret = [
+            Response::GENERAL_FEEDBACK => [],
+            Response::DOCUMENT_FEEDBACK => [],
+            Response::OBJECT_FEEDBACK => [],
+            Response::SCHEMA_FEEDBACK => [],
+        ];
 
         // Add the feedback (errors, warnings, deprecations) into the output
         $generalFeedbackStore = App::getFeedbackStore()->generalFeedbackStore;
         if ($generalErrors = $generalFeedbackStore->getErrors()) {
-            $ret['generalErrors'] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
+            $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
         }
 
         /** @var ComponentConfiguration */
@@ -1726,7 +1731,7 @@ class Engine implements EngineInterface
 
         if ($sendFeedbackWarnings) {
             if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
-                $ret['generalWarnings'] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
+                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
             }
         }
 
@@ -1747,21 +1752,21 @@ class Engine implements EngineInterface
                 }
                 $queryDocumentErrors[] = $queryDocumentError;
             }
-            $ret['documentErrors'] = $queryDocumentErrors;
+            $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] = $queryDocumentErrors;
         }
         if ($documentErrors = $documentFeedbackStore->getErrors()) {
-            $ret['documentErrors'] = array_merge(
-                $ret['documentErrors'] ?? [],
+            $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] = array_merge(
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? [],
                 $this->getDocumentFeedbackEntriesForOutput($documentErrors)
             );
         }
         if ($sendFeedbackWarnings) {
             if ($documentWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
-                $ret['documentWarnings'] = $documentWarnings;
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] = $documentWarnings;
             }
             if ($documentWarnings = $documentFeedbackStore->getWarnings()) {
-                $ret['documentWarnings'] = array_merge(
-                    $ret['documentWarnings'] ?? [],
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] = array_merge(
+                    $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? [],
                     $this->getDocumentFeedbackEntriesForOutput($documentWarnings)
                 );
             }
