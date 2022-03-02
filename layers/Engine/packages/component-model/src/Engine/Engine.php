@@ -1900,8 +1900,7 @@ class Engine implements EngineInterface
         array &$objectDeprecations,
         array &$objectNotices,
     ): void {
-        $iterationObjectErrors = $iterationObjectWarnings = $iterationObjectDeprecations = $iterationObjectNotices = [];
-        
+        $iterationObjectErrors = [];        
         foreach ($objectFeedbackStore->getErrors() as $objectFeedbackError) {
             $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorOutput($objectFeedbackError);
         }
@@ -1913,6 +1912,7 @@ class Engine implements EngineInterface
             $objectIDItems
         );
 
+        $iterationObjectWarnings = [];
         foreach ($objectFeedbackStore->getWarnings() as $objectFeedbackWarning) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackWarning,
@@ -1927,6 +1927,7 @@ class Engine implements EngineInterface
             $objectIDItems
         );
 
+        $iterationObjectDeprecations = [];
         foreach ($objectFeedbackStore->getDeprecations() as $objectFeedbackDeprecation) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackDeprecation,
@@ -1941,6 +1942,7 @@ class Engine implements EngineInterface
             $objectIDItems
         );
 
+        $iterationObjectNotices = [];
         foreach ($objectFeedbackStore->getNotices() as $objectFeedbackNotice) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackNotice,
@@ -2021,8 +2023,7 @@ class Engine implements EngineInterface
         array &$schemaDeprecations,
         array &$schemaNotices,
     ): void {
-        $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = [];
-        
+        $iterationSchemaErrors = [];
         foreach ($schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
             $iterationSchemaErrors[] = $this->getErrorOutput($schemaFeedbackError);
         }
@@ -2033,6 +2034,7 @@ class Engine implements EngineInterface
             $database_key,
         );
 
+        $iterationSchemaWarnings = [];
         foreach ($schemaFeedbackStore->getWarnings() as $schemaFeedbackWarning) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackWarning,
@@ -2046,6 +2048,7 @@ class Engine implements EngineInterface
             $database_key,
         );
 
+        $iterationSchemaDeprecations = [];
         foreach ($schemaFeedbackStore->getDeprecations() as $schemaFeedbackDeprecation) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackDeprecation,
@@ -2059,6 +2062,7 @@ class Engine implements EngineInterface
             $database_key,
         );
 
+        $iterationSchemaNotices = [];
         foreach ($schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackNotice,
