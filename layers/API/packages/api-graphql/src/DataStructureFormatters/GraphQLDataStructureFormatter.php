@@ -48,24 +48,15 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
             
             // Warnings
-            $warnings = array_merge(
-                $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] ?? []),
-                $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
-                $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING] ?? []),
-                $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::WARNING] ?? [])
-            );
-            if ($warnings !== []) {
-                $ret['extensions']['warnings'] = $warnings;
-            }
-
-            // Notices
-            if ($componentConfiguration->enableProactiveFeedbackNotices()) {
-                $notices = array_merge(
-                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
-                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::NOTICE] ?? [])
+            if ($componentConfiguration->enableProactiveFeedbackWarnings()) {
+                $warnings = array_merge(
+                    $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+                    $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::WARNING] ?? [])
                 );
-                if ($notices !== []) {
-                    $ret['extensions']['notices'] = $notices;
+                if ($warnings !== []) {
+                    $ret['extensions']['warnings'] = $warnings;
                 }
             }
 
@@ -77,6 +68,17 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 );
                 if ($deprecations !== []) {
                     $ret['extensions']['deprecations'] = $deprecations;
+                }
+            }
+
+            // Notices
+            if ($componentConfiguration->enableProactiveFeedbackNotices()) {
+                $notices = array_merge(
+                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
+                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::NOTICE] ?? [])
+                );
+                if ($notices !== []) {
+                    $ret['extensions']['notices'] = $notices;
                 }
             }
 
