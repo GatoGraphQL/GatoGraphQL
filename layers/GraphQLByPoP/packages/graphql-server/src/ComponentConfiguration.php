@@ -51,6 +51,19 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
+    public function enableProactiveFeedbackWarnings(): bool
+    {
+        $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_WARNINGS;
+        $defaultValue = true;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function enableProactiveFeedbackDeprecations(): bool
     {
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_DEPRECATIONS;
@@ -67,19 +80,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     public function enableProactiveFeedbackNotices(): bool
     {
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_NOTICES;
-        $defaultValue = true;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
-    public function enableProactiveFeedbackTraces(): bool
-    {
-        $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_TRACES;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

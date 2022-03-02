@@ -34,47 +34,33 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $ret['errors'] = $errors;
         }
 
-        // Add warnings always, not inside of Proactive Feedback,
-        // because the difference between errors and warnings sometimes is not clear
-        // Eg: `{ posts(searchfor: ["posts"]) { id } }` will fail casting fieldArg `searchfor`,
-        // raising a warning, but field `posts` is still executed, retrieving all results.
-        // If the user is not told that there was an error/warning, it's very confusing
-        $warnings = array_merge(
-            $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] ?? []),
-            $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
-            $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING] ?? []),
-            $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::WARNING] ?? [])
-        );
-        if ($warnings !== []) {
-            $ret['extensions']['warnings'] = $warnings;
-        }
-
         /**
-         * "deprecations", and "logEntries" top-level entries:
+         * "warnings", "deprecations", and "logEntries" top-level entries:
          * since they are not part of the spec, place them under the top-level entry "extensions":
          *
          * > This entry is reserved for implementors to extend the protocol however they see fit,
          * > and hence there are no additional restrictions on its contents.
          *
          * @see http://spec.graphql.org/June2018/#sec-Response-Format
-         *
-         * "warnings" are added always (see above)
          */
         if ($this->addTopLevelExtensionsEntryToResponse()) {
-            // Add notices
             /** @var ComponentConfiguration */
             $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-            if ($componentConfiguration->enableProactiveFeedbackNotices()) {
-                $notices = array_merge(
-                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
-                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::NOTICE] ?? [])
+
+            // Warnings
+            if ($componentConfiguration->enableProactiveFeedbackWarnings()) {
+                $warnings = array_merge(
+                    $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+                    $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::WARNING] ?? [])
                 );
-                if ($notices !== []) {
-                    $ret['extensions']['notices'] = $notices;
+                if ($warnings !== []) {
+                    $ret['extensions']['warnings'] = $warnings;
                 }
             }
 
-            // Add deprecations
+            // Deprecations
             if ($componentConfiguration->enableProactiveFeedbackDeprecations()) {
                 $deprecations = array_merge(
                     $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::DEPRECATION] ?? []),
@@ -85,7 +71,18 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 }
             }
 
-            // Add logs
+            // Notices
+            if ($componentConfiguration->enableProactiveFeedbackNotices()) {
+                $notices = array_merge(
+                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
+                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::NOTICE] ?? [])
+                );
+                if ($notices !== []) {
+                    $ret['extensions']['notices'] = $notices;
+                }
+            }
+
+            // Logs
             if ($componentConfiguration->enableProactiveFeedbackLogs()) {
                 $logs = $data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] ?? [];
                 if ($logs !== []) {
