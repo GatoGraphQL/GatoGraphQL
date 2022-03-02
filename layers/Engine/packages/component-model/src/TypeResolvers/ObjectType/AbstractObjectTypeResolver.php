@@ -496,7 +496,20 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 /** @var ComponentConfiguration */
                 $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
                 if ($componentConfiguration->logExceptionErrorMessages()) {
-                    // @todo: Implement for Log
+                    $objectTypeFieldResolutionFeedbackStore->addLog(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E3,
+                                [
+                                    $fieldName,
+                                    $e->getMessage(),
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                        )
+                    );
                 }
                 if (
                     $e instanceof AbstractClientException
