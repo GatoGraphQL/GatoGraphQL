@@ -1292,7 +1292,20 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 /** @var ComponentConfiguration */
                 $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
                 if ($componentConfiguration->logExceptionErrorMessages()) {
-                    // @todo: Implement for Log
+                    $objectTypeFieldResolutionFeedbackStore->addLog(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E6,
+                                [
+                                    $fieldName,
+                                    $e->getMessage()
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $objectTypeResolver,
+                        )
+                    );
                 }
                 $sendExceptionToClient = $e instanceof AbstractClientException
                     || $componentConfiguration->sendExceptionErrorMessages();
