@@ -1874,7 +1874,7 @@ class Engine implements EngineInterface
         ObjectFeedbackStore $objectFeedbackStore,
         array &$objectFeedbackEntries,
     ): void {
-        $iterationObjectErrors = [];        
+        $iterationObjectErrors = [];
         foreach ($objectFeedbackStore->getErrors() as $objectFeedbackError) {
             $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorOutput($objectFeedbackError);
         }
