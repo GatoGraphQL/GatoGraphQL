@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
-use PoP\Engine\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\Root\App;
 use PoP\Root\HttpFoundation\Response;
 use PoPAPI\API\Facades\FieldQueryConvertorFacade;

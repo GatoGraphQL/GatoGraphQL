@@ -11,7 +11,7 @@ use PoP\Engine\Exception\ContractNotSatisfiedException;
 use PoP\LooseContracts\LooseContractManagerInterface;
 use PoP\Root\App;
 
-class Engine extends UpstreamEngine implements EngineInterface
+class Engine extends UpstreamEngine
 {
     private ?LooseContractManagerInterface $looseContractManager = null;
     private ?CacheControlEngineInterface $cacheControlEngine = null;
