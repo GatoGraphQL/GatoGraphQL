@@ -46,7 +46,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($this->addTopLevelExtensionsEntryToResponse()) {
             /** @var ComponentConfiguration */
             $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-            
+
             // Warnings
             if ($componentConfiguration->enableProactiveFeedbackWarnings()) {
                 $warnings = array_merge(
