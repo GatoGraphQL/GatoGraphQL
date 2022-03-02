@@ -153,7 +153,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         foreach ($entries as $dbKey => $id_items) {
             foreach ($id_items as $id => $items) {
                 foreach ($items as $item) {
-                    $ret[] = $this->getDBEntry($dbKey, $id, $item);
+                    $ret[] = $this->getObjectEntry($dbKey, $id, $item);
                 }
             }
         }
@@ -168,7 +168,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return true;
     }
 
-    protected function getDBEntry(string $dbKey, string | int $id, array $item): array
+    protected function getObjectEntry(string $dbKey, string | int $id, array $item): array
     {
         $entry = [];
         if ($message = $item[Tokens::MESSAGE] ?? null) {
@@ -183,7 +183,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // if ($this->addTopLevelExtensionsEntryToResponse()) {
         if (
             $extensions = array_merge(
-                $this->getDBEntryExtensions($dbKey, $id, $item),
+                $this->getObjectEntryExtensions($dbKey, $id, $item),
                 $item[Tokens::EXTENSIONS] ?? []
             )
         ) {
@@ -211,7 +211,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $extensions;
     }
 
-    protected function getDBEntryExtensions(string $dbKey, int | string $id, array $item): array
+    protected function getObjectEntryExtensions(string $dbKey, int | string $id, array $item): array
     {
         return [
             'type' => 'dataObject',
