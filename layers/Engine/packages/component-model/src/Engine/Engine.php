@@ -29,7 +29,9 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectFeedbackInterface;
+use PoP\ComponentModel\Feedback\ObjectFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
+use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -1625,6 +1627,11 @@ class Engine implements EngineInterface
                     }
                 }
             }
+
+            /**
+             * Transer the feedback entries from the FeedbackStore
+             * to temporary variables for processing.
+             */
             $this->transferFeedback(
                 $engineIterationFeedbackStore,
                 $iterationObjectErrors,
@@ -1636,6 +1643,20 @@ class Engine implements EngineInterface
                 $iterationSchemaDeprecations,
                 $iterationSchemaNotices,
             );
+
+            /**
+             * The SchemaFeedbackStore is processed also within each iteration.
+             * It processes the information here, and at the end of the loop
+             * it will regenerated a new instance for the next iteration.
+             */
+            $this->transferSchemaFeedback(
+                App::getFeedbackStore()->schemaFeedbackStore,
+                $iterationSchemaErrors,
+                $iterationSchemaWarnings,
+                $iterationSchemaDeprecations,
+                $iterationSchemaNotices,
+            );
+
             /** @phpstan-ignore-next-line */
             if ($iterationObjectErrors !== []) {
                 $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationObjectErrors, true, $relationalTypeResolver);
@@ -1668,30 +1689,7 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectNotices[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
-
-            /**
-             * The SchemaFeedbackStore is processed also within each iteration.
-             * It processes the information here, and at the end of the loop
-             * it will regenerated a new instance for the next iteration.
-             */
-            $feedbackStoreSchemaErrors = App::getFeedbackStore()->schemaFeedbackStore->getErrors();
-            foreach ($feedbackStoreSchemaErrors as $schemaError) {
-                $iterationFeedbackStoreSchemaErrors = [];
-                $iterationFeedbackStoreSchemaErrors[] = [
-                    Tokens::PATH => [$schemaError->getField()],
-                    Tokens::MESSAGE => $schemaError->getFeedbackItemResolution()->getMessage(),
-                    Tokens::LOCATIONS => [$schemaError->getLocation()->toArray()],
-                    Tokens::EXTENSIONS => $schemaError->getExtensions(),
-                ];
-                $iterationDBKey = $schemaError->getRelationalTypeResolver()->getTypeOutputDBKey();
-                $dbNameSchemaErrorEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreSchemaErrors, false, $relationalTypeResolver);
-                foreach ($dbNameSchemaErrorEntries as $dbname => $entries) {
-                    $schemaErrors[$dbname][$iterationDBKey] = array_merge(
-                        $schemaErrors[$dbname][$iterationDBKey] ?? [],
-                        $entries
-                    );
-                }
-            }
+            /** @phpstan-ignore-next-line */
             if ($iterationSchemaErrors !== []) {
                 $dbNameSchemaErrorEntries = $this->moveEntriesUnderDBName($iterationSchemaErrors, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaErrorEntries as $dbname => $entries) {
@@ -1701,27 +1699,8 @@ class Engine implements EngineInterface
                     );
                 }
             }
-            $feedbackStoreSchemaWarnings = App::getFeedbackStore()->schemaFeedbackStore->getWarnings();
-            foreach ($feedbackStoreSchemaWarnings as $schemaWarning) {
-                $iterationFeedbackStoreSchemaWarnings = [];
-                $iterationFeedbackStoreSchemaWarnings[] = [
-                    Tokens::PATH => [$schemaWarning->getField()],
-                    Tokens::MESSAGE => $schemaWarning->getFeedbackItemResolution()->getMessage(),
-                    Tokens::LOCATIONS => [$schemaWarning->getLocation()->toArray()],
-                    Tokens::EXTENSIONS => $schemaWarning->getExtensions(),
-                ];
-                $iterationDBKey = $schemaWarning->getRelationalTypeResolver()->getTypeOutputDBKey();
-                $dbNameSchemaWarningEntries = $this->moveEntriesUnderDBName($iterationFeedbackStoreSchemaWarnings, false, $relationalTypeResolver);
-                foreach ($dbNameSchemaWarningEntries as $dbname => $entries) {
-                    $schemaWarnings[$dbname][$iterationDBKey] = array_merge(
-                        $schemaWarnings[$dbname][$iterationDBKey] ?? [],
-                        $entries
-                    );
-                }
-            }
             /** @phpstan-ignore-next-line */
             if ($iterationSchemaWarnings !== []) {
-                $iterationSchemaWarnings = array_intersect_key($iterationSchemaWarnings, array_unique(array_map('serialize', $iterationSchemaWarnings)));
                 $dbNameSchemaWarningEntries = $this->moveEntriesUnderDBName($iterationSchemaWarnings, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaWarningEntries as $dbname => $entries) {
                     $schemaWarnings[$dbname][$database_key] = array_merge(
@@ -1731,8 +1710,7 @@ class Engine implements EngineInterface
                 }
             }
             /** @phpstan-ignore-next-line */
-            if ($iterationSchemaDeprecations) {
-                $iterationSchemaDeprecations = array_intersect_key($iterationSchemaDeprecations, array_unique(array_map('serialize', $iterationSchemaDeprecations)));
+            if ($iterationSchemaDeprecations !== []) {
                 $dbNameSchemaDeprecationEntries = $this->moveEntriesUnderDBName($iterationSchemaDeprecations, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaDeprecationEntries as $dbname => $entries) {
                     $schemaDeprecations[$dbname][$database_key] = array_merge(
@@ -1742,8 +1720,7 @@ class Engine implements EngineInterface
                 }
             }
             /** @phpstan-ignore-next-line */
-            if ($iterationSchemaNotices) {
-                $iterationSchemaNotices = array_intersect_key($iterationSchemaNotices, array_unique(array_map('serialize', $iterationSchemaNotices)));
+            if ($iterationSchemaNotices !== []) {
                 $dbNameSchemaNoticeEntries = $this->moveEntriesUnderDBName($iterationSchemaNotices, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaNoticeEntries as $dbname => $entries) {
                     $schemaNotices[$dbname][$database_key] = array_merge(
@@ -1929,14 +1906,14 @@ class Engine implements EngineInterface
         array &$iterationSchemaNotices,
     ): void {
         $this->transferObjectFeedback(
-            $engineIterationFeedbackStore,
+            $engineIterationFeedbackStore->objectFeedbackStore,
             $iterationObjectErrors,
             $iterationObjectWarnings,
             $iterationObjectDeprecations,
             $iterationObjectNotices,
         );
         $this->transferSchemaFeedback(
-            $engineIterationFeedbackStore,
+            $engineIterationFeedbackStore->schemaFeedbackStore,
             $iterationSchemaErrors,
             $iterationSchemaWarnings,
             $iterationSchemaDeprecations,
@@ -1945,28 +1922,28 @@ class Engine implements EngineInterface
     }
 
     private function transferObjectFeedback(
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        ObjectFeedbackStore $objectFeedbackStore,
         array &$iterationObjectErrors,
         array &$iterationObjectWarnings,
         array &$iterationObjectDeprecations,
         array &$iterationObjectNotices,
     ): void {
-        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectFeedbackError) {
+        foreach ($objectFeedbackStore->getErrors() as $objectFeedbackError) {
             $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorOutput($objectFeedbackError);
         }
-        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getWarnings() as $objectFeedbackWarning) {
+        foreach ($objectFeedbackStore->getWarnings() as $objectFeedbackWarning) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackWarning,
                 $iterationObjectWarnings,
             );
         }
-        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getDeprecations() as $objectFeedbackDeprecation) {
+        foreach ($objectFeedbackStore->getDeprecations() as $objectFeedbackDeprecation) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackDeprecation,
                 $iterationObjectDeprecations,
             );
         }
-        foreach ($engineIterationFeedbackStore->objectFeedbackStore->getNotices() as $objectFeedbackNotice) {
+        foreach ($objectFeedbackStore->getNotices() as $objectFeedbackNotice) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackNotice,
                 $iterationObjectNotices,
@@ -2031,28 +2008,28 @@ class Engine implements EngineInterface
     }
 
     private function transferSchemaFeedback(
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        SchemaFeedbackStore $schemaFeedbackStore,
         array &$iterationSchemaErrors,
         array &$iterationSchemaWarnings,
         array &$iterationSchemaDeprecations,
         array &$iterationSchemaNotices
     ): void {
-        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
+        foreach ($schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
             $iterationSchemaErrors[] = $this->getErrorOutput($schemaFeedbackError);
         }
-        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getWarnings() as $schemaFeedbackWarning) {
+        foreach ($schemaFeedbackStore->getWarnings() as $schemaFeedbackWarning) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackWarning,
                 $iterationSchemaWarnings,
             );
         }
-        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getDeprecations() as $schemaFeedbackDeprecation) {
+        foreach ($schemaFeedbackStore->getDeprecations() as $schemaFeedbackDeprecation) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackDeprecation,
                 $iterationSchemaDeprecations,
             );
         }
-        foreach ($engineIterationFeedbackStore->schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
+        foreach ($schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackNotice,
                 $iterationSchemaNotices,
