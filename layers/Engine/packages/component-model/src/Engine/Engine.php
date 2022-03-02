@@ -1728,7 +1728,7 @@ class Engine implements EngineInterface
         $sendFeedbackWarnings = in_array(FeedbackCategories::WARNING, $enabledFeedbackCategoryExtensions);
         $sendFeedbackDeprecations = in_array(FeedbackCategories::DEPRECATION, $enabledFeedbackCategoryExtensions);
         $sendFeedbackNotices = in_array(FeedbackCategories::NOTICE, $enabledFeedbackCategoryExtensions);
-        $sendFeedbackLogs = true || in_array(FeedbackCategories::LOG, $enabledFeedbackCategoryExtensions);
+        $sendFeedbackLogs = in_array(FeedbackCategories::LOG, $enabledFeedbackCategoryExtensions);
 
         if ($sendFeedbackWarnings) {
             if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
@@ -1788,14 +1788,14 @@ class Engine implements EngineInterface
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::NOTICE, $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
         }
         if ($sendFeedbackLogs) {
+            if ($generalLogs = $generalFeedbackStore->getLogs()) {
+                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] = $this->getGeneralFeedbackEntriesForOutput($generalLogs);
+            }
+            if ($documentLogs = $documentFeedbackStore->getLogs()) {
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] = $this->getDocumentFeedbackEntriesForOutput($documentLogs);
+            }
             $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::LOG, $schemaFeedbackEntries[FeedbackCategories::LOG]);
-            if ($documentLogs = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs())) {
-                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] = array_merge(
-                    $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG],
-                    $documentLogs
-                );
-            }
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
