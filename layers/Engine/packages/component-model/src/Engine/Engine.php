@@ -1514,7 +1514,13 @@ class Engine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = [];
+        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = [];
+        $objectFeedbackEntries = $schemaFeedbackEntries = [
+            FeedbackCategories::ERROR => [],
+            FeedbackCategories::WARNING => [],
+            FeedbackCategories::DEPRECATION => [],
+            FeedbackCategories::NOTICE => [],
+        ];
         $engineState->nocache_fields = [];
 
         // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
@@ -1561,7 +1567,7 @@ class Engine implements EngineInterface
             $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
 
             // Execute the typeResolver for all combined ids
-            $iterationDBItems = $iterationObjectErrors = $iterationObjectWarnings = $iterationObjectDeprecations = $iterationObjectNotices = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = [];
+            $iterationDBItems = [];
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $objectIDItems = $relationalTypeResolver->fillObjects(
                 $ids_data_fields,
@@ -1571,14 +1577,6 @@ class Engine implements EngineInterface
                 $variables,
                 $messages,
                 $engineIterationFeedbackStore,
-                $iterationObjectErrors,
-                $iterationObjectWarnings,
-                $iterationObjectDeprecations,
-                $iterationObjectNotices,
-                $iterationSchemaErrors,
-                $iterationSchemaWarnings,
-                $iterationSchemaDeprecations,
-                $iterationSchemaNotices,
             );
 
             // Save in the database under the corresponding database-key
@@ -1629,106 +1627,17 @@ class Engine implements EngineInterface
             }
 
             /**
-             * Transer the feedback entries from the FeedbackStore
+             * Transfer the feedback entries from the FeedbackStore
              * to temporary variables for processing.
              */
             $this->transferFeedback(
+                $relationalTypeResolver,
+                $database_key,
+                $objectIDItems,
                 $engineIterationFeedbackStore,
-                $iterationObjectErrors,
-                $iterationObjectWarnings,
-                $iterationObjectDeprecations,
-                $iterationObjectNotices,
-                $iterationSchemaErrors,
-                $iterationSchemaWarnings,
-                $iterationSchemaDeprecations,
-                $iterationSchemaNotices,
+                $objectFeedbackEntries,
+                $schemaFeedbackEntries,
             );
-
-            /**
-             * The SchemaFeedbackStore is processed also within each iteration.
-             * It processes the information here, and at the end of the loop
-             * it will regenerated a new instance for the next iteration.
-             */
-            $this->transferSchemaFeedback(
-                App::getFeedbackStore()->schemaFeedbackStore,
-                $iterationSchemaErrors,
-                $iterationSchemaWarnings,
-                $iterationSchemaDeprecations,
-                $iterationSchemaNotices,
-            );
-
-            /** @phpstan-ignore-next-line */
-            if ($iterationObjectErrors !== []) {
-                $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationObjectErrors, true, $relationalTypeResolver);
-                foreach ($dbNameErrorEntries as $dbname => $entries) {
-                    $objectErrors[$dbname] ??= [];
-                    $this->addDatasetToDatabase($objectErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
-                }
-            }
-            /** @phpstan-ignore-next-line */
-            if ($iterationObjectWarnings !== []) {
-                $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationObjectWarnings, true, $relationalTypeResolver);
-                foreach ($dbNameWarningEntries as $dbname => $entries) {
-                    $objectWarnings[$dbname] ??= [];
-                    $this->addDatasetToDatabase($objectWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
-                }
-            }
-            /** @phpstan-ignore-next-line */
-            if ($iterationObjectDeprecations) {
-                $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationObjectDeprecations, true, $relationalTypeResolver);
-                foreach ($dbNameDeprecationEntries as $dbname => $entries) {
-                    $objectDeprecations[$dbname] ??= [];
-                    $this->addDatasetToDatabase($objectDeprecations[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
-                }
-            }
-            /** @phpstan-ignore-next-line */
-            if ($iterationObjectNotices) {
-                $dbNameNoticeEntries = $this->moveEntriesUnderDBName($iterationObjectNotices, true, $relationalTypeResolver);
-                foreach ($dbNameNoticeEntries as $dbname => $entries) {
-                    $objectNotices[$dbname] ??= [];
-                    $this->addDatasetToDatabase($objectNotices[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
-                }
-            }
-            /** @phpstan-ignore-next-line */
-            if ($iterationSchemaErrors !== []) {
-                $dbNameSchemaErrorEntries = $this->moveEntriesUnderDBName($iterationSchemaErrors, false, $relationalTypeResolver);
-                foreach ($dbNameSchemaErrorEntries as $dbname => $entries) {
-                    $schemaErrors[$dbname][$database_key] = array_merge(
-                        $schemaErrors[$dbname][$database_key] ?? [],
-                        $entries
-                    );
-                }
-            }
-            /** @phpstan-ignore-next-line */
-            if ($iterationSchemaWarnings !== []) {
-                $dbNameSchemaWarningEntries = $this->moveEntriesUnderDBName($iterationSchemaWarnings, false, $relationalTypeResolver);
-                foreach ($dbNameSchemaWarningEntries as $dbname => $entries) {
-                    $schemaWarnings[$dbname][$database_key] = array_merge(
-                        $schemaWarnings[$dbname][$database_key] ?? [],
-                        $entries
-                    );
-                }
-            }
-            /** @phpstan-ignore-next-line */
-            if ($iterationSchemaDeprecations !== []) {
-                $dbNameSchemaDeprecationEntries = $this->moveEntriesUnderDBName($iterationSchemaDeprecations, false, $relationalTypeResolver);
-                foreach ($dbNameSchemaDeprecationEntries as $dbname => $entries) {
-                    $schemaDeprecations[$dbname][$database_key] = array_merge(
-                        $schemaDeprecations[$dbname][$database_key] ?? [],
-                        $entries
-                    );
-                }
-            }
-            /** @phpstan-ignore-next-line */
-            if ($iterationSchemaNotices !== []) {
-                $dbNameSchemaNoticeEntries = $this->moveEntriesUnderDBName($iterationSchemaNotices, false, $relationalTypeResolver);
-                foreach ($dbNameSchemaNoticeEntries as $dbname => $entries) {
-                    $schemaNotices[$dbname][$database_key] = array_merge(
-                        $schemaNotices[$dbname][$database_key] ?? [],
-                        $entries
-                    );
-                }
-            }
 
             // Important: query like this: obtain keys first instead of iterating directly on array,
             // because it will keep adding elements
@@ -1799,26 +1708,17 @@ class Engine implements EngineInterface
             App::getFeedbackStore()->regenerateSchemaFeedbackStore();
         }
 
-        $ret = [];
-
-        // Executing the following query will produce duplicates on SchemaWarnings:
-        // ?query=posts(limit:3.5).title,posts(limit:extract(posts(limit:4.5),saraza)).title
-        // This is unavoidable, since add schemaWarnings (and, correspondingly, errors and deprecations) in functions
-        // `resolveFieldValidationWarningDescriptions` and `resolveValue` from the AbstractObjectTypeResolver
-        // Ideally, doing it in `resolveValue` is not needed, since it already went through the validation in `resolveFieldValidationWarningDescriptions`, so it's a duplication
-        // However, when having composed fields, the warnings are caught only in `resolveValue`, hence we need to add it there too
-        // Then, we will certainly have duplicates. Remove them now
-        // Because these are arrays of arrays, we use the method taken from https://stackoverflow.com/a/2561283
-        foreach ($schemaErrors as $dbname => &$entries) {
-            foreach ($entries as $dbKey => $errors) {
-                $entries[$dbKey] = array_intersect_key($errors, array_unique(array_map('serialize', $errors)));
-            }
-        }
+        $ret = [
+            Response::GENERAL_FEEDBACK => [],
+            Response::DOCUMENT_FEEDBACK => [],
+            Response::OBJECT_FEEDBACK => [],
+            Response::SCHEMA_FEEDBACK => [],
+        ];
 
         // Add the feedback (errors, warnings, deprecations) into the output
         $generalFeedbackStore = App::getFeedbackStore()->generalFeedbackStore;
         if ($generalErrors = $generalFeedbackStore->getErrors()) {
-            $ret['generalErrors'] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
+            $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
         }
 
         /** @var ComponentConfiguration */
@@ -1831,7 +1731,7 @@ class Engine implements EngineInterface
 
         if ($sendFeedbackWarnings) {
             if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
-                $ret['generalWarnings'] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
+                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
             }
         }
 
@@ -1852,41 +1752,42 @@ class Engine implements EngineInterface
                 }
                 $queryDocumentErrors[] = $queryDocumentError;
             }
-            $ret['documentErrors'] = $queryDocumentErrors;
+            $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] = $queryDocumentErrors;
         }
         if ($documentErrors = $documentFeedbackStore->getErrors()) {
-            $ret['documentErrors'] = array_merge(
-                $ret['documentErrors'] ?? [],
+            $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] = array_merge(
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? [],
                 $this->getDocumentFeedbackEntriesForOutput($documentErrors)
             );
         }
         if ($sendFeedbackWarnings) {
             if ($documentWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
-                $ret['documentWarnings'] = $documentWarnings;
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] = $documentWarnings;
             }
             if ($documentWarnings = $documentFeedbackStore->getWarnings()) {
-                $ret['documentWarnings'] = array_merge(
-                    $ret['documentWarnings'] ?? [],
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] = array_merge(
+                    $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? [],
                     $this->getDocumentFeedbackEntriesForOutput($documentWarnings)
                 );
             }
         }
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaErrors', $schemaErrors);
+        $ret[Response::OBJECT_FEEDBACK] = $ret[Response::SCHEMA_FEEDBACK] = [];
+        $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::ERROR, $objectFeedbackEntries[FeedbackCategories::ERROR]);
+        $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::ERROR, $schemaFeedbackEntries[FeedbackCategories::ERROR]);
         if ($sendFeedbackWarnings) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaWarnings);
+            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::WARNING, $objectFeedbackEntries[FeedbackCategories::WARNING]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::WARNING, $schemaFeedbackEntries[FeedbackCategories::WARNING]);
         }
         if ($sendFeedbackDeprecations) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectDeprecations);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaDeprecations);
+            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::DEPRECATION, $objectFeedbackEntries[FeedbackCategories::DEPRECATION]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::DEPRECATION, $schemaFeedbackEntries[FeedbackCategories::DEPRECATION]);
         }
         if ($sendFeedbackNotices) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectNotices);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
+            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::NOTICE, $objectFeedbackEntries[FeedbackCategories::NOTICE]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::NOTICE, $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
         }
         if ($sendFeedbackLogs) {
-            $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
+            $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
@@ -1894,61 +1795,141 @@ class Engine implements EngineInterface
         return $ret;
     }
 
+    protected function addObjectEntriesToDestinationArray(
+        array &$entries,
+        array &$destination,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $database_key,
+        array $objectIDItems,
+    ): void {
+        if ($entries === []) {
+            return;
+        }
+
+        $dbNameEntries = $this->moveEntriesUnderDBName($entries, true, $relationalTypeResolver);
+        foreach ($dbNameEntries as $dbname => $entries) {
+            $destination[$dbname] ??= [];
+            $this->addDatasetToDatabase($destination[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
+        }
+    }
+
+    protected function addSchemaEntriesToDestinationArray(
+        array &$entries,
+        array &$destination,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $database_key,
+    ): void {
+        if ($entries === []) {
+            return;
+        }
+
+        $dbNameEntries = $this->moveEntriesUnderDBName($entries, false, $relationalTypeResolver);
+        foreach ($dbNameEntries as $dbname => $entries) {
+            $destination[$dbname][$database_key] = array_merge(
+                $destination[$dbname][$database_key] ?? [],
+                $entries
+            );
+        }
+    }
+
     private function transferFeedback(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $database_key,
+        array $objectIDItems,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$iterationObjectErrors,
-        array &$iterationObjectWarnings,
-        array &$iterationObjectDeprecations,
-        array &$iterationObjectNotices,
-        array &$iterationSchemaErrors,
-        array &$iterationSchemaWarnings,
-        array &$iterationSchemaDeprecations,
-        array &$iterationSchemaNotices,
+        array &$objectFeedbackEntries,
+        array &$schemaFeedbackEntries,
     ): void {
         $this->transferObjectFeedback(
+            $relationalTypeResolver,
+            $database_key,
+            $objectIDItems,
             $engineIterationFeedbackStore->objectFeedbackStore,
-            $iterationObjectErrors,
-            $iterationObjectWarnings,
-            $iterationObjectDeprecations,
-            $iterationObjectNotices,
+            $objectFeedbackEntries,
         );
         $this->transferSchemaFeedback(
+            $relationalTypeResolver,
+            $database_key,
             $engineIterationFeedbackStore->schemaFeedbackStore,
-            $iterationSchemaErrors,
-            $iterationSchemaWarnings,
-            $iterationSchemaDeprecations,
-            $iterationSchemaNotices,
+            $schemaFeedbackEntries,
+        );
+
+        /**
+         * The SchemaFeedbackStore is processed also within each iteration.
+         * It processes the information here, and at the end of the loop
+         * it will regenerated a new instance for the next iteration.
+         */
+        $this->transferSchemaFeedback(
+            $relationalTypeResolver,
+            $database_key,
+            App::getFeedbackStore()->schemaFeedbackStore,
+            $schemaFeedbackEntries,
         );
     }
 
     private function transferObjectFeedback(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $database_key,
+        array $objectIDItems,
         ObjectFeedbackStore $objectFeedbackStore,
-        array &$iterationObjectErrors,
-        array &$iterationObjectWarnings,
-        array &$iterationObjectDeprecations,
-        array &$iterationObjectNotices,
+        array &$objectFeedbackEntries,
     ): void {
+        $iterationObjectErrors = [];
         foreach ($objectFeedbackStore->getErrors() as $objectFeedbackError) {
             $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorOutput($objectFeedbackError);
         }
+        $this->addObjectEntriesToDestinationArray(
+            $iterationObjectErrors,
+            $objectFeedbackEntries[FeedbackCategories::ERROR],
+            $relationalTypeResolver,
+            $database_key,
+            $objectIDItems
+        );
+
+        $iterationObjectWarnings = [];
         foreach ($objectFeedbackStore->getWarnings() as $objectFeedbackWarning) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackWarning,
                 $iterationObjectWarnings,
             );
         }
+        $this->addObjectEntriesToDestinationArray(
+            $iterationObjectWarnings,
+            $objectFeedbackEntries[FeedbackCategories::WARNING],
+            $relationalTypeResolver,
+            $database_key,
+            $objectIDItems
+        );
+
+        $iterationObjectDeprecations = [];
         foreach ($objectFeedbackStore->getDeprecations() as $objectFeedbackDeprecation) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackDeprecation,
                 $iterationObjectDeprecations,
             );
         }
+        $this->addObjectEntriesToDestinationArray(
+            $iterationObjectDeprecations,
+            $objectFeedbackEntries[FeedbackCategories::DEPRECATION],
+            $relationalTypeResolver,
+            $database_key,
+            $objectIDItems
+        );
+
+        $iterationObjectNotices = [];
         foreach ($objectFeedbackStore->getNotices() as $objectFeedbackNotice) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackNotice,
                 $iterationObjectNotices,
             );
         }
+        $this->addObjectEntriesToDestinationArray(
+            $iterationObjectNotices,
+            $objectFeedbackEntries[FeedbackCategories::NOTICE],
+            $relationalTypeResolver,
+            $database_key,
+            $objectIDItems
+        );
     }
 
     /**
@@ -2008,33 +1989,63 @@ class Engine implements EngineInterface
     }
 
     private function transferSchemaFeedback(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $database_key,
         SchemaFeedbackStore $schemaFeedbackStore,
-        array &$iterationSchemaErrors,
-        array &$iterationSchemaWarnings,
-        array &$iterationSchemaDeprecations,
-        array &$iterationSchemaNotices
+        array &$schemaFeedbackEntries,
     ): void {
+        $iterationSchemaErrors = [];
         foreach ($schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
             $iterationSchemaErrors[] = $this->getErrorOutput($schemaFeedbackError);
         }
+        $this->addSchemaEntriesToDestinationArray(
+            $iterationSchemaErrors,
+            $schemaFeedbackEntries[FeedbackCategories::ERROR],
+            $relationalTypeResolver,
+            $database_key,
+        );
+
+        $iterationSchemaWarnings = [];
         foreach ($schemaFeedbackStore->getWarnings() as $schemaFeedbackWarning) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackWarning,
                 $iterationSchemaWarnings,
             );
         }
+        $this->addSchemaEntriesToDestinationArray(
+            $iterationSchemaWarnings,
+            $schemaFeedbackEntries[FeedbackCategories::WARNING],
+            $relationalTypeResolver,
+            $database_key,
+        );
+
+        $iterationSchemaDeprecations = [];
         foreach ($schemaFeedbackStore->getDeprecations() as $schemaFeedbackDeprecation) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackDeprecation,
                 $iterationSchemaDeprecations,
             );
         }
+        $this->addSchemaEntriesToDestinationArray(
+            $iterationSchemaDeprecations,
+            $schemaFeedbackEntries[FeedbackCategories::DEPRECATION],
+            $relationalTypeResolver,
+            $database_key,
+        );
+
+        $iterationSchemaNotices = [];
         foreach ($schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackNotice,
                 $iterationSchemaNotices,
             );
         }
+        $this->addSchemaEntriesToDestinationArray(
+            $iterationSchemaNotices,
+            $schemaFeedbackEntries[FeedbackCategories::NOTICE],
+            $relationalTypeResolver,
+            $database_key,
+        );
     }
 
     private function transferSchemaFeedbackEntries(

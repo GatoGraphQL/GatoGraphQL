@@ -102,7 +102,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     /**
      * Change properties for GraphQL
      */
-    protected function getDBEntryExtensions(string $dbKey, int | string $id, array $item): array
+    protected function getObjectEntryExtensions(string $dbKey, int | string $id, array $item): array
     {
         if (App::getState('standard-graphql')) {
             $extensions = [
@@ -112,7 +112,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
             $this->addFieldOrDirectiveEntryToExtensions($extensions, $item);
             return $extensions;
         }
-        return parent::getDBEntryExtensions($dbKey, $id, $item);
+        return parent::getObjectEntryExtensions($dbKey, $id, $item);
     }
 
     /**
