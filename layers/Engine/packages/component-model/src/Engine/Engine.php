@@ -1876,7 +1876,10 @@ class Engine implements EngineInterface
     ): void {
         $iterationObjectErrors = [];
         foreach ($objectFeedbackStore->getErrors() as $objectFeedbackError) {
-            $iterationObjectErrors[(string)$objectFeedbackError->getObjectID()][] = $this->getErrorOutput($objectFeedbackError);
+            $this->transferObjectFeedbackEntries(
+                $objectFeedbackError,
+                $iterationObjectErrors,
+            );
         }
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectErrors,
@@ -1932,50 +1935,11 @@ class Engine implements EngineInterface
         );
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    protected function getErrorOutput(SchemaFeedbackInterface | ObjectFeedbackInterface $schemaOrObjectFeedback, ?array $path = null, ?string $argName = null): array
-    {
-        $feedbackItemResolution = $schemaOrObjectFeedback->getFeedbackItemResolution();
-        $directive = $schemaOrObjectFeedback->getDirective();
-        $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
-        return [
-            Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
-            Tokens::PATH => array_merge(
-                [
-                    $schemaOrObjectFeedback->getField(),
-                ],
-                $directive !== null ?
-                [
-                    $directive,
-                ] : []
-            ),
-            Tokens::LOCATIONS => [$schemaOrObjectFeedback->getLocation()->toArray()],
-            Tokens::EXTENSIONS => array_merge(
-                $schemaOrObjectFeedback->getExtensions(),
-                [
-                    'code' => $feedbackItemResolution->getNamespacedCode(),
-                ],
-                $specifiedByURL !== null ? [
-                    'specifiedBy' => $specifiedByURL,
-                ] : []
-            )
-        ];
-    }
-
     private function transferObjectFeedbackEntries(
         ObjectFeedbackInterface $objectFeedback,
         array &$objectFeedbackEntries
     ): void {
-        $entry = [
-            Tokens::PATH => $objectFeedback->getDirective() !== null
-                ? [$objectFeedback->getField(), $objectFeedback->getDirective()]
-                : [$objectFeedback->getField()],
-            Tokens::MESSAGE => $objectFeedback->getFeedbackItemResolution()->getMessage(),
-            Tokens::LOCATIONS => [$objectFeedback->getLocation()->toArray()],
-            Tokens::EXTENSIONS => $objectFeedback->getExtensions(),
-        ];
+        $entry = $this->getObjectOrSchemaFeedbackEntries($objectFeedback);
         if ($nestedObjectFeedbackEntries = $objectFeedback->getNested()) {
             $entry[Tokens::NESTED] = [];
             foreach ($nestedObjectFeedbackEntries as $nestedObjectFeedbackEntry) {
@@ -1996,7 +1960,10 @@ class Engine implements EngineInterface
     ): void {
         $iterationSchemaErrors = [];
         foreach ($schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
-            $iterationSchemaErrors[] = $this->getErrorOutput($schemaFeedbackError);
+            $this->transferSchemaFeedbackEntries(
+                $schemaFeedbackError,
+                $iterationSchemaErrors,
+            );
         }
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaErrors,
@@ -2052,12 +2019,7 @@ class Engine implements EngineInterface
         SchemaFeedbackInterface $schemaFeedback,
         array &$schemaFeedbackEntries
     ): void {
-        $entry = [
-            Tokens::PATH => [$schemaFeedback->getField()],
-            Tokens::MESSAGE => $schemaFeedback->getFeedbackItemResolution()->getMessage(),
-            Tokens::LOCATIONS => [$schemaFeedback->getLocation()->toArray()],
-            Tokens::EXTENSIONS => $schemaFeedback->getExtensions(),
-        ];
+        $entry = $this->getObjectOrSchemaFeedbackEntries($schemaFeedback);
         if ($nestedSchemaFeedbackEntries = $schemaFeedback->getNested()) {
             $entry[Tokens::NESTED] = [];
             foreach ($nestedSchemaFeedbackEntries as $nestedSchemaFeedbackEntry) {
@@ -2068,6 +2030,33 @@ class Engine implements EngineInterface
             }
         }
         $schemaFeedbackEntries[] = $entry;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function getObjectOrSchemaFeedbackEntries(
+        ObjectFeedbackInterface | SchemaFeedbackInterface $objectOrSchemaFeedback,
+    ): array {
+        $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
+        $directive = $objectOrSchemaFeedback->getDirective();
+        $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
+        return [
+            Tokens::MESSAGE => $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage(),
+            Tokens::PATH => $directive !== null
+                ? [$objectOrSchemaFeedback->getField(), $directive]
+                : [$objectOrSchemaFeedback->getField()],
+            Tokens::LOCATIONS => [$objectOrSchemaFeedback->getLocation()->toArray()],
+            Tokens::EXTENSIONS => array_merge(
+                $objectOrSchemaFeedback->getExtensions(),
+                [
+                    'code' => $feedbackItemResolution->getNamespacedCode(),
+                ],
+                $specifiedByURL !== null ? [
+                    'specifiedBy' => $specifiedByURL,
+                ] : []
+            ),
+        ];
     }
 
     /**
