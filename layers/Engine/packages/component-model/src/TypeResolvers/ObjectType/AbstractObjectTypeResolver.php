@@ -511,35 +511,27 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         )
                     );
                 }
-                if (
-                    $e instanceof AbstractClientException
-                    || $componentConfiguration->sendExceptionErrorMessages()
-                ) {
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            new FeedbackItemResolution(
-                                FeedbackItemProvider::class,
-                                FeedbackItemProvider::E3,
-                                [
-                                    $fieldName,
-                                    $e->getMessage(),
-                                ]
-                            ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $this,
-                        )
+                $sendExceptionErrorMessages = $e instanceof AbstractClientException
+                    || $componentConfiguration->sendExceptionErrorMessages();
+                $feedbackItemResolution = $sendExceptionErrorMessages
+                    ? new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        FeedbackItemProvider::E3,
+                        [
+                            $fieldName,
+                            $e->getMessage(),
+                        ]
+                    )
+                    : new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        FeedbackItemProvider::E4,
+                        [
+                            $fieldName,
+                        ]
                     );
-                    return null;
-                }
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            FeedbackItemProvider::class,
-                            FeedbackItemProvider::E4,
-                            [
-                                $fieldName,
-                            ]
-                        ),
+                        $feedbackItemResolution,
                         LocationHelper::getNonSpecificLocation(),
                         $this,
                     )
