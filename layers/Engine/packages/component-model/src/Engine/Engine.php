@@ -1788,14 +1788,17 @@ class Engine implements EngineInterface
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::NOTICE, $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
         }
         if ($sendFeedbackLogs) {
-            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
-            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::LOG, $schemaFeedbackEntries[FeedbackCategories::LOG]);
-            if ($documentLogs = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs())) {
+            if ($generalLogs = $generalFeedbackStore->getLogs()) {
+                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] = $this->getGeneralFeedbackEntriesForOutput($generalLogs);
+            }
+            if ($documentLogs = $documentFeedbackStore->getLogs()) {
                 $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] = array_merge(
-                    $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG],
+                    $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] ?? [],
                     $documentLogs
                 );
-            }
+            };
+            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::LOG, $schemaFeedbackEntries[FeedbackCategories::LOG]);
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
