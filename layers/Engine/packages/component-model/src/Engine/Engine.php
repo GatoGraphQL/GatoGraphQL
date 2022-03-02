@@ -1516,10 +1516,10 @@ class Engine implements EngineInterface
         // Save all database elements here, under typeResolver
         $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = [];
         $objectFeedbackEntries = $schemaFeedbackEntries = [
-            'errors' => [],
-            'warnings' => [],
-            'deprecations' => [],
-            'notices' => [],
+            FeedbackCategories::ERROR => [],
+            FeedbackCategories::WARNING => [],
+            FeedbackCategories::DEPRECATION => [],
+            FeedbackCategories::NOTICE => [],
         ];
         $engineState->nocache_fields = [];
 
@@ -1766,19 +1766,19 @@ class Engine implements EngineInterface
                 );
             }
         }
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectFeedbackEntries['errors']);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaErrors', $schemaFeedbackEntries['errors']);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectFeedbackEntries[FeedbackCategories::ERROR]);
+        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaErrors', $schemaFeedbackEntries[FeedbackCategories::ERROR]);
         if ($sendFeedbackWarnings) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectFeedbackEntries['warnings']);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaFeedbackEntries['warnings']);
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectFeedbackEntries[FeedbackCategories::WARNING]);
+            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaFeedbackEntries[FeedbackCategories::WARNING]);
         }
         if ($sendFeedbackDeprecations) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectFeedbackEntries['deprecations']);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaFeedbackEntries['deprecations']);
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectFeedbackEntries[FeedbackCategories::DEPRECATION]);
+            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaFeedbackEntries[FeedbackCategories::DEPRECATION]);
         }
         if ($sendFeedbackNotices) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectFeedbackEntries['notices']);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaFeedbackEntries['notices']);
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectFeedbackEntries[FeedbackCategories::NOTICE]);
+            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
         }
         if ($sendFeedbackLogs) {
             $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
@@ -1874,7 +1874,7 @@ class Engine implements EngineInterface
         }
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectErrors,
-            $objectFeedbackEntries['errors'],
+            $objectFeedbackEntries[FeedbackCategories::ERROR],
             $relationalTypeResolver,
             $database_key,
             $objectIDItems
@@ -1889,7 +1889,7 @@ class Engine implements EngineInterface
         }
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectWarnings,
-            $objectFeedbackEntries['warnings'],
+            $objectFeedbackEntries[FeedbackCategories::WARNING],
             $relationalTypeResolver,
             $database_key,
             $objectIDItems
@@ -1904,7 +1904,7 @@ class Engine implements EngineInterface
         }
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectDeprecations,
-            $objectFeedbackEntries['deprecations'],
+            $objectFeedbackEntries[FeedbackCategories::DEPRECATION],
             $relationalTypeResolver,
             $database_key,
             $objectIDItems
@@ -1919,7 +1919,7 @@ class Engine implements EngineInterface
         }
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectNotices,
-            $objectFeedbackEntries['notices'],
+            $objectFeedbackEntries[FeedbackCategories::NOTICE],
             $relationalTypeResolver,
             $database_key,
             $objectIDItems
@@ -1994,7 +1994,7 @@ class Engine implements EngineInterface
         }
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaErrors,
-            $schemaFeedbackEntries['errors'],
+            $schemaFeedbackEntries[FeedbackCategories::ERROR],
             $relationalTypeResolver,
             $database_key,
         );
@@ -2008,7 +2008,7 @@ class Engine implements EngineInterface
         }
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaWarnings,
-            $schemaFeedbackEntries['warnings'],
+            $schemaFeedbackEntries[FeedbackCategories::WARNING],
             $relationalTypeResolver,
             $database_key,
         );
@@ -2022,7 +2022,7 @@ class Engine implements EngineInterface
         }
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaDeprecations,
-            $schemaFeedbackEntries['deprecations'],
+            $schemaFeedbackEntries[FeedbackCategories::DEPRECATION],
             $relationalTypeResolver,
             $database_key,
         );
@@ -2036,7 +2036,7 @@ class Engine implements EngineInterface
         }
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaNotices,
-            $schemaFeedbackEntries['notices'],
+            $schemaFeedbackEntries[FeedbackCategories::NOTICE],
             $relationalTypeResolver,
             $database_key,
         );
