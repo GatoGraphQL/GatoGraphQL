@@ -48,14 +48,6 @@ class DirectivePipelineUtils
             &$payload['variables'],
             &$payload['messages'],
             &$payload['engineIterationFeedbackStore'],
-            &$payload['objectErrors'],
-            &$payload['objectWarnings'],
-            &$payload['objectDeprecations'],
-            &$payload['objectNotices'],
-            &$payload['schemaErrors'],
-            &$payload['schemaWarnings'],
-            &$payload['schemaDeprecations'],
-            &$payload['schemaNotices'],
         ];
     }
 }
