@@ -1792,11 +1792,8 @@ class Engine implements EngineInterface
                 $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] = $this->getGeneralFeedbackEntriesForOutput($generalLogs);
             }
             if ($documentLogs = $documentFeedbackStore->getLogs()) {
-                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] = array_merge(
-                    $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] ?? [],
-                    $documentLogs
-                );
-            };
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] = $this->getDocumentFeedbackEntriesForOutput($documentLogs);
+            }
             $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::LOG, $schemaFeedbackEntries[FeedbackCategories::LOG]);
         }
