@@ -1514,7 +1514,13 @@ class Engine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = [];
+        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = [];
+        $objectFeedbackEntries = $schemaFeedbackEntries = [
+            'errors' => [],
+            'warnings' => [],
+            'deprecations' => [],
+            'notices' => [],
+        ];
         $engineState->nocache_fields = [];
 
         // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
@@ -1629,14 +1635,8 @@ class Engine implements EngineInterface
                 $database_key,
                 $objectIDItems,
                 $engineIterationFeedbackStore,
-                $objectErrors,
-                $objectWarnings,
-                $objectDeprecations,
-                $objectNotices,
-                $schemaErrors,
-                $schemaWarnings,
-                $schemaDeprecations,
-                $schemaNotices,
+                $objectFeedbackEntries,
+                $schemaFeedbackEntries,
             );
 
             // Important: query like this: obtain keys first instead of iterating directly on array,
@@ -1710,20 +1710,6 @@ class Engine implements EngineInterface
 
         $ret = [];
 
-        // Executing the following query will produce duplicates on SchemaWarnings:
-        // ?query=posts(limit:3.5).title,posts(limit:extract(posts(limit:4.5),saraza)).title
-        // This is unavoidable, since add schemaWarnings (and, correspondingly, errors and deprecations) in functions
-        // `resolveFieldValidationWarningDescriptions` and `resolveValue` from the AbstractObjectTypeResolver
-        // Ideally, doing it in `resolveValue` is not needed, since it already went through the validation in `resolveFieldValidationWarningDescriptions`, so it's a duplication
-        // However, when having composed fields, the warnings are caught only in `resolveValue`, hence we need to add it there too
-        // Then, we will certainly have duplicates. Remove them now
-        // Because these are arrays of arrays, we use the method taken from https://stackoverflow.com/a/2561283
-        foreach ($schemaErrors as $dbname => &$entries) {
-            foreach ($entries as $dbKey => $errors) {
-                $entries[$dbKey] = array_intersect_key($errors, array_unique(array_map('serialize', $errors)));
-            }
-        }
-
         // Add the feedback (errors, warnings, deprecations) into the output
         $generalFeedbackStore = App::getFeedbackStore()->generalFeedbackStore;
         if ($generalErrors = $generalFeedbackStore->getErrors()) {
@@ -1780,19 +1766,19 @@ class Engine implements EngineInterface
                 );
             }
         }
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
-        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaErrors', $schemaErrors);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectFeedbackEntries['errors']);
+        $this->maybeCombineAndAddSchemaEntries($ret, 'schemaErrors', $schemaFeedbackEntries['errors']);
         if ($sendFeedbackWarnings) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaWarnings);
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectFeedbackEntries['warnings']);
+            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaFeedbackEntries['warnings']);
         }
         if ($sendFeedbackDeprecations) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectDeprecations);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaDeprecations);
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectFeedbackEntries['deprecations']);
+            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaFeedbackEntries['deprecations']);
         }
         if ($sendFeedbackNotices) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectNotices);
-            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectFeedbackEntries['notices']);
+            $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaFeedbackEntries['notices']);
         }
         if ($sendFeedbackLogs) {
             $ret['logEntries'] = $this->getDocumentFeedbackEntriesForOutput($documentFeedbackStore->getLogs());
@@ -1845,33 +1831,21 @@ class Engine implements EngineInterface
         string $database_key,
         array $objectIDItems,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
+        array &$objectFeedbackEntries,
+        array &$schemaFeedbackEntries,
     ): void {
         $this->transferObjectFeedback(
             $relationalTypeResolver,
             $database_key,
             $objectIDItems,
             $engineIterationFeedbackStore->objectFeedbackStore,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectNotices,
+            $objectFeedbackEntries,
         );
         $this->transferSchemaFeedback(
             $relationalTypeResolver,
             $database_key,
             $engineIterationFeedbackStore->schemaFeedbackStore,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
+            $schemaFeedbackEntries,
         );
 
         /**
@@ -1883,10 +1857,7 @@ class Engine implements EngineInterface
             $relationalTypeResolver,
             $database_key,
             App::getFeedbackStore()->schemaFeedbackStore,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
+            $schemaFeedbackEntries,
         );
     }
 
@@ -1895,10 +1866,7 @@ class Engine implements EngineInterface
         string $database_key,
         array $objectIDItems,
         ObjectFeedbackStore $objectFeedbackStore,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
+        array &$objectFeedbackEntries,
     ): void {
         $iterationObjectErrors = [];        
         foreach ($objectFeedbackStore->getErrors() as $objectFeedbackError) {
@@ -1906,7 +1874,7 @@ class Engine implements EngineInterface
         }
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectErrors,
-            $objectErrors,
+            $objectFeedbackEntries['errors'],
             $relationalTypeResolver,
             $database_key,
             $objectIDItems
@@ -1921,7 +1889,7 @@ class Engine implements EngineInterface
         }
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectWarnings,
-            $objectWarnings,
+            $objectFeedbackEntries['warnings'],
             $relationalTypeResolver,
             $database_key,
             $objectIDItems
@@ -1936,7 +1904,7 @@ class Engine implements EngineInterface
         }
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectDeprecations,
-            $objectDeprecations,
+            $objectFeedbackEntries['deprecations'],
             $relationalTypeResolver,
             $database_key,
             $objectIDItems
@@ -1951,7 +1919,7 @@ class Engine implements EngineInterface
         }
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectNotices,
-            $objectNotices,
+            $objectFeedbackEntries['notices'],
             $relationalTypeResolver,
             $database_key,
             $objectIDItems
@@ -2018,10 +1986,7 @@ class Engine implements EngineInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $database_key,
         SchemaFeedbackStore $schemaFeedbackStore,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
+        array &$schemaFeedbackEntries,
     ): void {
         $iterationSchemaErrors = [];
         foreach ($schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
@@ -2029,7 +1994,7 @@ class Engine implements EngineInterface
         }
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaErrors,
-            $schemaErrors,
+            $schemaFeedbackEntries['errors'],
             $relationalTypeResolver,
             $database_key,
         );
@@ -2043,7 +2008,7 @@ class Engine implements EngineInterface
         }
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaWarnings,
-            $schemaWarnings,
+            $schemaFeedbackEntries['warnings'],
             $relationalTypeResolver,
             $database_key,
         );
@@ -2057,7 +2022,7 @@ class Engine implements EngineInterface
         }
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaDeprecations,
-            $schemaDeprecations,
+            $schemaFeedbackEntries['deprecations'],
             $relationalTypeResolver,
             $database_key,
         );
@@ -2071,7 +2036,7 @@ class Engine implements EngineInterface
         }
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaNotices,
-            $schemaNotices,
+            $schemaFeedbackEntries['notices'],
             $relationalTypeResolver,
             $database_key,
         );
