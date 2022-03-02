@@ -912,12 +912,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         FeedbackItemProvider::class,
                         FeedbackItemProvider::E11,
                         [
+                            $this->directive,
                             $e->getMessage(),
                         ]
                     )
                     : new FeedbackItemResolution(
                         FeedbackItemProvider::class,
-                        FeedbackItemProvider::E12
+                        FeedbackItemProvider::E12,
+                        [
+                            $this->directive,
+                        ]
                     );
             }
             if ($feedbackItemResolution !== null) {
