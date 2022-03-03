@@ -12,10 +12,15 @@ use PoP\Root\Exception\AbstractClientException;
 abstract class AbstractParserException extends AbstractClientException implements LocationableExceptionInterface
 {
     public function __construct(
-        FeedbackItemResolution $feedbackItemResolution,
+        private FeedbackItemResolution $feedbackItemResolution,
         private Location $location,
     ) {
         parent::__construct($feedbackItemResolution->getMessage());
+    }
+
+    public function getFeedbackItemResolution(): FeedbackItemResolution
+    {
+        return $this->feedbackItemResolution;
     }
 
     public function getLocation(): Location

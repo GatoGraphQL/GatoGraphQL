@@ -153,10 +153,15 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             ) = $this->convertRequestToFieldQueryPaths($request);
         } catch (AbstractParserException $parserError) {
             // The error description is the exception message
-            $errorMessage = $parserError->getMessage();
+            $parserErrorFeedbackItemResolution = $parserError->getFeedbackItemResolution();
+            $errorMessage = $parserErrorFeedbackItemResolution->getMessage();
             $extensions = [
                 'locations' => [$parserError->getLocation()->toArray()],
+                'code' => $parserErrorFeedbackItemResolution->getNamespacedCode(),
             ];
+            if ($specifiedByURL = $parserErrorFeedbackItemResolution->getSpecifiedByURL()) {
+                $extensions['specifiedBy'] = $specifiedByURL;
+            }
 
             $this->getFeedbackMessageStore()->addQueryError($errorMessage, $extensions);
 
