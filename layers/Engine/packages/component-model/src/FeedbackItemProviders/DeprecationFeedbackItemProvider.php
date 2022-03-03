@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoP\ComponentModel\FeedbackItemProviders;
+
+use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
+use PoP\ComponentModel\Feedback\FeedbackCategories;
+
+class DeprecationFeedbackItemProvider extends AbstractFeedbackItemProvider
+{
+    public const D1 = 'd1';
+
+    /**
+     * @return string[]
+     */
+    public function getCodes(): array
+    {
+        return [
+            self::D1,
+        ];
+    }
+
+    public function getMessagePlaceholder(string $code): string
+    {
+        return match ($code) {
+            self::D1 => $this->__('Field \'%s\' is deprecated: %s', 'component-model'),
+            default => parent::getMessagePlaceholder($code),
+        };
+    }
+
+    public function getCategory(string $code): string
+    {
+        return FeedbackCategories::DEPRECATION;
+    }
+}
