@@ -15,6 +15,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public const E4 = 'e4';
     public const E5 = 'e5';
     public const E6 = 'e6';
+    public const E7 = 'e7';
 
     /**
      * @return string[]
@@ -28,6 +29,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E4,
             self::E5,
             self::E6,
+            self::E7,
         ];
     }
 
@@ -40,6 +42,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E4 => $this->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'engine'),
             self::E5 => $this->__('No composed directives were provided to \'%s\'', 'engine'),
             self::E6 => $this->__('There is no property \'%s\' in the application state', 'engine'),
+            self::E7 => $this->__('Traversing the array produced error: %s', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
