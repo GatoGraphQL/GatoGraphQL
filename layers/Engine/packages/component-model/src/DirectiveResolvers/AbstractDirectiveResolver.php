@@ -756,7 +756,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return [];
     }
 
-    public function getDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
