@@ -221,7 +221,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             !isset($form_data[MutationInputProperties::TITLE])
             && !isset($form_data[MutationInputProperties::CONTENT])
         ) {
-            $errors[] = $this->__('Either the title, or the content, must be provided', 'custompost-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E4,
+            );
         }
     }
 
