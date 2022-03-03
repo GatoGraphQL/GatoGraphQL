@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers;
 
-use PoP\Root\Exception\AbstractException;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Root\Exception\AbstractException;
+use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
@@ -41,9 +43,12 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         
         $errors = [];
         if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
-            $errors[] = sprintf(
-                $this->__('The %s ID is missing.', 'custompost-category-mutations'),
-                $this->getEntityName()
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E1,
+                [
+                    $this->getEntityName(),
+                ]
             );
         }
         return $errors;
