@@ -44,10 +44,10 @@ class AppStateProvider extends AbstractAppStateProvider
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $componentConfiguration->mustNamespaceTypes();
+        $state['are-mutations-enabled'] = $componentConfiguration->enableMutations();
 
         $state['only-fieldname-as-outputkey'] = false;
-        $state['are-mutations-enabled'] = true;
-
+        
         $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
         $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
 

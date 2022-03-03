@@ -61,11 +61,6 @@ class AppStateProvider extends AbstractAppStateProvider
         // Do not print the entry module
         $state['actions'][] = Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT;
 
-        // Enable mutations?
-        /** @var APIComponentConfiguration */
-        $apiComponentConfiguration = App::getComponent(APIComponent::class)->getConfiguration();
-        $state['are-mutations-enabled'] = $apiComponentConfiguration->enableMutations();
-
         // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)
         $state['does-api-query-have-errors'] = false;
     }
