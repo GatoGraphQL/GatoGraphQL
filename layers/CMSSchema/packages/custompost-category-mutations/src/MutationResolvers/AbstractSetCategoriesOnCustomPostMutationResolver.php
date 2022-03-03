@@ -42,7 +42,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
         
         $errors = [];
-        if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
+        if (!($form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,
