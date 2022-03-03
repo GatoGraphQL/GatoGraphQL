@@ -99,6 +99,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $errors;
     }
 
+    /**
+     * @return FeedbackItemResolution[]
+     */
     protected function validateUpdateErrors(array $form_data): array
     {
         $errors = [];

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
 use PoPCMSSchema\CustomPostMeta\Utils;
@@ -147,7 +148,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
     }
 
-    // Update Post Validation
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateUpdate(array &$errors, array $form_data): void
     {
         parent::validateUpdate($errors, $form_data);
@@ -155,6 +158,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         $customPostID = $form_data[MutationInputProperties::ID];
 
         if (!in_array($this->getCustomPostTypeAPI()->getStatus($customPostID), array(CustomPostStatus::DRAFT, CustomPostStatus::PENDING, CustomPostStatus::PUBLISH))) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }
