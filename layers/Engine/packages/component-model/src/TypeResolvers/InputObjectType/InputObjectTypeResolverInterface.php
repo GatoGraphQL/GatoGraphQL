@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use stdClass;
@@ -53,7 +54,7 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
     /**
      * Validate constraints on the input's value
      *
-     * @return string[] Error messages
+     * @return FeedbackItemResolution[] Errors
      */
     public function validateInputValue(stdClass $inputValue): array;
     public function hasMandatoryInputFields(): bool;

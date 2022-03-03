@@ -546,7 +546,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /**
      * Validate constraints on the input field's value
      *
-     * @return string[] Error messages
+     * @return FeedbackItemResolution[] Errors
      */
     final public function validateInputValue(stdClass $inputValue): array
     {
@@ -562,7 +562,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /**
      * Validate constraints on the input field's value
      *
-     * @return string[] Error messages
+     * @return FeedbackItemResolution[] Errors
      */
     protected function validateInputFieldValue(string $inputFieldName, mixed $inputFieldValue): array
     {

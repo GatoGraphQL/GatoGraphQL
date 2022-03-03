@@ -603,7 +603,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * Validate the constraints for a field argument
      *
-     * @return string[] Error messages
+     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldArgValue(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -722,22 +722,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * Validate field argument constraints
              */
             if (
-                $maybeErrors = $this->resolveFieldArgumentErrors(
+                $maybeErrorFeedbackItemResolutions = $this->resolveFieldArgumentErrors(
                     $objectTypeResolver,
                     $fieldName,
                     $fieldArgs
                 )
             ) {
-                foreach ($maybeErrors as $error) {
+                foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
-                            new FeedbackItemResolution(
-                                GenericFeedbackItemProvider::class,
-                                GenericFeedbackItemProvider::E1,
-                                [
-                                    $error,
-                                ]
-                            ),
+                            $errorFeedbackItemResolution,
                             LocationHelper::getNonSpecificLocation(),
                             $objectTypeResolver,
                         )
@@ -801,6 +795,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Validate the constraints for the field arguments
+     *
+     * @return FeedbackItemResolution[] Errors
      */
     final protected function resolveFieldArgumentErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
