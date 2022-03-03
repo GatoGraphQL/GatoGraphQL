@@ -773,21 +773,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         // Custom validations
-        $maybeErrors = $this->doResolveSchemaValidationErrorDescriptions(
+        $maybeErrorFeedbackItemResolutions = $this->doResolveSchemaValidationErrorDescriptions(
             $objectTypeResolver,
             $fieldName,
             $fieldArgs,
         );
-        foreach ($maybeErrors as $error) {
+        foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        GenericFeedbackItemProvider::class,
-                        GenericFeedbackItemProvider::E1,
-                        [
-                            $error,
-                        ]
-                    ),
+                    $errorFeedbackItemResolution,
                     LocationHelper::getNonSpecificLocation(),
                     $objectTypeResolver,
                 )
@@ -843,6 +837,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Custom validations. Function to override
+     *
+     * @return FeedbackItemResolution[] Errors
      */
     protected function doResolveSchemaValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
