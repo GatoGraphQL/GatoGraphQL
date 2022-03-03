@@ -130,7 +130,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         );
     }
 
-    protected function addDefaultErrorMessage(
+    protected function addDefaultError(
         mixed $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): void {
