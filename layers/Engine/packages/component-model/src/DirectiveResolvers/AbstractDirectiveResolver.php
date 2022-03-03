@@ -210,21 +210,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $directiveArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
-        $deprecationMessages = $this->resolveDirectiveValidationDeprecationMessages(
+        $deprecationFeedbackItemResolutions = $this->resolveDirectiveValidationDeprecationMessages(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs
         );
-        foreach ($deprecationMessages as $deprecationMessage) {
+        foreach ($deprecationFeedbackItemResolutions as $deprecationFeedbackItemResolution) {
             $objectTypeFieldResolutionFeedbackStore->addDeprecation(
                 new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        GenericFeedbackItemProvider::class,
-                        GenericFeedbackItemProvider::D1,
-                        [
-                            $deprecationMessage,
-                        ]
-                    ),
+                    $deprecationFeedbackItemResolution,
                     LocationHelper::getNonSpecificLocation(),
                     $relationalTypeResolver,
                 )
@@ -754,7 +748,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * @return string[]
+     * @return FeedbackItemResolution[]
      */
     public function resolveDirectiveValidationDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs): array
     {
