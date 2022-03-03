@@ -7,7 +7,7 @@ namespace PoP\Engine\FeedbackItemProviders;
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 
-class FeedbackItemProvider extends AbstractFeedbackItemProvider
+class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public const E1 = 'e1';
     public const E2 = 'e2';
@@ -46,16 +46,6 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
 
     public function getCategory(string $code): string
     {
-        return match ($code) {
-            self::E1,
-            self::E2,
-            self::E3,
-            self::E4,
-            self::E5,
-            self::E6
-                => FeedbackCategories::ERROR,
-            default
-                => parent::getCategory($code),
-        };
+        return FeedbackCategories::ERROR;
     }
 }

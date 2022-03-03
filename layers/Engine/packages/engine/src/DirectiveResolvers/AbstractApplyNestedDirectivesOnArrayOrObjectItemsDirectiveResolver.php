@@ -18,7 +18,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Component;
 use PoP\Engine\ComponentConfiguration;
 use PoP\Engine\Dataloading\Expressions;
-use PoP\Engine\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
@@ -126,8 +126,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
                             new FeedbackItemResolution(
-                                FeedbackItemProvider::class,
-                                FeedbackItemProvider::E5,
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E5,
                                 [
                                     $this->getDirectiveName(),
                                 ]
@@ -167,8 +167,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         new ObjectFeedback(
                             $fieldOutputKey !== $field ?
                                 new FeedbackItemResolution(
-                                    FeedbackItemProvider::class,
-                                    FeedbackItemProvider::E1,
+                                    ErrorFeedbackItemProvider::class,
+                                    ErrorFeedbackItemProvider::E1,
                                     [
                                         $field,
                                         $fieldOutputKey,
@@ -176,8 +176,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                                     ]
                                 )
                                 : new FeedbackItemResolution(
-                                    FeedbackItemProvider::class,
-                                    FeedbackItemProvider::E2,
+                                    ErrorFeedbackItemProvider::class,
+                                    ErrorFeedbackItemProvider::E2,
                                     [
                                         $fieldOutputKey,
                                         $id
@@ -208,8 +208,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         new ObjectFeedback(
                             $fieldOutputKey !== $field ?
                                 new FeedbackItemResolution(
-                                    FeedbackItemProvider::class,
-                                    FeedbackItemProvider::E3,
+                                    ErrorFeedbackItemProvider::class,
+                                    ErrorFeedbackItemProvider::E3,
                                     [
                                         $field,
                                         $fieldOutputKey,
@@ -217,8 +217,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                                     ]
                                 )
                                 : new FeedbackItemResolution(
-                                    FeedbackItemProvider::class,
-                                    FeedbackItemProvider::E4,
+                                    ErrorFeedbackItemProvider::class,
+                                    ErrorFeedbackItemProvider::E4,
                                     [
                                         $fieldOutputKey,
                                         $id
