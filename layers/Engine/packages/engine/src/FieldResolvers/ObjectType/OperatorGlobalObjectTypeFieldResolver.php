@@ -16,9 +16,9 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\Exception\RuntimeOperationException;
+use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\Engine\HelperServices\ArrayTraversionHelperServiceInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
-use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
@@ -268,8 +268,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
-                                GenericFeedbackItemProvider::class,
-                                GenericFeedbackItemProvider::E1,
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E7,
                                 [
                                     $e->getMessage(),
                                 ]
@@ -294,8 +294,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
-                                GenericFeedbackItemProvider::class,
-                                GenericFeedbackItemProvider::E1,
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E7,
                                 [
                                     $e->getMessage(),
                                 ]
