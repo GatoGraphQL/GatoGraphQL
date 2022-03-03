@@ -472,6 +472,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         // It is either is a query or a mutation
         $mutations = $queries = [];
         $operations = $executableDocument->getRequestedOperations();
+        
+        // @todo Migrate this, currently this code is not working
         if ($operations === []) {
             /** @var GraphQLParserComponentConfiguration */
             $componentConfiguration = App::getComponent(GraphQLParserComponent::class)->getConfiguration();
@@ -491,6 +493,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 );
             }
         }
+
         foreach ($operations as $operation) {
             if ($operation instanceof QueryOperation) {
                 $queries[] = $operation;
