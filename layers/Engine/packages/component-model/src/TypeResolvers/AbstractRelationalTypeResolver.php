@@ -372,7 +372,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
 
                 // Check for warnings
-                if ($warningFeedbackItemResolution = $directiveResolverInstance->resolveDirectiveWarningDescription($this)) {
+                if ($warningFeedbackItemResolution = $directiveResolverInstance->resolveDirectiveWarning($this)) {
                     foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
                         $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
                             new SchemaFeedback(

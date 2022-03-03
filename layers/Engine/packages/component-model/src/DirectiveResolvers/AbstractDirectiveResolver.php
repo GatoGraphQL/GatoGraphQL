@@ -774,7 +774,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return null;
     }
 
-    public function resolveDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution
+    public function resolveDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution
     {
         if (Environment::enableSemanticVersionConstraints()) {
             /**
