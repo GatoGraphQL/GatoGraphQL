@@ -5,3 +5,6 @@ services:
 
     PoPCMSSchema\CommentMutations\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
+
+    PoPCMSSchema\CommentMutations\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

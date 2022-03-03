@@ -9,3 +9,6 @@ services:
 
     PoPCMSSchema\CustomPostMutations\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
+
+    PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

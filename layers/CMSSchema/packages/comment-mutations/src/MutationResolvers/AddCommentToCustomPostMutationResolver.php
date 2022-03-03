@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\MutationResolvers;
 
-use PoP\Root\Exception\AbstractException;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\CommentMutations\Component;
 use PoPCMSSchema\CommentMutations\ComponentConfiguration;
 use PoPCMSSchema\CommentMutations\Exception\CommentCRUDMutationException;
+use PoPCMSSchema\CommentMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
@@ -83,9 +85,12 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 
-    protected function getUserNotLoggedInErrorMessage(): string
+    protected function getUserNotLoggedInErrorMessage(): FeedbackItemResolution
     {
-        return $this->__('You must be logged in to add comments', 'comment-mutations');
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E1,
+        );
     }
 
     protected function additionals(string | int $comment_id, array $form_data): void

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
+use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
@@ -153,9 +155,12 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
     }
 
-    protected function getUserNotLoggedInErrorMessage(): string
+    protected function getUserNotLoggedInErrorMessage(): FeedbackItemResolution
     {
-        return $this->__('You must be logged in to create or update custom posts', 'custompost-mutations');
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E1,
+        );
     }
 
     protected function validateContent(array &$errors, array $form_data): void
