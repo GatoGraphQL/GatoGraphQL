@@ -14,12 +14,17 @@ abstract class AbstractFeedbackItemProvider implements FeedbackItemProviderInter
 
     final public function getNamespacedCode(string $code): string
     {
-        return $this->getNamespace() . $code;
+        return $this->getNamespace() . $this->getNamespaceSeparator() . $code;
     }
 
     protected function getNamespace(): string
     {
-        return ClassHelpers::getClassPSR4Namespace(\get_called_class()) . '\\';
+        return ClassHelpers::getClassPSR4Namespace(\get_called_class());
+    }
+
+    protected function getNamespaceSeparator(): string
+    {
+        return '\\';
     }
 
     final public function getMessage(string $code, string|int|float|bool ...$args): string
