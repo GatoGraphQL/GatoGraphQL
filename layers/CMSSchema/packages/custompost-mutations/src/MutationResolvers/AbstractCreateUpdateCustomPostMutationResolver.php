@@ -173,6 +173,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         );
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateContent(array &$errors, array $form_data): void
     {
         // Validate that the status is valid
@@ -194,13 +197,23 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         );
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateCreateContent(array &$errors, array $form_data): void
     {
     }
+    
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateUpdateContent(array &$errors, array $form_data): void
     {
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateCreate(array &$errors, array $form_data): void
     {
         // Either the title or the content must be set
@@ -212,6 +225,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateUpdate(array &$errors, array $form_data): void
     {
 
