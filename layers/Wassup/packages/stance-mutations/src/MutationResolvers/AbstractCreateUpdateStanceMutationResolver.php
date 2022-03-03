@@ -99,6 +99,11 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
                     $this->getCustomPostTypeAPI()->getTitle($referenced_id)
                 );
             }
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = sprintf(
                 $this->__('%s. <a href="%s" target="%s">Edit?</a>', 'pop-userstance'),
                 $error,

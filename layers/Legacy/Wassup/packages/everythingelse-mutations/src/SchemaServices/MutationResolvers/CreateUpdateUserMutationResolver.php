@@ -62,20 +62,39 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     protected function validateCreateContent(array &$errors, array $form_data): void
     {
-
         // Check the username
         $user_login = $form_data['username'];
         if ($user_login == '') {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The username cannot be empty.', 'pop-application');
-        } elseif (! validate_username($user_login)) {
+        } elseif (!validate_username($user_login)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('This username is invalid because it uses illegal characters. Please enter a valid username.', 'pop-application');
         } elseif (username_exists($user_login)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('This username is already registered. Please choose another one.', 'pop-application');
         }
 
         // Check the e-mail address
         $user_email = $form_data['user_email'];
         if (email_exists($user_email)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('This email is already registered, please choose another one.', 'pop-application');
         }
 
@@ -84,13 +103,33 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         $repeatpassword =  $form_data['repeat_password'];
 
         if (!$password) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The password cannot be emtpy.', 'pop-application');
         } elseif (strlen($password) < 8) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The password must be at least 8 characters long.', 'pop-application');
         } else {
             if (!$repeatpassword) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $this->getTranslationAPI()->__('Please confirm the password.', 'pop-application');
             } elseif ($password !== $repeatpassword) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $this->getTranslationAPI()->__('Passwords do not match.', 'pop-application');
             }
         }
@@ -101,6 +140,11 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
             try {
                 \GD_Captcha::assertIsValid($captcha);
             } catch (GenericClientException $e) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $e->getMessage();
             }
         }
