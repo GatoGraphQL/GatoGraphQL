@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\SchemaCommons\FeedbackItemProviders;
+namespace PoPCMSSchema\UserStateMutations\FeedbackItemProviders;
 
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
@@ -10,6 +10,9 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public const E1 = 'e1';
+    public const E2 = 'e2';
+    public const E3 = 'e3';
+    public const E4 = 'e4';
 
     /**
      * @return string[]
@@ -18,6 +21,9 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return [
             self::E1,
+            self::E2,
+            self::E3,
+            self::E4,
         ];
     }
 
@@ -25,6 +31,9 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             self::E1 => $this->__('You are not logged in', 'user-state-mutations'),
+            self::E2 => $this->__('Please supply your username or email', 'user-state-mutations'),
+            self::E3 => $this->__('Please supply your password', 'user-state-mutations'),
+            self::E4 => $this->__('You are already logged in', 'user-state-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

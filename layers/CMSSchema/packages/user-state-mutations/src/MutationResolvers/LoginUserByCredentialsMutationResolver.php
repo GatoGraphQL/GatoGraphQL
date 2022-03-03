@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\Exception\UserLoginMutationException;
+use PoPCMSSchema\UserStateMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
 use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
@@ -41,10 +43,16 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         $pwd = $form_data[MutationInputProperties::PASSWORD];
 
         if (!$username_or_email) {
-            $errors[] = $this->__('Please supply your username or email', 'user-state-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E2,
+            );
         }
         if (!$pwd) {
-            $errors[] = $this->__('Please supply your password', 'user-state-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E3,
+            );
         }
 
         if (App::getState('is-user-logged-in')) {
@@ -53,9 +61,12 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 
-    protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
+    protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): FeedbackItemResolution
     {
-        return $this->__('You are already logged in', 'user-state-mutations');
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E4,
+        );
     }
 
     /**
