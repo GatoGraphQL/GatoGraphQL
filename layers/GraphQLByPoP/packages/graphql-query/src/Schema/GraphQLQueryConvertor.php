@@ -22,6 +22,7 @@ use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\SuggestionFeedbackItemProvider;
+use PoP\GraphQLParser\Query\ClientSymbols;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocumentInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -480,7 +481,10 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                     new DocumentFeedback(
                         new FeedbackItemResolution(
                             SuggestionFeedbackItemProvider::class,
-                            SuggestionFeedbackItemProvider::S1
+                            SuggestionFeedbackItemProvider::S1,
+                            [
+                                ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
+                            ]
                         ),
                         LocationHelper::getNonSpecificLocation()
                     )

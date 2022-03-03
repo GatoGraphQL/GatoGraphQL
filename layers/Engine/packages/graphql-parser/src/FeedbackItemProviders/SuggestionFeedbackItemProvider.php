@@ -24,7 +24,7 @@ class SuggestionFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::S1 => $this->__('To execute multiple queries in a single request, add the following operation to the GraphQL query, and execute it: `query __ALL { id }`', 'graphql-parser'),
+            self::S1 => $this->__('To execute multiple queries in a single request, add the following operation to the GraphQL query, and execute it: `query %s { id }`', 'graphql-parser'),
             default => parent::getMessagePlaceholder($code),
         };
     }
