@@ -10,6 +10,7 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 class DeprecationFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public const D1 = 'd1';
+    public const D2 = 'd2';
 
     /**
      * @return string[]
@@ -18,6 +19,7 @@ class DeprecationFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return [
             self::D1,
+            self::D2,
         ];
     }
 
@@ -25,6 +27,7 @@ class DeprecationFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             self::D1 => $this->__('Field \'%s\' is deprecated: %s', 'component-model'),
+            self::D1 => $this->__('Directive \'%s\' is deprecated: %s', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
