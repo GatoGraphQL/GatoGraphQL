@@ -1598,7 +1598,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
 
             // If it reached here, it's a field! Validate it, or show an error
-            $objectTypeResolver->collectFieldValidationErrorQualifiedEntries($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+            $objectTypeResolver->collectFieldValidationErrors($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
             return;
         }
     }
@@ -1619,7 +1619,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            $objectTypeResolver->collectFieldValidationWarningQualifiedEntries($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+            $objectTypeResolver->collectFieldValidationWarnings($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
             return;
         }
     }
@@ -1640,7 +1640,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            $objectTypeResolver->collectFieldDeprecationQualifiedEntries($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+            $objectTypeResolver->collectFieldDeprecations($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
             return;
         }
     }

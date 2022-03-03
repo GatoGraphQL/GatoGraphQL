@@ -155,7 +155,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
     }
 
-    final public function collectFieldValidationErrorQualifiedEntries(
+    final public function collectFieldValidationErrors(
         string $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
@@ -213,7 +213,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $executableObjectTypeFieldResolver->collectFieldValidationErrors($this, $fieldName, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
     }
 
-    final public function collectFieldValidationWarningQualifiedEntries(
+    final public function collectFieldValidationWarnings(
         string $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -250,7 +250,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
     }
 
-    final public function collectFieldDeprecationQualifiedEntries(
+    final public function collectFieldDeprecations(
         string $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -287,7 +287,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
-        // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrorQualifiedEntries, so don't duplicate output
+        // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrors, so don't duplicate output
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
             $validField,
@@ -306,7 +306,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
-        // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrorQualifiedEntries, so don't duplicate output
+        // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrors, so don't duplicate output
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
             $validField,
@@ -325,7 +325,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
-        // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrorQualifiedEntries, so don't duplicate output
+        // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrors, so don't duplicate output
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
             $validField,
