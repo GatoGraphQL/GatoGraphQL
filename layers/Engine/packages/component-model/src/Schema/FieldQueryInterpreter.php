@@ -14,7 +14,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
@@ -566,8 +566,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function getNoFieldErrorFeedbackItemResolution(ObjectTypeResolverInterface $objectTypeResolver, string $field): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
-            FeedbackItemProvider::class,
-            FeedbackItemProvider::E16,
+            ErrorFeedbackItemProvider::class,
+            ErrorFeedbackItemProvider::E16,
             [
                 $this->getFieldName($field),
                 $objectTypeResolver->getMaybeNamespacedTypeName()
@@ -1530,8 +1530,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
-                            FeedbackItemProvider::class,
-                            FeedbackItemProvider::E14,
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E14,
                             [
                                 $expressionName,
                             ]

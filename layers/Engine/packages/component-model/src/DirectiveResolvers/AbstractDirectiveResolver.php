@@ -17,7 +17,7 @@ use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
@@ -912,8 +912,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                             $engineIterationFeedbackStore->objectFeedbackStore->addLog(
                                 new ObjectFeedback(
                                     new FeedbackItemResolution(
-                                        FeedbackItemProvider::class,
-                                        FeedbackItemProvider::E11,
+                                        ErrorFeedbackItemProvider::class,
+                                        ErrorFeedbackItemProvider::E11,
                                         [
                                             $this->directive,
                                             $e->getMessage(),
@@ -931,16 +931,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 }
                 $feedbackItemResolution = $componentConfiguration->sendExceptionErrorMessages()
                     ? new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E11,
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E11,
                         [
                             $this->directive,
                             $e->getMessage(),
                         ]
                     )
                     : new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E12,
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E12,
                         [
                             $this->directive,
                         ]

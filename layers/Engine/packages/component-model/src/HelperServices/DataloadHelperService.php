@@ -8,7 +8,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\FilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
@@ -80,8 +80,8 @@ class DataloadHelperService implements DataloadHelperServiceInterface
                 App::getFeedbackStore()->schemaFeedbackStore->addError(
                     new SchemaFeedback(
                         new FeedbackItemResolution(
-                            FeedbackItemProvider::class,
-                            FeedbackItemProvider::E1,
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E1,
                             [
                                 $subcomponent_data_field_outputkey,
                             ]

@@ -13,7 +13,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -499,8 +499,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $objectTypeFieldResolutionFeedbackStore->addLog(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
-                                FeedbackItemProvider::class,
-                                FeedbackItemProvider::E3,
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E3,
                                 [
                                     $fieldName,
                                     $e->getMessage(),
@@ -515,16 +515,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     || $componentConfiguration->sendExceptionErrorMessages();
                 $feedbackItemResolution = $sendExceptionErrorMessages
                     ? new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E3,
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E3,
                         [
                             $fieldName,
                             $e->getMessage(),
                         ]
                     )
                     : new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E4,
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E4,
                         [
                             $fieldName,
                         ]

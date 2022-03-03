@@ -12,7 +12,7 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -91,8 +91,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             new FeedbackItemResolution(
-                                FeedbackItemProvider::class,
-                                FeedbackItemProvider::E13,
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E13,
                                 [
                                     $id,
                                 ]

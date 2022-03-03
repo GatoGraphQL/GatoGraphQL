@@ -9,7 +9,7 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 
-class FeedbackItemProvider extends AbstractFeedbackItemProvider
+class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public const W1 = 'w1';
     public const E1 = 'e1';

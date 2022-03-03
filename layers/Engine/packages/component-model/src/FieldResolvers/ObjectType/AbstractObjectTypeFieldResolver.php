@@ -15,7 +15,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -1295,8 +1295,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     $objectTypeFieldResolutionFeedbackStore->addLog(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
-                                FeedbackItemProvider::class,
-                                FeedbackItemProvider::E6,
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E6,
                                 [
                                     $fieldName,
                                     $e->getMessage()
@@ -1311,16 +1311,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     || $componentConfiguration->sendExceptionErrorMessages();
                 $feedbackItemResolution = $sendExceptionToClient
                     ? new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E6,
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E6,
                         [
                             $fieldName,
                             $e->getMessage()
                         ]
                     )
                     : new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E7,
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E7,
                         [
                             $fieldName
                         ]
