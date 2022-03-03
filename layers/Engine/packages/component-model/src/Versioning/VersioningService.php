@@ -8,7 +8,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\GeneralFeedback;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\Root\Services\BasicServiceTrait;
 
 class VersioningService implements VersioningServiceInterface
@@ -34,8 +34,8 @@ class VersioningService implements VersioningServiceInterface
                 $generalFeedbackStore->addWarning(
                     new GeneralFeedback(
                         new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::W1,
+                            WarningFeedbackItemProvider::class,
+                            WarningFeedbackItemProvider::W1,
                             [
                                 $typeField,
                             ]
