@@ -762,7 +762,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         // Custom validations
-        $maybeErrorFeedbackItemResolutions = $this->doResolveSchemaValidationErrorDescriptions(
+        $maybeErrorFeedbackItemResolutions = $this->doResolveSchemaValidationErrors(
             $objectTypeResolver,
             $fieldName,
             $fieldArgs,
@@ -831,7 +831,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      *
      * @return FeedbackItemResolution[] Errors
      */
-    protected function doResolveSchemaValidationErrorDescriptions(
+    protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         array $fieldArgs

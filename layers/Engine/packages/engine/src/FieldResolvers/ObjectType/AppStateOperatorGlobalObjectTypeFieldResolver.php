@@ -107,7 +107,7 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
         };
     }
 
-    protected function doResolveSchemaValidationErrorDescriptions(
+    protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         array $fieldArgs
@@ -134,7 +134,7 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
             }
         }
 
-        return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
+        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldName, $fieldArgs);
     }
 
     /**

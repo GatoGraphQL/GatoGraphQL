@@ -133,7 +133,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    protected function doResolveSchemaValidationErrorDescriptions(
+    protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         array $fieldArgs
@@ -158,7 +158,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         // }
 
-        return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
+        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldName, $fieldArgs);
     }
 
     public function validateResolvedFieldType(
