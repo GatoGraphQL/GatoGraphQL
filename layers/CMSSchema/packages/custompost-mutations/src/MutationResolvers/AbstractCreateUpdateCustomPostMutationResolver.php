@@ -74,6 +74,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $this->customPostTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
     }
 
+    /**
+     * @return FeedbackItemResolution[]
+     */
     protected function validateCreateErrors(array $form_data): array
     {
         $errors = [];

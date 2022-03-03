@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 
@@ -24,10 +25,16 @@ trait CreateCustomPostMutationResolverTrait
      */
     abstract protected function create(array $form_data): string | int;
 
+    /**
+     * @return FeedbackItemResolution[]
+     */
     public function validateErrors(array $form_data): array
     {
         return $this->validateCreateErrors($form_data);
     }
 
+    /**
+     * @return FeedbackItemResolution[]
+     */
     abstract protected function validateCreateErrors(array $form_data): array;
 }
