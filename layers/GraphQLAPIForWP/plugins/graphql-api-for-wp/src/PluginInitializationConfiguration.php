@@ -618,6 +618,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
              * Do not expose the `DangerouslyDynamic` scalar type
              */
             ComponentModelEnvironment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA => true,
+            /**
+             * Enable Mutations?
+             */
+            ComponentModelEnvironment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS),
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
@@ -635,8 +639,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $componentClassConfiguration[\PoPAPI\API\Component::class] = [
             // Do not expose global fields
             \PoPAPI\API\Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA => true,
-            // Enable Mutations?
-            \PoPAPI\API\Environment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS),
         ];
 
         // If doing ?behavior=unrestricted, always enable certain features

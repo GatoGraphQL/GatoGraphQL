@@ -51,6 +51,19 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
+    public function enableMutations(): bool
+    {
+        $envVariable = Environment::ENABLE_MUTATIONS;
+        $defaultValue = true;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function useSingleTypeInsteadOfUnionType(): bool
     {
         $envVariable = Environment::USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;

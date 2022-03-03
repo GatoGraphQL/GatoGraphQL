@@ -58,19 +58,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
-    public function enableMutations(): bool
-    {
-        $envVariable = Environment::ENABLE_MUTATIONS;
-        $defaultValue = true;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     public function skipExposingGlobalFieldsInFullSchema(): bool
     {
         $envVariable = Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA;
