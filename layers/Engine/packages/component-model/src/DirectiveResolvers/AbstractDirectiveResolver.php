@@ -441,6 +441,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * Custom validations. Function to override
+     *
+     * @return FeedbackItemResolution[] Errors
      */
     protected function doResolveSchemaValidationErrorDescriptions(
         RelationalTypeResolverInterface $relationalTypeResolver,
