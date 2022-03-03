@@ -10,10 +10,6 @@ use PoP\GraphQLParser\Facades\Query\QueryAugmenterServiceFacade;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument as UpstreamExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Feedback\DocumentFeedback;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoP\GraphQLParser\FeedbackItemProviders\SuggestionFeedbackItemProvider;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class ExecutableDocument extends UpstreamExecutableDocument
 {
@@ -42,17 +38,6 @@ class ExecutableDocument extends UpstreamExecutableDocument
         if ($multipleQueryExecutionOperations !== null) {
             return $multipleQueryExecutionOperations;
         }
-
-        // Add a suggestion indicating to pass __ALL in the query
-        App::getFeedbackStore()->documentFeedbackStore->addSuggestion(
-            new DocumentFeedback(
-                new FeedbackItemResolution(
-                    SuggestionFeedbackItemProvider::class,
-                    SuggestionFeedbackItemProvider::S1
-                ),
-                LocationHelper::getNonSpecificLocation()
-            )
-        );
 
         return parent::assertAndGetRequestedOperations();
     }

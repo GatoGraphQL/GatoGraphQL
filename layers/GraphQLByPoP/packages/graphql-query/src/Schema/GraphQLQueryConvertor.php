@@ -7,15 +7,21 @@ namespace GraphQLByPoP\GraphQLQuery\Schema;
 use Exception;
 use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
-use PoP\FieldQuery\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Feedback\DocumentFeedback;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
+use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
+use PoP\GraphQLParser\Component as GraphQLParserComponent;
+use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
+use PoP\GraphQLParser\FeedbackItemProviders\SuggestionFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocumentInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -32,7 +38,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
-use PoP\Root\App;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Services\BasicServiceTrait;
 use stdClass;
@@ -465,6 +471,22 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         // It is either is a query or a mutation
         $mutations = $queries = [];
         $operations = $executableDocument->getRequestedOperations();
+        if ($operations === []) {
+            /** @var GraphQLParserComponentConfiguration */
+            $componentConfiguration = App::getComponent(GraphQLParserComponent::class)->getConfiguration();
+            if ($componentConfiguration->enableMultipleQueryExecution()) {
+                // Add a suggestion indicating to pass __ALL in the query
+                App::getFeedbackStore()->documentFeedbackStore->addSuggestion(
+                    new DocumentFeedback(
+                        new FeedbackItemResolution(
+                            SuggestionFeedbackItemProvider::class,
+                            SuggestionFeedbackItemProvider::S1
+                        ),
+                        LocationHelper::getNonSpecificLocation()
+                    )
+                );
+            }
+        }
         foreach ($operations as $operation) {
             if ($operation instanceof QueryOperation) {
                 $queries[] = $operation;
