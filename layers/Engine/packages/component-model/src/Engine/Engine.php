@@ -1716,7 +1716,7 @@ class Engine implements EngineInterface
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
 
         // Add the feedback (errors, warnings, deprecations, notices, etc) into the output
-        $this->combineAndAddFeedbackEntries($ret, $objectFeedbackEntries, $schemaFeedbackEntries);
+        $this->addFeedbackEntries($ret, $objectFeedbackEntries, $schemaFeedbackEntries);
 
         return $ret;
     }
@@ -1725,7 +1725,7 @@ class Engine implements EngineInterface
      * Add the feedback (errors, warnings, deprecations, notices, etc)
      * into the output.
      */
-    protected function combineAndAddFeedbackEntries(
+    protected function addFeedbackEntries(
         array &$ret,
         array $objectFeedbackEntries,
         array $schemaFeedbackEntries,
