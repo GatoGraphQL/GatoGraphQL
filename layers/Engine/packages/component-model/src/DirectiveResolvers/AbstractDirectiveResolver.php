@@ -406,7 +406,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $errors = [];
         foreach ($directiveArgs as $directiveArgName => $directiveArgValue) {
             if (
-                $maybeErrors = $this->validateDirectiveArgValue(
+                $maybeErrorFeedbackItemResolutions = $this->validateDirectiveArgValue(
                     $relationalTypeResolver,
                     $directiveName,
                     $directiveArgName,
@@ -415,7 +415,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             ) {
                 $errors = array_merge(
                     $errors,
-                    $maybeErrors
+                    $maybeErrorFeedbackItemResolutions
                 );
             }
         }
