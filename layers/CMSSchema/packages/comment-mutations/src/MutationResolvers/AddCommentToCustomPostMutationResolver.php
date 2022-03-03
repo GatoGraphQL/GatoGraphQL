@@ -70,19 +70,31 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         } elseif ($componentConfiguration->requireCommenterNameAndEmail()) {
             // Validate if the commenter's name and email are mandatory
             if (!($form_data[MutationInputProperties::AUTHOR_NAME] ?? null)) {
-                $errors[] = $this->__('The comment author\'s name is missing', 'comment-mutations');
+                $errors[] = new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E2,
+                );
             }
             if (!($form_data[MutationInputProperties::AUTHOR_EMAIL] ?? null)) {
-                $errors[] = $this->__('The comment author\'s email is missing', 'comment-mutations');
+                $errors[] = new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E3,
+                );
             }
         }
 
         // Either provide the customPostID, or retrieve it from the parent comment
         if (!($form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null) && !($form_data[MutationInputProperties::PARENT_COMMENT_ID] ?? null)) {
-            $errors[] = $this->__('The custom post ID is missing.', 'comment-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E4,
+            );
         }
         if (!($form_data[MutationInputProperties::COMMENT] ?? null)) {
-            $errors[] = $this->__('The comment is empty.', 'comment-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E5,
+            );
         }
         return $errors;
     }
