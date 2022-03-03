@@ -90,6 +90,19 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
+    public function enableProactiveFeedbackSuggestions(): bool
+    {
+        $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_SUGGESTIONS;
+        $defaultValue = true;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function enableProactiveFeedbackLogs(): bool
     {
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_LOGS;

@@ -1520,6 +1520,7 @@ class Engine implements EngineInterface
             FeedbackCategories::WARNING => [],
             FeedbackCategories::DEPRECATION => [],
             FeedbackCategories::NOTICE => [],
+            FeedbackCategories::SUGGESTION => [],
             FeedbackCategories::LOG => [],
         ];
         $engineState->nocache_fields = [];
@@ -1728,6 +1729,7 @@ class Engine implements EngineInterface
         $sendFeedbackWarnings = in_array(FeedbackCategories::WARNING, $enabledFeedbackCategoryExtensions);
         $sendFeedbackDeprecations = in_array(FeedbackCategories::DEPRECATION, $enabledFeedbackCategoryExtensions);
         $sendFeedbackNotices = in_array(FeedbackCategories::NOTICE, $enabledFeedbackCategoryExtensions);
+        $sendFeedbackSuggestions = in_array(FeedbackCategories::SUGGESTION, $enabledFeedbackCategoryExtensions);
         $sendFeedbackLogs = in_array(FeedbackCategories::LOG, $enabledFeedbackCategoryExtensions);
 
         if ($sendFeedbackWarnings) {
@@ -1786,6 +1788,10 @@ class Engine implements EngineInterface
         if ($sendFeedbackNotices) {
             $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::NOTICE, $objectFeedbackEntries[FeedbackCategories::NOTICE]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::NOTICE, $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
+        }
+        if ($sendFeedbackSuggestions) {
+            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::SUGGESTION, $objectFeedbackEntries[FeedbackCategories::SUGGESTION]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::SUGGESTION, $schemaFeedbackEntries[FeedbackCategories::SUGGESTION]);
         }
         if ($sendFeedbackLogs) {
             if ($generalLogs = $generalFeedbackStore->getLogs()) {
