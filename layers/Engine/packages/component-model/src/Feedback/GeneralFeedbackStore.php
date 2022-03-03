@@ -15,6 +15,8 @@ class GeneralFeedbackStore
     /** @var GeneralFeedbackInterface[] */
     private array $notices = [];
     /** @var GeneralFeedbackInterface[] */
+    private array $suggestions = [];
+    /** @var GeneralFeedbackInterface[] */
     private array $logs = [];
 
     /**
@@ -99,6 +101,27 @@ class GeneralFeedbackStore
     public function setNotices(array $notices): void
     {
         $this->notices = $notices;
+    }
+
+    /**
+     * @return GeneralFeedbackInterface[]
+     */
+    public function getSuggestions(): array
+    {
+        return $this->suggestions;
+    }
+
+    public function addSuggestion(GeneralFeedbackInterface $suggestion): void
+    {
+        $this->suggestions[] = $suggestion;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $suggestions
+     */
+    public function setSuggestions(array $suggestions): void
+    {
+        $this->suggestions = $suggestions;
     }
 
     /**

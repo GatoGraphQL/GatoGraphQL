@@ -15,6 +15,8 @@ class SchemaInputValidationFeedbackStore
     /** @var SchemaInputValidationFeedbackInterface[] */
     private array $notices = [];
     /** @var SchemaInputValidationFeedbackInterface[] */
+    private array $suggestions = [];
+    /** @var SchemaInputValidationFeedbackInterface[] */
     private array $logs = [];
 
     public function incorporate(
@@ -35,6 +37,10 @@ class SchemaInputValidationFeedbackStore
         $this->notices = array_merge(
             $this->notices,
             $schemaInputValidationFeedbackStore->getNotices()
+        );
+        $this->suggestions = array_merge(
+            $this->suggestions,
+            $schemaInputValidationFeedbackStore->getSuggestions()
         );
         $this->logs = array_merge(
             $this->logs,
@@ -124,6 +130,27 @@ class SchemaInputValidationFeedbackStore
     public function setNotices(array $notices): void
     {
         $this->notices = $notices;
+    }
+
+    /**
+     * @return SchemaInputValidationFeedbackInterface[]
+     */
+    public function getSuggestions(): array
+    {
+        return $this->suggestions;
+    }
+
+    public function addSuggestion(SchemaInputValidationFeedbackInterface $suggestion): void
+    {
+        $this->suggestions[] = $suggestion;
+    }
+
+    /**
+     * @param SchemaInputValidationFeedbackInterface[] $suggestions
+     */
+    public function setSuggestions(array $suggestions): void
+    {
+        $this->suggestions = $suggestions;
     }
 
     /**

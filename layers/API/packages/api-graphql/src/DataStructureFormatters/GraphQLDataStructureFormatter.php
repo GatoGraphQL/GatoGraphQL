@@ -82,6 +82,17 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 }
             }
 
+            // Suggestions
+            if ($componentConfiguration->enableProactiveFeedbackSuggestions()) {
+                $notices = array_merge(
+                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
+                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
+                );
+                if ($notices !== []) {
+                    $ret['extensions']['suggestions'] = $notices;
+                }
+            }
+
             // Logs
             if ($componentConfiguration->enableProactiveFeedbackLogs()) {
                 $logs = array_merge(
