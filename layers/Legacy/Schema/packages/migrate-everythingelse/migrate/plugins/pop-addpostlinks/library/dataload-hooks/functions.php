@@ -33,6 +33,11 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
 
         if ($link = $form_data['link']) {
             if (!isValidUrl($link)) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = TranslationAPIFacade::getInstance()->__('The external link has an invalid format', 'pop-addpostlinks');
             }
         }

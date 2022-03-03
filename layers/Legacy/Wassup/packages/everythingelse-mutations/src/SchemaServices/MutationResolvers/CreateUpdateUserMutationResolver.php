@@ -20,14 +20,29 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     protected function validateContent(array &$errors, array $form_data): void
     {
         if (empty($form_data['first_name'])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The name cannot be empty', 'pop-application');
         }
 
         // Validate email
         $user_email = $form_data['user_email'];
         if ($user_email == '') {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The e-mail cannot be empty', 'pop-application');
         } elseif (! is_email($user_email)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The email address isn&#8217;t correct.', 'pop-application');
         }
 
@@ -35,6 +50,11 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         if (is_array($limited_email_domains) && empty($limited_email_domains) == false) {
             $emaildomain = substr($user_email, 1 + strpos($user_email, '@'));
             if (in_array($emaildomain, $limited_email_domains) == false) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $this->getTranslationAPI()->__('That email address is not allowed!', 'pop-application');
             }
         }

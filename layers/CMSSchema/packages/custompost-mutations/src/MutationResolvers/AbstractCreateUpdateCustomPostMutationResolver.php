@@ -182,9 +182,12 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         if (isset($form_data[MutationInputProperties::STATUS])) {
             $status = $form_data[MutationInputProperties::STATUS];
             if (!in_array($status, $this->getCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues())) {
-                $errors[] = sprintf(
-                    $this->__('Status \'%s\' is not supported', 'custompost-mutations'),
-                    $status
+                $errors[] = new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E5,
+                    [
+                        $status
+                    ]
                 );
             }
         }

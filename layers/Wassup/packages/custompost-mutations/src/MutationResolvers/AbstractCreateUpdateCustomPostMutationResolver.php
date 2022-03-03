@@ -78,6 +78,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         parent::validateContent($errors, $form_data);
 
         if ($this->supportsTitle() && empty($form_data[MutationInputProperties::TITLE])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('The title cannot be empty', 'pop-application');
         }
 
@@ -87,10 +92,20 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
 
         if (empty($form_data[MutationInputProperties::CONTENT])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('The content cannot be empty', 'pop-application');
         }
 
         if ($this->isFeaturedImageMandatory() && empty($form_data[CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('The featured image has not been set', 'pop-application');
         }
 
@@ -98,11 +113,26 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
             $category_error_msgs = $this->getCategoriesErrorMessages();
             if (empty($form_data[MutationInputProperties::CATEGORIES])) {
                 if ($validateCategories == self::VALIDATECATEGORIESTYPE_ATLEASTONE) {
+                    // @todo Migrate from string to FeedbackItemProvider
+                    // $errors[] = new FeedbackItemResolution(
+                    //     MutationErrorFeedbackItemProvider::class,
+                    //     MutationErrorFeedbackItemProvider::E1,
+                    // );
                     $errors[] = $category_error_msgs['empty-categories'];
                 } elseif ($validateCategories == self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
+                    // @todo Migrate from string to FeedbackItemProvider
+                    // $errors[] = new FeedbackItemResolution(
+                    //     MutationErrorFeedbackItemProvider::class,
+                    //     MutationErrorFeedbackItemProvider::E1,
+                    // );
                     $errors[] = $category_error_msgs['empty-category'];
                 }
             } elseif (count($form_data[MutationInputProperties::CATEGORIES]) > 1 && $validateCategories == self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $category_error_msgs['only-one'];
             }
         }
