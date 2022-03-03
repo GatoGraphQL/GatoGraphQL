@@ -756,11 +756,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return [];
     }
 
-    public function getDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution
+    public function getDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getDirectiveWarningDescription($relationalTypeResolver);
+            return $schemaDefinitionResolver->getDirectiveWarning($relationalTypeResolver);
         }
         return null;
     }
@@ -797,7 +797,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 }
             }
         }
-        return $this->getDirectiveWarningDescription($relationalTypeResolver);
+        return $this->getDirectiveWarning($relationalTypeResolver);
     }
 
     public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
