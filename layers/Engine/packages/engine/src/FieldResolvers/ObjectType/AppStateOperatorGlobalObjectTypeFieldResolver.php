@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
@@ -13,8 +14,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\Component;
 use PoP\Engine\ComponentConfiguration;
-use PoP\Root\App;
+use PoP\Engine\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\Root\App;
 
 class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
@@ -119,9 +121,12 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
                 case 'var':
                     if (!App::hasState($fieldArgs['name'])) {
                         return [
-                            sprintf(
-                                $this->__('There is no property \'%s\' in the application state', 'component-model'),
-                                $fieldArgs['name']
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E6,
+                                [
+                                    $fieldArgs['name'],
+                                ]
                             ),
                         ];
                     };

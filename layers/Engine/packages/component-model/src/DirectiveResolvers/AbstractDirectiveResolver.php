@@ -17,7 +17,7 @@ use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
@@ -210,21 +210,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $directiveArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
-        $deprecationMessages = $this->resolveDirectiveValidationDeprecationMessages(
+        $deprecationFeedbackItemResolutions = $this->resolveDirectiveValidationDeprecationMessages(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs
         );
-        foreach ($deprecationMessages as $deprecationMessage) {
+        foreach ($deprecationFeedbackItemResolutions as $deprecationFeedbackItemResolution) {
             $objectTypeFieldResolutionFeedbackStore->addDeprecation(
                 new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        GenericFeedbackItemProvider::class,
-                        GenericFeedbackItemProvider::D1,
-                        [
-                            $deprecationMessage,
-                        ]
-                    ),
+                    $deprecationFeedbackItemResolution,
                     LocationHelper::getNonSpecificLocation(),
                     $relationalTypeResolver,
                 )
@@ -256,23 +250,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          */
         if (!$engineIterationFeedbackStore->hasErrors()) {
             if (
-                $maybeErrors = $this->resolveDirectiveArgumentErrors(
+                $maybeErrorFeedbackItemResolutions = $this->resolveDirectiveArgumentErrors(
                     $relationalTypeResolver,
                     $directiveName,
                     $directiveArgs
                 )
             ) {
                 foreach ($fields as $field) {
-                    foreach ($maybeErrors as $errorMessage) {
+                    foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                         $engineIterationFeedbackStore->objectFeedbackStore->addError(
                             new ObjectFeedback(
-                                new FeedbackItemResolution(
-                                    GenericFeedbackItemProvider::class,
-                                    GenericFeedbackItemProvider::E1,
-                                    [
-                                        $errorMessage,
-                                    ]
-                                ),
+                                $errorFeedbackItemResolution,
                                 LocationHelper::getNonSpecificLocation(),
                                 $relationalTypeResolver,
                                 $field,
@@ -354,6 +342,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return true;
     }
 
+    /**
+     * @return FeedbackItemResolution[] Errors
+     */
     public function resolveDirectiveValidationErrorDescriptions(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
@@ -369,14 +360,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             ARRAY_FILTER_USE_KEY
         ));
         if (
-            $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+            $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
                 $mandatoryConsolidatedDirectiveArgNames,
                 $directiveName,
                 $directiveArgs,
                 ResolverTypes::DIRECTIVE
             )
         ) {
-            return [$maybeError];
+            return [$maybeErrorFeedbackItemResolution];
         }
 
         if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
@@ -384,13 +375,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * Validate directive argument constraints
              */
             if (
-                $maybeErrors = $this->resolveDirectiveArgumentErrors(
+                $maybeErrorFeedbackItemResolutions = $this->resolveDirectiveArgumentErrors(
                     $relationalTypeResolver,
                     $directiveName,
                     $directiveArgs
                 )
             ) {
-                return $maybeErrors;
+                return $maybeErrorFeedbackItemResolutions;
             }
         }
 
@@ -404,6 +395,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * Validate the constraints for the directive arguments
+     *
+     * @return FeedbackItemResolution[] Errors
      */
     final protected function resolveDirectiveArgumentErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -413,7 +406,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $errors = [];
         foreach ($directiveArgs as $directiveArgName => $directiveArgValue) {
             if (
-                $maybeErrors = $this->validateDirectiveArgValue(
+                $maybeErrorFeedbackItemResolutions = $this->validateDirectiveArgValue(
                     $relationalTypeResolver,
                     $directiveName,
                     $directiveArgName,
@@ -422,7 +415,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             ) {
                 $errors = array_merge(
                     $errors,
-                    $maybeErrors
+                    $maybeErrorFeedbackItemResolutions
                 );
             }
         }
@@ -431,6 +424,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * Validate the constraints for a directive argument
+     *
+     * @return FeedbackItemResolution[] Errors
      */
     protected function validateDirectiveArgValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -443,6 +438,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * Custom validations. Function to override
+     *
+     * @return FeedbackItemResolution[] Errors
      */
     protected function doResolveSchemaValidationErrorDescriptions(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -751,7 +748,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * @return string[]
+     * @return FeedbackItemResolution[]
      */
     public function resolveDirectiveValidationDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs): array
     {
@@ -912,8 +909,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                             $engineIterationFeedbackStore->objectFeedbackStore->addLog(
                                 new ObjectFeedback(
                                     new FeedbackItemResolution(
-                                        FeedbackItemProvider::class,
-                                        FeedbackItemProvider::E11,
+                                        ErrorFeedbackItemProvider::class,
+                                        ErrorFeedbackItemProvider::E11,
                                         [
                                             $this->directive,
                                             $e->getMessage(),
@@ -931,16 +928,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 }
                 $feedbackItemResolution = $componentConfiguration->sendExceptionErrorMessages()
                     ? new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E11,
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E11,
                         [
                             $this->directive,
                             $e->getMessage(),
                         ]
                     )
                     : new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E12,
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E12,
                         [
                             $this->directive,
                         ]

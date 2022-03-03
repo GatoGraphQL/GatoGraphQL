@@ -21,3 +21,6 @@ services:
 
     PoPCMSSchema\SchemaCommons\LooseContracts\:
         resource: '../src/LooseContracts/*'
+
+    PoPCMSSchema\SchemaCommons\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

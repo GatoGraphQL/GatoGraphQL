@@ -21,10 +21,20 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
             // Check that the referenced post exists
             $referenced = $this->getCustomPostTypeAPI()->getCustomPost($form_data['stancetarget']);
             if (!$referenced) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $this->__('The referenced post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
                 if ($this->getCustomPostTypeAPI()->getStatus($referenced) != CustomPostStatus::PUBLISH) {
+                    // @todo Migrate from string to FeedbackItemProvider
+                    // $errors[] = new FeedbackItemResolution(
+                    //     MutationErrorFeedbackItemProvider::class,
+                    //     MutationErrorFeedbackItemProvider::E1,
+                    // );
                     $errors[] = $this->__('The referenced post is not published yet', 'poptheme-wassup');
                 }
             }
@@ -89,6 +99,11 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
                     $this->getCustomPostTypeAPI()->getTitle($referenced_id)
                 );
             }
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = sprintf(
                 $this->__('%s. <a href="%s" target="%s">Edit?</a>', 'pop-userstance'),
                 $error,

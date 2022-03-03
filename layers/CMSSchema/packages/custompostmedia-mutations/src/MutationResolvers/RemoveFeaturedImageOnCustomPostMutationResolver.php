@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
-use PoP\Root\Exception\AbstractException;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Root\Exception\AbstractException;
+use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
@@ -37,16 +39,20 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
 
     public function validateErrors(array $form_data): array
     {
-        $errors = [];
-
         // Check that the user is logged-in
-        $this->validateUserIsLoggedIn($errors);
-        if ($errors) {
-            return $errors;
+        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
+        if ($errorFeedbackItemResolution !== null) {
+            return [
+                $errorFeedbackItemResolution,
+            ];
         }
 
-        if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
-            $errors[] = $this->__('The custom post ID is missing.', 'custompostmedia-mutations');
+        $errors = [];
+        if (!($form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null)) {
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E1,
+            );
         }
         return $errors;
     }

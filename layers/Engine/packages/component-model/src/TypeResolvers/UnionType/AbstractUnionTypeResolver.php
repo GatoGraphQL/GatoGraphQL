@@ -11,7 +11,7 @@ use PoP\ComponentModel\Exception\SchemaReferenceException;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -388,8 +388,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string | int $objectID): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
-            FeedbackItemProvider::class,
-            FeedbackItemProvider::E10,
+            ErrorFeedbackItemProvider::class,
+            ErrorFeedbackItemProvider::E10,
             [
                 $objectID
             ]
@@ -415,8 +415,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E8,
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E8,
                         [
                             $this->getOutputService()->jsonEncodeArrayOrStdClassValue($object),
                         ]

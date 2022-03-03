@@ -13,7 +13,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -237,17 +237,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($validField === null) {
             return;
         }
-        if ($maybeWarnings = $executableObjectTypeFieldResolver->resolveFieldValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
-            foreach ($maybeWarnings as $warning) {
+        if ($maybeWarningFeedbackItemResolutions = $executableObjectTypeFieldResolver->resolveFieldValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
+            foreach ($maybeWarningFeedbackItemResolutions as $warningFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addWarning(
                     new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::W1,
-                            [
-                                $warning,
-                            ]
-                        ),
+                        $warningFeedbackItemResolution,
                         LocationHelper::getNonSpecificLocation(),
                         $this,
                     )
@@ -499,8 +493,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $objectTypeFieldResolutionFeedbackStore->addLog(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
-                                FeedbackItemProvider::class,
-                                FeedbackItemProvider::E3,
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E3,
                                 [
                                     $fieldName,
                                     $e->getMessage(),
@@ -515,16 +509,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     || $componentConfiguration->sendExceptionErrorMessages();
                 $feedbackItemResolution = $sendExceptionErrorMessages
                     ? new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E3,
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E3,
                         [
                             $fieldName,
                             $e->getMessage(),
                         ]
                     )
                     : new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E4,
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E4,
                         [
                             $fieldName,
                         ]

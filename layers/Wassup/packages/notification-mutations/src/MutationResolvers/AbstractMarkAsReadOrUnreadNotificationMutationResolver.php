@@ -15,11 +15,21 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
         $errors = [];
         $histid = $form_data['histid'];
         if (!$histid) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('This URL is incorrect.', 'pop-notifications');
         } else {
             // $notification = AAL_Main::instance()->api->getNotification($histid);
             $notification = \PoP_Notifications_API::getNotification($histid);
             if (!$notification) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $this->__('This notification does not exist.', 'pop-notifications');
             }
         }

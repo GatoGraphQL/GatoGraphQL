@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FeedbackItemProviders;
 
-use PoP\ComponentModel\Constants\Constants;
-use PoP\ComponentModel\Constants\Params;
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 
-class FeedbackItemProvider extends AbstractFeedbackItemProvider
+class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public const W1 = 'w1';
     public const E1 = 'e1';
     public const E2 = 'e2';
     public const E3 = 'e3';
@@ -35,6 +32,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public const E21 = 'e21';
     public const E22 = 'e22';
     public const E23 = 'e23';
+    public const E24 = 'e24';
+    public const E25 = 'e25';
 
     /**
      * @return string[]
@@ -42,7 +41,6 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getCodes(): array
     {
         return [
-            self::W1,
             self::E1,
             self::E2,
             self::E3,
@@ -66,13 +64,14 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E21,
             self::E22,
             self::E23,
+            self::E24,
+            self::E25,
         ];
     }
 
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::W1 => $this->__('URL param \'' . Params::VERSION_CONSTRAINT_FOR_FIELDS . '\' expects the type and field name separated by \'' . Constants::TYPE_FIELD_SEPARATOR . '\' (eg: \'?' . Params::VERSION_CONSTRAINT_FOR_FIELDS . '[Post' . Constants::TYPE_FIELD_SEPARATOR . 'title]=^0.1\'), so the following value has been ignored: \'%s\'', 'component-model'),
             self::E1 => $this->__('Field \'%s\' is not a connection', 'component-model'),
             self::E2 => $this->__('Field \'%s\' could not be resolved due to its nested error(s)', 'component-model'),
             self::E3 => $this->__('Resolving field \'%s\' triggered exception: \'%s\'', 'component-model'),
@@ -96,41 +95,14 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E21 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'component-model'),
             self::E22 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'component-model'),
             self::E23 => $this->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
+            self::E24 => $this->__('Argument \'%1$s\' cannot be empty', 'component-model'),
+            self::E25 => $this->__('Arguments \'%1$s\' cannot be empty', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
 
     public function getCategory(string $code): string
     {
-        return match ($code) {
-            self::W1
-                => FeedbackCategories::WARNING,
-            self::E1,
-            self::E2,
-            self::E3,
-            self::E4,
-            self::E5,
-            self::E6,
-            self::E7,
-            self::E8,
-            self::E9,
-            self::E10,
-            self::E11,
-            self::E12,
-            self::E13,
-            self::E14,
-            self::E15,
-            self::E16,
-            self::E17,
-            self::E18,
-            self::E19,
-            self::E20,
-            self::E21,
-            self::E22,
-            self::E23
-                => FeedbackCategories::ERROR,
-            default
-                => parent::getCategory($code),
-        };
+        return FeedbackCategories::ERROR;
     }
 }

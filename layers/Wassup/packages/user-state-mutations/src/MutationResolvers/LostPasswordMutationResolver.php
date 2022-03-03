@@ -88,10 +88,20 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
 
         // Code copied from file wp-login.php (We can't invoke it directly, since wp-login.php has not been loaded, and we can't do it since it executes a lot of unwanted code producing and output)
         if (empty($user_login)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('Enter a username or e-mail address.');
         } elseif (strpos($user_login, '@')) {
             $user = $this->getUserTypeAPI()->getUserByEmail(trim($user_login));
             if (empty($user)) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $this->__('There is no user registered with that email address.');
             }
         } else {
@@ -100,6 +110,11 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         }
 
         if (!$user) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('Invalid username or e-mail.');
         }
 

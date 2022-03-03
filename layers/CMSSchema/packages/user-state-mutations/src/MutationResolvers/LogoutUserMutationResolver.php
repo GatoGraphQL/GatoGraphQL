@@ -27,9 +27,13 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
 
     public function validateErrors(array $form_data): array
     {
-        $errors = [];
-        $this->validateUserIsLoggedIn($errors);
-        return $errors;
+        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
+        if ($errorFeedbackItemResolution !== null) {
+            return [
+                $errorFeedbackItemResolution,
+            ];
+        }
+        return [];
     }
     /**
      * @param array<string,mixed> $form_data

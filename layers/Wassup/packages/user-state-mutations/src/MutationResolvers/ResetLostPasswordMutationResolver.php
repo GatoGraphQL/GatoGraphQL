@@ -39,17 +39,42 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         $repeatpwd = $form_data[MutationInputProperties::REPEAT_PASSWORD];
 
         if (!$code) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errorcodes[] = 'error-nocode';
         }
         if (!$pwd) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errorcodes[] = 'error-nopwd';
         } elseif (strlen($pwd) < 8) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errorcodes[] = 'error-short';
         }
         if (!$repeatpwd) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errorcodes[] = 'error-norepeatpwd';
         }
         if ($pwd != $repeatpwd) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errorcodes[] = 'error-pwdnomatch';
         }
         return $errorcodes;

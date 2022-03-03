@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
@@ -54,6 +55,11 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
 
         $emails = $form_data['emails'];
         if (empty($emails)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('Email(s) cannot be empty.', 'pop-coreprocessors');
         }
 
@@ -70,12 +76,20 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         );
     }
 
+    /**
+     * @return FeedbackItemResolution[]
+     */
     public function validateWarnings(array $form_data): array
     {
         $warnings = [];
 
         $emails = $form_data['emails'];
         if ($invalid_emails = $this->getInvalidEmails($emails)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $warnings[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $warnings[] = sprintf(
                 $this->getTranslationAPI()->__('The following emails are invalid: <strong>%s</strong>', 'pop-coreprocessors'),
                 implode(', ', $invalid_emails)

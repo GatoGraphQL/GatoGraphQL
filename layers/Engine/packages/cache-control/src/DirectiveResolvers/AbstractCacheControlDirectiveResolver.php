@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
-use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\CacheControl\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 
@@ -92,7 +94,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     /**
      * Validate the constraints for a directive argument
      *
-     * @return string[] Error messages
+     * @return FeedbackItemResolution[] Errors
      */
     protected function validateDirectiveArgValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -110,7 +112,10 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         switch ($directiveArgName) {
             case 'maxAge':
                 if ($directiveArgValue < 0) {
-                    $errors[] = $this->__('The value for \'maxAge\' must either be a positive number, or \'0\' to avoid caching');
+                    $errors[] = new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        FeedbackItemProvider::E1,
+                    );
                 }
                 break;
         }

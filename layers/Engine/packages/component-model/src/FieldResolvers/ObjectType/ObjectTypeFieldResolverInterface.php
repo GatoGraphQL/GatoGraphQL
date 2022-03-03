@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -101,7 +102,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         string $fieldName
     ): ?MutationResolverInterface;
     /**
-     * @return string[]
+     * @return FeedbackItemResolution[]
      */
     public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
     /**

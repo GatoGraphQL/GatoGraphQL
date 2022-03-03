@@ -20,6 +20,11 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
             // Check that the logged in user does currently follow that user
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS);
             if (!in_array($target_id, $value)) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = sprintf(
                     $this->__('You were not following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $this->getUserTypeAPI()->getUserDisplayName($target_id)

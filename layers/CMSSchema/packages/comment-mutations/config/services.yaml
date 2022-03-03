@@ -2,6 +2,10 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     PoPCMSSchema\CommentMutations\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
+
+    PoPCMSSchema\CommentMutations\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

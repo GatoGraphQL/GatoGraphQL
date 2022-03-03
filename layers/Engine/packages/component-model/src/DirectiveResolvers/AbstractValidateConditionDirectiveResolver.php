@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -80,8 +80,8 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
-            FeedbackItemProvider::class,
-            $this->isValidatingDirective() ? FeedbackItemProvider::E18 : FeedbackItemProvider::E19,
+            ErrorFeedbackItemProvider::class,
+            $this->isValidatingDirective() ? ErrorFeedbackItemProvider::E18 : ErrorFeedbackItemProvider::E19,
             [
                 implode(
                     $this->__('\', \''),

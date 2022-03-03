@@ -31,6 +31,11 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
             // Check that the logged in user has not already recommended this post
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
             if (in_array($target_id, $value)) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = sprintf(
                     $this->__('You have already down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $this->getCustomPostTypeAPI()->getTitle($target_id)

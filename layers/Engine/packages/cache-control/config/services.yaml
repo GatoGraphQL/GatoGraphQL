@@ -9,3 +9,6 @@ services:
 
     PoP\CacheControl\Managers\CacheControlManagerInterface:
         class: \PoP\CacheControl\Managers\CacheControlManager
+
+    PoP\CacheControl\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

@@ -21,15 +21,30 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         // Validate that the referenced post has been added (protection against hacking)
         // For highlights, we only add 1 reference, and not more.
         if (!$form_data['highlightedpost']) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('No post has been highlighted', 'poptheme-wassup');
         } else {
             // Highlights have no title input by the user. Instead, produce the title from the referenced post
             $referenced = $this->getCustomPostTypeAPI()->getCustomPost($form_data['highlightedpost']);
             if (!$referenced) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $this->__('The highlighted post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
                 if ($this->getCustomPostTypeAPI()->getStatus($referenced) != CustomPostStatus::PUBLISH) {
+                    // @todo Migrate from string to FeedbackItemProvider
+                    // $errors[] = new FeedbackItemResolution(
+                    //     MutationErrorFeedbackItemProvider::class,
+                    //     MutationErrorFeedbackItemProvider::E1,
+                    // );
                     $errors[] = $this->__('The highlighted post is not published yet', 'poptheme-wassup');
                 }
             }

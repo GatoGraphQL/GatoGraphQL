@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
+use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
@@ -72,6 +74,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $this->customPostTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
     }
 
+    /**
+     * @return FeedbackItemResolution[]
+     */
     protected function validateCreateErrors(array $form_data): array
     {
         $errors = [];
@@ -94,6 +99,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $errors;
     }
 
+    /**
+     * @return FeedbackItemResolution[]
+     */
     protected function validateUpdateErrors(array $form_data): array
     {
         $errors = [];
@@ -116,11 +124,15 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $errors;
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateCreateUpdateErrors(array &$errors, array $form_data): void
     {
         // Check that the user is logged-in
-        $this->validateUserIsLoggedIn($errors);
-        if ($errors) {
+        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
+        if ($errorFeedbackItemResolution !== null) {
+            $errors[] = $errorFeedbackItemResolution;
             return;
         }
 
@@ -134,7 +146,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
                 $editCustomPostsCapability
             )
         ) {
-            $errors[] = $this->__('Your user doesn\'t have permission for editing custom posts.', 'custompost-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E2,
+            );
             return;
         }
 
@@ -147,26 +162,38 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
                     $publishCustomPostsCapability
                 )
             ) {
-                $errors[] = $this->__('Your user doesn\'t have permission for publishing custom posts.', 'custompost-mutations');
+                $errors[] = new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E3,
+                );
                 return;
             }
         }
     }
 
-    protected function getUserNotLoggedInErrorMessage(): string
+    protected function getUserNotLoggedInErrorMessage(): FeedbackItemResolution
     {
-        return $this->__('You must be logged in to create or update custom posts', 'custompost-mutations');
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E1,
+        );
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateContent(array &$errors, array $form_data): void
     {
         // Validate that the status is valid
         if (isset($form_data[MutationInputProperties::STATUS])) {
             $status = $form_data[MutationInputProperties::STATUS];
             if (!in_array($status, $this->getCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues())) {
-                $errors[] = sprintf(
-                    $this->__('Status \'%s\' is not supported', 'custompost-mutations'),
-                    $status
+                $errors[] = new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E5,
+                    [
+                        $status
+                    ]
                 );
             }
         }
@@ -179,13 +206,23 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         );
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateCreateContent(array &$errors, array $form_data): void
     {
     }
+
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateUpdateContent(array &$errors, array $form_data): void
     {
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateCreate(array &$errors, array $form_data): void
     {
         // Either the title or the content must be set
@@ -193,10 +230,16 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             !isset($form_data[MutationInputProperties::TITLE])
             && !isset($form_data[MutationInputProperties::CONTENT])
         ) {
-            $errors[] = $this->__('Either the title, or the content, must be provided', 'custompost-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E4,
+            );
         }
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateUpdate(array &$errors, array $form_data): void
     {
 

@@ -32,6 +32,7 @@ class Component extends AbstractComponent
         bool $skipSchema,
         array $skipSchemaComponentClasses,
     ): void {
+        $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }

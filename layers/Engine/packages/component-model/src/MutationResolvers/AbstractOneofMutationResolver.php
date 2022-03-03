@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\MutationResolvers;
 
 use PoP\ComponentModel\Exception\QueryResolutionException;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use stdClass;
@@ -133,6 +135,10 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         /** @var stdClass $inputFieldFormData */
         return $inputFieldMutationResolver->executeMutation((array)$inputFieldFormData);
     }
+
+    /**
+     * @return FeedbackItemResolution[]
+     */
     final public function validateErrors(array $form_data): array
     {
         try {
@@ -142,9 +148,21 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
             return $inputFieldMutationResolver->validateErrors((array)$inputFieldFormData);
         } catch (QueryResolutionException $e) {
             // Return the error message from the exception
-            return [$e->getMessage()];
+            return [
+                new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E1,
+                    [
+                        $e->getMessage(),
+                    ]
+                ),
+            ];
         }
     }
+
+    /**
+     * @return FeedbackItemResolution[]
+     */
     final public function validateWarnings(array $form_data): array
     {
         try {

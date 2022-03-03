@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\MutationResolvers;
 
-use PoP\Root\Exception\AbstractException;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Root\Exception\AbstractException;
+use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
@@ -31,18 +33,22 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
 
     public function validateErrors(array $form_data): array
     {
-        $errors = [];
-
         // Check that the user is logged-in
-        $this->validateUserIsLoggedIn($errors);
-        if ($errors) {
-            return $errors;
+        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
+        if ($errorFeedbackItemResolution !== null) {
+            return [
+                $errorFeedbackItemResolution,
+            ];
         }
 
-        if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
-            $errors[] = sprintf(
-                $this->__('The %s ID is missing.', 'custompost-tag-mutations'),
-                $this->getEntityName()
+        $errors = [];
+        if (!($form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null)) {
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E1,
+                [
+                    $this->getEntityName(),
+                ]
             );
         }
         return $errors;

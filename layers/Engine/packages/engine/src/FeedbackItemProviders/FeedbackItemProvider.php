@@ -14,6 +14,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public const E3 = 'e3';
     public const E4 = 'e4';
     public const E5 = 'e5';
+    public const E6 = 'e6';
 
     /**
      * @return string[]
@@ -26,6 +27,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E3,
             self::E4,
             self::E5,
+            self::E6,
         ];
     }
 
@@ -37,6 +39,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E3 => $this->__('The value for field \'%s\' (under property \'%s\') is not an array, so execution of this directive can\'t continue', 'engine'),
             self::E4 => $this->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'engine'),
             self::E5 => $this->__('No composed directives were provided to \'%s\'', 'engine'),
+            self::E6 => $this->__('There is no property \'%s\' in the application state', 'engine'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -48,7 +51,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E2,
             self::E3,
             self::E4,
-            self::E5
+            self::E5,
+            self::E6
                 => FeedbackCategories::ERROR,
             default
                 => parent::getCategory($code),

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
-use PoP\Root\App;
-use PoP\ComponentModel\Component;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\Root\Translation\TranslationAPIInterface;
@@ -29,39 +28,26 @@ trait FieldOrDirectiveResolverTrait
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
         string $type
-    ): ?string {
+    ): ?FeedbackItemResolution {
         $missing = array_values(array_filter(
             $mandatoryFieldOrDirectiveArgNames,
             fn (string $fieldArgName) => !isset($fieldOrDirectiveArgs[$fieldArgName])
         ));
         if ($missing !== []) {
-            /** @var ComponentConfiguration */
-            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-            $treatUndefinedFieldOrDirectiveArgsAsErrors = $componentConfiguration->treatUndefinedFieldOrDirectiveArgsAsErrors();
-            $errorMessage = count($missing) == 1 ?
-                sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%1$s\' cannot be empty', 'component-model'),
-                    $missing[0]
-                ) :
-                sprintf(
-                    $this->getTranslationAPI()->__('Arguments \'%1$s\' cannot be empty', 'component-model'),
-                    implode($this->getTranslationAPI()->__('\', \''), $missing)
-                );
-            if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
-                return $errorMessage;
-            }
-            return count($missing) == 1 ?
-                sprintf(
-                    $this->getTranslationAPI()->__('%s, so %2$s \'%3$s\' has been ignored', 'component-model'),
-                    $errorMessage,
-                    $type == ResolverTypes::FIELD ? $this->getTranslationAPI()->__('field', 'component-model') : $this->getTranslationAPI()->__('directive', 'component-model'),
-                    $fieldOrDirectiveName
-                ) :
-                sprintf(
-                    $this->getTranslationAPI()->__('%s, so %2$s \'%3$s\' has been ignored', 'component-model'),
-                    $errorMessage,
-                    $type == ResolverTypes::FIELD ? $this->getTranslationAPI()->__('field', 'component-model') : $this->getTranslationAPI()->__('directive', 'component-model'),
-                    $fieldOrDirectiveName
+            return count($missing) === 1 ?
+                new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E24,
+                    [
+                        $missing[0],
+                    ]
+                )
+                : new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E25,
+                    [
+                        implode($this->getTranslationAPI()->__('\', \''), $missing),
+                    ]
                 );
         }
         return null;

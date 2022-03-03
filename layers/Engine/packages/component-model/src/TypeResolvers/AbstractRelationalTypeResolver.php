@@ -13,7 +13,7 @@ use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -250,8 +250,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
                             new FeedbackItemResolution(
-                                FeedbackItemProvider::class,
-                                FeedbackItemProvider::E20,
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E20,
                                 [
                                     $directiveName,
                                 ]
@@ -271,8 +271,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
                             new FeedbackItemResolution(
-                                FeedbackItemProvider::class,
-                                FeedbackItemProvider::E21,
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E21,
                                 [
                                     $directiveName,
                                     json_encode($directiveArgs),
@@ -297,8 +297,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
                             new FeedbackItemResolution(
-                                FeedbackItemProvider::class,
-                                FeedbackItemProvider::E22,
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E22,
                                 [
                                     $directiveName,
                                     json_encode($directiveArgs),
@@ -355,18 +355,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
 
                 // Validate against the directiveResolver
-                if ($maybeErrors = $directiveResolverInstance->resolveDirectiveValidationErrorDescriptions($this, $directiveName, $directiveArgs)) {
-                    foreach ($maybeErrors as $error) {
+                if ($maybeErrorFeedbackItemResolutions = $directiveResolverInstance->resolveDirectiveValidationErrorDescriptions($this, $directiveName, $directiveArgs)) {
+                    foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                         foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
                             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                                 new SchemaFeedback(
-                                    new FeedbackItemResolution(
-                                        GenericFeedbackItemProvider::class,
-                                        GenericFeedbackItemProvider::E1,
-                                        [
-                                            $error,
-                                        ]
-                                    ),
+                                    $errorFeedbackItemResolution,
                                     LocationHelper::getNonSpecificLocation(),
                                     $this,
                                     $field,
@@ -440,8 +434,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                             new SchemaFeedback(
                                 new FeedbackItemResolution(
-                                    FeedbackItemProvider::class,
-                                    FeedbackItemProvider::E23,
+                                    ErrorFeedbackItemProvider::class,
+                                    ErrorFeedbackItemProvider::E23,
                                     [
                                         $fieldDirective,
                                         implode('\', \'', $alreadyProcessingFields),
@@ -602,8 +596,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string | int $objectID): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
-            FeedbackItemProvider::class,
-            FeedbackItemProvider::E9,
+            ErrorFeedbackItemProvider::class,
+            ErrorFeedbackItemProvider::E9,
             [
                 $this->getMaybeNamespacedTypeName(),
                 $objectID

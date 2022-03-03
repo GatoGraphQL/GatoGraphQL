@@ -15,20 +15,45 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
     {
         $errors = [];
         if (empty($form_data['name'])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
         if (empty($form_data['email'])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
         if (empty($form_data['target-url'])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('The shared-page URL cannot be empty.', 'pop-genericforms');
         }
 
         if (empty($form_data['target-title'])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('The shared-page title cannot be empty.', 'pop-genericforms');
         }
         return $errors;
