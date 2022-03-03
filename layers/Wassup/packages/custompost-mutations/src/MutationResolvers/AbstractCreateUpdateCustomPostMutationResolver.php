@@ -139,11 +139,19 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateUpdateContent(array &$errors, array $form_data): void
     {
         parent::validateUpdateContent($errors, $form_data);
 
         if (isset($form_data[MutationInputProperties::REFERENCES]) && in_array($form_data[MutationInputProperties::ID], $form_data[MutationInputProperties::REFERENCES])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('The post cannot be a response to itself', 'pop-postscreation');
         }
     }

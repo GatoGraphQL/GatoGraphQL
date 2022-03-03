@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\EditUsers\FunctionAPIFactory;
 use PoP\Root\App;
@@ -150,6 +151,9 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateUpdateContent(array &$errors, array $form_data): void
     {
         $user_id = $form_data['user_id'];
@@ -157,6 +161,11 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
         $email_user_id = email_exists($user_email);
         if ($email_user_id && $email_user_id !== $user_id) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('That email address already exists in our system!', 'pop-application');
         }
     }
