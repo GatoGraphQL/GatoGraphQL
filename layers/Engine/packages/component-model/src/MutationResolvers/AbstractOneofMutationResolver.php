@@ -135,7 +135,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         /** @var stdClass $inputFieldFormData */
         return $inputFieldMutationResolver->executeMutation((array)$inputFieldFormData);
     }
-    
+
     /**
      * @return FeedbackItemResolution[]
      */

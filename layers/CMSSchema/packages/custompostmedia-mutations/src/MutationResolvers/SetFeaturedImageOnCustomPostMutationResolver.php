@@ -47,7 +47,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
                 $errorFeedbackItemResolution,
             ];
         }
-        
+
         $errors = [];
         if (!($form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null)) {
             $errors[] = new FeedbackItemResolution(

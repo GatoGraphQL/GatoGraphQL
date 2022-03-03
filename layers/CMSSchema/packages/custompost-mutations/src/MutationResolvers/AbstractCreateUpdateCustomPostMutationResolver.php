@@ -212,7 +212,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     protected function validateCreateContent(array &$errors, array $form_data): void
     {
     }
-    
+
     /**
      * @param FeedbackItemResolution[] $errors
      */
