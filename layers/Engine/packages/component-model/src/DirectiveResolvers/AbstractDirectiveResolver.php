@@ -256,23 +256,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          */
         if (!$engineIterationFeedbackStore->hasErrors()) {
             if (
-                $maybeErrors = $this->resolveDirectiveArgumentErrors(
+                $maybeErrorFeedbackItemResolutions = $this->resolveDirectiveArgumentErrors(
                     $relationalTypeResolver,
                     $directiveName,
                     $directiveArgs
                 )
             ) {
                 foreach ($fields as $field) {
-                    foreach ($maybeErrors as $errorMessage) {
+                    foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                         $engineIterationFeedbackStore->objectFeedbackStore->addError(
                             new ObjectFeedback(
-                                new FeedbackItemResolution(
-                                    GenericFeedbackItemProvider::class,
-                                    GenericFeedbackItemProvider::E1,
-                                    [
-                                        $errorMessage,
-                                    ]
-                                ),
+                                $errorFeedbackItemResolution,
                                 LocationHelper::getNonSpecificLocation(),
                                 $relationalTypeResolver,
                                 $field,
@@ -384,13 +378,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * Validate directive argument constraints
              */
             if (
-                $maybeErrors = $this->resolveDirectiveArgumentErrors(
+                $maybeErrorFeedbackItemResolutions = $this->resolveDirectiveArgumentErrors(
                     $relationalTypeResolver,
                     $directiveName,
                     $directiveArgs
                 )
             ) {
-                return $maybeErrors;
+                return $maybeErrorFeedbackItemResolutions;
             }
         }
 
