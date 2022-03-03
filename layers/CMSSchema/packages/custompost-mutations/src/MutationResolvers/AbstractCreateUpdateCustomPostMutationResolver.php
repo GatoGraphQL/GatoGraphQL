@@ -121,8 +121,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     protected function validateCreateUpdateErrors(array &$errors, array $form_data): void
     {
         // Check that the user is logged-in
-        $this->validateUserIsLoggedIn($errors);
-        if ($errors) {
+        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
+        if ($errorFeedbackItemResolution !== null) {
+            $errors[] = $errorFeedbackItemResolution;
             return;
         }
 

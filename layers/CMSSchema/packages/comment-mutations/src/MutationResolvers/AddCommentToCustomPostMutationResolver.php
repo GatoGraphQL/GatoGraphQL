@@ -61,9 +61,11 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
-            $this->validateUserIsLoggedIn($errors);
-            if ($errors) {
-                return $errors;
+            $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
+            if ($errorFeedbackItemResolution !== null) {
+                return [
+                    $errorFeedbackItemResolution,
+                ];
             }
         } elseif ($componentConfiguration->requireCommenterNameAndEmail()) {
             // Validate if the commenter's name and email are mandatory

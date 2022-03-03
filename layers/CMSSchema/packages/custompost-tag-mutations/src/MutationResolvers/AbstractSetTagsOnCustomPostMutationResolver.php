@@ -31,14 +31,15 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
 
     public function validateErrors(array $form_data): array
     {
-        $errors = [];
-
         // Check that the user is logged-in
-        $this->validateUserIsLoggedIn($errors);
-        if ($errors) {
-            return $errors;
+        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
+        if ($errorFeedbackItemResolution !== null) {
+            return [
+                $errorFeedbackItemResolution,
+            ];
         }
-
+        
+        $errors = [];
         if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
             $errors[] = sprintf(
                 $this->__('The %s ID is missing.', 'custompost-tag-mutations'),

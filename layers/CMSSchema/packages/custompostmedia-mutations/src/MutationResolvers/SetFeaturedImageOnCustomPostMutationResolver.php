@@ -38,14 +38,15 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
 
     public function validateErrors(array $form_data): array
     {
-        $errors = [];
-
         // Check that the user is logged-in
-        $this->validateUserIsLoggedIn($errors);
-        if ($errors) {
-            return $errors;
+        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
+        if ($errorFeedbackItemResolution !== null) {
+            return [
+                $errorFeedbackItemResolution,
+            ];
         }
-
+        
+        $errors = [];
         if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
             $errors[] = $this->__('The custom post ID is missing.', 'custompostmedia-mutations');
         }
