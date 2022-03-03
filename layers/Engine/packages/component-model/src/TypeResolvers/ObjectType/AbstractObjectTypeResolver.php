@@ -210,7 +210,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return;
         }
 
-        $executableObjectTypeFieldResolver->collectFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
+        $executableObjectTypeFieldResolver->collectFieldValidationErrors($this, $fieldName, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
     }
 
     final public function collectFieldValidationWarningQualifiedEntries(
@@ -456,7 +456,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
             if ($validateSchemaOnObject) {
                 $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-                $objectTypeFieldResolver->collectFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+                $objectTypeFieldResolver->collectFieldValidationErrors($this, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
                 $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
                 $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
                 if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
