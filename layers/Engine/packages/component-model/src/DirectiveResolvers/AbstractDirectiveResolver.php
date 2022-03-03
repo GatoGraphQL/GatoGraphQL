@@ -369,14 +369,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             ARRAY_FILTER_USE_KEY
         ));
         if (
-            $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+            $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
                 $mandatoryConsolidatedDirectiveArgNames,
                 $directiveName,
                 $directiveArgs,
                 ResolverTypes::DIRECTIVE
             )
         ) {
-            return [$maybeError];
+            return [$maybeErrorFeedbackItemResolution];
         }
 
         if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
@@ -404,6 +404,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * Validate the constraints for the directive arguments
+     *
+     * @return FeedbackItemResolution[] Errors
      */
     final protected function resolveDirectiveArgumentErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -431,6 +433,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * Validate the constraints for a directive argument
+     *
+     * @return FeedbackItemResolution[] Errors
      */
     protected function validateDirectiveArgValue(
         RelationalTypeResolverInterface $relationalTypeResolver,

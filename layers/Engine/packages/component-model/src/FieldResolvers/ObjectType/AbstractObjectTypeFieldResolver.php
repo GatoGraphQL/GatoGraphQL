@@ -700,7 +700,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             ARRAY_FILTER_USE_KEY
         ));
         if (
-            $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+            $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
                 $mandatoryConsolidatedFieldArgNames,
                 $fieldName,
                 $fieldArgs,
@@ -709,13 +709,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        GenericFeedbackItemProvider::class,
-                        GenericFeedbackItemProvider::E1,
-                        [
-                            $maybeError,
-                        ]
-                    ),
+                    $maybeErrorFeedbackItemResolution,
                     LocationHelper::getNonSpecificLocation(),
                     $objectTypeResolver,
                 )
