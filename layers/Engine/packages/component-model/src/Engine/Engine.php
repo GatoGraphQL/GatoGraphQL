@@ -1710,18 +1710,30 @@ class Engine implements EngineInterface
             App::getFeedbackStore()->regenerateSchemaFeedbackStore();
         }
 
-        $ret = [
-            Response::GENERAL_FEEDBACK => [],
-            Response::DOCUMENT_FEEDBACK => [],
-            Response::OBJECT_FEEDBACK => [],
-            Response::SCHEMA_FEEDBACK => [],
-        ];
+        // Print data into the output
+        $ret = [];
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
 
-        // Add the feedback (errors, warnings, deprecations) into the output
-        $generalFeedbackStore = App::getFeedbackStore()->generalFeedbackStore;
-        if ($generalErrors = $generalFeedbackStore->getErrors()) {
-            $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
-        }
+        // Add the feedback (errors, warnings, deprecations, notices, etc) into the output
+        $this->addFeedbackEntries($ret, $objectFeedbackEntries, $schemaFeedbackEntries);
+
+        return $ret;
+    }
+
+    /**
+     * Add the feedback (errors, warnings, deprecations, notices, etc)
+     * into the output.
+     */
+    protected function addFeedbackEntries(
+        array &$ret,
+        array $objectFeedbackEntries,
+        array $schemaFeedbackEntries,
+    ): void {
+        $ret[Response::GENERAL_FEEDBACK] = [];
+        $ret[Response::DOCUMENT_FEEDBACK] = [];
+        $ret[Response::OBJECT_FEEDBACK] = [];
+        $ret[Response::SCHEMA_FEEDBACK] = [];
 
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
@@ -1732,14 +1744,16 @@ class Engine implements EngineInterface
         $sendFeedbackSuggestions = in_array(FeedbackCategories::SUGGESTION, $enabledFeedbackCategoryExtensions);
         $sendFeedbackLogs = in_array(FeedbackCategories::LOG, $enabledFeedbackCategoryExtensions);
 
-        if ($sendFeedbackWarnings) {
-            if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
-                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
-            }
+        // Errors
+        $generalFeedbackStore = App::getFeedbackStore()->generalFeedbackStore;
+        if ($generalErrors = $generalFeedbackStore->getErrors()) {
+            $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
         }
-
         $documentFeedbackStore = App::getFeedbackStore()->documentFeedbackStore;
-
+        if ($documentErrors = $documentFeedbackStore->getErrors()) {
+            $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] = $this->getDocumentFeedbackEntriesForOutput($documentErrors);
+        }
+        // @todo Remove alongside FeedbackMessageStore!
         if ($queryErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
             $queryDocumentErrors = [];
             foreach ($queryErrors as $message => $extensions) {
@@ -1755,44 +1769,70 @@ class Engine implements EngineInterface
                 }
                 $queryDocumentErrors[] = $queryDocumentError;
             }
-            $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] = $queryDocumentErrors;
-        }
-        if ($documentErrors = $documentFeedbackStore->getErrors()) {
             $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] = array_merge(
                 $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? [],
-                $this->getDocumentFeedbackEntriesForOutput($documentErrors)
+                $queryDocumentErrors
             );
         }
-        if ($sendFeedbackWarnings) {
-            if ($documentWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
-                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] = $documentWarnings;
-            }
-            if ($documentWarnings = $documentFeedbackStore->getWarnings()) {
-                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] = array_merge(
-                    $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? [],
-                    $this->getDocumentFeedbackEntriesForOutput($documentWarnings)
-                );
-            }
-        }
-        $ret[Response::OBJECT_FEEDBACK] = $ret[Response::SCHEMA_FEEDBACK] = [];
         $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::ERROR, $objectFeedbackEntries[FeedbackCategories::ERROR]);
         $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::ERROR, $schemaFeedbackEntries[FeedbackCategories::ERROR]);
+
+        // Warnings
         if ($sendFeedbackWarnings) {
+            if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
+                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
+            }
+            if ($documentWarnings = $documentFeedbackStore->getWarnings()) {
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] = $this->getDocumentFeedbackEntriesForOutput($documentWarnings);
+            }
+            // @todo Remove alongside FeedbackMessageStore!
+            if ($documentWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] = array_merge(
+                    $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? [],
+                    $documentWarnings
+                );
+            }
             $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::WARNING, $objectFeedbackEntries[FeedbackCategories::WARNING]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::WARNING, $schemaFeedbackEntries[FeedbackCategories::WARNING]);
         }
+
+        // Deprecations
         if ($sendFeedbackDeprecations) {
+            if ($generalDeprecations = $generalFeedbackStore->getDeprecations()) {
+                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::DEPRECATION] = $this->getGeneralFeedbackEntriesForOutput($generalDeprecations);
+            }
+            if ($documentDeprecations = $documentFeedbackStore->getDeprecations()) {
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::DEPRECATION] = $this->getDocumentFeedbackEntriesForOutput($documentDeprecations);
+            }
             $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::DEPRECATION, $objectFeedbackEntries[FeedbackCategories::DEPRECATION]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::DEPRECATION, $schemaFeedbackEntries[FeedbackCategories::DEPRECATION]);
         }
+
+        // Notices
         if ($sendFeedbackNotices) {
+            if ($generalNotices = $generalFeedbackStore->getNotices()) {
+                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::NOTICE] = $this->getGeneralFeedbackEntriesForOutput($generalNotices);
+            }
+            if ($documentNotices = $documentFeedbackStore->getNotices()) {
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::NOTICE] = $this->getDocumentFeedbackEntriesForOutput($documentNotices);
+            }
             $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::NOTICE, $objectFeedbackEntries[FeedbackCategories::NOTICE]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::NOTICE, $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
         }
+
+        // Suggestions
         if ($sendFeedbackSuggestions) {
+            if ($generalSuggestions = $generalFeedbackStore->getSuggestions()) {
+                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::SUGGESTION] = $this->getGeneralFeedbackEntriesForOutput($generalSuggestions);
+            }
+            if ($documentSuggestions = $documentFeedbackStore->getSuggestions()) {
+                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::SUGGESTION] = $this->getDocumentFeedbackEntriesForOutput($documentSuggestions);
+            }
             $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::SUGGESTION, $objectFeedbackEntries[FeedbackCategories::SUGGESTION]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::SUGGESTION, $schemaFeedbackEntries[FeedbackCategories::SUGGESTION]);
         }
+
+        // Logs
         if ($sendFeedbackLogs) {
             if ($generalLogs = $generalFeedbackStore->getLogs()) {
                 $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] = $this->getGeneralFeedbackEntriesForOutput($generalLogs);
@@ -1803,10 +1843,6 @@ class Engine implements EngineInterface
             $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::LOG, $schemaFeedbackEntries[FeedbackCategories::LOG]);
         }
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
-
-        return $ret;
     }
 
     protected function addObjectEntriesToDestinationArray(
