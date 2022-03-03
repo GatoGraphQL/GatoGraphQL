@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\Exception\AbstractException;
 
 interface MutationResolverInterface
@@ -17,7 +18,7 @@ interface MutationResolverInterface
      */
     public function executeMutation(array $form_data): mixed;
     /**
-     * @return string[]
+     * @return FeedbackItemResolution[]
      */
     public function validateErrors(array $form_data): array;
     /**

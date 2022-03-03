@@ -747,17 +747,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
             $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
-            $maybeErrors = $mutationResolver->validateErrors($mutationFieldArgs);
-            foreach ($maybeErrors as $error) {
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationFieldArgs);
+            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::E1,
-                            [
-                                $error,
-                            ]
-                        ),
+                        $errorFeedbackItemResolution,
                         LocationHelper::getNonSpecificLocation(),
                         $objectTypeResolver,
                     )
@@ -1134,17 +1128,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $object,
                 $fieldName
             );
-            $maybeErrors = $mutationResolver->validateErrors($mutationFieldArgs);
-            foreach ($maybeErrors as $error) {
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationFieldArgs);
+            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::E1,
-                            [
-                                $error,
-                            ]
-                        ),
+                        $errorFeedbackItemResolution,
                         LocationHelper::getNonSpecificLocation(),
                         $objectTypeResolver,
                     )
