@@ -15,7 +15,6 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
-use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -176,33 +175,27 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              */
             $useSemanticVersionConstraints = Environment::enableSemanticVersionConstraints()
                 && ($versionConstraint = $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null);
-            $errorMessage = $useSemanticVersionConstraints
-                ? sprintf(
-                    $this->__(
-                        'There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'',
-                        'component-model'
-                    ),
-                    $fieldName,
-                    $this->getMaybeNamespacedTypeName(),
-                    $versionConstraint,
+            $feedbackItemResolution = $useSemanticVersionConstraints
+                ? new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E26,
+                    [
+                        $fieldName,
+                        $this->getMaybeNamespacedTypeName(),
+                        $versionConstraint,
+                    ]
                 )
-                : sprintf(
-                    $this->__(
-                        'There is no field \'%s\' on type \'%s\'',
-                        'component-model'
-                    ),
-                    $fieldName,
-                    $this->getMaybeNamespacedTypeName()
+                : new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E27,
+                    [
+                        $fieldName,
+                        $this->getMaybeNamespacedTypeName(),
+                    ]
                 );
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        GenericFeedbackItemProvider::class,
-                        GenericFeedbackItemProvider::E1,
-                        [
-                            $errorMessage,
-                        ]
-                    ),
+                    $feedbackItemResolution,
                     LocationHelper::getNonSpecificLocation(),
                     $this,
                 )

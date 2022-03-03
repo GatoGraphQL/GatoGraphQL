@@ -13,8 +13,8 @@ use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
+use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -391,9 +391,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
                             new SchemaFeedback(
                                 new FeedbackItemResolution(
-                                    GenericFeedbackItemProvider::class,
-                                    GenericFeedbackItemProvider::D1,
+                                    DeprecationFeedbackItemProvider::class,
+                                    DeprecationFeedbackItemProvider::D1,
                                     [
+                                        $directiveName,
                                         $deprecationMessage,
                                     ]
                                 ),

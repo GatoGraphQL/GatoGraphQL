@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\Component;
 use PoP\Engine\ComponentConfiguration;
-use PoP\Engine\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\Root\App;
 
@@ -122,8 +122,8 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
                     if (!App::hasState($fieldArgs['name'])) {
                         return [
                             new FeedbackItemResolution(
-                                FeedbackItemProvider::class,
-                                FeedbackItemProvider::E6,
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E6,
                                 [
                                     $fieldArgs['name'],
                                 ]
