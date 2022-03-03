@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
-use PoP\Root\Exception\AbstractException;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Root\Exception\AbstractException;
+use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
@@ -47,11 +49,17 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
         }
         
         $errors = [];
-        if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
-            $errors[] = $this->__('The custom post ID is missing.', 'custompostmedia-mutations');
+        if (!($form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null)) {
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E1,
+            );
         }
-        if (!$form_data[MutationInputProperties::MEDIA_ITEM_ID]) {
-            $errors[] = $this->__('The media item ID is missing.', 'custompostmedia-mutations');
+        if (!($form_data[MutationInputProperties::MEDIA_ITEM_ID] ?? null)) {
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E2,
+            );
         }
         return $errors;
     }
