@@ -9,7 +9,7 @@ use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Facades\Query\QueryAugmenterServiceFacade;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument as UpstreamExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
-use PoP\ComponentModel\App;
+use PoP\Root\App;
 
 class ExecutableDocument extends UpstreamExecutableDocument
 {
