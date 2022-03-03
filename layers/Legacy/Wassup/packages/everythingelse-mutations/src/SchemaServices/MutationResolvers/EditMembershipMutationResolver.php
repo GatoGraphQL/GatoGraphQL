@@ -91,6 +91,11 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         $errors = [];
         $user_id = $form_data['user_id'];
         if (!$user_id) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The user is missing', 'ure-pop');
             return $errors;
         }
@@ -103,6 +108,11 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
 
         $status = $form_data['status'];
         if (!$status) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The status has not been set', 'ure-pop');
         }
         return $errors;

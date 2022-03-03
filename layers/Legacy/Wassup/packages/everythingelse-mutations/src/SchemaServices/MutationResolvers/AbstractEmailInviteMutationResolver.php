@@ -54,6 +54,11 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
 
         $emails = $form_data['emails'];
         if (empty($emails)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('Email(s) cannot be empty.', 'pop-coreprocessors');
         }
 

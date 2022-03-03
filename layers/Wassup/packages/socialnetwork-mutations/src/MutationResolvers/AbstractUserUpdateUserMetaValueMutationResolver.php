@@ -30,6 +30,11 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
             // Make sure the user exists
             $target = $this->getUserTypeAPI()->getUserById($target_id);
             if (!$target) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $this->__('The requested user does not exist.', 'pop-coreprocessors');
             }
         }
