@@ -118,6 +118,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $errors;
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateCreateUpdateErrors(array &$errors, array $form_data): void
     {
         // Check that the user is logged-in
@@ -137,7 +140,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
                 $editCustomPostsCapability
             )
         ) {
-            $errors[] = $this->__('Your user doesn\'t have permission for editing custom posts.', 'custompost-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E2,
+            );
             return;
         }
 
@@ -150,7 +156,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
                     $publishCustomPostsCapability
                 )
             ) {
-                $errors[] = $this->__('Your user doesn\'t have permission for publishing custom posts.', 'custompost-mutations');
+                $errors[] = new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E3,
+                );
                 return;
             }
         }
