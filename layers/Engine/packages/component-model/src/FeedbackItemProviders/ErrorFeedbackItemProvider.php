@@ -34,6 +34,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public const E23 = 'e23';
     public const E24 = 'e24';
     public const E25 = 'e25';
+    public const E26 = 'e26';
+    public const E27 = 'e27';
 
     /**
      * @return string[]
@@ -66,6 +68,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E23,
             self::E24,
             self::E25,
+            self::E26,
+            self::E27,
         ];
     }
 
@@ -97,6 +101,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E23 => $this->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
             self::E24 => $this->__('Argument \'%1$s\' cannot be empty', 'component-model'),
             self::E25 => $this->__('Arguments \'%1$s\' cannot be empty', 'component-model'),
+            self::E26 => $this->__('There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'', 'component-model'),
+            self::E27 => $this->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
