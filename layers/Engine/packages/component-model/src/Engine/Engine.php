@@ -1942,6 +1942,21 @@ class Engine implements EngineInterface
             $objectIDItems
         );
 
+        $iterationObjectSuggestions = [];
+        foreach ($objectFeedbackStore->getSuggestions() as $objectFeedbackSuggestion) {
+            $this->transferObjectFeedbackEntries(
+                $objectFeedbackSuggestion,
+                $iterationObjectSuggestions,
+            );
+        }
+        $this->addObjectEntriesToDestinationArray(
+            $iterationObjectSuggestions,
+            $objectFeedbackEntries[FeedbackCategories::SUGGESTION],
+            $relationalTypeResolver,
+            $database_key,
+            $objectIDItems
+        );
+
         $iterationObjectLogs = [];
         foreach ($objectFeedbackStore->getLogs() as $objectFeedbackLog) {
             $this->transferObjectFeedbackEntries(
@@ -2033,6 +2048,20 @@ class Engine implements EngineInterface
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaNotices,
             $schemaFeedbackEntries[FeedbackCategories::NOTICE],
+            $relationalTypeResolver,
+            $database_key,
+        );
+
+        $iterationSchemaSuggestions = [];
+        foreach ($schemaFeedbackStore->getSuggestions() as $schemaFeedbackSuggestion) {
+            $this->transferSchemaFeedbackEntries(
+                $schemaFeedbackSuggestion,
+                $iterationSchemaSuggestions,
+            );
+        }
+        $this->addSchemaEntriesToDestinationArray(
+            $iterationSchemaSuggestions,
+            $schemaFeedbackEntries[FeedbackCategories::SUGGESTION],
             $relationalTypeResolver,
             $database_key,
         );
