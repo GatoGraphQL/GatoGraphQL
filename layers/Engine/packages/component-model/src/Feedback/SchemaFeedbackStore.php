@@ -17,6 +17,8 @@ class SchemaFeedbackStore
     /** @var SchemaFeedbackInterface[] */
     private array $notices = [];
     /** @var SchemaFeedbackInterface[] */
+    private array $suggestions = [];
+    /** @var SchemaFeedbackInterface[] */
     private array $logs = [];
 
     public function incorporate(
@@ -37,6 +39,10 @@ class SchemaFeedbackStore
         $this->notices = array_merge(
             $this->notices,
             $schemaFeedbackStore->getNotices()
+        );
+        $this->suggestions = array_merge(
+            $this->suggestions,
+            $schemaFeedbackStore->getSuggestions()
         );
         $this->logs = array_merge(
             $this->logs,
@@ -77,6 +83,14 @@ class SchemaFeedbackStore
         foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
             $this->notices[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackNotice,
+                $relationalTypeResolver,
+                $field,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getSuggestions() as $objectTypeFieldResolutionFeedbackSuggestion) {
+            $this->suggestions[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackSuggestion,
                 $relationalTypeResolver,
                 $field,
                 $directive,
@@ -174,6 +188,27 @@ class SchemaFeedbackStore
     public function setNotices(array $notices): void
     {
         $this->notices = $notices;
+    }
+
+    /**
+     * @return SchemaFeedbackInterface[]
+     */
+    public function getSuggestions(): array
+    {
+        return $this->suggestions;
+    }
+
+    public function addSuggestion(SchemaFeedbackInterface $suggestion): void
+    {
+        $this->suggestions[] = $suggestion;
+    }
+
+    /**
+     * @param SchemaFeedbackInterface[] $suggestions
+     */
+    public function setSuggestions(array $suggestions): void
+    {
+        $this->suggestions = $suggestions;
     }
 
     /**

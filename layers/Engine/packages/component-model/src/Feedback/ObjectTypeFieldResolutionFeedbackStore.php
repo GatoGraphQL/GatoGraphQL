@@ -17,6 +17,8 @@ class ObjectTypeFieldResolutionFeedbackStore
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
     private array $notices = [];
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
+    private array $suggestions = [];
+    /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
     private array $logs = [];
 
     public function incorporate(
@@ -37,6 +39,10 @@ class ObjectTypeFieldResolutionFeedbackStore
         $this->notices = array_merge(
             $this->notices,
             $objectTypeFieldResolutionFeedbackStore->getNotices()
+        );
+        $this->suggestions = array_merge(
+            $this->suggestions,
+            $objectTypeFieldResolutionFeedbackStore->getSuggestions()
         );
         $this->logs = array_merge(
             $this->logs,
@@ -86,6 +92,16 @@ class ObjectTypeFieldResolutionFeedbackStore
                     $relationalTypeResolver,
                 ),
                 $schemaInputValidationFeedbackStore->getNotices()
+            )
+        );
+        $this->suggestions = array_merge(
+            $this->suggestions,
+            array_map(
+                fn ($schemaInputValidationFeedback) => ObjectTypeFieldResolutionFeedback::fromSchemaInputValidationFeedback(
+                    $schemaInputValidationFeedback,
+                    $relationalTypeResolver,
+                ),
+                $schemaInputValidationFeedbackStore->getSuggestions()
             )
         );
         $this->logs = array_merge(
@@ -182,6 +198,27 @@ class ObjectTypeFieldResolutionFeedbackStore
     public function setNotices(array $notices): void
     {
         $this->notices = $notices;
+    }
+
+    /**
+     * @return ObjectTypeFieldResolutionFeedbackInterface[]
+     */
+    public function getSuggestions(): array
+    {
+        return $this->suggestions;
+    }
+
+    public function addSuggestion(ObjectTypeFieldResolutionFeedbackInterface $suggestion): void
+    {
+        $this->suggestions[] = $suggestion;
+    }
+
+    /**
+     * @param ObjectTypeFieldResolutionFeedbackInterface[] $suggestions
+     */
+    public function setSuggestions(array $suggestions): void
+    {
+        $this->suggestions = $suggestions;
     }
 
     /**

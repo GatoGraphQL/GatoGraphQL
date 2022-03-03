@@ -15,6 +15,8 @@ class DocumentFeedbackStore
     /** @var DocumentFeedbackInterface[] */
     private array $notices = [];
     /** @var DocumentFeedbackInterface[] */
+    private array $suggestions = [];
+    /** @var DocumentFeedbackInterface[] */
     private array $logs = [];
 
     /**
@@ -99,6 +101,27 @@ class DocumentFeedbackStore
     public function setNotices(array $notices): void
     {
         $this->notices = $notices;
+    }
+
+    /**
+     * @return DocumentFeedbackInterface[]
+     */
+    public function getSuggestions(): array
+    {
+        return $this->suggestions;
+    }
+
+    public function addSuggestion(DocumentFeedbackInterface $suggestion): void
+    {
+        $this->suggestions[] = $suggestion;
+    }
+
+    /**
+     * @param DocumentFeedbackInterface[] $suggestions
+     */
+    public function setSuggestions(array $suggestions): void
+    {
+        $this->suggestions = $suggestions;
     }
 
     /**

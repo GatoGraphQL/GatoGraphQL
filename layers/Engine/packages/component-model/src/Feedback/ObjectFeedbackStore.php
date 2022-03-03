@@ -17,6 +17,8 @@ class ObjectFeedbackStore
     /** @var ObjectFeedbackInterface[] */
     private array $notices = [];
     /** @var ObjectFeedbackInterface[] */
+    private array $suggestions = [];
+    /** @var ObjectFeedbackInterface[] */
     private array $logs = [];
 
     public function incorporate(
@@ -37,6 +39,10 @@ class ObjectFeedbackStore
         $this->notices = array_merge(
             $this->notices,
             $objectFeedbackStore->getNotices()
+        );
+        $this->suggestions = array_merge(
+            $this->suggestions,
+            $objectFeedbackStore->getSuggestions()
         );
         $this->logs = array_merge(
             $this->logs,
@@ -81,6 +87,15 @@ class ObjectFeedbackStore
         foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
             $this->notices[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackNotice,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getSuggestions() as $objectTypeFieldResolutionFeedbackSuggestion) {
+            $this->suggestions[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackSuggestion,
                 $relationalTypeResolver,
                 $field,
                 $objectID,
@@ -180,6 +195,27 @@ class ObjectFeedbackStore
     public function setNotices(array $notices): void
     {
         $this->notices = $notices;
+    }
+
+    /**
+     * @return ObjectFeedbackInterface[]
+     */
+    public function getSuggestions(): array
+    {
+        return $this->suggestions;
+    }
+
+    public function addSuggestion(ObjectFeedbackInterface $suggestion): void
+    {
+        $this->suggestions[] = $suggestion;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $suggestions
+     */
+    public function setSuggestions(array $suggestions): void
+    {
+        $this->suggestions = $suggestions;
     }
 
     /**
