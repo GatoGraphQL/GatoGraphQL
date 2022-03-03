@@ -32,6 +32,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public const E21 = 'e21';
     public const E22 = 'e22';
     public const E23 = 'e23';
+    public const E24 = 'e24';
+    public const E25 = 'e25';
 
     /**
      * @return string[]
@@ -62,6 +64,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E21,
             self::E22,
             self::E23,
+            self::E24,
+            self::E25,
         ];
     }
 
@@ -91,6 +95,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E21 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'component-model'),
             self::E22 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'component-model'),
             self::E23 => $this->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
+            self::E24 => $this->__('Argument \'%1$s\' cannot be empty', 'component-model'),
+            self::E25 => $this->__('Arguments \'%1$s\' cannot be empty', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }

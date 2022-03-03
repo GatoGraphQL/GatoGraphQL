@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\Root\Translation\TranslationAPIInterface;
@@ -26,22 +28,27 @@ trait FieldOrDirectiveResolverTrait
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
         string $type
-    ): ?string {
+    ): ?FeedbackItemResolution {
         $missing = array_values(array_filter(
             $mandatoryFieldOrDirectiveArgNames,
             fn (string $fieldArgName) => !isset($fieldOrDirectiveArgs[$fieldArgName])
         ));
         if ($missing !== []) {
-            $errorMessage = count($missing) == 1 ?
-                sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%1$s\' cannot be empty', 'component-model'),
-                    $missing[0]
-                ) :
-                sprintf(
-                    $this->getTranslationAPI()->__('Arguments \'%1$s\' cannot be empty', 'component-model'),
-                    implode($this->getTranslationAPI()->__('\', \''), $missing)
+            return count($missing) === 1 ?
+                new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E24,
+                    [
+                        $missing[0],
+                    ]
+                )
+                : new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E25,
+                    [
+                        implode($this->getTranslationAPI()->__('\', \''), $missing),
+                    ]
                 );
-            return $errorMessage;
         }
         return null;
     }
