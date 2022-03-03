@@ -99,7 +99,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 
-    protected function getUserNotLoggedInErrorMessage(): FeedbackItemResolution
+    protected function getUserNotLoggedInError(): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,

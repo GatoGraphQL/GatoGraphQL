@@ -171,7 +171,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
     }
 
-    protected function getUserNotLoggedInErrorMessage(): FeedbackItemResolution
+    protected function getUserNotLoggedInError(): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
