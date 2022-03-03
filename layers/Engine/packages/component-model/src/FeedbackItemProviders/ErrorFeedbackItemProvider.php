@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FeedbackItemProviders;
 
-use PoP\ComponentModel\Constants\Constants;
-use PoP\ComponentModel\Constants\Params;
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 
