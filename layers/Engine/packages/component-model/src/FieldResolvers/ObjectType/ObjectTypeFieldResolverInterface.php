@@ -52,7 +52,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool;
-    public function collectFieldValidationErrorDescriptions(
+    public function collectFieldValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         array $fieldArgs,
@@ -104,7 +104,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     /**
      * @return FeedbackItemResolution[]
      */
-    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
+    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
     /**
      * @param array<string, mixed> $fieldArgs
      */
@@ -118,7 +118,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function collectValidationErrorDescriptions(
+    public function collectValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,

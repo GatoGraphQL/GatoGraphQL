@@ -41,7 +41,7 @@ class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
 
         $castInputValue = CastToType::_bool($inputValue);
         if ($castInputValue === null) {
-            $this->addDefaultErrorMessage($inputValue, $schemaInputValidationFeedbackStore);
+            $this->addDefaultError($inputValue, $schemaInputValidationFeedbackStore);
             return null;
         }
         return (bool) $castInputValue;

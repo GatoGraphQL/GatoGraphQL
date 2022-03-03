@@ -355,7 +355,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
 
                 // Validate against the directiveResolver
-                if ($maybeErrorFeedbackItemResolutions = $directiveResolverInstance->resolveDirectiveValidationErrorDescriptions($this, $directiveName, $directiveArgs)) {
+                if ($maybeErrorFeedbackItemResolutions = $directiveResolverInstance->resolveDirectiveValidationErrors($this, $directiveName, $directiveArgs)) {
                     foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                         foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
                             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
@@ -372,17 +372,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
 
                 // Check for warnings
-                if ($warningDescription = $directiveResolverInstance->resolveDirectiveWarningDescription($this)) {
+                if ($warningFeedbackItemResolution = $directiveResolverInstance->resolveDirectiveWarning($this)) {
                     foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
                         $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
                             new SchemaFeedback(
-                                new FeedbackItemResolution(
-                                    GenericFeedbackItemProvider::class,
-                                    GenericFeedbackItemProvider::W1,
-                                    [
-                                        $warningDescription,
-                                    ]
-                                ),
+                                $warningFeedbackItemResolution,
                                 LocationHelper::getNonSpecificLocation(),
                                 $this,
                                 $field,

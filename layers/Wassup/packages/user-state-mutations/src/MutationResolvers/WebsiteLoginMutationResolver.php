@@ -10,7 +10,7 @@ use PoPCMSSchema\UserStateMutations\MutationResolvers\LoginUserByCredentialsMuta
 
 class LoginUserByCredentialsMutationResolver extends UpstreamLoginUserByCredentialsMutationResolver
 {
-    protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): FeedbackItemResolution
+    protected function getUserAlreadyLoggedInError(string | int $user_id): FeedbackItemResolution
     {
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         // @todo Migrate from string to FeedbackItemProvider

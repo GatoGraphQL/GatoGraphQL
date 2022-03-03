@@ -129,11 +129,11 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     /**
      * @return FeedbackItemResolution[] Errors
      */
-    public function resolveDirectiveValidationErrorDescriptions(
+    public function resolveDirectiveValidationErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs
     ): array;
-    public function resolveDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function resolveDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution;
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
 }

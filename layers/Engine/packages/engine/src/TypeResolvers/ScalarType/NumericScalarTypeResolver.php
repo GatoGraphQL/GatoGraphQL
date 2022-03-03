@@ -42,7 +42,7 @@ class NumericScalarTypeResolver extends AbstractScalarTypeResolver
         if ($castInputValue !== null) {
             return (float) $castInputValue;
         }
-        $this->addDefaultErrorMessage($inputValue, $schemaInputValidationFeedbackStore);
+        $this->addDefaultError($inputValue, $schemaInputValidationFeedbackStore);
         return null;
     }
 }

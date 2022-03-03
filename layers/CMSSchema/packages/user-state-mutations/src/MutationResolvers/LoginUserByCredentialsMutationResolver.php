@@ -56,12 +56,12 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         }
 
         if (App::getState('is-user-logged-in')) {
-            $errors[] = $this->getUserAlreadyLoggedInErrorMessage(App::getState('current-user-id'));
+            $errors[] = $this->getUserAlreadyLoggedInError(App::getState('current-user-id'));
         }
         return $errors;
     }
 
-    protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): FeedbackItemResolution
+    protected function getUserAlreadyLoggedInError(string | int $user_id): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,

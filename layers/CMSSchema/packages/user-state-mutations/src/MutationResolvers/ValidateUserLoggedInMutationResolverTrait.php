@@ -16,11 +16,11 @@ trait ValidateUserLoggedInMutationResolverTrait
     protected function validateUserIsLoggedIn(): ?FeedbackItemResolution
     {
         if (!App::getState('is-user-logged-in')) {
-            return $this->getUserNotLoggedInErrorMessage();
+            return $this->getUserNotLoggedInError();
         }
         return null;
     }
-    protected function getUserNotLoggedInErrorMessage(): FeedbackItemResolution
+    protected function getUserNotLoggedInError(): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,

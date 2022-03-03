@@ -685,7 +685,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         return true;
     }
-    public function collectFieldValidationErrorDescriptions(
+    public function collectFieldValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         array $fieldArgs,
@@ -762,7 +762,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         // Custom validations
-        $maybeErrorFeedbackItemResolutions = $this->doResolveSchemaValidationErrorDescriptions(
+        $maybeErrorFeedbackItemResolutions = $this->doResolveSchemaValidationErrors(
             $objectTypeResolver,
             $fieldName,
             $fieldArgs,
@@ -831,7 +831,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      *
      * @return FeedbackItemResolution[] Errors
      */
-    protected function doResolveSchemaValidationErrorDescriptions(
+    protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         array $fieldArgs
@@ -1032,7 +1032,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * @return FeedbackItemResolution[]
      */
-    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
+    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         $warningFeedbackItemResolutions = [];
         if (Environment::enableSemanticVersionConstraints()) {
@@ -1101,7 +1101,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function collectValidationErrorDescriptions(
+    public function collectValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,

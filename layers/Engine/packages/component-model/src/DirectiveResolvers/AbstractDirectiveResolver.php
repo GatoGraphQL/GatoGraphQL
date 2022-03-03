@@ -18,6 +18,7 @@ use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
@@ -210,7 +211,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $directiveArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
-        $deprecationFeedbackItemResolutions = $this->resolveDirectiveValidationDeprecationMessages(
+        $deprecationFeedbackItemResolutions = $this->resolveDirectiveValidationDeprecations(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs
@@ -345,7 +346,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @return FeedbackItemResolution[] Errors
      */
-    public function resolveDirectiveValidationErrorDescriptions(
+    public function resolveDirectiveValidationErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs
@@ -386,7 +387,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
 
         // Custom validations
-        return $this->doResolveSchemaValidationErrorDescriptions(
+        return $this->doResolveSchemaValidationErrors(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs,
@@ -441,7 +442,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @return FeedbackItemResolution[] Errors
      */
-    protected function doResolveSchemaValidationErrorDescriptions(
+    protected function doResolveSchemaValidationErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs
@@ -750,16 +751,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @return FeedbackItemResolution[]
      */
-    public function resolveDirectiveValidationDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs): array
+    public function resolveDirectiveValidationDeprecations(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs): array
     {
         return [];
     }
 
-    public function getDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getDirectiveWarningDescription($relationalTypeResolver);
+            return $schemaDefinitionResolver->getDirectiveWarning($relationalTypeResolver);
         }
         return null;
     }
@@ -773,7 +774,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return null;
     }
 
-    public function resolveDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function resolveDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution
     {
         if (Environment::enableSemanticVersionConstraints()) {
             /**
@@ -784,16 +785,19 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                  * If this fieldResolver doesn't have versioning, then it accepts everything
                  */
                 if (!$this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)) {
-                    return sprintf(
-                        $this->__('The DirectiveResolver used to process directive \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
-                        $this->getDirectiveName(),
-                        $this->getDirectiveVersion($relationalTypeResolver) ?? '',
-                        $versionConstraint
+                    return new FeedbackItemResolution(
+                        WarningFeedbackItemProvider::class,
+                        WarningFeedbackItemProvider::W3,
+                        [
+                            $this->getDirectiveName(),
+                            $this->getDirectiveVersion($relationalTypeResolver) ?? '',
+                            $versionConstraint,
+                        ]
                     );
                 }
             }
         }
-        return $this->getDirectiveWarningDescription($relationalTypeResolver);
+        return $this->getDirectiveWarning($relationalTypeResolver);
     }
 
     public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array

@@ -41,7 +41,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
 
     abstract protected function getMetaTypeAPI(): MetaTypeAPIInterface;
 
-    protected function doResolveSchemaValidationErrorDescriptions(
+    protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         array $fieldArgs
@@ -65,7 +65,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
         }
         // }
 
-        return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
+        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldName, $fieldArgs);
     }
 
     public function validateResolvedFieldType(
