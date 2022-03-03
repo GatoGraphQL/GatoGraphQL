@@ -345,7 +345,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @return FeedbackItemResolution[] Errors
      */
-    public function resolveDirectiveValidationErrorDescriptions(
+    public function resolveDirectiveValidationErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs
