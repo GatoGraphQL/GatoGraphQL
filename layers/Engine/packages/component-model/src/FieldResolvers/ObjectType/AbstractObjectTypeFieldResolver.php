@@ -1028,6 +1028,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
+    /**
+     * @return FeedbackItemResolution[]
+     */
     public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         $warnings = [];
