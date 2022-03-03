@@ -1714,11 +1714,22 @@ class Engine implements EngineInterface
         $ret = [];
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
+        
+        // Add the feedback (errors, warnings, deprecations, notices, etc) into the output
+        $this->addFeedbackEntries($ret, $objectFeedbackEntries, $schemaFeedbackEntries);
 
-        /**
-         * Add the feedback (errors, warnings, deprecations, notices, etc)
-         * into the output.
-         */
+        return $ret;
+    }
+
+    /**
+     * Add the feedback (errors, warnings, deprecations, notices, etc)
+     * into the output.
+     */
+    protected function addFeedbackEntries(
+        array &$ret,
+        array $objectFeedbackEntries,
+        array $schemaFeedbackEntries,
+    ): void {
         $ret[Response::GENERAL_FEEDBACK] = [];
         $ret[Response::DOCUMENT_FEEDBACK] = [];
         $ret[Response::OBJECT_FEEDBACK] = [];
@@ -1742,7 +1753,7 @@ class Engine implements EngineInterface
         if ($documentErrors = $documentFeedbackStore->getErrors()) {
             $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] = $this->getDocumentFeedbackEntriesForOutput($documentErrors);
         }
-        // @todo Remove!
+        // @todo Remove alongside FeedbackMessageStore!
         if ($queryErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
             $queryDocumentErrors = [];
             foreach ($queryErrors as $message => $extensions) {
@@ -1774,7 +1785,7 @@ class Engine implements EngineInterface
             if ($documentWarnings = $documentFeedbackStore->getWarnings()) {
                 $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] = $this->getDocumentFeedbackEntriesForOutput($documentWarnings);
             }
-            // @todo Remove!
+            // @todo Remove alongside FeedbackMessageStore!
             if ($documentWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
                 $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] = array_merge(
                     $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? [],
@@ -1832,8 +1843,6 @@ class Engine implements EngineInterface
             $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::LOG, $schemaFeedbackEntries[FeedbackCategories::LOG]);
         }
-
-        return $ret;
     }
 
     protected function addObjectEntriesToDestinationArray(
