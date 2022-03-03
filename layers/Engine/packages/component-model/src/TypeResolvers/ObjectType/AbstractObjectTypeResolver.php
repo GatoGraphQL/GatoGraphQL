@@ -237,17 +237,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($validField === null) {
             return;
         }
-        if ($maybeWarnings = $executableObjectTypeFieldResolver->resolveFieldValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
-            foreach ($maybeWarnings as $warning) {
+        if ($maybeWarningFeedbackItemResolutions = $executableObjectTypeFieldResolver->resolveFieldValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
+            foreach ($maybeWarningFeedbackItemResolutions as $warningFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addWarning(
                     new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            GenericFeedbackItemProvider::class,
-                            GenericFeedbackItemProvider::W1,
-                            [
-                                $warning,
-                            ]
-                        ),
+                        $warningFeedbackItemResolution,
                         LocationHelper::getNonSpecificLocation(),
                         $this,
                     )

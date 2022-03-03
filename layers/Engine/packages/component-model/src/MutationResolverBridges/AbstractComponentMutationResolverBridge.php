@@ -91,7 +91,11 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
                 ErrorTypes::CODES => ResponseConstants::WARNINGCODES,
             ];
             $warningTypeKey = $warningTypeKeys[$errorType];
-            $return[$warningTypeKey] = $warnings;
+            // @todo Migrate from string to FeedbackItemProvider
+            $return[$warningTypeKey] = array_map(
+                fn (FeedbackItemResolution $feedbackItemResolution) => $feedbackItemResolution->getMessage(),
+                $warnings
+            );
         }
 
         $errorMessage = null;

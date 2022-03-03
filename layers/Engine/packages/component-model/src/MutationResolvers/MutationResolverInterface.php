@@ -22,7 +22,7 @@ interface MutationResolverInterface
      */
     public function validateErrors(array $form_data): array;
     /**
-     * @return string[]
+     * @return FeedbackItemResolution[]
      */
     public function validateWarnings(array $form_data): array;
     public function getErrorType(): int;

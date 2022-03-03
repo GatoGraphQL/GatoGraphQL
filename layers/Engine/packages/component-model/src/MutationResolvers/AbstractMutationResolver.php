@@ -20,7 +20,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
     }
 
     /**
-     * @return string[]
+     * @return FeedbackItemResolution[]
      */
     public function validateWarnings(array $form_data): array
     {

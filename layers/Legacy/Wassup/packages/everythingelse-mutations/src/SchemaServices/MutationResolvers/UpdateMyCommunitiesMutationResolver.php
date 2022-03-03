@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\Root\Exception\AbstractException;
-use PoP\Root\App;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\UserMeta\Utils;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
@@ -85,6 +86,9 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 
+    /**
+     * @return FeedbackItemResolution[]
+     */
     public function validateWarnings(array $form_data): array
     {
         $warnings = [];
@@ -112,6 +116,11 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
                     $this->getUserTypeAPI()->getUserDisplayName($banned_community)
                 );
             }
+            // @todo Migrate from string to FeedbackItemProvider
+            // $warnings[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $warnings[] = sprintf(
                 $this->getTranslationAPI()->__('The following Community(ies) will not be active, since they claim you are not their member: %s.', 'ure-pop'),
                 implode(', ', $banned_communities_html)

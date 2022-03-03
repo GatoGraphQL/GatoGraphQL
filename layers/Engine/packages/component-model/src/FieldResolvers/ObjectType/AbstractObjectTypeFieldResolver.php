@@ -17,6 +17,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
@@ -1033,7 +1034,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
-        $warnings = [];
+        $warningFeedbackItemResolutions = [];
         if (Environment::enableSemanticVersionConstraints()) {
             /**
              * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
@@ -1043,11 +1044,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                  * If this fieldResolver doesn't have versioning, then it accepts everything
                  */
                 if (!$this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)) {
-                    $warnings[] = sprintf(
-                        $this->__('The ObjectTypeFieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
-                        $fieldName,
-                        $this->getFieldVersion($objectTypeResolver, $fieldName) ?? '',
-                        $versionConstraint
+                    $warningFeedbackItemResolutions[] = new FeedbackItemResolution(
+                        WarningFeedbackItemProvider::class,
+                        WarningFeedbackItemProvider::W2,
+                        [
+                            $fieldName,
+                            $this->getFieldVersion($objectTypeResolver, $fieldName) ?? '',
+                            $versionConstraint
+                        ]
                     );
                 }
             }
@@ -1056,12 +1060,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null) {
             $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
-            $warnings = array_merge(
-                $warnings,
+            $warningFeedbackItemResolutions = array_merge(
+                $warningFeedbackItemResolutions,
                 $mutationResolver->validateWarnings($mutationFieldArgs)
             );
         }
-        return $warnings;
+        return $warningFeedbackItemResolutions;
     }
 
     /**

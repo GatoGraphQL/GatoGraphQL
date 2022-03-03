@@ -159,6 +159,10 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
             ];
         }
     }
+
+    /**
+     * @return FeedbackItemResolution[]
+     */
     final public function validateWarnings(array $form_data): array
     {
         try {
