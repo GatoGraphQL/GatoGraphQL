@@ -423,13 +423,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
-            // Add "self" fields to the schema?
-            [
-                'class' => GraphQLServerComponent::class,
-                'envVariable' => GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA,
-                'module' => SchemaTypeModuleResolver::SCHEMA_SELF_FIELDS,
-                'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
-            ],
             // White/Blacklisted entries to CustomPost.meta
             [
                 'class' => CustomPostMetaComponent::class,
