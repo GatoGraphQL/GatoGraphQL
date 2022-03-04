@@ -37,16 +37,21 @@ class SkipDowngradeTestPathsDataSource
     protected function getSkipDowngradeTestVendorPaths(): array
     {
         return [
-            'vendor/symfony/polyfill-ctype/bootstrap80.php',
-            'vendor/symfony/polyfill-intl-grapheme/bootstrap80.php',
-            'vendor/symfony/polyfill-intl-idn/bootstrap80.php',
-            'vendor/symfony/polyfill-intl-normalizer/bootstrap80.php',
-            'vendor/symfony/polyfill-mbstring/bootstrap80.php',
+            'vendor/michelf/php-markdown/test/',
+            'vendor/nikic/fast-route/test/',
+            'vendor/psr/log/Psr/Log/Test/',
             'vendor/symfony/cache/DataCollector/CacheDataCollector.php',
             'vendor/symfony/cache/DoctrineProvider.php',
             'vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
             'vendor/symfony/dotenv/Command/DebugCommand.php',
             'vendor/symfony/dotenv/Command/DotenvDumpCommand.php',
+            'vendor/symfony/http-foundation/Test/',
+            'vendor/symfony/polyfill-ctype/bootstrap80.php',
+            'vendor/symfony/polyfill-intl-grapheme/bootstrap80.php',
+            'vendor/symfony/polyfill-intl-idn/bootstrap80.php',
+            'vendor/symfony/polyfill-intl-normalizer/bootstrap80.php',
+            'vendor/symfony/polyfill-mbstring/bootstrap80.php',
+            'vendor/symfony/service-contracts/Test/',
             'vendor/symfony/string/Slugger/AsciiSlugger.php',
         ];
     }
