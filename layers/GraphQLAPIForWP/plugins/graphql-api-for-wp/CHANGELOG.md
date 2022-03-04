@@ -156,6 +156,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Implementation of several input object types
 - Support for oneof input objects
   - Implementation of several oneof input objects
+- Link to the online documentation of the GraphQL errors
 - Namespacing is applied to new types
 - Allow to use unsafe default settings
 - Module "Schema Self Fields"
