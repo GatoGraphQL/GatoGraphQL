@@ -85,7 +85,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->addFullSchemaFieldToGraphQLSchema();
+        return $componentConfiguration->addFullSchemaFieldToSchema();
     }
 
     public function getFieldNamesToResolve(): array
