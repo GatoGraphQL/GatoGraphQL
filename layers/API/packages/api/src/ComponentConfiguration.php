@@ -83,4 +83,17 @@ class ComponentConfiguration extends AbstractComponentConfiguration
             $callback,
         );
     }
+
+    public function addFullSchemaFieldToGraphQLSchema(): bool
+    {
+        $envVariable = Environment::ADD_FULLSCHEMA_FIELD_TO_GRAPHQL_SCHEMA;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

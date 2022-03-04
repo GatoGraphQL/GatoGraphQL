@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPAPI\API\FieldResolvers\ObjectType;
 
 use PoP\Root\App;
-use GraphQLByPoP\GraphQLServer\Component;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
+use PoPAPI\API\Component;
+use PoPAPI\API\ComponentConfiguration;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoPAPI\API\PersistedQueries\PersistedQueryManagerInterface;
