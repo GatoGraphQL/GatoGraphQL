@@ -120,6 +120,7 @@ jobs:
             ################################################################################
             # Temporary hack: fix the return type in Trait, not yet handled by Rector
             # @see https://github.com/rectorphp/rector/issues/6962
+            # @see https://github.com/leoloso/PoP/issues/1470
             -   name: Temporary hack - fix the return type in Trait
                 run: |
                     sed -i 's/function getItem($key): CacheItem/function getItem($key): \\Psr\\Cache\\CacheItemInterface/' vendor/symfony/cache/Traits/AbstractAdapterTrait.php
