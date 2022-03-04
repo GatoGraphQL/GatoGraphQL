@@ -93,7 +93,7 @@ jobs:
 
             # Prepare for testing on PHP 7.1
             -   name: Install PHP Parallel Lint
-                run: composer create-project php-parallel-lint/php-parallel-lint php-parallel-lint --ansi
+                run: composer create-project php-parallel-lint/php-parallel-lint php-parallel-lint --ansi --no-dev
 
             # Only PROD dependencies must be tested
             # --ignore-platform-reqs to avoid Composer checking the PHP 8.0 requirement
