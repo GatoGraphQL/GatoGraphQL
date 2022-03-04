@@ -33,7 +33,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     use SchemaTypeModuleResolverTrait;
 
     public const SCHEMA_EXPOSE_ADMIN_DATA = Plugin::NAMESPACE . '\schema-expose-admin-data';
-    public const SCHEMA_SELF_FIELDS = Plugin::NAMESPACE . '\schema-self-fields';
     public const SCHEMA_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-customposts';
     public const SCHEMA_GENERIC_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-generic-customposts';
     public const SCHEMA_POSTS = Plugin::NAMESPACE . '\schema-posts';
@@ -216,7 +215,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return [
             self::SCHEMA_EXPOSE_ADMIN_DATA,
-            self::SCHEMA_SELF_FIELDS,
             self::SCHEMA_CUSTOMPOSTS,
             self::SCHEMA_GENERIC_CUSTOMPOSTS,
             self::SCHEMA_POSTS,
@@ -285,7 +283,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return match ($module) {
             self::SCHEMA_EXPOSE_ADMIN_DATA => \__('Schema Expose Admin Data', 'graphql-api'),
-            self::SCHEMA_SELF_FIELDS => \__('Schema Self Fields', 'graphql-api'),
             self::SCHEMA_GENERIC_CUSTOMPOSTS => \__('Schema Generic Custom Posts', 'graphql-api'),
             self::SCHEMA_POSTS => \__('Schema Posts', 'graphql-api'),
             self::SCHEMA_COMMENTS => \__('Schema Comments', 'graphql-api'),
@@ -310,8 +307,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         switch ($module) {
             case self::SCHEMA_EXPOSE_ADMIN_DATA:
                 return \__('Expose "admin" elements in the schema', 'graphql-api');
-            case self::SCHEMA_SELF_FIELDS:
-                return \__('Add "self" fields to the schema', 'graphql-api');
             case self::SCHEMA_GENERIC_CUSTOMPOSTS:
                 return sprintf(
                     \__('Query any custom post type (added to the schema or not), through a generic type <code>%1$s</code>', 'graphql-api'),
@@ -470,10 +465,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::DEFAULT_VALUE => $useUnsafe,
                 ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
             ],
-            self::SCHEMA_SELF_FIELDS => [
-                ModuleSettingOptions::DEFAULT_VALUE => false,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => false,
-            ],
             self::SCHEMA_CUSTOMPOSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
@@ -595,38 +586,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::TITLE => \__('Expose admin elements for the Admin?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Expose "admin" elements in the wp-admin? %s', 'graphql-api'),
-                    $adminClientsDesc
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-        } elseif ($module == self::SCHEMA_SELF_FIELDS) {
-            $option = ModuleSettingOptions::DEFAULT_VALUE;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => sprintf(
-                    \__('Expose the self fields to all types in the schema? %s', 'graphql-api'),
-                    $defaultValueLabel
-                ),
-                Properties::DESCRIPTION => sprintf(
-                    \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response. %s', 'graphql-api'),
-                    $defaultValueDesc
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Expose self fields for the Admin?', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Expose self fields in the wp-admin? %s', 'graphql-api'),
                     $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
