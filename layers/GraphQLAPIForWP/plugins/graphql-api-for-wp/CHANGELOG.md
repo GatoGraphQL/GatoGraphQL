@@ -159,7 +159,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Link to the online documentation of the GraphQL errors
 - Namespacing is applied to new types
 - Allow to use unsafe default settings
-- Module "Schema Self Fields"
 - Schema Configuration for the Single Endpoint
 - Exposed the `__schema` field in the ACLs, allowing us to disable introspection
 - Sort fields and connections together, alphabetically
